@@ -1,0 +1,78 @@
+<?php
+
+/**
+ * @file
+ * Tests for CKEditor CodeMirror module.
+ */
+
+class CkeditorCodeMirrorBasicTest extends DrupalWebTestCase {
+
+  /**
+   * User with permissions.
+   * @var
+   */
+  protected $privilegedUser;
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function getInfo() {
+    return array(
+      'name' => 'CKEditor CodeMirror basic',
+      'description' => 'Test basic functionality for CKEditor CodeMirror module.',
+      'group' => 'CKEditor CodeMirror',
+    );
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public function setUp() {
+    parent::setUp('ckeditor_codemirror');
+    $this->privilegedUser = $this->drupalCreateUser(array(
+      'administer ckeditor',
+      'administer site configuration',
+      'create article content',
+    ));
+    $this->drupalLogin($this->privilegedUser);
+  }
+
+  /**
+   * Check the library status on "Status report" page.
+   */
+  public function testCheckStatusReportPage() {
+    $this->drupalGet('admin/reports/status');
+
+    if (($library = libraries_detect('ckeditor.codemirror')) && !empty($library['library path'])) {
+      $this->assertRaw(t('CKEditor CodeMirror plugin %version installed at %path.', array('%path' => $library['library path'], '%version' => $library['version'])));
+    }
+    else {
+      $this->assertText(t('CKEditor CodeMirror plugin was not found.'));
+    }
+  }
+
+  /**
+   * Enable CKEditor CodeMirror plugin.
+   */
+  public function testEnableCkeditorCodeMirrorPlguin() {
+    $this->drupalGet('admin/config/content/ckeditor/edit/Advanced');
+    $this->assertText(t('CodeMirror (Source) Syntax Highlighting.'));
+    $this->assertNoFieldChecked('edit-loadplugins-codemirror');
+
+    $edit = array();
+    $edit['loadPlugins[codemirror]'] = TRUE;
+    $this->drupalPost('admin/config/content/ckeditor/edit/Advanced', $edit, t('Save'));
+    $this->assertText(t('Your CKEditor profile was updated.'));
+
+    $this->drupalGet('node/add/article');
+
+    if (($library = libraries_detect('ckeditor.codemirror')) && !empty($library['library path'])) {
+      if (isset($this->drupalSettings['ckeditor']['input_formats']['filtered_html']['loadPlugins']['codemirror'])) {
+        $this->pass(t('CKEditor CodeMirror plugin has been found.'));
+      }
+      else {
+        $this->fail(t('CKEditor CodeMirror plugin has not been found.'));
+      }
+    }
+  }
+}

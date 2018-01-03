@@ -1,0 +1,36 @@
+<?php
+
+/**
+ * @file
+ * Main code for CKEditor CodeMirror Wysiwyg module.
+ */
+
+/**
+ * Implements hook_wysiwyg_plugin().
+ */
+function ckeditor_codemirror_wysiwyg_wysiwyg_plugin($editor, $version) {
+  if ($editor == 'ckeditor') {
+    return array(
+      'codemirror' => array(
+        'buttons' => array(
+          'Source' => t('CodeMirror: Source'),
+          'AutoFormat' => t('CodeMirror: Auto Format'),
+          'CommentSelectedRange' => t('CodeMirror: Comment Selected Range'),
+          'UncommentSelectedRange' => t('CodeMirror: Uncomment Selected Range'),
+          'AutoComplete' => t('CodeMirror: Toggle Autocomplete'),
+        ),
+        'path' => wysiwyg_get_path('ckeditor.codemirror'),
+        'options' => array(
+          'codemirror' => array(
+            'showFormatButton' => TRUE,
+            'showCommentButton' => TRUE,
+            'showUncommentButton' => TRUE,
+            'showAutoCompleteButton' => TRUE,
+          ),
+        ),
+        'internal' => FALSE,
+        'load' => TRUE,
+      ),
+    );
+  }
+}

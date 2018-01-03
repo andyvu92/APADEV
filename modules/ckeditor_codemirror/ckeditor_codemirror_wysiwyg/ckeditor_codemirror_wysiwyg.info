@@ -1,0 +1,14 @@
+name = CKEditor CodeMirror Wysiwyg
+description = Syntax Highlighting for the CKEditor (Source View) with the CodeMirror plugin for Wysiwyg module.
+package = User interface
+configure = admin/config/content/wysiwyg
+core = 7.x
+
+dependencies[] = wysiwyg
+
+; Information added by Drupal.org packaging script on 2016-03-27
+version = "7.x-1.1"
+core = "7.x"
+project = "ckeditor_codemirror"
+datestamp = "1459083545"
+
