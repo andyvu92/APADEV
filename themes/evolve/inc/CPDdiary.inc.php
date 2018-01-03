@@ -1,4 +1,5 @@
 <?php
+/* jing's commit */
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
  $results_json='{  
         "CurrentCPDHour": "12",
