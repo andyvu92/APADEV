@@ -618,12 +618,12 @@
            $cardsnum= json_decode( $cardsnum_json , true);
   ?>
                     
-         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+         <div class="row" >
             
               
        
              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-
+              <form action="pd-shopping-cart?action=delete" method="POST" id="deleteCardForm">
                 <div class="paymentsidecredit"> <fieldset><select  id="Paymentcard" name="Paymentcard" style="width:100%;">
                       <?php if (sizeof($cardsnum)!=0): ?>   
                                    
@@ -632,8 +632,8 @@
                               <?php endforeach; ?>
                          <?php endif; ?>  
                            </select></fieldset></div>
-              
-                     
+                  <button class="deletecardbutton">delete selected card</button>
+                </form>    
                 <div class="paymentsideuse><input type="checkbox" id="anothercard"><label for="anothercard"><a  style="cursor: pointer; color:white;" id="addPaymentCard">Add another card</a></label>
 				  <div id="addPaymentCardForm" style="display:none;">
                   <form action="pd-shopping-cart?action=addcard" method="POST" id="formaddcard">
@@ -1285,12 +1285,12 @@ fieldset {
       top: 0.1em;
     }
     .ui-icon.Master{
-      background: url("http://10.2.1.190/apanew/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
+      background: url("http://localhost/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
     }
     .ui-icon.Visa{
-      background: url("http://10.2.1.190/apanew/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
+      background: url("http://localhost/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
     }
     .ui-icon.AE{
-      background: url("http://10.2.1.190/apanew/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
+      background: url("http://localhost/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
     }
 </style>
