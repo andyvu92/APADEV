@@ -98,11 +98,13 @@
 		   <h2><?php print $title; ?></h2>
     </header>
 	<!-- hamburger init -->
-	<div class="col-lg-3 col-md-3 col-xs-3 col-sm-3 HamburgerTesterButton"><span class="fa dexp-menu-toggle"><div class="hamburger hamburger--elastic" type="button">
-		<div class="hamburger-box HamburgerTester">
-			<div class="hamburger-inner"></div>
+	<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 HamburgerTesterButton"><span class="fa dexp-menu-toggle">
+		<div class="hamburger hamburger--arrowalt-r" type="button">
+			<div class="hamburger-box HamburgerTester">
+				<div class="hamburger-inner"></div>
+			</div>
 		</div>
-	</div></span></div>
+	</span></div>
 	<script>
 		jQuery(document).ready(function($) {
 			$('.hamburger').click(function() {
@@ -113,7 +115,7 @@
 				if(rightVal != "0px") {
 					$('.page-node-273 #section-main-content .container .region-right-sidebar').animate({ right: "0px" }, 700 )
 				} else {
-					$('.page-node-273 #section-main-content .container .region-right-sidebar').animate({ right: "-1000px" }, 700 )
+					$('.page-node-273 #section-main-content .container .region-right-sidebar').animate({ right: "-800px" }, 700 )
 				}
 			});
 		});
