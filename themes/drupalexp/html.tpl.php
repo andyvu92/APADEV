@@ -2,7 +2,8 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
-		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<link href="/sites/all/themes/evolve/assets/css/hamburgers-master/dist/hamburgers.css" rel="stylesheet">
 		<?php print $head; ?>
 		<title><?php print $head_title; ?></title>
 		<?php print $styles; ?>
