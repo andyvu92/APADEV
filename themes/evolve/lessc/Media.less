@@ -1,9 +1,17 @@
 /* --------------------------------------------------------- */
 /* Test Code
 /* --------------------------------------------------------- */
-
 .page-node-273 #section-main-content .container .region-right-sidebar {
 	right: -800px;
+	transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.15, 0.15, 0.51, 1.54);
+    -webkit-transition-timing-function: cubic-bezier(0.15, 0.15, 0.51, 1.54);
+}
+.page-node-273 #section-main-content .container .region-right-sidebar#out {
+	right: -800px;
+}
+.page-node-273 #section-main-content .container .region-right-sidebar#in {
+	right: 0px;
 }
 .HamburgerTesterButton {
 	float: right;

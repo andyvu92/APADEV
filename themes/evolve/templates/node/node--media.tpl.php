@@ -110,13 +110,22 @@
 			$('.hamburger').click(function() {
 				$(this).toggleClass("is-active");
 			});
+			$('.page-node-273 #section-main-content .container .region-right-sidebar').attr('id', "out");
 			$('.HamburgerTester').click(function() {
+				var HamChanger = $('.page-node-273 #section-main-content .container .region-right-sidebar').attr('id');
+				if(HamChanger == "out") {
+					$('.page-node-273 #section-main-content .container .region-right-sidebar').attr('id', "in");
+				} else {
+					$('.page-node-273 #section-main-content .container .region-right-sidebar').attr('id', "out");
+				}
+				/*
 				var rightVal = $('.page-node-273 #section-main-content .container .region-right-sidebar').css("right");
 				if(rightVal != "0px") {
 					$('.page-node-273 #section-main-content .container .region-right-sidebar').animate({ right: "0px" }, 700 )
 				} else {
 					$('.page-node-273 #section-main-content .container .region-right-sidebar').animate({ right: "-800px" }, 700 )
 				}
+				*/
 			});
 		});
 	</script
