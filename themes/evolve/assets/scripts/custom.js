@@ -26,7 +26,37 @@ jQuery(document).ready(function($) {
         }
 		
 	});
+	$('[class^=join-details-button]').click(function(){
+		
+        var i = Number($(this).attr("class").replace('join-details-button', ''));
+		var x = Number(i + 1);
+		var validateFun = function(){
+			if($("#Prefix").val() ==''){alert("please fill out all required fields *"); return false;} 
+			
+		};
+	    
+		if(validateFun()==false){return false;}
+		if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
+	    $('[class^=down]:not(.down'+x+')').slideUp(400);
+	    $('.down' + x).slideToggle(450);
+		$('[class^=tabtitle]:not(.tabtitle'+x+') span').removeClass("text-underline");
+		var eventtitle = "eventtitle"+x;
+		$("span." + eventtitle).addClass("text-underline");
+          		
+	});
 	
+	$('[class^=your-details-prevbutton]').click(function(){
+		
+        var i = Number($(this).attr("class").replace('your-details-prevbutton', ''));
+		var x = Number(i - 1);
+		if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
+	    $('[class^=down]:not(.down'+x+')').slideUp(400);
+	    $('.down' + x).slideToggle(450);
+		$('[class^=tabtitle]:not(.tabtitle'+x+') span').removeClass("text-underline");
+		var eventtitle = "eventtitle"+x;
+		$("span." + eventtitle).addClass("text-underline");
+          		
+	});
 	$("[id^=event]").click(function(){
         var x = $(this).attr("id").replace('event', '');
         var y = $("#event"+x).html().replace('+','~');
@@ -90,7 +120,23 @@ jQuery(document).ready(function($) {
          }
 
        });
-	  
+	  $('#block-block-245 input[type="checkbox"]').click(function(){
+         if($(this).is(":checked")){
+            $(this).attr('checked', true);
+           $(this).val('1');
+		
+		  }
+         else{
+         
+          $(this).removeAttr('checked');
+          $(this).val('0');
+		  
+         }
+		    if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked") || $('#Oneclaim1').is(":checked"))
+		 {
+			 $('#insuranceMore').removeClass("display-none");
+		 }
+       });
 	  $('#recent-purchases').click(function(){
 		 $('#all-purchases').removeClass("text-underline");
 		 $('#recent-purchases').addClass("text-underline");
@@ -152,7 +198,7 @@ $('#Debitcard').click(function(){
          $('#Shipping-postcode').val('');
          $('#Shipping-state').val('');
          $('#Shipping-country').val('');
-
+         
          }
        }); 
 	   $('[id^=Job]').change(function(){
@@ -166,7 +212,12 @@ $('#Debitcard').click(function(){
 		    $( "#addPaymentCardForm" ).dialog();
 	   }); 
 	    
-	   
+	   $('.deletecardbutton').click(function(){
+		    $( "#deleteCardWindow" ).dialog();
+	   }); 
+	   $('.cancelDeleteButton').click(function() {
+            $('#deleteCardWindow').dialog('close');
+        });
 	   $('#registerPDUserButton').click(function(){
 		 $( "#registerPDUser" ).dialog();
 		  });
@@ -179,7 +230,23 @@ $('#Debitcard').click(function(){
 	    $('#viewMap').click(function(){
 		 $( "#myMap" ).dialog();
 	   });
-	    
+	    $('#privacypolicyl').click(function(){
+		 $( "#privacypolicyWindow" ).dialog();
+	   });
+	     $('#instalmentpolicyl').click(function(){
+		 $( "#installmentpolicyWindow" ).dialog();
+	   });
+	    $('[id=Nationalgp]').change(function(){
+		   
+		   if(($('select[name=Nationalgp]').val()=="258-SPA")){
+			    $( "#ngsports" ).removeClass('display-none');
+				$( "#ngmusculo" ).addClass('display-none');
+		   }
+		   if(($('select[name=Nationalgp]').val()=="254-MPA")){
+			    $( "#ngmusculo" ).removeClass('display-none');
+				$( "#ngsports" ).addClass('display-none');
+		   }
+	   }); 
 	 
 });
 

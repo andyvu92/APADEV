@@ -1,15 +1,16 @@
+
 <?php
  include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
         
    ?>
 <div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
-<div style="display:table;">
+
 
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 background_<?php echo $user['background']; ?>" id="dashboard-right-content">
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Become a member</strong></span></div>
-         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
+         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background <?php if(!isset($_SESSION["userID"])) echo "display-none";?>">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
       </div>
       <!-- Modal -->
   <div id="myModal" class="modal fade" role="dialog">
@@ -61,21 +62,25 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
             <ul class="nav nav-tabs">
-               <li><a class="event6" style="cursor: pointer;"><span class="text-underline eventtitle6" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
+               <li><a class="tabtitle1" style="cursor: pointer;"><span class="text-underline eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
            
-               <li><a class="event8" style="cursor: pointer;"><span class="eventtitle8" id="membership"><strong>Membership</strong></span></a></li>
-               <li><a class="event9" style="cursor: pointer;"><span class="eventtitle9" id="payment"><strong>Shipping & Billing Address</strong></span></a></li>
-               <li><a class="event10" style="cursor: pointer;"><span class="eventtitle10" id="workplace"><strong>Workplace</strong></span></a></li>
-               <li><a class="event11" style="cursor: pointer;"><span class="eventtitle11" id="education"><strong>Education</strong></span></a></li>
-            </ul>
-            <form action="" name="your-details" method="POST">
-               <div class="down6">
+               <li><a class="tabtitle2" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li>
+               
+               <li><a class="tabtitle3" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li>
+               <li><a class="tabtitle4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
+               <li><a class="tabtitle5" style="cursor: pointer;"><span class="eventtitle5" id="payment"><strong>Insurance</strong></span></a></li>
+			   <li><a class="tabtitle6" style="cursor: pointer;"><span class="eventtitle6" id="payment"><strong>Survey</strong></span></a></li>
+			   <li><a class="tabtitle7" style="cursor: pointer;"><span class="eventtitle7" id="payment"><strong>Payment</strong></span></a></li>
+			   <li><a class="tabtitle8" style="cursor: pointer;"><span class="eventtitle8" id="payment"><strong>Review</strong></span></a></li>
+			</ul>
+            <form name="your-details">
+               <div class="down1">
                   <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 none-padding">
                      <div class="row">
                         <div class="col-lg-3">
-                           <label for="prefix">Prefix</label>
+                           <label for="prefix">Prefix<span>*</span></label>
                            <select class="form-control" id="Prefix" name="Prefix">
-                              <option value="" disabled>Prefix</option>
+                              <option value="" selected disabled>Prefix</option>
                               <option value="Prof">Prof</option>
                               <option value="Dr">Dr</option>
                               <option value="Mr">Mr</option>
@@ -85,7 +90,7 @@
                            </select>
                         </div>
                         <div class="col-lg-6">
-                           <label for="">First/preferred name</label>
+                           <label for="">First/preferred name<span>*</span></label>
                            <input type="text" class="form-control"  name="Firstname">
                         </div>
                         <div class="col-lg-3">
@@ -99,17 +104,17 @@
                            <input type="text" class="form-control" name="Maiden-name">
                         </div>
                         <div class="col-lg-6">
-                           <label for="">Last name</label>
+                           <label for="">Last name<span>*</span></label>
                            <input type="text" class="form-control" name="Lastname">
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-4">
-                           <label for="">Birth Date</label>
+                           <label for="">Birth Date<span>*</span></label>
                            <input type="date" class="form-control" name="Birth">
                         </div>
                         <div class="col-lg-3 col-lg-offset-1">
-                           <label for="">Gender</label>
+                           <label for="">Gender<span>*</span></label>
                            <select class="form-control" id="Gender" name="Gender">
                               <option value="" disabled> Gender </option>
                               <option value="Male">Male</option>
@@ -130,7 +135,7 @@
                      </div>
                      <div class="row">
                         <div class="col-lg-9">
-                           Aboriginal and Torres Strait Islander origin
+                           Aboriginal and Torres Strait Islander origin<span>*</span>
                         </div>
                         <div class="col-lg-3">
                            <select class="form-control" id="Aboriginal" name="Aboriginal">
@@ -142,11 +147,17 @@
                         </div>
                      </div>
                      <div class="row">
-                        <div class="col-lg-12">Mailing address:</div>
+                        <div class="col-lg-12">Preferred address:</div>
                      </div>
+					 <div class="row">
+					    <div class="col-lg-4">
+                           <label for="">Building name</label>
+                           <input type="text" class="form-control"  name="BuildingName">
+                        </div>
+					 </div>
                      <div class="row">
                         <div class="col-lg-4">
-                           <label for="">Unit/house number</label>
+                           <label for="">Unit/house number<span>*</span></label>
                            <input type="text" class="form-control"  name="Unit">
                         </div>
                         <div class="col-lg-6 col-lg-offset-2">
@@ -156,17 +167,64 @@
                      </div>
                      <div class="row">
                         <div class="col-lg-12">
-                           <label for="">Street name</label>
+                           <label for="">Street name<span>*</span></label>
                            <input type="text" class="form-control" name="Street">
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-12">
-                           <label for="">City or town</label>
+                           <label for="">City or town<span>*</span></label>
                            <input type="text" class="form-control" name="Suburb">
                         </div>
                      </div>
                      <div class="row">
+                        <div class="col-lg-3">
+                           <label for="">Postcode<span>*</span></label>
+                           <input type="text" class="form-control" name="Postcode">
+                        </div>
+                        <div class="col-lg-3">
+                           <label for="">State<span>*</span></label>
+                           <select class="form-control" id="State" name="State">
+                              <option value="" selected disabled> State </option>
+                              <option value="ACT"> ACT </option>
+                              <option value="NSW"> NSW </option>
+                              <option value="SA"> SA </option>
+                              <option value="TAS"> TAS </option>
+                              <option value="VIC"> VIC </option>
+                              <option value="QLD"> QLD </option>
+                              <option value="NT"> NT </option>
+                              <option value="WA"> WA </option>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label for="">Country<span>*</span></label>
+                           <input type="text" class="form-control" name="Country">
+                        </div>
+                     </div>
+             <!--       
+                  <div class="row">
+				     <div class="col-lg-12"><label for="Shipping-address"><strong>Shipping address:(Sames as Billing address)</strong></label><input type="checkbox" id="Shipping-address" checked></div>
+                  
+                  </div>
+                  
+                  
+                    <div class="row shipping" id="shippingAddress">
+					    <div class="col-lg-4">
+                           <label for="">Unit/house number</label>
+                           <input type="text" class="form-control"  name="Shipping-unitno">
+                        </div>
+                        <div class="col-lg-6 col-lg-offset-2">
+                           <label for="">PO box</label>
+                           <input type="text" class="form-control" name="Pobox">
+                        </div>
+					     <div class="col-lg-12">
+                           <label for="">Street name</label>
+                           <input type="text" class="form-control" name="Shipping-streetname">
+                        </div>
+						<div class="col-lg-12">
+                           <label for="">City or town</label>
+                           <input type="text" class="form-control" name="Suburb">
+                        </div>
                         <div class="col-lg-3">
                            <label for="">Postcode</label>
                            <input type="text" class="form-control" name="Postcode">
@@ -190,39 +248,8 @@
                            <input type="text" class="form-control" name="Country">
                         </div>
                      </div>
-                    
-                  <div class="row">
-				     <div class="col-lg-12"><label for="Shipping-address"><strong>Shipping address:(Sames as Billing address)</strong></label><input type="checkbox" id="Shipping-address" checked></div>
-                     <div class="col-lg-2">
-                        <label for="">Unit/house no.</label>
-                        <input type="text" class="form-control" name="Shipping-unitno" id="Shipping-unitno">
-                     </div>
-                     <div class="col-lg-4">
-                        <label for="">Street name</label>
-                        <input type="text" class="form-control" name="Shipping-streetname" id="Shipping-streetname">
-                     </div>
-                     <div class="col-lg-4">
-                        <label for="">City or town</label>
-                        <input type="text" class="form-control" name="Shipping-city-town" id="Shipping-city-town">
-                     </div>
-                     <div class="col-lg-2">
-                        <label for="">Postcode</label>
-                        <input type="text" class="form-control" name="Shipping-postcode" id="Shipping-postcode">
-                     </div>
-                  </div>
-                  <div class="row">
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-2">
-                        <label for="">State</label>
-                        <input type="text" class="form-control" name="Shipping-state" id="Shipping-state">
-                     </div>
-                     <div class="col-lg-4">
-                        <label for="">Country</label>
-                        <input type="text" class="form-control" name="Shipping-country" id="Shipping-country">
-                     </div>
-                  </div>
-                    
+					 
+			-->
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-right">
                      <div class="row form-image">
@@ -232,19 +259,20 @@
                      </div>
                                                
                   </div>
+				  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button1"><span class="dashboard-button-name">Next</span></a></div>
                </div>
-               <div class="down8" style="display:none;" >
+               <div class="down2" style="display:none;" >
                   <div class="row">
                      <div class="col-lg-6">
-                        <label for="">Member ID(Your email address)</label>
+                        <label for="">Member ID(Your email address)<span>*</span></label>
                         <input type="text" class="form-control" name="Memberid" >
                      </div>
                   </div>
                   <div class="row">
                      <div class="col-lg-6">
-                        <label for="">Member Type</label>
-                        <select class="form-control" id="MemberType" name="MemberType" disabled>
-                           <option value="" disabled>memberType</option>
+                        <label for="">Member Type<span>*</span></label>
+                        <select class="form-control" id="MemberType" name="MemberType">
+                           <option value="none" selected disabled>memberType</option>
                            <option value="FPI">Full-time physiotherapist with insurance (more than 18 hours per week) </option>
                            <option value="FPN">Full-time physiotherapist no insurance (more than 18 hours per week) </option>
                            <option value="FEPI">Full-time Employed Public Sector Physiotherapist (more than 18 hours per week) with insurance</option>
@@ -282,140 +310,64 @@
                   </div>
                   <div class="row">
                      <div class="col-lg-3">
-                        <label for="">Your Regional group</label>
-                        <input type="text" class="form-control" name="Regional-group">
+                        <label for="">Your National group</label>
+                         <select class="form-control" id="Nationalgp" name="Nationalgp">
+                           <option value="none" selected disabled>National group</option>
+                           <option value="250-ACG">Acupuncture and dry needling</option>
+                           <option value="202-APG">Animal</option>
+                           <option value="200-AG">Aquatic</option>
+                           <option value="262-PBA-BA">Business - Affiliate</option>
+                           <option value="262-PBA-PP">Business – Premium principal</option>
+                           <option value="410-ON">Cancer, palliative care and lymphoedema</option>
+                           <option value="208-CRP">Cardiorespiratory</option>
+                           <option value="422-DA">Disability</option>
+                           <option value="214-EDU">Educators</option>
+                           <option value="405-ED">Emergency department</option>
+                           <option value="216-GG">Gerontology</option>
+                           <option value="226-PLM">Leadership and management</option>
+                           <option value="420-MH">Mental health</option>
+                           <option value="254-MPA">Musculoskeletal</option>
+                           <option value="220-NG">Neurology</option>
+                           <option value="222-OHP">Occupational health</option>
+                           <option value="400-OG">Orthopaedic</option>
+                           <option value="224-PDG">Paediatric</option>
+                           <option value="415-PN">Pain</option>
+                           <option value="258-SPA">Sports</option>
+                           <option value="212-CWH">Women’s, men’s and pelvic health</option>
+                         </select>
                      </div>
+					 <div class="col-lg-3 display-none" id="ngsports"><label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label><input type="checkbox" id="ngsportsbox" checked></div>
+					 <div class="col-lg-3 display-none" id="ngmusculo"><label for="ngsportsbox">Would you like to subscribe to the APA InTouch magazine?</label><input type="checkbox" id="ngsportsbox" checked></div>
                   </div>
                   <div class="row">
                      <div class="col-lg-6">
-                        <label for="">Status</label>
-                        <input type="text" class="form-control" name="Status" readonly>
+                        <label for="">What branch would you like to join?</label>
+                         <select class="form-control" id="Branch" name="Branch">
+                           <option value="" selected disabled>What branch would you like to join?</option>
+                           <option value="ACT">ACT</option>
+                           <option value="NSW">NSW</option>
+                           <option value="QLD">QLD</option>
+                           <option value="SA">SA</option>
+                           <option value="TAS">TAS</option>
+                           <option value="VIC">VIC</option>
+                           <option value="WA">WA</option>
+                           <option value="Overseas">I live overseas</option>
+                         </select>
                      </div>
                   </div>
-               </div>
-               <div class="down9"  style="display:none;" >
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <input type="radio" name="Payment-method" id="Paypal" value="Paypal" /><label for="Paypal"><strong>Paypal</strong></label>&nbsp;
-                        <input type="radio" name="Payment-method" id="Creditcard" value="Creditcard" /><label for="Creditcard"><strong>Credit Card</strong></label>&nbsp;
-                     </div>
-                  </div>
-                  <div class='row' id="card_type_display">
-                     <div class="col-lg-2"><label for="">Card Type</label></div>
-                     <div class="col-lg-4">
-                        <select class="form-control" id="Cardtype" name="Cardtype">
-                           <option value="" disabled>Card Type</option>
-                           <option value="AE">American Express</option>
-                           <option value="Visa">Visa</option>
-                           <option value="Mastercard">Mastercard</option>
-                        </select>
-                     </div>
-                     <div class="col-lg-2"> <label for="">Name on card</label></div>
-                     <div class="col-lg-4">
-                        <input type="text" class="form-control" name="Name-on-card">
-                     </div>
-                  </div>
-                  <div class='row' id="cardno">
-                     <div class="col-lg-4">
-                        <label for="">Card Number</label>
-                        <input type="text" class="form-control" name="Cardno">
-                     </div>
-                     <div class="col-lg-4">
-                        <label for="">Expiry Date</label>
-                        <input type="date" class="form-control" name="Expiry-date">
-                     </div>
-                     <div class="col-lg-4">
-                        <label for="">CCV</label>
-                        <input type="text" class="form-control" name="CCV">
-                     </div>
-                  </div>
-                  <div class='row debit-type' id="card-account">
-                     <div class="col-lg-3">
-                        <input type="text" class="form-control" name="Bsbno">
-                     </div>
-                     <div class="col-lg-3">
-                        <input type="text" class="form-control" name="Accountno">
-                     </div>
-                  </div>
-                  <div class="row payment-line">
-                     <div class="col-lg-12"><strong>Billing address:</strong></div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-2">
-                        <label for="">Unit/house no.</label>
-                        <input type="text" class="form-control" name="Billing-unitno" id="Billing-unitno">
-                     </div>
-                     <div class="col-lg-4">
-                        <label for="">Street name</label>
-                        <input type="text" class="form-control" name="Billing-streetname" id="Billing-streetname">
-                     </div>
-                     <div class="col-lg-4">
-                        <label for="">City or town</label>
-                        <input type="text" class="form-control" name="Billing-city-town" id="Billing-city-town">
-                     </div>
-                     <div class="col-lg-2">
-                        <label for="">Postcode</label>
-                        <input type="text" class="form-control" name="Billing-postcode" id="Billing-postcode">
-                     </div>
-                  </div>
-                  <div class="row">
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-2">
-                        <label for="">State</label>
-                        <input type="text" class="form-control" name="Billing-state" id="Billing-state">
-                     </div>
-                     <div class="col-lg-4">
-                        <label for="">Country</label>
-                        <input type="text" class="form-control" name="Billing-country" id="Billing-country">
-                     </div>
-                  </div>
-                  <div class="row payment-line">
-                     <div class="col-lg-12"><label for="Shipping-address"><strong>Shipping address:(Sames as Billing address)</strong></label><input type="checkbox" id="Shipping-address"></div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-2">
-                        <label for="">Unit/house no.</label>
-                        <input type="text" class="form-control" name="Shipping-unitno" id="Shipping-unitno">
-                     </div>
-                     <div class="col-lg-4">
-                        <label for="">Street name</label>
-                        <input type="text" class="form-control" name="Shipping-streetname" id="Shipping-streetname">
-                     </div>
-                     <div class="col-lg-4">
-                        <label for="">City or town</label>
-                        <input type="text" class="form-control" name="Shipping-city-town" id="Shipping-city-town">
-                     </div>
-                     <div class="col-lg-2">
-                        <label for="">Postcode</label>
-                        <input type="text" class="form-control" name="Shipping-postcode" id="Shipping-postcode">
-                     </div>
-                  </div>
-                  <div class="row">
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-2">
-                        <label for="">State</label>
-                        <input type="text" class="form-control" name="Shipping-state" id="Shipping-state">
-                     </div>
-                     <div class="col-lg-4">
-                        <label for="">Country</label>
-                        <input type="text" class="form-control" name="Shipping-country" id="Shipping-country">
-                     </div>
-                  </div>
+				 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>
                </div>
               
+              
                <div id="wpnumber"><?php  $wpnumber =  3; echo  $wpnumber; ?></div>
-
+               
                  <script type="text/javascript">
                   jQuery(document).ready(function($) {
                       $(".chosen-select").chosen({width: "100%"});
                       $('#workplace').click(function(){
                             $('#dashboard-right-content').addClass("autoscroll");
                  });
-                      $('.event6').click(function(){
-                            $('#dashboard-right-content').addClass("autoscroll");
-                 });
+                     
                       $('.add-workplace').click(function(){
                     
                         
@@ -450,7 +402,7 @@
                
                    
                </script>
-               <div class="down10" style="display:none;">
+               <div class="down3" style="display:none;">
                    <ul class="nav nav-tabs" id="tabmenu">
                   
                         <?php for( $i=0;$i<3;$i++ ):  ?>
@@ -806,8 +758,9 @@
                 </div>
             
               <?php endfor; ?>
+			      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Last</span></a></div>
                </div>
-               <div class="down11" style="display:none;" >
+               <div class="down4" style="display:none;" >
                   <div class="row">
                      <div class="col-lg-6">
                         <label for="Udegree">Undergraduate degree</label>
@@ -858,17 +811,266 @@
                         <input type="text" class="form-control" name="Additional-qualifications" id="Additional-qualifications">
                      </div>
                   </div>
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
                </div>
-               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding" id="your-details-button">   <button  class="dashboard-button dashboard-bottom-button your-details-submit"><span class="dashboard-button-name">Submit</span></button></div>
-            </form>
-         
+               
+            
+			     <div class="down5" style="display:none;" >
+				    <div class="row">
+					  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+					    Has there been any medical malpractice or liability claim in the last five years(whether insured or uninsured)?
+					  </div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Claim1">Yes</label><input type="checkbox" id="Claim1"></div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Claim2">No</label><input type="checkbox" id="Claim2"></div>
+					</div>
+				    <div class="row">
+					  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+					    Are there any facts or circumstances that may give risk to a claim against any insured, including any predecessors in business?
+					  </div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Facts1">Yes</label><input type="checkbox" id="Facts1"></div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Facts2">No</label><input type="checkbox" id="Facts2"></div>
+					</div>
+					<div class="row">
+					  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+					    Has there been any external disciplinary proceeding or been subject to a complaint to a professional society or statutory registration board in the last five years?
+					  </div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Disciplinary1">Yes</label><input type="checkbox" id="Disciplinary1"></div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Disciplinary2">No</label><input type="checkbox" id="Disciplinary2"></div>
+					</div>
+					<div class="row">
+					  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+					    Has any insurer ever declined a proposal, impose special terms, decline to renew or cancel an insurance policy?
+					  </div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Decline1">Yes</label><input type="checkbox" id="Decline1"></div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Decline2">No</label><input type="checkbox" id="Decline2"></div>
+					</div>
+					<div class="row">
+					  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+					    Have you had more than one claim?
+					  </div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Oneclaim1">Yes</label><input type="checkbox" id="Oneclaim1"></div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Oneclaim2">No</label><input type="checkbox" id="Oneclaim2"></div>
+					</div>
+					<div class="display-none" id="insuranceMore">
+					  <div class="row">If you answered yes to one or more of the above questions (1-5) please provide:</div>
+					  <div class="row">
+						  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							 <input type="text" class="form-control" name="Yearclaim" id="Yearclaim" placeholder="Year of claim">
+					      </div>
+						  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+							 <input type="text" class="form-control" name="Nameclaim" id="Nameclaim" placeholder="Name of claimant">
+					      </div>
+						  
+					  </div>
+					  <div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><input type="text" class="form-control" name="Fulldescription" id="Fulldescription" placeholder="Full description of insurance"></div></div>
+					  <div class="row">Insufficient details in your response may result in additional details being requested</div>
+					  <div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+						 <input type="text" class="form-control" name="Amountpaid" id="Amountpaid" placeholder="Amount paid (if nil, please state NIL)">
+					    </div>
+						<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					    Has the claim been finalised?
+					  </div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Finalisedclaim1">Yes</label><input type="checkbox" id="Finalisedclaim1"></div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Finalisedclaim2">No</label><input type="checkbox" id="Finalisedclaim2"></div>
+					  </div>
+					  <div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><input type="text" class="form-control" name="Fulldescription" id="Fulldescription" placeholder="Business name, practice name or trading name owned by you, do not name your employer’s business."></div></div>
+				  </div>
+				   <div class="row">
+					  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					    <input type="checkbox" id="conditions"><label for="conditions">I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
+other material information to be disclosed</label>
+					  </div>
+					 
+					</div>
+			
+			 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button5"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton5"><span class="dashboard-button-name">Last</span></a></div>
          </div>
+		        <div class="down6" style="display:none;" >
+				    <div class="row">
+					  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+					    Do you currently or plan to provide services to professional sport people in the AFL, A League, ARU, NRL, Cricket Australia or Olympic Representatives?
+					  </div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="s1">Yes</label><input type="checkbox" id="s1"></div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="s1-1">No</label><input type="checkbox" id="s1-1"></div>
+					</div>
+				     <div class="row">
+					  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					    Number of professional sports people treated within the last 12 months
+					  </div>
+					  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><input type="text" class="form-control" name="s2" id="s2" placeholder="Amount"></div>
+					  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					    Percentage of your income obtained from professional sports people
+					  </div>
+					  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><input type="text" class="form-control" name="s3" id="s3" placeholder="%"></div>
+					</div>
+					<div class="row">
+					  <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+					    Do you currently or plan to provide services to thoroughbred horses?
+					  </div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="s4">Yes</label><input type="checkbox" id="s4"></div>
+					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="s4-1">No</label><input type="checkbox" id="s4-1"></div>
+					</div>
+					  <div class="row">
+					  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					    Number of thoroughbred horses treated within the last 12 months
+					  </div>
+					  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><input type="text" class="form-control" name="s5" id="s5" placeholder="Amount"></div>
+					  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+					    Percentage of your income obtained from thoroughbred horses
+					  </div>
+					  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><input type="text" class="form-control" name="s6" id="s6" placeholder="%"></div>
+					</div>
+				    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button6"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton6"><span class="dashboard-button-name">Last</span></a></div>
+				</div>
+		          <div class="down7" style="display:none;" >
+				     <div class="row">
+					  <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+					    Payment options:
+					  </div>
+					  
+					  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><label for="p1-1">Full payment</label><input type="checkbox" id="p1-1"><label for="p1-2">Monthly instalments</label><input type="checkbox" id="p1-2">This option incurs a $12.00 admin fee.</div>
+					</div>
+				   <div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">PRF donation</div></div>
+				   <div class="row">
+				      <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					      <select class="form-control" id="PRF" name="PRF">
+                              <option value="">$0.00</option>
+                              <option value="AB">$5.00</option>
+                              <option value="TSI">$10.00</option>
+                              <option value="BOTH">$20.00</option>
+							  <option value="BOTH">$30.00</option>
+							  <option value="BOTH">$50.00</option>
+							  <option value="BOTH">$100.00</option>
+                           </select>
+					  </div>
+					  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">What is this?</div>
+				      
+				   </div>
+				     <div class="row">
+					  
+				   <div class="col-lg-3">
+				        
+                        <select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
+						   <option value="" disabled>Card type</option>
+                           <option value="AE">American Express</option>
+                           <option value="Visa">Visa</option>
+                           <option value="Mastercard">Mastercard</option>
+                        </select>
+                   </div>
+				 </div>
+				 <div class="row">
+				   <div class="col-lg-6">
+                        <input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
+                   </div>
+				 </div>
+				 <div class="row">
+				   <div class="col-lg-6">
+                        <input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
+                   </div>
+				 </div>
+				 <div class="row">
+				   <div class="col-lg-4">
+                        <input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
+                   </div>
+				   <div class="col-lg-3">
+                        <input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+                   </div>
+				 </div>
+                   <div class="row">
+				    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><label id="privacypolicyl">Privacy policy</label><input type="checkbox" id="privacypolicy"></div>
+						
+					<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><label id="instalmentpolicyl">Instalment/payment policy</label><input type="checkbox" id="instalmentpolicy"></div>
+				   
+				   </div>   
+                   	   
+				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button7"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton7"><span class="dashboard-button-name">Last</span></a></div>
+				  </div>
+				  <div class="down8" style="display:none;" >
+				     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+				           <table>
+							   <tbody>
+								 <tr>
+								   <th>Product name</th>
+								   <th>Price</th>
+								   <th>Delete</th>
+								 </tr>
+								   <?php foreach( $products as $product){
+										 
+									   echo "<tr>";
+											
+											echo	"<td>".$product['Title']."</td>";
+									   
+											echo	"<td>".$product['Price']."</td>";
+										
+											echo        '<td><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$product['Id'].'"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></a></td>';
+									   echo "</tr>";    
+									 
+									}
+								 ?>
+							   </tbody>
+						  </table>
+		
+                  </div>
+					 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 paymentsiderbar">
+								  <div class="row ordersummary"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span>YOUR ORDER</span></div></div>
+							   <table>
+									<tr>
+									  <td>Sub total (Inc. GST)</td>
+									  <td>A$<?php echo $price;?></td>
+								   </tr>
+									<tr>
+									  <td>PRF donation</td>
+									  <td>A$0.00</td>
+								   </tr>
+									 <tr>
+									  <td>Total(Inc.GST)</td>
+									  <td>A$<?php echo $price;?></td>
+								   </tr>
+						   </table>
+					
+						 <a target="_blank" class="addCartlink"><button class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
+				</div>
+         
+				  </div>
+		  </form>
       </div>
    </div>
 </div>
+</div>
+ <div id="privacypolicyWindow" style="display:none;">
+							<h3>APA privacy policy</h3>
+							 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+							 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pretium
+tellus non ex mattis feugiat a in est. Praesent est leo, viverra ac
+hendrerit ac, facilisis at ante. Phasellus elementum hendrerit risus,
+eu luctus dolor sollicitudin vitae. Cras ac tellus ut mauris scelerisque
+mollis. Sed nibh ipsum, fringilla sed pellentesque non, luctus ut diam.
+In viverra neque lacus, vel pulvinar nulla convallis id. Curabitur porttitor
+eleifend quam in tincidunt.
+                           </div>
+                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+							 <label for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label><input type="checkbox" id="privacypolicyp">
+                           </div>
+						 
+</div>
+<div id="installmentpolicyWindow" style="display:none;">
+							<h3>APA installment policy</h3>
+							 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+							 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pretium
+tellus non ex mattis feugiat a in est. Praesent est leo, viverra ac
+hendrerit ac, facilisis at ante. Phasellus elementum hendrerit risus,
+eu luctus dolor sollicitudin vitae. Cras ac tellus ut mauris scelerisque
+mollis. Sed nibh ipsum, fringilla sed pellentesque non, luctus ut diam.
+In viverra neque lacus, vel pulvinar nulla convallis id. Curabitur porttitor
+eleifend quam in tincidunt.
+                           </div>
+                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+							 <label for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label><input type="checkbox" id="installmentpolicyp">
+                           </div>
+						 
+</div>	
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
-<script type="text/javascript">
-   jQuery(document).ready(function($) {
-     
-   });
-</script>
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
