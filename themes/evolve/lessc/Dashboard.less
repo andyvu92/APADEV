@@ -240,15 +240,15 @@ body.modal-open {
     background: transparent;
 }
 
-#block-block-184 label > input, #block-block-216 label > input, #block-block-218 label > input, #block-block-220 label > input, #block-block-243 label > input, #block-block-242 label > input, #block-block-244 label > input{ /* HIDE RADIO */
+#block-block-184 label > input, #block-block-216 label > input, #block-block-218 label > input, #block-block-220 label > input, #block-block-243 label > input, #block-block-242 label > input, #block-block-244 label > input, #block-block-245 label > input{ /* HIDE RADIO */
   visibility: hidden; /* Makes input not-clickable */
   position: absolute; /* Remove input from document flow */
 }
-#block-block-184 label > input + img, #block-block-216 label > input + img, #block-block-218 label > input + img, #block-block-220 label > input + img, #block-block-243 label > input + img, #block-block-242 label > input + img, #block-block-244 label > input + img{ /* IMAGE STYLES */
+#block-block-184 label > input + img, #block-block-216 label > input + img, #block-block-218 label > input + img, #block-block-220 label > input + img, #block-block-243 label > input + img, #block-block-242 label > input + img, #block-block-244 label > input + img, #block-block-245 label > input + img{ /* IMAGE STYLES */
   cursor:pointer;
   border:2px solid transparent;
 }
-#block-block-184 label > input:checked + img, #block-block-216 label > input:checked + img, #block-block-218 label > input:checked + img, #block-block-220 label > input:checked + img, #block-block-243 label > input:checked + img, #block-block-242 label > input:checked + img, #block-block-244 label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+#block-block-184 label > input:checked + img, #block-block-216 label > input:checked + img, #block-block-218 label > input:checked + img, #block-block-220 label > input:checked + img, #block-block-243 label > input:checked + img, #block-block-242 label > input:checked + img, #block-block-244 label > input:checked + img, #block-block-245 label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
   border:2px solid #009fda;
 }
 div#dashboard-right-content div.dashboard_detail div:nth-child(5){
@@ -261,14 +261,13 @@ form[name="formradio"] label {
     margin-left: -16px;
 	margin-top: 9px;
 }
-button.deletecardbutton {
-    background: transparent;
-    border: none;
+.deletecardbutton {
+    color:white!important;
 }
 div[aria-describedby="addPaymentCardForm"].ui-dialog {
     z-index: 1050!important;
     left: 33%!important;
-	top: 43%!important;
+	top: 47%!important;
 	width: 486px!important;
 }
 div[aria-describedby="addPaymentCardForm"] .ui-widget-header{
@@ -278,6 +277,117 @@ div[aria-describedby="addPaymentCardForm"] .ui-widget-header{
 div[aria-describedby="addPaymentCardForm"] .ui-dialog-content{
     overflow:hidden!important;
 }
+div[aria-describedby="deleteCardWindow"].ui-dialog {
+    z-index: 1050!important;
+    left: 33%!important;
+	top: 47%!important;
+	width: 429px!important;
+	height: 175px!important;
+}
+div[aria-describedby="deleteCardWindow"] .ui-widget-header{
+    border:none!important;
+	background-color:white!important;
+}
+div[aria-describedby="deleteCardWindow"] .ui-dialog-content{
+    overflow:hidden!important;
+}
+div[aria-describedby="privacypolicyWindow"].ui-dialog {
+    z-index: 1050!important;
+    left: 23%!important;
+	top: 51%!important;
+	width: 673px!important;
+	
+}
+div[aria-describedby="privacypolicyWindow"] .ui-widget-header{
+    border:none!important;
+	background:white!important;
+}
+div[aria-describedby="privacypolicyWindow"] .ui-dialog-content{
+   
+}
+div[aria-describedby="installmentpolicyWindow"].ui-dialog {
+    z-index: 1050!important;
+    left: 23%!important;
+	top: 51%!important;
+	width: 673px!important;
+	
+}
+div[aria-describedby="installmentpolicyWindow"] .ui-widget-header{
+    border:none!important;
+	background:white!important;
+}
+div[aria-describedby="installmentpolicyWindow"] .ui-dialog-content{
+   
+}
+label[for="privacypolicyp"]{
+    margin-left:-3px;
+}
+#deleteCardWindow h3{
+    color: #009fda!important;
+	margin-top: -6px;
+	margin-bottom: 28px;
+}
+#privacypolicyWindow h3, #installmentpolicyWindow h3{
+    color: #009fda !important;
+    margin-top: 22px;
+    margin-bottom: 22px;
+    margin-left: 13px;
+}
+input#privacypolicyp, input#installmentpolicyp{
+    margin-left: 14px;
+}
+a.cancelDeleteButton {
+    padding: 8px 46px;
+    background-color: #009fda!important;
+    color: white!important;
+    margin-left: 10%;
+}
+button.deletecardbutton {
+    width: 100px;
+    height: 33px;
+    border: none;
+    background-color: #009fda !important;
+    color: white !important;
+}
+
+/* ********************************************************* */
+/* -----------------Join the member page added by jinghu End---------- */
+/* ********************************************************* */
+.shipping{
+    display:none!important;
+}
+a[class^="join-details-button"]{
+    float: left;
+    margin-bottom: 20px;
+    margin-right: 24%;
+    margin-top: 4px;
+	background-color: #009fda;
+    border-width: 0px !important;
+    width: 110px;
+    height: 30px;
+}
+
+a[class^="your-details-prevbutton"]{
+    float: right;
+    margin-bottom: 20px;
+    margin-right: 24%;
+    margin-top: 4px;
+	background-color: #009fda;
+    border-width: 0px !important;
+    width: 110px;
+    height: 30px;
+}
+#conditions {
+    margin-left: 0%!important;
+    margin-right: 13px;
+}
+
+
+
+
+
+
+
 
 
 /* ********************************************************* */
@@ -330,6 +440,9 @@ div[aria-describedby="addPaymentCardForm"] .ui-dialog-content{
 #block-block-220 #dashboard-right-content, #block-block-220 .dashboard-left-nav, #block-block-245 #dashboard-right-content{
    height:890px;
 }
+#block-block-245 #dashboard-right-content{
+   height:913px;
+}
 #block-block-220 input[type="text"]{
    padding:0;
    padding-left:10px;
@@ -340,7 +453,7 @@ div[aria-describedby="addPaymentCardForm"] .ui-dialog-content{
 #block-block-243 #changePasswordForm{
    margin-top: 23px;
 }
-#block-block-220 .your-details-submit {
+#block-block-220 .your-details-submit, #block-block-245 .your-details-submit{
     
     float: left;
     margin-bottom: 20px;
@@ -365,11 +478,22 @@ div[aria-describedby="addPaymentCardForm"] .ui-dialog-content{
 #block-block-220 input[type=checkbox], #block-block-245 input[type=checkbox]{
     margin-left: 13%;
 }
+#block-block-245 input[id=p1-1], #block-block-245 input[id=p1-2]{
+    margin-left: 1%;
+}
+#block-block-245 label[for=p1-2]{
+    margin-left: 5%;
+}
+#block-block-245 .dashboard-button-name{
+    padding: 39px;
+    line-height: 32px;
+}
 #block-block-220 .nav-tabs>li>a, #block-block-245 .nav-tabs>li>a{
     margin-right:0!important;
 	white-space: nowrap;
 	padding-left:0;
 }
+
 #block-block-220 .nav-tabs, #block-block-245 .nav-tabs{
     border-bottom:none!important;
 	margin-bottom:10px;
@@ -427,4 +551,34 @@ div[aria-describedby="addPaymentCardForm"] .ui-dialog-content{
 }
 .fade.in{
     display: inline-block;
+}
+#formaddcard .row{
+    margin-bottom:5px;
+}
+#formaddcard .addCartButton{
+    margin-left: 3%;
+}
+#formaddcard .tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+	opacity: 1!important;
+}
+
+#formaddcard .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: transparent;
+    color: black;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+}
+
+#formaddcard .tooltip:hover .tooltiptext {
+    visibility: visible;
 }

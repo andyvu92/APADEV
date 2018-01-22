@@ -33,6 +33,7 @@
    "Cardno":"4566122333",
    "Expiry-date":"2022-05-05",
    "CCV":"111",
+   "installment":"1",
    "Billing-unitno":"1175",
    "Billing-streetname":"Toorak Road",
    "Billing-city-town":"Melbourne",
@@ -293,7 +294,7 @@
             <a href="your-details">
                <div class="dashboard-icon">[icon class="fa fa-users fa-3x" link=""][/icon]</div>
                <br/>
-               <div class="dashboard-button-name">Your details</div>
+               <div class="dashboard-button-name">Account</div>
             </a>
          </li>
          <li class="dashboard-nav">
@@ -323,7 +324,7 @@
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $user['background']; ?>" id="dashboard-right-content">
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Your details</strong></span></div>
+         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Account</strong></span></div>
          <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
       </div>
       <!-- Modal -->
@@ -364,7 +365,7 @@
                <li><a class="event6" style="cursor: pointer;"><span class="text-underline eventtitle6" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
            
                <li><a class="event8" style="cursor: pointer;"><span class="eventtitle8" id="membership"><strong>Membership</strong></span></a></li>
-               <li><a class="event9" style="cursor: pointer;"><span class="eventtitle9" id="payment"><strong>Shipping & Billing Address</strong></span></a></li>
+               <li><a class="event9" style="cursor: pointer;"><span class="eventtitle9" id="payment"><strong>Payment information</strong></span></a></li>
                <li><a class="event10" style="cursor: pointer;"><span class="eventtitle10" id="workplace"><strong>Workplace</strong></span></a></li>
                <li><a class="event11" style="cursor: pointer;"><span class="eventtitle11" id="education"><strong>Education</strong></span></a></li>
             </ul>
@@ -600,18 +601,17 @@
                  "0":{
                          "Digitsnumber":"8888",
                          "Cardtype":"Master",
-                         "Default":"1"
+                         "Name":"Allen"
                        },
                   "1":{
                          "Digitsnumber":"6666",
                          "Cardtype":"Visa",
-                         "Default":"0"
+                         "Name":"Luya"
                        } ,
                   "2":{
                          "Digitsnumber":"9999",
-  
                          "Cardtype":"Master",
-                         "Default":"0"
+                         "Name":"Jacky"
                        }
       
       }';
@@ -619,26 +619,38 @@
   ?>
                     
          <div class="row" >
-            
-              
-       
+            <div class="row" >
+              <div class="col-lg-12"><strong>Your payment details:</strong></div>
+             </div>
              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			 
               <form action="pd-shopping-cart?action=delete" method="POST" id="deleteCardForm">
                 <div class="paymentsidecredit"> <fieldset><select  id="Paymentcard" name="Paymentcard" style="width:100%;">
                       <?php if (sizeof($cardsnum)!=0): ?>   
                                    
                              <?php foreach( $cardsnum as $cardnum):  ?>
-                                 <option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardnum["Default"]==1) echo "selected"; ?> data-class="<?php echo  $cardnum["Cardtype"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
+                                 <option value="<?php echo  $cardnum["Digitsnumber"];?>" data-class="<?php echo  $cardnum["Cardtype"];?>"><?php echo  $cardnum["Name"];?>&nbsp;<br>Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
                               <?php endforeach; ?>
                          <?php endif; ?>  
                            </select></fieldset></div>
-                  <button class="deletecardbutton">delete selected card</button>
-                </form>    
-                <div class="paymentsideuse><input type="checkbox" id="anothercard"><label for="anothercard"><a  style="cursor: pointer; color:white;" id="addPaymentCard">Add another card</a></label>
+                  
+            
+         </div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> <a class="deletecardbutton">delete selected card</a>
+		      <div id="deleteCardWindow" style="display:none;">
+		        <h3>Are you sure you want to delete this card?</h3>
+                <button class="deletecardbutton">Yes</button>
+                <a target="_self" class="cancelDeleteButton">No</a>
+		</div>
+                </form></div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">  <div class="paymentsideuse><input type="checkbox" id="anothercard"><label for="anothercard"><a  style="cursor: pointer; color:white;" id="addPaymentCard">Add a new card</a></label>
 				  <div id="addPaymentCardForm" style="display:none;">
                   <form action="pd-shopping-cart?action=addcard" method="POST" id="formaddcard">
+				     <div class="row"><div class="col-lg-12">Add a new card:</div></div>
                      <div class="row">
+					  
 				   <div class="col-lg-12">
+				        
                         <select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
                            <option value="AE">American Express</option>
                            <option value="Visa">Visa</option>
@@ -657,30 +669,30 @@
                    </div>
 				 </div>
 				 <div class="row">
-				   <div class="col-lg-12">
+				   <div class="col-lg-6">
                         <input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
                    </div>
-				  
 				 </div>
-                               <div class="row">
-                                    <div class="col-lg-12">
-                        <input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV">
-                                   </div>
-                              </div>
-                            <div class="row">
-                                 <a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
-                             </div>
+                 <div class="row"> 
+				    <div class="col-lg-6">
+                        <input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+                   </div>
+				    <div class="col-lg-6">
+					     <div class="tooltip">What is this?
+  <span class="tooltiptext"><img src="http://localhost/sites/default/files/MEDIA/CVV number.png" ></span>
+</div>
+
+                        
+                   </div>
+				
+                 </div>				 
+				<div class="row">
+					 <a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
+				 </div>
              </form>
     </div>
-				</div>
-               
-            
-
-                                            
-                        
-               
-           
-         </div>
+				</div></div>
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 <?php if($details['installment']!= "1") echo "display-none"; ?>"><label for="rollover">Roll over your payment card information</label><input type="checkbox" id="rollover" checked> </div>
       </div>
   
                   <div class="row payment-line">
