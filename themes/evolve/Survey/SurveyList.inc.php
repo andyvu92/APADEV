@@ -1,0 +1,4 @@
+<?php
+/* Survey Group List */
+
+?>

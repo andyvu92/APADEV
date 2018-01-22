@@ -1,0 +1,4 @@
+<?php
+/* Survey Database */
+
+?>
