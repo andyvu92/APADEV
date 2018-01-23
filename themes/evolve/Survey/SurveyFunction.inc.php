@@ -7,5 +7,13 @@ function GetGroupList() {
 	$arrayIn = forGetGroupList();//returnGetList();
 	return $arrayIn;
 }
-
+function UpdateGroupList($action){
+	forUpdateGroupList($action);
+	
+}
+function SingleGroup($GID){
+	$arraySingle = forSingleGroup($GID);
+	return $arraySingle;
+	
+}
 ?>
