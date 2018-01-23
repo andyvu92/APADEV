@@ -47,7 +47,7 @@ echo "<div class='SurveyList'><ul class='Row'>";
 // need to put header of table here
 echo "<li><div class='ColSection ColHeader'><ul class='Col'>";
 echo "<li>ID</li><li>Name</li><li>Description</li><li>Start Date</li><li>End Date</li>";
-echo "<li>User number Limit</li><li>User type Limit</li><li>Publish status</li><li>Tools</li>";
+echo "<li>Number of Users</li><li>User types Limit</li><li>Publish status</li><li>Tools</li>";
 echo "</ul></div></li>";
 foreach($GroupList as $lines) {
 	echo "<li><div class='ColSection'><ul class='Col'>";
@@ -71,8 +71,6 @@ foreach($GroupList as $lines) {
 echo "</ul></div>";
 // end frame
 ////// end frame goes here
-echo "<p>Think out loud: Description of each survey will go under and 'click to expand' form.</p>";
-echo "<p>Think out loud: Will have sort function here along with a pagination.</p>";
-echo "<p>Think out loud: Combine limits and display together";
+
 
 ?>
