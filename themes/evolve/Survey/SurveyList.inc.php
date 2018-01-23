@@ -4,41 +4,9 @@
 // to get Group array;
 $GroupList = array();
 
-/*************** this part will be replaced with function *********/
-$assumeReturn = array();
-try {
-	//$db = new PDO('mysql:host=10.1.1.35;dbname=apa_survey', 'c0DefaultMain', 'Apa2017Config');
-	$db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
-	$Mcheck = $db->prepare('SELECT * FROM groups');
-	if(!$Mcheck->execute()) {
-		echo "<br />RunFail- Mcheck<br>";
-		print_r($Mcheck->errorInfo());
-	}
-	// Tester!
-	echo "<p>Number of raws: ".$Mcheck->rowCount()."</p>";
-	$arrayReturn = array();
-	foreach($Mcheck as $checks) {
-		$arrayRaw = array();
-		array_push($arrayRaw, $checks[0]);
-		array_push($arrayRaw, $checks[1]);
-		array_push($arrayRaw, $checks[2]);
-		array_push($arrayRaw, $checks[3]);
-		array_push($arrayRaw, $checks[4]);
-		array_push($arrayRaw, $checks[5]);
-		array_push($arrayRaw, $checks[6]);
-		array_push($arrayRaw, $checks[7]);
-		array_push($arrayRaw, $checks[8]);
-		array_push($arrayReturn, $arrayRaw);
-	}
-	echo "<br/>Done!";
-	$assumeReturn = $arrayReturn;
-} catch (PDOException $e) {
-	print "Error!: " . $e->getMessage() . "<br/>";
-	die();
-}
-/*************** this part will be replaced with function *********/
+include('SurveyFunction.inc.php');
 
-$GroupList = $assumeReturn;
+$GroupList = GetGroupList();
 
 //start frame
 ////// frame goes here
