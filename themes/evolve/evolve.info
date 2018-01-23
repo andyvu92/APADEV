@@ -91,12 +91,14 @@ lessc[] = lessc/Policy.less
 lessc[] = lessc/Research.less
 lessc[] = lessc/Resource.less
 lessc[] = lessc/custom.less
+lessc[] = Survey/Survey.less
+
 
 scripts[] = assets/scripts/evolve.js
 scripts[] = assets/scripts/custom.js
 scripts[] = assets/scripts/chosen_v1.7.0/chosen.jquery.min.js
 scripts[] = assets/scripts/twitter.js
-
+scripts[] = Survey/GFunction.js
 
 settings[body] = 'Open Sans:regular:14px:24px'
 settings[h1] = 'Raleway:regular:36px:'
