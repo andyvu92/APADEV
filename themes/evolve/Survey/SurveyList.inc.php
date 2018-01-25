@@ -4,7 +4,7 @@
 // to get Group array;
 $GroupList = array();
 
-include('SurveyFunction.inc.php');
+//include('SurveyFunction.inc.php');
 
 $GroupList = GetGroupList();
 

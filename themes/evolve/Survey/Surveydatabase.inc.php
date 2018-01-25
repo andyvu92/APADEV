@@ -88,7 +88,7 @@ function forUpdateGroupList($action){
 }
 /* ------------------ forUpdateGroupList($action) end -------- */
 
-/* ------------------ forSingleGroup($action) start -------- */
+/* ------------------ forSingleGroup($GID) start -------- */
 function forSingleGroup($GID){
 	   $arrayReturn = array();
 	  
@@ -116,5 +116,96 @@ function forSingleGroup($GID){
         return $arrayReturn;
 	
 }
-/* ------------------ forSingleGroup($action)end -------- */
+/* ------------------ forSingleGroup($GID)end -------- */
+
+/* ------------------ forUpdateQustion($action) start -------- */
+function forUpdateQustion($action){
+/* Survey Group Edit/Create */
+	try {
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+		$QDescription = '';
+		$QType = '';
+		$QMandatory = '';
+		$QOption = '';
+       $QTitle = $_POST['qTitle'];
+	   if(isset($_POST['QID'])){ $QID = $_POST['QID']; }
+	   if(isset($_POST['qDescription'])){ $QDescription = $_POST['qDescription']; }
+	   if(isset($_POST['qType'])){ $QType = $_POST['qType']; }
+       if(isset($_POST['qMandatory'])){ $QMandatory = $_POST['qMandatory']; } 
+	   if(isset($_POST['optionID'])){ $QOption = $_POST['optionID']; } 
+	   if(isset($_POST['GID'])){ $GID = $_POST['GID']; }
+	   if($action == "create"){
+          if(isset($_POST['oValue'])){ $OValue = $_POST['oValue']; } 
+		  $optionUpdate= $dbt->prepare('INSERT INTO options (Value) VALUES (:OValue)');
+		  $optionUpdate->bindValue(':OValue', $OValue);
+		  $optionUpdate->execute();
+		  $QOption = $dbt->lastInsertId();
+		  $optionUpdate= null;
+          $connUpdate= $dbt->prepare('INSERT INTO questions (QuestionTitle, QuestionDescription, OptionID, QuestionType, IsMandatory) VALUES (:QTitle, :QDescription, :QOption, :QType, :QMandatory)');
+		  $parentUpdate= $dbt->prepare('INSERT INTO parent (ParentTitle, ParentDescription, GroupID) VALUES (:QTitle, :QDescription, :GID)');
+		  $parentUpdate->bindValue(':QTitle', $QTitle);
+          $parentUpdate->bindValue(':QDescription', $QDescription);
+		  $parentUpdate->bindValue(':GID', $GID);
+		  $parentUpdate->execute();
+          $parentUpdate= null;		  
+		 }			  
+		  
+		  
+          if($action == "edit")	{
+			  $connUpdate= $dbt->prepare('UPDATE questions SET QuestionTitle = :QTitle, QuestionDescription = :QDescription, QuestionType = :QType, IsMandatory = :QMandatory WHERE QuestionID= :QID');  
+		      $connUpdate->bindValue(':QID', $QID);
+		  }	
+		  $connUpdate->bindValue(':QTitle', $QTitle);
+          $connUpdate->bindValue(':QDescription', $QDescription);
+		  $connUpdate->bindValue(':QOption', $QOption);
+		  $connUpdate->bindValue(':QType', $QType);
+		  $connUpdate->bindValue(':QMandatory', $QMandatory);
+		  $connUpdate->execute();
+          $connUpdate= null;
+       echo "save sccussfully!";
+  
+     }
+      catch (PDOException $e) {
+				print "Error!: " . $e->getMessage() . "<br/>";
+				die();
+	  }
+   
+}
+/* ------------------ forUpdateQustion($action) end -------- */
+/* ------------------ forGetOptionList() start -------- */
+function forGetOptionList() {
+	$arrayReturn = array();
+	try {
+		//$db = new PDO('mysql:host=10.1.1.35;dbname=apa_survey', 'c0DefaultMain', 'Apa2017Config');
+		$db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+		
+		$Mcheck = $db->prepare('SELECT * FROM options');
+		if(!$Mcheck->execute()) {
+			echo "<br />RunFail- Mcheck<br>";
+			print_r($Mcheck->errorInfo());
+		}
+		// Tester! 	echo "<p>Number of raws: ".$Mcheck->rowCount()."</p>";
+		foreach($Mcheck as $checks) {
+			$arrayRaw = array();
+			array_push($arrayRaw, $checks[0]);
+			array_push($arrayRaw, $checks[1]);
+			array_push($arrayRaw, $checks[2]);
+			array_push($arrayRaw, $checks[3]);
+			array_push($arrayReturn, $arrayRaw);
+		}
+		// close connection
+		$Mcheck->closeCursor();
+		$Mcheck = null;
+		
+		/////////// end of the code
+		$db = null;
+	} catch (PDOException $e) {
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}
+	return $arrayReturn;
+}
+/* ------------------ forGetGroupList() end -------- */
+
+
 ?>

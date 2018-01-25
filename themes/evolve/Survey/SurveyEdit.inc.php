@@ -1,4 +1,5 @@
-<?php include('SurveyFunction.inc.php');
+<?php //include('SurveyFunction.inc.php');
+$GroupList = GetGroupList();
   if(isset($_POST["action"])) { $action=$_POST["action"]; UpdateGroupList($action); }
  ?>
 <?php if(!isset($_GET["GID"])):?>
