@@ -13,15 +13,15 @@ function GetOptionList() {
 }
 function UpdateGroupList($action){
 	forUpdateGroupList($action);
-	
 }
 function SingleGroup($GID){
 	$arraySingle = forSingleGroup($GID);
 	return $arraySingle;
-	
 }
 function UpdateQustion($action){
-	forUpdateQustion($action);
-	
+	forUpdateQustions($action);
+}
+function DeleteGroup($GID) {
+	forDeleteGroup($GID);
 }
 ?>

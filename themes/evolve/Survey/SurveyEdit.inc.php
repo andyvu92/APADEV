@@ -1,9 +1,8 @@
 <?php //include('SurveyFunction.inc.php');
-$GroupList = GetGroupList();
-  if(isset($_POST["action"])) { $action=$_POST["action"]; UpdateGroupList($action); }
+$GroupList = GetGroupList();  
  ?>
 <?php if(!isset($_GET["GID"])):?>
-<form method="POST" action="surveydetail">
+<form method="POST" action="surveylist">
    <div class="row">
         <div class="col-lg-6">
             <label for="">Group Title</label>
