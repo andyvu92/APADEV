@@ -23,9 +23,9 @@ if(isset($_POST["action"])) {
 			if($_POST["qType".$a] == '1') {
 				$optionArrT = Array();
 				$optionArrF = Array();
-				array_push($optionArrT, $_POST["oValue".$a.".1"]);
+				array_push($optionArrT, $_POST[$a."oValue1"]);
 				array_push($optionArrT, $_POST[$a."qNext1"]);
-				array_push($optionArrF, $_POST["oValue".$a.".2"]);
+				array_push($optionArrF, $_POST[$a."oValue2"]);
 				array_push($optionArrF, $_POST[$a."qNext2"]);
 				array_push($optionArr, $optionArrT);
 				array_push($optionArr, $optionArrF);
@@ -35,15 +35,15 @@ if(isset($_POST["action"])) {
 				$optionArrTr = Array();
 				$optionArrFo = Array();
 				$optionArrFi = Array();
-				array_push($optionArrOn, $_POST["oValue".$a.".1"]);
+				array_push($optionArrOn, $_POST[$a."oValue1"]);
 				array_push($optionArrOn, $_POST[$a."qNext1"]);
-				array_push($optionArrTw, $_POST["oValue".$a.".2"]);
+				array_push($optionArrTw, $_POST[$a."oValue2"]);
 				array_push($optionArrTw, $_POST[$a."qNext2"]);
-				array_push($optionArrTr, $_POST["oValue".$a.".3"]);
+				array_push($optionArrTr, $_POST[$a."oValue3"]);
 				array_push($optionArrTr, $_POST[$a."qNext3"]);
-				array_push($optionArrFo, $_POST["oValue".$a.".4"]);
+				array_push($optionArrFo, $_POST[$a."oValue4"]);
 				array_push($optionArrFo, $_POST[$a."qNext4"]);
-				array_push($optionArrFi, $_POST["oValue".$a.".5"]);
+				array_push($optionArrFi, $_POST[$a."oValue5"]);
 				array_push($optionArrFi, $_POST[$a."qNext5"]);
 				array_push($optionArr, $optionArrOn);
 				array_push($optionArr, $optionArrTw);

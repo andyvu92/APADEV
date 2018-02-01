@@ -19,7 +19,8 @@ function SingleGroup($GID){
 	return $arraySingle;
 }
 function UpdateQustion($action){
-	forUpdateQustions($action);
+	print_r($action);
+	//forUpdateQustions($action);
 }
 function DeleteGroup($GID) {
 	forDeleteGroup($GID);

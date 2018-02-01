@@ -66,8 +66,8 @@ jQuery(document).ready(function($) {
 		if(($('#OptionsTF'+ j ).text().length ===0) && $('#qType'+ j ).val()=="1"){
 			$('#Q'+ j + " > .options" ).replaceWith('<div class="row options" id="optionSettings'+ j +'"><div class="col-lg-6">'+
 			'<label id="OptionsTF'+ j +'">Options'+ j +' Settings</label>'+
-			'<input type="text" id="'+j+'OptionCount1" class="form-control" name="oValue'+ j +'.1" placeholder="OptionValue" value="TRUE">'+
-			'<input type="text" id="'+j+'OptionCount2" class="form-control" name="oValue'+ j +'.2" placeholder="OptionValue" value="False">'+
+			'<input type="text" id="'+j+'OptionCount1" class="form-control" name="'+ j +'oValue1" placeholder="OptionValue" value="True">'+
+			'<input type="text" id="'+j+'OptionCount2" class="form-control" name="'+ j +'oValue2" placeholder="OptionValue" value="False">'+
 				'</div><div class="col-lg-6">'+
 				'<div class="SequenceQDorp'+j+'"></div>'+
 			'</div>');
@@ -84,11 +84,11 @@ jQuery(document).ready(function($) {
 		if(($('#OptionsMCSA'+ j ).text().length ===0)&&$('#qType'+ j).val()=="2"){
 			$('#Q'+ j + " > .options" ).replaceWith('<div class="row options" id="optionSettings'+ j +'"><div class="col-lg-6">'+
 			'<label id="OptionsMCSA'+ j +'">Options'+ j +' Settings</label>'+
-			'<input type="text" id="'+j+'OptionCount1" class="form-control" name="oValue'+ j +'" placeholder="OptionValue">'+
-			'<input type="text" id="'+j+'OptionCount2" class="form-control" name="oValue'+ j +'" placeholder="OptionValue">'+
-			'<input type="text" id="'+j+'OptionCount3" class="form-control" name="oValue'+ j +'" placeholder="OptionValue">'+
-			'<input type="text" id="'+j+'OptionCount4" class="form-control" name="oValue'+ j +'" placeholder="OptionValue">'+
-			'<input type="text" id="'+j+'OptionCount5" class="form-control" name="oValue'+ j +'" placeholder="OptionValue">'+
+			'<input type="text" id="'+j+'OptionCount1" class="form-control" name="'+ j +'oValue1" placeholder="OptionValue">'+
+			'<input type="text" id="'+j+'OptionCount2" class="form-control" name="'+ j +'oValue2" placeholder="OptionValue">'+
+			'<input type="text" id="'+j+'OptionCount3" class="form-control" name="'+ j +'oValue3" placeholder="OptionValue">'+
+			'<input type="text" id="'+j+'OptionCount4" class="form-control" name="'+ j +'oValue4" placeholder="OptionValue">'+
+			'<input type="text" id="'+j+'OptionCount5" class="form-control" name="'+ j +'oValue5" placeholder="OptionValue">'+
 				'</div><div class="col-lg-6">'+
 				'<div class="SequenceQDorp'+j+'"></div>'+
 			'</div>');
