@@ -16,6 +16,7 @@ if(isset($_POST["action"])) {
 	$QuestionArray = Array();
 	if(isset($_POST["qNum"])) {
 		$qNum = $_POST["qNum"];
+		array_push($QuestionArray, $qNum);
 		for($a = 1; $a <= $qNum; $a++) {
 			array_push($QuestionArray, $_POST["qTitle".$a]);
 			array_push($QuestionArray, $_POST["qDescription".$a]);

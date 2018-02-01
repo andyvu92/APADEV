@@ -237,55 +237,37 @@ function forUpdateQustion($action){
 
 /* ------------------ forUpdateQustions($action) start -------- */
 function forUpdateQustions($action){
-/* Survey Group Edit/Create */
+	// this variable will be used to add optionID to questions and questionID to options.
+	$QuestionList = Array();
 	try {
 		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
-		$QDescription = '';
-		$QType = '';
-		$QMandatory = '';
-		$QOption = '';
-       $QTitle = $_POST['qTitle'];
-	   if(isset($_POST['QID'])){ $QID = $_POST['QID']; }
-	   if(isset($_POST['qDescription'])){ $QDescription = $_POST['qDescription']; }
-	   if(isset($_POST['qType'])){ $QType = $_POST['qType']; }
-       if(isset($_POST['qMandatory'])){ $QMandatory = $_POST['qMandatory']; } 
-	   if(isset($_POST['optionID'])){ $QOption = $_POST['optionID']; } 
-	   if(isset($_POST['GID'])){ $GID = $_POST['GID']; }
-	   if($action == "create"){
-          if(isset($_POST['oValue'])){ $OValue = $_POST['oValue']; } 
-		  $optionUpdate= $dbt->prepare('INSERT INTO options (Value) VALUES (:OValue)');
-		  $optionUpdate->bindValue(':OValue', $OValue);
-		  $optionUpdate->execute();
-		  $QOption = $dbt->lastInsertId();
-		  $optionUpdate= null;
-          $connUpdate= $dbt->prepare('INSERT INTO questions (QuestionTitle, QuestionDescription, OptionID, QuestionType, IsMandatory) VALUES (:QTitle, :QDescription, :QOption, :QType, :QMandatory)');
-		  $parentUpdate= $dbt->prepare('INSERT INTO parent (ParentTitle, ParentDescription, GroupID) VALUES (:QTitle, :QDescription, :GID)');
-		  $parentUpdate->bindValue(':QTitle', $QTitle);
-          $parentUpdate->bindValue(':QDescription', $QDescription);
-		  $parentUpdate->bindValue(':GID', $GID);
-		  $parentUpdate->execute();
-          $parentUpdate= null;		  
-		 }			  
-		  
-		  
-          if($action == "edit")	{
-			  $connUpdate= $dbt->prepare('UPDATE questions SET QuestionTitle = :QTitle, QuestionDescription = :QDescription, QuestionType = :QType, IsMandatory = :QMandatory WHERE QuestionID= :QID');  
-		      $connUpdate->bindValue(':QID', $QID);
-		  }	
-		  $connUpdate->bindValue(':QTitle', $QTitle);
-          $connUpdate->bindValue(':QDescription', $QDescription);
-		  $connUpdate->bindValue(':QOption', $QOption);
-		  $connUpdate->bindValue(':QType', $QType);
-		  $connUpdate->bindValue(':QMandatory', $QMandatory);
-		  $connUpdate->execute();
-          $connUpdate= null;
-       echo "save sccussfully!";
+		/* First run - Enter questions */
+		$questionInsert = $dbt->prepare('INSERT INTO questions (QuestionTitle, QuestionDescription, QuestionType, IsMandatory) VALUES (:QTitle, :QDescription, :QType, :QMandatory)');
+		$questionInsert->bindValue(':QTitle', $OValue);
+		$questionInsert->bindValue(':QDescription', $OValue);
+		$questionInsert->bindValue(':QType', $OValue);
+		$questionInsert->bindValue(':QMandatory', $OValue);
+		/* Second run - Enter options */
+		$optionInsert= $dbt->prepare('INSERT INTO options (Value, NextQuestion, QuestionID) VALUES (:OValue, :NextQuestion, :QuestionID)');
+		$optionInsert->bindValue(':OValue', $OValue);
+		$optionInsert->bindValue(':NextQuestion', $OValue);
+		$optionInsert->bindValue(':QuestionID', $OValue);
+		/* Third run - Enter option ID to questions */
+		$questionUpdate= $dbt->prepare('UPDATE questions SET OptionID = :OID WHERE QuestionID= :QID');  
+		$questionUpdate->bindValue(':OID', $OValue);
+		$questionUpdate->bindValue(':QID', $OValue);
+		/* Forth run - Create parent based on QID list array */
+		/* Forth run - Don't build at sprint2. out of scope */
+		// code
+		/* Fifth run - Add ParentIDs in Group */
+		/* Fifth run - Don't build at sprint2. out of scope */
+		// code
+		echo "save sccussfully!";
   
-     }
-      catch (PDOException $e) {
-				print "Error!: " . $e->getMessage() . "<br/>";
-				die();
-	  }
+    } catch (PDOException $e) {
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}
    
 }
 /* ------------------ forUpdateQustions($action) end -------- */

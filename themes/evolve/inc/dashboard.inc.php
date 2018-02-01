@@ -1,6 +1,6 @@
 <?php
 global $base_url;
-$json = '{"Name":"Sophie Tucker","Memberid":"sophie.tucker@hotmail.com","MemberType":"student","Status":"Current","Ahpranumber":"6934395685-1","Specialty":"FACP","Officebearer":"NAC Chair","CPD":"15"}';
+$json = '{"Name":"Melanie Tannin","Memberid":"Melanie.tannin@physiotherapy.asn.au","MemberType":"student","Status":"Current","Ahpranumber":"6934395685-1","Specialty":"FACP","Officebearer":"NAC Chair","CPD":"15"}';
 $user= json_decode($json, true);
 $names = explode(" ",$user['Name']);
 $cpd = $user["CPD"];
@@ -128,13 +128,13 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
        <form name="formradio" action="dashboard" method="POST">
       <input type="hidden" name="userID" value="<?php echo $userID; ?>"> 
       <input type="hidden" name="update">  
-  <label> <input type="radio" name="background" value="1" id="background1"><img src="../sites/default/files/PARALLAX_TRADIES.jpg"></label>
-      <label> <input type="radio" name="background" value="2"  id="background2"><img src="../sites/default/files/ABOUT%20US/ABOUTUS1170X600.jpg"></label>
-      <label> <input type="radio" name="background" value="3"  id="background3"><img src="../sites/default/files/NG_1200X600_RURAL.png"></label>
-      <label> <input type="radio" name="background" value="4"  id="background4"><img src="../sites/default/files/MEDIA1170X600_5.jpg"></label>
+	  <label> <input type="radio" name="background" value="1" id="background1"><img src="../sites/default/files/DASHBOARD_PIC_1170X600.jpg"></label>
+      <label> <input type="radio" name="background" value="2"  id="background2"><img src="../sites/default/files/DASHBOARD_PIC_1170X600_2.jpg"></label>
+      <label> <input type="radio" name="background" value="3"  id="background3"><img src="../sites/default/files/DASHBOARD_PIC_1170X600_3.jpg"></label>
+      <label> <input type="radio" name="background" value="4"  id="background4"><img src="../sites/default/files/DASHBOARD_PIC_1170X600_4.jpg"></label>
+	  <label> <input type="radio" name="background" value="5"  id="background4"><img src="../sites/default/files/DASHBOARD_PIC_1170X600_5.jpg"></label>
        
-       
-      
+         
       </div>
       <div class="modal-footer">
       
