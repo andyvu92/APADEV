@@ -25,4 +25,8 @@ function UpdateQustion($action){
 function DeleteGroup($GID) {
 	forDeleteGroup($GID);
 }
+function ListQuestions($GID) {
+	$arrayQuestions = forListQuestions($GID);
+	return $arrayQuestions;
+}
 ?>
