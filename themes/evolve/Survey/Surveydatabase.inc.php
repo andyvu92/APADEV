@@ -239,36 +239,189 @@ function forUpdateQustion($action){
 function forUpdateQustions($action){
 	// this variable will be used to add optionID to questions and questionID to options.
 	$QuestionList = Array();
+	// Number of questions
+	$numQuestion = $action[1];
+	// Groun Number
+	$GIDSave = $action[0];
 	try {
 		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
 		/* First run - Enter questions */
+		//Things to consider
 		$questionInsert = $dbt->prepare('INSERT INTO questions (QuestionTitle, QuestionDescription, QuestionType, IsMandatory) VALUES (:QTitle, :QDescription, :QType, :QMandatory)');
-		$questionInsert->bindValue(':QTitle', $OValue);
-		$questionInsert->bindValue(':QDescription', $OValue);
-		$questionInsert->bindValue(':QType', $OValue);
-		$questionInsert->bindValue(':QMandatory', $OValue);
+		$count = 0;
+		$Tcount = 0;
+		foreach($action as $list) {
+			if($count > 1) {
+				$questionInsert->bindValue(':QTitle', $list[0]);
+				$questionInsert->bindValue(':QDescription', $list[1]);
+				$questionInsert->bindValue(':QType', $list[3]);
+				$questionInsert->bindValue(':QMandatory', $list[4]);
+				if(!$questionInsert->execute()) {
+					echo "<br />RunFail- questionInsert<br>";
+					print_r($questionInsert->errorInfo());
+				}
+				$getQuestionID = $dbt->prepare('SELECT QuestionID FROM questions WHERE QuestionTitle = :QTitle and QuestionDescription = :QDescription and QuestionType = :QType and IsMandatory = :QMandatory');
+				$getQuestionID->bindValue(':QTitle', $list[0]);
+				$getQuestionID->bindValue(':QDescription', $list[1]);
+				$getQuestionID->bindValue(':QType', $list[3]);
+				$getQuestionID->bindValue(':QMandatory', $list[4]);
+				if(!$getQuestionID->execute()) {
+					echo "<br />RunFail- getQuestionID<br>";
+					print_r($getQuestionID->errorInfo());
+				}
+				$id = "";
+				if($getQuestionID->rowCount() >= 1) {
+					foreach($getQuestionID as $ID) {
+						$id = $ID[0];
+					}
+				} else {
+					echo "<br />RunFail- getQuestionID<br>";
+				}
+				array_push($QuestionList, $id);
+			}
+			$count++;
+		}
+		echo "First run Done!<br />Qlist is : ";
+		print_r($QuestionList);
+		$Tcount++;
 		/* Second run - Enter options */
 		$optionInsert= $dbt->prepare('INSERT INTO options (Value, NextQuestion, QuestionID) VALUES (:OValue, :NextQuestion, :QuestionID)');
-		$optionInsert->bindValue(':OValue', $OValue);
-		$optionInsert->bindValue(':NextQuestion', $OValue);
-		$optionInsert->bindValue(':QuestionID', $OValue);
+		$OptionIDs = Array();
+		$count = 0;
+		$countt = 0;
+		foreach($action as $list) {
+			$OptionIDperQ = "";
+			if($count > 1) {
+				foreach($list[2] as $options) {
+					// Option with no value doesn't go here.
+					if($options[0] != "") {
+						$optionInsert->bindValue(':OValue', $options[0]);
+						$nextQ = intval($options[1]) - 1;
+						//echo "<br />-->".$nextQ."<--<br />";
+						if($nextQ < 0) {
+							$optionInsert->bindValue(':NextQuestion', 0);
+						} else {
+							$optionInsert->bindValue(':NextQuestion', $QuestionList[$nextQ]);
+						}
+						$optionInsert->bindValue(':QuestionID', $QuestionList[$countt]);
+						if(!$optionInsert->execute()) {
+							echo "<br />RunFail- optionInsert<br>";
+							print_r($optionInsert->errorInfo());
+						}
+						$getOptionID = $dbt->prepare('SELECT OptionID FROM options WHERE Value = :OValue and NextQuestion = :nextQ and QuestionID = :QuestionID');
+						$getOptionID->bindValue(':OValue', $options[0]);
+						if($nextQ < 0) {
+							$getOptionID->bindValue(':nextQ', 0);
+						} else {
+							$getOptionID->bindValue(':nextQ', $QuestionList[$nextQ]);
+						}
+						$getOptionID->bindValue(':QuestionID', $QuestionList[$countt]);
+						if(!$getOptionID->execute()) {
+							echo "<br />RunFail- getOptionID1<br>";
+							print_r($getOptionID->errorInfo());
+						}
+						$id = "";
+						if($getOptionID->rowCount() >= 1) {
+							foreach($getOptionID as $ID) {
+								$id = $ID[0];
+							}
+						} else {
+							echo "<br />RunFail- getOptionID2<br>";
+						}
+						$OptionIDperQ .= $id.",";
+					}
+				}
+				//remove last comma(,)
+				$OptionIDperQ = substr($OptionIDperQ, 0, -1);
+				array_push($OptionIDs, $OptionIDperQ);
+				$countt++;
+			}
+			$count++;
+		}
+		echo "Second run Done!";
+		$Tcount++;
 		/* Third run - Enter option ID to questions */
 		$questionUpdate= $dbt->prepare('UPDATE questions SET OptionID = :OID WHERE QuestionID= :QID');  
-		$questionUpdate->bindValue(':OID', $OValue);
-		$questionUpdate->bindValue(':QID', $OValue);
+		$counter = 0;
+		foreach($QuestionList as $question) {
+			$questionUpdate->bindValue(':OID', $OptionIDs[$counter]);
+			$questionUpdate->bindValue(':QID', $question);
+			if(!$questionUpdate->execute()) {
+				echo "<br />RunFail- questionUpdate<br>";
+				print_r($questionUpdate->errorInfo());
+			}
+			$counter++;
+		}
+		echo "Third run Done!";
+		$Tcount++;
 		/* Forth run - Create parent based on QID list array */
-		/* Forth run - Don't build at sprint2. out of scope */
+		$parentInsert= $dbt->prepare('INSERT INTO parent (ParentTitle, ParentDescription, QuestionList, GroupID) VALUES (:ParentTitle, :ParentDescription, :QuestionList, :GroupID)');
+		$Qcount = 0;
+		$count = 0;
+		$parentList = "";
+		// when there are no sub questions
+		foreach($action as $list) {
+			if($count > 1) {
+				$parentInsert->bindValue(':ParentTitle', $list[0]);
+				$parentInsert->bindValue(':ParentDescription', $list[1]);
+				$parentInsert->bindValue(':QuestionList', $QuestionList[$Qcount]);
+				$parentInsert->bindValue(':GroupID', $GIDSave);
+				if(!$parentInsert->execute()) {
+					echo "<br />RunFail- parentInsert<br>";
+					print_r($parentInsert->errorInfo());
+				}
+				$getParentID = $dbt->prepare('SELECT ParentID FROM parent WHERE ParentTitle = :ParentTitle and ParentDescription = :ParentDescription and QuestionList = :QuestionList and GroupID = :GroupID');
+				$getParentID->bindValue(':ParentTitle', $list[0]);
+				$getParentID->bindValue(':ParentDescription', $list[1]);
+				$getParentID->bindValue(':QuestionList', $QuestionList[$Qcount]);
+				$getParentID->bindValue(':GroupID', $GIDSave);
+				if(!$getParentID->execute()) {
+					echo "<br />RunFail- getParentID<br>";
+					print_r($getParentID->errorInfo());
+				}
+				$id = "";
+				if($getParentID->rowCount() == 1) {
+					foreach($getParentID as $ID) {
+						$id = $ID[0];
+					}
+				} else {
+					echo "<br />RunFail- getParentID<br>";
+				}
+				$parentList .= $id.",";
+				$Qcount++;
+			} 
+			$count++;
+		}
+		$parentList = substr($parentList, 0, -1);
+		// when there are sub questions
 		// code
+		
+		echo "Forth run Done!<br />parentList : ".$parentList;
+		
+		$Tcount++;
 		/* Fifth run - Add ParentIDs in Group */
-		/* Fifth run - Don't build at sprint2. out of scope */
-		// code
-		echo "save sccussfully!";
+		$GroupUpdate= $dbt->prepare('UPDATE groups SET ParentID= :PID WHERE GroupID = :GID');  
+		$counter = 0;
+		foreach($QuestionList as $question) {
+			$GroupUpdate->bindValue(':GID', $GIDSave);
+			$GroupUpdate->bindValue(':PID', $parentList);
+			if(!$GroupUpdate->execute()) {
+				echo "<br />RunFail- GroupUpdate<br>";
+				print_r($GroupUpdate->errorInfo());
+			}
+		}
+		echo "Fifth run Done!";
+		$Tcount++;
+		
+		if($Tcount == 5) {
+			echo "save sccussfully!";
+		}
   
     } catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
 	}
-   
+	
 }
 /* ------------------ forUpdateQustions($action) end -------- */
 ?>

@@ -20,7 +20,7 @@ function SingleGroup($GID){
 }
 function UpdateQustion($action){
 	print_r($action);
-	//forUpdateQustions($action);
+	forUpdateQustions($action);
 }
 function DeleteGroup($GID) {
 	forDeleteGroup($GID);
