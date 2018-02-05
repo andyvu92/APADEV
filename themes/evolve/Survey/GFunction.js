@@ -164,7 +164,16 @@ jQuery(document).ready(function($) {
 		}
 		//alert("Number is: "+counts);
 	});
-	
+	$('[id^=label]').click(function() {
+		var i = $(this).attr("id").replace('label', '');
+		$('#question'+ i).removeClass("display-none");
+		   
+	});
+	$('[id^=question]').click(function() {
+		var i = $(this).attr("id").replace('question', '');
+		$('#question'+ i).addClass("display-none");
+		   
+	});
 	/*
 	$('[id^=IsSequence]').change(function() {
 		var j = $(this).attr("id").replace('IsSequence', ''); 

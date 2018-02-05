@@ -424,4 +424,112 @@ function forUpdateQustions($action){
 	
 }
 /* ------------------ forUpdateQustions($action) end -------- */
+
+/* ------------------ forListQustions($GID) start -------- */
+function forListQuestions($GID){
+	// this variable will be used to search parent list from Group table.
+	$parentListArray = Array();
+	
+	$questionCollection = Array();
+	
+	//$db = new PDO('mysql:host=10.1.1.35;dbname=apa_survey', 'c0DefaultMain', 'Apa2017Config');
+	$db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+	try {
+	
+	   $connSelect = $db->prepare('SELECT * FROM groups WHERE GroupID= :GID');
+	   $connSelect->bindValue(':GID', $GID);
+	   $connSelect->execute();
+	if($connSelect->rowCount()>0) { 
+        foreach ($connSelect as $row) {
+		   $parentStr = $row['ParentID'];
+		   print_r($parentStr);
+	       echo "----Parent List ID---<br>";
+            break;			
+	    }
+	}
+    //Get ParentList from Group	
+	$parentListArray = explode(",",$parentStr);
+    $questioL = array();
+	//loop get question list from parent table
+		for ($i=0; $i<sizeof($parentListArray); $i++){
+		  $questionListArray = array();
+		   $pSelect = $db->prepare('SELECT * FROM parent WHERE ParentID= :PID');
+           $pSelect->bindValue(':PID', $parentListArray[$i]);
+           $pSelect->execute();
+           if($pSelect->rowCount()>0){
+			   foreach ($pSelect as $rowParent){
+				  $questionStr = $rowParent['QuestionList'];
+				  print_r($questionStr);
+	              echo "----Question List ID---<br>";
+				  //break;
+			   }
+		    }
+            //get question list for one loop 
+		
+			$questionListArray = explode(",",$questionStr); 
+			$questioL = array_merge($questioL, $questionListArray);
+	      	//if($i==0){$questioL = $questionListArray;}
+			//else{array_merge($questioL, $questionListArray);}
+		    print_r($questioL);
+			echo "-------<br>";
+		
+			
+		}	
+            //get questions from questions table 
+            for ($i=0; $i<sizeof($questioL); $i++){
+			   $qSelect = $db->prepare('SELECT * FROM questions WHERE QuestionID= :QID');
+			   $qSelect->bindValue(':QID', $questioL[$i]);
+			   $qSelect->execute();
+			   if($qSelect->rowCount()>0){
+				   foreach ($qSelect as $rowQuestion){
+					  echo "----Options List ID for one question---<br>";
+					  $arrayQuestion = array();
+					  $OptionList = array();
+					  $optionItem = array();
+					  
+					  //get option list for each question
+					  $optionStr = $rowQuestion['OptionID'];
+					  print_r($optionStr);
+	                  echo "----Option---<br>";
+					  $optionList = explode(",",$optionStr);
+					  //get option data from options table
+					  for($j=0; $j<sizeof($optionList);$j++){
+						//$optionCollection = array();
+						$oSelect = $db->prepare('SELECT * FROM options WHERE OptionID= :OID');
+			            $oSelect->bindValue(':OID', $optionList[$j]);
+			            $oSelect->execute();
+                      	if($oSelect->rowCount()>0){
+							foreach ($oSelect as $rowOption){
+								$arrayOption = array();
+								array_push($arrayOption, $rowOption['OptionID']);
+								array_push($arrayOption, $rowOption['Value']);
+								array_push($arrayOption, $rowOption['NextQuestion']);
+								array_push($optionItem, $arrayOption);
+							}
+						}
+                                             					
+					  }
+					 // array_push($optionCollection, $optionItem);	
+					  array_push($arrayQuestion, $rowQuestion['QuestionID']);
+					  array_push($arrayQuestion, $rowQuestion['QuestionTitle']);
+					  array_push($arrayQuestion, $rowQuestion['QuestionDescription']);
+					  array_push($arrayQuestion, $optionItem);
+					  array_push($arrayQuestion, $rowQuestion['QuestionType']);
+					  array_push($arrayQuestion, $rowQuestion['IsMandatory']);
+					  array_push($questionCollection, $arrayQuestion);
+				   }
+				}
+            }			
+		
+	// Return the array colletion for all the questions against with option
+        return $questionCollection;
+	
+  
+    } catch (PDOException $e) {
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}
+   
+}
+/* ------------------ forListQustions($GID) end -------- */
 ?>
