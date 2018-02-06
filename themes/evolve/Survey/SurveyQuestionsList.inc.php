@@ -1,6 +1,6 @@
 
 <?php
-$QuestionList = ListQuestions(7);
+$QuestionList = ListQuestions(1);
 print_r($QuestionList);
 ?>
 

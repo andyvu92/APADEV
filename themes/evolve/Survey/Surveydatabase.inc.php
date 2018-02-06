@@ -285,7 +285,7 @@ function forUpdateQustions($action){
 		print_r($QuestionList);
 		$Tcount++;
 		/* Second run - Enter options */
-		$optionInsert= $dbt->prepare('INSERT INTO options (Value, NextQuestion, QuestionID) VALUES (:OValue, :NextQuestion, :QuestionID)');
+		$optionInsert= $dbt->prepare('INSERT INTO options (Value, NextQuestion, QuestionID, NextQuestionNth) VALUES (:OValue, :NextQuestion, :QuestionID, :NextQuestionNth)');
 		$OptionIDs = Array();
 		$count = 0;
 		$countt = 0;
@@ -300,20 +300,24 @@ function forUpdateQustions($action){
 						//echo "<br />-->".$nextQ."<--<br />";
 						if($nextQ < 0) {
 							$optionInsert->bindValue(':NextQuestion', 0);
+							$optionInsert->bindValue(':NextQuestionNth', 0);
 						} else {
 							$optionInsert->bindValue(':NextQuestion', $QuestionList[$nextQ]);
+							$optionInsert->bindValue(':NextQuestionNth', $nextQ);
 						}
 						$optionInsert->bindValue(':QuestionID', $QuestionList[$countt]);
 						if(!$optionInsert->execute()) {
 							echo "<br />RunFail- optionInsert<br>";
 							print_r($optionInsert->errorInfo());
 						}
-						$getOptionID = $dbt->prepare('SELECT OptionID FROM options WHERE Value = :OValue and NextQuestion = :nextQ and QuestionID = :QuestionID');
+						$getOptionID = $dbt->prepare('SELECT OptionID FROM options WHERE Value = :OValue and NextQuestion = :nextQ and QuestionID = :QuestionID and NextQuestionNth = :NextQuestionNth');
 						$getOptionID->bindValue(':OValue', $options[0]);
 						if($nextQ < 0) {
 							$getOptionID->bindValue(':nextQ', 0);
+							$getOptionID->bindValue(':NextQuestionNth', 0);
 						} else {
 							$getOptionID->bindValue(':nextQ', $QuestionList[$nextQ]);
+							$getOptionID->bindValue(':NextQuestionNth', $nextQ);
 						}
 						$getOptionID->bindValue(':QuestionID', $QuestionList[$countt]);
 						if(!$getOptionID->execute()) {
@@ -449,6 +453,7 @@ function forListQuestions($GID){
 	}
     //Get ParentList from Group	
 	$parentListArray = explode(",",$parentStr);
+	if($parentListArray[0] == "") return null;
     $questioL = array();
 	//loop get question list from parent table
 		for ($i=0; $i<sizeof($parentListArray); $i++){
@@ -475,51 +480,52 @@ function forListQuestions($GID){
 		
 			
 		}	
-            //get questions from questions table 
-            for ($i=0; $i<sizeof($questioL); $i++){
-			   $qSelect = $db->prepare('SELECT * FROM questions WHERE QuestionID= :QID');
-			   $qSelect->bindValue(':QID', $questioL[$i]);
-			   $qSelect->execute();
-			   if($qSelect->rowCount()>0){
-				   foreach ($qSelect as $rowQuestion){
-					  echo "----Options List ID for one question---<br>";
-					  $arrayQuestion = array();
-					  $OptionList = array();
-					  $optionItem = array();
-					  
-					  //get option list for each question
-					  $optionStr = $rowQuestion['OptionID'];
-					  print_r($optionStr);
-	                  echo "----Option---<br>";
-					  $optionList = explode(",",$optionStr);
-					  //get option data from options table
-					  for($j=0; $j<sizeof($optionList);$j++){
-						//$optionCollection = array();
-						$oSelect = $db->prepare('SELECT * FROM options WHERE OptionID= :OID');
-			            $oSelect->bindValue(':OID', $optionList[$j]);
-			            $oSelect->execute();
-                      	if($oSelect->rowCount()>0){
-							foreach ($oSelect as $rowOption){
-								$arrayOption = array();
-								array_push($arrayOption, $rowOption['OptionID']);
-								array_push($arrayOption, $rowOption['Value']);
-								array_push($arrayOption, $rowOption['NextQuestion']);
-								array_push($optionItem, $arrayOption);
-							}
+		//get questions from questions table 
+		for ($i=0; $i<sizeof($questioL); $i++){
+		   $qSelect = $db->prepare('SELECT * FROM questions WHERE QuestionID= :QID');
+		   $qSelect->bindValue(':QID', $questioL[$i]);
+		   $qSelect->execute();
+		   if($qSelect->rowCount()>0){
+			   foreach ($qSelect as $rowQuestion){
+				  echo "----Options List ID for one question---<br>";
+				  $arrayQuestion = array();
+				  $OptionList = array();
+				  $optionItem = array();
+				  
+				  //get option list for each question
+				  $optionStr = $rowQuestion['OptionID'];
+				  print_r($optionStr);
+				  echo "----Option---<br>";
+				  $optionList = explode(",",$optionStr);
+				  //get option data from options table
+				  for($j=0; $j<sizeof($optionList);$j++){
+					//$optionCollection = array();
+					$oSelect = $db->prepare('SELECT * FROM options WHERE OptionID= :OID');
+					$oSelect->bindValue(':OID', $optionList[$j]);
+					$oSelect->execute();
+					if($oSelect->rowCount()>0){
+						foreach ($oSelect as $rowOption){
+							$arrayOption = array();
+							array_push($arrayOption, $rowOption['OptionID']);
+							array_push($arrayOption, $rowOption['Value']);
+							array_push($arrayOption, $rowOption['NextQuestion']);
+							array_push($arrayOption, $rowOption['NextQuestionNth']);
+							array_push($optionItem, $arrayOption);
 						}
-                                             					
-					  }
-					 // array_push($optionCollection, $optionItem);	
-					  array_push($arrayQuestion, $rowQuestion['QuestionID']);
-					  array_push($arrayQuestion, $rowQuestion['QuestionTitle']);
-					  array_push($arrayQuestion, $rowQuestion['QuestionDescription']);
-					  array_push($arrayQuestion, $optionItem);
-					  array_push($arrayQuestion, $rowQuestion['QuestionType']);
-					  array_push($arrayQuestion, $rowQuestion['IsMandatory']);
-					  array_push($questionCollection, $arrayQuestion);
-				   }
-				}
-            }			
+					}
+															
+				  }
+				 // array_push($optionCollection, $optionItem);	
+				  array_push($arrayQuestion, $rowQuestion['QuestionID']);
+				  array_push($arrayQuestion, $rowQuestion['QuestionTitle']);
+				  array_push($arrayQuestion, $rowQuestion['QuestionDescription']);
+				  array_push($arrayQuestion, $optionItem);
+				  array_push($arrayQuestion, $rowQuestion['QuestionType']);
+				  array_push($arrayQuestion, $rowQuestion['IsMandatory']);
+				  array_push($questionCollection, $arrayQuestion);
+			   }
+			}
+		}			
 		
 	// Return the array colletion for all the questions against with option
         return $questionCollection;

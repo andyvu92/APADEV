@@ -65,7 +65,7 @@ jQuery(document).ready(function($) {
 		var j = $(this).attr("id").replace('qType', ''); 
 		if(($('#OptionsTF'+ j ).text().length ===0) && $('#qType'+ j ).val()=="1"){
 			$('#Q'+ j + " > .options" ).replaceWith('<div class="row options" id="optionSettings'+ j +'"><div class="col-lg-6">'+
-			'<label id="OptionsTF'+ j +'">Options'+ j +' Settings</label>'+
+			'<label id="OptionsTF'+ j +'">Question'+ j +'\'s Option Settings</label>'+
 			'<input type="text" id="'+j+'OptionCount1" class="form-control" name="'+ j +'oValue1" placeholder="OptionValue" value="True">'+
 			'<input type="text" id="'+j+'OptionCount2" class="form-control" name="'+ j +'oValue2" placeholder="OptionValue" value="False">'+
 				'</div><div class="col-lg-6">'+
@@ -83,7 +83,7 @@ jQuery(document).ready(function($) {
 				   
 		if(($('#OptionsMCSA'+ j ).text().length ===0)&&$('#qType'+ j).val()=="2"){
 			$('#Q'+ j + " > .options" ).replaceWith('<div class="row options" id="optionSettings'+ j +'"><div class="col-lg-6">'+
-			'<label id="OptionsMCSA'+ j +'">Options'+ j +' Settings</label>'+
+			'<label id="OptionsMCSA'+ j +'">Question'+ j +'\'s Option Settings</label>'+
 			'<input type="text" id="'+j+'OptionCount1" class="form-control" name="'+ j +'oValue1" placeholder="OptionValue">'+
 			'<input type="text" id="'+j+'OptionCount2" class="form-control" name="'+ j +'oValue2" placeholder="OptionValue">'+
 			'<input type="text" id="'+j+'OptionCount3" class="form-control" name="'+ j +'oValue3" placeholder="OptionValue">'+
