@@ -247,37 +247,55 @@ function forUpdateQustions($action){
 		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
 		/* First run - Enter questions */
 		//Things to consider
-		$questionInsert = $dbt->prepare('INSERT INTO questions (QuestionTitle, QuestionDescription, QuestionType, IsMandatory) VALUES (:QTitle, :QDescription, :QType, :QMandatory)');
 		$count = 0;
 		$Tcount = 0;
 		foreach($action as $list) {
 			if($count > 1) {
-				$questionInsert->bindValue(':QTitle', $list[0]);
-				$questionInsert->bindValue(':QDescription', $list[1]);
-				$questionInsert->bindValue(':QType', $list[3]);
-				$questionInsert->bindValue(':QMandatory', $list[4]);
-				if(!$questionInsert->execute()) {
-					echo "<br />RunFail- questionInsert<br>";
-					print_r($questionInsert->errorInfo());
-				}
-				$getQuestionID = $dbt->prepare('SELECT QuestionID FROM questions WHERE QuestionTitle = :QTitle and QuestionDescription = :QDescription and QuestionType = :QType and IsMandatory = :QMandatory');
-				$getQuestionID->bindValue(':QTitle', $list[0]);
-				$getQuestionID->bindValue(':QDescription', $list[1]);
-				$getQuestionID->bindValue(':QType', $list[3]);
-				$getQuestionID->bindValue(':QMandatory', $list[4]);
-				if(!$getQuestionID->execute()) {
-					echo "<br />RunFail- getQuestionID<br>";
-					print_r($getQuestionID->errorInfo());
-				}
-				$id = "";
-				if($getQuestionID->rowCount() >= 1) {
-					foreach($getQuestionID as $ID) {
-						$id = $ID[0];
+				if($list[5] == "-") { // for new questions
+					$questionInsert = $dbt->prepare('INSERT INTO questions (QuestionTitle, QuestionDescription, QuestionType, IsMandatory) VALUES (:QTitle, :QDescription, :QType, :QMandatory)');
+					$questionInsert->bindValue(':QTitle', $list[0]);
+					$questionInsert->bindValue(':QDescription', $list[1]);
+					$questionInsert->bindValue(':QType', $list[3]);
+					$questionInsert->bindValue(':QMandatory', $list[4]);
+					if(!$questionInsert->execute()) {
+						echo "<br />RunFail- questionInsert<br>";
+						print_r($questionInsert->errorInfo());
 					}
-				} else {
-					echo "<br />RunFail- getQuestionID<br>";
+					$getQuestionID = $dbt->prepare('SELECT QuestionID FROM questions WHERE QuestionTitle = :QTitle and QuestionDescription = :QDescription and QuestionType = :QType and IsMandatory = :QMandatory');
+					$getQuestionID->bindValue(':QTitle', $list[0]);
+					$getQuestionID->bindValue(':QDescription', $list[1]);
+					$getQuestionID->bindValue(':QType', $list[3]);
+					$getQuestionID->bindValue(':QMandatory', $list[4]);
+					if(!$getQuestionID->execute()) {
+						echo "<br />RunFail- getQuestionID<br>";
+						print_r($getQuestionID->errorInfo());
+					}
+					$id = "";
+					if($getQuestionID->rowCount() >= 1) {
+						foreach($getQuestionID as $ID) {
+							$id = $ID[0];
+						}
+					} else {
+						echo "<br />RunFail- getQuestionID<br>";
+					}
+					array_push($QuestionList, $id);
+				} else { // for existing questions
+					$questionUpdate = $dbt->prepare('UPDATE questions SET QuestionTitle = :QTitle,
+											QuestionDescription = :QDescription, QuestionType = :QType,
+											IsMandatory = :QMandatory
+											WHERE QuestionID = :QuestionID');
+					$questionUpdate->bindValue(':QTitle', $list[0]);
+					$questionUpdate->bindValue(':QDescription', $list[1]);
+					$questionUpdate->bindValue(':QType', $list[3]);
+					$questionUpdate->bindValue(':QMandatory', $list[4]);
+					$questionUpdate->bindValue(':QuestionID', $list[5]);
+					if(!$questionUpdate->execute()) {
+						echo "<br />RunFail- questionUpdate<br>";
+						print_r($questionUpdate->errorInfo());
+					}
+					$id = $list[5];
+					array_push($QuestionList, $id);
 				}
-				array_push($QuestionList, $id);
 			}
 			$count++;
 		}
@@ -285,7 +303,6 @@ function forUpdateQustions($action){
 		print_r($QuestionList);
 		$Tcount++;
 		/* Second run - Enter options */
-		$optionInsert= $dbt->prepare('INSERT INTO options (Value, NextQuestion, QuestionID, NextQuestionNth) VALUES (:OValue, :NextQuestion, :QuestionID, :NextQuestionNth)');
 		$OptionIDs = Array();
 		$count = 0;
 		$countt = 0;
@@ -295,44 +312,73 @@ function forUpdateQustions($action){
 				foreach($list[2] as $options) {
 					// Option with no value doesn't go here.
 					if($options[0] != "") {
-						$optionInsert->bindValue(':OValue', $options[0]);
-						$nextQ = intval($options[1]) - 1;
-						//echo "<br />-->".$nextQ."<--<br />";
-						if($nextQ < 0) {
-							$optionInsert->bindValue(':NextQuestion', 0);
-							$optionInsert->bindValue(':NextQuestionNth', 0);
-						} else {
-							$optionInsert->bindValue(':NextQuestion', $QuestionList[$nextQ]);
-							$optionInsert->bindValue(':NextQuestionNth', $nextQ);
-						}
-						$optionInsert->bindValue(':QuestionID', $QuestionList[$countt]);
-						if(!$optionInsert->execute()) {
-							echo "<br />RunFail- optionInsert<br>";
-							print_r($optionInsert->errorInfo());
-						}
-						$getOptionID = $dbt->prepare('SELECT OptionID FROM options WHERE Value = :OValue and NextQuestion = :nextQ and QuestionID = :QuestionID and NextQuestionNth = :NextQuestionNth');
-						$getOptionID->bindValue(':OValue', $options[0]);
-						if($nextQ < 0) {
-							$getOptionID->bindValue(':nextQ', 0);
-							$getOptionID->bindValue(':NextQuestionNth', 0);
-						} else {
-							$getOptionID->bindValue(':nextQ', $QuestionList[$nextQ]);
-							$getOptionID->bindValue(':NextQuestionNth', $nextQ);
-						}
-						$getOptionID->bindValue(':QuestionID', $QuestionList[$countt]);
-						if(!$getOptionID->execute()) {
-							echo "<br />RunFail- getOptionID1<br>";
-							print_r($getOptionID->errorInfo());
-						}
-						$id = "";
-						if($getOptionID->rowCount() >= 1) {
-							foreach($getOptionID as $ID) {
-								$id = $ID[0];
+						if($options[3] == "-") { // new options
+							$optionInsert= $dbt->prepare('INSERT INTO options (Value, NextQuestion, QuestionID, NextQuestionNth, Answer) VALUES (:OValue, :NextQuestion, :QuestionID, :NextQuestionNth, :Answer)');
+							$optionInsert->bindValue(':OValue', $options[0]);
+							$nextQ = intval($options[1]) - 1;
+							//echo "<br />-->".$nextQ."<--<br />";
+							if($nextQ < 0) {
+								$optionInsert->bindValue(':NextQuestion', 0);
+								$optionInsert->bindValue(':NextQuestionNth', 0);
+							} else {
+								$optionInsert->bindValue(':NextQuestion', $QuestionList[$nextQ]);
+								$optionInsert->bindValue(':NextQuestionNth', $nextQ + 1);
 							}
-						} else {
-							echo "<br />RunFail- getOptionID2<br>";
+							$optionInsert->bindValue(':Answer', $options[2]);
+							$optionInsert->bindValue(':QuestionID', $QuestionList[$countt]);
+							if(!$optionInsert->execute()) {
+								echo "<br />RunFail- optionInsert<br>";
+								print_r($optionInsert->errorInfo());
+							}
+							$getOptionID = $dbt->prepare('SELECT OptionID FROM options WHERE Value = :OValue and NextQuestion = :nextQ and QuestionID = :QuestionID and NextQuestionNth = :NextQuestionNth and Answer = :Answer');
+							$getOptionID->bindValue(':OValue', $options[0]);
+							if($nextQ < 0) {
+								$getOptionID->bindValue(':nextQ', 0);
+								$getOptionID->bindValue(':NextQuestionNth', 0);
+							} else {
+								$getOptionID->bindValue(':nextQ', $QuestionList[$nextQ]);
+								$getOptionID->bindValue(':NextQuestionNth', $nextQ + 1);
+							}
+							$getOptionID->bindValue(':QuestionID', $QuestionList[$countt]);
+							$getOptionID->bindValue(':Answer', $options[2]);
+							if(!$getOptionID->execute()) {
+								echo "<br />RunFail- getOptionID1<br>";
+								print_r($getOptionID->errorInfo());
+							}
+							$id = "";
+							if($getOptionID->rowCount() >= 1) {
+								foreach($getOptionID as $ID) {
+									$id = $ID[0];
+								}
+							} else {
+								echo "<br />RunFail- getOptionID2<br>";
+							}
+							$OptionIDperQ .= $id.",";
+						} else { // existing option
+							$optionInsert = $dbt->prepare('UPDATE options SET Value = :OValue,
+												NextQuestion = :NextQuestion, QuestionID = :QuestionID,
+												NextQuestionNth = :NextQuestionNth, Answer = :Answer
+												WHERE OptionID = :OptionID');
+							$optionInsert->bindValue(':OValue', $options[0]);
+							$nextQ = intval($options[1]) - 1;
+							//echo "<br />-->".$nextQ."<--<br />";
+							if($nextQ < 0) {
+								$optionInsert->bindValue(':NextQuestion', 0);
+								$optionInsert->bindValue(':NextQuestionNth', 0);
+							} else {
+								$optionInsert->bindValue(':NextQuestion', $QuestionList[$nextQ]);
+								$optionInsert->bindValue(':NextQuestionNth', $nextQ + 1);
+							}
+							$optionInsert->bindValue(':Answer', $options[2]);
+							$optionInsert->bindValue(':QuestionID', $QuestionList[$countt]);
+							$optionInsert->bindValue(':OptionID', $options[3]);
+							if(!$optionInsert->execute()) {
+								echo "<br />RunFail- optionInsert<br>";
+								print_r($optionInsert->errorInfo());
+							}
+							$id = $options[3];
+							$OptionIDperQ .= $id.",";
 						}
-						$OptionIDperQ .= $id.",";
 					}
 				}
 				//remove last comma(,)
@@ -380,16 +426,17 @@ function forUpdateQustions($action){
 				$getParentID->bindValue(':QuestionList', $QuestionList[$Qcount]);
 				$getParentID->bindValue(':GroupID', $GIDSave);
 				if(!$getParentID->execute()) {
-					echo "<br />RunFail- getParentID<br>";
+					echo "<br />RunFail- getParentID11<br>";
 					print_r($getParentID->errorInfo());
 				}
 				$id = "";
-				if($getParentID->rowCount() == 1) {
+				if($getParentID->rowCount() >= 1) {
 					foreach($getParentID as $ID) {
 						$id = $ID[0];
+						break;
 					}
 				} else {
-					echo "<br />RunFail- getParentID<br>";
+					echo "<br />RunFail- getParentID22<br>";
 				}
 				$parentList .= $id.",";
 				$Qcount++;
@@ -509,6 +556,7 @@ function forListQuestions($GID){
 							array_push($arrayOption, $rowOption['OptionID']);
 							array_push($arrayOption, $rowOption['Value']);
 							array_push($arrayOption, $rowOption['NextQuestion']);
+							array_push($arrayOption, $rowOption['Answer']);
 							array_push($arrayOption, $rowOption['NextQuestionNth']);
 							array_push($optionItem, $arrayOption);
 						}
@@ -519,6 +567,7 @@ function forListQuestions($GID){
 				  array_push($arrayQuestion, $rowQuestion['QuestionID']);
 				  array_push($arrayQuestion, $rowQuestion['QuestionTitle']);
 				  array_push($arrayQuestion, $rowQuestion['QuestionDescription']);
+				  //echo "id: ".$rowQuestion['QuestionID']." - title: ".$rowQuestion['QuestionTitle']." - Desc: ".$rowQuestion['QuestionDescription'];
 				  array_push($arrayQuestion, $optionItem);
 				  array_push($arrayQuestion, $rowQuestion['QuestionType']);
 				  array_push($arrayQuestion, $rowQuestion['IsMandatory']);

@@ -59,18 +59,41 @@ jQuery(document).ready(function($) {
 			SequenceControl(false);
 			//$('#IsSequence').prop("disabled", false);
 		}
+		for(var y = 1; y <= i; y++) {
+			var counts = $("[id^="+y+"OptionCount]").length;
+			var NextQString = '<label for="">Question'+ y +'\'s next</label>';
+			for(var t = 1; t <= counts; t++) {
+				var nextHTML = $("#"+y+'qNext'+t).val();
+				var AnswerVal = $("#"+y+'Answer'+t).val();
+				NextQString = NextQString + UpdateDropDown(y, i, t, nextHTML);
+				NextQString = NextQString + '<input type="text" id="'+y+'Answer'+ t +'" class="form-control" name="'+ y +'Answer'+ t +'" value="'+AnswerVal+'">';
+			}
+			$('.SequenceQDorp'+y+'').html(NextQString);
+		}
 	});
 					
 	$('body').on('change', '[id^=qType]', function() {
 		var j = $(this).attr("id").replace('qType', ''); 
+		j = Number(j);
+		var number = Number($('#qnumber').val());
 		if(($('#OptionsTF'+ j ).text().length ===0) && $('#qType'+ j ).val()=="1"){
-			$('#Q'+ j + " > .options" ).replaceWith('<div class="row options" id="optionSettings'+ j +'"><div class="col-lg-6">'+
+			var optionString = "";
+			optionString = optionString + '<div class="row options" id="optionSettings'+ j +'"><div class="col-lg-6">'+
 			'<label id="OptionsTF'+ j +'">Question'+ j +'\'s Option Settings</label>'+
 			'<input type="text" id="'+j+'OptionCount1" class="form-control" name="'+ j +'oValue1" placeholder="OptionValue" value="True">'+
+			'<div style="height: 34px; text-align: right; position: inherit">Answer:</div>'+
 			'<input type="text" id="'+j+'OptionCount2" class="form-control" name="'+ j +'oValue2" placeholder="OptionValue" value="False">'+
-				'</div><div class="col-lg-6">'+
-				'<div class="SequenceQDorp'+j+'"></div>'+
-			'</div>');
+			'<div style="height: 34px; text-align: right; position: inherit">Answer:</div>'+
+			'</div><div class="col-lg-6">'+
+			'<div class="SequenceQDorp'+j+'">'+
+			'<label for="">Question'+ j +'\'s next</label>';
+			for(var i = 1; i <= 2; i++) {
+				optionString = optionString + CreateDropDown(j, number, i);
+				optionString = optionString + '<input type="text" id="'+j+'Answer'+ i +'" class="form-control" name="'+ j +'Answer'+ i +'" placeholder="Type answer">';
+			}
+			optionString = optionString + '</div></div>';
+			'</div></div>'
+			$('#Q'+ j + " > .options" ).replaceWith(optionString);
 			/*
 			$('#Q'+ j ).append('<br><div class="row" id="optionSettings'+ j +'"><div class="col-lg-6">'+
 			'<label id="OptionsTF'+ j +'">Options'+ j +' Settings</label>'+
@@ -82,16 +105,23 @@ jQuery(document).ready(function($) {
 		}
 				   
 		if(($('#OptionsMCSA'+ j ).text().length ===0)&&$('#qType'+ j).val()=="2"){
-			$('#Q'+ j + " > .options" ).replaceWith('<div class="row options" id="optionSettings'+ j +'"><div class="col-lg-6">'+
-			'<label id="OptionsMCSA'+ j +'">Question'+ j +'\'s Option Settings</label>'+
-			'<input type="text" id="'+j+'OptionCount1" class="form-control" name="'+ j +'oValue1" placeholder="OptionValue">'+
-			'<input type="text" id="'+j+'OptionCount2" class="form-control" name="'+ j +'oValue2" placeholder="OptionValue">'+
-			'<input type="text" id="'+j+'OptionCount3" class="form-control" name="'+ j +'oValue3" placeholder="OptionValue">'+
-			'<input type="text" id="'+j+'OptionCount4" class="form-control" name="'+ j +'oValue4" placeholder="OptionValue">'+
-			'<input type="text" id="'+j+'OptionCount5" class="form-control" name="'+ j +'oValue5" placeholder="OptionValue">'+
-				'</div><div class="col-lg-6">'+
-				'<div class="SequenceQDorp'+j+'"></div>'+
-			'</div>');
+			var optionString = "";
+			optionString = optionString + '<div class="row options" id="optionSettings'+ j +'"><div class="col-lg-6">'+
+			'<label id="OptionsMCSA'+ j +'">Question'+ j +'\'s Option Settings</label>';
+			for(var i = 1; i <= 5; i++) {
+				optionString = optionString + '<input type="text" id="'+j+'OptionCount'+ i +'" class="form-control" name="'+ j +'oValue'+ i +'" placeholder="OptionValue">'+
+				'<div style="height: 34px; text-align: right; position: inherit">Answer:</div>';
+			}
+			optionString = optionString + '</div><div class="col-lg-6">'+
+			'<div class="SequenceQDorp'+j+'">'+
+			'<label for="">Question'+ j +'\'s next</label>';
+			for(var i = 1; i <= 5; i++) {
+				optionString = optionString + CreateDropDown(j, number, i);
+				optionString = optionString + '<input type="text" id="'+j+'Answer'+ i +'" class="form-control" name="'+ j +'Answer'+ i +'" placeholder="Type answer">';
+			}
+			optionString = optionString + '</div></div>';
+			$('#Q'+ j + " > .options" ).replaceWith(optionString);
+			
 			/*
 			$('#Q'+ j ).append('<br><div class="row" id="optionSettings'+ j +'"><div class="col-lg-6">'+
 			'<label id="OptionsMCSA'+ j +'">Options'+ j +' Settings</label>'+
@@ -100,6 +130,21 @@ jQuery(document).ready(function($) {
 			'</div>');
 			*/
 		}
+		/*
+		This should be done through adding questions.
+		- this is for adding extra options without changing options.
+		for(var i = 1; i <= number; i++) {
+			var counts = $("[id^="+i+"OptionCount]").length;
+			var NextQString = '<label for="">Question'+ i +'\'s next</label>';
+			for(var t = 1; t <= counts; t++) {
+				var nextHTML = ("#"+i+'qNext'+t).html();
+				var AnswerVal = ("#"+i+'Answer'+t).val();
+				NextQString = NextQString + UpdateDropDown(i, number, nextHTML);
+				NextQString = NextQString + '<input type="text" id="'+i+'Answer'+ t +'" class="form-control" name="'+ i +'Answer'+ t +'" value="'+AnswerVal+'">';
+			}
+			$('.SequenceQDorp'+i+'').html(NextQString);
+		}
+		*/
 		var counts = $("[id^=Q]").length - 1;
 		
 		var toggleText = '<div class="col-lg-6">'+
@@ -145,6 +190,9 @@ jQuery(document).ready(function($) {
 	});
 	
 	$('#IsSequenceTotal').change(function() {
+		/*
+		Remove this for now.
+		It will destroy the software. Need more time for investigate
 		var sequence = $('#IsSequenceTotal').val();
 		if(sequence == "1") {
 			var number = Number($('#qnumber').val());
@@ -162,8 +210,10 @@ jQuery(document).ready(function($) {
 				$('.SequenceQDorp'+i+'').html("");
 			}
 		}
+		*/
 		//alert("Number is: "+counts);
 	});
+	
 	$('[id^=label]').click(function() {
 		var i = $(this).attr("id").replace('label', '');
 		$('#question'+ i).removeClass("display-none");
@@ -196,18 +246,33 @@ function SequenceControl(EnDis) {
 
 /* Create Next qeustion dropdown list */
 function CreateDropDown(CurrentQ, numberQ, NthOption) {
-	var NextOption = '<select class="form-control" id="qNext'+CurrentQ+'" name="'+CurrentQ+'qNext'+NthOption+'">';
+	var NextOption = '<select class="form-control" id="'+CurrentQ+'qNext'+NthOption+'" name="'+CurrentQ+'qNext'+NthOption+'">';
+	NextOption = NextOption + '<option value="0">No further options</option>';
 	var num = 0;
 	for(var i = CurrentQ; i < numberQ; i++) {
 		num = i + 1;
 		if(num == (CurrentQ+1)) {
-			NextOption = NextOption + '<option value="'+num+'" selected>'+num+'</option>';
+			NextOption = NextOption + '<option value="'+num+'">'+num+'</option>';
 		} else {
 			NextOption = NextOption + '<option value="'+num+'">'+num+'</option>';
 		}
 	}
-	if(num == 0) {
-		NextOption = NextOption + '<option value="0" selected disable>No further options</option>';
+	NextOption = NextOption + '</select>';
+	return NextOption;
+}
+
+/* Update Next qeustion dropdown list */
+function UpdateDropDown(CurrentQ, numberQ, NthOption ,Selected) {
+	var NextOption = '<select class="form-control" id="'+CurrentQ+'qNext'+NthOption+'" name="'+CurrentQ+'qNext'+NthOption+'">';
+	NextOption = NextOption + '<option value="0">No further options</option>';
+	var num = 0;
+	for(var i = CurrentQ; i < numberQ; i++) {
+		num = i + 1;
+		if(num == (Selected)) {
+			NextOption = NextOption + '<option value="'+num+'" selected>'+num+'</option>';
+		} else {
+			NextOption = NextOption + '<option value="'+num+'">'+num+'</option>';
+		}
 	}
 	NextOption = NextOption + '</select>';
 	return NextOption;
