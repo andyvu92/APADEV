@@ -783,7 +783,7 @@
 			 $('div[class="down10"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ i+'</a><span class="deletewp'+ i + '" style=" float: right; color: red; margin-right: 55%;">x</span></li>' );
                          $('div[class="down10"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
                          $('#wpnumber').text(i);
-                         $("#workplace"+ i ).load("workplace.php", {"count":i});
+                         $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":i});
                     
                          $(".chosen-select").chosen({width: "100%"});
                        
