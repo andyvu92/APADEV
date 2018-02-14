@@ -1,54 +1,44 @@
 <?php 
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
- $results_json='{  
-        "CurrentCPDHour": "12",
-        "APA": [
-         {
-         "PD_id": "421",
-         "PD_title":"PD title A",
-         "PD_date":"13/12/2017",
-         "PD_hours":"3" },
-         {
-         "PD_id": "231",
-         "PD_title":"PD title B",
-         "PD_date":"15/12/2017",
-         "PD_hours":"2" },
-         {
-         "PD_id": "763",
-         "PD_title":"PD title C",
-         "PD_date":"17/12/2017",
-         "PD_hours":"3" },
-         {
-         "PD_id": "236",
-         "PD_title":"PD title D",
-         "PD_date":"19/12/2017",
-         "PD_hours":"1" }  ], 
-         "NONAPA": [
-         {
-         "NPD_id": "821",
-         "NPD_Description":"NPD title A",
-         "NPD_date":"13/12/2017",
-         "NPD_Time":"1",
-         "NPD_Provider": "A Company",
-         "NPD_Reflection": "I have learned dis!" },
-         {
-         "NPD_id": "518",
-         "NPD_Description":"NPD title A",
-         "NPD_date":"13/12/2017",
-         "NPD_Time":"1",
-         "NPD_Provider": "B Company",
-         "NPD_Reflection": "I have learned dis!" },
-         {
-         "NPD_id": "324",
-         "NPD_Description":"NPD title A",
-         "NPD_date":"13/12/2017",
-         "NPD_Time":"1",
-         "NPD_Provider": "C Company",
-         "NPD_Reflection": "I have learned dis!" }
-         ]
-}';
-$results = json_decode($results_json, true);
-    $totalNum = sizeof($results);
+
+if(!isset($_SESSON["UserID"])) {
+	// No information to be displayed!
+	// redirect users to log-in or do something.
+}
+
+if(isset($_POST["nonAPA"])) {
+	// 2.2.34 - INSERT CPD diary
+	// Send - 
+	// UserID, Description, Date, Time, Provider, Reflection
+	// Response -
+	// response
+	$CPDsend = Array();
+	// Values need keys associated
+	$CPDsend["UserID"] = $_SESSON["UserID"];
+	$CPDsend["Date"] = $_POST["Date"];
+	$CPDsend["Descripotion"] = $_POST["Descripotion"];
+	$CPDsend["Time"] = $_POST["Time"];
+	$CPDsend["Provider"] = $_POST["Provider"];
+	$CPDsend["Reflection"] = $_POST["Reflection"];
+	// send and get response
+	$resultst = GetAptifyData("34", $CPDsend);
+	if($resultst == "type of value") {// to be used later
+		// to do
+	} else {
+		// to do
+	}
+	// this should be executed before load the data.
+}
+
+// 2.2.33 - GET CPD diary
+// Send - 
+// UserID
+// Response -
+// PD_id, NPD_id, CPD hours, PD title, PD date, CPD points
+// Description, Date, Time, Provider, Reflection
+$results = GetAptifyData("33", $_SESSON["UserID"]);
+
+$totalNum = sizeof($results);
 $CPDHousrs = $results["CurrentCPDHour"];
 $APA = array();
 $NAPA = array();
@@ -375,6 +365,9 @@ function move(input) {
 
 <h1 class="SectionHeader">Non-APA hours</h1>
 <div class="brd-headling">&nbsp;</div>
+
+<button class="Non-APA-hour" data-toggle="modal" data-target="#nonAPAhour"><span>Add non-APA hours</span></button><br />
+
 <strong><a href="http://www.physiotherapyboard.gov.au/documents/default.aspx?record=WD15%2f18489&dbid=AP&chksum=ewqLtzOm4m%2fsRUrlGCmo1A%3d%3d">This is based on Physiotherapy Board of Australia's Continuing professional development form.</a></strong>
 <div class="NAPAhours">
   <div class="NAPAhoursHead">
@@ -395,3 +388,38 @@ function move(input) {
 <img alt="" src="/sites/default/files/SKINS%20280x600.png" style="width: 260px;">
 </div>
 </div></div>
+<!--div class="container"-->
+    <!-- Modal -->
+<div id="nonAPAhour" class="modal fade" role="dialog">
+	<div class="modal-dialog" <!--style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;"-->>
+
+    <!-- Modal content-->
+    <div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Please enter non-APA PD activity details</h4>
+		</div>
+		<form name="formradio" action="cpd-diary" method="POST">
+			<div class="modal-body">
+				<input type="hidden" name="nonAPA" value="1" placeholder="" id="hidden">
+				<label for="DateNA">Date</label>
+				<input type="text" required="true" name="Date" placeholder="" id="DateNA">
+				<label for="DescripotionNA">Descripotion</label>
+				<input type="text" required="true" name="Descripotion" placeholder="" id="DescripotionNA">
+				<label for="TimeNA">Time</label>
+				<input type="text" required="true" name="Time" placeholder="" id="TimeNA">
+				<label for="ProviderNA">Provider</label>
+				<input type="text" required="true" name="Provider" placeholder="" id="ProviderNA">
+				<label for="ReflectionNA">Reflection</label>
+				<input type="text" required="true" name="Reflection" placeholder="" id="ReflectionNA">
+			</div>
+			<div class="modal-footer">
+				<button type="Submit" class="btn btn-default" id="saveNA">Save</button>
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			</div>
+		</form>
+    </div>
+
+  </div>
+</div>
+<!--/div-->

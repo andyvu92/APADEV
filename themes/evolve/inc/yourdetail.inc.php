@@ -1,6 +1,6 @@
 <?php
  include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
- 
+ /*
    $details_json='{  
    "Prefix":"",
    "Firstname":"Allen",
@@ -14,6 +14,7 @@
    "Mobile-number":"",
    "Aboriginal":"",
    "Dietary":"",
+   "BuildingName":"",
    "Unit":"1175 ",
    "Pobox":"437",
    "Street":"Toorak Road",
@@ -25,21 +26,39 @@
    "Memberid":"test@gmail.com",
    "MemberType":"RW",
    "Ahpranumber":"6934395685-1",
+   "Nationalgp":"Nationalgp",
+   "Branch":"Branch",
+   "Specialty":"FACP",
    "Status":"Current",
    "Regional-group":"A,B,C",
-   "Payment-method":"creditcard",
-   "Cardtype":"AE",
-   "Name-on-card":"Allen",
-   "Cardno":"4566122333",
-   "Expiry-date":"2022-05-05",
-   "CCV":"111",
-   "installment":"1",
+   ------------- ????? "Payment-method":"creditcard",
+   ------------- ????? "Cardtype":"AE",
+   ------------- ????? "Name-on-card":"Allen",
+   ------------- ????? "Cardno":"4566122333",
+   ------------- ????? "Expiry-date":"2022-05-05",
+   ------------- ????? "CCV":"111",
+   ------------- ????? "installment":"1",
+   "Billing-BuildingName":"",
    "Billing-unitno":"1175",
    "Billing-streetname":"Toorak Road",
    "Billing-city-town":"Melbourne",
    "Billing-postcode":"3177",
    "Billing-state":"VIC",
    "Billing-country":"Australia",
+   "Duplicate":"1",
+   "Shipping-BuildingName":"",
+   "Shipping-unitno":"1175",
+   "Shipping-streetname":"Toorak Road",
+   "Shipping-city-town":"Melbourne",
+   "Shipping-postcode":"3177",
+   "Shipping-state":"VIC",
+   "Shipping-country":"Australia",
+   "Mailing-unitno":"1175",
+   "Mailing-streetname":"Toorak Road",
+   "Mailing-city-town":"Melbourne",
+   "Mailing-postcode":"3177",
+   "Mailing-state":"VIC",
+   "Mailing-country":"Australia",
    "Udegree":"Bachelor",
    "Undergraduate-university-name":"Sydney University",
    "Ugraduate-country":"Australia",
@@ -48,15 +67,20 @@
    "Postgraduate-university-name":"Sydney University",
    "Pgraduate-country":"Postgraduate",
    "Pgraduate-year-attained":"Sydney University",
+   "Additional-qualifications":[
+		"additional1":"qualification 1",
+		"additional1":"qualification 2"
+   ],
    "Workplaces":{  
     "0": {  
-         "Name-of-workplace":"APA",
+		 "Workplace_ID":"72516",
+	     "Name-of-workplace":"APA",
+		 "BuildingName":"BuildingName",
          "Wunit":"2",
          "Wstreet":"toorak road",
          "Wcity":"Melbourne",
          "Wpostcode":"3177",
          "Wstate":"VIC",
-         "Wcity":"Melbourne",
          "Wcountry":"Australia",
          "Wemail":"test@apa.com",
          "Wwebaddress":"www.apa.com",
@@ -72,43 +96,49 @@
          "Medicare":"1",
          "Workplace-setting":"1",
          "Number-worked-hours":"7",
-         "Acupuncture-dry-needing":"1",
-         "Adolescents":"1",
-         "Ageing-well":"1",
-         "Amputees":"1",
-         "Arthritis":"1",
-         "Babies-children":"1",
-         "Back-neck":"1",
-         "Bowel":"1",
-         "Brain":"1",
-         "Cancer":"1",
-         "Chronic-pain":"1",
-         "Wdisability":"1",
-         "Wdiabetes":"1",
-         "Feldenkrais":"1",
-         "Hand-therapy":"1",
-         "Head-face":"1",
-         "Healthwork":"1",
-         "Heart-lung":"1",
-         "Hydrotherapy":"1",
-         "Lower-limbs":"1",
-         "Wmen-health":"1",
-         "Neurological-conditions":"1",
-         "Worthopaedics":"1",
-         "Palliative-care":"1",
-         "Pilates":"1",
-         "Pre-post":"1",
-         "Pre-surgey":"1",
-         "Stroke-recovery":"1",
-         "Sexual-health":"1",
-         "Sport-injuries":"1",
-         "Upper-limbs":"1",
-         "Women-health":"1",
-         "Yoga":"1",
-         "Findphysio":"1"
+		 "SpecialInterest": [
+			"Acupuncture-dry-needing":"1",
+			 "Adolescents":"1",
+			 "Ageing-well":"1",
+			 "Amputees":"1",
+			 "Arthritis":"1",
+			 "Babies-children":"1",
+			 "Back-neck":"1",
+			 "Bowel":"1",
+			 "Brain":"1",
+			 "Cancer":"1",
+			 "Chronic-pain":"1",
+			 "Wdisability":"1",
+			 "Wdiabetes":"1",
+			 "Feldenkrais":"1",
+			 "Hand-therapy":"1",
+			 "Head-face":"1",
+			 "Healthwork":"1",
+			 "Heart-lung":"1",
+			 "Hydrotherapy":"1",
+			 "Lower-limbs":"1",
+			 "Wmen-health":"1",
+			 "Neurological-conditions":"1",
+			 "Worthopaedics":"1",
+			 "Palliative-care":"1",
+			 "Pilates":"1",
+			 "Pre-post":"1",
+			 "Pre-surgey":"1",
+			 "Stroke-recovery":"1",
+			 "Sexual-health":"1",
+			 "Sport-injuries":"1",
+			 "Upper-limbs":"1",
+			 "Women-health":"1",
+			 "Yoga":"1",
+		 ],
+         "Findphysio":"1",
+		 "Homehospital":"1",
+		 "MobilePhysio":"1"
       },
    "1": {  
-          "Name-of-workplace":"testA",
+		 "Workplace_ID":"72571",
+         "Name-of-workplace":"testA",
+		 "BuildingName":"BuildingName",
          "Wunit":"2",
          "Wstreet":"toorak road",
          "Wcity":"Melbourne",
@@ -130,43 +160,49 @@
          "Medicare":"1",
          "Workplace-setting":"1",
          "Number-worked-hours":"7",
-         "Acupuncture-dry-needing":"1",
-         "Adolescents":"1",
-         "Ageing-well":"1",
-         "Amputees":"1",
-         "Arthritis":"1",
-         "Babies-children":"1",
-         "Back-neck":"1",
-         "Bowel":"1",
-         "Brain":"1",
-         "Cancer":"1",
-         "Chronic-pain":"1",
-         "Wdisability":"1",
-         "Wdiabetes":"1",
-         "Feldenkrais":"1",
-         "Hand-therapy":"1",
-         "Head-face":"1",
-         "Healthwork":"1",
-         "Heart-lung":"1",
-         "Hydrotherapy":"1",
-         "Lower-limbs":"1",
-         "Wmen-health":"1",
-         "Neurological-conditions":"1",
-         "Worthopaedics":"1",
-         "Palliative-care":"1",
-         "Pilates":"1",
-         "Pre-post":"1",
-         "Pre-surgey":"1",
-         "Stroke-recovery":"1",
-         "Sexual-health":"1",
-         "Sport-injuries":"1",
-         "Upper-limbs":"1",
-         "Women-health":"1",
-         "Yoga":"1",
+		 "SpecialInterest": [
+			 "Acupuncture-dry-needing":"1",
+			 "Adolescents":"1",
+			 "Ageing-well":"1",
+			 "Amputees":"1",
+			 "Arthritis":"1",
+			 "Babies-children":"1",
+			 "Back-neck":"1",
+			 "Bowel":"1",
+			 "Brain":"1",
+			 "Cancer":"1",
+			 "Chronic-pain":"1",
+			 "Wdisability":"1",
+			 "Wdiabetes":"1",
+			 "Feldenkrais":"1",
+			 "Hand-therapy":"1",
+			 "Head-face":"1",
+			 "Healthwork":"1",
+			 "Heart-lung":"1",
+			 "Hydrotherapy":"1",
+			 "Lower-limbs":"1",
+			 "Wmen-health":"1",
+			 "Neurological-conditions":"1",
+			 "Worthopaedics":"1",
+			 "Palliative-care":"1",
+			 "Pilates":"1",
+			 "Pre-post":"1",
+			 "Pre-surgey":"1",
+			 "Stroke-recovery":"1",
+			 "Sexual-health":"1",
+			 "Sport-injuries":"1",
+			 "Upper-limbs":"1",
+			 "Women-health":"1",
+			 "Yoga":"1"
+			],
          "Findphysio":"1"
+		 "Homehospital":"1",
+		 "MobilePhysio":"1"
       },
-   "2": {  
-            "Name-of-workplace":"testB",
+   "2": {
+		 "Workplace_ID":"72171",
+		 "Name-of-workplace":"testB",
+		 "BuildingName":"BuildingName",
          "Wunit":"2",
          "Wstreet":"toorak road",
          "Wcity":"Melbourne",
@@ -188,49 +224,114 @@
          "Medicare":"1",
          "Workplace-setting":"1",
          "Number-worked-hours":"7",
-         "Acupuncture-dry-needing":"1",
-         "Adolescents":"1",
-         "Ageing-well":"1",
-         "Amputees":"1",
-         "Arthritis":"1",
-         "Babies-children":"1",
-         "Back-neck":"1",
-         "Bowel":"1",
-         "Brain":"1",
-         "Cancer":"1",
-         "Chronic-pain":"1",
-         "Wdisability":"1",
-         "Wdiabetes":"1",
-         "Feldenkrais":"1",
-         "Hand-therapy":"1",
-         "Head-face":"1",
-         "Healthwork":"1",
-         "Heart-lung":"1",
-         "Hydrotherapy":"1",
-         "Lower-limbs":"1",
-         "Wmen-health":"1",
-         "Neurological-conditions":"1",
-         "Worthopaedics":"1",
-         "Palliative-care":"1",
-         "Pilates":"1",
-         "Pre-post":"1",
-         "Pre-surgey":"1",
-         "Stroke-recovery":"1",
-         "Sexual-health":"1",
-         "Sport-injuries":"1",
-         "Upper-limbs":"1",
-         "Women-health":"1",
-         "Yoga":"1",
-         "Findphysio":"1"
+		 "SpecialInterest": [
+			 "Acupuncture-dry-needing":"1",
+			 "Adolescents":"1",
+			 "Ageing-well":"1",
+			 "Amputees":"1",
+			 "Arthritis":"1",
+			 "Babies-children":"1",
+			 "Back-neck":"1",
+			 "Bowel":"1",
+			 "Brain":"1",
+			 "Cancer":"1",
+			 "Chronic-pain":"1",
+			 "Wdisability":"1",
+			 "Wdiabetes":"1",
+			 "Feldenkrais":"1",
+			 "Hand-therapy":"1",
+			 "Head-face":"1",
+			 "Healthwork":"1",
+			 "Heart-lung":"1",
+			 "Hydrotherapy":"1",
+			 "Lower-limbs":"1",
+			 "Wmen-health":"1",
+			 "Neurological-conditions":"1",
+			 "Worthopaedics":"1",
+			 "Palliative-care":"1",
+			 "Pilates":"1",
+			 "Pre-post":"1",
+			 "Pre-surgey":"1",
+			 "Stroke-recovery":"1",
+			 "Sexual-health":"1",
+			 "Sport-injuries":"1",
+			 "Upper-limbs":"1",
+			 "Women-health":"1",
+			 "Yoga":"1"
+			],
+         "Findphysio":"1",
+		 "Homehospital":"1",
+		 "MobilePhysio":"1"
       }
    }
 
 }';
    $details= json_decode($details_json, true);
    
+   */
    
+    // 2.2.4 - GET bember detail
+	// Send - 
+	// UserID
+	// Response -
+	// Prefix, First name, Preferred name, Middle name, Maiden name
+	// Last name, DOB, Gender, Home phone, Mobile number, Aboriginal
+	// Dietary, Pref-Building nmae, Pref-Unit num, Pref-PObox, 
+	// Pref- Street, Pref- Suburb, Pref- Postcode, Pref- State,
+	// Pref-Country, Member number, Member ID, Member type, AHPRA number
+	// National Group, Branch, Regional group, Specialty, Status,
+	// Billing- building name, Billing- unit, Billing- streetname
+	// Billing-suburb, Billing-postcode, Billing-State, Billing-Country
+	// Tickbox, Shipping-building, Shipping-unit, Shipping-streetname
+	// Shipping-city, Shipping-postcode, Shipping-state, Shipping-country
+	// Mailing-Unit, Mailing-street, Mailing-city, Mailing-postcode
+	// Mailing-state, Mailing-country, Workplace: {WorkplaceID, FAP,
+	// Name of workplace, Workplace setting, Building name, Unit, 
+	// street, city, postcode, state, country, email, Web address,
+	// phone, additional language, Electronic claiming, HICAPS, 
+	// Healthpoint, Department VA, Work Comp, MOTOR, MEDICARE,
+	// Homehospital, Mobile physio, Special interest area, Number of hours,
+	// QIP}, Undergraduate degree, Undergraduate Uni name, Undergraduate Country,
+	// Year attained, Post graduate degree, post graduate name, 
+	// Post graduate country, Year attained, Additional qualifications
+   $details = GetAptifyData("4", "UserID"); // #_SESSION["UserID"];
+   /*
+   echo "<p>return Begin!!!</p>";
+   print_r($details);
+   echo "<p>return End!!!</p>";
+   */
    ?>
 <div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
+<div class="extra_information">
+<?php
+echo "Nationalgp: ".$details['Nationalgp']."<br />";
+echo "Branch: ".$details['Branch']."<br />";
+echo "Specialty: ".$details['Specialty']."<br />";
+echo "Billing-BuildingName: ".$details['Billing-BuildingName']."<br />";
+echo "Shipping-BuildingName: ".$details['Shipping-BuildingName']."<br />";
+echo "Mailing-unitno: ".$details['Mailing-unitno']."<br />";
+echo "Mailing-streetname: ".$details['Mailing-streetname']."<br />";
+echo "Mailing-city-town: ".$details['Mailing-city-town']."<br />";
+echo "Mailing-postcode: ".$details['Mailing-postcode']."<br />";
+echo "Mailing-state: ".$details['Mailing-state']."<br />";
+echo "Mailing-country: ".$details['Mailing-country']."<br />";
+echo "Additional-qualifications1: ".$details['Additional-qualifications'][0]."<br />";
+echo "Additional-qualifications2: ".$details['Additional-qualifications'][1]."<br />";
+echo "Workplace_ID0: ".$details["Workplaces"][0]['Workplace_ID']."<br />";
+echo "BuildingName0: ".$details["Workplaces"][0]['BuildingName']."<br />";
+echo "Homehospital0: ".$details["Workplaces"][0]['Homehospital']."<br />";
+echo "MobilePhysio0: ".$details["Workplaces"][0]['MobilePhysio']."<br />";
+echo "Workplace_ID1: ".$details["Workplaces"][1]['Workplace_ID']."<br />";
+echo "BuildingName1: ".$details["Workplaces"][1]['BuildingName']."<br />";
+echo "Homehospital1: ".$details["Workplaces"][1]['Homehospital']."<br />";
+echo "MobilePhysio1: ".$details["Workplaces"][1]['MobilePhysio']."<br />";
+echo "Workplace_ID2: ".$details["Workplaces"][2]['Workplace_ID']."<br />";
+echo "BuildingName2: ".$details["Workplaces"][2]['BuildingName']."<br />";
+echo "Homehospital2: ".$details["Workplaces"][2]['Homehospital']."<br />";
+echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
+
+?>
+</div>
 <div style="display:table;">
 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 dashboard-left-nav">
    <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#dashboard-navbar-collapse-1"><i class="fa fa-align-justify"></i></a>
@@ -692,7 +793,7 @@
              </form>
     </div>
 				</div></div>
-				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 <?php if($details['installment']!= "1") echo "display-none"; ?>"><label for="rollover">Roll over your payment card information</label><input type="checkbox" id="rollover" checked> </div>
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 <?php //need to get installment data from payment ?>"><label for="rollover">Roll over your payment card information</label><input type="checkbox" id="rollover" checked> </div>
       </div>
   
                   <div class="row payment-line">
@@ -1033,125 +1134,125 @@
                   </div>
                   <div class="row">
                     <div class="col-lg-4">
-                    <input type="checkbox" name="Acupuncture-dry-needing<?php echo $key;?>" id="Acupuncture-dry-needing<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Acupuncture-dry-needing'];?>" <?php if($details['Workplaces'][$key]['Acupuncture-dry-needing']==1){echo "checked";} ?>> <label for="Acupuncture-dry-needing<?php echo $key;?>">Acupuncture and dry needling</label>
+                    <input type="checkbox" name="Acupuncture-dry-needing<?php echo $key;?>" id="Acupuncture-dry-needing<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Acupuncture-dry-needing'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Acupuncture-dry-needing']==1){echo "checked";} ?>> <label for="Acupuncture-dry-needing<?php echo $key;?>">Acupuncture and dry needling</label>
                    
                     </div>
                      <div class="col-lg-4">
-                      <input type="checkbox" name="Adolescents<?php echo $key;?>" id="Adolescents<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Adolescents'];?>" <?php if($details['Workplaces'][$key]['Adolescents']==1){echo "checked";} ?>> <label for="Adolescents<?php echo $key;?>">Adolescents</label>
+                      <input type="checkbox" name="Adolescents<?php echo $key;?>" id="Adolescents<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Adolescents'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Adolescents']==1){echo "checked";} ?>> <label for="Adolescents<?php echo $key;?>">Adolescents</label>
                     </div>
                        <div class="col-lg-4">
-                    <input type="checkbox" name="Ageing-well<?php echo $key;?>" id="Ageing-well<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Ageing-well'];?>" <?php if($details['Workplaces'][$key]['Ageing-well']==1){echo "checked";} ?>> <label for="Ageing-well<?php echo $key;?>">Ageing well</label>
+                    <input type="checkbox" name="Ageing-well<?php echo $key;?>" id="Ageing-well<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Ageing-well'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Ageing-well']==1){echo "checked";} ?>> <label for="Ageing-well<?php echo $key;?>">Ageing well</label>
                     </div>
                   
                  </div>
                   <div class="row">
                        <div class="col-lg-4">
-                    <input type="checkbox" name="Amputees<?php echo $key;?>" id="Amputees<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Amputees'];?>" <?php if($details['Workplaces'][$key]['Amputees']==1){echo "checked";} ?>> <label for="Amputees<?php echo $key;?>">Amputees</label>
+                    <input type="checkbox" name="Amputees<?php echo $key;?>" id="Amputees<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Amputees'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Amputees']==1){echo "checked";} ?>> <label for="Amputees<?php echo $key;?>">Amputees</label>
                     </div>
                         <div class="col-lg-4">
-                      <input type="checkbox" name="Arthritis<?php echo $key;?>" id="Arthritis<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Arthritis'];?>" <?php if($details['Workplaces'][$key]['Arthritis']==1){echo "checked";} ?>> <label for="Arthritis<?php echo $key;?>">Arthritis</label>
+                      <input type="checkbox" name="Arthritis<?php echo $key;?>" id="Arthritis<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Arthritis'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Arthritis']==1){echo "checked";} ?>> <label for="Arthritis<?php echo $key;?>">Arthritis</label>
                     </div>
                     <div class="col-lg-4">
-                    <input type="checkbox" name="Babies-children<?php echo $key;?>" id="Babies-children<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Babies-children'];?>" <?php if($details['Workplaces'][$key]['Babies-children']==1){echo "checked";} ?>> <label for="Babies-children<?php echo $key;?>">Babies and children</label>
+                    <input type="checkbox" name="Babies-children<?php echo $key;?>" id="Babies-children<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Babies-children'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Babies-children']==1){echo "checked";} ?>> <label for="Babies-children<?php echo $key;?>">Babies and children</label>
                     </div>
                    </div>
                   <div class="row">
                       <div class="col-lg-4">
-                    <input type="checkbox" name="Back-neck<?php echo $key;?>" id="Back-neck<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Back-neck'];?>" <?php if($details['Workplaces'][$key]['Back-neck']==1){echo "checked";} ?>> <label for="Back-neck<?php echo $key;?>">Back and neck</label>
+                    <input type="checkbox" name="Back-neck<?php echo $key;?>" id="Back-neck<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Back-neck'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Back-neck']==1){echo "checked";} ?>> <label for="Back-neck<?php echo $key;?>">Back and neck</label>
                     </div>
                      <div class="col-lg-4">
-                    <input type="checkbox" name="Bowel<?php echo $key;?>" id="Bowel<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Bowel'];?>" <?php if($details['Workplaces'][$key]['Bowel']==1){echo "checked";} ?>> <label for="Bowel<?php echo $key;?>">Bowel and bladder health</label>
+                    <input type="checkbox" name="Bowel<?php echo $key;?>" id="Bowel<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Bowel'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Bowel']==1){echo "checked";} ?>> <label for="Bowel<?php echo $key;?>">Bowel and bladder health</label>
                     </div>
                       <div class="col-lg-4">
-                    <input type="checkbox" name="Brain<?php echo $key;?>" id="Brain<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Brain'];?>" <?php if($details['Workplaces'][$key]['Brain']==1){echo "checked";} ?>> <label for="Brain<?php echo $key;?>">Brain and spinal cord</label>
+                    <input type="checkbox" name="Brain<?php echo $key;?>" id="Brain<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Brain'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Brain']==1){echo "checked";} ?>> <label for="Brain<?php echo $key;?>">Brain and spinal cord</label>
                     </div>
                   </div>
                   <div class="row">
                       <div class="col-lg-4">
-                    <input type="checkbox" name="Cancer<?php echo $key;?>" id="Cancer<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Cancer'];?>" <?php if($details['Workplaces'][$key]['Cancer']==1){echo "checked";} ?>> <label for="Cancer<?php echo $key;?>">Cancer and lympheodema</label>
+                    <input type="checkbox" name="Cancer<?php echo $key;?>" id="Cancer<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Cancer'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Cancer']==1){echo "checked";} ?>> <label for="Cancer<?php echo $key;?>">Cancer and lympheodema</label>
                     </div>
                      <div class="col-lg-4">
-                    <input type="checkbox" name="Chronic-pain<?php echo $key;?>" id="Chronic-pain<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Chronic-pain'];?>" <?php if($details['Workplaces'][$key]['Chronic-pain']==1){echo "checked";} ?>> <label for="Chronic-pain<?php echo $key;?>">Chronic pain</label>
+                    <input type="checkbox" name="Chronic-pain<?php echo $key;?>" id="Chronic-pain<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Chronic-pain'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Chronic-pain']==1){echo "checked";} ?>> <label for="Chronic-pain<?php echo $key;?>">Chronic pain</label>
                     </div>
                      <div class="col-lg-4">
-                    <input type="checkbox" name="Wdisability<?php echo $key;?>" id="Wdisability<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Wdisability'];?>" <?php if($details['Workplaces'][$key]['Wdisability']==1){echo "checked";} ?>> <label for="Wdisability<?php echo $key;?>">Disability</label>
+                    <input type="checkbox" name="Wdisability<?php echo $key;?>" id="Wdisability<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Wdisability'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Wdisability']==1){echo "checked";} ?>> <label for="Wdisability<?php echo $key;?>">Disability</label>
                     </div>
                   </div>
                     <div class="row">
                       <div class="col-lg-4">
-                    <input type="checkbox" name="Wdiabetes<?php echo $key;?>" id="Wdiabetes<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Wdiabetes'];?>" <?php if($details['Workplaces'][$key]['Wdiabetes']==1){echo "checked";} ?>> <label for="Wdiabetes<?php echo $key;?>">Diabetes</label>
+                    <input type="checkbox" name="Wdiabetes<?php echo $key;?>" id="Wdiabetes<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Wdiabetes'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Wdiabetes']==1){echo "checked";} ?>> <label for="Wdiabetes<?php echo $key;?>">Diabetes</label>
                     </div>
                      <div class="col-lg-4">
-                    <input type="checkbox" name="Feldenkrais<?php echo $key;?>" id="Feldenkrais<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Feldenkrais'];?>" <?php if($details['Workplaces'][$key]['Feldenkrais']==1){echo "checked";} ?>> <label for="Feldenkrais<?php echo $key;?>">Feldenkrais</label>
+                    <input type="checkbox" name="Feldenkrais<?php echo $key;?>" id="Feldenkrais<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Feldenkrais'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Feldenkrais']==1){echo "checked";} ?>> <label for="Feldenkrais<?php echo $key;?>">Feldenkrais</label>
                     </div>
                       <div class="col-lg-4">
-                    <input type="checkbox" name="Hand-therapy<?php echo $key;?>" id="Hand-therapy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Hand-therapy'];?>" <?php if($details['Workplaces'][$key]['Hand-therapy']==1){echo "checked";} ?>> <label for="Hand-therapy<?php echo $key;?>">Hand therapy</label>
+                    <input type="checkbox" name="Hand-therapy<?php echo $key;?>" id="Hand-therapy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Hand-therapy'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Hand-therapy']==1){echo "checked";} ?>> <label for="Hand-therapy<?php echo $key;?>">Hand therapy</label>
                     </div>
                   </div>
                   <div class="row">
                         <div class="col-lg-4">
-                    <input type="checkbox" name="Head-face<?php echo $key;?>" id="Head-face<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Head-face'];?>" <?php if($details['Workplaces'][$key]['Head-face']==1){echo "checked";} ?>> <label for="Head-face<?php echo $key;?>">Head and face</label>
+                    <input type="checkbox" name="Head-face<?php echo $key;?>" id="Head-face<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Head-face'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Head-face']==1){echo "checked";} ?>> <label for="Head-face<?php echo $key;?>">Head and face</label>
                     </div>
                          <div class="col-lg-4">
-                    <input type="checkbox" name="Healthwork<?php echo $key;?>" id="Healthwork<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Healthwork'];?>" <?php if($details['Workplaces'][$key]['Healthwork']==1){echo "checked";} ?>> <label for="Healthwork<?php echo $key;?>">Health at work</label>
+                    <input type="checkbox" name="Healthwork<?php echo $key;?>" id="Healthwork<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Healthwork'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Healthwork']==1){echo "checked";} ?>> <label for="Healthwork<?php echo $key;?>">Health at work</label>
                     </div>
                      <div class="col-lg-4">
-                    <input type="checkbox" name="Heart-lung<?php echo $key;?>" id="Heart-lung<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Heart-lung'];?>" <?php if($details['Workplaces'][$key]['Heart-lung']==1){echo "checked";} ?>> <label for="Heart-lung<?php echo $key;?>">Heart and lung health</label>
+                    <input type="checkbox" name="Heart-lung<?php echo $key;?>" id="Heart-lung<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Heart-lung'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Heart-lung']==1){echo "checked";} ?>> <label for="Heart-lung<?php echo $key;?>">Heart and lung health</label>
                     </div>
                   </div>
                     <div class="row">
                         <div class="col-lg-4">
-                    <input type="checkbox" name="Hydrotherapy<?php echo $key;?>" id="Hydrotherapy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Hydrotherapy'];?>" <?php if($details['Workplaces'][$key]['Hydrotherapy']==1){echo "checked";} ?>> <label for="Hydrotherapy<?php echo $key;?>">Hydrotherapy</label>
+                    <input type="checkbox" name="Hydrotherapy<?php echo $key;?>" id="Hydrotherapy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Hydrotherapy'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Hydrotherapy']==1){echo "checked";} ?>> <label for="Hydrotherapy<?php echo $key;?>">Hydrotherapy</label>
                     </div>
                          <div class="col-lg-4">
-                    <input type="checkbox" name="Lower-limbs<?php echo $key;?>" id="Lower-limbs<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Lower-limbs'];?>" <?php if($details['Workplaces'][$key]['Lower-limbs']==1){echo "checked";} ?>> <label for="Lower-limbs<?php echo $key;?>">Lower limbs</label>
+                    <input type="checkbox" name="Lower-limbs<?php echo $key;?>" id="Lower-limbs<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Lower-limbs'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Lower-limbs']==1){echo "checked";} ?>> <label for="Lower-limbs<?php echo $key;?>">Lower limbs</label>
                     </div>
                      <div class="col-lg-4">
-                    <input type="checkbox" name="Wmen-health<?php echo $key;?>" id="Wmen-health<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Wmen-health'];?>" <?php if($details['Workplaces'][$key]['Wmen-health']==1){echo "checked";} ?>> <label for="Wmen-health<?php echo $key;?>">Men’s health</label>
+                    <input type="checkbox" name="Wmen-health<?php echo $key;?>" id="Wmen-health<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Wmen-health'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Wmen-health']==1){echo "checked";} ?>> <label for="Wmen-health<?php echo $key;?>">Men’s health</label>
                     </div>
                   </div>
                         <div class="row">
                         <div class="col-lg-4">
-                    <input type="checkbox" name="Neurological-conditions<?php echo $key;?>" id="Neurological-conditions<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Neurological-conditions'];?>" <?php if($details['Workplaces'][$key]['Neurological-conditions']==1){echo "checked";} ?>> <label for="neurological-conditions<?php echo $key;?>">Neurological conditions</label>
+                    <input type="checkbox" name="Neurological-conditions<?php echo $key;?>" id="Neurological-conditions<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Neurological-conditions'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Neurological-conditions']==1){echo "checked";} ?>> <label for="neurological-conditions<?php echo $key;?>">Neurological conditions</label>
                     </div>
                          <div class="col-lg-4">
-                    <input type="checkbox" name="Worthopaedics<?php echo $key;?>" id="Worthopaedics<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Worthopaedics'];?>" <?php if($details['Workplaces'][$key]['Worthopaedics']==1){echo "checked";} ?>> <label for="Worthopaedics<?php echo $key;?>">Orthopaedics</label>
+                    <input type="checkbox" name="Worthopaedics<?php echo $key;?>" id="Worthopaedics<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Worthopaedics'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Worthopaedics']==1){echo "checked";} ?>> <label for="Worthopaedics<?php echo $key;?>">Orthopaedics</label>
                     </div>
                      <div class="col-lg-4">
-                    <input type="checkbox" name="Palliative-care<?php echo $key;?>" id="Palliative-care<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Palliative-care'];?>" <?php if($details['Workplaces'][$key]['Palliative-care']==1){echo "checked";} ?>> <label for="Palliative-care<?php echo $key;?>">Palliative care</label>
+                    <input type="checkbox" name="Palliative-care<?php echo $key;?>" id="Palliative-care<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Palliative-care'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Palliative-care']==1){echo "checked";} ?>> <label for="Palliative-care<?php echo $key;?>">Palliative care</label>
                     </div>
                   </div>
                      <div class="row">
                         <div class="col-lg-4">
-                    <input type="checkbox" name="Pilates<?php echo $key;?>" id="Pilates<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Pilates'];?>" <?php if($details['Workplaces'][$key]['Pilates']==1){echo "checked";} ?>> <label for="Pilates<?php echo $key;?>">Pilates</label>
+                    <input type="checkbox" name="Pilates<?php echo $key;?>" id="Pilates<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Pilates'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Pilates']==1){echo "checked";} ?>> <label for="Pilates<?php echo $key;?>">Pilates</label>
                     </div>
                          <div class="col-lg-4">
-                    <input type="checkbox" name="Pre-post<?php echo $key;?>" id="Pre-post<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Pre-post'];?>" <?php if($details['Workplaces'][$key]['Pre-post']==1){echo "checked";} ?>> <label for="Pre-post<?php echo $key;?>">Pre and post-natal</label>
+                    <input type="checkbox" name="Pre-post<?php echo $key;?>" id="Pre-post<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Pre-post'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Pre-post']==1){echo "checked";} ?>> <label for="Pre-post<?php echo $key;?>">Pre and post-natal</label>
                     </div>
                      <div class="col-lg-4">
-                    <input type="checkbox" name="Pre-surgey<?php echo $key;?>" id="Pre-surgey<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Pre-surgey'];?>" <?php if($details['Workplaces'][$key]['Pre-surgey']==1){echo "checked";} ?>> <label for="Pre-surgey<?php echo $key;?>">Pre and post-surgery</label>
+                    <input type="checkbox" name="Pre-surgey<?php echo $key;?>" id="Pre-surgey<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Pre-surgey'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Pre-surgey']==1){echo "checked";} ?>> <label for="Pre-surgey<?php echo $key;?>">Pre and post-surgery</label>
                     </div>
                   </div>
                    <div class="row">
                         <div class="col-lg-4">
-                    <input type="checkbox" name="Stroke-recovery<?php echo $key;?>" id="Stroke-recovery<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Stroke-recovery'];?>" <?php if($details['Workplaces'][$key]['Stroke-recovery']==1){echo "checked";} ?>> <label for="Stroke-recovery<?php echo $key;?>">Stroke recovery</label>
+                    <input type="checkbox" name="Stroke-recovery<?php echo $key;?>" id="Stroke-recovery<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Stroke-recovery'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Stroke-recovery']==1){echo "checked";} ?>> <label for="Stroke-recovery<?php echo $key;?>">Stroke recovery</label>
                     </div>
                          <div class="col-lg-4">
-                    <input type="checkbox" name="Sexual-health<?php echo $key;?>" id="Sexual-health<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Sexual-health'];?>" <?php if($details['Workplaces'][$key]['Sexual-health']==1){echo "checked";} ?>> <label for="Sexual-health<?php echo $key;?>">Sexual health</label>
+                    <input type="checkbox" name="Sexual-health<?php echo $key;?>" id="Sexual-health<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Sexual-health'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Sexual-health']==1){echo "checked";} ?>> <label for="Sexual-health<?php echo $key;?>">Sexual health</label>
                     </div>
                      <div class="col-lg-4">
-                    <input type="checkbox" name="Sport-injuries<?php echo $key;?>" id="Sport-injuries<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Sport-injuries'];?>" <?php if($details['Workplaces'][$key]['Sport-injuries']==1){echo "checked";} ?>> <label for="Sport-injuries<?php echo $key;?>">Sport injuries</label>
+                    <input type="checkbox" name="Sport-injuries<?php echo $key;?>" id="Sport-injuries<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Sport-injuries'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Sport-injuries']==1){echo "checked";} ?>> <label for="Sport-injuries<?php echo $key;?>">Sport injuries</label>
                     </div>
                   </div>
                  <div class="row">
                         <div class="col-lg-4">
-                    <input type="checkbox" name="Upper-limbs<?php echo $key;?>" id="Upper-limbs<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Upper-limbs'];?>" <?php if($details['Workplaces'][$key]['Upper-limbs']==1){echo "checked";} ?>> <label for="Upper-limbs<?php echo $key;?>">Upper limbs</label>
+                    <input type="checkbox" name="Upper-limbs<?php echo $key;?>" id="Upper-limbs<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Upper-limbs'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Upper-limbs']==1){echo "checked";} ?>> <label for="Upper-limbs<?php echo $key;?>">Upper limbs</label>
                     </div>
                          <div class="col-lg-4">
-                    <input type="checkbox" name="Women-health<?php echo $key;?>" id="Women-health<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Women-health'];?>" <?php if($details['Workplaces'][$key]['Women-health']==1){echo "checked";} ?>> <label for="Women-health<?php echo $key;?>">Women’s health</label>
+                    <input type="checkbox" name="Women-health<?php echo $key;?>" id="Women-health<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Women-health'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Women-health']==1){echo "checked";} ?>> <label for="Women-health<?php echo $key;?>">Women’s health</label>
                     </div>
                      <div class="col-lg-4">
-                    <input type="checkbox" name="Yoga<?php echo $key;?>" id="Yoga<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Yoga'];?>" <?php if($details['Workplaces'][$key]['Yoga']==1){echo "checked";} ?>> <label for="Yoga<?php echo $key;?>">Yoga</label>
+                    <input type="checkbox" name="Yoga<?php echo $key;?>" id="Yoga<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Yoga'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Yoga']==1){echo "checked";} ?>> <label for="Yoga<?php echo $key;?>">Yoga</label>
                     </div>
                   </div>
                 
@@ -1211,7 +1312,7 @@
                   <div class="row">
                      <div class="col-lg-6">
                         <label for="Additional-qualifications">Additional qualifications</label>
-                        <input type="text" class="form-control" name="Additional-qualifications" id="Additional-qualifications"  <?php if (empty($details['Additional-qualifications'])) {echo "placeholder='Additional qualifications'";}   else{ echo 'value="'.$details['Additional-qualifications'].'"'; }?>>
+                        <input type="text" class="form-control" name="Additional-qualifications" id="Additional-qualifications"  <?php if (empty($details['Additional-qualifications'])) {echo "placeholder='Additional qualifications'";}   else{ echo 'value="'.$details['Additional-qualifications'][0].'"'; }?>>
                      </div>
                   </div>
                </div>

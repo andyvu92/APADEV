@@ -98,193 +98,95 @@
 	   /*Get user payment card info webservice from Aptify and then return user payment card information*/
 	   $paymentCardList = array("4444","6666");
 	   /*Get user data from Aptify and then return user information*/
+	   /*
+	   "Job":"Osteopath",		  
+           "Professionalbody":"1",
+		   "Professionalinsurance":"1",
+           "HearaboutAPA":"socialmedia",
+		   "Registrationboard":"1",
+		   */
 	   if(isset($_SESSION["userID"])&&($_SESSION["userID"]!=0)){ 
+			// ToDo
+			// Find "Web user" and place it here!!!
+			if(isset($_SESSION["MemberType"])&&$_SESSION["MemberType"] != "") { // if they are member
+				// ToDo
+				// This is to get "insurance question for member"
+				if(isset($_SESSION["MemberType"])&&$_SESSION["MemberType"] != "") {
+					// if they have insurance, proceed
+				} else {
+					// when they don't have insurence, ask them
+				}
+			} else {
+				// ToDo
+				// get other PD related questions
+				// if the questions hasn't been asked,
+				// ask againot
+				// if not,
+				// skip to shopping cart/next step
+			}
 	       $userId=$_SESSION["userID"];
-	       $userInfo_json = '{ 
-          "MemberType":"APA Member",
-          "Job":"Osteopath",		  
-          "Professionalbody":"1",
-		  "Professionalinsurance":"1",
-          "HearaboutAPA":"socialmedia",
-		  "Registrationboard":"1",
-          "Dietary":["Shellfish","Eggs","Lactose"],
-		  "Memberid":"test@gmail.com",
-		   "Prefix":"",
-		   "Firstname":"Allen",
-		   "Preferred-name":"",
-		   "Middle-name":"",
-		   "Maiden-name":"Allen",
-		   "Lastname":"Wang",
-		   "Birth":"2017-05-05",
-		   "Gender":"Female",
-		   "Home-phone-number":"0390920807",
-		   "Mobile-number":"",
-		   "Aboriginal":"",
-		  
-		   "Unit":"1175 ",
-		   "Pobox":"437",
-		   "Street":"Toorak Road",
-		   "Suburb":"Camberwell",
-		   "Postcode":"3124",
-		   "State":"",
-		   "Country":"Australia",
-		   "Billing-unitno":"1175",
-		   "Billing-streetname":"Toorak Road",
-		   "Billing-city-town":"Melbourne",
-		   "Billing-postcode":"3177",
-		   "Billing-state":"VIC",
-		   "Billing-country":"Australia"
-				
-	   }';
-	       $userInfo= json_decode($userInfo_json, true);	
-	       $user_membertype=$userInfo['MemberType']; 
 		   
-           $Job = $userInfo['Job'];
-           $Professionalbody = $userInfo['Professionalbody'];
-    	   $Professionalinsurance = $userInfo['Professionalinsurance'];
-           $HearaboutAPA = $userInfo['HearaboutAPA'];
-		   $Registrationboard = $userInfo['Registrationboard'];
+			/* We may use this as "Session" data and won't need to load. */
+			// 2.2.4 - GET bember detail
+			// Send - 
+			// UserID
+			// Response -
+			// Prefix, First name, Preferred name, Middle name, Maiden name
+			// Last name, DOB, Gender, Home phone, Mobile number, Aboriginal
+			// Dietary, Pref-Building nmae, Pref-Unit num, Pref-PObox, 
+			// Pref- Street, Pref- Suburb, Pref- Postcode, Pref- State,
+			// Pref-Country, Member number, Member ID, Member type, AHPRA number
+			// National Group, Branch, Regional group, Specialty, Status,
+			// Billing- building name, Billing- unit, Billing- streetname
+			// Billing-suburb, Billing-postcode, Billing-State, Billing-Country
+			// Tickbox, Shipping-building, Shipping-unit, Shipping-streetname
+			// Shipping-city, Shipping-postcode, Shipping-state, Shipping-country
+			// Mailing-Unit, Mailing-street, Mailing-city, Mailing-postcode
+			// Mailing-state, Mailing-country, Workplace: {WorkplaceID, FAP,
+			// Name of workplace, Workplace setting, Building name, Unit, 
+			// street, city, postcode, state, country, email, Web address,
+			// phone, additional language, Electronic claiming, HICAPS, 
+			// Healthpoint, Department VA, Work Comp, MOTOR, MEDICARE,
+			// Homehospital, Mobile physio, Special interest area, Number of hours,
+			// QIP}, Undergraduate degree, Undergraduate Uni name, Undergraduate Country,
+			// Year attained, Post graduate degree, post graduate name, 
+			// Post graduate country, Year attained, Additional qualifications
+			$userInfo = GetAptifyData("4", "UserID"); // #_SESSION["UserID"];
+		   
+	       $user_membertype = $userInfo['MemberType']; 
+		   
+           $Job = "Osteopath";
+           $Professionalbody = "1";
+    	   $Professionalinsurance = "1";
+           $HearaboutAPA = "socialmedia";
+		   $Registrationboard = "1";
  		   $Dietary = $userInfo['Dietary'];
 	   } 
 	   /*Validate coupon code from Aptify and then reload the PD detail page*/
 	   if(isset($_POST["Couponcode"])){ $Couponcode = $_POST["Couponcode"]; } else { $Couponcode = "";}
 	  /* CURL GET to query data from Aptify using $_GET["ID"] & couponcode, and then return Json data as below example*/
-       if($_GET["id"]==1){
-	   $pd_json='{ 
-          "Id":"1",
-          "Typeofpd":"Lecture",		  
-          "Title":"Sports Physiotherapy Level2",
-		  "Summary":"<p>Best practice requires advanced skills in diagnoses,treatment and rehabilitation when treating patients with acute and complex knee conditions.</p>",
-          "Presenter_bio":"<p>This is a famuso person,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</p><p>This is a famuso person,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</p>",
-		 "Learning_outcomes":"<ul>this is presenter content<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</li><li>Vestibulum quis lobortis massa. Praesent mattis sem orci, non congue justo congue quis curabitur vestibulum.</li><li>Nisl aliquam, porta turpis pellentesque, auctor erat. Aliquam in ipsum mauris. Phasellus feugiat nibh interdum.</li><li>Elit faucibus egestas. Nam eu metus convallis, tempus nisl at, ullamcorper</li><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</li><li>Vestibulum quis lobortis massa. Praesent mattis sem orci, non congue justo congue quis curabitur vestibulum.</li><li>Nisl aliquam, porta turpis pellentesque, auctor erat. Aliquam in ipsum mauris. Phasellus feugiat nibh interdum.</li><li>Elit faucibus egestas. Nam eu metus convallis, tempus nisl at, ullamcorper</li></ul>",
-         "Prerequisites":"<ul>this is prerequisites content<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</li><li>Vestibulum quis lobortis massa. Praesent mattis sem orci, non congue justo congue quis curabitur vestibulum.</li><li>Nisl aliquam, porta turpis pellentesque, auctor erat. Aliquam in ipsum mauris. Phasellus feugiat nibh interdum.</li><li>Elit faucibus egestas. Nam eu metus convallis, tempus nisl at, ullamcorper arcu</li></ul>",
-         "Presenters":"Tim McGrath (PhD), Head Physiotherapist Port Adelaide FC;Dr Rob Creer, Orthopedic Surgeon;Kylie Shaw, Sports Physician and;Ben Serpell, Head of Athletic Development, Brumbies",
-         "Event_status":"1",
-		 "Totalnumber":"104",
-		 "Enrollednumber":"100",
-		 "Time":"<p>9:00 AM - 5.00 PM</p><p>12/12/2018</p>",
-		 "Close_date":"12/12/2018",
-		 "Location":"University of Canberra Building 29 Bruce, ACT 2617",
-		 "CPD":"10",
-		 "Users":["10","12"],
-		 "Cost":"750.00",
-		 "Pricelist":
-		  {
-			"SPA/Rural":"695.00",
-            "APA Member":"750.00",
-            "Non-member":"1125.00"			
-		  }
-		 
-		
-	   }';}
-	   if($_GET["id"]==2){
-	   $pd_json='{ 
-           "Id":"2",
-          "Typeofpd":"Online",			   
-          "Title":"Pregnancy and Postpartum:Clinical Hights",
-		  "Summary":"Best practice requires advanced skills in diagnoses, treatment and rehabilitation when treating patients with acute and complex knee conditions",
-         "Presenter_bio":"This is a famuso person",
-         "Learning_outcomes":"By completing this course/event you will:this is learning outcomes content",
-         "Prerequisites":"this is prerequisites content",
-         "Presenters":"test",
-         "Event_status":"2",
-		 "Totalnumber":"80",
-		 "Enrollednumber":"75",
-		 "Time":"12/12/2018",
-		 "Close_date":"12/12/2018",
-		 "Location":"1175 Toorak Road, Camberwell,VIC 3124 Australia",
-		 "CPD":"10",
-		 "Users":["113","10","12"],
-		 "Cost":"NULL",
-		"Pricelist":
-		  {
-			"SPA/Rural":"695.00",
-            "APA Member":"750.00",
-            "Non-member":"1125.00"		
-		  }
-		
-	   }';}
-	   if($_GET["id"]==3){
-	   $pd_json='{ 
-          "Id":"3",	
-          "Typeofpd":"Lecture",			  
-          "Title":"Sports Physiotherapy Level2",
-		  "Summary":"Best practice requires advanced skills in diagnoses, treatment and rehabilitation when treating patients with acute and complex knee conditions",
-         "Presenter_bio":"This is a famuso person",
-         "Learning_outcomes":"By completing this course/event you will:this is learning outcomes content",
-         "Prerequisites":"this is prerequisites content",
-         "Presenters":"test",
-         "Event_status":"3",
-		 "Totalnumber":"80",
-		 "Enrollednumber":"76,
-		 "Time":"12/12/2018",
-		 "Close_date":"12/12/2018",
-		 "Location":"Camberwell",
-		 "CPD":"10",
-		 "Users":["10","12"],
-		 "Cost":"700.00",
-		 "Pricelist":
-		  {
-			"SPA/Rural":"695.00",
-            "APA Member":"750.00",
-            "Non-member":"1125.00"			
-		  }
-		
-	   }';}
-	    if($_GET["id"]==4){
-	   $pd_json='{ 
-          "Id":"4",	
-         "Typeofpd":"Lecture",		  
-          "Title":"Pregnancy and Postpartum:Clinical Hights",
-		  "Summary":"Best practice requires advanced skills in diagnoses, treatment and rehabilitation when treating patients with acute and complex knee conditions",
-         "Presenter_bio":"This is a famuso person",
-         "Learning_outcomes":"By completing this course/event you will:this is learning outcomes content",
-         "Prerequisites":"this is prerequisites content",
-         "Presenters":"test",
-         "Event_status":"4",
-		 "Totalnumber":"200",
-		 "Enrollednumber":"100",
-		 "Time":"12/12/2018",
-		 "Close_date":"12/12/2018",
-		 "Location":"Camberwell",
-		 "CPD":"10",
-		 "Users":["10","12"],
-		 "Cost":"700.00",
-		 "Pricelist":
-		  {
-			"SPA/Rural":"695.00",
-            "APA Member":"750.00",
-            "Non-member":"1125.00"			
-		  }
-		
-	   }';}
-	    if($_GET["id"]==5){
-	   $pd_json='{ 
-          "Id":"5",	
-          "Typeofpd":"Lecture",		  
-          "Title":"Sports Physiotherapy Level2",
-		  "Summary":"Best practice requires advanced skills in diagnoses, treatment and rehabilitation when treating patients with acute and complex knee conditions",
-         "Presenter_bio":"This is a famuso person",
-         "Learning_outcomes":"By completing this course/event you will:this is learning outcomes content",
-         "Prerequisites":"this is prerequisites content",
-         "Presenters":"test",
-         "Event_status":"3",
-		 "Totalnumber":"200",
-		 "Enrollednumber":"100",
-		 "Time":"12/12/2018",
-		 "Close_date":"12/12/2018",
-		 "Location":"Camberwell",
-		 "CPD":"10",
-		 "Users":["10","12"],
-		 "Cost":"695.00",
-		 "Pricelist":
-		  {
-			"SPA/Rural":"695.00",
-            "APA Member":"750.00",
-            "Non-member":"1125.00"		
-		  }
-		}';}
-   $pd_detail= json_decode($pd_json, true);	
+       
+	$pdArr = Array();
+	array_push($pdArr, ($_GET["id"]-1));
+	if(isset($_SESSION["userID"])) {
+	   array_push($pdArr, $_SESSION["userID"]);
+	} else {
+	   array_push($pdArr, "");
+	}
+	array_push($pdArr, $Couponcode);
+	
+	// 2.2.29 - GET CPD diary
+	// Send - 
+	// PDID, UserID, Coupon
+	// Response -
+	// PriceTable(list), Max enrolment, Current enrolment, PD_id,
+	// Title, PD type, Presenter bio, Leaning outcomes, Prerequisites
+	// Presenters, Time, Start date, End date, Registration closing
+	// Where:{Address1, Address2, Address3(if exist), Address4(if exist), City,
+	//	state, Postcode}, CPD hours, Cost, Your registration stats
+	$pd_detail = GetAptifyData("29", $pdArr);
+	//print_r($pd_detail);
+   
       /*Save data to local shopping cart database response here*/
     	 $saveShoppingCart = "0";
 	   if(isset($_GET['saveShoppingCart'])){ 
@@ -317,31 +219,34 @@
 	   </div>
 		 <div class="detailContent">
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Presenters:</h3><p><?php echo $pd_detail['Presenters']; ?></p></div>
-		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Event status:</h3><p><?php 
-		                $Totalnumber = $pd_detail['Totalnumber'];
-						$Enrollednumber = $pd_detail['Enrollednumber'];
-						$Now = date('d-m-Y');
-		                if(strtotime($Now)> strtotime(str_replace("/","-",$pd_detail['Close_date']))){
-						    echo "Closed";  
-					     }
-					     elseif($Totalnumber-$Enrollednumber<=5){
-							 echo "Almost Full"; 
-						  
-					     }
-		                elseif(($Totalnumber-$Enrollednumber)==0){
-							 echo "Full"; 
-						  
-					     }
-		                 elseif(($Totalnumber-$Enrollednumber)>5){
-							 echo "Open"; 
-						  
-					     }
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Event status:</h3><p>
+		 <?php 
+			$Totalnumber = $pd_detail['Totalnumber'];
+			$Enrollednumber = $pd_detail['Enrollednumber'];
+			$Now = date('d-m-Y');
+			if(strtotime($Now)> strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+				echo "Closed";  
+			 }
+			 elseif($Totalnumber-$Enrollednumber<=5){
+				 echo "Almost Full"; 
+			  
+			 }
+			elseif(($Totalnumber-$Enrollednumber)==0){
+				 echo "Full"; 
+			  
+			 }
+			 elseif(($Totalnumber-$Enrollednumber)>5){
+				 echo "Open"; 
+			  
+			 }
 		 
 		 ?></p></div>
-		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>When:</h3><p><?php echo $pd_detail['Time']; ?></p></div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>When:</h3><p><?php echo $pd_detail['Time']; ?></p><p><?php echo $pd_detail['StartDate']." - ".$pd_detail['EndDate'] ; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Registration closing date:</h3><p><?php echo $pd_detail['Close_date']; ?></p></div>
-		 <!--<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Where:</h3><p><?php echo $pd_detail['Location']; ?><br><a href="pd-place-map?place=<?php echo $pd_detail['Location']; ?>" target="_blank">View map</a></p></div>-->
-		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Where:</h3><p><?php echo $pd_detail['Location']; ?><br><a id="viewMap">View map</a></p></div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+			<h3>Where:</h3>
+			<p><?php echo $pd_detail['Location']["Address1"]." ".$pd_detail['Location']["Address2"]; ?><br />
+			<?php echo $pd_detail['Location']["City"]." ".$pd_detail['Location']["State"]." ".$pd_detail['Location']["Postcode"]; ?><br><a id="viewMap">View map</a></p></div>
 		
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>CPD hours:</h3><p><?php echo $pd_detail['CPD']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Cost:</h3><p>
@@ -354,12 +259,9 @@
 					comparePrice($pd_detail['Pricelist'], $pd_detail['Cost']);
 				}
 				else {
-					
 					comparePrice($pd_detail['Pricelist'], $pd_detail['Cost']);
-					
 					echo "$".$pd_detail['Cost'];
 				}
-				
 		 }
 		  else{ foreach($pd_detail['Pricelist'] as $key=>$value){echo $key.":&nbsp;$".$value."<br>";}} 
 		 
@@ -373,12 +275,19 @@
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Your registration status:</h3><p>
 		 <?php 
 		    if(isset($userId)&& ($userId!=0)){
+				if($pd_detail['UserStatus'] > 0) {
+					echo "Registered";
+				} else {
+					echo "Not registered";
+				}
+				/*
 				if(!in_array( $user->uid,$pd_detail['Users'])){
 					echo "Not registered";
 				}
 				else{
 					echo "Registered";
 				}
+				*/
 			}
 			else{
 				echo '<a id="login">Login to see your status</a>';
@@ -388,11 +297,11 @@
 		 </p></div>
 		 <p>&nbsp;</p>
 		 
-		 <?php if(isset($userId)&& ($userId!=0) && (!in_array( $user->uid,$pd_detail['Users']))):?><p><form action="pd-product?id=<?php echo $pd_detail["Id"]?>" method="POST"><input type="text" name="Couponcode" placeholder="Enter discount code"><button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button></form></p><br><?php endif; ?>
+		 <?php if(isset($userId)&& ($userId!=0)):?><p><form action="pd-product?id=<?php echo $pd_detail["Id"]?>" method="POST"><input type="text" name="Couponcode" placeholder="Enter discount code"><button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button></form></p><br><?php endif; ?>
 		 <?php 
 		     
 		 
-		 if(isset($userId)&& ($userId!=0)&& (!in_array( $user->uid,$pd_detail['Users']))){
+		 if(isset($userId)&& ($userId!=0)){
 			 $userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
 	         if ($userTag =="1"){
 					echo '<form id="shoppingCartForm" action="../sites/all/themes/evolve/commonFile/updateShoppingCart.php" method="POST">
@@ -443,7 +352,7 @@
   height="450"
   frameborder="0" style="border:0"
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAUNE61ebLP9O54uFskPBMMXJ54GM-rfUk
-    &q='.$pd_detail['Location'].'" allowfullscreen>
+    &q='.$pd_detail['Location']["Address1"]." ".$pd_detail['Location']["Address2"]." ".$pd_detail['Location']["City"]." ".$pd_detail['Location']["State"]." ".$pd_detail['Location']["Postcode"].'" allowfullscreen>
 </iframe>';
    
 }
@@ -742,16 +651,16 @@
 					<div class="col-lg-9">
 					<?php if(isset($userInfo)): ?>
 					   <select class="form-control" id="Job1" name="Job" required>
-							 <option value=""  <?php if (empty($userInfo['Job'])) echo "selected='selected'";?> disabled>Please select</option> 
-                              <option value="Physiotherapist" <?php if ($userInfo['Job'] == "Physiotherapist") echo "selected='selected'";?>>Physiotherapist</option>
-							  <option value="Osteopath" <?php if ($userInfo['Job'] == "Osteopath") echo "selected='selected'";?>>Osteopath</option>
-							  <option value="Occupational therapist" <?php if ($userInfo['Job'] == "Occupational therapist") echo "selected='selected'";?>>Occupational therapist</option>
-							  <option value="Chiropractor" <?php if ($userInfo['Job'] == "Chiropractor") echo "selected='selected'";?>>Chiropractor</option>
-							  <option value="Massage therapist" <?php if ($userInfo['Job'] == "Massage therapist") echo "selected='selected'";?>>Massage therapist</option>
-							  <option value="Exercise physiologist" <?php if ($userInfo['Job'] == "Exercise physiologist") echo "selected='selected'";?>>Exercise physiologist</option>
-							  <option value="GP/Doctor" <?php if ($userInfo['Job'] == "GP/Doctor") echo "selected='selected'";?>>GP/Doctor</option>
-							  <option value="Podiatrist" <?php if ($userInfo['Job'] == "Podiatrist") echo "selected='selected'";?>>Podiatrist</option>
-							  <option value="other" <?php if ($userInfo['Job'] == "other") echo "selected='selected'";?>>Other, please specify</option>
+							 <option value=""  <?php if (empty($Job)) echo "selected='selected'";?> disabled>Please select</option> 
+                              <option value="Physiotherapist" <?php if ($Job == "Physiotherapist") echo "selected='selected'";?>>Physiotherapist</option>
+							  <option value="Osteopath" <?php if ($Job == "Osteopath") echo "selected='selected'";?>>Osteopath</option>
+							  <option value="Occupational therapist" <?php if ($Job == "Occupational therapist") echo "selected='selected'";?>>Occupational therapist</option>
+							  <option value="Chiropractor" <?php if ($Job == "Chiropractor") echo "selected='selected'";?>>Chiropractor</option>
+							  <option value="Massage therapist" <?php if ($Job == "Massage therapist") echo "selected='selected'";?>>Massage therapist</option>
+							  <option value="Exercise physiologist" <?php if ($Job == "Exercise physiologist") echo "selected='selected'";?>>Exercise physiologist</option>
+							  <option value="GP/Doctor" <?php if ($Job == "GP/Doctor") echo "selected='selected'";?>>GP/Doctor</option>
+							  <option value="Podiatrist" <?php if ($Job == "Podiatrist") echo "selected='selected'";?>>Podiatrist</option>
+							  <option value="other" <?php if ($Job == "other") echo "selected='selected'";?>>Other, please specify</option>
 				      </select>
 					  <?php endif;?>
 					</div>
