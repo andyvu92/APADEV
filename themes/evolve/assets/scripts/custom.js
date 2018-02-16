@@ -108,7 +108,7 @@ jQuery(document).ready(function($) {
 		$('#downt3').show(700);*/
 	});
 								  
-     $('#block-block-216 input[type="checkbox"]').click(function(){
+    $('#block-block-216 input[type="checkbox"]').click(function(){
          if($(this).is(":checked")){
             $(this).attr('checked', true);
            $(this).val('1');
@@ -119,7 +119,7 @@ jQuery(document).ready(function($) {
           $(this).val('0');
          }
 
-       });
+    });
 	  $('#block-block-245 input[type="checkbox"]').click(function(){
          if($(this).is(":checked")){
             $(this).attr('checked', true);
@@ -136,47 +136,47 @@ jQuery(document).ready(function($) {
 		 {
 			 $('#insuranceMore').removeClass("display-none");
 		 }
-       });
+    });
 	  $('#recent-purchases').click(function(){
-		 $('#all-purchases').removeClass("text-underline");
-		 $('#recent-purchases').addClass("text-underline");
+		$('#all-purchases').removeClass("text-underline");
+		$('#recent-purchases').addClass("text-underline");
 		  
-	  });
+	});
       $('#all-purchases').click(function(){
-		 $('#recent-purchases').removeClass("text-underline");
-		 $('#all-purchases').addClass("text-underline");
-	  });
-	   $('#change-password').click(function(){
+		$('#recent-purchases').removeClass("text-underline");
+		$('#all-purchases').addClass("text-underline");
+	});
+	  $('#change-password').click(function(){
 		
-		 $('#your-details-button').addClass("display-none");
-	  });
+		$('#your-details-button').addClass("display-none");
+	});
 	  $('#yourdetails-tab, #membership, #payment, #workplace, #education').click(function(){
 		  
-		 $('#your-details-button').removeClass("display-none");
-	  });
+		$('#your-details-button').removeClass("display-none");
+	});
 	  $('#Creditcard').click(function(){
-     $('#card_type_display').removeClass('display-none');
-     $('#Name-on-card').removeClass('display-none');
-     $('#Cardno').removeClass('display-none');
-     $('#Card-details').removeClass('display-none');
-     $('#Card-account').addClass('display-none');
+        $('#card_type_display').removeClass('display-none');
+        $('#Name-on-card').removeClass('display-none');
+        $('#Cardno').removeClass('display-none');
+        $('#Card-details').removeClass('display-none');
+        $('#Card-account').addClass('display-none');
    
-});
-$('#Debitcard').click(function(){
-     $('#card_type_display').removeClass('display-none');
-     $('#Name-on-card').removeClass('display-none');
-     $('#Cardno').removeClass('display-none');
-     $('#Card-account').removeClass('display-none');
-     $('#Card-details').addClass('display-none');
-}); 
+    });
+    $('#Debitcard').click(function(){
+       $('#card_type_display').removeClass('display-none');
+       $('#Name-on-card').removeClass('display-none');
+	   $('#Cardno').removeClass('display-none');
+	   $('#Card-account').removeClass('display-none');
+	   $('#Card-details').addClass('display-none');
+    }); 
 	$('#Paypal').click(function(){
      $('#card_type_display').addClass('display-none');
      $('#Name-on-card').addClass('display-none');
      $('#Cardno').addClass('display-none');
      $('#Card-account').addClass('display-none');
      $('#Card-details').addClass('display-none');
-});  
-      $('#Shipping-address').click(function(){
+    });  
+    $('#Shipping-address').click(function(){
         if($(this).is(":checked")){
             $(this).attr('checked', true);
             $('#Shipping-unitno').val($('#Billing-unitno').val());
@@ -200,53 +200,102 @@ $('#Debitcard').click(function(){
          $('#Shipping-country').val('');
          
          }
-       }); 
-	   $('[id^=Job]').change(function(){
+    }); 
+	$('#Shipping-address-join').click(function(){
+           if($(this).is(":checked")){
+			$('#shippingAddress').addClass('shipping');  
+            $(this).attr('checked', true);
+            $('#Shipping-unitno').val($('#Unit').val());
+            $('#Shipping-streetname').val($('#Street').val());
+            $('#Shipping-city-town').val($('#Suburb').val());
+            
+            $('#Shipping-postcode').val($('#Postcode').val());
+            $('#Shipping-state').val($('#State').val());
+            $('#Shipping-country').val($('#Country').val());
+            
+			
+         }
+         else{
+          
+          $(this).removeAttr('checked');
+		  $(this).val('0');
+		  $('#shippingAddress').removeClass('shipping');
+		  $('#dashboard-right-content').addClass("autoscroll");
+          $('#Shipping-unitno').val('');
+         $('#Shipping-streetname').val('');
+         $('#Shipping-city-town').val('');
+     
+         $('#Shipping-postcode').val('');
+         $('#Shipping-state').val('');
+         $('#Shipping-country').val('');
+         
+         }
+    }); 
+	$('[id^=Job]').change(function(){
+	    if(($('select[name=Job]').val()!="Physiotherapist")){
+			$( "#jobnoticement" ).dialog();
+		}
 		   
-		   if(($('select[name=Job]').val()!="Physiotherapist")){
-			    $( "#jobnoticement" ).dialog();
-		   }
-		   
-	   });
-	      $('#addPaymentCard').click(function(){
-		    $( "#addPaymentCardForm" ).dialog();
-	   }); 
+	});
+	$('#addPaymentCard').click(function(){
+		$( "#addPaymentCardForm" ).dialog();
+    }); 
 	    
-	   $('.deletecardbutton').click(function(){
-		    $( "#deleteCardWindow" ).dialog();
-	   }); 
-	   $('.cancelDeleteButton').click(function() {
-            $('#deleteCardWindow').dialog('close');
-        });
-	   $('#registerPDUserButton').click(function(){
-		 $( "#registerPDUser" ).dialog();
-		  });
-	   $('#createAccount').click(function(){
-		 $( "#registerMember" ).dialog();
-		});
-	   $('#login').click(function(){
-		 $( "#loginPopWindow" ).dialog();
-		 });
-	    $('#viewMap').click(function(){
-		 $( "#myMap" ).dialog();
-	   });
-	    $('#privacypolicyl').click(function(){
-		 $( "#privacypolicyWindow" ).dialog();
-	   });
-	     $('#instalmentpolicyl').click(function(){
-		 $( "#installmentpolicyWindow" ).dialog();
-	   });
-	    $('[id=Nationalgp]').change(function(){
-		   
-		   if(($('select[name=Nationalgp]').val()=="258-SPA")){
-			    $( "#ngsports" ).removeClass('display-none');
-				$( "#ngmusculo" ).addClass('display-none');
+	$('.deletecardbutton').click(function(){
+		$( "#deleteCardWindow" ).dialog();
+	}); 
+	$('.cancelDeleteButton').click(function() {
+        $('#deleteCardWindow').dialog('close');
+    });
+	$('#registerPDUserButton').click(function(){
+		$( "#registerPDUser" ).dialog();
+    });
+	$('#createAccount').click(function(){
+		$( "#registerMember" ).dialog();
+    });
+	$('#login').click(function(){
+		$( "#loginPopWindow" ).dialog();
+	});
+	$('#viewMap').click(function(){
+		$( "#myMap" ).dialog();
+	});
+	$('#privacypolicyl').click(function(){
+		$( "#privacypolicyWindow" ).dialog();
+	});
+	$('#instalmentpolicyl').click(function(){
+		$( "#installmentpolicyWindow" ).dialog();
+	});
+	$('[id=Nationalgp]').change(function(){
+	    if(($('select[name=Nationalgp]').val()=="258-SPA")){
+			$( "#ngsports" ).removeClass('display-none');
+		    $( "#ngmusculo" ).addClass('display-none');}
+		if(($('select[name=Nationalgp]').val()=="254-MPA")){
+			$( "#ngmusculo" ).removeClass('display-none');
+		    $( "#ngsports" ).addClass('display-none');
 		   }
-		   if(($('select[name=Nationalgp]').val()=="254-MPA")){
-			    $( "#ngmusculo" ).removeClass('display-none');
-				$( "#ngsports" ).addClass('display-none');
-		   }
-	   }); 
+	}); 
+	$('[id=Undergraduate-university-name]').change(function(){
+	    if(($('select[name=Undergraduate-university-name]').val()=="Other")){
+			$( "#Undergraduate-university-name-other" ).removeClass('display-none');
+		}
+		else{
+			$( "#Undergraduate-university-name-other" ).addClass('display-none');
+		}
+	}); 
+	$('[id=Postgraduate-university-name]').change(function(){
+	    if(($('select[name=Postgraduate-university-name]').val()=="Other")){
+			$( "#Postgraduate-university-name-other" ).removeClass('display-none');
+		}
+		else{
+			$( "#Postgraduate-university-name-other" ).addClass('display-none');
+		}
+	}); 
+	$('.add-additional-qualification').click(function(){
+        var number = Number($('#addtionalNumber').val());
+        $('div[id="additional-qualifications-block"]').append('<input type="text" class="form-control" name="Additional-qualifications'+ number +'" id="Additional-qualifications'+ number +'">');
+     	var i = Number(number +1);
+		$('input[name=addtionalNumber]').val(i);
+    });
 	 
 });
 

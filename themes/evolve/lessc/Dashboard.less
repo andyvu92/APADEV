@@ -446,7 +446,7 @@ a[class^="your-details-prevbutton"]{
    height:890px;
 }
 #block-block-245 #dashboard-right-content{
-   height:913px;
+   height:963px;
 }
 #block-block-220 input[type="text"]{
    padding:0;
@@ -523,26 +523,47 @@ a[class^="your-details-prevbutton"]{
 	
     padding-left: 50px;
 }
-.down10 .panel{
+.down10 .panel, .down3 .panel{
     background-color: transparent!important;
 }
-.down10 .panel-group .panel-heading+.panel-collapse .panel-body{
+.down10 .panel-group .panel-heading+.panel-collapse .panel-body, .down3 .panel-group .panel-heading+.panel-collapse .panel-body{
     border-top:none!important;
 }
-.down10 .panel-group .in{
+.down10 .panel-group .in, .down3 .panel-group .in{
     border-right:none!important;
 	border-left:none!important;
 }
-.down10 .panel-body{
+.down10 .panel-body, .down3 .panel-body{
     padding-left: 0px!important;
 	padding-bottom:0px!important;
 }
-.add-workplace{
+a.add-workplace-join{
+    margin-bottom: 10px;
+}
+input[id^="Additional-qualifications"] {
+    margin-left: -15px;
+    margin-bottom: 15px;
+}
+a.add-additional-qualification {
+    float: right;
+    margin-bottom: 16px;
+    margin-right: -9%;
+    margin-top: 4px;
+    background-color: #009fda;
+    border-width: 0px !important;
+    width: 182px;
+    height: 30px;
+}
+.add-workplace, .add-workplace-join{
     float:right;
 	background-color:#009fda;
 	padding: 3px;
     margin-top: -9px;
     margin-bottom: -2px;
+}
+.inactiveLink {
+   pointer-events: none;
+   cursor: default;
 }
 #wpnumber{
     display:none;
