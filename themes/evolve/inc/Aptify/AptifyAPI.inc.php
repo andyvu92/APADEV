@@ -434,7 +434,82 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />19. Dashbaord - Get list of National Group: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			if(count($variables) == 1) {
+				// When this web service is triggered to get
+				// National Group list only
+				$JSONreturn = '{ 
+					"NationalGroup": [
+						{ "NGid": "ACU",
+						"NGtitle": "Acupuncture and dry needling",
+						"NGprice": "50" },
+						{ "NGid": "ANI",
+						"NGtitle": "Animal",
+						"NGprice": "49" },
+						{ "NGid": "AQU",
+						"NGtitle": "Aquatic",
+						"NGprice": "48" },
+						{ "NGid": "BUS",
+						"NGtitle": "Business",
+						"NGprice": "47" },
+						{ "NGid": "CAN",
+						"NGtitle": "Cancer, palliative care and lymphoedema",
+						"NGprice": "46" },
+						{ "NGid": "CAR",
+						"NGtitle": "Cardiorespiratory",
+						"NGprice": "45" },
+						{ "NGid": "DIS",
+						"NGtitle": "Disability",
+						"NGprice": "44" },
+						{ "NGid": "EDU",
+						"NGtitle": "Educators",
+						"NGprice": "43" },
+						{ "NGid": "EME",
+						"NGtitle": "Emergency department",
+						"NGprice": "42" },
+						{ "NGid": "GER",
+						"NGtitle": "Gerontology",
+						"NGprice": "41" },
+						{ "NGid": "LEA",
+						"NGtitle": "Leadership and management",
+						"NGprice": "40" },
+						{ "NGid": "MEN",
+						"NGtitle": "Mental health",
+						"NGprice": "39" },
+						{ "NGid": "MUS",
+						"NGtitle": "Musculoskeletal",
+						"NGprice": "38" },
+						{ "NGid": "NEU",
+						"NGtitle": "Neurology",
+						"NGprice": "37" },
+						{ "NGid": "OCC",
+						"NGtitle": "Occupational health",
+						"NGprice": "36" },
+						{ "NGid": "ORT",
+						"NGtitle": "Orthopaedic",
+						"NGprice": "35" },
+						{ "NGid": "PAE",
+						"NGtitle": "Paediatric",
+						"NGprice": "34" },
+						{ "NGid": "PAI",
+						"NGtitle": "Pain",
+						"NGprice": "33" },
+						{ "NGid": "RUR",
+						"NGtitle": "Rural",
+						"NGprice": "32" },
+						{ "NGid": "SPO",
+						"NGtitle": "Sprots",
+						"NGprice": "31" },
+						{ "NGid": "STU",
+						"NGtitle": "Student",
+						"NGprice": "30" },
+						{ "NGid": "WOM",
+						"NGtitle": "Women\'s, men\'s and pelvic health",
+						"NGprice": "29" }
+					]
+				}';
+			} else {
+				$JSONreturn = "";
+			}
 			return $JSONreturn;
 		case "20":
 			// For the actual API use
@@ -515,7 +590,439 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />28. PD - Get event search result list: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			if($variables["PageSize"] == 5 && $variables["PageNumber"] == 1) {
+				$JSONreturn = '{  
+					"PDcount":"12",
+					"Results": [
+					{ 
+						"Id":"1",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Sports Physiotherapy Level2",
+						"Type":"Lecutre",
+						"CPD":"2",
+						"City":"Melbourne",
+						"State":"VIC",
+						"Begindate":"13/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {  
+						"Id":"2",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Pregancy and Postpartum:Clinical Highlights",
+						"Type":"Online",
+						"CPD":"2",
+						"City":"Camberwell",
+						"State":"VIC",
+						"Begindate":"10/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {  
+						"Id":"3",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Sports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"1/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {  
+						"Id":"4",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Pregancy and Postpartum:Clinical Highlights",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"9/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"4"
+					}, {  
+						"Id":"5",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"9/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					} ]
+				}';
+			} elseif($variables["PageSize"] == 5 && $variables["PageNumber"] == 2) {
+				$JSONreturn = '{  
+					"PDcount":"12",
+					"Results": [
+					{  
+						"Id":"6",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"9/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					}, {  
+						"Id":"7",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"9/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {  
+						"Id":"8",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"2/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					}, {  
+						"Id":"9",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"2/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					}, {  
+						"Id":"10",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"3/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					} ]
+				}';
+			} elseif($variables["PageSize"] == 5 && $variables["PageNumber"] == 3) {
+				$JSONreturn = '{  
+					"PDcount":"12",
+					"Results": [
+					{  
+						"Id":"11",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"5/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					}, {
+						"Id":"12",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"4/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					} ]
+				}';
+			} elseif($variables["PageSize"] == 10 && $variables["PageNumber"] == 1) {
+				$JSONreturn = '{  
+					"PDcount":"12",
+					"Results": [
+					{ 
+						"Id":"1",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Sports Physiotherapy Level2",
+						"Type":"Lecutre",
+						"CPD":"2",
+						"City":"Melbourne",
+						"State":"VIC",
+						"Begindate":"13/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {  
+						"Id":"2",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Pregancy and Postpartum:Clinical Highlights",
+						"Type":"Online",
+						"CPD":"2",
+						"City":"Camberwell",
+						"State":"VIC",
+						"Begindate":"10/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {  
+						"Id":"3",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Sports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"1/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {
+						"Id":"4",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Pregancy and Postpartum:Clinical Highlights",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"9/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"4"
+					}, {  
+						"Id":"5",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"9/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {  
+						"Id":"6",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"9/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					}, {
+						"Id":"7",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"9/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {
+						"Id":"8",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"2/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					}, {
+						"Id":"9",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"2/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					}, {
+						"Id":"10",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"3/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					} ]
+				}';
+			} elseif($variables["PageSize"] == 10 && $variables["PageNumber"] == 2) {
+				$JSONreturn = '{  
+					"PDcount":"12",
+					"Results": [
+					{  
+						"Id":"11",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"5/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					}, {
+						"Id":"12",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"4/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					} ]
+				}';
+			} else {
+				$JSONreturn = '{  
+					"PDcount":"12",
+					"Results": [
+					{ 
+						"Id":"1",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Sports Physiotherapy Level2",
+						"Type":"Lecutre",
+						"CPD":"2",
+						"City":"Melbourne",
+						"State":"VIC",
+						"Begindate":"13/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {
+						"Id":"2",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Pregancy and Postpartum:Clinical Highlights",
+						"Type":"Online",
+						"CPD":"2",
+						"City":"Camberwell",
+						"State":"VIC",
+						"Begindate":"10/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {  
+						"Id":"3",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Sports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"1/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {  
+						"Id":"4",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Pregancy and Postpartum:Clinical Highlights",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"9/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"4"
+					}, {  
+						"Id":"5",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"9/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {  
+						"Id":"6",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"9/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					}, {  
+						"Id":"7",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"9/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {  
+						"Id":"8",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"2/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					}, {  
+						"Id":"9",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"2/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					}, {  
+						"Id":"10",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"3/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"2"
+					}, {  
+						"Id":"11",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"5/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					}, {  
+						"Id":"12",
+						"Summary":"Best practice requires advanced skills in diagnoses",
+						"Title":"Aports Physiotherapy Level 2",
+						"Type":"Lecture",
+						"CPD":"2",
+						"City":"Ringwood",
+						"State":"VIC",
+						"Begindate":"4/12/2017",
+						"Enddate":"12/12/2018",
+						"Eventstatus":"3"
+					} ]
+				}';
+			}
 			return $JSONreturn;
 		case "29":
 			// For the actual API use
