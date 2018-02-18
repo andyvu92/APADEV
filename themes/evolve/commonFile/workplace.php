@@ -1,6 +1,8 @@
 <?php 
 
 $i = $_POST['count'];
+$sessionWorkplaceSetting = json_decode($_POST['sessionWorkplaceSetting']);
+$sessioninterestAreas = json_decode($_POST['sessioninterestAreas']);
 
 
  
@@ -18,45 +20,14 @@ $i = $_POST['count'];
                         Workplace setting
                      </div>
                      <div class="col-lg-9">
-                        <select class="form-control" id="Workplace-setting'.$i.'" name="workplace-setting'.$i.'">
-                          
-						   ';
-                          $workplace_json='{ 
-							   "0": {
-								   "name":"Aboriginal health services",
-								   "code":"Aboriginal-health-services"
-									},
-								"1":{
-									"name":"Defence forces",
-								    "code":"Defence-forces"
-								   },
-								 "3":{
-									"name":"Domiciliary services",
-								    "code":"Domiciliary-services"
-								 },
-								 "4":{
-									"name":"Education facility",
-								    "code":"Education-facility"
-								 },
-								 "5":{
-									"name":"Group private practice",
-								    "code":"Group-private-practice"
-								 },
-								 "6":{
-									"name":"Hospital(exclude outpatient)",
-								    "code":"Hospital"
-								 },
-								 "7":{
-									"name":"Locum private practice",
-								    "code":"Locum-private-practice"
-								 }
-							   
-							 }';
-							 $workplaceSettings = json_decode($workplace_json, true);
-							 foreach($workplaceSettings  as $key => $value){
-								echo '<option value="'.$workplaceSettings[$key]['code'].'">'.$workplaceSettings[$key]['name'].'</option>';
+                        <select class="form-control" id="Workplace-setting'.$i.'" name="workplace-setting'.$i.'">';
+                         
+							 $workplaceSettings = $sessionWorkplaceSetting;
+							 
+							foreach($workplaceSettings  as $key => $object){
+								echo '<option value="'.$object->code.'">'.$object->name.'</option>';
 								 
-							 }
+							}
                    echo     '</select>
                      </div>
                    </div>
@@ -258,42 +229,11 @@ $i = $_POST['count'];
 					   
                         <select class="chosen-select" id="interest-area'.$i.'" name="interest-area'.$i.'[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">';
 						  
-						    // get interest area list from Aptify via webserice return Json data;
-							$interestarea_json='{ 
-							   "0": {
-								   "ListName":"Acupuncture and dry needling",
-								   "ListCode":"ACU"
-									},
-								"1":{
-									"ListName":"Adolescents",
-								    "ListCode":"ADO"
-								   },
-								 "3":{
-									"ListName":"Aging well",
-								    "ListCode":"AGE"
-								 },
-								 "4":{
-									"ListName":"Amputees",
-								    "ListCode":"AMP"
-								 },
-								 "5":{
-									"ListName":"Arthritis",
-								    "ListCode":"ART"
-								 },
-								 "6":{
-									"ListName":"Babies and children",
-								    "ListCode":"CHILD"
-								 },
-								 "7":{
-									"ListName":"Back and neck",
-								    "ListCode":"BAN"
-								 }
-							   
-							 }';
-							 $interestAreas = json_decode($interestarea_json, true);
+						  
+							$interestAreas= $sessioninterestAreas;
 						
 						     foreach($interestAreas  as $key => $value){
-								echo '<option value="'.$interestAreas[$key]['ListCode'].'">'.$interestAreas[$key]['ListName'].'</option>';
+								echo '<option value="'.$value->ListCode.'">'.$value->ListName.'</option>';
 								 
 							 }
 						   
@@ -306,8 +246,7 @@ $i = $_POST['count'];
 
 
 
-
-
+	
 
                
 

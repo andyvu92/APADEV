@@ -1310,6 +1310,84 @@ function AptifyAPI($APItype, $variables){
 			// Add JSON sample here
 			$JSONreturn = "";
 			return $JSONreturn;
+		case "36":
+			// For the actual API use
+			// $API = "";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />36. Get workplace settings list <br />";
+			// Add JSON sample here
+			$JSONreturn = '{ 
+				   "0": {
+					   "name":"Aboriginal health services",
+					   "code":"Aboriginal-health-services"
+						},
+					"1":{
+						"name":"Defence forces",
+						"code":"Defence-forces"
+					   },
+					 "2":{
+						"name":"Domiciliary services",
+						"code":"Domiciliary-services"
+					 },
+					 "3":{
+						"name":"Education facility",
+						"code":"Education-facility"
+					 },
+					 "4":{
+						"name":"Group private practice",
+						"code":"Group-private-practice"
+					 },
+					 "5":{
+						"name":"Hospital(exclude outpatient)",
+						"code":"Hospital"
+					 },
+					 "6":{
+						"name":"Locum private practice",
+						"code":"Locum-private-practice"
+					 }
+							   
+							 }';
+			return $JSONreturn;	
+		case "37":
+			// For the actual API use
+			// $API = "";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />37. Get special interest area list <br />";
+			// Add JSON sample here
+			$JSONreturn = '{ 
+							   "0": {
+								   "ListName":"Acupuncture and dry needling",
+								   "ListCode":"ACU"
+									},
+								"1":{
+									"ListName":"Adolescents",
+								    "ListCode":"ADO"
+								   },
+								 "3":{
+									"ListName":"Aging well",
+								    "ListCode":"AGE"
+								 },
+								 "4":{
+									"ListName":"Amputees",
+								    "ListCode":"AMP"
+								 },
+								 "5":{
+									"ListName":"Arthritis",
+								    "ListCode":"ART"
+								 },
+								 "6":{
+									"ListName":"Babies and children",
+								    "ListCode":"CHILD"
+								 },
+								 "7":{
+									"ListName":"Back and neck",
+								    "ListCode":"BAN"
+								 }
+							   
+							 }';
+			return $JSONreturn;
 	}
 }
 ?>
