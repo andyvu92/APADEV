@@ -434,7 +434,93 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />19. Dashbaord - Get list of National Group: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = '{ 
+				   "0": {
+					   "NGid":"250-ACG",
+					   "NGtitle":"Acupuncture and dry needling"
+						},
+					"1":{
+						"NGid":"202-APG",
+						"NGtitle":"Animal"
+					   },
+					 "3":{
+						"NGid":"200-AG",
+						"NGtitle":"Aquatic"
+					 },
+					 "4":{
+						"NGid":"262-PBA-BA",
+						"NGtitle":"Business - Affiliate"
+					 },
+					 "5":{
+						"NGid":"262-PBA-PP",
+						"NGtitle":"Business – Premium principal"
+					 },
+					 "6":{
+						"NGid":"410-ON",
+						"NGtitle":"Cancer, palliative care and lymphoedema"
+					 },
+					 "7":{
+						"NGid":"208-CRP",
+						"NGtitle":"Cardiorespiratory"
+					 },
+					 "8":{
+						"NGid":"422-DA",
+						"NGtitle":"Disability"
+					 },
+					 "9":{
+						"NGid":"214-EDU",
+						"NGtitle":"Educators"
+					 },
+					 "10":{
+						"NGid":"405-ED",
+						"NGtitle":"Emergency department"
+					 },
+					 "11":{
+						"NGid":"216-GG",
+						"NGtitle":"Gerontology"
+					 },
+					 "12":{
+						"NGid":"226-PLM",
+						"NGtitle":"Leadership and management"
+					 },
+					 "13":{
+						"NGid":"420-MH",
+						"NGtitle":"Mental health"
+					 },
+					 "14":{
+						"NGid":"254-MPA",
+						"NGtitle":"Musculoskeletal"
+					 },
+					 "15":{
+						"NGid":"220-NG",
+						"NGtitle":"Neurology"
+					 },
+					 "16":{
+						"NGid":"222-OHP",
+						"NGtitle":"Occupational health"
+					 },
+					 "17":{
+						"NGid":"400-OG",
+						"NGtitle":"Orthopaedic"
+					 },
+					 "18":{
+						"NGid":"224-PDG",
+						"NGtitle":"Paediatric"
+					 },
+					 "19":{
+						"NGid":"415-PN",
+						"NGtitle":"Pain"
+					 },
+					 "20":{
+						"NGid":"258-SPA",
+						"NGtitle":"Sports"
+					 },
+					 "21":{
+						"NGid":"212-CWH",
+						"NGtitle":"Women’s, men’s and pelvic health"
+					 }
+				   
+			}';
 			return $JSONreturn;
 		case "20":
 			// For the actual API use
@@ -802,6 +888,84 @@ function AptifyAPI($APItype, $variables){
 			echo "<br />35. Find a Physio data: <br />";
 			// Add JSON sample here
 			$JSONreturn = "";
+			return $JSONreturn;
+		case "36":
+			// For the actual API use
+			// $API = "";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />36. Get workplace settings list <br />";
+			// Add JSON sample here
+			$JSONreturn = '{ 
+				   "0": {
+					   "name":"Aboriginal health services",
+					   "code":"Aboriginal-health-services"
+						},
+					"1":{
+						"name":"Defence forces",
+						"code":"Defence-forces"
+					   },
+					 "2":{
+						"name":"Domiciliary services",
+						"code":"Domiciliary-services"
+					 },
+					 "3":{
+						"name":"Education facility",
+						"code":"Education-facility"
+					 },
+					 "4":{
+						"name":"Group private practice",
+						"code":"Group-private-practice"
+					 },
+					 "5":{
+						"name":"Hospital(exclude outpatient)",
+						"code":"Hospital"
+					 },
+					 "6":{
+						"name":"Locum private practice",
+						"code":"Locum-private-practice"
+					 }
+							   
+							 }';
+			return $JSONreturn;	
+		case "37":
+			// For the actual API use
+			// $API = "";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />37. Get special interest area list <br />";
+			// Add JSON sample here
+			$JSONreturn = '{ 
+							   "0": {
+								   "ListName":"Acupuncture and dry needling",
+								   "ListCode":"ACU"
+									},
+								"1":{
+									"ListName":"Adolescents",
+								    "ListCode":"ADO"
+								   },
+								 "3":{
+									"ListName":"Aging well",
+								    "ListCode":"AGE"
+								 },
+								 "4":{
+									"ListName":"Amputees",
+								    "ListCode":"AMP"
+								 },
+								 "5":{
+									"ListName":"Arthritis",
+								    "ListCode":"ART"
+								 },
+								 "6":{
+									"ListName":"Babies and children",
+								    "ListCode":"CHILD"
+								 },
+								 "7":{
+									"ListName":"Back and neck",
+								    "ListCode":"BAN"
+								 }
+							   
+							 }';
 			return $JSONreturn;
 	}
 }
