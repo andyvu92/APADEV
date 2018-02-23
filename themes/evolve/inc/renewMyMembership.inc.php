@@ -1,16 +1,105 @@
 
 <?php
  include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
-  
+        
    ?>
+<div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 dashboard-left-nav">
+   <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#dashboard-navbar-collapse-1"><i class="fa fa-align-justify"></i></a>
+   <!----edit-->
+   <div class="collapse" id="dashboard-navbar-collapse-1">
+      <table class="table table-responsive">
+         <tbody style="border-top: none;">
+            <tr>
+               <td>
+                  <a href="dashboard">
+                     <div class="dashboard-icon">[icon class="fa fa-tachometer fa-3x" link=""][/icon]</div>
+                     <br/>
+                     <div class="dashboard-button-name">Dashboard</div>
+                  </a>
+               </td>
+               <td>
+                  <a href="your-details">
+                     <div class="dashboard-icon">[icon class="fa fa-users fa-3x" link=""][/icon]</div>
+                     <br/>
+                     <div class="dashboard-button-name">Your details</div>
+                  </a>
+               </td>
+            </tr>
+            <tr>
+               <td>
+                  <a href="your-purchases">
+                     <div class="dashboard-icon">[icon class="fa fa-shopping-cart fa-3x" link=""][/icon]</div>
+                     <br/>
+                     <div class="dashboard-button-name">Purchases</div>
+                  </a>
+               </td>
+               <td>
+                  <a href="subscriptions">
+                     <div class="dashboard-icon">[icon class="fa fa-trophy fa-3x" link=""][/icon]</div>
+                     <br/>
+                     <div class="dashboard-button-name">Subscriptions</div>
+                  </a>
+               </td>
+               <td>
+                  <a href="#about">
+                     <div class="dashboard-icon">[icon class="fa fa-folder-open fa-3x" link=""][/icon]</div>
+                     <br/>
+                     <div class="dashboard-button-name">Renew</div>
+                  </a>
+               </td>
+            </tr>
+         </tbody>
+      </table>
+   </div>
+   <!---end--->
+   <div class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-left">
+         <li class="dashboard-nav">
+            <a href="dashboard">
+               <div class="dashboard-icon">[icon class="fa fa-tachometer fa-3x" link=""][/icon]</div>
+               <br/>
+               <div class="dashboard-button-name">Dashboard</div>
+            </a>
+         </li>
+         <li class="dashboard-nav">
+            <a href="your-details">
+               <div class="dashboard-icon">[icon class="fa fa-users fa-3x" link=""][/icon]</div>
+               <br/>
+               <div class="dashboard-button-name">Account</div>
+            </a>
+         </li>
+         <li class="dashboard-nav">
+            <a href="your-purchases">
+               <div class="dashboard-icon">[icon class="fa fa-shopping-cart fa-3x" link=""][/icon]</div>
+               <br/>
+               <div class="dashboard-button-name">Purchases</div>
+            </a>
+         </li>
+         <li class="dashboard-nav">
+            <a href="subscriptions">
+               <div class="dashboard-icon">[icon class="fa fa-trophy fa-3x" link=""][/icon]</div>
+               <br/>
+               <div class="dashboard-button-name">Subscriptions</div>
+            </a>
+         </li>
+         <li class="dashboard-nav">
+            <a href="#about">
+               <div class="dashboard-icon">[icon class="fa fa-folder-open fa-3x" link=""][/icon]</div>
+               <br/>
+               <div class="dashboard-button-name">Renew</div>
+            </a>
+         </li>
+      </ul>
+   </div>
+</div >
 <div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
 
 
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 background_<?php echo $user['background']; if(isset($_SESSION["userID"])){ echo " autoscroll";} ?> " id="dashboard-right-content">
+<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $user['background']; ?> autoscroll" id="dashboard-right-content">
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Become a member</strong></span></div>
-         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background <?php if(!isset($_SESSION["userID"])) echo "display-none";?>">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
+         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Renew my membership</strong></span></div>
+         <!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background <?php if(!isset($_SESSION["userID"])) echo "display-none";?>">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>-->
       </div>
       <!-- Modal -->
   <div id="myModal" class="modal fade" role="dialog">
@@ -65,19 +154,19 @@
                
                <li><a class="tabtitle3 inactiveLink" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li>
                <li><a class="tabtitle4 inactiveLink" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
-               <li><a class="tabtitle5 inactiveLink" style="cursor: pointer;"><span class="eventtitle5 <?php if(isset($_POST['step1']))echo 'text-underline';?>" id="Insurance"><strong>Insurance</strong></span></a></li>
-			   <li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6" id="Survey"><strong>Survey</strong></span></a></li>
-			   <li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7" id="Payment"><strong>Payment</strong></span></a></li>
-			   <li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 <?php if(isset($_POST['step2']) || isset($_POST['step3']) )echo 'text-underline';?>" id="Review"><strong>Review</strong></span></a></li>
+               <li><a class="tabtitle5 inactiveLink" style="cursor: pointer;"><span class="eventtitle5 <?php if(isset($_POST['step1']))echo 'text-underline';?>" id="payment"><strong>Insurance</strong></span></a></li>
+			   <li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6" id="payment"><strong>Survey</strong></span></a></li>
+			   <li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7" id="payment"><strong>Payment</strong></span></a></li>
+			   <li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8" id="payment"><strong>Review</strong></span></a></li>
 			</ul>
    
    <?php
-        include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-yourdetail.inc.php');
-        if(isset($_POST["step1"]) && $_POST["step1"] == "1") {
-	    include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-insurancesurvey.inc.php'); 
-        } elseif(isset($_POST["step2"]) && $_POST["step2"] == "2") {
-	    include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-final.inc.php');
-        } 
+ include('sites/all/themes/evolve/inc/renewMyMembership/renew-yourdetail.inc.php');
+ if(isset($_POST["step1"]) && $_POST["step1"] == "1") {
+	include('sites/all/themes/evolve/inc/renewMyMembership/renew-insurancesurvey.inc.php'); 
+ } elseif(isset($_POST["step2"]) && $_POST["step2"] == "2") {
+	include('sites/all/themes/evolve/inc/renewMyMembership/renew-final.inc.php');
+ }
   ?>
   
       </div>

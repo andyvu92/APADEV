@@ -30,12 +30,12 @@ jQuery(document).ready(function($) {
 		
         var i = Number($(this).attr("class").replace('join-details-button', ''));
 		var x = Number(i + 1);
-		var validateFun = function(){
-			if($("#Prefix").val() ==''){alert("please fill out all required fields *"); return false;} 
+		//var validateFun = function(){
+			//if($("#Prefix").val() ==''){alert("please fill out all required fields *"); return false;} 
 			
-		};
+		//};
 	    
-		if(validateFun()==false){return false;}
+		//if(validateFun()==false){return false;}
 		if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
 	    $('[class^=down]:not(.down'+x+')').slideUp(400);
 	    $('.down' + x).slideToggle(450);
@@ -120,7 +120,7 @@ jQuery(document).ready(function($) {
          }
 
     });
-	  $('#block-block-245 input[type="checkbox"]').click(function(){
+	$('#p1-2').click(function(){
          if($(this).is(":checked")){
             $(this).attr('checked', true);
            $(this).val('1');
@@ -132,6 +132,33 @@ jQuery(document).ready(function($) {
           $(this).val('0');
 		  
          }
+		    if($('#p1-2').is(":checked"))
+		 {
+			 $('#rolloverblock').removeClass("display-none");
+		 }
+    });
+	  $('input[type="checkbox"]').click(function(){
+         if($(this).is(":checked")){
+            $(this).attr('checked', true);
+           $(this).val('1');
+		
+		  }
+         else{
+         
+          $(this).removeAttr('checked');
+          $(this).val('0');
+		  
+         }
+		
+    });
+	
+	$('input[type="radio"]').click(function(){
+         if($(this).is(":checked")){
+            $(this).attr('checked', true);
+          }
+         else{
+            $(this).removeAttr('checked');
+            }
 		    if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked") || $('#Oneclaim1').is(":checked"))
 		 {
 			 $('#insuranceMore').removeClass("display-none");
@@ -266,13 +293,20 @@ jQuery(document).ready(function($) {
 		$( "#installmentpolicyWindow" ).dialog();
 	});
 	$('[id=Nationalgp]').change(function(){
-	    if(($('select[name=Nationalgp]').val()=="258-SPA")){
+	    if(jQuery.inArray( "SPO", $('select[id=Nationalgp]').val())!==-1)
+		{
 			$( "#ngsports" ).removeClass('display-none');
-		    $( "#ngmusculo" ).addClass('display-none');}
-		if(($('select[name=Nationalgp]').val()=="254-MPA")){
+		}
+		else{
+			$( "#ngsports" ).addClass('display-none');
+		}
+		if(jQuery.inArray( "MUS", $('select[id=Nationalgp]').val())!==-1)	
+		{
 			$( "#ngmusculo" ).removeClass('display-none');
-		    $( "#ngsports" ).addClass('display-none');
-		   }
+	    }
+		else{
+			$( "#ngmusculo" ).addClass('display-none');
+		}
 	}); 
 	$('[id=Undergraduate-university-name]').change(function(){
 	    if(($('select[name=Undergraduate-university-name]').val()=="Other")){
@@ -296,6 +330,8 @@ jQuery(document).ready(function($) {
      	var i = Number(number +1);
 		$('input[name=addtionalNumber]').val(i);
     });
+	$( "#datepicker" ).datepicker({dateFormat: 'yy'});
+   
 	 
 });
 

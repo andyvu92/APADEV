@@ -24,7 +24,7 @@ $sessioninterestAreas = json_decode($_POST['sessioninterestAreas']);
                          
 							 $workplaceSettings = $sessionWorkplaceSetting;
 							 
-							foreach($workplaceSettings  as $key => $object){
+							foreach($workplaceSettings->WorkplaceSettings  as $key => $object){
 								echo '<option value="'.$object->code.'">'.$object->name.'</option>';
 								 
 							}
@@ -232,10 +232,10 @@ $sessioninterestAreas = json_decode($_POST['sessioninterestAreas']);
 						  
 							$interestAreas= $sessioninterestAreas;
 						
-						     foreach($interestAreas  as $key => $value){
+						     foreach($interestAreas->InterestAreas  as $key => $value){
 								echo '<option value="'.$value->ListCode.'">'.$value->ListName.'</option>';
 								 
-							 }
+							}
 						   
 						  
                    echo     '</select>
@@ -243,10 +243,6 @@ $sessioninterestAreas = json_decode($_POST['sessioninterestAreas']);
                   </div>
                   
   ';
-
-
-
-	
 
                
 
