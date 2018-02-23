@@ -15,7 +15,22 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />1. Dashboard Main: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = '{
+				"Preferred-name":"Mel",
+				"Firstname":"Melanie",
+				"Lastname":"Tannin",
+				"Memberid":"Melanie.tannin@physiotherapy.asn.au",
+				"MemberType":"student",
+				"Status":"Current",
+				"Ahpranumber":"6934395685-1",
+				"Specialty":"FACP",
+				"Officebearer":"NAC Chair",
+				"Yearmembership":"10",
+				"CPD":"15",
+				"PHN":"VIC",
+				"HomeBranch":"home branch",
+				"PreferBranch":"preferred branch"
+			}';
 			return $JSONreturn;
 			break;
 		case "2":
@@ -25,7 +40,9 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />2. Get membership Certificate PDF: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = '{
+				"MembershipCertification":"Membership certificate of currency"
+			}';
 			return $JSONreturn;
 		case "3":
 			// For the actual API use
@@ -34,7 +51,9 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />3. Get membership insurance certificate PDF: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = '{
+				"InsuranceCertification":"Insurance certificate of currency"
+			}';
 			return $JSONreturn;
 		case "4":
 			// For the actual API use
@@ -416,16 +435,60 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />17. Dashboard - Get payment history list: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = '{ 
+				"Product": [
+					{ "Invoice_ID":"7",
+					"Name":"ProductA",
+					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
+					"Price":"8.88",
+					"Date":"12/12/2014"},
+					{ "Invoice_ID":"9",
+					"Name":"ProductB",
+					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
+					"Price":"9.99",
+					"Date":"12/05/2017"},
+					{ "Invoice_ID":"11",
+					"Name":"ProductC",
+					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
+					"Price":"7.77",
+					"Date":"12/12/2016"},
+					{ "Invoice_ID":"15",
+					"Name":"ProductD",
+					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
+					"Price":"7.77",
+					"Date":"12/12/2016"},
+					{ "Invoice_ID":"19",
+					"Name":"ProductE",
+					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
+					"Price":"7.77",
+					"Date":"12/12/2016"},
+					{ "Invoice_ID":"22",
+					"Name":"ProductF",
+					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
+					"Price":"7.77",
+					"Date":"12/12/2016"},
+					{ "Invoice_ID":"27",
+					"Name":"ProductG",
+					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
+					"Price":"7.77",
+					"Date":"12/12/2016"},
+					{ "Invoice_ID":"29",
+					"Name":"ProductH",
+					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
+					"Price":"7.77",
+					"Date":"12/12/2016"}
+				] }';
 			return $JSONreturn;
 		case "18":
 			// For the actual API use
 			// $API = "";
-			echo "Data Sent: <br />";
+			echo "Data Sent: ";
 			print_r($variables);
-			echo "<br />18. Get payment invoice PDF: <br />";
+			echo "// 18. Get payment invoice PDF: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = '{
+				"Invoice":"'.$variables["Invoice_ID"].'`s invoice "
+			}';
 			return $JSONreturn;
 		case "19":
 			// For the actual API use
@@ -518,7 +581,26 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />20. Dashboard - Get list of subscribed National Group: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = '{ 
+				"NationalGroup": [
+					{ "NGid": "ACU",
+					"NGtitle": "Acupuncture and dry needling" },
+					{ "NGid": "AQU",
+					"NGtitle": "Aquatic" },
+					{ "NGid": "BUS",
+					"NGtitle": "Business" },
+					{ "NGid": "DIS",
+					"NGtitle": "Disability" },
+					{ "NGid": "LEA",
+					"NGtitle": "Leadership and management" },
+					{ "NGid": "MEN",
+					"NGtitle": "Mental health" },
+					{ "NGid": "PAE",
+					"NGtitle": "Paediatric" },
+					{ "NGid": "SPO",
+					"NGtitle": "Sprots" }
+				]
+			}';
 			return $JSONreturn;
 		case "21":
 			// For the actual API use
@@ -536,7 +618,13 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />22. Dashboard - Get list of subscribed Fellowship Product: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = '{ 
+				"Fellowship": [
+					{"FPid": "1",
+					"FPtitle": "I am part of the Australian College of Physiotherapists",
+					"FPprice": "50" }
+				]
+			}';
 			return $JSONreturn;
 		case "23":
 			// For the actual API use
@@ -545,7 +633,146 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />23. Dashbard - Get list of Subscription preferences: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = '{ 
+				"Subscription":[
+				{
+					"SubscriptionID":"472",
+					"Subscription":"Online-learning",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"43",
+					"Subscription":"Continence",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"478",
+					"Subscription":"Conference",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"424",
+					"Subscription":"Educators",
+					"Subscribed":"0"
+				}, {
+					"SubscriptionID":"439",
+					"Subscription":"Market-campaign",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"446",
+					"Subscription":"Emergency",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"371",
+					"Subscription":"Jobs-4-physio",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"365",
+					"Subscription":"Gerontology",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"374",
+					"Subscription":"Advocacy",
+					"Subscribed":"0"
+				}, {
+					"SubscriptionID":"319",
+					"Subscription":"Leadership",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"327",
+					"Subscription":"National-office",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"385",
+					"Subscription":"Musculoskeletal",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"283",
+					"Subscription":"Journal-of-physiotherapy",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"295",
+					"Subscription":"Neurology",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"243",
+					"Subscription":"Inmotion-online",
+					"Subscribed":"0"
+				}, {
+					"SubscriptionID":"292",
+					"Subscription":"Occupational",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"256",
+					"Subscription":"Flagship",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"172",
+					"Subscription":"Orthopaedic",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"157",
+					"Subscription":"Professinal-development",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"138",
+					"Subscription":"Paediatric",
+					"Subscribed":"0"
+				}, {
+					"SubscriptionID":"128",
+					"Subscription":"Students",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"71",
+					"Subscription":"Pain",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"68",
+					"Subscription":"Acupuncture",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"57",
+					"Subscription":"Sports",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"45",
+					"Subscription":"Animal",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"32",
+					"Subscription":"Rural",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"37",
+					"Subscription":"Aquatic",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"26",
+					"Subscription":"Print",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"24",
+					"Subscription":"Business",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"17",
+					"Subscription":"Disability",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"16",
+					"Subscription":"Cancer",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"12",
+					"Subscription":"Mental",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"7",
+					"Subscription":"Cardiorespiratory",
+					"Subscribed":"1"
+				}, {
+					"SubscriptionID":"3",
+					"Subscription":"Mental",
+					"Subscribed":"1"
+				} ]
+			}';
 			return $JSONreturn;
 		case "24":
 			// For the actual API use
@@ -554,7 +781,112 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />24. Dashbaord - Update subscription preferences: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = '{ 
+				"Subscription":[
+				{
+					"Subscription":"Online-learning",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Continence",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Conference",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Educators",
+					"Subscribed":"0"
+				}, {
+					"Subscription":"Market-campaign",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Emergency",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Jobs-4-physio",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Gerontology",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Advocacy",
+					"Subscribed":"0"
+				}, {
+					"Subscription":"Leadership",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"National-office",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Musculoskeletal",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Journal-of-physiotherapy",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Neurology",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Inmotion-online",
+					"Subscribed":"0"
+				}, {
+					"Subscription":"Occupational",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Flagship",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Orthopaedic",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Professinal-development",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Paediatric",
+					"Subscribed":"0"
+				}, {
+					"Subscription":"Students",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Pain",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Acupuncture",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Sports",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Animal",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Rural",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Aquatic",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Print",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Business",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Disability",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Cancer",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Mental",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Cardiorespiratory",
+					"Subscribed":"1"
+				}, {
+					"Subscription":"Mental",
+					"Subscribed":"1"
+				} ]
+			}';
 			return $JSONreturn;
 		case "25":
 			// For the actual API use
