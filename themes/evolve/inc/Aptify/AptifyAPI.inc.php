@@ -1,4 +1,5 @@
 <?php
+
 /*Dashboard page render national icons fuction*/
 /*Dashboard page*/
 function AptifyAPI($APItype, $variables){
@@ -44,7 +45,7 @@ function AptifyAPI($APItype, $variables){
 			echo "<br />4. Dashboard - Get member detail: <br />";
 			// Add JSON sample here
 			$JSONreturn = '{  
-				   "Prefix":"",
+				   "Prefix":"Dr",
 				   "Firstname":"Allen",
 				   "Preferred-name":"",
 				   "Middle-name":"",
@@ -68,7 +69,10 @@ function AptifyAPI($APItype, $variables){
 				   "Memberid":"test@gmail.com",
 				   "MemberType":"RW",
 				   "Ahpranumber":"6934395685-1",
-				   "Nationalgp":"Nationalgp",
+				   "Nationalgp":[
+						"ANI",
+						"GER"
+					],
 				   "Branch":"Branch",
 				   "Specialty":"FACP",
 				   "Status":"Current",
@@ -94,14 +98,14 @@ function AptifyAPI($APItype, $variables){
 				   "Mailing-postcode":"3177",
 				   "Mailing-state":"VIC",
 				   "Mailing-country":"Australia",
-				   "Udegree":"Bachelor",
-				   "Undergraduate-university-name":"Sydney University",
+				   "Udegree":"3",
+				   "Undergraduate-university-name":"CUR",
 				   "Ugraduate-country":"Australia",
-				   "Ugraduate-year-attained":"2000",
-				   "Pdegree":"Postgraduate",
-				   "Postgraduate-university-name":"Sydney University",
-				   "Pgraduate-country":"Postgraduate",
-				   "Pgraduate-year-attained":"Sydney University",
+				   "Ugraduate-year-attained":"2001",
+				   "Pdegree":"4",
+				   "Postgraduate-university-name":"CUR",
+				   "Pgraduate-country":"Australia",
+				   "Pgraduate-year-attained":"2001",
 				   "Additional-qualifications": [
 						"qualification 1",
 						"qualification 2"
@@ -110,7 +114,7 @@ function AptifyAPI($APItype, $variables){
 					"0": {  
 						 "Workplace_ID":"72516",
 						 "Name-of-workplace":"APA",
-						 "BuildingName":"BuildingName",
+						 "WBuildingName":"BuildingName",
 						 "Wunit":"2",
 						 "Wstreet":"toorak road",
 						 "Wcity":"Melbourne",
@@ -129,43 +133,9 @@ function AptifyAPI($APItype, $variables){
 						 "Workerscompensation":"1",
 						 "Motora":"1",
 						 "Medicare":"1",
-						 "Workplace-setting":"1",
+						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 "SpecialInterest": {
-							"Acupuncture-dry-needing":"1",
-							 "Adolescents":"1",
-							 "Ageing-well":"1",
-							 "Amputees":"1",
-							 "Arthritis":"1",
-							 "Babies-children":"1",
-							 "Back-neck":"1",
-							 "Bowel":"1",
-							 "Brain":"1",
-							 "Cancer":"1",
-							 "Chronic-pain":"1",
-							 "Wdisability":"1",
-							 "Wdiabetes":"1",
-							 "Feldenkrais":"1",
-							 "Hand-therapy":"1",
-							 "Head-face":"1",
-							 "Healthwork":"1",
-							 "Heart-lung":"1",
-							 "Hydrotherapy":"1",
-							 "Lower-limbs":"1",
-							 "Wmen-health":"1",
-							 "Neurological-conditions":"1",
-							 "Worthopaedics":"1",
-							 "Palliative-care":"1",
-							 "Pilates":"1",
-							 "Pre-post":"1",
-							 "Pre-surgey":"1",
-							 "Stroke-recovery":"1",
-							 "Sexual-health":"1",
-							 "Sport-injuries":"1",
-							 "Upper-limbs":"1",
-							 "Women-health":"1",
-							 "Yoga":"1"
-						 },
+						 "SpecialInterest": ["BAN","CHILD","ACU"],
 						 "Findphysio":"1",
 						 "Homehospital":"1",
 						 "MobilePhysio":"1"
@@ -193,43 +163,9 @@ function AptifyAPI($APItype, $variables){
 						 "Workerscompensation":"1",
 						 "Motora":"1",
 						 "Medicare":"1",
-						 "Workplace-setting":"1",
+						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 "SpecialInterest": {
-							 "Acupuncture-dry-needing":"1",
-							 "Adolescents":"1",
-							 "Ageing-well":"1",
-							 "Amputees":"1",
-							 "Arthritis":"1",
-							 "Babies-children":"1",
-							 "Back-neck":"1",
-							 "Bowel":"1",
-							 "Brain":"1",
-							 "Cancer":"1",
-							 "Chronic-pain":"1",
-							 "Wdisability":"1",
-							 "Wdiabetes":"1",
-							 "Feldenkrais":"1",
-							 "Hand-therapy":"1",
-							 "Head-face":"1",
-							 "Healthwork":"1",
-							 "Heart-lung":"1",
-							 "Hydrotherapy":"1",
-							 "Lower-limbs":"1",
-							 "Wmen-health":"1",
-							 "Neurological-conditions":"1",
-							 "Worthopaedics":"1",
-							 "Palliative-care":"1",
-							 "Pilates":"1",
-							 "Pre-post":"1",
-							 "Pre-surgey":"1",
-							 "Stroke-recovery":"1",
-							 "Sexual-health":"1",
-							 "Sport-injuries":"1",
-							 "Upper-limbs":"1",
-							 "Women-health":"1",
-							 "Yoga":"1"
-						 },
+						 "SpecialInterest": ["BAN","CHILD","ACU"],
 						 "Findphysio":"1",
 						 "Homehospital":"1",
 						 "MobilePhysio":"1"
@@ -257,43 +193,9 @@ function AptifyAPI($APItype, $variables){
 						 "Workerscompensation":"1",
 						 "Motora":"1",
 						 "Medicare":"1",
-						 "Workplace-setting":"1",
+						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 "SpecialInterest": {
-							 "Acupuncture-dry-needing":"1",
-							 "Adolescents":"1",
-							 "Ageing-well":"1",
-							 "Amputees":"1",
-							 "Arthritis":"1",
-							 "Babies-children":"1",
-							 "Back-neck":"1",
-							 "Bowel":"1",
-							 "Brain":"1",
-							 "Cancer":"1",
-							 "Chronic-pain":"1",
-							 "Wdisability":"1",
-							 "Wdiabetes":"1",
-							 "Feldenkrais":"1",
-							 "Hand-therapy":"1",
-							 "Head-face":"1",
-							 "Healthwork":"1",
-							 "Heart-lung":"1",
-							 "Hydrotherapy":"1",
-							 "Lower-limbs":"1",
-							 "Wmen-health":"1",
-							 "Neurological-conditions":"1",
-							 "Worthopaedics":"1",
-							 "Palliative-care":"1",
-							 "Pilates":"1",
-							 "Pre-post":"1",
-							 "Pre-surgey":"1",
-							 "Stroke-recovery":"1",
-							 "Sexual-health":"1",
-							 "Sport-injuries":"1",
-							 "Upper-limbs":"1",
-							 "Women-health":"1",
-							 "Yoga":"1"
-						 },
+						 "SpecialInterest": ["BAN","CHILD","ACU"],
 						 "Findphysio":"1",
 						 "Homehospital":"1",
 						 "MobilePhysio":"1"
@@ -308,7 +210,164 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />5. Member detail - Update: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = '{  
+				   "Prefix":"Dr",
+				   "Firstname":"Allen",
+				   "Preferred-name":"",
+				   "Middle-name":"",
+				   "Maiden-name":"Allen",
+				   "Lastname":"Wang",
+				   "Birth":"2017-05-05",
+				   "Gender":"Female",
+				   "Home-phone-number":"0390920807",
+				   "Mobile-number":"",
+				   "Aboriginal":"",
+				   "Dietary":["Shellfish","Eggs","Lactose"],
+				   "BuildingName":"",
+				   "Unit":"1175 ",
+				   "Pobox":"437",
+				   "Street":"Toorak Road",
+				   "Suburb":"Camberwell",
+				   "Postcode":"3124",
+				   "State":"",
+				   "Country":"Australia",
+				   "Memberno":"1234567",
+				   "Memberid":"test@gmail.com",
+				   "MemberType":"RW",
+				   "Ahpranumber":"6934395685-1",
+				   "Nationalgp":[
+						"ANI",
+						"GER"
+					],
+				   "Branch":"Branch",
+				   "Specialty":"FACP",
+				   "Status":"Current",
+				   "Regional-group":"A,B,C",
+				   "Billing-BuildingName":"",
+				   "Billing-unitno":"1175",
+				   "Billing-streetname":"Toorak Road",
+				   "Billing-city-town":"Melbourne",
+				   "Billing-postcode":"3177",
+				   "Billing-state":"VIC",
+				   "Billing-country":"Australia",
+				   "Duplicate":"1",
+				   "Shipping-BuildingName":"",
+				   "Shipping-unitno":"1175",
+				   "Shipping-streetname":"Toorak Road",
+				   "Shipping-city-town":"Melbourne",
+				   "Shipping-postcode":"3177",
+				   "Shipping-state":"VIC",
+				   "Shipping-country":"Australia",
+				   "Mailing-unitno":"1175",
+				   "Mailing-streetname":"Toorak Road",
+				   "Mailing-city-town":"Melbourne",
+				   "Mailing-postcode":"3177",
+				   "Mailing-state":"VIC",
+				   "Mailing-country":"Australia",
+				   "Udegree":"3",
+				   "Undergraduate-university-name":"CUR",
+				   "Ugraduate-country":"Australia",
+				   "Ugraduate-year-attained":"",
+				   "Pdegree":"Postgraduate",
+				   "Postgraduate-university-name":"Sydney University",
+				   "Pgraduate-country":"Postgraduate",
+				   "Pgraduate-year-attained":"Sydney University",
+				   "Additional-qualifications": [
+						"qualification 1",
+						"qualification 2"
+					],
+				   "Workplaces":{  
+					"0": {  
+						 "Workplace_ID":"72516",
+						 "Name-of-workplace":"APA",
+						 "WBuildingName":"BuildingName",
+						 "Wunit":"2",
+						 "Wstreet":"toorak road",
+						 "Wcity":"Melbourne",
+						 "Wpostcode":"3177",
+						 "Wstate":"VIC",
+						 "Wcountry":"Australia",
+						 "Wemail":"test@apa.com",
+						 "Wwebaddress":"www.apa.com",
+						 "Wphone":"0390920888",
+						 "Additionallanguage":["EG","AR","FL"],
+						 "QIP":"123456",
+						 "Electronic-claiming":"1",
+						 "Hicaps":"1",
+						 "Healthpoint":"1",
+						 "Departmentva":"1",
+						 "Workerscompensation":"1",
+						 "Motora":"1",
+						 "Medicare":"1",
+						 "Workplace-setting":"Defence-forces",
+						 "Number-worked-hours":"7",
+						 "SpecialInterest": ["BAN","CHILD","ACU"],
+						 "Findphysio":"1",
+						 "Homehospital":"1",
+						 "MobilePhysio":"1"
+					  },
+				   "1": {  
+						 "Workplace_ID":"72571",
+						 "Name-of-workplace":"testA",
+						 "BuildingName":"BuildingName",
+						 "Wunit":"2",
+						 "Wstreet":"toorak road",
+						 "Wcity":"Melbourne",
+						 "Wpostcode":"3177",
+						 "Wstate":"VIC",
+						 "Wcity":"Melbourne",
+						 "Wcountry":"Australia",
+						 "Wemail":"test@apa.com",
+						 "Wwebaddress":"www.apa.com",
+						 "Wphone":"0390920888",
+						 "Additionallanguage":["EG"],
+						 "QIP":"123456",
+						 "Electronic-claiming":"1",
+						 "Hicaps":"1",
+						 "Healthpoint":"1",
+						 "Departmentva":"1",
+						 "Workerscompensation":"1",
+						 "Motora":"1",
+						 "Medicare":"1",
+						 "Workplace-setting":"Defence-forces",
+						 "Number-worked-hours":"7",
+						 "SpecialInterest": ["BAN","CHILD","ACU"],
+						 "Findphysio":"1",
+						 "Homehospital":"1",
+						 "MobilePhysio":"1"
+					  },
+				   "2": {
+						 "Workplace_ID":"72171",
+						 "Name-of-workplace":"testB",
+						 "BuildingName":"BuildingName",
+						 "Wunit":"2",
+						 "Wstreet":"toorak road",
+						 "Wcity":"Melbourne",
+						 "Wpostcode":"3177",
+						 "Wstate":"VIC",
+						 "Wcity":"Melbourne",
+						 "Wcountry":"Australia",
+						 "Wemail":"test@apa.com",
+						 "Wwebaddress":"www.apa.com",
+						 "Wphone":"0390920888",
+						 "Additionallanguage":["EG","AR","FL"],
+						 "QIP":"123456",
+						 "Electronic-claiming":"1",
+						 "Hicaps":"1",
+						 "Healthpoint":"1",
+						 "Departmentva":"1",
+						 "Workerscompensation":"1",
+						 "Motora":"1",
+						 "Medicare":"1",
+						 "Workplace-setting":"Defence-forces",
+						 "Number-worked-hours":"7",
+						 "SpecialInterest": ["BAN","CHILD","ACU"],
+						 "Findphysio":"1",
+						 "Homehospital":"1",
+						 "MobilePhysio":"1"
+					  }
+				   }
+				}';
 			return $JSONreturn;
 		case "6":
 			// For the actual API use
@@ -371,7 +430,32 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />12. Dashboard - Get payment listing: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn =  '{ 
+			        "Main-Creditcard-ID":"1",
+					"paymentcards": [
+					   { "Creditcards ID": "1",
+						"Payment-method": "Master",
+						"Name-on-card": "Lucy",
+						"Digitsnumber":"8888",
+						"Expiry-date":"10-10-2020",
+						"Rollover":"1"
+						},
+						{ "Creditcards ID": "2",
+						"Payment-method": "Visa",
+						"Name-on-card": "Lucy",
+						"Digitsnumber":"6666",
+						"Expiry-date":"10-10-2020",
+						"Rollover":"0"
+						},
+						{ "Creditcards ID": "3",
+						"Payment-method": "Master",
+						"Name-on-card": "Lucy",
+						"Digitsnumber":"9999",
+						"Expiry-date":"10-10-2020",
+						"Rollover":"0"
+						}
+					]
+				}';
 			return $JSONreturn;
 		case "13":
 			// For the actual API use
@@ -504,7 +588,14 @@ function AptifyAPI($APItype, $variables){
 						"NGprice": "30" },
 						{ "NGid": "WOM",
 						"NGtitle": "Women\'s, men\'s and pelvic health",
+						"NGprice": "29" },
+						{ "NGid": "SPMagzine",
+						"NGtitle": "SportsMagzine",
+						"NGprice": "29" },
+						{ "NGid": "Intouch",
+						"NGtitle": "Intouch",
 						"NGprice": "29" }
+						
 					]
 				}';
 			} else {
@@ -527,7 +618,19 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />21. Dashboard - Get list of Fellowship Products: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			if(count($variables) == 1) {
+				// When this web service is triggered to get
+				// Fellowship list only
+				$JSONreturn = '{ 
+					"Fellowship": [
+						{"FPid": "1",
+						"FPtitle": "I am part of the Australian College of Physiotherapists",
+						"FPprice": "50" }
+					]
+				}';
+			} else {
+				$JSONreturn = "";
+			}
 			return $JSONreturn;
 		case "22":
 			// For the actual API use
@@ -1226,8 +1329,32 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />31. Get MEmbership product price: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
-			return $JSONreturn;
+		  
+			$JSONreturn = '{ 
+			    "Continue":"1",
+			    "products":[
+				    {
+					   "ProdcutName":"Full-time physiotherapist with insurance (more than 18 hours per week) ",
+					   "Price":"200"
+					  
+					},
+					{
+						"ProdcutName":"Gerontology",
+					    "Price":"41"
+					   
+					},
+					{
+						"ProdcutName":"Musculoskeletal",
+					    "Price":"38"
+					},
+					{
+						"ProdcutName":"Intouch",
+					    "Price":"10"
+					}
+					]		   
+				}';
+			
+			return $JSONreturn;	
 		case "32":
 			// For the actual API use
 			// $API = "";
@@ -1317,38 +1444,46 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />36. Get workplace settings list <br />";
 			// Add JSON sample here
+			if(count($variables) == 1) {
+				// When this web service is triggered to get
+				// workplace settings list only
 			$JSONreturn = '{ 
-				   "0": {
+			    "WorkplaceSettings":[
+				    {
 					   "name":"Aboriginal health services",
 					   "code":"Aboriginal-health-services"
-						},
-					"1":{
+					},
+					{
 						"name":"Defence forces",
 						"code":"Defence-forces"
-					   },
-					 "2":{
+					},
+					{
 						"name":"Domiciliary services",
 						"code":"Domiciliary-services"
-					 },
-					 "3":{
+					},
+					{
 						"name":"Education facility",
 						"code":"Education-facility"
-					 },
-					 "4":{
+					},
+					{
 						"name":"Group private practice",
 						"code":"Group-private-practice"
-					 },
-					 "5":{
+					},
+					{
 						"name":"Hospital(exclude outpatient)",
 						"code":"Hospital"
-					 },
-					 "6":{
+					},
+					{
 						"name":"Locum private practice",
 						"code":"Locum-private-practice"
-					 }
-							   
-							 }';
+					}
+					]		   
+				}';
+			} else{
+				$JSONreturn = "";
+			}
 			return $JSONreturn;	
+			
 		case "37":
 			// For the actual API use
 			// $API = "";
@@ -1356,37 +1491,45 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />37. Get special interest area list <br />";
 			// Add JSON sample here
+			if(count($variables) == 1) {
+				// When this web service is triggered to get
+				// National Group list only
 			$JSONreturn = '{ 
-							   "0": {
-								   "ListName":"Acupuncture and dry needling",
-								   "ListCode":"ACU"
-									},
-								"1":{
-									"ListName":"Adolescents",
-								    "ListCode":"ADO"
-								   },
-								 "3":{
-									"ListName":"Aging well",
-								    "ListCode":"AGE"
-								 },
-								 "4":{
-									"ListName":"Amputees",
-								    "ListCode":"AMP"
-								 },
-								 "5":{
-									"ListName":"Arthritis",
-								    "ListCode":"ART"
-								 },
-								 "6":{
-									"ListName":"Babies and children",
-								    "ListCode":"CHILD"
-								 },
-								 "7":{
-									"ListName":"Back and neck",
-								    "ListCode":"BAN"
-								 }
-							   
-							 }';
+				"InterestAreas": [
+				    {
+					   "ListName":"Acupuncture and dry needling",
+					   "ListCode":"ACU"
+					},
+					{
+						"ListName":"Adolescents",
+						"ListCode":"ADO"
+					},
+					{
+						"ListName":"Aging well",
+						"ListCode":"AGE"
+					},
+					{
+						"ListName":"Amputees",
+						"ListCode":"AMP"
+					},
+					{
+						"ListName":"Arthritis",
+						"ListCode":"ART"
+					},
+					{
+						"ListName":"Babies and children",
+						"ListCode":"CHILD"
+					},
+					{
+						"ListName":"Back and neck",
+						"ListCode":"BAN"
+					}
+					
+                ]					
+				}';
+			} else {
+				$JSONreturn = "";
+			}
 			return $JSONreturn;
 	}
 }

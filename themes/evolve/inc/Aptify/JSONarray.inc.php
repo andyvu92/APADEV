@@ -17,6 +17,7 @@ function GetAptifyData($TypeAPI, $ArrayIn) {
 	return JSONArrayConverter("toArray", $tt);
 }
 
+
 /**
  *  Conversion begin!
  *  Private function
