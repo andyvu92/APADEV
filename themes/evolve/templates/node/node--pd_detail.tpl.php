@@ -680,27 +680,27 @@
 				  <input type="checkbox" name="Professionalbody" id="Professionalbody1"> <label for="Professionalbody1">I am a member of my professional body.</label>
 				   </div>
 				</div>
-				 <div class="row">
-				   <div class="col-lg-6">Dietary requirements:</div>
-				   <div class="col-lg-6">
-				   	<?php if(isset($userInfo)): ?>
-				       <select class="chosen-select" id="Dietary" name="Dietary" multiple required>
-                              <option value="" <?php if (empty($userInfo['Dietary'])) echo "selected='selected'";?> disabled>None</option>
-                              <option value="Seafood" <?php if (in_array( "Seafood",$userInfo['Dietary'])) echo "selected='selected'";?>>Allergic to seafood</option>
-                              <option value="Shellfish" <?php if (in_array( "Shellfish",$userInfo['Dietary'])) echo "selected='selected'";?>>Allergic to shellfish</option>
-                              <option value="Nuts" <?php if (in_array( "Nuts",$userInfo['Dietary'])) echo "selected='selected'";?>>Allergic to nuts</option>
-                              <option value="Eggs" <?php if (in_array( "Eggs",$userInfo['Dietary'])) echo "selected='selected'";?>>Allergic to eggs</option>
-                              <option value="Coeliac" <?php if (in_array( "Coeliac",$userInfo['Dietary'])) echo "selected='selected'";?>>Coeliac</option>
-                              <option value="Fructose" <?php if (in_array( "Fructose",$userInfo['Dietary'])) echo "selected='selected'";?>>Fructose intolerant</option>
-                              <option value="Gluten" <?php if (in_array( "Gluten",$userInfo['Dietary'])) echo "selected='selected'";?>>Gluten intolerant</option>
-                              <option value="Lactose" <?php if (in_array( "Lactose",$userInfo['Dietary'])) echo "selected='selected'";?>>Lactose intolerant</option>
-                              <option value="Vegetarian" <?php if (in_array( "Vegetarian",$userInfo['Dietary'])) echo "selected='selected'";?>>Vegetarian</option>
-                              <option value="Vegan" <?php if (in_array( "Vegan",$userInfo['Dietary'])) echo "selected='selected'";?>>Vegan</option>
-                              <option value="Other" <?php if (in_array( "Other",$userInfo['Dietary'])) echo "selected='selected'";?>>Other</option>
-                           </select>
-					  <?php endif;?>
-				   </div>
-				 </div>
+				<div class="row">
+					<div class="col-lg-6">Dietary requirements:</div>
+					<div class="col-lg-6">
+						<?php if(isset($userInfo)): ?>
+						<select class="chosen-select" id="Dietary" name="Dietary" multiple required>
+							<option value="" <?php if (empty($userInfo['Dietary'])) echo "selected='selected'";?> disabled>None</option>
+							<option value="Seafood" <?php if (in_array( "Seafood",$userInfo['Dietary'])) echo "selected='selected'";?>>Allergic to seafood</option>
+							<option value="Shellfish" <?php if (in_array( "Shellfish",$userInfo['Dietary'])) echo "selected='selected'";?>>Allergic to shellfish</option>
+							<option value="Nuts" <?php if (in_array( "Nuts",$userInfo['Dietary'])) echo "selected='selected'";?>>Allergic to nuts</option>
+							<option value="Eggs" <?php if (in_array( "Eggs",$userInfo['Dietary'])) echo "selected='selected'";?>>Allergic to eggs</option>
+							<option value="Coeliac" <?php if (in_array( "Coeliac",$userInfo['Dietary'])) echo "selected='selected'";?>>Coeliac</option>
+							<option value="Fructose" <?php if (in_array( "Fructose",$userInfo['Dietary'])) echo "selected='selected'";?>>Fructose intolerant</option>
+							<option value="Gluten" <?php if (in_array( "Gluten",$userInfo['Dietary'])) echo "selected='selected'";?>>Gluten intolerant</option>
+							<option value="Lactose" <?php if (in_array( "Lactose",$userInfo['Dietary'])) echo "selected='selected'";?>>Lactose intolerant</option>
+							<option value="Vegetarian" <?php if (in_array( "Vegetarian",$userInfo['Dietary'])) echo "selected='selected'";?>>Vegetarian</option>
+							<option value="Vegan" <?php if (in_array( "Vegan",$userInfo['Dietary'])) echo "selected='selected'";?>>Vegan</option>
+							<option value="Other" <?php if (in_array( "Other",$userInfo['Dietary'])) echo "selected='selected'";?>>Other</option>
+						</select>
+						<?php endif;?>
+					</div>
+				</div>
 				  <div class="row">
 				   <div class="col-lg-6">How did you hear about APA PD?</div>
 				   <div class="col-lg-6">

@@ -4,7 +4,9 @@
 
 /*Dashboard page render national icons fuction*/
 /*Dashboard page*/
+
 function nationalIcons(){
+/*
    $nationalIcons = array(
              array("AcuPunctureNeedling","APN"),
              array("Animal","ANI"),
@@ -29,8 +31,20 @@ function nationalIcons(){
              array("Pain","PAN"),
              array("Orthopaedic","ORT"),
          ); 
-        $userIcons = array(0,1,2 ,3,3,5,6,7);
-        $length = sizeof($userIcons);		
+		*/
+		// 2.2.20 - GET list of subscribed National Group
+		// Send - 
+		// Request, User ID
+		// Response -
+		// National Group ID, National Group title
+		$sendData["RequestNG"] = "RequestNG";
+		$sendData["UserID"] = "UserID";
+		$nationalGroups = GetAptifyData("20", $sendData);
+		
+		//$userIcons = array(0,1,2 ,3,3,5,6,7);
+		$NGs = $nationalGroups["NationalGroup"];
+		
+        $length = sizeof($NGs);		
 	    $k =0;
 	    for($i=0; $i<$length/4; $i++){
 			if($i==0){
@@ -46,10 +60,14 @@ function nationalIcons(){
 			echo "<ul class='nav navbar-nav'>";
 	  	  	for($j=$k; $j<$k+4; $j++){
 				if($j<$length){
-					$num = intval($userIcons[$j]);
 					echo "<li>";
+					echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons">';
+                    echo '<i class="fa '.$NGs[$j]["NGid"].'">';
+					/*
+					$num = intval($userIcons[$j]);
                     echo '<a href="'.$nationalIcons[$num][0].'" class="icons">';
                     echo '<i class="fa '.$nationalIcons[$num][1].'">';
+					*/
                     echo "</i>";
                     echo "</a>";
 					echo "</li>";}
