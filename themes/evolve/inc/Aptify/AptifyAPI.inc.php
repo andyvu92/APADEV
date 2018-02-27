@@ -77,10 +77,10 @@ function AptifyAPI($APItype, $variables){
 				   "Aboriginal":"",
 				   "Dietary":["Shellfish","Eggs","Lactose"],
 				   "BuildingName":"",
-				   "Unit":"1175 ",
-				   "Pobox":"437",
-				   "Street":"Toorak Road",
-				   "Suburb":"Camberwell",
+				   "Address_Line_1":"1175 ",'.// changed
+				   '"Pobox":"437",
+				   "Address_Line_2":"Toorak Road",'.// changed
+				   '"Suburb":"Camberwell",
 				   "Postcode":"3124",
 				   "State":"",
 				   "Country":"Australia",
@@ -93,27 +93,32 @@ function AptifyAPI($APItype, $variables){
 						"GER"
 					],
 				   "Branch":"Branch",
-				   "Specialty":"FACP",
+				   "SpecialInterest":["BAN","CHILD","ACU"],'.// Added
+				   '"Specialty":"FACP",
 				   "Status":"Current",
 				   "Regional-group":"A,B,C",
 				   "Billing-BuildingName":"",
-				   "Billing-unitno":"1175",
-				   "Billing-streetname":"Toorak Road",
-				   "Billing-city-town":"Melbourne",
-				   "Billing-postcode":"3177",
-				   "Billing-state":"VIC",
-				   "Billing-country":"Australia",
+				   "Billing-Address_Line_1":"1175",'.// changed
+				   '"Billing-PObox":"",'.// Added
+				   '"Billing-Address_Line_2":"Toorak Road",'.// changed
+				   '"Billing-Suburb":"Melbourne",
+				   "Billing-Postcode":"3177",
+				   "Billing-State":"VIC",
+				   "Billing-Country":"Australia",
 				   "Duplicate":"1",
 				   "Shipping-BuildingName":"",
-				   "Shipping-unitno":"1175",
-				   "Shipping-streetname":"Toorak Road",
-				   "Shipping-city-town":"Melbourne",
+				   "Shipping-Address_Line_1":"1175",'.// changed
+				   '"Shipping-PObox":"",'.// Added
+				   '"Shipping-Address_Line_2":"Toorak Road",'.// changed
+				   '"Shipping-city-town":"Melbourne",
 				   "Shipping-postcode":"3177",
 				   "Shipping-state":"VIC",
 				   "Shipping-country":"Australia",
-				   "Mailing-unitno":"1175",
-				   "Mailing-streetname":"Toorak Road",
-				   "Mailing-city-town":"Melbourne",
+				   "Mailing-BuildingName":"",'.// Added
+				   '"Mailing-Address_Line_1":"1175",'.// changed
+				   '"Mailing-PObox":""'.// Added
+				   '"Mailing-Address_Line_2":"Toorak Road",'.// changed
+				   '"Mailing-city-town":"Melbourne",
 				   "Mailing-postcode":"3177",
 				   "Mailing-state":"VIC",
 				   "Mailing-country":"Australia",
@@ -134,9 +139,9 @@ function AptifyAPI($APItype, $variables){
 						 "Workplace_ID":"72516",
 						 "Name-of-workplace":"APA",
 						 "WBuildingName":"BuildingName",
-						 "Wunit":"2",
-						 "Wstreet":"toorak road",
-						 "Wcity":"Melbourne",
+						 "Address_Line_1":"2",'. // changed
+						 '"Address_Line_2":"toorak road",'. // changed
+						 '"Wcity":"Melbourne",
 						 "Wpostcode":"3177",
 						 "Wstate":"VIC",
 						 "Wcountry":"Australia",
@@ -154,18 +159,19 @@ function AptifyAPI($APItype, $variables){
 						 "Medicare":"1",
 						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 "SpecialInterest": ["BAN","CHILD","ACU"],
-						 "Findphysio":"1",
-						 "Homehospital":"1",
+						 '. // "SpecialInterest": ["BAN","CHILD","ACU"], - removed
+						 '"Findphysio":"1",
+						 "Findabuddy":"1",'. // Added
+						 '"Homehospital":"1",
 						 "MobilePhysio":"1"
 					  },
 				   "1": {  
 						 "Workplace_ID":"72571",
 						 "Name-of-workplace":"testA",
 						 "BuildingName":"BuildingName",
-						 "Wunit":"2",
-						 "Wstreet":"toorak road",
-						 "Wcity":"Melbourne",
+						 "Address_Line_1":"2",'. // changed
+						 '"Address_Line_2":"toorak road",'. // changed
+						 '"Wcity":"Melbourne",
 						 "Wpostcode":"3177",
 						 "Wstate":"VIC",
 						 "Wcity":"Melbourne",
@@ -184,18 +190,19 @@ function AptifyAPI($APItype, $variables){
 						 "Medicare":"1",
 						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 "SpecialInterest": ["BAN","CHILD","ACU"],
-						 "Findphysio":"1",
-						 "Homehospital":"1",
+						 './/"SpecialInterest": ["BAN","CHILD","ACU"], - removed
+						 '"Findphysio":"1",
+						 "Findabuddy":"1",'. // Added
+						 '"Homehospital":"1",
 						 "MobilePhysio":"1"
 					  },
 				   "2": {
 						 "Workplace_ID":"72171",
 						 "Name-of-workplace":"testB",
 						 "BuildingName":"BuildingName",
-						 "Wunit":"2",
-						 "Wstreet":"toorak road",
-						 "Wcity":"Melbourne",
+						 "Address_Line_1":"2",'. // changed
+						 '"Address_Line_2":"toorak road",'. // changed
+						 '"Wcity":"Melbourne",
 						 "Wpostcode":"3177",
 						 "Wstate":"VIC",
 						 "Wcity":"Melbourne",
@@ -214,9 +221,10 @@ function AptifyAPI($APItype, $variables){
 						 "Medicare":"1",
 						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 "SpecialInterest": ["BAN","CHILD","ACU"],
-						 "Findphysio":"1",
-						 "Homehospital":"1",
+						 './/"SpecialInterest": ["BAN","CHILD","ACU"], - removed
+						 '"Findphysio":"1",
+						 "Findabuddy":"1",'. // Added
+						 '"Homehospital":"1",
 						 "MobilePhysio":"1"
 					  }
 				   }
@@ -431,7 +439,7 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />10. Dashboard - Get picture: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = "Image response";
 			return $JSONreturn;
 		case "11":
 			// For the actual API use
@@ -440,7 +448,7 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />11. Dashboard - Update picture: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = "return Value!";
 			return $JSONreturn;
 		case "12":
 			// For the actual API use
@@ -1683,7 +1691,87 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />30. PD - Get event detail list: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = ' {
+				"PDEvents": [
+					{
+						"Totalnumber":"200",
+						"Enrollednumber":"100",
+						"Id":"1",
+						"Title":"Sports Physiotherapy Level 2",
+						"Typeofpd":"event",
+						"Time":"9:00 AM - 5.00 PM",
+						"Begindate":"3/06/2017",
+						"Enddate":"4/06/2017",
+						"Close_date":"12/12/2018",
+						"Location":{
+							"Address1":"1175 Toorak Road",
+							"Address2":"",
+							"City":"Camberwell",
+							"State":"VIC",
+							"Postcode":"3124"
+						},
+						"Price":"$750.00",
+						"UserStatus":"3"
+					}, {
+						"Totalnumber":"200",
+						"Enrollednumber":"100",
+						"Id":"3",
+						"Title":"Sports Physiotherapy Level 2",
+						"Typeofpd":"event",
+						"Time":"9:00 AM - 5.00 PM",
+						"Begindate":"3/06/2017",
+						"Enddate":"4/06/2017",
+						"Close_date":"12/12/2018",
+						"Location":{
+							"Address1":"1175 Toorak Road",
+							"Address2":"",
+							"City":"Camberwell",
+							"State":"VIC",
+							"Postcode":"3124"
+						},
+						"Price":"$750.00",
+						"UserStatus":"3"
+					}, {
+						"Totalnumber":"200",
+						"Enrollednumber":"100",
+						"Id":"5",
+						"Title":"Sports Physiotherapy Level 2",
+						"Typeofpd":"event",
+						"Time":"9:00 AM - 5.00 PM",
+						"Begindate":"3/06/2017",
+						"Enddate":"4/06/2017",
+						"Close_date":"25/02/2018",
+						"Location":{
+							"Address1":"1175 Toorak Road",
+							"Address2":"",
+							"City":"Camberwell",
+							"State":"VIC",
+							"Postcode":"3124"
+						},
+						"Price":"$750.00",
+						"UserStatus":"3"
+					}, {
+						"Totalnumber":"200",
+						"Enrollednumber":"200",
+						"Id":"7",
+						"Title":"Sports Physiotherapy Level 2",
+						"Typeofpd":"event",
+						"Time":"9:00 AM - 5.00 PM",
+						"Begindate":"3/06/2017",
+						"Enddate":"4/06/2017",
+						"Close_date":"12/12/2018",
+						"Location":{
+							"Address1":"1175 Toorak Road",
+							"Address2":"",
+							"City":"Camberwell",
+							"State":"VIC",
+							"Postcode":"3124"
+						},
+						"Price":"$750.00",
+						"UserStatus":"3"
+					}
+				]
+			}';;
 			return $JSONreturn;
 		case "31":
 			// For the actual API use
@@ -1893,6 +1981,17 @@ function AptifyAPI($APItype, $variables){
 			} else {
 				$JSONreturn = "";
 			}
+			return $JSONreturn;
+		case "38":
+			// For the actual API use
+			// $API = "";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />38. Get NON-APA CPD point's PDF<br />";
+			// Add JSON sample here
+			$JSONreturn = '{ 
+				"Non-CPD_PDF":"NON-CPD PDF file"
+			}';
 			return $JSONreturn;
 	}
 }
