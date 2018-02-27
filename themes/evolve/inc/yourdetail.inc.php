@@ -1,276 +1,7 @@
 <?php
  include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
- /*
-   $details_json='{  
-   "Prefix":"",
-   "Firstname":"Allen",
-   "Preferred-name":"",
-   "Middle-name":"",
-   "Maiden-name":"Allen",
-   "Lastname":"Wang",
-   "Birth":"2017-05-05",
-   "Gender":"Female",
-   "Home-phone-number":"0390920807",
-   "Mobile-number":"",
-   "Aboriginal":"",
-   "Dietary":"",
-   "BuildingName":"",
-   "Unit":"1175 ",
-   "Pobox":"437",
-   "Street":"Toorak Road",
-   "Suburb":"Camberwell",
-   "Postcode":"3124",
-   "State":"",
-   "Country":"Australia",
-   "Memberno":"1234567",
-   "Memberid":"test@gmail.com",
-   "MemberType":"RW",
-   "Ahpranumber":"6934395685-1",
-   "Nationalgp":"Nationalgp",
-   "Branch":"Branch",
-   "Specialty":"FACP",
-   "Status":"Current",
-   "Regional-group":"A,B,C",
-   ------------- ????? "Payment-method":"creditcard",
-   ------------- ????? "Cardtype":"AE",
-   ------------- ????? "Name-on-card":"Allen",
-   ------------- ????? "Cardno":"4566122333",
-   ------------- ????? "Expiry-date":"2022-05-05",
-   ------------- ????? "CCV":"111",
-   ------------- ????? "installment":"1",
-   "Billing-BuildingName":"",
-   "Billing-unitno":"1175",
-   "Billing-streetname":"Toorak Road",
-   "Billing-city-town":"Melbourne",
-   "Billing-postcode":"3177",
-   "Billing-state":"VIC",
-   "Billing-country":"Australia",
-   "Duplicate":"1",
-   "Shipping-BuildingName":"",
-   "Shipping-unitno":"1175",
-   "Shipping-streetname":"Toorak Road",
-   "Shipping-city-town":"Melbourne",
-   "Shipping-postcode":"3177",
-   "Shipping-state":"VIC",
-   "Shipping-country":"Australia",
-   "Mailing-unitno":"1175",
-   "Mailing-streetname":"Toorak Road",
-   "Mailing-city-town":"Melbourne",
-   "Mailing-postcode":"3177",
-   "Mailing-state":"VIC",
-   "Mailing-country":"Australia",
-   "Udegree":"Bachelor",
-   "Undergraduate-university-name":"Sydney University",
-   "Ugraduate-country":"Australia",
-   "Ugraduate-year-attained":"2000",
-   "Pdegree":"Postgraduate",
-   "Postgraduate-university-name":"Sydney University",
-   "Pgraduate-country":"Postgraduate",
-   "Pgraduate-year-attained":"Sydney University",
-   "Additional-qualifications":[
-		"additional1":"qualification 1",
-		"additional1":"qualification 2"
-   ],
-   "Workplaces":{  
-    "0": {  
-		 "Workplace_ID":"72516",
-	     "Name-of-workplace":"APA",
-		 "BuildingName":"BuildingName",
-         "Wunit":"2",
-         "Wstreet":"toorak road",
-         "Wcity":"Melbourne",
-         "Wpostcode":"3177",
-         "Wstate":"VIC",
-         "Wcountry":"Australia",
-         "Wemail":"test@apa.com",
-         "Wwebaddress":"www.apa.com",
-         "Wphone":"0390920888",
-         "Additionallanguage":["EG","AR","FL"],
-         "QIP":"123456",
-         "Electronic-claiming":"1",
-         "Hicaps":"1",
-         "Healthpoint":"1",
-         "Departmentva":"1",
-         "Workerscompensation":"1",
-         "Motora":"1",
-         "Medicare":"1",
-         "Workplace-setting":"1",
-         "Number-worked-hours":"7",
-		 "SpecialInterest": [
-			"Acupuncture-dry-needing":"1",
-			 "Adolescents":"1",
-			 "Ageing-well":"1",
-			 "Amputees":"1",
-			 "Arthritis":"1",
-			 "Babies-children":"1",
-			 "Back-neck":"1",
-			 "Bowel":"1",
-			 "Brain":"1",
-			 "Cancer":"1",
-			 "Chronic-pain":"1",
-			 "Wdisability":"1",
-			 "Wdiabetes":"1",
-			 "Feldenkrais":"1",
-			 "Hand-therapy":"1",
-			 "Head-face":"1",
-			 "Healthwork":"1",
-			 "Heart-lung":"1",
-			 "Hydrotherapy":"1",
-			 "Lower-limbs":"1",
-			 "Wmen-health":"1",
-			 "Neurological-conditions":"1",
-			 "Worthopaedics":"1",
-			 "Palliative-care":"1",
-			 "Pilates":"1",
-			 "Pre-post":"1",
-			 "Pre-surgey":"1",
-			 "Stroke-recovery":"1",
-			 "Sexual-health":"1",
-			 "Sport-injuries":"1",
-			 "Upper-limbs":"1",
-			 "Women-health":"1",
-			 "Yoga":"1",
-		 ],
-         "Findphysio":"1",
-		 "Homehospital":"1",
-		 "MobilePhysio":"1"
-      },
-   "1": {  
-		 "Workplace_ID":"72571",
-         "Name-of-workplace":"testA",
-		 "BuildingName":"BuildingName",
-         "Wunit":"2",
-         "Wstreet":"toorak road",
-         "Wcity":"Melbourne",
-         "Wpostcode":"3177",
-         "Wstate":"VIC",
-         "Wcity":"Melbourne",
-         "Wcountry":"Australia",
-         "Wemail":"test@apa.com",
-         "Wwebaddress":"www.apa.com",
-         "Wphone":"0390920888",
-         "Additionallanguage":["EG"],
-         "QIP":"123456",
-         "Electronic-claiming":"1",
-         "Hicaps":"1",
-         "Healthpoint":"1",
-         "Departmentva":"1",
-         "Workerscompensation":"1",
-         "Motora":"1",
-         "Medicare":"1",
-         "Workplace-setting":"1",
-         "Number-worked-hours":"7",
-		 "SpecialInterest": [
-			 "Acupuncture-dry-needing":"1",
-			 "Adolescents":"1",
-			 "Ageing-well":"1",
-			 "Amputees":"1",
-			 "Arthritis":"1",
-			 "Babies-children":"1",
-			 "Back-neck":"1",
-			 "Bowel":"1",
-			 "Brain":"1",
-			 "Cancer":"1",
-			 "Chronic-pain":"1",
-			 "Wdisability":"1",
-			 "Wdiabetes":"1",
-			 "Feldenkrais":"1",
-			 "Hand-therapy":"1",
-			 "Head-face":"1",
-			 "Healthwork":"1",
-			 "Heart-lung":"1",
-			 "Hydrotherapy":"1",
-			 "Lower-limbs":"1",
-			 "Wmen-health":"1",
-			 "Neurological-conditions":"1",
-			 "Worthopaedics":"1",
-			 "Palliative-care":"1",
-			 "Pilates":"1",
-			 "Pre-post":"1",
-			 "Pre-surgey":"1",
-			 "Stroke-recovery":"1",
-			 "Sexual-health":"1",
-			 "Sport-injuries":"1",
-			 "Upper-limbs":"1",
-			 "Women-health":"1",
-			 "Yoga":"1"
-			],
-         "Findphysio":"1"
-		 "Homehospital":"1",
-		 "MobilePhysio":"1"
-      },
-   "2": {
-		 "Workplace_ID":"72171",
-		 "Name-of-workplace":"testB",
-		 "BuildingName":"BuildingName",
-         "Wunit":"2",
-         "Wstreet":"toorak road",
-         "Wcity":"Melbourne",
-         "Wpostcode":"3177",
-         "Wstate":"VIC",
-         "Wcity":"Melbourne",
-         "Wcountry":"Australia",
-         "Wemail":"test@apa.com",
-         "Wwebaddress":"www.apa.com",
-         "Wphone":"0390920888",
-         "Additionallanguage":["EG","AR","FL"],
-         "QIP":"123456",
-         "Electronic-claiming":"1",
-         "Hicaps":"1",
-         "Healthpoint":"1",
-         "Departmentva":"1",
-         "Workerscompensation":"1",
-         "Motora":"1",
-         "Medicare":"1",
-         "Workplace-setting":"1",
-         "Number-worked-hours":"7",
-		 "SpecialInterest": [
-			 "Acupuncture-dry-needing":"1",
-			 "Adolescents":"1",
-			 "Ageing-well":"1",
-			 "Amputees":"1",
-			 "Arthritis":"1",
-			 "Babies-children":"1",
-			 "Back-neck":"1",
-			 "Bowel":"1",
-			 "Brain":"1",
-			 "Cancer":"1",
-			 "Chronic-pain":"1",
-			 "Wdisability":"1",
-			 "Wdiabetes":"1",
-			 "Feldenkrais":"1",
-			 "Hand-therapy":"1",
-			 "Head-face":"1",
-			 "Healthwork":"1",
-			 "Heart-lung":"1",
-			 "Hydrotherapy":"1",
-			 "Lower-limbs":"1",
-			 "Wmen-health":"1",
-			 "Neurological-conditions":"1",
-			 "Worthopaedics":"1",
-			 "Palliative-care":"1",
-			 "Pilates":"1",
-			 "Pre-post":"1",
-			 "Pre-surgey":"1",
-			 "Stroke-recovery":"1",
-			 "Sexual-health":"1",
-			 "Sport-injuries":"1",
-			 "Upper-limbs":"1",
-			 "Women-health":"1",
-			 "Yoga":"1"
-			],
-         "Findphysio":"1",
-		 "Homehospital":"1",
-		 "MobilePhysio":"1"
-      }
-   }
-
-}';
-   $details= json_decode($details_json, true);
    
-   */
-   
-    // 2.2.4 - GET bember detail
+	// 2.2.4 - GET bember detail
 	// Send - 
 	// UserID
 	// Response -
@@ -294,16 +25,39 @@
 	// QIP}, Undergraduate degree, Undergraduate Uni name, Undergraduate Country,
 	// Year attained, Post graduate degree, post graduate name, 
 	// Post graduate country, Year attained, Additional qualifications
-   $details = GetAptifyData("4", "UserID"); // #_SESSION["UserID"];
-   /*
-   echo "<p>return Begin!!!</p>";
-   print_r($details);
-   echo "<p>return End!!!</p>";
-   */
-   ?>
+	$details = GetAptifyData("4", "UserID"); // #_SESSION["UserID"];
+	
+	// 2.2.10 - GET Picture
+	// Send - 
+	// UserID
+	// Response -
+	// Profile image
+	$details = GetAptifyData("10", "UserID"); // #_SESSION["UserID"];
+	
+	// 2.2.11 - UPDATE Picture
+	// Send - 
+	// UserID, Image
+	// Response -
+	// N/A.
+	if(isset($_POST["PictureUpdate"])) {
+		$details = GetAptifyData("11", "UserID"); // #_SESSION["UserID"];
+	}
+	
+	
+	//use webservice 2.2.15 Add payment method
+	/*
+	if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; }
+	if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
+	if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
+	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
+	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
+	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
+	GetAptifyData("15", $postPaymentData); */
+?>
 <div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
 <div class="extra_information">
 <?php
+// please use those data!!!!
 echo "Nationalgp: ".$details['Nationalgp']."<br />";
 echo "Branch: ".$details['Branch']."<br />";
 echo "Specialty: ".$details['Specialty']."<br />";
@@ -329,7 +83,6 @@ echo "Workplace_ID2: ".$details["Workplaces"][2]['Workplace_ID']."<br />";
 echo "BuildingName2: ".$details["Workplaces"][2]['BuildingName']."<br />";
 echo "Homehospital2: ".$details["Workplaces"][2]['Homehospital']."<br />";
 echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
-
 ?>
 </div>
 <div style="display:table;">
@@ -617,7 +370,11 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                   <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-right">
                      <div class="row form-image">
                         <div class="col-lg-12">
-                           Upload/change image
+							Upload/change image
+							<form action="/your-details" type="POST">
+								<input type="hidden" name="PictureUpdate" value="pictureUpload">
+								<input type="submit">
+							</form>
                         </div>
                      </div>
                      <div class="row">

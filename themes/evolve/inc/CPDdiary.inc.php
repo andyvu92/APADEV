@@ -36,7 +36,7 @@ if(isset($_POST["nonAPA"])) {
 // Response -
 // PD_id, NPD_id, CPD hours, PD title, PD date, CPD points
 // Description, Date, Time, Provider, Reflection
-$results = GetAptifyData("33", $_SESSON["UserID"]);
+$results = GetAptifyData("33", "UserID"); //$_SESSON["UserID"]
 
 $totalNum = sizeof($results);
 $CPDHousrs = $results["CurrentCPDHour"];
@@ -47,6 +47,16 @@ foreach($results["APA"] as $t) {
 }
 foreach($results["NONAPA"] as $t) {
     array_push($NAPA, $t);
+}
+
+if(isset($_POST["NONAPA"])) {
+	// 2.2.38 - GET NON-APA CPD point's PDF
+	// Send - 
+	// UserID
+	// Response -
+	// PDF file of NON-CPD hours
+	$NCPDPDF = GetAptifyData("38", "UserID");//$_SESSON["UserID"]
+	// todo!
 }
 /*
 echo "Result: <br />";
@@ -367,6 +377,10 @@ function move(input) {
 <div class="brd-headling">&nbsp;</div>
 
 <button class="Non-APA-hour" data-toggle="modal" data-target="#nonAPAhour"><span>Add non-APA hours</span></button><br />
+<form action="/pd/cpd-diary" method="POST">
+<input type="submit" class="Non-APA-hour" name="NONAPA" id="NONAPA" value="Download NON-APA PDF">
+</form>
+<br />
 
 <strong><a href="http://www.physiotherapyboard.gov.au/documents/default.aspx?record=WD15%2f18489&dbid=AP&chksum=ewqLtzOm4m%2fsRUrlGCmo1A%3d%3d">This is based on Physiotherapy Board of Australia's Continuing professional development form.</a></strong>
 <div class="NAPAhours">

@@ -83,9 +83,21 @@
 	<section class="post-content">
     
 	<?php 
-	  
+		if(isset($_POST["Emailaddress"]) && isset($_POST["Password"])) {
+			// 2.2.7 - Log-in
+			// Send - 
+			// User ID, Password
+			// Response -
+			// N/A.
+			$User["ID"] = $_POST["Emailaddress"];
+			$User["Password"] = $_POST["Password"];
+			$LogIn = GetAptifyData("7", $User);
+			// todo
+			// once they successfully login, create userID Session
+			// and get User's detail data.
+		}
       
-	   $user_membertype =""; 
+	   $user_membertype ="";
 	   $Job = "";
        $Professionalbody = "";
        $Professionalinsurance = "";
