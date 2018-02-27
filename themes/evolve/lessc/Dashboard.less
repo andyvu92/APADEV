@@ -285,6 +285,19 @@ div[aria-describedby="addPaymentCardForm"] .ui-widget-header{
 div[aria-describedby="addPaymentCardForm"] .ui-dialog-content{
     overflow:hidden!important;
 }
+div[aria-describedby="updateCardForm"].ui-dialog {
+    z-index: 1050!important;
+    left: 33%!important;
+	top: 47%!important;
+	width: 486px!important;
+}
+div[aria-describedby="updateCardForm"] .ui-widget-header{
+    border:none!important;
+	background-color:white!important;
+}
+div[aria-describedby="updateCardForm"] .ui-dialog-content{
+    overflow:hidden!important;
+}
 div[aria-describedby="deleteCardWindow"].ui-dialog {
     z-index: 1050!important;
     left: 33%!important;
@@ -573,6 +586,10 @@ a.uploadImageButton {
 .Membpaymentsiderbar .placeorder{
     width: 222px;
 }
+#block-block-249 .Membpaymentsiderbar .placeorder{
+    width: 173px!important;
+}
+
 .down10 .panel, .down3 .panel{
     background-color: transparent!important;
 }
@@ -631,7 +648,7 @@ a.add-additional-qualification {
 #formaddcard .row{
     margin-bottom:5px;
 }
-#formaddcard .addCartButton{
+#formaddcard .addCartButton,#updateCardForm .addCartButton{
     margin-left: 3%;
 }
 #formaddcard .tooltip {

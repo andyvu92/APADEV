@@ -128,8 +128,8 @@
 		 /*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
 	    if(isset($_POST['ngmusculo']) && $_POST['ngmusculo'] =="1"){ array_push($products,"Intouch"); }
 	    if(isset($_POST['ngsports']) && $_POST['ngsports'] =="1" ) { array_push($products,"SPMagzine"); }
-		if(isset($_POST['fap']) && $_POST['fap'] =="1" ) { array_push($products,"fap"); }
-		
+		if(isset($_POST['fap0']) && $_POST['fap0'] =="1" ) { array_push($products,"fap"); }
+	
 	
         $type = "NG";
 		foreach($products as $key=>$value){
@@ -147,7 +147,7 @@
      <form id="your-detail-form" action="renewmymembership" method="POST">
 
 		 <input type="hidden" name="step1" value="1"/>
-               <div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
+               <div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding ">
                      <div class="row">
                         <div class="col-lg-3">
@@ -345,7 +345,7 @@
                   <div class="row">
                      <div class="col-lg-6">
                         <label for="">Member ID(Your email address)<span>*</span></label>
-                        <input type="text" class="form-control" name="Memberid" <?php if (empty($details['Memberno'])) {echo "placeholder='Member no.'";}   else{ echo 'value="'.$details['Memberno'].'"'; }?> readonly>
+                        <input type="text" class="form-control" name="Memberid" <?php if (empty($details['Memberno'])) {echo "placeholder='Member no.'";}   else{ echo 'value="'.$details['Memberno'].'"';$_SESSION['userID'] = $details['Memberno'];}?> readonly>
                      </div>
                   </div>
 				  <div class="row">
@@ -431,6 +431,7 @@
                      </div>
                   </div>
 				  <div class="row">
+				  <input type="hidden" name="fapnum" value="<?php echo sizeof($details['Specialty']);?>">
 				  <?php if(!empty($details['Specialty'])){
 					  $fp = GetAptifyData("21","request"); 
 					   foreach($fp["Fellowship"] as $key=>$value) {

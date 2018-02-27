@@ -1096,23 +1096,23 @@
 					
 			
                   </div>
-                  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-right">
+                 <!-- <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-right">
                      <div class="row form-image">
                         <div class="col-lg-12">
 						Upload/change image
-                           <!--<form id ="upload-Image-Form" action="jointheapa" method="post" enctype="multipart/form-data">
+                           <form id ="upload-Image-Form" action="jointheapa" method="post" enctype="multipart/form-data">
                            Upload/change image
                            <input type="file" name="fileToUpload" id="fileToUpload">
 						   <input type="hidden" name="uploadeIamge">
                          
 						   <a href="javascript:document.getElementById('upload-Image-Form').submit();" class="uploadImageButton">Upload Image</a>
-                           </form>-->
+                           </form>
 						   
 						   
                         </div>
                      </div>
                                                
-                  </div>
+                  </div>-->
 				  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button1"><span class="dashboard-button-name">Next</span></a></div>
                </div>
                <div class="down2" style="display:none;" >
@@ -1120,26 +1120,27 @@
                      <div class="col-lg-6">
                         <label for="">Member ID(Your email address)<span>*</span></label>
                         <input type="text" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)">
+						<div id="checkMessage"></div>
 						<script>
                            function checkEmailFunction(email) {
-							   	$.ajax({
-									url:"jointheapa", //the page containing php script
+							   $.ajax({
+							        url:"sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
 									type: "POST", //request type,
-									dataType: "json",
-								    data: {CheckEmailID: email},
-									success:function(response) { console.log(response.abc); }
+									//data: {CheckEmailID: email},
+									data: {action: 'test()',CheckEmailID: email},
+									success:function(response) { 
+									var result = response;
+									if(result=="true"){
+										$('#checkMessage').html("this email address has already registered, please use another one");
+										$( "#Memberid" ).focus();
+										$("#Memberid").css("border", "1px solid red");
+									} 
+																	
+									}
 								});
-							 }
-							
+						   }
 						</script>
-						<?php 
-						// call webservice to check email
-		     			if(isset($_POST["CheckEmailID"])){
-						$postEmail["userID"] = $_POST["CheckEmailID"];
-						    echo json_encode(array("abc"=>'successfuly'));
-							//GetAptifyData("16", $postEmail);
-						}
-						?>
+						
                      </div>
                   </div>
 				  <div class="row">

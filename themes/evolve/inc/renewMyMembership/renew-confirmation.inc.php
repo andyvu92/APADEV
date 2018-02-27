@@ -3,7 +3,7 @@
 	 if(isset($_POST['step3'])) {
 	   //continue to get the review data
 	   $postReviewData = $_SESSION['postReviewData'];
-	   if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
+	   if(isset($_POST['Paymentcardvalue'])){ $postReviewData['Card_number'] = $_POST['Paymentcardvalue']; }
 	   if(isset($_POST['rollover'])){ $postReviewData['Rollover'] = $_POST['rollover']; }
 	   $postReviewData['Termsandconditions'] = "1";
 	   
@@ -176,8 +176,22 @@
        <?php 
 		// webservice 2.2.18 Get payment invoice PDF
 		$send["UserID"] = $_SESSION["userID"];
+		
         $send["Invoice_ID"] = "1111";  // after web service 2.2.26 Aptify response the invoice_id;
 		$invoiceAPI = GetAptifyData("18", $send); 
+		// delete shopping cart data from APA database; put the response status validation here!!!!!!!
+		$userID = $_SESSION["userID"];
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+		try {
+		$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID');
+	    $shoppingCartDel->bindValue(':userID', $userID);
+	    $shoppingCartDel->execute();
+        $shoppingCartDel = null;
+		}
+        catch (PDOException $e) {
+				print "Error!: " . $e->getMessage() . "<br/>";
+				die();
+	    }    		
 		?> <a style="color:white;" href="<?php echo $invoiceAPI["Invoice"];?>">Download your receipt</a>
         <p style="color:white;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>
 		</div>

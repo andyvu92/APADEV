@@ -1,8 +1,9 @@
 
 <?php
  include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
-  
-   ?>
+ ?>
+   
+
 <div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
 
 
@@ -116,6 +117,7 @@ eleifend quam in tincidunt.
                            </div>
 						 
 </div>	
+
  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 

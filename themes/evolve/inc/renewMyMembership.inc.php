@@ -148,25 +148,26 @@
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
             <ul class="nav nav-tabs">
-               <li><a class="tabtitle1 inactiveLink" style="cursor: pointer;"><span class="<?php if(!isset($_POST['step1']) && !isset($_POST['step2']))echo "text-underline";?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
+               <li><a class="tabtitle1 inactiveLink" style="cursor: pointer;"><span class="<?php if(!isset($_POST['step1']) && !isset($_POST['step2']) && !isset($_POST['stepAdd']) )echo "text-underline";?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
            
-               <li><a class="tabtitle2 inactiveLink" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li>
+               <li><a class="tabtitle2 inactiveLink" style="cursor: pointer;"><span class="eventtitle2" id="Membership"><strong>Membership</strong></span></a></li>
                
-               <li><a class="tabtitle3 inactiveLink" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li>
-               <li><a class="tabtitle4 inactiveLink" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
-               <li><a class="tabtitle5 inactiveLink" style="cursor: pointer;"><span class="eventtitle5 <?php if(isset($_POST['step1']))echo 'text-underline';?>" id="payment"><strong>Insurance</strong></span></a></li>
-			   <li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6" id="payment"><strong>Survey</strong></span></a></li>
-			   <li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7" id="payment"><strong>Payment</strong></span></a></li>
-			   <li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8" id="payment"><strong>Review</strong></span></a></li>
+               <li><a class="tabtitle3 inactiveLink" style="cursor: pointer;"><span class="eventtitle3" id="Workplace"><strong>Workplace</strong></span></a></li>
+               <li><a class="tabtitle4 inactiveLink" style="cursor: pointer;"><span class="eventtitle4" id="Education"><strong>Education</strong></span></a></li>
+               <li><a class="tabtitle5 inactiveLink" style="cursor: pointer;"><span class="eventtitle5 <?php if(isset($_POST['step1']))echo 'text-underline';?>" id="Insurance"><strong>Insurance</strong></span></a></li>
+			   <li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6" id="Survey"><strong>Survey</strong></span></a></li>
+			   <li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7" id="Payment"><strong>Payment</strong></span></a></li>
+			   <li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 <?php if(isset($_POST['step2']) || isset($_POST['step3']) || isset($_POST['stepAdd']) )echo 'text-underline';?>" id="Review"><strong>Review</strong></span></a></li>
 			</ul>
    
    <?php
  include('sites/all/themes/evolve/inc/renewMyMembership/renew-yourdetail.inc.php');
  if(isset($_POST["step1"]) && $_POST["step1"] == "1") {
 	include('sites/all/themes/evolve/inc/renewMyMembership/renew-insurancesurvey.inc.php'); 
- } elseif(isset($_POST["step2"]) && $_POST["step2"] == "2") {
+ } elseif((isset($_POST["step2"]) && $_POST["step2"] == "2") || (isset($_POST["stepAdd"]) && $_POST["stepAdd"] == "2")) {
 	include('sites/all/themes/evolve/inc/renewMyMembership/renew-final.inc.php');
  }
+
   ?>
   
       </div>

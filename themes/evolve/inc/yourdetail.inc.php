@@ -780,8 +780,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                    </div>
 				    <div class="col-lg-6">
 					     <div class="tooltip">What is this?
-  <span class="tooltiptext"><img src="http://localhost/sites/default/files/MEDIA/CVV number.png" ></span>
-</div>
+                   <span class="tooltiptext"><img src="http://localhost/sites/default/files/MEDIA/CVV number.png" ></span>
+           </div>
 
                         
                    </div>
@@ -792,8 +792,44 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				 </div>
              </form>
     </div>
-				</div></div>
-				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 <?php //need to get installment data from payment ?>"><label for="rollover">Roll over your payment card information</label><input type="checkbox" id="rollover" checked> </div>
+				</div>
+				</div>
+				<div class="row">
+				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 <?php //need to get installment data from payment ?>">
+				<label for="rollover">Roll over your payment card information</label><input type="checkbox" id="rollover" checked> 
+				</div>
+					 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">  <div class="paymentsideuse><input type="checkbox" name="updatecard"><label for="updatecard"><a  style="cursor: pointer; color:white;" id="updatecard">update your card</a></label>
+				  <div id="updateCardForm" style="display:none;">
+                  <form action="" method="POST" id="updatecard">
+				     <div class="row"><div class="col-lg-12">Update your card:</div></div>
+                   
+				
+				 <div class="row">
+				   <div class="col-lg-6">
+                        <input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
+                   </div>
+				 </div>
+                 <div class="row"> 
+				    <div class="col-lg-6">
+                        <input type="text" class="form-control" id="CVV" name="CVV" placeholder="CVV">
+                   </div>
+				    <div class="col-lg-6">
+					     <div class="tooltip">What is this?
+  <span class="tooltiptext"><img src="http://localhost/sites/default/files/MEDIA/CVV number.png" ></span>
+</div>
+                      
+                   </div>
+				
+                 </div>				 
+				<div class="row">
+					 <a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
+				 </div>
+             </form>
+    </div>
+				</div>
+				</div>
+				</div>
+				
       </div>
   
                   <div class="row payment-line">

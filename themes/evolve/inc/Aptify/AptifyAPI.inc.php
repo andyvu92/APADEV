@@ -483,7 +483,27 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />13. Dashboard - update payment method: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			if(isset($variables["Rollover"])){
+				$JSONreturn =  '{ 
+			        "userID":"1",
+				    "Rollover": "1"
+				}';
+			}
+			if(isset($variables["CreditcardID"]) && isset($variables["Expiry date"]) && isset($variables["Expiry date"])){
+				$JSONreturn =  '{ 
+			        "userID":"1",
+					"Creditcard-ID":"1",
+					"Expiry-date":"12-12-2020",
+					"CVV":"333",
+				    "Rollover": "1"
+				}';
+			}
+			if(isset($variables["CreditcardID"])){
+				$JSONreturn =  '{ 
+			        "userID":"1",
+					"Creditcard-ID":"1",
+			    }';
+			}
 			return $JSONreturn;
 		case "14":
 			// For the actual API use
@@ -501,17 +521,28 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />15. Dashboard - Add payment method: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn =  '{ 
+			        "userID":"1",
+				    "Payment-method": "Visa",
+					"Name-on-card": "Lucy",
+					"Cardno":"343424238888",
+					"Expiry-date":"10-10-2020",
+					"CCV":"1"
+				}';
 			return $JSONreturn;
 		case "16":
 			// For the actual API use
 			// $API = "";
-			echo "Data Sent: <br />";
-			print_r($variables);
-			echo "<br />16. Dashboard - Check existing email: <br />";
+			//echo "Data Sent: <br />";
+			//print_r($variables);
+			//echo "<br />16. Dashboard - Check existing email: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = '{
+				"Status":"true"
+			}';
 			return $JSONreturn;
+			
+			
 		case "17":
 			// For the actual API use
 			// $API = "";

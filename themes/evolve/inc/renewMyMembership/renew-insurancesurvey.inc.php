@@ -1,5 +1,5 @@
  
-			<form id="join-insurance-form" action="jointheapa" method="POST">
+			<form id="join-insurance-form" action="renewmymembership" method="POST">
 			  <input type="hidden" name="step2" value="2"/>
 			     <div class="down5" <?php if(isset($_POST['step1']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>  >
 				    <div class="row">
@@ -162,6 +162,11 @@ other material information to be disclosed</label>
                    </div>
 				   <div class="col-lg-3">
                         <input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+                   </div>
+				 </div>
+				 <div class="row">
+				   <div class="col-lg-4">
+                        <input type="checkbox" id="addNewCard" name="addNewCard" value="0"> <label for="addNewCard">Add another card</label>
                    </div>
 				 </div>
                    <div class="row">

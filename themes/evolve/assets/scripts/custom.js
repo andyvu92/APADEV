@@ -26,6 +26,13 @@ jQuery(document).ready(function($) {
         }
 		
 	});
+	$('[class=cardevent]').click(function(){
+      
+	    $('.carddown').slideToggle(450);
+		
+		
+		
+	});
 	$('[class^=join-details-button]').click(function(){
 		
         var i = Number($(this).attr("class").replace('join-details-button', ''));
@@ -267,7 +274,9 @@ jQuery(document).ready(function($) {
 	$('#addPaymentCard').click(function(){
 		$( "#addPaymentCardForm" ).dialog();
     }); 
-	    
+	$('#updatecard').click(function(){
+		$( "#updateCardForm" ).dialog();
+    });    
 	$('.deletecardbutton').click(function(){
 		$( "#deleteCardWindow" ).dialog();
 	}); 
@@ -331,7 +340,9 @@ jQuery(document).ready(function($) {
 		$('input[name=addtionalNumber]').val(i);
     });
 	$( "#datepicker" ).datepicker({dateFormat: 'yy'});
-   
+    $('#Paymentcard').change(function(){
+	    $('#Paymentcardvalue').val($('#Paymentcard').val());
+	}); 
 	 
 });
 

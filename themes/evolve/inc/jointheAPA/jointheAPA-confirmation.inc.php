@@ -178,6 +178,19 @@
 		$send["UserID"] = $_SESSION["userID"];
         $send["Invoice_ID"] = "1111";  // after web service 2.2.26 Aptify response the invoice_id;
 		$invoiceAPI = GetAptifyData("18", $send); 
+		// delete shopping cart data from APA database; put the response status validation here!!!!!!!
+		$userID = $_SESSION["userID"];
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+		try {
+		$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID');
+	    $shoppingCartDel->bindValue(':userID', $userID);
+	    $shoppingCartDel->execute();
+        $shoppingCartDel = null;
+		}
+        catch (PDOException $e) {
+				print "Error!: " . $e->getMessage() . "<br/>";
+				die();
+	    }    		
 		?> <a style="color:white;" href="<?php echo $invoiceAPI["Invoice"];?>">Download your receipt</a>
         <p style="color:white;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>
 		</div>
