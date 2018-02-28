@@ -26,13 +26,14 @@
 	// Year attained, Post graduate degree, post graduate name, 
 	// Post graduate country, Year attained, Additional qualifications
 	$details = GetAptifyData("4", "UserID"); // #_SESSION["UserID"];
+	//print_r($details);
 	
 	// 2.2.10 - GET Picture
 	// Send - 
 	// UserID
 	// Response -
 	// Profile image
-	$details = GetAptifyData("10", "UserID"); // #_SESSION["UserID"];
+	$picture = GetAptifyData("10", "UserID"); // #_SESSION["UserID"];
 	
 	// 2.2.11 - UPDATE Picture
 	// Send - 
@@ -40,9 +41,34 @@
 	// Response -
 	// N/A.
 	if(isset($_POST["PictureUpdate"])) {
-		$details = GetAptifyData("11", "UserID"); // #_SESSION["UserID"];
+		$sendpicture = GetAptifyData("11", "UserID"); // #_SESSION["UserID"];
 	}
 	
+	if(isset($_GET["action"])&& ($_GET["action"]=="addcard")) {
+		//use webservice 2.2.15 Add payment method
+		$AddNewCounter = 0;
+		if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; $AddNewCounter++; }
+		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; $AddNewCounter++; }
+		if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; $AddNewCounter++; }
+		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; $AddNewCounter++; }
+		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; $AddNewCounter++; }
+		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; $AddNewCounter++; }
+		if($AddNewCounter == 6) { $addNewCards = 1; }
+		if($addNewCards == 1) {
+			GetAptifyData("15", $postPaymentData); 
+		}
+	} 
+	
+	if(isset($_POST["deleteID"]) && $_POST["deleteID"] != "") {
+		$deleteCardSubmit["UserID"] = "UserID";
+		$deleteCardSubmit["CreditCardID"] = $_POST["deleteID"];
+		// 2.2.11 - UPDATE Picture
+		// Send - 
+		// UserID, Credit Card ID
+		// Response -
+		// N/A.
+		GetAptifyData("14", $deleteCardSubmit); 
+	}
 	
 	//use webservice 2.2.15 Add payment method
 	/*
@@ -58,6 +84,7 @@
 <div class="extra_information">
 <?php
 // please use those data!!!!
+/*
 echo "Nationalgp: ".$details['Nationalgp']."<br />";
 echo "Branch: ".$details['Branch']."<br />";
 echo "Specialty: ".$details['Specialty']."<br />";
@@ -83,6 +110,7 @@ echo "Workplace_ID2: ".$details["Workplaces"][2]['Workplace_ID']."<br />";
 echo "BuildingName2: ".$details["Workplaces"][2]['BuildingName']."<br />";
 echo "Homehospital2: ".$details["Workplaces"][2]['Homehospital']."<br />";
 echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
+*/
 ?>
 </div>
 <div style="display:table;">
@@ -453,28 +481,19 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                   </div>
                </div>
                <div class="down9"  style="display:none;" >
-                 <?php
-
-             $cardsnum_json= '{
-                 "0":{
-                         "Digitsnumber":"8888",
-                         "Cardtype":"Master",
-                         "Name":"Allen"
-                       },
-                  "1":{
-                         "Digitsnumber":"6666",
-                         "Cardtype":"Visa",
-                         "Name":"Luya"
-                       } ,
-                  "2":{
-                         "Digitsnumber":"9999",
-                         "Cardtype":"Master",
-                         "Name":"Jacky"
-                       }
-      
-      }';
-           $cardsnum= json_decode( $cardsnum_json , true);
-  ?>
+			<?php
+			
+		   
+			// 2.2.12 - GET payment listing
+			// Send - 
+			// UserID
+			// Response -
+			// Credit cards details [Credit card ID, Payment-method,
+			// Name on card, Digits, Exp date, Roll over],  Main card
+			$cardsnum = GetAptifyData("12", "UserID");
+			//$cardsnum = $cardsnums["paymentcards"];
+			//$_SESSION["cardsnum"]= $cardsnum;
+			?>
                     
          <div class="row" >
             <div class="row" >
@@ -482,28 +501,50 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
              </div>
              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			 
-              <form action="pd-shopping-cart?action=delete" method="POST" id="deleteCardForm">
                 <div class="paymentsidecredit"> <fieldset><select  id="Paymentcard" name="Paymentcard" style="width:100%;">
-                      <?php if (sizeof($cardsnum)!=0): ?>   
+				  <?php
+					if (sizeof($cardsnum)!=0) {
+						foreach( $cardsnum["paymentcards"] as $cardnum) {
+							echo '<option value="'.$cardnum["CreditcardsID"].'"';
+							if($cardnum["Rollover"]==1) {
+								echo "selected";
+							}
+							echo 'data-class="'.$cardnum["Payment-method"].'">Credit card ending with ';
+							echo $cardnum["Digitsnumber"].'</option>';
+						}
+					}
+					?>
+					  <?php /*if (sizeof($cardsnum)!=0): ?>   
                                    
                              <?php foreach( $cardsnum as $cardnum):  ?>
                                  <option value="<?php echo  $cardnum["Digitsnumber"];?>" data-class="<?php echo  $cardnum["Cardtype"];?>"><?php echo  $cardnum["Name"];?>&nbsp;<br>Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
                               <?php endforeach; ?>
-                         <?php endif; ?>  
+                         <?php endif; */?>  
                            </select></fieldset></div>
                   
             
          </div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> <a class="deletecardbutton">delete selected card</a>
 		      <div id="deleteCardWindow" style="display:none;">
-		        <h3>Are you sure you want to delete this card?</h3>
-                <button class="deletecardbutton">Yes</button>
+				<form action="your-details?action=delete" method="POST" id="deleteCardForm">
+		        <h3>1Are you sure you want to delete this card?</h3>
+				<input type="hidden" name="deleteID" id="deleteID" value="">
+				<input type="submit" value="Yes">
                 <a target="_self" class="cancelDeleteButton">No</a>
+				</form>
 		</div>
-                </form></div>
+		</div>
+		<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".deletecardbutton").click(function() {
+					var CardID = $("#Paymentcard").val();
+					$("#deleteID").val(CardID);
+				});
+			});
+		</script>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">  <div class="paymentsideuse><input type="checkbox" id="anothercard"><label for="anothercard"><a  style="cursor: pointer; color:white;" id="addPaymentCard">Add a new card</a></label>
 				  <div id="addPaymentCardForm" style="display:none;">
-                  <form action="pd-shopping-cart?action=addcard" method="POST" id="formaddcard">
+                  <form action="/your-details?action=addcard" method="POST" id="formaddcard">
 				     <div class="row"><div class="col-lg-12">Add a new card:</div></div>
                      <div class="row">
 					  
@@ -916,7 +957,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                         </select>
                      </div>
                    </div>
-                   <p>[animate type="fadeInUp"]</p>
+                   <?php /*
+				   <p>[animate type="fadeInUp"]</p>
                   <p>[accordions class="question"]</p>
                  <p>[accordion title="Your interest area"]</p>
                     
@@ -925,6 +967,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                         Your special interest area:
                     </div>
                   </div>
+				  
                   <div class="row">
                     <div class="col-lg-4">
                     <input type="checkbox" name="Acupuncture-dry-needing<?php echo $key;?>" id="Acupuncture-dry-needing<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Acupuncture-dry-needing'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Acupuncture-dry-needing']==1){echo "checked";} ?>> <label for="Acupuncture-dry-needing<?php echo $key;?>">Acupuncture and dry needling</label>
@@ -1048,7 +1091,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                     <input type="checkbox" name="Yoga<?php echo $key;?>" id="Yoga<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['SpecialInterest']['Yoga'];?>" <?php if($details['Workplaces'][$key]['SpecialInterest']['Yoga']==1){echo "checked";} ?>> <label for="Yoga<?php echo $key;?>">Yoga</label>
                     </div>
                   </div>
-                
+                 */ ?>
                   <p>[/accordion]</p>
                   <p>[/accordions]</p>
                   <p>[/animate]</p>

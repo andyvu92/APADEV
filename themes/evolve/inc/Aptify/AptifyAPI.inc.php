@@ -116,7 +116,7 @@ function AptifyAPI($APItype, $variables){
 				   "Shipping-country":"Australia",
 				   "Mailing-BuildingName":"",'.// Added
 				   '"Mailing-Address_Line_1":"1175",'.// changed
-				   '"Mailing-PObox":""'.// Added
+				   '"Mailing-PObox":"",'.// Added
 				   '"Mailing-Address_Line_2":"Toorak Road",'.// changed
 				   '"Mailing-city-town":"Melbourne",
 				   "Mailing-postcode":"3177",
@@ -460,21 +460,21 @@ function AptifyAPI($APItype, $variables){
 			$JSONreturn =  '{ 
 			        "Main-Creditcard-ID":"1",
 					"paymentcards": [
-					   { "Creditcards ID": "1",
+					   { "CreditcardsID": "1",
 						"Payment-method": "Master",
 						"Name-on-card": "Lucy",
 						"Digitsnumber":"8888",
 						"Expiry-date":"10-10-2020",
 						"Rollover":"1"
 						},
-						{ "Creditcards ID": "2",
+						{ "CreditcardsID": "2",
 						"Payment-method": "Visa",
 						"Name-on-card": "Lucy",
 						"Digitsnumber":"6666",
 						"Expiry-date":"10-10-2020",
 						"Rollover":"0"
 						},
-						{ "Creditcards ID": "3",
+						{ "CreditcardsID": "3",
 						"Payment-method": "Master",
 						"Name-on-card": "Lucy",
 						"Digitsnumber":"9999",
