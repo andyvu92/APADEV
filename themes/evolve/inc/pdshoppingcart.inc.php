@@ -128,7 +128,6 @@ if(isset($_SESSION["userID"])&& ($_SESSION["userID"]!=0)){
 }
 ?>
 
-<form action="completed-purchase" method="POST">
 <?php   if($productList->rowCount()>0):?>
 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
 		<h1 class="SectionHeader">Summary of cart</h1>
@@ -145,9 +144,12 @@ if(isset($_SESSION["userID"])&& ($_SESSION["userID"]!=0)){
                        </tr>
                        <?php 
 					   //print_r($products);
+					   $ListProductID = Array();
 					   foreach($products as $productt){
 							$n = 0;
 							$pass=$localProducts[$n]['UID'];
+							$arrPID["PID"] = $productt['Id'];
+							array_push($ListProductID ,$arrPID);
 								echo "<tr>";
                                 echo	"<td>".$productt['Title']."</td>";
                                 echo	"<td>".$productt['Begindate']."-".$productt['Enddate']."</td>";
@@ -187,7 +189,7 @@ if(isset($_SESSION["userID"])&& ($_SESSION["userID"]!=0)){
 		<?php
 		if (sizeof($cardsnum)!=0) {
 			foreach( $cardsnum["paymentcards"] as $cardnum) {
-				echo '<option value="'.$cardnum["Digitsnumber"];
+				echo '<option value="'.$cardnum["Digitsnumber"].'"';
 				if($cardnum["Rollover"]==1) {
 					echo "selected";
 				}
@@ -206,7 +208,6 @@ if(isset($_SESSION["userID"])&& ($_SESSION["userID"]!=0)){
 		<?php endif; */?>  
 		</select></fieldset></div>
 	<?php endif; ?>
-	</form>
 		<div class="paymentsideuse <?php if($price==0) echo " display-none";?>"><input type="checkbox" id="anothercard"><label for="anothercard"><a class="event10" style="cursor: pointer;">Use another card</a></label>
 		<div class="down10" style="display:none;">
 			<form action="pd-shopping-cart?action=addcard" method="POST" id="formaddcard">
@@ -262,8 +263,26 @@ if(isset($_SESSION["userID"])&& ($_SESSION["userID"]!=0)){
                       <td>A$<?php echo $price;?></td>
                    </tr>
            </table>
-    
-         <a target="_blank" class="addCartlink"><button class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
+		         
+		<form action="/pd/completed-purchase" method="POST">
+			<input type="hidden" name="PRF" id="PRF" value="test">
+			<input type="hidden" name="TandC" id="TandC" value="0">
+			<input type="hidden" name="CardUsed" id="CardUsed" value="0">
+			<?php
+				$counterTotal = count($ListProductID);
+				$counters = 0;
+				foreach($ListProductID as $PIDs) {
+					$counters++;
+					echo '<input type="hidden" name="PID'.$counters.'" id="PID'.$counters.'" value="'.$PIDs["PID"].'">';
+				}
+				echo '<input type="hidden" name="total" id="total" value="'.$counterTotal.'">';
+			?>
+			
+			<input class="placeorder" type="submit" value="PLACE YOUR ORDER">
+			<!--a target="_blank" class="addCartlink">
+				<button class="placeorder" type="submit">PLACE YOUR ORDER</button>
+			</a-->
+		</form>
 </div>
 <?php endif; ?>
 <?php if($productList->rowCount()==0): ?>   <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><h3 style="color:black;">You don not have any products in your shopping cart.</h3></div>      <?php endif;?>
@@ -304,7 +323,34 @@ $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
       .iconselectmenu( "menuWidget" )
         .addClass( "ui-menu-icons customicons" );
 
+	$("#accept1").change(function() {
+		if(changeV() == "1") {
+			$("TandC").val("1");
+		}
+	});
+	$("#accept2").change(function() {
+		if(changeV() == "1") {
+			$("TandC").val("1");
+		}
+	});
+	$("#accept3").change(function() {
+		if(changeV() == "1") {
+			$("TandC").val("1");
+		}
+	});
+	
+	function changeV() {
+		$("#CardUsed").val($("#Paymentcard").val());
+		if($("#accept1").is(":checked")) {
+			if($("#accept2").is(":checked")) {
+				if($("#accept3").is(":checked")) {
+					return "1";
+				}
+			}
+		}
+	}
 } );
+
 </script>
 <style>
 fieldset {
