@@ -513,7 +513,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				  <?php
 					if (sizeof($cardsnum)!=0) {
 						foreach( $cardsnum["paymentcards"] as $cardnum) {
-							echo '<option value="'.$cardnum["CreditcardsID"].'"';
+							echo '<option value="'.$cardnum["Creditcards-ID"].'"';
 							if($cardnum["Rollover"]==1) {
 								echo "selected";
 							}
