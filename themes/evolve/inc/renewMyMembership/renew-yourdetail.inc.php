@@ -41,22 +41,22 @@
 		$postData['Billing-Country'] = $_POST['Billing-Country'];  
 	  }
 	  //Add shipping address & mailing address post data
-	  if(isset($_SESSION['Shipping-BuildingName'])){ $postData['Shipping-BuildingName'] = $_SESSION['Shipping-BuildingName']; } else { $postData['Shipping-BuildingName'] ="";}
-	  if(isset($_SESSION['Shipping-Address_Line_1'])){ $postData['Shipping-Address_Line_1'] = $_SESSION['Shipping-Address_Line_1']; } else { $postData['Shipping-Address_Line_1'] ="";}
-	  if(isset($_SESSION['Shipping-Address_Line_2'])){ $postData['Shipping-Address_Line_2'] = $_SESSION['Shipping-Address_Line_2']; } else { $postData['Shipping-Address_Line_2'] ="";}
-	  if(isset($_SESSION['Shipping-PObox'])){ $postData['Shipping-PObox'] = $_SESSION['Shipping-PObox']; } else { $postData['Shipping-PObox'] ="";}
-	  if(isset($_SESSION['Shipping-city-town'])){ $postData['Shipping-city-town'] = $_SESSION['Shipping-city-town']; } else { $postData['Shipping-city-town'] ="";}
-	  if(isset($_SESSION['Shipping-postcode'])){ $postData['Shipping-postcode'] = $_SESSION['Shipping-postcode']; } else { $postData['Shipping-postcode'] ="";}
-	  if(isset($_SESSION['Shipping-state'])){ $postData['Shipping-state'] = $_SESSION['Shipping-state']; } else { $postData['Shipping-state'] ="";}
-	  if(isset($_SESSION['Shipping-country'])){ $postData['Shipping-country'] = $_SESSION['Shipping-country']; } else { $postData['Shipping-country'] ="";}
-	  if(isset($_SESSION['Mailing-BuildingName'])){ $postData['Mailing-BuildingName'] = $_SESSION['Mailing-BuildingName']; } else { $postData['Mailing-BuildingName'] ="";}
-	  if(isset($_SESSION['Mailing-Address_Line_1'])){ $postData['Mailing-Address_Line_1'] = $_SESSION['Mailing-Address_Line_1']; } else { $postData['Mailing-Address_Line_1'] ="";}
-	  if(isset($_SESSION['Mailing-Address_Line_2'])){ $postData['Mailing-Address_Line_2'] = $_SESSION['Mailing-Address_Line_2']; } else { $postData['Mailing-Address_Line_2'] ="";}
-	  if(isset($_SESSION['Mailing-PObox'])){ $postData['Mailing-PObox'] = $_SESSION['Mailing-PObox']; } else { $postData['Mailing-PObox'] ="";}
-	  if(isset($_SESSION['Mailing-city-town'])){ $postData['Mailing-city-town'] = $_SESSION['Mailing-city-town']; } else { $postData['Mailing-city-town'] ="";}
-	  if(isset($_SESSION['Mailing-postcode'])){ $postData['Mailing-postcode'] = $_SESSION['Mailing-postcode']; } else { $postData['Mailing-postcode'] ="";}
-	  if(isset($_SESSION['Mailing-state'])){ $postData['Mailing-state'] = $_SESSION['Mailing-state']; } else { $postData['Mailing-state'] ="";}
-	  if(isset($_SESSION['Mailing-country'])){ $postData['Mailing-country'] = $_SESSION['Mailing-country']; } else { $postData['Mailing-country'] ="";}	  
+	  if(isset($_POST['Shipping-BuildingName'])){ $postData['Shipping-BuildingName'] = $_POST['Shipping-BuildingName']; }
+	  if(isset($_POST['Shipping-Address_Line_1'])){ $postData['Shipping-Address_Line_1'] = $_POST['Shipping-Address_Line_1']; }
+	  if(isset($_POST['Shipping-Address_Line_2'])){ $postData['Shipping-Address_Line_2'] = $_POST['Shipping-Address_Line_2']; }
+	  if(isset($_POST['Shipping-PObox'])){ $postData['Shipping-PObox'] = $_POST['Shipping-PObox']; } 
+	  if(isset($_POST['Shipping-city-town'])){ $postData['Shipping-city-town'] = $_POST['Shipping-city-town']; } 
+	  if(isset($_POST['Shipping-postcode'])){ $postData['Shipping-postcode'] = $_POST['Shipping-postcode']; } 
+	  if(isset($_POST['Shipping-state'])){ $postData['Shipping-state'] = $_POST['Shipping-state']; }
+	  if(isset($_POST['Shipping-country'])){ $postData['Shipping-country'] = $_POST['Shipping-country']; }
+	  if(isset($_POST['Mailing-BuildingName'])){ $postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName']; } 
+	  if(isset($_POST['Mailing-Address_Line_1'])){ $postData['Mailing-Address_Line_1'] = $_POST['Mailing-Address_Line_1']; } 
+	  if(isset($_POST['Mailing-Address_Line_2'])){ $postData['Mailing-Address_Line_2'] = $_POST['Mailing-Address_Line_2']; } 
+	  if(isset($_POST['Mailing-PObox'])){ $postData['Mailing-PObox'] = $_POST['Mailing-PObox']; }
+	  if(isset($_POST['Mailing-city-town'])){ $postData['Mailing-city-town'] = $_POST['Mailing-city-town']; } 
+	  if(isset($_POST['Mailing-postcode'])){ $postData['Mailing-postcode'] = $_POST['Mailing-postcode']; }
+	  if(isset($_POST['Mailing-state'])){ $postData['Mailing-state'] = $_POST['Mailing-state']; } 
+	  if(isset($_POST['Mailing-country'])){ $postData['Mailing-country'] = $_POST['Mailing-country']; } 
 	  //---
 	  if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid']; }
 	  if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password']; }
@@ -164,23 +164,6 @@
 ?> 
 
 <?php $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
-//stored shipping address & mailing address to session
-    $_SESSION['Shipping-BuildingName'] = $details['Shipping-BuildingName'];	
-	$_SESSION['Shipping-Address_Line_1'] = $details['Shipping-Address_Line_1'];	
-	$_SESSION['Shipping-Address_Line_2'] = $details['Shipping-Address_Line_2'];	
-	$_SESSION['Shipping-PObox'] = $details['Shipping-PObox'];
-	$_SESSION['Shipping-city-town'] = $details['Shipping-city-town'];
-	$_SESSION['Shipping-postcode'] = $details['Shipping-postcode'];
-	$_SESSION['Shipping-state'] = $details['Shipping-state'];
-	$_SESSION['Shipping-country'] = $details['Shipping-country'];
-	$_SESSION['Mailing-BuildingName'] = $details['Mailing-BuildingName'];	
-	$_SESSION['Mailing-Address_Line_1'] = $details['Mailing-Address_Line_1'];	
-	$_SESSION['Mailing-PObox'] = $details['Mailing-PObox'];	
-	$_SESSION['Mailing-Address_Line_2'] = $details['Mailing-Address_Line_2'];
-	$_SESSION['Mailing-city-town'] = $details['Mailing-city-town'];
-	$_SESSION['Mailing-postcode'] = $details['Mailing-postcode'];
-	$_SESSION['Mailing-state'] = $details['Mailing-state'];
-	$_SESSION['Mailing-country'] = $details['Mailing-country'];
       
 ?>
      <form id="your-detail-form" action="renewmymembership" method="POST">
@@ -367,8 +350,22 @@
                            <input type="text" class="form-control" name="Billing-Country" id="Billing-Country" <?php if (empty($details['Billing-Country'])) {echo "placeholder='Billing Country'";}   else{ echo 'value="'.$details['Billing-Country'].'"'; }?>>
                         </div>
                      </div>
-					
-			
+					<!---Hidden mailing address and shipping address Start from here-->
+					   <input type="hidden" name="Shipping-BuildingName" value="<?php echo $details['Shipping-BuildingName'];?>">
+					   <input type="hidden" name="Shipping-Address_Line_1" value="<?php echo $details['Shipping-Address_Line_1'];?>">
+					   <input type="hidden" name="Shipping-Address_Line_2" value="<?php echo $details['Shipping-Address_Line_2'];?>">
+					   <input type="hidden" name="Shipping-PObox" value="<?php echo $details['Shipping-PObox'];?>">
+					   <input type="hidden" name="Shipping-postcode" value="<?php echo $details['Shipping-postcode'];?>">
+					   <input type="hidden" name="Shipping-state" value="<?php echo $details['Shipping-state'];?>">
+					   <input type="hidden" name="Shipping-country" value="<?php echo $details['Shipping-country'];?>">
+					   <input type="hidden" name="Mailing-BuildingName" value="<?php echo $details['Mailing-BuildingName'];?>">
+					   <input type="hidden" name="Mailing-Address_Line_1" value="<?php echo $details['Mailing-Address_Line_1'];?>">
+					   <input type="hidden" name="Mailing-Address_Line_2" value="<?php echo $details['Mailing-Address_Line_2'];?>">
+					   <input type="hidden" name="Mailing-PObox" value="<?php echo $details['Mailing-PObox'];?>">
+					   <input type="hidden" name="Mailing-postcode" value="<?php echo $details['Mailing-postcode'];?>">
+					   <input type="hidden" name="Mailing-state" value="<?php echo $details['Mailing-state'];?>">
+					   <input type="hidden" name="Mailing-country" value="<?php echo $details['Mailing-country'];?>">
+			        <!---Hidden mailing address and shipping address End here-->
                   </div>
                   <!--<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-right">
                      <div class="row form-image">
