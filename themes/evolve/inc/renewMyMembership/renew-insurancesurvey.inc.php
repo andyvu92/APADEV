@@ -142,7 +142,7 @@ other material information to be disclosed</label>
 					 <select id="Paymentcard" name="Paymentcard">
                      
                             <?php foreach( $cardsnum["paymentcards"] as $cardnum):  ?>
-                                 <option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardnum["Main-Creditcard-ID"]==$cardnum["Creditcards-ID"]) echo "selected"; ?> data-class="<?php echo  $cardnum["Payment-method"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
+                                 <option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardsnum["Main-Creditcard-ID"]==$cardnum["Creditcards-ID"]) echo "selected"; ?> data-class="<?php echo  $cardnum["Payment-method"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
                             <?php endforeach; ?>
                         
                         </select>

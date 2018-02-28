@@ -67,7 +67,7 @@
 	
 	if(isset($_POST["deleteID"]) && $_POST["deleteID"] != "") {
 		$deleteCardSubmit["UserID"] = "UserID";
-		$deleteCardSubmit["CreditCardID"] = $_POST["deleteID"];
+		$deleteCardSubmit["Creditcard-ID"] = $_POST["deleteID"];
 		// 2.2.14 - DELETE credit card
 		// Send - 
 		// UserID, Credit Card ID
@@ -75,7 +75,39 @@
 		// N/A.
 		GetAptifyData("14", $deleteCardSubmit); 
 	}
-
+	
+  if(isset($_Get["action"]) && $_Get["action"] = "updatecard") {
+		$updateCardSubmit["UserID"] = "UserID";
+		$updateCardSubmit["Creditcard-ID"] = $_POST["selectedCard"];
+		$updateCardSubmit["Expiry-date"] = $_POST["Expiry-date"];
+		$updateCardSubmit["CVV"] = $_POST["CVV"];
+		// 2.2.13 - update payment method-2-update card
+		// Send - 
+		// UserID, Creditcard-ID,Expiry-date,CVV
+		// Response -
+		// N/A.
+		GetAptifyData("13", $updateCardSubmit); 
+	}
+ if(isset($_Get["action"]) && $_Get["action"] = "setCardForm") {
+		$updateCardSubmit["UserID"] = "UserID";
+		$updateCardSubmit["Creditcard-ID"] = $_POST["selectedCard"];
+		// 2.2.13 - update payment method-3-set main card
+		// Send - 
+		// UserID, Creditcard-ID
+		// Response -
+		// N/A.
+		GetAptifyData("13", $updateCardSubmit); 
+	}
+ if(isset($_Get["action"]) && $_Get["action"] = "rollover") {
+		$updateCardSubmit["UserID"] = "UserID";
+		$updateCardSubmit["Rollover"] = $_POST["Rollover"];
+		// 2.2.13 - update payment method-1-set user rollover
+		// Send - 
+		// UserID, Rollover
+		// Response -
+		// N/A.
+		GetAptifyData("13", $updateCardSubmit); 
+	}
 	
 	//use webservice 2.2.15 Add payment method
 	/*
@@ -309,7 +341,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                         </div>
                      </div>
                      <div class="row">
-                        <div class="col-lg-12">Mailing address:</div>
+                        <div class="col-lg-12">Residential address:</div>
                      </div>
                      <div class="row">
                         <div class="col-lg-4">
@@ -514,9 +546,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					if (sizeof($cardsnum)!=0) {
 						foreach( $cardsnum["paymentcards"] as $cardnum) {
 							echo '<option value="'.$cardnum["Creditcards-ID"].'"';
-							if($cardnum["Rollover"]==1) {
+							if($cardsnum["Main-Creditcard-ID"]==$cardnum["Creditcards-ID"]) {
 								echo "selected";
 							}
+							
 							echo 'data-class="'.$cardnum["Payment-method"].'">Credit card ending with ';
 							echo $cardnum["Digitsnumber"].'</option>';
 						}
@@ -536,7 +569,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 		      <div id="deleteCardWindow" style="display:none;">
 
 				<form action="your-details?action=delete" method="POST" id="deleteCardForm">
-		        <h3>1Are you sure you want to delete this card?</h3>
+		        <h3>Are you sure you want to delete this card?</h3>
 				<input type="hidden" name="deleteID" id="deleteID" value="">
 				<input type="submit" value="Yes">
                 <a target="_self" class="cancelDeleteButton">No</a>
@@ -549,6 +582,16 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					var CardID = $("#Paymentcard").val();
 					$("#deleteID").val(CardID);
 				});
+				$(".updatecard").click(function() {
+					var CardID = $("#Paymentcard").val();
+					$("#selectedCard").val(CardID);
+				});
+				$(".setcard").click(function() {
+					var CardID = $("#Paymentcard").val();
+					$("#selectedCard").val(CardID);
+				});
+				
+				
 			});
 		</script>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">  <div class="paymentsideuse><input type="checkbox" id="anothercard"><label for="anothercard"><a  style="cursor: pointer; color:white;" id="addPaymentCard">Add a new card</a></label>
@@ -604,13 +647,15 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				</div>
 				<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 <?php //need to get installment data from payment ?>">
-				<label for="rollover">Roll over your payment card information</label><input type="checkbox" id="rollover" checked> 
+				
 				</div>
-					 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">  <div class="paymentsideuse><input type="checkbox" name="updatecard"><label for="updatecard"><a  style="cursor: pointer; color:white;" id="updatecard">update your card</a></label>
+        
+			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">  <div class="paymentsideuse><input type="checkbox" name="updatecard"><label for="updatecard"><a  style="cursor: pointer; color:white;" id="updatecard">update your card</a></label>
 				  <div id="updateCardForm" style="display:none;">
-                  <form action="" method="POST" id="updatecard">
+                  <form action="/your-details?action=updatecard" method="POST" id="updatecard">
 				     <div class="row"><div class="col-lg-12">Update your card:</div></div>
-                     <input type="hidden" name="updateCard">
+                     
+					 <input type="hidden" name="selectedCard">
 				
 				 <div class="row">
 				   <div class="col-lg-6">
@@ -637,7 +682,30 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				</div>
 				</div>
 				</div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> <a  style="cursor: pointer; color:white;" id="rolloverButton">Change your roll over status</a>
+		      <div id="rollOverWindow" style="display:none;">
+
+				<form action="your-details?action=rollover" method="POST" id="rollOverForm">
+		        <h3>Are you sure you do want to change roll over status next year?</h3>
+				 <input type="hidden" name="selectedCard">
+				 <label for="rollover">Roll over</label><input type="checkbox" id="rollover" checked> 
+				 <input type="submit" value="Yes">
+                <a target="_self" class="cancelDeleteButton">No</a>
+				</form>
+		    </div>
+		 </div>
+		  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> <a  style="cursor: pointer; color:white;" id="setCardButton">Set your main credit card</a>
+		      <div id="setCardWindow" style="display:none;">
+
+				<form action="your-details?action=setCard" method="POST" id="setCardForm">
+		         <h3>Are you sure you do want to set selected car as main creadit card</h3>
+				 <input type="hidden" name="selectedCard">
 				
+				 <input type="submit" value="Yes">
+                <a target="_self" class="cancelDeleteButton">No</a>
+				</form>
+		    </div>
+		 </div>
       </div>
   
                   <div class="row payment-line">

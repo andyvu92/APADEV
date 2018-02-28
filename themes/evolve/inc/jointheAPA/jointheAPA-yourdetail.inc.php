@@ -1,6 +1,6 @@
 <?php
  //$_SESSION['userID']=1;
-
+ //$_SESSION for shipping address & mailing address
   if(isset($_POST['step1'])) {
 	  $postData = array();
 	  if(isset($_POST['Prefix'])){ $postData['Prefix'] = $_POST['Prefix']; } else { $postData['Prefix'] = '';}
@@ -15,37 +15,57 @@
 	  if(isset($_POST['Mobile-number'])){ $postData['Mobile-number'] = $_POST['Mobile-number']; }
 	  if(isset($_POST['Aboriginal'])){ $postData['Aboriginal'] = $_POST['Aboriginal']; }
 	  if(isset($_POST['BuildingName'])){ $postData['BuildingName'] = $_POST['BuildingName']; }
-	  if(isset($_POST['Unit'])){ $postData['Unit'] = $_POST['Unit']; }
+	  if(isset($_POST['Address_Line_1'])){ $postData['Address_Line_1'] = $_POST['Address_Line_1']; }
 	  if(isset($_POST['Pobox'])){ $postData['Pobox'] = $_POST['Pobox']; }
-	  if(isset($_POST['Street'])){ $postData['Street'] = $_POST['Street']; }
+	  if(isset($_POST['Address_Line_2'])){ $postData['Address_Line_2'] = $_POST['Address_Line_2']; }
 	  if(isset($_POST['Suburb'])){ $postData['Suburb'] = $_POST['Suburb']; }
 	  if(isset($_POST['Postcode'])){ $postData['Postcode'] = $_POST['Postcode']; }
 	  if(isset($_POST['State'])){ $postData['State'] = $_POST['State']; }
 	  if(isset($_POST['Country'])){ $postData['Country'] = $_POST['Country']; }
+	  //change from shipping address to billing address
 	  if(isset($_POST['Shipping-address-join']) && $_POST['Shipping-address-join']=='1'){ 
-		$postData['Shipping-BuildingName'] = $_POST['BuildingName']; 
-		$postData['Shipping-unitno'] = $_POST['Unit'];
-        $postData['Shipping-streetname'] = $_POST['Street'];
-		$postData['Shipping-city-town'] = $_POST['Suburb'];
-		$postData['Shipping-postcode'] = $_POST['Postcode'];
-		$postData['Shipping-state'] = $_POST['State'];
-		$postData['Shipping-country'] = $_POST['Country'];
+		$postData['Billing-BuildingName'] = $_POST['BuildingName']; 
+		$postData['Billing-Address_Line_1'] = $_POST['Address_Line_1'];
+		$postData['Billing-Address_Line_2'] = $_POST['Address_Line_2'];
+        $postData['Billing-PObox'] = $_POST['Pobox'];
+		$postData['Billing-Suburb'] = $_POST['Suburb'];
+		$postData['Billing-Postcode'] = $_POST['Postcode'];
+		$postData['Billing-State'] = $_POST['State'];
+		$postData['Billing-Country'] = $_POST['Country'];
 	  }else{
-		$postData['Shipping-BuildingName'] = $_POST['Shipping-BuildingName']; 
-		$postData['Shipping-unitno'] = $_POST['Shipping-unitno'];
-        $postData['Shipping-streetname'] = $_POST['Shipping-streetname'];
-		$postData['Shipping-city-town'] = $_POST['Shipping-city-town'];
-		$postData['Shipping-postcode'] = $_POST['Shipping-postcode'];
-		$postData['Shipping-state'] = $_POST['Shipping-state'];
-		$postData['Shipping-country'] = $_POST['Shipping-country'];  
+		$postData['Billing-BuildingName'] = $_POST['Billing-BuildingName']; 
+		$postData['Billing-Address_Line_1'] = $_POST['Billing-Address_Line_1'];
+		$postData['Billing-Address_Line_2'] = $_POST['Billing-Address_Line_2'];
+        $postData['Billing-PObox'] = $_POST['Billing-PObox'];
+		$postData['Billing-Suburb'] = $_POST['Billing-Suburb'];
+		$postData['Billing-Postcode'] = $_POST['Billing-Postcode'];
+		$postData['Billing-State'] = $_POST['Billing-State'];
+		$postData['Billing-Country'] = $_POST['Billing-Country'];  
 	  }
+	  //Add shipping address & mailing address post data
+	  if(isset($_SESSION['Shipping-BuildingName'])){ $postData['Shipping-BuildingName'] = $_SESSION['Shipping-BuildingName']; } else { $postData['Shipping-BuildingName'] ="";}
+	  if(isset($_SESSION['Shipping-Address_Line_1'])){ $postData['Shipping-Address_Line_1'] = $_SESSION['Shipping-Address_Line_1']; } else { $postData['Shipping-Address_Line_1'] ="";}
+	  if(isset($_SESSION['Shipping-Address_Line_2'])){ $postData['Shipping-Address_Line_2'] = $_SESSION['Shipping-Address_Line_2']; } else { $postData['Shipping-Address_Line_2'] ="";}
+	  if(isset($_SESSION['Shipping-PObox'])){ $postData['Shipping-PObox'] = $_SESSION['Shipping-PObox']; } else { $postData['Shipping-PObox'] ="";}
+	  if(isset($_SESSION['Shipping-city-town'])){ $postData['Shipping-city-town'] = $_SESSION['Shipping-city-town']; } else { $postData['Shipping-city-town'] ="";}
+	  if(isset($_SESSION['Shipping-postcode'])){ $postData['Shipping-postcode'] = $_SESSION['Shipping-postcode']; } else { $postData['Shipping-postcode'] ="";}
+	  if(isset($_SESSION['Shipping-state'])){ $postData['Shipping-state'] = $_SESSION['Shipping-state']; } else { $postData['Shipping-state'] ="";}
+	  if(isset($_SESSION['Shipping-country'])){ $postData['Shipping-country'] = $_SESSION['Shipping-country']; } else { $postData['Shipping-country'] ="";}
+	  if(isset($_SESSION['Mailing-BuildingName'])){ $postData['Mailing-BuildingName'] = $_SESSION['Mailing-BuildingName']; } else { $postData['Mailing-BuildingName'] ="";}
+	  if(isset($_SESSION['Mailing-Address_Line_1'])){ $postData['Mailing-Address_Line_1'] = $_SESSION['Mailing-Address_Line_1']; } else { $postData['Mailing-Address_Line_1'] ="";}
+	  if(isset($_SESSION['Mailing-Address_Line_2'])){ $postData['Mailing-Address_Line_2'] = $_SESSION['Mailing-Address_Line_2']; } else { $postData['Mailing-Address_Line_2'] ="";}
+	  if(isset($_SESSION['Mailing-PObox'])){ $postData['Mailing-PObox'] = $_SESSION['Mailing-PObox']; } else { $postData['Mailing-PObox'] ="";}
+	  if(isset($_SESSION['Mailing-city-town'])){ $postData['Mailing-city-town'] = $_SESSION['Mailing-city-town']; } else { $postData['Mailing-city-town'] ="";}
+	  if(isset($_SESSION['Mailing-postcode'])){ $postData['Mailing-postcode'] = $_SESSION['Mailing-postcode']; } else { $postData['Mailing-postcode'] ="";}
+	  if(isset($_SESSION['Mailing-state'])){ $postData['Mailing-state'] = $_SESSION['Mailing-state']; } else { $postData['Mailing-state'] ="";}
+	  if(isset($_SESSION['Mailing-country'])){ $postData['Mailing-country'] = $_SESSION['Mailing-country']; } else { $postData['Mailing-country'] ="";}	  
+	  //---	
 	  if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid']; $_SESSION["userID"] = $_POST['Memberid'];}
 	  if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password']; }
 	  if(isset($_POST['MemberType'])){ $postData['MemberType'] = $_POST['MemberType']; }
 	  if(isset($_POST['Nationalgp'])){ $postData['Nationalgp'] = $_POST['Nationalgp']; }
 	  if(isset($_POST['Branch'])){ $postData['Branch'] = $_POST['Branch']; }
-	  if(isset($_POST['Nationalgp'])){ $postData['Nationalgp'] = $_POST['Nationalgp']; }
-	 
+	  if(isset($_POST['SpecialInterest'])){ $postData['SpecialInterest'] = $_POST['SpecialInterest']; }
 	  if(isset($_POST['wpnumber'])){ 
 	    $num = $_POST['wpnumber']; 
 		for($i=0; $i<$num; $i++){
@@ -160,7 +180,24 @@
 ?> 
 <?php  if(isset($_SESSION['userID'])):  ?>
 <?php $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
-      
+    //stored shipping address & mailing address to session
+    $_SESSION['Shipping-BuildingName'] = $details['Shipping-BuildingName'];	
+	$_SESSION['Shipping-Address_Line_1'] = $details['Shipping-Address_Line_1'];	
+	$_SESSION['Shipping-Address_Line_2'] = $details['Shipping-Address_Line_2'];	
+	$_SESSION['Shipping-PObox'] = $details['Shipping-PObox'];
+	$_SESSION['Shipping-city-town'] = $details['Shipping-city-town'];
+	$_SESSION['Shipping-postcode'] = $details['Shipping-postcode'];
+	$_SESSION['Shipping-state'] = $details['Shipping-state'];
+	$_SESSION['Shipping-country'] = $details['Shipping-country'];
+	$_SESSION['Mailing-BuildingName'] = $details['Mailing-BuildingName'];	
+	$_SESSION['Mailing-Address_Line_1'] = $details['Mailing-Address_Line_1'];	
+	$_SESSION['Mailing-PObox'] = $details['Mailing-PObox'];	
+	$_SESSION['Mailing-Address_Line_2'] = $details['Mailing-Address_Line_2'];
+	$_SESSION['Mailing-city-town'] = $details['Mailing-city-town'];
+	$_SESSION['Mailing-postcode'] = $details['Mailing-postcode'];
+	$_SESSION['Mailing-state'] = $details['Mailing-state'];
+	$_SESSION['Mailing-country'] = $details['Mailing-country'];
+	
 ?>
      <form id="your-detail-form" action="jointheapa" method="POST">
 
@@ -253,8 +290,8 @@
 					 </div>
                      <div class="row">
                         <div class="col-lg-4">
-                           <label for="">Unit/house number<span>*</span></label>
-                           <input type="text" class="form-control"  name="Unit" id="Unit" <?php if (empty($details['Unit'])) {echo "placeholder='Unit/house number'";}   else{ echo 'value="'.$details['Unit'].'"'; }?>>
+                           <label for="">Address 1<span>*</span></label>
+                           <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1" <?php if (empty($details['Address_Line_1'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Address_Line_1'].'"'; }?>>
                         </div>
                         <div class="col-lg-6 col-lg-offset-2">
                            <label for="">PO box</label>
@@ -263,8 +300,8 @@
                      </div>
                      <div class="row">
                         <div class="col-lg-12">
-                           <label for="">Street name<span>*</span></label>
-                           <input type="text" class="form-control" name="Street" id="Street" <?php if (empty($details['Street'])) {echo "placeholder='Street name'";}   else{ echo 'value="'.$details['Street'].'"'; }?>>
+                           <label for="">Address 2<span>*</span></label>
+                           <input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2" <?php if (empty($details['Address_Line_2'])) {echo "placeholder='Address 2'";}   else{ echo 'value="'.$details['Address_Line_2'].'"'; }?>>
                         </div>
                      </div>
                      <div class="row">
@@ -299,7 +336,7 @@
                      </div>
                    
                   <div class="row">
-				     <div class="col-lg-12"><label for="Shipping-address-join"><strong>Shipping address:(Sames as Billing address)</strong></label><input type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="1" checked></div>
+				     <div class="col-lg-12"><label for="Shipping-address-join"><strong>Billing address:(Sames as Above address)</strong></label><input type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="1" checked></div>
                   
                   </div>
                   
@@ -308,43 +345,43 @@
 				    <div class="row">
 					    <div class="col-lg-4">
                            <label for="">Building name</label>
-                           <input type="text" class="form-control"  name="Shipping-BuildingName" <?php if (empty($details['Shipping-BuildingName'])) {echo "placeholder='Shipping Building Name'";}   else{ echo 'value="'.$details['Shipping-BuildingName'].'"'; }?>>
+                           <input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['Billing-BuildingName'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['Billing-BuildingName'].'"'; }?>>
                         </div>
 					 </div>
 					    <div class="col-lg-4">
-                           <label for="">Unit/house number</label>
-                           <input type="text" class="form-control"  name="Shipping-unitno" id="Shipping-unitno" <?php if (empty($details['Shipping-unitno'])) {echo "placeholder='Shipping Unit'";}   else{ echo 'value="'.$details['Shipping-unitno'].'"'; }?>>
+                           <label for="">Address 1</label>
+                           <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Address_Line_1'])) {echo "placeholder='Billing Address 1'";}   else{ echo 'value="'.$details['Billing-Address_Line_1'].'"'; }?>>
                         </div>
                        
 					     <div class="col-lg-12">
-                           <label for="">Street name</label>
-                           <input type="text" class="form-control" name="Shipping-streetname" id="Shipping-streetname" <?php if (empty($details['Shipping-streetname'])) {echo "placeholder='Shipping Street'";}   else{ echo 'value="'.$details['Shipping-streetname'].'"'; }?>>
+                           <label for="">Address 2</label>
+                           <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Address_Line_2'])) {echo "placeholder='Billing Address 2'";}   else{ echo 'value="'.$details['Billing-Address_Line_2'].'"'; }?>>
                         </div>
 						<div class="col-lg-12">
                            <label for="">City or town</label>
-                           <input type="text" class="form-control" name="Shipping-city-town" id="Shipping-city-town" <?php if (empty($details['Shipping-city-town'])) {echo "placeholder='Shipping City/Town'";}   else{ echo 'value="'.$details['Shipping-city-town'].'"'; }?>>
+                           <input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" <?php if (empty($details['Billing-Suburb'])) {echo "placeholder='Billing City/Town'";}   else{ echo 'value="'.$details['Billing-Suburb'].'"'; }?>>
                         </div>
                         <div class="col-lg-3">
                            <label for="">Postcode</label>
-                           <input type="text" class="form-control" name="Shipping-postcode" id="Shipping-postcode" <?php if (empty($details['Shipping-postcode'])) {echo "placeholder='Shipping Postcode'";}   else{ echo 'value="'.$details['Shipping-postcode'].'"'; }?>>
+                           <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?>>
                         </div>
                         <div class="col-lg-3">
                            <label for="">State</label>
                            <select class="form-control" name="Shipping-state" id="Shipping-state">
-                              <option value=""  <?php if (empty($details['Shipping-state'])) echo "selected='selected'";?> disabled> State </option>
-                              <option value="ACT" <?php if ($details['Shipping-state'] == "ACT") echo "selected='selected'";?>> ACT </option>
-                              <option value="NSW" <?php if ($details['Shipping-state'] == "NSW") echo "selected='selected'";?>> NSW </option>
-                              <option value="SA" <?php if ($details['Shipping-state'] == "SA") echo "selected='selected'";?>> SA </option>
-                              <option value="TAS" <?php if ($details['Shipping-state'] == "TAS") echo "selected='selected'";?>> TAS </option>
-                              <option value="VIC" <?php if ($details['Shipping-state'] == "VIC") echo "selected='selected'";?>> VIC </option>
-                              <option value="QLD" <?php if ($details['Shipping-state'] == "QLD") echo "selected='selected'";?>> QLD </option>
-                              <option value="NT" <?php if ($details['Shipping-state'] == "NT") echo "selected='selected'";?>> NT </option>
-                              <option value="WA" <?php if ($details['Shipping-state'] == "WA") echo "selected='selected'";?>> WA </option>
+                              <option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
+                              <option value="ACT" <?php if ($details['Billing-State'] == "ACT") echo "selected='selected'";?>> ACT </option>
+                              <option value="NSW" <?php if ($details['Billing-State'] == "NSW") echo "selected='selected'";?>> NSW </option>
+                              <option value="SA" <?php if ($details['Billing-State'] == "SA") echo "selected='selected'";?>> SA </option>
+                              <option value="TAS" <?php if ($details['Billing-State'] == "TAS") echo "selected='selected'";?>> TAS </option>
+                              <option value="VIC" <?php if ($details['Billing-State'] == "VIC") echo "selected='selected'";?>> VIC </option>
+                              <option value="QLD" <?php if ($details['Billing-State'] == "QLD") echo "selected='selected'";?>> QLD </option>
+                              <option value="NT" <?php if ($details['Billing-State'] == "NT") echo "selected='selected'";?>> NT </option>
+                              <option value="WA" <?php if ($details['Billing-State'] == "WA") echo "selected='selected'";?>> WA </option>
                            </select>
                         </div>
                         <div class="col-lg-6">
                            <label for="">Country</label>
-                           <input type="text" class="form-control" name="Shipping-country" id="Shipping-country" <?php if (empty($details['Shipping-country'])) {echo "placeholder='Shipping Country'";}   else{ echo 'value="'.$details['Shipping-country'].'"'; }?>>
+                           <input type="text" class="form-control" name="Billing-Country" id="Billing-Country" <?php if (empty($details['Billing-Country'])) {echo "placeholder='Billing Country'";}   else{ echo 'value="'.$details['Billing-Country'].'"'; }?>>
                         </div>
                      </div>
 					
@@ -445,6 +482,32 @@
                            <option value="WA" <?php if ($details['Branch'] == "WA") echo "selected='selected'";?>>WA</option>
                            <option value="Overseas" <?php if ($details['Branch'] == "Overseas") echo "selected='selected'";?>>I live overseas</option>
                          </select>
+                     </div>
+                  </div>
+				        
+                  <div class="row"> 
+                    <div class="col-lg-3">
+                        Your special interest area:
+                    </div>
+					
+					  <div class="col-lg-6">
+					   
+                        <select class="chosen-select" id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
+						  <?php 
+						  // get interest area from Aptify via webserice return Json data;
+							 $interestAreas= GetAptifyData("37","request");
+							 $_SESSION["interestAreas"] = $interestAreas;
+						  ?>
+						                    
+						   <?php 
+						     foreach($interestAreas['InterestAreas']  as $lines){
+								echo '<option value="'.$lines['ListCode'].'">'.$lines['ListName'].'</option>';
+								 
+							 }
+						   
+						   ?>
+                          
+                        </select>
                      </div>
                   </div>
 				 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>
@@ -723,32 +786,7 @@
                      </div>
                    </div>
                
-                    
-                  <div class="row"> 
-                    <div class="col-lg-3">
-                        Your special interest area:
-                    </div>
-					
-					  <div class="col-lg-9">
-					   
-                        <select class="chosen-select" id="interest-area0" name="interest-area0[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
-						  <?php 
-						  // get interest area from Aptify via webserice return Json data;
-							 $interestAreas= GetAptifyData("37","request");
-							 $_SESSION["interestAreas"] = $interestAreas;
-						  ?>
-						                    
-						   <?php 
-						     foreach($interestAreas['InterestAreas']  as $lines){
-								echo '<option value="'.$lines['ListCode'].'">'.$lines['ListName'].'</option>';
-								 
-							 }
-						   
-						   ?>
-                          
-                        </select>
-                     </div>
-                  </div>
+              
                
                   
                 </div>
@@ -989,7 +1027,7 @@
                         </div>
                      </div>
                      <div class="row">
-                        <div class="col-lg-12">Preferred address:</div>
+                        <div class="col-lg-12">Residential address:</div>
                      </div>
 					 <div class="row">
 					    <div class="col-lg-4">
@@ -999,8 +1037,8 @@
 					 </div>
                      <div class="row">
                         <div class="col-lg-4">
-                           <label for="">Unit/house number<span>*</span></label>
-                           <input type="text" class="form-control"  name="Unit" id="Unit">
+                           <label for="">Address line 1<span>*</span></label>
+                           <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
                         </div>
                         <div class="col-lg-6 col-lg-offset-2">
                            <label for="">PO box</label>
@@ -1009,8 +1047,8 @@
                      </div>
                      <div class="row">
                         <div class="col-lg-12">
-                           <label for="">Street name<span>*</span></label>
-                           <input type="text" class="form-control" name="Street" id="Street">
+                           <label for="">Address Line 2<span>*</span></label>
+                           <input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
                         </div>
                      </div>
                      <div class="row">
@@ -1045,7 +1083,7 @@
                      </div>
                    
                   <div class="row">
-				     <div class="col-lg-12"><label for="Shipping-address-join"><strong>Shipping address:(Sames as Billing address)</strong></label><input type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="1" checked></div>
+				     <div class="col-lg-12"><label for="Shipping-address-join"><strong>Billing address:(Sames as Above address)</strong></label><input type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="1" checked></div>
                   
                   </div>
                   
@@ -1054,29 +1092,33 @@
 				    <div class="row">
 					    <div class="col-lg-4">
                            <label for="">Building name</label>
-                           <input type="text" class="form-control"  name="Shipping-BuildingName">
+                           <input type="text" class="form-control"  name="Billing-BuildingName">
                         </div>
 					 </div>
 					    <div class="col-lg-4">
                            <label for="">Unit/house number</label>
-                           <input type="text" class="form-control"  name="Shipping-unitno" id="Shipping-unitno">
+                           <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1">
                         </div>
                        
 					     <div class="col-lg-12">
                            <label for="">Street name</label>
-                           <input type="text" class="form-control" name="Shipping-streetname" id="Shipping-streetname">
+                           <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2">
+                        </div>
+						<div class="col-lg-12">
+                           <label for="">POBOX</label>
+                           <input type="text" class="form-control" name="Billing-PObox" id="Billing-PObox">
                         </div>
 						<div class="col-lg-12">
                            <label for="">City or town</label>
-                           <input type="text" class="form-control" name="Shipping-city-town" id="Shipping-city-town">
+                           <input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb">
                         </div>
                         <div class="col-lg-3">
                            <label for="">Postcode</label>
-                           <input type="text" class="form-control" name="Shipping-postcode" id="Shipping-postcode">
+                           <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode">
                         </div>
                         <div class="col-lg-3">
                            <label for="">State</label>
-                           <select class="form-control" name="Shipping-state" id="Shipping-state">
+                           <select class="form-control" name="Billing-State" id="Billing-State">
                               <option value=""  disabled> State </option>
                               <option value="ACT"> ACT </option>
                               <option value="NSW"> NSW </option>
@@ -1090,7 +1132,7 @@
                         </div>
                         <div class="col-lg-6">
                            <label for="">Country</label>
-                           <input type="text" class="form-control" name="Shipping-country" id="Shipping-country">
+                           <input type="text" class="form-control" name="Billing-Country" id="Billing-Country">
                         </div>
                      </div>
 					
@@ -1217,6 +1259,31 @@
                            <option value="WA">WA</option>
                            <option value="Overseas">I live overseas</option>
                          </select>
+                     </div>
+                  </div>
+				    <div class="row"> 
+                    <div class="col-lg-3">
+                        Your special interest area:
+                    </div>
+					
+					  <div class="col-lg-6">
+					   
+                        <select class="chosen-select" id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
+						  <?php 
+						  // get interest area from Aptify via webserice return Json data;
+							 $interestAreas= GetAptifyData("37","request");
+							 $_SESSION["interestAreas"] = $interestAreas;
+						  ?>
+						                    
+						   <?php 
+						     foreach($interestAreas['InterestAreas']  as $lines){
+								echo '<option value="'.$lines['ListCode'].'">'.$lines['ListName'].'</option>';
+								 
+							 }
+						   
+						   ?>
+                          
+                        </select>
                      </div>
                   </div>
 				 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>
@@ -1495,32 +1562,7 @@
                      </div>
                    </div>
                
-                    
-                  <div class="row"> 
-                    <div class="col-lg-3">
-                        Your special interest area:
-                    </div>
-					
-					  <div class="col-lg-9">
-					   
-                        <select class="chosen-select" id="interest-area0" name="interest-area0[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
-						  <?php 
-						  // get interest area from Aptify via webserice return Json data;
-							 $interestAreas= GetAptifyData("37","request");
-							 $_SESSION["interestAreas"] = $interestAreas;
-						  ?>
-						                    
-						   <?php 
-						     foreach($interestAreas['InterestAreas']  as $lines){
-								echo '<option value="'.$lines['ListCode'].'">'.$lines['ListName'].'</option>';
-								 
-							 }
-						   
-						   ?>
-                          
-                        </select>
-                     </div>
-                  </div>
+                 
                
                   
                 </div>

@@ -239,13 +239,15 @@ jQuery(document).ready(function($) {
            if($(this).is(":checked")){
 			$('#shippingAddress').addClass('shipping');  
             $(this).attr('checked', true);
-            $('#Shipping-unitno').val($('#Unit').val());
-            $('#Shipping-streetname').val($('#Street').val());
-            $('#Shipping-city-town').val($('#Suburb').val());
+			$('#Billing-BuildingName').val($('#BuildingName').val());
+            $('#Billing-Address_Line_1').val($('#Address_Line_1').val());
+            $('#Billing-Address_Line_2').val($('#Address_Line_2').val());
+			$('#Billing-PObox').val($('#Billing-PObox').val());
+            $('#Billing-Suburb').val($('#Suburb').val());
             
-            $('#Shipping-postcode').val($('#Postcode').val());
-            $('#Shipping-state').val($('#State').val());
-            $('#Shipping-country').val($('#Country').val());
+            $('#Billing-Postcode').val($('#Postcode').val());
+            $('#Billing-State').val($('#State').val());
+            $('#Billing-Country').val($('#Country').val());
             
 			
          }
@@ -253,15 +255,17 @@ jQuery(document).ready(function($) {
           
           $(this).removeAttr('checked');
 		  $(this).val('0');
-		  $('#shippingAddress').removeClass('shipping');
+		  $('#Billing-BuildingName').removeClass('shipping');
 		  $('#dashboard-right-content').addClass("autoscroll");
           $('#Shipping-unitno').val('');
-         $('#Shipping-streetname').val('');
-         $('#Shipping-city-town').val('');
+		  $('#Billing-Address_Line_1').val('');
+          $('#Billing-Address_Line_2').val('');
+		  $('#Billing-PObox').val('');
+         $('#Billing-Suburb').val('');
      
-         $('#Shipping-postcode').val('');
-         $('#Shipping-state').val('');
-         $('#Shipping-country').val('');
+         $('#Billing-Postcode').val('');
+         $('#Billing-State').val('');
+         $('#Billing-Country').val('');
          
          }
     }); 
@@ -274,9 +278,15 @@ jQuery(document).ready(function($) {
 	$('#addPaymentCard').click(function(){
 		$( "#addPaymentCardForm" ).dialog();
     }); 
-	$('#updatecard').click(function(){
+	$('#setCardButton').click(function(){
+		$( "#setCardWindow" ).dialog();
+    }); 
+	$('#rolloverButton').click(function(){
+		$( "#rollOverWindow" ).dialog();
+    });
+    $('#updatecard').click(function(){
 		$( "#updateCardForm" ).dialog();
-    });    
+    });	
 	$('.deletecardbutton').click(function(){
 		$( "#deleteCardWindow" ).dialog();
 	}); 

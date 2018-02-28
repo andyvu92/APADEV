@@ -251,10 +251,10 @@ function AptifyAPI($APItype, $variables){
 				   "Aboriginal":"",
 				   "Dietary":["Shellfish","Eggs","Lactose"],
 				   "BuildingName":"",
-				   "Unit":"1175 ",
-				   "Pobox":"437",
-				   "Street":"Toorak Road",
-				   "Suburb":"Camberwell",
+				   "Address_Line_1":"1175 ",'.// changed
+				   '"Pobox":"437",
+				   "Address_Line_2":"Toorak Road",'.// changed
+				   '"Suburb":"Camberwell",
 				   "Postcode":"3124",
 				   "State":"",
 				   "Country":"Australia",
@@ -267,38 +267,43 @@ function AptifyAPI($APItype, $variables){
 						"GER"
 					],
 				   "Branch":"Branch",
-				   "Specialty":"FACP",
+				   "SpecialInterest":["BAN","CHILD","ACU"],'.// Added
+				   '"Specialty":"FACP",
 				   "Status":"Current",
 				   "Regional-group":"A,B,C",
 				   "Billing-BuildingName":"",
-				   "Billing-unitno":"1175",
-				   "Billing-streetname":"Toorak Road",
-				   "Billing-city-town":"Melbourne",
-				   "Billing-postcode":"3177",
-				   "Billing-state":"VIC",
-				   "Billing-country":"Australia",
+				   "Billing-Address_Line_1":"1175",'.// changed
+				   '"Billing-PObox":"",'.// Added
+				   '"Billing-Address_Line_2":"Toorak Road",'.// changed
+				   '"Billing-Suburb":"Melbourne",
+				   "Billing-Postcode":"3177",
+				   "Billing-State":"VIC",
+				   "Billing-Country":"Australia",
 				   "Duplicate":"1",
 				   "Shipping-BuildingName":"",
-				   "Shipping-unitno":"1175",
-				   "Shipping-streetname":"Toorak Road",
-				   "Shipping-city-town":"Melbourne",
+				   "Shipping-Address_Line_1":"1175",'.// changed
+				   '"Shipping-PObox":"",'.// Added
+				   '"Shipping-Address_Line_2":"Toorak Road",'.// changed
+				   '"Shipping-city-town":"Melbourne",
 				   "Shipping-postcode":"3177",
 				   "Shipping-state":"VIC",
 				   "Shipping-country":"Australia",
-				   "Mailing-unitno":"1175",
-				   "Mailing-streetname":"Toorak Road",
-				   "Mailing-city-town":"Melbourne",
+				   "Mailing-BuildingName":"",'.// Added
+				   '"Mailing-Address_Line_1":"1175",'.// changed
+				   '"Mailing-PObox":"",'.// Added
+				   '"Mailing-Address_Line_2":"Toorak Road",'.// changed
+				   '"Mailing-city-town":"Melbourne",
 				   "Mailing-postcode":"3177",
 				   "Mailing-state":"VIC",
 				   "Mailing-country":"Australia",
 				   "Udegree":"3",
 				   "Undergraduate-university-name":"CUR",
 				   "Ugraduate-country":"Australia",
-				   "Ugraduate-year-attained":"",
-				   "Pdegree":"Postgraduate",
-				   "Postgraduate-university-name":"Sydney University",
-				   "Pgraduate-country":"Postgraduate",
-				   "Pgraduate-year-attained":"Sydney University",
+				   "Ugraduate-year-attained":"2001",
+				   "Pdegree":"4",
+				   "Postgraduate-university-name":"CUR",
+				   "Pgraduate-country":"Australia",
+				   "Pgraduate-year-attained":"2001",
 				   "Additional-qualifications": [
 						"qualification 1",
 						"qualification 2"
@@ -308,9 +313,9 @@ function AptifyAPI($APItype, $variables){
 						 "Workplace_ID":"72516",
 						 "Name-of-workplace":"APA",
 						 "WBuildingName":"BuildingName",
-						 "Wunit":"2",
-						 "Wstreet":"toorak road",
-						 "Wcity":"Melbourne",
+						 "Address_Line_1":"2",'. // changed
+						 '"Address_Line_2":"toorak road",'. // changed
+						 '"Wcity":"Melbourne",
 						 "Wpostcode":"3177",
 						 "Wstate":"VIC",
 						 "Wcountry":"Australia",
@@ -328,18 +333,19 @@ function AptifyAPI($APItype, $variables){
 						 "Medicare":"1",
 						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 "SpecialInterest": ["BAN","CHILD","ACU"],
-						 "Findphysio":"1",
-						 "Homehospital":"1",
+						 '. // "SpecialInterest": ["BAN","CHILD","ACU"], - removed
+						 '"Findphysio":"1",
+						 "Findabuddy":"1",'. // Added
+						 '"Homehospital":"1",
 						 "MobilePhysio":"1"
 					  },
 				   "1": {  
 						 "Workplace_ID":"72571",
 						 "Name-of-workplace":"testA",
 						 "BuildingName":"BuildingName",
-						 "Wunit":"2",
-						 "Wstreet":"toorak road",
-						 "Wcity":"Melbourne",
+						 "Address_Line_1":"2",'. // changed
+						 '"Address_Line_2":"toorak road",'. // changed
+						 '"Wcity":"Melbourne",
 						 "Wpostcode":"3177",
 						 "Wstate":"VIC",
 						 "Wcity":"Melbourne",
@@ -358,18 +364,19 @@ function AptifyAPI($APItype, $variables){
 						 "Medicare":"1",
 						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 "SpecialInterest": ["BAN","CHILD","ACU"],
-						 "Findphysio":"1",
-						 "Homehospital":"1",
+						 './/"SpecialInterest": ["BAN","CHILD","ACU"], - removed
+						 '"Findphysio":"1",
+						 "Findabuddy":"1",'. // Added
+						 '"Homehospital":"1",
 						 "MobilePhysio":"1"
 					  },
 				   "2": {
 						 "Workplace_ID":"72171",
 						 "Name-of-workplace":"testB",
 						 "BuildingName":"BuildingName",
-						 "Wunit":"2",
-						 "Wstreet":"toorak road",
-						 "Wcity":"Melbourne",
+						 "Address_Line_1":"2",'. // changed
+						 '"Address_Line_2":"toorak road",'. // changed
+						 '"Wcity":"Melbourne",
 						 "Wpostcode":"3177",
 						 "Wstate":"VIC",
 						 "Wcity":"Melbourne",
@@ -388,9 +395,10 @@ function AptifyAPI($APItype, $variables){
 						 "Medicare":"1",
 						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 "SpecialInterest": ["BAN","CHILD","ACU"],
-						 "Findphysio":"1",
-						 "Homehospital":"1",
+						 './/"SpecialInterest": ["BAN","CHILD","ACU"], - removed
+						 '"Findphysio":"1",
+						 "Findabuddy":"1",'. // Added
+						 '"Homehospital":"1",
 						 "MobilePhysio":"1"
 					  }
 				   }
@@ -497,7 +505,7 @@ function AptifyAPI($APItype, $variables){
 				    "Rollover": "1"
 				}';
 			}
-			if(isset($variables["CreditcardID"]) && isset($variables["Expiry date"]) && isset($variables["Expiry date"])){
+			if(isset($variables["Creditcard-ID"]) && isset($variables["Expiry-date"]) && isset($variables["CVV"])){
 				$JSONreturn =  '{ 
 			        "userID":"1",
 					"Creditcard-ID":"1",
@@ -506,7 +514,7 @@ function AptifyAPI($APItype, $variables){
 				    "Rollover": "1"
 				}';
 			}
-			if(isset($variables["CreditcardID"])){
+			if(isset($variables["Creditcard-ID"])){
 				$JSONreturn =  '{ 
 			        "userID":"1",
 					"Creditcard-ID":"1",

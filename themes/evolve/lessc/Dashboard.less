@@ -298,6 +298,19 @@ div[aria-describedby="updateCardForm"] .ui-widget-header{
 div[aria-describedby="updateCardForm"] .ui-dialog-content{
     overflow:hidden!important;
 }
+div[aria-describedby="rollOverWindow"].ui-dialog,  div[aria-describedby="setCardWindow"].ui-dialog{
+    z-index: 1050!important;
+    left: 33%!important;
+	top: 47%!important;
+	width: 486px!important;
+}
+div[aria-describedby="rollOverWindow"] .ui-widget-header, div[aria-describedby="setCardWindow"] .ui-widget-header{
+    border:none!important;
+	background-color:white!important;
+}
+div[aria-describedby="rollOverWindow"] .ui-dialog-content, div[aria-describedby="setCardWindow"] .ui-dialog-content{
+    overflow:hidden!important;
+}
 div[aria-describedby="deleteCardWindow"].ui-dialog {
     z-index: 1050!important;
     left: 33%!important;
@@ -343,7 +356,7 @@ div[aria-describedby="installmentpolicyWindow"] .ui-dialog-content{
 label[for="privacypolicyp"]{
     margin-left:-3px;
 }
-#deleteCardWindow h3{
+#deleteCardWindow h3, #rollOverWindow h3,#setCardWindow h3{
     color: #009fda!important;
 	margin-top: -6px;
 	margin-bottom: 28px;
