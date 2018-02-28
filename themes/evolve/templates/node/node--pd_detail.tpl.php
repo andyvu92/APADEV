@@ -136,7 +136,7 @@
 				// if not,
 				// skip to shopping cart/next step
 			}
-	       $userId=$_SESSION["userID"];
+	       //$userId=$_SESSION["userID"];
 		   
 			/* We may use this as "Session" data and won't need to load. */
 			// 2.2.4 - GET bember detail
@@ -179,7 +179,7 @@
 	  /* CURL GET to query data from Aptify using $_GET["ID"] & couponcode, and then return Json data as below example*/
        
 	$pdArr = Array();
-	array_push($pdArr, ($_GET["id"]-1));
+	array_push($pdArr, (intval($_GET["id"]) - 1));
 	if(isset($_SESSION["userID"])) {
 	   array_push($pdArr, $_SESSION["userID"]);
 	} else {
@@ -187,7 +187,7 @@
 	}
 	array_push($pdArr, $Couponcode);
 	
-	// 2.2.29 - GET CPD diary
+	// 2.2.29 - GET event detail
 	// Send - 
 	// PDID, UserID, Coupon
 	// Response -
@@ -205,12 +205,33 @@
 	      $saveShoppingCart = "1";
 		 
 	  }   
-     /*Update your detail response here*/
-    	 $updateNonmemberTag = "0";
-	   if(isset($_GET['updateNonmember'])&&($_GET['updateNonmember']!=0)){ 
-	      $updateNonmemberTag = $_GET['updateNonmember'];
-		 
-	  }
+	/*Update your detail response here*/
+	$updateNonmemberTag = "0";
+	if(isset($_GET['updateNonmember'])&&($_GET['updateNonmember']!=0)){ 
+		
+	}
+	// add new user!
+	if(isset($_GET['updateNonmember'])&&($_GET['updateNonmember']!=0)){ 
+		$updateNonmemberTag = $_GET['updateNonmember'];
+		$CreateNewUserPD["Job"] = $_POST["Job"];
+		$CreateNewUserPD["Registrationboard"] = $_POST["Registrationboard"];
+		$CreateNewUserPD["Professionalinsurance"] = $_POST["Professionalinsurance"];
+		$CreateNewUserPD["Professionalbody"] = $_POST["Professionalbody"];
+		$CreateNewUserPD["Dietary"] = $_POST["Dietary"];
+		$CreateNewUserPD["HearaboutAPA"] = $_POST["HearaboutAPA"];
+		$CreateNewUserPD["Membership-product"] = $_POST["Membership-product"];
+		$CreateNewUserPD["Pdemails-product"] = $_POST["Pdemails-product"];
+		$CreateNewUserPD["Jobs-product"] = $_POST["Jobs-product"];
+		$CreateNewUserPD["Shop-product"] = $_POST["Shop-product"];
+		$CreateNewUserPD["Campaigns-product"] = $_POST["Campaigns-product"];
+		$CreateNewUserPD["Partner-product"] = $_POST["Partner-product"];
+		// 2.2.25 - User Registration
+		// Send - 
+		// PDID, UserID, Coupon
+		// Response -
+		// PriceTabl
+		GetAptifyData("25", $CreateNewUserPD);
+	}
 	?>
 	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-9 col-lg-9">
 	    <div id="popUp" style="display:none;"><?php echo $updateNonmemberTag; ?></div>
@@ -438,7 +459,7 @@
 				 </div>
 				 <div class="row">
 				     <div class="col-lg-12">
-					   <input type="password" class="form-control"  name="Password" placeholder="Password">
+					   <input type="password" class="form-control" id="Passwords" name="Passwords" placeholder="Password">
 					</div>
 					
 				 </div>
@@ -876,14 +897,14 @@
             Emailaddress: {
                 required: true,
             },
-            Password: {
+            Passwords: {
                 required: true,
                 minlength: 5,
             },
             Confirmpassword: {
                 required: true,
                 minlength: 5,
-                equalTo: "#password"
+                equalTo: "#Passwords"
             },
              Contactnumber: {
                 required: true,
