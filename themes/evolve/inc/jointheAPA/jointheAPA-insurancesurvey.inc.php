@@ -38,7 +38,7 @@
 					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Oneclaim2">No</label><input type="radio" name="Oneclaim" id="Oneclaim2" value="No"></div>
 					</div>
 					<div class="display-none" id="insuranceMore">
-					  <div class="row">If you answered yes to one or more of the above questions (1-5) please provide:</div>
+					  <div class="row">If you answered yes to one or more of the above questions (1-5) please provide:<input type="hidden" name="Addtionalquestion" id="Addtionalquestion" value="0"></div>
 					  <div class="row">
 						  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 							 <input type="text" class="form-control" name="Yearclaim" id="Yearclaim" placeholder="Year of claim">

@@ -169,6 +169,7 @@ jQuery(document).ready(function($) {
 		    if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked") || $('#Oneclaim1').is(":checked"))
 		 {
 			 $('#insuranceMore').removeClass("display-none");
+			 $('#Addtionalquestion').val("1");
 		 }
     });
 	  $('#recent-purchases').click(function(){

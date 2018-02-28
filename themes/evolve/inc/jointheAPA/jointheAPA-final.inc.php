@@ -46,12 +46,16 @@
 	 if(isset($_POST['Disciplinary'])){ $postReviewData['Disciplinary'] = $_POST['Disciplinary']; }
 	 if(isset($_POST['Decline'])){ $postReviewData['Decline'] = $_POST['Decline']; }
 	 if(isset($_POST['Oneclaim'])){ $postReviewData['Oneclaim'] = $_POST['Oneclaim']; }
-	 if(isset($_POST['Yearclaim'])){ $postReviewData['Yearclaim'] = $_POST['Yearclaim']; }
-	 if(isset($_POST['Nameclaim'])){ $postReviewData['Nameclaim'] = $_POST['Nameclaim']; }
-	 if(isset($_POST['Fulldescription'])){ $postReviewData['Fulldescription'] = $_POST['Fulldescription']; }
-	 if(isset($_POST['Amountpaid'])){ $postReviewData['Amountpaid'] = $_POST['Amountpaid']; }
-	 if(isset($_POST['Finalisedclaim'])){ $postReviewData['Finalisedclaim'] = $_POST['Finalisedclaim']; }
-	 if(isset($_POST['Businiessname'])){ $postReviewData['Businiessname'] = $_POST['Businiessname']; }
+	 if(isset($_POST['Addtionalquestion']) && $_POST['Addtionalquestion'] == "1"){ 
+		$postReviewData['Addtionalquestion'] = $_POST['Addtionalquestion'];
+		if(isset($_POST['Yearclaim'])){ $postReviewData['Yearclaim'] = $_POST['Yearclaim']; }
+		if(isset($_POST['Nameclaim'])){ $postReviewData['Nameclaim'] = $_POST['Nameclaim']; }
+		if(isset($_POST['Fulldescription'])){ $postReviewData['Fulldescription'] = $_POST['Fulldescription']; }
+		if(isset($_POST['Amountpaid'])){ $postReviewData['Amountpaid'] = $_POST['Amountpaid']; }
+		if(isset($_POST['Finalisedclaim'])){ $postReviewData['Finalisedclaim'] = $_POST['Finalisedclaim']; } 
+	}
+	else{ $postReviewData['Addtionalquestion'] = "0";}
+	if(isset($_POST['Businiessname'])){ $postReviewData['Businiessname'] = $_POST['Businiessname']; }
 	 
      
 	 //get productID list from local database;
@@ -85,7 +89,7 @@
 	$usedCard = $_POST['Paymentcard']; 
 	//use webservice 2.2.13 update payment method
 	$postCard['userID'] = $_SESSION['userID'];
-	$postCard['CreditcardID'] = $usedCard;
+	$postCard['Creditcard-ID'] = $usedCard;
 	GetAptifyData("13", $postCard);
   } 
  ?> 

@@ -47,7 +47,7 @@ if(isset($_POST['step2'])) {
 	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
 	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
 	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
-	 GetAptifyData("15", $postPaymentData);
+	if(isset($_POST['addCard'])){ GetAptifyData("15", $postPaymentData); }
 	//grab review order data
 	//use webservice 2.2.26 Register a new member order
 	if(isset($_SESSION['userID'])){ $postReviewData['userID'] = $_SESSION['userID']; } 
@@ -63,11 +63,15 @@ if(isset($_POST['step2'])) {
 	if(isset($_POST['Disciplinary'])){ $postReviewData['Disciplinary'] = $_POST['Disciplinary']; }
 	if(isset($_POST['Decline'])){ $postReviewData['Decline'] = $_POST['Decline']; }
 	if(isset($_POST['Oneclaim'])){ $postReviewData['Oneclaim'] = $_POST['Oneclaim']; }
-	if(isset($_POST['Yearclaim'])){ $postReviewData['Yearclaim'] = $_POST['Yearclaim']; }
-	if(isset($_POST['Nameclaim'])){ $postReviewData['Nameclaim'] = $_POST['Nameclaim']; }
-	if(isset($_POST['Fulldescription'])){ $postReviewData['Fulldescription'] = $_POST['Fulldescription']; }
-	if(isset($_POST['Amountpaid'])){ $postReviewData['Amountpaid'] = $_POST['Amountpaid']; }
-	if(isset($_POST['Finalisedclaim'])){ $postReviewData['Finalisedclaim'] = $_POST['Finalisedclaim']; }
+	if(isset($_POST['Addtionalquestion']) && $_POST['Addtionalquestion'] == "1"){ 
+		$postReviewData['Addtionalquestion'] = $_POST['Addtionalquestion'];
+		if(isset($_POST['Yearclaim'])){ $postReviewData['Yearclaim'] = $_POST['Yearclaim']; }
+		if(isset($_POST['Nameclaim'])){ $postReviewData['Nameclaim'] = $_POST['Nameclaim']; }
+		if(isset($_POST['Fulldescription'])){ $postReviewData['Fulldescription'] = $_POST['Fulldescription']; }
+		if(isset($_POST['Amountpaid'])){ $postReviewData['Amountpaid'] = $_POST['Amountpaid']; }
+		if(isset($_POST['Finalisedclaim'])){ $postReviewData['Finalisedclaim'] = $_POST['Finalisedclaim']; } 
+	}
+	else{ $postReviewData['Addtionalquestion'] = "0";}
 	if(isset($_POST['Businiessname'])){ $postReviewData['Businiessname'] = $_POST['Businiessname']; }
 	
 	//use webservice 2.2.31 Get Membership prodcut price
@@ -99,7 +103,7 @@ if(isset($_POST['Paymentcard'])) {
 	$usedCard = $_POST['Paymentcard']; 
 	//use webservice 2.2.13 update payment method
 	$postCard['userID'] = $_SESSION['userID'];
-	$postCard['CreditcardID'] = $usedCard;
+	$postCard['Creditcard-ID'] = $usedCard;
 	GetAptifyData("13", $postCard);
 }   
  ?> 

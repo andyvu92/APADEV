@@ -7,8 +7,8 @@
 	   if(isset($_POST['rollover'])){ $postReviewData['Rollover'] = $_POST['rollover']; }
 	   $postReviewData['Termsandconditions'] = "1";
 	   
-	   //submit data to complete purchase membership web service 2.2.26
-	   GetAptifyData("26", $postReviewData);
+	   //submit data to complete renew membership web service 2.2.27
+	   GetAptifyData("27", $postReviewData);
 	    //delete session:
 	   unset($_SESSION["postReviewData"]);
    }

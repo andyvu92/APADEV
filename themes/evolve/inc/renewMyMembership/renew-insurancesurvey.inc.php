@@ -38,7 +38,7 @@
 					  <div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Oneclaim2">No</label><input type="radio" name="Oneclaim" id="Oneclaim2" value="No"></div>
 					</div>
 					<div class="display-none" id="insuranceMore">
-					  <div class="row">If you answered yes to one or more of the above questions (1-5) please provide:</div>
+					  <div class="row">If you answered yes to one or more of the above questions (1-5) please provide:<input type="hidden" name="Addtionalquestion" id="Addtionalquestion" value="0"></div>
 					  <div class="row">
 						  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
 							 <input type="text" class="form-control" name="Yearclaim" id="Yearclaim" placeholder="Year of claim">
@@ -135,7 +135,7 @@ other material information to be disclosed</label>
 				      
 				   </div>
 				   <?php ////web service 2.2.12 Get payment listing;
-					  $cardsnum = GetAptifyData("12", $postPaymentData['userID']);?>
+					  $cardsnum = GetAptifyData("12", "userID");?>
 				   <?php if (sizeof($cardsnum)!=0): ?>  
                     <div class="row">					
 				    <fieldset>
@@ -179,6 +179,7 @@ other material information to be disclosed</label>
                         <input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
                    </div>
 				 </div>
+				 <input type="hidden" name="addCard"> 
 				  <?php endif; ?>  
                    <div class="row">
 				    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><label id="privacypolicyl">Privacy policy</label><input type="checkbox" id="privacypolicy"></div>

@@ -318,7 +318,10 @@
                            <label for="">Address 1</label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Address_Line_1'])) {echo "placeholder='Billing Address 1'";}   else{ echo 'value="'.$details['Billing-Address_Line_1'].'"'; }?>>
                         </div>
-                       
+                        <div class="col-lg-6 col-lg-offset-2">
+                           <label for="">PO box</label>
+                           <input type="text" class="form-control" name="Billing-PObox" <?php if (empty($details['Billing-PObox'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['Billing-PObox'].'"'; }?>>
+                        </div>
 					     <div class="col-lg-12">
                            <label for="">Address 2</label>
                            <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Address_Line_2'])) {echo "placeholder='Billing Address 2'";}   else{ echo 'value="'.$details['Billing-Address_Line_2'].'"'; }?>>
