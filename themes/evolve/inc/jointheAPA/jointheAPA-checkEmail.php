@@ -5,12 +5,9 @@
 		$postEmail = $_POST['CheckEmailID'];
 		//$result = GetAptifyData("16", $postEmail);
 		//echo $result["Status"]; 
-	    //$result="true";
-		//echo $result;
+	    $result="true";
+		echo $result;
 		
 	}
-	   function test(){
-			echo "true";
-			
-		}
+	   
 ?>

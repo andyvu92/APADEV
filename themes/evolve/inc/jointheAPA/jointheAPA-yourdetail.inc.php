@@ -1126,8 +1126,7 @@
 							   $.ajax({
 							        url:"sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
 									type: "POST", //request type,
-									//data: {CheckEmailID: email},
-									data: {action: 'test()',CheckEmailID: email},
+									data: {CheckEmailID: email},
 									success:function(response) { 
 									var result = response;
 									if(result=="true"){

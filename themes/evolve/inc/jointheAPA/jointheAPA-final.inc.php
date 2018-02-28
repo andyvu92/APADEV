@@ -1,4 +1,5 @@
 <?php
+//use session: $_SESSION['userID'],$_SESSION["postReviewData"]
  //save PRF product into APA database function
 	 function createShoppingCart($userID, $productID,$coupon){
 		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
@@ -22,6 +23,7 @@
 	 $postReviewData = array();
 	 //grab payment data
 	 //use webservice 2.2.15 Add payment method
+	 //variable includes: userID, Payment-method,Name-on-card,Cardno,Expiry-date,CCV
 	 if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; }
 	 if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
 	 if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
@@ -78,6 +80,13 @@
 	//store data in the session
 	$_SESSION["postReviewData"] =  array();
 	$_SESSION["postReviewData"] = $postReviewData;
+  }
+  if(isset($_POST['Paymentcard'])) {
+	$usedCard = $_POST['Paymentcard']; 
+	//use webservice 2.2.13 update payment method
+	$postCard['userID'] = $_SESSION['userID'];
+	$postCard['CreditcardID'] = $usedCard;
+	GetAptifyData("13", $postCard);
   } 
  ?> 
 				<form id ="join-review-form" action="joinconfirmation" method="POST">
@@ -107,6 +116,7 @@
 						  </table>
 		
                   </div>
+				  <!--<a class="your-details-prevbutton8"><span class="dashboard-button-name">Last</span></a>-->
 					 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 Membpaymentsiderbar">
 					 <p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
                 <div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> <fieldset><select  id="Paymentcard" name="Paymentcard">
@@ -115,7 +125,7 @@
 					  $cardsnum = GetAptifyData("12", $postPaymentData['userID']);
 					  if (sizeof($cardsnum)!=0): ?>   
                             <?php foreach( $cardsnum["paymentcards"] as $cardnum):  ?>
-                                 <option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardnum["Rollover"]==1) echo "selected"; ?> data-class="<?php echo  $cardnum["Payment-method"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
+                                 <option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardnum["Digitsnumber"]==$usedCard) echo "selected"; ?> data-class="<?php echo  $cardnum["Payment-method"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
                             <?php endforeach; ?>
                          <?php endif; ?>  
                            </select></fieldset></div>

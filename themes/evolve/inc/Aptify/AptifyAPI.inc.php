@@ -459,27 +459,25 @@ function AptifyAPI($APItype, $variables){
 			// Add JSON sample here
 			$JSONreturn =  '{ 
 			        "Main-Creditcard-ID":"1",
+					"Rollover":"1",
 					"paymentcards": [
-					   { "Creditcards ID": "1",
+					   { "Creditcards-ID": "1",
 						"Payment-method": "Master",
 						"Name-on-card": "Lucy",
 						"Digitsnumber":"8888",
-						"Expiry-date":"10-10-2020",
-						"Rollover":"1"
+						"Expiry-date":"10-10-2020"
 						},
-						{ "Creditcards ID": "2",
+						{ "Creditcards-ID": "2",
 						"Payment-method": "Visa",
 						"Name-on-card": "Lucy",
 						"Digitsnumber":"6666",
-						"Expiry-date":"10-10-2020",
-						"Rollover":"0"
+						"Expiry-date":"10-10-2020"
 						},
-						{ "Creditcards ID": "3",
+						{ "Creditcards-ID": "3",
 						"Payment-method": "Master",
 						"Name-on-card": "Lucy",
 						"Digitsnumber":"9999",
-						"Expiry-date":"10-10-2020",
-						"Rollover":"0"
+						"Expiry-date":"10-10-2020"
 						}
 					]
 				}';

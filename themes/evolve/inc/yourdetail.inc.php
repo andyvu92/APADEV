@@ -32,7 +32,7 @@
 	// UserID
 	// Response -
 	// Profile image
-	$details = GetAptifyData("10", "UserID"); // #_SESSION["UserID"];
+	$sdf = GetAptifyData("10", "UserID"); // #_SESSION["UserID"];
 	
 	// 2.2.11 - UPDATE Picture
 	// Send - 
@@ -40,9 +40,22 @@
 	// Response -
 	// N/A.
 	if(isset($_POST["PictureUpdate"])) {
-		$details = GetAptifyData("11", "UserID"); // #_SESSION["UserID"];
+		$dsfa = GetAptifyData("11", "UserID"); // #_SESSION["UserID"];
 	}
-	
+	// 2.2.15 - Add payment method
+	// Send - 
+	// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
+	// Response -
+	// N/A.
+	if(isset($_POST["addCard"])) {
+		if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; }
+		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
+		if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
+		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
+		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
+		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
+		GetAptifyData("15", $postPaymentData);
+	}
 	
 	//use webservice 2.2.15 Add payment method
 	/*
@@ -482,7 +495,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
              </div>
              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			 
-              <form action="pd-shopping-cart?action=delete" method="POST" id="deleteCardForm">
+        
                 <div class="paymentsidecredit"> <fieldset><select  id="Paymentcard" name="Paymentcard" style="width:100%;">
                       <?php if (sizeof($cardsnum)!=0): ?>   
                                    
@@ -496,17 +509,20 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
          </div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> <a class="deletecardbutton">delete selected card</a>
 		      <div id="deleteCardWindow" style="display:none;">
+			   <form action="" method="POST" id="formaddcard">
+			   <input type="hidden" name="deleteCard">
 		        <h3>Are you sure you want to delete this card?</h3>
                 <button class="deletecardbutton">Yes</button>
                 <a target="_self" class="cancelDeleteButton">No</a>
-		</div>
-                </form></div>
+				</form>
+		     </div>
+                </div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">  <div class="paymentsideuse><input type="checkbox" id="anothercard"><label for="anothercard"><a  style="cursor: pointer; color:white;" id="addPaymentCard">Add a new card</a></label>
 				  <div id="addPaymentCardForm" style="display:none;">
-                  <form action="pd-shopping-cart?action=addcard" method="POST" id="formaddcard">
+                  <form action="" method="POST" id="formaddcard">
 				     <div class="row"><div class="col-lg-12">Add a new card:</div></div>
                      <div class="row">
-					  
+					  <input type="hidden" name="addCard">
 				   <div class="col-lg-12">
 				        
                         <select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
@@ -559,16 +575,16 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				  <div id="updateCardForm" style="display:none;">
                   <form action="" method="POST" id="updatecard">
 				     <div class="row"><div class="col-lg-12">Update your card:</div></div>
-                   
+                     <input type="hidden" name="updateCard">
 				
 				 <div class="row">
 				   <div class="col-lg-6">
-                        <input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
+                        <input type="date" class="form-control"  name="Expirydate" placeholder="Expire date">
                    </div>
 				 </div>
                  <div class="row"> 
 				    <div class="col-lg-6">
-                        <input type="text" class="form-control" id="CVV" name="CVV" placeholder="CVV">
+                        <input type="text" class="form-control"  name="CVV" placeholder="CVV">
                    </div>
 				    <div class="col-lg-6">
 					     <div class="tooltip">What is this?

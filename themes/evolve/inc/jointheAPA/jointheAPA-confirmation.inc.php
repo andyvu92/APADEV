@@ -9,6 +9,8 @@
 	   
 	   //submit data to complete purchase membership web service 2.2.26
 	   GetAptifyData("26", $postReviewData);
+	   //delete session:
+	   unset($_SESSION["postReviewData"]);
    }
 	?>
 	

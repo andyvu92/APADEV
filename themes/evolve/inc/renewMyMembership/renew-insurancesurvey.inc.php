@@ -134,9 +134,24 @@ other material information to be disclosed</label>
 					  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">What is this?</div>
 				      
 				   </div>
-				     <div class="row">
-					  
-				   <div class="col-lg-3">
+				   <?php ////web service 2.2.12 Get payment listing;
+					  $cardsnum = GetAptifyData("12", $postPaymentData['userID']);?>
+				   <?php if (sizeof($cardsnum)!=0): ?>  
+                    <div class="row">					
+				    <fieldset>
+					 <select id="Paymentcard" name="Paymentcard">
+                     
+                            <?php foreach( $cardsnum["paymentcards"] as $cardnum):  ?>
+                                 <option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardnum["Main-Creditcard-ID"]==$cardnum["Creditcards-ID"]) echo "selected"; ?> data-class="<?php echo  $cardnum["Payment-method"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
+                            <?php endforeach; ?>
+                        
+                        </select>
+					 </fieldset>
+					 </div> 
+					 <?php endif; ?>  
+				   <?php if (sizeof($cardsnum)==0): ?>  
+				  <div class="row">
+					 <div class="col-lg-3">
 				        
                         <select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 						   <option value="" disabled>Card type</option>
@@ -164,11 +179,7 @@ other material information to be disclosed</label>
                         <input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
                    </div>
 				 </div>
-				 <div class="row">
-				   <div class="col-lg-4">
-                        <input type="checkbox" id="addNewCard" name="addNewCard" value="0"> <label for="addNewCard">Add another card</label>
-                   </div>
-				 </div>
+				  <?php endif; ?>  
                    <div class="row">
 				    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><label id="privacypolicyl">Privacy policy</label><input type="checkbox" id="privacypolicy"></div>
 						
