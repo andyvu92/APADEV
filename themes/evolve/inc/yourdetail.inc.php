@@ -43,7 +43,6 @@
 	// Response -
 	// N/A.
 	if(isset($_POST["PictureUpdate"])) {
-
 		$sendpicture = GetAptifyData("11", "UserID"); // #_SESSION["UserID"];
 	}
 	
@@ -69,7 +68,7 @@
 	if(isset($_POST["deleteID"]) && $_POST["deleteID"] != "") {
 		$deleteCardSubmit["UserID"] = "UserID";
 		$deleteCardSubmit["CreditCardID"] = $_POST["deleteID"];
-		// 2.2.11 - UPDATE Picture
+		// 2.2.14 - DELETE credit card
 		// Send - 
 		// UserID, Credit Card ID
 		// Response -
