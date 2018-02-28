@@ -116,7 +116,7 @@ function AptifyAPI($APItype, $variables){
 				   "Shipping-country":"Australia",
 				   "Mailing-BuildingName":"",'.// Added
 				   '"Mailing-Address_Line_1":"1175",'.// changed
-				   '"Mailing-PObox":""'.// Added
+				   '"Mailing-PObox":"",'.// Added
 				   '"Mailing-Address_Line_2":"Toorak Road",'.// changed
 				   '"Mailing-city-town":"Melbourne",
 				   "Mailing-postcode":"3177",
@@ -461,6 +461,7 @@ function AptifyAPI($APItype, $variables){
 			        "Main-Creditcard-ID":"1",
 					"Rollover":"1",
 					"paymentcards": [
+
 					   { "Creditcards-ID": "1",
 						"Payment-method": "Master",
 						"Name-on-card": "Lucy",
@@ -473,6 +474,7 @@ function AptifyAPI($APItype, $variables){
 						"Digitsnumber":"6666",
 						"Expiry-date":"10-10-2020"
 						},
+
 						{ "Creditcards-ID": "3",
 						"Payment-method": "Master",
 						"Name-on-card": "Lucy",
