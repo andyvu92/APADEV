@@ -934,105 +934,139 @@ function AptifyAPI($APItype, $variables){
 			$JSONreturn = '{ 
 				"Subscription":[
 				{
+					"SubscriptionID":"472",
 					"Subscription":"Online-learning",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"43",
 					"Subscription":"Continence",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"478",
 					"Subscription":"Conference",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"424",
 					"Subscription":"Educators",
 					"Subscribed":"0"
 				}, {
+					"SubscriptionID":"439",
 					"Subscription":"Market-campaign",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"446",
 					"Subscription":"Emergency",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"371",
 					"Subscription":"Jobs-4-physio",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"365",
 					"Subscription":"Gerontology",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"374",
 					"Subscription":"Advocacy",
 					"Subscribed":"0"
 				}, {
+					"SubscriptionID":"319",
 					"Subscription":"Leadership",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"327",
 					"Subscription":"National-office",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"385",
 					"Subscription":"Musculoskeletal",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"283",
 					"Subscription":"Journal-of-physiotherapy",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"295",
 					"Subscription":"Neurology",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"243",
 					"Subscription":"Inmotion-online",
 					"Subscribed":"0"
 				}, {
+					"SubscriptionID":"292",
 					"Subscription":"Occupational",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"256",
 					"Subscription":"Flagship",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"172",
 					"Subscription":"Orthopaedic",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"157",
 					"Subscription":"Professinal-development",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"138",
 					"Subscription":"Paediatric",
 					"Subscribed":"0"
 				}, {
+					"SubscriptionID":"128",
 					"Subscription":"Students",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"71",
 					"Subscription":"Pain",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"68",
 					"Subscription":"Acupuncture",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"57",
 					"Subscription":"Sports",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"45",
 					"Subscription":"Animal",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"32",
 					"Subscription":"Rural",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"37",
 					"Subscription":"Aquatic",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"26",
 					"Subscription":"Print",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"24",
 					"Subscription":"Business",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"17",
 					"Subscription":"Disability",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"16",
 					"Subscription":"Cancer",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"12",
 					"Subscription":"Mental",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"7",
 					"Subscription":"Cardiorespiratory",
 					"Subscribed":"1"
 				}, {
+					"SubscriptionID":"3",
 					"Subscription":"Mental",
 					"Subscribed":"1"
 				} ]
@@ -1821,7 +1855,10 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />32. Order confirmation: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = '{
+				"Orderstatus":"done!",
+				"InvoiceID":"12"
+			}';
 			return $JSONreturn;
 		case "33":
 			// For the actual API use
