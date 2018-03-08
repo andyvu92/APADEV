@@ -134,7 +134,8 @@ function AptifyAPI($APItype, $variables){
 						"qualification 1",
 						"qualification 2"
 					],
-				   "Workplaces":{  
+					"Findabuddy":"1",'. // Added
+				   '"Workplaces":{  
 					"0": {  
 						 "Workplace_ID":"72516",
 						 "Name-of-workplace":"APA",
@@ -161,8 +162,8 @@ function AptifyAPI($APItype, $variables){
 						 "Number-worked-hours":"7",
 						 '. // "SpecialInterest": ["BAN","CHILD","ACU"], - removed
 						 '"Findphysio":"1",
-						 "Findabuddy":"1",'. // Added
-						 '"Homehospital":"1",
+						 
+						 "Homehospital":"1",
 						 "MobilePhysio":"1"
 					  },
 				   "1": {  
@@ -192,8 +193,8 @@ function AptifyAPI($APItype, $variables){
 						 "Number-worked-hours":"7",
 						 './/"SpecialInterest": ["BAN","CHILD","ACU"], - removed
 						 '"Findphysio":"1",
-						 "Findabuddy":"1",'. // Added
-						 '"Homehospital":"1",
+						
+						 "Homehospital":"1",
 						 "MobilePhysio":"1"
 					  },
 				   "2": {
@@ -223,8 +224,8 @@ function AptifyAPI($APItype, $variables){
 						 "Number-worked-hours":"7",
 						 './/"SpecialInterest": ["BAN","CHILD","ACU"], - removed
 						 '"Findphysio":"1",
-						 "Findabuddy":"1",'. // Added
-						 '"Homehospital":"1",
+						
+						 "Homehospital":"1",
 						 "MobilePhysio":"1"
 					  }
 				   }

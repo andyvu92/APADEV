@@ -65,6 +65,7 @@
 	  if(isset($_POST['Branch'])){ $postData['Branch'] = $_POST['Branch']; }
 	  if(isset($_POST['Nationalgp'])){ $postData['Nationalgp'] = $_POST['Nationalgp']; }
 	  if(isset($_POST['SpecialInterest'])){ $postData['SpecialInterest'] = $_POST['SpecialInterest']; }
+	  if(isset($_POST['Findabuddy'])){ $postData['Findabuddy'] = $_POST['Findabuddy']; }
 	  if(isset($_POST['wpnumber'])){ 
 	    $num = $_POST['wpnumber']; 
 		for($i=0; $i<$num; $i++){
@@ -73,8 +74,8 @@
 			if(isset($_POST['Name-of-workplace'.$i])) { $workplaceArray['Name-of-workplace'] = $_POST['Name-of-workplace'.$i];}
 			if(isset($_POST['Workplace-setting'.$i])) { $workplaceArray['Workplace-setting'] = $_POST['Workplace-setting'.$i];}
 			if(isset($_POST['WBuildingName'.$i])) { $workplaceArray['WBuildingName'] = $_POST['WBuildingName'.$i];}
-			if(isset($_POST['Wunit'.$i])) { $workplaceArray['Wunit'] = $_POST['Wunit'.$i];}
-			if(isset($_POST['Wstreet'.$i])) { $workplaceArray['Wstreet'] = $_POST['Wstreet'.$i];}
+			if(isset($_POST['WAddress_Line_1'.$i])) { $workplaceArray['Address_Line_1'] = $_POST['WAddress_Line_1'.$i];}
+			if(isset($_POST['WAddress_Line_2'.$i])) { $workplaceArray['Address_Line_2'] = $_POST['WAddress_Line_2'.$i];}
 			if(isset($_POST['Wcity'.$i])) { $workplaceArray['Wcity'] = $_POST['Wcity'.$i];}
 			if(isset($_POST['Wpostcode'.$i])) { $workplaceArray['Wpostcode'] = $_POST['Wpostcode'.$i];}
 			if(isset($_POST['Wstate'.$i])) { $workplaceArray['Wstate'] = $_POST['Wstate'.$i];}
@@ -246,7 +247,7 @@
                         </div>
                      </div>
                      <div class="row">
-                        <div class="col-lg-12">Preferred address:</div>
+                        <div class="col-lg-12">Residential address:</div>
                      </div>
 					 <div class="row">
 					    <div class="col-lg-4">
@@ -358,6 +359,7 @@
 					   <input type="hidden" name="Shipping-Address_Line_1" value="<?php echo $details['Shipping-Address_Line_1'];?>">
 					   <input type="hidden" name="Shipping-Address_Line_2" value="<?php echo $details['Shipping-Address_Line_2'];?>">
 					   <input type="hidden" name="Shipping-PObox" value="<?php echo $details['Shipping-PObox'];?>">
+					   <input type="hidden" name="Shipping -city-town" value="<?php echo $details['Shipping -city-town'];?>">
 					   <input type="hidden" name="Shipping-postcode" value="<?php echo $details['Shipping-postcode'];?>">
 					   <input type="hidden" name="Shipping-state" value="<?php echo $details['Shipping-state'];?>">
 					   <input type="hidden" name="Shipping-country" value="<?php echo $details['Shipping-country'];?>">
@@ -365,6 +367,7 @@
 					   <input type="hidden" name="Mailing-Address_Line_1" value="<?php echo $details['Mailing-Address_Line_1'];?>">
 					   <input type="hidden" name="Mailing-Address_Line_2" value="<?php echo $details['Mailing-Address_Line_2'];?>">
 					   <input type="hidden" name="Mailing-PObox" value="<?php echo $details['Mailing-PObox'];?>">
+					   <input type="hidden" name="Mailing-city-town" value="<?php echo $details['Mailing-city-town'];?>">
 					   <input type="hidden" name="Mailing-postcode" value="<?php echo $details['Mailing-postcode'];?>">
 					   <input type="hidden" name="Mailing-state" value="<?php echo $details['Mailing-state'];?>">
 					   <input type="hidden" name="Mailing-country" value="<?php echo $details['Mailing-country'];?>">
@@ -564,6 +567,11 @@
                    
                </script>
                <div class="down3" style="display:none;">
+			     <div class="row">
+				   <div class="col-lg-12"> <label for="Findabuddy"><strong>NOTE:</strong>Please list my details in Find a Physio (visbile to other health professionals)</label>
+                        <input type="checkbox" name="Findabuddy" id="Findabuddy" value="<?php  echo $details['Findabuddy'];?>" <?php if($details['Findabuddy']==1){echo "checked";} ?>>
+					</div>
+				 </div> 
                    <ul class="nav nav-tabs" id="tabmenu">
                      <?php foreach( $details['Workplaces'] as $key => $value ):  ?>
                    
@@ -619,12 +627,12 @@
                         <input type="text" class="form-control" name="WBuildingName<?php echo $key;?>" id="WBuildingName<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WBuildingName'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WBuildingName'].'"'; }?>>
                      </div>
                      <div class="col-lg-2">
-                        <label for="Wunit">Unit/house number</label>
-                        <input type="text" class="form-control" name="Wunit<?php echo $key;?>" id="wunit<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wunit'])) {echo "placeholder='Unit/house number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wunit'].'"'; }?>>
+                        <label for="WAddress_Line_1">Address line 1</label>
+                        <input type="text" class="form-control" name="WAddress_Line_1<?php echo $key;?>" id="WAddress_Line_1<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Address_Line_1'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Address_Line_1'].'"'; }?>>
                      </div>
                      <div class="col-lg-4">
-                        <label for="Wstreet">Street name</label>
-                        <input type="text" class="form-control" name="Wstreet<?php echo $key;?>" id="Wstreet<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wstreet'])) {echo "placeholder='Street name'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wstreet'].'"'; }?>>
+                        <label for="WAddress_Line_2">Address line 2</label>
+                        <input type="text" class="form-control" name="WAddress_Line_2<?php echo $key;?>" id="Wstreet<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Address_Line_2'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Address_Line_2'].'"'; }?>>
                      </div>
                   </div>
                   <div class="row">
