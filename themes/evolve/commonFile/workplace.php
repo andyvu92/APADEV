@@ -38,12 +38,12 @@ $sessioninterestAreas = json_decode($_POST['sessioninterestAreas']);
                         <input type="text" class="form-control" name="WBuildingName'.$i.'" id="WBuildingName'.$i.'" value="">
                      </div>
                      <div class="col-lg-2">
-                        <label for="Wunit'.$i.'">Unit/house number</label>
-                        <input type="text" class="form-control" name="Wunit'.$i.'" id="Wunit'.$i.'" value="">
+                        <label for="WAddress_Line_1'.$i.'">Address line 1</label>
+                        <input type="text" class="form-control" name="WAddress_Line_1'.$i.'" id="WAddress_Line_1'.$i.'" value="">
                      </div>
                      <div class="col-lg-4">
-                        <label for="Wstreet'.$i.'">Street name</label>
-                        <input type="text" class="form-control" name="Wstreet'.$i.'" id="Wstreet'.$i.'" value="">
+                        <label for="WAddress_Line_2'.$i.'">Address line 2</label>
+                        <input type="text" class="form-control" name="WAddress_Line_2'.$i.'" id="WAddress_Line_2'.$i.'" value="">
                      </div>
                   </div>
                   <div class="row">

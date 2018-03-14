@@ -66,6 +66,7 @@
 	  if(isset($_POST['Nationalgp'])){ $postData['Nationalgp'] = $_POST['Nationalgp']; }
 	  if(isset($_POST['Branch'])){ $postData['Branch'] = $_POST['Branch']; }
 	  if(isset($_POST['SpecialInterest'])){ $postData['SpecialInterest'] = $_POST['SpecialInterest']; }
+	  if(isset($_POST['Findabuddy'])){ $postData['Findabuddy'] = $_POST['Findabuddy']; }
 	  if(isset($_POST['wpnumber'])){ 
 	    $num = $_POST['wpnumber']; 
 		for($i=0; $i<$num; $i++){
@@ -74,8 +75,8 @@
 			if(isset($_POST['Name-of-workplace'.$i])) { $workplaceArray['Name-of-workplace'] = $_POST['Name-of-workplace'.$i];}
 			if(isset($_POST['Workplace-setting'.$i])) { $workplaceArray['Workplace-setting'] = $_POST['Workplace-setting'.$i];}
 			if(isset($_POST['WBuildingName'.$i])) { $workplaceArray['WBuildingName'] = $_POST['WBuildingName'.$i];}
-			if(isset($_POST['Wunit'.$i])) { $workplaceArray['Wunit'] = $_POST['Wunit'.$i];}
-			if(isset($_POST['Wstreet'.$i])) { $workplaceArray['Wstreet'] = $_POST['Wstreet'.$i];}
+			if(isset($_POST['WAddress_Line_1'.$i])) { $workplaceArray['Address_Line_1'] = $_POST['WAddress_Line_1'.$i];}
+			if(isset($_POST['WAddress_Line_2'.$i])) { $workplaceArray['Address_Line_2'] = $_POST['WAddress_Line_2'.$i];}
 			if(isset($_POST['Wcity'.$i])) { $workplaceArray['Wcity'] = $_POST['Wcity'.$i];}
 			if(isset($_POST['Wpostcode'.$i])) { $workplaceArray['Wpostcode'] = $_POST['Wpostcode'.$i];}
 			if(isset($_POST['Wstate'.$i])) { $workplaceArray['Wstate'] = $_POST['Wstate'.$i];}
@@ -262,7 +263,7 @@
                         </div>
                      </div>
                      <div class="row">
-                        <div class="col-lg-12">Preferred address:</div>
+                        <div class="col-lg-12">Residential address:</div>
                      </div>
 					 <div class="row">
 					    <div class="col-lg-4">
@@ -329,6 +330,10 @@
                            <label for="">Building name</label>
                            <input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['Billing-BuildingName'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['Billing-BuildingName'].'"'; }?>>
                         </div>
+						<div class="col-lg-6 col-lg-offset-2">
+                           <label for="">PO box</label>
+                           <input type="text" class="form-control" name="Pobox"  <?php if (empty($details['Billing-PObox'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['Billing-PObox'].'"'; }?>>
+                        </div>
 					 </div>
 					    <div class="col-lg-4">
                            <label for="">Address 1</label>
@@ -349,7 +354,7 @@
                         </div>
                         <div class="col-lg-3">
                            <label for="">State</label>
-                           <select class="form-control" name="Shipping-state" id="Shipping-state">
+                           <select class="form-control" name="Billing-State" id="Billing-State">
                               <option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
                               <option value="ACT" <?php if ($details['Billing-State'] == "ACT") echo "selected='selected'";?>> ACT </option>
                               <option value="NSW" <?php if ($details['Billing-State'] == "NSW") echo "selected='selected'";?>> NSW </option>
@@ -371,6 +376,7 @@
 					   <input type="hidden" name="Shipping-Address_Line_1" value="<?php echo $details['Shipping-Address_Line_1'];?>">
 					   <input type="hidden" name="Shipping-Address_Line_2" value="<?php echo $details['Shipping-Address_Line_2'];?>">
 					   <input type="hidden" name="Shipping-PObox" value="<?php echo $details['Shipping-PObox'];?>">
+					   <input type="hidden" name="Shipping-city-town" value="<?php echo $details['Shipping-city-town'];?>">
 					   <input type="hidden" name="Shipping-postcode" value="<?php echo $details['Shipping-postcode'];?>">
 					   <input type="hidden" name="Shipping-state" value="<?php echo $details['Shipping-state'];?>">
 					   <input type="hidden" name="Shipping-country" value="<?php echo $details['Shipping-country'];?>">
@@ -378,6 +384,7 @@
 					   <input type="hidden" name="Mailing-Address_Line_1" value="<?php echo $details['Mailing-Address_Line_1'];?>">
 					   <input type="hidden" name="Mailing-Address_Line_2" value="<?php echo $details['Mailing-Address_Line_2'];?>">
 					   <input type="hidden" name="Mailing-PObox" value="<?php echo $details['Mailing-PObox'];?>">
+					   <input type="hidden" name="Mailing-city-town" value="<?php echo $details['Mailing-city-town'];?>">
 					   <input type="hidden" name="Mailing-postcode" value="<?php echo $details['Mailing-postcode'];?>">
 					   <input type="hidden" name="Mailing-state" value="<?php echo $details['Mailing-state'];?>">
 					   <input type="hidden" name="Mailing-country" value="<?php echo $details['Mailing-country'];?>">
@@ -558,6 +565,11 @@
                    
                </script>
                <div class="down3" style="display:none;">
+			   <div class="row">
+				   <div class="col-lg-12"> <label for="Findabuddy"><strong>NOTE:</strong>Please list my details in Find a Physio (visbile to other health professionals)</label>
+                        <input type="checkbox" name="Findabuddy" id="Findabuddy" value="<?php  echo $details['Findabuddy'];?>" <?php if($details['Findabuddy']==1){echo "checked";} ?>>
+					</div>
+				 </div> 
                    <ul class="nav nav-tabs" id="tabmenu">
                           <li class ="active"><a data-toggle="tab" href="#workplace0"><?php echo "Workplace0";?></a></li>
               
@@ -606,12 +618,12 @@
                         <input type="text" class="form-control" name="WBuildingName0" id="WBuildingName0">
                      </div>
                      <div class="col-lg-2">
-                        <label for="Wunit">Unit/house number</label>
-                        <input type="text" class="form-control" name="Wunit0" id="wunit0">
+                        <label for="WAddress_Line_10">Address line 1</label>
+                        <input type="text" class="form-control" name="WAddress_Line_10" id="WAddress_Line_10">
                      </div>
                      <div class="col-lg-4">
-                        <label for="Wstreet">Street name</label>
-                        <input type="text" class="form-control" name="Wstreet0" id="Wstreet0">
+                        <label for="WAddress_Line_20">Address line 2</label>
+                        <input type="text" class="form-control" name="WAddress_Line_20" id="WAddress_Line_20">
                      </div>
                   </div>
                   <div class="row">
@@ -1091,6 +1103,10 @@
                            <label for="">Building name</label>
                            <input type="text" class="form-control"  name="Billing-BuildingName">
                         </div>
+						<div class="col-lg-6 col-lg-offset-2">
+                           <label for="">PO box</label>
+                           <input type="text" class="form-control" name="Pobox" name="Billing-PObox">
+                        </div>
 					 </div>
 					    <div class="col-lg-4">
                            <label for="">Unit/house number</label>
@@ -1137,6 +1153,7 @@
 					   <input type="hidden" name="Shipping-Address_Line_1" value="">
 					   <input type="hidden" name="Shipping-Address_Line_2" value="">
 					   <input type="hidden" name="Shipping-PObox" value="">
+					   <input type="hidden" name="Shipping-city-town" value="">
 					   <input type="hidden" name="Shipping-postcode" value="">
 					   <input type="hidden" name="Shipping-state" value="">
 					   <input type="hidden" name="Shipping-country" value="">
@@ -1144,6 +1161,7 @@
 					   <input type="hidden" name="Mailing-Address_Line_1" value="">
 					   <input type="hidden" name="Mailing-Address_Line_2" value="">
 					   <input type="hidden" name="Mailing-PObox" value="">
+					   <input type="hidden" name="Mailing-city-town" value="">
 					   <input type="hidden" name="Mailing-postcode" value="">
 					   <input type="hidden" name="Mailing-state" value="">
 					   <input type="hidden" name="Mailing-country" value="">
@@ -1349,6 +1367,11 @@
                    
                </script>
                <div class="down3" style="display:none;">
+			   <div class="row">
+				   <div class="col-lg-12"> <label for="Findabuddy"><strong>NOTE:</strong>Please list my details in Find a Physio (visbile to other health professionals)</label>
+                        <input type="checkbox" name="Findabuddy" id="Findabuddy">
+					</div>
+			  </div> 
                    <ul class="nav nav-tabs" id="tabmenu">
                           <li class ="active"><a data-toggle="tab" href="#workplace0"><?php echo "Workplace0";?></a></li>
               
@@ -1397,12 +1420,12 @@
                         <input type="text" class="form-control" name="WBuildingName0" id="WBuildingName0">
                      </div>
                      <div class="col-lg-2">
-                        <label for="Wunit">Unit/house number</label>
-                        <input type="text" class="form-control" name="Wunit0" id="wunit0">
+                        <label for="WAddress_Line_10">Address line 1</label>
+                        <input type="text" class="form-control" name="WAddress_Line_10" id="WAddress_Line_10">
                      </div>
                      <div class="col-lg-4">
-                        <label for="Wstreet">Street name</label>
-                        <input type="text" class="form-control" name="Wstreet0" id="Wstreet0">
+                        <label for="WAddress_Line_20">Address line 2</label>
+                        <input type="text" class="form-control" name="WAddress_Line_20" id="WAddress_Line_20">
                      </div>
                   </div>
                   <div class="row">

@@ -256,9 +256,9 @@ jQuery(document).ready(function($) {
           
           $(this).removeAttr('checked');
 		  $(this).val('0');
-		  $('#Billing-BuildingName').removeClass('shipping');
+		  $('#shippingAddress').removeClass('shipping');
 		  $('#dashboard-right-content').addClass("autoscroll");
-          $('#Shipping-unitno').val('');
+          $('#Billing-BuildingName').val('');
 		  $('#Billing-Address_Line_1').val('');
           $('#Billing-Address_Line_2').val('');
 		  $('#Billing-PObox').val('');
@@ -269,6 +269,36 @@ jQuery(document).ready(function($) {
          $('#Billing-Country').val('');
          
          }
+    }); 
+	$('#Shipping-address-dup').click(function(){
+		  
+           if($(this).is(":checked")){
+			$(this).attr('checked', true);
+			$('#Shipping-BuildingName').val($('#BuildingName').val());
+            $('#Shipping-Address_Line_1').val($('#Address_Line_1').val());
+            $('#Shipping-Address_Line_2').val($('#Address_Line_2').val());
+			$('#Shipping-PObox').val($('#Billing-PObox').val());
+            $('#Shipping-city-town').val($('#Suburb').val());
+            $('#Shipping-postcode').val($('#Postcode').val());
+            $('#Shipping-state').val($('#State').val());
+            $('#Shipping-country').val($('#Country').val());
+        }
+        
+    }); 
+	$('#Mailing-address').click(function(){
+		  
+           if($(this).is(":checked")){
+			$(this).attr('checked', true);
+			$('#Mailing-BuildingName').val($('#BuildingName').val());
+            $('#Mailing-Address_Line_1').val($('#Address_Line_1').val());
+            $('#Mailing-Address_Line_2').val($('#Address_Line_2').val());
+			$('#Mailing-PObox').val($('#Billing-PObox').val());
+            $('#Mailing-city-town').val($('#Suburb').val());
+            $('#Mailing-postcode').val($('#Postcode').val());
+            $('#Mailing-state').val($('#State').val());
+            $('#Mailing-country').val($('#Country').val());
+        }
+        
     }); 
 	$('[id^=Job]').change(function(){
 	    if(($('select[name=Job]').val()!="Physiotherapist")){
