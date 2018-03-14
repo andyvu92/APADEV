@@ -33,37 +33,7 @@ jQuery(document).ready(function($) {
 		
 		
 	});
-	$('[class^=join-details-button]').click(function(){
-		
-        var i = Number($(this).attr("class").replace('join-details-button', ''));
-		var x = Number(i + 1);
-		//var validateFun = function(){
-			//if($("#Prefix").val() ==''){alert("please fill out all required fields *"); return false;} 
-			
-		//};
-	    
-		//if(validateFun()==false){return false;}
-		if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
-	    $('[class^=down]:not(.down'+x+')').slideUp(400);
-	    $('.down' + x).slideToggle(450);
-		$('[class^=tabtitle]:not(.tabtitle'+x+') span').removeClass("text-underline");
-		var eventtitle = "eventtitle"+x;
-		$("span." + eventtitle).addClass("text-underline");
-          		
-	});
 	
-	$('[class^=your-details-prevbutton]').click(function(){
-		
-        var i = Number($(this).attr("class").replace('your-details-prevbutton', ''));
-		var x = Number(i - 1);
-		if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
-	    $('[class^=down]:not(.down'+x+')').slideUp(400);
-	    $('.down' + x).slideToggle(450);
-		$('[class^=tabtitle]:not(.tabtitle'+x+') span').removeClass("text-underline");
-		var eventtitle = "eventtitle"+x;
-		$("span." + eventtitle).addClass("text-underline");
-          		
-	});
 	$("[id^=event]").click(function(){
         var x = $(this).attr("id").replace('event', '');
         var y = $("#event"+x).html().replace('+','~');
@@ -286,8 +256,7 @@ jQuery(document).ready(function($) {
         
     }); 
 	$('#Mailing-address').click(function(){
-		  
-           if($(this).is(":checked")){
+		if($(this).is(":checked")){
 			$(this).attr('checked', true);
 			$('#Mailing-BuildingName').val($('#BuildingName').val());
             $('#Mailing-Address_Line_1').val($('#Address_Line_1').val());
@@ -298,7 +267,7 @@ jQuery(document).ready(function($) {
             $('#Mailing-state').val($('#State').val());
             $('#Mailing-country').val($('#Country').val());
         }
-        
+     
     }); 
 	$('[id^=Job]').change(function(){
 	    if(($('select[name=Job]').val()!="Physiotherapist")){

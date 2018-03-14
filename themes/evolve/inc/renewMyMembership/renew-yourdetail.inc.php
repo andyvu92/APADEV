@@ -294,6 +294,7 @@
                               <option value="QLD" <?php if ($details['State'] == "QLD") echo "selected='selected'";?>> QLD </option>
                               <option value="NT" <?php if ($details['State'] == "NT") echo "selected='selected'";?>> NT </option>
                               <option value="WA" <?php if ($details['State'] == "WA") echo "selected='selected'";?>> WA </option>
+							  <option value="N/A" <?php if ($details['State'] == "N/A") echo "selected='selected'";?>> I live overseas </option>
                            </select>
                         </div>
                         <div class="col-lg-6">
@@ -316,7 +317,7 @@
                         </div>
 					 </div>
 					    <div class="col-lg-4">
-                           <label for="">Address 1</label>
+                           <label for="">Address 1<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Address_Line_1'])) {echo "placeholder='Billing Address 1'";}   else{ echo 'value="'.$details['Billing-Address_Line_1'].'"'; }?>>
                         </div>
                         <div class="col-lg-6 col-lg-offset-2">
@@ -324,19 +325,19 @@
                            <input type="text" class="form-control" name="Billing-PObox" <?php if (empty($details['Billing-PObox'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['Billing-PObox'].'"'; }?>>
                         </div>
 					     <div class="col-lg-12">
-                           <label for="">Address 2</label>
+                           <label for="">Address 2<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Address_Line_2'])) {echo "placeholder='Billing Address 2'";}   else{ echo 'value="'.$details['Billing-Address_Line_2'].'"'; }?>>
                         </div>
 						<div class="col-lg-12">
-                           <label for="">City or town</label>
+                           <label for="">City or town<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" <?php if (empty($details['Billing-Suburb'])) {echo "placeholder='Billing City/Town'";}   else{ echo 'value="'.$details['Billing-Suburb'].'"'; }?>>
                         </div>
                         <div class="col-lg-3">
-                           <label for="">Postcode</label>
+                           <label for="">Postcode<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?>>
                         </div>
                         <div class="col-lg-3">
-                           <label for="">State</label>
+                           <label for="">State<span class="tipstyle">*</span></label>
                            <select class="form-control" name="Shipping-state" id="Shipping-state">
                               <option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
                               <option value="ACT" <?php if ($details['Billing-State'] == "ACT") echo "selected='selected'";?>> ACT </option>
@@ -347,10 +348,11 @@
                               <option value="QLD" <?php if ($details['Billing-State'] == "QLD") echo "selected='selected'";?>> QLD </option>
                               <option value="NT" <?php if ($details['Billing-State'] == "NT") echo "selected='selected'";?>> NT </option>
                               <option value="WA" <?php if ($details['Billing-State'] == "WA") echo "selected='selected'";?>> WA </option>
+							  <option value="N/A" <?php if ($details['Billing-State'] == "N/A") echo "selected='selected'";?>> I live overseas </option>
                            </select>
                         </div>
                         <div class="col-lg-6">
-                           <label for="">Country</label>
+                           <label for="">Country<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Billing-Country" id="Billing-Country" <?php if (empty($details['Billing-Country'])) {echo "placeholder='Billing Country'";}   else{ echo 'value="'.$details['Billing-Country'].'"'; }?>>
                         </div>
                      </div>
@@ -359,7 +361,7 @@
 					   <input type="hidden" name="Shipping-Address_Line_1" value="<?php echo $details['Shipping-Address_Line_1'];?>">
 					   <input type="hidden" name="Shipping-Address_Line_2" value="<?php echo $details['Shipping-Address_Line_2'];?>">
 					   <input type="hidden" name="Shipping-PObox" value="<?php echo $details['Shipping-PObox'];?>">
-					   <input type="hidden" name="Shipping -city-town" value="<?php echo $details['Shipping -city-town'];?>">
+					   <input type="hidden" name="Shipping-city-town" value="<?php echo $details['Shipping -city-town'];?>">
 					   <input type="hidden" name="Shipping-postcode" value="<?php echo $details['Shipping-postcode'];?>">
 					   <input type="hidden" name="Shipping-state" value="<?php echo $details['Shipping-state'];?>">
 					   <input type="hidden" name="Shipping-country" value="<?php echo $details['Shipping-country'];?>">
@@ -458,7 +460,7 @@
                   </div>
                   <div class="row">
                      <div class="col-lg-6">
-                        <label for="">What branch would you like to join?</label>
+                        <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
                          <select class="form-control" id="Branch" name="Branch">
                            <option value="" <?php if (empty($details['Branch'])) echo "selected='selected'";?> disabled>What branch would you like to join?</option>
                            <option value="ACT" <?php if ($details['Branch'] == "ACT") echo "selected='selected'";?>>ACT</option>
@@ -468,7 +470,7 @@
                            <option value="TAS" <?php if ($details['Branch'] == "TAS") echo "selected='selected'";?>>TAS</option>
                            <option value="VIC" <?php if ($details['Branch'] == "VIC") echo "selected='selected'";?>>VIC</option>
                            <option value="WA" <?php if ($details['Branch'] == "WA") echo "selected='selected'";?>>WA</option>
-                           <option value="Overseas" <?php if ($details['Branch'] == "Overseas") echo "selected='selected'";?>>I live overseas</option>
+                           <option value="N/A" <?php if ($details['Branch'] == "N/A") echo "selected='selected'";?>>I live overseas</option>
                          </select>
                      </div>
                   </div>
@@ -627,7 +629,7 @@
                         <input type="text" class="form-control" name="WBuildingName<?php echo $key;?>" id="WBuildingName<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WBuildingName'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WBuildingName'].'"'; }?>>
                      </div>
                      <div class="col-lg-2">
-                        <label for="WAddress_Line_1">Address line 1</label>
+                        <label for="WAddress_Line_1">Address line 1<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control" name="WAddress_Line_1<?php echo $key;?>" id="WAddress_Line_1<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Address_Line_1'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Address_Line_1'].'"'; }?>>
                      </div>
                      <div class="col-lg-4">
@@ -637,33 +639,44 @@
                   </div>
                   <div class="row">
                      <div class="col-lg-3">
-                        <label for="Wcity">City/Town</label>
+                        <label for="Wcity">City/Town<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control" name="Wcity<?php echo $key;?>" id="Wcity<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wcity'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wcity'].'"'; }?>>
                      </div>
                      <div class="col-lg-3">
-                        <label for="Wpostcode">Postcode</label>
+                        <label for="Wpostcode">Postcode<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control" name="Wpostcode<?php echo $key;?>" id="Wpostcode<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wpostcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wpostcode'].'"'; }?>>
                      </div>
                      <div class="col-lg-3">
-                        <label for="Wstate">State</label>
-                        <input type="text" class="form-control" name="Wstate<?php echo $key;?>" id="Wstate<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wstate'])) {echo "placeholder='State'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wstate'].'"'; }?>>
+                        <label for="Wstate">State<span class="tipstyle">*</span></label>
+						<select class="form-control" id="Wstate<?php echo $key;?>" name="Wstate<?php echo $key;?>">
+							<option value="" <?php if (empty($details['Workplaces'][$key]['Wstate'])) echo "selected='selected'";?> disabled>State</option>
+                            <option value="ACT" <?php if ($details['Workplaces'][$key]['Wstate'] == "ACT") echo "selected='selected'";?>>ACT</option>
+                            <option value="NSW" <?php if ($details['Workplaces'][$key]['Wstate'] == "NSW") echo "selected='selected'";?>>NSW</option>
+                            <option value="QLD" <?php if ($details['Workplaces'][$key]['Wstate'] == "QLD") echo "selected='selected'";?>>QLD</option>
+                            <option value="SA" <?php if ($details['Workplaces'][$key]['Wstate'] == "SA") echo "selected='selected'";?>>SA</option>
+                            <option value="TAS" <?php if ($details['Workplaces'][$key]['Wstate'] == "TAS") echo "selected='selected'";?>>TAS</option>
+                            <option value="VIC" <?php if ($details['Workplaces'][$key]['Wstate'] == "VIC") echo "selected='selected'";?>>VIC</option>
+                            <option value="WA" <?php if ($details['Workplaces'][$key]['Wstate'] == "WA") echo "selected='selected'";?>>WA</option>
+                            <option value="N/A" <?php if ($details['Workplaces'][$key]['Wstate'] == "N/A") echo "selected='selected'";?>>I live overseas</option>
+                         </select>
+                       
                      </div>
                      <div class="col-lg-3">
-                        <label for="Wcountry">Country</label>
+                        <label for="Wcountry">Country<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control" name="Wcountry<?php echo $key;?>" id="Wcountry<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wcountry'])) {echo "placeholder='Country'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wcountry'].'"'; }?>>
                      </div>
                   </div>
                   <div class="row">
                      <div class="col-lg-6">
-                        <label for="Wemail">Workplace email</label>
+                        <label for="Wemail">Workplace email<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control" name="Wemail<?php echo $key;?>" id="Wemail<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wemail'])) {echo "placeholder='Workplace email'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wemail'].'"'; }?>>
                      </div>
                      <div class="col-lg-3">
-                        <label for="Wwebaddress">Website</label>
+                        <label for="Wwebaddress">Website<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control" name="Wwebaddress<?php echo $key;?>" id="Wwebaddress<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wwebaddress'])) {echo "placeholder='Website'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wwebaddress'].'"'; }?>>
                      </div>
                      <div class="col-lg-3">
-                        <label for="Wphone">Phone number</label>
+                        <label for="Wphone">Phone number<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control" name="Wphone<?php echo $key;?>" id="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>>
                      </div>
                   </div>
@@ -785,7 +798,7 @@
                   </div>
                    <div class="row">
                      <div class="col-lg-3">
-                        Numbers of hours worked
+                        Numbers of hours worked<span class="tipstyle">*</span>
                      </div>
                      <div class="col-lg-6">
                         <select class="form-control" id="Number-worked-hours<?php echo $key;?>" name="Number-worked-hours<?php echo $key;?>">
@@ -820,7 +833,7 @@
                <div class="down4" style="display:none;" >
                   <div class="row">
                      <div class="col-lg-6">
-                        <label for="Udegree">Undergraduate degree</label>
+                        <label for="Udegree">Undergraduate degree<span class="tipstyle">*</span></label>
                         <select name="Udegree" id="Udegree">
 							<option value="" <?php if (empty($details['Udegree'])) echo "selected='selected'";?> disabled>(None)</option>
 							<option value="1" <?php if ($details['Udegree'] == "1") echo "selected='selected'";?>>Bachelor of Physiotherapy</option>
@@ -837,7 +850,7 @@
                   </div>
                   <div class="row">
                      <div class="col-lg-6">
-                        <label for="undergraduate-university-name">Undergraduate university name</label>
+                        <label for="undergraduate-university-name">Undergraduate university name<span class="tipstyle">*</span></label>
                         <select name="Undergraduate-university-name" id="Undergraduate-university-name">
 							<option value="" <?php if (empty($details['Undergraduate-university-name'])) echo "selected='selected'";?>>(None)</option>
 							<option value="ACU" <?php if ($details['Undergraduate-university-name'] == "ACU") echo "selected='selected'";?>>Australian Catholic University - NSW</option>
@@ -878,13 +891,24 @@
                   </div>
                   <div class="row">
                      <div class="col-lg-4">
-                        <label for="ugraduate-country">Country</label>
+                        <label for="ugraduate-country">Country<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control" name="Ugraduate-country" id="Ugraduate-country" <?php if (empty($details['Ugraduate-country'])) {echo "placeholder='Country'";}   else{ echo 'value="'.$details['Ugraduate-country'].'"'; }?>>
                      </div>
                      <div class="col-lg-2">
-                        <label for="ugraduate-year-attained">Year attained</label>
-						<input type="text" class="form-control" name="Ugraduate-year-attained" id="Ugraduate-year-attained" <?php if (empty($details['Ugraduate-year-attained'])) {echo "placeholder='Attend year'";}   else{ echo 'value="'.$details['Ugraduate-year-attained'].'"'; }?>>
-                       
+                        <label for="ugraduate-year-attained">Year attained<span class="tipstyle">*</span></label>
+						<select class="form-control" name="Ugraduate-year-attained" id="Ugraduate-year-attained">
+							<?php 
+							   $y = date("Y") + 15; 
+							   for ($i=1940; $i<= $y; $i++){
+								echo '<option value="'.$i.'"';
+								if ($details['Ugraduate-year-attained'] == $i){
+										echo 'selected="selected"';
+								}
+								echo '>'.$i.'</option>';
+							    }
+								 
+							?>
+					</select>
                      </div>
                   </div>
 				 
@@ -949,7 +973,19 @@
                      </div>
                      <div class="col-lg-2">
                         <label for="pgraduate-year-attained">Year attained</label>
-                        <input type="text" class="form-control" name="Pgraduate-year-attained" id="Pgraduate-year-attained" <?php if (empty($details['Pgraduate-year-attained'])) {echo "placeholder='Attend year'";}   else{ echo 'value="'.$details['Pgraduate-year-attained'].'"'; }?>>
+                       	<select class="form-control" name="Pgraduate-year-attained" id="Pgraduate-year-attained">
+							 <?php 
+							  $y = date("Y") + 15; 
+							  for ($i=1940; $i<= $y; $i++){
+								echo '<option value="'.$i.'"';
+								if ($details['Pgraduate-year-attained'] == $i){
+										echo 'selected="selected"';
+								}
+								echo '>'.$i.'</option>';
+							  }
+								 
+							 ?>
+					</select>
                      </div>
                   </div>
                   <div class="row">

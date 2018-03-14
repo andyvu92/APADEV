@@ -95,6 +95,7 @@ lessc[] = Survey/Survey.less
 
 
 scripts[] = assets/scripts/evolve.js
+scripts[] = assets/scripts/formValidation.js
 scripts[] = assets/scripts/custom.js
 scripts[] = assets/scripts/chosen_v1.7.0/chosen.jquery.min.js
 scripts[] = assets/scripts/twitter.js
