@@ -1,52 +1,53 @@
 <?php
 //use session: $_SESSION['userID'],$_SESSION["postReviewData"]
- //save PRF product into APA database function
-	 function createShoppingCart($userID, $productID,$coupon){
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
-		try {
-			$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, coupon) VALUES (:userID, :productID, :coupon)');
-			$shoppingcartUpdate->bindValue(':userID', $userID);
-			$shoppingcartUpdate->bindValue(':productID', $productID);
-			$shoppingcartUpdate->bindValue(':coupon', $coupon);
-			$shoppingcartUpdate->execute();	
-			$shoppingcartUpdate = null;
-		   
-	    }
-		catch (PDOException $e) {
-				print "Error!: " . $e->getMessage() . "<br/>";
-				die();
-	    }
-	  }
-	
-    if(isset($_POST['step2'])) {
-	 $postPaymentData = array();
-	 $postReviewData = array();
-	 //grab payment data
-	 //use webservice 2.2.15 Add payment method
-	 //variable includes: userID, Payment-method,Name-on-card,Cardno,Expiry-date,CCV
-	 if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; }
-	 if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
-	 if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
-	 if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
-	 if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
-	 if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
-	 GetAptifyData("15", $postPaymentData);
-	 //grab review order data
-	 //use webservice 2.2.26 Register a new member order
+//save PRF product into APA database function
+function createShoppingCart($userID, $productID,$coupon){
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	try {
+		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, coupon) VALUES (:userID, :productID, :coupon)');
+		$shoppingcartUpdate->bindValue(':userID', $userID);
+		$shoppingcartUpdate->bindValue(':productID', $productID);
+		$shoppingcartUpdate->bindValue(':coupon', $coupon);
+		$shoppingcartUpdate->execute();	
+		$shoppingcartUpdate = null;
+	   
+	}
+	catch (PDOException $e) {
+			print "Error!: " . $e->getMessage() . "<br/>";
+			die();
+	}
+}
+if(isset($_POST['step2'])) {
+	$postPaymentData = array();
+	$postReviewData = array();
+	//grab payment data
+	//use webservice 2.2.15 Add payment method
+	//variable includes: userID, Payment-method,Name-on-card,Cardno,Expiry-date,CCV
+	if(isset($_POST['addCard']) && $_POST['addCard'] == "1" ){
+		if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; }
+		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
+		if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
+		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
+		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
+		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
+		GetAptifyData("15", $postPaymentData);
+	}
+	//grab review order data
+	//use webservice 2.2.26 Register a new member order
      if(isset($_SESSION['userID'])){ $postReviewData['userID'] = $_SESSION['userID']; } 
 	 if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption']; }
 	 if(isset($_POST['PRF'])){ 
 	 $postReviewData['PRF'] = $_POST['PRF']; 
 	 //save PRF product into APA database function
 	 createShoppingCart($userID=$_SESSION['userID'], $productID="PRF", $coupon=$_POST['PRF']);  
-	 }
-	 if(isset($_POST['Rollover'])){ $postReviewData['Rollover'] = $_POST['Rollover']; }
-	 if(isset($_POST['Claim'])){ $postReviewData['Claim'] = $_POST['Claim']; }
-	 if(isset($_POST['Facts'])){ $postReviewData['Facts'] = $_POST['Facts']; }
-	 if(isset($_POST['Disciplinary'])){ $postReviewData['Disciplinary'] = $_POST['Disciplinary']; }
-	 if(isset($_POST['Decline'])){ $postReviewData['Decline'] = $_POST['Decline']; }
-	 if(isset($_POST['Oneclaim'])){ $postReviewData['Oneclaim'] = $_POST['Oneclaim']; }
-	 if(isset($_POST['Addtionalquestion']) && $_POST['Addtionalquestion'] == "1"){ 
+	}
+	if(isset($_POST['Rollover'])){ $postReviewData['Rollover'] = $_POST['Rollover']; }
+	if(isset($_POST['Claim'])){ $postReviewData['Claim'] = $_POST['Claim']; }
+	if(isset($_POST['Facts'])){ $postReviewData['Facts'] = $_POST['Facts']; }
+	if(isset($_POST['Disciplinary'])){ $postReviewData['Disciplinary'] = $_POST['Disciplinary']; }
+	if(isset($_POST['Decline'])){ $postReviewData['Decline'] = $_POST['Decline']; }
+	if(isset($_POST['Oneclaim'])){ $postReviewData['Oneclaim'] = $_POST['Oneclaim']; }
+	if(isset($_POST['Addtionalquestion']) && $_POST['Addtionalquestion'] == "1"){ 
 		$postReviewData['Addtionalquestion'] = $_POST['Addtionalquestion'];
 		if(isset($_POST['Yearclaim'])){ $postReviewData['Yearclaim'] = $_POST['Yearclaim']; }
 		if(isset($_POST['Nameclaim'])){ $postReviewData['Nameclaim'] = $_POST['Nameclaim']; }
@@ -85,7 +86,7 @@
 	$_SESSION["postReviewData"] =  array();
 	$_SESSION["postReviewData"] = $postReviewData;
   }
-  if(isset($_POST['Paymentcard'])) {
+  if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 	$usedCard = $_POST['Paymentcard']; 
 	//use webservice 2.2.13 update payment method
 	$postCard['userID'] = $_SESSION['userID'];
@@ -123,7 +124,7 @@
 				  <!--<a class="your-details-prevbutton8"><span class="dashboard-button-name">Last</span></a>-->
 					 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 Membpaymentsiderbar">
 					 <p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
-                <div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> <fieldset><select  id="Paymentcard" name="Paymentcard">
+                <div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> <fieldset><select  id="Paymentcard" name="Paymentcard" disabled>
                       <?php 
 					  //web service 2.2.12 Get payment listing;
 					  $cardsnum = GetAptifyData("12", $postPaymentData['userID']);

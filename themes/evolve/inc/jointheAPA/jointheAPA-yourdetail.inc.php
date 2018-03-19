@@ -12,7 +12,9 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Lastname'])){ $postData['Lastname'] = $_POST['Lastname']; }
 	if(isset($_POST['Birth'])){ $postData['Birth'] = $_POST['Birth']; }
 	if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
-	if(isset($_POST['Home-phone-number'])){ $postData['Home-phone-number'] = $_POST['Home-phone-number']; }
+	if(isset($_POST['country-code'])){ $postData['Home-phone-number'][0] = $_POST['country-code']; }
+	if(isset($_POST['area-code'])){ $postData['Home-phone-number'][1] = $_POST['area-code']; }
+	if(isset($_POST['phone-number'])){ $postData['Home-phone-number'][2] = $_POST['phone-number']; }
 	if(isset($_POST['Mobile-number'])){ $postData['Mobile-number'] = $_POST['Mobile-number']; }
 	if(isset($_POST['Aboriginal'])){ $postData['Aboriginal'] = $_POST['Aboriginal']; }
 	if(isset($_POST['BuildingName'])){ $postData['BuildingName'] = $_POST['BuildingName']; }
@@ -64,6 +66,7 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid']; $_SESSION["userID"] = $_POST['Memberid'];}
 	if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password']; }
 	if(isset($_POST['MemberType'])){ $postData['MemberType'] = $_POST['MemberType']; }
+	if(isset($_POST['Ahpranumber'])){ $postData['Ahpranumber'] = $_POST['Ahpranumber']; }
 	if(isset($_POST['Nationalgp'])){ $postData['Nationalgp'] = $_POST['Nationalgp']; }
 	if(isset($_POST['Branch'])){ $postData['Branch'] = $_POST['Branch']; }
 	if(isset($_POST['SpecialInterest'])){ $postData['SpecialInterest'] = $_POST['SpecialInterest']; }
@@ -228,11 +231,19 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 					</div>
                 </div>
 				<div class="row">
-					<div class="col-lg-6">
-					   <label for="">Phone number</label>
-					   <input type="text" class="form-control" name="Home-phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number:039092 0840 '";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  pattern="[0-9]{10}">
+					<div class="col-lg-2">
+					   <label for="">Country code</label>
+					   <input type="text" class="form-control" name="country-code" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Country Code'";}   else{ echo 'value="'.$details['Home-phone-number'][0].'"'; }?>  pattern="[0-9]{10}">
 					</div>
-					<div class="col-lg-6">
+					<div class="col-lg-2">
+					   <label for="">Area code</label>
+					   <input type="text" class="form-control" name="area-code" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-number'][1].'"'; }?>  pattern="[0-9]{10}">
+					</div>
+					<div class="col-lg-4">
+					   <label for="">Phone number</label>
+					   <input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'][2].'"'; }?>  pattern="[0-9]{10}">
+					</div>
+					<div class="col-lg-4">
 					   <label for="">Mobile number</label>
 					   <input type="text" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile:0456089756'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?> pattern="[0-9]{9}">
 					</div>
@@ -241,7 +252,7 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
                     <div class="col-lg-9"> Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span></div>
                     <div class="col-lg-3">
                         <select class="form-control" id="Aboriginal" name="Aboriginal">
-                            <option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?>>No</option>
+                            <option value="No" <?php if ($details['Aboriginal'] == "No") echo "selected='selected'";?>>No</option>
                             <option value="AB" <?php if ($details['Aboriginal'] == "AB") echo "selected='selected'";?>>Yes, Aboriginal </option>
                             <option value="TSI" <?php if ($details['Aboriginal'] == "TSI") echo "selected='selected'";?>>Yes, Torres Strait Islander </option>
                             <option value="BOTH" <?php if ($details['Aboriginal'] == "BOTH") echo "selected='selected'";?>>Yes, both Aboriginal and Torres Strait Islander</option>
@@ -433,6 +444,12 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 					</select>
                 </div>
             </div>
+			<div class="row" id="ahpblock">
+                <div class="col-lg-2">
+                    <label for="">AHPRA number</label>
+                    <input type="text" class="form-control" name="Ahpranumber"  <?php if (empty($details['Ahpranumber'])) {echo "placeholder='AHPRA number'";}   else{ echo 'value="'.$details['Ahpranumber'].'"'; }?>>
+                </div>
+            </div>
             <div class="row">
                 <div class="col-lg-6">
 					<label for="">Your National group</label>
@@ -493,7 +510,7 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
                     </select>
                 </div>
             </div>
-		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>
+		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a><a class="join-details-button2"><span class="dashboard-button-name">Next</span></a></div>
         </div>
         <div id="wpnumber"><?php  $wpnumber =  0; echo  $wpnumber; ?></div>
         <input type="hidden" name="wpnumber" value="<?php  $wpnumber =  1; echo  $wpnumber; ?>"/>
@@ -986,11 +1003,19 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
                         </div>
                     </div>
 					  <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-2">
                            <label for="">Phone number</label>
                            <input type="text" class="form-control" name="Home-phone-number"   pattern="[0-9]{10}">
                         </div>
-                        <div class="col-lg-6">
+						<div class="col-lg-2">
+					       <label for="">Area code</label>
+					       <input type="text" class="form-control" name="area-code"   pattern="[0-9]{10}">
+					    </div>
+					    <div class="col-lg-4">
+					       <label for="">Phone number</label>
+					       <input type="text" class="form-control" name="phone-number" pattern="[0-9]{10}">
+					    </div>
+                        <div class="col-lg-4">
                            <label for="">Mobile number</label>
                            <input type="text" class="form-control" name="Mobile-number"  pattern="[0-9]{9}">
                         </div>
@@ -1226,7 +1251,12 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
                         </select>
                      </div>
                   </div>
-                
+                <div class="row" id="ahpblock">
+					<div class="col-lg-2">
+						<label for="">AHPRA number</label>
+						<input type="text" class="form-control" name="Ahpranumber"  <?php if (empty($details['Ahpranumber'])) {echo "placeholder='AHPRA number'";}   else{ echo 'value="'.$details['Ahpranumber'].'"'; }?>>
+					</div>
+				</div>
                   <div class="row">
                      <div class="col-lg-6">
                         <label for="">Your National group</label>

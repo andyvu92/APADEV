@@ -97,7 +97,7 @@ In viverra neque lacus, vel pulvinar nulla convallis id. Curabitur porttitor
 eleifend quam in tincidunt.
                            </div>
                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-							 <label for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label><input type="checkbox" id="privacypolicyp">
+							 <label for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label><input type="checkbox" id="privacypolicyp" checked>
                            </div>
 						 
 </div>
@@ -113,7 +113,7 @@ In viverra neque lacus, vel pulvinar nulla convallis id. Curabitur porttitor
 eleifend quam in tincidunt.
                            </div>
                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-							 <label for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label><input type="checkbox" id="installmentpolicyp">
+							 <label for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label><input type="checkbox" id="installmentpolicyp" checked>
                            </div>
 						 
 </div>	

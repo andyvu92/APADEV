@@ -287,15 +287,15 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
            
                <li><a class="event2" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li>
                <li><a class="event13" style="cursor: pointer;"><span class="eventtitle13" id="payment"><strong>Payment information</strong></span></a></li>
-               <li><a class="event3" style="cursor: pointer;"><span class="eventtitle4" id="workplace"><strong>Workplace</strong></span></a></li>
-               <li><a class="event4" style="cursor: pointer;"><span class="eventtitle5" id="education"><strong>Education</strong></span></a></li>
+               <li><a class="event3" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li>
+               <li><a class="event4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
             </ul>
             <form action="" name="your-details" method="POST">
                <div class="down1">
                   <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 none-padding">
                      <div class="row">
                         <div class="col-lg-3">
-                           <label for="prefix">Prefix</label>
+                           <label for="prefix">Prefix<span class="tipstyle">*</span></label>
                            <select class="form-control" id="Prefix" name="Prefix">
                               <option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> disabled>Prefix</option>
                               <option value="Prof"  <?php if ($details['Prefix'] == "Prof") echo "selected='selected'";?>>Prof</option>
@@ -306,10 +306,14 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                               <option value="Ms" <?php if ($details['Prefix'] == "Ms") echo "selected='selected'";?>>Ms</option>
                            </select>
                         </div>
-                        <div class="col-lg-6">
-                           <label for="">First/preferred name</label>
-                           <input type="text" class="form-control"  name="Firstname" <?php if (empty($details['Firstname'])) {echo "placeholder='First/preferred name'";}   else{ echo 'value="'.$details['Firstname'].'"'; }?>>
-                        </div>
+                        <div class="col-lg-3">
+							<label for="">First name<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control"  name="Firstname" <?php if (empty($details['Firstname'])) {echo "placeholder='First name'";}   else{ echo 'value="'.$details['Firstname'].'"'; }?>>
+						</div>
+						<div class="col-lg-3">
+							<label for="">preferred name</label>
+							<input type="text" class="form-control"  name="Preferred-name" <?php if (empty($details['Preferred-name'])) {echo "placeholder='Preferred name'";}   else{ echo 'value="'.$details['Preferred-name'].'"'; }?>>
+						</div>
                         <div class="col-lg-3">
                            <label for="">Middle name</label>
                            <input type="text" class="form-control" name="Middle-name" <?php if (empty($details['Middle-name'])) {echo "placeholder='Middle name'";}   else{ echo 'value="'.$details['Middle-name'].'"'; }?>>
@@ -321,17 +325,17 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                            <input type="text" class="form-control" name="Maiden-name"  <?php if (empty($details['Maiden-name'])) {echo "placeholder='Maiden name'";}   else{ echo 'value="'.$details['Maiden-name'].'"'; }?>>
                         </div>
                         <div class="col-lg-6">
-                           <label for="">Last name</label>
+                           <label for="">Last name<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Lastname" <?php if (empty($details['Lastname'])) {echo "placeholder='Last name'";}   else{ echo 'value="'.$details['Lastname'].'"'; }?>>
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-4">
-                           <label for="">Birth Date</label>
+                           <label for="">Birth Date<span class="tipstyle">*</span></label>
                            <input type="date" class="form-control" name="Birth" <?php if (empty($details['Birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.$details['Birth'].'"'; }?>>
                         </div>
                         <div class="col-lg-3 col-lg-offset-1">
-                           <label for="">Gender</label>
+                           <label for="">Gender<span class="tipstyle">*</span></label>
                            <select class="form-control" id="Gender" name="Gender">
                               <option value="" <?php if (empty($details['Gender'])) echo "selected='selected'";?> disabled> Gender </option>
                               <option value="Male" <?php if ($details['Gender'] == "Male") echo "selected='selected'";?>>Male</option>
@@ -340,23 +344,31 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                            </select>
                         </div>
                      </div>
-					   <div class="row">
-                        <div class="col-lg-6">
-                           <label for="">Phone number</label>
-                           <input type="text" class="form-control" name="Home-phone-number"  <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number:039092 0840 '";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  pattern="[0-9]{10}">
-                        </div>
-                        <div class="col-lg-6">
-                           <label for="">Mobile number</label>
-                           <input type="text" class="form-control" name="Mobile-number"  <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile:0456089756'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?> pattern="[0-9]{9}">
-                        </div>
-                     </div>
+					<div class="row">
+							<div class="col-lg-2">
+							   <label for="">Country code</label>
+							   <input type="text" class="form-control" name="country-code" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Country Code'";}   else{ echo 'value="'.$details['Home-phone-number'][0].'"'; }?>  pattern="[0-9]{10}">
+							</div>
+							<div class="col-lg-2">
+							   <label for="">Area code</label>
+							   <input type="text" class="form-control" name="area-code" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-number'][1].'"'; }?>  pattern="[0-9]{10}">
+							</div>
+							<div class="col-lg-4">
+							   <label for="">Phone number</label>
+							   <input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'][2].'"'; }?>  pattern="[0-9]{10}">
+							</div>
+							<div class="col-lg-4">
+							   <label for="">Mobile number</label>
+							   <input type="text" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile:0456089756'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?> pattern="[0-9]{9}">
+							</div>
+				    </div>
                      <div class="row">
                         <div class="col-lg-9">
-                           Aboriginal and Torres Strait Islander origin
+                           Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span>
                         </div>
                         <div class="col-lg-3">
                            <select class="form-control" id="Aboriginal" name="Aboriginal">
-                              <option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?>>No</option>
+                              <option value="No" <?php if ($details['Aboriginal'] == "No") echo "selected='selected'";?>>No</option>
                               <option value="AB" <?php if ($details['Aboriginal'] == "AB") echo "selected='selected'";?>>Yes, Aboriginal </option>
                               <option value="TSI" <?php if ($details['Aboriginal'] == "TSI") echo "selected='selected'";?>>Yes, Torres Strait Islander </option>
                               <option value="BOTH" <?php if ($details['Aboriginal'] == "BOTH") echo "selected='selected'";?>>Yes, both Aboriginal and Torres Strait Islander</option>
@@ -378,13 +390,13 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                      </div>
                      <div class="row">
                         <div class="col-lg-12">
-                           <label for="">Address 1</label>
+                           <label for="">Address 1<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Address_Line_1"  <?php if (empty($details['Address_Line_1'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Address_Line_1'].'"'; }?>>
                         </div>
                      </div>
 					 <div class="row">
                         <div class="col-lg-12">
-                           <label for="">Address 2</label>
+                           <label for="">Address 2<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Address_Line_2"  <?php if (empty($details['Address_Line_2'])) {echo "placeholder='Address 2'";}   else{ echo 'value="'.$details['Address_Line_2'].'"'; }?>>
                         </div>
                      </div>
@@ -396,11 +408,11 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                      </div>
                      <div class="row">
                         <div class="col-lg-3">
-                           <label for="">Postcode</label>
+                           <label for="">Postcode<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Postcode"  <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?>>
                         </div>
                         <div class="col-lg-3">
-                           <label for="">State</label>
+                           <label for="">State<span class="tipstyle">*</span></label>
                            <select class="form-control" id="State" name="State">
                               <option value="" <?php if (empty($details['State'])) echo "selected='selected'";?> disabled> State </option>
                               <option value="ACT" <?php if ($details['State'] == "ACT") echo "selected='selected'";?>> ACT </option>
@@ -414,7 +426,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                            </select>
                         </div>
                      <div class="col-lg-6">
-                           <label for="">Country</label>
+                           <label for="">Country<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Country"  <?php if (empty($details['Country'])) {echo "placeholder='Country'";}   else{ echo 'value="'.$details['Country'].'"'; }?>>
                         </div>
                      </div>
@@ -433,24 +445,24 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                         </div>
 					 </div>
 					    <div class="col-lg-4">
-                           <label for="">Address 1</label>
+                           <label for="">Address 1<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Address_Line_1'])) {echo "placeholder='Billing Address 1'";}   else{ echo 'value="'.$details['Billing-Address_Line_1'].'"'; }?>>
                         </div>
                        
 					     <div class="col-lg-12">
-                           <label for="">Address 2</label>
+                           <label for="">Address 2<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Address_Line_2'])) {echo "placeholder='Billing Address 2'";}   else{ echo 'value="'.$details['Billing-Address_Line_2'].'"'; }?>>
                         </div>
 						<div class="col-lg-12">
-                           <label for="">City or town</label>
+                           <label for="">City or town<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" <?php if (empty($details['Billing-Suburb'])) {echo "placeholder='Billing City/Town'";}   else{ echo 'value="'.$details['Billing-Suburb'].'"'; }?>>
                         </div>
                         <div class="col-lg-3">
-                           <label for="">Postcode</label>
+                           <label for="">Postcode<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?>>
                         </div>
                         <div class="col-lg-3">
-                           <label for="">State</label>
+                           <label for="">State<span class="tipstyle">*</span></label>
                            <select class="form-control" name="Billing-State" id="Billing-State">
                               <option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
                               <option value="ACT" <?php if ($details['Billing-State'] == "ACT") echo "selected='selected'";?>> ACT </option>
@@ -465,7 +477,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                            </select>
                         </div>
                         <div class="col-lg-6">
-                           <label for="">Country</label>
+                           <label for="">Country<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Billing-Country" id="Billing-Country" <?php if (empty($details['Billing-Country'])) {echo "placeholder='Billing Country'";}   else{ echo 'value="'.$details['Billing-Country'].'"'; }?>>
                         </div>
                      </div>
@@ -495,15 +507,15 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                      <div class="row form-image">
                         <div class="col-lg-12">
 							Upload/change image
-							<form action="/your-details" type="POST">
+							
 								<input type="hidden" name="PictureUpdate" value="pictureUpload">
 								<input type="submit">
-							</form>
+							
                         </div>
                      </div>
                      <div class="row">
                         <div class="col-lg-12">
-                           <label for="">Member no.</label>
+                           <label for="">Member no.<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" <?php if (empty($details['Memberno'])) {echo "placeholder='Member no.'";}   else{ echo 'value="'.$details['Memberno'].'"'; }?> readonly>
                         </div>
                      </div>
@@ -515,17 +527,19 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                      </div>
                        
                   </div>
+				    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button1"><span class="dashboard-button-name">Next</span></a></div>
                </div>
+			   
                <div class="down2" style="display:none;" >
                   <div class="row">
                      <div class="col-lg-6">
-                        <label for="">Member ID(Your email address)</label>
-                        <input type="text" class="form-control" name="Memberid"  <?php if (empty($details['Memberid'])) {echo "placeholder='Member ID(Your email address)'";}   else{ echo 'value="'.$details['Memberid'].'"'; }?>>
+                        <label for="">Member ID(Your email address)<span class="tipstyle">*</span></label>
+                        <input type="text" class="form-control" name="Memberid"  <?php if (empty($details['Memberid'])) {echo "placeholder='Member ID(Your email address)'";}   else{ echo 'value="'.$details['Memberid'].'"'; }?> readonly>
                      </div>
                   </div>
                   <div class="row">
                      <div class="col-lg-6">
-                        <label for="">Member Type</label>
+                        <label for="">Member Type<span class="tipstyle">*</span></label>
                         <select class="form-control" id="MemberType" name="MemberType" disabled>
                            <option value="" <?php if (empty($details['MemberType'])) echo "selected='selected'";?> disabled>memberType</option>
                            <option value="FPI" <?php if ($details['MemberType'] == "FPI") echo "selected='selected'";?>>Full-time physiotherapist with insurance (more than 18 hours per week) </option>
@@ -587,13 +601,13 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                   <div class="row">
                      <div class="col-lg-6">
                         <label for="">Your Regional group</label>
-                        <input type="text" class="form-control" name="Regional-group"  <?php if (empty($details['Regional-group'])) {echo "placeholder='Your Regional group'";}   else{ echo 'value="'.$details['Regional-group'].'"'; }?>>
+                        <input type="text" class="form-control" name="Regional-group"  <?php if (empty($details['Regional-group'])) {echo "placeholder='Your Regional group'";}   else{ echo 'value="'.$details['Regional-group'].'"'; }?> readonly>
                      </div>
                   </div>
 				   <div class="row">
                      <div class="col-lg-6">
-                        <label for="">Your Branch</label>
-                        <input type="text" class="form-control" name="Branch"  <?php if (empty($details['Branch'])) {echo "placeholder='Your Branch'";}   else{ echo 'value="'.$details['Branch'].'"'; }?>>
+                        <label for="">Your Branch<span class="tipstyle">*</span></label>
+                        <input type="text" class="form-control" name="Branch"  <?php if (empty($details['Branch'])) {echo "placeholder='Your Branch'";}   else{ echo 'value="'.$details['Branch'].'"'; }?> readonly>
                      </div>
                   </div>
 				  <div class="row"> 
@@ -625,12 +639,14 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                         </select>
                      </div>
                   </div>
+				  <!--
                   <div class="row">
                      <div class="col-lg-6">
                         <label for="">Status</label>
                         <input type="text" class="form-control" name="Status"  <?php if (empty($details['Status'])) {echo "placeholder='Status'";}   else{ echo 'value="'.$details['Status'].'"'; }?> readonly>
                      </div>
-                  </div>
+                  </div>-->
+				    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button12"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>
                </div>
                <div class="down13"  style="display:none;" >
 			<?php
@@ -857,16 +873,16 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<div class="col-lg-2">
                         <label for="">State<span class="tipstyle">*</span></label>
 						<select class="form-control" name="Shipping-State" id="Shipping-State">
-                              <option value=""  <?php if (empty($details['Shipping-State'])) echo "selected='selected'";?> disabled> State </option>
-                              <option value="ACT" <?php if ($details['Shipping-State'] == "ACT") echo "selected='selected'";?>> ACT </option>
-                              <option value="NSW" <?php if ($details['Shipping-State'] == "NSW") echo "selected='selected'";?>> NSW </option>
-                              <option value="SA" <?php if ($details['Shipping-State'] == "SA") echo "selected='selected'";?>> SA </option>
-                              <option value="TAS" <?php if ($details['Shipping-State'] == "TAS") echo "selected='selected'";?>> TAS </option>
-                              <option value="VIC" <?php if ($details['Shipping-State'] == "VIC") echo "selected='selected'";?>> VIC </option>
-                              <option value="QLD" <?php if ($details['Shipping-State'] == "QLD") echo "selected='selected'";?>> QLD </option>
-                              <option value="NT" <?php if ($details['Shipping-State'] == "NT") echo "selected='selected'";?>> NT </option>
-                              <option value="WA" <?php if ($details['Shipping-State'] == "WA") echo "selected='selected'";?>> WA </option>
-							  <option value="N/A" <?php if ($details['Shipping-State'] == "N/A") echo "selected='selected'";?>> I live overseas </option>
+                              <option value=""  <?php if (empty($details['Shipping-state'])) echo "selected='selected'";?> disabled> State </option>
+                              <option value="ACT" <?php if ($details['Shipping-state'] == "ACT") echo "selected='selected'";?>> ACT </option>
+                              <option value="NSW" <?php if ($details['Shipping-state'] == "NSW") echo "selected='selected'";?>> NSW </option>
+                              <option value="SA" <?php if ($details['Shipping-state'] == "SA") echo "selected='selected'";?>> SA </option>
+                              <option value="TAS" <?php if ($details['Shipping-state'] == "TAS") echo "selected='selected'";?>> TAS </option>
+                              <option value="VIC" <?php if ($details['Shipping-state'] == "VIC") echo "selected='selected'";?>> VIC </option>
+                              <option value="QLD" <?php if ($details['Shipping-state'] == "QLD") echo "selected='selected'";?>> QLD </option>
+                              <option value="NT" <?php if ($details['Shipping-state'] == "NT") echo "selected='selected'";?>> NT </option>
+                              <option value="WA" <?php if ($details['Shipping-state'] == "WA") echo "selected='selected'";?>> WA </option>
+							  <option value="N/A" <?php if ($details['Shipping-state'] == "N/A") echo "selected='selected'";?>> I live overseas </option>
                         </select>
                     </div>
                      <div class="col-lg-4">
@@ -911,16 +927,16 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					 <div class="col-lg-2">
                         <label for="">State<span class="tipstyle">*</span></label>
 						<select class="form-control" name="Mailing-State" id="Mailing-State">
-                              <option value=""  <?php if (empty($details['Mailing-State'])) echo "selected='selected'";?> disabled> State </option>
-                              <option value="ACT" <?php if ($details['Mailing-State'] == "ACT") echo "selected='selected'";?>> ACT </option>
-                              <option value="NSW" <?php if ($details['Mailing-State'] == "NSW") echo "selected='selected'";?>> NSW </option>
-                              <option value="SA" <?php if ($details['Mailing-State'] == "SA") echo "selected='selected'";?>> SA </option>
-                              <option value="TAS" <?php if ($details['Mailing-State'] == "TAS") echo "selected='selected'";?>> TAS </option>
-                              <option value="VIC" <?php if ($details['Mailing-State'] == "VIC") echo "selected='selected'";?>> VIC </option>
-                              <option value="QLD" <?php if ($details['Mailing-State'] == "QLD") echo "selected='selected'";?>> QLD </option>
-                              <option value="NT" <?php if ($details['Mailing-State'] == "NT") echo "selected='selected'";?>> NT </option>
-                              <option value="WA" <?php if ($details['Mailing-State'] == "WA") echo "selected='selected'";?>> WA </option>
-							  <option value="N/A" <?php if ($details['Mailing-State'] == "N/A") echo "selected='selected'";?>> I live overseas </option>
+                              <option value=""  <?php if (empty($details['Mailing-state'])) echo "selected='selected'";?> disabled> State </option>
+                              <option value="ACT" <?php if ($details['Mailing-state'] == "ACT") echo "selected='selected'";?>> ACT </option>
+                              <option value="NSW" <?php if ($details['Mailing-state'] == "NSW") echo "selected='selected'";?>> NSW </option>
+                              <option value="SA" <?php if ($details['Mailing-state'] == "SA") echo "selected='selected'";?>> SA </option>
+                              <option value="TAS" <?php if ($details['Mailing-state'] == "TAS") echo "selected='selected'";?>> TAS </option>
+                              <option value="VIC" <?php if ($details['Mailing-state'] == "VIC") echo "selected='selected'";?>> VIC </option>
+                              <option value="QLD" <?php if ($details['Mailing-state'] == "QLD") echo "selected='selected'";?>> QLD </option>
+                              <option value="NT" <?php if ($details['Mailing-state'] == "NT") echo "selected='selected'";?>> NT </option>
+                              <option value="WA" <?php if ($details['Mailing-state'] == "WA") echo "selected='selected'";?>> WA </option>
+							  <option value="N/A" <?php if ($details['Mailing-state'] == "N/A") echo "selected='selected'";?>> I live overseas </option>
                         </select>
                         
                      </div>
@@ -929,6 +945,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                         <input type="text" class="form-control" name="Mailing-country" id="Mailing-country"  <?php if (empty($details['Mailing-country'])) {echo "placeholder='Country'";}   else{ echo 'value="'.$details['Mailing-country'].'"'; }?>>
                      </div>
                   </div>
+				    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Last</span></a></div>
                </div>
               
                <div id="wpnumber"><?php  $wpnumber =  sizeof($details['Workplaces'])-1; echo  $wpnumber; ?></div>
@@ -1355,6 +1372,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                 </div>
             
               <?php endforeach ?>
+			  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton14"><span class="dashboard-button-name">Last</span></a></div>
                </div>
                <div class="down4" style="display:none;" >
                   <div class="row">
@@ -1431,6 +1449,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                         <input type="text" class="form-control" name="Additional-qualifications" id="Additional-qualifications"  <?php if (empty($details['Additional-qualifications'])) {echo "placeholder='Additional qualifications'";}   else{ echo 'value="'.$details['Additional-qualifications'][0].'"'; }?>>
                      </div>
                   </div>
+				     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
                </div>
                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding" id="your-details-button">   <button  class="dashboard-button dashboard-bottom-button your-details-submit"><span class="dashboard-button-name">Submit</span></button></div>
             </form>

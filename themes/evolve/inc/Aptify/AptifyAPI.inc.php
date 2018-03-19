@@ -72,7 +72,7 @@ function AptifyAPI($APItype, $variables){
 				   "Lastname":"Wang",
 				   "Birth":"2017-05-05",
 				   "Gender":"Female",
-				   "Home-phone-number":"0390920807",
+				   "Home-phone-number":["61","04","26897456"],
 				   "Mobile-number":"",
 				   "Aboriginal":"",
 				   "Dietary":["Shellfish","Eggs","Lactose"],

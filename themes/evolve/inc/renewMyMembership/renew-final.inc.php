@@ -41,13 +41,15 @@ if(isset($_POST['step2'])) {
 	$postReviewData = array();
 	//grab payment data
 	//use webservice 2.2.15 Add payment method
-	if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; }
-	if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
-	if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
-	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
-	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
-	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
-	if(isset($_POST['addCard'])){ GetAptifyData("15", $postPaymentData); }
+	if(isset($_POST['addCard']) && $_POST['addCard'] == "1" ){
+		if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; }
+		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
+		if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
+		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
+		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
+		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
+		GetAptifyData("15", $postPaymentData);
+	}
 	//grab review order data
 	//use webservice 2.2.26 Register a new member order
 	if(isset($_SESSION['userID'])){ $postReviewData['userID'] = $_SESSION['userID']; } 
@@ -99,7 +101,7 @@ if(isset($_POST['step2'])) {
 	$products = GetAptifyData("31", $prodcutID);
   
   }
-if(isset($_POST['Paymentcard'])) {
+if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 	$usedCard = $_POST['Paymentcard']; 
 	//use webservice 2.2.13 update payment method
 	$postCard['userID'] = $_SESSION['userID'];
@@ -136,7 +138,7 @@ if(isset($_POST['Paymentcard'])) {
 				  
 					 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 Membpaymentsiderbar">
 					 <p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
-                <div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> <fieldset><select  id="Paymentcard" name="Paymentcard">
+                <div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> <fieldset><select  id="Paymentcard" name="Paymentcard" disabled>
                       <?php 
 					  //web service 2.2.12 Get payment listing;
 					  $cardsnum = GetAptifyData("12", $postPaymentData['userID']);

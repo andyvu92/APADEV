@@ -13,9 +13,20 @@ jQuery(document).ready(function($) {
 			if($("input[name=Lastname]").val() ==''){$("input[name=Lastname]").addClass("focuscss");} else{$("input[name=Lastname]").removeClass("focuscss");}
 			if($("input[name=Birth]").val() ==''){$("input[name=Birth]").addClass("focuscss");}else{$("input[name=Birth]").removeClass("focuscss");}
 			if($("select[name=Gender]").val() ==''){$("select[name=Gender]").addClass("focuscss");}else{$("select[name=Gender]").removeClass("focuscss");}
+			if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ 
+				$("input[name=phone-number]").addClass("focuscss");
+				$("input[name=Mobile-number]").addClass("focuscss");
+			} 
+			else{
+				$("input[name=phone-number]").removeClass("focuscss");
+				$("input[name=Mobile-number]").removeClass("focuscss");
+			}				
+			
 			if($("select[name=Aboriginal]").val() ==''){$("select[name=Aboriginal]").addClass("focuscss");}else{$("select[name=Aboriginal]").removeClass("focuscss");}
-			if($("input[name=Address_Line_1]").val() ==''){$("input[name=Address_Line_1]").addClass("focuscss");}else{$("input[name=Address_Line_1]").removeClass("focuscss");}
-			if($("input[name=Address_Line_2]").val() ==''){$("input[name=Address_Line_2]").addClass("focuscss");}else{$("input[name=Address_Line_2]").removeClass("focuscss");}
+			if($("input[name=Pobox]").val() ==''){
+				if($("input[name=Address_Line_1]").val() ==''){$("input[name=Address_Line_1]").addClass("focuscss");}else{$("input[name=Address_Line_1]").removeClass("focuscss");}
+				if($("input[name=Address_Line_2]").val() ==''){$("input[name=Address_Line_2]").addClass("focuscss");}else{$("input[name=Address_Line_2]").removeClass("focuscss");}
+			}
 			if($("input[name=Suburb]").val() ==''){$("input[name=Suburb]").addClass("focuscss");}else{$("input[name=Suburb]").removeClass("focuscss");}
 			if($("input[name=Postcode]").val() ==''){$("input[name=Postcode]").addClass("focuscss");}else{$("input[name=Postcode]").removeClass("focuscss");}
 			if($("select[name=State]").val() ==''){$("select[name=State]").addClass("focuscss");}else{$("select[name=State]").removeClass("focuscss");}
@@ -34,7 +45,13 @@ jQuery(document).ready(function($) {
 			if($("input[name=Birth]").val() ==''||$("select[name=Gender]").val() ==''||$("select[name=Aboriginal]").val() ==''){
 				return false;
 			}
-			if($("input[name=Address_Line_1]").val() ==''||$("input[name=Address_Line_2]").val() ==''||$("select[name=State]").val() ==''){
+			if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ return false; }
+			if($("input[name=Pobox]").val() ==''){
+				if($("input[name=Address_Line_1]").val() ==''||$("input[name=Address_Line_2]").val() ==''){
+					return false;	
+				}
+			}
+			if($("select[name=State]").val() ==''){
 				return false;
 			}
 			if($("input[name=Country]").val() ==''||$("input[name=Postcode]").val() ==''||$("input[name=Suburb]").val() ==''){
@@ -51,7 +68,7 @@ jQuery(document).ready(function($) {
 		}
 		if($('.down2:visible').length !== 0){
 			if($("input[name=Memberid]").val() ==''){$("input[name=Memberid]").addClass("focuscss");}else{$("input[name=Memberid]").removeClass("focuscss");}
-			if($("input[name=Password]").length){
+			if($("input[name=Password]").length !==0){
 				if($("input[name=Password]").val() ==''){$("input[name=Password]").addClass("focuscss");}else{$("input[name=Password]").removeClass("focuscss");}
 			}
 			if($("select[name=MemberType]").val() ==''){$("select[name=MemberType]").addClass("focuscss");}else{$("select[name=MemberType]").removeClass("focuscss");}
@@ -59,42 +76,44 @@ jQuery(document).ready(function($) {
 		    if($("input[name=Memberid]").val() ==''||$("input[name=MemberType]").val() ==''||$("input[name=Branch]").val() ==''){
 				return false;
 		    }
-			if($("input[name=Password]").length){
+			if($("input[name=Password]").length !==0) {
 				if($("input[name=Password]").val() =='') { return false;}
 			}
 		}
-		if($('.down3:visible').length !== 0){
-			var i = $("input[name=wpnumber]").val();
-		    for (x = 0; x<i;x++){
-				if($("input[name=Name-of-workplace"+x+"]").val() ==''){$("input[name=Name-of-workplace"+x+"]").addClass("focuscss");}else{$("input[name=Name-of-workplace"+x+"]").removeClass("focuscss");}
-				if($("select[name=Workplace-setting"+x+"]").val() ==''){$("select[name=Workplace-setting"+x+"]").addClass("focuscss");}else{$("select[name=Workplace-setting"+x+"]").removeClass("focuscss");}
-				if($("input[name=WAddress_Line_1"+x+"]").val() ==''){$("input[name=WAddress_Line_1"+x+"]").addClass("focuscss");}else{$("input[name=WAddress_Line_1"+x+"]").removeClass("focuscss");}
-				if($("input[name=Wcity]"+x+"]").val() ==''){$("input[name=Wcity"+x+"]").addClass("focuscss");}else{$("input[name=Wcity"+x+"]").removeClass("focuscss");}
-				if($("input[name=Wpostcode"+x+"]").val() ==''){$("input[name=Wpostcode"+x+"]").addClass("focuscss");}else{$("input[name=Wpostcode"+x+"]").removeClass("focuscss");}
-				if($("input[name=Wstate"+x+"]").val() ==''){$("input[name=Wstate"+x+"]").addClass("focuscss");}else{$("input[name=Wstate"+x+"]").removeClass("focuscss");}
-				if($("input[name=Wcountry"+x+"]").val() ==''){$("input[name=Wcountry"+x+"]").addClass("focuscss");}else{$("input[name=Wcountry"+x+"]").removeClass("focuscss");}
-				if($("input[name=Wemail"+x+"]").val() ==''){$("input[name=Wemail"+x+"]").addClass("focuscss");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss");}
-				if($("input[name=Wwebaddress"+x+"]").val() ==''){$("input[name=Wwebaddress"+x+"]").addClass("focuscss");}else{$("input[name=Wwebaddress"+x+"]").removeClass("focuscss");}
-				if($("input[name=Number-worked-hours"+x+"]").val() ==''){$("input[name=Number-worked-hours"+x+"]").addClass("focuscss");}else{$("input[name=Number-worked-hours"+x+"]").removeClass("focuscss");}
+		if($('select[name=MemberType]').val()!=="AMO" || $('select[name=MemberType]').val()!=="AM" || $('select[name=MemberType]').val()!=="NPP"|| $('select[name=MemberType]').val()!=="RAN"|| $('select[name=MemberType]').val()!=="RW"|| $('select[name=MemberType]').val()!=="SY"){
+			if($('.down3:visible').length !== 0){
+				var i = $("input[name=wpnumber]").val();
+				for (x = 0; x<i;x++){
+					if($("input[name=Name-of-workplace"+x+"]").val() ==''){$("input[name=Name-of-workplace"+x+"]").addClass("focuscss");}else{$("input[name=Name-of-workplace"+x+"]").removeClass("focuscss");}
+					if($("select[name=Workplace-setting"+x+"]").val() ==''){$("select[name=Workplace-setting"+x+"]").addClass("focuscss");}else{$("select[name=Workplace-setting"+x+"]").removeClass("focuscss");}
+					if($("input[name=WAddress_Line_1"+x+"]").val() ==''){$("input[name=WAddress_Line_1"+x+"]").addClass("focuscss");}else{$("input[name=WAddress_Line_1"+x+"]").removeClass("focuscss");}
+					if($("input[name=Wcity"+x+"]").val() ==''){$("input[name=Wcity"+x+"]").addClass("focuscss");}else{$("input[name=Wcity"+x+"]").removeClass("focuscss");}
+					if($("input[name=Wpostcode"+x+"]").val() ==''){$("input[name=Wpostcode"+x+"]").addClass("focuscss");}else{$("input[name=Wpostcode"+x+"]").removeClass("focuscss");}
+					if($("input[name=Wstate"+x+"]").val() ==''){$("input[name=Wstate"+x+"]").addClass("focuscss");}else{$("input[name=Wstate"+x+"]").removeClass("focuscss");}
+					if($("input[name=Wcountry"+x+"]").val() ==''){$("input[name=Wcountry"+x+"]").addClass("focuscss");}else{$("input[name=Wcountry"+x+"]").removeClass("focuscss");}
+					if($("input[name=Wemail"+x+"]").val() ==''){$("input[name=Wemail"+x+"]").addClass("focuscss");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss");}
+					if($("input[name=Wwebaddress"+x+"]").val() ==''){$("input[name=Wwebaddress"+x+"]").addClass("focuscss");}else{$("input[name=Wwebaddress"+x+"]").removeClass("focuscss");}
+					if($("input[name=Number-worked-hours"+x+"]").val() ==''){$("input[name=Number-worked-hours"+x+"]").addClass("focuscss");}else{$("input[name=Number-worked-hours"+x+"]").removeClass("focuscss");}
+				}
+							
+				for (x = 0; x<i;x++){
+					if($("input[name=Name-of-workplace"+x+"]").val() ==''||$("select[name=Workplace-setting"+x+"]").val() ==''||$("input[name=WAddress_Line_1"+x+"]").val() ==''){
+						return false;
+					}
+					if($("input[name=Wcity"+x+"]").val() ==''||$("input[name=Wpostcode"+x+"]").val() ==''||$("input[name=Wstate"+x+"]").val() ==''){
+						return false;
+					}
+					if($("input[name=Wcountry"+x+"]").val() ==''||$("input[name=Wemail"+x+"]").val() ==''||$("input[name=Wwebaddress"+x+"]").val() ==''||$("input[name=Number-worked-hours"+x+"]").val() ==''){
+						return false;
+					}
+				}
+				
 			}
-						
-			for (x = 0; x<i;x++){
-				if($("input[name=Name-of-workplace"+x+"]").val() ==''||$("select[name=Workplace-setting"+x+"]").val() ==''||$("input[name=WAddress_Line_1"+x+"]").val() ==''){
-					return false;
-		        }
-				if($("input[name=Wcity"+x+"]").val() ==''||$("input[name=Wpostcode"+x+"]").val() ==''||$("input[name=Wstate"+x+"]").val() ==''){
-					return false;
-		        }
-				if($("input[name=Wcountry"+x+"]").val() ==''||$("input[name=Wemail"+x+"]").val() ==''||$("input[name=Wwebaddress"+x+"]").val() ==''||$("input[name=Number-worked-hours"+x+"]").val() ==''){
-					return false;
-		        }
-			}
-			
 		}
 		if($('.down4:visible').length !== 0){
 			if($("select[name=Udegree]").val() ==''){$("select[name=Udegree]").addClass("focuscss");}else{$("select[name=Udegree]").removeClass("focuscss");}
 			if($("select[name=Undergraduate-university-name]").val() ==''){$("select[name=Undergraduate-university-name]").addClass("focuscss");}else{$("select[name=Undergraduate-university-name]").removeClass("focuscss");}
-			if($("input[name=Undergraduate-university-name-other]").length){
+			if($("input[name=Undergraduate-university-name-other]").length!== 0){
 				if($("input[name=Undergraduate-university-name-other]").val() ==''){$("input[name=Undergraduate-university-name-other]").addClass("focuscss");}else{$("input[name=Undergraduate-university-name-other]").removeClass("focuscss");}
 			}
 			if($("input[name=Ugraduate-country]").val() ==''){$("input[name=Ugraduate-country").addClass("focuscss");}else{$("input[name=Ugraduate-country").removeClass("focuscss");}
@@ -102,13 +121,84 @@ jQuery(document).ready(function($) {
 		    if($("select[name=Udegree]").val() ==''||$("select[name=Undergraduate-university-name]").val() ==''||$("input[name=Ugraduate-country]").val() ==''||$("select[name=Ugraduate-year-attained]").val() ==''){
 				return false;
 		    }
-			if($("input[name=Undergraduate-university-name-other]").length){
+			if(!$("input[name=Undergraduate-university-name-other]").hasClass("display-none")){
 				if($("input[name=Undergraduate-university-name-other]").val() =='') { return false;}
 			}
 		}
-		
-		
-		
+		if($('.down5:visible').length !== 0){
+		   	if(!$("#insuranceMore").hasClass("display-none")){
+				if($("input[name=Yearclaim]").val() =='') {$("input[name=Yearclaim]").addClass("focuscss");}else{$("input[name=Yearclaim]").removeClass("focuscss");}
+				if($("input[name=Nameclaim]").val() =='') {$("input[name=Nameclaim]").addClass("focuscss");}else{$("input[name=Nameclaim]").removeClass("focuscss");}
+				if($("input[name=Fulldescription]").val() =='') {$("input[name=Fulldescription]").addClass("focuscss");}else{$("input[name=Fulldescription]").removeClass("focuscss");}
+				if($("input[name=Amountpaid]").val() =='') {$("input[name=Amountpaid]").addClass("focuscss");}else{$("input[name=Amountpaid]").removeClass("focuscss");}
+				if($("input[name=Finalisedclaim]").val() =='') {$("input[name=Finalisedclaim]").addClass("focuscss");}else{$("input[name=Finalisedclaim]").removeClass("focuscss");}
+				if($("input[name=Businiessname]").val() =='') {$("input[name=Businiessname]").addClass("focuscss");}else{$("input[name=Businiessname]").removeClass("focuscss");}
+			}
+			if($("input[name=conditions]").val() !=='1'){$("label[for=conditions]").addClass("focuscss");return false;}else{$("label[for=conditions]").removeClass("focuscss");}
+			if(!$("#insuranceMore").hasClass("display-none")){
+				if($("input[name=Yearclaim]").val() =='') { return false;}
+				if($("input[name=Nameclaim]").val() =='') { return false;}
+				if($("input[name=Fulldescription]").val() =='') { return false;}
+				if($("input[name=Amountpaid]").val() =='') { return false;}
+				if($("input[name=Finalisedclaim]").val() =='') { return false;}
+				if($("input[name=Businiessname]").val() =='') { return false;}
+				
+			}
+		}
+		if($('.down7:visible').length !== 0){
+		   	if(!$("#anothercardBlock").hasClass("display-none")){
+				if($("select[name=Cardtype]").val() =='') {$("select[name=Cardtype]").addClass("focuscss");}else{$("select[name=Cardtype]").removeClass("focuscss");}
+				if($("input[name=Cardname]").val() =='') {$("input[name=Cardname").addClass("focuscss");}else{$("input[name=Cardname").removeClass("focuscss");}
+				if($("input[name=Cardnumber]").val() =='') {$("input[name=Cardnumber").addClass("focuscss");}else{$("input[name=Cardnumber").removeClass("focuscss");}
+				if($("input[name=Expirydate]").val() =='') {$("input[name=Expirydate").addClass("focuscss");}else{$("input[name=Expirydate").removeClass("focuscss");}
+				if($("input[name=CCV]").val() =='') {$("input[name=CCV").addClass("focuscss");}else{$("input[name=CCV").removeClass("focuscss");}
+			}
+			if(!$("#anothercardBlock").hasClass("display-none")){
+				if($("select[name=Cardtype]").val() =='') { return false;}
+				if($("input[name=Cardname]").val() =='') { return false;}
+				if($("input[name=Cardnumber]").val() =='') { return false;}
+				if($("input[name=Expirydate]").val() =='') { return false;}
+				if($("input[name=CCV]").val() =='') { return false;}
+			}
+		}
+		if($('.down13:visible').length !== 0){
+		   	if($("input[name=Shipping-PObox]").val() ==''){
+				if($("input[name=Shipping-Address_Line_1]").val() ==''){$("input[name=Shipping-Address_Line_1]").addClass("focuscss");}else{$("input[name=Shipping-Address_Line_1]").removeClass("focuscss");}
+			}
+			if($("input[name=Shipping-city-town]").val() ==''){$("input[name=Shipping-city-town]").addClass("focuscss");}else{$("input[name=Shipping-city-town]").removeClass("focuscss");}
+			if($("input[name=Shipping-postcode]").val() ==''){$("input[name=Shipping-postcode]").addClass("focuscss");}else{$("input[name=Shipping-postcode]").removeClass("focuscss");}
+			if($("select[name=Shipping-State]").val() ==''){$("select[name=Shipping-State]").addClass("focuscss");}else{$("select[name=Shipping-State]").removeClass("focuscss");}
+			if($("input[name=Shipping-country]").val() ==''){$("input[name=Shipping-country]").addClass("focuscss");}else{$("input[name=Shipping-country]").removeClass("focuscss");}
+			if($("input[name=Shipping-PObox]").val() ==''){
+				if($("input[name=Shipping-Address_Line_1]").val() ==''){
+					return false;	
+				}
+			}
+			if($("select[name=Shipping-State]").val() ==''){
+				return false;
+			}
+			if($("input[name=Shipping-country]").val() ==''||$("input[name=Shipping-postcode]").val() ==''||$("input[name=Shipping-city-town]").val() ==''){
+				return false;
+			}
+			if($("input[name=Mailing-PObox]").val() ==''){
+				if($("input[name=Mailing-Address_Line_1]").val() ==''){$("input[name=Mailing-Address_Line_1]").addClass("focuscss");}else{$("input[name=Mailing-Address_Line_1]").removeClass("focuscss");}
+			}
+			if($("input[name=Mailing-city-town]").val() ==''){$("input[name=Mailing-city-town]").addClass("focuscss");}else{$("input[name=Mailing-city-town]").removeClass("focuscss");}
+			if($("input[name=Mailing-postcode]").val() ==''){$("input[name=Mailing-postcode]").addClass("focuscss");}else{$("input[name=Mailing-postcode]").removeClass("focuscss");}
+			if($("select[name=Mailing-State]").val() ==''){$("select[name=Mailing-State]").addClass("focuscss");}else{$("select[name=Mailing-State]").removeClass("focuscss");}
+			if($("input[name=Mailing-country]").val() ==''){$("input[name=Mailing-country]").addClass("focuscss");}else{$("input[name=Mailing-country]").removeClass("focuscss");}
+			if($("input[name=Mailing-PObox]").val() ==''){
+				if($("input[name=Mailing-Address_Line_1]").val() ==''){
+					return false;	
+				}
+			}
+			if($("select[name=Mailing-State]").val() ==''){
+				return false;
+			}
+			if($("input[name=Mailing-country]").val() ==''||$("input[name=Mailing-postcode]").val() ==''||$("input[name=Mailing-city-town]").val() ==''){
+				return false;
+			}
+		}
 		
 		
 		
@@ -122,6 +212,7 @@ jQuery(document).ready(function($) {
 	    $('[class^=down]:not(.down'+x+')').slideUp(400);
 	    $('.down' + x).slideToggle(450);
 		$('[class^=tabtitle]:not(.tabtitle'+x+') span').removeClass("text-underline");
+		$('[class^=event]:not(.event'+x+') span').removeClass("text-underline");
 		var eventtitle = "eventtitle"+x;
 		$("span." + eventtitle).addClass("text-underline");
 	});
@@ -134,6 +225,7 @@ jQuery(document).ready(function($) {
 	    $('[class^=down]:not(.down'+x+')').slideUp(400);
 	    $('.down' + x).slideToggle(450);
 		$('[class^=tabtitle]:not(.tabtitle'+x+') span').removeClass("text-underline");
+		$('[class^=event]:not(.event'+x+') span').removeClass("text-underline");
 		var eventtitle = "eventtitle"+x;
 		$("span." + eventtitle).addClass("text-underline");
           		

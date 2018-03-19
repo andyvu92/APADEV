@@ -98,49 +98,66 @@ jQuery(document).ready(function($) {
 
     });
 	$('#p1-2').click(function(){
-         if($(this).is(":checked")){
-            $(this).attr('checked', true);
-           $(this).val('1');
+        if($(this).is(":checked")){
+			$(this).attr('checked', true);
+			$(this).val('1');
 		
-		  }
-         else{
-         
-          $(this).removeAttr('checked');
-          $(this).val('0');
-		  
-         }
-		    if($('#p1-2').is(":checked"))
-		 {
-			 $('#rolloverblock').removeClass("display-none");
-		 }
-    });
-	  $('input[type="checkbox"]').click(function(){
-         if($(this).is(":checked")){
-            $(this).attr('checked', true);
-           $(this).val('1');
-		
-		  }
-         else{
-         
-          $(this).removeAttr('checked');
-          $(this).val('0');
-		  
-         }
-		
-    });
-	
-	$('input[type="radio"]').click(function(){
-         if($(this).is(":checked")){
-            $(this).attr('checked', true);
-          }
-         else{
+		}
+        else{
             $(this).removeAttr('checked');
-            }
-		    if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked") || $('#Oneclaim1').is(":checked"))
-		 {
-			 $('#insuranceMore').removeClass("display-none");
-			 $('#Addtionalquestion').val("1");
-		 }
+            $(this).val('0');
+		}
+		if($('#p1-2').is(":checked"))
+		{
+			$('#rolloverblock').removeClass("display-none");
+		}
+				 
+    });
+	$('#p1-1').click(function(){
+		if($(this).is(":checked")){
+			$('#rolloverblock').addClass("display-none");
+		}
+	});
+	$('input[type="checkbox"]').click(function(){
+        if($(this).is(":checked")){
+        $(this).attr('checked', true);
+           $(this).val('1');
+		
+		  }
+         else{
+         
+          $(this).removeAttr('checked');
+          $(this).val('0');
+		  
+         }
+		
+    });
+	$('#anothercard').click(function(){
+        if($(this).is(":checked")){
+			$('#anothercardBlock').removeClass("display-none");
+			$('input[name=addCard]').val('1');
+		}
+        else{
+            $('#anothercardBlock').addClass("display-none");
+			$('input[name=addCard]').val('0');
+        }
+	});
+	$('input[type="radio"]').click(function(){
+        if($(this).is(":checked")){
+            $(this).attr('checked', true);
+        }
+        else{
+            $(this).removeAttr('checked');
+        }
+		if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked"))
+		{
+			$('#insuranceMore').removeClass("display-none");
+			$('#Addtionalquestion').val("1");
+		}
+		else if($('#Claim2').is(":checked") && $('#Facts2').is(":checked") && $('#Disciplinary2').is(":checked") && $('#Decline2').is(":checked") && $('#Oneclaim2').is(":checked")){
+			$('#insuranceMore').addClass("display-none");
+			$('#Addtionalquestion').val("0");
+		}
     });
 	  $('#recent-purchases').click(function(){
 		$('#all-purchases').removeClass("text-underline");
@@ -352,6 +369,26 @@ jQuery(document).ready(function($) {
 	$( "#datepicker" ).datepicker({dateFormat: 'yy'});
     $('#Paymentcard').change(function(){
 	    $('#Paymentcardvalue').val($('#Paymentcard').val());
+	});
+    $("input[name=Pobox]").on("change paste keyup", function() {
+		if($(this).val()!==""){
+			$("input[name=Address_Line_1]").prop('disabled', true);
+			$("input[name=Address_Line_2]").prop('disabled', true);
+		}
+        else{
+			$("input[name=Address_Line_1]").prop('disabled', false);
+			$("input[name=Address_Line_2]").prop('disabled', false);
+		}		
+    });	
+	$('#MemberType').change(function(){
+	    if($('select[name=MemberType]').val()=="AMO" || $('select[name=MemberType]').val()=="AM" || $('select[name=MemberType]').val()=="AS"|| $('select[name=MemberType]').val()=="SY"|| $('select[name=MemberType]').val()=="PA"|| $('select[name=MemberType]').val()=="Other"){
+			$( "#ahpblock" ).addClass('display-none');
+			$( "input[name=Ahpranumber]" ).val('');
+			
+		}
+		else{
+			$( "#ahpblock" ).removeClass('display-none');
+		}
 	}); 
 	 
 });
