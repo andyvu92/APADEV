@@ -1,5 +1,7 @@
 <?php
 global $base_url;
+// todo
+// This will only be displayed when there is any results.
 
 // 2.2.28 - GET event search result list
 // It has four different cases, but we are going to use
@@ -91,15 +93,15 @@ if($totalNum % $request["PageSize"] > 0) {
 	//echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page=2&pagesize='.$numItem.'"><div class="Pagebutton">></div></a>';      
 	//echo "->".$totalPage;
 						
-			if(isset($_GET["page"])&&($_GET["page"]!=$totalPage)){   
-			   $next = $_GET["page"]+1;
-			   echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$next.'&pagesize='.$numItem.'"><div class="Pagebutton">></div></a>';                                        
-			}
-			if(!isset($_GET["page"])||($_GET["page"]!=$totalPage)){  
-			echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$totalPage.'&pagesize='.$numItem.'"><div class="Pagebutton">>></div></a>';  
-		   }     
+	if(isset($_GET["page"])&&($_GET["page"]!=$totalPage)){   
+		$next = $_GET["page"]+1;
+		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$next.'&pagesize='.$numItem.'"><div class="Pagebutton">></div></a>';                                        
+	}
+	if(!isset($_GET["page"])||($_GET["page"]!=$totalPage)){  
+		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$totalPage.'&pagesize='.$numItem.'"><div class="Pagebutton">>></div></a>';  
+	}     
 
-	  /**************************************pagination functionality***************************/      
+	/*****************************pagination functionality***************************/      
                 
  ?>
 <div class="pageSetting"><p>Pagesize:</p><select id="pagesize" name="pagesize" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option></select></div>
@@ -119,39 +121,38 @@ if($totalNum % $request["PageSize"] > 0) {
 			<th>ADD TO WISHLIST</th>
 		</tr>
          
-   <?php
-		 foreach($results as $result){
-                     
+	<?php
+	foreach($results as $result){
+
 		echo "<tr>";
-                echo	'<td><a target="_blank" href="pd-product?id='.$result['Id'].'">'.$result['Title']."</a><br>".$result['Summary'].'<br><a target="_blank" href="pd-product?id='.$result['Id'].'"><span style="text-decoration:underline;">Read more</span></a></td>';
-                echo	"<td>".$result['Type']."</td>";
-                echo	"<td>".$result['CPD']."</td>";
-                echo	"<td>".$result['City']."</td>";
-                echo	"<td>".$result['State']."</td>";
+		echo	'<td><a target="_blank" href="pd-product?id='.$result['Id'].'">'.$result['Title']."</a><br>".$result['Summary'].'<br><a target="_blank" href="pd-product?id='.$result['Id'].'"><span style="text-decoration:underline;">Read more</span></a></td>';
+		echo	"<td>".$result['Type']."</td>";
+		echo	"<td>".$result['CPD']."</td>";
+		echo	"<td>".$result['City']."</td>";
+		echo	"<td>".$result['State']."</td>";
 		echo	"<td>".$result['Begindate']."</td>";
-               echo	        "<td>".$result['Enddate']."</td>";
-                echo	 "<td>";
-              switch($result['Eventstatus']){
-                  case "1":
-                        echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['Id'].'&pd_type='.$result['Type'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></a></i>';
-                        break;
-                   case "2":
-                        echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['Id'].'&pd_type='.$result['Type'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></a></i>';
-                        break;
-                    case "3":
-                        echo  "COURSE  FULL";
-                        break;
-                     case "4":
-                        echo "Registration closed";
-                        break;
-                     default:
-                       echo "none";
-               }
-         
-               echo  "</td>";
-                 echo "</tr>";
-          
-             }
+		echo	"<td>".$result['Enddate']."</td>";
+		echo	"<td>";
+		switch($result['Eventstatus']){
+			case "1":
+				echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['Id'].'&pd_type='.$result['Type'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></a></i>';
+				break;
+			case "2":
+				echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['Id'].'&pd_type='.$result['Type'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></a></i>';
+				break;
+			case "3":
+				echo  "COURSE  FULL";
+				break;
+			case "4":
+				echo "Registration closed";
+				break;
+			default:
+				echo "none";
+		}
+		echo	"</td>";
+		echo "</tr>";
+
+	}
 	?>	
 	</tbody>
 </table>
@@ -165,21 +166,21 @@ echo '<div class="resultState"><span class="mobiledes">City:</span>'.$result['Ci
 echo '<div class="resultTime"><span class="mobiledes">BeginDate:</span>'.$result['Begindate'].'<span class="mobiledes">&nbsp;EndDate:</span>'.$result['Enddate'].'</div>';
 echo '<div class="resultAction"><span class="mobiledes">Add to wishlist</span>';
 switch($result['Eventstatus']){
-	  case "1":
-			echo '<a target="_blank" href="pd-wishlist?id='.$result['Id'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></a></i>';
-			break;
-	   case "2":
-			echo '<a target="_blank" href="pd-wishlist?id='.$result['Id'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></a></i>';
-			break;
-		case "3":
-			echo  "COURSE  FULL";
-			break;
-		 case "4":
-			echo "Registration closed";
-			break;
-		 default:
-				   echo "none";
-		   }
+	case "1":
+		echo '<a target="_blank" href="pd-wishlist?id='.$result['Id'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></a></i>';
+		break;
+	case "2":
+		echo '<a target="_blank" href="pd-wishlist?id='.$result['Id'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></a></i>';
+		break;
+	case "3":
+		echo  "COURSE  FULL";
+		break;
+	case "4":
+		echo "Registration closed";
+		break;
+	default:
+		echo "none";
+}
 echo "</div>";
 echo "</div>";
 
@@ -189,64 +190,60 @@ echo "</div>";
 /***********************bottom pagination****************/
     /********search result pagination*****/
                               
-					   if(isset($_GET["pagesize"])){       
-							   $numItem = $_GET["pagesize"];
-						   }
-					   else{
-						  $numItem = 5;
-					   }
-					//$numPage = intdiv(sizeof($_SESSION["searchResult"]),$numItem)+1;
-                                     
-						 if(isset($_GET["page"])&&($_GET["page"]!=1)){   
-								  echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.'"><div class="Pagebutton"><<</div></a>';     
-								  $last = $_GET["page"]-1;
-								  echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$last .'&pagesize='.$numItem.'"><div class="Pagebutton"><</div></a>';          
-						   }
-					for($i=1;$i<=$totalPage;$i++){
-						echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$i.'&pagesize='.$numItem.'"><div class="Pagebutton">'.$i.'</div></a>';
-					}
+	if(isset($_GET["pagesize"])){       
+		$numItem = $_GET["pagesize"];
+	} else {
+		$numItem = 5;
+	}
+	//$numPage = intdiv(sizeof($_SESSION["searchResult"]),$numItem)+1;
+	if(isset($_GET["page"])&&($_GET["page"]!=1)){   
+		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.'"><div class="Pagebutton"><<</div></a>';     
+		$last = $_GET["page"]-1;
+		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$last .'&pagesize='.$numItem.'"><div class="Pagebutton"><</div></a>';          
+	}
+	for($i=1;$i<=$totalPage;$i++){
+		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$i.'&pagesize='.$numItem.'"><div class="Pagebutton">'.$i.'</div></a>';
+	}
 										
-					/********end search result pagination*******/
-					if(isset($_GET["page"])){
-					    $resultTemp = $_SESSION["searchResult"];
-				           $numResult = ($_GET["page"]-1)*$numItem;
-                                               $results = array_slice($resultTemp, $numResult,$numItem);
-                                        }
-                                        else{
-					    $results = array_slice($results,0,$numItem); 
-                                           $numResult = 0;
-                                            echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page=2&pagesize='.$numItem.'"><div class="Pagebutton">></div></a>';      
-					}
+	/********end search result pagination*******/
+	if(isset($_GET["page"])){
+		$resultTemp = $_SESSION["searchResult"];
+		$numResult = ($_GET["page"]-1)*$numItem;
+		$results = array_slice($resultTemp, $numResult,$numItem);
+	} else {
+		$results = array_slice($results,0,$numItem); 
+		$numResult = 0;
+		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page=2&pagesize='.$numItem.'"><div class="Pagebutton">></div></a>';      
+	}
                                         
-                                            if(isset($_GET["page"])&&($_GET["page"]!=$totalPage)){   
-                                               $next = $_GET["page"]+1;
-                                               echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$next.'&pagesize='.$numItem.'"><div class="Pagebutton">></div></a>';                                        
-				            }
-                                            if(!isset($_GET["page"])||($_GET["page"]!=$totalPage)){  
-                                            echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$totalPage.'&pagesize='.$numItem.'"><div class="Pagebutton">>></div></a>';  
-                                           }     
+	if(isset($_GET["page"])&&($_GET["page"]!=$totalPage)){   
+		$next = $_GET["page"]+1;
+		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$next.'&pagesize='.$numItem.'"><div class="Pagebutton">></div></a>';                                        
+	}
+	if(!isset($_GET["page"])||($_GET["page"]!=$totalPage)){  
+		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$totalPage.'&pagesize='.$numItem.'"><div class="Pagebutton">>></div></a>';  
+	}     
                
-                      /**************************************pagination functionality***************************/      
+	/****************pagination functionality********************/      
 
 /**********************end bottom pagination************/
 ?>
 <?php  /*******************************right item******************/?>
-      <div class="pageSettingBottom"><p>Pagesize:</p><select id="pagesizebottom" name="pagesizebottom" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option></select></div>
-                           <div class="pageItemBottom"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $numResult+1;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $numResult+$numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
-
+	<div class="pageSettingBottom"><p>Pagesize:</p><select id="pagesizebottom" name="pagesizebottom" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option></select></div>
+	<div class="pageItemBottom"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $numResult+1;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $numResult+$numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
 <?php /*****************************end right item*************/?>
 </div>
 
 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3"><img alt="" src="/sites/default/files/SKINS%20280x600.png" style="width: 260px;" /></div>
- <script type="text/javascript">
-	  function pagesize(selectObject) {
+<script type="text/javascript">
+	function pagesize(selectObject) {
 		var value = selectObject.value;
 		//var urls = "https://" + window.location.hostname + window.location.pathname;
 		var urls = "http://" + window.location.hostname + ":" + window.location.port + window.location.pathname;
 		var param = window.location.href.replace(urls ,"");
 
 		//urls += "?" + paramPass;
-	  // urls = "http://10.2.1.190/apanew/pd/pd-search?";
+	  // urls = "/pd/pd-search?";
 	 
 		if(value== 1) {
 						window.location.href= urls + "?pagesize=5";
@@ -254,11 +251,5 @@ echo "</div>";
 						window.location.href= urls + "?pagesize=10";
 		}
                 
-}
-               
-                   
-                        
-
-
-
+	}
 </script>

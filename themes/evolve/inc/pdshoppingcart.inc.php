@@ -17,8 +17,6 @@ $userInfo= json_decode($userInfo_json, true);
 $Dietary = $userInfo['Dietary'];
 /****************End get userinfo from Aptify************/
 
-
-
 $dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
 /*********Delete shopping product from APAserver******/
 if(isset($_GET["action"])&&$_GET["action"]=="del"){
@@ -124,73 +122,73 @@ if(isset($_SESSION["userID"])&& ($_SESSION["userID"]!=0)){
 	/*  Get shopping cart data via $user from Aptify  */         
 } else {
 	$product_id = $_GET["id"];
-	header("Location:http://10.2.1.190/apanew/sign-in?id=$product_id"); /* Redirect browser */
+	header("Location:/sign-in?id=$product_id"); /* Redirect browser */
 }
 ?>
 
 <?php   if($productList->rowCount()>0):?>
 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-		<h1 class="SectionHeader">Summary of cart</h1>
-		<div class="brd-headling">&nbsp;</div>
-               <table>
-                   <tbody>
-                      <tr>
-                       <th>Product name</th>
-                       <th>Date</th>
-                       <th>Location</th>
-                       <th>Price</th>
-                       <th>Action</th>
-                       <th>Delete</th>
-                       </tr>
-                       <?php 
-					   //print_r($products);
-					   $ListProductID = Array();
-					   foreach($products as $productt){
-							$n = 0;
-							$pass=$localProducts[$n]['UID'];
-							$arrPID["PID"] = $productt['Id'];
-							array_push($ListProductID ,$arrPID);
-								echo "<tr>";
-                                echo	"<td>".$productt['Title']."</td>";
-                                echo	"<td>".$productt['Begindate']."-".$productt['Enddate']."</td>";
-                                echo	"<td>".$productt['Location']["City"].", ".$productt['Location']["State"]."</td>";
-								echo	"<td>".$productt['Price']."</td>";
-                                echo        '<td><a target="_blank" href="pd-wishlist?addWishList&UID='.$pass.'">ADD TO WISHLIST</a></td>';
-                                echo        '<td><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['Id'].'"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></a></td>';
-								echo "</tr>";    
-								$n=$n+1;
-								$i=$i+1;
-								$price=$price+(int)str_replace('$', '', $productt['Price']);
-                            if (in_array($productt['Typeofpd'],  $pdtype)){ $tag=1; }
-                        }
-                     ?>
-                   </tbody>
-              </table>
+	<h1 class="SectionHeader">Summary of cart</h1>
+	<div class="brd-headling">&nbsp;</div>
+	<table>
+	<tbody>
+	<tr>
+		<th>Product name</th>
+		<th>Date</th>
+		<th>Location</th>
+		<th>Price</th>
+		<th>Action</th>
+		<th>Delete</th>
+	</tr>
+	<?php 
+		//print_r($products);
+		$ListProductID = Array();
+		foreach($products as $productt){
+		$n = 0;
+		$pass=$localProducts[$n]['UID'];
+		$arrPID["PID"] = $productt['Id'];
+		array_push($ListProductID ,$arrPID);
+			echo "<tr>";
+			echo	"<td>".$productt['Title']."</td>";
+			echo	"<td>".$productt['Begindate']."-".$productt['Enddate']."</td>";
+			echo	"<td>".$productt['Location']["City"].", ".$productt['Location']["State"]."</td>";
+			echo	"<td>".$productt['Price']."</td>";
+			echo        '<td><a target="_blank" href="pd-wishlist?addWishList&UID='.$pass.'">ADD TO WISHLIST</a></td>';
+			echo        '<td><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['Id'].'"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></a></td>';
+			echo "</tr>";    
+			$n=$n+1;
+			$i=$i+1;
+			$price=$price+(int)str_replace('$', '', $productt['Price']);
+		if (in_array($productt['Typeofpd'],  $pdtype)){ $tag=1; }
+		}
+	?>
+	</tbody>
+	</table>
     <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 scleft <?php if($price==0) echo " display-none";?>">
-          <p>Terms & conditions</p>
-          <p><label for="accept1">I accept the APA events terms and conditions including the APA cancellation clause</label><input type="checkbox" id="accept1" <?php if($price!=0) echo " required";?>></p>
-         <?php if($tag==1): ?>
-           <p><label for="accept2">I understand that I must have appropriate Professional Indemnity insurance current on the date/s of any APA course/workshop that I’m registered for.</label><input type="checkbox" id="accept2" <?php if($price!=0) echo " required";?>></p>
-        <?php endif; ?>
-          <p><label for="accept3">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled. The APA recommends travelling participants purchase travel insurance to cover this.</label><input type="checkbox" id="accept3" <?php if($price!=0) echo " required";?>></p>
-         
-   </div>
-   <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 scright<?php if(($price==0)) echo " display-none";?>">
-         <p>Your dietary requirements</p>
-         <p>Based on your details, we’ve recognised you are:</p>
-         <p style=" border: 1px solid #004250; padding: 5px 0;"><?php if(sizeof($Dietary)>0) {foreach($Dietary as $item) {echo $item.'&nbsp;';} }  else { echo "None";}?></p>
-         <p>Please note that not all APA PD events include catering.</p>
-   </div>
+		<p>Terms & conditions</p>
+		<p><label for="accept1">I accept the APA events terms and conditions including the APA cancellation clause</label><input type="checkbox" id="accept1" <?php if($price!=0) echo " required";?>></p>
+		<?php if($tag==1): ?>
+		<p><label for="accept2">I understand that I must have appropriate Professional Indemnity insurance current on the date/s of any APA course/workshop that I’m registered for.</label><input type="checkbox" id="accept2" <?php if($price!=0) echo " required";?>></p>
+		<?php endif; ?>
+		<p><label for="accept3">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled. The APA recommends travelling participants purchase travel insurance to cover this.</label><input type="checkbox" id="accept3" <?php if($price!=0) echo " required";?>></p>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 scright<?php if(($price==0)) echo " display-none";?>">
+		<p>Your dietary requirements</p>
+		<p>Based on your details, we’ve recognised you are:</p>
+		<p style=" border: 1px solid #004250; padding: 5px 0;"><?php if(sizeof($Dietary)>0) {foreach($Dietary as $item) {echo $item.'&nbsp;';} }  else { echo "None";}?></p>
+		<p>Please note that not all APA PD events include catering.</p>
+	</div>
 
 </div>
 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 paymentsiderbar">
 	<p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
-		<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> <fieldset><select  id="Paymentcard" name="Paymentcard">
+		<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
+		<fieldset><select  id="Paymentcard" name="Paymentcard">
 		<?php
 		if (sizeof($cardsnum)!=0) {
 			foreach( $cardsnum["paymentcards"] as $cardnum) {
 				echo '<option value="'.$cardnum["Digitsnumber"].'"';
-				if($cardnum["Rollover"]==1) {
+				if($cardsnum["Rollover"]==1) {
 					echo "selected";
 				}
 				echo 'data-class="'.$cardnum["Payment-method"].'">Credit card ending with ';
@@ -198,71 +196,62 @@ if(isset($_SESSION["userID"])&& ($_SESSION["userID"]!=0)){
 			}
 		}
 		?>
-		
-		<?php /*if (sizeof($cardsnum)!=0): ?>   
-
-			<?php foreach( $cardsnum as $cardnum):  ?>
-			<option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardnum["Default"]==1) echo "selected"; ?> data-class="<?php echo  $cardnum["Payment-method"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
-			<?php endforeach; //cardsnums"Main-Creditcard-ID?>
-			
-		<?php endif; */?>  
 		</select></fieldset></div>
-	<?php endif; ?>
-		<div class="paymentsideuse <?php if($price==0) echo " display-none";?>"><input type="checkbox" id="anothercard"><label for="anothercard"><a class="event10" style="cursor: pointer;">Use another card</a></label>
-		<div class="down10" style="display:none;">
-			<form action="pd-shopping-cart?action=addcard" method="POST" id="formaddcard">
-			<div class="row">
-				<div class="col-lg-12">
-				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-				<option value="AE">American Express</option>
-				<option value="Visa">Visa</option>
-				<option value="Mastercard">Mastercard</option>
-				</select>
-				</div>
+<?php endif; ?>
+	<div class="paymentsideuse <?php if($price==0) echo " display-none";?>"><input type="checkbox" id="anothercard"><label for="anothercard"><a class="event10" style="cursor: pointer;">Use another card</a></label>
+	<div class="down10" style="display:none;">
+		<form action="pd-shopping-cart?action=addcard" method="POST" id="formaddcard">
+		<div class="row">
+			<div class="col-lg-12">
+			<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
+			<option value="AE">American Express</option>
+			<option value="Visa">Visa</option>
+			<option value="Mastercard">Mastercard</option>
+			</select>
 			</div>
-			<div class="row">
-				<div class="col-lg-12">
-				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-				<input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV">
-				</div>
-			</div>
-			<div class="row">
-				<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
-			</div>
-			</form>
 		</div>
+		<div class="row">
+			<div class="col-lg-12">
+			<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
+			</div>
 		</div>
-               
-         <?php if($productList->rowCount()>0): ?>      
-          <div class="row ordersummary"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span>YOUR ORDER</span></div></div>
-               <table>
-                    <tr>
-                      <td><?php echo $i;?> items</td>
-                      <td>A$<?php echo $price;?></td>
-                   </tr>
-                    <tr>
-                      <td>Discount</td>
-                      <td>A$0.00</td>
-                   </tr>
-                     <tr>
-                      <td>Total(Inc.GST)</td>
-                      <td>A$<?php echo $price;?></td>
-                   </tr>
-           </table>
+		<div class="row">
+			<div class="col-lg-12">
+			<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+			<input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+			<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV">
+			</div>
+		</div>
+		<div class="row">
+			<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
+		</div>
+		</form>
+	</div>
+	</div>
+		<?php if($productList->rowCount()>0): ?>      
+		<div class="row ordersummary"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span>YOUR ORDER</span></div></div>
+		<table>
+			<tr>
+			<td><?php echo $i;?> items</td>
+			<td>A$<?php echo $price;?></td>
+			</tr>
+			<tr>
+			<td>Discount</td>
+			<td>A$0.00</td>
+			</tr>
+			<tr>
+			<td>Total(Inc.GST)</td>
+			<td>A$<?php echo $price;?></td>
+			</tr>
+		</table>
 		         
 		<form action="/pd/completed-purchase" method="POST">
 			<input type="hidden" name="PRF" id="PRF" value="test">
@@ -352,29 +341,4 @@ $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
 } );
 
 </script>
-<style>
-fieldset {
-      border: 0;
-    }
-  
- 
-    /* select with custom icons */
-    .ui-selectmenu-menu .ui-menu.customicons .ui-menu-item-wrapper {
-      padding: 0.5em 0 0.5em 3em;
-    }
-    .ui-selectmenu-menu .ui-menu.customicons .ui-menu-item .ui-icon {
-      height: 24px;
-      width: 24px;
-      top: 0.1em;
-    }
-    .ui-icon.Master{
-      background: url("http://10.2.1.190/apanew/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
-    }
-    .ui-icon.Visa{
-      background: url("http://10.2.1.190/apanew/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
-    }
-    .ui-icon.AE{
-      background: url("http://10.2.1.190/apanew/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
-    }
-</style>
   
