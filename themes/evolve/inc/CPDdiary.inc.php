@@ -71,22 +71,20 @@ print_r($NAPA);
 */
 ?>
 
-  <script type="text/javascript">
-    function changeStatus(number){
-          document.formradio.background[number].checked=true;
-  }
+<script type="text/javascript">
+	function changeStatus(number){
+		document.formradio.background[number].checked=true;
+	}
 
-     function myFunction() {
-        var background_number =document.formradio.background.value;
-        var pre_bg =  document.getElementById('pre_background').innerHTML;
-        document.getElementById("CPD-diary-main").classList.remove(pre_bg);
-        var cur_bg = 'background_' +background_number;
-        document.getElementById("CPD-diary-main").classList.add(cur_bg);
-        document.getElementById('pre_background').innerHTML = 'background_' + background_number; 
-   }
-
-
-  </script >
+	function myFunction() {
+		var background_number =document.formradio.background.value;
+		var pre_bg =  document.getElementById('pre_background').innerHTML;
+		document.getElementById("CPD-diary-main").classList.remove(pre_bg);
+		var cur_bg = 'background_' +background_number;
+		document.getElementById("CPD-diary-main").classList.add(cur_bg);
+		document.getElementById('pre_background').innerHTML = 'background_' + background_number; 
+}
+</script >
 
 <div id="pre_background" style="display:none">background_2</div>
 <div id="CPD-diary-main" class="background_<?php echo $user['background']; ?>">
@@ -94,209 +92,54 @@ print_r($NAPA);
     <button class="dashboard-backgroud" data-toggle="modal" data-target="#myModal"><span class="customise_background" >Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button>
 </div>
 <div class="container">
-
     <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-  <div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+	<div id="myModal" class="modal fade" role="dialog">
+	<div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+		<!-- Modal content-->
+		<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Please select background image</h4>
+		</div>
+		<div class="modal-body">
+			<form name="formradio" action="cpd-diary" method="POST"">
+			<input type="hidden" name="userID" value="<?php echo $userID; ?>"> 
+			<input type="hidden" name="update">  
+			<label> <input type="radio" name="background" value="1" id="background1"><img src="/sites/default/files/PARALLAX_TRADIES.jpg"></label>
+			<label> <input type="radio" name="background" value="2"  id="background2"><img src="/sites/default/files/ABOUT%20US/ABOUTUS1170X600.jpg"></label>
+			<label> <input type="radio" name="background" value="3"  id="background3"><img src="/sites/default/files/NG_1200X600_RURAL.png"></label>
+			<label> <input type="radio" name="background" value="4"  id="background4"><img src="/sites/default/files/MEDIA1170X600_5.jpg"></label>
+		</div>
+		<div class="modal-footer">
+			<button type="Submit" class="btn btn-default" id="background_save">Save</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+		</form>
+		</div>
+	</div>
+	</div>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Please select background image</h4>
-      </div>
-      <div class="modal-body">
-       <form name="formradio" action="cpd-diary" method="POST"">
-      <input type="hidden" name="userID" value="<?php echo $userID; ?>"> 
-      <input type="hidden" name="update">  
-       <label> <input type="radio" name="background" value="1" id="background1"><img src="http://10.2.1.190/apanew/sites/default/files/PARALLAX_TRADIES.jpg"></label>
-      <label> <input type="radio" name="background" value="2"  id="background2"><img src="http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/ABOUTUS1170X600.jpg"></label>
-      <label> <input type="radio" name="background" value="3"  id="background3"><img src="http://10.2.1.190/apanew/sites/default/files/NG_1200X600_RURAL.png"></label>
-      <label> <input type="radio" name="background" value="4"  id="background4"><img src="http://10.2.1.190/apanew/sites/default/files/MEDIA1170X600_5.jpg"></label>
-       
-      
-      </div>
-      <div class="modal-footer">
-      
-        <button type="Submit" class="btn btn-default" id="background_save">Save</button>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-       </form>
-    </div>
+	<div id="myProgress">
+	<div id="currentProgress">0 hours currently</div>
 
-  </div>
+	<div id="ProgressCPDback">
+		<span class="front fa fa-circle"></span>
+		<span class="back fa fa-circle"></span>
+	</div>
+	<div id="myBar">10%</div>
+
+	<div id="MaxHours">
+	<div class="trophy">&nbsp;</div>
+
+	<div class="MaxHours">20 hours minimum</div>
+	</div>
+	</div>
 </div>
 
-
-<div id="myProgress">
-<div id="currentProgress">0 hours currently</div>
-
-<div id="ProgressCPDback">
-    <span class="front fa fa-circle"></span>
-    <span class="back fa fa-circle"></span>
-</div>
-<div id="myBar">10%</div>
-
-<div id="MaxHours">
-<div class="trophy">&nbsp;</div>
-
-<div class="MaxHours">20 hours minimum</div>
-</div>
-</div>
-</div>
 <form><input id="inputProgress" type="text" /> <input id="buttonProgress" type="button" value="Click Me" />&nbsp;</form>
 </div>
 
 <div class='lineBreak' style="height: 40px;">&nbsp;</div>
-
-<style type="text/css">
-div#CPD-diary-main { height: 400px; }
-div#CPD-diary-main .container:nth-child(2) {
-  padding-top: 70px;
-}
-#myProgress {
-  width: 100%;
-}
-#ProgressCPDback {
-  position: absolute;
-  margin-top: -8px;
-  height: 41px;
-  background-color: white;
-  z-index: 1;
-  width: 1140px;
-}
-div#ProgressCPDback .front {
-    font-size: 70px;
-    position: absolute;
-    left: -28px;
-    top: -15px;
-    color: rgb(0,159,218);
-}
-div#ProgressCPDback .back {
-    font-size: 70px;
-    position: absolute;
-    right: -28px;
-    top: -15px;
-    color: rgb(0,159,218);
-}
-#myBar {
-  width: 10%;
-  height: 25px;
-  text-align: center;
-  background-color: rgb(0,159,218);
-  line-height: 25px;
-  color: white;
-  position: relative;
-  z-index: 15;
-}
-#currentProgress {
-  width: 82px;
-  height: 43px;
-  text-align: center;
-  line-height: 18px;
-  background-color: black;
-  padding: 5px;
-  color: white;
-  margin-left: -41px;
-  z-index: 20;
-  position: relative;
-}
-#currentProgress:after {
-content: ' ';
-  position: absolute;
-  width: 0;
-  height: 0;
-  border: 13px solid;
-  border-color: black transparent transparent transparent;
-  margin: 20px 0 0 -44px;
-  z-index: 25;
-}
-#MaxHours {
-	width: 100%;
-    height: 98px;
-  z-index: 20;
-  position: relative;
-}
-#MaxHours .trophy {
-	border-left: black 1px solid;
-    height: 24px;
-    padding-left: 20px;
-   color: black;
-}
-#MaxHours .MaxHours {
-	padding: 10px 15px;
-   color: black;
-}
-.APAhoursHead, .NAPAhoursHead { width: 100% }
-.APAhoursContent, .NAPAhoursContent {
-    height: 240px;
-    overflow-y: auto;
-    float: left;
-    width: 100%;
-}
-.APAhoursHead div, .NAPAhoursHead div {
-  background-color: rgb(0,159,218);
-  border: 0.5px solid white;
-  padding: 10px;
-  float: left;
-  color: white;
-}
-.APAhoursContent div:not(.lineBreak), .NAPAhoursContent div:not(.lineBreak) {
-  border: solid black;
-  border-width: 0 0 0.5px;
-  padding: 10px;
-  float: left;
-}
-.APAhoursHead div:nth-child(1) {
-  width: 70%;
-}
-.APAhoursHead div:nth-child(2) {
-  width: 15%;
-}
-.APAhoursHead div:nth-child(3) {
-  width: 15%;
-}
-.APAhoursContent div:nth-child(5n + 2) {
-  width: 70%;
-}
-.APAhoursContent div:nth-child(5n + 3) {
-  width: 15%;
-}
-.APAhoursContent div:nth-child(5n + 4) {
-  width: 15%;
-}
-.NAPAhoursHead div:nth-child(1) {
-  width: 15%;
-}
-.NAPAhoursHead div:nth-child(2) {
-  width: 20%;
-}
-.NAPAhoursHead div:nth-child(3) {
-  width: 15%;
-}
-.NAPAhoursHead div:nth-child(4) {
-  width: 20%;
-}
-.NAPAhoursHead div:nth-child(5) {
-  width: 30%;
-}
-.NAPAhoursContent div:nth-child(7n + 2) {
-  width: 15%;
-}
-.NAPAhoursContent div:nth-child(7n + 3) {
-  width: 20%;
-}
-.NAPAhoursContent div:nth-child(7n + 4) {
-  width: 15%;
-}
-.NAPAhoursContent div:nth-child(7n + 5) {
-  width: 20%;
-}
-.NAPAhoursContent div:nth-child(7n + 6) {
-  width: 30%;
-}
-.lineBreak { clear: both; height: 1px; }
-</style>
 
 <script>
   jQuery(document).ready(function($) {
@@ -403,37 +246,37 @@ function move(input) {
 </div>
 </div></div>
 <!--div class="container"-->
-    <!-- Modal -->
+<!-- Modal -->
 <div id="nonAPAhour" class="modal fade" role="dialog">
 	<div class="modal-dialog" <!--style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;"-->>
 
-    <!-- Modal content-->
-    <div class="modal-content">
+	<!-- Modal content-->
+	<div class="modal-content">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal">&times;</button>
 			<h4 class="modal-title">Please enter non-APA PD activity details</h4>
 		</div>
 		<form name="formradio" action="cpd-diary" method="POST">
-			<div class="modal-body">
-				<input type="hidden" name="nonAPA" value="1" placeholder="" id="hidden">
-				<label for="DateNA">Date</label>
-				<input type="text" required="true" name="Date" placeholder="" id="DateNA">
-				<label for="DescripotionNA">Descripotion</label>
-				<input type="text" required="true" name="Descripotion" placeholder="" id="DescripotionNA">
-				<label for="TimeNA">Time</label>
-				<input type="text" required="true" name="Time" placeholder="" id="TimeNA">
-				<label for="ProviderNA">Provider</label>
-				<input type="text" required="true" name="Provider" placeholder="" id="ProviderNA">
-				<label for="ReflectionNA">Reflection</label>
-				<input type="text" required="true" name="Reflection" placeholder="" id="ReflectionNA">
-			</div>
-			<div class="modal-footer">
-				<button type="Submit" class="btn btn-default" id="saveNA">Save</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
+		<div class="modal-body">
+			<input type="hidden" name="nonAPA" value="1" placeholder="" id="hidden">
+			<label for="DateNA">Date</label>
+			<input type="text" required="true" name="Date" placeholder="" id="DateNA">
+			<label for="DescripotionNA">Descripotion</label>
+			<input type="text" required="true" name="Descripotion" placeholder="" id="DescripotionNA">
+			<label for="TimeNA">Time</label>
+			<input type="text" required="true" name="Time" placeholder="" id="TimeNA">
+			<label for="ProviderNA">Provider</label>
+			<input type="text" required="true" name="Provider" placeholder="" id="ProviderNA">
+			<label for="ReflectionNA">Reflection</label>
+			<input type="text" required="true" name="Reflection" placeholder="" id="ReflectionNA">
+		</div>
+		<div class="modal-footer">
+			<button type="Submit" class="btn btn-default" id="saveNA">Save</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
 		</form>
-    </div>
+	</div>
 
-  </div>
+	</div>
 </div>
 <!--/div-->

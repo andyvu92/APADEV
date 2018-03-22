@@ -21,7 +21,7 @@ $nationalGroups = GetAptifyData("20", $sendData);
 // Response -
 // List of Fellowship ID and its titles.
 $Fellows = GetAptifyData("22", "UserID");
-///////////////////////////////////////////////////////////////
+
 /* We may use this as "Session" data and won't need to load. */
 // 2.2.23 - GET list of subscription preferences
 // Send - 

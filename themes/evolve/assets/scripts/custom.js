@@ -24,7 +24,6 @@ jQuery(document).ready(function($) {
 			$("i." + faclass).removeClass("fa-angle-up");
 			$("i." + faclass).addClass("fa-angle-down");
         }
-		
 	});
 	$('[class=cardevent]').click(function(){
       
@@ -366,7 +365,7 @@ jQuery(document).ready(function($) {
      	var i = Number(number +1);
 		$('input[name=addtionalNumber]').val(i);
     });
-	$( "#datepicker" ).datepicker({dateFormat: 'yy'});
+	//$( "#datepicker" ).datepicker({dateFormat: 'yy'});
     $('#Paymentcard').change(function(){
 	    $('#Paymentcardvalue').val($('#Paymentcard').val());
 	});

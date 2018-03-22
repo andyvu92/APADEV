@@ -92,6 +92,8 @@ lessc[] = lessc/Research.less
 lessc[] = lessc/Resource.less
 lessc[] = lessc/custom.less
 lessc[] = Survey/Survey.less
+lessc[] = lessc/CPDdiary.less
+lessc[] = lessc/PDshopping.less
 
 
 scripts[] = assets/scripts/evolve.js
