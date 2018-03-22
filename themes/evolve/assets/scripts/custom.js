@@ -24,7 +24,6 @@ jQuery(document).ready(function($) {
 			$("i." + faclass).removeClass("fa-angle-up");
 			$("i." + faclass).addClass("fa-angle-down");
         }
-		
 	});
 	$('[class=cardevent]').click(function(){
       

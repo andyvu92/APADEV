@@ -92,9 +92,13 @@
 			if($(".locationAutomatic").hasClass("locationAutomaticHov")) {
 				$(".locationAutomatic").removeClass("locationAutomaticHov");
 				$(".locationManual").removeClass("locationManualHov");
+				$("#lat").val("-37.813611");
+				$("#lng").val("144.963056");
 			} else {
 				$(".locationAutomatic").addClass("locationAutomaticHov");
 				$(".locationManual").addClass("locationManualHov");
+				$("#lat").val("-37.848038");
+				$("#lng").val("145.078698");
 			}
 		});
 	});
