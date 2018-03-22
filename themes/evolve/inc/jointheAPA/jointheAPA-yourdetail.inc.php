@@ -1002,121 +1002,115 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
                            </select>
                         </div>
                     </div>
-					  <div class="row">
-                        <div class="col-lg-2">
-                           <label for="">Phone number</label>
-                           <input type="text" class="form-control" name="Home-phone-number"   pattern="[0-9]{10}">
-                        </div>
+					<div class="row">
 						<div class="col-lg-2">
-					       <label for="">Area code</label>
-					       <input type="text" class="form-control" name="area-code"   pattern="[0-9]{10}">
-					    </div>
-					    <div class="col-lg-4">
-					       <label for="">Phone number</label>
-					       <input type="text" class="form-control" name="phone-number" pattern="[0-9]{10}">
-					    </div>
-                        <div class="col-lg-4">
-                           <label for="">Mobile number</label>
-                           <input type="text" class="form-control" name="Mobile-number"  pattern="[0-9]{9}">
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-lg-9">
-                           Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span>
-                        </div>
-                        <div class="col-lg-3">
-                           <select class="form-control" id="Aboriginal" name="Aboriginal">
-                              <option value="">No</option>
-                              <option value="AB">Yes, Aboriginal </option>
-                              <option value="TSI">Yes, Torres Strait Islander </option>
-                              <option value="BOTH">Yes, both Aboriginal and Torres Strait Islander</option>
-                           </select>
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-lg-12">Residential address:</div>
-                     </div>
-					 <div class="row">
-					    <div class="col-lg-4">
-                           <label for="">Building name</label>
-                           <input type="text" class="form-control"  name="BuildingName">
-                        </div>
-					 </div>
-                     <div class="row">
-                        <div class="col-lg-4">
-                           <label for="">Address line 1<span class="tipstyle">*</span></label>
-                           <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
-                        </div>
-                        <div class="col-lg-6 col-lg-offset-2">
-                           <label for="">PO box</label>
-                           <input type="text" class="form-control" name="Pobox">
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-lg-12">
-                           <label for="">Address Line 2<span class="tipstyle">*</span></label>
-                           <input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-lg-12">
-                           <label for="">City or town<span class="tipstyle">*</span></label>
-                           <input type="text" class="form-control" name="Suburb" id="Suburb">
-                        </div>
-                     </div>
-                     <div class="row">
-                        <div class="col-lg-3">
-                           <label for="">Postcode<span class="tipstyle">*</span></label>
-                           <input type="text" class="form-control" name="Postcode" id="Postcode">
-                        </div>
-                        <div class="col-lg-3">
-                           <label for="">State<span class="tipstyle">*</span></label>
-                           <select class="form-control" id="State" name="State">
-                              <option value="" selected disabled> State </option>
-                              <option value="ACT"> ACT </option>
-                              <option value="NSW"> NSW </option>
-                              <option value="SA"> SA </option>
-                              <option value="TAS"> TAS </option>
-                              <option value="VIC"> VIC </option>
-                              <option value="QLD"> QLD </option>
-                              <option value="NT"> NT </option>
-                              <option value="WA"> WA </option>
-							  <option value="N/A"> I live overseas </option>
-                           </select>
-                        </div>
-                        <div class="col-lg-6">
-                           <label for="">Country<span class="tipstyle">*</span></label>
-                           <input type="text" class="form-control" name="Country" id="Country">
-                        </div>
-                     </div>
-                   
-                  <div class="row">
-				     <div class="col-lg-12"><label for="Shipping-address-join"><strong>Billing address:(Sames as Above address)</strong></label><input type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="1" checked></div>
-                  
-                  </div>
-                  
-                  
-                   <div class="row shipping" id="shippingAddress">
-				    <div class="row">
-					    <div class="col-lg-4">
-                           <label for="">Building name</label>
-                           <input type="text" class="form-control"  name="Billing-BuildingName">
-                        </div>
+							<label for="">Phone number</label>
+							<input type="text" class="form-control" name="Home-phone-number"   pattern="[0-9]{10}">
+						</div>
+						<div class="col-lg-2">
+							<label for="">Area code</label>
+							<input type="text" class="form-control" name="area-code"   pattern="[0-9]{10}">
+						</div>
+						<div class="col-lg-4">
+							<label for="">Phone number</label>
+							<input type="text" class="form-control" name="phone-number" pattern="[0-9]{10}">
+						</div>
+						<div class="col-lg-4">
+							<label for="">Mobile number</label>
+							<input type="text" class="form-control" name="Mobile-number"  pattern="[0-9]{9}">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-9">
+						Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span>
+						</div>
+						<div class="col-lg-3">
+							<select class="form-control" id="Aboriginal" name="Aboriginal">
+								<option value="">No</option>
+								<option value="AB">Yes, Aboriginal </option>
+								<option value="TSI">Yes, Torres Strait Islander </option>
+								<option value="BOTH">Yes, both Aboriginal and Torres Strait Islander</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">Residential address:</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
+							<label for="">Building name</label>
+							<input type="text" class="form-control"  name="BuildingName">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
+						<label for="">Address line 1<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
+						</div>
 						<div class="col-lg-6 col-lg-offset-2">
-                           <label for="">PO box</label>
-                           <input type="text" class="form-control" name="Billing-PObox" id="Billing-PObox">
-                        </div>
-					 </div>
+						<label for="">PO box</label>
+						<input type="text" class="form-control" name="Pobox">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<label for="">Address Line 2<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<label for="">City or town<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="Suburb" id="Suburb">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-3">
+							<label for="">Postcode<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="Postcode" id="Postcode">
+						</div>
+						<div class="col-lg-3">
+							<label for="">State<span class="tipstyle">*</span></label>
+							<select class="form-control" id="State" name="State">
+								<option value="" selected disabled> State </option>
+								<option value="ACT"> ACT </option>
+								<option value="NSW"> NSW </option>
+								<option value="SA"> SA </option>
+								<option value="TAS"> TAS </option>
+								<option value="VIC"> VIC </option>
+								<option value="QLD"> QLD </option>
+								<option value="NT"> NT </option>
+								<option value="WA"> WA </option>
+								<option value="N/A"> I live overseas </option>
+							</select>
+						</div>
+						<div class="col-lg-6">
+							<label for="">Country<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="Country" id="Country">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12"><label for="Shipping-address-join"><strong>Billing address:(Sames as Above address)</strong></label><input type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="1" checked></div>
+					</div>
+                <div class="row shipping" id="shippingAddress">
+					<div class="row">
+						<div class="col-lg-4">
+							<label for="">Building name</label>
+							<input type="text" class="form-control"  name="Billing-BuildingName">
+						</div>
+						<div class="col-lg-6 col-lg-offset-2">
+							<label for="">PO box</label>
+							<input type="text" class="form-control" name="Billing-PObox" id="Billing-PObox">
+						</div>
+					</div>
 					    <div class="col-lg-4">
                            <label for="">Address Line 1<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1">
                         </div>
-                       
-					     <div class="col-lg-12">
+                        <div class="col-lg-12">
                            <label for="">Address Line 2</label>
                            <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2">
                         </div>
-						
 						<div class="col-lg-12">
                            <label for="">City or town</label>
                            <input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb">
@@ -1128,23 +1122,23 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
                         <div class="col-lg-3">
                            <label for="">State</label>
                            <select class="form-control" name="Billing-State" id="Billing-State">
-                              <option value=""  disabled> State </option>
-                              <option value="ACT"> ACT </option>
-                              <option value="NSW"> NSW </option>
-                              <option value="SA"> SA </option>
-                              <option value="TAS"> TAS </option>
-                              <option value="VIC"> VIC </option>
-                              <option value="QLD"> QLD </option>
-                              <option value="NT"> NT </option>
-                              <option value="WA"> WA </option>
-							  <option value="N/A"> I live overseas </option>
+								<option value=""  disabled> State </option>
+								<option value="ACT"> ACT </option>
+								<option value="NSW"> NSW </option>
+								<option value="SA"> SA </option>
+								<option value="TAS"> TAS </option>
+								<option value="VIC"> VIC </option>
+								<option value="QLD"> QLD </option>
+								<option value="NT"> NT </option>
+								<option value="WA"> WA </option>
+								<option value="N/A"> I live overseas </option>
                            </select>
                         </div>
                         <div class="col-lg-6">
                            <label for="">Country</label>
                            <input type="text" class="form-control" name="Billing-Country" id="Billing-Country">
                         </div>
-                     </div>
+                    </div>
 					 <!---Hidden mailing address and shipping address Start from here-->
 					   <input type="hidden" name="Shipping-BuildingName" value="">
 					   <input type="hidden" name="Shipping-Address_Line_1" value="">
@@ -1163,8 +1157,7 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 					   <input type="hidden" name="Mailing-state" value="">
 					   <input type="hidden" name="Mailing-country" value="">
 			        <!---Hidden mailing address and shipping address End here-->
-			
-                  </div>
+				</div>
                  <!-- <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-right">
                      <div class="row form-image">
                         <div class="col-lg-12">
@@ -1183,449 +1176,412 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
                                                
                   </div>-->
 				  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button1"><span class="dashboard-button-name">Next</span></a></div>
-               </div>
-               <div class="down2" style="display:none;" >
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <label for="">Member ID(Your email address)<span class="tipstyle">*</span></label>
-                        <input type="text" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)">
-						<div id="checkMessage"></div>
-						<script>
-                           function checkEmailFunction(email) {
-							   $.ajax({
-							        url:"sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
-									type: "POST", //request type,
-									data: {CheckEmailID: email},
-									success:function(response) { 
-									var result = response;
-									if(result=="true"){
-										$('#checkMessage').html("this email address has already registered, please use another one");
-										$( "#Memberid" ).focus();
-										$("#Memberid").css("border", "1px solid red");
-									} 
-																	
-									}
-								});
-						   }
-						</script>
-						
-                     </div>
-                  </div>
-				  <div class="row">
-                     <div class="col-lg-6">
-                        <label for="">Your password<span class="tipstyle">*</span></label>
-                        <input type="text" class="form-control" name="Password" >
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <label for="">Member Type<span class="tipstyle">*</span></label>
-                        <select class="form-control" id="MemberType" name="MemberType">
-                           <option value="none" selected disabled>memberType</option>
-                           <option value="FPI">Full-time physiotherapist with insurance (more than 18 hours per week) </option>
-                           <option value="FPN">Full-time physiotherapist no insurance (more than 18 hours per week) </option>
-                           <option value="FEPI">Full-time Employed Public Sector Physiotherapist (more than 18 hours per week) with insurance</option>
-                           <option value="FEPN">Full-time Employed Public Sector Physiotherapist (more than 18 hours per week) no insurance</option>
-                           <option value="PPI">Part-time Physiotherapist (less than 18 hours per week) with insurance</option>
-                           <option value="PPN">Part-time Physiotherapist (less than 18 hours per week) no insurance</option>
-                           <option value="PEP">Part-time Employed Public Sector Physiotherapist (less than 18 hours per week) </option>
-                           <option value="MPU">Maternity/Paternity/Unemployed (working for less than 6 months) </option>
-                           <option value="OV">Overseas for more than 6 months (must hold current registration with AHPRA) </option>
-                           <option value="PGS">Post Graduate study and working less than 18 hours per week </option>
-                           <option value="NPP">Non-Practising Physiotherapist registered as NPP with PhysioBA</option>
-                           <option value="AM">￼Associate Member (Australia) </option>
-                           <option value="GFY">￼Graduate First Year </option>
-                           <option value="GSY">￼Graduate Second Year</option>
-                           <option value="GTY">￼Graduate Third Year</option>
-                           <option value="GFOY">￼Graduate Fourth Year</option>
-                           <option value="GFYE">Graduate First Year Employed Public Sector </option>
-                           <option value="GSYE">Graduate Second Year Employed Public Sector</option>
-                           <option value="GTYE">￼Graduate Third Year Employed Public Sector</option>
-                           <option value="GFOYE">￼Graduate Fourth Year Employed Public Sector </option>
-                           <option value="SY">￼Student Year 1 - 4</option>
-                           <option value="PA">Physiotherapy Assistant</option>
-                           <option value="AMO">Associate Member (Overseas)</option>
-                           <option value="AS">￼Affiliate subscription</option>
-                           <option value="RAN">Retired and not working in any paid capacity</option>
-                           <option value="RW">Retired with 36 years membership and is over the age of 55 years (subject to office validation)</option>
-                        </select>
-                     </div>
-                  </div>
-                <div class="row" id="ahpblock">
+            </div>
+			<div class="down2" style="display:none;" >
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="">Member ID(Your email address)<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)">
+					<div id="checkMessage"></div>
+					<script>
+					function checkEmailFunction(email) {
+					$.ajax({
+					url:"sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
+					type: "POST", //request type,
+					data: {CheckEmailID: email},
+					success:function(response) { 
+					var result = response;
+					if(result=="true"){
+						$('#checkMessage').html("this email address has already registered, please use another one");
+						$( "#Memberid" ).focus();
+						$("#Memberid").css("border", "1px solid red");
+					} 
+													
+					}
+					});
+					}
+					</script>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="">Your password<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Password" >
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="">Member Type<span class="tipstyle">*</span></label>
+						<select class="form-control" id="MemberType" name="MemberType">
+							<option value="none" selected disabled>memberType</option>
+							<option value="FPI">Full-time physiotherapist with insurance (more than 18 hours per week) </option>
+							<option value="FPN">Full-time physiotherapist no insurance (more than 18 hours per week) </option>
+							<option value="FEPI">Full-time Employed Public Sector Physiotherapist (more than 18 hours per week) with insurance</option>
+							<option value="FEPN">Full-time Employed Public Sector Physiotherapist (more than 18 hours per week) no insurance</option>
+							<option value="PPI">Part-time Physiotherapist (less than 18 hours per week) with insurance</option>
+							<option value="PPN">Part-time Physiotherapist (less than 18 hours per week) no insurance</option>
+							<option value="PEP">Part-time Employed Public Sector Physiotherapist (less than 18 hours per week) </option>
+							<option value="MPU">Maternity/Paternity/Unemployed (working for less than 6 months) </option>
+							<option value="OV">Overseas for more than 6 months (must hold current registration with AHPRA) </option>
+							<option value="PGS">Post Graduate study and working less than 18 hours per week </option>
+							<option value="NPP">Non-Practising Physiotherapist registered as NPP with PhysioBA</option>
+							<option value="AM">￼Associate Member (Australia) </option>
+							<option value="GFY">￼Graduate First Year </option>
+							<option value="GSY">￼Graduate Second Year</option>
+							<option value="GTY">￼Graduate Third Year</option>
+							<option value="GFOY">￼Graduate Fourth Year</option>
+							<option value="GFYE">Graduate First Year Employed Public Sector </option>
+							<option value="GSYE">Graduate Second Year Employed Public Sector</option>
+							<option value="GTYE">￼Graduate Third Year Employed Public Sector</option>
+							<option value="GFOYE">￼Graduate Fourth Year Employed Public Sector </option>
+							<option value="SY">￼Student Year 1 - 4</option>
+							<option value="PA">Physiotherapy Assistant</option>
+							<option value="AMO">Associate Member (Overseas)</option>
+							<option value="AS">￼Affiliate subscription</option>
+							<option value="RAN">Retired and not working in any paid capacity</option>
+							<option value="RW">Retired with 36 years membership and is over the age of 55 years (subject to office validation)</option>
+						</select>
+					</div>
+				</div>
+				<div class="row" id="ahpblock">
 					<div class="col-lg-2">
 						<label for="">AHPRA number</label>
 						<input type="text" class="form-control" name="Ahpranumber"  <?php if (empty($details['Ahpranumber'])) {echo "placeholder='AHPRA number'";}   else{ echo 'value="'.$details['Ahpranumber'].'"'; }?>>
 					</div>
 				</div>
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <label for="">Your National group</label>
-                        <select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple>
-						   <?php
-                            // 2.2.19 - get national group list
-							// Send - 
-							// Response - get national group from Aptify via webserice return Json data;
-							$nationalGroups= GetAptifyData("19","request");
-							?>
-                         	<?php 
-						     foreach($nationalGroups["NationalGroup"] as $lines) {
-				               echo '<option value="'.$lines["NGid"].'"> '.$lines["NGtitle"].' </option>';
-			                }
-						   	?>
-                        </select>
-                     </div>
-					 <div class="col-lg-3 display-none" id="ngsports"><label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label><input type="checkbox" id="ngsportsbox" name="ngsports" value="0"></div>
-					 <div class="col-lg-3 display-none" id="ngmusculo"><label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label><input type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"></div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
-                         <select class="form-control" id="Branch" name="Branch">
-                           <option value="" selected disabled>What branch would you like to join?</option>
-                           <option value="ACT">ACT</option>
-                           <option value="NSW">NSW</option>
-                           <option value="QLD">QLD</option>
-                           <option value="SA">SA</option>
-                           <option value="TAS">TAS</option>
-                           <option value="VIC">VIC</option>
-                           <option value="WA">WA</option>
-                           <option value="Overseas">I live overseas</option>
-                         </select>
-                     </div>
-                  </div>
-				    <div class="row"> 
-                    <div class="col-lg-3">
-                        Your special interest area:
-                    </div>
-					
-					  <div class="col-lg-6">
-					   
-                        <select class="chosen-select" id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
-						  <?php 
-						    // 2.2.37 - get interest area list
-							// Send - 
-							// Response - get workplace settings from Aptify via webserice return Json data;
-							// stroe interest area list into the session
-						 	 $interestAreas= GetAptifyData("37","request");
-							 $_SESSION["interestAreas"] = $interestAreas;
-						  ?>
-						                    
-						   <?php 
-						     foreach($interestAreas['InterestAreas']  as $lines){
-								echo '<option value="'.$lines['ListCode'].'">'.$lines['ListName'].'</option>';
-								 
-							 }
-						   
-						   ?>
-                          
-                        </select>
-                     </div>
-                  </div>
-				 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>
-               </div>
-              
-              
-               <div id="wpnumber"><?php  $wpnumber =  0; echo  $wpnumber; ?></div>
-               <input type="hidden" name="wpnumber" value="<?php  $wpnumber =  1; echo  $wpnumber; ?>"/>
-                 <script type="text/javascript">
-                  jQuery(document).ready(function($) {
-                      $(".chosen-select").chosen({width: "100%"});
-                      $('#workplace').click(function(){
-                            $('#dashboard-right-content').addClass("autoscroll");
-                 });
-                     
-                      $('.add-workplace-join').click(function(){
-                    
-                        
-                       var number = Number($('#wpnumber').text());
-                      
-                         var i = Number(number +1);
-                         var j = Number(number +2);
-                       
-			 $('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ i+'</a><span class="deletewp'+ i + '" style=" float: right; color: red; margin-right: 55%;">x</span></li>' );
-                         $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
-                         $('#wpnumber').text(i);
-						 $('input[name=wpnumber]').val(j);
-						 var sessionvariable = '<?php echo json_encode($_SESSION["workplaceSettings"]);?>';
-						 var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
-                         $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest});
-                    
-                         $(".chosen-select").chosen({width: "100%"});
-                            
-	          });
-                     
-                   $("a[href^=#workplace]").live( "click", function(){ $(".chosen-select").chosen({width: "100%"});});
-                   $("[class^=deletewp]").live( "click", function(){
-                          
-                        
-                          var x = $(this).attr("class").replace('deletewp', '');
-                          $("#workplaceli"+ x).remove();
-                          $("#workplace"+ x).remove();
-                           $(".deletewp"+ x).remove();
-                      });
-                      
-                });
-               
-                   
-               </script>
-               <div class="down3" style="display:none;">
-			   <div class="row">
-				   <div class="col-lg-12"> <label for="Findabuddy"><strong>NOTE:</strong>Please list my details in Find a Physio (visbile to other health professionals)</label>
-                        <input type="checkbox" name="Findabuddy" id="Findabuddy">
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="">Your National group</label>
+						<select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple>
+						<?php
+						// 2.2.19 - get national group list
+						// Send - 
+						// Response - get national group from Aptify via webserice return Json data;
+						$nationalGroups= GetAptifyData("19","request");
+						?>
+						<?php 
+						foreach($nationalGroups["NationalGroup"] as $lines) {
+						echo '<option value="'.$lines["NGid"].'"> '.$lines["NGtitle"].' </option>';
+						}
+						?>
+						</select>
 					</div>
-			  </div> 
-                   <ul class="nav nav-tabs" id="tabmenu">
-                          <li class ="active"><a data-toggle="tab" href="#workplace0"><?php echo "Workplace0";?></a></li>
-              
-                   </ul>
-             
-           
-                <div id="workplaceblocks">
-                <div id="workplace0" class='tab-pane fade in active'> 
-                 
-                 <div class="row"><div class="col-lg-6"></div><div class="col-lg-6"> <label for="Findphysio"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
-                        <input type="checkbox" name="Findphysio0" id="Findphysio" value="" ></div></div>
-                  <div class="row">
-				    <div class="col-lg-12">
-					<label for="Name-of-workplace">Name of workplace<span class="tipstyle">*</span></label>
-					<input type="text" class="form-control" name="Name-of-workplace0" id="Name-of-workplace0">
+					<div class="col-lg-3 display-none" id="ngsports"><label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label><input type="checkbox" id="ngsportsbox" name="ngsports" value="0"></div>
+					<div class="col-lg-3 display-none" id="ngmusculo"><label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label><input type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"></div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
+						<select class="form-control" id="Branch" name="Branch">
+							<option value="" selected disabled>What branch would you like to join?</option>
+							<option value="ACT">ACT</option>
+							<option value="NSW">NSW</option>
+							<option value="QLD">QLD</option>
+							<option value="SA">SA</option>
+							<option value="TAS">TAS</option>
+							<option value="VIC">VIC</option>
+							<option value="WA">WA</option>
+							<option value="Overseas">I live overseas</option>
+						</select>
 					</div>
-	
-				  </div>
-				  <div class="row">
-                     <div class="col-lg-3">
-                        Workplace setting<span class="tipstyle">*</span>
-                     </div>
-                     <div class="col-lg-9">
-					   
-                        <select class="form-control" id="Workplace-setting0" name="Workplace-setting0">
-						 <?php 
-						    // 2.2.36 - get workplace settings list
-							// Send - 
-							// Response - get workplace settings from Aptify via webserice return Json data;
-							// stroe workplace settings into the session
-							$workplaceSettings= GetAptifyData("36","request");
-							$_SESSION["workplaceSettings"] = $workplaceSettings;
-							
-						 ?>
-						 
-						 <?php 
-						     foreach($workplaceSettings['WorkplaceSettings']  as $lines){
-								echo '<option value="'.$lines['code'].'">'.$lines['name'].'</option>';
-							}
-						 ?>
-                          
-                        </select>
-						
-                     </div>
-                   </div>
-				  <div class="row">
-                     <div class="col-lg-6">
-                        <label for="BuildingName">Building Name</label>
-                        <input type="text" class="form-control" name="WBuildingName0" id="WBuildingName0">
-                     </div>
-                     <div class="col-lg-2">
-                        <label for="WAddress_Line_10">Address line 1<span class="tipstyle">*</span></label>
-                        <input type="text" class="form-control" name="WAddress_Line_10" id="WAddress_Line_10">
-                     </div>
-                     <div class="col-lg-4">
-                        <label for="WAddress_Line_20">Address line 2</label>
-                        <input type="text" class="form-control" name="WAddress_Line_20" id="WAddress_Line_20">
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-3">
-                        <label for="Wcity">City/Town<span class="tipstyle">*</span></label>
-                        <input type="text" class="form-control" name="Wcity0" id="Wcity0">
-                     </div>
-                     <div class="col-lg-3">
-                        <label for="Wpostcode">Postcode<span class="tipstyle">*</span></label>
-                        <input type="text" class="form-control" name="Wpostcode0" id="Wpostcode0">
-                     </div>
-                     <div class="col-lg-3">
-                        <label for="Wstate">State<span class="tipstyle">*</span></label>
-						    <select class="form-control" id="Wstate0" name="Wstate0">
-                              <option value="" selected disabled> State </option>
-                              <option value="ACT"> ACT </option>
-                              <option value="NSW"> NSW </option>
-                              <option value="SA"> SA </option>
-                              <option value="TAS"> TAS </option>
-                              <option value="VIC"> VIC </option>
-                              <option value="QLD"> QLD </option>
-                              <option value="NT"> NT </option>
-                              <option value="WA"> WA </option>
-							  <option value="N/A"> I live overseas </option>
-                           </select>
-                        
-                     </div>
-                     <div class="col-lg-3">
-                        <label for="Wcountry">Country<span class="tipstyle">*</span></label>
-                        <input type="text" class="form-control" name="Wcountry0" id="Wcountry0">
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <label for="Wemail">Workplace email<span class="tipstyle">*</span></label>
-                        <input type="text" class="form-control" name="Wemail0" id="Wemail0">
-                     </div>
-                     <div class="col-lg-3">
-                        <label for="Wwebaddress">Website<span class="tipstyle">*</span></label>
-                        <input type="text" class="form-control" name="Wwebaddress0" id="Wwebaddress0">
-                     </div>
-                     <div class="col-lg-3">
-                        <label for="Wphone">Phone number<span class="tipstyle">*</span></label>
-                        <input type="text" class="form-control" name="Wphone0" id="Wphone0">
-                     </div>
-                  </div>
-               
-                         <div class="row">
-                     <div class="col-lg-3">
-                        Does this workplace offer additional languages?<br/>
-                      
-                     </div>
-                     <div class="col-lg-3">
-                        <select class="chosen-select" id="Additionallanguage0" name="Additionallanguage0[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
-                           <option value="NONE" disabled>no</option>
-                           <option value="AF"> Afrikaans </option>
-                           <option value="AR"> Arabic </option>
-                           <option value="BO"> Bosnian </option>
-                           <option value="CA"> Cantonese </option>
-                           <option value="CHZ"> Chzech </option>
-                           <option value="CR"> Croation </option>
-                           <option value="DA"> Danish </option>
-                           <option value="DU"> Dutch </option>
-                           <option value="EG"> Egyptian </option>
-                           <option value="ENG"> English </option>
-                           <option value="FL"> Filipino </option>
-                           <option value="FR"> French </option>
-                           <option value="GE"> German </option>
-                           <option value="GR"> Greek </option>
-                           <option value="HE"> Hebrew </option>
-                           <option value="HI"> Hindi </option>
-                           <option value="HO"> Hokkien </option>
-                           <option value="HU"> Hungarian </option>
-                           <option value="IND"> Indonesian </option>
-                           <option value="IT"> Italian </option>
-                           <option value="JP"> Japanese </option>
-                           <option value="KO"> Korean </option>
-                           <option value="LAT"> Latvian </option>
-                           <option value="LE"> Lebanese </option>
-                           <option value="M"> Marathi </option>
-                           <option value="MA"> Macedonian </option>
-                           <option value="MALT"> Maltese </option>
-                           <option value="MAN"> Mandarin </option>
-                           <option value="MAV"> Mavathi </option>
-                           <option value="ML"> Malay </option>
-                           <option value="NOR"> Norwegian </option>
-                           <option value="POL"> Polish </option>
-                           <option value="POR"> Portuguese </option>
-                           <option value="PU"> Punjabi </option>
-                           <option value="RU"> Russian </option>
-                           <option value="S"> Slovak </option>
-                           <option value="SERB"> Serbian </option>
-                           <option value="SL"> Sign Language </option>
-                           <option value="SP"> Spanish </option>
-                           <option value="SW"> Swedish </option>
-                           <option value="SWI"> Swiss </option>
-                           <option value="TA"> Tamil </option>
-                           <option value="TAW"> Taiwanese </option>
-                           <option value="TE"> Teo-Chew </option>
-                           <option value="TEL"> Telugu </option>
-                           <option value="TH"> Thai </option>
-                           <option value="TURK"> Turkish </option>
-                           <option value="UK"> Ukrainian </option>
-                           <option value="UR"> Urdu </option>
-                           <option value="VI"> Vietnamese </option>
-                           <option value="YI"> Yiddish </option>
-                           <option value="YU"> Yugoslav </option>
-                        </select>
-                     </div>
-                     <div class="col-lg-3">
-                        Quality In Practice number(QIP):
-                     </div>
-                      <div class="col-lg-3">
-                         <input type="text" class="form-control" name="QIP0" id="QIP0">
-                     </div>
-                  </div>
-                  <div class="row"> 
-                    <div class="col-lg-3">
-                        Does this workplace provide:
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                    <input type="checkbox" name="Electronic-claiming0" id="Electronic-claiming0" value=""> <label for="Electronic-claiming0">Electronic claiming</label>
-                   
-                    </div>
-                     <div class="col-lg-6">
-                      <input type="checkbox" name="Hicaps0" id="Hicaps0" value=""> <label for="Hicaps0">HICAPS</label>
-                    </div>
-                 
-                 </div>
-                  <div class="row">
-                       <div class="col-lg-6">
-                    <input type="checkbox" name="Healthpoint0" id="Healthpoint0" value="" > <label for="Healthpoint0">Healthpoint</label>
-                    </div>
-                    <div class="col-lg-6">
-                    <input type="checkbox" name="Departmentva0" id="Departmentva0" value=""> <label for="Departmentva0">Department of Vetarans' Affairs</label>
-                    </div>
-                   </div>
-                  <div class="row">
-                     <div class="col-lg-6">
-                      <input type="checkbox" name="Workerscompensation0" id="Workerscompensation0" value=""> <label for="Workerscompensation0">Workers compensation</label>
-                    </div>
-                    <div class="col-lg-6">
-                    <input type="checkbox" name="Motora0" id="Motora0" value=""> <label for="Motora0">Motor accident compensation</label>
-                    </div>
-                   
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                    <input type="checkbox" name="Medicare0" id="Medicare0" value=""> <label for="Medicare0">Medicare Chronic Disease Management</label>
-                    </div>
-					 <div class="col-lg-6">
-                    <input type="checkbox" name="Homehospital0" id="Homehospital0" value=""> <label for="Homehospital0">Home and hospital visits</label>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-6">
-                    <input type="checkbox" name="Mobilephysiotherapist0" id="Mobilephysiotherapist0" value=""> <label for="Mobilephysiotherapist0">Mobile physiotherapist</label>
-                    </div>
-					
-                  </div>
-                   <div class="row">
-                     <div class="col-lg-3">
-                        Numbers of hours worked<span class="tipstyle">*</span>
-                     </div>
-                     <div class="col-lg-6">
-                        <select class="form-control" id="Number-worked-hours0" name="Number-worked-hours0">
-                           <option value="0" disabled>no</option>
-                           <option value="1"> 1-4 </option>
-                           <option value="2"> 5-8</option>
-                           <option value="3"> 9-12</option>
-                           <option value="4"> 13-16</option>
-                           <option value="5"> 17-20</option>
-                           <option value="6"> 21-25</option>
-                           <option value="7"> 26-30</option>
-                           <option value="8"> 31-35</option>
-                           <option value="9"> 36-40</option>
-                           <option value="10"> 40+</option>
-                        </select>
-                     </div>
-                   </div>
-            </div>
-			   </div>
-				  <div class="row"><div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a></div></div>
-                  
-			      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   
-				  <a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Last</span></a>
-				  </div>
-               </div>
-               <div class="down4" style="display:none;" >
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <label for="Udegree">Undergraduate degree<span class="tipstyle">*</span></label>
-                        <select  class="form-control" name="Udegree" id="Udegree">
+				</div>
+				<div class="row"> 
+					<div class="col-lg-3">
+					Your special interest area:
+					</div>
+					<div class="col-lg-6">
+						<select class="chosen-select" id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
+						<?php 
+						// 2.2.37 - get interest area list
+						// Send - 
+						// Response - get workplace settings from Aptify via webserice return Json data;
+						// stroe interest area list into the session
+						$interestAreas= GetAptifyData("37","request");
+						$_SESSION["interestAreas"] = $interestAreas;
+						?>
+								
+						<?php 
+						foreach($interestAreas['InterestAreas']  as $lines){
+						echo '<option value="'.$lines['ListCode'].'">'.$lines['ListName'].'</option>';
+
+						}
+
+						?>
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>
+			</div>
+			<div id="wpnumber"><?php  $wpnumber =  0; echo  $wpnumber; ?></div>
+			<input type="hidden" name="wpnumber" value="<?php  $wpnumber =  1; echo  $wpnumber; ?>"/>
+			<script type="text/javascript">
+			jQuery(document).ready(function($) {
+				$(".chosen-select").chosen({width: "100%"});
+				$('#workplace').click(function(){
+				$('#dashboard-right-content').addClass("autoscroll");
+				});
+				$('.add-workplace-join').click(function(){
+					var number = Number($('#wpnumber').text());
+					var i = Number(number +1);
+					var j = Number(number +2);
+					$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ i+'</a><span class="deletewp'+ i + '" style=" float: right; color: red; margin-right: 55%;">x</span></li>' );
+					$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
+					$('#wpnumber').text(i);
+					$('input[name=wpnumber]').val(j);
+					var sessionvariable = '<?php echo json_encode($_SESSION["workplaceSettings"]);?>';
+					var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
+					$("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest});
+					$(".chosen-select").chosen({width: "100%"});
+				});
+				$("a[href^=#workplace]").live( "click", function(){ $(".chosen-select").chosen({width: "100%"});});
+				$("[class^=deletewp]").live( "click", function(){
+					var x = $(this).attr("class").replace('deletewp', '');
+					$("#workplaceli"+ x).remove();
+					$("#workplace"+ x).remove();
+					$(".deletewp"+ x).remove();
+				});
+			});
+			</script>
+			<div class="down3" style="display:none;">
+				<div class="row">
+					<div class="col-lg-12"> <label for="Findabuddy"><strong>NOTE:</strong>Please list my details in Find a Physio (visbile to other health professionals)</label>
+						<input type="checkbox" name="Findabuddy" id="Findabuddy">
+					</div>
+				</div> 
+			<ul class="nav nav-tabs" id="tabmenu">
+			<li class ="active"><a data-toggle="tab" href="#workplace0"><?php echo "Workplace0";?></a></li>
+			</ul>
+			<div id="workplaceblocks">
+				<div id="workplace0" class='tab-pane fade in active'> 
+					<div class="row"><div class="col-lg-6"></div><div class="col-lg-6"> <label for="Findphysio"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
+					<input type="checkbox" name="Findphysio0" id="Findphysio" value="" ></div></div>
+				<div class="row">
+					<div class="col-lg-12">
+						<label for="Name-of-workplace">Name of workplace<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Name-of-workplace0" id="Name-of-workplace0">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3">
+					Workplace setting<span class="tipstyle">*</span>
+					</div>
+					<div class="col-lg-9">
+						<select class="form-control" id="Workplace-setting0" name="Workplace-setting0">
+						<?php 
+						// 2.2.36 - get workplace settings list
+						// Send - 
+						// Response - get workplace settings from Aptify via webserice return Json data;
+						// stroe workplace settings into the session
+						$workplaceSettings= GetAptifyData("36","request");
+						$_SESSION["workplaceSettings"] = $workplaceSettings;
+						?>
+						<?php 
+						 foreach($workplaceSettings['WorkplaceSettings']  as $lines){
+							echo '<option value="'.$lines['code'].'">'.$lines['name'].'</option>';
+						}
+						?>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="BuildingName">Building Name</label>
+						<input type="text" class="form-control" name="WBuildingName0" id="WBuildingName0">
+					</div>
+					<div class="col-lg-2">
+					<label for="WAddress_Line_10">Address line 1<span class="tipstyle">*</span></label>
+					<input type="text" class="form-control" name="WAddress_Line_10" id="WAddress_Line_10">
+					</div>
+					<div class="col-lg-4">
+					<label for="WAddress_Line_20">Address line 2</label>
+					<input type="text" class="form-control" name="WAddress_Line_20" id="WAddress_Line_20">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3">
+						<label for="Wcity">City/Town<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wcity0" id="Wcity0">
+					</div>
+					<div class="col-lg-3">
+						<label for="Wpostcode">Postcode<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wpostcode0" id="Wpostcode0">
+					</div>
+					<div class="col-lg-3">
+						<label for="Wstate">State<span class="tipstyle">*</span></label>
+						<select class="form-control" id="Wstate0" name="Wstate0">
+							<option value="" selected disabled> State </option>
+							<option value="ACT"> ACT </option>
+							<option value="NSW"> NSW </option>
+							<option value="SA"> SA </option>
+							<option value="TAS"> TAS </option>
+							<option value="VIC"> VIC </option>
+							<option value="QLD"> QLD </option>
+							<option value="NT"> NT </option>
+							<option value="WA"> WA </option>
+							<option value="N/A"> I live overseas </option>
+						</select>
+					</div>
+					<div class="col-lg-3">
+						<label for="Wcountry">Country<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wcountry0" id="Wcountry0">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="Wemail">Workplace email<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wemail0" id="Wemail0">
+					</div>
+					<div class="col-lg-3">
+						<label for="Wwebaddress">Website<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wwebaddress0" id="Wwebaddress0">
+					</div>
+					<div class="col-lg-3">
+						<label for="Wphone">Phone number<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wphone0" id="Wphone0">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3">
+					Does this workplace offer additional languages?<br/>
+					</div>
+					<div class="col-lg-3">
+						<select class="chosen-select" id="Additionallanguage0" name="Additionallanguage0[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
+							<option value="NONE" disabled>no</option>
+							<option value="AF"> Afrikaans </option>
+							<option value="AR"> Arabic </option>
+							<option value="BO"> Bosnian </option>
+							<option value="CA"> Cantonese </option>
+							<option value="CHZ"> Chzech </option>
+							<option value="CR"> Croation </option>
+							<option value="DA"> Danish </option>
+							<option value="DU"> Dutch </option>
+							<option value="EG"> Egyptian </option>
+							<option value="ENG"> English </option>
+							<option value="FL"> Filipino </option>
+							<option value="FR"> French </option>
+							<option value="GE"> German </option>
+							<option value="GR"> Greek </option>
+							<option value="HE"> Hebrew </option>
+							<option value="HI"> Hindi </option>
+							<option value="HO"> Hokkien </option>
+							<option value="HU"> Hungarian </option>
+							<option value="IND"> Indonesian </option>
+							<option value="IT"> Italian </option>
+							<option value="JP"> Japanese </option>
+							<option value="KO"> Korean </option>
+							<option value="LAT"> Latvian </option>
+							<option value="LE"> Lebanese </option>
+							<option value="M"> Marathi </option>
+							<option value="MA"> Macedonian </option>
+							<option value="MALT"> Maltese </option>
+							<option value="MAN"> Mandarin </option>
+							<option value="MAV"> Mavathi </option>
+							<option value="ML"> Malay </option>
+							<option value="NOR"> Norwegian </option>
+							<option value="POL"> Polish </option>
+							<option value="POR"> Portuguese </option>
+							<option value="PU"> Punjabi </option>
+							<option value="RU"> Russian </option>
+							<option value="S"> Slovak </option>
+							<option value="SERB"> Serbian </option>
+							<option value="SL"> Sign Language </option>
+							<option value="SP"> Spanish </option>
+							<option value="SW"> Swedish </option>
+							<option value="SWI"> Swiss </option>
+							<option value="TA"> Tamil </option>
+							<option value="TAW"> Taiwanese </option>
+							<option value="TE"> Teo-Chew </option>
+							<option value="TEL"> Telugu </option>
+							<option value="TH"> Thai </option>
+							<option value="TURK"> Turkish </option>
+							<option value="UK"> Ukrainian </option>
+							<option value="UR"> Urdu </option>
+							<option value="VI"> Vietnamese </option>
+							<option value="YI"> Yiddish </option>
+							<option value="YU"> Yugoslav </option>
+						</select>
+					</div>
+					<div class="col-lg-3">
+					Quality In Practice number(QIP):
+						</div>
+					<div class="col-lg-3">
+					<input type="text" class="form-control" name="QIP0" id="QIP0">
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col-lg-3">
+					Does this workplace provide:
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+					<input type="checkbox" name="Electronic-claiming0" id="Electronic-claiming0" value=""> <label for="Electronic-claiming0">Electronic claiming</label>
+					</div>
+					<div class="col-lg-6">
+					<input type="checkbox" name="Hicaps0" id="Hicaps0" value=""> <label for="Hicaps0">HICAPS</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="checkbox" name="Healthpoint0" id="Healthpoint0" value="" > <label for="Healthpoint0">Healthpoint</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="checkbox" name="Departmentva0" id="Departmentva0" value=""> <label for="Departmentva0">Department of Vetarans' Affairs</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="checkbox" name="Workerscompensation0" id="Workerscompensation0" value=""> <label for="Workerscompensation0">Workers compensation</label>
+					</div>
+					<div class="col-lg-6">
+					<input type="checkbox" name="Motora0" id="Motora0" value=""> <label for="Motora0">Motor accident compensation</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="checkbox" name="Medicare0" id="Medicare0" value=""> <label for="Medicare0">Medicare Chronic Disease Management</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="checkbox" name="Homehospital0" id="Homehospital0" value=""> <label for="Homehospital0">Home and hospital visits</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="checkbox" name="Mobilephysiotherapist0" id="Mobilephysiotherapist0" value=""> <label for="Mobilephysiotherapist0">Mobile physiotherapist</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3">
+					Numbers of hours worked<span class="tipstyle">*</span>
+					</div>
+					<div class="col-lg-6">
+						<select class="form-control" id="Number-worked-hours0" name="Number-worked-hours0">
+							<option value="0" disabled>no</option>
+							<option value="1"> 1-4 </option>
+							<option value="2"> 5-8</option>
+							<option value="3"> 9-12</option>
+							<option value="4"> 13-16</option>
+							<option value="5"> 17-20</option>
+							<option value="6"> 21-25</option>
+							<option value="7"> 26-30</option>
+							<option value="8"> 31-35</option>
+							<option value="9"> 36-40</option>
+							<option value="10"> 40+</option>
+						</select>
+					</div>
+				</div>
+				</div>
+			</div>
+				<div class="row"><div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a></div></div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   
+				<a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Last</span></a>
+				</div>
+			</div>
+			<div class="down4" style="display:none;" >
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="Udegree">Undergraduate degree<span class="tipstyle">*</span></label>
+						<select  class="form-control" name="Udegree" id="Udegree">
 							<option selected="selected" value="">(None)</option>
 							<option value="1">Bachelor of Physiotherapy</option>
 							<option value="2">Bachelor of Physiotherapy (Hons)</option>
@@ -1637,12 +1593,12 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 							<option value="8">Bachelor of Applied Science (Physiotherapy) (Honours)</option>
 							<option value="Other">Other</option>
 						</select>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <label for="undergraduate-university-name">Undergraduate university name<span class="tipstyle">*</span></label>
-                        <select class="form-control" name="Undergraduate-university-name" id="Undergraduate-university-name">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="undergraduate-university-name">Undergraduate university name<span class="tipstyle">*</span></label>
+						<select class="form-control" name="Undergraduate-university-name" id="Undergraduate-university-name">
 							<option selected="selected" value="">(None)</option>
 							<option value="ACU">Australian Catholic University - NSW</option>
 							<option value="ACUQ">Australian Catholic University - QLD</option>
@@ -1678,31 +1634,29 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 							<option value="Other">Other</option>
 						</select>
 						<input type="text" class="form-control display-none" name="Undergraduate-university-name-other" id="Undergraduate-university-name-other">
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-4">
-                        <label for="ugraduate-country">Country<span class="tipstyle">*</span></label>
-                        <input type="text" class="form-control" name="Ugraduate-country" id="Ugraduate-country">
-                     </div>
-                     <div class="col-lg-2">
-                        <label for="ugraduate-year-attained">Year attained<span class="tipstyle">*</span></label>
-                      
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">
+						<label for="ugraduate-country">Country<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Ugraduate-country" id="Ugraduate-country">
+					</div>
+					<div class="col-lg-2">
+						<label for="ugraduate-year-attained">Year attained<span class="tipstyle">*</span></label>
 						<select class="form-control" name="Ugraduate-year-attained" id="Ugraduate-year-attained">
-						 <?php 
-						  $y = date("Y") + 15; 
-						  for ($i=1940; $i<= $y; $i++){
-							echo '<option value="'.$i.'">'.$i.'</option>';  
-						  }
-							 
-						 ?>
+						<?php 
+						$y = date("Y") + 15; 
+						for ($i=1940; $i<= $y; $i++){
+						echo '<option value="'.$i.'">'.$i.'</option>';  
+						}
+						?>
 						</select>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <label for="pdegree">Postgraduate degree</label>
-                      	<select class="form-control" name="Pdegree" id="Pdegree">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="pdegree">Postgraduate degree</label>
+						<select class="form-control" name="Pdegree" id="Pdegree">
 							<option selected="selected" value="">(None)</option>
 							<option value="1">Doctor of Physiotherapy</option>
 							<option value="2">Master of Physiotherapy</option>
@@ -1710,11 +1664,11 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 							<option value="4">Master of Physiotherapy (Graduate Entry)</option>
 							<option value="5">Master of Physiotherapy Studies</option>
 						</select>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <label for="postgraduate-university-name">Postgraduate university name</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="postgraduate-university-name">Postgraduate university name</label>
 						<select class="form-control" name="Postgraduate-university-name" id="Postgraduate-university-name">
 							<option selected="selected" value="">(None)</option>
 							<option value="ACU">Australian Catholic University - NSW</option>
@@ -1750,38 +1704,36 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 							<option value="WAIT">Western Australian Institute of Technology</option>
 							<option value="Other">Other</option>
 						</select>
-						<input type="text" class="form-control display-none" name="Postgraduate-university-name-other" id="Postgraduate-university-name-other">
-                    </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-4">
-                        <label for="pgraduate-country">Country</label>
-                        <input type="text" class="form-control" name="Pgraduate-country" id="Pgraduate-country">
-                     </div>
-                     <div class="col-lg-2">
-                        <label for="pgraduate-year-attained">Year attained</label>
-                     	<select class="form-control" name="Pgraduate-year-attained" id="Pgraduate-year-attained">
-						 <?php 
-						  $y = date("Y"); 
-						  for ($i=1940; $i<= $y; $i++){
+					<input type="text" class="form-control display-none" name="Postgraduate-university-name-other" id="Postgraduate-university-name-other">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-4">
+					<label for="pgraduate-country">Country</label>
+					<input type="text" class="form-control" name="Pgraduate-country" id="Pgraduate-country">
+					</div>
+					<div class="col-lg-2">
+						<label for="pgraduate-year-attained">Year attained</label>
+						<select class="form-control" name="Pgraduate-year-attained" id="Pgraduate-year-attained">
+							<?php 
+							$y = date("Y"); 
+							for ($i=1940; $i<= $y; $i++){
 							echo '<option value="'.$i.'">'.$i.'</option>';  
-						  }
-						 ?>
+							}
+							?>
 						</select>
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <label for="Additional-qualifications">Additional qualifications<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a></label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="Additional-qualifications">Additional qualifications<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a></label>
 						<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  $addtionalNumber =  1; echo  $addtionalNumber; ?>"/>
 						<div id="additional-qualifications-block">
-                        <input type="text" class="form-control" name="Additional-qualifications0" id="Additional-qualifications0">
+						<input type="text" class="form-control" name="Additional-qualifications0" id="Additional-qualifications0">
 						</div>
-                     </div>
-					
-                  </div>
-				   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
-               </div>
-               
-            </form>
+					</div>
+				</div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
+			</div>
+    </form>
 <?php endif; ?>			

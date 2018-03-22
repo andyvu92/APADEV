@@ -6,8 +6,6 @@
 		//$result = GetAptifyData("16", $postEmail);
 		//echo $result["Status"]; 
 	    $result="true";
-		echo $result;
-		
-	}
-	   
+		echo $result;	
+	} 
 ?>
