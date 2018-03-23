@@ -54,6 +54,9 @@ jQuery(document).ready(function($) {
 			'<div class="col-lg-6"><a class="button'+i+'" id="deleteQuestion">Delete Question</a></div>'+
 		'</div></div>');	
 		*/
+		'<div class="row">'+
+			'<div class="col-lg-6"><a class="button'+i+'" id="AddOption4">AddOption</a></div>'+
+		'</div>'+
 		'</div>');
 		if(number >= 2) {
 			SequenceControl(false);
@@ -120,6 +123,7 @@ jQuery(document).ready(function($) {
 				optionString = optionString + '<input type="text" id="'+j+'Answer'+ i +'" class="form-control" name="'+ j +'Answer'+ i +'" placeholder="Type answer">';
 			}
 			optionString = optionString + '</div></div>';
+			optionString = optionString + '<div class="'+j+'optionAdd"></div>';
 			$('#Q'+ j + " > .options" ).replaceWith(optionString);
 			
 			/*
@@ -130,6 +134,7 @@ jQuery(document).ready(function($) {
 			'</div>');
 			*/
 		}
+		
 		/*
 		This should be done through adding questions.
 		- this is for adding extra options without changing options.
@@ -174,6 +179,12 @@ jQuery(document).ready(function($) {
 	$('[class^=deletebutton]').click(function() {
 		var N = $(this).attr("class").replace('deletebutton', '');
 		$("#deleteform form input").val(N);
+	});
+	
+	$('[id^=AddOption]').click(function() {
+		var i = $(this).attr("id").replace('AddOption', '');
+		console.log("triggered"+i);
+		$("."+ i+"optionAdd").load("sites/all/themes/evolve/Survey/OptionTest.inc.php", function() {console.log("Load was performed.");});
 	});
 	
 	$('#deleteQuestion').click(function() {

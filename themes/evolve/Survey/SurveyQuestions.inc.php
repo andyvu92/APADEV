@@ -425,6 +425,10 @@ $NthQuestion = $i + 1; ?>
 			</div>
 		</div>
 		<?php endif; ?>
+		<div class="row">
+			<div class="col-lg-6"><a class="button<?php echo $NthQuestion; ?>" id="AddOption<?php echo $NthQuestion; ?>">AddOption</a></div>
+		</div>
+		<div class="<?php echo $NthQuestion; ?>optionAdd"></div>
 	</div>
 	<div class="row toggles">
 		<div class="col-lg-6">
