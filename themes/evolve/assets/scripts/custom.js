@@ -32,6 +32,74 @@ jQuery(document).ready(function($) {
 		
 		
 	});
+	// for Advocacy template
+	var advocacyCount = $("[id^=sections]").length;
+	var classesM = $("[id^=sections]").attr("class") + " advocacySize" + advocacyCount;
+	var firstIndex = 0;
+	var advocacyArray = [];
+	$("#testerviewadvocacy-block").find("section").each(function(){ advocacyArray.push(this.id); });
+	var advocacyContentArray = [];
+	$("#testerviewadvocacy-block-1").find("section").each(function(){ advocacyContentArray.push(this.id); });
+	var advocacyBackgroundArray = [];
+	$("#testerviewadvocacy-block-2").find("section").each(function(){ advocacyBackgroundArray.push(this.id); });
+	var classMaster = $('#block-views-testerviewadvocacy-block').attr("class");
+	$('#block-views-testerviewadvocacy-block').attr("class", classMaster+" container");
+	$('#block-views-testerviewadvocacy-block-1').attr("class", classMaster+" container");
+	for(var i = 0; i < advocacyCount; i++) {
+		var classes = $('#'+advocacyArray[i]).attr("class") + " advocacySize"+ advocacyCount;
+		console.log(advocacyCount);
+		if(i != (advocacyCount -1)) {
+			$('#'+advocacyArray[i]).after("<div clsss='sectionDots' style='color: white; width: 58px; float: left; padding: 80px 5px 35px 22px;'><span class='glyphicon'></span></div>");
+		}
+		if(i == 0) {
+			firstIndex = $('#'+advocacyArray[i]).attr("id").replace("sections","");
+			$('#'+advocacyArray[i]).attr('class', 'focusedAdv '+classes);
+		} else {
+			$('#'+advocacyArray[i]).attr('class', 'unfocusedAdv '+classes);
+			$('#'+advocacyContentArray[i]).attr('style', 'width: 0px; padding: 0px; overflow: hidden;');
+			$('#'+advocacyBackgroundArray[i]).attr('style', 'opacity: 0;');
+		}
+	}
+	var lastIndex = parseInt(firstIndex) + parseInt(advocacyCount);
+	$('#leftArrow').attr("id", "leftArrow"+firstIndex);
+	$('#rightArrow').attr("id", "rightArrow"+(parseInt(firstIndex)+1));
+	// set width for top navigation
+	var widthCal = $("#testerviewadvocacy-block").width();
+	if(advocacyCount == 3) {
+		$("#testerviewadvocacy-block").attr('style','padding-left: '+((parseInt(widthCal) - 591)/2)+"px");
+	} else if(advocacyCount == 4) {
+		$("#testerviewadvocacy-block").attr('style','padding-left: '+((parseInt(widthCal) - 799)/2)+"px");
+	} else {
+		$("#testerviewadvocacy-block").attr('style','padding-left: '+((parseInt(widthCal) - 1007)/2)+"px");
+	}
+	// set width for top navigation
+	var functionCall = function($input) {
+		$('#sections'+$input).attr("class",'focusedAdv '+classesM);
+		$('[id^=sections]:not(#sections'+$input+')').attr("class",'unfocusedAdv '+classesM);
+		$('[id^=sectionContent]:not(#sectionContent'+$input+')').animate({width: "0px", padding: "0px"}, 300);
+		$("#sectionContent" + $input).animate({width: "100%", padding: "0 15px"}, 300);
+		$('[id^=advocacyBackground]:not(#advocacyBackground'+$input+')').animate({opacity: 0}, 300);
+		$("#advocacyBackground" + $input).animate({opacity: 0.8}, 300);
+		$(".leftArrow").attr("id","leftArrow"+(parseInt($input)-1));
+		$(".rightArrow").attr("id","rightArrow"+(parseInt($input)+1));
+	}
+	$("[id^=sections]").click(function(){
+		var x = $(this).attr("id").replace('sections', '');
+		functionCall(x);
+    });
+	$("[class^=rightArrow]").click(function(){
+		var x = $(this).attr("id").replace('rightArrow', '');
+		if(x != lastIndex) {
+			functionCall(x);
+		}
+	});
+	$("[class^=leftArrow]").click(function(){
+		var x = $(this).attr("id").replace('leftArrow', '');
+		if(x != (firstIndex - 1)) {
+			functionCall(x);
+		}
+	});
+	// advocacy section done
 	
 	$("[id^=event]").click(function(){
         var x = $(this).attr("id").replace('event', '');
