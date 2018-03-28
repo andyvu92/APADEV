@@ -261,7 +261,7 @@
                                              <div class="field field-name-field-team-image field-type-image field-label-hidden">
                                                 <div class="field-items">
                                                    <div class="field-item even">
-                                                      <?php $base_path = base_path();$imgLink = "http://10.2.1.190".$base_path."sites/default/files/".$content['field_research_author']['#items'][$i]['taxonomy_term']->field_profile_picture['und'][0]['filename']; 
+                                                      <?php $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();$imgLink = $link.$base_path."sites/default/files/".$content['field_research_author']['#items'][0]['taxonomy_term']->field_profile_picture['und'][0]['filename'];  
                                                          echo "<img src='".$imgLink."'/>"; ?>
                                                    </div>
                                                 </div>
