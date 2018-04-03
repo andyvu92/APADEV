@@ -3,7 +3,19 @@
 /* --------------------------------------------------------- */
 /*section[id^="testerviewadvocacy-block"]
 content/testtest*/
+.advocacytemplate div#block-dexp-page-elements-dexp-page-elements-breadcrumb {
+	float: right;
+}
+.advocacytemplate .page_title {
+	color: white;
+	text-align: center;
+    margin: 45px 0 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: cairo !important;
+}
 *[id^="sections"] {
+	cursor: pointer;
 	float: left;
 	height: 150px;
 	width: 150px;
@@ -17,41 +29,40 @@ content/testtest*/
 }
 section .sectionSub {
 	text-align: center;
-	line-height: 107px;
+	line-height: 117px;
 }
 section.focusedAdv .sectionSub {
 	line-height: 126px;
 }
 *[id^="sections"] h2 { 
 	font-size: 19px;
-    margin: auto auto auto 11px;
+    margin: auto;
     width: 125px;
 	display: inline-block;
 	vertical-align: middle;
-	text-align: left;
 }
-#testerviewadvocacy-block section:first-child {
+.AdvocacyHeader section:first-child {
 	border-color: rgb(0,159,218);
 }
-#testerviewadvocacy-block section:first-child h2 {
+.AdvocacyHeader section:first-child h2 {
 	color: rgb(0,159,218);
 }
-#testerviewadvocacy-block section:nth-child(3) {
+.AdvocacyHeader section:nth-child(3) {
 	border-color: rgb(195,200,200);
 }
-#testerviewadvocacy-block section:nth-child(3) h2 {
+.AdvocacyHeader section:nth-child(3) h2 {
 	color: rgb(195,200,200);
 }
-#testerviewadvocacy-block section:nth-child(5) {
+.AdvocacyHeader section:nth-child(5) {
 	border-color: rgb(255,160,47);
 }
-#testerviewadvocacy-block section:nth-child(5) h2 {
+.AdvocacyHeader section:nth-child(5) h2 {
 	color: rgb(255,160,47);
 }
-#testerviewadvocacy-block section:nth-child(7) {
+.AdvocacyHeader section:nth-child(7) {
 	border-color: rgb(162,173,0);
 }
-#testerviewadvocacy-block section:nth-child(7) h2 {
+.AdvocacyHeader section:nth-child(7) h2 {
 	color: rgb(162,173,0);
 }
 section.focusedAdv {
@@ -66,6 +77,7 @@ section.focusedAdv {
 }
 section.unfocusedAdv {
 	opacity: 0.3;
+	pointer: cursor;
 }
 .sectionContentSub {
 	text-align: center;
@@ -76,13 +88,12 @@ section.unfocusedAdv {
 	vertical-align: middle;
 	text-align: left;
 }
-#testerviewadvocacy-block section.focusedAdv h2 {
+.AdvocacyHeader section.focusedAdv h2 {
 	color: white;
 	font-size: 23px;
     width: 124px;
 	display: inline-block;
 	vertical-align: middle;
-	text-align: left;
 }
 .sectionDots span{
 	//float: left;
@@ -92,14 +103,11 @@ section.unfocusedAdv {
 .advocacyContent p {
 	color: white;
 }
-div#block-views-testerviewadvocacy-block-1 #testerviewadvocacy-block-1,
-div#block-views-testerviewadvocacy-block-4 #testerviewadvocacy-block-4,
-div#block-views-testerviewadvocacy-block-7 #testerviewadvocacy-block-7,
-div#block-views-testerviewadvocacy-block-10 #testerviewadvocacy-block-10,
-div#block-views-testerviewadvocacy-block-1,
-div#block-views-testerviewadvocacy-block-4,
-div#block-views-testerviewadvocacy-block-7,
-div#block-views-testerviewadvocacy-block-10 {
+div.AdvocacyBody #testerviewadvocacy-block-1,
+div.AdvocacyBody #testerviewadvocacy-block-4,
+div.AdvocacyBody #testerviewadvocacy-block-7,
+div.AdvocacyBody #testerviewadvocacy-block-10,
+div.AdvocacyBody {
 	height: 450px;
 	overflow: hidden;
 	margin-bottom: 113px;
@@ -130,32 +138,96 @@ div#block-views-testerviewadvocacy-block-10 {
 	background-color: white;
 	border: 0.5px solid rgb(0,159,218);
 }
-div#block-views-testerviewadvocacy-block-2,
-div#block-views-testerviewadvocacy-block-5,
-div#block-views-testerviewadvocacy-block-8,
-div#block-views-testerviewadvocacy-block-11 {
+div.AdvocacyBackground {
 	position: absolute;
-	top: -195px;
-	left: 0;
+	top: -372px;
 	width: 100%;
 	z-index: -1;
 }
 .advocacyBackgroundSub .advocacyBackgroundImage {
-	height: 820px;
+	height: 935px;
 	background-repeat: no-repeat !important;
 	width: 100%;
 	background-size: cover !important;
 	position: absolute;
 	z-index: -3;
 }
-.advocacyBackground{
+.advocacyBackground {
 	position: absolute;
 }
 .advocacyBackgroundCover {
 	background-color: black;
 	width: 100%;
-	height: 820px;
+	height: 935px;
 	opacity: 0.75;
 	z-index: -1;
 	position: absolute;
+}
+
+// hamburger sidebar property
+.HamburgerAdvocacyO {
+	float: right;
+	border-radius: 50%;
+	border: 0.5px solid white;
+	padding: 5px 5px 0 0;
+	width: 68px;
+	margin-top: -67px;
+	transition: 0.3s;
+	transition-timing-function: cubic-bezier(0.15,0.15,0.51,1.54);
+	-webkit-transition-timing-function: cubic-bezier(0.15,0.15,0.51,1.54);
+}
+.HamburgerAdvocacyO .HamburgerAdvocacy .hamburger-inner::before,
+.HamburgerAdvocacyO .HamburgerAdvocacy .hamburger-inner::after,
+.HamburgerAdvocacyO .HamburgerAdvocacy .hamburger-inner {
+	background-color: white;
+}
+.HamburgerAdvocacyO.is-active {
+	position: fixed;
+	top: 60px;
+	right: 200px;
+	z-index: 1009;
+	width: 68px;
+	border: 0.5px solid rgba(195,200,200,0.7);
+	margin-top: 0;
+}
+.HamburgerAdvocacyO.is-active .HamburgerAdvocacy .hamburger-inner::before,
+.HamburgerAdvocacyO.is-active .HamburgerAdvocacy .hamburger-inner::after,
+.HamburgerAdvocacyO.is-active .HamburgerAdvocacy .hamburger-inner {
+	background-color: rgb(195,200,200);
+}
+.HamburgerAdvocacyMenu {
+	position: fixed;
+	height: 100%;
+	width: 300px;
+	top: 0;
+	right: 0;
+	background-color: white;
+	z-index: 1004;
+	transition-duration: 0.3s;
+	-webkit-transition: -webkit-transform 0.3s ease-in-out;
+	transition: 0.3s;
+	transition-timing-function: cubic-bezier(0.15, 0.15, 0.14, 1.23);
+	-webkit-transition-timing-function: cubic-bezier(0.15, 0.15, 0.14, 1.23);
+}
+.HamburgerAdvocacyMenu#in {
+	-webkit-transform: translateX(0);
+	transform: translateX(0);
+}
+.HamburgerAdvocacyMenu#out {
+	-webkit-transform: translateX(300px);
+	transform: translateX(300px);
+}
+.HamburgerAdvocacyCov#in .HamburgerAdvocacyCover {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0,0,0,0.8);
+	z-index: 1002;
+}
+.HamburgerAdvocacyCov#out .HamburgerAdvocacyCover {
+	position: fixed;
+	background-color: translate;
+	z-index: -9999;
 }

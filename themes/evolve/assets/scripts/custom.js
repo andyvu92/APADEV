@@ -35,24 +35,30 @@ jQuery(document).ready(function($) {
 	// for Advocacy template
 	var advocacyCount = $("[id^=sections]").length;
 	var classesM = $("[id^=sections]").attr("class") + " advocacySize" + advocacyCount;
+	var listNumIndex = [];
 	var firstIndex = 0;
 	var advocacyArray = [];
-	$("#testerviewadvocacy-block").find("section").each(function(){ advocacyArray.push(this.id); });
+	//$("#testerviewadvocacy-block").find("section").each(function(){ advocacyArray.push(this.id); });
+	$(".AdvocacyHeader").find(".advocacyTitle").each(function(){ advocacyArray.push(this.id); });
 	var advocacyContentArray = [];
-	$("#testerviewadvocacy-block-1").find("section").each(function(){ advocacyContentArray.push(this.id); });
+	//$("#testerviewadvocacy-block-1").find("section").each(function(){ advocacyContentArray.push(this.id); });
+	$(".region-content").find(".advocacyContent").each(function(){ advocacyContentArray.push(this.id); });
 	var advocacyBackgroundArray = [];
-	$("#testerviewadvocacy-block-2").find("section").each(function(){ advocacyBackgroundArray.push(this.id); });
-	var classMaster = $('#block-views-testerviewadvocacy-block').attr("class");
-	$('#block-views-testerviewadvocacy-block').attr("class", classMaster+" container");
-	$('#block-views-testerviewadvocacy-block-1').attr("class", classMaster+" container");
+	//$("#testerviewadvocacy-block-2").find("section").each(function(){ advocacyBackgroundArray.push(this.id); });
+	$(".AdvocacyBackground").find(".advocacyBackground").each(function(){ advocacyBackgroundArray.push(this.id); });
+	var classMaster = $('.AdvocacyHeader').attr("class");
+	$('.AdvocacyHeader').attr("class", classMaster+" container");
+	var classMaster2 = $('.AdvocacyBody').attr("class");
+	$('.AdvocacyBody').attr("class", classMaster2+" container");
 	for(var i = 0; i < advocacyCount; i++) {
+		listNumIndex.push($('#'+advocacyArray[i]).attr("id").replace('sections',''));
 		var classes = $('#'+advocacyArray[i]).attr("class") + " advocacySize"+ advocacyCount;
 		console.log(advocacyCount);
 		if(i != (advocacyCount -1)) {
 			$('#'+advocacyArray[i]).after("<div clsss='sectionDots' style='color: white; width: 58px; float: left; padding: 80px 5px 35px 22px;'><span class='glyphicon'></span></div>");
 		}
 		if(i == 0) {
-			firstIndex = $('#'+advocacyArray[i]).attr("id").replace("sections","");
+			firstIndex = listNumIndex[0];
 			$('#'+advocacyArray[i]).attr('class', 'focusedAdv '+classes);
 		} else {
 			$('#'+advocacyArray[i]).attr('class', 'unfocusedAdv '+classes);
@@ -60,9 +66,9 @@ jQuery(document).ready(function($) {
 			$('#'+advocacyBackgroundArray[i]).attr('style', 'opacity: 0;');
 		}
 	}
-	var lastIndex = parseInt(firstIndex) + parseInt(advocacyCount);
-	$('#leftArrow').attr("id", "leftArrow"+firstIndex);
-	$('#rightArrow').attr("id", "rightArrow"+(parseInt(firstIndex)+1));
+	var lastIndex = listNumIndex[(parseInt(advocacyCount) - 1)];
+	$('#leftArrow').attr("id", "leftArrow"+listNumIndex[0]);
+	$('#rightArrow').attr("id", "rightArrow"+listNumIndex[1]);
 	// set width for top navigation
 	var widthCal = $("#testerviewadvocacy-block").width();
 	if(advocacyCount == 3) {
@@ -80,8 +86,9 @@ jQuery(document).ready(function($) {
 		$("#sectionContent" + $input).animate({width: "100%", padding: "0 15px"}, 300);
 		$('[id^=advocacyBackground]:not(#advocacyBackground'+$input+')').animate({opacity: 0}, 300);
 		$("#advocacyBackground" + $input).animate({opacity: 0.8}, 300);
-		$(".leftArrow").attr("id","leftArrow"+(parseInt($input)-1));
-		$(".rightArrow").attr("id","rightArrow"+(parseInt($input)+1));
+		var nth = parseInt(jQuery.inArray($input, listNumIndex));
+		$(".leftArrow").attr("id","leftArrow"+(listNumIndex[nth-1]));
+		$(".rightArrow").attr("id","rightArrow"+(listNumIndex[nth+1]));
 	}
 	$("[id^=sections]").click(function(){
 		var x = $(this).attr("id").replace('sections', '');
@@ -89,15 +96,11 @@ jQuery(document).ready(function($) {
     });
 	$("[class^=rightArrow]").click(function(){
 		var x = $(this).attr("id").replace('rightArrow', '');
-		if(x != lastIndex) {
-			functionCall(x);
-		}
+		if(x != "undefined") {functionCall(x);}
 	});
 	$("[class^=leftArrow]").click(function(){
 		var x = $(this).attr("id").replace('leftArrow', '');
-		if(x != (firstIndex - 1)) {
-			functionCall(x);
-		}
+		if(x != "undefined") {functionCall(x);}
 	});
 	// advocacy section done
 	
