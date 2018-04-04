@@ -53,16 +53,17 @@ jQuery(document).ready(function($) {
 	for(var i = 0; i < advocacyCount; i++) {
 		listNumIndex.push($('#'+advocacyArray[i]).attr("id").replace('sections',''));
 		var classes = $('#'+advocacyArray[i]).attr("class") + " advocacySize"+ advocacyCount;
-		console.log(advocacyCount);
-		if(i != (advocacyCount -1)) {
-			$('#'+advocacyArray[i]).after("<div clsss='sectionDots' style='color: white; width: 58px; float: left; padding: 80px 5px 35px 22px;'><span class='glyphicon'></span></div>");
+		//console.log(advocacyCount);
+		if(i == (advocacyCount -1)) {
+			$('.Dots'+listNumIndex[i]).remove();
+			//$('#'+advocacyArray[i]).after("<div clsss='sectionDots' style='color: white; width: 49px; float: left; padding: 80px 5px 35px 17px;'><span class='glyphicon'></span></div>");
 		}
 		if(i == 0) {
 			firstIndex = listNumIndex[0];
 			$('#'+advocacyArray[i]).attr('class', 'focusedAdv '+classes);
 		} else {
 			$('#'+advocacyArray[i]).attr('class', 'unfocusedAdv '+classes);
-			$('#'+advocacyContentArray[i]).attr('style', 'width: 0px; padding: 0px; overflow: hidden;');
+			$('#'+advocacyContentArray[i]).attr('style', 'width: 0px; padding: 0px; ');
 			$('#'+advocacyBackgroundArray[i]).attr('style', 'opacity: 0;');
 		}
 	}
@@ -71,7 +72,7 @@ jQuery(document).ready(function($) {
 	$('#rightArrow').attr("id", "rightArrow"+listNumIndex[1]);
 	// set width for top navigation
 	var widthCal = $("#testerviewadvocacy-block").width();
-	if(advocacyCount == 3) {
+	if(advocacyCount == 3 && $( document ).width() > 991) {
 		$("#testerviewadvocacy-block").attr('style','padding-left: '+((parseInt(widthCal) - 591)/2)+"px");
 	} else if(advocacyCount == 4) {
 		$("#testerviewadvocacy-block").attr('style','padding-left: '+((parseInt(widthCal) - 799)/2)+"px");

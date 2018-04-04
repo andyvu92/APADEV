@@ -85,3 +85,4 @@
 		<h2><?php print $title; ?></h2>
 	</div>
 </section>
+<div class="sectionDots Dots<?php print $node->nid; ?>"><span class="glyphicon"></span></div>
