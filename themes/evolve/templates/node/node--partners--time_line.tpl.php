@@ -79,19 +79,6 @@
 * @ingroup themeable
 */
 ?>
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>  dexp-animate clearfix"<?php print $attributes; ?>>
-   <div class="content"<?php print $content_attributes; ?>>
-    <?php
-// We hide the comments and links now so that we can render them later.
-    hide($content['comments']);
-    hide($content['links']);  
-	?>
-    <div class="portfolio-image">
-      <a data-target="#myModal-node-<?php print $node->nid; ?>" data-toggle="modal"><?php print render($content['field_company_logo']); ?></a>    
-    </div>
-  </div>
-</div>
-<?php /*
 <div id="myModal-node-<?php print $node->nid; ?>" class="modal fade " role="dialog">
     <div class="modal-dialog" style="max-height:100%;  margin-top: 0px; margin-bottom:50px;width: 100%;">
 		<div class="modal-content">
@@ -132,4 +119,3 @@
 	</div>
 </div> 
 
-*/ ?>

@@ -1,7 +1,6 @@
 <?php if (!empty($title)): ?>
   <h3><?php print $title; ?></h3>
 <?php endif; ?>
-
 <?php if($options['dexp_portfolio_filter']):?>
   <?php if(isset($categories)):?>
   <div class="portfolio-filters">
@@ -12,6 +11,7 @@
 					<a href="#" data-filter="<?php echo $key; ?>"><?php echo $c; ?></a>
 				</li>
 			<?php endforeach; ?>
+			
 		</ul>
 	</div>
   <?php endif;?>
