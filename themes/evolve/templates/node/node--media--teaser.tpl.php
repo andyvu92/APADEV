@@ -74,7 +74,7 @@
 *
 * @see template_preprocess()
 * @see template_preprocess_node()
-* @see template_process()
+* @see template_process() 
 *
 * @ingroup themeable
 */
