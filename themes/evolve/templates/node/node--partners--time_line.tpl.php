@@ -79,19 +79,18 @@
 * @ingroup themeable
 */
 ?>
-<div id="myModal-node-<?php print $node->nid; ?>" class="modal fade " role="dialog">
+<div id="myModal-node-<?php print $node->nid; ?>" class="PartnersDetail modal fade " role="dialog">
     <div class="modal-dialog" style="max-height:100%;  margin-top: 0px; margin-bottom:50px;width: 100%;">
 		<div class="modal-content">
 		   
-		    <div class="modal-body container" style="height:782px;">
+		    <div class="modal-body container">
 				<h2><?php print $title; ?></h2>
 		
 				<div class="post-img media">
 				  <div class='mediaholder'>
-					<div class="col-lg-3"><a href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_company_logo']);?></a></div>
-					<div class="col-lg-9"><?php print render($content['body']);?>
+					<div class="col-lg-12"><?php print render($content['body']);?></div>
 					<div class="col-lg-12"><a href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_web_address']);?></a></div>
-					</div>
+					<div class="col-lg-12"><a href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_company_logo']);?></a></div>
 				  </div>
 				</div>
 				<!--<p class="arrowDown"><i class="fa fa-angle-down"></i></p>-->

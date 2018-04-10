@@ -80,56 +80,26 @@
 */
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>  dexp-animate clearfix"<?php print $attributes; ?>>
-   <div class="content"<?php print $content_attributes; ?>>
-    <?php
-// We hide the comments and links now so that we can render them later.
-    hide($content['comments']);
-    hide($content['links']);  
-	?>
-    <div class="portfolio-image">
-      <a data-target="#myModal-node-<?php print $node->nid; ?>" data-toggle="modal"><?php print render($content['field_company_logo']); ?></a>    
-    </div>
-  </div>
-</div>
-<?php /*
-<div id="myModal-node-<?php print $node->nid; ?>" class="modal fade " role="dialog">
-    <div class="modal-dialog" style="max-height:100%;  margin-top: 0px; margin-bottom:50px;width: 100%;">
-		<div class="modal-content">
-		   
-		    <div class="modal-body container" style="height:782px;">
-				<h2><?php print $title; ?></h2>
-		
-				<div class="post-img media">
-				  <div class='mediaholder'>
-					<div class="col-lg-3"><a href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_company_logo']);?></a></div>
-					<div class="col-lg-9"><?php print render($content['body']);?>
-					<div class="col-lg-12"><a href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_web_address']);?></a></div>
-					</div>
-				  </div>
-				</div>
-				<!--<p class="arrowDown"><i class="fa fa-angle-down"></i></p>-->
-				<section class="post-content">
-					<dl class="ckeditor-accordion">
-						<dt>Beneift to APA members</dt>
-						<dd>
-							<p><?php print render($content['field_benefit_to_members']);?></p>
-						</dd>
-						<dt>Current discount that's on offer (not always applicaable)</dt>
-						<dd>
-							<p><?php print render($content['field_offer']);?></p>
-						</dd>
-						<dt>Contact details</dt>
-						<dd>
-							<p><?php print render($content['field_contact_details']);?></p>
-						</dd>
-					</dl>
-				</section>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-			</div>
-        </div>		
+	<div class="content"<?php print $content_attributes; ?>>
+		<?php
+		// We hide the comments and links now so that we can render them later.
+		hide($content['comments']);
+		hide($content['links']);  
+		?>
+		<div class="portfolio-image">
+			<a data-target="#myModal-node-<?php print $node->nid; ?>" data-toggle="modal"><?php print render($content['field_company_logo']); ?></a>
+		</div>
 	</div>
-</div> 
+	<div class="SponsorSum" data-target="#myModal-node-<?php print $node->nid; ?>" data-toggle="modal">
+		<div class="sponsor-Sbody">
+			<h2><?php print $title; ?></h2>
 
-*/ ?>
+			<div class="media">
+				<div class='mediaholder'>
+					<?php print render($content['body']);?>
+				</div>
+			</div>
+			<a data-target="#myModal-node-<?php print $node->nid; ?>" data-toggle="modal">Read more</a>
+		</div>
+	</div>
+</div>
