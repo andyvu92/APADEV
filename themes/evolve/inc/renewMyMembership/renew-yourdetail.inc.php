@@ -66,16 +66,20 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Ahpranumber'])){ $postData['Ahpranumber'] = $_POST['Ahpranumber']; }
 	if(isset($_POST['Nationalgp'])){ $postData['Nationalgp'] = $_POST['Nationalgp']; }
 	if(isset($_POST['Branch'])){ $postData['Branch'] = $_POST['Branch']; }
-	if(isset($_POST['Nationalgp'])){ $postData['Nationalgp'] = $_POST['Nationalgp']; }
+	if(isset($_SESSION['Regional-group'])){ $postData['Regional-group'] = $_SESSION['Regional-group']; } else{ $postData['Regional-group'] ="";}
 	if(isset($_POST['SpecialInterest'])){ $postData['SpecialInterest'] = $_POST['SpecialInterest']; }
-	if(isset($_POST['Findabuddy'])){ $postData['Findabuddy'] = $_POST['Findabuddy']; }
+	if(isset($_POST['Treatmentarea'])){ $postData['Treatmentarea'] = $_POST['Treatmentarea']; }
+	if(isset($_POST['MAdditionallanguage'])){ $postData['Additionallanguage'] = $_POST['MAdditionallanguage']; }
+	if(isset($_POST['Findpublicbuddy'])){ $postData['Findpublicbuddy'] = $_POST['Findpublicbuddy']; } else{ $postData['Findpublicbuddy'] = 0;}
 	if(isset($_POST['wpnumber'])){ 
 	$num = $_POST['wpnumber']; 
 	for($i=0; $i<$num; $i++){
 		$workplaceArray = array();
-		if(isset($_POST['Findphysio'.$i])) { $workplaceArray['Findphysio'] = $_POST['Findphysio'.$i];}
+		if(isset($_POST['Findabuddy'.$i])) { $workplaceArray['Findabuddy'] = $_POST['Findabuddy'.$i];}else{ $workplaceArray['Findabuddy'] = "0";}
+		if(isset($_POST['Findphysio'.$i])) { $workplaceArray['Findphysio'] = $_POST['Findphysio'.$i];}else{ $workplaceArray['Findphysio'] = "0";}
 		if(isset($_POST['Name-of-workplace'.$i])) { $workplaceArray['Name-of-workplace'] = $_POST['Name-of-workplace'.$i];}
 		if(isset($_POST['Workplace-setting'.$i])) { $workplaceArray['Workplace-setting'] = $_POST['Workplace-setting'.$i];}
+		if(isset($_POST['WTreatmentarea'.$i])){ $workplaceArray['Treatmentarea'] = $_POST['WTreatmentarea'.$i]; }
 		if(isset($_POST['WBuildingName'.$i])) { $workplaceArray['WBuildingName'] = $_POST['WBuildingName'.$i];}
 		if(isset($_POST['WAddress_Line_1'.$i])) { $workplaceArray['Address_Line_1'] = $_POST['WAddress_Line_1'.$i];}
 		if(isset($_POST['WAddress_Line_2'.$i])) { $workplaceArray['Address_Line_2'] = $_POST['WAddress_Line_2'.$i];}
@@ -127,6 +131,7 @@ if(isset($_POST['step1'])) {
 	// UserID 
 	// Response - UserID & detail data
 	GetAptifyData("5", $postData);
+	unset($_SESSION["Regional-group"]);
 	/*General function: save data to APA shopping cart database;*/
 	/*Parameters: $userID, $productID,$type;*/
 	/*save product data including membership type product, national group product, fellowship & PRF product*/
@@ -173,6 +178,7 @@ if(isset($_POST['step1'])) {
 // UserID 
 // Response - UserID & detail data
 $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
+if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details['Regional-group'];}
 ?>
 <form id="your-detail-form" action="renewmymembership" method="POST">
 	<input type="hidden" name="step1" value="1"/>
@@ -513,6 +519,29 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 					</select>
 				</div>
 			</div>
+				<div class="row"> 
+				<div class="col-lg-3">
+				Your treatment area:
+				</div>
+			</div>
+			<div class="row"> 
+				<div class="col-lg-6">
+					<select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+					<?php 
+					// get interest area from Aptify via webserice return Json data;
+					$interestAreas= GetAptifyData("37","request");
+					$_SESSION["interestAreas"] = $interestAreas;
+					?>
+					<?php 
+					foreach($interestAreas['InterestAreas']  as $lines){
+						echo '<option value="'.$lines["ListCode"].'"';
+						if (in_array( $lines["ListCode"],$details['Treatmentarea'])){ echo "selected='selected'"; } 
+						echo '> '.$lines["ListName"].' </option>'; 
+					}
+					?>
+					</select>
+				</div>
+			</div>
 			<div class="row">
 				<input type="hidden" name="fapnum" value="<?php echo sizeof($details['Specialty']);?>">
 				<?php if(!empty($details['Specialty'])){
@@ -530,6 +559,68 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 			<label for="fap"></label>
 			<input type="checkbox" id="fap" name="fap" checked>
 			-->
+			</div>
+			<div class="row">
+				<div class="col-lg-3">
+					What is your favourite languages?<br/>
+				</div>
+				<div class="col-lg-3">
+					<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
+						<option value="NONE" <?php if (empty($details['Additionallanguage'])) echo "selected='selected'";?> disabled>no</option>
+						<option value="AF"  <?php if (in_array( "AF",$details['Additionallanguage'])) echo "selected='selected'";?>> Afrikaans </option>
+						<option value="AR" <?php if (in_array("AR",$details['Additionallanguage'])) echo "selected='selected'";?>> Arabic </option>
+						<option value="BO" <?php if (in_array( "BO",$details['Additionallanguage'])) echo "selected='selected'";?>> Bosnian </option>
+						<option value="CA" <?php if (in_array( "CA",$details['Additionallanguage'])) echo "selected='selected'";?>> Cantonese </option>
+						<option value="CHZ" <?php if (in_array( "CHZ",$details['Additionallanguage'])) echo "selected='selected'";?>> Chzech </option>
+						<option value="CR" <?php if (in_array( "CR",$details['Additionallanguage'])) echo "selected='selected'";?>> Croation </option>
+						<option value="DA" <?php if (in_array( "DA",$details['Additionallanguage'])) echo "selected='selected'";?>> Danish </option>
+						<option value="DU" <?php if (in_array( "DU",$details['Additionallanguage'])) echo "selected='selected'";?>> Dutch </option>
+						<option value="EG" <?php if (in_array( "EG",$details['Additionallanguage'])) echo "selected='selected'";?>> Egyptian </option>
+						<option value="ENG" <?php if (in_array( "ENG",$details['Additionallanguage'])) echo "selected='selected'";?>> English </option>
+						<option value="FL" <?php if (in_array( "FL",$details['Additionallanguage'])) echo "selected='selected'";?>> Filipino </option>
+						<option value="FR" <?php if (in_array( "FR",$details['Additionallanguage'])) echo "selected='selected'";?>> French </option>
+						<option value="GE" <?php if (in_array( "GE",$details['Additionallanguage'])) echo "selected='selected'";?>> German </option>
+						<option value="GR" <?php if (in_array( "GR",$details['Additionallanguage'])) echo "selected='selected'";?>> Greek </option>
+						<option value="HE" <?php if (in_array( "HE",$details['Additionallanguage'])) echo "selected='selected'";?>> Hebrew </option>
+						<option value="HI" <?php if (in_array( "HI",$details['Additionallanguage'])) echo "selected='selected'";?>> Hindi </option>
+						<option value="HO" <?php if (in_array( "HO",$details['Additionallanguage'])) echo "selected='selected'";?>> Hokkien </option>
+						<option value="HU" <?php if (in_array( "HU",$details['Additionallanguage'])) echo "selected='selected'";?>> Hungarian </option>
+						<option value="IND" <?php if (in_array( "IND",$details['Additionallanguage'])) echo "selected='selected'";?>> Indonesian </option>
+						<option value="IT" <?php if (in_array( "IT",$details['Additionallanguage'])) echo "selected='selected'";?>> Italian </option>
+						<option value="JP" <?php if (in_array( "JP",$details['Additionallanguage'])) echo "selected='selected'";?>> Japanese </option>
+						<option value="KO" <?php if (in_array( "KO",$details['Additionallanguage'])) echo "selected='selected'";?>> Korean </option>
+						<option value="LAT" <?php if (in_array( "LAT",$details['Additionallanguage'])) echo "selected='selected'";?>> Latvian </option>
+						<option value="LE" <?php if (in_array( "LE",$details['Additionallanguage'])) echo "selected='selected'";?>> Lebanese </option>
+						<option value="M" <?php if (in_array( "M",$details['Additionallanguage'])) echo "selected='selected'";?>> Marathi </option>
+						<option value="MA" <?php if (in_array( "MA",$details['Additionallanguage'])) echo "selected='selected'";?>> Macedonian </option>
+						<option value="MALT" <?php if (in_array( "MALT",$details['Additionallanguage'])) echo "selected='selected'";?>> Maltese </option>
+						<option value="MAN" <?php if (in_array( "MAN",$details['Additionallanguage'])) echo "selected='selected'";?>> Mandarin </option>
+						<option value="MAV" <?php if (in_array( "MAV",$details['Additionallanguage'])) echo "selected='selected'";?>> Mavathi </option>
+						<option value="ML" <?php if (in_array( "ML",$details['Additionallanguage'])) echo "selected='selected'";?>> Malay </option>
+						<option value="NOR" <?php if (in_array( "NOR",$details['Additionallanguage'])) echo "selected='selected'";?>> Norwegian </option>
+						<option value="POL" <?php if (in_array( "POL",$details['Additionallanguage'])) echo "selected='selected'";?>> Polish </option>
+						<option value="POR" <?php if (in_array( "POR",$details['Additionallanguage'])) echo "selected='selected'";?>> Portuguese </option>
+						<option value="PU" <?php if (in_array( "PU",$details['Additionallanguage'])) echo "selected='selected'";?>> Punjabi </option>
+						<option value="RU" <?php if (in_array( "RU",$details['Additionallanguage'])) echo "selected='selected'";?>> Russian </option>
+						<option value="S" <?php if (in_array( "S",$details['Additionallanguage'])) echo "selected='selected'";?>> Slovak </option>
+						<option value="SERB" <?php if (in_array( "SERB",$details['Additionallanguage'])) echo "selected='selected'";?>> Serbian </option>
+						<option value="SL" <?php if (in_array( "SL",$details['Additionallanguage'])) echo "selected='selected'";?>> Sign Language </option>
+						<option value="SP" <?php if (in_array( "SP",$details['Additionallanguage'])) echo "selected='selected'";?>> Spanish </option>
+						<option value="SW" <?php if (in_array( "SW",$details['Additionallanguage'])) echo "selected='selected'";?>> Swedish </option>
+						<option value="SWI" <?php if (in_array( "SWI",$details['Additionallanguage'])) echo "selected='selected'";?>> Swiss </option>
+						<option value="TA" <?php if (in_array( "TA",$details['Additionallanguage'])) echo "selected='selected'";?>> Tamil </option>
+						<option value="TAW" <?php if (in_array( "TAW",$details['Additionallanguage'])) echo "selected='selected'";?>> Taiwanese </option>
+						<option value="TE" <?php if (in_array( "TE",$details['Additionallanguage'])) echo "selected='selected'";?>> Teo-Chew </option>
+						<option value="TEL" <?php if (in_array( "TEL",$details['Additionallanguage'])) echo "selected='selected'";?>> Telugu </option>
+						<option value="TH" <?php if (in_array( "TH",$details['Additionallanguage'])) echo "selected='selected'";?>> Thai </option>
+						<option value="TURK" <?php if (in_array( "TURK",$details['Additionallanguage'])) echo "selected='selected'";?>> Turkish </option>
+						<option value="UK" <?php if (in_array( "UK",$details['Additionallanguage'])) echo "selected='selected'";?>> Ukrainian </option>
+						<option value="UR" <?php if (in_array( "UR",$details['Additionallanguage'])) echo "selected='selected'";?>> Urdu </option>
+						<option value="VI" <?php if (in_array( "VI",$details['Additionallanguage'])) echo "selected='selected'";?>> Vietnamese </option>
+						<option value="YI" <?php if (in_array( "YI",$details['Additionallanguage'])) echo "selected='selected'";?>> Yiddish </option>
+						<option value="YU" <?php if (in_array( "YU",$details['Additionallanguage'])) echo "selected='selected'";?>> Yugoslav </option>
+					</select>
+				</div>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>
 		</div>
@@ -565,10 +656,10 @@ jQuery(document).ready(function($) {
 </script>
 		<div class="down3" style="display:none;">
 			<div class="row">
-				<div class="col-lg-12"> <label for="Findabuddy"><strong>NOTE:</strong>Please list my details in Find a Physio (visbile to other health professionals)</label>
-				<input type="checkbox" name="Findabuddy" id="Findabuddy" value="<?php  echo $details['Findabuddy'];?>" <?php if($details['Findabuddy']==1){echo "checked";} ?>>
+				<div class="col-lg-12"> <label for="Findpublicbuddy"><strong>NOTE:</strong>Please list my details in the public (visbile to other health professionals)</label>
+					<input type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="<?php  echo $details['Findpublicbuddy'];?>" <?php if($details['Findpublicbuddy']==1){echo "checked";} ?>>
 				</div>
-			</div> 
+			</div>
 		<ul class="nav nav-tabs" id="tabmenu">
 		<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
 		<li <?php if($key=='Workplace0') echo 'class ="active" ';?>><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php echo "Workplace".$key;?></a></li>
@@ -577,8 +668,16 @@ jQuery(document).ready(function($) {
 			<div id="workplaceblocks">
 			<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
 				<div id="workplace<?php echo $key;?>" class='tab-pane fade <?php if($key=='Workplace0') echo "in active ";?>'> 
-				<div class="row"><div class="col-lg-6"></div><div class="col-lg-6"> <label for="Findphysio<?php echo $key;?>"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
-				<input type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" ></div></div>
+				<div class="row">
+					<div class="col-lg-6"> <label for="Findphysio<?php echo $key;?>"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
+						<input type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" >
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12"> <label for="Findabuddy<?php echo $key;?>"><strong>NOTE:</strong>Please list my details in the physio</label>
+						<input type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findabuddy'];?>" <?php if($details['Workplaces'][$key]['Findabuddy']==1){echo "checked";} ?>>
+					</div>
+				</div>
 				<div class="row">
 					<div class="col-lg-12">
 					<label for="Name-of-workplace">Name of workplace</label>
@@ -604,6 +703,29 @@ jQuery(document).ready(function($) {
 						   echo '<option value="'.$lines["code"].'"';
 						   if ($details['Workplaces'][$key]['Workplace-setting'] == $lines["code"]){ echo "selected='selected'"; } 
 						   echo '> '.$lines["name"].' </option>';
+						}
+						?>
+						</select>
+					</div>
+				</div>
+				<div class="row"> 
+						<div class="col-lg-3">
+						Workplace treatment area:
+						</div>
+				</div>
+				<div class="row"> 
+					<div class="col-lg-6">
+						<select class="chosen-select" id="WTreatmentarea<?php echo $key;?>" name="WTreatmentarea<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+						<?php 
+						// get interest area from Aptify via webserice return Json data;
+						$interestAreas= GetAptifyData("37","request");
+						$_SESSION["interestAreas"] = $interestAreas;
+						?>
+						<?php 
+						foreach($interestAreas['InterestAreas']  as $lines){
+							echo '<option value="'.$lines["ListCode"].'"';
+							if (in_array( $lines["ListCode"],$details['Workplaces'][$key]['Treatmentarea'])){ echo "selected='selected'"; } 
+							echo '> '.$lines["ListName"].' </option>'; 
 						}
 						?>
 						</select>

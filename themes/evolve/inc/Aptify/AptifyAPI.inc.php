@@ -82,7 +82,7 @@ function AptifyAPI($APItype, $variables){
 				   "Address_Line_2":"Toorak Road",'.// changed
 				   '"Suburb":"Camberwell",
 				   "Postcode":"3124",
-				   "State":"",
+				   "State":"VIC",
 				   "Country":"Australia",
 				   "Memberno":"1234567",
 				   "Memberid":"test@gmail.com",
@@ -94,9 +94,13 @@ function AptifyAPI($APItype, $variables){
 					],
 				   "Branch":"Branch",
 				   "SpecialInterest":["BAN","CHILD","ACU"],'.// Added
+				   '"Treatmentarea":["BAN","CHILD","ACU"],'. // Added
 				   '"Specialty":"FACP",
+				   "Additionallanguage":["EG","AR","FL"],
 				   "Status":"Current",
-				   "Regional-group":"A,B,C",
+				   "Findpublicbuddy":"1",
+				   "Regional-group":{"NSW":"NSW","NSW-CC":"NSW - CENTRAL COAST","NSW-CH":"NSW - COFFS HARBOUR"},
+				   "PaythroughDate":"2018-05-05",
 				   "Billing-BuildingName":"",
 				   "Billing-Address_Line_1":"1175",'.// changed
 				   '"Billing-PObox":"",'.// Added
@@ -134,8 +138,8 @@ function AptifyAPI($APItype, $variables){
 						"qualification 1",
 						"qualification 2"
 					],
-					"Findabuddy":"1",'. // Added
-				   '"Workplaces":{  
+					
+				   "Workplaces":{  
 					"0": {  
 						 "Workplace_ID":"72516",
 						 "Name-of-workplace":"APA",
@@ -160,7 +164,8 @@ function AptifyAPI($APItype, $variables){
 						 "Medicare":"1",
 						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 '. // "SpecialInterest": ["BAN","CHILD","ACU"], - removed
+						 "Treatmentarea": ["BAN","CHILD","ACU"], './/changed
+						 '"Findabuddy":"1",'. // Added
 						 '"Findphysio":"1",
 						 
 						 "Homehospital":"1",
@@ -191,7 +196,8 @@ function AptifyAPI($APItype, $variables){
 						 "Medicare":"1",
 						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 './/"SpecialInterest": ["BAN","CHILD","ACU"], - removed
+						 "Treatmentarea": ["BAN","CHILD","ACU"], './/changed
+						 '"Findabuddy":"1",'. // Added
 						 '"Findphysio":"1",
 						
 						 "Homehospital":"1",
@@ -222,7 +228,8 @@ function AptifyAPI($APItype, $variables){
 						 "Medicare":"1",
 						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 './/"SpecialInterest": ["BAN","CHILD","ACU"], - removed
+						 "Treatmentarea": ["BAN","CHILD","ACU"], './/changed
+						 '"Findabuddy":"1",'. // Added
 						 '"Findphysio":"1",
 						
 						 "Homehospital":"1",
@@ -257,7 +264,7 @@ function AptifyAPI($APItype, $variables){
 				   "Address_Line_2":"Toorak Road",'.// changed
 				   '"Suburb":"Camberwell",
 				   "Postcode":"3124",
-				   "State":"",
+				   "State":"VIC",
 				   "Country":"Australia",
 				   "Memberno":"1234567",
 				   "Memberid":"test@gmail.com",
@@ -270,8 +277,10 @@ function AptifyAPI($APItype, $variables){
 				   "Branch":"Branch",
 				   "SpecialInterest":["BAN","CHILD","ACU"],'.// Added
 				   '"Specialty":"FACP",
+				   "Additionallanguage":["EG","AR","FL"],
 				   "Status":"Current",
-				   "Regional-group":"A,B,C",
+				   "Findpublicbuddy":"1",
+				   "Regional-group":{"NSW":"NSW","NSW-CC":"NSW - CENTRAL COAST","NSW-CH":"NSW - COFFS HARBOUR"},
 				   "Billing-BuildingName":"",
 				   "Billing-Address_Line_1":"1175",'.// changed
 				   '"Billing-PObox":"",'.// Added
@@ -334,7 +343,7 @@ function AptifyAPI($APItype, $variables){
 						 "Medicare":"1",
 						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 '. // "SpecialInterest": ["BAN","CHILD","ACU"], - removed
+						 "Treatmentarea": ["BAN","CHILD","ACU"], '.// changed
 						 '"Findphysio":"1",
 						 "Findabuddy":"1",'. // Added
 						 '"Homehospital":"1",
@@ -365,7 +374,7 @@ function AptifyAPI($APItype, $variables){
 						 "Medicare":"1",
 						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 './/"SpecialInterest": ["BAN","CHILD","ACU"], - removed
+						 "Treatmentarea": ["BAN","CHILD","ACU"], './/- removed
 						 '"Findphysio":"1",
 						 "Findabuddy":"1",'. // Added
 						 '"Homehospital":"1",
@@ -396,7 +405,7 @@ function AptifyAPI($APItype, $variables){
 						 "Medicare":"1",
 						 "Workplace-setting":"Defence-forces",
 						 "Number-worked-hours":"7",
-						 './/"SpecialInterest": ["BAN","CHILD","ACU"], - removed
+						 "Treatmentarea": ["BAN","CHILD","ACU"],'.// changed
 						 '"Findphysio":"1",
 						 "Findabuddy":"1",'. // Added
 						 '"Homehospital":"1",
@@ -473,20 +482,20 @@ function AptifyAPI($APItype, $variables){
 
 					   { "Creditcards-ID": "1",
 						"Payment-method": "Master",
-						"Name-on-card": "Lucy",
+						
 						"Digitsnumber":"8888",
 						"Expiry-date":"10-10-2020"
 						},
 						{ "Creditcards-ID": "2",
 						"Payment-method": "Visa",
-						"Name-on-card": "Lucy",
+						
 						"Digitsnumber":"6666",
 						"Expiry-date":"10-10-2020"
 						},
 
 						{ "Creditcards-ID": "3",
 						"Payment-method": "Master",
-						"Name-on-card": "Lucy",
+						
 						"Digitsnumber":"9999",
 						"Expiry-date":"10-10-2020"
 						}
@@ -541,7 +550,7 @@ function AptifyAPI($APItype, $variables){
 			$JSONreturn =  '{ 
 			        "userID":"1",
 				    "Payment-method": "Visa",
-					"Name-on-card": "Lucy",
+					
 					"Cardno":"343424238888",
 					"Expiry-date":"10-10-2020",
 					"CCV":"1"

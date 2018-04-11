@@ -45,7 +45,7 @@ if(isset($_POST['step2'])) {
 	if(isset($_POST['addCard']) && $_POST['addCard'] == "1" ){
 	if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; }
 	if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
-	if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
+	//if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
 	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
 	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
 	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
@@ -98,7 +98,7 @@ if(isset($_POST['stepAdd'])) {
 // Response - Add payment card successful
 if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; }
 if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
-if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
+//if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
 if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
 if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
 if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }

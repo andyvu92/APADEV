@@ -25,6 +25,7 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 // Year attained, Post graduate degree, post graduate name, 
 // Post graduate country, Year attained, Additional qualifications
 $details = GetAptifyData("4", "UserID"); // #_SESSION["UserID"];
+if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details['Regional-group'];}
 //print_r($details);
 // 2.2.10 - GET Picture
 // Send - 
@@ -50,7 +51,7 @@ if(isset($_GET["action"])&& ($_GET["action"]=="addcard")) {
 	$AddNewCounter = 0;
 	if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; $AddNewCounter++; }
 	if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; $AddNewCounter++; }
-	if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; $AddNewCounter++; }
+	//if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; $AddNewCounter++; }
 	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; $AddNewCounter++; }
 	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; $AddNewCounter++; }
 	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; $AddNewCounter++; }
@@ -469,7 +470,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<div class="row">
 						<div class="col-lg-6">
 							<label for="">Your Regional group</label>
-							<input type="text" class="form-control" name="Regional-group"  <?php if (empty($details['Regional-group'])) {echo "placeholder='Your Regional group'";}   else{ echo 'value="'.$details['Regional-group'].'"'; }?> readonly>
+							<input type="text" class="form-control" name="Regional-group-display"  <?php if (empty($details['Regional-group'])) {echo "placeholder='Your Regional group'";}   else{ echo 'value="'; foreach( $details['Regional-group'] as $key => $value ) {echo $value.", ";} echo '"'; }?> readonly>
 						</div>
 					</div>
 					<div class="row">
@@ -499,6 +500,97 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							}
 							?>
 							</select>
+						</div>
+					</div>
+					<div class="row"> 
+						<div class="col-lg-3">
+						Your treatment area:
+						</div>
+					</div>
+					<div class="row"> 
+						<div class="col-lg-6">
+							<select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+							<?php 
+							// get interest area from Aptify via webserice return Json data;
+							$interestAreas= GetAptifyData("37","request");
+							$_SESSION["interestAreas"] = $interestAreas;
+							?>
+							<?php 
+							foreach($interestAreas['InterestAreas']  as $lines){
+								echo '<option value="'.$lines["ListCode"].'"';
+								if (in_array( $lines["ListCode"],$details['Treatmentarea'])){ echo "selected='selected'"; } 
+								echo '> '.$lines["ListName"].' </option>'; 
+							}
+							?>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-3">
+							What is your favourite languages?<br/>
+						</div>
+						<div class="col-lg-3">
+							<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
+								<option value="NONE" <?php if (empty($details['Additionallanguage'])) echo "selected='selected'";?> disabled>no</option>
+								<option value="AF"  <?php if (in_array( "AF",$details['Additionallanguage'])) echo "selected='selected'";?>> Afrikaans </option>
+								<option value="AR" <?php if (in_array("AR",$details['Additionallanguage'])) echo "selected='selected'";?>> Arabic </option>
+								<option value="BO" <?php if (in_array( "BO",$details['Additionallanguage'])) echo "selected='selected'";?>> Bosnian </option>
+								<option value="CA" <?php if (in_array( "CA",$details['Additionallanguage'])) echo "selected='selected'";?>> Cantonese </option>
+								<option value="CHZ" <?php if (in_array( "CHZ",$details['Additionallanguage'])) echo "selected='selected'";?>> Chzech </option>
+								<option value="CR" <?php if (in_array( "CR",$details['Additionallanguage'])) echo "selected='selected'";?>> Croation </option>
+								<option value="DA" <?php if (in_array( "DA",$details['Additionallanguage'])) echo "selected='selected'";?>> Danish </option>
+								<option value="DU" <?php if (in_array( "DU",$details['Additionallanguage'])) echo "selected='selected'";?>> Dutch </option>
+								<option value="EG" <?php if (in_array( "EG",$details['Additionallanguage'])) echo "selected='selected'";?>> Egyptian </option>
+								<option value="ENG" <?php if (in_array( "ENG",$details['Additionallanguage'])) echo "selected='selected'";?>> English </option>
+								<option value="FL" <?php if (in_array( "FL",$details['Additionallanguage'])) echo "selected='selected'";?>> Filipino </option>
+								<option value="FR" <?php if (in_array( "FR",$details['Additionallanguage'])) echo "selected='selected'";?>> French </option>
+								<option value="GE" <?php if (in_array( "GE",$details['Additionallanguage'])) echo "selected='selected'";?>> German </option>
+								<option value="GR" <?php if (in_array( "GR",$details['Additionallanguage'])) echo "selected='selected'";?>> Greek </option>
+								<option value="HE" <?php if (in_array( "HE",$details['Additionallanguage'])) echo "selected='selected'";?>> Hebrew </option>
+								<option value="HI" <?php if (in_array( "HI",$details['Additionallanguage'])) echo "selected='selected'";?>> Hindi </option>
+								<option value="HO" <?php if (in_array( "HO",$details['Additionallanguage'])) echo "selected='selected'";?>> Hokkien </option>
+								<option value="HU" <?php if (in_array( "HU",$details['Additionallanguage'])) echo "selected='selected'";?>> Hungarian </option>
+								<option value="IND" <?php if (in_array( "IND",$details['Additionallanguage'])) echo "selected='selected'";?>> Indonesian </option>
+								<option value="IT" <?php if (in_array( "IT",$details['Additionallanguage'])) echo "selected='selected'";?>> Italian </option>
+								<option value="JP" <?php if (in_array( "JP",$details['Additionallanguage'])) echo "selected='selected'";?>> Japanese </option>
+								<option value="KO" <?php if (in_array( "KO",$details['Additionallanguage'])) echo "selected='selected'";?>> Korean </option>
+								<option value="LAT" <?php if (in_array( "LAT",$details['Additionallanguage'])) echo "selected='selected'";?>> Latvian </option>
+								<option value="LE" <?php if (in_array( "LE",$details['Additionallanguage'])) echo "selected='selected'";?>> Lebanese </option>
+								<option value="M" <?php if (in_array( "M",$details['Additionallanguage'])) echo "selected='selected'";?>> Marathi </option>
+								<option value="MA" <?php if (in_array( "MA",$details['Additionallanguage'])) echo "selected='selected'";?>> Macedonian </option>
+								<option value="MALT" <?php if (in_array( "MALT",$details['Additionallanguage'])) echo "selected='selected'";?>> Maltese </option>
+								<option value="MAN" <?php if (in_array( "MAN",$details['Additionallanguage'])) echo "selected='selected'";?>> Mandarin </option>
+								<option value="MAV" <?php if (in_array( "MAV",$details['Additionallanguage'])) echo "selected='selected'";?>> Mavathi </option>
+								<option value="ML" <?php if (in_array( "ML",$details['Additionallanguage'])) echo "selected='selected'";?>> Malay </option>
+								<option value="NOR" <?php if (in_array( "NOR",$details['Additionallanguage'])) echo "selected='selected'";?>> Norwegian </option>
+								<option value="POL" <?php if (in_array( "POL",$details['Additionallanguage'])) echo "selected='selected'";?>> Polish </option>
+								<option value="POR" <?php if (in_array( "POR",$details['Additionallanguage'])) echo "selected='selected'";?>> Portuguese </option>
+								<option value="PU" <?php if (in_array( "PU",$details['Additionallanguage'])) echo "selected='selected'";?>> Punjabi </option>
+								<option value="RU" <?php if (in_array( "RU",$details['Additionallanguage'])) echo "selected='selected'";?>> Russian </option>
+								<option value="S" <?php if (in_array( "S",$details['Additionallanguage'])) echo "selected='selected'";?>> Slovak </option>
+								<option value="SERB" <?php if (in_array( "SERB",$details['Additionallanguage'])) echo "selected='selected'";?>> Serbian </option>
+								<option value="SL" <?php if (in_array( "SL",$details['Additionallanguage'])) echo "selected='selected'";?>> Sign Language </option>
+								<option value="SP" <?php if (in_array( "SP",$details['Additionallanguage'])) echo "selected='selected'";?>> Spanish </option>
+								<option value="SW" <?php if (in_array( "SW",$details['Additionallanguage'])) echo "selected='selected'";?>> Swedish </option>
+								<option value="SWI" <?php if (in_array( "SWI",$details['Additionallanguage'])) echo "selected='selected'";?>> Swiss </option>
+								<option value="TA" <?php if (in_array( "TA",$details['Additionallanguage'])) echo "selected='selected'";?>> Tamil </option>
+								<option value="TAW" <?php if (in_array( "TAW",$details['Additionallanguage'])) echo "selected='selected'";?>> Taiwanese </option>
+								<option value="TE" <?php if (in_array( "TE",$details['Additionallanguage'])) echo "selected='selected'";?>> Teo-Chew </option>
+								<option value="TEL" <?php if (in_array( "TEL",$details['Additionallanguage'])) echo "selected='selected'";?>> Telugu </option>
+								<option value="TH" <?php if (in_array( "TH",$details['Additionallanguage'])) echo "selected='selected'";?>> Thai </option>
+								<option value="TURK" <?php if (in_array( "TURK",$details['Additionallanguage'])) echo "selected='selected'";?>> Turkish </option>
+								<option value="UK" <?php if (in_array( "UK",$details['Additionallanguage'])) echo "selected='selected'";?>> Ukrainian </option>
+								<option value="UR" <?php if (in_array( "UR",$details['Additionallanguage'])) echo "selected='selected'";?>> Urdu </option>
+								<option value="VI" <?php if (in_array( "VI",$details['Additionallanguage'])) echo "selected='selected'";?>> Vietnamese </option>
+								<option value="YI" <?php if (in_array( "YI",$details['Additionallanguage'])) echo "selected='selected'";?>> Yiddish </option>
+								<option value="YU" <?php if (in_array( "YU",$details['Additionallanguage'])) echo "selected='selected'";?>> Yugoslav </option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<label for="">Paid through</label>
+							<input type="text" class="form-control" name="PaythroughDate"  <?php if (!empty($details['PaythroughDate'])) {echo 'value="'.$details['PaythroughDate'].'"'; }?> readonly>
 						</div>
 					</div>
 				<!--
@@ -552,14 +644,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> <a class="deletecardbutton">delete selected card</a>
-							<div id="deleteCardWindow" style="display:none;">
-								<form action="your-details?action=delete" method="POST" id="deleteCardForm">
-									<h3>Are you sure you want to delete this card?</h3>
-									<input type="hidden" name="deleteID" id="deleteID" value="">
-									<input type="submit" value="Yes">
-									<a target="_self" class="cancelDeleteButton">No</a>
-								</form>
-							</div>
+						
 						</div>
 						<script type="text/javascript">
 						jQuery(document).ready(function($) {
@@ -579,49 +664,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</script>
 						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">  
 							<div class="paymentsideuse><input type="checkbox" id="anothercard"><label for="anothercard"><a  style="cursor: pointer; color:white;" id="addPaymentCard">Add a new card</a></label>
-								<div id="addPaymentCardForm" style="display:none;">
-									<form action="/your-details?action=addcard" method="POST" id="formaddcard">
-										<div class="row"><div class="col-lg-12">Add a new card:</div></div>
-										<div class="row">
-											<input type="hidden" name="addCard">
-											<div class="col-lg-12">
-												<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-													<option value="AE">American Express</option>
-													<option value="Visa">Visa</option>
-													<option value="Mastercard">Mastercard</option>
-												</select>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-12">
-											<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-12">
-												<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-lg-6">
-												<input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
-											</div>
-										</div>
-										<div class="row"> 
-											<div class="col-lg-6">
-												<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
-											</div>
-											<div class="col-lg-6">
-												<div class="tooltip">What is this?
-												<span class="tooltiptext"><img src="http://localhost/sites/default/files/MEDIA/CVV number.png" ></span>
-												</div>
-											</div>
-										</div>				 
-										<div class="row">
-											<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
-										</div>
-									</form>
-								</div>
+								
 							</div>
 						</div>
 						<div class="row">
@@ -629,55 +672,17 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 							<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">  
 								<div class="paymentsideuse><input type="checkbox" name="updatecard"><label for="updatecard"><a  style="cursor: pointer; color:white;" id="updatecard">update your card</a></label>
-									<div id="updateCardForm" style="display:none;">
-										<form action="/your-details?action=updatecard" method="POST" id="updatecard">
-											<div class="row"><div class="col-lg-12">Update your card:</div></div>
-											<input type="hidden" name="selectedCard">
-											<div class="row">
-												<div class="col-lg-6">
-													<input type="date" class="form-control"  name="Expirydate" placeholder="Expire date">
-												</div>
-											</div>
-											<div class="row"> 
-												<div class="col-lg-6">
-													<input type="text" class="form-control"  name="CVV" placeholder="CVV">
-												</div>
-												<div class="col-lg-6">
-													<div class="tooltip">What is this?
-													<span class="tooltiptext"><img src="http://localhost/sites/default/files/MEDIA/CVV number.png" ></span>
-													</div>
-												</div>
-											</div>				 
-											<div class="row">
-												<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
-											</div>
-										</form>
-									</div>
+									
 								</div>
 							</div>
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> 
 							<a  style="cursor: pointer; color:white;" id="rolloverButton">Change your roll over status</a>
-							<div id="rollOverWindow" style="display:none;">
-								<form action="your-details?action=rollover" method="POST" id="rollOverForm">
-									<h3>Are you sure you do want to change roll over status next year?</h3>
-									<input type="hidden" name="selectedCard">
-									<label for="rollover">Roll over</label><input type="checkbox" id="rollover" checked> 
-									<input type="submit" value="Yes">
-									<a target="_self" class="cancelDeleteButton">No</a>
-								</form>
-							</div>
+							
 						</div>
 						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> 
 							<a  style="cursor: pointer; color:white;" id="setCardButton">Set your main credit card</a>
-							<div id="setCardWindow" style="display:none;">
-								<form action="your-details?action=setCard" method="POST" id="setCardForm">
-									<h3>Are you sure you do want to set selected car as main creadit card</h3>
-									<input type="hidden" name="selectedCard">
-									<input type="submit" value="Yes">
-									<a target="_self" class="cancelDeleteButton">No</a>
-								</form>
-							</div>
+							
 						</div>
 					</div>
 					<div class="row payment-line">
@@ -812,9 +817,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				</script>
 				<div class="down3" style="display:none;">
 					<div class="row">
-					<div class="col-lg-12"> <label for="Findabuddy"><strong>NOTE:</strong>Please list my details in Find a Physio (visbile to other health professionals)</label>
-					<input type="checkbox" name="Findabuddy" id="Findabuddy" value="<?php  echo $details['Findabuddy'];?>" <?php if($details['Findabuddy']==1){echo "checked";} ?>>
-					</div>
+						<div class="col-lg-12"> <label for="Findpublicbuddy"><strong>NOTE:</strong>Please list my details in the public (visbile to other health professionals)</label>
+						<input type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="<?php  echo $details['Findpublicbuddy'];?>" <?php if($details['Findpublicbuddy']==1){echo "checked";} ?>>
+						</div>
 					</div> 
 					<ul class="nav nav-tabs" id="tabmenu">
 					<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
@@ -825,6 +830,11 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<div id="workplace<?php echo $key;?>" class='tab-pane fade  <?php if($key=='Workplace0') echo "in active ";?> '>
 						<div class="row"><div class="col-lg-6"></div><div class="col-lg-6"> <label for="Findphysio<?php echo $key;?>"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
 							<input type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" <?php if($details['Workplaces'][$key]['Findphysio']==1){echo "checked";} ?>></div>
+						</div>
+						<div class="row">
+							<div class="col-lg-12"> <label for="Findabuddy<?php echo $key;?>"><strong>NOTE:</strong>Please list my details in the physio</label>
+							<input type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findabuddy'];?>" <?php if($details['Workplaces'][$key]['Findabuddy']==1){echo "checked";} ?>>
+							</div>
 						</div>
 						<div class="row">
 							<div class="col-lg-12">
@@ -851,6 +861,30 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 									echo '<option value="'.$lines["code"].'"';
 									if ($details['Workplaces'][$key]['Workplace-setting'] == $lines["code"]){ echo "selected='selected'"; } 
 									echo '> '.$lines["name"].' </option>';
+								}
+								?>
+								</select>
+							</div>
+						</div>
+						
+						<div class="row"> 
+							<div class="col-lg-3">
+							Workplace treatment area:
+							</div>
+						</div>
+						<div class="row"> 
+							<div class="col-lg-6">
+								<select class="chosen-select" id="WTreatmentarea<?php echo $key;?>" name="WTreatmentarea<?php echo $key;?>" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+								<?php 
+								// get interest area from Aptify via webserice return Json data;
+								$interestAreas= GetAptifyData("37","request");
+								$_SESSION["interestAreas"] = $interestAreas;
+								?>
+								<?php 
+								foreach($interestAreas['InterestAreas']  as $lines){
+									echo '<option value="'.$lines["ListCode"].'"';
+									if (in_array( $lines["ListCode"],$details['Workplaces'][$key]['Treatmentarea'])){ echo "selected='selected'"; } 
+									echo '> '.$lines["ListName"].' </option>'; 
 								}
 								?>
 								</select>
@@ -1273,6 +1307,98 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0;">   <button  class="dashboard-button dashboard-bottom-button change-password-button"><span class="dashboard-button-name">Save</span></button></div>
 			</div>
 		</form>
+		<div id="addPaymentCardForm" style="display:none;">
+			<form action="/your-details?action=addcard" method="POST" id="formaddcard">
+				<div class="row"><div class="col-lg-12">Add a new card:</div></div>
+				<div class="row">
+					<input type="hidden" name="addCard">
+					<div class="col-lg-12">
+						<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
+							<option value="AE">American Express</option>
+							<option value="Visa">Visa</option>
+							<option value="Mastercard">Mastercard</option>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+					<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
+						<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col-lg-6">
+						<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+					</div>
+					<div class="col-lg-6">
+						<div class="tooltip">What is this?
+						<span class="tooltiptext"><img src="http://localhost/sites/default/files/MEDIA/CVV number.png" ></span>
+						</div>
+					</div>
+				</div>				 
+				<div class="row">
+					<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
+				</div>
+			</form>
+		</div>
+		<div id="rollOverWindow" style="display:none;">
+			<form action="your-details?action=rollover" method="POST" id="rollOverForm">
+				<h3>Are you sure you do want to change roll over status next year?</h3>
+				<input type="hidden" name="selectedCard">
+				<label for="rollover">Roll over</label><input type="checkbox" id="rollover" checked> 
+				<input type="submit" value="Yes">
+				<a target="_self" class="cancelDeleteButton">No</a>
+			</form>
+		</div>
+		<div id="deleteCardWindow" style="display:none;">
+			<form action="your-details?action=delete" method="POST" id="deleteCardForm">
+				<h3>Are you sure you want to delete this card?</h3>
+				<input type="hidden" name="deleteID" id="deleteID" value="">
+				<input type="submit" value="Yes">
+				<a target="_self" class="cancelDeleteButton">No</a>
+			</form>
+		</div>
+		<div id="setCardWindow" style="display:none;">
+			<form action="your-details?action=setCard" method="POST" id="setCardForm">
+				<h3>Are you sure you do want to set selected car as main creadit card</h3>
+				<input type="hidden" name="selectedCard">
+				<input type="submit" value="Yes">
+				<a target="_self" class="cancelDeleteButton">No</a>
+			</form>
+		</div>
+		<div id="updateCardForm" style="display:none;">
+			<form action="/your-details?action=updatecard" method="POST" id="updatecard">
+				<div class="row"><div class="col-lg-12">Update your card:</div></div>
+				<input type="hidden" name="selectedCard">
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="date" class="form-control"  name="Expirydate" placeholder="Expire date">
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col-lg-6">
+						<input type="text" class="form-control"  name="CVV" placeholder="CVV">
+					</div>
+					<div class="col-lg-6">
+						<div class="tooltip">What is this?
+						<span class="tooltiptext"><img src="http://localhost/sites/default/files/MEDIA/CVV number.png" ></span>
+						</div>
+					</div>
+				</div>				 
+				<div class="row">
+					<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
+				</div>
+			</form>
+	    </div>
 	</div>
 	</div>
 	</div>

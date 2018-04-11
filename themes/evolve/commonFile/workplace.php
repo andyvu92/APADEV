@@ -4,6 +4,8 @@ $sessionWorkplaceSetting = json_decode($_POST['sessionWorkplaceSetting']);
 $sessioninterestAreas = json_decode($_POST['sessioninterestAreas']);
 echo '<div class="row"><div class="col-lg-6">&nbsp;</div><div class="col-lg-6"> <label for="Findphysio'.$i.'"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
 <input type="checkbox" name="Findphysio'.$i.'" id="Findphysio'.$i.'" value="" ></div></div>
+<div class="row"><div class="col-lg-6">&nbsp;</div><div class="col-lg-6"> <label for="Findabuddy'.$i.'"><strong>NOTE:</strong>Please list my details in the physio</label>
+<input type="checkbox" name="Findabuddy'.$i.'" id="Findabuddy'.$i.'" value="" ></div></div>
 <div class="row">
 <div class="col-lg-12">
 <label for="Name-of-workplace'.$i.'">Name of workplace</label>
@@ -215,7 +217,7 @@ Numbers of hours worked
 Your special interest area:
 </div>
 <div class="col-lg-9">
-<select class="chosen-select" id="interest-area'.$i.'" name="interest-area'.$i.'[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">';
+<select class="chosen-select" id="WTreatmentarea'.$i.'" name="WTreatmentarea'.$i.'[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">';
   	$interestAreas= $sessioninterestAreas;
 	foreach($interestAreas->InterestAreas  as $key => $value){
 		echo '<option value="'.$value->ListCode.'">'.$value->ListName.'</option>';
