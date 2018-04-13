@@ -181,12 +181,14 @@ jQuery(document).ready(function($) {
 		if($('#p1-2').is(":checked"))
 		{
 			$('#rolloverblock').removeClass("display-none");
+			$('#Installpayment-frequency').val("monthly");
 		}
 				 
     });
 	$('#p1-1').click(function(){
 		if($(this).is(":checked")){
 			$('#rolloverblock').addClass("display-none");
+			$('#Installpayment-frequency').val("annualy");
 		}
 	});
 	$('input[type="checkbox"]').click(function(){
@@ -432,9 +434,11 @@ jQuery(document).ready(function($) {
 		}
 	}); 
 	$('.add-additional-qualification').click(function(){
+		$('#dashboard-right-content').addClass("autoscroll");
         var number = Number($('#addtionalNumber').val());
-        $('div[id="additional-qualifications-block"]').append('<input type="text" class="form-control" name="Additional-qualifications'+ number +'" id="Additional-qualifications'+ number +'">');
-     	var i = Number(number +1);
+		$('div[id="additional-qualifications-block"]').append('<div id="additional'+ number +'"></div>');
+		$("#additional"+ number ).load("sites/all/themes/evolve/commonFile/education.php", {"count":number});
+        var i = Number(number +1);
 		$('input[name=addtionalNumber]').val(i);
     });
 	//$( "#datepicker" ).datepicker({dateFormat: 'yy'});

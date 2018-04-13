@@ -73,6 +73,7 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Findpublicbuddy'])){ $postData['Findpublicbuddy'] = $_POST['Findpublicbuddy']; } else{ $postData['Findpublicbuddy'] = 0;}
 	if(isset($_POST['wpnumber'])){ 
 	$num = $_POST['wpnumber']; 
+	$tempWork = array();
 	for($i=0; $i<$num; $i++){
 		$workplaceArray = array();
 		if(isset($_POST['Findabuddy'.$i])) { $workplaceArray['Findabuddy'] = $_POST['Findabuddy'.$i];}else{ $workplaceArray['Findabuddy'] = "0";}
@@ -102,9 +103,9 @@ if(isset($_POST['step1'])) {
 		if(isset($_POST['MobilePhysio'.$i])) { $workplaceArray['MobilePhysio'] = $_POST['MobilePhysio'.$i];}
 		if(isset($_POST['Number-worked-hours'.$i])) { $workplaceArray['Number-worked-hours'] = $_POST['Number-worked-hours'.$i];}
 		if(isset($_POST['interest-area'.$i])) { $workplaceArray['Interest-area'] = $_POST['interest-area'.$i];}
-		array_push($postData, $workplaceArray);
+		array_push($tempWork, $workplaceArray);
 	}
-
+		$postData['Workplaces'] =  $tempWork ;
 	}
 	if(isset($_POST['Udegree'])){ $postData['Udegree'] = $_POST['Udegree']; }
 	if(isset($_POST['Undergraduate-university-name'])){ $postData['Undergraduate-university-name'] = $_POST['Undergraduate-university-name']; }
@@ -117,16 +118,19 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Pgraduate-country'])){ $postData['Pgraduate-country'] = $_POST['Pgraduate-country']; }
 	if(isset($_POST['Pgraduate-year-attained'])){ $postData['Pgraduate-year-attained'] = $_POST['Pgraduate-year-attained']; }
 	if(isset($_POST['addtionalNumber'])){
-	$n =  $_POST['addtionalNumber'];
-	$qArray = array();
-	for($j=0; $j<$n; $j++){
-		if(isset($_POST['Additional-qualifications'.$j])) { 
-		array_push($qArray, $_POST['Additional-qualifications'.$j]);
-		}			
+		$n =  $_POST['addtionalNumber'];
+		$temp = array();
+		for($j=0; $j<$n; $j++){
+			$additionalQualifications = array();
+			if(isset($_POST['degree'.$j])) { $additionalQualifications['degree'] = $_POST['degree'.$j];}
+			if(isset($_POST['university-name'.$j])) { $additionalQualifications['university-name'] = $_POST['university-name'.$j];}
+			if(isset($_POST['additional-country'.$j])) { $additionalQualifications['additional-country'] = $_POST['additional-country'.$j];}
+			if(isset($_POST['additional-year-attained'.$j])) { $additionalQualifications['additional-year-attained'] = $_POST['additional-year-attained'.$j];}
+			array_push($temp , $additionalQualifications);
+		}
+		$postData['Additional-qualifications'] =  $temp ;
 	}
-	$postData['Additional-qualifications'] = $qArray;
-	}
-    // 2.2.4 - Dashboard - Get member detail
+    // 2.2.5 - Dashboard - update member detail
 	// Send - 
 	// UserID 
 	// Response - UserID & detail data
@@ -182,7 +186,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 ?>
 <form id="your-detail-form" action="renewmymembership" method="POST">
 	<input type="hidden" name="step1" value="1"/>
-		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
+		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_GET['goI']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding ">
 				<div class="row">
 					<div class="col-lg-3">
@@ -1085,14 +1089,94 @@ jQuery(document).ready(function($) {
 			<div class="row">
 				<div class="col-lg-6">
 					<label for="Additional-qualifications">Additional qualifications<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a></label>
-					<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  $addtionalNumber =  sizeof($details['Additional-qualifications']); echo  $addtionalNumber; ?>"/>
-					<div id="additional-qualifications-block">
-					<?php foreach( $details['Additional-qualifications'] as $key => $value ): ?>
-					<input type="text" class="form-control" name="Additional-qualifications<?php echo $key;?>" id="Additional-qualifications<?php echo $key;?>" value="<?php echo $value;?>">
-					<?php endforeach;?>
-					</div>
+					<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  $addtionalNumber =  sizeof($details['Additional-qualifications']); echo  $addtionalNumber; ?>"/>			
 				</div>
 			</div>
+			<div id="additional-qualifications-block">
+				<?php foreach($details['Additional-qualifications'] as $key => $value) :?>
+					<div id="additional<?php echo $key;?>">
+						<div class="row">
+							<div class="col-lg-6">
+								<label for="degree<?php echo $key;?>">Degree<span class="tipstyle">*</span></label>
+								<select name="degree<?php echo $key;?>" id="degree<?php echo $key;?>">
+									<option <?php if (empty($details['Additional-qualifications'][$key]['degree'])) echo "selected='selected'";?> selected disabled>(None)</option>
+									<option value="1" <?php if ($details['Additional-qualifications'][$key]['degree'] == "1") echo "selected='selected'";?>>Bachelor of Physiotherapy</option>
+									<option value="2" <?php if ($details['Additional-qualifications'][$key]['degree'] == "2") echo "selected='selected'";?>>Bachelor of Physiotherapy (Hons)</option>
+									<option value="3" <?php if ($details['Additional-qualifications'][$key]['degree'] == "3") echo "selected='selected'";?>>Bachelor of Physiotherapy (Honours)</option>
+									<option value="4" <?php if ($details['Additional-qualifications'][$key]['degree'] == "4") echo "selected='selected'";?>>Bachelor of Science (Physiotherapy)</option>
+									<option value="5" <?php if ($details['Additional-qualifications'][$key]['degree'] == "5") echo "selected='selected'";?>>Bachelor of Science (Physiotherapy) (Honours)</option>
+									<option value="6" <?php if ($details['Additional-qualifications'][$key]['degree'] == "6") echo "selected='selected'";?>>Bachelor of Applied Science and Master of Physiotherapy Practice</option>
+									<option value="7" <?php if ($details['Additional-qualifications'][$key]['degree'] == "7") echo "selected='selected'";?>>Bachelor of Applied Science (Physiotherapy)</option>
+									<option value="8" <?php if ($details['Additional-qualifications'][$key]['degree'] == "8") echo "selected='selected'";?>>Bachelor of Applied Science (Physiotherapy) (Honours)</option>
+									<option value="Other" <?php if ($details['Additional-qualifications'][$key]['degree'] == "Other") echo "selected='selected'";?>>Other</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<label for="university-name<?php echo $key;?>">University name<span class="tipstyle">*</span></label>
+								<select name="university-name<?php echo $key;?>" id="university-name<?php echo $key;?>">
+									<option <?php if (empty($details['Additional-qualifications'][$key]['university-name'])) echo "selected='selected'";?> selected disabled>(None)</option>
+									<option value="ACU" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "ACU") echo "selected='selected'";?>>Australian Catholic University - NSW</option>
+									<option value="ACUQ" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "ACUQ") echo "selected='selected'";?>>Australian Catholic University - QLD</option>
+									<option value="ACUB" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "ACUB") echo "selected='selected'";?>>Australlian Catholic University - Ballarat</option>
+									<option value="BON" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "BON") echo "selected='selected'";?>>Bond University - QLD</option>
+									<option value="CU" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CU") echo "selected='selected'";?>>Canberra University</option>
+									<option value="CQU" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CQU") echo "selected='selected'";?>>Central Qld University</option>
+									<option value="CSU" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CSU") echo "selected='selected'";?>>Charles Sturt University - Albury NSW</option>
+									<option value="CSUO" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CSUO") echo "selected='selected'";?>>Charles Sturt University - Orange NSW</option>
+									<option value="CSUP" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CSUP") echo "selected='selected'";?>>Charles Sturt University Port Macquarie</option>
+									<option value="CUMB" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CUMB") echo "selected='selected'";?>>Cumberland University - NSW</option>
+									<option value="CUR" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CUR") echo "selected='selected'";?>>Curtin University - WA</option>
+									<option value="ECU" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "ECU") echo "selected='selected'";?>>Edith Cowan University - WA</option>
+									<option value="FLIN" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "FLIN") echo "selected='selected'";?>>Flinders University SA</option>
+									<option value="GRIF" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "GRIF") echo "selected='selected'";?>>Griffith University - Gold coast QLD</option>
+									<option value="JCU" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "JCU") echo "selected='selected'";?>>James Cook University - QLD</option>
+									<option value="LAT" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "ACUQ") echo "selected='selected'";?>>Latrobe University - Bundoora VIC</option>
+									<option value="LATB" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "LATB") echo "selected='selected'";?>>Latrobe Universtiy - Bendigo VIC</option>
+									<option value="LIN" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "LIN") echo "selected='selected'";?>>Lincoln Institute - VIC</option>
+									<option value="MACQ" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "MACQ") echo "selected='selected'";?>>Macquarie University - NSW</option>
+									<option value="MON" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "MON") echo "selected='selected'";?>>Monash University - Vic</option>
+									<option value="UA" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UA") echo "selected='selected'";?>>University of Adelaide</option>
+									<option value="UM" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UM") echo "selected='selected'";?>>University of Melbourne - Vic</option>
+									<option value="UNC" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UNC") echo "selected='selected'";?>>University of Newcastle - NSW</option>
+									<option value="UND" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UND") echo "selected='selected'";?>>University of Notre Dam - WA</option>
+									<option value="UQ" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UQ") echo "selected='selected'";?>>University of Qld</option>
+									<option value="USA" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "USA") echo "selected='selected'";?>>University of South Australia</option>
+									<option value="US" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "US") echo "selected='selected'";?>>University of Sydney - NSW</option>
+									<option value="UTS" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UTS") echo "selected='selected'";?>>University of Technology Sydney</option>
+									<option value="UWA" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UWA") echo "selected='selected'";?>>University of Western Australia</option>
+									<option value="UWS" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UWS") echo "selected='selected'";?>>University of Western Sydney- NSW</option>
+									<option value="WAIT" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "WAIT") echo "selected='selected'";?>>Western Australian Institute of Technology</option>
+									<option value="Other" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "Other") echo "selected='selected'";?>>Other</option>
+								</select>
+								<input type="text" class="form-control display-none" name="Undergraduate-university-name-other<?php echo $key;?>" id="Undergraduate-university-name-other<?php echo $key;?>">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-4">
+								<label for="additional-country<?php echo $key;?>">Country<span class="tipstyle">*</span></label>
+								<input type="text" class="form-control" name="additional-country<?php echo $key;?>" id="additional-country<?php echo $key;?>" value="<?php echo $details['Additional-qualifications'][$key]['additional-country']; ?>">
+							</div>
+							<div class="col-lg-2">
+								<label for="additional-year-attained<?php echo $key;?>">Year attained<span class="tipstyle">*</span></label>
+								<select class="form-control" name="additional-year-attained<?php echo $key;?>" id="additional-year-attained<?php echo $key;?>">
+								<?php 
+								$y = date("Y") + 15; 
+								for ($i=1940; $i<= $y; $i++){
+								echo '<option value="'.$i.'"';
+								if ($details['Additional-qualifications'][$key]['additional-year-attained'] == $i){
+								echo 'selected="selected"';
+								}
+								echo '>'.$i.'</option>';
+								}
+								?>
+								</select>
+							</div>
+						</div>
+					</div>
+				<?php endforeach;?>
+				</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
 		</div>
 </form>   

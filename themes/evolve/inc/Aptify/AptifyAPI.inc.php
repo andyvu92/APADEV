@@ -134,10 +134,20 @@ function AptifyAPI($APItype, $variables){
 				   "Postgraduate-university-name":"CUR",
 				   "Pgraduate-country":"Australia",
 				   "Pgraduate-year-attained":"2001",
-				   "Additional-qualifications": [
-						"qualification 1",
-						"qualification 2"
-					],
+				   "Additional-qualifications": {
+					"0":{
+						"degree":"3",
+						"university-name": "CUR",
+						"additional-country":"Australia",
+						"additional-year-attained":"2015"
+					    },
+					"1":{
+						"degree":"2",
+						"university-name": "CUR",
+						"additional-country":"Australia",
+						"additional-year-attained":"2018"
+					    }
+ 				    },
 					
 				   "Workplaces":{  
 					"0": {  
@@ -515,15 +525,15 @@ function AptifyAPI($APItype, $variables){
 				    "Rollover": "1"
 				}';
 			}
-			if(isset($variables["Creditcard-ID"]) && isset($variables["Expiry-date"]) && isset($variables["CVV"])){
-				$JSONreturn =  '{ 
-			        "userID":"1",
-					"Creditcard-ID":"1",
-					"Expiry-date":"12-12-2020",
-					"CVV":"333",
-				    "Rollover": "1"
-				}';
-			}
+			//if(isset($variables["Creditcard-ID"]) && isset($variables["Expiry-date"]) && isset($variables["CVV"])){
+				//$JSONreturn =  '{ 
+			        //"userID":"1",
+					//"Creditcard-ID":"1",
+					//"Expiry-date":"12-12-2020",
+					//"CVV":"333",
+				   // "Rollover": "1"
+				//}';
+			//}
 			if(isset($variables["Creditcard-ID"])){
 				$JSONreturn =  '{ 
 			        "userID":"1",

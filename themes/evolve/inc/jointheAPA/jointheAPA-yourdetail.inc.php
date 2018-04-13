@@ -77,6 +77,7 @@ if(isset($_POST['step1'])) {
 	//Process workplace data
 	if(isset($_POST['wpnumber'])){ 
 	$num = $_POST['wpnumber']; 
+	$tempWork = array();
 		for($i=0; $i<$num; $i++){
 			$workplaceArray = array();
 			if(isset($_POST['Findphysio'.$i])) { $workplaceArray['Findphysio'] = $_POST['Findphysio'.$i];}else{ $workplaceArray['Findphysio'] = "0";}
@@ -105,9 +106,9 @@ if(isset($_POST['step1'])) {
 			if(isset($_POST['Homehospital'.$i])) { $workplaceArray['Homehospital'] = $_POST['Homehospital'.$i];}
 			if(isset($_POST['MobilePhysio'.$i])) { $workplaceArray['MobilePhysio'] = $_POST['MobilePhysio'.$i];}
 			if(isset($_POST['Number-worked-hours'.$i])) { $workplaceArray['Number-worked-hours'] = $_POST['Number-worked-hours'.$i];}
-			array_push($postData, $workplaceArray);
+			array_push($tempWork, $workplaceArray);
 		}
-
+		$postData['Workplaces'] =  $tempWork ;
 	}
 	   if(isset($_POST['Udegree'])){ $postData['Udegree'] = $_POST['Udegree']; }
 	   if(isset($_POST['Undergraduate-university-name'])){ $postData['Undergraduate-university-name'] = $_POST['Undergraduate-university-name']; }
@@ -120,15 +121,18 @@ if(isset($_POST['step1'])) {
 	   if(isset($_POST['Pgraduate-country'])){ $postData['Pgraduate-country'] = $_POST['Pgraduate-country']; }
 	   if(isset($_POST['Pgraduate-year-attained'])){ $postData['Pgraduate-year-attained'] = $_POST['Pgraduate-year-attained']; }
 	   if(isset($_POST['addtionalNumber'])){
-		$n =  $_POST['addtionalNumber'];
-		$qArray = array();
-        for($j=0; $j<$n; $j++){
-			if(isset($_POST['Additional-qualifications'.$j])) { 
-			array_push($qArray, $_POST['Additional-qualifications'.$j]);
-			}			
-	    }
-		$postData['Additional-qualifications'] = $qArray;
-	   }
+			$n =  $_POST['addtionalNumber'];
+			$temp = array();
+			for($j=0; $j<$n; $j++){
+				$additionalQualifications = array();
+				if(isset($_POST['degree'.$j])) { $additionalQualifications['degree'] = $_POST['degree'.$j];}
+				if(isset($_POST['university-name'.$j])) { $additionalQualifications['university-name'] = $_POST['university-name'.$j];}
+				if(isset($_POST['additional-country'.$j])) { $additionalQualifications['additional-country'] = $_POST['additional-country'.$j];}
+				if(isset($_POST['additional-year-attained'.$j])) { $additionalQualifications['additional-year-attained'] = $_POST['additional-year-attained'.$j];}
+				array_push($temp , $additionalQualifications);
+			}
+			$postData['Additional-qualifications'] =  $temp ;
+		}
 // 2.2.5 - Member detail - Update
 // Send - 
 // UserID & detail data
@@ -182,7 +186,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
  ?>
 <form id="your-detail-form" action="jointheapa" method="POST">
     <input type="hidden" name="step1" value="1"/>
-        <div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
+        <div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2'])|| isset($_POST['step2-1'])|| isset($_GET['goI']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 none-padding">
                 <div class="row">
                     <div class="col-lg-3">
@@ -1052,12 +1056,86 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 			    <div class="col-lg-6">
 					<label for="Additional-qualifications">Additional qualifications<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a></label>
 					<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  $addtionalNumber =  1; echo  $addtionalNumber; ?>"/>
-				<div id="additional-qualifications-block">
-					<input type="text" class="form-control" name="Additional-qualifications0" id="Additional-qualifications0">
 				</div>
-			    </div>
+			</div>
+				<div id="additional-qualifications-block">
+					<div class="row">
+						<div class="col-lg-6">
+							<label for="degree0">Degree<span class="tipstyle">*</span></label>
+							<select name="degree0" id="degree0">
+								<option selected="selected" value="">(None)</option>
+								<option value="1">Bachelor of Physiotherapy</option>
+								<option value="2">Bachelor of Physiotherapy (Hons)</option>
+								<option value="3">Bachelor of Physiotherapy (Honours)</option>
+								<option value="4">Bachelor of Science (Physiotherapy)</option>
+								<option value="5">Bachelor of Science (Physiotherapy) (Honours)</option>
+								<option value="6">Bachelor of Applied Science and Master of Physiotherapy Practice</option>
+								<option value="7">Bachelor of Applied Science (Physiotherapy)</option>
+								<option value="8">Bachelor of Applied Science (Physiotherapy) (Honours)</option>
+								<option value="Other">Other</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<label for="university-name0">University name<span class="tipstyle">*</span></label>
+							<select name="university-name0" id="university-name0">
+								<option selected="selected" value="">(None)</option>
+								<option value="ACU">Australian Catholic University - NSW</option>
+								<option value="ACUQ">Australian Catholic University - QLD</option>
+								<option value="ACUB">Australlian Catholic University - Ballarat</option>
+								<option value="BON">Bond University - QLD</option>
+								<option value="CU">Canberra University</option>
+								<option value="CQU">Central Qld University</option>
+								<option value="CSU">Charles Sturt University - Albury NSW</option>
+								<option value="CSUO">Charles Sturt University - Orange NSW</option>
+								<option value="CSUP">Charles Sturt University Port Macquarie</option>
+								<option value="CUMB">Cumberland University - NSW</option>
+								<option value="CUR">Curtin University - WA</option>
+								<option value="ECU">Edith Cowan University - WA</option>
+								<option value="FLIN">Flinders University SA</option>
+								<option value="GRIF">Griffith University - Gold coast QLD</option>
+								<option value="JCU">James Cook University - QLD</option>
+								<option value="LAT">Latrobe University - Bundoora VIC</option>
+								<option value="LATB">Latrobe Universtiy - Bendigo VIC</option>
+								<option value="LIN">Lincoln Institute - VIC</option>
+								<option value="MACQ">Macquarie University - NSW</option>
+								<option value="MON">Monash University - Vic</option>
+								<option value="UA">University of Adelaide</option>
+								<option value="UM">University of Melbourne - Vic</option>
+								<option value="UNC">University of Newcastle - NSW</option>
+								<option value="UND">University of Notre Dam - WA</option>
+								<option value="UQ">University of Qld</option>
+								<option value="USA">University of South Australia</option>
+								<option value="US">University of Sydney - NSW</option>
+								<option value="UTS">University of Technology Sydney</option>
+								<option value="UWA">University of Western Australia</option>
+								<option value="UWS">University of Western Sydney- NSW</option>
+								<option value="WAIT">Western Australian Institute of Technology</option>
+								<option value="Other">Other</option>
+							</select>
+							<input type="text" class="form-control display-none" name="Undergraduate-university-name-other" id="Undergraduate-university-name-other">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
+							<label for="additional-country0">Country<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="additional-country0" id="additional-country0">
+						</div>
+						<div class="col-lg-2">
+							<label for="additional-year-attained0">Year attained<span class="tipstyle">*</span></label>
+							<select class="form-control" name="additional-year-attained0" id="additional-year-attained0">
+							<?php 
+							$y = date("Y"); 
+							for ($i=1940; $i<= $y; $i++){
+							echo '<option value="'.$i.'">'.$i.'</option>';  
+							}
+							?>
+							</select>
+						</div>
+					</div>
+				</div>
 			
-		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
         </div>
                
@@ -1950,12 +2028,86 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						</select>
 					</div>
 				</div>
-				<div class="row">
+			   <div class="row">
 					<div class="col-lg-6">
 						<label for="Additional-qualifications">Additional qualifications<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a></label>
 						<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  $addtionalNumber =  1; echo  $addtionalNumber; ?>"/>
-						<div id="additional-qualifications-block">
-						<input type="text" class="form-control" name="Additional-qualifications0" id="Additional-qualifications0">
+					</div>
+				</div>
+				<div id="additional-qualifications-block0">
+					<div class="row">
+						<div class="col-lg-6">
+							<label for="degree0">Degree<span class="tipstyle">*</span></label>
+							<select name="degree0" id="degree0">
+								<option selected="selected" value="">(None)</option>
+								<option value="1">Bachelor of Physiotherapy</option>
+								<option value="2">Bachelor of Physiotherapy (Hons)</option>
+								<option value="3">Bachelor of Physiotherapy (Honours)</option>
+								<option value="4">Bachelor of Science (Physiotherapy)</option>
+								<option value="5">Bachelor of Science (Physiotherapy) (Honours)</option>
+								<option value="6">Bachelor of Applied Science and Master of Physiotherapy Practice</option>
+								<option value="7">Bachelor of Applied Science (Physiotherapy)</option>
+								<option value="8">Bachelor of Applied Science (Physiotherapy) (Honours)</option>
+								<option value="Other">Other</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<label for="university-name0">University name<span class="tipstyle">*</span></label>
+							<select name="university-name0" id="university-name0">
+								<option selected="selected" value="">(None)</option>
+								<option value="ACU">Australian Catholic University - NSW</option>
+								<option value="ACUQ">Australian Catholic University - QLD</option>
+								<option value="ACUB">Australlian Catholic University - Ballarat</option>
+								<option value="BON">Bond University - QLD</option>
+								<option value="CU">Canberra University</option>
+								<option value="CQU">Central Qld University</option>
+								<option value="CSU">Charles Sturt University - Albury NSW</option>
+								<option value="CSUO">Charles Sturt University - Orange NSW</option>
+								<option value="CSUP">Charles Sturt University Port Macquarie</option>
+								<option value="CUMB">Cumberland University - NSW</option>
+								<option value="CUR">Curtin University - WA</option>
+								<option value="ECU">Edith Cowan University - WA</option>
+								<option value="FLIN">Flinders University SA</option>
+								<option value="GRIF">Griffith University - Gold coast QLD</option>
+								<option value="JCU">James Cook University - QLD</option>
+								<option value="LAT">Latrobe University - Bundoora VIC</option>
+								<option value="LATB">Latrobe Universtiy - Bendigo VIC</option>
+								<option value="LIN">Lincoln Institute - VIC</option>
+								<option value="MACQ">Macquarie University - NSW</option>
+								<option value="MON">Monash University - Vic</option>
+								<option value="UA">University of Adelaide</option>
+								<option value="UM">University of Melbourne - Vic</option>
+								<option value="UNC">University of Newcastle - NSW</option>
+								<option value="UND">University of Notre Dam - WA</option>
+								<option value="UQ">University of Qld</option>
+								<option value="USA">University of South Australia</option>
+								<option value="US">University of Sydney - NSW</option>
+								<option value="UTS">University of Technology Sydney</option>
+								<option value="UWA">University of Western Australia</option>
+								<option value="UWS">University of Western Sydney- NSW</option>
+								<option value="WAIT">Western Australian Institute of Technology</option>
+								<option value="Other">Other</option>
+							</select>
+							<input type="text" class="form-control display-none" name="Undergraduate-university-name-other" id="Undergraduate-university-name-other">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
+							<label for="additional-country0">Country<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="additional-country0" id="additional-country0">
+						</div>
+						<div class="col-lg-2">
+							<label for="additional-year-attained0">Year attained<span class="tipstyle">*</span></label>
+							<select class="form-control" name="additional-year-attained0" id="additional-year-attained0">
+							<?php 
+							$y = date("Y"); 
+							for ($i=1940; $i<= $y; $i++){
+							echo '<option value="'.$i.'">'.$i.'</option>';  
+							}
+							?>
+							</select>
 						</div>
 					</div>
 				</div>
