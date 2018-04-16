@@ -222,13 +222,14 @@ jQuery(document).ready(function($) {
         var i = Number($(this).attr("class").replace('your-details-prevbutton', ''));
 		var x = Number(i - 1);
 		if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
+		//if(x==5){ $.post( "http://localhost/jointheapa", { goI: "1"});}
 	    $('[class^=down]:not(.down'+x+')').slideUp(400);
 	    $('.down' + x).slideToggle(450);
 		$('[class^=tabtitle]:not(.tabtitle'+x+') span').removeClass("text-underline");
 		$('[class^=event]:not(.event'+x+') span').removeClass("text-underline");
 		var eventtitle = "eventtitle"+x;
 		$("span." + eventtitle).addClass("text-underline");
-          		
+        		
 	});
 	
 });

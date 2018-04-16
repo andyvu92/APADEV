@@ -227,7 +227,12 @@ jQuery(document).ready(function($) {
 	
 	$('[id^=label]').click(function() {
 		var i = $(this).attr("id").replace('label', '');
-		$('#question'+ i).removeClass("display-none");
+		if(i!=="0"){$('#question'+ i).removeClass("display-none");}
+		else if(i === "0"){ n = $(this).attr("class").replace('optionLabel', '');
+		var anstr = "Answer" + n;
+		var choseType = $("#"+anstr).val();
+		$('#memberTypeBlock').html(choseType);
+		}
 		   
 	});
 	$('[id^=question]').click(function() {

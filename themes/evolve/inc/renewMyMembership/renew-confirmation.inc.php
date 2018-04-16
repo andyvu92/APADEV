@@ -3,7 +3,8 @@ if(isset($_POST['step3'])) {
 	//continue to get the review data
 	$postReviewData = $_SESSION['postReviewData'];
 	if(isset($_POST['Paymentcardvalue'])){ $postReviewData['Card_number'] = $_POST['Paymentcardvalue']; }
-	if(isset($_POST['rollover'])){ $postReviewData['Rollover'] = $_POST['rollover']; }
+	//if(isset($_POST['rollover'])){ $postReviewData['Rollover'] = $_POST['rollover']; }
+	//if(isset($_POST['Installpayment-frequency'])){ $postReviewData['Installpayment-frequency'] = $_POST['Installpayment-frequency']; }
 	$postReviewData['Termsandconditions'] = "1";
 	// 2.2.27 - Renew a membership order
 	// Send - 

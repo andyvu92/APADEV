@@ -20,7 +20,7 @@ $userID = $_SESSION['userID'];
 				<label> <input type="radio" name="background" value="2"  id="background2"><img src="../sites/default/files/DASHBOARD_PIC_1170X600_2.jpg"></label>
 				<label> <input type="radio" name="background" value="3"  id="background3"><img src="../sites/default/files/DASHBOARD_PIC_1170X600_3.jpg"></label>
 				<label> <input type="radio" name="background" value="4"  id="background4"><img src="../sites/default/files/DASHBOARD_PIC_1170X600_4.jpg"></label>
-				<label> <input type="radio" name="background" value="5"  id="background4"><img src="../sites/default/files/DASHBOARD_PIC_1170X600_5.jpg"></label>
+				<label> <input type="radio" name="background" value="5"  id="background5"><img src="../sites/default/files/DASHBOARD_PIC_1170X600_5.jpg"></label>
 		</div>
 				<div class="modal-footer">
 				<button type="Submit" class="btn btn-default" id="background_save">Save</button>

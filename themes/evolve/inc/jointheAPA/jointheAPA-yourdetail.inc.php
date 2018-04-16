@@ -69,16 +69,22 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Ahpranumber'])){ $postData['Ahpranumber'] = $_POST['Ahpranumber']; }
 	if(isset($_POST['Nationalgp'])){ $postData['Nationalgp'] = $_POST['Nationalgp']; }
 	if(isset($_POST['Branch'])){ $postData['Branch'] = $_POST['Branch']; }
+	if(isset($_SESSION['Regional-group'])){ $postData['Regional-group'] = $_SESSION['Regional-group']; } else{ $postData['Regional-group'] ="";}
 	if(isset($_POST['SpecialInterest'])){ $postData['SpecialInterest'] = $_POST['SpecialInterest']; }
-	if(isset($_POST['Findabuddy'])){ $postData['Findabuddy'] = $_POST['Findabuddy']; }
+	if(isset($_POST['Treatmentarea'])){ $postData['Treatmentarea'] = $_POST['Treatmentarea']; }
+	if(isset($_POST['MAdditionallanguage'])){ $postData['Additionallanguage'] = $_POST['MAdditionallanguage']; }
+	if(isset($_POST['Findpublicbuddy'])){ $postData['Findpublicbuddy'] = $_POST['Findpublicbuddy']; }else{ $postData['Findpublicbuddy'] = 0;}
 	//Process workplace data
 	if(isset($_POST['wpnumber'])){ 
 	$num = $_POST['wpnumber']; 
+	$tempWork = array();
 		for($i=0; $i<$num; $i++){
 			$workplaceArray = array();
-			if(isset($_POST['Findphysio'.$i])) { $workplaceArray['Findphysio'] = $_POST['Findphysio'.$i];}
+			if(isset($_POST['Findphysio'.$i])) { $workplaceArray['Findphysio'] = $_POST['Findphysio'.$i];}else{ $workplaceArray['Findphysio'] = "0";}
+			if(isset($_POST['Findabuddy'.$i])) { $workplaceArray['Findabuddy'] = $_POST['Findabuddy'.$i];}else{ $workplaceArray['Findabuddy'] = "0";}
 			if(isset($_POST['Name-of-workplace'.$i])) { $workplaceArray['Name-of-workplace'] = $_POST['Name-of-workplace'.$i];}
 			if(isset($_POST['Workplace-setting'.$i])) { $workplaceArray['Workplace-setting'] = $_POST['Workplace-setting'.$i];}
+			if(isset($_POST['WTreatmentarea'.$i])){ $workplaceArray['Treatmentarea'] = $_POST['WTreatmentarea'.$i]; }
 			if(isset($_POST['WBuildingName'.$i])) { $workplaceArray['WBuildingName'] = $_POST['WBuildingName'.$i];}
 			if(isset($_POST['WAddress_Line_1'.$i])) { $workplaceArray['Address_Line_1'] = $_POST['WAddress_Line_1'.$i];}
 			if(isset($_POST['WAddress_Line_2'.$i])) { $workplaceArray['Address_Line_2'] = $_POST['WAddress_Line_2'.$i];}
@@ -100,10 +106,9 @@ if(isset($_POST['step1'])) {
 			if(isset($_POST['Homehospital'.$i])) { $workplaceArray['Homehospital'] = $_POST['Homehospital'.$i];}
 			if(isset($_POST['MobilePhysio'.$i])) { $workplaceArray['MobilePhysio'] = $_POST['MobilePhysio'.$i];}
 			if(isset($_POST['Number-worked-hours'.$i])) { $workplaceArray['Number-worked-hours'] = $_POST['Number-worked-hours'.$i];}
-			if(isset($_POST['interest-area'.$i])) { $workplaceArray['Interest-area'] = $_POST['interest-area'.$i];}
-			array_push($postData, $workplaceArray);
+			array_push($tempWork, $workplaceArray);
 		}
-
+		$postData['Workplaces'] =  $tempWork ;
 	}
 	   if(isset($_POST['Udegree'])){ $postData['Udegree'] = $_POST['Udegree']; }
 	   if(isset($_POST['Undergraduate-university-name'])){ $postData['Undergraduate-university-name'] = $_POST['Undergraduate-university-name']; }
@@ -116,20 +121,24 @@ if(isset($_POST['step1'])) {
 	   if(isset($_POST['Pgraduate-country'])){ $postData['Pgraduate-country'] = $_POST['Pgraduate-country']; }
 	   if(isset($_POST['Pgraduate-year-attained'])){ $postData['Pgraduate-year-attained'] = $_POST['Pgraduate-year-attained']; }
 	   if(isset($_POST['addtionalNumber'])){
-		$n =  $_POST['addtionalNumber'];
-		$qArray = array();
-        for($j=0; $j<$n; $j++){
-			if(isset($_POST['Additional-qualifications'.$j])) { 
-			array_push($qArray, $_POST['Additional-qualifications'.$j]);
-			}			
-	    }
-		$postData['Additional-qualifications'] = $qArray;
-	   }
+			$n =  $_POST['addtionalNumber'];
+			$temp = array();
+			for($j=0; $j<$n; $j++){
+				$additionalQualifications = array();
+				if(isset($_POST['degree'.$j])) { $additionalQualifications['degree'] = $_POST['degree'.$j];}
+				if(isset($_POST['university-name'.$j])) { $additionalQualifications['university-name'] = $_POST['university-name'.$j];}
+				if(isset($_POST['additional-country'.$j])) { $additionalQualifications['additional-country'] = $_POST['additional-country'.$j];}
+				if(isset($_POST['additional-year-attained'.$j])) { $additionalQualifications['additional-year-attained'] = $_POST['additional-year-attained'.$j];}
+				array_push($temp , $additionalQualifications);
+			}
+			$postData['Additional-qualifications'] =  $temp ;
+		}
 // 2.2.5 - Member detail - Update
 // Send - 
 // UserID & detail data
 // Response -Update Success message & UserID & detail data
 GetAptifyData("5", $postData);
+unset($_SESSION["Regional-group"]);
 /*General function: save data to APA shopping cart database;*/
 /*Parameters: $userID, $productID,$type;*/
 /*save product data including membership type product, national group product, fellowship & PRF product*/	   
@@ -173,11 +182,11 @@ function createShoppingCart($userID, $productID,$type){
 // UserID 
 // Response - UserID & detail data
 $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
-   
+if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details['Regional-group'];}											
  ?>
 <form id="your-detail-form" action="jointheapa" method="POST">
     <input type="hidden" name="step1" value="1"/>
-        <div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
+        <div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2'])|| isset($_POST['step2-1'])|| isset($_GET['goI']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 none-padding">
                 <div class="row">
                     <div class="col-lg-3">
@@ -475,8 +484,8 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
             </div>
 		    <div class="row">
 			    <div class="col-lg-6">
-				   <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
-				   <select class="form-control" id="Branch" name="Branch">
+					<label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
+					<select class="form-control" id="Branch" name="Branch">
 				       <option value="ACT" <?php if ($details['Branch'] == "ACT") echo "selected='selected'";?>>ACT</option>
 					   <option value="NSW" <?php if ($details['Branch'] == "NSW") echo "selected='selected'";?>>NSW</option>
 					   <option value="QLD" <?php if ($details['Branch'] == "QLD") echo "selected='selected'";?>>QLD</option>
@@ -485,8 +494,8 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 					   <option value="VIC" <?php if ($details['Branch'] == "VIC") echo "selected='selected'";?>>VIC</option>
 					   <option value="WA" <?php if ($details['Branch'] == "WA") echo "selected='selected'";?>>WA</option>
 					   <option value="Overseas" <?php if ($details['Branch'] == "Overseas") echo "selected='selected'";?>>I live overseas</option>
-				 </select>
-			 </div>
+					</select>
+				</div>
 		    </div>
 			<div class="row"> 
                 <div class="col-lg-3"> Your special interest area:</div>
@@ -502,7 +511,9 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 						                    
 						   <?php 
 						     foreach($interestAreas['InterestAreas']  as $lines){
-								echo '<option value="'.$lines['ListCode'].'">'.$lines['ListName'].'</option>';
+								echo '<option value="'.$lines["ListCode"].'"';
+								if (in_array( $lines["ListCode"],$details['SpecialInterest'])){ echo "selected='selected'"; } 
+								echo '> '.$lines["ListName"].' </option>'; 
 								 
 							 }
 						   
@@ -510,6 +521,89 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
                     </select>
                 </div>
             </div>
+			<div class="row"> 
+				<div class="col-lg-3">
+				Your treatment area:
+				</div>
+			</div>
+			<div class="row"> 
+				<div class="col-lg-6">
+					<select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+					<?php 
+					// get interest area from Aptify via webserice return Json data;
+					$interestAreas= GetAptifyData("37","request");
+					$_SESSION["interestAreas"] = $interestAreas;
+					?>
+					<?php 
+					foreach($interestAreas['InterestAreas']  as $lines){
+						echo '<option value="'.$lines["ListCode"].'"';
+						if (in_array( $lines["ListCode"],$details['Treatmentarea'])){ echo "selected='selected'"; } 
+						echo '> '.$lines["ListName"].' </option>'; 
+					}
+					?>
+					</select>
+				</div>
+			</div>
+		    <div class="row">
+				<div class="col-lg-3">What is your favourite languages?<br/></div>
+				<div class="col-lg-3">
+					<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
+					   <option value="NONE" disabled>no</option>
+					   <option value="AF"> Afrikaans </option>
+					   <option value="AR"> Arabic </option>
+					   <option value="BO"> Bosnian </option>
+					   <option value="CA"> Cantonese </option>
+					   <option value="CHZ"> Chzech </option>
+					   <option value="CR"> Croation </option>
+					   <option value="DA"> Danish </option>
+					   <option value="DU"> Dutch </option>
+					   <option value="EG"> Egyptian </option>
+					   <option value="ENG"> English </option>
+					   <option value="FL"> Filipino </option>
+					   <option value="FR"> French </option>
+					   <option value="GE"> German </option>
+					   <option value="GR"> Greek </option>
+					   <option value="HE"> Hebrew </option>
+					   <option value="HI"> Hindi </option>
+					   <option value="HO"> Hokkien </option>
+					   <option value="HU"> Hungarian </option>
+					   <option value="IND"> Indonesian </option>
+					   <option value="IT"> Italian </option>
+					   <option value="JP"> Japanese </option>
+					   <option value="KO"> Korean </option>
+					   <option value="LAT"> Latvian </option>
+					   <option value="LE"> Lebanese </option>
+					   <option value="M"> Marathi </option>
+					   <option value="MA"> Macedonian </option>
+					   <option value="MALT"> Maltese </option>
+					   <option value="MAN"> Mandarin </option>
+					   <option value="MAV"> Mavathi </option>
+					   <option value="ML"> Malay </option>
+					   <option value="NOR"> Norwegian </option>
+					   <option value="POL"> Polish </option>
+					   <option value="POR"> Portuguese </option>
+					   <option value="PU"> Punjabi </option>
+					   <option value="RU"> Russian </option>
+					   <option value="S"> Slovak </option>
+					   <option value="SERB"> Serbian </option>
+					   <option value="SL"> Sign Language </option>
+					   <option value="SP"> Spanish </option>
+					   <option value="SW"> Swedish </option>
+					   <option value="SWI"> Swiss </option>
+					   <option value="TA"> Tamil </option>
+					   <option value="TAW"> Taiwanese </option>
+					   <option value="TE"> Teo-Chew </option>
+					   <option value="TEL"> Telugu </option>
+					   <option value="TH"> Thai </option>
+					   <option value="TURK"> Turkish </option>
+					   <option value="UK"> Ukrainian </option>
+					   <option value="UR"> Urdu </option>
+					   <option value="VI"> Vietnamese </option>
+					   <option value="YI"> Yiddish </option>
+					   <option value="YU"> Yugoslav </option>
+					</select>
+				</div>
+			</div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a><a class="join-details-button2"><span class="dashboard-button-name">Next</span></a></div>
         </div>
         <div id="wpnumber"><?php  $wpnumber =  0; echo  $wpnumber; ?></div>
@@ -544,10 +638,10 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 </script>
         <div class="down3" style="display:none;">
 			<div class="row">
-				<div class="col-lg-12"> <label for="Findabuddy"><strong>NOTE:</strong>Please list my details in Find a Physio (visbile to other health professionals)</label>
-                    <input type="checkbox" name="Findabuddy" id="Findabuddy" value="<?php  echo $details['Findabuddy'];?>" <?php if($details['Findabuddy']==1){echo "checked";} ?>>
-			    </div>
-		    </div> 
+				<div class="col-lg-12"> <label for="Findpublicbuddy"><strong>NOTE:</strong>Please list my details in the public (visbile to other health professionals)</label>
+					<input type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="">
+				</div>
+			</div>
             <ul class="nav nav-tabs" id="tabmenu">
                  <li class ="active"><a data-toggle="tab" href="#workplace0"><?php echo "Workplace0";?></a></li>
             </ul>
@@ -556,10 +650,15 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
                     <div class="row">
 					    <div class="col-lg-6"></div>
 						<div class="col-lg-6">
-						    <label for="Findphysio"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
-                            <input type="checkbox" name="Findphysio0" id="Findphysio" value="" >
+						    <label for="Findphysio0"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
+                            <input type="checkbox" name="Findphysio0" id="Findphysio0" value="" >
 					    </div>
 					</div>
+					<div class="row">
+							<div class="col-lg-12"> <label for="Findabuddy0"><strong>NOTE:</strong>Please list my details in the physio</label>
+							<input type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
+							</div>
+				    </div>
                     <div class="row">
 				        <div class="col-lg-12">
 					        <label for="Name-of-workplace">Name of workplace<span class="tipstyle">*</span></label>
@@ -586,6 +685,28 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
                             </select>
 						</div>
                     </div>
+					<div class="row"> 
+							<div class="col-lg-3">
+							Workplace treatment area:
+							</div>
+					</div>
+					<div class="row"> 
+						<div class="col-lg-6">
+							<select class="chosen-select" id="WTreatmentarea0" name="WTreatmentarea0[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+							<?php 
+							// get interest area from Aptify via webserice return Json data;
+							$interestAreas= GetAptifyData("37","request");
+							$_SESSION["interestAreas"] = $interestAreas;
+							?>
+							<?php 
+							foreach($interestAreas['InterestAreas']  as $lines){
+								echo '<option value="'.$lines["ListCode"].'"';
+								echo '> '.$lines["ListName"].' </option>'; 
+							}
+							?>
+							</select>
+						</div>
+					</div>
 				    <div class="row">
                         <div class="col-lg-6">
                            <label for="BuildingName">Building Name</label>
@@ -935,12 +1056,86 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 			    <div class="col-lg-6">
 					<label for="Additional-qualifications">Additional qualifications<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a></label>
 					<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  $addtionalNumber =  1; echo  $addtionalNumber; ?>"/>
-				<div id="additional-qualifications-block">
-					<input type="text" class="form-control" name="Additional-qualifications0" id="Additional-qualifications0">
 				</div>
-			    </div>
+			</div>
+				<div id="additional-qualifications-block">
+					<div class="row">
+						<div class="col-lg-6">
+							<label for="degree0">Degree<span class="tipstyle">*</span></label>
+							<select name="degree0" id="degree0">
+								<option selected="selected" value="">(None)</option>
+								<option value="1">Bachelor of Physiotherapy</option>
+								<option value="2">Bachelor of Physiotherapy (Hons)</option>
+								<option value="3">Bachelor of Physiotherapy (Honours)</option>
+								<option value="4">Bachelor of Science (Physiotherapy)</option>
+								<option value="5">Bachelor of Science (Physiotherapy) (Honours)</option>
+								<option value="6">Bachelor of Applied Science and Master of Physiotherapy Practice</option>
+								<option value="7">Bachelor of Applied Science (Physiotherapy)</option>
+								<option value="8">Bachelor of Applied Science (Physiotherapy) (Honours)</option>
+								<option value="Other">Other</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<label for="university-name0">University name<span class="tipstyle">*</span></label>
+							<select name="university-name0" id="university-name0">
+								<option selected="selected" value="">(None)</option>
+								<option value="ACU">Australian Catholic University - NSW</option>
+								<option value="ACUQ">Australian Catholic University - QLD</option>
+								<option value="ACUB">Australlian Catholic University - Ballarat</option>
+								<option value="BON">Bond University - QLD</option>
+								<option value="CU">Canberra University</option>
+								<option value="CQU">Central Qld University</option>
+								<option value="CSU">Charles Sturt University - Albury NSW</option>
+								<option value="CSUO">Charles Sturt University - Orange NSW</option>
+								<option value="CSUP">Charles Sturt University Port Macquarie</option>
+								<option value="CUMB">Cumberland University - NSW</option>
+								<option value="CUR">Curtin University - WA</option>
+								<option value="ECU">Edith Cowan University - WA</option>
+								<option value="FLIN">Flinders University SA</option>
+								<option value="GRIF">Griffith University - Gold coast QLD</option>
+								<option value="JCU">James Cook University - QLD</option>
+								<option value="LAT">Latrobe University - Bundoora VIC</option>
+								<option value="LATB">Latrobe Universtiy - Bendigo VIC</option>
+								<option value="LIN">Lincoln Institute - VIC</option>
+								<option value="MACQ">Macquarie University - NSW</option>
+								<option value="MON">Monash University - Vic</option>
+								<option value="UA">University of Adelaide</option>
+								<option value="UM">University of Melbourne - Vic</option>
+								<option value="UNC">University of Newcastle - NSW</option>
+								<option value="UND">University of Notre Dam - WA</option>
+								<option value="UQ">University of Qld</option>
+								<option value="USA">University of South Australia</option>
+								<option value="US">University of Sydney - NSW</option>
+								<option value="UTS">University of Technology Sydney</option>
+								<option value="UWA">University of Western Australia</option>
+								<option value="UWS">University of Western Sydney- NSW</option>
+								<option value="WAIT">Western Australian Institute of Technology</option>
+								<option value="Other">Other</option>
+							</select>
+							<input type="text" class="form-control display-none" name="Undergraduate-university-name-other" id="Undergraduate-university-name-other">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
+							<label for="additional-country0">Country<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="additional-country0" id="additional-country0">
+						</div>
+						<div class="col-lg-2">
+							<label for="additional-year-attained0">Year attained<span class="tipstyle">*</span></label>
+							<select class="form-control" name="additional-year-attained0" id="additional-year-attained0">
+							<?php 
+							$y = date("Y"); 
+							for ($i=1940; $i<= $y; $i++){
+							echo '<option value="'.$i.'">'.$i.'</option>';  
+							}
+							?>
+							</select>
+						</div>
+					</div>
+				</div>
 			
-		    </div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
         </div>
                
@@ -1310,6 +1505,88 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 						</select>
 					</div>
 				</div>
+				<div class="row"> 
+					<div class="col-lg-3">
+					Your treatment area:
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col-lg-6">
+						<select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+						<?php 
+						// get interest area from Aptify via webserice return Json data;
+						$interestAreas= GetAptifyData("37","request");
+						$_SESSION["interestAreas"] = $interestAreas;
+						?>
+						<?php 
+						foreach($interestAreas['InterestAreas']  as $lines){
+							echo '<option value="'.$lines["ListCode"].'"';
+							echo '> '.$lines["ListName"].' </option>'; 
+						}
+						?>
+						</select>
+					</div>
+				</div>
+				    <div class="row">
+				<div class="col-lg-3">What is your favourite languages?<br/></div>
+				<div class="col-lg-3">
+					<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
+					   <option value="NONE" disabled>no</option>
+					   <option value="AF"> Afrikaans </option>
+					   <option value="AR"> Arabic </option>
+					   <option value="BO"> Bosnian </option>
+					   <option value="CA"> Cantonese </option>
+					   <option value="CHZ"> Chzech </option>
+					   <option value="CR"> Croation </option>
+					   <option value="DA"> Danish </option>
+					   <option value="DU"> Dutch </option>
+					   <option value="EG"> Egyptian </option>
+					   <option value="ENG"> English </option>
+					   <option value="FL"> Filipino </option>
+					   <option value="FR"> French </option>
+					   <option value="GE"> German </option>
+					   <option value="GR"> Greek </option>
+					   <option value="HE"> Hebrew </option>
+					   <option value="HI"> Hindi </option>
+					   <option value="HO"> Hokkien </option>
+					   <option value="HU"> Hungarian </option>
+					   <option value="IND"> Indonesian </option>
+					   <option value="IT"> Italian </option>
+					   <option value="JP"> Japanese </option>
+					   <option value="KO"> Korean </option>
+					   <option value="LAT"> Latvian </option>
+					   <option value="LE"> Lebanese </option>
+					   <option value="M"> Marathi </option>
+					   <option value="MA"> Macedonian </option>
+					   <option value="MALT"> Maltese </option>
+					   <option value="MAN"> Mandarin </option>
+					   <option value="MAV"> Mavathi </option>
+					   <option value="ML"> Malay </option>
+					   <option value="NOR"> Norwegian </option>
+					   <option value="POL"> Polish </option>
+					   <option value="POR"> Portuguese </option>
+					   <option value="PU"> Punjabi </option>
+					   <option value="RU"> Russian </option>
+					   <option value="S"> Slovak </option>
+					   <option value="SERB"> Serbian </option>
+					   <option value="SL"> Sign Language </option>
+					   <option value="SP"> Spanish </option>
+					   <option value="SW"> Swedish </option>
+					   <option value="SWI"> Swiss </option>
+					   <option value="TA"> Tamil </option>
+					   <option value="TAW"> Taiwanese </option>
+					   <option value="TE"> Teo-Chew </option>
+					   <option value="TEL"> Telugu </option>
+					   <option value="TH"> Thai </option>
+					   <option value="TURK"> Turkish </option>
+					   <option value="UK"> Ukrainian </option>
+					   <option value="UR"> Urdu </option>
+					   <option value="VI"> Vietnamese </option>
+					   <option value="YI"> Yiddish </option>
+					   <option value="YU"> Yugoslav </option>
+					</select>
+				</div>
+			</div>
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>
 			</div>
 			<div id="wpnumber"><?php  $wpnumber =  0; echo  $wpnumber; ?></div>
@@ -1344,10 +1621,10 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 			</script>
 			<div class="down3" style="display:none;">
 				<div class="row">
-					<div class="col-lg-12"> <label for="Findabuddy"><strong>NOTE:</strong>Please list my details in Find a Physio (visbile to other health professionals)</label>
-						<input type="checkbox" name="Findabuddy" id="Findabuddy">
+					<div class="col-lg-12"> <label for="Findpublicbuddy"><strong>NOTE:</strong>Please list my details in the public (visbile to other health professionals)</label>
+						<input type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="">
 					</div>
-				</div> 
+				</div>
 			<ul class="nav nav-tabs" id="tabmenu">
 			<li class ="active"><a data-toggle="tab" href="#workplace0"><?php echo "Workplace0";?></a></li>
 			</ul>
@@ -1355,6 +1632,11 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 				<div id="workplace0" class='tab-pane fade in active'> 
 					<div class="row"><div class="col-lg-6"></div><div class="col-lg-6"> <label for="Findphysio"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
 					<input type="checkbox" name="Findphysio0" id="Findphysio" value="" ></div></div>
+					<div class="row">
+						<div class="col-lg-12"> <label for="Findabuddy0"><strong>NOTE:</strong>Please list my details in the physio</label>
+							<input type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
+						</div>
+				    </div>
 				<div class="row">
 					<div class="col-lg-12">
 						<label for="Name-of-workplace">Name of workplace<span class="tipstyle">*</span></label>
@@ -1378,6 +1660,28 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 						<?php 
 						 foreach($workplaceSettings['WorkplaceSettings']  as $lines){
 							echo '<option value="'.$lines['code'].'">'.$lines['name'].'</option>';
+						}
+						?>
+						</select>
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col-lg-3">
+					Workplace treatment area:
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col-lg-6">
+						<select class="chosen-select" id="WTreatmentarea<?php echo $key;?>" name="WTreatmentarea<?php echo $key;?>" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+						<?php 
+						// get interest area from Aptify via webserice return Json data;
+						$interestAreas= GetAptifyData("37","request");
+						$_SESSION["interestAreas"] = $interestAreas;
+						?>
+						<?php 
+						foreach($interestAreas['InterestAreas']  as $lines){
+							echo '<option value="'.$lines["ListCode"].'"';
+							echo '> '.$lines["ListName"].' </option>'; 
 						}
 						?>
 						</select>
@@ -1724,12 +2028,86 @@ $details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
 						</select>
 					</div>
 				</div>
-				<div class="row">
+			   <div class="row">
 					<div class="col-lg-6">
 						<label for="Additional-qualifications">Additional qualifications<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a></label>
 						<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  $addtionalNumber =  1; echo  $addtionalNumber; ?>"/>
-						<div id="additional-qualifications-block">
-						<input type="text" class="form-control" name="Additional-qualifications0" id="Additional-qualifications0">
+					</div>
+				</div>
+				<div id="additional-qualifications-block0">
+					<div class="row">
+						<div class="col-lg-6">
+							<label for="degree0">Degree<span class="tipstyle">*</span></label>
+							<select name="degree0" id="degree0">
+								<option selected="selected" value="">(None)</option>
+								<option value="1">Bachelor of Physiotherapy</option>
+								<option value="2">Bachelor of Physiotherapy (Hons)</option>
+								<option value="3">Bachelor of Physiotherapy (Honours)</option>
+								<option value="4">Bachelor of Science (Physiotherapy)</option>
+								<option value="5">Bachelor of Science (Physiotherapy) (Honours)</option>
+								<option value="6">Bachelor of Applied Science and Master of Physiotherapy Practice</option>
+								<option value="7">Bachelor of Applied Science (Physiotherapy)</option>
+								<option value="8">Bachelor of Applied Science (Physiotherapy) (Honours)</option>
+								<option value="Other">Other</option>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<label for="university-name0">University name<span class="tipstyle">*</span></label>
+							<select name="university-name0" id="university-name0">
+								<option selected="selected" value="">(None)</option>
+								<option value="ACU">Australian Catholic University - NSW</option>
+								<option value="ACUQ">Australian Catholic University - QLD</option>
+								<option value="ACUB">Australlian Catholic University - Ballarat</option>
+								<option value="BON">Bond University - QLD</option>
+								<option value="CU">Canberra University</option>
+								<option value="CQU">Central Qld University</option>
+								<option value="CSU">Charles Sturt University - Albury NSW</option>
+								<option value="CSUO">Charles Sturt University - Orange NSW</option>
+								<option value="CSUP">Charles Sturt University Port Macquarie</option>
+								<option value="CUMB">Cumberland University - NSW</option>
+								<option value="CUR">Curtin University - WA</option>
+								<option value="ECU">Edith Cowan University - WA</option>
+								<option value="FLIN">Flinders University SA</option>
+								<option value="GRIF">Griffith University - Gold coast QLD</option>
+								<option value="JCU">James Cook University - QLD</option>
+								<option value="LAT">Latrobe University - Bundoora VIC</option>
+								<option value="LATB">Latrobe Universtiy - Bendigo VIC</option>
+								<option value="LIN">Lincoln Institute - VIC</option>
+								<option value="MACQ">Macquarie University - NSW</option>
+								<option value="MON">Monash University - Vic</option>
+								<option value="UA">University of Adelaide</option>
+								<option value="UM">University of Melbourne - Vic</option>
+								<option value="UNC">University of Newcastle - NSW</option>
+								<option value="UND">University of Notre Dam - WA</option>
+								<option value="UQ">University of Qld</option>
+								<option value="USA">University of South Australia</option>
+								<option value="US">University of Sydney - NSW</option>
+								<option value="UTS">University of Technology Sydney</option>
+								<option value="UWA">University of Western Australia</option>
+								<option value="UWS">University of Western Sydney- NSW</option>
+								<option value="WAIT">Western Australian Institute of Technology</option>
+								<option value="Other">Other</option>
+							</select>
+							<input type="text" class="form-control display-none" name="Undergraduate-university-name-other" id="Undergraduate-university-name-other">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
+							<label for="additional-country0">Country<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="additional-country0" id="additional-country0">
+						</div>
+						<div class="col-lg-2">
+							<label for="additional-year-attained0">Year attained<span class="tipstyle">*</span></label>
+							<select class="form-control" name="additional-year-attained0" id="additional-year-attained0">
+							<?php 
+							$y = date("Y"); 
+							for ($i=1940; $i<= $y; $i++){
+							echo '<option value="'.$i.'">'.$i.'</option>';  
+							}
+							?>
+							</select>
 						</div>
 					</div>
 				</div>
