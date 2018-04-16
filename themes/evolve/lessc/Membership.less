@@ -242,7 +242,11 @@
 	border-width: 0.5px;
 	border-style: solid;
 	border-color: rgba(195,200,200,0.8);
-	padding: 1px 22px;
+	padding: 1px 60px;
+}
+#media-block-15 .node-partners img,
+#media-block-16 .node-partners img {
+	width: 160px;
 }
 #media-block-15 .node-partners:nth-child(4n + 1),
 #media-block-16 .node-partners:nth-child(4n + 1) {
@@ -271,9 +275,73 @@
 	border-top-width: 0.5px;
 	border-color: rgba(195,200,200,0.46);
 }
+/*
 #media-block-16 .node-partners {
 	padding: 1px 65px;
 }
 #media-block-16 .node-partners img {
-	width: 150px;	
+	width: 150px;
+}
+*/
+/* Membership Question */
+.ProgressHolder {
+	height: 150px;
+	width: 800px;
+	position: relative;
+	margin: auto;
+}
+.ProgressHolder .SectionHolder {
+    width: 800px;
+    position: absolute;
+}
+.ProgressHolder div[id^="Section"] {
+    float: left;
+    width: 40px;
+    margin-right: 150px;
+}
+.ProgressHolder div#Section5 {
+    margin-right: 0;
+}
+.ProgressHolder div[id^="Section"] [class^="Label"] {
+	color: rgb(0,159,218);
+	width: 190px;
+	margin-left: -10px;
+	transition: 0.3s;
+	-webkit-transition-timing-function: cubic-bezier(0.54, -0.89, 0.7, 1.41);
+	transition-timing-function: cubic-bezier(0.54, -0.89, 0.7, 1.41);
+}
+.ProgressHolder div[id^="Section"] div.Label1 {
+	margin-left: 5px;
+}
+.ProgressHolder div[id^="Section"] div.Label2 {
+    margin-left: -30px;
+}
+.ProgressHolder div[id^="Section"] div.Label3 {
+    margin-left: -40px;
+}
+.ProgressHolder div[id^="Section"] div.Label4 {
+    margin-left: -45px;
+}
+.ProgressHolder div[id^="Section"] [class^="Circle"] {
+	background-color: rgb(0,159,218);
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	margin: auto;
+	transition: 0.3s;
+	-webkit-transition-timing-function: cubic-bezier(0.54, -0.89, 0.7, 1.41);
+	transition-timing-function: cubic-bezier(0.54, -0.89, 0.7, 1.41);
+}
+.ProgressHolder .active div[class^="Label"] {
+    color: rgb(0,159,218);
+    font-weight: bold;
+}
+.ProgressHolder .passed div[class^="Circle"] {
+    background-color: rgb(195,200,200);
+}
+#block-block-255 .MemberQInfo2 p {
+	margin: 40px 0 50px;
+    padding-left: 0;
+	font-size: 20px;
+    text-indent: 0;
 }
