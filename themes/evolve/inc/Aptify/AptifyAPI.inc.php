@@ -1913,49 +1913,55 @@ function AptifyAPI($APItype, $variables){
 			// Add JSON sample here
 			$JSONreturn = '{  
 				"CurrentCPDHour": "12",
-				"APA": [
+				"Diary": [
 				 {
 				 "PD_id": "421",
 				 "PD_title":"PD title A",
 				 "PD_date":"13/12/2017",
-				 "PD_hours":"3" },
+				 "PD_hours":"3",
+				 "CPD": "APA"},
 				 {
 				 "PD_id": "231",
 				 "PD_title":"PD title B",
 				 "PD_date":"15/12/2017",
-				 "PD_hours":"2" },
+				 "PD_hours":"2",
+				 "CPD": "APA" },
 				 {
 				 "PD_id": "763",
 				 "PD_title":"PD title C",
 				 "PD_date":"17/12/2017",
-				 "PD_hours":"3" },
+				 "PD_hours":"3",
+				 "CPD": "APA" },
 				 {
 				 "PD_id": "236",
 				 "PD_title":"PD title D",
 				 "PD_date":"19/12/2017",
-				 "PD_hours":"1" }  ], 
-				 "NONAPA": [
+				 "PD_hours":"1",
+				 "CPD": "APA"},  
 				 {
-				 "NPD_id": "821",
-				 "NPD_Description":"NPD title A",
-				 "NPD_date":"13/12/2017",
-				 "NPD_Time":"1",
-				 "NPD_Provider": "A Company",
-				 "NPD_Reflection": "I have learned dis!" },
+				 "PD_id": "821",
+				 "PD_title":"NPD title A",
+				 "PD_date":"13/12/2017",
+				 "PD_hours":"1",
+				 "CPD": "NAPA",
+				 "PD_Provider": "A Company",
+				 "PD_Reflection": "I have learned dis!1" },
 				 {
-				 "NPD_id": "518",
-				 "NPD_Description":"NPD title A",
-				 "NPD_date":"13/12/2017",
-				 "NPD_Time":"1",
-				 "NPD_Provider": "B Company",
-				 "NPD_Reflection": "I have learned dis!" },
+				 "PD_id": "518",
+				 "PD_title":"NPD title A",
+				 "PD_date":"13/12/2017",
+				 "PD_hours":"1",
+				 "CPD": "NAPA",
+				 "PD_Provider": "B Company",
+				 "PD_Reflection": "I have learned dis!2" },
 				 {
-				 "NPD_id": "324",
-				 "NPD_Description":"NPD title A",
-				 "NPD_date":"13/12/2017",
-				 "NPD_Time":"1",
-				 "NPD_Provider": "C Company",
-				 "NPD_Reflection": "I have learned dis!" }
+				 "PD_id": "324",
+				 "PD_title":"NPD title A",
+				 "PD_date":"13/12/2017",
+				 "PD_hours":"1",
+				 "CPD": "NAPA",
+				 "PD_Provider": "C Company",
+				 "PD_Reflection": "I have learned dis!3" }
 				 ]
 			}';
 			return $JSONreturn;
