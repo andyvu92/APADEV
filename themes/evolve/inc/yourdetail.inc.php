@@ -819,10 +819,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								</div>
 							</div>-->
 						</div>
-						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> 
+						<!--<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> 
 							<a  style="cursor: pointer; color:white;" id="rolloverButton">Change your roll over status</a>
 							
-						</div>
+						</div>-->
 						<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"> 
 							<a  style="cursor: pointer; color:white;" id="setCardButton">Set your main credit card</a>
 							

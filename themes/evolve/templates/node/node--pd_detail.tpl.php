@@ -83,6 +83,7 @@
 	<section class="post-content">
     
 	<?php 
+	    $userId = 0;
 		if(isset($_POST["Emailaddress"]) && isset($_POST["Password"])) {
 			// 2.2.7 - Log-in
 			// Send - 
@@ -95,6 +96,8 @@
 			// todo
 			// once they successfully login, create userID Session
 			// and get User's detail data.
+			$userId = $LogIn["UserId"];
+			echo $LogIn["TokenId"];
 		}
       
 	   $user_membertype ="";
@@ -105,9 +108,7 @@
 	   $Registrationboard = "";
  	   $Dietary = array();
 	  
-      /*this is used in the dev environment, when it integrates with Aptify remove that, userID get from session when user log in */ 	  
-	   if(isset($_GET["userID"])){ $_SESSION["userID"]=$_GET["userID"];}
-	   /*Get user payment card info webservice from Aptify and then return user payment card information*/
+       /*Get user payment card info webservice from Aptify and then return user payment card information*/
 	   $paymentCardList = array("4444","6666");
 	   /*Get user data from Aptify and then return user information*/
 	   /*
@@ -163,7 +164,7 @@
 			// QIP}, Undergraduate degree, Undergraduate Uni name, Undergraduate Country,
 			// Year attained, Post graduate degree, post graduate name, 
 			// Post graduate country, Year attained, Additional qualifications
-			$userInfo = GetAptifyData("4", "UserID"); // #_SESSION["UserID"];
+			$userInfo = GetAptifyData("4", "userID"); // #_SESSION["UserID"];
 		   
 	       $user_membertype = $userInfo['MemberType']; 
 		   
@@ -274,7 +275,16 @@
 			 }
 		 
 		 ?></p></div>
-		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>When:</h3><p><?php echo $pd_detail['Time']; ?></p><p><?php echo $pd_detail['StartDate']." - ".$pd_detail['EndDate'] ; ?></p></div>
+		<?php 
+			$bdata = explode(" ",$pd_detail['StartDate']);
+			$edata = explode(" ",$pd_detail['EndDate']);
+			//if Aptify give the StartDate&EndDate as timestamp, use below code to get the time and start date and end date;
+			//echo date('d-m-Y h:i:s',$pd_detail['StartDate']);
+			
+			
+			
+		?>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>When:</h3><p><?php echo $bdata[1]."-".$edata[1]; ?></p><p><?php echo $bdata[0]." - ".$edata[0] ; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Registration closing date:</h3><p><?php echo $pd_detail['Close_date']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<h3>Where:</h3>

@@ -440,7 +440,29 @@ function AptifyAPI($APItype, $variables){
 			print_r($variables);
 			echo "<br />7. Dashboard - log-in: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			// create curl resource 
+			$ch = curl_init(); 
+            // set url 
+			
+			curl_setopt($ch, CURLOPT_URL, "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/Web?UserName=".$variables['ID']."&Password=".$variables['Password']); 
+            curl_setopt($ch, CURLOPT_HEADER, 0);
+         	//return the transfer as a string 
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+			//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+            //curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+           // curl_setopt($ch, CURLOPT_CAINFO,getcwd() ."\CA.crt");
+			//$output contains the output string 
+			$JSONreturn = curl_exec($ch);
+            if(curl_error($ch))
+			{
+				echo 'error:' . curl_error($ch);
+			}
+				
+            //echo $JSONreturn.'this is call from Aptify';
+			// close curl resource to free up system resources 
+			curl_close($ch);    
+			 
 			return $JSONreturn;
 		case "8":
 			// For the actual API use
@@ -1138,7 +1160,7 @@ function AptifyAPI($APItype, $variables){
 						"CPD":"2",
 						"City":"Melbourne",
 						"State":"VIC",
-						"Begindate":"13/12/2017",
+						"Begindate":"10/12/2017",
 						"Enddate":"12/12/2018",
 						"Eventstatus":"2"
 					}, {  
@@ -1162,6 +1184,8 @@ function AptifyAPI($APItype, $variables){
 						"State":"VIC",
 						"Begindate":"1/12/2017",
 						"Enddate":"12/12/2018",
+						
+						
 						"Eventstatus":"2"
 					}, {  
 						"Id":"4",
@@ -1582,10 +1606,10 @@ function AptifyAPI($APItype, $variables){
 			  "UserStatus":"1",
 			  "Totalnumber":"104",
 			  "Enrollednumber":"100",
-			  "Time":"9:00 AM - 5.00 PM",
-			  "StartDate":"13/12/2018",
-			  "EndDate":"17/12/2018",
-			  "Close_date":"12/12/2018",
+			  "Time":"1524030029",
+			  "StartDate":"2018-10-31 9:00:00",
+			  "EndDate":"2018-12-31 17:00:00",
+			  "Close_date":"2018-07-25",
 			  "Location":{
 					"Address1":"University of Canberra",
 					"Address2":"Building 29",

@@ -103,9 +103,10 @@ if(isset($_POST['step2-1'])) {
 					<?php endforeach; ?>
 				</select>
 			</fieldset>
+			<input type="checkbox" id="anothercard"><label for="anothercard">Use another card</label>
 		</div> 
 		<div class="row">
-			<input type="checkbox" id="anothercard"><label for="anothercard">Use another card</label>
+			
 		</div>
 		<div id="anothercardBlock" class="display-none col-lg-12">
 		<div class="row">
@@ -137,6 +138,7 @@ if(isset($_POST['step2-1'])) {
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV">
 			</div>
 		</div>
+		<div class="row"><label for="addcardtag">Do you want to save this card</label><input type="checkbox" id="addcardtag"></div>
 		<input type="hidden" name="addCard" value="0">
 		</div>
 	<?php endif; ?>  
@@ -170,6 +172,7 @@ if(isset($_POST['step2-1'])) {
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 			</div>
 		</div>
+		<div class="row"><label for="addcardtag">Do you want to save this card</label><input type="checkbox" id="addcardtag"></div>
 		<input type="hidden" name="addCard" value="1">
 	</div>
 	<?php endif; ?>  
