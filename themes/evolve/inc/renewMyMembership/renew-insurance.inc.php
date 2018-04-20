@@ -1,6 +1,6 @@
 <form id="join-insurance-form2" action="renewmymembership" method="POST">
 	<input type="hidden" name="step2-1" value="1"/>
-	<div class="down5 <?php if(isset($_POST['step1'])||isset($_GET['goI']))echo 'display'; else { echo 'display-none';}?>">
+	<div class="down5 <?php if(isset($_POST['step1'])||isset($_POST['goI']))echo 'display'; else { echo 'display-none';}?>">
 		<div class="row">
 			<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 			Has there been any medical malpractice or liability claim in the last five years(whether insured or uninsured)?<span class="tipstyle">*</span>

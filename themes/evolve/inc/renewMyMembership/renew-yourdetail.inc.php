@@ -186,7 +186,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 ?>
 <form id="your-detail-form" action="renewmymembership" method="POST">
 	<input type="hidden" name="step1" value="1"/>
-		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_GET['goI']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
+		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_POST['goI']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding ">
 				<div class="row">
 					<div class="col-lg-3">
@@ -242,7 +242,24 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<div class="row">
 					<div class="col-lg-2">
 					   <label for="">Country code</label>
-					   <input type="text" class="form-control" name="country-code" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Country Code'";}   else{ echo 'value="'.$details['Home-phone-number'][0].'"'; }?>  pattern="[0-9]{10}">
+					   <?php 
+						// 2.2.39 - get option dropdown list
+						// Send - 
+						// Response - get dropdown list from Aptify via webserice return Json data;
+						// stroe workplace settings into the session
+						$dropdata= GetAptifyData("39","request");
+						$countrycode = $dropdata['Country'];
+						?>
+						<select class="form-control" id="country-code" name="country-code">
+						
+						<?php 
+						foreach($countrycode  as $lines){
+							echo '<option value="'.$lines["TelephoneCode"].'"';
+							if ($details['Home-phone-number'][0] == $lines["TelephoneCode"]){ echo "selected='selected'"; } 
+							echo '> '.$lines["Country"].' </option>';
+						}
+						?>
+						</select>
 					</div>
 					<div class="col-lg-2">
 					   <label for="">Area code</label>

@@ -367,9 +367,27 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 						</div>
 						<div class="row">
+							
 							<div class="col-lg-2">
 								<label for="">Country code</label>
-								<input type="text" class="form-control" name="country-code" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Country Code'";}   else{ echo 'value="'.$details['Home-phone-number'][0].'"'; }?> >
+								<?php 
+								// 2.2.39 - get option dropdown list
+								// Send - 
+								// Response - get dropdown list from Aptify via webserice return Json data;
+								// stroe workplace settings into the session
+								$dropdata= GetAptifyData("39","request");
+								$countrycode = $dropdata['Country'];
+								?>
+								<select class="form-control" id="country-code" name="country-code">
+								
+								<?php 
+								foreach($countrycode  as $lines){
+									echo '<option value="'.$lines["TelephoneCode"].'"';
+									if ($details['Home-phone-number'][0] == $lines["TelephoneCode"]){ echo "selected='selected'"; } 
+									echo '> '.$lines["Country"].' </option>';
+								}
+								?>
+								</select>
 							</div>
 							<div class="col-lg-2">
 								<label for="">Area code</label>

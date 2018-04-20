@@ -62,7 +62,7 @@ if(isset($_POST['step2-1'])) {
 			</div>
 			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><input type="text" class="form-control" name="s6" id="s6" placeholder="%"></div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button6"><span class="dashboard-button-name">Next</span></a><a href="jointheapa?goI" class="your-details-prevbutton6"><span class="dashboard-button-name">Last</span></a></div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button6"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton6"><span class="dashboard-button-name">Last</span></a></div>
 	</div>
 	<div class="down7" style="display:none;" >
 		<div class="row">
