@@ -79,44 +79,127 @@
 * @ingroup themeable
 */
 ?>
-<div id="node-<?php print $node->nid; ?>" style="margin-top:30px;" class="<?php print $classes; ?> clearfix post large MediaListing" <?php print $attributes; ?>>
-    <div class="post-img media">
-      <div class='mediaholder'>
-        <?php print render($content['field_picture']);?>
-      </div>
-    </div>
-    
+<?php 
+$rens = render($content['field_member_type_category']);
+$rens = str_replace('<div class="field field-name-field-member-type-category field-type-text field-label-hidden">',"",$rens);
+$rens = str_replace('<div class="field-items">',"",$rens);
+$rens = str_replace('<div class="field-item even">',"",$rens);
+$rens = str_replace('</div>',"",$rens);
+?>
+<div id="node-<?php print $node->nid; ?>" style="display: none; margin-top:30px;" class="<?php print $classes; echo ' '.$rens; ?> clearfix large" <?php print $attributes; ?>>
 	<section class="post-content">
-	
-    <header class="meta">
-		   <ul>
-          <li><?php print render($content['field_media_type']);?></li>
-		  <li><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></li>
-		   </ul>
-		  
-		   <?php if(!is_null(render($content['field_external_link']))): ?>
-		   <h2><a href="<?php echo $content['field_external_link']['#items'][0]['value'];?>" target="_blank">
-		   
-		   <?php print $title; ?></a></h2>
-		   <?php else: ?>
-		   <h2><a href="<?php print $node_url; ?>">
-		   <?php print $title; ?></a></h2>
-		   <?php endif ?>
-    </header>
+	<h2 class="MTtitle"><?php print $title; ?></h2>
+	<div class="contents">
+		<div class="MTcontent">
+			<div class="MTcontentTitle">Category:</div>
+			<?php //print render($content['field_member_type_category']);?>
+			<?php 
+				print '<div>'.$rens.'</div>';
+			?>
+		</div>
+		<div class="MTcontent">
+			<div class="MTcontentTitle">Price:</div>
+			<?php //print '$'.render($content['field_member_type_price']);?>
+			<?php 
+				$rens = render($content['field_member_type_price']);
+				$rens = str_replace('<div class="field field-name-field-member-type-price field-type-text field-label-hidden">',"",$rens);
+				$rens = str_replace('<div class="field-items">',"",$rens);
+				$rens = str_replace('<div class="field-item even">',"",$rens);
+				$rens = str_replace('</div>',"",$rens);
+				print '<div>$'.$rens.'</div>';
+			?>
+		</div>
+		<?php //print render($content['field_what_is_it']);?>
+		<?php 
+			$rens = render($content['field_what_is_it']);
+			$linksList = explode("\n", $rens);
+			$count = 0;
+			$total = count($linksList);
+			if($total > 1) {
+				echo '<div class="MTcontent">
+				<div class="MTcontentTitle">What is it?</div><br />';
+				print '<ul>';
+				foreach($linksList as $ren) {					
+					$count++;
+					if($count == $total) {
+						// get rid of </div>;
+						$ren = str_replace("</div>","",$ren);
+					}
+					// get rid of &nbsp;
+					$string = htmlentities($ren, null, 'utf-8');
+					$checks = str_replace("&nbsp;", " ", $string);
+					$checks = html_entity_decode($checks);
+					print '<li>';
+					print $ren;
+					print '</li>';
+				}
+				print '</ul></div>';
+			}
+		?>
+		<?php // print render($content['field_eligibility']);?>
+		<?php 
+			$rens = render($content['field_eligibility']);
+			$linksList = explode("\n", $rens);
+			$count = 0;
+			$total = count($linksList);
+			if($total > 1) {
+				echo '<div class="MTcontent">
+					<div class="MTcontentTitle">You are eligible if you:</div><br />';
+				print '<ul>';
+				foreach($linksList as $ren) {					
+					$count++;
+					if($count == $total) {
+						// get rid of </div>;
+						$ren = str_replace("</div>","",$ren);
+					}
+					// get rid of &nbsp;
+					$string = htmlentities($ren, null, 'utf-8');
+					$checks = str_replace("&nbsp;", " ", $string);
+					$checks = html_entity_decode($checks);
+					print '<li>';
+					print $ren;
+					print '</li>';
+				}
+				print '</ul></div>';
+			}
+		?>
+		<?php // print render($content['body']); ?>
+		<?php 
+			$rens = render($content['body']);
+			$rens = str_replace('<div class="field field-name-body field-type-text-with-summary field-label-hidden">',"",$rens);
+			$rens = str_replace('<div class="field-items">',"",$rens);
+			$rens = str_replace('<div class="field-item even" property="content:encoded">',"",$rens);
+			$rens = str_replace('</div>',"",$rens);
+			$rens = str_replace('<p>',"",$rens);
+			$rens = str_replace('</p>',"",$rens);
+			$string = htmlentities($rens, null, 'utf-8');
+			$checks = str_replace("&nbsp;", " ", $string);
+			$checks = html_entity_decode($checks);
+			$linksList = explode("\n", $checks);
+			$count = 0;
+			$total = count($linksList);
+			if($total > 1) {
+				echo '<div class="MTcontent">
+					<div class="MTcontentTitle">You are not eligible if you:</div><br />';
+				print '<ul>';
+				foreach($linksList as $ren) {					
+					$count++;
+					if($count == $total) break;
+					print '<li>';
+					print $ren;
+					print '</li>';
+				}
+				print '</ul></div>';
+			}
+		?>
+	</div>
 	  <?php
         // We hide the comments and links now so that we can render them later.
         hide($content['comments']);
         hide($content['links']);
 		hide($content['field_media_tag']);
-        print render($content);
+        //print render($content);
         ?>
-	<div class="more">
-		<?php if(!is_null(render($content['field_external_link']))): ?>
-			<p><a href="<?php echo $content['field_external_link']['#items'][0]['value'];?>" target="_blank">Discover more ></a></p>
-	    <?php else: ?>
-			<p><a href="<?php print $node_url; ?>">Discover more ></a></p>
-		<?php endif ?>
-	</div>
 	</section>
   
 </div> 

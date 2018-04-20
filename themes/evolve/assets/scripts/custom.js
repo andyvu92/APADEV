@@ -26,11 +26,7 @@ jQuery(document).ready(function($) {
         }
 	});
 	$('[class=cardevent]').click(function(){
-      
 	    $('.carddown').slideToggle(450);
-		
-		
-		
 	});
 	// for Advocacy template
 	var advocacyCount = $("[id^=sections]").length;
@@ -71,13 +67,13 @@ jQuery(document).ready(function($) {
 	$('#leftArrow').attr("id", "leftArrow"+listNumIndex[0]);
 	$('#rightArrow').attr("id", "rightArrow"+listNumIndex[1]);
 	// set width for top navigation
-	var widthCal = $("#testerviewadvocacy-block").width();
+	var widthCal = $(".AdvocacyHeader").width();
 	if(advocacyCount == 3 && $( document ).width() > 991) {
-		$("#testerviewadvocacy-block").attr('style','padding-left: '+((parseInt(widthCal) - 591)/2)+"px");
+		$(".AdvocacyHeader").attr('style','padding-left: '+((parseInt(widthCal) - 591)/2)+"px");
 	} else if(advocacyCount == 4) {
-		$("#testerviewadvocacy-block").attr('style','padding-left: '+((parseInt(widthCal) - 799)/2)+"px");
+		$(".AdvocacyHeader").attr('style','padding-left: '+((parseInt(widthCal) - 799)/2)+"px");
 	} else {
-		$("#testerviewadvocacy-block").attr('style','padding-left: '+((parseInt(widthCal) - 1007)/2)+"px");
+		$(".AdvocacyHeader").attr('style','padding-left: '+((parseInt(widthCal) - 1007)/2)+"px");
 	}
 	// set width for top navigation
 	var functionCall = function($input) {
@@ -464,7 +460,142 @@ jQuery(document).ready(function($) {
 		else{
 			$( "#ahpblock" ).removeClass('display-none');
 		}
-	}); 
+	});
+	
+	/*   Membership Types questions   */
+		
+		$(".next").click(function() {
+    var x = $(".active").attr('id').replace('Section','');
+    if(x != '5') { // if it is not the last section
+      $("#Section"+x).removeClass("active");
+      x = parseInt(x) + 1;
+      $("#Section"+x).addClass("active passed");
+       $(".MainQuestionHolder #Section"+x).show();
+       $('.MainQuestionHolder [id^=Section]:not(.MainQuestionHolder #Section'+x+')').hide(400);
+      ProgressMove(x);
+    }
+    BringSurveyBack();
+    var type = $("#chosenType").text();
+    var title = $("."+type+" .MTtitle").text();
+    $("#chosenTypeName").text(title);
+    console.log(type);
+    if(x == 5) {
+      convertAndCalculate(type);
+    }
+    $("."+type).show();
+  });
+  $(".prev").click(function() {
+    var x = $(".active").attr('id').replace('Section','');
+    if(x != '1') {
+      $("#Section"+x).removeClass("active passed");
+       x = parseInt(x) - 1;
+       $(".MainQuestionHolder #Section"+x).show();
+      $("#Section"+x).addClass("active");
+       $('.MainQuestionHolder [id^=Section]:not(.MainQuestionHolder #Section'+x+')').hide(400);
+      ProgressMove(x);
+    }
+    BringSurveyBack();
+    if(x == 2) {
+      $(".node-membership-type").hide();
+      $('[id^=question]').hide();
+      $('[id^=question]').addClass("function");
+      $('#question50').show();
+      $('#question50').removeClass("function");
+    }
+  });
+  $("[class^=NGname]").change(function() {
+    var id = $(this).attr('id');
+    if($('#'+id).is(':checked')) {
+      var ins = $(this).attr('class').replace('NGname','');
+      var NGtext = $(".NGnameText"+ins).text();
+      var NGtotalText = $('#chosenNGName').text();
+      var NGpriceT = $('.NGprice'+ ins).text();
+      var NGPrice = NGpriceT.replace(/^\D+|\D+$/g, "");
+      var totalNG = $(".NGpriceT").text();
+      var totalPrice = totalNG.replace(/^\D+|\D+$/g, "");
+      if(totalPrice == '') totalPrice = 0;
+      var Sum = parseInt(NGPrice) + parseInt(totalPrice);
+      console.log("ins: "+ins+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
+      $(".NGpriceT").text(Sum);
+      if(NGtotalText == "" || NGtotalText == "Not selected") {
+        $('#chosenNGName').text(NGtext);
+      } else {
+        $('#chosenNGName').text(NGtotalText + " and "+NGtext);
+      }
+    } else {
+      var ins = $(this).attr('class').replace('NGname','');
+      var NGtext = $(".NGnameText"+ins).text();
+      var NGtotalText = $('#chosenNGName').text();
+      var NGpriceT = $('.NGprice'+ ins).text();
+      var NGPrice = NGpriceT.replace(/^\D+|\D+$/g, "");
+      var totalNG = $(".NGpriceT").text();
+      var totalPrice = totalNG.replace(/^\D+|\D+$/g, "");
+      if(totalPrice == '') totalPrice = 0;
+      var Sum = parseInt(totalPrice) - parseInt(NGPrice);
+      
+      $(".NGpriceT").text(Sum);
+      var index = NGtotalText.indexOf(NGtext);
+      var subs = index + NGtext.length + 5;
+      var firstString = NGtotalText.substring(0, index);
+      
+      if(index == (NGtotalText.length - NGtext.length)) {
+        var firstString = NGtotalText.substring(0, index - 5);
+      }
+      var finalString = NGtotalText.substring(subs, 9999);
+      $('#chosenNGName').text(firstString + finalString);
+    }
+  })
+  $('.restart').click(function() {
+    location.reload();
+  });
+  function ProgressMove(input) {
+    var left = -931.0 + (parseFloat(input) * 184.55);
+    if(input == 5) {left = 0;}
+    $(".ProgressHolder .ProgressBar .ProgressBarBar").css('margin-left',left);
+  }
+  function BringSurveyBack() {
+    if($(".active").attr('id').replace('Section','') == '1') {
+        $(".firstSection").show();
+        $(".secondSection").hide();
+		$(".thirdSection").hide();
+    } else if($(".active").attr('id').replace('Section','') == '3') {
+        $(".firstSection").hide();
+        $(".secondSection").hide();
+		$(".thirdSection").show();
+    } else {
+		$(".firstSection").hide();
+        $(".secondSection").show();
+		$(".thirdSection").hide();
+    }
+  }
+  function convertAndCalculate(MtypeSelected) {
+    // things I need to calculate - member price and National Group price -------------
+    // Member price source - section 3
+    var MemberPriceText = $("."+MtypeSelected+" .MTprice").text();
+    if(MemberPriceText == "" || MemberPriceText == "$Free") {
+		var MemberPrice = 0;
+    } else {
+		var MemberPrice = MemberPriceText.replace(/^\D+|\D+$/g, "");
+    }
+    // National group price source - section 4
+    var NGpriceText = $(".NGpriceT").text();
+    if(NGpriceText == "" || NGpriceText == "&nbsp;") {
+		var NGprice = 0;
+    } else {
+		var NGprice = NGpriceText.replace(/^\D+|\D+$/g, "");
+    }
+    // List of actions that I need to perform -----------------
+    // Remove any non-digits from price
+    // Sum all price
+    var Sum = parseInt(MemberPrice) + parseInt(NGprice);
+    // Combine all price from National Group
+    // Need hidden field to get prices --------------------
+    // Place I need to get - from Section 4 to Section 5.
+    $("#chosenNG").text(NGprice);
+    $("#totalCost").text('$'+Sum);
+  }
+	 
+	 /*   Membership Types questions   */
 	 
 });
 

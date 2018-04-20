@@ -54,9 +54,9 @@ jQuery(document).ready(function($) {
 			'<div class="col-lg-6"><a class="button'+i+'" id="deleteQuestion">Delete Question</a></div>'+
 		'</div></div>');	
 		*/
-		'<div class="row">'+
+		'<!--div class="row">'+
 			'<div class="col-lg-6"><a class="button'+i+'" id="AddOption4">AddOption</a></div>'+
-		'</div>'+
+		'</div-->'+
 		'</div>');
 		if(number >= 2) {
 			SequenceControl(false);
@@ -111,14 +111,14 @@ jQuery(document).ready(function($) {
 			var optionString = "";
 			optionString = optionString + '<div class="row options" id="optionSettings'+ j +'"><div class="col-lg-6">'+
 			'<label id="OptionsMCSA'+ j +'">Question'+ j +'\'s Option Settings</label>';
-			for(var i = 1; i <= 5; i++) {
+			for(var i = 1; i <= 7; i++) {
 				optionString = optionString + '<input type="text" id="'+j+'OptionCount'+ i +'" class="form-control" name="'+ j +'oValue'+ i +'" placeholder="OptionValue">'+
 				'<div style="height: 34px; text-align: right; position: inherit">Answer:</div>';
 			}
 			optionString = optionString + '</div><div class="col-lg-6">'+
 			'<div class="SequenceQDorp'+j+'">'+
 			'<label for="">Question'+ j +'\'s next</label>';
-			for(var i = 1; i <= 5; i++) {
+			for(var i = 1; i <= 7; i++) {
 				optionString = optionString + CreateDropDown(j, number, i);
 				optionString = optionString + '<input type="text" id="'+j+'Answer'+ i +'" class="form-control" name="'+ j +'Answer'+ i +'" placeholder="Type answer">';
 			}
@@ -227,19 +227,28 @@ jQuery(document).ready(function($) {
 	
 	$('[id^=label]').click(function() {
 		var i = $(this).attr("id").replace('label', '');
-		if(i!=="0"){$('#question'+ i).removeClass("display-none");}
-		else if(i === "0"){ n = $(this).attr("class").replace('optionLabel', '');
-		var anstr = "Answer" + n;
-		var choseType = $("#"+anstr).val();
-		$('#memberTypeBlock').html(choseType);
+		if(i!=="0"){
+			$('[id^=question]:not(.function)').hide();
+			$('[id^=question]:not(.function)').addClass("function");
+			$('#question'+ i).show();
+			$('#question'+ i).removeClass("function");
+		} else if(i === "0") { 
+			n = $(this).attr("class").replace('optionLabel', '');
+			var anstr = "Answer" + n;
+			var choseType = $("#"+anstr).val();
+			//$('#memberTypeBlock').html(choseType);
+			$('#Section5 #chosenType').html(choseType);
+			$('#Section2 .next').click();
 		}
 		   
 	});
+	/*
 	$('[id^=question]').click(function() {
 		var i = $(this).attr("id").replace('question', '');
 		$('#question'+ i).addClass("display-none");
 		   
 	});
+	*/
 	/*
 	$('[id^=IsSequence]').change(function() {
 		var j = $(this).attr("id").replace('IsSequence', ''); 

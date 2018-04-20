@@ -42,11 +42,12 @@ $totalNum = sizeof($results);
 $CPDHousrs = $results["CurrentCPDHour"];
 $APA = array();
 $NAPA = array();
-foreach($results["APA"] as $t) {
-    array_push($APA, $t);
-}
-foreach($results["NONAPA"] as $t) {
-    array_push($NAPA, $t);
+foreach($results["Diary"] as $t) {
+	if($t["CPD"] == "APA") {
+		array_push($APA, $t);
+	} else {
+		array_push($NAPA, $t);
+	}
 }
 
 if(isset($_POST["NONAPA"])) {
@@ -233,7 +234,7 @@ function move(input) {
   <div class="NAPAhoursContent">
     <?php
        foreach($NAPA as $rowData) {
-          echo "<div style='display: none;'>".$rowData["NPD_id"]."</div><div>".$rowData["NPD_date"]."</div><div>".$rowData["NPD_Description"]."</div><div>".$rowData["NPD_Time"]."</div><div>".$rowData["NPD_Provider"]."</div><div>".$rowData["NPD_Reflection"]."</div>";
+          echo "<div style='display: none;'>".$rowData["PD_id"]."</div><div>".$rowData["PD_date"]."</div><div>".$rowData["PD_title"]."</div><div>".$rowData["PD_hours"]."</div><div>".$rowData["PD_Provider"]."</div><div>".$rowData["PD_Reflection"]."</div>";
           echo "<div class='lineBreak'>&nbsp;</div>";
        }
     ?> 

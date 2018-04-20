@@ -297,7 +297,7 @@ if($QuestionList == null): ?>
 </div>
 */ 
 $size = sizeof($QuestionList);
-print_r($QuestionList);
+//print_r($QuestionList);
 ?>
 <input type="hidden" value="<?php echo $size; ?>" id="qnumber" name="qNum">
 <?php  for($i=0; $i<$size; $i++):  ?>
@@ -337,7 +337,7 @@ $NthQuestion = $i + 1; ?>
 			<label id="OptionsMCSA<?php echo $NthQuestion; ?>">Question<?php echo $NthQuestion; ?>'s Option Settings</label>
 			<?php $OptionSize = sizeof($QuestionList[$i][3]) - 1; ?>
 			<?php $optionMax = $size - $i; ?>
-			<?php  for($t=0; $t< 5; $t++):  ?>
+			<?php  for($t=0; $t< 7; $t++):  ?>
 				<?php if($OptionSize < $t): // out of range, for additional options ?>
 					<input type="text" id="<?php echo $NthQuestion; ?>OptionCount<?php echo ($t + 1); ?>" class="form-control" name="<?php echo $NthQuestion; ?>oValue<?php echo ($t + 1); ?>" placeholder="OptionValue">
 				<?php else: // within range, for existing options ?>
@@ -349,7 +349,7 @@ $NthQuestion = $i + 1; ?>
 		<div class="col-lg-6">
 			<div class="SequenceQDorp<?php echo $NthQuestion; ?>">
 				<label for="">Question<?php echo $NthQuestion; ?>'s next</label>
-				<?php  for($t=0; $t< 5; $t++):  ?>
+				<?php  for($t=0; $t< 7; $t++):  ?>
 					<select class="form-control" id="<?php echo $NthQuestion; ?>qNext<?php echo ($t + 1);?>" name="<?php echo $NthQuestion; ?>qNext<?php echo ($t + 1);?>">
 						<option value="0">No further options</option>
 						<?php if($OptionSize < $t): // out of range, for additional options ?>
@@ -425,9 +425,9 @@ $NthQuestion = $i + 1; ?>
 			</div>
 		</div>
 		<?php endif; ?>
-		<div class="row">
+		<!--div class="row">
 			<div class="col-lg-6"><a class="button<?php echo $NthQuestion; ?>" id="AddOption<?php echo $NthQuestion; ?>">AddOption</a></div>
-		</div>
+		</div-->
 		<div class="<?php echo $NthQuestion; ?>optionAdd"></div>
 	</div>
 	<div class="row toggles">
