@@ -62,7 +62,7 @@ if(isset($_POST['step2'])) {
 		}	
 		$shoppingcartGet = null;
 		return $arrayReturn;
-	}
+		}
 	// 2.2.31 Get Membership prodcut price
 	// Send - 
 	// userID & product list

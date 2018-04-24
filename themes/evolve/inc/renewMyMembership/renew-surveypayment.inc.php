@@ -181,4 +181,4 @@ if(isset($_POST['step2-1'])) {
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('renew-insurance-form').submit();" class="join-details-button7"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton7"><span class="dashboard-button-name">Last</span></a></div>
 	</div>
 </form>
-	
+<form id="tempform" action="" method="POST"><input type="hidden" name="goI"></form>		

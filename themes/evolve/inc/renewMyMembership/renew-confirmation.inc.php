@@ -12,6 +12,15 @@ if(isset($_POST['step3'])) {
 	// Response -Renew a membership order successfully
 	//submit data to complete renew membership web service 2.2.27
 	GetAptifyData("27", $postReviewData);
+	//put extra code when using API to get the status of order, if it is successful, will save terms and conditions on APA side
+	//save the terms and conditons on APA side
+	$dataArray = array();
+	$dataArray['MemberID'] = $postReviewData['userID'];
+	$dataArray['CreateDate']= date('Y-m-d');
+	$dataArray['MembershipYear'] = date('Y',strtotime('+1 year'));
+	$dataArray['ProductList'] = implode(",",$postReviewData['productID']);
+	$dataArray['Type'] = "R";
+	forCreateRecordFunc($dataArray);
 	//delete session:
 	unset($_SESSION["postReviewData"]);
 }

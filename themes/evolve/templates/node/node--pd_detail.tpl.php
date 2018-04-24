@@ -97,6 +97,7 @@
 			// once they successfully login, create userID Session
 			// and get User's detail data.
 			$userId = $LogIn["UserId"];
+			$_SESSION["userID"] = $LogIn["UserId"];
 			echo $LogIn["TokenId"];
 		}
       

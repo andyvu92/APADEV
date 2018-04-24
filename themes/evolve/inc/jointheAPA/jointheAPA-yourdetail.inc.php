@@ -159,6 +159,8 @@ function createShoppingCart($userID, $productID,$type){
 	    }
 	  }
 	    $userID = $postData['Memberid'];
+		//test code
+		$_SESSION['userID'] = $userID;
 		$products = array();
         $productID = $postData['MemberType'];
 		createShoppingCart($userID, $productID,$type="membership");

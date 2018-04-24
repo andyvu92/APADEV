@@ -4,12 +4,21 @@ if(isset($_POST['step3'])) {
 	$postReviewData = $_SESSION['postReviewData'];
 	if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
 	if(isset($_POST['rollover'])){ $postReviewData['Rollover'] = $_POST['rollover']; }
-	$postReviewData['Termsandconditions'] = "1";
+	
 	// 2.2.26 - Register a new order
 	// Send - 
 	// userID&Paymentoption&PRFdonation&Rollover&Card_number&productID
 	// Response -Register a new order successfully
 	GetAptifyData("26", $postReviewData);
+	//put extra code when using API to get the status of order, if it is successful, will save terms and conditions on APA side
+	//save the terms and conditons on APA side
+	$dataArray = array();
+	$dataArray['MemberID'] = $postReviewData['userID'];
+	$dataArray['CreateDate']= date('Y-m-d');
+	$dataArray['MembershipYear'] = date('Y',strtotime('+1 year'));
+	$dataArray['ProductList'] = implode(",",$postReviewData['productID']);
+	$dataArray['Type'] = "J";
+	forCreateRecordFunc($dataArray);
 	//delete session:
 	unset($_SESSION["postReviewData"]);
 }

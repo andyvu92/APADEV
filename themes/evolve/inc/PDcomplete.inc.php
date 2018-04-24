@@ -10,11 +10,22 @@ if(isset($_POST["PRF"])) {
 	$OrderSend["CardUsed"] = $_POST["CardUsed"];
 	$PIDs = array();
 	for($i = 1; $i <= intval($_POST["total"]); $i++) {
-		$PID["PID"] = $_POST["PID".$i];
+		//$PID["PID"] = $_POST["PID".$i];
+		$PID = $_POST["PID".$i];
 		array_push($PIDs, $PID);
+		
 	}
 	$OrderSend["PID"] = $PIDs;
 	$ReceiveOrder = GetAptifyData("32", $OrderSend);
+	//put extra code when using API to get the status of order, if it is successful, will save terms and conditions on APA side
+	//save the terms and conditons on APA side
+	$dataArray = array();
+	$dataArray['MemberID'] = $_SESSION['userID'];
+	$dataArray['CreateDate']= date('Y-m-d');
+	$dataArray['MembershipYear'] = "";
+	$dataArray['ProductList'] = implode(",",$OrderSend["PID"]);
+	$dataArray['Type'] = "P";
+	forCreateRecordFunc($dataArray);
 }
 
 if(isset($_POST["Invoice_ID"])) {
