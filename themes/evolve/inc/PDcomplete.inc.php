@@ -16,7 +16,16 @@ if(isset($_POST["PRF"])) {
 		
 	}
 	$OrderSend["PID"] = $PIDs;
+	if(isset($_SESSION["tempcard"])){
+		$cardDetails = $_SESSION["tempcard"];
+		$OrderSend['Addcard'] = "No";
+		$OrderSend['Payment-method'] = $cardDetails['Payment-method'];
+		$OrderSend['Cardno'] = $cardDetails['Cardno'];
+		$OrderSend['Expiry-date'] = $cardDetails['Expiry-date'];
+		$OrderSend['CCV'] = $cardDetails['CCV'];
+	}
 	$ReceiveOrder = GetAptifyData("32", $OrderSend);
+	unset($_SESSION["tempcard"]);
 	//put extra code when using API to get the status of order, if it is successful, will save terms and conditions on APA side
 	//save the terms and conditons on APA side
 	$dataArray = array();

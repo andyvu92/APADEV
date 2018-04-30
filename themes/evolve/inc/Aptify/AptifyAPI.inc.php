@@ -508,28 +508,28 @@ function AptifyAPI($APItype, $variables){
 			echo "<br />12. Dashboard - Get payment listing: <br />";
 			// Add JSON sample here
 			$JSONreturn =  '{ 
-			        "Main-Creditcard-ID":"1",
-					"Rollover":"1",
+			        
+					
 					"paymentcards": [
 
 					   { "Creditcards-ID": "1",
 						"Payment-method": "Master",
-						
 						"Digitsnumber":"8888",
-						"Expiry-date":"10-10-2020"
+						"Expiry-date":"10-10-2020",
+						"Description":"N"
 						},
 						{ "Creditcards-ID": "2",
 						"Payment-method": "Visa",
-						
 						"Digitsnumber":"6666",
-						"Expiry-date":"10-10-2020"
+						"Expiry-date":"10-10-2020",
+						"Description":"Y"
 						},
 
 						{ "Creditcards-ID": "3",
 						"Payment-method": "Master",
-						
 						"Digitsnumber":"9999",
-						"Expiry-date":"10-10-2020"
+						"Expiry-date":"10-10-2020",
+						"Description":"N"
 						}
 					]
 				}';
@@ -1603,7 +1603,7 @@ function AptifyAPI($APItype, $variables){
 			  "Learning_outcomes":"<ul>this is presenter content<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</li><li>Vestibulum quis lobortis massa. Praesent mattis sem orci, non congue justo congue quis curabitur vestibulum.</li><li>Nisl aliquam, porta turpis pellentesque, auctor erat. Aliquam in ipsum mauris. Phasellus feugiat nibh interdum.</li><li>Elit faucibus egestas. Nam eu metus convallis, tempus nisl at, ullamcorper</li><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</li><li>Vestibulum quis lobortis massa. Praesent mattis sem orci, non congue justo congue quis curabitur vestibulum.</li><li>Nisl aliquam, porta turpis pellentesque, auctor erat. Aliquam in ipsum mauris. Phasellus feugiat nibh interdum.</li><li>Elit faucibus egestas. Nam eu metus convallis, tempus nisl at, ullamcorper</li></ul>",
 			  "Prerequisites":"<ul>this is prerequisites content<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</li><li>Vestibulum quis lobortis massa. Praesent mattis sem orci, non congue justo congue quis curabitur vestibulum.</li><li>Nisl aliquam, porta turpis pellentesque, auctor erat. Aliquam in ipsum mauris. Phasellus feugiat nibh interdum.</li><li>Elit faucibus egestas. Nam eu metus convallis, tempus nisl at, ullamcorper arcu</li></ul>",
 			  "Presenters":"Tim McGrath (PhD), Head Physiotherapist Port Adelaide FC;Dr Rob Creer, Orthopedic Surgeon;Kylie Shaw, Sports Physician and;Ben Serpell, Head of Athletic Development, Brumbies",
-			  "UserStatus":"1",
+			  "UserStatus":"0",
 			  "Totalnumber":"104",
 			  "Enrollednumber":"100",
 			  "Time":"1524030029",

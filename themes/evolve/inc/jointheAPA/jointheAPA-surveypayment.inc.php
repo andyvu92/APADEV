@@ -64,7 +64,7 @@ if(isset($_POST['step2-1'])) {
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button6"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton6"><span class="dashboard-button-name">Last</span></a></div>
 	</div>
-	<div class="down7" style="display:none;" >
+	<div class="down7" <?php if(isset($_POST['goP']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
 		<div class="row">
 			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 			Payment options:
@@ -99,7 +99,7 @@ if(isset($_POST['step2-1'])) {
 			<fieldset>
 				<select id="Paymentcard" name="Paymentcard">
 					<?php foreach( $cardsnum["paymentcards"] as $cardnum):  ?>
-					<option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardsnum["Main-Creditcard-ID"]==$cardnum["Creditcards-ID"]) echo "selected"; ?> data-class="<?php echo  $cardnum["Payment-method"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
+					<option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardnum["Description"]=="Y") echo "selected"; ?> data-class="<?php echo  $cardnum["Payment-method"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
 					<?php endforeach; ?>
 				</select>
 			</fieldset>
@@ -119,17 +119,17 @@ if(isset($_POST['step2-1'])) {
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-3">
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-3">
 				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-4">
+			<div class="col-lg-3">
 				<input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
 			</div>
 		</div>
@@ -138,7 +138,7 @@ if(isset($_POST['step2-1'])) {
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV">
 			</div>
 		</div>
-		<div class="row"><label for="addcardtag">Do you want to save this card</label><input type="checkbox" id="addcardtag"></div>
+		<div class="row"><label for="addcardtag">Do you want to save this card</label><input type="checkbox" id="addcardtag" name="addcardtag" value="1" checked></div>
 		<input type="hidden" name="addCard" value="0">
 		</div>
 	<?php endif; ?>  
@@ -155,24 +155,24 @@ if(isset($_POST['step2-1'])) {
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-3">
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-lg-3">
 				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-4">
+			<div class="col-lg-3">
 				<input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
 			</div>
 			<div class="col-lg-3">
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 			</div>
 		</div>
-		<div class="row"><label for="addcardtag">Do you want to save this card</label><input type="checkbox" id="addcardtag"></div>
+		<div class="row"><label for="addcardtag">Do you want to save this card</label><input type="checkbox" id="addcardtag" name="addcardtag" value="1" checked></div>
 		<input type="hidden" name="addCard" value="1">
 	</div>
 	<?php endif; ?>  

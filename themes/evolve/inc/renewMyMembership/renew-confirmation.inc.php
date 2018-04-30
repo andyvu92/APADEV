@@ -5,7 +5,14 @@ if(isset($_POST['step3'])) {
 	if(isset($_POST['Paymentcardvalue'])){ $postReviewData['Card_number'] = $_POST['Paymentcardvalue']; }
 	//if(isset($_POST['rollover'])){ $postReviewData['Rollover'] = $_POST['rollover']; }
 	//if(isset($_POST['Installpayment-frequency'])){ $postReviewData['Installpayment-frequency'] = $_POST['Installpayment-frequency']; }
-	$postReviewData['Termsandconditions'] = "1";
+	if(isset($_SESSION["tempcard"])){
+		$cardDetails = $_SESSION["tempcard"];
+		$postReviewData['Addcard'] = "No";
+		$postReviewData['Payment-method'] = $cardDetails['Payment-method'];
+		$postReviewData['Cardno'] = $cardDetails['Cardno'];
+		$postReviewData['Expiry-date'] = $cardDetails['Expiry-date'];
+		$postReviewData['CCV'] = $cardDetails['CCV'];
+	}
 	// 2.2.27 - Renew a membership order
 	// Send - 
 	// userID&Paymentoption&PRFdonation&Rollover&Card_number&productID
@@ -23,6 +30,7 @@ if(isset($_POST['step3'])) {
 	forCreateRecordFunc($dataArray);
 	//delete session:
 	unset($_SESSION["postReviewData"]);
+	unset($_SESSION["tempcard"]);
 }
 ?>
 <?php
@@ -66,9 +74,11 @@ include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 					// delete shopping cart data from APA database; put the response status validation here!!!!!!!
 					$userID = $_SESSION["userID"];
 					$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+					$type = "PD";
 					try {
-						$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID');
+						$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type!=:type');
 						$shoppingCartDel->bindValue(':userID', $userID);
+						$shoppingCartDel->bindValue(':type', $type);
 						$shoppingCartDel->execute();
 						$shoppingCartDel = null;
 					}

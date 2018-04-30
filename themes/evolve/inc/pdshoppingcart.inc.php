@@ -7,7 +7,7 @@ $products = array();
 $localProducts = array();
 $pdtype= array("event", "course", "workshop");
 $type = "PD";
-$userID = "1";
+$userID = $_SESSION['userID'];
 
 /***************get userinfo from Aptify******************/
 $userInfo_json = '{ 
@@ -77,7 +77,7 @@ $products = $product["PDEvents"];
 
 /********End get Product details  from Aptify******/
 
-if(isset($_SESSION["userID"])&& ($_SESSION["userID"]!=0)){
+if(isset($_SESSION["userID"])){
     
 	$userid = $_SESSION["userID"];
 	
@@ -96,7 +96,7 @@ if(isset($_SESSION["userID"])&& ($_SESSION["userID"]!=0)){
 	}
 	print_r($cardsnum);
 	
-	if(isset($_GET["action"])&& ($_GET["action"]=="addcard")) {
+	if(isset($_GET["action"])&& ($_GET["action"]=="addcard")&& isset($_POST['addcardtag'])) {
 		/*
 		$newcardsnum =  $_SESSION["cardsnum"];
 		$newcard =  array("Digitsnumber"=>substr($_POST["Cardnumber"],-4),"Payment-method"=>$_POST["Cardtype"],"Default"=>"0");
@@ -109,21 +109,30 @@ if(isset($_SESSION["userID"])&& ($_SESSION["userID"]!=0)){
 		$AddNewCounter = 0;
 		if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; $AddNewCounter++; }
 		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; $AddNewCounter++; }
-		if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; $AddNewCounter++; }
+		//if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; $AddNewCounter++; }
 		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; $AddNewCounter++; }
 		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; $AddNewCounter++; }
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; $AddNewCounter++; }
-		if($AddNewCounter == 6) { $addNewCards = 1; }
+		if($AddNewCounter == 5) { $addNewCards = 1; }
 		if($addNewCards == 1) {
 			GetAptifyData("15", $postPaymentData); 
 		}
-	}  
+	} 
+    if(isset($_GET["action"])&& ($_GET["action"]=="addcard")&& !isset($_POST['addcardtag'])) {
+	    $tempcard = array();
+		$tempcard['Payment-method'] = $_POST['Cardtype'];
+		$tempcard['Cardno'] = $_POST['Cardnumber'];
+		$tempcard['Expiry-date'] = $_POST['Expirydate']; 
+		$tempcard['CCV'] = $_POST['CCV'];
+		$_SESSION['tempcard'] = $tempcard;
+		
+	}	
 	/* $cardnum=substr( $creditcard,-4);  */
 	/*  Get shopping cart data via $user from Aptify  */         
-} else {
-	$product_id = $_GET["id"];
-	header("Location:/sign-in?id=$product_id"); /* Redirect browser */
-}
+} //else {
+	//$product_id = $_GET["id"];
+	//header("Location:/sign-in?id=$product_id"); /* Redirect browser */
+//}
 ?>
 
 <?php   if($productList->rowCount()>0):?>
@@ -188,7 +197,7 @@ if(isset($_SESSION["userID"])&& ($_SESSION["userID"]!=0)){
 		if (sizeof($cardsnum)!=0) {
 			foreach( $cardsnum["paymentcards"] as $cardnum) {
 				echo '<option value="'.$cardnum["Digitsnumber"].'"';
-				if($cardsnum["Rollover"]==1) {
+				if($cardsnum["Description"]=="Y") {
 					echo "selected";
 				}
 				echo 'data-class="'.$cardnum["Payment-method"].'">Credit card ending with ';
@@ -230,6 +239,7 @@ if(isset($_SESSION["userID"])&& ($_SESSION["userID"]!=0)){
 			<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV">
 			</div>
 		</div>
+		<div class="row"><label for="addcardtag">Do you want to save this card</label><input type="checkbox" id="addcardtag" name="addcardtag" value="1" checked></div>
 		<div class="row">
 			<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
 		</div>

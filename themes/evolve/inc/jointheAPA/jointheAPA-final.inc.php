@@ -17,6 +17,28 @@ function createShoppingCart($userID, $productID,$coupon){
 			die();
 	}
 }
+// check the user product in case of duplicated shopping cart data
+function checkShoppingCart($userID, $productID){
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+		try {
+			$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID and productID=:productID');
+			$shoppingcartGet->bindValue(':userID', $userID);
+			$shoppingcartGet->bindValue(':productID', $productID);
+			$shoppingcartGet->execute();
+			if($shoppingcartGet->rowCount()>0) { 
+			   $shoppingcartDel = $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and productID=:productID');
+			   $shoppingcartDel->bindValue(':userID', $userID);
+			   $shoppingcartDel->bindValue(':productID', $productID);
+			   $shoppingcartDel->execute();	
+			   $shoppingcartDel = null;
+			}
+			$shoppingcartGet = null; 
+	    }
+		catch (PDOException $e) {
+				print "Error!: " . $e->getMessage() . "<br/>";
+				die();
+	    }
+}
 if(isset($_POST['step2'])) {
 	$postPaymentData = array();
 	$postReviewData = array();
@@ -24,7 +46,7 @@ if(isset($_POST['step2'])) {
 	// Send - 
 	// userID, Payment-method,Name-on-card,Cardno,Expiry-date,CCV
 	// Response -Add Success message 
-	if(isset($_POST['addCard']) && $_POST['addCard'] == "1" ){
+	if(isset($_POST['addCard']) && $_POST['addCard'] == "1"  && isset($_POST['addcardtag'])){
 		if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; }
 		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
 		//if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
@@ -32,6 +54,15 @@ if(isset($_POST['step2'])) {
 		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
 		GetAptifyData("15", $postPaymentData);
+	}
+	elseif(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])){
+		$tempcard = array();
+		$tempcard['Payment-method'] = $_POST['Cardtype'];
+		$tempcard['Cardno'] = $_POST['Cardnumber'];
+		$tempcard['Expiry-date'] = $_POST['Expirydate']; 
+		$tempcard['CCV'] = $_POST['CCV'];
+		$_SESSION['tempcard'] = $tempcard;
+		
 	}
     // 2.2.26 Register a new member order
 	// Send - 
@@ -41,6 +72,8 @@ if(isset($_POST['step2'])) {
 	if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption']; }
 	if(isset($_POST['PRF'])){ 
 		$postReviewData['PRF'] = $_POST['PRF']; 
+		//check is there PRF product existed for this user
+		checkShoppingCart($userID, $prodcutID="PRF");
 		//save PRF product into APA database function
 		createShoppingCart($userID=$_SESSION['userID'], $productID="PRF", $coupon=$_POST['PRF']);  
 	}
@@ -81,6 +114,11 @@ if(isset($_POST['step2'])) {
 		$postCard['Creditcard-ID'] = $usedCard;
 		GetAptifyData("13", $postCard);
 	} 
+	// 2.2.12 Get payment listing
+	// Send - 
+	// UserID & detail data
+	// Response -payment card list
+	$cardsnum = GetAptifyData("12", $_SESSION['userID']);
  ?> 
 <form id ="join-review-form" action="joinconfirmation" method="POST">
 	<input type="hidden" name="step3" value="3">
@@ -112,21 +150,45 @@ if(isset($_POST['step2'])) {
 		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 Membpaymentsiderbar">
 		<p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
 		<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
+		<?php if ((sizeof($cardsnum)!=0) && (!isset($_SESSION['tempcard']))): ?>   
 			<fieldset>
 				<select  id="Paymentcard" name="Paymentcard" disabled>
-				<?php 
-				// 2.2.12 Get payment listing
-				// Send - 
-				// UserID & detail data
-				// Response -payment card list
-				$cardsnum = GetAptifyData("12", $postPaymentData['userID']);
-				if (sizeof($cardsnum)!=0): ?>   
+				
 					<?php foreach( $cardsnum["paymentcards"] as $cardnum):  ?>
-					<option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardnum["Digitsnumber"]==$usedCard) echo "selected"; ?> data-class="<?php echo  $cardnum["Payment-method"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
+					<option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardnum["Description"]=="Y") echo "selected"; ?> data-class="<?php echo  $cardnum["Payment-method"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
 					<?php endforeach; ?>
-				<?php endif; ?>  
+				
 				</select>
 			</fieldset>
+		<?php endif; ?>  
+		<?php if(isset($_SESSION['tempcard'])) : ?>
+		<?php $tempcards = $_SESSION['tempcard'];?>
+		    <div class="row">
+				<div class="col-lg-12">
+					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type" disabled>
+						<option value="AE" <?php if($tempcards['Payment-method'] == 'AE') echo "selected"; ?>>American Express</option>
+						<option value="Visa" <?php if($tempcards['Payment-method'] == 'Visa') echo "selected"; ?>>Visa</option>
+						<option value="Mastercard" <?php if($tempcards['Payment-method'] == 'Mastercard') echo "selected"; ?>>Mastercard</option>
+					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" value="<?php echo $tempcards['Cardno']; ?>"  placeholder="Card number" readonly>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<input type="date" class="form-control" id="Expirydate" name="Expirydate" value="<?php echo $tempcards['Expiry-date']; ?>" placeholder="Expire date" readonly>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<input type="text" class="form-control" id="CCV" name="CCV" value="<?php echo $tempcards['CCV']; ?>" placeholder="CCV" readonly>
+				</div>
+			</div>
+		
+		<?php endif; ?>
 		</div>
 		<div class="row ordersummary"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span>YOUR ORDER</span></div></div>
 			<table>
@@ -146,3 +208,5 @@ if(isset($_POST['step2'])) {
 		</div>
 	</div>
 </form>
+<form id="pform" action="" method="POST"><input type="hidden" name="goP"></form>	
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="your-details-prevbutton8"><span class="dashboard-button-name">Last</span></a></div>

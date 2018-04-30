@@ -227,6 +227,7 @@ jQuery(document).ready(function($) {
 		//}
         //if(x==5){ $.post(window.location, {goI:"1"},function(data){console.log('successfully posted data! response body: ' + data);});}
 		if(x==5){ $('#tempform').submit();}
+		if(x==7){ $('#pform').submit();}
 	    $('[class^=down]:not(.down'+x+')').slideUp(400);
 	    $('.down' + x).slideToggle(450);
 		$('[class^=tabtitle]:not(.tabtitle'+x+') span').removeClass("text-underline");

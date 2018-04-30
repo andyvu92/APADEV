@@ -155,11 +155,34 @@ if(isset($_POST['step1'])) {
 			die();
 	}
 	}
+	// check the user product in case of duplicated shopping cart data
+function checkShoppingCart($userID, $type){
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+		try {
+			$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID and type=:type');
+			$shoppingcartGet->bindValue(':userID', $userID);
+			$shoppingcartGet->bindValue(':type', $type);
+			$shoppingcartGet->execute();
+			if($shoppingcartGet->rowCount()>0) { 
+			   $shoppingcartDel = $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type=:type');
+			   $shoppingcartDel->bindValue(':userID', $userID);
+			   $shoppingcartDel->bindValue(':type', $type);
+			   $shoppingcartDel->execute();	
+			   $shoppingcartDel = null;
+			}
+			$shoppingcartGet = null; 
+	    }
+		catch (PDOException $e) {
+				print "Error!: " . $e->getMessage() . "<br/>";
+				die();
+	    }
+}
 	$userID = $postData['Memberid'];
 
 	$products = array();
 
 	$productID = $postData['MemberType'];
+	checkShoppingCart($userID, $type="membership");
 	createShoppingCart($userID, $productID,$type="membership");
 	foreach($postData['Nationalgp'] as $key=>$value){
 		array_push($products,$value);
@@ -186,7 +209,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 ?>
 <form id="your-detail-form" action="renewmymembership" method="POST">
 	<input type="hidden" name="step1" value="1"/>
-		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_POST['goI']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
+		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_POST['goI'])|| isset($_POST['goP']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding ">
 				<div class="row">
 					<div class="col-lg-3">
