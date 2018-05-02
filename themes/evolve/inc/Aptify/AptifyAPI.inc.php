@@ -2,7 +2,7 @@
 
 /*Dashboard page render national icons fuction*/
 /*Dashboard page*/
-function AptifyAPI($APItype, $variables){
+function AptifyAPI($APItype, $variables, $jsonVersion){
 	switch($APItype){
 		case "0":
 			// JSON persar
@@ -434,44 +434,23 @@ function AptifyAPI($APItype, $variables){
 			$JSONreturn = "";
 			return $JSONreturn;
 		case "7":
-			// For the actual API use
-			// $API = "";
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/Web?";
+			/*
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />7. Dashboard - log-in: <br />";
-			// Add JSON sample here
-			// create curl resource 
-			$ch = curl_init(); 
-            // set url 
-			
-			curl_setopt($ch, CURLOPT_URL, "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/Web?UserName=".$variables['ID']."&Password=".$variables['Password']); 
-            curl_setopt($ch, CURLOPT_HEADER, 0);
-         	//return the transfer as a string 
-			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-			//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-            //curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-           // curl_setopt($ch, CURLOPT_CAINFO,getcwd() ."\CA.crt");
-			//$output contains the output string 
-			$JSONreturn = curl_exec($ch);
-            if(curl_error($ch))
-			{
-				echo 'error:' . curl_error($ch);
-			}
-				
-            //echo $JSONreturn.'this is call from Aptify';
-			// close curl resource to free up system resources 
-			curl_close($ch);    
-			 
+			*/
+			$variable = "UserName=".$variables['ID']."&Password=".$variables['Password'];
+			$JSONreturn = curlRequest($API, null, "Get", $variable);
 			return $JSONreturn;
 		case "8":
 			// For the actual API use
-			// $API = "";
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Logout";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />8. Dashboard - Log-out: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = curlRequest($API, null, "", "");
 			return $JSONreturn;
 		case "9":
 			// For the actual API use
@@ -3363,5 +3342,43 @@ function AptifyAPI($APItype, $variables){
 			}'; 
 			return $JSONreturn;
 	}
+}
+
+function curlRequest($API, $header, $type, $variables) {
+	// create curl resource 
+	$ch = curl_init(); 
+	// set url 
+	if($type == "Get") {
+		$urlcurl = $API.$variables;
+		curl_setopt($ch, CURLOPT_URL, $urlcurl); 
+	} elseif($type == "JSON") {
+		curl_setopt($ch, CURLOPT_URL, $API); 
+		if(!empty($variables) || $variables != null) {
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS,$variables);
+		}
+	} else {
+		curl_setopt($ch, CURLOPT_URL, $API); 
+	}
+	if (!empty($header) || $header != null) {
+		curl_setopt($ch, CURLOPT_HEADER, $header);
+    }
+	//return the transfer as a string 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+	//curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
+   // curl_setopt($ch, CURLOPT_CAINFO,getcwd() ."\CA.crt");
+	//$output contains the output string 
+	$JSONreturn = curl_exec($ch);
+	if(curl_error($ch))
+	{
+		echo 'error:' . curl_error($ch);
+		return curl_error($ch);
+	}
+	//echo $JSONreturn.'this is call from Aptify';
+	// close curl resource to free up system resources 
+	curl_close($ch);
+	return $JSONreturn;
 }
 ?>

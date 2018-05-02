@@ -225,23 +225,6 @@ jQuery(document).ready(function($) {
 		//alert("Number is: "+counts);
 	});
 	
-	$('[id^=label]').click(function() {
-		var i = $(this).attr("id").replace('label', '');
-		if(i!=="0"){
-			$('[id^=question]:not(.function)').hide();
-			$('[id^=question]:not(.function)').addClass("function");
-			$('#question'+ i).show();
-			$('#question'+ i).removeClass("function");
-		} else if(i === "0") { 
-			n = $(this).attr("class").replace('optionLabel', '');
-			var anstr = "Answer" + n;
-			var choseType = $("#"+anstr).val();
-			//$('#memberTypeBlock').html(choseType);
-			$('#Section5 #chosenType').html(choseType);
-			$('#Section2 .next').click();
-		}
-		   
-	});
 	/*
 	$('[id^=question]').click(function() {
 		var i = $(this).attr("id").replace('question', '');

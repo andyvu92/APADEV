@@ -1,18 +1,10 @@
 <?php
-/*
-This page is undone.
-I need to add "List of fellowship product and National Groups"
-I'm doing it now :)
-*/
-/* We may use this as "Session" data and won't need to load. */
-// 2.2.20 - GET list of subscribed National Group
+// get national group from Aptify via webserice return Json data;
+// 2.2.19 - get national group
 // Send - 
-// Request, User ID
-// Response -
-// National Group ID, National Group title
+// Response - national group
 $sendData["RequestNG"] = "RequestNG";
-$sendData["UserID"] = "UserID";
-$nationalGroups = GetAptifyData("20", $sendData);
+$nationalGroups = GetAptifyData("19", $sendData);
 // use one of above to get "current" data
 // and combine with existing data ("$Subsctiption")
 // Then send it to Aptify.
@@ -30,7 +22,8 @@ if(count($PostArray) == 0) { // Just GET data
 	foreach($nationalGroup as $Subs) {
 		$ArrayRe["SubscriptionID"] = $Subs["NGid"];
 		$ArrayRe["Subscription"] = $Subs["NGtitle"];
-		$ArrayRe["Subscribed"] = 1;
+		$ArrayRe["NGprice"] = $Subs["NGprice"];
+		$ArrayRe["Subscribed"] = 0;
 		array_push($SubListAll, $ArrayRe);
 	}
 } else {
@@ -39,6 +32,7 @@ if(count($PostArray) == 0) { // Just GET data
 	foreach($nationalGroup as $Subs) {
 		$ArrayRe["SubscriptionID"] = $Subs["NGid"];
 		$ArrayRe["Subscription"] = $Subs["NGtitle"];
+		$ArrayRe["NGprice"] = $Subs["NGprice"];
 		if(!isset($PostArray[$Subs["NGid"]])) {
 			// When it's not set (unticked on check box)
 			$ArrayRe["Subscribed"] = 0;
@@ -58,10 +52,10 @@ if(count($PostArray) == 0) { // Just GET data
 }
 ?>
 
-<table class="table table-responsive table-bordered">
+<table class="table MTtable">
 	<tbody>
 		<?php
-			$countSubs = count($Subscription);
+			$countSubs = count($nationalGroups);
 			$countSubType = $countSubs%2;
 			$counter = 0;
 			foreach($SubListAll as $Subs) {
@@ -69,13 +63,14 @@ if(count($PostArray) == 0) { // Just GET data
 				if($tr == 0) {
 					echo "<tr>";
 				}
-				echo '<td><label for="'.$Subs["Subscription"].'">'.$Subs["Subscription"]
-					.'</label><input type="checkbox" name="'.$Subs["SubscriptionID"].
-					'" id="'.$Subs["Subscription"].'" value="'.$Subs["Subscribed"].'"';
+				echo '<td><input type="checkbox" name="'.$Subs["SubscriptionID"].
+					'" id="'.$Subs["SubscriptionID"].'" class="NGname'.$counter.'" value="'.$Subs["Subscribed"].'"';
 				if($Subs['Subscribed']==1){ 
 					echo "checked";
 				}
-				echo '></td>';
+				echo '>&nbsp;&nbsp;&nbsp;<label class="NGnameText'.$counter.'" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
+					.'</label></td>';
+				echo '<td><div class="NGprice'.$counter.'">$'.$Subs["NGprice"].'</div></td>';
 				if($tr == 1) {
 					echo "</tr>";
 				}
@@ -84,3 +79,4 @@ if(count($PostArray) == 0) { // Just GET data
 		?>
 	</tbody>
 </table>
+<div class="NGpriceT" style="display: none;"></div>
