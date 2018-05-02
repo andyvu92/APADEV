@@ -204,16 +204,31 @@ jQuery(document).ready(function($) {
 		
 		
 	};
+	var checkInsurance = function (memberType){
+    if(memberType=="11"||memberType=="12"||memberType=="15"||memberType=="16"||memberType=="34"||memberType=="22"||memberType=="21"||memberType=="36"||memberType=="37"){
+		return false;
+	}
+	else{return true;}
+	};
+	$('#MemberType').change(function(){
+		if(checkInsurance($('#MemberType').val())==false){
+			$('#insuranceTag').val("0");	
+		}
+		else{ $('#insuranceTag').val("1");}
+		
+	});
 	$('[class^=join-details-button]').click(function(){
 		if(validateFun()==false){alert("please fill out all required fields *");return false;} 
         var i = Number($(this).attr("class").replace('join-details-button', ''));
 		var x = Number(i + 1);
 	    if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
 	    $('[class^=down]:not(.down'+x+')').slideUp(400);
-	    $('.down' + x).slideToggle(450);
+	    if((x==5) && ($('#insuranceTag').val()=="0")){ $('.down6').slideToggle(450); }
+		else{$('.down' + x).slideToggle(450);}
 		$('[class^=tabtitle]:not(.tabtitle'+x+') span').removeClass("text-underline");
 		$('[class^=event]:not(.event'+x+') span').removeClass("text-underline");
-		var eventtitle = "eventtitle"+x;
+		if((x==5) && ($('#insuranceTag').val()=="0")){var eventtitle = "eventtitle6";}
+		else{var eventtitle = "eventtitle"+x;}
 		$("span." + eventtitle).addClass("text-underline");
 	});
 	

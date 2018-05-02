@@ -19,19 +19,19 @@
 			<li><a class="tabtitle2 inactiveLink" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li>
 			<li><a class="tabtitle3 inactiveLink" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li>
 			<li><a class="tabtitle4 inactiveLink" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
-			<li><a class="tabtitle5 inactiveLink" style="cursor: pointer;"><span class="eventtitle5 <?php if(isset($_POST['step1']) || isset($_POST['goI']))echo 'text-underline';?>" id="Insurance"><strong>Insurance</strong></span></a></li>
-			<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6 <?php if(isset($_POST['step2-1']))echo 'text-underline';?>" id="Survey"><strong>Survey</strong></span></a></li>
+			<li><a class="tabtitle5 inactiveLink" style="cursor: pointer;"><span class="eventtitle5 <?php if((isset($_POST['step1'])&& $_POST['insuranceTag']!="0") || isset($_POST['goI']))echo 'text-underline';?>" id="Insurance"><strong>Insurance</strong></span></a></li>
+			<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6 <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0"))echo 'text-underline';?>" id="Survey"><strong>Survey</strong></span></a></li>
 			<li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7 <?php if(isset($_POST['goP']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>
 			<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 <?php if(isset($_POST['step2']) || isset($_POST['step3']) )echo 'text-underline';?>" id="Review"><strong>Review</strong></span></a></li>
 			</ul>
 		<div id="insuranceBlock"></div>
 		<?php
 		include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-yourdetail.inc.php');
-		if((isset($_POST["step1"]) && $_POST["step1"] == "1") || isset($_POST['goI'])) {
+		if((isset($_POST["step1"]) && $_POST["step1"] == "1" && $_POST['insuranceTag']!="0") || isset($_POST['goI'])) {
 		include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-insurance.inc.php'); 
 		
 		}
-		elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP'])) {
+		elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")) {
 		include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-surveypayment.inc.php');
 		} 
 		elseif(isset($_POST["step2"]) && $_POST["step2"] == "2") {
