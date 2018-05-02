@@ -209,6 +209,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 ?>
 <form id="your-detail-form" action="renewmymembership" method="POST">
 	<input type="hidden" name="step1" value="1"/>
+	<input type="hidden" name="insuranceTag" id="insuranceTag"/>
 		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_POST['goI'])|| isset($_POST['goP']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding ">
 				<div class="row">
@@ -463,7 +464,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<select class="form-control" id="MemberType" name="MemberType">
 						<option value="" <?php if (empty($details['MemberType'])) echo "selected='selected'";?> disabled>memberType</option>
 						<option value="FPI" <?php if ($details['MemberType'] == "FPI") echo "selected='selected'";?>>Full-time physiotherapist with insurance (more than 18 hours per week) </option>
-						<option value="FPN" <?php if ($details['MemberType'] == "FPN") echo "selected='selected'";?>>Full-time physiotherapist no insurance (more than 18 hours per week) </option>
+						<option value="11" <?php if ($details['MemberType'] == "FPN") echo "selected='selected'";?>>Full-time physiotherapist no insurance (more than 18 hours per week) </option>
 						<option value="FEPI" <?php if ($details['MemberType'] == "FEPI") echo "selected='selected'";?>>Full-time Employed Public Sector Physiotherapist (more than 18 hours per week) with insurance</option>
 						<option value="FEPN" <?php if ($details['MemberType'] == "FEPN") echo "selected='selected'";?>>Full-time Employed Public Sector Physiotherapist (more than 18 hours per week) no insurance</option>
 						<option value="PPI" <?php if ($details['MemberType'] == "PPI") echo "selected='selected'";?>>Part-time Physiotherapist (less than 18 hours per week) with insurance</option>

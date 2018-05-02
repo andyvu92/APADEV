@@ -228,6 +228,7 @@ jQuery(document).ready(function($) {
 			$('#Addtionalquestion').val("0");
 		}
     });
+	if($('#Addtionalquestion').val()=="1"){$('#insuranceMore').removeClass("display-none");} else{$('#insuranceMore').addClass("display-none");}
 	  $('#recent-purchases').click(function(){
 		$('#all-purchases').removeClass("text-underline");
 		$('#recent-purchases').addClass("text-underline");
@@ -376,8 +377,15 @@ jQuery(document).ready(function($) {
 	$('.deletecardbutton').click(function(){
 		$( "#deleteCardWindow" ).dialog();
 	}); 
-	$('.cancelDeleteButton').click(function() {
+	$('#insuranceControl').click(function(){
+		$("#insurancePopUp").dialog();
+		
+	});
+    $('.cancelDeleteButton').click(function() {
         $('#deleteCardWindow').dialog('close');
+    });	
+	$('.cancelInsuranceButton').click(function() {
+        $('#insurancePopUp').dialog('close');
     });
 	$('#registerPDUserButton').click(function(){
 		$( "#registerPDUser" ).dialog();
@@ -596,6 +604,18 @@ jQuery(document).ready(function($) {
   }
 	 
 	 /*   Membership Types questions   */
-	 
+	/*insurance page for join a new member */
+	$('#join-insurance-form2 input').click(function() {
+       if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked"))
+	   { 
+			
+            $( "#insuranceStatus" ).val('0');			
+       }
+	   else if($('#Claim2').is(":checked") && $('#Facts2').is(":checked") && $('#Disciplinary2').is(":checked") && $('#Decline2').is(":checked") && $('#Oneclaim2').is(":checked")){
+			
+           
+            $( "#insuranceStatus" ).val('1');				
+		}
+    });
 });
 

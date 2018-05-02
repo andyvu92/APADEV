@@ -13,21 +13,48 @@ if(isset($_POST['step2-1'])) {
 		if(isset($_POST['Nameclaim'])){ $postInsuranceData['Nameclaim'] = $_POST['Nameclaim']; }
 		if(isset($_POST['Fulldescription'])){ $postInsuranceData['Fulldescription'] = $_POST['Fulldescription']; }
 		if(isset($_POST['Amountpaid'])){ $postInsuranceData['Amountpaid'] = $_POST['Amountpaid']; }
-		if(isset($_POST['Finalisedclaim'])){ $postInsuranceData['Finalisedclaim'] = $_POST['Finalisedclaim']; } 
+		if(isset($_POST['Finalisedclaim'])){ $postInsuranceData['Finalisedclaim'] = $_POST['Finalisedclaim']; }
+        if(isset($_POST['Businiessname'])){ $postInsuranceData['Businiessname'] = $_POST['Businiessname']; }		
 	}
 	else{ $postInsuranceData['Addtionalquestion'] = "0";}
-	if(isset($_POST['Businiessname'])){ $postInsuranceData['Businiessname'] = $_POST['Businiessname']; }
+	//check post insurance data is same as previous insurance data 
+	// 2.2.* - Get user insurance data
+	// Send - 
+	// UserID 
+	// Response -UserID & insurance data
+	$insuranceDataTag=1;// this is important key, to check the user is whether the first time to submit insuranceData.
+	$insuarnceData=array();
+	$insuarnceData['Claim']="Yes";
+	$insuarnceData['Facts']="No"; 
+	$insuarnceData['Disciplinary']="No"; 
+	$insuarnceData['Decline']="No"; 
+	$insuarnceData['Oneclaim']="No";  
+	$insuarnceData['Addtionalquestion']="1";
+	$insuarnceData['Yearclaim']="2018";
+	$insuarnceData['Nameclaim']="test";
+	$insuarnceData['Fulldescription']="test"; 
+	$insuarnceData['Amountpaid']="2000"; 
+	$insuarnceData['Finalisedclaim']="Yes"; 
+	$insuarnceData['Businiessname']="test"; 
+	
+	if($postInsuranceData['Claim']!=$insuarnceData['Claim'] || $postInsuranceData['Facts']!=$insuarnceData['Facts'] || $postInsuranceData['Disciplinary']!=$insuarnceData['Disciplinary'] || $postInsuranceData['Decline']!=$insuarnceData['Decline']|| $postInsuranceData['Oneclaim']!=$insuarnceData['Oneclaim']){
+	$submitTag=true;	
+	}
+	else{$submitTag=false;}
+	if($insuarnceData['Addtionalquestion']=="1" && ($postInsuranceData['Yearclaim'] != $insuarnceData['Yearclaim'] || $postInsuranceData['Nameclaim'] != $insuarnceData['Nameclaim'] || $postInsuranceData['Fulldescription'] != $insuarnceData['Fulldescription']|| $postInsuranceData['Amountpaid'] != $insuarnceData['Amountpaid']|| $postInsuranceData['Finalisedclaim'] != $insuarnceData['Finalisedclaim']|| $postInsuranceData['Businiessname'] != $insuarnceData['Businiessname'])){
+	$submitTag=true;	
+	}
 
 	// 2.2.* Send insurance data to Aptify webservice
 	// Send - 
 	// userID & insurance data
 	// Response -??????????????????????set in the future
-    $testData = GetAptifyData("31", $postInsuranceData);
+    if($insuranceDataTag==0 || $submitTag ) {$testData = GetAptifyData("31", $postInsuranceData);}
 }
   ?>
 <form id="renew-insurance-form" action="renewmymembership" method="POST">
 	<input type="hidden" name="step2" value="2"/>
-	<div class="down6" <?php if(isset($_POST['step2-1']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
+	<div class="down6" <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0"))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
 		<div class="row">
 			<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 			Do you currently or plan to provide services to professional sport people in the AFL, A League, ARU, NRL, Cricket Australia or Olympic Representatives?
@@ -62,7 +89,7 @@ if(isset($_POST['step2-1'])) {
 			</div>
 			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><input type="text" class="form-control" name="s6" id="s6" placeholder="%"></div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button6"><span class="dashboard-button-name">Next</span></a><a  class="your-details-prevbutton6"><span class="dashboard-button-name">Last</span></a></div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button6"><span class="dashboard-button-name">Next</span></a><a  class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Last</span></a></div>
 	</div>
 	<div class="down7" <?php if(isset($_POST['goP']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
 		<div class="row">
