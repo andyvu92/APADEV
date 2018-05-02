@@ -472,34 +472,34 @@ jQuery(document).ready(function($) {
 	
 	/*   Membership Types questions   */
 		
-		$(".next").click(function() {
-    var x = $(".active").attr('id').replace('Section','');
-    if(x != '5') { // if it is not the last section
-      $("#Section"+x).removeClass("active");
-      x = parseInt(x) + 1;
-      $("#Section"+x).addClass("active passed");
-       $(".MainQuestionHolder #Section"+x).show();
-       $('.MainQuestionHolder [id^=Section]:not(.MainQuestionHolder #Section'+x+')').hide(400);
-      ProgressMove(x);
-    }
-    BringSurveyBack();
-    var type = $("#chosenType").text();
-    var title = $("."+type+" .MTtitle").text();
-    $("#chosenTypeName").text(title);
-    console.log(type);
-    if(x == 5) {
-      convertAndCalculate(type);
-    }
-    $("."+type).show();
-  });
+	$(".next").click(function() {
+		var x = $(".active").attr('id').replace('Section','');
+		if(x != '5') { // if it is not the last section
+		  $("#Section"+x).removeClass("active");
+		  x = parseInt(x) + 1;
+		  $("#Section"+x).addClass("active passed");
+		   $(".MainQuestionHolder #Sections"+x).show();
+		   $('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
+		  ProgressMove(x);
+		}
+		BringSurveyBack();
+		var type = $("#chosenType").text();
+		var title = $("."+type+" .MTtitle").text();
+		$("#chosenTypeName").text(title);
+		console.log(type);
+		if(x == 5) {
+			convertAndCalculate(type);
+		}
+		$("."+type).show();
+	});
   $(".prev").click(function() {
     var x = $(".active").attr('id').replace('Section','');
     if(x != '1') {
-      $("#Section"+x).removeClass("active passed");
+      $("#Section"+x).removeClass("passed active");
        x = parseInt(x) - 1;
-       $(".MainQuestionHolder #Section"+x).show();
+       $(".MainQuestionHolder #Sections"+x).show();
       $("#Section"+x).addClass("active");
-       $('.MainQuestionHolder [id^=Section]:not(.MainQuestionHolder #Section'+x+')').hide(400);
+       $('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
       ProgressMove(x);
     }
     BringSurveyBack();
@@ -507,8 +507,8 @@ jQuery(document).ready(function($) {
       $(".node-membership-type").hide();
       $('[id^=question]').hide();
       $('[id^=question]').addClass("function");
-      $('#question50').show();
-      $('#question50').removeClass("function");
+      $('#question65').show();
+      $('#question65').removeClass("function");
     }
   });
   $("[class^=NGname]").change(function() {
@@ -562,11 +562,12 @@ jQuery(document).ready(function($) {
     $(".ProgressHolder .ProgressBar .ProgressBarBar").css('margin-left',left);
   }
   function BringSurveyBack() {
-    if($(".active").attr('id').replace('Section','') == '1') {
+	var x = $(".active").attr('id').replace('Section','');
+    if(x == '1') {
         $(".firstSection").show();
         $(".secondSection").hide();
 		$(".thirdSection").hide();
-    } else if($(".active").attr('id').replace('Section','') == '3') {
+    } else if(x == '3') {
         $(".firstSection").hide();
         $(".secondSection").hide();
 		$(".thirdSection").show();
@@ -576,32 +577,77 @@ jQuery(document).ready(function($) {
 		$(".thirdSection").hide();
     }
   }
-  function convertAndCalculate(MtypeSelected) {
-    // things I need to calculate - member price and National Group price -------------
-    // Member price source - section 3
-    var MemberPriceText = $("."+MtypeSelected+" .MTprice").text();
-    if(MemberPriceText == "" || MemberPriceText == "$Free") {
-		var MemberPrice = 0;
-    } else {
-		var MemberPrice = MemberPriceText.replace(/^\D+|\D+$/g, "");
-    }
-    // National group price source - section 4
-    var NGpriceText = $(".NGpriceT").text();
-    if(NGpriceText == "" || NGpriceText == "&nbsp;") {
-		var NGprice = 0;
-    } else {
-		var NGprice = NGpriceText.replace(/^\D+|\D+$/g, "");
-    }
-    // List of actions that I need to perform -----------------
-    // Remove any non-digits from price
-    // Sum all price
-    var Sum = parseInt(MemberPrice) + parseInt(NGprice);
-    // Combine all price from National Group
-    // Need hidden field to get prices --------------------
-    // Place I need to get - from Section 4 to Section 5.
-    $("#chosenNG").text(NGprice);
-    $("#totalCost").text('$'+Sum);
-  }
+	function convertAndCalculate(MtypeSelected) {
+		// things I need to calculate - member price and National Group price -------------
+		// Member price source - section 3
+		var MemberPriceText = $("."+MtypeSelected+" .MTprice").text();
+		if(MemberPriceText == "" || MemberPriceText == "$Free") {
+			var MemberPrice = 0;
+		} else {
+			var MemberPrice = MemberPriceText.replace(/^\D+|\D+$/g, "");
+		}
+		// National group price source - section 4
+		var NGpriceText = $(".NGpriceT").text();
+		if(NGpriceText == "" || NGpriceText == "&nbsp;") {
+			var NGprice = 0;
+		} else {
+			var NGprice = NGpriceText.replace(/^\D+|\D+$/g, "");
+		}
+		// List of actions that I need to perform -----------------
+		// Remove any non-digits from price
+		// Sum all price
+		var Sum = parseInt(MemberPrice) + parseInt(NGprice);
+		// Combine all price from National Group
+		// Need hidden field to get prices --------------------
+		// Place I need to get - from Section 4 to Section 5.
+		$("#chosenNG").text(NGprice);
+		$("#totalCost").text('$'+Sum);
+	}
+	 
+	$('[id^=label]').click(function() {
+		var i = $(this).attr("id").replace('label', '');
+		if(i!=="0"){
+			$('[id^=question]:not(.function)').hide();
+			$('[id^=question]:not(.function)').addClass("function");
+			$('#question'+ i).show();
+			$('#question'+ i).removeClass("function");
+		} else if(i === "0") { 
+			n = $(this).attr("class").replace('optionLabel', '');
+			var anstr = "Answer" + n;
+			var choseType = $("#"+anstr).val();
+			//$('#memberTypeBlock').html(choseType);
+			$('#Sections5 #chosenType').html(choseType);
+			$('#Sections2 .next').click();
+		}
+	});
+	
+	$('[id^=Section]').click(function() {
+		var x = $(this).attr("id").replace('Section', '');
+		var i = $(".ProgressHolder .active").attr('id').replace('Section','');
+		if(x < i) { // when clicked section is previous one.
+			var i = parseInt(i);
+			var x = parseInt(x)
+			var gap = i - x;
+			console.log("i:"+i+" x:"+x+" gap:"+gap);
+			for(y = x + 1; y <= (i); y++) {
+				console.log("in " +y);
+				$("#Section"+y).removeClass("passed active");
+				$("#Section"+y).removeClass("active passed");
+			}
+			$(".MainQuestionHolder #Sections"+x).show();
+			$("#Section"+x).addClass("active");
+			$('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
+			ProgressMove(x);
+			BringSurveyBack();
+			if(x == 2) {
+				$(".node-membership-type").hide();
+				$('[id^=question]').hide();
+				$('[id^=question]').addClass("function");
+				$('#question65').show();
+				$('#question65').removeClass("function");
+			}
+		}
+	});
 	 
 	 /*   Membership Types questions   */
 	/*insurance page for join a new member */

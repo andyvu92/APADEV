@@ -106,7 +106,7 @@ $rens = str_replace('</div>',"",$rens);
 				$rens = str_replace('<div class="field-items">',"",$rens);
 				$rens = str_replace('<div class="field-item even">',"",$rens);
 				$rens = str_replace('</div>',"",$rens);
-				print '<div>$'.$rens.'</div>';
+				print '<div class="MTprice">$'.$rens.'</div>';
 			?>
 		</div>
 		<?php //print render($content['field_what_is_it']);?>
@@ -132,6 +132,21 @@ $rens = str_replace('</div>',"",$rens);
 					print '<li>';
 					print $ren;
 					print '</li>';
+				}
+				print '</ul></div>';
+			} elseif($total == 1 && strlen($linksList[0]) > 200) {
+				echo '<div class="MTcontent">
+				<div class="MTcontentTitle">What is it?</div><br />';
+				print '<ul>';
+				foreach($linksList as $ren) {					
+					// get rid of &nbsp;
+					$string = htmlentities($ren, null, 'utf-8');
+					$checks = str_replace("&nbsp;", " ", $string);
+					$checks = html_entity_decode($checks);
+					print '<li>';
+					print $ren;
+					print '</li>';
+					break;
 				}
 				print '</ul></div>';
 			}
@@ -161,6 +176,21 @@ $rens = str_replace('</div>',"",$rens);
 					print '</li>';
 				}
 				print '</ul></div>';
+			} elseif($total == 1 && strlen($linksList[0]) > 200) {
+				echo '<div class="MTcontent">
+				<div class="MTcontentTitle">You are eligible if you:</div><br />';
+				print '<ul>';
+				foreach($linksList as $ren) {					
+					// get rid of &nbsp;
+					$string = htmlentities($ren, null, 'utf-8');
+					$checks = str_replace("&nbsp;", " ", $string);
+					$checks = html_entity_decode($checks);
+					print '<li>';
+					print $ren;
+					print '</li>';
+					break;
+				}
+				print '</ul></div>';
 			}
 		?>
 		<?php // print render($content['body']); ?>
@@ -185,6 +215,16 @@ $rens = str_replace('</div>',"",$rens);
 				foreach($linksList as $ren) {					
 					$count++;
 					if($count == $total) break;
+					print '<li>';
+					print $ren;
+					print '</li>';
+				}
+				print '</ul></div>';
+			} elseif($total == 1 && strlen($linksList[0]) > 10) {
+				echo '<div class="MTcontent">
+					<div class="MTcontentTitle">You are not eligible if you:</div><br />';
+				print '<ul>';
+				foreach($linksList as $ren) {					
 					print '<li>';
 					print $ren;
 					print '</li>';

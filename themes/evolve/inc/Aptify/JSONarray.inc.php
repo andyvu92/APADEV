@@ -6,15 +6,10 @@ include('sites/all/themes/evolve/inc/Aptify/AptifyAPI.inc.php');
  */
 function GetAptifyData($TypeAPI, $ArrayIn) {
 	// Array to JSON
-	// use this code under for later.
-	// we need to pass array for now :)
-	/*
-	$json = JSONArrayConverter("toArraytoJSON",$ArrayIn);
-	$json2 = AptifyAPI($TypeAPI, $json);
-	return JSONArrayConverter("toArray", $json2);
-	*/
-	$tt = AptifyAPI($TypeAPI, $ArrayIn);
-	return JSONArrayConverter("toArray", $tt);
+	$arrayToJson = JSONArrayConverter("toJSON", $ArrayIn);
+	// pass array and JSON version together and use them as needed.
+	$jsonreturn = AptifyAPI($TypeAPI, $ArrayIn, $arrayToJson);
+	return JSONArrayConverter("toArray", $jsonreturn);
 }
 
 
