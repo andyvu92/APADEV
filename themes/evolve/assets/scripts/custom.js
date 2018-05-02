@@ -640,7 +640,8 @@ jQuery(document).ready(function($) {
 			}
 		}
 	});
-	 
+	 var widthCalVideo169 = $(".video169").width();
+	$(".video169").attr('style','height: '+((parseInt(widthCalVideo169) * 9)/16)+"px; width: 100%;");
 	 /*   Membership Types questions   */
 	 
 });
