@@ -80,7 +80,7 @@ jQuery(document).ready(function($) {
 				if($("input[name=Password]").val() =='') { return false;}
 			}
 		}
-		if($('select[name=MemberType]').val()!=="AMO" || $('select[name=MemberType]').val()!=="AM" || $('select[name=MemberType]').val()!=="NPP"|| $('select[name=MemberType]').val()!=="RAN"|| $('select[name=MemberType]').val()!=="RW"|| $('select[name=MemberType]').val()!=="SY"){
+		if($('select[name=MemberType]').val()!=="36" || $('select[name=MemberType]').val()!=="35" || $('select[name=MemberType]').val()!=="33"|| $('select[name=MemberType]').val()!=="21"|| $('select[name=MemberType]').val()!=="22"|| $('select[name=MemberType]').val()!=="31"|| $('select[name=MemberType]').val()!=="32"){
 			if($('.down3:visible').length !== 0){
 				var i = $("input[name=wpnumber]").val();
 				for (x = 0; x<i;x++){

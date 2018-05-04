@@ -141,9 +141,15 @@ if(isset($_POST['step2-1'])) {
 		<div class="row">
 			<div class="col-lg-3">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-					<option value="AE">American Express</option>
-					<option value="Visa">Visa</option>
-					<option value="Mastercard">Mastercard</option>
+				<?php 
+					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+					$PaymentType=json_decode($PaymentTypecode, true);
+					foreach($PaymentType  as $pair => $value){
+						echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+						echo '> '.$PaymentType[$pair]['Name'].' </option>';
+						
+					}
+				?>	
 				</select>
 			</div>
 		</div>
@@ -176,10 +182,15 @@ if(isset($_POST['step2-1'])) {
 		<div class="row">
 			<div class="col-lg-3">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-					<option value="" disabled>Card type</option>
-					<option value="AE">American Express</option>
-					<option value="Visa">Visa</option>
-					<option value="Mastercard">Mastercard</option>
+				<?php 
+					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+					$PaymentType=json_decode($PaymentTypecode, true);
+					foreach($PaymentType  as $pair => $value){
+						echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+						echo '> '.$PaymentType[$pair]['Name'].' </option>';
+						
+					}
+				?>
 				</select>
 			</div>
 		</div>

@@ -217,16 +217,18 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 none-padding">
                 <div class="row">
                     <div class="col-lg-3">
-				        <label for="prefix">Prefix<span class="tipstyle">*</span></label>
-                        <select class="form-control" id="Prefix" name="Prefix">
-                            <option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> selected disabled>Prefix</option>
-                            <option value="Prof" <?php if ($details['Prefix'] == "Prof") echo "selected='selected'";?>>Prof</option>
-                            <option value="Dr" <?php if ($details['Prefix'] == "Dr") echo "selected='selected'";?>>Dr</option>
-                            <option value="Mr" <?php if ($details['Prefix'] == "Mr") echo "selected='selected'";?>>Mr</option>
-                            <option value="Mrs" <?php if ($details['Prefix'] == "Mrs") echo "selected='selected'";?>>Mrs</option>
-                            <option value="Miss" <?php if ($details['Prefix'] == "Miss") echo "selected='selected'";?>>Miss</option>
-                            <option value="Ms" <?php if ($details['Prefix'] == "Ms") echo "selected='selected'";?>>Ms</option>
-                        </select>
+				            <label for="prefix">Prefix<span class="tipstyle">*</span></label>
+							<select class="form-control" id="Prefix" name="Prefix">
+							<?php
+							$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
+							$Prefix=json_decode($Prefixcode, true);							
+							foreach($Prefix  as $key => $value){
+								echo '<option value="'.$Prefix[$key]['ID'].'"';
+								if ($details['Prefix'] == $Prefix[$key]['ID']){ echo "selected='selected'"; } 
+								echo '> '.$Prefix[$key]['Prefix'].' </option>';
+							}
+							?>
+							</select>
                     </div>
                     <div class="col-lg-3">
                         <label for="">First name<span class="tipstyle">*</span></label>
@@ -258,32 +260,25 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                     </div>
 					<div class="col-lg-3 col-lg-offset-1">
 					   <label for="">Gender<span class="tipstyle">*</span></label>
-					   <select class="form-control" id="Gender" name="Gender">
-						    <option value="" <?php if (empty($details['Gender'])) echo "selected='selected'";?> disabled> Gender </option>
-						    <option value="Male" <?php if ($details['Gender'] == "Male") echo "selected='selected'";?>>Male</option>
-						    <option value="Female" <?php if ($details['Gender'] == "Female") echo "selected='selected'";?>>Female</option>
-						    <option value="other" <?php if ($details['Gender'] == "Other") echo "selected='selected'";?>>I’d prefer not to say</option>
-					   </select>
+					   <select class="form-control" id="Gender" name="Gender" required>
+							<option value="" <?php if (empty($details['Gender'])) echo "selected='selected'";?> disabled> Gender </option>
+							<option value="Male" <?php if ($details['Gender'] == "Male") echo "selected='selected'";?>>Male</option>
+							<option value="Female" <?php if ($details['Gender'] == "Female") echo "selected='selected'";?>>Female</option>
+							<option value="other" <?php if ($details['Gender'] == "Other") echo "selected='selected'";?>>I’d prefer not to say</option>
+						</select>
 					</div>
                 </div>
 				<div class="row">
 					<div class="col-lg-2">
 					   <label for="">Country code</label>
-					   <?php 
-						// 2.2.39 - get option dropdown list
-						// Send - 
-						// Response - get dropdown list from Aptify via webserice return Json data;
-						// stroe workplace settings into the session
-						$dropdata= GetAptifyData("39","request");
-						$countrycode = $dropdata['Country'];
-						?>
-						<select class="form-control" id="country-code" name="country-code">
-						
-						<?php 
-						foreach($countrycode  as $lines){
-							echo '<option value="'.$lines["TelephoneCode"].'"';
-							if ($details['Home-phone-number'][0] == $lines["TelephoneCode"]){ echo "selected='selected'"; } 
-							echo '> '.$lines["Country"].' </option>';
+					   	<select class="form-control" id="country-code" name="country-code">
+						<?php
+                        $countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+						$country=json_decode($countrycode, true);						
+						foreach($country  as $key => $value){
+						   	echo '<option value="'.$country[$key]['TelephoneCode'].'"';
+							if ($details['Home-phone-number'][0] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; } 
+							echo '> '.$country[$key]['Country'].' </option>';
 						}
 						?>
 						</select>
@@ -350,22 +345,36 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                     </div>
                     <div class="col-lg-3">
                         <label for="">State<span class="tipstyle">*</span></label>
-                        <select class="form-control" id="State" name="State">
-                            <option value="" <?php if (empty($details['State'])) echo "selected='selected'";?> disabled> State </option>
-                            <option value="ACT" <?php if ($details['State'] == "ACT") echo "selected='selected'";?>> ACT </option>
-                            <option value="NSW" <?php if ($details['State'] == "NSW") echo "selected='selected'";?>> NSW </option>
-                            <option value="SA" <?php if ($details['State'] == "SA") echo "selected='selected'";?>> SA </option>
-                            <option value="TAS" <?php if ($details['State'] == "TAS") echo "selected='selected'";?>> TAS </option>
-                            <option value="VIC" <?php if ($details['State'] == "VIC") echo "selected='selected'";?>> VIC </option>
-                            <option value="QLD" <?php if ($details['State'] == "QLD") echo "selected='selected'";?>> QLD </option>
-                            <option value="NT" <?php if ($details['State'] == "NT") echo "selected='selected'";?>> NT </option>
-                            <option value="WA" <?php if ($details['State'] == "WA") echo "selected='selected'";?>> WA </option>
-							<option value="N/A" <?php if ($details['State'] == "N/A") echo "selected='selected'";?>> I live overseas </option>
-                        </select>
+						<select class="form-control" id="State" name="State">
+						<?php
+                        $statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+						$State=json_decode($statecode, true);						
+						foreach($State  as $key => $value){
+						    echo '<option value="'.$State[$key]['ID'].'"';
+							if ($details['State'] == $State[$key]['ID']){ echo "selected='selected'"; } 
+							echo '> '.$State[$key]['Abbreviation'].' </option>';
+							
+						}
+						?>
+						</select>
+                       
                     </div>
                     <div class="col-lg-6">
                         <label for="">Country<span class="tipstyle">*</span></label>
-                        <input type="text" class="form-control" name="Country" id="Country" <?php if (empty($details['Country'])) {echo "placeholder='Country'";}   else{ echo 'value="'.$details['Country'].'"'; }?>>
+						<select class="form-control" id="Country" name="Country">
+						<?php
+                        $countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+						$country=json_decode($countrycode, true);						
+						foreach($country  as $key => $value){
+						    
+							echo '<option value="'.$country[$key]['ID'].'"';
+							if ($details['Country'] == $country[$key]['ID']){ echo "selected='selected'"; } 
+							echo '> '.$country[$key]['Country'].' </option>';
+							
+						}
+						?>
+						</select>
+                        
                     </div>
                 </div>
                    
@@ -402,21 +411,35 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                         </div>
                         <div class="col-lg-3">
                            <label for="">State<span class="tipstyle">*</span></label>
-                           <select class="form-control" name="Billing-State" id="Billing-State">
+						    <select class="form-control" name="Billing-State" id="Billing-State">
                               <option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
-                              <option value="ACT" <?php if ($details['Billing-State'] == "ACT") echo "selected='selected'";?>> ACT </option>
-                              <option value="NSW" <?php if ($details['Billing-State'] == "NSW") echo "selected='selected'";?>> NSW </option>
-                              <option value="SA" <?php if ($details['Billing-State'] == "SA") echo "selected='selected'";?>> SA </option>
-                              <option value="TAS" <?php if ($details['Billing-State'] == "TAS") echo "selected='selected'";?>> TAS </option>
-                              <option value="VIC" <?php if ($details['Billing-State'] == "VIC") echo "selected='selected'";?>> VIC </option>
-                              <option value="QLD" <?php if ($details['Billing-State'] == "QLD") echo "selected='selected'";?>> QLD </option>
-                              <option value="NT" <?php if ($details['Billing-State'] == "NT") echo "selected='selected'";?>> NT </option>
-                              <option value="WA" <?php if ($details['Billing-State'] == "WA") echo "selected='selected'";?>> WA </option>
-                           </select>
+							  <?php 
+								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+								$State=json_decode($statecode, true);
+								foreach($State  as $key => $value){
+								echo '<option value="'.$State[$key]['ID'].'"';
+								if ($details['Billing-State'] == $State[$key]['ID']){ echo "selected='selected'"; } 
+								echo '> '.$State[$key]['Abbreviation'].' </option>';
+							
+								}
+								?>
+                            </select>
                         </div>
                         <div class="col-lg-6">
                            <label for="">Country<span class="tipstyle">*</span></label>
-                           <input type="text" class="form-control" name="Billing-Country" id="Billing-Country" <?php if (empty($details['Billing-Country'])) {echo "placeholder='Billing Country'";}   else{ echo 'value="'.$details['Billing-Country'].'"'; }?>>
+						  	<select class="form-control" id="Billing-Country" name="Billing-Country" required>
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								
+								echo '<option value="'.$country[$key]['ID'].'"';
+								if ($details['Billing-Country'] == $country[$key]['ID']){ echo "selected='selected'"; } 
+								echo '> '.$country[$key]['Country'].' </option>';
+							}
+							?>
+							</select>
+                           
                         </div>
                 </div>
 					 <!---Hidden mailing address and shipping address Start from here-->
@@ -467,33 +490,16 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                 <div class="col-lg-6">
                     <label for="">Member Type<span class="tipstyle">*</span></label>
 					<select class="form-control" id="MemberType" name="MemberType">
-					   <option value="" <?php if (empty($details['MemberType'])) echo "selected='selected'";?> disabled>memberType</option>
-					   <option value="FPI" <?php if ($details['MemberType'] == "FPI") echo "selected='selected'";?>>Full-time physiotherapist with insurance (more than 18 hours per week) </option>
-					   <option value="11" <?php if ($details['MemberType'] == "FPN") echo "selected='selected'";?>>Full-time physiotherapist no insurance (more than 18 hours per week) </option>
-					   <option value="FEPI" <?php if ($details['MemberType'] == "FEPI") echo "selected='selected'";?>>Full-time Employed Public Sector Physiotherapist (more than 18 hours per week) with insurance</option>
-					   <option value="FEPN" <?php if ($details['MemberType'] == "FEPN") echo "selected='selected'";?>>Full-time Employed Public Sector Physiotherapist (more than 18 hours per week) no insurance</option>
-					   <option value="PPI" <?php if ($details['MemberType'] == "PPI") echo "selected='selected'";?>>Part-time Physiotherapist (less than 18 hours per week) with insurance</option>
-					   <option value="PPN" <?php if ($details['MemberType'] == "PPN") echo "selected='selected'";?>>Part-time Physiotherapist (less than 18 hours per week) no insurance</option>
-					   <option value="PEP" <?php if ($details['MemberType'] == "PEP") echo "selected='selected'";?>>Part-time Employed Public Sector Physiotherapist (less than 18 hours per week) </option>
-					   <option value="MPU" <?php if ($details['MemberType'] == "MPU") echo "selected='selected'";?>>Maternity/Paternity/Unemployed (working for less than 6 months) </option>
-					   <option value="OV" <?php if ($details['MemberType'] == "OV") echo "selected='selected'";?>>Overseas for more than 6 months (must hold current registration with AHPRA) </option>
-					   <option value="PGS" <?php if ($details['MemberType'] == "PGS") echo "selected='selected'";?>>Post Graduate study and working less than 18 hours per week </option>
-					   <option value="NPP" <?php if ($details['MemberType'] == "NPP") echo "selected='selected'";?>>Non-Practising Physiotherapist registered as NPP with PhysioBA</option>
-					   <option value="AM" <?php if ($details['MemberType'] == "AM") echo "selected='selected'";?>>￼Associate Member (Australia) </option>
-					   <option value="GFY" <?php if ($details['MemberType'] == "GFY") echo "selected='selected'";?>>￼Graduate First Year </option>
-					   <option value="GSY" <?php if ($details['MemberType'] == "GSY") echo "selected='selected'";?>>￼Graduate Second Year</option>
-					   <option value="GTY" <?php if ($details['MemberType'] == "GTY") echo "selected='selected'";?>>￼Graduate Third Year</option>
-					   <option value="GFOY" <?php if ($details['MemberType'] == "GFOY") echo "selected='selected'";?>>￼Graduate Fourth Year</option>
-					   <option value="GFYE" <?php if ($details['MemberType'] == "GFYE") echo "selected='selected'";?>>Graduate First Year Employed Public Sector </option>
-					   <option value="GSYE" <?php if ($details['MemberType'] == "GSYE") echo "selected='selected'";?>>Graduate Second Year Employed Public Sector</option>
-					   <option value="GTYE" <?php if ($details['MemberType'] == "GTYE") echo "selected='selected'";?>>￼Graduate Third Year Employed Public Sector</option>
-					   <option value="GFOYE" <?php if ($details['MemberType'] == "GFOYE") echo "selected='selected'";?>>￼Graduate Fourth Year Employed Public Sector </option>
-					   <option value="SY" <?php if ($details['MemberType'] == "SY") echo "selected='selected'";?>>￼Student Year 1 - 4</option>
-					   <option value="PA" <?php if ($details['MemberType'] == "PA") echo "selected='selected'";?>>Physiotherapy Assistant</option>
-					   <option value="AMO" <?php if ($details['MemberType'] == "AMO") echo "selected='selected'";?>>Associate Member (Overseas)</option>
-					   <option value="AS" <?php if ($details['MemberType'] == "AS") echo "selected='selected'";?>>￼Affiliate subscription</option>
-					   <option value="RAN" <?php if ($details['MemberType'] == "RAN") echo "selected='selected'";?>>Retired and not working in any paid capacity</option>
-					   <option value="RW" <?php if ($details['MemberType'] == "RW") echo "selected='selected'";?>>Retired with 36 years membership and is over the age of 55 years (subject to office validation)</option>
+						<option value="" <?php if (empty($details['MemberType'])) echo "selected='selected'";?> disabled>memberType</option>	
+					<?php 
+                        $MemberTypecode  = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
+						$MemberType=json_decode($MemberTypecode, true);
+						foreach($MemberType  as $key => $value){
+							echo '<option value="'.$MemberType[$key]['ID'].'"';
+							if ($details['MemberType'] == $MemberType[$key]['ID']){ echo "selected='selected'"; } 
+							echo '> '.$MemberType[$key]['Name'].' </option>';
+						}
+					?>
 					</select>
                 </div>
             </div>
@@ -508,18 +514,20 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<label for="">Your National group</label>
 					<select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple>
 					<?php 
-					  // get national group from Aptify via webserice return Json data;
-					  // 2.2.19 - get national group
-                      // Send - 
-                      // Response - national group
-					  $nationalGroups= GetAptifyData("19","request");
+						// get national group from Aptify via webserice return Json data;
+						// 2.2.19 - get national group
+						// Send - 
+						// Response - national group
+						$nationalGroupsCode= file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
+						$nationalGroups=json_decode($nationalGroupsCode, true);
 				    ?>
 					<?php 
-						 foreach($nationalGroups["NationalGroup"] as $lines) {
-						   echo '<option value="'.$lines["NGid"].'"';
-						   if (in_array( $lines["NGid"],$details['Nationalgp'])){ echo "selected='selected'"; } 
-						   echo '> '.$lines["NGtitle"].' </option>';
+						foreach($nationalGroups as $key=>$value) {
+						   echo '<option value="'.$nationalGroups[$key]["ID"].'"';
+						   if (in_array( $nationalGroups[$key]["ID"],$details['Nationalgp'])){ echo "selected='selected'"; } 
+						   echo '> '.$nationalGroups[$key]["Name"].' </option>';
 						}
+						
 					?>
 					  </select>
                 </div>
@@ -530,14 +538,23 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 			    <div class="col-lg-6">
 					<label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
 					<select class="form-control" id="Branch" name="Branch">
-				       <option value="ACT" <?php if ($details['Branch'] == "ACT") echo "selected='selected'";?>>ACT</option>
-					   <option value="NSW" <?php if ($details['Branch'] == "NSW") echo "selected='selected'";?>>NSW</option>
-					   <option value="QLD" <?php if ($details['Branch'] == "QLD") echo "selected='selected'";?>>QLD</option>
-					   <option value="SA" <?php if ($details['Branch'] == "SA") echo "selected='selected'";?>>SA</option>
-					   <option value="TAS" <?php if ($details['Branch'] == "TAS") echo "selected='selected'";?>>TAS</option>
-					   <option value="VIC" <?php if ($details['Branch'] == "VIC") echo "selected='selected'";?>>VIC</option>
-					   <option value="WA" <?php if ($details['Branch'] == "WA") echo "selected='selected'";?>>WA</option>
-					   <option value="Overseas" <?php if ($details['Branch'] == "Overseas") echo "selected='selected'";?>>I live overseas</option>
+					<?php
+						//$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+						//$State=json_decode($statecode, true);					
+						//foreach($State  as $key => $value){
+						//echo '<option value="'.$State[$key]['ID'].'"';
+						//if ($details['Branch'] == $State[$key]['ID']){ echo "selected='selected'"; } 
+						//echo '> '.$State[$key]['Abbreviation'].' </option>';
+						//}
+					?>
+						<option value="73" <?php if ($details['Branch'] == "73") echo "selected='selected'";?>> ACT </option>
+						<option value="74" <?php if ($details['Branch'] == "74") echo "selected='selected'";?>> NSW </option>
+						<option value="77" <?php if ($details['Branch'] == "77") echo "selected='selected'";?>> SA </option>
+						<option value="78" <?php if ($details['Branch'] == "78") echo "selected='selected'";?>> TAS </option>
+						<option value="79" <?php if ($details['Branch'] == "79") echo "selected='selected'";?>> VIC </option>
+						<option value="76" <?php if ($details['Branch'] == "76") echo "selected='selected'";?>> QLD </option>
+						<option value="75" <?php if ($details['Branch'] == "75") echo "selected='selected'";?>> NT </option>
+						<option value="80" <?php if ($details['Branch'] == "80") echo "selected='selected'";?>> WA </option>
 					</select>
 				</div>
 		    </div>
@@ -549,18 +566,19 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						  // 2.2.37 - get interest area list
                           // Send - 
                           // Response - interest area list
-							 $interestAreas= GetAptifyData("37","request");
-							 $_SESSION["interestAreas"] = $interestAreas;
+						    $interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
+						    $interestAreas=json_decode($interestAreascode, true);	
+							$_SESSION["interestAreas"] = $interestAreas;
 						  ?>
 						                    
 						   <?php 
-						     foreach($interestAreas['InterestAreas']  as $lines){
-								echo '<option value="'.$lines["ListCode"].'"';
-								if (in_array( $lines["ListCode"],$details['SpecialInterest'])){ echo "selected='selected'"; } 
-								echo '> '.$lines["ListName"].' </option>'; 
+						     foreach($interestAreas as $key => $value){
+								echo '<option value="'.$interestAreas[$key]["Code"].'"';
+								if (in_array( $interestAreas[$key]["Code"],$details['SpecialInterest'])){ echo "selected='selected'"; } 
+								echo '> '.$interestAreas[$key]["Name"].' </option>'; 
 								 
 							 }
-						   
+												   
 						   ?>
                     </select>
                 </div>
@@ -574,15 +592,16 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<div class="col-lg-6">
 					<select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
 					<?php 
-					// get interest area from Aptify via webserice return Json data;
-					$interestAreas= GetAptifyData("37","request");
-					$_SESSION["interestAreas"] = $interestAreas;
+					
+					$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
+				    $interestAreas=json_decode($interestAreascode, true);	
+				
 					?>
 					<?php 
-					foreach($interestAreas['InterestAreas']  as $lines){
-						echo '<option value="'.$lines["ListCode"].'"';
-						if (in_array( $lines["ListCode"],$details['Treatmentarea'])){ echo "selected='selected'"; } 
-						echo '> '.$lines["ListName"].' </option>'; 
+					foreach($interestAreas  as $key => $value){
+						echo '<option value="'.$interestAreas[$key]["Code"].'"';
+						if (in_array( $interestAreas[$key]["Code"],$details['Treatmentarea'])){ echo "selected='selected'"; } 
+						echo '> '.$interestAreas[$key]["Name"].' </option>'; 
 					}
 					?>
 					</select>
@@ -592,66 +611,25 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<div class="col-lg-3">What is your favourite languages?<br/></div>
 				<div class="col-lg-3">
 					<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
-					   <option value="NONE" disabled>no</option>
-					   <option value="AF"> Afrikaans </option>
-					   <option value="AR"> Arabic </option>
-					   <option value="BO"> Bosnian </option>
-					   <option value="CA"> Cantonese </option>
-					   <option value="CHZ"> Chzech </option>
-					   <option value="CR"> Croation </option>
-					   <option value="DA"> Danish </option>
-					   <option value="DU"> Dutch </option>
-					   <option value="EG"> Egyptian </option>
-					   <option value="ENG"> English </option>
-					   <option value="FL"> Filipino </option>
-					   <option value="FR"> French </option>
-					   <option value="GE"> German </option>
-					   <option value="GR"> Greek </option>
-					   <option value="HE"> Hebrew </option>
-					   <option value="HI"> Hindi </option>
-					   <option value="HO"> Hokkien </option>
-					   <option value="HU"> Hungarian </option>
-					   <option value="IND"> Indonesian </option>
-					   <option value="IT"> Italian </option>
-					   <option value="JP"> Japanese </option>
-					   <option value="KO"> Korean </option>
-					   <option value="LAT"> Latvian </option>
-					   <option value="LE"> Lebanese </option>
-					   <option value="M"> Marathi </option>
-					   <option value="MA"> Macedonian </option>
-					   <option value="MALT"> Maltese </option>
-					   <option value="MAN"> Mandarin </option>
-					   <option value="MAV"> Mavathi </option>
-					   <option value="ML"> Malay </option>
-					   <option value="NOR"> Norwegian </option>
-					   <option value="POL"> Polish </option>
-					   <option value="POR"> Portuguese </option>
-					   <option value="PU"> Punjabi </option>
-					   <option value="RU"> Russian </option>
-					   <option value="S"> Slovak </option>
-					   <option value="SERB"> Serbian </option>
-					   <option value="SL"> Sign Language </option>
-					   <option value="SP"> Spanish </option>
-					   <option value="SW"> Swedish </option>
-					   <option value="SWI"> Swiss </option>
-					   <option value="TA"> Tamil </option>
-					   <option value="TAW"> Taiwanese </option>
-					   <option value="TE"> Teo-Chew </option>
-					   <option value="TEL"> Telugu </option>
-					   <option value="TH"> Thai </option>
-					   <option value="TURK"> Turkish </option>
-					   <option value="UK"> Ukrainian </option>
-					   <option value="UR"> Urdu </option>
-					   <option value="VI"> Vietnamese </option>
-					   <option value="YI"> Yiddish </option>
-					   <option value="YU"> Yugoslav </option>
+					   <option value="NONE" <?php if (empty($details['Additionallanguage'])) echo "selected='selected'";?> disabled>no</option>
+					   <?php 
+                        $Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
+						$Language=json_decode($Languagecode, true);
+						foreach($Language  as $key => $value){
+						    echo '<option value="'.$Language[$key]['ID'].'"';
+							if (in_array( $Language[$key]["ID"],$details['Additionallanguage'])){ echo "selected='selected'"; } 
+							echo '> '.$Language[$key]['Name'].' </option>';
+							
+						}
+						?>
+					  
 					</select>
 				</div>
 			</div>
 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a><a class="join-details-button2"><span class="dashboard-button-name">Next</span></a></div>
         </div>
-        <div id="wpnumber"><?php  $wpnumber =  0; echo  $wpnumber; ?></div>
-        <input type="hidden" name="wpnumber" value="<?php  $wpnumber =  1; echo  $wpnumber; ?>"/>
+        <div id="wpnumber"><?php  $wpnumber =  sizeof($details['Workplaces'])-1; echo  $wpnumber; ?></div>
+        <input type="hidden" name="wpnumber" value="<?php  $wpnumber =  sizeof($details['Workplaces'])-1; echo  $wpnumber; ?>"/>
 <script type="text/javascript">
     jQuery(document).ready(function($) {
 	    $(".chosen-select").chosen({width: "100%"});
@@ -683,36 +661,39 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
         <div class="down3" style="display:none;">
 			<div class="row">
 				<div class="col-lg-12"> <label for="Findpublicbuddy"><strong>NOTE:</strong>Please list my details in the public (visbile to other health professionals)</label>
-					<input type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="">
+					<input type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="<?php  echo $details['Findpublicbuddy'];?>" <?php if($details['Findpublicbuddy']==1){echo "checked";} ?>>
 				</div>
 			</div>
             <ul class="nav nav-tabs" id="tabmenu">
-                 <li class ="active"><a data-toggle="tab" href="#workplace0"><?php echo "Workplace0";?></a></li>
-            </ul>
+			<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
+                <li <?php if($key=='Workplace0') echo 'class ="active" ';?>><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php echo "Workplace".$key;?></a></li>
+            <?php endforeach ?> 
+			</ul>
             <div id="workplaceblocks">
-                <div id="workplace0" class='tab-pane fade in active'> 
+			<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
+                <div id="workplace<?php echo $key;?>" class='tab-pane fade <?php if($key=='Workplace0') echo "in active ";?>'> 
                     <div class="row">
 					    <div class="col-lg-6"></div>
 						<div class="col-lg-6">
-						    <label for="Findphysio0"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
-                            <input type="checkbox" name="Findphysio0" id="Findphysio0" value="" >
+						    <label for="Findphysio<?php echo $key;?>"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
+                            <input type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" >
 					    </div>
 					</div>
 					<div class="row">
-							<div class="col-lg-12"> <label for="Findabuddy0"><strong>NOTE:</strong>Please list my details in the physio</label>
-							<input type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
-							</div>
-				    </div>
+						<div class="col-lg-12"> <label for="Findabuddy<?php echo $key;?>"><strong>NOTE:</strong>Please list my details in the physio</label>
+							<input type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findabuddy'];?>" <?php if($details['Workplaces'][$key]['Findabuddy']==1){echo "checked";} ?>>
+						</div>
+					</div>
                     <div class="row">
 				        <div class="col-lg-12">
 					        <label for="Name-of-workplace">Name of workplace<span class="tipstyle">*</span></label>
-					        <input type="text" class="form-control" name="Name-of-workplace0" id="Name-of-workplace0">
-					    </div>
+					        <input type="text" class="form-control" name="Name-of-workplace<?php echo $key;?>" id="Name-of-workplace<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Name-of-workplace'])) {echo "placeholder='Name of workplace'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Name-of-workplace'].'"'; }?>>
+						</div>
 					</div>
 				    <div class="row">
                         <div class="col-lg-3">Workplace setting<span class="tipstyle">*</span></div>
                         <div class="col-lg-9">
-					        <select class="form-control" id="Workplace-setting0" name="Workplace-setting0">
+					        <select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting<?php echo $key;?>">
 							<?php 
 							  // 2.2.36 - get workplace settings list
 							  // Send - 
@@ -722,8 +703,10 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 								 $_SESSION["workplaceSettings"] = $workplaceSettings;
 							?>
 							<?php 
-								 foreach($workplaceSettings['WorkplaceSettings']  as $lines){
-									echo '<option value="'.$lines['code'].'">'.$lines['name'].'</option>';
+								foreach($workplaceSettings['WorkplaceSettings']  as $lines){
+								   echo '<option value="'.$lines["code"].'"';
+								   if ($details['Workplaces'][$key]['Workplace-setting'] == $lines["code"]){ echo "selected='selected'"; } 
+									echo '> '.$lines["name"].' </option>';
 								}
 							?>
                             </select>
@@ -736,203 +719,178 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 					<div class="row"> 
 						<div class="col-lg-6">
-							<select class="chosen-select" id="WTreatmentarea0" name="WTreatmentarea0[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+							<select class="chosen-select" id="WTreatmentarea<?php echo $key;?>" name="WTreatmentarea<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
 							<?php 
 							// get interest area from Aptify via webserice return Json data;
-							$interestAreas= GetAptifyData("37","request");
-							$_SESSION["interestAreas"] = $interestAreas;
+							$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
+				            $interestAreas=json_decode($interestAreascode, true);	
 							?>
 							<?php 
-							foreach($interestAreas['InterestAreas']  as $lines){
-								echo '<option value="'.$lines["ListCode"].'"';
-								echo '> '.$lines["ListName"].' </option>'; 
+							foreach($interestAreas  as $pair => $value){
+								echo '<option value="'.$interestAreas[$pair]["Code"].'"';
+								if ($details['Workplaces'][$key]['Treatmentarea'] == $interestAreas[$pair]["Code"]){ echo "selected='selected'"; } 
+								echo '> '.$interestAreas[$pair]["Name"].' </option>'; 
 							}
 							?>
 							</select>
 						</div>
 					</div>
 				    <div class="row">
-                        <div class="col-lg-6">
-                           <label for="BuildingName">Building Name</label>
-                           <input type="text" class="form-control" name="WBuildingName0" id="WBuildingName0">
-                        </div>
+						<div class="col-lg-6">
+							<label for="BuildingName">Building Name</label>
+							<input type="text" class="form-control" name="WBuildingName<?php echo $key;?>" id="WBuildingName<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WBuildingName'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WBuildingName'].'"'; }?>>
+						</div>
 						<div class="col-lg-2">
-						    <label for="WAddress_Line_10">Address line 1<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="WAddress_Line_10" id="WAddress_Line_10">
+							<label for="WAddress_Line_1">Address line 1<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="WAddress_Line_1<?php echo $key;?>" id="WAddress_Line_1<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Address_Line_1'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Address_Line_1'].'"'; }?>>
 						</div>
 						<div class="col-lg-4">
-							<label for="WAddress_Line_20">Address line 2</label>
-							<input type="text" class="form-control" name="WAddress_Line_20" id="WAddress_Line_20">
+							<label for="WAddress_Line_2">Address line 2</label>
+							<input type="text" class="form-control" name="WAddress_Line_2<?php echo $key;?>" id="Wstreet<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Address_Line_2'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Address_Line_2'].'"'; }?>>
 						</div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3">
+					</div>
+                 	<div class="row">
+						<div class="col-lg-3">
 							<label for="Wcity">City/Town<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Wcity0" id="Wcity0">
-                         </div>
+							<input type="text" class="form-control" name="Wcity<?php echo $key;?>" id="Wcity<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wcity'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wcity'].'"'; }?>>
+						</div>
 						<div class="col-lg-3">
 							<label for="Wpostcode">Postcode<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Wpostcode0" id="Wpostcode0">
+							<input type="text" class="form-control" name="Wpostcode<?php echo $key;?>" id="Wpostcode<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wpostcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wpostcode'].'"'; }?>>
 						</div>
 						<div class="col-lg-3">
 							<label for="Wstate">State<span class="tipstyle">*</span></label>
-							<select class="form-control" id="Wstate0" name="Wstate0">
-                              <option value="" selected disabled> State </option>
-                              <option value="ACT"> ACT </option>
-                              <option value="NSW"> NSW </option>
-                              <option value="SA"> SA </option>
-                              <option value="TAS"> TAS </option>
-                              <option value="VIC"> VIC </option>
-                              <option value="QLD"> QLD </option>
-                              <option value="NT"> NT </option>
-                              <option value="WA"> WA </option>
-							  <option value="N/A"> I live overseas </option>
-                           </select>
+							<select class="form-control" id="Wstate<?php echo $key;?>" name="Wstate<?php echo $key;?>">
+								<option value="" <?php if (empty($details['Workplaces'][$key]['Wstate'])) echo "selected='selected'";?> disabled>State</option>
+								<?php
+								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+								$State=json_decode($statecode, true);						
+								foreach($State  as $pair => $value){
+									echo '<option value="'.$State[$pair]['ID'].'"';
+									if ($details['Workplaces'][$key]['Wstate'] == $State[$pair]['ID']){ echo "selected='selected'"; } 
+									echo '> '.$State[$pair]['Abbreviation'].' </option>';
+								}
+								?>
+							</select>
 						</div>
 						<div class="col-lg-3">
-							<label for="Wcountry">Country<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Wcountry0" id="Wcountry0">
+							<label for="Wcountry<?php echo $key;?>">Country<span class="tipstyle">*</span></label>
+							<select class="form-control" id="Wcountry<?php echo $key;?>" name="Wcountry<?php echo $key;?>" required>
+								<?php 
+								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+								$country=json_decode($countrycode, true);
+								foreach($country  as $pair => $value){
+									echo '<option value="'.$country[$pair]['ID'].'"';
+									if ($details['Workplaces'][$key]['Wcountry'] == $country[$pair]['ID']){ echo "selected='selected'"; } 
+									echo '> '.$country[$pair]['Country'].' </option>';
+									
+								}
+								?>
+							</select>
 						</div>
-                    </div>
+					</div>
                     <div class="row">
 						<div class="col-lg-6">
 							<label for="Wemail">Workplace email<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Wemail0" id="Wemail0">
+							<input type="text" class="form-control" name="Wemail<?php echo $key;?>" id="Wemail<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wemail'])) {echo "placeholder='Workplace email'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wemail'].'"'; }?>>
 						</div>
 						<div class="col-lg-3">
 							<label for="Wwebaddress">Website<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Wwebaddress0" id="Wwebaddress0">
+							<input type="text" class="form-control" name="Wwebaddress<?php echo $key;?>" id="Wwebaddress<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wwebaddress'])) {echo "placeholder='Website'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wwebaddress'].'"'; }?>>
 						</div>
 						<div class="col-lg-3">
 							<label for="Wphone">Phone number<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Wphone0" id="Wphone0">
+							<input type="text" class="form-control" name="Wphone<?php echo $key;?>" id="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>>
 						</div>
-                    </div>
+					</div>
                     <div class="row">
-						<div class="col-lg-3">Does this workplace offer additional languages?<br/></div>
-					    <div class="col-lg-3">
-                            <select class="chosen-select" id="Additionallanguage0" name="Additionallanguage0[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
-							   <option value="NONE" disabled>no</option>
-							   <option value="AF"> Afrikaans </option>
-							   <option value="AR"> Arabic </option>
-							   <option value="BO"> Bosnian </option>
-							   <option value="CA"> Cantonese </option>
-							   <option value="CHZ"> Chzech </option>
-							   <option value="CR"> Croation </option>
-							   <option value="DA"> Danish </option>
-							   <option value="DU"> Dutch </option>
-							   <option value="EG"> Egyptian </option>
-							   <option value="ENG"> English </option>
-							   <option value="FL"> Filipino </option>
-							   <option value="FR"> French </option>
-							   <option value="GE"> German </option>
-							   <option value="GR"> Greek </option>
-							   <option value="HE"> Hebrew </option>
-							   <option value="HI"> Hindi </option>
-							   <option value="HO"> Hokkien </option>
-							   <option value="HU"> Hungarian </option>
-							   <option value="IND"> Indonesian </option>
-							   <option value="IT"> Italian </option>
-							   <option value="JP"> Japanese </option>
-							   <option value="KO"> Korean </option>
-							   <option value="LAT"> Latvian </option>
-							   <option value="LE"> Lebanese </option>
-							   <option value="M"> Marathi </option>
-							   <option value="MA"> Macedonian </option>
-							   <option value="MALT"> Maltese </option>
-							   <option value="MAN"> Mandarin </option>
-							   <option value="MAV"> Mavathi </option>
-							   <option value="ML"> Malay </option>
-							   <option value="NOR"> Norwegian </option>
-							   <option value="POL"> Polish </option>
-							   <option value="POR"> Portuguese </option>
-							   <option value="PU"> Punjabi </option>
-							   <option value="RU"> Russian </option>
-							   <option value="S"> Slovak </option>
-							   <option value="SERB"> Serbian </option>
-							   <option value="SL"> Sign Language </option>
-							   <option value="SP"> Spanish </option>
-							   <option value="SW"> Swedish </option>
-							   <option value="SWI"> Swiss </option>
-							   <option value="TA"> Tamil </option>
-							   <option value="TAW"> Taiwanese </option>
-							   <option value="TE"> Teo-Chew </option>
-							   <option value="TEL"> Telugu </option>
-							   <option value="TH"> Thai </option>
-							   <option value="TURK"> Turkish </option>
-							   <option value="UK"> Ukrainian </option>
-							   <option value="UR"> Urdu </option>
-							   <option value="VI"> Vietnamese </option>
-							   <option value="YI"> Yiddish </option>
-							   <option value="YU"> Yugoslav </option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3">Quality In Practice number(QIP):</div>
-                        <div class="col-lg-3">
-                            <input type="text" class="form-control" name="QIP0" id="QIP0">
-                        </div>
-                    </div>
+						<div class="col-lg-3">
+						Does this workplace offer additional languages?<br/>
+						</div>
+						<div class="col-lg-3">
+							<select class="chosen-select" id="Additionallanguage<?php echo $key;?>" name="Additionallanguage<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
+								<option value="NONE" <?php if (empty($details['Workplaces'][$key]['Additionallanguage'])) echo "selected='selected'";?> disabled>no</option>
+								<?php 
+									$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
+									$Language=json_decode($Languagecode, true);
+									foreach($Language  as $pair => $value){
+										echo '<option value="'.$Language[$pair]['ID'].'"';
+										if (in_array($Language[$pair]['ID'],$details['Workplaces'][$key]['Additionallanguage'])){ echo "selected='selected'"; } 
+										echo '> '.$Language[$pair]['Name'].' </option>';
+									}
+								?>
+								
+							</select>
+						</div>
+						<div class="col-lg-3">
+						Quality In Practice number(QIP):
+						</div>
+						<div class="col-lg-3">
+							<input type="text" class="form-control" name="QIP<?php echo $key;?>" id="QIP<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['QIP'])) {echo "placeholder='QIP Number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['QIP'].'"'; }?>>
+						</div>
+					</div>
                     <div class="row"> 
                         <div class="col-lg-3">Does this workplace provide: </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-6">
-                            <input type="checkbox" name="Electronic-claiming0" id="Electronic-claiming0" value=""> <label for="Electronic-claiming0">Electronic claiming</label>
-                   
-                        </div>
-                        <div class="col-lg-6">
-                            <input type="checkbox" name="Hicaps0" id="Hicaps0" value=""> <label for="Hicaps0">HICAPS</label>
-                        </div>
-                    </div>
-					<div class="row">
 						<div class="col-lg-6">
-						    <input type="checkbox" name="Healthpoint0" id="Healthpoint0" value="" > <label for="Healthpoint0">Healthpoint</label>
+							<input type="checkbox" name="Electronic-claiming<?php echo $key;?>" id="Electronic-claiming<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Electronic-claiming'];?>" <?php if($details['Workplaces'][$key]['Electronic-claiming']==1){echo "checked";} ?>> <label for="Electronic-claiming<?php echo $key;?>">Electronic claiming</label>
 						</div>
 						<div class="col-lg-6">
-						    <input type="checkbox" name="Departmentva0" id="Departmentva0" value=""> <label for="Departmentva0">Department of Vetarans' Affairs</label>
+							<input type="checkbox" name="Hicaps<?php echo $key;?>" id="Hicaps<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Hicaps'];?>" <?php if($details['Workplaces'][$key]['Hicaps']==1){echo "checked";} ?>> <label for="Hicaps<?php echo $key;?>">HICAPS</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-6">
-						    <input type="checkbox" name="Workerscompensation0" id="Workerscompensation0" value=""> <label for="Workerscompensation0">Workers compensation</label>
+							<input type="checkbox" name="Healthpoint<?php echo $key;?>" id="Healthpoint<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Healthpoint'];?>" <?php if($details['Workplaces'][$key]['Healthpoint']==1){echo "checked";} ?>> <label for="Healthpoint<?php echo $key;?>">Healthpoint</label>
 						</div>
 						<div class="col-lg-6">
-						    <input type="checkbox" name="Motora0" id="Motora0" value=""> <label for="Motora0">Motor accident compensation</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-6">
-						    <input type="checkbox" name="Medicare0" id="Medicare0" value=""> <label for="Medicare0">Medicare Chronic Disease Management</label>
-						</div>
-						<div class="col-lg-6">
-						    <input type="checkbox" name="Homehospital0" id="Homehospital0" value=""> <label for="Homehospital0">Home and hospital visits</label>
+							<input type="checkbox" name="Departmentva<?php echo $key;?>" id="Departmentva<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Departmentva'];?>" <?php if($details['Workplaces'][$key]['Departmentva']==1){echo "checked";} ?>> <label for="Departmentva<?php echo $key;?>">Department of Vetarans' Affairs</label>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-6">
-						    <input type="checkbox" name="Mobilephysiotherapist0" id="Mobilephysiotherapist0" value=""> <label for="Mobilephysiotherapist0">Mobile physiotherapist</label>
+							<input type="checkbox" name="Workerscompensation<?php echo $key;?>" id="Workerscompensation<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Workerscompensation'];?>" <?php if($details['Workplaces'][$key]['Workerscompensation']==1){echo "checked";} ?>> <label for="Workerscompensation<?php echo $key;?>">Workers compensation</label>
+						</div>
+						<div class="col-lg-6">
+							<input type="checkbox" name="Motora<?php echo $key;?>" id="Motora<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Motora'];?>" <?php if($details['Workplaces'][$key]['Motora']==1){echo "checked";} ?>> <label for="Motora<?php echo $key;?>">Motor accident compensation</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<input type="checkbox" name="Medicare<?php echo $key;?>" id="Medicare<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Medicare'];?>" <?php if($details['Workplaces'][$key]['Medicare']==1){echo "checked";} ?>> <label for="Medicare<?php echo $key;?>">Medicare Chronic Disease Management</label>
+						</div>
+						<div class="col-lg-6">
+							<input type="checkbox" name="Homehospital<?php echo $key;?>" id="Homehospital<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Homehospital'];?>" <?php if($details['Workplaces'][$key]['Homehospital']==1){echo "checked";} ?> > <label for="Homehospital<?php echo $key;?>">Home and hospital visits</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<input type="checkbox" name="Mobilephysiotherapist<?php echo $key;?>" id="Mobilephysiotherapist<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['MobilePhysio'];?>" <?php if($details['Workplaces'][$key]['MobilePhysio']==1){echo "checked";} ?>> <label for="Mobilephysiotherapist<?php echo $key;?>">Mobile physiotherapist</label>
 						</div>
 					</div>
                     <div class="row">
-                        <div class="col-lg-3"> Numbers of hours worked<span class="tipstyle">*</span></div>
-                        <div class="col-lg-6">
-                        <select class="form-control" id="Number-worked-hours0" name="Number-worked-hours0">
-                            <option value="0" disabled>no</option>
-                            <option value="1"> 1-4 </option>
-                            <option value="2"> 5-8</option>
-							<option value="3"> 9-12</option>
-							<option value="4"> 13-16</option>
-							<option value="5"> 17-20</option>
-							<option value="6"> 21-25</option>
-							<option value="7"> 26-30</option>
-							<option value="8"> 31-35</option>
-							<option value="9"> 36-40</option>
-							<option value="10"> 40+</option>
-                        </select>
-                        </div>
-                    </div>
+						<div class="col-lg-3">
+						Numbers of hours worked<span class="tipstyle">*</span>
+						</div>
+						<div class="col-lg-6">
+							<select class="form-control" id="Number-worked-hours<?php echo $key;?>" name="Number-worked-hours<?php echo $key;?>">
+							<?php 
+								$NumberOfHourscode  = file_get_contents("sites/all/themes/evolve/json/NumberOfHours.json");
+								$NumberOfHours=json_decode($NumberOfHourscode, true);
+								foreach($NumberOfHours  as $pair => $value){
+									echo '<option value="'.$NumberOfHours[$pair]['ID'].'"';
+									if ($details['Workplaces'][$key]['Number-worked-hours'] == $NumberOfHours[$pair]['ID']){ echo "selected='selected'"; } 
+									echo '> '.$NumberOfHours[$pair]['Name'].' </option>';
+								}
+							?>
+								
+							</select>
+						</div>
+					</div>
                            
                 </div>
+			<?php endforeach; ?>	
 			</div>
 		    <div class="row"><div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a></div></div>
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   
@@ -944,15 +902,15 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                 <div class="col-lg-6">
 					<label for="Udegree">Undergraduate degree<span class="tipstyle">*</span></label>
 					<select name="Udegree" id="Udegree">
-						<option selected="selected" value="">(None)</option>
-						<option value="1">Bachelor of Physiotherapy</option>
-						<option value="2">Bachelor of Physiotherapy (Hons)</option>
-						<option value="3">Bachelor of Physiotherapy (Honours)</option>
-						<option value="4">Bachelor of Science (Physiotherapy)</option>
-						<option value="5">Bachelor of Science (Physiotherapy) (Honours)</option>
-						<option value="6">Bachelor of Applied Science and Master of Physiotherapy Practice</option>
-						<option value="7">Bachelor of Applied Science (Physiotherapy)</option>
-						<option value="8">Bachelor of Applied Science (Physiotherapy) (Honours)</option>
+						<option value="" <?php if (empty($details['Udegree'])) echo "selected='selected'";?> disabled>(None)</option>
+						<option value="1" <?php if ($details['Udegree'] == "1") echo "selected='selected'";?>>Bachelor of Physiotherapy</option>
+						<option value="2" <?php if ($details['Udegree'] == "2") echo "selected='selected'";?>>Bachelor of Physiotherapy (Hons)</option>
+						<option value="3" <?php if ($details['Udegree'] == "3") echo "selected='selected'";?>>Bachelor of Physiotherapy (Honours)</option>
+						<option value="4" <?php if ($details['Udegree'] == "4") echo "selected='selected'";?>>Bachelor of Science (Physiotherapy)</option>
+						<option value="5" <?php if ($details['Udegree'] == "5") echo "selected='selected'";?>>Bachelor of Science (Physiotherapy) (Honours)</option>
+						<option value="6" <?php if ($details['Udegree'] == "6") echo "selected='selected'";?>>Bachelor of Applied Science and Master of Physiotherapy Practice</option>
+						<option value="7" <?php if ($details['Udegree'] == "7") echo "selected='selected'";?>>Bachelor of Applied Science (Physiotherapy)</option>
+						<option value="8" <?php if ($details['Udegree'] == "8") echo "selected='selected'";?>>Bachelor of Applied Science (Physiotherapy) (Honours)</option>
 						<option value="Other">Other</option>
 					</select>
 			    </div>
@@ -961,38 +919,38 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                 <div class="col-lg-6">
                     <label for="undergraduate-university-name">Undergraduate university name<span class="tipstyle">*</span></label>
                     <select name="Undergraduate-university-name" id="Undergraduate-university-name">
-						<option selected="selected" value="">(None)</option>
-						<option value="ACU">Australian Catholic University - NSW</option>
-						<option value="ACUQ">Australian Catholic University - QLD</option>
-						<option value="ACUB">Australlian Catholic University - Ballarat</option>
-						<option value="BON">Bond University - QLD</option>
-						<option value="CU">Canberra University</option>
-						<option value="CQU">Central Qld University</option>
-						<option value="CSU">Charles Sturt University - Albury NSW</option>
-						<option value="CSUO">Charles Sturt University - Orange NSW</option>
-						<option value="CSUP">Charles Sturt University Port Macquarie</option>
-						<option value="CUMB">Cumberland University - NSW</option>
-						<option value="CUR">Curtin University - WA</option>
-						<option value="ECU">Edith Cowan University - WA</option>
-						<option value="FLIN">Flinders University SA</option>
-						<option value="GRIF">Griffith University - Gold coast QLD</option>
-						<option value="JCU">James Cook University - QLD</option>
-						<option value="LAT">Latrobe University - Bundoora VIC</option>
-						<option value="LATB">Latrobe Universtiy - Bendigo VIC</option>
-						<option value="LIN">Lincoln Institute - VIC</option>
-						<option value="MACQ">Macquarie University - NSW</option>
-						<option value="MON">Monash University - Vic</option>
-						<option value="UA">University of Adelaide</option>
-						<option value="UM">University of Melbourne - Vic</option>
-						<option value="UNC">University of Newcastle - NSW</option>
-						<option value="UND">University of Notre Dam - WA</option>
-						<option value="UQ">University of Qld</option>
-						<option value="USA">University of South Australia</option>
-						<option value="US">University of Sydney - NSW</option>
-						<option value="UTS">University of Technology Sydney</option>
-						<option value="UWA">University of Western Australia</option>
-						<option value="UWS">University of Western Sydney- NSW</option>
-						<option value="WAIT">Western Australian Institute of Technology</option>
+						<option value="" <?php if (empty($details['Undergraduate-university-name'])) echo "selected='selected'";?>>(None)</option>
+						<option value="ACU" <?php if ($details['Undergraduate-university-name'] == "ACU") echo "selected='selected'";?>>Australian Catholic University - NSW</option>
+						<option value="ACUQ" <?php if ($details['Undergraduate-university-name'] == "ACUQ") echo "selected='selected'";?>>Australian Catholic University - QLD</option>
+						<option value="ACUB" <?php if ($details['Undergraduate-university-name'] == "ACUB") echo "selected='selected'";?>>Australlian Catholic University - Ballarat</option>
+						<option value="BON" <?php if ($details['Undergraduate-university-name'] == "BON") echo "selected='selected'";?>>Bond University - QLD</option>
+						<option value="CU" <?php if ($details['Undergraduate-university-name'] == "CU") echo "selected='selected'";?>>Canberra University</option>
+						<option value="CQU" <?php if ($details['Undergraduate-university-name'] == "CQU") echo "selected='selected'";?>>Central Qld University</option>
+						<option value="CSU" <?php if ($details['Undergraduate-university-name'] == "CSU") echo "selected='selected'";?>>Charles Sturt University - Albury NSW</option>
+						<option value="CSUO" <?php if ($details['Undergraduate-university-name'] == "CSUO") echo "selected='selected'";?>>Charles Sturt University - Orange NSW</option>
+						<option value="CSUP" <?php if ($details['Undergraduate-university-name'] == "CSUP") echo "selected='selected'";?>>Charles Sturt University Port Macquarie</option>
+						<option value="CUMB" <?php if ($details['Undergraduate-university-name'] == "CUMB") echo "selected='selected'";?>>Cumberland University - NSW</option>
+						<option value="CUR" <?php if ($details['Undergraduate-university-name'] == "CUR") echo "selected='selected'";?>>Curtin University - WA</option>
+						<option value="ECU" <?php if ($details['Undergraduate-university-name'] == "ECU") echo "selected='selected'";?>>Edith Cowan University - WA</option>
+						<option value="FLIN" <?php if ($details['Undergraduate-university-name'] == "FLIN") echo "selected='selected'";?>>Flinders University SA</option>
+						<option value="GRIF" <?php if ($details['Undergraduate-university-name'] == "GRIF") echo "selected='selected'";?>>Griffith University - Gold coast QLD</option>
+						<option value="JCU" <?php if ($details['Undergraduate-university-name'] == "JCU") echo "selected='selected'";?>>James Cook University - QLD</option>
+						<option value="LAT" <?php if ($details['Undergraduate-university-name'] == "LAT") echo "selected='selected'";?>>Latrobe University - Bundoora VIC</option>
+						<option value="LATB" <?php if ($details['Undergraduate-university-name'] == "LATB") echo "selected='selected'";?>>Latrobe Universtiy - Bendigo VIC</option>
+						<option value="LIN" <?php if ($details['Undergraduate-university-name'] == "LIN") echo "selected='selected'";?>>Lincoln Institute - VIC</option>
+						<option value="MACQ" <?php if ($details['Undergraduate-university-name'] == "MACQ") echo "selected='selected'";?>>Macquarie University - NSW</option>
+						<option value="MON" <?php if ($details['Undergraduate-university-name'] == "MON") echo "selected='selected'";?>>Monash University - Vic</option>
+						<option value="UA" <?php if ($details['Undergraduate-university-name'] == "UA") echo "selected='selected'";?>>University of Adelaide</option>
+						<option value="UM" <?php if ($details['Undergraduate-university-name'] == "UM") echo "selected='selected'";?>>University of Melbourne - Vic</option>
+						<option value="UNC" <?php if ($details['Undergraduate-university-name'] == "UNC") echo "selected='selected'";?>>University of Newcastle - NSW</option>
+						<option value="UND" <?php if ($details['Undergraduate-university-name'] == "UND") echo "selected='selected'";?>>University of Notre Dam - WA</option>
+						<option value="UQ" <?php if ($details['Undergraduate-university-name'] == "UQ") echo "selected='selected'";?>>University of Qld</option>
+						<option value="USA" <?php if ($details['Undergraduate-university-name'] == "USA") echo "selected='selected'";?>>University of South Australia</option>
+						<option value="US" <?php if ($details['Undergraduate-university-name'] == "UTS") echo "selected='selected'";?>>University of Sydney - NSW</option>
+						<option value="UTS" <?php if ($details['Undergraduate-university-name'] == "UTS") echo "selected='selected'";?>>University of Technology Sydney</option>
+						<option value="UWA" <?php if ($details['Undergraduate-university-name'] == "UWA") echo "selected='selected'";?>>University of Western Australia</option>
+						<option value="UWS" <?php if ($details['Undergraduate-university-name'] == "UWS") echo "selected='selected'";?>>University of Western Sydney- NSW</option>
+						<option value="WAIT" <?php if ($details['Undergraduate-university-name'] == "WAIT") echo "selected='selected'";?>>Western Australian Institute of Technology</option>
 						<option value="Other">Other</option>
 					</select>
 					<input type="text" class="form-control display-none" name="Undergraduate-university-name-other" id="Undergraduate-university-name-other">
@@ -1001,8 +959,20 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
             <div class="row">
                 <div class="col-lg-4">
 					<label for="ugraduate-country">Country<span class="tipstyle">*</span></label>
-					<input type="text" class="form-control" name="Ugraduate-country" id="Ugraduate-country">
-                </div>
+					<select class="form-control" id="Ugraduate-country" name="Ugraduate-country">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['ID'].'"';
+								if ($details['Ugraduate-country'] == $country[$key]['ID']){ echo "selected='selected'"; } 
+								echo '> '.$country[$key]['Country'].' </option>';
+								
+							}
+							?>
+					</select>
+					
+				</div>
                 <div class="col-lg-2">
 					<label for="ugraduate-year-attained">Year attained<span class="tipstyle">*</span></label>
 					<select class="form-control" name="Ugraduate-year-attained" id="Ugraduate-year-attained">
@@ -1024,12 +994,12 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<div class="col-lg-6">
 					<label for="pdegree">Postgraduate degree</label>
 					<select name="Pdegree" id="Pdegree">
-						<option selected="selected" value="">(None)</option>
-						<option value="1">Doctor of Physiotherapy</option>
-						<option value="2">Master of Physiotherapy</option>
-						<option value="3">Master of Physiotherapy Practice</option>
-						<option value="4">Master of Physiotherapy (Graduate Entry)</option>
-						<option value="5">Master of Physiotherapy Studies</option>
+						<option <?php if (empty($details['Pdegree'])) echo "selected='selected'";?> value="">(None)</option>
+						<option value="1" <?php if ($details['Pdegree'] == "1") echo "selected='selected'";?>>Doctor of Physiotherapy</option>
+						<option value="2" <?php if ($details['Pdegree'] == "2") echo "selected='selected'";?>>Master of Physiotherapy</option>
+						<option value="3" <?php if ($details['Pdegree'] == "3") echo "selected='selected'";?>>Master of Physiotherapy Practice</option>
+						<option value="4" <?php if ($details['Pdegree'] == "4") echo "selected='selected'";?>>Master of Physiotherapy (Graduate Entry)</option>
+						<option value="5" <?php if ($details['Pdegree'] == "5") echo "selected='selected'";?>>Master of Physiotherapy Studies</option>
 					</select>
 				</div>
             </div>
@@ -1037,38 +1007,38 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                 <div class="col-lg-6">
                     <label for="postgraduate-university-name">Postgraduate university name</label>
 				    <select name="Postgraduate-university-name" id="Postgraduate-university-name">
-						<option selected="selected" value="">(None)</option>
-						<option value="ACU">Australian Catholic University - NSW</option>
-						<option value="ACUQ">Australian Catholic University - QLD</option>
-						<option value="ACUB">Australlian Catholic University - Ballarat</option>
-						<option value="BON">Bond University - QLD</option>
-						<option value="CU">Canberra University</option>
-						<option value="CQU">Central Qld University</option>
-						<option value="CSU">Charles Sturt University - Albury NSW</option>
-						<option value="CSUO">Charles Sturt University - Orange NSW</option>
-						<option value="CSUP">Charles Sturt University Port Macquarie</option>
-						<option value="CUMB">Cumberland University - NSW</option>
-						<option value="CUR">Curtin University - WA</option>
-						<option value="ECU">Edith Cowan University - WA</option>
-						<option value="FLIN">Flinders University SA</option>
-						<option value="GRIF">Griffith University - Gold coast QLD</option>
-						<option value="JCU">James Cook University - QLD</option>
-						<option value="LAT">Latrobe University - Bundoora VIC</option>
-						<option value="LATB">Latrobe Universtiy - Bendigo VIC</option>
-						<option value="LIN">Lincoln Institute - VIC</option>
-						<option value="MACQ">Macquarie University - NSW</option>
-						<option value="MON">Monash University - Vic</option>
-						<option value="UA">University of Adelaide</option>
-						<option value="UM">University of Melbourne - Vic</option>
-						<option value="UNC">University of Newcastle - NSW</option>
-						<option value="UND">University of Notre Dam - WA</option>
-						<option value="UQ">University of Qld</option>
-						<option value="USA">University of South Australia</option>
-						<option value="US">University of Sydney - NSW</option>
-						<option value="UTS">University of Technology Sydney</option>
-						<option value="UWA">University of Western Australia</option>
-						<option value="UWS">University of Western Sydney- NSW</option>
-						<option value="WAIT">Western Australian Institute of Technology</option>
+						<option value="" <?php if (empty($details['Undergraduate-university-name'])) echo "selected='selected'";?>>(None)</option>
+						<option value="ACU" <?php if ($details['Undergraduate-university-name'] == "ACU") echo "selected='selected'";?>>Australian Catholic University - NSW</option>
+						<option value="ACUQ" <?php if ($details['Undergraduate-university-name'] == "ACUQ") echo "selected='selected'";?>>Australian Catholic University - QLD</option>
+						<option value="ACUB" <?php if ($details['Undergraduate-university-name'] == "ACUB") echo "selected='selected'";?>>Australlian Catholic University - Ballarat</option>
+						<option value="BON" <?php if ($details['Undergraduate-university-name'] == "BON") echo "selected='selected'";?>>Bond University - QLD</option>
+						<option value="CU" <?php if ($details['Undergraduate-university-name'] == "CU") echo "selected='selected'";?>>Canberra University</option>
+						<option value="CQU" <?php if ($details['Undergraduate-university-name'] == "CQU") echo "selected='selected'";?>>Central Qld University</option>
+						<option value="CSU" <?php if ($details['Undergraduate-university-name'] == "CSU") echo "selected='selected'";?>>Charles Sturt University - Albury NSW</option>
+						<option value="CSUO" <?php if ($details['Undergraduate-university-name'] == "CSUO") echo "selected='selected'";?>>Charles Sturt University - Orange NSW</option>
+						<option value="CSUP" <?php if ($details['Undergraduate-university-name'] == "CSUP") echo "selected='selected'";?>>Charles Sturt University Port Macquarie</option>
+						<option value="CUMB" <?php if ($details['Undergraduate-university-name'] == "CUMB") echo "selected='selected'";?>>Cumberland University - NSW</option>
+						<option value="CUR" <?php if ($details['Undergraduate-university-name'] == "CUR") echo "selected='selected'";?>>Curtin University - WA</option>
+						<option value="ECU" <?php if ($details['Undergraduate-university-name'] == "ECU") echo "selected='selected'";?>>Edith Cowan University - WA</option>
+						<option value="FLIN" <?php if ($details['Undergraduate-university-name'] == "FLIN") echo "selected='selected'";?>>Flinders University SA</option>
+						<option value="GRIF" <?php if ($details['Undergraduate-university-name'] == "GRIF") echo "selected='selected'";?>>Griffith University - Gold coast QLD</option>
+						<option value="JCU" <?php if ($details['Undergraduate-university-name'] == "JCU") echo "selected='selected'";?>>James Cook University - QLD</option>
+						<option value="LAT" <?php if ($details['Undergraduate-university-name'] == "LAT") echo "selected='selected'";?>>Latrobe University - Bundoora VIC</option>
+						<option value="LATB" <?php if ($details['Undergraduate-university-name'] == "LATB") echo "selected='selected'";?>>Latrobe Universtiy - Bendigo VIC</option>
+						<option value="LIN" <?php if ($details['Undergraduate-university-name'] == "LIN") echo "selected='selected'";?>>Lincoln Institute - VIC</option>
+						<option value="MACQ" <?php if ($details['Undergraduate-university-name'] == "MACQ") echo "selected='selected'";?>>Macquarie University - NSW</option>
+						<option value="MON" <?php if ($details['Undergraduate-university-name'] == "MON") echo "selected='selected'";?>>Monash University - Vic</option>
+						<option value="UA" <?php if ($details['Undergraduate-university-name'] == "UA") echo "selected='selected'";?>>University of Adelaide</option>
+						<option value="UM" <?php if ($details['Undergraduate-university-name'] == "UM") echo "selected='selected'";?>>University of Melbourne - Vic</option>
+						<option value="UNC" <?php if ($details['Undergraduate-university-name'] == "UNC") echo "selected='selected'";?>>University of Newcastle - NSW</option>
+						<option value="UND" <?php if ($details['Undergraduate-university-name'] == "UND") echo "selected='selected'";?>>University of Notre Dam - WA</option>
+						<option value="UQ" <?php if ($details['Undergraduate-university-name'] == "UQ") echo "selected='selected'";?>>University of Qld</option>
+						<option value="USA" <?php if ($details['Undergraduate-university-name'] == "USA") echo "selected='selected'";?>>University of South Australia</option>
+						<option value="US" <?php if ($details['Undergraduate-university-name'] == "UTS") echo "selected='selected'";?>>University of Sydney - NSW</option>
+						<option value="UTS" <?php if ($details['Undergraduate-university-name'] == "UTS") echo "selected='selected'";?>>University of Technology Sydney</option>
+						<option value="UWA" <?php if ($details['Undergraduate-university-name'] == "UWA") echo "selected='selected'";?>>University of Western Australia</option>
+						<option value="UWS" <?php if ($details['Undergraduate-university-name'] == "UWS") echo "selected='selected'";?>>University of Western Sydney- NSW</option>
+						<option value="WAIT" <?php if ($details['Undergraduate-university-name'] == "WAIT") echo "selected='selected'";?>>Western Australian Institute of Technology</option>
 						<option value="Other">Other</option>
 					</select>
 					<input type="text" class="form-control display-none" name="Postgraduate-university-name-other" id="Postgraduate-university-name-other">
@@ -1077,7 +1047,18 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
             <div class="row">
 				<div class="col-lg-4">
 					<label for="pgraduate-country">Country</label>
-					<input type="text" class="form-control" name="Pgraduate-country" id="Pgraduate-country">
+					<select class="form-control" id="Pgraduate-country" name="Pgraduate-country">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['ID'].'"';
+								if ($details['Pgraduate-country'] == $country[$key]['ID']){ echo "selected='selected'"; } 
+								echo '> '.$country[$key]['Country'].' </option>';
+								
+							}
+							?>
+					</select>
 				</div>
                 <div class="col-lg-2">
 					<label for="pgraduate-year-attained">Year attained</label>
@@ -1099,85 +1080,104 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 		    <div class="row">
 			    <div class="col-lg-6">
 					<label for="Additional-qualifications">Additional qualifications<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a></label>
-					<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  $addtionalNumber =  1; echo  $addtionalNumber; ?>"/>
+					<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  $addtionalNumber =  sizeof($details['Additional-qualifications']); echo  $addtionalNumber; ?>"/>			
 				</div>
 			</div>
-				<div id="additional-qualifications-block">
-					<div class="row">
-						<div class="col-lg-6">
-							<label for="degree0">Degree<span class="tipstyle">*</span></label>
-							<select name="degree0" id="degree0">
-								<option selected="selected" value="">(None)</option>
-								<option value="1">Bachelor of Physiotherapy</option>
-								<option value="2">Bachelor of Physiotherapy (Hons)</option>
-								<option value="3">Bachelor of Physiotherapy (Honours)</option>
-								<option value="4">Bachelor of Science (Physiotherapy)</option>
-								<option value="5">Bachelor of Science (Physiotherapy) (Honours)</option>
-								<option value="6">Bachelor of Applied Science and Master of Physiotherapy Practice</option>
-								<option value="7">Bachelor of Applied Science (Physiotherapy)</option>
-								<option value="8">Bachelor of Applied Science (Physiotherapy) (Honours)</option>
-								<option value="Other">Other</option>
-							</select>
+			<div id="additional-qualifications-block">
+				<?php foreach($details['Additional-qualifications'] as $key => $value) :?>
+					<div id="additional<?php echo $key;?>">
+						<div class="row">
+							<div class="col-lg-6">
+								<label for="degree<?php echo $key;?>">Degree<span class="tipstyle">*</span></label>
+								<select name="degree<?php echo $key;?>" id="degree<?php echo $key;?>">
+									<option <?php if (empty($details['Additional-qualifications'][$key]['degree'])) echo "selected='selected'";?> selected disabled>(None)</option>
+									<option value="1" <?php if ($details['Additional-qualifications'][$key]['degree'] == "1") echo "selected='selected'";?>>Bachelor of Physiotherapy</option>
+									<option value="2" <?php if ($details['Additional-qualifications'][$key]['degree'] == "2") echo "selected='selected'";?>>Bachelor of Physiotherapy (Hons)</option>
+									<option value="3" <?php if ($details['Additional-qualifications'][$key]['degree'] == "3") echo "selected='selected'";?>>Bachelor of Physiotherapy (Honours)</option>
+									<option value="4" <?php if ($details['Additional-qualifications'][$key]['degree'] == "4") echo "selected='selected'";?>>Bachelor of Science (Physiotherapy)</option>
+									<option value="5" <?php if ($details['Additional-qualifications'][$key]['degree'] == "5") echo "selected='selected'";?>>Bachelor of Science (Physiotherapy) (Honours)</option>
+									<option value="6" <?php if ($details['Additional-qualifications'][$key]['degree'] == "6") echo "selected='selected'";?>>Bachelor of Applied Science and Master of Physiotherapy Practice</option>
+									<option value="7" <?php if ($details['Additional-qualifications'][$key]['degree'] == "7") echo "selected='selected'";?>>Bachelor of Applied Science (Physiotherapy)</option>
+									<option value="8" <?php if ($details['Additional-qualifications'][$key]['degree'] == "8") echo "selected='selected'";?>>Bachelor of Applied Science (Physiotherapy) (Honours)</option>
+									<option value="Other" <?php if ($details['Additional-qualifications'][$key]['degree'] == "Other") echo "selected='selected'";?>>Other</option>
+								</select>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-6">
+								<label for="university-name<?php echo $key;?>">University name<span class="tipstyle">*</span></label>
+								<select name="university-name<?php echo $key;?>" id="university-name<?php echo $key;?>">
+									<option <?php if (empty($details['Additional-qualifications'][$key]['university-name'])) echo "selected='selected'";?> selected disabled>(None)</option>
+									<option value="ACU" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "ACU") echo "selected='selected'";?>>Australian Catholic University - NSW</option>
+									<option value="ACUQ" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "ACUQ") echo "selected='selected'";?>>Australian Catholic University - QLD</option>
+									<option value="ACUB" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "ACUB") echo "selected='selected'";?>>Australlian Catholic University - Ballarat</option>
+									<option value="BON" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "BON") echo "selected='selected'";?>>Bond University - QLD</option>
+									<option value="CU" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CU") echo "selected='selected'";?>>Canberra University</option>
+									<option value="CQU" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CQU") echo "selected='selected'";?>>Central Qld University</option>
+									<option value="CSU" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CSU") echo "selected='selected'";?>>Charles Sturt University - Albury NSW</option>
+									<option value="CSUO" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CSUO") echo "selected='selected'";?>>Charles Sturt University - Orange NSW</option>
+									<option value="CSUP" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CSUP") echo "selected='selected'";?>>Charles Sturt University Port Macquarie</option>
+									<option value="CUMB" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CUMB") echo "selected='selected'";?>>Cumberland University - NSW</option>
+									<option value="CUR" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "CUR") echo "selected='selected'";?>>Curtin University - WA</option>
+									<option value="ECU" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "ECU") echo "selected='selected'";?>>Edith Cowan University - WA</option>
+									<option value="FLIN" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "FLIN") echo "selected='selected'";?>>Flinders University SA</option>
+									<option value="GRIF" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "GRIF") echo "selected='selected'";?>>Griffith University - Gold coast QLD</option>
+									<option value="JCU" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "JCU") echo "selected='selected'";?>>James Cook University - QLD</option>
+									<option value="LAT" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "ACUQ") echo "selected='selected'";?>>Latrobe University - Bundoora VIC</option>
+									<option value="LATB" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "LATB") echo "selected='selected'";?>>Latrobe Universtiy - Bendigo VIC</option>
+									<option value="LIN" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "LIN") echo "selected='selected'";?>>Lincoln Institute - VIC</option>
+									<option value="MACQ" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "MACQ") echo "selected='selected'";?>>Macquarie University - NSW</option>
+									<option value="MON" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "MON") echo "selected='selected'";?>>Monash University - Vic</option>
+									<option value="UA" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UA") echo "selected='selected'";?>>University of Adelaide</option>
+									<option value="UM" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UM") echo "selected='selected'";?>>University of Melbourne - Vic</option>
+									<option value="UNC" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UNC") echo "selected='selected'";?>>University of Newcastle - NSW</option>
+									<option value="UND" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UND") echo "selected='selected'";?>>University of Notre Dam - WA</option>
+									<option value="UQ" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UQ") echo "selected='selected'";?>>University of Qld</option>
+									<option value="USA" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "USA") echo "selected='selected'";?>>University of South Australia</option>
+									<option value="US" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "US") echo "selected='selected'";?>>University of Sydney - NSW</option>
+									<option value="UTS" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UTS") echo "selected='selected'";?>>University of Technology Sydney</option>
+									<option value="UWA" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UWA") echo "selected='selected'";?>>University of Western Australia</option>
+									<option value="UWS" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "UWS") echo "selected='selected'";?>>University of Western Sydney- NSW</option>
+									<option value="WAIT" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "WAIT") echo "selected='selected'";?>>Western Australian Institute of Technology</option>
+									<option value="Other" <?php if ($details['Additional-qualifications'][$key]['university-name'] == "Other") echo "selected='selected'";?>>Other</option>
+								</select>
+								<input type="text" class="form-control display-none" name="Undergraduate-university-name-other<?php echo $key;?>" id="Undergraduate-university-name-other<?php echo $key;?>">
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-lg-4">
+								<label for="additional-country<?php echo $key;?>">Country<span class="tipstyle">*</span></label>
+								<select class="form-control" id="additional-country<?php echo $key;?>" name="additional-country<?php echo $key;?>">
+								<?php 
+								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+								$country=json_decode($countrycode, true);
+								foreach($country  as $pair => $value){
+									echo '<option value="'.$country[$pair]['ID'].'"';
+									if ($details['Additional-qualifications'][$key]['additional-country'] == $country[$pair]['ID']){ echo "selected='selected'"; } 
+									echo '> '.$country[$pair]['Country'].' </option>';
+									
+								}
+								?>
+								</select>
+							</div>
+							<div class="col-lg-2">
+								<label for="additional-year-attained<?php echo $key;?>">Year attained<span class="tipstyle">*</span></label>
+								<select class="form-control" name="additional-year-attained<?php echo $key;?>" id="additional-year-attained<?php echo $key;?>">
+								<?php 
+								$y = date("Y") + 15; 
+								for ($i=1940; $i<= $y; $i++){
+								echo '<option value="'.$i.'"';
+								if ($details['Additional-qualifications'][$key]['additional-year-attained'] == $i){
+								echo 'selected="selected"';
+								}
+								echo '>'.$i.'</option>';
+								}
+								?>
+								</select>
+							</div>
 						</div>
 					</div>
-					<div class="row">
-						<div class="col-lg-6">
-							<label for="university-name0">University name<span class="tipstyle">*</span></label>
-							<select name="university-name0" id="university-name0">
-								<option selected="selected" value="">(None)</option>
-								<option value="ACU">Australian Catholic University - NSW</option>
-								<option value="ACUQ">Australian Catholic University - QLD</option>
-								<option value="ACUB">Australlian Catholic University - Ballarat</option>
-								<option value="BON">Bond University - QLD</option>
-								<option value="CU">Canberra University</option>
-								<option value="CQU">Central Qld University</option>
-								<option value="CSU">Charles Sturt University - Albury NSW</option>
-								<option value="CSUO">Charles Sturt University - Orange NSW</option>
-								<option value="CSUP">Charles Sturt University Port Macquarie</option>
-								<option value="CUMB">Cumberland University - NSW</option>
-								<option value="CUR">Curtin University - WA</option>
-								<option value="ECU">Edith Cowan University - WA</option>
-								<option value="FLIN">Flinders University SA</option>
-								<option value="GRIF">Griffith University - Gold coast QLD</option>
-								<option value="JCU">James Cook University - QLD</option>
-								<option value="LAT">Latrobe University - Bundoora VIC</option>
-								<option value="LATB">Latrobe Universtiy - Bendigo VIC</option>
-								<option value="LIN">Lincoln Institute - VIC</option>
-								<option value="MACQ">Macquarie University - NSW</option>
-								<option value="MON">Monash University - Vic</option>
-								<option value="UA">University of Adelaide</option>
-								<option value="UM">University of Melbourne - Vic</option>
-								<option value="UNC">University of Newcastle - NSW</option>
-								<option value="UND">University of Notre Dam - WA</option>
-								<option value="UQ">University of Qld</option>
-								<option value="USA">University of South Australia</option>
-								<option value="US">University of Sydney - NSW</option>
-								<option value="UTS">University of Technology Sydney</option>
-								<option value="UWA">University of Western Australia</option>
-								<option value="UWS">University of Western Sydney- NSW</option>
-								<option value="WAIT">Western Australian Institute of Technology</option>
-								<option value="Other">Other</option>
-							</select>
-							<input type="text" class="form-control display-none" name="Undergraduate-university-name-other" id="Undergraduate-university-name-other">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-4">
-							<label for="additional-country0">Country<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="additional-country0" id="additional-country0">
-						</div>
-						<div class="col-lg-2">
-							<label for="additional-year-attained0">Year attained<span class="tipstyle">*</span></label>
-							<select class="form-control" name="additional-year-attained0" id="additional-year-attained0">
-							<?php 
-							$y = date("Y"); 
-							for ($i=1940; $i<= $y; $i++){
-							echo '<option value="'.$i.'">'.$i.'</option>';  
-							}
-							?>
-							</select>
-						</div>
-					</div>
+				<?php endforeach;?>
 				</div>
 			
 		    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
@@ -1194,16 +1194,20 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                     <div class="row">
                         <div class="col-lg-3">
 				            <label for="prefix">Prefix<span class="tipstyle">*</span></label>
+							<?php 
+							$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
+							$Prefix=json_decode($Prefixcode, true);
+							?>
                             <select class="form-control" id="Prefix" name="Prefix">
-								<option value="" selected disabled>Prefix</option>
-								<option value="Prof">Prof</option>
-								<option value="Dr">Dr</option>
-								<option value="Mr">Mr</option>
-								<option value="Mrs">Mrs</option>
-								<option value="Miss">Miss</option>
-								 <option value="Ms">Ms</option>
-                            </select>
+							<?php 
+							foreach($Prefix  as $key => $value){
+								echo '<option value="'.$Prefix[$key]['ID'].'"';
+								echo '> '.$Prefix[$key]['Prefix'].' </option>';
+							}
+							?>
+							</select>
                         </div>
+						
                         <div class="col-lg-3">
                            <label for="">First name<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control"  name="Firstname">
@@ -1245,24 +1249,16 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<div class="row">
 						<div class="col-lg-2">
 							<label for="">Country code</label>
-							<?php 
-							// 2.2.39 - get option dropdown list
-							// Send - 
-							// Response - get dropdown list from Aptify via webserice return Json data;
-							// stroe workplace settings into the session
-							$dropdata= GetAptifyData("39","request");
-							$countrycode = $dropdata['Country'];
-							?>
 							<select class="form-control" id="country-code" name="country-code">
-							
-							<?php 
-							foreach($countrycode  as $lines){
-								echo '<option value="'.$lines["TelephoneCode"].'"';
-								
-								echo '> '.$lines["Country"].' </option>';
+							<?php
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);						
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
+								echo '> '.$country[$key]['Country'].' </option>';
 							}
 							?>
-							</select>
+						</select>
 						</div>
 						<div class="col-lg-2">
 							<label for="">Area code</label>
@@ -1330,20 +1326,30 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							<label for="">State<span class="tipstyle">*</span></label>
 							<select class="form-control" id="State" name="State">
 								<option value="" selected disabled> State </option>
-								<option value="ACT"> ACT </option>
-								<option value="NSW"> NSW </option>
-								<option value="SA"> SA </option>
-								<option value="TAS"> TAS </option>
-								<option value="VIC"> VIC </option>
-								<option value="QLD"> QLD </option>
-								<option value="NT"> NT </option>
-								<option value="WA"> WA </option>
-								<option value="N/A"> I live overseas </option>
+								<?php 
+								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+								$State=json_decode($statecode, true);
+								foreach($State  as $key => $value){
+								echo '<option value="'.$State[$key]['ID'].'"';
+							    echo '> '.$State[$key]['Abbreviation'].' </option>';
+							
+								}
+								?>
 							</select>
 						</div>
 						<div class="col-lg-6">
 							<label for="">Country<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Country" id="Country">
+							<select class="form-control" id="Country" name="Country">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['ID'].'"';
+								echo '> '.$country[$key]['Country'].' </option>';
+								
+							}
+							?>
+					        </select>
 						</div>
 					</div>
 					<div class="row">
@@ -1380,20 +1386,30 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                            <label for="">State</label>
                            <select class="form-control" name="Billing-State" id="Billing-State">
 								<option value=""  disabled> State </option>
-								<option value="ACT"> ACT </option>
-								<option value="NSW"> NSW </option>
-								<option value="SA"> SA </option>
-								<option value="TAS"> TAS </option>
-								<option value="VIC"> VIC </option>
-								<option value="QLD"> QLD </option>
-								<option value="NT"> NT </option>
-								<option value="WA"> WA </option>
-								<option value="N/A"> I live overseas </option>
+								<?php 
+								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+								$State=json_decode($statecode, true);
+								foreach($State  as $key => $value){
+								echo '<option value="'.$State[$key]['ID'].'"';
+							    echo '> '.$State[$key]['Abbreviation'].' </option>';
+							
+								}
+								?>
                            </select>
                         </div>
                         <div class="col-lg-6">
                            <label for="">Country</label>
-                           <input type="text" class="form-control" name="Billing-Country" id="Billing-Country">
+                           	<select class="form-control" id="Billing-Country" name="Billing-Country">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['ID'].'"';
+								echo '> '.$country[$key]['Country'].' </option>';
+								
+							}
+							?>
+					        </select>
                         </div>
                     </div>
 					 <!---Hidden mailing address and shipping address Start from here-->
@@ -1471,32 +1487,14 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<label for="">Member Type<span class="tipstyle">*</span></label>
 						<select class="form-control" id="MemberType" name="MemberType">
 							<option value="none" selected disabled>memberType</option>
-							<option value="FPI">Full-time physiotherapist with insurance (more than 18 hours per week) </option>
-							<option value="11">Full-time physiotherapist no insurance (more than 18 hours per week) </option>
-							<option value="FEPI">Full-time Employed Public Sector Physiotherapist (more than 18 hours per week) with insurance</option>
-							<option value="FEPN">Full-time Employed Public Sector Physiotherapist (more than 18 hours per week) no insurance</option>
-							<option value="PPI">Part-time Physiotherapist (less than 18 hours per week) with insurance</option>
-							<option value="PPN">Part-time Physiotherapist (less than 18 hours per week) no insurance</option>
-							<option value="PEP">Part-time Employed Public Sector Physiotherapist (less than 18 hours per week) </option>
-							<option value="MPU">Maternity/Paternity/Unemployed (working for less than 6 months) </option>
-							<option value="OV">Overseas for more than 6 months (must hold current registration with AHPRA) </option>
-							<option value="PGS">Post Graduate study and working less than 18 hours per week </option>
-							<option value="NPP">Non-Practising Physiotherapist registered as NPP with PhysioBA</option>
-							<option value="AM">￼Associate Member (Australia) </option>
-							<option value="GFY">￼Graduate First Year </option>
-							<option value="GSY">￼Graduate Second Year</option>
-							<option value="GTY">￼Graduate Third Year</option>
-							<option value="GFOY">￼Graduate Fourth Year</option>
-							<option value="GFYE">Graduate First Year Employed Public Sector </option>
-							<option value="GSYE">Graduate Second Year Employed Public Sector</option>
-							<option value="GTYE">￼Graduate Third Year Employed Public Sector</option>
-							<option value="GFOYE">￼Graduate Fourth Year Employed Public Sector </option>
-							<option value="SY">￼Student Year 1 - 4</option>
-							<option value="PA">Physiotherapy Assistant</option>
-							<option value="AMO">Associate Member (Overseas)</option>
-							<option value="AS">￼Affiliate subscription</option>
-							<option value="RAN">Retired and not working in any paid capacity</option>
-							<option value="RW">Retired with 36 years membership and is over the age of 55 years (subject to office validation)</option>
+							<?php 
+							$MemberTypecode  = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
+							$MemberType=json_decode($MemberTypecode, true);
+							foreach($MemberType  as $key => $value){
+								echo '<option value="'.$MemberType[$key]['ID'].'"';
+								echo '> '.$MemberType[$key]['Name'].' </option>';
+							}
+							?>
 						</select>
 					</div>
 				</div>
@@ -1510,17 +1508,20 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<div class="col-lg-6">
 						<label for="">Your National group</label>
 						<select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple>
-						<?php
-						// 2.2.19 - get national group list
-						// Send - 
-						// Response - get national group from Aptify via webserice return Json data;
-						$nationalGroups= GetAptifyData("19","request");
-						?>
 						<?php 
-						foreach($nationalGroups["NationalGroup"] as $lines) {
-						echo '<option value="'.$lines["NGid"].'"> '.$lines["NGtitle"].' </option>';
+						// get national group from Aptify via webserice return Json data;
+						// 2.2.19 - get national group
+						// Send - 
+						// Response - national group
+						$nationalGroupsCode= file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
+						$nationalGroups=json_decode($nationalGroupsCode, true);
+				        ?>
+					    <?php 
+						foreach($nationalGroups as $key=>$value) {
+						   echo '<option value="'.$nationalGroups[$key]["ID"].'"';
+						   echo '> '.$nationalGroups[$key]["Name"].' </option>';
 						}
-						?>
+					    ?>
 						</select>
 					</div>
 					<div class="col-lg-3 display-none" id="ngsports"><label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label><input type="checkbox" id="ngsportsbox" name="ngsports" value="0"></div>
@@ -1531,14 +1532,23 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
 						<select class="form-control" id="Branch" name="Branch">
 							<option value="" selected disabled>What branch would you like to join?</option>
-							<option value="ACT">ACT</option>
-							<option value="NSW">NSW</option>
-							<option value="QLD">QLD</option>
-							<option value="SA">SA</option>
-							<option value="TAS">TAS</option>
-							<option value="VIC">VIC</option>
-							<option value="WA">WA</option>
-							<option value="Overseas">I live overseas</option>
+							<?php 
+								//$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+								//$State=json_decode($statecode, true);
+								//foreach($State  as $key => $value){
+								//echo '<option value="'.$State[$key]['ID'].'"';
+							   // echo '> '.$State[$key]['Abbreviation'].' </option>';
+							
+								//}
+							?>
+							<option value="73"> ACT </option>
+							<option value="74"> NSW </option>
+							<option value="77"> SA </option>
+							<option value="78"> TAS </option>
+							<option value="79"> VIC </option>
+							<option value="76"> QLD </option>
+							<option value="75"> NT </option>
+							<option value="80"> WA </option>
 						</select>
 					</div>
 				</div>
@@ -1549,20 +1559,16 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<div class="col-lg-6">
 						<select class="chosen-select" id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
 						<?php 
-						// 2.2.37 - get interest area list
-						// Send - 
-						// Response - get workplace settings from Aptify via webserice return Json data;
-						// stroe interest area list into the session
-						$interestAreas= GetAptifyData("37","request");
-						$_SESSION["interestAreas"] = $interestAreas;
-						?>
-								
-						<?php 
-						foreach($interestAreas['InterestAreas']  as $lines){
-						echo '<option value="'.$lines['ListCode'].'">'.$lines['ListName'].'</option>';
-
-						}
-
+							// get interest area from Aptify via webserice return Json data;
+							$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
+				            $interestAreas=json_decode($interestAreascode, true);
+                            $_SESSION["interestAreas"] = $interestAreas;							
+							?>
+							<?php 
+							foreach($interestAreas  as $key => $value){
+								echo '<option value="'.$interestAreas[$key]["Code"].'"';
+								echo '> '.$interestAreas[$key]["Name"].' </option>'; 
+							}
 						?>
 						</select>
 					</div>
@@ -1576,15 +1582,15 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<div class="col-lg-6">
 						<select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
 						<?php 
-						// get interest area from Aptify via webserice return Json data;
-						$interestAreas= GetAptifyData("37","request");
-						$_SESSION["interestAreas"] = $interestAreas;
-						?>
-						<?php 
-						foreach($interestAreas['InterestAreas']  as $lines){
-							echo '<option value="'.$lines["ListCode"].'"';
-							echo '> '.$lines["ListName"].' </option>'; 
-						}
+							// get interest area from Aptify via webserice return Json data;
+							$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
+				            $interestAreas=json_decode($interestAreascode, true);	
+							?>
+							<?php 
+							foreach($interestAreas  as $key => $value){
+								echo '<option value="'.$interestAreas[$key]["Code"].'"';
+								echo '> '.$interestAreas[$key]["Name"].' </option>'; 
+							}
 						?>
 						</select>
 					</div>
@@ -1594,58 +1600,14 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<div class="col-lg-3">
 					<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
 					   <option value="NONE" disabled>no</option>
-					   <option value="AF"> Afrikaans </option>
-					   <option value="AR"> Arabic </option>
-					   <option value="BO"> Bosnian </option>
-					   <option value="CA"> Cantonese </option>
-					   <option value="CHZ"> Chzech </option>
-					   <option value="CR"> Croation </option>
-					   <option value="DA"> Danish </option>
-					   <option value="DU"> Dutch </option>
-					   <option value="EG"> Egyptian </option>
-					   <option value="ENG"> English </option>
-					   <option value="FL"> Filipino </option>
-					   <option value="FR"> French </option>
-					   <option value="GE"> German </option>
-					   <option value="GR"> Greek </option>
-					   <option value="HE"> Hebrew </option>
-					   <option value="HI"> Hindi </option>
-					   <option value="HO"> Hokkien </option>
-					   <option value="HU"> Hungarian </option>
-					   <option value="IND"> Indonesian </option>
-					   <option value="IT"> Italian </option>
-					   <option value="JP"> Japanese </option>
-					   <option value="KO"> Korean </option>
-					   <option value="LAT"> Latvian </option>
-					   <option value="LE"> Lebanese </option>
-					   <option value="M"> Marathi </option>
-					   <option value="MA"> Macedonian </option>
-					   <option value="MALT"> Maltese </option>
-					   <option value="MAN"> Mandarin </option>
-					   <option value="MAV"> Mavathi </option>
-					   <option value="ML"> Malay </option>
-					   <option value="NOR"> Norwegian </option>
-					   <option value="POL"> Polish </option>
-					   <option value="POR"> Portuguese </option>
-					   <option value="PU"> Punjabi </option>
-					   <option value="RU"> Russian </option>
-					   <option value="S"> Slovak </option>
-					   <option value="SERB"> Serbian </option>
-					   <option value="SL"> Sign Language </option>
-					   <option value="SP"> Spanish </option>
-					   <option value="SW"> Swedish </option>
-					   <option value="SWI"> Swiss </option>
-					   <option value="TA"> Tamil </option>
-					   <option value="TAW"> Taiwanese </option>
-					   <option value="TE"> Teo-Chew </option>
-					   <option value="TEL"> Telugu </option>
-					   <option value="TH"> Thai </option>
-					   <option value="TURK"> Turkish </option>
-					   <option value="UK"> Ukrainian </option>
-					   <option value="UR"> Urdu </option>
-					   <option value="VI"> Vietnamese </option>
-					   <option value="YI"> Yiddish </option>
-					   <option value="YU"> Yugoslav </option>
+					   <?php 
+						$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
+						$Language=json_decode($Languagecode, true);
+						foreach($Language  as $key => $value){
+							echo '<option value="'.$Language[$key]['ID'].'"';
+							echo '> '.$Language[$key]['Name'].' </option>';
+						}
+						?>
 					</select>
 				</div>
 			</div>
@@ -1776,20 +1738,29 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<label for="Wstate">State<span class="tipstyle">*</span></label>
 						<select class="form-control" id="Wstate0" name="Wstate0">
 							<option value="" selected disabled> State </option>
-							<option value="ACT"> ACT </option>
-							<option value="NSW"> NSW </option>
-							<option value="SA"> SA </option>
-							<option value="TAS"> TAS </option>
-							<option value="VIC"> VIC </option>
-							<option value="QLD"> QLD </option>
-							<option value="NT"> NT </option>
-							<option value="WA"> WA </option>
-							<option value="N/A"> I live overseas </option>
+							<?php 
+								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+								$State=json_decode($statecode, true);
+								foreach($State  as $key => $value){
+								echo '<option value="'.$State[$key]['ID'].'"';
+							    echo '> '.$State[$key]['Abbreviation'].' </option>';
+								}
+							?>
 						</select>
 					</div>
 					<div class="col-lg-3">
 						<label for="Wcountry">Country<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" name="Wcountry0" id="Wcountry0">
+					    <select class="form-control" id="Wcountry0" name="Wcountry0">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['ID'].'"';
+								echo '> '.$country[$key]['Country'].' </option>';
+								
+							}
+							?>
+					    </select>
 					</div>
 				</div>
 				<div class="row">
@@ -1812,59 +1783,14 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 					<div class="col-lg-3">
 						<select class="chosen-select" id="Additionallanguage0" name="Additionallanguage0[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
-							<option value="NONE" disabled>no</option>
-							<option value="AF"> Afrikaans </option>
-							<option value="AR"> Arabic </option>
-							<option value="BO"> Bosnian </option>
-							<option value="CA"> Cantonese </option>
-							<option value="CHZ"> Chzech </option>
-							<option value="CR"> Croation </option>
-							<option value="DA"> Danish </option>
-							<option value="DU"> Dutch </option>
-							<option value="EG"> Egyptian </option>
-							<option value="ENG"> English </option>
-							<option value="FL"> Filipino </option>
-							<option value="FR"> French </option>
-							<option value="GE"> German </option>
-							<option value="GR"> Greek </option>
-							<option value="HE"> Hebrew </option>
-							<option value="HI"> Hindi </option>
-							<option value="HO"> Hokkien </option>
-							<option value="HU"> Hungarian </option>
-							<option value="IND"> Indonesian </option>
-							<option value="IT"> Italian </option>
-							<option value="JP"> Japanese </option>
-							<option value="KO"> Korean </option>
-							<option value="LAT"> Latvian </option>
-							<option value="LE"> Lebanese </option>
-							<option value="M"> Marathi </option>
-							<option value="MA"> Macedonian </option>
-							<option value="MALT"> Maltese </option>
-							<option value="MAN"> Mandarin </option>
-							<option value="MAV"> Mavathi </option>
-							<option value="ML"> Malay </option>
-							<option value="NOR"> Norwegian </option>
-							<option value="POL"> Polish </option>
-							<option value="POR"> Portuguese </option>
-							<option value="PU"> Punjabi </option>
-							<option value="RU"> Russian </option>
-							<option value="S"> Slovak </option>
-							<option value="SERB"> Serbian </option>
-							<option value="SL"> Sign Language </option>
-							<option value="SP"> Spanish </option>
-							<option value="SW"> Swedish </option>
-							<option value="SWI"> Swiss </option>
-							<option value="TA"> Tamil </option>
-							<option value="TAW"> Taiwanese </option>
-							<option value="TE"> Teo-Chew </option>
-							<option value="TEL"> Telugu </option>
-							<option value="TH"> Thai </option>
-							<option value="TURK"> Turkish </option>
-							<option value="UK"> Ukrainian </option>
-							<option value="UR"> Urdu </option>
-							<option value="VI"> Vietnamese </option>
-							<option value="YI"> Yiddish </option>
-							<option value="YU"> Yugoslav </option>
+							<?php 
+								$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
+								$Language=json_decode($Languagecode, true);
+								foreach($Language  as $key => $value){
+									echo '<option value="'.$Language[$key]['ID'].'"';
+									echo '> '.$Language[$key]['Name'].' </option>';
+								}
+								?>
 						</select>
 					</div>
 					<div class="col-lg-3">
@@ -1923,16 +1849,14 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<div class="col-lg-6">
 						<select class="form-control" id="Number-worked-hours0" name="Number-worked-hours0">
 							<option value="0" disabled>no</option>
-							<option value="1"> 1-4 </option>
-							<option value="2"> 5-8</option>
-							<option value="3"> 9-12</option>
-							<option value="4"> 13-16</option>
-							<option value="5"> 17-20</option>
-							<option value="6"> 21-25</option>
-							<option value="7"> 26-30</option>
-							<option value="8"> 31-35</option>
-							<option value="9"> 36-40</option>
-							<option value="10"> 40+</option>
+							<?php 
+							$NumberOfHourscode  = file_get_contents("sites/all/themes/evolve/json/NumberOfHours.json");
+							$NumberOfHours=json_decode($NumberOfHourscode, true);
+							foreach($NumberOfHours  as $key => $value){
+								echo '<option value="'.$NumberOfHours[$key]['ID'].'"';
+								echo '> '.$NumberOfHours[$key]['Name'].' </option>';
+							}
+							?>
 						</select>
 					</div>
 				</div>
@@ -2005,7 +1929,17 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<div class="row">
 					<div class="col-lg-4">
 						<label for="ugraduate-country">Country<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" name="Ugraduate-country" id="Ugraduate-country">
+						<select class="form-control" id="Ugraduate-country" name="Ugraduate-country">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['ID'].'"';
+								echo '> '.$country[$key]['Country'].' </option>';
+								
+							}
+							?>
+					    </select>
 					</div>
 					<div class="col-lg-2">
 						<label for="ugraduate-year-attained">Year attained<span class="tipstyle">*</span></label>
@@ -2076,7 +2010,18 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<div class="row">
 					<div class="col-lg-4">
 					<label for="pgraduate-country">Country</label>
-					<input type="text" class="form-control" name="Pgraduate-country" id="Pgraduate-country">
+					<select class="form-control" id="Pgraduate-country" name="Pgraduate-country">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['ID'].'"';
+								echo '> '.$country[$key]['Country'].' </option>';
+								
+							}
+							?>
+					</select>
+				
 					</div>
 					<div class="col-lg-2">
 						<label for="pgraduate-year-attained">Year attained</label>
@@ -2158,7 +2103,17 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<div class="row">
 						<div class="col-lg-4">
 							<label for="additional-country0">Country<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="additional-country0" id="additional-country0">
+							<select class="form-control" id="additional-country0" name="additional-country0">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['ID'].'"';
+								echo '> '.$country[$key]['Country'].' </option>';
+								
+							}
+							?>
+							</select>
 						</div>
 						<div class="col-lg-2">
 							<label for="additional-year-attained0">Year attained<span class="tipstyle">*</span></label>

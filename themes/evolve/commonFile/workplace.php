@@ -2,6 +2,8 @@
 $i = $_POST['count'];
 $sessionWorkplaceSetting = json_decode($_POST['sessionWorkplaceSetting']);
 $sessioninterestAreas = json_decode($_POST['sessioninterestAreas']);
+$interestAreas= $sessioninterestAreas;
+
 echo '<div class="row"><div class="col-lg-6">&nbsp;</div><div class="col-lg-6"> <label for="Findphysio'.$i.'"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
 <input type="checkbox" name="Findphysio'.$i.'" id="Findphysio'.$i.'" value="" ></div></div>
 <div class="row"><div class="col-lg-6">&nbsp;</div><div class="col-lg-6"> <label for="Findabuddy'.$i.'"><strong>NOTE:</strong>Please list my details in the physio</label>
@@ -52,15 +54,14 @@ echo '</select>
 <label for="Wstate'.$i.'">State</label>
 <select class="form-control" id="Wstate'.$i.'" name="Wstate'.$i.'">
 	<option value="" selected disabled> State </option>
-	<option value="ACT"> ACT </option>
-	<option value="NSW"> NSW </option>
-	<option value="SA"> SA </option>
-	<option value="TAS"> TAS </option>
-	<option value="VIC"> VIC </option>
-	<option value="QLD"> QLD </option>
-	<option value="NT"> NT </option>
-	<option value="WA"> WA </option>
-	<option value="N/A"> I live overseas </option>
+	<option value="73"> ACT </option>
+	<option value="74"> NSW </option>
+	<option value="77"> SA </option>
+	<option value="78"> TAS </option>
+	<option value="79"> VIC </option>
+	<option value="76"> QLD </option>
+	<option value="75"> NT </option>
+	<option value="80"> WA </option>
 </select>
 </div>
 <div class="col-lg-3">
@@ -89,58 +90,57 @@ Does this workplace offer additional languages?
 <div class="col-lg-3">
 <select class="chosen-select" multiple id="Additionallanguage'.$i.'" name="Additionallanguage'.$i.'[]">
 	<option value="NONE" disabled="" >no</option>
-	<option value="AF" selected> Afrikaans </option>
-	<option value="AR"> Arabic </option>
-	<option value="BO"> Bosnian </option>
-	<option value="CA"> Cantonese </option>
-	<option value="CHZ"> Chzech </option>
-	<option value="CR"> Croation </option>
-	<option value="DA"> Danish </option>
-	<option value="DU"> Dutch </option>
-	<option value="EG"> Egyptian </option>
-	<option value="ENG"> English </option>
-	<option value="FL"> Filipino </option>
-	<option value="FR"> French </option>
-	<option value="GE"> German </option>
-	<option value="GR"> Greek </option>
-	<option value="HE"> Hebrew </option>
-	<option value="HI"> Hindi </option>
-	<option value="HO"> Hokkien </option>
-	<option value="HU"> Hungarian </option>
-	<option value="IND"> Indonesian </option>
-	<option value="IT"> Italian </option>
-	<option value="JP"> Japanese </option>
-	<option value="KO"> Korean </option>
-	<option value="LAT"> Latvian </option>
-	<option value="LE"> Lebanese </option>
-	<option value="M"> Marathi </option>
-	<option value="MA"> Macedonian </option>
-	<option value="MALT"> Maltese </option>
-	<option value="MAN"> Mandarin </option>
-	<option value="MAV"> Mavathi </option>
-	<option value="ML"> Malay </option>
-	<option value="NOR"> Norwegian </option>
-	<option value="POL"> Polish </option>
-	<option value="POR"> Portuguese </option>
-	<option value="PU"> Punjabi </option>
-	<option value="RU"> Russian </option>
-	<option value="S"> Slovak </option>
-	<option value="SERB"> Serbian </option>
-	<option value="SL"> Sign Language </option>
-	<option value="SP"> Spanish </option>
-	<option value="SW"> Swedish </option>
-	<option value="SWI"> Swiss </option>
-	<option value="TA"> Tamil </option>
-	<option value="TAW"> Taiwanese </option>
-	<option value="TE"> Teo-Chew </option>
-	<option value="TEL"> Telugu </option>
-	<option value="TH"> Thai </option>
-	<option value="TURK"> Turkish </option>
-	<option value="UK"> Ukrainian </option>
-	<option value="UR"> Urdu </option>
-	<option value="VI"> Vietnamese </option>
-	<option value="YI"> Yiddish </option>
-	<option value="YU"> Yugoslav </option>
+	<option value="1"> Afrikaans </option>
+	<option value="2"> Arabic </option>
+	<option value="3"> Bosnian </option>
+	<option value="4"> Cantonese </option>
+	<option value="5"> Chinese </option>
+	<option value="6"> Chzech </option>
+	<option value="7"> Croation </option>
+	<option value="8"> Danish </option>
+	<option value="9"> Dutch </option>
+	<option value="10"> Egyptian </option>
+	<option value="11"> English </option>
+	<option value="12"> Filipino </option>
+	<option value="13"> French </option>
+	<option value="14"> German </option>
+	<option value="15"> Greek </option>
+	<option value="16"> Hebrew </option>
+	<option value="17"> Hindi </option>
+	<option value="18"> Hokkien </option>
+	<option value="19"> Hungarian </option>
+	<option value="20"> Indonesian </option>
+	<option value="21"> Italian </option>
+	<option value="22"> Japanese </option>
+	<option value="23"> Korean </option>
+	<option value="24"> Latvian </option>
+	<option value="25"> Lebanese </option>
+	<option value="27"> Macedonian </option>
+	<option value="30"> Malay </option>
+	<option value="28"> Maltese </option>
+	<option value="29"> Mandaron </option>
+	<option value="26"> Marathi </option>
+	<option value="31"> Norwegian </option>
+	<option value="32"> Poland </option>
+	<option value="33"> Portuguese </option>
+	<option value="34"> Punjabi </option>
+	<option value="35"> Russian </option>
+	<option value="37"> Serbian </option>
+	<option value="38"> Sign Language </option>
+	<option value="36"> Slovak </option>
+	<option value="39"> Spanish </option>
+	<option value="40"> Swedish </option>
+	<option value="41"> Swiss </option>
+	<option value="43"> Taiwanese </option>
+	<option value="42"> Tamil </option>
+	<option value="44"> Teo-Chew </option>
+	<option value="45"> Thai </option>
+	<option value="46"> Turkish </option>
+	<option value="47"> Ukrainian </option>
+	<option value="48"> Urdu </option>
+	<option value="49"> Vietnamese </option>
+	<option value="50"> Yiddish </option>
+	<option value="51"> Yugoslav </option>
 </select>
 </div>
 <div class="col-lg-3">
@@ -199,16 +199,16 @@ Numbers of hours worked
 <div class="col-lg-6">
 <select class="form-control" id="Number-worked-hours'.$i.'" name="Number-worked-hours'.$i.'">
 	<option value="0" disabled="">no</option>
-	<option value="1"> 1-4 </option>
-	<option value="2"> 5-8</option>
-	<option value="3"> 9-12</option>
-	<option value="4"> 13-16</option>
-	<option value="5"> 17-20</option>
-	<option value="6"> 21-25</option>
-	<option value="7"> 26-30</option>
-	<option value="8"> 31-35</option>
-	<option value="9"> 36-40</option>
-	<option value="10"> 40+</option>
+	<option value="01-04"> 01-04 </option>
+	<option value="05-08"> 05-08 </option>
+	<option value="09-12"> 09-12 </option>
+	<option value="13-16"> 13-16 </option>
+	<option value="17-20"> 17-20 </option>
+	<option value="21-25"> 21-25 </option>
+	<option value="26-30"> 26-30 </option>
+	<option value="31-35"> 31-35 </option>
+	<option value="36-40"> 36-40 </option>
+	<option value="40+"> 40+ </option>
 </select>
 </div>
 </div>
@@ -218,9 +218,8 @@ Your special interest area:
 </div>
 <div class="col-lg-9">
 <select class="chosen-select" id="WTreatmentarea'.$i.'" name="WTreatmentarea'.$i.'[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">';
-  	$interestAreas= $sessioninterestAreas;
-	foreach($interestAreas->InterestAreas  as $key => $value){
-		echo '<option value="'.$value->ListCode.'">'.$value->ListName.'</option>';
+    foreach($interestAreas  as $key => $value){
+		echo '<option value="'.$value->Code.'">'.$value->Name.'</option>';
 	}
 echo '</select>
 </div>

@@ -460,7 +460,7 @@ jQuery(document).ready(function($) {
 		}		
     });	
 	$('#MemberType').change(function(){
-	    if($('select[name=MemberType]').val()=="AMO" || $('select[name=MemberType]').val()=="AM" || $('select[name=MemberType]').val()=="AS"|| $('select[name=MemberType]').val()=="SY"|| $('select[name=MemberType]').val()=="PA"|| $('select[name=MemberType]').val()=="Other"){
+	    if($('select[name=MemberType]').val()=="36" || $('select[name=MemberType]').val()=="35" || $('select[name=MemberType]').val()=="37"|| $('select[name=MemberType]').val()=="31"|| $('select[name=MemberType]').val()=="32"|| $('select[name=MemberType]').val()=="34"){
 			$( "#ahpblock" ).addClass('display-none');
 			$( "input[name=Ahpranumber]" ).val('');
 			
