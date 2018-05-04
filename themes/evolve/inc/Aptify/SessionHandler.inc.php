@@ -31,6 +31,7 @@ function deleteSession() {
 	unset($_SESSION['Database']);
 	unset($_SESSION['AptifyUserID']);
 	// user details' data
+	/*
 	unset($_SESSION['Logfgh']);
 	unset($_SESSION['Logfgh']);
 	unset($_SESSION['Logfgh']);
@@ -55,5 +56,6 @@ function deleteSession() {
 	unset($_SESSION['Logfgh']);
 	unset($_SESSION['Logfgh']);
 	unset($_SESSION['Logfgh']);
+	*/
 }
 ?>

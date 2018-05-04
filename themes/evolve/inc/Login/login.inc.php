@@ -1,4 +1,5 @@
 <?php
+//include('sites/all/themes/evolve/inc/Aptify/AptifyAPI.inc.php');
 	/*
 	 * Log-in and Log-out manager
 	 * Manage the entire log in and out here 
@@ -24,8 +25,14 @@
 		logoutManager();
 	}
 	
+	// test get data
+	if(isset($_POST["Getdata"])) {
+		$data = "UserID=".$_SESSION["UserId"];
+		$output = GetAptifyData("1", $data,"");
+		print_r($output);
+	}	
+	
 	function loginManager($id, $pass) {
-		$arr = Array();
 		// 2.2.7 - log-in
 		// Send - 
 		// UserID, User password
@@ -33,13 +40,28 @@
 		// log-in
 		$arrIn["ID"] = $id;
 		$arrIn["Password"] = $pass;
-		array_push($arr, $arrIn);
 		$result = GetAptifyData("7", $arrIn);
 		if(isset($result["ErrorInfo"])) {
 			echo $result["ErrorInfo"]["ErrorMessage"];
 			echo "log-in fail";
 		} else {
 			// logged in
+			print_r($result);
+			
+			$id= $result["UserId"];
+			$UserName= $result["UserName"];
+			$Email= $result["Email"];
+			$FirstName= $result["FirstName"];
+			$LastName= $result["LastName"];
+			$Title= $result["Title"];
+			$LinkId= $result["LinkId"];
+			$CompanyId= $result["CompanyId"];
+			$TokenId= $result["TokenId"];
+			$Server= $result["Server"];
+			$Database= $result["Database"];
+			$AptifyUserID= $result["AptifyUserID"];
+			newSessionLogIn($id, $UserName, $Email, $FirstName, $LastName, $Title, $LinkId, $CompanyId, $TokenId, $Server, $Database, $AptifyUserID);
+			
 			$_SESSION["Log-in"] = "in";
 			echo "<br>logged in!!";
 		}
@@ -53,7 +75,7 @@
 		// 
 		$result = GetAptifyData("8", "logout");
 		print_r($result);
-		unset($_SESSION['Log-in']);
+		deleteSession();
 		echo "logged out";
 	}
 ?>
@@ -64,6 +86,10 @@
 		<input type="submit" value="log-oout" />
 	</form>
 </div>
+<form method="POST" action="<?php echo $url; ?>" name="getData">
+	<input type="hidden" name="Getdata" value="out" style="display: none;" />
+	<input type="submit" value="Get Data" />
+</form>
 <?php else: ?>
 <div style="float: right;">
 	<button class="info" data-target="#loginAT" data-toggle="modal" type="button">Log-in</button>

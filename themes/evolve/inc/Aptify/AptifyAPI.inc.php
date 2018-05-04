@@ -11,27 +11,12 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			break;
 		case "1":
 			// For the actual API use
-			// $API = "";
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/DataObjects/spGetDashboardMainDetailsForUserID__c?";
 			echo "Data Sent: <br />";
-			print_r($variables);
+			print($variables);
 			echo "<br />1. Dashboard Main: <br />";
 			// Add JSON sample here
-			$JSONreturn = '{
-				"Preferred-name":"Mel",
-				"Firstname":"Melanie",
-				"Lastname":"Tannin",
-				"Memberid":"Melanie.tannin@physiotherapy.asn.au",
-				"MemberType":"student",
-				"Status":"Current",
-				"Ahpranumber":"6934395685-1",
-				"Specialty":"FACP",
-				"Officebearer":"NAC Chair",
-				"Yearmembership":"10",
-				"CPD":"15",
-				"PHN":"VIC",
-				"HomeBranch":"home branch",
-				"PreferBranch":"preferred branch"
-			}';
+			$JSONreturn = curlRequest($API, "Get", $variables);
 			return $JSONreturn;
 			break;
 		case "2":
@@ -58,7 +43,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			return $JSONreturn;
 		case "4":
 			// For the actual API use
-			// $API = "";
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/GetDBMemberDetails?";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />4. Dashboard - Get member detail: <br />";
@@ -441,7 +426,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			echo "<br />7. Dashboard - log-in: <br />";
 			*/
 			$variable = "UserName=".$variables['ID']."&Password=".$variables['Password'];
-			$JSONreturn = curlRequest($API, null, "Get", $variable);
+			$JSONreturn = curlRequest($API, "Get", $variable);
 			return $JSONreturn;
 		case "8":
 			// For the actual API use
@@ -450,7 +435,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			print_r($variables);
 			echo "<br />8. Dashboard - Log-out: <br />";
 			// Add JSON sample here
-			$JSONreturn = curlRequest($API, null, "", "");
+			$JSONreturn = curlRequest($API, "", "");
 			return $JSONreturn;
 		case "9":
 			// For the actual API use
@@ -3344,7 +3329,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 	}
 }
 
-function curlRequest($API, $header, $type, $variables) {
+function curlRequest($API, $type, $variables) {
 	// create curl resource 
 	$ch = curl_init(); 
 	// set url 
@@ -3360,16 +3345,20 @@ function curlRequest($API, $header, $type, $variables) {
 	} else {
 		curl_setopt($ch, CURLOPT_URL, $API); 
 	}
-	if (!empty($header) || $header != null) {
-		curl_setopt($ch, CURLOPT_HEADER, $header);
+	if (isset($_SESSION["TokenId"])) {
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			"AptifyAuthorization: Web ".$_SESSION["TokenId"]
+		));
     }
 	//return the transfer as a string 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1); 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_ENCODING, "");
+	curl_setopt($ch, CURLOPT_maxredirs, 10);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+	curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	//curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
-	//curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);
-   // curl_setopt($ch, CURLOPT_CAINFO,getcwd() ."\CA.crt");
-	//$output contains the output string 
+	
 	$JSONreturn = curl_exec($ch);
 	if(curl_error($ch))
 	{
