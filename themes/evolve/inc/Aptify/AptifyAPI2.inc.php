@@ -2,7 +2,7 @@
 
 /*Dashboard page render national icons fuction*/
 /*Dashboard page*/
-function AptifyAPI($APItype, $variables, $jsonVersion){
+function AptifyAPI2($APItype, $variables, $jsonVersion){
 	switch($APItype){
 		case "0":
 			// JSON persar
@@ -2062,47 +2062,5 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			$JSONreturn = curlRequest($API, null, "Get", null);
 			return $JSONreturn;
 	}
-}
-
-function curlRequest($API, $type, $variables) {
-	// create curl resource 
-	$ch = curl_init(); 
-	// set url 
-	if($type == "Get") {
-		$urlcurl = $API.$variables;
-		curl_setopt($ch, CURLOPT_URL, $urlcurl); 
-	} elseif($type == "JSON") {
-		curl_setopt($ch, CURLOPT_URL, $API); 
-		if(!empty($variables) || $variables != null) {
-			curl_setopt($ch, CURLOPT_POST, 1);
-			curl_setopt($ch, CURLOPT_POSTFIELDS,$variables);
-		}
-	} else {
-		curl_setopt($ch, CURLOPT_URL, $API); 
-	}
-	if (isset($_SESSION["TokenId"])) {
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-			"AptifyAuthorization: Web ".$_SESSION["TokenId"]
-		));
-    }
-	//return the transfer as a string 
-	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-	curl_setopt($ch, CURLOPT_ENCODING, "");
-	curl_setopt($ch, CURLOPT_maxredirs, 10);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-	curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	
-	$JSONreturn = curl_exec($ch);
-	if(curl_error($ch))
-	{
-		echo 'error:' . curl_error($ch);
-		return curl_error($ch);
-	}
-	//echo $JSONreturn.'this is call from Aptify';
-	// close curl resource to free up system resources 
-	curl_close($ch);
-	return $JSONreturn;
 }
 ?>
