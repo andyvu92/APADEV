@@ -646,7 +646,7 @@ jQuery(document).ready(function($) {
 				$('#question65').show();
 				$('#question65').removeClass("function");
 			}
-		}
+		} 
 	});
 	 var widthCalVideo169 = $(".video169").width();
 	$(".video169").attr('style','height: '+((parseInt(widthCalVideo169) * 9)/16)+"px; width: 100%;");
