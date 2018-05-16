@@ -9,7 +9,18 @@
 	
 	// log-in
 	if(isset($_POST["id"])) {
-		//echo $_POST["id"] . " / " . $_POST["password"];
+		//echo $_POST["id"] . " / " . $_POST["password"];4
+		if(!empty($_POST["remember"])) {
+			setcookie ("member_login",$_POST["id"],time()+ (10 * 365 * 24 * 60 * 60));
+			setcookie ("member_password",$_POST["password"],time()+ (10 * 365 * 24 * 60 * 60));
+		} else {
+			if(isset($_COOKIE["member_login"])) {
+				setcookie ("member_login","");
+			}
+			if(isset($_COOKIE["member_password"])) {
+				setcookie ("member_password","");
+			}
+		}
 		loginManager($_POST["id"], $_POST["password"]);
 	} else {
 		// no id has been entered
@@ -28,9 +39,16 @@
 	// test get data
 	if(isset($_POST["Getdata"])) {
 		$data = "UserID=".$_SESSION["UserId"];
-		$output = GetAptifyData("1", $data,"");
+		$output = GetAptifyData("1", $data);
 		print_r($output);
-	}	
+	}
+	
+	// forgot password
+	if(isset($_POST["Fid"])) {
+		$input["email"] = $_POST["Fid"];
+		$output = GetAptifyData("6", $input);
+		print_r($output);
+	}
 	
 	function loginManager($id, $pass) {
 		// 2.2.7 - log-in
@@ -95,22 +113,43 @@
 	<button class="info" data-target="#loginAT" data-toggle="modal" type="button">Log-in</button>
 </div>
 <?php endif; ?>
-<!-- Modal -->
 
+<!-- Modal log-in -->
 <div class="modal fade" id="loginAT" role="dialog">
+<div class="modal-dialog"><!-- Modal content-->
+	<div class="modal-content">
+
+	<div class="modal-body">
+		<button class="close" data-dismiss="modal" type="button">×</button>
+		<div class="form-container">
+			<h4 class="modal-title">Sign in to your account</h4>
+			<form method="POST" action="<?php echo $url; ?>" name="forLogin">
+				<input id="id" name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" />
+				<input id="password" placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" />
+				<input type="submit" value="Login" />
+				<p><input type="checkbox" name="remember" id="remember" <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> /><label for="remember">Remember me</label><a class="forgotPS" data-dismiss="modal" data-toggle="modal" data-target="#passwordReset" >Forgot password?</a></p>
+			</form>
+			<p>Not a member? <a href="">Join us today</a>.</p>
+			<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+		</div>
+	</div>
+	</div>
+</div>
+</div>
+
+<!-- Modal forgot password -->
+<div class="modal fade" id="passwordReset" role="dialog">
 <div class="modal-dialog"><!-- Modal content-->
 	<div class="modal-content">
 	<div class="modal-header">
 		<button class="close" data-dismiss="modal" type="button">×</button>
-		<h4 class="modal-title">Log-in</h4>
+		<h4 class="modal-title">Reset password</h4>
 	</div>
 
 	<div class="modal-body">
-		<form method="POST" action="<?php echo $url; ?>" name="forLogin">
+		<form method="POST" action="<?php echo $url; ?>" name="resetPass">
 			<label for="id">ID</label>
-			<input id="id" name="id" placeholder="ID" type="text" />
-			<label for="password">Password:</label>
-			<input id="password" name="password" type="password" />
+			<input id="Fid" name="Fid" placeholder="ID" type="text" />
 			<input type="submit" value="submit" />
 		</form>
 	</div>

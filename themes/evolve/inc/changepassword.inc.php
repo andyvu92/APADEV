@@ -1,6 +1,25 @@
 <?php
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
   ?>
+<?php
+// 2.2.9 - Change password
+// Send - 
+// UserID, old password, new password
+// Response -
+// 
+if(isset($_SESSION["Log-in"])) : ?>
+<?php	// when logged in;
+	if(isset($_POST["Password"])): ?>
+<?php
+	echo "password is there: ";
+	$data["userID"] = $_SESSION["UserName"];
+	$data["Password"] = $_POST["Password"];
+	$data["New_password"] = $_POST["New_password"];
+	print_r($data);
+	$product = GetAptifyData("9", $data); 
+	echo $product["Update"]."!!";
+?>	
+<?php	else: ?> 
 <div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
 <div style="display:table;">
 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 dashboard-left-nav">
@@ -109,7 +128,7 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
         <h4 class="modal-title">Please select background image</h4>
       </div>
       <div class="modal-body">
-       <form name="formradio" action="changepassword" method="POST"">
+       <form name="formradio" action="changepassword" method="POST">
       <input type="hidden" name="userID" value="<?php echo $userID; ?>"> 
       <input type="hidden" name="update">  
  <label> <input type="radio" name="background" value="1" id="background1"><img src="../sites/default/files/PARALLAX_TRADIES.jpg"></label>
@@ -129,30 +148,28 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 
   </div>
 </div>
-          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
-            
-              
-            <form id="changePasswordForm">
-               <div class="changePassword">
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <input type="password" class="form-control" placeholder="Current password" value="" name="Password">
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <input type="password" class="form-control" placeholder="New password" id="New_password" name="New_password">
-                     </div>
-                  </div>
-                  <div class="row">
-                     <div class="col-lg-6">
-                        <input type="password" class="form-control" placeholder="Confirm password" id="Confirm_password" name="Confirm_password">
-                     </div>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0;">   <button  class="dashboard-button dashboard-bottom-button change-password-button"><span class="dashboard-button-name">Save</span></button></div>
-               </div>
-            </form>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+		<form id="changePasswordForm" action="changepassword" method="POST">
+		   <div class="changePassword">
+			  <div class="row">
+				 <div class="col-lg-6">
+					<input type="password" class="form-control" placeholder="Current password" value="" name="Password">
+				 </div>
+			  </div>
+			  <div class="row">
+				 <div class="col-lg-6">
+					<input type="password" class="form-control" placeholder="New password" id="New_password" name="New_password">
+				 </div>
+			  </div>
+			  <div class="row">
+				 <div class="col-lg-6">
+					<input type="password" class="form-control" placeholder="Confirm password" id="Confirm_password" name="Confirm_password">
+				 </div>
+			  </div>
+			  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0;">   <button  class="dashboard-button dashboard-bottom-button change-password-button"><span class="dashboard-button-name">Save</span></button></div>
+		   </div>
+		</form>
                                             
                         
                
@@ -206,3 +223,7 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
     }); 
    });
 </script>
+<?php endif; ?>
+<?php 	else: ?>
+	<p>not logged in</p>
+<?php endif; ?>
