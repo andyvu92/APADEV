@@ -749,7 +749,7 @@ function curlRequest($API, $type, $variables) {
 		curl_setopt($ch, CURLOPT_URL, $urlcurl); 
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Length: 0'));
-	} elseif($type == "JSON"||$type == "Image") {
+	} elseif($type == "JSON"||$type == "Image"|| $type == "Order") {
 		curl_setopt($ch, CURLOPT_URL, $API); 
 		if(!empty($variables) || $variables != null) {
 			curl_setopt($ch, CURLOPT_POST, 1);
