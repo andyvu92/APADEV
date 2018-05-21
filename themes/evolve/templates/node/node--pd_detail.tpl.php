@@ -180,7 +180,8 @@
 	   if(isset($_POST["Couponcode"])){ $Couponcode = $_POST["Couponcode"]; } else { $Couponcode = "";}
 	  /* CURL GET to query data from Aptify using $_GET["ID"] & couponcode, and then return Json data as below example*/
        
-	$pdArr = Array();
+	$pdArr["PDIDs"] = $_GET["id"];
+	/*
 	array_push($pdArr, (intval($_GET["id"]) - 1));
 	if(isset($_SESSION["userID"])) {
 	   array_push($pdArr, $_SESSION["userID"]);
@@ -188,6 +189,7 @@
 	   array_push($pdArr, "");
 	}
 	array_push($pdArr, $Couponcode);
+	*/
 	
 	// 2.2.29 - GET event detail
 	// Send - 
@@ -199,8 +201,14 @@
 	// Where:{Address1, Address2, Address3(if exist), Address4(if exist), City,
 	//	state, Postcode}, CPD hours, Cost, Your registration stats
 	$pd_detail = GetAptifyData("29", $pdArr);
-	//print_r($pd_detail);
-   
+	print_r($pd_detail);
+    $pd_detail = $pd_detail['MeetingDetails'][0];
+	$prices = $pd_detail['Pricelist'];
+	$pricelistGet = Array();
+	foreach($prices as $t) {
+		$type = $t['MemberType'];
+		$pricelistGet[$type] = $t['Price'];
+	}
       /*Save data to local shopping cart database response here*/
     	 $saveShoppingCart = "0";
 	   if(isset($_GET['saveShoppingCart'])){ 
@@ -241,7 +249,7 @@
 		<h1 class="SectionHeader"><?php echo $pd_detail['Title'];?></h1>
 		<div class="brd-headling">&nbsp;</div>
 		<h3><?php echo $pd_detail['Typeofpd'];?></h3>
-		<p><?php echo $pd_detail['Summary']; ?></p>
+		<p><?php echo $pd_detail['Description']; ?></p>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		 <ul class="nav nav-tabs" id="tabpd">
            <li class="active"><a data-toggle="tab" href="#presenter">PRESENTER BIO</a></li>
@@ -277,11 +285,10 @@
 		 
 		 ?></p></div>
 		<?php 
-			$bdata = explode(" ",$pd_detail['StartDate']);
-			$edata = explode(" ",$pd_detail['EndDate']);
+			$bdata = explode(" ",$pd_detail['Sdate']);
+			$edata = explode(" ",$pd_detail['Edate']);
 			//if Aptify give the StartDate&EndDate as timestamp, use below code to get the time and start date and end date;
-			//echo date('d-m-Y h:i:s',$pd_detail['StartDate']);
-			
+			//echo date('d-m-Y h:i:s',$bdata);
 			
 			
 		?>
@@ -297,17 +304,21 @@
 		 <?php 
 		  $priceList = array();
 		  $cost = 0;
-		 
-		 if($pd_detail['Cost']!="NULL"&& isset($_SESSION["userID"])){
-			    if(in_array($pd_detail['Cost'],$pd_detail['Pricelist'])) {
-					comparePrice($pd_detail['Pricelist'], $pd_detail['Cost']);
-				}
-				else {
-					comparePrice($pd_detail['Pricelist'], $pd_detail['Cost']);
-					echo "$".$pd_detail['Cost'];
-				}
+		 // todo
+		 // apply coupon one
+		 // ["Product Cost With Coupon"]
+		 if($prices!="NULL"&& isset($_SESSION["UserId"])){
+			if(in_array($pd_detail['Product Cost Without Coupon'],$pricelistGet)) {
+				comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
+			}
+			else {
+				comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
+				echo "$".$pd_detail['Cost'];
+			}
 		 }
-		  else{ foreach($pd_detail['Pricelist'] as $key=>$value){echo $key.":&nbsp;$".$value."<br>";}} 
+		else{
+			foreach($pricelistGet as $key=>$value){echo $key.":&nbsp;$".$value."<br>";}
+		}			
 		 
 		 
 		 
@@ -319,7 +330,7 @@
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Your registration status:</h3><p>
 		 <?php 
 		    if(isset($userId)&& ($userId!=0)){
-				if($pd_detail['UserStatus'] > 0) {
+				if($pd_detail['AttendeeStatus'] > 0) {
 					echo "Registered";
 				} else {
 					echo "Not registered";

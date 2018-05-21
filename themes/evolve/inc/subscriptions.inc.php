@@ -8,28 +8,47 @@ I'm doing it now :)
 /* We may use this as "Session" data and won't need to load. */
 // 2.2.20 - GET list of subscribed National Group
 // Send - 
-// Request, User ID
+// User ID
 // Response -
 // National Group ID, National Group title
-$sendData["RequestNG"] = "RequestNG";
-$sendData["UserID"] = "UserID";
+$sendData["UserID"] = $_SESSION['UserId'];
 $nationalGroups = GetAptifyData("20", $sendData);
+echo "national Groups:<br>";
+print_r($nationalGroups);
+
+///
+$ttt = GetAptifyData("19", $sendData);
+echo "ttt:<br>";
+print_r($ttt);
+///
+
+///
+$tt["ProductID"] = "";
+$ttt = GetAptifyData("21", $tt);
+echo ">21:<br>";
+print_r($ttt);
+///
+
+
 /* We may use this as "Session" data and won't need to load. */
 // 2.2.22 - Get list of subscribed Fellowship Products
 // Send - 
 // UserID
 // Response -
 // List of Fellowship ID and its titles.
-$Fellows = GetAptifyData("22", "UserID");
-
+$Fellows = GetAptifyData("22", $sendData);
+echo "Fellow ships:<br>";
+print_r($Fellows);
 /* We may use this as "Session" data and won't need to load. */
 // 2.2.23 - GET list of subscription preferences
 // Send - 
 // UserID
 // Response -
 // List of subscriptions and its T/F values.
-$subscriptions = GetAptifyData("23", "UserID");
-$Subscription = $subscriptions["Subscription"];
+$subscriptions = GetAptifyData("23", $sendData);
+echo "Subs:<br>";
+print_r($subscriptions);
+$Subscription = $subscriptions["results"];
 // use one of above to get "current" data
 // and combine with existing data ("$Subsctiption")
 // Then send it to Aptify.

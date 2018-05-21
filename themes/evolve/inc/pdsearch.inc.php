@@ -7,7 +7,8 @@
 	// Request, NGID(optional)
 	// Response -
 	// National Group ID, National Group title and National Group Price
-	$details = GetAptifyData("19", "request");
+	$sendData["UserID"] = $_SESSION['UserId'];
+	$details = GetAptifyData("19", $sendData);
 ?>
 <form action="pd-search?search-result" method="POST">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -29,7 +30,7 @@
 		<select  class="chosen-select" name="Nationalgp" id="Nationalgp" multiple data-placeholder="National group">
 		<?php
 		//$_SESSION["testTTdad"]["NationalGroup"]
-		foreach($details["NationalGroup"] as $lines) {
+		foreach($details as $lines) {
 			echo '<option value="'.$lines["NGid"].'"> '.$lines["NGtitle"].' </option>';
 		}
 		?>

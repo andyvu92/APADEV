@@ -7,10 +7,17 @@ global $base_url;
 // Preferred name, First name, Last name, Member ID, Member type,
 // Status, AHPRA number, Specialty, Office bearer, Year membership,
 // CPD hours, Private health care Network, Home branch, Preferred branch
-$user = GetAptifyData("1", "UserID");
-$cpd = $user["CPD"];
-include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
-?> 
+$user = Array();
+if(isset($_SESSION["UserId"])) {
+	$users = GetAptifyData("1", $_SESSION["UserId"]);
+	print_r($users);
+	$cpd = $users["results"][0]["CPD"];
+	//echo "CPD: ".$cpd;
+	$user = $users["results"][0];
+}
+include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php'); 
+?>
+<?php if(isset($_SESSION["UserId"])) : ?>
 <div id="cpd" style="display:none"><?php echo $cpd; ?></div>
 <div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -71,7 +78,7 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $user['background']; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Hello <?php echo $user["Preferred-name"]; ?></strong></span></div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Hello <?php echo $user["Preferredname"]; ?></strong></span></div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-toggle="modal" data-target="#myModal"><span class="customise_background" >Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
 	<?php
@@ -86,11 +93,11 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 						</tr>
 						<tr>
 							<td><strong>Name:</strong></td>
-							<td><?php echo $user['Firstname']." ".$user['Lastname']; ?></td>
+							<td><?php echo $user['FirstName']." ".$user['LastName']; ?></td>
 						</tr>
 						<tr>
 							<td><strong>Member ID:</strong></td>
-							<td><?php echo $user['Memberid']; ?></td>
+							<td><?php echo $user['MemberID']; ?></td>
 						</tr>
 						<tr>
 							<td><strong>Member type:</strong></td>
@@ -211,4 +218,9 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 		</div>
 	</div>
 </div>
-
+<?php else : 
+	// todo
+	// add log-in button with message - you must be logged in
+	?>
+<p>please log-in to use this page</p>
+<?php endif; ?>

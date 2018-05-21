@@ -6,8 +6,14 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 // UserID
 // Response -
 // Invoice ID, product name, Invoice, Price, date
-$product = GetAptifyData("17", "UserID"); // #_SESSION["UserID"];
-$products = $product["Product"]
+if(isset($_SESSION["Log-in"])) {
+	$data["ID"] = $_SESSION["UserId"];
+	$product = GetAptifyData("17", $data);
+	print_r($product);
+} else {
+	echo "not logged in";
+}
+$products = $product["Orders"]
 //rsort($products);
 ?>
 <div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
@@ -35,7 +41,7 @@ $products = $product["Product"]
 							</tr>
 							<?php foreach($products as $product){
 								$now = date('d-m-Y');
-								if(strtotime($now)<strtotime('+2 years',strtotime($product['Date']))){
+								if(strtotime($now)<strtotime('+1 years',strtotime($product['Orderdate']))){
 									echo "<tr>";
 									// 2.2.18 - GET payment history list
 									// Send - 
@@ -43,12 +49,12 @@ $products = $product["Product"]
 									// Response -
 									// Invoice PDF
 									$send["UserID"] = "UserID";
-									$send["Invoice_ID"] = $product['Invoice_ID'];
+									$send["Invoice_ID"] = $product['ID'];
 									$invoiceAPI = GetAptifyData("18", $send); // #_SESSION["UserID"];
-									echo "<td>".$product['Name']."</td>";
-									echo '<td><a style="color:white;" href="' .$product['Invoice'].'">'.$invoiceAPI["Invoice"].'</a></td>';
-									echo "<td>".$product['Price']."</td>";
-									echo "<td>".$product['Date']."</td>";
+									echo "<td>".$product['OrderLines'][0]['ProductName']."</td>";
+									echo '<td><a style="color:white;" href="' .$product['ID'].'">'.$invoiceAPI["Invoice"].'</a></td>';
+									echo "<td>".$product['Initialpaymentamount']."</td>";
+									echo "<td>".$product['Orderdate']."</td>";
 									echo "</tr>";
 								}
 							} ?>	
@@ -72,12 +78,12 @@ $products = $product["Product"]
 								// Response -
 								// Invoice PDF
 								$send["UserID"] = "UserID";
-								$send["Invoice_ID"] = $product['Invoice_ID'];
+								$send["Invoice_ID"] = $product['ID'];
 								$invoiceAPI = GetAptifyData("18", $send); // #_SESSION["UserID"];
-								echo "<td>".$product['Name']."</td>";
-								echo '<td><a style="color:white;" href="' .$product['Invoice'].'">'.$invoiceAPI["Invoice"].'</a></td>';
-								echo "<td>".$product['Price']."</td>";
-								echo "<td>".$product['Date']."</td>";
+								echo "<td>".$product['OrderLines'][0]['ProductName']."</td>";
+								echo '<td><a style="color:white;" href="' .$product['ID'].'">'.$invoiceAPI["Invoice"].'</a></td>';
+								echo "<td>".$product['Initialpaymentamount']."</td>";
+								echo "<td>".$product['Orderdate']."</td>";
 								echo "</tr>";
 								   
 							} ?>	

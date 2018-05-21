@@ -1,7 +1,7 @@
 <?php 
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 
-if(!isset($_SESSON["UserID"])) {
+if(!isset($_SESSION["UserId"])) {
 	// No information to be displayed!
 	// redirect users to log-in or do something.
 }
@@ -14,14 +14,15 @@ if(isset($_POST["nonAPA"])) {
 	// response
 	$CPDsend = Array();
 	// Values need keys associated
-	$CPDsend["UserID"] = $_SESSON["UserID"];
+	$CPDsend["userID"] = $_SESSION["UserId"];
 	$CPDsend["Date"] = $_POST["Date"];
-	$CPDsend["Descripotion"] = $_POST["Descripotion"];
+	$CPDsend["Description"] = $_POST["Description"];
 	$CPDsend["Time"] = $_POST["Time"];
 	$CPDsend["Provider"] = $_POST["Provider"];
 	$CPDsend["Reflection"] = $_POST["Reflection"];
 	// send and get response
 	$resultst = GetAptifyData("34", $CPDsend);
+	print_r($resultst);
 	if($resultst == "type of value") {// to be used later
 		// to do
 	} else {
@@ -36,20 +37,19 @@ if(isset($_POST["nonAPA"])) {
 // Response -
 // PD_id, NPD_id, CPD hours, PD title, PD date, CPD points
 // Description, Date, Time, Provider, Reflection
-$results = GetAptifyData("33", "UserID"); //$_SESSON["UserID"]
-
+$results = GetAptifyData("33", $_SESSION["UserId"]);
+print_r($results);
 $totalNum = sizeof($results);
 $CPDHousrs = $results["CurrentCPDHour"];
 $APA = array();
 $NAPA = array();
-foreach($results["Diary"] as $t) {
-	if($t["CPD"] == "APA") {
-		array_push($APA, $t);
-	} else {
-		array_push($NAPA, $t);
-	}
-}
 
+foreach($results["NONAPA"] as $t) {
+	array_push($NAPA, $t);
+}
+foreach($results["APA"] as $t) {
+	array_push($APA, $t);
+}
 if(isset($_POST["NONAPA"])) {
 	// 2.2.38 - GET NON-APA CPD point's PDF
 	// Send - 
@@ -209,10 +209,12 @@ function move(input) {
   </div>
   <div class="APAhoursContent">
     <?php
-       foreach($APA as $rowData) {
-          echo "<div style='display: none;'>".$rowData["PD_id"]."</div><div>".$rowData["PD_title"]."</div><div>".$rowData["PD_date"]."</div><div>".$rowData["PD_hours"]."</div>";
-          echo "<div class='lineBreak'>&nbsp;</div>";
-       }
+		if(sizeof($APA) > 0) {
+			foreach($APA as $rowData) {
+				echo "<div style='display: none;'>".$rowData["PD_id"]."</div><div>".$rowData["PD_title"]."</div><div>".$rowData["PD_date"]."</div><div>".$rowData["PD_hours"]."</div>";
+				echo "<div class='lineBreak'>&nbsp;</div>";
+			}
+		}
     ?> 
   </div>
 </div>
@@ -233,10 +235,13 @@ function move(input) {
   </div>
   <div class="NAPAhoursContent">
     <?php
-       foreach($NAPA as $rowData) {
-          echo "<div style='display: none;'>".$rowData["PD_id"]."</div><div>".$rowData["PD_date"]."</div><div>".$rowData["PD_title"]."</div><div>".$rowData["PD_hours"]."</div><div>".$rowData["PD_Provider"]."</div><div>".$rowData["PD_Reflection"]."</div>";
-          echo "<div class='lineBreak'>&nbsp;</div>";
-       }
+	if(sizeof($NAPA) > 0) {
+		foreach($NAPA as $rowData) {
+			$date = date("d-m-Y", strtotime($rowData["Date"]));
+			echo "<div style='display: none;'>".$rowData["NPDid"]."</div><div>".$date."</div><div>".$rowData["Description"]."</div><div>".$rowData["Time"]."</div><div>".$rowData["Provider"]."</div><div>".$rowData["Reflection"]."</div>";
+			echo "<div class='lineBreak'>&nbsp;</div>";
+		}
+	}
     ?> 
   </div>
 </div>
@@ -262,8 +267,8 @@ function move(input) {
 			<input type="hidden" name="nonAPA" value="1" placeholder="" id="hidden">
 			<label for="DateNA">Date</label>
 			<input type="text" required="true" name="Date" placeholder="" id="DateNA">
-			<label for="DescripotionNA">Descripotion</label>
-			<input type="text" required="true" name="Descripotion" placeholder="" id="DescripotionNA">
+			<label for="DescripotionNA">Description</label>
+			<input type="text" required="true" name="Description" placeholder="" id="Description">
 			<label for="TimeNA">Time</label>
 			<input type="text" required="true" name="Time" placeholder="" id="TimeNA">
 			<label for="ProviderNA">Provider</label>

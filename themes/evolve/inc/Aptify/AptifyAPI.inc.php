@@ -10,17 +10,16 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			return "Test! 0 in";
 			break;
 		case "1":
-			// For the actual API use
+			// Eddy - done check;
 			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/DataObjects/spGetDashboardMainDetailsForUserID__c?";
-			echo "Data Sent: <br />";
-			print($variables);
+			$passInput = "Userid=".$variables;
 			echo "<br />1. Dashboard Main: <br />";
 			// Add JSON sample here
-			$JSONreturn = curlRequest($API, "Get", $variables);
+			$JSONreturn = curlRequest($API, "Get", $passInput);
 			return $JSONreturn;
 			break;
 		case "2":
-			// For the actual API use
+			// Eddy
 			// $API = "";
 			echo "Data Sent: <br />";
 			print_r($variables);
@@ -31,7 +30,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			}';
 			return $JSONreturn;
 		case "3":
-			// For the actual API use
+			// Eddy
 			// $API = "";
 			echo "Data Sent: <br />";
 			print_r($variables);
@@ -410,41 +409,39 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 				}';
 			return $JSONreturn;
 		case "6":
-			// For the actual API use
-			// $API = "";
-			echo "Data Sent: <br />";
-			print_r($variables);
-			echo "<br />6. Dashboard - Gorgot password: <br />";
+			// Eddy;
+			/* if(isset($_SESSION["TokenId"])) {
+				$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/PasswordReset/Web";
+				$JSONreturn = curlRequest($API, "Secure", $variable);
+			} else { */
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/PasswordResetRequest/Web?";
+			$variable = "UserName=".$variables["email"]."&email=".$variables["email"];
+			$JSONreturn = curlRequest($API, "GetPost", $variable);
+			echo "<br />6. Dashboard - Forgot password: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
 			return $JSONreturn;
 		case "7":
+			// Eddy - done check;
 			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/Web?";
-			/*
-			echo "Data Sent: <br />";
-			print_r($variables);
 			echo "<br />7. Dashboard - log-in: <br />";
-			*/
+			// Add JSON sample here
 			$variable = "UserName=".$variables['ID']."&Password=".$variables['Password'];
 			$JSONreturn = curlRequest($API, "Get", $variable);
 			return $JSONreturn;
 		case "8":
+			// Eddy - done check;
 			// For the actual API use
 			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Logout";
-			echo "Data Sent: <br />";
-			print_r($variables);
 			echo "<br />8. Dashboard - Log-out: <br />";
 			// Add JSON sample here
 			$JSONreturn = curlRequest($API, "", "");
 			return $JSONreturn;
 		case "9":
-			// For the actual API use
-			// $API = "";
-			echo "Data Sent: <br />";
-			print_r($variables);
+			// Eddy - done check;
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/UpdatePassword";
 			echo "<br />9. Dashboard - change password: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion);
 			return $JSONreturn;
 		case "10":
 			// For the actual API use
@@ -566,55 +563,12 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			
 			
 		case "17":
-			// For the actual API use
-			// $API = "";
-			echo "Data Sent: <br />";
-			print_r($variables);
+			// Eddy - done check;
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/GetOrderDetails?";
 			echo "<br />17. Dashboard - Get payment history list: <br />";
 			// Add JSON sample here
-			$JSONreturn = '{ 
-				"Product": [
-					{ "Invoice_ID":"7",
-					"Name":"ProductA",
-					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
-					"Price":"8.88",
-					"Date":"12/12/2014"},
-					{ "Invoice_ID":"9",
-					"Name":"ProductB",
-					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
-					"Price":"9.99",
-					"Date":"12/05/2017"},
-					{ "Invoice_ID":"11",
-					"Name":"ProductC",
-					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
-					"Price":"7.77",
-					"Date":"12/12/2016"},
-					{ "Invoice_ID":"15",
-					"Name":"ProductD",
-					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
-					"Price":"7.77",
-					"Date":"12/12/2016"},
-					{ "Invoice_ID":"19",
-					"Name":"ProductE",
-					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
-					"Price":"7.77",
-					"Date":"12/12/2016"},
-					{ "Invoice_ID":"22",
-					"Name":"ProductF",
-					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
-					"Price":"7.77",
-					"Date":"12/12/2016"},
-					{ "Invoice_ID":"27",
-					"Name":"ProductG",
-					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
-					"Price":"7.77",
-					"Date":"12/12/2016"},
-					{ "Invoice_ID":"29",
-					"Name":"ProductH",
-					"Invoice":"http://10.2.1.190/apanew/sites/default/files/ABOUT%20US/Awards%20%26%20recognition/Felice%20Rosemary%20Lloyd%20Trust/Report_Culvenor_2012_recipient.pdf",
-					"Price":"7.77",
-					"Date":"12/12/2016"}
-				] }';
+			$sent = "UserID=".$variables["ID"];
+			$JSONreturn = curlRequest($API, "Get", $sent);
 			return $JSONreturn;
 		case "18":
 			// For the actual API use
@@ -628,131 +582,28 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			}';
 			return $JSONreturn;
 		case "19":
-			// For the actual API use
-			// $API = "";
-			echo "Data Sent: <br />";
-			print_r($variables);
+			// Eddy - done check;
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/NationalGroupProducts/";
 			echo "<br />19. Dashbaord - Get list of National Group: <br />";
+			$API = $API.$variables["UserID"];
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion);
 			// Add JSON sample here
-			if(count($variables) == 1) {
-				// When this web service is triggered to get
-				// National Group list only
-				$JSONreturn = '{ 
-					"NationalGroup": [
-						{ "NGid": "ACU",
-						"NGtitle": "Acupuncture and dry needling",
-						"NGprice": "50" },
-						{ "NGid": "ANI",
-						"NGtitle": "Animal",
-						"NGprice": "49" },
-						{ "NGid": "AQU",
-						"NGtitle": "Aquatic",
-						"NGprice": "48" },
-						{ "NGid": "BUS",
-						"NGtitle": "Business",
-						"NGprice": "47" },
-						{ "NGid": "CAN",
-						"NGtitle": "Cancer, palliative care and lymphoedema",
-						"NGprice": "46" },
-						{ "NGid": "CAR",
-						"NGtitle": "Cardiorespiratory",
-						"NGprice": "45" },
-						{ "NGid": "DIS",
-						"NGtitle": "Disability",
-						"NGprice": "44" },
-						{ "NGid": "EDU",
-						"NGtitle": "Educators",
-						"NGprice": "43" },
-						{ "NGid": "EME",
-						"NGtitle": "Emergency department",
-						"NGprice": "42" },
-						{ "NGid": "GER",
-						"NGtitle": "Gerontology",
-						"NGprice": "41" },
-						{ "NGid": "LEA",
-						"NGtitle": "Leadership and management",
-						"NGprice": "40" },
-						{ "NGid": "MEN",
-						"NGtitle": "Mental health",
-						"NGprice": "39" },
-						{ "NGid": "MUS",
-						"NGtitle": "Musculoskeletal",
-						"NGprice": "38" },
-						{ "NGid": "NEU",
-						"NGtitle": "Neurology",
-						"NGprice": "37" },
-						{ "NGid": "OCC",
-						"NGtitle": "Occupational health",
-						"NGprice": "36" },
-						{ "NGid": "ORT",
-						"NGtitle": "Orthopaedic",
-						"NGprice": "35" },
-						{ "NGid": "PAE",
-						"NGtitle": "Paediatric",
-						"NGprice": "34" },
-						{ "NGid": "PAI",
-						"NGtitle": "Pain",
-						"NGprice": "33" },
-						{ "NGid": "RUR",
-						"NGtitle": "Rural",
-						"NGprice": "32" },
-						{ "NGid": "SPO",
-						"NGtitle": "Sprots",
-						"NGprice": "31" },
-						{ "NGid": "STU",
-						"NGtitle": "Student",
-						"NGprice": "30" },
-						{ "NGid": "WOM",
-						"NGtitle": "Women\'s, men\'s and pelvic health",
-						"NGprice": "29" },
-						{ "NGid": "SPMagzine",
-						"NGtitle": "SportsMagzine",
-						"NGprice": "29" },
-						{ "NGid": "Intouch",
-						"NGtitle": "Intouch",
-						"NGprice": "29" }
-						
-					]
-				}';
-			} else {
-				$JSONreturn = "";
-			}
 			return $JSONreturn;
 		case "20":
-			// For the actual API use
-			// $API = "";
-			echo "Data Sent: <br />";
-			print_r($variables);
+			// Eddy
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/DataObjects/spGetListOfSubscribedNationalGroup__c?";
+			$var = "UserID=".$variables["UserID"];
 			echo "<br />20. Dashboard - Get list of subscribed National Group: <br />";
 			// Add JSON sample here
-			$JSONreturn = '{ 
-				"NationalGroup": [
-					{ "NGid": "ACU",
-					"NGtitle": "Acupuncture and dry needling" },
-					{ "NGid": "AQU",
-					"NGtitle": "Aquatic" },
-					{ "NGid": "BUS",
-					"NGtitle": "Business" },
-					{ "NGid": "DIS",
-					"NGtitle": "Disability" },
-					{ "NGid": "LEA",
-					"NGtitle": "Leadership and management" },
-					{ "NGid": "MEN",
-					"NGtitle": "Mental health" },
-					{ "NGid": "PAE",
-					"NGtitle": "Paediatric" },
-					{ "NGid": "SPO",
-					"NGtitle": "Sprots" }
-				]
-			}';
+			$JSONreturn = curlRequest($API, "Get", $var);
 			return $JSONreturn;
 		case "21":
-			// For the actual API use
-			// $API = "";
-			echo "Data Sent: <br />";
-			print_r($variables);
+			// Eddy
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/FellowshipProducts/-1";
 			echo "<br />21. Dashboard - Get list of Fellowship Products: <br />";
 			// Add JSON sample here
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+			/*
 			if(count($variables) == 1) {
 				// When this web service is triggered to get
 				// Fellowship list only
@@ -765,15 +616,16 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 				}';
 			} else {
 				$JSONreturn = "";
-			}
+			}*/
 			return $JSONreturn;
 		case "22":
-			// For the actual API use
-			// $API = "";
-			echo "Data Sent: <br />";
-			print_r($variables);
+			// Eddy
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/DataObjects/spGetListOfSubscribedFellowshipProducts__c?";
+			$var = "UserID=".$variables["UserID"];
 			echo "<br />22. Dashboard - Get list of subscribed Fellowship Product: <br />";
 			// Add JSON sample here
+			$JSONreturn = curlRequest($API, "Get", $var);
+			/*
 			$JSONreturn = '{ 
 				"Fellowship": [
 					{"FPid": "1",
@@ -781,14 +633,16 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 					"FPprice": "50" }
 				]
 			}';
+			*/
 			return $JSONreturn;
 		case "23":
-			// For the actual API use
-			// $API = "";
-			echo "Data Sent: <br />";
-			print_r($variables);
+			// Eddy
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/DataObjects/spGetListOfSubscriptionPreferences__c?";
+			$var = "UserID=".$variables["UserID"];
 			echo "<br />23. Dashbard - Get list of Subscription preferences: <br />";
 			// Add JSON sample here
+			$JSONreturn = curlRequest($API, "Get", $var);
+			/*
 			$JSONreturn = '{ 
 				"Subscription":[
 				{
@@ -929,6 +783,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 					"Subscribed":"1"
 				} ]
 			}';
+			*/
 			return $JSONreturn;
 		case "24":
 			// For the actual API use
@@ -1106,634 +961,26 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			$JSONreturn = "";
 			return $JSONreturn;
 		case "28":
-			// For the actual API use
-			// $API = "";
+			// Eddy
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/PDGetEventSearchResultsList";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />28. PD - Get event search result list: <br />";
 			// Add JSON sample here
-			if($variables["PageSize"] == 5 && $variables["PageNumber"] == 1) {
-				$JSONreturn = '{  
-					"PDcount":"12",
-					"Results": [
-					{ 
-						"Id":"1",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Sports Physiotherapy Level2",
-						"Type":"Lecutre",
-						"CPD":"2",
-						"City":"Melbourne",
-						"State":"VIC",
-						"Begindate":"10/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {  
-						"Id":"2",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Pregancy and Postpartum:Clinical Highlights",
-						"Type":"Online",
-						"CPD":"2",
-						"City":"Camberwell",
-						"State":"VIC",
-						"Begindate":"10/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {  
-						"Id":"3",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Sports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"1/12/2017",
-						"Enddate":"12/12/2018",
-						
-						
-						"Eventstatus":"2"
-					}, {  
-						"Id":"4",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Pregancy and Postpartum:Clinical Highlights",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"9/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"4"
-					}, {  
-						"Id":"5",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"9/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					} ]
-				}';
-			} elseif($variables["PageSize"] == 5 && $variables["PageNumber"] == 2) {
-				$JSONreturn = '{  
-					"PDcount":"12",
-					"Results": [
-					{  
-						"Id":"6",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"9/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					}, {  
-						"Id":"7",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"9/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {  
-						"Id":"8",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"2/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					}, {  
-						"Id":"9",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"2/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					}, {  
-						"Id":"10",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"3/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					} ]
-				}';
-			} elseif($variables["PageSize"] == 5 && $variables["PageNumber"] == 3) {
-				$JSONreturn = '{  
-					"PDcount":"12",
-					"Results": [
-					{  
-						"Id":"11",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"5/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					}, {
-						"Id":"12",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"4/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					} ]
-				}';
-			} elseif($variables["PageSize"] == 10 && $variables["PageNumber"] == 1) {
-				$JSONreturn = '{  
-					"PDcount":"12",
-					"Results": [
-					{ 
-						"Id":"1",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Sports Physiotherapy Level2",
-						"Type":"Lecutre",
-						"CPD":"2",
-						"City":"Melbourne",
-						"State":"VIC",
-						"Begindate":"13/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {  
-						"Id":"2",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Pregancy and Postpartum:Clinical Highlights",
-						"Type":"Online",
-						"CPD":"2",
-						"City":"Camberwell",
-						"State":"VIC",
-						"Begindate":"10/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {  
-						"Id":"3",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Sports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"1/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {
-						"Id":"4",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Pregancy and Postpartum:Clinical Highlights",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"9/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"4"
-					}, {  
-						"Id":"5",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"9/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {  
-						"Id":"6",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"9/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					}, {
-						"Id":"7",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"9/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {
-						"Id":"8",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"2/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					}, {
-						"Id":"9",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"2/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					}, {
-						"Id":"10",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"3/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					} ]
-				}';
-			} elseif($variables["PageSize"] == 10 && $variables["PageNumber"] == 2) {
-				$JSONreturn = '{  
-					"PDcount":"12",
-					"Results": [
-					{  
-						"Id":"11",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"5/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					}, {
-						"Id":"12",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"4/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					} ]
-				}';
-			} else {
-				$JSONreturn = '{  
-					"PDcount":"12",
-					"Results": [
-					{ 
-						"Id":"1",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Sports Physiotherapy Level2",
-						"Type":"Lecutre",
-						"CPD":"2",
-						"City":"Melbourne",
-						"State":"VIC",
-						"Begindate":"13/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {
-						"Id":"2",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Pregancy and Postpartum:Clinical Highlights",
-						"Type":"Online",
-						"CPD":"2",
-						"City":"Camberwell",
-						"State":"VIC",
-						"Begindate":"10/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {  
-						"Id":"3",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Sports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"1/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {  
-						"Id":"4",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Pregancy and Postpartum:Clinical Highlights",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"9/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"4"
-					}, {  
-						"Id":"5",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"9/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {  
-						"Id":"6",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"9/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					}, {  
-						"Id":"7",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"9/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {  
-						"Id":"8",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"2/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					}, {  
-						"Id":"9",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"2/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					}, {  
-						"Id":"10",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"3/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"2"
-					}, {  
-						"Id":"11",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"5/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					}, {  
-						"Id":"12",
-						"Summary":"Best practice requires advanced skills in diagnoses",
-						"Title":"Aports Physiotherapy Level 2",
-						"Type":"Lecture",
-						"CPD":"2",
-						"City":"Ringwood",
-						"State":"VIC",
-						"Begindate":"4/12/2017",
-						"Enddate":"12/12/2018",
-						"Eventstatus":"3"
-					} ]
-				}';
-			}
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion);
 			return $JSONreturn;
 		case "29":
 			// For the actual API use
-			// $API = "";
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/PDGetEventDetail";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />29. PD - Get event detail: <br />";
 			// Add JSON sample here
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+			//echo "got@@@!!<br>";
+			//echo $JSONreturn;
 			//$JSONreturn = "";
-			$inID = $variables[0];
-			$outputArray = Array();
-			$pd_json1='{ 
-			  "Id":"1",
-			  "Typeofpd":"Lecture",		  
-			  "Title":"Sports Physiotherapy Level2",
-			  "Summary":"<p>Best practice requires advanced skills in diagnoses,treatment and rehabilitation when treating patients with acute and complex knee conditions.</p>",
-			  "Presenter_bio":"<p>This is a famuso person,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</p><p>This is a famuso person,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</p>",
-			  "Learning_outcomes":"<ul>this is presenter content<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</li><li>Vestibulum quis lobortis massa. Praesent mattis sem orci, non congue justo congue quis curabitur vestibulum.</li><li>Nisl aliquam, porta turpis pellentesque, auctor erat. Aliquam in ipsum mauris. Phasellus feugiat nibh interdum.</li><li>Elit faucibus egestas. Nam eu metus convallis, tempus nisl at, ullamcorper</li><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</li><li>Vestibulum quis lobortis massa. Praesent mattis sem orci, non congue justo congue quis curabitur vestibulum.</li><li>Nisl aliquam, porta turpis pellentesque, auctor erat. Aliquam in ipsum mauris. Phasellus feugiat nibh interdum.</li><li>Elit faucibus egestas. Nam eu metus convallis, tempus nisl at, ullamcorper</li></ul>",
-			  "Prerequisites":"<ul>this is prerequisites content<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</li><li>Vestibulum quis lobortis massa. Praesent mattis sem orci, non congue justo congue quis curabitur vestibulum.</li><li>Nisl aliquam, porta turpis pellentesque, auctor erat. Aliquam in ipsum mauris. Phasellus feugiat nibh interdum.</li><li>Elit faucibus egestas. Nam eu metus convallis, tempus nisl at, ullamcorper arcu</li></ul>",
-			  "Presenters":"Tim McGrath (PhD), Head Physiotherapist Port Adelaide FC;Dr Rob Creer, Orthopedic Surgeon;Kylie Shaw, Sports Physician and;Ben Serpell, Head of Athletic Development, Brumbies",
-			  "UserStatus":"0",
-			  "Totalnumber":"104",
-			  "Enrollednumber":"100",
-			  "Time":"1524030029",
-			  "StartDate":"2018-10-31 9:00:00",
-			  "EndDate":"2018-12-31 17:00:00",
-			  "Close_date":"2018-07-25",
-			  "Location":{
-					"Address1":"University of Canberra",
-					"Address2":"Building 29",
-					"City":"Bruce",
-					"State":"ACT",
-					"Postcode":"2617"
-			  },
-			  "CPD":"10",
-			  "Cost":"750.00",
-			  "Pricelist":
-			  {
-				"SPA/Rural":"695.00",
-				"APA Member":"750.00",
-				"Non-member":"1125.00"			
-			  }
-			 
-			
-		   }';
-		   $pd_json2='{ 
-			   "Id":"2",
-			  "Typeofpd":"Online",			   
-			  "Title":"Pregnancy and Postpartum:Clinical Hights",
-			  "Summary":"Best practice requires advanced skills in diagnoses, treatment and rehabilitation when treating patients with acute and complex knee conditions",
-			 "Presenter_bio":"This is a famuso person",
-			 "Learning_outcomes":"By completing this course/event you will:this is learning outcomes content",
-			 "Prerequisites":"this is prerequisites content",
-			 "Presenters":"test",
-			 "UserStatus":"2",
-			 "Totalnumber":"80",
-			 "Enrollednumber":"75",
-			 "Time":"9:00 AM - 5.00 PM",
-			  "StartDate":"13/12/2018",
-			  "EndDate":"17/12/2018",
-			 "Close_date":"12/12/2018",
-			 "Location":{
-					"Address1":"1175 Toorak Road",
-					"Address2":"",
-					"City":"Camberwell",
-					"State":"VIC",
-					"Postcode":"3124"
-			  },
-			 "CPD":"10",
-			 "Users":["113","10","12"],
-			 "Cost":"NULL",
-			"Pricelist":
-			  {
-				"SPA/Rural":"695.00",
-				"APA Member":"750.00",
-				"Non-member":"1125.00"		
-			  }
-			
-		   }';
-		   $pd_json3='{ 
-			  "Id":"3",	
-			  "Typeofpd":"Lecture",			  
-			  "Title":"Sports Physiotherapy Level2",
-			  "Summary":"Best practice requires advanced skills in diagnoses, treatment and rehabilitation when treating patients with acute and complex knee conditions",
-			 "Presenter_bio":"This is a famuso person",
-			 "Learning_outcomes":"By completing this course/event you will:this is learning outcomes content",
-			 "Prerequisites":"this is prerequisites content",
-			 "Presenters":"test",
-			 "UserStatus":"3",
-			 "Totalnumber":"80",
-			 "Enrollednumber":"76,
-			 "Time":"9:00 AM - 5.00 PM",
-			  "StartDate":"13/12/2018",
-			  "EndDate":"17/12/2018",
-			 "Close_date":"12/12/2018",
-			 "Location":{
-					"Address1":"1175 Toorak Road",
-					"Address2":"",
-					"City":"Camberwell",
-					"State":"VIC",
-					"Postcode":"3124"
-			  },
-			 "CPD":"10",
-			 "Users":["10","12"],
-			 "Cost":"700.00",
-			 "Pricelist":
-			  {
-				"SPA/Rural":"695.00",
-				"APA Member":"750.00",
-				"Non-member":"1125.00"			
-			  }
-			
-		   }';
-		   $pd_json4='{ 
-			  "Id":"4",	
-			 "Typeofpd":"Lecture",		  
-			  "Title":"Pregnancy and Postpartum:Clinical Hights",
-			  "Summary":"Best practice requires advanced skills in diagnoses, treatment and rehabilitation when treating patients with acute and complex knee conditions",
-			 "Presenter_bio":"This is a famuso person",
-			 "Learning_outcomes":"By completing this course/event you will:this is learning outcomes content",
-			 "Prerequisites":"this is prerequisites content",
-			 "Presenters":"test",
-			 "UserStatus":"4",
-			 "Totalnumber":"200",
-			 "Enrollednumber":"100",
-			 "Time":"9:00 AM - 5.00 PM",
-			  "StartDate":"13/12/2018",
-			  "EndDate":"17/12/2018",
-			 "Close_date":"12/12/2018",
-			 "Location":{
-					"Address1":"1175 Toorak Road",
-					"Address2":"",
-					"City":"Camberwell",
-					"State":"VIC",
-					"Postcode":"3124"
-			  },
-			 "CPD":"10",
-			 "Users":["10","12"],
-			 "Cost":"700.00",
-			 "Pricelist":
-			  {
-				"SPA/Rural":"695.00",
-				"APA Member":"750.00",
-				"Non-member":"1125.00"			
-			  }
-			
-		   }';
-		   $pd_json5='{ 
-			  "Id":"5",	
-			  "Typeofpd":"Lecture",		  
-			  "Title":"Sports Physiotherapy Level2",
-			  "Summary":"Best practice requires advanced skills in diagnoses, treatment and rehabilitation when treating patients with acute and complex knee conditions",
-			 "Presenter_bio":"This is a famuso person",
-			 "Learning_outcomes":"By completing this course/event you will:this is learning outcomes content",
-			 "Prerequisites":"this is prerequisites content",
-			 "Presenters":"test",
-			 "UserStatus":"3",
-			 "Totalnumber":"200",
-			 "Enrollednumber":"100",
-			 "Time":"9:00 AM - 5.00 PM",
-			  "StartDate":"13/12/2018",
-			  "EndDate":"17/12/2018",
-			 "Close_date":"12/12/2018",
-			 "Location":{
-					"Address1":"1175 Toorak Road",
-					"Address2":"",
-					"City":"Camberwell",
-					"State":"VIC",
-					"Postcode":"3124"
-			  },
-			 "CPD":"10",
-			 "Users":["10","12"],
-			 "Cost":"695.00",
-			 "Pricelist":
-			  {
-				"SPA/Rural":"695.00",
-				"APA Member":"750.00",
-				"Non-member":"1125.00"		
-			  }
-			}';
-			array_push($outputArray, $pd_json1);
-			array_push($outputArray, $pd_json2);
-			array_push($outputArray, $pd_json3);
-			array_push($outputArray, $pd_json4);
-			array_push($outputArray, $pd_json5);
-			//echo "-><br />".$outputArray[$inID]."<br />";
-			return $outputArray[$inID];
+			return $JSONreturn;
 		case "30":
 			// For the actual API use
 			// $API = "";
@@ -1869,12 +1116,13 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			}';
 			return $JSONreturn;
 		case "33":
-			// For the actual API use
-			// $API = "";
-			echo "Data Sent: <br />";
-			print_r($variables);
+			// Eddy - done check;
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/GetEducationUnits__c/";
 			echo "<br />33. Get CPD diary: <br />";
 			// Add JSON sample here
+			$var = $variables;
+			$JSONreturn = curlRequest($API, "Get", $var);
+			/*
 			$JSONreturn = '{  
 				"CurrentCPDHour": "12",
 				"Diary": [
@@ -1928,14 +1176,16 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 				 "PD_Reflection": "I have learned dis!3" }
 				 ]
 			}';
+			*/
 			return $JSONreturn;
 		case "34":
-			// For the actual API use
-			// $API = "";
+			// Eddy - done check;
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/CreateNonAPAEducationUnits";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />34. Insert CPD diary: <br />";
 			// Add JSON sample here
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion);
 			$JSONreturn = "Successfully updated!! :)";
 			return $JSONreturn;
 		case "35":
@@ -2071,27 +1321,52 @@ function curlRequest($API, $type, $variables) {
 	if($type == "Get") {
 		$urlcurl = $API.$variables;
 		curl_setopt($ch, CURLOPT_URL, $urlcurl); 
-	} elseif($type == "JSON") {
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+	} elseif($type == "GetPost") {
+		$urlcurl = $API.$variables;
+		curl_setopt($ch, CURLOPT_URL, $urlcurl); 
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Length: 0'));
+	} elseif($type == "JSON"||$type == "Image") {
 		curl_setopt($ch, CURLOPT_URL, $API); 
 		if(!empty($variables) || $variables != null) {
 			curl_setopt($ch, CURLOPT_POST, 1);
 			curl_setopt($ch, CURLOPT_POSTFIELDS,$variables);
 		}
+	} elseif($type == "Secure") {
+		curl_setopt($ch, CURLOPT_URL, $API); 
+		if(!empty($variables) || $variables != null) {
+			$secureData = http_build_query($variables);
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS,$secureData);
+		}
 	} else {
 		curl_setopt($ch, CURLOPT_URL, $API); 
 	}
-	if (isset($_SESSION["TokenId"])) {
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
-			"AptifyAuthorization: Web ".$_SESSION["TokenId"]
-		));
+	if(isset($_SESSION["TokenId"])) {
+		if($type == "Secure") {
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				"AptifyAuthorization: Web ".$_SESSION["TokenId"],
+				"Content-Type:application/x-www-form-urlencoded" 
+			));
+		} elseif($type == "Image") {
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				"AptifyAuthorization: Web ".$_SESSION["TokenId"],
+				"Content-Type:application/json"
+			));
+		} else {
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				"AptifyAuthorization: Web ".$_SESSION["TokenId"]
+			));
+		}
     }
 	//return the transfer as a string 
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
 	curl_setopt($ch, CURLOPT_ENCODING, "");
-	curl_setopt($ch, CURLOPT_maxredirs, 10);
+	curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
 	curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 	curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	
 	$JSONreturn = curl_exec($ch);
@@ -2105,4 +1380,624 @@ function curlRequest($API, $type, $variables) {
 	curl_close($ch);
 	return $JSONreturn;
 }
+
+/*
+echo "<br />28. PD - Get event search result list: <br />";
+if($variables["PageSize"] == 5 && $variables["PageNumber"] == 1) {
+	$JSONreturn = '{  
+		"PDcount":"12",
+		"Results": [
+		{ 
+			"Id":"1",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Sports Physiotherapy Level2",
+			"Type":"Lecutre",
+			"CPD":"2",
+			"City":"Melbourne",
+			"State":"VIC",
+			"Begindate":"10/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {  
+			"Id":"2",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Pregancy and Postpartum:Clinical Highlights",
+			"Type":"Online",
+			"CPD":"2",
+			"City":"Camberwell",
+			"State":"VIC",
+			"Begindate":"10/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {  
+			"Id":"3",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Sports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"1/12/2017",
+			"Enddate":"12/12/2018",
+			
+			
+			"Eventstatus":"2"
+		}, {  
+			"Id":"4",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Pregancy and Postpartum:Clinical Highlights",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"9/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"4"
+		}, {  
+			"Id":"5",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"9/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		} ]
+	}';
+} elseif($variables["PageSize"] == 5 && $variables["PageNumber"] == 2) {
+	$JSONreturn = '{  
+		"PDcount":"12",
+		"Results": [
+		{  
+			"Id":"6",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"9/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		}, {  
+			"Id":"7",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"9/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {  
+			"Id":"8",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"2/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		}, {  
+			"Id":"9",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"2/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		}, {  
+			"Id":"10",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"3/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		} ]
+	}';
+} elseif($variables["PageSize"] == 5 && $variables["PageNumber"] == 3) {
+	$JSONreturn = '{  
+		"PDcount":"12",
+		"Results": [
+		{  
+			"Id":"11",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"5/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		}, {
+			"Id":"12",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"4/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		} ]
+	}';
+} elseif($variables["PageSize"] == 10 && $variables["PageNumber"] == 1) {
+	$JSONreturn = '{  
+		"PDcount":"12",
+		"Results": [
+		{ 
+			"Id":"1",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Sports Physiotherapy Level2",
+			"Type":"Lecutre",
+			"CPD":"2",
+			"City":"Melbourne",
+			"State":"VIC",
+			"Begindate":"13/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {  
+			"Id":"2",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Pregancy and Postpartum:Clinical Highlights",
+			"Type":"Online",
+			"CPD":"2",
+			"City":"Camberwell",
+			"State":"VIC",
+			"Begindate":"10/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {  
+			"Id":"3",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Sports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"1/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {
+			"Id":"4",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Pregancy and Postpartum:Clinical Highlights",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"9/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"4"
+		}, {  
+			"Id":"5",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"9/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {  
+			"Id":"6",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"9/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		}, {
+			"Id":"7",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"9/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {
+			"Id":"8",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"2/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		}, {
+			"Id":"9",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"2/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		}, {
+			"Id":"10",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"3/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		} ]
+	}';
+} elseif($variables["PageSize"] == 10 && $variables["PageNumber"] == 2) {
+	$JSONreturn = '{  
+		"PDcount":"12",
+		"Results": [
+		{  
+			"Id":"11",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"5/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		}, {
+			"Id":"12",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"4/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		} ]
+	}';
+} else {
+	$JSONreturn = '{  
+		"PDcount":"12",
+		"Results": [
+		{ 
+			"Id":"1",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Sports Physiotherapy Level2",
+			"Type":"Lecutre",
+			"CPD":"2",
+			"City":"Melbourne",
+			"State":"VIC",
+			"Begindate":"13/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {
+			"Id":"2",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Pregancy and Postpartum:Clinical Highlights",
+			"Type":"Online",
+			"CPD":"2",
+			"City":"Camberwell",
+			"State":"VIC",
+			"Begindate":"10/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {  
+			"Id":"3",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Sports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"1/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {  
+			"Id":"4",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Pregancy and Postpartum:Clinical Highlights",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"9/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"4"
+		}, {  
+			"Id":"5",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"9/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {  
+			"Id":"6",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"9/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		}, {  
+			"Id":"7",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"9/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {  
+			"Id":"8",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"2/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		}, {  
+			"Id":"9",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"2/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		}, {  
+			"Id":"10",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"3/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"2"
+		}, {  
+			"Id":"11",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"5/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		}, {  
+			"Id":"12",
+			"Summary":"Best practice requires advanced skills in diagnoses",
+			"Title":"Aports Physiotherapy Level 2",
+			"Type":"Lecture",
+			"CPD":"2",
+			"City":"Ringwood",
+			"State":"VIC",
+			"Begindate":"4/12/2017",
+			"Enddate":"12/12/2018",
+			"Eventstatus":"3"
+		} ]
+	}';
+}*/
+
+/*
+$inID = $variables[0];
+$outputArray = Array();
+$pd_json1='{ 
+  "Id":"1",
+  "Typeofpd":"Lecture",		  
+  "Title":"Sports Physiotherapy Level2",
+  "Summary":"<p>Best practice requires advanced skills in diagnoses,treatment and rehabilitation when treating patients with acute and complex knee conditions.</p>",
+  "Presenter_bio":"<p>This is a famuso person,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</p><p>This is a famuso person,Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</p>",
+  "Learning_outcomes":"<ul>this is presenter content<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</li><li>Vestibulum quis lobortis massa. Praesent mattis sem orci, non congue justo congue quis curabitur vestibulum.</li><li>Nisl aliquam, porta turpis pellentesque, auctor erat. Aliquam in ipsum mauris. Phasellus feugiat nibh interdum.</li><li>Elit faucibus egestas. Nam eu metus convallis, tempus nisl at, ullamcorper</li><li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</li><li>Vestibulum quis lobortis massa. Praesent mattis sem orci, non congue justo congue quis curabitur vestibulum.</li><li>Nisl aliquam, porta turpis pellentesque, auctor erat. Aliquam in ipsum mauris. Phasellus feugiat nibh interdum.</li><li>Elit faucibus egestas. Nam eu metus convallis, tempus nisl at, ullamcorper</li></ul>",
+  "Prerequisites":"<ul>this is prerequisites content<li>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et feugiat risus.</li><li>Vestibulum quis lobortis massa. Praesent mattis sem orci, non congue justo congue quis curabitur vestibulum.</li><li>Nisl aliquam, porta turpis pellentesque, auctor erat. Aliquam in ipsum mauris. Phasellus feugiat nibh interdum.</li><li>Elit faucibus egestas. Nam eu metus convallis, tempus nisl at, ullamcorper arcu</li></ul>",
+  "Presenters":"Tim McGrath (PhD), Head Physiotherapist Port Adelaide FC;Dr Rob Creer, Orthopedic Surgeon;Kylie Shaw, Sports Physician and;Ben Serpell, Head of Athletic Development, Brumbies",
+  "UserStatus":"0",
+  "Totalnumber":"104",
+  "Enrollednumber":"100",
+  "Time":"1524030029",
+  "StartDate":"2018-10-31 9:00:00",
+  "EndDate":"2018-12-31 17:00:00",
+  "Close_date":"2018-07-25",
+  "Location":{
+		"Address1":"University of Canberra",
+		"Address2":"Building 29",
+		"City":"Bruce",
+		"State":"ACT",
+		"Postcode":"2617"
+  },
+  "CPD":"10",
+  "Cost":"750.00",
+  "Pricelist":
+  {
+	"SPA/Rural":"695.00",
+	"APA Member":"750.00",
+	"Non-member":"1125.00"			
+  }
+ 
+
+}';
+$pd_json2='{ 
+   "Id":"2",
+  "Typeofpd":"Online",			   
+  "Title":"Pregnancy and Postpartum:Clinical Hights",
+  "Summary":"Best practice requires advanced skills in diagnoses, treatment and rehabilitation when treating patients with acute and complex knee conditions",
+ "Presenter_bio":"This is a famuso person",
+ "Learning_outcomes":"By completing this course/event you will:this is learning outcomes content",
+ "Prerequisites":"this is prerequisites content",
+ "Presenters":"test",
+ "UserStatus":"2",
+ "Totalnumber":"80",
+ "Enrollednumber":"75",
+ "Time":"9:00 AM - 5.00 PM",
+  "StartDate":"13/12/2018",
+  "EndDate":"17/12/2018",
+ "Close_date":"12/12/2018",
+ "Location":{
+		"Address1":"1175 Toorak Road",
+		"Address2":"",
+		"City":"Camberwell",
+		"State":"VIC",
+		"Postcode":"3124"
+  },
+ "CPD":"10",
+ "Users":["113","10","12"],
+ "Cost":"NULL",
+"Pricelist":
+  {
+	"SPA/Rural":"695.00",
+	"APA Member":"750.00",
+	"Non-member":"1125.00"		
+  }
+
+}';
+$pd_json3='{ 
+  "Id":"3",	
+  "Typeofpd":"Lecture",			  
+  "Title":"Sports Physiotherapy Level2",
+  "Summary":"Best practice requires advanced skills in diagnoses, treatment and rehabilitation when treating patients with acute and complex knee conditions",
+ "Presenter_bio":"This is a famuso person",
+ "Learning_outcomes":"By completing this course/event you will:this is learning outcomes content",
+ "Prerequisites":"this is prerequisites content",
+ "Presenters":"test",
+ "UserStatus":"3",
+ "Totalnumber":"80",
+ "Enrollednumber":"76,
+ "Time":"9:00 AM - 5.00 PM",
+  "StartDate":"13/12/2018",
+  "EndDate":"17/12/2018",
+ "Close_date":"12/12/2018",
+ "Location":{
+		"Address1":"1175 Toorak Road",
+		"Address2":"",
+		"City":"Camberwell",
+		"State":"VIC",
+		"Postcode":"3124"
+  },
+ "CPD":"10",
+ "Users":["10","12"],
+ "Cost":"700.00",
+ "Pricelist":
+  {
+	"SPA/Rural":"695.00",
+	"APA Member":"750.00",
+	"Non-member":"1125.00"			
+  }
+
+}';
+$pd_json4='{ 
+  "Id":"4",	
+ "Typeofpd":"Lecture",		  
+  "Title":"Pregnancy and Postpartum:Clinical Hights",
+  "Summary":"Best practice requires advanced skills in diagnoses, treatment and rehabilitation when treating patients with acute and complex knee conditions",
+ "Presenter_bio":"This is a famuso person",
+ "Learning_outcomes":"By completing this course/event you will:this is learning outcomes content",
+ "Prerequisites":"this is prerequisites content",
+ "Presenters":"test",
+ "UserStatus":"4",
+ "Totalnumber":"200",
+ "Enrollednumber":"100",
+ "Time":"9:00 AM - 5.00 PM",
+  "StartDate":"13/12/2018",
+  "EndDate":"17/12/2018",
+ "Close_date":"12/12/2018",
+ "Location":{
+		"Address1":"1175 Toorak Road",
+		"Address2":"",
+		"City":"Camberwell",
+		"State":"VIC",
+		"Postcode":"3124"
+  },
+ "CPD":"10",
+ "Users":["10","12"],
+ "Cost":"700.00",
+ "Pricelist":
+  {
+	"SPA/Rural":"695.00",
+	"APA Member":"750.00",
+	"Non-member":"1125.00"			
+  }
+
+}';
+$pd_json5='{ 
+  "Id":"5",	
+  "Typeofpd":"Lecture",		  
+  "Title":"Sports Physiotherapy Level2",
+  "Summary":"Best practice requires advanced skills in diagnoses, treatment and rehabilitation when treating patients with acute and complex knee conditions",
+ "Presenter_bio":"This is a famuso person",
+ "Learning_outcomes":"By completing this course/event you will:this is learning outcomes content",
+ "Prerequisites":"this is prerequisites content",
+ "Presenters":"test",
+ "UserStatus":"3",
+ "Totalnumber":"200",
+ "Enrollednumber":"100",
+ "Time":"9:00 AM - 5.00 PM",
+  "StartDate":"13/12/2018",
+  "EndDate":"17/12/2018",
+ "Close_date":"12/12/2018",
+ "Location":{
+		"Address1":"1175 Toorak Road",
+		"Address2":"",
+		"City":"Camberwell",
+		"State":"VIC",
+		"Postcode":"3124"
+  },
+ "CPD":"10",
+ "Users":["10","12"],
+ "Cost":"695.00",
+ "Pricelist":
+  {
+	"SPA/Rural":"695.00",
+	"APA Member":"750.00",
+	"Non-member":"1125.00"		
+  }
+}';
+array_push($outputArray, $pd_json1);
+array_push($outputArray, $pd_json2);
+array_push($outputArray, $pd_json3);
+array_push($outputArray, $pd_json4);
+array_push($outputArray, $pd_json5);
+//echo "-><br />".$outputArray[$inID]."<br />";
+return $outputArray[$inID];
+*/
+
 ?>
