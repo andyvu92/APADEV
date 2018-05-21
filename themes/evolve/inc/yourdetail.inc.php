@@ -24,7 +24,13 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 // QIP}, Undergraduate degree, Undergraduate Uni name, Undergraduate Country,
 // Year attained, Post graduate degree, post graduate name, 
 // Post graduate country, Year attained, Additional qualifications
-$details = GetAptifyData("4", "UserID"); // #_SESSION["UserID"];
+$data = "UserID=".$_SESSION["UserId"];
+$details = GetAptifyData("4", $data,""); // #_SESSION["UserID"];
+print_r($details);
+//get installment data test part
+$installmentData['id'] = $_SESSION["UserId"];
+$installmentOrder = GetAptifyData("43", $installmentData);
+
 if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details['Regional-group'];}
 //print_r($details);
 // 2.2.10 - GET Picture
@@ -32,14 +38,66 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 // UserID
 // Response -
 // Profile image
-$picture = GetAptifyData("10", "UserID"); // #_SESSION["UserID"];
+$picture = GetAptifyData("10","",""); 
+			
 // 2.2.11 - UPDATE Picture
 // Send - 
 // UserID, Image
 // Response -
 // N/A.
 if(isset($_POST["PictureUpdate"])) {
-	$sendpicture = GetAptifyData("11", "UserID"); // #_SESSION["UserID"];
+$target_dir =__DIR__ . '/../uploads/';
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+$name = $_FILES["fileToUpload"]["name"];
+$uploadOk = 1;
+$imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
+// Check if image file is a actual image or fake image
+if(isset($_POST["submit"])) {
+    $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
+    if($check !== false) {
+        echo "File is an image - " . $check["mime"] . ".";
+        $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
+    }
+}
+// Check if file already exists
+//if (file_exists($target_file)) {
+    //echo "Sorry, file already exists.";
+    //$uploadOk = 0;
+//}
+// Check file size
+if ($_FILES["fileToUpload"]["size"] > 500000) {
+    echo "Sorry, your file is too large.";
+    $uploadOk = 0;
+}
+// Allow certain file formats
+if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+&& $imageFileType != "gif" ) {
+    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    $uploadOk = 0;
+}
+
+// Check if $uploadOk is set to 0 by an error
+if ($uploadOk == 0) {
+    echo "Sorry, your file was not uploaded.";
+// if everything is ok, try to upload file
+} else {
+	
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
+}
+$imageBlob = base64_encode(file_get_contents("sites/all/themes/evolve/uploads/".$name));
+$postImageData['ID'] = $_SESSION['LinkId'];
+$postImageData['EntityName'] = "Persons";
+$postImageData['Photo'] = $imageBlob;
+$outImage = GetAptifyData("11",$postImageData); 
+unlink(file_get_contents("sites/all/themes/evolve/uploads/".$name));
+    
 }
 
 if(isset($_GET["action"])&& ($_GET["action"]=="addcard")) {
@@ -48,49 +106,62 @@ if(isset($_GET["action"])&& ($_GET["action"]=="addcard")) {
 	// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
 	// Response -
 	// N/A.
-	$AddNewCounter = 0;
-	if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; $AddNewCounter++; }
-	if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; $AddNewCounter++; }
-	//if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; $AddNewCounter++; }
-	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; $AddNewCounter++; }
-	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; $AddNewCounter++; }
-	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; $AddNewCounter++; }
-	if($AddNewCounter == 6) { $addNewCards = 1; }
-	if($addNewCards == 1) {
-		GetAptifyData("15", $postPaymentData); 
-	}
+	if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
+	if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
+	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
+	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
+	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
+	$out = GetAptifyData("15",$postPaymentData); 
 } 
 if(isset($_POST["deleteID"]) && $_POST["deleteID"] != "") {
-	$deleteCardSubmit["UserID"] = "UserID";
-	$deleteCardSubmit["Creditcard-ID"] = $_POST["deleteID"];
-	// 2.2.14 - DELETE credit card
+	$deleteCardSubmit["UserID"] = $_SESSION['UserId'];
+	$deleteCardSubmit["SpmID"] = $_POST["deleteID"];
+	$deleteCardSubmit["ExpireMonthYear"] = "";
+	$deleteCardSubmit["CCSNumber"] = "";
+    $deleteCardSubmit["IsDefault"] = "";
+	$deleteCardSubmit["IsActive"] = "0";
+	// 2.2.13 - update payment method-2-delete card
 	// Send - 
-	// UserID, Credit Card ID
 	// Response -
 	// N/A.
-	GetAptifyData("14", $deleteCardSubmit); 
+	$deleteCards = GetAptifyData("13", $deleteCardSubmit); 
+	print_r($deleteCards);
+	
 }
 if(isset($_Get["action"]) && $_Get["action"] = "updatecard") {
-	$updateCardSubmit["UserID"] = "UserID";
-	$updateCardSubmit["Creditcard-ID"] = $_POST["selectedCard"];
-	$updateCardSubmit["Expiry-date"] = $_POST["Expiry-date"];
-	$updateCardSubmit["CVV"] = $_POST["CVV"];
+	$updateCardSubmit["UserID"] = $_SESSION['UserId'];
+	$updateCardSubmit["SpmID"] = $_POST["selectedCard"];
+	$updateCardSubmit["ExpireMonthYear"] = "";
+	$updateCardSubmit["CCSNumber"] = "";
+    $updateCardSubmit["IsDefault"] = "1";
+	$updateCardSubmit["IsActive"] = "";
+	//$updateCardSubmit["Expiry-date"] = $_POST["Expiry-date"];
+	//$updateCardSubmit["CVV"] = $_POST["CVV"];
 	// 2.2.13 - update payment method-2-update card
 	// Send - 
 	// UserID, Creditcard-ID,Expiry-date,CVV
 	// Response -
 	// N/A.
-	GetAptifyData("13", $updateCardSubmit); 
+	$updateCards = GetAptifyData("13", $updateCardSubmit); 
+	print_r($updateCards);
+	echo "End here";
 }
-if(isset($_Get["action"]) && $_Get["action"] = "setCardForm") {
-	$updateCardSubmit["UserID"] = "UserID";
-	$updateCardSubmit["Creditcard-ID"] = $_POST["selectedCard"];
+if(isset($_POST["setCardID"]) && $_POST["setCardID"] != ""){
+	$updateCardSubmit["UserID"] = $_SESSION['UserId'];
+	$updateCardSubmit["SpmID"] = $_POST["setCardID"];
+	$updateCardSubmit["ExpireMonthYear"] = "";
+	$updateCardSubmit["CCSNumber"] = "";
+    $updateCardSubmit["IsDefault"] = "1";
+	$updateCardSubmit["IsActive"] = "";
 	// 2.2.13 - update payment method-3-set main card
 	// Send - 
 	// UserID, Creditcard-ID
 	// Response -
 	// N/A.
-	GetAptifyData("13", $updateCardSubmit); 
+	echo "End here";
+	$updateCards = GetAptifyData("13", $updateCardSubmit); 
+	print_r($updateCards);
+	
 }
 if(isset($_Get["action"]) && $_Get["action"] = "rollover") {
 	$updateCardSubmit["UserID"] = "UserID";
@@ -102,18 +173,115 @@ if(isset($_Get["action"]) && $_Get["action"] = "rollover") {
 	// N/A.
 	GetAptifyData("13", $updateCardSubmit); 
 }
-//use webservice 2.2.15 Add payment method
-/*
-if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; }
-if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
-if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
-if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
-if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
-if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
-GetAptifyData("15", $postPaymentData); */
-
 if(isset($_POST['step1'])) {
 	$postData = array();
+	//test update data,please remove later 
+	/*$postData['Prefix']="Mr.";
+	$postData['Firstname']="owen";
+	$postData['Preferred-name']="owen";
+	$postData['Middle-name']="owen";
+	$postData['LastName']="owen";
+	$postData['birthday']="10/5/1975";
+	$postData['Gender']="Male";
+	$postData['Aboriginal']="Abo";
+	$postData['Home-area-code']="023";
+	$postData['Home-phone-number']="1235";
+	$postData['Mobile-area-code']="90";
+	$postData['Mobile-number']="99892798081";
+	$postData['BuildingName']="Line 1 Business Add1";
+	$postData['Address_Line_1']="Line 2 Business Add1";
+	$postData['Pobox']="40012";
+	$postData['AddressLine3']="Line 3 Business Add";
+	$postData['State']="KY";
+	$postData['Suburb']="Chaplin";
+	$postData['Postcode']="40012";
+	$postData['Country']="Australia";
+	$postData['Memberid']="owenthreadgold@hotmail.com";
+	$postData['MemberType']="Full Time Private Insured";
+	$postData['Ahpranumber']="123";
+	$postData['Branch']="MyBranch";
+	$postData['Billing-BuildingName']="Line 1 Billing Add";
+	$postData['BillingAddress_Line_1']="Line 2 Billing Add";
+	$postData['BillingAddress_Line_2']="Line 3 Billing Add";
+	$postData['Billing-Suburb']="NEW FARM";
+	$postData['Billing-State']="QLD";
+	$postData['Billing-Postcode']="4007";
+	$postData['Billing-Country']="Australia";
+	$postData['D20Tick']="4007";
+	$postData['ShippingBuildingName']="Line 1 Home Add";
+	$postData['ShippingAddress_line_1']="Line 2 Home Add Line 3 POBox Add";
+	$postData['ShippingAddress_line_2']="Line 2 Home Add Line 4 Home Add";
+	$postData['Shipping-city-town']="BARDON";
+	$postData['Shipping-state']="QLD";
+	$postData['Shipping-country']="Australia";
+	$postData['Shipping-postcode']="40057";
+	$postData['Mailing-BuildingName']="Line 1 Home Add";
+	$postData['MailingAddress_line_1']="Line 2 Home Add Line 3 POBox Add";
+	$postData['Mailing-Address_line_2']="Line 2 Home Add Line 4 Home Add";
+	$postData['Mailing-city-town']="BARDON";
+	$postData['Mailing-state']="QLD";
+	$postData['Mailing-PObox']="40087";
+	$postData['Mailing-country']="BARDON";
+	$postData['PSpecialInterestAreaID']="38,16";
+	$testNG['ID']="1";
+	$testNG['Name']="Acupuncture & Dry Needling";
+	$testNGArray = array();
+	array_push($testNGArray, $testNG);
+	$postData['Nationalgp'] = $testNGArray;
+	$testD['ID']="6";
+	$testD['Name']="Languages";
+	$testDietaryArray = array();
+	array_push($testDietaryArray, $testD);
+	$postData['Dietary'] = $testDietaryArray;
+	$temppostWorkplacesData= array();
+	$postWorkplacesData['WorkplaceID']="2";
+	$postWorkplacesData['WorkplaceAddInfoID']="1";
+	$postWorkplacesData['Name-of-workplace']="Practice Ravi-test";
+	$postWorkplacesData['Findphysio']="True";
+	$postWorkplacesData['FindaBuddy']="False";
+	$postWorkplacesData['Workplace-settingID']="1";
+	$postWorkplacesData['Workplace-settingName']="Aborignal Health Services";
+	$postWorkplacesData['BuildingName']="Practice Line1";
+	$postWorkplacesData['Address_Line_1']="Practice Line 2";
+	$postWorkplacesData['Address_Line_2']="Practice Line 3";
+	$postWorkplacesData['Wcity']="DOUGLAS";
+	$postWorkplacesData['Wpostcode']="4354";
+	$postWorkplacesData['Wstate']="QLD";
+	$postWorkplacesData['Wcountry']="Australia";
+	$postWorkplacesData['Wemail']="test.shivdas@aptify.com";
+	$postWorkplacesData['Wwebaddress']="www.aptify.com";
+	$postWorkplacesData['WPhoneAreaCode']="03";
+	$postWorkplacesData['WPhone']="487810";
+	$postWorkplacesData['WPhoneExtentions']="93";
+	$postWorkplacesData['Additionallanguage']="Additionallanguage";
+	$postWorkplacesData['Wwebaddress']="www.aptify.com";
+	$postWorkplacesData['Electronicclaiming']="True";
+	$postWorkplacesData['Hicaps']="True";
+	$postWorkplacesData['Healthpoint']="True";
+	$postWorkplacesData['Departmentva']="True";
+	$postWorkplacesData['Workerscompensation']="True";
+	$postWorkplacesData['Motora']="True";
+	$postWorkplacesData['Medicare']="True";
+	$postWorkplacesData['Homehospital']="Homehospital";
+	$postWorkplacesData['MobilePhysio']="True";
+	$postWorkplacesData['SpecialInterestAreaID']="38";
+	$postWorkplacesData['SpecialInterestArea']="Development";
+	$postWorkplacesData['AdditionalLanguage']="5,52";
+	$postWorkplacesData['Number-workedhours']="05-08";
+	array_push($temppostWorkplacesData, $postWorkplacesData);
+	$postData['Workplaces']=$temppostWorkplacesData;
+	$tempPersonEducationData = array();
+	$postPersonEducationData['ID']="-1";
+	$postPersonEducationData['Udegree']="1";
+	$postPersonEducationData['Ugraduate-country']="1";
+	$postPersonEducationData['Undergraduateuniversity-name']="My Company Name";
+	$postPersonEducationData['Ugraduate-yearattained']="4/28/2019";
+	array_push($tempPersonEducationData, $postPersonEducationData);
+	$postData['PersonEducation']=$tempPersonEducationData;
+	$postData['Status']="Overseas Agency";
+	$postData['Specialty']="mySpec";//FACP member will show this field
+	*/
+	//test data end here
 	if(isset($_POST['Prefix'])){ $postData['Prefix'] = $_POST['Prefix']; } else { $postData['Prefix'] = '';}
 	if(isset($_POST['Firstname'])){ $postData['Firstname'] = $_POST['Firstname']; }
 	if(isset($_POST['Middle-name'])){ $postData['Middle-name'] = $_POST['Middle-name']; }
@@ -122,15 +290,17 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Lastname'])){ $postData['Lastname'] = $_POST['Lastname']; }
 	if(isset($_POST['Birth'])){ $postData['Birth'] = $_POST['Birth']; }
 	if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
-	if(isset($_POST['country-code'])){ $postData['Home-phone-number'][0] = $_POST['country-code']; }
-	if(isset($_POST['area-code'])){ $postData['Home-phone-number'][1] = $_POST['area-code']; }
-	if(isset($_POST['phone-number'])){ $postData['Home-phone-number'][2] = $_POST['phone-number']; }
+	if(isset($_POST['country-code'])){ $postData['Home-phone-countrycode'] = $_POST['country-code']; }
+	if(isset($_POST['area-code'])){ $postData['Home-phone-areacode'] = $_POST['area-code']; }
+	if(isset($_POST['phone-number'])){ $postData['Home-phone-number'] = $_POST['phone-number']; }
+	if(isset($_POST['Mobile-countrycode'])){ $postData['Mobile-countrycode'] = $_POST['Mobile-countrycode']; }
+	if(isset($_POST['Mobile-areacode'])){ $postData['Mobile-areacode'] = $_POST['Mobile-areacode']; }
 	if(isset($_POST['Mobile-number'])){ $postData['Mobile-number'] = $_POST['Mobile-number']; }
-	if(isset($_POST['Aboriginal'])){ $postData['Aboriginal'] = $_POST['Aboriginal']; }
+    if(isset($_POST['Aboriginal'])){ $postData['Aboriginal'] = $_POST['Aboriginal']; }
 	if(isset($_POST['BuildingName'])){ $postData['BuildingName'] = $_POST['BuildingName']; }
-	if(isset($_POST['Unit'])){ $postData['Unit'] = $_POST['Unit']; }
+	if(isset($_POST['Address_Line_1'])){ $postData['Address_Line_1'] = $_POST['Address_Line_1']; }
 	if(isset($_POST['Pobox'])){ $postData['Pobox'] = $_POST['Pobox']; }
-	if(isset($_POST['Street'])){ $postData['Street'] = $_POST['Street']; }
+	if(isset($_POST['Address_Line_2'])){ $postData['Address_Line_2'] = $_POST['Address_Line_2']; }
 	if(isset($_POST['Suburb'])){ $postData['Suburb'] = $_POST['Suburb']; }
 	if(isset($_POST['Postcode'])){ $postData['Postcode'] = $_POST['Postcode']; }
 	if(isset($_POST['State'])){ $postData['State'] = $_POST['State']; }
@@ -356,7 +526,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<div class="row">
 							<div class="col-lg-4">
 								<label for="">Birth Date<span class="tipstyle">*</span></label>
-								<input type="date" class="form-control" name="Birth" <?php if (empty($details['Birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.$details['Birth'].'"'; }?> required>
+								<input type="date" class="form-control" name="Birth" <?php if (empty($details['Birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['Birth']).'"';}?> required>
 							</div>
 							<div class="col-lg-3 col-lg-offset-1">
 								<label for="">Gender<span class="tipstyle">*</span></label>
@@ -377,8 +547,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 									$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 									$country=json_decode($countrycode, true);						
 									foreach($country  as $key => $value){
-										echo '<option value="'.$country[$key]['TelephoneCode'].'"';
-										if ($details['Home-phone-number'][0] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; } 
+										echo '<option value="'.$country[$key]['ID'].'"';
+										if ($details['Home-phone-countrycode'] == $country[$key]['ID']){ echo "selected='selected'"; } 
 										echo '> '.$country[$key]['Country'].' </option>';
 									}
 								?>
@@ -386,16 +556,39 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 							<div class="col-lg-2">
 								<label for="">Area code</label>
-								<input type="text" class="form-control" name="area-code" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-number'][1].'"'; }?>  >
+								<input type="text" class="form-control" name="area-code" <?php if (empty($details['Home-phone-areacode'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-areacode'].'"'; }?>  >
 							</div>
 							<div class="col-lg-4">
 								<label for="">Phone number</label>
-								<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'][2].'"'; }?>  >
+								<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  >
+							</div>
+							
+						</div>
+						<div class="row">
+							
+							<div class="col-lg-2">
+								<label for="">Country code</label>
+								<select class="form-control" id="Mobile-countrycode" name="Mobile-countrycode">
+								<?php
+									$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+									$country=json_decode($countrycode, true);						
+									foreach($country  as $key => $value){
+										echo '<option value="'.$country[$key]['ID'].'"';
+										if ($details['Mobile-countrycode'] == $country[$key]['ID']){ echo "selected='selected'"; } 
+										echo '> '.$country[$key]['Country'].' </option>';
+									}
+								?>
+								</select>
+							</div>
+							<div class="col-lg-2">
+								<label for="">Area code</label>
+								<input type="text" class="form-control" name="Mobile-areacode" <?php if (empty($details['Mobile-areacode'])) {echo "placeholder='Mobile Area code'";}   else{ echo 'value="'.$details['Mobile-areacode'].'"'; }?>  >
 							</div>
 							<div class="col-lg-4">
 								<label for="">Mobile number</label>
-								<input type="text" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile:0456089756'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?> pattern="[0-9]{9}">
+								<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  >
 							</div>
+							
 						</div>
 						<div class="row">
 							<div class="col-lg-9">
@@ -553,8 +746,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-right">
 						<div class="row form-image">
+						   	<img src="https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo"/>
 							<div class="col-lg-12">
-							Upload/change image
+							<a  style="cursor: pointer; color:white;" id="uploadImageButton">Upload/change image</a>
 							<input type="hidden" name="PictureUpdate" value="pictureUpload">
 							<input type="submit">
 							</div>
@@ -616,6 +810,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							// 2.2.19 - get national group
 							// Send - 
 							// Response - national group
+							
 							$nationalGroupsCode= file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
 							$nationalGroups=json_decode($nationalGroupsCode, true);
 							?>
@@ -709,7 +904,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</select>
 						</div>
 					</div>
-					
+						
 				<!--
 				<div class="row">
 				<div class="col-lg-6">
@@ -727,7 +922,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				// Response -
 				// Credit cards details [Credit card ID, Payment-method,
 				// Name on card, Digits, Exp date, Roll over],  Main card
-				$cardsnum = GetAptifyData("12", "UserID");
+				$test['id'] = $_SESSION["UserId"];
+				$cardsnum = GetAptifyData("12", $test);
+				print_r($cardsnum);
 				//$cardsnum = $cardsnums["paymentcards"];
 				//$_SESSION["cardsnum"]= $cardsnum;
 				?>
@@ -741,13 +938,13 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 									<select  id="Paymentcard" name="Paymentcard" style="width:100%;">
 									<?php
 									if (sizeof($cardsnum)!=0) {
-										foreach( $cardsnum["paymentcards"] as $cardnum) {
+										foreach( $cardsnum["results"] as $cardnum) {
 											echo '<option value="'.$cardnum["Creditcards-ID"].'"';
-											if($cardnum["Description"]=="Y") {
-											echo "selected";
+											if($cardnum["IsDefault"]=="1") {
+											echo "selected ";
 										}
-										echo 'data-class="'.$cardnum["Payment-method"].'">Credit card ending with ';
-										echo $cardnum["Digitsnumber"].'</option>';
+										echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
+										echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
 										}
 									}
 									?>
@@ -773,9 +970,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								var CardID = $("#Paymentcard").val();
 								$("#selectedCard").val(CardID);
 							});
-							$(".setcard").click(function() {
+							$("#setCardButton").click(function() {
 								var CardID = $("#Paymentcard").val();
-								$("#selectedCard").val(CardID);
+								$("#setCardID").val(CardID);
 							});
 						});
 						</script>
@@ -970,6 +1167,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<input type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="<?php  echo $details['Findpublicbuddy'];?>" <?php if($details['Findpublicbuddy']==1){echo "checked";} ?>>
 						</div>
 					</div> 
+					<?php if(sizeof($details['Workplaces'])!=0):?>
 					<ul class="nav nav-tabs" id="tabmenu">
 					<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
 					<li <?php if($key=='Workplace0') echo 'class ="active" ';?>><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php echo "Workplace".$key;?></a></li>
@@ -991,25 +1189,29 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<input type="text" class="form-control" name="Name-of-workplace<?php echo $key;?>" id="Name-of-workplace<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Name-of-workplace'])) {echo "placeholder='Name of workplace'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Name-of-workplace'].'"'; }?>>
 							</div>
 						</div>
+						
 						<div class="row">
 							<div class="col-lg-3">
 							Workplace setting<span class="tipstyle">*</span>
 							</div>
-							<div class="col-lg-9">
-								<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting0" required>
-								<?php 
+							<?php 
 								// 2.2.36 - get workplace settings list
 								// Send - 
 								// Response - get workplace settings from Aptify via webserice return Json data;
 								// stroe workplace settings into the session
-								$workplaceSettings= GetAptifyData("36","request");
+							    
+								$workplaceSettings= GetAptifyData("36","","");
+								print_r($workplaceSettings);
 								$_SESSION["workplaceSettings"] = $workplaceSettings;
 								?>
+							<div class="col-lg-9">
+								<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting0" required>
+								
 								<?php 
-								foreach($workplaceSettings['WorkplaceSettings']  as $lines){
-									echo '<option value="'.$lines["code"].'"';
-									if ($details['Workplaces'][$key]['Workplace-setting'] == $lines["code"]){ echo "selected='selected'"; } 
-									echo '> '.$lines["name"].' </option>';
+								foreach($workplaceSettings['results']  as $lines){
+									echo '<option value="'.$lines["ID"].'"';
+									if ($details['Workplaces'][$key]['Workplace-setting'] == $lines["ID"]){ echo "selected='selected'"; } 
+									echo '> '.$lines["Name"].' </option>';
 								}
 								?>
 								</select>
@@ -1322,8 +1524,225 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<p>[/animate]</p>*/ ?>
 						<a class="add-workplace"><span class="dashboard-button-name">Add workplace</span></a>
 					</div>
-				<?php endforeach ?>
+				<?php endforeach; ?>
 				<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton14"><span class="dashboard-button-name">Last</span></a></div>-->
+				<?php endif; ?>
+				<?php if(sizeof($details['Workplaces'])==-1):?>
+				<ul class="nav nav-tabs" id="tabmenu">
+			<li class ="active"><a data-toggle="tab" href="#workplace0"><?php echo "Workplace0";?></a></li>
+			</ul>
+			<div id="workplaceblocks">
+				<div id="workplace0" class='tab-pane fade in active'> 
+					<div class="row"><div class="col-lg-6"></div><div class="col-lg-6"> <label for="Findphysio"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
+					<input type="checkbox" name="Findphysio0" id="Findphysio" value="" ></div></div>
+					<div class="row">
+						<div class="col-lg-12"> <label for="Findabuddy0"><strong>NOTE:</strong>Please list my details in the physio</label>
+							<input type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
+						</div>
+				    </div>
+				<div class="row">
+					<div class="col-lg-12">
+						<label for="Name-of-workplace">Name of workplace<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Name-of-workplace0" id="Name-of-workplace0">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3">
+					Workplace setting<span class="tipstyle">*</span>
+					</div>
+					<div class="col-lg-9">
+						<select class="form-control" id="Workplace-setting0" name="Workplace-setting0">
+						<?php 
+						// 2.2.36 - get workplace settings list
+						// Send - 
+						// Response - get workplace settings from Aptify via webserice return Json data;
+						// stroe workplace settings into the session
+						$workplaceSettings= GetAptifyData("36","","");
+						$_SESSION["workplaceSettings"] = $workplaceSettings;
+						?>
+						<?php 
+						 foreach($workplaceSettings['WorkplaceSettings']  as $lines){
+							echo '<option value="'.$lines['code'].'">'.$lines['name'].'</option>';
+						}
+						?>
+						</select>
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col-lg-3">
+					Workplace treatment area:
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col-lg-6">
+						<select class="chosen-select" id="WTreatmentarea0" name="WTreatmentarea0" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+						<?php 
+						// get interest area from Aptify via webserice return Json data;
+						$interestAreas= GetAptifyData("37","request");
+						$_SESSION["interestAreas"] = $interestAreas;
+						?>
+						<?php 
+						foreach($interestAreas['InterestAreas']  as $lines){
+							echo '<option value="'.$lines["ListCode"].'"';
+							echo '> '.$lines["ListName"].' </option>'; 
+						}
+						?>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="BuildingName">Building Name</label>
+						<input type="text" class="form-control" name="WBuildingName0" id="WBuildingName0">
+					</div>
+					<div class="col-lg-2">
+					<label for="WAddress_Line_10">Address line 1<span class="tipstyle">*</span></label>
+					<input type="text" class="form-control" name="WAddress_Line_10" id="WAddress_Line_10">
+					</div>
+					<div class="col-lg-4">
+					<label for="WAddress_Line_20">Address line 2</label>
+					<input type="text" class="form-control" name="WAddress_Line_20" id="WAddress_Line_20">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3">
+						<label for="Wcity">City/Town<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wcity0" id="Wcity0">
+					</div>
+					<div class="col-lg-3">
+						<label for="Wpostcode">Postcode<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wpostcode0" id="Wpostcode0">
+					</div>
+					<div class="col-lg-3">
+						<label for="Wstate">State<span class="tipstyle">*</span></label>
+						<select class="form-control" id="Wstate0" name="Wstate0">
+							<option value="" selected disabled> State </option>
+							<?php 
+								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+								$State=json_decode($statecode, true);
+								foreach($State  as $key => $value){
+								echo '<option value="'.$State[$key]['ID'].'"';
+							    echo '> '.$State[$key]['Abbreviation'].' </option>';
+								}
+							?>
+						</select>
+					</div>
+					<div class="col-lg-3">
+						<label for="Wcountry">Country<span class="tipstyle">*</span></label>
+					    <select class="form-control" id="Wcountry0" name="Wcountry0">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['ID'].'"';
+								echo '> '.$country[$key]['Country'].' </option>';
+								
+							}
+							?>
+					    </select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="Wemail">Workplace email<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wemail0" id="Wemail0">
+					</div>
+					<div class="col-lg-3">
+						<label for="Wwebaddress">Website<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wwebaddress0" id="Wwebaddress0">
+					</div>
+					<div class="col-lg-3">
+						<label for="Wphone">Phone number<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wphone0" id="Wphone0">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3">
+					Does this workplace offer additional languages?<br/>
+					</div>
+					<div class="col-lg-3">
+						<select class="chosen-select" id="Additionallanguage0" name="Additionallanguage0[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
+							<?php 
+								$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
+								$Language=json_decode($Languagecode, true);
+								foreach($Language  as $key => $value){
+									echo '<option value="'.$Language[$key]['ID'].'"';
+									echo '> '.$Language[$key]['Name'].' </option>';
+								}
+								?>
+						</select>
+					</div>
+					<div class="col-lg-3">
+					Quality In Practice number(QIP):
+						</div>
+					<div class="col-lg-3">
+					<input type="text" class="form-control" name="QIP0" id="QIP0">
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col-lg-3">
+					Does this workplace provide:
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+					<input type="checkbox" name="Electronic-claiming0" id="Electronic-claiming0" value=""> <label for="Electronic-claiming0">Electronic claiming</label>
+					</div>
+					<div class="col-lg-6">
+					<input type="checkbox" name="Hicaps0" id="Hicaps0" value=""> <label for="Hicaps0">HICAPS</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="checkbox" name="Healthpoint0" id="Healthpoint0" value="" > <label for="Healthpoint0">Healthpoint</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="checkbox" name="Departmentva0" id="Departmentva0" value=""> <label for="Departmentva0">Department of Vetarans' Affairs</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="checkbox" name="Workerscompensation0" id="Workerscompensation0" value=""> <label for="Workerscompensation0">Workers compensation</label>
+					</div>
+					<div class="col-lg-6">
+					<input type="checkbox" name="Motora0" id="Motora0" value=""> <label for="Motora0">Motor accident compensation</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="checkbox" name="Medicare0" id="Medicare0" value=""> <label for="Medicare0">Medicare Chronic Disease Management</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="checkbox" name="Homehospital0" id="Homehospital0" value=""> <label for="Homehospital0">Home and hospital visits</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="checkbox" name="Mobilephysiotherapist0" id="Mobilephysiotherapist0" value=""> <label for="Mobilephysiotherapist0">Mobile physiotherapist</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3">
+					Numbers of hours worked<span class="tipstyle">*</span>
+					</div>
+					<div class="col-lg-6">
+						<select class="form-control" id="Number-worked-hours0" name="Number-worked-hours0">
+							<option value="0" disabled>no</option>
+							<?php 
+							$NumberOfHourscode  = file_get_contents("sites/all/themes/evolve/json/NumberOfHours.json");
+							$NumberOfHours=json_decode($NumberOfHourscode, true);
+							foreach($NumberOfHours  as $key => $value){
+								echo '<option value="'.$NumberOfHours[$key]['ID'].'"';
+								echo '> '.$NumberOfHours[$key]['Name'].' </option>';
+							}
+							?>
+						</select>
+					</div>
+				</div>
+				</div>
+			</div>
+				<div class="row"><div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a></div></div>
+				<?php endif; ?>
 			</div>
 			<div class="down4" style="display:none;" >
 				<div class="row">
@@ -1639,7 +2058,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 							$PaymentType=json_decode($PaymentTypecode, true);
 							foreach($PaymentType  as $pair => $value){
-								echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+								echo '<option value="'.$PaymentType[$pair]['Name'].'"';
 								echo '> '.$PaymentType[$pair]['Name'].' </option>';
 								
 							}
@@ -1654,12 +2073,12 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
-						<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
+						<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" required maxlength="16">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-6">
-						<input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
+						<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date" required maxlength="4">
 					</div>
 				</div>
 				<div class="row"> 
@@ -1695,10 +2114,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			</form>
 		</div>
 		<div id="setCardWindow" style="display:none;">
-			<form action="your-details?action=setCard" method="POST" id="setCardForm">
+			<form action="your-details" method="POST" id="setCardForm">
 				<h3>Are you sure you do want to set selected car as main creadit card</h3>
-				<input type="hidden" name="selectedCard">
-				<input type="submit" value="Yes">
+				<input type="hidden" name="setCardID" id="setCardID" value="">
+			    <input type="submit" value="Yes">
 				<a target="_self" class="cancelDeleteButton">No</a>
 			</form>
 		</div>
@@ -1708,7 +2127,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				<input type="hidden" name="selectedCard">
 				<div class="row">
 					<div class="col-lg-6">
-						<input type="date" class="form-control"  name="Expirydate" placeholder="Expire date">
+						<input type="text" class="form-control"  name="Expirydate" placeholder="Expire date">
 					</div>
 				</div>
 				<div class="row"> 
@@ -1726,6 +2145,13 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				</div>
 			</form>
 	    </div>
+		<div id="uploadImage" style="display:none;">
+			<form action="your-details" method="post" enctype="multipart/form-data">
+				Select image to upload:
+				<input type="file" name="fileToUpload" id="fileToUpload">
+				<input type="submit" value="Upload Image" name="PictureUpdate">
+			</form>
+		</div>
 	</div>
 	</div>
 	</div>

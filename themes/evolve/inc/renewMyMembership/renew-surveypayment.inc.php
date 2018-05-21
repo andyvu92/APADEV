@@ -1,12 +1,15 @@
 <?php  
 if(isset($_POST['step2-1'])) {
 	$postInsuranceData = array();
-	if(isset($_SESSION['userID'])){ $postInsuranceData['userID'] = $_SESSION['userID']; } 
-	if(isset($_POST['Claim'])){ $postInsuranceData['Claim'] = $_POST['Claim']; }
-	if(isset($_POST['Facts'])){ $postInsuranceData['Facts'] = $_POST['Facts']; }
-	if(isset($_POST['Disciplinary'])){ $postInsuranceData['Disciplinary'] = $_POST['Disciplinary']; }
-	if(isset($_POST['Decline'])){ $postInsuranceData['Decline'] = $_POST['Decline']; }
-	if(isset($_POST['Oneclaim'])){ $postInsuranceData['Oneclaim'] = $_POST['Oneclaim']; }
+	$postInsuranceData['ID'] = "-1";
+	$postInsuranceData['EntityName'] = "PersonInsuranceData__c";
+	if(isset($_SESSION['LinkId'])){ $postInsuranceData['PersonID'] = $_SESSION['LinkId']; } 
+	//if(isset($_SESSION['userID'])){ $postInsuranceData['userID'] = $_SESSION['userID']; } 
+	//if(isset($_POST['Claim'])){ $postInsuranceData['Claim'] = $_POST['Claim']; }
+	//if(isset($_POST['Facts'])){ $postInsuranceData['Facts'] = $_POST['Facts']; }
+	//if(isset($_POST['Disciplinary'])){ $postInsuranceData['Disciplinary'] = $_POST['Disciplinary']; }
+	//if(isset($_POST['Decline'])){ $postInsuranceData['Decline'] = $_POST['Decline']; }
+	//if(isset($_POST['Oneclaim'])){ $postInsuranceData['Oneclaim'] = $_POST['Oneclaim']; }
 	if(isset($_POST['Addtionalquestion']) && $_POST['Addtionalquestion'] == "1"){ 
 		$postInsuranceData['Addtionalquestion'] = $_POST['Addtionalquestion'];
 		if(isset($_POST['Yearclaim'])){ $postInsuranceData['Yearclaim'] = $_POST['Yearclaim']; }
@@ -16,26 +19,28 @@ if(isset($_POST['step2-1'])) {
 		if(isset($_POST['Finalisedclaim'])){ $postInsuranceData['Finalisedclaim'] = $_POST['Finalisedclaim']; }
         if(isset($_POST['Businiessname'])){ $postInsuranceData['Businiessname'] = $_POST['Businiessname']; }		
 	}
-	else{ $postInsuranceData['Addtionalquestion'] = "0";}
-	//check post insurance data is same as previous insurance data 
-	// 2.2.* - Get user insurance data
+	//test data start from here
+	$postInsuranceData['MalpracticeClaim'] ="false";
+	$postInsuranceData['InsuredClaimRisk'] ="false";
+	$postInsuranceData['ExternalDisciplinaryProceedings'] ="false";
+	$postInsuranceData['InsurerDeclinedInsurance'] ="false";
+	$postInsuranceData['MoreThanOneClaim'] ="false";
+	$postInsuranceData['Yearofclaim'] ="2018";
+	$postInsuranceData['ClaimantName'] ="test";
+	$postInsuranceData['Description'] ="test";
+	$postInsuranceData['AmountPaid'] ="200";
+	$postInsuranceData['ClaimFinalised'] ="false";
+	
+	
+	
+	
+	//test data end here
+    // 2.2.40 - Get user insurance data
 	// Send - 
 	// UserID 
 	// Response -UserID & insurance data
-	$insuranceDataTag=1;// this is important key, to check the user is whether the first time to submit insuranceData.
-	$insuarnceData=array();
-	$insuarnceData['Claim']="Yes";
-	$insuarnceData['Facts']="No"; 
-	$insuarnceData['Disciplinary']="No"; 
-	$insuarnceData['Decline']="No"; 
-	$insuarnceData['Oneclaim']="No";  
-	$insuarnceData['Addtionalquestion']="1";
-	$insuarnceData['Yearclaim']="2018";
-	$insuarnceData['Nameclaim']="test";
-	$insuarnceData['Fulldescription']="test"; 
-	$insuarnceData['Amountpaid']="2000"; 
-	$insuarnceData['Finalisedclaim']="Yes"; 
-	$insuarnceData['Businiessname']="test"; 
+	$data['ID'] = $_SESSION["UserId"];
+	$insuarnceData = GetAptifyData("40", $data,""); // #_SESSION["UserID"];
 	
 	if($postInsuranceData['Claim']!=$insuarnceData['Claim'] || $postInsuranceData['Facts']!=$insuarnceData['Facts'] || $postInsuranceData['Disciplinary']!=$insuarnceData['Disciplinary'] || $postInsuranceData['Decline']!=$insuarnceData['Decline']|| $postInsuranceData['Oneclaim']!=$insuarnceData['Oneclaim']){
 	$submitTag=true;	
@@ -44,12 +49,13 @@ if(isset($_POST['step2-1'])) {
 	if($insuarnceData['Addtionalquestion']=="1" && ($postInsuranceData['Yearclaim'] != $insuarnceData['Yearclaim'] || $postInsuranceData['Nameclaim'] != $insuarnceData['Nameclaim'] || $postInsuranceData['Fulldescription'] != $insuarnceData['Fulldescription']|| $postInsuranceData['Amountpaid'] != $insuarnceData['Amountpaid']|| $postInsuranceData['Finalisedclaim'] != $insuarnceData['Finalisedclaim']|| $postInsuranceData['Businiessname'] != $insuarnceData['Businiessname'])){
 	$submitTag=true;	
 	}
-
-	// 2.2.* Send insurance data to Aptify webservice
+	  
+	// 2.2.41 Send insurance data to Aptify webservice
 	// Send - 
 	// userID & insurance data
 	// Response -??????????????????????set in the future
-    if($insuranceDataTag==0 || $submitTag ) {$testData = GetAptifyData("31", $postInsuranceData);}
+    //if($insuranceDataTag==0 || $submitTag ) {$testData = GetAptifyData("41", $postInsuranceData); print_r($testData);}
+	$testData = GetAptifyData("41", $postInsuranceData); print_r($testData);
 }
   ?>
 <form id="renew-insurance-form" action="renewmymembership" method="POST">
@@ -120,14 +126,25 @@ if(isset($_POST['step2-1'])) {
 	// Send - 
 	// UserID 
 	// Response -payment card list
-	$cardsnum = GetAptifyData("12", "userID");?>
-	<?php if (sizeof($cardsnum)!=0): ?>  
+	$test['id'] = $_SESSION["UserId"];
+	$cardsnum = GetAptifyData("12", $test);
+	print_r($cardsnum);?>
+	<?php if (sizeof($cardsnum["results"])!=0): ?>  
 		<div class="row">					
 			<fieldset>
 				<select id="Paymentcard" name="Paymentcard">
-				<?php foreach( $cardsnum["paymentcards"] as $cardnum):  ?>
-					<option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardnum["Description"]=="Y") echo "selected"; ?> data-class="<?php echo  $cardnum["Payment-method"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
-				<?php endforeach; ?>
+				<?php
+					
+						foreach( $cardsnum["results"] as $cardnum) {
+							echo '<option value="'.$cardnum["Creditcards-ID"].'"';
+							if($cardnum["IsDefault"]=="1") {
+							echo "selected ";
+						}
+						echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
+						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+						}
+					
+				?>
 				</select>
 			</fieldset>
 		</div> 
@@ -162,7 +179,7 @@ if(isset($_POST['step2-1'])) {
 		</div>
 		<div class="row">
 			<div class="col-lg-4">
-				<input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
+				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date" maxlength="4">
 			</div>
 		</div>
 		<div class="row">
@@ -174,15 +191,20 @@ if(isset($_POST['step2-1'])) {
 		<input type="hidden" name="addCard" value="0">
 	</div>
 	<?php endif; ?>  
-	<?php if (sizeof($cardsnum)==0): ?> 
+	<?php if (sizeof($cardsnum["results"])==0): ?> 
 	<div id="anothercardBlock" class="col-lg-12">					   
 		<div class="row">
 			<div class="col-lg-3">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-					<option value="" disabled>Card type</option>
-					<option value="AE">American Express</option>
-					<option value="Visa">Visa</option>
-					<option value="Mastercard">Mastercard</option>
+					<?php 
+					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+					$PaymentType=json_decode($PaymentTypecode, true);
+					foreach($PaymentType  as $pair => $value){
+						echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+						echo '> '.$PaymentType[$pair]['Name'].' </option>';
+						
+					}
+				?>	
 				</select>
 			</div>
 		</div>
@@ -198,10 +220,10 @@ if(isset($_POST['step2-1'])) {
 		</div>
 		<div class="row">
 			<div class="col-lg-4">
-				<input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
+				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date" maxlength="4">
 			</div>
 			<div class="col-lg-3">
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 		</div>
 		<div class="row"><label for="addcardtag">Do you want to save this card</label><input type="checkbox" id="addcardtag" name="addcardtag" value="1" checked></div>

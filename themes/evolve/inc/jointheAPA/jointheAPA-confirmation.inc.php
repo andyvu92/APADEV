@@ -3,20 +3,36 @@ if(isset($_POST['step3'])) {
 	//continue to get the review data
 	$postReviewData = $_SESSION['postReviewData'];
 	if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
-	if(isset($_POST['rollover'])){ $postReviewData['Rollover'] = $_POST['rollover']; }
+	//if(isset($_POST['rollover'])){ $postReviewData['Rollover'] = $_POST['rollover']; }
 	if(isset($_SESSION["tempcard"])){
 		$cardDetails = $_SESSION["tempcard"];
-		$postReviewData['Addcard'] = "No";
-		$postReviewData['Payment-method'] = $cardDetails['Payment-method'];
-		$postReviewData['Cardno'] = $cardDetails['Cardno'];
-		$postReviewData['Expiry-date'] = $cardDetails['Expiry-date'];
-		$postReviewData['CCV'] = $cardDetails['CCV'];
+		//$postReviewData['Payment-method'] = $cardDetails['Payment-method'];
+		//$postReviewData['Cardno'] = $cardDetails['Cardno'];
+		//$postReviewData['Expiry-date'] = $cardDetails['Expiry-date'];
+		//$postReviewData['CCV'] = $cardDetails['CCV'];
+		//test data
+		$postReviewData['PaymentTypeID'] = $cardDetails['Payment-method'];
+		$postReviewData['CCNumber'] = $cardDetails['Cardno'];
+		$postReviewData['CCExpireDate'] = $cardDetails['Expiry-date'];
+		$postReviewData['CCSecurityNumber'] = $cardDetails['CCV'];	
 	}
+	else{
+		$postReviewData['PaymentTypeID'] = "";
+		$postReviewData['CCNumber'] = "";
+		$postReviewData['CCExpireDate'] = "";
+		$postReviewData['CCSecurityNumber'] = "";
+	}
+	//test data
+	$postReviewData['Paymentoption']=0;  
+	$postReviewData['Card_number']="2";  	
+	$postReviewData['InsuranceApplied'] = 0;
+		
 	// 2.2.26 - Register a new order
 	// Send - 
 	// userID&Paymentoption&PRFdonation&Rollover&Card_number&productID
 	// Response -Register a new order successfully
-	GetAptifyData("26", $postReviewData);
+	$registerOuts = GetAptifyData("26", $postReviewData);
+
 	//put extra code when using API to get the status of order, if it is successful, will save terms and conditions on APA side
 	//save the terms and conditons on APA side
 	$dataArray = array();
@@ -26,9 +42,11 @@ if(isset($_POST['step3'])) {
 	$dataArray['ProductList'] = implode(",",$postReviewData['productID']);
 	$dataArray['Type'] = "J";
 	forCreateRecordFunc($dataArray);
-	//delete session:
+	//delete session: really important!!!!!!!!
 	unset($_SESSION["postReviewData"]);
 	unset($_SESSION["tempcard"]);
+	unset($_SESSION["MembershipProductID"]);
+	unset($_SESSION["NationalProductID"]);
 }
 ?>
 <?php
@@ -66,11 +84,11 @@ include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 					// Send - 
 					// UserID & Invoice_ID
 					// Response -Invoice PDF
-					$send["UserID"] = $_SESSION["userID"];
+					$send["UserID"] = $_SESSION["UserId"];
 					$send["Invoice_ID"] = "1111";  
 					$invoiceAPI = GetAptifyData("18", $send); 
 					// delete shopping cart data from APA database; put the response status validation here!!!!!!!
-					$userID = $_SESSION["userID"];
+					$userID = $_SESSION["UserId"];
 					$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
 					$type = "PD";
 					try {

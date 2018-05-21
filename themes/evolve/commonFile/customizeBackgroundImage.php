@@ -1,7 +1,7 @@
 <?php 
 $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 $url= $link.$_SERVER['REQUEST_URI']; 
-$_SESSION["userID"] ="1";
+
 ?>
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -14,7 +14,7 @@ $_SESSION["userID"] ="1";
 			</div>
 		<div class="modal-body">
 			<form name="formradio" action="<?php echo $url;?>" method="POST"">
-				<input type="hidden" name="userID" value="<?php if(isset($_SESSION["userID"])){ $userID = $_SESSION["userID"]; echo $userID;}  ?>"> 
+				<input type="hidden" name="userID" value="<?php if(isset($_SESSION["UserId"])){ $userID = $_SESSION["UserId"]; echo $userID;}  ?>"> 
 				<input type="hidden" name="update">  
 				<label> <input type="radio" name="background" value="1" id="background1"><img src="../sites/default/files/DASHBOARD_PIC_1170X600.jpg"></label>
 				<label> <input type="radio" name="background" value="2"  id="background2"><img src="../sites/default/files/DASHBOARD_PIC_1170X600_2.jpg"></label>

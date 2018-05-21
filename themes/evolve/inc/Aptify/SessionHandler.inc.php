@@ -31,6 +31,11 @@ function deleteSession() {
 	unset($_SESSION['Database']);
 	unset($_SESSION['AptifyUserID']);
 	// user details' data
+	//Added by JingHu
+	unset($_SESSION["workplaceSettings"]);
+	unset($_SESSION["interestAreas"]);
+	unset($_SESSION["Language"]);
+	//End Added by JingHu
 	/*
 	unset($_SESSION['Logfgh']);
 	unset($_SESSION['Logfgh']);

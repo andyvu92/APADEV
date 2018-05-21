@@ -44,7 +44,7 @@ function getProductList($userID){
 	$arrayReturn = array();
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
 	//$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND type=:type');
-	$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID');
+	$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND productID != "PRF" AND type != "PD"');
 	$shoppingcartGet->bindValue(':userID', $userID);
 	//$shoppingcartGet->bindValue(':type', $type);
 	$shoppingcartGet->execute();
@@ -82,29 +82,36 @@ elseif(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['ad
 	$_SESSION['tempcard'] = $tempcard;
 		
 }
-// 2.2.26 Register a new member order
+// 2.2.27 Renew a new member order
 // Send - 
 // UserID&Paymentoption&PRFdonation&Rollover&productID&Insurancelist
 // Response - Invoice_ID
-if(isset($_SESSION['userID'])){ $postReviewData['userID'] = $_SESSION['userID']; } 
-if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption']; }
+if(isset($_SESSION['UserId'])){ $postReviewData['userID'] = $_SESSION['UserId']; } 
+if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption'] == '1' ? 1:0; }
+//test data
+
+$postReviewData['InstallmentFor'] = "Membership";
 if(isset($_POST['PRF'])){ 
 $postReviewData['PRF'] = $_POST['PRF']; 
 //check is there PRF product existed for this user
 checkShoppingCart($userID, $prodcutID="PRF");
 //save PRF product into APA database function
-createShoppingCart($userID=$_SESSION['userID'], $productID="PRF", $coupon=$_POST['PRF']);  
+createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $coupon=$_POST['PRF']);  
 }
 if(isset($_POST['Rollover'])){ $postReviewData['Rollover'] = $_POST['Rollover']; }
-if(isset($_POST['Installpayment-frequency'])){ $postReviewData['Installpayment-frequency'] = $_POST['Installpayment-frequency']; }
+//if(isset($_POST['Installpayment-frequency'])){ $postReviewData['Installpayment-frequency'] = $_POST['Installpayment-frequency']; }
+if(isset($_POST['Installpayment-frequency'])){ $postReviewData['InstallmentFrequency'] = $_POST['Installpayment-frequency']; }
+//test data
+
 // 2.2.31 Get Membership prodcut price
 // Send - 
 // UserID&productID
 // Response - Title&Price&Continue instalment
-$prodcutID = getProductList($_SESSION['userID']);
-$postReviewData['productID'] = $prodcutID;
+$productsArray['ProductID'] = getProductList($_SESSION['UserId']);
+$prodcutID = $productsArray;
+$postReviewData['productID'] = getProductList($_SESSION['UserId']);
 $products = GetAptifyData("31", $prodcutID);
-
+print_r($products);
 //store data in the session
 $_SESSION["postReviewData"] =  array();
 $_SESSION["postReviewData"] = $postReviewData;
@@ -115,30 +122,37 @@ if(isset($_POST['stepAdd'])) {
 // Send - 
 // UserID&Payment-method&Name-on-card&Cardno&Expiry-date&CCV
 // Response - Add payment card successful
-if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; }
-if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
-//if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
-if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
-if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
-if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
-if(isset($_POST['addNewCard'])&& $_POST['addNewCard'] == "1") { GetAptifyData("15", $postPaymentData); }  
-//use webservice 2.2.31 Get Membership prodcut price
-$prodcutID = getProductList($_SESSION['userID']);
-$products = GetAptifyData("31", $prodcutID);
+	if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
+	if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
+	//if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
+	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
+	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
+	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
+	GetAptifyData("15", $postPaymentData);
 
 }
 if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
-$usedCard = $_POST['Paymentcard']; 
-//use webservice 2.2.13 update payment method
-$postCard['userID'] = $_SESSION['userID'];
-$postCard['Creditcard-ID'] = $usedCard;
-GetAptifyData("13", $postCard);
-}
-// 2.2.12 Get payment listing
+	$updateCard["UserID"] = $_SESSION['UserId'];
+	$updateCard["SpmID"] = $_POST['Paymentcard'];
+	$updateCard["ExpireMonthYear"] = "";
+	$updateCard["CCSNumber"] = "";
+	$updateCard["IsDefault"] = "1";
+	$updateCard["IsActive"] = "";
+	// 2.2.13 - update payment method-3-set main card
 	// Send - 
-	// UserID & detail data
+	// UserID, Creditcard-ID
+	// Response -
+	// N/A.
+	$updateCards = GetAptifyData("13", $updateCard); 
+	print_r($updateCards);
+}
+	// 2.2.12 - Get payment list
+	// Send - 
+	// UserID 
 	// Response -payment card list
-	$cardsnum = GetAptifyData("12", $_SESSION['userID']);   
+	$test['id'] = $_SESSION["UserId"];
+	$cardsnum = GetAptifyData("12", $test);
+	print_r($cardsnum);
 ?> 
 <div class="down8" <?php if(isset($_POST['step2'])|| isset($_POST['stepAdd']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
 	<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
@@ -151,9 +165,9 @@ GetAptifyData("13", $postCard);
 				</tr>
 				<?php 
 				$price = "";
-				foreach( $products['products'] as $product){
+				foreach( $products as $product){
 				echo "<tr>";
-				echo "<td>".$product['ProdcutName']."</td>";
+				echo "<td>".$product['Title']."</td>";
 				echo "<td>A$".$product['Price']."</td>";
 				$price += $product['Price'];
 				echo '<td>delete</td>';
@@ -167,14 +181,21 @@ GetAptifyData("13", $postCard);
 	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 Membpaymentsiderbar">
 		<p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
 				<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
-		<?php if ((sizeof($cardsnum)!=0) && (!isset($_SESSION['tempcard']))): ?>   
+		<?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>   
 			<fieldset>
 				<select  id="Paymentcard" name="Paymentcard" disabled>
-				
-					<?php foreach( $cardsnum["paymentcards"] as $cardnum):  ?>
-					<option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardnum["Description"]=="Y") echo "selected"; ?> data-class="<?php echo  $cardnum["Payment-method"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
-					<?php endforeach; ?>
-				
+				<?php
+					
+						foreach( $cardsnum["results"] as $cardnum) {
+							echo '<option value="'.$cardnum["Creditcards-ID"].'"';
+							if($cardnum["IsDefault"]=="1") {
+							echo "selected ";
+						}
+						echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
+						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+						}
+					
+				?>
 				</select>
 			</fieldset>
 		<?php endif; ?>  

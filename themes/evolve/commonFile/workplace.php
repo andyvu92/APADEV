@@ -2,6 +2,7 @@
 $i = $_POST['count'];
 $sessionWorkplaceSetting = json_decode($_POST['sessionWorkplaceSetting']);
 $sessioninterestAreas = json_decode($_POST['sessioninterestAreas']);
+$sessionLanguage = json_decode($_POST['sessionLanguage']);
 $interestAreas= $sessioninterestAreas;
 
 echo '<div class="row"><div class="col-lg-6">&nbsp;</div><div class="col-lg-6"> <label for="Findphysio'.$i.'"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
@@ -21,8 +22,8 @@ Workplace setting
 <div class="col-lg-9">
 <select class="form-control" id="Workplace-setting'.$i.'" name="workplace-setting'.$i.'">';
  	$workplaceSettings = $sessionWorkplaceSetting;
-	foreach($workplaceSettings->WorkplaceSettings  as $key => $object){
-		echo '<option value="'.$object->code.'">'.$object->name.'</option>';
+	foreach($workplaceSettings  as $key => $object){
+		echo '<option value="'.$object->ID.'">'.$object->Name.'</option>';
 	}
 echo '</select>
 </div>
@@ -88,60 +89,12 @@ echo '</select>
 Does this workplace offer additional languages?
 </div>
 <div class="col-lg-3">
-<select class="chosen-select" multiple id="Additionallanguage'.$i.'" name="Additionallanguage'.$i.'[]">
-	<option value="NONE" disabled="" >no</option>
-	<option value="1"> Afrikaans </option>
-	<option value="2"> Arabic </option>
-	<option value="3"> Bosnian </option>
-	<option value="4"> Cantonese </option>
-	<option value="5"> Chinese </option>
-	<option value="6"> Chzech </option>
-	<option value="7"> Croation </option>
-	<option value="8"> Danish </option>
-	<option value="9"> Dutch </option>
-	<option value="10"> Egyptian </option>
-	<option value="11"> English </option>
-	<option value="12"> Filipino </option>
-	<option value="13"> French </option>
-	<option value="14"> German </option>
-	<option value="15"> Greek </option>
-	<option value="16"> Hebrew </option>
-	<option value="17"> Hindi </option>
-	<option value="18"> Hokkien </option>
-	<option value="19"> Hungarian </option>
-	<option value="20"> Indonesian </option>
-	<option value="21"> Italian </option>
-	<option value="22"> Japanese </option>
-	<option value="23"> Korean </option>
-	<option value="24"> Latvian </option>
-	<option value="25"> Lebanese </option>
-	<option value="27"> Macedonian </option>
-	<option value="30"> Malay </option>
-	<option value="28"> Maltese </option>
-	<option value="29"> Mandaron </option>
-	<option value="26"> Marathi </option>
-	<option value="31"> Norwegian </option>
-	<option value="32"> Poland </option>
-	<option value="33"> Portuguese </option>
-	<option value="34"> Punjabi </option>
-	<option value="35"> Russian </option>
-	<option value="37"> Serbian </option>
-	<option value="38"> Sign Language </option>
-	<option value="36"> Slovak </option>
-	<option value="39"> Spanish </option>
-	<option value="40"> Swedish </option>
-	<option value="41"> Swiss </option>
-	<option value="43"> Taiwanese </option>
-	<option value="42"> Tamil </option>
-	<option value="44"> Teo-Chew </option>
-	<option value="45"> Thai </option>
-	<option value="46"> Turkish </option>
-	<option value="47"> Ukrainian </option>
-	<option value="48"> Urdu </option>
-	<option value="49"> Vietnamese </option>
-	<option value="50"> Yiddish </option>
-	<option value="51"> Yugoslav </option>
-</select>
+<select class="chosen-select" multiple id="Additionallanguage'.$i.'" name="Additionallanguage'.$i.'[]">';
+	$Language = $sessionLanguage;
+	foreach($Language  as $key => $object){
+		echo '<option value="'.$object->ID.'">'.$object->Name.'</option>';
+	}
+echo '</select>
 </div>
 <div class="col-lg-3">
 Quality In Practice number(QIP):

@@ -1,5 +1,5 @@
 <?php
-//use session: $_SESSION['userID'],$_SESSION["postReviewData"]
+//use session: $_SESSION['UserID'],$_SESSION["postReviewData"]
 //save PRF product into APA database function
 function createShoppingCart($userID, $productID,$coupon){
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
@@ -47,7 +47,7 @@ if(isset($_POST['step2'])) {
 	// userID, Payment-method,Name-on-card,Cardno,Expiry-date,CCV
 	// Response -Add Success message 
 	if(isset($_POST['addCard']) && $_POST['addCard'] == "1"  && isset($_POST['addcardtag'])){
-		if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; }
+		if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
 		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
 		//if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
 		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
@@ -58,7 +58,7 @@ if(isset($_POST['step2'])) {
 	elseif(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])){
 		$tempcard = array();
 		$tempcard['Payment-method'] = $_POST['Cardtype'];
-		$tempcard['Cardno'] = $_POST['Cardnumber'];
+	    $tempcard['Cardno'] = $_POST['Cardnumber'];
 		$tempcard['Expiry-date'] = $_POST['Expirydate']; 
 		$tempcard['CCV'] = $_POST['CCV'];
 		$_SESSION['tempcard'] = $tempcard;
@@ -68,25 +68,27 @@ if(isset($_POST['step2'])) {
 	// Send - 
 	// userID & order data
 	// Response -payment invoice ID
-	if(isset($_SESSION['userID'])){ $postReviewData['userID'] = $_SESSION['userID']; } 
-	if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption']; }
+	if(isset($_SESSION['UserId'])){ $postReviewData['userID'] = $_SESSION['UserId'];  } 
+	if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption'] == '1' ? 1:0; }
+	$postReviewData['InstallmentFor'] = "Membership";
 	if(isset($_POST['PRF'])){ 
-		$postReviewData['PRF'] = $_POST['PRF']; 
+		$postReviewData['PRFdonation'] = $_POST['PRF']; 
 		//check is there PRF product existed for this user
-		checkShoppingCart($userID, $prodcutID="PRF");
+		checkShoppingCart($userID=$_SESSION['UserId'], $prodcutID="PRF");
 		//save PRF product into APA database function
-		createShoppingCart($userID=$_SESSION['userID'], $productID="PRF", $coupon=$_POST['PRF']);  
+		createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $coupon=$_POST['PRF']);  
 	}
-	if(isset($_POST['Rollover'])){ $postReviewData['Rollover'] = $_POST['Rollover']; }
-	if(isset($_POST['Installpayment-frequency'])){ $postReviewData['Installpayment-frequency'] = $_POST['Installpayment-frequency']; }
+	//if(isset($_POST['Rollover'])){ $postReviewData['Rollover'] = $_POST['Rollover']; }
+	if(isset($_POST['Installpayment-frequency'])){ $postReviewData['InstallmentFrequency'] = $_POST['Installpayment-frequency']; }
+	
+	
+}
 	//get productID list from local database;
 	function getProductList($userID){
 		$arrayReturn = array();
 		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
-		//$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND type=:type');
-		$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID');
+		$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND productID != "PRF" AND type != "PD"');
 		$shoppingcartGet->bindValue(':userID', $userID);
-		//$shoppingcartGet->bindValue(':type', $type);
 		$shoppingcartGet->execute();
 		if($shoppingcartGet->rowCount()>0) { 
 			foreach ($shoppingcartGet as $row) {
@@ -95,30 +97,42 @@ if(isset($_POST['step2'])) {
 		}	
 		$shoppingcartGet = null;
 		return $arrayReturn;
-		}
-	// 2.2.31 Get Membership prodcut price
+	}
+	  // 2.2.31 Get Membership prodcut price
 	// Send - 
 	// userID & product list
 	// Response -Membership prodcut price
-	$prodcutID = getProductList($_SESSION['userID']);
-	$postReviewData['productID'] = $prodcutID;
+	$productsArray['ProductID']=getProductList($_SESSION['UserId']);
+	$prodcutID = $productsArray;
+	$postReviewData['productID'] = getProductList($_SESSION['UserId']);
 	$products = GetAptifyData("31", $prodcutID);
+
+ 
   	//store data in the session
 	$_SESSION["postReviewData"] =  array();
-	$_SESSION["postReviewData"] = $postReviewData;
-  }
-	if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
-		$usedCard = $_POST['Paymentcard']; 
-		//use webservice 2.2.13 update payment method
-		$postCard['userID'] = $_SESSION['userID'];
-		$postCard['Creditcard-ID'] = $usedCard;
-		GetAptifyData("13", $postCard);
-	} 
-	// 2.2.12 Get payment listing
+	$_SESSION["postReviewData"] = $postReviewData;  
+if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
+		$updateCard["UserID"] = $_SESSION['UserId'];
+		$updateCard["SpmID"] = $_POST['Paymentcard'];
+		$updateCard["ExpireMonthYear"] = "";
+		$updateCard["CCSNumber"] = "";
+		$updateCard["IsDefault"] = "1";
+		$updateCard["IsActive"] = "";
+		// 2.2.13 - update payment method-3-set main card
+		// Send - 
+		// UserID, Creditcard-ID
+		// Response -
+		// N/A.
+		$updateCards = GetAptifyData("13", $updateCard); 
+
+} 
+	// 2.2.12 - Get payment list
 	// Send - 
-	// UserID & detail data
+	// UserID 
 	// Response -payment card list
-	$cardsnum = GetAptifyData("12", $_SESSION['userID']);
+	$cardData['id'] = $_SESSION["UserId"];
+	$cardsnum = GetAptifyData("12", $cardData);
+	print_r($cardsnum);
  ?> 
 <form id ="join-review-form" action="joinconfirmation" method="POST">
 	<input type="hidden" name="step3" value="3">
@@ -133,9 +147,9 @@ if(isset($_POST['step2'])) {
 					</tr>
 					<?php 
 					$price = "";
-					foreach( $products['products'] as $product){
+					foreach( $products as $product){
 						echo "<tr>";
-						echo "<td>".$product['ProdcutName']."</td>";
+						echo "<td>".$product['Title']."</td>";
 						echo "<td>A$".$product['Price']."</td>";
 						$price += $product['Price'];
 						echo '<td>delete</td>';
@@ -150,14 +164,21 @@ if(isset($_POST['step2'])) {
 		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 Membpaymentsiderbar">
 		<p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
 		<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
-		<?php if ((sizeof($cardsnum)!=0) && (!isset($_SESSION['tempcard']))): ?>   
+		<?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>   
 			<fieldset>
 				<select  id="Paymentcard" name="Paymentcard" disabled>
-				
-					<?php foreach( $cardsnum["paymentcards"] as $cardnum):  ?>
-					<option value="<?php echo  $cardnum["Digitsnumber"];?>" <?php if($cardnum["Description"]=="Y") echo "selected"; ?> data-class="<?php echo  $cardnum["Payment-method"];?>">Credit card ending with <?php echo  $cardnum["Digitsnumber"];?></option>
-					<?php endforeach; ?>
-				
+				<?php
+					
+						foreach( $cardsnum["results"] as $cardnum) {
+							echo '<option value="'.$cardnum["Creditcards-ID"].'"';
+							if($cardnum["IsDefault"]=="1") {
+							echo "selected ";
+						}
+						echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
+						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+						}
+					
+				?>
 				</select>
 			</fieldset>
 		<?php endif; ?>  

@@ -107,7 +107,28 @@ function getDropdown(){
 	$fp = fopen(__DIR__ . '/../json/NumberOfHours.json', 'w');
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);
-	
+	// write WorkPlaceSettings json file
+	foreach($result['WorkPlaceSettings']  as $lines){
+		$ID = $lines['ID'];
+		$Name = $lines['Name'];
+		$IsActive = $lines['IsActive'];
+		$IsPublic = $lines['IsPublic'];
+		$arrayWorkPlaceSettings[] = array('ID'=>$ID, 'Name'=>$Name, 'IsActive'=>$IsActive, 'IsPublic'=>$IsPublic);	
+    }
+	$response= $arrayWorkPlaceSettings;
+	$fp = fopen(__DIR__ . '/../json/WorkPlaceSettings.json', 'w');
+    $test = fwrite($fp, json_encode($response));
+	fclose($fp);
+	// write Educationdegree json file
+	foreach($result['Educationdegree']  as $lines){
+		$ID = $lines['ID'];
+		$Name = $lines['Name'];
+		$arrayEducationdegree[] = array('ID'=>$ID, 'Name'=>$Name);	
+    }
+	$response= $arrayEducationdegree;
+	$fp = fopen(__DIR__ . '/../json/Educationdegree.json', 'w');
+    $test = fwrite($fp, json_encode($response));
+	fclose($fp);
 }
 getDropdown();
 ?>

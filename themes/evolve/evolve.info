@@ -94,6 +94,7 @@ lessc[] = lessc/Drupal/Policy.less
 lessc[] = lessc/Drupal/Research.less
 lessc[] = lessc/Drupal/Resource.less
 lessc[] = lessc/custom.less
+lessc[] = lessc/Drupal/Advocacy.less
 lessc[] = lessc/Drupal/Home.less
 lessc[] = Survey/Survey.less
 

@@ -9,15 +9,17 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Lastname'])){ $postData['Lastname'] = $_POST['Lastname']; }
 	if(isset($_POST['Birth'])){ $postData['Birth'] = $_POST['Birth']; }
 	if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
-	if(isset($_POST['country-code'])){ $postData['Home-phone-number'][0] = $_POST['country-code']; }
-	if(isset($_POST['area-code'])){ $postData['Home-phone-number'][1] = $_POST['area-code']; }
-	if(isset($_POST['phone-number'])){ $postData['Home-phone-number'][2] = $_POST['phone-number']; }
+	if(isset($_POST['country-code'])){ $postData['Home-phone-countrycode'] = $_POST['country-code']; }
+	if(isset($_POST['area-code'])){ $postData['Home-phone-areacode'] = $_POST['area-code']; }
+	if(isset($_POST['phone-number'])){ $postData['Home-phone-number'] = $_POST['phone-number']; }
+	if(isset($_POST['Mobile-countrycode'])){ $postData['Mobile-countrycode'] = $_POST['Mobile-countrycode']; }
+	if(isset($_POST['Mobile-areacode'])){ $postData['Mobile-areacode'] = $_POST['Mobile-areacode']; }
 	if(isset($_POST['Mobile-number'])){ $postData['Mobile-number'] = $_POST['Mobile-number']; }
 	if(isset($_POST['Aboriginal'])){ $postData['Aboriginal'] = $_POST['Aboriginal']; }
 	if(isset($_POST['BuildingName'])){ $postData['BuildingName'] = $_POST['BuildingName']; }
-	if(isset($_POST['Unit'])){ $postData['Unit'] = $_POST['Unit']; }
+	if(isset($_POST['Address_Line_1'])){ $postData['Address_Line_1'] = $_POST['Address_Line_1']; }
 	if(isset($_POST['Pobox'])){ $postData['Pobox'] = $_POST['Pobox']; }
-	if(isset($_POST['Street'])){ $postData['Street'] = $_POST['Street']; }
+	if(isset($_POST['Address_Line_2'])){ $postData['Address_Line_2'] = $_POST['Address_Line_2']; }
 	if(isset($_POST['Suburb'])){ $postData['Suburb'] = $_POST['Suburb']; }
 	if(isset($_POST['Postcode'])){ $postData['Postcode'] = $_POST['Postcode']; }
 	if(isset($_POST['State'])){ $postData['State'] = $_POST['State']; }
@@ -134,7 +136,7 @@ if(isset($_POST['step1'])) {
 	// Send - 
 	// UserID 
 	// Response - UserID & detail data
-	GetAptifyData("5", $postData);
+	$postData['userID']=$_SESSION['UserId'];$testdata = GetAptifyData("5", $postData); print_r($testdata);
 	unset($_SESSION["Regional-group"]);
 	/*General function: save data to APA shopping cart database;*/
 	/*Parameters: $userID, $productID,$type;*/
@@ -177,7 +179,7 @@ function checkShoppingCart($userID, $type){
 				die();
 	    }
 }
-	$userID = $postData['Memberid'];
+	$userID = $_SESSION['UserId'];
 
 	$products = array();
 
@@ -204,7 +206,9 @@ function checkShoppingCart($userID, $type){
 // Send - 
 // UserID 
 // Response - UserID & detail data
-$details = GetAptifyData("4", "UserID");// #_SESSION["UserID"];
+$data = "UserID=".$_SESSION["UserId"];
+$details = GetAptifyData("4", $data,"");// #_SESSION["UserID"];
+print_r($details);
 if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details['Regional-group'];}
 ?>
 <form id="your-detail-form" action="renewmymembership" method="POST">
@@ -253,7 +257,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 			    <div class="row">
 					<div class="col-lg-4">
 					    <label for="">Birth Date<span class="tipstyle">*</span></label>
-					    <input type="date" class="form-control" name="Birth" <?php if (empty($details['Birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.$details['Birth'].'"'; }?>>
+					    <input type="date" class="form-control" name="Birth" <?php if (empty($details['Birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['Birth']).'"';}?>>
 					</div>
 					<div class="col-lg-3 col-lg-offset-1">
 					    <label for="">Gender<span class="tipstyle">*</span></label>
@@ -266,32 +270,56 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 				</div>
 				<div class="row">
+					
 					<div class="col-lg-2">
-					   <label for="">Country code</label>
-					   	<select class="form-control" id="country-code" name="country-code">
+						<label for="">Country code</label>
+						<select class="form-control" id="country-code" name="country-code">
 						<?php
-                        $countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-						$country=json_decode($countrycode, true);						
-						foreach($country  as $key => $value){
-						   	echo '<option value="'.$country[$key]['TelephoneCode'].'"';
-							if ($details['Home-phone-number'][0] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; } 
-							echo '> '.$country[$key]['Country'].' </option>';
-						}
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);						
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['ID'].'"';
+								if ($details['Home-phone-countrycode'] == $country[$key]['ID']){ echo "selected='selected'"; } 
+								echo '> '.$country[$key]['Country'].' </option>';
+							}
 						?>
 						</select>
 					</div>
 					<div class="col-lg-2">
-					   <label for="">Area code</label>
-					   <input type="text" class="form-control" name="area-code" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-number'][1].'"'; }?>  pattern="[0-9]{10}">
+						<label for="">Area code</label>
+						<input type="text" class="form-control" name="area-code" <?php if (empty($details['Home-phone-areacode'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-areacode'].'"'; }?>  >
 					</div>
 					<div class="col-lg-4">
-					   <label for="">Phone number</label>
-					   <input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'][2].'"'; }?>  pattern="[0-9]{10}">
+						<label for="">Phone number</label>
+						<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  >
+					</div>
+					
+				</div>
+				<div class="row">
+					
+					<div class="col-lg-2">
+						<label for="">Country code</label>
+						<select class="form-control" id="Mobile-countrycode" name="Mobile-countrycode">
+						<?php
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);						
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['ID'].'"';
+								if ($details['Mobile-countrycode'] == $country[$key]['ID']){ echo "selected='selected'"; } 
+								echo '> '.$country[$key]['Country'].' </option>';
+							}
+						?>
+						</select>
+					</div>
+					<div class="col-lg-2">
+						<label for="">Area code</label>
+						<input type="text" class="form-control" name="Mobile-areacode" <?php if (empty($details['Mobile-areacode'])) {echo "placeholder='Mobile Area code'";}   else{ echo 'value="'.$details['Mobile-areacode'].'"'; }?>  >
 					</div>
 					<div class="col-lg-4">
-					   <label for="">Mobile number</label>
-					   <input type="text" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile:0456089756'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?> pattern="[0-9]{9}">
+						<label for="">Mobile number</label>
+						<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  >
 					</div>
+					
 				</div>
 				<div class="row">
 					<div class="col-lg-9">
@@ -468,7 +496,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 			<div class="row">
 				<div class="col-lg-6">
 					<label for="">Member ID(Your email address)<span class="tipstyle">*</span></label>
-					<input type="text" class="form-control" name="Memberid" <?php if (empty($details['Memberno'])) {echo "placeholder='Member no.'";}   else{ echo 'value="'.$details['Memberno'].'"';$_SESSION['userID'] = $details['Memberno'];}?> readonly>
+					<input type="text" class="form-control" name="Memberid" <?php if (empty($details['Memberid'])) {echo "placeholder='Member no.'";}   else{ echo 'value="'.$details['Memberid'].'"';}?> readonly>
 				</div>
 			</div>
 			<div class="row">
@@ -486,7 +514,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						$MemberType=json_decode($MemberTypecode, true);
 						foreach($MemberType  as $key => $value){
 							echo '<option value="'.$MemberType[$key]['ID'].'"';
-							if ($details['MemberType'] == $MemberType[$key]['ID']){ echo "selected='selected'"; } 
+							if ($details['MemberTypeID'] == $MemberType[$key]['ID']){ echo "selected='selected'"; } 
 							echo '> '.$MemberType[$key]['Name'].' </option>';
 						}
 					    ?>
@@ -890,6 +918,222 @@ jQuery(document).ready(function($) {
 				</div>
 			<?php endforeach; ?>
 			</div>
+			<?php if(sizeof($details['Workplaces'])==0):?>
+				<ul class="nav nav-tabs" id="tabmenu">
+			<li class ="active"><a data-toggle="tab" href="#workplace0"><?php echo "Workplace0";?></a></li>
+			</ul>
+			<div id="workplaceblocks">
+				<div id="workplace0" class='tab-pane fade in active'> 
+					<div class="row"><div class="col-lg-6"></div><div class="col-lg-6"> <label for="Findphysio"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
+					<input type="checkbox" name="Findphysio0" id="Findphysio" value="" ></div></div>
+					<div class="row">
+						<div class="col-lg-12"> <label for="Findabuddy0"><strong>NOTE:</strong>Please list my details in the physio</label>
+							<input type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
+						</div>
+				    </div>
+				<div class="row">
+					<div class="col-lg-12">
+						<label for="Name-of-workplace">Name of workplace<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Name-of-workplace0" id="Name-of-workplace0">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3">
+					Workplace setting<span class="tipstyle">*</span>
+					</div>
+					<div class="col-lg-9">
+						<select class="form-control" id="Workplace-setting0" name="Workplace-setting0">
+						<?php
+							// 2.2.36 - get workplace settings list
+							// Send - 
+							// Response - get workplace settings from Aptify via webserice return Json data;
+							// stroe workplace settings into the session
+							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/workplaceSettings.json");
+							$workplaceSettings=json_decode($workplaceSettingscode, true);	
+							$_SESSION["workplaceSettings"] = $workplaceSettings;
+							foreach($workplaceSettings  as $pair => $value){
+							echo '<option value="'.$workplaceSettings[$pair]["ID"].'"';
+							echo '> '.$workplaceSettings[$pair]["Name"].' </option>'; 
+							}							
+						?>
+						</select>
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col-lg-3">
+					Workplace treatment area:
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col-lg-6">
+						<select class="chosen-select" id="WTreatmentarea0" name="WTreatmentarea0" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+						<?php 
+						// get interest area from Aptify via webserice return Json data;
+						$interestAreas= GetAptifyData("37","request");
+						$_SESSION["interestAreas"] = $interestAreas;
+						?>
+						<?php 
+						foreach($interestAreas['InterestAreas']  as $lines){
+							echo '<option value="'.$lines["ListCode"].'"';
+							echo '> '.$lines["ListName"].' </option>'; 
+						}
+						?>
+						</select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="BuildingName">Building Name</label>
+						<input type="text" class="form-control" name="WBuildingName0" id="WBuildingName0">
+					</div>
+					<div class="col-lg-2">
+					<label for="WAddress_Line_10">Address line 1<span class="tipstyle">*</span></label>
+					<input type="text" class="form-control" name="WAddress_Line_10" id="WAddress_Line_10">
+					</div>
+					<div class="col-lg-4">
+					<label for="WAddress_Line_20">Address line 2</label>
+					<input type="text" class="form-control" name="WAddress_Line_20" id="WAddress_Line_20">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3">
+						<label for="Wcity">City/Town<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wcity0" id="Wcity0">
+					</div>
+					<div class="col-lg-3">
+						<label for="Wpostcode">Postcode<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wpostcode0" id="Wpostcode0">
+					</div>
+					<div class="col-lg-3">
+						<label for="Wstate">State<span class="tipstyle">*</span></label>
+						<select class="form-control" id="Wstate0" name="Wstate0">
+							<option value="" selected disabled> State </option>
+							<?php 
+								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+								$State=json_decode($statecode, true);
+								foreach($State  as $key => $value){
+								echo '<option value="'.$State[$key]['ID'].'"';
+							    echo '> '.$State[$key]['Abbreviation'].' </option>';
+								}
+							?>
+						</select>
+					</div>
+					<div class="col-lg-3">
+						<label for="Wcountry">Country<span class="tipstyle">*</span></label>
+					    <select class="form-control" id="Wcountry0" name="Wcountry0">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['ID'].'"';
+								echo '> '.$country[$key]['Country'].' </option>';
+								
+							}
+							?>
+					    </select>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="Wemail">Workplace email<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wemail0" id="Wemail0">
+					</div>
+					<div class="col-lg-3">
+						<label for="Wwebaddress">Website<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wwebaddress0" id="Wwebaddress0">
+					</div>
+					<div class="col-lg-3">
+						<label for="Wphone">Phone number<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Wphone0" id="Wphone0">
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3">
+					Does this workplace offer additional languages?<br/>
+					</div>
+					<div class="col-lg-3">
+						<select class="chosen-select" id="Additionallanguage0" name="Additionallanguage0[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
+							<?php 
+								$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
+								$Language=json_decode($Languagecode, true);
+								foreach($Language  as $key => $value){
+									echo '<option value="'.$Language[$key]['ID'].'"';
+									echo '> '.$Language[$key]['Name'].' </option>';
+								}
+								?>
+						</select>
+					</div>
+					<div class="col-lg-3">
+					Quality In Practice number(QIP):
+						</div>
+					<div class="col-lg-3">
+					<input type="text" class="form-control" name="QIP0" id="QIP0">
+					</div>
+				</div>
+				<div class="row"> 
+					<div class="col-lg-3">
+					Does this workplace provide:
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+					<input type="checkbox" name="Electronic-claiming0" id="Electronic-claiming0" value=""> <label for="Electronic-claiming0">Electronic claiming</label>
+					</div>
+					<div class="col-lg-6">
+					<input type="checkbox" name="Hicaps0" id="Hicaps0" value=""> <label for="Hicaps0">HICAPS</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="checkbox" name="Healthpoint0" id="Healthpoint0" value="" > <label for="Healthpoint0">Healthpoint</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="checkbox" name="Departmentva0" id="Departmentva0" value=""> <label for="Departmentva0">Department of Vetarans' Affairs</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="checkbox" name="Workerscompensation0" id="Workerscompensation0" value=""> <label for="Workerscompensation0">Workers compensation</label>
+					</div>
+					<div class="col-lg-6">
+					<input type="checkbox" name="Motora0" id="Motora0" value=""> <label for="Motora0">Motor accident compensation</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="checkbox" name="Medicare0" id="Medicare0" value=""> <label for="Medicare0">Medicare Chronic Disease Management</label>
+					</div>
+					<div class="col-lg-6">
+						<input type="checkbox" name="Homehospital0" id="Homehospital0" value=""> <label for="Homehospital0">Home and hospital visits</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<input type="checkbox" name="Mobilephysiotherapist0" id="Mobilephysiotherapist0" value=""> <label for="Mobilephysiotherapist0">Mobile physiotherapist</label>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-3">
+					Numbers of hours worked<span class="tipstyle">*</span>
+					</div>
+					<div class="col-lg-6">
+						<select class="form-control" id="Number-worked-hours0" name="Number-worked-hours0">
+							<option value="0" disabled>no</option>
+							<?php 
+							$NumberOfHourscode  = file_get_contents("sites/all/themes/evolve/json/NumberOfHours.json");
+							$NumberOfHours=json_decode($NumberOfHourscode, true);
+							foreach($NumberOfHours  as $key => $value){
+								echo '<option value="'.$NumberOfHours[$key]['ID'].'"';
+								echo '> '.$NumberOfHours[$key]['Name'].' </option>';
+							}
+							?>
+						</select>
+					</div>
+				</div>
+				</div>
+			</div>
+				
+				<?php endif; ?>
 		<div class="row"><div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a></div></div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   
 		<a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Last</span></a>

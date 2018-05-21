@@ -177,14 +177,14 @@ jQuery(document).ready(function($) {
 		if($('#p1-2').is(":checked"))
 		{
 			$('#rolloverblock').removeClass("display-none");
-			$('#Installpayment-frequency').val("monthly");
+			$('#Installpayment-frequency').val("Monthly");
 		}
 				 
     });
 	$('#p1-1').click(function(){
 		if($(this).is(":checked")){
 			$('#rolloverblock').addClass("display-none");
-			$('#Installpayment-frequency').val("annualy");
+			
 		}
 	});
 	$('input[type="checkbox"]').click(function(){
@@ -228,6 +228,15 @@ jQuery(document).ready(function($) {
 			$('#Addtionalquestion').val("0");
 		}
     });
+	if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked"))
+	{
+		$('#insuranceMore').removeClass("display-none");
+		$('#Addtionalquestion').val("1");
+	}
+	else if($('#Claim2').is(":checked") && $('#Facts2').is(":checked") && $('#Disciplinary2').is(":checked") && $('#Decline2').is(":checked") && $('#Oneclaim2').is(":checked")){
+		$('#insuranceMore').addClass("display-none");
+		$('#Addtionalquestion').val("0");
+	}
 	if($('#Addtionalquestion').val()=="1"){$('#insuranceMore').removeClass("display-none");} else{$('#insuranceMore').addClass("display-none");}
 	  $('#recent-purchases').click(function(){
 		$('#all-purchases').removeClass("text-underline");
@@ -362,6 +371,9 @@ jQuery(document).ready(function($) {
 		}
 		   
 	});
+	$('#uploadImageButton').click(function(){
+		$( "#uploadImage" ).dialog();
+    }); 
 	$('#addPaymentCard').click(function(){
 		$( "#addPaymentCardForm" ).dialog();
     }); 
@@ -664,5 +676,7 @@ jQuery(document).ready(function($) {
             $( "#insuranceStatus" ).val('1');				
 		}
     });
+	
+	
 });
 
