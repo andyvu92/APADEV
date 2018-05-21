@@ -802,7 +802,7 @@ function curlRequest($API, $type, $variables) {
 	curl_close($ch);
 	return $JSONreturn;
 }
-
+ 
 /*
 echo "<br />28. PD - Get event search result list: <br />";
 if($variables["PageSize"] == 5 && $variables["PageNumber"] == 1) {
