@@ -41,373 +41,24 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			}';
 			return $JSONreturn;
 		case "4":
-			// For the actual API use
-			// $API = "";
+			//API test by JingHu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/GetDBMemberDetails?";		
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />4. Dashboard - Get member detail: <br />";
-			// Add JSON sample here
-			$JSONreturn = '{  
-				   "Prefix":"Mrs.",
-				   "Firstname":"Allen",
-				   "Preferred-name":"",
-				   "Middle-name":"",
-				   "Maiden-name":"Allen",
-				   "Lastname":"Wang",
-				   "Birth":"2017-05-05",
-				   "Gender":"Female",
-				   "Home-phone-number":["61","04","26897456"],
-				   "Mobile-number":"",
-				   "Aboriginal":"",
-				   "Dietary":["Shellfish","Eggs","Lactose"],
-				   "BuildingName":"",
-				   "Address_Line_1":"1175 ",'.// changed
-				   '"Pobox":"437",
-				   "Address_Line_2":"Toorak Road",'.// changed
-				   '"Suburb":"Camberwell",
-				   "Postcode":"3124",
-				   "State":"79",
-				   "Country":"14",
-				   "Memberno":"1234567",
-				   "Memberid":"test@gmail.com",
-				   "MemberType":"4",
-				   "Ahpranumber":"6934395685-1",
-				   "Nationalgp":[
-						"1",
-						"2"
-					],
-				   "Branch":"79",
-				   "SpecialInterest":["BAN","CHILD","ACU"],'.// Added
-				   '"Treatmentarea":["BAN","CHILD","ACU"],'. // Added
-				   '"Specialty":"FACP",
-				   "Additionallanguage":["1","2","3"],
-				   "Status":"Current",
-				   "Findpublicbuddy":"1",
-				   "Regional-group":{"NSW":"NSW","NSW-CC":"NSW - CENTRAL COAST","NSW-CH":"NSW - COFFS HARBOUR"},
-				   "PaythroughDate":"2018-05-05",
-				   "Billing-BuildingName":"",
-				   "Billing-Address_Line_1":"1175",'.// changed
-				   '"Billing-PObox":"",'.// Added
-				   '"Billing-Address_Line_2":"Toorak Road",'.// changed
-				   '"Billing-Suburb":"Melbourne",
-				   "Billing-Postcode":"3177",
-				   "Billing-State":"79",
-				   "Billing-Country":"14",
-				   "Duplicate":"1",
-				   "Shipping-BuildingName":"",
-				   "Shipping-Address_Line_1":"1175",'.// changed
-				   '"Shipping-PObox":"",'.// Added
-				   '"Shipping-Address_Line_2":"Toorak Road",'.// changed
-				   '"Shipping-city-town":"Melbourne",
-				   "Shipping-postcode":"3177",
-				   "Shipping-state":"VIC",
-				   "Shipping-country":"Australia",
-				   "Mailing-BuildingName":"",'.// Added
-				   '"Mailing-Address_Line_1":"1175",'.// changed
-				   '"Mailing-PObox":"",'.// Added
-				   '"Mailing-Address_Line_2":"Toorak Road",'.// changed
-				   '"Mailing-city-town":"Melbourne",
-				   "Mailing-postcode":"3177",
-				   "Mailing-state":"79",
-				   "Mailing-country":"14",
-				   "Udegree":"3",
-				   "Undergraduate-university-name":"CUR",
-				   "Ugraduate-country":"14",
-				   "Ugraduate-year-attained":"2001",
-				   "Pdegree":"4",
-				   "Postgraduate-university-name":"CUR",
-				   "Pgraduate-country":"14",
-				   "Pgraduate-year-attained":"2001",
-				   "Additional-qualifications": {
-					"0":{
-						"degree":"3",
-						"university-name": "CUR",
-						"additional-country":"14",
-						"additional-year-attained":"2015"
-					    },
-					"1":{
-						"degree":"2",
-						"university-name": "CUR",
-						"additional-country":"14",
-						"additional-year-attained":"2018"
-					    }
- 				    },
-					
-				   "Workplaces":{  
-					"0": {  
-						 "Workplace_ID":"72516",
-						 "Name-of-workplace":"APA",
-						 "WBuildingName":"BuildingName",
-						 "Address_Line_1":"2",'. // changed
-						 '"Address_Line_2":"toorak road",'. // changed
-						 '"Wcity":"Melbourne",
-						 "Wpostcode":"3177",
-						 "Wstate":"79",
-						 "Wcountry":"14",
-						 "Wemail":"test@apa.com",
-						 "Wwebaddress":"www.apa.com",
-						 "Wphone":"0390920888",
-						 "Additionallanguage":["1","2","3"],
-						 "QIP":"123456",
-						 "Electronic-claiming":"1",
-						 "Hicaps":"1",
-						 "Healthpoint":"1",
-						 "Departmentva":"1",
-						 "Workerscompensation":"1",
-						 "Motora":"1",
-						 "Medicare":"1",
-						 "Workplace-setting":"Defence-forces",
-						 "Number-worked-hours":"7",
-						 "Treatmentarea": ["BAN","CHILD","ACU"], './/changed
-						 '"Findabuddy":"1",'. // Added
-						 '"Findphysio":"1",
-						 
-						 "Homehospital":"1",
-						 "MobilePhysio":"1"
-					  },
-				   "1": {  
-						 "Workplace_ID":"72571",
-						 "Name-of-workplace":"testA",
-						 "BuildingName":"BuildingName",
-						 "Address_Line_1":"2",'. // changed
-						 '"Address_Line_2":"toorak road",'. // changed
-						 '"Wcity":"Melbourne",
-						 "Wpostcode":"3177",
-						 "Wstate":"79",
-						 "Wcity":"Melbourne",
-						 "Wcountry":"14",
-						 "Wemail":"test@apa.com",
-						 "Wwebaddress":"www.apa.com",
-						 "Wphone":"0390920888",
-						 "Additionallanguage":["EG"],
-						 "QIP":"123456",
-						 "Electronic-claiming":"1",
-						 "Hicaps":"1",
-						 "Healthpoint":"1",
-						 "Departmentva":"1",
-						 "Workerscompensation":"1",
-						 "Motora":"1",
-						 "Medicare":"1",
-						 "Workplace-setting":"Defence-forces",
-						 "Number-worked-hours":"7",
-						 "Treatmentarea": ["BAN","CHILD","ACU"], './/changed
-						 '"Findabuddy":"1",'. // Added
-						 '"Findphysio":"1",
-						
-						 "Homehospital":"1",
-						 "MobilePhysio":"1"
-					  },
-				   "2": {
-						 "Workplace_ID":"72171",
-						 "Name-of-workplace":"testB",
-						 "BuildingName":"BuildingName",
-						 "Address_Line_1":"2",'. // changed
-						 '"Address_Line_2":"toorak road",'. // changed
-						 '"Wcity":"Melbourne",
-						 "Wpostcode":"3177",
-						 "Wstate":"79",
-						 "Wcity":"Melbourne",
-						 "Wcountry":"14",
-						 "Wemail":"test@apa.com",
-						 "Wwebaddress":"www.apa.com",
-						 "Wphone":"0390920888",
-						 "Additionallanguage":["EG","AR","FL"],
-						 "QIP":"123456",
-						 "Electronic-claiming":"1",
-						 "Hicaps":"1",
-						 "Healthpoint":"1",
-						 "Departmentva":"1",
-						 "Workerscompensation":"1",
-						 "Motora":"1",
-						 "Medicare":"1",
-						 "Workplace-setting":"Defence-forces",
-						 "Number-worked-hours":"7",
-						 "Treatmentarea": ["BAN","CHILD","ACU"], './/changed
-						 '"Findabuddy":"1",'. // Added
-						 '"Findphysio":"1",
-						
-						 "Homehospital":"1",
-						 "MobilePhysio":"1"
-					  }
-				   }
-				}';
+			$JSONreturn = curlRequest($API, "Get", $variables);
 			return $JSONreturn;
+			break;
 		case "5":
-			// For the actual API use
-			// $API = "";
+			//API test by JingHu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/DMemberDetailUpdate";		
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />5. Member detail - Update: <br />";
 			// Add JSON sample here
-			$JSONreturn = '{  
-				   "Prefix":"Dr",
-				   "Firstname":"Allen",
-				   "Preferred-name":"",
-				   "Middle-name":"",
-				   "Maiden-name":"Allen",
-				   "Lastname":"Wang",
-				   "Birth":"2017-05-05",
-				   "Gender":"Female",
-				   "Home-phone-number":"0390920807",
-				   "Mobile-number":"",
-				   "Aboriginal":"",
-				   "Dietary":["Shellfish","Eggs","Lactose"],
-				   "BuildingName":"",
-				   "Address_Line_1":"1175 ",'.// changed
-				   '"Pobox":"437",
-				   "Address_Line_2":"Toorak Road",'.// changed
-				   '"Suburb":"Camberwell",
-				   "Postcode":"3124",
-				   "State":"VIC",
-				   "Country":"Australia",
-				   "Memberno":"1234567",
-				   "Memberid":"test@gmail.com",
-				   "MemberType":"RW",
-				   "Ahpranumber":"6934395685-1",
-				   "Nationalgp":[
-						"ANI",
-						"GER"
-					],
-				   "Branch":"Branch",
-				   "SpecialInterest":["BAN","CHILD","ACU"],'.// Added
-				   '"Specialty":"FACP",
-				   "Additionallanguage":["EG","AR","FL"],
-				   "Status":"Current",
-				   "Findpublicbuddy":"1",
-				   "Regional-group":{"NSW":"NSW","NSW-CC":"NSW - CENTRAL COAST","NSW-CH":"NSW - COFFS HARBOUR"},
-				   "Billing-BuildingName":"",
-				   "Billing-Address_Line_1":"1175",'.// changed
-				   '"Billing-PObox":"",'.// Added
-				   '"Billing-Address_Line_2":"Toorak Road",'.// changed
-				   '"Billing-Suburb":"Melbourne",
-				   "Billing-Postcode":"3177",
-				   "Billing-State":"VIC",
-				   "Billing-Country":"Australia",
-				   "Duplicate":"1",
-				   "Shipping-BuildingName":"",
-				   "Shipping-Address_Line_1":"1175",'.// changed
-				   '"Shipping-PObox":"",'.// Added
-				   '"Shipping-Address_Line_2":"Toorak Road",'.// changed
-				   '"Shipping-city-town":"Melbourne",
-				   "Shipping-postcode":"3177",
-				   "Shipping-state":"VIC",
-				   "Shipping-country":"Australia",
-				   "Mailing-BuildingName":"",'.// Added
-				   '"Mailing-Address_Line_1":"1175",'.// changed
-				   '"Mailing-PObox":"",'.// Added
-				   '"Mailing-Address_Line_2":"Toorak Road",'.// changed
-				   '"Mailing-city-town":"Melbourne",
-				   "Mailing-postcode":"3177",
-				   "Mailing-state":"VIC",
-				   "Mailing-country":"Australia",
-				   "Udegree":"3",
-				   "Undergraduate-university-name":"CUR",
-				   "Ugraduate-country":"Australia",
-				   "Ugraduate-year-attained":"2001",
-				   "Pdegree":"4",
-				   "Postgraduate-university-name":"CUR",
-				   "Pgraduate-country":"Australia",
-				   "Pgraduate-year-attained":"2001",
-				   "Additional-qualifications": [
-						"qualification 1",
-						"qualification 2"
-					],
-				   "Workplaces":{  
-					"0": {  
-						 "Workplace_ID":"72516",
-						 "Name-of-workplace":"APA",
-						 "WBuildingName":"BuildingName",
-						 "Address_Line_1":"2",'. // changed
-						 '"Address_Line_2":"toorak road",'. // changed
-						 '"Wcity":"Melbourne",
-						 "Wpostcode":"3177",
-						 "Wstate":"VIC",
-						 "Wcountry":"Australia",
-						 "Wemail":"test@apa.com",
-						 "Wwebaddress":"www.apa.com",
-						 "Wphone":"0390920888",
-						 "Additionallanguage":["EG","AR","FL"],
-						 "QIP":"123456",
-						 "Electronic-claiming":"1",
-						 "Hicaps":"1",
-						 "Healthpoint":"1",
-						 "Departmentva":"1",
-						 "Workerscompensation":"1",
-						 "Motora":"1",
-						 "Medicare":"1",
-						 "Workplace-setting":"Defence-forces",
-						 "Number-worked-hours":"7",
-						 "Treatmentarea": ["BAN","CHILD","ACU"], '.// changed
-						 '"Findphysio":"1",
-						 "Findabuddy":"1",'. // Added
-						 '"Homehospital":"1",
-						 "MobilePhysio":"1"
-					  },
-				   "1": {  
-						 "Workplace_ID":"72571",
-						 "Name-of-workplace":"testA",
-						 "BuildingName":"BuildingName",
-						 "Address_Line_1":"2",'. // changed
-						 '"Address_Line_2":"toorak road",'. // changed
-						 '"Wcity":"Melbourne",
-						 "Wpostcode":"3177",
-						 "Wstate":"VIC",
-						 "Wcity":"Melbourne",
-						 "Wcountry":"Australia",
-						 "Wemail":"test@apa.com",
-						 "Wwebaddress":"www.apa.com",
-						 "Wphone":"0390920888",
-						 "Additionallanguage":["EG"],
-						 "QIP":"123456",
-						 "Electronic-claiming":"1",
-						 "Hicaps":"1",
-						 "Healthpoint":"1",
-						 "Departmentva":"1",
-						 "Workerscompensation":"1",
-						 "Motora":"1",
-						 "Medicare":"1",
-						 "Workplace-setting":"Defence-forces",
-						 "Number-worked-hours":"7",
-						 "Treatmentarea": ["BAN","CHILD","ACU"], './/- removed
-						 '"Findphysio":"1",
-						 "Findabuddy":"1",'. // Added
-						 '"Homehospital":"1",
-						 "MobilePhysio":"1"
-					  },
-				   "2": {
-						 "Workplace_ID":"72171",
-						 "Name-of-workplace":"testB",
-						 "BuildingName":"BuildingName",
-						 "Address_Line_1":"2",'. // changed
-						 '"Address_Line_2":"toorak road",'. // changed
-						 '"Wcity":"Melbourne",
-						 "Wpostcode":"3177",
-						 "Wstate":"VIC",
-						 "Wcity":"Melbourne",
-						 "Wcountry":"Australia",
-						 "Wemail":"test@apa.com",
-						 "Wwebaddress":"www.apa.com",
-						 "Wphone":"0390920888",
-						 "Additionallanguage":["EG","AR","FL"],
-						 "QIP":"123456",
-						 "Electronic-claiming":"1",
-						 "Hicaps":"1",
-						 "Healthpoint":"1",
-						 "Departmentva":"1",
-						 "Workerscompensation":"1",
-						 "Motora":"1",
-						 "Medicare":"1",
-						 "Workplace-setting":"Defence-forces",
-						 "Number-worked-hours":"7",
-						 "Treatmentarea": ["BAN","CHILD","ACU"],'.// changed
-						 '"Findphysio":"1",
-						 "Findabuddy":"1",'. // Added
-						 '"Homehospital":"1",
-						 "MobilePhysio":"1"
-					  }
-				   }
-				}';
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
 			return $JSONreturn;
+			break;
 		case "6":
 			// Eddy;
 			/* if(isset($_SESSION["TokenId"])) {
@@ -444,88 +95,46 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			$JSONreturn = curlRequest($API, "JSON", $jsonVersion);
 			return $JSONreturn;
 		case "10":
-			// For the actual API use
-			// $API = "";
+			//API test by JingHu
+			$PersonID = $_SESSION['LinkId'];
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/ImageField/Persons/".$PersonID."/Photo";		
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />10. Dashboard - Get picture: <br />";
-			// Add JSON sample here
-			$JSONreturn = "Image response";
+			$JSONreturn = curlRequest($API, "Get", "");
 			return $JSONreturn;
+			break;
 		case "11":
-			// For the actual API use
-			// $API = "";
+			//API test by JingHu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/GenericEntity/SaveData";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />11. Dashboard - Update picture: <br />";
 			// Add JSON sample here
-			$JSONreturn = "return Value!";
+			$JSONreturn = curlRequest($API, "Image", $jsonVersion); 
 			return $JSONreturn;
+			break;
 		case "12":
-			// For the actual API use
-			// $API = "";
+			//API test by JingHu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/DataObjects/spGetPaymentListing__c?";
 			echo "Data Sent: <br />";
-			print_r($variables);
 			echo "<br />12. Dashboard - Get payment listing: <br />";
-			// Add JSON sample here
-			$JSONreturn =  '{ 
-			        
-					
-					"paymentcards": [
-
-					   { "Creditcards-ID": "1",
-						"Payment-method": "Master",
-						"Digitsnumber":"8888",
-						"Expiry-date":"10-10-2020",
-						"Description":"N"
-						},
-						{ "Creditcards-ID": "2",
-						"Payment-method": "Visa",
-						"Digitsnumber":"6666",
-						"Expiry-date":"10-10-2020",
-						"Description":"Y"
-						},
-
-						{ "Creditcards-ID": "3",
-						"Payment-method": "Master",
-						"Digitsnumber":"9999",
-						"Expiry-date":"10-10-2020",
-						"Description":"N"
-						}
-					]
-				}';
+			$data = "UserID=".$variables["id"];
+			$JSONreturn = curlRequest($API, "Get", $data);
 			return $JSONreturn;
+			break;
 		case "13":
-			// For the actual API use
-			// $API = "";
+			//API test by JingHu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/ProcessFlow/UpdatePaymentMethod__c";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />13. Dashboard - update payment method: <br />";
-			// Add JSON sample here
-			if(isset($variables["Rollover"])){
-				$JSONreturn =  '{ 
-			        "userID":"1",
-				    "Rollover": "1"
-				}';
-			}
-			//if(isset($variables["Creditcard-ID"]) && isset($variables["Expiry-date"]) && isset($variables["CVV"])){
-				//$JSONreturn =  '{ 
-			        //"userID":"1",
-					//"Creditcard-ID":"1",
-					//"Expiry-date":"12-12-2020",
-					//"CVV":"333",
-				   // "Rollover": "1"
-				//}';
-			//}
-			if(isset($variables["Creditcard-ID"])){
-				$JSONreturn =  '{ 
-			        "userID":"1",
-					"Creditcard-ID":"1",
-			    }';
-			}
+			$JSONreturn = curlRequest($API, "Secure", $variables); 
+			echo $JSONreturn;
 			return $JSONreturn;
+			break;
 		case "14":
-			// For the actual API use
+			// Merged together with Case 13
 			// $API = "";
 			echo "Data Sent: <br />";
 			print_r($variables);
@@ -534,34 +143,25 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			$JSONreturn = "";
 			return $JSONreturn;
 		case "15":
-			// For the actual API use
-			// $API = "";
+			//API test by JingHu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/AddPaymentMethod";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />15. Dashboard - Add payment method: <br />";
 			// Add JSON sample here
-			$JSONreturn =  '{ 
-			        "userID":"1",
-				    "Payment-method": "Visa",
-					
-					"Cardno":"343424238888",
-					"Expiry-date":"10-10-2020",
-					"CCV":"1"
-				}';
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
+			echo $JSONreturn;
 			return $JSONreturn;
+			break;
 		case "16":
-			// For the actual API use
-			// $API = "";
+			//API test by JingHu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/VerifyUserName/".$variables["ID"];
 			//echo "Data Sent: <br />";
 			//print_r($variables);
 			//echo "<br />16. Dashboard - Check existing email: <br />";
 			// Add JSON sample here
-			$JSONreturn = '{
-				"Status":"true"
-			}';
+			$JSONreturn = curlRequest($API, "JSON",""); 
 			return $JSONreturn;
-			
-			
 		case "17":
 			// Eddy - done check;
 			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/GetOrderDetails?";
@@ -603,20 +203,6 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			echo "<br />21. Dashboard - Get list of Fellowship Products: <br />";
 			// Add JSON sample here
 			$JSONreturn = curlRequest($API, "JSON", $jsonVersion);
-			/*
-			if(count($variables) == 1) {
-				// When this web service is triggered to get
-				// Fellowship list only
-				$JSONreturn = '{ 
-					"Fellowship": [
-						{"FPid": "1",
-						"FPtitle": "I am part of the Australian College of Physiotherapists",
-						"FPprice": "50" }
-					]
-				}';
-			} else {
-				$JSONreturn = "";
-			}*/
 			return $JSONreturn;
 		case "22":
 			// Eddy
@@ -625,15 +211,6 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			echo "<br />22. Dashboard - Get list of subscribed Fellowship Product: <br />";
 			// Add JSON sample here
 			$JSONreturn = curlRequest($API, "Get", $var);
-			/*
-			$JSONreturn = '{ 
-				"Fellowship": [
-					{"FPid": "1",
-					"FPtitle": "I am part of the Australian College of Physiotherapists",
-					"FPprice": "50" }
-				]
-			}';
-			*/
 			return $JSONreturn;
 		case "23":
 			// Eddy
@@ -642,148 +219,6 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			echo "<br />23. Dashbard - Get list of Subscription preferences: <br />";
 			// Add JSON sample here
 			$JSONreturn = curlRequest($API, "Get", $var);
-			/*
-			$JSONreturn = '{ 
-				"Subscription":[
-				{
-					"SubscriptionID":"472",
-					"Subscription":"Online-learning",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"43",
-					"Subscription":"Continence",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"478",
-					"Subscription":"Conference",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"424",
-					"Subscription":"Educators",
-					"Subscribed":"0"
-				}, {
-					"SubscriptionID":"439",
-					"Subscription":"Market-campaign",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"446",
-					"Subscription":"Emergency",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"371",
-					"Subscription":"Jobs-4-physio",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"365",
-					"Subscription":"Gerontology",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"374",
-					"Subscription":"Advocacy",
-					"Subscribed":"0"
-				}, {
-					"SubscriptionID":"319",
-					"Subscription":"Leadership",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"327",
-					"Subscription":"National-office",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"385",
-					"Subscription":"Musculoskeletal",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"283",
-					"Subscription":"Journal-of-physiotherapy",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"295",
-					"Subscription":"Neurology",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"243",
-					"Subscription":"Inmotion-online",
-					"Subscribed":"0"
-				}, {
-					"SubscriptionID":"292",
-					"Subscription":"Occupational",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"256",
-					"Subscription":"Flagship",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"172",
-					"Subscription":"Orthopaedic",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"157",
-					"Subscription":"Professinal-development",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"138",
-					"Subscription":"Paediatric",
-					"Subscribed":"0"
-				}, {
-					"SubscriptionID":"128",
-					"Subscription":"Students",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"71",
-					"Subscription":"Pain",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"68",
-					"Subscription":"Acupuncture",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"57",
-					"Subscription":"Sports",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"45",
-					"Subscription":"Animal",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"32",
-					"Subscription":"Rural",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"37",
-					"Subscription":"Aquatic",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"26",
-					"Subscription":"Print",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"24",
-					"Subscription":"Business",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"17",
-					"Subscription":"Disability",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"16",
-					"Subscription":"Cancer",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"12",
-					"Subscription":"Mental",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"7",
-					"Subscription":"Cardiorespiratory",
-					"Subscribed":"1"
-				}, {
-					"SubscriptionID":"3",
-					"Subscription":"Mental",
-					"Subscribed":"1"
-				} ]
-			}';
-			*/
 			return $JSONreturn;
 		case "24":
 			// For the actual API use
@@ -934,31 +369,35 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			}';
 			return $JSONreturn;
 		case "25":
-			// For the actual API use
-			// $API = "";
+			//API test by JingHu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/UserRegistration";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />25. User Registration: <br />";
-			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
+			echo $JSONreturn;
 			return $JSONreturn;
+			break;
 		case "26":
-			// For the actual API use
-			// $API = "";
+			//API test by JingHu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/PlaceOrder";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />26. REgister a new member order: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = curlRequest($API, "Order", $jsonVersion);
+            echo $JSONreturn;		
 			return $JSONreturn;
+			break;
 		case "27":
-			// For the actual API use
-			// $API = "";
+			//API test by JingHu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/RenewMembershipOrder";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />27. Renew membership order: <br />";
 			// Add JSON sample here
-			$JSONreturn = "";
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+			echo $JSONreturn;		
 			return $JSONreturn;
 		case "28":
 			// Eddy
@@ -1071,38 +510,16 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			}';;
 			return $JSONreturn;
 		case "31":
-			// For the actual API use
-			// $API = "";
+			//API test by JingHu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/MembershipProducts/".$_SESSION['UserId'];
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />31. Get MEmbership product price: <br />";
 			// Add JSON sample here
-		  
-			$JSONreturn = '{ 
-			    "Continue":"1",
-			    "products":[
-				    {
-					   "ProdcutName":"Full-time physiotherapist with insurance (more than 18 hours per week) ",
-					   "Price":"200"
-					  
-					},
-					{
-						"ProdcutName":"Gerontology",
-					    "Price":"41"
-					   
-					},
-					{
-						"ProdcutName":"Musculoskeletal",
-					    "Price":"38"
-					},
-					{
-						"ProdcutName":"Intouch",
-					    "Price":"10"
-					}
-					]		   
-				}';
-			
-			return $JSONreturn;	
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
+			echo $JSONreturn;
+			return $JSONreturn;
+			break;	
 		case "32":
 			// For the actual API use
 			// $API = "";
@@ -1189,7 +606,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			$JSONreturn = "Successfully updated!! :)";
 			return $JSONreturn;
 		case "35":
-			// For the actual API use
+			// Eddy
 			// $API = "";
 			echo "Data Sent: <br />";
 			print_r($variables);
@@ -1198,54 +615,17 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			$JSONreturn = "";
 			return $JSONreturn;
 		case "36":
-			// For the actual API use
-			// $API = "";
+			//API test by JingHu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/DataObjects/spGetWorkPlaceSettings__c";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />36. Get workplace settings list <br />";
 			// Add JSON sample here
-			if(count($variables) == 1) {
-				// When this web service is triggered to get
-				// workplace settings list only
-			$JSONreturn = '{ 
-			    "WorkplaceSettings":[
-				    {
-					   "name":"Aboriginal health services",
-					   "code":"Aboriginal-health-services"
-					},
-					{
-						"name":"Defence forces",
-						"code":"Defence-forces"
-					},
-					{
-						"name":"Domiciliary services",
-						"code":"Domiciliary-services"
-					},
-					{
-						"name":"Education facility",
-						"code":"Education-facility"
-					},
-					{
-						"name":"Group private practice",
-						"code":"Group-private-practice"
-					},
-					{
-						"name":"Hospital(exclude outpatient)",
-						"code":"Hospital"
-					},
-					{
-						"name":"Locum private practice",
-						"code":"Locum-private-practice"
-					}
-					]		   
-				}';
-			} else{
-				$JSONreturn = "";
-			}
-			return $JSONreturn;	
 			
+			$JSONreturn = curlRequest($API, "Get", "");
+			return $JSONreturn;
 		case "37":
-			// For the actual API use
+			// Merged to 39
 			// $API = "";
 			echo "Data Sent: <br />";
 			print_r($variables);
@@ -1304,13 +684,55 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			return $JSONreturn;
 		case "39":
 			// For the actual API use
-			// $API = "";
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/GetOptionValues";		
 			//echo "Data Sent: <br />";
 			//print_r($variables);
 			//echo "<br />39. Get dropdown option list: <br />";
-			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/GetOptionValues";			
-			$JSONreturn = curlRequest($API, null, "Get", null);
+			$JSONreturn = curlRequest($API, "", "Get");
 			return $JSONreturn;
+			break;
+		case "40":
+			// test by Jing Hu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/DataObjects/spGetPersonInsuranceData__c?";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />40. Get Insurance Data: <br />";
+			$insuranceData ="UserID=".$variables["ID"];
+			$JSONreturn = curlRequest($API, "Get", $insuranceData);
+			return $JSONreturn;
+			break;
+		case "41":
+			// test by Jing Hu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/GenericEntity/SaveData";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />41. Save Insurance Data: <br />";
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+            echo $JSONreturn;		
+			return $JSONreturn;
+			break;
+		case "42":
+			// test by Jing Hu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/CreateWebUser";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />42. Sign up: <br />";
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+            echo $JSONreturn;		
+			return $JSONreturn;
+			break;
+		case "43":
+			// test by Jing Hu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/DataObjects/spGetUserInstallmentDetails__c?";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />43. Get installment details for the user: <br />";
+			//$data = "UserID=".$variables["id"];
+			$data = "UserID=55280";
+			$JSONreturn = curlRequest($API, "Get", $data);	
+			echo $JSONreturn;
+			return $JSONreturn;
+			break;
 	}
 }
 
@@ -1998,6 +1420,150 @@ array_push($outputArray, $pd_json4);
 array_push($outputArray, $pd_json5);
 //echo "-><br />".$outputArray[$inID]."<br />";
 return $outputArray[$inID];
+*/
+
+/*
+23 Get list of Subscription preferences
+$JSONreturn = '{ 
+	"Subscription":[
+	{
+		"SubscriptionID":"472",
+		"Subscription":"Online-learning",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"43",
+		"Subscription":"Continence",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"478",
+		"Subscription":"Conference",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"424",
+		"Subscription":"Educators",
+		"Subscribed":"0"
+	}, {
+		"SubscriptionID":"439",
+		"Subscription":"Market-campaign",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"446",
+		"Subscription":"Emergency",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"371",
+		"Subscription":"Jobs-4-physio",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"365",
+		"Subscription":"Gerontology",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"374",
+		"Subscription":"Advocacy",
+		"Subscribed":"0"
+	}, {
+		"SubscriptionID":"319",
+		"Subscription":"Leadership",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"327",
+		"Subscription":"National-office",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"385",
+		"Subscription":"Musculoskeletal",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"283",
+		"Subscription":"Journal-of-physiotherapy",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"295",
+		"Subscription":"Neurology",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"243",
+		"Subscription":"Inmotion-online",
+		"Subscribed":"0"
+	}, {
+		"SubscriptionID":"292",
+		"Subscription":"Occupational",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"256",
+		"Subscription":"Flagship",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"172",
+		"Subscription":"Orthopaedic",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"157",
+		"Subscription":"Professinal-development",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"138",
+		"Subscription":"Paediatric",
+		"Subscribed":"0"
+	}, {
+		"SubscriptionID":"128",
+		"Subscription":"Students",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"71",
+		"Subscription":"Pain",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"68",
+		"Subscription":"Acupuncture",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"57",
+		"Subscription":"Sports",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"45",
+		"Subscription":"Animal",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"32",
+		"Subscription":"Rural",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"37",
+		"Subscription":"Aquatic",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"26",
+		"Subscription":"Print",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"24",
+		"Subscription":"Business",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"17",
+		"Subscription":"Disability",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"16",
+		"Subscription":"Cancer",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"12",
+		"Subscription":"Mental",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"7",
+		"Subscription":"Cardiorespiratory",
+		"Subscribed":"1"
+	}, {
+		"SubscriptionID":"3",
+		"Subscription":"Mental",
+		"Subscribed":"1"
+	} ]
+}';
 */
 
 ?>
