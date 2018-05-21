@@ -771,7 +771,7 @@ function curlRequest($API, $type, $variables) {
 				"AptifyAuthorization: Web ".$_SESSION["TokenId"],
 				"Content-Type:application/x-www-form-urlencoded" 
 			));
-		} elseif($type == "Image") {
+		} elseif($type == "Image"|| $type == "Order") {
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 				"AptifyAuthorization: Web ".$_SESSION["TokenId"],
 				"Content-Type:application/json"

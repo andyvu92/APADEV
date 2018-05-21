@@ -201,8 +201,12 @@
 	// Where:{Address1, Address2, Address3(if exist), Address4(if exist), City,
 	//	state, Postcode}, CPD hours, Cost, Your registration stats
 	$pd_detail = GetAptifyData("29", $pdArr);
+	echo "1";
 	print_r($pd_detail);
+	echo $pd_detail;
+	echo "2";
     $pd_detail = $pd_detail['MeetingDetails'][0];
+	/*
 	$prices = $pd_detail['Pricelist'];
 	$pricelistGet = Array();
 	foreach($prices as $t) {
@@ -307,6 +311,7 @@
 		 // todo
 		 // apply coupon one
 		 // ["Product Cost With Coupon"]
+		 /*
 		 if($prices!="NULL"&& isset($_SESSION["UserId"])){
 			if(in_array($pd_detail['Product Cost Without Coupon'],$pricelistGet)) {
 				comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
@@ -318,7 +323,7 @@
 		 }
 		else{
 			foreach($pricelistGet as $key=>$value){echo $key.":&nbsp;$".$value."<br>";}
-		}			
+		}	*/		
 		 
 		 
 		 
