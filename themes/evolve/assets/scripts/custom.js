@@ -201,6 +201,22 @@ jQuery(document).ready(function($) {
          }
 		
     });
+	$('body').on('change', '[type="checkbox"]', function() {
+		$('#workplaceblocks input[type="checkbox"]').click(function(){
+			if($(this).is(":checked")){
+			$(this).attr('checked', true);
+			   $(this).val('True');
+			
+			  }
+			 else{
+			 
+			  $(this).removeAttr('checked');
+			  $(this).val('False');
+			  
+			 }
+			
+		});
+	});
 	$('#anothercard').click(function(){
         if($(this).is(":checked")){
 			$('#anothercardBlock').removeClass("display-none");
@@ -418,14 +434,14 @@ jQuery(document).ready(function($) {
 		$( "#installmentpolicyWindow" ).dialog();
 	});
 	$('[id=Nationalgp]').change(function(){
-	    if(jQuery.inArray( "SPO", $('select[id=Nationalgp]').val())!==-1)
+	    if(jQuery.inArray( "10021", $('select[id=Nationalgp]').val())!==-1)
 		{
 			$( "#ngsports" ).removeClass('display-none');
 		}
 		else{
 			$( "#ngsports" ).addClass('display-none');
 		}
-		if(jQuery.inArray( "MUS", $('select[id=Nationalgp]').val())!==-1)	
+		if(jQuery.inArray( "10015", $('select[id=Nationalgp]').val())!==-1)	
 		{
 			$( "#ngmusculo" ).removeClass('display-none');
 	    }
@@ -449,14 +465,7 @@ jQuery(document).ready(function($) {
 			$( "#Postgraduate-university-name-other" ).addClass('display-none');
 		}
 	}); 
-	$('.add-additional-qualification').click(function(){
-		$('#dashboard-right-content').addClass("autoscroll");
-        var number = Number($('#addtionalNumber').val());
-		$('div[id="additional-qualifications-block"]').append('<div id="additional'+ number +'"></div>');
-		$("#additional"+ number ).load("sites/all/themes/evolve/commonFile/education.php", {"count":number});
-        var i = Number(number +1);
-		$('input[name=addtionalNumber]').val(i);
-    });
+	//  add additional education
 	//$( "#datepicker" ).datepicker({dateFormat: 'yy'});
     $('#Paymentcard').change(function(){
 	    $('#Paymentcardvalue').val($('#Paymentcard').val());
@@ -472,7 +481,7 @@ jQuery(document).ready(function($) {
 		}		
     });	
 	$('#MemberType').change(function(){
-	    if($('select[name=MemberType]').val()=="36" || $('select[name=MemberType]').val()=="35" || $('select[name=MemberType]').val()=="37"|| $('select[name=MemberType]').val()=="31"|| $('select[name=MemberType]').val()=="32"|| $('select[name=MemberType]').val()=="34"){
+	    if($('select[name=MemberType]').val()=="10005" || $('select[name=MemberType]').val()=="9966" || $('select[name=MemberType]').val()=="9967"|| $('select[name=MemberType]').val()=="10006"|| $('select[name=MemberType]').val()=="9965"|| $('select[name=MemberType]').val()=="9964"){
 			$( "#ahpblock" ).addClass('display-none');
 			$( "input[name=Ahpranumber]" ).val('');
 			
@@ -676,7 +685,27 @@ jQuery(document).ready(function($) {
             $( "#insuranceStatus" ).val('1');				
 		}
     });
-	
-	
+	/*delete PRF from member shoppingcart  */
+	$(".deletePRFButton").click(function(){
+		$('#deletePRFForm').submit();
+	});
 });
-
+/*
+$( window ).on( "load", function() {
+	console.log( "window loaded" );
+	$('#workplaceblocks [id^=workplace] input[type="checkbox"]').click(function(){
+        if($(this).is(":checked")){
+        $(this).attr('checked', true);
+           $(this).val('True');
+		
+		  }
+         else{
+         
+          $(this).removeAttr('checked');
+          $(this).val('False');
+		  
+         }
+		
+    });
+});
+*/

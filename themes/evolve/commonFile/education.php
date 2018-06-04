@@ -1,10 +1,11 @@
 <?php 
 
 $i = $_POST['count'];
+$sessionCountry = $_POST['sessionCountry'];
 //$sessionWorkplaceSetting = json_decode($_POST['sessionWorkplaceSetting']);
 //$sessioninterestAreas = json_decode($_POST['sessioninterestAreas']);
-echo '<div class="row"><div class="col-lg-6"> <label for="degree'.$i.'">Degree<span class="tipstyle">*</span></label>
-<select name="degree'.$i.'" id="degree'.$i.'">
+echo '<input type="hidden" name="ID'.$i.'" value="-1"><div class="row"><div class="col-lg-6"> <label for="degree'.$i.'">Degree<span class="tipstyle">*</span></label>
+<select name="Udegree'.$i.'" id="Udegree'.$i.'">
 	<option selected="selected" value="">(None)</option>
 	<option value="1">Bachelor of Physiotherapy</option>
 	<option value="2">Bachelor of Physiotherapy (Hons)</option>
@@ -20,8 +21,8 @@ echo '<div class="row"><div class="col-lg-6"> <label for="degree'.$i.'">Degree<s
 </div>
 <div class="row">
 	<div class="col-lg-6">
-		<label for="university-name'.$i.'">University name<span class="tipstyle">*</span></label>
-		<select name="university-name'.$i.'" id="university-name0">
+		<label for="Undergraduateuniversity-name'.$i.'">University name<span class="tipstyle">*</span></label>
+		<select name="Undergraduateuniversity-name'.$i.'" id="Undergraduateuniversity-name0">
 			<option selected="selected" value="">(None)</option>
 			<option value="ACU">Australian Catholic University - NSW</option>
 			<option value="ACUQ">Australian Catholic University - QLD</option>
@@ -61,12 +62,20 @@ echo '<div class="row"><div class="col-lg-6"> <label for="degree'.$i.'">Degree<s
 </div>
 <div class="row">
 	<div class="col-lg-4">
-		<label for="additional-country'.$i.'">Country<span class="tipstyle">*</span></label>
-		<input type="text" class="form-control" name="additional-country'.$i.'" id="additional-country'.$i.'">
+		<label for="Ugraduate-country'.$i.'">Country<span class="tipstyle">*</span></label>
+		<select class="form-control" id="Ugraduate-country'.$i.'" name="Ugraduate-country'.$i.'">
+';
+ 	$country = $sessionCountry;
+	foreach($country  as $key => $object){
+		echo '<option value="'.$country[$key]['Country'].'">'.$country[$key]['Country'].'</option>';
+	}
+echo '
+</select>
+		
 	</div>
 	<div class="col-lg-2">
-		<label for="additional-year-attained'.$i.'">Year attained<span class="tipstyle">*</span></label>
-		<select class="form-control" name="additional-year-attained'.$i.'" id="additional-year-attained'.$i.'">';
+		<label for="Ugraduate-yearattained'.$i.'">Year attained<span class="tipstyle">*</span></label>
+		<select class="form-control" name="Ugraduate-yearattained'.$i.'" id="Ugraduate-yearattained'.$i.'">';
 	
 		$y = date("Y"); 
 		for ($i=1940; $i<= $y; $i++){

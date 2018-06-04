@@ -80,7 +80,7 @@ jQuery(document).ready(function($) {
 				if($("input[name=Password]").val() =='') { return false;}
 			}
 		}
-		if($('select[name=MemberType]').val()!=="36" || $('select[name=MemberType]').val()!=="35" || $('select[name=MemberType]').val()!=="33"|| $('select[name=MemberType]').val()!=="21"|| $('select[name=MemberType]').val()!=="22"|| $('select[name=MemberType]').val()!=="31"|| $('select[name=MemberType]').val()!=="32"){
+		if($('select[name=MemberType]').val()!=="9964" && $('select[name=MemberType]').val()!=="9965" && $('select[name=MemberType]').val()!=="10004"&& $('select[name=MemberType]').val()!=="9966"&& $('select[name=MemberType]').val()!=="9967"&& $('select[name=MemberType]').val()!=="9968"&& $('select[name=MemberType]').val()!=="9997"&& $('select[name=MemberType]').val()!=="9967"){
 			if($('.down3:visible').length !== 0){
 				var i = $("input[name=wpnumber]").val();
 				for (x = 0; x<i;x++){
@@ -109,7 +109,8 @@ jQuery(document).ready(function($) {
 				}
 				
 			}
-		}
+		}else { return true;}
+		
 		if($('.down4:visible').length !== 0){
 			if($("select[name=Udegree]").val() ==''){$("select[name=Udegree]").addClass("focuscss");}else{$("select[name=Udegree]").removeClass("focuscss");}
 			if($("select[name=Undergraduate-university-name]").val() ==''){$("select[name=Undergraduate-university-name]").addClass("focuscss");}else{$("select[name=Undergraduate-university-name]").removeClass("focuscss");}
@@ -205,7 +206,7 @@ jQuery(document).ready(function($) {
 		
 	};
 	var checkInsurance = function (memberType){
-    if(memberType=="11"||memberType=="12"||memberType=="15"||memberType=="16"||memberType=="34"||memberType=="22"||memberType=="21"||memberType=="36"||memberType=="37"){
+    if(memberType=="9960"||memberType=="9961"||memberType=="9991"||memberType=="9992"||memberType=="9968"||memberType=="9997"||memberType=="10005"||memberType=="9967"||memberType=="10006"){
 		return false;
 	}
 	else{return true;}

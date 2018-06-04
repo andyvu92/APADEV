@@ -99,7 +99,7 @@
 ?>
 <?php if(isset($_SESSION["Log-in"])): ?>
 <div style="float: right;">
-	<form method="POST" action="<?php echo $url; ?>" name="forLogin">
+	<form method="POST" action="<?php echo $url; ?>" name="forlogout">
 		<input type="hidden" name="logout" value="out" style="display: none;" />
 		<input type="submit" value="log-oout" />
 	</form>

@@ -35,6 +35,8 @@ function deleteSession() {
 	unset($_SESSION["workplaceSettings"]);
 	unset($_SESSION["interestAreas"]);
 	unset($_SESSION["Language"]);
+	unset($_SESSION['country']);
+	
 	//End Added by JingHu
 	/*
 	unset($_SESSION['Logfgh']);
@@ -62,5 +64,13 @@ function deleteSession() {
 	unset($_SESSION['Logfgh']);
 	unset($_SESSION['Logfgh']);
 	*/
+}
+/* Added by JingHu  */
+/* When the order is created successfully delete all the session which are stored the temp data  */
+function completeOrderDeleteSession(){
+	unset($_SESSION["postReviewData"]);
+	unset($_SESSION["tempcard"]);
+	unset($_SESSION["MembershipProductID"]);
+	unset($_SESSION["NationalProductID"]);
 }
 ?>

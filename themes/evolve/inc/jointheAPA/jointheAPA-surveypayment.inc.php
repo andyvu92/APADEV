@@ -4,35 +4,17 @@ if(isset($_POST['step2-1'])) {
 	$postInsuranceData['ID'] = "-1";
 	$postInsuranceData['EntityName'] = "PersonInsuranceData__c";
 	if(isset($_SESSION['LinkId'])){ $postInsuranceData['PersonID'] = $_SESSION['LinkId']; } 
-	//if(isset($_POST['Claim'])){ $postInsuranceData['MalpracticeClaim'] = $_POST['Claim']; }
-	//if(isset($_POST['Facts'])){ $postInsuranceData['Facts'] = $_POST['Facts']; }
-	//if(isset($_POST['Disciplinary'])){ $postInsuranceData['ExternalDisciplinaryProceedings'] = $_POST['Disciplinary']; }
-	//if(isset($_POST['Decline'])){ $postInsuranceData['InsurerDeclinedInsurance'] = $_POST['Decline']; }
-	//if(isset($_POST['Oneclaim'])){ $postInsuranceData['MoreThanOneClaim'] = $_POST['Oneclaim']; }
-	if(isset($_POST['Addtionalquestion']) && $_POST['Addtionalquestion'] == "1"){ 
-		$postInsuranceData['Addtionalquestion'] = $_POST['Addtionalquestion'];
-		if(isset($_POST['Yearclaim'])){ $postInsuranceData['Yearofclaim'] = $_POST['Yearclaim']; }
-		if(isset($_POST['Nameclaim'])){ $postInsuranceData['ClaimantName'] = $_POST['Nameclaim']; }
-		if(isset($_POST['Fulldescription'])){ $postInsuranceData['Description'] = $_POST['Fulldescription']; }
-		if(isset($_POST['Amountpaid'])){ $postInsuranceData['AmountPaid'] = $_POST['Amountpaid']; }
-		if(isset($_POST['Finalisedclaim'])){ $postInsuranceData['ClaimFinalised'] = $_POST['Finalisedclaim']; }
-        if(isset($_POST['Businiessname'])){ $postInsuranceData['Businiessname'] = $_POST['Businiessname']; }		
-	}
-	
-	//test data start from here
-	$postInsuranceData['MalpracticeClaim'] ="false";
-	$postInsuranceData['InsuredClaimRisk'] ="false";
-	$postInsuranceData['ExternalDisciplinaryProceedings'] ="false";
-	$postInsuranceData['InsurerDeclinedInsurance'] ="false";
-	$postInsuranceData['MoreThanOneClaim'] ="false";
-	$postInsuranceData['Yearofclaim'] ="2018";
-	$postInsuranceData['ClaimantName'] ="test";
-	$postInsuranceData['Description'] ="test";
-	$postInsuranceData['AmountPaid'] ="200";
-	$postInsuranceData['ClaimFinalised'] ="false";
-	
-	
-	
+	if(isset($_POST['Claim'])){ $postInsuranceData['MalpracticeClaim'] = $_POST['Claim']; }
+	if(isset($_POST['Facts'])){ $postInsuranceData['InsuredClaimRisk'] = $_POST['Facts']; }
+	if(isset($_POST['Disciplinary'])){ $postInsuranceData['ExternalDisciplinaryProceedings'] = $_POST['Disciplinary']; }
+	if(isset($_POST['Decline'])){ $postInsuranceData['InsurerDeclinedInsurance'] = $_POST['Decline']; }
+	if(isset($_POST['Oneclaim'])){ $postInsuranceData['MoreThanOneClaim'] = $_POST['Oneclaim']; }
+	if(isset($_POST['Yearclaim'])){ $postInsuranceData['Yearofclaim'] = $_POST['Yearclaim']; }
+	if(isset($_POST['Nameclaim'])){ $postInsuranceData['ClaimantName'] = $_POST['Nameclaim']; }
+	if(isset($_POST['Fulldescription'])){ $postInsuranceData['Description'] = $_POST['Fulldescription']; }
+	if(isset($_POST['Amountpaid'])){ $postInsuranceData['AmountPaid'] = $_POST['Amountpaid']; }
+	if(isset($_POST['Finalisedclaim'])){ $postInsuranceData['ClaimFinalised'] = $_POST['Finalisedclaim']; }
+	if(isset($_POST['Businiessname'])){ $postInsuranceData['BusinessNameOwned'] = $_POST['Businiessname']; }		
 	
 	//test data end here
     // 2.2.40 - Get user insurance data
@@ -42,20 +24,7 @@ if(isset($_POST['step2-1'])) {
 	$data['ID'] = $_SESSION["UserId"];
 	$insuarnceData = GetAptifyData("40", $data,""); // #_SESSION["UserID"];
 	if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=0;}// this is important key, to check the user is whether the first time to submit insuranceData;
-	//print_r($insuarnceData);
-	//$insuarnceData=array();
-	//$insuarnceData['Claim']="Yes";
-	//$insuarnceData['Facts']="No"; 
-	//$insuarnceData['Disciplinary']="No"; 
-	//$insuarnceData['Decline']="No"; 
-	//$insuarnceData['Oneclaim']="No";  
-	//$insuarnceData['Addtionalquestion']="1";
-	//$insuarnceData['Yearclaim']="2018";
-	//$insuarnceData['Nameclaim']="test";
-	//$insuarnceData['Fulldescription']="test"; 
-	//$insuarnceData['Amountpaid']="2000"; 
-	//$insuarnceData['Finalisedclaim']="Yes"; 
-	//$insuarnceData['Businiessname']="test"; 
+	
 	
 	if($postInsuranceData['Claim']!=$insuarnceData['Claim'] || $postInsuranceData['Facts']!=$insuarnceData['Facts'] || $postInsuranceData['Disciplinary']!=$insuarnceData['Disciplinary'] || $postInsuranceData['Decline']!=$insuarnceData['Decline']|| $postInsuranceData['Oneclaim']!=$insuarnceData['Oneclaim']){
 	$submitTag=true;	
@@ -70,7 +39,7 @@ if(isset($_POST['step2-1'])) {
 	// userID & insurance data
 	// Response -??????????????????????set in the future
     //if($insuranceDataTag==0 || $submitTag ) {$testData = GetAptifyData("41", $postInsuranceData); print_r($testData);}
-	$testData = GetAptifyData("41", $postInsuranceData); print_r($testData);
+	$testData = GetAptifyData("41", $postInsuranceData); 
 	
 }
   ?>
@@ -119,7 +88,7 @@ if(isset($_POST['step2-1'])) {
 			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 			Payment options:
 			</div>
-			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><label for="p1-1">Full payment</label><input type="radio" name ="Paymentoption" id="p1-1" value="1" checked="checked"><label for="p1-2">Monthly instalments</label><input type="radio" name ="Paymentoption" id="p1-2" value="0">This option incurs a $12.00 admin fee.</div>
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><label for="p1-1">Full payment</label><input type="radio" name ="Paymentoption" id="p1-1" value="0" checked="checked"><label for="p1-2">Monthly instalments</label><input type="radio" name ="Paymentoption" id="p1-2" value="1">This option incurs a $12.00 admin fee.</div>
 		    <input type="hidden" id="Installpayment-frequency" name="Installpayment-frequency" value="">
 		</div>
 		<div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">PRF donation</div></div>
@@ -177,7 +146,7 @@ if(isset($_POST['step2-1'])) {
 					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 					$PaymentType=json_decode($PaymentTypecode, true);
 					foreach($PaymentType  as $pair => $value){
-						echo '<option value="'.$PaymentType[$pair]['Name'].'"';
+						echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 						echo '> '.$PaymentType[$pair]['Name'].' </option>';
 						
 					}
@@ -218,7 +187,7 @@ if(isset($_POST['step2-1'])) {
 					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 					$PaymentType=json_decode($PaymentTypecode, true);
 					foreach($PaymentType  as $pair => $value){
-						echo '<option value="'.$PaymentType[$pair]['Name'].'"';
+						echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 						echo '> '.$PaymentType[$pair]['Name'].' </option>';
 						
 					}

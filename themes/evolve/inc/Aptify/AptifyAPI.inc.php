@@ -57,6 +57,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			echo "<br />5. Member detail - Update: <br />";
 			// Add JSON sample here
 			$JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
+			echo $JSONreturn;
 			return $JSONreturn;
 			break;
 		case "6":
@@ -203,6 +204,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			echo "<br />21. Dashboard - Get list of Fellowship Products: <br />";
 			// Add JSON sample here
 			$JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+			echo $JSONreturn;
 			return $JSONreturn;
 		case "22":
 			// Eddy
@@ -699,7 +701,9 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			echo "<br />40. Get Insurance Data: <br />";
 			$insuranceData ="UserID=".$variables["ID"];
 			$JSONreturn = curlRequest($API, "Get", $insuranceData);
+			echo $JSONreturn;
 			return $JSONreturn;
+			
 			break;
 		case "41":
 			// test by Jing Hu
@@ -727,12 +731,43 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />43. Get installment details for the user: <br />";
-			//$data = "UserID=".$variables["id"];
-			$data = "UserID=55280";
+			$data = "UserID=".$variables["id"];
 			$JSONreturn = curlRequest($API, "Get", $data);	
 			echo $JSONreturn;
 			return $JSONreturn;
 			break;
+		case "44":
+			// test by Jing Hu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/OrderDetails/";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />44. Get Order Details <br />";
+			$JSONreturn = curlRequest($API, "Get", $variables);	
+			echo $JSONreturn;
+			return $JSONreturn;
+			break;
+		case "45":
+			// test by Jing Hu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/DataObjects/spGetQuatationOrderID__c?";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />45. Get Renewal Quatation OrderID <br />";
+		    $data = "UserID=".$variables["id"];
+			$JSONreturn = curlRequest($API, "Get", $data);	
+			echo $JSONreturn;
+			return $JSONreturn;
+			break;
+        case "46":
+			// test by Jing Hu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/DataObjects/spGetOrderPaymentScheduledDetails__c?";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />46. Get Order payment schedules <br />";
+		    $data = "OrderID=".$variables["id"];
+			$JSONreturn = curlRequest($API, "Get", $data);	
+			echo $JSONreturn;
+			return $JSONreturn['results'];
+			break;				
 	}
 }
 
@@ -771,7 +806,7 @@ function curlRequest($API, $type, $variables) {
 				"AptifyAuthorization: Web ".$_SESSION["TokenId"],
 				"Content-Type:application/x-www-form-urlencoded" 
 			));
-		} elseif($type == "Image"|| $type == "Order") {
+		} elseif($type == "Image"|| $type == "Order"|| $type == "JSON") {
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 				"AptifyAuthorization: Web ".$_SESSION["TokenId"],
 				"Content-Type:application/json"

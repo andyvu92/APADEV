@@ -28,7 +28,8 @@ function getDropdown(){
 	foreach($result['MemberType']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
-		$arrayMemberType[] = array('ID'=>$ID, 'Name'=>$Name);	
+		$ProductID = $lines['ProductID'];
+		$arrayMemberType[] = array('ID'=>$ID, 'Name'=>$Name, 'ProductID'=>$ProductID);	
     }
 	$response= $arrayMemberType;
 	$fp = fopen(__DIR__ . '/../json/MemberType.json', 'w');
@@ -59,7 +60,8 @@ function getDropdown(){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
 		$IsActive = $lines['IsActive'];
-		$arrayNationalGroup__c[] = array('ID'=>$ID, 'Name'=>$Name, 'IsActive'=>$IsActive);	
+		$ProductID = $lines['ProductID'];
+		$arrayNationalGroup__c[] = array('ID'=>$ID, 'Name'=>$Name, 'IsActive'=>$IsActive, 'ProductID'=>$ProductID);	
     }
 	$response= $arrayNationalGroup__c;
 	$fp = fopen(__DIR__ . '/../json/NationalGroup__c.json', 'w');
@@ -127,6 +129,47 @@ function getDropdown(){
     }
 	$response= $arrayEducationdegree;
 	$fp = fopen(__DIR__ . '/../json/Educationdegree.json', 'w');
+    $test = fwrite($fp, json_encode($response));
+	fclose($fp);
+	// write Aboriginal json file
+	foreach($result['Aboriginal']  as $lines){
+		$ID = $lines['ID'];
+		$Name = $lines['Name'];
+		$arrayAboriginal[] = array('ID'=>$ID, 'Name'=>$Name);	
+    }
+	$response= $arrayAboriginal;
+	$fp = fopen(__DIR__ . '/../json/Aboriginal.json', 'w');
+    $test = fwrite($fp, json_encode($response));
+	fclose($fp);
+	// write Dietary json file
+	foreach($result['Dietary']  as $lines){
+		$ID = $lines['ID'];
+		$Name = $lines['Name'];
+		$arrayDietary[] = array('ID'=>$ID, 'Name'=>$Name);	
+    }
+	$response= $arrayDietary;
+	$fp = fopen(__DIR__ . '/../json/Dietary.json', 'w');
+    $test = fwrite($fp, json_encode($response));
+	fclose($fp);
+	// write Gender json file
+	foreach($result['Gender']  as $lines){
+		$ID = $lines['ID'];
+		$Name = $lines['Description'];
+		$arrayGender[] = array('ID'=>$ID, 'Description'=>$Name);	
+    }
+	$response= $arrayGender;
+	$fp = fopen(__DIR__ . '/../json/Gender.json', 'w');
+    $test = fwrite($fp, json_encode($response));
+	fclose($fp);
+	// write Branch json file
+	foreach($result['Branch']  as $lines){
+		$ID = $lines['ID'];
+		$Abbreviation = $lines['Abbreviation'];
+		$FullName = $lines['FullName'];
+		$arrayBranch[] = array('ID'=>$ID, 'Abbreviation'=>$Abbreviation, 'FullName'=>$FullName);	
+    }
+	$response= $arrayBranch;
+	$fp = fopen(__DIR__ . '/../json/Branch.json', 'w');
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);
 }

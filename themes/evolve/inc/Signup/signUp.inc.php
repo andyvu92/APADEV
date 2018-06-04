@@ -3,13 +3,26 @@
 
 if(isset($_POST['step1'])) {
 	$postData = array();
+	if(isset($_POST['Firstname'])){ $postData['Firstname'] = $_POST['Firstname']; }
+	if(isset($_POST['Lastname'])){ $postData['Lastname'] = $_POST['Lastname']; }
+	if(isset($_POST['Prefix'])){ $postData['Prefix'] = $_POST['Prefix']; }
+	if(isset($_POST['Birth'])){ $postData['birth'] = str_replace("-","/",$_POST['Birth']); }
+	if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
+	if(isset($_POST['Address_Line_1'])){ $postData['Unit'] = $_POST['Address_Line_1']; }
+	if(isset($_POST['Address_Line_2'])){ $postData['Street'] = $_POST['Address_Line_2']; }
+	if(isset($_POST['Suburb'])){ $postData['Suburb'] = $_POST['Suburb']; }
+	if(isset($_POST['Postcode'])){ $postData['Postcode'] = $_POST['Postcode']; }
+	if(isset($_POST['State'])){ $postData['State'] = $_POST['State']; }
+	if(isset($_POST['Country'])){ $postData['Country'] = $_POST['Country']; }
+	if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid'];}
+	if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password'];}
 	//test data start from here
-	$postData['Firstname']="testjh20180517";
+	/*$postData['Firstname']="testjh20180517";
 	
 	$postData['Lastname']="testjh";
 	$postData['Prefix'] ="Mr.";
 	$postData['Birth']="1978-10-05";
-	$postData['Gender']="0";
+	$postData['Gender']="Male";
 
 	$postData['Unit']="Line 1 Business Add1";
 	$postData['Street']="Line 2 Business Add1";
@@ -20,7 +33,7 @@ if(isset($_POST['step1'])) {
 	$postData['Postcode']="40012";
 	$postData['Country']="Australia";
 	$postData['Memberid']="testjh20180517@hotmail.com";
-	$postData['Password']="!!Aptify@1234";
+	$postData['Password']="!!Aptify@1234";*/
 	
 	
 	
@@ -287,7 +300,7 @@ if($resultdata['result']) {
 								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 								$State=json_decode($statecode, true);
 								foreach($State  as $key => $value){
-								echo '<option value="'.$State[$key]['ID'].'"';
+								echo '<option value="'.$State[$key]['Abbreviation'].'"';
 							    echo '> '.$State[$key]['Abbreviation'].' </option>';
 							
 								}
@@ -301,7 +314,7 @@ if($resultdata['result']) {
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
 							foreach($country  as $key => $value){
-								echo '<option value="'.$country[$key]['ID'].'"';
+								echo '<option value="'.$country[$key]['Country'].'"';
 								echo '> '.$country[$key]['Country'].' </option>';
 								
 							}

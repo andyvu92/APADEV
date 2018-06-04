@@ -3,9 +3,10 @@ $i = $_POST['count'];
 $sessionWorkplaceSetting = json_decode($_POST['sessionWorkplaceSetting']);
 $sessioninterestAreas = json_decode($_POST['sessioninterestAreas']);
 $sessionLanguage = json_decode($_POST['sessionLanguage']);
+$sessionCountry = $_POST['sessionCountry'];
 $interestAreas= $sessioninterestAreas;
 
-echo '<div class="row"><div class="col-lg-6">&nbsp;</div><div class="col-lg-6"> <label for="Findphysio'.$i.'"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
+echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1"><div class="row"><div class="col-lg-6">&nbsp;</div><div class="col-lg-6"> <label for="Findphysio'.$i.'"><strong>NOTE:</strong>This workplace is included in Find a Pyhsio.</label>
 <input type="checkbox" name="Findphysio'.$i.'" id="Findphysio'.$i.'" value="" ></div></div>
 <div class="row"><div class="col-lg-6">&nbsp;</div><div class="col-lg-6"> <label for="Findabuddy'.$i.'"><strong>NOTE:</strong>Please list my details in the physio</label>
 <input type="checkbox" name="Findabuddy'.$i.'" id="Findabuddy'.$i.'" value="" ></div></div>
@@ -67,22 +68,55 @@ echo '</select>
 </div>
 <div class="col-lg-3">
 <label for="Wcountry'.$i.'">Country</label>
-<input type="text" class="form-control" name="Wcountry'.$i.'" id="Wcountry'.$i.'" value="">
+<select class="form-control" id="Wcountry'.$i.'" name="Wcountry'.$i.'">
+';
+ 	$country = $sessionCountry;
+	foreach($country  as $key => $object){
+		echo '<option value="'.$country[$key]['Country'].'">'.$country[$key]['Country'].'</option>';
+	}
+echo '
+</select>
+
 </div>
 </div>
 <div class="row">
 <div class="col-lg-6">
 <label for="Wemail'.$i.'">Workplace email</label>
-<input type="text" class="form-control" name="Wemail'.$i.'" id="Wemail'.$i.'" value="">
+<input type="email" class="form-control" name="Wemail'.$i.'" id="Wemail'.$i.'" value="">
 </div>
 <div class="col-lg-3">
 <label for="Wwebaddress'.$i.'">Website</label>
 <input type="text" class="form-control" name="Wwebaddress'.$i.'" id="Wwebaddress'.$i.'" value="">
 </div>
-<div class="col-lg-3">
-<label for="Wphone'.$i.'">Phone number</label>
-<input type="text" class="form-control" name="Wphone'.$i.'" id="Wphone'.$i.'" value="">
+
 </div>
+<div class="row">
+							
+<div class="col-lg-2">
+	<label for="">Country code</label>
+	<select class="form-control" id="WPhoneCountryCode'.$i.'" name="WPhoneCountryCode'.$i.'">';
+				
+		foreach($country  as $pair => $value){
+			echo '<option value="'.$country[$pair]['TelephoneCode'].'"';
+			if ($details['Workplaces'][$key]['WPhoneCountryCode'] == $country[$pair]['TelephoneCode']){ echo "selected='selected'"; } 
+			echo '> '.$country[$pair]['Country'].' </option>';
+		}
+	
+	echo '</select>
+</div>
+<div class="col-lg-2">
+	<label for="">Area code</label>
+	<input type="text" class="form-control" name="WPhoneAreaCode'.$i.'" maxlength="5">
+</div>
+<div class="col-lg-4">
+	<label for="">Phone number</label>
+	<input type="text" class="form-control" name="Wphone'.$i.'">
+</div>
+<div class="col-lg-2">
+	<label for="">Extention Number</label>
+	<input type="text" class="form-control" name="WPhoneExtentions'.$i.'">
+</div>
+
 </div>
 <div class="row">
 <div class="col-lg-3">
@@ -110,39 +144,39 @@ Does this workplace provide:
 </div>
 <div class="row">
 <div class="col-lg-6">
-<input type="checkbox" name="Electronic-claiming'.$i.'" id="Electronic-claiming'.$i.'" value="" > <label for="Electronic-claiming'.$i.'">Electronic claiming</label>
+<input type="checkbox" name="Electronic-claiming'.$i.'" id="Electronic-claiming'.$i.'" value="False" > <label for="Electronic-claiming'.$i.'">Electronic claiming</label>
 </div>
 <div class="col-lg-6">
-<input type="checkbox" name="Hicaps'.$i.'" id="Hicaps'.$i.'" value="" > <label for="Hicaps'.$i.'">HICAPS</label>
+<input type="checkbox" name="Hicaps'.$i.'" id="Hicaps'.$i.'" value="False" > <label for="Hicaps'.$i.'">HICAPS</label>
 </div>
 </div>
 <div class="row">
 <div class="col-lg-6">
-<input type="checkbox" name="Healthpoint'.$i.'" id="Healthpoint'.$i.'" value="0"> <label for="Healthpoint'.$i.'">Healthpoint</label>
+<input type="checkbox" name="Healthpoint'.$i.'" id="Healthpoint'.$i.'" value="False"> <label for="Healthpoint'.$i.'">Healthpoint</label>
 </div>
 <div class="col-lg-6">
-<input type="checkbox" name="Departmentva'.$i.'" id="Departmentva'.$i.'" value="0"> <label for="Departmentva'.$i.'">Department of Vetarans Affairs</label>
+<input type="checkbox" name="Departmentva'.$i.'" id="Departmentva'.$i.'" value="False"> <label for="Departmentva'.$i.'">Department of Vetarans Affairs</label>
 </div>
 </div>
 <div class="row">
 <div class="col-lg-6">
-<input type="checkbox" name="Workerscompensation'.$i.'" id="Workerscompensation'.$i.'" value="0"> <label for="Workerscompensation'.$i.'">Workers compensation</label>
+<input type="checkbox" name="Workerscompensation'.$i.'" id="Workerscompensation'.$i.'" value="False"> <label for="Workerscompensation'.$i.'">Workers compensation</label>
 </div>
 <div class="col-lg-6">
-<input type="checkbox" name="Motora'.$i.'" id="Motora'.$i.'" value="0"> <label for="Motora'.$i.'">Motor accident compensation</label>
+<input type="checkbox" name="Motora'.$i.'" id="Motora'.$i.'" value="False"> <label for="Motora'.$i.'">Motor accident compensation</label>
 </div>
 </div>
 <div class="row">
 <div class="col-lg-6">
-<input type="checkbox" name="Medicare'.$i.'" id="Medicare'.$i.'" value="0"> <label for="Medicare'.$i.'">Medicare Chronic Disease Management</label>
+<input type="checkbox" name="Medicare'.$i.'" id="Medicare'.$i.'" value="False"> <label for="Medicare'.$i.'">Medicare Chronic Disease Management</label>
 </div>
 <div class="col-lg-6">
-<input type="checkbox" name="Homehospital'.$i.'" id="Homehospital'.$i.'" value="0"> <label for="Homehospital'.$i.'">Home and hospital visits</label>
+<input type="checkbox" name="Homehospital'.$i.'" id="Homehospital'.$i.'" value="False"> <label for="Homehospital'.$i.'">Home and hospital visits</label>
 </div>
 </div>
 <div class="row">
 <div class="col-lg-6">
-<input type="checkbox" name="MobilePhysio'.$i.'" id="MobilePhysio'.$i.'" value="0"> <label for="MobilePhysio'.$i.'">Mobile physiotherapist</label>
+<input type="checkbox" name="MobilePhysio'.$i.'" id="MobilePhysio'.$i.'" value="False"> <label for="MobilePhysio'.$i.'">Mobile physiotherapist</label>
 </div>
 </div>
 <div class="row">
@@ -172,7 +206,7 @@ Your special interest area:
 <div class="col-lg-9">
 <select class="chosen-select" id="WTreatmentarea'.$i.'" name="WTreatmentarea'.$i.'[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">';
     foreach($interestAreas  as $key => $value){
-		echo '<option value="'.$value->Code.'">'.$value->Name.'</option>';
+		echo '<option value="'.$value->ID.'">'.$value->Name.'</option>';
 	}
 echo '</select>
 </div>

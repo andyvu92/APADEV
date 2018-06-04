@@ -14,7 +14,11 @@ if(isset($_POST['step3'])) {
 		$postReviewData['PaymentTypeID'] = $cardDetails['Payment-method'];
 		$postReviewData['CCNumber'] = $cardDetails['Cardno'];
 		$postReviewData['CCExpireDate'] = $cardDetails['Expiry-date'];
+		
+		//test data
+		
 		$postReviewData['CCSecurityNumber'] = $cardDetails['CCV'];	
+		$postReviewData['Card_number'] = "";	
 	}
 	else{
 		$postReviewData['PaymentTypeID'] = "";
@@ -22,9 +26,6 @@ if(isset($_POST['step3'])) {
 		$postReviewData['CCExpireDate'] = "";
 		$postReviewData['CCSecurityNumber'] = "";
 	}
-	//test data
-	$postReviewData['Paymentoption']=0;  
-	$postReviewData['Card_number']="2";  	
 	$postReviewData['InsuranceApplied'] = 0;
 		
 	// 2.2.26 - Register a new order
@@ -32,21 +33,39 @@ if(isset($_POST['step3'])) {
 	// userID&Paymentoption&PRFdonation&Rollover&Card_number&productID
 	// Response -Register a new order successfully
 	$registerOuts = GetAptifyData("26", $postReviewData);
+    if($registerOuts['Invoice_ID']!=="0") {
+		$invoice_ID = $registerOuts['Invoice_ID'];
+		//save the terms and conditons on APA side
+		$dataArray = array();
+		$dataArray['MemberID'] = $postReviewData['userID'];
+		$dataArray['CreateDate']= date('Y-m-d');
+		$dataArray['MembershipYear'] = date('Y',strtotime('+1 year'));
+		$dataArray['ProductList'] = implode(",",$postReviewData['productID']);
+		$dataArray['Type'] = "J";
+		forCreateRecordFunc($dataArray);
+		//delete session: really important!!!!!!!!
+		completeOrderDeleteSession();
+		// delete shopping cart data from APA database; put the response status validation here!!!!!!!
+		$userID = $_SESSION["UserId"];
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+		$type = "PD";
+		try {
+			$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type!=:type');
+			$shoppingCartDel->bindValue(':userID', $userID);
+			$shoppingCartDel->bindValue(':type', $type);
+			$shoppingCartDel->execute();
+			$shoppingCartDel = null;
+		}
+		catch (PDOException $e) {
+			print "Error!: " . $e->getMessage() . "<br/>";
+			die();
+		}    		
+	}
+	//2.2.46 -get order payment schedules test part
+   $paymentData['id'] = $registerOuts['Invoice_ID'];
+   $paymentDataSchedules = GetAptifyData("46", $paymentData);
 
-	//put extra code when using API to get the status of order, if it is successful, will save terms and conditions on APA side
-	//save the terms and conditons on APA side
-	$dataArray = array();
-	$dataArray['MemberID'] = $postReviewData['userID'];
-	$dataArray['CreateDate']= date('Y-m-d');
-	$dataArray['MembershipYear'] = date('Y',strtotime('+1 year'));
-	$dataArray['ProductList'] = implode(",",$postReviewData['productID']);
-	$dataArray['Type'] = "J";
-	forCreateRecordFunc($dataArray);
-	//delete session: really important!!!!!!!!
-	unset($_SESSION["postReviewData"]);
-	unset($_SESSION["tempcard"]);
-	unset($_SESSION["MembershipProductID"]);
-	unset($_SESSION["NationalProductID"]);
+   
 }
 ?>
 <?php
@@ -85,24 +104,11 @@ include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 					// UserID & Invoice_ID
 					// Response -Invoice PDF
 					$send["UserID"] = $_SESSION["UserId"];
-					$send["Invoice_ID"] = "1111";  
+					$send["Invoice_ID"] = $invoice_ID;  
 					$invoiceAPI = GetAptifyData("18", $send); 
-					// delete shopping cart data from APA database; put the response status validation here!!!!!!!
-					$userID = $_SESSION["UserId"];
-					$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
-					$type = "PD";
-					try {
-						$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type!=:type');
-						$shoppingCartDel->bindValue(':userID', $userID);
-						$shoppingCartDel->bindValue(':type', $type);
-						$shoppingCartDel->execute();
-						$shoppingCartDel = null;
-					}
-					catch (PDOException $e) {
-						print "Error!: " . $e->getMessage() . "<br/>";
-						die();
-					}    		
+					
 					?> 
+					<br>
 					<a style="color:white;" href="<?php echo $invoiceAPI["Invoice"];?>">Download your receipt</a>
 					<p style="color:white;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>
 				</div>

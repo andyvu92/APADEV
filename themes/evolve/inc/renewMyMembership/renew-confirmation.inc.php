@@ -2,7 +2,7 @@
 if(isset($_POST['step3'])) {
 	//continue to get the review data
 	$postReviewData = $_SESSION['postReviewData'];
-	//if(isset($_POST['Paymentcardvalue'])){ $postReviewData['Card_number'] = $_POST['Paymentcardvalue']; }
+	if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
 	//if(isset($_POST['rollover'])){ $postReviewData['Rollover'] = $_POST['rollover']; }
 	//if(isset($_POST['Installpayment-frequency'])){ $postReviewData['Installpayment-frequency'] = $_POST['Installpayment-frequency']; }
 	
@@ -16,7 +16,10 @@ if(isset($_POST['step3'])) {
 		$postReviewData['PaymentTypeID'] = $cardDetails['Payment-method'];
 		$postReviewData['CCNumber'] = $cardDetails['Cardno'];
 		$postReviewData['CCExpireDate'] = $cardDetails['Expiry-date'];
+		//test data
+		
 		$postReviewData['CCSecurityNumber'] = $cardDetails['CCV'];	
+		$postReviewData['Card_number'] = "";	
 	}
 	else{
 		$postReviewData['PaymentTypeID'] = "";
@@ -24,10 +27,20 @@ if(isset($_POST['step3'])) {
 		$postReviewData['CCExpireDate'] = "";
 		$postReviewData['CCSecurityNumber'] = "";
 	}
-	//test data
-	    $postReviewData['OrderID'] = "11404";
-    $postReviewData['Paymentoption']=0;  
-	$postReviewData['Card_number']="2";  	
+	
+	//This is to get the renewal quatation order details from Aptify!!!!!!!!
+	// 2.2.45 - Renewal Quatation OrderID
+	// Send - 
+	// userID
+	// Response -Renewal Quatation OrderID
+	$variableData['id'] = $_SESSION["UserId"];
+	$Quatation = GetAptifyData("45", $variableData);
+	foreach ($Quatation["results"] as $quatationOrderArray){
+		$quatationOrderID =  $quatationOrderArray["ID"];
+	}
+	
+	$postReviewData['OrderID'] = $quatationOrderID;
+	
 	$postReviewData['InsuranceApplied'] = 0;
 	
 	
@@ -37,7 +50,8 @@ if(isset($_POST['step3'])) {
 	// Response -Renew a membership order successfully
 	//submit data to complete renew membership web service 2.2.27
 	$renewOuts=GetAptifyData("27", $postReviewData);
-	//put extra code when using API to get the status of order, if it is successful, will save terms and conditions on APA side
+	if($renewOuts['Invoice_ID']!=="0") {
+	  $invoice_ID = $registerOuts['Invoice_ID'];
 	//save the terms and conditons on APA side
 	$dataArray = array();
 	$dataArray['MemberID'] = $postReviewData['userID'];
@@ -47,8 +61,23 @@ if(isset($_POST['step3'])) {
 	$dataArray['Type'] = "R";
 	forCreateRecordFunc($dataArray);
 	//delete session:
-	unset($_SESSION["postReviewData"]);
-	unset($_SESSION["tempcard"]);
+	completeOrderDeleteSession();
+	// delete shopping cart data from APA database; put the response status validation here!!!!!!!
+					$userID = $_SESSION["UserId"];
+					$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+					$type = "PD";
+					try {
+						$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type!=:type');
+						$shoppingCartDel->bindValue(':userID', $userID);
+						$shoppingCartDel->bindValue(':type', $type);
+						$shoppingCartDel->execute();
+						$shoppingCartDel = null;
+					}
+					catch (PDOException $e) {
+						print "Error!: " . $e->getMessage() . "<br/>";
+						die();
+					}    		
+	}
 }
 ?>
 <?php
@@ -89,21 +118,7 @@ include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 					$send["UserID"] = $_SESSION["UserId"];
 					$send["Invoice_ID"] = "1111";  
 					$invoiceAPI = GetAptifyData("18", $send); 
-					// delete shopping cart data from APA database; put the response status validation here!!!!!!!
-					$userID = $_SESSION["UserId"];
-					$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
-					$type = "PD";
-					try {
-						$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type!=:type');
-						$shoppingCartDel->bindValue(':userID', $userID);
-						$shoppingCartDel->bindValue(':type', $type);
-						$shoppingCartDel->execute();
-						$shoppingCartDel = null;
-					}
-					catch (PDOException $e) {
-						print "Error!: " . $e->getMessage() . "<br/>";
-						die();
-					}    		
+					
 					?> 
 					<a style="color:white;" href="<?php echo $invoiceAPI["Invoice"];?>">Download your receipt</a>
 					<p style="color:white;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>

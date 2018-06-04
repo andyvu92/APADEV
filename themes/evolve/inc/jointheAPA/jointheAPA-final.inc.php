@@ -1,5 +1,5 @@
 <?php
-//use session: $_SESSION['UserID'],$_SESSION["postReviewData"]
+//use session: $_SESSION['UserID'],$_SESSION["postReviewData"],
 //save PRF product into APA database function
 function createShoppingCart($userID, $productID,$coupon){
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
@@ -39,6 +39,10 @@ function checkShoppingCart($userID, $productID){
 				die();
 	    }
 }
+//delete PRF
+if(isset($_POST['step2-2'])){
+	checkShoppingCart($userID=$_SESSION['UserId'], $prodcutID="PRF");
+}
 if(isset($_POST['step2'])) {
 	$postPaymentData = array();
 	$postReviewData = array();
@@ -54,6 +58,7 @@ if(isset($_POST['step2'])) {
 		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
 		GetAptifyData("15", $postPaymentData);
+		if(isset($_SESSION['tempcard'])){ unset($_SESSION["tempcard"]);}
 	}
 	elseif(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])){
 		$tempcard = array();
@@ -61,6 +66,7 @@ if(isset($_POST['step2'])) {
 	    $tempcard['Cardno'] = $_POST['Cardnumber'];
 		$tempcard['Expiry-date'] = $_POST['Expirydate']; 
 		$tempcard['CCV'] = $_POST['CCV'];
+		if(isset($_SESSION['tempcard'])){ unset($_SESSION["tempcard"]);}
 		$_SESSION['tempcard'] = $tempcard;
 		
 	}
@@ -79,8 +85,13 @@ if(isset($_POST['step2'])) {
 		createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $coupon=$_POST['PRF']);  
 	}
 	//if(isset($_POST['Rollover'])){ $postReviewData['Rollover'] = $_POST['Rollover']; }
+	echo "this is payment card".$_POST['Paymentcard'];
+	if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
 	if(isset($_POST['Installpayment-frequency'])){ $postReviewData['InstallmentFrequency'] = $_POST['Installpayment-frequency']; }
-	
+	$postReviewData['productID'] = getProductList($_SESSION['UserId']);
+  	//store data in the session
+	$_SESSION["postReviewData"] =  array();
+	$_SESSION["postReviewData"] = $postReviewData;  
 	
 }
 	//get productID list from local database;
@@ -98,19 +109,23 @@ if(isset($_POST['step2'])) {
 		$shoppingcartGet = null;
 		return $arrayReturn;
 	}
-	  // 2.2.31 Get Membership prodcut price
+	// 2.2.31 Get Membership prodcut price
 	// Send - 
 	// userID & product list
 	// Response -Membership prodcut price
-	$productsArray['ProductID']=getProductList($_SESSION['UserId']);
-	$prodcutID = $productsArray;
-	$postReviewData['productID'] = getProductList($_SESSION['UserId']);
-	$products = GetAptifyData("31", $prodcutID);
-
- 
-  	//store data in the session
-	$_SESSION["postReviewData"] =  array();
-	$_SESSION["postReviewData"] = $postReviewData;  
+	$prodcutArray = array();
+	array_push($prodcutArray,$_SESSION["MembershipProductID"]);
+	$memberProductsArray['ProductID']=$prodcutArray;
+	$memberProdcutID = $memberProductsArray;
+	$memberProducts = GetAptifyData("31", $memberProdcutID);
+	// 2.2.19 - GET list National Group
+	// Send - 
+	// userID
+	// Response -National Group product
+	$sendData["UserID"] = $_SESSION['UserId'];
+	$NGListArray = GetAptifyData("19", $sendData);
+	$NGProductsArray=$_SESSION["NationalProductID"];
+	 
 if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 		$updateCard["UserID"] = $_SESSION['UserId'];
 		$updateCard["SpmID"] = $_POST['Paymentcard'];
@@ -133,10 +148,11 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 	$cardData['id'] = $_SESSION["UserId"];
 	$cardsnum = GetAptifyData("12", $cardData);
 	print_r($cardsnum);
+$PRFPrice = 0;
  ?> 
 <form id ="join-review-form" action="joinconfirmation" method="POST">
 	<input type="hidden" name="step3" value="3">
-	<div class="down8" <?php if(isset($_POST['step2']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
+	<div class="down8" <?php if(isset($_POST['step2'])||isset($_POST['step2-2']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
 		<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
 			<table class="memSCTable">
 				<tbody>
@@ -146,16 +162,29 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 					<th>Delete</th>
 					</tr>
 					<?php 
-					$price = "";
-					foreach( $products as $product){
-						echo "<tr>";
-						echo "<td>".$product['Title']."</td>";
-						echo "<td>A$".$product['Price']."</td>";
-						$price += $product['Price'];
-						echo '<td>delete</td>';
-						echo "</tr>";  
-					}
-					if(isset($_POST['PRF'])&& $_POST['PRF']!=""){ echo '<tr><td>Physiotherapy Research Foundation donation</td><td>A$'.$_POST['PRF'].'</td><td>delete</td></tr>'; }
+						$price = "";
+						foreach( $memberProducts as $memberProduct){
+							echo "<tr>";
+							echo "<td>".$memberProduct['Title']."</td>";
+							echo "<td>A$".$memberProduct['Price']."</td>";
+							$price += $memberProduct['Price'];
+							echo '<td><a href="jointheapa" target="_self">delete</a></td>';
+							echo "</tr>";  
+						}
+						foreach( $NGListArray as $NGArray){
+						if(sizeof($NGProductsArray)!=0){
+						    foreach($NGProductsArray as $NGProduct){
+								if($NGProduct == $NGArray['ProductID']){
+									echo "<tr>";
+									echo "<td>".$NGArray['ProductName']."</td>";
+									echo "<td>A$".$NGArray['NGprice']."</td>";
+									$price += $NGArray['NGprice'];
+									echo '<td><a href="jointheapa" target="_self">delete</a></td>';
+								}	echo "</tr>";  
+							}
+						}
+						}
+						if(isset($_POST['PRF'])&& $_POST['PRF']!=""){ echo '<tr><td>Physiotherapy Research Foundation donation</td><td>A$'.$_POST['PRF'].'</td><td><a class="deletePRFButton">delete</a></td></tr>'; $price +=$_POST['PRF']; }
 					?>
 				</tbody>
 			</table>
@@ -166,7 +195,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 		<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
 		<?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>   
 			<fieldset>
-				<select  id="Paymentcard" name="Paymentcard" disabled>
+				<select  id="Paymentcard" name="Paymentcard" readonly>
 				<?php
 					
 						foreach( $cardsnum["results"] as $cardnum) {
@@ -182,14 +211,21 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 				</select>
 			</fieldset>
 		<?php endif; ?>  
-		<?php if(isset($_SESSION['tempcard'])) : ?>
+		<?php if(isset($_SESSION['tempcard']) && !isset($_POST['addcardtag'])) : ?>
 		<?php $tempcards = $_SESSION['tempcard'];?>
 		    <div class="row">
 				<div class="col-lg-12">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type" disabled>
-						<option value="AE" <?php if($tempcards['Payment-method'] == 'AE') echo "selected"; ?>>American Express</option>
-						<option value="Visa" <?php if($tempcards['Payment-method'] == 'Visa') echo "selected"; ?>>Visa</option>
-						<option value="Mastercard" <?php if($tempcards['Payment-method'] == 'Mastercard') echo "selected"; ?>>Mastercard</option>
+					<?php 
+						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+						$PaymentType=json_decode($PaymentTypecode, true);
+						foreach($PaymentType  as $pair => $value){
+							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+							if($tempcards['Payment-method'] == $PaymentType[$pair]['ID']){ echo "selected ";}
+							echo '> '.$PaymentType[$pair]['Name'].' </option>';
+							
+						}
+				    ?>	
 					</select>
 				</div>
 			</div>
@@ -200,7 +236,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			</div>
 			<div class="row">
 				<div class="col-lg-12">
-					<input type="date" class="form-control" id="Expirydate" name="Expirydate" value="<?php echo $tempcards['Expiry-date']; ?>" placeholder="Expire date" readonly>
+					<input type="text" class="form-control" id="Expirydate" name="Expirydate" value="<?php echo $tempcards['Expiry-date']; ?>" placeholder="Expire date" readonly>
 				</div>
 			</div>
 			<div class="row">
@@ -218,16 +254,17 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 					<td>A$<?php echo $price;?></td>
 				</tr>
 				<?php 
-				if(isset($_POST['PRF'])&& $_POST['PRF']!=""){ echo '<tr><td>PRF donation</td><td>A$'.$_POST['PRF'].'</td></tr>'; }
+				if(isset($_POST['PRF'])&& $_POST['PRF']!=""){ $PRFPrice =$_POST['PRF']; echo '<tr><td>PRF donation</td><td>A$'.$_POST['PRF'].'</td></tr>'; }
 				?>
 				<tr>
 				<td>Total(Inc.GST)</td>
-				<td>A$<?php echo $price;?></td>
+				<td>A$<?php echo $price+$PRFPrice;?></td>
 				</tr>
 			</table>
 		<a target="_blank" class="addCartlink"><button class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
 		</div>
 	</div>
 </form>
-<form id="pform" action="" method="POST"><input type="hidden" name="goP"></form>	
+<form id="pform" action="" method="POST"><input type="hidden" name="goP"></form>
+<form id="deletePRFForm" action="" method="POST"><input type="hidden" name="step2-2"></form>	
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="your-details-prevbutton8"><span class="dashboard-button-name">Last</span></a></div>

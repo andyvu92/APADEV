@@ -7,7 +7,7 @@ $products = array();
 $localProducts = array();
 $pdtype= array("event", "course", "workshop");
 $type = "PD";
-$userID = $_SESSION['userID'];
+$userID = $_SESSION['UserId'];
 
 /***************get userinfo from Aptify******************/
 $userInfo_json = '{ 
@@ -77,9 +77,9 @@ $products = $product["PDEvents"];
 
 /********End get Product details  from Aptify******/
 
-if(isset($_SESSION["userID"])){
+if(isset($_SESSION["UserId"])){
     
-	$userid = $_SESSION["userID"];
+	$userid = $_SESSION["UserId"];
 	
 	if(isset($_SESSION["cardsnum"])){
 		$cardsnum = $_SESSION["cardsnum"];
@@ -90,33 +90,25 @@ if(isset($_SESSION["userID"])){
 		// Response -
 		// Credit cards details [Credit card ID, Payment-method,
 		// Name on card, Digits, Exp date, Roll over],  Main card
-		$cardsnum = GetAptifyData("12", $userid);
-		//$cardsnum = $cardsnums["paymentcards"];
-		$_SESSION["cardsnum"]= $cardsnum;
+		
+		$test['id'] = $_SESSION["UserId"];
+		$cardsnum = GetAptifyData("12", $test);
+	    $_SESSION["cardsnum"]= $cardsnum;
 	}
 	print_r($cardsnum);
 	
 	if(isset($_GET["action"])&& ($_GET["action"]=="addcard")&& isset($_POST['addcardtag'])) {
-		/*
-		$newcardsnum =  $_SESSION["cardsnum"];
-		$newcard =  array("Digitsnumber"=>substr($_POST["Cardnumber"],-4),"Payment-method"=>$_POST["Cardtype"],"Default"=>"0");
-		array_push($newcardsnum, $newcard);
-		$_SESSION["cardsnum"]= $newcardsnum;
-		$cardsnum =   $_SESSION["cardsnum"];
-		*/
-		
-		//use webservice 2.2.15 Add payment method
-		$AddNewCounter = 0;
-		if(isset($_SESSION['userID'])){ $postPaymentData['userID'] = $_SESSION['userID']; $AddNewCounter++; }
-		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; $AddNewCounter++; }
-		//if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; $AddNewCounter++; }
-		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; $AddNewCounter++; }
-		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; $AddNewCounter++; }
-		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; $AddNewCounter++; }
-		if($AddNewCounter == 5) { $addNewCards = 1; }
-		if($addNewCards == 1) {
-			GetAptifyData("15", $postPaymentData); 
-		}
+	// 2.2.15 - Add payment method
+	// Send - 
+	// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
+	// Response -
+	// N/A.
+	if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
+	if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
+	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
+	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
+	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
+	$out = GetAptifyData("15",$postPaymentData); 
 	} 
     if(isset($_GET["action"])&& ($_GET["action"]=="addcard")&& !isset($_POST['addcardtag'])) {
 	    $tempcard = array();
@@ -195,13 +187,13 @@ if(isset($_SESSION["userID"])){
 		<fieldset><select  id="Paymentcard" name="Paymentcard">
 		<?php
 		if (sizeof($cardsnum)!=0) {
-			foreach( $cardsnum["paymentcards"] as $cardnum) {
-				echo '<option value="'.$cardnum["Digitsnumber"].'"';
-				if($cardsnum["Description"]=="Y") {
-					echo "selected";
-				}
-				echo 'data-class="'.$cardnum["Payment-method"].'">Credit card ending with ';
-				echo $cardnum["Digitsnumber"].'</option>';
+			foreach( $cardsnum["results"] as $cardnum) {
+				echo '<option value="'.$cardnum["Creditcards-ID"].'"';
+				if($cardnum["IsDefault"]=="1") {
+				echo "selected ";
+			}
+			echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
+			echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
 			}
 		}
 		?>
@@ -213,9 +205,15 @@ if(isset($_SESSION["userID"])){
 		<div class="row">
 			<div class="col-lg-12">
 			<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-			<option value="AE">American Express</option>
-			<option value="Visa">Visa</option>
-			<option value="Mastercard">Mastercard</option>
+			<?php 
+				$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+				$PaymentType=json_decode($PaymentTypecode, true);
+				foreach($PaymentType  as $pair => $value){
+					echo '<option value="'.$PaymentType[$pair]['Name'].'"';
+					echo '> '.$PaymentType[$pair]['Name'].' </option>';
+					
+				}
+			?>
 			</select>
 			</div>
 		</div>
@@ -226,12 +224,12 @@ if(isset($_SESSION["userID"])){
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
+			<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" required maxlength="16">
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
+			<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date" required maxlength="4">
 			</div>
 		</div>
 		<div class="row">

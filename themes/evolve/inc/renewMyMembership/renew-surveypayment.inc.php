@@ -4,37 +4,18 @@ if(isset($_POST['step2-1'])) {
 	$postInsuranceData['ID'] = "-1";
 	$postInsuranceData['EntityName'] = "PersonInsuranceData__c";
 	if(isset($_SESSION['LinkId'])){ $postInsuranceData['PersonID'] = $_SESSION['LinkId']; } 
-	//if(isset($_SESSION['userID'])){ $postInsuranceData['userID'] = $_SESSION['userID']; } 
-	//if(isset($_POST['Claim'])){ $postInsuranceData['Claim'] = $_POST['Claim']; }
-	//if(isset($_POST['Facts'])){ $postInsuranceData['Facts'] = $_POST['Facts']; }
-	//if(isset($_POST['Disciplinary'])){ $postInsuranceData['Disciplinary'] = $_POST['Disciplinary']; }
-	//if(isset($_POST['Decline'])){ $postInsuranceData['Decline'] = $_POST['Decline']; }
-	//if(isset($_POST['Oneclaim'])){ $postInsuranceData['Oneclaim'] = $_POST['Oneclaim']; }
-	if(isset($_POST['Addtionalquestion']) && $_POST['Addtionalquestion'] == "1"){ 
-		$postInsuranceData['Addtionalquestion'] = $_POST['Addtionalquestion'];
-		if(isset($_POST['Yearclaim'])){ $postInsuranceData['Yearclaim'] = $_POST['Yearclaim']; }
-		if(isset($_POST['Nameclaim'])){ $postInsuranceData['Nameclaim'] = $_POST['Nameclaim']; }
-		if(isset($_POST['Fulldescription'])){ $postInsuranceData['Fulldescription'] = $_POST['Fulldescription']; }
-		if(isset($_POST['Amountpaid'])){ $postInsuranceData['Amountpaid'] = $_POST['Amountpaid']; }
-		if(isset($_POST['Finalisedclaim'])){ $postInsuranceData['Finalisedclaim'] = $_POST['Finalisedclaim']; }
-        if(isset($_POST['Businiessname'])){ $postInsuranceData['Businiessname'] = $_POST['Businiessname']; }		
-	}
-	//test data start from here
-	$postInsuranceData['MalpracticeClaim'] ="false";
-	$postInsuranceData['InsuredClaimRisk'] ="false";
-	$postInsuranceData['ExternalDisciplinaryProceedings'] ="false";
-	$postInsuranceData['InsurerDeclinedInsurance'] ="false";
-	$postInsuranceData['MoreThanOneClaim'] ="false";
-	$postInsuranceData['Yearofclaim'] ="2018";
-	$postInsuranceData['ClaimantName'] ="test";
-	$postInsuranceData['Description'] ="test";
-	$postInsuranceData['AmountPaid'] ="200";
-	$postInsuranceData['ClaimFinalised'] ="false";
+	if(isset($_POST['Claim'])){ $postInsuranceData['MalpracticeClaim'] = $_POST['Claim']; }
+	if(isset($_POST['Facts'])){ $postInsuranceData['InsuredClaimRisk'] = $_POST['Facts']; }
+	if(isset($_POST['Disciplinary'])){ $postInsuranceData['ExternalDisciplinaryProceedings'] = $_POST['Disciplinary']; }
+	if(isset($_POST['Decline'])){ $postInsuranceData['InsurerDeclinedInsurance'] = $_POST['Decline']; }
+	if(isset($_POST['Oneclaim'])){ $postInsuranceData['MoreThanOneClaim'] = $_POST['Oneclaim']; }
+	if(isset($_POST['Yearclaim'])){ $postInsuranceData['Yearofclaim'] = $_POST['Yearclaim']; }
+	if(isset($_POST['Nameclaim'])){ $postInsuranceData['ClaimantName'] = $_POST['Nameclaim']; }
+	if(isset($_POST['Fulldescription'])){ $postInsuranceData['Description'] = $_POST['Fulldescription']; }
+	if(isset($_POST['Amountpaid'])){ $postInsuranceData['AmountPaid'] = $_POST['Amountpaid']; }
+	if(isset($_POST['Finalisedclaim'])){ $postInsuranceData['ClaimFinalised'] = $_POST['Finalisedclaim']; }
+	if(isset($_POST['Businiessname'])){ $postInsuranceData['BusinessNameOwned'] = $_POST['Businiessname']; }		
 	
-	
-	
-	
-	//test data end here
     // 2.2.40 - Get user insurance data
 	// Send - 
 	// UserID 
@@ -102,7 +83,7 @@ if(isset($_POST['step2-1'])) {
 			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 			Payment options:
 			</div>
-			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><label for="p1-1">Full payment</label><input type="radio" name ="Paymentoption" id="p1-1" value="full" checked="checked"><label for="p1-2">Monthly instalments</label><input type="radio" name ="Paymentoption" id="p1-2" value="monthly">This option incurs a $12.00 admin fee.</div>
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><label for="p1-1">Full payment</label><input type="radio" name ="Paymentoption" id="p1-1" value="0" checked="checked"><label for="p1-2">Monthly instalments</label><input type="radio" name ="Paymentoption" id="p1-2" value="1">This option incurs a $12.00 admin fee.</div>
 			<input type="hidden" id="Installpayment-frequency" name="Installpayment-frequency" value="">
 		</div>
 		<div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">PRF donation</div></div>
