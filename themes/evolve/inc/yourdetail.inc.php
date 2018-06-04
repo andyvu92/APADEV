@@ -79,9 +79,11 @@ if(isset($_POST['step1'])) {
 	
 	if(isset($_POST['Findpublicbuddy'])){ $postData['Findpublicbuddy'] = $_POST['Findpublicbuddy']; } else{ $postData['Findpublicbuddy'] = "False";}
 	if(isset($_POST['Dietary'])){ 
-		$testD['ID']=$_POST['Dietary'];
-		$testDietaryArray = array();
+	   $testDietaryArray = array();
+		foreach($_POST['Dietary'] as $dietaryData){
+		$testD['ID']=$dietaryData;
 		array_push($testDietaryArray, $testD);
+		}
 		$postData['Dietary'] = $testDietaryArray;
 	}
 	if(isset($_POST['wpnumber'])){ 
@@ -639,7 +641,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							Your dietary requirements
 							</div>
 							<div class="col-lg-6">
-								<select class="form-control" id="Dietary" name="Dietary">
+								<select class="chosen-select" id="Dietary" name="Dietary[]" multiple>
 								<?php 
 								$Dietarycode  = file_get_contents("sites/all/themes/evolve/json/Dietary.json");
 								$Dietary=json_decode($Dietarycode, true);
@@ -791,7 +793,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</select>
 						</div>
 					</div>
-					<div class="row"> 
+					<!--<div class="row"> 
 						<div class="col-lg-3">
 						Your treatment area:
 						</div>
@@ -799,19 +801,19 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<div class="col-lg-9">
 							<select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
 							<?php 
-							$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
-							$interestAreas=json_decode($interestAreascode, true);	
+							//$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
+							//$interestAreas=json_decode($interestAreascode, true);	
 							?>
 							<?php 
-							foreach($interestAreas  as $key => $value){
-								echo '<option value="'.$interestAreas[$key]["Code"].'"';
-								if (in_array( $interestAreas[$key]["Code"],$details['Treatmentarea'])){ echo "selected='selected'"; } 
-								echo '> '.$interestAreas[$key]["Name"].' </option>'; 
-							}
+							//foreach($interestAreas  as $key => $value){
+								//echo '<option value="'.$interestAreas[$key]["Code"].'"';
+								//if (in_array( $interestAreas[$key]["Code"],$details['Treatmentarea'])){ echo "selected='selected'"; } 
+								//echo '> '.$interestAreas[$key]["Name"].' </option>'; 
+							//}
 							?>
 							</select>
 						</div>
-					</div>
+					</div>-->
 					<div class="row">
 						<div class="col-lg-3">
 							What is your favourite languages?<br/>
@@ -1793,39 +1795,39 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<div class="col-lg-6">
 								<label for="Undergraduateuniversity-name<?php echo $key;?>">University name<span class="tipstyle">*</span></label>
 								<select name="Undergraduateuniversity-name<?php echo $key;?>" id="Undergraduateuniversity-name<?php echo $key;?>">
-									<option <?php if (empty($details['PersonEducation'][$key]['Undergraduateuniversity-name'])) echo "selected='selected'";?> selected disabled>(None)</option>
-									<option value="ACU" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "ACU") echo "selected='selected'";?>>Australian Catholic University - NSW</option>
-									<option value="ACUQ" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "ACUQ") echo "selected='selected'";?>>Australian Catholic University - QLD</option>
-									<option value="ACUB" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "ACUB") echo "selected='selected'";?>>Australlian Catholic University - Ballarat</option>
-									<option value="BON" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "BON") echo "selected='selected'";?>>Bond University - QLD</option>
-									<option value="CU" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "CU") echo "selected='selected'";?>>Canberra University</option>
-									<option value="CQU" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "CQU") echo "selected='selected'";?>>Central Qld University</option>
-									<option value="CSU" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "CSU") echo "selected='selected'";?>>Charles Sturt University - Albury NSW</option>
-									<option value="CSUO" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "CSUO") echo "selected='selected'";?>>Charles Sturt University - Orange NSW</option>
-									<option value="CSUP" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "CSUP") echo "selected='selected'";?>>Charles Sturt University Port Macquarie</option>
-									<option value="CUMB" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "CUMB") echo "selected='selected'";?>>Cumberland University - NSW</option>
-									<option value="CUR" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "CUR") echo "selected='selected'";?>>Curtin University - WA</option>
-									<option value="ECU" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "ECU") echo "selected='selected'";?>>Edith Cowan University - WA</option>
-									<option value="FLIN" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "FLIN") echo "selected='selected'";?>>Flinders University SA</option>
-									<option value="GRIF" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "GRIF") echo "selected='selected'";?>>Griffith University - Gold coast QLD</option>
-									<option value="JCU" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "JCU") echo "selected='selected'";?>>James Cook University - QLD</option>
-									<option value="LAT" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "ACUQ") echo "selected='selected'";?>>Latrobe University - Bundoora VIC</option>
-									<option value="LATB" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "LATB") echo "selected='selected'";?>>Latrobe Universtiy - Bendigo VIC</option>
-									<option value="LIN" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "LIN") echo "selected='selected'";?>>Lincoln Institute - VIC</option>
-									<option value="MACQ" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "MACQ") echo "selected='selected'";?>>Macquarie University - NSW</option>
-									<option value="MON" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "MON") echo "selected='selected'";?>>Monash University - Vic</option>
-									<option value="UA" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "UA") echo "selected='selected'";?>>University of Adelaide</option>
-									<option value="UM" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "UM") echo "selected='selected'";?>>University of Melbourne - Vic</option>
-									<option value="UNC" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "UNC") echo "selected='selected'";?>>University of Newcastle - NSW</option>
-									<option value="UND" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "UND") echo "selected='selected'";?>>University of Notre Dam - WA</option>
-									<option value="UQ" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "UQ") echo "selected='selected'";?>>University of Qld</option>
-									<option value="USA" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "USA") echo "selected='selected'";?>>University of South Australia</option>
-									<option value="US" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "US") echo "selected='selected'";?>>University of Sydney - NSW</option>
-									<option value="UTS" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "UTS") echo "selected='selected'";?>>University of Technology Sydney</option>
-									<option value="UWA" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "UWA") echo "selected='selected'";?>>University of Western Australia</option>
-									<option value="UWS" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "UWS") echo "selected='selected'";?>>University of Western Sydney- NSW</option>
-									<option value="WAIT" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "WAIT") echo "selected='selected'";?>>Western Australian Institute of Technology</option>
-									<option value="Other" <?php if ($details['PersonEducation'][$key]['Undergraduateuniversity-name'] == "Other") echo "selected='selected'";?>>Other</option>
+									<option <?php if (empty($details['PersonEducation'][$key]['Graduateuniversity-name'])) echo "selected='selected'";?> selected disabled>(None)</option>
+									<option value="ACU" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "ACU") echo "selected='selected'";?>>Australian Catholic University - NSW</option>
+									<option value="ACUQ" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "ACUQ") echo "selected='selected'";?>>Australian Catholic University - QLD</option>
+									<option value="ACUB" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "ACUB") echo "selected='selected'";?>>Australlian Catholic University - Ballarat</option>
+									<option value="BON" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "BON") echo "selected='selected'";?>>Bond University - QLD</option>
+									<option value="CU" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CU") echo "selected='selected'";?>>Canberra University</option>
+									<option value="CQU" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CQU") echo "selected='selected'";?>>Central Qld University</option>
+									<option value="CSU" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CSU") echo "selected='selected'";?>>Charles Sturt University - Albury NSW</option>
+									<option value="CSUO" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CSUO") echo "selected='selected'";?>>Charles Sturt University - Orange NSW</option>
+									<option value="CSUP" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CSUP") echo "selected='selected'";?>>Charles Sturt University Port Macquarie</option>
+									<option value="CUMB" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CUMB") echo "selected='selected'";?>>Cumberland University - NSW</option>
+									<option value="CUR" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CUR") echo "selected='selected'";?>>Curtin University - WA</option>
+									<option value="ECU" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "ECU") echo "selected='selected'";?>>Edith Cowan University - WA</option>
+									<option value="FLIN" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "FLIN") echo "selected='selected'";?>>Flinders University SA</option>
+									<option value="GRIF" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "GRIF") echo "selected='selected'";?>>Griffith University - Gold coast QLD</option>
+									<option value="JCU" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "JCU") echo "selected='selected'";?>>James Cook University - QLD</option>
+									<option value="LAT" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "ACUQ") echo "selected='selected'";?>>Latrobe University - Bundoora VIC</option>
+									<option value="LATB" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "LATB") echo "selected='selected'";?>>Latrobe Universtiy - Bendigo VIC</option>
+									<option value="LIN" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "LIN") echo "selected='selected'";?>>Lincoln Institute - VIC</option>
+									<option value="MACQ" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "MACQ") echo "selected='selected'";?>>Macquarie University - NSW</option>
+									<option value="MON" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "MON") echo "selected='selected'";?>>Monash University - Vic</option>
+									<option value="UA" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UA") echo "selected='selected'";?>>University of Adelaide</option>
+									<option value="UM" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UM") echo "selected='selected'";?>>University of Melbourne - Vic</option>
+									<option value="UNC" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UNC") echo "selected='selected'";?>>University of Newcastle - NSW</option>
+									<option value="UND" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UND") echo "selected='selected'";?>>University of Notre Dam - WA</option>
+									<option value="UQ" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UQ") echo "selected='selected'";?>>University of Qld</option>
+									<option value="USA" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "USA") echo "selected='selected'";?>>University of South Australia</option>
+									<option value="US" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "US") echo "selected='selected'";?>>University of Sydney - NSW</option>
+									<option value="UTS" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UTS") echo "selected='selected'";?>>University of Technology Sydney</option>
+									<option value="UWA" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UWA") echo "selected='selected'";?>>University of Western Australia</option>
+									<option value="UWS" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UWS") echo "selected='selected'";?>>University of Western Sydney- NSW</option>
+									<option value="WAIT" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "WAIT") echo "selected='selected'";?>>Western Australian Institute of Technology</option>
+									<option value="Other" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "Other") echo "selected='selected'";?>>Other</option>
 								</select>
 								<input type="text" class="form-control display-none" name="Undergraduate-university-name-other<?php echo $key;?>" id="Undergraduate-university-name-other<?php echo $key;?>">
 							</div>

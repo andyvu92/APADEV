@@ -10,6 +10,7 @@ jQuery(document).ready(function($) {
 	$('.bx-prev').html("<i class='fa fa-angle-left'></i>");
     $('.bx-next').html("<i class='fa fa-angle-right'></i>");
     $('[class^=event]').click(function(){
+		
         var x = $(this).attr("class").replace('event', '');
         $('[class^=down]:not(.down'+x+')').slideUp(400);
 	    $('.down' + x).slideToggle(450);
@@ -25,6 +26,7 @@ jQuery(document).ready(function($) {
 			$("i." + faclass).addClass("fa-angle-down");
         }
 	});
+	
 	$('[class=cardevent]').click(function(){
 	    $('.carddown').slideToggle(450);
 	});
