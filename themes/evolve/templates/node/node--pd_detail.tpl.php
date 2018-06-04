@@ -181,13 +181,11 @@
 	  /* CURL GET to query data from Aptify using $_GET["ID"] & couponcode, and then return Json data as below example*/
        
 	$pdArr["PDIDs"] = $_GET["id"];
-	/*
-	array_push($pdArr, (intval($_GET["id"]) - 1));
-	if(isset($_SESSION["userID"])) {
-	   array_push($pdArr, $_SESSION["userID"]);
-	} else {
-	   array_push($pdArr, "");
+	
+	if(isset($_SESSION["UserId"])) {
+		$pdArr["UserID"] = $_SESSION["UserId"];
 	}
+	/*
 	array_push($pdArr, $Couponcode);
 	*/
 	
@@ -201,12 +199,8 @@
 	// Where:{Address1, Address2, Address3(if exist), Address4(if exist), City,
 	//	state, Postcode}, CPD hours, Cost, Your registration stats
 	$pd_detail = GetAptifyData("29", $pdArr);
-	echo "1";
 	print_r($pd_detail);
-	echo $pd_detail;
-	echo "2";
     $pd_detail = $pd_detail['MeetingDetails'][0];
-	/*
 	$prices = $pd_detail['Pricelist'];
 	$pricelistGet = Array();
 	foreach($prices as $t) {
@@ -300,8 +294,8 @@
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Registration closing date:</h3><p><?php echo $pd_detail['Close_date']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<h3>Where:</h3>
-			<p><?php echo $pd_detail['Location']["Address1"]." ".$pd_detail['Location']["Address2"]; ?><br />
-			<?php echo $pd_detail['Location']["City"]." ".$pd_detail['Location']["State"]." ".$pd_detail['Location']["Postcode"]; ?><br><a id="viewMap">View map</a></p></div>
+			<p><?php echo $pd_detail['AddressLine1']." ".$pd_detail['AddressLine2']." ".$pd_detail['AddressLine3']; ?><br />
+			<?php echo $pd_detail['City']." ".$pd_detail['State']." ".$pd_detail['PostalCode']; ?><br><a id="viewMap">View map</a></p></div>
 		
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>CPD hours:</h3><p><?php echo $pd_detail['CPD']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Cost:</h3><p>
@@ -311,7 +305,7 @@
 		 // todo
 		 // apply coupon one
 		 // ["Product Cost With Coupon"]
-		 /*
+		 
 		 if($prices!="NULL"&& isset($_SESSION["UserId"])){
 			if(in_array($pd_detail['Product Cost Without Coupon'],$pricelistGet)) {
 				comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
@@ -323,7 +317,7 @@
 		 }
 		else{
 			foreach($pricelistGet as $key=>$value){echo $key.":&nbsp;$".$value."<br>";}
-		}	*/		
+		}	
 		 
 		 
 		 
@@ -412,7 +406,7 @@
   height="450"
   frameborder="0" style="border:0"
   src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAUNE61ebLP9O54uFskPBMMXJ54GM-rfUk
-    &q='.$pd_detail['Location']["Address1"]." ".$pd_detail['Location']["Address2"]." ".$pd_detail['Location']["City"]." ".$pd_detail['Location']["State"]." ".$pd_detail['Location']["Postcode"].'" allowfullscreen>
+    &q='.$pd_detail['AddressLine1']." ".$pd_detail['AddressLine2']." ".$pd_detail['City']." ".$pd_detail['State']." ".$pd_detail['PostalCode'].'" allowfullscreen>
 </iframe>';
    
 }

@@ -37,6 +37,22 @@
 }
 /* homepage bottom - Eddy */
 
+/* log-in */
+#loginAT .form-container {
+	width: 80%;
+	margin: auto;
+}
+#loginAT .form-container input:not(#remember) {
+	width: 100%;
+}
+#loginAT .form-container .forgotPS {
+	float: right;
+}
+#loginAT .form-container:nth-child(3) {
+	text-align: center;
+}
+
+/* Homepage bottom */
 .HomeType .field-item {
 	position: absolute;
     z-index: 1;
@@ -59,23 +75,13 @@
 .HomeType .latest .field-item {
 	background-color: rgb(146,0,117);
 }
-
-/* log-in */
-#loginAT .form-container {
-	width: 80%;
-	margin: auto;
+.portfolio-image .HomeType,
+.description {
+	display: block;
 }
-#loginAT .form-container input:not(#remember) {
-	width: 100%;
+.movSection {
+	display: none;
 }
-#loginAT .form-container .forgotPS {
-	float: right;
-}
-#loginAT .form-container:nth-child(3) {
-	text-align: center;
-}
-
-/* Homepage bottom */
 #home-tile-view-block .homeBottom .content {
 	border: 0.5px solid rgb(195,200,200);
 }
@@ -128,6 +134,26 @@
 	#home-tile-view-block .homeBottom .content .item-description {
 		float: left;
 		width: 70%;
+		padding-bottom: 5px;
+	}
+	.portfolio-image .HomeType,
+	.description {
+		display: none;
+	}
+	.movSection {
+		display: block;
+	}
+	#home-tile-view-block .homeBottom .content .movSection .MonlyIconHolder {
+		float: left;
+	}
+	.item-description .HomeType .field-item {
+		position: inherit;
+		margin: 6px 2px;
+		float: left;
+	}
+	#home-tile-view-block .homeBottom .content .item-description h5 {
+		margin-bottom: 2px;
+		margin-top: 2px;
 	}
 }
 

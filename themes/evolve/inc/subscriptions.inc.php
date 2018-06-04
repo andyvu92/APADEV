@@ -63,19 +63,19 @@ foreach ($_POST as $key => $value) {
 if(count($PostArray) == 0) { // Just GET data
 	$SubListAll = Array();
 	foreach($Subscription as $Subs) {
-		$ArrayRe["SubscriptionID"] = $Subs["SubscriptionID"];
-		$ArrayRe["Subscription"] = $Subs["Subscription"];
+		$ArrayRe["SubscriptionID"] = $Subs["ConsentID"];
+		$ArrayRe["Subscription"] = $Subs["Consent"];
 		$ArrayRe["Subscribed"] = $Subs["Subscribed"];
 		array_push($SubListAll, $ArrayRe);
 	}
-	$nationalGroup = $nationalGroups["NationalGroup"];
+	$nationalGroup = $nationalGroups["results"];
 	foreach($nationalGroup as $Subs) {
-		$ArrayRe["SubscriptionID"] = $Subs["NGid"];
+		$ArrayRe["SubscriptionID"] = $Subs["SubscriptionID"];
 		$ArrayRe["Subscription"] = $Subs["NGtitle"];
 		$ArrayRe["Subscribed"] = 1;
 		array_push($SubListAll, $ArrayRe);
 	}
-	$Fellow = $Fellows["Fellowship"];
+	$Fellow = $Fellows["results"];
 	foreach($Fellow as $Subs) {
 		$ArrayRe["SubscriptionID"] = $Subs["FPid"];
 		$ArrayRe["Subscription"] = $Subs["FPtitle"];
@@ -87,8 +87,8 @@ if(count($PostArray) == 0) { // Just GET data
 	array_push($ArrayReturn, "UserID");
 	$SubListAll = Array();
 	foreach($Subscription as $Subs) {
-		$ArrayRe["SubscriptionID"] = $Subs["SubscriptionID"];
-		$ArrayRe["Subscription"] = $Subs["Subscription"];
+		$ArrayRe["SubscriptionID"] = $Subs["ConsentID"];
+		$ArrayRe["Subscription"] = $Subs["Consent"];
 		if(!isset($PostArray[$Subs["SubscriptionID"]])) {
 			// When it's not set (unticked on check box)
 			$ArrayRe["Subscribed"] = 0;

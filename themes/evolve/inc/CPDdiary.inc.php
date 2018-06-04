@@ -211,9 +211,12 @@ function move(input) {
     <?php
 		if(sizeof($APA) > 0) {
 			foreach($APA as $rowData) {
-				echo "<div style='display: none;'>".$rowData["PD_id"]."</div><div>".$rowData["PD_title"]."</div><div>".$rowData["PD_date"]."</div><div>".$rowData["PD_hours"]."</div>";
+				$date = date("d-m-Y", strtotime($rowData["Date"]));
+				echo "<div style='display: none;'>".$rowData["Id"]."</div><div>".$rowData["Title"]."&nbsp;</div><div>".$date."</div><div>".$rowData["Hours"]."</div>";
 				echo "<div class='lineBreak'>&nbsp;</div>";
 			}
+		} else {
+			echo "<div style='display: none;'>&nbsp;</div><div>No PD information found.</div><div>&nbsp;</div><div>0</div>";
 		}
     ?> 
   </div>
@@ -241,6 +244,8 @@ function move(input) {
 			echo "<div style='display: none;'>".$rowData["NPDid"]."</div><div>".$date."</div><div>".$rowData["Description"]."</div><div>".$rowData["Time"]."</div><div>".$rowData["Provider"]."</div><div>".$rowData["Reflection"]."</div>";
 			echo "<div class='lineBreak'>&nbsp;</div>";
 		}
+	}else {
+		echo "<div style='display: none;'>&nbsp;</div><div>&nbsp;</div><div>No PD information was found.</div><div>0</div><div>&nbsp;</div><div>&nbsp;</div>";
 	}
     ?> 
   </div>

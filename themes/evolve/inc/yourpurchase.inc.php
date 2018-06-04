@@ -53,7 +53,7 @@ $products = $product["Orders"]
 									$invoiceAPI = GetAptifyData("18", $send); // #_SESSION["UserID"];
 									echo "<td>".$product['OrderLines'][0]['ProductName']."</td>";
 									echo '<td><a style="color:white;" href="' .$product['ID'].'">'.$invoiceAPI["Invoice"].'</a></td>';
-									echo "<td>".$product['Initialpaymentamount']."</td>";
+									echo "<td>".$product['Paymenttotal']."</td>";
 									echo "<td>".$product['Orderdate']."</td>";
 									echo "</tr>";
 								}

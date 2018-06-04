@@ -17,7 +17,8 @@ if(isset($_SESSION["Log-in"])) : ?>
 	$data["New_password"] = $_POST["New_password"];
 	print_r($data);
 	$product = GetAptifyData("9", $data); 
-	echo $product["Update"]."!!";
+	//echo $product["Update"]."!!";
+	print_r($product);
 ?>	
 <?php	else: ?> 
 <div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
