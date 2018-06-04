@@ -643,7 +643,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 			<div class="row"> 
                 <div class="col-lg-3"> Your special interest area:</div>
 				 <?php  
-					if(!empty($details['PSpecialInterestAreaID'])) {$PSpecialInterestAreaID = explode(",",$details['PSpecialInterestAreaID']); } else {$PSpecialInterestAreaID ="";}
+					if(!empty($details['PSpecialInterestAreaID'])) {$PSpecialInterestAreaID = explode(",",$details['PSpecialInterestAreaID']); } else {$PSpecialInterestAreaID =array();}
 						
 				?>
                 <div class="col-lg-6">
@@ -696,7 +696,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 		    <div class="row">
 				<div class="col-lg-3">What is your favourite languages?<br/></div>
 				<?php  
-					if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID ="";}
+					if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID =array();}
 						
 				?>
 				<div class="col-lg-3">

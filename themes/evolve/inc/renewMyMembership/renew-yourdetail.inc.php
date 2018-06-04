@@ -653,7 +653,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				Your special interest area:
 				</div>
 				<?php  
-					if(!empty($details['PSpecialInterestAreaID'])) {$PSpecialInterestAreaID = explode(",",$details['PSpecialInterestAreaID']); } else {$PSpecialInterestAreaID ="";}
+					if(!empty($details['PSpecialInterestAreaID'])) {$PSpecialInterestAreaID = explode(",",$details['PSpecialInterestAreaID']); } else {$PSpecialInterestAreaID =array();}
 				?>
 				<div class="col-lg-9">
 					<select class="chosen-select" id="interest-area" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
@@ -721,7 +721,7 @@ a Fellow of the Australian College of Physiotherapists, you must tick this box.<
 					What is your favourite languages?<br/>
 				</div>
 				<?php  
-					if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID ="";}
+					if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID =array();}
 						
 				?>
 				<div class="col-lg-3">
