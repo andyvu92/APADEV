@@ -23,9 +23,11 @@ $orderDetails = GetAptifyData("44", $quatationOrderID);
 	// Response - UserID & detail data
 	$tt["ProductID"] = "";
     $fellowshipProducts = GetAptifyData("21", $tt);
-	foreach ($fellowshipProducts as $fellowshipProduct){
-		$fellowshipProductID = $fellowshipProduct['ProductID'];
-	}
+	$fellow = array_shift($fellowshipProducts);
+	//foreach ($fellowshipProducts as $fellowshipProduct){
+		$fellowshipProductID = $fellow['ProductID'];
+	//}
+
 if(isset($_POST['step1'])) {
 	$postData = array();
 	if(isset($_SESSION['UserId'])) {$postData['userID'] = $_SESSION['UserId'];}
@@ -262,6 +264,8 @@ $userMemberProduct = getProduct($_SESSION['UserId'],"membership");
 if(sizeof($userMemberProduct)!=0){ foreach($userMemberProduct as $singProduct) { $_SESSION["MembershipProductID"] = $singProduct;}}
 $userNGProduct = getProduct($_SESSION['UserId'],"NG");
 if(sizeof($userNGProduct)!=0){$_SESSION['NationalProductID'] = $userNGProduct; }
+$userFPProduct = getProduct($_SESSION['UserId'],"FP");
+if(sizeof($userFPProduct)!=0){ foreach($userFPProduct as $singFP) { $_SESSION["FPProductID"] = $singFP;}}
 // 2.2.4 - Dashboard - Get member detail
 // Send - 
 // UserID 
@@ -678,7 +682,8 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</select>
 				</div>
 			</div>
-				<div class="row"> 
+			<!--
+			<div class="row"> 
 				<div class="col-lg-3">
 				Your treatment area:
 				</div>
@@ -687,19 +692,19 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<div class="col-lg-6">
 					<select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
 					<?php 
-					$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
-				    $interestAreas=json_decode($interestAreascode, true);	
+					//$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
+				    //$interestAreas=json_decode($interestAreascode, true);	
 					?>
 					<?php 
-					foreach($interestAreas  as $key => $value){
-						echo '<option value="'.$interestAreas[$key]["ID"].'"';
-						if (in_array( $interestAreas[$key]["ID"],$details['Treatmentarea'])){ echo "selected='selected'"; } 
-						echo '> '.$interestAreas[$key]["Name"].' </option>'; 
-					}
+					//foreach($interestAreas  as $key => $value){
+						//echo '<option value="'.$interestAreas[$key]["ID"].'"';
+						//if (in_array( $interestAreas[$key]["ID"],$details['Treatmentarea'])){ echo "selected='selected'"; } 
+						//echo '> '.$interestAreas[$key]["Name"].' </option>'; 
+					//}
 					?>
 					</select>
 				</div>
-			</div>
+			</div>-->
 			<div class="row">
 				<input type="hidden" name="fapnum" value="<?php echo sizeof($details['Specialty']);?>">
 				<?php if(!empty($details['Specialty'])){
@@ -845,6 +850,9 @@ jQuery(document).ready(function($) {
 						Workplace treatment area:
 						</div>
 				</div>
+				<?php  
+					if(!empty($details['Workplaces'][$key]['SpecialInterestAreaID'])) {$SpecialInterestAreaID = explode(",",$details['Workplaces'][$key]['SpecialInterestAreaID']); } else {$SpecialInterestAreaID = array();}
+				?>
 				<div class="row"> 
 					<div class="col-lg-6">
 						<select class="chosen-select" id="WTreatmentarea<?php echo $key;?>" name="WTreatmentarea<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
@@ -856,7 +864,7 @@ jQuery(document).ready(function($) {
 						<?php 
 							foreach($interestAreas  as $pair => $value){
 								echo '<option value="'.$interestAreas[$pair]["ID"].'"';
-								if ($details['Workplaces'][$key]['Treatmentarea'] == $interestAreas[$pair]["Code"]){ echo "selected='selected'"; } 
+								if (in_array( $interestAreas[$pair]["ID"],$SpecialInterestAreaID)){ echo "selected='selected'"; } 
 								echo '> '.$interestAreas[$pair]["Name"].' </option>'; 
 							}
 					    ?>
@@ -963,7 +971,7 @@ jQuery(document).ready(function($) {
 					Does this workplace offer additional languages?<br/>
 					</div>
 					 <?php  
-						if(!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {$WAdditionalLanguage = explode(",",$details['Workplaces'][$key]['AdditionalLanguage']); } else {$WAdditionalLanguage = "";}
+						if(!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {$WAdditionalLanguage = explode(",",$details['Workplaces'][$key]['AdditionalLanguage']); } else {$WAdditionalLanguage = array();}
 						
 						?>
 					<div class="col-lg-3">

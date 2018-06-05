@@ -67,7 +67,7 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1"><div class="row"><div clas
 ';
  	$country = $sessionCountry;
 	foreach($country  as $key => $object){
-		echo '<option value="'.$country[$key]['Country'].'">'.$country[$key]['Country'].'</option>';
+		echo '<option value="'.$country[$key]['ID'].'">'.$country[$key]['Country'].'</option>';
 	}
 echo '
 </select>

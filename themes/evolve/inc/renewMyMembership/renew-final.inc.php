@@ -129,13 +129,17 @@ $memberProducts = GetAptifyData("31", $memberProdcutID);
 $sendData["UserID"] = $_SESSION['UserId'];
 $NGListArray = GetAptifyData("19", $sendData);
 $NGProductsArray=$_SESSION["NationalProductID"];
-// 2.2.21 - GET Fellowship product
+// 2.2.21 - GET Fellowship product price
 // Send - 
 // userID
 // Response -Fellowship product list
-$fpData["ProductID"] = "";
+$FPListArray = array();
+if(isset($_SESSION["FPProductID"])){
+$fpProdcutArray = array();
+array_push($fpProdcutArray,$_SESSION["FPProductID"]);
+$fpData['ProductID'] = $fpProdcutArray;
 $FPListArray = GetAptifyData("21", $fpData);
-$FPProductsArray=$_SESSION["FPProductID"];
+}
 
 //From review page to review page to add payment method again; 
 
@@ -196,6 +200,16 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 							}	echo "</tr>";  
 						}
 					}
+				}
+				if(sizeof($FPListArray)!=0){
+					foreach( $FPListArray as $FProduct){
+							echo "<tr>";
+							echo "<td>".$FProduct['FPtitle']."</td>";
+							echo "<td>A$".$FProduct['FPprice']."</td>";
+							$price += $FProduct['FPprice'];
+							echo '<td><a href="renewmymembership" target="_self">delete</a></td>';
+							echo "</tr>";  
+						}
 				}
 				if(isset($_POST['PRF'])&& $_POST['PRF']!=""){ echo '<tr><td>Physiotherapy Research Foundation donation</td><td>A$'.$_POST['PRF'].'</td><td><a class="deletePRFButton">delete</a></td></tr>'; }
 				?>

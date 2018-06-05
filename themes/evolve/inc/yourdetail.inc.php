@@ -531,7 +531,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 							<div class="col-lg-6 col-lg-offset-2">
 								<label for="">PO box</label>
-								<input type="text" class="form-control" name="Pobox"  <?php if (empty($details['Pobox'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['Pobox'].'"'; }?>>
+								<input type="text" class="form-control" name="Pobox"  <?php if (!empty($details['Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
 							</div>
 						</div>
 						<div class="row">
@@ -596,7 +596,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<div class="row">
 						<div class="col-lg-6">
 							<label for="">POBox</label>
-							<input type="text" class="form-control" name="Mailing-PObox" id="Mailing-PObox"  <?php if (empty($details['Mailing-PObox'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Mailing-PObox'].'"'; }?>>
+							<input type="text" class="form-control" name="Mailing-PObox" id="Mailing-PObox"  <?php if (!empty($details['Mailing-unitno'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?>>
 						</div>
 						<div class="col-lg-6">
 							<label for="">Building Name</label>
@@ -961,7 +961,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<div class="row">
 						<div class="col-lg-6">
 							<label for="">POBox</label>
-							<input type="text" class="form-control" name="Shipping-PObox" id="Shipping-PObox"  <?php if (empty($details['Shipping-PObox'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Shipping-PObox'].'"'; }?>>
+							<input type="text" class="form-control" name="Shipping-PObox" id="Shipping-PObox"  <?php if (!empty($details['Shipping-unitno'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Shipping-BuildingName'].'"'; }?>>
 						</div>
 						<div class="col-lg-6">
 							<label for="">Building Name</label>
@@ -1033,7 +1033,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 							<div class="col-lg-6 col-lg-offset-2">
 								<label for="">PO box</label>
-								<input type="text" class="form-control" name="Billing-Pobox"  <?php if (empty($details['Billing-PObox'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['Billing-PObox'].'"'; }?>>
+								<input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 							</div>
 						</div>
 						<div class="col-lg-4">
@@ -1146,7 +1146,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							Workplace treatment area:
 							</div>
 							<?php  
-								if(!empty($details['Workplaces'][$key]['SpecialInterestAreaID'])) {$SpecialInterestAreaID = explode(",",$details['Workplaces'][$key]['SpecialInterestAreaID']); } else {$SpecialInterestAreaID = "";}
+								if(!empty($details['Workplaces'][$key]['SpecialInterestAreaID'])) {$SpecialInterestAreaID = explode(",",$details['Workplaces'][$key]['SpecialInterestAreaID']); } else {$SpecialInterestAreaID = array();}
 							?>
 							<div class="col-lg-6">
 								<select class="chosen-select" id="WTreatmentarea<?php echo $key;?>" name="WTreatmentarea<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
