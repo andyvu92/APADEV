@@ -324,15 +324,15 @@ jQuery(document).ready(function($) {
            if($(this).is(":checked")){
 			$('#shippingAddress').addClass('shipping');  
             $(this).attr('checked', true);
-			$('#Billing-BuildingName').val($('#BuildingName').val());
-            $('#Billing-Address_Line_1').val($('#Address_Line_1').val());
-            $('#Billing-Address_Line_2').val($('#Address_Line_2').val());
-			$('#Billing-PObox').val($('#Billing-PObox').val());
-            $('#Billing-Suburb').val($('#Suburb').val());
+			$('#Billing-BuildingName').val($('input[name="BuildingName"]').val());
+            $('#Billing-Address_Line_1').val($('input[name="Address_Line_1"]').val());
+            $('#Billing-Address_Line_2').val($('input[name="Address_Line_2"]').val());
+			$('#Billing-PObox').val($('input[name="Pobox"]').val());
+            $('#Billing-Suburb').val($('input[name="Suburb"]').val());
             
-            $('#Billing-Postcode').val($('#Postcode').val());
-            $('#Billing-State').val($('#State').val());
-            $('#Billing-Country').val($('#Country').val());
+            $('#Billing-Postcode').val($('input[name="Postcode"]').val());
+            $('#Billing-State').val($('select[name="State"]').val());
+            $('#Billing-Country').val($('select[name="Country"]').val());
             
 			
          }
@@ -358,29 +358,38 @@ jQuery(document).ready(function($) {
 		  
            if($(this).is(":checked")){
 			$(this).attr('checked', true);
-			$('#Shipping-BuildingName').val($('#BuildingName').val());
-            $('#Shipping-Address_Line_1').val($('#Address_Line_1').val());
-            $('#Shipping-Address_Line_2').val($('#Address_Line_2').val());
-			$('#Shipping-PObox').val($('#Billing-PObox').val());
-            $('#Shipping-city-town').val($('#Suburb').val());
-            $('#Shipping-postcode').val($('#Postcode').val());
-            $('#Shipping-state').val($('#State').val());
-            $('#Shipping-country').val($('#Country').val());
+			$('#Shipping-BuildingName').val($('input[name="BuildingName"]').val());
+            $('#Shipping-Address_Line_1').val($('input[name="Address_Line_1"]').val());
+            $('#Shipping-Address_Line_2').val($('input[name="Address_Line_2"]').val());
+			$('#Shipping-PObox').val($('input[name="Pobox"]').val());
+            $('#Shipping-city-town').val($('input[name="Suburb"]').val());
+            $('#Shipping-postcode').val($('input[name="Postcode"]').val());
+            $('#Shipping-state').val($('select[name="State"]').val());
+            $('#Shipping-country').val($('select[name="Country"]').val());
         }
         
     }); 
 	$('#Mailing-address').click(function(){
 		if($(this).is(":checked")){
 			$(this).attr('checked', true);
-			$('#Mailing-BuildingName').val($('#BuildingName').val());
-            $('#Mailing-Address_Line_1').val($('#Address_Line_1').val());
-            $('#Mailing-Address_Line_2').val($('#Address_Line_2').val());
-			$('#Mailing-PObox').val($('#Billing-PObox').val());
-            $('#Mailing-city-town').val($('#Suburb').val());
-            $('#Mailing-postcode').val($('#Postcode').val());
-            $('#Mailing-state').val($('#State').val());
-            $('#Mailing-country').val($('#Country').val());
-        }
+			$('#Mailing-BuildingName').val($('input[name="BuildingName"]').val());
+            $('#Mailing-Address_Line_1').val($('input[name="Address_Line_1"]').val());
+            $('#Mailing-Address_Line_2').val($('input[name="Address_Line_2"]').val());
+			$('#Mailing-PObox').val($('input[name="Pobox"]').val());
+            $('#Mailing-city-town').val($('input[name="Suburb"]').val());
+            $('#Mailing-postcode').val($('input[name="Postcode"]').val());
+            $('#Mailing-state').val($('select[name="State"]').val());
+            $('#Mailing-country').val($('select[name="Country"]').val());
+        }else{
+		    $('#Mailing-BuildingName').val('');
+            $('#Mailing-Address_Line_1').val('');
+            $('#Mailing-Address_Line_2').val('');
+			$('#Mailing-PObox').val('');
+            $('#Mailing-city-town').val('');
+            $('#Mailing-postcode').val('');
+            $('#Mailing-state').val('');
+            $('#Mailing-country').val(''); 	
+		}
      
     }); 
 	$('[id^=Job]').change(function(){

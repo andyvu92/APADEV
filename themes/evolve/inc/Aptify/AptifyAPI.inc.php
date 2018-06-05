@@ -47,6 +47,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			print_r($variables);
 			echo "<br />4. Dashboard - Get member detail: <br />";
 			$JSONreturn = curlRequest($API, "Get", $variables);
+			echo $JSONreturn;
 			return $JSONreturn;
 			break;
 		case "5":

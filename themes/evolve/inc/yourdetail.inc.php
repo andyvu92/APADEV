@@ -69,7 +69,7 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid']; }
 	//if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password']; }
 	if(isset($_POST['Ahpranumber'])){ $postData['Ahpranumber'] = $_POST['Ahpranumber']; }
-	if(isset($_POST['Branch'])){ $postData['PreferBranch'] = $_POST['Branch']; }
+	if(isset($_POST['Branch'])){ $postData['Branch'] = $_POST['Branch']; }
 	
 	if(isset($_SESSION['Regional-group'])){ $postData['Regional-group'] = $_SESSION['Regional-group']; } else{ $postData['Regional-group'] ="";}
 	if(isset($_POST['SpecialInterest'])){ $postData['PSpecialInterestAreaID'] = implode(",",$_POST['SpecialInterest']); }
@@ -176,13 +176,17 @@ if(isset($_POST['step1'])) {
 // QIP}, Undergraduate degree, Undergraduate Uni name, Undergraduate Country,
 // Year attained, Post graduate degree, post graduate name, 
 // Post graduate country, Year attained, Additional qualifications
-$data = "UserID=".$_SESSION["UserId"];
-$details = GetAptifyData("4", $data,""); // #_SESSION["UserID"];
-print_r($details);
+if(isset($_SESSION["UserId"])) {
+	$data = "UserID=".$_SESSION["UserId"];
+	$details = GetAptifyData("4", $data,""); // #_SESSION["UserID"];
+	//2.2.43 -get user installment data test part
+	$installmentData['id'] = $_SESSION["UserId"];
+	$installmentOrder = GetAptifyData("43", $installmentData);
+}
 
-//2.2.43 -get user installment data test part
-$installmentData['id'] = $_SESSION["UserId"];
-$installmentOrder = GetAptifyData("43", $installmentData);
+
+
+
 
 if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details['Regional-group'];}
 //print_r($details);
@@ -585,57 +589,74 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								</select>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-lg-12"><label for="Shipping-address-join"><strong>Billing address:(Use my residential address)</strong></label><input type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="0"></div>
+						<!--put code here-->
+						<div class="row payment-line">
+						<div class="col-lg-12"><label for="Mailing-address"><strong>Mailing address: Check box to duplicate residential address details</strong></label><input type="checkbox" id="Mailing-address"></div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<label for="">POBox</label>
+							<input type="text" class="form-control" name="Mailing-PObox" id="Mailing-PObox"  <?php if (empty($details['Mailing-PObox'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Mailing-PObox'].'"'; }?>>
 						</div>
-					<div class="row" id="shippingAddress">
-						<div class="row">
-							<div class="col-lg-4">
-								<label for="">Building name</label>
-								<input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['BuildingName1'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
-							</div>
-							<div class="col-lg-6 col-lg-offset-2">
-								<label for="">PO box</label>
-								<input type="text" class="form-control" name="Billing-Pobox"  <?php if (empty($details['Billing-PObox'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['Billing-PObox'].'"'; }?>>
-							</div>
+						<div class="col-lg-6">
+							<label for="">Building Name</label>
+							<input type="text" class="form-control" name="Mailing-BuildingName" id="Mailing-BuildingName"  <?php if (empty($details['Mailing-BuildingName'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?>>
 						</div>
-						<div class="col-lg-4">
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
 							<label for="">Address 1<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Address 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?> required>
-						</div>
-						<div class="col-lg-12">
+							<input type="text" class="form-control" name="Mailing-Address_Line_1" id="Mailing-Address_Line_1"  <?php if (empty($details['Mailing-unitno'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Mailing-unitno'].'"'; }?> required>
+						</div> 
+						<div class="col-lg-6">
 							<label for="">Address 2<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Street'])) {echo "placeholder='Billing Address 2'";}   else{ echo 'value="'.$details['Billing-Street'].'"'; }?> required>
-						</div>
-						<div class="col-lg-12">
+							<input type="text" class="form-control" name="Mailing-Address_Line_2" id="Mailing-Address_Line_2"  <?php if (empty($details['Mailing-streetname'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Mailing-streetname'].'"'; }?> required>
+						</div> 
+					</div>
+					<div class="row">
+						<div class="col-lg-4">
 							<label for="">City or town<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" <?php if (empty($details['Billing-Suburb'])) {echo "placeholder='Billing City/Town'";}   else{ echo 'value="'.$details['Billing-Suburb'].'"'; }?> required>
+							<input type="text" class="form-control" name="Mailing-city-town" id="Mailing-city-town" <?php if (empty($details['Mailing-city-town'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Mailing-city-town'].'"'; }?> required>
 						</div>
-						<div class="col-lg-3">
+						<div class="col-lg-2">
 							<label for="">Postcode<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?> required>
+							<input type="text" class="form-control" name="Mailing-postcode" id="Mailing-postcode"  <?php if (empty($details['Shipping-postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Mailing-postcode'].'"'; }?> required>
 						</div>
-						<div class="col-lg-3">
+						<div class="col-lg-2">
 							<label for="">State<span class="tipstyle">*</span></label>
-							<select class="form-control" name="Billing-State" id="Billing-State" required>
-								<option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
+							<select class="form-control" name="Mailing-State" id="Mailing-State" required>
+								<option value=""  <?php if (empty($details['Mailing-state'])) echo "selected='selected'";?> disabled> State </option>
 								<?php 
 								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 								$State=json_decode($statecode, true);
 								foreach($State  as $key => $value){
 								echo '<option value="'.$State[$key]['Abbreviation'].'"';
-								if ($details['Billing-State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+								if ($details['Mailing-state'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
 								echo '> '.$State[$key]['Abbreviation'].' </option>';
 							
 								}
-							    ?>
+								?>
+								
 							</select>
 						</div>
-						<div class="col-lg-6">
+						<div class="col-lg-4">
 							<label for="">Country<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Billing-Country" id="Billing-Country" <?php if (empty($details['Billing-Country'])) {echo "placeholder='Billing Country'";}   else{ echo 'value="'.$details['Billing-Country'].'"'; }?> required>
+							<select class="form-control" id="Mailing-Country" name="Mailing-Country" required>
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								
+								echo '<option value="'.$country[$key]['Country'].'"';
+								if ($details['Mailing-country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+								echo '> '.$country[$key]['Country'].' </option>';
+							}
+							?>
+							</select>
 						</div>
 					</div>
+						<!--put code here-->
+						
 						<div class="row">
 							<div class="col-lg-6">
 							Your dietary requirements
@@ -1000,105 +1021,65 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							
 						</div>
 					</div>
-					<div class="row payment-line">
-						<div class="col-lg-12"><label for="Mailing-address"><strong>Mailing address: Check box to duplicate residential address details</strong></label><input type="checkbox" id="Mailing-address"></div>
-					</div>
+					<!--put code here-->
 					<div class="row">
-						<div class="col-lg-6">
-							<label for="">POBox</label>
-							<input type="text" class="form-control" name="Mailing-PObox" id="Mailing-PObox"  <?php if (empty($details['Mailing-PObox'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Mailing-PObox'].'"'; }?>>
+							<div class="col-lg-12"><label for="Shipping-address-join"><strong>Billing address:(Use my residential address)</strong></label><input type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="0"></div>
 						</div>
-						<div class="col-lg-6">
-							<label for="">Building Name</label>
-							<input type="text" class="form-control" name="Mailing-BuildingName" id="Mailing-BuildingName"  <?php if (empty($details['Mailing-BuildingName'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?>>
+					<div class="row" id="shippingAddress">
+						<div class="row">
+							<div class="col-lg-4">
+								<label for="">Building name</label>
+								<input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['BuildingName1'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
+							</div>
+							<div class="col-lg-6 col-lg-offset-2">
+								<label for="">PO box</label>
+								<input type="text" class="form-control" name="Billing-Pobox"  <?php if (empty($details['Billing-PObox'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['Billing-PObox'].'"'; }?>>
+							</div>
 						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-6">
-							<label for="">Address 1<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Mailing-Address_Line_1" id="Mailing-Address_Line_1"  <?php if (empty($details['Mailing-unitno'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Mailing-unitno'].'"'; }?> required>
-						</div> 
-						<div class="col-lg-6">
-							<label for="">Address 2<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Mailing-Address_Line_2" id="Mailing-Address_Line_2"  <?php if (empty($details['Mailing-streetname'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Mailing-streetname'].'"'; }?> required>
-						</div> 
-					</div>
-					<div class="row">
 						<div class="col-lg-4">
+							<label for="">Address 1<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Address 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?> required>
+						</div>
+						<div class="col-lg-12">
+							<label for="">Address 2<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Street'])) {echo "placeholder='Billing Address 2'";}   else{ echo 'value="'.$details['Billing-Street'].'"'; }?> required>
+						</div>
+						<div class="col-lg-12">
 							<label for="">City or town<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Mailing-city-town" id="Mailing-city-town" <?php if (empty($details['Mailing-city-town'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Mailing-city-town'].'"'; }?> required>
+							<input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" <?php if (empty($details['Billing-Suburb'])) {echo "placeholder='Billing City/Town'";}   else{ echo 'value="'.$details['Billing-Suburb'].'"'; }?> required>
 						</div>
-						<div class="col-lg-2">
+						<div class="col-lg-3">
 							<label for="">Postcode<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Mailing-postcode" id="Mailing-postcode"  <?php if (empty($details['Shipping-postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Mailing-postcode'].'"'; }?> required>
+							<input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?> required>
 						</div>
-						<div class="col-lg-2">
+						<div class="col-lg-3">
 							<label for="">State<span class="tipstyle">*</span></label>
-							<select class="form-control" name="Mailing-State" id="Mailing-State" required>
-								<option value=""  <?php if (empty($details['Mailing-state'])) echo "selected='selected'";?> disabled> State </option>
+							<select class="form-control" name="Billing-State" id="Billing-State" required>
+								<option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
 								<?php 
 								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 								$State=json_decode($statecode, true);
 								foreach($State  as $key => $value){
 								echo '<option value="'.$State[$key]['Abbreviation'].'"';
-								if ($details['Mailing-state'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+								if ($details['Billing-State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
 								echo '> '.$State[$key]['Abbreviation'].' </option>';
 							
 								}
-								?>
-								
+							    ?>
 							</select>
 						</div>
-						<div class="col-lg-4">
+						<div class="col-lg-6">
 							<label for="">Country<span class="tipstyle">*</span></label>
-							<select class="form-control" id="Mailing-Country" name="Mailing-Country" required>
-							<?php 
-							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							$country=json_decode($countrycode, true);
-							foreach($country  as $key => $value){
-								
-								echo '<option value="'.$country[$key]['Country'].'"';
-								if ($details['Mailing-country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
-								echo '> '.$country[$key]['Country'].' </option>';
-							}
-							?>
-							</select>
+							<input type="text" class="form-control" name="Billing-Country" id="Billing-Country" <?php if (empty($details['Billing-Country'])) {echo "placeholder='Billing Country'";}   else{ echo 'value="'.$details['Billing-Country'].'"'; }?> required>
 						</div>
 					</div>
+					<!--put code here-->
 					<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Last</span></a></div>-->
 				</div>
 				<div id="wpnumber"><?php  if(sizeof($details['Workplaces'])==0){$wpnumber = 0;} else{$wpnumber =  sizeof($details['Workplaces'])-1;} echo  $wpnumber; ?></div>
 				<input type="hidden" name="wpnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =1; echo $wpnumber;} ?>"/>
 				
-				<script type="text/javascript">
-					jQuery(document).ready(function($) {
-						$('#workplace').click(function(){
-						$('#dashboard-right-content').addClass("autoscroll");
-						});
-						$('.add-workplace-join').click(function(){
-							var number = Number($('#wpnumber').text());
-							var i = Number(number +1);
-							var j = Number(number +2);
-							$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ i+'</a><span class="deletewp'+ i + '" style=" float: right; color: red; margin-right: 55%;">x</span></li>' );
-							$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
-							$('#wpnumber').text(i);
-							$('input[name=wpnumber]').val(j);
-							var sessionvariable = '<?php echo json_encode($_SESSION["workplaceSettings"]);?>';
-							var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
-							var sessionLanguage = '<?php echo json_encode($_SESSION["Language"]);?>';
-							var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
-							$("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry});
-							$(".chosen-select").chosen({width: "100%"});
-						});
-						$("a[href^=#workplace]").live( "click", function(){ $(".chosen-select").chosen({width: "100%"});});
-						$("[class^=deletewp]").live( "click", function(){
-							var x = $(this).attr("class").replace('deletewp', '');
-							$("#workplaceli"+ x).remove();
-							$("#workplace"+ x).remove();
-							$(".deletewp"+ x).remove();
-						});
-					});
-				</script>
+				
 				<div class="down3" style="display:none;">
 					<div class="row">
 						<div class="col-lg-12"> <label for="Findpublicbuddy"><strong>NOTE:</strong>Please list my details in the public (visbile to other health professionals)</label>
@@ -2000,6 +1981,35 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 	</div>
 	</div>
 </div>
+<script type="text/javascript">
+	jQuery(document).ready(function($) {
+		$('#workplace').click(function(){
+		$('#dashboard-right-content').addClass("autoscroll");
+		});
+		$('.add-workplace-join').click(function(){
+			var number = Number($('#wpnumber').text());
+			var i = Number(number +1);
+			var j = Number(number +2);
+			$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ i+'</a><span class="deletewp'+ i + '" style=" float: right; color: red; margin-right: 55%;">x</span></li>' );
+			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
+			$('#wpnumber').text(i);
+			$('input[name=wpnumber]').val(j);
+			var sessionvariable = '<?php echo json_encode($_SESSION["workplaceSettings"]);?>';
+			var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
+			var sessionLanguage = '<?php echo json_encode($_SESSION["Language"]);?>';
+			var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
+			$("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry});
+			$(".chosen-select").chosen({width: "100%"});
+		});
+		$("a[href^=#workplace]").live( "click", function(){ $(".chosen-select").chosen({width: "100%"});});
+		$("[class^=deletewp]").live( "click", function(){
+			var x = $(this).attr("class").replace('deletewp', '');
+			$("#workplaceli"+ x).remove();
+			$("#workplace"+ x).remove();
+			$(".deletewp"+ x).remove();
+		});
+	});
+</script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
@@ -2037,6 +2047,7 @@ $('.add-additional-qualification').click(function(){
 		$('input[name=addtionalNumber]').val(i);
     });
 </script>
+
 <style>
 fieldset {
 border: 0;

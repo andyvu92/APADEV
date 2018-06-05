@@ -76,7 +76,7 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password'];}
 	if(isset($_POST['MemberType'])){ $postLocalData['MemberType'] = $_POST['MemberType']; }
 	if(isset($_POST['Ahpranumber'])){ $postData['Ahpranumber'] = $_POST['Ahpranumber']; }
-	if(isset($_POST['Branch'])){ $postData['PreferBranch'] = $_POST['Branch']; }
+	if(isset($_POST['Branch'])){ $postData['Branch'] = $_POST['Branch']; }
 	if(isset($_SESSION['Regional-group'])){ $postData['Regional-group'] = $_SESSION['Regional-group']; } else{ $postData['Regional-group'] ="";}
 	if(isset($_POST['Nationalgp'])){ $ngData['Nationalgp'] = $_POST['Nationalgp']; }
 	if(isset($_POST['SpecialInterest'])){ $postData['PSpecialInterestAreaID'] = implode(",",$_POST['SpecialInterest']); }
@@ -669,7 +669,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                     </select>
                 </div>
             </div>
-			<div class="row"> 
+			<!--<div class="row"> 
 				<div class="col-lg-3">
 				Your treatment area:
 				</div>
@@ -679,20 +679,20 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
 					<?php 
 					
-					$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
-				    $interestAreas=json_decode($interestAreascode, true);	
+					//$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
+				    //$interestAreas=json_decode($interestAreascode, true);	
 				
 					?>
 					<?php 
-					foreach($interestAreas  as $key => $value){
-						echo '<option value="'.$interestAreas[$key]["ID"].'"';
-						if (in_array( $interestAreas[$key]["ID"],$details['Treatmentarea'])){ echo "selected='selected'"; } 
-						echo '> '.$interestAreas[$key]["Name"].' </option>'; 
-					}
+					//foreach($interestAreas  as $key => $value){
+						//echo '<option value="'.$interestAreas[$key]["ID"].'"';
+						//if (in_array( $interestAreas[$key]["ID"],$details['Treatmentarea'])){ echo "selected='selected'"; } 
+						//echo '> '.$interestAreas[$key]["Name"].' </option>'; 
+					//}
 					?>
 					</select>
 				</div>
-			</div>
+			</div>-->
 		    <div class="row">
 				<div class="col-lg-3">What is your favourite languages?<br/></div>
 				<?php  
