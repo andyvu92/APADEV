@@ -843,16 +843,15 @@ function curlRequest($API, $type, $variables) {
 function logTransaction($APINum, $Sent, $Got) {
 	$sizeByte = intval(filesize("sites/Log/APA_Aptify_Communication.log"));
 	$size = FileSizeConvert($sizeByte);
-	echo "size: ".$size." // ".filesize("sites/Log/APA_Aptify_Communication.log")."<br />";
+	//echo "size: ".$size." // ".filesize("sites/Log/APA_Aptify_Communication.log")."<br />";
 	if($sizeByte > 100000) {
 		fileloop();
-		echo "in!";
 	}
 	$fileContinue = "";
 	if(file_exists("sites/Log/APA_Aptify_Communication.log")){ // Check If File Already Exists
 		$myfile = fopen("sites/Log/APA_Aptify_Communication.log", "r") or die("Unable to open file!");
 		$fileContinue = fread($myfile,filesize("sites/Log/APA_Aptify_Communication.log"));
-		echo "Yo: ".$fileContinue."!<br />";
+		//echo "Yo: ".$fileContinue."!<br />";
 		fclose($myfile);
 	}
 	$myfile = fopen("sites/Log/APA_Aptify_Communication.log", "w") or die("Unable to open file!");
@@ -869,7 +868,7 @@ function logTransaction($APINum, $Sent, $Got) {
 	$txt .= "Data Received: \n";
 	$txt .= $Got."\n";
 	$txt .= "---End of Log (".date("Y-m-d h-i-s").")---\n\n\n\n\n";
-	echo $txt;
+	//echo $txt;
 	fwrite($myfile, $txt);
 	fclose($myfile);
 	// log file output.
@@ -880,7 +879,6 @@ function fileloop() {
 	$num = count(scandir('sites/Log/')) - 2;
 	$arrayT = array();
 	if($handle = opendir('sites/Log/')) {
-		//echo "!!!!!!!!!!!!".count(scandir('sites/Log/'));
 		while (false !== ($fileName = readdir($handle))) {
 			array_push($arrayT, $fileName);			
 		}
