@@ -928,7 +928,7 @@ function fileloop() {
 * @param string $bytes 
 * @return string human readable file size (2,87 Мб)
 * @author Mogilev Arseny 
-*/ 
+*/
 function FileSizeConvert($bytes)
 {
     $bytes = floatval($bytes);
