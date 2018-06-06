@@ -134,13 +134,19 @@ $NGProductsArray=$_SESSION["NationalProductID"];
 // userID
 // Response -Fellowship product list
 $FPListArray = array();
-if(isset($_SESSION["FPProductID"])){
 $fpProdcutArray = array();
-array_push($fpProdcutArray,$_SESSION["FPProductID"]);
-$fpData['ProductID'] = $fpProdcutArray;
-$FPListArray = GetAptifyData("21", $fpData);
+if(isset($_SESSION["FPProductID"])){
+	array_push($fpProdcutArray,$_SESSION["FPProductID"]);
 }
-
+if(isset($_SESSION["MGProductID"])){
+	foreach($_SESSION["MGProductID"] as $singleMG){
+		array_push($fpProdcutArray,$singleMG);
+	}
+}
+$fpData['ProductID'] = $fpProdcutArray;
+echo "this is MG product.......";
+print_r($fpData);
+$FPListArray = GetAptifyData("21", $fpData);
 //From review page to review page to add payment method again; 
 
 if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {

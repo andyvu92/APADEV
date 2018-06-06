@@ -73,5 +73,6 @@ function completeOrderDeleteSession(){
 	unset($_SESSION["MembershipProductID"]);
 	unset($_SESSION["NationalProductID"]);
 	unset($_SESSION["FPProductID"]);
+	unset($_SESSION["MGProductID"]);
 }
 ?>

@@ -4,11 +4,13 @@
 // Send - 
 // userID
 // Response -Renewal Quatation OrderID
-$variableData['id'] = $_SESSION["UserId"];
-$Quatation = GetAptifyData("45", $variableData);
-foreach ($Quatation["results"] as $quatationOrderArray){
-	$quatationOrderID =  $quatationOrderArray["ID"];
-}
+if(isset($_SESSION["UserId"])){
+	$variableData['id'] = $_SESSION["UserId"];
+	$Quatation = GetAptifyData("45", $variableData);
+	if(sizeof($Quatation["results"])!=0){
+		foreach ($Quatation["results"] as $quatationOrderArray){
+			$quatationOrderID =  $quatationOrderArray["ID"];
+		}
 
 
 // after web service 2.2.45 Get renewal quatation orderID from Aptify;
@@ -16,7 +18,9 @@ foreach ($Quatation["results"] as $quatationOrderArray){
 // Send - 
 // Invoice_ID
 // Response -Order details
-$orderDetails = GetAptifyData("44", $quatationOrderID); 
+	$orderDetails = GetAptifyData("44", $quatationOrderID); 
+	}
+}
 // 2.2.21 - Get Fellowship product
 	// Send - 
 	// ProductID 
@@ -226,19 +230,27 @@ function checkShoppingCart($userID, $type){
 	foreach($ngData['Nationalgp'] as $key=>$value){
 		array_push($products,$value);
 	}
-	 /*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
-	if(isset($_POST['ngmusculo']) && $_POST['ngmusculo'] =="1"){ array_push($products,"Intouch"); }
-	if(isset($_POST['ngsports']) && $_POST['ngsports'] =="1" ) { array_push($products,"SPMagzine"); }
-	
 	$type = "NG";
 	checkShoppingCart($userID, $type="NG");
 	foreach($products as $key=>$value){
 		$productID = $value;
 		createShoppingCart($userID, $productID,$type);
 	}
+	//save fellowship product on APA side
 	if(isset($_POST['fap']) && $_POST['fap'] =="1" ) { 
 		checkShoppingCart($userID, $type="FP");
 		createShoppingCart($userID, $fellowshipProductID,$type="FP");
+	}
+	//save magazine products on APA side
+	 /*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
+	if(isset($_POST['ngmusculo']) && $_POST['ngmusculo'] =="1"){ 
+		checkShoppingCart($userID, $type="MG1");
+		createShoppingCart($userID, "9978",$type="MG1"); 
+	}
+	if(isset($_POST['ngsports']) && $_POST['ngsports'] =="1" ) {
+		checkShoppingCart($userID, $type="MG2");
+		createShoppingCart($userID, "9977",$type="MG2"); 
+		
 	}
 }   
 ?> 
@@ -266,6 +278,19 @@ $userNGProduct = getProduct($_SESSION['UserId'],"NG");
 if(sizeof($userNGProduct)!=0){$_SESSION['NationalProductID'] = $userNGProduct; }
 $userFPProduct = getProduct($_SESSION['UserId'],"FP");
 if(sizeof($userFPProduct)!=0){ foreach($userFPProduct as $singFP) { $_SESSION["FPProductID"] = $singFP;}}
+$userMGProduct = array();
+$userMG1Product = getProduct($_SESSION['UserId'],"MG1");
+if(sizeof($userMG1Product)!=0){ 
+    array_push($userMGProduct, $userMG1Product); 
+	$_SESSION["MGProductID"] = $userMGProduct;
+}
+$userMG2Product = getProduct($_SESSION['UserId'],"MG2");
+if(sizeof($userMG2Product)!=0){ 
+    array_push($userMGProduct, $userMG2Product); 
+}
+if(sizeof($userMGProduct)!=0){$_SESSION["MGProductID"] = $userMGProduct; }
+
+
 // 2.2.4 - Dashboard - Get member detail
 // Send - 
 // UserID 
