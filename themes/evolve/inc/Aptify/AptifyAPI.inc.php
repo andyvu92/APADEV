@@ -844,7 +844,7 @@ function logTransaction($APINum, $Sent, $Got) {
 	$sizeByte = intval(filesize("sites/Log/APA_Aptify_Communication.log"));
 	$size = FileSizeConvert($sizeByte);
 	echo "size: ".$size." // ".filesize("sites/Log/APA_Aptify_Communication.log")."<br />";
-	if($sizeByte > 1000) {
+	if($sizeByte > 100000) {
 		fileloop();
 		echo "in!";
 	}
@@ -857,12 +857,11 @@ function logTransaction($APINum, $Sent, $Got) {
 	}
 	$myfile = fopen("sites/Log/APA_Aptify_Communication.log", "w") or die("Unable to open file!");
 	// log:
-	// UserID, Status, Date/Time, 
-	// Data Sent, Data Received, Web service Number
+	// UserID, Date/Time, Data Sent,
+	// Data Received, Web service Number
 	fwrite($myfile, $fileContinue);
 	$txt = "UserID: ";
 	if(isset($_SESSION["UserId"])) {$txt .= $_SESSION["UserId"]."\n";} else {$txt .= "Null\n";}
-	$txt .= "Status: \n";
 	$txt .= "Date/time: ".date("Y-m-d h-i-s")."\n";
 	$txt .= "Web Service No: ".$APINum."\n";
 	$txt .= "Date Sent: \n";
@@ -878,7 +877,7 @@ function logTransaction($APINum, $Sent, $Got) {
 
 // push file names' number increased by 1.
 function fileloop() {
-	$num = count(scandir('sites/Log/')) - 1;
+	$num = count(scandir('sites/Log/')) - 2;
 	$arrayT = array();
 	if($handle = opendir('sites/Log/')) {
 		//echo "!!!!!!!!!!!!".count(scandir('sites/Log/'));
@@ -890,23 +889,14 @@ function fileloop() {
 	arsort($arrayT);
 	foreach($arrayT as $fileName) {
 		if(strlen($fileName) > 2 ) {
-			$pos = strpos($fileName, "".$num);
 			echo $fileName." - iiiinnnnn!!!<br />";
-			if ($pos !== false) {
-				echo "not false";
-				// first file without number
-				$newName = str_replace("APA_Aptify_Communication.log","APA_Aptify_Communication1.log",$fileName);
-				echo "new Name: '".$newName."'<br />";
-			} else {
-				echo "false";
-				// rest of files
-				if($fileName == "") {
+			if($fileName == "APA_Aptify_Communication.log") {
 					$newName = $newName = str_replace("APA_Aptify_Communication.log","APA_Aptify_Communication1.log",$fileName);
+				} else {
+					$newName = str_replace((string)($num - 1),(string)$num,$fileName);
 				}
-				$newName = str_replace((string)($num - 1),(string)$num,$fileName);
 				$num--;
 				echo "new Name: ".$newName."<br />";
-			}
 			if(!file_exists("sites/Log/".$newName)){ // Check If File Already Exists
 				if(rename("sites/Log/".$fileName, "sites/Log/".$newName)){ // Check If rename Function Completed Successfully
 					echo "Successfully Renamed $fileName to $newName<br />" ;
@@ -916,7 +906,6 @@ function fileloop() {
 			}else{
 				echo "A File With The New File Name Already Exists<br />" ;
 			}
-			//rename("sites/Log/".$fileName, "sites/Log/".$newname);
 		}
 	}
 }

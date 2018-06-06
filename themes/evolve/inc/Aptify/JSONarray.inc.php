@@ -10,7 +10,7 @@ function GetAptifyData($TypeAPI, $ArrayIn) {
 	$arrayToJson = JSONArrayConverter("toJSON", $ArrayIn);
 	// pass array and JSON version together and use them as needed.
 	$jsonreturn = AptifyAPI($TypeAPI, $ArrayIn, $arrayToJson);
-	
+	logTransaction($TypeAPI,$arrayToJson,$jsonreturn);
 	if($TypeAPI == "10") {
 		//echo $jsonreturn;
 	/*	
