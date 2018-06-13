@@ -60,7 +60,7 @@ foreach ($_POST as $key => $value) {
 	//echo "Field ".htmlspecialchars($key)." is ".htmlspecialchars($value)."<br>";
 	$PostArray[htmlspecialchars($key)] = htmlspecialchars($value);
 }
-if(count($PostArray) == 0) { // Just GET data
+if(count($PostArray) == 0) { // GET data
 	$SubListAll = Array();
 	foreach($Subscription as $Subs) {
 		$ArrayRe["SubscriptionID"] = $Subs["ConsentID"];
@@ -82,46 +82,55 @@ if(count($PostArray) == 0) { // Just GET data
 		$ArrayRe["Subscribed"] = 1;
 		array_push($SubListAll, $ArrayRe);
 	}
-} else {
+} else { // send & get updated data
 	$ArrayReturn = Array();
-	array_push($ArrayReturn, "UserID");
+	$ArrayReturn["UserID"] = $_SESSION['UserId'];
 	$SubListAll = Array();
+	$subArray = Array();
+	$consArray = Array();
 	foreach($Subscription as $Subs) {
 		$ArrayRe["SubscriptionID"] = $Subs["ConsentID"];
-		$ArrayRe["Subscription"] = $Subs["Consent"];
-		if(!isset($PostArray[$Subs["SubscriptionID"]])) {
+		$arrayUpdate["ConsentID"] = $Subs["ConsentID"];
+		if(!isset($PostArray[$Subs["ConsentID"]])) {
 			// When it's not set (unticked on check box)
-			$ArrayRe["Subscribed"] = 0;
+			$ArrayRe["Subscribed"] = "False";
+			$arrayUpdate["Subscribed"] = "False";
 		} else {
-			$ArrayRe["Subscribed"] = $Subs["Subscribed"];
+			$ArrayRe["Subscribed"] = "True";//$Subs["Subscribed"];
+			$arrayUpdate["Subscribed"] = "True";//$Subs["Subscribed"];
 		}
+		array_push($consArray, $arrayUpdate);
+		$ArrayRe["Subscription"] = $Subs["Consent"];
 		array_push($SubListAll, $ArrayRe);
 	}
-	$nationalGroup = $nationalGroups["NationalGroup"];
+	$nationalGroup = $nationalGroups["results"];
 	foreach($nationalGroup as $Subs) {
-		$ArrayRe["SubscriptionID"] = $Subs["NGid"];
-		$ArrayRe["Subscription"] = $Subs["NGtitle"];
-		if(!isset($PostArray[$Subs["NGid"]])) {
+		$ArrayRe["SubscriptionID"] = $Subs["SubscriptionID"];
+		if(!isset($PostArray[$Subs["SubscriptionID"]])) {
 			// When it's not set (unticked on check box)
 			$ArrayRe["Subscribed"] = 0;
 		} else {
 			$ArrayRe["Subscribed"] = 1;
 		}
+		array_push($subArray, $ArrayRe);
+		$ArrayRe["Subscription"] = $Subs["NGtitle"];
 		array_push($SubListAll, $ArrayRe);
 	}
-	$Fellow = $Fellows["Fellowship"];
+	$Fellow = $Fellows["results"];
 	foreach($Fellow as $Subs) {
 		$ArrayRe["SubscriptionID"] = $Subs["FPid"];
-		$ArrayRe["Subscription"] = $Subs["FPtitle"];
 		if(!isset($PostArray[$Subs["FPid"]])) {
 			// When it's not set (unticked on check box)
 			$ArrayRe["Subscribed"] = 0;
 		} else {
 			$ArrayRe["Subscribed"] = 1;
 		}
+		array_push($subArray, $ArrayRe);
+		$ArrayRe["Subscription"] = $Subs["FPtitle"];
 		array_push($SubListAll, $ArrayRe);
 	}
-	array_push($ArrayReturn, $SubListAll);
+	$ArrayReturn["Subscriptions"] = $subArray;
+	$ArrayReturn["Consents"] = $consArray;
 	echo "<br /><br />";
 	// 2.2.24 - Update subscription preferences
 	// Send - 
@@ -157,10 +166,10 @@ if(count($PostArray) == 0) { // Just GET data
 									if($tr == 0) {
 										echo "<tr>";
 									}
-									echo '<td><label for="'.$Subs["Subscription"].'">'.$Subs["Subscription"]
+									echo '<td><label for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
 										.'</label><input type="checkbox" name="'.$Subs["SubscriptionID"].
-										'" id="'.$Subs["Subscription"].'" value="'.$Subs["Subscribed"].'"';
-									if($Subs['Subscribed']==1){ 
+										'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
+									if($Subs['Subscribed']==1 || $Subs['Subscribed']=="True"){ 
 										echo "checked";
 									}
 									echo '></td>';
