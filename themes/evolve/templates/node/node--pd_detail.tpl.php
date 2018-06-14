@@ -78,6 +78,39 @@
 *
 * @ingroup themeable
 */
+//1. for create web user
+
+if(isset($_POST['step1'])) {
+	$postData = array();
+	if(isset($_POST['Firstname'])){ $postData['Firstname'] = $_POST['Firstname']; }
+	if(isset($_POST['Lastname'])){ $postData['Lastname'] = $_POST['Lastname']; }
+	if(isset($_POST['Prefix'])){ $postData['Prefix'] = $_POST['Prefix']; }
+	if(isset($_POST['Birth'])){ $postData['birth'] = str_replace("-","/",$_POST['Birth']); }
+	if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
+	if(isset($_POST['Address_Line_1'])){ $postData['Unit'] = $_POST['Address_Line_1']; }
+	if(isset($_POST['Address_Line_2'])){ $postData['Street'] = $_POST['Address_Line_2']; }
+	if(isset($_POST['Suburb'])){ $postData['Suburb'] = $_POST['Suburb']; }
+	if(isset($_POST['Postcode'])){ $postData['Postcode'] = $_POST['Postcode']; }
+	if(isset($_POST['State'])){ $postData['State'] = $_POST['State']; }
+	if(isset($_POST['Country'])){ $postData['Country'] = $_POST['Country']; }
+	if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid'];}
+	if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password'];}
+	
+
+// for new user join a member call user registeration web service	
+$resultdata = GetAptifyData("42", $postData); print_r($resultdata);
+//when create user successfully call login web service to login in APA website automatically.
+//after login successfully get UserID as well to store on APA shopping cart database
+if($resultdata['result']) { 
+	$_SESSION["UserName"] = $postData['Memberid'];
+	$_SESSION["Password"] = $postData['Password'];
+	// call webservice login. Eddy will provide login -process functionality---put code here
+	// login sucessful unset session
+	loginManager($_SESSION["UserName"], $_SESSION["Password"]);
+	unset($_SESSION["UserName"]);
+	unset($_SESSION["Password"]);
+}
+}
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
 	<section class="post-content">
@@ -219,8 +252,192 @@
 		
 	}
 	// add new user!
-	if(isset($_GET['updateNonmember'])&&($_GET['updateNonmember']!=0)){ 
-		$updateNonmemberTag = $_GET['updateNonmember'];
+	if(isset($_GET['updateNonmember'])&&($_GET['updateNonmember']=="1")){
+		
+		//$updateNonmemberTag = $_GET['updateNonmember'];
+		$postData = array();
+		if(isset($_SESSION['UserId'])) {$postData['userID'] = $_SESSION['UserId'];}
+		if(isset($_POST['Prefix'])){ $postData['Prefix'] = $_POST['Prefix']; }
+		if(isset($_POST['Firstname'])){ $postData['Firstname'] = $_POST['Firstname']; }
+		if(isset($_POST['Middle-name'])){ $postData['Middle-name'] = $_POST['Middle-name']; }
+		if(isset($_POST['Preferred-name'])){ $postData['Preferred-name'] = $_POST['Preferred-name']; }
+		if(isset($_POST['Maiden-name'])){ $postData['Maiden-name'] = $_POST['Maiden-name']; }
+		if(isset($_POST['Lastname'])){ $postData['Lastname'] = $_POST['Lastname']; }
+		if(isset($_POST['Birth'])){ $postData['birth'] = str_replace("-","/",$_POST['Birth']); }
+		if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
+		if(isset($_POST['country-code'])){ $postData['Home-country-code'] = $_POST['country-code']; }
+		if(isset($_POST['area-code'])){ $postData['Home-area-code'] = $_POST['area-code']; }
+		if(isset($_POST['phone-number'])){ $postData['Home-phone-number'] = $_POST['phone-number']; }
+		if(isset($_POST['Mobile-country-code'])){ $postData['Mobile-country-code'] = $_POST['Mobile-country-code']; }
+		if(isset($_POST['Mobile-area-code'])){ $postData['Mobile-area-code'] = $_POST['Mobile-area-code']; }
+		if(isset($_POST['Mobile-number'])){ $postData['Mobile-number'] = $_POST['Mobile-number']; }
+		if(isset($_POST['Aboriginal'])){ $postData['Aboriginal'] = $_POST['Aboriginal']; }
+		if(isset($_POST['BuildingName'])){ $postData['BuildingName'] = $_POST['BuildingName']; }
+		if(isset($_POST['Address_Line_1'])){ $postData['Address_Line_1'] = $_POST['Address_Line_1']; }
+		if(isset($_POST['Pobox'])){ $postData['Pobox'] = $_POST['Pobox']; }
+		if(isset($_POST['Address_Line_2'])){ $postData['Address_Line_2'] = $_POST['Address_Line_2']; }
+		if(isset($_POST['Suburb'])){ $postData['Suburb'] = $_POST['Suburb']; }
+		if(isset($_POST['Postcode'])){ $postData['Postcode'] = $_POST['Postcode']; }
+		if(isset($_POST['State'])){ $postData['State'] = $_POST['State']; }
+		if(isset($_POST['Country'])){ $postData['Country'] = $_POST['Country']; }
+		if(isset($_POST['Status'])){ $postData['Status'] = $_POST['Status']; }
+		if(isset($_POST['Specialty'])){ $postData['Specialty'] = $_POST['Specialty']; }
+
+		//change from shipping address to billing address
+		if(isset($_POST['Shipping-address-join']) && $_POST['Shipping-address-join']=='1'){ 
+		$postData['Billing-BuildingName'] = $_POST['BuildingName']; 
+		$postData['BillingAddress_Line_1'] = $_POST['Address_Line_1'];
+		$postData['BillingAddress_Line_2'] = $_POST['Address_Line_2'];
+		$postData['Billing-Pobox'] = $_POST['Pobox'];
+		$postData['Billing-Suburb'] = $_POST['Suburb'];
+		$postData['Billing-Postcode'] = $_POST['Postcode'];
+		$postData['Billing-State'] = $_POST['State'];
+		$postData['Billing-Country'] = $_POST['Country'];
+		}else{
+		$postData['Billing-BuildingName'] = $_POST['Billing-BuildingName']; 
+		$postData['BillingAddress_Line_1'] = $_POST['Billing-Address_Line_1'];
+		$postData['BillingAddress_Line_2'] = $_POST['Billing-Address_Line_2'];
+		$postData['Billing-Pobox'] = $_POST['Billing-Pobox'];
+		$postData['Billing-Suburb'] = $_POST['Billing-Suburb'];
+		$postData['Billing-Postcode'] = $_POST['Billing-Postcode'];
+		$postData['Billing-State'] = $_POST['Billing-State'];
+		$postData['Billing-Country'] = $_POST['Billing-Country'];  
+		}
+		//Add shipping address & mailing address post data
+		if(isset($_POST['Shipping-BuildingName'])){ $postData['Shipping-BuildingName'] = $_POST['Shipping-BuildingName']; }
+	if(isset($_POST['Shipping-Address_Line_1'])){ $postData['Shipping-Address_line_1'] = $_POST['Shipping-Address_Line_1']; }
+	if(isset($_POST['Shipping-Address_Line_2'])){ $postData['Shipping-Address_line_2'] = $_POST['Shipping-Address_Line_2']; }
+	if(isset($_POST['Shipping-PObox'])){ $postData['Shipping-PObox'] = $_POST['Shipping-PObox']; } 
+	if(isset($_POST['Shipping-city-town'])){ $postData['Shipping-city-town'] = $_POST['Shipping-city-town']; } 
+	if(isset($_POST['Shipping-postcode'])){ $postData['Shipping-postcode'] = $_POST['Shipping-postcode']; } 
+	if(isset($_POST['Shipping-State'])){ $postData['Shipping-state'] = $_POST['Shipping-State']; }
+	if(isset($_POST['Shipping-country'])){ $postData['Shipping-country'] = $_POST['Shipping-country']; }
+	if(isset($_POST['Mailing-BuildingName'])){ $postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName']; } 
+	if(isset($_POST['Mailing-Address_Line_1'])){ $postData['Mailing-Address_line_1'] = $_POST['Mailing-Address_Line_1']; } 
+	if(isset($_POST['Mailing-Address_Line_2'])){ $postData['Mailing-Address_line_2'] = $_POST['Mailing-Address_Line_2']; } 
+	if(isset($_POST['Mailing-PObox'])){ $postData['Mailing-PObox'] = $_POST['Mailing-PObox']; }
+	if(isset($_POST['Mailing-city-town'])){ $postData['Mailing-city-town'] = $_POST['Mailing-city-town']; } 
+	if(isset($_POST['Mailing-postcode'])){ $postData['Mailing-postcode'] = $_POST['Mailing-postcode']; }
+	if(isset($_POST['Mailing-State'])){ $postData['Mailing-state'] = $_POST['Mailing-State']; } 
+	if(isset($_POST['Mailing-country'])){ $postData['Mailing-country'] = $_POST['Mailing-country']; } 
+	
+	
+	//---	
+	if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid'];}
+	if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password'];}
+	if(isset($_POST['MemberType'])){ $postLocalData['MemberType'] = $_POST['MemberType']; }
+	if(isset($_POST['Ahpranumber'])){ $postData['Ahpranumber'] = $_POST['Ahpranumber']; }
+	if(isset($_POST['Branch'])){ $postData['Branch'] = $_POST['Branch']; }
+	if(isset($_SESSION['Regional-group'])){ $postData['Regional-group'] = $_SESSION['Regional-group']; } else{ $postData['Regional-group'] ="";}
+	if(isset($_POST['Nationalgp'])){ $ngData['Nationalgp'] = $_POST['Nationalgp']; }
+	if(isset($_POST['SpecialInterest'])){ $postData['PSpecialInterestAreaID'] = implode(",",$_POST['SpecialInterest']); }
+		
+		//if(isset($_POST['Treatmentarea'])){ $postData['Treatmentarea'] = $_POST['Treatmentarea']; }
+		if(isset($_POST['MAdditionallanguage'])){ $postData['PAdditionalLanguageID'] = implode(",",$_POST['MAdditionallanguage']); }
+		
+		if(isset($_POST['Findpublicbuddy'])){ $postData['Findpublicbuddy'] = $_POST['Findpublicbuddy']; } else{ $postData['Findpublicbuddy'] = "False";}
+		if(isset($_POST['Dietary'])){ 
+		   $testDietaryArray = array();
+			foreach($_POST['Dietary'] as $dietaryData){
+			$testD['ID']=$dietaryData;
+			array_push($testDietaryArray, $testD);
+			}
+			$postData['Dietary'] = $testDietaryArray;
+		}
+		if(isset($_POST['wpnumber'])){ 
+		$num = $_POST['wpnumber']; 
+		$tempWork = array();
+		for($i=0; $i<$num; $i++){
+			$workplaceArray = array();
+			$workplaceArray['WorkplaceID'] = $_POST['WorkplaceID'.$i];
+			if(isset($_POST['Findabuddy'.$i])) { $workplaceArray['Find-a-buddy'] = $_POST['Findabuddy'.$i];}else{ $workplaceArray['Findabuddy'] = "False";}
+			if(isset($_POST['Findphysio'.$i])) { $workplaceArray['Findphysio'] = $_POST['Findphysio'.$i];}else{ $workplaceArray['Findphysio'] = "False";}
+			if(isset($_POST['Name-of-workplace'.$i])) { $workplaceArray['Name-of-workplace'] = $_POST['Name-of-workplace'.$i];}
+			if(isset($_POST['Workplace-setting'.$i])) { $workplaceArray['Workplace-settingID'] = $_POST['Workplace-setting'.$i];}
+			if(isset($_POST['WBuildingName'.$i])) { $workplaceArray['WBuildingName'] = $_POST['WBuildingName'.$i];}
+			if(isset($_POST['WAddress_Line_1'.$i])) { $workplaceArray['Address_Line_1'] = $_POST['WAddress_Line_1'.$i];}
+			if(isset($_POST['WAddress_Line_2'.$i])) { $workplaceArray['Address_Line_2'] = $_POST['WAddress_Line_2'.$i];}
+			if(isset($_POST['Wcity'.$i])) { $workplaceArray['Wcity'] = $_POST['Wcity'.$i];}
+			if(isset($_POST['Wpostcode'.$i])) { $workplaceArray['Wpostcode'] = $_POST['Wpostcode'.$i];}
+			if(isset($_POST['Wstate'.$i])) { $workplaceArray['Wstate'] = $_POST['Wstate'.$i];}
+			if(isset($_POST['Wcountry'.$i])) { $workplaceArray['Wcountry'] = $_POST['Wcountry'.$i];}
+			if(isset($_POST['Wemail'.$i])) { $workplaceArray['Wemail'] = $_POST['Wemail'.$i];}
+			if(isset($_POST['Wwebaddress'.$i])) { $workplaceArray['Wwebaddress'] = $_POST['Wwebaddress'.$i];}
+			if(isset($_POST['WPhoneCountryCode'.$i])) { $workplaceArray['WPhoneCountryCode'] = $_POST['WPhoneCountryCode'.$i];}
+			if(isset($_POST['WPhoneAreaCode'.$i])) { $workplaceArray['WPhoneAreaCode'] = $_POST['WPhoneAreaCode'.$i];}
+			if(isset($_POST['Wphone'.$i])) { $workplaceArray['WPhone'] = $_POST['Wphone'.$i];}
+			if(isset($_POST['WPhoneExtentions'.$i])) { $workplaceArray['WPhoneExtentions'] = $_POST['WPhoneExtentions'.$i];}
+			if(isset($_POST['Electronic-claiming'.$i])) { $workplaceArray['Electronic-claiming'] = $_POST['Electronic-claiming'.$i];}else {$workplaceArray['Electronic-claiming']="False";}
+			if(isset($_POST['Hicaps'.$i])) { $workplaceArray['Hicaps'] = $_POST['Hicaps'.$i];}else {$workplaceArray['Hicaps']="False";}
+			if(isset($_POST['Healthpoint'.$i])) { $workplaceArray['Healthpoint'] = $_POST['Healthpoint'.$i];}else {$workplaceArray['Healthpoint']="False";}
+			if(isset($_POST['Departmentva'.$i])) { $workplaceArray['Departmentva'] = $_POST['Departmentva'.$i];}else {$workplaceArray['Departmentva']="False";}
+			if(isset($_POST['Workerscompensation'.$i])) { $workplaceArray['Workerscompensation'] = $_POST['Workerscompensation'.$i];}else {$workplaceArray['Workerscompensation']="False";}
+			if(isset($_POST['Motora'.$i])) { $workplaceArray['Motora'] = $_POST['Motora'.$i];}else {$workplaceArray['Motora']="False";}
+			if(isset($_POST['Medicare'.$i])) { $workplaceArray['Medicare'] = $_POST['Medicare'.$i];}else {$workplaceArray['Medicare']="False";}
+			if(isset($_POST['Homehospital'.$i])) { $workplaceArray['Homehospital'] = $_POST['Homehospital'.$i];} else {$workplaceArray['Homehospital']="False";}
+			if(isset($_POST['MobilePhysio'.$i])) { $workplaceArray['MobilePhysio'] = $_POST['MobilePhysio'.$i];}else {$workplaceArray['MobilePhysio']="False";}
+			if(isset($_POST['Number-worked-hours'.$i])) { $workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours'.$i];}
+			if(isset($_POST['WTreatmentarea'.$i])){ $workplaceArray['SpecialInterestAreaID'] = implode(",",$_POST['WTreatmentarea'.$i]); }
+			if(isset($_POST['Additionallanguage'.$i])){ $workplaceArray['AdditionalLanguage'] = implode(",",$_POST['Additionallanguage'.$i]); }
+			array_push($tempWork, $workplaceArray);
+		}
+			$postData['Workplaces'] =  $tempWork ;
+		}
+		if(isset($_POST['wpnumber']) == "1" && empty($_POST['Name-of-workplace0'])){ $postData['Workplaces'] =array();}
+		if(isset($_POST['addtionalNumber'])){
+				$n =  $_POST['addtionalNumber'];
+				$temp = array();
+				for($j=0; $j<$n; $j++){
+					$additionalQualifications = array();
+					if(isset($_POST['ID'.$j])) { $additionalQualifications['ID'] = $_POST['ID'.$j];}
+					
+					if(isset($_POST['University-degree'.$j]) && $_POST['University-degree'.$j]!=""){
+						$additionalQualifications['Degree'] = $_POST['University-degree'.$j]; 
+						$additionalQualifications['DegreeID'] = "";
+					}
+					else{
+						$additionalQualifications['DegreeID'] = $_POST['Udegree'.$j];
+						$additionalQualifications['Degree'] = "";
+					}
+					
+					if(isset($_POST['Undergraduate-university-name-other'.$j]) && $_POST['Undergraduate-university-name-other'.$j]!=""){
+						$additionalQualifications['Institute'] = $_POST['Undergraduate-university-name-other'.$j]; 
+						$additionalQualifications['InstituteID'] = "";
+					}
+					else{
+						$additionalQualifications['InstituteID'] = $_POST['Undergraduate-university-name'.$j];
+						$additionalQualifications['Institute'] = "";
+					}
+					
+					if(isset($_POST['Ugraduate-country'.$j])) { $additionalQualifications['Country'] = $_POST['Ugraduate-country'.$j];}
+					if(isset($_POST['Ugraduate-yearattained'.$j])) { $additionalQualifications['Yearattained'] = $_POST['Ugraduate-yearattained'.$j];}
+					array_push($temp , $additionalQualifications);
+				}
+				$postData['PersonEducation'] =  $temp ;
+		}
+		// 2.2.5 - Member detail - Update
+		// Send - 
+		// UserID & detail data
+		// Response -Update Success message & UserID & detail data
+		if(isset($_SESSION['UserId'])){ $testdata = GetAptifyData("5", $postData);  }
+		else {
+		// for new user join a member call user registeration web service	
+			
+		$resultdata = GetAptifyData("25", $postData); print_r($resultdata);
+		//when create user successfully call login web service to login in APA website automatically.
+		//after login successfully get UserID as well to store on APA shopping cart database
+		if($resultdata['result'] =="Success") { 
+			$_SESSION["UserName"] = $postData['Memberid'];
+			$_SESSION["Password"] = $postData['Password'];
+			// call webservice login. Eddy will provide login -process functionality---put code here
+			// login sucessful unset session
+			loginManager($_SESSION["UserName"], $_SESSION["Password"]);
+			
+			unset($_SESSION["UserName"]);
+			unset($_SESSION["Password"]);
+		}
+		} 
+	unset($_SESSION["Regional-group"]);
 		$CreateNewUserPD["Job"] = $_POST["Job"];
 		$CreateNewUserPD["Registrationboard"] = $_POST["Registrationboard"];
 		$CreateNewUserPD["Professionalinsurance"] = $_POST["Professionalinsurance"];
@@ -351,7 +568,7 @@
 		 </p></div>
 		 <p>&nbsp;</p>
 		 
-		 <?php if(isset($userId)&& ($userId!=0)):?><p><form action="pd-product?id=<?php echo $pd_detail["Id"]?>" method="POST"><input type="text" name="Couponcode" placeholder="Enter discount code"><button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button></form></p><br><?php endif; ?>
+		 <?php if(isset($userId)&& ($userId!=0)):?><p><form action="pd-product?id=<?php echo $pd_detail["MeetingID"]?>" method="POST"><input type="text" name="Couponcode" placeholder="Enter discount code"><button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button></form></p><br><?php endif; ?>
 		 <?php 
 		     
 		 
@@ -360,7 +577,7 @@
 	         if ($userTag =="1"){
 					echo '<form id="shoppingCartForm" action="../sites/all/themes/evolve/commonFile/updateShoppingCart.php" method="POST">
 					<input type="hidden" name="userID" value="'.$_SESSION["userID"].'"> 
-					<input type="hidden" name="productID" value="'.$pd_detail["Id"].'"> 
+					<input type="hidden" name="productID" value="'.$pd_detail["MeetingID"].'"> 
 					<input type="hidden" name="type" value="PD">
 					<input type="hidden" name="Couponcode" value="'.$Couponcode.'"> 
 					<input type="hidden" name="create">
@@ -418,49 +635,50 @@
        
       </div>
 	  
-	   <div  id="loginPopWindow" >
-        
-           
-                
-             
-          
-			      <form name="signInForm" method="POST" action="pd-product?userID=1&id=<?php echo $pd_detail['Id'];?>">
-                     <p style="color: #009FDA !important;">I’m a member. Please sign in below:</p>
-				     <input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
-					 <input type="password" class="form-control"  name="Password" id="Password" placeholder="Password"><br>
-					 <p style="color: #009FDA !important;">I am not a member. <a id="createAccount">Create an account.</a></p>
-					 <p>Forgotten your email address or password?<a href="" target="_blank">&nbsp;Click here</a> to reset your login details</p>
-					  <input type="submit" value="Sign in">
-				 </form>
-            
-            
-           
-         
+		<div  id="loginPopWindow" >
+			<form name="signInForm" method="POST" action="pd-product?userID=1&id=<?php echo $pd_detail['Id'];?>">
+				 <p style="color: #009FDA !important;">I’m a member. Please sign in below:</p>
+				 <input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
+				 <input type="password" class="form-control"  name="Password" id="Password" placeholder="Password"><br>
+				 <p style="color: #009FDA !important;">I am not a member. <a id="createAccount">Create an account.</a></p>
+				 <p>Forgotten your email address or password?<a href="" target="_blank">&nbsp;Click here</a> to reset your login details</p>
+				  <input type="submit" value="Sign in">
+			</form>
+       
       </div>
 	  <div id="registerMember">
-        
-                         
-			     <form action="" method="POST" id="registerMemberForm" autocomplete="off">
+            <form action="pd-product?updateNonmember=1&id=<?php echo $pd_detail['MeetingID'];?>" method="POST" id="registerMember" autocomplete="off">
+				<div class="down20">
 				   <div class="row"><h4 class="modal-title">Don’t have an account? Please register below:</h4></div>
-                   <div class="row">
+                   <input type="hidden" name="Status" value="1"/>
+				   <div class="row">
                      <div class="col-lg-6">
-                          <select class="form-control" id="Prefix" name="Prefix">
-                              <option value="" disabled selected>Prefix</option>
-                              <option value="Prof">Prof</option>
-                              <option value="Dr">Dr</option>
-                              <option value="Mr">Mr</option>
-                              <option value="Mrs">Mrs</option>
-                              <option value="Miss">Miss</option>
-                              <option value="Ms">Ms</option>
-                           </select>
+                        <?php 
+							$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
+							$Prefix=json_decode($Prefixcode, true);
+							?>
+                            <select class="form-control" id="Prefix" name="Prefix">
+							<?php 
+							foreach($Prefix  as $key => $value){
+								echo '<option value="'.$Prefix[$key]['ID'].'"';
+								echo '> '.$Prefix[$key]['Prefix'].' </option>';
+							}
+							
+						?>
+						</select>
                      </div>
 					   <div class="col-lg-6">
 						
 						   <select class="form-control" id="Gender" name="Gender">
-							  <option value="" disabled selected> Gender </option>
-							  <option value="Male">Male</option>
-							  <option value="Female">Female</option>
-							  <option value="other">I’d prefer not to say</option>
+							  <?php
+									$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
+									$Gender=json_decode($Gendercode, true);						
+									foreach($Gender  as $key => $value){
+										echo '<option value="'.$Gender[$key]['ID'].'"';
+									
+										echo '> '.$Gender[$key]['Description'].' </option>';
+									}
+								?>
 						   </select>
 						</div>
                   </div>
@@ -489,12 +707,165 @@
 					   <input type="password" class="form-control"  name="Confirmpassword" placeholder="Confirm your password">
 					</div>
 				</div>
-				 <div class="row">
-				     <div class="col-lg-6">
-					   <input type="text" class="form-control"  name="Contactnumber" placeholder="Contact number">
+				<div class="row">
+						<div class="col-lg-12">Residential address:</div>
+				</div>
+				<div class="row">
+						<div class="col-lg-4">
+							<label for="">Building name</label>
+							<input type="text" class="form-control"  name="BuildingName">
+						</div>
 					</div>
-					 <div class="col-lg-6">
-					   <input type="text" class="form-control" onfocus="(this.type='date')" name="Birthdate" placeholder="Date of birth">
+					<div class="row">
+						<div class="col-lg-4">
+						<label for="">Address line 1<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
+						</div>
+						<div class="col-lg-6 col-lg-offset-2">
+						<label for="">PO box</label>
+						<input type="text" class="form-control" name="Pobox">
+						</div>
+				</div>
+				<div class="row">
+						<div class="col-lg-12">
+							<label for="">Address Line 2<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<label for="">City or town<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="Suburb" id="Suburb">
+						</div>
+				</div>
+				<div class="row">
+						<div class="col-lg-3">
+							<label for="">Postcode<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="Postcode" id="Postcode">
+						</div>
+						<div class="col-lg-3">
+							<label for="">State<span class="tipstyle">*</span></label>
+							<select class="form-control" id="State" name="State">
+								<option value="" selected disabled> State </option>
+								<?php 
+								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+								$State=json_decode($statecode, true);
+								foreach($State  as $key => $value){
+								echo '<option value="'.$State[$key]['Abbreviation'].'"';
+							    echo '> '.$State[$key]['Abbreviation'].' </option>';
+							
+								}
+								?>
+							</select>
+						</div>
+						<div class="col-lg-6">
+							<label for="">Country<span class="tipstyle">*</span></label>
+							<select class="form-control" id="Country" name="Country">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['Country'].'"';
+								echo '> '.$country[$key]['Country'].' </option>';
+								
+							}
+							?>
+					        </select>
+						</div>
+				</div>
+				<div class="row">
+						<div class="col-lg-12"><label for="Shipping-address-join"><strong>Billing address:(Sames as Above address)</strong></label><input type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="1" checked></div>
+				</div>
+				<div class="row shipping" id="shippingAddress">
+					<div class="row">
+						<div class="col-lg-4">
+							<label for="">Building name</label>
+							<input type="text" class="form-control"  name="Billing-BuildingName">
+						</div>
+						<div class="col-lg-6 col-lg-offset-2">
+							<label for="">PO box</label>
+							<input type="text" class="form-control" name="Billing-Pobox" id="Billing-Pobox">
+						</div>
+					</div>
+					    <div class="col-lg-4">
+                           <label for="">Address Line 1<span class="tipstyle">*</span></label>
+                           <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1">
+                        </div>
+                        <div class="col-lg-12">
+                           <label for="">Address Line 2</label>
+                           <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2">
+                        </div>
+						<div class="col-lg-12">
+                           <label for="">City or town</label>
+                           <input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb">
+                        </div>
+                        <div class="col-lg-3">
+                           <label for="">Postcode</label>
+                           <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode">
+                        </div>
+                        <div class="col-lg-3">
+                           <label for="">State</label>
+                           <select class="form-control" name="Billing-State" id="Billing-State">
+								<option value=""  disabled> State </option>
+								<?php 
+								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+								$State=json_decode($statecode, true);
+								foreach($State  as $key => $value){
+								echo '<option value="'.$State[$key]['Abbreviation'].'"';
+							    echo '> '.$State[$key]['Abbreviation'].' </option>';
+							
+								}
+								?>
+                           </select>
+                        </div>
+                        <div class="col-lg-6">
+                           <label for="">Country</label>
+                           	<select class="form-control" id="Billing-Country" name="Billing-Country">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['Country'].'"';
+								echo '> '.$country[$key]['Country'].' </option>';
+								
+							}
+							?>
+					        </select>
+                        </div>
+                </div>
+				<div class="row">
+					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button21"><span class="dashboard-button-name">Next</span></a></div>
+				</div>
+			</div>
+			<div class="down22" style="display:none;">
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="">Country code</label>
+						<select class="form-control" id="country-code" name="country-code">
+						<?php
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);						
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
+								echo '> '.$country[$key]['Country'].' </option>';
+							}
+						?>
+						</select>
+					</div>
+					<div class="col-lg-2">
+						<label for="">Area code</label>
+						<input type="text" class="form-control" name="area-code" maxlength="5">
+					</div>
+					<div class="col-lg-4">
+						<label for="">Phone number</label>
+						<input type="text" class="form-control" name="phone-number" >
+					</div>
+					
+				</div>
+				<div class="row">
+				    <div class="col-lg-6">
+						<label for="">Birth Date<span class="tipstyle">*</span></label>
+						<input type="date" class="form-control" onfocus="(this.type='date')" name="Birth" placeholder="Date of birth">
 					</div>
 				 </div>
 				 <div class="row">
@@ -514,14 +885,14 @@
 				      </select>
 					</div>
 				 </div>
-				 <div class="row">
+				<div class="row">
 				   <div class="col-lg-12">
 				  <input type="checkbox" name="Registrationboard" id="Registrationboard" required> <label for="Registrationboard">I am registered with my profession's registration board.</label>
 				   </div>
 				</div>
 				<div class="row">
 				   <div class="col-lg-12">
-				  <input type="checkbox" name="Professionalinsurance" id="Professionalinsurance" required> <label for="Professionalinsurance">I have current adequate professional indemnity insurance.</label>
+					<input type="checkbox" name="Professionalinsurance" id="Professionalinsurance" required> <label for="Professionalinsurance">I have current adequate professional indemnity insurance.</label>
 				   </div>
 				</div>
 				<div class="row">
@@ -529,26 +900,27 @@
 				  <input type="checkbox" name="Professionalbody" id="Professionalbody"> <label for="Professionalbody">I am a member of my professional body.</label>
 				   </div>
 				</div>
-				 <div class="row">
-				   <div class="col-lg-6">Dietary requirements:</div>
-				   <div class="col-lg-6">
-				       <select class="chosen-select" id="Dietary" name="Dietary" multiple>
-                              <option value="None" selected>None</option>
-                              <option value="Seafood">Allergic to seafood</option>
-                              <option value="Shellfish">Allergic to shellfish</option>
-                              <option value="Nuts">Allergic to nuts</option>
-                              <option value="Eggs">Allergic to eggs</option>
-                              <option value="Coeliac">Coeliac</option>
-                              <option value="Fructose">Fructose intolerant</option>
-                              <option value="Gluten">Gluten intolerant</option>
-                              <option value="Lactose">Lactose intolerant</option>
-                              <option value="Vegetarian">Vegetarian</option>
-                              <option value="Vegan">Vegan</option>
-                              <option value="Other">Other</option>
-                           </select>
-				   </div>
-				 </div>
-				  <div class="row">
+				<div class="row">
+					<div class="col-lg-6">
+					Your dietary requirements
+					</div>
+					<div class="col-lg-6">
+						<select class="chosen-select" id="Dietary" name="Dietary[]" multiple>
+						<option value=""  selected> None </option>
+						<?php 
+						$Dietarycode  = file_get_contents("sites/all/themes/evolve/json/Dietary.json");
+						$Dietary=json_decode($Dietarycode, true);
+						foreach($Dietary  as $key => $value){
+						echo '<option value="'.$Dietary[$key]['ID'].'"';
+						echo '> '.$Dietary[$key]['Name'].' </option>';
+					
+						}
+						?>
+						
+						</select>
+					</div>
+				</div>
+				<div class="row">
 				   <div class="col-lg-6">How did you hear about APA PD?</div>
 				   <div class="col-lg-6">
 				       <select class="form-control" id="HearaboutAPA" name="HearaboutAPA">
@@ -569,13 +941,13 @@
                                               ?>
 					   </select>
 				   </div>
-				 </div>
-				 <div class="row"> 
+				</div>
+				<div class="row"> 
                     <div class="col-lg-9">
                         <p>Would you like to hear about other APA products?</p>
                     </div>
                 </div>
-				 <div class="row">
+				<div class="row">
                     <div class="col-lg-4">
                     <input type="checkbox" name="Membership-product" id="Membership-product" checked> <label for="Membership-product">Membership</label>
                     </div>
@@ -585,8 +957,8 @@
 					 <div class="col-lg-4">
                     <input type="checkbox" name="Jobs-product" id="Jobs-product" checked> <label for="Jobs-product">Jobs4physios</label>
                     </div>
-                 </div>
-				  <div class="row">
+                </div>
+				<div class="row">
                     <div class="col-lg-4">
                     <input type="checkbox" name="Shop-product" id="Shop-product" checked> <label for="Shop-product">Shop4physios</label>
                     </div>
@@ -596,62 +968,61 @@
 					 <div class="col-lg-4">
                     <input type="checkbox" name="Partner-product" id="Partner-product" checked> <label for="Partner-product">Partner offers</label>
                     </div>
-                 </div>
-				  <div class="row payment-line">
+                </div>
+				<!--
+				<div class="row payment-line">
 				  <p><span class="registerDes">Payment information:</span></p> 
-				  </div>
-				  <div class="row">
-				   <div class="col-lg-4">
+				</div>
+				<div class="row">
+					<div class="col-lg-4">
                         <select class="form-control" id="Cardtype" name="Cardtype">
 						   <option value="" selected disabled>Card Type</option>
                            <option value="AE">American Express</option>
                            <option value="Visa">Visa</option>
                            <option value="Mastercard">Mastercard</option>
                         </select>
-                   </div>
-				 </div>
-				 <div class="row">
-				   <div class="col-lg-12">
+					</div>
+				</div>
+				<div class="row">
+				    <div class="col-lg-12">
                         <input type="text" class="form-control" name="Name-on-card" placeholder="Name on card" required>
-                   </div>
-				 </div>
-				 <div class="row">
-				   <div class="col-lg-12">
+                    </div>
+				</div>
+				<div class="row">
+					<div class="col-lg-12">
 				       
                         <input type="number" class="form-control" name="Card-number" placeholder="Card number" required maxlength="16">
-                   </div>
-				 </div>
-				 <div class="row">
-				   <div class="col-lg-6">
+					</div>
+			    </div>
+				<div class="row">
+					<div class="col-lg-6">
                         <input type="text" class="form-control" name="Expiry-date" placeholder="Expire date" required>
-                   </div>
-				   <div class="col-lg-6">
+					</div>
+					<div class="col-lg-6">
                         <input type="number" class="form-control" name="CCV" placeholder="CCV" maxlength="4">
-                   </div>
-				 </div>
-				 <div class="row payment-line">
+					</div>
+				</div>
+				<div class="row payment-line">
 				    <p><span class="registerDes">Billing address:</span></p>
-				 </div>
-				  <div class="row">
-                     <div class="col-lg-6">
+				</div>
+				<div class="row">
+                    <div class="col-lg-6">
                        <input type="text" class="form-control" name="Billing-unitno" id="Billing-unitno" placeholder="Unit/house number" required>
-                     </div>
-                     <div class="col-lg-6">
+                    </div>
+                    <div class="col-lg-6">
 					    <textarea class="form-control" name="Billing-streetname" id="Billing-streetname" placeholder="Street" required></textarea>
                         
-                     </div>
-				   </div>
-                  <div class="row">   
-					 <div class="col-lg-6">
-                   
+                    </div>
+				</div>
+                <div class="row">   
+					<div class="col-lg-6">
                         <input type="text" class="form-control" name="Billing-city" id="Billing-city" placeholder="Suburb/city" required>
-                     </div>
-                     <div class="col-lg-6">
-                     
+					</div>
+                    <div class="col-lg-6">
                         <input type="text" class="form-control" name="Billing-postcode" id="Billing-postcode" placeholder="Postcode" required>
-                     </div>
-                  </div>
-                  <div class="row">
+                    </div>
+                </div>
+                <div class="row">
                      <div class="col-lg-6">
 					     <select class="form-control" id="Billing-state" name="Billing-state" required>
                               <option value="" disabled selected>State</option>
@@ -669,28 +1040,216 @@
                      <div class="col-lg-6">
                         <input type="text" class="form-control" name="Billing-country" id="Billing-country" placeholder="Country" required>
                      </div>
-                  </div>
-				   <div class="row"> 
-				      <div class="col-lg-6">
+                </div>-->
+				<div class="row"> 
+					  <div class="col-lg-6">
 					  <label for="Confirm-policy">Yes. I have read the APA Privacy policy</label><input type="checkbox" name="Confirm-policy" id="Confirm-policy" required>
 					  </div>
 					  <div class="col-lg-6">
 					  <input type="submit" value="Submit">
 					  </div>
-				   </div>
+				</div>
 				   </form>
-              </div>
-             
-           
+              
+            </div>
+        </div>   
         
           <div id="jobnoticement">
               <p><span class="registerDes">We’ve noticed you’re not a physiotherapist.</span></p>
               <p>Please note, if a course or event is for registered physiotherapists only. this will be indicated in the event description</p>
               <p><span class="registerDes">Make sure you are attending APA PD that is open to everyone.</span></p>
           </div>  
+<!---Sign up Web User--->
+<div id="signupWebUser">
+<form id="your-detail-form" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST">
+		<input type="hidden" name="step1" value="1"/>
+		    <div class="down33" style="display:block;">
+			<div class="row"><h4 class="modal-title">Don’t have an account? Please register below:</h4></div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">
+                    <div class="row">
+                        <div class="col-lg-6">
+				            <label for="prefix">Prefix<span class="tipstyle">*</span></label>
+							<?php 
+							$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
+							$Prefix=json_decode($Prefixcode, true);
+							?>
+                            <select class="form-control" id="Prefix" name="Prefix">
+							<?php 
+							foreach($Prefix  as $key => $value){
+								echo '<option value="'.$Prefix[$key]['ID'].'"';
+								echo '> '.$Prefix[$key]['Prefix'].' </option>';
+							}
+							?>
+							</select>
+                        </div>
+						
+                        <div class="col-lg-6">
+                           <label for="">First name<span class="tipstyle">*</span></label>
+                           <input type="text" class="form-control"  name="Firstname">
+                        </div>
+						
+                    </div>
+                    <div class="row">
+                        
+                        <div class="col-lg-6">
+                           <label for="">Last name<span class="tipstyle">*</span></label>
+                           <input type="text" class="form-control" name="Lastname">
+                        </div>
+                     </div>
+                    <div class="row">
+                        <div class="col-lg-4">
+                           <label for="">Birth Date<span class="tipstyle">*</span></label>
+                           <input type="date" class="form-control" name="Birth">
+                        </div>
+                        <div class="col-lg-3 col-lg-offset-1">
+                           <label for="">Gender<span class="tipstyle">*</span></label>
+							<select class="form-control" id="Gender" name="Gender">
+							  <?php
+									$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
+									$Gender=json_decode($Gendercode, true);						
+									foreach($Gender  as $key => $value){
+										echo '<option value="'.$Gender[$key]['ID'].'"';
+									
+										echo '> '.$Gender[$key]['Description'].' </option>';
+									}
+								?>
+						    </select>
+                        </div>
+                    </div>
+					<div class="row">
+					<div class="col-lg-6">
+						<label for="">Member ID(Your email address)<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)">
+					<div id="checkMessage"></div>
+					<script>
+					function checkEmailFunction(email) {
+						$.ajax({
+						url:"sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
+						type: "POST", 
+						data: {CheckEmailID: email},
+						success:function(response) { 
+						var result = response;
+						if(result=="T"){
+							$('#checkMessage').html("this email address has already registered, please use another one");
+							$( "#Memberid" ).focus();
+							$("#Memberid").css("border", "1px solid red");
+							$(".join-details-button2").addClass("display-none");
+							
+						}
+						else{
+							$('#checkMessage').html("");
+							$( "#Memberid" ).blur();
+							$("#Memberid").css("border", "");
+							$(".join-details-button2").removeClass("display-none");
+						}					
+						}
+						});
+						}
+					</script>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-lg-6">
+						<label for="">Your password<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" id="newPassword" name="newPassword" >
+					</div>
+					<div class="row">
+					<div class="col-lg-6">
+						<label for="">Confirm password<span class="tipstyle">*</span></label>
+						<input type="password" class="form-control" id="Password" name="Password" value="" onchange="checkPasswordFunction(this.value)">
+					</div>
+					<div id="checkPasswordMessage"></div>
+				<script>
+					function checkPasswordFunction(Password) {
+						if($('#newPassword').val()!= Password){
+							$('#checkPasswordMessage').html("Please confirm your password is same");
+							$( "#Password" ).focus();
+							$("#Password").css("border", "1px solid red");
+							$(".join-details-button2").addClass("display-none");
+							
+						}
+						else{
+							$('#checkPasswordMessage').html("");
+							$( "#Password" ).blur();
+							$("#Password").css("border", "");
+							$(".join-details-button2").removeClass("display-none");
+						}					
+					}
+				</script>
+				</div>
+			    </div>
+						
+					
+					<div class="row">
+						<div class="col-lg-4">
+						<label for="">Address line 1<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
+						</div>
+					
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<label for="">Address Line 2<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<label for="">City or town<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="Suburb" id="Suburb">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-3">
+							<label for="">Postcode<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="Postcode" id="Postcode">
+						</div>
+						<div class="col-lg-3">
+							<label for="">State<span class="tipstyle">*</span></label>
+							<select class="form-control" id="State" name="State">
+								<option value="" selected disabled> State </option>
+								<?php 
+								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+								$State=json_decode($statecode, true);
+								foreach($State  as $key => $value){
+								echo '<option value="'.$State[$key]['Abbreviation'].'"';
+							    echo '> '.$State[$key]['Abbreviation'].' </option>';
+							
+								}
+								?>
+							</select>
+						</div>
+						<div class="col-lg-6">
+							<label for="">Country<span class="tipstyle">*</span></label>
+							<select class="form-control" id="Country" name="Country">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['Country'].'"';
+								echo '> '.$country[$key]['Country'].' </option>';
+								
+							}
+							?>
+					        </select>
+						</div>
+					</div>
+					            			
+				</div>
+                	
+				
+            </div>
+	
+			
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Submit</span></a></div>
+		
+    </form>
 
+</div>
+
+<!---End Sign up Web User--->
 	  <!---Register PDUser--->
-	  
+	    
 	     <div id="registerPDUser">
 		    <form action="pd-product?updateNonmember=<?php if((sizeof($paymentCardList)==0)) { echo "1"; } else { echo "0";}?>&id=<?php echo $pd_detail['Id'];?>" method="POST" id="registerMemberForm" autocomplete="off">
                    <div class="row">
@@ -900,7 +1459,7 @@
 	   }
 	   
 	   
-     $("#registerMemberForm").validate({
+     $("#registerMember").validate({
             rules: {
               Prefix:{
                 required: true,

@@ -369,26 +369,26 @@ input[value="Sign in"], input[value="Submit"], input[value="Next"]{
 #node-254 a.signIn{
     margin-bottom: 20px;
 }
-#registerMember h4.modal-title,  #registerPDUser h4.modal-title, #loginPopWindow h4.modal-title{
+#registerMember h4.modal-title,  #registerPDUser h4.modal-title, #loginPopWindow h4.modal-title, #signupWebUser h4.modal-title{
     color: #009fda;
     font-weight: 400;
 	margin-bottom: -10px;
 }
-#registerMember h4.modal-title{
+#registerMember h4.modal-title, #signupWebUser h4.modal-title{
     margin-bottom: 11px;
     margin-left: 13px;
 }
-#registerMember .modal-header {
+#registerMember .modal-header, #signupWebUser .modal-header{
     border-bottom: none!important;
 }
-#registerMember .form-control,  #registerPDUser .form-control{
+#registerMember .form-control,  #registerPDUser .form-control,  #signupWebUser .form-control{
     border-radius: 0px!important;
     margin-bottom: 10px;
 }
 #registerMember input[type=checkbox],  #registerPDUser input[type=checkbox]{
     margin-right: 3px;
 }
-#registerMember label,  #registerPDUser label{
+#registerMember label,  #registerPDUser label,  #signupWebUser label{
     font-weight: 400;
 }
 .registerDes{
@@ -397,7 +397,7 @@ input[value="Sign in"], input[value="Submit"], input[value="Next"]{
     font-size: 20px;
     margin-left: 12px;
 }
-#registerMember .modal-content{
+#registerMember .modal-content, #signupWebUser .modal-content,{
     border:none!important;
 	border-radius:0px;
 }
@@ -409,7 +409,7 @@ input[value="Sign in"], input[value="Submit"], input[value="Next"]{
     margin-top: 13px;
     padding-top: 8px;
 }
-div[id="jobnoticement"], div[id="processWindow"], div[id="registerPDUser"], div[id="popUpWindow"], div[id="deleteConfirmwindow"], div[id="registerMember"], div[id="loginPopWindow"],div[id="myMap"]{
+div[id="jobnoticement"], div[id="processWindow"], div[id="registerPDUser"], div[id="popUpWindow"], div[id="deleteConfirmwindow"], div[id="registerMember"], div[id="loginPopWindow"],div[id="myMap"], div[id="signupWebUser"]{
     display:none;
 }
 div[aria-describedby="registerPDUser"].ui-dialog {
@@ -443,7 +443,7 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
 	top: 574px!important;
     left: 537px!important;
 }
-div[aria-describedby="registerMember"].ui-dialog {
+div[aria-describedby="registerMember"].ui-dialog, div[aria-describedby="signupWebUser"].ui-dialog{
     z-index: 1055!important;
     top: 400px!important;
     left: 425px!important;

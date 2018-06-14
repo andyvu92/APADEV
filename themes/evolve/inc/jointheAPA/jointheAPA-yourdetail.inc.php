@@ -1405,7 +1405,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 								<input type="text" class="form-control" name="phone-number" >
 							</div>
 							
-						</div>
+					</div>
 						<div class="row">
 							
 							<div class="col-lg-2">
@@ -1676,7 +1676,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							$(".join-details-button2").removeClass("display-none");
 						}					
 					}
-					</script>
+				</script>
 				<div class="row">
 					<div class="col-lg-6">
 						<label for="">Member Type<span class="tipstyle">*</span></label>
