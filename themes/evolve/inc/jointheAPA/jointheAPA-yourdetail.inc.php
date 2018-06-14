@@ -46,7 +46,7 @@ if(isset($_POST['step1'])) {
 		$postData['Billing-BuildingName'] = $_POST['Billing-BuildingName']; 
 		$postData['BillingAddress_Line_1'] = $_POST['Billing-Address_Line_1'];
 		$postData['BillingAddress_Line_2'] = $_POST['Billing-Address_Line_2'];
-		$postData['Billing-Pobox'] = $_POST['Billing-PObox'];
+		$postData['Billing-Pobox'] = $_POST['Billing-Pobox'];
 		$postData['Billing-Suburb'] = $_POST['Billing-Suburb'];
 		$postData['Billing-Postcode'] = $_POST['Billing-Postcode'];
 		$postData['Billing-State'] = $_POST['Billing-State'];
@@ -131,12 +131,24 @@ if(isset($_POST['step1'])) {
 			for($j=0; $j<$n; $j++){
 				$additionalQualifications = array();
 				if(isset($_POST['ID'.$j])) { $additionalQualifications['ID'] = $_POST['ID'.$j];}
-				if(isset($_POST['Udegree'.$j])) { $additionalQualifications['Udegree'] = $_POST['Udegree'.$j];}
-				if(isset($_POST['Udegree-other'.$j]) && $_POST['Udegree-other'.$j]!=""){$postData['Udegree'] = $_POST['Udegree-other'.$j];}
-				if(isset($_POST['Undergraduateuniversity-name'.$j])) { $additionalQualifications['Undergraduateuniversity-name'] = $_POST['Undergraduateuniversity-name'.$j];}
-				if(isset($_POST['Undergraduate-university-name-other'.$j]) && $_POST['Undergraduate-university-name-other'.$j]!=""){$postData['Undergraduate-university-name'] = $_POST['Undergraduate-university-name-other'.$j];}
-				if(isset($_POST['Ugraduate-country'.$j])) { $additionalQualifications['Ugraduate-country'] = $_POST['Ugraduate-country'.$j];}
-				if(isset($_POST['Ugraduate-yearattained'.$j])) { $additionalQualifications['Ugraduate-yearattained'] = $_POST['Ugraduate-yearattained'.$j];}
+				if(isset($_POST['University-degree'.$j]) && $_POST['University-degree'.$j]!=""){
+					$additionalQualifications['Degree'] = $_POST['University-degree'.$j]; 
+					$additionalQualifications['DegreeID'] = "";
+				}
+				else{
+					$additionalQualifications['DegreeID'] = $_POST['Udegree'.$j];
+					$additionalQualifications['Degree'] = "";
+				}
+				if(isset($_POST['Undergraduate-university-name-other'.$j]) && $_POST['Undergraduate-university-name-other'.$j]!=""){
+					$additionalQualifications['Institute'] = $_POST['Undergraduate-university-name-other'.$j]; 
+					$additionalQualifications['InstituteID'] = "";
+				}
+				else{
+					$additionalQualifications['InstituteID'] = $_POST['Undergraduate-university-name'.$j];
+					$additionalQualifications['Institute'] = "";
+				}
+				if(isset($_POST['Ugraduate-country'.$j])) { $additionalQualifications['Country'] = $_POST['Ugraduate-country'.$j];}
+				if(isset($_POST['Ugraduate-yearattained'.$j])) { $additionalQualifications['Yearattained'] = $_POST['Ugraduate-yearattained'.$j];}
 				array_push($temp , $additionalQualifications);
 			}
 			$postData['PersonEducation'] =  $temp ;
@@ -165,90 +177,53 @@ if($resultdata['result'] =="Success") {
 } 
  
 unset($_SESSION["Regional-group"]);
-/*General function: save data to APA shopping cart database;*/
-/*Parameters: $userID, $productID,$type;*/
-/*save product data including membership type product, national group product, fellowship & PRF product*/	   
-function createShoppingCart($userID, $productID,$type){
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
-		try {
-			$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, type) VALUES (:userID, :productID, :type)');
-			$shoppingcartUpdate->bindValue(':userID', $userID);
-			$shoppingcartUpdate->bindValue(':productID', $productID);
-			$shoppingcartUpdate->bindValue(':type', $type);
-			$shoppingcartUpdate->execute();	
-			$shoppingcartUpdate = null;
-		 
-	    }
-		catch (PDOException $e) {
-				print "Error!: " . $e->getMessage() . "<br/>";
-				die();
-	    }
-}
-// check the user product in case of duplicated shopping cart data
-function checkShoppingCart($userID, $type){
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
-		try {
-			$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID and type=:type');
-			$shoppingcartGet->bindValue(':userID', $userID);
-			$shoppingcartGet->bindValue(':type', $type);
-			$shoppingcartGet->execute();
-			if($shoppingcartGet->rowCount()>0) { 
-			   $shoppingcartDel = $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type=:type');
-			   $shoppingcartDel->bindValue(':userID', $userID);
-			   $shoppingcartDel->bindValue(':type', $type);
-			   $shoppingcartDel->execute();	
-			   $shoppingcartDel = null;
-			}
-			$shoppingcartGet = null; 
-	    }
-		catch (PDOException $e) {
-				print "Error!: " . $e->getMessage() . "<br/>";
-				die();
-	    }
-}
+
         if(isset($_SESSION['UserId'])){$userID = $_SESSION['UserId']; }
 	   
 		$products = array();
-        $productID = $postLocalData['MemberType'];
-		checkShoppingCart($userID, $type="membership");
-		createShoppingCart($userID, $productID,$type="membership");
+       	checkShoppingCart($userID, $type="membership", $productID="");
+		checkShoppingCart($userID, $type="MG1", $productID="");
+		checkShoppingCart($userID, $type="MG2", $productID="");
+		createShoppingCart($userID, $productID=$postLocalData['MemberType'],$type="membership",$coupon="");
 		foreach($ngData['Nationalgp'] as $key=>$value){
 			array_push($products,$value);
 		}
-		 /*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
-	    if(isset($_POST['ngmusculo']) && $_POST['ngmusculo'] =="1"){ array_push($products,"Intouch"); }
-	    if(isset($_POST['ngsports']) && $_POST['ngsports'] =="1" ) { array_push($products,"SPMagzine"); }
-	    $type = "NG";
-		checkShoppingCart($userID, $type="NG");
+		$type = "NG";
+		checkShoppingCart($userID, $type="NG",$productID="");
 		foreach($products as $key=>$value){
 			$productID = $value;
-			createShoppingCart($userID, $productID,$type);	
-		}	
+			createShoppingCart($userID, $productID,$type,$coupon="");	
+		}
+		//save magazine products on APA side
+	 /*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
+		if(isset($_POST['ngmusculo']) && $_POST['ngmusculo'] =="1"){ 
+			checkShoppingCart($userID, $type="MG1", $productID="");
+			createShoppingCart($userID, "9978",$type="MG1",$coupon=""); 
+		}
+		if(isset($_POST['ngsports']) && $_POST['ngsports'] =="1" ) {
+			checkShoppingCart($userID, $type="MG2",$productID="");
+			createShoppingCart($userID, "9977",$type="MG2",$coupon=""); 
+		}
   }
 ?> 
 <?php  if(isset($_SESSION['UserId'])): ?>
 <?php 
-//get productID list from local database;
-	function getProduct($userID,$type){
-		$arrayReturn = array();
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
-		$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND type=:type');
-		$shoppingcartGet->bindValue(':userID', $userID);
-		$shoppingcartGet->bindValue(':type', $type);
-		$shoppingcartGet->execute();
-		if($shoppingcartGet->rowCount()>0) { 
-			foreach ($shoppingcartGet as $row) {
-				array_push($arrayReturn, $row['productID']);
-			}
-		}	
-		$shoppingcartGet = null;
-		return $arrayReturn;
-	}
+
 $userMemberProduct = getProduct($_SESSION['UserId'],"membership");
 if(sizeof($userMemberProduct)!=0){ foreach($userMemberProduct as $singProduct) { $_SESSION["MembershipProductID"] = $singProduct;}}
 $userNGProduct = getProduct($_SESSION['UserId'],"NG");
 if(sizeof($userNGProduct)!=0){$_SESSION['NationalProductID'] = $userNGProduct; }
-
+$userMGProduct = array();
+$userMG1Product = getProduct($_SESSION['UserId'],"MG1");
+if(sizeof($userMG1Product)!=0){ 
+    array_push($userMGProduct, $userMG1Product); 
+	
+}
+$userMG2Product = getProduct($_SESSION['UserId'],"MG2");
+if(sizeof($userMG2Product)!=0){ 
+    array_push($userMGProduct, $userMG2Product); 
+}
+if(sizeof($userMGProduct)!=0){$_SESSION["MGProductID"] = $userMGProduct; }
 
 	
 // 2.2.4 - Dashboard - Get member detail
@@ -263,7 +238,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 <form id="your-detail-form" action="jointheapa" method="POST">
     <input type="hidden" name="step1" value="1"/>
 	<input type="hidden" name="insuranceTag" id="insuranceTag"/>
-        <div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2'])|| isset($_POST['step2-1'])|| isset($_POST['goI']) || isset($_POST['goP'])|| isset($_POST['step2-2']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
+        <div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2'])|| isset($_POST['step2-1'])|| isset($_POST['goI']) || isset($_POST['goP'])|| isset($_POST['step2-2'])||isset($_POST['step2-3']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
             <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 none-padding">
                 <div class="row">
                     <div class="col-lg-3">
@@ -315,8 +290,8 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
 							$Gender=json_decode($Gendercode, true);						
 							foreach($Gender  as $key => $value){
-								echo '<option value="'.$Gender[$key]['Description'].'"';
-								if ($details['Gender'] == $Gender[$key]['Description']){ echo "selected='selected'"; } 
+								echo '<option value="'.$Gender[$key]['ID'].'"';
+								if ($details['Gender'] == $Gender[$key]['ID']){ echo "selected='selected'"; } 
 								echo '> '.$Gender[$key]['Description'].' </option>';
 							}
 							?>
@@ -474,7 +449,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                         </div>
 						<div class="col-lg-6 col-lg-offset-2">
                            <label for="">PO box</label>
-                           <input type="text" class="form-control" name="Pobox"  <?php if (empty($details['Billing-PObox'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['Billing-PObox'].'"'; }?>>
+                           <input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
                         </div>
 					</div>
 					    <div class="col-lg-4">
@@ -790,7 +765,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							</div>
 					</div>
 					<?php  
-						if(!empty($details['Workplaces'][$key]['SpecialInterestAreaID'])) {$SpecialInterestAreaID = explode(",",$details['Workplaces'][$key]['SpecialInterestAreaID']); } else {$SpecialInterestAreaID = "";}
+						if(!empty($details['Workplaces'][$key]['SpecialInterestAreaID'])) {$SpecialInterestAreaID = explode(",",$details['Workplaces'][$key]['SpecialInterestAreaID']); } else {$SpecialInterestAreaID = array();}
 					?>
 					<div class="row"> 
 						<div class="col-lg-6">
@@ -909,7 +884,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						Does this workplace offer additional languages?<br/>
 						</div>
 						 <?php  
-						if(!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {$WAdditionalLanguage = explode(",",$details['Workplaces'][$key]['AdditionalLanguage']); } else {$WAdditionalLanguage = "";}
+						if(!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {$WAdditionalLanguage = explode(",",$details['Workplaces'][$key]['AdditionalLanguage']); } else {$WAdditionalLanguage = array();}
 						
 						?>
 						<div class="col-lg-3">
@@ -1244,7 +1219,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
            
 		    <div class="row">
 			    <div class="col-lg-6">
-					<label for="Additional-qualifications">Qualifications<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a></label>
+					<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>
 					<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  $addtionalNumber =  sizeof($details['PersonEducation']); echo  $addtionalNumber; ?>"/>			
 				</div>
 			</div>
@@ -1255,59 +1230,46 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<div class="row">
 							<div class="col-lg-6">
 								<label for="Udegree<?php echo $key;?>">Degree<span class="tipstyle">*</span></label>
+								<?php if (!empty($details['PersonEducation'][$key]['DegreeID'])):?>
 								<select name="Udegree<?php echo $key;?>" id="Udegree<?php echo $key;?>">
-									<option <?php if (empty($details['PersonEducation'][$key]['Udegree'])) echo "selected='selected'";?> selected disabled>(None)</option>
-									<option value="1" <?php if ($details['PersonEducation'][$key]['Udegree'] == "1") echo "selected='selected'";?>>Bachelor of Physiotherapy</option>
-									<option value="2" <?php if ($details['PersonEducation'][$key]['Udegree'] == "2") echo "selected='selected'";?>>Bachelor of Physiotherapy (Hons)</option>
-									<option value="3" <?php if ($details['PersonEducation'][$key]['Udegree'] == "3") echo "selected='selected'";?>>Bachelor of Physiotherapy (Honours)</option>
-									<option value="4" <?php if ($details['PersonEducation'][$key]['Udegree'] == "4") echo "selected='selected'";?>>Bachelor of Science (Physiotherapy)</option>
-									<option value="5" <?php if ($details['PersonEducation'][$key]['Udegree'] == "5") echo "selected='selected'";?>>Bachelor of Science (Physiotherapy) (Honours)</option>
-									<option value="6" <?php if ($details['PersonEducation'][$key]['Udegree'] == "6") echo "selected='selected'";?>>Bachelor of Applied Science and Master of Physiotherapy Practice</option>
-									<option value="7" <?php if ($details['PersonEducation'][$key]['Udegree'] == "7") echo "selected='selected'";?>>Bachelor of Applied Science (Physiotherapy)</option>
-									<option value="8" <?php if ($details['PersonEducation'][$key]['Udegree'] == "8") echo "selected='selected'";?>>Bachelor of Applied Science (Physiotherapy) (Honours)</option>
-									<option value="Other" <?php if ($details['PersonEducation'][$key]['Udegree'] == "Other") echo "selected='selected'";?>>Other</option>
+								    <?php 
+										$degreecode  = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
+										$degree=json_decode($degreecode, true);
+										$_SESSION["degree"] = $degree;	
+										foreach($degree  as $pair => $value){
+											echo '<option value="'.$degree[$pair]['ID'].'"';
+											if ($details['PersonEducation'][$key]['DegreeID'] == $degree[$pair]['ID']){ echo "selected='selected'"; } 
+											echo '> '.$degree[$pair]['Name'].' </option>';
+											
+										}
+									?>
+									<!--<option value="0" >Other</option>-->
 								</select>
+								<?php endif;?>
+								<?php if (empty($details['PersonEducation'][$key]['DegreeID'])):?>
+								<input type="text" class="form-control" name="University-degree<?php echo $key;?>" id="University-degree<?php echo $key;?>" value="<?php echo $details['PersonEducation'][$key]['Degree'];?>">
+								<?php endif;?>
 							</div>
 						</div>
 						<div class="row">
 							<div class="col-lg-6">
 								<label for="Undergraduateuniversity-name<?php echo $key;?>">University name<span class="tipstyle">*</span></label>
-								<select name="Undergraduateuniversity-name<?php echo $key;?>" id="Undergraduateuniversity-name<?php echo $key;?>">
-									<option <?php if (empty($details['PersonEducation'][$key]['Graduateuniversity-name'])) echo "selected='selected'";?> selected disabled>(None)</option>
-									<option value="ACU" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "ACU") echo "selected='selected'";?>>Australian Catholic University - NSW</option>
-									<option value="ACUQ" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "ACUQ") echo "selected='selected'";?>>Australian Catholic University - QLD</option>
-									<option value="ACUB" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "ACUB") echo "selected='selected'";?>>Australlian Catholic University - Ballarat</option>
-									<option value="BON" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "BON") echo "selected='selected'";?>>Bond University - QLD</option>
-									<option value="CU" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CU") echo "selected='selected'";?>>Canberra University</option>
-									<option value="CQU" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CQU") echo "selected='selected'";?>>Central Qld University</option>
-									<option value="CSU" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CSU") echo "selected='selected'";?>>Charles Sturt University - Albury NSW</option>
-									<option value="CSUO" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CSUO") echo "selected='selected'";?>>Charles Sturt University - Orange NSW</option>
-									<option value="CSUP" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CSUP") echo "selected='selected'";?>>Charles Sturt University Port Macquarie</option>
-									<option value="CUMB" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CUMB") echo "selected='selected'";?>>Cumberland University - NSW</option>
-									<option value="CUR" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "CUR") echo "selected='selected'";?>>Curtin University - WA</option>
-									<option value="ECU" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "ECU") echo "selected='selected'";?>>Edith Cowan University - WA</option>
-									<option value="FLIN" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "FLIN") echo "selected='selected'";?>>Flinders University SA</option>
-									<option value="GRIF" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "GRIF") echo "selected='selected'";?>>Griffith University - Gold coast QLD</option>
-									<option value="JCU" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "JCU") echo "selected='selected'";?>>James Cook University - QLD</option>
-									<option value="LAT" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "ACUQ") echo "selected='selected'";?>>Latrobe University - Bundoora VIC</option>
-									<option value="LATB" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "LATB") echo "selected='selected'";?>>Latrobe Universtiy - Bendigo VIC</option>
-									<option value="LIN" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "LIN") echo "selected='selected'";?>>Lincoln Institute - VIC</option>
-									<option value="MACQ" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "MACQ") echo "selected='selected'";?>>Macquarie University - NSW</option>
-									<option value="MON" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "MON") echo "selected='selected'";?>>Monash University - Vic</option>
-									<option value="UA" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UA") echo "selected='selected'";?>>University of Adelaide</option>
-									<option value="UM" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UM") echo "selected='selected'";?>>University of Melbourne - Vic</option>
-									<option value="UNC" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UNC") echo "selected='selected'";?>>University of Newcastle - NSW</option>
-									<option value="UND" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UND") echo "selected='selected'";?>>University of Notre Dam - WA</option>
-									<option value="UQ" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UQ") echo "selected='selected'";?>>University of Qld</option>
-									<option value="USA" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "USA") echo "selected='selected'";?>>University of South Australia</option>
-									<option value="US" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "US") echo "selected='selected'";?>>University of Sydney - NSW</option>
-									<option value="UTS" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UTS") echo "selected='selected'";?>>University of Technology Sydney</option>
-									<option value="UWA" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UWA") echo "selected='selected'";?>>University of Western Australia</option>
-									<option value="UWS" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "UWS") echo "selected='selected'";?>>University of Western Sydney- NSW</option>
-									<option value="WAIT" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "WAIT") echo "selected='selected'";?>>Western Australian Institute of Technology</option>
-									<option value="Other" <?php if ($details['PersonEducation'][$key]['Graduateuniversity-name'] == "Other") echo "selected='selected'";?>>Other</option>
+								<?php if (!empty($details['PersonEducation'][$key]['InstituteID'])):?>
+								<select name="Undergraduate-university-name<?php echo $key;?>" id="Undergraduate-university-name<?php echo $key;?>">
+									<option <?php if (empty($details['PersonEducation'][$key]['InstituteID'])) echo "selected='selected'";?> selected disabled>(None)</option>
+									<option value="18798" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "18798") echo "selected='selected'";?>>Australian Catholic University - NSW</option>
+									<option value="18842" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "18842") echo "selected='selected'";?>>Australian Catholic University - QLD</option>
+									<option value="3" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "3") echo "selected='selected'";?>>Australlian Catholic University - Ballarat</option>
+									<option value="4" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "4") echo "selected='selected'";?>>Bond University - QLD</option>
+									<option value="5" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "5") echo "selected='selected'";?>>Canberra University</option>
+									<option value="6" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "6") echo "selected='selected'";?>>Central Qld University</option>
+									<option value="7" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "7") echo "selected='selected'";?>>Charles Sturt University - Albury NSW</option>
+									<!--<option value="0">Other</option>-->
 								</select>
-								<input type="text" class="form-control display-none" name="Undergraduate-university-name-other<?php echo $key;?>" id="Undergraduate-university-name-other<?php echo $key;?>">
+								<?php endif;?>
+								<?php if (empty($details['PersonEducation'][$key]['InstituteID'])):?>
+								<input type="text" class="form-control" name="Undergraduate-university-name-other<?php echo $key;?>" id="Undergraduate-university-name-other<?php echo $key;?>" value="<?php echo $details['PersonEducation'][$key]['Institute'];?>">
+							    <?php endif;?>
 							</div>
 						</div>
 						<div class="row">
@@ -1319,7 +1281,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 								$country=json_decode($countrycode, true);
 								foreach($country  as $pair => $value){
 									echo '<option value="'.$country[$pair]['ID'].'"';
-									if ($details['PersonEducation'][$key]['Ugraduate-country'] == $country[$pair]['ID']){ echo "selected='selected'"; } 
+									if ($details['PersonEducation'][$key]['Country'] == $country[$pair]['ID']){ echo "selected='selected'"; } 
 									echo '> '.$country[$pair]['Country'].' </option>';
 									
 								}
@@ -1333,7 +1295,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 								$y = date("Y") + 15; 
 								for ($i=1940; $i<= $y; $i++){
 								echo '<option value="'.$i.'"';
-								if ($details['PersonEducation'][$key]['Ugraduate-yearattained'] == $i){
+								if ($details['PersonEducation'][$key]['Yearattained'] == $i){
 								echo 'selected="selected"';
 								}
 								echo '>'.$i.'</option>';
@@ -1410,7 +1372,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 									$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
 									$Gender=json_decode($Gendercode, true);						
 									foreach($Gender  as $key => $value){
-										echo '<option value="'.$Gender[$key]['Description'].'"';
+										echo '<option value="'.$Gender[$key]['ID'].'"';
 									
 										echo '> '.$Gender[$key]['Description'].' </option>';
 									}
@@ -1737,12 +1699,8 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<input type="text" class="form-control" name="Ahpranumber"  <?php if (empty($details['Ahpranumber'])) {echo "placeholder='AHPRA number'";}   else{ echo 'value="'.$details['Ahpranumber'].'"'; }?>>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-lg-2">
-						<label for="">Specialty</label>
-						<input type="text" class="form-control" name="Specialty">
-					</div>
-				</div>
+				
+				<input type="hidden" class="form-control" name="Specialty">
 				<div class="row">
 					<div class="col-lg-6">
 						<label for="">Your National group</label>
@@ -2120,63 +2078,39 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  $addtionalNumber =  1; echo  $addtionalNumber; ?>"/>
 					</div>
 				</div>
-				<div id="additional-qualifications-block0">
+				<div id="additional-qualifications-block">
 					<div class="row">
 						<div class="col-lg-6">
 							<label for="Udegree">Degree<span class="tipstyle">*</span></label>
 							<select name="Udegree0" id="Udegree0">
-								<option selected="selected" value="">(None)</option>
-								<option value="1">Bachelor of Physiotherapy</option>
-								<option value="2">Bachelor of Physiotherapy (Hons)</option>
-								<option value="3">Bachelor of Physiotherapy (Honours)</option>
-								<option value="4">Bachelor of Science (Physiotherapy)</option>
-								<option value="5">Bachelor of Science (Physiotherapy) (Honours)</option>
-								<option value="6">Bachelor of Applied Science and Master of Physiotherapy Practice</option>
-								<option value="7">Bachelor of Applied Science (Physiotherapy)</option>
-								<option value="8">Bachelor of Applied Science (Physiotherapy) (Honours)</option>
-								<option value="Other">Other</option>
+								<?php 
+									$degreecode  = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
+									$degree=json_decode($degreecode, true);
+									$_SESSION["degree"] = $degree;	
+									foreach($degree  as $pair => $value){
+										echo '<option value="'.$degree[$pair]['ID'].'"';
+										echo '> '.$degree[$pair]['Name'].' </option>';
+										
+									}
+								?>
+								<option value="0">Other</option>
 							</select>
+							<input type="text" class="form-control display-none" name="University-degree0" id="University-degree0">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-6">
 							<label for="Undergraduateuniversity-name0">University name<span class="tipstyle">*</span></label>
-							<select name="Undergraduateuniversity-name0" id="Undergraduateuniversity-name0">
+							<select name="Undergraduate-university-name0" id="Undergraduate-university-name0">
 								<option selected="selected" value="">(None)</option>
-								<option value="ACU">Australian Catholic University - NSW</option>
-								<option value="ACUQ">Australian Catholic University - QLD</option>
-								<option value="ACUB">Australlian Catholic University - Ballarat</option>
-								<option value="BON">Bond University - QLD</option>
-								<option value="CU">Canberra University</option>
-								<option value="CQU">Central Qld University</option>
-								<option value="CSU">Charles Sturt University - Albury NSW</option>
-								<option value="CSUO">Charles Sturt University - Orange NSW</option>
-								<option value="CSUP">Charles Sturt University Port Macquarie</option>
-								<option value="CUMB">Cumberland University - NSW</option>
-								<option value="CUR">Curtin University - WA</option>
-								<option value="ECU">Edith Cowan University - WA</option>
-								<option value="FLIN">Flinders University SA</option>
-								<option value="GRIF">Griffith University - Gold coast QLD</option>
-								<option value="JCU">James Cook University - QLD</option>
-								<option value="LAT">Latrobe University - Bundoora VIC</option>
-								<option value="LATB">Latrobe Universtiy - Bendigo VIC</option>
-								<option value="LIN">Lincoln Institute - VIC</option>
-								<option value="MACQ">Macquarie University - NSW</option>
-								<option value="MON">Monash University - Vic</option>
-								<option value="UA">University of Adelaide</option>
-								<option value="UM">University of Melbourne - Vic</option>
-								<option value="UNC">University of Newcastle - NSW</option>
-								<option value="UND">University of Notre Dam - WA</option>
-								<option value="UQ">University of Qld</option>
-								<option value="USA">University of South Australia</option>
-								<option value="US">University of Sydney - NSW</option>
-								<option value="UTS">University of Technology Sydney</option>
-								<option value="UWA">University of Western Australia</option>
-								<option value="UWS">University of Western Sydney- NSW</option>
-								<option value="WAIT">Western Australian Institute of Technology</option>
-								<option value="Other">Other</option>
+								<option value="18798">Australian Catholic University - NSW</option>
+								<option value="18842">Australian Catholic University - QLD</option>
+								<option value="3">Australlian Catholic University - Ballarat</option>
+								<option value="4">Bond University - QLD</option>
+								<option value="5">Canberra University</option>
+								<option value="0">Other</option>
 							</select>
-							<input type="text" class="form-control display-none" name="Undergraduate-university-name-other" id="Undergraduate-university-name-other">
+							<input type="text" class="form-control display-none" name="Undergraduate-university-name-other0" id="Undergraduate-university-name-other0">
 						</div>
 					</div>
 					<div class="row">
@@ -2244,8 +2178,9 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 		$('#dashboard-right-content').addClass("autoscroll");
         var number = Number($('#addtionalNumber').val());
 		var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
+		var sessionDegree = <?php echo json_encode($_SESSION['degree']);?>;
 		$('div[id="additional-qualifications-block"]').append('<div id="additional'+ number +'"></div>');
-		$("#additional"+ number ).load("sites/all/themes/evolve/commonFile/education.php", {"count":number,"sessionCountry":sessionCountry});
+		$("#additional"+ number ).load("sites/all/themes/evolve/commonFile/education.php", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree});
         var i = Number(number +1);
 		$('input[name=addtionalNumber]').val(i);
     });

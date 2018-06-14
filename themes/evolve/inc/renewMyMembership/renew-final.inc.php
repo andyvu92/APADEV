@@ -2,7 +2,7 @@
 //use session: $_SESSION['userID'],$_SESSION["postReviewData"]
 //save PRF product into APA database function
 //save PRF product into APA database function
-function createShoppingCart($userID, $productID,$coupon){
+/*function createShoppingCart($userID, $productID,$coupon){
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
 	try {
 		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, coupon) VALUES (:userID, :productID, :coupon)');
@@ -38,7 +38,7 @@ function checkShoppingCart($userID, $productID){
 				print "Error!: " . $e->getMessage() . "<br/>";
 				die();
 	    }
-}
+}*/
 //get productID list from local database;
 function getProductList($userID){
 	$arrayReturn = array();
@@ -58,7 +58,27 @@ function getProductList($userID){
 }
 //delete PRF
 if(isset($_POST['step2-2'])){
-	checkShoppingCart($userID=$_SESSION['UserId'], $prodcutID="PRF");
+	checkShoppingCart($userID=$_SESSION['UserId'], $type="" ,$prodcutID="PRF");
+}
+//delete MG product
+if(isset($_POST['step2-3'])){
+	checkShoppingCart($userID=$_SESSION['UserId'], $type="" ,$prodcutID=$_POST['step2-3']);
+	echo "this is productID";
+	print_r($_SESSION["MGProductID"]);
+	
+	foreach($_SESSION["MGProductID"] as $deleteM){
+		if (($key = array_search($_POST['step2-3'], $deleteM)) !== false) {
+			echo "try to delete product";
+			unset($deleteM[$key]);
+		}    
+	}
+	print_r($deleteM);
+	unset($_SESSION["MGProductID"]);
+	
+	$afterDelete = array();
+	array_push($afterDelete,$deleteM);
+	$_SESSION["MGProductID"] = $afterDelete;
+	
 }
 //From insurance page to review page;	
 if(isset($_POST['step2'])) {
@@ -100,9 +120,9 @@ $postReviewData['InstallmentFor'] = "Membership";
 if(isset($_POST['PRF'])){ 
 $postReviewData['PRFdonation'] = $_POST['PRF']; 
 //check is there PRF product existed for this user
-checkShoppingCart($userID, $prodcutID="PRF");
+checkShoppingCart($userID, $type="" , $prodcutID="PRF");
 //save PRF product into APA database function
-createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $coupon=$_POST['PRF']);  
+createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $type="", $coupon=$_POST['PRF']);  
 }
 //if(isset($_POST['Rollover'])){ $postReviewData['Rollover'] = $_POST['Rollover']; }
 //if(isset($_POST['Installpayment-frequency'])){ $postReviewData['Installpayment-frequency'] = $_POST['Installpayment-frequency']; }
@@ -139,13 +159,13 @@ if(isset($_SESSION["FPProductID"])){
 	array_push($fpProdcutArray,$_SESSION["FPProductID"]);
 }
 if(isset($_SESSION["MGProductID"])){
-	foreach($_SESSION["MGProductID"] as $singleMG){
-		array_push($fpProdcutArray,$singleMG);
+	foreach($_SESSION["MGProductID"] as $singleM){
+	    foreach($singleM as $key => $value){
+			array_push($fpProdcutArray,$value);
+		}
 	}
 }
 $fpData['ProductID'] = $fpProdcutArray;
-echo "this is MG product.......";
-print_r($fpData);
 $FPListArray = GetAptifyData("21", $fpData);
 //From review page to review page to add payment method again; 
 
@@ -175,7 +195,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 ?> 
 <form id ="join-review-form" action="renewconfirmation" method="POST">
 <input type="hidden" name="step3" value="3">
-<div class="down8" <?php if(isset($_POST['step2'])|| isset($_POST['stepAdd'])||isset($_POST['step2-2']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
+<div class="down8" <?php if(isset($_POST['step2'])|| isset($_POST['stepAdd'])||isset($_POST['step2-2'])||isset($_POST['step2-3']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
 	<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
 		<table class="memSCTable">
 			<tbody>
@@ -209,11 +229,12 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 				}
 				if(sizeof($FPListArray)!=0){
 					foreach( $FPListArray as $FProduct){
+						    echo '<input type="hidden" name="MGProductID" value="'.$FProduct['ProductID'].'">';
 							echo "<tr>";
 							echo "<td>".$FProduct['FPtitle']."</td>";
 							echo "<td>A$".$FProduct['FPprice']."</td>";
 							$price += $FProduct['FPprice'];
-							echo '<td><a href="renewmymembership" target="_self">delete</a></td>';
+							echo '<td>';if($FProduct['ProductID']!="9973"){ echo '<a class="deleteMGButton'.$FProduct['ProductID'].'">delete</a>';} echo '</td>';
 							echo "</tr>";  
 						}
 				}
@@ -344,5 +365,6 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 </div>
 </form>
 <form id="pform" action="" method="POST"><input type="hidden" name="goP"></form>
-<form id="deletePRFForm" action="" method="POST"><input type="hidden" name="step2-2"></form>	
+<form id="deletePRFForm" action="" method="POST"><input type="hidden" name="step2-2"></form>
+<form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>		
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="your-details-prevbutton8"><span class="dashboard-button-name">Last</span></a></div>

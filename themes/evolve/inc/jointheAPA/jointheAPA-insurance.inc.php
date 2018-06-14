@@ -3,6 +3,7 @@
 // Send - 
 // UserID 
 // Response -UserID & insurance data
+$data = array();
 $data['ID'] = $_SESSION["UserId"];
 $insuarnceData = GetAptifyData("40", $data,""); // #_SESSION["UserID"];
 if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDataTag=0;}// this is important key, to check the user is whether the first time to submit insuranceData;
@@ -11,7 +12,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 ?>
 <form id="join-insurance-form2" action="jointheapa" method="POST">
     <input type="hidden" name="step2-1" value="1"/>
-	<input type="hidden" name="insuranceStatus" id="insuranceStatus" value="1">
+	<input type="hidden" name="insuranceStatus" id="insuranceStatus" value="0">
 	
 	<div class="down5 <?php if((isset($_POST['step1'])&& $_POST['insuranceTag']!="0")||isset($_POST['goI']) )echo 'display'; else { echo 'display-none';}?>">
 	<div class="row">

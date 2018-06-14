@@ -211,6 +211,10 @@ jQuery(document).ready(function($) {
 	}
 	else{return true;}
 	};
+	if(checkInsurance($('#MemberType').val())==false){
+			$('#insuranceTag').val("0");	
+		}
+		else{ $('#insuranceTag').val("1");}
 	$('#MemberType').change(function(){
 		if(checkInsurance($('#MemberType').val())==false){
 			$('#insuranceTag').val("0");	

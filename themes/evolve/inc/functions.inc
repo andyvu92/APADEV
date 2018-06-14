@@ -110,4 +110,74 @@ function checkPDUser($Job, $Professionalbody, $Professionalinsurance, $Hearabout
 				 }
 			     
 			 }
+/*General function: save data to APA shopping cart database;*/
+/*Parameters: $userID, $productID,$type;*/
+/*save product data including membership type product, national group product, fellowship & PRF product*/
+	function createShoppingCart($userID, $productID,$type,$coupon){
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	try {
+		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, type, coupon) VALUES (:userID, :productID, :type, :coupon)');
+		$shoppingcartUpdate->bindValue(':userID', $userID);
+		$shoppingcartUpdate->bindValue(':productID', $productID);
+		$shoppingcartUpdate->bindValue(':type', $type);
+		$shoppingcartUpdate->bindValue(':coupon', $coupon);
+		$shoppingcartUpdate->execute();	
+		$shoppingcartUpdate = null;
+	   
+	}
+	catch (PDOException $e) {
+			print "Error!: " . $e->getMessage() . "<br/>";
+			die();
+	}
+	}
+// check the user product in case of duplicated shopping cart data
+function checkShoppingCart($userID, $type, $productID){
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+		try {
+			if($type!=""){
+				$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID and type=:type');
+				$shoppingcartGet->bindValue(':type', $type);}
+			if($productID!=""){
+				$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID and productID=:productID');	
+				$shoppingcartGet->bindValue(':productID', $productID);	
+			}
+			$shoppingcartGet->bindValue(':userID', $userID);	
+			$shoppingcartGet->execute();
+			if($shoppingcartGet->rowCount()>0) { 
+				if($type!=""){
+					$shoppingcartDel = $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type=:type');
+					$shoppingcartDel->bindValue(':type', $type);
+			   }
+				if($productID!=""){
+					$shoppingcartDel = $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and productID=:productID');
+					$shoppingcartDel->bindValue(':productID', $productID);
+			   }
+			   
+			   $shoppingcartDel->bindValue(':userID', $userID);	   
+			   $shoppingcartDel->execute();	
+			   $shoppingcartDel = null;
+			}
+			$shoppingcartGet = null; 
+	    }
+		catch (PDOException $e) {
+				print "Error!: " . $e->getMessage() . "<br/>";
+				die();
+	    }
+}
+//get productID list from local database;
+function getProduct($userID,$type){
+		$arrayReturn = array();
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+		$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND type=:type');
+		$shoppingcartGet->bindValue(':userID', $userID);
+		$shoppingcartGet->bindValue(':type', $type);
+		$shoppingcartGet->execute();
+		if($shoppingcartGet->rowCount()>0) { 
+			foreach ($shoppingcartGet as $row) {
+				array_push($arrayReturn, $row['productID']);
+			}
+		}	
+		$shoppingcartGet = null;
+		return $arrayReturn;
+}
 ?>

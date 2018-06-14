@@ -9,39 +9,58 @@ if(isset($_POST['step2-1'])) {
 	if(isset($_POST['Disciplinary'])){ $postInsuranceData['ExternalDisciplinaryProceedings'] = $_POST['Disciplinary']; }
 	if(isset($_POST['Decline'])){ $postInsuranceData['InsurerDeclinedInsurance'] = $_POST['Decline']; }
 	if(isset($_POST['Oneclaim'])){ $postInsuranceData['MoreThanOneClaim'] = $_POST['Oneclaim']; }
-	if(isset($_POST['Yearclaim'])){ $postInsuranceData['Yearofclaim'] = $_POST['Yearclaim']; }
-	if(isset($_POST['Nameclaim'])){ $postInsuranceData['ClaimantName'] = $_POST['Nameclaim']; }
-	if(isset($_POST['Fulldescription'])){ $postInsuranceData['Description'] = $_POST['Fulldescription']; }
-	if(isset($_POST['Amountpaid'])){ $postInsuranceData['AmountPaid'] = $_POST['Amountpaid']; }
-	if(isset($_POST['Finalisedclaim'])){ $postInsuranceData['ClaimFinalised'] = $_POST['Finalisedclaim']; }
-	if(isset($_POST['Businiessname'])){ $postInsuranceData['BusinessNameOwned'] = $_POST['Businiessname']; }		
+	if($_POST['Addtionalquestion']=="1"){
+		if(isset($_POST['Yearclaim'])){ $postInsuranceData['Yearofclaim'] = $_POST['Yearclaim']; }
+		if(isset($_POST['Nameclaim'])){ $postInsuranceData['ClaimantName'] = $_POST['Nameclaim']; }
+		if(isset($_POST['Fulldescription'])){ $postInsuranceData['Description'] = $_POST['Fulldescription']; }
+		if(isset($_POST['Amountpaid'])){ $postInsuranceData['AmountPaid'] = $_POST['Amountpaid']; }
+		if(isset($_POST['Finalisedclaim'])){ $postInsuranceData['ClaimFinalised'] = $_POST['Finalisedclaim']; }
+		if(isset($_POST['Businiessname'])){ $postInsuranceData['BusinessNameOwned'] = $_POST['Businiessname']; }	
+	}
+	else{
+		$postInsuranceData['Yearofclaim'] ="";
+		$postInsuranceData['ClaimantName'] ="";
+		$postInsuranceData['Description']="";
+		$postInsuranceData['AmountPaid'] ="";
+		$postInsuranceData['ClaimFinalised'] ="";
+		$postInsuranceData['BusinessNameOwned'] = "";
+	}		
 	
     // 2.2.40 - Get user insurance data
 	// Send - 
 	// UserID 
 	// Response -UserID & insurance data
+	$data = array();
 	$data['ID'] = $_SESSION["UserId"];
 	$insuarnceData = GetAptifyData("40", $data,""); // #_SESSION["UserID"];
-	
-	if($postInsuranceData['Claim']!=$insuarnceData['Claim'] || $postInsuranceData['Facts']!=$insuarnceData['Facts'] || $postInsuranceData['Disciplinary']!=$insuarnceData['Disciplinary'] || $postInsuranceData['Decline']!=$insuarnceData['Decline']|| $postInsuranceData['Oneclaim']!=$insuarnceData['Oneclaim']){
-	$submitTag=true;	
+	if(sizeof($insuarnceData['results'])!=0){
+		if($postInsuranceData['MalpracticeClaim']!=$insuarnceData['results'][0]['Claim'] || $postInsuranceData['InsuredClaimRisk']!=$insuarnceData['results'][0]['Facts'] || $postInsuranceData['ExternalDisciplinaryProceedings']!=$insuarnceData['results'][0]['Disciplinary'] || $postInsuranceData['InsurerDeclinedInsurance']!=$insuarnceData['results'][0]['Decline']|| $postInsuranceData['MoreThanOneClaim']!=$insuarnceData['results'][0]['Oneclaim']){
+		$submitTag=true;
+        		
+	}
+		else{$submitTag=false;}
+		if($postInsuranceData['Yearofclaim'] != $insuarnceData['results'][0]['Yearclaim'] || $postInsuranceData['ClaimantName'] != $insuarnceData['results'][0]['Nameclaim'] || $postInsuranceData['Description'] != $insuarnceData['results'][0]['Fulldescription']|| $postInsuranceData['AmountPaid'] != $insuarnceData['results'][0]['Amountpaid']|| $postInsuranceData['ClaimFinalised'] != $insuarnceData['results'][0]['Finalisedclaim']|| $postInsuranceData['BusinessNameOwned'] != $insuarnceData['results'][0]['Businiessname']){
+		$submitTag=true;
+       		
 	}
 	else{$submitTag=false;}
-	if($insuarnceData['Addtionalquestion']=="1" && ($postInsuranceData['Yearclaim'] != $insuarnceData['Yearclaim'] || $postInsuranceData['Nameclaim'] != $insuarnceData['Nameclaim'] || $postInsuranceData['Fulldescription'] != $insuarnceData['Fulldescription']|| $postInsuranceData['Amountpaid'] != $insuarnceData['Amountpaid']|| $postInsuranceData['Finalisedclaim'] != $insuarnceData['Finalisedclaim']|| $postInsuranceData['Businiessname'] != $insuarnceData['Businiessname'])){
-	$submitTag=true;	
+		
+    }
+	else{
+		$submitTag=true;
 	}
 	  
 	// 2.2.41 Send insurance data to Aptify webservice
 	// Send - 
 	// userID & insurance data
 	// Response -??????????????????????set in the future
-    //if($insuranceDataTag==0 || $submitTag ) {$testData = GetAptifyData("41", $postInsuranceData); print_r($testData);}
-	$testData = GetAptifyData("41", $postInsuranceData); print_r($testData);
+   
+	if($submitTag){$testData = GetAptifyData("41", $postInsuranceData); }
 }
   ?>
 <form id="renew-insurance-form" action="renewmymembership" method="POST">
 	<input type="hidden" name="step2" value="2"/>
-	<div class="down6" <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0"))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
+	<div class="down6" <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")|| isset($_POST['QOrder']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
 		<div class="row">
 			<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
 			Do you currently or plan to provide services to professional sport people in the AFL, A League, ARU, NRL, Cricket Australia or Olympic Representatives?

@@ -1,6 +1,7 @@
 <?php
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
-include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');       
+include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
+ 
 ?>
 <div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $user['background']; ?> autoscroll" id="dashboard-right-content">
@@ -15,25 +16,47 @@ include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
 				<ul class="nav nav-tabs">
-				<li><a class="tabtitle1 inactiveLink" style="cursor: pointer;"><span class="<?php if(!isset($_POST['step1']) && !isset($_POST['step2']) && !isset($_POST['stepAdd']) && !isset($_POST['step2-1']) && !isset($_POST['goI']) && !isset($_POST['goP'])&& !isset($_POST['step2-2']))echo "text-underline";?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
+				<li><a class="tabtitle1 inactiveLink" style="cursor: pointer;"><span class="<?php if(!isset($_POST['step1']) && !isset($_POST['step2']) && !isset($_POST['stepAdd']) && !isset($_POST['step2-1']) && !isset($_POST['goI']) && !isset($_POST['goP'])&& !isset($_POST['step2-2'])&&!isset($_POST['step2-3'])&& !isset($_POST['QOrder']))echo "text-underline";?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
 				<li><a class="tabtitle2 inactiveLink" style="cursor: pointer;"><span class="eventtitle2" id="Membership"><strong>Membership</strong></span></a></li>
 				<li><a class="tabtitle3 inactiveLink" style="cursor: pointer;"><span class="eventtitle3" id="Workplace"><strong>Workplace</strong></span></a></li>
 				<li><a class="tabtitle4 inactiveLink" style="cursor: pointer;"><span class="eventtitle4" id="Education"><strong>Education</strong></span></a></li>
 				<li><a class="tabtitle5 inactiveLink" style="cursor: pointer;"><span class="eventtitle5 <?php if((isset($_POST['step1'])&& $_POST['insuranceTag']!="0") || isset($_POST['goI']))echo 'text-underline';?>" id="Insurance"><strong>Insurance</strong></span></a></li>
-				<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6 <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0"))echo 'text-underline';?>" id="Survey"><strong>Survey</strong></span></a></li>
+				<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6 <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")||isset($_POST['QOrder']))echo 'text-underline';?>" id="Survey"><strong>Survey</strong></span></a></li>
 				<li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7 <?php if(isset($_POST['goP']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>
-				<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 <?php if(isset($_POST['step2']) || isset($_POST['step3']) || isset($_POST['stepAdd']) ||isset($_POST['step2-2']) )echo 'text-underline';?>" id="Review"><strong>Review</strong></span></a></li>
+				<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 <?php if(isset($_POST['step2']) || isset($_POST['step3']) || isset($_POST['stepAdd']) ||isset($_POST['step2-2']) ||isset($_POST['step2-3']))echo 'text-underline';?>" id="Review"><strong>Review</strong></span></a></li>
 				</ul>
 			<div id="insuranceBlockRN"></div>
 			<?php
+			//This is to get the renewal quatation order details from Aptify!!!!!!!!
+			// 2.2.45 - Renewal Quatation OrderID
+			// Send - 
+			// userID
+			// Response -Renewal Quatation OrderID
+			if(isset($_SESSION["UserId"])){
+				$variableData['id'] = $_SESSION["UserId"];
+				$Quatation = GetAptifyData("45", $variableData);
+				if(sizeof($Quatation["results"])!=0){
+					foreach ($Quatation["results"] as $quatationOrderArray){
+						$quatationOrderID =  $quatationOrderArray["ID"];
+					}
+
+
+			// after web service 2.2.45 Get renewal quatation orderID from Aptify;
+			// 2.2.44 Get Order details this web service is to use renew membership to get the order detail for next year
+			// Send - 
+			// Invoice_ID
+			// Response -Order details
+				$orderDetails = GetAptifyData("44", $quatationOrderID); 
+				}
+			}      
 			include('sites/all/themes/evolve/inc/renewMyMembership/renew-yourdetail.inc.php');
 			if((isset($_POST["step1"]) && $_POST["step1"] == "1"&& $_POST['insuranceTag']!="0") || isset($_POST['goI'])){
 			include('sites/all/themes/evolve/inc/renewMyMembership/renew-insurance.inc.php'); 
 			}
-            elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")) {
+            elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder'])) {
 		    include('sites/all/themes/evolve/inc/renewMyMembership/renew-surveypayment.inc.php');
 		    } 			
-			elseif((isset($_POST["step2"]) && $_POST["step2"] == "2") || (isset($_POST["stepAdd"]) && $_POST["stepAdd"] == "2") ||isset($_POST['step2-2'])) {
+			elseif((isset($_POST["step2"]) && $_POST["step2"] == "2") || (isset($_POST["stepAdd"]) && $_POST["stepAdd"] == "2") ||isset($_POST['step2-2'])||isset($_POST['step2-3'])) {
 			include('sites/all/themes/evolve/inc/renewMyMembership/renew-final.inc.php');
 			}
 			?>
@@ -70,7 +93,35 @@ include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
 		<label for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label><input type="checkbox" id="installmentpolicyp">
 	</div>
-</div>	
+</div>
+<div id="QuatationPopUp" style="display:none;" class="container">
+	<h3 style="color:black;">Your purchased product:<br>
+	<?php foreach($orderDetails['Order'] as $orders){
+		foreach($orders['OrderLines'] as $order){
+//  put the code here to save the quatation order products into the database firstly.			
+		echo $order['ProductName']; echo ",";} 
+	}?></h3>
+	<p>&nbsp;</p>
+	<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
+	<a href="renewmymembership" target="_self" class="cancelInsuranceButton"><span class="dashboard-button-name">Change your details</span></a>
+	<a href="renewmymembership"  target="_self" class="cancelInsuranceButton"><span class="dashboard-button-name">Change member type and national group</span></a>
+</div>
+<form id="renew-survey-form2" action="" method="POST"><input type="hidden" name="QOrder"></form>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	var isshow = sessionStorage.getItem('isshow');
+	var user ='<?php if(isset($_SESSION['UserId'])) {echo $_SESSION['UserId']; } else{ echo "";}?>';
+	if(isshow== null && user!== ''){
+       sessionStorage.setItem('isshow', 1);
+       $("#QuatationPopUp" ).dialog();
+       
+    }
+	$('input[value="log-oout"]').click(function(){
+	   sessionStorage.removeItem("isshow");
+	});
+	
+});
+</script>

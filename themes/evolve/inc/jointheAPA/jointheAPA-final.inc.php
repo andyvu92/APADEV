@@ -1,7 +1,7 @@
 <?php
 //use session: $_SESSION['UserID'],$_SESSION["postReviewData"],
 //save PRF product into APA database function
-function createShoppingCart($userID, $productID,$coupon){
+/*function createShoppingCart($userID, $productID,$coupon){
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
 	try {
 		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, coupon) VALUES (:userID, :productID, :coupon)');
@@ -38,10 +38,30 @@ function checkShoppingCart($userID, $productID){
 				print "Error!: " . $e->getMessage() . "<br/>";
 				die();
 	    }
-}
+}*/
 //delete PRF
 if(isset($_POST['step2-2'])){
-	checkShoppingCart($userID=$_SESSION['UserId'], $prodcutID="PRF");
+	checkShoppingCart($userID=$_SESSION['UserId'],$type="", $prodcutID="PRF");
+}
+//delete MG product
+if(isset($_POST['step2-3'])){
+	checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID=$_POST['step2-3']);
+	echo "this is productID";
+	print_r($_SESSION["MGProductID"]);
+	
+	foreach($_SESSION["MGProductID"] as $deleteM){
+		if (($key = array_search($_POST['step2-3'], $deleteM)) !== false) {
+			echo "try to delete product";
+			unset($deleteM[$key]);
+		}    
+	}
+	print_r($deleteM);
+	unset($_SESSION["MGProductID"]);
+	
+	$afterDelete = array();
+	array_push($afterDelete,$deleteM);
+	$_SESSION["MGProductID"] = $afterDelete;
+	
 }
 if(isset($_POST['step2'])) {
 	$postPaymentData = array();
@@ -80,9 +100,9 @@ if(isset($_POST['step2'])) {
 	if(isset($_POST['PRF'])){ 
 		$postReviewData['PRFdonation'] = $_POST['PRF']; 
 		//check is there PRF product existed for this user
-		checkShoppingCart($userID=$_SESSION['UserId'], $prodcutID="PRF");
+		checkShoppingCart($userID=$_SESSION['UserId'], $type="", $prodcutID="PRF");
 		//save PRF product into APA database function
-		createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $coupon=$_POST['PRF']);  
+		createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $type="",$coupon=$_POST['PRF']);  
 	}
 	//if(isset($_POST['Rollover'])){ $postReviewData['Rollover'] = $_POST['Rollover']; }
 	echo "this is payment card".$_POST['Paymentcard'];
@@ -125,7 +145,27 @@ if(isset($_POST['step2'])) {
 	$sendData["UserID"] = $_SESSION['UserId'];
 	$NGListArray = GetAptifyData("19", $sendData);
 	$NGProductsArray=$_SESSION["NationalProductID"];
-	 
+	// 2.2.21 - GET Fellowship product price
+	// Send - 
+	// userID
+	// Response -Fellowship product list
+	$FPListArray = array();
+	$fpProdcutArray = array();
+	
+	if(isset($_SESSION["MGProductID"])){
+		foreach($_SESSION["MGProductID"] as $singleM){
+			foreach($singleM as $key => $value){
+				array_push($fpProdcutArray,$value);
+			}
+		}
+	}
+$fpData['ProductID'] = $fpProdcutArray;
+$FPListArray = GetAptifyData("21", $fpData);
+// 2.2.13 - update payment method-3-set main card
+// Send - 
+// UserID, Creditcard-ID
+// Response -
+// N/A. 
 if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 		$updateCard["UserID"] = $_SESSION['UserId'];
 		$updateCard["SpmID"] = $_POST['Paymentcard'];
@@ -133,11 +173,6 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 		$updateCard["CCSNumber"] = "";
 		$updateCard["IsDefault"] = "1";
 		$updateCard["IsActive"] = "";
-		// 2.2.13 - update payment method-3-set main card
-		// Send - 
-		// UserID, Creditcard-ID
-		// Response -
-		// N/A.
 		$updateCards = GetAptifyData("13", $updateCard); 
 
 } 
@@ -152,7 +187,7 @@ $PRFPrice = 0;
  ?> 
 <form id ="join-review-form" action="joinconfirmation" method="POST">
 	<input type="hidden" name="step3" value="3">
-	<div class="down8" <?php if(isset($_POST['step2'])||isset($_POST['step2-2']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
+	<div class="down8" <?php if(isset($_POST['step2'])||isset($_POST['step2-2'])||isset($_POST['step2-3']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
 		<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
 			<table class="memSCTable">
 				<tbody>
@@ -183,6 +218,16 @@ $PRFPrice = 0;
 								}	echo "</tr>";  
 							}
 						}
+						}
+						if(sizeof($FPListArray)!=0){
+							foreach( $FPListArray as $FProduct){
+									echo "<tr>";
+									echo "<td>".$FProduct['FPtitle']."</td>";
+									echo "<td>A$".$FProduct['FPprice']."</td>";
+									$price += $FProduct['FPprice'];
+									echo '<td>';if($FProduct['ProductID']!="9973"){ echo '<a class="deleteMGButton'.$FProduct['ProductID'].'">delete</a>';} echo '</td>';
+									echo "</tr>";  
+							}
 						}
 						if(isset($_POST['PRF'])&& $_POST['PRF']!=""){ echo '<tr><td>Physiotherapy Research Foundation donation</td><td>A$'.$_POST['PRF'].'</td><td><a class="deletePRFButton">delete</a></td></tr>'; $price +=$_POST['PRF']; }
 					?>
@@ -266,5 +311,6 @@ $PRFPrice = 0;
 	</div>
 </form>
 <form id="pform" action="" method="POST"><input type="hidden" name="goP"></form>
-<form id="deletePRFForm" action="" method="POST"><input type="hidden" name="step2-2"></form>	
+<form id="deletePRFForm" action="" method="POST"><input type="hidden" name="step2-2"></form>
+<form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>	
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="your-details-prevbutton8"><span class="dashboard-button-name">Last</span></a></div>

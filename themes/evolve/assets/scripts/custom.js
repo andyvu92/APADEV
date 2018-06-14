@@ -218,15 +218,37 @@ jQuery(document).ready(function($) {
 			 }
 			
 		});
+		
+	});
+			
+	$('body').on('change', 'select', function() {
+			var x = $(this).attr("id").replace('Udegree', '');
+				if(($('#Udegree'+ x).val()=="0")){
+				
+				$( "#University-degree"+ x ).removeClass('display-none');
+			}
+			else{
+				$( "#University-degree" + x).addClass('display-none');
+				
+			}
+			var y = $(this).attr("id").replace('Undergraduate-university-name', '');
+			if(($('#Undergraduate-university-name'+ y).val()=="0")){
+				$( "#Undergraduate-university-name-other"+ y ).removeClass('display-none');
+			}
+			else{
+				$( "#Undergraduate-university-name-other" + y).addClass('display-none');
+			}
+		
+		
 	});
 	$('#anothercard').click(function(){
         if($(this).is(":checked")){
 			$('#anothercardBlock').removeClass("display-none");
-			$('input[name=addCard]').val('1');
+			$('input[name=addCard]').val('0');
 		}
         else{
             $('#anothercardBlock').addClass("display-none");
-			$('input[name=addCard]').val('0');
+			$('input[name=addCard]').val('1');
         }
 	});
 	$('input[type="radio"]').click(function(){
@@ -254,8 +276,11 @@ jQuery(document).ready(function($) {
 	else if($('#Claim2').is(":checked") && $('#Facts2').is(":checked") && $('#Disciplinary2').is(":checked") && $('#Decline2').is(":checked") && $('#Oneclaim2').is(":checked")){
 		$('#insuranceMore').addClass("display-none");
 		$('#Addtionalquestion').val("0");
+			
 	}
-	if($('#Addtionalquestion').val()=="1"){$('#insuranceMore').removeClass("display-none");} else{$('#insuranceMore').addClass("display-none");}
+	if($('#Addtionalquestion').val()=="1"){$('#insuranceMore').removeClass("display-none");} else{$('#insuranceMore').addClass("display-none");
+		
+	}
 	  $('#recent-purchases').click(function(){
 		$('#all-purchases').removeClass("text-underline");
 		$('#recent-purchases').addClass("text-underline");
@@ -459,23 +484,30 @@ jQuery(document).ready(function($) {
 		else{
 			$( "#ngmusculo" ).addClass('display-none');
 		}
-	}); 
-	$('[id=Undergraduate-university-name]').change(function(){
-	    if(($('select[name=Undergraduate-university-name]').val()=="Other")){
-			$( "#Undergraduate-university-name-other" ).removeClass('display-none');
+	});
+	if(jQuery.inArray( "10021", $('select[id=Nationalgp]').val())!==-1)
+		{
+			$( "#ngsports" ).removeClass('display-none');
+			$( "#ngsportsbox" ).val('1');
+			$("#ngsportsbox").attr('checked', true);
 		}
 		else{
-			$( "#Undergraduate-university-name-other" ).addClass('display-none');
+			$( "#ngsports" ).addClass('display-none');
+			$( "#ngsportsbox" ).val('0');
+			$("#ngsportsbox").attr('checked', false);
 		}
-	}); 
-	$('[id=Postgraduate-university-name]').change(function(){
-	    if(($('select[name=Postgraduate-university-name]').val()=="Other")){
-			$( "#Postgraduate-university-name-other" ).removeClass('display-none');
-		}
+		if(jQuery.inArray( "10015", $('select[id=Nationalgp]').val())!==-1)	
+		{
+			$( "#ngmusculo" ).removeClass('display-none');
+			$( "#ngmusculobox" ).val('1');
+			$("#ngmusculobox").attr('checked', true);
+	    }
 		else{
-			$( "#Postgraduate-university-name-other" ).addClass('display-none');
-		}
-	}); 
+			$( "#ngmusculo" ).addClass('display-none');
+			$( "#ngmusculobox" ).val('0');
+			$("#ngmusculobox").attr('checked', false);
+		}	
+	
 	//  add additional education
 	//$( "#datepicker" ).datepicker({dateFormat: 'yy'});
     $('#Paymentcard').change(function(){
@@ -688,17 +720,23 @@ jQuery(document).ready(function($) {
        if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked"))
 	   { 
 			
-            $( "#insuranceStatus" ).val('0');			
+            $( "#insuranceStatus" ).val('1');			
        }
 	   else if($('#Claim2').is(":checked") && $('#Facts2').is(":checked") && $('#Disciplinary2').is(":checked") && $('#Decline2').is(":checked") && $('#Oneclaim2').is(":checked")){
 			
            
-            $( "#insuranceStatus" ).val('1');				
+            $( "#insuranceStatus" ).val('0');				
 		}
     });
 	/*delete PRF from member shoppingcart  */
 	$(".deletePRFButton").click(function(){
 		$('#deletePRFForm').submit();
+	});
+	/*delete MG Product from member shoppingcart  */
+	$('[class^=deleteMGButton]').click(function(){
+		var productID = $(this).attr("class").replace('deleteMGButton', '');
+		$('input[name="step2-3"]').val(productID);
+		$('#deleteMGForm').submit();
 	});
 });
 /*
