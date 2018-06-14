@@ -82,6 +82,10 @@
 			
 			$_SESSION["Log-in"] = "in";
 			echo "<br>logged in!!";
+			
+			$data = "UserID=".$_SESSION["UserId"];
+			$details = GetAptifyData("4", $data,"");
+			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"]);
 		}
 	}
 	

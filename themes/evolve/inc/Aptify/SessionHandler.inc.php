@@ -15,6 +15,11 @@ function newSessionLogIn($id, $UserName, $Email, $FirstName, $LastName, $Title, 
 	$_SESSION['Database'] = $Database;
 	$_SESSION['AptifyUserID'] = $AptifyUserID;
 }
+function newSessionStats($MemberTypeID, $MemberType, $Status) {
+	$_SESSION['MemberTypeID'] = $MemberTypeID;
+	$_SESSION['MemberType'] = $MemberType;
+	$_SESSION['Status'] = $Status;
+}
 function deleteSession() {
 	// login related data
 	unset($_SESSION['Log-in']);

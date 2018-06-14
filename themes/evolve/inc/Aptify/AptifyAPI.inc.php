@@ -63,13 +63,14 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			break;
 		case "6":
 			// Eddy;
-			/* if(isset($_SESSION["TokenId"])) {
+			if(isset($variables["Token"])) {
 				$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/PasswordReset/Web";
-				$JSONreturn = curlRequest($API, "Secure", $variable);
-			} else { */
-			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/PasswordResetRequest/Web?";
-			$variable = "UserName=".$variables["email"]."&email=".$variables["email"];
-			$JSONreturn = curlRequest($API, "GetPost", $variable);
+				$JSONreturn = curlRequest($API, "Secure", $jsonVersion);
+			} else {
+				$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/PasswordResetRequest/Web?";
+				$variable = "UserName=".$variables["email"]."&email=".$variables["email"];
+				$JSONreturn = curlRequest($API, "GetPost", $variable);
+			}
 			echo "<br />6. Dashboard - Forgot password: <br />";
 			// Add JSON sample here
 			return $JSONreturn;
