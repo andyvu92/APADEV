@@ -63,10 +63,15 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			break;
 		case "6":
 			// Eddy;
+			echo "Data Sent: <br />";
+			print_r($variables);
 			if(isset($variables["Token"])) {
+				echo "1";
 				$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/PasswordReset/Web";
-				$JSONreturn = curlRequest($API, "Secure", $jsonVersion);
+				$JSONreturn = curlRequest($API, "SecureNoToken", $variables);
+				echo $JSONreturn;
 			} else {
+				echo "2";
 				$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/PasswordResetRequest/Web?";
 				$variable = "UserName=".$variables["email"]."&email=".$variables["email"];
 				$JSONreturn = curlRequest($API, "GetPost", $variable);
@@ -288,92 +293,12 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			return $JSONreturn;
 		case "30":
 			// For the actual API use
-			// $API = "";
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/PDGetEventSearchResultsList";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />30. PD - Get event detail list: <br />";
 			// Add JSON sample here
-			$JSONreturn = ' {
-				"PDEvents": [
-					{
-						"Totalnumber":"200",
-						"Enrollednumber":"100",
-						"Id":"1",
-						"Title":"Sports Physiotherapy Level 2",
-						"Typeofpd":"event",
-						"Time":"9:00 AM - 5.00 PM",
-						"Begindate":"3/06/2017",
-						"Enddate":"4/06/2017",
-						"Close_date":"12/12/2018",
-						"Location":{
-							"Address1":"1175 Toorak Road",
-							"Address2":"",
-							"City":"Camberwell",
-							"State":"VIC",
-							"Postcode":"3124"
-						},
-						"Price":"$750.00",
-						"UserStatus":"3"
-					}, {
-						"Totalnumber":"200",
-						"Enrollednumber":"100",
-						"Id":"3",
-						"Title":"Sports Physiotherapy Level 2",
-						"Typeofpd":"event",
-						"Time":"9:00 AM - 5.00 PM",
-						"Begindate":"3/06/2017",
-						"Enddate":"4/06/2017",
-						"Close_date":"12/12/2018",
-						"Location":{
-							"Address1":"1175 Toorak Road",
-							"Address2":"",
-							"City":"Camberwell",
-							"State":"VIC",
-							"Postcode":"3124"
-						},
-						"Price":"$750.00",
-						"UserStatus":"3"
-					}, {
-						"Totalnumber":"200",
-						"Enrollednumber":"100",
-						"Id":"5",
-						"Title":"Sports Physiotherapy Level 2",
-						"Typeofpd":"event",
-						"Time":"9:00 AM - 5.00 PM",
-						"Begindate":"3/06/2017",
-						"Enddate":"4/06/2017",
-						"Close_date":"25/02/2018",
-						"Location":{
-							"Address1":"1175 Toorak Road",
-							"Address2":"",
-							"City":"Camberwell",
-							"State":"VIC",
-							"Postcode":"3124"
-						},
-						"Price":"$750.00",
-						"UserStatus":"3"
-					}, {
-						"Totalnumber":"200",
-						"Enrollednumber":"200",
-						"Id":"7",
-						"Title":"Sports Physiotherapy Level 2",
-						"Typeofpd":"event",
-						"Time":"9:00 AM - 5.00 PM",
-						"Begindate":"3/06/2017",
-						"Enddate":"4/06/2017",
-						"Close_date":"12/12/2018",
-						"Location":{
-							"Address1":"1175 Toorak Road",
-							"Address2":"",
-							"City":"Camberwell",
-							"State":"VIC",
-							"Postcode":"3124"
-						},
-						"Price":"$750.00",
-						"UserStatus":"3"
-					}
-				]
-			}';;
+			$JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
 			return $JSONreturn;
 		case "31":
 			//API test by JingHu
@@ -654,7 +579,7 @@ function curlRequest($API, $type, $variables) {
 			curl_setopt($ch, CURLOPT_POST, 1);
 			curl_setopt($ch, CURLOPT_POSTFIELDS,$variables);
 		}
-	} elseif($type == "Secure") {
+	} elseif($type == "Secure"||$type == "SecureNoToken") {
 		curl_setopt($ch, CURLOPT_URL, $API); 
 		if(!empty($variables) || $variables != null) {
 			$secureData = http_build_query($variables);
@@ -669,6 +594,10 @@ function curlRequest($API, $type, $variables) {
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 				"AptifyAuthorization: Web ".$_SESSION["TokenId"],
 				"Content-Type:application/x-www-form-urlencoded" 
+			));
+		} elseif($type == "SecureNoToken") {
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				"Content-Type:application/x-www-form-urlencoded"
 			));
 		} elseif($type == "Image"|| $type == "Order"|| $type == "JSON") {
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
@@ -1722,6 +1651,89 @@ $JSONreturn = '{
 		"Subscription":"Mental",
 		"Subscribed":"1"
 	} ]
+}';
+
+// 30 pd event list
+$JSONreturn = ' {
+	"PDEvents": [
+		{
+			"Totalnumber":"200",
+			"Enrollednumber":"100",
+			"Id":"1",
+			"Title":"Sports Physiotherapy Level 2",
+			"Typeofpd":"event",
+			"Time":"9:00 AM - 5.00 PM",
+			"Begindate":"3/06/2017",
+			"Enddate":"4/06/2017",
+			"Close_date":"12/12/2018",
+			"Location":{
+				"Address1":"1175 Toorak Road",
+				"Address2":"",
+				"City":"Camberwell",
+				"State":"VIC",
+				"Postcode":"3124"
+			},
+			"Price":"$750.00",
+			"UserStatus":"3"
+		}, {
+			"Totalnumber":"200",
+			"Enrollednumber":"100",
+			"Id":"3",
+			"Title":"Sports Physiotherapy Level 2",
+			"Typeofpd":"event",
+			"Time":"9:00 AM - 5.00 PM",
+			"Begindate":"3/06/2017",
+			"Enddate":"4/06/2017",
+			"Close_date":"12/12/2018",
+			"Location":{
+				"Address1":"1175 Toorak Road",
+				"Address2":"",
+				"City":"Camberwell",
+				"State":"VIC",
+				"Postcode":"3124"
+			},
+			"Price":"$750.00",
+			"UserStatus":"3"
+		}, {
+			"Totalnumber":"200",
+			"Enrollednumber":"100",
+			"Id":"5",
+			"Title":"Sports Physiotherapy Level 2",
+			"Typeofpd":"event",
+			"Time":"9:00 AM - 5.00 PM",
+			"Begindate":"3/06/2017",
+			"Enddate":"4/06/2017",
+			"Close_date":"25/02/2018",
+			"Location":{
+				"Address1":"1175 Toorak Road",
+				"Address2":"",
+				"City":"Camberwell",
+				"State":"VIC",
+				"Postcode":"3124"
+			},
+			"Price":"$750.00",
+			"UserStatus":"3"
+		}, {
+			"Totalnumber":"200",
+			"Enrollednumber":"200",
+			"Id":"7",
+			"Title":"Sports Physiotherapy Level 2",
+			"Typeofpd":"event",
+			"Time":"9:00 AM - 5.00 PM",
+			"Begindate":"3/06/2017",
+			"Enddate":"4/06/2017",
+			"Close_date":"12/12/2018",
+			"Location":{
+				"Address1":"1175 Toorak Road",
+				"Address2":"",
+				"City":"Camberwell",
+				"State":"VIC",
+				"Postcode":"3124"
+			},
+			"Price":"$750.00",
+			"UserStatus":"3"
+		}
+	]
 }';
 */
 ?>
