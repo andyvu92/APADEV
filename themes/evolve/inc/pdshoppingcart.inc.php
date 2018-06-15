@@ -149,19 +149,21 @@ if(isset($_SESSION["UserId"])){
 		foreach($products as $productt){
 		$n = 0;
 		$pass=$localProducts[$n]['UID'];
-		$arrPID["PID"] = $productt['ProductID'];
+		$arrPID["PID"] = $productt['MeetingID'];
 		array_push($ListProductID ,$arrPID);
 			echo "<tr>";
 			echo	"<td>".$productt['Title']."</td>";
 			echo	"<td>".$productt['Sdate']."-".$productt['Edate']."</td>";
-			echo	"<td>".$productt['Location']["City"].", ".$productt['Location']["State"]."</td>";
+			echo	"<td>".$productt['City'].", ".$productt['State']."</td>";
 			if($_SESSION['MemberTypeID'] == "1" || $_SESSION['MemberTypeID'] == 1) {
-				echo	"<td>".$productt['Pricelist'][1]['Price']."</td>";
+				//echo	"<td>".$productt['Pricelist'][1]['Price']."</td>";
+				echo	"<td>M price</td>";
 			} else {
-				echo	"<td>".$productt['Pricelist'][0]['Price']."</td>";
+				//echo	"<td>".$productt['Pricelist'][0]['Price']."</td>";
+				echo	"<td>NM price</td>";
 			}
 			echo        '<td><a target="_blank" href="pd-wishlist?addWishList&UID='.$pass.'">ADD TO WISHLIST</a></td>';
-			echo        '<td><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['ProductID'].'"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></a></td>';
+			echo        '<td><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['MeetingID'].'"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></a></td>';
 			echo "</tr>";    
 			$n=$n+1;
 			$i=$i+1;
