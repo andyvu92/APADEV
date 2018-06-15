@@ -46,7 +46,6 @@ try {
 /********End get user shopping product form APA server******/
 /********Get Product details  from Aptify******/
 // Eddy's code next 3
-$PDtotalArray = array();
 $UserID = "";
 $PDarray = array();
 foreach ($productList as $productDetail){
@@ -58,9 +57,9 @@ foreach ($productList as $productDetail){
 	
 	// Eddy's code next 3
 	
-	array_push($PDtotalArray, $Lproduct['PDid']);
+	$PDtotalArray["PDid"] = $Lproduct['ProductID'];
 	$UserID = $productDetail['ID'];
-	array_push($PDtotalArray, $Lproduct['Coupon']);
+	$PDtotalArray["Coupon"] = $Lproduct['coupon'];
 	array_push($PDarray, $PDtotalArray);
 }
 
