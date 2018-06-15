@@ -75,7 +75,7 @@ foreach ($productList as $productDetail){
 $RequestCart["userID"] = $_SESSION["UserId"];
 $RequestCart["MeetingCoupons"] = $PDarray;
 $product = GetAptifyData("30", $RequestCart); //$_SESSON["UserID"]
-$products = $product["PDEvents"];
+$products = $product["MeetingDetails"];
 
 /********End get Product details  from Aptify******/
 
@@ -149,19 +149,23 @@ if(isset($_SESSION["UserId"])){
 		foreach($products as $productt){
 		$n = 0;
 		$pass=$localProducts[$n]['UID'];
-		$arrPID["PID"] = $productt['Id'];
+		$arrPID["PID"] = $productt['ProductID'];
 		array_push($ListProductID ,$arrPID);
 			echo "<tr>";
 			echo	"<td>".$productt['Title']."</td>";
-			echo	"<td>".$productt['Begindate']."-".$productt['Enddate']."</td>";
+			echo	"<td>".$productt['Sdate']."-".$productt['Edate']."</td>";
 			echo	"<td>".$productt['Location']["City"].", ".$productt['Location']["State"]."</td>";
-			echo	"<td>".$productt['Price']."</td>";
+			if($_SESSION['MemberTypeID'] == "1" || $_SESSION['MemberTypeID'] == 1) {
+				echo	"<td>".$productt['Pricelist'][1]['Price']."</td>";
+			} else {
+				echo	"<td>".$productt['Pricelist'][0]['Price']."</td>";
+			}
 			echo        '<td><a target="_blank" href="pd-wishlist?addWishList&UID='.$pass.'">ADD TO WISHLIST</a></td>';
-			echo        '<td><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['Id'].'"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></a></td>';
+			echo        '<td><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['ProductID'].'"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></a></td>';
 			echo "</tr>";    
 			$n=$n+1;
 			$i=$i+1;
-			$price=$price+(int)str_replace('$', '', $productt['Price']);
+			$price=$price+(int)str_replace('$', '', $productt['Pricelist'][0]['Price']);
 		if (in_array($productt['Typeofpd'],  $pdtype)){ $tag=1; }
 		}
 	?>
