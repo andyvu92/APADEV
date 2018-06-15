@@ -19,9 +19,11 @@ DEPENDENCIES
 INSTALLATION
 ------------
 1. Download and install CKEditor and Libraries API modules.
-2. Download CKEditor-CodeMirror-Plugin library to the following directory
+2. Download and install CKEditor CodeMirror module.
+3. Download CKEditor-CodeMirror-Plugin library to the following directory
    "sites/all/libraries/ckeditor.codemirror". Path to "plugin.js" file should be
    "sites/all/libraries/ckeditor.codemirror/plugin.js".
+   Note: Latest version of module will offer to do this for you automatically.
    Use "drush ckeditor-codemirror-download" (or "drush ccmd") command
    to download the library.
 
@@ -63,7 +65,8 @@ DEPENDENCIES
 INSTALLATION
 ------------
 1. Download and install Wysiwyg module.
-2. Download CKEditor-CodeMirror-Plugin library to the following directory
+2. Download and install CKEditor CodeMirror Wysiwyg module.
+3. Download CKEditor-CodeMirror-Plugin library to the following directory
    "sites/all/libraries/ckeditor.codemirror". Path to "plugin.js" file should be
    "sites/all/libraries/ckeditor.codemirror/plugin.js".
 
