@@ -35,12 +35,16 @@ function deleteSession() {
 	unset($_SESSION['Server']);
 	unset($_SESSION['Database']);
 	unset($_SESSION['AptifyUserID']);
+	unset($_SESSION['MemberTypeID']);
+	unset($_SESSION['MemberType']);
+	unset($_SESSION['Status']);
 	// user details' data
 	//Added by JingHu
 	unset($_SESSION["workplaceSettings"]);
 	unset($_SESSION["interestAreas"]);
 	unset($_SESSION["Language"]);
 	unset($_SESSION['country']);
+	
 	//End Added by JingHu
 	/*
 	unset($_SESSION['Logfgh']);

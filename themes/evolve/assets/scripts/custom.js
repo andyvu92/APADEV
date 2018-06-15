@@ -454,6 +454,9 @@ jQuery(document).ready(function($) {
 	$('#registerPDUserButton').click(function(){
 		$( "#registerPDUser" ).dialog();
     });
+	$('#registerNonMember').click(function(){
+		$( "#registerMember" ).dialog();
+    });
 	$('#createAccount').click(function(){
 		$( "#signupWebUser" ).dialog();
     });

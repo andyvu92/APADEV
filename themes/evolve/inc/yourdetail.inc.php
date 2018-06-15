@@ -635,7 +635,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 						<div class="col-lg-2">
 							<label for="">Postcode<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Mailing-postcode" id="Mailing-postcode"  <?php if (empty($details['Shipping-postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Mailing-postcode'].'"'; }?> required>
+							<input type="text" class="form-control" name="Mailing-postcode" id="Mailing-postcode"  <?php if (empty($details['Mailing-postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Mailing-postcode'].'"'; }?> required>
 						</div>
 						<div class="col-lg-2">
 							<label for="">State<span class="tipstyle">*</span></label>
@@ -1086,7 +1086,19 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 						<div class="col-lg-6">
 							<label for="">Country<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Billing-Country" id="Billing-Country" <?php if (empty($details['Billing-Country'])) {echo "placeholder='Billing Country'";}   else{ echo 'value="'.$details['Billing-Country'].'"'; }?> required>
+							<select class="form-control" id="Billing-Country" name="Billing-Country" required>
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								
+								echo '<option value="'.$country[$key]['Country'].'"';
+								if ($details['Billing-Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+								echo '> '.$country[$key]['Country'].' </option>';
+							}
+							?>
+							</select>
+							
 						</div>
 					</div>
 					<!--put code here-->

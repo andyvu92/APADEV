@@ -100,16 +100,26 @@ function comparePrice($priceList, $cost){
 /*PD detail page check eligible user to purchase the product fuction*/
 /*Parameters: $Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList*/
 /*PD detail page */
-function checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList){
-				 if(($Job!=NULL) && ($Professionalbody=="1") && ($Professionalinsurance=="1") && ($HearaboutAPA!=NULL) && ($Registrationboard=="1") && ($Registrationboard=="1") && (sizeof($Dietary)>0) && (sizeof($paymentCardList)>0))
-				 {
-					return "1"; 
-				 }
-				 else{
-					 return "0";
-				 }
+//function checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList){
+				 //if(($Job!=NULL) && ($Professionalbody=="1") && ($Professionalinsurance=="1") && ($HearaboutAPA!=NULL) && ($Registrationboard=="1") && ($Registrationboard=="1") && (sizeof($Dietary)>0) && (sizeof($paymentCardList)>0))
+				 //{
+					//return "1"; 
+				 //}
+				// else{
+					// return "0";
+				 //}
 			     
-			 }
+			 //}
+function checkPDUser($memberType){
+	if($memberType!="1"){
+		return "1"; 
+	}
+	else{
+		return "0"; 
+	}
+	
+	
+}			 
 /*General function: save data to APA shopping cart database;*/
 /*Parameters: $userID, $productID,$type;*/
 /*save product data including membership type product, national group product, fellowship & PRF product*/
@@ -179,5 +189,40 @@ function getProduct($userID,$type){
 		}	
 		$shoppingcartGet = null;
 		return $arrayReturn;
+}
+function PDShoppingCart($userID, $productID,$type,$Coupon){
+	$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	try {
+		$shoppingcartGet= $dbt->prepare('SELECT * FROM shopping_cart WHERE productID= :productID AND userID=:userID AND type=:type');
+		$shoppingcartGet->bindValue(':productID', $productID);
+		$shoppingcartGet->bindValue(':userID', $userID);
+		$shoppingcartGet->bindValue(':type', $type);
+		$shoppingcartGet->execute();
+		if($shoppingcartGet->rowCount()>0) {
+		header("Location:".$link."/pd/pd-product?saveShoppingCart&id=".$productID);
+	} else{
+		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, type, Coupon) VALUES (:userID, :productID, :type, :Coupon)');
+		$shoppingcartGet = null;
+	}
+	$shoppingcartUpdate->bindValue(':userID', $userID);
+	$shoppingcartUpdate->bindValue(':productID', $productID);
+	$shoppingcartUpdate->bindValue(':type', $type);
+	$shoppingcartUpdate->bindValue(':Coupon', $Coupon);
+	$shoppingcartUpdate->execute();	
+	$shoppingcartUpdate = null;
+	$wishlistDel= $dbt->prepare('DELETE FROM wishlist WHERE productID=:productID AND userID=:userID AND source=:source');
+	$wishlistDel->bindValue(':productID', $productID);
+	$wishlistDel->bindValue(':userID', $userID);
+	$wishlistDel->bindValue(':source', $type);
+	$wishlistDel->execute();
+	$wishlistDel = null;		
+	}
+	catch (PDOException $e) {
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}
+	header("Location:".$link."/pd/pd-product?saveShoppingCart&id=".$productID);
+	
 }
 ?>
