@@ -98,7 +98,28 @@ include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 	<h3 style="color:black;">Your purchased product:<br>
 	<?php foreach($orderDetails['Order'] as $orders){
 		foreach($orders['OrderLines'] as $order){
-//  put the code here to save the quatation order products into the database firstly.			
+//  put the code here to save the quatation order products into the database firstly.
+			if($order['ProductCategory'] =="Memberships"){
+				checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID=$order['ProductID']);
+				createShoppingCart($userID, $productID =$order['ProductID'],$type="membership",$coupon="");
+			}
+			if($order['ProductCategory'] =="Subscription"){
+				checkShoppingCart($userID=$_SESSION["UserId"], $type="NG", $productID=$order['ProductID']);
+				createShoppingCart($userID, $productID =$order['ProductID'],$type="NG",$coupon="");
+			}
+			if($order['ProductID'] =="9978"){
+				checkShoppingCart($userID=$_SESSION["UserId"], $type="MG1", $productID=$order['ProductID']);
+				createShoppingCart($userID, $productID =$order['ProductID'],$type="MG1",$coupon="");
+			}
+			if($order['ProductID'] =="9977"){
+				checkShoppingCart($userID=$_SESSION["UserId"], $type="MG2", $productID=$order['ProductID']);
+				createShoppingCart($userID, $productID =$order['ProductID'],$type="MG2",$coupon="");
+			}
+			if($order['ProductID'] =="9973"){
+				checkShoppingCart($userID=$_SESSION["UserId"], $type="FP", $productID=$order['ProductID']);
+				createShoppingCart($userID, $productID =$order['ProductID'],$type="FP",$coupon="");
+			}
+		
 		echo $order['ProductName']; echo ",";} 
 	}?></h3>
 	<p>&nbsp;</p>
