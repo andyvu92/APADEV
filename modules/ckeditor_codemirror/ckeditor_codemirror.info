@@ -9,9 +9,9 @@ dependencies[] = libraries (>=2.x)
 
 files[] = ckeditor_codemirror.test
 
-; Information added by Drupal.org packaging script on 2016-03-27
-version = "7.x-1.1"
+; Information added by Drupal.org packaging script on 2018-03-18
+version = "7.x-1.2"
 core = "7.x"
 project = "ckeditor_codemirror"
-datestamp = "1459083545"
+datestamp = "1521380285"
 

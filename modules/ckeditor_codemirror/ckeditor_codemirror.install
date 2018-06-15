@@ -10,7 +10,7 @@
  */
 function ckeditor_codemirror_requirements($phase) {
   if ($phase != 'runtime') {
-    return FALSE;
+    return array();
   }
   $return = array();
   // Ensure translations don't break at install time.

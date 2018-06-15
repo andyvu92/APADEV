@@ -15,7 +15,7 @@ function ckeditor_codemirror_libraries_info() {
     'download url' => 'https://github.com/w8tcha/CKEditor-CodeMirror-Plugin/releases',
     'version arguments' => array(
       'file' => 'plugin.js',
-      'pattern' => '@version:\s+([0-9a-zA-Z\.-]+)@',
+      'pattern' => '@version:\s+\'{0,1}([0-9a-zA-Z\.-]+)\'{0,1}@',
     ),
     'files' => array(
       'js' => array(
