@@ -46,9 +46,9 @@ try {
 /********End get user shopping product form APA server******/
 /********Get Product details  from Aptify******/
 // Eddy's code next 3
-$PIDArray = array();
+$PDtotalArray = array();
 $UserID = "";
-$CouponArray = array();
+$PDarray = array();
 foreach ($productList as $productDetail){
 	$productID = $productDetail['productID'];
 	$coupon =  $productDetail['coupon'];
@@ -57,13 +57,14 @@ foreach ($productList as $productDetail){
 	array_push($localProducts, $Lproduct);
 	
 	// Eddy's code next 3
-	array_push($PIDArray, $Lproduct['ProductID']);
-	$UserID = $productDetail['ID'];
-	array_push($CouponArray, $Lproduct['coupon']);
 	
+	array_push($PDtotalArray, $Lproduct['PDid']);
+	$UserID = $productDetail['ID'];
+	array_push($PDtotalArray, $Lproduct['Coupon']);
+	array_push($PDarray, $PDtotalArray);
 }
 
-$RequestCart = array('Id' => $PIDArray, "userID" => $UserID, "Coupon" => $CouponArray);
+//$RequestCart = array('Id' => $PIDArray, "userID" => $UserID, "Coupon" => $CouponArray);
 // 2.2.30 - GET event detail list
 // Send - 
 // ProductIDs, UserID, Coupons
@@ -72,6 +73,8 @@ $RequestCart = array('Id' => $PIDArray, "userID" => $UserID, "Coupon" => $Coupon
 // Title, PD type, Time, Start & End date, Registration closing date,
 // Where[Building Name, Address1, Address2, State, Suburb, Country],
 // Cost, Your registration.
+$RequestCart["userID"] = $_SESSION["UserId"];
+$RequestCart["MeetingCoupons"] = $PDarray;
 $product = GetAptifyData("30", $RequestCart); //$_SESSON["UserID"]
 $products = $product["PDEvents"];
 
