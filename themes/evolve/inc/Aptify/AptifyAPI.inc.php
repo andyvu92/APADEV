@@ -293,7 +293,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			return $JSONreturn;
 		case "30":
 			// For the actual API use
-			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/PDGetEventSearchResultsList";
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/PDGetEventDetailList";
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />30. PD - Get event detail list: <br />";
