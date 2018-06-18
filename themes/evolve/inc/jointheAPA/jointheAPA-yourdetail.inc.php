@@ -1230,12 +1230,15 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<div class="row">
 							<div class="col-lg-6">
 								<label for="Udegree<?php echo $key;?>">Degree<span class="tipstyle">*</span></label>
+								<?php 
+									$degreecode  = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
+									$degree=json_decode($degreecode, true);
+									$_SESSION["degree"] = $degree;	
+								?>
 								<?php if (!empty($details['PersonEducation'][$key]['DegreeID'])):?>
 								<select name="Udegree<?php echo $key;?>" id="Udegree<?php echo $key;?>">
 								    <?php 
-										$degreecode  = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
-										$degree=json_decode($degreecode, true);
-										$_SESSION["degree"] = $degree;	
+										
 										foreach($degree  as $pair => $value){
 											echo '<option value="'.$degree[$pair]['ID'].'"';
 											if ($details['PersonEducation'][$key]['DegreeID'] == $degree[$pair]['ID']){ echo "selected='selected'"; } 
@@ -1254,16 +1257,20 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<div class="row">
 							<div class="col-lg-6">
 								<label for="Undergraduateuniversity-name<?php echo $key;?>">University name<span class="tipstyle">*</span></label>
+								<?php 
+									$universityCode  = file_get_contents("sites/all/themes/evolve/json/University.json");
+									$University=json_decode($universityCode, true);
+									$_SESSION["University"] = $University;	
+								?>
 								<?php if (!empty($details['PersonEducation'][$key]['InstituteID'])):?>
 								<select name="Undergraduate-university-name<?php echo $key;?>" id="Undergraduate-university-name<?php echo $key;?>">
-									<option <?php if (empty($details['PersonEducation'][$key]['InstituteID'])) echo "selected='selected'";?> selected disabled>(None)</option>
-									<option value="18798" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "18798") echo "selected='selected'";?>>Australian Catholic University - NSW</option>
-									<option value="18842" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "18842") echo "selected='selected'";?>>Australian Catholic University - QLD</option>
-									<option value="3" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "3") echo "selected='selected'";?>>Australlian Catholic University - Ballarat</option>
-									<option value="4" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "4") echo "selected='selected'";?>>Bond University - QLD</option>
-									<option value="5" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "5") echo "selected='selected'";?>>Canberra University</option>
-									<option value="6" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "6") echo "selected='selected'";?>>Central Qld University</option>
-									<option value="7" <?php if ($details['PersonEducation'][$key]['InstituteID'] == "7") echo "selected='selected'";?>>Charles Sturt University - Albury NSW</option>
+									<?php 
+										foreach($University  as $pair => $value){
+											echo '<option value="'.$University[$pair]['ID'].'"';
+											if ($details['PersonEducation'][$key]['InstituteID'] == $University[$pair]['ID']){ echo "selected='selected'"; } 
+											echo '> '.$University[$pair]['Name'].' </option>';
+										}
+									?>
 									<!--<option value="0">Other</option>-->
 								</select>
 								<?php endif;?>
@@ -2101,13 +2108,19 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<div class="row">
 						<div class="col-lg-6">
 							<label for="Undergraduateuniversity-name0">University name<span class="tipstyle">*</span></label>
+							<?php 
+								$universityCode  = file_get_contents("sites/all/themes/evolve/json/University.json");
+								$University=json_decode($universityCode, true);
+								$_SESSION["University"] = $University;	
+							?>
 							<select name="Undergraduate-university-name0" id="Undergraduate-university-name0">
-								<option selected="selected" value="">(None)</option>
-								<option value="18798">Australian Catholic University - NSW</option>
-								<option value="18842">Australian Catholic University - QLD</option>
-								<option value="3">Australlian Catholic University - Ballarat</option>
-								<option value="4">Bond University - QLD</option>
-								<option value="5">Canberra University</option>
+							<?php 
+								foreach($University  as $pair => $value){
+									echo '<option value="'.$University[$pair]['ID'].'"';
+									echo '> '.$University[$pair]['Name'].' </option>';
+									
+								}
+									?>	
 								<option value="0">Other</option>
 							</select>
 							<input type="text" class="form-control display-none" name="Undergraduate-university-name-other0" id="Undergraduate-university-name-other0">
@@ -2179,8 +2192,9 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
         var number = Number($('#addtionalNumber').val());
 		var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
 		var sessionDegree = <?php echo json_encode($_SESSION['degree']);?>;
+		var sessionUniversity = <?php echo json_encode($_SESSION['University']);?>;
 		$('div[id="additional-qualifications-block"]').append('<div id="additional'+ number +'"></div>');
-		$("#additional"+ number ).load("sites/all/themes/evolve/commonFile/education.php", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree});
+		$("#additional"+ number ).load("sites/all/themes/evolve/commonFile/education.php", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree,"sessionUniversity":sessionUniversity});
         var i = Number(number +1);
 		$('input[name=addtionalNumber]').val(i);
     });

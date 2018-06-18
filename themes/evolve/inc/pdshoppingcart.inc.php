@@ -156,11 +156,11 @@ if(isset($_SESSION["UserId"])){
 			echo	"<td>".$productt['Sdate']."-".$productt['Edate']."</td>";
 			echo	"<td>".$productt['City'].", ".$productt['State']."</td>";
 			if($_SESSION['MemberTypeID'] == "1" || $_SESSION['MemberTypeID'] == 1) {
-				//echo	"<td>".$productt['Pricelist'][1]['Price']."</td>";
-				echo	"<td>M price</td>";
+				echo	"<td>".$productt['Pricelist'][1]['Price']."</td>";
+				//echo	"<td>M price</td>";
 			} else {
-				//echo	"<td>".$productt['Pricelist'][0]['Price']."</td>";
-				echo	"<td>NM price</td>";
+				echo	"<td>".$productt['Pricelist'][0]['Price']."</td>";
+				//echo	"<td>NM price</td>";
 			}
 			echo        '<td><a target="_blank" href="pd-wishlist?addWishList&UID='.$pass.'">ADD TO WISHLIST</a></td>';
 			echo        '<td><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['MeetingID'].'"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></a></td>';
@@ -184,7 +184,7 @@ if(isset($_SESSION["UserId"])){
 	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 scright<?php if(($price==0)) echo " display-none";?>">
 		<p>Your dietary requirements</p>
 		<p>Based on your details, we’ve recognised you are:</p>
-		<p style=" border: 1px solid #004250; padding: 5px 0;"><?php if(sizeof($Dietary)>0) {foreach($Dietary as $item) {echo $item['Name'].'&nbsp;';} }  else { echo "None";}?></p>
+		<p style=" border: 1px solid #004250; padding: 5px 0;"><?php if(sizeof($Dietary)>0) {foreach($Dietary as $item) {echo $item['Name'].'<br>';} }  else { echo "None";}?></p>
 		<p>Please note that not all APA PD events include catering.</p>
 	</div>
 
@@ -192,7 +192,7 @@ if(isset($_SESSION["UserId"])){
 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 paymentsiderbar">
 	<p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
 		<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
-		<fieldset><select  id="Paymentcard" name="Paymentcard">
+		<fieldset><select  id="Paymentcard" name="Paymentcard" >
 		<?php
 		if (sizeof($cardsnum)!=0) {
 			foreach( $cardsnum["results"] as $cardnum) {
@@ -270,9 +270,9 @@ if(isset($_SESSION["UserId"])){
 		</table>
 		         
 		<form action="/pd/completed-purchase" method="POST">
-			<input type="hidden" name="PRF" id="PRF" value="test">
+			<input type="hidden" name="PRF" id="PRF" value="">
 			<input type="hidden" name="TandC" id="TandC" value="0">
-			<input type="hidden" name="CardUsed" id="CardUsed" value="0">
+			<input type="hidden" name="CardUsed" id="CardUsed" value="">
 			
 			<?php
 				$counterTotal = count($ListProductID);
@@ -346,7 +346,7 @@ $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
 	});
 	
 	function changeV() {
-		$("#CardUsed").val($("#Paymentcard").val());
+		
 		if($("#accept1").is(":checked")) {
 			if($("#accept2").is(":checked")) {
 				if($("#accept3").is(":checked")) {

@@ -5,9 +5,10 @@ if(isset($_POST["PRF"])) {
 	// PRFdonation, Card number, Term+Condition, Product ID
 	// Response -
 	// Order status, Invoice ID
-	$OrderSend["PRF"] = $_POST["PRF"];
-	$OrderSend["TandC"] = $_POST["TandC"];
-	$OrderSend["CardUsed"] = $_POST["CardUsed"];
+	$OrderSend["userID"] = $_SESSION["UserId"];
+	$OrderSend["PRFdonation"] = $_POST["PRF"];
+	//$OrderSend["TandC"] = $_POST["TandC"];
+	$OrderSend["Card_number"] = $_POST["CardUsed"];
 	$PIDs = array();
 	for($i = 1; $i <= intval($_POST["total"]); $i++) {
 		//$PID["PID"] = $_POST["PID".$i];
@@ -15,15 +16,26 @@ if(isset($_POST["PRF"])) {
 		array_push($PIDs, $PID);
 		
 	}
-	$OrderSend["PID"] = $PIDs;
+	$OrderSend["productID"] = $PIDs;
 	if(isset($_SESSION["tempcard"])){
 		$cardDetails = $_SESSION["tempcard"];
-		$OrderSend['Addcard'] = "No";
-		$OrderSend['Payment-method'] = $cardDetails['Payment-method'];
-		$OrderSend['Cardno'] = $cardDetails['Cardno'];
-		$OrderSend['Expiry-date'] = $cardDetails['Expiry-date'];
-		$OrderSend['CCV'] = $cardDetails['CCV'];
+		$OrderSend['PaymentTypeID'] = $cardDetails['Payment-method'];
+		$OrderSend['CCNumber'] = $cardDetails['Cardno'];
+		$OrderSend['CCExpireDate'] = $cardDetails['Expiry-date'];
+		$OrderSend['CCSecurityNumber'] = $cardDetails['CCV'];
+		$OrderSend['Card_number'] = "";	
 	}
+	else{
+		$OrderSend['PaymentTypeID'] = "";
+		$OrderSend['CCNumber'] = "";
+		$OrderSend['CCExpireDate'] = "";
+		$OrderSend['CCSecurityNumber'] = "";
+	}
+	$OrderSend['InsuranceApplied'] = 0;
+	$OrderSend['Paymentoption'] = 1;
+	$OrderSend['InstallmentFor'] = "Membership";
+	$OrderSend['InstallmentFrequency'] = "Monthly";
+	$OrderSend['CampaignCode'] = "";
 	$ReceiveOrder = GetAptifyData("26", $OrderSend);
 	if($registerOuts['Invoice_ID']!=="0") {
 		$invoice_ID = $registerOuts['Invoice_ID'];
@@ -34,7 +46,7 @@ if(isset($_POST["PRF"])) {
 		$dataArray['MemberID'] = $_SESSION['userID'];
 		$dataArray['CreateDate']= date('Y-m-d');
 		$dataArray['MembershipYear'] = "";
-		$dataArray['ProductList'] = implode(",",$OrderSend["PID"]);
+		$dataArray['ProductList'] = implode(",",$OrderSend["productID"]);
 		$dataArray['Type'] = "P";
 		forCreateRecordFunc($dataArray);
 		//delete session: really important!!!!!!!!

@@ -204,13 +204,14 @@ function PDShoppingCart($userID, $productID,$type,$Coupon){
 	} else{
 		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, type, Coupon) VALUES (:userID, :productID, :type, :Coupon)');
 		$shoppingcartGet = null;
+		$shoppingcartUpdate->bindValue(':userID', $userID);
+		$shoppingcartUpdate->bindValue(':productID', $productID);
+		$shoppingcartUpdate->bindValue(':type', $type);
+		$shoppingcartUpdate->bindValue(':Coupon', $Coupon);
+		$shoppingcartUpdate->execute();	
+		$shoppingcartUpdate = null;
 	}
-	$shoppingcartUpdate->bindValue(':userID', $userID);
-	$shoppingcartUpdate->bindValue(':productID', $productID);
-	$shoppingcartUpdate->bindValue(':type', $type);
-	$shoppingcartUpdate->bindValue(':Coupon', $Coupon);
-	$shoppingcartUpdate->execute();	
-	$shoppingcartUpdate = null;
+	
 	$wishlistDel= $dbt->prepare('DELETE FROM wishlist WHERE productID=:productID AND userID=:userID AND source=:source');
 	$wishlistDel->bindValue(':productID', $productID);
 	$wishlistDel->bindValue(':userID', $userID);

@@ -172,6 +172,16 @@ function getDropdown(){
 	$fp = fopen(__DIR__ . '/../json/Branch.json', 'w');
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);
+	// write University json file
+	foreach($result['University']  as $lines){
+		$ID = $lines['ID'];
+		$Name = $lines['Name'];
+		$arrayUniversity[] = array('ID'=>$ID, 'Name'=>$Name);	
+    }
+	$response= $arrayUniversity;
+	$fp = fopen(__DIR__ . '/../json/University.json', 'w');
+    $test = fwrite($fp, json_encode($response));
+	fclose($fp);
 }
 getDropdown();
 ?>

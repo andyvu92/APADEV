@@ -220,7 +220,13 @@ jQuery(document).ready(function($) {
 		});
 		
 	});
-			
+	$("#CardUsed").val($("#Paymentcard").val());
+	$("input[value='PLACE YOUR ORDER']").click(function(){
+		var CardID = $("#Paymentcard").val();
+		$("#CardUsed").val(CardID);
+		
+		alert($("#CardUsed").val());
+	});		
 	$('body').on('change', 'select', function() {
 			var x = $(this).attr("id").replace('Udegree', '');
 				if(($('#Udegree'+ x).val()=="0")){
