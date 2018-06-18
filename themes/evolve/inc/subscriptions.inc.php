@@ -1,10 +1,5 @@
 <?php
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
-/*
-This page is undone.
-I need to add "List of fellowship product and National Groups"
-I'm doing it now :)
-*/
 /* We may use this as "Session" data and won't need to load. */
 // 2.2.20 - GET list of subscribed National Group
 // Send - 
@@ -60,6 +55,9 @@ foreach ($_POST as $key => $value) {
 	//echo "Field ".htmlspecialchars($key)." is ".htmlspecialchars($value)."<br>";
 	$PostArray[htmlspecialchars($key)] = htmlspecialchars($value);
 }
+echo "@@@@";
+print_r($PostArray);
+echo "@@@@";
 if(count($PostArray) == 0) { // GET data
 	$SubListAll = Array();
 	foreach($Subscription as $Subs) {
@@ -105,29 +103,41 @@ if(count($PostArray) == 0) { // GET data
 	}
 	$nationalGroup = $nationalGroups["results"];
 	foreach($nationalGroup as $Subs) {
-		$ArrayRe["SubscriptionID"] = $Subs["SubscriptionID"];
+		$ArrayUpdate["SubscriptionID"] = $Subs["SubscriptionID"];
 		if(!isset($PostArray[$Subs["SubscriptionID"]])) {
 			// When it's not set (unticked on check box)
-			$ArrayRe["Subscribed"] = 0;
+			$ArrayUpdate["Subscribed"] = 0;
 		} else {
-			$ArrayRe["Subscribed"] = 1;
+			if($PostArray[$Subs["SubscriptionID"]] == 0) {
+				$ArrayUpdate["Subscribed"] = 0;
+			} else {
+				$ArrayRe["SubscriptionID"] = $Subs["SubscriptionID"];
+				$ArrayRe["Subscribed"] = 1;
+				$ArrayRe["Subscription"] = $Subs["NGtitle"];
+				array_push($SubListAll, $ArrayRe);
+				$ArrayUpdate["Subscribed"] = 1;
+			}
 		}
-		array_push($subArray, $ArrayRe);
-		$ArrayRe["Subscription"] = $Subs["NGtitle"];
-		array_push($SubListAll, $ArrayRe);
+		array_push($subArray, $ArrayUpdate);
 	}
 	$Fellow = $Fellows["results"];
 	foreach($Fellow as $Subs) {
-		$ArrayRe["SubscriptionID"] = $Subs["FPid"];
+		$ArrayUpdate["SubscriptionID"] = $Subs["FPid"];
 		if(!isset($PostArray[$Subs["FPid"]])) {
 			// When it's not set (unticked on check box)
-			$ArrayRe["Subscribed"] = 0;
+			$ArrayUpdate["Subscribed"] = 0;
 		} else {
-			$ArrayRe["Subscribed"] = 1;
+			if($PostArray[$Subs["FPid"]] == 0) {
+				$ArrayUpdate["Subscribed"] = 0;
+			} else {
+				$ArrayRe["SubscriptionID"] = $Subs["FPid"];
+				$ArrayRe["Subscribed"] = 1;
+				$ArrayRe["Subscription"] = $Subs["FPtitle"];
+				array_push($SubListAll, $ArrayRe);
+				$ArrayUpdate["Subscribed"] = 1;
+			}
 		}
-		array_push($subArray, $ArrayRe);
-		$ArrayRe["Subscription"] = $Subs["FPtitle"];
-		array_push($SubListAll, $ArrayRe);
+		array_push($subArray, $ArrayUpdate);
 	}
 	$ArrayReturn["Subscriptions"] = $subArray;
 	$ArrayReturn["Consents"] = $consArray;
@@ -138,6 +148,7 @@ if(count($PostArray) == 0) { // GET data
 	// Response -
 	// Response, List of subscriptions and it's T/F values.
 	$subscriptions = GetAptifyData("24", $ArrayReturn);
+	
 }
 ?>
 <div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
