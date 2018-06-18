@@ -271,7 +271,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			echo $JSONreturn;		
 			return $JSONreturn;
 		case "28":
-			// Eddy
+			// Eddy 
 			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/PDGetEventSearchResultsList";
 			echo "Data Sent: <br />";
 			print_r($variables);
