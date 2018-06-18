@@ -136,11 +136,13 @@ if($resultdata['result']) {
 			echo $LogIn["TokenId"];
 			$data = "UserID=".$_SESSION["UserId"];
 			$details = GetAptifyData("4", $data,"");
+			$_SESSION['Dietary'] = $details["Dietary"];
 			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"]);
 		}
       if(!isset($details)) {
 			$data = "UserID=".$_SESSION["UserId"];
 			$details = GetAptifyData("4", $data,"");
+			$_SESSION['Dietary'] = $details["Dietary"];
 			}
 	   $user_membertype ="";
 	   $Job = "";

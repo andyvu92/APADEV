@@ -24,17 +24,37 @@ if(isset($_POST["PRF"])) {
 		$OrderSend['Expiry-date'] = $cardDetails['Expiry-date'];
 		$OrderSend['CCV'] = $cardDetails['CCV'];
 	}
-	$ReceiveOrder = GetAptifyData("32", $OrderSend);
-	unset($_SESSION["tempcard"]);
-	//put extra code when using API to get the status of order, if it is successful, will save terms and conditions on APA side
-	//save the terms and conditons on APA side
-	$dataArray = array();
-	$dataArray['MemberID'] = $_SESSION['userID'];
-	$dataArray['CreateDate']= date('Y-m-d');
-	$dataArray['MembershipYear'] = "";
-	$dataArray['ProductList'] = implode(",",$OrderSend["PID"]);
-	$dataArray['Type'] = "P";
-	forCreateRecordFunc($dataArray);
+	$ReceiveOrder = GetAptifyData("26", $OrderSend);
+	if($registerOuts['Invoice_ID']!=="0") {
+		$invoice_ID = $registerOuts['Invoice_ID'];
+		
+		//put extra code when using API to get the status of order, if it is successful, will save terms and conditions on APA side
+		//save the terms and conditons on APA side
+		$dataArray = array();
+		$dataArray['MemberID'] = $_SESSION['userID'];
+		$dataArray['CreateDate']= date('Y-m-d');
+		$dataArray['MembershipYear'] = "";
+		$dataArray['ProductList'] = implode(",",$OrderSend["PID"]);
+		$dataArray['Type'] = "P";
+		forCreateRecordFunc($dataArray);
+		//delete session: really important!!!!!!!!
+		unset($_SESSION["tempcard"]);
+		// delete shopping cart data from APA database; put the response status validation here!!!!!!!
+		$userID = $_SESSION["UserId"];
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+		$type = "PD";
+		try {
+			$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type=:type');
+			$shoppingCartDel->bindValue(':userID', $userID);
+			$shoppingCartDel->bindValue(':type', $type);
+			$shoppingCartDel->execute();
+			$shoppingCartDel = null;
+		}
+		catch (PDOException $e) {
+			print "Error!: " . $e->getMessage() . "<br/>";
+			die();
+		}    	
+	}
 }
 
 if(isset($_POST["Invoice_ID"])) {

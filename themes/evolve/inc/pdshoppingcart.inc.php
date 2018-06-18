@@ -10,11 +10,11 @@ $type = "PD";
 $userID = $_SESSION['UserId'];
 
 /***************get userinfo from Aptify******************/
-$userInfo_json = '{ 
-	"Dietary":["Shellfish","Eggs","Lactose"]
-}';
-$userInfo= json_decode($userInfo_json, true);	
-$Dietary = $userInfo['Dietary'];
+if(isset($_SESSION['Dietary'])) {
+	$Dietary = $_SESSION['Dietary'];	
+}
+else {$Dietary = array();}
+
 /****************End get userinfo from Aptify************/
 
 $dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
@@ -184,7 +184,7 @@ if(isset($_SESSION["UserId"])){
 	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 scright<?php if(($price==0)) echo " display-none";?>">
 		<p>Your dietary requirements</p>
 		<p>Based on your details, we’ve recognised you are:</p>
-		<p style=" border: 1px solid #004250; padding: 5px 0;"><?php if(sizeof($Dietary)>0) {foreach($Dietary as $item) {echo $item.'&nbsp;';} }  else { echo "None";}?></p>
+		<p style=" border: 1px solid #004250; padding: 5px 0;"><?php if(sizeof($Dietary)>0) {foreach($Dietary as $item) {echo $item['Name'].'&nbsp;';} }  else { echo "None";}?></p>
 		<p>Please note that not all APA PD events include catering.</p>
 	</div>
 
@@ -217,7 +217,7 @@ if(isset($_SESSION["UserId"])){
 				$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 				$PaymentType=json_decode($PaymentTypecode, true);
 				foreach($PaymentType  as $pair => $value){
-					echo '<option value="'.$PaymentType[$pair]['Name'].'"';
+					echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 					echo '> '.$PaymentType[$pair]['Name'].' </option>';
 					
 				}
@@ -273,6 +273,7 @@ if(isset($_SESSION["UserId"])){
 			<input type="hidden" name="PRF" id="PRF" value="test">
 			<input type="hidden" name="TandC" id="TandC" value="0">
 			<input type="hidden" name="CardUsed" id="CardUsed" value="0">
+			
 			<?php
 				$counterTotal = count($ListProductID);
 				$counters = 0;

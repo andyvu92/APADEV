@@ -44,7 +44,7 @@ function deleteSession() {
 	unset($_SESSION["interestAreas"]);
 	unset($_SESSION["Language"]);
 	unset($_SESSION['country']);
-	
+	unset($_SESSION['Dietary']);
 	//End Added by JingHu
 	/*
 	unset($_SESSION['Logfgh']);
