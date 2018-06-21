@@ -439,7 +439,7 @@ if($resultdata['result']) {
 		// Response - UserID & detail data
 		GetAptifyData("5", $postData);
 		//update PD shopping care 
-		PDShoppingCart($userID=$_SESSION['UserId'], $productID=$_POST['productID'],$type=$_POST['type'],$Coupon=$_POST['Couponcode']);
+		PDShoppingCart($userID=$_SESSION['UserId'], $productID=$_POST['productID'], $meetingID=$_POST['meetingID'],$type=$_POST['type'],$Coupon=$_POST['Couponcode']);
 		$CreateNewUserPD["Job"] = $_POST["Job"];
 		$CreateNewUserPD["Registrationboard"] = $_POST["Registrationboard"];
 		$CreateNewUserPD["Professionalinsurance"] = $_POST["Professionalinsurance"];
@@ -567,7 +567,7 @@ if($resultdata['result']) {
 		 </p></div>
 		 <p>&nbsp;</p>
 		 
-		 <?php if(isset($userId)&& ($userId!="0")):?><p><form action="pd-product?id=<?php echo $pd_detail["MeetingID"]?>" method="POST"><input type="text" name="Couponcode" placeholder="Enter discount code"><button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button></form></p><br><?php endif; ?>
+		 
 		 <?php 
 		     
 		 
@@ -640,7 +640,8 @@ if($resultdata['result']) {
 	  <div id="registerMember">
             <form action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" id="registerMemberForm" autocomplete="off">
 			    <input type="hidden" name="updateDetail">
-				<input type="hidden" name="productID" value="<?php echo $pd_detail['MeetingID'];?>"> 
+				<input type="hidden" name="meetingID" value="<?php echo $pd_detail['MeetingID'];?>"> 
+				<input type="hidden" name="productID" value="<?php echo $pd_detail['ProductID'];?>"> 
 			    <input type="hidden" name="type" value="PD">
 				<input type="hidden" name="Couponcode" value="<?php echo $Couponcode;?>"> 
 				<div class="down20">
@@ -1240,7 +1241,8 @@ if($resultdata['result']) {
 <div id="registerPDUser">
 	<form action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" autocomplete="off" >
 		<input type="hidden" name="updateDetail">
-		<input type="hidden" name="productID" value="<?php echo $pd_detail['MeetingID'];?>"> 
+		<input type="hidden" name="meetingID" value="<?php echo $pd_detail['MeetingID'];?>"> 
+		<input type="hidden" name="productID" value="<?php echo $pd_detail['ProductID'];?>"> 
 	    <input type="hidden" name="type" value="PD">
 	    <input type="hidden" name="Couponcode" value="<?php echo $Couponcode;?>"> 		
 		<div class="row">

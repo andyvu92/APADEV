@@ -200,10 +200,7 @@ jQuery(document).ready(function($) {
 				return false;
 			}
 		}
-		
-		
-		
-		
+				
 	};
 	var checkInsurance = function (memberType){
     if(memberType=="9960"||memberType=="9961"||memberType=="9991"||memberType=="9992"||memberType=="9968"||memberType=="9997"||memberType=="10005"||memberType=="9967"||memberType=="10006"){
@@ -256,5 +253,6 @@ jQuery(document).ready(function($) {
 		$("span." + eventtitle).addClass("text-underline");
         		
 	});
+	
 	
 });

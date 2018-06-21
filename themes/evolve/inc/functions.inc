@@ -111,7 +111,7 @@ function comparePrice($priceList, $cost){
 			     
 			 //}
 function checkPDUser($memberType){
-	if($memberType!="1"){
+	if($memberType=="1"){
 		return "1"; 
 	}
 	else{
@@ -190,7 +190,8 @@ function getProduct($userID,$type){
 		$shoppingcartGet = null;
 		return $arrayReturn;
 }
-function PDShoppingCart($userID, $productID,$type,$Coupon){
+
+function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 	$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
 	try {
@@ -202,10 +203,11 @@ function PDShoppingCart($userID, $productID,$type,$Coupon){
 		if($shoppingcartGet->rowCount()>0) {
 		header("Location:".$link."/pd/pd-product?saveShoppingCart&id=".$productID);
 	} else{
-		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, type, Coupon) VALUES (:userID, :productID, :type, :Coupon)');
+		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, meetingID, type, Coupon) VALUES (:userID, :productID, :meetingID, :type, :Coupon)');
 		$shoppingcartGet = null;
 		$shoppingcartUpdate->bindValue(':userID', $userID);
 		$shoppingcartUpdate->bindValue(':productID', $productID);
+			$shoppingcartUpdate->bindValue(':meetingID', $meetingID);
 		$shoppingcartUpdate->bindValue(':type', $type);
 		$shoppingcartUpdate->bindValue(':Coupon', $Coupon);
 		$shoppingcartUpdate->execute();	
@@ -224,6 +226,21 @@ function PDShoppingCart($userID, $productID,$type,$Coupon){
 		die();
 	}
 	header("Location:".$link."/pd/pd-product?saveShoppingCart&id=".$productID);
+	
+}
+function PDSaveCoupon($userID, $type, $Coupon){
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	try {
+	$shoppingcartSave= $dbt->prepare('UPDATE shopping_cart SET Coupon = :Coupon WHERE userID= :userID AND type= :type');
+	$shoppingcartSave->bindValue(':userID', $userID);
+	$shoppingcartSave->bindValue(':type', $type);
+	$shoppingcartSave->bindValue(':Coupon', $Coupon);
+	$shoppingcartSave->execute();
+	$shoppingcartSave= null;               
+	} catch (PDOException $e) {
+	print "Error!: " . $e->getMessage() . "<br/>";
+	die();
+}
 	
 }
 ?>

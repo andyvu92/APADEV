@@ -10,8 +10,7 @@ jQuery(document).ready(function($) {
 	$('.bx-prev').html("<i class='fa fa-angle-left'></i>");
     $('.bx-next').html("<i class='fa fa-angle-right'></i>");
     $('[class^=event]').click(function(){
-		
-        var x = $(this).attr("class").replace('event', '');
+		var x = $(this).attr("class").replace('event', '');
         $('[class^=down]:not(.down'+x+')').slideUp(400);
 	    $('.down' + x).slideToggle(450);
 		$('[class^=event]:not(.event'+x+') span').removeClass("text-underline");
@@ -224,8 +223,6 @@ jQuery(document).ready(function($) {
 	$("input[value='PLACE YOUR ORDER']").click(function(){
 		var CardID = $("#Paymentcard").val();
 		$("#CardUsed").val(CardID);
-		
-		alert($("#CardUsed").val());
 	});		
 	$('body').on('change', 'select', function() {
 			var x = $(this).attr("id").replace('Udegree', '');

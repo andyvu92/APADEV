@@ -268,7 +268,7 @@ $postImageData['ID'] = $_SESSION['LinkId'];
 $postImageData['EntityName'] = "Persons";
 $postImageData['Photo'] = $imageBlob;
 $outImage = GetAptifyData("11",$postImageData); 
-unlink(file_get_contents("sites/all/themes/evolve/uploads/".$name));
+unlink("sites/all/themes/evolve/uploads/".$name);
     
 }
 
@@ -400,7 +400,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			<li><a class="event3" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li>
 			<li><a class="event4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
 			</ul>
-			<form action="your-details" name="your-details" method="POST">
+			<form action="your-details" name="your-details" method="POST" novalidate>
 			    <input type="hidden" name="step1" value="1"/>
 				<input type="hidden" name="Specialty" value="<?php echo$details['Specialty'];?>">
 				<div class="down1">
@@ -544,13 +544,14 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<label for="">Building name</label>
 								<input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['BuildingName'])) {echo "placeholder='Building name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
 							</div>
-							<div class="col-lg-6 col-lg-offset-2">
+							
+						</div>
+						<div class="row">
+							<div class="col-lg-3">
 								<label for="">PO box</label>
 								<input type="text" class="form-control" name="Pobox"  <?php if (!empty($details['Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
 							</div>
-						</div>
-						<div class="row">
-							<div class="col-lg-12">
+							<div class="col-lg-9">
 								<label for="">Address 1<span class="tipstyle">*</span></label>
 								<input type="text" class="form-control" name="Address_Line_1"  <?php if (empty($details['Unit'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Unit'].'"'; }?> required>
 							</div>
@@ -609,21 +610,25 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<div class="col-lg-12"><label for="Mailing-address"><strong>Mailing address: Check box to duplicate residential address details</strong></label><input type="checkbox" id="Mailing-address"></div>
 					</div>
 					<div class="row">
-						<div class="col-lg-6">
-							<label for="">POBox</label>
-							<input type="text" class="form-control" name="Mailing-PObox" id="Mailing-PObox"  <?php if (!empty($details['Mailing-unitno'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?>>
-						</div>
+						
 						<div class="col-lg-6">
 							<label for="">Building Name</label>
 							<input type="text" class="form-control" name="Mailing-BuildingName" id="Mailing-BuildingName"  <?php if (empty($details['Mailing-BuildingName'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?>>
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-lg-6">
+					    <div class="col-lg-3">
+							<label for="">POBox</label>
+							<input type="text" class="form-control" name="Mailing-PObox" id="Mailing-PObox"  <?php if (!empty($details['Mailing-unitno'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?>>
+						</div>
+						<div class="col-lg-9">
 							<label for="">Address 1<span class="tipstyle">*</span></label>
 							<input type="text" class="form-control" name="Mailing-Address_Line_1" id="Mailing-Address_Line_1"  <?php if (empty($details['Mailing-unitno'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Mailing-unitno'].'"'; }?> required>
 						</div> 
-						<div class="col-lg-6">
+						
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
 							<label for="">Address 2<span class="tipstyle">*</span></label>
 							<input type="text" class="form-control" name="Mailing-Address_Line_2" id="Mailing-Address_Line_2"  <?php if (empty($details['Mailing-streetname'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Mailing-streetname'].'"'; }?> required>
 						</div> 
@@ -696,7 +701,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					</div>
 					<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-right">
 						<div class="row form-image">
-						   	<!--<img src="https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo"/>-->
+						   	<img src="https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo"/>
 							<div class="col-lg-12">
 							<a  style="cursor: pointer; color:white;" id="uploadImageButton">Upload/change image</a>
 							
@@ -1052,6 +1057,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 							</div>
 						</div>
+						<div class="row"></div>
 						<div class="col-lg-4">
 							<label for="">Address 1<span class="tipstyle">*</span></label>
 							<input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Address 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?> required>
@@ -1873,7 +1879,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				</div>
 				<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>-->
 			</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding" id="your-details-button">   <button  id="your-details-submit-button" class="dashboard-button dashboard-bottom-button your-details-submit"><span class="dashboard-button-name" type="submit">Submit</span></button></div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding" id="your-details-button">   <button type="submit" id="your-details-submit-button" class="dashboard-button dashboard-bottom-button your-details-submit"><span class="dashboard-button-name">Submit</span></button></div>
 	</form>
 		<form id="changePasswordForm">
 			<div class="down7" style="display:none;" >

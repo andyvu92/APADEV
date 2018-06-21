@@ -132,6 +132,19 @@ $postReviewData['productID'] = getProductList($_SESSION['UserId']);
 //store data in the session
 $_SESSION["postReviewData"] =  array();
 $_SESSION["postReviewData"] = $postReviewData;
+//Get calculating the Order Total and Schedule Payments
+// 2.2.47 Get calculating the Order Total and Schedule Payments
+// Send - 
+// userID & Paymentoption & InstallmentFor & InstallmentFrequency & PRFdonation & productID & CampaignCode
+// Response -AdminFee & SubTotal & GST & OrderTotal & InitialPaymentAmount & OccuringPayment & LastPayment
+$postScheduleData['userID'] = $postReviewData['userID'];
+$postScheduleData['Paymentoption'] = $postReviewData['Paymentoption'];
+$postScheduleData['InstallmentFor'] = "Membership";
+$postScheduleData['InstallmentFrequency'] = $postReviewData['InstallmentFrequency'];
+$postScheduleData['PRFdonation'] = $postReviewData['PRFdonation'];
+$postScheduleData['productID'] = $postReviewData['productID'];
+$postScheduleData['CampaignCode'] = "";
+$scheduleDetails = GetAptifyData("47", $postScheduleData);
 }
 // 2.2.31 Get Membership prodcut price
 // Send - 
@@ -148,6 +161,7 @@ $memberProducts = GetAptifyData("31", $memberProdcutID);
 // Response -National Group product
 $sendData["UserID"] = $_SESSION['UserId'];
 $NGListArray = GetAptifyData("19", $sendData);
+print_r($NGListArray);
 $NGProductsArray=$_SESSION["NationalProductID"];
 // 2.2.21 - GET Fellowship product price
 // Send - 
@@ -165,8 +179,10 @@ if(isset($_SESSION["MGProductID"])){
 		}
 	}
 }
-$fpData['ProductID'] = $fpProdcutArray;
-$FPListArray = GetAptifyData("21", $fpData);
+if(sizeof($fpProdcutArray)!=0){
+	$fpData['ProductID'] = $fpProdcutArray;
+	$FPListArray = GetAptifyData("21", $fpData);
+}
 //From review page to review page to add payment method again; 
 
 if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
@@ -345,15 +361,31 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 		<div class="row ordersummary"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span>YOUR ORDER</span></div></div>
 			<table>
 				<tr>
-				<td>Sub total (Inc. GST)</td>
-				<td>A$<?php echo $price;?></td>
+				<td>Sub total (Exc. GST)</td>
+				<td>A$<?php echo $scheduleDetails['SubTotal'];?></td>
+				</tr>
+				<tr>
+					<td>GST</td>
+					<td>A$<?php echo $scheduleDetails['GST'];?></td>
 				</tr>
 				<?php 
 				if(isset($_POST['PRF'])&& $_POST['PRF']!=""){  $PRFPrice =$_POST['PRF'];echo '<tr><td>PRF donation</td><td>A$'.$_POST['PRF'].'</td></tr>'; }
 				?>
+				<?php 
+					if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"){ 
+						$AdminFee =$scheduleDetails['AdminFee']; 
+						$InitialPaymentAmount = $scheduleDetails['InitialPaymentAmount'];
+						$OccuringPayment = $scheduleDetails['OccuringPayment'];
+						$LastPayment = $scheduleDetails['LastPayment'];
+						echo '<tr><td>Admin Fee</td><td>A$'.$AdminFee.'</td></tr>';
+						echo '<tr><td>Initial Payment Amount</td><td>A$'.$InitialPaymentAmount.'</td></tr>';
+						echo '<tr><td>Occuring Payment</td><td>A$'.$OccuringPayment.'</td></tr>';
+						echo '<tr><td>Last Payment</td><td>A$'.$LastPayment.'</td></tr>';
+					}
+				?>
 				<tr>
 				<td>Total(Inc.GST)</td>
-				<td>A$<?php echo $price+$PRFPrice;?></td>
+				<td>A$<?php echo $scheduleDetails['OrderTotal'];?></td>
 				</tr>
 			</table>
 		

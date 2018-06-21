@@ -7,6 +7,7 @@ $products = array();
 $localProducts = array();
 $pdtype= array("event", "course", "workshop");
 $type = "PD";
+$couponCode ="";
 $userID = $_SESSION['UserId'];
 
 /***************get userinfo from Aptify******************/
@@ -16,6 +17,12 @@ if(isset($_SESSION['Dietary'])) {
 else {$Dietary = array();}
 
 /****************End get userinfo from Aptify************/
+/***************Save coupon code on APA side******************/
+if(isset($_POST['Couponcode'])) {
+	PDSaveCoupon($userID=$_SESSION['UserId'], $type="PD", $Coupon=$_POST['Couponcode']);
+}
+/***************End Save coupon code on APA side************/
+
 
 $dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
 /*********Delete shopping product from APAserver******/
@@ -33,7 +40,7 @@ if(isset($_GET["action"])&&$_GET["action"]=="del"){
 /*********End delete shopping product from APAserver******/
 /********Get user shopping product form APA server******/
 try {
-	$shoppingcartGet= $dbt->prepare('SELECT ID, productID, coupon FROM shopping_cart WHERE userID= :userID AND type= :type');
+	$shoppingcartGet= $dbt->prepare('SELECT ID, productID, meetingID,coupon FROM shopping_cart WHERE userID= :userID AND type= :type');
 	$shoppingcartGet->bindValue(':userID', $userID);
 	$shoppingcartGet->bindValue(':type', $type);
 	$shoppingcartGet->execute();
@@ -48,18 +55,23 @@ try {
 // Eddy's code next 3
 $UserID = "";
 $PDarray = array();
+$PDProductarray = array();
 foreach ($productList as $productDetail){
 	$productID = $productDetail['productID'];
+	$meetingID = $productDetail['meetingID'];
 	$coupon =  $productDetail['coupon'];
 	$UID = $productDetail['ID'];
-	$Lproduct = array('UID'=>$UID,'ProductID' =>$productID, 'coupon' =>$coupon);
+	$Lproduct = array('UID'=>$UID,'ProductID' =>$productID,'MeetingID' =>$meetingID, 'coupon' =>$coupon);
 	array_push($localProducts, $Lproduct);
 	
 	// Eddy's code next 3
 	
-	$PDtotalArray["PDid"] = $Lproduct['ProductID'];
+	$PDtotalArray["PDid"] = $Lproduct['MeetingID'];
+	$SingleProduct = $Lproduct['ProductID'];
+	array_push($PDProductarray, $SingleProduct);
 	$UserID = $productDetail['ID'];
 	$PDtotalArray["Coupon"] = $Lproduct['coupon'];
+	$couponCode = $Lproduct['coupon'];
 	array_push($PDarray, $PDtotalArray);
 }
 
@@ -76,9 +88,26 @@ $RequestCart["userID"] = $_SESSION["UserId"];
 $RequestCart["MeetingCoupons"] = $PDarray;
 $product = GetAptifyData("30", $RequestCart); //$_SESSON["UserID"]
 $products = $product["MeetingDetails"];
+print_r($products);
 
 /********End get Product details  from Aptify******/
 
+//Get calculating the Order Total and Schedule Payments
+// 2.2.47 Get calculating the Order Total and Schedule Payments
+// Send - 
+// userID & Paymentoption & InstallmentFor & InstallmentFrequency & PRFdonation & productID & CampaignCode
+// Response -AdminFee & SubTotal & GST & OrderTotal & InitialPaymentAmount & OccuringPayment & LastPayment
+$postScheduleData['userID'] = $_SESSION["UserId"];
+$postScheduleData['Paymentoption'] = 0;
+$postScheduleData['InstallmentFor'] = "Membership";
+$postScheduleData['InstallmentFrequency'] = "";
+$postScheduleData['PRFdonation'] = "";
+$postScheduleData['productID'] = $PDProductarray;
+$postScheduleData['CampaignCode'] = $couponCode;
+$scheduleDetails = GetAptifyData("47", $postScheduleData);
+$price =$scheduleDetails['OrderTotal'];
+print_r($scheduleDetails);
+/********End get Order Total and Schedule Payments  from Aptify******/
 if(isset($_SESSION["UserId"])){
     
 	$userid = $_SESSION["UserId"];
@@ -116,6 +145,7 @@ if(isset($_SESSION["UserId"])){
 	    $tempcard = array();
 		$tempcard['Payment-method'] = $_POST['Cardtype'];
 		$tempcard['Cardno'] = $_POST['Cardnumber'];
+		$tempcard['CardName'] = $_POST['Cardname'];
 		$tempcard['Expiry-date'] = $_POST['Expirydate']; 
 		$tempcard['CCV'] = $_POST['CCV'];
 		$_SESSION['tempcard'] = $tempcard;
@@ -146,28 +176,39 @@ if(isset($_SESSION["UserId"])){
 	<?php 
 		//print_r($products);
 		$ListProductID = Array();
+		$discountPrice=0;
 		foreach($products as $productt){
 		$n = 0;
 		$pass=$localProducts[$n]['UID'];
-		$arrPID["PID"] = $productt['MeetingID'];
+		//$arrPID["PID"] = $productt['MeetingID'];
+		$arrPID["PID"] = $productt['ProductID'];
 		array_push($ListProductID ,$arrPID);
 			echo "<tr>";
 			echo	"<td>".$productt['Title']."</td>";
 			echo	"<td>".$productt['Sdate']."-".$productt['Edate']."</td>";
 			echo	"<td>".$productt['City'].", ".$productt['State']."</td>";
-			if($_SESSION['MemberTypeID'] == "1" || $_SESSION['MemberTypeID'] == 1) {
-				echo	"<td>".$productt['Pricelist'][1]['Price']."</td>";
-				//echo	"<td>M price</td>";
-			} else {
-				echo	"<td>".$productt['Pricelist'][0]['Price']."</td>";
-				//echo	"<td>NM price</td>";
+			// add by jinghu
+			if($couponCode!=""){
+				echo	"<td>".$productt['Product Cost With Coupon']."</td>";
 			}
+			else{
+				echo	"<td>".$productt['Product Cost Without Coupon']."</td>";
+			}
+			$discountPrice += $productt['Product Cost Without Coupon']-$productt['Product Cost With Coupon'];
+			// end add by jinghu
+			//if($_SESSION['MemberTypeID'] == "1" || $_SESSION['MemberTypeID'] == 1) {
+				//echo	"<td>".$productt['Pricelist'][1]['Price']."</td>";
+				//echo	"<td>M price</td>";
+			//} else {
+				//echo	"<td>".$productt['Pricelist'][0]['Price']."</td>";
+				//echo	"<td>NM price</td>";
+			//}
 			echo        '<td><a target="_blank" href="pd-wishlist?addWishList&UID='.$pass.'">ADD TO WISHLIST</a></td>';
-			echo        '<td><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['MeetingID'].'"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></a></td>';
+			echo        '<td><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['ProductID'].'"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></a></td>';
 			echo "</tr>";    
 			$n=$n+1;
 			$i=$i+1;
-			$price=$price+(int)str_replace('$', '', $productt['Pricelist'][0]['Price']);
+			//$price=$price+(int)str_replace('$', '', $productt['Pricelist'][0]['Price']);
 		if (in_array($productt['Typeofpd'],  $pdtype)){ $tag=1; }
 		}
 	?>
@@ -207,8 +248,9 @@ if(isset($_SESSION["UserId"])){
 		?>
 		</select></fieldset></div>
 <?php endif; ?>
+
 	<div class="paymentsideuse <?php if($price==0) echo " display-none";?>"><input type="checkbox" id="anothercard"><label for="anothercard"><a class="event10" style="cursor: pointer;">Use another card</a></label>
-	<div class="down10" style="display:none;">
+	<div class="down10" <?php if(isset($_SESSION["tempcard"])){ echo 'style="display:block;"';} else { echo 'style="display:none;"';}?>>
 		<form action="pd-shopping-cart?action=addcard" method="POST" id="formaddcard">
 		<div class="row">
 			<div class="col-lg-12">
@@ -218,6 +260,7 @@ if(isset($_SESSION["UserId"])){
 				$PaymentType=json_decode($PaymentTypecode, true);
 				foreach($PaymentType  as $pair => $value){
 					echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+					if(isset($_SESSION["tempcard"]) && $_SESSION["tempcard"]['Payment-method'] ==$PaymentType[$pair]['ID']) {echo "selected ";}
 					echo '> '.$PaymentType[$pair]['Name'].' </option>';
 					
 				}
@@ -227,31 +270,32 @@ if(isset($_SESSION["UserId"])){
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
+			<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CardName'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" required maxlength="16">
+			<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" required maxlength="16" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date" required maxlength="4">
+			<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date" required maxlength="4" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV">
+			<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
 		</div>
-		<div class="row"><label for="addcardtag">Do you want to save this card</label><input type="checkbox" id="addcardtag" name="addcardtag" value="1" checked></div>
+		<div class="row"><label for="addcardtag">Do you want to save this card</label><input type="checkbox" id="addcardtag" name="addcardtag" <?php if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>></div>
 		<div class="row">
 			<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
 		</div>
 		</form>
 	</div>
 	</div>
+	<?php if(isset($_SESSION["UserId"]) && $productList->rowCount()>0):?><p><form action="pd-shopping-cart" method="POST"><input type="text" name="Couponcode" placeholder="Enter discount code" value=""><button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button></form></p><br><?php endif; ?>
 		<?php if($productList->rowCount()>0): ?>      
 		<div class="row ordersummary"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span>YOUR ORDER</span></div></div>
 		<table>
@@ -261,11 +305,15 @@ if(isset($_SESSION["UserId"])){
 			</tr>
 			<tr>
 			<td>Discount</td>
-			<td>A$0.00</td>
+			<td>A$<?php echo $discountPrice;?></td>
+			</tr>
+			<tr>
+				<td>GST</td>
+				<td>A$<?php echo $scheduleDetails['GST'];?></td>
 			</tr>
 			<tr>
 			<td>Total(Inc.GST)</td>
-			<td>A$<?php echo $price;?></td>
+			<td>A$<?php echo $scheduleDetails['OrderTotal'];?></td>
 			</tr>
 		</table>
 		         
@@ -273,7 +321,7 @@ if(isset($_SESSION["UserId"])){
 			<input type="hidden" name="PRF" id="PRF" value="">
 			<input type="hidden" name="TandC" id="TandC" value="0">
 			<input type="hidden" name="CardUsed" id="CardUsed" value="">
-			
+			<input type="hidden" name="CouponCode"  value="<?php echo $couponCode; ?>">
 			<?php
 				$counterTotal = count($ListProductID);
 				$counters = 0;
