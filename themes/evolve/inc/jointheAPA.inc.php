@@ -1,9 +1,13 @@
 <?php
  include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
+ /* get background image****/
+if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID =0; }
+$background = getBackgroundImage($userID);
+/* get background image****/ 
  ?> 
 
-<div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 autoscroll background_<?php echo $user['background'];?> " id="dashboard-right-content">
+<div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 autoscroll background_<?php echo $background;?> " id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Become a member</strong></span></div>

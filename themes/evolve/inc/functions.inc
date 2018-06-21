@@ -241,6 +241,31 @@ function PDSaveCoupon($userID, $type, $Coupon){
 	print "Error!: " . $e->getMessage() . "<br/>";
 	die();
 }
+}
+function getBackgroundImage($userID){
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	$background=0;
+	try {
+		$backgroundInfo= $dbt->prepare('SELECT * FROM background_images WHERE userID= :userID');
+		$backgroundInfo->bindValue(':userID', $userID);
+		$backgroundInfo->execute();
+		if($backgroundInfo->rowCount()>0) { 
+			foreach ($backgroundInfo as $row) {
+				$background= $row['imageID'];
+				break;
+			}
+			return $background;
+		}
+		else{
+			$background=1; 
+			return $background;
+		}
+		$backgroundInfo = null;
+	}
+	catch (PDOException $e) {
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}	
 	
 }
 ?>

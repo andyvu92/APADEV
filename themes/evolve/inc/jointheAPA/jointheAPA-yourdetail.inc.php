@@ -1,4 +1,5 @@
 <?php
+
 //Put two scenarios here;
 //1. for new user who join a member
 //2. web user who join a member use $_SESSION]['userID'] to get user info
