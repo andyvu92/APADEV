@@ -37,12 +37,12 @@ function nationalIcons(){
 		// Request, User ID
 		// Response -
 		// National Group ID, National Group title
-		$sendData["RequestNG"] = "RequestNG";
-		$sendData["UserID"] = "UserID";
+		//$sendData["RequestNG"] = "RequestNG";
+		$sendData["UserID"] = $_SESSION['UserId'];
 		$nationalGroups = GetAptifyData("20", $sendData);
 		
 		//$userIcons = array(0,1,2 ,3,3,5,6,7);
-		$NGs = $nationalGroups["NationalGroup"];
+		$NGs = $nationalGroups["results"];
 		
         $length = sizeof($NGs);		
 	    $k =0;
