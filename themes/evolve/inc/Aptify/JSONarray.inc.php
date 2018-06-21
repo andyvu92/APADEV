@@ -24,7 +24,7 @@ function GetAptifyData($TypeAPI, $ArrayIn) {
 	var_dump($test);
 	fclose($fp);
 	*/
-	}
+	}	
     return JSONArrayConverter("toArray", $jsonreturn);
 }
 
