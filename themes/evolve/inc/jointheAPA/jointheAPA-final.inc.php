@@ -165,7 +165,6 @@ if(isset($_POST['step2'])) {
 	// Response -Fellowship product list
 	$FPListArray = array();
 	$fpProdcutArray = array();
-	
 	if(isset($_SESSION["MGProductID"])){
 		foreach($_SESSION["MGProductID"] as $singleM){
 			foreach($singleM as $key => $value){
@@ -176,6 +175,7 @@ if(isset($_POST['step2'])) {
 	if(sizeof($fpProdcutArray)!=0){
 		$fpData['ProductID'] = $fpProdcutArray;
 		$FPListArray = GetAptifyData("21", $fpData);
+		
 	}
 // 2.2.13 - update payment method-3-set main card
 // Send - 
