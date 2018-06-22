@@ -80,8 +80,22 @@
 */
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix " <?php print $attributes; ?>>
-    
-        <?php print render($content['field_home_image']);?>
-     
+	<?php $test = render($content['field_home_image']);
+		$typePos = strpos($test, 'typeof');
+		$a = $typePos + 8;
+		$b = $typePos + 26;
+		//echo "a: $a & b: $b <br />";
+		$type = substr($test, $a, 10);
+		if($type == "foaf:Image") {
+			$num1 = strpos($test, "src");
+			$num2 = strpos($test, 'width') - 7;
+			$num3 = $num2 - $num1;
+			echo "<div class='image' style='background-image: url(".'"'.substr($test, $num1 + 5, $num3).'"'.");'></div>";
+		} else {
+			print render($content['field_home_image']);
+		}
+	?>
+	<?php print render($content['field_members_only']);?>
+	<div class="HomeTitle"><?php print render($title); ?></div>
 </div> 
 

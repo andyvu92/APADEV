@@ -1,5 +1,5 @@
 <?php
-$QuestionList = ListQuestions(3);
+$QuestionList = ListQuestions(5);
 //print_r($QuestionList);
 ?>
 <?php  for($i=0; $i<sizeof($QuestionList); $i++):  ?>

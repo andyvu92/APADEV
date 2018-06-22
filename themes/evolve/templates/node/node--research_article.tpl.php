@@ -79,7 +79,13 @@
    * @ingroup themeable
    */
    ?>
-  
+<div style="height: 10px; width: 1px;">&nbsp;</div>
+
+<div class="Pagination">
+<div class="WFpage">RESEARCH W1.3.1&W1.4</div>
+
+<div class="Docpage">00.06.05.01</div>
+</div> 
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
    <div class="post-img media">
       <div class='mediaholder fullwidthimage'>

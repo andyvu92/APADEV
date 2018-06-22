@@ -1,12 +1,15 @@
 .Main{
-	width:547px;
+	width:49.95%;
 	float:left;
-	height:540px;
+	height:385px;
 }
 .Mainright{
-	width:566px;
+	width:49.7%;
 	float:right;
-	height:540px;
+	height:385px;
+}
+.First, .Second, .Third, .Advertise {
+	width: 49.6%;
 }
 .First{
     float:left;
@@ -20,21 +23,34 @@
     float:left;
 	padding:0;
 }
-.Addverstise{
+.Advertise{
 	float:right;
 	padding:0;
 }
-.Main iframe.media-youtube-player{
-    width: 570px!important;
-    height: 534px!important;
+.Main .image {
+	background-position: center;
+	background-size: cover;
 }
-.First iframe.media-youtube-player,  .Second iframe.media-youtube-player,  .Third iframe.media-youtube-player,  .Addverstise iframe.media-youtube-player{
-    width: 280px!important;
-    height: 265px!important;
+.Main iframe.media-youtube-player, .Main .image{
+    width: 100% !important;
+    height: 385px !important;
+}
+.First iframe.media-youtube-player,  .Second iframe.media-youtube-player,  .Third iframe.media-youtube-player,  .Advertise iframe.media-youtube-player,
+.First .image,  .Second .image,  .Third .image,  .Advertise .image {
+    width: 100% !important;
+    height: 191px !important;
 	margin-bottom: -2px;
 	margin-right: 3px;
-
 }
+
+.HomeTitle {
+	position: absolute;
+	padding: 25px;
+	bottom: 0;
+	font-size: 15px;
+	color: white;
+}
+
 /* homepage bottom - Eddy */
 
 /* log-in */
@@ -53,6 +69,9 @@
 }
 
 /* Homepage bottom */
+.homeBottom {
+	margin-bottom: 15px;
+}
 .HomeType .field-item {
 	position: absolute;
     z-index: 1;
@@ -87,6 +106,7 @@
 }
 #home-tile-view-block .homeBottom .content .item-description {
 	padding: 10px 10px 40px 20px;
+	height: 130px;
 }
 #home-tile-view-block .homeBottom .content .item-description h5 {
 	margin-bottom: 20px;
@@ -126,6 +146,9 @@
 	height: 31px;
 }
 @media screen and (max-width: 767px) {
+	.homeBottom {
+		margin-bottom: 0px;
+	}
 	#home-tile-view-block .homeBottom .content .portfolio-image {
 		margin: 15px 0;
 		float: left;
@@ -135,12 +158,13 @@
 		float: left;
 		width: 70%;
 		padding-bottom: 5px;
+		height: 100px;
 	}
 	.portfolio-image .HomeType,
 	.description {
 		display: none;
 	}
-	.movSection {
+	.movSection	{
 		display: block;
 	}
 	#home-tile-view-block .homeBottom .content .movSection .MonlyIconHolder {
@@ -158,25 +182,79 @@
 }
 
 /* ---------------------- Mediascreen Added by Jinghu ---------------------- */
+@media screen and (max-width: 992px) {
+	.Main {
+		width: 100%;
+		margin-bottom: 2px;
+	}
+	.Main iframe.media-youtube-player, .Main .image{
+		width: 100% !important;
+	}
+	.Mainright{
+		width:100%;
+	}
+	.First iframe.media-youtube-player,  .Second iframe.media-youtube-player,  .Third iframe.media-youtube-player,  .Advertise iframe.media-youtube-player,
+	.First .image,  .Second .image,  .Third .image,  .Advertise .image{
+		width: 100%!important;
+		margin-right: 3px;
+		margin-bottom: -4px;
+	}
+	.First, .Second, .Third, .Advertise{
+		width:49.8%;
+	}
+}
 
-@media screen and (max-width: 1200px) {
-.Main {
-    width: 100%!important;
-	
+
+@media screen and (min-width: 640px) and (max-width: 767px) {
+	.Main {
+		height: 340px;
+	}
+	.Main iframe.media-youtube-player, .Main .image{
+		height: 340px !important;
+	}
 }
-.Main iframe.media-youtube-player{
-    width: 100%!important;
-    
+@media screen and (min-width: 480px) and (max-width: 639px) {
+	.Main {
+		height: 290px;
+	}
+	.Main iframe.media-youtube-player, .Main .image{
+		height: 290px !important;
+	}
+	.Mainright{
+		height: 300px;
+	}
+	.First iframe.media-youtube-player,  .Second iframe.media-youtube-player,  .Third iframe.media-youtube-player,  .Advertise iframe.media-youtube-player,
+	.First .image,  .Second .image,  .Third .image,  .Advertise .image{
+		height: 148px !important;
+	}
 }
-.Mainright{
-	width:100%;
+@media screen and (min-width: 380px) and (max-width: 479px) {
+	.Main {
+		height: 240px;
+	}
+	.Main iframe.media-youtube-player, .Main .image{
+		height: 240px !important;
+	}
+	.Mainright{
+		height: 300px;
+	}
+	.First iframe.media-youtube-player,  .Second iframe.media-youtube-player,  .Third iframe.media-youtube-player,  .Advertise iframe.media-youtube-player,
+	.First .image,  .Second .image,  .Third .image,  .Advertise .image{
+		height: 148px !important;
+	}
 }
-.First iframe.media-youtube-player,  .Second iframe.media-youtube-player,  .Third iframe.media-youtube-player,  .Addverstise iframe.media-youtube-player{
-    width: 100%!important;
-	margin-right: 3px;
-}
-.First, .Second, .Third, .Addverstise{
-    width:49.8%;
-	
-}
+@media screen and (max-width: 379px) {
+	.Main {
+		height: 220px;
+	}
+	.Main iframe.media-youtube-player, .Main .image{
+		height: 220px !important;
+	}
+	.Mainright{
+		height: 270px;
+	}
+	.First iframe.media-youtube-player,  .Second iframe.media-youtube-player,  .Third iframe.media-youtube-player,  .Advertise iframe.media-youtube-player,
+	.First .image,  .Second .image,  .Third .image,  .Advertise .image{
+		height: 133px !important;
+	}
 }

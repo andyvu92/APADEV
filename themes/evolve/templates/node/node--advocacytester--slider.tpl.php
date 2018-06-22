@@ -83,6 +83,7 @@
 ?>
 <section id="advocacyBackground<?php print $node->nid; ?>" class="advocacyList advocacyBackground <?php print $classes; ?>" <?php print $attributes; ?>>
 	<div class="advocacyBackgroundSub">
-		<?php print render($content['field_pdf']);?>
+		<?php //print render($content['field_pdf']);?>
+		<?php print render($content['field_advobackground']);?>
 	</div>
 </section>
