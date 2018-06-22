@@ -233,7 +233,7 @@ if(isset($_POST['step2-1'])) {
 		<div class="row">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><label id="privacypolicyl">Privacy policy</label><input type="checkbox" id="privacypolicy" checked></div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><label id="instalmentpolicyl">Instalment/payment policy</label><input type="checkbox" id="instalmentpolicy" checked></div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 display-none" id="rolloverblock"><label for="Rollover">Roll over</label><input type="checkbox" name="Rollover" id="Rollover"></div>
+			<!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 display-none" id="rolloverblock"><label for="Rollover">Roll over</label><input type="checkbox" name="Rollover" id="Rollover"></div>-->
 		</div>   
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('renew-insurance-form').submit();" class="join-details-button7"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton7"><span class="dashboard-button-name">Last</span></a></div>
 	</div>

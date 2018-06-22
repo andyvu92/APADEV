@@ -730,7 +730,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<div class="row">
 					<input type="hidden"  name="Status" value="<?php echo $details['Status'];?>">
 						<div class="col-lg-4">
-							<label for="">Member ID(Your email address)<span class="tipstyle">*</span></label>
+							<label for="">Your email address(Member ID)<span class="tipstyle">*</span></label>
 							<input type="text" class="form-control" name="Memberid"  <?php if (empty($details['Memberid'])) {echo "placeholder='Member ID(Your email address)'";}   else{ echo 'value="'.$details['Memberid'].'"'; }?> readonly>
 						</div>
 					

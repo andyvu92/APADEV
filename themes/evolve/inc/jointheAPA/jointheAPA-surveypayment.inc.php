@@ -61,7 +61,7 @@ if(isset($_POST['step2-1'])) {
 	
 }
   ?>
-<div id="tipsBlock" class="<?php if($_POST['insuranceStatus']=="1") {echo "display";} else { echo "display-none";}?>"><span style="color:red;">you are possible not eligible for join a new member based on your provided insurance information</span></div>
+<div id="tipsBlock" class="<?php if($_POST['insuranceStatus']=="1") {echo "display";} else { echo "display-none";}?>"><span style="color:red;">Unfortunately, we cannot let you proceed with this membership purchase. Please contact the APA member hub (include email link) or on 1 300 306 622 for more information.</span></div>
 <form id="join-insurance-form" action="jointheapa" method="POST">
 	<input type="hidden" name="step2" value="2"/>
 	<div class="down6" <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0"))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
@@ -238,7 +238,7 @@ if(isset($_POST['step2-1'])) {
 		<div class="row">
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><label id="privacypolicyl">Privacy policy</label><input type="checkbox" id="privacypolicy" checked></div>
 			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><label id="instalmentpolicyl">Instalment/payment policy</label><input type="checkbox" id="instalmentpolicy" checked></div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 display-none" id="rolloverblock"><label for="Rollover">Roll over</label><input type="checkbox" name="Rollover" id="Rollover"></div>
+			<!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 display-none" id="rolloverblock"><label for="Rollover">Roll over</label><input type="checkbox" name="Rollover" id="Rollover"></div>-->
 		</div>   
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('join-insurance-form').submit();" class="join-details-button7"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton7"><span class="dashboard-button-name">Last</span></a></div>
 	</div>
