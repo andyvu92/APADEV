@@ -78,7 +78,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 		</div>
 			<div class="row">
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<input type="checkbox" name="conditions" id="conditions" value="0"><label for="conditions">I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
+					<input type="checkbox" name="conditions" id="conditions" value="0" data-target="#insuranceTermsandConditions" data-toggle="modal"><label for="conditions">I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
 				other material information to be disclosed<span class="tipstyle">*</span></label>
 				</div>
 			</div>
@@ -91,4 +91,48 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 	<a target="_self" class="cancelInsuranceButton"><span class="dashboard-button-name">No</span></a>
 	
 </div>
+<div id="insuranceTermsandConditions" class="modal fade" role="dialog">
+	<div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+	<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">FINANCIAL SERVICES GUIDE</h4>
+			</div>
+			<div class="modal-body">
+				<strong>This guide includes important information about:</strong>
+				<ul>
+					<li>the financial services we offer</li>
+					<li>the advice we will give to you</li>
+					<li>information we need from you</li>
+					<li>how we are paid</li>
+					<li>what to do if you have a complaint</li>
+					<li>how you can contact the FOS</li>
+				</ul>
+				
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
+            	<label for="insuranceTerms">Yes. I’ve read and understand the insurance terms and conditions</label><input type="checkbox" id="insuranceTerms" checked>
+			</div>   
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeDescription"> 
+            	Please agree with the insurance Terms and Conditions to continue with your membership
+			</div> 
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" id="insurance_terms_button" data-dismiss="modal">Submit</button>
+				
+			</div>
+		</div>
+	</div>
+</div>
+<!--  this part will be merged with Andy's Dashboard less file-->
+<style>
+div#insuranceTermsandConditions {
+    color: black;
+}
+#disagreeDescription{
+	color:red!important;
+}
+
+</style>
+<!--  this part will be merged with Andy's Dashboard less file-->
 	

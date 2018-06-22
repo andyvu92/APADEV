@@ -37,7 +37,7 @@ header("Location:".$actual_link);
 }
 /*********end background image to local server******/
 /*********get background image from local server******/
-$background=0;
+/*****$background=0;
 	try {
 		$backgroundInfo= $dbt->prepare('SELECT * FROM background_images WHERE userID= :userID');
 		$backgroundInfo->bindValue(':userID', $userID);
@@ -57,6 +57,6 @@ $background=0;
 	catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
-	}
+	}***/
 /**********end get background image from local server******/
 ?>

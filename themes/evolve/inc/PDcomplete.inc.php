@@ -32,10 +32,10 @@ if(isset($_POST["PRF"])) {
 		$OrderSend['CCSecurityNumber'] = "";
 	}
 	$OrderSend['InsuranceApplied'] = 0;
-	$OrderSend['Paymentoption'] = 1;
+	$OrderSend['Paymentoption'] = 0;
 	$OrderSend['InstallmentFor'] = "Membership";
-	$OrderSend['InstallmentFrequency'] = "Monthly";
-	$OrderSend['CampaignCode'] = "";
+	$OrderSend['InstallmentFrequency'] = "";
+	$OrderSend['CampaignCode'] = $_POST["CouponCode"];
 	$ReceiveOrder = GetAptifyData("26", $OrderSend);
 	if($registerOuts['Invoice_ID']!=="0") {
 		$invoice_ID = $registerOuts['Invoice_ID'];

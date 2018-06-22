@@ -526,7 +526,17 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			$JSONreturn = curlRequest($API, "Get", $data);	
 			echo $JSONreturn;
 			return $JSONreturn['results'];
-			break;				
+			break;	
+		case "47":
+			// test by Jing Hu
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/GetOrderPaymentDetail";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />47. Get calculating the Order Total and Schedule Payments <br />";
+		   	$JSONreturn = curlRequest($API, "JSON", $jsonVersion);	
+			echo $JSONreturn;
+			return $JSONreturn;
+			break;			
 	}
 }
 

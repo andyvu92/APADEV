@@ -111,7 +111,20 @@ if(isset($_POST['step2'])) {
 	$postReviewData['productID'] = getProductList($_SESSION['UserId']);
   	//store data in the session
 	$_SESSION["postReviewData"] =  array();
-	$_SESSION["postReviewData"] = $postReviewData;  
+	$_SESSION["postReviewData"] = $postReviewData; 
+    //Get calculating the Order Total and Schedule Payments
+	// 2.2.47 Get calculating the Order Total and Schedule Payments
+	// Send - 
+	// userID & Paymentoption & InstallmentFor & InstallmentFrequency & PRFdonation & productID & CampaignCode
+	// Response -AdminFee & SubTotal & GST & OrderTotal & InitialPaymentAmount & OccuringPayment & LastPayment
+	$postScheduleData['userID'] = $postReviewData['userID'];
+	$postScheduleData['Paymentoption'] = $postReviewData['Paymentoption'];
+	$postScheduleData['InstallmentFor'] = "Membership";
+	$postScheduleData['InstallmentFrequency'] = $postReviewData['InstallmentFrequency'];
+	$postScheduleData['PRFdonation'] = $postReviewData['PRFdonation'];
+	$postScheduleData['productID'] = $postReviewData['productID'];
+	$postScheduleData['CampaignCode'] = "";
+	$scheduleDetails = GetAptifyData("47", $postScheduleData);
 	
 }
 	//get productID list from local database;
@@ -144,6 +157,7 @@ if(isset($_POST['step2'])) {
 	// Response -National Group product
 	$sendData["UserID"] = $_SESSION['UserId'];
 	$NGListArray = GetAptifyData("19", $sendData);
+	print_r($NGListArray);
 	$NGProductsArray=$_SESSION["NationalProductID"];
 	// 2.2.21 - GET Fellowship product price
 	// Send - 
@@ -151,7 +165,6 @@ if(isset($_POST['step2'])) {
 	// Response -Fellowship product list
 	$FPListArray = array();
 	$fpProdcutArray = array();
-	
 	if(isset($_SESSION["MGProductID"])){
 		foreach($_SESSION["MGProductID"] as $singleM){
 			foreach($singleM as $key => $value){
@@ -159,8 +172,11 @@ if(isset($_POST['step2'])) {
 			}
 		}
 	}
-$fpData['ProductID'] = $fpProdcutArray;
-$FPListArray = GetAptifyData("21", $fpData);
+	if(sizeof($fpProdcutArray)!=0){
+		$fpData['ProductID'] = $fpProdcutArray;
+		$FPListArray = GetAptifyData("21", $fpData);
+		
+	}
 // 2.2.13 - update payment method-3-set main card
 // Send - 
 // UserID, Creditcard-ID
@@ -188,7 +204,7 @@ $PRFPrice = 0;
 <form id ="join-review-form" action="joinconfirmation" method="POST">
 	<input type="hidden" name="step3" value="3">
 	<div class="down8" <?php if(isset($_POST['step2'])||isset($_POST['step2-2'])||isset($_POST['step2-3']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
-		<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 			<table class="memSCTable">
 				<tbody>
 					<tr>
@@ -235,7 +251,7 @@ $PRFPrice = 0;
 			</table>
 		</div>
 	<!--<a class="your-details-prevbutton8"><span class="dashboard-button-name">Last</span></a>-->
-		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 Membpaymentsiderbar">
+		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 Membpaymentsiderbar">
 		<p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
 		<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
 		<?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>   
@@ -294,17 +310,45 @@ $PRFPrice = 0;
 		</div>
 		<div class="row ordersummary"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span>YOUR ORDER</span></div></div>
 			<table>
+				<tr><td>&nbsp;</td><td>&nbsp;</td></tr>
 				<tr>
-					<td>Sub total (Inc. GST)</td>
-					<td>A$<?php echo $price;?></td>
+					<td>Sub total (Exc. GST)</td>
+					<td>A$<?php echo $scheduleDetails['SubTotal'];?></td>
 				</tr>
+				<tr>
+					<td>GST</td>
+					<td>A$<?php echo $scheduleDetails['GST'];?></td>
+				</tr>
+				<tr>
+					<td><span style="font-size: 20px;font-weight: bold;">Total(Inc.GST)</span></td>
+					<td>A$<?php echo $scheduleDetails['OrderTotal'];?></td>
+				</tr>
+				<?php if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"): ?>
+				<tr><td><p style="border-top: 1px solid #ccc;"></p></td><td><p style="border-top: 1px solid #ccc;"></p></td></tr>
+				
 				<?php 
-				if(isset($_POST['PRF'])&& $_POST['PRF']!=""){ $PRFPrice =$_POST['PRF']; echo '<tr><td>PRF donation</td><td>A$'.$_POST['PRF'].'</td></tr>'; }
+					if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"){ 
+						$AdminFee =$scheduleDetails['AdminFee']; 
+						$InitialPaymentAmount = $scheduleDetails['InitialPaymentAmount'];
+						$OccuringPayment = $scheduleDetails['OccuringPayment'];
+						$LastPayment = $scheduleDetails['LastPayment'];
+						
+						echo '<tr><td>Initial Payment</td><td>A$'.$InitialPaymentAmount.'</td></tr>';
+						echo '<tr><td>includes:</td></tr>';
+						echo '<tr><td><span>Admin Fee</span></td><td>A$'.$AdminFee.'</td></tr>';
+												
+					}
+				?>
+				<?php 
+				if(isset($_POST['PRF'])&& $_POST['PRF']!=""){  $PRFPrice =$_POST['PRF'];echo '<tr><td>PRF donation</td><td>A$'.$_POST['PRF'].'</td></tr>'; }
 				?>
 				<tr>
-				<td>Total(Inc.GST)</td>
-				<td>A$<?php echo $price+$PRFPrice;?></td>
+					<td>GST</td>
+					<td>A$<?php echo $scheduleDetails['GST'];?></td>
 				</tr>
+				<tr><td><button type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Next Schedule</button></td></tr>
+				 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
+				 <?php endif;?>
 			</table>
 		<a target="_blank" class="addCartlink"><button class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
 		</div>
@@ -314,3 +358,41 @@ $PRFPrice = 0;
 <form id="deletePRFForm" action="" method="POST"><input type="hidden" name="step2-2"></form>
 <form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>	
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="your-details-prevbutton8"><span class="dashboard-button-name">Last</span></a></div>
+<?php if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"): ?>
+<div id="schedulePOPUp" class="modal fade" role="dialog">
+	<div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+	<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Your next schedule payment details</h4>
+			</div>
+			<div class="modal-body">
+			<ul>
+			    <?php 
+                    $month = date("m");		
+					$currentMonth = trim($month,"0"); 
+					$currentYear = date("Y");  
+					for($i=$currentMonth+1; $i<12; $i++){
+						echo '<li>01/'.$i.'/'.$currentYear.' payment: A$'.$OccuringPayment.'</li>';
+					}
+				echo '<li>01/12/'.$currentYear.'payment: A$'.$LastPayment.'</li>';
+				?>
+				 
+            </ul>			
+			
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default"  data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>
+<?php endif;?>
+<!--  this part will be merged with Andy's Dashboard less file-->
+<style>
+div#schedulePOPUp {
+    color: black;
+}
+</style>
+<!--  this part will be merged with Andy's Dashboard less file-->	
