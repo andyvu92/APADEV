@@ -744,6 +744,28 @@ jQuery(document).ready(function($) {
 		$('input[name="step2-3"]').val(productID);
 		$('#deleteMGForm').submit();
 	});
+	
+	if($('#insuranceTerms').val()=="0"){
+		$( "#disagreeDescription" ).removeClass('display-none');
+		$('a.join-details-button5').addClass('disabled');
+		
+	}
+	else{
+		$( "#disagreeDescription" ).addClass('display-none');
+		$('a.join-details-button5').removeClass('disabled');
+	}
+	$('#insuranceTerms').click(function() {
+		if($('#insuranceTerms').val()=="0"){
+		$( "#disagreeDescription" ).removeClass('display-none');
+		$('a.join-details-button5').addClass('disabled');
+	}
+	else{
+		
+		$( "#disagreeDescription" ).addClass('display-none');
+		$('a.join-details-button5').removeClass('disabled');
+	}
+	});
+	
 });
 /*
 $( window ).on( "load", function() {
