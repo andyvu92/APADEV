@@ -10,7 +10,6 @@ function GetAptifyData($TypeAPI, $ArrayIn) {
 	$arrayToJson = JSONArrayConverter("toJSON", $ArrayIn);
 	// pass array and JSON version together and use them as needed.
 	$jsonreturn = AptifyAPI($TypeAPI, $ArrayIn, $arrayToJson);
-	logTransaction($TypeAPI,$arrayToJson,$jsonreturn);
 	if($TypeAPI == "10") {
 		//echo $jsonreturn;
 	/*	
@@ -24,7 +23,13 @@ function GetAptifyData($TypeAPI, $ArrayIn) {
 	var_dump($test);
 	fclose($fp);
 	*/
-	}	
+	}
+	echo "<br>".$TypeAPI."<br>";
+	if($TypeAPI == "2" || $TypeAPI == "3" || $TypeAPI == "18" || $TypeAPI == "38") {
+		return $jsonreturn;
+	} else {
+		logTransaction($TypeAPI,$arrayToJson,$jsonreturn);
+	}
     return JSONArrayConverter("toArray", $jsonreturn);
 }
 
@@ -35,9 +40,15 @@ function GetAptifyData($TypeAPI, $ArrayIn) {
  */
 function JSONArrayConverter($type, $Input) {
 	if($type == "toArray") {
-		return $results = json_decode($Input, true);
+		return $results = json_clean_decode($Input, true);
 	} else {
 		return $results = json_encode($Input, true);
 	}
+}
+function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
+	// search and remove line space \r\n
+	$json = preg_replace("!\r?\n!", "", $json);
+	$json = json_decode($json, $assoc);
+	return $json;
 }
 ?>

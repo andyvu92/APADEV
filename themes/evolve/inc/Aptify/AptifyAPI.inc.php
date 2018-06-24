@@ -19,26 +19,46 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			break;
 		case "2":
 			// Eddy
-			// $API = "";
-			echo "Data Sent: <br />";
-			print_r($variables);
+			$AptifyAuth = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=aptifyuser&Password=!@-auser-Apatest1-2468";
+			$AuthToken = curlRequest($AptifyAuth, "Get", "");
+			$AuthToken = json_decode($AuthToken, true);
+			$AuthToken = $AuthToken["TokenId"];
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=151&";
+			//$ttt = urlencode("DomainWithContainer ");
+			$passInput = "EntityRecordID=".$variables."&AptifyAuthorization=DomainWithContainer%20".$AuthToken;
+			$API = $API.$passInput;
+			//$API = urlencode($API);
+			//setcookie ("AptifySession","$AuthToken",time()+ (24 * 60 * 60));
+			//$_SESSION[""] = $AuthToken;
+			$APItt = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=150&";
+			//$ttt = urlencode("DomainWithContainer ");
+			$passInputt = "EntityRecordID=".$variables."&AptifyAuthorization=DomainWithContainer%20".$AuthToken;
+			$APItt = $APItt.$passInput;
+			$APIs["M"] = $API;
+			$APIs["I"] = $APItt;
 			echo "<br />2. Get membership Certificate PDF: <br />";
 			// Add JSON sample here
-			$JSONreturn = '{
-				"MembershipCertification":"Membership certificate of currency"
-			}';
-			return $JSONreturn;
+			//$JSONreturn = curlRequest($API, "PDF", $AuthToken);
+			//echo $JSONreturn;
+			//return $JSONreturn;
+			return $APIs;
 		case "3":
 			// Eddy
-			// $API = "";
-			echo "Data Sent: <br />";
-			print_r($variables);
+			$AptifyAuth = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=aptifyuser&Password=!@-auser-Apatest1-2468";
+			$AuthToken = curlRequest($AptifyAuth, "Get", "");
+			$AuthToken = json_decode($AuthToken, true);
+			$AuthToken = $AuthToken["TokenId"];
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=150&";
+			//$ttt = urlencode("DomainWithContainer ");
+			$passInput = "EntityRecordID=".$variables."&AptifyAuthorization=DomainWithContainer%20".$AuthToken;
+			$API = $API.$passInput;
+			//$API = urlencode($API);
+			//setcookie ("AptifySession","$AuthToken",time()+ (24 * 60 * 60));
+			//$_SESSION[""] = $AuthToken;
 			echo "<br />3. Get membership insurance certificate PDF: <br />";
 			// Add JSON sample here
-			$JSONreturn = '{
-				"InsuranceCertification":"Insurance certificate of currency"
-			}';
-			return $JSONreturn;
+			$JSONreturn = curlRequest($API, "PDF", $AuthToken);
+			return $API;
 		case "4":
 			//API test by JingHu
 			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/GetDBMemberDetails?";		
@@ -178,16 +198,25 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			$JSONreturn = curlRequest($API, "Get", $sent);
 			return $JSONreturn;
 		case "18":
-			// For the actual API use
-			// $API = "";
-			echo "Data Sent: ";
-			print_r($variables);
+			// Eddy
+			$AptifyAuth = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=aptifyuser&Password=!@-auser-Apatest1-2468";
+			$AuthToken = curlRequest($AptifyAuth, "Get", "");
+			$AuthToken = json_decode($AuthToken, true);
+			$AuthToken = $AuthToken["TokenId"];
+			$returnArr = Array();
+			foreach($variables as $var) {
+				$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=154&";
+				$passInput = "EntityRecordID=".$var."&AptifyAuthorization=DomainWithContainer%20".$AuthToken;
+				$API = $API.$passInput;
+				array_push($returnArr, $API);
+			}
+			//$API = urlencode($API);
+			//setcookie ("AptifySession","$AuthToken",time()+ (24 * 60 * 60));
+			//$_SESSION[""] = $AuthToken;
 			echo "// 18. Get payment invoice PDF: <br />";
 			// Add JSON sample here
-			$JSONreturn = '{
-				"Invoice":"'.$variables["Invoice_ID"].'`s invoice "
-			}';
-			return $JSONreturn;
+			//$JSONreturn = curlRequest($API, "PDF", $AuthToken);
+			return $returnArr;
 		case "19":
 			// Eddy - done check;
 			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/NationalGroupProducts/";
@@ -519,6 +548,10 @@ function curlRequest($API, $type, $variables) {
 		$urlcurl = $API.$variables;
 		curl_setopt($ch, CURLOPT_URL, $urlcurl); 
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+	} elseif($type == "PDF") {
+		$urlcurl = $API;
+		curl_setopt($ch, CURLOPT_URL, $urlcurl); 
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
 	} elseif($type == "GetPost") {
 		$urlcurl = $API.$variables;
 		curl_setopt($ch, CURLOPT_URL, $urlcurl); 
@@ -545,6 +578,10 @@ function curlRequest($API, $type, $variables) {
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 				"AptifyAuthorization: Web ".$_SESSION["TokenId"],
 				"Content-Type:application/x-www-form-urlencoded" 
+			));
+		} elseif($type == "PDF") {
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				"AptifyAuthorization: DomainWithContainer ".$variables
 			));
 		} elseif($type == "SecureNoToken") {
 			curl_setopt($ch, CURLOPT_HTTPHEADER, array(

@@ -231,7 +231,6 @@ if($resultdata['result']) {
 	/*
 	array_push($pdArr, $Couponcode);
 	*/
-	
 	// 2.2.29 - GET event detail
 	// Send - 
 	// PDID, UserID, Coupon
@@ -242,7 +241,6 @@ if($resultdata['result']) {
 	// Where:{Address1, Address2, Address3(if exist), Address4(if exist), City,
 	//	state, Postcode}, CPD hours, Cost, Your registration stats
 	$pd_detail = GetAptifyData("29", $pdArr);
-	print_r($pd_detail);
     $pd_detail = $pd_detail['MeetingDetails'][0];
 	$prices = $pd_detail['Pricelist'];
 	$pricelistGet = Array();
@@ -608,7 +606,7 @@ if($resultdata['result']) {
         <h4 class="modal-title">View map</h4>
 
                                <?php
-    if($pd_detail['Location']){
+    if(strlen($pd_detail['AddressLine1']) > 5){
    echo ' <iframe
   width="600"
   height="450"

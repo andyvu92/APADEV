@@ -138,10 +138,17 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 						// UserID
 						// Response -
 						// Membership certificate PDF
-						$MemberCerti = GetAptifyData("2", "UserID");
+						//echo "<iframe name='YInkFroamame' src='http://www.physiotherapy.asn.au'></iframe>";
+						$Certi = GetAptifyData("2", $_SESSION['LinkId']);
+						//echo "<iframe id="YInkFroamame" srcdoc='".$MemberCerti."'></iframe>";
+						//echo "<iframe src='".$MemberCerti."'></iframe>";
+						//echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=aptifyuser&Password=!@-auser-Apatest1-2468' style='display: none;'></iframe>";
+						//echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&amp;ViewEntityName=Persons&amp;ReportId=151&amp;EntityRecordID=55280'width='900' height='900'></iframe>";
+						//echo "<a href='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=151&EntityRecordID=".$_SESSION['LinkId']."'>ttttt</a>";
 						?>
 							<td></td>
-							<td><a href=""><strong><span style="text-decoration: underline; color:white;"><?php echo $MemberCerti['MembershipCertification']; ?></span></strong></a></td>
+							<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#YInkFroamame"><span style="text-decoration: underline; color:white;">Membership certificate</span></button></td>
+							<?php /*<a href="https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=151&EntityRecordID=<?php echo $_SESSION['UserId']; ?>" target="_blank"><strong><span style="text-decoration: underline; color:white;">Membership certificate</span></strong></a> */ ?>
 						</tr>
 						<tr>
 						<?php
@@ -150,14 +157,78 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 						// UserID
 						// Response -
 						// Insurance certificate PDF
-						$InsuCerti = GetAptifyData("3", "UserID");
+						//$InsuCerti = GetAptifyData("3", $_SESSION['LinkId']);
 						?>
 							<td></td>
-							<td><a href=""><strong><span style="text-decoration: underline; color:white"><?php echo $InsuCerti['InsuranceCertification']; ?></span></strong></a></td>
+							<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#KiNsuraneCiynbC"><span style="text-decoration: underline; color:white;">Insurance certification</span></button></td>
+							<?php /*<a href=""><strong><span style="text-decoration: underline; color:white"><?php echo $InsuCerti['InsuranceCertification']; ?></span></strong></a>*/ ?>
 						</tr>
 					</tbody>
 				</table>
+				
+				<div id="YInkFroamame" class="modal fade big-screen" role="dialog">
+				  <div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					  </div>
+					  <div class="modal-body">
+						<iframe name='YInkFroamame' src='http://www.physiotherapy.asn.au'></iframe>
+					  </div>
+					  <div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					  </div>
+					</div>
+
+				  </div>
+				</div>
+				
+				<div id="KiNsuraneCiynbC" class="modal fade big-screen" role="dialog">
+				  <div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+					  <div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+					  </div>
+					  <div class="modal-body">
+						<iframe name='KiNsuraneCiynbC' src='http://www.physiotherapy.asn.au'></iframe>
+					  </div>
+					  <div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					  </div>
+					</div>
+
+				  </div>
+				</div>
+				<style type="text/css">
+					.big-screen {
+						width: 62%;
+						margin: auto;
+						min-width: 1190px;
+						overflow: hidden;
+					}
+					.big-screen .modal-dialog .modal-content .modal-body {
+						width: 100%;
+						height: 85%;
+					}
+					.big-screen .modal-dialog, .big-screen .modal-dialog .modal-content, .big-screen iframe {
+						width: 100%;
+						height: 100%;
+					}
+				</style>
 			</div>   
+			<script>
+			$(document).ready(function() {
+				if (window.frames['YInkFroamame'] && !window.userSet){
+					window.userSet = true;
+					frames['YInkFroamame'].location.href='<?php echo $Certi["M"]; ?>';
+					frames['KiNsuraneCiynbC'].location.href='<?php echo $Certi["I"]; ?>';
+				}
+			});
+			</script>
 			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mobile_line" >
 				<table class="table table-responsive">
 					<tbody style="border-top: none;">

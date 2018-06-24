@@ -9,7 +9,7 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 if(isset($_SESSION["Log-in"])) {
 	$data["ID"] = $_SESSION["UserId"];
 	$product = GetAptifyData("17", $data);
-	print_r($product);
+	//print_r($product);
 } else {
 	echo "not logged in";
 }
@@ -39,25 +39,19 @@ $products = $product["Orders"]
 								<td>Price</td>
 								<td>Date</td>
 							</tr>
-							<?php foreach($products as $product){
+							<?php 
+							foreach($products as $product){
 								$now = date('d-m-Y');
 								if(strtotime($now)<strtotime('+1 years',strtotime($product['Orderdate']))){
 									echo "<tr>";
-									// 2.2.18 - GET payment history list
-									// Send - 
-									// UserID, Invoice_ID
-									// Response -
-									// Invoice PDF
-									$send["UserID"] = "UserID";
-									$send["Invoice_ID"] = $product['ID'];
-									$invoiceAPI = GetAptifyData("18", $send); // #_SESSION["UserID"];
 									echo "<td>".$product['OrderLines'][0]['ProductName']."</td>";
-									echo '<td><a style="color:white;" href="' .$product['ID'].'">'.$invoiceAPI["Invoice"].'</a></td>';
+									echo '<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span style="text-decoration: underline; color:white;">Invoice</span></button></td>';
 									echo "<td>".$product['Paymenttotal']."</td>";
 									echo "<td>".$product['Orderdate']."</td>";
 									echo "</tr>";
 								}
-							} ?>	
+							}
+							?>	
 						</tbody>
 					</table>
 				</div>
@@ -70,28 +64,141 @@ $products = $product["Orders"]
 								  <td>Price</td>
 								  <td>Date</td>
 							</tr>
-							<?php foreach($products as $product){
+							<?php
+							$apis = Array();
+							foreach($products as $product){
+								array_push($apis, $product["ID"]);
 								echo "<tr>";
-								// 2.2.18 - GET payment history list
-								// Send - 
-								// UserID, Invoice_ID
-								// Response -
-								// Invoice PDF
-								$send["UserID"] = "UserID";
-								$send["Invoice_ID"] = $product['ID'];
-								$invoiceAPI = GetAptifyData("18", $send); // #_SESSION["UserID"];
 								echo "<td>".$product['OrderLines'][0]['ProductName']."</td>";
-								echo '<td><a style="color:white;" href="' .$product['ID'].'">'.$invoiceAPI["Invoice"].'</a></td>';
-								echo "<td>".$product['Initialpaymentamount']."</td>";
+								echo '<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span style="text-decoration: underline; color:white;">Invoice</span></button></td>';
+								echo "<td>".$product['Paymenttotal']."</td>";
 								echo "<td>".$product['Orderdate']."</td>";
 								echo "</tr>";
-								   
-							} ?>	
+								echo '<div id="Iaksbnkvoice'.$product['ID'].'" class="modal fade big-screen" role="dialog">
+									  <div class="modal-dialog">
+
+										<!-- Modal content-->
+										<div class="modal-content">
+										  <div class="modal-header">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+										  </div>
+										  <div class="modal-body">
+											<iframe name="Iaksbnkvoice'.$product['ID'].'" src="http://www.physiotherapy.asn.au"></iframe>
+										  </div>
+										  <div class="modal-footer">
+											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										  </div>
+										</div>
+
+									  </div>
+									</div>';
+							}
+							//// 2.2.18 - GET payment history list
+							// Send - 
+							// UserID, Invoice_ID
+							// Response -
+							// Invoice PDF
+							$invoiceAPI = GetAptifyData("18", $apis);
+							?>	
 						</tbody>
 					</table>
 				</div>
 			</div>
 		</div>
 	</div>
+	<style type="text/css">
+		.big-screen {
+			width: 62%;
+			margin: auto;
+			min-width: 1190px;
+		}
+		.big-screen .modal-dialog, .big-screen .modal-dialog .modal-content, .big-screen .modal-dialog .modal-content .modal-body, .big-screen iframe {
+			width: 100%;
+			height: 100%;
+		}
+	</style> 
+	<script>
+	$(document).ready(function() {
+		if (window.frames["<?php echo "Iaksbnkvoice".$apis[0]; ?>"] && !window.userSet){
+			//window.userSet = true;
+			
+			<?php 
+				$count = 0;
+				$tt = 0;
+				foreach($apis as $api) {
+					if($count > 30) {
+						$tt++;
+						break;
+					}
+					echo "frames['Iaksbnkvoice".$api."'].location.href='".$invoiceAPI[$count]."';\n";
+					$count++;
+				}
+			?>
+		}
+	});
+	</script>
+	<?php if($tt > 0): ?>
+	<script>
+	$(document).ready(function() {
+		if (window.frames["<?php echo "Iaksbnkvoice".$apis[31]; ?>"] && !window.userSet){
+			window.userSet = true;
+			<?php 
+				$count = 0;
+				foreach($apis as $api) {
+					if($count > 60) {
+						$tt++;
+						echo "window.userSet = false";
+						break;
+					}
+					if($count > 30) {
+						echo "frames['Iaksbnkvoice".$api."'].location.href='".$invoiceAPI[$count]."';\n";
+					}
+					$count++;
+				}
+			?>
+		}
+	});
+	</script>
+	<?php endif; ?>
+	<?php if($tt > 1): ?>
+	<script>
+	$(document).ready(function() {
+		if (window.frames["<?php echo "Iaksbnkvoice".$apis[61]; ?>"] && !window.userSet){
+			window.userSet = true;
+			<?php 
+				$count = 0;
+				foreach($apis as $api) {
+					if($count > 90) {
+						$tt++;
+						echo "window.userSet = false";
+						break;
+					}
+					if($count > 60) {
+						echo "frames['Iaksbnkvoice".$api."'].location.href='".$invoiceAPI[$count]."';\n";
+					}
+					$count++;
+				}
+			?>
+		}
+	});
+	</script>
+	<?php endif; ?>
+	<?php /*if($tt > 2): ?>
+	<script>
+	$(document).ready(function() {
+		if (window.frames["<?php echo "Iaksbnkvoice".$apis[91]; ?>"] && !window.userSet){
+			window.userSet = true;
+			<?php 
+				foreach($apis as $api) {
+					if($count > 90) {
+						echo "frames['Iaksbnkvoice".$api."'].location.href='".$invoiceAPI[$count]."';\n";
+					}
+					$count++;
+				}
+			?>
+		}
+	});
+	</script>
+	<?php endif;*/ ?>
 </div>
  
