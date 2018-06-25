@@ -36,7 +36,7 @@
 						</a>
 					</td>
 					<td>
-						<a href="#about">
+						<a href="renewmymembership">
 						<div class="dashboard-icon">[icon class="fa fa-folder-open fa-3x" link=""][/icon]</div>
 						<br/>
 						<div class="dashboard-button-name">Renew</div>
