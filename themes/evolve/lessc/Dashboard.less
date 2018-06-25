@@ -11,12 +11,12 @@
 	  display:none;
 	}
 
-#block-block-184 #dashboard-right-content, #block-block-243 #dashboard-right-content, #block-block-244 #dashboard-right-content{
+/****#block-block-184 #dashboard-right-content, #block-block-243 #dashboard-right-content, #block-block-244 #dashboard-right-content{
       height: 825px; 
 }
 #block-block-249 #dashboard-right-content{
       height: 825px;
-}
+}*****/
 .focuscss{
     border: 1px solid red!important;
 }
@@ -640,9 +640,10 @@ a.uploadImageButton {
     padding-left: 0px!important;
 	padding-bottom:0px!important;
 }
+/****
 a.add-workplace-join{
     margin-bottom: 10px;
-}
+}*****/
 input[id^="Additional-qualifications"] {
     margin-left: -15px;
     margin-bottom: 15px;
@@ -1002,7 +1003,7 @@ a.add-additional-qualification {
 
  /*--YOUR DETAILS--*/
  #dashboard-right-content{
-    form#your-detail-form{
+    form#your-detail-form, #join-insurance-form2{
         .row{
             margin: 0;
         }
@@ -1023,9 +1024,51 @@ a.add-additional-qualification {
         #workplaceblocks input{
             margin-left: 0;
         }
+		 #additional-qualifications-block{		
+            select{			                
+				width: 100%;		
+            }
+		}
+	}
+    .down3{
+        .add-workplace-join{
+            float: left;
+            margin-bottom: 20px;
+            margin-top: 4px;
+            background-color: @bright-blue;
+            border-width: 0px !important;
+            color: #fff;
+            &:hover{
+                color: #fff;
+                opacity: 0.9;
+                cursor: pointer;
+            }
+        }
     }
- }
-
+	.down4{
+        .add-additional-qualification{
+            float: left;
+            margin-bottom: 20px;
+            margin-top: 4px;
+            background-color: @bright-blue;
+            border-width: 0px !important;
+            color: #fff;
+            &:hover{
+                color: #fff;
+                opacity: 0.9;
+                cursor: pointer;
+            }
+        }
+    }
+	 #join-insurance-form2{
+        label{
+            margin-bottom: 6px;
+            font-weight: 300;
+            padding-left: 20px;
+        }
+        
+    }
+}
  .chosen-container-multi .chosen-choices li.search-choice{
      font-size: 16px;
  }
@@ -1033,5 +1076,8 @@ a.add-additional-qualification {
  .nav>li>a:hover, .nav>li>a:focus{
      background-color: rgba(0,0,0,0);
  }
-
+a#insuranceControl {
+    float: right;
+    height: 38px;
+}
  
