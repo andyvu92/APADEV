@@ -16,10 +16,14 @@ if(isset($_SESSION["UserId"])) {
 	$user = $users["results"][0];
 }
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php'); 
+/* get background image****/
+if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID =0; }
+$background = getBackgroundImage($userID);
+/* get background image****/
 ?>
 <?php if(isset($_SESSION["UserId"])) : ?>
 <div id="cpd" style="display:none"><?php echo $cpd; ?></div>
-<div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
+<div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	window.onresize = function(event) {
@@ -75,7 +79,7 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 	}
 </script>
 <?php include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php'); ?> 
-<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $user['background']; ?>" id="dashboard-right-content">
+<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Hello <?php echo $user["Preferredname"]; ?></strong></span></div>
@@ -84,12 +88,12 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 	<?php
 		include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
 	?>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mobile_line" >
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bottom-space">
+			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 mobile_line" >
 				<table class="table table-responsive bordless">
-					<tbody style="border-top: none;">
+					<tbody class="limit-width" style="border-top: none;">
 						<tr>
-							<td><span style="text-decoration: underline; color:#009fda"><strong>Your details</strong></span></td>
+							<td><span class="med-accent-header"><strong>Your details</strong></span></td>
 						</tr>
 						<tr>
 							<td><strong>Name:</strong></td>
@@ -229,25 +233,22 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 				}
 			});
 			</script>
-			<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mobile_line" >
-				<table class="table table-responsive">
-					<tbody style="border-top: none;">
-						<tr>
-							<td><strong>Years of membership</strong></td>
-							<td><strong><span style="margin-left:15px;">CPD hours</span></strong></td>
-						</tr>
-						<tr>
-							<td><div class="circle"><?php echo $user['Yearmembership']; ?></div></td>
-							<td><div class="circle"><?php echo $cpd; ?></div><div id="donutchart"></div></td>
-						</tr>
-					</tbody>
-				</table>
+			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 mobile_line" >
+				<div class="col-xs-12 center">				 
+					<span class="lead-heading">Your membership</br> snapshot</span>		
+			    </div>
+				<div class="col-xs-6 col-md-6 circle-container">
+					<div class="circle"><span class="number"><?php echo $user['Yearmembership']; ?></span><span class="text">Years of membership</span></div>
+				</div>
+				<div class="col-xs-6 col-md-6 circle-container">
+					<div id="donutchart"></div><span class="number">15</span><span class="text">Years of membership</span>
+				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 mobile_line">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><strong>Your National Groups &gt</strong></div>
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard-content-bottom">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bottom-space bottom-section flex-column">
+			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span class="small-heading">Your National Groups &gt</span></div>
+				<div class="col-xs-12 dashboard-content-bottom">
 					<div id="myCarousel" class="carousel slide" data-ride="carousel">
 					<!-- Indicators 
 					<ol class="carousel-indicators">
@@ -274,17 +275,19 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 						</a>
 					</div>
 				</div>
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><button class="dashboard-button"><span class="dashboard-button-name">Join more &gt</span></button></div>
+				<a class="accent-button" href="#"><span>Join more</span></a>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mobile_line">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><strong>Donate to the PRF &gt</strong></div>
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard-content-bottom"><img src="/sites/default/files/PRF_155x56.png" alt=""></div>
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><button  class="dashboard-button dashboard-bottom-button "><span class="dashboard-button-name">Donate today &gt</span></button></div>
+			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
+				<div class="section-container">
+					<span class="small-heading">Donate to the PRF</span>
+					<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="">
+					<a class="accent-button" href="#"><span>Donate today</span></a>
+				</div>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><strong>Suggestions/feedback &gt</strong></div>
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard-content-bottom">If you have a question or concern, please don’t hesitate to contact us. We’re always looking for ways to improve our member offering.</div>
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><button class="dashboard-button dashboard-bottom-button"><span class="dashboard-button-name">Submit &gt</span></button></div>
+			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
+				<span class="small-heading">Suggestions/feedback</span>
+				<span class="dashboard-content-bottom">If you have a question or concern, please don’t hesitate to contact us. We’re always looking for ways to improve our member offering.</span>
+				<a class="accent-button" href="#"><span>Submit</span></a>
 			</div>
 		</div>
 	</div>
