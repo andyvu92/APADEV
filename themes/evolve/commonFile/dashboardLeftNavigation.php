@@ -9,7 +9,7 @@
 						<a href="dashboard">
 						<div class="dashboard-icon">[icon class="fa fa-tachometer fa-3x" link=""][/icon]</div>
 						<br/>
-						<div class="dashboard-button-name"> Dashboard</div>
+						<div class="dashboard-button-name">Dashboard</div>
 						</a>
 					</td>
 					<td>
@@ -36,7 +36,7 @@
 						</a>
 					</td>
 					<td>
-						<a href="renewmymembership">
+						<a href="#about">
 						<div class="dashboard-icon">[icon class="fa fa-folder-open fa-3x" link=""][/icon]</div>
 						<br/>
 						<div class="dashboard-button-name">Renew</div>
@@ -46,36 +46,42 @@
 			</tbody>
 		</table>
 	</div>
-<!---end---->
+<!---end--->
 	<div class="navbar-collapse collapse">
-		<div class="user-avatar">
-			<img class="ava-circle" src="/sites/all/themes/evolve/user.png"> 
-			<span class="user-name">Eddy Kim</span>
-		</div>
 		<ul class="nav navbar-nav navbar-left">
 			<li class="dashboard-nav">
 				<a href="dashboard">
-					<div class="dashboard-button-name"><i class="fa fa-tachometer"></i> Dashboard</div>
+					<div class="dashboard-icon">[icon class="fa fa-tachometer fa-3x" link=""][/icon]</div>
+					<br/>
+					<div class="dashboard-button-name">Dashboard</div>
 				</a>
 				</li>
 			<li class="dashboard-nav">
 				<a href="your-details">
-					<div class="dashboard-button-name"><i class="fa fa-users"></i> Account</div>
+					<div class="dashboard-icon">[icon class="fa fa-users fa-3x" link=""][/icon]</div>
+					<br/>
+					<div class="dashboard-button-name">Account</div>
 				</a>
 			</li>
 			<li class="dashboard-nav">
 				<a href="your-purchases">
-					<div class="dashboard-button-name"><i class="fa fa-shopping-cart"></i> Purchases</div>
+					<div class="dashboard-icon">[icon class="fa fa-shopping-cart fa-3x" link=""][/icon]</div>
+					<br/>
+					<div class="dashboard-button-name">Purchases</div>
 				</a>
 			</li>
 			<li class="dashboard-nav">
 				<a href="subscriptions">
-					<div class="dashboard-button-name"><i class="fa fa-trophy"></i> Subscriptions</div>
+					<div class="dashboard-icon">[icon class="fa fa-trophy fa-3x" link=""][/icon]</div>
+					<br/>
+					<div class="dashboard-button-name">Subscriptions</div>
 				</a>
 			</li>
 			<li class="dashboard-nav">
 				<a href="#about">
-					<div class="dashboard-button-name"><i class="fa fa-refresh"></i> Renew</div>
+					<div class="dashboard-icon">[icon class="fa fa-folder-open fa-3x" link=""][/icon]</div>
+					<br/>
+					<div class="dashboard-button-name">Renew</div>
 				</a>
 			</li>
 		</ul>

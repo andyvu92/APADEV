@@ -566,7 +566,7 @@ a[class^="your-details-prevbutton"]{
 }
 
 #block-block-220 form label, #block-block-245 form label, #block-block-220 form label, #block-block-249 form label{
-    font-weight:100;
+    font-weight:300;
 }
 #block-block-220 .payment-line, #block-block-245 .payment-line, #block-block-249 .payment-line{    
 	border-top: 1px solid white;
@@ -673,7 +673,7 @@ a.add-additional-qualification {
     display:none;
 }
 .autoscroll{
-   overflow-y: scroll;
+   overflow-y: unset;
 
 }
 .fade {
@@ -717,7 +717,7 @@ a.add-additional-qualification {
 
 /*--PREDEFINED COLOURS--*/
 @light-background: rgb(242, 243, 244);
-@light-transparent-background: rgba(255, 255, 255, 0.95);
+@light-transparent-background: rgba(255, 255, 255, 0.9);
 @dark-background: rgb(94, 96, 103);
 @dark-transparent-background: rgba(94, 96, 103, 0.8);
 @bright-blue: rgb(0, 159, 218);
@@ -931,7 +931,7 @@ a.add-additional-qualification {
 	}
 }
 
-.dexp-section.SocialIcons, .sticky-wrapper{
+.dexp-section.SocialIcons, .sticky-wrapper .dexp-section .container{
 	.contained;
 }
 
@@ -1003,6 +1003,31 @@ a.add-additional-qualification {
 
  /*--YOUR DETAILS--*/
  #dashboard-right-content{
+  #tabmenu li a{		
+	        padding: 10px 15px;		
+	        font-weight: 600;		
+	    }		
+			
+	    input, select{		
+	        min-height: 48px;		
+	        font-size: 16px;		
+	        background: #fff;		
+	        border-radius: 0;		
+	        color: #000;		
+	    }		
+			
+	    input[type=checkbox], input[type=radio]{		
+	        min-height: 0;		
+	        margin-right: 10px;		
+	    }		
+			
+	    input{		
+	        margin-left: 0;		
+	    }		
+			
+	    select{		
+	        width: 100%;		
+	    }
     form#your-detail-form, #join-insurance-form2{
         .row{
             margin: 0;
@@ -1014,21 +1039,7 @@ a.add-additional-qualification {
             margin-bottom: 6px;
             font-weight: 300;
         }
-        input, select{
-            min-height: 48px;
-            font-size: 16px;
-            background: #fff;
-            border-radius: 0;
-            color: #000;
-        }
-        #workplaceblocks input{
-            margin-left: 0;
-        }
-		 #additional-qualifications-block{		
-            select{			                
-				width: 100%;		
-            }
-		}
+        
 	}
     .down3{
         .add-workplace-join{
