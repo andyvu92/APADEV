@@ -140,6 +140,7 @@
 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 searchds"><a target="_blank">Event registeration form</a></div>
 </form>
 </div>
+<?php logRecorder(); ?>
  <script type="text/javascript">
 	  jQuery(document).ready(function($) {
 		   $(".chosen-select").chosen({width: "100%"});
@@ -167,4 +168,5 @@
 
 
 </script>
+<?php logRecorder(); ?>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>

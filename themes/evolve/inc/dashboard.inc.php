@@ -298,3 +298,4 @@ $background = getBackgroundImage($userID);
 	?>
 <p>please log-in to use this page</p>
 <?php endif; ?>
+<?php logRecorder(); ?>

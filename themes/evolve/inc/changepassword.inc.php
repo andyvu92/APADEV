@@ -228,3 +228,4 @@ if(isset($_SESSION["Log-in"])) : ?>
 <?php 	else: ?>
 	<p>not logged in</p>
 <?php endif; ?>
+<?php logRecorder(); ?>

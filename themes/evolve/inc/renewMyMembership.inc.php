@@ -68,6 +68,7 @@ $background = getBackgroundImage($userID);
 		</div>
 	</div>
 </div>
+<?php logRecorder(); ?>
 <div id="privacypolicyWindow" style="display:none;">
 	<h3>APA privacy policy</h3>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  

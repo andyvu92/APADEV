@@ -238,9 +238,9 @@ function PDSaveCoupon($userID, $type, $Coupon){
 	$shoppingcartSave->execute();
 	$shoppingcartSave= null;               
 	} catch (PDOException $e) {
-	print "Error!: " . $e->getMessage() . "<br/>";
-	die();
-}
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}
 }
 function getBackgroundImage($userID){
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
@@ -266,6 +266,9 @@ function getBackgroundImage($userID){
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
 	}	
+	
+}
+function MtypeContent($Only,$type) {
 	
 }
 ?>

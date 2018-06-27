@@ -35,6 +35,7 @@
 	}
 	echo "<div class='TTTTT'>click here!</div>";
 ?>
+<?php logRecorder(); ?>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 	if($(".TokenExist").text() == "1") {

@@ -291,3 +291,4 @@ function move(input) {
 	</div>
 </div>
 <!--/div-->
+<?php logRecorder(); ?>

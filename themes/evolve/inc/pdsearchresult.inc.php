@@ -247,7 +247,7 @@ echo "</div>";
 	<div class="pageItemBottom"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $numResult+1;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $numResult+$numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
 <?php /*****************************end right item*************/?>
 </div>
-
+<?php logRecorder(); ?>
 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3"><img alt="" src="/sites/default/files/SKINS%20280x600.png" style="width: 260px;" /></div>
 <script type="text/javascript">
 	function pagesize(selectObject) {

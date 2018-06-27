@@ -79,4 +79,5 @@ if(count($PostArray) == 0) { // Just GET data
 		?>
 	</tbody>
 </table>
+<?php logRecorder(); ?>
 <div class="NGpriceT" style="display: none;"></div>

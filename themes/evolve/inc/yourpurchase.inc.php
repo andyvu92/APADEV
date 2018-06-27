@@ -106,6 +106,7 @@ $products = $product["Orders"]
 			</div>
 		</div>
 	</div>
+	<?php logRecorder(); ?>
 	<style type="text/css">
 		.big-screen {
 			width: 62%;
