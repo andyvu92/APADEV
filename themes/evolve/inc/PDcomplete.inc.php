@@ -80,6 +80,7 @@ if(isset($_POST["Invoice_ID"])) {
 	$GetPDF = GetAptifyData("18", $User);
 }
 ?>
+<?php logRecorder();  ?>
 <h2>Thank you for your purchase</h2>
 <p>We hope you enjoy your event.</p>
 

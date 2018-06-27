@@ -145,6 +145,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 		</div>
 	</div>
 </div>
+<?php logRecorder();  ?>
 <!--  this part will be merged with Andy's Dashboard less file-->
 <style>
 div#insuranceTermsandConditions {

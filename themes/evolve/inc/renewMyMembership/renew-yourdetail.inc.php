@@ -1351,7 +1351,8 @@ a Fellow of the Australian College of Physiotherapists, you must tick this box.<
 				</div>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
 		</div>
-</form>   
+</form>  
+<?php logRecorder();  ?> 
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 	$(".chosen-select").chosen({width: "100%"});

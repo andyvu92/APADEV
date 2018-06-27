@@ -3218,7 +3218,8 @@ if (!isset($_SESSION['UserId'])):
     </form>
 <?php
 endif;
-?>        
+?> 
+<?php logRecorder();  ?>       
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $(".chosen-select").chosen({width: "100%"});

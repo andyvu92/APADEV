@@ -1935,8 +1935,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6">
-						<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date" required maxlength="4">
+					<div class="col-lg-12">
+						<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire month and year(4 digits eg:1225)" required maxlength="4">
 					</div>
 				</div>
 				<div class="row"> 
@@ -2014,6 +2014,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 	</div>
 	</div>
 </div>
+<?php logRecorder();  ?>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$('#workplace').click(function(){

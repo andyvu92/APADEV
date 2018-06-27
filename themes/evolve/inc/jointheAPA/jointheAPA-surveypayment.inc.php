@@ -286,3 +286,4 @@ if(isset($_POST['step2-1'])) {
 	</div>
 </form>
 <form id="tempform" action="" method="POST"><input type="hidden" name="goI"></form>	
+<?php logRecorder();  ?>

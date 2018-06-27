@@ -447,6 +447,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 	</div>
 </div>
 <?php endif;?>
+<?php logRecorder();  ?>
 <!--  this part will be merged with Andy's Dashboard less file-->
 <style>
 div#schedulePOPUp {

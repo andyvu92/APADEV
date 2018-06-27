@@ -396,3 +396,4 @@ div#schedulePOPUp {
 }
 </style>
 <!--  this part will be merged with Andy's Dashboard less file-->	
+<?php logRecorder();  ?>
