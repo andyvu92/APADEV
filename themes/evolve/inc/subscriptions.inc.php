@@ -148,8 +148,8 @@ if(count($PostArray) == 0) { // GET data
 	// Response -
 	// Response, List of subscriptions and it's T/F values.
 	$subscriptions = GetAptifyData("24", $ArrayReturn);
-	
 }
+logRecorder();
 ?>
 <div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
 <?php include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php'); ?>

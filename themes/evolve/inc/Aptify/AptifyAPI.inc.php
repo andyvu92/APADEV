@@ -619,4 +619,177 @@ function curlRequest($API, $type, $variables) {
 	return $JSONreturn;
 }
 
+function logTransaction($APINum, $Sent, $Got) {
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	$profile = $dbt->prepare('INSERT INTO logprofile (userID, text) VALUES (:userID, :text)');	
+	
+	$txt = "UserID: ";
+	if(isset($_SESSION["UserId"])) {
+		$profile->bindValue(':userID', $_SESSION["UserId"]);
+		$txt .= $_SESSION["UserId"]."\n";
+	} else {
+		$profile->bindValue(':userID', NULL);
+		$txt .= "Null\n";
+	}
+	$txt .= "Date/time: ".date("Y-m-d h-i-s")."\n";
+	$txt .= "Web Service No: ".$APINum."\n";
+	$txt .= "Date Sent: \n";
+	$txt .= $Sent."\n";
+	$txt .= "Data Received: \n";
+	$txt .= $Got."\n";
+	$txt .= "---End of Log (".date("Y-m-d h-i-s").")---\n\n\n\n\n";
+	
+	$profile->bindValue(':text', $txt);		  
+	
+	// log file output.
+	$profile->execute();	
+	$profile->closeCursor();
+	$profile = null;
+	$dbt = null;
+}
+
+/** Log record start / end
+  * Records log when sent TRUE.
+  * When start - Use
+  *
+  *
+  *
+  */
+function logRecorder() {
+	/* load log file and prepare for new data */
+	$sizeByte = intval(filesize("sites/Log/APA_Aptify_Communication.log"));
+	$size = FileSizeConvert($sizeByte);
+	//echo "size: ".$size." // ".filesize("sites/Log/APA_Aptify_Communication.log")."<br />";
+	if($sizeByte > 1000000) {
+		fileloop();
+	}
+	$fileContinue = "";
+	if(file_exists("sites/Log/APA_Aptify_Communication.log")){ // Check If File Already Exists
+		$myfilet = fopen("sites/Log/APA_Aptify_Communication.log", "r");
+		$fileContinue = fread($myfilet,filesize("sites/Log/APA_Aptify_Communication.log"));
+		//echo "Yo: ".$fileContinue."!<br />";
+		fclose($myfilet);
+	}
+	/* load logged records to a single text */
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	$profileFinal= $dbt->prepare('SELECT * FROM logprofile WHERE userID= :userID');	
+	if(isset($_SESSION["UserId"])) {
+		$profileFinal->bindValue(':userID', $_SESSION["UserId"]);
+		$Mdelete = $dbt->prepare('DELETE FROM logprofile WHERE userID = '.$_SESSION["UserId"].'');
+	} else {
+		$profileFinal->bindValue(':userID', NULL);
+		$Mdelete = $dbt->prepare('DELETE FROM logprofile WHERE userID = NULL');
+	}
+	$profileFinal->execute();
+	$finalLog = "";
+	foreach($profileFinal as $profiles) {
+		$finalLog .= $profiles[1];
+		//echo $profiles[1];
+	}
+	/* add final version of log record to existing log file */
+	$myfile = fopen("sites/Log/APA_Aptify_Communication.log", "w");
+	// log:
+	// UserID, Date/Time, Data Sent,
+	// Data Received, Web service Number
+	fwrite($myfile, $fileContinue);
+	fwrite($myfile, $finalLog);
+	fclose($myfile);
+	
+	$Mdelete->execute();
+	/* close connection */
+	$Mdelete->closeCursor();
+	$Mdelete = null;
+	$profileFinal->closeCursor();
+	$profileFinal = null;
+	$dbt = null;
+}
+
+// push file names' number increased by 1.
+function fileloop() {
+	echo "in!!!";
+	$num = count(scandir('sites/Log/')) - 2;
+	$num = str_pad($num, 5, "0", STR_PAD_LEFT);
+	echo "<br>Num:$num<br><br>";
+	$arrayT = array();
+	if($handle = opendir('sites/Log/')) {
+		while (false !== ($fileName = readdir($handle))) {
+			array_push($arrayT, $fileName);			
+		}
+		closedir($handle);
+	}
+	arsort($arrayT);
+	foreach($arrayT as $fileName) {
+		
+		if(strlen($fileName) > 2 ) {
+			echo $fileName." - iiiinnnnn!!!<br />";
+			if($fileName == "APA_Aptify_Communication.log") {
+				$newName = str_replace("APA_Aptify_Communication.log","APA_Aptify_Communication00001.log",$fileName);
+			} else {
+				$Nnum = $num - 1;
+				$Nnum = str_pad($Nnum, 5, "0", STR_PAD_LEFT);
+				$newName = str_replace((string)$Nnum,(string)$num,$fileName);
+			}
+			echo "before:$num";
+			$num--;
+			$num = str_pad($num, 5, "0", STR_PAD_LEFT);
+			echo "after:$num";
+			echo "new Name: ".$newName."<br />";
+			if(!file_exists("sites/Log/".$newName)){ // Check If File Already Exists
+				if(rename("sites/Log/".$fileName, "sites/Log/".$newName)){ // Check If rename Function Completed Successfully
+					echo "Successfully Renamed $fileName to $newName<br />" ;
+				}else{
+					echo "There Was Some Error While Renaming $fileName<br />" ;
+				}
+			}else{
+				echo "A File With The New File Name Already Exists<br />" ;
+			}
+		}
+	}
+}
+
+
+/** 
+* Converts bytes into human readable file size. 
+* 
+* @param string $bytes 
+* @return string human readable file size (2,87 Мб)
+* @author Mogilev Arseny 
+*/
+function FileSizeConvert($bytes)
+{
+    $bytes = floatval($bytes);
+        $arBytes = array(
+            0 => array(
+                "UNIT" => "TB",
+                "VALUE" => pow(1024, 4)
+            ),
+            1 => array(
+                "UNIT" => "GB",
+                "VALUE" => pow(1024, 3)
+            ),
+            2 => array(
+                "UNIT" => "MB",
+                "VALUE" => pow(1024, 2)
+            ),
+            3 => array(
+                "UNIT" => "KB",
+                "VALUE" => 1024
+            ),
+            4 => array(
+                "UNIT" => "B",
+                "VALUE" => 1
+            ),
+        );
+
+    foreach($arBytes as $arItem)
+    {
+        if($bytes >= $arItem["VALUE"])
+        {
+            $result = $bytes / $arItem["VALUE"];
+            $result = str_replace(".", "," , strval(round($result, 2)))." ".$arItem["UNIT"];
+            break;
+        }
+    }
+    return $result;
+}
 ?>
