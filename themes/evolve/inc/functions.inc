@@ -287,6 +287,7 @@ function getBackgroundImage($userID){
  */
 function MtypeContent($Only, $type) {
 	$MemberOnly = ((array)$Only['#items'][0]["taxonomy_term"])['name'];
+	echo $MemberOnly;
 	$content = ((array)$Only['#object'])["body"]['und'];
 	if($MemberOnly == "Full") {
 		//echo "F";

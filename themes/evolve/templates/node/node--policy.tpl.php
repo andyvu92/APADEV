@@ -80,7 +80,9 @@
 */
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large policybottom" <?php print $attributes; ?>>
-	  <div class="post-img media">
+	<?php $result = MtypeContent($content['field_member_content_type'],$content['field_member_type_list']); ?>
+	<?php if ($result == "0") : ?>
+		<div class="post-img media">
       <div class='mediaholder'>
         <?php print render($content['field_policyimage']);?>
       </div>
@@ -108,22 +110,6 @@
         hide($content['links']);
         print render($content['body']);
         ?>
-		<h4>type</h4>
-		<?php print render($content['field_member_type_list']);?>
-		<?php 
-			$result = MtypeContent($content['field_member_content_type'],$content['field_member_type_list']);
-			if ($result == "0") {
-				echo "full content!";
-			} elseif($result == "1") {
-				echo "members only!";
-			} elseif($result == "3") {
-				echo "member, but not eligible!";
-			} else {
-				print_r($result);
-			}
-		?>
-		<h4>content</h4>
-		<?php print render($content['field_member_content_type']);?>
 	</div>
 	<div class="block policyright contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
 		<h3 class="headline">Our Work</h3>
@@ -139,12 +125,36 @@
 				<li><strong>Submissions</strong></li>
 				<li><strong>Ongoing work</strong></li>
 				<li>If you would like information on past position statements, background papers, elections and budgets, please email policy@physiotherapy.asn.au</li>
-</ul>
+			</ul>
 			</div>
 		  
 		</div></div></div>
 	</div>
 	</section>
-  
+	<?php elseif($result == "1"): ?>
+		<?php   
+			$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+			$base_path = base_path();
+			$imgLink = $link.$base_path."sites/default/files/Member-access-page.png"; 
+            echo "<img src='".$imgLink."'/>";
+		?>
+		
+	<?php elseif($result == "2"): ?>
+		 <?php print render($content['field_policyimage']);?>
+	<?php elseif($result == "3"): ?>
+		<?php echo "member, but not eligible!"; ?>
+	<?php else: ?>
+		<?php if ($result[0] == "0") : ?>
+			<?php echo "!!"; ?>
+		<?php elseif ($result[0] == "3") : ?>
+		
+			<?php print_r($result[1]); ?>
+		<?php elseif($result == "2"): ?>
+			<?php // Non-member. ?>
+			<?php print_r($result[1]); ?>
+		<?php elseif($result == "3"): ?>
+			<?php echo "member, but not eligible!"; ?>
+		<?php endif; ?>
+	<?php endif; ?>
 </div> 
 
