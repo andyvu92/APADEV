@@ -268,7 +268,103 @@ function getBackgroundImage($userID){
 	}	
 	
 }
-function MtypeContent($Only,$type) {
-	
+
+/**
+ *  Member only content display controller.
+ *  
+ *  $Only -> field_member_content_type
+ *  $type -> field_member_type_list
+ *
+ *  output
+ *  0 (no content limit)
+ *  1 (no content, not logged in)
+ *  2 (no content, non-member)
+ *  3 (member, type not matched)
+ *
+ *  when return summary, return
+ *  [number,summary]
+ *  number = see as above
+ */
+function MtypeContent($Only, $type) {
+	$MemberOnly = ((array)$Only['#items'][0]["taxonomy_term"])['name'];
+	$content = ((array)$Only['#object'])["body"]['und'];
+	if($MemberOnly == "Full") {
+		//echo "F";
+		return "0";
+	} elseif($MemberOnly == "Members only") {
+		/*
+		echo "M";
+		echo "<br>MemberTypeID->".$_SESSION['MemberTypeID'];
+		echo "<br>MemberType->".$_SESSION['MemberType'];
+		echo "<br>Status->".$_SESSION['Status'];
+		echo "<br>Type:";
+		*/
+		$Mtype = ((array)$type['#items']);
+		//print_r($Mtype);
+		$login = loggedInStatus();
+		if($login == "3") { // member
+			if (!empty($Mtype)) { // if type filter is there
+				foreach($Mtype as $types) {
+					$ty = ((array)$types['taxonomy_term'])['name'];
+					if(strpos($_SESSION['MemberType'], $ty) !== false) {
+						return "0";
+					}
+				}
+				return "3";
+			}
+			// no filter. show full content.
+			return "0";
+		} else { // non-member or not logged in
+			return $login;
+		}
+		echo "<br>";
+	} else {
+		/*
+		echo "S";
+		echo "<br>MemberTypeID->".$_SESSION['MemberTypeID'];
+		echo "<br>MemberType->".$_SESSION['MemberType'];
+		echo "<br>Status->".$_SESSION['Status'];
+		echo "<br>Type:";
+		*/
+		$Mtype = ((array)$type['#items']);
+		//print_r($Mtype);
+		echo "<br>";
+		$login = loggedInStatus();
+		if($login == "3") { // member
+			if (!empty($Mtype)) { // if type filter is there
+				foreach($Mtype as $types) {
+					$ty = ((array)$types['taxonomy_term'])['name'];
+					if(strpos($_SESSION['MemberType'], $ty) !== false) {
+						return "0";
+					}
+				}
+				return ["3",$content[0]['summary']];
+			}
+			// no filter. show full content.
+			return "0";
+		} else { // non-member or not logged in
+			return [$login, $content[0]['summary']];
+		}
+	}
+}
+
+/**
+ *  loggedInStatus
+ *   - help "MtypeContent" function to return user status
+ *  output
+ *  1 (not logged in)
+ *  2 (non-member)
+ *  3 (member)
+ */
+function loggedInStatus() {
+	if(isset($_SESSION['Log-in'])) {
+		if(isset($_SESSION['Status']) && $_SESSION['Status'] == "1") {
+			return "3";
+		} else {
+			return "2";
+		}
+	} else {
+		return "1";
+	}
 }
 ?>

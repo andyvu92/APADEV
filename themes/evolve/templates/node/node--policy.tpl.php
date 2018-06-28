@@ -108,6 +108,22 @@
         hide($content['links']);
         print render($content['body']);
         ?>
+		<h4>type</h4>
+		<?php print render($content['field_member_type_list']);?>
+		<?php 
+			$result = MtypeContent($content['field_member_content_type'],$content['field_member_type_list']);
+			if ($result == "0") {
+				echo "full content!";
+			} elseif($result == "1") {
+				echo "members only!";
+			} elseif($result == "3") {
+				echo "member, but not eligible!";
+			} else {
+				print_r($result);
+			}
+		?>
+		<h4>content</h4>
+		<?php print render($content['field_member_content_type']);?>
 	</div>
 	<div class="block policyright contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
 		<h3 class="headline">Our Work</h3>
