@@ -462,6 +462,7 @@ jQuery(document).ready(function($) {
     });
 	$('#createAccount').click(function(){
 		$( "#signupWebUser" ).dialog();
+		$( "#loginPopWindow" ).dialog('close');
     });
 	$('#login').click(function(){
 		$( "#loginPopWindow" ).dialog();
