@@ -337,7 +337,7 @@ if($resultdata['result']) {
 		if(isset($_POST['Mailing-postcode'])){ $postData['Mailing-postcode'] = $_POST['Mailing-postcode']; }else {$postData['Mailing-postcode'] = $details['Mailing-postcode'];}
 		if(isset($_POST['Mailing-State'])){ $postData['Mailing-state'] = $_POST['Mailing-State']; } else {$postData['Mailing-state'] = $details['Mailing-state'];}
 		if(isset($_POST['Mailing-country'])){ $postData['Mailing-country'] = $_POST['Mailing-country']; } else {$postData['Mailing-country'] = $details['Mailing-country'];}
-		if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid']; }
+		if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid']; } else {$postData['Memberid'] = $details['Memberid'];}
 		if(isset($_POST['Ahpranumber'])){ $postData['Ahpranumber'] = $_POST['Ahpranumber']; }else {$postData['Ahpranumber'] = $details['Ahpranumber'];}
 		if(isset($_POST['Branch'])){ $postData['Branch'] = $_POST['Branch']; }else {$postData['Branch'] = $details['PreferBranch'];}
 		$postData['Regional-group'] =$details['Regional-group'];
@@ -559,6 +559,7 @@ if($resultdata['result']) {
 			}
 			else{
 				echo '<a id="login">Login to see your status</a>';
+				//echo '<a class="info" data-target="#loginAT" data-toggle="modal" type="button">Login to see your status</a>';
 			}
 		 
 		 ?>
@@ -569,10 +570,10 @@ if($resultdata['result']) {
 		 <?php 
 		     
 		 
-		 if(isset($userId)&& ($userId!=0)){
+		 if(isset($_SESSION["UserId"])){
 			 //$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
 	         $userTag = checkPDUser($_SESSION['MemberTypeID']);
-			 if ($userTag =="1"){
+			 if ($userTag =="0"){
 				    echo '<a class="dashboard-button dashboard-bottom-button your-details-submit addCartButton" id="registerPDUserButton" style="float:right;">Add to cart</a><br>  
 						<br>';
 					
@@ -627,10 +628,13 @@ if($resultdata['result']) {
 		<div  id="loginPopWindow" >
 			<form name="signInForm" method="POST" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>">
 				 <p style="color: #009FDA !important;">I’m a member. Please sign in below:</p>
-				 <input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
-				 <input type="password" class="form-control"  name="Password"  placeholder="Password"><br>
+				<!--<input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
+				 <input type="password" class="form-control"  name="Password"  placeholder="Password"><br>-->
+				<input name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" />
+				<input placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" />
+				<p><input type="checkbox" name="remember"  <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> /><label for="remember">Remember me</label><a class="forgotPS" data-dismiss="modal" data-toggle="modal" data-target="#passwordReset" >Forgot password?</a></p>
 				 <p style="color: #009FDA !important;">I am not a member. <a id="createAccount">Create an account.</a></p>
-				 <p>Forgotten your email address or password?<a href="" target="_blank">&nbsp;Click here</a> to reset your login details</p>
+				
 				  <input type="submit" value="Sign in">
 			</form>
        
@@ -1297,7 +1301,7 @@ if($resultdata['result']) {
 		  
 		 if($('#popUp').text()!='0' && $('#popUp').text()!='3'){
 		   var x = $('#popUp').text();
-		   $( "#registerPDUser" ).dialog();
+		   //$( "#registerPDUser" ).dialog();
 		    $('[class^=down]:not(.down'+x+')').slideUp(400);
 	      $('.down' + x).slideToggle(450);
 	   }
