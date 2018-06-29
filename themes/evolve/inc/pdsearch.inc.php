@@ -7,8 +7,13 @@
 	// Request, NGID(optional)
 	// Response -
 	// National Group ID, National Group title and National Group Price
-	$sendData["UserID"] = $_SESSION['UserId'];
+	if(isset($_SESSION['UserID'])) {
+		$sendData["UserID"] = $_SESSION['UserId'];
+	} else {
+		$sendData["UserID"] = "-1";
+	}
 	$details = GetAptifyData("19", $sendData);
+	//print_r($details);
 ?>
 <form action="pd-search?search-result" method="POST">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

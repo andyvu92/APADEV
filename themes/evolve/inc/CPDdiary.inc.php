@@ -271,11 +271,11 @@ function move(input) {
 		<div class="modal-body">
 			<input type="hidden" name="nonAPA" value="1" placeholder="" id="hidden">
 			<label for="DateNA">Date</label>
-			<input type="text" required="true" name="Date" placeholder="" id="DateNA">
+			<input type="date" required="true" name="Date" placeholder="" id="DateNA">
 			<label for="DescripotionNA">Description</label>
 			<input type="text" required="true" name="Description" placeholder="" id="Description">
 			<label for="TimeNA">Time</label>
-			<input type="text" required="true" name="Time" placeholder="" id="TimeNA">
+			<input type="number" required="true" name="Time" placeholder="" id="TimeNA">
 			<label for="ProviderNA">Provider</label>
 			<input type="text" required="true" name="Provider" placeholder="" id="ProviderNA">
 			<label for="ReflectionNA">Reflection</label>

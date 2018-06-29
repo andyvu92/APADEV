@@ -155,7 +155,7 @@ if(isset($_SESSION["Log-in"])) : ?>
 		   <div class="changePassword">
 			  <div class="row">
 				 <div class="col-lg-6">
-					<input type="password" class="form-control" placeholder="Current password" value="" name="Password">
+					<input type="password" class="form-control" placeholder="Current password" id="Cpassword" value="" name="Password">
 				 </div>
 			  </div>
 			  <div class="row">
@@ -181,48 +181,53 @@ if(isset($_SESSION["Log-in"])) : ?>
 </div>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script type="text/javascript">
-   jQuery(document).ready(function($) {
-           
-	 $("#changePasswordForm").validate({
-    
-        rules: {
-              Password:{
-                required: true,
-           },
-              New_password: {
-                required: true,
-                minlength: 5
+jQuery.validator.addMethod("notEqualTo", function(v, e, p) {  
+    return this.optional(e) || v != p;
+  }, "Your password must be different from existing password");
+jQuery(document).ready(function($) {
+      $("#New_password").on("keyup",function() {
+        if($("#New_password").val() == $("#Cpassword").val()) {
+          console.log("same!");
+          $("#New_password").after('<label for="New_password" generated="true" class="errorNP" style="display: block !important;">Your password must be different from existing password</label>');
+        } else {
+          $(".errorNP").detach();
+          console.log("Not same!");
+        }
+      });
+      $("#changePasswordForm").validate({
+          rules: {
+                Password:{
+                  required: true,
             },
-         
+            New_password: {
+                  required: true,
+                  minlength: 5
+            },
             Confirm_password: {
-                required: true,
-                minlength: 5,
-                equalTo: "#New_password"
-               
-            },
-           
-        },
-      
-        messages: {
-           Password:{
-               required:"Please enter your current password",
-           },
-           New_password: {
-                required: "Please enter a new password",
-                minlength: "Your password must be at least 5 characters long",
-            },
-         
-           Confirm_password: {
-                required: "Please confirm your password",
-                minlength: "Your password must be at least 5 characters long",
-                equalTo:"Please enter the same password",
-            },
-         
-        },
+                  required: true,
+                  minlength: 5,
+                  equalTo: "#New_password"
+            }
+            
+          },
         
-      
-    }); 
-   });
+          messages: {
+            Password:{
+                required:"Please enter your current password"
+            },
+            New_password: {
+                  required: "Please enter a new password",
+                  minlength: "Your password must be at least 5 characters long"
+              },
+          
+            Confirm_password: {
+                  required: "Please confirm your password",
+                  minlength: "Your password must be at least 5 characters long",
+                  equalTo:"Please enter the same password"
+              }
+          }
+      }); 
+});
 </script>
 <?php endif; ?>
 <?php 	else: ?>

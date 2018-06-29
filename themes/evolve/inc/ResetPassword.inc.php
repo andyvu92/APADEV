@@ -23,7 +23,9 @@
 		print_r($output);
 		// todo
 		if($output["success"] == 1 ||$output["success"] == "1") {
-			
+			// success
+		} else {
+			// when failed
 		}
 		echo "<h1>Password update success!!</h1>";
 		echo "<p>Please wait..</p>";
@@ -36,24 +38,25 @@
 	echo "<div class='TTTTT'>click here!</div>";
 ?>
 <?php logRecorder(); ?>
+<script>
+	function checkPasswordFunction(Password) {
+		if($('#newPassword').val()!= Password){
+			$('#checkPasswordMessage').html("Please confirm your password is same");
+			$( "#Password" ).focus();
+			$("#Password").css("border", "1px solid red");
+			$(".join-details-button2").addClass("display-none");
+			
+		}
+		else{
+			$('#checkPasswordMessage').html("");
+			$( "#Password" ).blur();
+			$("#Password").css("border", "");
+			$(".join-details-button2").removeClass("display-none");
+		}                    
+	}
+</script>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
-	if($(".TokenExist").text() == "1") {
-		/*
-		setTimeout(function() {
-		  window.location.href = "/";
-		}, 1500);
-		*/
-	} else if($(".TokenExist").text() == "2") {
-		/*
-		setTimeout(function() {
-		  window.location.href = "/";
-		}, 1500);
-		*/
-	};
-	$(".TTTTT").click(function(){
-	    window.location.href = "/";
-	});
 	$("#NewPass").validate({
         rules: {
 			NPassword: {

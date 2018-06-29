@@ -9,7 +9,6 @@
 	
 	// log-in
 	if(isset($_POST["id"])) {
-		//echo $_POST["id"] . " / " . $_POST["password"];4
 		if(!empty($_POST["remember"])) {
 			setcookie ("member_login",$_POST["id"],time()+ (10 * 365 * 24 * 60 * 60));
 			setcookie ("member_password",$_POST["password"],time()+ (10 * 365 * 24 * 60 * 60));
@@ -128,8 +127,8 @@
 		<div class="form-container">
 			<h4 class="modal-title">Sign in to your account</h4>
 			<form method="POST" action="<?php echo $url; ?>" name="forLogin">
-				<input id="id" name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" />
-				<input id="password" placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" />
+				<input id="id" name="id" placeholder="Email address" type="email" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" />
+				<input id="password" placeholder="Password" name="password" type="password" required value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" />
 				<input type="submit" value="Login" />
 				<p><input type="checkbox" name="remember" id="remember" <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> /><label for="remember">Remember me</label><a class="forgotPS" data-dismiss="modal" data-toggle="modal" data-target="#passwordReset" >Forgot password?</a></p>
 			</form>
