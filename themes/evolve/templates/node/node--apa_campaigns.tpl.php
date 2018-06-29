@@ -79,16 +79,12 @@
 * @ingroup themeable
 */
 ?>
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large policybottom" <?php print $attributes; ?>>
+<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix" <?php print $attributes; ?>>
 	<?php $result = MtypeContent($content['field_member_content_type'],$content['field_member_type_list']); ?>
-	<?php if ($result == "0") : ?>
-		<div class="post-img media">
-      <div class='mediaholder'>
-        <?php print render($content['field_policyimage']);?>
-      </div>
-    </div>
-	<section class="post-content">
-    
+	
+	<?php if ($result == "0"): ?>
+	
+		
 	<?php /*
 	use this header as reference, but delete at the end
 	<header class="meta">
@@ -101,45 +97,32 @@
 		   <?php print $title; ?></a></h2>
     </header>
 		*/ ?>
-	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-9 col-lg-9">
-		<h1 class="SectionHeader"><?php print render($content['field_contenttitle']);?></h1>
+	
+	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	    
+		<h1 class="SectionHeader"><?php print $node->title;?></h1>
 		<div class="brd-headling">&nbsp;</div>
+		<div class="content">	
+			<?php print render($content['field_campaignimage']);?>
+		</div>
 	  <?php
         // We hide the comments and links now so that we can render them later.
         hide($content['comments']);
         hide($content['links']);
         print render($content['body']);
         ?>
+	
 	</div>
-	<div class="block policyright contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
-		<h3 class="headline">Our Work</h3>
-		<span class="brd-headling"></span>
-		<div class="content">
-		<div class="view view-current-apa-campaign view-id-current_apa_campaign view-display-id-block_1 view-dom-id-32635ceaef40fd2d990939d49ac29284">
-		<div class="view-content">
-		  
-			<div class="dexp-grid-items row">
-			<ul>
-				<li><strong>Priorities</strong></li>
-				<li style="border-bottom:none !important" class="PrioritiesSidebar"><?php echo views_embed_view('our_priorities', 'block_1');?></li>
-				<li><strong>Submissions</strong></li>
-				<li><strong>Ongoing work</strong></li>
-				<li>If you would like information on past position statements, background papers, elections and budgets, please email policy@physiotherapy.asn.au</li>
-			</ul>
-			</div>
-		  
-		</div></div></div>
-	</div>
-	</section>
-	<?php elseif($result == "1"): $url =  "{$_SERVER['REQUEST_URI']}";?>
+	
+
+    <?php elseif($result == "1"): $url =  "{$_SERVER['REQUEST_URI']}";?>
 		<form method="POST" action="<?php echo $url; ?>" name="forLogin">
 			<input  name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" />
 			<input  placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" />
 			<input type="submit" value="Login" />
 		</form>
 	<?php elseif($result == "2"): ?>
-		<?php
-				
+		<?php   
 			$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 			$base_path = base_path();
 			$imgLink = $link.$base_path."sites/default/files/Member-access-page.png"; 
@@ -149,7 +132,7 @@
 		<?php echo "member, but not eligible!"; ?>
 	<?php else: ?>
 		<?php if ($result[0] == "0") : ?>
-			<?php echo "!!"; ?>
+			<?php echo "!!!!"; ?>
 		<?php elseif ($result[0] == "3") : ?>
 		
 			<?php print_r($result[1]); ?>
@@ -159,7 +142,7 @@
 			$base_path = base_path();
 			$imgLink = $link.$base_path."sites/default/files/Member-access-page.png"; 
             echo "<img src='".$imgLink."'/>";
-		?>
+		    ?>
 			<?php print_r($result[1]); ?>
 		<?php elseif($result == "3"): ?>
 			<?php echo "member, but not eligible!"; ?>

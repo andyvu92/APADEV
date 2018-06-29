@@ -359,10 +359,10 @@ function MtypeContent($Only, $type) {
  */
 function loggedInStatus() {
 	if(isset($_SESSION['Log-in'])) {
-		if(isset($_SESSION['Status']) && $_SESSION['Status'] == "1") {
-			return "3";
-		} else {
+		if(isset($_SESSION['MemberTypeID']) && $_SESSION['MemberTypeID'] == "1") {
 			return "2";
+		} else {
+			return "3";
 		}
 	} else {
 		return "1";
