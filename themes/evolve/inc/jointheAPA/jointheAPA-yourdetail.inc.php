@@ -1076,7 +1076,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['Memberid'] . '"';
     }
-?>>
+?> readonly>
                 </div>
                 
                 <div class="col-xs-12 col-md-6">

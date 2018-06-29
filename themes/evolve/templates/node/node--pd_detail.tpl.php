@@ -337,7 +337,7 @@ if($resultdata['result']) {
 		if(isset($_POST['Mailing-postcode'])){ $postData['Mailing-postcode'] = $_POST['Mailing-postcode']; }else {$postData['Mailing-postcode'] = $details['Mailing-postcode'];}
 		if(isset($_POST['Mailing-State'])){ $postData['Mailing-state'] = $_POST['Mailing-State']; } else {$postData['Mailing-state'] = $details['Mailing-state'];}
 		if(isset($_POST['Mailing-country'])){ $postData['Mailing-country'] = $_POST['Mailing-country']; } else {$postData['Mailing-country'] = $details['Mailing-country'];}
-		if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid']; }
+		if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid']; } else {$postData['Memberid'] = $details['Memberid'];}
 		if(isset($_POST['Ahpranumber'])){ $postData['Ahpranumber'] = $_POST['Ahpranumber']; }else {$postData['Ahpranumber'] = $details['Ahpranumber'];}
 		if(isset($_POST['Branch'])){ $postData['Branch'] = $_POST['Branch']; }else {$postData['Branch'] = $details['PreferBranch'];}
 		$postData['Regional-group'] =$details['Regional-group'];
@@ -570,10 +570,10 @@ if($resultdata['result']) {
 		 <?php 
 		     
 		 
-		 if(isset($userId)&& ($userId!=0)){
+		 if(isset($_SESSION["UserId"])){
 			 //$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
 	         $userTag = checkPDUser($_SESSION['MemberTypeID']);
-			 if ($userTag =="1"){
+			 if ($userTag =="0"){
 				    echo '<a class="dashboard-button dashboard-bottom-button your-details-submit addCartButton" id="registerPDUserButton" style="float:right;">Add to cart</a><br>  
 						<br>';
 					
@@ -1301,7 +1301,7 @@ if($resultdata['result']) {
 		  
 		 if($('#popUp').text()!='0' && $('#popUp').text()!='3'){
 		   var x = $('#popUp').text();
-		   $( "#registerPDUser" ).dialog();
+		   //$( "#registerPDUser" ).dialog();
 		    $('[class^=down]:not(.down'+x+')').slideUp(400);
 	      $('.down' + x).slideToggle(450);
 	   }
