@@ -21,23 +21,23 @@ $products = $product["Orders"]
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $user['background']; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Your purchases</strong></span></div>
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name cairo"><strong>Your purchases</strong></span></div>
+			<div class="col-xs-6 col-sm-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
         <?php
 			include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
 	    ?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
-				<p><a class="event4" style="cursor: pointer;"><span class="text-underline" id="recent-purchases" style="margin-left:1%;"><strong>Recent purchases</strong></span> </a><a class="event5" style="cursor: pointer; margin-left:10px;"><span id="all-purchases"><strong>See all purchases</strong></span></a></p>
+				<div class="row" style="padding: 10px 0;"><a class="event4" style="cursor: pointer;"><span class="text-underline accent" id="recent-purchases"><strong>Recent</strong></span> </a><a class="event5" style="cursor: pointer; margin-left:10px;"><span id="all-purchases" class="accent"><strong>See all purchases</strong></span></a></div>
 				<div class="down4">
 					<table class="table table-responsive">
 						<tbody>
 							<tr>
-								<td>Prodcut Name</td>
-								<td>Download Invoice</td>
-								<td>Price</td>
-								<td>Date</td>
+								<td><span class="table-heading">Product Name</span></td>
+								<td><span class="table-heading">Download Invoice</span></td>
+								<td><span class="table-heading">Price</span></td>
+								<td><span class="table-heading">Date</span></td>
 							</tr>
 							<?php 
 							foreach($products as $product){
@@ -59,10 +59,10 @@ $products = $product["Orders"]
 					<table class="table table-responsive">
 						<tbody>
 							  <tr>
-								 <td>Prodcut Name</td>
-								 <td>Download Invoice</td>
-								  <td>Price</td>
-								  <td>Date</td>
+								<td><span class="table-heading">Product Name</span></td>
+								<td><span class="table-heading">Download Invoice</span></td>
+								<td><span class="table-heading">Price</span></td>
+								<td><span class="table-heading">Date</span></td>
 							</tr>
 							<?php
 							$apis = Array();

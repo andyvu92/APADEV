@@ -184,7 +184,7 @@ if(isset($_POST['step2-1'])) {
 			<input type="checkbox" id="anothercard"><label for="anothercard">Use another card</label>
 		</div> 
 
-		<div id="anothercardBlock" style="margin: 0" class="display-none col-xs-12">
+		<div id="anothercardBlock" style="margin: 0; padding:0" class="display-none col-xs-12">
 		<div class="row">
 			<div class="col-xs-6 col-md-3">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
@@ -282,7 +282,7 @@ if(isset($_POST['step2-1'])) {
 				<input type="checkbox" name="Rollover" id="Rollover"><label for="Rollover">Roll over</label>
 			</div>
 		</div>   
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('join-insurance-form').submit();" class="join-details-button7"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton7"><span class="dashboard-button-name">Last</span></a></div>
+		<div class="col-xs-12">  <a href="javascript:document.getElementById('join-insurance-form').submit();" class="join-details-button7"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton7"><span class="dashboard-button-name">Last</span></a></div>
 	</div>
 </form>
 <form id="tempform" action="" method="POST"><input type="hidden" name="goI"></form>	

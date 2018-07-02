@@ -751,24 +751,30 @@ if (isset($_SESSION['UserId'])):
                     </div>
                     <!--BREAK-->
 
-                    <div class="col-xs-6 col-md-3">
+                   <div class="row">
+
+                    <div class="col-xs-12">
                         <label for="">Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span></label>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3" style="margin: 0">
                         <select class="form-control" id="Aboriginal" name="Aboriginal">
                             <?php
-    $Aboriginalcode = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
-    $Aboriginal     = json_decode($Aboriginalcode, true);
-    foreach ($Aboriginal as $key => $value) {
-        echo '<option value="' . $Aboriginal[$key]['ID'] . '"';
-        if ($details['Aboriginal'] == $Aboriginal[$key]['ID']) {
-            echo "selected='selected'";
-        }
-        
-        echo '> ' . $Aboriginal[$key]['Name'] . ' </option>';
-    }
-    
-?>
+                                $Aboriginalcode = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
+                                $Aboriginal     = json_decode($Aboriginalcode, true);
+                                foreach ($Aboriginal as $key => $value) {
+                                    echo '<option value="' . $Aboriginal[$key]['ID'] . '"';
+                                    if ($details['Aboriginal'] == $Aboriginal[$key]['ID']) {
+                                        echo "selected='selected'";
+                                    }
+                                    
+                                    echo '> ' . $Aboriginal[$key]['Name'] . ' </option>';
+                                }
+                                
+                            ?>
                        </select>
                     </div>
+                </div>
                     
                     <!--BREAK-->
 
@@ -1272,7 +1278,7 @@ if (isset($_SESSION['UserId'])):
                    </select>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">   <a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a><a class="join-details-button2"><span class="dashboard-button-name">Next</span></a></div>
+            <div class="col-xs-12">   <a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a><a class="join-details-button2"><span class="dashboard-button-name">Next</span></a></div>
         </div>
         <!--BREAK-->
 
@@ -2165,7 +2171,7 @@ if (isset($_SESSION['UserId'])):
 
             <div class="row"><div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a></div></div>
             
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">   
+            <div class="col-xs-12">   
                 <a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Last</span></a>
             </div>
         </div>
@@ -2343,7 +2349,7 @@ if (isset($_SESSION['UserId'])):
 ?>
                </div>
             
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
+            <div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
         </div>
                
 </form>   
@@ -2668,7 +2674,7 @@ if (!isset($_SESSION['UserId'])):
                      </div>
                                                
                   </div>-->
-                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">   <a class="join-details-button1"><span class="dashboard-button-name">Next</span></a></div>
+                  <div class="col-xs-12">   <a class="join-details-button1"><span class="dashboard-button-name">Next</span></a></div>
             </div>
             <div class="down2" style="display:none;" >
                 <div class="row">
@@ -2867,7 +2873,7 @@ if (!isset($_SESSION['UserId'])):
 					</select>
 					</div>
             	</div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>
+                <div class="col-xs-12">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>
             </div>
             <?php
     
@@ -3133,7 +3139,7 @@ if (!isset($_SESSION['UserId'])):
                 </div>
             </div>
                 <div class="row"><div class="col-xs-12"><a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a></div></div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">   
+                <div class="col-xs-12">   
                 <a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Last</span></a>
                 </div>
             </div>
@@ -3213,7 +3219,7 @@ if (!isset($_SESSION['UserId'])):
                         </div>
                     </div>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
+                <div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
             </div>
     </form>
 <?php

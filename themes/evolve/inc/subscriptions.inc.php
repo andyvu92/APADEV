@@ -148,51 +148,47 @@ if(count($PostArray) == 0) { // GET data
 	// Response -
 	// Response, List of subscriptions and it's T/F values.
 	$subscriptions = GetAptifyData("24", $ArrayReturn);
+	
 }
-logRecorder();
 ?>
 <div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
 <?php include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php'); ?>
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $user['background']; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Your subscriptions</strong></span></div>
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
+			<div class="col-xs-12 col-sm-6"><span class="dashboard-name cairo"><strong>Your subscriptions</strong></span></div>
+			<div class="col-xs-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
 		<?php
 			include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
 	    ?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
-				<p><span style="text-decoration: underline; color:#009fda; margin-left:1%;"><strong>What I'm signed up for</strong></span></p>
+				<p><span style="color:#009fda; font-size: 1.2em;"><strong>What you're sighned up for</strong></span></p>
 				<form action="/subscriptions" method="POST">
-					<table class="table table-responsive table-bordered">
-						<tbody>
+					<ul>
 							<?php
 								$countSubs = count($Subscription);
 								$countSubType = $countSubs%2;
 								$counter = 0;
 								foreach($SubListAll as $Subs) {
-									$tr = $counter % 2;
-									if($tr == 0) {
-										echo "<tr>";
-									}
-									echo '<td><label for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
-										.'</label><input type="checkbox" name="'.$Subs["SubscriptionID"].
+
+									echo '
+									<li>
+										<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
 										'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
-									if($Subs['Subscribed']==1 || $Subs['Subscribed']=="True"){ 
-										echo "checked";
-									}
-									echo '></td>';
-									if($tr == 1) {
-										echo "</tr>";
-									}
-									$counter++;
+										if($Subs['Subscribed']==1 || $Subs['Subscribed']=="True"){ 
+											echo "checked";
+										}
+										echo '>
+										<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
+										.'</label>
+									</li>';
+
 								}
 							?>
-						</tbody>
-					</table>
-					<button  class="dashboard-button dashboard-bottom-button subscriptions-submit"><span class="dashboard-button-name">Submit</span></button>
+					</ul>
+					<button id="your-details-submit-button" class="dashboard-button dashboard-bottom-button subscriptions-submit"><span class="dashboard-button-name">Submit</span></button>
 				</form>
 			</div>
 		</div>

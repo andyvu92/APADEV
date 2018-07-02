@@ -10,7 +10,7 @@ global $base_url;
 $user = Array();
 if(isset($_SESSION["UserId"])) {
 	$users = GetAptifyData("1", $_SESSION["UserId"]);
-	print_r($users);
+	//print_r($users);
 	$cpd = $users["results"][0]["CPD"];
 	//echo "CPD: ".$cpd;
 	$user = $users["results"][0];
@@ -40,12 +40,14 @@ $background = getBackgroundImage($userID);
 		['Finished',     fin],
 		['Unfinished',  unfin],
 		]);
-		if(window.innerWidth<361){
+		if(window.innerWidth<480){
 			var options = {
-				chartArea:{left:0,top:0,width:'80%',height:'80%'},
+				chartArea:{left:0,top:0,width:'100%',height:'100%'},
+				width: '200',
+				height: '200',
 				backgroundColor: 'transparent',
 				pieSliceBorderColor: 'transparent',
-				pieHole: 0.7,
+				pieHole: 0.89,
 				legend: 'none',
 				pieSliceText: 'none',
 				pieSliceTextStyle: {
@@ -53,16 +55,94 @@ $background = getBackgroundImage($userID);
 				},
 				slices: {
 					0: { color: '#009fda' },
-					1: { color: 'grey' }
+					1: { color: '#a6a8ab' }
+				},
+			};
+		}
+		else if(window.innerWidth<570){
+			var options = {
+				chartArea:{left:0,top:0,width:'100%',height:'100%'},
+				width: '160',
+				height: '160',
+				backgroundColor: 'transparent',
+				pieSliceBorderColor: 'transparent',
+				pieHole: 0.91,
+				legend: 'none',
+				pieSliceText: 'none',
+				pieSliceTextStyle: {
+					color: 'white',
+				},
+				slices: {
+					0: { color: '#009fda' },
+					1: { color: '#a6a8ab' }
+				},
+			};
+		}
+		else if(window.innerWidth<992){
+			var options = {
+				chartArea:{left:0,top:0,width:'100%',height:'100%'},
+				width: '230',
+				height: '230',
+				backgroundColor: 'transparent',
+				pieSliceBorderColor: 'transparent',
+				pieHole: 0.87,
+				legend: 'none',
+				pieSliceText: 'none',
+				pieSliceTextStyle: {
+					color: 'white',
+				},
+				slices: {
+					0: { color: '#009fda' },
+					1: { color: '#a6a8ab' }
+				},
+			};
+		}
+		else if(window.innerWidth<1200){
+			var options = {
+				chartArea:{left:0,top:0,width:'100%',height:'100%'},
+				width: '170',
+				height: '170',
+				backgroundColor: 'transparent',
+				pieSliceBorderColor: 'transparent',
+				pieHole: 0.91,
+				legend: 'none',
+				pieSliceText: 'none',
+				pieSliceTextStyle: {
+					color: 'white',
+				},
+				slices: {
+					0: { color: '#009fda' },
+					1: { color: '#a6a8ab' }
+				},
+			};
+		}
+		else if(window.innerWidth<1500){
+			var options = {
+				chartArea:{left:0,top:0,width:'100%',height:'100%'},
+				width: '200',
+				height: '200',
+				backgroundColor: 'transparent',
+				pieSliceBorderColor: 'transparent',
+				pieHole: 0.89,
+				legend: 'none',
+				pieSliceText: 'none',
+				pieSliceTextStyle: {
+					color: 'white',
+				},
+				slices: {
+					0: { color: '#009fda' },
+					1: { color: '#a6a8ab' }
 				},
 			};
 		}
 		else{
 			var options = {
-				chartArea:{left:0,top:0,width:'150%',height:'150%'},
+				chartArea:{left:0,top:0,width:'100%',height:'100%'},
+				width: '230',
+				height: '230',
 				backgroundColor: 'transparent',
 				pieSliceBorderColor: 'transparent',
-				pieHole: 0.75,
+				pieHole: 0.87,
 				legend: 'none',
 				pieSliceText: 'none',
 				pieSliceTextStyle: {
@@ -70,7 +150,7 @@ $background = getBackgroundImage($userID);
 				},
 				slices: {
 					0: { color: '#009fda' },
-					1: { color: 'grey' }
+					1: { color: '#a6a8ab' }
 				},
 			};
 		}
@@ -79,21 +159,21 @@ $background = getBackgroundImage($userID);
 	}
 </script>
 <?php include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php'); ?> 
-<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?>" id="dashboard-right-content">
+<div class="col-xs-12 col-md-10 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Hello <?php echo $user["Preferredname"]; ?></strong></span></div>
+			<div class="col-xs-12 col-sm-6"><span class="dashboard-name cairo">Hello <?php echo $user["Preferredname"]; ?></span></div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-toggle="modal" data-target="#myModal"><span class="customise_background" >Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
 	<?php
 		include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
 	?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bottom-space">
-			<div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 mobile_line" >
+			<div class="col-xs-12 col-md-6 mobile_line" >
 				<table class="table table-responsive bordless">
 					<tbody class="limit-width" style="border-top: none;">
 						<tr>
-							<td><span class="med-accent-header"><strong>Your details</strong></span></td>
+						<span class="med-accent-header"><strong>Your details</strong></span>
 						</tr>
 						<tr>
 							<td><strong>Name:</strong></td>
@@ -150,8 +230,7 @@ $background = getBackgroundImage($userID);
 						//echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&amp;ViewEntityName=Persons&amp;ReportId=151&amp;EntityRecordID=55280'width='900' height='900'></iframe>";
 						//echo "<a href='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=151&EntityRecordID=".$_SESSION['LinkId']."'>ttttt</a>";
 						?>
-							<td></td>
-							<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#YInkFroamame"><span style="text-decoration: underline; color:white;">Membership certificate</span></button></td>
+
 							<?php /*<a href="https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=151&EntityRecordID=<?php echo $_SESSION['UserId']; ?>" target="_blank"><strong><span style="text-decoration: underline; color:white;">Membership certificate</span></strong></a> */ ?>
 						</tr>
 						<tr>
@@ -163,13 +242,22 @@ $background = getBackgroundImage($userID);
 						// Insurance certificate PDF
 						//$InsuCerti = GetAptifyData("3", $_SESSION['LinkId']);
 						?>
-							<td></td>
-							<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#KiNsuraneCiynbC"><span style="text-decoration: underline; color:white;">Insurance certification</span></button></td>
+
 							<?php /*<a href=""><strong><span style="text-decoration: underline; color:white"><?php echo $InsuCerti['InsuranceCertification']; ?></span></strong></a>*/ ?>
 						</tr>
 					</tbody>
 				</table>
 				
+				<div class="col-xs-12 none-padding">
+					<a href class="black-underline-link" data-toggle="modal" data-target="#YInkFroamame">
+						<span>Membership certificate</span></a>
+				</div>
+
+				<div class="col-xs-12 none-padding">
+					<a href class="black-underline-link" data-toggle="modal" data-target="#KiNsuraneCiynbC">
+						<span>Insurance certification</span></a>	
+				</div>
+
 				<div id="YInkFroamame" class="modal fade big-screen" role="dialog">
 				  <div class="modal-dialog">
 
@@ -233,21 +321,22 @@ $background = getBackgroundImage($userID);
 				}
 			});
 			</script>
-			<div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 mobile_line" >
+			<div class="col-xs-12 col-md-6 mobile_line" >
 				<div class="col-xs-12 center">				 
 					<span class="lead-heading">Your membership</br> snapshot</span>		
 			    </div>
 				<div class="col-xs-6 col-md-6 circle-container">
 					<div class="circle"><span class="number"><?php echo $user['Yearmembership']; ?></span><span class="text">Years of membership</span></div>
 				</div>
-				<div class="col-xs-6 col-md-6 circle-container">
-					<div id="donutchart"></div><span class="number">15</span><span class="text">Years of membership</span>
+				<div class="col-xs-6 col-md-6 circle-container" id="goo-chart">
+					<div id="donutchart"></div>
+					<span class="number"><?php echo $cpd; ?></span><span class="text">CPD hours</span>
 				</div>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bottom-space bottom-section flex-column">
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span class="small-heading">Your National Groups &gt</span></div>
+				<span class="small-heading">Your National Groups</span>
 				<div class="col-xs-12 dashboard-content-bottom">
 					<div id="myCarousel" class="carousel slide" data-ride="carousel">
 					<!-- Indicators 
@@ -278,11 +367,9 @@ $background = getBackgroundImage($userID);
 				<a class="accent-button" href="#"><span>Join more</span></a>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
-				<div class="section-container">
 					<span class="small-heading">Donate to the PRF</span>
 					<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="">
 					<a class="accent-button" href="#"><span>Donate today</span></a>
-				</div>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
 				<span class="small-heading">Suggestions/feedback</span>

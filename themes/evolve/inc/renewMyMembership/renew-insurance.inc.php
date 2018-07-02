@@ -15,79 +15,142 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 	<input type="hidden" name="insuranceStatus" id="insuranceStatus" value="0">
 	<div class="down5 <?php if((isset($_POST['step1'])&& $_POST['insuranceTag']!="0")||isset($_POST['goI']))echo 'display'; else { echo 'display-none';}?>">
 		<div class="row">
-			<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-			Has there been any medical malpractice or liability claim in the last five years(whether insured or uninsured)?<span class="tipstyle">*</span>
+			<div class="col-xs-12">
+			<label>Has there been any medical malpractice or liability claim in the last five years(whether insured or uninsured)?<span class="tipstyle">*</span></label>
 			</div>
-			<div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Claim1">Yes</label><input type="radio" name="Claim" id="Claim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="1") echo 'checked="checked"';?>></div>
-			<div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Claim2">No</label><input type="radio" name="Claim" id="Claim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>></div>
+
+			<div class="col-xs-6 col-md-3">
+				<input type="radio" name="Claim" id="Claim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="1") echo 'checked="checked"';?>>
+				<label class="light-font-weight" for="Claim1">Yes</label>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<input type="radio" name="Claim" id="Claim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
+				<label class="light-font-weight" for="Claim2">No</label>
+			</div>
 		</div>
+
 		<div class="row">
-			<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-			Are there any facts or circumstances that may give risk to a claim against any insured, including any predecessors in business?<span class="tipstyle">*</span>
+			<div class="col-xs-12">
+			<label>Are there any facts or circumstances that may give risk to a claim against any insured, including any predecessors in business?<span class="tipstyle">*</span></label>
 			</div>
-			<div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Facts1">Yes</label><input type="radio" name="Facts" id="Facts1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Facts']=="1") echo 'checked="checked"';?>></div>
-			<div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Facts2">No</label><input type="radio" name="Facts" id="Facts2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Facts']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>></div>
+
+			<div class="col-xs-6 col-md-3">
+				<input type="radio" name="Facts" id="Facts1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Facts']=="1") echo 'checked="checked"';?>>
+				<label class="light-font-weight" for="Facts1">Yes</label>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<input type="radio" name="Facts" id="Facts2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Facts']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
+				<label class="light-font-weight" for="Facts2">No</label>
+			</div>
 		</div>
+
 		<div class="row">
-			<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-			Has there been any external disciplinary proceeding or been subject to a complaint to a professional society or statutory registration board in the last five years?<span class="tipstyle">*</span>
+			<div class="col-xs-12">
+			<label>Has there been any external disciplinary proceeding or been subject to a complaint to a professional society or statutory registration board in the last five years?<span class="tipstyle">*</span></label>
 			</div>
-			<div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Disciplinary1">Yes</label><input type="radio" name="Disciplinary" id="Disciplinary1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Disciplinary']=="1") echo 'checked="checked"';?>></div>
-			<div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Disciplinary2">No</label><input type="radio" name="Disciplinary" id="Disciplinary2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Disciplinary']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>></div>
+
+			<div class="col-xs-6 col-md-3">
+				<input type="radio" name="Disciplinary" id="Disciplinary1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Disciplinary']=="1") echo 'checked="checked"';?>>
+				<label class="light-font-weight" for="Disciplinary1">Yes</label>
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<input type="radio" name="Disciplinary" id="Disciplinary2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Disciplinary']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
+				<label class="light-font-weight" for="Disciplinary2">No</label>
+			</div>
 		</div>
+
 		<div class="row">
-			<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-			Has any insurer ever declined a proposal, impose special terms, decline to renew or cancel an insurance policy?<span class="tipstyle">*</span>
+			<div class="col-xs-12">
+			<label>Has any insurer ever declined a proposal, impose special terms, decline to renew or cancel an insurance policy?<span class="tipstyle">*</span></label>
 			</div>
-			<div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Decline1">Yes</label><input type="radio" name="Decline" id="Decline1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Decline']=="1") echo 'checked="checked"';?>></div>
-			<div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Decline2">No</label><input type="radio" name="Decline" id="Decline2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Decline']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>></div>
+
+			<div class="col-xs-6 col-md-3">
+				<input type="radio" name="Decline" id="Decline1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Decline']=="1") echo 'checked="checked"';?>>
+				<label class="light-font-weight" for="Decline1">Yes</label>	
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<input type="radio" name="Decline" id="Decline2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Decline']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
+				<label class="light-font-weight" for="Decline2">No</label>	
+			</div>
 		</div>
+
 		<div class="row">
-			<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-			Have you had more than one claim?<span class="tipstyle">*</span>
+			<div class="col-xs-12">
+			<label>Have you had more than one claim?<span class="tipstyle">*</span></label>
 			</div>
-			<div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Oneclaim1">Yes</label><input type="radio" name="Oneclaim" id="Oneclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="1") echo 'checked="checked"';?>></div>
-			<div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Oneclaim2">No</label><input type="radio" name="Oneclaim" id="Oneclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>></div>
+
+			<div class="col-xs-6 col-md-3">
+				<input type="radio" name="Oneclaim" id="Oneclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="1") echo 'checked="checked"';?>>
+				<label class="light-font-weight" for="Oneclaim1">Yes</label>	
+			</div>
+			<div class="col-xs-6 col-md-3">
+				<input type="radio" name="Oneclaim" id="Oneclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
+				<label class="light-font-weight" for="Oneclaim2">No</label>	
+			</div>
 		</div>
+
 		<div class="display-none" id="insuranceMore">
-			<div class="row">If you answered yes to one or more of the above questions (1-5) please provide:<input type="hidden" name="Addtionalquestion" id="Addtionalquestion" value=""></div>
+			<div class="col-xs-12">
+				<label>If you answered yes to one or more of the above questions (1-5) please provide:</label>
+				<input type="hidden" name="Addtionalquestion" id="Addtionalquestion" value="">
+			</div>
+			
 			<div class="row">
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+				<div class="col-xs-6 col-md-3">
 					<input type="text" class="form-control" name="Yearclaim" id="Yearclaim" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Yearclaim']; }else{ echo 'placeholder="Year of claim"';}?> >
 				</div>
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+				<div class="col-xs-6 col-md-3">
 					<input type="text" class="form-control" name="Nameclaim" id="Nameclaim" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Nameclaim']; }else{ echo 'placeholder="Name of claimant"';}?>>
 				</div>
 			</div>
-			<div class="row"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><input type="text" class="form-control" name="Fulldescription" id="Fulldescription" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Fulldescription']; }else{ echo 'placeholder="Full description of insurance"';}?>></div></div>
-			<div class="row">Insufficient details in your response may result in additional details being requested</div>
+
+			<div class="row"><div class="col-xs-12 col-md-6"><input type="text" class="form-control" name="Fulldescription" id="Fulldescription" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Fulldescription']; }else{ echo 'placeholder="Full description of insurance"';}?>></div></div>
+			
+			<div class="col-xs-12">
+				<label>Insufficient details in your response may result in additional details being requested</label>
+				</div>
+			
 			<div class="row">
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<div class="col-xs-6 col-md-6">
 					<input type="text" class="form-control" name="Amountpaid" id="Amountpaid" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Amountpaid']; }else{ echo 'placeholder="Amount paid (if nil, please state NIL)"';}?>>
 				</div>
-				<div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
-				Has the claim been finalised?
+
+				<div class="col-xs-12">
+				<label>Has the claim been finalised?</label>
 				</div>
-				<div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Finalisedclaim1">Yes</label><input type="radio" name="Finalisedclaim" id="Finalisedclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="1") echo 'checked="checked"';?>></div>
-				<div class="col-xs-10 col-sm-10 col-md-1 col-lg-1"><label for="Finalisedclaim2">No</label><input type="radio" name="Finalisedclaim" id="Finalisedclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>></div>
+				<div class="col-xs-6 col-md-3">
+					<input type="radio" name="Finalisedclaim" id="Finalisedclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="1") echo 'checked="checked"';?>>
+					<label class="light-font-weight" for="Finalisedclaim1">Yes</label>	
+				</div>
+				<div class="col-xs-6 col-md-3">
+					<input type="radio" name="Finalisedclaim" id="Finalisedclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
+					<label class="light-font-weight" for="Finalisedclaim2">No</label>	
+				</div>
 			</div>
+
 			<div class="row">
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><input type="text" class="form-control" name="Businiessname" id="Businiessname"  <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Businiessname']; }else{ echo 'placeholder="Business name, practice name or trading name owned by you, do not name your employer’s business."';}?>></div>
+				<div class="col-xs-12 col-md-6"><input type="text" class="form-control" name="Businiessname" id="Businiessname"  <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Businiessname']; }else{ echo 'placeholder="Business name, practice name or trading name owned by you, do not name your employer’s business."';}?>></div>
 			</div>
 		</div>
+
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<input type="checkbox" name="conditions" id="conditions" value="0" data-target="#insuranceTermsandConditions" data-toggle="modal"><label for="conditions">I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
-			other material information to be disclosed<span class="tipstyle">*</span></label>
+			<div class="col-xs-12">
+				<input class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0" data-target="#insuranceTermsandConditions" data-toggle="modal">
+				<label class="light-font-weight" for="conditions">I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
+				other material information to be disclosed<span class="tipstyle">*</span></label>
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a id="insuranceControl"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton5"><span class="dashboard-button-name">Last</span></a></div>
+
+		<div class="col-xs-12" style="margin-top: 20px;"><a id="insuranceControl" class="accent-right-btn"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton5"><span class="dashboard-button-name">Last</span></a></div>
 	</div>
 </form>
 <div id="insurancePopUp" style="display:none;">
 	<h3>Are you sure you want to submit your insurance information?</h3>
-	<a href="javascript:document.getElementById('renew-insurance-form2').submit();" class="join-details-button5"><span class="dashboard-button-name">Yes</span></a>
-	<a target="_self" class="cancelInsuranceButton"><span class="dashboard-button-name">No</span></a>
+	
+	<div class="center">
+		<a href="javascript:document.getElementById('renew-insurance-form2').submit();" class="join-details-button5 accent-btn"><span class="dashboard-button-name">Yes</span></a>
+		<a target="_self" class="cancelInsuranceButton accent-btn"><span class="dashboard-button-name">No</span></a>
+	</div>
 </div>
 <div id="insuranceTermsandConditions" class="modal fade" role="dialog">
 	<div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
@@ -131,5 +194,4 @@ div#insuranceTermsandConditions {
 	color:red!important;
 }
 
-</style>
-<!--  this part will be merged with Andy's Dashboard less file-->	
+</style>	
