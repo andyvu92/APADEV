@@ -293,7 +293,7 @@ function MtypeContent($Only, $type) {
 		//echo "F";
 		return "0";
 	} elseif($MemberOnly == "Members only") {
-		/*
+		/* 
 		echo "M";
 		echo "<br>MemberTypeID->".$_SESSION['MemberTypeID'];
 		echo "<br>MemberType->".$_SESSION['MemberType'];
