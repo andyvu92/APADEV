@@ -227,8 +227,49 @@ function move(input) {
 
 <button class="Non-APA-hour" data-toggle="modal" data-target="#nonAPAhour"><span>Add non-APA hours</span></button><br />
 <form action="/pd/cpd-diary" method="POST">
-<input type="submit" class="Non-APA-hour" name="NONAPA" id="NONAPA" value="Download NON-APA PDF">
 </form>
+<?php
+// 2.2.2 - GET Membership certification PDF
+// Send - 
+// UserID
+// Response -
+// Membership certificate PDF
+//echo "<iframe name='YInkFroamame' src='http://www.physiotherapy.asn.au'></iframe>";
+$Certi = GetAptifyData("38", $_SESSION['LinkId']);
+//echo "<iframe id="YInkFroamame" srcdoc='".$MemberCerti."'></iframe>";
+//echo "<iframe src='".$MemberCerti."'></iframe>";
+//echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=aptifyuser&Password=!@-auser-Apatest1-2468' style='display: none;'></iframe>";
+//echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&amp;ViewEntityName=Persons&amp;ReportId=151&amp;EntityRecordID=55280'width='900' height='900'></iframe>";
+//echo "<a href='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=151&EntityRecordID=".$_SESSION['LinkId']."'>ttttt</a>";
+?>
+<!--input type="submit" class="Non-APA-hour" name="NONAPA" id="NONAPA" value="Download NON-APA PDF"-->
+<button type="button" class="btn btn-info btn-lg Non-APA-hour" data-toggle="modal" data-target="#NonCPDPDF"><span style="text-decoration: underline; color:white;">Download NON-APA PDF</span></button>
+<div id="NonCPDPDF" class="modal fade big-screen" role="dialog">
+	<div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+		<div class="modal-body">
+		<iframe name='NonCPDPDF' src='http://www.physiotherapy.asn.au'></iframe>
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+	</div>
+
+	</div>
+</div>
+<script>
+$(document).ready(function() {
+	if (window.frames['NonCPDPDF'] && !window.userSet){
+		window.userSet = true;
+		frames['NonCPDPDF'].location.href='<?php echo $Certi; ?>';
+	}
+});
+</script>
 <br />
 
 <strong><a href="http://www.physiotherapyboard.gov.au/documents/default.aspx?record=WD15%2f18489&dbid=AP&chksum=ewqLtzOm4m%2fsRUrlGCmo1A%3d%3d">This is based on Physiotherapy Board of Australia's Continuing professional development form.</a></strong>

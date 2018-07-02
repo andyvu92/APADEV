@@ -433,16 +433,17 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			}
 			return $JSONreturn;
 		case "38":
-			// For the actual API use
-			// $API = "";
-			echo "Data Sent: <br />";
-			print_r($variables);
+			// Eddy
+			$AptifyAuth = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=aptifyuser&Password=!@-auser-Apatest1-2468";
+			$AuthToken = curlRequest($AptifyAuth, "Get", "");
+			$AuthToken = json_decode($AuthToken, true);
+			$AuthToken = $AuthToken["TokenId"];
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=152&";
+			//$ttt = urlencode("DomainWithContainer ");
+			$passInput = "EntityRecordID=".$variables."&AptifyAuthorization=DomainWithContainer%20".$AuthToken;
+			$API = $API.$passInput;
 			echo "<br />38. Get NON-APA CPD point's PDF<br />";
-			// Add JSON sample here
-			$JSONreturn = '{ 
-				"Non-CPD_PDF":"NON-CPD PDF file"
-			}';
-			return $JSONreturn;
+			return $API;
 		case "39":
 			// For the actual API use
 			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/GetOptionValues";		
