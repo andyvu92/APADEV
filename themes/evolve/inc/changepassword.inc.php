@@ -1,5 +1,9 @@
 <?php
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
+/* get background image****/
+if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID =0; }
+$background = getBackgroundImage($userID);
+/* get background image****/
   ?>
 <?php
 // 2.2.9 - Change password
@@ -21,7 +25,7 @@ if(isset($_SESSION["Log-in"])) : ?>
 	print_r($product);
 ?>	
 <?php	else: ?> 
-<div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
+<div id="pre_background" style="display:none">background_<?php echo $background;  ?></div>
 <div style="display:table;">
 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 dashboard-left-nav">
    <a type="button" class="navbar-toggle" data-toggle="collapse" data-target="#dashboard-navbar-collapse-1"><i class="fa fa-align-justify"></i></a>

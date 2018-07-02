@@ -1,5 +1,9 @@
 <?php
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
+/* get background image****/
+if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID =0; }
+$background = getBackgroundImage($userID);
+/* get background image****/
 /* We may use this as "Session" data and won't need to load. */
 // 2.2.20 - GET list of subscribed National Group
 // Send - 
@@ -151,7 +155,7 @@ if(count($PostArray) == 0) { // GET data
 	
 }
 ?>
-<div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
+<div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
 <?php include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php'); ?>
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $user['background']; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
