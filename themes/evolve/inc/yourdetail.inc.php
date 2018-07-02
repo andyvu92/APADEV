@@ -413,8 +413,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 
 							<div class="col-xs-6 col-md-2">
-								<label for="prefix">Prefix<span class="tipstyle">*</span></label>
+								<label for="prefix">Prefix</label>
 								<select class="form-control" id="Prefix" name="Prefix" required>
+									<option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> disabled>Please select</option>
 								<?php
 									$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
 									$Prefix=json_decode($Prefixcode, true);							
@@ -428,8 +429,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 
 							<div class="col-xs-6 col-md-4">
-								<label for="">First name<span class="tipstyle">*</span></label>
-								<input type="text" class="form-control"  name="Firstname" <?php if (empty($details['Firstname'])) {echo "placeholder='First name'";}   else{ echo 'value="'.$details['Firstname'].'"'; }?> required>
+								<label for="">Given name<span class="tipstyle">*</span></label>
+								<input type="text" class="form-control"  name="Firstname" <?php if (empty($details['Firstname'])) {echo "placeholder='Given name'";}   else{ echo 'value="'.$details['Firstname'].'"'; }?> required>
 							</div>
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
@@ -448,8 +449,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
-								<label for="">Last name<span class="tipstyle">*</span></label>
-								<input type="text" class="form-control" name="Lastname" <?php if (empty($details['Lastname'])) {echo "placeholder='Last name'";}   else{ echo 'value="'.$details['Lastname'].'"'; }?> required>
+								<label for="">Family name<span class="tipstyle">*</span></label>
+								<input type="text" class="form-control" name="Lastname" <?php if (empty($details['Lastname'])) {echo "placeholder='Family name'";}   else{ echo 'value="'.$details['Lastname'].'"'; }?> required>
 							</div>
 
 							<div class="col-xs-6 col-sm-6 col-md-3">
@@ -486,7 +487,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 									$country=json_decode($countrycode, true);
 										foreach($country  as $key => $value){
 										echo '<option value="'.$country[$key]['TelephoneCode'].'"';
-										if ($details['Home-phone-countrycode'] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; } 
+										if ($details['Home-phone-countrycode'] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; }
+										elseif(empty($details['Home-phone-countrycode']) && $country[$key]['TelephoneCode']=="61"){
+											echo "selected='selected'";
+										}
 										echo '> '.$country[$key]['Country'].' </option>';
 									}
 								?>
@@ -552,7 +556,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 
 							<div class="col-xs-12 col-md-6">
-								<label for="">Address 2<span class="tipstyle">*</span></label>
+								<label for="">Address 2</label>
 								<input type="text" class="form-control" name="Address_Line_2"  <?php if (empty($details['Street'])) {echo "placeholder='Address 2'";}   else{ echo 'value="'.$details['Street'].'"'; }?> required>
 							</div>
 
@@ -628,8 +632,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div> 
 						
 						<div class="col-xs-12 col-md-6">
-							<label for="">Address 2<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Mailing-Address_Line_2" id="Mailing-Address_Line_2"  <?php if (empty($details['Mailing-streetname'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Mailing-streetname'].'"'; }?> required>
+							<label for="">Address 2</label>
+							<input type="text" class="form-control" name="Mailing-Address_Line_2" id="Mailing-Address_Line_2"  <?php if (empty($details['Mailing-streetname'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Mailing-streetname'].'"'; }?> >
 						</div> 
 
 						<div class="col-xs-6 col-md-6">
@@ -681,6 +685,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<div class="col-xs-12 col-sm-6 col-md-6">
 								<label>Aboriginal and Torres Strait Islander<span class="tipstyle">*</span></label>
 								<select class="form-control" id="Aboriginal" name="Aboriginal" required>
+									<option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?> disabled>Please select</option>
 								<?php
 									$Aboriginalcode  = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
 									$Aboriginal=json_decode($Aboriginalcode, true);						
@@ -958,7 +963,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div> 
 
 						<div class="col-xs-12 col-md-6">
-							<label for="">Address 2<span class="tipstyle">*</span></label>
+							<label for="">Address 2</label>
 							<input type="text" class="form-control" name="Shipping-Address_Line_2" id="Shipping-Address_Line_2"  <?php if (empty($details['Shipping-streetname'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Shipping-streetname'].'"'; }?> required>
 						</div> 
 
@@ -1029,7 +1034,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 
 						<div class="col-xs-12 col-md-6">
-							<label for="">Address 2<span class="tipstyle">*</span></label>
+							<label for="">Address 2</label>
 							<input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Street'])) {echo "placeholder='Billing Address 2'";}   else{ echo 'value="'.$details['Billing-Street'].'"'; }?> required>
 						</div>
 

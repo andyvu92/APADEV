@@ -564,8 +564,9 @@ if (isset($_SESSION['UserId'])):
 ?>>
                             <div class="row">
                                 <div class="col-xs-6 col-md-3">
-                                        <label for="prefix">Prefix<span class="tipstyle">*</span></label>
+                                        <label for="prefix">Prefix</label>
                                         <select class="form-control" id="Prefix" name="Prefix">
+										<option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> disabled>Please select</option>
                                         <?php
     $Prefixcode = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
     $Prefix     = json_decode($Prefixcode, true);
@@ -581,8 +582,8 @@ if (isset($_SESSION['UserId'])):
                            </select>
                     </div>
                     <div class="col-xs-6 col-md-3">
-                        <label for="">First name<span class="tipstyle">*</span></label>
-                        <input type="text" class="form-control"  name="Firstname" placeholder="First name"<?php
+                        <label for="">Given name<span class="tipstyle">*</span></label>
+                        <input type="text" class="form-control"  name="Firstname" placeholder="Given name"<?php
     if (empty($details['Firstname'])) {
         echo "";
     } else {
@@ -624,8 +625,8 @@ if (isset($_SESSION['UserId'])):
 ?>>
                     </div>
                     <div class="col-xs-6 col-md-3">
-                       <label for="">Last name<span class="tipstyle">*</span></label>
-                       <input type="text" class="form-control" name="Lastname" placeholder='Last name'<?php
+                       <label for="">Family name<span class="tipstyle">*</span></label>
+                       <input type="text" class="form-control" name="Lastname" placeholder='Family name'<?php
     if (empty($details['Lastname'])) {
         echo "";
     } else {
@@ -671,8 +672,10 @@ if (isset($_SESSION['UserId'])):
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
     foreach ($country as $key => $value) {
-        echo '<option value="' . $country[$key]['ID'] . '"';
-        if ($details['Home-phone-countrycode'] == $country[$key]['ID']) {
+        echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
+        if ($details['Home-phone-countrycode'] == $country[$key]['TelephoneCode']) {
+            echo "selected='selected'";
+        }elseif(empty($details['Home-phone-countrycode']) && $country[$key]['ID']="14"){
             echo "selected='selected'";
         }
         
@@ -759,6 +762,7 @@ if (isset($_SESSION['UserId'])):
 
                     <div class="col-xs-6 col-md-3" style="margin: 0">
                         <select class="form-control" id="Aboriginal" name="Aboriginal">
+							<option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?> disabled>Please select</option>
                             <?php
                                 $Aboriginalcode = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
                                 $Aboriginal     = json_decode($Aboriginalcode, true);
@@ -812,7 +816,7 @@ if (isset($_SESSION['UserId'])):
 ?>>
                     </div>
                     <div class="col-xs-12 col-md-3">
-                        <label for="">Address 2<span class="tipstyle">*</span></label>
+                        <label for="">Address 2</label>
                         <input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2" placeholder='Address 2'<?php
     if (empty($details['Street'])) {
         echo "";
@@ -922,7 +926,7 @@ if (isset($_SESSION['UserId'])):
 ?>>
                         </div>
                         <div class="col-xs-12 col-md-3">
-                           <label for="">Address 2<span class="tipstyle">*</span></label>
+                           <label for="">Address 2</label>
                            <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" placeholder='Billing Address 2'<?php
     if (empty($details['Billing-Street'])) {
         echo "";
@@ -2373,12 +2377,13 @@ if (!isset($_SESSION['UserId'])):
 ?>>
                     <div class="row">
                         <div class="col-xs-6 col-md-3">
-                            <label for="prefix">Prefix<span class="tipstyle">*</span></label>
+                            <label for="prefix">Prefix</label>
                             <?php
     $Prefixcode = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
     $Prefix     = json_decode($Prefixcode, true);
 ?>
                            <select class="form-control" id="Prefix" name="Prefix">
+						   <option value="" selected disabled>Please select</option>
                             <?php
     foreach ($Prefix as $key => $value) {
         echo '<option value="' . $Prefix[$key]['ID'] . '"';
@@ -2390,7 +2395,7 @@ if (!isset($_SESSION['UserId'])):
                         </div>
                         
                         <div class="col-xs-6 col-md-3">
-                           <label for="">First name<span class="tipstyle">*</span></label>
+                           <label for="">Given name<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control"  name="Firstname">
                         </div>
                         <div class="col-xs-6 col-md-3">
@@ -2409,7 +2414,7 @@ if (!isset($_SESSION['UserId'])):
                            <input type="text" class="form-control" name="Maiden-name">
                         </div>
                         <div class="col-xs-6 col-md-3">
-                           <label for="">Last name<span class="tipstyle">*</span></label>
+                           <label for="">Family name<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Lastname">
                         </div>
 
@@ -2493,6 +2498,7 @@ if (!isset($_SESSION['UserId'])):
                             <div class="col-xs-6 col-md-3">
                             <label for="">Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span></label>
                                 <select class="form-control" id="Aboriginal" name="Aboriginal">
+									<option value="" selected disabled>Please select</option>
                                 <?php
     $Aboriginalcode = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
     $Aboriginal     = json_decode($Aboriginalcode, true);
