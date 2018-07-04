@@ -279,7 +279,7 @@ if(isset($_POST['step2-1'])) {
 				<input type="checkbox" name="Rollover" id="Rollover"><label for="Rollover">Roll over</label>
 			</div>
 		</div>   
-		<div class="col-xs-12">  <a href="javascript:document.getElementById('join-insurance-form').submit();" class="join-details-button7" <?php if(isset($_POST['insuranceStatus'])&&$_POST['insuranceStatus']=="1") {echo "disabled";}  ?>><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>
+		<div class="col-xs-12">  <a href="javascript:document.getElementById('join-insurance-form').submit();" class="join-details-button7 <?php if(isset($_POST['insuranceStatus'])&&$_POST['insuranceStatus']=="1") {echo "disabled";}  ?>" ><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>
 	</div>
 </form>
 <form id="tempform" action="" method="POST"><input type="hidden" name="goI"></form>	

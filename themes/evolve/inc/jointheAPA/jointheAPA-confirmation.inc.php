@@ -59,12 +59,15 @@ if(isset($_POST['step3'])) {
 		catch (PDOException $e) {
 			print "Error!: " . $e->getMessage() . "<br/>";
 			die();
-		}    		
-	}
-	//2.2.46 -get order payment schedules test part
+		} 
+//2.2.46 -get order payment schedules test part
    $paymentData['id'] = $registerOuts['Invoice_ID'];
    $paymentDataSchedules = GetAptifyData("46", $paymentData);
-
+  //2.2.44 -get order detail test part
+   $orderData = $registerOuts['Invoice_ID'];
+   $orderDetails = GetAptifyData("44", $orderData);   		
+}
+	
    
 }
 ?>

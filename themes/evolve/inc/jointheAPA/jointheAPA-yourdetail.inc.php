@@ -2926,8 +2926,8 @@ if (!isset($_SESSION['UserId'])):
 ?>"/>
             
             <div class="down3" style="display:none;">
-                    <div class="col-xs-12"><input type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="0"> <label for="Findpublicbuddy"><strong>NOTE:</strong>Please list my details in the public (visbile to other health professionals)</label>
-                    </div>
+                    <!--<div class="col-xs-12"><input type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="0"> <label for="Findpublicbuddy"><strong>NOTE:</strong>Please list my details in the public (visbile to other health professionals)</label>
+                    </div>-->
 			<div class="col-xs-12">
 				<ul class="nav nav-tabs" id="tabmenu">
 				<li class ="active"><a data-toggle="tab" href="#workplace0"><?php
