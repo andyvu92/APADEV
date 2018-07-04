@@ -92,7 +92,7 @@ jQuery(document).ready(function($) {
 					if($("input[name=Wstate"+x+"]").val() ==''){$("input[name=Wstate"+x+"]").addClass("focuscss");}else{$("input[name=Wstate"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wcountry"+x+"]").val() ==''){$("input[name=Wcountry"+x+"]").addClass("focuscss");}else{$("input[name=Wcountry"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wemail"+x+"]").val() ==''){$("input[name=Wemail"+x+"]").addClass("focuscss");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss");}
-					if($("input[name=Wwebaddress"+x+"]").val() ==''){$("input[name=Wwebaddress"+x+"]").addClass("focuscss");}else{$("input[name=Wwebaddress"+x+"]").removeClass("focuscss");}
+					//if($("input[name=Wwebaddress"+x+"]").val() ==''){$("input[name=Wwebaddress"+x+"]").addClass("focuscss");}else{$("input[name=Wwebaddress"+x+"]").removeClass("focuscss");}
 					if($("input[name=Number-worked-hours"+x+"]").val() ==''){$("input[name=Number-worked-hours"+x+"]").addClass("focuscss");}else{$("input[name=Number-worked-hours"+x+"]").removeClass("focuscss");}
 				}
 							
@@ -103,7 +103,7 @@ jQuery(document).ready(function($) {
 					if($("input[name=Wcity"+x+"]").val() ==''||$("input[name=Wpostcode"+x+"]").val() ==''||$("input[name=Wstate"+x+"]").val() ==''){
 						return false;
 					}
-					if($("input[name=Wcountry"+x+"]").val() ==''||$("input[name=Wemail"+x+"]").val() ==''||$("input[name=Wwebaddress"+x+"]").val() ==''||$("input[name=Number-worked-hours"+x+"]").val() ==''){
+					if($("input[name=Wcountry"+x+"]").val() ==''||$("input[name=Wemail"+x+"]").val() ==''||$("input[name=Number-worked-hours"+x+"]").val() ==''){
 						return false;
 					}
 				}

@@ -295,6 +295,22 @@ if(isset($_SESSION["UserId"])){
 		</form>
 	</div>
 	</div>
+	<?php if($productList->rowCount()>0): ?>    
+	<div class="row">
+		<div class="col-xs-12"><label>PRF donation</label></div>
+		<div class="col-xs-12 col-md-12">
+			<select class="form-control" id="PRF" name="PRF">
+				<option value="10" selected>$10.00</option>
+				<option value="20">$20.00</option>
+				<option value="50">$50.00</option>
+				<option value="100">$100.00</option>
+				<option value="Other">Other</option>
+			</select>
+			<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="">
+			<a style="color: black;" id="PRFDescription">What is this?</a>
+		</div>
+	</div>
+	<?php endif; ?>
 	<?php if(isset($_SESSION["UserId"]) && $productList->rowCount()>0):?><p><form action="pd-shopping-cart" method="POST"><input type="text" name="Couponcode" placeholder="Enter discount code" value=""><button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button></form></p><br><?php endif; ?>
 		<?php if($productList->rowCount()>0): ?>      
 		<div class="row ordersummary"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span>YOUR ORDER</span></div></div>
@@ -318,7 +334,7 @@ if(isset($_SESSION["UserId"])){
 		</table>
 		         
 		<form action="/pd/completed-purchase" method="POST">
-			<input type="hidden" name="PRF" id="PRF" value="">
+			<input type="hidden" name="POSTPRF" id="POSTPRF" value="">
 			<input type="hidden" name="TandC" id="TandC" value="0">
 			<input type="hidden" name="CardUsed" id="CardUsed" value="">
 			<input type="hidden" name="CouponCode"  value="<?php echo $couponCode; ?>">
@@ -345,9 +361,13 @@ if(isset($_SESSION["UserId"])){
  <a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update my details</button></a>
 </div>
 <?php logRecorder();  ?>
+<div id="PRFDesPopUp" style="display:none;" class="container">
+<p>The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot. </p>
+<p><a href="/reserach/purpose-prf" target="_blank">Tell me more</a></p>
+</div>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+ <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 $( function() {

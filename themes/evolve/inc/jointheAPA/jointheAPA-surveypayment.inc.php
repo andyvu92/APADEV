@@ -64,8 +64,8 @@ if(isset($_POST['step2-1'])) {
 <div id="tipsBlock" class="<?php if($_POST['insuranceStatus']=="1") {echo "display";} else { echo "display-none";}?>"><span style="color:red;">Unfortunately, we cannot let you proceed with this membership purchase. Please contact the APA member hub (include email link) or on 1 300 306 622 for more information.</span></div>
 <form id="join-insurance-form" action="jointheapa" method="POST">
 	<input type="hidden" name="step2" value="2"/>
-	<div class="down6" <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0"))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
-		<div class="row">
+	<div class="down6" <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['goP']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
+		<!--<div class="row">
 			<div class="col-xs-12">
 			<label>Do you currently or plan to provide services to professional sport people in the AFL, A League, ARU, NRL, Cricket Australia or Olympic Representatives?</label>
 			</div>
@@ -116,9 +116,9 @@ if(isset($_POST['step2-1'])) {
 				<input type="text" class="form-control" name="s6" id="s6" placeholder="%">
 			</div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button6 <?php if(isset($_POST['insuranceStatus'])&&$_POST['insuranceStatus']=="1") {echo "disabled";}  ?>"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Last</span></a></div>
-	</div>
-	<div class="down7" <?php if(isset($_POST['goP']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button6 <?php //if(isset($_POST['insuranceStatus'])&&$_POST['insuranceStatus']=="1") {echo "disabled";}  ?>"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton<?php //if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>-->
+	<!--</div>
+	<div class="down7" <?php //if(isset($_POST['goP']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>-->
 		<div class="row">
 			<div class="col-xs-12">
 			<label>Payment options:</label>
@@ -141,18 +141,15 @@ if(isset($_POST['step2-1'])) {
 			<div class="col-xs-12"><label>PRF donation</label></div>
 			<div class="col-xs-6 col-md-3">
 				<select class="form-control" id="PRF" name="PRF">
-					<option value="">$0.00</option>
-					<option value="5">$5.00</option>
-					<option value="10">$10.00</option>
+					<option value="10" selected>$10.00</option>
 					<option value="20">$20.00</option>
-					<option value="30">$30.00</option>
 					<option value="50">$50.00</option>
 					<option value="100">$100.00</option>
-					<option value="200">$200.00</option>
-					<option value="500">$500.00</option>
-					<option value="other">Other</option>
+					<option value="Other">Other</option>
 				</select>
+				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="">
 				<a style="color: black;" href="#">What is this?</a>
+				
 			</div>
 		</div>
 	<?php 
@@ -282,8 +279,12 @@ if(isset($_POST['step2-1'])) {
 				<input type="checkbox" name="Rollover" id="Rollover"><label for="Rollover">Roll over</label>
 			</div>
 		</div>   
-		<div class="col-xs-12">  <a href="javascript:document.getElementById('join-insurance-form').submit();" class="join-details-button7"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton7"><span class="dashboard-button-name">Last</span></a></div>
+		<div class="col-xs-12">  <a href="javascript:document.getElementById('join-insurance-form').submit();" class="join-details-button7" <?php if(isset($_POST['insuranceStatus'])&&$_POST['insuranceStatus']=="1") {echo "disabled";}  ?>><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>
 	</div>
 </form>
 <form id="tempform" action="" method="POST"><input type="hidden" name="goI"></form>	
 <?php logRecorder();  ?>
+<div id="PRFDesPopUp" style="display:none;" class="container">
+<p>The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot. </p>
+<p><a href="/reserach/purpose-prf" target="_blank">Tell me more</a></p>
+</div>

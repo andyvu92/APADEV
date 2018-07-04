@@ -1,6 +1,6 @@
 <?php
 function getDropdown(){
-	$result = GetAptifyData("39","","");
+	$result = GetAptifyData("39","");
 	// write Country json file
 	foreach($result['Country']  as $lines){
 		$ID = $lines['ID'];

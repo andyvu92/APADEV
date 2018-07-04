@@ -55,6 +55,9 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 				$country = $sessionCountry;
 				foreach($country  as $key => $object){
 					echo '<option value="'.$country[$key]['ID'].'">'.$country[$key]['Country'].'</option>';
+					if($country[$key]['ID']=="14"){
+						echo "selected='selected'";
+					}
 				}
 			echo '
 		</select>

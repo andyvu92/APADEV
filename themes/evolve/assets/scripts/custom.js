@@ -226,7 +226,7 @@ jQuery(document).ready(function($) {
 	});		
 	$('body').on('change', 'select', function() {
 			var x = $(this).attr("id").replace('Udegree', '');
-				if(($('#Udegree'+ x).val()=="0")){
+			if(($('#Udegree'+ x).val()=="0")){
 				
 				$( "#University-degree"+ x ).removeClass('display-none');
 			}
@@ -241,9 +241,27 @@ jQuery(document).ready(function($) {
 			else{
 				$( "#Undergraduate-university-name-other" + y).addClass('display-none');
 			}
-		
+		    		
+	});
+	var PRF = $("#PRF").val();
+	$( "#POSTPRF").val(PRF);
+	$( "#PRF" ).change(function() {
+		if(($('#PRF').val()=="Other")){
+			$( "#PRFOther").removeClass('display-none');
+			
+		}
+		else{
+			$( "#PRFOther").addClass('display-none');
+			var PRF = $("#PRF").val();
+			$( "#POSTPRF").val(PRF);
+		}
 		
 	});
+	$( "#PRFOther" ).blur(function() {
+		var PRF = $("#PRFOther").val();
+		$( "#POSTPRF").val(PRF);
+	});
+	
 	$('#anothercard').click(function(){
         if($(this).is(":checked")){
 			$('#anothercardBlock').removeClass("display-none");
@@ -472,6 +490,9 @@ jQuery(document).ready(function($) {
 	});
 	$('#privacypolicyl').click(function(){
 		$( "#privacypolicyWindow" ).dialog();
+	});
+	$('#PRFDescription').click(function(){
+		$( "#PRFDesPopUp" ).dialog();
 	});
 	$('#instalmentpolicyl').click(function(){
 		$( "#installmentpolicyWindow" ).dialog();

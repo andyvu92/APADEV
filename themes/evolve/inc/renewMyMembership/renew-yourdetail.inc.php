@@ -260,8 +260,9 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_POST['goI'])|| isset($_POST['goP'])||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['QOrder']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
 				<div class="row">
 					<div class="col-xs-6 col-md-3">
-						<label for="prefix">Prefix<span class="tipstyle">*</span></label>
+						<label for="prefix">Prefix</label>
 						<select class="form-control" id="Prefix" name="Prefix">
+							<option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> disabled>Please select</option>
 						    <?php
 							$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
 							$Prefix=json_decode($Prefixcode, true);							
@@ -274,8 +275,8 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						</select>
 					</div>
 					<div class="col-xs-6 col-md-3">
-					   <label for="">First name<span class="tipstyle">*</span></label>
-					   <input type="text" class="form-control"  name="Firstname" <?php if (empty($details['Firstname'])) {echo "placeholder='First name'";}   else{ echo 'value="'.$details['Firstname'].'"'; }?>>
+					   <label for="">Given name<span class="tipstyle">*</span></label>
+					   <input type="text" class="form-control"  name="Firstname" <?php if (empty($details['Firstname'])) {echo "placeholder='Given name'";}   else{ echo 'value="'.$details['Firstname'].'"'; }?>>
 					</div>
 					<div class="col-xs-6 col-md-3">
 					   <label for="">preferred name</label>
@@ -293,8 +294,8 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					   <input type="text" class="form-control" name="Maiden-name" <?php if (empty($details['Maiden-name'])) {echo "placeholder='Maiden name'";}   else{ echo 'value="'.$details['Maiden-name'].'"'; }?>>
 					</div>
 					<div class="col-xs-6 col-md-3">
-					   <label for="">Last name<span class="tipstyle">*</span></label>
-					   <input type="text" class="form-control" name="Lastname" <?php if (empty($details['Lastname'])) {echo "placeholder='Last name'";}   else{ echo 'value="'.$details['Lastname'].'"'; }?>>
+					   <label for="">Family name<span class="tipstyle">*</span></label>
+					   <input type="text" class="form-control" name="Lastname" <?php if (empty($details['Lastname'])) {echo "placeholder='Family name'";}   else{ echo 'value="'.$details['Lastname'].'"'; }?>>
 					</div>
 
 					<div class="col-xs-6 col-md-3">
@@ -327,6 +328,9 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							foreach($country  as $key => $value){
 								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
 								if ($details['Home-phone-countrycode'] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; } 
+								elseif(empty($details['Home-phone-countrycode']) && $country[$key]['ID']=="14"){
+											echo "selected='selected'";
+								}
 								echo '> '.$country[$key]['Country'].' </option>';
 							}
 						?>
@@ -346,13 +350,16 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<div class="row">
 					<div class="col-xs-6 col-md-3">
 						<label for="">Country code</label>
-						<select class="form-control" id="Mobile-countrycode" name="Mobile-countrycode">
+						<select class="form-control" id="Mobile-countrycode" name="Mobile-country-code">
 						<?php
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);						
 							foreach($country  as $key => $value){
 								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
 								if ($details['Mobile-country-code'] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; } 
+								elseif(empty($details['Mobile-country-code']) && $country[$key]['ID']=="14"){
+											echo "selected='selected'";
+										}
 								echo '> '.$country[$key]['Country'].' </option>';
 							}
 						?>
@@ -374,6 +381,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 					<div class="col-xs-6 col-md-3"style="margin-top: 0">
 					   <select class="form-control" id="Aboriginal" name="Aboriginal">
+							<option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?> disabled>Please select</option>
 						 <?php
 									$Aboriginalcode  = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
 									$Aboriginal=json_decode($Aboriginalcode, true);						
@@ -446,6 +454,9 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						    
 							echo '<option value="'.$country[$key]['Country'].'"';
 							if ($details['Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+							elseif(empty($details['Country']) && $country[$key]['ID']=="14"){
+											echo "selected='selected'";
+							}
 							echo '> '.$country[$key]['Country'].' </option>';
 							
 						}
@@ -526,6 +537,9 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 								
 								echo '<option value="'.$country[$key]['Country'].'"';
 								if ($details['Billing-Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+								elseif(empty($details['Billing-Country']) && $country[$pair]['ID']=="14"){
+											echo "selected='selected'";
+								}
 								echo '> '.$country[$key]['Country'].' </option>';
 							}
 							?>
@@ -565,7 +579,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 			<div class="row">
 			<input type="hidden"  name="Status" <?php if (empty($details['Status'])) {echo "value='1'";}   else{ echo 'value="'.$details['Status'].'"'; }?>>
 				<div class="col-xs-12 col-md-6">
-					<label for="">Member ID(Your email address)<span class="tipstyle">*</span></label>
+					<label for="">Member ID(email address)<span class="tipstyle">*</span></label>
 					<input type="text" class="form-control" name="Memberid" <?php if (empty($details['Memberid'])) {echo "placeholder='Member no.'";}   else{ echo 'value="'.$details['Memberid'].'"';}?> >
 				</div>
 
@@ -597,8 +611,8 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 			<div clas="row">	
 				<input type="hidden"  name="Specialty"  <?php   echo 'value="'.$details['Specialty'].'"'; ?>>
 				<div class="col-xs-12 col-md-6">
-					<label for="">Your National group</label>
-					<select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple>
+					<label for="">Your National group<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
+					<select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
 					<?php 
 						// get national group from Aptify via webserice return Json data;
 						// 2.2.19 - get national group
@@ -643,7 +657,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					if(!empty($details['PSpecialInterestAreaID'])) {$PSpecialInterestAreaID = explode(",",$details['PSpecialInterestAreaID']); } else {$PSpecialInterestAreaID =array();}
 				?>
 				<div class="col-xs-12 col-md-6">
-					<label>Your special interest area:</label>
+					<label>Tell us what you'd like to know more about</label>
 					<select class="chosen-select" id="interest-area" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
 					  <?php 
 						  // 2.2.37 - get interest area list
@@ -720,18 +734,18 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				</div>
 			</div>-->
 
-			<div class="col-xs-12">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>
+			<div class="col-xs-12">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Back</span></a></div>
 		</div>
         <div id="wpnumber"><?php  if(sizeof($details['Workplaces'])==0){$wpnumber = 0;} else{$wpnumber =  sizeof($details['Workplaces'])-1;} echo  $wpnumber; ?></div>
         <input type="hidden" name="wpnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =1; echo $wpnumber;} ?>"/>
 
 		<div class="down3" style="display:none;">
-			<div class="row">
+			<!--<div class="row">
 				<div class="col-lg-12"> 
-					<input class="styled-checkbox" type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="<?php  echo $details['Findpublicbuddy'];?>" <?php if($details['Findpublicbuddy']==1){echo "checked";} ?>>
+					<input class="styled-checkbox" type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="<?php  //echo $details['Findpublicbuddy'];?>" <?php //if($details['Findpublicbuddy']==1){echo "checked";} ?>>
 					<label class="light-font-weight" class="light-font-weight" for="Findpublicbuddy"><span class="note-text">NOTE: </span>Please list my details in the public (visbile to other health professionals)</label>
 				</div>
-			</div>
+			</div>-->
 		<ul class="nav nav-tabs" id="tabmenu">
 		<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
 		<li <?php if($key=='Workplace0') echo 'class ="active" ';?>><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php echo "Workplace".$key;?></a></li>
@@ -747,12 +761,12 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 
 				<div class="col-lg-6">
 					<input class="styled-checkbox" type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" >
-					<label class="light-font-weight" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE: </span>This workplace is included in Find a Pyhsio.</label>
+					<label class="light-font-weight" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE: </span>I want this workplace to be listed on the consumer choose.physio site</label>
 				</div>
 
 				<div class="col-lg-12"> 
 					<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
-					<label class="light-font-weight" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE: </span>Please list my details in the physio</label>	
+					<label class="light-font-weight" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE: </span>I want this workplace to be listed on the APA australian.physio site</label>	
 				</div>
 
 				<div class="row">
@@ -769,7 +783,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							// Send - 
 							// Response - get workplace settings from Aptify via webserice return Json data;
 							// stroe workplace settings into the session
-							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/workplaceSettings.json");
+							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
 							$workplaceSettings=json_decode($workplaceSettingscode, true);	
 							$_SESSION["workplaceSettings"] = $workplaceSettings;
 							foreach($workplaceSettings  as $pair => $value){
@@ -782,29 +796,29 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 				</div>
 
-				<div class="row"> 
+				<!--<div class="row"> 
 						<div class="col-xs-12 col-md-6">
 						<label>Workplace treatment area:</label>
 						<?php  
 					if(!empty($details['Workplaces'][$key]['SpecialInterestAreaID'])) {$SpecialInterestAreaID = explode(",",$details['Workplaces'][$key]['SpecialInterestAreaID']); } else {$SpecialInterestAreaID = array();}
 					?>
-						<select class="chosen-select" id="WTreatmentarea<?php echo $key;?>" name="WTreatmentarea<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+						<select class="chosen-select" id="WTreatmentarea<?php //echo $key;?>" name="WTreatmentarea<?php //echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
 						<?php 
 							// get interest area from Aptify via webserice return Json data;
 							$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
 				            $interestAreas=json_decode($interestAreascode, true);	
 						?>
 						<?php 
-							foreach($interestAreas  as $pair => $value){
-								echo '<option value="'.$interestAreas[$pair]["ID"].'"';
-								if (in_array( $interestAreas[$pair]["ID"],$SpecialInterestAreaID)){ echo "selected='selected'"; } 
-								echo '> '.$interestAreas[$pair]["Name"].' </option>'; 
-							}
+							//foreach($interestAreas  as $pair => $value){
+								//echo '<option value="'.$interestAreas[$pair]["ID"].'"';
+								//if (in_array( $interestAreas[$pair]["ID"],$SpecialInterestAreaID)){ echo "selected='selected'"; } 
+								//echo '> '.$interestAreas[$pair]["Name"].' </option>'; 
+							//}
 					    ?>
 						</select>
 					</div>
 					
-				</div>
+				</div>-->
 
 				<div class="row">
 					<div class="col-xs-6 col-md-3">
@@ -859,6 +873,9 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							foreach($country  as $pair => $value){
 								echo '<option value="'.$country[$pair]['Country'].'"';
 								if ($details['Workplaces'][$key]['Wcountry'] == $country[$pair]['Country']){ echo "selected='selected'"; } 
+								elseif(empty($details['Workplaces'][$key]['Wcountry']) && $country[$pair]['ID']=="14"){
+									echo "selected='selected'";
+								}
 								echo '> '.$country[$pair]['Country'].' </option>';
 								
 							}
@@ -874,7 +891,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 
 					<div class="col-xs-6 col-md-3">
-						<label for="Wwebaddress">Website<span class="tipstyle">*</span></label>
+						<label for="Wwebaddress">Website</label>
 						<input type="text" class="form-control" name="Wwebaddress<?php echo $key;?>" id="Wwebaddress<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wwebaddress'])) {echo "placeholder='Website'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wwebaddress'].'"'; }?>>
 					</div>
 				</div>
@@ -889,6 +906,9 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							foreach($country  as $pair => $value){
 								echo '<option value="'.$country[$pair]['TelephoneCode'].'"';
 								if ($details['Workplaces'][$key]['WPhoneCountryCode'] == $country[$pair]['TelephoneCode']){ echo "selected='selected'"; } 
+								elseif(empty($details['Workplaces'][$key]['WPhoneCountryCode']) && $country[$pair]['ID']=="14"){
+									echo "selected='selected'";
+								}
 								echo '> '.$country[$key]['Country'].' </option>';
 							}
 						?>
@@ -918,7 +938,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						
 						?>
 					<div class="col-xs-12 col-md-6">
-						<label>Does this workplace offer additional languages?</label>
+						<label>What languages do you speak in your professional practice?</label>
 						<select class="chosen-select" id="Additionallanguage<?php echo $key;?>" name="Additionallanguage<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
 							<?php 
 								$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
@@ -1011,14 +1031,14 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<div class="row">
 						<div class="col-xs-12">
 						<input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio" value="" >
-						<label class="light-font-weight" for="Findphysio"><span class="note-text">NOTE:</span>This workplace is included in Find a Pyhsio.</label>
+						<label class="light-font-weight" for="Findphysio"><span class="note-text">NOTE:</span>I want this workplace to be listed on the consumer choose.physio site</label>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-lg-12">
 							<input class="styled-checkbox" type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
-							<label class="light-font-weight" for="Findabuddy0"><span class="note-text">NOTE:</span>Please list my details in the physio</label>
+							<label class="light-font-weight" for="Findabuddy0"><span class="note-text">NOTE:</span>I want this workplace to be listed on the APA australian.physio site</label>
 						</div>
 				    </div>
 
@@ -1036,7 +1056,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							// Send - 
 							// Response - get workplace settings from Aptify via webserice return Json data;
 							// stroe workplace settings into the session
-							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/workplaceSettings.json");
+							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
 							$workplaceSettings=json_decode($workplaceSettingscode, true);	
 							$_SESSION["workplaceSettings"] = $workplaceSettings;
 							foreach($workplaceSettings  as $pair => $value){
@@ -1048,7 +1068,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 				</div>
 
-				<div class="row"> 
+				<!--<div class="row"> 
 					<div class="col-xs-12 col-md-6">
 						<label>Workplace treatment area:</label>
 						<select class="chosen-select" id="WTreatmentarea0" name="WTreatmentarea0" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
@@ -1059,14 +1079,14 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                             $_SESSION["interestAreas"] = $interestAreas;							
 						?>
 						<?php 
-							foreach($interestAreas  as $pair => $value){
-								echo '<option value="'.$interestAreas[$pair]["ID"].'"';
-								echo '> '.$interestAreas[$pair]["Name"].' </option>'; 
-							}
+							//foreach($interestAreas  as $pair => $value){
+								//echo '<option value="'.$interestAreas[$pair]["ID"].'"';
+								//echo '> '.$interestAreas[$pair]["Name"].' </option>'; 
+							//}
 						?>
 						</select>
 					</div>
-				</div>
+				</div>-->
 
 				<div class="row">
 					<div class="col-xs-6 col-md-3">
@@ -1119,6 +1139,9 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							$country=json_decode($countrycode, true);
 							foreach($country  as $key => $value){
 								echo '<option value="'.$country[$key]['Country'].'"';
+								if($country[$key]['ID']=="14"){
+									echo "selected='selected'";
+								}
 								echo '> '.$country[$key]['Country'].' </option>';
 								
 							}
@@ -1134,7 +1157,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 
 					<div class="col-xs-6 col-md-3">
-						<label for="Wwebaddress">Website<span class="tipstyle">*</span></label>
+						<label for="Wwebaddress">Website</label>
 						<input type="text" class="form-control" name="Wwebaddress0" id="Wwebaddress0">
 					</div>
 				</div>
@@ -1148,7 +1171,9 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							$country=json_decode($countrycode, true);						
 							foreach($country  as $key => $value){
 								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
-								
+								if($country[$key]['ID']=="14"){
+									echo "selected='selected'";
+								}
 								echo '> '.$country[$key]['Country'].' </option>';
 							}
 						?>
@@ -1270,7 +1295,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 			</div>
 
 			<div class="col-xs-12">   
-				<a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Last</span></a>
+				<a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Back</span></a>
 			</div>
 		
 		</div>
@@ -1350,6 +1375,10 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 								foreach($country  as $pair => $value){
 									echo '<option value="'.$country[$pair]['ID'].'"';
 									if ($details['PersonEducation'][$key]['Country'] == $country[$pair]['ID']){ echo "selected='selected'"; } 
+									elseif(empty($details['PersonEducation'][$key]['Country']) && $country[$pair]['ID']=="14"){
+											echo "selected='selected'";
+									}
+
 									echo '> '.$country[$pair]['Country'].' </option>';
 									
 								}
@@ -1375,7 +1404,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 				<?php endforeach;?>
 				</div>
-			<div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>
+			<div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Back</span></a></div>
 		</div>
 	</div>
 </form>   

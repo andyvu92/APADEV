@@ -241,6 +241,7 @@ if($resultdata['result']) {
 	// Where:{Address1, Address2, Address3(if exist), Address4(if exist), City,
 	//	state, Postcode}, CPD hours, Cost, Your registration stats
 	$pd_detail = GetAptifyData("29", $pdArr);
+	print_r($pd_detail);
     $pd_detail = $pd_detail['MeetingDetails'][0];
 	$prices = $pd_detail['Pricelist'];
 	$pricelistGet = Array();

@@ -488,7 +488,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 										foreach($country  as $key => $value){
 										echo '<option value="'.$country[$key]['TelephoneCode'].'"';
 										if ($details['Home-phone-countrycode'] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; }
-										elseif(empty($details['Home-phone-countrycode']) && $country[$key]['TelephoneCode']=="61"){
+										elseif(empty($details['Home-phone-countrycode']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
 										}
 										echo '> '.$country[$key]['Country'].' </option>';
@@ -520,6 +520,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 									foreach($country  as $key => $value){
 										echo '<option value="'.$country[$key]['TelephoneCode'].'"';
 										if ($details['Mobile-country-code'] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; } 
+										elseif(empty($details['Mobile-country-code']) && $country[$key]['ID']=="14"){
+											echo "selected='selected'";
+										}
 										echo '> '.$country[$key]['Country'].' </option>';
 									}
 								?>
@@ -595,7 +598,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								foreach($country  as $key => $value){
 									
 									echo '<option value="'.$country[$key]['Country'].'"';
-									if ($details['Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+									if ($details['Country'] == $country[$key]['Country']){ echo "selected='selected'"; }
+									elseif(empty($details['Country']) && $country[$key]['ID']=="14"){
+											echo "selected='selected'";
+									}
 									echo '> '.$country[$key]['Country'].' </option>';
 									
 								}
@@ -674,6 +680,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								
 								echo '<option value="'.$country[$key]['Country'].'"';
 								if ($details['Mailing-country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+								elseif(empty($details['Mailing-country']) && $country[$key]['ID']=="14"){
+											echo "selected='selected'";
+									}
 								echo '> '.$country[$key]['Country'].' </option>';
 							}
 							?>
@@ -721,7 +730,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				<div class="down2" style="display:none;" >
 						<input type="hidden"  name="Status" value="<?php echo $details['Status'];?>">
 						<div class="col-xs-12 col-sm-6 col-md-6">
-							<label for="">Your email address(Member ID)<span class="tipstyle">*</span></label>
+							<label for="">Member ID(email address)<span class="tipstyle">*</span></label>
 							<input type="text" class="form-control" name="Memberid"  <?php if (empty($details['Memberid'])) {echo "placeholder='Member ID(Your email address)'";}   else{ echo 'value="'.$details['Memberid'].'"'; }?> readonly>
 						</div>
 					
@@ -748,7 +757,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					
 						<div class="col-xs-12 col-md-6">
 							<label for="">Your National group</label>
-							<select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple disabled>
+							<select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple disabled data-placeholder="Choose from our 21 National Groups">
 							<?php 
 							// get national group from Aptify via webserice return Json data;
 							// 2.2.19 - get national group
@@ -796,7 +805,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						
 						?>
 						<div class="col-xs-12">
-							<label>Your special interest area:</label>
+							<label>Tell us what you'd like to know more about</label>
 							<select class="chosen-select" id="interest-area" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area..."data-placeholder="Choose interest area...">
 							<?php 
 							  // 2.2.37 - get interest area list
@@ -1005,6 +1014,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								
 								echo '<option value="'.$country[$key]['Country'].'"';
 								if ($details['Shipping-country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+								elseif(empty($details['Shipping-country']) && $country[$key]['ID']=="14"){
+											echo "selected='selected'";
+									}
 								echo '> '.$country[$key]['Country'].' </option>';
 							}
 							?>
@@ -1075,6 +1087,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								
 								echo '<option value="'.$country[$key]['Country'].'"';
 								if ($details['Billing-Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+								elseif(empty($details['Billing-Country']) && $country[$key]['ID']=="14"){
+											echo "selected='selected'";
+									}
 								echo '> '.$country[$key]['Country'].' </option>';
 							}
 							?>
@@ -1091,10 +1106,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				
 				
 				<div class="down3" style="display:none;">
-						<div class="col-xs-12"> 
-							<input class="styled-checkbox" type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="<?php  echo $details['Findpublicbuddy'];?>" <?php if($details['Findpublicbuddy']=="True"){echo "checked";} ?>>
+						<!--<div class="col-xs-12"> 
+							<input class="styled-checkbox" type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="<?php  echo $details['Findpublicbuddy'];?>" <?php //if($details['Findpublicbuddy']=="True"){echo "checked";} ?>>
 							<label  style="font-weight: 300" for="Findpublicbuddy"><span class="note-text">NOTE: </span>Please list my details in the public (visbile to other health professionals)</label>	
-						</div>
+						</div>-->
 				
 					<div class="col-xs-12">
 						<ul class="nav nav-tabs" id="tabmenu">
@@ -1113,12 +1128,12 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 
 			 		<div class="col-xs-12">
 						<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
-						<label  style="font-weight: 300" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE: </span>Please list my details in the physio</label>
+						<label  style="font-weight: 300" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE: </span>I want this workplace to be listed on the APA australian.physio site</label>
 					</div>
 
 					<div class="col-xs-12"> 
 						<input class="styled-checkbox" type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" <?php if($details['Workplaces'][$key]['Findphysio']=="True"){echo "checked";} ?>>
-						<label  style="font-weight: 300" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE: </span>This workplace is included in Find a Pyhsio.</label>
+						<label  style="font-weight: 300" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE: </span>I want this workplace to be listed on the consumer choose.physio site</label>
 					</div>
 
 				<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
@@ -1177,7 +1192,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								$country=json_decode($countrycode, true);
 								foreach($country  as $pair => $value){
 									echo '<option value="'.$country[$pair]['Country'].'"';
-									if ($details['Workplaces'][$key]['Wcountry'] == $country[$pair]['Country']){ echo "selected='selected'"; } 
+									if ($details['Workplaces'][$key]['Wcountry'] == $country[$pair]['Country']){ echo "selected='selected'"; }
+									elseif(empty($details['Workplaces'][$key]['Wcountry']) && $country[$pair]['ID']=="14"){
+											echo "selected='selected'";
+									}
 									echo '> '.$country[$pair]['Country'].' </option>';
 									
 								}
@@ -1193,7 +1211,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
-								<label for="Wwebaddress<?php echo $key;?>">Website<span class="tipstyle">*</span></label>
+								<label for="Wwebaddress<?php echo $key;?>">Website</label>
 								<input type="text" class="form-control" name="Wwebaddress<?php echo $key;?>" id="Wwebaddress<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wwebaddress'])) {echo "placeholder='Website'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wwebaddress'].'"'; }?> required>
 							</div>
 
@@ -1208,7 +1226,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								if(!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {$WAdditionalLanguage = explode(",",$details['Workplaces'][$key]['AdditionalLanguage']); } else {$WAdditionalLanguage = array();}
 							?>
 							<div class="col-xs-12 col-md-6">
-								<label>Does this workplace offer additional languages?</label>
+								<label>What languages do you speak in your professional practice?</label>
 								<select class="chosen-select" id="Additionallanguage<?php echo $key;?>" name="Additionallanguage<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
 									
 									<?php 
@@ -1290,7 +1308,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							// Send - 
 							// Response - get workplace settings from Aptify via webserice return Json data;
 							// stroe workplace settings into the session
-							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/workplaceSettings.json");
+							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
 							$workplaceSettings=json_decode($workplaceSettingscode, true);	
 							$_SESSION["workplaceSettings"] = $workplaceSettings;
 							foreach($workplaceSettings  as $pair => $value){
@@ -1466,13 +1484,13 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				    <input type="hidden" name="WorkplaceID0" value="-1">
 
 					<div class="col-xs-12">
-						<input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio" value="" >
-						<label  style="font-weight: 300" for="Findphysio"><span class="note-text">NOTE:</span>This workplace is included in Find a Pyhsio.</label>
+						<input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio0" value="" >
+						<label  style="font-weight: 300" for="Findphysio"><span class="note-text">NOTE:</span>I want this workplace to be listed on the consumer choose.physio site</label>
 					</div>
 
 					<div class="col-xs-12">
 						<input class="styled-checkbox" type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
-						<label  style="font-weight: 300" for="Findabuddy0"><span class="note-text">NOTE:</span>Please list my details in the physio</label>
+						<label  style="font-weight: 300" for="Findabuddy0"><span class="note-text">NOTE:</span>I want this workplace to be listed on the APA australian.physio site</label>
 					</div>
 
 					<div class="col-xs-12 col-sm-6">
@@ -1529,6 +1547,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							$country=json_decode($countrycode, true);
 							foreach($country  as $key => $value){
 								echo '<option value="'.$country[$key]['Country'].'"';
+								if($country[$key]['ID']=="14"){
+									echo "selected='selected'";
+									}
 								echo '> '.$country[$key]['Country'].' </option>';
 								
 							}
@@ -1544,7 +1565,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					</div>
 
 					<div class="col-xs-12 col-sm-6 col-md-6">
-						<label for="Wwebaddress">Website<span class="tipstyle">*</span></label>
+						<label for="Wwebaddress">Website</label>
 						<input type="text" class="form-control" name="Wwebaddress0" id="Wwebaddress0">
 					</div>
 
@@ -1635,7 +1656,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							// Send - 
 							// Response - get workplace settings from Aptify via webserice return Json data;
 							// stroe workplace settings into the session
-							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/workplaceSettings.json");
+							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
 							$workplaceSettings=json_decode($workplaceSettingscode, true);	
 							$_SESSION["workplaceSettings"] = $workplaceSettings;
 							foreach($workplaceSettings  as $pair => $value){
@@ -1764,6 +1785,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								foreach($country  as $pair => $value){
 									echo '<option value="'.$country[$pair]['ID'].'"';
 									if ($details['PersonEducation'][$key]['Country'] == $country[$pair]['ID']){ echo "selected='selected'"; } 
+									elseif(empty($details['PersonEducation'][$key]['Country']) && $country[$pair]['ID']=="14"){
+											echo "selected='selected'";
+									}
+
 									echo '> '.$country[$pair]['Country'].' </option>';
 									
 								}

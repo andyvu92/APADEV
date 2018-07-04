@@ -31,6 +31,8 @@ function GetAptifyData($TypeAPI, $ArrayIn) {
 		logTransaction($TypeAPI,$arrayToJson,$jsonreturn);
 	}
     return JSONArrayConverter("toArray", $jsonreturn);
+	
+	
 }
 
 

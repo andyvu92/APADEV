@@ -535,7 +535,8 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			print_r($variables);
 			echo "<br />47. Get calculating the Order Total and Schedule Payments <br />";
 		   	$JSONreturn = curlRequest($API, "JSON", $jsonVersion);	
-			echo $JSONreturn;
+			print_r($JSONreturn);
+			echo "PD order schedulement!!!!!!";
 			return $JSONreturn;
 			break;			
 	}

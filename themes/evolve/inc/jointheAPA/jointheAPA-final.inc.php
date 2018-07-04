@@ -97,13 +97,17 @@ if(isset($_POST['step2'])) {
 	if(isset($_SESSION['UserId'])){ $postReviewData['userID'] = $_SESSION['UserId'];  } 
 	if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption'] == '1' ? 1:0; }
 	$postReviewData['InstallmentFor'] = "Membership";
-	if(isset($_POST['PRF'])){ 
+	if(isset($_POST['PRF'])&& $_POST['PRF']!="Other"){ 
 		$postReviewData['PRFdonation'] = $_POST['PRF']; 
-		//check is there PRF product existed for this user
-		checkShoppingCart($userID=$_SESSION['UserId'], $type="", $prodcutID="PRF");
-		//save PRF product into APA database function
-		createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $type="",$coupon=$_POST['PRF']);  
 	}
+	elseif(isset($_POST['PRF'])&& $_POST['PRF']=="Other"){
+		$_POST['PRF'] = $_POST['PRFOther'];
+		$postReviewData['PRFdonation'] = $_POST['PRF'];		
+	}
+	//check is there PRF product existed for this user
+	checkShoppingCart($userID=$_SESSION['UserId'], $type="", $prodcutID="PRF");
+	//save PRF product into APA database function
+	createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $type="",$coupon=$_POST['PRF']); 
 	//if(isset($_POST['Rollover'])){ $postReviewData['Rollover'] = $_POST['Rollover']; }
 	echo "this is payment card".$_POST['Paymentcard'];
 	if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
@@ -357,7 +361,7 @@ $PRFPrice = 0;
 <form id="pform" action="" method="POST"><input type="hidden" name="goP"></form>
 <form id="deletePRFForm" action="" method="POST"><input type="hidden" name="step2-2"></form>
 <form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>	
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="your-details-prevbutton8"><span class="dashboard-button-name">Last</span></a></div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="your-details-prevbutton8"><span class="dashboard-button-name">Back</span></a></div>
 <?php if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"): ?>
 <div id="schedulePOPUp" class="modal fade" role="dialog">
 	<div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">

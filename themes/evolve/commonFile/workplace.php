@@ -10,12 +10,12 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 
 	<div class="col-xs-12">
 		<input class="styled-checkbox" type="checkbox" name="Findphysio'.$i.'" id="Findphysio'.$i.'" value="" >
-		<label class="light-font-weight" for="Findphysio'.$i.'"><span class="note-text">NOTE: </span>This workplace is included in Find a Pyhsio.</label>
+		<label class="light-font-weight" for="Findphysio'.$i.'"><span class="note-text">NOTE: </span>I want this workplace to be listed on the consumer choose.physio site</label>
 	</div>
 
 	<div class="col-xs-12">
 		<input class="styled-checkbox" type="checkbox" name="Findabuddy'.$i.'" id="Findabuddy'.$i.'" value="" >
-		<label class="light-font-weight" for="Findabuddy'.$i.'"><span class="note-text">NOTE: </span>Please list my details in the physio</label>
+		<label class="light-font-weight" for="Findabuddy'.$i.'"><span class="note-text">NOTE: </span>I want this workplace to be listed on the APA australian.physio site</label>
 	</div>
 
 <div class="row">
@@ -69,6 +69,9 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 		$country = $sessionCountry;
 		foreach($country  as $key => $object){
 			echo '<option value="'.$country[$key]['Country'].'">'.$country[$key]['Country'].'</option>';
+			if($country[$key]['ID']=="14"){
+				echo "selected='selected'";
+			}
 		}
 	echo '
 	</select>
@@ -95,7 +98,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 <div class="row">
 
 	<div class="col-xs-12">
-		<label>Does this workplace offer additional languages?</label>
+		<label>What languages do you speak in your professional practice?</label>
 		<select class="chosen-select" multiple id="Additionallanguage'.$i.'" name="Additionallanguage'.$i.'[]">';
 			$Language = $sessionLanguage;
 			foreach($Language  as $key => $object){

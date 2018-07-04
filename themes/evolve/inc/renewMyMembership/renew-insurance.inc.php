@@ -141,7 +141,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			</div>
 		</div>
 
-		<div class="col-xs-12" style="margin-top: 20px;"><a id="insuranceControl" class="accent-right-btn"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton5"><span class="dashboard-button-name">Last</span></a></div>
+		<div class="col-xs-12" style="margin-top: 20px;"><a id="insuranceControl" class="accent-right-btn"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton5"><span class="dashboard-button-name">Back</span></a></div>
 	</div>
 </form>
 <div id="insurancePopUp" style="display:none;">
