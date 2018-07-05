@@ -187,28 +187,226 @@
     }
 }
 
+/*----------------PREDEFINED COLORS-------------------*/
+@blue: #009fda;
+
+
+/*----------------PD SEARCH RESULT-------------------*/
 #block-block-240{
-    padding: 50px 0px 80px;
+    padding: 50px 0px 80px!important;
 }
 
-#section-content-top .container .row #block-block-241{
-    .content{
-        display: block;
+#section-content-top .container{
+    width: 100%;
+    max-width: 1500px;
+    .row #block-block-241{
+        .content{
+            display: block;
+            width: 100%;
+            margin: 0 auto;
+            .light-lead-heading{
+                color: @blue;
+                font-size: 3.5em;
+                margin-bottom: 25px;
+                font-weight: 400;
+            }
+            .pager{
+                text-align: left;
+                a, div{
+                    color: #000;
+                    padding: 0 5px;
+                }
+                .Pagebutton{
+                    font-size: 1.2em;
+                    display: inline;
+                }
+            }
+            .pageSetting{
+                margin: 20px 0;
+                text-align: right;
+                display: inline-block;
+                width: 50%;
+                p, select{
+                    display: inline;
+                    margin: 0;
+                    font-size: 1.2em;
+                }
+                select{
+                    border: none;
+                    background: none;
+                    color: #000;
+                }
+            }
+            .pageItem{
+                margin: 20px 0;
+                text-align: right;
+                display: inline-block;
+                width: 49%;
+                p{
+                    margin: 0;
+                    span{
+                        padding: 0 3px;
+                    }
+                }
+            }
+            .align-center{
+                text-align: center;
+            }
+            .align-right{
+                text-align: right;
+            }
+            .flex-container{
+                .flex-cell{
+                    border-bottom: 1px solid #d3d4d5;
+                    padding: 20px 0;
+                    font-size: 1.2em;
+                    color: #000;
+                    div[class^="flex-col"]{
+                        text-align: center;
+                    }
+                    div[class^="flex-col"]:nth-child(1){
+                        text-align: left;
+                    }
+                    &.heading-row{
+                        border-top: 1px solid #d3d4d5;
+                        padding: 10px 0;
+                        .table-heading{
+                            font-size: 0.8em;
+                            font-weight: 500;
+                            color: #000;
+                            text-transform: uppercase;
+                        }
+                    }
+                    .title{
+                        display: block;
+                        font-weight: 600;
+                        a{
+                            color: #000;
+                        }
+                    }
+                    .excerpt{
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        line-height: 16px;
+                        max-height: 43px;
+                        p{
+                            margin: 0;
+                        }
+                        br, strong, div{
+                            display: none;
+
+                        }
+                    }
+                    .readmore{
+                        display: block;
+                        font-weight: 600;
+                        a{
+                            color: @blue;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 
-#block-block-240 h3{
-    font-weight:400!important;
+/*----------------PD PAGES-------------------*/
+#block-system-main{
+    .content{
+        .node{
+            .region{
+                .light-lead-heading{
+                    color: @blue;
+                    font-size: 3.5em;
+                    margin-bottom: 25px;
+                    font-weight: 500;
+                    line-height: 1em;
+                }
+                .sub-title{
+                    font-family: 'Roboto';
+                    font-size: 1.4em;
+                    color: @blue;
+                }
+                .blue-heading{
+                    color: @blue;
+                    font-family: 'Roboto';
+                    font-size: 2em;
+                    font-weight: 700;
+
+                }
+                .left-icon{
+                    max-width: 70px;
+                }
+                .large-icon{
+                    width: 40px;
+                    height: 40px;
+                    margin: 0 10px 0 0;
+                    display: block;
+                    float: left;
+                    background-repeat:no-repeat;
+                    background-size:contain;
+                    background-position:center;
+                }
+                .learning-outcome-icon{
+                    background-image:url('/sites/default/files/dashboard-icon/invoice-B.png');
+                }
+                .prerequiresite-icon{
+                    background-image:url('/sites/default/files/dashboard-icon/invoice-B.png');
+                }
+                .presenters-bio-icon{
+                    background-image:url('/sites/default/files/dashboard-icon/invoice-B.png');
+                }
+                .section{
+                    padding-bottom: 36px;
+                }
+            }
+            .region-right-sidebar{
+                .top-banner{
+                    width: 100%;
+                    height: 200px;
+                }
+                .calendar-icon{
+                    width: 40px;
+                    height: 40px;
+                    margin: 0 10px 0 0;
+                    display: block;
+                    float: left;
+                    background-repeat:no-repeat;
+                    background-size:contain;
+                    background-position:center;
+                    background-image:url('/sites/default/files/dashboard-icon/invoice-B.png');
+                }
+                .address-icon{
+                    width: 40px;
+                    height: 40px;
+                    margin: 0 10px 0 0;
+                    display: block;
+                    float: left;
+                    background-repeat:no-repeat;
+                    background-size:contain;
+                    background-position:center;
+                    background-image:url('/sites/default/files/dashboard-icon/invoice-B.png');
+                }
+            }
+        }
+    }
+    p{
+        line-height: 20px;
+        margin: 0;
+        margin-bottom: 10px!important;
+        font-size: 1.2em;
+        color: black;
+    }
 }
+
 
 #block-block-240 .form-control{
     background-color:transparent!important;
 	border: 1px solid white!important;
 }
 
-#block-block-241 h3{
-    color:#004250!important;
-}
 #block-block-241 table th{
     background-color: #5E6167;
 	color: white;
@@ -317,11 +515,7 @@ div[id^="myCart"] .modal-body a.addCartlink{
     border-right: 1px solid lightgray;
 	height:140px;
 }
-#node-249 h3{
-    color:#009FDA!important;
-	font-size:15px!important;
-	
-}
+
 .detailContent div:nth-child(odd) {
     border-left: 1px solid lightgray;
 }
@@ -652,35 +846,7 @@ input[name="otherjob"]{
 .resultMobile{
     display:none;
 }
-#block-block-241 .Pagebutton, #block-block-241 .PagebuttonHighlight {
-    width: 3px;
-    height: 10px;
-    padding: 7px;
-    margin: 2px 4px 18px;
-    text-align: center;
-    float:left;
-    color: #004250;
-}
 
-#block-block-241 .pageSetting p {
-    margin-left: 54%;
-    margin-top: 1%;
-    color: #004250 !important;
-    color: #004250!important;
-}
-
-#block-block-241 select#pagesize {
-    margin-left: 60%;
-    margin-top: -42px;
-	width: 46px;
-    color: #004250;
-}
-#block-block-241 .pageItem {
-    width: 50%;
-    margin-left: 64%;
-    margin-top: -27px;
-    margin-bottom: 8px;
-}
 #block-block-241 .pageItem p {
     color: #004250 !important;
 }
