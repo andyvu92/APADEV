@@ -18,14 +18,37 @@ global $base_url;
 // PDcount,
 // [ PD id, PD title, PD type, CPD hour, City, State,
 // Begin date, End date ]
-$request["Latitude"] = "";
-$request["Longitude"] = "";
-$request["userID"] = "";
-$request["Radius"] = "";
-$request["Keywords"] = "";
-$request["Typeofpd"] = "";
-$request["Nationalgp"] = "";
-$request["Regionalgp"] = "";
+if(isset($_POST["lat"])) {	$request["Latitude"] = $_POST["lat"];
+} else { $request["Latitude"] = ""; }
+if(isset($_POST["lng"])) {	$request["Longitude"] = $_POST["lng"];
+} else { $request["Longitude"] = ""; }
+if(isset($_SESSION['UserID'])) { $sendData["UserID"] = $_SESSION['UserId'];
+} else { $sendData["UserID"] = "-1"; }
+if(isset($_POST["Radius"])) { $request["Radius"] = $_POST["Radius"];
+} else { $request["Radius"] = ""; }
+if(isset($_POST["Keywords"])) {	$request["Keyword"] = $_POST["Keywords"];
+} else { $request["Keyword"] = ""; }
+if(isset($_POST["Typeofpd"])) {	$request["Typeofpd"] = $_POST["Typeofpd"];
+} else { $request["Typeofpd"] = ""; }
+if(isset($_POST["Nationalgp"])) {	$request["Nationalgp"] = $_POST["Nationalgp"];
+} else { $request["Nationalgp"] = ""; }
+if(isset($_POST["Regionalgp"])) {	$request["Regionalgp"] = $_POST["Regionalgp"];
+} else { $request["Regionalgp"] = ""; }
+if(isset($_POST["State"])) {	$request["State"] = $_POST["State"];
+} else { $request["State"] = ""; }
+
+
+
+if(isset($_POST["lat"])) {	$request["Latitude"] = $_POST["lat"];
+} else { $request["Latitude"] = ""; }
+if(isset($_POST["lat"])) {	$request["Latitude"] = $_POST["lat"];
+} else { $request["Latitude"] = ""; }
+if(isset($_POST["lat"])) {	$request["Latitude"] = $_POST["lat"];
+} else { $request["Latitude"] = ""; }
+
+$request[""] = "";
+$request[""] = "";
+$request[""] = "";
 $request["State"] = "";
 $request["Suburb"] = "";
 $request["Begindate"] = "";
@@ -42,7 +65,7 @@ if(isset($_GET["page"])) {
 }
 $results = GetAptifyData("28", $request);
 echo "result:<br>";
-print_r($results);
+//print_r($results);
 
 $totalNum = $results["MeetingDetails"][0]["PDcount"]; //sizeof($results);
 $results = $results["MeetingDetails"];
@@ -64,7 +87,7 @@ if($totalNum % $request["PageSize"] > 0) {
 	});
 	******/ 
 	
-	$_SESSION["searchResult"] = $results;
+	$_SESSION["`searchResult`"] = $results;
 
 	/******** search result pagination *****/
 	
@@ -138,29 +161,26 @@ if($totalNum % $request["PageSize"] > 0) {
 	foreach($results as $result){
 
 		echo "<tr>";
-		echo	'<td><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a><br>".$result['Summary'].'<br><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Read more</span></a></td>';
+		echo	'<td><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a><br>".$result['Description'].'<br><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Read more</span></a></td>';
+		if(isset($result['CPDhours'])) {
+			echo	"<td>?</td>";
+		} else {
+			echo	"<td>".$result['CPDhours'][0]."</td>";
+		}
 		echo	"<td>".$result['PDType']."</td>";
-		echo	"<td>".$result['CPDhours']."</td>";
 		echo	"<td>".$result['City']."</td>";
 		echo	"<td>".$result['State']."</td>";
 		echo	"<td>".$result['StartDate']."</td>";
 		echo	"<td>".$result['EndDate']."</td>";
 		echo	"<td>";
-		switch($result['Eventstatus']){
-			case "1":
-				echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></a></i>';
-				break;
-			case "2":
-				echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></a></i>';
-				break;
-			case "3":
-				echo  "COURSE  FULL";
-				break;
-			case "4":
-				echo "Registration closed";
-				break;
-			default:
-				echo "none";
+		$gap = intval($result['Totalnumber']) - intval($result['Enrollednumber']);
+		$tenP = intval($result['Totalnumber'])/10;
+		if($gap == 0) {
+			echo  "COURSE  FULL";
+		} elseif($gap < $tenP) {
+			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true">Almost full</a></i>';
+		} else {
+			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true">Open</a></i>';
 		}
 		echo	"</td>";
 		echo "</tr>";
@@ -173,26 +193,23 @@ if($totalNum % $request["PageSize"] > 0) {
 <div class="resultMobile">
 <?php foreach($results as $result){
 echo '<div class="resultDisplay">';
-echo '<div class="resultTitle"><span class="mobiledes">Title:</span><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a><br>".$result['Summary'].'<br><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Read more</span></a></div>';
-echo '<div class="resultType"><span class="mobiledes">Type:</span>'.$result['PDType'].'&nbsp;<span class="mobiledes">CPD HRS:</span>'.$result['CPDhours'].'</div>';
+echo '<div class="resultTitle"><span class="mobiledes">Title:</span><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a><br>".$result['Description'].'<br><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Read more</span></a></div>';
+if(isset($result['CPDhours'])) {
+	echo '<div class="resultType"><span class="mobiledes">Type:</span>'.$result['PDType'].'&nbsp;<span class="mobiledes">CPD HRS:</span>?</div>';
+} else {
+	echo '<div class="resultType"><span class="mobiledes">Type:</span>'.$result['PDType'].'&nbsp;<span class="mobiledes">CPD HRS:</span>'.$result['CPDhours'].'</div>';
+}
 echo '<div class="resultState"><span class="mobiledes">City:</span>'.$result['City'].'&nbsp;<span class="mobiledes">State:</span>'.$result['State'].'</div>';
 echo '<div class="resultTime"><span class="mobiledes">BeginDate:</span>'.$result['StartDate'].'<span class="mobiledes">&nbsp;EndDate:</span>'.$result['EndDate'].'</div>';
 echo '<div class="resultAction"><span class="mobiledes">Add to wishlist</span>';
-switch($result['Eventstatus']){
-	case "1":
-		echo '<a target="_blank" href="pd-wishlist?id='.$result['MeetingID'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></a></i>';
-		break;
-	case "2":
-		echo '<a target="_blank" href="pd-wishlist?id='.$result['MeetingID'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></a></i>';
-		break;
-	case "3":
-		echo  "COURSE  FULL";
-		break;
-	case "4":
-		echo "Registration closed";
-		break;
-	default:
-		echo "none";
+$gap = intval($result['Totalnumber']) - intval($result['Enrollednumber']);
+$tenP = intval($result['Totalnumber'])/10;
+if($gap == 0) {
+	echo  "COURSE  FULL";
+} elseif($gap < $tenP) {
+	echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true">Almost full</a></i>';
+} else {
+	echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true">Open</a></i>';
 }
 echo "</div>";
 echo "</div>";
@@ -244,7 +261,9 @@ echo "</div>";
 ?>
 <?php  /*******************************right item******************/?>
 	<div class="pageSettingBottom"><p>Pagesize:</p><select id="pagesizebottom" name="pagesizebottom" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option></select></div>
-	<div class="pageItemBottom"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $numResult+1;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $numResult+$numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
+	<?php /*
+	<div class="pageItemBottom"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $totalNum+1;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $totalNum+$numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
+	*/ ?>
 <?php /*****************************end right item*************/?>
 </div>
 <?php logRecorder(); ?>

@@ -168,7 +168,7 @@ if(count($PostArray) == 0) { // GET data
 	    ?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
-				<p><span style="color:#009fda; font-size: 1.2em;"><strong>What you're sighned up for</strong></span></p>
+				<p><span style="color:#009fda; font-size: 1.2em;"><strong>What you're signed up for</strong></span></p>
 				<form action="/subscriptions" method="POST">
 					<ul>
 							<?php
