@@ -95,45 +95,115 @@
 /* --------------------------------------------------------- */
 /* ----------------------- PD search Added by Jinghu ----------------------- */
 #pdSearch{
-    margin-left:23%;
+    display: block;
+    margin: 0 auto;
+    float: none;
+    text-align: left;
+    .row{
+        margin: 0;
+    }
+    div[class^="col"]{
+        margin-top: 18px;
+    }
+    label{
+        margin-bottom: 2px;
+        font-weight: 400;
+        color: #a6a8ab;
+    }
+    .light-lead-heading{
+        color: #fff;
+        font-size: 3.5em;
+        margin-bottom: 25px;
+    }
+    input, select{
+        font-size: 1.4em;
+        height: 40px;
+        margin: 0;
+        background: none;
+        color: rgba(255,255,255,0.8);
+        width: 100%!important;
+        line-height: 40px;
+        border: 1px solid #665f5e;
+        &:focus{
+            border: 1px solid #665f5e;
+            box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075) inset, 0 0 0px rgba(126, 239, 104, 0.6);
+            outline: 0 none;
+        }
+    }
+    input[type="date"]::-webkit-inner-spin-button { 
+        display: none; 
+    }
+    input[type="date"]::-webkit-calendar-picker-indicator{
+        background: none;
+    }
+    .chosen-container-multi{
+        .chosen-choices{
+            height: 40px;
+            background: none;
+            border: 1px solid #665f5e;
+            padding: 0;
+        }
+    }
+    span{
+        color: #fff;
+        font-size: 1.4em;
+        a{
+            color: #fff;
+            text-decoration: underline;
+        }
+        &.small-text{
+            font-size: 1.2em;
+            display: block;
+        }
+    }
+    .accent-btn{
+        float: none!important;
+        display: inline-block;
+        margin-bottom: 20px;
+        margin-top: 4px;
+        background-color: @bright-blue;
+        border-width: 0px !important;
+        color: #fff!important;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-weight: 400;
+        font-family: 'Roboto';
+        padding: 15px 45px;
+        &:hover{
+            color: #fff;
+            opacity: 0.9;
+            cursor: pointer;
+        }
+        i{
+            margin-right: 5px;
+        }
+    }
+    .align-right{
+        text-align: right;
+    }
+    textarea, select, input{
+        border: 1px solid #665f5e;
+        padding: 8px 15px;
+    }
 }
+
+#block-block-240{
+    padding: 50px 0px 80px;
+}
+
+#section-content-top .container .row #block-block-241{
+    .content{
+        display: block;
+    }
+}
+
 #block-block-240 h3{
     font-weight:400!important;
 }
-#block-block-240 input[type="text"]{
-    
-	margin: 15px 0;
-	width: 100%;
-	height:50px;
-   	background: transparent!important;
-}
-#block-block-240 input[type="date"]{
-    margin: -4px 0;
-	width: 100%;
-	height:50px;
-   	background: transparent!important;
-	border:1px solid white;
-	padding:10px;
-}
-#block-block-240 input[placeholder]{
-    color:white;
-	backgroud:transparent;
-}
+
 #block-block-240 .form-control{
     background-color:transparent!important;
 	border: 1px solid white!important;
-}
-#block-block-240 .chosen-container-multi .chosen-choices{
-    margin-bottom:10px!important;
-	padding:0px 12px!important;
-	background-image:none!important;
-	background-color:transparent!important;
-	border:1px solid white!important;
-	
-}
-#block-block-240 .chosen-container-multi .chosen-choices li.search-field input[type="text"]{
-    height:18px!important;
-	color:white!important;
 }
 
 #block-block-241 h3{
@@ -229,11 +299,7 @@ div[id^="myCart"] .modal-body a.addCartlink{
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    white;
 }
-.searchds{
-    padding-top:20px;
-	padding-left:0px;
-	color:white;
-}
+
 .searchds a {
     color: white;
    
@@ -595,14 +661,12 @@ input[name="otherjob"]{
     float:left;
     color: #004250;
 }
-#block-block-241 .pageSetting{
-    
-}
+
 #block-block-241 .pageSetting p {
     margin-left: 54%;
     margin-top: 1%;
     color: #004250 !important;
-    font-color: #004250!important;
+    color: #004250!important;
 }
 
 #block-block-241 select#pagesize {
@@ -650,10 +714,9 @@ form#registerMemberForm .error, form#updatePaymentForm .error{
 
 .applyCouponButton {
     float: left;
-    margin-top: -37px;
-    margin-left: 182px!important;
+    margin-top: -35px;
+    margin-left: 201px;
     color: white;
-	width: 76px!important;
 	
 }
 input[name="Couponcode"]::-webkit-input-placeholder {

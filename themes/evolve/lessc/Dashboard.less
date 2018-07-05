@@ -59,8 +59,8 @@
 }
 
 body.modal-open {
-    overflow: hidden;
-	position: fixed;
+    overflow: unset;
+	position: relative;
 }
 /* ********************************************************* */
 
@@ -162,12 +162,6 @@ body.modal-open {
 }
 #block-block-184 .dashboard-bottom-button{
     margin-top:20px;
-}
-
-.dashboard-icon{
-    display:inline-block;
-    color:white;
-    margin-left:25%;
 }
 
 #block-block-184 .carousel-control{
@@ -766,7 +760,7 @@ input[id^="Additional-qualifications"] {
 }
 
 .table-heading{
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: 600;
 }
 
@@ -779,6 +773,10 @@ a.accent-btn{
 	background-color: @bright-blue;
     border-width: 0px !important;
     color: #fff!important;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 300;
+    font-family: 'Roboto';
     &:hover{
         color: #fff;
         opacity: 0.9;
@@ -790,10 +788,13 @@ a.accent-btn{
     display: inline-block;
     margin-bottom: 20px;
     margin-top: 4px;
-    padding: 5px 20px;
+    padding: 9px 20px;
 	background-color: @bright-blue;
     border-width: 0px !important;
     color: #fff!important;
+    text-transform: uppercase;
+    font-family: 'Roboto';
+    font-weight: 200;
     &:hover{
         color: #fff;
         opacity: 0.9;
@@ -808,6 +809,10 @@ a[class^="join-details-button"], a.accent-right-btn{
 	background-color: @bright-blue;
     border-width: 0px !important;
     color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 300;
+    font-family: 'Roboto';
     &:hover{
         color: #fff;
         opacity: 0.9;
@@ -822,6 +827,10 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
 	background-color: @bright-blue;
     border-width: 0px !important;
     color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 300;
+    font-family: 'Roboto';
     &:hover{
         color: #fff;
         opacity: 0.9;
@@ -834,6 +843,7 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
     background: @dark-transparent-background;
     padding: @no-padding;
     height: auto;
+
     @media all and (max-width:@larger-tablet-width) {
         position: fixed;
         bottom: 0;
@@ -873,7 +883,7 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
         }
     }
 
-    ul.nav li.dashboard-nav{
+    .navbar-collapse ul.nav li.dashboard-nav{
         width: 100%;
         height: auto;
         border-left: 5px solid rgba(0,184,241,0);
@@ -885,7 +895,7 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
             border-left: 0;
             float: left;
             &:hover{
-                border-left: 0px solid @brighter-blue;
+                border-left: 0px solid @brighter-blue!important;
                 background: none;
                 .dashboard-button-name{
                     color: @brighter-blue;
@@ -905,6 +915,7 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
             color: #fff;
             text-align: left;
             font-size: 16px;
+            line-height: 25px;
             @media all and (max-width:@larger-tablet-width) {
                 text-align: center;
             }
@@ -914,10 +925,65 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
                 @media all and (max-width:@larger-phone-width) {
                     display: block;
                     padding-bottom: 10px;
-
-
                 }
             }
+        }
+        .left-nav-icon{
+            width: 25px;
+            height: 25px;
+            display: block;
+            float: left;
+            margin: 0 10px 0 15px;
+            transition: 0.1s linear;
+            background-repeat:no-repeat;
+            background-size:contain;
+            background-position:center;
+            @media all and (max-width: @larger-tablet-width) {
+                float: none;
+                margin: 0 auto;
+                margin-bottom: 5px;
+            }
+        }
+        .dashboard-icon{
+            background-image:url('/sites/default/files/dashboard-icon/dashboard-W.png');
+        }
+        .account-icon{
+            background-image:url('/sites/default/files/dashboard-icon/account-W.png');
+        }
+        .purchases-icon{
+            background-image:url('/sites/default/files/dashboard-icon/purchases-W.png');
+        }
+        .subscription-icon{
+            background-image:url('/sites/default/files/dashboard-icon/subscription-W.png');
+        }
+        .renew-icon{
+            background-image:url('/sites/default/files/dashboard-icon/renew-W.png');
+        }
+
+        &:nth-child(1):hover{
+            .dashboard-icon{
+                background-image:url('/sites/default/files/dashboard-icon/dashboard-B.png');
+            } 
+        }
+        &:nth-child(2):hover{
+            .account-icon{
+                background-image:url('/sites/default/files/dashboard-icon/account-B.png');
+            } 
+        }
+        &:nth-child(3):hover{
+            .purchases-icon{
+                background-image:url('/sites/default/files/dashboard-icon/purchases-B.png');
+            } 
+        }
+        &:nth-child(4):hover{
+            .subscription-icon{
+                background-image:url('/sites/default/files/dashboard-icon/subscription-B.png');
+            } 
+        }
+        &:nth-child(5):hover{
+            .renew-icon{
+                background-image:url('/sites/default/files/dashboard-icon/renew-B.png');
+            } 
         }
     }
 }
@@ -929,6 +995,11 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
     color: black;
     background: @light-transparent-background;
     padding: 0;
+    @media all and (max-width: @larger-tablet-width) {
+        .mobile_line{
+            margin: 0 0 50px !important;
+        }
+    }
     @media all and (max-width: @larger-phone-width) {
         padding: 0 10px;
         .col-xs-12{
@@ -939,6 +1010,7 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
         @media all and (max-width: @larger-phone-width) {
             position: absolute;
             right: 10%;
+            z-index: 99999;
         }
         span.customise_background{
             padding: 5px 10px;
@@ -968,7 +1040,6 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
     .bottom-section{
         flex-direction: row;
         .mobile_line:nth-child(2){
-            text-align: center;
             padding: 0 80px;
             margin: 0 50px;
             border-left: 1px solid #a6a8ab;
@@ -976,6 +1047,42 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
             .section-container{
                 display: inline-block;
             }
+            @media all and (min-width: @desktop-width) and (max-width: 1330px) {
+                padding: 0 60px;
+                margin: 0 40px;  
+            }
+            @media all and (max-width: @desktop-width - 1) {
+                padding: 0px 30px;
+                margin: 0 20px;
+            }
+            @media all and (min-width: 852px) and (max-width: @larger-tablet-width) {
+                padding: 0 50px;
+                margin: 0 40px;  
+            }
+            @media all and (min-width: @tablet-width) and (max-width: 851px) {
+                padding: 0 30px;
+                margin: 0 20px;  
+            }
+            @media all and (max-width: @tablet-width) {
+                padding: 0 30px;
+                margin: 0 20px;  
+                border-left: 0px solid #a6a8ab;
+                border-right: 0px solid #a6a8ab;
+            }
+        }
+        @media all and (max-width: @tablet-width){
+            .mobile_line{
+                min-height: 180px;
+                margin: 0 0 50px!important;
+                align-items: center!important;
+            }
+        }
+
+        @media all and (max-width: @tablet-width) {
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0;
         }
         .mobile_line{
             min-height: 170px;
@@ -983,6 +1090,12 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
             align-items: flex-start;
             display: flex;
             flex-direction: column;
+            @media all and (max-width: @tablet-width) {
+                min-height: 170px;
+                margin-bottom: 20px;
+                text-align: center;
+                max-width: 350px;
+            }
         }
     }
 
@@ -995,17 +1108,48 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
     
     tbody.limit-width tr td:nth-child(1){
         max-width: 110px;
+        @media all and (max-width: @phone-width) {
+            max-width: none;
+        }
     }
     tbody.limit-width tr td:nth-child(2){
         text-indent: 10px;
+        width: 65%;
     }
 
 	.dashboard_detail{
         margin: 40px 35px 40px;
         width: auto;
-        width: 100%;
-        @media all and (max-width: @desktop-width) {
+        .member-info{
+            .flex-cell{
+                padding: 5px 0;
+                .flex-col-4{
+                    max-width: 120px;
+                }
+                .flex-col-8{
+                    padding-left: 10px;
+                }
+                @media all and (max-width: @phone-width) {
+                    .flex-flow-column;
+                    padding: 10px 0;
+                    .flex-col-8{
+                        padding: 0;
+                        font-size: 1.6em;
+                        width: 100%;
+                        line-height: 15px;
+                    }
+                    .flex-col-4{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        @media all and (min-width: @phone-width) and (max-width: @desktop-width) {
             margin: 20px 0 20px;
+            padding: 30px;
+        }
+        @media all and (max-width: @phone-width) {
+            margin: 0 0 0;
         }
     }
     
@@ -1027,7 +1171,7 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
         span.number{
             position: absolute;
             top: 25px;
-            left: 65%;
+            left: 50.5%;
             -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
             font-size: 5em;
@@ -1043,10 +1187,10 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
         }
 
         @media all and (max-width: @larger-destop-width) {
-            width: 200px;
+            width: 199px;
             span.number{
                 font-size: 4.5em;
-                left: 68%;
+                left: 56%;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
@@ -1057,13 +1201,13 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
             }
         }
         @media all and (max-width: @desktop-width) {
-            width: 170px;
+            width: 165px;
             #donutchart{
                 top: -10px;
             }
             span.number{
                 font-size: 4em;
-                left: 68%;
+                left: 59%;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
@@ -1074,13 +1218,13 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
             }
         }
         @media all and (max-width: @larger-tablet-width){
-            width: 230px;
+            width: 217px;
             #donutchart{
                 top: -10px;
             }
             span.number{
                 font-size: 5em;
-                left: 65%;
+                left: 56%;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
@@ -1112,7 +1256,7 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
             width: 100%;
             span.number{
                 font-size: 4.5em;
-                left: 47%;
+                left: 48%;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
@@ -1333,22 +1477,16 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
 	}
  }
  
- /*--PURCHASE--*/
+ /*--PURCHASES--*/
 #dashboard-right-content{
     .dashboard_detail{
-        tr td a.download-link{
-            color: #000;
-            &:before{
-                content: "\f15c";
-                font-family: fontawesome;
-                color: @brighter-blue;
-                position: relative;
-                margin-right: 10px;
-            }
-        }
+
         tr{
+            @media all and (max-width: @phone-width) {
+                border: 5px 0 5px 0 solid rgba(0,0,0,0);
+            }
             td{
-                padding: 9px 0;
+                padding: 15px 0;
                 text-transform: lowercase;
                 line-height: 15px;
                 &::first-letter{
@@ -1374,6 +1512,55 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
     a[class^="event"], ul.nav-tabs li{
         font-size: 1.2em;
     }
+
+    .member-purchases{
+        .flex-cell{
+            border-bottom: 1px solid rgba(0,0,0,0.12);
+            padding: 11px 0;
+            font-size: 1.2em;
+            .flex-col-2{
+                justify-content: flex-end;
+            }
+            div[class^="flex-col-"]{
+                display: flex;
+                align-items: center;
+                padding-right: 20px;
+            }
+            @media all and (max-width: @larger-phone-width) {
+                font-size: 1em;
+                .flex-center{
+                    text-align: center;
+                }
+            }
+        }
+        .border-btm{
+            padding: 5px 0;
+        }
+        .download-link{
+            cursor: pointer;
+            display: block!important;
+            .invoice-icon{
+                width: 25px;
+                height: 25px;
+                margin: 0 10px 0 0;
+                display: block;
+                float: left;
+                background-repeat:no-repeat;
+                background-size:contain;
+                background-position:center;
+                background-image:url('/sites/default/files/dashboard-icon/invoice-B.png');
+            }
+            .invoice-text{
+                color: #000;
+            }
+            @media all and (max-width: @larger-phone-width){
+                .invoice-text{
+                    display: none;
+                }
+            }
+
+        }
+    }
 }
 
  /*--YOUR DETAILS--*/
@@ -1394,14 +1581,32 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
                 }
             }
             span{
+                height: 25px;
+                visibility: hidden;
+                line-height: 25px;
+                width: 100%;
+                text-align: center;
+                font-size: 12px;
                 position: absolute;
-                top: 0;
+                bottom: -10px;
                 right: 0;
                 margin: 0;
                 padding: 0 5px;
                 color: #000;
-                background: rgba(255,255,255,0.5);
+                background: rgba(255,0,0,0.9);
+                color: #fff;
                 cursor: pointer;
+                z-index: 0;
+                transition: 0.2s linear;
+                opacity: 0;
+            }
+            &:hover{
+                span{
+                    display: block;
+                    bottom: -25px;
+                    visibility: visible;
+                    opacity: 1;
+                }
             }
         }
         li.active{
@@ -1482,6 +1687,10 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
             background-color: @bright-blue;
             border-width: 0px !important;
             color: #fff;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 300;
+            font-family: 'Roboto';
             &:hover{
                 color: #fff;
                 opacity: 0.9;
@@ -1493,15 +1702,23 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
     .down4{
         .add-additional-qualification{
             float: left;
+            height: 38px;
             margin-bottom: 20px;
             margin-top: 4px;
             background-color: @bright-blue;
             border-width: 0px !important;
             color: #fff;
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 300;
+            font-family: 'Roboto';
             &:hover{
                 color: #fff;
                 opacity: 0.9;
                 cursor: pointer;
+            }
+            .dashboard-button-name{
+                line-height: 38px;
             }
         }
     }
@@ -1513,6 +1730,12 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
             padding-left: 20px;
         }
         
+    }
+
+    #additional0{
+        .separate-dash{
+            display: none;
+        }
     }
  }
 
@@ -1755,6 +1978,60 @@ form{
                   transform: rotate(45deg);
                 }
               }
+        }
+    }
+}
+
+ /*--RENEW MEMBERSHIP--*/
+ div[aria-describedby="QuatationPopUp"] .ui-widget-header{
+    position: absolute;
+    right: 5px;
+    z-index: 99999;
+ }
+ div[aria-describedby="QuatationPopUp"] .ui-dialog-content {
+    text-align: center;
+}
+
+#dashboard-right-content{
+    .chevron-select-box{
+        select{
+            -webkit-appearance: none;
+        }
+        &::after{
+            content: '\f078';
+            font-family: 'fontawesome';
+            color: #5b5957;
+            position: absolute;
+            opacity: 0.5;
+            top: 53%;
+            right: 25px;
+        }
+        &.chevron-adjust{
+            &::after{
+                top: 27%;
+            }
+        }
+    }
+    .plus-select-box{
+        select{
+            -webkit-appearance: none;
+        }
+        &::after{
+            content: '';
+            width: 15px;
+            height: 15px;
+            position: absolute;
+            top: 57%;
+            right: 25px;
+            background-repeat:no-repeat;
+            background-size:contain;
+            background-position:center;
+            background-image:url('/sites/default/files/dashboard-icon/plus-icon-G.png');
+        }
+        &.plus-adjust{
+            &::after{
+                top: 20%;
+            }
         }
     }
 }
