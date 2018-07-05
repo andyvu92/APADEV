@@ -861,6 +861,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								</fieldset>
 								<a class="deletecardbutton black-underline-link">Delete selected</a>
 								<a id="addPaymentCard" class="black-underline-link">Add another card</a>
+								<a class="black-underline-link" id="setCardButton">Set your main credit card</a>
 							</div>
 						</div>
 					</div>
