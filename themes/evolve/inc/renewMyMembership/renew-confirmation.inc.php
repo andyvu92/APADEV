@@ -1,4 +1,5 @@
 <?php
+ $invoice_ID ="";
 if(isset($_POST['step3'])) {
 	//continue to get the review data
 	$postReviewData = $_SESSION['postReviewData'];
@@ -78,14 +79,19 @@ if(isset($_POST['step3'])) {
 						die();
 					}    		
 	}
+	
 }
 ?>
 <?php
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
-include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');       
+include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php'); 
+/* get background image****/
+if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID =0; }
+$background = getBackgroundImage($userID);
+/* get background image****/      
 ?>
-<div id="pre_background" style="display:none">background_<?php echo $user['background']; ?></div>
-<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $user['background']; ?>" id="dashboard-right-content">
+<div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
+<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Renew my membership</strong></span></div>
@@ -116,7 +122,7 @@ include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 					// UserID & Invoice_ID
 					// Response -Invoice PDF
 					$send["UserID"] = $_SESSION["UserId"];
-					$send["Invoice_ID"] = "1111";  
+					$send["Invoice_ID"] = $invoice_ID;  
 					$invoiceAPI = GetAptifyData("18", $send); 
 					
 					?> 
