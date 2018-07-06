@@ -316,6 +316,10 @@
 #block-system-main{
     .content{
         .node{
+            .post-content{
+                margin: 0;
+                padding-top: 50px;
+            }
             .region{
                 .light-lead-heading{
                     color: @blue;
@@ -350,13 +354,13 @@
                     background-position:center;
                 }
                 .learning-outcome-icon{
-                    background-image:url('/sites/default/files/dashboard-icon/invoice-B.png');
+                    background-image:url('/sites/default/files/dashboard-icon/learning-B.png');
                 }
                 .prerequiresite-icon{
-                    background-image:url('/sites/default/files/dashboard-icon/invoice-B.png');
+                    background-image:url('/sites/default/files/dashboard-icon/prerequiresites-B.png');
                 }
                 .presenters-bio-icon{
-                    background-image:url('/sites/default/files/dashboard-icon/invoice-B.png');
+                    background-image:url('/sites/default/files/dashboard-icon/presenters-B.png');
                 }
                 .section{
                     padding-bottom: 36px;
@@ -366,17 +370,170 @@
                 .top-banner{
                     width: 100%;
                     height: 200px;
+                    border-bottom: 5px solid #ffa02f;
+                    position: relative;
+                    -webkit-background-size: cover;
+                    -moz-background-size: cover;
+                    -o-background-size: cover;
+                    background-size: cover;
+                    .pd-type{
+                        position: absolute;
+                        bottom: 0;
+                        background: #ffa02f;
+                        color: #fff;
+                        padding: 10px 30px 5px 30px;
+                        font-size: 1em;
+                        text-transform: uppercase;
+                        font-family: 'Cairo';
+                        letter-spacing: 2px;
+                        font-weight: 400;
+                    }
+                }
+                .lecture-featured-image{
+                    background: url('/sites/default/files/pd-featured-images/lecture-image.png') no-repeat center center;
+                }
+                .session-info{
+                    .session-calendar{
+                        background: @blue;
+                        padding: 30px 30px 15px 30px;
+                        .session-date{
+                            padding-left: 10px;
+                            font-size: 1.4em;
+                            font-family: 'Cairo';
+                            color: #fff;
+                            font-weight: 700;
+                            display: block;
+                            .weekdate{
+                                display: block;
+                            }
+                            .month-date{
+                                display: block;
+                            }
+                        }
+                        .session-time{
+                            font-size: 1.1em;
+                            font-family: Roboto;
+                            color: #fff;
+                            font-weight: 400;
+                            padding: 15px 0 5px 0;
+                            display: block;
+                        }
+                    }
+                    .session-address{
+                        background: @blue;
+                        padding: 0px 30px 30px 30px;
+                        color: #fff;
+                        font-size: 1.2em;
+                        font-weight: 400;
+                        a{
+                            color: #fff;
+                            text-decoration: underline;
+                            &:hover{
+                                color: #fff;
+                            }
+                        }
+                        .address{
+                            padding-left: 10px;
+                            display: block;
+                        }
+                    }
+                }
+                .session-register-info{
+                    background: @blue;
+                    padding: 30px;
+                    border-top: 1px solid #fff;
+                    font-family: Roboto;
+                    font-size: 1.2em;
+                    color: #fff;
+                    .small-heading{
+                        display: block;
+                        font-weight: 500;
+                        padding-top: 10px;
+                        &:nth-child(1){
+                            padding-top: 0;
+                        }
+                    }
+                    #login{
+                        background: @blue;
+                        color: #fff;
+                        border: 1px solid #fff;
+                        padding: 15px 0px;
+                        text-align: center;
+                        display: block;
+                        margin-top: 15px;
+                        font-family: Roboto;
+                        text-transform: uppercase;
+                        transition: 0.1s linear;
+                        cursor: pointer;
+                        &:hover{
+                            background: #fff;
+                            color: @blue;
+                        }
+                    }
+                }
+                .session-cta{
+                    padding: 40px 30px;
+                    background: #009fda;
+                    border-top: 1px solid #fff;
+                    font-family: Roboto;
+                    .add-to-wishlist{
+                        background: #c3c8c8;
+                        color: #fff;
+                        display: block;
+                        text-transform: uppercase;
+                        text-align: center;
+                        font-size: 1.2em;
+                        cursor: pointer;
+                    }
+                    .add-to-card{
+                        background: #ffa02f;
+                        color: #fff;
+                        display: block;
+                        text-transform: uppercase;
+                        text-align: center;
+                        font-size: 1.2em;
+                        margin-top: 10px;
+                        cursor: pointer;
+                    }
+                    span{
+                        padding: 15px 20px;
+                        display: block;
+                    }
+                    a:hover{
+                        opacity: 0.9;
+                    }
+                }
+                .extra-info{
+                    font-family: Roboto;
+                    padding: 30px 0;
+                    font-weight: 500;
+                    font-size: 1.2em;
+                    span{
+                        display: block;
+                        padding-bottom: 15px;
+                    }
                 }
                 .calendar-icon{
-                    width: 40px;
-                    height: 40px;
+                    width: 100%;
+                    height: 50px;
                     margin: 0 10px 0 0;
                     display: block;
                     float: left;
+                    position: relative;
                     background-repeat:no-repeat;
                     background-size:contain;
                     background-position:center;
-                    background-image:url('/sites/default/files/dashboard-icon/invoice-B.png');
+                    background-image:url('/sites/default/files/dashboard-icon/calendar-W.png');
+                    .calendar-date{
+                        position: absolute;
+                        color: #fff;
+                        font-size: 1.2em;
+                        font-weight: 900;
+                        top: 40%;
+                        left: 49%;
+                        -webkit-transform: translateX(-50%);
+                        transform: translateX(-50%);
+                    }
                 }
                 .address-icon{
                     width: 40px;
@@ -387,7 +544,7 @@
                     background-repeat:no-repeat;
                     background-size:contain;
                     background-position:center;
-                    background-image:url('/sites/default/files/dashboard-icon/invoice-B.png');
+                    background-image:url('/sites/default/files/dashboard-icon/location-W.png');
                 }
             }
         }

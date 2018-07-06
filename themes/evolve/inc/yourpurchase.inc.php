@@ -24,8 +24,8 @@ $products = $product["Orders"]
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name cairo"><strong>Your purchases</strong></span></div>
-			<div class="col-xs-6 col-sm-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
+			<div class="col-xs-12 col-sm-6"><span class="dashboard-name cairo"><strong>Your purchases</strong></span></div>
+			<div class="col-xs-12 col-sm-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
         <?php
 			include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
@@ -34,66 +34,88 @@ $products = $product["Orders"]
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
 				<div class="row" style="padding: 10px 0;"><a class="event4" style="cursor: pointer;"><span class="text-underline accent" id="recent-purchases"><strong>Recent</strong></span> </a><a class="event5" style="cursor: pointer; margin-left:10px;"><span id="all-purchases" class="accent"><strong>See all purchases</strong></span></a></div>
 				<div class="down4">
-					<table class="table table-responsive">
-						<tbody>
-							<tr>
-								<td><span class="table-heading">Product Name</span></td>
-								<td><span class="table-heading">Download Invoice</span></td>
-								<td><span class="table-heading">Price</span></td>
-								<td><span class="table-heading">Date</span></td>
-							</tr>
-							<?php 
+					<div class="flex-container flex-flow-column member-purchases">
+
+						<div class="flex-cell flex-flow-row border-btm">
+
+							<div class="flex-col-4">
+								<span class="table-heading">Product Name</span>
+							</div>
+							<div class="flex-col-3 flex-center">
+								<span class="table-heading">Download Invoice</span>
+							</div>
+							<div class="flex-col-2">
+								<span class="table-heading">Price</span>
+							</div>
+							<div class="flex-col-3">
+								<span class="table-heading">Date</span>
+							</div>
+						</div>
+
+						<?php 
 							foreach($products as $product){
 								$now = date('d-m-Y');
 								if(strtotime($now)<strtotime('+1 years',strtotime($product['Orderdate']))){
-									echo "<tr>";
-									echo "<td>".$product['OrderLines'][0]['ProductName']."</td>";
-									echo '<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span style="text-decoration: underline; color:white;">Invoice</span></button></td>';
-									echo "<td>".$product['Paymenttotal']."</td>";
-									echo "<td>".$product['Orderdate']."</td>";
-									echo "</tr>";
+									echo "<div class='flex-cell flex-flow-row'>";
+									echo "<div class='flex-col-4'>".$product['OrderLines'][0]['ProductName']."</div>";
+									echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
+									echo "<div class='flex-col-2'>".$product['Paymenttotal']."</div>";
+									echo "<div class='flex-col-3'>".$product['Orderdate']."</div>";
+									echo "</div>";
 								}
 							}
-							?>	
-						</tbody>
-					</table>
+						?>
+
+					</div>
 				</div>
+
 				<div class="down5"   style="display: none;">
-					<table class="table table-responsive">
-						<tbody>
-							  <tr>
-								<td><span class="table-heading">Product Name</span></td>
-								<td><span class="table-heading">Download Invoice</span></td>
-								<td><span class="table-heading">Price</span></td>
-								<td><span class="table-heading">Date</span></td>
-							</tr>
-							<?php
+				<div class="flex-container flex-flow-column member-purchases">
+
+					<div class="flex-cell flex-flow-row border-btm">
+
+						<div class="flex-col-4">
+							<span class="table-heading">Product Name</span>
+						</div>
+						<div class="flex-col-3 flex-center">
+							<span class="table-heading">Download Invoice</span>
+						</div>
+						<div class="flex-col-2">
+							<span class="table-heading">Price</span>
+						</div>
+						<div class="flex-col-3">
+							<span class="table-heading">Date</span>
+						</div>
+
+					</div>
+
+					<?php
 							$apis = Array();
 							foreach($products as $product){
 								array_push($apis, $product["ID"]);
-								echo "<tr>";
-								echo "<td>".$product['OrderLines'][0]['ProductName']."</td>";
-								echo '<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span style="text-decoration: underline; color:white;">Invoice</span></button></td>';
-								echo "<td>".$product['Paymenttotal']."</td>";
-								echo "<td>".$product['Orderdate']."</td>";
-								echo "</tr>";
+								echo "<div class='flex-cell flex-flow-row'>";
+								echo "<div class='flex-col-4'>".$product['OrderLines'][0]['ProductName']."</div>";
+								echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
+								echo "<div class='flex-col-2'>".$product['Paymenttotal']."</div>";
+								echo "<div class='flex-col-3'>".$product['Orderdate']."</div>";
+								echo "</div>";
 								echo '<div id="Iaksbnkvoice'.$product['ID'].'" class="modal fade big-screen" role="dialog">
-									  <div class="modal-dialog">
+									<div class="modal-dialog">
 
 										<!-- Modal content-->
 										<div class="modal-content">
-										  <div class="modal-header">
+										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-										  </div>
-										  <div class="modal-body">
+										</div>
+										<div class="modal-body">
 											<iframe name="Iaksbnkvoice'.$product['ID'].'" src="http://www.physiotherapy.asn.au"></iframe>
-										  </div>
-										  <div class="modal-footer">
+										</div>
+										<div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-										  </div>
+										</div>
 										</div>
 
-									  </div>
+									</div>
 									</div>';
 							}
 							//// 2.2.18 - GET payment history list
@@ -103,8 +125,9 @@ $products = $product["Orders"]
 							// Invoice PDF
 							$invoiceAPI = GetAptifyData("18", $apis);
 							?>	
-						</tbody>
-					</table>
+				</div>
+
+
 				</div>
 			</div>
 		</div>
