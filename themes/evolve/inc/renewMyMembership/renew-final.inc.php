@@ -264,7 +264,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 		</table>
 		</div>
 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 Membpaymentsiderbar">
-		<span styule="margin-bottom: 15px;" class="smaller-lead-heading sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span>
+		<p><span class="smaller-lead-heading sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
 				<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
 		<?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>   
 			<fieldset>
@@ -447,7 +447,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 								<div class="flex-col-6">$'.$InitialPaymentAmount.'</div></div>';
                         echo'<div class="flex-cell flex-flow-row">
 								<div class="flex-col-12" style="text-align: center">
-									<button style="margin: 30px 0;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payment</button>	
+									<button style="margin-top: 30px;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payment</button>	
 								</div>
 							</div>'; 								
 					}
@@ -460,7 +460,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			
 			<!--<input type="hidden" name="Paymentcard" id="Paymentcardvalue" value="">-->
 			<div class="flex-col-12" style="text-align: center">
-				<a target="_blank" class="addCartlink"><button style="margin: 30px 0;" class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
+				<a target="_blank" class="addCartlink"><button style="margin-top: 30px;" class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
 			</div>
 	</div>
 </div>
