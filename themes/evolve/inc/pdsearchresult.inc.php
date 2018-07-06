@@ -77,7 +77,7 @@ if($totalNum % $request["PageSize"] > 0) {
 	
 ?>
 
-<h3>PD BASED ON YOUR PROFILE</h3>
+<h3 class="light-lead-heading align-center">PD BASED ON YOUR PROFILE</h3>
 <?php
 
    /********sort search result*****/
@@ -97,13 +97,13 @@ if($totalNum % $request["PageSize"] > 0) {
 		$current = 1;
 	}
 	$max = $totalNum;
-	echo "when current is: $current <br><br>";
+	//echo "when current is: $current <br><br>";
 	for($i = 0; $i < ($max / 10); $i++) {
 		$front = (10 * $i);
 		$back = 10 * ($i + 1) + 1;
 		if($front < $current && $current <= ($back - 1)) {
 			if($front == 0) {
-				echo '<div class="pager"><a href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.'"><div class="Pagebutton"><<</div></a>';
+				echo '<div class="pager col-xs-12 col-sm-6 col-md-9"><a href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.'"><div class="Pagebutton"><<</div></a>';
 			} else {
 				echo '<div class="pager"><a href="'.$base_url.'/pd/pd-search?page='.$front.'&pagesize='.$numItem.'"><div class="Pagebutton"><<</div></a>';
 			}
@@ -116,7 +116,7 @@ if($totalNum % $request["PageSize"] > 0) {
 				$t = ($front + $j);
 				if($t <= $max) {
 					if($t == $current) {
-						echo '<<div class="Pagebutton current">'.$t.'</div>';
+						echo '<div class="Pagebutton current">'.$t.'</div>';
 					} else {
 						echo '<a href="'.$base_url.'/pd/pd-search?page='.$t.'&pagesize='.$numItem.'"><div class="Pagebutton">'.$t.'</div></a>';
 					}
@@ -140,39 +140,88 @@ if($totalNum % $request["PageSize"] > 0) {
 	/********end search result pagination*******/
 
  ?>
-<div class="pageSetting"><p>Pagesize:</p><select id="pagesize" name="pagesize" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option></select></div>
-<div class="pageItem"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $numItem;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
-        <?php              /**************************************pagination settings***************************/        ?>  
-<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9" style="padding:0;">
-<table class="table table-responsive resultTable">
-	<tbody>
-		<tr>
-			<th>TITLE</th>
-			<th>CPD HRS</th>
-			<th>TYPE</th>
-			<th>CITY</th>
-			<th>STATE</th>
-			<th>BEGIN DATE</th>
-			<th>END DATE</th>
-			<th>ADD TO WISHLIST</th>
-		</tr>
-         
-	<?php
+ <div class="col-xs-12 col-sm-6 col-md-3 none-padding align-right">
+	<div class="pageSetting"><p>Pagesize:</p><select id="pagesize" name="pagesize" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option></select></div>
+	<div class="pageItem"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $numItem;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
+</div>		
+<?php              /**************************************pagination settings***************************/        ?>  
+<div class="col-xs-12" style="padding:0;">
+<div class="flex-container">
+
+    <div class="flex-cell flex-flow-row heading-row">
+        <div class="flex-col-3">
+            <span class="table-heading">Title</span>
+        </div>
+        <div class="flex-col-1">
+            <span class="table-heading">Type</span>
+        </div>
+        <div class="flex-col-1">
+            <span class="table-heading">CPD Hours</span>
+        </div>
+        <div class="flex-col-1">
+            <span class="table-heading">City</span>
+        </div>
+        <div class="flex-col-1">
+            <span class="table-heading">State</span>
+        </div>
+        <div class="flex-col-2">
+            <span class="table-heading">Begin date</span>
+        </div>
+        <div class="flex-col-2">
+            <span class="table-heading">End date</span>
+        </div>
+        <div class="flex-col-1">
+            <span class="table-heading">Add to wishlist</span>
+        </div>
+    </div>
+
+    <?php
 	foreach($results as $result){
 
-		echo "<tr>";
-		echo	'<td><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a><br>".$result['Description'].'<br><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Read more</span></a></td>';
-		if(isset($result['CPDhours'])) {
-			echo	"<td>?</td>";
+		echo "<div class='flex-cell flex-flow-row'>";
+		echo	'<div class="flex-col-3">
+					<span class="title"><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a></span>
+					<div class='excerpt'><p>".$result['Description'].'</p></div>
+					<span class="readmore"><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Read more</span></a></span>
+				</div>';
+
+        if(!empty($result['PDType'])) {
+			echo	"<div class='flex-col-1'>".$result['PDType']."</div>";
 		} else {
-			echo	"<td>".$result['CPDhours'][0]."</td>";
+			echo	"<div class='flex-col-1'>N/A</div>";
 		}
-		echo	"<td>".$result['PDType']."</td>";
-		echo	"<td>".$result['City']."</td>";
-		echo	"<td>".$result['State']."</td>";
-		echo	"<td>".$result['StartDate']."</td>";
-		echo	"<td>".$result['EndDate']."</td>";
-		echo	"<td>";
+
+        if(!empty($result['CPDhours'])) {
+			echo	"<div class='flex-col-1'>".$result['CPDhours'][0]."</div>";
+		} else {
+			echo	"<div class='flex-col-1'>N/A</div>";
+		}
+
+        if(!empty($result['City'])) {
+			echo	"<div class='flex-col-1'>".$result['City']."</div>";
+		} else {
+			echo	"<div class='flex-col-1'>N/A</div>";
+		}
+
+		if(!empty($result['State'])) {
+			echo	"<div class='flex-col-1'>".$result['State']."</div>";
+		} else {
+			echo	"<div class='flex-col-1'>N/A</div>";
+		}
+
+		if(!empty($result['StartDate'])) {
+			echo	"<div class='flex-col-2'>".$result['StartDate']."</div>";
+		} else {
+			echo	"<div class='flex-col-2'>N/A</div>";
+		}
+
+		if(!empty($result['EndDate'])) {
+			echo	"<div class='flex-col-2'>".$result['EndDate']."</div>";
+		} else {
+			echo	"<div class='flex-col-2'>N/A</div>";
+		}
+		
+		echo	"<div class='flex-col-1'>";
 		$gap = intval($result['Totalnumber']) - intval($result['Enrollednumber']);
 		$tenP = intval($result['Totalnumber'])/10;
 		if($gap == 0) {
@@ -182,13 +231,12 @@ if($totalNum % $request["PageSize"] > 0) {
 		} else {
 			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true">Open</a></i>';
 		}
-		echo	"</td>";
-		echo "</tr>";
+		echo	"</div>";
+		echo "</div>";
 
 	}
 	?>	
-	</tbody>
-</table>
+</div>
 
 <div class="resultMobile">
 <?php foreach($results as $result){
@@ -260,14 +308,17 @@ echo "</div>";
 /**********************end bottom pagination************/
 ?>
 <?php  /*******************************right item******************/?>
-	<div class="pageSettingBottom"><p>Pagesize:</p><select id="pagesizebottom" name="pagesizebottom" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option></select></div>
+<div class="pager-bottom col-xs-12 col-sm-6 col-md-9"></div>
+<div class="col-xs-12 col-sm-6 col-md-3 none-padding align-right">
+	<div class="pageSetting"><p>Pagesize:</p><select id="pagesize" name="pagesize" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option></select></div>
+	<div class="pageItem"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $numItem;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
+</div>
 	<?php /*
 	<div class="pageItemBottom"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $totalNum+1;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $totalNum+$numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
 	*/ ?>
 <?php /*****************************end right item*************/?>
 </div>
 <?php logRecorder(); ?>
-<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3"><img alt="" src="/sites/default/files/SKINS%20280x600.png" style="width: 260px;" /></div>
 <script type="text/javascript">
 	function pagesize(selectObject) {
 		var value = selectObject.value;

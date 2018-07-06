@@ -241,7 +241,6 @@ if($resultdata['result']) {
 	// Where:{Address1, Address2, Address3(if exist), Address4(if exist), City,
 	//	state, Postcode}, CPD hours, Cost, Your registration stats
 	$pd_detail = GetAptifyData("29", $pdArr);
-	print_r($pd_detail);
     $pd_detail = $pd_detail['MeetingDetails'][0];
 	$prices = $pd_detail['Pricelist'];
 	$pricelistGet = Array();
@@ -439,80 +438,123 @@ if($resultdata['result']) {
 		GetAptifyData("5", $postData);
 		//update PD shopping care 
 		PDShoppingCart($userID=$_SESSION['UserId'], $productID=$_POST['productID'], $meetingID=$_POST['meetingID'],$type=$_POST['type'],$Coupon=$_POST['Couponcode']);
-		$CreateNewUserPD["Job"] = $_POST["Job"];
-		$CreateNewUserPD["Registrationboard"] = $_POST["Registrationboard"];
-		$CreateNewUserPD["Professionalinsurance"] = $_POST["Professionalinsurance"];
-		$CreateNewUserPD["Professionalbody"] = $_POST["Professionalbody"];
-		$CreateNewUserPD["Dietary"] = $_POST["Dietary"];
-		$CreateNewUserPD["HearaboutAPA"] = $_POST["HearaboutAPA"];
-		$CreateNewUserPD["Membership-product"] = $_POST["Membership-product"];
-		$CreateNewUserPD["Pdemails-product"] = $_POST["Pdemails-product"];
-		$CreateNewUserPD["Jobs-product"] = $_POST["Jobs-product"];
-		$CreateNewUserPD["Shop-product"] = $_POST["Shop-product"];
-		$CreateNewUserPD["Campaigns-product"] = $_POST["Campaigns-product"];
-		$CreateNewUserPD["Partner-product"] = $_POST["Partner-product"];
+		//save survey data in APA side
+		$CreateNewUserPD = array();
+		$CreateNewUserPD["UserID"] = $_SESSION['UserId'];
+		if(isset($_POST['Memberid'])){ $CreateNewUserPD["EmailAddress"] = $_POST['Memberid']; } else {$CreateNewUserPD["EmailAddress"] = $details['Memberid'];}
+		if(isset($_POST['Job'])){ $CreateNewUserPD["Job"] = $_POST["Job"];  }
+		if(isset($_POST['Registrationboard'])){ $CreateNewUserPD["Registrationboard"] = $_POST["Registrationboard"];  } else { $CreateNewUserPD["Registrationboard"] = 0;  } 
+		if(isset($_POST['Professionalinsurance'])){ $CreateNewUserPD["Professionalinsurance"] = $_POST["Professionalinsurance"];  }else { $CreateNewUserPD["Professionalinsurance"] = 0;  } 
+		if(isset($_POST['Professionalbody'])){ $CreateNewUserPD["Professionalbody"] = $_POST["Professionalbody"];  }else { $CreateNewUserPD["Professionalbody"] = 0;  } 
+		if(isset($_POST['HearaboutAPA'])){ $CreateNewUserPD["HearaboutAPA"] = $_POST["HearaboutAPA"];  }
+		if(isset($_POST['Membership-product'])){ $CreateNewUserPD["Membership-product"] = $_POST["Membership-product"];  }else { $CreateNewUserPD["Membership-product"] = 0;  } 
+		if(isset($_POST['Pdemails-product'])){ $CreateNewUserPD["Pdemails-product"] = $_POST["Pdemails-product"];  }else { $CreateNewUserPD["Pdemails-product"] = 0;  } 
+		if(isset($_POST['Jobs-product'])){ $CreateNewUserPD["Jobs-product"] = $_POST["Jobs-product"];  }else { $CreateNewUserPD["Jobs-product"] = 0;  } 
+		if(isset($_POST['Shop-product'])){ $CreateNewUserPD["Shop-product"] = $_POST["Shop-product"];  }else { $CreateNewUserPD["Shop-product"] = 0;  } 
+		if(isset($_POST['Campaigns-product'])){ $CreateNewUserPD["Campaigns-product"] = $_POST["Campaigns-product"];  }else { $CreateNewUserPD["Campaigns-product"] = 0;  } 
+		if(isset($_POST['Partner-product'])){ $CreateNewUserPD["Partner-product"] = $_POST["Partner-product"];  }else { $CreateNewUserPD["Partner-product"] = 0;  } 
+		$CreateNewUserPD["CreateDate"] = date('Y-m-d');
+		SavePDSurvey($CreateNewUserPD=$CreateNewUserPD);	
 		
 	}
 	// in case of user update the details get the new data.
 	
 	?>
-	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-9 col-lg-9">
+	<div class="region col-xs-12 col-sm-12 col-md-9">
 	    <div id="popUp" style="display:none;"><?php echo $updateNonmemberTag; ?></div>
 		<div id="saveShoppingCart" style="display:none;"><?php echo $saveShoppingCart; ?></div>
-		<h1 class="SectionHeader"><?php echo $pd_detail['Title'];?></h1>
-		<div class="brd-headling">&nbsp;</div>
-		<h3><?php echo $pd_detail['Typeofpd'];?></h3>
-		<p><?php echo $pd_detail['Description']; ?></p>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		 <ul class="nav nav-tabs" id="tabpd">
-           <li class="active"><a data-toggle="tab" href="#presenter">PRESENTER BIO</a></li>
-           <li><a data-toggle="tab" href="#learning">LEARNING OUTCOMES</a></li> 
-           <li><a data-toggle="tab" href="#prerequisites">PREREQUISITES</a></li>   		   
-         </ul>
-         <div id="presenter" class="tab-pane fade active in"><?php if(strlen($pd_detail['Presenter_bio'])>400){ echo substr($pd_detail['Presenter_bio'],0,400).'....<a id="event1" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Presenter_bio'];} ?><div id="down1" class="conts" style="display: none;"><?php echo $pd_detail['Presenter_bio'];?></div></div> 
-         <div id="learning" class="tab-pane fade"><?php if(strlen($pd_detail['Learning_outcomes'])>400){ echo substr($pd_detail['Learning_outcomes'],0,400).'....<a id="event2" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Learning_outcomes'];} ?><div id="down2" class="conts" style="display: none;"><?php echo $pd_detail['Learning_outcomes'];?></div></div> 
-		 <div id="prerequisites" class="tab-pane fade"><?php if(strlen($pd_detail['Prerequisites'])>400){ echo substr($pd_detail['Prerequisites'],0,400).'....<a id="event3" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Prerequisites'];} ?><div id="down3" class="conts" style="display: none;"><?php echo $pd_detail['Prerequisites'];?></div></div> 
-	   </div>
+
+		<div class="section">
+			<h1 class="light-lead-heading"><?php echo $pd_detail['Title'];?></h1>
+
+			<h3 class="sub-title"><?php 
+			if (!empty($pd_detail['Typeofpd'])){
+				echo $pd_detail['Typeofpd'];
+			}
+			else{
+				echo "Not Available";
+			}
+			?></h3>
+		</div>
+
+		<div class="section description">
+			<p><?php echo $pd_detail['Description']; ?></p>
+		</div>
+
+		<div class="section flex-container flex-flow-row">
+			<div class="flex-col-1 left-icon">
+				<span class="learning-outcome-icon large-icon"></span>
+			</div>
+			<div class="flex-col-11">
+				<h2 class="blue-heading">Learning outcomes</h2>
+				<?php if(strlen($pd_detail['Learning_outcomes'])>400){ echo substr($pd_detail['Learning_outcomes'],0,400).'....<a id="event2" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Learning_outcomes'];} ?>
+				<div id="down2" class="conts" style="display: none;"><?php echo $pd_detail['Learning_outcomes'];?></div>
+			</div>
+		</div>
+
+		<div class="section flex-container flex-flow-row">
+			<div class="flex-col-1 left-icon">
+				<span class="prerequiresite-icon large-icon"></span>
+			</div>
+			<div class="flex-col-11">
+				<h2 class="blue-heading">Prerequiresites</h2>
+				<?php if(strlen($pd_detail['Prerequisites'])>400){ echo substr($pd_detail['Prerequisites'],0,400).'....<a id="event3" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Prerequisites'];} ?>
+				<div id="down3" class="conts" style="display: none;"><?php echo $pd_detail['Prerequisites'];?></div>
+			</div>
+		</div>
+
+		<div class="section flex-container flex-flow-row">
+			<div class="flex-col-1 left-icon">
+				<span class="presenters-bio-icon large-icon"></span>
+			</div>
+			<div class="flex-col-11">
+				<h2 class="blue-heading">Presenters bio</h2>
+				<?php if(strlen($pd_detail['Presenter_bio'])>400){ echo substr($pd_detail['Presenter_bio'],0,400).'....<a id="event1" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Presenter_bio'];} ?>
+				<div id="down1" class="conts" style="display: none;"><?php echo $pd_detail['Presenter_bio'];?></div>
+			</div>
+		</div>
+
+        <!--
 		 <div class="detailContent">
-		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Presenters:</h3><p><?php echo $pd_detail['Presenters']; ?></p></div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Presenters:</h3><p><?php //echo $pd_detail['Presenters']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Event status:</h3><p>
 		 <?php 
-			$Totalnumber = $pd_detail['Totalnumber'];
-			$Enrollednumber = $pd_detail['Enrollednumber'];
-			$Now = date('d-m-Y');
-			if(strtotime($Now)> strtotime(str_replace("/","-",$pd_detail['Close_date']))){
-				echo "Closed";  
-			 }
-			 elseif($Totalnumber-$Enrollednumber<=5){
-				 echo "Almost Full"; 
+			//$Totalnumber = $pd_detail['Totalnumber'];
+			//$Enrollednumber = $pd_detail['Enrollednumber'];
+			//$Now = date('d-m-Y');
+			//if(strtotime($Now)> strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+				//echo "Closed";  
+			// }
+			// elseif($Totalnumber-$Enrollednumber<=5){
+				// echo "Almost Full"; 
 			  
-			 }
-			elseif(($Totalnumber-$Enrollednumber)==0){
-				 echo "Full"; 
+			// }
+			//elseif(($Totalnumber-$Enrollednumber)==0){
+				// echo "Full"; 
 			  
-			 }
-			 elseif(($Totalnumber-$Enrollednumber)>5){
-				 echo "Open"; 
+			 //}
+			// elseif(($Totalnumber-$Enrollednumber)>5){
+				 //echo "Open"; 
 			  
-			 }
+			 //}
 		 
 		 ?></p></div>
 		<?php 
-			$bdata = explode(" ",$pd_detail['Sdate']);
-			$edata = explode(" ",$pd_detail['Edate']);
+			//$bdata = explode(" ",$pd_detail['Sdate']);
+			//$edata = explode(" ",$pd_detail['Edate']);
 			//if Aptify give the StartDate&EndDate as timestamp, use below code to get the time and start date and end date;
 			//echo date('d-m-Y h:i:s',$bdata);
 			
 			
 		?>
-		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>When:</h3><p><?php echo $bdata[1]."-".$edata[1]; ?></p><p><?php echo $bdata[0]." - ".$edata[0] ; ?></p></div>
-		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Registration closing date:</h3><p><?php echo $pd_detail['Close_date']; ?></p></div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>When:</h3><p><?php //echo $bdata[1]."-".$edata[1]; ?></p><p><?php echo $bdata[0]." - ".$edata[0] ; ?></p></div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Registration closing date:</h3><p><?php //echo $pd_detail['Close_date']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<h3>Where:</h3>
-			<p><?php echo $pd_detail['AddressLine1']." ".$pd_detail['AddressLine2']." ".$pd_detail['AddressLine3']; ?><br />
-			<?php echo $pd_detail['City']." ".$pd_detail['State']." ".$pd_detail['PostalCode']; ?><br><a id="viewMap">View map</a></p></div>
+			<p><?php //echo $pd_detail['AddressLine1']." ".$pd_detail['AddressLine2']." ".$pd_detail['AddressLine3']; ?><br />
+			<?php //echo $pd_detail['City']." ".$pd_detail['State']." ".$pd_detail['PostalCode']; ?><br><a >View map</a></p></div>
 		
-		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>CPD hours:</h3><p><?php echo $pd_detail['CPD']; ?></p></div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>CPD hours:</h3><p><?php //echo $pd_detail['CPD']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Cost:</h3><p>
 		 <?php 
 		  $priceList = array();
@@ -527,16 +569,12 @@ if($resultdata['result']) {
 			}
 			else {
 				comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-				echo "$".$pd_detail['Cost'];
+				//echo "$".$pd_detail['Cost'];
 			}
 		 }
 		else{
 			foreach($pricelistGet as $key=>$value){echo $key.":&nbsp;$".$value."<br>";}
 		}	
-		 
-		 
-		 
-		 
 		 ?>
 		 
 		 
@@ -545,9 +583,9 @@ if($resultdata['result']) {
 		 <?php 
 		    if(isset($userId)&& ($userId!="0")){
 				if($pd_detail['AttendeeStatus'] > 0) {
-					echo "Registered";
+					//echo "Registered";
 				} else {
-					echo "Not registered";
+					//echo "Not registered";
 				}
 				/*
 				if(!in_array( $user->uid,$pd_detail['Users'])){
@@ -559,7 +597,7 @@ if($resultdata['result']) {
 				*/
 			}
 			else{
-				echo '<a id="login">Login to see your status</a>';
+				//echo '<a >Login to see your status</a>';
 				//echo '<a class="info" data-target="#loginAT" data-toggle="modal" type="button">Login to see your status</a>';
 			}
 		 
@@ -567,30 +605,30 @@ if($resultdata['result']) {
 		 </p></div>
 		 <p>&nbsp;</p>
 		 
-		 
+		
 		 <?php 
 		     
-		 
-		 if(isset($_SESSION["UserId"])){
+		
+		// if(isset($_SESSION["UserId"])){
 			 //$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
-	         $userTag = checkPDUser($_SESSION['MemberTypeID']);
-			 if ($userTag =="0"){
-				    echo '<a class="dashboard-button dashboard-bottom-button your-details-submit addCartButton" id="registerPDUserButton" style="float:right;">Add to cart</a><br>  
-						<br>';
+	        // $userTag = checkPDUser($_SESSION['MemberTypeID']);
+			// if ($userTag =="0"){
+				   // echo '<a class="dashboard-button dashboard-bottom-button your-details-submit addCartButton" id="registerPDUserButton" style="float:right;">Add to cart</a><br>  
+						//<br>';
 					
-			 }
-			 else
+			// }
+			// else
 				 
-				 {
-					 echo '<a class="dashboard-button dashboard-bottom-button your-details-submit addCartButton" id="registerNonMember" style="float:right;">Add to cart</a><br>  
-						<br>';
-				 }
+				// {
+					// echo '<a class="dashboard-button dashboard-bottom-button your-details-submit addCartButton" id="registerNonMember" style="float:right;">Add to cart</a><br>  
+						//<br>';
+				 //}
        
-	   }   ?>
+	   //}   ?>
 	  
 		 <p>By registering for this course, you agree to the <a target="_blank">APA Events Terms and Conditions.</a></p>
 		 <p>You could save $55 on future courses by <a target="_blank">joining an APA national group</a>. Pay $54 today and keeping saving on PD throughout the year.</p>
-		 </div>
+		 </div>-->
 	  <?php
         // We hide the comments and links now so that we can render them later.
         hide($content['comments']);
@@ -944,24 +982,24 @@ if($resultdata['result']) {
                 </div>
 				<div class="row">
                     <div class="col-lg-4">
-                    <input type="checkbox" name="Membership-product" id="Membership-product" checked> <label for="Membership-product">Membership</label>
+                    <input type="checkbox" name="Membership-product" id="Membership-product" value="1" checked> <label for="Membership-product">Membership</label>
                     </div>
                     <div class="col-lg-4">
-                    <input type="checkbox" name="Pdemails-product" id="Pdemails-product" checked> <label for="Pdemails-product">PD emails</label>
+                    <input type="checkbox" name="Pdemails-product" id="Pdemails-product" value="1" checked> <label for="Pdemails-product">PD emails</label>
                     </div>
 					 <div class="col-lg-4">
-                    <input type="checkbox" name="Jobs-product" id="Jobs-product" checked> <label for="Jobs-product">Jobs4physios</label>
+                    <input type="checkbox" name="Jobs-product" id="Jobs-product" value="1" checked> <label for="Jobs-product">Jobs4physios</label>
                     </div>
                 </div>
 				<div class="row">
                     <div class="col-lg-4">
-                    <input type="checkbox" name="Shop-product" id="Shop-product" checked> <label for="Shop-product">Shop4physios</label>
+                    <input type="checkbox" name="Shop-product" id="Shop-product" value="1" checked> <label for="Shop-product">Shop4physios</label>
                     </div>
                     <div class="col-lg-4">
-                    <input type="checkbox" name="Campaigns-product" id="Campaigns-product" checked> <label for="Campaigns-product">Campaigns</label>
+                    <input type="checkbox" name="Campaigns-product" id="Campaigns-product" value="1" checked> <label for="Campaigns-product">Campaigns</label>
                     </div>
 					 <div class="col-lg-4">
-                    <input type="checkbox" name="Partner-product" id="Partner-product" checked> <label for="Partner-product">Partner offers</label>
+                    <input type="checkbox" name="Partner-product" id="Partner-product" value="1" checked> <label for="Partner-product">Partner offers</label>
                     </div>
                 </div>
 				<!--
@@ -1250,7 +1288,7 @@ if($resultdata['result']) {
 	    <input type="hidden" name="Couponcode" value="<?php echo $Couponcode;?>"> 		
 		<div class="row">
 		   <div class="col-lg-12">
-				<input type="checkbox" name="Professionalinsurance" id="Professionalinsurance1" required> <label for="Professionalinsurance1">I have current adequate professional indemnity insurance.</label>
+				<input type="checkbox" name="Professionalinsurance"  required> <label for="Professionalinsurance1">I have current adequate professional indemnity insurance.</label>
 		   </div>
 		</div>
 		<div class="row">
@@ -1285,11 +1323,163 @@ if($resultdata['result']) {
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
       
 	  
-	  <!--PD Register--->
+	  <!--PD RIGHT SIDEBAR-->
 	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3">
-		<img alt="" src="/sites/default/files/SKINS%20280x600.png" style="width: 260px;margin-top:25px;" />
+		<div class="top-banner lecture-featured-image">
+			<span class="pd-type">Lecture:</span>
+		</div>
 
+		<div class="session-info">
+			<div class="session-calendar">
+				<div class="flex-cell">
+					<div class="flex-col-3">
+						<span class="calendar-icon">
+							<span class="calendar-date">12</span>
+						</span>
+					</div>
+					<div class="flex-col-9">
+						<span class="session-date"> 
+							<!--<span class="weekdate">Wednesday,</span><span class="month-date">12 December</span>-->
+							<?php echo $bdata[0]." - ".$edata[0] ; ?>
+						</span>
+					</div>
+				</div>
+				<span class="session-time">
+					<?php echo $bdata[1]."-".$edata[1]; ?>
+				</span>
+			</div>
+
+			<div class="session-address">
+				<div class="flex-cell" style="border-top: 1px solid #fff; padding-top: 10px;">
+					<div class="flex-col-2">
+						<span class="address-icon"></span>
+					</div>
+					<div class="flex-col-10">
+						<span class="address">
+							<?php echo $pd_detail['AddressLine1']." ".$pd_detail['AddressLine2']." ".$pd_detail['AddressLine3']; ?><br />
+			<?php echo $pd_detail['City']." ".$pd_detail['State']." ".$pd_detail['PostalCode']; ?>
+							<a id="viewMap" class="direction" target="_blank">View map</a>
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="session-register-info">
+			<span class="small-heading">Tickets:</span>
+			<span>
+				<?php 
+				$priceList = array();
+				$cost = 0;
+				// todo
+				// apply coupon one
+				// ["Product Cost With Coupon"]
+				
+				if($prices!="NULL"&& isset($_SESSION["UserId"])){
+					if(in_array($pd_detail['Product Cost Without Coupon'],$pricelistGet)) {
+						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
+					}
+					else {
+						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
+						echo "$".$pd_detail['Cost'];
+					}
+				}
+				else{
+					foreach($pricelistGet as $key=>$value){echo $key.":&nbsp;$".$value."<br>";}
+				}	
+				?>
+			</span>
+
+			<span class="small-heading">Registration closing date:</span>
+			<span>
+				<?php echo $pd_detail['Close_date']; ?>
+			</span>
+
+			<span class="small-heading">Event status:</span>
+			<span>
+				<?php 
+				$Totalnumber = $pd_detail['Totalnumber'];
+				$Enrollednumber = $pd_detail['Enrollednumber'];
+				$Now = date('d-m-Y');
+				if(strtotime($Now)> strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+					echo "Closed";  
+				}
+				elseif($Totalnumber-$Enrollednumber<=5){
+					echo "Almost Full"; 
+				
+				}
+				elseif(($Totalnumber-$Enrollednumber)==0){
+					echo "Full"; 
+				
+				}
+				elseif(($Totalnumber-$Enrollednumber)>5){
+					echo "Open"; 
+				
+				}
+		 		?>
+			</span>
+
+			<span class="small-heading">CPD hours:</span>
+			<span>
+				<?php 
+				if (!empty($pd_detail['CPD'])){
+					echo $pd_detail['CPD'];
+				}
+				 else{
+					 echo 'Not available';
+				 }
+				?>
+			</span>
+
+			<span class="small-heading">Your registration status:</span>
+			<span>
+				<?php 
+				if(isset($userId)&& ($userId!="0")){
+					if($pd_detail['AttendeeStatus'] > 0) {
+						echo "Registered";
+					} else {
+						echo "Not registered";
+					}
+					/*
+					if(!in_array( $user->uid,$pd_detail['Users'])){
+						echo "Not registered";
+					}
+					else{
+						echo "Registered";
+					}
+					*/
+				}
+				else{
+					echo '<a id="login">Login to see your status</a>';
+					//echo '<a class="info" data-target="#loginAT" data-toggle="modal" type="button">Login to see your status</a>';
+				}
+				?>
+			</span>
+		</div>
+
+		<div class="session-cta">
+			<a class="add-to-wishlist"><span>Add to Wishlist</span></a>
+			<!--<a class="add-to-card"><span>Add to Card</span></a>-->
+			<?php 
+			if(isset($_SESSION["UserId"])){
+				 //$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
+				$userTag = checkPDUser($_SESSION['MemberTypeID']);
+				if ($userTag =="0"){
+					echo '<a class="add-to-card" id="registerPDUserButton">Add to cart</a>';	
+				}
+				else{
+						 echo '<a class="add-to-card" id="registerNonMember">Add to cart</a>';
+					}
+		   	}	
+		   ?>
+		</div>
+
+		<div class="extra-info">
+			<span>By registering for this course, you agree to the <a href="">APA Events Terms and Conditions.</a></span>
+			<span>You could sae $55 on future courses by joining an <a href="">APA National Group.</a> Pay $54 today and keeping saving on PD throughout the year.</span>
+		</div>
 	</div>
+
 	</section>
   
 </div> 

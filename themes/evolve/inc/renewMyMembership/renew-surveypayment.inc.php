@@ -98,13 +98,21 @@ if(isset($_POST['step2-1'])) {
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button6"><span class="dashboard-button-name">Next</span></a><a  class="your-details-prevbutton<?php //if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>
 	</div>-->
 	<!--<div class="down7" <?php //if(isset($_POST['goP']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>-->
-		<div class="row">
-			<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-			Payment options:
+			<div class="col-xs-12">
+			<label>Payment options:</label>
 			</div>
-			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><label for="p1-1">Full payment</label><input type="radio" name ="Paymentoption" id="p1-1" value="0" checked="checked"><label for="p1-2">Monthly instalments</label><input type="radio" name ="Paymentoption" id="p1-2" value="1">This option incurs a $12.00 admin fee.</div>
+
+			<div class="col-xs-12">
+				<input type="radio" name ="Paymentoption" id="p1-1" value="0" checked="checked">
+				<label for="p1-1">Full payment</label>
+			</div>
+
+			<div class="col-xs-12">
+				<input type="radio" name ="Paymentoption" id="p1-2" value="1">
+				<label for="p1-2">Monthly instalments (This option incurs a $12.00 admin fee)</label>
+			</div>
 			<input type="hidden" id="Installpayment-frequency" name="Installpayment-frequency" value="">
-		</div>
+
 		<div class="row">
 			<div class="col-xs-12"><label>PRF donation</label></div>
 			<div class="col-xs-6 col-md-3">
@@ -129,30 +137,31 @@ if(isset($_POST['step2-1'])) {
 	$cardsnum = GetAptifyData("12", $test);
 	print_r($cardsnum);?>
 	<?php if (sizeof($cardsnum["results"])!=0): ?>  
-		<div class="row">					
+		<div class="row">	
+		<div class="col-xs-12 col-sm-6">				
 			<fieldset>
 				<select id="Paymentcard" name="Paymentcard">
 				<?php
-					
 						foreach( $cardsnum["results"] as $cardnum) {
 							echo '<option value="'.$cardnum["Creditcards-ID"].'"';
 							if($cardnum["IsDefault"]=="1") {
 							echo "selected ";
 						}
-						echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
+						echo 'data-class="'.$cardnum["Payment-Method"].'">---- ---- ---- ';
 						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
 						}
-					
 				?>
 				</select>
 			</fieldset>
+			</div>
 		</div> 
-		<div class="row">
-			<input type="checkbox" id="anothercard"><label for="anothercard">Use another card</label>
+		<div class="col-xs-12">
+			<input type="checkbox" class="styled-checkbox" id="anothercard">
+			<label for="anothercard">Use another card</label>
 		</div>
-	<div id="anothercardBlock" class="display-none col-lg-12">
+	<div id="anothercardBlock" class="display-none row">
 		<div class="row">
-			<div class="col-lg-3">
+			<div class="col-xs-12 col-sm-6">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 				<?php 
 					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
@@ -167,33 +176,34 @@ if(isset($_POST['step2-1'])) {
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-xs-12 col-sm-6">
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-6">
-				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
+			<div class="col-xs-6 col-sm-6">
+				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
+			</div>
+
+			<div class="col-xs-6 col-sm-3">
+				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
+			</div>
+
+			<div class="col-xs-6 col-sm-3">
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV">
 			</div>
 		</div>
-		<div class="row">
-			<div class="col-lg-4">
-				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date" maxlength="4">
-			</div>
+		<div class="col-xs-12">
+			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked>
+			<label for="addcardtag">Do you want to save this card</label>
 		</div>
-		<div class="row">
-			<div class="col-lg-3">
-			<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV">
-			</div>
-		</div>
-		<div class="row"><label for="addcardtag">Do you want to save this card</label><input type="checkbox" id="addcardtag" name="addcardtag" value="1" checked></div>
 		<input type="hidden" name="addCard" value="0">
 	</div>
 	<?php endif; ?>  
 	<?php if (sizeof($cardsnum["results"])==0): ?> 
 	<div id="anothercardBlock" class="col-lg-12">					   
 		<div class="row">
-			<div class="col-lg-3">
+			<div class="col-xs-6 col-sm-6">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 					<?php 
 					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
@@ -208,33 +218,43 @@ if(isset($_POST['step2-1'])) {
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-xs-12 col-sm-6">
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-xs-12 col-sm-6">
 				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-4">
+
+			<div class="col-xs-6 col-sm-3">
 				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date" maxlength="4">
 			</div>
-			<div class="col-lg-3">
+
+			<div class="col-xs-6 col-sm-3">
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 		</div>
-		<div class="row"><label for="addcardtag">Do you want to save this card</label><input type="checkbox" id="addcardtag" name="addcardtag" value="1" checked></div>
+		<div class="col-xs-12">
+			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked>
+			<label for="addcardtag">Do you want to save this card</label>
+		</div>
+		
 		<input type="hidden" name="addCard" value="1">
 	</div>				 
 	<?php endif; ?>  
 		<div class="row">
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><label id="privacypolicyl">Privacy policy</label><input type="checkbox" id="privacypolicy" checked></div>
-			<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3"><label id="instalmentpolicyl">Instalment/payment policy</label><input type="checkbox" id="instalmentpolicy" checked></div>
+			<div class="col-xs-12">
+				<input class="styled-checkbox" type="checkbox" id="privacypolicy" checked>
+				<label id="privacypolicyl">Privacy policy</label>
+			</div>
+			<div class="col-xs-12">
+				<input class="styled-checkbox" type="checkbox" id="instalmentpolicy" checked>
+				<label id="instalmentpolicyl">Instalment/payment policy</label>
+			</div>
 			<!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 display-none" id="rolloverblock"><label for="Rollover">Roll over</label><input type="checkbox" name="Rollover" id="Rollover"></div>-->
 		</div>   
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('renew-insurance-form').submit();" class="join-details-button7"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  <a href="javascript:document.getElementById('renew-insurance-form').submit();" class="join-details-button7"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>
 	</div>
 </form>
 <form id="tempform" action="" method="POST"><input type="hidden" name="goI"></form>	

@@ -242,8 +242,20 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			return $JSONreturn;
 		case "31":
 			//API test by JingHu
+<<<<<<< HEAD
 			//echo "<br />31. Get MEmbership product price: <br />";
 			$API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/".$_SESSION['UserId'];
+=======
+			if(isset($_SESSION['UserId'])){
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/MembershipProducts/".$_SESSION['UserId'];}
+			else{
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/MembershipProducts/-1";	
+			}
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />31. Get MEmbership product price: <br />";
+			// Add JSON sample here
+>>>>>>> 3a69a0a307a576f9da435fb173d8f82289780fbc
 			$JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
 			return $JSONreturn;
 			break;	
@@ -351,10 +363,21 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			return $JSONreturn['results'];
 		case "47":
 			// test by Jing Hu
+<<<<<<< HEAD
 			//echo "<br />47. Get calculating the Order Total and Schedule Payments <br />";
 			$API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOrderPaymentDetail";
 			$JSONreturn = curlRequest($API, "JSON", $jsonVersion);	
 			return $JSONreturn;
+=======
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/GetOrderPaymentDetail";
+			echo "Data Sent: <br />";
+			print_r($variables);
+			echo "<br />47. Get calculating the Order Total and Schedule Payments <br />";
+		   	$JSONreturn = curlRequest($API, "JSON", $jsonVersion);	
+			print_r($JSONreturn);
+			return $JSONreturn;
+			break;			
+>>>>>>> 3a69a0a307a576f9da435fb173d8f82289780fbc
 	}
 }
 

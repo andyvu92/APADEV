@@ -368,4 +368,46 @@ function loggedInStatus() {
 		return "1";
 	}
 }
+//savePD survey data
+function SavePDSurvey($CreateNewUserPD){
+	$UserID = $CreateNewUserPD["UserID"];
+	$Job = $CreateNewUserPD["Job"];
+	$EmailAddress = $CreateNewUserPD["EmailAddress"];
+	$Registrationboard = $CreateNewUserPD["Registrationboard"];
+	$Professionalinsurance = $CreateNewUserPD["Professionalinsurance"];
+	$Professionalbody = $CreateNewUserPD["Professionalbody"];
+	$HearaboutAPA = $CreateNewUserPD["HearaboutAPA"];
+	$Membershipproduct = $CreateNewUserPD["Membership-product"];
+	$Pdemailsproduct = $CreateNewUserPD["Pdemails-product"];
+	$Jobsproduct = $CreateNewUserPD["Jobs-product"];
+	$Shopproduct = $CreateNewUserPD["Shop-product"];
+	$Campaignsproduct = $CreateNewUserPD["Campaigns-product"];
+	$Partnerproduct = $CreateNewUserPD["Partner-product"];
+	$CreateDate = $CreateNewUserPD["CreateDate"];
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+	try {
+		$PDSurvey= $dbt->prepare('INSERT INTO pdsurvey (UserID, Job, EmailAddress, Registrationboard, Professionalinsurance,Professionalbody,HearaboutAPA,Membershipproduct,Pdemailsproduct,Jobsproduct,Shopproduct,Campaignsproduct,Partnerproduct,CreateDate) VALUES (:UserID, :Job, :EmailAddress, :Registrationboard, :Professionalinsurance, :Professionalbody, :HearaboutAPA, :Membershipproduct, :Pdemailsproduct, :Jobsproduct, :Shopproduct, :Campaignsproduct, :Partnerproduct, :CreateDate)');
+		$PDSurvey->bindValue(':UserID', $UserID);
+		$PDSurvey->bindValue(':Job', $Job);
+		$PDSurvey->bindValue(':EmailAddress', $EmailAddress);
+		$PDSurvey->bindValue(':Registrationboard', $Registrationboard);
+		$PDSurvey->bindValue(':Professionalinsurance', $Professionalinsurance);
+		$PDSurvey->bindValue(':Professionalbody', $Professionalbody);
+		$PDSurvey->bindValue(':HearaboutAPA', $HearaboutAPA);
+		$PDSurvey->bindValue(':Membershipproduct', $Membershipproduct);
+		$PDSurvey->bindValue(':Pdemailsproduct', $Pdemailsproduct);
+		$PDSurvey->bindValue(':Jobsproduct', $Jobsproduct);
+		$PDSurvey->bindValue(':Shopproduct', $Shopproduct);
+		$PDSurvey->bindValue(':Campaignsproduct', $Campaignsproduct);
+		$PDSurvey->bindValue(':Partnerproduct', $Partnerproduct);
+		$PDSurvey->bindValue(':CreateDate', $CreateDate);
+		$PDSurvey->execute();	
+		$PDSurvey = null;
+	}
+	catch (PDOException $e) {
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}	
+	
+}
 ?>

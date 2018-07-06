@@ -25,6 +25,28 @@ jQuery(document).ready(function($) {
 			$("i." + faclass).addClass("fa-angle-down");
         }
 	});
+	$('[id^=Country]').change(function(){
+		var x = $(this).attr("id").replace('Country', '');
+		var y = $('select[id="Country'+x+'"] :selected').attr('class').replace('CountryOption', '');
+		$('select[id="State'+x+'"] option:not(.StateOption'+y+')').addClass("display-none");
+		$('select[id="State'+x+'"] option.StateOption'+y+'').removeClass("display-none");
+		$('select[id="State'+x+'"] option.StateOption'+y+'').addClass("display");
+	});
+	$('[id^=Wcountry]').change(function(){
+		var x = $(this).attr("id").replace('Wcountry', '');
+		var y = $('select[id="Wcountry'+x+'"] :selected').attr('class').replace('CountryOption', '');
+		$('select[id="Wstate'+x+'"] option:not(.StateOption'+y+')').addClass("display-none");
+		$('select[id="Wstate'+x+'"] option.StateOption'+y+'').removeClass("display-none");
+		$('select[id="Wstate'+x+'"] option.StateOption'+y+'').addClass("display");
+	});
+	$('select[id^=State] option.StateOption14').removeClass("display-none");
+	$('select[id^=State] option.StateOption14').addClass("display");
+	$('select[id^=State] option:not(.StateOption14)').addClass("display-none");
+	$('select[id^=State] option:not(.StateOption14)').removeClass("display");
+	$('select[id^=Wstate] option.StateOption14').removeClass("display-none");
+	$('select[id^=Wstate] option.StateOption14').addClass("display");
+	$('select[id^=Wstate] option:not(.StateOption14)').addClass("display-none");
+	$('select[id^=Wstate] option:not(.StateOption14)').removeClass("display");
 	
 	$('[class=cardevent]').click(function(){
 	    $('.carddown').slideToggle(450);

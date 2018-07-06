@@ -264,7 +264,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 		</table>
 		</div>
 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 Membpaymentsiderbar">
-		<p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
+		<span styule="margin-bottom: 15px;" class="smaller-lead-heading sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span>
 				<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
 		<?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>   
 			<fieldset>
@@ -276,7 +276,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 							if($cardnum["IsDefault"]=="1") {
 							echo "selected ";
 						}
-						echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
+						echo 'data-class="'.$cardnum["Payment-Method"].'">---- ---- ---- ';
 						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
 						}
 					
@@ -362,53 +362,106 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 	</div>
 	</div>
 	-->
-		<div class="row ordersummary"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span>YOUR ORDER</span></div></div>
-			<table>
-			    <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-				<tr>
-				<td>Sub total (Exc. GST)</td>
-				<td>A$<?php echo $scheduleDetails['SubTotal'];?></td>
-				</tr>
-				<tr>
-					<td>GST</td>
-					<td>A$<?php echo $scheduleDetails['GST'];?></td>
-				</tr>
-				<tr>
-				<td><span style="font-size: 20px;font-weight: bold;">Total(Inc.GST)</span></td>
-				<td>A$<?php echo $scheduleDetails['OrderTotal'];?></td>
-				</tr>
-				<?php if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"): ?>
-				<tr><td><p style="border-top: 1px solid #ccc;"></p></td><td><p style="border-top: 1px solid #ccc;"></p></td></tr>
-				
+
+			<div class="flex-container flex-flow-column">
+
+				<div class="flex-cell ordersummary">
+					<span>YOUR ORDER</span>
+				</div>
+
+				<div class="flex-cell flex-flow-row">
+					<div class="flex-col-12">
+					Membership payment total:	
+					</div>
+				</div>
+
+				<div class="flex-cell flex-flow-row">
+					<div class="flex-col-6">
+					Subtotal (exc. GST)	
+					</div>
+					<div class="flex-col-6">
+			        $<?php echo $scheduleDetails['SubTotal'];?>
+					</div>
+				</div>
+
+				<div class="flex-cell flex-flow-row">
+					<div class="flex-col-6">
+					GST	
+					</div>
+					<div class="flex-col-6">
+			        $<?php echo $scheduleDetails['GST'];?>
+					</div>
+				</div>
+
+				<div class="flex-cell flex-flow-row">
+					<div class="flex-col-6">
+					Total(inc.GST)	
+					</div>
+					<div class="flex-col-6">
+			        $<?php echo $scheduleDetails['OrderTotal'];?>
+					</div>
+				</div>
+
 				<?php 
 					if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"){ 
 						$AdminFee =$scheduleDetails['AdminFee']; 
 						$InitialPaymentAmount = $scheduleDetails['InitialPaymentAmount'];
 						$OccuringPayment = $scheduleDetails['OccuringPayment'];
+						$firstInstallment = $InitialPaymentAmount-$AdminFee-$scheduleDetails['GST']-$_POST['PRF'];
 						$LastPayment = $scheduleDetails['LastPayment'];
-						
-						echo '<tr><td>Initial Payment</td><td>A$'.$InitialPaymentAmount.'</td></tr>';
-						echo '<tr><td>includes:</td></tr>';
-						echo '<tr><td><span>Admin Fee</span></td><td>A$'.$AdminFee.'</td></tr>';
-												
+						echo '<div class="flex-cell flex-flow-row">
+								<div class="flex-col-12">
+								</div>
+							</div>';
+						echo '<div class="flex-cell flex-flow-row">
+								<div class="flex-col-12">Today’s payment includes:
+								</div>
+							</div>';
+						echo'<div class="flex-cell flex-flow-row">
+								<div class="flex-col-6">
+									Admin fee	
+								</div>
+								<div class="flex-col-6">$'.$AdminFee.'</div></div>';
+						echo'<div class="flex-cell flex-flow-row">
+								<div class="flex-col-6">
+									First instalment	
+								</div>
+								<div class="flex-col-6">$'.$firstInstallment.'</div></div>';	
+						if(isset($_POST['PRF'])&& $_POST['PRF']!=""){
+							$PRFPrice =$_POST['PRF']; 
+							echo'<div class="flex-cell flex-flow-row">
+									<div class="flex-col-6">
+										PRF donation	
+									</div>
+									<div class="flex-col-6">$'.$PRFPrice.'</div></div>';		
+						}
+						echo'<div class="flex-cell flex-flow-row">
+								<div class="flex-col-6">
+									GST	
+								</div>
+								<div class="flex-col-6">$'.$scheduleDetails['GST'].'</div></div>';
+						echo'<div class="flex-cell flex-flow-row">
+								<div class="flex-col-6">
+									Today’s total	
+								</div>
+								<div class="flex-col-6">$'.$InitialPaymentAmount.'</div></div>';
+                        echo'<div class="flex-cell flex-flow-row">
+								<div class="flex-col-12" style="text-align: center">
+									<button style="margin: 30px 0;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payment</button>	
+								</div>
+							</div>'; 								
 					}
 				?>
-				<?php 
-				if(isset($_POST['PRF'])&& $_POST['PRF']!=""){  $PRFPrice =$_POST['PRF'];echo '<tr><td>PRF donation</td><td>A$'.$_POST['PRF'].'</td></tr>'; }
-				?>
-				<tr>
-					<td>GST</td>
-					<td>A$<?php echo $scheduleDetails['GST'];?></td>
-				</tr>
-				<tr><td><button type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Next Schedule</button></td></tr>
-				 <tr><td>&nbsp;</td><td>&nbsp;</td></tr>
-				 <?php endif;?>
-			</table>
-		
+				<div class="flex-cell flex-flow-row">
+					<div class="flex-col-12">
+					</div>
+				</div>					
+			</div>
 			
 			<!--<input type="hidden" name="Paymentcard" id="Paymentcardvalue" value="">-->
-			<a target="_blank" class="addCartlink"><button class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
-		
+			<div class="flex-col-12" style="text-align: center">
+				<a target="_blank" class="addCartlink"><button style="margin: 30px 0;" class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
+			</div>
 	</div>
 </div>
 </form>
@@ -430,15 +483,25 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			    <?php 
                     $month = date("m");		
 					$currentMonth = trim($month,"0"); 
-					$currentYear = date("Y");  
+					$currentYear = date("Y"); 
+					echo '<div class="flex-cell flex-flow-row">
+								<div class="flex-col-6">
+								Date	
+								</div>
+								<div class="flex-col-6">
+								Payment amount	
+								</div>
+							</div>';
 					for($i=$currentMonth+1; $i<12; $i++){
-						echo '<li>01/'.$i.'/'.$currentYear.' payment: A$'.$OccuringPayment.'</li>';
+						echo '<div class="flex-cell flex-flow-row"><div class="flex-col-6">01/'.$i.'/'.$currentYear.'</div>
+								<div class="flex-col-6">$'.$OccuringPayment.'</div>
+							</div>';
 					}
-				echo '<li>01/12/'.$currentYear.'payment: A$'.$LastPayment.'</li>';
+				echo '<div class="flex-cell flex-flow-row"><div class="flex-col-6">01/12/'.$currentYear.'</div>
+						<div class="flex-col-6">$'.$LastPayment.'</div>
+					</div>';
 				?>
-				
-			    
-            </ul>			
+			</ul>			
 				
 				
             
