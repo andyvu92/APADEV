@@ -326,7 +326,11 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			return $JSONreturn;
 		case "31":
 			//API test by JingHu
-			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/MembershipProducts/".$_SESSION['UserId'];
+			if(isset($_SESSION['UserId'])){
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/MembershipProducts/".$_SESSION['UserId'];}
+			else{
+			$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/MembershipProducts/-1";	
+			}
 			echo "Data Sent: <br />";
 			print_r($variables);
 			echo "<br />31. Get MEmbership product price: <br />";

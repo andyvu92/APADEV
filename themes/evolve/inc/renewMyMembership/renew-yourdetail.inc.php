@@ -431,12 +431,12 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					
 					<div class="col-xs-6 col-md-3">
 					   <label for="">State<span class="tipstyle">*</span></label>
-					   <select class="form-control" id="State" name="State">
+					   <select class="form-control" id="State1" name="State">
 							<?php
 							$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 							$State=json_decode($statecode, true);						
 							foreach($State  as $key => $value){
-								echo '<option value="'.$State[$key]['Abbreviation'].'"';
+								echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
 								if ($details['State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
 								echo '> '.$State[$key]['Abbreviation'].' </option>';
 						    }
@@ -446,13 +446,13 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					
 					<div class="col-xs-6 col-md-3">
 					   <label for="">Country<span class="tipstyle">*</span></label>
-					   <select class="form-control" id="Country" name="Country">
+					   <select class="form-control" id="Country1" name="Country">
 						<?php
                         $countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 						$country=json_decode($countrycode, true);						
 						foreach($country  as $key => $value){
 						    
-							echo '<option value="'.$country[$key]['Country'].'"';
+							echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
 							if ($details['Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
 							elseif(empty($details['Country']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
@@ -512,13 +512,13 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					
 					<div class="col-xs-6 col-md-3">
 					   <label for="">State<span class="tipstyle">*</span></label>
-					   <select class="form-control" name="Billing-State" id="Billing-State">
+					   <select class="form-control" name="Billing-State" id="State2">
 							<option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
 							<?php 
 								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 								$State=json_decode($statecode, true);
 								foreach($State  as $key => $value){
-								echo '<option value="'.$State[$key]['Abbreviation'].'"';
+								echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
 								if ($details['Billing-State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
 								echo '> '.$State[$key]['Abbreviation'].' </option>';
 							
@@ -529,15 +529,15 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					
 					<div class="col-xs-6 col-md-3">
 					   <label for="">Country<span class="tipstyle">*</span></label>
-					   <select class="form-control" id="Billing-Country" name="Billing-Country">
+					   <select class="form-control" id="Country2" name="Billing-Country">
 							<?php 
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
 							foreach($country  as $key => $value){
 								
-								echo '<option value="'.$country[$key]['Country'].'"';
+								echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
 								if ($details['Billing-Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
-								elseif(empty($details['Billing-Country']) && $country[$pair]['ID']=="14"){
+								elseif(empty($details['Billing-Country']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
 								}
 								echo '> '.$country[$key]['Country'].' </option>';
@@ -587,14 +587,22 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<label for="">Member Type<span class="tipstyle">*</span></label>
 					<select class="form-control" id="MemberType" name="MemberType">
 						
-						<?php 
-                        $MemberTypecode  = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
-						$MemberType=json_decode($MemberTypecode, true);
+						<?php
+						// 2.2.31 Get Membership prodcut price
+						// Send - 
+						// userID & product list
+						// Response -Membership prodcut price
+						$prodcutArray = array();
+						$memberProductsArray['ProductID']=$prodcutArray;
+						$memberProdcutID = $memberProductsArray;
+						$MemberType = GetAptifyData("31", $memberProdcutID);						
+                        //$MemberTypecode  = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
+						//$MemberType=json_decode($MemberTypecode, true);
 						foreach($MemberType  as $key => $value){
 							echo '<option value="'.$MemberType[$key]['ProductID'].'"';
 							if(isset($_SESSION["MembershipProductID"])){if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']){ echo "selected='selected'"; }} 
 							//elseif ($details['MemberTypeID'] == $MemberType[$key]['ID']){ echo "selected='selected'"; } 
-							echo '> '.$MemberType[$key]['Name'].' </option>';
+							echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.$MemberType[$key]['Price'].') </option>';
 						}
 					    ?>
 					</select>
@@ -856,7 +864,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 							$State=json_decode($statecode, true);						
 							foreach($State  as $pair => $value){
-								echo '<option value="'.$State[$pair]['Abbreviation'].'"';
+								echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$pair]['Abbreviation'].'"';
 								if ($details['Workplaces'][$key]['Wstate'] == $State[$pair]['Abbreviation']){ echo "selected='selected'"; } 
 								echo '> '.$State[$pair]['Abbreviation'].' </option>';
 							}
@@ -871,7 +879,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
 							foreach($country  as $pair => $value){
-								echo '<option value="'.$country[$pair]['Country'].'"';
+								echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$pair]['Country'].'"';
 								if ($details['Workplaces'][$key]['Wcountry'] == $country[$pair]['Country']){ echo "selected='selected'"; } 
 								elseif(empty($details['Workplaces'][$key]['Wcountry']) && $country[$pair]['ID']=="14"){
 									echo "selected='selected'";

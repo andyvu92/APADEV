@@ -173,12 +173,12 @@ if(isset($_POST['step2-1'])) {
 		</div>
 		<div class="row">
 			<div class="col-lg-6">
-				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
+				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-4">
-				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date" maxlength="4">
+				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
 			</div>
 		</div>
 		<div class="row">

@@ -516,14 +516,14 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 
 							<div class="col-xs-6 col-md-6">
-								<label for="">State<span class="tipstyle">*</span></label>
-								<select class="form-control" id="State" name="State" required>
+								<label for="">State</label>
+								<select class="form-control" id="State1" name="State" required>
 									<option value="" <?php if (empty($details['State'])) echo "selected='selected'";?> disabled> State </option>
 									<?php
 										$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 										$State=json_decode($statecode, true);						
 										foreach($State  as $key => $value){
-											echo '<option value="'.$State[$key]['Abbreviation'].'"';
+											echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
 											if ($details['State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
 											echo '> '.$State[$key]['Abbreviation'].' </option>';
 										}
@@ -533,13 +533,13 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 
 							<div class="col-xs-6 col-md-6">
 								<label for="">Country<span class="tipstyle">*</span></label>
-								<select class="form-control" id="Country" name="Country" required>
+								<select class="form-control" id="Country1" name="Country" required>
 								<?php
 								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 								$country=json_decode($countrycode, true);						
 								foreach($country  as $key => $value){
 									
-									echo '<option value="'.$country[$key]['Country'].'"';
+									echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
 									if ($details['Country'] == $country[$key]['Country']){ echo "selected='selected'"; }
 									elseif(empty($details['Country']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
@@ -595,14 +595,14 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 
 						<div class="col-xs-6 col-md-6">
-							<label for="">State<span class="tipstyle">*</span></label>
-							<select class="form-control" name="Mailing-State" id="Mailing-State" required>
+							<label for="">State</label>
+							<select class="form-control" name="Mailing-State" id="State2" required>
 								<option value=""  <?php if (empty($details['Mailing-state'])) echo "selected='selected'";?> disabled> State </option>
 								<?php 
 								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 								$State=json_decode($statecode, true);
 								foreach($State  as $key => $value){
-								echo '<option value="'.$State[$key]['Abbreviation'].'"';
+								echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
 								if ($details['Mailing-state'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
 								echo '> '.$State[$key]['Abbreviation'].' </option>';
 							
@@ -614,13 +614,13 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 
 						<div class="col-xs-6 col-md-6">
 							<label for="">Country<span class="tipstyle">*</span></label>
-							<select class="form-control" id="Mailing-Country" name="Mailing-Country" required>
+							<select class="form-control" id="Country2" name="Mailing-Country" required>
 							<?php 
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
 							foreach($country  as $key => $value){
 								
-								echo '<option value="'.$country[$key]['Country'].'"';
+								echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
 								if ($details['Mailing-country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
 								elseif(empty($details['Mailing-country']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
@@ -930,14 +930,14 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 
 						<div class="col-xs-6 col-md-6">
-							<label for="">State<span class="tipstyle">*</span></label>
-							<select class="form-control" name="Shipping-State" id="Shipping-State" required>
+							<label for="">State</label>
+							<select class="form-control" name="Shipping-State" id="State3" required>
 								<option value=""  <?php if (empty($details['Shipping-state'])) echo "selected='selected'";?> disabled> State </option>
 								<?php 
 								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 								$State=json_decode($statecode, true);
 								foreach($State  as $key => $value){
-								echo '<option value="'.$State[$key]['Abbreviation'].'"';
+								echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
 								if ($details['Shipping-state'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
 								echo '> '.$State[$key]['Abbreviation'].' </option>';
 							
@@ -949,13 +949,13 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 
 						<div class="col-xs-6 col-md-6">
 							<label for="">Country<span class="tipstyle">*</span></label>
-							<select class="form-control" id="Shipping-Country" name="Shipping-Country" required>
+							<select class="form-control" id="Country3" name="Shipping-Country" required>
 							<?php 
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
 							foreach($country  as $key => $value){
 								
-								echo '<option value="'.$country[$key]['Country'].'"';
+								echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
 								if ($details['Shipping-country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
 								elseif(empty($details['Shipping-country']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
@@ -1004,14 +1004,14 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 
 						<div class="col-xs-6 col-md-6">
-							<label for="">State<span class="tipstyle">*</span></label>
-							<select class="form-control" name="Billing-State" id="Billing-State" required>
+							<label for="">State</label>
+							<select class="form-control" name="Billing-State" id="State4" required>
 								<option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
 								<?php 
 								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 								$State=json_decode($statecode, true);
 								foreach($State  as $key => $value){
-								echo '<option value="'.$State[$key]['Abbreviation'].'"';
+								echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
 								if ($details['Billing-State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
 								echo '> '.$State[$key]['Abbreviation'].' </option>';
 							
@@ -1022,13 +1022,13 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 
 						<div class="col-xs-6 col-md-6">
 							<label for="">Country<span class="tipstyle">*</span></label>
-							<select class="form-control" id="Billing-Country" name="Billing-Country" required>
+							<select class="form-control" id="Country4" name="Billing-Country" required>
 							<?php 
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
 							foreach($country  as $key => $value){
 								
-								echo '<option value="'.$country[$key]['Country'].'"';
+								echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
 								if ($details['Billing-Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
 								elseif(empty($details['Billing-Country']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
@@ -1112,14 +1112,14 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 
 							<div class="col-xs-6 col-md-6">
-								<label for="Wstate<?php echo $key;?>">State<span class="tipstyle">*</span></label>
+								<label for="Wstate<?php echo $key;?>">State</label>
 								<select class="form-control" id="Wstate<?php echo $key;?>" name="Wstate<?php echo $key;?>" required>
 									<option value="" <?php if (empty($details['Workplaces'][$key]['Wstate'])) echo "selected='selected'";?> disabled>State</option>
 									<?php
 									$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 									$State=json_decode($statecode, true);						
 									foreach($State  as $pair => $value){
-										echo '<option value="'.$State[$pair]['Abbreviation'].'"';
+										echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$pair]['Abbreviation'].'"';
 										if ($details['Workplaces'][$key]['Wstate'] == $State[$pair]['Abbreviation']){ echo "selected='selected'"; } 
 										echo '> '.$State[$pair]['Abbreviation'].' </option>';
 									}
@@ -1134,7 +1134,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 								$country=json_decode($countrycode, true);
 								foreach($country  as $pair => $value){
-									echo '<option value="'.$country[$pair]['Country'].'"';
+									echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$pair]['Country'].'"';
 									if ($details['Workplaces'][$key]['Wcountry'] == $country[$pair]['Country']){ echo "selected='selected'"; }
 									elseif(empty($details['Workplaces'][$key]['Wcountry']) && $country[$pair]['ID']=="14"){
 											echo "selected='selected'";
@@ -1797,7 +1797,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				</div>
 				<div class="row">
 					<div class="col-lg-6">
-						<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date" required maxlength="4">
+						<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" required maxlength="4">
 					</div>
 				</div>
 				<div class="row"> 
