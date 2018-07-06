@@ -547,7 +547,7 @@ if($resultdata['result']) {
 			
 			
 		?>
-		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>When:</h3><p><?php //echo $bdata[1]."-".$edata[1]; ?></p><p><?php echo $bdata[0]." - ".$edata[0] ; ?></p></div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>When:</h3><p><?php //echo $bdata[1]."-".$edata[1]; ?></p><p><?php //echo $bdata[0]." - ".$edata[0] ; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Registration closing date:</h3><p><?php //echo $pd_detail['Close_date']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<h3>Where:</h3>
@@ -557,24 +557,24 @@ if($resultdata['result']) {
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>CPD hours:</h3><p><?php //echo $pd_detail['CPD']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Cost:</h3><p>
 		 <?php 
-		  $priceList = array();
-		  $cost = 0;
+		  //$priceList = array();
+		  //$cost = 0;
 		 // todo
 		 // apply coupon one
 		 // ["Product Cost With Coupon"]
 		 
-		 if($prices!="NULL"&& isset($_SESSION["UserId"])){
-			if(in_array($pd_detail['Product Cost Without Coupon'],$pricelistGet)) {
-				comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-			}
-			else {
-				comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
+		 //if($prices!="NULL"&& isset($_SESSION["UserId"])){
+			//if(in_array($pd_detail['Product Cost Without Coupon'],$pricelistGet)) {
+				//comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
+			//}
+			//else {
+				//comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
 				//echo "$".$pd_detail['Cost'];
-			}
-		 }
-		else{
-			foreach($pricelistGet as $key=>$value){echo $key.":&nbsp;$".$value."<br>";}
-		}	
+			//}
+		 //}
+		//else{
+			//foreach($pricelistGet as $key=>$value){echo //$key.":&nbsp;$".$value."<br>";}
+		//}	
 		 ?>
 		 
 		 
