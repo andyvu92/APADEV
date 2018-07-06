@@ -268,7 +268,7 @@ $PRFPrice = 0;
 							if($cardnum["IsDefault"]=="1") {
 							echo "selected ";
 						}
-						echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
+						echo 'data-class="'.$cardnum["Payment-Method"].'">---- ---- ---- ';
 						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
 						}
 					
@@ -312,8 +312,12 @@ $PRFPrice = 0;
 		
 		<?php endif; ?>
 		</div>
-		<div class="row ordersummary"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span>YOUR ORDER</span></div></div>
-			<div class="flex-container flex-flow-column member-info">
+			<div class="flex-container flex-flow-column">
+
+				<div class="flex-cell ordersummary">
+					<span>YOUR ORDER</span>
+				</div>
+
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-12">
 					Membership payment total:	
@@ -387,8 +391,8 @@ $PRFPrice = 0;
 								</div>
 								<div class="flex-col-6">$'.$InitialPaymentAmount.'</div></div>';
                         echo'<div class="flex-cell flex-flow-row">
-								<div class="flex-col-12">
-									<button type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payment</button>	
+								<div class="flex-col-12" style="text-align: center">
+									<button style="margin-top: 30px;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payment</button>	
 								</div>
 							</div>'; 								
 					}
@@ -399,8 +403,10 @@ $PRFPrice = 0;
 				</div>					
 			</div>
 			
-		<a target="_blank" class="addCartlink"><button class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
-		</div>
+			<div class="flex-col-12" style="text-align: center">
+				<a target="_blank" class="addCartlink"><button style="margin-top: 30px;" class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
+			</div>	
+	</div>
 	</div>
 </form>
 <form id="pform" action="" method="POST"><input type="hidden" name="goP"></form>
