@@ -438,18 +438,23 @@ if($resultdata['result']) {
 		GetAptifyData("5", $postData);
 		//update PD shopping care 
 		PDShoppingCart($userID=$_SESSION['UserId'], $productID=$_POST['productID'], $meetingID=$_POST['meetingID'],$type=$_POST['type'],$Coupon=$_POST['Couponcode']);
-		$CreateNewUserPD["Job"] = $_POST["Job"];
-		$CreateNewUserPD["Registrationboard"] = $_POST["Registrationboard"];
-		$CreateNewUserPD["Professionalinsurance"] = $_POST["Professionalinsurance"];
-		$CreateNewUserPD["Professionalbody"] = $_POST["Professionalbody"];
-		$CreateNewUserPD["Dietary"] = $_POST["Dietary"];
-		$CreateNewUserPD["HearaboutAPA"] = $_POST["HearaboutAPA"];
-		$CreateNewUserPD["Membership-product"] = $_POST["Membership-product"];
-		$CreateNewUserPD["Pdemails-product"] = $_POST["Pdemails-product"];
-		$CreateNewUserPD["Jobs-product"] = $_POST["Jobs-product"];
-		$CreateNewUserPD["Shop-product"] = $_POST["Shop-product"];
-		$CreateNewUserPD["Campaigns-product"] = $_POST["Campaigns-product"];
-		$CreateNewUserPD["Partner-product"] = $_POST["Partner-product"];
+		//save survey data in APA side
+		$CreateNewUserPD = array();
+		$CreateNewUserPD["UserID"] = $_SESSION['UserId'];
+		if(isset($_POST['Memberid'])){ $CreateNewUserPD["EmailAddress"] = $_POST['Memberid']; } else {$CreateNewUserPD["EmailAddress"] = $details['Memberid'];}
+		if(isset($_POST['Job'])){ $CreateNewUserPD["Job"] = $_POST["Job"];  }
+		if(isset($_POST['Registrationboard'])){ $CreateNewUserPD["Registrationboard"] = $_POST["Registrationboard"];  } else { $CreateNewUserPD["Registrationboard"] = 0;  } 
+		if(isset($_POST['Professionalinsurance'])){ $CreateNewUserPD["Professionalinsurance"] = $_POST["Professionalinsurance"];  }else { $CreateNewUserPD["Professionalinsurance"] = 0;  } 
+		if(isset($_POST['Professionalbody'])){ $CreateNewUserPD["Professionalbody"] = $_POST["Professionalbody"];  }else { $CreateNewUserPD["Professionalbody"] = 0;  } 
+		if(isset($_POST['HearaboutAPA'])){ $CreateNewUserPD["HearaboutAPA"] = $_POST["HearaboutAPA"];  }
+		if(isset($_POST['Membership-product'])){ $CreateNewUserPD["Membership-product"] = $_POST["Membership-product"];  }else { $CreateNewUserPD["Membership-product"] = 0;  } 
+		if(isset($_POST['Pdemails-product'])){ $CreateNewUserPD["Pdemails-product"] = $_POST["Pdemails-product"];  }else { $CreateNewUserPD["Pdemails-product"] = 0;  } 
+		if(isset($_POST['Jobs-product'])){ $CreateNewUserPD["Jobs-product"] = $_POST["Jobs-product"];  }else { $CreateNewUserPD["Jobs-product"] = 0;  } 
+		if(isset($_POST['Shop-product'])){ $CreateNewUserPD["Shop-product"] = $_POST["Shop-product"];  }else { $CreateNewUserPD["Shop-product"] = 0;  } 
+		if(isset($_POST['Campaigns-product'])){ $CreateNewUserPD["Campaigns-product"] = $_POST["Campaigns-product"];  }else { $CreateNewUserPD["Campaigns-product"] = 0;  } 
+		if(isset($_POST['Partner-product'])){ $CreateNewUserPD["Partner-product"] = $_POST["Partner-product"];  }else { $CreateNewUserPD["Partner-product"] = 0;  } 
+		$CreateNewUserPD["CreateDate"] = date('Y-m-d');
+		SavePDSurvey($CreateNewUserPD=$CreateNewUserPD);	
 		
 	}
 	// in case of user update the details get the new data.
@@ -977,24 +982,24 @@ if($resultdata['result']) {
                 </div>
 				<div class="row">
                     <div class="col-lg-4">
-                    <input type="checkbox" name="Membership-product" id="Membership-product" checked> <label for="Membership-product">Membership</label>
+                    <input type="checkbox" name="Membership-product" id="Membership-product" value="1" checked> <label for="Membership-product">Membership</label>
                     </div>
                     <div class="col-lg-4">
-                    <input type="checkbox" name="Pdemails-product" id="Pdemails-product" checked> <label for="Pdemails-product">PD emails</label>
+                    <input type="checkbox" name="Pdemails-product" id="Pdemails-product" value="1" checked> <label for="Pdemails-product">PD emails</label>
                     </div>
 					 <div class="col-lg-4">
-                    <input type="checkbox" name="Jobs-product" id="Jobs-product" checked> <label for="Jobs-product">Jobs4physios</label>
+                    <input type="checkbox" name="Jobs-product" id="Jobs-product" value="1" checked> <label for="Jobs-product">Jobs4physios</label>
                     </div>
                 </div>
 				<div class="row">
                     <div class="col-lg-4">
-                    <input type="checkbox" name="Shop-product" id="Shop-product" checked> <label for="Shop-product">Shop4physios</label>
+                    <input type="checkbox" name="Shop-product" id="Shop-product" value="1" checked> <label for="Shop-product">Shop4physios</label>
                     </div>
                     <div class="col-lg-4">
-                    <input type="checkbox" name="Campaigns-product" id="Campaigns-product" checked> <label for="Campaigns-product">Campaigns</label>
+                    <input type="checkbox" name="Campaigns-product" id="Campaigns-product" value="1" checked> <label for="Campaigns-product">Campaigns</label>
                     </div>
 					 <div class="col-lg-4">
-                    <input type="checkbox" name="Partner-product" id="Partner-product" checked> <label for="Partner-product">Partner offers</label>
+                    <input type="checkbox" name="Partner-product" id="Partner-product" value="1" checked> <label for="Partner-product">Partner offers</label>
                     </div>
                 </div>
 				<!--
@@ -1283,7 +1288,7 @@ if($resultdata['result']) {
 	    <input type="hidden" name="Couponcode" value="<?php echo $Couponcode;?>"> 		
 		<div class="row">
 		   <div class="col-lg-12">
-				<input type="checkbox" name="Professionalinsurance" id="Professionalinsurance1" required> <label for="Professionalinsurance1">I have current adequate professional indemnity insurance.</label>
+				<input type="checkbox" name="Professionalinsurance"  required> <label for="Professionalinsurance1">I have current adequate professional indemnity insurance.</label>
 		   </div>
 		</div>
 		<div class="row">
