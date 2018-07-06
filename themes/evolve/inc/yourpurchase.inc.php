@@ -93,22 +93,12 @@ $products = $product["Orders"]
 							$apis = Array();
 							foreach($products as $product){
 								array_push($apis, $product["ID"]);
-<<<<<<< HEAD
-								echo "<tr>";
-								echo "<td>".$product['OrderLines'][0]['ProductName']."</td>";
-								echo '<td><button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span style="text-decoration: underline; color:white;">Invoice</span></button></td>';
-								echo "<td>".$product['Paymenttotal']."</td>";
-								echo "<td>".$product['Orderdate']."</td>";
-								echo "</tr>";
-								/*
-=======
 								echo "<div class='flex-cell flex-flow-row'>";
 								echo "<div class='flex-col-4'>".$product['OrderLines'][0]['ProductName']."</div>";
 								echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
 								echo "<div class='flex-col-2'>".$product['Paymenttotal']."</div>";
 								echo "<div class='flex-col-3'>".$product['Orderdate']."</div>";
 								echo "</div>";
->>>>>>> 3a69a0a307a576f9da435fb173d8f82289780fbc
 								echo '<div id="Iaksbnkvoice'.$product['ID'].'" class="modal fade big-screen" role="dialog">
 									<div class="modal-dialog">
 
@@ -116,26 +106,17 @@ $products = $product["Orders"]
 										<div class="modal-content">
 										<div class="modal-header">
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
-<<<<<<< HEAD
-										  </div>
-										  <div class="modal-body">
-											<iframe name="stsIaksbnkvoice'.$product['ID'].'" src="http://www.physiotherapy.asn.au"></iframe>
-										  </div>
-										  <div class="modal-footer">
-=======
 										</div>
 										<div class="modal-body">
 											<iframe name="Iaksbnkvoice'.$product['ID'].'" src="http://www.physiotherapy.asn.au"></iframe>
 										</div>
 										<div class="modal-footer">
->>>>>>> 3a69a0a307a576f9da435fb173d8f82289780fbc
 											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 										</div>
 										</div>
 
 									</div>
 									</div>';
-									*/
 							}
 							//// 2.2.18 - GET payment history list
 							// Send - 
