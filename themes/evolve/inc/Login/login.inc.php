@@ -39,14 +39,14 @@
 	if(isset($_POST["Getdata"])) {
 		$data = "UserID=".$_SESSION["UserId"];
 		$output = GetAptifyData("1", $data);
-		print_r($output);
+		//print_r($output);
 	}
 	
 	// forgot password
 	if(isset($_POST["Fid"])) {
 		$input["email"] = $_POST["Fid"];
 		$output = GetAptifyData("6", $input);
-		print_r($output);
+		//print_r($output);
 	}
 	
 	function loginManager($id, $pass) {
@@ -59,8 +59,8 @@
 		$arrIn["Password"] = $pass;
 		$result = GetAptifyData("7", $arrIn);
 		if(isset($result["ErrorInfo"])) {
-			echo $result["ErrorInfo"]["ErrorMessage"];
-			echo "log-in fail";
+			//echo $result["ErrorInfo"]["ErrorMessage"];
+			//echo "log-in fail";
 		} else {
 			// logged in
 			print_r($result);

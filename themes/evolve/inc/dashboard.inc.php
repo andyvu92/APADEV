@@ -162,7 +162,7 @@ $background = getBackgroundImage($userID);
 <div class="col-xs-12 col-md-10 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-12 col-sm-6"><span class="dashboard-name cairo">Hello <?php echo $user["Preferredname"]; ?></span></div>
+			<div class="col-xs-12 col-sm-6"><span class="dashboard-name cairo">Hello <?php echo $user["Preferred-name"]; ?></span></div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-toggle="modal" data-target="#myModal"><span class="customise_background" >Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
 	<?php
@@ -177,7 +177,7 @@ $background = getBackgroundImage($userID);
 						</tr>
 						<tr>
 							<td><strong>Name:</strong></td>
-							<td><?php echo $user['FirstName']." ".$user['LastName']; ?></td>
+							<td><?php echo $user['Firstname']." ".$user['Lastname']; ?></td>
 						</tr>
 						<tr>
 							<td><strong>Member ID:</strong></td>

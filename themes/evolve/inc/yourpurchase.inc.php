@@ -77,6 +77,7 @@ $products = $product["Orders"]
 								echo "<td>".$product['Paymenttotal']."</td>";
 								echo "<td>".$product['Orderdate']."</td>";
 								echo "</tr>";
+								/*
 								echo '<div id="Iaksbnkvoice'.$product['ID'].'" class="modal fade big-screen" role="dialog">
 									  <div class="modal-dialog">
 
@@ -86,7 +87,7 @@ $products = $product["Orders"]
 											<button type="button" class="close" data-dismiss="modal">&times;</button>
 										  </div>
 										  <div class="modal-body">
-											<iframe name="Iaksbnkvoice'.$product['ID'].'" src="http://www.physiotherapy.asn.au"></iframe>
+											<iframe name="stsIaksbnkvoice'.$product['ID'].'" src="http://www.physiotherapy.asn.au"></iframe>
 										  </div>
 										  <div class="modal-footer">
 											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -95,6 +96,7 @@ $products = $product["Orders"]
 
 									  </div>
 									</div>';
+									*/
 							}
 							//// 2.2.18 - GET payment history list
 							// Send - 
@@ -106,6 +108,28 @@ $products = $product["Orders"]
 						</tbody>
 					</table>
 				</div>
+				<?php 
+					foreach($products as $product) {
+						echo '<div id="Iaksbnkvoice'.$product['ID'].'" class="modal fade big-screen" role="dialog">
+								<div class="modal-dialog">
+
+								<!-- Modal content-->
+								<div class="modal-content">
+									<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									</div>
+									<div class="modal-body">
+									<iframe name="stsIaksbnkvoice'.$product['ID'].'" src="http://www.physiotherapy.asn.au"></iframe>
+									</div>
+									<div class="modal-footer">
+									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+									</div>
+								</div>
+
+								</div>
+							</div>';
+					}
+				?>
 			</div>
 		</div>
 	</div>
@@ -123,30 +147,60 @@ $products = $product["Orders"]
 	</style> 
 	<script>
 	$(document).ready(function() {
-		if (window.frames["<?php echo "Iaksbnkvoice".$apis[0]; ?>"] && !window.userSet){
-			//window.userSet = true;
-			
-			<?php 
+		if (window.frames["<?php echo "Iaksbnkvoice".$apis[0]; ?>"] && !window.userSet) {
+			<?php if(count($invoiceAPI) <= 30) :?>
+				window.userSet = true;
+			<?php endif; ?>
+			<?php	
 				$count = 0;
 				$tt = 0;
-				foreach($apis as $api) {
+			?>
+			<?php foreach($apis as $api): ?>
+				<?php
 					if($count > 30) {
 						$tt++;
 						break;
 					}
-					echo "frames['Iaksbnkvoice".$api."'].location.href='".$invoiceAPI[$count]."';\n";
+				?>
+				frames['stsIaksbnkvoice<?php echo $api; ?>'].location.href="<?php echo $invoiceAPI[$count]; ?>";
+				<?php $count++; ?>
+			<?php endforeach; ?>
+			<?php	
+				foreach($apis as $api) {
+					if($count > 60) {
+						$tt++;
+						echo "window.userSet = false";
+						break;
+					}
+					if($count > 30) {
+						echo "frames['stsIaksbnkvoice".$api."'].location.href='".$invoiceAPI[$count]."';\n";
+					}
+					$count++;
+				}
+				foreach($apis as $api) {
+					if($count > 90) {
+						$tt++;
+						echo "window.userSet = false";
+						break;
+					}
+					if($count > 60) {
+						echo "frames['stsIaksbnkvoice".$api."'].location.href='".$invoiceAPI[$count]."';\n";
+					}
 					$count++;
 				}
 			?>
 		}
 	});
 	</script>
-	<?php if($tt > 0): ?>
+	<?php /* if($tt > 0): ?>
 	<script>
 	$(document).ready(function() {
 		if (window.frames["<?php echo "Iaksbnkvoice".$apis[31]; ?>"] && !window.userSet){
 			window.userSet = true;
 			<?php 
+				if(count($invoiceAPI) <= 60) {
+					window.userSet = true;
+				}
 				$count = 0;
 				foreach($apis as $api) {
 					if($count > 60) {
@@ -155,7 +209,7 @@ $products = $product["Orders"]
 						break;
 					}
 					if($count > 30) {
-						echo "frames['Iaksbnkvoice".$api."'].location.href='".$invoiceAPI[$count]."';\n";
+						echo "frames['stsIaksbnkvoice".$api."'].location.href='".$invoiceAPI[$count]."';\n";
 					}
 					$count++;
 				}
@@ -178,7 +232,7 @@ $products = $product["Orders"]
 						break;
 					}
 					if($count > 60) {
-						echo "frames['Iaksbnkvoice".$api."'].location.href='".$invoiceAPI[$count]."';\n";
+						echo "frames['stsIaksbnkvoice".$api."'].location.href='".$invoiceAPI[$count]."';\n";
 					}
 					$count++;
 				}
@@ -195,7 +249,7 @@ $products = $product["Orders"]
 			<?php 
 				foreach($apis as $api) {
 					if($count > 90) {
-						echo "frames['Iaksbnkvoice".$api."'].location.href='".$invoiceAPI[$count]."';\n";
+						echo "frames['stsIaksbnkvoice".$api."'].location.href='".$invoiceAPI[$count]."';\n";
 					}
 					$count++;
 				}

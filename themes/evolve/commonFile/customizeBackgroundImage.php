@@ -13,7 +13,7 @@ $url= $link.$_SERVER['REQUEST_URI'];
 			<h4 class="modal-title">Please select background image</h4>
 			</div>
 		<div class="modal-body">
-			<form name="formradio" action="<?php echo $url;?>" method="POST"">
+			<form name="formradio" action="<?php echo $url;?>" method="POST">
 				<input type="hidden" name="userID" value="<?php if(isset($_SESSION["UserId"])){ $userID = $_SESSION["UserId"]; echo $userID;}  ?>"> 
 				<input type="hidden" name="update">  
 				<label> <input type="radio" name="background" value="1" id="background1"><img src="../sites/default/files/DASHBOARD_PIC_1170X600.jpg"></label>

@@ -3,7 +3,7 @@
 // 2.2.19 - get national group
 // Send - 
 // Response - national group
-$sendData["RequestNG"] = "RequestNG";
+$sendData["UserID"] = "-1";
 $nationalGroups = GetAptifyData("19", $sendData);
 // use one of above to get "current" data
 // and combine with existing data ("$Subsctiption")
@@ -16,9 +16,10 @@ foreach ($_POST as $key => $value) {
 	//echo "Field ".htmlspecialchars($key)." is ".htmlspecialchars($value)."<br>";
 	$PostArray[htmlspecialchars($key)] = htmlspecialchars($value);
 }
+$nationalGroup = $nationalGroups;
 if(count($PostArray) == 0) { // Just GET data
 	$SubListAll = Array();
-	$nationalGroup = $nationalGroups["NationalGroup"];
+	//$nationalGroup = $nationalGroups["NationalGroup"];
 	foreach($nationalGroup as $Subs) {
 		$ArrayRe["SubscriptionID"] = $Subs["NGid"];
 		$ArrayRe["Subscription"] = $Subs["NGtitle"];
@@ -28,7 +29,7 @@ if(count($PostArray) == 0) { // Just GET data
 	}
 } else {
 	$SubListAll = Array();
-	$nationalGroup = $nationalGroups["NationalGroup"];
+	//$nationalGroup = $nationalGroups["NationalGroup"];
 	foreach($nationalGroup as $Subs) {
 		$ArrayRe["SubscriptionID"] = $Subs["NGid"];
 		$ArrayRe["Subscription"] = $Subs["NGtitle"];
