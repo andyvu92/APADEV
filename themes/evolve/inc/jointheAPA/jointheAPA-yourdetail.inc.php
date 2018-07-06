@@ -890,8 +890,10 @@ if (isset($_SESSION['UserId'])):
                        </select>
                     </div>
 
-                    <div class="col-xs-12 col-md-6"><label for="Shipping-address-join" style="font-weight: 500">Billing address:(Sames as Above address)</label>
-                    <input style="min-height: 0" type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="0"></div>
+                    <div class="col-xs-12 col-md-6">
+                        <input class="styled-checkbox" style="min-height: 0" type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="0">
+                        <label for="Shipping-address-join" style="font-weight: 500">Billing address:(Sames as Above address)</label>
+                    </div>
                 </div>
                 
                 <!--BREAK-->
@@ -1179,8 +1181,14 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>
                      </select>
                 </div>
-                <div class="col-lg-3 display-none" id="ngsports"><label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label><input type="checkbox" id="ngsportsbox" name="ngsports" value="0"></div>
-                <div class="col-lg-3 display-none" id="ngmusculo"><label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label><input type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"></div>
+                <div class="col-xs-12 display-none" id="ngsports">
+                    <input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0">
+                    <label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label>
+                </div>
+                <div class="col-xs-12 display-none" id="ngmusculo">
+                    <input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value="0">
+                    <label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label>
+                </div>
 
                 <div class="col-xs-12 col-md-6">
                     <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
@@ -1377,7 +1385,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>">
                     <div class="row">
                         <div class="col-xs-12">
-                            <input style="min-height: 0" type="checkbox" name="Findphysio<?php
+                            <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Findphysio<?php
         echo $key;
 ?>" id="Findphysio<?php
         echo $key;
@@ -1390,7 +1398,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                         </div>
 
                         <div class="col-xs-12"> 
-                            <input style="min-height: 0" type="checkbox" name="Findabuddy<?php
+                            <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Findabuddy<?php
         echo $key;
 ?>" id="Findabuddy<?php
         echo $key;
@@ -1770,7 +1778,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                                 <label>Does this workplace provide: </label>
                             </div>
                             <div class="col-xs-6 col-md-3">
-                                <input style="min-height: 0" type="checkbox" name="Electronic-claiming<?php
+                                <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Electronic-claiming<?php
         echo $key;
 ?>" id="Electronic-claiming<?php
         echo $key;
@@ -1785,7 +1793,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>">Electronic claiming</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
-                                <input style="min-height: 0" type="checkbox" name="Hicaps<?php
+                                <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Hicaps<?php
         echo $key;
 ?>" id="Hicaps<?php
         echo $key;
@@ -1800,7 +1808,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>">HICAPS</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
-                                <input style="min-height: 0" type="checkbox" name="Healthpoint<?php
+                                <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Healthpoint<?php
         echo $key;
 ?>" id="Healthpoint<?php
         echo $key;
@@ -1815,7 +1823,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>">Healthpoint</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
-                                <input style="min-height: 0" type="checkbox" name="Departmentva<?php
+                                <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Departmentva<?php
         echo $key;
 ?>" id="Departmentva<?php
         echo $key;
@@ -1831,7 +1839,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                             </div>
 
                             <div class="col-xs-6 col-md-3">
-                                <input style="min-height: 0" type="checkbox" name="Workerscompensation<?php
+                                <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Workerscompensation<?php
         echo $key;
 ?>" id="Workerscompensation<?php
         echo $key;
@@ -1846,7 +1854,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>">Workers compensation</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
-                                <input style="min-height: 0" type="checkbox" name="Motora<?php
+                                <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Motora<?php
         echo $key;
 ?>" id="Motora<?php
         echo $key;
@@ -1861,7 +1869,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>">Motor accident compensation</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
-                                <input style="min-height: 0" type="checkbox" name="Medicare<?php
+                                <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Medicare<?php
         echo $key;
 ?>" id="Medicare<?php
         echo $key;
@@ -1876,7 +1884,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>">Medicare Chronic Disease Management</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
-                                <input style="min-height: 0" type="checkbox" name="Homehospital<?php
+                                <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Homehospital<?php
         echo $key;
 ?>" id="Homehospital<?php
         echo $key;
@@ -1892,7 +1900,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                             </div>
 
                             <div class="col-xs-6 col-md-3">
-                                <input style="min-height: 0" type="checkbox" name="Mobilephysiotherapist<?php
+                                <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Mobilephysiotherapist<?php
         echo $key;
 ?>" id="Mobilephysiotherapist<?php
         echo $key;
@@ -1912,7 +1920,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 
                         <div class="row">
                             
-                            <div class="col-xs-12 col-md-6">
+                            <div class="col-xs-12 col-sm-6 col-md-3">
                             <label>Numbers of hours worked<span class="tipstyle">*</span></label>    
                                 <select class="form-control" id="Number-worked-hours<?php
         echo $key;
@@ -1947,10 +1955,10 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                 <div id="workplace0" class='tab-pane fade in active'>
                     <input type="hidden" name="WorkplaceID0" value="-1">                
                     <div class="row"><div class="col-lg-6"></div><div class="col-lg-6"> <label for="Findphysio"><strong>NOTE:</strong>I want this workplace to be listed on the consumer choose.physio site</label>
-                    <input type="checkbox" name="Findphysio0" id="Findphysio" value="" ></div></div>
+                    <input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio" value="" ></div></div>
                     <div class="row">
                         <div class="col-lg-12"> <label for="Findabuddy0"><strong>NOTE:</strong>I want this workplace to be listed on the APA australian.physio site</label>
-                            <input type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
+                            <input class="styled-checkbox" type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
                         </div>
                     </div>
                 <div class="row">
@@ -2136,39 +2144,39 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                    <input type="checkbox" name="Electronic-claiming0" id="Electronic-claiming0" value=""> <label for="Electronic-claiming0">Electronic claiming</label>
+                    <input class="styled-checkbox" type="checkbox" name="Electronic-claiming0" id="Electronic-claiming0" value=""> <label for="Electronic-claiming0">Electronic claiming</label>
                     </div>
                     <div class="col-lg-6">
-                    <input type="checkbox" name="Hicaps0" id="Hicaps0" value=""> <label for="Hicaps0">HICAPS</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <input type="checkbox" name="Healthpoint0" id="Healthpoint0" value="" > <label for="Healthpoint0">Healthpoint</label>
-                    </div>
-                    <div class="col-lg-6">
-                        <input type="checkbox" name="Departmentva0" id="Departmentva0" value=""> <label for="Departmentva0">Department of Vetarans' Affairs</label>
+                    <input class="styled-checkbox" type="checkbox" name="Hicaps0" id="Hicaps0" value=""> <label for="Hicaps0">HICAPS</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <input type="checkbox" name="Workerscompensation0" id="Workerscompensation0" value=""> <label for="Workerscompensation0">Workers compensation</label>
+                        <input class="styled-checkbox" type="checkbox" name="Healthpoint0" id="Healthpoint0" value="" > <label for="Healthpoint0">Healthpoint</label>
                     </div>
                     <div class="col-lg-6">
-                    <input type="checkbox" name="Motora0" id="Motora0" value=""> <label for="Motora0">Motor accident compensation</label>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <input type="checkbox" name="Medicare0" id="Medicare0" value=""> <label for="Medicare0">Medicare Chronic Disease Management</label>
-                    </div>
-                    <div class="col-lg-6">
-                        <input type="checkbox" name="Homehospital0" id="Homehospital0" value=""> <label for="Homehospital0">Home and hospital visits</label>
+                        <input class="styled-checkbox" type="checkbox" name="Departmentva0" id="Departmentva0" value=""> <label for="Departmentva0">Department of Vetarans' Affairs</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-lg-6">
-                        <input type="checkbox" name="Mobilephysiotherapist0" id="Mobilephysiotherapist0" value=""> <label for="Mobilephysiotherapist0">Mobile physiotherapist</label>
+                        <input class="styled-checkbox" type="checkbox" name="Workerscompensation0" id="Workerscompensation0" value=""> <label for="Workerscompensation0">Workers compensation</label>
+                    </div>
+                    <div class="col-lg-6">
+                    <input class="styled-checkbox" type="checkbox" name="Motora0" id="Motora0" value=""> <label for="Motora0">Motor accident compensation</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input class="styled-checkbox" type="checkbox" name="Medicare0" id="Medicare0" value=""> <label for="Medicare0">Medicare Chronic Disease Management</label>
+                    </div>
+                    <div class="col-lg-6">
+                        <input class="styled-checkbox" type="checkbox" name="Homehospital0" id="Homehospital0" value=""> <label for="Homehospital0">Home and hospital visits</label>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6">
+                        <input class="styled-checkbox" type="checkbox" name="Mobilephysiotherapist0" id="Mobilephysiotherapist0" value=""> <label for="Mobilephysiotherapist0">Mobile physiotherapist</label>
                     </div>
                 </div>
                 <div class="row">
@@ -2613,7 +2621,7 @@ if (!isset($_SESSION['UserId'])):
 
                     <div class="row">
                         <div class="col-xs-12 col-md-6"><label for="Shipping-address-join"><strong>Billing address:(Sames as Above address)</strong></label>
-                        <input style="min-height: 0" type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="0"></div>
+                        <input style="min-height: 0" class="styled-checkbox" type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="0"></div>
                     </div>
                     <div class="row" id="shippingAddress">
                         <div class="col-xs-6 col-md-3">
@@ -2855,8 +2863,14 @@ if (!isset($_SESSION['UserId'])):
                        </select>
                     </div>
 
-                    <div class="col-xs-12 display-none" id="ngsports"><label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label><input type="checkbox" id="ngsportsbox" name="ngsports" value="0"></div>
-                    <div class="col-xs-12 display-none" id="ngmusculo"><label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label><input type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"></div>
+                    <div class="col-xs-12 display-none" id="ngsports">
+                        <input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0">
+                        <label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label>
+                    </div>
+                    <div class="col-xs-12 display-none" id="ngmusculo">
+                        <input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value="0">
+                        <label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label>
+                    </div>
 			    </div>
 
                 <div class="row"> 
@@ -2957,10 +2971,14 @@ if (!isset($_SESSION['UserId'])):
                 <div id="workplace0" class='tab-pane fade in active'> 
                     <input type="hidden" name="WorkplaceID0" value="-1">
 					
-					<div class="col-xs-12"><input type="checkbox" name="Findphysio0" id="Findphysio" value="" > <label for="Findphysio"><strong>NOTE:</strong>I want this workplace to be listed on the consumer choose.physio site</label>
+					<div class="col-xs-12">
+                        <input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio" value="" >
+                        <label for="Findphysio"><strong>NOTE:</strong>I want this workplace to be listed on the consumer choose.physio site</label>
 					</div>
 					
-                    <div class="col-xs-12"> <input type="checkbox" name="Findabuddy0" id="Findabuddy0" value=""> <label for="Findabuddy0"><strong>NOTE:</strong>I want this workplace to be listed on the APA australian.physio site</label>
+                    <div class="col-xs-12">
+                        <input class="styled-checkbox" type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
+                        <label for="Findabuddy0"><strong>NOTE:</strong>I want this workplace to be listed on the APA australian.physio site</label>
                     </div>
 
                 <div class="row">
@@ -3137,35 +3155,35 @@ if (!isset($_SESSION['UserId'])):
 					</div>
 
                     <div class="col-xs-6 col-md-3">
-                    <input type="checkbox" name="Electronic-claiming0" id="Electronic-claiming0" value=""> <label for="Electronic-claiming0">Electronic claiming</label>
+                    <input class="styled-checkbox" type="checkbox" name="Electronic-claiming0" id="Electronic-claiming0" value=""> <label for="Electronic-claiming0">Electronic claiming</label>
                     </div>
                     <div class="col-xs-6 col-md-3">
-                    <input type="checkbox" name="Hicaps0" id="Hicaps0" value=""> <label for="Hicaps0">HICAPS</label>
-                    </div>
-
-                    <div class="col-xs-6 col-md-3">
-                        <input type="checkbox" name="Healthpoint0" id="Healthpoint0" value="" > <label for="Healthpoint0">Healthpoint</label>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <input type="checkbox" name="Departmentva0" id="Departmentva0" value=""> <label for="Departmentva0">Department of Vetarans' Affairs</label>
+                    <input class="styled-checkbox" type="checkbox" name="Hicaps0" id="Hicaps0" value=""> <label for="Hicaps0">HICAPS</label>
                     </div>
 
                     <div class="col-xs-6 col-md-3">
-                        <input type="checkbox" name="Workerscompensation0" id="Workerscompensation0" value=""> <label for="Workerscompensation0">Workers compensation</label>
+                        <input class="styled-checkbox" type="checkbox" name="Healthpoint0" id="Healthpoint0" value="" > <label for="Healthpoint0">Healthpoint</label>
                     </div>
                     <div class="col-xs-6 col-md-3">
-                    <input type="checkbox" name="Motora0" id="Motora0" value=""> <label for="Motora0">Motor accident compensation</label>
-                    </div>
-
-                    <div class="col-xs-6 col-md-3">
-                        <input type="checkbox" name="Medicare0" id="Medicare0" value=""> <label for="Medicare0">Medicare Chronic Disease Management</label>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <input type="checkbox" name="Homehospital0" id="Homehospital0" value=""> <label for="Homehospital0">Home and hospital visits</label>
+                        <input class="styled-checkbox" type="checkbox" name="Departmentva0" id="Departmentva0" value=""> <label for="Departmentva0">Department of Vetarans' Affairs</label>
                     </div>
 
                     <div class="col-xs-6 col-md-3">
-                        <input type="checkbox" name="Mobilephysiotherapist0" id="Mobilephysiotherapist0" value=""> <label for="Mobilephysiotherapist0">Mobile physiotherapist</label>
+                        <input class="styled-checkbox" type="checkbox" name="Workerscompensation0" id="Workerscompensation0" value=""> <label for="Workerscompensation0">Workers compensation</label>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                    <input class="styled-checkbox" type="checkbox" name="Motora0" id="Motora0" value=""> <label for="Motora0">Motor accident compensation</label>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <input class="styled-checkbox" type="checkbox" name="Medicare0" id="Medicare0" value=""> <label for="Medicare0">Medicare Chronic Disease Management</label>
+                    </div>
+                    <div class="col-xs-6 col-md-3">
+                        <input class="styled-checkbox" type="checkbox" name="Homehospital0" id="Homehospital0" value=""> <label for="Homehospital0">Home and hospital visits</label>
+                    </div>
+
+                    <div class="col-xs-6 col-md-3">
+                        <input class="styled-checkbox" type="checkbox" name="Mobilephysiotherapist0" id="Mobilephysiotherapist0" value=""> <label for="Mobilephysiotherapist0">Mobile physiotherapist</label>
                     </div>
 				</div>
 				

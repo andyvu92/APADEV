@@ -1465,10 +1465,10 @@ if($resultdata['result']) {
 				 //$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
 				$userTag = checkPDUser($_SESSION['MemberTypeID']);
 				if ($userTag =="0"){
-					echo '<a class="add-to-card" id="registerPDUserButton">Add to cart</a>';	
+					echo '<a class="add-to-card" id="registerPDUserButton"><span>Add to cart</span></a>';	
 				}
 				else{
-						 echo '<a class="add-to-card" id="registerNonMember">Add to cart</a>';
+						 echo '<a class="add-to-card" id="registerNonMember"><span>Add to cart</span></a>';
 					}
 		   	}	
 		   ?>

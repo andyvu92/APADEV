@@ -178,7 +178,7 @@ if(isset($_POST['step2-1'])) {
 					?>
 				</select>
 			</fieldset>
-			<input type="checkbox" id="anothercard"><label for="anothercard">Use another card</label>
+			<input class="styled-checkbox" type="checkbox" id="anothercard"><label for="anothercard">Use another card</label>
 		</div> 
 
 		<div id="anothercardBlock" style="margin: 0; padding:0" class="display-none col-xs-12">
@@ -218,7 +218,7 @@ if(isset($_POST['step2-1'])) {
 			</div>
 		</div>
 		<div class="col-xs-12">
-			<input type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label></div>
+			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label></div>
 			<input type="hidden" name="addCard" value="0">
 		</div>
 	<?php endif; ?>  
@@ -260,7 +260,7 @@ if(isset($_POST['step2-1'])) {
 			</div>
 		</div>
 		<div class="col-xs-12">
-			<input type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label>
+			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label>
 			<input type="hidden" name="addCard" value="1">
 		</div>
 
@@ -268,15 +268,15 @@ if(isset($_POST['step2-1'])) {
 	<?php endif; ?>  
 		<div class="row">
 			<div class="col-xs-12">
-				<input type="checkbox" id="privacypolicy" checked><label id="privacypolicyl">Privacy policy</label>
+				<input class="styled-checkbox" type="checkbox" id="privacypolicy" checked><label id="privacypolicyl">Privacy policy</label>
 			</div>
 
 			<div class="col-xs-12">
-				<input type="checkbox" id="instalmentpolicy" checked><label id="instalmentpolicyl">Instalment/payment policy</label>
+				<input class="styled-checkbox" type="checkbox" id="instalmentpolicy" checked><label id="instalmentpolicyl">Instalment/payment policy</label>
 			</div>
 
 			<div class="col-xs-12 display-none" id="rolloverblock">
-				<input type="checkbox" name="Rollover" id="Rollover"><label for="Rollover">Roll over</label>
+				<input class="styled-checkbox" type="checkbox" name="Rollover" id="Rollover"><label for="Rollover">Roll over</label>
 			</div>
 		</div>   
 		<div class="col-xs-12">  <a href="javascript:document.getElementById('join-insurance-form').submit();" class="join-details-button7 <?php if(isset($_POST['insuranceStatus'])&&$_POST['insuranceStatus']=="1") {echo "disabled";}  ?>" ><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>

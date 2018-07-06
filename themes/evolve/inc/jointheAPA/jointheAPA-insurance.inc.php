@@ -99,7 +99,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
-					<input type="checkbox" name="conditions" id="conditions" value="0" data-target="#insuranceTermsandConditions" data-toggle="modal"><label for="conditions">I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
+					<input class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0" data-target="#insuranceTermsandConditions" data-toggle="modal"><label for="conditions">I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
 				other material information to be disclosed<span class="tipstyle">*</span></label>
 				</div>
 			</div>
@@ -207,7 +207,8 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 					<li>If we cannot reach a satisfactory resolution within a further 45 days you can send your complaint to FOS at phone 1300 780 808; email at info@fos.org.au; or in writing to Financial Ombudsman Service, GPO Box 3, Melbourne, VIC 3001. The FOS website is www.fos.org.au. </li>
 				</ul>
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
-            	<label for="insuranceTerms">Yes. I’ve read and understand the insurance terms and conditions</label><input type="checkbox" id="insuranceTerms" checked>
+				<input class="styled-checkbox" type="checkbox" id="insuranceTerms" checked>
+				<label for="insuranceTerms">Yes. I’ve read and understand the insurance terms and conditions</label>
 			</div>   
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeDescription"> 
             	Please agree with the insurance Terms and Conditions to continue with your membership
