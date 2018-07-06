@@ -514,47 +514,47 @@ if($resultdata['result']) {
 			</div>
 		</div>
 
-
+        <!--
 		 <div class="detailContent">
-		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Presenters:</h3><p><?php echo $pd_detail['Presenters']; ?></p></div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Presenters:</h3><p><?php //echo $pd_detail['Presenters']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Event status:</h3><p>
 		 <?php 
-			$Totalnumber = $pd_detail['Totalnumber'];
-			$Enrollednumber = $pd_detail['Enrollednumber'];
-			$Now = date('d-m-Y');
-			if(strtotime($Now)> strtotime(str_replace("/","-",$pd_detail['Close_date']))){
-				echo "Closed";  
-			 }
-			 elseif($Totalnumber-$Enrollednumber<=5){
-				 echo "Almost Full"; 
+			//$Totalnumber = $pd_detail['Totalnumber'];
+			//$Enrollednumber = $pd_detail['Enrollednumber'];
+			//$Now = date('d-m-Y');
+			//if(strtotime($Now)> strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+				//echo "Closed";  
+			// }
+			// elseif($Totalnumber-$Enrollednumber<=5){
+				// echo "Almost Full"; 
 			  
-			 }
-			elseif(($Totalnumber-$Enrollednumber)==0){
-				 echo "Full"; 
+			// }
+			//elseif(($Totalnumber-$Enrollednumber)==0){
+				// echo "Full"; 
 			  
-			 }
-			 elseif(($Totalnumber-$Enrollednumber)>5){
-				 echo "Open"; 
+			 //}
+			// elseif(($Totalnumber-$Enrollednumber)>5){
+				 //echo "Open"; 
 			  
-			 }
+			 //}
 		 
 		 ?></p></div>
 		<?php 
-			$bdata = explode(" ",$pd_detail['Sdate']);
-			$edata = explode(" ",$pd_detail['Edate']);
+			//$bdata = explode(" ",$pd_detail['Sdate']);
+			//$edata = explode(" ",$pd_detail['Edate']);
 			//if Aptify give the StartDate&EndDate as timestamp, use below code to get the time and start date and end date;
 			//echo date('d-m-Y h:i:s',$bdata);
 			
 			
 		?>
-		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>When:</h3><p><?php echo $bdata[1]."-".$edata[1]; ?></p><p><?php echo $bdata[0]." - ".$edata[0] ; ?></p></div>
-		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Registration closing date:</h3><p><?php echo $pd_detail['Close_date']; ?></p></div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>When:</h3><p><?php //echo $bdata[1]."-".$edata[1]; ?></p><p><?php echo $bdata[0]." - ".$edata[0] ; ?></p></div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Registration closing date:</h3><p><?php //echo $pd_detail['Close_date']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<h3>Where:</h3>
-			<p><?php echo $pd_detail['AddressLine1']." ".$pd_detail['AddressLine2']." ".$pd_detail['AddressLine3']; ?><br />
-			<?php echo $pd_detail['City']." ".$pd_detail['State']." ".$pd_detail['PostalCode']; ?><br><a id="viewMap">View map</a></p></div>
+			<p><?php //echo $pd_detail['AddressLine1']." ".$pd_detail['AddressLine2']." ".$pd_detail['AddressLine3']; ?><br />
+			<?php //echo $pd_detail['City']." ".$pd_detail['State']." ".$pd_detail['PostalCode']; ?><br><a >View map</a></p></div>
 		
-		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>CPD hours:</h3><p><?php echo $pd_detail['CPD']; ?></p></div>
+		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>CPD hours:</h3><p><?php //echo $pd_detail['CPD']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Cost:</h3><p>
 		 <?php 
 		  $priceList = array();
@@ -569,7 +569,7 @@ if($resultdata['result']) {
 			}
 			else {
 				comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-				echo "$".$pd_detail['Cost'];
+				//echo "$".$pd_detail['Cost'];
 			}
 		 }
 		else{
@@ -583,9 +583,9 @@ if($resultdata['result']) {
 		 <?php 
 		    if(isset($userId)&& ($userId!="0")){
 				if($pd_detail['AttendeeStatus'] > 0) {
-					echo "Registered";
+					//echo "Registered";
 				} else {
-					echo "Not registered";
+					//echo "Not registered";
 				}
 				/*
 				if(!in_array( $user->uid,$pd_detail['Users'])){
@@ -597,7 +597,7 @@ if($resultdata['result']) {
 				*/
 			}
 			else{
-				echo '<a id="login">Login to see your status</a>';
+				//echo '<a >Login to see your status</a>';
 				//echo '<a class="info" data-target="#loginAT" data-toggle="modal" type="button">Login to see your status</a>';
 			}
 		 
@@ -605,30 +605,30 @@ if($resultdata['result']) {
 		 </p></div>
 		 <p>&nbsp;</p>
 		 
-		 
+		
 		 <?php 
 		     
-		 
-		 if(isset($_SESSION["UserId"])){
+		
+		// if(isset($_SESSION["UserId"])){
 			 //$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
-	         $userTag = checkPDUser($_SESSION['MemberTypeID']);
-			 if ($userTag =="0"){
-				    echo '<a class="dashboard-button dashboard-bottom-button your-details-submit addCartButton" id="registerPDUserButton" style="float:right;">Add to cart</a><br>  
-						<br>';
+	        // $userTag = checkPDUser($_SESSION['MemberTypeID']);
+			// if ($userTag =="0"){
+				   // echo '<a class="dashboard-button dashboard-bottom-button your-details-submit addCartButton" id="registerPDUserButton" style="float:right;">Add to cart</a><br>  
+						//<br>';
 					
-			 }
-			 else
+			// }
+			// else
 				 
-				 {
-					 echo '<a class="dashboard-button dashboard-bottom-button your-details-submit addCartButton" id="registerNonMember" style="float:right;">Add to cart</a><br>  
-						<br>';
-				 }
+				// {
+					// echo '<a class="dashboard-button dashboard-bottom-button your-details-submit addCartButton" id="registerNonMember" style="float:right;">Add to cart</a><br>  
+						//<br>';
+				 //}
        
-	   }   ?>
+	   //}   ?>
 	  
 		 <p>By registering for this course, you agree to the <a target="_blank">APA Events Terms and Conditions.</a></p>
 		 <p>You could save $55 on future courses by <a target="_blank">joining an APA national group</a>. Pay $54 today and keeping saving on PD throughout the year.</p>
-		 </div>
+		 </div>-->
 	  <?php
         // We hide the comments and links now so that we can render them later.
         hide($content['comments']);
@@ -1356,8 +1356,9 @@ if($resultdata['result']) {
 					</div>
 					<div class="flex-col-10">
 						<span class="address">
-							University of Canberra Building, 29 Bruce, ACT 2716
-							<a href="" class="direction" target="_blank">View map</a>
+							<?php echo $pd_detail['AddressLine1']." ".$pd_detail['AddressLine2']." ".$pd_detail['AddressLine3']; ?><br />
+			<?php echo $pd_detail['City']." ".$pd_detail['State']." ".$pd_detail['PostalCode']; ?>
+							<a id="viewMap" class="direction" target="_blank">View map</a>
 						</span>
 					</div>
 				</div>
@@ -1458,7 +1459,7 @@ if($resultdata['result']) {
 
 		<div class="session-cta">
 			<a class="add-to-wishlist"><span>Add to Wishlist</span></a>
-			<a class="add-to-card"><span>Add to Card</span></a>
+			<!--<a class="add-to-card"><span>Add to Card</span></a>-->
 			<?php 
 			if(isset($_SESSION["UserId"])){
 				 //$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
