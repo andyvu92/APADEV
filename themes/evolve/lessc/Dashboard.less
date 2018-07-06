@@ -533,36 +533,19 @@ a.uploadImageButton {
     line-height: 32px;
    
 }
-.memSCTable td{
-    border-left: 1px solid white;
-	border-bottom: 1px solid white!important;
-    padding: 14px;
-}
-.memSCTable th{
-    border-left: 1px solid white;
-	border-bottom: 1px solid white!important;
-    padding: 14px;
-}
-.memSCTable td:nth-child(3), .memSCTable th:nth-child(3) {
-    border-right: 1px solid white!important;
-}
+
 .Membpaymentsiderbar {
     border: 1px solid white;
     background-color: transparent;
     padding: 15px;
 }
-.Membpaymentsiderbar .sidebardis{
-    color: white!important;
-}
+
 .Membpaymentsiderbar .ordersummary{
     border-left:none;
 	border-right:none;
 	border-top:none;
 }
-.Membpaymentsiderbar .ordersummary span{
-    margin-left: 34px;
-    color: white;
-}
+
 .Membpaymentsiderbar .placeorder{
     width: 222px;
 }
@@ -1845,6 +1828,7 @@ form{
           position: relative;
           cursor: pointer;
           padding: 0;
+          display: flex;
         }
       
         // Box.
@@ -1995,6 +1979,9 @@ form{
 }
 
 #dashboard-right-content{
+    #Paymentcard{
+        letter-spacing: 5px;
+    }
     .chevron-select-box{
         select{
             -webkit-appearance: none;
@@ -2034,6 +2021,52 @@ form{
             &::after{
                 top: 20%;
             }
+        }
+    }
+    .memSCTable{
+        width: 100%;
+        tbody{
+            border-top: none;
+        }
+        tr:nth-child(1){
+        border-bottom: 1ps solid #ccc;
+            th:nth-child(1){
+                width: 60%;
+            }
+            th:nth-child(2){
+                width: 20%;
+            }
+            th:nth-child(3){
+                width: 20%;
+            }
+        }
+        th{
+            border-bottom: none;
+            line-height: 40px;
+        }
+        tr{
+            td:nth-child(1){
+                width: 60%;
+            }
+            td:nth-child(2){
+                width: 20%;
+            }
+            td:nth-child(3){
+                width: 20%;
+                text-align: left;
+            }
+        }
+    }
+    .Membpaymentsiderbar{
+        .ordersummary{
+            color: #000;
+            font-size: 1.2em;
+            font-weight: 400;
+        }
+        .sidebardis{
+            color: #000;
+            font-size: 1.2em;
+            font-weight: 400;
         }
     }
 }

@@ -171,8 +171,9 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 					<li>how you can contact the FOS</li>
 				</ul>
 				
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
-            	<label for="insuranceTerms">Yes. I’ve read and understand the insurance terms and conditions</label><input type="checkbox" id="insuranceTerms" checked>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<input class="styled-checkbox" type="checkbox" id="insuranceTerms" checked>
+            	<label for="insuranceTerms">Yes. I’ve read and understand the insurance terms and conditions</label>
 			</div>   
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeDescription"> 
             	Please agree with the insurance Terms and Conditions to continue with your membership

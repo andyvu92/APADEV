@@ -264,7 +264,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 		</table>
 		</div>
 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 Membpaymentsiderbar">
-		<p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
+		<span styule="margin-bottom: 15px;" class="smaller-lead-heading sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span>
 				<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
 		<?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>   
 			<fieldset>
@@ -276,7 +276,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 							if($cardnum["IsDefault"]=="1") {
 							echo "selected ";
 						}
-						echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
+						echo 'data-class="'.$cardnum["Payment-Method"].'">---- ---- ---- ';
 						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
 						}
 					
@@ -362,13 +362,19 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 	</div>
 	</div>
 	-->
-		<div class="row ordersummary"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span>YOUR ORDER</span></div></div>
-			<div class="flex-container flex-flow-column member-info">
+
+			<div class="flex-container flex-flow-column">
+
+				<div class="flex-cell ordersummary">
+					<span>YOUR ORDER</span>
+				</div>
+
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-12">
 					Membership payment total:	
 					</div>
 				</div>
+
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-6">
 					Subtotal (exc. GST)	
@@ -377,6 +383,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			        $<?php echo $scheduleDetails['SubTotal'];?>
 					</div>
 				</div>
+
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-6">
 					GST	
@@ -385,6 +392,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			        $<?php echo $scheduleDetails['GST'];?>
 					</div>
 				</div>
+
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-6">
 					Total(inc.GST)	
@@ -393,6 +401,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			        $<?php echo $scheduleDetails['OrderTotal'];?>
 					</div>
 				</div>
+
 				<?php 
 					if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"){ 
 						$AdminFee =$scheduleDetails['AdminFee']; 
@@ -437,8 +446,8 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 								</div>
 								<div class="flex-col-6">$'.$InitialPaymentAmount.'</div></div>';
                         echo'<div class="flex-cell flex-flow-row">
-								<div class="flex-col-12">
-									<button type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payment</button>	
+								<div class="flex-col-12" style="text-align: center">
+									<button style="margin: 30px 0;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payment</button>	
 								</div>
 							</div>'; 								
 					}
@@ -450,8 +459,9 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			</div>
 			
 			<!--<input type="hidden" name="Paymentcard" id="Paymentcardvalue" value="">-->
-			<a target="_blank" class="addCartlink"><button class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
-		
+			<div class="flex-col-12" style="text-align: center">
+				<a target="_blank" class="addCartlink"><button style="margin: 30px 0;" class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
+			</div>
 	</div>
 </div>
 </form>

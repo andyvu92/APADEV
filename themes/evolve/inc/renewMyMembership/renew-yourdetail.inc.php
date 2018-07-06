@@ -618,6 +618,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 
 			<div clas="row">	
 				<input type="hidden"  name="Specialty"  <?php   echo 'value="'.$details['Specialty'].'"'; ?>>
+				<div class="row">
 				<div class="col-xs-12 col-md-6">
 					<label for="">Your National group<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
 					<select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
@@ -656,6 +657,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						?>
 					</select>
 				</div>
+				</div>
 				<div class="col-xs-12 display-none" id="ngsports"><input type="checkbox" id="ngsportsbox" name="ngsports" value="0"> <label class="light-font-weight" for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label></div>
 				<div class="col-xs-12 display-none" id="ngmusculo"><input type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"> <label class="light-font-weight" for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label></div>
 			</div>
@@ -689,7 +691,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<input type="hidden" name="fapnum" value="<?php echo sizeof($details['Specialty']);?>">
 					<?php if(!empty($details['Specialty'])){
 						echo '<input class="styled-checkbox" type="checkbox" id="fap" name="fap" checked value="1" onclick="return false;" onkeydown="return false;" >';
-						echo '<label class="light-font-weight" style="" for="fap">I am part of the Australian College of Physiotherapists</label>';
+						echo '<label class="light-font-weight" style="margin-top: 15px;" for="fap">I am part of the Australian College of Physiotherapists</label>';
 						echo '<p><span class="note-text">Please note:</span> Ticking this box adds an extra $200 to the price of your membership.
 	If you have passed Specialisation, Fellowship by Original Contribution or are
 	a Fellow of the Australian College of Physiotherapists, you must tick this box.</p>';
@@ -767,12 +769,12 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<div id="workplace<?php echo $key;?>" class='tab-pane fade <?php if($key=='Workplace0') echo "in active ";?>'> 
 				<input type="hidden" name="WorkplaceID<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['WorkplaceID'];?>">
 
-				<div class="col-lg-6">
+				<div class="col-xs-12">
 					<input class="styled-checkbox" type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" >
 					<label class="light-font-weight" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE: </span>I want this workplace to be listed on the consumer choose.physio site</label>
 				</div>
 
-				<div class="col-lg-12"> 
+				<div class="col-xs-12"> 
 					<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
 					<label class="light-font-weight" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE: </span>I want this workplace to be listed on the APA australian.physio site</label>	
 				</div>
