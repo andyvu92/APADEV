@@ -19,36 +19,36 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 			<div class="col-xs-12">
 			<label>Has there been any medical malpractice or liability claim in the last five years(whether insured or uninsured)?<span class="tipstyle">*</span></label>
 			</div>
-			<div class="col-xs-6 col-md-3"><input style="min-height:0" type="radio" name="Claim" id="Claim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="1") echo 'checked="checked"';?>><label for="Claim1">Yes</label></div>
-			<div class="col-xs-6 col-md-3"><input style="min-height:0" type="radio" name="Claim" id="Claim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label for="Claim2">No</label></div>
+			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Claim" id="Claim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="1") echo 'checked="checked"';?>><label for="Claim1">Yes</label></div>
+			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Claim" id="Claim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label for="Claim2">No</label></div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
 			<label>Are there any facts or circumstances that may give risk to a claim against any insured, including any predecessors in business?<span class="tipstyle">*</span></label>
 			</div>
-			<div class="col-xs-6 col-md-3"><input style="min-height:0" type="radio" name="Facts" id="Facts1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Facts']=="1") echo 'checked="checked"';?>><label for="Facts1">Yes</label></div>
-			<div class="col-xs-6 col-md-3"><input style="min-height:0" type="radio" name="Facts" id="Facts2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Facts']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label for="Facts2">No</label></div>
+			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Facts" id="Facts1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Facts']=="1") echo 'checked="checked"';?>><label for="Facts1">Yes</label></div>
+			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Facts" id="Facts2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Facts']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label for="Facts2">No</label></div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
 			<label>Has there been any external disciplinary proceeding or been subject to a complaint to a professional society or statutory registration board in the last five years?<span class="tipstyle">*</span></label>
 			</div>
-			<div class="col-xs-6 col-md-3"><input style="min-height:0" type="radio" name="Disciplinary" id="Disciplinary1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Disciplinary']=="1") echo 'checked="checked"';?>><label for="Disciplinary1">Yes</label></div>
-			<div class="col-xs-6 col-md-3"><input style="min-height:0" type="radio" name="Disciplinary" id="Disciplinary2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Disciplinary']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label for="Disciplinary2">No</label></div>
+			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Disciplinary" id="Disciplinary1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Disciplinary']=="1") echo 'checked="checked"';?>><label for="Disciplinary1">Yes</label></div>
+			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Disciplinary" id="Disciplinary2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Disciplinary']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label for="Disciplinary2">No</label></div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
 			<label>Has any insurer ever declined a proposal, impose special terms, decline to renew or cancel an insurance policy?<span class="tipstyle">*</span></label>
 			</div>
-			<div class="col-xs-6 col-md-3"><input style="min-height:0" type="radio" name="Decline" id="Decline1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Decline']=="1") echo 'checked="checked"';?>><label for="Decline1">Yes</label></div>
-			<div class="col-xs-6 col-md-3"><input style="min-height:0" type="radio" name="Decline" id="Decline2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Decline']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label for="Decline2">No</label></div>
+			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Decline" id="Decline1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Decline']=="1") echo 'checked="checked"';?>><label for="Decline1">Yes</label></div>
+			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Decline" id="Decline2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Decline']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label for="Decline2">No</label></div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
 			Have you had more than one claim?<span class="tipstyle">*</span>
 			</div>
-			<div class="col-xs-6 col-md-3"><input style="min-height:0" type="radio" name="Oneclaim" id="Oneclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="1") echo 'checked="checked"';?>><label style="min-height:0" for="Oneclaim1">Yes</label></div>
-			<div class="col-xs-6 col-md-3"><input style="min-height:0" type="radio" name="Oneclaim" id="Oneclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label style="min-height:0" for="Oneclaim2">No</label></div>
+			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Oneclaim" id="Oneclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="1") echo 'checked="checked"';?>><label style="min-height:0" for="Oneclaim1">Yes</label></div>
+			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Oneclaim" id="Oneclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label style="min-height:0" for="Oneclaim2">No</label></div>
 		</div>
 		<div class="display-none" id="insuranceMore">
 			<div class="col-xs-12">
@@ -71,7 +71,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 					<textarea type="text" rows="5" class="form-control" name="Fulldescription" id="Fulldescription" placeholder="Full description of insurance"<?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Fulldescription']; }else{ echo '';}?>></textarea>
 				</div>
 
-			<div class="col-xs-12 font-weight-500"><label>Insufficient details in your response may result in additional details being requested</label></div>
+			<div class="col-xs-12 font-weight-500"><label class="note-text">Insufficient details in your response may result in additional details being requested</label></div>
 			<div class="row">
 
 				<div class="row">
@@ -84,16 +84,16 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 					<div class="col-xs-12">
 					<label>Has the claim been finalised?<span class="tipstyle">*</span></label>
 					</div>
-					<div class="col-xs-6 col-md-3"><input style="min-height:0" type="radio" name="Finalisedclaim" id="Finalisedclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="1") echo 'checked="checked"';?>><label for="Finalisedclaim1">Yes</label></div>
-					<div class="col-xs-6 col-md-3"><input style="min-height:0" type="radio" name="Finalisedclaim" id="Finalisedclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label for="Finalisedclaim2">No</label></div>
+					<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Finalisedclaim" id="Finalisedclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="1") echo 'checked="checked"';?>><label for="Finalisedclaim1">Yes</label></div>
+					<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Finalisedclaim" id="Finalisedclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label for="Finalisedclaim2">No</label></div>
 				</div>
 				
-			
-
 				<div class="col-xs-12 col-md-6">
 					<label>Business name</label>
 					<input type="text" class="form-control" name="Businiessname" id="Businiessname" placeholder="Business name" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Businiessname']; }else{ echo '';}?>>
-					Note:Business name, practice name or trading name owned by you, do not name your employer’s business.
+				</div>
+				<div class="col-xs-12">
+					<span class="note-text"><strong>Note: </strong></span>Business name, practice name or trading name owned by you, do not name your employer’s business.
 				</div>
 		    </div>
 			</div>

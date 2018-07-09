@@ -49,32 +49,36 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 
 	<div class="col-xs-6 col-md-6">
 		<label for="Wstate'.$i.'">State</label>
-		<select class="form-control" id="Wstate'.$i.'" name="Wstate'.$i.'">
-			<option value="" selected disabled> State </option>
-			<option value="73"> ACT </option>
-			<option value="74"> NSW </option>
-			<option value="77"> SA </option>
-			<option value="78"> TAS </option>
-			<option value="79"> VIC </option>
-			<option value="76"> QLD </option>
-			<option value="75"> NT </option>
-			<option value="80"> WA </option>
-		</select>
+		<div class="chevron-select-box">
+			<select class="form-control" id="Wstate'.$i.'" name="Wstate'.$i.'">
+				<option value="" selected disabled> State </option>
+				<option value="73"> ACT </option>
+				<option value="74"> NSW </option>
+				<option value="77"> SA </option>
+				<option value="78"> TAS </option>
+				<option value="79"> VIC </option>
+				<option value="76"> QLD </option>
+				<option value="75"> NT </option>
+				<option value="80"> WA </option>
+			</select>
+		</div>
 	</div>
 
 	<div class="col-xs-6 col-md-6">
 	<label for="Wcountry'.$i.'">Country</label>
-	<select class="form-control" id="Wcountry'.$i.'" name="Wcountry'.$i.'">
-	';
-		$country = $sessionCountry;
-		foreach($country  as $key => $object){
-			echo '<option value="'.$country[$key]['Country'].'">'.$country[$key]['Country'].'</option>';
-			if($country[$key]['ID']=="14"){
-				echo "selected='selected'";
+	<div class="chevron-select-box">
+		<select class="form-control" id="Wcountry'.$i.'" name="Wcountry'.$i.'">
+		';
+			$country = $sessionCountry;
+			foreach($country  as $key => $object){
+				echo '<option value="'.$country[$key]['Country'].'">'.$country[$key]['Country'].'</option>';
+				if($country[$key]['ID']=="14"){
+					echo "selected='selected'";
+				}
 			}
-		}
-	echo '
-	</select>
+		echo '
+		</select>
+	</div>
 	</div>
 </div>
 
@@ -97,7 +101,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 
 <div class="row">
 
-	<div class="col-xs-12">
+	<div class="col-xs-12 col-md-6">
 		<label>What languages do you speak in your professional practice?</label>
 		<select class="chosen-select" multiple id="Additionallanguage'.$i.'" name="Additionallanguage'.$i.'[]">';
 			$Language = $sessionLanguage;
@@ -169,6 +173,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 
 	<div class="col-xs-12 col-md-6">
 		<label>Workplace setting<span class="tipstyle">*</span></label>
+		<div class="chevron-select-box">
 		<select class="form-control" id="Workplace-setting'.$i.'" name="workplace-setting'.$i.'">';
 			$workplaceSettings = $sessionWorkplaceSetting;
 			foreach($workplaceSettings  as $key => $object){
@@ -176,10 +181,12 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 			}
 		echo '
 		</select>
+		</div>
 	</div>
 
 	<div class="col-xs-12 col-sm-6 col-md-6">
 		<label>Numbers of hours worked<span class="tipstyle">*</span></label>
+		<div class="chevron-select-box">
 		<select class="form-control" id="Number-worked-hours'.$i.'" name="Number-worked-hours'.$i.'">
 			<option value="0" disabled="">no</option>
 			<option value="01-04"> 01-04 </option>
@@ -193,6 +200,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 			<option value="36-40"> 36-40 </option>
 			<option value="40+"> 40+ </option>
 		</select>
+		</div>
 	</div>
 </div>
 ';

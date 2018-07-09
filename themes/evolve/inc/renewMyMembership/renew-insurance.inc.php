@@ -20,11 +20,11 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			</div>
 
 			<div class="col-xs-6 col-md-3">
-				<input type="radio" name="Claim" id="Claim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="1") echo 'checked="checked"';?>>
+				<input class="styled-radio-select" type="radio" name="Claim" id="Claim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="1") echo 'checked="checked"';?>>
 				<label class="light-font-weight" for="Claim1">Yes</label>
 			</div>
 			<div class="col-xs-6 col-md-3">
-				<input type="radio" name="Claim" id="Claim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
+				<input class="styled-radio-select" type="radio" name="Claim" id="Claim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
 				<label class="light-font-weight" for="Claim2">No</label>
 			</div>
 		</div>
@@ -35,11 +35,11 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			</div>
 
 			<div class="col-xs-6 col-md-3">
-				<input type="radio" name="Facts" id="Facts1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Facts']=="1") echo 'checked="checked"';?>>
+				<input class="styled-radio-select" type="radio" name="Facts" id="Facts1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Facts']=="1") echo 'checked="checked"';?>>
 				<label class="light-font-weight" for="Facts1">Yes</label>
 			</div>
 			<div class="col-xs-6 col-md-3">
-				<input type="radio" name="Facts" id="Facts2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Facts']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
+				<input class="styled-radio-select" type="radio" name="Facts" id="Facts2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Facts']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
 				<label class="light-font-weight" for="Facts2">No</label>
 			</div>
 		</div>
@@ -50,11 +50,11 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			</div>
 
 			<div class="col-xs-6 col-md-3">
-				<input type="radio" name="Disciplinary" id="Disciplinary1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Disciplinary']=="1") echo 'checked="checked"';?>>
+				<input class="styled-radio-select" type="radio" name="Disciplinary" id="Disciplinary1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Disciplinary']=="1") echo 'checked="checked"';?>>
 				<label class="light-font-weight" for="Disciplinary1">Yes</label>
 			</div>
 			<div class="col-xs-6 col-md-3">
-				<input type="radio" name="Disciplinary" id="Disciplinary2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Disciplinary']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
+				<input class="styled-radio-select" type="radio" name="Disciplinary" id="Disciplinary2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Disciplinary']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
 				<label class="light-font-weight" for="Disciplinary2">No</label>
 			</div>
 		</div>
@@ -65,11 +65,11 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			</div>
 
 			<div class="col-xs-6 col-md-3">
-				<input type="radio" name="Decline" id="Decline1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Decline']=="1") echo 'checked="checked"';?>>
+				<input class="styled-radio-select" type="radio" name="Decline" id="Decline1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Decline']=="1") echo 'checked="checked"';?>>
 				<label class="light-font-weight" for="Decline1">Yes</label>	
 			</div>
 			<div class="col-xs-6 col-md-3">
-				<input type="radio" name="Decline" id="Decline2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Decline']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
+				<input class="styled-radio-select" type="radio" name="Decline" id="Decline2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Decline']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
 				<label class="light-font-weight" for="Decline2">No</label>	
 			</div>
 		</div>
@@ -80,11 +80,11 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			</div>
 
 			<div class="col-xs-6 col-md-3">
-				<input type="radio" name="Oneclaim" id="Oneclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="1") echo 'checked="checked"';?>>
+				<input class="styled-radio-select" type="radio" name="Oneclaim" id="Oneclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="1") echo 'checked="checked"';?>>
 				<label class="light-font-weight" for="Oneclaim1">Yes</label>	
 			</div>
 			<div class="col-xs-6 col-md-3">
-				<input type="radio" name="Oneclaim" id="Oneclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
+				<input class="styled-radio-select" type="radio" name="Oneclaim" id="Oneclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
 				<label class="light-font-weight" for="Oneclaim2">No</label>	
 			</div>
 		</div>
@@ -119,11 +119,11 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 				<label>Has the claim been finalised?</label>
 				</div>
 				<div class="col-xs-6 col-md-3">
-					<input type="radio" name="Finalisedclaim" id="Finalisedclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="1") echo 'checked="checked"';?>>
+					<input class="styled-radio-select" type="radio" name="Finalisedclaim" id="Finalisedclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="1") echo 'checked="checked"';?>>
 					<label class="light-font-weight" for="Finalisedclaim1">Yes</label>	
 				</div>
 				<div class="col-xs-6 col-md-3">
-					<input type="radio" name="Finalisedclaim" id="Finalisedclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
+					<input class="styled-radio-select" type="radio" name="Finalisedclaim" id="Finalisedclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
 					<label class="light-font-weight" for="Finalisedclaim2">No</label>	
 				</div>
 			</div>
@@ -153,7 +153,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 	</div>
 </div>
 <div id="insuranceTermsandConditions" class="modal fade" role="dialog">
-	<div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
+	<div class="modal-dialog" style="overflow-y: scroll; max-height:85%; margin-bottom:50px;">
 	<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">

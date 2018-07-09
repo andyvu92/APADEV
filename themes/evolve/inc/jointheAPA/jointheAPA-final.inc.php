@@ -109,7 +109,7 @@ if(isset($_POST['step2'])) {
 	//save PRF product into APA database function
 	createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $type="",$coupon=$_POST['PRF']); 
 	//if(isset($_POST['Rollover'])){ $postReviewData['Rollover'] = $_POST['Rollover']; }
-	echo "this is payment card".$_POST['Paymentcard'];
+	//echo "this is payment card".$_POST['Paymentcard'];
 	if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
 	if(isset($_POST['Installpayment-frequency'])){ $postReviewData['InstallmentFrequency'] = $_POST['Installpayment-frequency']; }
 	$postReviewData['productID'] = getProductList($_SESSION['UserId']);
@@ -209,50 +209,61 @@ $PRFPrice = 0;
 	<input type="hidden" name="step3" value="3">
 	<div class="down8" <?php if(isset($_POST['step2'])||isset($_POST['step2-2'])||isset($_POST['step2-3']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
 		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-			<table class="memSCTable">
-				<tbody>
-					<tr>
-					<th>Product name</th>
-					<th>Price</th>
-					<th>Delete</th>
-					</tr>
-					<?php 
+			<div class="flex-container join-apa-final">
+				<div class="flex-cell flex-flow-row table-header">
+					<div class="flex-col-8">
+						<span class="table-heading">Product name</span>
+					</div>
+					<div class="flex-col-2">
+						<span class="table-heading">Price</span>
+					</div>
+					<div class="flex-col-2">
+						<span class="table-heading">Delete</span>
+					</div>
+				</div>
+
+    			<?php 
 						$price = "";
 						foreach( $memberProducts as $memberProduct){
-							echo "<tr>";
-							echo "<td>".$memberProduct['Title']."</td>";
-							echo "<td>A$".$memberProduct['Price']."</td>";
+							echo "<div class='flex-cell flex-flow-row table-cell'>";
+							echo "<div class='flex-col-8 title-col'>".$memberProduct['Title']."</div>";
+							echo "<div class='flex-col-2 price-col'>A$".$memberProduct['Price']."</div>";
 							$price += $memberProduct['Price'];
-							echo '<td><a href="jointheapa" target="_self">delete</a></td>';
-							echo "</tr>";  
+							echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
+							echo "</div>";  
 						}
 						foreach( $NGListArray as $NGArray){
 						if(sizeof($NGProductsArray)!=0){
 						    foreach($NGProductsArray as $NGProduct){
 								if($NGProduct == $NGArray['ProductID']){
-									echo "<tr>";
-									echo "<td>".$NGArray['ProductName']."</td>";
-									echo "<td>A$".$NGArray['NGprice']."</td>";
+									echo "<div class='flex-cell flex-flow-row table-cell'>";
+									echo "<div class='flex-col-8 title-col'>".$NGArray['ProductName']."</div>";
+									echo "<div class='flex-col-2 price-col'>A$".$NGArray['NGprice']."</div>";
 									$price += $NGArray['NGprice'];
-									echo '<td><a href="jointheapa" target="_self">delete</a></td>';
-								}	echo "</tr>";  
+									echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
+								}	echo "</div>";  
 							}
 						}
 						}
 						if(sizeof($FPListArray)!=0){
 							foreach( $FPListArray as $FProduct){
-									echo "<tr>";
-									echo "<td>".$FProduct['FPtitle']."</td>";
-									echo "<td>A$".$FProduct['FPprice']."</td>";
+									echo "<div class='flex-cell flex-flow-row table-cell'>";
+									echo "<div class='flex-col-8 title-col'>".$FProduct['FPtitle']."</div>";
+									echo "<div class='flex-col-2 price-col'>A$".$FProduct['FPprice']."</div>";
 									$price += $FProduct['FPprice'];
-									echo '<td>';if($FProduct['ProductID']!="9973"){ echo '<a class="deleteMGButton'.$FProduct['ProductID'].'">delete</a>';} echo '</td>';
-									echo "</tr>";  
+									echo '<div class="flex-col-2 action-col">';if($FProduct['ProductID']!="9973"){ echo '<a class="deleteMGButton'.$FProduct['ProductID'].'">delete</a>';} echo '</div>';
+									echo "</div>";  
 							}
 						}
-						if(isset($_POST['PRF'])&& $_POST['PRF']!=""){ echo '<tr><td>Physiotherapy Research Foundation donation</td><td>A$'.$_POST['PRF'].'</td><td><a class="deletePRFButton">delete</a></td></tr>'; $price +=$_POST['PRF']; }
-					?>
-				</tbody>
-			</table>
+                        if(isset($_POST['PRF'])&& $_POST['PRF']!=""){ 
+                            echo '<div class="flex-cell flex-flow-row table-cell">
+                            <div class="flex-col-8 title-col">Physiotherapy Research Foundation donation</div>
+                            <div class="flex-col-2 price-col">A$'.$_POST['PRF'].'</div>
+                            <div class="flex-col-2 action-col"><a class="deletePRFButton">delete</a></div>
+                            </div>'; 
+                            $price +=$_POST['PRF']; }
+				?>
+			</div>
 		</div>
 	<!--<a class="your-details-prevbutton8"><span class="dashboard-button-name">Last</span></a>-->
 		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 Membpaymentsiderbar">

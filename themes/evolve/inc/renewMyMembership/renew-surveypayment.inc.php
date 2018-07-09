@@ -103,12 +103,12 @@ if(isset($_POST['step2-1'])) {
 			</div>
 
 			<div class="col-xs-12">
-				<input type="radio" name ="Paymentoption" id="p1-1" value="0" checked="checked">
+				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-1" value="0" checked="checked">
 				<label for="p1-1">Full payment</label>
 			</div>
 
 			<div class="col-xs-12">
-				<input type="radio" name ="Paymentoption" id="p1-2" value="1">
+				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-2" value="1">
 				<label for="p1-2">Monthly instalments (This option incurs a $12.00 admin fee)</label>
 			</div>
 			<input type="hidden" id="Installpayment-frequency" name="Installpayment-frequency" value="">
@@ -201,7 +201,7 @@ if(isset($_POST['step2-1'])) {
 	</div>
 	<?php endif; ?>  
 	<?php if (sizeof($cardsnum["results"])==0): ?> 
-	<div id="anothercardBlock" class="col-lg-12">					   
+	<div id="anothercardBlock" class="row">					   
 		<div class="row">
 			<div class="col-xs-6 col-sm-6">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">

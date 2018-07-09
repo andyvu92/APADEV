@@ -565,6 +565,7 @@ if (isset($_SESSION['UserId'])):
                             <div class="row">
                                 <div class="col-xs-6 col-md-3">
                                         <label for="prefix">Prefix</label>
+                                        <div class="chevron-select-box">
                                         <select class="form-control" id="Prefix" name="Prefix">
 										<option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> disabled>Please select</option>
                                         <?php
@@ -580,6 +581,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>
                            </select>
+                           </div>
                     </div>
                     <div class="col-xs-6 col-md-3">
                         <label for="">Given name<span class="tipstyle">*</span></label>
@@ -646,6 +648,7 @@ if (isset($_SESSION['UserId'])):
                     </div>
                     <div class="col-xs-6 col-md-3">
                        <label for="">Gender<span class="tipstyle">*</span></label>
+                       <div class="chevron-select-box">
                        <select class="form-control" id="Gender" name="Gender" required>
                         <?php
     $Gendercode = file_get_contents("sites/all/themes/evolve/json/Gender.json");
@@ -661,12 +664,20 @@ if (isset($_SESSION['UserId'])):
     
 ?>
                        </select>
+                       </div>
                     </div>
 
                     <!--BREAK-->
                     <div class="row">
+
+                            <div class="col-xs-12">
+								<span class="light-lead-heading cairo" style="font-weight: 200; margin-bottom: 18px;">Phone numbers:</span>
+								<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Home</span>
+                            </div>
+                            
                         <div class="col-xs-6 col-md-3">
                             <label for="">Country code</label>
+                            <div class="chevron-select-box">
                             <select class="form-control" id="country-code" name="country-code">
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
@@ -684,6 +695,7 @@ if (isset($_SESSION['UserId'])):
     
 ?>
                            </select>
+                           </div>
                         </div>
                         <?php
     $_SESSION['country'] = $country;
@@ -713,8 +725,13 @@ if (isset($_SESSION['UserId'])):
                     <!--BREAK-->
                     
                     <div class="row">
+                        <div class="col-xs-12">
+							<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Mobile</span>
+						</div>
+                            
                         <div class="col-xs-6 col-md-3">
                             <label for="">Country code</label>
+                            <div class="chevron-select-box">
                             <select class="form-control" id="Mobile-countrycode" name="Mobile-country-code">
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
@@ -732,6 +749,7 @@ if (isset($_SESSION['UserId'])):
     
 ?>
                            </select>
+                           </div>
                         </div>
                         <div class="col-xs-6 col-md-3">
                             <label for="">Area code</label>
@@ -763,6 +781,7 @@ if (isset($_SESSION['UserId'])):
                     </div>
 
                     <div class="col-xs-6 col-md-3" style="margin: 0">
+                        <div class="chevron-select-box">
                         <select class="form-control" id="Aboriginal" name="Aboriginal">
 							<option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?> disabled>Please select</option>
                             <?php
@@ -779,12 +798,15 @@ if (isset($_SESSION['UserId'])):
                                 
                             ?>
                        </select>
+                       </div>
                     </div>
                 </div>
                     
                     <!--BREAK-->
 
-                    <div class="col-xs-12" style="font-weight: 500">Residential address:</div>
+                        <div class="col-xs-12">
+							<span class="light-lead-heading cairo" style="font-weight: 200">Residential address:</span>
+						</div>
                     
                         <div class="col-xs-6 col-md-3">
                             <label for="">Building name</label>
@@ -853,6 +875,7 @@ if (isset($_SESSION['UserId'])):
                     </div>
                     <div class="col-xs-6 col-md-3">
                         <label for="">State</label>
+                        <div class="chevron-select-box">
                         <select class="form-control" id="State3" name="State">
                         <?php
     $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
@@ -868,9 +891,11 @@ if (isset($_SESSION['UserId'])):
     
 ?>
                        </select>
+                       </div>
                     </div>
                     <div class="col-xs-6 col-md-3">
                         <label for="">Country<span class="tipstyle">*</span></label>
+                        <div class="chevron-select-box">
                         <select class="form-control" id="Country3" name="Country">
                         <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
@@ -888,12 +913,19 @@ if (isset($_SESSION['UserId'])):
     
 ?>
                        </select>
+                       </div>
                     </div>
 
-                    <div class="col-xs-12 col-md-6">
-                        <input class="styled-checkbox" style="min-height: 0" type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="0">
-                        <label for="Shipping-address-join" style="font-weight: 500">Billing address:(Sames as Above address)</label>
-                    </div>
+                    <div class="row payment-line flex-cell flex-flow-row">
+							<div class="col-xs-12 col-sm-6">
+								<span class="light-lead-heading cairo" style="font-weight: 200">Billing address:</span>
+							</div>
+
+							<div class="col-xs-12 col-sm-6 align-item-end">
+								<input class="styled-checkbox" type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="0">
+								<label style="font-weight: 300;" for="Shipping-address-join">Use my residential address</label>
+							</div>
+					</div>
                 </div>
                 
                 <!--BREAK-->
@@ -966,6 +998,7 @@ if (isset($_SESSION['UserId'])):
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">State</label>
+                            <div class="chevron-select-box">
                             <select class="form-control" name="Billing-State" id="State4">
                               <option value=""  <?php
     if (empty($details['Billing-State']))
@@ -985,9 +1018,11 @@ if (isset($_SESSION['UserId'])):
     
 ?>
                            </select>
+                           </div>
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">Country<span class="tipstyle">*</span></label>
+                              <div class="chevron-select-box">
                               <select class="form-control" id="Country4" name="Billing-Country" required>
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
@@ -1005,6 +1040,7 @@ if (isset($_SESSION['UserId'])):
     
 ?>
                            </select>
+                           </div>
                         </div>
                     </div>
                      <!---Hidden mailing address and shipping address Start from here-->
@@ -1099,11 +1135,12 @@ if (isset($_SESSION['UserId'])):
                 
                 <div class="col-xs-12 col-md-6">
                     <label for="">Member Type<span class="tipstyle">*</span></label>
+                    <div class="chevron-select-box">
                     <select class="form-control" id="MemberType" name="MemberType">
                         <option value="" <?php
     if (isset($_SESSION["MembershipProductID"]))
         echo "selected='selected'";
-?> disabled>memberType</option>    
+?> disabled>Member type</option>    
                     <?php
 // 2.2.31 Get Membership prodcut price
 // Send - 
@@ -1127,6 +1164,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
     
 ?>
                    </select>
+                   </div>
                 </div>
             </div>
             <div class="row" id="ahpblock">
@@ -1155,7 +1193,10 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
             <div class="row">
                 <div class="col-xs-12 col-md-6">
                     <label for="">Your National group<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
+                    
+                    <div class="plus-select-box">
                     <select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
+                    
                     <?php
     
     // get national group from Aptify via webserice return Json data;
@@ -1180,6 +1221,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
     
 ?>
                      </select>
+                    </div>
                 </div>
                 <div class="col-xs-12 display-none" id="ngsports">
                     <input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0">
@@ -1192,6 +1234,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 
                 <div class="col-xs-12 col-md-6">
                     <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
+                    <div class="chevron-select-box">
                     <select class="form-control" id="Branch" name="Branch">
                     <?php
     $Branchcode = file_get_contents("sites/all/themes/evolve/json/Branch.json");
@@ -1207,6 +1250,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
     
 ?>
                    </select>
+                   </div>
                 </div>
             </div>
             <div class="row"> 
@@ -1221,6 +1265,8 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>
                <div class="col-xs-12 col-md-6">
                     <label>Tell us what you'd like to know more about</label>
+                    
+                    <div class="plus-select-box">
                     <select class="chosen-select" id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
                           <?php
     
@@ -1245,6 +1291,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
     
 ?>
                    </select>
+                   </div>
                 </div>
            
             <!--<div class="row"> 
@@ -1254,7 +1301,9 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
             </div>
             <div class="row"> 
                 <div class="col-lg-6">
-                    <select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+                    
+                <div class="plus-select-box">    
+                <select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
                     <?php
     
     // $interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
@@ -1271,6 +1320,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
     
 ?>
                    </select>
+                   </div>
                 </div>
             </div>-->
                 
@@ -1284,6 +1334,8 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>
                <div class="col-xs-12 col-md-6">
                     <label>What is your favourite languages?</label>
+                    
+                    <div class="plus-select-box">
                     <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
                        
                        <?php
@@ -1301,6 +1353,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
     
 ?>
                    </select>
+                   </div>
                 </div>
             </div>
             <div class="col-xs-12">   <a class="your-details-prevbutton2"><span class="dashboard-button-name">Back</span></a><a class="join-details-button2"><span class="dashboard-button-name">Next</span></a></div>
@@ -1433,6 +1486,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 
                         <div class="col-xs-12 col-md-6">
                             <label>Workplace setting<span class="tipstyle">*</span></label>
+                            <div class="chevron-select-box">
                             <select class="form-control" id="Workplace-setting<?php
         echo $key;
 ?>" name="Workplace-setting<?php
@@ -1459,6 +1513,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                            </select>
+                           </div>
                         </div>
                         
                         <?php
@@ -1473,6 +1528,8 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                             <!--<div class="row">
                                 <div class="col-xs-12 col-md-6">
                                     <label>Workplace treatment area:</label>
+                                    
+                                    <div class="plus-select-box">
                                     <select class="chosen-select" id="WTreatmentarea<?php
         //echo $key;
 ?>" name="WTreatmentarea<?php
@@ -1497,6 +1554,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                                    </select>
+                                   </div>
                                 </div>
                             </div>-->
                         <!--BREAK-->
@@ -1576,6 +1634,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                         </div>
                         <div class="col-xs-6 col-md-3">
                             <label for="Wstate">State</label>
+                            <div class="chevron-select-box">
                             <select class="form-control" id="Wstate<?php
         echo $key;
 ?>" name="Wstate<?php
@@ -1599,11 +1658,13 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                            </select>
+                           </div>
                         </div>
                         <div class="col-xs-6 col-md-3">
                             <label for="Wcountry<?php
         echo $key;
 ?>">Country<span class="tipstyle">*</span></label>
+                            <div class="chevron-select-box">
                             <select class="form-control" id="Wcountry<?php
         echo $key;
 ?>" name="Wcountry<?php
@@ -1626,6 +1687,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                            </select>
+                           </div>
                         </div>
 
                         <!--BREAK-->
@@ -1662,6 +1724,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                         </div>
                             <div class="col-xs-6 col-md-3">
                                 <label for="">Country code</label>
+                                <div class="chevron-select-box">
                                 <select class="form-control" id="WPhoneCountryCode<?php
         echo $key;
 ?>" name="WPhoneCountryCode<?php
@@ -1684,6 +1747,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                                </select>
+                               </div>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <label for="">Area code</label>
@@ -1735,6 +1799,8 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         }
         
 ?>
+                               
+                               <div class="plus-select-box">
                                <select class="chosen-select" id="Additionallanguage<?php
         echo $key;
 ?>" name="Additionallanguage<?php
@@ -1754,6 +1820,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                                </select>
+                                </div>
                             </div>
                             <div class="col-xs-12 col-md-6">
                                 <label>Quality In Practice number(QIP):</label>
@@ -1922,6 +1989,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                             
                             <div class="col-xs-12 col-sm-6 col-md-3">
                             <label>Numbers of hours worked<span class="tipstyle">*</span></label>    
+                                <div class="chevron-select-box">
                                 <select class="form-control" id="Number-worked-hours<?php
         echo $key;
 ?>" name="Number-worked-hours<?php
@@ -1941,6 +2009,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                                </select>
+                               </div>
                             </div>
                         </div>
 
@@ -1954,10 +2023,10 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
             
                 <div id="workplace0" class='tab-pane fade in active'>
                     <input type="hidden" name="WorkplaceID0" value="-1">                
-                    <div class="row"><div class="col-lg-6"></div><div class="col-lg-6"> <label for="Findphysio"><strong>NOTE:</strong>I want this workplace to be listed on the consumer choose.physio site</label>
+                    <div class="row"><div class="col-lg-6"></div><div class="col-lg-6"> <label for="Findphysio"><strong>NOTE: </strong>I want this workplace to be listed on the consumer choose.physio site</label>
                     <input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio" value="" ></div></div>
                     <div class="row">
-                        <div class="col-lg-12"> <label for="Findabuddy0"><strong>NOTE:</strong>I want this workplace to be listed on the APA australian.physio site</label>
+                        <div class="col-lg-12"> <label for="Findabuddy0"><strong>NOTE: </strong>I want this workplace to be listed on the APA australian.physio site</label>
                             <input class="styled-checkbox" type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
                         </div>
                     </div>
@@ -1972,6 +2041,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                     Workplace setting<span class="tipstyle">*</span>
                     </div>
                     <div class="col-lg-9">
+                        <div class="chevron-select-box">
                         <select class="form-control" id="Workplace-setting0" name="Workplace-setting0">
                         <?php
         
@@ -1990,6 +2060,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                        </select>
+                       </div>
                     </div>
                 </div>
                 <div class="row"> 
@@ -1999,7 +2070,9 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                 </div>
                 <!--<div class="row"> 
                     <div class="col-lg-6">
-                        <select class="chosen-select" id="WTreatmentarea0" name="WTreatmentarea0" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+                        
+                    <div class="plus-select-box">    
+                    <select class="chosen-select" id="WTreatmentarea0" name="WTreatmentarea0" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
                         <?php
         
         // get interest area from Aptify via webserice return Json data;
@@ -2016,6 +2089,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                        </select>
+                       </div>
                     </div>
                 </div>-->
                 <div class="row">
@@ -2043,6 +2117,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                     </div>
                     <div class="col-lg-3">
                         <label for="Wstate">State<span class="tipstyle">*</span></label>
+                        <div class="chevron-select-box">
                         <select class="form-control" id="Wstate0" name="Wstate0">
                             <option value="" selected disabled> State </option>
                             <?php
@@ -2055,9 +2130,11 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                        </select>
+                       </div>
                     </div>
                     <div class="col-lg-3">
                         <label for="Wcountry">Country<span class="tipstyle">*</span></label>
+                        <div class="chevron-select-box">
                         <select class="form-control" id="Wcountry0" name="Wcountry0">
                             <?php
         $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
@@ -2072,6 +2149,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                        </select>
+                       </div>
                     </div>
                 </div>
                 <div class="row">
@@ -2089,6 +2167,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                             
                             <div class="col-lg-2">
                                 <label for="">Country code</label>
+                                <div class="chevron-select-box">
                                 <select class="form-control" id="WPhoneCountryCode0" name="WPhoneCountryCode0">
                                 <?php
         $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
@@ -2103,6 +2182,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                                </select>
+                               </div>
                             </div>
                             <div class="col-lg-2">
                                 <label for="">Area code</label>
@@ -2119,11 +2199,11 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                             
                 </div>
                 <div class="row">
-                    <div class="col-lg-3">
-                    What languages do you speak in your professional practice?<br/>
-                    </div>
-                    <div class="col-lg-3">
-                        <select class="chosen-select" id="Additionallanguage0" name="Additionallanguage0[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
+                    <div class="col-xs-12 col-md-6">
+                    <label>What languages do you speak in your professional practice?</label>
+                        
+                    <div class="plus-select-box">    
+                    <select class="chosen-select" id="Additionallanguage0" name="Additionallanguage0[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
                             <?php
         $Languagecode = file_get_contents("sites/all/themes/evolve/json/Language.json");
         $Language     = json_decode($Languagecode, true);
@@ -2134,6 +2214,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                        </select>
+                       </div>
                     </div>
                     
                 </div>
@@ -2184,6 +2265,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                     Numbers of hours worked<span class="tipstyle">*</span>
                     </div>
                     <div class="col-lg-6">
+                        <div class="chevron-select-box">
                         <select class="form-control" id="Number-worked-hours0" name="Number-worked-hours0">
                             <option value="0" disabled>no</option>
                             <?php
@@ -2196,6 +2278,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                        </select>
+                       </div>
                     </div>
                 </div>
                 </div>
@@ -2248,7 +2331,8 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                                <?php
         if (!empty($details['PersonEducation'][$key]['DegreeID'])):
 ?>
-                               <select name="Udegree<?php
+                               <div class="chevron-select-box">
+                               <select class="form-control" name="Udegree<?php
             echo $key;
 ?>" id="Udegree<?php
             echo $key;
@@ -2266,6 +2350,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>
                                    <!--<option value="0" >Other</option>-->
                                 </select>
+                                </div>
                                 <?php
         endif;
 ?>
@@ -2296,7 +2381,8 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                                <?php
         if (!empty($details['PersonEducation'][$key]['InstituteID'])):
 ?>
-                               <select name="Undergraduate-university-name<?php
+                               <div class="chevron-select-box">
+                               <select class="form-control" name="Undergraduate-university-name<?php
             echo $key;
 ?>" id="Undergraduate-university-name<?php
             echo $key;
@@ -2314,6 +2400,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>
                                    <!--<option value="0">Other</option>-->
                                 </select>
+                                </div>
                                 <?php
         endif;
 ?>
@@ -2336,6 +2423,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                                 <label for="Ugraduate-country<?php
         echo $key;
 ?>">Country<span class="tipstyle">*</span></label>
+                                <div class="chevron-select-box">
                                 <select class="form-control" id="Ugraduate-country<?php
         echo $key;
 ?>" name="Ugraduate-country<?php
@@ -2357,11 +2445,13 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                                </select>
+                               </div>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <label for="Ugraduate-yearattained<?php
         echo $key;
 ?>">Year attained<span class="tipstyle">*</span></label>
+                                <div class="chevron-select-box">
                                 <select class="form-control" name="Ugraduate-yearattained<?php
         echo $key;
 ?>" id="Ugraduate-yearattained<?php
@@ -2380,6 +2470,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
                                </select>
+                               </div>
                             </div>
                         </div>
                     </div>
@@ -2417,6 +2508,7 @@ if (!isset($_SESSION['UserId'])):
     $Prefixcode = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
     $Prefix     = json_decode($Prefixcode, true);
 ?>
+                           <div class="chevron-select-box">
                            <select class="form-control" id="Prefix" name="Prefix">
 						   <option value="" selected disabled>Please select</option>
                             <?php
@@ -2427,6 +2519,7 @@ if (!isset($_SESSION['UserId'])):
     
 ?>
                            </select>
+                           </div>
                         </div>
                         
                         <div class="col-xs-6 col-md-3">
@@ -2459,6 +2552,7 @@ if (!isset($_SESSION['UserId'])):
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">Gender<span class="tipstyle">*</span></label>
+                           <div class="chevron-select-box">
                            <select class="form-control" id="Gender" name="Gender">
                              <?php
     $Gendercode = file_get_contents("sites/all/themes/evolve/json/Gender.json");
@@ -2470,13 +2564,20 @@ if (!isset($_SESSION['UserId'])):
     
 ?>
                           </select>
+                          </div>
                         </div>
 
                             <!--BREAK-->
 
                         <div class="row">
+                            <div class="col-xs-12">
+								<span class="light-lead-heading cairo" style="font-weight: 200; margin-bottom: 18px;">Phone numbers:</span>
+								<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Home</span>
+                            </div>
+                            
                             <div class="col-xs-6 col-md-3">
                                 <label for="">Country code</label>
+                                <div class="chevron-select-box">
                                 <select class="form-control" id="country-code" name="country-code">
                                 <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
@@ -2489,6 +2590,7 @@ if (!isset($_SESSION['UserId'])):
     
 ?>
                                </select>
+                               </div>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <label for="">Area code</label>
@@ -2503,8 +2605,13 @@ if (!isset($_SESSION['UserId'])):
                             <!--BREAK-->
 
                         <div class="row">
+                            <div class="col-xs-12">
+								<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Mobile</span>
+                            </div>
+                            
                             <div class="col-xs-6 col-md-3">
                                 <label for="">Country code</label>
+                                <div class="chevron-select-box">
                                 <select class="form-control" id="Mobile-country-code" name="Mobile-country-code">
                                 <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
@@ -2517,6 +2624,7 @@ if (!isset($_SESSION['UserId'])):
     
 ?>
                                </select>
+                               </div>
                             </div>
                             <?php
     $_SESSION['country'] = $country;
@@ -2534,6 +2642,7 @@ if (!isset($_SESSION['UserId'])):
                         <div class="row">
                             <div class="col-xs-6 col-md-3">
                             <label for="">Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span></label>
+                                <div class="chevron-select-box">
                                 <select class="form-control" id="Aboriginal" name="Aboriginal">
 									<option value="" selected disabled>Please select</option>
                                 <?php
@@ -2546,12 +2655,16 @@ if (!isset($_SESSION['UserId'])):
     
 ?>
                                </select>
+                               </div>
                             </div>
                         </div>
 
                     <!--BREAK-->
 
-                    <div class="col-xs-12" style="font-weight: 500">Residential address:</div>
+                        <div class="col-xs-12">
+							<span class="light-lead-heading cairo" style="font-weight: 200">Residential address:</span>
+                        </div>
+                            
                         <div class="col-xs-6 col-md-3">
                             <label for="">Building name</label>
                             <input type="text" class="form-control"  name="BuildingName">
@@ -2586,6 +2699,7 @@ if (!isset($_SESSION['UserId'])):
 
                         <div class="col-xs-6 col-md-3">
                             <label for="">State</label>
+                            <div class="chevron-select-box">
                             <select class="form-control" id="State1" name="State">
                                 <option value="" selected disabled> State </option>
                                 <?php
@@ -2598,10 +2712,12 @@ if (!isset($_SESSION['UserId'])):
     
 ?>
                            </select>
-						   <div id="test"></div>
+                           </div>
+
                         </div>
                         <div class="col-xs-6 col-md-3">
                             <label for="">Country<span class="tipstyle">*</span></label>
+                            <div class="chevron-select-box">
                             <select class="form-control" id="Country1" name="Country">
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
@@ -2614,15 +2730,23 @@ if (!isset($_SESSION['UserId'])):
     
 ?>
                            </select>
+                           </div>
                         </div>
 						
 
                         <!--BREAK-->
 
-                    <div class="row">
-                        <div class="col-xs-12 col-md-6"><label for="Shipping-address-join"><strong>Billing address:(Sames as Above address)</strong></label>
-                        <input style="min-height: 0" class="styled-checkbox" type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="0"></div>
-                    </div>
+                        <div class="row payment-line flex-cell flex-flow-row">
+							<div class="col-xs-12 col-sm-6">
+								<span class="light-lead-heading cairo" style="font-weight: 200">Billing address:</span>
+							</div>
+
+							<div class="col-xs-12 col-sm-6 align-item-end">
+								<input class="styled-checkbox" type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="0">
+								<label style="font-weight: 300;" for="Shipping-address-join">Use my residential address</label>
+							</div>
+                        </div>
+                        
                     <div class="row" id="shippingAddress">
                         <div class="col-xs-6 col-md-3">
                             <label for="">Building name</label>
@@ -2656,6 +2780,7 @@ if (!isset($_SESSION['UserId'])):
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">State</label>
+                           <div class="chevron-select-box">
                            <select class="form-control" name="Billing-State" id="State2">
                                 <option value="" selected='selected' disabled> State </option>
                                 <?php
@@ -2668,9 +2793,11 @@ if (!isset($_SESSION['UserId'])):
     
 ?>
                           </select>
+                          </div>
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">Country<span class="tipstyle">*</span></label>
+                               <div class="chevron-select-box">
                                <select class="form-control" id="Country2" name="Billing-Country">
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
@@ -2683,6 +2810,7 @@ if (!isset($_SESSION['UserId'])):
     
 ?>
                            </select>
+                           </div>
                         </div>
                     </div>
                      <!---Hidden mailing address and shipping address Start from here-->
@@ -2789,8 +2917,9 @@ if (!isset($_SESSION['UserId'])):
                 <div class="row">
                     <div class="col-xs-6 col-md-6">
                         <label for="">Member Type<span class="tipstyle">*</span></label>
+                        <div class="chevron-select-box">
                         <select class="form-control" id="MemberType" name="MemberType">
-                            <option value="none" selected disabled>memberType</option>
+                            <option value="none" selected disabled>Member type</option>
                             <?php
 								// 2.2.31 Get Membership prodcut price
 								// Send - 
@@ -2809,6 +2938,7 @@ if (!isset($_SESSION['UserId'])):
 								
 							?>
                        </select>
+                       </div>
                     </div>
                     <div id="ahpblock" class="col-xs-6 col-md-3">
                         <label for="">AHPRA number</label>
@@ -2826,6 +2956,8 @@ if (!isset($_SESSION['UserId'])):
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
                         <label for="">Your National group</label>
+                        
+                        <div class="plus-select-box">
                         <select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
                         <?php
 							
@@ -2845,10 +2977,12 @@ if (!isset($_SESSION['UserId'])):
 							
 						?>
                        </select>
+                       </div>
                     </div>
 
 					<div class="col-xs-12 col-md-6">
                         <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
+                        <div class="chevron-select-box">
                         <select class="form-control" id="Branch" name="Branch">
                             <option value="" selected disabled>What branch would you like to join?</option>
                             <?php
@@ -2861,6 +2995,7 @@ if (!isset($_SESSION['UserId'])):
 								
 							?>
                        </select>
+                       </div>
                     </div>
 
                     <div class="col-xs-12 display-none" id="ngsports">
@@ -2877,6 +3012,8 @@ if (!isset($_SESSION['UserId'])):
 
                     <div class="col-xs-12 col-md-6">
 						<label>Tell us what you'd like to know more about</label>
+                        
+                        <div class="plus-select-box">
                         <select class="chosen-select" id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
                         <?php
 							
@@ -2894,10 +3031,13 @@ if (!isset($_SESSION['UserId'])):
 							
 						?>
                        </select>
+                       </div>
                     </div>
 
                     <div class="col-xs-12 col-md-6">
 						<label>Your treatment area:</label>
+                        
+                        <div class="plus-select-box">
                         <select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
                         <?php
 								
@@ -2914,13 +3054,16 @@ if (!isset($_SESSION['UserId'])):
 								
 							?>
                        </select>
+                       </div>
                     </div>
                 </div>
 
                 <div class="row">
 					<div class="col-xs-12 col-md-6">
 						<label>What is your favourite languages?</label>
-						<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
+						
+                        <div class="plus-select-box">
+                        <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
 						<option value="NONE" disabled>no</option>
 						<?php
 								$Languagecode         = file_get_contents("sites/all/themes/evolve/json/Language.json");
@@ -2931,7 +3074,8 @@ if (!isset($_SESSION['UserId'])):
 									echo '> ' . $Language[$key]['Name'] . ' </option>';
 								}
 							?>
-					</select>
+                    </select>
+                    </div>
 					</div>
             	</div>
                 <div class="col-xs-12">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Back</span></a></div>
@@ -2973,12 +3117,12 @@ if (!isset($_SESSION['UserId'])):
 					
 					<div class="col-xs-12">
                         <input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio" value="" >
-                        <label for="Findphysio"><strong>NOTE:</strong>I want this workplace to be listed on the consumer choose.physio site</label>
+                        <label for="Findphysio"><strong>NOTE: </strong>I want this workplace to be listed on the consumer choose.physio site</label>
 					</div>
 					
                     <div class="col-xs-12">
                         <input class="styled-checkbox" type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
-                        <label for="Findabuddy0"><strong>NOTE:</strong>I want this workplace to be listed on the APA australian.physio site</label>
+                        <label for="Findabuddy0"><strong>NOTE: </strong>I want this workplace to be listed on the APA australian.physio site</label>
                     </div>
 
                 <div class="row">
@@ -2989,6 +3133,7 @@ if (!isset($_SESSION['UserId'])):
 
                     <div class="col-xs-12 col-md-6">
 						<label>Workplace setting<span class="tipstyle">*</span></label>
+                        <div class="chevron-select-box">
                         <select class="form-control" id="Workplace-setting0" name="Workplace-setting0">
                         <?php
 							// 2.2.36 - get workplace settings list
@@ -3005,29 +3150,9 @@ if (!isset($_SESSION['UserId'])):
 							}
 						?>
                        </select>
+                       </div>
                     </div>
 				</div>
-				
-                <!--<div class="row"> 
-                    <div class="col-xs-12 col-md-6">
-						<label>Workplace treatment area:</label>
-                        <select class="chosen-select" id="WTreatmentarea0" name="WTreatmentarea0[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
-                        <?php
-							// get interest area from Aptify via webserice return Json data;
-							
-							//$interestAreascode = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
-							//$interestAreas     = json_decode($interestAreascode, true);
-						?>
-                       <?php
-							//foreach ($interestAreas as $pair => $value) {
-								//echo '<option value="' . $interestAreas[$pair]["ID"] . '"';
-								//echo '> ' . $interestAreas[$pair]["Name"] . ' </option>';
-							//}
-						?>
-                       
-                        </select>
-                    </div>
-				</div>-->
 				
                 <div class="row">
                     <div class="col-xs-6 col-md-3">
@@ -3057,6 +3182,7 @@ if (!isset($_SESSION['UserId'])):
 					
                     <div class="col-xs-6 col-md-3">
                         <label for="Wstate">State<span class="tipstyle">*</span></label>
+                        <div class="chevron-select-box">
                         <select class="form-control" id="Wstate0" name="Wstate0">
                             <option value="" selected disabled> State </option>
                             <?php
@@ -3068,9 +3194,11 @@ if (!isset($_SESSION['UserId'])):
 								}
 							?>
                        </select>
+                       </div>
                     </div>
                     <div class="col-xs-6 col-md-3">
                         <label for="Wcountry">Country<span class="tipstyle">*</span></label>
+                        <div class="chevron-select-box">
                         <select class="form-control" id="Wcountry0" name="Wcountry0">
                             <?php
 								$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
@@ -3082,6 +3210,7 @@ if (!isset($_SESSION['UserId'])):
 								}
 							?>
                        </select>
+                       </div>
                     </div>
 				</div>
 				
@@ -3099,6 +3228,7 @@ if (!isset($_SESSION['UserId'])):
                 <div class="row">
                     <div class="col-xs-6 col-md-3">
                         <label for="">Country code</label>
+                        <div class="chevron-select-box">
                         <select class="form-control" id="WPhoneCountryCode0" name="WPhoneCountryCode0">
                         <?php
 									$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
@@ -3110,6 +3240,7 @@ if (!isset($_SESSION['UserId'])):
 									}
 						?>
                         </select>
+                        </div>
 					</div>
 					
                     <div class="col-xs-6 col-md-3">
@@ -3131,6 +3262,8 @@ if (!isset($_SESSION['UserId'])):
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
 						<label>What languages do you speak in your professional practice?</label>
+                        
+                        <div class="plus-select-box">
                         <select class="chosen-select" id="Additionallanguage0" name="Additionallanguage0[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
                             <?php
 								$Languagecode = file_get_contents("sites/all/themes/evolve/json/Language.json");
@@ -3141,6 +3274,7 @@ if (!isset($_SESSION['UserId'])):
 								}
 							?>
                        </select>
+                       </div>
 					</div>
 					
                     <div class="col-xs-12 col-md-6">
@@ -3188,8 +3322,9 @@ if (!isset($_SESSION['UserId'])):
 				</div>
 				
                 <div class="row">
-                    <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-12 col-md-3">
 						<label>Numbers of hours worked<span class="tipstyle">*</span></label>
+                        <div class="chevron-select-box">
                         <select class="form-control" id="Number-worked-hours0" name="Number-worked-hours0">
                             <option value="0" disabled>no</option>
                             <?php
@@ -3201,10 +3336,11 @@ if (!isset($_SESSION['UserId'])):
 								}
 							?>
                        </select>
+                       </div>
                     </div>
                 </div>
-                </div>
             </div>
+        </div>
                 <div class="row"><div class="col-xs-12"><a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a></div></div>
                 <div class="col-xs-12">   
                 <a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Back</span></a>
@@ -3223,67 +3359,81 @@ if (!isset($_SESSION['UserId'])):
                 </div>
                 <div id="additional-qualifications-block">
                     <div class="row">
-                        <div class="col-xs-6 col-md-3">
-                            <label for="Udegree">Degree<span class="tipstyle">*</span></label>
-                            <select name="Udegree0" id="Udegree0">
-                                <?php
-									$degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
-									$degree             = json_decode($degreecode, true);
-									$_SESSION["degree"] = $degree;
-									foreach ($degree as $pair => $value) {
-										echo '<option value="' . $degree[$pair]['ID'] . '"';
-										echo '> ' . $degree[$pair]['Name'] . ' </option>';
-									}
-								?>
-                               <option value="0">Other</option>
-                            </select>
-                            <input type="text" class="form-control display-none" name="University-degree0" id="University-degree0">
-                        </div>
-
-                        <div class="col-xs-6 col-md-3">
-                            <label for="Undergraduateuniversity-name0">University name<span class="tipstyle">*</span></label>
-                            <?php
-								$universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
-								$University             = json_decode($universityCode, true);
-								$_SESSION["University"] = $University;
-							?>
-                           <select name="Undergraduate-university-name0" id="Undergraduate-university-name0">
-                            <?php
-								foreach ($University as $pair => $value) {
-									echo '<option value="' . $University[$pair]['ID'] . '"';
-									echo '> ' . $University[$pair]['Name'] . ' </option>';
-								}
-							?>    
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label for="Udegree">Degree<span class="tipstyle">*</span></label>
+                                <div class="chevron-select-box">
+                                <select class="form-control" name="Udegree0" id="Udegree0">
+                                    <?php
+                                        $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
+                                        $degree             = json_decode($degreecode, true);
+                                        $_SESSION["degree"] = $degree;
+                                        foreach ($degree as $pair => $value) {
+                                            echo '<option value="' . $degree[$pair]['ID'] . '"';
+                                            echo '> ' . $degree[$pair]['Name'] . ' </option>';
+                                        }
+                                    ?>
                                 <option value="0">Other</option>
-                            </select>
-                            <input type="text" class="form-control display-none" name="Undergraduate-university-name-other0" id="Undergraduate-university-name-other0">
+                                </select>
+                                </div>
+                                <input type="text" class="form-control display-none" name="University-degree0" id="University-degree0">
+                            </div>
                         </div>
 
-                        <div class="col-xs-6 col-md-3">
-                            <label for="Ugraduate-country0">Country<span class="tipstyle">*</span></label>
-                            <select class="form-control" id="Ugraduate-country0" name="Ugraduate-country0">
-                            <?php
-								$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
-								$country     = json_decode($countrycode, true);
-								foreach ($country as $key => $value) {
-									echo '<option value="' . $country[$key]['ID'] . '"';
-									if($country[$key]['ID']=="14"){echo "selected='selected'";}
-									echo '> ' . $country[$key]['Country'] . ' </option>';
-								}
-							?>
-                           </select>
-						</div>
-						
-                        <div class="col-xs-6 col-md-3">
-                            <label for="Ugraduate-yearattained0">Year attained<span class="tipstyle">*</span></label>
-                            <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
-                            <?php
-								$y = date("Y");
-								for ($i = 1940; $i <= $y; $i++) {
-									echo '<option value="' . $i . '">' . $i . '</option>';
-								}
-							?>
-                           </select>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label for="Undergraduateuniversity-name0">University name<span class="tipstyle">*</span></label>
+                                <?php
+                                    $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
+                                    $University             = json_decode($universityCode, true);
+                                    $_SESSION["University"] = $University;
+                                ?>
+                            <div class="chevron-select-box">
+                            <select class="form-control" name="Undergraduate-university-name0" id="Undergraduate-university-name0">
+                                <?php
+                                    foreach ($University as $pair => $value) {
+                                        echo '<option value="' . $University[$pair]['ID'] . '"';
+                                        echo '> ' . $University[$pair]['Name'] . ' </option>';
+                                    }
+                                ?>    
+                                    <option value="0">Other</option>
+                                </select>
+                                </div>
+                                <input type="text" class="form-control display-none" name="Undergraduate-university-name-other0" id="Undergraduate-university-name-other0">
+                            </div>
+                        </div>
+
+						<div class="row">
+                            <div class="col-xs-6 col-sm-3">
+                                <label for="Ugraduate-yearattained0">Year attained<span class="tipstyle">*</span></label>
+                                <div class="chevron-select-box">
+                                <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
+                                <?php
+                                    $y = date("Y");
+                                    for ($i = 1940; $i <= $y; $i++) {
+                                        echo '<option value="' . $i . '">' . $i . '</option>';
+                                    }
+                                ?>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-9">
+                                <label for="Ugraduate-country0">Country<span class="tipstyle">*</span></label>
+                                <div class="chevron-select-box">
+                                <select class="form-control" id="Ugraduate-country0" name="Ugraduate-country0">
+                                <?php
+                                    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+                                    $country     = json_decode($countrycode, true);
+                                    foreach ($country as $key => $value) {
+                                        echo '<option value="' . $country[$key]['ID'] . '"';
+                                        if($country[$key]['ID']=="14"){echo "selected='selected'";}
+                                        echo '> ' . $country[$key]['Country'] . ' </option>';
+                                    }
+                                ?>
+                                </select>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -3304,7 +3454,7 @@ endif;
             var number = Number($('#wpnumber').text());
               var i = Number(number +1);
             var j = Number(number +2);
-            $('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ i+'</a><span class="deletewp'+ i + '" style=" float: right; color: red; margin-right: 55%;">x</span></li>' );
+            $('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ i+'</a><span class="deletewp'+ i + '">Remove</span></li>' );
             $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
             $('#wpnumber').text(i);
             $('input[name=wpnumber]').val(j);

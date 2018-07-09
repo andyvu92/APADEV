@@ -824,6 +824,23 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
     }
 }
 
+a#insuranceControl{
+    float: right;
+    margin-bottom: 20px;
+    margin-top: 4px;
+	background-color: @bright-blue;
+    border-width: 0px !important;
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 300;
+    font-family: 'Roboto';
+    &:hover{
+        color: #fff;
+        opacity: 0.9;
+        cursor: pointer;
+    }
+}
 /*--DASHBOARD LEFT NAVIGATION--*/
 .dashboard-left-nav{
     background: @dark-transparent-background;
@@ -1603,7 +1620,7 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
         border: 0;
     }
 
-    input, select{
+    input, select, textarea{
         min-height: 48px;
         font-size: 18px;
         background: none;
@@ -1660,7 +1677,7 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
         }
         ul.chosen-choices li.search-field input{
             width: auto!important;
-            min-width: 270px;
+            min-width: 650px;
         }
     }
 
@@ -1712,7 +1729,6 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
         label{
             margin-bottom: 6px;
             font-weight: 400;
-            padding-left: 20px;
         }
         
     }
@@ -1884,6 +1900,61 @@ form{
           transform: rotate(45deg);
         }
       }
+      .styled-radio-select:checked,
+      .styled-radio-select:not(:checked) {
+          position: absolute;
+          left: -9999px;
+      }
+      .styled-radio-select:checked + label,
+      .styled-radio-select:not(:checked) + label
+      {
+          position: relative;
+          padding-left: 28px;
+          cursor: pointer;
+          line-height: 20px;
+          display: inline-block;
+          color: #666;
+      }
+      .styled-radio-select:checked + label:before,
+      .styled-radio-select:not(:checked) + label:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 18px;
+          height: 18px;
+          border: 1px solid rgba(0,0,0,0.12);
+          border-radius: 100%;
+          background: none;
+      }
+      .styled-radio-select:checked + label:after,
+      .styled-radio-select:not(:checked) + label:after {
+          content: '';
+          width: 10px;
+          height: 10px;
+          background: rgba(0,0,0,0.7);
+          position: absolute;
+          top: 4px;
+          left: 4px;
+          border-radius: 100%;
+          -webkit-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+      }
+      .styled-radio-select:not(:checked) + label:after {
+          opacity: 0;
+          -webkit-transform: scale(0);
+          transform: scale(0);
+      }
+      .styled-radio-select:checked + label:after {
+          opacity: 1;
+          -webkit-transform: scale(1);
+          transform: scale(1);
+      }
+    #additional0{
+        .separater{
+            display: none;
+        }
+    }
 }
 
 //--------------SUBSCRIPTIONS------------------
@@ -1989,9 +2060,8 @@ form{
         &::after{
             content: '\f078';
             font-family: 'fontawesome';
-            color: #5b5957;
+            color: #c3c8c8;
             position: absolute;
-            opacity: 0.5;
             top: 53%;
             right: 25px;
         }
@@ -2077,38 +2147,55 @@ form{
 
 /*--JOIN THE APA--*/
 #join-review-form{
-    .memSCTable{
-        width: 100%;
-        tbody{
-            border-top: none;
+    .join-apa-final{
+        .table-header{
+            border-bottom: 1px solid #b8bcbf;
+            padding: 5px 0;
         }
-        tr:nth-child(1){
-        border-bottom: 1px solid #ccc;
-            th:nth-child(1){
-                width: 60%;
+        .table-cell{
+            padding: 5px 0;
+            font-size: 1.2em;
+        }
+        .table-heading{
+            font-size: 1em;
+            font-weight: 600;
+        }
+    }
+    .placeorder{
+        &:hover{
+            opacity: 0.9;
+        }
+    }
+    .Membpaymentsiderbar{
+        margin-bottom: 20px;
+    }
+}
+
+#dashboard-right-content{
+    label[for="Findphysio"], label[for="Findabuddy0"]{
+        strong{
+            margin-right: 5px;
+        }
+    }
+    #insuranceTermsandConditions{
+        .modal-content{
+            .modal-body{
+                max-width: 650px;
+                max-height: 650px;
             }
-            th:nth-child(2){
-                width: 20%;
-            }
-            th:nth-child(3){
-                width: 20%;
+            .modal-footer{
+                margin-top: 0;
             }
         }
-        th{
-            border-bottom: none;
-            line-height: 40px;
-        }
-        tr{
-            td:nth-child(1){
-                width: 60%;
-            }
-            td:nth-child(2){
-                width: 20%;
-            }
-            td:nth-child(3){
-                width: 20%;
-                text-align: left;
-            }
+    }
+    .chosen-container-multi .chosen-choices li.search-choice .search-choice-close{
+        opacity: 0.5;
+        background-repeat:no-repeat;
+        background-size:contain;
+        background-position:center;
+        background-image:url('/sites/default/files/dashboard-icon/close-icon.png');
+        &:hover{
+            opacity: 1;
         }
     }
 }
