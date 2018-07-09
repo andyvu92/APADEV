@@ -453,7 +453,7 @@ if (isset($_POST['step1'])) {
         // for new user join a member call user registeration web service
         
         $resultdata = GetAptifyData("25", $postData);
-        print_r($resultdata);
+        //print_r($resultdata);
         
         // when create user successfully call login web service to login in APA website automatically.
         // after login successfully get UserID as well to store on APA shopping cart database
@@ -546,7 +546,7 @@ if (isset($_SESSION['UserId'])):
     
     $data    = "UserID=" . $_SESSION["UserId"];
     $details = GetAptifyData("4", $data, ""); // #_SESSION["UserId"];
-    print_r($details);
+    //print_r($details);
     if (!empty($details['Regional-group'])) {
         $_SESSION['Regional-group'] = $details['Regional-group'];
     }

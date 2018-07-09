@@ -250,7 +250,7 @@ if(sizeof($userMGProduct)!=0){$_SESSION["MGProductID"] = $userMGProduct; }
 // Response - UserID & detail data
 $data = "UserID=".$_SESSION["UserId"];
 $details = GetAptifyData("4", $data,"");// #_SESSION["UserID"];
-print_r($details);
+//print_r($details);
 if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details['Regional-group'];}
 
 ?>

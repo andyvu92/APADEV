@@ -88,7 +88,7 @@ $RequestCart["userID"] = $_SESSION["UserId"];
 $RequestCart["MeetingCoupons"] = $PDarray;
 $product = GetAptifyData("30", $RequestCart); //$_SESSON["UserID"]
 $products = $product["MeetingDetails"];
-print_r($products);
+//print_r($products);
 
 /********End get Product details  from Aptify******/
 
@@ -106,7 +106,7 @@ $postScheduleData['productID'] = $PDProductarray;
 $postScheduleData['CampaignCode'] = $couponCode;
 $scheduleDetails = GetAptifyData("47", $postScheduleData);
 $price =$scheduleDetails['OrderTotal'];
-print_r($scheduleDetails);
+//print_r($scheduleDetails);
 /********End get Order Total and Schedule Payments  from Aptify******/
 if(isset($_SESSION["UserId"])){
     
@@ -126,7 +126,7 @@ if(isset($_SESSION["UserId"])){
 		$cardsnum = GetAptifyData("12", $test);
 	    $_SESSION["cardsnum"]= $cardsnum;
 	}
-	print_r($cardsnum);
+	//print_r($cardsnum);
 	
 	if(isset($_GET["action"])&& ($_GET["action"]=="addcard")&& isset($_POST['addcardtag'])) {
 	// 2.2.15 - Add payment method
@@ -174,7 +174,7 @@ if(isset($_SESSION["UserId"])){
 		<th>Delete</th>
 	</tr>
 	<?php 
-		//print_r($products);
+		////print_r($products);
 		$ListProductID = Array();
 		$discountPrice=0;
 		foreach($products as $productt){

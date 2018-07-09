@@ -135,7 +135,7 @@ if(isset($_POST['step2-1'])) {
 	// Response -payment card list
 	$test['id'] = $_SESSION["UserId"];
 	$cardsnum = GetAptifyData("12", $test);
-	print_r($cardsnum);?>
+	//print_r($cardsnum);?>
 	<?php if (sizeof($cardsnum["results"])!=0): ?>  
 		<div class="row">	
 		<div class="col-xs-12 col-sm-6">				

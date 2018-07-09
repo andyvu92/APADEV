@@ -208,7 +208,7 @@ if(isset($_SESSION["UserId"])) {
 
 
 if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details['Regional-group'];}
-//print_r($details);
+////print_r($details);
 // 2.2.10 - GET Picture
 // Send - 
 // UserID
@@ -243,7 +243,7 @@ if(isset($_POST["deleteID"]) && $_POST["deleteID"] != "") {
 	// Response -
 	// N/A.
 	$deleteCards = GetAptifyData("13", $deleteCardSubmit); 
-	print_r($deleteCards);
+	//print_r($deleteCards);
 	
 }
 if(isset($_Get["action"]) && $_Get["action"] = "updatecard") {
@@ -261,7 +261,7 @@ if(isset($_Get["action"]) && $_Get["action"] = "updatecard") {
 	// Response -
 	// N/A.
 	$updateCards = GetAptifyData("13", $updateCardSubmit); 
-	print_r($updateCards);
+	//print_r($updateCards);
 	echo "End here";
 }
 if(isset($_POST["setCardID"]) && $_POST["setCardID"] != ""){
@@ -278,7 +278,7 @@ if(isset($_POST["setCardID"]) && $_POST["setCardID"] != ""){
 	// N/A.
 	echo "End here";
 	$updateCards = GetAptifyData("13", $updateCardSubmit); 
-	print_r($updateCards);
+	//print_r($updateCards);
 	
 }
 if(isset($_Get["action"]) && $_Get["action"] = "rollover") {
@@ -862,7 +862,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				// Name on card, Digits, Exp date, Roll over],  Main card
 				$test['id'] = $_SESSION["UserId"];
 				$cardsnum = GetAptifyData("12", $test);
-				print_r($cardsnum);
+				//print_r($cardsnum);
 				//$cardsnum = $cardsnums["paymentcards"];
 				//$_SESSION["cardsnum"]= $cardsnum;
 				?>

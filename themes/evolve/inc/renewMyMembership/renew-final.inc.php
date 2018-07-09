@@ -64,7 +64,7 @@ if(isset($_POST['step2-2'])){
 if(isset($_POST['step2-3'])){
 	checkShoppingCart($userID=$_SESSION['UserId'], $type="" ,$prodcutID=$_POST['step2-3']);
 	echo "this is productID";
-	print_r($_SESSION["MGProductID"]);
+	//print_r($_SESSION["MGProductID"]);
 	
 	foreach($_SESSION["MGProductID"] as $deleteM){
 		if (($key = array_search($_POST['step2-3'], $deleteM)) !== false) {
@@ -72,7 +72,7 @@ if(isset($_POST['step2-3'])){
 			unset($deleteM[$key]);
 		}    
 	}
-	print_r($deleteM);
+	//print_r($deleteM);
 	unset($_SESSION["MGProductID"]);
 	
 	$afterDelete = array();
@@ -165,7 +165,7 @@ $memberProducts = GetAptifyData("31", $memberProdcutID);
 // Response -National Group product
 $sendData["UserID"] = $_SESSION['UserId'];
 $NGListArray = GetAptifyData("19", $sendData);
-print_r($NGListArray);
+//print_r($NGListArray);
 $NGProductsArray=$_SESSION["NationalProductID"];
 // 2.2.21 - GET Fellowship product price
 // Send - 
@@ -202,7 +202,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 	// Response -
 	// N/A.
 	$updateCards = GetAptifyData("13", $updateCard); 
-	print_r($updateCards);
+	//print_r($updateCards);
 }
 	// 2.2.12 - Get payment list
 	// Send - 
@@ -210,7 +210,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 	// Response -payment card list
 	$test['id'] = $_SESSION["UserId"];
 	$cardsnum = GetAptifyData("12", $test);
-	print_r($cardsnum);
+	//print_r($cardsnum);
 	$PRFPrice = 0;
 ?> 
 <form id ="join-review-form" action="renewconfirmation" method="POST">
