@@ -7,7 +7,6 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 		case "0":
 			// JSON persar
 			return "Test! 0 in";
-			break;
 		case "1":
 			// Eddy - done check;
 			//echo "<br />1. Dashboard Main: <br />";
@@ -16,7 +15,6 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			$passInput = "Userid=".$variables;
 			$JSONreturn = curlRequest($API, "Get", $passInput);
 			return $JSONreturn;
-			break;
 		case "2":
 			// Eddy - done check;
 			//echo "<br />2. Get membership Certificate PDF: <br />";
@@ -243,11 +241,11 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 		case "31":
 			//API test by JingHu
 			//echo "<br />31. Get MEmbership product price: <br />";
-			$API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/".$_SESSION['UserId'];
+			//$API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/".$_SESSION['UserId'];
 			if(isset($_SESSION['UserId'])){
-				$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/MembershipProducts/".$_SESSION['UserId'];}
+				$API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/".$_SESSION['UserId'];}
 			else{
-				$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/MembershipProducts/-1";	
+				$API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/-1";	
 			}
 			$JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
 			return $JSONreturn;	
