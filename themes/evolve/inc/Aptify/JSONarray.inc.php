@@ -51,6 +51,7 @@ function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
 	// search and remove line space \r\n and tabs \t
 	$json = preg_replace("!\r?\n!", "", $json);
 	$json = preg_replace("!\t!", " ", $json);
+	$json = preg_replace("/&nbsp;/", " ", $json);
 	$json = json_decode($json, $assoc);
 	return $json;
 }

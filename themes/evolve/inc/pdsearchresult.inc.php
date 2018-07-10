@@ -179,7 +179,7 @@ if($totalNum % $request["PageSize"] > 0) {
 		}
 
         if(!empty($result['CPDhours'])) {
-			echo	"<div class='flex-col-1'>".$result['CPDhours'][0]."</div>";
+			echo	"<div class='flex-col-1'>".$result['CPDhours'][0]['EducationUnits']."</div>";
 		} else {
 			echo	"<div class='flex-col-1'>N/A</div>";
 		}
