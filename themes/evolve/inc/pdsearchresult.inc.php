@@ -53,15 +53,9 @@ if(isset($_GET["page"])) {
 	$request["PageNumber"] = "1";
 }
 $results = GetAptifyData("28", $request);
-echo "results:<br>";
-print_r($results);
 
 $totalNum = $results["MeetingDetails"][0]["PDcount"]; //sizeof($results);
-echo "totalNum:<br>";
-print_r($totalNum);
 $results = $results["MeetingDetails"];
-echo "result:<br>";
-print_r($results);
 $numItem = $request["PageSize"];
 $totalPage = intval($totalNum/$request["PageSize"]);
 if($totalNum % $request["PageSize"] > 0) {
