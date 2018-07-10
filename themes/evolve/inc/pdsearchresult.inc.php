@@ -18,9 +18,9 @@ global $base_url;
 // PDcount,
 // [ PD id, PD title, PD type, CPD hour, City, State,
 // Begin date, End date ]
-if(isset($_POST["lat"])) {	$request["Latitude"] = $_POST["lat"];
+if(isset($_POST["lat"])) {	$request["Latitude"] = "";//$_POST["lat"];
 } else { $request["Latitude"] = ""; }
-if(isset($_POST["lng"])) {	$request["Longitude"] = $_POST["lng"];
+if(isset($_POST["lng"])) {	$request["Longitude"] = "";//$_POST["lng"];
 } else { $request["Longitude"] = ""; }
 if(isset($_SESSION['UserID'])) { $sendData["UserID"] = $_SESSION['UserId'];
 } else { $sendData["UserID"] = "-1"; }
@@ -36,23 +36,12 @@ if(isset($_POST["Regionalgp"])) {	$request["Regionalgp"] = $_POST["Regionalgp"];
 } else { $request["Regionalgp"] = ""; }
 if(isset($_POST["State"])) {	$request["State"] = $_POST["State"];
 } else { $request["State"] = ""; }
-
-
-
-if(isset($_POST["lat"])) {	$request["Latitude"] = $_POST["lat"];
-} else { $request["Latitude"] = ""; }
-if(isset($_POST["lat"])) {	$request["Latitude"] = $_POST["lat"];
-} else { $request["Latitude"] = ""; }
-if(isset($_POST["lat"])) {	$request["Latitude"] = $_POST["lat"];
-} else { $request["Latitude"] = ""; }
-
-$request[""] = "";
-$request[""] = "";
-$request[""] = "";
-$request["State"] = "";
-$request["Suburb"] = "";
-$request["Begindate"] = "";
-$request["Enddate"] = "";
+if(isset($_POST["Suburb"])) {	$request["Suburb"] = $_POST["Suburb"];
+} else { $request["Suburb"] = ""; }
+if(isset($_POST["Begindate"])) {	$request["Begindate"] = str_replace("-","/",$_POST["Begindate"]);
+} else { $request["Begindate"] = ""; }
+if(isset($_POST["Enddate"])) {	$request["Enddate"] = $_POST["Enddate"];
+} else { $request["Enddate"] = ""; }
 if(isset($_GET["pagesize"])) {
 	$request["PageSize"] = $_GET["pagesize"];
 } else { // default page size
@@ -64,11 +53,15 @@ if(isset($_GET["page"])) {
 	$request["PageNumber"] = "1";
 }
 $results = GetAptifyData("28", $request);
-echo "result:<br>";
-//print_r($results);
+echo "results:<br>";
+print_r($results);
 
 $totalNum = $results["MeetingDetails"][0]["PDcount"]; //sizeof($results);
+echo "totalNum:<br>";
+print_r($totalNum);
 $results = $results["MeetingDetails"];
+echo "result:<br>";
+print_r($results);
 $numItem = $request["PageSize"];
 $totalPage = intval($totalNum/$request["PageSize"]);
 if($totalNum % $request["PageSize"] > 0) {

@@ -154,7 +154,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 			$AuthToken = $AuthToken["TokenId"];
 			$returnArr = Array();
 			foreach($variables as $var) {
-				$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=154&";
+				$API = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Orders&ReportId=154&";
 				$passInput = "EntityRecordID=".$var."&AptifyAuthorization=DomainWithContainer%20".$AuthToken;
 				$API = $API.$passInput;
 				array_push($returnArr, $API);
@@ -478,7 +478,7 @@ function logTransaction($APINum, $Sent, $Got) {
 function logRecorder() {
 	/* load log file and prepare for new data */
 	$sizeByte = intval(filesize("sites/Log/APA_Aptify_Communication.log"));
-	$size = FileSizeConvert($sizeByte);
+	//$size = FileSizeConvert($sizeByte);
 	////echo "size: ".$size." // ".filesize("sites/Log/APA_Aptify_Communication.log")."<br />";
 	if($sizeByte > 1000000) {
 		fileloop();

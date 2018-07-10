@@ -12,20 +12,20 @@ $background = getBackgroundImage($userID);
 // National Group ID, National Group title
 $sendData["UserID"] = $_SESSION['UserId'];
 $nationalGroups = GetAptifyData("20", $sendData);
-echo "national Groups:<br>";
-print_r($nationalGroups);
+//echo "national Groups:<br>";
+//print_r($nationalGroups);
 
 ///
-$ttt = GetAptifyData("19", $sendData);
-echo "ttt:<br>";
-print_r($ttt);
+//$ttt = GetAptifyData("19", $sendData);
+//echo "ttt:<br>";
+//print_r($ttt);
 ///
 
 ///
-$tt["ProductID"] = "";
-$ttt = GetAptifyData("21", $tt);
-echo ">21:<br>";
-print_r($ttt);
+//$tt["Userid"] = $userID;
+//$ttt = GetAptifyData("21", $tt);
+//echo ">21:<br>";
+//print_r($ttt);
 ///
 
 
@@ -36,8 +36,8 @@ print_r($ttt);
 // Response -
 // List of Fellowship ID and its titles.
 $Fellows = GetAptifyData("22", $sendData);
-echo "Fellow ships:<br>";
-print_r($Fellows);
+//echo "Fellow ships:<br>";
+//print_r($Fellows);
 /* We may use this as "Session" data and won't need to load. */
 // 2.2.23 - GET list of subscription preferences
 // Send - 
@@ -45,8 +45,8 @@ print_r($Fellows);
 // Response -
 // List of subscriptions and its T/F values.
 $subscriptions = GetAptifyData("23", $sendData);
-echo "Subs:<br>";
-print_r($subscriptions);
+//echo "Subs:<br>";
+//print_r($subscriptions);
 $Subscription = $subscriptions["results"];
 // use one of above to get "current" data
 // and combine with existing data ("$Subsctiption")
@@ -59,9 +59,9 @@ foreach ($_POST as $key => $value) {
 	//echo "Field ".htmlspecialchars($key)." is ".htmlspecialchars($value)."<br>";
 	$PostArray[htmlspecialchars($key)] = htmlspecialchars($value);
 }
-echo "@@@@";
-print_r($PostArray);
-echo "@@@@";
+//echo "@@@@";
+//print_r($PostArray);
+//echo "@@@@";
 if(count($PostArray) == 0) { // GET data
 	$SubListAll = Array();
 	foreach($Subscription as $Subs) {
@@ -79,7 +79,7 @@ if(count($PostArray) == 0) { // GET data
 	}
 	$Fellow = $Fellows["results"];
 	foreach($Fellow as $Subs) {
-		$ArrayRe["SubscriptionID"] = $Subs["FPid"];
+		$ArrayRe["SubscriptionID"] = $Subs["SubscriptionID"];
 		$ArrayRe["Subscription"] = $Subs["FPtitle"];
 		$ArrayRe["Subscribed"] = 1;
 		array_push($SubListAll, $ArrayRe);
@@ -126,15 +126,15 @@ if(count($PostArray) == 0) { // GET data
 	}
 	$Fellow = $Fellows["results"];
 	foreach($Fellow as $Subs) {
-		$ArrayUpdate["SubscriptionID"] = $Subs["FPid"];
-		if(!isset($PostArray[$Subs["FPid"]])) {
+		$ArrayUpdate["SubscriptionID"] = $Subs["SubscriptionID"];
+		if(!isset($PostArray[$Subs["SubscriptionID"]])) {
 			// When it's not set (unticked on check box)
 			$ArrayUpdate["Subscribed"] = 0;
 		} else {
-			if($PostArray[$Subs["FPid"]] == 0) {
+			if($PostArray[$Subs["SubscriptionID"]] == 0) {
 				$ArrayUpdate["Subscribed"] = 0;
 			} else {
-				$ArrayRe["SubscriptionID"] = $Subs["FPid"];
+				$ArrayRe["SubscriptionID"] = $Subs["SubscriptionID"];
 				$ArrayRe["Subscribed"] = 1;
 				$ArrayRe["Subscription"] = $Subs["FPtitle"];
 				array_push($SubListAll, $ArrayRe);
@@ -197,5 +197,6 @@ if(count($PostArray) == 0) { // GET data
 			</div>
 		</div>
 	</div>
+	<?php logRecorder(); ?>
 </div>
  

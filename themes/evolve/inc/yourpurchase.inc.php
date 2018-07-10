@@ -99,24 +99,6 @@ $products = $product["Orders"]
 								echo "<div class='flex-col-2'>".$product['Paymenttotal']."</div>";
 								echo "<div class='flex-col-3'>".$product['Orderdate']."</div>";
 								echo "</div>";
-								echo '<div id="Iaksbnkvoice'.$product['ID'].'" class="modal fade big-screen" role="dialog">
-									<div class="modal-dialog">
-
-										<!-- Modal content-->
-										<div class="modal-content">
-										<div class="modal-header">
-											<button type="button" class="close" data-dismiss="modal">&times;</button>
-										</div>
-										<div class="modal-body">
-											<iframe name="Iaksbnkvoice'.$product['ID'].'" src="http://www.physiotherapy.asn.au"></iframe>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-										</div>
-										</div>
-
-									</div>
-									</div>';
 							}
 							//// 2.2.18 - GET payment history list
 							// Send - 
