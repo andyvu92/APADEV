@@ -75,7 +75,24 @@ if($totalNum % $request["PageSize"] > 0) {
 	******/ 
 	
 	$_SESSION["`searchResult`"] = $results;
-
+	$passString = "";
+	foreach($request as $reqt) {
+		if($reqt != "") {
+			$key = array_search($reqt, $request);
+			if($key != "PageSize") {
+				if($key != "PageNumber") {
+					$passString = $passString.$key."=".$reqt."&";
+				}
+			}
+		}
+	}
+	echo "test1: ".$passString."<br >";
+	//echo "test2: ".strlen($passString)."<br >";
+	if(strlen($passString) > 1) {
+		$passString = "&".substr($passString, 0, strlen($passString) - 1);
+	}
+	echo "test3: ".$passString."<br >";
+	//echo "test4: ".strlen($passString)."<br >";
 	/******** search result pagination *****/
 	
 	if(isset($_GET["page"])) {
