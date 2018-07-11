@@ -28,9 +28,9 @@ jQuery(document).ready(function($) {
 	$('[id^=Country]').change(function(){
 		var x = $(this).attr("id").replace('Country', '');
 		var y = $('select[id="Country'+x+'"] :selected').attr('class').replace('CountryOption', '');
-		$('select[id="State'+x+'"] option:not(.StateOption'+y+')').addClass("display-none");
-		$('select[id="State'+x+'"] option.StateOption'+y+'').removeClass("display-none");
-		$('select[id="State'+x+'"] option.StateOption'+y+'').addClass("display");
+		$('select[id="State'+x+'"] option:not(.StateOption'+y+'), select[id="State'+x+'"] li:not(.StateOption'+y+')').addClass("display-none");
+		$('select[id="State'+x+'"] option.StateOption'+y+', select[id="State'+x+'"] li:not(.StateOption'+y+')').removeClass("display-none");
+		$('select[id="State'+x+'"] option.StateOption'+y+', select[id="State'+x+'"] li:not(.StateOption'+y+')').addClass("display");
 	});
 	$('[id^=Wcountry]').change(function(){
 		var x = $(this).attr("id").replace('Wcountry', '');
@@ -39,10 +39,10 @@ jQuery(document).ready(function($) {
 		$('select[id="Wstate'+x+'"] option.StateOption'+y+'').removeClass("display-none");
 		$('select[id="Wstate'+x+'"] option.StateOption'+y+'').addClass("display");
 	});
-	$('select[id^=State] option.StateOption14').removeClass("display-none");
-	$('select[id^=State] option.StateOption14').addClass("display");
-	$('select[id^=State] option:not(.StateOption14)').addClass("display-none");
-	$('select[id^=State] option:not(.StateOption14)').removeClass("display");
+	$('select[id^=State] option.StateOption14, select[id^=State] li.StateOption14').removeClass("display-none");
+	$('select[id^=State] option.StateOption14, select[id^=State] li.StateOption14').addClass("display");
+	$('select[id^=State] option:not(.StateOption14), select[id^=State] li.StateOption14').addClass("display-none");
+	$('select[id^=State] option:not(.StateOption14), select[id^=State] li.StateOption14').removeClass("display");
 	$('select[id^=Wstate] option.StateOption14').removeClass("display-none");
 	$('select[id^=Wstate] option.StateOption14').addClass("display");
 	$('select[id^=Wstate] option:not(.StateOption14)').addClass("display-none");
