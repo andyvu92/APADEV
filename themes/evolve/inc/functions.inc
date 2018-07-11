@@ -83,47 +83,41 @@ function nationalIcons(){
 /*Parameters: $priceList, $cost*/
 /*PD detail page */
 function comparePrice($priceList, $cost){
-			     foreach($priceList as $key=>$value)
-				 { 
-				  if($cost>$value) {
-					  echo '<span class="redprice">'.$key.":&nbsp;$".$value."</span><br>";
-				   } 
-				  elseif($cost<$value){
-					  echo '<span class="greenprice">'.$key.":&nbsp;$".$value."</span><br>";
-				  }
-                  elseif($cost==$value){
-					  echo $key.":&nbsp;$".$value."<br>";
-				  }				  
-			   
-	     	 }
-		 }
+	foreach($priceList as $key=>$value) { 
+		if($cost>$value) {
+			echo '<span class="redprice">'.$key.":&nbsp;$".$value."</span><br>";
+		} elseif($cost<$value){
+			echo '<span class="greenprice">'.$key.":&nbsp;$".$value."</span><br>";
+		} elseif($cost==$value){
+			echo $key.":&nbsp;$".$value."<br>";
+		}
+	}
+}
 /*PD detail page check eligible user to purchase the product fuction*/
 /*Parameters: $Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList*/
 /*PD detail page */
 //function checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList){
-				 //if(($Job!=NULL) && ($Professionalbody=="1") && ($Professionalinsurance=="1") && ($HearaboutAPA!=NULL) && ($Registrationboard=="1") && ($Registrationboard=="1") && (sizeof($Dietary)>0) && (sizeof($paymentCardList)>0))
-				 //{
-					//return "1"; 
-				 //}
-				// else{
-					// return "0";
-				 //}
-			     
-			 //}
+ //if(($Job!=NULL) && ($Professionalbody=="1") && ($Professionalinsurance=="1") && ($HearaboutAPA!=NULL) && ($Registrationboard=="1") && ($Registrationboard=="1") && (sizeof($Dietary)>0) && (sizeof($paymentCardList)>0))
+ //{
+	//return "1"; 
+ //}
+// else{
+	// return "0";
+ //}
+ 
+//}
 function checkPDUser($memberType){
 	if($memberType=="1"){
 		return "1"; 
 	}
 	else{
 		return "0"; 
-	}
-	
-	
+	}	
 }			 
 /*General function: save data to APA shopping cart database;*/
 /*Parameters: $userID, $productID,$type;*/
 /*save product data including membership type product, national group product, fellowship & PRF product*/
-	function createShoppingCart($userID, $productID,$type,$coupon){
+function createShoppingCart($userID, $productID,$type,$coupon){
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
 	try {
 		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, type, coupon) VALUES (:userID, :productID, :type, :coupon)');
@@ -139,7 +133,7 @@ function checkPDUser($memberType){
 			print "Error!: " . $e->getMessage() . "<br/>";
 			die();
 	}
-	}
+}
 // check the user product in case of duplicated shopping cart data
 function checkShoppingCart($userID, $type, $productID){
 		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
