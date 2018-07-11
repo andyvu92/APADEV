@@ -1399,8 +1399,8 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 						echo 'class ="active" ';
 			?>><a data-toggle="tab" href="#workplace<?php
 					echo $key;
-			?>"><?php
-					echo "Workplace" . $key;
+			?>"><?php $newkey =$key+1;
+					echo "Workplace" . $newkey;
 			?></a></li>
 						<?php
 				endforeach;
@@ -1410,7 +1410,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 			?>
 						
 						<li class ="active"><a data-toggle="tab" href="#workplace0"><?php
-					echo "Workplace0";
+					echo "Workplace1";
 			?></a></li>
 						
 						<?php
@@ -1426,7 +1426,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                             <div id="workplace<?php
                         echo $key;
                 ?>" class='tab-pane fade <?php
-                        if ($key == 'Workplace0')
+                        if ($key == '0')
                             echo "in active ";
                 ?>'> 
                                 <input type="hidden" name="WorkplaceID<?php
@@ -3429,7 +3429,7 @@ endif;
             var number = Number($('#wpnumber').text());
               var i = Number(number +1);
             var j = Number(number +2);
-            $('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ i+'</a><span class="deletewp'+ i + '">Remove</span></li>' );
+            $('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ j+'</a><span class="deletewp'+ i + '">Remove</span></li>' );
             $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade">');
             $('#wpnumber').text(i);
             $('input[name=wpnumber]').val(j);

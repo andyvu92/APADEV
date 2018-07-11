@@ -795,10 +795,10 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 			</div>-->
 		<ul class="nav nav-tabs" id="tabmenu">
 		<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
-		<li <?php if($key=='Workplace0') echo 'class ="active" ';?>><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php echo "Workplace".$key;?></a></li>
+		<li <?php if($key=='Workplace0') echo 'class ="active" ';?>><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace".$newkey;?></a></li>
 		<?php endforeach ?> 
 		<?php if(sizeof($details['Workplaces'])==0):?>
-		<li class ="active"><a data-toggle="tab" href="#workplace0"><?php echo "Workplace0";?></a></li>
+		<li class ="active"><a data-toggle="tab" href="#workplace0"><?php echo "Workplace1";?></a></li>
 		<?php endif; ?>
 		</ul>
 		<div id="workplaceblocks">
@@ -818,12 +818,12 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 
 				<div class="row">
 					<div class="col-xs-12 col-md-6">
-					<label for="Name-of-workplace">Name of workplace</label>
+					<label for="Name-of-workplace">Name of workplace<span class="tipstyle">*</span></label>
 					<input type="text" class="form-control" name="Name-of-workplace<?php echo $key;?>" id="Name-of-workplace<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Name-of-workplace'])) {echo "placeholder='Name of workplace'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Name-of-workplace'].'"'; }?>>
 					</div>
 
 					<div class="col-xs-12 col-md-6">
-					<label>Workplace setting</label>
+					<label>Workplace setting<span class="tipstyle">*</span></label>
 					<div class="chevron-select-box">	
 					<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting0">
 						<?php
@@ -1503,7 +1503,7 @@ jQuery(document).ready(function($) {
 		var number = Number($('#wpnumber').text());
 		var i = Number(number +1);
 		var j = Number(number +2);
-		$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ i+'</a><span class="deletewp'+ i + '">Remove</span></li>' );
+		$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ j+'</a><span class="deletewp'+ i + '">Remove</span></li>' );
 		$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
 		$('#wpnumber').text(i);
 		$('input[name=wpnumber]').val(j);

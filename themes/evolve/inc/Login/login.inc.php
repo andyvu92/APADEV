@@ -132,7 +132,7 @@
 				<input type="submit" value="Login" />
 				<p><input type="checkbox" name="remember" id="remember" <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> /><label for="remember">Remember me</label><a class="forgotPS" data-dismiss="modal" data-toggle="modal" data-target="#passwordReset" >Forgot password?</a></p>
 			</form>
-			<p>Not a member? <a href="">Join us today</a>.</p>
+			<p>Not a member? <a href="jointheapa">Join us today</a>.</p>
 			<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
 		</div>
 	</div>
