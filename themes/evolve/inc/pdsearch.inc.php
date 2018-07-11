@@ -21,16 +21,16 @@
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Keyword</label>
-		<input type="text" name="Keywords" placeholder="Keyword">
+		<input type="text" name="Keywords" placeholder="Keyword" <?php if(isset($_POST["Keywords"])) { echo "value='".$_POST["Keywords"]."'";} ?>>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Type of PD</label>
 		<select  class="chosen-select" name="Typeofpd" id="Typeofpd" multiple data-placeholder="Type of PD">
-			<option value="Course">Course</option>
-			<option value="Lecture">Lecture</option>
-			<option value="ProfessionalE">Professional interest event</option>
-			<option value="Conference">Conference/tour</option> 
-			<option value="Vclass">Virtual classroom</option>
+			<option value="Course" <?php if(isset($_POST["Typeofpd"]) && $_POST["Typeofpd"]=="Course") { echo "selected";} ?>>Course</option>
+			<option value="Lecture" <?php if(isset($_POST["Typeofpd"]) && $_POST["Typeofpd"]=="Lecture") { echo "selected";} ?>>Lecture</option>
+			<option value="ProfessionalE" <?php if(isset($_POST["Typeofpd"]) && $_POST["Typeofpd"]=="ProfessionalE") { echo "selected";} ?>>Professional interest event</option>
+			<option value="Conference" <?php if(isset($_POST["Typeofpd"]) && $_POST["Typeofpd"]=="Conference") { echo "selected";} ?>>Conference/tour</option> 
+			<option value="Vclass" <?php if(isset($_POST["Typeofpd"]) && $_POST["Typeofpd"]=="Vclass") { echo "selected";} ?>>Virtual classroom</option>
 		</select>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -39,7 +39,9 @@
 		<?php
 		//$_SESSION["testTTdad"]["NationalGroup"]
 		foreach($details as $lines) {
-			echo '<option value="'.$lines["NGid"].'"> '.$lines["NGtitle"].' </option>';
+			$vals = '';
+			if(isset($_POST["Nationalgp"]) && $_POST["Nationalgp"]==$lines["NGid"]) { $vals = "selected";}
+			echo '<option value="'.$lines["NGid"].'" '.$vals.'> '.$lines["NGtitle"].' </option>';
 		}
 		?>
 		</select>
@@ -47,45 +49,45 @@
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Regional group</label>
 		<select  class="chosen-select" name="Regionalgp" id="Regionalgp" multiple data-placeholder="Regional group">
-			<option value="NSW-CC"> NSW - CENTRAL COAST  </option>
-			<option value="NSW-CH"> NSW - COFFS HARBOUR  </option>
-			<option value="NSW-CW"> NSW - CENTRAL WEST  </option>
-			<option value="NSW-FN"> NSW - FAR NORTH COAST  </option>
-			<option value="NSW-FS"> NSW - FAR SOUTH COAST </option>
-			<option value="NSW-HU"> NSW - HUNTER  </option>
-			<option value="NSW-IL">  NSW - ILLAWARRA  </option>
-			<option value="NSW-MI"> NSW - MID NORTH COAST  </option>
-			<option value="NSW-MU"> NSW - MURRAY AREA </option>
-			<option value="NSW-NE"> NSW - NEW ENGLAND  </option>
-			<option value="NSW-OR">  NSW - ORANA FAR WEST  </option>
-			<option value="NSW-RI"> NSW - RIVERINA  </option>
-			<option value="QLD-CE"> QLD - CENTRAL </option>
-			<option value="QLD-FN"> QLD - FAR NORTH  </option>
-			<option value="QLD-GC"> QLD - GOLD COAST  </option>
-			<option value="QLD-MA"> QLD - MACKAY  </option>
-			<option value="QLD-SC"> QLD - SUNSHINE COAST  </option>
-			<option value="QLD-NO"> QLD - NORTH</option>
-			<option value="QLD-SW"> QLD - SOUTH WEST  </option>
-			<option value="QLD-WB"> QLD - WIDE BAY  </option>
-			<option value="SA-RI"> SA - RIVERLAND  </option>
-			<option value="SA-SE"> SA - SOUTH EAST </option>
-			<option value="TAS-NO"> TAS - NORTHERN </option>
-			<option value="TAS-NW"> TAS - NORTH WEST </option>
-			<option value="VIC-BA"> VIC - BALLARAT   </option>
-			<option value="VIC-CV"> VIC - CENTRAL VICTORIA   </option>
-			<option value="VIC-GI"> VIC - GIPPLAND  </option>
-			<option value="VIC-GE"> VIC - GEELONG  </option>
-			<option value="VIC-MA"> VIC - MURRAY AREA  </option>
-			<option value="VIC-NE"> VIC - NORTH EAST  </option>
-			<option value="VIC-NW"> VIC - NORTH WEST </option>
-			<option value="VIC-SW"> VIC - SOUTH WEST    </option>
-			<option value="VIC-WI"> VIC - WIMMERA   </option>
-			<option value="WA-CW"> WA - CENTRAL WHEATBELT  </option>
-			<option value="WA-GO"> WA - GOLDFIELFS   </option>
-			<option value="WA-GS"> WA - GREAT SOUTHERN   </option>
-			<option value="WA-MW"> WA - MID WEST </option>
-			<option value="WA-PI"> WA - PILBARRA/KIMBERLEY </option>
-			<option value="WA-SW"> WA - SOUTH WEST   </option>
+			<option value="NSW-CC" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-CC") { echo "selected";} ?>> NSW - CENTRAL COAST  </option>
+			<option value="NSW-CH" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-CH") { echo "selected";} ?>> NSW - COFFS HARBOUR  </option>
+			<option value="NSW-CW" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-CW") { echo "selected";} ?>> NSW - CENTRAL WEST  </option>
+			<option value="NSW-FN" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-FN") { echo "selected";} ?>> NSW - FAR NORTH COAST  </option>
+			<option value="NSW-FS" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-FS") { echo "selected";} ?>> NSW - FAR SOUTH COAST </option>
+			<option value="NSW-HU" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-HU") { echo "selected";} ?>> NSW - HUNTER  </option>
+			<option value="NSW-IL" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-IL") { echo "selected";} ?>>  NSW - ILLAWARRA  </option>
+			<option value="NSW-MI" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-MI") { echo "selected";} ?>> NSW - MID NORTH COAST  </option>
+			<option value="NSW-MU" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-MU") { echo "selected";} ?>> NSW - MURRAY AREA </option>
+			<option value="NSW-NE" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-NE") { echo "selected";} ?>> NSW - NEW ENGLAND  </option>
+			<option value="NSW-OR" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-OR") { echo "selected";} ?>>  NSW - ORANA FAR WEST  </option>
+			<option value="NSW-RI" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-RI") { echo "selected";} ?>> NSW - RIVERINA  </option>
+			<option value="QLD-CE" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="QLD-CE") { echo "selected";} ?>> QLD - CENTRAL </option>
+			<option value="QLD-FN" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="QLD-FN") { echo "selected";} ?>> QLD - FAR NORTH  </option>
+			<option value="QLD-GC" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="QLD-GC") { echo "selected";} ?>> QLD - GOLD COAST  </option>
+			<option value="QLD-MA" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="QLD-MA") { echo "selected";} ?>> QLD - MACKAY  </option>
+			<option value="QLD-SC" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="QLD-SC") { echo "selected";} ?>> QLD - SUNSHINE COAST  </option>
+			<option value="QLD-NO" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="QLD-NO") { echo "selected";} ?>> QLD - NORTH</option>
+			<option value="QLD-SW" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="QLD-SW") { echo "selected";} ?>> QLD - SOUTH WEST  </option>
+			<option value="QLD-WB" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="QLD-WB") { echo "selected";} ?>> QLD - WIDE BAY  </option>
+			<option value="SA-RI" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="SA-RI") { echo "selected";} ?>> SA - RIVERLAND  </option>
+			<option value="SA-SE" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="SA-SE") { echo "selected";} ?>> SA - SOUTH EAST </option>
+			<option value="TAS-NO" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="TAS-NO") { echo "selected";} ?>> TAS - NORTHERN </option>
+			<option value="TAS-NW" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="TAS-NW") { echo "selected";} ?>> TAS - NORTH WEST </option>
+			<option value="VIC-BA" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="VIC-BA") { echo "selected";} ?>> VIC - BALLARAT   </option>
+			<option value="VIC-CV" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="VIC-CV") { echo "selected";} ?>> VIC - CENTRAL VICTORIA   </option>
+			<option value="VIC-GI" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="VIC-GI") { echo "selected";} ?>> VIC - GIPPLAND  </option>
+			<option value="VIC-GE" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="VIC-GE") { echo "selected";} ?>> VIC - GEELONG  </option>
+			<option value="VIC-MA" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="VIC-MA") { echo "selected";} ?>> VIC - MURRAY AREA  </option>
+			<option value="VIC-NE" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="VIC-NE") { echo "selected";} ?>> VIC - NORTH EAST  </option>
+			<option value="VIC-NW" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="VIC-NW") { echo "selected";} ?>> VIC - NORTH WEST </option>
+			<option value="VIC-SW" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="VIC-SW") { echo "selected";} ?>> VIC - SOUTH WEST    </option>
+			<option value="VIC-WI" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="VIC-WI") { echo "selected";} ?>> VIC - WIMMERA   </option>
+			<option value="WA-CW" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="WA-CW") { echo "selected";} ?>> WA - CENTRAL WHEATBELT  </option>
+			<option value="WA-GO" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="WA-GO") { echo "selected";} ?>> WA - GOLDFIELFS   </option>
+			<option value="WA-GS" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="WA-GS") { echo "selected";} ?>> WA - GREAT SOUTHERN   </option>
+			<option value="WA-MW" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="WA-MW") { echo "selected";} ?>> WA - MID WEST </option>
+			<option value="WA-PI" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="WA-PI") { echo "selected";} ?>> WA - PILBARRA/KIMBERLEY </option>
+			<option value="WA-SW" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="WA-SW") { echo "selected";} ?>> WA - SOUTH WEST   </option>
 																																																
 		</select>
 	</div>
@@ -116,29 +118,33 @@
 	<div class="locationManual">
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<label>State</label>
-			<select  class="chosen-select" name="State" id="State" multiple data-placeholder="State">
-				<option value="ACT">ACT</option>
-				<option value="NSW">NSW</option>
-				<option value="QLD">QLD</option>
-				<option value="SA">SA</option> 
-				<option value="TAS">TAS</option>
-				<option value="NT">NT</option>
-				<option value="VIC">VIC</option>
-				<option value="WA">WA</option> 
+			<select class="chosen-select" name="State" id="State" multiple data-placeholder="State" id="State">
+				<option value=""  <?php if (!isset($_POST["State"])) echo "selected='selected'";?> disabled> State </option>
+				<?php 
+				$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+				$State=json_decode($statecode, true);
+				$t = 0;
+				foreach($State  as $key => $value){
+				echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
+				if (isset($_POST["State"]) && $_POST["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+				echo '> '.$State[$key]['Abbreviation'].' </option>';
+			
+				}
+				?>
 			</select>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<label>Suburb/city</label>
-			<input type="text" name="Suburb" placeholder="Suburb/city" style="margin-top:0px">
+			<input type="text" name="Suburb" placeholder="Suburb/city" style="margin-top:0px"<?php if(isset($_POST["Suburb"])) { echo "value='".$_POST["Suburb"]."'";} ?>>
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 		<label>Start date</label>
-		<input type="date" name="Begindate" placeholder="Begin date" required value="<?php echo date("Y-m-d");?>">
+		<input type="date" name="Begindate" placeholder="Begin date" required <?php if(isset($_POST["Begindate"])) { echo "value='".$_POST["Begindate"]."'";} else {echo date("Y-m-d");} ?>>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 		<label>End date</label>
-		<input type="date" name="Enddate" placeholder="End date">
+		<input type="date" name="Enddate" placeholder="End date"<?php if(isset($_POST["Enddate"])) { echo "value='".$_POST["Enddate"]."'";} ?>>
 	</div>
 	
 	<div class="col-xs-12">
