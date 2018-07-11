@@ -86,12 +86,12 @@ if($totalNum % $request["PageSize"] > 0) {
 			}
 		}
 	}
-	echo "test1: ".$passString."<br >";
+	//echo "test1: ".$passString."<br >";
 	//echo "test2: ".strlen($passString)."<br >";
 	if(strlen($passString) > 1) {
 		$passString = "&".substr($passString, 0, strlen($passString) - 1);
 	}
-	echo "test3: ".$passString."<br >";
+	//echo "test3: ".$passString."<br >";
 	//echo "test4: ".strlen($passString)."<br >";
 	/******** search result pagination *****/
 	
@@ -107,14 +107,14 @@ if($totalNum % $request["PageSize"] > 0) {
 		$back = 10 * ($i + 1) + 1;
 		if($front < $current && $current <= ($back - 1)) {
 			if($front == 0) {
-				echo '<div class="pager col-xs-12 col-sm-6 col-md-9"><a href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.'"><div class="Pagebutton"><<</div></a>';
+				echo '<div class="pager col-xs-12 col-sm-6 col-md-9"><a href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.$passString.'"><div class="Pagebutton"><<</div></a>';
 			} else {
-				echo '<div class="pager"><a href="'.$base_url.'/pd/pd-search?page='.$front.'&pagesize='.$numItem.'"><div class="Pagebutton"><<</div></a>';
+				echo '<div class="pager"><a href="'.$base_url.'/pd/pd-search?page='.$front.'&pagesize='.$numItem.$passString.'"><div class="Pagebutton"><<</div></a>';
 			}
 			if($current != 1) {
-				echo '<a href="'.$base_url.'/pd/pd-search?page='.($current - 1).'&pagesize='.$numItem.'"><div class="Pagebutton"><</div></a>';
+				echo '<a href="'.$base_url.'/pd/pd-search?page='.($current - 1).'&pagesize='.$numItem.$passString.'"><div class="Pagebutton"><</div></a>';
 			} else {
-				echo '<a href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.'"><div class="Pagebutton"><</div></a>';
+				echo '<a href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.$passString.'"><div class="Pagebutton"><</div></a>';
 			}
 			for($j = 1;$j < 11; $j++) {
 				$t = ($front + $j);
@@ -122,19 +122,19 @@ if($totalNum % $request["PageSize"] > 0) {
 					if($t == $current) {
 						echo '<div class="Pagebutton current">'.$t.'</div>';
 					} else {
-						echo '<a href="'.$base_url.'/pd/pd-search?page='.$t.'&pagesize='.$numItem.'"><div class="Pagebutton">'.$t.'</div></a>';
+						echo '<a href="'.$base_url.'/pd/pd-search?page='.$t.'&pagesize='.$numItem.$passString.'"><div class="Pagebutton">'.$t.'</div></a>';
 					}
 				} 
 			}
 			if($current != $max) {
-				echo '<a href="'.$base_url.'/pd/pd-search?page='.($current + 1).'&pagesize='.$numItem.'"><div class="Pagebutton">></div></a>';
+				echo '<a href="'.$base_url.'/pd/pd-search?page='.($current + 1).'&pagesize='.$numItem.$passString.'"><div class="Pagebutton">></div></a>';
 			} else {
-				echo '<a href="'.$base_url.'/pd/pd-search?page='.$max.'&pagesize='.$numItem.'"><div class="Pagebutton">></div></a>';
+				echo '<a href="'.$base_url.'/pd/pd-search?page='.$max.'&pagesize='.$numItem.$passString.'"><div class="Pagebutton">></div></a>';
 			}
 			if($back >= $max) {
-				echo '<a href="'.$base_url.'/pd/pd-search?page='.$max.'&pagesize='.$numItem.'"><div class="Pagebutton">>></div></a></div>';
+				echo '<a href="'.$base_url.'/pd/pd-search?page='.$max.'&pagesize='.$numItem.$passString.'"><div class="Pagebutton">>></div></a></div>';
 			} else {
-				echo '<a href="'.$base_url.'/pd/pd-search?page='.$back.'&pagesize='.$numItem.'"><div class="Pagebutton">>></div></a></div>';
+				echo '<a href="'.$base_url.'/pd/pd-search?page='.$back.'&pagesize='.$numItem.$passString.'"><div class="Pagebutton">>></div></a></div>';
 			}
 			break;
 		}
@@ -268,49 +268,6 @@ echo "</div>";
 
 }?>
 </div>
-<?php 
-/***********************bottom pagination****************/
-    /********search result pagination*****/
-	/*
-	if(isset($_GET["pagesize"])){       
-		$numItem = $_GET["pagesize"];
-	} else {
-		$numItem = 5;
-	}
-	//$numPage = intdiv(sizeof($_SESSION["searchResult"]),$numItem)+1;
-	if(isset($_GET["page"])&&($_GET["page"]!=1)){   
-		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.'"><div class="Pagebutton"><<</div></a>';     
-		$last = $_GET["page"]-1;
-		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$last .'&pagesize='.$numItem.'"><div class="Pagebutton"><</div></a>';          
-	}
-	for($i=1;$i<=$totalPage;$i++){
-		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$i.'&pagesize='.$numItem.'"><div class="Pagebutton">'.$i.'</div></a>';
-	}
-										
-	/********end search result pagination*******/
-	/*
-	if(isset($_GET["page"])){
-		$resultTemp = $_SESSION["searchResult"];
-		$numResult = ($_GET["page"]-1)*$numItem;
-		$results = array_slice($resultTemp, $numResult,$numItem);
-	} else {
-		$results = array_slice($results,0,$numItem); 
-		$numResult = 0;
-		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page=2&pagesize='.$numItem.'"><div class="Pagebutton">></div></a>';      
-	}
-                                        
-	if(isset($_GET["page"])&&($_GET["page"]!=$totalPage)){   
-		$next = $_GET["page"]+1;
-		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$next.'&pagesize='.$numItem.'"><div class="Pagebutton">></div></a>';                                        
-	}
-	if(!isset($_GET["page"])||($_GET["page"]!=$totalPage)){  
-		echo '<a target="_self" href="'.$base_url.'/pd/pd-search?page='.$totalPage.'&pagesize='.$numItem.'"><div class="Pagebutton">>></div></a>';  
-	}     
-               
-	/****************pagination functionality********************/      
-
-/**********************end bottom pagination************/
-?>
 <?php  /*******************************right item******************/?>
 <div class="pager-bottom col-xs-12 col-sm-6 col-md-9"></div>
 <div class="col-xs-12 col-sm-6 col-md-3 none-padding align-right">

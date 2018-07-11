@@ -119,7 +119,6 @@
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<label>State</label>
 			<select class="chosen-select" name="State" id="State" multiple data-placeholder="State" id="State">
-				<option value=""  <?php if (!isset($_POST["State"])) echo "selected='selected'";?> disabled> State </option>
 				<?php 
 				$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 				$State=json_decode($statecode, true);
@@ -140,7 +139,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 		<label>Start date</label>
-		<input type="date" name="Begindate" placeholder="Begin date" required <?php if(isset($_POST["Begindate"])) { echo "value='".$_POST["Begindate"]."'";} else {echo date("Y-m-d");} ?>>
+		<input type="date" name="Begindate" placeholder="Begin date" required <?php if(isset($_POST["Begindate"])) { echo "value='".$_POST["Begindate"]."'";} else {echo "value='".date("Y-m-d")."'";} ?>>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 		<label>End date</label>
