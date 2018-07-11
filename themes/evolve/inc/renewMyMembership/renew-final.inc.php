@@ -216,8 +216,9 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 <form id ="join-review-form" action="renewconfirmation" method="POST">
 <input type="hidden" name="step3" value="3">
 <div class="down8" <?php if(isset($_POST['step2'])|| isset($_POST['stepAdd'])||isset($_POST['step2-2'])||isset($_POST['step2-3']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
-	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-			<div class="flex-container join-apa-final">
+
+	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 review-main-container">
+	<div class="flex-container join-apa-final">
 				<div class="flex-cell flex-flow-row table-header">
 					<div class="flex-col-8">
 						<span class="table-heading">Product name</span>
@@ -233,7 +234,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
     			<?php 
 				$price = "";
 				foreach( $memberProducts as $memberProduct){
-							echo "<div class='flex-cell flex-flow-row table-cell'>";
+							echo "<div class='flex-cell flex-flow-row table-cell memberproduct'>";
 							echo "<div class='flex-col-8 title-col'>".$memberProduct['Title']."</div>";
 							echo "<div class='flex-col-2 price-col'>A$".$memberProduct['Price']."</div>";
 							$price += $memberProduct['Price'];
@@ -244,19 +245,20 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 					if(sizeof($NGProductsArray)!=0){
 						foreach($NGProductsArray as $NGProduct){
 							if($NGProduct == $NGArray['ProductID']){
-								echo "<div class='flex-cell flex-flow-row table-cell'>";
+								echo "<div class='flex-cell flex-flow-row table-cell NG'>";
 								echo "<div class='flex-col-8 title-col'>".$NGArray['ProductName']."</div>";
 								echo "<div class='flex-col-2 price-col'>A$".$NGArray['NGprice']."</div>";
 								$price += $NGArray['NGprice'];
 								echo '<div class="flex-col-2 action-col"><a href="renewmymembership" target="_self">delete</a></div>';
-							}	echo "</div>";  
+								echo "</div>";
+							}	  
 						}
 					}
 				}
 				if(sizeof($FPListArray)!=0){
 					foreach( $FPListArray as $FProduct){
 						    echo '<input type="hidden" name="MGProductID" value="'.$FProduct['ProductID'].'">';
-							echo "<div class='flex-cell flex-flow-row table-cell'>";
+							echo "<div class='flex-cell flex-flow-row table-cell FP'>";
 							echo "<div class='flex-col-8 title-col'>".$FProduct['FPtitle']."</div>";
 							echo "<div class='flex-col-2 price-col'>A$".$FProduct['FPprice']."</div>";
 							$price += $FProduct['FPprice'];
@@ -265,15 +267,14 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 						}
 				}
 				if(isset($_POST['PRF'])&& $_POST['PRF']!=""){ 
-                    echo '<div class="flex-cell flex-flow-row table-cell">
+                    echo '<div class="flex-cell flex-flow-row table-cell PRF">
                     <div class="flex-col-8 title-col">Physiotherapy Research Foundation donation</div>
                     <div class="flex-col-2 price-col">A$'.$_POST['PRF'].'</div>
                     <div class="flex-col-2 action-col"><a class="deletePRFButton">delete</a></div>
                     </div>'; }
 				?>
             </div>
-            
-		</div>
+	</div>
 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 Membpaymentsiderbar">
 		<p><span class="smaller-lead-heading sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
 				<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
@@ -287,7 +288,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 							if($cardnum["IsDefault"]=="1") {
 							echo "selected ";
 						}
-						echo 'data-class="'.$cardnum["Payment-Method"].'">---- ---- ---- ';
+						echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
 						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
 						}
 					
@@ -331,48 +332,6 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 		
 		<?php endif; ?>
 		</div>
-	<!-- <div class="paymentsideuse"><input type="checkbox" id="anothercard"><label for="anothercard"><a class="cardevent" style="cursor: pointer;color:white;">Use another card</a></label>
-	<div class="carddown" style="display:none;">
-	<form action="renewmymembership" method="POST" id="formaddcard">
-	<input type="hidden" name="stepAdd" value="2"/>
-	<input type="hidden" name="addNewCard" value="1"/>
-	<div class="row">
-	<div class="col-lg-12">
-	<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-	<option value="AE">American Express</option>
-	<option value="Visa">Visa</option>
-	<option value="Mastercard">Mastercard</option>
-	</select>
-	</div>
-	</div>
-	<div class="row">
-	<div class="col-lg-12">
-	<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
-	</div>
-	</div>
-	<div class="row">
-	<div class="col-lg-12">
-	<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
-	</div>
-	</div>
-	<div class="row">
-	<div class="col-lg-12">
-	<input type="date" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date">
-	</div>
-
-	</div>
-	<div class="row">
-	<div class="col-lg-12">
-	<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV">
-	</div>
-	</div>
-	<div class="row">
-	<a href="javascript:document.getElementById('formaddcard').submit();" class="join-details-button7"><span class="dashboard-button-name">Add</span></a>
-	</div>
-	</form>
-	</div>
-	</div>
-	-->
 
 			<div class="flex-container flex-flow-column">
 
@@ -462,11 +421,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 								</div>
 							</div>'; 								
 					}
-				?>
-				<div class="flex-cell flex-flow-row">
-					<div class="flex-col-12">
-					</div>
-				</div>					
+				?>				
 			</div>
 			
 			<!--<input type="hidden" name="Paymentcard" id="Paymentcardvalue" value="">-->

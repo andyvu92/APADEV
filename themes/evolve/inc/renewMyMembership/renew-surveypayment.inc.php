@@ -147,7 +147,7 @@ if(isset($_POST['step2-1'])) {
 							if($cardnum["IsDefault"]=="1") {
 							echo "selected ";
 						}
-						echo 'data-class="'.$cardnum["Payment-Method"].'">---- ---- ---- ';
+						echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
 						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
 						}
 				?>

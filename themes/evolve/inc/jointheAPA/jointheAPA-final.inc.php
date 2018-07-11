@@ -241,7 +241,8 @@ $PRFPrice = 0;
 									echo "<div class='flex-col-2 price-col'>A$".$NGArray['NGprice']."</div>";
 									$price += $NGArray['NGprice'];
 									echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
-								}	echo "</div>";  
+									echo "</div>";
+								}	  
 							}
 						}
 						}
@@ -279,7 +280,7 @@ $PRFPrice = 0;
 							if($cardnum["IsDefault"]=="1") {
 							echo "selected ";
 						}
-						echo 'data-class="'.$cardnum["Payment-Method"].'">---- ---- ---- ';
+						echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
 						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
 						}
 					

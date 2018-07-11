@@ -10,12 +10,12 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 
 	<div class="col-xs-12">
 		<input class="styled-checkbox" type="checkbox" name="Findphysio'.$i.'" id="Findphysio'.$i.'" value="" >
-		<label class="light-font-weight" for="Findphysio'.$i.'"><span class="note-text">NOTE: </span>I want this workplace to be listed on the consumer choose.physio site</label>
+		<label class="light-font-weight" for="Findphysio'.$i.'"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
 	</div>
 
 	<div class="col-xs-12">
 		<input class="styled-checkbox" type="checkbox" name="Findabuddy'.$i.'" id="Findabuddy'.$i.'" value="" >
-		<label class="light-font-weight" for="Findabuddy'.$i.'"><span class="note-text">NOTE: </span>I want this workplace to be listed on the APA australian.physio site</label>
+		<label class="light-font-weight" for="Findabuddy'.$i.'"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>
 	</div>
 
 <div class="row">

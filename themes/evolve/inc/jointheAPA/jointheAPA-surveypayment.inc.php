@@ -161,24 +161,32 @@ if(isset($_POST['step2-1'])) {
 	$cardsnum = GetAptifyData("12", $test);
 	//print_r($cardsnum);?>
 	<?php if (sizeof($cardsnum["results"])!=0): ?>  
-		<div class="row">					
-			<fieldset>
-				<select id="Paymentcard" name="Paymentcard">
-					<?php
-					
-						foreach( $cardsnum["results"] as $cardnum) {
-							echo '<option value="'.$cardnum["Creditcards-ID"].'"';
-							if($cardnum["IsDefault"]=="1") {
-							echo "selected ";
-						}
-						echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
-						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
-						}
-					
-					?>
-				</select>
-			</fieldset>
-			<input class="styled-checkbox" type="checkbox" id="anothercard"><label for="anothercard">Use another card</label>
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">					
+				<fieldset>
+					<select id="Paymentcard" name="Paymentcard">
+						<?php
+						
+							foreach( $cardsnum["results"] as $cardnum) {
+								echo '<option value="'.$cardnum["Creditcards-ID"].'"';
+								if($cardnum["IsDefault"]=="1") {
+								echo "selected ";
+							}
+							echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
+							echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+							}
+						
+						?>
+					</select>
+				</fieldset>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-xs-12 col-sm-6">
+				<input class="styled-checkbox" type="checkbox" id="anothercard">
+				<label for="anothercard">Use another card</label>
+			</div>
 		</div> 
 
 		<div id="anothercardBlock" style="margin: 0; padding:0" class="display-none col-xs-12">

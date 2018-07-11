@@ -8,10 +8,12 @@ $background = getBackgroundImage($userID);
  
 ?>
 <div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
-<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?> autoscroll" id="dashboard-right-content">
+	<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?> autoscroll" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Renew my membership</strong></span></div>
+		<div class="col-xs-12">
+			<span class="dashboard-name"><strong>Renew my membership</strong></span>
+		</div>
 		<!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background <?php if(!isset($_SESSION["userID"])) echo "display-none";?>">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>-->
 		</div>
 	<?php
@@ -68,6 +70,7 @@ $background = getBackgroundImage($userID);
 			</div>
 		</div>
 	</div>
+</div>
 </div>
 <?php logRecorder(); ?>
 <div id="privacypolicyWindow" style="display:none;">
@@ -335,14 +338,14 @@ Facsimile: (03) 9092 0899</p>
 		
 		echo $order['ProductName']; echo ",";} 
 	}?><?php endif;?></p>
-	<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a><br>
-	<p>&nbsp;</p>
+	<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
+
 	<p>If this isn’t quite right, and you’d like to change your member type, or add some National Groups to your membership, follow the link below:</p>
-	<a href="renewmymembership"  target="_self" class="cancelInsuranceButton"><span class="dashboard-button-name">Change member type and national group</span></a><br>
-	<p>&nbsp;</p>
+	<a href="renewmymembership"  target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change member type and national group</span></a><br>
+
 	<p>If you’ve changed address recently or would like to update any of your personal details, follow this link:</p>
-	<a href="renewmymembership" target="_self" class="cancelInsuranceButton"><span class="dashboard-button-name">Change your details</span></a>
-	<p>&nbsp;</p>
+	<a href="renewmymembership" target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change your details</span></a>
+
 </div>
 <form id="renew-survey-form2" action="" method="POST"><input type="hidden" name="QOrder"></form>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		

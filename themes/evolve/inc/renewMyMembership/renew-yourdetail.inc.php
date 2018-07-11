@@ -281,7 +281,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					   <input type="text" class="form-control"  name="Firstname" <?php if (empty($details['Firstname'])) {echo "placeholder='Given name'";}   else{ echo 'value="'.$details['Firstname'].'"'; }?>>
 					</div>
 					<div class="col-xs-6 col-md-3">
-					   <label for="">preferred name</label>
+					   <label for="">Preferred name</label>
 					   <input type="text" class="form-control"  name="Preferred-name" <?php if (empty($details['Preferred-name'])) {echo "placeholder='Preferred name'";}   else{ echo 'value="'.$details['Preferred-name'].'"'; }?>>
 					</div>
 					<div class="col-xs-6 col-md-3">
@@ -321,8 +321,33 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					   </div>
 					</div>
 				</div>
-
+				
 				<div class="row">
+					<div class="col-xs-6 col-md-6">
+					<label>Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span></label>
+					<div class="chevron-select-box">   
+					<select class="form-control" id="Aboriginal" name="Aboriginal">
+							<option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?> disabled>Please select</option>
+						 <?php
+									$Aboriginalcode  = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
+									$Aboriginal=json_decode($Aboriginalcode, true);						
+									foreach($Aboriginal  as $key => $value){
+										echo '<option value="'.$Aboriginal[$key]['ID'].'"';
+										if ($details['Aboriginal'] == $Aboriginal[$key]['ID']){ echo "selected='selected'"; } 
+										echo '> '.$Aboriginal[$key]['Name'].' </option>';
+									}
+								?>
+					   </select>
+					   </div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12">
+						<span class="light-lead-heading cairo" style="font-weight: 200; margin-bottom: 18px;">Phone numbers:</span>
+						<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Home</span>
+					</div>
+
 					<div class="col-xs-6 col-md-3">
 						<label for="">Country code</label>
 						<div class="chevron-select-box">
@@ -354,6 +379,10 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				</div>
 				
 				<div class="row">
+					<div class="col-xs-12">
+						<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Mobile</span>
+					</div>
+
 					<div class="col-xs-6 col-md-3">
 						<label for="">Country code</label>
 						<div class="chevron-select-box">
@@ -382,46 +411,26 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  >
 					</div>
 				</div>
-				
-				<div class="row">
-					<div class="col-xs-6 col-md-6">
-					<label>Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span></label>
-					<div class="chevron-select-box">   
-					<select class="form-control" id="Aboriginal" name="Aboriginal">
-							<option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?> disabled>Please select</option>
-						 <?php
-									$Aboriginalcode  = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
-									$Aboriginal=json_decode($Aboriginalcode, true);						
-									foreach($Aboriginal  as $key => $value){
-										echo '<option value="'.$Aboriginal[$key]['ID'].'"';
-										if ($details['Aboriginal'] == $Aboriginal[$key]['ID']){ echo "selected='selected'"; } 
-										echo '> '.$Aboriginal[$key]['Name'].' </option>';
-									}
-								?>
-					   </select>
-					   </div>
-					</div>
-				</div>
-				
+
 					<div class="col-xs-12"><span class="light-lead-heading cairo">Residential address:</span></div>
 				<div class="row">
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-12">
 					   <label for="">Building name</label>
 					   <input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['BuildingName'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
 					</div>
 					
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-12">
 					   <label for="">PO box</label>
 					   <input type="text" class="form-control" name="Pobox" <?php if (empty($details['Pobox'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['Pobox'].'"'; }?>>
 					</div>
 					
-					<div class="col-xs-12 col-md-3">
-						<label for="">Address 1<span class="tipstyle">*</span></label>
+					<div class="col-xs-12 col-md-6">
+						<label for="">Address line 1<span class="tipstyle">*</span></label>
 						<input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1" <?php if (empty($details['Unit'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Unit'].'"'; }?>>
 					</div>
 
-					<div class="col-xs-12 col-md-3">
-						<label for="">Address 2</label>
+					<div class="col-xs-12 col-md-6">
+						<label for="">Address line 2</label>
 						<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2" <?php if (empty($details['Street'])) {echo "placeholder='Address 2'";}   else{ echo 'value="'.$details['Street'].'"'; }?>>
 					</div>
 				</div>
@@ -490,23 +499,23 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 
 			<div class="row" id="shippingAddress">
 				<div class="row">
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-12">
 					   <label for="">Building name</label>
 					   <input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['BuildingName1'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 					</div>
 				
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-12">
 					   <label for="">PO box</label>
 					   <input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 					</div>
 					
-					<div class="col-xs-12 col-md-3">
-					   <label for="">Address 1<span class="tipstyle">*</span></label>
+					<div class="col-xs-12 col-md-6">
+					   <label for="">Address line 1<span class="tipstyle">*</span></label>
 					   <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Address 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?>>
 					</div>
 					
-					<div class="col-xs-12 col-md-3">
-					   <label for="">Address 2</label>
+					<div class="col-xs-12 col-md-6">
+					   <label for="">Address line 2</label>
 					   <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Street'])) {echo "placeholder='Billing Address 2'";}   else{ echo 'value="'.$details['Billing-Street'].'"'; }?>>
 					</div>
 				</div>
@@ -595,7 +604,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 			<div class="row">
 			<input type="hidden"  name="Status" <?php if (empty($details['Status'])) {echo "value='1'";}   else{ echo 'value="'.$details['Status'].'"'; }?>>
 				<div class="col-xs-12 col-md-6">
-					<label for="">Member ID(email address)<span class="tipstyle">*</span></label>
+					<label for="">Member ID (email address)<span class="tipstyle">*</span></label>
 					<input type="text" class="form-control" name="Memberid" <?php if (empty($details['Memberid'])) {echo "placeholder='Member no.'";}   else{ echo 'value="'.$details['Memberid'].'"';}?> >
 				</div>
 
@@ -729,7 +738,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID =array();}
 						
 				?>
-					<label>What is your favourite languages?</label>
+					<label>What languages do you speak in your professional practice?</label>
 					<div class="plus-select-box">
 					<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
 						<?php 
@@ -799,12 +808,12 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 
 				<div class="col-xs-12">
 					<input class="styled-checkbox" type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" >
-					<label class="light-font-weight" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE: </span>I want this workplace to be listed on the consumer choose.physio site</label>
+					<label class="light-font-weight" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
 				</div>
 
 				<div class="col-xs-12"> 
 					<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
-					<label class="light-font-weight" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE: </span>I want this workplace to be listed on the APA australian.physio site</label>	
+					<label class="light-font-weight" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>	
 				</div>
 
 				<div class="row">
@@ -863,17 +872,17 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				</div>-->
 
 				<div class="row">
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-12">
 						<label for="BuildingName">Building Name</label>
 						<input type="text" class="form-control" name="WBuildingName<?php echo $key;?>" id="WBuildingName<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WBuildingName'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WBuildingName'].'"'; }?>>
 					</div>
 
-					<div class="col-xs-12 col-md-3">
+					<div class="col-xs-12 col-md-6">
 						<label for="WAddress_Line_1">Address line 1<span class="tipstyle">*</span></label>
 						<input type="text" class="form-control" name="WAddress_Line_1<?php echo $key;?>" id="WAddress_Line_1<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Address_Line_1'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Address_Line_1'].'"'; }?>>
 					</div>
 
-					<div class="col-xs-12 col-md-3">
+					<div class="col-xs-12 col-md-6">
 						<label for="WAddress_Line_2">Address line 2</label>
 						<input type="text" class="form-control" name="WAddress_Line_2<?php echo $key;?>" id="Wstreet<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Address_Line_2'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Address_Line_2'].'"'; }?>>
 					</div>
@@ -1083,14 +1092,14 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<div class="row">
 						<div class="col-xs-12">
 						<input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio" value="" >
-						<label class="light-font-weight" for="Findphysio"><span class="note-text">NOTE: </span>I want this workplace to be listed on the consumer choose.physio site</label>
+						<label class="light-font-weight" for="Findphysio"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-lg-12">
 							<input class="styled-checkbox" type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
-							<label class="light-font-weight" for="Findabuddy0"><span class="note-text">NOTE: </span>I want this workplace to be listed on the APA australian.physio site</label>
+							<label class="light-font-weight" for="Findabuddy0"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>
 						</div>
 				    </div>
 
@@ -1145,17 +1154,17 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				</div>-->
 
 				<div class="row">
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-12">
 						<label for="BuildingName">Building Name</label>
 						<input type="text" class="form-control" name="WBuildingName0" id="WBuildingName0">
 					</div>
 
-					<div class="col-xs-12 col-md-3">
+					<div class="col-xs-12 col-md-6">
 						<label for="WAddress_Line_10">Address line 1<span class="tipstyle">*</span></label>
 						<input type="text" class="form-control" name="WAddress_Line_10" id="WAddress_Line_10">
 					</div>
 
-					<div class="col-xs-12 col-md-3">
+					<div class="col-xs-12 col-md-6">
 						<label for="WAddress_Line_20">Address line 2</label>
 						<input type="text" class="form-control" name="WAddress_Line_20" id="WAddress_Line_20">
 					</div>
@@ -1378,6 +1387,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<?php foreach($details['PersonEducation'] as $key => $value) :?>
 				<input type="hidden" name="ID<?php echo $key;?>" value="<?php  echo $details['PersonEducation'][$key]['ID'];?>">
 					<div id="additional<?php echo $key;?>">
+					<div class="col-xs-12"><div class="col-xs-12 separater"></div></div>
 						<div class="row">
 							<div class="row">
 								<div class="col-xs-12 col-sm-6">
@@ -1476,8 +1486,9 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 								</div>
 							</div>
 					</div>
+					</div>
 				<?php endforeach;?>
-				</div>
+				
 			<div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Back</span></a></div>
 		</div>
 	</div>

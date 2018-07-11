@@ -4,6 +4,29 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:200,300,500,700');
 @import url('https://fonts.googleapis.com/css?family=Cairo:200,300,400');
 
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+	border-radius: 10px;
+}
+
+::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+	border-radius: 10px;
+	background-image: -webkit-gradient(linear,
+									   left bottom,
+									   left top,
+									   color-stop(0.5, rgb(193,193,193)),
+									   color-stop(0.86, rgb(193,193,193)));
+}
 
 .customise_icon{
 	  display:none;
@@ -497,7 +520,7 @@ button.deletecardbutton {
 #block-block-220 .nav-tabs>li>a, #block-block-245 .nav-tabs>li>a{
     margin-right:0!important;
 	white-space: nowrap;
-	padding-left:0;
+    border: 0;
 }
 
 #block-block-220 .nav-tabs, #block-block-245 .nav-tabs, #block-block-249 .nav-tabs, #block-block-250 .nav-tabs, #block-block-251 .nav-tabs{
@@ -547,10 +570,7 @@ a.uploadImageButton {
 }
 
 .Membpaymentsiderbar .placeorder{
-    width: 222px;
-}
-#block-block-249 .Membpaymentsiderbar .placeorder{
-    width: 173px!important;
+    width: 100%;
 }
 
 .down10 .panel, .down3 .panel{
@@ -790,11 +810,11 @@ a.accent-btn{
 
 a[class^="join-details-button"], a.accent-right-btn{
     float: right;
+    color: #fff!important;
     margin-bottom: 20px;
     margin-top: 4px;
 	background-color: @bright-blue;
     border-width: 0px !important;
-    color: #fff;
     text-transform: uppercase;
     font-size: 12px;
     font-weight: 300;
@@ -1015,6 +1035,12 @@ a#insuranceControl{
             right: 10%;
             z-index: 99999;
         }
+        @media all and (max-width: @tablet-width) {
+            position: absolute;
+            top: -80px;
+            z-index: 99999;
+            right: 0;
+        }
         span.customise_background{
             padding: 5px 10px;
             background: #c3c8c8;
@@ -1123,6 +1149,9 @@ a#insuranceControl{
 	.dashboard_detail{
         margin: 40px 35px 40px;
         width: auto;
+        @media all and (max-width: @tablet-width) {
+            width: 100%;
+        }
         .member-info{
             .flex-cell{
                 padding: 5px 0;
@@ -1569,6 +1598,11 @@ a#insuranceControl{
  /*--YOUR DETAILS--*/
 
  #dashboard-right-content{
+    .dashboard_detail{
+        div[class^="down"]{
+            overflow: visible!important;
+        }
+    }
     #tabmenu{
         li{
             background: #c3c8c8;
@@ -1797,6 +1831,54 @@ form{
 }
 
 #dashboard-right-content{
+    @media all and (max-width:@larger-phone-width) {
+        .nav-chevron{
+            position: relative;
+            ul.nav-tabs{
+                min-height: 50px;
+                height: auto;
+                padding: 0;
+                .text-underline{
+                    visibility: visible;
+                    &:after{
+                        content: '\f078';
+                        font-family: 'fontawesome';
+                        color: #2aaddd;
+                        position: absolute;
+                        top: 15px;
+                        visibility: visible;
+                        font-size: 70%;
+                        padding-left: 10px;
+                    }
+                }
+                li{
+                    float: none;
+                    position: absolute;
+                    visibility: hidden;
+                }
+                &:hover{
+                    li{
+                        float: none;
+                        position: relative;
+                        visibility: visible;
+                    }
+                    .text-underline{
+                        &:after{
+                            content: '\f078';
+                            font-family: 'fontawesome';
+                            color: #2aaddd;
+                            position: absolute;
+                            top: 15px;
+                            visibility: visible;
+                            font-size: 70%;
+                            padding-left: 10px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     .label-list{
         label{
             font-size: 16px;
@@ -1817,8 +1899,11 @@ form{
         font-weight: 300;
     }
 
-    .paymentsidecredit .ui-selectmenu-button.ui-button{
-        background: none;
+    .paymentsidecredit{
+
+        .ui-selectmenu-button.ui-button{
+            background: none;
+        }
     }
 
     .ui-selectmenu-text{
@@ -2050,10 +2135,29 @@ form{
 }
 
 #dashboard-right-content{
+    .dashboard_detail{
+        @media all and (max-width: @larger-phone-width ) {
+            .nav-tabs{
+                min-height: 50px;
+                li{
+                    position: absolute;
+                    a{
+                        span{
+                            visibility: hidden;
+                        }
+                        .text-underline{
+                            visibility: visible;
+                        }
+                    }
+                }
+            }   
+        }
+    }
     #Paymentcard{
         letter-spacing: 5px;
     }
     .chevron-select-box{
+        position: relative;
         select{
             -webkit-appearance: none;
         }
@@ -2062,8 +2166,8 @@ form{
             font-family: 'fontawesome';
             color: #c3c8c8;
             position: absolute;
-            top: 53%;
-            right: 25px;
+            top: 33%;
+            right: 10px;
         }
         &.chevron-adjust{
             &::after{
@@ -2072,6 +2176,7 @@ form{
         }
     }
     .plus-select-box{
+        position: relative;
         select{
             -webkit-appearance: none;
         }
@@ -2080,8 +2185,8 @@ form{
             width: 15px;
             height: 15px;
             position: absolute;
-            top: 57%;
-            right: 25px;
+            top: 40%;
+            right: 10px;
             background-repeat:no-repeat;
             background-size:contain;
             background-position:center;
@@ -2147,6 +2252,19 @@ form{
 
 /*--JOIN THE APA--*/
 #join-review-form{
+    .review-main-container{
+        @media all and (max-width: @desktop-width){
+            width: 100%;
+        }
+    }
+    .Membpaymentsiderbar{
+        @media all and (max-width: @desktop-width){
+            width: 100%;
+        }
+        @media all and (max-width: @larger-phone-width){
+            padding: 15px;
+        }
+    }
     .join-apa-final{
         .table-header{
             border-bottom: 1px solid #b8bcbf;
@@ -2190,6 +2308,7 @@ form{
     }
     .chosen-container-multi .chosen-choices li.search-choice .search-choice-close{
         opacity: 0.5;
+        cursor: pointer;
         background-repeat:no-repeat;
         background-size:contain;
         background-position:center;

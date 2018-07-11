@@ -103,13 +103,13 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 				other material information to be disclosed<span class="tipstyle">*</span></label>
 				</div>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a id="insuranceControl"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton5"><span class="dashboard-button-name">Back</span></a></div>
+			<div class="col-xs-12">  <a id="insuranceControl"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton5"><span class="dashboard-button-name">Back</span></a></div>
 	</div>
 </form>
 <div id="insurancePopUp" style="display:none;">
 	<h3>Are you sure you want to submit your insurance information?</h3>
 	<a href="javascript:document.getElementById('join-insurance-form2').submit();" class="join-details-button5"><span class="dashboard-button-name">Yes</span></a>
-	<a target="_self" class="cancelInsuranceButton"><span class="dashboard-button-name">No</span></a>
+	<a target="_self" class="cancelInsuranceButton accent-btn"><span class="dashboard-button-name">No</span></a>
 	
 </div>
 <div id="insuranceTermsandConditions" class="modal fade" role="dialog">

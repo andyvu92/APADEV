@@ -594,7 +594,7 @@ if (isset($_SESSION['UserId'])):
 ?>>
                     </div>
                     <div class="col-xs-6 col-md-3">
-                        <label for="">preferred name</label>
+                        <label for="">Preferred name</label>
                         <input type="text" class="form-control"  name="Preferred-name" placeholder="Preferred name"<?php
     if (empty($details['Preferred-name'])) {
         echo "";
@@ -666,6 +666,33 @@ if (isset($_SESSION['UserId'])):
                        </select>
                        </div>
                     </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <label for="">Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span></label>
+                            </div>
+
+                            <div class="col-xs-12 col-md-6" style="margin: 0">
+                                <div class="chevron-select-box">
+                                    <select class="form-control" id="Aboriginal" name="Aboriginal">
+                                    <option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?> disabled>Please select</option>
+                                    <?php
+                                        $Aboriginalcode = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
+                                        $Aboriginal     = json_decode($Aboriginalcode, true);
+                                        foreach ($Aboriginal as $key => $value) {
+                                            echo '<option value="' . $Aboriginal[$key]['ID'] . '"';
+                                            if ($details['Aboriginal'] == $Aboriginal[$key]['ID']) {
+                                                echo "selected='selected'";
+                                            }
+                                            
+                                            echo '> ' . $Aboriginal[$key]['Name'] . ' </option>';
+                                        }
+                                        
+                                    ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 
                     <!--BREAK-->
                     <div class="row">
@@ -772,35 +799,6 @@ if (isset($_SESSION['UserId'])):
 ?>  >
                         </div>
                     </div>
-                    <!--BREAK-->
-
-                   <div class="row">
-
-                    <div class="col-xs-12">
-                        <label for="">Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span></label>
-                    </div>
-
-                    <div class="col-xs-6 col-md-3" style="margin: 0">
-                        <div class="chevron-select-box">
-                        <select class="form-control" id="Aboriginal" name="Aboriginal">
-							<option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?> disabled>Please select</option>
-                            <?php
-                                $Aboriginalcode = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
-                                $Aboriginal     = json_decode($Aboriginalcode, true);
-                                foreach ($Aboriginal as $key => $value) {
-                                    echo '<option value="' . $Aboriginal[$key]['ID'] . '"';
-                                    if ($details['Aboriginal'] == $Aboriginal[$key]['ID']) {
-                                        echo "selected='selected'";
-                                    }
-                                    
-                                    echo '> ' . $Aboriginal[$key]['Name'] . ' </option>';
-                                }
-                                
-                            ?>
-                       </select>
-                       </div>
-                    </div>
-                </div>
                     
                     <!--BREAK-->
 
@@ -808,7 +806,7 @@ if (isset($_SESSION['UserId'])):
 							<span class="light-lead-heading cairo" style="font-weight: 200">Residential address:</span>
 						</div>
                     
-                        <div class="col-xs-6 col-md-3">
+                        <div class="col-xs-12">
                             <label for="">Building name</label>
                             <input type="text" class="form-control"  name="BuildingName" placeholder='Building Name'<?php
     if (empty($details['BuildingName'])) {
@@ -818,7 +816,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                         </div>
-                        <div class="col-xs-6 col-md-3">
+                        <div class="col-xs-12">
                             <label for="">PO box</label>
                             <input type="text" class="form-control" name="Pobox" placeholder='PO box'<?php
     if (empty($details['Pobox'])) {
@@ -829,8 +827,8 @@ if (isset($_SESSION['UserId'])):
 ?>>
                         </div>
                     
-                    <div class="col-xs-12 col-md-3">
-                        <label for="">Address 1<span class="tipstyle">*</span></label>
+                    <div class="col-xs-12 col-md-6">
+                        <label for="">Address line 1<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1" placeholder='Address 1'<?php
     if (empty($details['Unit'])) {
         echo "";
@@ -839,8 +837,8 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                     </div>
-                    <div class="col-xs-12 col-md-3">
-                        <label for="">Address 2</label>
+                    <div class="col-xs-12 col-md-6">
+                        <label for="">Address line 2</label>
                         <input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2" placeholder='Address 2'<?php
     if (empty($details['Street'])) {
         echo "";
@@ -932,7 +930,7 @@ if (isset($_SESSION['UserId'])):
 
                     <div class="row" id="shippingAddress">
                         
-                            <div class="col-xs-6 col-md-3">
+                            <div class="col-xs-12">
                             <label for="">Building name</label>
                             <input type="text" class="form-control"  name="Billing-BuildingName" placeholder="Billing Building Name"<?php
     if (empty($details['BuildingName1'])) {
@@ -942,7 +940,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                             </div>
-                            <div class="col-xs-6 col-md-3">
+                            <div class="col-xs-12">
                             <label for="">PO box</label>
                             <input type="text" class="form-control" name="Billing-Pobox" placeholder='PO box'<?php
     if (!empty($details['Billing-Unit'])) {
@@ -953,8 +951,8 @@ if (isset($_SESSION['UserId'])):
 ?>>
                             </div>
                         
-                        <div class="col-xs-12 col-md-3">
-                           <label for="">Address 1<span class="tipstyle">*</span></label>
+                        <div class="col-xs-12 col-md-6">
+                           <label for="">Address line 1<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" placeholder='Billing Address 1'<?php
     if (empty($details['Billing-Unit'])) {
         echo "";
@@ -963,8 +961,8 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                         </div>
-                        <div class="col-xs-12 col-md-3">
-                           <label for="">Address 2</label>
+                        <div class="col-xs-12 col-md-6">
+                           <label for="">Address line 2</label>
                            <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" placeholder='Billing Address 2'<?php
     if (empty($details['Billing-Street'])) {
         echo "";
@@ -1333,7 +1331,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
     
 ?>
                <div class="col-xs-12 col-md-6">
-                    <label>What is your favourite languages?</label>
+                    <label>What languages do you speak in your professional practice?</label>
                     
                     <div class="plus-select-box">
                     <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
@@ -1388,7 +1386,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         //echo "checked";
     //}
 ?>>
-                <label for="Findpublicbuddy" class="font-weight-medium">NOTE: Please list my details in the public (visbile to other health professionals)</label>
+                <label for="Findpublicbuddy" class="light-font-weight">NOTE: Please list my details in the public (visbile to other health professionals)</label>
             </div>-->
 			
 			<div class="col-xs-12">
@@ -1423,48 +1421,48 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 			
             <div id="workplaceblocks">
             <?php
-    foreach ($details['Workplaces'] as $key => $value):
-?>
-               <div id="workplace<?php
-        echo $key;
-?>" class='tab-pane fade <?php
-        if ($key == 'Workplace0')
-            echo "in active ";
-?>'> 
-                <input type="hidden" name="WorkplaceID<?php
-        echo $key;
-?>" value="<?php
-        echo $details['Workplaces'][$key]['WorkplaceID'];
-?>">
+                    foreach ($details['Workplaces'] as $key => $value):
+                ?>
+                            <div id="workplace<?php
+                        echo $key;
+                ?>" class='tab-pane fade <?php
+                        if ($key == 'Workplace0')
+                            echo "in active ";
+                ?>'> 
+                                <input type="hidden" name="WorkplaceID<?php
+                        echo $key;
+                ?>" value="<?php
+                        echo $details['Workplaces'][$key]['WorkplaceID'];
+                ?>">
                     <div class="row">
                         <div class="col-xs-12">
                             <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Findphysio<?php
-        echo $key;
-?>" id="Findphysio<?php
-        echo $key;
-?>" value="<?php
-        echo $details['Workplaces'][$key]['Findphysio'];
-?>" >
-                            <label class="font-weight-medium" for="Findphysio<?php
-        echo $key;
-?>">I want this workplace to be listed on the consumer choose.physio site</label>
+                            echo $key;
+                    ?>" id="Findphysio<?php
+                            echo $key;
+                    ?>" value="<?php
+                            echo $details['Workplaces'][$key]['Findphysio'];
+                    ?>" >
+                                                <label class="light-font-weight" for="Findphysio<?php
+                            echo $key;
+                    ?>"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
                         </div>
 
                         <div class="col-xs-12"> 
                             <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Findabuddy<?php
-        echo $key;
-?>" id="Findabuddy<?php
-        echo $key;
-?>" value="<?php
-        echo $details['Workplaces'][$key]['Find-a-buddy'];
-?>" <?php
-        if ($details['Workplaces'][$key]['Find-a-buddy'] == "True") {
-            echo "checked";
-        }
-?>>
-                            <label class="font-weight-medium" for="Findabuddy<?php
-        echo $key;
-?>">I want this workplace to be listed on the APA australian.physio site</label>
+                                echo $key;
+                        ?>" id="Findabuddy<?php
+                                echo $key;
+                        ?>" value="<?php
+                                echo $details['Workplaces'][$key]['Find-a-buddy'];
+                        ?>" <?php
+                                if ($details['Workplaces'][$key]['Find-a-buddy'] == "True") {
+                                    echo "checked";
+                                }
+                        ?>>
+                            <label class="light-font-weight" for="Findabuddy<?php
+                                echo $key;
+                        ?>"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site </label>
                         </div>
 
                         <!--BREAK-->
@@ -1472,16 +1470,16 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                         <div class="col-xs-12 col-md-6">
                             <label for="Name-of-workplace">Name of workplace<span class="tipstyle">*</span></label>
                             <input type="text" class="form-control" name="Name-of-workplace<?php
-        echo $key;
-?>" id="Name-of-workplace<?php
-        echo $key;
-?>" <?php
-        if (empty($details['Workplaces'][$key]['Name-of-workplace'])) {
-            echo "placeholder='Name of workplace'";
-        } else {
-            echo 'value="' . $details['Workplaces'][$key]['Name-of-workplace'] . '"';
-        }
-?>>
+                                        echo $key;
+                                ?>" id="Name-of-workplace<?php
+                                        echo $key;
+                                ?>" <?php
+                                        if (empty($details['Workplaces'][$key]['Name-of-workplace'])) {
+                                            echo "placeholder='Name of workplace'";
+                                        } else {
+                                            echo 'value="' . $details['Workplaces'][$key]['Name-of-workplace'] . '"';
+                                        }
+                                ?>>
                         </div>
 
                         <div class="col-xs-12 col-md-6">
@@ -1525,41 +1523,9 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         
 ?>
 
-                            <!--<div class="row">
-                                <div class="col-xs-12 col-md-6">
-                                    <label>Workplace treatment area:</label>
-                                    
-                                    <div class="plus-select-box">
-                                    <select class="chosen-select" id="WTreatmentarea<?php
-        //echo $key;
-?>" name="WTreatmentarea<?php
-        //echo $key;
-?>[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
-                                    <?php
-        
-        // get interest area from Aptify via webserice return Json data;
-        
-        //$interestAreascode = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
-        //$interestAreas     = json_decode($interestAreascode, true);
-?>
-                                   <?php
-       // foreach ($interestAreas as $pair => $value) {
-           // echo '<option value="' . $interestAreas[$pair]["ID"] . '"';
-           // if (in_array($interestAreas[$pair]["ID"], $SpecialInterestAreaID)) {
-               // echo "selected='selected'";
-           // }
-            
-           // echo '> ' . $interestAreas[$pair]["Name"] . ' </option>';
-       // }
-        
-?>
-                                   </select>
-                                   </div>
-                                </div>
-                            </div>-->
                         <!--BREAK-->
 
-                        <div class="col-xs-12 col-md-3">
+                        <div class="col-xs-12">
                             <label for="BuildingName">Building Name</label>
                             <input type="text" class="form-control" name="WBuildingName<?php
         echo $key;
@@ -1573,7 +1539,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         }
 ?>>
                         </div>
-                        <div class="col-xs-12 col-md-3">
+                        <div class="col-xs-12 col-md-6">
                             <label for="WAddress_Line_1">Address line 1<span class="tipstyle">*</span></label>
                             <input type="text" class="form-control" name="WAddress_Line_1<?php
         echo $key;
@@ -1587,7 +1553,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         }
 ?>>
                         </div>
-                        <div class="col-xs-12 col-md-3">
+                        <div class="col-xs-12 col-md-6">
                             <label for="WAddress_Line_2">Address line 2</label>
                             <input type="text" class="form-control" name="WAddress_Line_2<?php
         echo $key;
@@ -1692,44 +1658,44 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 
                         <!--BREAK-->
 
-                        </div class="row">
+                        <div class="row">
                             <div class="col-xs-6 col-md-3">
                                 <label for="Wemail">Workplace email<span class="tipstyle">*</span></label>
                                 <input type="email" class="form-control" name="Wemail<?php
-        echo $key;
-?>" id="Wemail<?php
-        echo $key;
-?>"  <?php
-        if (empty($details['Workplaces'][$key]['Wemail'])) {
-            echo "placeholder='Workplace email'";
-        } else {
-            echo 'value="' . $details['Workplaces'][$key]['Wemail'] . '"';
-        }
-?>>
+                                        echo $key;
+                                ?>" id="Wemail<?php
+                                        echo $key;
+                                ?>"  <?php
+                                        if (empty($details['Workplaces'][$key]['Wemail'])) {
+                                            echo "placeholder='Workplace email'";
+                                        } else {
+                                            echo 'value="' . $details['Workplaces'][$key]['Wemail'] . '"';
+                                        }
+                                ?>>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <label for="Wwebaddress">Website</label>
                                 <input type="text" class="form-control" name="Wwebaddress<?php
-        echo $key;
-?>" id="Wwebaddress<?php
-        echo $key;
-?>" <?php
-        if (empty($details['Workplaces'][$key]['Wwebaddress'])) {
-            echo "placeholder='Website'";
-        } else {
-            echo 'value="' . $details['Workplaces'][$key]['Wwebaddress'] . '"';
-        }
-?>>
+                                        echo $key;
+                                ?>" id="Wwebaddress<?php
+                                        echo $key;
+                                ?>" <?php
+                                        if (empty($details['Workplaces'][$key]['Wwebaddress'])) {
+                                            echo "placeholder='Website'";
+                                        } else {
+                                            echo 'value="' . $details['Workplaces'][$key]['Wwebaddress'] . '"';
+                                        }
+                                ?>>
                             </div>
                         </div>
                             <div class="col-xs-6 col-md-3">
                                 <label for="">Country code</label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="WPhoneCountryCode<?php
-        echo $key;
-?>" name="WPhoneCountryCode<?php
-        echo $key;
-?>">
+                                            echo $key;
+                                    ?>" name="WPhoneCountryCode<?php
+                                            echo $key;
+                                    ?>">
                                 <?php
         $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
         $country     = json_decode($countrycode, true);
@@ -1846,140 +1812,140 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Electronic-claiming<?php
-        echo $key;
-?>" id="Electronic-claiming<?php
-        echo $key;
-?>" value="<?php
-        echo $details['Workplaces'][$key]['Electronic-claiming'];
-?>" <?php
-        if ($details['Workplaces'][$key]['Electronic-claiming'] == "True") {
-            echo "checked";
-        }
-?>> <label for="Electronic-claiming<?php
-        echo $key;
-?>">Electronic claiming</label>
+                                        echo $key;
+                                ?>" id="Electronic-claiming<?php
+                                        echo $key;
+                                ?>" value="<?php
+                                        echo $details['Workplaces'][$key]['Electronic-claiming'];
+                                ?>" <?php
+                                        if ($details['Workplaces'][$key]['Electronic-claiming'] == "True") {
+                                            echo "checked";
+                                        }
+                                ?>> <label for="Electronic-claiming<?php
+                                        echo $key;
+                                ?>">Electronic claiming</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Hicaps<?php
-        echo $key;
-?>" id="Hicaps<?php
-        echo $key;
-?>" value="<?php
-        echo $details['Workplaces'][$key]['Hicaps'];
-?>" <?php
-        if ($details['Workplaces'][$key]['Hicaps'] == "True") {
-            echo "checked";
-        }
-?>> <label for="Hicaps<?php
-        echo $key;
-?>">HICAPS</label>
+                                    echo $key;
+                            ?>" id="Hicaps<?php
+                                    echo $key;
+                            ?>" value="<?php
+                                    echo $details['Workplaces'][$key]['Hicaps'];
+                            ?>" <?php
+                                    if ($details['Workplaces'][$key]['Hicaps'] == "True") {
+                                        echo "checked";
+                                    }
+                            ?>> <label for="Hicaps<?php
+                                    echo $key;
+                            ?>">HICAPS</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Healthpoint<?php
-        echo $key;
-?>" id="Healthpoint<?php
-        echo $key;
-?>" value="<?php
-        echo $details['Workplaces'][$key]['Healthpoint'];
-?>" <?php
-        if ($details['Workplaces'][$key]['Healthpoint'] == "True") {
-            echo "checked";
-        }
-?>> <label for="Healthpoint<?php
-        echo $key;
-?>">Healthpoint</label>
+                                echo $key;
+                        ?>" id="Healthpoint<?php
+                                echo $key;
+                        ?>" value="<?php
+                                echo $details['Workplaces'][$key]['Healthpoint'];
+                        ?>" <?php
+                                if ($details['Workplaces'][$key]['Healthpoint'] == "True") {
+                                    echo "checked";
+                                }
+                        ?>> <label for="Healthpoint<?php
+                                echo $key;
+                        ?>">Healthpoint</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Departmentva<?php
-        echo $key;
-?>" id="Departmentva<?php
-        echo $key;
-?>" value="<?php
-        echo $details['Workplaces'][$key]['Departmentva'];
-?>" <?php
-        if ($details['Workplaces'][$key]['Departmentva'] == "True") {
-            echo "checked";
-        }
-?>> <label for="Departmentva<?php
-        echo $key;
-?>">Department of Vetarans' Affairs</label>
+                                    echo $key;
+                            ?>" id="Departmentva<?php
+                                    echo $key;
+                            ?>" value="<?php
+                                    echo $details['Workplaces'][$key]['Departmentva'];
+                            ?>" <?php
+                                    if ($details['Workplaces'][$key]['Departmentva'] == "True") {
+                                        echo "checked";
+                                    }
+                            ?>> <label for="Departmentva<?php
+                                    echo $key;
+                            ?>">Department of Vetarans' Affairs</label>
                             </div>
 
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Workerscompensation<?php
-        echo $key;
-?>" id="Workerscompensation<?php
-        echo $key;
-?>" value="<?php
-        echo $details['Workplaces'][$key]['Workerscompensation'];
-?>" <?php
-        if ($details['Workplaces'][$key]['Workerscompensation'] == "True") {
-            echo "checked";
-        }
-?>> <label for="Workerscompensation<?php
-        echo $key;
-?>">Workers compensation</label>
+                                        echo $key;
+                                ?>" id="Workerscompensation<?php
+                                        echo $key;
+                                ?>" value="<?php
+                                        echo $details['Workplaces'][$key]['Workerscompensation'];
+                                ?>" <?php
+                                        if ($details['Workplaces'][$key]['Workerscompensation'] == "True") {
+                                            echo "checked";
+                                        }
+                                ?>> <label for="Workerscompensation<?php
+                                        echo $key;
+                                ?>">Workers compensation</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Motora<?php
-        echo $key;
-?>" id="Motora<?php
-        echo $key;
-?>" value="<?php
-        echo $details['Workplaces'][$key]['Motora'];
-?>" <?php
-        if ($details['Workplaces'][$key]['Motora'] == "True") {
-            echo "checked";
-        }
-?>> <label for="Motora<?php
-        echo $key;
-?>">Motor accident compensation</label>
+                                        echo $key;
+                                ?>" id="Motora<?php
+                                        echo $key;
+                                ?>" value="<?php
+                                        echo $details['Workplaces'][$key]['Motora'];
+                                ?>" <?php
+                                        if ($details['Workplaces'][$key]['Motora'] == "True") {
+                                            echo "checked";
+                                        }
+                                ?>> <label for="Motora<?php
+                                        echo $key;
+                                ?>">Motor accident compensation</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Medicare<?php
-        echo $key;
-?>" id="Medicare<?php
-        echo $key;
-?>" value="<?php
-        echo $details['Workplaces'][$key]['Medicare'];
-?>" <?php
-        if ($details['Workplaces'][$key]['Medicare'] == "True") {
-            echo "checked";
-        }
-?>> <label for="Medicare<?php
-        echo $key;
-?>">Medicare Chronic Disease Management</label>
+                                        echo $key;
+                                ?>" id="Medicare<?php
+                                        echo $key;
+                                ?>" value="<?php
+                                        echo $details['Workplaces'][$key]['Medicare'];
+                                ?>" <?php
+                                        if ($details['Workplaces'][$key]['Medicare'] == "True") {
+                                            echo "checked";
+                                        }
+                                ?>> <label for="Medicare<?php
+                                        echo $key;
+                                ?>">Medicare Chronic Disease Management</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Homehospital<?php
-        echo $key;
-?>" id="Homehospital<?php
-        echo $key;
-?>" value="<?php
-        echo $details['Workplaces'][$key]['Homehospital'];
-?>" <?php
-        if ($details['Workplaces'][$key]['Homehospital'] == "True") {
-            echo "checked";
-        }
-?> > <label for="Homehospital<?php
-        echo $key;
-?>">Home and hospital visits</label>
+                                echo $key;
+                        ?>" id="Homehospital<?php
+                                echo $key;
+                        ?>" value="<?php
+                                echo $details['Workplaces'][$key]['Homehospital'];
+                        ?>" <?php
+                                if ($details['Workplaces'][$key]['Homehospital'] == "True") {
+                                    echo "checked";
+                                }
+                        ?> > <label for="Homehospital<?php
+                                echo $key;
+                        ?>">Home and hospital visits</label>
                             </div>
 
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Mobilephysiotherapist<?php
-        echo $key;
-?>" id="Mobilephysiotherapist<?php
-        echo $key;
-?>" value="<?php
-        echo $details['Workplaces'][$key]['MobilePhysio'];
-?>" <?php
-        if ($details['Workplaces'][$key]['MobilePhysio'] == "True") {
-            echo "checked";
-        }
-?>> <label for="Mobilephysiotherapist<?php
-        echo $key;
-?>">Mobile physiotherapist</label>
+                                    echo $key;
+                            ?>" id="Mobilephysiotherapist<?php
+                                    echo $key;
+                            ?>" value="<?php
+                                    echo $details['Workplaces'][$key]['MobilePhysio'];
+                            ?>" <?php
+                                    if ($details['Workplaces'][$key]['MobilePhysio'] == "True") {
+                                        echo "checked";
+                                    }
+                            ?>> <label for="Mobilephysiotherapist<?php
+                                    echo $key;
+                            ?>">Mobile physiotherapist</label>
                             </div>
                         </div>
 
@@ -1991,10 +1957,10 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                             <label>Numbers of hours worked<span class="tipstyle">*</span></label>    
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="Number-worked-hours<?php
-        echo $key;
-?>" name="Number-worked-hours<?php
-        echo $key;
-?>">
+                                    echo $key;
+                            ?>" name="Number-worked-hours<?php
+                                    echo $key;
+                            ?>">
                                 <?php
         $NumberOfHourscode = file_get_contents("sites/all/themes/evolve/json/NumberOfHours.json");
         $NumberOfHours     = json_decode($NumberOfHourscode, true);
@@ -2007,12 +1973,13 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
             echo '> ' . $NumberOfHours[$pair]['Name'] . ' </option>';
         }
         
-?>
+                                ?>
                                </select>
                                </div>
                             </div>
                         </div>
-
+					</div>
+					</div>
             <?php
     endforeach;
 ?>
@@ -2023,10 +1990,10 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
             
                 <div id="workplace0" class='tab-pane fade in active'>
                     <input type="hidden" name="WorkplaceID0" value="-1">                
-                    <div class="row"><div class="col-lg-6"></div><div class="col-lg-6"> <label for="Findphysio"><strong>NOTE: </strong>I want this workplace to be listed on the consumer choose.physio site</label>
+                    <div class="row"><div class="col-lg-6"></div><div class="col-lg-6"> <label class="light-font-weight" for="Findphysio"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
                     <input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio" value="" ></div></div>
                     <div class="row">
-                        <div class="col-lg-12"> <label for="Findabuddy0"><strong>NOTE: </strong>I want this workplace to be listed on the APA australian.physio site</label>
+                        <div class="col-lg-12"> <label class="light-font-weight" for="Findabuddy0"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>
                             <input class="styled-checkbox" type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
                         </div>
                     </div>
@@ -2093,29 +2060,29 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                     </div>
                 </div>-->
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-xs-12">
                         <label for="BuildingName">Building Name</label>
                         <input type="text" class="form-control" name="WBuildingName0" id="WBuildingName0">
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-xs-12 col-md-6">
                     <label for="WAddress_Line_10">Address line 1<span class="tipstyle">*</span></label>
                     <input type="text" class="form-control" name="WAddress_Line_10" id="WAddress_Line_10">
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-xs-12 col-md-6">
                     <label for="WAddress_Line_20">Address line 2</label>
                     <input type="text" class="form-control" name="WAddress_Line_20" id="WAddress_Line_20">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-3">
+                    <div class="col-xs-12 col-sm-6 col-md-3">
                         <label for="Wcity">City/Town<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control" name="Wcity0" id="Wcity0">
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-xs-12 col-sm-6 col-md-3">
                         <label for="Wpostcode">Postcode<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control" name="Wpostcode0" id="Wpostcode0">
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-xs-12 col-sm-6 col-md-3">
                         <label for="Wstate">State<span class="tipstyle">*</span></label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="Wstate0" name="Wstate0">
@@ -2132,7 +2099,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                        </select>
                        </div>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-xs-12 col-sm-6 col-md-3">
                         <label for="Wcountry">Country<span class="tipstyle">*</span></label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="Wcountry0" name="Wcountry0">
@@ -2153,11 +2120,11 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-xs-12 col-md-6">
                         <label for="Wemail">Workplace email<span class="tipstyle">*</span></label>
                         <input type="email" class="form-control" name="Wemail0" id="Wemail0">
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-xs-12 col-md-6">
                         <label for="Wwebaddress">Website</label>
                         <input type="text" class="form-control" name="Wwebaddress0" id="Wwebaddress0">
                     </div>
@@ -2165,7 +2132,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                 </div>
                 <div class="row">
                             
-                            <div class="col-lg-2">
+                            <div class="col-xs-6 col-md-3">
                                 <label for="">Country code</label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="WPhoneCountryCode0" name="WPhoneCountryCode0">
@@ -2184,15 +2151,15 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                                </select>
                                </div>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-xs-6 col-md-3">
                                 <label for="">Area code</label>
                                 <input type="text" class="form-control" name="WPhoneAreaCode0" maxlength="5">
                             </div>
-                            <div class="col-lg-4">
+                            <div class="col-xs-12 col-md-3">
                                 <label for="">Phone number</label>
                                 <input type="text" class="form-control" name="WPhone0">
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-xs-12 col-md-3">
                                 <label for="">Extention Number</label>
                                 <input type="text" class="form-control" name="WPhoneExtentions0">
                             </div>
@@ -2318,11 +2285,14 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>" value="<?php
         echo $details['PersonEducation'][$key]['ID'];
 ?>">
+                        <div class="col-xs-12"><div class="col-xs-12 separater"></div></div>
                         <div class="row">
-                            <div class="col-xs-6 col-md-3">
+                        
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
                                 <label for="Udegree<?php
         echo $key;
-?>">Degree<span class="tipstyle">*</span></label>
+?>">Level of qualification<span class="tipstyle">*</span></label>
                                 <?php
         $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
         $degree             = json_decode($degreecode, true);
@@ -2368,8 +2338,10 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         endif;
 ?>
                            </div>
+                        </div>
 
-                            <div class="col-xs-6 col-md-3">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
                                 <label for="Undergraduateuniversity-name<?php
         echo $key;
 ?>">University name<span class="tipstyle">*</span></label>
@@ -2418,8 +2390,35 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         endif;
 ?>
                            </div>
+                        </div>
 
-                            <div class="col-xs-6 col-md-3">
+                            <div class="col-xs-6 col-sm-3 col-md-3">
+                                                            <label for="Ugraduate-yearattained<?php
+                                    echo $key;
+                            ?>">Year attained<span class="tipstyle">*</span></label>
+                                                            <div class="chevron-select-box">
+                                                            <select class="form-control" name="Ugraduate-yearattained<?php
+                                    echo $key;
+                            ?>" id="Ugraduate-yearattained<?php
+                                    echo $key;
+                            ?>">
+                                                            <?php
+                                    $y = date("Y") + 15;
+                                    for ($i = 1940; $i <= $y; $i++) {
+                                        echo '<option value="' . $i . '"';
+                                        if ($details['PersonEducation'][$key]['Yearattained'] == $i) {
+                                            echo 'selected="selected"';
+                                        }
+                                        
+                                        echo '>' . $i . '</option>';
+                                    }
+                                    
+                            ?>
+                               </select>
+                               </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-9 col-md-9">
                                 <label for="Ugraduate-country<?php
         echo $key;
 ?>">Country<span class="tipstyle">*</span></label>
@@ -2447,31 +2446,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                                </select>
                                </div>
                             </div>
-                            <div class="col-xs-6 col-md-3">
-                                <label for="Ugraduate-yearattained<?php
-        echo $key;
-?>">Year attained<span class="tipstyle">*</span></label>
-                                <div class="chevron-select-box">
-                                <select class="form-control" name="Ugraduate-yearattained<?php
-        echo $key;
-?>" id="Ugraduate-yearattained<?php
-        echo $key;
-?>">
-                                <?php
-        $y = date("Y") + 15;
-        for ($i = 1940; $i <= $y; $i++) {
-            echo '<option value="' . $i . '"';
-            if ($details['PersonEducation'][$key]['Yearattained'] == $i) {
-                echo 'selected="selected"';
-            }
-            
-            echo '>' . $i . '</option>';
-        }
-        
-?>
-                               </select>
-                               </div>
-                            </div>
+                            
                         </div>
                     </div>
                 <?php
@@ -2527,7 +2502,7 @@ if (!isset($_SESSION['UserId'])):
                            <input type="text" class="form-control"  name="Firstname">
                         </div>
                         <div class="col-xs-6 col-md-3">
-                           <label for="">preferred name</label>
+                           <label for="">Preferred name</label>
                            <input type="text" class="form-control"  name="Preferred-name">
                         </div>
                         <div class="col-xs-6 col-md-3">
@@ -2565,6 +2540,26 @@ if (!isset($_SESSION['UserId'])):
 ?>
                           </select>
                           </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                            <label for="">Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span></label>
+                                <div class="chevron-select-box">
+                                <select class="form-control" id="Aboriginal" name="Aboriginal">
+									<option value="" selected disabled>Please select</option>
+                                <?php
+                                    $Aboriginalcode = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
+                                    $Aboriginal     = json_decode($Aboriginalcode, true);
+                                    foreach ($Aboriginal as $key => $value) {
+                                        echo '<option value="' . $Aboriginal[$key]['ID'] . '"';
+                                        echo '> ' . $Aboriginal[$key]['Name'] . ' </option>';
+                                    }
+                                    
+                                ?>
+                               </select>
+                               </div>
+                            </div>
                         </div>
 
                             <!--BREAK-->
@@ -2639,49 +2634,29 @@ if (!isset($_SESSION['UserId'])):
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-xs-6 col-md-3">
-                            <label for="">Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span></label>
-                                <div class="chevron-select-box">
-                                <select class="form-control" id="Aboriginal" name="Aboriginal">
-									<option value="" selected disabled>Please select</option>
-                                <?php
-    $Aboriginalcode = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
-    $Aboriginal     = json_decode($Aboriginalcode, true);
-    foreach ($Aboriginal as $key => $value) {
-        echo '<option value="' . $Aboriginal[$key]['ID'] . '"';
-        echo '> ' . $Aboriginal[$key]['Name'] . ' </option>';
-    }
-    
-?>
-                               </select>
-                               </div>
-                            </div>
-                        </div>
-
                     <!--BREAK-->
 
                         <div class="col-xs-12">
 							<span class="light-lead-heading cairo" style="font-weight: 200">Residential address:</span>
                         </div>
                             
-                        <div class="col-xs-6 col-md-3">
+                        <div class="col-xs-12">
                             <label for="">Building name</label>
                             <input type="text" class="form-control"  name="BuildingName">
                         </div>
 
-                        <div class="col-xs-6 col-md-3">
+                        <div class="col-xs-12">
                         <label for="">PO box</label>
                         <input type="text" class="form-control" name="Pobox">
                         </div>
 
-                        <div class="col-xs-12 col-md-3">
-                        <label for="">Address 1<span class="tipstyle">*</span></label>
+                        <div class="col-xs-12 col-md-6">
+                        <label for="">Address line 1<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
                         </div>
 
-                        <div class="col-xs-12 col-md-3">
-                            <label for="">Address 2</label>
+                        <div class="col-xs-12 col-md-6">
+                            <label for="">Address line 2</label>
                             <input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
                         </div>
 
@@ -2748,22 +2723,22 @@ if (!isset($_SESSION['UserId'])):
                         </div>
                         
                     <div class="row" id="shippingAddress">
-                        <div class="col-xs-6 col-md-3">
+                        <div class="col-xs-12">
                             <label for="">Building name</label>
                             <input type="text" class="form-control"  name="Billing-BuildingName">
                         </div>
 
-                        <div class="col-xs-6 col-md-3">
+                        <div class="col-xs-12">
                             <label for="">PO box</label>
                             <input type="text" class="form-control" name="Billing-Pobox" id="Billing-Pobox">
                         </div>
 
-                        <div class="col-xs-12 col-md-3">
+                        <div class="col-xs-12 col-md-6">
                            <label for="">Address Line 1<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1">
                         </div>
 
-                        <div class="col-xs-12 col-md-3">
+                        <div class="col-xs-12 col-md-6">
                            <label for="">Address Line 2</label>
                            <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2">
                         </div>
@@ -2854,7 +2829,7 @@ if (!isset($_SESSION['UserId'])):
             <div class="down2" style="display:none;" >
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
-                        <label for="">Member ID(email address)<span class="tipstyle">*</span></label>
+                        <label for="">Member ID (email address)<span class="tipstyle">*</span></label>
                         <input type="email" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)">
                     <div id="checkMessage"></div>
                     <script>
@@ -3117,12 +3092,12 @@ if (!isset($_SESSION['UserId'])):
 					
 					<div class="col-xs-12">
                         <input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio" value="" >
-                        <label for="Findphysio"><strong>NOTE: </strong>I want this workplace to be listed on the consumer choose.physio site</label>
+                        <label class="light-font-weight" for="Findphysio"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
 					</div>
 					
                     <div class="col-xs-12">
                         <input class="styled-checkbox" type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
-                        <label for="Findabuddy0"><strong>NOTE: </strong>I want this workplace to be listed on the APA australian.physio site</label>
+                        <label class="light-font-weight" for="Findabuddy0"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>
                     </div>
 
                 <div class="row">
@@ -3155,15 +3130,15 @@ if (!isset($_SESSION['UserId'])):
 				</div>
 				
                 <div class="row">
-                    <div class="col-xs-6 col-md-3">
+                    <div class="col-xs-12">
                         <label for="BuildingName">Building Name</label>
                         <input type="text" class="form-control" name="WBuildingName0" id="WBuildingName0">
                     </div>
-                    <div class="col-xs-12 col-md-3">
+                    <div class="col-xs-12 col-md-6">
                     <label for="WAddress_Line_10">Address line 1<span class="tipstyle">*</span></label>
                     <input type="text" class="form-control" name="WAddress_Line_10" id="WAddress_Line_10">
                     </div>
-                    <div class="col-xs-12 col-md-3">
+                    <div class="col-xs-12 col-md-6">
                     <label for="WAddress_Line_20">Address line 2</label>
                     <input type="text" class="form-control" name="WAddress_Line_20" id="WAddress_Line_20">
                     </div>
@@ -3455,20 +3430,20 @@ endif;
               var i = Number(number +1);
             var j = Number(number +2);
             $('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ i+'</a><span class="deletewp'+ i + '">Remove</span></li>' );
-            $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
+            $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade">');
             $('#wpnumber').text(i);
             $('input[name=wpnumber]').val(j);
             var sessionvariable = '<?php
-echo json_encode($_SESSION["workplaceSettings"]);
-?>';
-            var sessionInterest = '<?php
-echo json_encode($_SESSION["interestAreas"]);
-?>';
-           var sessionLanguage = '<?php
-echo json_encode($_SESSION["Language"]);
-?>';
-           var sessionCountry = <?php
-echo json_encode($_SESSION['country']);
+            echo json_encode($_SESSION["workplaceSettings"]);
+            ?>';
+                        var sessionInterest = '<?php
+            echo json_encode($_SESSION["interestAreas"]);
+            ?>';
+                    var sessionLanguage = '<?php
+            echo json_encode($_SESSION["Language"]);
+            ?>';
+                    var sessionCountry = <?php
+            echo json_encode($_SESSION['country']);
 ?>;
           $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry});
             $(".chosen-select").chosen({width: "100%"});
