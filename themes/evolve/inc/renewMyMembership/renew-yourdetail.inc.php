@@ -1387,7 +1387,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<?php foreach($details['PersonEducation'] as $key => $value) :?>
 				<input type="hidden" name="ID<?php echo $key;?>" value="<?php  echo $details['PersonEducation'][$key]['ID'];?>">
 					<div id="additional<?php echo $key;?>">
-					<div class="col-xs-12"><div class="col-xs-12 separater"></div></div>
+					<div class="col-xs-12 space-line"><div class="col-xs-12 separater"></div></div>
 						<div class="row">
 							<div class="row">
 								<div class="col-xs-12 col-sm-6">

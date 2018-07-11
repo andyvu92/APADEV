@@ -1722,7 +1722,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<div id="additional<?php echo $key;?>">
 					    <input type="hidden" name="ID<?php echo $key;?>" value="<?php  echo $details['PersonEducation'][$key]['ID'];?>">
 						
-						<div class="col-xs-12"><div class="col-xs-12 separater"></div></div>
+						<div class="col-xs-12 space-line"><div class="col-xs-12 separater"></div></div>
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
 								<label for="Udegree<?php echo $key;?>">Level of qualification<span class="tipstyle">*</span></label>

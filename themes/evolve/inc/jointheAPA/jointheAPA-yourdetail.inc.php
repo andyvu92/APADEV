@@ -1389,7 +1389,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                 <label for="Findpublicbuddy" class="light-font-weight">NOTE: Please list my details in the public (visbile to other health professionals)</label>
             </div>-->
 			
-			<div class="col-xs-12">
+			<div class="row">
             <ul class="nav nav-tabs" id="tabmenu">
             <?php
 				foreach ($details['Workplaces'] as $key => $value):
@@ -2285,7 +2285,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 ?>" value="<?php
         echo $details['PersonEducation'][$key]['ID'];
 ?>">
-                        <div class="col-xs-12"><div class="col-xs-12 separater"></div></div>
+                        <div class="col-xs-12 space-line"><div class="col-xs-12 separater"></div></div>
                         <div class="row">
                         
                         <div class="row">

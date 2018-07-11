@@ -523,10 +523,6 @@ button.deletecardbutton {
     border: 0;
 }
 
-#block-block-220 .nav-tabs, #block-block-245 .nav-tabs, #block-block-249 .nav-tabs, #block-block-250 .nav-tabs, #block-block-251 .nav-tabs{
-    border-bottom:none!important;
-	margin-bottom:10px;
-}
 #block-block-220 .nav-tabs>li>a:hover{
     border: 0;
 }
@@ -809,7 +805,8 @@ a.accent-btn{
 }
 
 a[class^="join-details-button"], a.accent-right-btn{
-    float: right;
+    float: none;
+    display: inline-block;
     color: #fff!important;
     margin-bottom: 20px;
     margin-top: 4px;
@@ -824,6 +821,15 @@ a[class^="join-details-button"], a.accent-right-btn{
         opacity: 0.9;
         cursor: pointer;
     }
+    &.float-right{
+        float: right;
+    }
+}
+
+a.join-details-button1, a.join-details-button2, 
+a.join-details-button3, a.join-details-button4,
+a.join-details-button5, a.join-details-button7{
+    float: right;
 }
 
 a[class^="your-details-prevbutton"], a.accent-left-btn{
@@ -1815,10 +1821,6 @@ form{
 }
 
 //-----------ACCOUNT------------
-#block-block-220 .nav-tabs{
-    padding-left: 15px;
-    padding-right: 15px;
-}
 
 #block-block-220 .payment-line{
     flex-direction: row;
@@ -2036,9 +2038,10 @@ form{
           transform: scale(1);
       }
     #additional0{
-        .separater{
+        .separater, .space-line{
             display: none;
         }
+
     }
 }
 
@@ -2316,6 +2319,16 @@ form{
         &:hover{
             opacity: 1;
         }
+    }
+    #insurancePopUp{
+        text-align: center;
+    }
+    #tabmenu{
+        border-bottom: 1px solid #ddd;
+        border-top: 1px solid #ddd;
+    }
+    .nav-tabs{
+        border: 0;
     }
 }
 
