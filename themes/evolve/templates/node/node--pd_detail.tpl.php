@@ -1485,7 +1485,7 @@ if($resultdata['result']) {
 			   $today = date("j, n, Y");
 			   $t = $closedate > $today;
 			   if($t) {
-				   echo '<a class="add-to-card" disabled><span>Registration closed</span></a>';
+				   echo '<a class="add-to-wishlist" style="margin-top: 15px;"><span>Registration closed</span></a>';
 			   } elseif ($userTag =="0"){
 				   echo '<a class="add-to-card" id="registerPDUserButton"><span>Add to cart</span></a>';	
 			   } else {
