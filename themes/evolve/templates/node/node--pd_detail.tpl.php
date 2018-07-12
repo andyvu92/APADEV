@@ -540,8 +540,23 @@ if($resultdata['result']) {
 		 
 		 ?></p></div>
 		<?php 
-			//$bdata = explode(" ",$pd_detail['Sdate']);
-			//$edata = explode(" ",$pd_detail['Edate']);
+			$bdata = explode(" ",$pd_detail['Sdate']);
+			$edata = explode(" ",$pd_detail['Edate']);
+			$dateOutput = "";
+			$t = strtotime($bdata[0]);
+			$j = strtotime($edata[0]);
+			$dateStart = date("d",strtotime($t));
+			if($bdate[0] == $edata[0]) {
+				if(date("F",$t) != date("F",$j)) {
+					$dateOutput = date("D d M",$t)."<br>- ".date("D d M",$j);
+				} else {
+					$dateOutput = date("l",$t)."<br>".date("d F",$t);
+				}
+			} elseif(date("F",$t) != date("F",$j)) {
+				$dateOutput = date("D d M",$t)."<br>- ".date("D d M",$j);
+			} else {
+				$dateOutput = date("D d",$t)." - ".date("D d",$j)."<br>".date("F",$t);
+			}
 			//if Aptify give the StartDate&EndDate as timestamp, use below code to get the time and start date and end date;
 			//echo date('d-m-Y h:i:s',$bdata);
 			
@@ -647,7 +662,7 @@ if($resultdata['result']) {
 
                                <?php
     if(strlen($pd_detail['AddressLine1']) > 5){
-   echo ' <iframe
+   echo ' <iframe 
   width="600"
   height="450"
   frameborder="0" style="border:0"
@@ -1334,13 +1349,13 @@ if($resultdata['result']) {
 				<div class="flex-cell">
 					<div class="flex-col-3">
 						<span class="calendar-icon">
-							<span class="calendar-date">12</span>
+							<span class="calendar-date"><?php echo $dateStart ?></span>
 						</span>
 					</div>
 					<div class="flex-col-9">
 						<span class="session-date"> 
 							<!--<span class="weekdate">Wednesday,</span><span class="month-date">12 December</span>-->
-							<?php echo $bdata[0]." - ".$edata[0] ; ?>
+							<?php echo $dateOutput; ?>
 						</span>
 					</div>
 				</div>

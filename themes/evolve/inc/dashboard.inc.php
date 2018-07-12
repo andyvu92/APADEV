@@ -337,33 +337,13 @@ $background = getBackgroundImage($userID);
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bottom-space bottom-section flex-column">
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
 				<span class="small-heading">Your National Groups</span>
-				<div class="col-xs-12 dashboard-content-bottom">
-					<div id="myCarousel" class="carousel slide" data-ride="carousel">
-					<!-- Indicators 
-					<ol class="carousel-indicators">
-					<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-					<li data-target="#myCarousel" data-slide-to="1"></li>
-					<li data-target="#myCarousel" data-slide-to="2"></li>
-					</ol>
-					-->
-					<!-- Wrapper for slides -->
-						<div class="carousel-inner">
+				<div class="col-xs-12 dashboard-content-bottom ng-icons-group">
 
-						<!-----edit----><?php 
+						<?php 
 						nationalIcons();
 						?>
-						</div>
-					<!-- Left and right controls -->
-						<a class="left carousel-control" href="#myCarousel" data-slide="prev">
-						<span class="glyphicon glyphicon-chevron-left"></span>
-						<span class="sr-only">Previous</span>
-						</a>
-						<a class="right carousel-control" href="#myCarousel" data-slide="next">
-						<span class="glyphicon glyphicon-chevron-right"></span>
-						<span class="sr-only">Next</span>
-						</a>
+
 					</div>
-				</div>
 				<a class="accent-button" href="#"><span>Join more</span></a>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">

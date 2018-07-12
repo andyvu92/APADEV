@@ -43,40 +43,74 @@ function nationalIcons(){
 		
 		//$userIcons = array(0,1,2 ,3,3,5,6,7);
 		$NGs = $nationalGroups["results"];
-		
-        $length = sizeof($NGs);		
-	    $k =0;
-	    for($i=0; $i<$length/4; $i++){
-			if($i==0){
-					echo "<div class='item active'>";
-				
-					}
-					else{
-					echo "<div class='item'>";
-					}
-				   
-			echo "<nav class='navbar'>";
-			echo "<div class='container-fluid'>";
-			echo "<ul class='nav navbar-nav'>";
-	  	  	for($j=$k; $j<$k+4; $j++){
+	   
+		$length = sizeof($NGs);	
+	
+		$k =0;
+		if($length > 6){
+			for($i=0; $i<$length/4; $i++){
+				echo '<div id="myCarousel" class="carousel slide" data-ride="carousel">';
+				echo '<div class="carousel-inner">';
+				if($i==0){
+						echo "<div class='item active'>";
+						}
+						else{
+						echo "<div class='item'>";
+						}
+					   
+				echo "<div class='flex-container flex-flow-row'>";
+				echo "<div class='flex-cell'>";
+					for($j=$k; $j<$k+4; $j++){
+					if($j<$length){
+						echo "<div class='flex-col-3'>";
+						echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons">';
+						echo '<i class="fa '.$NGs[$j]["NGid"].'">';
+						/*
+						$num = intval($userIcons[$j]);
+						echo '<a href="'.$nationalIcons[$num][0].'" class="icons">';
+						echo '<i class="fa '.$nationalIcons[$num][1].'">';
+						*/
+						echo "</i>";
+						echo "</a>";
+						echo "</div>";}
+				}
+				echo "</div>";
+				echo "</div>";	
+				echo "</div>";
+				echo "</div>";
+				echo '<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span>
+				<span class="sr-only">Previous</span>
+				</a>
+				<a class="right carousel-control" href="#myCarousel" data-slide="next">
+				<span class="glyphicon glyphicon-chevron-right"></span>
+				<span class="sr-only">Next</span>
+				</a>';
+				echo "</div>";
+				$k=$i+4;
+			}
+		}
+	    else{
+			echo "<div class='flex-container flex-flow-row'>";
+			echo "<div class='flex-cell'>";
+				for($j=$k; $j<$k+4; $j++){
 				if($j<$length){
-					echo "<li>";
+					echo "<div class='flex-col-6 item-container'>";
 					echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons">';
-                    echo '<i class="fa '.$NGs[$j]["NGid"].'">';
+					echo '<i class="fa '.$NGs[$j]["NGid"].'">';
 					/*
 					$num = intval($userIcons[$j]);
-                    echo '<a href="'.$nationalIcons[$num][0].'" class="icons">';
-                    echo '<i class="fa '.$nationalIcons[$num][1].'">';
+					echo '<a href="'.$nationalIcons[$num][0].'" class="icons">';
+					echo '<i class="fa '.$nationalIcons[$num][1].'">';
 					*/
-                    echo "</i>";
-                    echo "</a>";
-					echo "</li>";}
+					echo "</i>";
+					echo "<span class='ng-title'>".$NGs[$j]["NGtitle"]."</span>";
+					echo "</a>";
+					echo "</div>";
+					}
 			}
-			echo "</ul>";
 			echo "</div>";
-			echo "</nav>";	
 			echo "</div>";
-			$k=$i+4;
 		}
 }
 /*PD detail page display product price fuction*/
