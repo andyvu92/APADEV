@@ -1402,7 +1402,12 @@ if($resultdata['result']) {
 					}
 				}
 				else{
-					foreach($pricelistGet as $key=>$value){echo $key.":&nbsp;$".$value."<br>";}
+					foreach($pricelistGet as $key=>$value){
+						$x = explode(" ", $key);
+						$y = str_replace($x[0], "", $key);
+						echo "key: $key, x: $x, y: $y <br>";
+						echo $y.":&nbsp;$".$value."<br>";
+					}
 				}	
 				?>
 			</span>
