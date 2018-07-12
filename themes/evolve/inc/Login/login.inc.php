@@ -63,7 +63,7 @@
 			//echo "log-in fail";
 		} else {
 			// logged in
-			print_r($result);
+			//print_r($result);
 			
 			$id= $result["UserId"];
 			$UserName= $result["UserName"];
@@ -95,7 +95,7 @@
 		// Response -
 		// 
 		$result = GetAptifyData("8", "logout");
-		print_r($result);
+		//print_r($result);
 		deleteSession();
 		echo "logged out";
 	}

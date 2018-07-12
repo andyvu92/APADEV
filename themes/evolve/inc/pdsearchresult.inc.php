@@ -38,10 +38,10 @@ if(isset($_POST["State"])) {	$request["State"] = $_POST["State"];
 } else { $request["State"] = ""; }
 if(isset($_POST["Suburb"])) {	$request["Suburb"] = $_POST["Suburb"];
 } else { $request["Suburb"] = ""; }
-if(isset($_POST["Begindate"])) {	$request["Begindate"] = str_replace("-","/",$_POST["Begindate"]);
-} else { $request["Begindate"] = ""; }
-if(isset($_POST["Enddate"])) {	$request["Enddate"] = $_POST["Enddate"];
-} else { $request["Enddate"] = ""; }
+if(isset($_POST["Begindate"])) {	$request["BeginDate"] = str_replace("-","/",$_POST["Begindate"]);
+} else { $request["BeginDate"] = ""; }
+if(isset($_POST["Enddate"])) {	$request["EndDate"] = $_POST["Enddate"];
+} else { $request["EndDate"] = ""; }
 if(isset($_GET["pagesize"])) {
 	$request["PageSize"] = $_GET["pagesize"];
 } else { // default page size
