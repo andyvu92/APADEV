@@ -3429,7 +3429,7 @@ endif;
             var number = Number($('#wpnumber').text());
               var i = Number(number +1);
             var j = Number(number +2);
-            $('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ j+'</a><span class="deletewp'+ i + '">Remove</span></li>' );
+            $('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ j+'</a><span class="deletewp'+ i + '"></span></li>' );
             $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade">');
             $('#wpnumber').text(i);
             $('input[name=wpnumber]').val(j);

@@ -138,10 +138,27 @@
     }
     .chosen-container-multi{
         .chosen-choices{
-            height: 40px;
             background: none;
             border: 1px solid #665f5e;
             padding: 0;
+            li.search-choice{
+                background: rgba(58, 60, 60,0.8);
+                margin: 8px;
+                &:nth-child(1){
+                    margin-left: 14px;
+                }
+                .search-choice-close{
+                    opacity: 0.5;
+                    cursor: pointer;
+                    background-repeat:no-repeat;
+                    background-size:contain;
+                    background-position:center;
+                    background-image:url('/sites/default/files/dashboard-icon/close-icon.png');
+                    &:hover{
+                        opacity: 1;
+                    }
+                }
+            }
         }
     }
     span{
