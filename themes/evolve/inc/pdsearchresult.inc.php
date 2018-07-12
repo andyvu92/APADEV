@@ -38,9 +38,9 @@ if(isset($_POST["State"])) {	$request["State"] = $_POST["State"];
 } else { $request["State"] = ""; }
 if(isset($_POST["Suburb"])) {	$request["Suburb"] = $_POST["Suburb"];
 } else { $request["Suburb"] = ""; }
-if(isset($_POST["Begindate"])) {	$request["BeginDate"] = str_replace("-","/",$_POST["Begindate"]);
+if(isset($_POST["Begindate"])) { $request["BeginDate"] = str_replace("-","/",$_POST["Begindate"]);
 } else { $request["BeginDate"] = ""; }
-if(isset($_POST["Enddate"])) {	$request["EndDate"] = $_POST["Enddate"];
+if(isset($_POST["Enddate"])) {	$request["EndDate"] = str_replace("-","/",$_POST["Enddate"]);
 } else { $request["EndDate"] = ""; }
 if(isset($_GET["pagesize"])) {
 	$request["PageSize"] = $_GET["pagesize"];
@@ -61,7 +61,8 @@ $totalPage = intval($totalNum/$request["PageSize"]);
 if($totalNum % $request["PageSize"] > 0) {
 	$totalPage++;
 }
-	
+echo "ssssssssss".$totalNum;
+echo "ttttttttt".$totalPage;
 ?>
 
 <h3 class="light-lead-heading align-center">PD BASED ON YOUR PROFILE</h3>
@@ -100,9 +101,13 @@ if($totalNum % $request["PageSize"] > 0) {
 	} else {
 		$current = 1;
 	}
-	$max = $totalNum;
+	// echo "ssssssssss".$totalNum;
+	// echo "ttttttttt".$totalPage;
+
+	$max = intval($totalNum / 10);
+	if($max == 0) $max = 1;
 	//echo "when current is: $current <br><br>";
-	for($i = 0; $i < ($max / 10); $i++) {
+	for($i = 0; $i < $max; $i++) {
 		$front = (10 * $i);
 		$back = 10 * ($i + 1) + 1;
 		if($front < $current && $current <= ($back - 1)) {

@@ -490,7 +490,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<input type="text" class="form-control" name="area-code" <?php if (empty($details['Home-phone-areacode'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-areacode'].'"'; }?> maxlength="5">
 							</div>
 							<div class="col-xs-8 col-sm-6 col-md-4">
-								<label for="">Phone number</label>
+								<label for="">Phone number<span class="tipstyle">*</span></label>
 								<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  >
 							</div>
 						</div>
@@ -523,7 +523,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<input type="text" class="form-control" name="Mobile-area-code" <?php if (empty($details['Mobile-area-code'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Mobile-area-code'].'"'; }?> maxlength="5">
 							</div>
 							<div class="col-xs-8 col-sm-6 col-md-4">
-								<label for="">Mobile number</label>
+								<label for="">Mobile number<span class="tipstyle">*</span></label>
 								<input type="text" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  >
 							</div>
 						</div>
@@ -1104,7 +1104,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<div class="col-xs-12">
 						<ul class="nav nav-tabs" id="tabmenu">
 						<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
-						<li <?php if($key=='Workplace0') echo 'class ="active" ';?>><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace".$newkey;?></a></li>
+						<li <?php if($key=='Workplace0') echo 'class ="active" ';?>><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a></li>
 						<?php endforeach; ?> 
 						<?php if(sizeof($details['Workplaces'])==0):?>
 					
@@ -1713,7 +1713,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				
 					<div class="col-xs-12">
 						<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>
-						<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  $addtionalNumber =  sizeof($details['PersonEducation']); echo  $addtionalNumber; ?>"/>			
+						<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) { $addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =1;} echo  $addtionalNumber;  ?>"/>			
 					</div>
 
 				<div id="additional-qualifications-block">
@@ -1821,6 +1821,86 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 					</div>
 				<?php endforeach;?>
+				<?php if(sizeof($details['PersonEducation'])==0):?>
+					<div id="additional0">
+					   <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label for="Udegree">Degree<span class="tipstyle">*</span></label>
+                                <div class="chevron-select-box">
+                                <select class="form-control" name="Udegree0" id="Udegree0">
+                                    <?php
+                                        $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
+                                        $degree             = json_decode($degreecode, true);
+                                        $_SESSION["degree"] = $degree;
+                                        foreach ($degree as $pair => $value) {
+                                            echo '<option value="' . $degree[$pair]['ID'] . '"';
+                                            echo '> ' . $degree[$pair]['Name'] . ' </option>';
+                                        }
+                                    ?>
+                                <option value="0">Other</option>
+                                </select>
+                                </div>
+                                <input type="text" class="form-control display-none" name="University-degree0" id="University-degree0">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label for="Undergraduateuniversity-name0">University name<span class="tipstyle">*</span></label>
+                                <?php
+                                    $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
+                                    $University             = json_decode($universityCode, true);
+                                    $_SESSION["University"] = $University;
+                                ?>
+                            <div class="chevron-select-box">
+                            <select class="form-control" name="Undergraduate-university-name0" id="Undergraduate-university-name0">
+                                <?php
+                                    foreach ($University as $pair => $value) {
+                                        echo '<option value="' . $University[$pair]['ID'] . '"';
+                                        echo '> ' . $University[$pair]['Name'] . ' </option>';
+                                    }
+                                ?>    
+                                    <option value="0">Other</option>
+                                </select>
+                                </div>
+                                <input type="text" class="form-control display-none" name="Undergraduate-university-name-other0" id="Undergraduate-university-name-other0">
+                            </div>
+                        </div>
+
+						<div class="row">
+                            <div class="col-xs-6 col-sm-3">
+                                <label for="Ugraduate-yearattained0">Year attained<span class="tipstyle">*</span></label>
+                                <div class="chevron-select-box">
+                                <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
+                                <?php
+                                    $y = date("Y");
+                                    for ($i = 1940; $i <= $y; $i++) {
+                                        echo '<option value="' . $i . '">' . $i . '</option>';
+                                    }
+                                ?>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-9">
+                                <label for="Ugraduate-country0">Country<span class="tipstyle">*</span></label>
+                                <div class="chevron-select-box">
+                                <select class="form-control" id="Ugraduate-country0" name="Ugraduate-country0">
+                                <?php
+                                    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+                                    $country     = json_decode($countrycode, true);
+                                    foreach ($country as $key => $value) {
+                                        echo '<option value="' . $country[$key]['ID'] . '"';
+                                        if($country[$key]['ID']=="14"){echo "selected='selected'";}
+                                        echo '> ' . $country[$key]['Country'] . ' </option>';
+                                    }
+                                ?>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+					</div>
+				<?php endif; ?>
 				</div>
 				<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>-->
 			</div>
@@ -1961,7 +2041,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			var number = Number($('#wpnumber').text());
 			var i = Number(number +1);
 			var j = Number(number +2);
-			$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ j+'</a><span class="deletewp'+ i + '">Remove</span></li>' );
+			$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="deletewp'+ i + '">Remove</span></li>' );
 			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
 			$('#wpnumber').text(i);
 			$('input[name=wpnumber]').val(j);
