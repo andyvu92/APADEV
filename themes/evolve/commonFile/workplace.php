@@ -123,7 +123,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 
 <div class="row label-list"> 
 	<div class="col-xs-12" style="margin-top: 18px">
-		<label>Does this workplace provide:</label>
+		<label>What services does this workplace provide?</label>
 	</div>
 
 	<div class="col-xs-12 col-sm-6 col-md-6">
