@@ -203,7 +203,7 @@ jQuery(document).ready(function($) {
 				
 	};
 	var checkInsurance = function (memberType){
-    if(memberType=="9960"||memberType=="9961"||memberType=="9991"||memberType=="9992"||memberType=="9968"||memberType=="9997"||memberType=="10005"||memberType=="9967"||memberType=="10006"){
+    if(memberType=="9960"||memberType=="9961"||memberType=="9968"||memberType=="9997"||memberType=="9965"||memberType=="9964"||memberType=="10006"||memberType=="10005"||memberType=="9966"||memberType=="9967"){
 		return false;
 	}
 	else{return true;}

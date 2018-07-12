@@ -1119,7 +1119,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
 					<div id="workplace<?php echo $key;?>" class='tab-pane fade  <?php if($key=='Workplace0') echo "in active ";?> '>
 					    <input type="hidden" name="WorkplaceID<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['WorkplaceID'];?>">
-					<div clas="row">
+					<div class="row FapTagC">
 						<div class="col-xs-12">
 							<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
 							<label  style="font-weight: 300" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
@@ -1168,7 +1168,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 									$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 									$State=json_decode($statecode, true);						
 									foreach($State  as $pair => $value){
-										echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$pair]['Abbreviation'].'"';
+										echo '<option class="StateOption'.$State[$pair]['CountryID'].'" value="'.$State[$pair]['Abbreviation'].'"';
 										if ($details['Workplaces'][$key]['Wstate'] == $State[$pair]['Abbreviation']){ echo "selected='selected'"; } 
 										echo '> '.$State[$pair]['Abbreviation'].' </option>';
 									}
@@ -1484,7 +1484,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				<div id="workplace0" class='tab-pane fade in active'> 
 				    <input type="hidden" name="WorkplaceID0" value="-1">
 
-					<div class="row">
+					<div class="row FapTagC">
 						<div class="col-xs-12">
 							<input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio0" value="" >
 							<label  style="font-weight: 300" for="Findphysio0"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>

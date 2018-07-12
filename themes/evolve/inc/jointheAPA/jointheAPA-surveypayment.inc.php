@@ -128,11 +128,12 @@ if(isset($_POST['step2-1'])) {
 				<div class="col-xs-12">
 				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-1" value="0" checked="checked"><label for="p1-1">Full payment</label>
 				</div>
-
+				<?php if($_SESSION["MembershipProductID"] !="9968" && $_SESSION["MembershipProductID"] !="10005" && $_SESSION["MembershipProductID"] !="9967"&& $_SESSION["MembershipProductID"] !="10006"): ?>
 				<div class="col-xs-12">
 				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-2" value="1"><label for="p1-2">Monthly instalments (This option incurs a $12.00 admin fee)</label>
 				</div>
-				</div>
+				<?php endif;?>
+			</div>
 
 				<input type="hidden" id="Installpayment-frequency" name="Installpayment-frequency" value="">
 			</div>

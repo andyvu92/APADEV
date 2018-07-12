@@ -582,8 +582,32 @@ jQuery(document).ready(function($) {
 		else{
 			$( "#ahpblock" ).removeClass('display-none');
 		}
+		
 	});
 	
+	$('body').on('change', 'select', function() {
+		
+			if($('select[name=MemberType]').val()=="9993" || $('select[name=MemberType]').val()=="9994" || $('select[name=MemberType]').val()=="9968"|| $('select[name=MemberType]').val()=="9997"){
+				$( ".FapTagC" ).addClass('display-none');
+				$( ".FapTagA" ).addClass('display-none');
+					
+			}
+			else{
+				$( ".FapTagC" ).removeClass('display-none');
+				$( ".FapTagA" ).removeClass('display-none');
+			}
+		
+		
+	});
+	if($('select[name=MemberType]').val()=="9993" || $('select[name=MemberType]').val()=="9994" || $('select[name=MemberType]').val()=="9968"|| $('select[name=MemberType]').val()=="9997"){
+			$( ".FapTagC" ).addClass('display-none');
+			$( ".FapTagA" ).addClass('display-none');
+				
+		}
+	else{
+		$( ".FapTagC" ).removeClass('display-none');
+		$( ".FapTagA" ).removeClass('display-none');
+	}
 	/*   Membership Types questions   */
 		
 	$(".next").click(function() {

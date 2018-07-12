@@ -1435,7 +1435,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                         echo $details['Workplaces'][$key]['WorkplaceID'];
                 ?>">
                     <div class="row">
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 FapTagC">
                             <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Findphysio<?php
                             echo $key;
                     ?>" id="Findphysio<?php
@@ -1448,7 +1448,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                     ?>"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
                         </div>
 
-                        <div class="col-xs-12"> 
+                        <div class="col-xs-12 FapTagA"> 
                             <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Findabuddy<?php
                                 echo $key;
                         ?>" id="Findabuddy<?php
@@ -1614,7 +1614,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
         $State     = json_decode($statecode, true);
         foreach ($State as $pair => $value) {
-            echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="' . $State[$pair]['Abbreviation'] . '"';
+            echo '<option class="StateOption'.$State[$pair]['CountryID'].'" value="' . $State[$pair]['Abbreviation'] . '"';
             if ($details['Workplaces'][$key]['Wstate'] == $State[$pair]['Abbreviation']) {
                 echo "selected='selected'";
             }
@@ -1990,9 +1990,9 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
             
                 <div id="workplace0" class='tab-pane fade in active'>
                     <input type="hidden" name="WorkplaceID0" value="-1">                
-                    <div class="row"><div class="col-lg-6"></div><div class="col-lg-6"> <label class="light-font-weight" for="Findphysio"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
+                    <div class="row FapTagC"><div class="col-lg-6"></div><div class="col-lg-6"> <label class="light-font-weight" for="Findphysio"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
                     <input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio" value="" ></div></div>
-                    <div class="row">
+                    <div class="row FapTagA ">
                         <div class="col-lg-12"> <label class="light-font-weight" for="Findabuddy0"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>
                             <input class="styled-checkbox" type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
                         </div>
@@ -3009,7 +3009,7 @@ if (!isset($_SESSION['UserId'])):
                        </div>
                     </div>
 
-                    <div class="col-xs-12 col-md-6">
+                  <!--  <div class="col-xs-12 col-md-6">
 						<label>Your treatment area:</label>
                         
                         <div class="plus-select-box">
@@ -3018,24 +3018,24 @@ if (!isset($_SESSION['UserId'])):
 								
 								// get interest area from Aptify via webserice return Json data;
 								
-								$interestAreascode = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
-								$interestAreas     = json_decode($interestAreascode, true);
+								//$interestAreascode = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
+								//$interestAreas     = json_decode($interestAreascode, true);
 							?>
                            <?php
-								foreach ($interestAreas as $key => $value) {
-									echo '<option value="' . $interestAreas[$key]["ID"] . '"';
-									echo '> ' . $interestAreas[$key]["Name"] . ' </option>';
-								}
+								//foreach ($interestAreas as $key => $value) {
+									//echo '<option value="' . $interestAreas[$key]["ID"] . '"';
+									//echo '> ' . $interestAreas[$key]["Name"] . ' </option>';
+								//}
 								
 							?>
                        </select>
                        </div>
-                    </div>
+                    </div>-->
                 </div>
 
                 <div class="row">
 					<div class="col-xs-12 col-md-6">
-						<label>What is your favourite languages?</label>
+						<label>What languages do you speak in your professional practice?</label>
 						
                         <div class="plus-select-box">
                         <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
@@ -3081,7 +3081,7 @@ if (!isset($_SESSION['UserId'])):
 			<div class="col-xs-12">
 				<ul class="nav nav-tabs" id="tabmenu">
 				<li class ="active"><a data-toggle="tab" href="#workplace0"><?php
-					echo "Workplace0";
+					echo "Workplace1";
 				?></a></li>
 				</ul>
 			</div>
@@ -3090,12 +3090,12 @@ if (!isset($_SESSION['UserId'])):
                 <div id="workplace0" class='tab-pane fade in active'> 
                     <input type="hidden" name="WorkplaceID0" value="-1">
 					
-					<div class="col-xs-12">
+					<div class="col-xs-12 FapTagC">
                         <input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio" value="" >
                         <label class="light-font-weight" for="Findphysio"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
 					</div>
 					
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 FapTagA">
                         <input class="styled-checkbox" type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
                         <label class="light-font-weight" for="Findabuddy0"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>
                     </div>
