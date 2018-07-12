@@ -1733,43 +1733,45 @@ a#insuranceControl{
     #tabmenu{
         li{
             background: #c3c8c8;
-            
+            border-right: 1px solid #fff;
+            transition: 0.2s linear;
             a{
                 padding: 10px 20px;
                 font-weight: 600;
                 background: none;
                 color: #000;
                 border: 0;
+                float: left;
                 &hover{
                     border: 0;
                 }
             }
             span{
-                height: 25px;
-                visibility: hidden;
-                line-height: 25px;
-                width: 100%;
-                text-align: center;
-                font-size: 12px;
-                position: absolute;
-                bottom: -10px;
-                right: 0;
-                margin: 0;
-                padding: 0 5px;
-                color: #000;
-                background: rgba(255,0,0,0.9);
-                color: #fff;
+                position: relative;
+                opacity:0;
+                width: 0px;
+                height: 43px;
+                margin-top: auto;
+                display: block;
+                float: left;
+                background-repeat: no-repeat;
+                background-size: contain;
                 cursor: pointer;
                 z-index: 0;
                 transition: 0.2s linear;
-                opacity: 0;
+                margin: 0 0px 0 0;
+                padding: 0;
+                background-position: center;
+                background-image: url(/sites/default/files/dashboard-icon/close-icon.png);
             }
             &:hover{
                 span{
-                    display: block;
-                    bottom: -25px;
-                    visibility: visible;
-                    opacity: 1;
+                    width: 15px;
+                    margin: 0 10px 0 0;
+                    opacity: 0.6;
+                    &:hover{
+                        opacity: 1;
+                    }
                 }
             }
         }
@@ -1866,8 +1868,7 @@ a#insuranceControl{
         .add-additional-qualification{
             float: left;
             height: 38px;
-            margin-bottom: 20px;
-            margin-top: 4px;
+            margin-top: 23px;
             background-color: @bright-blue;
             border-width: 0px !important;
             color: #fff;
@@ -2441,9 +2442,6 @@ form{
             opacity: 1;
         }
     }
-    #insurancePopUp{
-        text-align: center;
-    }
     #tabmenu{
         border-bottom: 1px solid #ddd;
         border-top: 1px solid #ddd;
@@ -2451,6 +2449,10 @@ form{
     .nav-tabs{
         border: 0;
     }
+}
+
+#insurancePopUp{
+    text-align: center;
 }
 
  /*--TEMPORARILY REMOVED--*/

@@ -145,8 +145,8 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 	</div>
 </form>
 <div id="insurancePopUp" style="display:none;">
-	<h3>Are you sure you want to submit your insurance information?</h3>
-	
+	<h3 style="margin-bottom: 20px">Are you sure you want to submit your insurance information?</h3>
+	<span class="note-text" style="display: block; margin-bottom: 10px">This may take a moment while we process your request</span>
 	<div class="center">
 		<a href="javascript:document.getElementById('renew-insurance-form2').submit();" class="join-details-button5 accent-btn"><span class="dashboard-button-name">Yes</span></a>
 		<a target="_self" class="cancelInsuranceButton accent-btn"><span class="dashboard-button-name">No</span></a>
@@ -161,6 +161,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 				<h4 class="modal-title">FINANCIAL SERVICES GUIDE</h4>
 			</div>
 			<div class="modal-body">
+				<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>
 				<strong>This guide includes important information about:</strong>
 				<ul>
 					<li>the financial services we offer</li>

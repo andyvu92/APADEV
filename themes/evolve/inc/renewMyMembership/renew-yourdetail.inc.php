@@ -1018,7 +1018,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				</div>
 
 					<div class="col-xs-12">
-					<label>Does this workplace provide:</label>
+					<label>What services does this workplace provide?</label>
 					</div>
 
 				<div class="row">
@@ -1292,7 +1292,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 
 				<div class="row"> 
 					<div class="col-xs-12">
-					<label>Does this workplace provide:</label>
+					<label>What services does this workplace provide?</label>
 					</div>
 
 					<div class="col-xs-6 col-md-4">
@@ -1375,13 +1375,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 		
 		</div>
 		<div class="down4" style="display:none;" >
-			
-			<div class="row">
-				<div class="col-xs-12">
-					<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>
-					<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =1;} echo  $addtionalNumber;  ?>"/>			
-				</div>
-			</div>
+		<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =1;} echo  $addtionalNumber;  ?>"/>
 
 			<div id="additional-qualifications-block">
 				<?php foreach($details['PersonEducation'] as $key => $value) :?>
@@ -1568,7 +1562,11 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                         </div>
 					</div>
 				<?php endif; ?>
-				
+
+			<div class="col-xs-12">
+				<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>		
+			</div>
+
 			<div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Back</span></a></div>
 		</div>
 	</div>
@@ -1583,7 +1581,7 @@ jQuery(document).ready(function($) {
 		var number = Number($('#wpnumber').text());
 		var i = Number(number +1);
 		var j = Number(number +2);
-		$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="deletewp'+ i + '">Remove</span></li>' );
+		$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="deletewp'+ i + '"></span></li>' );
 		$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
 		$('#wpnumber').text(i);
 		$('input[name=wpnumber]').val(j);

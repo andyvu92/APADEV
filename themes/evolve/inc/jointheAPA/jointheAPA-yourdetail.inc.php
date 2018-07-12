@@ -2263,13 +2263,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
             </div>
         </div>
         <div class="down4" style="display:none;" >
-           
-            <div class="row">
-                <div class="col-lg-6">
-                    <a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>
-                    <input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =1;} echo  $addtionalNumber;  ?>"/>            
-                </div>
-            </div>
+        <input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =1;} echo  $addtionalNumber;  ?>"/>
             <div id="additional-qualifications-block">
                 <?php
     foreach ($details['PersonEducation'] as $key => $value):
@@ -2532,6 +2526,10 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 
             </div>
             
+            <div class="col-lg-6">
+                <a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>         
+            </div>
+
             <div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Back</span></a></div>
         </div>
                
@@ -3401,15 +3399,11 @@ if (!isset($_SESSION['UserId'])):
             </div>
             <div class="down4" style="display:none;" >
                 <input type="hidden" name="ID" value="-1">
-               <div class="row">
-                    <div class="col-lg-6">
-                        <label for="Additional-qualifications"><a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a></label>
-                        <input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php
+                <input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php
     $addtionalNumber = 1;
     echo $addtionalNumber;
 ?>"/>
-                    </div>
-                </div>
+
                 <div id="additional-qualifications-block">
                     <div class="row">
                         <div class="row">
@@ -3490,6 +3484,12 @@ if (!isset($_SESSION['UserId'])):
                         </div>
                     </div>
                 </div>
+
+                <div class="col-xs-12">
+                        <label for="Additional-qualifications"><a class="add-additional-qualification">
+                        <span class="dashboard-button-name">Add qualification</span></a></label>
+                </div>
+
                 <div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Back</span></a></div>
             </div>
     </form>
@@ -3507,7 +3507,7 @@ endif;
             var number = Number($('#wpnumber').text());
               var i = Number(number +1);
             var j = Number(number +2);
-            $('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="deletewp'+ i + '">Remove</span></li>' );
+            $('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ j+'</a><span class="deletewp'+ i + '"></span></li>' );
             $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade">');
             $('#wpnumber').text(i);
             $('input[name=wpnumber]').val(j);
