@@ -191,7 +191,7 @@ echo "ttttttttt".$totalPage;
 		echo	'<div class="flex-col-3">
 					<span class="title"><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a></span>
 					<div class='excerpt'><p>".$result['Description'].'</p></div>
-					<span class="readmore"><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Read more</span></a></span>
+					<span class="readmore"><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Tell me more</span></a></span>
 				</div>';
 
         if(!empty($result['PDType'])) {
@@ -230,15 +230,15 @@ echo "ttttttttt".$totalPage;
 			echo	"<div class='flex-col-2'>N/A</div>";
 		}
 		
-		echo	"<div class='flex-col-1'>";
+		echo	"<div class='flex-col-1 pd-status'>";
 		$gap = intval($result['Totalnumber']) - intval($result['Enrollednumber']);
 		$tenP = intval($result['Totalnumber'])/10;
 		if($gap == 0) {
 			echo  "COURSE  FULL";
 		} elseif($gap < $tenP) {
-			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true">Almost full</a></i>';
+			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i></a>';
 		} else {
-			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true">Open</a></i>';
+			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Open</span></a>';
 		}
 		echo	"</div>";
 		echo "</div>";
@@ -250,7 +250,7 @@ echo "ttttttttt".$totalPage;
 <div class="resultMobile">
 <?php foreach($results as $result){
 echo '<div class="resultDisplay">';
-echo '<div class="resultTitle"><span class="mobiledes">Title:</span><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a><br>".$result['Description'].'<br><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Read more</span></a></div>';
+echo '<div class="resultTitle"><span class="mobiledes">Title:</span><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a><br>".$result['Description'].'<br><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Tell me more</span></a></div>';
 if(isset($result['CPDhours'])) {
 	echo '<div class="resultType"><span class="mobiledes">Type:</span>'.$result['PDType'].'&nbsp;<span class="mobiledes">CPD HRS:</span>?</div>';
 } else {
@@ -264,9 +264,9 @@ $tenP = intval($result['Totalnumber'])/10;
 if($gap == 0) {
 	echo  "COURSE  FULL";
 } elseif($gap < $tenP) {
-	echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true">Almost full</a></i>';
+	echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span class="pd-status">Almost full</span></a>';
 } else {
-	echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true">Open</a></i>';
+	echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span class="pd-status">Open</span></a>';
 }
 echo "</div>";
 echo "</div>";

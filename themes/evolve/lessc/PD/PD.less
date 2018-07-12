@@ -325,6 +325,17 @@
                     }
                 }
             }
+            .pd-status{
+                a{
+                    display: flex;
+                    flex-direction: column;
+                }
+                span{
+                    font-weight: 400;
+                    color: #5e5f67;
+                    margin-top: 5px;
+                }
+            }
         }
     }
 }
@@ -445,6 +456,7 @@
                         a{
                             color: #fff;
                             text-decoration: underline;
+                            display: block;
                             &:hover{
                                 color: #fff;
                             }
@@ -729,9 +741,7 @@ div[id^="myCart"] .modal-body a.addCartlink{
     margin-left: 10px;
 	margin-bottom: 10px;
 }
-div#block-block-241 i {
-    margin-left: 40%;
-}
+
 div#block-block-241 a:not(.btn) i {
     color: #5E6167;
 }
@@ -1071,7 +1081,7 @@ input[name="Couponcode"]{
 }
 .greenprice{
   text-decoration: line-through;
-  color: #A2AD00;
+  color: rgba(255,255,255,0.6);
 }
 .redprice{
   text-decoration: line-through;
