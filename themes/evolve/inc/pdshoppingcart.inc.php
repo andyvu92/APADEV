@@ -112,9 +112,9 @@ if(isset($_SESSION["UserId"])){
     
 	$userid = $_SESSION["UserId"];
 	
-	if(isset($_SESSION["cardsnum"])){
-		$cardsnum = $_SESSION["cardsnum"];
-	} else {
+	//if(isset($_SESSION["cardsnum"])){
+		//$cardsnum = $_SESSION["cardsnum"];
+	//} else {
 		// 2.2.12 - GET payment listing
 		// Send - 
 		// UserID
@@ -123,9 +123,10 @@ if(isset($_SESSION["UserId"])){
 		// Name on card, Digits, Exp date, Roll over],  Main card
 		
 		$test['id'] = $_SESSION["UserId"];
+		//print_r($test['id']);
 		$cardsnum = GetAptifyData("12", $test);
-	    $_SESSION["cardsnum"]= $cardsnum;
-	}
+	    //$_SESSION["cardsnum"]= $cardsnum;
+	//}
 	//print_r($cardsnum);
 	
 	if(isset($_GET["action"])&& ($_GET["action"]=="addcard")&& isset($_POST['addcardtag'])) {

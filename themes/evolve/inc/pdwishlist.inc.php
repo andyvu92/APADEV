@@ -5,8 +5,8 @@ $wishlists = array();
 $now = date('d-m-Y');
 $wishlistTag = 0;
 
-if(isset($_SESSION["userID"])&& ($_SESSION["userID"]!=0)){
-	$userid = $_SESSION["userID"];
+if(isset($_SESSION["UserId"])&& ($_SESSION["UserId"]!=0)){
+	$userid = $_SESSION["UserId"];
 
    /*********save wishlist to APAserver******/
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 

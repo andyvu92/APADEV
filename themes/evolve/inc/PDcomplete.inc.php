@@ -1,12 +1,12 @@
 <?php
-if(isset($_POST["PRF"])) {
+if(isset($_POST["POSTPRF"])) {
 	// 2.2.32 - Order confirmation
 	// Send - 
 	// PRFdonation, Card number, Term+Condition, Product ID
 	// Response -
 	// Order status, Invoice ID
 	$OrderSend["userID"] = $_SESSION["UserId"];
-	$OrderSend["PRFdonation"] = $_POST["PRF"];
+	$OrderSend["PRFdonation"] = $_POST["POSTPRF"];
 	//$OrderSend["TandC"] = $_POST["TandC"];
 	$OrderSend["Card_number"] = $_POST["CardUsed"];
 	$PIDs = array();
