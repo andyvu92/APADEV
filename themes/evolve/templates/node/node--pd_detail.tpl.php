@@ -1479,15 +1479,19 @@ if($resultdata['result']) {
 			<!--<a class="add-to-card"><span>Add to Card</span></a>-->
 			<?php 
 			if(isset($_SESSION["UserId"])){
-				 //$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
-				$userTag = checkPDUser($_SESSION['MemberTypeID']);
-				if ($userTag =="0"){
-					echo '<a class="add-to-card" id="registerPDUserButton"><span>Add to cart</span></a>';	
-				}
-				else{
-						 echo '<a class="add-to-card" id="registerNonMember"><span>Add to cart</span></a>';
-					}
-		   	}	
+				//$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
+			   $userTag = checkPDUser($_SESSION['MemberTypeID']);
+			   $closedate = date("j, n, Y",strtotime($pd_detail['Close_date']));
+			   $today = date("j, n, Y");
+			   $t = $closedate > $today;
+			   if($t) {
+				   echo '<a class="add-to-card" disabled><span>Registration closed</span></a>';
+			   } elseif ($userTag =="0"){
+				   echo '<a class="add-to-card" id="registerPDUserButton"><span>Add to cart</span></a>';	
+			   } else {
+				   echo '<a class="add-to-card" id="registerNonMember"><span>Add to cart</span></a>';
+			   }
+			  }	
 		   ?>
 		</div>
 
