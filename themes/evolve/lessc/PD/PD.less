@@ -94,6 +94,35 @@
 
 /* --------------------------------------------------------- */
 /* ----------------------- PD search Added by Jinghu ----------------------- */
+
+.dexp-section{
+    .dexp-container{
+        .dexp-parallax{
+            background-attachment: fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: bottom!important;
+        }
+    }
+}
+
+.pd{
+    .dexp-section{
+        .dexp-container{
+            .dexp-parallax{
+                background-attachment: unset;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+        }
+    }
+}
 #pdSearch{
     display: block;
     margin: 0 auto;
@@ -1000,16 +1029,9 @@ div[aria-describedby="jobnoticement"] .registerDes{
 .paymentsiderbar table td:nth-child(even) {
     text-align: right;
 }
-.ordersummary {
-    border-left: 1px solid rgba(137,159,153,0.2);
-    border-right: 1px solid rgba(137,159,153,0.2);
-    border-top: 1px solid rgba(137,159,153,0.2);
-    width: 252px;
-    margin-left: 0px;
-    height: 38px;
-}
+
 .ordersummary span{
-    margin-left:70px;
+
 	color:#009fda;
 }
 .ordersummary div:nth-child(1){
@@ -1065,13 +1087,6 @@ form#registerMemberForm .error, form#updatePaymentForm .error{
     color: red;
 }
 
-.applyCouponButton {
-    float: left;
-    margin-top: -35px;
-    margin-left: 201px;
-    color: white;
-	
-}
 input[name="Couponcode"]::-webkit-input-placeholder {
   color: black!important;
   

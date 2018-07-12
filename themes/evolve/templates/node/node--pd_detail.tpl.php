@@ -933,25 +933,26 @@ if($resultdata['result']) {
 					</div>
 				 </div>
 				<div class="row">
-				   <div class="col-lg-12">
-				  <input type="checkbox" name="Registrationboard" id="Registrationboard" required> <label for="Registrationboard">I am registered with my profession's registration board.</label>
+				   <div class="col-xs-12">
+				  <input class="styled-checkbox" type="checkbox" name="Registrationboard" id="Registrationboard" required>
+				  <label for="Registrationboard">I am registered with my profession's registration board.</label>
 				   </div>
 				</div>
 				<div class="row">
-				   <div class="col-lg-12">
-					<input type="checkbox" name="Professionalinsurance" id="Professionalinsurance" required> <label for="Professionalinsurance">I have current adequate professional indemnity insurance.</label>
+				   <div class="col-xs-12">
+					<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professionalinsurance" required>
+					<label for="Professionalinsurance">I have current adequate professional indemnity insurance.</label>
 				   </div>
 				</div>
 				<div class="row">
-				   <div class="col-lg-12">
-				  <input type="checkbox" name="Professionalbody" id="Professionalbody"> <label for="Professionalbody">I am a member of my professional body.</label>
+				   <div class="col-xs-12">
+				  <input class="styled-checkbox" type="checkbox" name="Professionalbody" id="Professionalbody">
+				  <label for="Professionalbody">I am a member of my professional body.</label>
 				   </div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6">
-					Your dietary requirements
-					</div>
-					<div class="col-lg-6">
+					<div class="col-xs-12">
+					<label>Your dietary requirements</label>
 						<select class="chosen-select"  name="Dietary[]" multiple>
 						<option value=""  <?php if (empty($details['Dietary'])) echo "selected='selected'";?> disabled> None </option>
 						<?php 
@@ -1303,14 +1304,13 @@ if($resultdata['result']) {
 	    <input type="hidden" name="Couponcode" value="<?php echo $Couponcode;?>"> 		
 		<div class="row">
 		   <div class="col-lg-12">
-				<input type="checkbox" name="Professionalinsurance"  required> <label for="Professionalinsurance1">I have current adequate professional indemnity insurance.</label>
+				<input class="styled-checkbox" type="checkbox" name="Professionalinsurance"  required>
+				<label for="Professionalinsurance">I have current adequate professional indemnity insurance.</label>
 		   </div>
 		</div>
 		<div class="row">
-			<div class="col-lg-6">
-			Your dietary requirements
-			</div>
-			<div class="col-lg-6">
+			<div class="col-xs-12">
+				<label>Your dietary requirements</label>
 				<select class="chosen-select" id="Dietary" name="Dietary[]" multiple>
 				<option value=""  <?php if (empty($details['Dietary'])) echo "selected='selected'";?> disabled> None </option>
 				<?php 
@@ -1327,7 +1327,9 @@ if($resultdata['result']) {
 				</select>
 			</div>
 		</div>
-	 <input type="submit" value="Go to my cart">
+
+	 <input class="accent-btn" style="margin-top: 10px;" type="submit" value="Go to my cart">
+
 	</form>
 	</div>
 <!--End Member update detail-->

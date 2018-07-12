@@ -2285,6 +2285,8 @@ form{
         position: relative;
         select{
             -webkit-appearance: none;
+            position: relative;
+            z-index: 1;
         }
         &::after{
             content: '\f078';
@@ -2293,6 +2295,7 @@ form{
             position: absolute;
             top: 33%;
             right: 10px;
+            z-index: 0;
         }
         &.chevron-adjust{
             &::after{
@@ -2304,6 +2307,8 @@ form{
         position: relative;
         select{
             -webkit-appearance: none;
+            position: relative;
+            z-index: 1;
         }
         &::after{
             content: '';
@@ -2312,6 +2317,7 @@ form{
             position: absolute;
             top: 40%;
             right: 10px;
+            z-index: 0;
             background-repeat:no-repeat;
             background-size:contain;
             background-position:center;
