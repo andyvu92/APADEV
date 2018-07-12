@@ -21,7 +21,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Keyword</label>
-		<input type="text" name="Keywords" placeholder="Keyword" <?php if(isset($_POST["Keywords"])) { echo "value='".$_POST["Keywords"]."'";} ?>>
+		<input type="text" name="Keywords" placeholder="Keyword" <?php if(isset($_POST["Keywords"]) || isset($_GET["Keywords"])) { echo "value='".$_POST["Keywords"]."'";} ?>>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Type of PD</label>
@@ -40,7 +40,7 @@
 		//$_SESSION["testTTdad"]["NationalGroup"]
 		foreach($details as $lines) {
 			$vals = '';
-			if(isset($_POST["Nationalgp"]) && $_POST["Nationalgp"]==$lines["NGid"]) { $vals = "selected";}
+			if((isset($_POST["Nationalgp"])  || isset($_GET["Nationalgp"])) && ($_GET["Nationalgp"]==$lines["NGid"] || $_POST["Nationalgp"]==$lines["NGid"])) { $vals = "selected";}
 			echo '<option value="'.$lines["NGid"].'" '.$vals.'> '.$lines["NGtitle"].' </option>';
 		}
 		?>
@@ -125,7 +125,7 @@
 				$t = 0;
 				foreach($State  as $key => $value){
 				echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
-				if (isset($_POST["State"]) && $_POST["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+				if ((isset($_POST["State"]) || isset($_GET["Enddate"])) && ($_GET["State"]==$State[$key]['Abbreviation'] || $_POST["State"]==$State[$key]['Abbreviation'])){ echo "selected='selected'"; } 
 				echo '> '.$State[$key]['Abbreviation'].' </option>';
 			
 				}
@@ -134,16 +134,16 @@
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<label>Suburb/city</label>
-			<input type="text" name="Suburb" placeholder="Suburb/city" style="margin-top:0px"<?php if(isset($_POST["Suburb"])) { echo "value='".$_POST["Suburb"]."'";} ?>>
+			<input type="text" name="Suburb" placeholder="Suburb/city" style="margin-top:0px"<?php if(isset($_POST["Suburb"])  || isset($_GET["Suburb"])) { echo "value='".$_POST["Suburb"]."'";} ?>>
 		</div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 		<label>Start date</label>
-		<input type="date" name="Begindate" placeholder="Begin date" required <?php if(isset($_POST["Begindate"])) { echo "value='".$_POST["Begindate"]."'";} else {echo "value='".date("Y-m-d")."'";} ?>>
+		<input type="date" name="Begindate" placeholder="Begin date" required <?php if(isset($_POST["Begindate"]) || isset($_GET["Begindate"])) { echo "value='".$_POST["Begindate"]."'";} else {echo "value='".date("Y-m-d")."'";} ?>>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 		<label>End date</label>
-		<input type="date" name="Enddate" placeholder="End date"<?php if(isset($_POST["Enddate"])) { echo "value='".$_POST["Enddate"]."'";} ?>>
+		<input type="date" name="Enddate" placeholder="End date"<?php if(isset($_POST["Enddate"]) || isset($_GET["Enddate"])) { echo "value='".$_POST["Enddate"]."'";} ?>>
 	</div>
 	
 	<div class="col-xs-12">
