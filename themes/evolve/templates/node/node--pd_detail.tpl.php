@@ -1480,6 +1480,7 @@ if($resultdata['result']) {
 		</div>
 
 		<div class="session-cta">
+			<a class="add-to-wishlist"><span>Add to Wishlist</span></a>
 			<!--<a class="add-to-card"><span>Add to Card</span></a>-->
 			<?php 
 			if(isset($_SESSION["UserId"])){
@@ -1491,10 +1492,8 @@ if($resultdata['result']) {
 			   if($t) {
 				   echo '<span class="add-to-wishlist" style="padding: 5px; text-align: center; cursor: auto; background-color: transparent;">Registration closed</span>';
 			   } elseif ($userTag =="0"){
-				   echo '<a class="add-to-wishlist"><span>Add to Wishlist</span></a>';
 				   echo '<a class="add-to-card" id="registerPDUserButton"><span>Add to cart</span></a>';	
 			   } else {
-					echo '<a class="add-to-wishlist"><span>Add to Wishlist</span></a>';
 				   echo '<a class="add-to-card" id="registerNonMember"><span>Add to cart</span></a>';
 			   }
 			  }	

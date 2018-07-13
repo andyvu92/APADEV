@@ -757,7 +757,9 @@ jQuery(document).ready(function($) {
 			$('#Sections2 .next').click();
 		}
 	});
-	
+	if ( $('[type="date"]').prop('type') != 'date' ) {
+		$('[type="date"]').datepicker();
+	}
 	$('[id^=Section]').click(function() {
 		var x = $(this).attr("id").replace('Section', '');
 		var i = $(".ProgressHolder .active").attr('id').replace('Section','');
