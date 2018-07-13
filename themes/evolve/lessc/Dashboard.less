@@ -660,7 +660,7 @@ input[id^="Additional-qualifications"] {
 @tablet-width: 768px;
 @larger-tablet-width: 992px;
 @desktop-width: 1200px;
-@larger-destop-width: 1500px;
+@larger-desktop-width: 1500px;
 
 /*--CONTAINER--*/
 .contained{
@@ -940,6 +940,9 @@ a#insuranceControl{
         height: auto;
         border-left: 5px solid rgba(0,184,241,0);
         transition: 0.1s linear;
+        &.active{
+            border-left: 5px solid #00b8f1;
+        }
         @media all and (max-width:@larger-tablet-width) {
             width: 20%;
             margin: 0;
