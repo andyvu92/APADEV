@@ -43,17 +43,17 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 
 <div class="row">
 	<div class="col-xs-6 col-md-6">
-		<label for="Wcity'.$i.'">City/Town</label>
+		<label for="Wcity'.$i.'">City/Town<span class="tipstyle">*</span></label>
 		<input type="text" class="form-control" name="Wcity'.$i.'" id="Wcity'.$i.'" value="">
 	</div>
 
 	<div class="col-xs-6 col-md-6">
-		<label for="Wpostcode'.$i.'">Postcode</label>
+		<label for="Wpostcode'.$i.'">Postcode<span class="tipstyle">*</span></label>
 		<input type="text" class="form-control" name="Wpostcode'.$i.'" id="Wpostcode'.$i.'" value="">
 	</div>
 
 	<div class="col-xs-6 col-md-6">
-		<label for="Wstate'.$i.'">State</label>
+		<label for="Wstate'.$i.'">State<span class="tipstyle">*</span></label>
 		<div class="chevron-select-box">
 			<select class="form-control" id="Wstate'.$i.'" name="Wstate'.$i.'">
 				<option value="" selected disabled> State </option>
@@ -70,7 +70,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 	</div>
 
 	<div class="col-xs-6 col-md-6">
-	<label for="Wcountry'.$i.'">Country</label>
+	<label for="Wcountry'.$i.'">Country<span class="tipstyle">*</span></label>
 	<div class="chevron-select-box">
 		<select class="form-control" id="Wcountry'.$i.'" name="Wcountry'.$i.'">
 		';
@@ -92,7 +92,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-md-6">
-		<label for="Wemail'.$i.'">Workplace email</label>
+		<label for="Wemail'.$i.'">Workplace email<span class="tipstyle">*</span></label>
 		<input type="email" class="form-control" name="Wemail'.$i.'" id="Wemail'.$i.'" value="">
 	</div>
 
@@ -182,7 +182,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 	<div class="col-xs-12 col-md-6">
 		<label>Workplace setting<span class="tipstyle">*</span></label>
 		<div class="chevron-select-box">
-		<select class="form-control" id="Workplace-setting'.$i.'" name="workplace-setting'.$i.'">';
+		<select class="form-control" id="Workplace-setting'.$i.'" name="Workplace-setting'.$i.'">';
 			$workplaceSettings = $sessionWorkplaceSetting;
 			foreach($workplaceSettings  as $key => $object){
 				echo '<option value="'.$object->ID.'">'.$object->Name.'</option>';

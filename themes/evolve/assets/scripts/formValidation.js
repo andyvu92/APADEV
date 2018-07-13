@@ -32,7 +32,10 @@ jQuery(document).ready(function($) {
 			//if($("select[name=State]").val() ==''){$("select[name=State]").addClass("focuscss");}else{$("select[name=State]").removeClass("focuscss");}
 			if($("input[name=Country]").val() ==''){$("input[name=Country]").addClass("focuscss");}else{$("input[name=Country]").removeClass("focuscss");}
 			if(!$("#Shipping-address-join").is(":checked")){
-				if($("input[name=Billing-Address_Line_1]").val() ==''){$("input[name=Billing-Address_Line_1]").addClass("focuscss");}else{$("input[name=Billing-Address_Line_1]").removeClass("focuscss");}
+				if($("input[name=Billing-Pobox]").val() ==''){
+						if($("input[name=Billing-Address_Line_1]").val() ==''){$("input[name=Billing-Address_Line_1]").addClass("focuscss");}else{$("input[name=Billing-Address_Line_1]").removeClass("focuscss");}
+				}
+				//if($("input[name=Billing-Address_Line_1]").val() ==''){$("input[name=Billing-Address_Line_1]").addClass("focuscss");}else{$("input[name=Billing-Address_Line_1]").removeClass("focuscss");}
 				//if($("input[name=Billing-Address_Line_2]").val() ==''){$("input[name=Billing-Address_Line_2]").addClass("focuscss");}else{$("input[name=Billing-Address_Line_2]").removeClass("focuscss");}
 				if($("input[name=Billing-Suburb]").val() ==''){$("input[name=Billing-Suburb]").addClass("focuscss");}else{$("input[name=Billing-Suburb]").removeClass("focuscss");}
 				if($("input[name=Billing-Postcode]").val() ==''){$("input[name=Billing-Postcode]").addClass("focuscss");}else{$("input[name=Billing-Postcode]").removeClass("focuscss");}
@@ -58,9 +61,12 @@ jQuery(document).ready(function($) {
 				return false;
 			}
 			if(!$("#Shipping-address-join").is(":checked")){
-				if($("input[name=Billing-Address_Line_1]").val() ==''){
-					return false;
+				if($("input[name=Billing-Pobox]").val() ==''){
+					if($("input[name=Billing-Address_Line_1]").val() ==''){
+						return false;
+					}
 				}
+				
 				if($("input[name=Billing-Country").val() ==''||$("input[name=Billing-Postcode]").val() ==''||$("input[name=Billing-Suburb]").val() ==''){
 					return false;
 				}
@@ -88,10 +94,10 @@ jQuery(document).ready(function($) {
 				for (x = 0; x<i;x++){
 					if($("input[name=Name-of-workplace"+x+"]").val() ==''){$("input[name=Name-of-workplace"+x+"]").addClass("focuscss");}else{$("input[name=Name-of-workplace"+x+"]").removeClass("focuscss");}
 					if($("select[name=Workplace-setting"+x+"]").val() ==''){$("select[name=Workplace-setting"+x+"]").addClass("focuscss");}else{$("select[name=Workplace-setting"+x+"]").removeClass("focuscss");}
-					if($("input[name=WAddress_Line_1"+x+"]").val() ==''){$("input[name=WAddress_Line_1"+x+"]").addClass("focuscss");}else{$("input[name=WAddress_Line_1"+x+"]").removeClass("focuscss");}
+					//if($("input[name=WAddress_Line_1"+x+"]").val() ==''){$("input[name=WAddress_Line_1"+x+"]").addClass("focuscss");}else{$("input[name=WAddress_Line_1"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wcity"+x+"]").val() ==''){$("input[name=Wcity"+x+"]").addClass("focuscss");}else{$("input[name=Wcity"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wpostcode"+x+"]").val() ==''){$("input[name=Wpostcode"+x+"]").addClass("focuscss");}else{$("input[name=Wpostcode"+x+"]").removeClass("focuscss");}
-					if($("input[name=Wstate"+x+"]").val() ==''){$("input[name=Wstate"+x+"]").addClass("focuscss");}else{$("input[name=Wstate"+x+"]").removeClass("focuscss");}
+					//if($("input[name=Wstate"+x+"]").val() ==''){$("input[name=Wstate"+x+"]").addClass("focuscss");}else{$("input[name=Wstate"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wcountry"+x+"]").val() ==''){$("input[name=Wcountry"+x+"]").addClass("focuscss");}else{$("input[name=Wcountry"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wemail"+x+"]").val() ==''){$("input[name=Wemail"+x+"]").addClass("focuscss");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss");}
 					if (!isValidEmailAddress($("input[name=Wemail"+x+"]").val())) {$("input[name=Wemail"+x+"]").addClass("focuscss");$('#erroMessage').html("this email address is not valid");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss"); $('#errorMessage').html("");}
@@ -100,14 +106,18 @@ jQuery(document).ready(function($) {
 				}
 							
 				for (x = 0; x<i;x++){
-					if($("input[name=Name-of-workplace"+x+"]").val() ==''||$("select[name=Workplace-setting"+x+"]").val() ==''||$("input[name=WAddress_Line_1"+x+"]").val() ==''){
+					
+					if($("input[name=Name-of-workplace"+x+"]").val() ==''||$("select[name=Workplace-setting"+x+"]").val() ==''){
+						
 						return false;
 					}
 					if($("input[name=Wcity"+x+"]").val() ==''||$("input[name=Wpostcode"+x+"]").val() ==''){
+						
 						return false;
 					}
 					
-					if($("input[name=Wcountry"+x+"]").val() ==''||$("input[name=Wemail"+x+"]").val() =='' || !isValidEmailAddress($("input[name=Wemail"+x+"]").val()) ||$("input[name=Number-worked-hours"+x+"]").val() ==''){
+					if($("input[name=Wcountry"+x+"]").val() ==''||$("input[name=Wemail"+x+"]").val() =='' || !isValidEmailAddress($("input[name=Wemail"+x+"]").val()) ||$("select[name=Number-worked-hours"+x+"]").val() ==''){
+						alert(i+"dffs"+x);
 						return false;
 					}
 				}

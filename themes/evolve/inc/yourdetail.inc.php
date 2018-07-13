@@ -472,9 +472,13 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<?php
 									$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 									$country=json_decode($countrycode, true);
-										foreach($country  as $key => $value){
+									$countser = 0;
+									foreach($country  as $key => $value){
 										echo '<option value="'.$country[$key]['TelephoneCode'].'"';
-										if ($details['Home-phone-countrycode'] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; }
+										if ($details['Home-phone-countrycode'] == preg_replace('/\s+/', '', $country[$key]['TelephoneCode']) && $countser == 0){ 
+											echo "selected='selected'"; 
+											$countser++;
+										}
 										elseif(empty($details['Home-phone-countrycode']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
 										}
@@ -502,15 +506,19 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<div class="col-xs-12 col-sm-3 col-md-6">
 								<label for="">Country</label>
 								<div class="chevron-select-box">
+								
+								
 								<select class="form-control" id="Mobile-country-code" name="Mobile-country-code">
 								<?php
 									$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-									$country=json_decode($countrycode, true);						
+									$country=json_decode($countrycode, true);
+									$countser = 0;									
 									foreach($country  as $key => $value){
 										echo '<option value="'.$country[$key]['TelephoneCode'].'"';
-										if ($details['Mobile-country-code'] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; } 
+										if ($details['Mobile-country-code'] ==  str_replace(' ', '', $country[$key]['TelephoneCode'])&& $countser == 0){ echo "selected='selected'"; } 
 										elseif(empty($details['Mobile-country-code']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
+											$countser++;
 										}
 										echo '> '.$country[$key]['Country'].' </option>';
 									}
