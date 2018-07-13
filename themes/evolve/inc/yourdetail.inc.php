@@ -90,7 +90,7 @@ if(isset($_POST['step1'])) {
 		}
 		$postData['Dietary'] = $testDietaryArray;
 	}
-	if(isset($_POST['wpnumber'])){ 
+	if(isset($_POST['wpnumber'])&& $_POST['wpnumber']!="0"){ 
 	$num = $_POST['wpnumber']; 
 	$tempWork = array();
 	for($i=0; $i<$num; $i++){
@@ -129,7 +129,7 @@ if(isset($_POST['step1'])) {
 	}
         $postData['Workplaces'] =  $tempWork ;
 	}
-    if(isset($_POST['wpnumber']) == "1" && empty($_POST['Name-of-workplace0'])){ $postData['Workplaces'] =array();}
+    if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 	if(isset($_POST['addtionalNumber'])){
 			$n =  $_POST['addtionalNumber'];
 			$temp = array();
@@ -1106,11 +1106,11 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
 						<li <?php if($key=='Workplace0') echo 'class ="active" ';?>><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a></li>
 						<?php endforeach; ?> 
-						<?php if(sizeof($details['Workplaces'])==0):?>
+						<?php //if(sizeof($details['Workplaces'])==0):?>
 					
-				<li class ="active"><a data-toggle="tab" href="#workplace0"><?php echo "Workplace1";?></a></li>
+				<!--<li class ="active"><a data-toggle="tab" href="#workplace0"><?php //echo "Workplace1";?></a></li>-->
 				
-				<?php endif; ?>
+				<?php //endif; ?>
 						</ul>
 					</div>
 
@@ -1478,228 +1478,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						
 					</div>
 				<?php endforeach; ?>
-				<?php if(sizeof($details['Workplaces'])==0):?>
 				
-			
-				<div id="workplace0" class='tab-pane fade in active'> 
-				    <input type="hidden" name="WorkplaceID0" value="-1">
-
-					<div class="row FapTagC">
-						<div class="col-xs-12">
-							<input class="styled-checkbox" type="checkbox" name="Findphysio0" id="Findphysio0" value="" >
-							<label  style="font-weight: 300" for="Findphysio0"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
-						</div>
-
-						<div class="col-xs-12">
-							<input class="styled-checkbox" type="checkbox" name="Findabuddy0" id="Findabuddy0" value="">
-							<label  style="font-weight: 300" for="Findabuddy0"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>
-						</div>
-					</div>
-
-					<div class="col-xs-12 col-sm-6">
-						<label for="Name-of-workplace">Name of workplace<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" name="Name-of-workplace0" id="Name-of-workplace0">
-					</div>
-
-					<div class="col-xs-12 col-sm-6">
-						<label for="BuildingName">Practice Name</label>
-						<input type="text" class="form-control" name="WBuildingName0" id="WBuildingName0">
-					</div>
-
-				<div class="row">
-					<div class="col-xs-12 col-md-6">
-						<label for="WAddress_Line_10">Address line 1<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" name="WAddress_Line_10" id="WAddress_Line_10" placeholder="Address line 1">
-					</div>
-
-					<div class="col-xs-12 col-md-6">
-						<label for="WAddress_Line_20">Address line 2</label>
-						<input type="text" class="form-control" name="WAddress_Line_20" id="WAddress_Line_20" placeholder="Address line 2">
-					</div>
-
-					<div class="col-xs-6 col-md-6">
-						<label for="Wcity">City/Town<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" name="Wcity0" id="Wcity0" placeholder="City or town">
-					</div>
-
-					<div class="col-xs-6 col-md-6">
-						<label for="Wpostcode">Postcode<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" name="Wpostcode0" id="Wpostcode0" placeholder="Postcode">
-					</div>
-
-					<div class="col-xs-6 col-md-6">
-						<label for="Wstate">State<span class="tipstyle">*</span></label>
-						<div class="chevron-select-box">
-						<select class="form-control" id="Wstate0" name="Wstate0">
-							<option value="" selected disabled> State </option>
-							<?php 
-								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
-								$State=json_decode($statecode, true);
-								foreach($State  as $key => $value){
-								echo '<option value="'.$State[$key]['Abbreviation'].'"';
-							    echo '> '.$State[$key]['Abbreviation'].' </option>';
-								}
-							?>
-						</select>
-						</div>
-					</div>
-
-					<div class="col-xs-6 col-md-6">
-						<label for="Wcountry">Country<span class="tipstyle">*</span></label>
-					    <div class="chevron-select-box">
-						<select class="form-control" id="Wcountry0" name="Wcountry0">
-							<?php 
-							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							$country=json_decode($countrycode, true);
-							foreach($country  as $key => $value){
-								echo '<option value="'.$country[$key]['Country'].'"';
-								if($country[$key]['ID']=="14"){
-									echo "selected='selected'";
-									}
-								echo '> '.$country[$key]['Country'].' </option>';
-								
-							}
-							?>
-						</select>
-						</div>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-xs-12 col-sm-6 col-md-6">
-						<label for="Wemail">Workplace email<span class="tipstyle">*</span></label>
-						<input type="email" class="form-control" name="Wemail0" id="Wemail0">
-					</div>
-
-					<div class="col-xs-12 col-sm-6 col-md-6">
-						<label for="Wwebaddress">Website</label>
-						<input type="text" class="form-control" name="Wwebaddress0" id="Wwebaddress0">
-					</div>
-
-					<div class="col-xs-12 col-sm-6 col-md-6">
-						<label for="Wphone">Phone number<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" name="Wphone0" id="Wphone0">
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-xs-12 col-md-6">
-						<label>Does this workplace offer additional languages?</label>
-						<div class="plus-select-box">
-						<select class="chosen-select" id="Additionallanguage0" name="Additionallanguage0[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
-							<?php 
-								$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
-								$Language=json_decode($Languagecode, true);
-								foreach($Language  as $key => $value){
-									echo '<option value="'.$Language[$key]['ID'].'"';
-									echo '> '.$Language[$key]['Name'].' </option>';
-								}
-								?>
-						</select>
-						</div>
-					</div>
-
-					<div class="col-xs-12 col-sm-6 col-md-6">
-						<label>Quality In Practice number(QIP):</label>
-						<input type="text" class="form-control" name="QIP0" id="QIP0">
-					</div>
-				</div>
-
-				<div class="row label-list"> 
-					<div class="col-xs-12" style="margin-top: 18px">
-						<span>What services does this workplace provide?</span>
-					</div>
-
-					<div class="col-xs-12 col-sm-6">
-						<input class="styled-checkbox" type="checkbox" name="Electronic-claiming0" id="Electronic-claiming0" value="">	
-						<label class="light-font-weight" for="Electronic-claiming0">Electronic claiming</label>
-					</div>
-
-					<div class="col-xs-12 col-sm-6">
-						<input class="styled-checkbox" type="checkbox" name="Hicaps0" id="Hicaps0" value="">
-						<label class="light-font-weight" for="Hicaps0">HICAPS</label>
-					</div>
-
-					<div class="col-xs-12 col-sm-6">
-						<input class="styled-checkbox" type="checkbox" name="Healthpoint0" id="Healthpoint0" value="" >
-						<label class="light-font-weight" for="Healthpoint0">Healthpoint</label>
-					</div>
-
-					<div class="col-xs-12 col-sm-6">
-						<input class="styled-checkbox" type="checkbox" name="Departmentva0" id="Departmentva0" value="">
-						<label class="light-font-weight" for="Departmentva0">Department of Vetarans' Affairs</label>
-					</div>
-
-					<div class="col-xs-12 col-sm-6">
-						<input class="styled-checkbox" type="checkbox" name="Workerscompensation0" id="Workerscompensation0" value="">
-						<label class="light-font-weight" for="Workerscompensation0">Workers compensation</label>
-					</div>
-
-					<div class="col-xs-12 col-sm-6">
-						<input class="styled-checkbox" type="checkbox" name="Motora0" id="Motora0" value="">
-						<label class="light-font-weight" for="Motora0">Motor accident compensation</label>
-					</div>
-
-					<div class="col-xs-12 col-sm-6">
-						<input class="styled-checkbox" type="checkbox" name="Medicare0" id="Medicare0" value="">
-						<label class="light-font-weight" for="Medicare0">Medicare Chronic Disease Management</label>
-					</div>
-
-					<div class="col-xs-12 col-sm-6">
-						<input class="styled-checkbox" type="checkbox" name="Homehospital0" id="Homehospital0" value="">
-						<label class="light-font-weight" for="Homehospital0">Home and hospital visits</label>
-					</div>
-
-					<div class="col-xs-12 col-sm-6">
-						<input class="styled-checkbox" type="checkbox" name="Mobilephysiotherapist0" id="Mobilephysiotherapist0" value="">
-						<label class="light-font-weight" for="Mobilephysiotherapist0">Mobile physiotherapist</label>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-xs-12 col-md-6">
-						<label>Workplace setting<span class="tipstyle">*</span></label>
-						<div class="chevron-select-box">
-						<select class="form-control" id="Workplace-setting0" name="Workplace-setting0">
-						<?php
-							// 2.2.36 - get workplace settings list
-							// Send - 
-							// Response - get workplace settings from Aptify via webserice return Json data;
-							// stroe workplace settings into the session
-							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
-							$workplaceSettings=json_decode($workplaceSettingscode, true);	
-							$_SESSION["workplaceSettings"] = $workplaceSettings;
-							foreach($workplaceSettings  as $pair => $value){
-							echo '<option value="'.$workplaceSettings[$pair]["ID"].'"';
-							echo '> '.$workplaceSettings[$pair]["Name"].' </option>'; 
-							}							
-						?>
-						</select>
-						</div>
-					</div>
-
-					<div class="col-xs-12 col-sm-6 col-md-6">
-						<label>Numbers of hours worked<span class="tipstyle">*</span></label>
-						<div class="chevron-select-box">
-						<select class="form-control" id="Number-worked-hours0" name="Number-worked-hours0">
-							<option value="0" disabled>no</option>
-							<?php 
-							$NumberOfHourscode  = file_get_contents("sites/all/themes/evolve/json/NumberOfHours.json");
-							$NumberOfHours=json_decode($NumberOfHourscode, true);
-							foreach($NumberOfHours  as $key => $value){
-								echo '<option value="'.$NumberOfHours[$key]['ID'].'"';
-								echo '> '.$NumberOfHours[$key]['Name'].' </option>';
-							}
-							?>
-						</select>
-						</div>
-					</div>
-				</div>
-
-			</div>
-			
-				
-				<?php endif; ?>			
 				<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton14"><span class="dashboard-button-name">Last</span></a></div>-->
 			</div>	
 
@@ -2042,7 +1821,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			var number = Number($('#wpnumber').text());
 			var i = Number(number +1);
 			var j = Number(number +2);
-			$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="deletewp'+ i + '"></span></li>' );
+			$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
 			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
 			$('#wpnumber').text(i);
 			$('input[name=wpnumber]').val(j);
@@ -2050,7 +1829,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
 			var sessionLanguage = '<?php echo json_encode($_SESSION["Language"]);?>';
 			var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
-			$("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry});
+			$("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry});
 			$(".chosen-select").chosen({width: "100%"});
 		});
 		$("a[href^=#workplace]").live( "click", function(){ $(".chosen-select").chosen({width: "100%"});});

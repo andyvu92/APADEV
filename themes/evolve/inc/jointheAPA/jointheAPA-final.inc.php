@@ -162,7 +162,7 @@ if(isset($_POST['step2'])) {
 	$sendData["UserID"] = $_SESSION['UserId'];
 	$NGListArray = GetAptifyData("19", $sendData);
 	//print_r($NGListArray);
-	$NGProductsArray=$_SESSION["NationalProductID"];
+	if(isset($_SESSION["NationalProductID"])) {$NGProductsArray=$_SESSION["NationalProductID"];} else{$NGProductsArray=array();}
 	// 2.2.21 - GET Fellowship product price
 	// Send - 
 	// userID

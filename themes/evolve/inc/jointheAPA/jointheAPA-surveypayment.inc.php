@@ -61,7 +61,7 @@ if(isset($_POST['step2-1'])) {
 	
 }
   ?>
-<div id="tipsBlock" class="<?php if($_POST['insuranceStatus']=="1") {echo "display";} else { echo "display-none";}?>"><span style="color:red;">Unfortunately, we cannot let you proceed with this membership purchase. Please contact the APA member hub (include email link) or on 1 300 306 622 for more information.</span></div>
+<div id="tipsBlock" class="<?php if(isset($_POST['insuranceStatus'])&& $_POST['insuranceStatus']=="1") {echo "display";} else { echo "display-none";}?>"><span style="color:red;">Unfortunately, we cannot let you proceed with this membership purchase. Please contact the APA member hub (include email link) or on 1 300 306 622 for more information.</span></div>
 <form id="join-insurance-form" action="jointheapa" method="POST">
 	<input type="hidden" name="step2" value="2"/>
 	<div class="down6" <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['goP']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
@@ -278,12 +278,12 @@ if(isset($_POST['step2-1'])) {
 		<div class="row">
 			<div class="col-xs-12">
 				<input class="styled-checkbox" type="checkbox" id="privacypolicy">
-				<label id="privacypolicyl">I agree to the Privacy policy</label>
+				<label for="privacypolicy" id="privacypolicyl">I agree to the Privacy policy</label>
 			</div>
 
 			<div class="col-xs-12">
 				<input class="styled-checkbox" type="checkbox" id="instalmentpolicy">
-				<label id="instalmentpolicyl">I agree to the Instalment Payment Policy</label>
+				<label for="instalmentpolicy" id="instalmentpolicyl">I agree to the Instalment Payment Policy</label>
 			</div>
 
 			<!--<div class="col-xs-12 display-none" id="rolloverblock">

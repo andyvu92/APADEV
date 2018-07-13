@@ -36,7 +36,7 @@ if(isset($_POST["POSTPRF"])) {
 	$OrderSend['InstallmentFor'] = "Membership";
 	$OrderSend['InstallmentFrequency'] = "";
 	$OrderSend['CampaignCode'] = $_POST["CouponCode"];
-	$ReceiveOrder = GetAptifyData("26", $OrderSend);
+	$registerOuts = GetAptifyData("26", $OrderSend);
 	if($registerOuts['Invoice_ID']!=="0") {
 		$invoice_ID = $registerOuts['Invoice_ID'];
 		
@@ -84,13 +84,68 @@ if(isset($_POST["Invoice_ID"])) {
 <h2>Thank you for your purchase</h2>
 <p>We hope you enjoy your event.</p>
 
-<form action="/pd/completed-purchase" method="POST">
+<!--<form action="/pd/completed-purchase" method="POST">
 	<input type="hidden" value="1" name="Invoice_ID" id="Invoice_ID">
 	<input type="submit" value="Download your receipt">
-</form>
+</form>-->
 
-<p>Download <a><?php if(isset($GetPDF)) echo $GetPDF["Invoice"]; ?></a></p>
-
+<!--<p>Download <a><?php if(isset($GetPDF)) //echo $GetPDF["Invoice"]; 
+$apis[0] = $invoice_ID;
+$invoiceAPI = GetAptifyData("18", $apis);
+?></a></p>-->
+<a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 <p>A copy will be sent to your inbox and stored in your new dashboard</p>
+<div id="Iaksbnkvoice" class="modal fade big-screen" role="dialog">
+	<div class="modal-dialog">
 
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+		<div class="modal-body">
+		<iframe name="stsIaksbnkvoice" src="http://www.physiotherapy.asn.au"></iframe>
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+	</div>
+
+	</div>
+</div>
 <a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>
+<style type="text/css">
+		.big-screen {
+			width: 62%;
+			margin: auto;
+			min-width: 1190px;
+		}
+		.big-screen .modal-dialog, .big-screen .modal-dialog .modal-content, .big-screen .modal-dialog .modal-content .modal-body, .big-screen iframe {
+			width: 100%;
+			height: 100%;
+		}
+	</style> 
+	<script>
+	$(document).ready(function() {
+		if (window.frames["Iaksbnkvoice"] && !window.userSet) {
+			<?php if(count($invoiceAPI) <= 30) :?>
+				window.userSet = true;
+			<?php endif; ?>
+			<?php	
+				$count = 0;
+				$tt = 0;
+			?>
+			<?php foreach($apis as $api): ?>
+				<?php
+					if($count > 30) {
+						$tt++;
+						break;
+					}
+				?>
+				frames['stsIaksbnkvoice'].location.href="<?php echo $invoiceAPI[$count]; ?>";
+				<?php $count++; ?>
+			<?php endforeach; ?>
+			?>
+		}
+	});
+	</script>

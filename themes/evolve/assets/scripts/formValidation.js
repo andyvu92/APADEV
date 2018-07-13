@@ -68,12 +68,13 @@ jQuery(document).ready(function($) {
 		}
 		if($('.down2:visible').length !== 0){
 			if($("input[name=Memberid]").val() ==''){$("input[name=Memberid]").addClass("focuscss");}else{$("input[name=Memberid]").removeClass("focuscss");}
+			if (!isValidEmailAddress($("input[name=Memberid]").val())) {$("input[name=Memberid]").addClass("focuscss");$('#checkMessage').html("this email address is not valid");}else{$("input[name=Memberid]").removeClass("focuscss"); $('#checkMessage').html("");}
 			if($("input[name=Password]").length !==0){
 				if($("input[name=Password]").val() ==''){$("input[name=Password]").addClass("focuscss");}else{$("input[name=Password]").removeClass("focuscss");}
 			}
 			if($("select[name=MemberType]").val() ==''){$("select[name=MemberType]").addClass("focuscss");}else{$("select[name=MemberType]").removeClass("focuscss");}
 			if($("select[name=Branch]").val() ==''){$("select[name=Branch]").addClass("focuscss");}else{$("select[name=Branch]").removeClass("focuscss");}
-		    if($("input[name=Memberid]").val() ==''||$("input[name=MemberType]").val() ==''||$("input[name=Branch]").val() ==''){
+		    if($("input[name=Memberid]").val() =='' || !isValidEmailAddress($("input[name=Memberid]").val()) ||$("input[name=MemberType]").val() ==''||$("input[name=Branch]").val() ==''){
 				return false;
 		    }
 			if($("input[name=Password]").length !==0) {
@@ -83,15 +84,17 @@ jQuery(document).ready(function($) {
 		if($('select[name=MemberType]').val()!=="9964" && $('select[name=MemberType]').val()!=="9965" && $('select[name=MemberType]').val()!=="10004"&& $('select[name=MemberType]').val()!=="9966"&& $('select[name=MemberType]').val()!=="9967"&& $('select[name=MemberType]').val()!=="9968"&& $('select[name=MemberType]').val()!=="9997"&& $('select[name=MemberType]').val()!=="9967"){
 			if($('.down3:visible').length !== 0){
 				var i = $("input[name=wpnumber]").val();
+				if(i!=0){
 				for (x = 0; x<i;x++){
 					if($("input[name=Name-of-workplace"+x+"]").val() ==''){$("input[name=Name-of-workplace"+x+"]").addClass("focuscss");}else{$("input[name=Name-of-workplace"+x+"]").removeClass("focuscss");}
 					if($("select[name=Workplace-setting"+x+"]").val() ==''){$("select[name=Workplace-setting"+x+"]").addClass("focuscss");}else{$("select[name=Workplace-setting"+x+"]").removeClass("focuscss");}
 					if($("input[name=WAddress_Line_1"+x+"]").val() ==''){$("input[name=WAddress_Line_1"+x+"]").addClass("focuscss");}else{$("input[name=WAddress_Line_1"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wcity"+x+"]").val() ==''){$("input[name=Wcity"+x+"]").addClass("focuscss");}else{$("input[name=Wcity"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wpostcode"+x+"]").val() ==''){$("input[name=Wpostcode"+x+"]").addClass("focuscss");}else{$("input[name=Wpostcode"+x+"]").removeClass("focuscss");}
-					//if($("input[name=Wstate"+x+"]").val() ==''){$("input[name=Wstate"+x+"]").addClass("focuscss");}else{$("input[name=Wstate"+x+"]").removeClass("focuscss");}
+					if($("input[name=Wstate"+x+"]").val() ==''){$("input[name=Wstate"+x+"]").addClass("focuscss");}else{$("input[name=Wstate"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wcountry"+x+"]").val() ==''){$("input[name=Wcountry"+x+"]").addClass("focuscss");}else{$("input[name=Wcountry"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wemail"+x+"]").val() ==''){$("input[name=Wemail"+x+"]").addClass("focuscss");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss");}
+					if (!isValidEmailAddress($("input[name=Wemail"+x+"]").val())) {$("input[name=Wemail"+x+"]").addClass("focuscss");$('#erroMessage').html("this email address is not valid");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss"); $('#errorMessage').html("");}
 					//if($("input[name=Wwebaddress"+x+"]").val() ==''){$("input[name=Wwebaddress"+x+"]").addClass("focuscss");}else{$("input[name=Wwebaddress"+x+"]").removeClass("focuscss");}
 					if($("input[name=Number-worked-hours"+x+"]").val() ==''){$("input[name=Number-worked-hours"+x+"]").addClass("focuscss");}else{$("input[name=Number-worked-hours"+x+"]").removeClass("focuscss");}
 				}
@@ -103,11 +106,12 @@ jQuery(document).ready(function($) {
 					if($("input[name=Wcity"+x+"]").val() ==''||$("input[name=Wpostcode"+x+"]").val() ==''){
 						return false;
 					}
-					if($("input[name=Wcountry"+x+"]").val() ==''||$("input[name=Wemail"+x+"]").val() ==''||$("input[name=Number-worked-hours"+x+"]").val() ==''){
+					
+					if($("input[name=Wcountry"+x+"]").val() ==''||$("input[name=Wemail"+x+"]").val() =='' || !isValidEmailAddress($("input[name=Wemail"+x+"]").val()) ||$("input[name=Number-worked-hours"+x+"]").val() ==''){
 						return false;
 					}
 				}
-				
+			}	
 			}
 		}else { return true;}
 		
@@ -202,6 +206,11 @@ jQuery(document).ready(function($) {
 		}
 				
 	};
+
+	function isValidEmailAddress(emailAddress) {
+    var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+    return pattern.test(emailAddress);
+	}
 	var checkInsurance = function (memberType){
     if(memberType=="9960"||memberType=="9961"||memberType=="9968"||memberType=="9997"||memberType=="9965"||memberType=="9964"||memberType=="10006"||memberType=="10005"||memberType=="9966"||memberType=="9967"){
 		return false;
@@ -223,7 +232,9 @@ jQuery(document).ready(function($) {
 		if(validateFun()==false){alert("please fill out all required fields *");return false;} 
         var i = Number($(this).attr("class").replace('join-details-button', ''));
 		var x = Number(i + 1);
-	    if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
+		if((x==3) && ($('select[name=MemberType]').val()=="9964" || $('select[name=MemberType]').val()=="9965")){ $('.down4').slideToggle(450); }
+	    //if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
+		
 	    $('[class^=down]:not(.down'+x+')').slideUp(400);
 	    if((x==5) && ($('#insuranceTag').val()=="0")){ $('.down6').slideToggle(450); }
 		else{$('.down' + x).slideToggle(450);}

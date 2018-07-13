@@ -17,10 +17,15 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 		<input class="styled-checkbox" type="checkbox" name="Findabuddy'.$i.'" id="Findabuddy'.$i.'" value="" >
 		<label class="light-font-weight" for="Findabuddy'.$i.'"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>
 	</div>
-
+<div class="row">
+<div class="col-lg-12">
+<label for="Name-of-workplace'.$i.'">Name of workplace<span class="tipstyle">*</span></label>
+<input type="text" class="form-control" name="Name-of-workplace'.$i.'" id="Name-of-workplace'.$i.'">
+</div>
+</div>
 <div class="row">
 	<div class="col-xs-12 col-md-6">
-		<label for="BuildingName'.$i.'">Practice Name</label>
+		<label for="BuildingName'.$i.'">Building Name</label>
 		<input type="text" class="form-control" name="WBuildingName'.$i.'" id="WBuildingName'.$i.'" value="">
 	</div>
 </div>
@@ -52,14 +57,14 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 		<div class="chevron-select-box">
 			<select class="form-control" id="Wstate'.$i.'" name="Wstate'.$i.'">
 				<option value="" selected disabled> State </option>
-				<option value="73"> ACT </option>
-				<option value="74"> NSW </option>
-				<option value="77"> SA </option>
-				<option value="78"> TAS </option>
-				<option value="79"> VIC </option>
-				<option value="76"> QLD </option>
-				<option value="75"> NT </option>
-				<option value="80"> WA </option>
+				<option value="ACT"> ACT </option>
+				<option value="NSW"> NSW </option>
+				<option value="SA"> SA </option>
+				<option value="TAS"> TAS </option>
+				<option value="VIC"> VIC </option>
+				<option value="QLD"> QLD </option>
+				<option value="NT"> NT </option>
+				<option value="WA"> WA </option>
 			</select>
 		</div>
 	</div>
