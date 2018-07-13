@@ -400,6 +400,9 @@ body.page-node{
                     }
 
                     #pd-search-results{
+                        i{
+                            color: #5E6167;
+                        }
                         .flex-cell{
                             position: relative;
                             transition: 0.1s linear;
@@ -412,6 +415,7 @@ body.page-node{
                             }
                         }
                         @media all and (max-width: @larger-tablet-width){
+                            border-top: 1px solid #d3d4d5;
                             .heading-row{
                                 display: none;
                             }
@@ -455,6 +459,18 @@ body.page-node{
                             }
                         }
                     }
+                    @media all and (max-width: @larger-tablet-width){
+                        .pager{
+                            width: 100%;
+                        }
+                        .page-size-setting{
+                            width: 100%;
+                            .pageSetting{
+                                text-align: left;
+                            }
+                        }
+                    }
+                   
                 }
             }
         }
@@ -589,6 +605,11 @@ body.page-node{
                 }
             }
             .pd-status{
+                display: flex;
+                flex-direction: column;
+                i.fa-ban{
+                    font-size: 1.5em;
+                }
                 a{
                     display: flex;
                     flex-direction: column;
