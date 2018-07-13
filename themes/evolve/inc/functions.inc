@@ -118,12 +118,18 @@ function nationalIcons(){
 /*PD detail page */
 function comparePrice($priceList, $cost){
 	foreach($priceList as $key=>$value) { 
+		$x = explode(" ", $key);
+		if(count($x) == 1) {
+			$y = $key;
+		} else {
+			$y = str_replace($x[0], "", $key);
+		}
 		if($cost>$value) {
-			echo '<span class="redprice">'.$key.":&nbsp;$".$value."</span><br>";
+			echo '<span class="redprice">'.$y.":&nbsp;$".$value."</span><br>";
 		} elseif($cost<$value){
-			echo '<span class="greenprice">'.$key.":&nbsp;$".$value."</span><br>";
+			echo '<span class="greenprice">'.$y.":&nbsp;$".$value."</span><br>";
 		} elseif($cost==$value){
-			echo $key.":&nbsp;$".$value."<br>";
+			echo $y.":&nbsp;$".$value."<br>";
 		}
 	}
 }

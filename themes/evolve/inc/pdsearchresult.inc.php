@@ -26,21 +26,33 @@ if(isset($_SESSION['UserID'])) { $sendData["UserID"] = $_SESSION['UserId'];
 } else { $sendData["UserID"] = "-1"; }
 if(isset($_POST["Radius"])) { $request["Radius"] = $_POST["Radius"];
 } else { $request["Radius"] = ""; }
-if(isset($_POST["Keywords"])) {	$request["Keyword"] = $_POST["Keywords"];
+if(isset($_POST["Keywords"]) || isset($_GET["Keywords"])) {	
+	if(isset($_POST["Keywords"])) {$request["Keyword"] = $_POST["Keywords"];}
+	else {$request["Keyword"] = $_GET["Keywords"];}
 } else { $request["Keyword"] = ""; }
 if(isset($_POST["Typeofpd"])) {	$request["Typeofpd"] = $_POST["Typeofpd"];
 } else { $request["Typeofpd"] = ""; }
-if(isset($_POST["Nationalgp"])) {	$request["Nationalgp"] = $_POST["Nationalgp"];
+if(isset($_POST["Nationalgp"]) || isset($_GET["Nationalgp"])) {	
+	if(isset($_POST["Nationalgp"])) {$request["Nationalgp"] = $_POST["Nationalgp"];}
+	else {$request["Nationalgp"] = $_GET["Nationalgp"];}
 } else { $request["Nationalgp"] = ""; }
 if(isset($_POST["Regionalgp"])) {	$request["Regionalgp"] = $_POST["Regionalgp"];
 } else { $request["Regionalgp"] = ""; }
-if(isset($_POST["State"])) {	$request["State"] = $_POST["State"];
+if(isset($_POST["State"]) || isset($_GET["State"])) {	
+	if(isset($_POST["State"])) {$request["State"] = $_POST["State"];}
+	else {$request["State"] = $_GET["State"];}
 } else { $request["State"] = ""; }
-if(isset($_POST["Suburb"])) {	$request["Suburb"] = $_POST["Suburb"];
+if(isset($_POST["Suburb"]) || isset($_GET["Suburb"])) {	
+	if(isset($_POST["Suburb"])) {$request["Suburb"] = $_POST["Suburb"];}
+	else {$request["Suburb"] = $_GET["Suburb"];}
 } else { $request["Suburb"] = ""; }
-if(isset($_POST["Begindate"])) { $request["BeginDate"] = str_replace("-","/",$_POST["Begindate"]);
+if(isset($_POST["BeginDate"]) || isset($_GET["BeginDate"])) {	
+	if(isset($_POST["BeginDate"])) {$request["BeginDate"] = str_replace("-","/",$_POST["BeginDate"]);}
+	else {$request["BeginDate"] = $_GET["BeginDate"];}
 } else { $request["BeginDate"] = ""; }
-if(isset($_POST["Enddate"])) {	$request["EndDate"] = str_replace("-","/",$_POST["Enddate"]);
+if(isset($_POST["EndDate"]) || isset($_GET["EndDate"])) {	
+	if(isset($_POST["EndDate"])) {$request["EndDate"] = str_replace("-","/",$_POST["EndDate"]);}
+	else {$request["EndDate"] = $_GET["EndDate"];}
 } else { $request["EndDate"] = ""; }
 if(isset($_GET["pagesize"])) {
 	$request["PageSize"] = $_GET["pagesize"];
@@ -61,8 +73,8 @@ $totalPage = intval($totalNum/$request["PageSize"]);
 if($totalNum % $request["PageSize"] > 0) {
 	$totalPage++;
 }
-echo "ssssssssss".$totalNum;
-echo "ttttttttt".$totalPage;
+//echo "totalnum: ".$totalNum;
+//echo "totalpage: ".$totalPage;
 ?>
 
 <h3 class="light-lead-heading align-center">PD BASED ON YOUR PROFILE</h3>
@@ -101,13 +113,10 @@ echo "ttttttttt".$totalPage;
 	} else {
 		$current = 1;
 	}
-	// echo "ssssssssss".$totalNum;
-	// echo "ttttttttt".$totalPage;
-
-	$max = intval($totalNum / 10);
-	if($max == 0) $max = 1;
+	$max1 = $totalPage;
+	$max = $totalNum;
 	//echo "when current is: $current <br><br>";
-	for($i = 0; $i < $max; $i++) {
+	for($i = 0; $i < ($max / 10); $i++) {
 		$front = (10 * $i);
 		$back = 10 * ($i + 1) + 1;
 		if($front < $current && $current <= ($back - 1)) {
@@ -123,13 +132,13 @@ echo "ttttttttt".$totalPage;
 			}
 			for($j = 1;$j < 11; $j++) {
 				$t = ($front + $j);
-				if($t <= $max) {
+				if($t <= $max1) {
 					if($t == $current) {
 						echo '<div class="Pagebutton current">'.$t.'</div>';
 					} else {
 						echo '<a href="'.$base_url.'/pd/pd-search?page='.$t.'&pagesize='.$numItem.$passString.'"><div class="Pagebutton">'.$t.'</div></a>';
 					}
-				} 
+				}
 			}
 			if($current != $max) {
 				echo '<a href="'.$base_url.'/pd/pd-search?page='.($current + 1).'&pagesize='.$numItem.$passString.'"><div class="Pagebutton">></div></a>';
@@ -191,7 +200,7 @@ echo "ttttttttt".$totalPage;
 		echo	'<div class="flex-col-3">
 					<span class="title"><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a></span>
 					<div class='excerpt'><p>".$result['Description'].'</p></div>
-					<span class="readmore"><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Tell me more</span></a></span>
+					<span class="readmore"><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Read more</span></a></span>
 				</div>';
 
         if(!empty($result['PDType'])) {
@@ -230,15 +239,15 @@ echo "ttttttttt".$totalPage;
 			echo	"<div class='flex-col-2'>N/A</div>";
 		}
 		
-		echo	"<div class='flex-col-1 pd-status'>";
+		echo	"<div class='flex-col-1'>";
 		$gap = intval($result['Totalnumber']) - intval($result['Enrollednumber']);
 		$tenP = intval($result['Totalnumber'])/10;
 		if($gap == 0) {
 			echo  "COURSE  FULL";
 		} elseif($gap < $tenP) {
-			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i></a>';
+			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true">Almost full</a></i>';
 		} else {
-			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Open</span></a>';
+			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true">Open</a></i>';
 		}
 		echo	"</div>";
 		echo "</div>";
@@ -250,7 +259,7 @@ echo "ttttttttt".$totalPage;
 <div class="resultMobile">
 <?php foreach($results as $result){
 echo '<div class="resultDisplay">';
-echo '<div class="resultTitle"><span class="mobiledes">Title:</span><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a><br>".$result['Description'].'<br><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Tell me more</span></a></div>';
+echo '<div class="resultTitle"><span class="mobiledes">Title:</span><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a><br>".$result['Description'].'<br><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Read more</span></a></div>';
 if(isset($result['CPDhours'])) {
 	echo '<div class="resultType"><span class="mobiledes">Type:</span>'.$result['PDType'].'&nbsp;<span class="mobiledes">CPD HRS:</span>?</div>';
 } else {
@@ -264,9 +273,9 @@ $tenP = intval($result['Totalnumber'])/10;
 if($gap == 0) {
 	echo  "COURSE  FULL";
 } elseif($gap < $tenP) {
-	echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span class="pd-status">Almost full</span></a>';
+	echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true">Almost full</a></i>';
 } else {
-	echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span class="pd-status">Open</span></a>';
+	echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true">Open</a></i>';
 }
 echo "</div>";
 echo "</div>";
