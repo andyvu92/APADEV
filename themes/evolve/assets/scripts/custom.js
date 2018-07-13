@@ -174,7 +174,7 @@ jQuery(document).ready(function($) {
 		$('#downt2').hide(700);
 		$('#downt3').show(700);*/
 	});
-								  
+
     $('#block-block-216 input[type="checkbox"]').click(function(){
          if($(this).is(":checked")){
             $(this).attr('checked', true);
@@ -185,7 +185,6 @@ jQuery(document).ready(function($) {
           $(this).removeAttr('checked');
           $(this).val('0');
          }
-
     });
 	$('#p1-2').click(function(){
         if($(this).is(":checked")){

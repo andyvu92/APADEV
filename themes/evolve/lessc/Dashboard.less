@@ -1250,8 +1250,8 @@ a#insuranceControl{
             margin-left: -55px;
         }
 
-        @media all and (max-width: @larger-destop-width) {
-            width: 199px;
+        @media all and (max-width: @larger-desktop-width) {
+            width: 180px;
             span.number{
                 font-size: 4.5em;
                 left: 56%;
@@ -1367,7 +1367,7 @@ a#insuranceControl{
                 .text{
                     font-size: 1.8em;
                 }
-                @media all and (max-width: @larger-destop-width) {
+                @media all and (max-width: @larger-desktop-width) {
                     width: 170px;
                     height: 170px;
                     box-shadow: 0 0 0 12px #009fda;
@@ -2308,6 +2308,10 @@ form{
     }
     .plus-select-box{
         position: relative;
+        .chosen-container{
+            position: relative;
+            z-index: 1;
+        }
         select{
             -webkit-appearance: none;
             position: relative;

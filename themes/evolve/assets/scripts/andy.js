@@ -30,3 +30,17 @@ jQuery(document).ready(function(){
   jQuery("#section-content-top .container .row #block-block-241 .content .pager").clone().appendTo("#section-content-top .container .row #block-block-241 .content .pager-bottom");
 });
 
+//ADD ACTIVE CLASS
+jQuery(document).ready(function($){
+  // Get current path and find target link
+  var path = window.location.pathname.split("/").pop();
+  
+  // Account for home page with empty path
+  if ( path == '' ) {
+    path = 'index.php';
+  }
+      
+  var target = jQuery('.nav a[href="'+path+'"]');
+  // Add active class to target link
+  target.parent().addClass('active');
+});

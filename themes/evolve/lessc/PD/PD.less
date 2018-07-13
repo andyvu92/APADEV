@@ -222,7 +222,44 @@
     .chosen-container-multi{
         .chosen-choices{
             background: none;
-            border: 1px solid #665f5e;
+            border: 1px solid #d1d1d1;
+            padding: 0;
+            background-image: none;
+            li.search-choice{
+                background: rgba(58, 60, 60,0.8);
+                background-color: rgba(0,0,0,0);
+                margin: 8px;
+                &:active {
+                    outline: none;
+                    border: none;
+                    }
+                .search-choice-close{
+                    opacity: 0.5;
+                    position: absolute;
+                    z-index: 9999;
+                    right: 2px;
+                    width: 15px;
+                    height: 15px;
+                    top: 2px;
+                    cursor: pointer;
+                    background-repeat:no-repeat;
+                    background-size:contain;
+                    background-position:center;
+                    background-image:url('/sites/default/files/dashboard-icon/close-icon.png');
+                    &:hover{
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+    }
+}
+
+#registerPDUser{
+    .chosen-container-multi{
+        .chosen-choices{
+            background: none;
+            border: 1px solid #d1d1d1;
             padding: 0;
             background-image: none;
             li.search-choice{
@@ -354,7 +391,7 @@ body.page-node{
     #section-content-top{
         .container{
             .row{
-                .region-content-top{
+                #block-block-241{
                     @media all and (max-width: @larger-desktop-width){
                         padding: 0 50px;
                     }
@@ -365,15 +402,57 @@ body.page-node{
                     #pd-search-results{
                         .flex-cell{
                             position: relative;
-                        }
-                        .pd-action{
-
+                            transition: 0.1s linear;
+                            background: none;
+                            &:hover{
+                                background: rgba(0,0,0,0.02);
+                            }
+                            &.heading-row:hover{
+                                background: none;
+                            }
                         }
                         @media all and (max-width: @larger-tablet-width){
-                            
+                            .heading-row{
+                                display: none;
+                            }
+                            .flex-cell{
+                                flex-direction: column;
+                                .flex-col-3{
+                                    width: 90%;
+                                    margin-bottom: 20px;
+                                }
+                                .flex-col-1, .flex-col-2{
+                                    width: 50%;
+                                    font-size: 0.85em;
+                                    text-align: left;
+                                }
+                                .pd-status{
+                                    position: absolute;
+                                    bottom: 5%;
+                                    right: 5%; 
+                                    width: 10%;
+                                    font-size: 1em;
+                                    text-align: center;
+                                }
+                            }
                         }
-                        @media all and (max-width: @tablet-width){
-                            
+                        @media all and (max-width: @phone-width){
+                            .flex-col-1, .flex-col-2{
+                                width: 80%;
+                                font-size: 0.9em;
+                            }
+                        }
+                        .pd-detail-city{
+                            word-break: break-all;
+                            -ms-word-break: break-all;
+                        }
+                        .pd-header-mobile{
+                            display: inline-block;
+                            font-weight: 400;
+                            padding-right: 5px;
+                            @media all and (min-width: @larger-tablet-width) {
+                                display: none;
+                            }
                         }
                     }
                 }
@@ -480,6 +559,7 @@ body.page-node{
                         font-weight: 600;
                         a{
                             color: #000;
+                            font-size: 1em;
                         }
                     }
                     .excerpt{
@@ -489,8 +569,10 @@ body.page-node{
                         overflow: hidden;
                         line-height: 16px;
                         max-height: 43px;
-                        p{
+                        margin: 5px 0;
+                        p, span{
                             margin: 0;
+                            font-size: 1em!important;
                         }
                         br, strong, div{
                             display: none;
