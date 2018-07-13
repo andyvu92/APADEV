@@ -26,21 +26,33 @@ if(isset($_SESSION['UserID'])) { $sendData["UserID"] = $_SESSION['UserId'];
 } else { $sendData["UserID"] = "-1"; }
 if(isset($_POST["Radius"])) { $request["Radius"] = $_POST["Radius"];
 } else { $request["Radius"] = ""; }
-if(isset($_POST["Keywords"])) {	$request["Keyword"] = $_POST["Keywords"];
+if(isset($_POST["Keywords"]) || isset($_GET["Keywords"])) {	
+	if(isset($_POST["Keywords"])) {$request["Keyword"] = $_POST["Keywords"];}
+	else {$request["Keyword"] = $_GET["Keywords"];}
 } else { $request["Keyword"] = ""; }
 if(isset($_POST["Typeofpd"])) {	$request["Typeofpd"] = $_POST["Typeofpd"];
 } else { $request["Typeofpd"] = ""; }
-if(isset($_POST["Nationalgp"])) {	$request["Nationalgp"] = $_POST["Nationalgp"];
+if(isset($_POST["Nationalgp"]) || isset($_GET["Nationalgp"])) {	
+	if(isset($_POST["Nationalgp"])) {$request["Nationalgp"] = $_POST["Nationalgp"];}
+	else {$request["Nationalgp"] = $_GET["Nationalgp"];}
 } else { $request["Nationalgp"] = ""; }
 if(isset($_POST["Regionalgp"])) {	$request["Regionalgp"] = $_POST["Regionalgp"];
 } else { $request["Regionalgp"] = ""; }
-if(isset($_POST["State"])) {	$request["State"] = $_POST["State"];
+if(isset($_POST["State"]) || isset($_GET["State"])) {	
+	if(isset($_POST["State"])) {$request["State"] = $_POST["State"];}
+	else {$request["State"] = $_GET["State"];}
 } else { $request["State"] = ""; }
-if(isset($_POST["Suburb"])) {	$request["Suburb"] = $_POST["Suburb"];
+if(isset($_POST["Suburb"]) || isset($_GET["Suburb"])) {	
+	if(isset($_POST["Suburb"])) {$request["Suburb"] = $_POST["Suburb"];}
+	else {$request["Suburb"] = $_GET["Suburb"];}
 } else { $request["Suburb"] = ""; }
-if(isset($_POST["Begindate"])) { $request["BeginDate"] = str_replace("-","/",$_POST["Begindate"]);
+if(isset($_POST["BeginDate"]) || isset($_GET["BeginDate"])) {	
+	if(isset($_POST["BeginDate"])) {$request["BeginDate"] = str_replace("-","/",$_POST["BeginDate"]);}
+	else {$request["BeginDate"] = $_GET["BeginDate"];}
 } else { $request["BeginDate"] = ""; }
-if(isset($_POST["Enddate"])) {	$request["EndDate"] = str_replace("-","/",$_POST["Enddate"]);
+if(isset($_POST["EndDate"]) || isset($_GET["EndDate"])) {	
+	if(isset($_POST["EndDate"])) {$request["EndDate"] = str_replace("-","/",$_POST["EndDate"]);}
+	else {$request["EndDate"] = $_GET["EndDate"];}
 } else { $request["EndDate"] = ""; }
 if(isset($_GET["pagesize"])) {
 	$request["PageSize"] = $_GET["pagesize"];
