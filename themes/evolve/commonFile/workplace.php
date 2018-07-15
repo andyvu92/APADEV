@@ -18,13 +18,13 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 		<label class="light-font-weight" for="Findabuddy'.$i.'"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>
 	</div>
 <div class="row">
-<div class="col-lg-12">
-<label for="Name-of-workplace'.$i.'">Name of workplace<span class="tipstyle">*</span></label>
+<div class="col-xs-12">
+<label for="Name-of-workplace'.$i.'">Practice name<span class="tipstyle">*</span></label>
 <input type="text" class="form-control" name="Name-of-workplace'.$i.'" id="Name-of-workplace'.$i.'">
 </div>
 </div>
 <div class="row">
-	<div class="col-xs-12 col-md-6">
+	<div class="col-xs-12">
 		<label for="BuildingName'.$i.'">Building Name</label>
 		<input type="text" class="form-control" name="WBuildingName'.$i.'" id="WBuildingName'.$i.'" value="">
 	</div>

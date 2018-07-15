@@ -1469,8 +1469,8 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 
                         <!--BREAK-->
 
-                        <div class="col-xs-12 col-md-6">
-                            <label for="Name-of-workplace">Name of workplace<span class="tipstyle">*</span></label>
+                        <div class="col-xs-12">
+                            <label for="Name-of-workplace">Practice name<span class="tipstyle">*</span></label>
                             <input type="text" class="form-control" name="Name-of-workplace<?php
                                         echo $key;
                                 ?>" id="Name-of-workplace<?php
@@ -1482,38 +1482,6 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                                             echo 'value="' . $details['Workplaces'][$key]['Name-of-workplace'] . '"';
                                         }
                                 ?>>
-                        </div>
-
-                        <div class="col-xs-12 col-md-6">
-                            <label>Workplace setting<span class="tipstyle">*</span></label>
-                            <div class="chevron-select-box">
-                            <select class="form-control" id="Workplace-setting<?php
-        echo $key;
-?>" name="Workplace-setting<?php
-        echo $key;
-?>">
-                            <?php
-        
-        // 2.2.36 - get workplace settings list
-        // Send -
-        // Response - get workplace settings from Aptify via webserice return Json data;
-        // stroe workplace settings into the session
-        
-        $workplaceSettingscode         = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
-        $workplaceSettings             = json_decode($workplaceSettingscode, true);
-        $_SESSION["workplaceSettings"] = $workplaceSettings;
-        foreach ($workplaceSettings as $pair => $value) {
-            echo '<option value="' . $workplaceSettings[$pair]["ID"] . '"';
-            if ($details['Workplaces'][$key]['Workplace-settingID'] == $workplaceSettings[$pair]["ID"]) {
-                echo "selected='selected'";
-            }
-            
-            echo '> ' . $workplaceSettings[$pair]["Name"] . ' </option>';
-        }
-        
-?>
-                           </select>
-                           </div>
                         </div>
                         
                         <?php
@@ -1954,8 +1922,39 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                         <!--BREAK-->
 
                         <div class="row">
-                            
-                            <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="col-xs-12 col-md-6">
+                            <label>Workplace setting<span class="tipstyle">*</span></label>
+                            <div class="chevron-select-box">
+                            <select class="form-control" id="Workplace-setting<?php
+                                            echo $key;
+                                    ?>" name="Workplace-setting<?php
+                                            echo $key;
+                                    ?>">
+                                                        <?php
+                                    
+                                    // 2.2.36 - get workplace settings list
+                                    // Send -
+                                    // Response - get workplace settings from Aptify via webserice return Json data;
+                                    // stroe workplace settings into the session
+                                    
+                                    $workplaceSettingscode         = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
+                                    $workplaceSettings             = json_decode($workplaceSettingscode, true);
+                                    $_SESSION["workplaceSettings"] = $workplaceSettings;
+                                    foreach ($workplaceSettings as $pair => $value) {
+                                        echo '<option value="' . $workplaceSettings[$pair]["ID"] . '"';
+                                        if ($details['Workplaces'][$key]['Workplace-settingID'] == $workplaceSettings[$pair]["ID"]) {
+                                            echo "selected='selected'";
+                                        }
+                                        
+                                        echo '> ' . $workplaceSettings[$pair]["Name"] . ' </option>';
+                                    }
+                                    
+                            ?>
+                           </select>
+                           </div>
+                        </div>
+
+                            <div class="col-xs-12 col-md-6">
                             <label>Numbers of hours worked<span class="tipstyle">*</span></label>    
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="Number-worked-hours<?php

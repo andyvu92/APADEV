@@ -941,7 +941,30 @@ a#insuranceControl{
         border-left: 5px solid rgba(0,184,241,0);
         transition: 0.1s linear;
         &.active{
-            border-left: 5px solid #00b8f1;
+            border-left: 5px solid @brighter-blue;
+            background: @brighter-blue;
+            &:hover{
+                border-left: 5px solid @brighter-blue;
+                background: @brighter-blue;  
+                .dashboard-button-name{
+                    color: #fff;
+                    .account-icon{
+                        background-image: url(/sites/default/files/dashboard-icon/account-W.png);
+                    }
+                    .dashboard-icon{
+                        background-image: url(/sites/default/files/dashboard-icon/dashboard-W.png);
+                    }
+                    .purchases-icon{
+                        background-image: url(/sites/default/files/dashboard-icon/purchases-W.png);
+                    }
+                    .subscription-icon{
+                        background-image: url(/sites/default/files/dashboard-icon/subscription-W.png);
+                    }
+                    .renew-icon{
+                        background-image: url(/sites/default/files/dashboard-icon/renew-W.png);
+                    }
+                }
+            }
         }
         @media all and (max-width:@larger-tablet-width) {
             width: 20%;

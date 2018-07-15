@@ -826,34 +826,10 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					<label class="light-font-weight" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>	
 				</div>
 
-				<div class="row">
-					<div class="col-xs-12 col-md-6">
-					<label for="Name-of-workplace">Name of workplace<span class="tipstyle">*</span></label>
-					<input type="text" class="form-control" name="Name-of-workplace<?php echo $key;?>" id="Name-of-workplace<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Name-of-workplace'])) {echo "placeholder='Name of workplace'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Name-of-workplace'].'"'; }?>>
+					<div class="col-xs-12">
+						<label for="Name-of-workplace">Practice name<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Name-of-workplace<?php echo $key;?>" id="Name-of-workplace<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Name-of-workplace'])) {echo "placeholder='Name of workplace'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Name-of-workplace'].'"'; }?>>
 					</div>
-
-					<div class="col-xs-12 col-md-6">
-					<label>Workplace setting<span class="tipstyle">*</span></label>
-					<div class="chevron-select-box">	
-					<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting0">
-						<?php
-							// 2.2.36 - get workplace settings list
-							// Send - 
-							// Response - get workplace settings from Aptify via webserice return Json data;
-							// stroe workplace settings into the session
-							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
-							$workplaceSettings=json_decode($workplaceSettingscode, true);	
-							$_SESSION["workplaceSettings"] = $workplaceSettings;
-							foreach($workplaceSettings  as $pair => $value){
-							echo '<option value="'.$workplaceSettings[$pair]["ID"].'"';
-							if ($details['Workplaces'][$key]['Workplace-settingID'] == $workplaceSettings[$pair]["ID"]){ echo "selected='selected'"; } 
-							echo '> '.$workplaceSettings[$pair]["Name"].' </option>'; 
-							}							
-							?>
-						</select>
-						</div>
-					</div>
-				</div>
 
 				<!--<div class="row"> 
 						<div class="col-xs-12 col-md-6">
@@ -1075,7 +1051,29 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				</div>
 
 				<div class="row">
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-12 col-md-6">
+						<label>Workplace setting<span class="tipstyle">*</span></label>
+						<div class="chevron-select-box">	
+						<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting0">
+						<?php
+							// 2.2.36 - get workplace settings list
+							// Send - 
+							// Response - get workplace settings from Aptify via webserice return Json data;
+							// stroe workplace settings into the session
+							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
+							$workplaceSettings=json_decode($workplaceSettingscode, true);	
+							$_SESSION["workplaceSettings"] = $workplaceSettings;
+							foreach($workplaceSettings  as $pair => $value){
+							echo '<option value="'.$workplaceSettings[$pair]["ID"].'"';
+							if ($details['Workplaces'][$key]['Workplace-settingID'] == $workplaceSettings[$pair]["ID"]){ echo "selected='selected'"; } 
+							echo '> '.$workplaceSettings[$pair]["Name"].' </option>'; 
+							}							
+							?>
+						</select>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-md-6">
 						<label>Numbers of hours worked<span class="tipstyle">*</span></label>
 						<div class="chevron-select-box">
 						<select class="form-control" id="Number-worked-hours<?php echo $key;?>" name="Number-worked-hours<?php echo $key;?>">

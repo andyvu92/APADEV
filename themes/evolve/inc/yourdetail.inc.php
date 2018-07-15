@@ -1139,12 +1139,15 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 					</div>
 
-						<div class="row">
-							<div class="col-xs-12 col-md-6">
+							<div class="col-xs-12">
 								<label for="Name-of-workplace">Practice name<span class="tipstyle">*</span></label>
 								<input type="text" class="form-control" name="Name-of-workplace<?php echo $key;?>" id="Name-of-workplace<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Name-of-workplace'])) {echo "placeholder='Name of workplace'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Name-of-workplace'].'"'; }?>>
 							</div>
-						</div>
+
+							<div class="col-xs-12">
+	 							<label for="BuildingName">Building name</label>
+                                <input type="text" class="form-control" name="WBuildingName<?php echo $key;?>" id="WBuildingName<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WBuildingName'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WBuildingName'].'"'; }?>>
+                            </div>
 
 							<div class="col-xs-12 col-md-6">
 								<label for="WAddress_Line_1<?php echo $key;?>">Address line 1<span class="tipstyle">*</span></label>
@@ -1247,7 +1250,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
-								<label>Quality In Practice number(QIP):</label>
+								<label>Quality In practice number(QIP):</label>
 								<input type="text" class="form-control" name="QIP<?php echo $key;?>" id="QIP<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['QIP'])) {echo "placeholder='QIP Number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['QIP'].'"'; }?>>
 							</div>
 						</div>
