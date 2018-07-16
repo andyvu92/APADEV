@@ -793,8 +793,8 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 
 			<div class="col-xs-12">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Back</span></a></div>
 		</div>
-        <div id="wpnumber"><?php  if(sizeof($details['Workplaces'])==0){$wpnumber = 0;} else{$wpnumber =  sizeof($details['Workplaces'])-1;} echo  $wpnumber; ?></div>
-        <input type="hidden" name="wpnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =0; echo $wpnumber;} ?>"/>
+       
+        <input type="hidden" id="wpnumber" name="wpnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =0; echo $wpnumber;} ?>"/>
 
 		<div class="down3" style="display:none;">
 			<!--<div class="row">
@@ -1309,12 +1309,12 @@ jQuery(document).ready(function($) {
 		$('#dashboard-right-content').addClass("autoscroll");
 	});
 	$('.add-workplace-join').click(function(){
-		var number = Number($('#wpnumber').text());
+		var number = Number($('#wpnumber').val());
 		var i = Number(number +1);
-		var j = Number(number +2);
+		//var j = Number(number +2);
 		$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
-		$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade in active"></div>');
-		$('#wpnumber').text(i);
+		$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
+		//$('#wpnumber').text(i);
 		$('input[name=wpnumber]').val(i);
 		var sessionvariable = '<?php echo json_encode($_SESSION["workplaceSettings"]);?>';
 		var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
@@ -1328,7 +1328,11 @@ jQuery(document).ready(function($) {
 		  var x = $(this).attr("class").replace('deletewp', '');
 		  $("#workplaceli"+ x).remove();
 		  $("#workplace"+ x).remove();
-		   $(".deletewp"+ x).remove();
+		  $(".deletewp"+ x).remove();
+		  var n = Number($('#wpnumber').val());
+		  var t = Number(number -1);
+		  
+		$('input[name=wpnumber]').val(t);
 	});
 	
 });

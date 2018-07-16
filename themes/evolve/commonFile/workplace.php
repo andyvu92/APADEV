@@ -53,7 +53,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">
 	</div>
 
 	<div class="col-xs-6 col-md-6">
-		<label for="Wstate'.$i.'">State<span class="tipstyle">*</span></label>
+		<label for="Wstate'.$i.'">State</label>
 		<div class="chevron-select-box">
 			<select class="form-control" id="Wstate'.$i.'" name="Wstate'.$i.'">
 				<option value="" selected disabled> State </option>

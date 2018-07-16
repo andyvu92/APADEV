@@ -1099,8 +1099,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Last</span></a></div>-->
 				</div>
 
-				<div id="wpnumber"><?php  if(sizeof($details['Workplaces'])==0){$wpnumber = 0;} else{$wpnumber =  sizeof($details['Workplaces'])-1;} echo  $wpnumber; ?></div>
-				<input type="hidden" name="wpnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =1; echo $wpnumber;} ?>"/>
+				
+				<input id="wpnumber" type="hidden" name="wpnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =0; echo $wpnumber;} ?>"/>
 				
 				
 				<div class="down3" style="display:none;">
@@ -1829,13 +1829,13 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 		$('#dashboard-right-content').addClass("autoscroll");
 		});
 		$('.add-workplace-join').click(function(){
-			var number = Number($('#wpnumber').text());
+			var number = Number($('#wpnumber').val());
 			var i = Number(number +1);
-			var j = Number(number +2);
+			//var j = Number(number +2);
 			$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
 			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
-			$('#wpnumber').text(i);
-			$('input[name=wpnumber]').val(j);
+			//$('#wpnumber').text(i);
+			$('input[name=wpnumber]').val(i);
 			var sessionvariable = '<?php echo json_encode($_SESSION["workplaceSettings"]);?>';
 			var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
 			var sessionLanguage = '<?php echo json_encode($_SESSION["Language"]);?>';
@@ -1849,6 +1849,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			$("#workplaceli"+ x).remove();
 			$("#workplace"+ x).remove();
 			$(".deletewp"+ x).remove();
+			var n = Number($('#wpnumber').val());
+		  var t = Number(n -1);
+		  $('input[name=wpnumber]').val(t);
 		});
 	});
 </script>
