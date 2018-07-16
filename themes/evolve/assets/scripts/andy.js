@@ -39,8 +39,57 @@ jQuery(document).ready(function($){
   if ( path == '' ) {
     path = 'index.php';
   }
-      
-  var target = jQuery('.nav a[href="'+path+'"]');
+
   // Add active class to target link
+  var target = jQuery('.nav a[href="/'+path+'"]');
   target.parent().addClass('active');
+
+  var target = jQuery('.nav a[href="'+path+'"]');
+  target.parent().addClass('active');
+});
+
+//ACORDIAN 
+jQuery(document).ready(function($){
+var list = $(".accordian-container");
+
+  list.find(".accordian-content").hide();
+
+  list.find(".acordian-label").on("click", function(){
+    if (jQuery(this).hasClass('active')) {
+      $(this).removeClass('active');
+      $(this).next().slideToggle("fast", "swing").slideUp();
+    }
+    else
+    {
+      $(".acordian-label").removeClass('active');
+      $(this).addClass('active');
+      $(this).next().slideToggle("fast", "swing").siblings(".accordian-content").slideUp();
+    }
+  });
+});
+
+//READMORE
+jQuery(document).ready(function(){
+  $('.readmore-content').each(function(){
+var trimLength = 200;
+var trimMargin = 1.2; // don't trim just a couple of words
+if($(this).text().length > (trimLength * trimMargin)) {
+var text = $(this).text();
+var trimPoint = $(this).text().indexOf(" ", trimLength);
+var newContent = text.substring(0, trimPoint)+'<span class="read-more">'+text.substring(trimPoint)+'</span><span class="toggle">... <a href="#">Read more</a></span>';
+$(this).html(newContent);
+}
+});
+$('.toggle a').click(function(e){
+e.preventDefault();
+var para = $(this).closest('.readmore-content');
+var initialHeight = $(this).closest('.readmore-content').innerHeight();
+para.find('.read-more').show();
+para.find('.toggle').hide();
+var newHeight = para.innerHeight();
+para.css('max-height', initialHeight+'px');
+para.animate({ maxHeight: newHeight }, 300, function(){
+para.css('max-height', 'none');
+});
+});
 });
