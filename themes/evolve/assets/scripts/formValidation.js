@@ -242,12 +242,21 @@ jQuery(document).ready(function($) {
 		if(validateFun()==false){alert("please fill out all required fields *");return false;} 
         var i = Number($(this).attr("class").replace('join-details-button', ''));
 		var x = Number(i + 1);
-		if((x==3) && ($('select[name=MemberType]').val()=="9964" || $('select[name=MemberType]').val()=="9965")){ $('.down4').slideToggle(450); }
-	    //if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
 		
-	    $('[class^=down]:not(.down'+x+')').slideUp(400);
+	    //if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
+		$('[class^=down]:not(.down'+x+')').slideUp(400);
+		if(x==3){
+			if($('select[name=MemberType]').val()=="9964" || $('select[name=MemberType]').val()=="9965"){
+				$('.down3').slideUp(400);
+				$('.down4').slideToggle(450);
+				$("span.eventtitle4").addClass("text-underline");
+				$("span:not(.eventtitle4)").removeClass("text-underline");
+				return;
+			}
+		}
 	    if((x==5) && ($('#insuranceTag').val()=="0")){ $('.down6').slideToggle(450); }
 		else{$('.down' + x).slideToggle(450);}
+		
 		$('[class^=tabtitle]:not(.tabtitle'+x+') span').removeClass("text-underline");
 		$('[class^=event]:not(.event'+x+') span').removeClass("text-underline");
 		if((x==5) && ($('#insuranceTag').val()=="0")){var eventtitle = "eventtitle6";}
@@ -259,7 +268,16 @@ jQuery(document).ready(function($) {
 		
         var i = Number($(this).attr("class").replace('your-details-prevbutton', ''));
 		var x = Number(i - 1);
-		if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
+		//if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
+		if(x==3){
+			if($('select[name=MemberType]').val()=="9964" || $('select[name=MemberType]').val()=="9965"){
+				$('.down4').slideUp(400);
+				$('.down2').slideToggle(450);
+				$("span.eventtitle2").addClass("text-underline");
+				$("span:not(.eventtitle2)").removeClass("text-underline");
+				return;
+			}
+		}
 		//if(x==5){ $('#insuranceBlock').load("sites/all/themes/evolve/inc/jointheAPA/jointheAPA-insurance.inc.php", {"goI":"1"});
 		        //$('#insuranceBlockRN').load("sites/all/themes/evolve/inc/renewMyMembership/renew-insurance.inc.php", {"goI":"1"});
 		//}

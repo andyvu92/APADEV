@@ -1316,11 +1316,12 @@ jQuery(document).ready(function($) {
 		$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
 		//$('#wpnumber').text(i);
 		$('input[name=wpnumber]').val(i);
+		var memberType = $('select[name=MemberType]').val();
 		var sessionvariable = '<?php echo json_encode($_SESSION["workplaceSettings"]);?>';
 		var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
 		var sessionLanguage = '<?php echo json_encode($_SESSION["Language"]);?>';
 		var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
-		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry});
+		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
 		$(".chosen-select").chosen({width: "100%"});
 	});
 	$("a[href^=#workplace]").live( "click", function(){ $(".chosen-select").chosen({width: "100%"});});

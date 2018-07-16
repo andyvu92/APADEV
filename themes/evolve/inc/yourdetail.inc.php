@@ -343,7 +343,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<li><a class="event1" style="cursor: pointer;"><span class="text-underline eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
 							<li><a class="event2" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li>
 							<li><a class="event13" style="cursor: pointer;"><span class="eventtitle13" id="payment"><strong>Payment information</strong></span></a></li>
-							<li><a class="event3" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li>
+							<?php if($details['MemberType']!="31" && $details['MemberType']!="32"): ?><li><a class="event3" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li><?php endif; ?>
 							<li><a class="event4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
 					</ul>
 				</div>
@@ -713,12 +713,14 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<div class="chevron-select-box">
 							<select class="form-control" id="MemberType" name="MemberType" disabled>
 								<option value="" <?php if (empty($details['MemberType'])) echo "selected='selected'";?> disabled>memberType</option>
-								<?php 
+								<?php
+								
 								$MemberTypecode  = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
 								$MemberType=json_decode($MemberTypecode, true);
 								foreach($MemberType  as $key => $value){
 									echo '<option value="'.$MemberType[$key]['ID'].'"';
 									if ($details['MemberTypeID'] == $MemberType[$key]['ID']){ echo "selected='selected'"; } 
+									
 									echo '> '.$MemberType[$key]['Name'].' </option>';
 								}
 								?>
@@ -1121,12 +1123,13 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				<?php //endif; ?>
 						</ul>
 					</div>
-
+         
 			 <div id="workplaceblocks">
 
 				<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
 					<div id="workplace<?php echo $key;?>" class='tab-pane fade  <?php if($key=='Workplace0') echo "in active ";?> '>
 					    <input type="hidden" name="WorkplaceID<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['WorkplaceID'];?>">
+					<?php if($details['MemberTypeID']!="17" && $details['MemberTypeID']!="18" && $details['MemberTypeID']!="21" && $details['MemberTypeID']!="22" && $details['MemberTypeID']!="31" && $details['MemberTypeID']!="32" && $details['MemberTypeID']!="34" && $details['MemberTypeID']!="35" && $details['MemberTypeID']!="36" && $details['MemberTypeID']!="37") :?>
 					<div class="row FapTagC">
 						<div class="col-xs-12">
 							<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
@@ -1138,7 +1141,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<label  style="font-weight: 300" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>
 						</div>
 					</div>
-
+					<?php endif;?>
 							<div class="col-xs-12">
 								<label for="Name-of-workplace">Practice name<span class="tipstyle">*</span></label>
 								<input type="text" class="form-control" name="Name-of-workplace<?php echo $key;?>" id="Name-of-workplace<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Name-of-workplace'])) {echo "placeholder='Name of workplace'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Name-of-workplace'].'"'; }?>>
@@ -1836,11 +1839,12 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
 			//$('#wpnumber').text(i);
 			$('input[name=wpnumber]').val(i);
+			var memberType = $('select[name=MemberType]').val();
 			var sessionvariable = '<?php echo json_encode($_SESSION["workplaceSettings"]);?>';
 			var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
 			var sessionLanguage = '<?php echo json_encode($_SESSION["Language"]);?>';
 			var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
-			$("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry});
+			$("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry,"memberType":memberType});
 			$(".chosen-select").chosen({width: "100%"});
 		});
 		$("a[href^=#workplace]").live( "click", function(){ $(".chosen-select").chosen({width: "100%"});});
