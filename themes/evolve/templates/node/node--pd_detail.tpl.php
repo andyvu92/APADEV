@@ -114,8 +114,14 @@ if($resultdata['result']) {
 }
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
-	<section class="post-content">
-    
+	<div class="post-content">
+	
+	<div class="mobile-banner">
+		<div class="mobile-top-banner lecture-featured-image">
+			<span class="pd-type">Lecture:</span>
+		</div>
+	</div>
+
 	<?php 
 	    if(isset($_SESSION["UserId"])&&($_SESSION["UserId"]!="0")){ $userId=$_SESSION["UserId"];
 		} else {$userId="0";}
@@ -464,56 +470,95 @@ if($resultdata['result']) {
 	    <div id="popUp" style="display:none;"><?php echo $updateNonmemberTag; ?></div>
 		<div id="saveShoppingCart" style="display:none;"><?php echo $saveShoppingCart; ?></div>
 
-		<div class="section">
+		<div class="section mobile-no-padding">
 			<h1 class="light-lead-heading"><?php echo $pd_detail['Title'];?></h1>
-
-			<h3 class="sub-title"><?php 
-			if (!empty($pd_detail['Typeofpd'])){
-				echo $pd_detail['Typeofpd'];
-			}
-			else{
-				echo "Not Available";
-			}
-			?></h3>
 		</div>
 
 		<div class="section description">
-			<p><?php echo $pd_detail['Description']; ?></p>
+			<div class="readmore-content">
+				<p>
+				<?php 
+				if (!empty($pd_detail['Description'])){
+					echo $pd_detail['Description'];
+				}
+				else{
+					echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+				}
+				?>
+				</p>
+			</div>
 		</div>
 
-		<div class="section flex-container flex-flow-row">
-			<div class="flex-col-1 left-icon">
+	<div class="mobile-hidden">
+		<div class="section flex-cell" style="flex-wrap: unset">
+			<div class="left-icon">
 				<span class="learning-outcome-icon large-icon"></span>
 			</div>
-			<div class="flex-col-11">
+			<div class="right-content">
 				<h2 class="blue-heading">Learning outcomes</h2>
-				<?php if(strlen($pd_detail['Learning_outcomes'])>400){ echo substr($pd_detail['Learning_outcomes'],0,400).'....<a id="event2" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Learning_outcomes'];} ?>
-				<div id="down2" class="conts" style="display: none;"><?php echo $pd_detail['Learning_outcomes'];?></div>
+				<!--
+				<?php //if(strlen($pd_detail['Learning_outcomes'])>400){ echo substr($pd_detail['Learning_outcomes'],0,400).'....<a id="event2" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Learning_outcomes'];} ?>
+				<div id="down2" class="conts" style="display: none;"><?php //echo $pd_detail['Learning_outcomes'];?></div>
+				-->
+				<p>
+					<?php 
+					if (!empty($pd_detail['Learning_outcomes'])){
+						echo $pd_detail['Learning_outcomes'];
+					}
+					else{
+						echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+					}
+					?>
+				</p>
 			</div>
 		</div>
 
-		<div class="section flex-container flex-flow-row">
-			<div class="flex-col-1 left-icon">
+		<div class="section flex-cell" style="flex-wrap: unset">
+			<div class="left-icon">
 				<span class="prerequiresite-icon large-icon"></span>
 			</div>
-			<div class="flex-col-11">
+			<div class="right-content">
 				<h2 class="blue-heading">Prerequiresites</h2>
-				<?php if(strlen($pd_detail['Prerequisites'])>400){ echo substr($pd_detail['Prerequisites'],0,400).'....<a id="event3" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Prerequisites'];} ?>
-				<div id="down3" class="conts" style="display: none;"><?php echo $pd_detail['Prerequisites'];?></div>
+				<!--
+				<?php //if(strlen($pd_detail['Prerequisites'])>400){ echo substr($pd_detail['Prerequisites'],0,400).'....<a id="event3" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Prerequisites'];} ?>
+				<div id="down3" class="conts" style="display: none;"><?php //echo $pd_detail['Prerequisites'];?></div>
+				-->
+				<p>
+					<?php 
+					if (!empty($pd_detail['Prerequisites'])){
+						echo $pd_detail['Prerequisites'];
+					}
+					else{
+						echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+					}
+					?>
+				</p>
 			</div>
 		</div>
 
-		<div class="section flex-container flex-flow-row">
-			<div class="flex-col-1 left-icon">
+		<div class="section flex-cell" style="flex-wrap: unset">
+			<div class="left-icon">
 				<span class="presenters-bio-icon large-icon"></span>
 			</div>
-			<div class="flex-col-11">
+			<div class="right-content">
 				<h2 class="blue-heading">Presenters bio</h2>
-				<?php if(strlen($pd_detail['Presenter_bio'])>400){ echo substr($pd_detail['Presenter_bio'],0,400).'....<a id="event1" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Presenter_bio'];} ?>
-				<div id="down1" class="conts" style="display: none;"><?php echo $pd_detail['Presenter_bio'];?></div>
+				<!--
+				<?php //if(strlen($pd_detail['Presenter_bio'])>400){ echo substr($pd_detail['Presenter_bio'],0,400).'....<a id="event1" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Presenter_bio'];} ?>
+				<div id="down1" class="conts" style="display: none;"><?php //echo $pd_detail['Presenter_bio'];?></div>
+				-->
+				<p>
+					<?php 
+					if (!empty($pd_detail['Presenter_bio'])){
+						echo $pd_detail['Presenter_bio'];
+					}
+					else{
+						echo "<h4>Dr Christian Barton</h4>Christian Barton is a physiotherapist and postdoctoral research fellow at the La Trobe Sport and Exercise Medicine Research Centre. His focus on knowledge translation was recently rewarded with an NHMRC TRIP Fellowship. Christian’s research is focused on the knee, running injuries and knowledge translation including the use of digital innovation.";
+					}
+					?>
+				</p>
 			</div>
 		</div>
-
+	</div>
         <!--
 		 <div class="detailContent">
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Presenters:</h3><p><?php //echo $pd_detail['Presenters']; ?></p></div>
@@ -1348,13 +1393,13 @@ if($resultdata['result']) {
 
 		<div class="session-info">
 			<div class="session-calendar">
-				<div class="flex-cell">
-					<div class="flex-col-3">
+				<div class="flex-cell" style="flex-wrap: unset;">
+					<div class="">
 						<span class="calendar-icon">
 							<span class="calendar-date"><?php echo $dateStart ?></span>
 						</span>
 					</div>
-					<div class="flex-col-9">
+					<div class="">
 						<span class="session-date"> 
 							<!--<span class="weekdate">Wednesday,</span><span class="month-date">12 December</span>-->
 							<?php echo $dateOutput; ?>
@@ -1367,11 +1412,11 @@ if($resultdata['result']) {
 			</div>
 
 			<div class="session-address">
-				<div class="flex-cell" style="border-top: 1px solid #fff; padding-top: 10px;">
-					<div class="flex-col-2">
+				<div class="flex-cell" style="border-top: 1px solid #fff; padding-top: 10px; flex-wrap: unset;">
+					<div class="">
 						<span class="address-icon"></span>
 					</div>
-					<div class="flex-col-10">
+					<div class="">
 						<span class="address">
 							<?php echo $pd_detail['AddressLine1']." ".$pd_detail['AddressLine2']." ".$pd_detail['AddressLine3']; ?><br />
 			<?php echo $pd_detail['City']." ".$pd_detail['State']." ".$pd_detail['PostalCode']; ?>
@@ -1499,6 +1544,188 @@ if($resultdata['result']) {
 			  }	
 		   ?>
 		</div>
+
+<div class="accordian-container mobile-pd-details">
+
+<div class="acordian-label">At a glance</div>
+<div class="accordian-content">
+	<div class="session-register-info">
+			<span class="small-heading">Tickets:</span>
+			<span>
+				<?php 
+				$priceList = array();
+				$cost = 0;
+				// todo
+				// apply coupon one
+				// ["Product Cost With Coupon"]
+				
+				if($prices!="NULL"&& isset($_SESSION["UserId"])){
+					if(in_array($pd_detail['Product Cost Without Coupon'],$pricelistGet)) {
+						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
+					}
+					else {
+						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
+						echo "$".$pd_detail['Cost'];
+					}
+				}
+				else{
+					foreach($pricelistGet as $key=>$value){
+						$x = explode(" ", $key);
+						$y = str_replace($x[0], "", $key);
+						echo "key: $key, x: $x, y: $y <br>";
+						echo $y.":&nbsp;$".$value."<br>";
+					}
+				}	
+				?>
+			</span>
+
+			<span class="small-heading">Registration closing date:</span>
+			<span>
+				<?php echo $pd_detail['Close_date']; ?>
+			</span>
+
+			<span class="small-heading">Event status:</span>
+			<span>
+				<?php 
+				$Totalnumber = $pd_detail['Totalnumber'];
+				$Enrollednumber = $pd_detail['Enrollednumber'];
+				$Now = date('d-m-Y');
+				if(strtotime($Now)> strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+					echo "Closed";  
+				}
+				elseif($Totalnumber-$Enrollednumber<=5){
+					echo "Almost Full"; 
+				
+				}
+				elseif(($Totalnumber-$Enrollednumber)==0){
+					echo "Full"; 
+				
+				}
+				elseif(($Totalnumber-$Enrollednumber)>5){
+					echo "Open"; 
+				
+				}
+		 		?>
+			</span>
+
+			<span class="small-heading">CPD hours:</span>
+			<span>
+				<?php 
+				if (!empty($pd_detail['CPD'])){
+					echo $pd_detail['CPD'];
+				}
+				 else{
+					 echo 'Not available';
+				 }
+				?>
+			</span>
+
+			<span class="small-heading">Your registration status:</span>
+			<span>
+				<?php 
+				if(isset($userId)&& ($userId!="0")){
+					if($pd_detail['AttendeeStatus'] > 0) {
+						echo "Registered";
+					} else {
+						echo "Not registered";
+					}
+					/*
+					if(!in_array( $user->uid,$pd_detail['Users'])){
+						echo "Not registered";
+					}
+					else{
+						echo "Registered";
+					}
+					*/
+				}
+				else{
+					echo '<a id="login">Login to see your status</a>';
+					//echo '<a class="info" data-target="#loginAT" data-toggle="modal" type="button">Login to see your status</a>';
+				}
+				?>
+			</span>
+		</div>
+</div>
+
+<div class="acordian-label">Presenters</div>
+<div class="accordian-content">
+		<div class="section flex-cell" style="flex-wrap: unset">
+			<div class="left-icon">
+				<span class="presenters-bio-icon large-icon"></span>
+			</div>
+			<div class="right-content">
+				<h2 class="blue-heading">Presenters bio</h2>
+				<!--
+				<?php //if(strlen($pd_detail['Presenter_bio'])>400){ echo substr($pd_detail['Presenter_bio'],0,400).'....<a id="event1" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Presenter_bio'];} ?>
+				<div id="down1" class="conts" style="display: none;"><?php //echo $pd_detail['Presenter_bio'];?></div>
+				-->
+				<p>
+					<?php 
+					if (!empty($pd_detail['Presenter_bio'])){
+						echo $pd_detail['Presenter_bio'];
+					}
+					else{
+						echo "<h4>Dr Christian Barton</h4>Christian Barton is a physiotherapist and postdoctoral research fellow at the La Trobe Sport and Exercise Medicine Research Centre. His focus on knowledge translation was recently rewarded with an NHMRC TRIP Fellowship. Christian’s research is focused on the knee, running injuries and knowledge translation including the use of digital innovation.";
+					}
+					?>
+				</p>
+			</div>
+		</div>
+</div>
+
+<div class="acordian-label">Learning outcomes</div>
+<div class="accordian-content">
+		<div class="section flex-cell" style="flex-wrap: unset">
+			<div class="left-icon">
+				<span class="learning-outcome-icon large-icon"></span>
+			</div>
+			<div class="right-content">
+				<h2 class="blue-heading">Learning outcomes</h2>
+				<!--
+				<?php //if(strlen($pd_detail['Learning_outcomes'])>400){ echo substr($pd_detail['Learning_outcomes'],0,400).'....<a id="event2" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Learning_outcomes'];} ?>
+				<div id="down2" class="conts" style="display: none;"><?php //echo $pd_detail['Learning_outcomes'];?></div>
+				-->
+				<p>
+					<?php 
+					if (!empty($pd_detail['Learning_outcomes'])){
+						echo $pd_detail['Learning_outcomes'];
+					}
+					else{
+						echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+					}
+					?>
+				</p>
+			</div>
+		</div>
+</div>
+
+<div class="acordian-label">Prerequisites</div>
+<div class="accordian-content">
+		<div class="section flex-cell" style="flex-wrap: unset">
+			<div class="left-icon">
+				<span class="prerequiresite-icon large-icon"></span>
+			</div>
+			<div class="right-content">
+				<h2 class="blue-heading">Prerequiresites</h2>
+				<!--
+				<?php //if(strlen($pd_detail['Prerequisites'])>400){ echo substr($pd_detail['Prerequisites'],0,400).'....<a id="event3" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Prerequisites'];} ?>
+				<div id="down3" class="conts" style="display: none;"><?php //echo $pd_detail['Prerequisites'];?></div>
+				-->
+				<p>
+					<?php 
+					if (!empty($pd_detail['Prerequisites'])){
+						echo $pd_detail['Prerequisites'];
+					}
+					else{
+						echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+					}
+					?>
+				</p>
+			</div>
+		</div>
+</div>
+
+</div>
 
 		<div class="extra-info">
 			<span>By registering for this course, you agree to the <a href="">APA Events Terms and Conditions.</a></span>

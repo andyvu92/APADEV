@@ -432,3 +432,52 @@
     }
   }
 }
+
+//ACORDIAN
+.accordian-container {
+  padding: 15px;
+  margin:  auto;
+  width: 50%;
+  .accordian-content {
+    padding: 5px 10px;
+    margin: 0;
+    background-color: #787878;
+    color: white;
+    font-size: 20px;
+  }
+  .acordian-label {
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 2px 0;
+    background-color: black;
+    color: white;
+    font-size: 20px;
+    &:before {
+      content: "+";
+      font-size:1.5em;
+      line-height: 25px;
+      float:left;
+      padding-right: 10px;
+      transition: transform 0.3s ease-in-out;
+   }
+  }
+}
+
+//READMORE
+.readmore-content {
+  overflow: hidden;
+  max-width: 30em;
+  line-height: 1.7;
+  margin: 2em auto;
+  .read-more {
+    display: none;
+  }
+  a {
+    color: #3ac;
+    transition: color 200ms ease-in;
+  }
+}
+
+
+
+
