@@ -71,7 +71,7 @@ var list = $(".accordian-container");
 //READMORE
 jQuery(document).ready(function(){
   $('.readmore-content').each(function(){
-var trimLength = 200;
+var trimLength = 250;
 var trimMargin = 1.2; // don't trim just a couple of words
 if($(this).text().length > (trimLength * trimMargin)) {
 var text = $(this).text();
