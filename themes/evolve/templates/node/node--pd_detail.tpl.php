@@ -1541,7 +1541,7 @@ if($resultdata['result']) {
 				   echo '<a class="add-to-card" id="registerPDUserButton"><span>Add to cart</span></a>';	
 			   } else {
 				   echo '<a class="add-to-card" id="registerNonMember"><span>Add to cart</span></a>';
-			   }
+			   } 
 			  }	
 		   ?>
 		</div>
