@@ -585,13 +585,14 @@ if($resultdata['result']) {
 		 
 		 ?></p></div>
 		<?php 
-			$bdata = explode(" ",$pd_detail['Sdate']);
-			$edata = explode(" ",$pd_detail['Edate']);
+			$bdate = explode(" ",$pd_detail['Sdate']);
+			$edate = explode(" ",$pd_detail['Edate']);
+			echo $bdate[0]."//".$edate[0];
 			$dateOutput = "";
-			$t = strtotime($bdata[0]);
-			$j = strtotime($edata[0]);
+			$t = strtotime($bdate[0]);
+			$j = strtotime($edate[0]);
 			$dateStart = date("d",strtotime($t));
-			if($bdate[0] == $edata[0]) {
+			if($bdate[0] == $edate[0]) {
 				if(date("F",$t) != date("F",$j)) {
 					$dateOutput = date("D d M",$t)."<br>- ".date("D d M",$j);
 				} else {
@@ -1407,7 +1408,7 @@ if($resultdata['result']) {
 					</div>
 				</div>
 				<span class="session-time">
-					<?php echo $bdata[1]."-".$edata[1]; ?>
+					<?php echo $edate[1]."-".$edate[1]; ?>
 				</span>
 			</div>
 
@@ -1531,9 +1532,9 @@ if($resultdata['result']) {
 			if(isset($_SESSION["UserId"])){
 				//$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
 			   $userTag = checkPDUser($_SESSION['MemberTypeID']);
-			   $closedate = date("j, n, Y",strtotime($pd_detail['Close_date']));
-			   $today = date("j, n, Y");
-			   $t = $closedate > $today;
+			   $closedate = strtotime($pd_detail['Close_date']);
+			   $today = strtotime("today");
+			   $t = $closedate < $today;
 			   if($t) {
 				   echo '<span class="add-to-wishlist" style="padding: 5px; text-align: center; cursor: auto; background-color: transparent;">Registration closed</span>';
 			   } elseif ($userTag =="0"){
