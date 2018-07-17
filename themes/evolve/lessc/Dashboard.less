@@ -337,11 +337,24 @@ div[aria-describedby="deleteCardWindow"] .ui-dialog-content{
     overflow:hidden!important;
 }
 div[aria-describedby="privacypolicyWindow"].ui-dialog {
-    z-index: 1050!important;
-    left: 23%!important;
-	top: 51%!important;
-	width: 673px!important;
-	
+    z-index: 1050 !important;
+    width: 50%!important;
+    max-height: 600px!important;
+    overflow-y: scroll!important;
+    position: fixed!important;
+    display: block!important;
+    top: 20%!important;
+    left: 25%!important;
+    @media all and (max-width: @tablet-width) {
+        width: 70%!important;
+        left: 15%!important;
+    }
+    @media all and (max-width: @phone-width) {
+        width: 80%!important;
+        left: 10%!important;
+        top: 15%!important;
+        max-height: 300px!important;
+    }
 }
 div[aria-describedby="privacypolicyWindow"] .ui-widget-header{
     border:none!important;

@@ -1770,7 +1770,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 
                         <div class="row"> 
                             <div class="col-xs-12">
-                                <label>Does this workplace provide: </label>
+                                <label>What services does this workplace provide: </label>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Electronic-claiming<?php

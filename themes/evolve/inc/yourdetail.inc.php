@@ -1225,11 +1225,41 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<input type="text" class="form-control" name="Wwebaddress<?php echo $key;?>" id="Wwebaddress<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wwebaddress'])) {echo "placeholder='Website'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wwebaddress'].'"'; }?> required>
 							</div>
 
-							<div class="col-xs-12 col-sm-6 col-md-6">
-								<label for="">Phone number</label>
-								<input type="text" class="form-control" name="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  >
-							</div>
 						</div>
+
+						<div class="row">
+																																		
+							<div class="col-xs-6 col-md-3">
+											<label for="">Country code</label>
+											<div class="chevron-select-box">
+											<select class="form-control" id="WPhoneCountryCode'.$i.'" name="WPhoneCountryCode'.$i.'">';
+																							
+															foreach($country  as $pair => $value){
+																			echo '<option value="'.$country[$pair]['TelephoneCode'].'"';
+																			if ($details['Workplaces'][$key]['WPhoneCountryCode'] == $country[$pair]['TelephoneCode']){ echo "selected='selected'"; } 
+																			echo '> '.$country[$pair]['Country'].' </option>';
+															}
+											
+											echo '</select></div>
+							</div>
+
+							<div class="col-xs-6 col-md-3">
+											<label for="">Area code</label>
+											<input type="text" class="form-control" name="WPhoneAreaCode'.$i.'" maxlength="5">
+							</div>
+
+							<div class="col-xs-6 col-md-3">
+											<label for="">Phone number</label>
+											<input type="text" class="form-control" name="Wphone'.$i.'">
+							</div>
+
+							<div class="col-xs-6 col-md-3">
+											<label for="">Extention Number</label>
+											<input type="text" class="form-control" name="WPhoneExtentions'.$i.'">
+							</div>
+
+						</div>
+
 
 						<div class="row">
 							 <?php  
