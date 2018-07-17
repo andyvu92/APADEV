@@ -466,7 +466,7 @@ if($resultdata['result']) {
 	// in case of user update the details get the new data.
 	
 	?>
-	<div class="region col-xs-12 col-sm-12 col-md-9">
+	<div class="region col-xs-12 col-sm-12 col-md-9 left-side-content">
 	    <div id="popUp" style="display:none;"><?php echo $updateNonmemberTag; ?></div>
 		<div id="saveShoppingCart" style="display:none;"><?php echo $saveShoppingCart; ?></div>
 
@@ -475,7 +475,7 @@ if($resultdata['result']) {
 		</div>
 
 		<div class="section description">
-			<div class="readmore-content">
+			<div class="readmore-content pd-description-mobile">
 				<p>
 				<?php 
 				if (!empty($pd_detail['Description'])){
@@ -485,6 +485,19 @@ if($resultdata['result']) {
 					echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
 				}
 				?>
+				</p>
+			</div>
+
+			<div class="pd-description-nonmobile">
+				<p>
+					<?php 
+					if (!empty($pd_detail['Description'])){
+						echo $pd_detail['Description'];
+					}
+					else{
+						echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+					}
+					?>
 				</p>
 			</div>
 		</div>
@@ -541,7 +554,7 @@ if($resultdata['result']) {
 				<span class="presenters-bio-icon large-icon"></span>
 			</div>
 			<div class="right-content">
-				<h2 class="blue-heading">Presenters bio</h2>
+				<h2 class="blue-heading">Presenter's bio</h2>
 				<!--
 				<?php //if(strlen($pd_detail['Presenter_bio'])>400){ echo substr($pd_detail['Presenter_bio'],0,400).'....<a id="event1" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Presenter_bio'];} ?>
 				<div id="down1" class="conts" style="display: none;"><?php //echo $pd_detail['Presenter_bio'];?></div>
@@ -1413,7 +1426,7 @@ if($resultdata['result']) {
 			</div>
 
 			<div class="session-address">
-				<div class="flex-cell" style="border-top: 1px solid #fff; padding-top: 10px; flex-wrap: unset;">
+				<div class="flex-cell">
 					<div class="">
 						<span class="address-icon"></span>
 					</div>
@@ -1655,7 +1668,7 @@ if($resultdata['result']) {
 				<span class="presenters-bio-icon large-icon"></span>
 			</div>
 			<div class="right-content">
-				<h2 class="blue-heading">Presenters bio</h2>
+				<h2 class="blue-heading">Presenter's bio</h2>
 				<!--
 				<?php //if(strlen($pd_detail['Presenter_bio'])>400){ echo substr($pd_detail['Presenter_bio'],0,400).'....<a id="event1" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Presenter_bio'];} ?>
 				<div id="down1" class="conts" style="display: none;"><?php //echo $pd_detail['Presenter_bio'];?></div>
