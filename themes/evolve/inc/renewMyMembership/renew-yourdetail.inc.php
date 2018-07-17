@@ -952,7 +952,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 								elseif(empty($details['Workplaces'][$key]['WPhoneCountryCode']) && $country[$pair]['ID']=="14"){
 									echo "selected='selected'";
 								}
-								echo '> '.$country[$key]['Country'].' </option>';
+								echo '> '.$country[$pair]['Country'].' </option>';
 							}
 						?>
 						</select>
