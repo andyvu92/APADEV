@@ -216,14 +216,14 @@ if($resultdata['result']) {
 			// Post graduate country, Year attained, Additional qualifications
 			
 		   
-	       $user_membertype = $userInfo['MemberType']; 
+	       //$user_membertype = $userInfo['MemberType']; 
 		   
-           $Job = "Osteopath";
-           $Professionalbody = "1";
-    	   $Professionalinsurance = "1";
-           $HearaboutAPA = "socialmedia";
-		   $Registrationboard = "1";
- 		   $Dietary = $userInfo['Dietary'];
+           //$Job = "Osteopath";
+          //$Professionalbody = "1";
+    	   //$Professionalinsurance = "1";
+           //$HearaboutAPA = "socialmedia";
+		   //$Registrationboard = "1";
+ 		  // $Dietary = $userInfo['Dietary'];
 	   } 
 	   /*Validate coupon code from Aptify and then reload the PD detail page*/
 	   if(isset($_POST["Couponcode"])){ $Couponcode = $_POST["Couponcode"]; } else { $Couponcode = "";}
