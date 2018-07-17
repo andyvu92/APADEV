@@ -1149,8 +1149,7 @@ if (isset($_SESSION['UserId'])):
 $prodcutArray = array();
 $memberProductsArray['ProductID']=$prodcutArray;
 $memberProdcutID = $memberProductsArray;
-$MemberTypes = GetAptifyData("31", $memberProdcutID);
-$MemberType = unique_multidim_array($MemberTypes,'ProductID'); 
+$MemberType = GetAptifyData("31", $memberProdcutID);
     //$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
     //$MemberType     = json_decode($MemberTypecode, true);
     foreach ($MemberType as $key => $value) {
