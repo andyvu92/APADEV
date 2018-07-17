@@ -75,6 +75,7 @@
     }
 }
 
+//STYLED RADIO SELECT
   .styled-radio-select:checked,
 .styled-radio-select:not(:checked) {
     position: absolute;
@@ -232,57 +233,7 @@
   }
 }
 
-.styled-radio-select:checked,
-      .styled-radio-select:not(:checked) {
-          position: absolute;
-          left: -9999px;
-      }
-      .styled-radio-select:checked + label,
-      .styled-radio-select:not(:checked) + label
-      {
-          position: relative;
-          padding-left: 28px;
-          cursor: pointer;
-          line-height: 20px;
-          display: inline-block;
-          color: #666;
-      }
-      .styled-radio-select:checked + label:before,
-      .styled-radio-select:not(:checked) + label:before {
-          content: '';
-          position: absolute;
-          left: 0;
-          top: 0;
-          width: 18px;
-          height: 18px;
-          border: 1px solid rgba(0,0,0,0.12);
-          border-radius: 100%;
-          background: none;
-      }
-      .styled-radio-select:checked + label:after,
-      .styled-radio-select:not(:checked) + label:after {
-          content: '';
-          width: 10px;
-          height: 10px;
-          background: rgba(0,0,0,0.7);
-          position: absolute;
-          top: 4px;
-          left: 4px;
-          border-radius: 100%;
-          -webkit-transition: all 0.2s ease;
-          transition: all 0.2s ease;
-      }
-      .styled-radio-select:not(:checked) + label:after {
-          opacity: 0;
-          -webkit-transform: scale(0);
-          transform: scale(0);
-      }
-      .styled-radio-select:checked + label:after {
-          opacity: 1;
-          -webkit-transform: scale(1);
-          transform: scale(1);
-      }
-
+//STYLED SELECT BOX
       .chevron-select-box{
         position: relative;
         select{

@@ -164,16 +164,16 @@ if(isset($_SESSION["UserId"])){
 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
 	<h1 class="SectionHeader">Summary of cart</h1>
 	<div class="brd-headling">&nbsp;</div>
-	<table>
-	<tbody>
-	<tr>
-		<th>Product name</th>
-		<th>Date</th>
-		<th>Location</th>
-		<th>Price</th>
-		<th>Action</th>
-		<th>Delete</th>
-	</tr>
+	
+	<div class="flex-container" id="pd-shopping-cart">
+	<div class="flex-cell flex-flow-row heading-row">
+		<div class="flex-col-3"><span class="table-heading">Product name</span></div>
+		<div class="flex-col-3"><span class="table-heading">Date</span></div>
+		<div class="flex-col-2 pd-spcart-location"><span class="table-heading">Location</span></div>
+		<div class="flex-col-1 pd-spcart-price"><span class="table-heading">Price</span></div>
+		<div class="flex-col-2 pd-spcart-wishlist"><span class="table-heading">Action</span></div>
+		<div class="flex-col-1 pd-spcart-delete"><span class="table-heading">Delete</span></div>
+	</div>
 	<?php 
 		////print_r($products);
 		$ListProductID = Array();
@@ -184,16 +184,16 @@ if(isset($_SESSION["UserId"])){
 		//$arrPID["PID"] = $productt['MeetingID'];
 		$arrPID["PID"] = $productt['ProductID'];
 		array_push($ListProductID ,$arrPID);
-			echo "<tr>";
-			echo	"<td>".$productt['Title']."</td>";
-			echo	"<td>".$productt['Sdate']."-".$productt['Edate']."</td>";
-			echo	"<td>".$productt['City'].", ".$productt['State']."</td>";
+			echo "<div class='flex-cell flex-flow-row'>";
+			echo	"<div class='flex-col-3'>".$productt['Title']."</div>";
+			echo	"<div class='flex-col-3 pd-spcart-date'><span class='start-date'>".$productt['Sdate']."</span><span class='end-date'>".$productt['Edate']."</span></div>";
+			echo	"<div class='flex-col-2 pd-spcart-location'>".$productt['City'].", ".$productt['State']."</div>";
 			// add by jinghu
 			if($couponCode!=""){
-				echo	"<td>".$productt['Product Cost With Coupon']."</td>";
+				echo	"<div class='flex-col-1 pd-spcart-price'>".$productt['Product Cost With Coupon']."</div>";
 			}
 			else{
-				echo	"<td>".$productt['Product Cost Without Coupon']."</td>";
+				echo	"<div class='flex-col-1 pd-spcart-price'>".$productt['Product Cost Without Coupon']."</div>";
 			}
 			$discountPrice += $productt['Product Cost Without Coupon']-$productt['Product Cost With Coupon'];
 			// end add by jinghu
@@ -204,69 +204,99 @@ if(isset($_SESSION["UserId"])){
 				//echo	"<td>".$productt['Pricelist'][0]['Price']."</td>";
 				//echo	"<td>NM price</td>";
 			//}
-			echo        '<td><a target="_blank" href="pd-wishlist?addWishList&UID='.$pass.'">ADD TO WISHLIST</a></td>';
-			echo        '<td><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['ProductID'].'"><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></a></td>';
-			echo "</tr>";    
+			echo        '<div class="flex-col-2 pd-spcart-wishlist"><a target="_blank" href="pd-wishlist?addWishList&UID='.$pass.'">ADD TO WISHLIST</a></div>';
+			echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
+			echo "</div>";    
 			$n=$n+1;
 			$i=$i+1;
 			//$price=$price+(int)str_replace('$', '', $productt['Pricelist'][0]['Price']);
 		if (in_array($productt['Typeofpd'],  $pdtype)){ $tag=1; }
 		}
 	?>
-	</tbody>
-	</table>
-    <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 scleft <?php if($price==0) echo " display-none";?>">
-		<p>Terms & conditions</p>
-		<p><label for="accept1">I accept the APA events terms and conditions including the APA cancellation clause</label><input type="checkbox" id="accept1" <?php if($price!=0) echo " required";?>></p>
-		<?php if($tag==1): ?>
-		<p><label for="accept2">I understand that I must have appropriate Professional Indemnity insurance current on the date/s of any APA course/workshop that I’m registered for.</label><input type="checkbox" id="accept2" <?php if($price!=0) echo " required";?>></p>
-		<?php endif; ?>
-		<p><label for="accept3">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled. The APA recommends travelling participants purchase travel insurance to cover this.</label><input type="checkbox" id="accept3" <?php if($price!=0) echo " required";?>></p>
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 scright<?php if(($price==0)) echo " display-none";?>">
-		<p>Your dietary requirements</p>
+
+    <div class="flex-container flex-flow-column <?php if($price==0) echo " display-none";?>">
+		<div class="flex-cell">	
+			<span class="small-lead-heading">Terms & conditions</span>
+		</div>
+
+		<div class="flex-cell">
+			<input class="styled-checkbox" type="checkbox" id="accept1" <?php if($price!=0) echo " required";?>>
+			<label for="accept1">I accept the APA events terms and conditions including the APA cancellation clause</label>
+		</div>
+
+		<?php if($tag==1): ?>
+		<div class="flex-cell">
+			<input class="styled-checkbox" type="checkbox" id="accept2" <?php if($price!=0) echo " required";?>>
+			<label for="accept2">I understand that I must have appropriate Professional Indemnity insurance current on the date/s of any APA course/workshop that I’m registered for.</label>
+		</div>
+
+		<?php endif; ?>
+		<div class="flex-cell">
+			<input class="styled-checkbox" type="checkbox" id="accept3" <?php if($price!=0) echo " required";?>>
+			<label for="accept3">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled. The APA recommends travelling participants purchase travel insurance to cover this.</label>
+		</div>
+	</div>
+	<div class="flex-container flex-flow-column <?php if(($price==0)) echo " display-none";?>">
+		<div class="flex-cell">
+			<span class="small-lead-heading">Your dietary requirements</span>
+		</div>
+
 		<p>Based on your details, we’ve recognised you are:</p>
 		<p style=" border: 1px solid #004250; padding: 5px 0;"><?php if(sizeof($Dietary)>0) {foreach($Dietary as $item) {echo $item['Name'].'<br>';} }  else { echo "None";}?></p>
-		<p>Please note that not all APA PD events include catering.</p>
+		<span class="note-text">Please note that not all APA PD events include catering.</span>
 	</div>
 
 </div>
 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 paymentsiderbar">
 	<p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
 		<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
-		<fieldset><select  id="Paymentcard" name="Paymentcard" >
-		<?php
-		if (sizeof($cardsnum)!=0) {
-			foreach( $cardsnum["results"] as $cardnum) {
-				echo '<option value="'.$cardnum["Creditcards-ID"].'"';
-				if($cardnum["IsDefault"]=="1") {
-				echo "selected ";
-			}
-			echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
-			echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
-			}
-		}
-		?>
-		</select></fieldset></div>
+		<fieldset>
+			<div class="chevron-select-box">
+				<select  id="Paymentcard" name="Paymentcard" >
+					<?php
+					if (sizeof($cardsnum)!=0) {
+						foreach( $cardsnum["results"] as $cardnum) {
+							echo '<option value="'.$cardnum["Creditcards-ID"].'"';
+							if($cardnum["IsDefault"]=="1") {
+							echo "selected ";
+						}
+						echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
+						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+						}
+					}
+					?>
+				</select>
+			</div>
+		</fieldset>
+	</div>
 <?php endif; ?>
 
-	<div class="paymentsideuse <?php if($price==0) echo " display-none";?>"><input type="checkbox" id="anothercard"><label for="anothercard"><a class="event10" style="cursor: pointer;">Use another card</a></label>
+	<div class="paymentsideuse <?php if($price==0) echo " display-none";?>">
+	
+	<div class="col-xs-12 none-padding" style="margin: 5px 0;">
+		<input class="styled-checkbox" type="checkbox" id="anothercard">
+		<label for="anothercard"><a class="event10" style="cursor: pointer;">Use another card</a></label>
+	</div>
+
 	<div class="down10" <?php if(isset($_SESSION["tempcard"])){ echo 'style="display:block;"';} else { echo 'style="display:none;"';}?>>
 		<form action="pd-shopping-cart?action=addcard" method="POST" id="formaddcard">
 		<div class="row">
 			<div class="col-lg-12">
-			<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-			<?php 
-				$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
-				$PaymentType=json_decode($PaymentTypecode, true);
-				foreach($PaymentType  as $pair => $value){
-					echo '<option value="'.$PaymentType[$pair]['ID'].'"';
-					if(isset($_SESSION["tempcard"]) && $_SESSION["tempcard"]['Payment-method'] ==$PaymentType[$pair]['ID']) {echo "selected ";}
-					echo '> '.$PaymentType[$pair]['Name'].' </option>';
-					
-				}
-			?>
-			</select>
+				<div class="chevron-select-box">
+					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
+					<?php 
+						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+						$PaymentType=json_decode($PaymentTypecode, true);
+						foreach($PaymentType  as $pair => $value){
+							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+							if(isset($_SESSION["tempcard"]) && $_SESSION["tempcard"]['Payment-method'] ==$PaymentType[$pair]['ID']) {echo "selected ";}
+							echo '> '.$PaymentType[$pair]['Name'].' </option>';
+							
+						}
+					?>
+					</select>
+				</div>
 			</div>
 		</div>
 		<div class="row">
@@ -289,8 +319,11 @@ if(isset($_SESSION["UserId"])){
 			<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
 		</div>
-		<div class="row"><label for="addcardtag">Do you want to save this card</label><input type="checkbox" id="addcardtag" name="addcardtag" <?php if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>></div>
-		<div class="row">
+		<div class="col-xs-12 none-padding" style="pading-left: 1px; margin: 5px 0;">
+			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" <?php if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>>
+			<label for="addcardtag">Do you want to save this card?</label>
+		</div>
+		<div class="col-xs-12 none-padding">
 			<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
 		</div>
 		</form>
@@ -298,41 +331,50 @@ if(isset($_SESSION["UserId"])){
 	</div>
 	<?php if($productList->rowCount()>0): ?>    
 	<div class="row">
-		<div class="col-xs-12"><label>PRF donation</label></div>
+		<div class="col-xs-12"><span class="sidebardis">PRF donation</span></div>
 		<div class="col-xs-12 col-md-12">
-			<select class="form-control" id="PRF" name="PRF">
-				<option value="10" selected>$10.00</option>
-				<option value="20">$20.00</option>
-				<option value="50">$50.00</option>
-				<option value="100">$100.00</option>
-				<option value="Other">Other</option>
-			</select>
+			<div class="chevron-select-box">
+				<select class="form-control" id="PRF" name="PRF">
+					<option value="10" selected>$10.00</option>
+					<option value="20">$20.00</option>
+					<option value="50">$50.00</option>
+					<option value="100">$100.00</option>
+					<option value="Other">Other</option>
+				</select>
+			</div>
 			<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="">
 			<a style="color: black;" id="PRFDescription">What is this?</a>
 		</div>
 	</div>
 	<?php endif; ?>
-	<?php if(isset($_SESSION["UserId"]) && $productList->rowCount()>0):?><p><form action="pd-shopping-cart" method="POST"><input type="text" name="Couponcode" placeholder="Enter discount code" value=""><button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button></form></p><br><?php endif; ?>
+	<?php if(isset($_SESSION["UserId"]) && $productList->rowCount()>0):?><p>
+		<form id="discount" action="pd-shopping-cart" method="POST">
+			<input type="text" name="Couponcode" placeholder="Enter discount code" value="">
+			<button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button>
+		</form></p><br><?php endif; ?>
 		<?php if($productList->rowCount()>0): ?>      
-		<div class="row ordersummary"><div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><span>YOUR ORDER</span></div></div>
-		<table>
-			<tr>
-			<td><?php echo $i;?> items</td>
-			<td>A$<?php echo $price;?></td>
-			</tr>
-			<tr>
-			<td>Discount</td>
-			<td>A$<?php echo $discountPrice;?></td>
-			</tr>
-			<tr>
-				<td>GST</td>
-				<td>A$<?php echo $scheduleDetails['GST'];?></td>
-			</tr>
-			<tr>
-			<td>Total(Inc.GST)</td>
-			<td>A$<?php echo $scheduleDetails['OrderTotal'];?></td>
-			</tr>
-		</table>
+		<div class="row ordersummary"><div class="col-xs-12"><span class="blue-sidebardis">YOUR ORDER</span></div></div>
+		<div class="flex-container flex-flow-column pd-spcart-order">
+			<div class="flex-cell">
+                <div class="flex-col-6"><?php echo $i;?> items</div>
+                <div class="flex-col-6">A$<?php echo $price;?></div>
+            </div>
+            
+			<div class="flex-cell">
+                <div class="flex-col-6">Discount</div>
+                <div class="flex-col-6">A$<?php echo $discountPrice;?></div>
+            </div>
+            
+			<div class="flex-cell">
+			    <div class="flex-col-6">GST</div>
+				<div class="flex-col-6">A$<?php echo $scheduleDetails['GST'];?></div>
+            </div>
+            
+			<div class="flex-cell">
+                <div class="flex-col-6">Total(Inc.GST)</div>
+                <div class="flex-col-6">A$<?php echo $scheduleDetails['OrderTotal'];?></div>
+			</div>
+		</div>
 		         
 		<form action="/pd/completed-purchase" method="POST">
 			<input type="hidden" name="POSTPRF" id="POSTPRF" value="">

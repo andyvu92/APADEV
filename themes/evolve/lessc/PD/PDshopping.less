@@ -22,3 +22,239 @@ fieldset {
 .ui-icon.AE{
   background: url("/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
 }
+
+#section-main-content{
+  .container{
+    .region{
+      .content{
+        #pd-shopping-cart{
+          div[class^="flex-col-"]{
+            padding: 0px 5px;
+            font-size: 1em;
+          }
+          .heading-row{
+            border-top: 1px solid #d3d4d5;
+            padding: 10px 0!important;
+            align-items: center;
+          }
+          .flex-cell{
+            position: relative;
+            transition: 0.1s linear;
+            background: none;
+            border-bottom: 1px solid #d3d4d5;
+            padding: 20px 0;
+            font-size: 1.2em;
+            color: #000;
+          }
+          .table-heading{
+            font-size: 0.8em;
+            font-weight: 500;
+            color: #000;
+            text-transform: uppercase;
+          }
+          .pd-spcart-date{
+            display: flex;
+            flex-direction:column;
+            .start-date:before{
+              content: 'Start date: ';
+              color: @brighter-blue;
+            }
+            .end-date:before{
+              content: 'End date: ';
+              color: @brighter-blue;
+            }
+          }
+          .pd-spcart-location{
+            text-align: right;
+          }
+          .pd-spcart-price{
+            text-align: center;
+          }
+          .pd-spcart-delete{
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            a{
+              i{
+                color: red;
+              }
+            }
+          }
+          .pd-spcart-wishlist{
+            a{
+              color: @brighter-blue;
+            }
+          }
+        }
+      }
+
+      .paymentsiderbar{
+        span.sidebardis{
+          color: #757676;
+          font-weight: 400;
+          padding-bottom: 10px;
+          display: block;
+          font-size: 16px;
+        }
+
+        span.blue-sidebardis{
+          color: #009fda;
+          font-size: 16px;
+          font-weight: 400;
+          text-align: center;
+          display: block;
+          padding-bottom: 20px;
+        }
+        .addCartlink{
+          .dashboard-button{
+            color: white;
+            margin: 0;
+            width: auto;
+            height: auto;
+            padding: 9px 25px;
+            margin-left: 10px;
+            display: block;
+            &:hover{
+              opacity: 0.8;
+            }
+          }
+        }
+        .paymentsideuse{
+          padding: 5px 0 10px 0;
+          label{
+            font-weight: 300;
+            color: #000;
+            a{
+              color: #000;
+              font-weight: 300;
+              &:hover{
+                color: #000;
+                font-weight: 300;
+              }
+            }
+          }
+        }
+        
+        .chevron-select-box{
+          position: relative;
+          select{
+              -webkit-appearance: none;
+              min-height: 48px;
+          }
+          &::after{
+              content: '\f078';
+              font-family: 'fontawesome';
+              color: #c3c8c8;
+              position: absolute;
+              top: 33%;
+              right: 10px;
+          }
+          &.chevron-adjust{
+              &::after{
+                  top: 27%;
+              }
+          }
+      }
+        #discount{
+          display: flex;
+          flex-direction: row;
+          .dashboard-button{
+            color: white;
+            margin: 0;
+            width: auto;
+            height: auto;
+            padding: 9px 25px;
+            margin-left: 10px;
+            display: block;
+            &:hover{
+              opacity: 0.8;
+            }
+          }
+        }
+
+        .pd-spcart-order{
+          color: #000;
+          margin-bottom: 25px;
+        }
+
+        .placeorder{
+          width: 100%;
+        }
+      }
+      
+      .styled-checkbox {
+        position: absolute; // take it out of document flow
+        opacity: 0; // hide it
+      
+        & + label {
+          position: relative;
+          cursor: pointer;
+          padding: 0;
+        }
+      
+        // Box.
+        & + label:before {
+          content: '';
+          margin-right: 20px;
+          display: inline-block;
+          vertical-align: text-top;
+          width: 20px;
+          height: 20px;
+          background: none;
+          box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+        }
+      
+        // Box hover
+        &:hover + label:before {
+          background: none;
+        }
+      
+        // Box checked
+        &:checked + label:before {
+          background: none;
+        }
+        
+        // Disabled state label.
+        &:disabled + label {
+          color: #b8b8b8;
+          cursor: auto;
+        }
+      
+        // Disabled box.
+        &:disabled + label:before {
+          box-shadow: none;
+          background: #fff;
+        }
+      
+        // Checkmark. Could be replaced with an image
+        &:checked + label:after {
+          content: '';
+          position: absolute;
+          left: 5px;
+          top: 10px;
+          background: #000;
+          width: 2px;
+          height: 2px;
+          box-shadow: 
+            2px 0 0 #000,
+            4px 0 0 #000,
+            4px -2px 0 #000,
+            4px -4px 0 #000,
+            4px -6px 0 #000,
+            4px -8px 0 #000;
+          transform: rotate(45deg);
+        }
+      }
+
+      .small-lead-heading{
+        font-size: 1.4em;
+        font-weight: 400;
+        margin: 10px 0;
+      }
+      .note-text{
+        font-weight: 400;
+        color: rgba(0,0,0,0.6);
+      }
+    }
+  }
+}

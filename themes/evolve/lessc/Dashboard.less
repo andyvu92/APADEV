@@ -943,6 +943,20 @@ a#insuranceControl{
         &.active{
             border-left: 5px solid @brighter-blue;
             background: @brighter-blue;
+            position: relative;
+            &:after{
+                content: '';
+                width: 15px;
+                height: 15px;
+                position: absolute;
+                top: 35%;
+                right: -8px;
+                background: #edebe8;
+                transform: rotate(45deg);
+                @media all and (max-width: @larger-tablet-width){
+                    display: none;
+                }
+            }
             &:hover{
                 border-left: 5px solid @brighter-blue;
                 background: @brighter-blue;  
@@ -1277,13 +1291,13 @@ a#insuranceControl{
             width: 180px;
             span.number{
                 font-size: 4.5em;
-                left: 56%;
+                left: 65%;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
             span.text{
                 font-size: 1.6em;
-                margin-left: -36px;
+                margin-left: -30px;
                 top: 100px;
             }
         }
