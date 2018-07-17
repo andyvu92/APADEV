@@ -161,7 +161,7 @@ if(isset($_SESSION["UserId"])){
 ?>
 
 <?php   if($productList->rowCount()>0):?>
-<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 left-content">
 	<h1 class="SectionHeader">Summary of cart</h1>
 	<div class="brd-headling">&nbsp;</div>
 	
@@ -185,15 +185,15 @@ if(isset($_SESSION["UserId"])){
 		$arrPID["PID"] = $productt['ProductID'];
 		array_push($ListProductID ,$arrPID);
 			echo "<div class='flex-cell flex-flow-row'>";
-			echo	"<div class='flex-col-3'>".$productt['Title']."</div>";
+			echo	"<div class='flex-col-3'><span class='mobile-visible'>Product name: </span>".$productt['Title']."</div>";
 			echo	"<div class='flex-col-3 pd-spcart-date'><span class='start-date'>".$productt['Sdate']."</span><span class='end-date'>".$productt['Edate']."</span></div>";
-			echo	"<div class='flex-col-2 pd-spcart-location'>".$productt['City'].", ".$productt['State']."</div>";
+			echo	"<div class='flex-col-2 pd-spcart-location'><span class='mobile-visible'>Location: </span>".$productt['City'].", ".$productt['State']."</div>";
 			// add by jinghu
 			if($couponCode!=""){
-				echo	"<div class='flex-col-1 pd-spcart-price'>".$productt['Product Cost With Coupon']."</div>";
+				echo	"<div class='flex-col-1 pd-spcart-price'><span class='mobile-visible'>Price: </span>".$productt['Product Cost With Coupon']."</div>";
 			}
 			else{
-				echo	"<div class='flex-col-1 pd-spcart-price'>".$productt['Product Cost Without Coupon']."</div>";
+				echo	"<div class='flex-col-1 pd-spcart-price'><span class='mobile-visible'>Price: </span>".$productt['Product Cost Without Coupon']."</div>";
 			}
 			$discountPrice += $productt['Product Cost Without Coupon']-$productt['Product Cost With Coupon'];
 			// end add by jinghu
@@ -243,7 +243,16 @@ if(isset($_SESSION["UserId"])){
 		</div>
 
 		<p>Based on your details, we’ve recognised you are:</p>
-		<p style=" border: 1px solid #004250; padding: 5px 0;"><?php if(sizeof($Dietary)>0) {foreach($Dietary as $item) {echo $item['Name'].'<br>';} }  else { echo "None";}?></p>
+
+		<div class="flex-cell flex-flow-column">
+			<?php if(sizeof($Dietary)>0) {
+				foreach($Dietary as $item) {
+					echo '<span class="diet-name">'.$item['Name'].'</span>';} }  
+				else { 
+					echo "<span style='text-transform: uppercase; color: grey; font-size: 1.1em; font-weight: 500;'>None</span>";}
+			?>
+		</div>
+		
 		<span class="note-text">Please note that not all APA PD events include catering.</span>
 	</div>
 
@@ -399,7 +408,7 @@ if(isset($_SESSION["UserId"])){
 </div>
 <?php endif; ?>
 <?php if($productList->rowCount()==0): ?>   <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><h3 style="color:black;">You don not have any products in your shopping cart.</h3></div>      <?php endif;?>
-<div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<div  class="col-xs-12 bottom-buttons">
  <a target="_blank" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
  <a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update my details</button></a>
 </div>

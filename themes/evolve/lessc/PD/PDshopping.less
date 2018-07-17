@@ -23,10 +23,29 @@ fieldset {
   background: url("/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
 }
 
+/*--PREDEFINED COLOURS--*/
+@light-background: rgb(242, 243, 244);
+@light-transparent-background: rgba(255, 255, 255, 0.9);
+@dark-background: rgb(94, 96, 103);
+@dark-transparent-background: rgba(94, 96, 103, 0.8);
+@bright-blue: rgb(0, 159, 218);
+@brighter-blue: rgb(0,184,241);
+
+/*--RESPONSIVE BREAKPOINTS--*/
+@phone-width: 480px;
+@larger-phone-width: 570px;
+@tablet-width: 768px;
+@larger-tablet-width: 992px;
+@desktop-width: 1200px;
+@larger-desktop-width: 1500px;
+
 #section-main-content{
   .container{
     .region{
       .content{
+        .bottom-buttons{
+          text-align: center;
+        }
         #pd-shopping-cart{
           div[class^="flex-col-"]{
             padding: 0px 5px;
@@ -86,11 +105,43 @@ fieldset {
             }
           }
         }
+
+        .left-content{
+          label{
+            font-weight: 300;
+            color: #000;
+          }
+          .diet-name{
+            font-size: 1.1em;
+            color: #000;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            &:before{
+              content: '';
+              width: 6px;
+              height: 6px;
+              border-radius: 100%;
+              background: #000;
+              position: relative;
+              display: block;
+              float: left;
+              margin-right: 10px;
+            }
+          }
+        }
+        .dashboard-button{
+          &:hover{
+            opacity: 0.8;
+          }
+        }
       }
 
       .paymentsiderbar{
+        background-color: rgba(137,159,153,0.1);
+        border: 0;
         span.sidebardis{
-          color: #757676;
+          color: #000;
           font-weight: 400;
           padding-bottom: 10px;
           display: block;
@@ -155,9 +206,12 @@ fieldset {
               }
           }
       }
+
         #discount{
           display: flex;
           flex-direction: row;
+          width: 100%;
+          flex-wrap: wrap;
           .dashboard-button{
             color: white;
             margin: 0;
@@ -166,6 +220,16 @@ fieldset {
             padding: 9px 25px;
             margin-left: 10px;
             display: block;
+            @media all and (max-width: 1253px) {
+              margin-left: 0;
+            }
+            @media all and (max-width: @desktop-width) and (min-width: @larger-tablet-width + 1) {
+              margin-left: 0;
+              margin-top: 10px
+            }
+            @media all and (max-width: @larger-tablet-width) {
+              margin-left: 10px;
+            }
             &:hover{
               opacity: 0.8;
             }
@@ -179,6 +243,9 @@ fieldset {
 
         .placeorder{
           width: 100%;
+          &:hover{
+            opacity: 0.8;
+          }
         }
       }
       
@@ -247,13 +314,77 @@ fieldset {
       }
 
       .small-lead-heading{
-        font-size: 1.4em;
+        font-size: 18px;
         font-weight: 400;
         margin: 10px 0;
       }
       .note-text{
         font-weight: 400;
         color: rgba(0,0,0,0.6);
+      }
+    }
+  }
+}
+
+//MOBILE VERSION
+#section-main-content{
+  .container{
+    .region{
+      .content{
+        #pd-shopping-cart{
+          .mobile-visible{
+            display: none;
+            @media all and (max-width: @tablet-width) {
+              display: inline-block;
+              font-weight: 400;
+              padding-right: 5px;
+            }
+          }
+          @media all and (max-width: @tablet-width) {
+            flex-direction: column;
+            .heading-row{
+              display: none;
+            }
+            div[class^="flex-col-"]{
+              width: 100%;
+              text-align: left;
+            }
+            .pd-spcart-date{
+              .start-date:before, .end-date:before{
+                color: #000;
+                font-weight: 400;
+              }
+            }
+            .pd-spcart-wishlist{
+              a{
+                background: #c3c8c8;
+                color: #fff;
+                display: inline-block;
+                text-transform: uppercase;
+                text-align: center;
+                font-size: 1.2em;
+                cursor: pointer;
+                padding: 5px 10px;
+                margin-top: 20px;
+              }
+            }
+            .pd-spcart-delete{
+              justify-content: flex-start;
+              a{
+                position: relative;
+                margin-top: 20px;
+                text-decoration: underline;
+                &:after{
+                  content: 'Delete';
+                  padding: 5px 10px;
+                }
+                i{
+                  display: none;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

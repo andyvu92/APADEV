@@ -1738,7 +1738,7 @@ if($resultdata['result']) {
   
 </div> 
 
-<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script type="text/javascript">
    jQuery(document).ready(function($) {
