@@ -117,7 +117,6 @@ jQuery(document).ready(function($) {
 					}
 					
 					if($("input[name=Wcountry"+x+"]").val() ==''||$("input[name=Wemail"+x+"]").val() =='' || !isValidEmailAddress($("input[name=Wemail"+x+"]").val()) ||$("select[name=Number-worked-hours"+x+"]").val() ==''){
-						alert(i+"dffs"+x);
 						return false;
 					}
 				}
@@ -244,18 +243,18 @@ jQuery(document).ready(function($) {
 		var x = Number(i + 1);
 		
 	    //if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
-		$('[class^=down]:not(.down'+x+')').slideUp(400);
+		$('[class^=down]:not(.down'+x+')').slideUp(200);
 		if(x==3){
 			if($('select[name=MemberType]').val()=="9964" || $('select[name=MemberType]').val()=="9965"){
-				$('.down3').slideUp(400);
-				$('.down4').slideToggle(450);
+				$('.down3').slideUp(200);
+				$('.down4').slideToggle(200);
 				$("span.eventtitle4").addClass("text-underline");
 				$("span:not(.eventtitle4)").removeClass("text-underline");
 				return;
 			}
 		}
-	    if((x==5) && ($('#insuranceTag').val()=="0")){ $('.down6').slideToggle(450); }
-		else{$('.down' + x).slideToggle(450);}
+	    if((x==5) && ($('#insuranceTag').val()=="0")){ $('.down6').slideToggle(200); }
+		else{$('.down' + x).slideToggle(200);}
 		
 		$('[class^=tabtitle]:not(.tabtitle'+x+') span').removeClass("text-underline");
 		$('[class^=event]:not(.event'+x+') span').removeClass("text-underline");
@@ -271,8 +270,8 @@ jQuery(document).ready(function($) {
 		//if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
 		if(x==3){
 			if($('select[name=MemberType]').val()=="9964" || $('select[name=MemberType]').val()=="9965"){
-				$('.down4').slideUp(400);
-				$('.down2').slideToggle(450);
+				$('.down4').slideUp(200);
+				$('.down2').slideToggle(200);
 				$("span.eventtitle2").addClass("text-underline");
 				$("span:not(.eventtitle2)").removeClass("text-underline");
 				return;
@@ -284,8 +283,8 @@ jQuery(document).ready(function($) {
         //if(x==5){ $.post(window.location, {goI:"1"},function(data){console.log('successfully posted data! response body: ' + data);});}
 		if(x==5){ $('#tempform').submit();}
 		if(x==7){ $('#pform').submit();}
-	    $('[class^=down]:not(.down'+x+')').slideUp(400);
-	    $('.down' + x).slideToggle(450);
+	    $('[class^=down]:not(.down'+x+')').slideUp(200);
+	    $('.down' + x).slideToggle(200);
 		$('[class^=tabtitle]:not(.tabtitle'+x+') span').removeClass("text-underline");
 		$('[class^=event]:not(.event'+x+') span').removeClass("text-underline");
 		var eventtitle = "eventtitle"+x;

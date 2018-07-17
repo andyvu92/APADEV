@@ -1,3 +1,4 @@
+<?php if(isset($_SESSION["UserId"])) : ?>
 <?php
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 /* get background image****/
@@ -1924,3 +1925,9 @@ background: url("http://localhost/sites/default/files/logo_apa_0.png") 0 0 no-re
 background: url("http://localhost/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
 }
 </style>
+<?php else : 
+	// todo
+	// add log-in button with message - you must be logged in
+	?>
+<p>please log-in to use this page</p>
+<?php endif; ?>

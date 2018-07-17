@@ -1,3 +1,4 @@
+<?php if(isset($_SESSION["UserId"])) : ?>
 <?php
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 /* get background image****/
@@ -262,4 +263,9 @@ $products = $product["Orders"]
 	</script>
 	<?php endif;*/ ?>
 </div>
- 
+ <?php else : 
+	// todo
+	// add log-in button with message - you must be logged in
+	?>
+<p>please log-in to use this page</p>
+<?php endif; ?>
