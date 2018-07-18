@@ -607,8 +607,8 @@ jQuery(document).ready(function($) {
 		$( ".FapTagC" ).removeClass('display-none');
 		$( ".FapTagA" ).removeClass('display-none');
 	}
-	/*   Membership Types questions   */
-		
+
+	/*   Membership Types questions start  */	
 	$(".next").click(function() {
 		var x = $(".active").attr('id').replace('Section','');
 		if(x != '5') { // if it is not the last section
@@ -789,7 +789,8 @@ jQuery(document).ready(function($) {
 	});
 	 var widthCalVideo169 = $(".video169").width();
 	$(".video169").attr('style','height: '+((parseInt(widthCalVideo169) * 9)/16)+"px; width: 100%;");
-	 /*   Membership Types questions   */
+	 /*   Membership Types questions end   */
+	 
 	/*insurance page for join a new member */
 	$('#join-insurance-form2 input').click(function() {
        if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked"))

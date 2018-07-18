@@ -96,11 +96,11 @@ if(count($PostArray) == 0) { // GET data
 		$arrayUpdate["ConsentID"] = $Subs["ConsentID"];
 		if(!isset($PostArray[$Subs["ConsentID"]])) {
 			// When it's not set (unticked on check box)
-			$ArrayRe["Subscribed"] = "False";
-			$arrayUpdate["Subscribed"] = "False";
+			$ArrayRe["Subscribed"] = 0;
+			$arrayUpdate["Subscribed"] = 0;
 		} else {
-			$ArrayRe["Subscribed"] = "True";//$Subs["Subscribed"];
-			$arrayUpdate["Subscribed"] = "True";//$Subs["Subscribed"];
+			$ArrayRe["Subscribed"] = 1;//$Subs["Subscribed"];
+			$arrayUpdate["Subscribed"] = 1;//$Subs["Subscribed"];
 		}
 		array_push($consArray, $arrayUpdate);
 		$ArrayRe["Subscription"] = $Subs["Consent"];
@@ -182,7 +182,7 @@ if(count($PostArray) == 0) { // GET data
 									<li>
 										<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
 										'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
-										if($Subs['Subscribed']==1 || $Subs['Subscribed']=="True"){ 
+										if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1'){ 
 											echo "checked";
 										}
 										echo '>

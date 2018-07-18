@@ -52,7 +52,7 @@ if(count($PostArray) == 0) { // Just GET data
 	$subscriptions = GetAptifyData("24", $ArrayReturn);
 }
 ?>
-
+<?php logRecorder(); ?>
 <table class="table MTtable">
 	<tbody>
 		<?php
@@ -80,5 +80,4 @@ if(count($PostArray) == 0) { // Just GET data
 		?>
 	</tbody>
 </table>
-<?php logRecorder(); ?>
 <div class="NGpriceT" style="display: none;"></div>
