@@ -140,7 +140,8 @@ if(isset($_POST['step2-1'])) {
 
 		<div class="row">
 			<div class="col-xs-12"><label>PRF donation</label></div>
-			<div class="col-xs-6 col-sm-6">
+			<div class="col-xs-6 col-sm-6 col-md-3">
+				<div class="chevron-select-box">
 				<select class="form-control" id="PRF" name="PRF">
 					<option value="10" selected>$10.00</option>
 					<option value="20">$20.00</option>
@@ -148,6 +149,7 @@ if(isset($_POST['step2-1'])) {
 					<option value="100">$100.00</option>
 					<option value="Other">Other</option>
 				</select>
+				</div>
 				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="">
 				<a style="color: black;" href="#">What is this?</a>
 				
@@ -192,7 +194,8 @@ if(isset($_POST['step2-1'])) {
 
 		<div id="anothercardBlock" style="margin: 0; padding:0" class="display-none col-xs-12">
 		<div class="row">
-			<div class="col-xs-6 col-sm-6">
+			<div class="col-xs-6 col-sm-6 col-md-3">
+				<div class="chevron-select-box">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 				<?php 
 					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
@@ -204,11 +207,12 @@ if(isset($_POST['step2-1'])) {
 					}
 				?>	
 				</select>
+				</div>
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-xs-12 col-md-3">
+			<div class="col-xs-12 col-sm-6">
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>
@@ -234,7 +238,8 @@ if(isset($_POST['step2-1'])) {
 	<?php if (sizeof($cardsnum["results"])==0): ?> 
 	<div id="anothercardBlock" class="row">				   
 		<div class="row">
-			<div class="col-xs-12">
+			<div class="col-xs-6 col-sm-6 col-md-3">
+				<div class="chevron-select-box">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 				<?php 
 					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
@@ -246,11 +251,12 @@ if(isset($_POST['step2-1'])) {
 					}
 				?>
 				</select>
+				</div>
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="col-xs-12 col-md-3">
+			<div class="col-xs-12 col-sm-6">
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>

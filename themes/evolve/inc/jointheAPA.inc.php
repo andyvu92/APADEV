@@ -262,23 +262,29 @@ Telephone: 1300 306 622<br />
 Facsimile: (03) 9092 0899</p>
 
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-		<label for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label><input type="checkbox" id="privacypolicyp" checked>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
+
+		<input class="styled-checkbox" type="checkbox" id="privacypolicyp" checked> 
+		<label for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label>
+		
 	</div>	 
 </div>
 <div id="installmentpolicyWindow" style="display:none;">
 	<h3>APA installment policy</h3>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pretium
+	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pretium
 	tellus non ex mattis feugiat a in est. Praesent est leo, viverra ac
 	hendrerit ac, facilisis at ante. Phasellus elementum hendrerit risus,
 	eu luctus dolor sollicitudin vitae. Cras ac tellus ut mauris scelerisque
 	mollis. Sed nibh ipsum, fringilla sed pellentesque non, luctus ut diam.
 	In viverra neque lacus, vel pulvinar nulla convallis id. Curabitur porttitor
-	eleifend quam in tincidunt.
+	eleifend quam in tincidunt.</p>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-		<label for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label><input type="checkbox" id="installmentpolicyp" checked>
+		
+		<input class="styled-checkbox" type="checkbox" id="installmentpolicyp" checked>
+		<label for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label>
+
 	</div>
 </div>	
 <?php logRecorder(); ?>

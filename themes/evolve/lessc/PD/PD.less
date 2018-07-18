@@ -218,42 +218,47 @@
     }
 }
 
-.content{
-    .chosen-container-multi{
-        .chosen-choices{
-            background: none;
-            border: 1px solid #d1d1d1;
-            padding: 0;
-            background-image: none;
-            li.search-choice{
-                background: rgba(58, 60, 60,0.8);
-                background-color: rgba(0,0,0,0);
-                margin: 8px;
-                &:active {
-                    outline: none;
-                    border: none;
-                    }
-                .search-choice-close{
-                    opacity: 0.5;
-                    position: absolute;
-                    z-index: 9999;
-                    right: 2px;
-                    width: 15px;
-                    height: 15px;
-                    top: 2px;
-                    cursor: pointer;
-                    background-repeat:no-repeat;
-                    background-size:contain;
-                    background-position:center;
-                    background-image:url('/sites/default/files/dashboard-icon/close-icon.png');
-                    &:hover{
-                        opacity: 1;
+.pd{
+    .content{
+        .chosen-container-multi{
+            .chosen-choices{
+                background: none;
+                border: 1px solid #655e5e;
+                padding: 0;
+                background-image: none;
+                li.search-choice{
+                    background: rgba(58, 60, 60,0.8);
+                    background-color: rgba(0,0,0,0);
+                    margin: 8px;
+                    &:active {
+                        outline: none;
+                        border: none;
+                        }
+                    .search-choice-close{
+                        opacity: 0.5;
+                        position: absolute;
+                        z-index: 9999;
+                        right: 2px;
+                        width: 15px;
+                        height: 15px;
+                        top: 2px;
+                        cursor: pointer;
+                        background-repeat:no-repeat;
+                        background-size:contain;
+                        background-position:center;
+                        background-image:url('/sites/default/files/dashboard-icon/close-icon.png');
+                        &:hover{
+                            opacity: 1;
+                        }
                     }
                 }
             }
         }
     }
 }
+
+
+
 
 #registerPDUser{
     .chosen-container-multi{
@@ -329,6 +334,7 @@
               position: relative;
               cursor: pointer;
               padding: 0;
+              display: flex;
             }
           
             // Box.
@@ -338,6 +344,7 @@
               display: inline-block;
               vertical-align: text-top;
               width: 20px;
+              min-width: 20px;
               height: 20px;
               background: none;
               box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
