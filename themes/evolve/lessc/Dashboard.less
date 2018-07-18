@@ -798,7 +798,7 @@ a.accent-btn{
     color: #fff!important;
     text-transform: uppercase;
     font-family: 'Roboto';
-    font-weight: 200;
+    font-weight: 300;
     width: auto;
     height: auto;
     &:hover{
@@ -927,13 +927,16 @@ a#insuranceControl{
             }
         }
         @media all and (max-width: @larger-phone-width) {
-            width: 560px;
-            overflow-y: scroll;
+            overflow-x: scroll;
+            white-space: nowrap;
+            margin: 0!important;
             &::-webkit-scrollbar { 
                 display: none; 
             }
             li.dashboard-nav{
-                width: 112px;
+                min-width: 125px;
+                float: none!important;
+                display: inline-block;
                 padding: 5px 0;
             }
         }
@@ -2032,6 +2035,11 @@ form{
                         float: none;
                         position: relative;
                         visibility: visible;
+                        a{
+                            span{
+                                visibility: visible;
+                            }
+                        }
                     }
                     .text-underline{
                         &:after{
@@ -2100,6 +2108,7 @@ form{
           position: relative;
           cursor: pointer;
           padding: 0;
+          display: flex;
         }
       
         // Box.
@@ -2237,6 +2246,7 @@ form{
                   position: relative;
                   cursor: pointer;
                   padding: 0;
+                  display: flex;
                 }
               
                 // Box.
