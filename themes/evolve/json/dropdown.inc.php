@@ -14,12 +14,14 @@ function getDropdown(){
 	fclose($fp);
 	// write State json file
 	foreach($result['State']  as $lines){
-		$ID = $lines['ID'];
-		$Abbreviation = $lines['Abbreviation'];
-		$FullName = $lines['FullName'];
-		$CountryID = $lines['CountryID'];
-		$arrayState[] = array('ID'=>$ID, 'Abbreviation'=>$Abbreviation, 'FullName'=>$FullName,'CountryID'=>$CountryID);	
-    }
+		if($lines['CountryID'] == "14"){
+			$ID = $lines['ID'];
+			$Abbreviation = $lines['Abbreviation'];
+			$FullName = $lines['FullName'];
+			$CountryID = $lines['CountryID'];
+			$arrayState[] = array('ID'=>$ID, 'Abbreviation'=>$Abbreviation, 'FullName'=>$FullName,'CountryID'=>$CountryID);	
+		}
+	}
 	$response= $arrayState;
 	$fp = fopen(__DIR__ . '/../json/State.json', 'w');
     $test = fwrite($fp, json_encode($response));

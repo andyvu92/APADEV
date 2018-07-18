@@ -43,7 +43,7 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Address_Line_2'])){ $postData['Address_Line_2'] = $_POST['Address_Line_2']; }
 	if(isset($_POST['Suburb'])){ $postData['Suburb'] = $_POST['Suburb']; }
 	if(isset($_POST['Postcode'])){ $postData['Postcode'] = $_POST['Postcode']; }
-	if(isset($_POST['State'])){ $postData['State'] = $_POST['State']; }
+	if(isset($_POST['State'])){ $postData['State'] = $_POST['State']; }  else {$postData['State'] = "";}
 	if(isset($_POST['Country'])){ $postData['Country'] = $_POST['Country']; }
 	if(isset($_POST['Status'])){ $postData['Status'] = $_POST['Status']; }
 	if(isset($_POST['Specialty'])){ $postData['Specialty'] = $_POST['Specialty']; }
@@ -474,7 +474,8 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 							$State=json_decode($statecode, true);						
 							foreach($State  as $key => $value){
-								echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
+								//echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
+								echo '<option value="'.$State[$key]['Abbreviation'].'"';
 								if ($details['State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
 								echo '> '.$State[$key]['Abbreviation'].' </option>';
 						    }
@@ -560,7 +561,8 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 								$State=json_decode($statecode, true);
 								foreach($State  as $key => $value){
-								echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
+								//echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
+								echo '<option value="'.$State[$key]['Abbreviation'].'"';
 								if ($details['Billing-State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
 								echo '> '.$State[$key]['Abbreviation'].' </option>';
 							
@@ -904,8 +906,8 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							//$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 							//$State=json_decode($statecode, true);						
 							foreach($State  as $pair => $value){
-								echo '<option class="StateOption'.$State[$pair]['CountryID'].'" value="'.$State[$pair]['Abbreviation'].'"';
-								//echo '<option value="'.$State[$pair]['Abbreviation'].'"';
+								//echo '<option class="StateOption'.$State[$pair]['CountryID'].'" value="'.$State[$pair]['Abbreviation'].'"';
+								echo '<option value="'.$State[$pair]['Abbreviation'].'"';
 								if ($details['Workplaces'][$key]['Wstate'] == $State[$pair]['Abbreviation']){ echo "selected='selected'"; } 
 								echo '> '.$State[$pair]['Abbreviation'].' </option>';
 							}

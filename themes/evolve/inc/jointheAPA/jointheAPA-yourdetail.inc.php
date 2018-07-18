@@ -97,7 +97,7 @@ if (isset($_POST['step1'])) {
     if (isset($_POST['State'])) {
         $postData['State'] = $_POST['State'];
     }
-    
+    else {$postData['State'] = "";}
     if (isset($_POST['Country'])) {
         $postData['Country'] = $_POST['Country'];
     }
@@ -887,8 +887,10 @@ if (isset($_SESSION['UserId'])):
     $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
     $State     = json_decode($statecode, true);
     foreach ($State as $key => $value) {
-        echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="' . $State[$key]['Abbreviation'] . '"';
-        if ($details['State'] == $State[$key]['Abbreviation']) {
+        //echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="' . $State[$key]['Abbreviation'] . '"';
+        echo '<option value="' . $State[$key]['Abbreviation'] . '"';
+        
+		if ($details['State'] == $State[$key]['Abbreviation']) {
             echo "selected='selected'";
         }
         
@@ -1014,8 +1016,9 @@ if (isset($_SESSION['UserId'])):
     $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
     $State     = json_decode($statecode, true);
     foreach ($State as $key => $value) {
-        echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="' . $State[$key]['Abbreviation'] . '"';
-        if ($details['Billing-State'] == $State[$key]['Abbreviation']) {
+        //echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="' . $State[$key]['Abbreviation'] . '"';
+        echo '<option value="' . $State[$key]['Abbreviation'] . '"';
+		if ($details['Billing-State'] == $State[$key]['Abbreviation']) {
             echo "selected='selected'";
         }
         
@@ -1593,8 +1596,9 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                                 <?php
         
         foreach ($State as $pair => $value) {
-            echo '<option class="StateOption'.$State[$pair]['CountryID'].'" value="' . $State[$pair]['Abbreviation'] . '"';
-            if ($details['Workplaces'][$key]['Wstate'] == $State[$pair]['Abbreviation']) {
+            //echo '<option class="StateOption'.$State[$pair]['CountryID'].'" value="' . $State[$pair]['Abbreviation'] . '"';
+            echo '<option value="' . $State[$pair]['Abbreviation'] . '"';
+			if ($details['Workplaces'][$key]['Wstate'] == $State[$pair]['Abbreviation']) {
                 echo "selected='selected'";
             }
             
@@ -2492,8 +2496,9 @@ if (!isset($_SESSION['UserId'])):
     $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
     $State     = json_decode($statecode, true);
 	foreach ($State as $key => $value) {
-        echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="' . $State[$key]['Abbreviation'] . '"';
-        echo '> ' . $State[$key]['Abbreviation'] . ' </option>';
+        //echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="' . $State[$key]['Abbreviation'] . '"';
+        echo '<option value="' . $State[$key]['Abbreviation'] . '"';
+		echo '> ' . $State[$key]['Abbreviation'] . ' </option>';
     }
     
 ?>
@@ -2573,8 +2578,9 @@ if (!isset($_SESSION['UserId'])):
     $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
     $State     = json_decode($statecode, true);
     foreach ($State as $key => $value) {
-        echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="' . $State[$key]['Abbreviation'] . '"';
-        echo '> ' . $State[$key]['Abbreviation'] . ' </option>';
+        //echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="' . $State[$key]['Abbreviation'] . '"';
+        echo '<option value="' . $State[$key]['Abbreviation'] . '"';
+		echo '> ' . $State[$key]['Abbreviation'] . ' </option>';
     }
     
 ?>

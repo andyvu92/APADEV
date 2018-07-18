@@ -27,26 +27,39 @@ jQuery(document).ready(function($) {
 	});
 	$('[id^=Country]').change(function(){
 		var x = $(this).attr("id").replace('Country', '');
-		var y = $('select[id="Country'+x+'"] :selected').attr('class').replace('CountryOption', '');
-		$('select[id="State'+x+'"] option:not(.StateOption'+y+'), select[id="State'+x+'"] li:not(.StateOption'+y+')').addClass("display-none");
-		$('select[id="State'+x+'"] option.StateOption'+y+', select[id="State'+x+'"] li:not(.StateOption'+y+')').removeClass("display-none");
-		$('select[id="State'+x+'"] option.StateOption'+y+', select[id="State'+x+'"] li:not(.StateOption'+y+')').addClass("display");
+		//var y = $('select[id="Country'+x+'"] :selected').attr('class').replace('CountryOption', '');
+		if($('select[id="Country'+x+'"]').val()!="Australia"){
+            $('select[id="State'+x+'"]').attr('disabled', 'disabled');
+		}
+		else{
+			$('select[id="State'+x+'"]').removeAttr('disabled');
+		}
+		
+		//$('select[id="State'+x+'"] option:not(.StateOption'+y+'), select[id="State'+x+'"] li:not(.StateOption'+y+')').addClass("display-none");
+		//$('select[id="State'+x+'"] option.StateOption'+y+', select[id="State'+x+'"] li:not(.StateOption'+y+')').removeClass("display-none");
+		//$('select[id="State'+x+'"] option.StateOption'+y+', select[id="State'+x+'"] li:not(.StateOption'+y+')').addClass("display");
 	});
 	$('[id^=Wcountry]').change(function(){
 		var x = $(this).attr("id").replace('Wcountry', '');
-		var y = $('select[id="Wcountry'+x+'"] :selected').attr('class').replace('CountryOption', '');
-		$('select[id="Wstate'+x+'"] option:not(.StateOption'+y+')').addClass("display-none");
-		$('select[id="Wstate'+x+'"] option.StateOption'+y+'').removeClass("display-none");
-		$('select[id="Wstate'+x+'"] option.StateOption'+y+'').addClass("display");
+		//var y = $('select[id="Wcountry'+x+'"] :selected').attr('class').replace('CountryOption', '');
+		//$('select[id="Wstate'+x+'"] option:not(.StateOption'+y+')').addClass("display-none");
+		//$('select[id="Wstate'+x+'"] option.StateOption'+y+'').removeClass("display-none");
+		//$('select[id="Wstate'+x+'"] option.StateOption'+y+'').addClass("display");
+		if($('select[id="Wcountry'+x+'"]').val()!="Australia"){
+            $('select[id="Wstate'+x+'"]').attr('disabled', 'disabled');
+		}
+		else{
+			$('select[id="Wstate'+x+'"]').removeAttr('disabled');
+		}
 	});
-	$('select[id^=State] option.StateOption14, select[id^=State] li.StateOption14').removeClass("display-none");
-	$('select[id^=State] option.StateOption14, select[id^=State] li.StateOption14').addClass("display");
-	$('select[id^=State] option:not(.StateOption14), select[id^=State] li.StateOption14').addClass("display-none");
-	$('select[id^=State] option:not(.StateOption14), select[id^=State] li.StateOption14').removeClass("display");
-	$('select[id^=Wstate] option.StateOption14').removeClass("display-none");
-	$('select[id^=Wstate] option.StateOption14').addClass("display");
-	$('select[id^=Wstate] option:not(.StateOption14)').addClass("display-none");
-	$('select[id^=Wstate] option:not(.StateOption14)').removeClass("display");
+	//$('select[id^=State] option.StateOption14, select[id^=State] li.StateOption14').removeClass("display-none");
+	//$('select[id^=State] option.StateOption14, select[id^=State] li.StateOption14').addClass("display");
+	//$('select[id^=State] option:not(.StateOption14), select[id^=State] li.StateOption14').addClass("display-none");
+	//$('select[id^=State] option:not(.StateOption14), select[id^=State] li.StateOption14').removeClass("display");
+	//$('select[id^=Wstate] option.StateOption14').removeClass("display-none");
+	//$('select[id^=Wstate] option.StateOption14').addClass("display");
+	//$('select[id^=Wstate] option:not(.StateOption14)').addClass("display-none");
+	//$('select[id^=Wstate] option:not(.StateOption14)').removeClass("display");
 	
 	$('[class=cardevent]').click(function(){
 	    $('.carddown').slideToggle(450);
