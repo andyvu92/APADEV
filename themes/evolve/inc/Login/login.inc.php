@@ -59,8 +59,8 @@
 		$arrIn["Password"] = $pass;
 		$result = GetAptifyData("7", $arrIn);
 		if(isset($result["ErrorInfo"])) {
-			//echo $result["ErrorInfo"]["ErrorMessage"];
-			//echo "log-in fail";
+			echo $result["ErrorInfo"]["ErrorMessage"];
+			echo "log-in fail";
 		} else {
 			// logged in
 			//print_r($result);
