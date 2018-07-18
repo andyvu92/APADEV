@@ -128,7 +128,7 @@ if (isset($_POST['step1'])) {
         $postData['Billing-Pobox']         = $_POST['Billing-Pobox'];
         $postData['Billing-Suburb']        = $_POST['Billing-Suburb'];
         $postData['Billing-Postcode']      = $_POST['Billing-Postcode'];
-        $postData['Billing-State']         = $_POST['Billing-State'];
+        if(isset($_POST['Billing-State'])) {$postData['Billing-State'] = $_POST['Billing-State']; } else{$postData['Billing-State'] ="";}
         $postData['Billing-Country']       = $_POST['Billing-Country'];
     }
     
@@ -554,7 +554,7 @@ if (isset($_SESSION['UserId'])):
     }
     
 ?>
-<form id="your-detail-form" action="jointheapa" method="POST">
+<form id="your-detail-form" action="jointheapa" method="POST" autocomplete="off">
     <input type="hidden" name="step1" value="1"/>
     <input type="hidden" name="insuranceTag" id="insuranceTag"/>
             <div class="down1" <?php
@@ -711,11 +711,13 @@ if (isset($_SESSION['UserId'])):
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
+	$countser = 0;
     foreach ($country as $key => $value) {
         echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
-        if ($details['Home-phone-countrycode'] == $country[$key]['TelephoneCode']) {
-            echo "selected='selected'";
-        }elseif(empty($details['Home-phone-countrycode']) && $country[$key]['ID']="14"){
+        if ($details['Home-phone-countrycode'] == preg_replace('/\s+/', '', $country[$key]['TelephoneCode']) && $countser == 0){ 
+			echo "selected='selected'"; 
+			$countser++;
+		}elseif(empty($details['Home-phone-countrycode']) && $country[$key]['ID']="14"){
             echo "selected='selected'";
         }
         
@@ -765,11 +767,14 @@ if (isset($_SESSION['UserId'])):
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
+	$countser = 0;
     foreach ($country as $key => $value) {
         echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
-        if ($details['Mobile-country-code'] == $country[$key]['TelephoneCode']) {
-            echo "selected='selected'";
-        }
+        if ($details['Mobile-country-code'] ==  preg_replace('/\s+/', '', $country[$key]['TelephoneCode'])&& $countser == 0)
+			{ 
+				echo "selected='selected'"; 
+				$countser++;
+			} 
         elseif(empty($details['Mobile-country-code']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
 										}
@@ -1413,7 +1418,19 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 			?>
             </ul>
 			</div>
-			
+			<?php   
+				$workplaceSettingscode         = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
+				$workplaceSettings             = json_decode($workplaceSettingscode, true);
+				$_SESSION["workplaceSettings"] = $workplaceSettings;  
+				$statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
+				$State     = json_decode($statecode, true);
+				$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+				$country     = json_decode($countrycode, true);
+				$Languagecode = file_get_contents("sites/all/themes/evolve/json/Language.json");
+				$Language     = json_decode($Languagecode, true);
+				$NumberOfHourscode = file_get_contents("sites/all/themes/evolve/json/NumberOfHours.json");
+				$NumberOfHours     = json_decode($NumberOfHourscode, true);	
+		    ?>
             <div id="workplaceblocks">
             <?php
                     foreach ($details['Workplaces'] as $key => $value):
@@ -1574,8 +1591,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
             echo "selected='selected'";
 ?> disabled>State</option>
                                 <?php
-        $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
-        $State     = json_decode($statecode, true);
+        
         foreach ($State as $pair => $value) {
             echo '<option class="StateOption'.$State[$pair]['CountryID'].'" value="' . $State[$pair]['Abbreviation'] . '"';
             if ($details['Workplaces'][$key]['Wstate'] == $State[$pair]['Abbreviation']) {
@@ -1600,8 +1616,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         echo $key;
 ?>" required>
                                 <?php
-        $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
-        $country     = json_decode($countrycode, true);
+        
         foreach ($country as $pair => $value) {
             echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$pair]['Country'] . '"';
             if ($details['Workplaces'][$key]['Wcountry'] == $country[$pair]['Country']) {
@@ -1660,8 +1675,8 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                                             echo $key;
                                     ?>">
                                 <?php
-        $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
-        $country     = json_decode($countrycode, true);
+        //$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+        //$country     = json_decode($countrycode, true);
         foreach ($country as $pair => $value) {
             echo '<option value="' . $country[$pair]['TelephoneCode'] . '"';
             if ($details['Workplaces'][$key]['WPhoneCountryCode'] == $country[$pair]['TelephoneCode']) {
@@ -1671,7 +1686,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
 				echo "selected='selected'";
 			}
 
-            echo '> ' . $country[$key]['Country'] . ' </option>';
+            echo '> ' . $country[$pair]['Country'] . ' </option>';
         }
         
 ?>
@@ -1736,8 +1751,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
         echo $key;
 ?>[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
                                     <?php
-        $Languagecode = file_get_contents("sites/all/themes/evolve/json/Language.json");
-        $Language     = json_decode($Languagecode, true);
+       
         foreach ($Language as $pair => $value) {
             echo '<option value="' . $Language[$pair]['ID'] . '"';
             if (in_array($Language[$pair]['ID'], $WAdditionalLanguage)) {
@@ -1930,9 +1944,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                                     // Response - get workplace settings from Aptify via webserice return Json data;
                                     // stroe workplace settings into the session
                                     
-                                    $workplaceSettingscode         = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
-                                    $workplaceSettings             = json_decode($workplaceSettingscode, true);
-                                    $_SESSION["workplaceSettings"] = $workplaceSettings;
+                                   
                                     foreach ($workplaceSettings as $pair => $value) {
                                         echo '<option value="' . $workplaceSettings[$pair]["ID"] . '"';
                                         if ($details['Workplaces'][$key]['Workplace-settingID'] == $workplaceSettings[$pair]["ID"]) {
@@ -1956,8 +1968,7 @@ $MemberType = GetAptifyData("31", $memberProdcutID);
                                     echo $key;
                             ?>">
                                 <?php
-        $NumberOfHourscode = file_get_contents("sites/all/themes/evolve/json/NumberOfHours.json");
-        $NumberOfHours     = json_decode($NumberOfHourscode, true);
+        
         foreach ($NumberOfHours as $pair => $value) {
             echo '<option value="' . $NumberOfHours[$pair]['ID'] . '"';
             if ($details['Workplaces'][$key]['Number-workedhours'] == $NumberOfHours[$pair]['ID']) {
@@ -2265,7 +2276,7 @@ endif;
 
 if (!isset($_SESSION['UserId'])):
 ?>
-   <form id="your-detail-form" action="jointheapa" method="POST">
+   <form id="your-detail-form" action="jointheapa" method="POST" autocomplete="off">
         <input type="hidden" name="step1" value="1"/>
         <input type="hidden" name="insuranceTag" id="insuranceTag"/>
             <input type="hidden" name="Status" value="1"/>
@@ -2998,12 +3009,15 @@ endif;
             $('#dashboard-right-content').addClass("autoscroll");
         });
          $('.add-workplace-join').click(function(){
+			
             var number = Number($('#wpnumber').val());
             var i = Number(number +1);
             //var j = Number(number +2);
-            $('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
-            $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade">');
+            $('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
+            $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
             //$('#wpnumber').text(i);
+			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
+			$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
             $('input[name=wpnumber]').val(i);
 			var memberType = $('select[name=MemberType]').val();
             var sessionvariable = '<?php

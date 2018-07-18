@@ -65,7 +65,7 @@ if(isset($_POST['step1'])) {
 	$postData['Billing-Pobox'] = $_POST['Billing-Pobox'];
 	$postData['Billing-Suburb'] = $_POST['Billing-Suburb'];
 	$postData['Billing-Postcode'] = $_POST['Billing-Postcode'];
-	$postData['Billing-State'] = $_POST['Billing-State'];
+	        if(isset($_POST['Billing-State'])) {$postData['Billing-State'] = $_POST['Billing-State']; } else{$postData['Billing-State'] ="";}
 	$postData['Billing-Country'] = $_POST['Billing-Country'];  
 	}
 	//Add shipping address & mailing address post data
@@ -364,10 +364,14 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<select class="form-control" id="country-code" name="country-code">
 						<?php
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							$country=json_decode($countrycode, true);						
+							$country=json_decode($countrycode, true);
+							$countser = 0;							
 							foreach($country  as $key => $value){
 								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
-								if ($details['Home-phone-countrycode'] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; } 
+								if ($details['Home-phone-countrycode'] == preg_replace('/\s+/', '', $country[$key]['TelephoneCode']) && $countser == 0){ 
+									echo "selected='selected'"; 
+									$countser++;
+								}
 								elseif(empty($details['Home-phone-countrycode']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
 								}
@@ -399,10 +403,15 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<select class="form-control" id="Mobile-countrycode" name="Mobile-country-code">
 						<?php
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							$country=json_decode($countrycode, true);						
+							$country=json_decode($countrycode, true);
+							$countser = 0;							
 							foreach($country  as $key => $value){
 								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
-								if ($details['Mobile-country-code'] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; } 
+								if ($details['Mobile-country-code'] ==  preg_replace('/\s+/', '', $country[$key]['TelephoneCode'])&& $countser == 0)
+									{ 
+										echo "selected='selected'"; 
+										$countser++;
+									} 
 								elseif(empty($details['Mobile-country-code']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
 										}
@@ -887,15 +896,16 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 
 					<div class="col-xs-6 col-md-3">
-						<label for="Wstate">State<span class="tipstyle">*</span></label>
+						<label for="Wstate">State</label>
 						<div class="chevron-select-box">
 						<select class="form-control" id="Wstate<?php echo $key;?>" name="Wstate<?php echo $key;?>">
 						   	<option value="" <?php if (empty($details['Workplaces'][$key]['Wstate'])) echo "selected='selected'";?> disabled>State</option>
 							<?php
-							$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
-							$State=json_decode($statecode, true);						
+							//$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+							//$State=json_decode($statecode, true);						
 							foreach($State  as $pair => $value){
 								echo '<option class="StateOption'.$State[$pair]['CountryID'].'" value="'.$State[$pair]['Abbreviation'].'"';
+								//echo '<option value="'.$State[$pair]['Abbreviation'].'"';
 								if ($details['Workplaces'][$key]['Wstate'] == $State[$pair]['Abbreviation']){ echo "selected='selected'"; } 
 								echo '> '.$State[$pair]['Abbreviation'].' </option>';
 							}
@@ -945,7 +955,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<select class="form-control" id="WPhoneCountryCode<?php echo $key;?>" name="WPhoneCountryCode<?php echo $key;?>">
 						<?php
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							$country=json_decode($countrycode, true);						
+							$country = json_decode($countrycode, true);						
 							foreach($country  as $pair => $value){
 								echo '<option value="'.$country[$pair]['TelephoneCode'].'"';
 								if ($details['Workplaces'][$key]['WPhoneCountryCode'] == $country[$pair]['TelephoneCode']){ echo "selected='selected'"; } 
@@ -1313,9 +1323,11 @@ jQuery(document).ready(function($) {
 		var number = Number($('#wpnumber').val());
 		var i = Number(number +1);
 		//var j = Number(number +2);
-		$('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
-		$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade"></div>');
+		$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
+		$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in"></div>');
 		//$('#wpnumber').text(i);
+		$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
+		$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
 		$('input[name=wpnumber]').val(i);
 		var memberType = $('select[name=MemberType]').val();
 		var sessionvariable = '<?php echo json_encode($_SESSION["workplaceSettings"]);?>';
