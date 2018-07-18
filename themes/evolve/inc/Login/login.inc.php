@@ -80,7 +80,7 @@
 			newSessionLogIn($id, $UserName, $Email, $FirstName, $LastName, $Title, $LinkId, $CompanyId, $TokenId, $Server, $Database, $AptifyUserID);
 			
 			$_SESSION["Log-in"] = "in";
-			echo "<br>logged in!!";
+			//echo "<br>logged in!!";
 			
 			$data = "UserID=".$_SESSION["UserId"];
 			$details = GetAptifyData("4", $data,"");

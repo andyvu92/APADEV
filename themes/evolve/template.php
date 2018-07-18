@@ -5,6 +5,7 @@ require_once dirname(__FILE__) . '/inc/functions.inc';
 require_once dirname(__FILE__) . '/inc/TandC/TandCFunction.inc.php';
 require_once dirname(__FILE__) . '/inc/Aptify/SessionHandler.inc.php';
 //require_once dirname(__FILE__) . '/json/dropdown.inc.php';
+//require_once dirname(__FILE__) . '/json/MembershipPrice.php';
 
 function evolve_init_presets(){
   return 8;
