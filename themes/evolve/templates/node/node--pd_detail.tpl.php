@@ -475,21 +475,9 @@ if($resultdata['result']) {
 		</div>
 
 		<div class="section description">
-			<div class="readmore-content pd-description-mobile">
-				<p>
-				<?php 
-				if (!empty($pd_detail['Description'])){
-					echo $pd_detail['Description'];
-				}
-				else{
-					echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
-				}
-				?>
-				</p>
-			</div>
-
-			<div class="pd-description-nonmobile">
-				<p>
+			<div class="pd-description-mobile">
+				<div class="readmore">
+					<p>
 					<?php 
 					if (!empty($pd_detail['Description'])){
 						echo $pd_detail['Description'];
@@ -498,7 +486,25 @@ if($resultdata['result']) {
 						echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
 					}
 					?>
-				</p>
+					</p>
+
+					<div class="col-xs-12">
+						<a href="#" class="scrollTop">Scroll</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="pd-description-nonmobile">
+					<p>
+						<?php 
+						if (!empty($pd_detail['Description'])){
+							echo $pd_detail['Description'];
+						}
+						else{
+							echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+						}
+						?>
+					</p>
 			</div>
 		</div>
 
@@ -1549,7 +1555,7 @@ if($resultdata['result']) {
 			   $today = strtotime("today");
 			   $t = $closedate < $today;
 			   if($t) {
-				   echo '<span class="add-to-wishlist" style="padding: 5px; text-align: center; cursor: auto; background-color: transparent;">Registration closed</span>';
+				   echo '<span class="add-to-card disable">Registration closed</span>';
 			   } elseif ($userTag =="0"){
 				   echo '<a class="add-to-card" id="registerPDUserButton"><span>Add to cart</span></a>';	
 			   } else {
@@ -1586,7 +1592,7 @@ if($resultdata['result']) {
 					foreach($pricelistGet as $key=>$value){
 						$x = explode(" ", $key);
 						$y = str_replace($x[0], "", $key);
-						echo "key: $key, x: $x, y: $y <br>";
+						//echo "key: $key, x: $x, y: $y <br>";
 						echo $y.":&nbsp;$".$value."<br>";
 					}
 				}	

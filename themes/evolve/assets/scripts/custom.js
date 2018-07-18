@@ -635,10 +635,15 @@ jQuery(document).ready(function($) {
 		BringSurveyBack();
 		var type = $("#chosenType").text();
 		var title = $("."+type+" .MTtitle").text();
+		var typeID = $('.'+type+' .MTid').text();
 		$("#chosenTypeName").text(title);
+		$("#chosenTid").text(typeID);
 		console.log(type);
 		if(x == 5) {
 			convertAndCalculate(type);
+			var MembershipType = $("#chosenTid").text();
+			var NationalGroups = $("#chosenNGid").text();
+			$('.Join').html("<a href='/jointheapa?MT="+MembershipType+"&NG="+NationalGroups+"' style='color: white;'>Join now</a>");
 		}
 		$("."+type).show();
 	});
@@ -662,7 +667,7 @@ jQuery(document).ready(function($) {
     }
   });
   $("[class^=NGname]").change(function() {
-    var id = $(this).attr('id');
+	var id = $(this).attr('id');
     if($('#'+id).is(':checked')) {
       var ins = $(this).attr('class').replace('NGname','');
       var NGtext = $(".NGnameText"+ins).text();
@@ -679,7 +684,13 @@ jQuery(document).ready(function($) {
         $('#chosenNGName').text(NGtext);
       } else {
         $('#chosenNGName').text(NGtotalText + " and "+NGtext);
-      }
+	  }
+	  var original = $("#chosenNGid").text();
+	  if(original == " " || original == "&nbsp;" || original == "") {
+		$("#chosenNGid").text(id);
+	  } else  {
+		$("#chosenNGid").text(original + "," + id);
+	  }
     } else {
       var ins = $(this).attr('class').replace('NGname','');
       var NGtext = $(".NGnameText"+ins).text();
@@ -689,18 +700,29 @@ jQuery(document).ready(function($) {
       var totalNG = $(".NGpriceT").text();
       var totalPrice = totalNG.replace(/^\D+|\D+$/g, "");
       if(totalPrice == '') totalPrice = 0;
-      var Sum = parseInt(totalPrice) - parseInt(NGPrice);
+	  var Sum = parseInt(totalPrice) - parseInt(NGPrice);
+	  // get original ids
+	  var original = $("#chosenNGid").text();
       
       $(".NGpriceT").text(Sum);
       var index = NGtotalText.indexOf(NGtext);
       var subs = index + NGtext.length + 5;
-      var firstString = NGtotalText.substring(0, index);
+	  var firstString = NGtotalText.substring(0, index);
+	  // Find index of first string of NG id chosen
+	  // and cut from first string to the first string
+	  var output = original.indexOf(id);
+      var subsID = output + id.length + 1;
+	  var firstStringID = original.substring(0, output);
       
       if(index == (NGtotalText.length - NGtext.length)) {
-        var firstString = NGtotalText.substring(0, index - 5);
+		var firstString = NGtotalText.substring(0, index - 5);
+		// its same. If first string's location is at the end
+		var firstStringID = original.substring(0, output - 1);
       }
-      var finalString = NGtotalText.substring(subs, 9999);
-      $('#chosenNGName').text(firstString + finalString);
+	  var finalString = NGtotalText.substring(subs, 9999);
+	  var finalStringID = original.substring(subsID, 9999);
+	  $('#chosenNGName').text(firstString + finalString);
+	  $("#chosenNGid").text(firstStringID + finalStringID);
     }
   })
   $('.restart').click(function() {
@@ -803,7 +825,7 @@ jQuery(document).ready(function($) {
 	 var widthCalVideo169 = $(".video169").width();
 	$(".video169").attr('style','height: '+((parseInt(widthCalVideo169) * 9)/16)+"px; width: 100%;");
 	 /*   Membership Types questions end   */
-	 
+
 	/*insurance page for join a new member */
 	$('#join-insurance-form2 input').click(function() {
        if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked"))

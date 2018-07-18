@@ -99,14 +99,28 @@ $rens = str_replace('</div>',"",$rens);
 		</div>
 		<div class="MTcontent">
 			<div class="MTcontentTitle">Price:</div>
+			<?php
+			$TypePrice = file_get_contents("sites/all/themes/evolve/json/TypePrice.json");
+			$TypePrice = json_decode($TypePrice, true);
+			foreach ($TypePrice as $key => $value) {
+				//echo $TypePrice[$key]["Code"]." vs ".strtoupper($rens)."<br>";
+				if($TypePrice[$key]["Code"] == strtoupper($rens)) {
+					//echo "ever?????????????????!!!!!!!!!!!!!!!!!!";
+					print '<div class="MTprice">$'.$TypePrice[$key]["Price"].'</div>';
+					print '<div class="MTid" style="display: hidden;">'.$TypePrice[$key]["ID"].'</div>';
+				}
+			}
+			?>
 			<?php //print '$'.render($content['field_member_type_price']);?>
 			<?php 
+				/*
 				$rens = render($content['field_member_type_price']);
 				$rens = str_replace('<div class="field field-name-field-member-type-price field-type-text field-label-hidden">',"",$rens);
 				$rens = str_replace('<div class="field-items">',"",$rens);
 				$rens = str_replace('<div class="field-item even">',"",$rens);
 				$rens = str_replace('</div>',"",$rens);
 				print '<div class="MTprice">$'.$rens.'</div>';
+				*/
 			?>
 		</div>
 		<?php //print render($content['field_what_is_it']);?>

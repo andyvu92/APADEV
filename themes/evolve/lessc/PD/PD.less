@@ -514,6 +514,7 @@ body.page-node{
                 a, div{
                     color: #000;
                     padding: 0 5px;
+                    float: left;
                 }
                 .Pagebutton{
                     font-size: 1.2em;
@@ -645,6 +646,32 @@ body.page-node{
                         padding-right: 15px;
                     }
                 }
+
+                .readmore {
+                    position: relative;
+                    overflow: hidden;
+                    -moz-transition: height 0.7s ease-in;
+                    -o-transition: height 0.7s ease-in;
+                    -webkit-transition: height 0.7s ease-in;
+                    transition: height 0.7s ease-in;
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        bottom: 0;
+                        width: 100%;
+                        height: 18px;
+                        opacity: 1;
+                        background: linear-gradient(to right, rgba(255, 255, 255, 0), #ffffff 65%);
+                      }
+                      .readmore-link, .readless-link{
+                        color: #000;
+                        font-weight: 500;
+                      }
+                  }
+
+                  .readmore[aria-expanded="true"]:before{
+                      opacity: 0;
+                  }
             }
             .region{
 
@@ -833,6 +860,11 @@ body.page-node{
                         font-size: 1.2em;
                         margin-top: 10px;
                         cursor: pointer;
+                        &.disable{
+                            cursor: no-drop;
+                            opacity: 0.8;
+
+                        }
                     }
                     span{
                         padding: 15px 20px;
@@ -987,7 +1019,6 @@ body.page-node{
                       }
                       .pd-description-nonmobile{
                           display: block;
-
                         @media all and (max-width: @larger-phone-width) {
                             display: none;
                         }
@@ -1090,6 +1121,15 @@ body.page-node{
                                 }
                             }
 
+                        }
+                    }
+                    @media all and (max-width: 381px){
+                        .session-info{
+                            .session-calendar{
+                                .session-date{
+                                    font-size: 1.6em;
+                                }
+                            }
                         }
                     }
                 }

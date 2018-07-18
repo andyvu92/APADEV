@@ -88,8 +88,90 @@ para.find('.read-more').show();
 para.find('.toggle').hide();
 var newHeight = para.innerHeight();
 para.css('max-height', initialHeight+'px');
-para.animate({ maxHeight: newHeight }, 300, function(){
+para.animate({ maxHeight: newHeight }, 600, function(){
 para.css('max-height', 'none');
 });
 });
+});
+
+//READMORE
+jQuery(document).ready(function ($) {
+  var lineHeight = 20;
+  var numLines = 10;
+  $('.readmore').readmore({
+    collapsedHeight: lineHeight * numLines,
+    heightMargin: lineHeight * 1
+  });
+});
+
+//SCROLL TO TOP
+jQuery(document).ready(function() {
+  /******************************
+      BOTTOM SCROLL TOP BUTTON
+   ******************************/
+
+  // declare variable
+  var scrollTop = $(".scrollTop");
+
+  $(window).scroll(function() {
+    // declare variable
+    var topPos = $(this).scrollTop();
+
+    // if user scrolls down - show scroll to top button
+    if (topPos > $(document).height()*0.8) {
+      $(scrollTop).css("opacity", "1");
+
+    } else {
+      $(scrollTop).css("opacity", "0");
+    }
+
+  }); // scroll END
+
+  //Click event to scroll to top
+  $(scrollTop).click(function() {
+    $('html, body').animate({
+      scrollTop: 400
+    }, 600);
+    return false;
+
+  }); // click() scroll top EMD
+
+  /*************************************
+    LEFT MENU SMOOTH SCROLL ANIMATION
+   *************************************/
+  // declare variable
+  var h1 = $("#popUp").position();
+  var h2 = $("#h2").position();
+  var h3 = $("#h3").position();
+
+  $('.scrolltop').click(function() {
+    $('html, body').animate({
+      scrollTop: h1.top
+    }, 500);
+    return false;
+
+  }); // left menu link2 click() scroll END
+
+  $('.link2').click(function() {
+    $('html, body').animate({
+      scrollTop: h2.top
+    }, 500);
+    return false;
+
+  }); // left menu link2 click() scroll END
+
+  $('.link3').click(function() {
+    $('html, body').animate({
+      scrollTop: h3.top
+    }, 500);
+    return false;
+
+  }); // left menu link3 click() scroll END
+
+}); // ready() END
+
+jQuery(".scrollTop").click(function() {
+  $('html,body').animate({
+      scrollTop: $("#popUp").offset().top},
+      'slow');
 });
