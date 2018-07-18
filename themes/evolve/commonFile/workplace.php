@@ -114,7 +114,9 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
         <select class="form-control" id="WPhoneCountryCode'.$i.'" name="WPhoneCountryCode'.$i.'">';
                 foreach($country  as $pair => $value){
                 echo '<option value="'.$country[$pair]['TelephoneCode'].'"';
-                if ($details['Workplaces'][$key]['WPhoneCountryCode'] == $country[$pair]['TelephoneCode']){ echo "selected='selected'"; } 
+                if($country[$pair]['ID']=="14"){
+					echo "selected='selected'";
+				}
                 echo '> '.$country[$pair]['Country'].' </option>';
                 }
                 

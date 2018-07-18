@@ -877,6 +877,7 @@ if (isset($_SESSION['UserId'])):
                         <label for="">State</label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="State3" name="State">
+						<option value=""  <?php if (empty($details['State'])) echo "selected='selected'";?> disabled> State </option>
                         <?php
     $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
     $State     = json_decode($statecode, true);
@@ -2693,7 +2694,7 @@ if (!isset($_SESSION['UserId'])):
                         <label for="">Member Type<span class="tipstyle">*</span></label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="MemberType" name="MemberType">
-                            <option value="none" selected disabled>Member type</option>
+                            <option value="" selected disabled>Member type</option>
                             <?php
 								// 2.2.31 Get Membership prodcut price
 								// Send - 
@@ -3000,7 +3001,7 @@ endif;
             var number = Number($('#wpnumber').val());
             var i = Number(number +1);
             //var j = Number(number +2);
-            $('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace'+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
+            $('div[class="down3"] #tabmenu').append( '<li id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
             $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade">');
             //$('#wpnumber').text(i);
             $('input[name=wpnumber]').val(i);

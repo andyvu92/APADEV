@@ -51,12 +51,12 @@ if(isset($_POST['step1'])) {
 	//change from shipping address to billing address
 	if(isset($_POST['Shipping-address-join']) && $_POST['Shipping-address-join']=='1'){ 
 	$postData['Billing-BuildingName'] = $_POST['BuildingName']; 
-	$postData['BillingAddress_Line_1'] = $_POST['Address_Line_1'];
-	$postData['BillingAddress_Line_2'] = $_POST['Address_Line_2'];
+	if(isset($_POST['Address_Line_1'])) {$postData['BillingAddress_Line_1'] = $_POST['Address_Line_1'];} else{$postData['BillingAddress_Line_1'] = "";}
+    if(isset($_POST['Address_Line_2'])) {$postData['BillingAddress_Line_2'] = $_POST['Address_Line_2']; } else {$postData['BillingAddress_Line_2'] ="";}
 	$postData['Billing-Pobox'] = $_POST['Pobox'];
 	$postData['Billing-Suburb'] = $_POST['Suburb'];
 	$postData['Billing-Postcode'] = $_POST['Postcode'];
-	$postData['Billing-State'] = $_POST['State'];
+	if(isset($_POST['State'])) {$postData['Billing-State']  = $_POST['State'];} else{$postData['Billing-State']  = "";}
 	$postData['Billing-Country'] = $_POST['Country'];
 	}else{
 	$postData['Billing-BuildingName'] = $_POST['Billing-BuildingName']; 
@@ -457,9 +457,10 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 					
 					<div class="col-xs-6 col-md-3">
-					   <label for="">State<span class="tipstyle">*</span></label>
+					   <label for="">State</label>
 					 <div class="chevron-select-box">  
 					   <select class="form-control" id="State1" name="State">
+					   <option value=""  <?php if (empty($details['State'])) echo "selected='selected'";?> disabled> State </option>
 							<?php
 							$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 							$State=json_decode($statecode, true);						
@@ -542,7 +543,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 					
 					<div class="col-xs-6 col-md-3">
-					   <label for="">State<span class="tipstyle">*</span></label>
+					   <label for="">State</label>
 					 <div class="chevron-select-box">  
 					   <select class="form-control" name="Billing-State" id="State2">
 							<option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>

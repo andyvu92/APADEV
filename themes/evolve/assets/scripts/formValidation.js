@@ -78,9 +78,9 @@ jQuery(document).ready(function($) {
 			if($("input[name=Password]").length !==0){
 				if($("input[name=Password]").val() ==''){$("input[name=Password]").addClass("focuscss");}else{$("input[name=Password]").removeClass("focuscss");}
 			}
-			if($("select[name=MemberType]").val() ==''){$("select[name=MemberType]").addClass("focuscss");}else{$("select[name=MemberType]").removeClass("focuscss");}
-			if($("select[name=Branch]").val() ==''){$("select[name=Branch]").addClass("focuscss");}else{$("select[name=Branch]").removeClass("focuscss");}
-		    if($("input[name=Memberid]").val() =='' || !isValidEmailAddress($("input[name=Memberid]").val()) ||$("input[name=MemberType]").val() ==''||$("input[name=Branch]").val() ==''){
+			if($("select[name=MemberType]").val() ===''){$("select[name=MemberType]").addClass("focuscss");}else{$("select[name=MemberType]").removeClass("focuscss");}
+			if($("select[name=Branch]").val() ===''){$("select[name=Branch]").addClass("focuscss");}else{$("select[name=Branch]").removeClass("focuscss");}
+		    if($("input[name=Memberid]").val() =='' || !isValidEmailAddress($("input[name=Memberid]").val()) ||$("select[name=MemberType]").val() ===''||$("select[name=Branch]").val() ===''){
 				return false;
 		    }
 			if($("input[name=Password]").length !==0) {
