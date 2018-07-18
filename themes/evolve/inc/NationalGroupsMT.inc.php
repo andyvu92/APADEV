@@ -21,7 +21,7 @@ if(count($PostArray) == 0) { // Just GET data
 	$SubListAll = Array();
 	//$nationalGroup = $nationalGroups["NationalGroup"];
 	foreach($nationalGroup as $Subs) {
-		$ArrayRe["SubscriptionID"] = $Subs["NGid"];
+		$ArrayRe["SubscriptionID"] = $Subs["ProductID"];//$Subs["NGid"];
 		$ArrayRe["Subscription"] = $Subs["NGtitle"];
 		$ArrayRe["NGprice"] = $Subs["NGprice"];
 		$ArrayRe["Subscribed"] = 0;
@@ -31,7 +31,7 @@ if(count($PostArray) == 0) { // Just GET data
 	$SubListAll = Array();
 	//$nationalGroup = $nationalGroups["NationalGroup"];
 	foreach($nationalGroup as $Subs) {
-		$ArrayRe["SubscriptionID"] = $Subs["NGid"];
+		$ArrayRe["SubscriptionID"] = $Subs["ProductID"];//$Subs["NGid"];
 		$ArrayRe["Subscription"] = $Subs["NGtitle"];
 		$ArrayRe["NGprice"] = $Subs["NGprice"];
 		if(!isset($PostArray[$Subs["NGid"]])) {
