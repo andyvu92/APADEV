@@ -2493,15 +2493,21 @@ form{
             }
         }
     }
-    .chosen-container-multi .chosen-choices li.search-choice .search-choice-close{
-        opacity: 0.5;
-        cursor: pointer;
-        background-repeat:no-repeat;
-        background-size:contain;
-        background-position:center;
-        background-image:url('/sites/default/files/dashboard-icon/close-icon.png');
-        &:hover{
-            opacity: 1;
+    .chosen-container-multi .chosen-choices li.search-choice{
+        padding: 3px 5px 3px 5px;
+        .search-choice-close{
+            opacity: 0.5;
+            width: 15px;
+            height: 15px;
+            display: inline-block;
+            cursor: pointer;
+            background-repeat:no-repeat;
+            background-size:contain;
+            background-position:center;
+            background-image:url('/sites/default/files/dashboard-icon/close-icon.png');
+            &:hover{
+                opacity: 1;
+            }
         }
     }
     #tabmenu{
@@ -2611,3 +2617,8 @@ form{
     }
  }
  
+ #workplaceblocks{
+     .tab-pane{
+         width: 100%;
+     }
+ }
