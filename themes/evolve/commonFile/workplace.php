@@ -147,6 +147,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 
 	<div class="col-xs-12 col-md-6">
 		<label>What languages do you speak in your professional practice?</label>
+		<div class="chevron-select-box">
 		<select class="chosen-select" multiple id="Additionallanguage'.$i.'" name="Additionallanguage'.$i.'[]">';
 			$Language = $sessionLanguage;
 			foreach($Language  as $key => $object){
@@ -154,6 +155,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 			}
 		echo '
 		</select>
+		</div>
 	</div>
 
 	<div class="col-xs-6 col-md-6">
