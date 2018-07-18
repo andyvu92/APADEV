@@ -1344,7 +1344,7 @@ jQuery(document).ready(function($) {
 		  $("#workplace"+ x).remove();
 		  $(".deletewp"+ x).remove();
 		  var n = Number($('#wpnumber').val());
-		  var t = Number(number -1);
+		  var t = Number(n -1);
 		  
 		$('input[name=wpnumber]').val(t);
 	});
