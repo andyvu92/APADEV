@@ -493,6 +493,13 @@ body.page-node{
 /*----------------PD SEARCH RESULT-------------------*/
 #block-block-240{
     padding: 50px 0px 80px!important;
+    background-position: 50% 1% !important;
+    @media all and (max-width: @desktop-width) {
+        background-position: 60% 1% !important;
+    }
+    @media all and (max-width: @larger-phone-width) {
+        background-position: 65% 1% !important;
+    }
 }
 
 #section-content-top .container{
@@ -663,14 +670,21 @@ body.page-node{
                         opacity: 1;
                         background: linear-gradient(to right, rgba(255, 255, 255, 0), #ffffff 65%);
                       }
-                      .readmore-link, .readless-link{
-                        color: #000;
-                        font-weight: 500;
-                      }
                   }
 
                   .readmore[aria-expanded="true"]:before{
                       opacity: 0;
+                  }
+
+                  .readmore-link, .readless-link{
+                    color: #000;
+                    font-weight: 500;
+                    font-size: 1.2em;
+                    text-align: center;
+                    background: rgb(242, 242, 242);
+                    color: #000;
+                    margin-top: 10px;
+                    padding: 5px;
                   }
             }
             .region{

@@ -85,7 +85,7 @@ function topFunction() {
     //document.body.scrollTop = 0; // For Safari
     //document.documentElement.scrollTop = 50; // For Chrome, Firefox, IE and Opera
     jQuery(document).ready(function(){
-      $("html, body").animate({ scrollTop: $("#popUp").position().top }, 600);
+      $("html, body").animate({ scrollTop: "280" }, 600);
     });
 }
 
