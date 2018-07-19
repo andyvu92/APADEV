@@ -514,33 +514,41 @@ if (isset($_POST['step1'])) {
 if (isset($_SESSION['UserId'])):
 ?>
 <?php
-    $userMemberProduct = getProduct($_SESSION['UserId'], "membership");
-    if (sizeof($userMemberProduct) != 0) {
-        foreach ($userMemberProduct as $singProduct) {
-            $_SESSION["MembershipProductID"] = $singProduct;
-        }
+	//Implement membertype questionaries 
+	if(isset($_GET['MT'])){
+		$_SESSION["MembershipProductID"] = $_GET['MT'];
+		if(isset($_GET['NG'])){
+			$_SESSION['NationalProductID'] = explode(",", $_GET['NG']);
+		}
+	}
+	else{
+		$userMemberProduct = getProduct($_SESSION['UserId'], "membership");
+		if (sizeof($userMemberProduct) != 0) {
+			foreach ($userMemberProduct as $singProduct) {
+				$_SESSION["MembershipProductID"] = $singProduct;
+			}
+		}
+		
+		$userNGProduct = getProduct($_SESSION['UserId'], "NG");
+		if (sizeof($userNGProduct) != 0) {
+			$_SESSION['NationalProductID'] = $userNGProduct;
+		}
+		
+		$userMGProduct  = array();
+		$userMG1Product = getProduct($_SESSION['UserId'], "MG1");
+		if (sizeof($userMG1Product) != 0) {
+			array_push($userMGProduct, $userMG1Product);
+		}
+		
+		$userMG2Product = getProduct($_SESSION['UserId'], "MG2");
+		if (sizeof($userMG2Product) != 0) {
+			array_push($userMGProduct, $userMG2Product);
+		}
+		
+		if (sizeof($userMGProduct) != 0) {
+			$_SESSION["MGProductID"] = $userMGProduct;
+		}
     }
-    
-    $userNGProduct = getProduct($_SESSION['UserId'], "NG");
-    if (sizeof($userNGProduct) != 0) {
-        $_SESSION['NationalProductID'] = $userNGProduct;
-    }
-    
-    $userMGProduct  = array();
-    $userMG1Product = getProduct($_SESSION['UserId'], "MG1");
-    if (sizeof($userMG1Product) != 0) {
-        array_push($userMGProduct, $userMG1Product);
-    }
-    
-    $userMG2Product = getProduct($_SESSION['UserId'], "MG2");
-    if (sizeof($userMG2Product) != 0) {
-        array_push($userMGProduct, $userMG2Product);
-    }
-    
-    if (sizeof($userMGProduct) != 0) {
-        $_SESSION["MGProductID"] = $userMGProduct;
-    }
-    
     // 2.2.4 - Dashboard - Get member detail
     // Send -
     // UserID
@@ -1147,7 +1155,7 @@ if (isset($_SESSION['UserId'])):
                     <div class="chevron-select-box">
                     <select class="form-control" id="MemberType" name="MemberType">
                         <option value="" <?php
-    if (isset($_SESSION["MembershipProductID"]))
+    if (!isset($_SESSION["MembershipProductID"]))
         echo "selected='selected'";
 ?> disabled>Member type</option>    
                     <?php
@@ -2279,6 +2287,14 @@ endif;
 <?php
 
 if (!isset($_SESSION['UserId'])):
+//Implement membertype questionaries 
+if(isset($_GET['MT'])){
+	$_SESSION["MembershipProductID"] = $_GET['MT'];
+	if(isset($_GET['NG'])){
+		$_SESSION['NationalProductID'] = explode(",", $_GET['NG']);
+	}
+}
+
 ?>
    <form id="your-detail-form" action="jointheapa" method="POST" autocomplete="off">
         <input type="hidden" name="step1" value="1"/>
@@ -2711,7 +2727,7 @@ if (!isset($_SESSION['UserId'])):
                         <label for="">Member Type<span class="tipstyle">*</span></label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="MemberType" name="MemberType">
-                            <option value="" selected disabled>Member type</option>
+							<option value="" <?php if (!isset($_SESSION["MembershipProductID"])) echo "selected='selected'";?> disabled>Member type</option>  
                             <?php
 								// 2.2.31 Get Membership prodcut price
 								// Send - 
@@ -2725,6 +2741,11 @@ if (!isset($_SESSION['UserId'])):
 								//$MemberType     = json_decode($MemberTypecode, true);
 								foreach ($MemberType as $key => $value) {
 									echo '<option value="' . $MemberType[$key]['ProductID'] . '"';
+									if (isset($_SESSION["MembershipProductID"])) {
+										if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']) {
+											echo "selected='selected'";
+										}
+									}
 									echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.$MemberType[$key]['Price'].') </option>';
 								}
 								
@@ -2764,6 +2785,11 @@ if (!isset($_SESSION['UserId'])):
                        <?php
 							foreach ($nationalGroups as $key => $value) {
 								echo '<option value="' . $nationalGroups[$key]["ProductID"] . '"';
+								if (isset($_SESSION["NationalProductID"])) {
+									if (in_array($nationalGroups[$key]["ProductID"], $_SESSION["NationalProductID"])) {
+										echo "selected='selected'";
+									}
+								}
 								echo '> ' . $nationalGroups[$key]["Name"] . ' </option>';
 							}
 							
