@@ -69,32 +69,6 @@ var list = $(".accordian-container");
 });
 
 //READMORE
-jQuery(document).ready(function(){
-  $('.readmore-content').each(function(){
-var trimLength = 250;
-var trimMargin = 1.2; // don't trim just a couple of words
-if($(this).text().length > (trimLength * trimMargin)) {
-var text = $(this).text();
-var trimPoint = $(this).text().indexOf(" ", trimLength);
-var newContent = text.substring(0, trimPoint)+'<span class="read-more">'+text.substring(trimPoint)+'</span><span class="toggle">... <a href="#">Read more</a></span>';
-$(this).html(newContent);
-}
-});
-$('.toggle a').click(function(e){
-e.preventDefault();
-var para = $(this).closest('.readmore-content');
-var initialHeight = $(this).closest('.readmore-content').innerHeight();
-para.find('.read-more').show();
-para.find('.toggle').hide();
-var newHeight = para.innerHeight();
-para.css('max-height', initialHeight+'px');
-para.animate({ maxHeight: newHeight }, 600, function(){
-para.css('max-height', 'none');
-});
-});
-});
-
-//READMORE
 jQuery(document).ready(function ($) {
   var lineHeight = 20;
   var numLines = 10;
@@ -104,7 +78,18 @@ jQuery(document).ready(function ($) {
   });
 });
 
-//SCROLL TO TOP
+//SCROLL TOP AUTO
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+    //document.body.scrollTop = 0; // For Safari
+    //document.documentElement.scrollTop = 50; // For Chrome, Firefox, IE and Opera
+    jQuery(document).ready(function(){
+      $("html, body").animate({ scrollTop: $("#popUp").position().top }, 600);
+    });
+}
+
+//-------------------------------------
 jQuery(document).ready(function() {
   /******************************
       BOTTOM SCROLL TOP BUTTON
@@ -140,7 +125,7 @@ jQuery(document).ready(function() {
     LEFT MENU SMOOTH SCROLL ANIMATION
    *************************************/
   // declare variable
-  var h1 = $("#popUp").position();
+  var h1 = $("#popUp").offset();
   var h2 = $("#h2").position();
   var h3 = $("#h3").position();
 
@@ -169,9 +154,3 @@ jQuery(document).ready(function() {
   }); // left menu link3 click() scroll END
 
 }); // ready() END
-
-jQuery(".scrollTop").click(function() {
-  $('html,body').animate({
-      scrollTop: $("#popUp").offset().top},
-      'slow');
-});
