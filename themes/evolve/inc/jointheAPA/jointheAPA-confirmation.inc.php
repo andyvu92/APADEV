@@ -108,12 +108,31 @@ include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 					// Response -Invoice PDF
 					$send["UserID"] = $_SESSION["UserId"];
 					$send["Invoice_ID"] = $invoice_ID;  
-					$invoiceAPI = GetAptifyData("18", $send); 
-					
+					//$invoiceAPI = GetAptifyData("18", $send); 
+					$apis[0] = $invoice_ID;
+					$invoiceAPI = GetAptifyData("18", $apis);
 					?> 
 					<br>
-					<a style="color:white;" href="<?php echo $invoiceAPI["Invoice"];?>">Download your receipt</a>
+					<a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 					<p style="color:white;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>
+				</div>
+				<div id="Iaksbnkvoice" class="modal fade big-screen" role="dialog">
+					<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						</div>
+						<div class="modal-body">
+						<iframe name="stsIaksbnkvoice" src="http://www.physiotherapy.asn.au"></iframe>
+						</div>
+						<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+					</div>
+
+					</div>
 				</div>
 			</div>
 		</div>
@@ -122,4 +141,23 @@ include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<style type="text/css">
+	.big-screen {
+		width: 62%;
+		margin: auto;
+		min-width: 1190px;
+	}
+	.big-screen .modal-dialog, .big-screen .modal-dialog .modal-content, .big-screen .modal-dialog .modal-content .modal-body, .big-screen iframe {
+		width: 100%;
+		height: 100%;
+	}
+</style> 
+<script>
+$(document).ready(function() {
+	if (window.frames["Iaksbnkvoice"] && !window.userSet) {
+		window.userSet = true;
+		frames['stsIaksbnkvoice'].location.href="<?php echo $invoiceAPI[0]; ?>";
+	}
+});
+</script>
 <?php logRecorder();  ?>

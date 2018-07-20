@@ -89,7 +89,7 @@ if(isset($_POST["Invoice_ID"])) {
 	<input type="submit" value="Download your receipt">
 </form>-->
 
-<!--<p>Download <a><?php if(isset($GetPDF)) //echo $GetPDF["Invoice"]; 
+<!--<p>Download <a><?php //if(isset($GetPDF)) //echo $GetPDF["Invoice"]; 
 $apis[0] = $invoice_ID;
 $invoiceAPI = GetAptifyData("18", $apis);
 ?></a></p>-->
@@ -115,37 +115,22 @@ $invoiceAPI = GetAptifyData("18", $apis);
 </div>
 <a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>
 <style type="text/css">
-		.big-screen {
-			width: 62%;
-			margin: auto;
-			min-width: 1190px;
-		}
-		.big-screen .modal-dialog, .big-screen .modal-dialog .modal-content, .big-screen .modal-dialog .modal-content .modal-body, .big-screen iframe {
-			width: 100%;
-			height: 100%;
-		}
-	</style> 
-	<script>
-	$(document).ready(function() {
-		if (window.frames["Iaksbnkvoice"] && !window.userSet) {
-			<?php if(count($invoiceAPI) <= 30) :?>
-				window.userSet = true;
-			<?php endif; ?>
-			<?php	
-				$count = 0;
-				$tt = 0;
-			?>
-			<?php foreach($apis as $api): ?>
-				<?php
-					if($count > 30) {
-						$tt++;
-						break;
-					}
-				?>
-				frames['stsIaksbnkvoice'].location.href="<?php echo $invoiceAPI[$count]; ?>";
-				<?php $count++; ?>
-			<?php endforeach; ?>
-			?>
-		}
-	});
-	</script>
+	.big-screen {
+		width: 62%;
+		margin: auto;
+		min-width: 1190px;
+	}
+	.big-screen .modal-dialog, .big-screen .modal-dialog .modal-content, .big-screen .modal-dialog .modal-content .modal-body, .big-screen iframe {
+		width: 100%;
+		height: 100%;
+	}
+</style> 
+<script>
+$(document).ready(function() {
+	if (window.frames["Iaksbnkvoice"] && !window.userSet) {
+		window.userSet = true;
+		frames['stsIaksbnkvoice'].location.href="<?php echo $invoiceAPI[0]; ?>";
+	}
+});
+</script>
+<?php logRecorder();  ?>	

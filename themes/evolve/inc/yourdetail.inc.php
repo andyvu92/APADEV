@@ -1877,6 +1877,33 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 		$('#workplace').click(function(){
 		$('#dashboard-right-content').addClass("autoscroll");
 		});
+		if($('#wpnumber').val()=="0"){
+			var number = Number($('#wpnumber').val());
+			var i = Number(number +1);
+			//var j = Number(number +2);
+			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
+			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
+			//$('#wpnumber').text(i);
+			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
+			$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
+			$('input[name=wpnumber]').val(i);
+			var memberType = $('select[name=MemberType]').val();
+			var sessionvariable = '<?php
+			echo json_encode($_SESSION["workplaceSettings"]);
+			?>';
+						var sessionInterest = '<?php
+			echo json_encode($_SESSION["interestAreas"]);
+			?>';
+					var sessionLanguage = '<?php
+			echo json_encode($_SESSION["Language"]);
+			?>';
+					var sessionCountry = <?php
+			echo json_encode($_SESSION['country']);
+?>;
+		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
+		  $(".chosen-select").chosen({width: "100%"});	 
+			 
+		}
 		$('.add-workplace-join').click(function(){
 			var number = Number($('#wpnumber').val());
 			var i = Number(number +1);
