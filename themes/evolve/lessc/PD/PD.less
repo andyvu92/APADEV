@@ -469,10 +469,33 @@ body.page-node{
                     @media all and (max-width: @larger-tablet-width){
                         .pager{
                             width: 100%;
+                            padding: 0;
+                            margin: 10px 0 0 0;
+                        }
+                        .pager-bottom{
+                            width: 100%;
+                            padding: 0;
+                            margin: 10px 0 0 0;
                         }
                         .page-size-setting{
                             width: 100%;
                             .pageSetting{
+                                text-align: left;
+                                margin: 10px 0;
+                            }
+                            .pageItem{
+                                margin: 10px 0;
+                            }
+                        }
+                    }
+                    @media all and (max-width: 410px){
+                        .page-size-setting{
+                            .pageSetting{
+                                width: 100%;
+                                margin: 10px 0 0 0;
+                            }
+                            .pageItem{
+                                width: 100%;
                                 text-align: left;
                             }
                         }
@@ -528,6 +551,11 @@ body.page-node{
                     display: inline;
                 }
             }
+            .pager-bottom{
+                .pager{
+                    width: 100%;
+                }
+            }
             .pageSetting{
                 margin: 20px 0;
                 text-align: right;
@@ -551,6 +579,7 @@ body.page-node{
                 width: 39%;
                 p{
                     margin: 0;
+                    font-size: 1.2em;
                     span{
                         padding: 0 3px;
                     }
@@ -1590,9 +1619,6 @@ input[name="otherjob"]{
     display:none;
 }
 
-#block-block-241 .pageItem p {
-    color: #004250 !important;
-}
 #block-block-241 .pageItem .pageItemDes{
     padding:0 1px;
 }

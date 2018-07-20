@@ -407,7 +407,7 @@ if(isset($_SESSION["UserId"])){
 		</form>
 </div>
 <?php endif; ?>
-<?php if($productList->rowCount()==0): ?>   <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12"><h3 style="color:black;">You don not have any products in your shopping cart.</h3></div>      <?php endif;?>
+<?php if($productList->rowCount()==0): ?>   <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center"><h3 style="color:black;">You do not have any products in your shopping cart.</h3></div>      <?php endif;?>
 <div  class="col-xs-12 bottom-buttons">
  <a target="_blank" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
  <a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update my details</button></a>
