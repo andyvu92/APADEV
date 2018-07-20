@@ -1,5 +1,116 @@
-div[class^="col-"]{
-    &.clearfix{
-        clear: both;
+/*--PREDEFINED COLOURS--*/
+@light-background: rgb(242, 243, 244);
+@light-transparent-background: rgba(255, 255, 255, 0.9);
+@dark-background: rgb(94, 96, 103);
+@dark-transparent-background: rgba(94, 96, 103, 0.8);
+@bright-blue: rgb(0, 159, 218);
+@brighter-blue: rgb(0,184,241);
+
+/*--RESPONSIVE BREAKPOINTS--*/
+@phone-width: 480px;
+@larger-phone-width: 570px;
+@tablet-width: 768px;
+@larger-tablet-width: 992px;
+@desktop-width: 1200px;
+@larger-desktop-width: 1500px;
+
+//HOMEPAGE
+
+#section-banner{
+    .dexp-container{
+        .region{
+            .home-main-grid{
+                .image-grid{
+                    #node-377{
+                        width: 100%;
+                        height: 100%;
+                        padding-bottom: 50.26%;
+                    }
+                    img{
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                    }
+                    .image{
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        background-repeat: no-repeat;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                    }
+                    .node{
+                        position: relative;
+                        .HomeTitle{
+                            position: absolute;
+                            bottom: 0;
+                            height: auto;
+                            background: rgba(0,0,0,0.3);
+                            width: 100%;
+                            color: #fff;
+                            font-size: 2em;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                    }
+                }
+                .video-grid{
+                    .row{
+                        margin: 0;
+                    }
+                    div[class*="col-xs"]{
+                        padding: 0;
+                    }
+                    .node{
+                        position: relative;
+                        .media-youtube-video{
+                            position: relative;
+                            width: 100%;
+                            height: 0;
+                            padding-bottom: 56.25%;
+                            iframe{
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                            }
+                        }
+                        .HomeTitle{
+                            position: relative;
+                            background: #000;
+                            color: #fff;
+                            font-weight: 400;
+                            font-size: 1.2em;
+                            padding: 5px 15px;
+                            display: none;
+                        }
+                    }
+                }
+            }
+            @media all and (max-width: @larger-tablet-width){
+                #block-block-263{
+                    .content{
+                        .flex-grid-sm-padding{
+                            flex-direction: column;
+                        }
+                    }
+                }
+            }
+            @media all and (max-width: @phone-width){
+                #block-block-263{
+                    #node-377{
+                        .HomeTitle{
+                            font-size: 1.5em;
+                        }
+                    }
+                }
+            }
+        }
     }
 }
+
+//-------------------END HOMEPAGE-------------------

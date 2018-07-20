@@ -50,7 +50,49 @@
 		display: -ms-flexbox;
 		flex-wrap: wrap;
 	}
+}
 
+.flex-container{
+	.flex-grid-sm-padding{
+		div[class*="flex-col"] {
+			padding: 2px
+		}
+	}
+	.flex-grid-md-padding{
+		div[class*="flex-col"] {
+			padding: 5px
+		}
+	}
+	.flex-grid-lg-padding{
+		div[class*="flex-col"] {
+			padding: 10px
+		}
+	}
+	.flex-cell{
+		.none-padding{
+			padding: 0!important;
+		}
+		.fit-div{
+			div{
+				height: 100%;
+			}
+		}
+	}
+	.flex-column{
+		display: flex;
+		display: -webkit-box;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		flex-wrap: wrap;
+	}
+}
+
+.flex-container{
+	.flex-md-down-fw{
+		@media all and (max-width: 993px) {
+			width: 100%;
+		}
+	}
 }
 
 .flex-cell{

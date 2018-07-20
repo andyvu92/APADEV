@@ -1,0 +1,928 @@
+/*********************************************************************************/
+/* Overall Initialisation                                                        */
+/*********************************************************************************/
+
+/* custom */
+.home {
+    background: url(image/backgr.jpg);
+    background-size: cover;
+    background-position: 44% 75%;
+    width: 100%;
+    height: 100%;
+}
+#FindAPhysio {
+	width: 100%;
+	padding: 25px 40px 145px 13px;
+}
+div#block-block-268 {
+	background-position: center 26% !important;
+}
+#FindAPhysio input, #FindAPhysio select {
+	display: inherit;
+	border-radius: 0;
+	outline: inherit;
+}
+#FindAPhysio select::-ms-expand {
+	display: none;
+}
+#FindAPhysio h1 {
+	font-size: 45px;
+	color: white;
+	margin-bottom: 30px;
+	line-height: 40px;
+}
+#FindAPhysio h1.sub {
+	color: rgb(0,159,218);
+	margin-top: -8px;
+}
+#FindAPhysio h2 {
+	color: white;
+	margin-top: 25px;
+}
+#FindAPhysio #find {
+	margin-top: 15px;
+	width: 474px;
+}
+#FindAPhysio #find .filterArea .down1 span {
+	float: left;
+	margin: 8px 20px 8px 2px;
+	color: white;
+	font-weight: 500;
+}
+#FindAPhysio #find .filterArea .down1 ul li a {
+	border-radius: 0;
+}
+#FindAPhysio #find .filterArea .down1 ul>li+li {
+	margin-left: 0px;
+}
+#FindAPhysio #find .filterArea .down1 ul li:not(.active) a {
+	color: black;
+	background-color: rgb(195,200,200);
+}
+#FindAPhysio #find .filterArea .down1 ul li.active a {
+	color: black;
+	background-color: white;
+}
+#FindAPhysio #find .filterArea .down1 ul li a:hover {
+	background-color: rgb(0,159,218);
+	color: white;
+}
+#content a {
+	text-decoration: none;
+}
+#content a .backButton {
+    width: 112px;
+    border: 0.5px #c3c8c8 solid;
+    margin: 0 0 20px 0;
+    font-family: roboto;
+    margin-top: 3%;
+    background-color: white;
+    color: #009FDA;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 11px 16px;
+	float: left;
+}
+#content a .backButton:hover {
+	background-color: rgb(0,159,218);
+    color: white;
+	transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
+    -webkit-transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
+}
+#FindAPhysio #find #geocomplete, #FindAPhysio #find #practiceName, #FindAPhysio #find #userName, #FindAPhysio #find select, #FindAPhysio #find .submit, #bloodhound input {
+    width: 473px;
+	height: 50px;
+    border: 0.5px rgb(195,200,200) solid;
+	margin: 0;
+    padding: 11px;
+	color: black;
+    font-size: 15px;
+	background-color: rgb(255, 255, 255);
+	background-image: url(image/SEARCH2.png);
+    background-repeat: no-repeat;
+    background-position: 437px 20px;
+	max-width: inherit;
+	font-weight: 700;
+}#FindAPhysio #find #userName {
+	border-top: 0;
+}
+.tt-suggestion {
+	padding: 3px 35px;
+    font-size: 18px;
+    line-height: 24px;
+	background = url("/sites/default/files/drupalexp/evolve/css/image/POINTER2__15X15.png") 12px 7px / auto no-repeat scroll padding-box border-box rgb(255, 255, 255)
+}
+.tt-suggestion:hover {
+    cursor: pointer;
+    color: #fff;
+    background-color: #0097cf;
+}
+.tt-menu {
+	width: 474px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+#FindAPhysio #find select {
+	background-color: rgb(255, 255, 255);
+	background-image: url("/sites/default/files/DOWN_ARROW_B_15X15.png");
+	margin-bottom: 20px;
+	width: 473.6px;
+    height: 50px;
+	border-top: none;
+	 -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+	outline: none;
+}
+#FindAPhysio #find select:after {
+	content:"\f107";    
+    padding: 12px 8px;
+    position: absolute; right: 10px; top: 0;    
+    z-index: 1;
+    text-align: center;
+    width: 10%;
+    height: 100%;      
+    pointer-events: none;
+    box-sizing: border-box; 
+}
+#FindAPhysio #find select option {
+    width: 250px;
+    height: 30px;
+    margin: 5px 0;
+    padding: 0 5px;
+}
+#FindAPhysio #find select:last-child {
+	margin: 0 0 10px;
+}
+
+#FindAPhysio #find p {
+	color: white;
+	font-size: 1.5em;
+	line-height: 12px;
+}
+#FindAPhysio #find input.submit {
+	width: 105px;
+	margin: 20px 0;
+	height: 42px;
+	color: white;
+	background-color: rgb(0,159,218);
+}
+#FindAPhysio #find .submit:hover {
+	width: 110px;
+	cursor: pointer;
+	transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
+    -webkit-transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
+}
+#FindAPhysio .center {
+	text-align: center;
+	display: none;
+}
+#FindAPhysio .filterTitle {
+	padding: 0 0 16px;
+	width: 143px;
+}
+#FindAPhysio .filterTitle a {
+	width: 130px;
+	color: white;
+	margin: 4px 0;
+	cursor: pointer;
+}
+
+#ErrorPage {
+	padding: 20px 0;
+	margin-top: 20px;
+}
+#ErrorPage * {
+	transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
+    -webkit-transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
+}
+#ErrorPage a {
+	border-radius: 50px;
+    height: 40px;
+    border: 6px #007ac9 double;
+    background-color: rgb(255, 255, 255);
+    color: black;
+    width: 120px;
+    padding: 5px 15px;
+    font-size: 18px;
+	text-decoration: none;
+	background-image: url(image/SEARCH2.png);
+    background-repeat: no-repeat;
+    background-position: 248px 20px;
+}
+span.fa.fa-search {
+	color: rgb(0,159,218);
+}
+#ErrorPage a:hover {
+	font-size: 20px;
+	width: 130px;
+	height: 44px;
+	padding: 6px 16px;
+}
+
+.options {
+	float: right;
+}
+.options h3 {
+	margin-top: 8px;
+	color: rgb(0,159,218);
+	margin-left: 5px;
+}
+.options * {
+	float: left;
+	margin-right: 4px;
+}
+.options select {
+    height: 40px;
+    background-color: rgba(195,200,200,0.3);
+    color: rgb(0,159,218);
+    width: 125px;
+    padding: 0 10px;
+    font-size: 18px;
+	border-radius: 0;
+}
+.options select:nth-child(4) {
+	width: 75px;
+}
+.optionValue {
+	float: left;
+}
+.optionValue select#treatmentT {
+	width: 180px;
+}
+.optionValue select#languageT {
+	width: 135px;
+}
+
+.resultWrapper {
+	padding: 10px 0;
+	width: 100%;
+	//width: 1140px;
+}
+.clearfix-FAP {
+	height: 1px;
+	clear: both;
+}
+#content .resultWrapper .results {
+	float: left;
+}
+#content .resultWrapper #features .results {
+	float: right;
+}
+#content .resultWrapper .results h3 {
+	margin-left: 25px;
+    font-size: 22px;
+    font-weight: 500;
+    color: rgb(0,159,218);
+    margin-top: -1px;
+	line-height: 28px;
+}
+#content .resultWrapper .results p {
+	line-height: 20px;
+	margin-top: 10px;
+	color: rgb(0,66,80);
+	margin-left: 25px;
+	font-size: 17px;
+}
+#content .resultWrapper .results p a {
+	color: rgb(0,66,80);
+	font-size: 14px;
+	text-decoration: underline;
+	font-weight: 700;
+}
+#content .resultWrapper .results .resultInner {
+	padding: 15px;
+	margin: 15px 30px 15px 0;
+	width: 360px;
+	background-color: rgba(195,200,200,0.3);
+    color: rgb(0,159,218);
+    border: 0.5px rgb(195,200,200) solid;
+}
+#content .resultWrapper div.results:nth-child(4n + 2) .resultInner {
+	margin: 15px 0;
+}
+#content .resultWrapper .results .resultInner .counter {
+	position: absolute;
+	color: white;
+    padding: 4px 2px 4px 10px;
+    margin-left: -15px;
+    margin-top: -1px;
+	font-weight: bold;
+    font-size: 16px;
+	background-color: rgb(255,160,47);
+}
+.right-content h3 {
+	font-weight: 500;
+	margin: 12px 15px 10px;
+}
+.right-content h3:nth-child(3) {
+	margin: 10px 15px 0px;
+}
+.right-content ul {
+	margin-bottom: 24px;
+}
+.right-content .right ul {
+	padding-left: 17px;
+}
+.left-content h3 {
+	margin: 12px 20px 10px 0;
+	font-weight: 500;
+}
+.left-content p {
+	margin: 0 20px 10px;
+}
+.left-content div.contacts .contactInner  {
+	padding-left: 20px;
+}
+#details .left-content #address1 {
+	margin-bottom: 20px;
+}
+h3.name {
+	color: rgb(0,66,80);
+	margin: 0;
+	font-weight: 700;
+	font-size: 18px;
+}
+h3.name b {
+	color: rgb(0,159,218);
+}
+.contacts a {
+	text-decoration: none;
+}
+.contacts .contactInner {
+	padding: 12px 0 5px 25px;
+	min-height: 22px;
+    background-color: white;
+	color: rgb(0,66,80);
+	border: 0.5px rgb(195,200,200) solid;
+	font-size: 16px;
+}
+.contacts a:nth-child(2) .contactInner {
+	border-top: 0.5px rgb(195,200,200) solid;
+}
+.contacts a:nth-child(3) .contactInner {
+	border-top: 0.5px rgb(195,200,200) solid;
+}
+.contacts a:nth-child(4) .contactInner {
+	border-top: 0.5px rgb(195,200,200) solid;
+}
+.contacts a:hover .contactInner {
+	color: white;
+	transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
+    -webkit-transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
+	background-color: rgb(0,159,218);
+}
+.Pagebutton, .PagebuttonHighlight {
+	width: 3px;
+    height: 10px;
+    padding: 7px;
+    margin: 2px 4px;
+    text-align: center;
+    float: left;
+	color: rgb(0,66,80);
+}
+.pager { margin: 0 10px; }
+.PagebuttonHighlight {
+    color: rgb(0,159,218);
+}
+
+.contactInner .icon-box i {
+	background-repeat: no-repeat;
+}
+.contactInner .icon-box i .icon-inner {
+	width: 17px;
+	height: 17px;
+	background-size: cover;
+}
+.contactInner .icon-box {
+	width: 25px;
+	height: 25px;
+	float: left;
+	margin: 0 12px 0 0;
+}
+.contacts a .contactInner .icon-box i.calendar .icon-inner {
+	background-image: url(image/CALENDAR2_25x25.png);
+}
+.contacts a:hover .contactInner .icon-box i.direction .icon-inner {
+	background-image: url(image/Calendar_25x25.png);
+}
+.contacts a .contactInner .icon-box i.direction .icon-inner {
+	background-image: url(image/MARKER2_25x25.png);
+}
+.contacts a:hover .contactInner .icon-box i.direction .icon-inner {
+	background-image: url(image/Tag_25x25.png);
+}
+.contacts a .contactInner .icon-box i.website .icon-inner {
+	background-image: url(image/GLOBE2_25x25.png);
+}
+.contacts a:hover .contactInner .icon-box i.website .icon-inner {
+	background-image: url(image/Globe_25x25.png);
+}
+.contacts a .contactInner .icon-box i.email .icon-inner {
+	background-image: url(image/ENVELOPE2_25x25.png);
+}
+.contacts a:hover .contactInner .icon-box i.email .icon-inner {
+	background-image: url(image/Envelope_25x25.png);
+}
+.contacts a .contactInner .icon-box i.phone .icon-inner {
+	background-image: url(image/PHONE2_25x25.png);
+}
+.contacts a:hover .contactInner .icon-box i.phone .icon-inner {
+	background-image: url(image/Phone_25x25.png);
+}
+
+p.Finalbutton a {
+    padding: 8px 28px 8px 0;
+}
+p.Finalbutton a:hover {
+	color: rgb(0,159,218) !important;
+	transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
+    -webkit-transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
+}
+
+#features {
+	margin: 15px 0 0;
+    padding: 20px 20px 25px;
+    color: white;
+    clear: both;
+    height: 235px;
+	background-color: rgba(195,200,200,0.3);
+	border: 0.5px #c3c8c8 solid;
+}
+#features .counter {
+	color: white;
+	position: absolute;
+    padding: 4px 0px 4px 20px;
+    margin-left: -20px;
+    margin-top: 18px;
+    font-weight: bold;
+    font-size: 29px;
+    background-color: rgb(255,160,47);
+}
+#features .left-content {
+	width: 68%;
+    float: left;
+    padding: 15px 15px 15px 68px;
+    font-weight: 300;
+}
+#features .left-content h3 {
+	font-size: 21px;
+}
+#features .left-content h3 span {
+	color: rgb(0,159,218);
+}
+#features .left-content p {
+	line-height: 19px;
+	margin: 10px 0 28px;
+}
+#features .left-content p:nth-child(2) {
+	margin: 8px 0 8px;
+}
+#features .left-content p a {
+	color: rgb(0,66,80);
+	text-decoration: underline;
+	font-size: 16px;
+	padding: 12px 30px 12px 0;
+	font-weight: 700;
+}
+#features .left-content p a:hover {
+	color: rgb(0,159,218);
+	transition: 0.3s;
+    transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
+    -webkit-transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
+}
+#features .right-content {
+	width: 31%;
+    padding: 15px;
+    float: right;
+}
+#details {
+	color: white;
+}
+#details .left-content {
+	float: left;
+	width: 40%;
+	padding: 15px;
+}
+#details .right-content {
+	float: left;
+	width: 54%;
+	padding: 15px;
+}
+#details .physios {
+	overflow: hidden;
+	overflow-y: scroll;
+	height: 300px;
+}
+#details .physios .physio {
+	min-height: 52px;
+    padding: 14px;
+    background-color: rgba(195,200,200,0.3);
+    margin: 15px;
+    border: 0.5px rgb(195,200,200) solid;
+}
+#details .physios .physio .left {
+	float: left;
+	width: 58%;
+}
+#details .physios .physio .right {
+	float: left;
+	width: 38%;
+}
+#details .physios .physio .smallTitle {
+	margin: 5px 0;
+	color: rgb(0,66,80);
+	font-weight: 500;
+}
+
+.final #details .left-content {
+	float: left;
+	width: 48%;
+	background-color: rgba(195,200,200,0.3);
+    margin: 15px 0;
+    border: 0.5px rgb(195,200,200) solid;
+}
+.final #details .right-content {
+	float: left;
+	width: 48%;
+	padding: 15px;
+	background-color: rgba(195,200,200,0.3);
+    margin: 15px;
+    border: 0.5px rgb(195,200,200) solid;
+}
+#block-block-270 li {
+	color: rgb(0,66,80);
+}
+
+#currentTickbox {
+	margin-bottom: 0;
+}
+
+/* load image on banner */
+#banner {
+	overflow: hidden;
+	height: 400px;
+}
+
+#currentLocation label h2 {
+	font-size: 17px;
+}
+
+.LocationUsing {
+    color: white !important;
+    -webkit-animation-iteration-count: infinite;
+    animation-iteration-count: infinite;
+}
+
+.LocationNo {color:rgb(195,200,200) !important;}
+
+.orState {
+	margin: -20px 0px 0px 249px;
+    color: white;
+    line-height: 0px;
+    float: left;
+}
+.orState p {
+	margin: -13px 0px 0px -51px;
+    color: white;
+    font-family: cairo;
+    float: left;
+    text-decoration: underline;
+    font-size: 17px;
+}
+.orState h2 {
+	font-size: 17px;
+	margin: -10px 0px 0 -23px !important;
+}
+	
+#FindAPhysio #find input.submit:disabled {
+	background-color: rgb(195,200,200);
+	cursor: auto;
+}
+	
+/*********************************************************************************/
+/* Mobile structure setting (for more than 480px size screen)                    */
+/*********************************************************************************/		
+@media screen and (min-width: 840px) and (max-width: 1280px) {
+	
+}
+
+@media screen and (min-width: 992px) and (max-width: 1199px) {
+	#content .resultWrapper .results .resultInner {
+		width: 293px;
+	}
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+	#features {
+		height: 280px;
+	}
+	#content .resultWrapper .results .resultInner {
+		width: 220px;
+		padding: 10px;
+	}
+	#features .left-content {
+		width: 68%;
+	}
+	#features .right-content {
+		margin-right: 0;
+		width: 32%;
+	}
+	.options {
+		float: left;
+		margin-top: 5px;
+	}
+}
+
+@media screen and (min-width: 480px) and (max-width: 767px) {
+	#features {
+		margin: 20px 0 0;
+		height: 405px;
+	}
+	#features .left-content {
+		width: 100%;
+		padding: 0px 10px 0px 50px;
+	}
+	#features .right-content {
+		margin-right: 0;
+		width: 100%;
+		padding: 5px 45px;
+	}
+	#features .left-content p {
+		margin: 10px 0 15px;
+	}
+	#content .resultWrapper .results {
+		width: 100%;
+	}
+	#content .resultWrapper .results .resultInner {
+		width: 100%;
+		margin: 15px 0 0;
+	}
+	.options {
+		float: left;
+		margin-top: 5px;
+	}
+	.final #details .left-content {
+		float: left;
+		width: 92%;
+		padding: 10px;
+	}
+	.final #details .right-content {
+		float: left;
+		width: 92%;
+		padding: 10px;
+	}
+}
+
+
+
+/*********************************************************************************/
+/* Mobile structure setting (for smaller than 480px size screen)                 */
+/*********************************************************************************/		
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+	#FindAPhysio {
+		padding: 8px;
+	}
+	#FindAPhysio #find select {
+		width: 299.6px;
+	}
+	#FindAPhysio h1 {
+		font-size: 39px;
+	}
+	#FindAPhysio #find #geocomplete, #FindAPhysio #find #practiceName, #FindAPhysio #find #userName, #FindAPhysio #find select, #FindAPhysio #find .submit, #bloodhound input {
+		width: 300px;
+		background-position: 265px 20px;
+	}
+	#FindAPhysio h2 {
+		font-size: 23px;
+	}
+	#FindAPhysio #find .filterArea .down1 ul li a {
+		padding: 10px;
+	}
+	#features {
+		margin: 20px 0 0;
+		height: 405px;
+	}
+	#features .left-content {
+		width: 100%;
+		padding: 0px 10px 0px 50px;
+	}
+	#features .right-content {
+		margin-right: 0;
+		width: 100%;
+		padding: 5px 45px;
+	}
+	#features .left-content p {
+		margin: 10px 0 15px;
+	}
+	#content .resultWrapper .results {
+		width: 100%;
+	}
+	#content .resultWrapper .results .resultInner {
+		width: 100%;
+		margin: 15px 0 0;
+	}
+	.options {
+		float: left;
+		margin-top: 5px;
+		margin-right: 0;
+	}
+	.options * {
+		margin-right: 5px;
+	}
+	.options select {
+		height: 30px;
+		width: 97px;
+		font-size: 13px;
+	}
+	.optionValue select#languageT {
+		width: 105px;
+	}
+	.options select:nth-child(4) {
+		width: 55px;
+	}
+	.options h3 {
+		margin-top: 5px;
+		font-size: 16px
+	}
+	#currentTickbox {
+		width: 240px;
+	}
+	.final #details .left-content {
+		float: left;
+		width: 92%;
+		padding: 10px;
+	}
+	.final #details .right-content {
+		float: left;
+		width: 92%;
+		padding: 10px;
+	}
+	#details .physios .physio .left {
+		width: 100%;
+		margin-top: 4px;
+	}
+	#details .physios .physio .right {
+		width: 100%;
+		margin-top: 6px;
+	}
+	.orState {
+		margin: -10px 0 0;
+	}
+	.orState p {
+		margin: 0px 205px 0 87px;
+	}
+	.orState h2 {
+		font-size: 17px !important;
+		margin: 0 19px 10px !important;
+		float: left;
+	}
+}
+
+/*********************************************************************************/
+/* Mobile structure setting (for smaller than 320px size screen)                 */
+/*********************************************************************************/	
+
+@media screen and (max-width: 319px) {
+	#features { height: 460px; }
+	#features .counter { position: relative; padding: 0 0 0 20px; margin: 0; }
+	#features .left-content { width: 90%; padding: 15px 15px 0 15px }
+	#features .right-content { width: 100%; float: left; margin-left: 0px; margin-right:0px; }
+	#features .left-content p a { font-size: 14px; }
+	.resultWrapper .results {
+		float: inherit;
+	}
+	.resultWrapper .results .resultInner {
+		width: 80%;
+	}
+	.options {
+		margin-right: 70px;
+	}
+	
+	.final #details .left-content {
+		float: left;
+		width: 92%;
+		padding: 10px;
+	}
+	.final #details .right-content {
+		float: left;
+		width: 92%;
+		padding: 10px;
+	}
+
+	/* Resize overall page width */
+	.container {
+		width: 320px;
+		margin: auto;
+	}
+	
+	/* Resize Header Box*/
+	#header-wrapper{
+		padding: 1em 0em 0.5em 0em;
+	}
+	
+	#header {
+		text-align: center;
+		width: 275px;
+	}
+	
+	/* Reposition and resize Logo */
+	#logo {
+		height: auto;
+		width: auto;
+		text-align: center;
+		
+	}
+	
+	#logo h1 {
+		width: auto;
+		margin: 0px;
+		font-size: 1.25em;
+		text-align: center;
+	}
+	
+	/* Remove sub-logo for mobile version */
+	#logo p {
+		display: none;
+	}
+	
+	/* Resize Page layout for Content */
+	#page{
+		margin: auto;
+		width:295px;
+		position: relative;
+		overflow: hidden;
+		padding: 2em 0em 1em 0em;
+	}
+	
+	#content{
+		margin: auto;
+		width:300px;
+		position: relative;
+	}
+	
+	#content p{
+		font-size: 0.75em;
+	}
+	
+	#content h1{
+		font-size: 1em;
+	}
+	
+	.title h2
+	{
+		font-size: 1.25em;
+	}
+	
+	/* Resize footer */
+	#footer-wrapper
+	{
+		padding: 0.75em 0em;
+	}
+	
+	#footer{
+		max-height: 10px;
+	}
+	
+	#footer  h2{
+		font-size: 0.75em;
+	}
+	
+	/* Resize table with result extension */
+	.result {
+		font-size: 0.6em;
+		text-align: left;
+		margin: auto;
+	}
+	
+	/* Resize table with review extension */
+	.review{
+		font-size: 0.6em;
+		text-align: left;
+		margin: auto;
+	}
+	
+	/* Resize element with redMessage */
+	.redMessage{
+		font-size: 0.75em;
+	}
+	
+	/* Squeeze the result page width */
+	#content.result_page{
+		max-width: 320px;
+	}
+	
+}
+
+
+/*------------------------------------End of Line--------------------------------*/

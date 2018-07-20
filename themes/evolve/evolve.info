@@ -98,6 +98,8 @@ lessc[] = lessc/Drupal/Advocacy.less
 lessc[] = lessc/Drupal/Home.less
 lessc[] = Survey/Survey.less
 lessc[] = lessc/flex-box.less
+lessc[] = lessc/Andy.less
+lessc[] = lessc/initial.less
 
 
 scripts[] = assets/scripts/evolve.js
