@@ -182,7 +182,7 @@
 		$("#block-block-241").addClass("display");
 		$("#section-parallax-first").removeClass("display-none");
 		$("#section-parallax-first").addClass("display");
-		$('html,body').animate({ scrollTop: $(document).height() * 0.25 }, 1000);
+		$('html,body').animate({ scrollTop: $('#section-content-top').offset().top  - $('#section-header').height() }, 1000);
 	}
                     
 });

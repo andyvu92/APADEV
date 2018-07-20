@@ -487,10 +487,6 @@ if($resultdata['result']) {
 					}
 					?>
 					</p>
-
-					<div class="col-xs-12">
-						<a href="#" class="scrollTop">Scroll</a>
-					</div>
 				</div>
 			</div>
 
@@ -1427,7 +1423,7 @@ if($resultdata['result']) {
 					</div>
 				</div>
 				<span class="session-time">
-					<?php echo $edate[1]."-".$edate[1]; ?>
+					<?php echo $edate[1]."-".$edate[1]; ?> AEST
 				</span>
 			</div>
 
