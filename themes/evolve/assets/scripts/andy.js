@@ -129,7 +129,7 @@ jQuery(document).ready(function() {
   var h2 = $("#h2").position();
   var h3 = $("#h3").position();
 
-  $('.join-details-button1').click(function() {
+  $("[class^='join-details-button'").click(function() {
     $('html, body').animate({
       scrollTop: h1.top
     }, 500);
@@ -137,53 +137,13 @@ jQuery(document).ready(function() {
 
   }); // left menu link2 click() scroll END
 
-  $('.your-details-prevbutton2').click(function() {
+  $("[class^='your-details-prevbutton'").click(function() {
     $('html, body').animate({
       scrollTop: h1.top
     }, 500);
     return false;
 
   }); // left menu link2 click() scroll END
-
-  $('.join-details-button2').click(function() {
-    $('html, body').animate({
-      scrollTop: h1.top
-    }, 500);
-    return false;
-
-  }); // left menu link3 click() scroll END
-
-  $('.join-details-button3').click(function() {
-    $('html, body').animate({
-      scrollTop: h1.top
-    }, 500);
-    return false;
-
-  }); // left menu link3 click() scroll END
-
-  $('.your-details-prevbutton3').click(function() {
-    $('html, body').animate({
-      scrollTop: h1.top
-    }, 500);
-    return false;
-
-  }); // left menu link3 click() scroll END
-
-  $('.your-details-prevbutton4').click(function() {
-    $('html, body').animate({
-      scrollTop: h1.top
-    }, 500);
-    return false;
-
-  }); // left menu link3 click() scroll END
-
-  $('.your-details-prevbutton4').click(function() {
-    $('html, body').animate({
-      scrollTop: h1.top
-    }, 500);
-    return false;
-
-  }); // left menu link3 click() scroll END
 
 }); // ready() END
 
