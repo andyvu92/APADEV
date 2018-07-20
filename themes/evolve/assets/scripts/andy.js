@@ -125,11 +125,11 @@ jQuery(document).ready(function() {
     LEFT MENU SMOOTH SCROLL ANIMATION
    *************************************/
   // declare variable
-  var h1 = $("#popUp").offset();
+  var h1 = $("#dashboard-right-content").offset();
   var h2 = $("#h2").position();
   var h3 = $("#h3").position();
 
-  $('.scrolltop').click(function() {
+  $('.join-details-button1').click(function() {
     $('html, body').animate({
       scrollTop: h1.top
     }, 500);
@@ -137,17 +137,49 @@ jQuery(document).ready(function() {
 
   }); // left menu link2 click() scroll END
 
-  $('.link2').click(function() {
+  $('.your-details-prevbutton2').click(function() {
     $('html, body').animate({
-      scrollTop: h2.top
+      scrollTop: h1.top
     }, 500);
     return false;
 
   }); // left menu link2 click() scroll END
 
-  $('.link3').click(function() {
+  $('.join-details-button2').click(function() {
     $('html, body').animate({
-      scrollTop: h3.top
+      scrollTop: h1.top
+    }, 500);
+    return false;
+
+  }); // left menu link3 click() scroll END
+
+  $('.join-details-button3').click(function() {
+    $('html, body').animate({
+      scrollTop: h1.top
+    }, 500);
+    return false;
+
+  }); // left menu link3 click() scroll END
+
+  $('.your-details-prevbutton3').click(function() {
+    $('html, body').animate({
+      scrollTop: h1.top
+    }, 500);
+    return false;
+
+  }); // left menu link3 click() scroll END
+
+  $('.your-details-prevbutton4').click(function() {
+    $('html, body').animate({
+      scrollTop: h1.top
+    }, 500);
+    return false;
+
+  }); // left menu link3 click() scroll END
+
+  $('.your-details-prevbutton4').click(function() {
+    $('html, body').animate({
+      scrollTop: h1.top
     }, 500);
     return false;
 
@@ -155,7 +187,28 @@ jQuery(document).ready(function() {
 
 }); // ready() END
 
-//YOUTUBE VIDEO TO HAVE CONTAIN IMAGE
-jQuery(document).ready(function(){
-  $('iframe #player .ytp-cued-thumbnail-overlay-image').css('background-size: contain');
+//SMOOTH SCROLL TO ID
+$(document).ready(function(){
+  // Add smooth scrolling to all links
+  $("a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
 });
