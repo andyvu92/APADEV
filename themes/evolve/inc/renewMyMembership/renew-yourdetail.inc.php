@@ -126,7 +126,7 @@ if(isset($_POST['step1'])) {
 		if(isset($_POST['Wwebaddress'.$i])) { $workplaceArray['Wwebaddress'] = $_POST['Wwebaddress'.$i];}
 		if(isset($_POST['WPhoneCountryCode'.$i])) { $workplaceArray['WPhoneCountryCode'] = $_POST['WPhoneCountryCode'.$i];}
 		if(isset($_POST['WPhoneAreaCode'.$i])) { $workplaceArray['WPhoneAreaCode'] = $_POST['WPhoneAreaCode'.$i];}
-		if(isset($_POST['Wphone'.$i])) { $workplaceArray['Wphone'] = $_POST['Wphone'.$i];}
+		if(isset($_POST['Wphone'.$i])) { $workplaceArray['WPhone'] = $_POST['Wphone'.$i];}
 		if(isset($_POST['WPhoneExtentions'.$i])) { $workplaceArray['WPhoneExtentions'] = $_POST['WPhoneExtentions'.$i];}
 		if(isset($_POST['Electronic-claiming'.$i])) { $workplaceArray['Electronic-claiming'] = $_POST['Electronic-claiming'.$i];}else {$workplaceArray['Electronic-claiming']="False";}
 		if(isset($_POST['Hicaps'.$i])) { $workplaceArray['Hicaps'] = $_POST['Hicaps'.$i];}else {$workplaceArray['Hicaps']="False";}
@@ -355,7 +355,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<div class="row">
 					<div class="col-xs-12">
 						<span class="light-lead-heading cairo" style="font-weight: 200; margin-bottom: 18px;">Phone numbers:</span>
-						<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Home</span>
+						<span class="text-underline smaller-lead-heading" style="color: #000">Home</span>
 					</div>
 
 					<div class="col-xs-6 col-md-3">
@@ -394,7 +394,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				
 				<div class="row">
 					<div class="col-xs-12">
-						<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Mobile</span>
+						<span class="text-underline smaller-lead-heading" style="color: #000">Mobile</span>
 					</div>
 
 					<div class="col-xs-6 col-md-3">
@@ -925,7 +925,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
 							foreach($country  as $pair => $value){
-								echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$pair]['Country'].'"';
+								echo '<option class="CountryOption'.$country[$pair]['ID'].'" value="'.$country[$pair]['Country'].'"';
 								if ($details['Workplaces'][$key]['Wcountry'] == $country[$pair]['Country']){ echo "selected='selected'"; } 
 								elseif(empty($details['Workplaces'][$key]['Wcountry']) && $country[$pair]['ID']=="14"){
 									echo "selected='selected'";
@@ -979,7 +979,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 
 					<div class="col-xs-6 col-md-3">
 						<label for="">Phone number</label>
-						<input type="text" class="form-control" name="WPhone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WPhone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WPhone'].'"'; }?>  >
+						<input type="text" class="form-control" name="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  >
 					</div>
 
 					<div class="col-xs-6 col-md-3">
@@ -1147,9 +1147,10 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 												
 											}
 										?>
-										<!--<option value="0" >Other</option>-->
+										<option value="0" >Other</option>
 									</select>
 									</div>
+									<input type="text" class="form-control display-none" name="University-degree<?php echo $key;?>" id="University-degree<?php echo $key;?>">
 									<?php endif;?>
 									<?php if (empty($details['PersonEducation'][$key]['DegreeID'])):?>
 									<input type="text" class="form-control" name="University-degree<?php echo $key;?>" id="University-degree<?php echo $key;?>" value="<?php echo $details['PersonEducation'][$key]['Degree'];?>">
@@ -1178,6 +1179,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 										<!--<option value="0">Other</option>-->
 									</select>
 									</div>
+									<input type="text" class="form-control display-none" name="Undergraduate-university-name-other<?php echo $key;?>" id="Undergraduate-university-name-other<?php echo $key;?>">
 									<?php endif;?>
 									<?php if (empty($details['PersonEducation'][$key]['InstituteID'])):?>
 									<input type="text" class="form-control" name="Undergraduate-university-name-other<?php echo $key;?>" id="Undergraduate-university-name-other<?php echo $key;?>" value="<?php echo $details['PersonEducation'][$key]['Institute'];?>">
@@ -1212,7 +1214,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 								<div class="chevron-select-box">
 								<select class="form-control" name="Ugraduate-yearattained<?php echo $key;?>" id="Ugraduate-yearattained<?php echo $key;?>">
 								<?php 
-								$y = date("Y") + 15; 
+								$y = date("Y") + 5;
 								for ($i=1940; $i<= $y; $i++){
 								echo '<option value="'.$i.'"';
 								if ($details['PersonEducation'][$key]['Yearattained'] == $i){
@@ -1279,7 +1281,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
                                 <?php
-                                    $y = date("Y");
+                                    $y = date("Y") + 5;
                                     for ($i = 1940; $i <= $y; $i++) {
                                         echo '<option value="' . $i . '">' . $i . '</option>';
                                     }

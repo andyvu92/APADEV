@@ -249,7 +249,7 @@ if(isset($_POST['step2-1'])) {
 				<input class="styled-checkbox" type="checkbox" id="privacypolicy">
 				<label id="privacypolicyl">I agree to Privacy Policy</label>
 			</div>
-			<div class="col-xs-12">
+			<div class="col-xs-12 display-none" id="rolloverblock">
 				<input class="styled-checkbox" type="checkbox" id="instalmentpolicy">
 				<label id="instalmentpolicyl">I agree to the Instalment Payment Policy</label>
 			</div>

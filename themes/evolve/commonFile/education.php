@@ -46,7 +46,7 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 		<div class="chevron-select-box">
 		<select class="form-control" name="Ugraduate-yearattained'.$i.'" id="Ugraduate-yearattained'.$i.'">';
 
-		$y = date("Y"); 
+		$y = date("Y") + 5; 
 		for ($i=1940; $i<= $y; $i++){
 		echo '<option value="'.$i.'">'.$i.'</option>';  
 		}

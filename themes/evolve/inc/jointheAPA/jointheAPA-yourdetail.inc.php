@@ -312,7 +312,7 @@ if (isset($_POST['step1'])) {
             }
             
             if (isset($_POST['WPhoneCountryCode' . $i])) {
-                $workplaceArray['WPhoneCountryCode'] = $_POST['WPhoneCountryCode' . $i];
+                $workplaceArray['WPhoneCountryCode'] = $_POST['WPhoneCountryCode'. $i];
             }
             
             if (isset($_POST['WPhoneAreaCode' . $i])) {
@@ -709,7 +709,7 @@ if (isset($_SESSION['UserId'])):
 
                             <div class="col-xs-12">
 								<span class="light-lead-heading cairo" style="font-weight: 200; margin-bottom: 18px;">Phone numbers:</span>
-								<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Home</span>
+								<span class="text-underline smaller-lead-heading" style="color: #000">Home</span>
                             </div>
                             
                         <div class="col-xs-6 col-md-3">
@@ -717,22 +717,21 @@ if (isset($_SESSION['UserId'])):
                             <div class="chevron-select-box">
                             <select class="form-control" id="country-code" name="country-code">
                             <?php
-    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
-    $country     = json_decode($countrycode, true);
-	$countser = 0;
-    foreach ($country as $key => $value) {
-        echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
-        if ($details['Home-phone-countrycode'] == preg_replace('/\s+/', '', $country[$key]['TelephoneCode']) && $countser == 0){ 
-			echo "selected='selected'"; 
-			$countser++;
-		}elseif(empty($details['Home-phone-countrycode']) && $country[$key]['ID']="14"){
-            echo "selected='selected'";
-        }
-        
-        echo '> ' . $country[$key]['Country'] . ' </option>';
-    }
-    
-?>
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							$countser = 0;							
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
+								if ($details['Home-phone-countrycode'] == preg_replace('/\s+/', '', $country[$key]['TelephoneCode']) && $countser == 0){ 
+									echo "selected='selected'"; 
+									$countser++;
+								}
+								elseif(empty($details['Home-phone-countrycode']) && $country[$key]['ID']=="14"){
+											echo "selected='selected'";
+								}
+								echo '> '.$country[$key]['Country'].' </option>';
+							}
+						?>
                            </select>
                            </div>
                         </div>
@@ -765,7 +764,7 @@ if (isset($_SESSION['UserId'])):
                     
                     <div class="row">
                         <div class="col-xs-12">
-							<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Mobile</span>
+							<span class="text-underline smaller-lead-heading" style="color: #000">Mobile</span>
 						</div>
                             
                         <div class="col-xs-6 col-md-3">
@@ -1631,7 +1630,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <?php
         
         foreach ($country as $pair => $value) {
-            echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$pair]['Country'] . '"';
+            echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'. $country[$pair]['Country']. '"';
             if ($details['Workplaces'][$key]['Wcountry'] == $country[$pair]['Country']) {
                 echo "selected='selected'";
             }
@@ -1691,7 +1690,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
         //$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
         //$country     = json_decode($countrycode, true);
         foreach ($country as $pair => $value) {
-            echo '<option value="' . $country[$pair]['TelephoneCode'] . '"';
+            echo '<option value="'. $country[$pair]['TelephoneCode'].'"';
             if ($details['Workplaces'][$key]['WPhoneCountryCode'] == $country[$pair]['TelephoneCode']) {
                 echo "selected='selected'";
             }
@@ -1714,19 +1713,19 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
         if (empty($details['Workplaces'][$key]['WPhoneAreaCode'])) {
             echo "placeholder='Phone Area code'";
         } else {
-            echo 'value="' . $details['Workplaces'][$key]['WPhoneAreaCode'] . '"';
+            echo 'value="'. $details['Workplaces'][$key]['WPhoneAreaCode'].'"';
         }
 ?>  maxlength="5">
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <label for="">Phone number</label>
-                                <input type="text" class="form-control" name="WPhone<?php
+                                <input type="text" class="form-control" name="Wphone<?php
         echo $key;
 ?>" <?php
-        if (empty($details['Workplaces'][$key]['WPhone'])) {
+        if (empty($details['Workplaces'][$key]['Wphone'])) {
             echo "placeholder='Phone number'";
         } else {
-            echo 'value="' . $details['Workplaces'][$key]['WPhone'] . '"';
+            echo 'value="' . $details['Workplaces'][$key]['Wphone'] . '"';
         }
 ?>  >
                             </div>
@@ -2057,9 +2056,14 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
             }
             
 ?>
-                                   <!--<option value="0" >Other</option>-->
+                                   <option value="0" >Other</option>
                                 </select>
                                 </div>
+	<input type="text" class="form-control display-none" name="University-degree<?php
+            echo $key;
+?>" id="University-degree<?php
+            echo $key;
+?>">
                                 <?php
         endif;
 ?>
@@ -2109,9 +2113,14 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
             }
             
 ?>
-                                   <!--<option value="0">Other</option>-->
+                                   <option value="0">Other</option>
                                 </select>
                                 </div>
+								<input type="text" class="form-control display-none" name="Undergraduate-university-name-other<?php
+            echo $key;
+?>" id="Undergraduate-university-name-other<?php
+            echo $key;
+?>">
                                 <?php
         endif;
 ?>
@@ -2142,7 +2151,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                     echo $key;
                             ?>">
                                                             <?php
-                                    $y = date("Y") + 15;
+                                    $y = date("Y") + 5;
                                     for ($i = 1940; $i <= $y; $i++) {
                                         echo '<option value="' . $i . '"';
                                         if ($details['PersonEducation'][$key]['Yearattained'] == $i) {
@@ -2243,7 +2252,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
                                 <?php
-                                    $y = date("Y");
+                                    $y = date("Y") + 5;
                                     for ($i = 1940; $i <= $y; $i++) {
                                         echo '<option value="' . $i . '">' . $i . '</option>';
                                     }
@@ -2399,7 +2408,7 @@ if(isset($_GET['MT'])){
                         <div class="row">
                             <div class="col-xs-12">
 								<span class="light-lead-heading cairo" style="font-weight: 200; margin-bottom: 18px;">Phone numbers:</span>
-								<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Home</span>
+								<span class="text-underline smaller-lead-heading" style="color: #000">Home</span>
                             </div>
                             
                             <div class="col-xs-6 col-md-3">
@@ -2433,7 +2442,7 @@ if(isset($_GET['MT'])){
 
                         <div class="row">
                             <div class="col-xs-12">
-								<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Mobile</span>
+								<span class="text-underline smaller-lead-heading" style="color: #000">Mobile</span>
                             </div>
                             
                             <div class="col-xs-6 col-md-3">
@@ -2995,7 +3004,7 @@ if(isset($_GET['MT'])){
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
                                 <?php
-                                    $y = date("Y");
+                                    $y = date("Y") + 5;
                                     for ($i = 1940; $i <= $y; $i++) {
                                         echo '<option value="' . $i . '">' . $i . '</option>';
                                     }

@@ -1245,34 +1245,31 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 												<?php
 													$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 													$country = json_decode($countrycode, true);						
-													foreach($country  as $pair => $value){
-														echo '<option value="'.$country[$pair]['TelephoneCode'].'"';
-														if ($details['Workplaces'][$key]['WPhoneCountryCode'] == $country[$pair]['TelephoneCode']){ echo "selected='selected'"; } 
-														elseif(empty($details['Workplaces'][$key]['WPhoneCountryCode']) && $country[$pair]['ID']=="14"){
+													foreach($country  as $wcpair => $value){
+														echo '<option value="'.$country[$wcpair]['TelephoneCode'].'"';
+														if ($details['Workplaces'][$key]['WPhoneCountryCode'] == $country[$wcpair]['TelephoneCode']){ echo "selected='selected'"; } 
+														elseif(empty($details['Workplaces'][$key]['WPhoneCountryCode']) && $country[$wcpair]['ID']=="14"){
 															echo "selected='selected'";
 														}
-														echo '> '.$country[$pair]['Country'].' </option>';
+														echo '> '.$country[$wcpair]['Country'].' </option>';
 													}
 												?>
 											</select>
 						</div>
 							</div>
 
-							<div class="col-xs-6 col-md-3">
-											<label for="">Area code</label>
-											<input type="text" class="form-control" name="WPhoneAreaCode'.$i.'" maxlength="5">
+							<div class="col-lg-2">
+								<label for="">Area code</label>
+								<input type="text" class="form-control" name="WPhoneAreaCode<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WPhoneAreaCode'])) {echo "placeholder='Phone Area code'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WPhoneAreaCode'].'"'; }?>  maxlength="5">
 							</div>
-
-							<div class="col-xs-6 col-md-3">
-											<label for="">Phone number</label>
-											<input type="text" class="form-control" name="Wphone'.$i.'">
+							<div class="col-lg-4">
+								<label for="">Phone number</label>
+								<input type="text" class="form-control" name="WPhone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  >
 							</div>
-
-							<div class="col-xs-6 col-md-3">
-											<label for="">Extention Number</label>
-											<input type="text" class="form-control" name="WPhoneExtentions'.$i.'">
+							<div class="col-lg-2">
+								<label for="">Extention Number</label>
+								<input type="text" class="form-control" name="WPhoneExtentions<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WPhoneExtentions'])) {echo "placeholder='Extentions Number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WPhoneExtentions'].'"'; }?>  >
 							</div>
-
 						</div>
 
 

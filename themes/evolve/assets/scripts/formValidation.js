@@ -94,10 +94,10 @@ jQuery(document).ready(function($) {
 				for (x = 0; x<i;x++){
 					if($("input[name=Name-of-workplace"+x+"]").val() ==''){$("input[name=Name-of-workplace"+x+"]").addClass("focuscss");}else{$("input[name=Name-of-workplace"+x+"]").removeClass("focuscss");}
 					if($("select[name=Workplace-setting"+x+"]").val() ==''){$("select[name=Workplace-setting"+x+"]").addClass("focuscss");}else{$("select[name=Workplace-setting"+x+"]").removeClass("focuscss");}
-					//if($("input[name=WAddress_Line_1"+x+"]").val() ==''){$("input[name=WAddress_Line_1"+x+"]").addClass("focuscss");}else{$("input[name=WAddress_Line_1"+x+"]").removeClass("focuscss");}
+					if($("input[name=WAddress_Line_1"+x+"]").val() ==''){$("input[name=WAddress_Line_1"+x+"]").addClass("focuscss");}else{$("input[name=WAddress_Line_1"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wcity"+x+"]").val() ==''){$("input[name=Wcity"+x+"]").addClass("focuscss");}else{$("input[name=Wcity"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wpostcode"+x+"]").val() ==''){$("input[name=Wpostcode"+x+"]").addClass("focuscss");}else{$("input[name=Wpostcode"+x+"]").removeClass("focuscss");}
-					//if($("input[name=Wstate"+x+"]").val() ==''){$("input[name=Wstate"+x+"]").addClass("focuscss");}else{$("input[name=Wstate"+x+"]").removeClass("focuscss");}
+					if($("input[name=Wphone"+x+"]").val() ==''){$("input[name=Wphone"+x+"]").addClass("focuscss");}else{$("input[name=Wphone"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wcountry"+x+"]").val() ==''){$("input[name=Wcountry"+x+"]").addClass("focuscss");}else{$("input[name=Wcountry"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wemail"+x+"]").val() ==''){$("input[name=Wemail"+x+"]").addClass("focuscss");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss");}
 					if (!isValidEmailAddress($("input[name=Wemail"+x+"]").val())) {$("input[name=Wemail"+x+"]").addClass("focuscss");$('#erroMessage').html("this email address is not valid");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss"); $('#errorMessage').html("");}
@@ -111,7 +111,7 @@ jQuery(document).ready(function($) {
 						
 						return false;
 					}
-					if($("input[name=Wcity"+x+"]").val() ==''||$("input[name=Wpostcode"+x+"]").val() ==''){
+					if($("input[name=Wcity"+x+"]").val() ==''||$("input[name=Wpostcode"+x+"]").val() =='' ||$("input[name=WAddress_Line_1"+x+"]").val() =='' ||$("input[name=Wphone"+x+"]").val() ==''){
 						
 						return false;
 					}
@@ -243,7 +243,7 @@ jQuery(document).ready(function($) {
 		var x = Number(i + 1);
 		
 	    //if(x==3){ $('#dashboard-right-content').addClass("autoscroll");}
-		$('[class^=down]:not(.down'+x+')').slideUp(200);
+		$('[class^=down]:not(.down'+x+')').slideUp(0);
 		if(x==3){
 			if($('select[name=MemberType]').val()=="9964" || $('select[name=MemberType]').val()=="9965"){
 				$('.down3').slideUp(200);

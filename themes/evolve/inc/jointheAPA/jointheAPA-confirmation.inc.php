@@ -61,11 +61,11 @@ if(isset($_POST['step3'])) {
 			die();
 		} 
 //2.2.46 -get order payment schedules test part
-   $paymentData['id'] = $registerOuts['Invoice_ID'];
-   $paymentDataSchedules = GetAptifyData("46", $paymentData);
+   //$paymentData['id'] = $registerOuts['Invoice_ID'];
+   //$paymentDataSchedules = GetAptifyData("46", $paymentData);
   //2.2.44 -get order detail test part
-   $orderData = $registerOuts['Invoice_ID'];
-   $orderDetails = GetAptifyData("44", $orderData);   		
+  // $orderData = $registerOuts['Invoice_ID'];
+  // $orderDetails = GetAptifyData("44", $orderData);   		
 }
 	
    
