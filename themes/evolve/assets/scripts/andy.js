@@ -154,3 +154,8 @@ jQuery(document).ready(function() {
   }); // left menu link3 click() scroll END
 
 }); // ready() END
+
+//YOUTUBE VIDEO TO HAVE CONTAIN IMAGE
+jQuery(document).ready(function(){
+  $('iframe #player .ytp-cued-thumbnail-overlay-image').css('background-size: contain');
+});
