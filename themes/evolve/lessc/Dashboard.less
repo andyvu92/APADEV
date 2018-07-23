@@ -930,6 +930,8 @@ a#insuranceControl{
             overflow-x: scroll;
             white-space: nowrap;
             margin: 0!important;
+            display: flex;
+            flex-direction: row;
             &::-webkit-scrollbar { 
                 display: none; 
             }
@@ -938,6 +940,10 @@ a#insuranceControl{
                 float: none!important;
                 display: inline-block;
                 padding: 5px 0;
+                order: 2;
+                &.active{
+                    order: 1;
+                }
             }
         }
     }
@@ -1292,6 +1298,16 @@ a#insuranceControl{
             top: 110px;
             left: 50%;
             margin-left: -55px;
+            a{
+                display: block;
+                font-size: 12px;
+                text-align: center;
+                color: #000;
+                &:hover{
+                    color: #009fda;
+                    text-decoration: underline;
+                }
+            }
         }
 
         @media all and (max-width: @larger-desktop-width) {
@@ -1315,30 +1331,30 @@ a#insuranceControl{
             }
             span.number{
                 font-size: 4em;
-                left: 59%;
+                left: 60%;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
             span.text{
                 font-size: 1.5em;
-                margin-left: -35px;
+                margin-left: -31px;
                 top: 90px;
             }
         }
         @media all and (max-width: @larger-tablet-width){
-            width: 217px;
+            width: 220px;
             #donutchart{
                 top: -10px;
             }
             span.number{
                 font-size: 5em;
-                left: 56%;
+                left: 58%;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
             span.text{
                 font-size: 1.8em;
-                margin-left: -45px;
+                margin-left: -42px;
                 top: 110px;
             }
         }
@@ -1570,6 +1586,7 @@ a#insuranceControl{
             i{
                 display: block;
                 margin: 10px auto;
+                min-width: 44px;
             }
             .ng-title{
                 color: #000;

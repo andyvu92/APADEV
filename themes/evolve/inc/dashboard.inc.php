@@ -330,7 +330,16 @@ $background = getBackgroundImage($userID);
 				</div>
 				<div class="col-xs-6 col-md-6 circle-container" id="goo-chart">
 					<div id="donutchart"></div>
-					<span class="number"><?php echo $cpd; ?></span><span class="text">CPD hours</span>
+					<span class="number"><?php  
+					if (!empty($cpd)){
+						echo $cpd;
+					}
+					else{
+						echo '0';
+					}
+					
+					?></span>
+					<span class="text">CPD hours <a href="/pd/cpd-diary"><i class="fa fa-info"></i> Full CPD diary</a></span>
 				</div>
 			</div>
 		</div>
