@@ -264,6 +264,7 @@ $details = GetAptifyData("4", $data,"");// #_SESSION["UserID"];
 if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details['Regional-group'];}
 
 ?>
+
 <form id="your-detail-form" action="renewmymembership" method="POST">
 	<input type="hidden" name="step1" value="1"/>
 	<input type="hidden" name="insuranceTag" id="insuranceTag"/>

@@ -110,6 +110,10 @@ scripts[] = assets/scripts/readmore.min.js
 scripts[] = assets/scripts/chosen_v1.7.0/chosen.jquery.min.js
 scripts[] = assets/scripts/twitter.js
 scripts[] = Survey/GFunction.js
+scripts[] = assets/scripts/Map.js
+scripts[] = assets/scripts/Distance.js
+scripts[] = assets/scripts/FindPhysio.js
+
 
 settings[body] = 'Open Sans:regular:14px:24px'
 settings[h1] = 'Raleway:regular:36px:'

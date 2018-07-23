@@ -339,7 +339,7 @@ $background = getBackgroundImage($userID);
 					}
 					
 					?></span>
-					<span class="text">CPD hours <a href="/pd/cpd-diary"><i class="fa fa-info"></i> Full CPD diary</a></span>
+					<span class="text">CPD hours <a target="_blank" href="/pd/cpd-diary"><i class="fa fa-info"></i> Full CPD diary</a></span>
 				</div>
 			</div>
 		</div>

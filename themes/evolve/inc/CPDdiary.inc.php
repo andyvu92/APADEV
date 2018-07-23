@@ -1,10 +1,10 @@
 <?php 
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 
-if(!isset($_SESSION["UserId"])) {
-	// No information to be displayed!
-	// redirect users to log-in or do something.
-}
+/* get background image****/
+if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID =0; }
+$background = getBackgroundImage($userID);
+/* get background image****/
 
 if(isset($_POST["nonAPA"])) {
 	// 2.2.34 - INSERT CPD diary
@@ -85,10 +85,10 @@ print_r($NAPA);
 		document.getElementById("CPD-diary-main").classList.add(cur_bg);
 		document.getElementById('pre_background').innerHTML = 'background_' + background_number; 
 }
-</script >
+</script>
 
 <div id="pre_background" style="display:none">background_2</div>
-<div id="CPD-diary-main" class="background_<?php echo $user['background']; ?>">
+<div id="CPD-diary-main" class="background_<?php echo $background; ?>">
 <div class="container">
     <button class="dashboard-backgroud" data-toggle="modal" data-target="#myModal"><span class="customise_background" >Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button>
 </div>
@@ -130,7 +130,7 @@ print_r($NAPA);
 	<div id="myBar">10%</div>
 
 	<div id="MaxHours">
-	<div class="trophy">&nbsp;</div>
+	<div class="trophy"><i class="fa fa-trophy fa-2x"></i></div>
 
 	<div class="MaxHours">20 hours minimum</div>
 	</div>
