@@ -604,9 +604,13 @@ if($resultdata['result']) {
 			$edate = explode(" ",$pd_detail['Edate']);
 			echo $bdate[0]."//".$edate[0];
 			$dateOutput = "";
+			$timeOutput = "";
 			$t = strtotime($bdate[0]);
 			$j = strtotime($edate[0]);
+			$q = strtotime($bdate[1]);
+			$r = strtotime($edate[1]);
 			$dateStart = date("d",strtotime($t));
+			$timeOutput = date("h:i",$q)." - ".date("h:i",$r);
 			if($bdate[0] == $edate[0]) {
 				if(date("F",$t) != date("F",$j)) {
 					$dateOutput = date("D d M",$t)."<br>- ".date("D d M",$j);
@@ -1423,7 +1427,7 @@ if($resultdata['result']) {
 					</div>
 				</div>
 				<span class="session-time">
-					<?php echo $edate[1]."-".$edate[1]; ?> AEST
+					<?php echo $timeOutput;//$edate[1]."-".$edate[1]; ?> AEST
 				</span>
 			</div>
 
