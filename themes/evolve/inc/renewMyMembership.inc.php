@@ -291,7 +291,8 @@ Facsimile: (03) 9092 0899</p>
 
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-		<label for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label><input type="checkbox" id="privacypolicyp">
+		<input class="styled-checkbox" type="checkbox" id="privacypolicyp">
+		<label for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label>
 	</div>
 </div>
 <div id="installmentpolicyWindow" style="display:none;">
@@ -306,7 +307,8 @@ Facsimile: (03) 9092 0899</p>
 	eleifend quam in tincidunt.
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-		<label for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label><input type="checkbox" id="installmentpolicyp">
+		<input class="styled-checkbox" type="checkbox" id="installmentpolicyp">
+		<label for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label>
 	</div>
 </div>
 <div id="QuatationPopUp" style="display:none;" class="container">

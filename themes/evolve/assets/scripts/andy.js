@@ -17,6 +17,11 @@ jQuery(document).ready(function() {
   jQuery('#section-content-top').removeClass('col-xs-12 col-sm-12 col-md-10 col-lg-10');
 });
 
+jQuery(document).ready(function() {
+  jQuery('.page-node-257 #section-banner').addClass( jQuery('#CPD-diary-main').attr('class'));
+});
+
+
 //REMOVE AUTO SCROLL CLASS
 jQuery(document).ready(function() {
   jQuery('#dashboard-right-content').removeClass('autoscroll');
@@ -148,7 +153,7 @@ jQuery(document).ready(function() {
 }); // ready() END
 
 //SMOOTH SCROLL TO ID
-$(document).ready(function(){
+jQuery(document).ready(function(){
   // Add smooth scrolling to all links
   $("a").on('click', function(event) {
 

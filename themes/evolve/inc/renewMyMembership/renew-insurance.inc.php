@@ -160,6 +160,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-title">FINANCIAL SERVICES GUIDE</h4>
 			</div>
+
 			<div class="modal-body">
 				<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>
 				<strong>This guide includes important information about:</strong>
