@@ -63,7 +63,6 @@ unlink("sites/all/themes/evolve/uploads/".$name);
 if(isset($_SESSION["UserId"])) {
 	$data = "UserID=".$_SESSION["UserId"];
 	$details = GetAptifyData("4", $data,""); // #_SESSION["UserID"];
-	
 }
 ?>
 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 dashboard-left-nav">
@@ -95,9 +94,16 @@ if(isset($_SESSION["UserId"])) {
 				</a>
 			</li>
 			<li class="dashboard-nav">
+				<?php  if($details['MemberTypeID']!="1"):?>
 				<a href="/renewmymembership">
 					<div class="dashboard-button-name"><span class="left-nav-icon renew-icon"></span>Renew</div>
 				</a>
+				<?php else:?>
+				<a href="/membership-question">
+					<div class="dashboard-button-name"><span class="left-nav-icon renew-icon"></span>Join a member</div>
+				</a>
+				<?php endif;?>
+				
 			</li>
 		</ul>
 	</div>
