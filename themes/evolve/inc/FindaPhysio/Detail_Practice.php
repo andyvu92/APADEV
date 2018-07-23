@@ -485,7 +485,7 @@
 				$UserIncludes = array();
 				try {
                     //$db = new PDO('mysql:host=localhost;dbname=c0FindPhysio', 'c0FindAPhysio', 'jc4X2ERLpn_');
-                    $db = new PDO('mysql:host=localhost;dbname=findaphysio', 'c0DefaultMain', 'Apa2017Config');
+                    $dbt = new PDO('mysql:host=localhost;dbname=findaphysio', 'c0DefaultMain', 'Apa2017Config');
 					$stmt = $db->prepare('SELECT * FROM practicesearch WHERE PID = :pid');
 					$stmt->bindValue(':pid', $id);
 					$stmt->execute();
@@ -862,4 +862,4 @@ $oo .= '<div id="directions'.$MapCounter.'" style="display:none;">'.'https://map
 		</script>
 				</div>
 </div>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBUXY9mb7uoQp8PtmLH8tNkLvr7Vdm6xAQ&libraries=places"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBooZHR_M33b8q226HIf1rHAAoRzdc3tTo&libraries=places"></script>"></script>
