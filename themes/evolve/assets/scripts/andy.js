@@ -133,7 +133,7 @@ jQuery(document).ready(function() {
     $('html, body').animate({
       scrollTop: h1.top
     }, 500);
-    return false;
+    //return false;
 
   }); // left menu link2 click() scroll END
 
@@ -141,7 +141,7 @@ jQuery(document).ready(function() {
     $('html, body').animate({
       scrollTop: h1.top
     }, 500);
-    return false;
+    //return false;
 
   }); // left menu link2 click() scroll END
 

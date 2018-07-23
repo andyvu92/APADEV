@@ -1221,8 +1221,15 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
     // Send -
     // Response - national group
     
-    $nationalGroupsCode = file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
-    $nationalGroups     = json_decode($nationalGroupsCode, true);
+    //$nationalGroupsCode = file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
+    //$nationalGroups     = json_decode($nationalGroupsCode, true);
+	// 2.2.19 - GET list National Group
+	// Send - 
+	// userID
+	// Response -National Group product
+	$sendData["UserID"] = $_SESSION['UserId'];
+	$nationalGroups = GetAptifyData("19", $sendData);
+	//print_r($nationalGroups);
 ?>
                    <?php
     foreach ($nationalGroups as $key => $value) {
@@ -1233,7 +1240,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
             }
         }
         
-        echo '> ' . $nationalGroups[$key]["Name"] . ' </option>';
+        echo '> ' . $nationalGroups[$key]["NGtitle"] . ' ($'.$nationalGroups[$key]['NGprice'].')  </option>';
     }
     
 ?>
@@ -2790,8 +2797,14 @@ if(isset($_GET['MT'])){
 							// Send -
 							// Response - national group
 							
-							$nationalGroupsCode = file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
-							$nationalGroups     = json_decode($nationalGroupsCode, true);
+							//$nationalGroupsCode = file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
+							//$nationalGroups     = json_decode($nationalGroupsCode, true);
+							// 2.2.19 - GET list National Group
+							// Send - 
+							// userID
+							// Response -National Group product
+							$sendData["UserID"] = "-1";
+							$nationalGroups = GetAptifyData("19", $sendData);
 						?>
                        <?php
 							foreach ($nationalGroups as $key => $value) {
@@ -2801,7 +2814,7 @@ if(isset($_GET['MT'])){
 										echo "selected='selected'";
 									}
 								}
-								echo '> ' . $nationalGroups[$key]["Name"] . ' </option>';
+								echo '> ' . $nationalGroups[$key]["NGtitle"]  . ' ($'.$nationalGroups[$key]['NGprice'].')  </option>';
 							}
 							
 						?>

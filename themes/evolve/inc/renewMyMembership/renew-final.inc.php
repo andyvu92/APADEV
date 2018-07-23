@@ -155,10 +155,12 @@ $scheduleDetails = GetAptifyData("47", $postScheduleData);
 // userID & product list
 // Response -Membership prodcut price
 $prodcutArray = array();
-array_push($prodcutArray,$_SESSION["MembershipProductID"]);
-$memberProductsArray['ProductID']=$prodcutArray;
-$memberProdcutID = $memberProductsArray;
-$memberProducts = GetAptifyData("31", $memberProdcutID);
+if(isset($_SESSION["MembershipProductID"])) { array_push($prodcutArray,$_SESSION["MembershipProductID"]);}
+if(sizeof($prodcutArray)!=0){
+	$memberProductsArray['ProductID']=$prodcutArray;
+	$memberProdcutID = $memberProductsArray;
+	$memberProducts = GetAptifyData("31", $memberProdcutID);
+}
 // 2.2.19 - GET list National Group
 // Send - 
 // userID
@@ -233,14 +235,16 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 
     			<?php 
 				$price = "";
-				foreach( $memberProducts as $memberProduct){
-							echo "<div class='flex-cell flex-flow-row table-cell memberproduct'>";
-							echo "<div class='flex-col-8 title-col'>".$memberProduct['Title']."</div>";
-							echo "<div class='flex-col-2 price-col'>A$".$memberProduct['Price']."</div>";
-							$price += $memberProduct['Price'];
-							echo '<div class="flex-col-2 action-col"><a href="renewmymembership" target="_self">delete</a></div>';
-							echo "</div>";  
-						}
+				if(sizeof($prodcutArray)!=0){
+					foreach( $memberProducts as $memberProduct){
+						echo "<div class='flex-cell flex-flow-row table-cell memberproduct'>";
+						echo "<div class='flex-col-8 title-col'>".$memberProduct['Title']."</div>";
+						echo "<div class='flex-col-2 price-col'>A$".$memberProduct['Price']."</div>";
+						$price += $memberProduct['Price'];
+						echo '<div class="flex-col-2 action-col"><a href="renewmymembership" target="_self">delete</a></div>';
+						echo "</div>";  
+					}
+				}
 				foreach( $NGListArray as $NGArray){
 					if(sizeof($NGProductsArray)!=0){
 						foreach($NGProductsArray as $NGProduct){

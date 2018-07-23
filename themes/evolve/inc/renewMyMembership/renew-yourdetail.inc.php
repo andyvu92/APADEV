@@ -678,15 +678,22 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						// 2.2.19 - get national group
 						// Send - 
 						// Response - national group
-						$nationalGroupsCode= file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
-						$nationalGroups=json_decode($nationalGroupsCode, true);
+						//$nationalGroupsCode= file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
+						//$nationalGroups=json_decode($nationalGroupsCode, true);
+						// 2.2.19 - GET list National Group
+						// Send - 
+						// userID
+						// Response -National Group product
+						$sendData["UserID"] = $_SESSION['UserId'];
+						$nationalGroups = GetAptifyData("19", $sendData);
+						
 				    ?>
 					<?php 
 						foreach($nationalGroups as $key=>$value) {
 						   echo '<option value="'.$nationalGroups[$key]["ProductID"].'"';
 						   if(isset($_SESSION["NationalProductID"])){ if (in_array( $nationalGroups[$key]["ProductID"],$_SESSION["NationalProductID"])){ echo "selected='selected'"; } }
 						   //elseif (in_array( $nationalGroups[$key]["ID"],$details['Nationalgp'])){ echo "selected='selected'"; } 
-						   echo '> '.$nationalGroups[$key]["Name"].' </option>';
+						   echo '> '.$nationalGroups[$key]["NGtitle"]. ' ($'.$nationalGroups[$key]['NGprice'].')  </option>';
 						}
 						
 					?>
