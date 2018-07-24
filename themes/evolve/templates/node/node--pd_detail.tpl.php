@@ -566,9 +566,7 @@ if($resultdata['result']) {
 					if (!empty($pd_detail['Presenter_bio'])){
 						echo $pd_detail['Presenter_bio'];
 					}
-					else{
-						echo "<h4>Dr Christian Barton</h4>Christian Barton is a physiotherapist and postdoctoral research fellow at the La Trobe Sport and Exercise Medicine Research Centre. His focus on knowledge translation was recently rewarded with an NHMRC TRIP Fellowship. Christian’s research is focused on the knee, running injuries and knowledge translation including the use of digital innovation.";
-					}
+
 					?>
 				</p>
 			</div>
@@ -1683,9 +1681,7 @@ if($resultdata['result']) {
 					if (!empty($pd_detail['Presenter_bio'])){
 						echo $pd_detail['Presenter_bio'];
 					}
-					else{
-						echo "<h4>Dr Christian Barton</h4>Christian Barton is a physiotherapist and postdoctoral research fellow at the La Trobe Sport and Exercise Medicine Research Centre. His focus on knowledge translation was recently rewarded with an NHMRC TRIP Fellowship. Christian’s research is focused on the knee, running injuries and knowledge translation including the use of digital innovation.";
-					}
+					
 					?>
 				</p>
 			</div>

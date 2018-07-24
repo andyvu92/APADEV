@@ -177,38 +177,3 @@ jQuery(document).ready(function(){
     } // End if
   });
 });
-
-
-//UL LIST TO DROPDOWN ON MOBILE
-//jQuery(window).resize(function() {
- // if ($(window).width() < 480) {
-
-//}
-//});
-
-
-//jQuery(document).ready(function(){
- // $("#dexp-portfolio-filter--5").on("click", ".init", function() {
-  //  $(this).closest("#dexp-portfolio-filter--5").children('li:not(.init)').toggle();
-//});
-
-//var allOptions = $("#dexp-portfolio-filter--5").children('li:not(.init)');
-//$("#dexp-portfolio-filter--5").on("click", "li:not(.init)", function() {
-//    allOptions.removeClass('selected');
-//    $(this).addClass('selected');
-//    $("#dexp-portfolio-filter--5").children('.init').html($(this).html());
-//    allOptions.toggle();
-//});
-
-
-//});
-
-jQuery(document).ready(function(){
-  $('.nav-chevron span.text-underline').parent().addClass('active');
-  $('.nav-chevron a.active').parent().addClass('init');
-$(".nav-chevron .nav-tabs li a").click(function () {
-  $(".nav-chevron .nav-tabs li").removeClass('init');
-  $(this).parent().addClass('init');
-  $(".nav-chevron .nav-tabs li:not(.init)").fadeOut(300); //Close filters drop-downs if user taps on any link in drop-down
-});
-});
