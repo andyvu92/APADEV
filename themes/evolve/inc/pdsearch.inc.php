@@ -182,10 +182,9 @@
 		$("#block-block-241").addClass("display");
 		$("#section-parallax-first").removeClass("display-none");
 		$("#section-parallax-first").addClass("display");
-		//$('html, body').animate({ scrollTop: $('#section-content-top').offset().top  - $('#section-header').height() }, 1000);
+		$('html').animate({ scrollTop: $('#section-content-top').offset().top  - $('#section-header').height() }, 1000);
 
-		$('html, body').animate({
-			scrollTop: 600 }, 400);
+		//$('html, body').animate({scrollTop: 600 }, 400);
 
 	}
 });
