@@ -2,11 +2,6 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
-	<link href="/sites/all/themes/evolve/assets/css/hamburgers-master/dist/hamburgers.css" rel="stylesheet">
-		<?php print $head; ?>
-		<title><?php print $head_title; ?></title>
-		<?php print $styles; ?>
-		<?php print $scripts; ?>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="/sites/all/themes/evolve/assets/scripts/typeahead.js-master/dist/typeahead.bundle.min.js" type="text/javascript"></script>
 	<script type="text/javascript" language="javascript">
@@ -47,8 +42,16 @@
 		});
 	});
 	</script>
+	<link href="/sites/all/themes/evolve/assets/css/hamburgers-master/dist/hamburgers.css" rel="stylesheet">
+		<?php print $head; ?>
+		<title><?php print $head_title; ?></title>
+		<?php print $styles; ?>
+		<?php print $scripts; ?>
+	<script type="text/javascript" src="/sites/all/themes/evolve/assets/scripts/Map.js"></script>
 	</head>
-	<?php if(strpos($_SERVER['REQUEST_URI'], 'find-')) {
+	<?php
+	// variables changed TODO
+	if(strpos($_SERVER['REQUEST_URI'], 'find-ph')) {
 		echo '<body class="'.$classes.'" '.$attributes.' onload="initGeolocation()">';
 	} else {
 		echo '<body class="'.$classes.'" '.$attributes.'>';
@@ -64,7 +67,9 @@
 		
 		<script>
 		var urlhere = window.location.href.substring(0,33);
-		if(urlhere == "https://choose.physio/find-result" || urlhere =="https://choose.physio/find-detail") {
+		// variables changed TODO
+		if(urlhere == "http://localhost/practice-ressult" || urlhere =="http://localhost/practice-detail?") {
+			console.log("in!");
 			initialize();
 			<?php /*if(isset($_SESSION["lat"]) || isset($_SESSION["lng"])): ?
 				initGeolocation(?php echo $_SESSION["lat"].', '.$_SESSION["lng"]; ?>);
