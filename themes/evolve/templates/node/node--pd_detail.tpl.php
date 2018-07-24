@@ -1680,8 +1680,9 @@ if($resultdata['result']) {
 					<?php 
 					if (!empty($pd_detail['Presenter_bio'])){
 						echo $pd_detail['Presenter_bio'];
+					} else {
+						echo "<h4>No record found!</h4>";
 					}
-					
 					?>
 				</p>
 			</div>
@@ -1706,7 +1707,7 @@ if($resultdata['result']) {
 						echo $pd_detail['Learning_outcomes'];
 					}
 					else{
-						echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+						echo "<h4>No record found!</h4>";
 					}
 					?>
 				</p>
@@ -1732,7 +1733,7 @@ if($resultdata['result']) {
 						echo $pd_detail['Prerequisites'];
 					}
 					else{
-						echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+						echo "<h4>No record found!</h4>";
 					}
 					?>
 				</p>
