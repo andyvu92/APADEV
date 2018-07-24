@@ -184,7 +184,7 @@
 		$("#section-parallax-first").addClass("display");
 		$('html').animate({ scrollTop: $('#section-content-top').offset().top  - $('#section-header').height() }, 1000);
 
-		//$('html, body').animate({scrollTop: 600 }, 400);
+		$('body').animate({scrollTop: 600 }, 400);
 
 	}
 });
