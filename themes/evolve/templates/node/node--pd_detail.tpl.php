@@ -1682,9 +1682,8 @@ if($resultdata['result']) {
 					<?php 
 					if (!empty($pd_detail['Presenter_bio'])){
 						echo $pd_detail['Presenter_bio'];
-					}
-					else{
-						echo "<h4>Dr Christian Barton</h4>Christian Barton is a physiotherapist and postdoctoral research fellow at the La Trobe Sport and Exercise Medicine Research Centre. His focus on knowledge translation was recently rewarded with an NHMRC TRIP Fellowship. Christian’s research is focused on the knee, running injuries and knowledge translation including the use of digital innovation.";
+					} else {
+						echo "<h4>No record found!</h4>";
 					}
 					?>
 				</p>
@@ -1710,7 +1709,7 @@ if($resultdata['result']) {
 						echo $pd_detail['Learning_outcomes'];
 					}
 					else{
-						echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+						echo "<h4>No record found!</h4>";
 					}
 					?>
 				</p>
@@ -1736,7 +1735,7 @@ if($resultdata['result']) {
 						echo $pd_detail['Prerequisites'];
 					}
 					else{
-						echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+						echo "<h4>No record found!</h4>";
 					}
 					?>
 				</p>
