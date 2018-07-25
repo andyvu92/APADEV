@@ -105,6 +105,24 @@
 /* --------------------------------------------------------- */
 /* ----------------------- PD search Added by Jinghu ----------------------- */
 
+.page-node-248{
+    .pd{
+        #section-banner{
+            .dexp-container{
+                background: url(http://10.1.1.35/sites/default/files/MEDIA/PD_EVENT_SEARCH_IMAGE_1.jpg) no-repeat center center fixed;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover;
+                background-position: 40%;
+                @media all and (max-width: @larger-tablet-width){
+                    background-position: 70%; 
+                }
+            } 
+        }
+    }
+}
+
 .dexp-section{
     .dexp-container{
         .dexp-parallax{
@@ -1183,9 +1201,16 @@ body.page-node{
 
 
 
-#block-block-240 .form-control{
-    background-color:transparent!important;
-	border: 1px solid white!important;
+#block-block-240{
+    .form-control{
+        background-color:transparent!important;
+        border: 1px solid white!important;
+    }
+    form{
+        input[type="text"]{
+            min-height: 37px;
+        }
+    }
 }
 
 #block-block-241 table th{

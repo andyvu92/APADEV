@@ -142,97 +142,53 @@ jQuery(document).ready(function($) {
         var y = $("#event"+x).html().replace('+','~');
         if($('#event'+x).attr("class") == 'open') {$('#event'+x).attr("class",'close');} else {$('#event'+x).attr("class",'open');}
 		$("#down" + x).slideToggle(500);
-    });
+	});
+	
+	$("#block-block-271 .media_filter ul li").click(function(){
+		$('li').siblings().removeClass('active');
+		$(this).addClass('active');
+	});
+
 	$("#homeShowAll").click(function() {
-		$("#homeShowAll").css('background', 'rgb(0,159,218)');
-		$("#homeShowAll a").css('color', 'white');
-		$("#homeEvents").css('background', 'white');
-		$("#homeEvents a").css('color', '#007ac9');
-		$("#homePublication").css('background', 'white');
-		$("#homePublication a").css('color', '#007ac9');
-		$("#homeStateNews").css('background', 'white');
-		$("#homeStateNews a").css('color', '#007ac9');
-		$("#homeTheLatest").css('background', 'white');
-		$("#homeTheLatest a").css('color', '#007ac9');
 		$('#downHomeT1').show(500);
 		$('#downHomeT2').hide(500);
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
-		$('#downHomeT5').hide(500);
-		
+		$('#downHomeT5').hide(500);	
 	});
+
 	$("#homeEvents").click(function() {
-		$("#homeEvents").css('background', 'rgb(0,159,218)');
-		$("#homeEvents a").css('color', 'white');
-		$("#homeShowAll").css('background', 'white');
-		$("#homeShowAll a").css('color', '#007ac9');
-		$("#homePublication").css('background', 'white');
-		$("#homePublication a").css('color', '#007ac9');
-		$("#homeStateNews").css('background', 'white');
-		$("#homeStateNews a").css('color', '#007ac9');
-		$("#homeTheLatest").css('background', 'white');
-		$("#homeTheLatest a").css('color', '#007ac9');
 		$('#downHomeT2').show(500);
 		$('#downHomeT1').hide(500);
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
-		
 	});
+
 	$("#homePublication").click(function() {
-		$("#homePublication").css('background', 'rgb(0,159,218)');
-		$("#homePublication a").css('color', 'white');
-		$("#homeShowAll").css('background', 'white');
-		$("#homeShowAll a").css('color', '#007ac9');
-		$("#homeEvents").css('background', 'white');
-		$("#homeEvents a").css('color', '#007ac9');
-		$("#homeStateNews").css('background', 'white');
-		$("#homeStateNews a").css('color', '#007ac9');
-		$("#homeTheLatest").css('background', 'white');
-		$("#homeTheLatest a").css('color', '#007ac9');
 		$('#downHomeT3').show(500);
 		$('#downHomeT1').hide(500);
 		$('#downHomeT2').hide(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
-		
 	});
+
 	$("#homeStateNews").click(function() {
-		$("#homeStateNews").css('background', 'rgb(0,159,218)');
-		$("#homeStateNews a").css('color', 'white');
-		$("#homeShowAll").css('background', 'white');
-		$("#homeShowAll a").css('color', '#007ac9');
-		$("#homeEvents").css('background', 'white');
-		$("#homeEvents a").css('color', '#007ac9');
-		$("#homePublication").css('background', 'white');
-		$("#homePublication a").css('color', '#007ac9');
-		$("#homeTheLatest").css('background', 'white');
-		$("#homeTheLatest a").css('color', '#007ac9');
 		$('#downHomeT4').show(500);
 		$('#downHomeT1').hide(500);
 		$('#downHomeT2').hide(500);
 		$('#downHomeT3').hide(500);
 		$('#downHomeT5').hide(500);
-		
 	});
+
 	$("#homeTheLatest").click(function() {
-		$("#homeTheLatest").css('background', 'rgb(0,159,218)');
-		$("#homeTheLatest a").css('color', 'white');
-		$("#homeShowAll").css('background', 'white');
-		$("#homeShowAll a").css('color', '#007ac9');
-		$("#homeEvents").css('background', 'white');
-		$("#homeEvents a").css('color', '#007ac9');
-		$("#homePublication").css('background', 'white');
-		$("#homePublication a").css('color', '#007ac9');
-		$("#homeStateNews").css('background', 'white');
-		$("#homeStateNews a").css('color', '#007ac9');
 		$('#downHomeT5').show(500);
 		$('#downHomeT1').hide(500);
 		$('#downHomeT2').hide(500);
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
-		
 	});
+
 	$("#showall").click(function() {
 		$("#showall").css('background', 'rgb(0,159,218)');
 		$("#showall a").css('color', 'white');
