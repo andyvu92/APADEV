@@ -620,7 +620,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<!--put code here-->
 						<div class="row payment-line flex-column">
 							<div class="col-xs-12">
-								<span class="light-lead-heading cairo" style="font-weight: 200">Billing address:</span>
+								<span class="light-lead-heading cairo" style="font-weight: 200">Mailing address:</span>
 							</div>
 
 							<div class="col-lg-12 align-item-end">
@@ -944,7 +944,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>-->
 					<div class="row payment-line flex-column">
 						<div class="col-xs-12 none-margin">
-							<span class="light-lead-heading">Mailing address:</span>
+							<span class="light-lead-heading">Shipping address:</span>
 						</div>
 
 					</div>
@@ -1027,7 +1027,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						
 					<div class="row payment-line flex-cell">
 						<div class="col-xs-12 col-sm-6">
-							<span class="light-lead-heading">Shipping address:</span>
+							<span class="light-lead-heading">Billing address:</span>
 						</div>
 						<div class="col-xs-12 col-sm-6 align-item-end">
 							<input class="styled-checkbox" type="checkbox" id="Shipping-address-dup">
