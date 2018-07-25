@@ -47,7 +47,7 @@
 		</select>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<label>Regional group</label>
+		<label>Region</label>
 		<select  class="chosen-select" name="Regionalgp" id="Regionalgp" multiple data-placeholder="Regional group">
 			<option value="NSW-CC" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-CC") { echo "selected";} ?>> NSW - CENTRAL COAST  </option>
 			<option value="NSW-CH" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-CH") { echo "selected";} ?>> NSW - COFFS HARBOUR  </option>
@@ -182,8 +182,8 @@
 		$("#block-block-241").addClass("display");
 		$("#section-parallax-first").removeClass("display-none");
 		$("#section-parallax-first").addClass("display");
-		$('html, body').animate({ scrollTop: $('#section-content-top').offset().top  - $('#section-header').height() }, 1000);
-
+		//$('html, body').animate({ scrollTop: $('#section-content-top').offset().top  - $('#section-header').height() }, 1000);
+		window.scrollTo(0, 500);
 	}
 });
 
