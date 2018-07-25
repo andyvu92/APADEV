@@ -90,7 +90,7 @@ print_r($NAPA);
 <div id="pre_background" style="display:none">background_2</div>
 <div id="CPD-diary-main" class="background_<?php echo $background; ?>">
 <div class="container">
-    <button class="dashboard-backgroud" data-toggle="modal" data-target="#myModal"><span class="customise_background" >Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button>
+<button class="dashboard-backgroud" data-toggle="modal" data-target="#myModal"><span class="customise_background" >Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button>
 </div>
 <div class="container">
     <!-- Modal -->

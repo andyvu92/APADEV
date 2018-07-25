@@ -2329,6 +2329,25 @@ form{
 }
 
  /*--RENEW MEMBERSHIP--*/
+ #QuatationPopUp{
+    position: fixed;
+    top: 40%!important;
+    width: 60%!important;
+    left: 20%;
+    text-align: center;
+    background: #fff;
+    z-index: 9999;
+     @media all and (max-width: @larger-phone-width) {
+        max-height: 300px;
+        overflow-y: scroll!important;
+        top: 25% !important;
+        width: 70%!important;
+        left: 15%;
+     }
+     @media all and (max-width: @desktop-width) {
+        top: 30%!important;
+     }
+ }
  div[aria-describedby="QuatationPopUp"] .ui-widget-header{
     position: absolute;
     right: 5px;
