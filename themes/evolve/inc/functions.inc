@@ -163,7 +163,6 @@ function createShoppingCart($userID, $productID,$type,$coupon){
 		$dbt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
-		return false;
 	}
 	try {
 		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, type, coupon) VALUES (:userID, :productID, :type, :coupon)');
@@ -176,9 +175,7 @@ function createShoppingCart($userID, $productID,$type,$coupon){
 	} catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
-		return false;
 	}
-	return true;
 }
 // check the user product in case of duplicated shopping cart data
 function checkShoppingCart($userID, $type, $productID){
@@ -233,7 +230,14 @@ function getProduct($userID,$type){
 
 function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 	$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	try {
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+		$dbt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+	} catch (PDOException $e) {
+		echo 'Connection failed: ' . $e->getMessage();
+		return false;
+	}
 	try {
 		$shoppingcartGet= $dbt->prepare('SELECT * FROM shopping_cart WHERE productID= :productID AND userID=:userID AND type=:type');
 		$shoppingcartGet->bindValue(':productID', $productID);
@@ -241,29 +245,30 @@ function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 		$shoppingcartGet->bindValue(':type', $type);
 		$shoppingcartGet->execute();
 		if($shoppingcartGet->rowCount()>0) {
-		header("Location:".$link."/pd/pd-product?saveShoppingCart&id=".$productID);
-	} else{
-		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, meetingID, type, Coupon) VALUES (:userID, :productID, :meetingID, :type, :Coupon)');
-		$shoppingcartGet = null;
-		$shoppingcartUpdate->bindValue(':userID', $userID);
-		$shoppingcartUpdate->bindValue(':productID', $productID);
+			header("Location:".$link."/pd/pd-product?saveShoppingCart&id=".$productID);
+		} else{
+			$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, meetingID, type, Coupon) VALUES (:userID, :productID, :meetingID, :type, :Coupon)');
+			$shoppingcartGet = null;
+			$shoppingcartUpdate->bindValue(':userID', $userID);
+			$shoppingcartUpdate->bindValue(':productID', $productID);
 			$shoppingcartUpdate->bindValue(':meetingID', $meetingID);
-		$shoppingcartUpdate->bindValue(':type', $type);
-		$shoppingcartUpdate->bindValue(':Coupon', $Coupon);
-		$shoppingcartUpdate->execute();	
-		$shoppingcartUpdate = null;
-	}
+			$shoppingcartUpdate->bindValue(':type', $type);
+			$shoppingcartUpdate->bindValue(':Coupon', $Coupon);
+			$shoppingcartUpdate->execute();	
+			$shoppingcartUpdate = null;
+		}
 	
-	$wishlistDel= $dbt->prepare('DELETE FROM wishlist WHERE productID=:productID AND userID=:userID AND source=:source');
-	$wishlistDel->bindValue(':productID', $productID);
-	$wishlistDel->bindValue(':userID', $userID);
-	$wishlistDel->bindValue(':source', $type);
-	$wishlistDel->execute();
-	$wishlistDel = null;		
+		$wishlistDel= $dbt->prepare('DELETE FROM wishlist WHERE productID=:productID AND userID=:userID AND source=:source');
+		$wishlistDel->bindValue(':productID', $productID);
+		$wishlistDel->bindValue(':userID', $userID);
+		$wishlistDel->bindValue(':source', $type);
+		$wishlistDel->execute();
+		$wishlistDel = null;		
 	}
 	catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
+		return false;
 	}
 	header("Location:".$link."/pd/pd-product?saveShoppingCart&id=".$productID);
 	
