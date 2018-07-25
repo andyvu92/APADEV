@@ -1488,21 +1488,15 @@ if($resultdata['result']) {
 				<?php 
 				$Totalnumber = $pd_detail['Totalnumber'];
 				$Enrollednumber = $pd_detail['Enrollednumber'];
-				$Now = date('d-m-Y');
-				if(strtotime($Now)> strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+				$Now = strtotime(date('d-m-Y'));
+				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";  
-				}
-				elseif($Totalnumber-$Enrollednumber<=5){
+				} elseif($Totalnumber-$Enrollednumber<=5){
 					echo "Almost Full"; 
-				
-				}
-				elseif(($Totalnumber-$Enrollednumber)==0){
+				} elseif(($Totalnumber-$Enrollednumber)==0){
 					echo "Full"; 
-				
-				}
-				elseif(($Totalnumber-$Enrollednumber)>5){
+				} elseif(($Totalnumber-$Enrollednumber)>5){
 					echo "Open"; 
-				
 				}
 		 		?>
 			</span>
@@ -1610,21 +1604,15 @@ if($resultdata['result']) {
 				<?php 
 				$Totalnumber = $pd_detail['Totalnumber'];
 				$Enrollednumber = $pd_detail['Enrollednumber'];
-				$Now = date('d-m-Y');
-				if(strtotime($Now)> strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+				$Now = strtotime(date('d-m-Y'));
+				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";  
-				}
-				elseif($Totalnumber-$Enrollednumber<=5){
+				} elseif($Totalnumber-$Enrollednumber<=5){
 					echo "Almost Full"; 
-				
-				}
-				elseif(($Totalnumber-$Enrollednumber)==0){
+				} elseif(($Totalnumber-$Enrollednumber)==0){
 					echo "Full"; 
-				
-				}
-				elseif(($Totalnumber-$Enrollednumber)>5){
+				} elseif(($Totalnumber-$Enrollednumber)>5){
 					echo "Open"; 
-				
 				}
 		 		?>
 			</span>
