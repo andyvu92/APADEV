@@ -39,7 +39,7 @@
 	if(isset($_POST["Getdata"])) {
 		$data = "UserID=".$_SESSION["UserId"];
 		$output = GetAptifyData("1", $data);
-		//print_r($output);
+		print_r($output);
 	}
 	
 	// forgot password
