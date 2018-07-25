@@ -236,7 +236,6 @@ function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 		$dbt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
-		return false;
 	}
 	try {
 		$shoppingcartGet= $dbt->prepare('SELECT * FROM shopping_cart WHERE productID= :productID AND userID=:userID AND type=:type');
@@ -268,10 +267,8 @@ function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 	catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
-		return false;
 	}
 	header("Location:".$link."/pd/pd-product?saveShoppingCart&id=".$productID);
-	
 }
 function PDSaveCoupon($userID, $type, $Coupon){
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
