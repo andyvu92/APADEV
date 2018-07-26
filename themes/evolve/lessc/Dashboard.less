@@ -2582,37 +2582,12 @@ form{
             }
         }
     }
-    .memSCTable{
-        width: 100%;
-        tbody{
-            border-top: none;
-        }
-        tr:nth-child(1){
-        border-bottom: 1px solid #ccc;
-            th:nth-child(1){
-                width: 60%;
-            }
-            th:nth-child(2){
-                width: 20%;
-            }
-            th:nth-child(3){
-                width: 20%;
-            }
-        }
-        th{
-            border-bottom: none;
-            line-height: 40px;
-        }
-        tr{
-            td:nth-child(1){
-                width: 60%;
-            }
-            td:nth-child(2){
-                width: 20%;
-            }
-            td:nth-child(3){
-                width: 20%;
-                text-align: left;
+    .join-apa-final{
+        .memberproduct{
+            .action-col{
+                a{
+                    cursor: pointer;
+                }
             }
         }
     }
@@ -2624,6 +2599,8 @@ form{
             text-align: center;
             span{
                 margin: 0 auto;
+                color: #0e7ac9;
+                padding: 10px 0;
             }
         }
         .sidebardis{
@@ -2664,6 +2641,14 @@ form{
         }
     }
     .placeorder{
+        font-family: Cairo;
+        font-weight: 700;
+        font-size: 15px;
+        background: #0f7ac9;
+        text-transform: lowercase;
+        &::first-letter{
+            text-transform: uppercase;
+        }
         &:hover{
             opacity: 0.9;
         }

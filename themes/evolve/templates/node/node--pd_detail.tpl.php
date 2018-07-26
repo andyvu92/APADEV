@@ -463,7 +463,7 @@ if($resultdata['result']) {
 	<div class="post-content">
 	
 	<div class="mobile-banner">
-		<div class="mobile-top-banner lecture-featured-image">
+		<div class="mobile-top-banner lecture-featured-image <?php echo $pd_detail['Typeofpd']; ?>">
 			<span class="pd-type"><?php echo $pd_detail['Typeofpd']; ?></span>
 		</div>
 	</div>
@@ -1419,7 +1419,7 @@ if($resultdata['result']) {
 	  
 	  <!--PD RIGHT SIDEBAR-->
 	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3">
-		<div class="top-banner lecture-featured-image">
+		<div class="top-banner lecture-featured-image <?php echo $pd_detail['Typeofpd']; ?>">
 			<span class="pd-type"><?php echo $pd_detail['Typeofpd']; ?></span>
 		</div>
 
