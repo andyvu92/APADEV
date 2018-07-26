@@ -136,11 +136,13 @@ if($resultdata['result']) {
 			$_SESSION['Dietary'] = $details["Dietary"];
 			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"]);
 		}
-      if(!isset($details)) {
+	if(isset($_SESSION["UserId"])){
+		if(!isset($details)) {
 			$data = "UserID=".$_SESSION["UserId"];
 			$details = GetAptifyData("4", $data,"");
 			$_SESSION['Dietary'] = $details["Dietary"];
-			}
+		}
+	}
 	   $user_membertype ="";
 	   $Job = "";
        $Professionalbody = "";
@@ -760,6 +762,7 @@ if($resultdata['result']) {
 			</form>
        
       </div>
+	  <?php if(isset($details)): ?>
 	  <div id="registerMember">
             <form action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" id="registerMemberForm" autocomplete="off">
 			    <input type="hidden" name="updateDetail">
@@ -1169,7 +1172,7 @@ if($resultdata['result']) {
               
             </div>
         </div>   
-        
+        <?php endif;?>
           <div id="jobnoticement">
               <p><span class="registerDes">We’ve noticed you’re not a physiotherapist.</span></p>
               <p>Please note, if a course or event is for registered physiotherapists only. this will be indicated in the event description</p>
@@ -1362,6 +1365,7 @@ if($resultdata['result']) {
 
 <!---End Sign up Web User--->
 <!---Member update detail-->
+ <?php if(isset($details)): ?>
 <div id="registerPDUser">
 	<form action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" autocomplete="off" >
 		<input type="hidden" name="updateDetail">
@@ -1399,6 +1403,7 @@ if($resultdata['result']) {
 
 	</form>
 	</div>
+	<?php endif;?>
 <!--End Member update detail-->
   </div>
 
