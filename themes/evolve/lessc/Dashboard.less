@@ -2,7 +2,7 @@
 /* -----------------Dashboard page added by jinghu ---------- */
 /* ********************************************************* */
 @import url('https://fonts.googleapis.com/css?family=Roboto:200,300,500,700');
-@import url('https://fonts.googleapis.com/css?family=Cairo:200,300,400');
+@import url('https://fonts.googleapis.com/css?family=Cairo:200,300,400,500,700,900');
 
 ::-webkit-scrollbar-track
 {
@@ -89,79 +89,119 @@ body.modal-open {
 
 /* ********************************************************* */
 /* -----------------Dashboard national group icons settings ---------- */
-.icons i{
-    width: 44px;
-    height: 44px;
-	background-image: url(/sites/default/files/NG_ICON_44X44.png);
-    background-repeat: no-repeat;
-    background-size: inherit;
-}
-
-.icons i.APN{
-    background-position: 0px 0px;
-}
-.icons i.ANI{
-    background-position: -44px 0px;
-}
-.icons i.AQA{
-    background-position: 0px -44px;
-}
-.icons i.CAR{
-    background-position: -44px -44px;
-}
-.icons i.EDU{
-    background-position: 0px -88px;
-}
-.icons i.GEN{
-    background-position: -44px -88px;
-}
-.icons i.MUS{
-    background-position: 0px -132px;
-}
-.icons i.NEU{
-    background-position: -44px -132px;
-}
-.icons i.OCC{
-    background-position: 0px -176px;
-}
-.icons i.PAE{
-    background-position: -44px -176px;
-}
-.icons i.SPT{
-    background-position: 0px -220px;
-}
-.icons i.PEL{
-    background-position: -44px -220px;
-}
-.icons i.DIS{
-    background-position: 0px -264px;
-}
-.icons i.PAN{
-    background-position: -44px -264px;
-}
-.icons i.CAN{
-    background-position: 0px -308px;
-}
-.icons i.ORT{
-    background-position: -44px -308px;
-}
-.icons i.EMG{
-    background-position: 0px -352px;
-}
-.icons i.BUS{
-    background-position: -44px -352px;
-}
-.icons i.RUL{
-    background-position: 0px -396px;
-}
-.icons i.STU{
-    background-position: -44px -396px;
-}
-.icons i.MEN{
-    background-position: 0px -440px;
-}
-.icons i.LED{
-    background-position: -44px -440px;
+.ng-icons-group{
+    .icons i{
+        width: 65px;
+        min-width: 65px;
+        height: 45px;
+        background-size: contain;
+        background-position: center center;
+        background-repeat: no-repeat;
+    }
+    
+    .icons{
+        &.ng-1{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Acupuncture-B.png);
+            }
+        }
+        &.ng-2{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Animal-B.png);
+            }
+        }
+        &.ng-3{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Aquatic-B.png);
+            }
+        }
+        &.ng-4{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Cardio-B.png);
+            }
+        }
+        &.ng-5{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Disability-B.png);
+            }
+        }
+        &.ng-6{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Educators-B.png);
+            }
+        }
+        &.ng-7{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/ED-B.png);
+            }
+        }
+        &.ng-8{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Gerontology-B.png);
+            }
+        }
+        &.ng-9{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Cancer-B.png);
+            }
+        }
+        &.ng-10{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Mental-Health-B.png);
+            }
+        }
+        &.ng-11{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Musculoskeletal-B.png);
+            }
+        }
+        &.ng-12{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Neurology-B.png);
+            }
+        }
+        &.ng-13{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Occ-Health-B.png);
+            }
+        }
+        &.ng-14{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Orthopaedic-B.png);
+            }
+        }
+        &.ng-15{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Paediatrics-B.png);
+            }
+        }
+        &.ng-16{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Pain-B.png);
+            }
+        }
+        &.ng-17{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Animal-B.png);
+            }
+        }
+        
+        &.ng-19{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Physio-Leadership-B.png);
+            }
+        }
+        &.ng-20{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Sports-B.png);
+            }
+        }
+        &.ng-21{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Pelvic-Health-B.png);
+            }
+        }
+    }
 }
 
 /* ********************************************************* */
@@ -268,13 +308,7 @@ div[aria-describedby="uploadImage"] .ui-widget-header{
 div[aria-describedby="uploadImage"] .ui-dialog-content{
     overflow:hidden!important;
 }
-div[aria-describedby="QuatationPopUp"].ui-dialog {
-    z-index: 1050!important;
-    left: 20%!important;
-	top: 47%!important;
-	width: 60%!important;
-	height:36%important;
-}
+
 div[aria-describedby="QuatationPopUp"] .ui-widget-header{
     border:none!important;
 	background-color:white!important;
@@ -675,8 +709,8 @@ input[id^="Additional-qualifications"] {
 
 .med-accent-header{
     color: @bright-blue;
-    font-size: 1.2em;
-    font-weight: 600;
+    font-size: 1.6em;
+    font-weight: 900;
 }
 
 .flex-column{
@@ -769,7 +803,7 @@ input[id^="Additional-qualifications"] {
 }
 
 /*--BUTTON STYLES--*/
-a.accent-btn{
+a.accent-btn, button.accent-btn{
     float: none!important;
     display: inline-block;
     margin-bottom: 20px;
@@ -781,6 +815,52 @@ a.accent-btn{
     font-size: 12px;
     font-weight: 300;
     font-family: 'Roboto';
+    &:hover{
+        color: #fff;
+        opacity: 0.9;
+        cursor: pointer;
+    }
+}
+
+.yes.accent-btn{
+    float: none !important;
+    display: inline-block;
+    margin-bottom: 0px;
+    margin-top: 2px;
+    background-color: #009fda;
+    border-width: 0px !important;
+    color: #fff !important;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    height: 38px;
+    min-width: 100px;
+    text-align: center;
+    font-family: Cairo;
+    font-weight: 700;
+    font-size: 14px;
+    &:hover{
+        color: #fff;
+        opacity: 0.9;
+        cursor: pointer;
+    }
+}
+
+.no.accent-btn{
+    float: none !important;
+    display: inline-block;
+    margin-bottom: 0px;
+    margin-top: 2px;
+    background-color: #009fda;
+    border-width: 0px !important;
+    color: #fff !important;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    height: 38px;
+    min-width: 100px;
+    text-align: center;
+    font-family: Cairo;
+    font-weight: 700;
+    font-size: 14px;
     &:hover{
         color: #fff;
         opacity: 0.9;
@@ -801,6 +881,11 @@ a.accent-btn{
     font-weight: 300;
     width: auto;
     height: auto;
+    span{
+        font-weight: 600;
+        font-size: 15px;
+        padding: 10px 30px;
+    }
     &:hover{
         color: #fff;
         opacity: 0.9;
@@ -900,13 +985,17 @@ a#insuranceControl{
         }
         .user-avatar{
             max-width: 50%;
-            margin: 50px auto 20px;
+            margin: 44px auto 25px;
             text-align: center;
             @media all and (max-width:@larger-tablet-width) {
                 display: none;
             }
             .ava-circle{
                 border-radius: 100%;
+                width: 100px;
+                height: 100px;
+                margin: 0 auto;
+                position: relative;
             }
             .user-name{
                 color: #fff;
@@ -914,6 +1003,7 @@ a#insuranceControl{
                 font-weight: 600;
                 display: block;
                 padding-top: 10px;
+                letter-spacing: 0.5px;
             }
         }
     }
@@ -924,6 +1014,9 @@ a#insuranceControl{
             margin: 0;
             li.dashboard-nav{
                 padding: 5px 0;
+                .dashboard-button-name{
+                    flex-flow: column;
+                }
             }
         }
         @media all and (max-width: @larger-phone-width) {
@@ -1021,6 +1114,8 @@ a#insuranceControl{
             text-align: left;
             font-size: 16px;
             line-height: 25px;
+            display: flex;
+            align-items: center;
             @media all and (max-width:@larger-tablet-width) {
                 text-align: center;
             }
@@ -1034,11 +1129,11 @@ a#insuranceControl{
             }
         }
         .left-nav-icon{
-            width: 25px;
-            height: 25px;
+            width: 20px;
+            height: 20px;
             display: block;
             float: left;
-            margin: 0 10px 0 15px;
+            margin: 0 15px 0 15px;
             transition: 0.1s linear;
             background-repeat:no-repeat;
             background-size:contain;
@@ -1215,17 +1310,24 @@ a#insuranceControl{
         tr td{
             padding: 5px 0px;
         }
+        &.limit-width{
+            .user-name{
+                text-transform: capitalize;
+            }
+        }
 	}
     
     tbody.limit-width tr td:nth-child(1){
         max-width: 110px;
+        line-height: 1.1em;
         @media all and (max-width: @phone-width) {
             max-width: none;
         }
     }
     tbody.limit-width tr td:nth-child(2){
-        text-indent: 10px;
         width: 65%;
+        padding-left: 10px;
+        line-height: 1.1em;
     }
 
 	.dashboard_detail{
@@ -1274,7 +1376,16 @@ a#insuranceControl{
     }
 
     #goo-chart{
-
+        padding-left: 0;
+        @media all and (max-width: 1300px) and (min-width: @larger-tablet-width) {
+            padding-left: 10px;
+            span.number{
+                left: 60%;
+            }
+            span.text{
+                margin-left: -32px;
+            }
+        }
         #donutchart{
             position: relative;
             top: -15px;
@@ -1284,7 +1395,7 @@ a#insuranceControl{
         }
         span.number{
             position: absolute;
-            top: 25px;
+            top: 20px;
             left: 50.5%;
             -webkit-transform: translateX(-50%);
             transform: translateX(-50%);
@@ -1295,14 +1406,15 @@ a#insuranceControl{
         span.text{
             font-size: 1.8em;
             position: absolute;
-            top: 110px;
-            left: 50%;
+            top: 87px;
+            left: 48%;
             margin-left: -55px;
             a{
                 display: block;
                 font-size: 12px;
                 text-align: center;
                 color: #000;
+                text-decoration: underline;
                 &:hover{
                     color: #009fda;
                     text-decoration: underline;
@@ -1314,14 +1426,14 @@ a#insuranceControl{
             width: 180px;
             span.number{
                 font-size: 4.5em;
-                left: 65%;
+                left: 55%;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
             span.text{
                 font-size: 1.6em;
-                margin-left: -30px;
-                top: 100px;
+                margin-left: -38px;
+                top: 80px;
             }
         }
         @media all and (max-width: @desktop-width) {
@@ -1331,31 +1443,33 @@ a#insuranceControl{
             }
             span.number{
                 font-size: 4em;
-                left: 60%;
+                left: 58%;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
             span.text{
                 font-size: 1.5em;
-                margin-left: -31px;
-                top: 90px;
+                margin-left: -33px;
+                top: 72px;
             }
         }
         @media all and (max-width: @larger-tablet-width){
             width: 220px;
+            padding-left: 15px;
             #donutchart{
                 top: -10px;
             }
             span.number{
                 font-size: 5em;
                 left: 58%;
+                top: 21px;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
             span.text{
                 font-size: 1.8em;
-                margin-left: -42px;
-                top: 110px;
+                margin-left: -39px;
+                top: 87px;
             }
         }
         @media all and (max-width: @larger-phone-width) {
@@ -1366,28 +1480,28 @@ a#insuranceControl{
             }
             span.number{
                 font-size: 4em;
-                left: 48%;
+                left: 50%;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
             span.text{
                 font-size: 1.3em;
-                margin-left: -40px;
-                top: 85px;
+                margin-left: -39px;
+                top: 75px;
             }
         }
         @media all and (max-width: @phone-width) {
             width: 100%;
             span.number{
                 font-size: 4.5em;
-                left: 48%;
+                left: 49%;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
             span.text{
                 font-size: 1.6em;
-                margin-left: -56px;
-                top: 100px;
+                margin-left: -48px;
+                top: 81px;
             }
         }
     }
@@ -1405,9 +1519,14 @@ a#insuranceControl{
         }
 
         .circle-container{
+            padding-right: 0;
+            @media all and (max-width: 1300px) and (min-width: @larger-tablet-width) {
+                padding-right: 5px;
+            }
             @media all and (max-width: @phone-width) {
                 width: 100%;
                 margin-bottom: 50px;
+                padding-right: 15px;
             }
             .circle{
                 width: 200px;
@@ -1426,6 +1545,7 @@ a#insuranceControl{
                 }
                 .text{
                     font-size: 1.8em;
+                    line-height: 1em;
                 }
                 @media all and (max-width: @larger-desktop-width) {
                     width: 170px;
@@ -1454,6 +1574,7 @@ a#insuranceControl{
                     margin-right: 10px;
                     width: 200px;
                     height: 200px;
+                    padding-right: 15px;
                     box-shadow: 0 0 0 15px #009fda; 
                     .number{
                         font-size: 5em;
@@ -1491,6 +1612,7 @@ a#insuranceControl{
         .accent-button{
             display: block;
             float: left;
+            text-align: center;
             background: @bright-blue;
             &:hover{
                 opacity: 0.9;
@@ -1500,16 +1622,18 @@ a#insuranceControl{
                 display: block;
                 padding: 10px 30px;
                 color: #fff;
-                font-weight: 500;
-                font-size: 14px;
+                font-weight: 600;
+                font-size: 15px;
                 min-width: 145px;
+                font-family: Cairo;
             }
         }
 
         .small-heading{
             display: block;
-            font-size: 1.4em;
-            font-weight: 600;
+            font-size: 1.6em;
+            font-weight: 700;
+            color: #000;
         }
     }
 
@@ -1570,6 +1694,15 @@ a#insuranceControl{
 }
 
 #dashboard-right-content{
+    .top-info{
+        margin-top: 10px;
+        @media all and (max-width: @phone-width) {
+            padding-bottom: 0;
+        }
+    }
+}
+
+#dashboard-right-content{
     .item-container{
         position: relative;
     }
@@ -1578,8 +1711,10 @@ a#insuranceControl{
         .icons{
             display: block;
             padding: 5px;
+            line-height: 0.8em;
             text-align: center;
             transition: 0.2s linear;
+            height: 100%;
             &:hover{
                 background: rgba(0, 0, 0, 0.12);
             }
@@ -1591,6 +1726,7 @@ a#insuranceControl{
             .ng-title{
                 color: #000;
                 font-weight: 500;
+                font-size: 0.7em;
             }
         }
         @media all and (max-width: @phone-width) {
@@ -1619,7 +1755,8 @@ a#insuranceControl{
 }
 
 .dashboard-name{
-	font-size: 4em;
+    font-size: 5em;
+    word-spacing: 6px;
     @media all and (max-width: @tablet-width) {
         font-size: 3em;
     }
@@ -1713,8 +1850,7 @@ iframe{
                 border: 5px 0 5px 0 solid rgba(0,0,0,0);
             }
             td{
-                padding: 15px 0;
-                text-transform: lowercase;
+                padding: 8px 0;
                 line-height: 15px;
                 &::first-letter{
                     text-transform: uppercase;
@@ -1737,7 +1873,9 @@ iframe{
         margin: 0;
     }
     a[class^="event"], ul.nav-tabs li{
-        font-size: 1.2em;
+        font-size: 1.25em;
+        color: #009fda;
+        font-family: cairo;
     }
 
     .member-purchases{
@@ -1859,6 +1997,7 @@ iframe{
         color: #000;
         vertical-align: sub;
         box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
+        border: 0px solid #ccc;
     }
 
     .chosen-container-multi .chosen-choices{
@@ -1911,6 +2050,8 @@ iframe{
             input{
                 width: auto!important;
                 min-width: 650px;
+                font-weight: 300;
+                font-family: Roboto;
             }
         }
     }
@@ -2035,6 +2176,7 @@ form{
                 padding: 0;
                 .text-underline{
                     visibility: visible;
+                    color: #009fda;
                     &:after{
                         content: '\f078';
                         font-family: 'fontawesome';
@@ -2329,7 +2471,7 @@ form{
 }
 
  /*--RENEW MEMBERSHIP--*/
- #QuatationPopUp{
+ div[aria-describedby="QuatationPopUp"].ui-dialog{
     position: fixed;
     top: 40%!important;
     width: 60%!important;
@@ -2661,6 +2803,7 @@ form{
  
  .dexp-body-inner{
     #section-content-top{
+        border-bottom: 30px solid #009fda;
         @media all and (max-width: @tablet-width) {
             padding: 0;
         }
@@ -2671,4 +2814,13 @@ form{
      .tab-pane{
          width: 100%;
      }
+ }
+
+ /*--POPUP FORMS--*/
+ #setCardForm{
+     text-align: center;
+ }
+
+ #deleteCardWindow{
+     text-align: center;
  }

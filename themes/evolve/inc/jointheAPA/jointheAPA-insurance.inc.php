@@ -75,7 +75,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 			<div class="row">
 
 				<div class="row">
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-6">
 						<label>Amount paid</label>
 						<input type="text" class="form-control" name="Amountpaid" id="Amountpaid" placeholder="Amount paid (if nil, please state NIL)"<?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Amountpaid']; }else{ echo '';}?>>
 					</div>
@@ -88,9 +88,9 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 					<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Finalisedclaim" id="Finalisedclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label for="Finalisedclaim2">No</label></div>
 				</div>
 				
-				<div class="col-xs-12 col-md-6">
+				<div class="col-xs-12">
 					<label>Business name</label>
-					<input type="text" class="form-control" name="Businiessname" id="Businiessname" placeholder="Business name" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Businiessname']; }else{ echo '';}?>>
+					<input type="text" class="form-control" name="Businiessname" id="Businiessname" placeholder="Business name, practice name or trading name owned by you, do not name your employer’s business." <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Businiessname']; }else{ echo '';}?>>
 				</div>
 				<div class="col-xs-12">
 					<span class="note-text"><strong>Note: </strong></span>Business name, practice name or trading name owned by you, do not name your employer’s business.

@@ -47,7 +47,14 @@ function nationalIcons(){
 		$length = sizeof($NGs);	
 	
 		$k =0;
-		if($length > 6){
+		if($length == 0){
+			echo "<div class='flex-container flex-flow-row'>
+					<div class='flex-cell'>
+					<span class='dashboard-content-bottom'>We noticed you're not a part of any yet. Why not join your peers to keep up tp date with the latest developments in your area of physiotherapy?</span>
+					</div>
+					</div>";
+		}
+		elseif($length > 3){
 			for($i=0; $i<$length/4; $i++){
 				echo '<div id="myCarousel" class="carousel slide" data-ride="carousel">';
 				echo '<div class="carousel-inner">';
@@ -60,11 +67,11 @@ function nationalIcons(){
 					   
 				echo "<div class='flex-container flex-flow-row'>";
 				echo "<div class='flex-cell'>";
-					for($j=$k; $j<$k+4; $j++){
+					for($j=$k; $j<$k+3; $j++){
 					if($j<$length){
-						echo "<div class='flex-col-3'>";
-						echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons">';
-						echo '<i class="fa '.$NGs[$j]["NGid"].'">';
+						echo "<div class='flex-col-4'>";
+						echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons ng-'.$NGs[$j]["NGid"].'">';
+						echo '<i class="fa">';
 						/*
 						$num = intval($userIcons[$j]);
 						echo '<a href="'.$nationalIcons[$num][0].'" class="icons">';
@@ -93,10 +100,10 @@ function nationalIcons(){
 	    else{
 			echo "<div class='flex-container flex-flow-row'>";
 			echo "<div class='flex-cell'>";
-				for($j=$k; $j<$k+4; $j++){
+				for($j=$k; $j<$k+3; $j++){
 				if($j<$length){
-					echo "<div class='flex-col-6 item-container'>";
-					echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons">';
+					echo "<div class='flex-col-4 item-container'>";
+					echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons ng-'.$NGs[$j]["NGid"].'">';
 					echo '<i class="fa '.$NGs[$j]["NGid"].'">';
 					/*
 					$num = intval($userIcons[$j]);

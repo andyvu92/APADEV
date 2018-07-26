@@ -830,7 +830,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                         </div>
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
                             <label for="">PO box</label>
                             <input type="text" class="form-control" name="Pobox" placeholder='PO box'<?php
     if (empty($details['Pobox'])) {
@@ -841,7 +841,7 @@ if (isset($_SESSION['UserId'])):
 ?>>
                         </div>
                     
-                    <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-12 col-sm-6 col-md-9">
                         <label for="">Address line 1<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1" placeholder='Address 1'<?php
     if (empty($details['Unit'])) {
@@ -851,7 +851,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                     </div>
-                    <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-12">
                         <label for="">Address line 2</label>
                         <input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2" placeholder='Address 2'<?php
     if (empty($details['Street'])) {
@@ -957,7 +957,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                             </div>
-                            <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-6 col-md-3">
                             <label for="">PO box</label>
                             <input type="text" class="form-control" name="Billing-Pobox" placeholder='PO box'<?php
     if (!empty($details['Billing-Unit'])) {
@@ -968,7 +968,7 @@ if (isset($_SESSION['UserId'])):
 ?>>
                             </div>
                         
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 col-sm-6 col-md-9">
                            <label for="">Address line 1<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" placeholder='Billing Address 1'<?php
     if (empty($details['Billing-Unit'])) {
@@ -978,7 +978,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                         </div>
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12">
                            <label for="">Address line 2</label>
                            <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" placeholder='Billing Address 2'<?php
     if (empty($details['Billing-Street'])) {
@@ -1356,7 +1356,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
     }
     
 ?>
-               <div class="col-xs-12 col-md-6">
+               <div class="col-xs-12">
                     <label>What languages do you speak in your professional practice?</label>
                     
                     <div class="plus-select-box">
@@ -1752,7 +1752,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                         <!--BREAK-->
                     
                         <div class="row">
-                            <div class="col-xs-12 col-md-6">
+                            <div class="col-xs-12">
                                 <label>What languages do you speak in your professional practice?</label>
                                 <?php
         if (!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {
@@ -2493,17 +2493,17 @@ if(isset($_GET['MT'])){
                             <input type="text" class="form-control"  name="BuildingName">
                         </div>
 
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
                         <label for="">PO box</label>
                         <input type="text" class="form-control" name="Pobox">
                         </div>
 
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 col-sm-6 col-md-9">
                         <label for="">Address line 1<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
                         </div>
 
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12">
                             <label for="">Address line 2</label>
                             <input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
                         </div>
@@ -2577,17 +2577,17 @@ if(isset($_GET['MT'])){
                             <input type="text" class="form-control"  name="Billing-BuildingName">
                         </div>
 
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
                             <label for="">PO box</label>
                             <input type="text" class="form-control" name="Billing-Pobox" id="Billing-Pobox">
                         </div>
 
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 col-sm-6 col-md-9">
                            <label for="">Address Line 1<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1">
                         </div>
 
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12">
                            <label for="">Address Line 2</label>
                            <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2">
                         </div>
@@ -2786,6 +2786,24 @@ if(isset($_GET['MT'])){
                 <input type="hidden" class="form-control" name="Specialty">
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
+                        <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
+                        <div class="chevron-select-box">
+                        <select class="form-control" id="Branch" name="Branch">
+                            <option value="" selected disabled>What branch would you like to join?</option>
+                            <?php
+								$Branchcode = file_get_contents("sites/all/themes/evolve/json/Branch.json");
+								$Branch     = json_decode($Branchcode, true);
+								foreach ($Branch as $key => $value) {
+									echo '<option value="' . $Branch[$key]['Abbreviation'] . '"';
+									echo '> ' . $Branch[$key]['FullName'] . ' </option>';
+								}
+								
+							?>
+                       </select>
+                       </div>
+                    </div>
+
+                    <div class="col-xs-12">
                         <label for="">Your National group</label>
                         
                         <div class="plus-select-box">
@@ -2822,24 +2840,6 @@ if(isset($_GET['MT'])){
                        </div>
                     </div>
 
-					<div class="col-xs-12 col-md-6">
-                        <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
-                        <div class="chevron-select-box">
-                        <select class="form-control" id="Branch" name="Branch">
-                            <option value="" selected disabled>What branch would you like to join?</option>
-                            <?php
-								$Branchcode = file_get_contents("sites/all/themes/evolve/json/Branch.json");
-								$Branch     = json_decode($Branchcode, true);
-								foreach ($Branch as $key => $value) {
-									echo '<option value="' . $Branch[$key]['Abbreviation'] . '"';
-									echo '> ' . $Branch[$key]['FullName'] . ' </option>';
-								}
-								
-							?>
-                       </select>
-                       </div>
-                    </div>
-
                     <div class="col-xs-12 display-none" id="ngsports">
                         <input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0">
                         <label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label>
@@ -2852,7 +2852,7 @@ if(isset($_GET['MT'])){
 
                 <div class="row"> 
 
-                    <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-12">
 						<label>Tell us what you'd like to know more about</label>
                         
                         <div class="plus-select-box">
@@ -2901,7 +2901,7 @@ if(isset($_GET['MT'])){
                 </div>
 
                 <div class="row">
-					<div class="col-xs-12 col-md-6">
+					<div class="col-xs-12">
 						<label>What languages do you speak in your professional practice?</label>
 						
                         <div class="plus-select-box">

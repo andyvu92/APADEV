@@ -750,13 +750,18 @@ if($resultdata['result']) {
 	  
 		<div  id="loginPopWindow" >
 			<form name="signInForm" method="POST" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>">
-				 <p style="color: #009FDA !important;">I’m a member. Please sign in below:</p>
+				 <p style="color: #009FDA !important;">Have a member account? Please sign in below:</p>
 				<!--<input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
 				 <input type="password" class="form-control"  name="Password"  placeholder="Password"><br>-->
 				<input name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" />
 				<input placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" />
-				<p><input type="checkbox" name="remember"  <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> /><label for="remember">Remember me</label><a class="forgotPS" data-dismiss="modal" data-toggle="modal" data-target="#passwordReset" >Forgot password?</a></p>
-				 <p style="color: #009FDA !important;">I am not a member. <a id="createAccount">Create an account.</a></p>
+				<p>
+				<input class type="checkbox" name="remember"  <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> />
+				<label for="remember">Remember me</label>
+				</p>
+				<p><a class="forgotPS" data-dismiss="modal" data-toggle="modal" data-target="#passwordReset" >Forgot password?</a></p>
+
+				 <p style="color: #009FDA !important;">Not a member? <a id="createAccount">Create an account.</a></p>
 				
 				  <input type="submit" value="Sign in">
 			</form>
