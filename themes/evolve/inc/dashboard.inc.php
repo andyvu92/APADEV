@@ -162,22 +162,22 @@ $background = getBackgroundImage($userID);
 <div class="col-xs-12 col-md-10 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-12 col-sm-6"><span class="dashboard-name cairo">Hello <?php echo $user["Preferred-name"]; ?></span></div>
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-toggle="modal" data-target="#myModal"><span class="customise_background" >Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
+			<div class="col-xs-12"><span class="dashboard-name cairo">Hello Michaelangelo<?php echo $user["Preferred-name"]; ?></span></div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="display: none"><button class="dashboard-backgroud" data-toggle="modal" data-target="#myModal"><span class="customise_background" >Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
 	<?php
 		include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
 	?>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bottom-space">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 top-info bottom-space">
 			<div class="col-xs-12 col-md-6 mobile_line" >
 				<table class="table table-responsive bordless">
 					<tbody class="limit-width" style="border-top: none;">
 						<tr>
-						<span class="med-accent-header"><strong>Your details</strong></span>
+						<span class="med-accent-header cairo"><strong>Your details</strong></span>
 						</tr>
 						<tr>
 							<td><strong>Name:</strong></td>
-							<td><?php echo $user['Firstname']." ".$user['Lastname']; ?></td>
+							<td class="user-name"><?php echo $user['Firstname']." ".$user['Lastname']; ?></td>
 						</tr>
 						<tr>
 							<td><strong>Member ID:</strong></td>
@@ -193,27 +193,27 @@ $background = getBackgroundImage($userID);
 						</tr>
 						<tr>
 							<td><strong>AHPRA NO:</strong></td>
-							<td><?php echo $user['Ahpranumber']; ?></td>
+							<td><?php echo $user['Ahpranumber']; ?>0983473482</td>
 						</tr>
 						<tr>
 							<td><strong>Specialty:</strong></td>
-							<td><?php echo $user['Specialty']; ?></td>
+							<td><?php echo $user['Specialty']; ?>Neque porro quisquam est qui dolorem</td>
 						</tr>
 						<tr>
 							<td><strong>Officebearer positions:</strong></td>
-							<td><?php echo $user['Officebearer']; ?></td>
+							<td><?php echo $user['Officebearer']; ?>Neque porro quisquam est qui dolorem</td>
 						</tr>
 						<tr>
-							<td><strong>Your branch:</strong></td>
-							<td><?php echo $user['HomeBranch']; ?></td>
+							<td><strong>Your Branch:</strong></td>
+							<td><?php echo $user['HomeBranch']; ?>Victoria</td>
 						</tr>
 						<tr>
-							<td><strong>Additional branch:</strong></td>
-							<td><?php echo $user['PreferBranch']; ?></td>
+							<td><strong>Additional Branch:</strong></td>
+							<td><?php echo $user['PreferBranch']; ?>New South Wales</td>
 						</tr>
 						<tr>
 							<td><strong>Primary health care network:</strong></td>
-							<td><?php echo $user['PHN']; ?></td>
+							<td><?php echo $user['PHN']; ?>Neque porro quisquam est qui dolorem</td>
 						</tr>
 						<tr>
 						<?php
@@ -323,7 +323,7 @@ $background = getBackgroundImage($userID);
 			</script>
 			<div class="col-xs-12 col-md-6 mobile_line" >
 				<div class="col-xs-12 center">				 
-					<span class="lead-heading">Your membership</br> snapshot</span>		
+					<span class="cairo lead-heading">Your membership</br> snapshot</span>		
 			    </div>
 				<div class="col-xs-6 col-md-6 circle-container">
 					<div class="circle"><span class="number"><?php echo $user['Yearmembership']; ?></span><span class="text">Years of membership</span></div>
@@ -339,13 +339,13 @@ $background = getBackgroundImage($userID);
 					}
 					
 					?></span>
-					<span class="text">CPD hours <a target="_blank" href="/pd/cpd-diary"><i class="fa fa-info"></i> Full CPD diary</a></span>
+					<span class="text">CPD hours <a target="_blank" href="/pd/cpd-diary">Full CPD diary</a></span>
 				</div>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bottom-space bottom-section flex-column">
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
-				<span class="small-heading">Your National Groups</span>
+				<span class="small-heading cairo">Your National Groups</span>
 				<div class="col-xs-12 dashboard-content-bottom ng-icons-group">
 
 						<?php 
@@ -356,12 +356,12 @@ $background = getBackgroundImage($userID);
 				<a class="accent-button" href="#"><span>Join more</span></a>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
-					<span class="small-heading">Donate to the PRF</span>
+					<span class="small-heading cairo">Donate to the PRF</span>
 					<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="">
 					<a class="accent-button" href="#"><span>Donate today</span></a>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
-				<span class="small-heading">Suggestions/feedback</span>
+				<span class="small-heading cairo">Suggestions/feedback</span>
 				<span class="dashboard-content-bottom">If you have a question or concern, please don’t hesitate to contact us. We’re always looking for ways to improve our member offering.</span>
 				<a class="accent-button" href="#"><span>Submit</span></a>
 			</div>

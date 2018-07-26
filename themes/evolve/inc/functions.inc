@@ -63,8 +63,8 @@ function nationalIcons(){
 					for($j=$k; $j<$k+4; $j++){
 					if($j<$length){
 						echo "<div class='flex-col-3'>";
-						echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons">';
-						echo '<i class="fa '.$NGs[$j]["NGid"].'">';
+						echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons ng-'.$NGs[$j]["NGid"].'">';
+						echo '<i class="fa">';
 						/*
 						$num = intval($userIcons[$j]);
 						echo '<a href="'.$nationalIcons[$num][0].'" class="icons">';
@@ -96,7 +96,7 @@ function nationalIcons(){
 				for($j=$k; $j<$k+4; $j++){
 				if($j<$length){
 					echo "<div class='flex-col-6 item-container'>";
-					echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons">';
+					echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons ng-'.$NGs[$j]["NGid"].'">';
 					echo '<i class="fa '.$NGs[$j]["NGid"].'">';
 					/*
 					$num = intval($userIcons[$j]);

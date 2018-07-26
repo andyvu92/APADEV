@@ -1502,10 +1502,11 @@ div[aria-describedby="myMap"].ui-dialog {
 }
 div[aria-describedby="loginPopWindow"].ui-dialog {
     z-index: 1054!important;
-    
-	width: 395px!important;
-	top: 574px!important;
-    left: 537px!important;
+    position: fixed;
+    width: 70%!important;
+    max-width: 400px;
+    left: calc(~"50% - 200px")!important;
+    top: 40%!important;
 }
 div[aria-describedby="registerMember"].ui-dialog, div[aria-describedby="signupWebUser"].ui-dialog{
     z-index: 1055!important;
