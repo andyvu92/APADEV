@@ -1560,11 +1560,11 @@ if($resultdata['result']) {
 			   $today = strtotime("today");
 			   $t = $closedate < $today;
 			   if($t) {
-				   echo '<span class="add-to-card disable">Registration closed</span>';
+				   echo '<span class="add-to-card disable '.$pd_detail['Typeofpd'].'">Registration closed</span>';
 			   } elseif ($userTag =="0"){
 				   echo '<a class="add-to-card '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
 			   } else {
-				   echo '<a class="add-to-card" id="registerNonMember"><span>Add to cart</span></a>';
+				   echo '<a class="add-to-card '.$pd_detail['Typeofpd'].'" id="registerNonMember"><span>Add to cart</span></a>';
 			   } 
 			  }	
 		   ?>
