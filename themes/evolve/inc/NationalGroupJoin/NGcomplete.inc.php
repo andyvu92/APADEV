@@ -16,12 +16,6 @@ if(isset($_POST["POSTPRF"])) {
 		array_push($PIDs, $PID);
 		
 	}
-	for($i = 1; $i <= intval($_POST["totalNG"]); $i++) {
-		//$PID["PID"] = $_POST["PID".$i];
-		$PID = $_POST["NG".$i];
-		array_push($PIDs, $PID);
-		
-	}
 	$OrderSend["productID"] = $PIDs;
 	if(isset($_SESSION["tempcard"])){
 		$cardDetails = $_SESSION["tempcard"];
@@ -43,8 +37,6 @@ if(isset($_POST["POSTPRF"])) {
 	$OrderSend['InstallmentFrequency'] = "";
 	$OrderSend['CampaignCode'] = $_POST["CouponCode"];
 	$registerOuts = GetAptifyData("26", $OrderSend);
-	//delete session: really important!!!!!!!!
-	unset($_SESSION["tempcard"]);
 	if($registerOuts['Invoice_ID']!=="0") {
 		$invoice_ID = $registerOuts['Invoice_ID'];
 		
@@ -57,40 +49,23 @@ if(isset($_POST["POSTPRF"])) {
 		$dataArray['ProductList'] = implode(",",$OrderSend["productID"]);
 		$dataArray['Type'] = "P";
 		forCreateRecordFunc($dataArray);
-		
+		//delete session: really important!!!!!!!!
+		unset($_SESSION["tempcard"]);
 		// delete shopping cart data from APA database; put the response status validation here!!!!!!!
 		$userID = $_SESSION["UserId"];
 		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
-		//$type = array("PD","PDNG");
-		
-		//$in  = str_repeat('?,', count($type) - 1) . '?';
+		$type = "PD";
 		try {
-			$type="PD";
-			$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type=:type');
-			$shoppingCartDel->bindValue(':userID', $userID);
-			$shoppingCartDel->bindValue(':type', $type);
-			$shoppingCartDel->execute();
-			$shoppingCartDel = null;
-			$type="PDNG";
 			$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type=:type');
 			$shoppingCartDel->bindValue(':userID', $userID);
 			$shoppingCartDel->bindValue(':type', $type);
 			$shoppingCartDel->execute();
 			$shoppingCartDel = null;
 		}
-		/*
-		try {
-			$type="PDNG";
-			$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type=:type');
-			$shoppingCartDel->bindValue(':userID', $userID);
-			$shoppingCartDel->bindValue(':type', $type);
-			$shoppingCartDel->execute();
-			$shoppingCartDel = null;
-		}*/
 		catch (PDOException $e) {
-				print "Error!: " . $e->getMessage() . "<br/>";
-				die();
-	    }
+			print "Error!: " . $e->getMessage() . "<br/>";
+			die();
+		}    	
 	}
 }
 
@@ -138,7 +113,7 @@ $invoiceAPI = GetAptifyData("18", $apis);
 
 	</div>
 </div>
-<a target="_blank" class="addCartlink" href="../your-purchases"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>
+<a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>
 <style type="text/css">
 	.big-screen {
 		width: 62%;
