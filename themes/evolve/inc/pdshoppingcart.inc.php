@@ -9,7 +9,39 @@ $pdtype= array("event", "course", "workshop");
 $type = "PD";
 $couponCode ="";
 $userID = $_SESSION['UserId'];
+//Post NG Product
+if(isset($_POST["PostNG"])) {
+	$NGPostArray = Array();
+	foreach($_POST as $key => $value){
+		if($key!="PostNG"){
+		array_push($NGPostArray,$key);}
+	}
+	/**
+	 *  Save National Group in PD shopping cart
+	 *  added by jing hu
+	 */
+	
+	foreach($NGPostArray as $NG){
+		checkShoppingCart($userID=$_SESSION['UserId'], $type="PDNG", $productID=$NG,$coupon = "");
+        createShoppingCart($userID, $productID=$NG, $type = "PDNG", $coupon = "");
+		//PDShoppingCart($userID=$_SESSION['UserId'], $productID=$NG, $meetingID="",$type="PDNG",$Coupon="");
+	}
+/***************End Save National Group in PD shopping cart***********/
+}
 
+/**
+ *  Get National Group products for PD shopping cart
+ *  added by jing hu
+ */
+$NGProductsArray = array(); 
+$NGProductsArray = getProduct($userID=$_SESSION['UserId'],$type="PDNG"); 
+
+// 2.2.19 - GET list National Group
+// Send - 
+// userID
+// Response -National Group product
+$sendData["UserID"] = $_SESSION['UserId'];
+$NGListArray = GetAptifyData("19", $sendData);
 /***************get userinfo from Aptify******************/
 if(isset($_SESSION['Dietary'])) {
 	$Dietary = $_SESSION['Dietary'];	
@@ -40,6 +72,7 @@ if(isset($_GET["action"])&&$_GET["action"]=="del"){
 /*********End delete shopping product from APAserver******/
 /********Get user shopping product form APA server******/
 try {
+	$type="PD";
 	$shoppingcartGet= $dbt->prepare('SELECT ID, productID, meetingID,coupon FROM shopping_cart WHERE userID= :userID AND type= :type');
 	$shoppingcartGet->bindValue(':userID', $userID);
 	$shoppingcartGet->bindValue(':type', $type);
@@ -63,7 +96,7 @@ foreach ($productList as $productDetail){
 	$UID = $productDetail['ID'];
 	$Lproduct = array('UID'=>$UID,'ProductID' =>$productID,'MeetingID' =>$meetingID, 'coupon' =>$coupon);
 	array_push($localProducts, $Lproduct);
-	
+		
 	// Eddy's code next 3
 	
 	$PDtotalArray["PDid"] = $Lproduct['MeetingID'];
@@ -73,6 +106,11 @@ foreach ($productList as $productDetail){
 	$PDtotalArray["Coupon"] = $Lproduct['coupon'];
 	$couponCode = $Lproduct['coupon'];
 	array_push($PDarray, $PDtotalArray);
+}
+if(sizeof($NGProductsArray)!=0) {
+	foreach($NGProductsArray as $singleNG){
+		array_push($PDProductarray, $singleNG);
+	}
 }
 
 //$RequestCart = array('Id' => $PIDArray, "userID" => $UserID, "Coupon" => $CouponArray);
@@ -105,7 +143,7 @@ $postScheduleData['PRFdonation'] = "";
 $postScheduleData['productID'] = $PDProductarray;
 $postScheduleData['CampaignCode'] = $couponCode;
 $scheduleDetails = GetAptifyData("47", $postScheduleData);
-$price =$scheduleDetails['OrderTotal'];
+$price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
 //print_r($scheduleDetails);
 /********End get Order Total and Schedule Payments  from Aptify******/
 if(isset($_SESSION["UserId"])){
@@ -159,9 +197,9 @@ if(isset($_SESSION["UserId"])){
 	//header("Location:/sign-in?id=$product_id"); /* Redirect browser */
 //}
 ?>
-
-<?php   if($productList->rowCount()>0):?>
+<?php  if(($productList->rowCount()>0) || (sizeof($NGProductsArray)!=0)):?>
 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 left-content">
+	<?php   if($productList->rowCount()>0):?>
 	<h1 class="SectionHeader">Summary of cart</h1>
 	<div class="brd-headling">&nbsp;</div>
 	
@@ -212,6 +250,8 @@ if(isset($_SESSION["UserId"])){
 			//$price=$price+(int)str_replace('$', '', $productt['Pricelist'][0]['Price']);
 		if (in_array($productt['Typeofpd'],  $pdtype)){ $tag=1; }
 		}
+		
+		
 	?>
 	</div>
 
@@ -255,8 +295,42 @@ if(isset($_SESSION["UserId"])){
 		
 		<span class="note-text">Please note that not all APA PD events include catering.</span>
 	</div>
+	<?php endif; ?>	
+	<?php if(sizeof($NGProductsArray)!=0):?>
+    	<div class="flex-container join-apa-final">
+		    <h1 class="SectionHeader">National Group Product</h1>
+			<div class="flex-cell flex-flow-row table-header">
+				<div class="flex-col-8">
+					<span class="table-heading">Product name</span>
+				</div>
+				<div class="flex-col-2">
+					<span class="table-heading">Price</span>
+				</div>
+				
+			</div>
 
+    			<?php 
+							
+				foreach( $NGListArray as $NGArray){
+				if(sizeof($NGProductsArray)!=0){
+					foreach($NGProductsArray as $NGProduct){
+						if($NGProduct == $NGArray['ProductID']){
+							echo "<div class='flex-cell flex-flow-row table-cell'>";
+							echo "<div class='flex-col-8 title-col'>".$NGArray['ProductName']."</div>";
+							echo "<div class='flex-col-2 price-col'>A$".$NGArray['NGprice']."</div>";
+							//$price += $NGArray['NGprice'];
+							//echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
+							echo "</div>";
+						}	  
+					}
+				}
+				}
+						                       
+				?>
+		</div>
+	<?php endif; ?>		
 </div>
+<?php endif; ?>	
 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 paymentsiderbar">
 	<p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
 		<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
@@ -279,7 +353,7 @@ if(isset($_SESSION["UserId"])){
 			</div>
 		</fieldset>
 	</div>
-<?php endif; ?>
+
 
 	<div class="paymentsideuse <?php if($price==0) echo " display-none";?>">
 	
@@ -338,30 +412,31 @@ if(isset($_SESSION["UserId"])){
 		</form>
 	</div>
 	</div>
-	<?php if($productList->rowCount()>0): ?>    
-	<div class="row">
-		<div class="col-xs-12"><span class="sidebardis">PRF donation</span></div>
-		<div class="col-xs-12 col-md-12">
-			<div class="chevron-select-box">
-				<select class="form-control" id="PRF" name="PRF">
-					<option value="10" selected>$10.00</option>
-					<option value="20">$20.00</option>
-					<option value="50">$50.00</option>
-					<option value="100">$100.00</option>
-					<option value="Other">Other</option>
-				</select>
+	<?php  if(($productList->rowCount()>0) && (sizeof($NGProductsArray)!=0)):?>
+		<div class="row">
+			<div class="col-xs-12"><span class="sidebardis">PRF donation</span></div>
+			<div class="col-xs-12 col-md-12">
+				<div class="chevron-select-box">
+					<select class="form-control" id="PRF" name="PRF">
+						<option value="10" selected>$10.00</option>
+						<option value="20">$20.00</option>
+						<option value="50">$50.00</option>
+						<option value="100">$100.00</option>
+						<option value="Other">Other</option>
+					</select>
+				</div>
+				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="">
+				<a style="color: black;" id="PRFDescription">What is this?</a>
 			</div>
-			<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="">
-			<a style="color: black;" id="PRFDescription">What is this?</a>
 		</div>
-	</div>
 	<?php endif; ?>
 	<?php if(isset($_SESSION["UserId"]) && $productList->rowCount()>0):?><p>
 		<form id="discount" action="pd-shopping-cart" method="POST">
 			<input type="text" name="Couponcode" placeholder="Enter discount code" value="">
 			<button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button>
-		</form></p><br><?php endif; ?>
-		<?php if($productList->rowCount()>0): ?>      
+		</form></p><br>
+	<?php endif; ?>
+		<?php if($productList->rowCount()>0 || sizeof($NGProductsArray)!=0 ): ?>      
 		<div class="row ordersummary"><div class="col-xs-12"><span class="blue-sidebardis">YOUR ORDER</span></div></div>
 		<div class="flex-container flex-flow-column pd-spcart-order">
 			<div class="flex-cell">
@@ -399,7 +474,17 @@ if(isset($_SESSION["UserId"])){
 				}
 				echo '<input type="hidden" name="total" id="total" value="'.$counterTotal.'">';
 			?>
-			
+			<?php
+			if(sizeof($NGProductsArray)!=0) {
+				$ngTotal = count($NGProductsArray);
+				$ct = 0;
+				foreach($NGProductsArray as $NGP) {
+					$ct++;
+					echo '<input type="hidden" name="NG'.$ct.'" id="NG'.$ct.'" value="'.$NGP.'">';
+				}
+				echo '<input type="hidden" name="totalNG" id="totalNG" value="'.$ngTotal.'">';
+			}
+			?>
 			<input class="placeorder" type="submit" value="PLACE YOUR ORDER">
 			<!--a target="_blank" class="addCartlink">
 				<button class="placeorder" type="submit">PLACE YOUR ORDER</button>
@@ -407,8 +492,8 @@ if(isset($_SESSION["UserId"])){
 		</form>
 </div>
 <?php endif; ?>
-<?php if($productList->rowCount()==0): ?>   <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center"><h3 style="color:black;">You do not have any products in your shopping cart.</h3></div>      <?php endif;?>
-<div  class="col-xs-12 bottom-buttons">
+<?php if($productList->rowCount()==0 && sizeof($NGProductsArray)==0) : ?>   <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center"><h3 style="color:black;">You do not have any products in your shopping cart.</h3></div>      <?php endif;?>
+<div class="col-xs-12 bottom-buttons">
  <a target="_blank" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
  <a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update my details</button></a>
 </div>
