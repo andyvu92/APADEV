@@ -671,6 +671,24 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<input type="hidden"  name="Specialty"  <?php   echo 'value="'.$details['Specialty'].'"'; ?>>
 				<div class="row">
 				<div class="col-xs-12 col-md-6">
+					<label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
+					<div class="chevron-select-box">
+					<select class="form-control" id="Branch" name="Branch">
+						<?php 
+							$Branchcode  = file_get_contents("sites/all/themes/evolve/json/Branch.json");
+							$Branch=json_decode($Branchcode, true);
+							foreach($Branch  as $key => $value){
+							echo '<option value="'.$Branch[$key]['Abbreviation'].'"';
+							if ($details['PreferBranch'] == $Branch[$key]['Abbreviation']){ echo "selected='selected'"; } 
+							echo '> '.$Branch[$key]['FullName'].' </option>';
+						
+							}
+						?>
+					</select>
+					</div>
+				</div>
+
+				<div class="col-xs-12">
 					<label for="">Your National group<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
 					<div class="plus-select-box">
 					<select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
@@ -702,23 +720,6 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 				</div>
 
-				<div class="col-xs-12 col-md-6">
-					<label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
-					<div class="chevron-select-box">
-					<select class="form-control" id="Branch" name="Branch">
-						<?php 
-							$Branchcode  = file_get_contents("sites/all/themes/evolve/json/Branch.json");
-							$Branch=json_decode($Branchcode, true);
-							foreach($Branch  as $key => $value){
-							echo '<option value="'.$Branch[$key]['Abbreviation'].'"';
-							if ($details['PreferBranch'] == $Branch[$key]['Abbreviation']){ echo "selected='selected'"; } 
-							echo '> '.$Branch[$key]['FullName'].' </option>';
-						
-							}
-						?>
-					</select>
-					</div>
-				</div>
 				</div>
 				<div class="col-xs-12 display-none" id="ngsports"><input type="checkbox" id="ngsportsbox" name="ngsports" value="0"> <label class="light-font-weight" for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label></div>
 				<div class="col-xs-12 display-none" id="ngmusculo"><input type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"> <label class="light-font-weight" for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label></div>
@@ -728,7 +729,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<?php  
 					if(!empty($details['PSpecialInterestAreaID'])) {$PSpecialInterestAreaID = explode(",",$details['PSpecialInterestAreaID']); } else {$PSpecialInterestAreaID =array();}
 				?>
-				<div class="col-xs-12 col-md-6">
+				<div class="col-xs-12">
 					<label>Tell us what you'd like to know more about</label>
 					<div class="plus-select-box">
 					<select class="chosen-select" id="interest-area" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
@@ -764,7 +765,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					?>	
 				</div>
 
-				<div class="col-xs-12 col-md-6">
+				<div class="col-xs-12">
 				<?php  
 					if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID =array();}
 						
@@ -1002,7 +1003,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						if(!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {$WAdditionalLanguage = explode(",",$details['Workplaces'][$key]['AdditionalLanguage']); } else {$WAdditionalLanguage = array();}
 						
 						?>
-					<div class="col-xs-12 col-md-6">
+					<div class="col-xs-12">
 						<label>What languages do you speak in your professional practice?</label>
 						<div class="plus-select-box">
 						<select class="chosen-select" id="Additionallanguage<?php echo $key;?>" name="Additionallanguage<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">

@@ -308,13 +308,7 @@ div[aria-describedby="uploadImage"] .ui-widget-header{
 div[aria-describedby="uploadImage"] .ui-dialog-content{
     overflow:hidden!important;
 }
-div[aria-describedby="QuatationPopUp"].ui-dialog {
-    z-index: 1050!important;
-    left: 20%!important;
-	top: 47%!important;
-	width: 60%!important;
-	height:36%important;
-}
+
 div[aria-describedby="QuatationPopUp"] .ui-widget-header{
     border:none!important;
 	background-color:white!important;
@@ -809,7 +803,7 @@ input[id^="Additional-qualifications"] {
 }
 
 /*--BUTTON STYLES--*/
-a.accent-btn{
+a.accent-btn, button.accent-btn{
     float: none!important;
     display: inline-block;
     margin-bottom: 20px;
@@ -821,6 +815,52 @@ a.accent-btn{
     font-size: 12px;
     font-weight: 300;
     font-family: 'Roboto';
+    &:hover{
+        color: #fff;
+        opacity: 0.9;
+        cursor: pointer;
+    }
+}
+
+.yes.accent-btn{
+    float: none !important;
+    display: inline-block;
+    margin-bottom: 0px;
+    margin-top: 2px;
+    background-color: #009fda;
+    border-width: 0px !important;
+    color: #fff !important;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    height: 38px;
+    min-width: 100px;
+    text-align: center;
+    font-family: Cairo;
+    font-weight: 700;
+    font-size: 14px;
+    &:hover{
+        color: #fff;
+        opacity: 0.9;
+        cursor: pointer;
+    }
+}
+
+.no.accent-btn{
+    float: none !important;
+    display: inline-block;
+    margin-bottom: 0px;
+    margin-top: 2px;
+    background-color: #009fda;
+    border-width: 0px !important;
+    color: #fff !important;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    height: 38px;
+    min-width: 100px;
+    text-align: center;
+    font-family: Cairo;
+    font-weight: 700;
+    font-size: 14px;
     &:hover{
         color: #fff;
         opacity: 0.9;
@@ -2431,7 +2471,7 @@ form{
 }
 
  /*--RENEW MEMBERSHIP--*/
- #QuatationPopUp{
+ div[aria-describedby="QuatationPopUp"].ui-dialog{
     position: fixed;
     top: 40%!important;
     width: 60%!important;
@@ -2774,4 +2814,13 @@ form{
      .tab-pane{
          width: 100%;
      }
+ }
+
+ /*--POPUP FORMS--*/
+ #setCardForm{
+     text-align: center;
+ }
+
+ #deleteCardWindow{
+     text-align: center;
  }

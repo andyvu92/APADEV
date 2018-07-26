@@ -97,14 +97,14 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			
 			<div class="row">
 				<div class="col-xs-6 col-md-3">
-					<input type="text" class="form-control" name="Yearclaim" id="Yearclaim" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Yearclaim']; }else{ echo 'placeholder="Year of claim"';}?> >
+					<input type="text" class="form-control" name="Yearclaim" id="Yearclaim" placeholder="Year claim" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Yearclaim']; }else{ echo 'placeholder="Year of claim"';}?> >
 				</div>
 				<div class="col-xs-6 col-md-3">
-					<input type="text" class="form-control" name="Nameclaim" id="Nameclaim" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Nameclaim']; }else{ echo 'placeholder="Name of claimant"';}?>>
+					<input type="text" class="form-control" name="Nameclaim" id="Nameclaim" placeholder="Name of claimant" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Nameclaim']; }else{ echo 'placeholder="Name of claimant"';}?>>
 				</div>
 			</div>
 
-			<div class="row"><div class="col-xs-12 col-md-6"><input type="text" class="form-control" name="Fulldescription" id="Fulldescription" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Fulldescription']; }else{ echo 'placeholder="Full description of insurance"';}?>></div></div>
+			<div class="row"><div class="col-xs-12 col-md-6"><textarea rows="5" type="text" class="form-control" name="Fulldescription" id="Fulldescription" placeholder="Full description of insurance" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Fulldescription']; }else{ echo 'placeholder="Full description of insurance"';}?>></div></div>
 			
 			<div class="col-xs-12">
 				<label>Insufficient details in your response may result in additional details being requested</label>
@@ -112,7 +112,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			
 			<div class="row">
 				<div class="col-xs-6 col-md-6">
-					<input type="text" class="form-control" name="Amountpaid" id="Amountpaid" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Amountpaid']; }else{ echo 'placeholder="Amount paid (if nil, please state NIL)"';}?>>
+					<input type="text" class="form-control" name="Amountpaid" id="Amountpaid" placeholder="Amount paid (if nil, please state NIL)" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Amountpaid']; }else{ echo 'placeholder="Amount paid (if nil, please state NIL)"';}?>>
 				</div>
 
 				<div class="col-xs-12">
@@ -129,7 +129,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			</div>
 
 			<div class="row">
-				<div class="col-xs-12 col-md-6"><input type="text" class="form-control" name="Businiessname" id="Businiessname"  <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Businiessname']; }else{ echo 'placeholder="Business name, practice name or trading name owned by you, do not name your employer’s business."';}?>></div>
+				<div class="col-xs-12"><input type="text" class="form-control" name="Businiessname" id="Businiessname" placeholder="Business name, practice name or trading name owned by you, do not name your employer’s business." <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Businiessname']; }else{ echo 'placeholder="Business name, practice name or trading name owned by you, do not name your employer’s business."';}?>></div>
 			</div>
 		</div>
 

@@ -331,8 +331,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?> autoscroll" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-12 col-sm-6"><span class="dashboard-name cairo" style="font-weight: 300;">Your account</span></div>
-			<div class="col-xs-12 col-sm-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
+			<div class="col-xs-12"><span class="dashboard-name cairo" style="font-weight: 300;">Your account</span></div>
+			<div class="col-xs-12 col-sm-6" style="display: none"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
     <?php
 		include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
@@ -442,7 +442,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								</div>
 							</div>
 
-							<div class="col-xs-12 col-sm-6 col-md-6">
+							<div class="col-xs-12">
 								<label>Your dietary requirements</label>
 								<div class="plus-select-box">
 								<select class="chosen-select" id="Dietary" name="Dietary[]" data-placeholder="Your dietary requirements..." multiple>
@@ -740,7 +740,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<input type="text" class="form-control" name="Ahpranumber"  <?php if (empty($details['Ahpranumber'])) {echo "placeholder='AHPRA number'";}   else{ echo 'value="'.$details['Ahpranumber'].'"'; }?>>
 						</div>
 					
-						<div class="col-xs-12 col-md-6">
+						<div class="col-xs-12">
 							<label for="">Your National group</label>
 							<div class="plus-select-box">
 							<select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple disabled data-placeholder="Choose from our 21 National Groups">
@@ -765,11 +765,6 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</select>
 							</div>
 						</div>
-					
-						<div class="col-xs-12 col-md-6">
-							<label for="">Your Regional group</label>
-							<input type="text" class="form-control" name="Regional-group-display"  <?php if (empty($details['Regional-group'])) {echo "placeholder='Your Regional group'";}   else{ echo 'value="'; foreach( $details['Regional-group'] as $key => $value ) {echo $value.", ";} echo '"'; }?> readonly>
-						</div>
 
 						<div class="col-xs-12 col-md-6">
 							<label for="">Your Branch<span class="tipstyle">*</span></label>
@@ -789,11 +784,16 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 						</div>
 
+						<div class="col-xs-12">
+							<label for="">Your Regional group</label>
+							<input type="text" class="form-control" name="Regional-group-display"  <?php if (empty($details['Regional-group'])) {echo "placeholder='Your Regional group'";}   else{ echo 'value="'; foreach( $details['Regional-group'] as $key => $value ) {echo $value.", ";} echo '"'; }?> readonly>
+						</div>
+
 					    <?php  
 						if(!empty($details['PSpecialInterestAreaID'])) {$PSpecialInterestAreaID = explode(",",$details['PSpecialInterestAreaID']); } else {$PSpecialInterestAreaID =array();}
 						
 						?>
-						<div class="col-xs-12 col-sm-6">
+						<div class="col-xs-12">
 							<label>Tell us what you'd like to know more about</label>
 							<div class="plus-select-box">
 							<select class="chosen-select" id="interest-area" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area..."data-placeholder="Choose interest area...">
@@ -845,7 +845,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID =array();}
 						
 						?>
-						<div class="col-xs-12 col-sm-6">
+						<div class="col-xs-12">
 							<label>What languages do you speak in your professional practice?</label>
 							<div class="plus-select-box">
 							<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
@@ -1258,15 +1258,15 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 							</div>
 
-							<div class="col-lg-2">
+							<div class="col-xs-6 col-md-3">
 								<label for="">Area code</label>
 								<input type="text" class="form-control" name="WPhoneAreaCode<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WPhoneAreaCode'])) {echo "placeholder='Phone Area code'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WPhoneAreaCode'].'"'; }?>  maxlength="5">
 							</div>
-							<div class="col-lg-4">
+							<div class="col-xs-6 col-md-3">
 								<label for="">Phone number</label>
 								<input type="text" class="form-control" name="WPhone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  >
 							</div>
-							<div class="col-lg-2">
+							<div class="col-xs-6 col-md-3">
 								<label for="">Extention Number</label>
 								<input type="text" class="form-control" name="WPhoneExtentions<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WPhoneExtentions'])) {echo "placeholder='Extentions Number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WPhoneExtentions'].'"'; }?>  >
 							</div>
@@ -1827,16 +1827,16 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			<form action="your-details?action=delete" method="POST" id="deleteCardForm">
 				<h3>Are you sure you want to delete this card?</h3>
 				<input type="hidden" name="deleteID" id="deleteID" value="">
-				<input type="submit" value="Yes">
-				<a target="_self" class="cancelDeleteButton">No</a>
+				<button class="yes accent-btn" type="submit" value="Yes">Yes</button>
+				<a class="no accent-btn cancelDeleteButton" target="_self">No</a>
 			</form>
 		</div>
 		<div id="setCardWindow" style="display:none;">
 			<form action="your-details" method="POST" id="setCardForm">
 				<h3>Are you sure you do want to set selected car as main creadit card</h3>
 				<input type="hidden" name="setCardID" id="setCardID" value="">
-			    <input type="submit" value="Yes">
-				<a target="_self" class="cancelDeleteButton">No</a>
+			    <button class="yes accent-btn" type="submit" value="Yes">Yes</button>
+				<a class="no accent-btn cancelDeleteButton" target="_self">No</a>
 			</form>
 		</div>
 		<div id="updateCardForm" style="display:none;">

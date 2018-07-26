@@ -161,8 +161,8 @@ if(count($PostArray) == 0) { // GET data
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-12 col-sm-6"><span class="dashboard-name cairo"><strong>Your subscriptions</strong></span></div>
-			<div class="col-xs-12 col-sm-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
+			<div class="col-xs-12"><span class="dashboard-name cairo"><strong>Your subscriptions</strong></span></div>
+			<div class="col-xs-12 col-sm-6" style="display: none"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
 		<?php
 			include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');

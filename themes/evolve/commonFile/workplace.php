@@ -145,7 +145,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 
 <div class="row">
 
-	<div class="col-xs-12 col-md-6">
+	<div class="col-xs-12">
 		<label>What languages do you speak in your professional practice?</label>
 		<div class="chevron-select-box">
 		<select class="chosen-select" multiple id="Additionallanguage'.$i.'" name="Additionallanguage'.$i.'[]">';
