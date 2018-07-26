@@ -10,6 +10,93 @@
 @desktop-width: 1200px;
 @larger-desktop-width: 1500px;
 
+/*--PD TYPE IMAGES--*/
+#section-main-content{
+    .region {
+        .region-right-sidebar, .post-content{
+           .top-banner, .mobile-top-banner{
+               background-size: cover;
+               &.Lecture{
+                border-bottom: 5px solid #ffa02f;
+                background: url(/sites/default/files/pd-featured-images/lecture-image.png) no-repeat center center;
+                    .pd-type{
+                        background: #ffa02f;
+                    }   
+                }
+               &.Branch{
+                border-bottom: 5px solid #00424f;
+                background: url(/sites/default/files/pd-featured-images/branch-image.png) no-repeat center center;
+                    .pd-type{
+                        background: #00424f;
+                    } 
+                }
+               &.College{
+                border-bottom: 5px solid #0772b0;
+                background: url(/sites/default/files/pd-featured-images/college-image.png) no-repeat center center;
+                    .pd-type{
+                        background: #0772b0;
+                    } 
+                }
+               &.Course{
+                border-bottom: 5px solid #5e6067;
+                background: url(/sites/default/files/pd-featured-images/course-mage.png) no-repeat center center;
+                    .pd-type{
+                        background: #5e6067;
+                    }    
+                }
+               &.Masterclass{
+                border-bottom: 5px solid #910674;
+                background: url(/sites/default/files/pd-featured-images/masterclass-image.png) no-repeat center center;
+                    .pd-type{
+                        background: #910674;
+                    }    
+                }
+               &.Symposium{
+                border-bottom: 5px solid #23c1fc;
+                background: url(/sites/default/files/pd-featured-images/symposium-image.png) no-repeat center center;
+                    .pd-type{
+                        background: #23c1fc;
+                    }    
+                }
+               &.Virtual{
+                border-bottom: 5px solid #a2ad00;
+                background: url(/sites/default/files/pd-featured-images/virtual-image.png) no-repeat center center;
+                    .pd-type{
+                        background: #a2ad00;
+                    }    
+                }
+           }
+           .session-cta{
+               #registerPDUserButton{
+                &.Lecture{
+                    background: #ffa02f;
+                   }
+                   &.Branch{
+                    background: #00424f;
+                   }
+                   &.College{
+                    background: #0772b0;
+                   }
+                   &.Course{
+                    background: #5e6067;
+                   }
+                   &.Masterclass{
+                    background: #910674;
+                   }
+                   &.Symposium{
+                    background: #23c1fc;
+                   }
+                   &.Virtual{
+                    background: #a2ad00;
+                   } 
+               }
+           }
+        }
+    }
+}
+
+
+/*--END PD TYPE IMAGES--*/
 
 #section-tagline #block-block-117 .button {
 	color: white !important;
@@ -782,7 +869,6 @@ body.page-node{
                 .top-banner{
                     width: 100%;
                     height: 200px;
-                    border-bottom: 5px solid #ffa02f;
                     position: relative;
                     -webkit-background-size: cover;
                     -moz-background-size: cover;
@@ -791,7 +877,6 @@ body.page-node{
                     .pd-type{
                         position: absolute;
                         bottom: 0;
-                        background: #ffa02f;
                         color: #fff;
                         padding: 10px 30px 5px 30px;
                         font-size: 1em;
@@ -805,10 +890,6 @@ body.page-node{
                     .top-banner, .session-register-info{
                         display: none;
                     }
-                }
-                .lecture-featured-image{
-                    background: url('/sites/default/files/pd-featured-images/lecture-image.png') no-repeat center center;
-                    background-size: cover;
                 }
                 .session-info{
                     .session-calendar{
@@ -913,7 +994,6 @@ body.page-node{
                         cursor: pointer;
                     }
                     .add-to-card{
-                        background: #ffa02f;
                         color: #fff;
                         display: block;
                         text-transform: uppercase;
@@ -1107,7 +1187,6 @@ body.page-node{
                             width: 100vw;
                             margin-left: calc(~'-50vw + 50%');
                             height: 200px;
-                            border-bottom: 5px solid #ffa02f;
                             position: relative;
                             -webkit-background-size: cover;
                             -moz-background-size: cover;
@@ -1116,7 +1195,6 @@ body.page-node{
                             .pd-type{
                                 position: absolute;
                                 bottom: 0;
-                                background: #ffa02f;
                                 color: #fff;
                                 padding: 10px 30px 5px 30px;
                                 font-size: 1em;

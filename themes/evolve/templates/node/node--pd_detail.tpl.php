@@ -463,7 +463,7 @@ if($resultdata['result']) {
 	<div class="post-content">
 	
 	<div class="mobile-banner">
-		<div class="mobile-top-banner lecture-featured-image <?php echo $pd_detail['Typeofpd']; ?>">
+		<div class="mobile-top-banner <?php echo $pd_detail['Typeofpd']; ?>">
 			<span class="pd-type"><?php echo $pd_detail['Typeofpd']; ?></span>
 		</div>
 	</div>
@@ -1419,7 +1419,7 @@ if($resultdata['result']) {
 	  
 	  <!--PD RIGHT SIDEBAR-->
 	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3">
-		<div class="top-banner lecture-featured-image <?php echo $pd_detail['Typeofpd']; ?>">
+		<div class="top-banner <?php echo $pd_detail['Typeofpd']; ?>">
 			<span class="pd-type"><?php echo $pd_detail['Typeofpd']; ?></span>
 		</div>
 
@@ -1562,7 +1562,7 @@ if($resultdata['result']) {
 			   if($t) {
 				   echo '<span class="add-to-card disable">Registration closed</span>';
 			   } elseif ($userTag =="0"){
-				   echo '<a class="add-to-card" id="registerPDUserButton"><span>Add to cart</span></a>';	
+				   echo '<a class="add-to-card '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
 			   } else {
 				   echo '<a class="add-to-card" id="registerNonMember"><span>Add to cart</span></a>';
 			   } 
