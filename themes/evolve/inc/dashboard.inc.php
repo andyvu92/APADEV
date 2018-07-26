@@ -162,7 +162,7 @@ $background = getBackgroundImage($userID);
 <div class="col-xs-12 col-md-10 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-12"><span class="dashboard-name cairo">Hello Michaelangelo<?php echo $user["Preferred-name"]; ?></span></div>
+			<div class="col-xs-12"><span class="dashboard-name cairo">Hello <?php echo $user["Preferred-name"]; ?></span></div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="display: none"><button class="dashboard-backgroud" data-toggle="modal" data-target="#myModal"><span class="customise_background" >Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
 	<?php
@@ -193,27 +193,27 @@ $background = getBackgroundImage($userID);
 						</tr>
 						<tr>
 							<td><strong>AHPRA NO:</strong></td>
-							<td><?php echo $user['Ahpranumber']; ?>0983473482</td>
+							<td><?php echo $user['Ahpranumber']; ?></td>
 						</tr>
 						<tr>
 							<td><strong>Specialty:</strong></td>
-							<td><?php echo $user['Specialty']; ?>Neque porro quisquam est qui dolorem</td>
+							<td><?php echo $user['Specialty']; ?></td>
 						</tr>
 						<tr>
 							<td><strong>Officebearer positions:</strong></td>
-							<td><?php echo $user['Officebearer']; ?>Neque porro quisquam est qui dolorem</td>
+							<td><?php echo $user['Officebearer']; ?></td>
 						</tr>
 						<tr>
 							<td><strong>Your Branch:</strong></td>
-							<td><?php echo $user['HomeBranch']; ?>Victoria</td>
+							<td><?php echo $user['HomeBranch']; ?></td>
 						</tr>
 						<tr>
 							<td><strong>Additional Branch:</strong></td>
-							<td><?php echo $user['PreferBranch']; ?>New South Wales</td>
+							<td><?php echo $user['PreferBranch']; ?></td>
 						</tr>
 						<tr>
 							<td><strong>Primary health care network:</strong></td>
-							<td><?php echo $user['PHN']; ?>Neque porro quisquam est qui dolorem</td>
+							<td><?php echo $user['PHN']; ?></td>
 						</tr>
 						<tr>
 						<?php
@@ -344,7 +344,7 @@ $background = getBackgroundImage($userID);
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bottom-space bottom-section flex-column">
-			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
+			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line" id="national-groups">
 				<span class="small-heading cairo">Your National Groups</span>
 				<div class="col-xs-12 dashboard-content-bottom ng-icons-group">
 
@@ -353,7 +353,7 @@ $background = getBackgroundImage($userID);
 						?>
 
 					</div>
-				<a class="accent-button" href="#"><span>Join more</span></a>
+				<a class="accent-button" href="#" id="ng-join-btn"><span>Join more</span></a>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
 					<span class="small-heading cairo">Donate to the PRF</span>

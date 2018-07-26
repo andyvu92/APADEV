@@ -69,8 +69,8 @@ if(isset($_SESSION["UserId"])) {
 
 	<div class="navbar-collapse">
 		<div class="user-avatar">
-			<a  style="cursor: pointer; color:white;" id="uploadImageButton"><div class="ava-circle" style="background: url(/sites/all/themes/evolve/3591-rod-stewart-pb.jpg) no-repeat center center"></div><img style="display: none" src="https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo/?NoImageObject=CRM.NoPhotoAvailable&amp;ds=636652401978000000"></a> 
-			<span class="user-name cairo"><?php //echo $details['Firstname'].' '.$details['Lastname'];?>Michaelangelo Rodriguez IV</span>
+			<a  style="cursor: pointer; color:white;" id="uploadImageButton"><div class="ava-circle" style="background: url(https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo/?NoImageObject=CRM.NoPhotoAvailable&amp;ds=636652401978000000") no-repeat center center"></div></a> 
+			<span class="user-name cairo"><?php echo $details['Firstname'].' '.$details['Lastname'];?></span>
 		</div>
 		<ul class="nav navbar-nav navbar-left">
 			<li class="dashboard-nav">
