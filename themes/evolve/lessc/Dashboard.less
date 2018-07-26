@@ -92,6 +92,7 @@ body.modal-open {
 .ng-icons-group{
     .icons i{
         width: 65px;
+        min-width: 65px;
         height: 45px;
         background-size: contain;
         background-position: center center;
@@ -193,6 +194,11 @@ body.modal-open {
         &.ng-20{
             i{
                 background-image: url(/sites/default/files/national-group-icons/Sports-B.png);
+            }
+        }
+        &.ng-21{
+            i{
+                background-image: url(/sites/default/files/national-group-icons/Pelvic-Health-B.png);
             }
         }
     }
@@ -1448,13 +1454,13 @@ a#insuranceControl{
             width: 100%;
             span.number{
                 font-size: 4.5em;
-                left: 50%;
+                left: 49%;
                 -webkit-transform: translateX(-50%);
                 transform: translateX(-50%);
             }
             span.text{
                 font-size: 1.6em;
-                margin-left: -44px;
+                margin-left: -48px;
                 top: 81px;
             }
         }
@@ -1480,6 +1486,7 @@ a#insuranceControl{
             @media all and (max-width: @phone-width) {
                 width: 100%;
                 margin-bottom: 50px;
+                padding-right: 15px;
             }
             .circle{
                 width: 200px;
@@ -1649,6 +1656,9 @@ a#insuranceControl{
 #dashboard-right-content{
     .top-info{
         margin-top: 10px;
+        @media all and (max-width: @phone-width) {
+            padding-bottom: 0;
+        }
     }
 }
 

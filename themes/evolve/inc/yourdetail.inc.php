@@ -551,17 +551,17 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['BuildingName'])) {echo "placeholder='Building name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
 							</div>
 							
-							<div class="col-xs-12">
+							<div class="col-xs-12 col-sm-6 col-md-3">
 								<label for="">PO box</label>
 								<input type="text" class="form-control" name="Pobox"  <?php if (!empty($details['Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
 							</div>
 
-							<div class="col-xs-12 col-md-6">
+							<div class="col-xs-12 col-sm-6 col-md-9">
 								<label for="">Address line 1<span class="tipstyle">*</span></label>
 								<input type="text" class="form-control" name="Address_Line_1"  <?php if (empty($details['Unit'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Unit'].'"'; }?> required>
 							</div>
 
-							<div class="col-xs-12 col-md-6">
+							<div class="col-xs-12">
 								<label for="">Address line 2</label>
 								<input type="text" class="form-control" name="Address_Line_2"  <?php if (empty($details['Street'])) {echo "placeholder='Address 2'";}   else{ echo 'value="'.$details['Street'].'"'; }?> required>
 							</div>
@@ -635,17 +635,17 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<input type="text" class="form-control" name="Mailing-BuildingName" id="Mailing-BuildingName"  <?php if (empty($details['Mailing-BuildingName'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?>>
 						</div>
 
-					    <div class="col-xs-12">
+					    <div class="col-xs-12 col-sm-6 col-md-3">
 							<label for="">PO box</label>
 							<input type="text" class="form-control" name="Mailing-PObox" id="Mailing-PObox"  <?php if (!empty($details['Mailing-unitno'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?>>
 						</div>
 
-						<div class="col-xs-12 col-md-6">
+						<div class="col-xs-12 col-sm-6 col-md-9">
 							<label for="">Address line 1<span class="tipstyle">*</span></label>
 							<input type="text" class="form-control" name="Mailing-Address_Line_1" id="Mailing-Address_Line_1"  <?php if (empty($details['Mailing-unitno'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Mailing-unitno'].'"'; }?> required>
 						</div> 
 						
-						<div class="col-xs-12 col-md-6">
+						<div class="col-xs-12">
 							<label for="">Address line 2</label>
 							<input type="text" class="form-control" name="Mailing-Address_Line_2" id="Mailing-Address_Line_2"  <?php if (empty($details['Mailing-streetname'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Mailing-streetname'].'"'; }?> >
 						</div> 
@@ -955,17 +955,17 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<input type="text" class="form-control" name="Shipping-BuildingName" id="Shipping-BuildingName"  <?php if (empty($details['Shipping-BuildingName'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Shipping-BuildingName'].'"'; }?>>
 						</div>
 
-						<div class="col-xs-12">
+						<div class="col-xs-12 col-sm-6 col-md-3">
 							<label for="">PO box</label>
 							<input type="text" class="form-control" name="Shipping-PObox" id="Shipping-PObox"  <?php if (!empty($details['Shipping-unitno'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Shipping-BuildingName'].'"'; }?>>
 						</div>
 
-						<div class="col-xs-12 col-md-6">
+						<div class="col-xs-12 col-sm-6 col-md-9">
 							<label for="">Address line 1<span class="tipstyle">*</span></label>
 							<input type="text" class="form-control" name="Shipping-Address_Line_1" id="Shipping-Address_Line_1"  <?php if (empty($details['Shipping-unitno'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Shipping-unitno'].'"'; }?> required>
 						</div> 
 
-						<div class="col-xs-12 col-md-6">
+						<div class="col-xs-12">
 							<label for="">Address line 2</label>
 							<input type="text" class="form-control" name="Shipping-Address_Line_2" id="Shipping-Address_Line_2"  <?php if (empty($details['Shipping-streetname'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Shipping-streetname'].'"'; }?> required>
 						</div> 
@@ -1040,17 +1040,17 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['BuildingName1'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 						</div>
 
-						<div class="col-xs-12">
+						<div class="col-xs-12 col-sm-6 col-md-3">
 							<label for="">PO box</label>
 							<input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 						</div>
 
-						<div class="col-xs-12 col-md-6">
+						<div class="col-xs-12 col-sm-6 col-md-9">
 							<label for="">Address line 1</label>
 							<input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Address 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?> required>
 						</div>
 
-						<div class="col-xs-12 col-md-6">
+						<div class="col-xs-12">
 							<label for="">Address line 2</label>
 							<input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Street'])) {echo "placeholder='Billing Address 2'";}   else{ echo 'value="'.$details['Billing-Street'].'"'; }?> required>
 						</div>

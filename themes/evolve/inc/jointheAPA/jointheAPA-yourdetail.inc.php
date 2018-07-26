@@ -830,7 +830,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                         </div>
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
                             <label for="">PO box</label>
                             <input type="text" class="form-control" name="Pobox" placeholder='PO box'<?php
     if (empty($details['Pobox'])) {
@@ -841,7 +841,7 @@ if (isset($_SESSION['UserId'])):
 ?>>
                         </div>
                     
-                    <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-12 col-sm-6 col-md-9">
                         <label for="">Address line 1<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1" placeholder='Address 1'<?php
     if (empty($details['Unit'])) {
@@ -851,7 +851,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                     </div>
-                    <div class="col-xs-12 col-md-6">
+                    <div class="col-xs-12">
                         <label for="">Address line 2</label>
                         <input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2" placeholder='Address 2'<?php
     if (empty($details['Street'])) {
@@ -957,7 +957,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                             </div>
-                            <div class="col-xs-12">
+                            <div class="col-xs-12 col-sm-6 col-md-3">
                             <label for="">PO box</label>
                             <input type="text" class="form-control" name="Billing-Pobox" placeholder='PO box'<?php
     if (!empty($details['Billing-Unit'])) {
@@ -968,7 +968,7 @@ if (isset($_SESSION['UserId'])):
 ?>>
                             </div>
                         
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 col-sm-6 col-md-9">
                            <label for="">Address line 1<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" placeholder='Billing Address 1'<?php
     if (empty($details['Billing-Unit'])) {
@@ -978,7 +978,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                         </div>
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12">
                            <label for="">Address line 2</label>
                            <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" placeholder='Billing Address 2'<?php
     if (empty($details['Billing-Street'])) {
@@ -2493,17 +2493,17 @@ if(isset($_GET['MT'])){
                             <input type="text" class="form-control"  name="BuildingName">
                         </div>
 
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
                         <label for="">PO box</label>
                         <input type="text" class="form-control" name="Pobox">
                         </div>
 
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 col-sm-6 col-md-9">
                         <label for="">Address line 1<span class="tipstyle">*</span></label>
                         <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
                         </div>
 
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12">
                             <label for="">Address line 2</label>
                             <input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
                         </div>
@@ -2577,17 +2577,17 @@ if(isset($_GET['MT'])){
                             <input type="text" class="form-control"  name="Billing-BuildingName">
                         </div>
 
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 col-sm-6 col-md-3">
                             <label for="">PO box</label>
                             <input type="text" class="form-control" name="Billing-Pobox" id="Billing-Pobox">
                         </div>
 
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12 col-sm-6 col-md-9">
                            <label for="">Address Line 1<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1">
                         </div>
 
-                        <div class="col-xs-12 col-md-6">
+                        <div class="col-xs-12">
                            <label for="">Address Line 2</label>
                            <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2">
                         </div>
