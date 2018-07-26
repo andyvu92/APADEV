@@ -296,10 +296,12 @@ div[aria-describedby="addPaymentCardForm"] .ui-dialog-content{
     overflow:hidden!important;
 }
 div[aria-describedby="uploadImage"].ui-dialog {
-    z-index: 1050!important;
-    left: 33%!important;
-	top: 47%!important;
-	width: 486px!important;
+    z-index: 1050 !important;
+    position: fixed!important;
+    left: calc(50% - 175px) !important;
+    top: 50% !important;
+    width: 40% !important;
+    max-width: 350px;
 }
 div[aria-describedby="uploadImage"] .ui-widget-header{
     border:none!important;
