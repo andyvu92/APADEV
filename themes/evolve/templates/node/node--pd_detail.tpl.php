@@ -113,16 +113,7 @@ if($resultdata['result']) {
 }
 }
 ?>
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
-	<div class="post-content">
-	
-	<div class="mobile-banner">
-		<div class="mobile-top-banner lecture-featured-image">
-			<span class="pd-type">Lecture:</span>
-		</div>
-	</div>
-
-	<?php 
+<?php 
 	    if(isset($_SESSION["UserId"])&&($_SESSION["UserId"]!="0")){ $userId=$_SESSION["UserId"];
 		} else {$userId="0";}
 		if(isset($_POST["Emailaddress"]) && isset($_POST["Password"])) {
@@ -145,11 +136,13 @@ if($resultdata['result']) {
 			$_SESSION['Dietary'] = $details["Dietary"];
 			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"]);
 		}
-      if(!isset($details)) {
+	if(isset($_SESSION["UserId"])){
+		if(!isset($details)) {
 			$data = "UserID=".$_SESSION["UserId"];
 			$details = GetAptifyData("4", $data,"");
 			$_SESSION['Dietary'] = $details["Dietary"];
-			}
+		}
+	}
 	   $user_membertype ="";
 	   $Job = "";
        $Professionalbody = "";
@@ -466,6 +459,14 @@ if($resultdata['result']) {
 	// in case of user update the details get the new data.
 	
 	?>
+<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
+	<div class="post-content">
+	
+	<div class="mobile-banner">
+		<div class="mobile-top-banner lecture-featured-image">
+			<span class="pd-type"><?php echo $pd_detail['Typeofpd']; ?></span>
+		</div>
+	</div>
 	<div class="region col-xs-12 col-sm-12 col-md-9 left-side-content">
 	    <div id="popUp" style="display:none;"><?php echo $updateNonmemberTag; ?></div>
 		<div id="saveShoppingCart" style="display:none;"><?php echo $saveShoppingCart; ?></div>
@@ -483,7 +484,7 @@ if($resultdata['result']) {
 						echo $pd_detail['Description'];
 					}
 					else{
-						echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+						echo "<h4>No record found!</h4>";
 					}
 					?>
 					</p>
@@ -497,7 +498,7 @@ if($resultdata['result']) {
 							echo $pd_detail['Description'];
 						}
 						else{
-							echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+							echo "<h4>No record found!</h4>";
 						}
 						?>
 					</p>
@@ -521,7 +522,7 @@ if($resultdata['result']) {
 						echo $pd_detail['Learning_outcomes'];
 					}
 					else{
-						echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+						echo "<h4>No record found!</h4>";
 					}
 					?>
 				</p>
@@ -544,7 +545,7 @@ if($resultdata['result']) {
 						echo $pd_detail['Prerequisites'];
 					}
 					else{
-						echo "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dapibus, felis at lobortis imperdiet, est urna aliquet ligula, eget auctor justo mi eu tortor. Proin libero eros, convallis quis molestie ut, sollicitudin rhoncus diam. Aenean eu lacinia ante. Aenean ut eros venenatis, lacinia mauris eget, aliquet magna. Nulla vitae odio ex. Duis pharetra, justo eu lobortis luctus, nibh massa eleifend metus, a venenatis leo diam non orci. Donec bibendum lacinia mauris ac sagittis. Cras laoreet fermentum turpis, et vestibulum sem euismod ultricies.";
+						echo "<h4>No record found!</h4>";
 					}
 					?>
 				</p>
@@ -563,8 +564,13 @@ if($resultdata['result']) {
 				-->
 				<p>
 					<?php 
-					if (!empty($pd_detail['Presenter_bio'])){
-						echo $pd_detail['Presenter_bio'];
+					if (!empty($pd_detail['Presenter'])){
+						foreach($pd_detail['Presenter'] as $bios) {
+							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
+							echo '<p>'.$bios['Comments'].'</p><br>';
+						}
+					}else {
+						echo "<h4>No record found!</h4>";
 					}
 
 					?>
@@ -761,6 +767,7 @@ if($resultdata['result']) {
 			</form>
        
       </div>
+	  <?php if(isset($details)): ?>
 	  <div id="registerMember">
             <form action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" id="registerMemberForm" autocomplete="off">
 			    <input type="hidden" name="updateDetail">
@@ -1170,7 +1177,7 @@ if($resultdata['result']) {
               
             </div>
         </div>   
-        
+        <?php endif;?>
           <div id="jobnoticement">
               <p><span class="registerDes">We’ve noticed you’re not a physiotherapist.</span></p>
               <p>Please note, if a course or event is for registered physiotherapists only. this will be indicated in the event description</p>
@@ -1363,6 +1370,7 @@ if($resultdata['result']) {
 
 <!---End Sign up Web User--->
 <!---Member update detail-->
+ <?php if(isset($details)): ?>
 <div id="registerPDUser">
 	<form action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" autocomplete="off" >
 		<input type="hidden" name="updateDetail">
@@ -1400,6 +1408,7 @@ if($resultdata['result']) {
 
 	</form>
 	</div>
+	<?php endif;?>
 <!--End Member update detail-->
   </div>
 
@@ -1411,7 +1420,7 @@ if($resultdata['result']) {
 	  <!--PD RIGHT SIDEBAR-->
 	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3">
 		<div class="top-banner lecture-featured-image">
-			<span class="pd-type">Lecture:</span>
+			<span class="pd-type"><?php echo $pd_detail['Typeofpd']; ?></span>
 		</div>
 
 		<div class="session-info">
@@ -1489,21 +1498,15 @@ if($resultdata['result']) {
 				<?php 
 				$Totalnumber = $pd_detail['Totalnumber'];
 				$Enrollednumber = $pd_detail['Enrollednumber'];
-				$Now = date('d-m-Y');
-				if(strtotime($Now)> strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+				$Now = strtotime(date('d-m-Y'));
+				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";  
-				}
-				elseif($Totalnumber-$Enrollednumber<=5){
+				} elseif($Totalnumber-$Enrollednumber<=5){
 					echo "Almost Full"; 
-				
-				}
-				elseif(($Totalnumber-$Enrollednumber)==0){
+				} elseif(($Totalnumber-$Enrollednumber)==0){
 					echo "Full"; 
-				
-				}
-				elseif(($Totalnumber-$Enrollednumber)>5){
+				} elseif(($Totalnumber-$Enrollednumber)>5){
 					echo "Open"; 
-				
 				}
 		 		?>
 			</span>
@@ -1511,8 +1514,8 @@ if($resultdata['result']) {
 			<span class="small-heading">CPD hours:</span>
 			<span>
 				<?php 
-				if (!empty($pd_detail['CPD'])){
-					echo $pd_detail['CPD'];
+				if (!empty($pd_detail['CPDhours'])){
+					echo $pd_detail['CPDhours'][0]['EducationUnits'];
 				}
 				 else{
 					 echo 'Not available';
@@ -1611,21 +1614,15 @@ if($resultdata['result']) {
 				<?php 
 				$Totalnumber = $pd_detail['Totalnumber'];
 				$Enrollednumber = $pd_detail['Enrollednumber'];
-				$Now = date('d-m-Y');
-				if(strtotime($Now)> strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+				$Now = strtotime(date('d-m-Y'));
+				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";  
-				}
-				elseif($Totalnumber-$Enrollednumber<=5){
+				} elseif($Totalnumber-$Enrollednumber<=5){
 					echo "Almost Full"; 
-				
-				}
-				elseif(($Totalnumber-$Enrollednumber)==0){
+				} elseif(($Totalnumber-$Enrollednumber)==0){
 					echo "Full"; 
-				
-				}
-				elseif(($Totalnumber-$Enrollednumber)>5){
+				} elseif(($Totalnumber-$Enrollednumber)>5){
 					echo "Open"; 
-				
 				}
 		 		?>
 			</span>
@@ -1633,8 +1630,8 @@ if($resultdata['result']) {
 			<span class="small-heading">CPD hours:</span>
 			<span>
 				<?php 
-				if (!empty($pd_detail['CPD'])){
-					echo $pd_detail['CPD'];
+				if (!empty($pd_detail['CPDhours'])){
+					echo $pd_detail['CPDhours'][0]['EducationUnits'];
 				}
 				 else{
 					 echo 'Not available';
@@ -1683,9 +1680,12 @@ if($resultdata['result']) {
 				-->
 				<p>
 					<?php 
-					if (!empty($pd_detail['Presenter_bio'])){
-						echo $pd_detail['Presenter_bio'];
-					} else {
+					if (!empty($pd_detail['Presenter'])){
+						foreach($pd_detail['Presenter'] as $bios) {
+							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
+							echo '<p>'.$bios['Comments'].'</p><br>';
+						}
+					}else {
 						echo "<h4>No record found!</h4>";
 					}
 					?>
