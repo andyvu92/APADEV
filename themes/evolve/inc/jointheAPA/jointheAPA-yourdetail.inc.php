@@ -1208,7 +1208,28 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-12 col-md-6">
+            <div class="col-xs-12 col-md-6">
+                    <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
+                    <div class="chevron-select-box">
+                    <select class="form-control" id="Branch" name="Branch">
+                    <?php
+    $Branchcode = file_get_contents("sites/all/themes/evolve/json/Branch.json");
+    $Branch     = json_decode($Branchcode, true);
+    foreach ($Branch as $key => $value) {
+        echo '<option value="' . $Branch[$key]['Abbreviation'] . '"';
+        if ($details['PreferBranch'] == $Branch[$key]['Abbreviation']) {
+            echo "selected='selected'";
+        }
+        
+        echo '> ' . $Branch[$key]['FullName'] . ' </option>';
+    }
+    
+?>
+                   </select>
+                   </div>
+                </div>
+
+                <div class="col-xs-12">
                     <label for="">Your National group<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
                     
                     <div class="plus-select-box">
@@ -1256,26 +1277,6 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                     <label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label>
                 </div>
 
-                <div class="col-xs-12 col-md-6">
-                    <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
-                    <div class="chevron-select-box">
-                    <select class="form-control" id="Branch" name="Branch">
-                    <?php
-    $Branchcode = file_get_contents("sites/all/themes/evolve/json/Branch.json");
-    $Branch     = json_decode($Branchcode, true);
-    foreach ($Branch as $key => $value) {
-        echo '<option value="' . $Branch[$key]['Abbreviation'] . '"';
-        if ($details['PreferBranch'] == $Branch[$key]['Abbreviation']) {
-            echo "selected='selected'";
-        }
-        
-        echo '> ' . $Branch[$key]['FullName'] . ' </option>';
-    }
-    
-?>
-                   </select>
-                   </div>
-                </div>
             </div>
             <div class="row"> 
                 
@@ -1287,7 +1288,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
     }
     
 ?>
-               <div class="col-xs-12 col-md-6">
+               <div class="col-xs-12">
                     <label>Tell us what you'd like to know more about</label>
                     
                     <div class="plus-select-box">

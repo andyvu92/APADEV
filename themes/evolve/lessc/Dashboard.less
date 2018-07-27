@@ -208,7 +208,8 @@ body.modal-open {
 
 #block-block-184 .carousel-control.left {
     background-image:none;
-	color:white;
+    color:white;
+    cursor: pointer;
 }
 
 #block-block-184 .carousel-control.right {
@@ -298,7 +299,7 @@ div[aria-describedby="addPaymentCardForm"] .ui-dialog-content{
 div[aria-describedby="uploadImage"].ui-dialog {
     z-index: 1050 !important;
     position: fixed!important;
-    left: calc(50% - 175px) !important;
+    left: calc(~"50% - 175px") !important;
     top: 50% !important;
     width: 40% !important;
     max-width: 350px;
@@ -806,21 +807,24 @@ input[id^="Additional-qualifications"] {
 
 /*--BUTTON STYLES--*/
 a.accent-btn, button.accent-btn{
-    float: none!important;
+    float: none !important;
     display: inline-block;
     margin-bottom: 20px;
     margin-top: 4px;
-	background-color: @bright-blue;
+    background-color: #009fda;
     border-width: 0px !important;
-    color: #fff!important;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 300;
-    font-family: 'Roboto';
+    padding: 3px 20px;
+    color: #fff !important;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Cairo';
     &:hover{
         color: #fff;
         opacity: 0.9;
         cursor: pointer;
+    }
+    .dashboard-button-name{
+        padding: 0;
     }
 }
 
@@ -833,7 +837,7 @@ a.accent-btn, button.accent-btn{
     border-width: 0px !important;
     color: #fff !important;
     text-transform: uppercase;
-    padding: 10px 20px;
+    padding: 5px 20px;
     height: 38px;
     min-width: 100px;
     text-align: center;
@@ -856,7 +860,7 @@ a.accent-btn, button.accent-btn{
     border-width: 0px !important;
     color: #fff !important;
     text-transform: uppercase;
-    padding: 10px 20px;
+    padding: 5px 20px;
     height: 38px;
     min-width: 100px;
     text-align: center;
@@ -875,12 +879,12 @@ a.accent-btn, button.accent-btn{
     margin-bottom: 20px;
     margin-top: 4px;
     padding: 9px 20px;
-	background-color: @bright-blue;
+    background-color: @bright-blue;
     border-width: 0px !important;
-    color: #fff!important;
-    text-transform: uppercase;
-    font-family: 'Roboto';
-    font-weight: 300;
+    color: #fff !important;
+    font-family: 'Cairo';
+    font-weight: 700;
+    font-size: 15px;
     width: auto;
     height: auto;
     span{
@@ -898,15 +902,20 @@ a.accent-btn, button.accent-btn{
 a[class^="join-details-button"], a.accent-right-btn{
     float: none;
     display: inline-block;
-    color: #fff!important;
+    color: #fff !important;
     margin-bottom: 20px;
     margin-top: 4px;
-	background-color: @bright-blue;
+    background-color: #009fda;
     border-width: 0px !important;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 300;
-    font-family: 'Roboto';
+    font-size: 15px;
+    font-weight: 700;
+    font-family: 'Cairo';
+    padding: 3px 20px;
+    min-width: 110px;
+    text-align: center;
+    .dashboard-button-name{
+        padding: 0;
+    }
     &:hover{
         color: #fff;
         opacity: 0.9;
@@ -927,13 +936,18 @@ a[class^="your-details-prevbutton"], a.accent-left-btn{
     float: left;
     margin-bottom: 20px;
     margin-top: 4px;
-	background-color: @bright-blue;
+    background-color: #009fda;
     border-width: 0px !important;
     color: #fff;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 300;
-    font-family: 'Roboto';
+    font-size: 15px;
+    padding: 3px 20px;
+    min-width: 110px;
+    text-align: center;
+    font-weight: 700;
+    font-family: 'Cairo';
+    .dashboard-button-name{
+        padding: 0;
+    }
     &:hover{
         color: #fff;
         opacity: 0.9;
@@ -2066,13 +2080,16 @@ iframe{
             float: left;
             margin-bottom: 20px;
             margin-top: 4px;
-            background-color: @bright-blue;
+            background-color: #009fda;
             border-width: 0px !important;
             color: #fff;
-            text-transform: uppercase;
-            font-size: 12px;
-            font-weight: 300;
-            font-family: 'Roboto';
+            font-size: 15px;
+            padding: 3px 20px;
+            font-weight: 700;
+            font-family: 'Cairo';
+            .dashboard-button-name{
+                padding: 0;
+            }
             &:hover{
                 color: #fff;
                 opacity: 0.9;
@@ -2084,15 +2101,18 @@ iframe{
     .down4{
         .add-additional-qualification{
             float: left;
-            height: 38px;
-            margin-top: 23px;
-            background-color: @bright-blue;
+            margin-bottom: 20px;
+            margin-top: 4px;
+            background-color: #009fda;
             border-width: 0px !important;
             color: #fff;
-            text-transform: uppercase;
-            font-size: 12px;
-            font-weight: 300;
-            font-family: 'Roboto';
+            font-size: 15px;
+            padding: 3px 20px;
+            font-weight: 700;
+            font-family: 'Cairo';
+            .dashboard-button-name{
+                padding: 0;
+            }
             &:hover{
                 color: #fff;
                 opacity: 0.9;
@@ -2480,16 +2500,19 @@ form{
     position: fixed;
     top: 40%!important;
     width: 60%!important;
-    left: 20%;
+    left: 20%!important;
     text-align: center;
     background: #fff;
     z-index: 9999;
      @media all and (max-width: @larger-phone-width) {
-        max-height: 300px;
+        max-height: 500px;
         overflow-y: scroll!important;
-        top: 25% !important;
+        top: 15% !important;
         width: 70%!important;
-        left: 15%;
+        left: 15%!important;
+     }
+     @media all and (max-width: 340px) {
+        max-height: 400px;
      }
      @media all and (max-width: @desktop-width) {
         top: 30%!important;

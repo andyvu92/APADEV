@@ -158,3 +158,4 @@ jQuery(document).ready(function ($) {
     $("#ng-join-btn").html('<span>Join now</span>');
   }
 });
+

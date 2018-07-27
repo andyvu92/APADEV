@@ -110,7 +110,7 @@ if(isset($_SESSION["UserId"])) {
 </div >
 <div id="uploadImage" style="display:none;">
 	<form action="<?php echo $url;?>" method="POST" enctype="multipart/form-data">
-		Select image to upload:
+		<span>Select image to upload:</span>
 		<input type="file" name="fileToUpload" id="fileToUpload">
 		<input type="submit" value="Upload Image" name="PictureUpdate">
 	</form>

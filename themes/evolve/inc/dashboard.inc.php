@@ -162,7 +162,13 @@ $background = getBackgroundImage($userID);
 <div class="col-xs-12 col-md-10 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-12"><span class="dashboard-name cairo">Hello <?php echo $user["Preferred-name"]; ?></span></div>
+			<div class="col-xs-12"><span class="dashboard-name cairo">Hello <?php 
+				if (!empty($user["Preferred-name"])){
+					echo $user["Preferred-name"];
+				} else{
+					echo $user['Firstname'];
+				}
+			?></span></div>
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="display: none"><button class="dashboard-backgroud" data-toggle="modal" data-target="#myModal"><span class="customise_background" >Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
 	<?php

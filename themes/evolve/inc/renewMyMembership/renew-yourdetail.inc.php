@@ -1319,13 +1319,14 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 				<?php endif; ?>
 
-			<div class="col-xs-12">
-				<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>		
-			</div>
-
-			<div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Back</span></a></div>
 		</div>
+		<div class="col-xs-12">
+				<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>		
+		</div>
+		<div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Back</span></a></div>
+
 	</div>
+
 </form>   
 <script type="text/javascript">
 jQuery(document).ready(function($) {
