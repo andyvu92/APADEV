@@ -137,39 +137,39 @@ if(isset($_SESSION["UserId"])&& ($_SESSION["UserId"]!=0)){
 	}	
 }
 ?>
-<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+<div class="col-xs-12">
 <div id="popUp" style="display:none;"><?php echo $wishlistTag; ?></div>
           
 	<h1 class="SectionHeader">Your wishlist</h1>
 	<div class="brd-headling">&nbsp;</div>
 	<?php if(sizeof($wishlists)>0) :?>
-	<table>
-		<tbody>
-		<tr>
-			<th>Product name</th>
-			<th>Date</th>
-			<th>Location</th>
-			<th>Price</th>
-			<th>Action</th>
-			<th>Delete</th>
-		</tr>
+	<div class="flex-container" id="wishlist">
+    <div class="flex-cell flex-flow-row heading-row">
+			<div class="flex-col-3"><span class="table-heading">Product name</span></div>
+			<div class="flex-col-3"><span class="table-heading">Date</span></div>
+			<div class="flex-col-2"><span class="table-heading">Location</span></div>
+			<div class="flex-col-1 price-col"><span class="table-heading">Price</span></div>
+			<div class="flex-col-2 action-col"><span class="table-heading">Action</span></div>
+			<div class="flex-col-1 delete-col"><span class="table-heading">Delete</span></div>
+    </div>
+
 		<?php foreach( $wishlists as $wishlist){
 
-			echo "<tr>";
-			echo	"<td>".$wishlist['ProductName']."</td>";
-			echo	"<td>".$wishlist['BeginDate']."-".$wishlist['EndDate']."</td>";
-			echo	"<td>".$wishlist['Location']."</td>";
-			echo	"<td>".$wishlist['Price']."</td>";
+			echo "<div class='flex-cell flex-flow-row'>";
+			echo	"<div class='flex-col-3'>".$wishlist['ProductName']."</div>";
+			echo	"<div class='flex-col-3'>".$wishlist['BeginDate']."-".$wishlist['EndDate']."</div>";
+			echo	"<div class='flex-col-2'>".$wishlist['Location']."</div>";
+			echo	"<div class='flex-col-1 price-col'>".$wishlist['Price']."</div>";
 			if(strtotime($now)> strtotime(str_replace("/","-",$wishlist['BeginDate']))){
-			echo        "<td>THIS EVENT HAS ALREADY HAPPENED</td>";
+			echo        "<div class='flex-col-3'>THIS EVENT HAS ALREADY HAPPENED</div>";
 		} else {
-			echo        '<td><a target="_self" href="pd-product?id='.$wishlist['Id'].'">ADD TO Cart</a></td>'; }
-			echo        '<td><a target="_self" id="deleteWishlist1" href="pd-wishlist?action=del&wishlistid='.$wishlist['Id'].'" ><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></a></td>';
-			echo "</tr>";    
+			echo        '<div class="flex-col-2 action-col"><a target="_self" href="pd-product?id='.$wishlist['Id'].'">ADD TO Cart</a></div>'; }
+			echo        '<div class="flex-col-1 delete-col"><a target="_self" id="deleteWishlist1" href="pd-wishlist?action=del&wishlistid='.$wishlist['Id'].'" ><i class="fa fa-times-circle fa-2x" aria-hidden="true"></i></a></div>';
+			echo "</div>";    
 		}
 		?>
-		</tbody>
-	</table>
+
+	</div>
 	<?php endif; ?>
 	<?php if(sizeof($wishlists)==0)   { echo '<h3 style="color:black;">You don not have any products in your wishlist.</h3>'; }?>
                  
