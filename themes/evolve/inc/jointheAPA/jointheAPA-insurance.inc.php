@@ -108,7 +108,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 </form>
 <div id="insurancePopUp" style="display:none;">
 	<h3 style="margin-bottom: 20px">Are you sure you want to submit your insurance information?</h3>
-	<span class="note-text" style="display: block; margin-bottom: 10px">This may take a moment while we process your request</span>
+	<span style="display: block; margin-bottom: 20px">This may take a moment while we process your request.</span>
 
 	<a href="javascript:document.getElementById('join-insurance-form2').submit();" style="float:none;" class="join-details-button5"><span class="dashboard-button-name">Yes</span></a>
 	<a target="_self" class="cancelInsuranceButton accent-btn"><span class="dashboard-button-name">No</span></a>

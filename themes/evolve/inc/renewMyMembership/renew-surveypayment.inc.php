@@ -196,7 +196,7 @@ if(isset($_POST['step2-1'])) {
 		</div>
 		<div class="col-xs-12">
 			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked>
-			<label for="addcardtag">Do you want to save this card</label>
+			<label for="addcardtag">Save this card</label>
 		</div>
 		<input type="hidden" name="addCard" value="0">
 	</div>
@@ -247,11 +247,11 @@ if(isset($_POST['step2-1'])) {
 		<div class="row">
 			<div class="col-xs-12">
 				<input class="styled-checkbox" type="checkbox" id="privacy-policy">
-				<label for="privacy-policy" id="privacypolicyl">I agree to Privacy Policy</label>
+				<label for="privacy-policy" id="privacypolicyl">I agree to the APA Privacy Policy</label>
 			</div>
 			<div class="col-xs-12 display-none" id="rolloverblock">
 				<input class="styled-checkbox" type="checkbox" id="instalment-policy">
-				<label for="instalment-policy" id="instalmentpolicyl">I agree to the Instalment Payment Policy</label>
+				<label for="instalment-policy" id="instalmentpolicyl">I agree to the APA Instalment Payment Policy</label>
 			</div>
 			<!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 display-none" id="rolloverblock"><label for="Rollover">Roll over</label><input type="checkbox" name="Rollover" id="Rollover"></div>-->
 		</div>   

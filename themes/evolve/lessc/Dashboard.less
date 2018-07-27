@@ -214,7 +214,8 @@ body.modal-open {
 
 #block-block-184 .carousel-control.right {
     background-image:none;
-	color:white;
+    color:white;
+    cursor: pointer;
 }
 
 .dashboard-button
@@ -229,7 +230,7 @@ body.modal-open {
 }
 
 #block-block-184 .carousel-control{
-  width:2%;
+  width:0%;
 }
 #block-block-184 .carousel-control .glyphicon-chevron-left, #block-block-184 .carousel-control .glyphicon-chevron-right {
 
@@ -287,7 +288,8 @@ div[aria-describedby="addPaymentCardForm"].ui-dialog {
     z-index: 1050!important;
     left: 33%!important;
 	top: 47%!important;
-	width: 486px!important;
+    width: 486px!important;
+    font-family: Roboto;
 }
 div[aria-describedby="addPaymentCardForm"] .ui-widget-header{
     border:none!important;
@@ -295,14 +297,18 @@ div[aria-describedby="addPaymentCardForm"] .ui-widget-header{
 }
 div[aria-describedby="addPaymentCardForm"] .ui-dialog-content{
     overflow:hidden!important;
+    font-family: Roboto;
 }
 div[aria-describedby="uploadImage"].ui-dialog {
     z-index: 1050 !important;
     position: fixed!important;
     left: calc(~"50% - 175px") !important;
-    top: 50% !important;
+    top: 40% !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    border: 0;
     width: 40% !important;
     max-width: 350px;
+    font-family: Roboto;
 }
 div[aria-describedby="uploadImage"] .ui-widget-header{
     border:none!important;
@@ -310,6 +316,7 @@ div[aria-describedby="uploadImage"] .ui-widget-header{
 }
 div[aria-describedby="uploadImage"] .ui-dialog-content{
     overflow:hidden!important;
+    font-family: Roboto;
 }
 
 div[aria-describedby="QuatationPopUp"] .ui-widget-header{
@@ -318,12 +325,14 @@ div[aria-describedby="QuatationPopUp"] .ui-widget-header{
 }
 div[aria-describedby="QuatationPopUp"] .ui-dialog-content{
     overflow:hidden!important;
+    font-family: Roboto;
 }
 div[aria-describedby="insurancePopUp"].ui-dialog {
     z-index: 1050!important;
     left: 33%!important;
 	top: 47%!important;
     width: 486px!important;
+    font-family: Roboto;
     position: fixed;
 }
 div[aria-describedby="insurancePopUp"] .ui-widget-header{
@@ -332,12 +341,14 @@ div[aria-describedby="insurancePopUp"] .ui-widget-header{
 }
 div[aria-describedby="insurancePopUp"] .ui-dialog-content{
     overflow:hidden!important;
+    font-family: Roboto;
 }
 div[aria-describedby="updateCardForm"].ui-dialog {
     z-index: 1050!important;
     left: 33%!important;
 	top: 47%!important;
-	width: 486px!important;
+    width: 486px!important;
+    font-family: Roboto;
 }
 div[aria-describedby="updateCardForm"] .ui-widget-header{
     border:none!important;
@@ -562,6 +573,9 @@ button.deletecardbutton {
     margin-right:0!important;
 	white-space: nowrap;
     border: 0;
+    font-size: 1.25em;
+    color: #009fda;
+    font-family: cairo;
 }
 
 #block-block-220 .nav-tabs>li>a:hover{
@@ -818,6 +832,7 @@ a.accent-btn, button.accent-btn{
     font-size: 15px;
     font-weight: 700;
     font-family: 'Cairo';
+    min-width: 110px;
     &:hover{
         color: #fff;
         opacity: 0.9;
@@ -1012,6 +1027,7 @@ a#insuranceControl{
                 height: 100px;
                 margin: 0 auto;
                 position: relative;
+                background-size: cover!important;
             }
             .user-name{
                 color: #fff;
@@ -1450,6 +1466,14 @@ a#insuranceControl{
                 font-size: 1.6em;
                 margin-left: -38px;
                 top: 80px;
+            }
+        }
+        @media all and (max-width: 1300px) and (min-width: @desktop-width + 1px ){
+            span.number{
+                left: 62%;
+            }
+            span.text{
+                margin-left: -30px;
             }
         }
         @media all and (max-width: @desktop-width) {
@@ -1950,6 +1974,20 @@ iframe{
  /*--YOUR DETAILS--*/
 
  #dashboard-right-content{
+     form{
+         #tabmenu{
+             li{
+                font-size: 1em;
+                color: #000;
+                font-family: cairo;
+                &:hover{
+                    a{
+                        text-decoration: underline;
+                    }
+                }
+             }
+         }
+     }
     .dashboard_detail{
         div[class^="down"]{
             overflow: visible!important;
@@ -2004,8 +2042,13 @@ iframe{
             background: none;
         }
     }
-    .nav-tabs>li>a:hover{
-        border: 0;
+    .nav-tabs>li>a{
+        font-size: 1.25em;
+        color: #009fda;
+        font-family: cairo;
+        &:hover{
+            border: 0;
+        }
     }
 
     input, select, textarea{
@@ -2065,12 +2108,13 @@ iframe{
             font-weight: 400;
         }
         ul.chosen-choices li.search-field{
-            padding-left: 10px;
+            padding-left: 4px;
             input{
                 width: auto!important;
                 min-width: 650px;
                 font-weight: 300;
                 font-family: Roboto;
+                color: darkgrey;
             }
         }
     }
@@ -2496,6 +2540,14 @@ form{
 }
 
  /*--RENEW MEMBERSHIP--*/
+ .ui-dialog{
+     font-family: Roboto;
+     .doc-header{
+        color: #000;
+        font-size: 120%;
+        font-weight: 600;   
+     }
+ }
  div[aria-describedby="QuatationPopUp"].ui-dialog{
     position: fixed;
     top: 40%!important;
@@ -2527,7 +2579,14 @@ form{
     text-align: center;
 }
 
+.form-control{
+    padding-left: 10px;
+}
+
 #dashboard-right-content{
+    .form-control{
+        padding-left: 10px;
+    }
     .dashboard_detail{
         @media all and (max-width: @larger-phone-width ) {
             .nav-tabs{
@@ -2814,9 +2873,16 @@ form{
       }
  }
  
+ .page-node-154, .page-node-211, .page-node-209, 
+ .page-node-207, .page-node-385{
+    .dexp-body-inner{
+        #section-content-top{
+            border-bottom: 30px solid #009fda;
+        }
+     }
+ }
  .dexp-body-inner{
     #section-content-top{
-        border-bottom: 30px solid #009fda;
         @media all and (max-width: @tablet-width) {
             padding: 0;
         }

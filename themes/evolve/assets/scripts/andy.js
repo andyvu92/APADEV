@@ -159,3 +159,6 @@ jQuery(document).ready(function ($) {
   }
 });
 
+//IMAGE UPLOAD BOX
+
+
