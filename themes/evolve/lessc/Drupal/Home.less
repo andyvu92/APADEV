@@ -129,6 +129,86 @@ div[id^="home-tile-view-block"] .homeBottom .content .item-description .NextIcon
 	width: 31px;
 	height: 31px;
 }
+div.ButtonIconHolder {
+	width: 70px;
+	height: 40px;
+	overflow: hidden;
+	transition: 0.3s;
+	-webkit-transition-timing-function: cubic-bezier(0.2,0.45,0.75,0.8);
+	transition-timing-function: cubic-bezier(0.2,0.45,0.75,0.8);
+	.OtherSites {
+		background-image: url('/sites/default/files/OTHER SITES G 22X18.png');
+		width: 22px;
+		height: 20px;
+		margin: 10px auto 0px;
+		&:hover {
+			background-image: url('/sites/default/files/OTHER SITES B 22X18.png');
+		}
+	}
+	.ShoppingCartEmpty {
+		background-image: url('/sites/default/files/SHOPPING CART G 24X18.png');
+		width: 24px;
+		height: 20px;
+		margin: 10px auto 0px;
+	}
+	.ShoppingCart {
+		background-image: url('/sites/default/files/SHOPPING CART B 24X18.png');
+		background-position: 0 20px;
+		width: 24px;
+		height: 20px;
+		margin: 10px auto 0px;
+	}
+	.Log-in {
+		background-image: url('/sites/default/files/MEMBER ICON.png');
+		background-position: 0 0;
+		width: 20px;
+		height: 20px;
+		padding: 2px 8px;
+		margin-right: 5px;
+	}
+	.Log-out {
+		background-image: url('/sites/default/files/MEMBER ICON.png');
+		background-position: 0 60px;
+		width: 20px;
+		height: 20px;
+		float: left;
+		margin: 8px 0 0 14px;
+	}
+}
+div.borderLeftForTop {
+	border-left: rgba(0,0,0,0.1) 2px solid;
+}
+div.borderLeftForTopRight {
+	border-right: rgba(0,0,0,0.1) 2px solid;
+}
+div.LogInOutPadding {
+	width: 110px;
+}
+div.withButtonIcon {
+	width: 105px;
+	height: 40px;
+	margin: auto;
+}
+.LogInOutPadding .info {
+	width: 105px;
+    height: 38px;
+    margin: auto;
+    padding: 7px 0 2px;
+    background-color: transparent;
+    border: none;
+	.withButtonIcon {
+		height: 24px;
+	}
+}
+div.withButtonIcon  input{
+	background-color:transparent;
+	padding: 10px 0 0 10px;
+	font-weight: 200;
+	font-size: 13px;
+}
+div#logoutButton, div#loginButton {
+	cursor: pointer;
+}
 @media screen and (max-width: 767px) {
 	div[id^="home-tile-view-block"] .homeBottom .content .portfolio-image {
 		margin: 15px 0;
