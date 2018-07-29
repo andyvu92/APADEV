@@ -452,10 +452,9 @@ if (isset($_POST['step1'])) {
     } else {
         
         // for new user join a member call user registeration web service
-        
+       
         $resultdata = GetAptifyData("25", $postData);
-        //print_r($resultdata);
-        
+		        
         // when create user successfully call login web service to login in APA website automatically.
         // after login successfully get UserID as well to store on APA shopping cart database
         
@@ -572,6 +571,7 @@ if (isset($_SESSION['UserId'])):
         echo 'style="display:block;"';
     }
 ?>>
+    
                             <div class="row">
                                 <div class="col-xs-6 col-md-3">
                                         <label for="prefix">Prefix</label>
@@ -594,7 +594,7 @@ if (isset($_SESSION['UserId'])):
                            </div>
                     </div>
                     <div class="col-xs-6 col-md-3">
-                        <label for="">Given name<span class="tipstyle">*</span></label>
+                        <label for="">Given name<span class="tipstyle"> *</span></label>
                         <input type="text" class="form-control"  name="Firstname" placeholder="Given name"<?php
     if (empty($details['Firstname'])) {
         echo "";
@@ -637,7 +637,7 @@ if (isset($_SESSION['UserId'])):
 ?>>
                     </div>
                     <div class="col-xs-6 col-md-3">
-                       <label for="">Family name<span class="tipstyle">*</span></label>
+                       <label for="">Family name<span class="tipstyle"> *</span></label>
                        <input type="text" class="form-control" name="Lastname" placeholder='Family name'<?php
     if (empty($details['Lastname'])) {
         echo "";
@@ -647,7 +647,7 @@ if (isset($_SESSION['UserId'])):
 ?>>
                     </div>
                     <div class="col-xs-6 col-md-3">
-                       <label for="">Birth Date<span class="tipstyle">*</span></label>
+                       <label for="">Birth Date<span class="tipstyle"> *</span></label>
                        <input type="date" class="form-control" name="Birth" placeholder='DOB'<?php
     if (empty($details['birth'])) {
         echo "";
@@ -657,7 +657,7 @@ if (isset($_SESSION['UserId'])):
 ?>>
                     </div>
                     <div class="col-xs-6 col-md-3">
-                       <label for="">Gender<span class="tipstyle">*</span></label>
+                       <label for="">Gender</label>
                        <div class="chevron-select-box">
                        <select class="form-control" id="Gender" name="Gender" required>
                         <?php
@@ -668,7 +668,9 @@ if (isset($_SESSION['UserId'])):
         if ($details['Gender'] == $Gender[$key]['ID']) {
             echo "selected='selected'";
         }
-        
+        if (empty($details['Gender']) && $Gender[$key]['ID']=="2" ) {
+            echo "selected='selected'";
+        }
         echo '> ' . $Gender[$key]['Description'] . ' </option>';
     }
     
@@ -679,7 +681,7 @@ if (isset($_SESSION['UserId'])):
 
                         <div class="row">
                             <div class="col-xs-12">
-                                <label for="">Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span></label>
+                                <label for="">Aboriginal and Torres Strait Islander origin<span class="tipstyle"> *</span></label>
                             </div>
 
                             <div class="col-xs-12 col-md-6" style="margin: 0">
@@ -749,7 +751,7 @@ if (isset($_SESSION['UserId'])):
 ?>  maxlength="5">
                         </div>
                         <div class="col-xs-12 col-md-3">
-                            <label for="">Phone number<span class="tipstyle">*</span></label>
+                            <label for="">Phone number</label>
                             <input type="text" class="form-control" name="phone-number" placeholder='Phone number'<?php
     if (empty($details['Home-phone-number'])) {
         echo "";
@@ -803,7 +805,7 @@ if (isset($_SESSION['UserId'])):
 ?>  maxlength="5">
                         </div>
                         <div class="col-xs-12 col-md-3">
-                            <label for="">Mobile number<span class="tipstyle">*</span></label>
+                            <label for="">Mobile number</label>
                             <input type="text" class="form-control" name="phone-number" placeholder='Mobile number'<?php
     if (empty($details['Mobile-number'])) {
         echo "";
@@ -842,7 +844,7 @@ if (isset($_SESSION['UserId'])):
                         </div>
                     
                     <div class="col-xs-12 col-sm-6 col-md-9">
-                        <label for="">Address line 1<span class="tipstyle">*</span></label>
+                        <label for="">Address line 1<span class="tipstyle"> *</span></label>
                         <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1" placeholder='Address 1'<?php
     if (empty($details['Unit'])) {
         echo "";
@@ -865,7 +867,7 @@ if (isset($_SESSION['UserId'])):
                     <!--BREAK-->
 
                     <div class="col-xs-6 col-md-3">
-                        <label for="">City or town<span class="tipstyle">*</span></label>
+                        <label for="">City or town<span class="tipstyle"> *</span></label>
                         <input type="text" class="form-control" name="Suburb" id="Suburb" placeholder='City or town'<?php
     if (empty($details['Suburb'])) {
         echo "";
@@ -876,7 +878,7 @@ if (isset($_SESSION['UserId'])):
                     </div>
                     
                     <div class="col-xs-6 col-md-3">
-                        <label for="">Postcode<span class="tipstyle">*</span></label>
+                        <label for="">Postcode<span class="tipstyle"> *</span></label>
                         <input type="text" class="form-control" name="Postcode" id="Postcode" placeholder='Postcode'<?php
     if (empty($details['Postcode'])) {
         echo "";
@@ -909,7 +911,7 @@ if (isset($_SESSION['UserId'])):
                        </div>
                     </div>
                     <div class="col-xs-6 col-md-3">
-                        <label for="">Country<span class="tipstyle">*</span></label>
+                        <label for="">Country<span class="tipstyle"> *</span></label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="Country3" name="Country">
                         <?php
@@ -969,7 +971,7 @@ if (isset($_SESSION['UserId'])):
                             </div>
                         
                         <div class="col-xs-12 col-sm-6 col-md-9">
-                           <label for="">Address line 1<span class="tipstyle">*</span></label>
+                           <label for="">Address line 1<span class="tipstyle"> *</span></label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" placeholder='Billing Address 1'<?php
     if (empty($details['Billing-Unit'])) {
         echo "";
@@ -992,7 +994,7 @@ if (isset($_SESSION['UserId'])):
                         <!--BREAK-->
 
                         <div class="col-xs-6 col-md-3">
-                           <label for="">City or town<span class="tipstyle">*</span></label>
+                           <label for="">City or town<span class="tipstyle"> *</span></label>
                            <input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" placeholder='Billing City/Town'<?php
     if (empty($details['Billing-Suburb'])) {
         echo "";
@@ -1002,7 +1004,7 @@ if (isset($_SESSION['UserId'])):
 ?>>
                         </div>
                         <div class="col-xs-6 col-md-3">
-                           <label for="">Postcode<span class="tipstyle">*</span></label>
+                           <label for="">Postcode<span class="tipstyle"> *</span></label>
                            <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" placeholder='Billing Postcode'<?php
     if (empty($details['Billing-Postcode'])) {
         echo "";
@@ -1037,7 +1039,7 @@ if (isset($_SESSION['UserId'])):
                            </div>
                         </div>
                         <div class="col-xs-6 col-md-3">
-                           <label for="">Country<span class="tipstyle">*</span></label>
+                           <label for="">Country<span class="tipstyle"> *</span></label>
                               <div class="chevron-select-box">
                               <select class="form-control" id="Country4" name="Billing-Country" required>
                             <?php
@@ -1139,7 +1141,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                 <div class="col-xs-12 col-md-6">
-                    <label for="">Member ID (email address)<span class="tipstyle">*</span></label>
+                    <label for="">Member ID (Your email address)<span class="tipstyle"> *</span></label>
                     <input type="text" class="form-control" name="Memberid" placeholder='Member no.'<?php
     if (empty($details['Memberid'])) {
         echo "";
@@ -1150,13 +1152,13 @@ if (isset($_SESSION['UserId'])):
                 </div>
                 
                 <div class="col-xs-12 col-md-6">
-                    <label for="">Member Type<span class="tipstyle">*</span></label>
+                    <label for="">Member Category<span class="tipstyle"> *</span></label>
                     <div class="chevron-select-box">
                     <select class="form-control" id="MemberType" name="MemberType">
                         <option value="" <?php
     if (!isset($_SESSION["MembershipProductID"]))
         echo "selected='selected'";
-?> disabled>Member type</option>    
+?> disabled>Member Category</option>    
                     <?php
 // 2.2.31 Get Membership prodcut price
 // Send - 
@@ -1257,7 +1259,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                 </div>
 
                 <div class="col-xs-12 col-md-6">
-                    <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
+                    <label for="">What branch would you like to join?<span class="tipstyle"> *</span></label>
                     <div class="chevron-select-box">
                     <select class="form-control" id="Branch" name="Branch">
                     <?php
@@ -1288,7 +1290,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
     
 ?>
                <div class="col-xs-12 col-md-6">
-                    <label>Tell us what you'd like to know more about</label>
+                    <label>Choose as many interest areas as you like from the list below</label>
                     
                     <div class="plus-select-box">
                     <select class="chosen-select" id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
@@ -1357,7 +1359,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
     
 ?>
                <div class="col-xs-12">
-                    <label>What languages do you speak in your professional practice?</label>
+                    <label>Choose the languages you speak in your practice?</label>
                     
                     <div class="plus-select-box">
                     <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
@@ -1498,7 +1500,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                         <!--BREAK-->
 
                         <div class="col-xs-12">
-                            <label for="Name-of-workplace">Practice name<span class="tipstyle">*</span></label>
+                            <label for="Name-of-workplace">Practice name<span class="tipstyle"> *</span></label>
                             <input type="text" class="form-control" name="Name-of-workplace<?php
                                         echo $key;
                                 ?>" id="Name-of-workplace<?php
@@ -1538,7 +1540,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 ?>>
                         </div>
                         <div class="col-xs-12 col-md-6">
-                            <label for="WAddress_Line_1">Address line 1<span class="tipstyle">*</span></label>
+                            <label for="WAddress_Line_1">Address line 1<span class="tipstyle"> *</span></label>
                             <input type="text" class="form-control" name="WAddress_Line_1<?php
         echo $key;
 ?>" id="WAddress_Line_1<?php
@@ -1569,7 +1571,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                         <!--BREAK-->
 
                         <div class="col-xs-6 col-md-3">
-                            <label for="Wcity">City/Town<span class="tipstyle">*</span></label>
+                            <label for="Wcity">City/Town<span class="tipstyle"> *</span></label>
                             <input type="text" class="form-control" name="Wcity<?php
         echo $key;
 ?>" id="Wcity<?php
@@ -1583,7 +1585,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 ?>>
                         </div>
                         <div class="col-xs-6 col-md-3">
-                            <label for="Wpostcode">Postcode<span class="tipstyle">*</span></label>
+                            <label for="Wpostcode">Postcode<span class="tipstyle"> *</span></label>
                             <input type="text" class="form-control" name="Wpostcode<?php
         echo $key;
 ?>" id="Wpostcode<?php
@@ -1627,7 +1629,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                         <div class="col-xs-6 col-md-3">
                             <label for="Wcountry<?php
         echo $key;
-?>">Country<span class="tipstyle">*</span></label>
+?>">Country<span class="tipstyle"> *</span></label>
                             <div class="chevron-select-box">
                             <select class="form-control" id="Wcountry<?php
         echo $key;
@@ -1657,7 +1659,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 
                         <div class="row">
                             <div class="col-xs-6 col-md-3">
-                                <label for="Wemail">Workplace email<span class="tipstyle">*</span></label>
+                                <label for="Wemail">Workplace email</label>
                                 <input type="email" class="form-control" name="Wemail<?php
                                         echo $key;
                                 ?>" id="Wemail<?php
@@ -1753,7 +1755,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                     
                         <div class="row">
                             <div class="col-xs-12">
-                                <label>What languages do you speak in your professional practice?</label>
+                                <label>Choose the languages you speak in your practice?</label>
                                 <?php
         if (!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {
             $WAdditionalLanguage = explode(",", $details['Workplaces'][$key]['AdditionalLanguage']);
@@ -1785,7 +1787,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-6">
-                                <label>Quality In Practice number(QIP):</label>
+                                <label>Quality In Practice number(QIP)</label>
                                 <input type="text" class="form-control" name="QIP<?php
         echo $key;
 ?>" id="QIP<?php
@@ -1949,7 +1951,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 
                         <div class="row">
                         <div class="col-xs-12 col-md-6">
-                            <label>Workplace setting<span class="tipstyle">*</span></label>
+                            <label>Workplace setting<span class="tipstyle"> *</span></label>
                             <div class="chevron-select-box">
                             <select class="form-control" id="Workplace-setting<?php
                                             echo $key;
@@ -1979,7 +1981,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                         </div>
 
                             <div class="col-xs-12 col-md-6">
-                            <label>Numbers of hours worked<span class="tipstyle">*</span></label>    
+                            <label>Numbers of hours worked<span class="tipstyle"> *</span></label>    
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="Number-worked-hours<?php
                                     echo $key;
@@ -2037,7 +2039,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             <div class="col-xs-12 col-sm-6">
                                 <label for="Udegree<?php
         echo $key;
-?>">Level of qualification<span class="tipstyle">*</span></label>
+?>">Level of qualification<span class="tipstyle"> *</span></label>
                                 <?php
         $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
         $degree             = json_decode($degreecode, true);
@@ -2094,7 +2096,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             <div class="col-xs-12 col-sm-6">
                                 <label for="Undergraduateuniversity-name<?php
         echo $key;
-?>">University name<span class="tipstyle">*</span></label>
+?>">University name<span class="tipstyle"> *</span></label>
                                 <?php
         $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
         $University             = json_decode($universityCode, true);
@@ -2150,7 +2152,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             <div class="col-xs-6 col-sm-3 col-md-3">
                                                             <label for="Ugraduate-yearattained<?php
                                     echo $key;
-                            ?>">Year attained<span class="tipstyle">*</span></label>
+                            ?>">Year attained<span class="tipstyle"> *</span></label>
                                                             <div class="chevron-select-box">
                                                             <select class="form-control" name="Ugraduate-yearattained<?php
                                     echo $key;
@@ -2176,7 +2178,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             <div class="col-xs-6 col-sm-9 col-md-9">
                                 <label for="Ugraduate-country<?php
         echo $key;
-?>">Country<span class="tipstyle">*</span></label>
+?>">Country<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="Ugraduate-country<?php
         echo $key;
@@ -2211,7 +2213,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 					<div id="additional0">
 					   <div class="row">
                             <div class="col-xs-12 col-sm-6">
-                                <label for="Udegree">Degree<span class="tipstyle">*</span></label>
+                                <label for="Udegree">Degree<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Udegree0" id="Udegree0">
                                     <?php
@@ -2232,7 +2234,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
-                                <label for="Undergraduateuniversity-name0">University name<span class="tipstyle">*</span></label>
+                                <label for="Undergraduateuniversity-name0">University name<span class="tipstyle"> *</span></label>
                                 <?php
                                     $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
                                     $University             = json_decode($universityCode, true);
@@ -2255,7 +2257,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 
 						<div class="row">
                             <div class="col-xs-6 col-sm-3">
-                                <label for="Ugraduate-yearattained0">Year attained<span class="tipstyle">*</span></label>
+                                <label for="Ugraduate-yearattained0">Year attained<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
                                 <?php
@@ -2269,7 +2271,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             </div>
 
                             <div class="col-xs-6 col-sm-9">
-                                <label for="Ugraduate-country0">Country<span class="tipstyle">*</span></label>
+                                <label for="Ugraduate-country0">Country<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="Ugraduate-country0" name="Ugraduate-country0">
                                 <?php
@@ -2324,6 +2326,7 @@ if(isset($_GET['MT'])){
         echo 'style="display:block;"';
     }
 ?>>
+	
                     <div class="row">
                         <div class="col-xs-6 col-md-3">
                             <label for="prefix">Prefix</label>
@@ -2346,7 +2349,7 @@ if(isset($_GET['MT'])){
                         </div>
                         
                         <div class="col-xs-6 col-md-3">
-                           <label for="">Given name<span class="tipstyle">*</span></label>
+                           <label for="">Given name<span class="tipstyle"> *</span></label>
                            <input type="text" class="form-control"  name="Firstname">
                         </div>
                         <div class="col-xs-6 col-md-3">
@@ -2365,16 +2368,16 @@ if(isset($_GET['MT'])){
                            <input type="text" class="form-control" name="Maiden-name">
                         </div>
                         <div class="col-xs-6 col-md-3">
-                           <label for="">Family name<span class="tipstyle">*</span></label>
+                           <label for="">Family name<span class="tipstyle"> *</span></label>
                            <input type="text" class="form-control" name="Lastname">
                         </div>
 
                         <div class="col-xs-6 col-md-3">
-                           <label for="">Birth Date<span class="tipstyle">*</span></label>
+                           <label for="">Birth Date<span class="tipstyle"> *</span></label>
                            <input type="date" class="form-control" name="Birth">
                         </div>
                         <div class="col-xs-6 col-md-3">
-                           <label for="">Gender<span class="tipstyle">*</span></label>
+                           <label for="">Gender</label>
                            <div class="chevron-select-box">
                            <select class="form-control" id="Gender" name="Gender">
                              <?php
@@ -2382,6 +2385,7 @@ if(isset($_GET['MT'])){
     $Gender     = json_decode($Gendercode, true);
     foreach ($Gender as $key => $value) {
         echo '<option value="' . $Gender[$key]['ID'] . '"';
+		if($Gender[$key]['ID'] =="2") {echo "selected='selected'";}
         echo '> ' . $Gender[$key]['Description'] . ' </option>';
     }
     
@@ -2392,7 +2396,7 @@ if(isset($_GET['MT'])){
 
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
-                            <label for="">Aboriginal and Torres Strait Islander origin<span class="tipstyle">*</span></label>
+                            <label for="">Aboriginal and Torres Strait Islander origin<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="Aboriginal" name="Aboriginal">
 									<option value="" selected disabled>Please select</option>
@@ -2440,7 +2444,7 @@ if(isset($_GET['MT'])){
                                 <input type="text" class="form-control" name="area-code" maxlength="5">
                             </div>
                             <div class="col-xs-12 col-md-3">
-                                <label for="">Phone number<span class="tipstyle">*</span></label>
+                                <label for="">Phone number</label>
                                 <input type="text" class="form-control" name="phone-number" >
                             </div>
                         </div>
@@ -2477,7 +2481,7 @@ if(isset($_GET['MT'])){
                                 <input type="text" class="form-control" name="Mobile-area-code"  maxlength="5">
                             </div>
                             <div class="col-xs-12 col-md-3">
-                                <label for="">Mobile number<span class="tipstyle">*</span></label>
+                                <label for="">Mobile number</label>
                                 <input type="text" class="form-control" name="Mobile-number">
                             </div>
                         </div>
@@ -2499,7 +2503,7 @@ if(isset($_GET['MT'])){
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-9">
-                        <label for="">Address line 1<span class="tipstyle">*</span></label>
+                        <label for="">Address line 1<span class="tipstyle"> *</span></label>
                         <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
                         </div>
 
@@ -2511,12 +2515,12 @@ if(isset($_GET['MT'])){
                             <!--BREAK-->
 
                         <div class="col-xs-6 col-md-3">
-                            <label for="">City or town<span class="tipstyle">*</span></label>
+                            <label for="">City or town<span class="tipstyle"> *</span></label>
                             <input type="text" class="form-control" name="Suburb" id="Suburb">
                         </div>
 
                         <div class="col-xs-6 col-md-3">
-                            <label for="">Postcode<span class="tipstyle">*</span></label>
+                            <label for="">Postcode<span class="tipstyle"> *</span></label>
                             <input type="text" class="form-control" name="Postcode" id="Postcode">
                         </div>
 
@@ -2540,7 +2544,7 @@ if(isset($_GET['MT'])){
 
                         </div>
                         <div class="col-xs-6 col-md-3">
-                            <label for="">Country<span class="tipstyle">*</span></label>
+                            <label for="">Country<span class="tipstyle"> *</span></label>
                             <div class="chevron-select-box">
                             <select class="form-control" id="Country1" name="Country">
                             <?php
@@ -2583,7 +2587,7 @@ if(isset($_GET['MT'])){
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-9">
-                           <label for="">Address Line 1<span class="tipstyle">*</span></label>
+                           <label for="">Address Line 1<span class="tipstyle"> *</span></label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1">
                         </div>
 
@@ -2595,11 +2599,11 @@ if(isset($_GET['MT'])){
                         <!--BREAK-->
 
                         <div class="col-xs-6 col-md-3">
-                           <label for="">City or town<span class="tipstyle">*</span></label>
+                           <label for="">City or town<span class="tipstyle"> *</span></label>
                            <input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb">
                         </div>
                         <div class="col-xs-6 col-md-3">
-                           <label for="">Postcode<span class="tipstyle">*</span></label>
+                           <label for="">Postcode<span class="tipstyle"> *</span></label>
                            <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode">
                         </div>
                         <div class="col-xs-6 col-md-3">
@@ -2621,7 +2625,7 @@ if(isset($_GET['MT'])){
                           </div>
                         </div>
                         <div class="col-xs-6 col-md-3">
-                           <label for="">Country<span class="tipstyle">*</span></label>
+                           <label for="">Country<span class="tipstyle"> *</span></label>
                                <div class="chevron-select-box">
                                <select class="form-control" id="Country2" name="Billing-Country">
                             <?php
@@ -2679,7 +2683,7 @@ if(isset($_GET['MT'])){
             <div class="down2" style="display:none;" >
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
-                        <label for="">Member ID (email address)<span class="tipstyle">*</span></label>
+                        <label for="">Member ID (Your email address)<span class="tipstyle"> *</span></label>
                         <input type="email" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)">
                     <div id="checkMessage"></div>
                     <script>
@@ -2710,12 +2714,12 @@ if(isset($_GET['MT'])){
                     </div>
 
                     <div class="col-xs-6 col-md-3">
-                        <label for="">Your password<span class="tipstyle">*</span></label>
+                        <label for="">Your password<span class="tipstyle"> *</span></label>
                         <input type="password" class="form-control" id="newPassword" name="newPassword">
                     </div>
 
                     <div class="col-xs-6 col-md-3">
-                        <label for="">Confirm password<span class="tipstyle">*</span></label>
+                        <label for="">Confirm password<span class="tipstyle"> *</span></label>
                         <input type="password" class="form-control" id="Password" name="Password" value="" onchange="checkPasswordFunction(this.value)">
 						<div id="checkPasswordMessage"></div>
 					</div>           
@@ -2741,10 +2745,10 @@ if(isset($_GET['MT'])){
 
                 <div class="row">
                     <div class="col-xs-6 col-md-6">
-                        <label for="">Member Type<span class="tipstyle">*</span></label>
+                        <label for="">Member Category<span class="tipstyle"> *</span></label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="MemberType" name="MemberType">
-							<option value="" <?php if (!isset($_SESSION["MembershipProductID"])) echo "selected='selected'";?> disabled>Member type</option>  
+							<option value="" <?php if (!isset($_SESSION["MembershipProductID"])) echo "selected='selected'";?> disabled>Member Category</option>  
                             <?php
 								// 2.2.31 Get Membership prodcut price
 								// Send - 
@@ -2786,7 +2790,7 @@ if(isset($_GET['MT'])){
                 <input type="hidden" class="form-control" name="Specialty">
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
-                        <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
+                        <label for="">What branch would you like to join?<span class="tipstyle"> *</span></label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="Branch" name="Branch">
                             <option value="" selected disabled>What branch would you like to join?</option>
@@ -2853,7 +2857,7 @@ if(isset($_GET['MT'])){
                 <div class="row"> 
 
                     <div class="col-xs-12">
-						<label>Tell us what you'd like to know more about</label>
+						<label>Choose as many interest areas as you like from the list below</label>
                         
                         <div class="plus-select-box">
                         <select class="chosen-select" id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
@@ -2902,7 +2906,7 @@ if(isset($_GET['MT'])){
 
                 <div class="row">
 					<div class="col-xs-12">
-						<label>What languages do you speak in your professional practice?</label>
+						<label>Choose the languages you speak in your practice?</label>
 						
                         <div class="plus-select-box">
                         <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
@@ -2969,7 +2973,7 @@ if(isset($_GET['MT'])){
                     <div class="row">
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
-                                <label for="Udegree">Degree<span class="tipstyle">*</span></label>
+                                <label for="Udegree">Degree<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Udegree0" id="Udegree0">
                                     <?php
@@ -2990,7 +2994,7 @@ if(isset($_GET['MT'])){
 
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
-                                <label for="Undergraduateuniversity-name0">University name<span class="tipstyle">*</span></label>
+                                <label for="Undergraduateuniversity-name0">University name<span class="tipstyle"> *</span></label>
                                 <?php
                                     $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
                                     $University             = json_decode($universityCode, true);
@@ -3013,7 +3017,7 @@ if(isset($_GET['MT'])){
 
 						<div class="row">
                             <div class="col-xs-6 col-sm-3">
-                                <label for="Ugraduate-yearattained0">Year attained<span class="tipstyle">*</span></label>
+                                <label for="Ugraduate-yearattained0">Year attained<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
                                 <?php
@@ -3027,7 +3031,7 @@ if(isset($_GET['MT'])){
                             </div>
 
                             <div class="col-xs-6 col-sm-9">
-                                <label for="Ugraduate-country0">Country<span class="tipstyle">*</span></label>
+                                <label for="Ugraduate-country0">Country<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="Ugraduate-country0" name="Ugraduate-country0">
                                 <?php

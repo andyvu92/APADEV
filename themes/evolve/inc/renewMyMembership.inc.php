@@ -33,6 +33,9 @@ $background = getBackgroundImage($userID);
 				<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 <?php if(isset($_POST['step2']) || isset($_POST['step3']) || isset($_POST['stepAdd']) ||isset($_POST['step2-2']) ||isset($_POST['step2-3']))echo 'text-underline';?>" id="Review"><strong>Review</strong></span></a></li>
 				</ul>
 			<div id="insuranceBlockRN"></div>
+			<div class="col-xs-12 none-margin">
+				<label class="note-text"><span class="tipstyle">*</span>Required fields</label>
+			</div>
 			<?php
 			//This is to get the renewal quatation order details from Aptify!!!!!!!!
 			// 2.2.45 - Renewal Quatation OrderID
@@ -344,7 +347,7 @@ Facsimile: (03) 9092 0899</p>
 	<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
 
 	<p>If this isn’t quite right, and you’d like to change your member type, or add some National Groups to your membership, follow the link below:</p>
-	<a href="renewmymembership"  target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change member type and national group</span></a><br>
+	<a href="renewmymembership"  target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change member type or national group</span></a><br>
 
 	<p>If you’ve changed address recently or would like to update any of your personal details, follow this link:</p>
 	<a href="renewmymembership" target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change your details</span></a>

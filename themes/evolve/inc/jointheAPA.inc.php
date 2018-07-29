@@ -29,6 +29,9 @@ $background = getBackgroundImage($userID);
 			<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 <?php if(isset($_POST['step2']) || isset($_POST['step3'])|| isset($_POST['step2-2'])||isset($_POST['step2-3']))echo 'text-underline';?>" id="Review"><strong>Review</strong></span></a></li>
 			</ul>
 		<div id="insuranceBlock"></div>
+		<div class="col-xs-12 none-margin">
+			<label class="note-text"><span class="tipstyle">*</span>Required fields</label>
+		</div>
 		<?php
 		include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-yourdetail.inc.php');
 		if((isset($_POST["step1"]) && $_POST["step1"] == "1" && $_POST['insuranceTag']!="0") || isset($_POST['goI'])) {

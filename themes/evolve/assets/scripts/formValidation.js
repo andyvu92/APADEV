@@ -12,15 +12,15 @@ jQuery(document).ready(function($) {
 			if($("input[name=Firstname]").val() ==''){$("input[name=Firstname]").addClass("focuscss");} else{$("input[name=Firstname]").removeClass("focuscss");}
 			if($("input[name=Lastname]").val() ==''){$("input[name=Lastname]").addClass("focuscss");} else{$("input[name=Lastname]").removeClass("focuscss");}
 			if($("input[name=Birth]").val() ==''){$("input[name=Birth]").addClass("focuscss");}else{$("input[name=Birth]").removeClass("focuscss");}
-			if($("select[name=Gender]").val() ==''){$("select[name=Gender]").addClass("focuscss");}else{$("select[name=Gender]").removeClass("focuscss");}
-			if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ 
-				$("input[name=phone-number]").addClass("focuscss");
-				$("input[name=Mobile-number]").addClass("focuscss");
-			} 
-			else{
-				$("input[name=phone-number]").removeClass("focuscss");
-				$("input[name=Mobile-number]").removeClass("focuscss");
-			}				
+			//if($("select[name=Gender]").val() ==''){$("select[name=Gender]").addClass("focuscss");}else{$("select[name=Gender]").removeClass("focuscss");}
+			//if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ 
+				//$("input[name=phone-number]").addClass("focuscss");
+				//$("input[name=Mobile-number]").addClass("focuscss");
+			//} 
+			//else{
+				//$("input[name=phone-number]").removeClass("focuscss");
+				//$("input[name=Mobile-number]").removeClass("focuscss");
+			//}				
 			
 			if($("select[name=Aboriginal]").val() ==''){$("select[name=Aboriginal]").addClass("focuscss");}else{$("select[name=Aboriginal]").removeClass("focuscss");}
 			if($("input[name=Pobox]").val() ==''){
@@ -45,10 +45,10 @@ jQuery(document).ready(function($) {
 			if($("input[name=Firstname]").val() ==''||$("input[name=Lastname]").val() ==''){
 				return false;
 			}
-			if($("input[name=Birth]").val() ==''||$("select[name=Gender]").val() ==''||$("select[name=Aboriginal]").val() ==''){
+			if($("input[name=Birth]").val() ==''||$("select[name=Aboriginal]").val() ==''){
 				return false;
 			}
-			if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ return false; }
+			//if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ return false; }
 			if($("input[name=Pobox]").val() ==''){
 				if($("input[name=Address_Line_1]").val() ==''){
 					return false;	
@@ -99,7 +99,7 @@ jQuery(document).ready(function($) {
 					if($("input[name=Wpostcode"+x+"]").val() ==''){$("input[name=Wpostcode"+x+"]").addClass("focuscss");}else{$("input[name=Wpostcode"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wphone"+x+"]").val() ==''){$("input[name=Wphone"+x+"]").addClass("focuscss");}else{$("input[name=Wphone"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wcountry"+x+"]").val() ==''){$("input[name=Wcountry"+x+"]").addClass("focuscss");}else{$("input[name=Wcountry"+x+"]").removeClass("focuscss");}
-					if($("input[name=Wemail"+x+"]").val() ==''){$("input[name=Wemail"+x+"]").addClass("focuscss");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss");}
+					//if($("input[name=Wemail"+x+"]").val() ==''){$("input[name=Wemail"+x+"]").addClass("focuscss");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss");}
 					if (!isValidEmailAddress($("input[name=Wemail"+x+"]").val())) {$("input[name=Wemail"+x+"]").addClass("focuscss");$('#erroMessage').html("this email address is not valid");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss"); $('#errorMessage').html("");}
 					//if($("input[name=Wwebaddress"+x+"]").val() ==''){$("input[name=Wwebaddress"+x+"]").addClass("focuscss");}else{$("input[name=Wwebaddress"+x+"]").removeClass("focuscss");}
 					if($("input[name=Number-worked-hours"+x+"]").val() ==''){$("input[name=Number-worked-hours"+x+"]").addClass("focuscss");}else{$("input[name=Number-worked-hours"+x+"]").removeClass("focuscss");}
@@ -116,7 +116,7 @@ jQuery(document).ready(function($) {
 						return false;
 					}
 					
-					if($("input[name=Wcountry"+x+"]").val() ==''||$("input[name=Wemail"+x+"]").val() =='' || !isValidEmailAddress($("input[name=Wemail"+x+"]").val()) ||$("select[name=Number-worked-hours"+x+"]").val() ==''){
+					if($("input[name=Wcountry"+x+"]").val() ==''||$("select[name=Number-worked-hours"+x+"]").val() ==''){
 						return false;
 					}
 				}

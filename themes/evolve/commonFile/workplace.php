@@ -95,7 +95,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-md-6">
-		<label for="Wemail'.$i.'">Workplace email<span class="tipstyle">*</span></label>
+		<label for="Wemail'.$i.'">Workplace email</label>
 		<input type="email" class="form-control" name="Wemail'.$i.'" id="Wemail'.$i.'" value="">
 	</div>
 
@@ -146,7 +146,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 <div class="row">
 
 	<div class="col-xs-12">
-		<label>What languages do you speak in your professional practice?</label>
+		<label>Choose the languages you speak in your practice?</label>
 		<div class="chevron-select-box">
 		<select class="chosen-select" multiple id="Additionallanguage'.$i.'" name="Additionallanguage'.$i.'[]">';
 			$Language = $sessionLanguage;
@@ -159,7 +159,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 	</div>
 
 	<div class="col-xs-6 col-md-6">
-		<label>Quality In Practice number(QIP):</label>
+		<label>Quality In Practice number(QIP)</label>
 		<input type="text" class="form-control" name="QIP'.$i.'" id="QIP'.$i.'" value="" placeholder="QIP Number">
 	</div>
 </div>
