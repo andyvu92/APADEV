@@ -81,7 +81,7 @@ $background = getBackgroundImage($userID);
 	<h3>APA privacy policy</h3>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
 	
-	<p>Our Commitment to Your Privacy</p>
+	<h5 class="doc-header">Our Commitment to Your Privacy</h5>
 
 
 
@@ -89,22 +89,19 @@ $background = getBackgroundImage($userID);
 
 
 
-<p>Your information and Your Right to Privacy</p>
-
-
+<h5 class="doc-header">Your information and Your Right to Privacy</h5>
 
 <p>You can elect to provide as much or as little information as you choose although the APA requires a minimum set of information to provide access to its site. What you provide is your choice.</p>
 
-<p><br />
-The APA will under no circumstances sell, trade or rent any personal information that you supply to it to any third party. The APA has partnerships with commercial organisations and those partners will, from time to time, request that the APA send information to people on the APA database as part of the partnership. Any APA or partner information is sent by the APA and data is not provided to any third party. In short, information you supply to the APA stays with the APA. The APA may disclose personal information to the following third parties to satisfy standard operating procedures of the APA:</p>
+<p>The APA will under no circumstances sell, trade or rent any personal information that you supply to it to any third party. The APA has partnerships with commercial organisations and those partners will, from time to time, request that the APA send information to people on the APA database as part of the partnership. Any APA or partner information is sent by the APA and data is not provided to any third party. In short, information you supply to the APA stays with the APA. The APA may disclose personal information to the following third parties to satisfy standard operating procedures of the APA:</p>
 
-
-
-<p>IT service providers<br />
-Marketing and communications agencies<br />
-Agencies that conduct member surveys on our behalf<br />
-Mailing houses<br />
-Printers that print and distribute our publications and marketing material</p>
+<ul>
+	<li>IT service providers</li>
+	<li>Marketing and communications agencies</li>
+	<li>Agencies that conduct member surveys on our behalf</li>
+	<li>Mailing houses</li>
+	<li>Printers that print and distribute our publications and marketing material</li>
+</ul>
 
 
 
@@ -112,7 +109,7 @@ Printers that print and distribute our publications and marketing material</p>
 
 
 
-<p>APA is the controller responsible for your personal data. It has appointed a privacy officer who is responsible for overseeing issues of privacy. If you have any questions about this privacy policy, including requests to exercise your legal rights, please contact the privacy officer at privacy@physiotherapy.asn.au.</p>
+<p>APA is the controller responsible for your personal data. It has appointed a privacy officer who is responsible for overseeing issues of privacy. If you have any questions about this privacy policy, including requests to exercise your legal rights, please contact the privacy officer at <a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a>.</p>
 
 
 
@@ -124,14 +121,16 @@ Printers that print and distribute our publications and marketing material</p>
 
 
 
-<p>Processed lawfully, fairly and in a transparent manner<br />
-Collected only for specified, explicit and legitimate purposes<br />
-Adequate, relevant and limited to what is necessary in relation to the purposes for which it is processed<br />
-Accurate and where necessary kept up to date<br />
-Not kept in a form which permits identification of data subjects for longer than is necessary for the purposes for which the data is processed<br />
-Processed in a manner that ensures its security using appropriate technical and organisational measures to protect against unauthorised or unlawful processing and against accidental loss, destruction or damage<br />
-Not transferred to another country without appropriate safeguards being in place<br />
-Made available to data subjects and allow data subjects to exercise certain rights in relation to their personal data</p>
+<ul>
+	<li>Processed lawfully, fairly and in a transparent manner</li>li>
+	<li>Collected only for specified, explicit and legitimate purposes</li>
+	<li>Adequate, relevant and limited to what is necessary in relation to the purposes for which it is processed</li>
+	<li>Accurate and where necessary kept up to date</li>
+	<li>Not kept in a form which permits identification of data subjects for longer than is necessary for the purposes for which the data is processed</li>
+	<li>Processed in a manner that ensures its security using appropriate technical and organisational measures to protect against unauthorised or unlawful processing and against accidental loss, destruction or damage</li>
+	<li>Not transferred to another country without appropriate safeguards being in place</li>
+	<li>Made available to data subjects and allow data subjects to exercise certain rights in relation to their personal data</li>
+</ul>
 
 
 
@@ -139,25 +138,27 @@ Made available to data subjects and allow data subjects to exercise certain righ
 
 
 
-<p>Collecting Information</p>
+<h5 class="doc-header">Collecting Information</h5>
 
 <p>The APA may collect, use, store and transfer different kinds of personal data about you. It collects and process personal data about you when you:</p>
 
 
 
-<p>Access and use the site and its services<br />
-Register an account on the site<br />
-Leave a comment on the site<br />
-Place an advertisement on the site<br />
-Buy a product through the site<br />
-Make an enquiry about a particular product on the site<br />
-submit a general enquiry to the APA<br />
-Enter a competition<br />
-Create a wish list on the site<br />
-Subscribe to the APA’s newsletter<br />
-Leave your feedback or review on the site<br />
-Manage your marketing preferences with the APA<br />
-Make a payment through the site</p>
+<ul>
+	<li>Access and use the site and its services</li>
+	<li>Register an account on the site</li>
+	<li>Leave a comment on the site</li>
+	<li>Place an advertisement on the site</li>
+	<li>Buy a product through the site</li>
+	<li>Make an enquiry about a particular product on the site</li>
+	<li>submit a general enquiry to the APA</li>
+	<li>Enter a competition</li>
+	<li>Create a wish list on the site</li>
+	<li>Subscribe to the APA’s newsletter</li>
+	<li>Leave your feedback or review on the site</li>
+	<li>Manage your marketing preferences with the APA</li>
+	<li>Make a payment through the site</li>
+</ul>
 
 
 
@@ -165,14 +166,16 @@ Make a payment through the site</p>
 
 
 
-<p>Name, address, telephone number(s)<br />
-Date of birth<br />
-Racial or ethnic origin<br />
-Email address<br />
-Occupation<br />
-Transaction details associated with services we have provided to you<br />
-Additional information provided by us to you<br />
-Information you have provided to us via client surveys</p>
+<ul>
+	<li>Name, address, telephone number(s)</li>
+	<li>Date of birth</li>
+	<li>Racial or ethnic origin</li>
+	<li>Email address</li>
+	<li>Occupation</li>
+	<li>Transaction details associated with services we have provided to you</li>
+	<li>Additional information provided by us to you</li>
+	<li>Information you have provided to us via client surveys</li>
+</ul>
 
 
 
@@ -188,39 +191,35 @@ Information you have provided to us via client surveys</p>
 
 
 
-<p>To change your personal information you must login to your account with your unique login and password via the APA website www.physiotherapy.asn.au.</p>
+<p>To change your personal information you must login to your account with your unique login and password via the APA website <a href="http://www.physiotherapy.asn.au" target="_blank" style="text-decoration: underline; color: #000">www.physiotherapy.asn.au</a>.</p>
 
 
 
-<p>Opt-Out<br />
-&nbsp;</p>
+<h5 class="doc-header">Opt-Out</h5>
 
-<p>By choosing to register on the APA web site or as a member of the APA, you may receive information from the APA about membership, APA services, partner information and offers. The APA uses this method to communicate quickly with you. You have the right to refuse inclusion on a mailing list. You can make a request to remove your email address from a mailing list by contacting the privacy officer at privacy@physiotherapy.asn.au.&nbsp;</p>
-
+<p>By choosing to register on the APA web site or as a member of the APA, you may receive information from the APA about membership, APA services, partner information and offers. The APA uses this method to communicate quickly with you. You have the right to refuse inclusion on a mailing list. You can make a request to remove your email address from a mailing list by contacting the privacy officer at <a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a>.</p>
 
 
-<p>The APA uses your email address, your mailing address and phone number to contact you regarding administrative notices, publications, and communications relevant to your use of the site and your APA membership. If you do not wish to receive these communications, you have the ability to opt out by contacting the privacy officer at privacy@physiotherapy.asn.au.</p>
+
+<p>The APA uses your email address, your mailing address and phone number to contact you regarding administrative notices, publications, and communications relevant to your use of the site and your APA membership. If you do not wish to receive these communications, you have the ability to opt out by contacting the privacy officer at <a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a>.</p>
 
 
 <p>From time to time, the APA arranges mailings using the contact information you have provided, from its business partners (including corporate partners and endorsed product manufacturers/suppliers). These mailings aim to provide you with information and benefits available to you.</p>
 
 
 
-<p>If you do not wish to receive information from APA's business partners you should advise your local APA Branch or notify the APA’s privacy officer at privacy@physiotherapy.asn.au. For any information about privacy, please contact the APA’s privacy officer by phoning 03 9092 0888 or by email privacy@physiotherapy.asn.au.</p>
+<p>If you do not wish to receive information from APA's business partners you should advise your local APA Branch or notify the APA’s privacy officer at <a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a>. For any information about privacy, please contact the APA’s privacy officer by phoning <a href="tel:03 9092 0888" style="text-decoration: underline; color: #000">03 9092 0888</a> or by email <a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a>.</p>
 
 
 
-<p>Cookies</p>
+<h5 class="doc-header">Cookies</h5>
 
-<p><br />
-As part of the normal operation of this site, your internet browser will be sent a "cookie" (a temporary internet file). This cookie enhances the site's functionality with features such as membership logon and electronic ordering. By itself, this cookie can only identify your computer to APA’s server; it is not used to identify you personally.</p>
+<p>As part of the normal operation of this site, your internet browser will be sent a "cookie" (a temporary internet file). This cookie enhances the site's functionality with features such as membership logon and electronic ordering. By itself, this cookie can only identify your computer to APA’s server; it is not used to identify you personally.</p>
 
-<p><br />
-Your personal password to access the APA website protects your privacy. We recommend that you do not disclose, share or reveal this password to any other individual.</p>
+<p>Your personal password to access the APA website protects your privacy. We recommend that you do not disclose, share or reveal this password to any other individual.</p>
 
 
-
-<p>Change of Purpose</p>
+<h5 class="doc-header">Change of Purpose</h5>
 
 
 
@@ -228,63 +227,61 @@ Your personal password to access the APA website protects your privacy. We recom
 
 
 
-<p>From time to time, the APA may decide to collect different kinds of information. When this occurs, the APA will update this privacy page.<br />
-&nbsp;</p>
-
-<p>Privacy Enquires</p>
+<p>From time to time, the APA may decide to collect different kinds of information. When this occurs, the APA will update this privacy page.</p>
 
 
+<h5 class="doc-header">Privacy Enquires</h5>
 
-<p>You have the right to complain regarding any aspect of your privacy rights.&nbsp;If you have a complaint please contact the privacy officer at privacy@physiotherapy.asn.au or on 03 9092 0888.</p>
+<p>You have the right to complain regarding any aspect of your privacy rights.&nbsp;If you have a complaint please contact the privacy officer at <a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a> or on <a href="tel:03 9092 0888" style="text-decoration: underline; color: #000">03 9092 0888</a>.</p>
 
 
-
-<p>APA Membership</p>
+<h5 class="doc-header">APA Membership</h5>
 
 <p>If you decide to become a member of the APA, and we hope that you do, the APA will ask you for additional personal details. You may also opt to provide the APA with more information such as special interest areas you may have where you are employed and your date of birth. Relevant information is disclosed to the public on the internet via the APA's 'Find a Physio' online searchable database only. You must approve the use of your details on this database. Whether you decide to use this service is your choice.</p>
 
-<p>Security</p>
+
+<h5 class="doc-header">Security</h5>
 
 <p>Your information is stored on the APA's server located in a secure data housing facility. While, it is important to recognise that "perfect security" does not exist on the internet, the APA is committed to using industry standard mechanisms to safeguard the confidentiality of your personal information such as firewalls and Secure Socket Layers.&nbsp;&nbsp;</p>
 
-<p>Credit Card Information</p>
+
+<h5 class="doc-header">Credit Card Information</h5>
 
 <p>The APA does not permanently store credit card information anywhere on this site.&nbsp;&nbsp;</p>
 
-<p>APA Members Privacy</p>
+
+<h5 class="doc-header">APA Members Privacy</h5>
 
 <p>The APA has a strong commitment to protecting your privacy and ensuring the confidentiality and security of personal information provided to the APA by you. As an organisation with an annual turnover of more than $3 million, the APA is required to comply with the Privacy Act 1988 as amended by the Privacy Amendment (Enhancing Privacy Protection) Act 2012 which came into effect in March 2014.<br />
-&nbsp;<br />
-You have the right to access the personal information about yourself held by the APA and to correct information which is inaccurate. To change your information you must log into your account with your unique login and password via the APA website www.physiotherapy.asn.au.</p>
 
-<p>Information you have provided to the APA is used to:&nbsp;</p>
+You have the right to access the personal information about yourself held by the APA and to correct information which is inaccurate. To change your information you must log into your account with your unique login and password via the APA website <a href="http://www.physiotherapy.asn.au" target="_blank" style="text-decoration: underline; color: #000">www.physiotherapy.asn.au</a>.</p>
 
-<p>Process applications and renewals and to update your membership details and profile information<br />
-Notify members and the public that you have met our requirements for credentialing (e.g. specialisation or titling)<br />
-Provide information to consumers and others on the availability of physiotherapy services<br />
-Conduct market research in order to identify and analyse the ongoing needs of APA members<br />
-Ensure compliance with the APA's Constitution and Regulations<br />
-Provide you with APA publications and information<br />
-Provide you with access to and information about current and future member benefits</p>
+<p>Information you have provided to the APA is used to:</p>
 
-
-
-<p>Consent</p>
+<ul>
+	<li>Process applications and renewals and to update your membership details and profile information</li>
+	<li>Notify members and the public that you have met our requirements for credentialing (e.g. specialisation or titling)</li>
+	<li>Provide information to consumers and others on the availability of physiotherapy services</li>
+	<li>Conduct market research in order to identify and analyse the ongoing needs of APA members</li>
+	<li>Ensure compliance with the APA's Constitution and Regulations</li>
+	<li>Provide you with APA publications and information</li>
+	<li>Provide you with access to and information about current and future member benefits</li>
+</ul>
 
 
+<h5 class="doc-header">Consent</h5>
 
 <p>You acknowledge and agree that by providing your personal and/or sensitive information to the APA that the APA, its related bodies corporate and partners and each of their officers, employees, agents and contractors are permitted to collect, store, use and disclose your personal information in the manner set out in this privacy policy and in accordance with the Australian Privacy Principles.</p>
 
 
-
-<p>Contact Us</p>
+<h5 class="doc-header">Contact Us</h5>
 
 
 <p>Please do not hesitate to contact us if you have a concern or issue in relation to how we collect, store, use or disclose your personal information.</p>
 
 
 
-<p>If your concern relates to your APA membership or another APA function or service please contact us by email to&nbsp;privacy@physiotherapy.asn.au&nbsp;or call or mail us at the following address:</p>
+<p>If your concern relates to your APA membership or another APA function or service please contact us by email to&nbsp;<a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a>&nbsp;or call or mail us at the following address:</p>
 
 
 <p>Australian Physiotherapy Association<br />
@@ -344,6 +341,7 @@ Facsimile: (03) 9092 0899</p>
 		
 		echo $order['ProductName']; echo ",";} 
 	}?><?php endif;?></p>
+	
 	<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
 
 	<p>If this isn’t quite right, and you’d like to change your member type, or add some National Groups to your membership, follow the link below:</p>

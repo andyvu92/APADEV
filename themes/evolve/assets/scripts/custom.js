@@ -525,7 +525,7 @@ jQuery(document).ready(function($) {
 	});
 	$('#uploadImageButton').click(function(){
 		$( "#uploadImage" ).dialog();
-    }); 
+	});
 	$('#addPaymentCard').click(function(){
 		$( "#addPaymentCardForm" ).dialog();
     }); 

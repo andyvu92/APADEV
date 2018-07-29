@@ -391,3 +391,58 @@ fieldset {
     }
   }
 }
+
+/*--PD WISHLIST--*/
+
+#wishlist{
+  .heading-row{
+    border-top: 1px solid #d3d4d5;
+    padding: 10px 0;
+    align-items: center;
+    &:hover {
+      background: rgba(0,0,0,0)!important;
+    }
+    .table-heading{
+      font-size: 0.8em;
+      font-weight: 500;
+      color: #000;
+      text-transform: uppercase;
+    }
+  }
+  .flex-cell{
+    position: relative;
+    transition: 0.1s linear;
+    background: none;
+    border-bottom: 1px solid #d3d4d5;
+    padding: 20px 0;
+    font-size: 1.2em;
+    color: #000;
+    align-items: center;
+    &:hover {
+      background: rgba(0,0,0,0.02);
+    }
+    .price-col{
+      text-align: right;
+      padding-right: 10px;
+    }
+    .action-col{
+      padding-left: 10px;
+    }
+    .delete-col{
+      text-align: center;
+      a{
+        i{
+          color: rgba(255, 0, 0, 0.5);
+          transition: 0.2s linear;
+        }
+        &:hover{
+          i{
+            color: rgba(255, 0, 0, 1);
+          }
+        }
+      }
+    }
+  }
+}
+
+/*--END PD WISHLIST--*/

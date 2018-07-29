@@ -42,14 +42,14 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
 
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-    echo "Sorry, your file was not uploaded.";
+    //echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
 	
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-        echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+        //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
     } else {
-        echo "Sorry, there was an error uploading your file.";
+        //echo "Sorry, there was an error uploading your file.";
     }
 }
 $imageBlob = base64_encode(file_get_contents("sites/all/themes/evolve/uploads/".$name));
@@ -69,7 +69,7 @@ if(isset($_SESSION["UserId"])) {
 
 	<div class="navbar-collapse">
 		<div class="user-avatar">
-			<a  style="cursor: pointer; color:white;" id="uploadImageButton"><div class="ava-circle" style='background: url(https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo/?NoImageObject=CRM.NoPhotoAvailable&amp;ds=636652401978000000) no-repeat center center'></div></a> 
+			<a  style="cursor: pointer; color:white;" id="uploadImageButton"><div class="ava-circle" style='background: url(https://aptifyweb.australian.physio/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo?NoImageObject=CRM.NoPhotoAvailable&amp;ds=636682564840400000) no-repeat center center'></div></a> 
 			<span class="user-name cairo"><?php echo $details['Firstname'].' '.$details['Lastname'];?></span>
 		</div>
 		<ul class="nav navbar-nav navbar-left">
@@ -110,9 +110,33 @@ if(isset($_SESSION["UserId"])) {
 </div >
 <div id="uploadImage" style="display:none;">
 	<form action="<?php echo $url;?>" method="POST" enctype="multipart/form-data">
-		Select image to upload:
-		<input type="file" name="fileToUpload" id="fileToUpload">
-		<input type="submit" value="Upload Image" name="PictureUpdate">
+		<div class="avatar-upload">
+			<div class="avatar-edit">
+				<input type='file' id="imageUpload" name="fileToUpload" accept=".png, .jpg, .jpeg" />
+				<label for="imageUpload"></label>
+			</div>
+			<div class="avatar-preview">
+				<div id="imagePreview" style="background-image: url(https://aptifyweb.australian.physio/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo?NoImageObject=CRM.NoPhotoAvailable&amp;ds=636682564840400000);">
+				</div>
+			</div>
+		</div>
+		<input id="upload-btn" type="submit" value="Upload Image" name="PictureUpdate">
+		<script>
+			function readURL(input) {
+			if (input.files && input.files[0]) {
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$('#imagePreview').css('background-image', 'url('+e.target.result +')');
+					$('#imagePreview').hide();
+					$('#imagePreview').fadeIn(650);
+				}
+				reader.readAsDataURL(input.files[0]);
+			}
+			}
+			$("#imageUpload").change(function() {
+			readURL(this);
+			});
+		</script>
 	</form>
 </div>
 <!-----this is for dialog function JS--->
