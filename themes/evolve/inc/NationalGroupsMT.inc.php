@@ -53,8 +53,8 @@ if(count($PostArray) == 0) { // Just GET data
 }
 ?>
 <?php logRecorder(); ?>
-<table class="table MTtable">
-	<tbody>
+<div class="MTtable flex-container" id="mt-national-group">
+
 		<?php
 			$countSubs = count($nationalGroups);
 			$countSubType = $countSubs%2;
@@ -62,22 +62,23 @@ if(count($PostArray) == 0) { // Just GET data
 			foreach($SubListAll as $Subs) {
 				$tr = $counter % 2;
 				if($tr == 0) {
-					echo "<tr>";
+					echo "<div class='flex-cell'>";
 				}
-				echo '<td><input type="checkbox" name="'.$Subs["SubscriptionID"].
+				echo '<div class="flex-col-6"><div class="flex-col-10">
+						<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
 					'" id="'.$Subs["SubscriptionID"].'" class="NGname'.$counter.'" value="'.$Subs["Subscribed"].'"';
 				if($Subs['Subscribed']==1){ 
 					echo "checked";
 				}
 				echo '>&nbsp;&nbsp;&nbsp;<label class="NGnameText'.$counter.'" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
-					.'</label></td>';
-				echo '<td><div class="NGprice'.$counter.'">$'.$Subs["NGprice"].'</div></td>';
+					.'</label></div>';
+				echo '<div class="flex-col-2"><div class="NGprice'.$counter.'">$'.$Subs["NGprice"].'</div></div></div>';
 				if($tr == 1) {
-					echo "</tr>";
+					echo "</div>";
 				}
 				$counter++;
 			}
 		?>
-	</tbody>
-</table>
+
+</div>
 <div class="NGpriceT" style="display: none;"></div>

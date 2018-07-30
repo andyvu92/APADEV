@@ -2,6 +2,14 @@
 /* ---------------------- Membership ----------------------- */
 /* --------------------------------------------------------- */
 
+/*--RESPONSIVE BREAKPOINTS--*/
+@phone-width: 480px;
+@larger-phone-width: 570px;
+@tablet-width: 768px;
+@larger-tablet-width: 992px;
+@desktop-width: 1200px;
+@larger-desktop-width: 1500px;
+
 .membershipCategory {
 	width: 20%;
     height: 99px;
@@ -407,21 +415,17 @@
 	margin: auto;
 	width: 95%;
 	border: 0.5px solid rgba(195,200,200,0.5);
-    height: 390px;
     padding: 25px 40px;
 	overflow: hidden;
 }
 .MainQuestionHolder .SectionHolder #Sections5 .MPcontainer {
-    height: 270px;
     margin: 30px auto 50px;
 }
-.MainQuestionHolder .SectionHolder #Sections1 h2 {
-	font-size: 56px;
-	padding-top: 60px;
-}
+
 .MainQuestionHolder .SectionHolder #Sections2 h2 {
-	font-size: 56px;
-	padding-top: 30px;
+	font-size: 4em;
+	padding: 30px;
+	margin: 0;
 }
 .MainQuestionHolder .SectionHolder #Sections3 h2:not(.MTtitle),
 .MainQuestionHolder .SectionHolder #Sections4 h2:not(.MTtitle),
@@ -450,9 +454,6 @@
 	float: initial;
 	margin: 0;
 }
-.MainQuestionHolder .SectionHolder #Sections4 .MPcontainer {
-	height: 460px;
-}
 .MainQuestionHolder .SectionHolder #Sections4 p {
 	text-align: left;
 	margin-bottom: 15px;
@@ -470,18 +471,14 @@ table.MTtable td {
     text-align: left;
 }
 .MainQuestionHolder div[id^="Sections"] .buttons {
-	width: 334px;
 	margin: 20px auto 10px;
-	height: 60px;
 }
 .MainQuestionHolder #Sections1 .buttons {
 	margin-top: 60px;
 	margin-bottom: 50px;
 }
 .MainQuestionHolder #Sections5 .buttons {
-	width: 505px;
 	margin: 85px auto 10px;
-	height: 50px;
 }
 .MainQuestionHolder div[id^="Sections"] .buttons div {
 	color: white;
@@ -506,14 +503,11 @@ table.MTtable td {
 	background-color: rgb(0,159,218);
 }
 .MainQuestionHolder div#Sections2 div[id^="question"] {
-	height: 370px;
 	transition: 0.3s;
 	-webkit-transition-timing-function: cubic-bezier(0.2, 0.45, 0.75, 0.8);
 	transition-timing-function: cubic-bezier(0.2, 0.45, 0.75, 0.8);
 }
-.MainQuestionHolder div#Sections2 .buttons {
-	width: auto;
-}
+
 .MainQuestionHolder div#Sections2 .buttons div {
 	width: auto;
 }
@@ -538,4 +532,168 @@ table.MTtable td {
 }
 #Sections5 #totalCost {
 	font-weight: bold;
+}
+
+.membership-type-question{
+	#section-main-content{
+		position: relative;
+		display: block;
+		padding-bottom: 70px;
+	}
+	.MainQuestionHolder{
+		width: 100%;
+		overflow: visible;
+		position: relative;
+		height: auto;
+		.SectionHolder{
+			h2{
+				font-size: 4em;
+				padding-top: 60px;
+				font-weight: 200;
+				font-family: Cairo;
+				margin: 0;
+				@media all and (max-width: @tablet-width){
+					font-size: 2em!important;
+				}
+				@media all and (max-width: @phone-width){
+					padding: 30px 10px!important;
+				}
+			}
+			.buttons{
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				@media screen and (max-width: 335px) {
+					div{
+						font-size: 0.87em;
+					}
+				}
+			}
+			label[class^="optionLabel"]{
+				cursor: pointer;
+			}
+			.question{
+				.buttons{
+					label{
+						float: left;
+						clear: both;
+						padding: 5px 20px;
+						margin: 10px;
+						min-width: 100px;
+						max-width: 70%;
+						text-align: center;
+						font-size: 1.4em;
+						font-family: Cairo;
+						font-weight: 400;
+						color: white;
+						background-color: #c3c8c8;
+						transition: 0.1s linear;
+						&:hover{
+							background-color: #009fda;
+						}
+						@media all and (max-width: @phone-width){
+							width: 100%;
+							max-width: 100%;
+						}
+					}
+				}
+			}
+			#Sections1{
+				.buttons{
+					flex-direction: row;
+    				justify-content: center;
+					.prev{
+						display: inline-block;
+						float: none;
+					}
+					.next{
+						display: inline-block;
+						float: none;
+					}
+				}
+			}
+			#Sections2{
+				.question{
+					.buttons{
+						label{
+							float: left;
+							clear: both;
+							padding: 5px 20px;
+							margin: 10px;
+							min-width: 100px;
+							text-align: center;
+							font-size: 1.4em;
+							font-family: Cairo;
+							font-weight: 400;
+							color: white;
+							background-color: #c3c8c8;
+							transition: 0.1s linear;
+							&:hover{
+								background-color: #009fda;
+							}
+						}
+					}
+				}
+			}
+			#Sections3{
+				.buttons{
+					flex-direction: row;
+					justify-content: center;
+				}
+				.MPcontainer{
+					overflow-y: auto;
+					h2{
+						position: relative;
+						padding: 30px 0;
+						margin: 0;
+						font-size: 2.5em;
+						font-weight: 400;
+					}
+				}
+			}
+			#Sections4{
+				.buttons{
+					flex-direction: row;
+					justify-content: center;
+				}
+				#mt-national-group{
+					.flex-cell{
+						justify-content: center;
+    					align-items: center;
+					}
+					div[class^="flex-col"]{
+						align-items: flex-start;
+						display: flex;
+						padding-top: 15px;
+					}
+					.div[class^="NGprice"]{
+						padding: 0 10px;
+					}
+					@media all and (max-width: @tablet-width) {
+						.flex-cell{
+							flex-direction: column;
+							.flex-col-6{
+								width: 100%;
+							}
+						}
+					}
+				}
+			}
+			#Sections5{
+				.buttons{
+					flex-direction: row;
+					align-items: center;
+					justify-content: center;
+					.prev, .restart, .Join{
+						margin: 10px;
+					}
+				}
+				@media all and (max-width: @larger-phone-width) {
+					.buttons{
+						flex-direction: column;
+					}
+				}
+			}
+		}
+	}
 }
