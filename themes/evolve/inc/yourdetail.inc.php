@@ -1560,7 +1560,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<div class="col-xs-12 space-line"><div class="col-xs-12 separater"></div></div>
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
-								<label for="Udegree<?php echo $key;?>">Level of qualification<span class="tipstyle"> *</span></label>
+								<label for="Udegree<?php echo $key;?>">Degree Level<span class="tipstyle"> *</span></label>
 								<?php 
 									$degreecode  = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
 									$degree=json_decode($degreecode, true);

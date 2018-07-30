@@ -268,7 +268,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 <form id="your-detail-form" action="renewmymembership" method="POST">
 	<input type="hidden" name="step1" value="1"/>
 	<input type="hidden" name="insuranceTag" id="insuranceTag"/>
-		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_POST['goI'])|| isset($_POST['goP'])||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['QOrder']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
+		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_POST['goI'])|| isset($_POST['goP'])||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['QOrder']) || isset($_POST["MType"]))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
 				<div class="row">
 					<div class="col-xs-6 col-md-3">
 						<label for="prefix">Prefix</label>
@@ -626,7 +626,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 		  </div>-->
 		    <div class="col-xs-12">   <a class="join-details-button1"><span class="dashboard-button-name">Next</span></a></div>
 		</div>
-		<div class="down2" style="display:none;" >
+		<div class="down2" <?php if(isset($_POST["MType"]))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
 			<div class="row">
 			<input type="hidden"  name="Status" <?php if (empty($details['Status'])) {echo "value='1'";}   else{ echo 'value="'.$details['Status'].'"'; }?>>
 				<div class="col-xs-12 col-md-6">
