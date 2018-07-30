@@ -83,9 +83,11 @@ function getDropdown(){
 	fclose($fp);
 	// write PaymentType json file
 	foreach($result['PaymentType']  as $lines){
-		$ID = $lines['ID'];
-		$Name = $lines['Name'];
-		$arrayPaymentType[] = array('ID'=>$ID, 'Name'=>$Name);	
+		if($lines['ID'] != "9"){
+			$ID = $lines['ID'];
+			$Name = $lines['Name'];
+			$arrayPaymentType[] = array('ID'=>$ID, 'Name'=>$Name);	
+		}
     }
 	$response= $arrayPaymentType;
 	$fp = fopen(__DIR__ . '/../json/PaymentType.json', 'w');
