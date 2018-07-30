@@ -60,7 +60,7 @@
 		$result = GetAptifyData("7", $arrIn);
 		if(isset($result["ErrorInfo"])) {
 			echo $result["ErrorInfo"]["ErrorMessage"];
-			echo "log-in fail";
+			echo "<br>log-in fail";
 		} else {
 			// logged in
 			//print_r($result);
@@ -97,23 +97,31 @@
 		$result = GetAptifyData("8", "logout");
 		//print_r($result);
 		deleteSession();
-		echo "logged out";
+		//echo "logged out";
 	}
 ?>
 <?php if(isset($_SESSION["Log-in"])): ?>
-<div style="float: right;">
+<div class="pull-right borderLeftForTop LogInOutPadding">
 	<form method="POST" action="<?php echo $url; ?>" name="forlogout">
-		<input type="hidden" name="logout" value="out" style="display: none;" />
-		<input type="submit" value="log-out" />
+		<input id="logoutAcButton"type="hidden" name="logout" value="out" style="display: none;" />
+		<div id="logoutButton" class="ButtonIconHolder withButtonIcon">
+			<?php if(isset($_SESSION['FirstName'])) {echo "<b>".$_SESSION['FirstName']."</b>&nbsp;";} ?>
+			<input type="submit" value="log-out" />
+		</div>
 	</form>
 </div>
+<!--div style="float: right;">
 <form method="POST" action="<?php echo $url; ?>" name="getData">
 	<input type="hidden" name="Getdata" value="out" style="display: none;" />
 	<input type="submit" value="Get Data" />
 </form>
+</div-->
 <?php else: ?>
-<div style="float: right;">
-	<button class="info" data-target="#loginAT" data-toggle="modal" type="button">Log-in</button>
+<div class="pull-right borderLeftForTop LogInOutPadding">
+	<button class="info" data-target="#loginAT" data-toggle="modal" type="button">
+	<div class="ButtonIconHolder withButtonIcon">
+		<i class="Log-in">&nbsp;</i>Log-in
+	</div></button>
 </div>
 <?php endif; ?>
 

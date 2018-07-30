@@ -916,6 +916,17 @@ jQuery(document).ready(function($) {
 	}
 	});
 	
+	$('#logoutButton').click(function() {
+		document.getElementById("logoutAcButton").click();
+	});
+	$(".OthersiteButton").click( function() {
+		$(".OtherSitesList").animate({right: "0px"}, 300);
+	});
+	$(".OthersiteButtonClose").click( function() {
+		$(".OtherSitesList").animate({right: "-300px"}, 300);
+	});
+	
+	
 });
 /*
 $( window ).on( "load", function() {
