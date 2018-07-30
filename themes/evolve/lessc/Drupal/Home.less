@@ -130,7 +130,7 @@ div[id^="home-tile-view-block"] .homeBottom .content .item-description .NextIcon
 	height: 31px;
 }
 div.ButtonIconHolder {
-	width: 70px;
+	width: 60px;
 	height: 40px;
 	overflow: hidden;
 	transition: 0.3s;
@@ -166,7 +166,7 @@ div.ButtonIconHolder {
 		padding: 2px 8px;
 		margin-right: 5px;
 	}
-	.Log-out {
+	.Dashboard {
 		background-image: url('/sites/default/files/MEMBER ICON.png');
 		background-position: 0 60px;
 		width: 20px;
@@ -181,15 +181,29 @@ div.borderLeftForTop {
 div.borderLeftForTopRight {
 	border-right: rgba(0,0,0,0.1) 2px solid;
 }
-div.LogInOutPadding {
+div.LogOutPadding {
+	width: 80px;
+}
+div.LogInPadding {
 	width: 110px;
 }
+div.DashboardPadding {
+	width: 60px;
+}
 div.withButtonIcon {
-	width: 105px;
 	height: 40px;
 	margin: auto;
 }
-.LogInOutPadding .info {
+div.OutwithButtonIcon {
+	width: 78px;
+}
+div.InwithButtonIcon {
+	width: 105px;
+}
+div.DashboardwithButtonIcon {
+	width: 48px;
+}
+.LogInPadding .info {
 	width: 105px;
     height: 38px;
     margin: auto;
@@ -209,13 +223,13 @@ div.withButtonIcon {
 	background-color: white;
 	z-index: 15;
 }
-div.withButtonIcon  input{
+div.OutwithButtonIcon  input{
 	background-color:transparent;
-	padding: 10px 0 0 10px;
+	padding: 10px 0 0 21px;
 	font-weight: 200;
 	font-size: 13px;
 }
-div#logoutButton, div#loginButton {
+div#logoutButton, div#loginButton, div#DashboardButton {
 	cursor: pointer;
 }
 /* homepage nav hover cancel */
@@ -254,26 +268,276 @@ div#logoutButton, div#loginButton {
 	}
 }
 
+@media screen and (max-width: 767px) {
+	.dexp-section.SocialIcons, .dexp-section.SocialIcons .container {
+		padding: 0;
+	}
+}
+
+@media screen and (max-width: 480px) {
+	.OthersiteButton {
+		display: none;
+	}
+	div.ButtonIconHolder {
+		width: 40px;
+	}
+	div.ButtonIconHolder .Log-out {
+		margin-left: 5px;
+	}
+	div.DashboardPadding {
+		width: 50px;
+		float: left !important;
+	}
+	div.LogOutPadding {
+		width: 110px;
+	}
+	div.LogInPadding {
+		width: 130px;
+	}
+	div.OutwithButtonIcon input {
+		padding-left: 22px;
+	}
+	div.LogInPadding, div.LogOutPadding, div.DashboardPadding {
+		float: left !important;
+	}
+	.pull-right.social-icons {
+		float: right !important;
+	}
+	div.withButtonIcon {
+		width: 85px
+	}
+	.region-socials ul:not(.contextual-links) li:last-child {
+		border-right: 2px solid rgba(0,0,0,0.1);
+	}
+	div.borderLeftForTop {
+		border-left: 0;
+		border-right: rgba(0,0,0,0.1) 2px solid;
+	}
+	div.ShoppingCartBorder {
+		border-right: 0;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	div.ButtonIconHolder {
+		width: 40px;
+	}
+	div.ButtonIconHolder .Log-out {
+		margin-left: 5px;
+	}
+	div.DashboardPadding {
+		width: 50px;
+	}
+	div.ButtonIconHolder .Dashboard {
+		margin-left: 15px;
+	}
+	div.OutwithButtonIcon input {
+		padding-left: 22px;
+	}
+	div.LogOutPadding {
+		width: 100px;
+		border-right: 0;
+	}
+	div.LogInPadding {
+		width: 115px;
+	}
+	div.DashboardPadding, div.LogOutPadding, div.LogInPadding {
+		float: left !important;
+	}
+	div.withButtonIcon {
+		width: 85px
+	}
+	div.borderLeftForTop {
+		border-left: 0;
+		border-right: rgba(0,0,0,0.1) 2px solid;
+	}
+}
+
+@media screen and (max-width: 420px) {
+	div.ButtonIconHolder {
+		width: 40px;
+	}
+	div.ButtonIconHolder .Log-out {
+		margin-left: 5px;
+	}
+	div.DashboardPadding {
+		width: 45px;
+	}
+	div.ButtonIconHolder .Dashboard {
+		margin-left: 12px;
+	}
+	div.OutwithButtonIcon input {
+		padding-left: 20px;
+	}
+	div.LogOutPadding {
+		width: 92px;
+		border-right: 0;
+	}
+	div.LogInPadding {
+		width: 110px;
+	}
+	div.DashboardPadding, div.LogOutPadding, div.LogInPadding {
+		float: left !important;
+	}
+	div.withButtonIcon {
+		width: 85px
+	}
+}
+
+@media screen and (max-width: 380px) {
+	div.ButtonIconHolder {
+		width: 40px;
+	}
+	div.ButtonIconHolder .Log-out {
+		margin-left: 5px;
+	}
+	div.DashboardPadding {
+		width: 40px;
+	}
+	div.ButtonIconHolder .Dashboard {
+		margin-left: 10px;
+	}
+	div.OutwithButtonIcon input {
+		padding-left: 13px;
+	}
+	div.LogOutPadding {
+		width: 67px;
+		border-right: 0;
+	}
+	div.LogInPadding {
+		width: 107px;
+		border-right: 0;
+	}
+	div.DashboardPadding, div.LogOutPadding, div.LogInPadding {
+		float: left !important;
+	}
+	div.withButtonIcon {
+		width: 85px
+	}
+}
+
+@media screen and (max-width: 350px) {
+	div.ButtonIconHolder {
+		width: 40px;
+	}
+	div.ButtonIconHolder .Log-out {
+		margin-left: 5px;
+	}
+	div.DashboardPadding {
+		width: 32px;
+	}
+	div.ButtonIconHolder .Dashboard {
+		margin-left: 6px;
+	}
+	div.OutwithButtonIcon input {
+		padding-left: 4px;
+	}
+	div.LogOutPadding {
+		width: 55px;
+		border-right: 0;
+	}
+	div.LogInPadding {
+		width: 87px;
+	}
+	div.InwithButtonIcon {
+		margin: 0 4px;
+	}
+	div.DashboardPadding, div.LogOutPadding, div.LogInPadding {
+		float: left !important;
+	}
+	div.withButtonIcon {
+		width: 85px
+	}
+}
+
+@media screen and (max-width: 330px) {
+	div.ButtonIconHolder {
+		width: 30px;
+	}
+	div.ButtonIconHolder .Log-out {
+		margin-left: 5px;
+	}
+	div.DashboardPadding {
+		width: 30px;
+	}
+	div.LogOutPadding {
+		width: 58px;
+		border-right: 0;
+	}
+	.LogInPadding .info .withButtonIcon {
+		margin: 0;
+		width: 86px;
+	}
+	div.DashboardPadding, div.LogOutPadding, div.LogInPadding, .pull-right.social-icons {
+		float: left !important;
+	}
+	div.ButtonIconHolder .Dashboard {
+		margin-left: 4px;
+	}
+	div.OutwithButtonIcon {
+		width: 58px;
+	}
+	div.OutwithButtonIcon input {
+		padding-left: 8px;
+	}
+	div.ShoppingCartBorder {
+		border-right: 0;
+	}
+}
+
 /* ---------------------- Mediascreen Added by Jinghu ---------------------- */
 
 @media screen and (max-width: 1200px) {
-.Main {
-    width: 100%!important;
-	
+	.Main {
+		width: 100%!important;
+		
+	}
+	.Main iframe.media-youtube-player{
+		width: 100%!important;
+		
+	}
+	.Mainright{
+		width:100%;
+	}
+	.First iframe.media-youtube-player,  .Second iframe.media-youtube-player,  .Third iframe.media-youtube-player,  .Addverstise iframe.media-youtube-player{
+		width: 100%!important;
+		margin-right: 3px;
+	}
+	.First, .Second, .Third, .Addverstise{
+		width:49.8%;
+	}
 }
-.Main iframe.media-youtube-player{
-    width: 100%!important;
-    
+
+/* ------------------ Bobber Ad -------------- */
+.GetCentreLayout {
+	left: 0;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 1000;
 }
-.Mainright{
-	width:100%;
+.GetCentreLayout .ASection div {
+	background-color: white;
 }
-.First iframe.media-youtube-player,  .Second iframe.media-youtube-player,  .Third iframe.media-youtube-player,  .Addverstise iframe.media-youtube-player{
-    width: 100%!important;
-	margin-right: 3px;
+.GetCentreLayout .ASection .Desktop {
+	display: block;
+	width: 600px;
+	z-index: 1000;
+	margin: auto;
+	margin-top: -84px;
 }
-.First, .Second, .Third, .Addverstise{
-    width:49.8%;
-	
+.GetCentreLayout .ASection .Mobile {
+	display: none;
+	width: 234px;
+	z-index: 1000;
+	margin: auto;
+	margin-top: -84px;
 }
+@media screen and (max-width: 600px) {
+	.GetCentreLayout .ASection .Desktop {
+		display: none;
+	}
+	.GetCentreLayout .ASection .Mobile {
+		display: block;
+	}
 }

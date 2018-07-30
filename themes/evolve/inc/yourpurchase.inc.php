@@ -17,7 +17,7 @@ if(isset($_SESSION["Log-in"])) {
 } else {
 	echo "not logged in";
 }
-$products = $product["Orders"]
+$products = $product["Orders"];
 //rsort($products);
 ?>
 <div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
@@ -54,6 +54,7 @@ $products = $product["Orders"]
 						</div>
 
 						<?php 
+						if(!empty($products)) {
 							foreach($products as $product){
 								$now = date('d-m-Y');
 								if(strtotime($now)<strtotime('+1 years',strtotime($product['Orderdate']))){
@@ -65,6 +66,7 @@ $products = $product["Orders"]
 									echo "</div>";
 								}
 							}
+						}
 						?>
 
 					</div>
@@ -92,14 +94,16 @@ $products = $product["Orders"]
 
 					<?php
 							$apis = Array();
-							foreach($products as $product){
-								array_push($apis, $product["ID"]);
-								echo "<div class='flex-cell flex-flow-row'>";
-								echo "<div class='flex-col-4'>".$product['OrderLines'][0]['ProductName']."</div>";
-								echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
-								echo "<div class='flex-col-2'>".$product['Paymenttotal']."</div>";
-								echo "<div class='flex-col-3'>".$product['Orderdate']."</div>";
-								echo "</div>";
+							if(!empty($products)) {
+								foreach($products as $product){
+									array_push($apis, $product["ID"]);
+									echo "<div class='flex-cell flex-flow-row'>";
+									echo "<div class='flex-col-4'>".$product['OrderLines'][0]['ProductName']."</div>";
+									echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
+									echo "<div class='flex-col-2'>".$product['Paymenttotal']."</div>";
+									echo "<div class='flex-col-3'>".$product['Orderdate']."</div>";
+									echo "</div>";
+								}
 							}
 							//// 2.2.18 - GET payment history list
 							// Send - 
@@ -113,25 +117,27 @@ $products = $product["Orders"]
 
 				</div>
 				<?php 
-					foreach($products as $product) {
-						echo '<div id="Iaksbnkvoice'.$product['ID'].'" class="modal fade big-screen" role="dialog">
-								<div class="modal-dialog">
+					if(!empty($products)) {
+						foreach($products as $product) {
+							echo '<div id="Iaksbnkvoice'.$product['ID'].'" class="modal fade big-screen" role="dialog">
+									<div class="modal-dialog">
 
-								<!-- Modal content-->
-								<div class="modal-content">
-									<div class="modal-header">
-									<button type="button" class="close" data-dismiss="modal">&times;</button>
+									<!-- Modal content-->
+									<div class="modal-content">
+										<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">&times;</button>
+										</div>
+										<div class="modal-body">
+										<iframe name="stsIaksbnkvoice'.$product['ID'].'" src="http://www.physiotherapy.asn.au"></iframe>
+										</div>
+										<div class="modal-footer">
+										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+										</div>
 									</div>
-									<div class="modal-body">
-									<iframe name="stsIaksbnkvoice'.$product['ID'].'" src="http://www.physiotherapy.asn.au"></iframe>
-									</div>
-									<div class="modal-footer">
-									<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									</div>
-								</div>
 
-								</div>
-							</div>';
+									</div>
+								</div>';
+						}
 					}
 				?>
 			</div>
@@ -151,7 +157,7 @@ $products = $product["Orders"]
 	</style> 
 	<script>
 	$(document).ready(function() {
-		if (window.frames["<?php echo "Iaksbnkvoice".$apis[0]; ?>"] && !window.userSet) {
+		if (window.frames["<?php echo "Iaksbnkvoice".$apis[0]; ?>"] && !window.userSet && !empty($apis)) {
 			<?php if(count($invoiceAPI) <= 30) :?>
 				window.userSet = true;
 			<?php endif; ?>
