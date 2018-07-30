@@ -2986,7 +2986,7 @@ if(isset($_GET['MT'])){
                                 <label for="Udegree">Degree Level<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Udegree0" id="Udegree0">
-									<!--<option value="">Please select</option>-->
+									<option value="" selected disabled>Please select</option>
                                     <?php
                                         $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
                                         $degree             = json_decode($degreecode, true);
@@ -3013,7 +3013,7 @@ if(isset($_GET['MT'])){
                                 ?>
                             <div class="chevron-select-box">
                             <select class="form-control" name="Undergraduate-university-name0" id="Undergraduate-university-name0">
-                                <!--<option value="">Please select</option>-->
+                                <option value="" selected disabled>Please select</option>
 								<?php
                                     foreach ($University as $pair => $value) {
                                         echo '<option value="' . $University[$pair]['ID'] . '"';
@@ -3032,7 +3032,7 @@ if(isset($_GET['MT'])){
                                 <label for="Ugraduate-yearattained0">Year attained<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
-                                <!--<option value="">Please select</option>-->
+                                <option value="" selected disabled>Please select</option>
 								<?php
                                     $y = date("Y") + 5;
                                     for ($i = 1940; $i <= $y; $i++) {
