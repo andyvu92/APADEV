@@ -1,5 +1,6 @@
 <?php
-
+//Put filter condition to display member type
+$filterMemberProduct = array("10007","10008","10009","9997");
 // Put two scenarios here;
 // 1. for new user who join a member
 // 2. web user who join a member use $_SESSION]['userID'] to get user info
@@ -1173,13 +1174,15 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
     //$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
     //$MemberType     = json_decode($MemberTypecode, true);
     foreach ($MemberType as $key => $value) {
-        echo '<option value="' . $MemberType[$key]['ProductID'] . '"';
-        if (isset($_SESSION["MembershipProductID"])) {
-            if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']) {
-                echo "selected='selected'";
-            }
-        }
-        echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.$MemberType[$key]['Price'].') </option>';
+		if(!in_array($MemberType[$key]['ProductID'],$filterMemberProduct)){
+			echo '<option value="' . $MemberType[$key]['ProductID'] . '"';
+			if (isset($_SESSION["MembershipProductID"])) {
+				if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']) {
+					echo "selected='selected'";
+				}
+			}
+			echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.$MemberType[$key]['Price'].') </option>';
+		}
     }
     
 ?>
@@ -2767,13 +2770,15 @@ if(isset($_GET['MT'])){
 								//$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
 								//$MemberType     = json_decode($MemberTypecode, true);
 								foreach ($MemberType as $key => $value) {
-									echo '<option value="' . $MemberType[$key]['ProductID'] . '"';
-									if (isset($_SESSION["MembershipProductID"])) {
-										if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']) {
-											echo "selected='selected'";
+									if(!in_array($MemberType[$key]['ProductID'],$filterMemberProduct)){
+										echo '<option value="' . $MemberType[$key]['ProductID'] . '"';
+										if (isset($_SESSION["MembershipProductID"])) {
+											if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']) {
+												echo "selected='selected'";
+											}
 										}
+										echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.$MemberType[$key]['Price'].') </option>';
 									}
-									echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.$MemberType[$key]['Price'].') </option>';
 								}
 								
 							?>
@@ -2981,6 +2986,7 @@ if(isset($_GET['MT'])){
                                 <label for="Udegree">Degree Level<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Udegree0" id="Udegree0">
+									<option value="">Please select</option>
                                     <?php
                                         $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
                                         $degree             = json_decode($degreecode, true);
@@ -3000,14 +3006,15 @@ if(isset($_GET['MT'])){
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
                                 <label for="Undergraduateuniversity-name0">University name<span class="tipstyle"> *</span></label>
-                                <?php
+                                								<?php
                                     $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
                                     $University             = json_decode($universityCode, true);
                                     $_SESSION["University"] = $University;
                                 ?>
                             <div class="chevron-select-box">
                             <select class="form-control" name="Undergraduate-university-name0" id="Undergraduate-university-name0">
-                                <?php
+                                <option value="">Please select</option>
+								<?php
                                     foreach ($University as $pair => $value) {
                                         echo '<option value="' . $University[$pair]['ID'] . '"';
                                         echo '> ' . $University[$pair]['Name'] . ' </option>';
@@ -3025,7 +3032,8 @@ if(isset($_GET['MT'])){
                                 <label for="Ugraduate-yearattained0">Year attained<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
-                                <?php
+                                <option value="">Please select</option>
+								<?php
                                     $y = date("Y") + 5;
                                     for ($i = 1940; $i <= $y; $i++) {
                                         echo '<option value="' . $i . '">' . $i . '</option>';

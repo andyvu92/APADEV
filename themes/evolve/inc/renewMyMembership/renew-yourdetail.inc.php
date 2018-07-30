@@ -1,4 +1,6 @@
 <?php
+//Put filter condition to display member type
+$filterMemberProduct = array("10007","10008","10009","9997");
 // 2.2.21 - Get Fellowship product
 	// Send - 
 	// ProductID 
@@ -652,10 +654,12 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
                         //$MemberTypecode  = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
 						//$MemberType=json_decode($MemberTypecode, true);
 						foreach($MemberType  as $key => $value){
-							echo '<option value="'.$MemberType[$key]['ProductID'].'"';
-							if(isset($_SESSION["MembershipProductID"])){if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']){ echo "selected='selected'"; }} 
-							//elseif ($details['MemberTypeID'] == $MemberType[$key]['ID']){ echo "selected='selected'"; } 
-							echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.$MemberType[$key]['Price'].') </option>';
+							if(!in_array($MemberType[$key]['ProductID'],$filterMemberProduct)){
+								echo '<option value="'.$MemberType[$key]['ProductID'].'"';
+								if(isset($_SESSION["MembershipProductID"])){if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']){ echo "selected='selected'"; }} 
+								//elseif ($details['MemberTypeID'] == $MemberType[$key]['ID']){ echo "selected='selected'"; } 
+								echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.$MemberType[$key]['Price'].') </option>';
+							}
 						}
 					    ?>
 					</select>
