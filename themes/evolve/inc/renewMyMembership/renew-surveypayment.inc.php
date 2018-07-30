@@ -253,12 +253,12 @@ if(isset($_POST['step2-1'])) {
 	<?php endif; ?>  
 		<div class="row">
 			<div class="col-xs-12">
-				<input class="styled-checkbox" type="checkbox" id="privacy-policy">
-				<label for="privacy-policy" id="privacypolicyl">I agree to the APA Privacy Policy</label>
+				<input class="styled-checkbox" type="checkbox" id="jprivacy-policy">
+				<label for="jprivacy-policy" id="privacypolicyl"><span class="tipstyle">*&nbsp;</span>I agree to the APA Privacy Policy</label>
 			</div>
 			<div class="col-xs-12 display-none" id="rolloverblock">
-				<input class="styled-checkbox" type="checkbox" id="instalment-policy">
-				<label for="instalment-policy" id="instalmentpolicyl">I agree to the APA Instalment Payment Policy</label>
+				<input class="styled-checkbox" type="checkbox" id="instalmentpolicy">
+				<label for="instalmentpolicy" id="instalmentpolicyl"><span class="tipstyle">*&nbsp;</span>I agree to the APA Instalment Payment Policy</label>
 			</div>
 			<!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 display-none" id="rolloverblock"><label for="Rollover">Roll over</label><input type="checkbox" name="Rollover" id="Rollover"></div>-->
 		</div>   

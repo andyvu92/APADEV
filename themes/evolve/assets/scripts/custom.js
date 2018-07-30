@@ -915,7 +915,60 @@ jQuery(document).ready(function($) {
 		$('a.join-details-button5').removeClass('disabled');
 	}
 	});
-	
+	/*  check APA policy*/
+	if($('#privacypolicyp').val()=="0"){
+		$( "#disagreePolicyDescription" ).removeClass('display-none');
+		$('a.join-details-button7').addClass('disabled');
+		
+	}
+	else{
+		$( "#disagreePolicyDescription" ).addClass('display-none');
+		$('a.join-details-button7').removeClass('disabled');
+	}
+	$('#privacypolicyp').click(function() {
+		if($('#privacypolicyp').val()=="0"){
+		$( "#disagreePolicyDescription" ).removeClass('display-none');
+		$('a.join-details-button7').addClass('disabled');
+	}
+	else{
+		
+		$( "#disagreePolicyDescription" ).addClass('display-none');
+		$('a.join-details-button7').removeClass('disabled');
+	}
+	});
+	$('#apa_policy_button').click(function() {
+		$('#privacypolicyWindow').dialog('close');
+	});
+	/*  end check APA policy*/
+	/*  check Installment policy*/
+	if(!$("#rolloverblock").hasClass("display-none")){
+		if($('#installmentpolicyp').val()=="0"){
+			$( "#disagreeInstallmentDescription" ).removeClass('display-none');
+			$('a.join-details-button7').addClass('disabled');
+			
+		}
+		else{
+			$( "#disagreePolicyDescription" ).addClass('display-none');
+			$('a.join-details-button7').removeClass('disabled');
+		}
+		
+		
+	}
+	$('#installmentpolicyp').click(function() {
+		if($('#installmentpolicyp').val()=="0"){
+		$( "#disagreeInstallmentDescription" ).removeClass('display-none');
+		$('a.join-details-button7').addClass('disabled');
+		}
+		else{
+			
+			$( "#disagreeInstallmentDescription" ).addClass('display-none');
+			$('a.join-details-button7').removeClass('disabled');
+		}
+	});
+	$('#installment_policy_button').click(function() {
+		$('#installmentpolicyWindow').dialog('close');
+	});
+	/*  end check Installment policy*/
 	$('#logoutButton').click(function() {
 		document.getElementById("logoutAcButton").click();
 	});

@@ -291,12 +291,12 @@ if(isset($_POST['step2-1'])) {
 		<div class="row">
 			<div class="col-xs-12">
 				<input class="styled-checkbox" type="checkbox" id="jprivacy-policy">
-				<label for="jprivacy-policy" id="privacypolicyl">I agree to the APA Privacy policy</label>
+				<label for="jprivacy-policy" id="privacypolicyl"><span class="tipstyle">*&nbsp;</span>I agree to the APA Privacy policy</label>
 			</div>
 
 			<div class="col-xs-12 display-none" id="rolloverblock">
 				<input class="styled-checkbox" type="checkbox" id="instalmentpolicy" >
-				<label for="instalmentpolicy" id="instalmentpolicyl">I agree to the APA Instalment Payment Policy</label>
+				<label for="instalmentpolicy" id="instalmentpolicyl"><span class="tipstyle">*&nbsp;</span>I agree to the APA Instalment Payment Policy</label>
 			</div>
 
 			<!--<div class="col-xs-12 display-none" id="rolloverblock">

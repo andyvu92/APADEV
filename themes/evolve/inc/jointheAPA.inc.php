@@ -52,8 +52,9 @@ $background = getBackgroundImage($userID);
 </div>
 <div id="privacypolicyWindow" style="display:none;">
 	<h3>Australian Physiotherapy Association Privacy Policy </h3>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
 	
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>
 	<h5 class="doc-header">Our Commitment to Your Privacy</h5>
 
 
@@ -276,15 +277,20 @@ Facsimile: (03) 9092 0899</p>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
 
-		<input class="styled-checkbox" type="checkbox" id="privacypolicyp" checked> 
+		<input class="styled-checkbox" type="checkbox" id="privacypolicyp" checked name="privacy-policy"> 
 		<label for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label>
 		
 	</div>	
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreePolicyDescription"> 
+        Please agree to the APA Privacy Policy to continue with your membership
+	</div> 
     <button type="button" class="btn btn-default" id="apa_policy_button">Submit</button>	
 </div>
 <div id="installmentpolicyWindow" style="display:none;">
 	<h3>APA installment policy</h3>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+	
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
 	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pretium
 	tellus non ex mattis feugiat a in est. Praesent est leo, viverra ac
 	hendrerit ac, facilisis at ante. Phasellus elementum hendrerit risus,
@@ -295,10 +301,14 @@ Facsimile: (03) 9092 0899</p>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
 		
-		<input class="styled-checkbox" type="checkbox" id="installmentpolicyp" checked>
+		<input class="styled-checkbox" type="checkbox" id="installmentpolicyp" checked name="instalmentpolicy"> 
 		<label for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label>
 
 	</div>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeInstallmentDescription"> 
+         Please agree to the APA Installment Policy to continue with your membership
+	</div>
+	<button type="button" class="btn btn-default" id="installment_policy_button">Submit</button>		
 </div>	
 <?php logRecorder(); ?>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
