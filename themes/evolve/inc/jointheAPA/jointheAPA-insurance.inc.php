@@ -51,6 +51,15 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Oneclaim" id="Oneclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="1") echo 'checked="checked"';?>><label style="min-height:0" for="Oneclaim1">Yes</label></div>
 			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Oneclaim" id="Oneclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label style="min-height:0" for="Oneclaim2">No</label></div>
 		</div>
+		<div class="row">
+			<div class="col-xs-12">
+						<label>Business name</label>
+						<input type="text" class="form-control" name="Businiessname" id="Businiessname" placeholder="Business name, practice name or trading name owned by you, do not name your employer’s business." <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Businiessname']; }else{ echo '';}?>>
+			</div>
+			<div class="col-xs-12">
+				<span class="note-text"><strong>Note: </strong></span>Business name, practice name or trading name owned by you, do not name your employer’s business.
+			</div>
+		</div>
 		<div class="display-none" id="insuranceMore">
 			<div class="col-xs-12">
 				<label>If you answered yes to one or more of the above questions (1-5) please provide:</label>
@@ -89,19 +98,13 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 					<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Finalisedclaim" id="Finalisedclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label for="Finalisedclaim2">No</label></div>
 				</div>
 				
-				<div class="col-xs-12">
-					<label>Business name</label>
-					<input type="text" class="form-control" name="Businiessname" id="Businiessname" placeholder="Business name, practice name or trading name owned by you, do not name your employer’s business." <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Businiessname']; }else{ echo '';}?>>
-				</div>
-				<div class="col-xs-12">
-					<span class="note-text"><strong>Note: </strong></span>Business name, practice name or trading name owned by you, do not name your employer’s business.
-				</div>
+				
 		    </div>
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
-					<input class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0" data-target="#insuranceTermsandConditions" data-toggle="modal"><label for="conditions">I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
-				other material information to be disclosed<span class="tipstyle">*</span></label>
+					<input class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0" data-target="#insuranceTermsandConditions" data-toggle="modal"><label for="conditions"><span class="tipstyle">* </span>I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
+				other material information to be disclosed</label>
 				</div>
 			</div>
 			<div class="col-xs-12">  <a id="insuranceControl"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton5"><span class="dashboard-button-name">Back</span></a></div>

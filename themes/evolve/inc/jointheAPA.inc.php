@@ -279,7 +279,8 @@ Facsimile: (03) 9092 0899</p>
 		<input class="styled-checkbox" type="checkbox" id="privacypolicyp" checked> 
 		<label for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label>
 		
-	</div>	 
+	</div>	
+    <button type="button" class="btn btn-default" id="apa_policy_button">Submit</button>	
 </div>
 <div id="installmentpolicyWindow" style="display:none;">
 	<h3>APA installment policy</h3>

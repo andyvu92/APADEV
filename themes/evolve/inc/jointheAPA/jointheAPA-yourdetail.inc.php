@@ -392,6 +392,7 @@ if (isset($_POST['step1'])) {
             if (isset($_POST['Additionallanguage' . $i])) {
                 $workplaceArray['AdditionalLanguage'] = implode(",", $_POST['Additionallanguage' . $i]);
             }
+			else{ $workplaceArray['AdditionalLanguage'] = array();}
             
             array_push($tempWork, $workplaceArray);
         }
@@ -1758,25 +1759,25 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                         <!--BREAK-->
                     
                         <div class="row">
-                            <div class="col-xs-12">
+                            <!--<div class="col-xs-12">
                                 <label>Choose the languages you speak in your practice?</label>
-                                <?php
+                                <?php /*
         if (!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {
             $WAdditionalLanguage = explode(",", $details['Workplaces'][$key]['AdditionalLanguage']);
         } else {
             $WAdditionalLanguage = array();
-        }
+        }*/
         
 ?>
                                
                                <div class="plus-select-box">
                                <select class="chosen-select" id="Additionallanguage<?php
-        echo $key;
+        //echo $key;
 ?>" name="Additionallanguage<?php
         echo $key;
 ?>[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
                                     <?php
-       
+       /*
         foreach ($Language as $pair => $value) {
             echo '<option value="' . $Language[$pair]['ID'] . '"';
             if (in_array($Language[$pair]['ID'], $WAdditionalLanguage)) {
@@ -1784,12 +1785,12 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
             }
             
             echo '> ' . $Language[$pair]['Name'] . ' </option>';
-        }
+        }*/
         
 ?>
                                </select>
                                 </div>
-                            </div>
+                            </div>-->
                             <div class="col-xs-12 col-md-6">
                                 <label>Quality In Practice number(QIP)</label>
                                 <input type="text" class="form-control" name="QIP<?php
@@ -1955,7 +1956,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 
                         <div class="row">
                         <div class="col-xs-12 col-md-6">
-                            <label>Workplace setting<span class="tipstyle"> *</span></label>
+                            <label>Workplace setting</label>
                             <div class="chevron-select-box">
                             <select class="form-control" id="Workplace-setting<?php
                                             echo $key;
@@ -2043,7 +2044,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             <div class="col-xs-12 col-sm-6">
                                 <label for="Udegree<?php
         echo $key;
-?>">Level of qualification<span class="tipstyle"> *</span></label>
+?>">Degree Level<span class="tipstyle"> *</span></label>
                                 <?php
         $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
         $degree             = json_decode($degreecode, true);
@@ -2977,7 +2978,7 @@ if(isset($_GET['MT'])){
                     <div class="row">
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
-                                <label for="Udegree">Degree<span class="tipstyle"> *</span></label>
+                                <label for="Udegree">Degree Level<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Udegree0" id="Udegree0">
                                     <?php

@@ -125,7 +125,7 @@ if(isset($_POST['step1'])) {
 		if(isset($_POST['MobilePhysio'.$i])) { $workplaceArray['MobilePhysio'] = $_POST['MobilePhysio'.$i];}else {$workplaceArray['MobilePhysio']="False";}
 		if(isset($_POST['Number-worked-hours'.$i])) { $workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours'.$i];}
 		if(isset($_POST['WTreatmentarea'.$i])){ $workplaceArray['SpecialInterestAreaID'] = implode(",",$_POST['WTreatmentarea'.$i]); }
-		if(isset($_POST['Additionallanguage'.$i])){ $workplaceArray['AdditionalLanguage'] = implode(",",$_POST['Additionallanguage'.$i]); }
+		if(isset($_POST['Additionallanguage'.$i])){ $workplaceArray['AdditionalLanguage'] = implode(",",$_POST['Additionallanguage'.$i]); }else{ $workplaceArray['AdditionalLanguage'] = array();}
 		array_push($tempWork, $workplaceArray);
 	}
         $postData['Workplaces'] =  $tempWork ;
@@ -1278,25 +1278,25 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 
 						<div class="row">
 							 <?php  
-								if(!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {$WAdditionalLanguage = explode(",",$details['Workplaces'][$key]['AdditionalLanguage']); } else {$WAdditionalLanguage = array();}
+								//if(!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {$WAdditionalLanguage = explode(",",$details['Workplaces'][$key]['AdditionalLanguage']); } else {$WAdditionalLanguage = array();}
 							?>
-							<div class="col-xs-12 col-md-6">
+							<!--<div class="col-xs-12 col-md-6">
 								<label>Choose the languages you speak in your practice?</label>
 								<div class="plus-select-box">
 								<select class="chosen-select" id="Additionallanguage<?php echo $key;?>" name="Additionallanguage<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
 									
-									<?php 
+									<?php /*
 									$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
 									$Language=json_decode($Languagecode, true);
 									foreach($Language  as $pair => $value){
 										echo '<option value="'.$Language[$pair]['ID'].'"';
 										if (in_array($Language[$pair]['ID'],$WAdditionalLanguage)){ echo "selected='selected'"; } 
 										echo '> '.$Language[$pair]['Name'].' </option>';
-									}
+									}*/
 									?>
 								</select>
 								</div>
-							</div>
+							</div>-->
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
 								<label>Quality In practice number(QIP)</label>
@@ -1358,7 +1358,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<div class="row">
 
 							<div class="col-xs-12 col-md-6">
-								<label>Workplace setting<span class="tipstyle"> *</span></label>
+								<label>Workplace setting</label>
 								<div class="chevron-select-box">
 								<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting0" required>
 								<?php

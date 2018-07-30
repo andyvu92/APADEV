@@ -2,7 +2,7 @@
 $i = $_POST['count'];
 $sessionWorkplaceSetting = json_decode($_POST['sessionWorkplaceSetting']);
 $sessioninterestAreas = json_decode($_POST['sessioninterestAreas']);
-$sessionLanguage = json_decode($_POST['sessionLanguage']);
+//$sessionLanguage = json_decode($_POST['sessionLanguage']);
 $sessionCountry = $_POST['sessionCountry'];
 $memberType = $_POST['memberType'];
 $interestAreas= $sessioninterestAreas;
@@ -145,18 +145,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 
 <div class="row">
 
-	<div class="col-xs-12">
-		<label>Choose the languages you speak in your practice?</label>
-		<div class="chevron-select-box">
-		<select class="chosen-select" multiple id="Additionallanguage'.$i.'" name="Additionallanguage'.$i.'[]">';
-			$Language = $sessionLanguage;
-			foreach($Language  as $key => $object){
-				echo '<option value="'.$object->ID.'">'.$object->Name.'</option>';
-			}
-		echo '
-		</select>
-		</div>
-	</div>
+	
 
 	<div class="col-xs-6 col-md-6">
 		<label>Quality In Practice number(QIP)</label>
@@ -218,7 +207,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 <div class="row">
 
 	<div class="col-xs-12 col-md-6">
-		<label>Workplace setting<span class="tipstyle">*</span></label>
+		<label>Workplace setting</label>
 		<div class="chevron-select-box">
 		<select class="form-control" id="Workplace-setting'.$i.'" name="Workplace-setting'.$i.'">';
 			$workplaceSettings = $sessionWorkplaceSetting;
