@@ -139,7 +139,7 @@ if(isset($_POST['step1'])) {
 		if(isset($_POST['MobilePhysio'.$i])) { $workplaceArray['MobilePhysio'] = $_POST['MobilePhysio'.$i];}else {$workplaceArray['MobilePhysio']="False";}
 		if(isset($_POST['Number-worked-hours'.$i])) { $workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours'.$i];}
 		if(isset($_POST['WTreatmentarea'.$i])){ $workplaceArray['SpecialInterestAreaID'] = implode(",",$_POST['WTreatmentarea'.$i]); }
-		if(isset($_POST['Additionallanguage'.$i])){ $workplaceArray['AdditionalLanguage'] = implode(",",$_POST['Additionallanguage'.$i]); }
+		if(isset($_POST['Additionallanguage'.$i])){ $workplaceArray['AdditionalLanguage'] = implode(",",$_POST['Additionallanguage'.$i]); } else{ $workplaceArray['AdditionalLanguage'] = array();}
 		array_push($tempWork, $workplaceArray);
 	}
         $postData['Workplaces'] =  $tempWork ;
@@ -268,7 +268,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 <form id="your-detail-form" action="renewmymembership" method="POST">
 	<input type="hidden" name="step1" value="1"/>
 	<input type="hidden" name="insuranceTag" id="insuranceTag"/>
-		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_POST['goI'])|| isset($_POST['goP'])||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['QOrder']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
+		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_POST['goI'])|| isset($_POST['goP'])||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['QOrder']) || isset($_POST["MType"]))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
 				<div class="row">
 					<div class="col-xs-6 col-md-3">
 						<label for="prefix">Prefix</label>
@@ -626,7 +626,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 		  </div>-->
 		    <div class="col-xs-12">   <a class="join-details-button1"><span class="dashboard-button-name">Next</span></a></div>
 		</div>
-		<div class="down2" style="display:none;" >
+		<div class="down2" <?php if(isset($_POST["MType"]))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
 			<div class="row">
 			<input type="hidden"  name="Status" <?php if (empty($details['Status'])) {echo "value='1'";}   else{ echo 'value="'.$details['Status'].'"'; }?>>
 				<div class="col-xs-12 col-md-6">
@@ -1003,25 +1003,26 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<div class="row">
 
 					 <?php  
-						if(!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {$WAdditionalLanguage = explode(",",$details['Workplaces'][$key]['AdditionalLanguage']); } else {$WAdditionalLanguage = array();}
+						//if(!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {$WAdditionalLanguage = explode(",",$details['Workplaces'][$key]['AdditionalLanguage']); } else {$WAdditionalLanguage = array();}
 						
 						?>
-					<div class="col-xs-12">
+					<!--<div class="col-xs-12">
 						<label>Choose the languages you speak in your practice?</label>
 						<div class="plus-select-box">
 						<select class="chosen-select" id="Additionallanguage<?php echo $key;?>" name="Additionallanguage<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
 							<?php 
+							/*
 								$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
 								$Language=json_decode($Languagecode, true);
 								foreach($Language  as $pair => $value){
 									echo '<option value="'.$Language[$pair]['ID'].'"';
 									if (in_array($Language[$pair]['ID'],$WAdditionalLanguage)){ echo "selected='selected'"; } 
 									echo '> '.$Language[$pair]['Name'].' </option>';
-								}
+								}*/
 						    ?>	
 						</select>
 						</div>
-					</div>
+					</div>-->
 
 					<div class="col-xs-6 col-md-6">
 						<label>Quality In Practice number(QIP)</label>
@@ -1078,7 +1079,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 
 				<div class="row">
 					<div class="col-xs-12 col-md-6">
-						<label>Workplace setting<span class="tipstyle"> *</span></label>
+						<label>Workplace setting</label>
 						<div class="chevron-select-box">	
 						<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting0">
 						<?php
@@ -1142,7 +1143,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<div class="row">
 							<div class="row">
 								<div class="col-xs-12 col-sm-6">
-									<label for="Udegree<?php echo $key;?>">Degree<span class="tipstyle"> *</span></label>
+									<label for="Udegree<?php echo $key;?>">Degree Level<span class="tipstyle"> *</span></label>
 									<?php 
 										$degreecode  = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
 										$degree=json_decode($degreecode, true);

@@ -117,17 +117,23 @@ if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['P
 //test data
 
 $postReviewData['InstallmentFor'] = "Membership";
-if(isset($_POST['PRF'])&& $_POST['PRF']!="Other"){ 
-	$postReviewData['PRFdonation'] = $_POST['PRF']; 
+if(!isset($_POST['prftag'])){
+	if(isset($_POST['PRF'])&& $_POST['PRF']!="Other"){ 
+		$postReviewData['PRFdonation'] = $_POST['PRF']; 
+	}
+	elseif(isset($_POST['PRF'])&& $_POST['PRF']=="Other"){
+		$_POST['PRF'] = $_POST['PRFOther'];
+		$postReviewData['PRFdonation'] = $_POST['PRF'];		
+	}
+	//check is there PRF product existed for this user
+	checkShoppingCart($userID=$_SESSION['UserId'], $type="", $prodcutID="PRF");
+	//save PRF product into APA database function
+	createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $type="",$coupon=$_POST['PRF']); 
 }
-elseif(isset($_POST['PRF'])&& $_POST['PRF']=="Other"){
-	$_POST['PRF'] = $_POST['PRFOther'];
-	$postReviewData['PRFdonation'] = $_POST['PRF'];		
-}
-//check is there PRF product existed for this user
-checkShoppingCart($userID=$_SESSION['UserId'], $type="", $prodcutID="PRF");
-//save PRF product into APA database function
-createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $type="",$coupon=$_POST['PRF']); 
+else{
+		$postReviewData['PRFdonation'] = "";
+		$_POST['PRF'] = "0";
+	}
 //if(isset($_POST['Rollover'])){ $postReviewData['Rollover'] = $_POST['Rollover']; }
 //if(isset($_POST['Installpayment-frequency'])){ $postReviewData['Installpayment-frequency'] = $_POST['Installpayment-frequency']; }
 if(isset($_POST['Installpayment-frequency'])){ $postReviewData['InstallmentFrequency'] = $_POST['Installpayment-frequency']; }
@@ -270,7 +276,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 							echo "</div>";  
 						}
 				}
-				if(isset($_POST['PRF'])&& $_POST['PRF']!=""){ 
+				if((!isset($_POST['prftag'])) && isset($_POST['PRF'])&& $_POST['PRF']!=""){ 
                     echo '<div class="flex-cell flex-flow-row table-cell PRF">
                     <div class="flex-col-8 title-col">Physiotherapy Research Foundation donation</div>
                     <div class="flex-col-2 price-col">A$'.$_POST['PRF'].'</div>

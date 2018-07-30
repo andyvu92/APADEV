@@ -10,7 +10,7 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 	<div class="col-xs-12 space-line"><div class="col-xs-12 separater"></div></div>
 
 	<div class="row">
-		<div class="col-xs-12 col-sm-6"> <label for="degree'.$i.'">Level of qualification<span class="tipstyle">*</span></label>
+		<div class="col-xs-12 col-sm-6"> <label for="degree'.$i.'">Degree Level<span class="tipstyle">*</span></label>
 		<div class="chevron-select-box">	
 		<select class="form-control" name="Udegree'.$i.'" id="Udegree'.$i.'">';
 				$degree = $sessionDegree;

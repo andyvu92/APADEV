@@ -9,13 +9,14 @@ if(isset($_POST['step2-1'])) {
 	if(isset($_POST['Disciplinary'])){ $postInsuranceData['ExternalDisciplinaryProceedings'] = $_POST['Disciplinary']; }
 	if(isset($_POST['Decline'])){ $postInsuranceData['InsurerDeclinedInsurance'] = $_POST['Decline']; }
 	if(isset($_POST['Oneclaim'])){ $postInsuranceData['MoreThanOneClaim'] = $_POST['Oneclaim']; }
+	if(isset($_POST['Businiessname'])){ $postInsuranceData['BusinessNameOwned'] = $_POST['Businiessname']; }	
 	if($_POST['Addtionalquestion']=="1"){
 		if(isset($_POST['Yearclaim'])){ $postInsuranceData['Yearofclaim'] = $_POST['Yearclaim']; }
 		if(isset($_POST['Nameclaim'])){ $postInsuranceData['ClaimantName'] = $_POST['Nameclaim']; }
 		if(isset($_POST['Fulldescription'])){ $postInsuranceData['Description'] = $_POST['Fulldescription']; }
 		if(isset($_POST['Amountpaid'])){ $postInsuranceData['AmountPaid'] = $_POST['Amountpaid']; }
 		if(isset($_POST['Finalisedclaim'])){ $postInsuranceData['ClaimFinalised'] = $_POST['Finalisedclaim']; }
-		if(isset($_POST['Businiessname'])){ $postInsuranceData['BusinessNameOwned'] = $_POST['Businiessname']; }	
+		
 	}
 	else{
 		$postInsuranceData['Yearofclaim'] ="";
@@ -23,7 +24,7 @@ if(isset($_POST['step2-1'])) {
 		$postInsuranceData['Description']="";
 		$postInsuranceData['AmountPaid'] ="";
 		$postInsuranceData['ClaimFinalised'] ="";
-		$postInsuranceData['BusinessNameOwned'] = "";
+		
 	}		
 	
     // 2.2.40 - Get user insurance data
@@ -104,21 +105,27 @@ if(isset($_POST['step2-1'])) {
 
 			<div class="col-xs-12">
 				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-1" value="0" checked="checked">
-				<label for="p1-1">Full payment</label>
+				<label for="p1-1">Pay in full today</label>
 			</div>
 			<?php if($_SESSION["MembershipProductID"] !="9968" ||$_SESSION["MembershipProductID"] !="10005"|| $_SESSION["MembershipProductID"] !="9967"|| $_SESSION["MembershipProductID"] !="10006"): ?>
 			<div class="col-xs-12">
 				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-2" value="1">
-				<label for="p1-2">Monthly instalments (This option incurs a $12.00 admin fee)</label>
+				<label for="p1-2">Pay by monthly instalments (This option incurs a $12.00 admin fee)</label>
 			</div>
 			<?php endif;?>
 			<input type="hidden" id="Installpayment-frequency" name="Installpayment-frequency" value="">
 
 		<div class="row">
 			<div class="col-xs-12"><label>PRF donation</label></div>
+			<div class="col-xs-12">A small proportion of all membership fees directly support physiotherapy research. We also appreciate member donations to further the important work of the Physiotherapy Research Foundation.</div>
+			<div class="col-xs-12">
+				<input class="styled-checkbox" type="checkbox" id="prftag" name="prftag">
+				<label for="prftag" id="prftagAgree">No, I do not want to make a donation to the PRF</label>
+			</div>
 			<div class="col-xs-6 col-md-3">
 				<select class="form-control" id="PRF" name="PRF">
-					<option value="10" selected>$10.00</option>
+					<option value="5" selected>$5.00</option>
+					<option value="10">$10.00</option>
 					<option value="20">$20.00</option>
 					<option value="50">$50.00</option>
 					<option value="100">$100.00</option>
@@ -229,7 +236,7 @@ if(isset($_POST['step2-1'])) {
 			</div>
 
 			<div class="col-xs-6 col-sm-3">
-				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date" maxlength="4">
+				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
 			</div>
 
 			<div class="col-xs-6 col-sm-3">
@@ -238,7 +245,7 @@ if(isset($_POST['step2-1'])) {
 		</div>
 		<div class="col-xs-12">
 			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked>
-			<label for="addcardtag">Do you want to save this card</label>
+			<label for="addcardtag">Save this card</label>
 		</div>
 		
 		<input type="hidden" name="addCard" value="1">
@@ -246,12 +253,12 @@ if(isset($_POST['step2-1'])) {
 	<?php endif; ?>  
 		<div class="row">
 			<div class="col-xs-12">
-				<input class="styled-checkbox" type="checkbox" id="privacy-policy">
-				<label for="privacy-policy" id="privacypolicyl">I agree to the APA Privacy Policy</label>
+				<input class="styled-checkbox" type="checkbox" id="jprivacy-policy">
+				<label for="jprivacy-policy" id="privacypolicyl"><span class="tipstyle">*&nbsp;</span>I agree to the APA Privacy Policy</label>
 			</div>
 			<div class="col-xs-12 display-none" id="rolloverblock">
-				<input class="styled-checkbox" type="checkbox" id="instalment-policy">
-				<label for="instalment-policy" id="instalmentpolicyl">I agree to the APA Instalment Payment Policy</label>
+				<input class="styled-checkbox" type="checkbox" id="instalmentpolicy">
+				<label for="instalmentpolicy" id="instalmentpolicyl"><span class="tipstyle">*&nbsp;</span>I agree to the APA Instalment Payment Policy</label>
 			</div>
 			<!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 display-none" id="rolloverblock"><label for="Rollover">Roll over</label><input type="checkbox" name="Rollover" id="Rollover"></div>-->
 		</div>   
