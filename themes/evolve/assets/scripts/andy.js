@@ -159,6 +159,11 @@ jQuery(document).ready(function ($) {
   }
 });
 
-//IMAGE UPLOAD BOX
+//AUTO SCROLL ON SEARCH
+jQuery(document).ready(function() {
+	if(window.location.href.indexOf("?page") > -1||window.location.href.indexOf("?pagesize") > -1 || window.location.href.indexOf("?search-result") > -1){
+		$('html, body').animate({ scrollTop: $('#section-content-top').offset().top  - $('#section-header').height() }, 1000);
+	}
+});
 
 
