@@ -83,7 +83,7 @@ $background = getBackgroundImage($userID);
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Become a member</strong></span></div>
+			<div class="col-xs-12"><span class="dashboard-name"><strong>Become a member</strong></span></div>
 		<!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background <?php if(!isset($_SESSION["userID"])) echo "display-none";?>">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>-->
 		</div>
 	<?php
@@ -102,8 +102,8 @@ $background = getBackgroundImage($userID);
 					<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 text-underline" id="Review"><strong>Review</strong></span></a></li>
 				</ul>
 				<div class="row">
-					<h2 style="color:white;">Thank you for your joining</h2>
-					<p style="color:white;">We’re glad to have you on board.</p>
+					<h2 style="color:#000;">Thank you for your joining</h2>
+					<p style="color:#000;">We’re glad to have you on board.</p>
 					<?php 
 					// after web service 2.2.26 Aptify response the invoice_id;
 					// 2.2.18 Get payment invoice PDF
@@ -118,7 +118,7 @@ $background = getBackgroundImage($userID);
 					?> 
 					<br>
 					<a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
-					<p style="color:white;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>
+					<p style="color:#000;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>
 				</div>
 				<div id="Iaksbnkvoice" class="modal fade big-screen" role="dialog">
 					<div class="modal-dialog">

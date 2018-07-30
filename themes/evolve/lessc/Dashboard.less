@@ -232,19 +232,30 @@ body.modal-open {
 #block-block-184 .carousel-control{
   width:0%;
 }
-#block-block-184 .carousel-control .glyphicon-chevron-left, #block-block-184 .carousel-control .glyphicon-chevron-right {
-
-  font-size: 15px;
-  margin-right:-15px;
+#block-block-184 .carousel-control .glyphicon-chevron-left{
+    position: absolute;
+    font-size: 15px;
+    left: 0;
 }
+
+#block-block-184 .carousel-control .glyphicon-chevron-right{
+    position: absolute;
+    font-size: 15px;
+    right: -20px;
+    @media all and (max-width: @tablet-width){
+        right: 0;
+    }
+}
+
 #block-block-184 .container-fluid {
   width:100%;
   padding-left: 0px!important;      
 }
 
-#block-block-184 td, #block-block-220 td, #block-block-216 #dashboard-navbar-collapse-1 td, #block-block-218 #dashboard-navbar-collapse-1 td, #block-block-220 #dashboard-navbar-collapse-1 td
-	
-{
+#block-block-184 td, #block-block-220 td, 
+#block-block-216 #dashboard-navbar-collapse-1 td, 
+#block-block-218 #dashboard-navbar-collapse-1 td, 
+#block-block-220 #dashboard-navbar-collapse-1 td{
    border-top: none;
 }
 #block-block-218 .down4 td, #block-block-218 .down5 td{
@@ -265,7 +276,11 @@ body.modal-open {
     background: transparent;
 }
 
-#block-block-184 label > input, #block-block-216 label > input, #block-block-218 label > input, #block-block-220 label > input, #block-block-243 label > input, #block-block-242 label > input, #block-block-244 label > input, #block-block-245 label > input{ /* HIDE RADIO */
+#block-block-184 label > input, 
+#block-block-216 label > input, #block-block-218 label > input, 
+#block-block-220 label > input, #block-block-243 label > input, 
+#block-block-242 label > input, #block-block-244 label > input, 
+#block-block-245 label > input{ /* HIDE RADIO */
   visibility: hidden; /* Makes input not-clickable */
   position: absolute; /* Remove input from document flow */
 }
@@ -2341,6 +2356,7 @@ form{
           cursor: pointer;
           padding: 0;
           display: flex;
+          text-align: left;
         }
       
         // Box.
@@ -2479,6 +2495,7 @@ form{
                   cursor: pointer;
                   padding: 0;
                   display: flex;
+                  text-align: left;
                 }
               
                 // Box.
@@ -2815,6 +2832,7 @@ form{
           cursor: pointer;
           padding: 0;
           display: flex;
+          text-align: left;
         }
       
         // Box.
@@ -2874,7 +2892,7 @@ form{
  }
  
  .page-node-154, .page-node-211, .page-node-209, 
- .page-node-207, .page-node-385{
+ .page-node-207, .page-node-385, .page-node-388{
     .dexp-body-inner{
         #section-content-top{
             border-bottom: 30px solid #009fda;
@@ -2902,4 +2920,13 @@ form{
 
  #deleteCardWindow{
      text-align: center;
+ }
+
+ /*--JOIN CONFIRMATION--*/
+ .page-node-388{
+    #dashboard-right-content{
+        .nav-tabs {
+            margin-left: -15px;
+        }
+    }
  }
