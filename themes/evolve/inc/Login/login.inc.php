@@ -105,7 +105,8 @@
 	<form method="POST" action="<?php echo $url; ?>" name="forlogout">
 		<input id="logoutAcButton"type="hidden" name="logout" value="out" style="display: none;" />
 		<div id="logoutButton" class="ButtonIconHolder withButtonIcon">
-			<i class="Log-out">&nbsp;</i><input type="submit" value="log-out" />
+			<?php if(isset($_SESSION['FirstName'])) {echo "<b>".$_SESSION['FirstName']."</b>&nbsp;";} ?>
+			<input type="submit" value="log-out" />
 		</div>
 	</form>
 </div>

@@ -200,6 +200,15 @@ div.withButtonIcon {
 		height: 24px;
 	}
 }
+.OtherSitesList {
+	position: fixed;
+    width: 300px;
+    height: 500px;
+    right: -300px;
+    top: 0;
+	background-color: white;
+	z-index: 15;
+}
 div.withButtonIcon  input{
 	background-color:transparent;
 	padding: 10px 0 0 10px;
@@ -208,6 +217,10 @@ div.withButtonIcon  input{
 }
 div#logoutButton, div#loginButton {
 	cursor: pointer;
+}
+/* homepage nav hover cancel */
+#section-header .dexp-dropdown > ul > li:hover > a, #section-header .dexp-dropdown > ul > li.active > a {
+	border-top: 3px solid transparent;
 }
 @media screen and (max-width: 767px) {
 	div[id^="home-tile-view-block"] .homeBottom .content .portfolio-image {

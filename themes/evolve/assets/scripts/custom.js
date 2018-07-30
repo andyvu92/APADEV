@@ -920,13 +920,12 @@ jQuery(document).ready(function($) {
 		document.getElementById("logoutAcButton").click();
 	});
 	$(".OthersiteButton").click( function() {
-		console.log($(".OtherSitesList").position().right);
-		if($(".OtherSitesList").position().right == '-300') {
-			$(".OtherSitesList").animate({right: "0px"}, 300);
-		} else {
-			$(".OtherSitesList").animate({right: "-300px"}, 300);
-		}
+		$(".OtherSitesList").animate({right: "0px"}, 300);
 	});
+	$(".OthersiteButtonClose").click( function() {
+		$(".OtherSitesList").animate({right: "-300px"}, 300);
+	});
+	
 	
 });
 /*
