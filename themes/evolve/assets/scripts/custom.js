@@ -969,8 +969,12 @@ jQuery(document).ready(function($) {
 		$('#installmentpolicyWindow').dialog('close');
 	});
 	/*  end check Installment policy*/
+	
 	$('#logoutButton').click(function() {
 		document.getElementById("logoutAcButton").click();
+	});
+	$('#DashboardButton').click(function() {
+		window.location = "/dashboard";
 	});
 	$(".OthersiteButton").click( function() {
 		$(".OtherSitesList").animate({right: "0px"}, 300);
@@ -978,7 +982,6 @@ jQuery(document).ready(function($) {
 	$(".OthersiteButtonClose").click( function() {
 		$(".OtherSitesList").animate({right: "-300px"}, 300);
 	});
-	
 	
 });
 /*
