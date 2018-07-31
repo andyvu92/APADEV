@@ -111,8 +111,11 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 					<input type="text" class="form-control" name="Nameclaim" id="Nameclaim" placeholder="Name of claimant" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Nameclaim']; }else{ echo 'placeholder="Name of claimant"';}?>>
 				</div>
 			</div>
-
-			<div class="row"><div class="col-xs-12 col-md-6"><textarea rows="5" type="text" class="form-control" name="Fulldescription" id="Fulldescription" placeholder="Full description of insurance" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Fulldescription']; }else{ echo 'placeholder="Full description of insurance"';}?>></div></div>
+			
+			<div class="row"><div class="col-xs-12 col-md-6">
+				<textarea rows="5" type="text" class="form-control" name="Fulldescription" id="Fulldescription" placeholder="Full description of insurance" <?php if($insuranceDataTag==1 && strlen($insuarnceData['results'][0]['Fulldescription']) > 1) {echo " value='".$insuarnceData['results'][0]['Fulldescription']."'"; } ?>>
+				</textarea>
+			</div></div>
 			
 			<div class="col-xs-12">
 				<label>Insufficient details in your response may result in additional details being requested</label>
@@ -255,13 +258,13 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 					<li>If we cannot reach a satisfactory resolution within a further 45 days you can send your complaint to FOS at phone 1300 780 808; email at info@fos.org.au; or in writing to Financial Ombudsman Service, GPO Box 3, Melbourne, VIC 3001. The FOS website is www.fos.org.au. </li>
 				</ul>
 				
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				<input class="styled-checkbox" type="checkbox" id="insuranceTerms" checked>
-            	<label for="insuranceTerms">Yes. I’ve read and understand the insurance terms and conditions</label>
-			</div>   
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeDescription"> 
-            	Please agree with the insurance Terms and Conditions to continue with your membership
-			</div> 
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<input class="styled-checkbox" type="checkbox" id="insuranceTerms" checked>
+					<label for="insuranceTerms">Yes. I’ve read and understand the insurance terms and conditions</label>
+				</div>   
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeDescription"> 
+					Please agree with the insurance Terms and Conditions to continue with your membership
+				</div> 
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" id="insurance_terms_button" data-dismiss="modal">Submit</button>
