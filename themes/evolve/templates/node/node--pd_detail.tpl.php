@@ -1555,18 +1555,26 @@ if($resultdata['result']) {
 			<?php 
 			if(isset($_SESSION["UserId"])){
 				//$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
-			   $userTag = checkPDUser($_SESSION['MemberTypeID']);
-			   $closedate = strtotime($pd_detail['Close_date']);
-			   $today = strtotime("today");
-			   $t = $closedate < $today;
-			   if($t) {
-				   echo '<span class="add-to-card disable '.$pd_detail['Typeofpd'].'">Registration closed</span>';
-			   } elseif ($userTag =="0"){
-				   echo '<a class="add-to-card '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
-			   } else {
-				   echo '<a class="add-to-card '.$pd_detail['Typeofpd'].'" id="registerNonMember"><span>Add to cart</span></a>';
-			   } 
-			  }	
+				$userTag = checkPDUser($_SESSION['MemberTypeID']);
+				$closedate = strtotime($pd_detail['Close_date']);
+				$today = strtotime("today");
+				$t = $closedate < $today;
+				if($t) {
+					echo '<span class="add-to-card disable '.$pd_detail['Typeofpd'].'">Registration closed</span>';
+				} elseif ($userTag =="0"){ // any logged in users
+					if(isset($pd_detail['Typeofpd']) && $pd_detail['Typeofpd'] == "Course") {
+						if($_SESSION['MemberTypeID'] =='31' || $_SESSION['MemberTypeID'] =='32') {
+							echo '<span class="add-to-card disable '.$pd_detail['Typeofpd'].'"></span>';
+						} else {
+							echo '<a class="add-to-card '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
+						}
+					} else {
+						echo '<a class="add-to-card '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
+					}
+				} else { // Not-logged in
+					echo '<a class="add-to-card '.$pd_detail['Typeofpd'].'" id="registerNonMember"><span>Add to cart</span></a>';
+				} 
+			}	
 		   ?>
 		</div>
 

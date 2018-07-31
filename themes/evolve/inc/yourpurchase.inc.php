@@ -157,7 +157,8 @@ $products = $product["Orders"];
 	</style> 
 	<script>
 	$(document).ready(function() {
-		if (window.frames["<?php echo "Iaksbnkvoice".$apis[0]; ?>"] && !window.userSet && !empty($apis)) {
+		<?php if(!empty($apis)): ?>
+		if (window.frames["<?php echo "Iaksbnkvoice".$apis[0]; ?>"] && !window.userSet) {
 			<?php if(count($invoiceAPI) <= 30) :?>
 				window.userSet = true;
 			<?php endif; ?>
@@ -200,6 +201,7 @@ $products = $product["Orders"];
 				}
 			?>
 		}
+	<?php endif; ?>
 	});
 	</script>
 	<?php /* if($tt > 0): ?>
