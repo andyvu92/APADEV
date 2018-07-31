@@ -5,7 +5,7 @@
 	$postEmail['ID'] = $_POST['CheckEmailID'];
 	// create curl resource 
 	$ch = curl_init();
-    $urlcurl = "https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/VerifyUserName/".$postEmail['ID'];	
+    $urlcurl = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/VerifyUserName/".$postEmail['ID'];	
 	// set url 
     curl_setopt($ch, CURLOPT_POST, 1);
 	curl_setopt($ch, CURLOPT_URL, $urlcurl); 
