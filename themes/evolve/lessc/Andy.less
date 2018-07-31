@@ -16,6 +16,56 @@
 
 /*--HOMEPAGE--*/
 
+.page-node-356{
+    #section-content-bottom-second{
+        background-color: unset!important;
+    }
+}
+
+div[id^="home-tile-view-block"]{
+    &.dexp-grid-items{
+        .node-home-news-tiles{
+            margin-bottom: 30px;
+            .portfolio-image{
+                img{
+                    width: 100%;
+                    max-height: 175px;
+                }
+            }
+            .item-description{
+                height: 183px;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding-bottom: 15px;
+                h5{
+                    a{
+                        color: black;
+                        font-size: 1.65em;
+                        line-height: 1.1em;
+                        font-weight: 300;
+                        br{
+                            display: none;
+                        }
+                    }
+                }
+                .description{
+                    display: flex;
+                    vertical-align: bottom;
+                    align-items: flex-end;
+                    .NextIconHolder{
+                        order: 2;
+                    }
+                    .MonlyIconHolder{
+                        margin-left: auto;
+                    }
+                }
+            }
+        }
+    }
+}
+
+
 #section-banner{
     .dexp-container{
         .region{
@@ -122,6 +172,43 @@
                         .HomeTitle{
                             font-size: 1.5em;
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.container{
+    .region{
+        .home-leader-ad{
+            margin: 20px auto;
+            .image-grid{
+                text-align: center;
+                &.desktop-ad{
+                    @media all and (max-width: @phone-width) {
+                        display: none;
+                    }
+                }
+                &.mobile-ad{
+                    @media all and (min-width: @phone-width + 1px) {
+                        display: none;
+                    }
+                }
+            }
+        }
+        .home-bt-leader-ad{
+            margin: 20px auto;
+            .image-grid{
+                text-align: center;
+                &.desktop-ad{
+                    @media all and (max-width: @phone-width) {
+                        display: none;
+                    }
+                }
+                &.mobile-ad{
+                    @media all and (min-width: @phone-width + 1px) {
+                        display: none;
                     }
                 }
             }
