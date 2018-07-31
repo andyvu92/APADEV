@@ -65,9 +65,9 @@ function nationalIcons(){
 				}
 			for($i=0; $i<$out; $i++){
 				if($i==0){
-						echo "<div class='item active'>";
-						}
-						else{
+							echo "<div class='item active'>";
+							}
+					else{
 						echo "<div class='item'>";
 						}
 					   
@@ -75,24 +75,25 @@ function nationalIcons(){
 				echo "<div class='flex-cell'>";
 					for($j=$k; $j<$k+3; $j++){
 						
-					if($j<$length){
-						echo "<div class='flex-col-4'>";
-						echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons ng-'.$NGs[$j]["NGid"].'">';
-						echo '<i class="fa">';
-						/*
-						$num = intval($userIcons[$j]);
-						echo '<a href="'.$nationalIcons[$num][0].'" class="icons">';
-						echo '<i class="fa '.$nationalIcons[$num][1].'">';
-						*/
-						echo "</i>";
-						echo "<span class='ng-title'>".$NGs[$j]["NGtitle"]."</span>";
-						echo "</a>";
-						echo "</div>";}
-				}
+						if($j<$length){
+							echo "<div class='flex-col-4'>";
+							echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons ng-'.$NGs[$j]["NGid"].'">';
+							echo '<i class="fa">';
+							/*
+							$num = intval($userIcons[$j]);
+							echo '<a href="'.$nationalIcons[$num][0].'" class="icons">';
+							echo '<i class="fa '.$nationalIcons[$num][1].'">';
+							*/
+							echo "</i>";
+							echo "<span class='ng-title'>".$NGs[$j]["NGtitle"]."</span>";
+							echo "</a>";
+							echo "</div>";
+						}
+					}
 				echo "</div>";
 				echo "</div>";	
 				echo "</div>";
-				
+				$k=$k+3;
 			}
 			echo "</div>";
 				echo '<a class="left carousel-control" data-target="#myCarousel" data-slide="prev">
@@ -104,12 +105,12 @@ function nationalIcons(){
 				<span class="sr-only">Next</span>
 				</a>';
 				echo "</div>";
-				$k=$i+3;
+				
 		}
 	    else{
 			echo "<div class='flex-container flex-flow-row'>";
 			echo "<div class='flex-cell'>";
-				for($j=$k; $j<$k+9; $j++){
+				for($j=$k; $j<$k+3; $j++){
 				if($j<$length){
 					echo "<div class='flex-col-4 item-container'>";
 					echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons ng-'.$NGs[$j]["NGid"].'">';
