@@ -166,4 +166,11 @@ jQuery(document).ready(function() {
 	}
 });
 
-
+//SET BACKGROUND FOR EACH HOME PAGE ARTICLE CONTENT
+jQuery(function ($) {
+  var someId = $(".dexp-grid-items .portfolio-image .content");
+  someId.css('background', function () {
+      console.log('x')
+      return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
+  })
+}) 

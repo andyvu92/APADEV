@@ -26,10 +26,52 @@ div[id^="home-tile-view-block"]{
     &.dexp-grid-items{
         .node-home-news-tiles{
             margin-bottom: 30px;
+            @media all and (max-width: @tablet-width) {
+                margin: 0;
+            }
+            & > .content{
+                @media all and (max-width: @tablet-width) {
+                    display: flex;
+                    border: 0;
+                    border-top: 0.5px solid #c3c8c8;
+                }
+                @media all and (max-width: 335px) {
+                    flex-direction: column;
+                    .portfolio-image{
+                        width: 100%
+                    }
+                    .item-description{
+                        width: 100%;
+                    }
+                }
+            }
             .portfolio-image{
                 img{
                     width: 100%;
                     max-height: 175px;
+                }
+                @media all and (max-width: @tablet-width) {
+                    img{
+                        visibility: hidden;
+                    }
+                    .field{
+                        height: 100%;
+                        .field-items{
+                            height: 100%;
+                            .field-item{
+                                height: 100%;
+                                .file{
+                                    height: 100%;
+                                    .content{
+                                        height: 100%;
+                                        border: 0;
+                                        background-size: cover!important;
+                                        background-position: center center!important;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
             .item-description{
@@ -38,6 +80,17 @@ div[id^="home-tile-view-block"]{
                 flex-direction: column;
                 justify-content: space-between;
                 padding-bottom: 15px;
+                @media all and (max-width: @tablet-width) {
+                    justify-content: flex-start;
+                    height: auto;
+                    .description{
+                        margin-top: auto;
+                        align-items: center!important;
+                        .MonlyIconHolder{
+                            margin-left: 10px!important;
+                        }
+                    }
+                }
                 h5{
                     a{
                         color: black;
@@ -46,6 +99,13 @@ div[id^="home-tile-view-block"]{
                         font-weight: 300;
                         br{
                             display: none;
+                        }
+                    }
+                }
+                @media all and (max-width: @phone-width) {
+                    h5{
+                        a{
+                            font-size: 1.2em;
                         }
                     }
                 }
@@ -81,14 +141,22 @@ div[id^="home-tile-view-block"]{
                         }
                 }
                 .image-grid{
-                    #node-377{
-                        width: 100%;
-                        height: 100%;
-                        padding-bottom: 57.8%;
+                    .row{
+                        margin: 0;
+                    }
+                    a.home-tile-block-anchor{
+                        &:hover{
+                            .node{
+                                .HomeTitle{
+                                    transition: 0.3s linear;
+                                }
+                            }
+                        }
                     }
                     img{
                         background-size: cover;
                         background-repeat: no-repeat;
+                        width: 100%;
                     }
                     .image{
                         background-size: cover;
@@ -120,6 +188,7 @@ div[id^="home-tile-view-block"]{
                             line-height: 1.1em;
                             min-height: 55%;
                             padding: 0 20px 20px 20px;
+                            transition: 0.3s linear;
                         }
                     }
                 }
@@ -227,7 +296,7 @@ div[id^="home-tile-view-block"]{
                 display: flex;
                 justify-content: center;
                 flex-wrap: wrap;
-                z-index: 9999;
+                z-index: 99;
                 li{
                     margin: 15px 1px;
                     border: 0.5px #afaeae solid;

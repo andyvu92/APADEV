@@ -79,7 +79,8 @@
 * @ingroup themeable
 */
 ?>
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix " <?php print $attributes; ?>>
+<a class="home-tile-block-anchor" href="#">
+<div id="node-<?php print $node->nid; ?>" class="node" <?php print $attributes; ?>>
 	<?php $test = render($content['field_home_image']);
 		$typePos = strpos($test, 'typeof');
 		$a = $typePos + 8;
@@ -90,12 +91,24 @@
 			$num1 = strpos($test, "src");
 			$num2 = strpos($test, 'width') - 7;
 			$num3 = $num2 - $num1;
-			echo "<div class='image' style='background-image: url(".'"'.substr($test, $num1 + 5, $num3).'"'.");'></div>";
+			echo "<img src=".'"'.substr($test, $num1 + 5, $num3).'"'.";'>";
 		} else {
 			print render($content['field_home_image']);
 		}
 	?>
 	<?php print render($content['field_members_only']);?>
-	<div class="HomeTitle"><?php print render($title); ?></div>
+	<?php $ttitle = explode("_",$title); ?>
+	<?php if(sizeof($ttitle) == 1): ?>
+		<div class="HomeTitle"><?php print render($title); ?></div>
+	<?php else: ?>
+		<div class="HomeTitle">
+		<?php $i = 0; ?>
+		<?php foreach($ttitle as $titles): ?>
+			<?php print render($titles); ?>
+			<?php if($i == 0) echo '<br>'; else $i++; ?>
+		<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
 </div> 
+</a>
 
