@@ -174,3 +174,31 @@ jQuery(function ($) {
       return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
   })
 }) 
+
+//REMOVE RED BORDER ON FIELD VALIDATION
+jQuery(document).ready(function() {
+  $('input').on('keyup',function() {
+    $(this).removeClass('focuscss');
+  });
+
+  $('input[name="Pobox"]').on('keyup',function() {
+    $(this).removeClass('focuscss');
+  });
+
+  $('input[type="date"]').on('click',function() {
+    $(this).removeClass('focuscss');
+  });
+  $('select').on('click',function() {
+    $(this).removeClass('focuscss');
+  });
+
+  $('input[type="date"]').datepicker();
+
+  $('input[type="date"]').focus(function(){
+      $(this).datepicker('show');
+  });
+  
+  $('input[type="date"]').click(function(){
+      $(this).datepicker('show');
+  });
+});

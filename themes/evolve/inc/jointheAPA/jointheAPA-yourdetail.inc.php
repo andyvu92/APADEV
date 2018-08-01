@@ -835,8 +835,8 @@ if (isset($_SESSION['UserId'])):
 ?>>
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-3">
-                            <label for="">PO box</label>
-                            <input type="text" class="form-control" name="Pobox" placeholder='PO box'<?php
+                            <label for="">PO Box</label>
+                            <input type="text" class="form-control" name="Pobox" placeholder='PO Box'<?php
     if (empty($details['Pobox'])) {
         echo "";
     } else {
@@ -962,8 +962,8 @@ if (isset($_SESSION['UserId'])):
 ?>>
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-3">
-                            <label for="">PO box</label>
-                            <input type="text" class="form-control" name="Billing-Pobox" placeholder='PO box'<?php
+                            <label for="">PO Box</label>
+                            <input type="text" class="form-control" name="Billing-Pobox" placeholder='PO Box'<?php
     if (!empty($details['Billing-Unit'])) {
         echo "";
     } else {
@@ -2506,7 +2506,7 @@ if(isset($_GET['MT'])){
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-3">
-                        <label for="">PO box</label>
+                        <label for="">PO Box</label>
                         <input type="text" class="form-control" name="Pobox">
                         </div>
 
@@ -2590,7 +2590,7 @@ if(isset($_GET['MT'])){
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-3">
-                            <label for="">PO box</label>
+                            <label for="">PO Box</label>
                             <input type="text" class="form-control" name="Billing-Pobox" id="Billing-Pobox">
                         </div>
 
