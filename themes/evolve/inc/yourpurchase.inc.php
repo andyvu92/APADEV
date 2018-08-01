@@ -61,8 +61,9 @@ $products = $product["Orders"];
 									echo "<div class='flex-cell flex-flow-row'>";
 									echo "<div class='flex-col-4'>".$product['OrderLines'][0]['ProductName']."</div>";
 									echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
-									echo "<div class='flex-col-2'>".$product['Paymenttotal']."</div>";
-									echo "<div class='flex-col-3'>".$product['Orderdate']."</div>";
+									echo "<div class='flex-col-2'>".number_format($product['Paymenttotal'],2)."</div>";
+									$OrderDate = date('d-m-Y', strtotime($product['Orderdate']));
+									echo "<div class='flex-col-3'>".$OrderDate."</div>";
 									echo "</div>";
 								}
 							}
@@ -100,8 +101,9 @@ $products = $product["Orders"];
 									echo "<div class='flex-cell flex-flow-row'>";
 									echo "<div class='flex-col-4'>".$product['OrderLines'][0]['ProductName']."</div>";
 									echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
-									echo "<div class='flex-col-2'>".$product['Paymenttotal']."</div>";
-									echo "<div class='flex-col-3'>".$product['Orderdate']."</div>";
+									echo "<div class='flex-col-2'>".number_format($product['Paymenttotal'],2)."</div>";
+									$OrderDate = date('d-m-Y', strtotime($product['Orderdate']));
+									echo "<div class='flex-col-3'>".$OrderDate."</div>";
 									echo "</div>";
 								}
 							}
