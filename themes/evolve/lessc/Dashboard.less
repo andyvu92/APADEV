@@ -1766,6 +1766,9 @@ a#insuranceControl{
     }
     .ng-icons-group{
         padding: 20px 0;
+        .dashboard-content-bottom{
+            padding: 10px 0;
+        }
         .flex-cell{
             justify-content: center;
         }
@@ -2950,3 +2953,20 @@ form{
         }
     }
  }
+
+ /*--FORM FIELDS ENABLE/DISABLE STYLE--*/
+form{
+    .locked{
+        &:after{
+            content: '';
+            position: absolute;
+            right: 35px;
+            bottom: 12px;
+            background: url(/sites/default/files/general-icon/locker-trans.png) center no-repeat;
+            width: 15px;
+            height: 25px;
+            background-size: contain;
+            opacity: 0.5;
+        }
+    }
+}

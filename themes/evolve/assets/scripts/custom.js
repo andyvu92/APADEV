@@ -620,16 +620,23 @@ jQuery(document).ready(function($) {
     $('#Paymentcard').change(function(){
 	    $('#Paymentcardvalue').val($('#Paymentcard').val());
 	});
+
+	//DISABLE FIELDS ON CHANGE & ADD LOCKER ICON
     $("input[name=Pobox]").on("change paste keyup", function() {
 		if($(this).val()!==""){
 			$("input[name=Address_Line_1]").prop('disabled', true);
 			$("input[name=Address_Line_2]").prop('disabled', true);
+			$("input[name=Address_Line_1]").parent().addClass('locked');
+			$("input[name=Address_Line_2]").parent().addClass('locked');
 		}
         else{
 			$("input[name=Address_Line_1]").prop('disabled', false);
 			$("input[name=Address_Line_2]").prop('disabled', false);
+			$("input[name=Address_Line_1]").parent().removeClass('locked');
+			$("input[name=Address_Line_2]").parent().removeClass('locked');
 		}		
-    });	
+	});	
+
 	$('#MemberType').change(function(){
 	    if($('select[name=MemberType]').val()=="10005" || $('select[name=MemberType]').val()=="9966" || $('select[name=MemberType]').val()=="9967"|| $('select[name=MemberType]').val()=="10006"|| $('select[name=MemberType]').val()=="9965"|| $('select[name=MemberType]').val()=="9964"){
 			$( "#ahpblock" ).addClass('display-none');

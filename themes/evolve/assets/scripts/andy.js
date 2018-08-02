@@ -154,7 +154,7 @@ jQuery(document).ready(function() {
 
 //CHANGE "JOIN BUTTON" FOR NATIONAL GROUP ON DASHBOARD
 jQuery(document).ready(function ($) {
-  if ($("#national-groups").find(".ng-icons-group").length = 0){ 
+  if ($("#national-groups").find(".carousel").length == 0){ 
     $("#ng-join-btn").html('<span>Join now</span>');
   }
 });
@@ -192,13 +192,6 @@ jQuery(document).ready(function() {
     $(this).removeClass('focuscss');
   });
 
-  $('input[type="date"]').datepicker();
-
-  $('input[type="date"]').focus(function(){
-      $(this).datepicker('show');
-  });
-  
-  $('input[type="date"]').click(function(){
-      $(this).datepicker('show');
-  });
+  $('input[readonly]').parent().addClass('locked');
 });
+

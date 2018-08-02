@@ -9,7 +9,7 @@
 /*--RESPONSIVE BREAKPOINTS--*/
 @phone-width: 480px;
 @larger-phone-width: 570px;
-@tablet-width: 769px;
+@tablet-width: 768px;
 @larger-tablet-width: 992px;
 @desktop-width: 1200px;
 @larger-desktop-width: 1500px;
@@ -24,13 +24,26 @@
 
 div[id^="home-tile-view-block"]{
     &.dexp-grid-items{
+        div[id^="node-"]{
+            &.node-home-news-tiles{
+                & > .content{
+                    @media all and (max-width: 335px) {
+                        .item-description{
+                            .MonlyIconHolder{
+                                margin-left: auto!important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         .node-home-news-tiles{
             margin-bottom: 30px;
             @media all and (max-width: @tablet-width) {
                 margin: 0;
             }
             & > .content{
-                @media all and (max-width: @tablet-width) {
+                @media all and (max-width: @tablet-width - 1px) {
                     display: flex;
                     border: 0;
                     border-top: 0.5px solid #c3c8c8;
