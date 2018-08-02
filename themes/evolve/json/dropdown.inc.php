@@ -39,7 +39,7 @@ function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
 }
 
 function getDropdown(){
-	$API = https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOptionValues;
+	$API = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOptionValues';
 	$result = curlRequest($API);
 	$result = json_clean_decode($result);
 	
