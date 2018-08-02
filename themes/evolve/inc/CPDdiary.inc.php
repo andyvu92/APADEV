@@ -103,7 +103,7 @@ print_r($NAPA);
 			<h4 class="modal-title">Please select background image</h4>
 		</div>
 		<div class="modal-body">
-			<form name="formradio" action="cpd-diary" method="POST"">
+			<form name="formradio" action="cpd-diary" method="POST">
 			<input type="hidden" name="userID" value="<?php echo $userID; ?>"> 
 			<input type="hidden" name="update">  
 			<label> <input type="radio" name="background" value="1" id="background1"><img src="/sites/default/files/PARALLAX_TRADIES.jpg"></label>
@@ -235,7 +235,7 @@ function move(input) {
 // Response -
 // Membership certificate PDF
 //echo "<iframe name='YInkFroamame' src='http://www.physiotherapy.asn.au'></iframe>";
-$Certi = GetAptifyData("38", $_SESSION['LinkId']);
+// $Certi = GetAptifyData("38", $_SESSION['LinkId']);
 //echo "<iframe id="YInkFroamame" srcdoc='".$MemberCerti."'></iframe>";
 //echo "<iframe src='".$MemberCerti."'></iframe>";
 //echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=aptifyuser&Password=!@-auser-Apatest1-2468' style='display: none;'></iframe>";
@@ -244,6 +244,7 @@ $Certi = GetAptifyData("38", $_SESSION['LinkId']);
 ?>
 <!--input type="submit" class="Non-APA-hour" name="NONAPA" id="NONAPA" value="Download NON-APA PDF"-->
 <button type="button" class="btn btn-info btn-lg Non-APA-hour" data-toggle="modal" data-target="#NonCPDPDF"><span style="text-decoration: underline; color:white;">Download NON-APA PDF</span></button>
+<?php /*
 <div id="NonCPDPDF" class="modal fade big-screen" role="dialog">
 	<div class="modal-dialog">
 
@@ -270,6 +271,7 @@ $(document).ready(function() {
 	}
 });
 </script>
+*/ ?>
 <br />
 
 <strong><a href="http://www.physiotherapyboard.gov.au/documents/default.aspx?record=WD15%2f18489&dbid=AP&chksum=ewqLtzOm4m%2fsRUrlGCmo1A%3d%3d">This is based on Physiotherapy Board of Australia's Continuing professional development form.</a></strong>

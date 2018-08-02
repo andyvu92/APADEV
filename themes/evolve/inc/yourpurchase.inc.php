@@ -112,13 +112,14 @@ $products = $product["Orders"];
 							// UserID, Invoice_ID
 							// Response -
 							// Invoice PDF
-							$invoiceAPI = GetAptifyData("18", $apis);
+							//$invoiceAPI = GetAptifyData("18", $apis);
 							?>	
 				</div>
 
 
 				</div>
 				<?php 
+				/*
 					if(!empty($products)) {
 						foreach($products as $product) {
 							echo '<div id="Iaksbnkvoice'.$product['ID'].'" class="modal fade big-screen" role="dialog">
@@ -141,11 +142,13 @@ $products = $product["Orders"];
 								</div>';
 						}
 					}
+				*/
 				?>
 			</div>
 		</div>
 	</div>
 	<?php logRecorder(); ?>
+	<?php /*
 	<style type="text/css">
 		.big-screen {
 			width: 62%;
@@ -206,6 +209,7 @@ $products = $product["Orders"];
 	<?php endif; ?>
 	});
 	</script>
+	*/ ?>
 	<?php /* if($tt > 0): ?>
 	<script>
 	$(document).ready(function() {
