@@ -1,11 +1,77 @@
-(function($) {
-    "use strict";
-    $(document).ready(function() {
-        //Tooltip
-        $(".dtooltip").tooltip();
-    });
-})(this.jQuery);
 jQuery(document).ready(function($) {
+	var originM = $(".pd-description-nonmobile").html();
+	var t = '';
+	if(originM != null) {
+		var texts = originM.split('\n');
+		for(var i = 0;i < texts.length;i++){
+			//code here using lines[i] which will give you each line
+			//console.log('before: '+texts[i]);
+			t += removeSpan(texts[i]);
+			//console.log('after: '+t);
+		}
+	}
+	$(".pd-description-nonmobile").html(t);
+	
+	
+	var originN = $(".pd-description-nonmobile").html();
+	var t = '';
+	if(originN != null) {
+		var texts = originN.split('\n');
+		for(var i = 0;i < texts.length;i++){
+			//code here using lines[i] which will give you each line
+			//console.log('before: '+texts[i]);
+			t += removeSpan(texts[i]);
+			//console.log('after: '+t);
+		}
+	}
+	$(".pd-description-nonmobile").html(t);
+	
+	function removeSpan(string) {
+		var returnTxt = string;
+		if(returnTxt.includes("span")) {
+			var n = returnTxt.indexOf("span");
+			var mx = returnTxt.length;
+			if(returnTxt.charAt(n - 1) == '/') {
+				// when it is end of span
+				//console.log("CL_before: "+returnTxt);
+				returnTxt = returnTxt.substring(0, n-2) + returnTxt.substring(n + 5, mx);
+				//console.log("CL_after: "+returnTxt);
+			} else {
+				// when it is beginning of span
+				var t = returnTxt.indexOf(">");
+				if(n < t) {
+					// if t is the index of closing span
+					//console.log("GD_before: "+returnTxt);
+					returnTxt = returnTxt.substring(0, n-1) + returnTxt.substring(t + 1, mx);
+					//console.log("GD_after: "+returnTxt);
+				} else {
+					// remove and find next.
+					var x = returnTxt.substring(n, mx);
+					var f = x.indexOf(">");
+					//console.log("BD_before: "+returnTxt);
+					returnTxt = returnTxt.substring(0, n-1) + returnTxt.substring(f + n + 1, mx);
+					//console.log("BD_after: "+returnTxt);
+				}
+			}
+			return removeSpan(returnTxt);
+		} else {
+			return returnTxt;
+		}
+	}
+	
+	function removeStyle() {
+		
+	}
+	
+	function removeHeaders() {
+		
+	}
+	
+	function ChangeImages() {
+		
+	}
+	
+	/*
 	$(".chosen-select").chosen({width: "100%"});
 	$('.bx-prev').html("<i class='fa fa-angle-left'></i>");
     $('.bx-next').html("<i class='fa fa-angle-right'></i>");
@@ -202,7 +268,7 @@ jQuery(document).ready(function($) {
 		/*
 		$('#downt1').show(700);
 		$('#downt2').hide(700);
-		$('#downt3').hide(700);*/
+		$('#downt3').hide(700);*
 	});
 	$("#InTheNews").click(function() {
 		$("#showall").css('background', 'white');
@@ -216,7 +282,7 @@ jQuery(document).ready(function($) {
 		$('#downT3').hide(500);
 		/*$('#downt1').hide(700);
 		$('#downt2').show(700);
-		$('#downt3').hide(700);*/
+		$('#downt3').hide(700);*
 	});
 	$("#mediaRelease").click(function() {
 		$("#showall").css('background', 'white');
@@ -230,7 +296,7 @@ jQuery(document).ready(function($) {
 		$('#downT3').show(500);
 		/*$('#downt1').hide(700);
 		$('#downt2').hide(700);
-		$('#downt3').show(700);*/
+		$('#downt3').show(700);*
 	});
 
     $('#block-block-216 input[type="checkbox"]').click(function(){
@@ -620,137 +686,23 @@ jQuery(document).ready(function($) {
     $('#Paymentcard').change(function(){
 	    $('#Paymentcardvalue').val($('#Paymentcard').val());
 	});
+
+	//DISABLE FIELDS ON CHANGE & ADD LOCKER ICON
     $("input[name=Pobox]").on("change paste keyup", function() {
 		if($(this).val()!==""){
 			$("input[name=Address_Line_1]").prop('disabled', true);
 			$("input[name=Address_Line_2]").prop('disabled', true);
-			$("input[name=BuildingName]").prop('disabled', true);
-			$("input[name=Address_Line_1]").val('');;
-			$("input[name=Address_Line_2]").val('');;
-			$("input[name=BuildingName]").val('');;
-			//$("input[name=Address_Line_1]").parent().addClass('locked');
-			//$("input[name=Address_Line_2]").parent().addClass('locked');
-			//$("input[name=BuildingName]").parent().addClass('locked');
+			$("input[name=Address_Line_1]").parent().addClass('locked');
+			$("input[name=Address_Line_2]").parent().addClass('locked');
 		}
         else{
 			$("input[name=Address_Line_1]").prop('disabled', false);
 			$("input[name=Address_Line_2]").prop('disabled', false);
-			$("input[name=BuildingName]").prop('disabled', false);
-			
+			$("input[name=Address_Line_1]").parent().removeClass('locked');
+			$("input[name=Address_Line_2]").parent().removeClass('locked');
 		}		
-    });	
-	if($("input[name=Pobox]").val()!=""){
-		$("input[name=Address_Line_1]").prop('disabled', true);
-		$("input[name=Address_Line_2]").prop('disabled', true);
-		$("input[name=BuildingName]").prop('disabled', true);
-		//$("input[name=Address_Line_1]").parent().addClass('locked');
-		//$("input[name=Address_Line_2]").parent().addClass('locked');
-		//$("input[name=BuildingName]").parent().addClass('locked');
-	}
-	else{
-		$("input[name=Address_Line_1]").prop('disabled', false);
-		$("input[name=Address_Line_2]").prop('disabled', false);
-		$("input[name=BuildingName]").prop('disabled', false);
-	}
-	$("input[name=Billing-Pobox]").on("change paste keyup", function() {
-		if($(this).val()!==""){
-			$("input[name=Billing-Address_Line_1]").prop('disabled', true);
-			$("input[name=Billing-Address_Line_2]").prop('disabled', true);
-			$("input[name=Billing-BuildingName]").prop('disabled', true);
-			$("input[name=Billing-Address_Line_1]").val('');
-			$("input[name=Billing-Address_Line_2]").val('');
-			$("input[name=Billing-BuildingName]").val('');
-			//$("input[name=Billing-Address_Line_1]").parent().addClass('locked');
-			//$("input[name=Billing-Address_Line_2]").parent().addClass('locked');
-			//$("input[name=Billing-BuildingName]").parent().addClass('locked');
-		}
-        else{
-			$("input[name=Billing-Address_Line_1]").prop('disabled', false);
-			$("input[name=Billing-Address_Line_2]").prop('disabled', false);
-			$("input[name=Billing-BuildingName]").prop('disabled', false);
-		}		
-    });
-	if($("input[name=Billing-Pobox]").val()!=""){
-		$("input[name=Billing-Address_Line_1]").prop('disabled', true);
-		$("input[name=Billing-Address_Line_2]").prop('disabled', true);
-		$("input[name=Billing-BuildingName]").prop('disabled', true);
-		//$("input[name=Billing-Address_Line_1]").parent().addClass('locked');
-		//$("input[name=Billing-Address_Line_2]").parent().addClass('locked');
-		//$("input[name=Billing-BuildingName]").parent().addClass('locked');
-	}
-	else{
-		$("input[name=Billing-Address_Line_1]").prop('disabled', false);
-		$("input[name=Billing-Address_Line_2]").prop('disabled', false);
-		$("input[name=Billing-BuildingName]").prop('disabled', false);
-	}
-	$("input[name=Shipping-PObox]").on("change paste keyup", function() {
-		if($(this).val()!==""){
-			$("input[name=Shipping-Address_Line_1]").prop('disabled', true);
-			$("input[name=Shipping-Address_Line_2]").prop('disabled', true);
-			$("input[name=Shipping-BuildingName]").prop('disabled', true);
-			$("input[name=Shipping-Address_Line_1]").val('');
-			$("input[name=Shipping-Address_Line_2]").val('');
-			$("input[name=Shipping-BuildingName]").val('');
-			//$("input[readonly]").parent().addClass('locked');
-			//$("input[disabled]").parent().addClass('locked');
-			//$("input[name=Shipping-Address_Line_1]").parent().addClass('locked');
-			//$("input[name=Shipping-Address_Line_2]").parent().addClass('locked');
-			//$("input[name=Shipping-BuildingName]").parent().addClass('locked');
-			
-		}
-        else{
-			$("input[name=Shipping-Address_Line_1]").prop('disabled', false);
-			$("input[name=Shipping-Address_Line_2]").prop('disabled', false);
-			$("input[name=Shipping-BuildingName]").prop('disabled', false);
-		}		
-    });
-	if($("input[name=Shipping-PObox]").val()!=""){
-		$("input[name=Shipping-Address_Line_1]").prop('disabled', true);
-		$("input[name=Shipping-Address_Line_2]").prop('disabled', true);
-		$("input[name=Shipping-BuildingName]").prop('disabled', true);
-		//$("input[readonly]").parent().addClass('locked');
-		//$("input[disabled]").parent().addClass('locked');
-		//$("input[name=Shipping-Address_Line_1]").parent().addClass('locked');
-		//$("input[name=Shipping-Address_Line_2]").parent().addClass('locked');
-		//$("input[name=Shipping-BuildingName]").parent().addClass('locked');
-	}
-	else{
-		$("input[name=Shipping-Address_Line_1]").prop('disabled', false);
-		$("input[name=Shipping-Address_Line_2]").prop('disabled', false);
-		$("input[name=Shipping-BuildingName]").prop('disabled', false);
-	}	
-	$("input[name=Mailing-PObox]").on("change paste keyup", function() {
-		if($(this).val()!==""){
-			$("input[name=Mailing-Address_Line_1]").prop('disabled', true);
-			$("input[name=Mailing-Address_Line_2]").prop('disabled', true);
-			$("input[name=Mailing-BuildingName]").prop('disabled', true);
-			$("input[name=Mailing-Address_Line_1]").val('');
-			$("input[name=Mailing-Address_Line_2]").val('');
-			$("input[name=Mailing-BuildingName]").val('');
-			//$("input[readonly]").parent().addClass('locked');
-			//$("input[disabled]").parent().addClass('locked');
-			//$("input[name=Mailing-BuildingName]").parent().addClass('locked');
-			
-		}
-        else{
-			$("input[name=Mailing-Address_Line_1]").prop('disabled', false);
-			$("input[name=Mailing-Address_Line_2]").prop('disabled', false);
-			$("input[name=Mailing-BuildingName]").prop('disabled', false);
-		}		
-    });	
-	if($("input[name=Mailing-PObox]").val()!=""){
-		$("input[name=Mailing-Address_Line_1]").prop('disabled', true);
-		$("input[name=Mailing-Address_Line_2]").prop('disabled', true);
-		$("input[name=Mailing-BuildingName]").prop('disabled', true);
-		//$("input[readonly]").parent().addClass('locked');
-		//$("input[disabled]").parent().addClass('locked');
-		//$("input[name=Mailing-BuildingName]").parent().addClass('locked');
-	}
-	else{
-		$("input[name=Mailing-Address_Line_1]").prop('disabled', false);
-		$("input[name=Mailing-Address_Line_2]").prop('disabled', false);
-		$("input[name=Mailing-BuildingName]").prop('disabled', false);
-	}
+	});	
+
 	$('#MemberType').change(function(){
 	    if($('select[name=MemberType]').val()=="10005" || $('select[name=MemberType]').val()=="9966" || $('select[name=MemberType]').val()=="9967"|| $('select[name=MemberType]').val()=="10006"|| $('select[name=MemberType]').val()=="9965"|| $('select[name=MemberType]').val()=="9964"){
 			$( "#ahpblock" ).addClass('display-none');
@@ -787,7 +739,7 @@ jQuery(document).ready(function($) {
 		$( ".FapTagA" ).removeClass('display-none');
 	}
 
-	/*   Membership Types questions start  */	
+	/*   Membership Types questions start  *
 	$(".next").click(function() {
 		var x = $(".active").attr('id').replace('Section','');
 		if(x != '5') { // if it is not the last section
@@ -990,9 +942,9 @@ jQuery(document).ready(function($) {
 	});
 	 var widthCalVideo169 = $(".video169").width();
 	$(".video169").attr('style','height: '+((parseInt(widthCalVideo169) * 9)/16)+"px; width: 100%;");
-	 /*   Membership Types questions end   */
+	 /*   Membership Types questions end   *
 
-	/*insurance page for join a new member */
+	/*insurance page for join a new member *
 	$('#join-insurance-form2 input').click(function() {
        if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked"))
 	   { 
@@ -1005,23 +957,15 @@ jQuery(document).ready(function($) {
             $( "#insuranceStatus" ).val('0');				
 		}
     });
-	/*delete PRF from member shoppingcart  */
+	/*delete PRF from member shoppingcart  *
 	$(".deletePRFButton").click(function(){
 		$('#deletePRFForm').submit();
 	});
-	/*delete MG Product from member shoppingcart  */
+	/*delete MG Product from member shoppingcart  *
 	$('[class^=deleteMGButton]').click(function(){
 		var productID = $(this).attr("class").replace('deleteMGButton', '');
 		$('input[name="step2-3"]').val(productID);
 		$('#deleteMGForm').submit();
-	});
-	/*delete NG Product from member shoppingcart  */
-	$('[class^=deleteNGButton]').click(function(){
-		var productID = $(this).attr("class").replace('deleteNGButton', '');
-		$('input[name="step2-4"]').val(productID);
-		//if(productID == "10021") { $('input[name="MG"]').val("9977");}
-		//if(productID == "10015") { $('input[name="MG"]').val("9978");}
-		$('#deleteNGForm').submit();
 	});
 	
 	if($('#insuranceTerms').val()=="0"){
@@ -1044,7 +988,7 @@ jQuery(document).ready(function($) {
 		$('a.join-details-button5').removeClass('disabled');
 	}
 	});
-	/*  check APA policy*/
+	/*  check APA policy*
 	if($('#privacypolicyp').val()=="0"){
 		$( "#disagreePolicyDescription" ).removeClass('display-none');
 		$('a.join-details-button7').addClass('disabled');
@@ -1069,7 +1013,7 @@ jQuery(document).ready(function($) {
 		$('#privacypolicyWindow').dialog('close');
 	});
 	/*  end check APA policy*/
-	/*  check Installment policy*/
+	/*  check Installment policy*
 	if(!$("#rolloverblock").hasClass("display-none")){
 		if($('#installmentpolicyp').val()=="0"){
 			$( "#disagreeInstallmentDescription" ).removeClass('display-none');
@@ -1097,7 +1041,7 @@ jQuery(document).ready(function($) {
 	$('#installment_policy_button').click(function() {
 		$('#installmentpolicyWindow').dialog('close');
 	});
-	/*  end check Installment policy*/
+	/*  end check Installment policy*
 	
 	$('#logoutButton').click(function() {
 		document.getElementById("logoutAcButton").click();
@@ -1111,24 +1055,5 @@ jQuery(document).ready(function($) {
 	$(".OthersiteButtonClose").click( function() {
 		$(".OtherSitesList").animate({right: "-300px"}, 300);
 	});
-	
+	*/
 });
-/*
-$( window ).on( "load", function() {
-	console.log( "window loaded" );
-	$('#workplaceblocks [id^=workplace] input[type="checkbox"]').click(function(){
-        if($(this).is(":checked")){
-        $(this).attr('checked', true);
-           $(this).val('True');
-		
-		  }
-         else{
-         
-          $(this).removeAttr('checked');
-          $(this).val('False');
-		  
-         }
-		
-    });
-});
-*/

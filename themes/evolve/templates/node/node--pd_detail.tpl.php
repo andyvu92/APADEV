@@ -478,7 +478,7 @@ if($resultdata['result']) {
 		<div class="section description">
 			<div class="pd-description-mobile">
 				<div class="readmore">
-					<p>
+					<p class="pd-descriptionM">
 					<?php 
 					if (!empty($pd_detail['Description'])){
 						echo $pd_detail['Description'];
@@ -492,7 +492,7 @@ if($resultdata['result']) {
 			</div>
 
 			<div class="pd-description-nonmobile">
-					<p>
+					<p class="pd-descriptionN">
 						<?php 
 						if (!empty($pd_detail['Description'])){
 							echo $pd_detail['Description'];
