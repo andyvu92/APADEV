@@ -112,7 +112,7 @@ scripts[] = assets/scripts/twitter.js
 scripts[] = Survey/GFunction.js
 scripts[] = assets/scripts/Distance.js
 scripts[] = assets/scripts/FindPhysio.js
-
+scripts[] = assets/scripts/Eddy.js
 
 settings[body] = 'Open Sans:regular:14px:24px'
 settings[h1] = 'Raleway:regular:36px:'
