@@ -86,7 +86,9 @@
 			<ul>
 				<li><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></li>
 			</ul>
+			
 			<?php if(is_null(render($content['field_external_link']))): ?>
+			
 			<h2><a href="<?php echo $pdfLink = $link.$base_path."sites/default/files/".str_replace("public://","",$node->field_pdf['und'][0]['uri']);?>" target="_blank"><?php print $title; ?></a></h2>
 			<?php else: ?>
 			<h2><a href="<?php echo $content['field_external_link']['#items'][0]['value'];?>" target="_blank"><?php print $title; ?></a></h2>
