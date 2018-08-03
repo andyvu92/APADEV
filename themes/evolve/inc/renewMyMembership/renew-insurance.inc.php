@@ -91,7 +91,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 		<div class="row">
 			<div class="col-xs-12">
 				<label>Business name</label>
-				<input type="text" class="form-control" name="Businiessname" id="Businiessname" placeholder="Business name, practice name or trading name owned by you, do not name your employer’s business." <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Businiessname']; }else{ echo '';}?>>
+				<input type="text" class="form-control" name="Businiessname" id="Businiessname" placeholder="" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Businiessname']; }else{ echo '';}?>>
 			</div>
 			<div class="col-xs-12">
 				<span class="note-text"><strong>Note: </strong></span>Business name, practice name or trading name owned by you, do not name your employer’s business.

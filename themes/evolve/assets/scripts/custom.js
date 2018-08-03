@@ -620,23 +620,137 @@ jQuery(document).ready(function($) {
     $('#Paymentcard').change(function(){
 	    $('#Paymentcardvalue').val($('#Paymentcard').val());
 	});
-
-	//DISABLE FIELDS ON CHANGE & ADD LOCKER ICON
     $("input[name=Pobox]").on("change paste keyup", function() {
 		if($(this).val()!==""){
 			$("input[name=Address_Line_1]").prop('disabled', true);
 			$("input[name=Address_Line_2]").prop('disabled', true);
-			$("input[name=Address_Line_1]").parent().addClass('locked');
-			$("input[name=Address_Line_2]").parent().addClass('locked');
+			$("input[name=BuildingName]").prop('disabled', true);
+			$("input[name=Address_Line_1]").val('');;
+			$("input[name=Address_Line_2]").val('');;
+			$("input[name=BuildingName]").val('');;
+			//$("input[name=Address_Line_1]").parent().addClass('locked');
+			//$("input[name=Address_Line_2]").parent().addClass('locked');
+			//$("input[name=BuildingName]").parent().addClass('locked');
 		}
         else{
 			$("input[name=Address_Line_1]").prop('disabled', false);
 			$("input[name=Address_Line_2]").prop('disabled', false);
-			$("input[name=Address_Line_1]").parent().removeClass('locked');
-			$("input[name=Address_Line_2]").parent().removeClass('locked');
+			$("input[name=BuildingName]").prop('disabled', false);
+			
 		}		
-	});	
-
+    });	
+	if($("input[name=Pobox]").val()!=""){
+		$("input[name=Address_Line_1]").prop('disabled', true);
+		$("input[name=Address_Line_2]").prop('disabled', true);
+		$("input[name=BuildingName]").prop('disabled', true);
+		//$("input[name=Address_Line_1]").parent().addClass('locked');
+		//$("input[name=Address_Line_2]").parent().addClass('locked');
+		//$("input[name=BuildingName]").parent().addClass('locked');
+	}
+	else{
+		$("input[name=Address_Line_1]").prop('disabled', false);
+		$("input[name=Address_Line_2]").prop('disabled', false);
+		$("input[name=BuildingName]").prop('disabled', false);
+	}
+	$("input[name=Billing-Pobox]").on("change paste keyup", function() {
+		if($(this).val()!==""){
+			$("input[name=Billing-Address_Line_1]").prop('disabled', true);
+			$("input[name=Billing-Address_Line_2]").prop('disabled', true);
+			$("input[name=Billing-BuildingName]").prop('disabled', true);
+			$("input[name=Billing-Address_Line_1]").val('');
+			$("input[name=Billing-Address_Line_2]").val('');
+			$("input[name=Billing-BuildingName]").val('');
+			//$("input[name=Billing-Address_Line_1]").parent().addClass('locked');
+			//$("input[name=Billing-Address_Line_2]").parent().addClass('locked');
+			//$("input[name=Billing-BuildingName]").parent().addClass('locked');
+		}
+        else{
+			$("input[name=Billing-Address_Line_1]").prop('disabled', false);
+			$("input[name=Billing-Address_Line_2]").prop('disabled', false);
+			$("input[name=Billing-BuildingName]").prop('disabled', false);
+		}		
+    });
+	if($("input[name=Billing-Pobox]").val()!=""){
+		$("input[name=Billing-Address_Line_1]").prop('disabled', true);
+		$("input[name=Billing-Address_Line_2]").prop('disabled', true);
+		$("input[name=Billing-BuildingName]").prop('disabled', true);
+		//$("input[name=Billing-Address_Line_1]").parent().addClass('locked');
+		//$("input[name=Billing-Address_Line_2]").parent().addClass('locked');
+		//$("input[name=Billing-BuildingName]").parent().addClass('locked');
+	}
+	else{
+		$("input[name=Billing-Address_Line_1]").prop('disabled', false);
+		$("input[name=Billing-Address_Line_2]").prop('disabled', false);
+		$("input[name=Billing-BuildingName]").prop('disabled', false);
+	}
+	$("input[name=Shipping-PObox]").on("change paste keyup", function() {
+		if($(this).val()!==""){
+			$("input[name=Shipping-Address_Line_1]").prop('disabled', true);
+			$("input[name=Shipping-Address_Line_2]").prop('disabled', true);
+			$("input[name=Shipping-BuildingName]").prop('disabled', true);
+			$("input[name=Shipping-Address_Line_1]").val('');
+			$("input[name=Shipping-Address_Line_2]").val('');
+			$("input[name=Shipping-BuildingName]").val('');
+			//$("input[readonly]").parent().addClass('locked');
+			//$("input[disabled]").parent().addClass('locked');
+			//$("input[name=Shipping-Address_Line_1]").parent().addClass('locked');
+			//$("input[name=Shipping-Address_Line_2]").parent().addClass('locked');
+			//$("input[name=Shipping-BuildingName]").parent().addClass('locked');
+			
+		}
+        else{
+			$("input[name=Shipping-Address_Line_1]").prop('disabled', false);
+			$("input[name=Shipping-Address_Line_2]").prop('disabled', false);
+			$("input[name=Shipping-BuildingName]").prop('disabled', false);
+		}		
+    });
+	if($("input[name=Shipping-PObox]").val()!=""){
+		$("input[name=Shipping-Address_Line_1]").prop('disabled', true);
+		$("input[name=Shipping-Address_Line_2]").prop('disabled', true);
+		$("input[name=Shipping-BuildingName]").prop('disabled', true);
+		//$("input[readonly]").parent().addClass('locked');
+		//$("input[disabled]").parent().addClass('locked');
+		//$("input[name=Shipping-Address_Line_1]").parent().addClass('locked');
+		//$("input[name=Shipping-Address_Line_2]").parent().addClass('locked');
+		//$("input[name=Shipping-BuildingName]").parent().addClass('locked');
+	}
+	else{
+		$("input[name=Shipping-Address_Line_1]").prop('disabled', false);
+		$("input[name=Shipping-Address_Line_2]").prop('disabled', false);
+		$("input[name=Shipping-BuildingName]").prop('disabled', false);
+	}	
+	$("input[name=Mailing-PObox]").on("change paste keyup", function() {
+		if($(this).val()!==""){
+			$("input[name=Mailing-Address_Line_1]").prop('disabled', true);
+			$("input[name=Mailing-Address_Line_2]").prop('disabled', true);
+			$("input[name=Mailing-BuildingName]").prop('disabled', true);
+			$("input[name=Mailing-Address_Line_1]").val('');
+			$("input[name=Mailing-Address_Line_2]").val('');
+			$("input[name=Mailing-BuildingName]").val('');
+			//$("input[readonly]").parent().addClass('locked');
+			//$("input[disabled]").parent().addClass('locked');
+			//$("input[name=Mailing-BuildingName]").parent().addClass('locked');
+			
+		}
+        else{
+			$("input[name=Mailing-Address_Line_1]").prop('disabled', false);
+			$("input[name=Mailing-Address_Line_2]").prop('disabled', false);
+			$("input[name=Mailing-BuildingName]").prop('disabled', false);
+		}		
+    });	
+	if($("input[name=Mailing-PObox]").val()!=""){
+		$("input[name=Mailing-Address_Line_1]").prop('disabled', true);
+		$("input[name=Mailing-Address_Line_2]").prop('disabled', true);
+		$("input[name=Mailing-BuildingName]").prop('disabled', true);
+		//$("input[readonly]").parent().addClass('locked');
+		//$("input[disabled]").parent().addClass('locked');
+		//$("input[name=Mailing-BuildingName]").parent().addClass('locked');
+	}
+	else{
+		$("input[name=Mailing-Address_Line_1]").prop('disabled', false);
+		$("input[name=Mailing-Address_Line_2]").prop('disabled', false);
+		$("input[name=Mailing-BuildingName]").prop('disabled', false);
+	}
 	$('#MemberType').change(function(){
 	    if($('select[name=MemberType]').val()=="10005" || $('select[name=MemberType]').val()=="9966" || $('select[name=MemberType]').val()=="9967"|| $('select[name=MemberType]').val()=="10006"|| $('select[name=MemberType]').val()=="9965"|| $('select[name=MemberType]').val()=="9964"){
 			$( "#ahpblock" ).addClass('display-none');
@@ -900,6 +1014,14 @@ jQuery(document).ready(function($) {
 		var productID = $(this).attr("class").replace('deleteMGButton', '');
 		$('input[name="step2-3"]').val(productID);
 		$('#deleteMGForm').submit();
+	});
+	/*delete NG Product from member shoppingcart  */
+	$('[class^=deleteNGButton]').click(function(){
+		var productID = $(this).attr("class").replace('deleteNGButton', '');
+		$('input[name="step2-4"]').val(productID);
+		//if(productID == "10021") { $('input[name="MG"]').val("9977");}
+		//if(productID == "10015") { $('input[name="MG"]').val("9978");}
+		$('#deleteNGForm').submit();
 	});
 	
 	if($('#insuranceTerms').val()=="0"){

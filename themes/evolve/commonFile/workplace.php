@@ -207,9 +207,10 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 <div class="row">
 
 	<div class="col-xs-12 col-md-6">
-		<label>Workplace setting</label>
+		<label>Workplace setting<span class="tipstyle">*</span></label>
 		<div class="chevron-select-box">
 		<select class="form-control" id="Workplace-setting'.$i.'" name="Workplace-setting'.$i.'">';
+			echo '<option value="" selected disabled>Please select</option>';
 			$workplaceSettings = $sessionWorkplaceSetting;
 			foreach($workplaceSettings  as $key => $object){
 				echo '<option value="'.$object->ID.'">'.$object->Name.'</option>';
@@ -223,7 +224,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 		<label>Numbers of hours worked<span class="tipstyle">*</span></label>
 		<div class="chevron-select-box">
 		<select class="form-control" id="Number-worked-hours'.$i.'" name="Number-worked-hours'.$i.'">
-			<option value="0" disabled="">no</option>
+			<option value="" selected disabled>Please select</option>
 			<option value="01-04"> 01-04 </option>
 			<option value="05-08"> 05-08 </option>
 			<option value="09-12"> 09-12 </option>

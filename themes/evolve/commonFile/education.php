@@ -13,6 +13,7 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 		<div class="col-xs-12 col-sm-6"> <label for="degree'.$i.'">Degree Level<span class="tipstyle">*</span></label>
 		<div class="chevron-select-box">	
 		<select class="form-control" name="Udegree'.$i.'" id="Udegree'.$i.'">';
+				echo '<option value="" selected disabled>Please select</option>';
 				$degree = $sessionDegree;
 						foreach($degree  as $key => $object){
 					echo '<option value="'.$degree[$key]['ID'].'">'.$degree[$key]['Name'].'</option>';
@@ -29,6 +30,7 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 			<label for="Undergraduate-university-name'.$i.'">University name<span class="tipstyle">*</span></label>
 			<div class="chevron-select-box">
 			<select class="form-control" name="Undergraduate-university-name'.$i.'" id="Undergraduate-university-name'.$i.'">';
+				echo '<option value="" selected disabled>Please select</option>';
 				$University = $sessionUniversity;
 				foreach($University  as $key => $object){
 			echo '<option value="'.$University[$key]['ID'].'">'.$University[$key]['Name'].'</option>';
@@ -45,7 +47,7 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 		<label for="Ugraduate-yearattained'.$i.'">Year attained<span class="tipstyle">*</span></label>
 		<div class="chevron-select-box">
 		<select class="form-control" name="Ugraduate-yearattained'.$i.'" id="Ugraduate-yearattained'.$i.'">';
-
+		echo '<option value="" selected disabled>Please select</option>';
 		$y = date("Y") + 5; 
 		for ($i=1940; $i<= $y; $i++){
 		echo '<option value="'.$i.'">'.$i.'</option>';  
