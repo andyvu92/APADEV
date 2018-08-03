@@ -629,7 +629,7 @@ if (isset($_SESSION['UserId'])):
     <input type="hidden" name="step1" value="1"/>
     <input type="hidden" name="insuranceTag" id="insuranceTag"/>
             <div class="down1" <?php
-    if (isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['step2-1']) || isset($_POST['goI']) || isset($_POST['goP']) || isset($_POST['step2-2']) || isset($_POST['step2-3']))
+    if (isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['step2-1']) || isset($_POST['goI']) || isset($_POST['goP']) || isset($_POST['step2-2']) || isset($_POST['step2-3'])|| isset($_POST['step2-4']))
         echo 'style="display:none;"';
     else {
         echo 'style="display:block;"';
@@ -755,6 +755,7 @@ if (isset($_SESSION['UserId'])):
                                     <?php
                                         $Aboriginalcode = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
                                         $Aboriginal     = json_decode($Aboriginalcode, true);
+										sort($Aboriginal);
                                         foreach ($Aboriginal as $key => $value) {
                                             echo '<option value="' . $Aboriginal[$key]['ID'] . '"';
                                             if ($details['Aboriginal'] == $Aboriginal[$key]['ID']) {
@@ -2463,6 +2464,7 @@ if(isset($_GET['MT'])){
                                 <?php
                                     $Aboriginalcode = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
                                     $Aboriginal     = json_decode($Aboriginalcode, true);
+									sort($Aboriginal);
 									foreach ($Aboriginal as $key => $value) {
                                         echo '<option value="' . $Aboriginal[$key]['ID'] . '"';
                                         echo '> ' . $Aboriginal[$key]['Name'] . ' </option>';

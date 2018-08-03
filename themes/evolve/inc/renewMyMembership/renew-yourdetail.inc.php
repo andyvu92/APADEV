@@ -406,7 +406,8 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 							<option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?> disabled>Please select</option>
 						 <?php
 									$Aboriginalcode  = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
-									$Aboriginal=json_decode($Aboriginalcode, true);						
+									$Aboriginal=json_decode($Aboriginalcode, true);
+									sort($Aboriginal);									
 									foreach($Aboriginal  as $key => $value){
 										echo '<option value="'.$Aboriginal[$key]['ID'].'"';
 										if ($details['Aboriginal'] == $Aboriginal[$key]['ID']){ echo "selected='selected'"; } 
