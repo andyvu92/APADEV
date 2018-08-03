@@ -24,12 +24,67 @@
 
 div[id^="home-tile-view-block"]{
     &.dexp-grid-items{
+        div[id^="node-"]{
+            &.node-home-news-tiles{
+                & > .content{
+                    @media all and (max-width: 335px) {
+                        .item-description{
+                            .MonlyIconHolder{
+                                margin-left: auto!important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         .node-home-news-tiles{
             margin-bottom: 30px;
+            @media all and (max-width: @tablet-width) {
+                margin: 0;
+            }
+            & > .content{
+                @media all and (max-width: @tablet-width - 1px) {
+                    display: flex;
+                    border: 0;
+                    border-top: 0.5px solid #c3c8c8;
+                }
+                @media all and (max-width: 335px) {
+                    flex-direction: column;
+                    .portfolio-image{
+                        width: 100%
+                    }
+                    .item-description{
+                        width: 100%;
+                    }
+                }
+            }
             .portfolio-image{
                 img{
                     width: 100%;
                     max-height: 175px;
+                }
+                @media all and (max-width: @tablet-width) {
+                    img{
+                        visibility: hidden;
+                    }
+                    .field-type-media{
+                        height: 100%;
+                        .field-items{
+                            height: 100%;
+                            .field-item{
+                                height: 100%;
+                                .file{
+                                    height: 100%;
+                                    .content{
+                                        height: 100%;
+                                        border: 0;
+                                        background-size: cover!important;
+                                        background-position: center center!important;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
             }
             .item-description{
@@ -38,6 +93,17 @@ div[id^="home-tile-view-block"]{
                 flex-direction: column;
                 justify-content: space-between;
                 padding-bottom: 15px;
+                @media all and (max-width: @tablet-width) {
+                    justify-content: flex-start;
+                    height: auto;
+                    .description{
+                        margin-top: auto;
+                        align-items: center!important;
+                        .MonlyIconHolder{
+                            margin-left: 10px!important;
+                        }
+                    }
+                }
                 h5{
                     a{
                         color: black;
@@ -46,6 +112,13 @@ div[id^="home-tile-view-block"]{
                         font-weight: 300;
                         br{
                             display: none;
+                        }
+                    }
+                }
+                @media all and (max-width: @phone-width) {
+                    h5{
+                        a{
+                            font-size: 1.2em;
                         }
                     }
                 }
@@ -81,14 +154,22 @@ div[id^="home-tile-view-block"]{
                         }
                 }
                 .image-grid{
-                    #node-377{
-                        width: 100%;
-                        height: 100%;
-                        padding-bottom: 57.8%;
+                    .row{
+                        margin: 0;
+                    }
+                    a.home-tile-block-anchor{
+                        &:hover{
+                            .node{
+                                .HomeTitle{
+                                    transition: 0.3s linear;
+                                }
+                            }
+                        }
                     }
                     img{
                         background-size: cover;
                         background-repeat: no-repeat;
+                        width: 100%;
                     }
                     .image{
                         background-size: cover;
@@ -120,6 +201,7 @@ div[id^="home-tile-view-block"]{
                             line-height: 1.1em;
                             min-height: 55%;
                             padding: 0 20px 20px 20px;
+                            transition: 0.3s linear;
                         }
                     }
                 }
@@ -227,7 +309,7 @@ div[id^="home-tile-view-block"]{
                 display: flex;
                 justify-content: center;
                 flex-wrap: wrap;
-                z-index: 9999;
+                z-index: 99;
                 li{
                     margin: 15px 1px;
                     border: 0.5px #afaeae solid;
@@ -470,3 +552,82 @@ div[aria-describedby="uploadImage"].ui-dialog{
     }
 }
 /*--END IMAGE UPLOAD BOX--*/
+
+/*--TOOLTIP--*/
+    /*--USAGE--
+
+    <p data-tooltip="I’m the tooltip text.">I’m a link with a tooltip.</p>
+
+    */
+[data-tooltip] {
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+  }
+  
+  /* Hide the tooltip content by default */
+  [data-tooltip]:before,
+  [data-tooltip]:after {
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  /* Position tooltip above the element */
+  [data-tooltip]:before {
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    margin-bottom: 5px;
+    margin-left: -80px;
+    padding: 7px;
+    width: 160px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    background-color: #000;
+    background-color: hsla(0, 0%, 20%, 0.9);
+    color: #fff;
+    content: attr(data-tooltip);
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  
+  /* Triangle hack to make tooltip look like a speech bubble */
+  [data-tooltip]:after {
+    position: absolute;
+    bottom: 150%;
+    left: 50%;
+    margin-left: -5px;
+    width: 0;
+    border-top: 5px solid #000;
+    border-top: 5px solid hsla(0, 0%, 20%, 0.9);
+    border-right: 5px solid transparent;
+    border-left: 5px solid transparent;
+    content: " ";
+    font-size: 0;
+    line-height: 0;
+  }
+  
+  /* Show tooltip content on hover */
+  [data-tooltip]:hover:before,
+  [data-tooltip]:hover:after {
+    visibility: visible;
+    opacity: 1;
+  }
+
+/*--END TOOLTIP--*/
+
+/*
+#section-content-top .container {
+    width: 100%;
+    max-width: 1170px!important;
+}
+
+.dexp-body-inner .container {
+    max-width: 1170px!important;
+    width: 100%;
+}
+*/
+

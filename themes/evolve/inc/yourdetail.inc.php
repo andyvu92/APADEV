@@ -611,8 +611,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 							
 							<div class="col-xs-12 col-sm-6 col-md-3">
-								<label for="">PO box</label>
-								<input type="text" class="form-control" name="Pobox"  <?php if (!empty($details['Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
+								<label for="">PO Box</label>
+								<input type="text" class="form-control" name="Pobox"  <?php if (!empty($details['Unit'])) {echo "placeholder='PO Box'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
 							</div>
 
 							<div class="col-xs-12 col-sm-6 col-md-9">
@@ -695,7 +695,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 
 					    <div class="col-xs-12 col-sm-6 col-md-3">
-							<label for="">PO box</label>
+							<label for="">PO Box</label>
 							<input type="text" class="form-control" name="Mailing-PObox" id="Mailing-PObox"  <?php if (!empty($details['Mailing-unitno'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?>>
 						</div>
 
@@ -1015,7 +1015,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 
 						<div class="col-xs-12 col-sm-6 col-md-3">
-							<label for="">PO box</label>
+							<label for="">PO Box</label>
 							<input type="text" class="form-control" name="Shipping-PObox" id="Shipping-PObox"  <?php if (!empty($details['Shipping-unitno'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Shipping-BuildingName'].'"'; }?>>
 						</div>
 
@@ -1100,8 +1100,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 
 						<div class="col-xs-12 col-sm-6 col-md-3">
-							<label for="">PO box</label>
-							<input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
+							<label for="">PO Box</label>
+							<input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO Box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 						</div>
 
 						<div class="col-xs-12 col-sm-6 col-md-9">

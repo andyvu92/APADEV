@@ -521,8 +521,10 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 					
 					<div class="col-xs-12 col-sm-6 col-md-3">
-					   <label for="">PO box</label>
+
+					   <label for="">PO Box</label>
 					   <input type="text" class="form-control" name="Pobox" <?php if (!empty($details['Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['Pobox'].'"'; }?>>
+
 					</div>
 					
 					<div class="col-xs-12 col-sm-6 col-md-9">
@@ -608,8 +610,8 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 				
 					<div class="col-xs-12 col-sm-6 col-md-3">
-					   <label for="">PO box</label>
-					   <input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
+					   <label for="">PO Box</label>
+					   <input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO Box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 					</div>
 					
 					<div class="col-xs-12 col-sm-6 col-md-9">

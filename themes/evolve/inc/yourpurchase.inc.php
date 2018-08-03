@@ -61,8 +61,9 @@ $products = $product["Orders"];
 									echo "<div class='flex-cell flex-flow-row'>";
 									echo "<div class='flex-col-4'>".$product['OrderLines'][0]['ProductName']."</div>";
 									echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
-									echo "<div class='flex-col-2'>".$product['Paymenttotal']."</div>";
-									echo "<div class='flex-col-3'>".$product['Orderdate']."</div>";
+									echo "<div class='flex-col-2'>".number_format($product['Paymenttotal'],2)."</div>";
+									$OrderDate = date('d-m-Y', strtotime($product['Orderdate']));
+									echo "<div class='flex-col-3'>".$OrderDate."</div>";
 									echo "</div>";
 								}
 							}
@@ -100,8 +101,9 @@ $products = $product["Orders"];
 									echo "<div class='flex-cell flex-flow-row'>";
 									echo "<div class='flex-col-4'>".$product['OrderLines'][0]['ProductName']."</div>";
 									echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
-									echo "<div class='flex-col-2'>".$product['Paymenttotal']."</div>";
-									echo "<div class='flex-col-3'>".$product['Orderdate']."</div>";
+									echo "<div class='flex-col-2'>".number_format($product['Paymenttotal'],2)."</div>";
+									$OrderDate = date('d-m-Y', strtotime($product['Orderdate']));
+									echo "<div class='flex-col-3'>".$OrderDate."</div>";
 									echo "</div>";
 								}
 							}
@@ -110,13 +112,14 @@ $products = $product["Orders"];
 							// UserID, Invoice_ID
 							// Response -
 							// Invoice PDF
-							$invoiceAPI = GetAptifyData("18", $apis);
+							//$invoiceAPI = GetAptifyData("18", $apis);
 							?>	
 				</div>
 
 
 				</div>
 				<?php 
+				/*
 					if(!empty($products)) {
 						foreach($products as $product) {
 							echo '<div id="Iaksbnkvoice'.$product['ID'].'" class="modal fade big-screen" role="dialog">
@@ -139,11 +142,13 @@ $products = $product["Orders"];
 								</div>';
 						}
 					}
+				*/
 				?>
 			</div>
 		</div>
 	</div>
 	<?php logRecorder(); ?>
+	<?php /*
 	<style type="text/css">
 		.big-screen {
 			width: 62%;
@@ -204,6 +209,7 @@ $products = $product["Orders"];
 	<?php endif; ?>
 	});
 	</script>
+	*/ ?>
 	<?php /* if($tt > 0): ?>
 	<script>
 	$(document).ready(function() {

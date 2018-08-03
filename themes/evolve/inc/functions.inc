@@ -50,7 +50,7 @@ function nationalIcons(){
 		if($length == 0){
 			echo "<div class='flex-container flex-flow-row'>
 					<div class='flex-cell'>
-					<span class='dashboard-content-bottom'>We noticed you're not a part of any yet. Why not join your peers to keep up tp date with the latest developments in your area of physiotherapy?</span>
+					<span class='dashboard-content-bottom'>We noticed you're not a part of any yet. Why not join your peers to keep up to date with the latest developments in your area of physiotherapy?</span>
 					</div>
 					</div>";
 		}

@@ -229,7 +229,7 @@ $background = getBackgroundImage($userID);
 						// Response -
 						// Membership certificate PDF
 						//echo "<iframe name='YInkFroamame' src='http://www.physiotherapy.asn.au'></iframe>";
-						$Certi = GetAptifyData("2", $_SESSION['LinkId']);
+						//$Certi = GetAptifyData("2", $_SESSION['LinkId']);
 						//echo "<iframe id="YInkFroamame" srcdoc='".$MemberCerti."'></iframe>";
 						//echo "<iframe src='".$MemberCerti."'></iframe>";
 						//echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=aptifyuser&Password=!@-auser-Apatest1-2468' style='display: none;'></iframe>";
@@ -263,7 +263,7 @@ $background = getBackgroundImage($userID);
 					<a href class="black-underline-link" data-toggle="modal" data-target="#KiNsuraneCiynbC">
 						<span>Insurance certification</span></a>	
 				</div>
-
+				<?php /*
 				<div id="YInkFroamame" class="modal fade big-screen" role="dialog">
 				  <div class="modal-dialog">
 
@@ -317,8 +317,10 @@ $background = getBackgroundImage($userID);
 						height: 100%;
 					}
 				</style>
+				*/ ?>
 			</div>   
 			<script>
+			<?php /*
 			$(document).ready(function() {
 				if (window.frames['YInkFroamame'] && !window.userSet){
 					window.userSet = true;
@@ -326,6 +328,7 @@ $background = getBackgroundImage($userID);
 					frames['KiNsuraneCiynbC'].location.href='<?php echo $Certi["I"]; ?>';
 				}
 			});
+			*/ ?>
 			</script>
 			<div class="col-xs-12 col-md-6 mobile_line" >
 				<div class="col-xs-12 center">				 

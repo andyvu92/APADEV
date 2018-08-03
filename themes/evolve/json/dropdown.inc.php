@@ -1,6 +1,48 @@
 <?php
+
+function curlRequest($API) {
+	// create curl resource 
+	$ch = curl_init(); 
+	// set url 
+	$urlcurl = $API;
+	curl_setopt($ch, CURLOPT_URL, $urlcurl); 
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+	
+	//return the transfer as a string 
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+	curl_setopt($ch, CURLOPT_ENCODING, "");
+	curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 300000000);
+	curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+	
+	$JSONreturn = curl_exec($ch);
+	if(curl_error($ch))
+	{
+		//echo 'error:' . curl_error($ch);
+		return curl_error($ch);
+	}
+	////echo $JSONreturn.'this is call from Aptify';
+	// close curl resource to free up system resources 
+	curl_close($ch);
+	return $JSONreturn;
+}
+
+function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
+	// search and remove line space \r\n and tabs \t
+	$json = preg_replace("!\r?\n!", "", $json);
+	$json = preg_replace("!\t!", " ", $json);
+	$json = preg_replace("/&nbsp;/", " ", $json);
+	$json = json_decode($json, $assoc);
+	return $json;
+}
+
 function getDropdown(){
-	$result = GetAptifyData("39","");
+	$API = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOptionValues';
+	$result = curlRequest($API);
+	$result = json_clean_decode($result);
+	
 	// write Country json file
 	foreach($result['Country']  as $lines){
 		$ID = $lines['ID'];

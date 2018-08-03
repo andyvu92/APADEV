@@ -100,9 +100,9 @@ if(isset($_POST["Invoice_ID"])) {
 	// User ID, InvoiceID
 	// Response -
 	// Invoice
-	$User["UserID"] = "UserID";
-	$User["Invoice_ID"] = $_POST["Invoice_ID"];
-	$GetPDF = GetAptifyData("18", $User);
+	//$User["UserID"] = "UserID";
+	//$User["Invoice_ID"] = $_POST["Invoice_ID"];
+	//$GetPDF = GetAptifyData("18", $User);
 }
 ?>
 <?php logRecorder();  ?>
@@ -115,11 +115,12 @@ if(isset($_POST["Invoice_ID"])) {
 </form>-->
 
 <!--<p>Download <a><?php //if(isset($GetPDF)) //echo $GetPDF["Invoice"]; 
-$apis[0] = $invoice_ID;
-$invoiceAPI = GetAptifyData("18", $apis);
+//$apis[0] = $invoice_ID;
+//$invoiceAPI = GetAptifyData("18", $apis);
 ?></a></p>-->
 <a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 <p>A copy will be sent to your inbox and stored in your new dashboard</p>
+<?php  /*
 <div id="Iaksbnkvoice" class="modal fade big-screen" role="dialog">
 	<div class="modal-dialog">
 
@@ -138,7 +139,9 @@ $invoiceAPI = GetAptifyData("18", $apis);
 
 	</div>
 </div>
+*/ ?>
 <a target="_blank" class="addCartlink" href="../your-purchases"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>
+<?php /*
 <style type="text/css">
 	.big-screen {
 		width: 62%;
@@ -158,4 +161,5 @@ $(document).ready(function() {
 	}
 });
 </script>
+*/ ?>
 <?php logRecorder();  ?>	

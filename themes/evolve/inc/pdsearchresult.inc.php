@@ -66,18 +66,29 @@ if(isset($_GET["page"])) {
 }
 $results = GetAptifyData("28", $request);
 
-$totalNum = $results["MeetingDetails"][0]["PDcount"]; //sizeof($results);
-$results = $results["MeetingDetails"];
-$numItem = $request["PageSize"];
-$totalPage = intval($totalNum/$request["PageSize"]);
-if($totalNum % $request["PageSize"] > 0) {
-	$totalPage++;
+$outputEmpty = false;
+if(isset($results['MResponse'])) {
+	echo 'no record!!!';
+	$outputEmpty = true;
+} else {
+	$totalNum = $results["MeetingDetails"][0]["PDcount"]; //sizeof($results);
+	$results = $results["MeetingDetails"];
+	$numItem = $request["PageSize"];
+	$totalPage = intval($totalNum/$request["PageSize"]);
+	if($totalNum % $request["PageSize"] > 0) {
+		$totalPage++;
+	}
 }
+
+
 //echo "totalnum: ".$totalNum;
 //echo "totalpage: ".$totalPage;
 ?>
 
 <h3 class="light-lead-heading align-center">PD BASED ON YOUR PROFILE</h3>
+<?php if($outputEmpty): ?>
+	<b stlye="text-align: center;">No result found!</b>
+<?php else: ?>
 <?php
 
    /********sort search result*****/
@@ -289,3 +300,4 @@ if($totalNum % $request["PageSize"] > 0) {
                 
 	}
 </script>
+<?php endif; ?>

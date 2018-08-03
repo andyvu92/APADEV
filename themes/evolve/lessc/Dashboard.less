@@ -715,6 +715,13 @@ input[id^="Additional-qualifications"] {
 }
 
 
+/*--PREDEFINED FONTS--*/
+.roboto{
+    font-family: Roboto;
+}
+.cairo{
+    font-family: Cairo;
+}
 
 /*--PREDEFINED COLOURS--*/
 @light-background: rgb(242, 243, 244);
@@ -764,10 +771,6 @@ input[id^="Additional-qualifications"] {
 
 .light-font-weight{
     font-weight: 300;
-}
-
-.cairo{
-    font-family: Cairo;
 }
 
 .lead-heading{
@@ -1763,6 +1766,9 @@ a#insuranceControl{
     }
     .ng-icons-group{
         padding: 20px 0;
+        .dashboard-content-bottom{
+            padding: 10px 0;
+        }
         .flex-cell{
             justify-content: center;
         }
@@ -2632,6 +2638,10 @@ form{
             -webkit-appearance: none;
             position: relative;
             z-index: 1;
+            .roboto;
+            &:focus{
+                background: rgb(238, 236, 233);
+            }
         }
         &::after{
             content: '\f078';
@@ -2698,7 +2708,6 @@ form{
             font-weight: 400;
             text-align: center;
             span{
-                margin: 0 auto;
                 color: #0e7ac9;
                 padding: 10px 0;
             }
@@ -2712,6 +2721,9 @@ form{
 }
 
 /*--JOIN THE APA--*/
+.form-control[disabled]{
+    color: rgba(0,0,0,0)!important;
+}
 #join-review-form{
     .review-main-container{
         @media all and (max-width: @desktop-width){
@@ -2765,10 +2777,19 @@ form{
         }
     }
     #insuranceTermsandConditions{
+        .modal-dialog{
+            margin-top: 0!important;
+        }
         .modal-content{
             .modal-body{
                 max-width: 650px;
-                max-height: 650px;
+                max-height: 550px;
+                @media all and (max-width: @larger-phone-width) {
+                    max-height: 400px;
+                }
+                @media all and (max-width: 335px) {
+                    max-height: 300px;
+                }
             }
             .modal-footer{
                 margin-top: 0;
@@ -2932,3 +2953,20 @@ form{
         }
     }
  }
+
+ /*--FORM FIELDS ENABLE/DISABLE STYLE--*/
+form{
+    .locked{
+        &:after{
+            content: '';
+            position: absolute;
+            right: 35px;
+            bottom: 12px;
+            background: url(/sites/default/files/general-icon/locker-trans.png) center no-repeat;
+            width: 15px;
+            height: 25px;
+            background-size: contain;
+            opacity: 0.5;
+        }
+    }
+}

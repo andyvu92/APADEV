@@ -102,6 +102,53 @@
 		//echo "logged out";
 	}
 ?>
+<?php
+/******* shopping cart number + icon change *****/
+$type = "PD";
+$counts = 0;
+if(isset($_SESSION['UserId'])) {
+	$userID = $_SESSION['UserId'];
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	/********Get user shopping product form APA server******/
+	try {
+		$type="PD";
+		$shoppingcartGetPD= $dbt->prepare('SELECT ID, productID, meetingID,coupon FROM shopping_cart WHERE userID= :userID AND type= :type');
+		$shoppingcartGetPD->bindValue(':userID', $userID);
+		$shoppingcartGetPD->bindValue(':type', $type);
+		$shoppingcartGetPD->execute();
+		$counts += count($shoppingcartGetPD);
+		$shoppingcartGetPD= null;               
+		$type="PDNG";
+		$shoppingcartGetPD= $dbt->prepare('SELECT ID, productID, meetingID,coupon FROM shopping_cart WHERE userID= :userID AND type= :type');
+		$shoppingcartGetPD->bindValue(':userID', $userID);
+		$shoppingcartGetPD->bindValue(':type', $type);
+		$shoppingcartGetPD->execute();
+		$counts += count($shoppingcartGetPD);
+		$shoppingcartGetPD= null;               
+	} catch (PDOException $e) {
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}
+	$dbt = null;
+	/********End get user shopping product form APA server******/
+} else {
+	$userID = '';
+	$counts = 0;
+}
+?>
+<?php if($counts == 0): ?>
+<div class="pull-right borderLeftForTop ShoppingCartBorder" title="Shopping cart">
+	<div class="ButtonIconHolder">
+		<div class="ShoppingCartEmpty">0</div>
+	</div>
+</div>
+<?php else: ?>
+<div class="pull-right borderLeftForTop ShoppingCartBorder" title="Shopping cart">
+	<div class="ButtonIconHolder">
+		<div class="ShoppingCart"><?php echo $counts; ?></div>
+	</div>
+</div>
+<?php endif; ?>
 <?php if(isset($_SESSION["Log-in"])): ?>
 <div class="pull-right borderLeftForTop DashboardPadding">
 	<div id="DashboardButton" class="ButtonIconHolder withButtonIcon DashboardwithButtonIcon" title="Dashboard">

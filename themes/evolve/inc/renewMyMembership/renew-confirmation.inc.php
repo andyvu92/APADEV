@@ -124,12 +124,13 @@ $background = getBackgroundImage($userID);
 					$send["UserID"] = $_SESSION["UserId"];
 					$send["Invoice_ID"] = $invoice_ID;  
 					//$invoiceAPI = GetAptifyData("18", $send); 
-					$apis[0] = $invoice_ID;
-					$invoiceAPI = GetAptifyData("18", $apis);
+					//$apis[0] = $invoice_ID;
+					//$invoiceAPI = GetAptifyData("18", $apis);
 					?> 
 					<a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 					<p style="color:white;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>
 				</div>
+				<?php /*
 				<div id="Iaksbnkvoice" class="modal fade big-screen" role="dialog">
 					<div class="modal-dialog">
 
@@ -148,6 +149,7 @@ $background = getBackgroundImage($userID);
 
 					</div>
 				</div>
+				*/ ?>
 			</div>
 		</div>
 	</div>
@@ -155,6 +157,7 @@ $background = getBackgroundImage($userID);
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<?php /*
 <style type="text/css">
 	.big-screen {
 		width: 62%;
@@ -174,4 +177,5 @@ $(document).ready(function() {
 	}
 });
 </script>
+*/ ?>
 <?php logRecorder();  ?>	

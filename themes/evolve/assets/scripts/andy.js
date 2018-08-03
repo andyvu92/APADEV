@@ -154,7 +154,7 @@ jQuery(document).ready(function() {
 
 //CHANGE "JOIN BUTTON" FOR NATIONAL GROUP ON DASHBOARD
 jQuery(document).ready(function ($) {
-  if ($("#national-groups").find(".ng-icons-group").length = 0){ 
+  if ($("#national-groups").find(".carousel").length == 0){ 
     $("#ng-join-btn").html('<span>Join now</span>');
   }
 });
@@ -166,4 +166,32 @@ jQuery(document).ready(function() {
 	}
 });
 
+//SET BACKGROUND FOR EACH HOME PAGE ARTICLE CONTENT
+jQuery(function ($) {
+  var someId = $(".dexp-grid-items .portfolio-image .content");
+  someId.css('background', function () {
+      console.log('x')
+      return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
+  })
+}) 
+
+//REMOVE RED BORDER ON FIELD VALIDATION
+jQuery(document).ready(function() {
+  $('input').on('keyup',function() {
+    $(this).removeClass('focuscss');
+  });
+
+  $('input[name="Pobox"]').on('keyup',function() {
+    $(this).removeClass('focuscss');
+  });
+
+  $('input[type="date"]').on('click',function() {
+    $(this).removeClass('focuscss');
+  });
+  $('select').on('click',function() {
+    $(this).removeClass('focuscss');
+  });
+
+  $('input[readonly]').parent().addClass('locked');
+});
 
