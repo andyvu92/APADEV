@@ -1542,7 +1542,10 @@ ul.socials li a {
 		width: 100%;
 	}
 }
-
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control{
+    cursor: default!important;
+	background-color: rgba(0,0,0,0.12)!important;
+}
 
 /*
 #veryTopNav li:before {

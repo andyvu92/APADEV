@@ -78,6 +78,9 @@ jQuery(document).ready(function($) {
 			if($("input[name=Password]").length !==0){
 				if($("input[name=Password]").val() ==''){$("input[name=Password]").addClass("focuscss");}else{$("input[name=Password]").removeClass("focuscss");}
 			}
+			if($("input[name=newPassword]").length !==0){
+				if($("input[name=newPassword]").val() ==''){$("input[name=newPassword]").addClass("focuscss");}else{$("input[name=newPassword]").removeClass("focuscss");}
+			}
 			if($("select[name=MemberType]").val() ===''){$("select[name=MemberType]").addClass("focuscss");}else{$("select[name=MemberType]").removeClass("focuscss");}
 			if($("select[name=Branch]").val() ===''){$("select[name=Branch]").addClass("focuscss");}else{$("select[name=Branch]").removeClass("focuscss");}
 		    if($("input[name=Memberid]").val() =='' || !isValidEmailAddress($("input[name=Memberid]").val()) ||$("select[name=MemberType]").val() ===''||$("select[name=Branch]").val() ===''){
@@ -86,6 +89,9 @@ jQuery(document).ready(function($) {
 			if($("input[name=Password]").length !==0) {
 				if($("input[name=Password]").val() =='') { return false;}
 			}
+			if($("input[name=newPassword]").length !==0) {
+				if($("input[name=newPassword]").val() =='') { return false;}
+			}
 		}
 		if($('select[name=MemberType]').val()!=="9964" && $('select[name=MemberType]').val()!=="9965" && $('select[name=MemberType]').val()!=="10004"&& $('select[name=MemberType]').val()!=="9966"&& $('select[name=MemberType]').val()!=="9967"&& $('select[name=MemberType]').val()!=="9968"&& $('select[name=MemberType]').val()!=="9997"&& $('select[name=MemberType]').val()!=="9967"){
 			if($('.down3:visible').length !== 0){
@@ -93,7 +99,7 @@ jQuery(document).ready(function($) {
 				if(i!=0){
 				for (x = 0; x<i;x++){
 					if($("input[name=Name-of-workplace"+x+"]").val() ==''){$("input[name=Name-of-workplace"+x+"]").addClass("focuscss");}else{$("input[name=Name-of-workplace"+x+"]").removeClass("focuscss");}
-					//if($("select[name=Workplace-setting"+x+"]").val() ==''){$("select[name=Workplace-setting"+x+"]").addClass("focuscss");}else{$("select[name=Workplace-setting"+x+"]").removeClass("focuscss");}
+					if($("select[name=Workplace-setting"+x+"]").val() ==''){$("select[name=Workplace-setting"+x+"]").addClass("focuscss");}else{$("select[name=Workplace-setting"+x+"]").removeClass("focuscss");}
 					if($("input[name=WAddress_Line_1"+x+"]").val() ==''){$("input[name=WAddress_Line_1"+x+"]").addClass("focuscss");}else{$("input[name=WAddress_Line_1"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wcity"+x+"]").val() ==''){$("input[name=Wcity"+x+"]").addClass("focuscss");}else{$("input[name=Wcity"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wpostcode"+x+"]").val() ==''){$("input[name=Wpostcode"+x+"]").addClass("focuscss");}else{$("input[name=Wpostcode"+x+"]").removeClass("focuscss");}
@@ -107,7 +113,7 @@ jQuery(document).ready(function($) {
 							
 				for (x = 0; x<i;x++){
 					
-					if($("input[name=Name-of-workplace"+x+"]").val() ==''){
+					if($("input[name=Name-of-workplace"+x+"]").val() =='' || $("select[name=Workplace-setting"+x+"]").val() =='' ){
 						
 						return false;
 					}
