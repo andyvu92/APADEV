@@ -335,7 +335,12 @@ $background = getBackgroundImage($userID);
 					<span class="cairo lead-heading">Your membership</br> snapshot</span>		
 			    </div>
 				<div class="col-xs-6 col-md-6 circle-container">
-					<div class="circle"><span class="number"><?php echo $user['Yearmembership']; ?></span><span class="text">Years of membership</span></div>
+					<div class="circle"><span class="number"><?php 
+					if ( !empty($user['Yearmembership']) ){
+						echo $user['Yearmembership'];
+					} else {
+						echo "0";
+					} ?></span><span class="text">Years of membership</span></div>
 				</div>
 				<div class="col-xs-6 col-md-6 circle-container" id="goo-chart">
 					<div id="donutchart"></div>

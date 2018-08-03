@@ -177,7 +177,22 @@ jQuery(function ($) {
 
 //REMOVE RED BORDER ON FIELD VALIDATION
 jQuery(document).ready(function() {
-  $('input').on('keyup',function() {
+  $('input.form-control').on('keyup',function() {
+    $(this).removeClass('focuscss');
+  });
+
+	$(".join-details-button3").on("click",function() {
+
+		if ($('[id^=#workplace]').find(".focuscss").length > 0){ 
+      var num = $(this).attr('id').match(/\d+$/)[0];
+			$('#tabmenu li#workplaceli'+num).addClass("test");
+    }
+    if ($('#workplaceblocks #workplace2').find(".focuscss").length > 0){ 
+			$('#tabmenu li#workplaceli2').addClass("test");
+	  }
+	});
+
+  $('input').on('change',function() {
     $(this).removeClass('focuscss');
   });
 
@@ -191,7 +206,10 @@ jQuery(document).ready(function() {
   $('select').on('click',function() {
     $(this).removeClass('focuscss');
   });
-
-  $('input[readonly]').parent().addClass('locked');
 });
 
+jQuery(document).ready(function() {
+  $('input[readonly]').parent().addClass('locked');
+  $('input[disabled]').parent().addClass('locked');
+  $('select[disabled]').parent().addClass('locked');
+});

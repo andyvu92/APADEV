@@ -2957,7 +2957,7 @@ form{
  /*--FORM FIELDS ENABLE/DISABLE STYLE--*/
 form{
     .locked{
-        &:after{
+        &:before{
             content: '';
             position: absolute;
             right: 35px;
@@ -2967,6 +2967,28 @@ form{
             height: 25px;
             background-size: contain;
             opacity: 0.5;
+        }
+        &.plus-select-box {
+            cursor: no-drop;
+            .search-field.locked{
+                &:before{
+                    opacity: 0;
+                }
+            }
+            &:after{
+                display: none;
+            }
+            &:before{
+                right: 20px;
+            }
+        }
+        &.chevron-select-box{
+            &:after{
+                display: none;
+            }
+            &:before{
+                right: 20px;
+            }
         }
     }
 }
