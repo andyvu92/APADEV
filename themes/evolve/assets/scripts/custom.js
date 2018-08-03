@@ -630,6 +630,7 @@ jQuery(document).ready(function($) {
 			$("input[name=BuildingName]").val('');;
 			$("input[name=Address_Line_1]").parent().addClass('locked');
 			$("input[name=Address_Line_2]").parent().addClass('locked');
+			$("input[name=BuildingName]").parent().addClass('locked');
 		}
         else{
 			$("input[name=Address_Line_1]").prop('disabled', false);
@@ -642,6 +643,9 @@ jQuery(document).ready(function($) {
 		$("input[name=Address_Line_1]").prop('disabled', true);
 		$("input[name=Address_Line_2]").prop('disabled', true);
 		$("input[name=BuildingName]").prop('disabled', true);
+		$("input[name=Address_Line_1]").parent().addClass('locked');
+		$("input[name=Address_Line_2]").parent().addClass('locked');
+		$("input[name=BuildingName]").parent().addClass('locked');
 	}
 	else{
 		$("input[name=Address_Line_1]").prop('disabled', false);
@@ -656,6 +660,9 @@ jQuery(document).ready(function($) {
 			$("input[name=Billing-Address_Line_1]").val('');
 			$("input[name=Billing-Address_Line_2]").val('');
 			$("input[name=Billing-BuildingName]").val('');
+			$("input[name=Billing-Address_Line_1]").parent().addClass('locked');
+			$("input[name=Billing-Address_Line_2]").parent().addClass('locked');
+			$("input[name=Billing-BuildingName]").parent().addClass('locked');
 		}
         else{
 			$("input[name=Billing-Address_Line_1]").prop('disabled', false);
@@ -667,6 +674,9 @@ jQuery(document).ready(function($) {
 		$("input[name=Billing-Address_Line_1]").prop('disabled', true);
 		$("input[name=Billing-Address_Line_2]").prop('disabled', true);
 		$("input[name=Billing-BuildingName]").prop('disabled', true);
+		$("input[name=Billing-Address_Line_1]").parent().addClass('locked');
+		$("input[name=Billing-Address_Line_2]").parent().addClass('locked');
+		$("input[name=Billing-BuildingName]").parent().addClass('locked');
 	}
 	else{
 		$("input[name=Billing-Address_Line_1]").prop('disabled', false);
@@ -681,6 +691,10 @@ jQuery(document).ready(function($) {
 			$("input[name=Shipping-Address_Line_1]").val('');
 			$("input[name=Shipping-Address_Line_2]").val('');
 			$("input[name=Shipping-BuildingName]").val('');
+			$("input[name=Shipping-Address_Line_1]").parent().addClass('locked');
+			$("input[name=Shipping-Address_Line_2]").parent().addClass('locked');
+			$("input[name=Shipping-BuildingName]").parent().addClass('locked');
+			
 		}
         else{
 			$("input[name=Shipping-Address_Line_1]").prop('disabled', false);
@@ -692,6 +706,9 @@ jQuery(document).ready(function($) {
 		$("input[name=Shipping-Address_Line_1]").prop('disabled', true);
 		$("input[name=Shipping-Address_Line_2]").prop('disabled', true);
 		$("input[name=Shipping-BuildingName]").prop('disabled', true);
+		$("input[name=Shipping-Address_Line_1]").parent().addClass('locked');
+		$("input[name=Shipping-Address_Line_2]").parent().addClass('locked');
+		$("input[name=Shipping-BuildingName]").parent().addClass('locked');
 	}
 	else{
 		$("input[name=Shipping-Address_Line_1]").prop('disabled', false);
@@ -706,6 +723,10 @@ jQuery(document).ready(function($) {
 			$("input[name=Mailing-Address_Line_1]").val('');
 			$("input[name=Mailing-Address_Line_2]").val('');
 			$("input[name=Mailing-BuildingName]").val('');
+			$("input[name=Mailing-Address_Line_1]").parent().addClass('locked');
+			$("input[name=Mailing-Address_Line_2]").parent().addClass('locked');
+			$("input[name=Mailing-BuildingName]").parent().addClass('locked');
+			
 		}
         else{
 			$("input[name=Mailing-Address_Line_1]").prop('disabled', false);
@@ -717,6 +738,9 @@ jQuery(document).ready(function($) {
 		$("input[name=Mailing-Address_Line_1]").prop('disabled', true);
 		$("input[name=Mailing-Address_Line_2]").prop('disabled', true);
 		$("input[name=Mailing-BuildingName]").prop('disabled', true);
+		$("input[name=Mailing-Address_Line_1]").parent().addClass('locked');
+		$("input[name=Mailing-Address_Line_2]").parent().addClass('locked');
+		$("input[name=Mailing-BuildingName]").parent().addClass('locked');
 	}
 	else{
 		$("input[name=Mailing-Address_Line_1]").prop('disabled', false);
