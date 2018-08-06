@@ -42,8 +42,11 @@ function checkShoppingCart($userID, $productID){
 //delete PRF
 if(isset($_POST['step2-2'])){
 	checkShoppingCart($userID=$_SESSION['UserId'],$type="", $prodcutID="PRF");
+	$_SESSION["postReviewData"]['PRFdonation']="";
+	
 }
 //delete MG product
+
 if(isset($_POST['step2-3'])){
 	checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID=$_POST['step2-3']);
 	//echo "this is productID";
@@ -63,6 +66,51 @@ if(isset($_POST['step2-3'])){
 	$_SESSION["MGProductID"] = $afterDelete;
 	
 }
+
+
+//delete NG product-------change delete NG product process at 31/07/2018
+if(isset($_POST['step2-4'])){
+	checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID=$_POST['step2-4']);
+	unset($_SESSION["NationalProductID"]);
+	$userNGProduct = getProduct($_SESSION['UserId'], "NG");
+	if (sizeof($userNGProduct) != 0) {
+		$_SESSION['NationalProductID'] = $userNGProduct;
+	}
+	deleteMGR($totalMGProduct=$_SESSION["MGProductID"], $NGProduct=$_POST['step2-4'], $userID=$_SESSION['UserId']);
+	unset($_SESSION["MGProductID"]);
+	$userMGProduct  = array();
+	$userMG1Product = getProduct($_SESSION['UserId'], "MG1");
+	if (sizeof($userMG1Product) != 0) {
+		array_push($userMGProduct, $userMG1Product);
+	}
+	
+	$userMG2Product = getProduct($_SESSION['UserId'], "MG2");
+	if (sizeof($userMG2Product) != 0) {
+		array_push($userMGProduct, $userMG2Product);
+	}
+	
+	if (sizeof($userMGProduct) != 0) {
+		$_SESSION["MGProductID"] = $userMGProduct;
+	}
+	
+
+}
+//delete NG product-------change delete NG product process at 31/07/2018
+/***********Delete MG Product when required********/
+/***********This function is just for delete NG Product********/
+function deleteMGR($totalMGProduct, $NGProduct, $userID){
+	if($NGProduct == "10021") {
+		checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID="9977");
+	}
+	if($NGProduct == "10015") {
+		checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID="9978");
+		
+	}
+
+}
+
+
+/***********End delete MG Product when required********/
 if(isset($_POST['step2'])) {
 	$postPaymentData = array();
 	$postReviewData = array();
@@ -114,6 +162,7 @@ if(isset($_POST['step2'])) {
 		$postReviewData['PRFdonation'] = "";
 		$_POST['PRF'] = "0";
 	}
+
 	//if(isset($_POST['Rollover'])){ $postReviewData['Rollover'] = $_POST['Rollover']; }
 	//echo "this is payment card".$_POST['Paymentcard'];
 	if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
@@ -122,36 +171,28 @@ if(isset($_POST['step2'])) {
   	//store data in the session
 	$_SESSION["postReviewData"] =  array();
 	$_SESSION["postReviewData"] = $postReviewData; 
-    //Get calculating the Order Total and Schedule Payments
+    
+	
+}
+//Get calculating the Order Total and Schedule Payments
 	// 2.2.47 Get calculating the Order Total and Schedule Payments
 	// Send - 
 	// userID & Paymentoption & InstallmentFor & InstallmentFrequency & PRFdonation & productID & CampaignCode
 	// Response -AdminFee & SubTotal & GST & OrderTotal & InitialPaymentAmount & OccuringPayment & LastPayment
-	$postScheduleData['userID'] = $postReviewData['userID'];
-	$postScheduleData['Paymentoption'] = $postReviewData['Paymentoption'];
+	$reviewData = $_SESSION["postReviewData"] ;
+	$postScheduleData['userID'] = $reviewData['userID'];
+	$postScheduleData['Paymentoption'] = $reviewData['Paymentoption'];
 	$postScheduleData['InstallmentFor'] = "Membership";
-	$postScheduleData['InstallmentFrequency'] = $postReviewData['InstallmentFrequency'];
-	$postScheduleData['PRFdonation'] = $postReviewData['PRFdonation'];
-	$postScheduleData['productID'] = $postReviewData['productID'];
+	$postScheduleData['InstallmentFrequency'] = $reviewData['InstallmentFrequency'];
+	if(isset($_POST['step2-2'])){  $reviewData['PRFdonation']="";}
+	$postScheduleData['PRFdonation'] = $reviewData['PRFdonation']; 
+	//$postScheduleData['PRFdonation'] = $reviewData['PRFdonation'];
+	//$postScheduleData['PRFdonation'] = getProduct($_SESSION['UserId'],$type="");
+	$postScheduleData['productID'] = getProductList($_SESSION['UserId']);
 	$postScheduleData['CampaignCode'] = "";
 	$scheduleDetails = GetAptifyData("47", $postScheduleData);
 	
-}
-	//get productID list from local database;
-	function getProductList($userID){
-		$arrayReturn = array();
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
-		$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND productID != "PRF" AND type != "PD"');
-		$shoppingcartGet->bindValue(':userID', $userID);
-		$shoppingcartGet->execute();
-		if($shoppingcartGet->rowCount()>0) { 
-			foreach ($shoppingcartGet as $row) {
-				array_push($arrayReturn, $row['productID']);
-			}
-		}	
-		$shoppingcartGet = null;
-		return $arrayReturn;
-	}
+	
 	// 2.2.31 Get Membership prodcut price
 	// Send - 
 	// userID & product list
@@ -216,7 +257,7 @@ $PRFPrice = 0;
  ?> 
 <form id ="join-review-form" action="joinconfirmation" method="POST">
 	<input type="hidden" name="step3" value="3">
-	<div class="down8" <?php if(isset($_POST['step2'])||isset($_POST['step2-2'])||isset($_POST['step2-3']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
+	<div class="down8" <?php if(isset($_POST['step2'])||isset($_POST['step2-2'])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
 		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
 			<div class="flex-container join-apa-final">
 				<div class="flex-cell flex-flow-row table-header">
@@ -251,7 +292,7 @@ $PRFPrice = 0;
 									echo "<div class='flex-col-8 title-col'>".$NGArray['ProductName']."</div>";
 									echo "<div class='flex-col-2 price-col'>A$".$NGArray['NGprice']."</div>";
 									$price += $NGArray['NGprice'];
-									echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
+									echo '<div class="flex-col-2 action-col"><a class="deleteNGButton'.$NGArray['ProductID'].'">delete</a></div>';
 									echo "</div>";
 								}	  
 							}
@@ -267,13 +308,14 @@ $PRFPrice = 0;
 									echo "</div>";  
 							}
 						}
-                        if((!isset($_POST['prftag'])) && isset($_POST['PRF'])&& $_POST['PRF']!=""){ 
+                        //if((!isset($_POST['prftag'])) && isset($_POST['PRF'])&& $_POST['PRF']!=""){ 
+						if($reviewData['PRFdonation']!=""){ 
                             echo '<div class="flex-cell flex-flow-row table-cell">
                             <div class="flex-col-8 title-col">Physiotherapy Research Foundation donation</div>
-                            <div class="flex-col-2 price-col">A$'.$_POST['PRF'].'</div>
+                            <div class="flex-col-2 price-col">A$'.$reviewData['PRFdonation'].'</div>
                             <div class="flex-col-2 action-col"><a class="deletePRFButton">delete</a></div>
                             </div>'; 
-                            $price +=$_POST['PRF']; }
+                            $price +=$reviewData['PRFdonation']; }
 				?>
 			</div>
 		</div>
@@ -395,8 +437,8 @@ $PRFPrice = 0;
 									First instalment	
 								</div>
 								<div class="flex-col-6">$'.$firstInstallment.'</div></div>';	
-						if(isset($_POST['PRF'])&& $_POST['PRF']!=""){
-							$PRFPrice =$_POST['PRF']; 
+						if($reviewData['PRFdonation']!=""){
+							$PRFPrice =$reviewData['PRFdonation']; 
 							echo'<div class="flex-cell flex-flow-row">
 									<div class="flex-col-6">
 										PRF donation	
@@ -434,7 +476,8 @@ $PRFPrice = 0;
 </form>
 <form id="pform" action="" method="POST"><input type="hidden" name="goP"></form>
 <form id="deletePRFForm" action="" method="POST"><input type="hidden" name="step2-2"></form>
-<form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>	
+<form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>
+<form id="deleteNGForm" action="" method="POST"><input type="hidden" name="step2-4" value=""></form>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="your-details-prevbutton8"><span class="dashboard-button-name">Back</span></a></div>
 <?php if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"): ?>
 <div id="schedulePOPUp" class="modal fade" role="dialog">
@@ -484,5 +527,14 @@ div#schedulePOPUp {
     color: black;
 }
 </style>
+<!--<div id="deleteNGWindow" style="display:none;">
+	<h3 style="color:#009fda">Are you want to delete this National Group?</h3>
+	<form id="deleteNGForm" action="" method="POST">
+		<input type="hidden" name="step2-4" value="">
+		<input type="hidden" name="MG" value="">
+		<button class="yes accent-btn" type="submit" value="Yes">Yes</button>
+	    <a class="no accent-btn cancelDeleteButton" target="_self">No</a>
+	</form>	
+</div>-->
 <!--  this part will be merged with Andy's Dashboard less file-->	
 <?php logRecorder();  ?>

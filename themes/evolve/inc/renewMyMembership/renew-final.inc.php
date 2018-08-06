@@ -1,69 +1,15 @@
 <?php
 //use session: $_SESSION['userID'],$_SESSION["postReviewData"]
-//save PRF product into APA database function
-//save PRF product into APA database function
-/*function createShoppingCart($userID, $productID,$coupon){
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
-	try {
-		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, coupon) VALUES (:userID, :productID, :coupon)');
-		$shoppingcartUpdate->bindValue(':userID', $userID);
-		$shoppingcartUpdate->bindValue(':productID', $productID);
-		$shoppingcartUpdate->bindValue(':coupon', $coupon);
-		$shoppingcartUpdate->execute();	
-		$shoppingcartUpdate = null;
-	}
-	catch (PDOException $e) {
-		print "Error!: " . $e->getMessage() . "<br/>";
-		die();
-	}
-}
-// check the user product in case of duplicated shopping cart data
-function checkShoppingCart($userID, $productID){
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
-		try {
-			$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID and productID=:productID');
-			$shoppingcartGet->bindValue(':userID', $userID);
-			$shoppingcartGet->bindValue(':productID', $productID);
-			$shoppingcartGet->execute();
-			if($shoppingcartGet->rowCount()>0) { 
-			   $shoppingcartDel = $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and productID=:productID');
-			   $shoppingcartDel->bindValue(':userID', $userID);
-			   $shoppingcartDel->bindValue(':productID', $productID);
-			   $shoppingcartDel->execute();	
-			   $shoppingcartDel = null;
-			}
-			$shoppingcartGet = null; 
-	    }
-		catch (PDOException $e) {
-				print "Error!: " . $e->getMessage() . "<br/>";
-				die();
-	    }
-}*/
-//get productID list from local database;
-function getProductList($userID){
-	$arrayReturn = array();
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
-	//$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND type=:type');
-	$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND productID != "PRF" AND type != "PD"');
-	$shoppingcartGet->bindValue(':userID', $userID);
-	//$shoppingcartGet->bindValue(':type', $type);
-	$shoppingcartGet->execute();
-	if($shoppingcartGet->rowCount()>0) { 
-		foreach ($shoppingcartGet as $row) {
-		array_push($arrayReturn, $row['productID']);
-		}
-	}	
-	$shoppingcartGet = null;
-	return $arrayReturn;
-}
+
 //delete PRF
 if(isset($_POST['step2-2'])){
 	checkShoppingCart($userID=$_SESSION['UserId'], $type="" ,$prodcutID="PRF");
+	$_SESSION["postReviewData"]['PRFdonation']="";
 }
 //delete MG product
 if(isset($_POST['step2-3'])){
 	checkShoppingCart($userID=$_SESSION['UserId'], $type="" ,$prodcutID=$_POST['step2-3']);
-	echo "this is productID";
+	
 	//print_r($_SESSION["MGProductID"]);
 	
 	foreach($_SESSION["MGProductID"] as $deleteM){
@@ -80,6 +26,50 @@ if(isset($_POST['step2-3'])){
 	$_SESSION["MGProductID"] = $afterDelete;
 	
 }
+
+//delete NG product-------change delete NG product process at 31/07/2018
+if(isset($_POST['step2-4'])){
+	checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID=$_POST['step2-4']);
+	unset($_SESSION["NationalProductID"]);
+	$userNGProduct = getProduct($_SESSION['UserId'], "NG");
+	if (sizeof($userNGProduct) != 0) {
+		$_SESSION['NationalProductID'] = $userNGProduct;
+	}
+	deleteMGR($totalMGProduct=$_SESSION["MGProductID"], $NGProduct=$_POST['step2-4'], $userID=$_SESSION['UserId']);
+	unset($_SESSION["MGProductID"]);
+	$userMGProduct  = array();
+	$userMG1Product = getProduct($_SESSION['UserId'], "MG1");
+	if (sizeof($userMG1Product) != 0) {
+		array_push($userMGProduct, $userMG1Product);
+	}
+	
+	$userMG2Product = getProduct($_SESSION['UserId'], "MG2");
+	if (sizeof($userMG2Product) != 0) {
+		array_push($userMGProduct, $userMG2Product);
+	}
+	
+	if (sizeof($userMGProduct) != 0) {
+		$_SESSION["MGProductID"] = $userMGProduct;
+	}
+	
+
+}
+//delete NG product-------change delete NG product process at 31/07/2018
+/***********Delete MG Product when required********/
+/***********This function is just for delete NG Product********/
+function deleteMGR($totalMGProduct, $NGProduct, $userID){
+	if($NGProduct == "10021") {
+		checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID="9977");
+	}
+	if($NGProduct == "10015") {
+		checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID="9978");
+		
+	}
+
+}
+
+
+/***********End delete MG Product when required********/
 //From insurance page to review page;	
 if(isset($_POST['step2'])) {
 	$postPaymentData = array();
@@ -142,20 +132,25 @@ $postReviewData['productID'] = getProductList($_SESSION['UserId']);
 //store data in the session
 $_SESSION["postReviewData"] =  array();
 $_SESSION["postReviewData"] = $postReviewData;
+
+}
 //Get calculating the Order Total and Schedule Payments
 // 2.2.47 Get calculating the Order Total and Schedule Payments
 // Send - 
 // userID & Paymentoption & InstallmentFor & InstallmentFrequency & PRFdonation & productID & CampaignCode
 // Response -AdminFee & SubTotal & GST & OrderTotal & InitialPaymentAmount & OccuringPayment & LastPayment
-$postScheduleData['userID'] = $postReviewData['userID'];
-$postScheduleData['Paymentoption'] = $postReviewData['Paymentoption'];
+$reviewData = $_SESSION["postReviewData"] ;
+$postScheduleData['userID'] = $reviewData['userID'];
+$postScheduleData['Paymentoption'] = $reviewData['Paymentoption'];
 $postScheduleData['InstallmentFor'] = "Membership";
-$postScheduleData['InstallmentFrequency'] = $postReviewData['InstallmentFrequency'];
-$postScheduleData['PRFdonation'] = $postReviewData['PRFdonation'];
-$postScheduleData['productID'] = $postReviewData['productID'];
+$postScheduleData['InstallmentFrequency'] = $reviewData['InstallmentFrequency'];
+if(isset($_POST['step2-2'])){  $reviewData['PRFdonation']="";}
+$postScheduleData['PRFdonation'] = $reviewData['PRFdonation']; 
+//$postScheduleData['PRFdonation'] = $reviewData['PRFdonation'];
+//$postScheduleData['PRFdonation'] = getProduct($_SESSION['UserId'],$type="");
+$postScheduleData['productID'] = getProductList($_SESSION['UserId']);
 $postScheduleData['CampaignCode'] = "";
 $scheduleDetails = GetAptifyData("47", $postScheduleData);
-}
 // 2.2.31 Get Membership prodcut price
 // Send - 
 // userID & product list
@@ -259,7 +254,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 								echo "<div class='flex-col-8 title-col'>".$NGArray['ProductName']."</div>";
 								echo "<div class='flex-col-2 price-col'>A$".$NGArray['NGprice']."</div>";
 								$price += $NGArray['NGprice'];
-								echo '<div class="flex-col-2 action-col"><a href="renewmymembership" target="_self">delete</a></div>';
+								echo '<div class="flex-col-2 action-col"><a class="deleteNGButton'.$NGArray['ProductID'].'">delete</a></div>';
 								echo "</div>";
 							}	  
 						}
@@ -276,12 +271,15 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 							echo "</div>";  
 						}
 				}
-				if((!isset($_POST['prftag'])) && isset($_POST['PRF'])&& $_POST['PRF']!=""){ 
+				//if((!isset($_POST['prftag'])) && isset($_POST['PRF'])&& $_POST['PRF']!=""){ 
+				if($reviewData['PRFdonation']!=""){ 
                     echo '<div class="flex-cell flex-flow-row table-cell PRF">
                     <div class="flex-col-8 title-col">Physiotherapy Research Foundation donation</div>
-                    <div class="flex-col-2 price-col">A$'.$_POST['PRF'].'</div>
+                    <div class="flex-col-2 price-col">A$'.$reviewData['PRFdonation'].'</div>
                     <div class="flex-col-2 action-col"><a class="deletePRFButton">delete</a></div>
-                    </div>'; }
+                    </div>'; 
+					$price +=$reviewData['PRFdonation']; 
+					}
 				?>
             </div>
 	</div>
@@ -407,8 +405,8 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 									First instalment	
 								</div>
 								<div class="flex-col-6">$'.$firstInstallment.'</div></div>';	
-						if(isset($_POST['PRF'])&& $_POST['PRF']!=""){
-							$PRFPrice =$_POST['PRF']; 
+						if($reviewData['PRFdonation']!=""){
+							$PRFPrice =$reviewData['PRFdonation']; 
 							echo'<div class="flex-cell flex-flow-row">
 									<div class="flex-col-6">
 										PRF donation	
@@ -443,7 +441,8 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 </form>
 <form id="pform" action="" method="POST"><input type="hidden" name="goP"></form>
 <form id="deletePRFForm" action="" method="POST"><input type="hidden" name="step2-2"></form>
-<form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>		
+<form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>
+<form id="deleteNGForm" action="" method="POST"><input type="hidden" name="step2-4" value=""></form>		
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  <a class="your-details-prevbutton8"><span class="dashboard-button-name">Back</span></a></div>
 <?php if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"): ?>
 <div id="schedulePOPUp" class="modal fade" role="dialog">

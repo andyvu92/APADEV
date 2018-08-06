@@ -2,6 +2,7 @@
 if(isset($_POST['step3'])) {
 	//continue to get the review data
 	$postReviewData = $_SESSION['postReviewData'];
+	$postReviewData['productID'] = getProductList($_SESSION['UserId']);
 	if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
 	//if(isset($_POST['rollover'])){ $postReviewData['Rollover'] = $_POST['rollover']; }
 	if(isset($_SESSION["tempcard"])){
