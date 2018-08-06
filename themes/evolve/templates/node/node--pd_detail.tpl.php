@@ -1458,7 +1458,11 @@ if($resultdata['result']) {
 				else{
 					foreach($pricelistGet as $key=>$value){
 						$x = explode(" ", $key);
-						$y = str_replace($x[0], "", $key);
+						if(count($x) == 1) {
+							$y = $key;
+						} else {
+							$y = str_replace($x[0], "", $key);
+						}
 						$valuet = number_format($value,2);
 						echo $y.":&nbsp;$".$valuet."<br>";
 					}
