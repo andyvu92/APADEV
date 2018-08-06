@@ -212,5 +212,5 @@ jQuery(document).ready(function() {
   $('input[readonly]').parent().addClass('locked');
   $('input[disabled]').parent().addClass('locked');
   $('select[disabled]').parent().addClass('locked');
-
+  $('[class^="down"]').removeClass('locked');
 });
