@@ -218,7 +218,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 ?> 
 <form id ="join-review-form" action="renewconfirmation" method="POST">
 <input type="hidden" name="step3" value="3">
-<div class="down8" <?php if(isset($_POST['step2'])|| isset($_POST['stepAdd'])||isset($_POST['step2-2'])||isset($_POST['step2-3']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
+<div class="down8" <?php if(isset($_POST['step2'])|| isset($_POST['stepAdd'])||isset($_POST['step2-2'])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
 
 	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 review-main-container">
 	<div class="flex-container join-apa-final">
