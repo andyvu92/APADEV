@@ -281,7 +281,7 @@
     }
     span{
         color: #fff;
-        font-size: 1.4em;
+        font-size: 1.2em;
         a{
             color: #fff;
             text-decoration: underline;
@@ -646,6 +646,7 @@ body.page-node{
             }
             .pager{
                 text-align: left;
+                margin: 20px 0;
                 a, div{
                     color: #000;
                     padding: 0 5px;
@@ -1590,7 +1591,7 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
     left: calc(~"50% - 200px")!important;
     top: 40%!important;
 }
-div[aria-describedby="registerMember"].ui-dialog, div[aria-describedby="signupWebUser"].ui-dialog{
+div[aria-describedby="registerMember"].ui-dialog{
     z-index: 1055!important;
     top: 400px!important;
     left: 425px!important;
@@ -1626,6 +1627,7 @@ div[aria-describedby="jobnoticement"] .ui-widget-header, div[aria-describedby="r
 }
  div[aria-describedby="registerPDUser"] .ui-dialog-content, div[aria-describedby="registerMember"] .ui-dialog-content{
     overflow:hidden!important;
+    overflow-x: hidden;
 }
 div[aria-describedby="jobnoticement"] .registerDes{
     margin-left:0px!important;
@@ -1804,4 +1806,28 @@ input[name="Couponcode"]{
 }
 .locationAutomaticHov span {
 	color: white;
+}
+
+#passwordReset{
+    z-index: 1055;
+}
+
+div[aria-describedby="signupWebUser"]{
+    position: fixed!important;
+    top: 15%!important;
+    left: 25%!important;
+    width: 50%!important;
+    max-width: 718px;
+    #signupWebUser{
+        overflow: auto;
+        overflow-x: hidden;
+        max-height: 80vh!important;
+        input{
+            background: #fff;
+        }
+    }
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+    background: none!important;
 }

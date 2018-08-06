@@ -26,6 +26,13 @@ div[id^="home-tile-view-block"]{
     &.dexp-grid-items{
         div[id^="node-"]{
             &.node-home-news-tiles{
+                @media all and (max-width: 1025px) and (min-width: @tablet-width + 1px) {
+                    width: 33.33%;
+                    padding: 7px;
+                }
+                @media all and (max-width: @tablet-width){
+                    padding: 7px;
+                }
                 & > .content{
                     @media all and (max-width: 335px) {
                         .item-description{

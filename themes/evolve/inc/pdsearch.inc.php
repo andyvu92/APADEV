@@ -48,7 +48,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Region</label>
-		<select  class="chosen-select" name="Regionalgp" id="Regionalgp" multiple data-placeholder="Regional group">
+		<select  class="chosen-select" name="Regionalgp" id="Regionalgp" multiple data-placeholder="Region">
 			<option value="NSW-CC" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-CC") { echo "selected";} ?>> NSW - CENTRAL COAST  </option>
 			<option value="NSW-CH" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-CH") { echo "selected";} ?>> NSW - COFFS HARBOUR  </option>
 			<option value="NSW-CW" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-CW") { echo "selected";} ?>> NSW - CENTRAL WEST  </option>
@@ -152,7 +152,6 @@
 	<div class="row">
 		<div class="col-xs-12 col-md-5">
 			<span class="small-text"><a target="_blank">Terms and conditions</a></span>
-			<span class="small-text"><a target="_blank">Frequently asked questions</a></span>
 			<span class="small-text"><a target="_blank">Event registeration form</a></span>
 		</div>
 		<div class="col-xs-12 col-md-7 searchds align-right">

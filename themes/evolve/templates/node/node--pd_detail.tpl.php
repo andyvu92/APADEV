@@ -478,21 +478,7 @@ if($resultdata['result']) {
 		<div class="section description">
 			<div class="pd-description-mobile">
 				<div class="readmore">
-					<p class="pd-descriptionM">
-					<?php 
-					if (!empty($pd_detail['Description'])){
-						echo $pd_detail['Description'];
-					}
-					else{
-						echo "<h4>No record found!</h4>";
-					}
-					?>
-					</p>
-				</div>
-			</div>
-
-			<div class="pd-description-nonmobile">
-					<p class="pd-descriptionN">
+					<div class="pd-descriptionM">
 						<?php 
 						if (!empty($pd_detail['Description'])){
 							echo $pd_detail['Description'];
@@ -501,82 +487,72 @@ if($resultdata['result']) {
 							echo "<h4>No record found!</h4>";
 						}
 						?>
-					</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="pd-description-nonmobile">
+				<div class="pd-descriptionN">
+					<?php 
+					if (!empty($pd_detail['Description'])){
+						echo $pd_detail['Description'];
+					}
+					else{
+						echo "<h4>No record found!</h4>";
+					}
+					?>
+				</div>
 			</div>
 		</div>
 
 	<div class="mobile-hidden">
-		<div class="section flex-cell" style="flex-wrap: unset">
-			<div class="left-icon">
-				<span class="learning-outcome-icon large-icon"></span>
+		<?php if (!empty($pd_detail['Learning_outcomes'])): ?>
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="learning-outcome-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Learning outcomes</h2>
+					<p>
+						<?php echo $pd_detail['Learning_outcomes']; ?>
+					</p>
+				</div>
 			</div>
-			<div class="right-content">
-				<h2 class="blue-heading">Learning outcomes</h2>
-				<!--
-				<?php //if(strlen($pd_detail['Learning_outcomes'])>400){ echo substr($pd_detail['Learning_outcomes'],0,400).'....<a id="event2" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Learning_outcomes'];} ?>
-				<div id="down2" class="conts" style="display: none;"><?php //echo $pd_detail['Learning_outcomes'];?></div>
-				-->
-				<p>
-					<?php 
-					if (!empty($pd_detail['Learning_outcomes'])){
-						echo $pd_detail['Learning_outcomes'];
-					}
-					else{
-						echo "<h4>No record found!</h4>";
-					}
-					?>
-				</p>
-			</div>
-		</div>
+		<?php endif; ?>
 
-		<div class="section flex-cell" style="flex-wrap: unset">
-			<div class="left-icon">
-				<span class="prerequiresite-icon large-icon"></span>
+		<?php if (!empty($pd_detail['Prerequisites'])): ?>
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="prerequiresite-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Prerequiresites</h2>
+					<p>
+						<?php echo $pd_detail['Prerequisites']; ?>
+					</p>
+				</div>
 			</div>
-			<div class="right-content">
-				<h2 class="blue-heading">Prerequiresites</h2>
-				<!--
-				<?php //if(strlen($pd_detail['Prerequisites'])>400){ echo substr($pd_detail['Prerequisites'],0,400).'....<a id="event3" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Prerequisites'];} ?>
-				<div id="down3" class="conts" style="display: none;"><?php //echo $pd_detail['Prerequisites'];?></div>
-				-->
-				<p>
-					<?php 
-					if (!empty($pd_detail['Prerequisites'])){
-						echo $pd_detail['Prerequisites'];
-					}
-					else{
-						echo "<h4>No record found!</h4>";
-					}
-					?>
-				</p>
-			</div>
-		</div>
+		<?php endif; ?>
 
-		<div class="section flex-cell" style="flex-wrap: unset">
-			<div class="left-icon">
-				<span class="presenters-bio-icon large-icon"></span>
-			</div>
-			<div class="right-content">
-				<h2 class="blue-heading">Presenter's bio</h2>
-				<!--
-				<?php //if(strlen($pd_detail['Presenter_bio'])>400){ echo substr($pd_detail['Presenter_bio'],0,400).'....<a id="event1" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Presenter_bio'];} ?>
-				<div id="down1" class="conts" style="display: none;"><?php //echo $pd_detail['Presenter_bio'];?></div>
-				-->
-				<p>
-					<?php 
-					if (!empty($pd_detail['Presenter'])){
+		<?php if(!empty($pd_detail['Presenter'])): ?>
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="presenters-bio-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Presenter's bio</h2>
+					<p>
+						<?php 
 						foreach($pd_detail['Presenter'] as $bios) {
 							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
 							echo '<p>'.$bios['Comments'].'</p><br>';
 						}
-					}else {
-						echo "<h4>No record found!</h4>";
-					}
-
-					?>
-				</p>
+						?>
+					</p>
+				</div>
 			</div>
-		</div>
+		<?php endif; ?>
+
 	</div>
         <!--
 		 <div class="detailContent">
@@ -1183,7 +1159,7 @@ if($resultdata['result']) {
               <p>Please note, if a course or event is for registered physiotherapists only. this will be indicated in the event description</p>
               <p><span class="registerDes">Make sure you are attending APA PD that is open to everyone.</span></p>
           </div>  
-<!---Sign up Web User--->
+<!--Sign up Web User-->
 <div id="signupWebUser">
 <form id="your-detail-form" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST">
 		<input type="hidden" name="step1" value="1"/>
@@ -1277,7 +1253,7 @@ if($resultdata['result']) {
 						<label for="">Your password<span class="tipstyle">*</span></label>
 						<input type="text" class="form-control" id="newPassword" name="newPassword" >
 					</div>
-					<div class="row">
+					
 					<div class="col-lg-6">
 						<label for="">Confirm password<span class="tipstyle">*</span></label>
 						<input type="password" class="form-control" id="Password" name="Password" value="" onchange="checkPasswordFunction(this.value)">
@@ -1300,7 +1276,7 @@ if($resultdata['result']) {
 						}					
 					}
 				</script>
-				</div>
+				
 			    </div>
 									
 					<div class="row">
@@ -1312,7 +1288,8 @@ if($resultdata['result']) {
 					</div>
 					<div class="row">
 						<div class="col-lg-12">
-							<label for="">Address Line 2<span class="tipstyle">*</span></label>
+							<label for="">Address L
+								line 2<span class="tipstyle">*</span></label>
 							<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
 						</div>
 					</div>
@@ -1684,91 +1661,68 @@ if($resultdata['result']) {
 		</div>
 </div>
 
-<div class="acordian-label">Presenters</div>
-<div class="accordian-content">
+
+<?php if(!empty($pd_detail['Presenter'])): ?>
+	<div class="acordian-label">Presenters</div>
+	<div class="accordian-content">
 		<div class="section flex-cell" style="flex-wrap: unset">
 			<div class="left-icon">
 				<span class="presenters-bio-icon large-icon"></span>
 			</div>
 			<div class="right-content">
 				<h2 class="blue-heading">Presenter's bio</h2>
-				<!--
-				<?php //if(strlen($pd_detail['Presenter_bio'])>400){ echo substr($pd_detail['Presenter_bio'],0,400).'....<a id="event1" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Presenter_bio'];} ?>
-				<div id="down1" class="conts" style="display: none;"><?php //echo $pd_detail['Presenter_bio'];?></div>
-				-->
 				<p>
 					<?php 
-					if (!empty($pd_detail['Presenter'])){
-						foreach($pd_detail['Presenter'] as $bios) {
-							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
-							echo '<p>'.$bios['Comments'].'</p><br>';
-						}
-					}else {
-						echo "<h4>No record found!</h4>";
+					foreach($pd_detail['Presenter'] as $bios) {
+						echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
+						echo '<p>'.$bios['Comments'].'</p><br>';
 					}
 					?>
 				</p>
 			</div>
 		</div>
-</div>
+	</div>
+<?php endif; ?>
 
-<div class="acordian-label">Learning outcomes</div>
-<div class="accordian-content">
-		<div class="section flex-cell" style="flex-wrap: unset">
-			<div class="left-icon">
-				<span class="learning-outcome-icon large-icon"></span>
-			</div>
-			<div class="right-content">
-				<h2 class="blue-heading">Learning outcomes</h2>
-				<!--
-				<?php //if(strlen($pd_detail['Learning_outcomes'])>400){ echo substr($pd_detail['Learning_outcomes'],0,400).'....<a id="event2" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Learning_outcomes'];} ?>
-				<div id="down2" class="conts" style="display: none;"><?php //echo $pd_detail['Learning_outcomes'];?></div>
-				-->
-				<p>
-					<?php 
-					if (!empty($pd_detail['Learning_outcomes'])){
-						echo $pd_detail['Learning_outcomes'];
-					}
-					else{
-						echo "<h4>No record found!</h4>";
-					}
-					?>
-				</p>
-			</div>
-		</div>
-</div>
 
-<div class="acordian-label">Prerequisites</div>
-<div class="accordian-content">
-		<div class="section flex-cell" style="flex-wrap: unset">
-			<div class="left-icon">
-				<span class="prerequiresite-icon large-icon"></span>
+
+<?php if (!empty($pd_detail['Learning_outcomes'])): ?>
+	<div class="acordian-label">Learning outcomes</div>
+	<div class="accordian-content">
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="learning-outcome-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Learning outcomes</h2>
+					<p><?php echo $pd_detail['Learning_outcomes']; ?></p>
+				</div>
 			</div>
-			<div class="right-content">
-				<h2 class="blue-heading">Prerequiresites</h2>
-				<!--
-				<?php //if(strlen($pd_detail['Prerequisites'])>400){ echo substr($pd_detail['Prerequisites'],0,400).'....<a id="event3" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Prerequisites'];} ?>
-				<div id="down3" class="conts" style="display: none;"><?php //echo $pd_detail['Prerequisites'];?></div>
-				-->
-				<p>
-					<?php 
-					if (!empty($pd_detail['Prerequisites'])){
-						echo $pd_detail['Prerequisites'];
-					}
-					else{
-						echo "<h4>No record found!</h4>";
-					}
-					?>
-				</p>
+	</div>
+<?php endif; ?>
+
+<?php if (!empty($pd_detail['Prerequisites'])): ?>
+	<div class="acordian-label">Prerequisites</div>
+	<div class="accordian-content">
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="prerequiresite-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Prerequiresites</h2>
+					<p>
+						<?php echo $pd_detail['Prerequisites']; ?>
+					</p>
+				</div>
 			</div>
-		</div>
-</div>
+	</div>
+<?php endif; ?>
 
 </div>
 
 		<div class="extra-info">
 			<span>By registering for this course, you agree to the <a href="">APA Events Terms and Conditions.</a></span>
-			<span>You could sae $55 on future courses by joining an <a href="">APA National Group.</a> Pay $54 today and keeping saving on PD throughout the year.</span>
+			<span>You could save $55 on future courses by joining an <a href="http://uat.australian.physio/membership/national-groups">APA National Group.</a> Pay $54 today and keeping saving on PD throughout the year.</span>
 		</div>
 	</div>
 

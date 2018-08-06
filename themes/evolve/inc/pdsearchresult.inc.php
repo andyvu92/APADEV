@@ -194,7 +194,7 @@ if(isset($results['MResponse'])) {
             <span class="table-heading">State</span>
         </div>
         <div class="flex-col-2">
-            <span class="table-heading">Begin date</span>
+            <span class="table-heading">Start date</span>
         </div>
         <div class="flex-col-2">
             <span class="table-heading">End date</span>
@@ -239,13 +239,17 @@ if(isset($results['MResponse'])) {
 		}
 
 		if(!empty($result['StartDate'])) {
-			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>Start date: </span>".$result['StartDate']."</div>";
+			$bdate = explode(" ",$result['StartDate']);
+			$t = strtotime($bdate[0]);
+			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>Start date: </span>".date("d M, Y",$t)."</div>";
 		} else {
 			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>Start date: </span>N/A</div>";
 		}
 
 		if(!empty($result['EndDate'])) {
-			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>End date: </span>".$result['EndDate']."</div>";
+			$edate = explode(" ",$result['EndDate']);
+			$j = strtotime($edate[0]);
+			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>End date: </span>".date("d M, Y",$j)."</div>";
 		} else {
 			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>End date: </span>N/A</div>";
 		}
