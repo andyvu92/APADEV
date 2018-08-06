@@ -155,38 +155,53 @@ jQuery(document).ready(function($) {
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);	
+		$('#downHomeT6').hide(500);	
+
 	});
 
 	$("#homeEvents").click(function() {
-		$('#downHomeT2').show(500);
 		$('#downHomeT1').hide(500);
+		$('#downHomeT2').show(500);
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
+		$('#downHomeT6').hide(500);	
 	});
 
 	$("#homePublication").click(function() {
-		$('#downHomeT3').show(500);
 		$('#downHomeT1').hide(500);
 		$('#downHomeT2').hide(500);
+		$('#downHomeT3').show(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
+		$('#downHomeT6').hide(500);	
 	});
 
 	$("#homeStateNews").click(function() {
-		$('#downHomeT4').show(500);
 		$('#downHomeT1').hide(500);
 		$('#downHomeT2').hide(500);
 		$('#downHomeT3').hide(500);
+		$('#downHomeT4').show(500);
 		$('#downHomeT5').hide(500);
+		$('#downHomeT6').hide(500);	
 	});
 
 	$("#homeTheLatest").click(function() {
-		$('#downHomeT5').show(500);
 		$('#downHomeT1').hide(500);
 		$('#downHomeT2').hide(500);
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
+		$('#downHomeT5').show(500);
+		$('#downHomeT6').hide(500);	
+	});
+
+	$("#homeHighlights").click(function() {
+		$('#downHomeT1').hide(500);
+		$('#downHomeT2').hide(500);
+		$('#downHomeT3').hide(500);
+		$('#downHomeT4').hide(500);
+		$('#downHomeT5').hide(500);
+		$('#downHomeT6').show(500);	
 	});
 
 	$("#showall").click(function() {
@@ -625,27 +640,26 @@ jQuery(document).ready(function($) {
 			$("input[name=Address_Line_1]").prop('disabled', true);
 			$("input[name=Address_Line_2]").prop('disabled', true);
 			$("input[name=BuildingName]").prop('disabled', true);
-			$("input[name=Address_Line_1]").val('');;
-			$("input[name=Address_Line_2]").val('');;
-			$("input[name=BuildingName]").val('');;
-			//$("input[name=Address_Line_1]").parent().addClass('locked');
-			//$("input[name=Address_Line_2]").parent().addClass('locked');
-			//$("input[name=BuildingName]").parent().addClass('locked');
+			$("input[name=Address_Line_1]").val('');
+			$("input[name=Address_Line_2]").val('');
+			$("input[name=BuildingName]").val('');
+			$("input[name=Address_Line_1]").parent().addClass('locked');
+			$("input[name=Address_Line_2]").parent().addClass('locked');
+			$("input[name=BuildingName]").parent().addClass('locked');
 		}
         else{
 			$("input[name=Address_Line_1]").prop('disabled', false);
 			$("input[name=Address_Line_2]").prop('disabled', false);
 			$("input[name=BuildingName]").prop('disabled', false);
-			
+			$("input[name=Address_Line_1]").parent().removeClass('locked');
+			$("input[name=Address_Line_2]").parent().removeClass('locked');
+			$("input[name=BuildingName]").parent().removeClass('locked');
 		}		
     });	
 	if($("input[name=Pobox]").val()!=""){
 		$("input[name=Address_Line_1]").prop('disabled', true);
 		$("input[name=Address_Line_2]").prop('disabled', true);
 		$("input[name=BuildingName]").prop('disabled', true);
-		//$("input[name=Address_Line_1]").parent().addClass('locked');
-		//$("input[name=Address_Line_2]").parent().addClass('locked');
-		//$("input[name=BuildingName]").parent().addClass('locked');
 	}
 	else{
 		$("input[name=Address_Line_1]").prop('disabled', false);
@@ -660,23 +674,23 @@ jQuery(document).ready(function($) {
 			$("input[name=Billing-Address_Line_1]").val('');
 			$("input[name=Billing-Address_Line_2]").val('');
 			$("input[name=Billing-BuildingName]").val('');
-			//$("input[name=Billing-Address_Line_1]").parent().addClass('locked');
-			//$("input[name=Billing-Address_Line_2]").parent().addClass('locked');
-			//$("input[name=Billing-BuildingName]").parent().addClass('locked');
+			$("input[name=Billing-Address_Line_1]").parent().addClass('locked');
+			$("input[name=Billing-Address_Line_2]").parent().addClass('locked');
+			$("input[name=Billing-BuildingName]").parent().addClass('locked');
 		}
         else{
 			$("input[name=Billing-Address_Line_1]").prop('disabled', false);
 			$("input[name=Billing-Address_Line_2]").prop('disabled', false);
 			$("input[name=Billing-BuildingName]").prop('disabled', false);
+			$("input[name=Billing-Address_Line_1]").parent().removeClass('locked');
+			$("input[name=Billing-Address_Line_2]").parent().removeClass('locked');
+			$("input[name=Billing-BuildingName]").parent().removeClass('locked');
 		}		
     });
 	if($("input[name=Billing-Pobox]").val()!=""){
 		$("input[name=Billing-Address_Line_1]").prop('disabled', true);
 		$("input[name=Billing-Address_Line_2]").prop('disabled', true);
 		$("input[name=Billing-BuildingName]").prop('disabled', true);
-		//$("input[name=Billing-Address_Line_1]").parent().addClass('locked');
-		//$("input[name=Billing-Address_Line_2]").parent().addClass('locked');
-		//$("input[name=Billing-BuildingName]").parent().addClass('locked');
 	}
 	else{
 		$("input[name=Billing-Address_Line_1]").prop('disabled', false);
@@ -691,28 +705,24 @@ jQuery(document).ready(function($) {
 			$("input[name=Shipping-Address_Line_1]").val('');
 			$("input[name=Shipping-Address_Line_2]").val('');
 			$("input[name=Shipping-BuildingName]").val('');
-			//$("input[readonly]").parent().addClass('locked');
-			//$("input[disabled]").parent().addClass('locked');
-			//$("input[name=Shipping-Address_Line_1]").parent().addClass('locked');
-			//$("input[name=Shipping-Address_Line_2]").parent().addClass('locked');
-			//$("input[name=Shipping-BuildingName]").parent().addClass('locked');
+			$("input[name=Shipping-Address_Line_1]").parent().addClass('locked');
+			$("input[name=Shipping-Address_Line_2]").parent().addClass('locked');
+			$("input[name=Shipping-BuildingName]").parent().addClass('locked');
 			
 		}
         else{
 			$("input[name=Shipping-Address_Line_1]").prop('disabled', false);
 			$("input[name=Shipping-Address_Line_2]").prop('disabled', false);
 			$("input[name=Shipping-BuildingName]").prop('disabled', false);
+			$("input[name=Shipping-Address_Line_1]").parent().removeClass('locked');
+			$("input[name=Shipping-Address_Line_2]").parent().removeClass('locked');
+			$("input[name=Shipping-BuildingName]").parent().removeClass('locked');
 		}		
     });
 	if($("input[name=Shipping-PObox]").val()!=""){
 		$("input[name=Shipping-Address_Line_1]").prop('disabled', true);
 		$("input[name=Shipping-Address_Line_2]").prop('disabled', true);
 		$("input[name=Shipping-BuildingName]").prop('disabled', true);
-		//$("input[readonly]").parent().addClass('locked');
-		//$("input[disabled]").parent().addClass('locked');
-		//$("input[name=Shipping-Address_Line_1]").parent().addClass('locked');
-		//$("input[name=Shipping-Address_Line_2]").parent().addClass('locked');
-		//$("input[name=Shipping-BuildingName]").parent().addClass('locked');
 	}
 	else{
 		$("input[name=Shipping-Address_Line_1]").prop('disabled', false);
@@ -727,24 +737,24 @@ jQuery(document).ready(function($) {
 			$("input[name=Mailing-Address_Line_1]").val('');
 			$("input[name=Mailing-Address_Line_2]").val('');
 			$("input[name=Mailing-BuildingName]").val('');
-			//$("input[readonly]").parent().addClass('locked');
-			//$("input[disabled]").parent().addClass('locked');
-			//$("input[name=Mailing-BuildingName]").parent().addClass('locked');
+			$("input[name=Mailing-Address_Line_1]").parent().addClass('locked');
+			$("input[name=Mailing-Address_Line_2]").parent().addClass('locked');
+			$("input[name=Mailing-BuildingName]").parent().addClass('locked');
 			
 		}
         else{
 			$("input[name=Mailing-Address_Line_1]").prop('disabled', false);
 			$("input[name=Mailing-Address_Line_2]").prop('disabled', false);
 			$("input[name=Mailing-BuildingName]").prop('disabled', false);
+			$("input[name=Mailing-Address_Line_1]").parent().removeClass('locked');
+			$("input[name=Mailing-Address_Line_2]").parent().removeClass('locked');
+			$("input[name=Mailing-BuildingName]").parent().removeClass('locked');
 		}		
     });	
 	if($("input[name=Mailing-PObox]").val()!=""){
 		$("input[name=Mailing-Address_Line_1]").prop('disabled', true);
 		$("input[name=Mailing-Address_Line_2]").prop('disabled', true);
 		$("input[name=Mailing-BuildingName]").prop('disabled', true);
-		//$("input[readonly]").parent().addClass('locked');
-		//$("input[disabled]").parent().addClass('locked');
-		//$("input[name=Mailing-BuildingName]").parent().addClass('locked');
 	}
 	else{
 		$("input[name=Mailing-Address_Line_1]").prop('disabled', false);

@@ -2990,8 +2990,10 @@ form{
                 right: 20px;
             }
         }
+        &[class^="down"]{
+            &:before{
+                display: none;
+            }
+        }
     }
-}
-.form-control[disabled], .form-control[readonly], fieldset[disabled]{
-   cursor: default!important;
 }
