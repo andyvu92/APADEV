@@ -194,7 +194,7 @@ if(isset($results['MResponse'])) {
             <span class="table-heading">State</span>
         </div>
         <div class="flex-col-2">
-            <span class="table-heading">Begin date</span>
+            <span class="table-heading">Start date</span>
         </div>
         <div class="flex-col-2">
             <span class="table-heading">End date</span>

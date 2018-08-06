@@ -1183,7 +1183,7 @@ if($resultdata['result']) {
               <p>Please note, if a course or event is for registered physiotherapists only. this will be indicated in the event description</p>
               <p><span class="registerDes">Make sure you are attending APA PD that is open to everyone.</span></p>
           </div>  
-<!---Sign up Web User--->
+<!--Sign up Web User-->
 <div id="signupWebUser">
 <form id="your-detail-form" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST">
 		<input type="hidden" name="step1" value="1"/>
@@ -1277,7 +1277,7 @@ if($resultdata['result']) {
 						<label for="">Your password<span class="tipstyle">*</span></label>
 						<input type="text" class="form-control" id="newPassword" name="newPassword" >
 					</div>
-					<div class="row">
+					
 					<div class="col-lg-6">
 						<label for="">Confirm password<span class="tipstyle">*</span></label>
 						<input type="password" class="form-control" id="Password" name="Password" value="" onchange="checkPasswordFunction(this.value)">
@@ -1300,7 +1300,7 @@ if($resultdata['result']) {
 						}					
 					}
 				</script>
-				</div>
+				
 			    </div>
 									
 					<div class="row">
@@ -1312,7 +1312,8 @@ if($resultdata['result']) {
 					</div>
 					<div class="row">
 						<div class="col-lg-12">
-							<label for="">Address Line 2<span class="tipstyle">*</span></label>
+							<label for="">Address L
+								line 2<span class="tipstyle">*</span></label>
 							<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
 						</div>
 					</div>
@@ -1758,7 +1759,7 @@ if($resultdata['result']) {
 
 		<div class="extra-info">
 			<span>By registering for this course, you agree to the <a href="">APA Events Terms and Conditions.</a></span>
-			<span>You could sae $55 on future courses by joining an <a href="">APA National Group.</a> Pay $54 today and keeping saving on PD throughout the year.</span>
+			<span>You could save $55 on future courses by joining an <a href="http://uat.australian.physio/membership/national-groups">APA National Group.</a> Pay $54 today and keeping saving on PD throughout the year.</span>
 		</div>
 	</div>
 
