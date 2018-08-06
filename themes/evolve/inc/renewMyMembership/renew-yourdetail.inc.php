@@ -841,7 +841,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 					<input type="hidden" name="fapnum" value="<?php echo sizeof($details['Specialty']);?>">
 					<?php if(!empty($details['Specialty'])){
-						echo '<input class="styled-checkbox" type="checkbox" id="fap" name="fap" checked value="1" onclick="return false;" onkeydown="return false;" >';
+						echo '<input class="styled-checkbox" type="checkbox" id="fap" name="fap" checked value="1" >';
 						echo '<label class="light-font-weight" style="margin-top: 15px;" for="fap">I am part of the Australian College of Physiotherapists</label>';
 						echo '<p style="margin-bottom: 0"><span class="note-text">Please note:</span> Ticking this box adds an extra $200 to the price of your membership.
 	If you have passed Specialisation, Fellowship by Original Contribution or are

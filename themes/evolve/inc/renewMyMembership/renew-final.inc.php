@@ -9,21 +9,24 @@ if(isset($_POST['step2-2'])){
 //delete MG product
 if(isset($_POST['step2-3'])){
 	checkShoppingCart($userID=$_SESSION['UserId'], $type="" ,$prodcutID=$_POST['step2-3']);
-	
-	//print_r($_SESSION["MGProductID"]);
-	
-	foreach($_SESSION["MGProductID"] as $deleteM){
-		if (($key = array_search($_POST['step2-3'], $deleteM)) !== false) {
-			echo "try to delete product";
-			unset($deleteM[$key]);
-		}    
+	if($_POST['step2-3']=="9973"){
+		unset($_SESSION["FPProductID"]);
 	}
-	//print_r($deleteM);
-	unset($_SESSION["MGProductID"]);
 	
-	$afterDelete = array();
-	array_push($afterDelete,$deleteM);
-	$_SESSION["MGProductID"] = $afterDelete;
+	else{
+		foreach($_SESSION["MGProductID"] as $deleteM){
+			if (($key = array_search($_POST['step2-3'], $deleteM)) !== false) {
+				echo "try to delete product";
+				unset($deleteM[$key]);
+			}    
+		}
+		//print_r($deleteM);
+		unset($_SESSION["MGProductID"]);
+		
+		$afterDelete = array();
+		array_push($afterDelete,$deleteM);
+		$_SESSION["MGProductID"] = $afterDelete;
+	}
 	
 }
 
@@ -35,21 +38,23 @@ if(isset($_POST['step2-4'])){
 	if (sizeof($userNGProduct) != 0) {
 		$_SESSION['NationalProductID'] = $userNGProduct;
 	}
-	deleteMGR($totalMGProduct=$_SESSION["MGProductID"], $NGProduct=$_POST['step2-4'], $userID=$_SESSION['UserId']);
-	unset($_SESSION["MGProductID"]);
-	$userMGProduct  = array();
-	$userMG1Product = getProduct($_SESSION['UserId'], "MG1");
-	if (sizeof($userMG1Product) != 0) {
-		array_push($userMGProduct, $userMG1Product);
-	}
-	
-	$userMG2Product = getProduct($_SESSION['UserId'], "MG2");
-	if (sizeof($userMG2Product) != 0) {
-		array_push($userMGProduct, $userMG2Product);
-	}
-	
-	if (sizeof($userMGProduct) != 0) {
-		$_SESSION["MGProductID"] = $userMGProduct;
+	if(sizeof($_SESSION["MGProductID"]!= 0)){
+		deleteMGR($totalMGProduct=$_SESSION["MGProductID"], $NGProduct=$_POST['step2-4'], $userID=$_SESSION['UserId']);
+		unset($_SESSION["MGProductID"]);
+		$userMGProduct  = array();
+		$userMG1Product = getProduct($_SESSION['UserId'], "MG1");
+		if (sizeof($userMG1Product) != 0) {
+			array_push($userMGProduct, $userMG1Product);
+		}
+		
+		$userMG2Product = getProduct($_SESSION['UserId'], "MG2");
+		if (sizeof($userMG2Product) != 0) {
+			array_push($userMGProduct, $userMG2Product);
+		}
+		
+		if (sizeof($userMGProduct) != 0) {
+			$_SESSION["MGProductID"] = $userMGProduct;
+		}
 	}
 	
 
@@ -267,7 +272,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 							echo "<div class='flex-col-8 title-col'>".$FProduct['FPtitle']."</div>";
 							echo "<div class='flex-col-2 price-col'>A$".$FProduct['FPprice']."</div>";
 							$price += $FProduct['FPprice'];
-							echo '<div class="flex-col-2 action-col">';if($FProduct['ProductID']!="9973"){ echo '<a class="deleteMGButton'.$FProduct['ProductID'].'">delete</a>';} echo '</div>';
+							echo '<div class="flex-col-2 action-col">'; echo '<a class="deleteMGButton'.$FProduct['ProductID'].'">delete</a>'; echo '</div>';
 							echo "</div>";  
 						}
 				}
