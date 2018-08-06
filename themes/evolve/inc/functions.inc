@@ -140,13 +140,14 @@ function comparePrice($priceList, $cost){
 			$y = $key;
 		} else {
 			$y = str_replace($x[0], "", $key);
-		}
+		}		
+		$valuet = number_format($value,2);
 		if($cost>$value) {
-			echo '<span class="redprice">'.$y.":&nbsp;$".$value."</span><br>";
-		} elseif($cost<$value){
-			echo '<span class="greenprice">'.$y.":&nbsp;$".$value."</span><br>";
-		} elseif($cost==$value){
-			echo $y.":&nbsp;$".$value."<br>";
+			echo '<span class="redprice">'.$y.":&nbsp;$".$valuet."</span><br>";
+		} elseif($cost<$valuet){
+			echo '<span class="greenprice">'.$y.":&nbsp;$".$valuet."</span><br>";
+		} elseif($cost==$valuet){
+			echo $y.":&nbsp;$".$valuet."<br>";
 		}
 	}
 }
@@ -488,5 +489,21 @@ function unique_multidim_array($array, $key) {
         $i++; 
     } 
     return $temp_array; 
-}  
+} 
+
+//get productID list from local database;
+function getProductList($userID){
+	$arrayReturn = array();
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+	$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND productID != "PRF" AND type != "PD" AND type != "PDNG"');
+	$shoppingcartGet->bindValue(':userID', $userID);
+	$shoppingcartGet->execute();
+	if($shoppingcartGet->rowCount()>0) { 
+		foreach ($shoppingcartGet as $row) {
+			array_push($arrayReturn, $row['productID']);
+		}
+	}	
+	$shoppingcartGet = null;
+	return $arrayReturn;
+} 
 ?>

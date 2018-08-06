@@ -478,21 +478,7 @@ if($resultdata['result']) {
 		<div class="section description">
 			<div class="pd-description-mobile">
 				<div class="readmore">
-					<p class="pd-descriptionM">
-					<?php 
-					if (!empty($pd_detail['Description'])){
-						echo $pd_detail['Description'];
-					}
-					else{
-						echo "<h4>No record found!</h4>";
-					}
-					?>
-					</p>
-				</div>
-			</div>
-
-			<div class="pd-description-nonmobile">
-					<p class="pd-descriptionN">
+					<div class="pd-descriptionM">
 						<?php 
 						if (!empty($pd_detail['Description'])){
 							echo $pd_detail['Description'];
@@ -501,82 +487,72 @@ if($resultdata['result']) {
 							echo "<h4>No record found!</h4>";
 						}
 						?>
-					</p>
+					</div>
+				</div>
+			</div>
+
+			<div class="pd-description-nonmobile">
+				<div class="pd-descriptionN">
+					<?php 
+					if (!empty($pd_detail['Description'])){
+						echo $pd_detail['Description'];
+					}
+					else{
+						echo "<h4>No record found!</h4>";
+					}
+					?>
+				</div>
 			</div>
 		</div>
 
 	<div class="mobile-hidden">
-		<div class="section flex-cell" style="flex-wrap: unset">
-			<div class="left-icon">
-				<span class="learning-outcome-icon large-icon"></span>
+		<?php if (!empty($pd_detail['Learning_outcomes'])): ?>
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="learning-outcome-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Learning outcomes</h2>
+					<p>
+						<?php echo $pd_detail['Learning_outcomes']; ?>
+					</p>
+				</div>
 			</div>
-			<div class="right-content">
-				<h2 class="blue-heading">Learning outcomes</h2>
-				<!--
-				<?php //if(strlen($pd_detail['Learning_outcomes'])>400){ echo substr($pd_detail['Learning_outcomes'],0,400).'....<a id="event2" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Learning_outcomes'];} ?>
-				<div id="down2" class="conts" style="display: none;"><?php //echo $pd_detail['Learning_outcomes'];?></div>
-				-->
-				<p>
-					<?php 
-					if (!empty($pd_detail['Learning_outcomes'])){
-						echo $pd_detail['Learning_outcomes'];
-					}
-					else{
-						echo "<h4>No record found!</h4>";
-					}
-					?>
-				</p>
-			</div>
-		</div>
+		<?php endif; ?>
 
-		<div class="section flex-cell" style="flex-wrap: unset">
-			<div class="left-icon">
-				<span class="prerequiresite-icon large-icon"></span>
+		<?php if (!empty($pd_detail['Prerequisites'])): ?>
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="prerequiresite-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Prerequiresites</h2>
+					<p>
+						<?php echo $pd_detail['Prerequisites']; ?>
+					</p>
+				</div>
 			</div>
-			<div class="right-content">
-				<h2 class="blue-heading">Prerequiresites</h2>
-				<!--
-				<?php //if(strlen($pd_detail['Prerequisites'])>400){ echo substr($pd_detail['Prerequisites'],0,400).'....<a id="event3" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Prerequisites'];} ?>
-				<div id="down3" class="conts" style="display: none;"><?php //echo $pd_detail['Prerequisites'];?></div>
-				-->
-				<p>
-					<?php 
-					if (!empty($pd_detail['Prerequisites'])){
-						echo $pd_detail['Prerequisites'];
-					}
-					else{
-						echo "<h4>No record found!</h4>";
-					}
-					?>
-				</p>
-			</div>
-		</div>
+		<?php endif; ?>
 
-		<div class="section flex-cell" style="flex-wrap: unset">
-			<div class="left-icon">
-				<span class="presenters-bio-icon large-icon"></span>
-			</div>
-			<div class="right-content">
-				<h2 class="blue-heading">Presenter's bio</h2>
-				<!--
-				<?php //if(strlen($pd_detail['Presenter_bio'])>400){ echo substr($pd_detail['Presenter_bio'],0,400).'....<a id="event1" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Presenter_bio'];} ?>
-				<div id="down1" class="conts" style="display: none;"><?php //echo $pd_detail['Presenter_bio'];?></div>
-				-->
-				<p>
-					<?php 
-					if (!empty($pd_detail['Presenter'])){
+		<?php if(!empty($pd_detail['Presenter'])): ?>
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="presenters-bio-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Presenter's bio</h2>
+					<p>
+						<?php 
 						foreach($pd_detail['Presenter'] as $bios) {
 							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
 							echo '<p>'.$bios['Comments'].'</p><br>';
 						}
-					}else {
-						echo "<h4>No record found!</h4>";
-					}
-
-					?>
-				</p>
+						?>
+					</p>
+				</div>
 			</div>
-		</div>
+		<?php endif; ?>
+
 	</div>
         <!--
 		 <div class="detailContent">
@@ -1476,14 +1452,15 @@ if($resultdata['result']) {
 					}
 					else {
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-						echo "$".$pd_detail['Cost'];
+						echo "$".number_format($pd_detail['Cost'],2);
 					}
 				}
 				else{
 					foreach($pricelistGet as $key=>$value){
 						$x = explode(" ", $key);
 						$y = str_replace($x[0], "", $key);
-						echo $y.":&nbsp;$".$value."<br>";
+						$valuet = number_format($value,2);
+						echo $y.":&nbsp;$".$valuet."<br>";
 					}
 				}	
 				?>
@@ -1491,7 +1468,11 @@ if($resultdata['result']) {
 
 			<span class="small-heading">Registration closing date:</span>
 			<span>
-				<?php echo $pd_detail['Close_date']; ?>
+			<?php 
+				$closingDate = explode(" ",$pd_detail['Close_date']);
+				$Cls = strtotime($closingDate[0]);
+				$ClsDateFinal = date("d M Y",$Cls);
+				echo $ClsDateFinal; ?>
 			</span>
 
 			<span class="small-heading">Event status:</span>
@@ -1599,15 +1580,16 @@ if($resultdata['result']) {
 					}
 					else {
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-						echo "$".$pd_detail['Cost'];
+						echo "$".number_format($pd_detail['Cost'],2);
 					}
 				}
 				else{
 					foreach($pricelistGet as $key=>$value){
 						$x = explode(" ", $key);
 						$y = str_replace($x[0], "", $key);
+						$valuet = number_format($value,2);
 						//echo "key: $key, x: $x, y: $y <br>";
-						echo $y.":&nbsp;$".$value."<br>";
+						echo $y.":&nbsp;$".$valuet."<br>";
 					}
 				}	
 				?>
@@ -1615,7 +1597,11 @@ if($resultdata['result']) {
 
 			<span class="small-heading">Registration closing date:</span>
 			<span>
-				<?php echo $pd_detail['Close_date']; ?>
+				<?php 
+				$closingDate = explode(" ",$pd_detail['Close_date']);
+				$Cls = strtotime($closingDate[0]);
+				$ClsDateFinal = date("d M Y",$Cls);
+				echo $ClsDateFinal; ?>
 			</span>
 
 			<span class="small-heading">Event status:</span>
@@ -1675,85 +1661,62 @@ if($resultdata['result']) {
 		</div>
 </div>
 
-<div class="acordian-label">Presenters</div>
-<div class="accordian-content">
+
+<?php if(!empty($pd_detail['Presenter'])): ?>
+	<div class="acordian-label">Presenters</div>
+	<div class="accordian-content">
 		<div class="section flex-cell" style="flex-wrap: unset">
 			<div class="left-icon">
 				<span class="presenters-bio-icon large-icon"></span>
 			</div>
 			<div class="right-content">
 				<h2 class="blue-heading">Presenter's bio</h2>
-				<!--
-				<?php //if(strlen($pd_detail['Presenter_bio'])>400){ echo substr($pd_detail['Presenter_bio'],0,400).'....<a id="event1" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Presenter_bio'];} ?>
-				<div id="down1" class="conts" style="display: none;"><?php //echo $pd_detail['Presenter_bio'];?></div>
-				-->
 				<p>
 					<?php 
-					if (!empty($pd_detail['Presenter'])){
-						foreach($pd_detail['Presenter'] as $bios) {
-							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
-							echo '<p>'.$bios['Comments'].'</p><br>';
-						}
-					}else {
-						echo "<h4>No record found!</h4>";
+					foreach($pd_detail['Presenter'] as $bios) {
+						echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
+						echo '<p>'.$bios['Comments'].'</p><br>';
 					}
 					?>
 				</p>
 			</div>
 		</div>
-</div>
+	</div>
+<?php endif; ?>
 
-<div class="acordian-label">Learning outcomes</div>
-<div class="accordian-content">
-		<div class="section flex-cell" style="flex-wrap: unset">
-			<div class="left-icon">
-				<span class="learning-outcome-icon large-icon"></span>
-			</div>
-			<div class="right-content">
-				<h2 class="blue-heading">Learning outcomes</h2>
-				<!--
-				<?php //if(strlen($pd_detail['Learning_outcomes'])>400){ echo substr($pd_detail['Learning_outcomes'],0,400).'....<a id="event2" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Learning_outcomes'];} ?>
-				<div id="down2" class="conts" style="display: none;"><?php //echo $pd_detail['Learning_outcomes'];?></div>
-				-->
-				<p>
-					<?php 
-					if (!empty($pd_detail['Learning_outcomes'])){
-						echo $pd_detail['Learning_outcomes'];
-					}
-					else{
-						echo "<h4>No record found!</h4>";
-					}
-					?>
-				</p>
-			</div>
-		</div>
-</div>
 
-<div class="acordian-label">Prerequisites</div>
-<div class="accordian-content">
-		<div class="section flex-cell" style="flex-wrap: unset">
-			<div class="left-icon">
-				<span class="prerequiresite-icon large-icon"></span>
+
+<?php if (!empty($pd_detail['Learning_outcomes'])): ?>
+	<div class="acordian-label">Learning outcomes</div>
+	<div class="accordian-content">
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="learning-outcome-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Learning outcomes</h2>
+					<p><?php echo $pd_detail['Learning_outcomes']; ?></p>
+				</div>
 			</div>
-			<div class="right-content">
-				<h2 class="blue-heading">Prerequiresites</h2>
-				<!--
-				<?php //if(strlen($pd_detail['Prerequisites'])>400){ echo substr($pd_detail['Prerequisites'],0,400).'....<a id="event3" class="close" style="cursor: pointer;">Read More</a>';} else{echo $pd_detail['Prerequisites'];} ?>
-				<div id="down3" class="conts" style="display: none;"><?php //echo $pd_detail['Prerequisites'];?></div>
-				-->
-				<p>
-					<?php 
-					if (!empty($pd_detail['Prerequisites'])){
-						echo $pd_detail['Prerequisites'];
-					}
-					else{
-						echo "<h4>No record found!</h4>";
-					}
-					?>
-				</p>
+	</div>
+<?php endif; ?>
+
+<?php if (!empty($pd_detail['Prerequisites'])): ?>
+	<div class="acordian-label">Prerequisites</div>
+	<div class="accordian-content">
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="prerequiresite-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Prerequiresites</h2>
+					<p>
+						<?php echo $pd_detail['Prerequisites']; ?>
+					</p>
+				</div>
 			</div>
-		</div>
-</div>
+	</div>
+<?php endif; ?>
 
 </div>
 
