@@ -141,6 +141,7 @@ function comparePrice($priceList, $cost){
 		} else {
 			$y = str_replace($x[0], "", $key);
 		}
+		$value = number_format($value,2);
 		if($cost>$value) {
 			echo '<span class="redprice">'.$y.":&nbsp;$".$value."</span><br>";
 		} elseif($cost<$value){
