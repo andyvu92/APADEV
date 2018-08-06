@@ -239,5 +239,16 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 		</div>
 	</div>
 </div>
+<script>
+jQuery(document).ready(function() {
+	$("input").on("keyup",function() {
+	  $(this).removeClass("focuscss");
+	});
+
+	$("#tabmenu li").click(function(){
+		$(this).removeClass("test");
+	});
+});
+</script>
 ';
 ?>

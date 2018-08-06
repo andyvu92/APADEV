@@ -478,7 +478,7 @@ if($resultdata['result']) {
 		<div class="section description">
 			<div class="pd-description-mobile">
 				<div class="readmore">
-					<p>
+					<p class="pd-descriptionM">
 					<?php 
 					if (!empty($pd_detail['Description'])){
 						echo $pd_detail['Description'];
@@ -492,7 +492,7 @@ if($resultdata['result']) {
 			</div>
 
 			<div class="pd-description-nonmobile">
-					<p>
+					<p class="pd-descriptionN">
 						<?php 
 						if (!empty($pd_detail['Description'])){
 							echo $pd_detail['Description'];
@@ -1475,14 +1475,15 @@ if($resultdata['result']) {
 					}
 					else {
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-						echo "$".$pd_detail['Cost'];
+						echo "$".number_format($pd_detail['Cost'],2);
 					}
 				}
 				else{
 					foreach($pricelistGet as $key=>$value){
 						$x = explode(" ", $key);
 						$y = str_replace($x[0], "", $key);
-						echo $y.":&nbsp;$".$value."<br>";
+						$valuet = number_format($value,2);
+						echo $y.":&nbsp;$".$valuet."<br>";
 					}
 				}	
 				?>
@@ -1490,7 +1491,11 @@ if($resultdata['result']) {
 
 			<span class="small-heading">Registration closing date:</span>
 			<span>
-				<?php echo $pd_detail['Close_date']; ?>
+			<?php 
+				$closingDate = explode(" ",$pd_detail['Close_date']);
+				$Cls = strtotime($closingDate[0]);
+				$ClsDateFinal = date("d M Y",$Cls);
+				echo $ClsDateFinal; ?>
 			</span>
 
 			<span class="small-heading">Event status:</span>
@@ -1598,15 +1603,16 @@ if($resultdata['result']) {
 					}
 					else {
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-						echo "$".$pd_detail['Cost'];
+						echo "$".number_format($pd_detail['Cost'],2);
 					}
 				}
 				else{
 					foreach($pricelistGet as $key=>$value){
 						$x = explode(" ", $key);
 						$y = str_replace($x[0], "", $key);
+						$valuet = number_format($value,2);
 						//echo "key: $key, x: $x, y: $y <br>";
-						echo $y.":&nbsp;$".$value."<br>";
+						echo $y.":&nbsp;$".$valuet."<br>";
 					}
 				}	
 				?>
@@ -1614,7 +1620,11 @@ if($resultdata['result']) {
 
 			<span class="small-heading">Registration closing date:</span>
 			<span>
-				<?php echo $pd_detail['Close_date']; ?>
+				<?php 
+				$closingDate = explode(" ",$pd_detail['Close_date']);
+				$Cls = strtotime($closingDate[0]);
+				$ClsDateFinal = date("d M Y",$Cls);
+				echo $ClsDateFinal; ?>
 			</span>
 
 			<span class="small-heading">Event status:</span>

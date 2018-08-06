@@ -530,12 +530,12 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					
 					<div class="col-xs-12 col-sm-6 col-md-9">
 						<label for="">Address line 1<span class="tipstyle"> *</span></label>
-						<input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1" <?php if (empty($details['Unit'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Unit'].'"'; }?>>
+						<input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1" <?php if (empty($details['Unit'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Unit'].'"'; }?>>
 					</div>
 
 					<div class="col-xs-12">
 						<label for="">Address line 2</label>
-						<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2" <?php if (empty($details['Street'])) {echo "placeholder='Address 2'";}   else{ echo 'value="'.$details['Street'].'"'; }?>>
+						<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2" <?php if (empty($details['Street'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Street'].'"'; }?>>
 					</div>
 				</div>
 				
@@ -617,12 +617,12 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					
 					<div class="col-xs-12 col-sm-6 col-md-9">
 					   <label for="">Address line 1<span class="tipstyle"> *</span></label>
-					   <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit']) || $details['Billing-Unit']=="") {echo "placeholder='Billing Address 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?>>
+					   <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit']) || $details['Billing-Unit']=="") {echo "placeholder='Billing address line 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?>>
 					</div>
 					
 					<div class="col-xs-12">
 					   <label for="">Address line 2</label>
-					   <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Street'])) {echo "placeholder='Billing Address 2'";}   else{ echo 'value="'.$details['Billing-Street'].'"'; }?>>
+					   <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Street'])) {echo "placeholder='Billing address line 2'";}   else{ echo 'value="'.$details['Billing-Street'].'"'; }?>>
 					</div>
 				</div>
 				
