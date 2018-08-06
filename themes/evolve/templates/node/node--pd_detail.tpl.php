@@ -1482,7 +1482,8 @@ if($resultdata['result']) {
 					foreach($pricelistGet as $key=>$value){
 						$x = explode(" ", $key);
 						$y = str_replace($x[0], "", $key);
-						echo $y.":&nbsp;$".$value."<br>";
+						$valuet = number_format($value,2);
+						echo $y.":&nbsp;$".$valuet."<br>";
 					}
 				}	
 				?>
@@ -1609,8 +1610,9 @@ if($resultdata['result']) {
 					foreach($pricelistGet as $key=>$value){
 						$x = explode(" ", $key);
 						$y = str_replace($x[0], "", $key);
+						$valuet = number_format($value,2);
 						//echo "key: $key, x: $x, y: $y <br>";
-						echo $y.":&nbsp;$".$value."<br>";
+						echo $y.":&nbsp;$".$valuet."<br>";
 					}
 				}	
 				?>
