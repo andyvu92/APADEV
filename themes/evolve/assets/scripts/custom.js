@@ -1037,23 +1037,43 @@ jQuery(document).ready(function($) {
 	if($('#insuranceTerms').val()=="0"){
 		$( "#disagreeDescription" ).removeClass('display-none');
 		$('a.join-details-button5').addClass('disabled');
+		//$("#conditions" ).removeAttr('checked');
 		
 	}
 	else{
 		$( "#disagreeDescription" ).addClass('display-none');
 		$('a.join-details-button5').removeClass('disabled');
+		//$("#conditions" ).attr('checked', true);
+		
 	}
-	$('#insuranceTerms').click(function() {
+	$('#insuranceTerms, #insurance_terms_button').click(function() {
 		if($('#insuranceTerms').val()=="0"){
 		$( "#disagreeDescription" ).removeClass('display-none');
 		$('a.join-details-button5').addClass('disabled');
+		$("#conditions" ).removeAttr('checked');
+		$('#conditions').attr('data-target','#insuranceTermsandConditions');
 	}
 	else{
 		
 		$( "#disagreeDescription" ).addClass('display-none');
 		$('a.join-details-button5').removeClass('disabled');
+		$("#conditions" ).attr('checked', true);
+		$('#conditions').removeAttr('data-target');
 	}
 	});
+	 $('#conditions').change(function() {
+        if($(this).is(":checked")) {
+          $('#conditions').removeAttr('data-target');
+        }
+		else{
+		  $('#conditions').attr('data-target','#insuranceTermsandConditions');
+		}
+       
+    });
+	
+		
+	
+	
 	/*  check APA policy*/
 	if($('#privacypolicyp').val()=="0"){
 		$( "#disagreePolicyDescription" ).removeClass('display-none');
