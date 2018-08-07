@@ -826,9 +826,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 
 						<div class="col-xs-12 col-md-6">
-							<label for="">Your Branch<span class="tipstyle"> *</span></label>
+							<label for="">Your Branch</label>
 							<div class="chevron-select-box">
-							<select class="form-control" name="Branch" id="Branch" disabled>
+							<select class="form-control" name="Branch" id="Branch">
+							<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>Please select</option>
 								<?php 
 								$Branchcode  = file_get_contents("sites/all/themes/evolve/json/Branch.json");
 								$Branch=json_decode($Branchcode, true);

@@ -757,9 +757,10 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<input type="hidden"  name="Specialty"  <?php   echo 'value="'.$details['Specialty'].'"'; ?>>
 				<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<label for="">What branch would you like to join?<span class="tipstyle"> *</span></label>
+					<label for="">What branch would you like to join?</label>
 					<div class="chevron-select-box">
 					<select class="form-control" id="Branch" name="Branch">
+					<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>Please select</option>
 						<?php 
 							$Branchcode  = file_get_contents("sites/all/themes/evolve/json/Branch.json");
 							$Branch=json_decode($Branchcode, true);

@@ -82,8 +82,8 @@ jQuery(document).ready(function($) {
 				if($("input[name=newPassword]").val() ==''){$("input[name=newPassword]").addClass("focuscss");}else{$("input[name=newPassword]").removeClass("focuscss");}
 			}
 			if($("select[name=MemberType]").val() ===''){$("select[name=MemberType]").addClass("focuscss");}else{$("select[name=MemberType]").removeClass("focuscss");}
-			if($("select[name=Branch]").val() ===''){$("select[name=Branch]").addClass("focuscss");}else{$("select[name=Branch]").removeClass("focuscss");}
-		    if($("input[name=Memberid]").val() =='' || !isValidEmailAddress($("input[name=Memberid]").val()) ||$("select[name=MemberType]").val() ===''||$("select[name=Branch]").val() ===''){
+			//if($("select[name=Branch]").val() ===''){$("select[name=Branch]").addClass("focuscss");}else{$("select[name=Branch]").removeClass("focuscss");}
+		    if($("input[name=Memberid]").val() =='' || !isValidEmailAddress($("input[name=Memberid]").val()) ||$("select[name=MemberType]").val() ===''){
 				return false;
 		    }
 			if($("input[name=Password]").length !==0) {

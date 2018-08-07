@@ -939,7 +939,7 @@ if (isset($_SESSION['UserId'])):
                     <!--BREAK-->
 
                     <div class="col-xs-6 col-md-3">
-                        <label for="">City or town<span class="tipstyle"> *</span></label>
+                        <label for="">City or Town<span class="tipstyle"> *</span></label>
                         <input type="text" class="form-control" name="Suburb" id="Suburb" placeholder='City or town'<?php
     if (empty($details['Suburb'])) {
         echo "";
@@ -1273,9 +1273,10 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
             </div>
             <div class="row">
             <div class="col-xs-12 col-md-6">
-                    <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
+                    <label for="">What branch would you like to join?</label>
                     <div class="chevron-select-box">
                     <select class="form-control" id="Branch" name="Branch">
+					<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>Please select</option>
                     <?php
     $Branchcode = file_get_contents("sites/all/themes/evolve/json/Branch.json");
     $Branch     = json_decode($Branchcode, true);
@@ -2860,7 +2861,7 @@ if(isset($_GET['MT'])){
                 <input type="hidden" class="form-control" name="Specialty">
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
-                        <label for="">What branch would you like to join?<span class="tipstyle"> *</span></label>
+                        <label for="">What branch would you like to join?</label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="Branch" name="Branch">
                             <option value="" selected disabled>What branch would you like to join?</option>
