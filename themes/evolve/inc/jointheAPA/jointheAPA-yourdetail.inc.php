@@ -300,7 +300,7 @@ if (isset($_POST['step1'])) {
     } else {
         $postData['Findpublicbuddy'] = "False";
     }
-    if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} else{$postData['Dietary']=array();}
+   // if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} else{$postData['Dietary']=array();}
     // Process workplace data
     
     if (isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ) {
@@ -441,12 +441,14 @@ if (isset($_POST['step1'])) {
             
             if (isset($_POST['WTreatmentarea' . $i])) {
                 $workplaceArray['SpecialInterestAreaID'] = implode(",", $_POST['WTreatmentarea' . $i]);
-            }
+            }else{
+				$workplaceArray['SpecialInterestAreaID'] = "";
+			}
             
             if (isset($_POST['Additionallanguage' . $i])) {
-                $workplaceArray['AdditionalLanguage'] = implode(",", $_POST['Additionallanguage' . $i]);
+				$workplaceArray['AdditionalLanguage'] = implode(",", $_POST['Additionallanguage' . $i]);
             }
-			else{ $workplaceArray['AdditionalLanguage'] = array();}
+			else{ $workplaceArray['AdditionalLanguage'] = ""; }
             
             array_push($tempWork, $workplaceArray);
         }
@@ -504,6 +506,7 @@ if (isset($_POST['step1'])) {
     
     if (isset($_SESSION['UserId'])) {
         $testdata = GetAptifyData("5", $postData);
+		Print_r($testdata); 
     } else {
         
         // for new user join a member call user registeration web service
