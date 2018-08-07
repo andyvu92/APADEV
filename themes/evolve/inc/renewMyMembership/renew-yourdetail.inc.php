@@ -157,7 +157,7 @@ if(isset($_POST['step1'])) {
 		array_push($testDietaryArray, $testD);
 		$postData['Dietary'] = $testDietaryArray;
 	}*/
-	if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} else{$postData['Dietary']=array();}
+	if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} 
 	if(isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ){ 
 	$num = $_POST['wpnumber']; 
 	$tempWork = array();
@@ -388,7 +388,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 								foreach($Gender  as $key => $value){
 									echo '<option value="'.$Gender[$key]['ID'].'"';
 									if ($details['Gender'] == $Gender[$key]['ID']){ echo "selected='selected'"; }
-									if (empty($details['Gender']) && $Gender[$key]['ID']=="2" ) {
+									if (empty($details['Gender']) && $Gender[$key]['ID']=="3" ) {
 										echo "selected='selected'";
 									}
 									echo '> '.$Gender[$key]['Description'].' </option>';
@@ -1075,7 +1075,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					</div>
 
 					<div class="col-xs-6 col-md-3">
-						<label for="">Phone number</label>
+						<label for="">Phone number<span class="tipstyle">*</span></label>
 						<input type="text" class="form-control" name="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  >
 					</div>
 

@@ -131,7 +131,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 </div>
 
 <div class="col-xs-6 col-md-3">
-        <label for="">Phone number</label>
+        <label for="">Phone number<span class="tipstyle">*</span></label>
         <input type="text" class="form-control" name="Wphone'.$i.'">
 </div>
 

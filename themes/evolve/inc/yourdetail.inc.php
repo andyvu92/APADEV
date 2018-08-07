@@ -469,7 +469,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 									foreach($Gender  as $key => $value){
 										echo '<option value="'.$Gender[$key]['ID'].'"';
 										if ($details['Gender'] == $Gender[$key]['ID']){ echo "selected='selected'"; } 
-										if (empty($details['Gender']) && $Gender[$key]['ID']=="2" ) {
+										if (empty($details['Gender']) && $Gender[$key]['ID']=="3" ) {
 											echo "selected='selected'";
 										}
 										echo '> '.$Gender[$key]['Description'].' </option>';
@@ -1323,7 +1323,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<input type="text" class="form-control" name="WPhoneAreaCode<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WPhoneAreaCode'])) {echo "placeholder='Phone Area code'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WPhoneAreaCode'].'"'; }?>  maxlength="5">
 							</div>
 							<div class="col-xs-6 col-md-3">
-								<label for="">Phone number</label>
+								<label for="">Phone number<span class="tipstyle">*</span></label>
 								<input type="text" class="form-control" name="WPhone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  >
 							</div>
 							<div class="col-xs-6 col-md-3">
