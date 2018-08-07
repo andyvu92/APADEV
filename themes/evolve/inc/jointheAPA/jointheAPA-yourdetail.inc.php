@@ -302,7 +302,7 @@ if (isset($_POST['step1'])) {
     } else {
         $postData['Findpublicbuddy'] = "False";
     }
-   // if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} else{$postData['Dietary']=array();}
+   if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} else{$postData['Dietary']=array();}
     // Process workplace data
     
     if (isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ) {

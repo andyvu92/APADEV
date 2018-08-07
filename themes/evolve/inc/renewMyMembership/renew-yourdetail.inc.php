@@ -151,12 +151,13 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['MAdditionallanguage'])){ $postData['PAdditionalLanguageID'] = implode(",",$_POST['MAdditionallanguage']); }
 	
 	if(isset($_POST['Findpublicbuddy'])){ $postData['Findpublicbuddy'] = $_POST['Findpublicbuddy']; } else{ $postData['Findpublicbuddy'] = "False";}
-	if(isset($_POST['Dietary'])){ 
+	/*if(isset($_POST['Dietary'])){ 
 		$testD['ID']=$_POST['Dietary'];
 		$testDietaryArray = array();
 		array_push($testDietaryArray, $testD);
 		$postData['Dietary'] = $testDietaryArray;
-	}
+	}*/
+	if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} else{$postData['Dietary']=array();}
 	if(isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ){ 
 	$num = $_POST['wpnumber']; 
 	$tempWork = array();

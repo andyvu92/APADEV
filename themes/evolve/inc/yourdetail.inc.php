@@ -221,6 +221,7 @@ if(isset($_POST['step1'])) {
 	// UserID 
 	// Response - UserID & detail data
 	$test = GetAptifyData("5", $postData);
+	
 	unset($_SESSION["Regional-group"]);
 	/*General function: save data to APA shopping cart database;*/
 	/*Parameters: $userID, $productID,$type;*/
@@ -331,7 +332,6 @@ if(isset($_POST["setCardID"]) && $_POST["setCardID"] != ""){
 	// UserID, Creditcard-ID
 	// Response -
 	// N/A.
-	echo "End here";
 	$updateCards = GetAptifyData("13", $updateCardSubmit); 
 	//print_r($updateCards);
 	
