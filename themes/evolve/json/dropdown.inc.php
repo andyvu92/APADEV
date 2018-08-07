@@ -40,8 +40,8 @@ function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
 
 function getDropdown(){
 	$API = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOptionValues';
-	$result = curlRequest($API);
-	$result = json_clean_decode($result);
+	$resultt = curlRequest($API);
+	$result = json_clean_decode($resultt, true);
 	
 	// write Country json file
 	foreach($result['Country']  as $lines){
