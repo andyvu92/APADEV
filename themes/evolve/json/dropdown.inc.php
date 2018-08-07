@@ -199,9 +199,9 @@ function getDropdown(){
 	fclose($fp);
 	// write Gender json file
 	foreach($result['Gender']  as $lines){
-		$ID = $lines['ID'];
+		$ID = $lines['Value'];
 		$Name = $lines['Description'];
-		$arrayGender[] = array('ID'=>$ID, 'Description'=>$Name);	
+		$arrayGender[] = array('Value'=>$ID, 'Description'=>$Name);	
     }
 	$response= $arrayGender;
 	$fp = fopen(__DIR__ . '/../json/Gender.json', 'w');
@@ -221,8 +221,8 @@ function getDropdown(){
 	// write University json file
 	foreach($result['University']  as $lines){
 		$ID = $lines['ID'];
-		$Name = $lines['Name'];
-		$arrayUniversity[] = array('ID'=>$ID, 'Name'=>$Name);	
+		$Name = $lines['Column1'];
+		$arrayUniversity[] = array('ID'=>$ID, 'Column1'=>$Name);	
     }
 	$response= $arrayUniversity;
 	$fp = fopen(__DIR__ . '/../json/University.json', 'w');
