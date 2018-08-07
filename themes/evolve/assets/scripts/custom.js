@@ -576,7 +576,7 @@ jQuery(document).ready(function($) {
 		$( "#signupWebUser" ).dialog();
 		$( "#loginPopWindow" ).dialog('close');
     });
-	$('#login').click(function(){
+	$('.member-login').click(function(){
 		$( "#loginPopWindow" ).dialog();
 	});
 	$('#viewMap').click(function(){

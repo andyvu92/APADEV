@@ -246,7 +246,7 @@ jQuery(document).ready(function() {
 	});
 
 	$("#tabmenu li").click(function(){
-		$(this).removeClass("test");
+		$(this).removeClass("warning");
 	});
 });
 </script>
