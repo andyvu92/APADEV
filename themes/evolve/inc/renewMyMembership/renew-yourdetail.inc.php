@@ -541,7 +541,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				
 				<div class="row">
 					<div class="col-xs-6 col-md-3">
-					   <label for="">City or town<span class="tipstyle"> *</span></label>
+					   <label for="">City or Town<span class="tipstyle"> *</span></label>
 					   <input type="text" class="form-control" name="Suburb" id="Suburb" <?php if (empty($details['Suburb'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Suburb'].'"'; }?>>
 					</div>
 
@@ -1162,9 +1162,9 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 
 				<div class="row">
 					<div class="col-xs-12 col-md-6">
-						<label>Workplace setting</label>
+						<label>Workplace setting<span class="tipstyle">*</span></label>
 						<div class="chevron-select-box">	
-						<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting0">
+						<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting<?php echo $key;?>">
 						<?php
 							// 2.2.36 - get workplace settings list
 							// Send - 

@@ -1232,7 +1232,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 
 						<div class="row">
 							<div class="col-xs-6 col-md-6">
-								<label for="Wcity<?php echo $key;?>">City/Town<span class="tipstyle"> *</span></label>
+								<label for="Wcity<?php echo $key;?>">City or Town<span class="tipstyle"> *</span></label>
 								<input type="text" class="form-control" name="Wcity<?php echo $key;?>" id="Wcity<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wcity'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wcity'].'"'; }?> required>
 							</div>
 
@@ -1414,9 +1414,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<div class="row">
 
 							<div class="col-xs-12 col-md-6">
-								<label>Workplace setting</label>
+								<label>Workplace setting<span class="tipstyle">*</span></label>
 								<div class="chevron-select-box">
-								<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting0" required>
+								<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting<?php echo $key;?>" required>
 								<?php
 							// 2.2.36 - get workplace settings list
 							// Send - 

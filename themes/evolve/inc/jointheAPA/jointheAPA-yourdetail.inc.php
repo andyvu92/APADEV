@@ -2017,7 +2017,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 
                         <div class="row">
                         <div class="col-xs-12 col-md-6">
-                            <label>Workplace setting</label>
+                            <label>Workplace setting<span class="tipstyle">*</span></label>
                             <div class="chevron-select-box">
                             <select class="form-control" id="Workplace-setting<?php
                                             echo $key;
@@ -3134,7 +3134,7 @@ if(isset($_GET['MT'])){
 <?php
 endif;
 ?> 
-<?php logRecorder();  ?>       
+      
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $(".chosen-select").chosen({width: "100%"});
@@ -3225,3 +3225,4 @@ echo json_encode($_SESSION['University']);
         $('input[name=addtionalNumber]').val(i);
     });
 </script>
+<?php logRecorder();  ?> 
