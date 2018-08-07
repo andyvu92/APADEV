@@ -589,7 +589,7 @@ if($resultdata['result']) {
 			$j = strtotime($edate[0]);
 			$q = strtotime($bdate[1]);
 			$r = strtotime($edate[1]);
-			$dateStart = date("d",strtotime($t));
+			$dateStart = date("d",$t);
 			$timeOutput = date("h:i",$q)." - ".date("h:i",$r);
 			if($bdate[0] == $edate[0]) {
 				if(date("F",$t) != date("F",$j)) {
@@ -729,8 +729,8 @@ if($resultdata['result']) {
 				 <h3 style="color: #009FDA; text-align: center; margin-top: 0; margin-bottom: 20px">Have a member account?</br>Please sign in below:</h3>
 				<!--<input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
 				 <input type="password" class="form-control"  name="Password"  placeholder="Password"><br>-->
-				<input class="form-control" name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" />
-				<input class="form-control" placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" />
+				<input class="form-control" name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" required />
+				<input class="form-control" placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" required />
 				<div class="col-xs-12 none-padding" style="margin: 10px 0 8px 0">
 				<input class="styled-checkbox" id="remember1" type="checkbox" name="remember"  <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> />
 				<label for="remember1">Remember me</label>

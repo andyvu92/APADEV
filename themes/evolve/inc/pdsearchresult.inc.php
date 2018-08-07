@@ -239,29 +239,28 @@ if(isset($results['MResponse'])) {
 		}
 
 		if(!empty($result['StartDate'])) {
-			$bdate = explode(" ",$result['StartDate']);
-			$t = strtotime($bdate[0]);
+			$t = strtotime($result['StartDate']);
 			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>Start date: </span>".date("d M, Y",$t)."</div>";
 		} else {
 			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>Start date: </span>N/A</div>";
 		}
 
 		if(!empty($result['EndDate'])) {
-			$edate = explode(" ",$result['EndDate']);
-			$j = strtotime($edate[0]);
+			$j = strtotime($result['EndDate']);
 			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>End date: </span>".date("d M, Y",$j)."</div>";
 		} else {
 			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>End date: </span>N/A</div>";
 		}
 		
 		echo	"<div class='flex-col-1 pd-status'>";
-		$gap = intval($result['Totalnumber']) - intval($result['Enrollednumber']);
-		$tenP = intval($result['Totalnumber'])/10;
-		if($gap == 0) {
-			echo  "<i class='fa fa-ban fa-lg' aria-hidden='true'></i><span>Course full</span>";
-		} elseif($gap < $tenP) {
+		$Totalnumber = doubleval($result['Totalnumber']);
+		$Enrollednumber = doubleval($result['Enrollednumber']);
+		$Div = $Enrollednumber/$Totalnumber;
+		if($Div>=0.9 && $Div<1){
 			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Almost full</span></a>';
-		} else {
+		} elseif(($Totalnumber-$Enrollednumber)==0){
+			echo  "<i class='fa fa-ban fa-lg' aria-hidden='true'></i><span>Course full</span>";
+		} elseif($Div<0.9){
 			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Open</span></a>';
 		}
 		echo	"</div>";
