@@ -31,6 +31,7 @@ if (isset($_POST['step1'])) {
     if (isset($_POST['Maiden-name'])) {
         $postData['Maiden-name'] = $_POST['Maiden-name'];
     }
+	else{ $postData['Maiden-name'] ="";}
     
     if (isset($_POST['Lastname'])) {
         $postData['Lastname'] = $_POST['Lastname'];
@@ -62,7 +63,7 @@ if (isset($_POST['step1'])) {
     
     if (isset($_POST['Mobile-area-code'])) {
         $postData['Mobile-area-code'] = $_POST['Mobile-area-code'];
-    }
+    }else {$postData['Mobile-area-code'] = "";}
     
     if (isset($_POST['Mobile-number'])) {
         $postData['Mobile-number'] = $_POST['Mobile-number'];
@@ -273,6 +274,7 @@ if (isset($_POST['step1'])) {
     if (isset($_POST['Branch'])) {
         $postData['Branch'] = $_POST['Branch'];
     }
+	
     
     if (isset($_SESSION['Regional-group'])) {
         $postData['Regional-group'] = $_SESSION['Regional-group'];
@@ -506,7 +508,7 @@ if (isset($_POST['step1'])) {
     
     if (isset($_SESSION['UserId'])) {
         $testdata = GetAptifyData("5", $postData);
-		Print_r($testdata); 
+	
     } else {
         
         // for new user join a member call user registeration web service
@@ -693,16 +695,16 @@ if (isset($_SESSION['UserId'])):
                     
                     <!--BREAK-->
 
-                    <div class="col-xs-6 col-md-3">
+                    <!--<div class="col-xs-6 col-md-3">
                         <label for="">Maiden name</label>
                         <input type="text" class="form-control" name="Maiden-name" placeholder='Maiden name'<?php
-    if (empty($details['Maiden-name'])) {
+    /*if (empty($details['Maiden-name'])) {
         echo "";
     } else {
         echo 'value="' . $details['Maiden-name'] . '"';
-    }
+    }*/
 ?>>
-                    </div>
+                    </div>-->
                     <div class="col-xs-6 col-md-3">
                        <label for="">Family name<span class="tipstyle"> *</span></label>
                        <input type="text" class="form-control" name="Lastname" placeholder='Family name'<?php
@@ -808,16 +810,16 @@ if (isset($_SESSION['UserId'])):
                         <?php
     $_SESSION['country'] = $country;
 ?>
-                      <!--<div class="col-xs-6 col-md-3">
+                      <div class="col-xs-6 col-md-3">
                             <label for="">Area code</label>
                             <input type="text" class="form-control" name="area-code" placeholder='Area code'<?php
-    /*if (empty($details['Home-phone-areacode'])) {
+    if (empty($details['Home-phone-areacode'])) {
         echo "";
     } else {
         echo 'value="' . $details['Home-phone-areacode'] . '"';
-    }*/
+    }
 ?>  maxlength="5">
-                        </div>-->
+                        </div>
                         <div class="col-xs-12 col-md-3">
                             <label for="">Phone number</label>
                             <input type="text" class="form-control" name="phone-number" placeholder='Phone number'<?php
@@ -2427,10 +2429,10 @@ if(isset($_GET['MT'])){
 
                         <!--BREAK-->
 
-                        <div class="col-xs-6 col-md-3">
+                        <!--<div class="col-xs-6 col-md-3">
                            <label for="">Maiden name</label>
                            <input type="text" class="form-control" name="Maiden-name">
-                        </div>
+                        </div>-->
                         <div class="col-xs-6 col-md-3">
                            <label for="">Family name<span class="tipstyle"> *</span></label>
                            <input type="text" class="form-control" name="Lastname">
@@ -2504,10 +2506,10 @@ if(isset($_GET['MT'])){
                                </select>
                                </div>
                             </div>
-                            <!--<div class="col-xs-6 col-md-3">
+                            <div class="col-xs-6 col-md-3">
                                 <label for="">Area code</label>
                                 <input type="text" class="form-control" name="area-code" maxlength="5">
-                            </div>-->
+                            </div>
                             <div class="col-xs-12 col-md-3">
                                 <label for="">Phone number</label>
                                 <input type="text" class="form-control" name="phone-number" >
