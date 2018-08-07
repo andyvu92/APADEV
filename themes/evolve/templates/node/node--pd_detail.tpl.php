@@ -1531,7 +1531,7 @@ if($resultdata['result']) {
 					*/
 				}
 				else{
-					echo '<a id="login">Login to see your status</a>';
+					echo '<a class="member-login" id="login">Login to see your status</a>';
 					//echo '<a class="info" data-target="#loginAT" data-toggle="modal" type="button">Login to see your status</a>';
 				}
 				?>
@@ -1658,7 +1658,7 @@ if($resultdata['result']) {
 					*/
 				}
 				else{
-					echo '<a id="login">Login to see your status</a>';
+					echo '<a class="member-login" id="login">Login to see your status</a>';
 					//echo '<a class="info" data-target="#loginAT" data-toggle="modal" type="button">Login to see your status</a>';
 				}
 				?>

@@ -31,7 +31,7 @@ div[id^="home-tile-view-block"]{
                     padding: 7px;
                 }
                 @media all and (max-width: @tablet-width){
-                    padding: 7px;
+                    padding: 0 7px;
                 }
                 & > .content{
                     @media all and (max-width: 335px) {
@@ -151,6 +151,7 @@ div[id^="home-tile-view-block"]{
                     min-height: 145.5px;
                     .description{
                         margin-top: auto;
+                        margin-bottom: 3px;
                         align-items: center!important;
                         .MonlyIconHolder{
                             margin-left: 10px!important;
@@ -165,11 +166,16 @@ div[id^="home-tile-view-block"]{
                             .field-items{
                                .field-item{
                                    font-size: 9px;
+                                   letter-spacing: 0.5px;
                                } 
                             }
                         }
                     }
                     .description{
+
+                        .dateHome{
+                            color: #a6a8ab;
+                        }
                         .NextIconHolder{
                             display: none;
                         }
@@ -226,6 +232,10 @@ div[id^="home-tile-view-block"]{
                                 line-height: 1.1em;
                                 padding: 0 30px 30px 30px!important;
                                 min-height: 40%!important;
+                                @media all and (max-width: @phone-width) {
+                                    font-size: 2em!important;
+                                    padding: 0 20px 20px 20px!important;
+                                }
                             }
                         }
                 }
@@ -277,6 +287,13 @@ div[id^="home-tile-view-block"]{
                             min-height: 55%;
                             padding: 0 20px 20px 20px;
                             transition: 0.3s linear;
+                            @media all and (max-width: @larger-phone-width) {
+                                font-size: 1em;
+                                padding: 0 10px 10px 10px;
+                            }
+                            @media all and (max-width: 335px) {
+                                min-height: 85%;
+                            }
                         }
                     }
                 }

@@ -65,4 +65,9 @@ jQuery(document).ready(function($) {
 		
 	}
 	
+	$(".ShoppingCartBorder").click(function() {
+		window.location = "/pd/pd-shopping-cart";		
+	});
+	
+	
 });

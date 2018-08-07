@@ -1160,6 +1160,7 @@ body.page-node{
                       }
                       .pd-description-nonmobile{
                           display: block;
+                          font-size: 1.2em;
                         @media all and (max-width: @larger-phone-width) {
                             display: none;
                         }
@@ -1556,7 +1557,10 @@ input[value="Sign in"], input[value="Submit"], input[value="Next"]{
     margin-top: 13px;
     padding-top: 8px;
 }
-div[id="jobnoticement"], div[id="processWindow"], div[id="registerPDUser"], div[id="popUpWindow"], div[id="deleteConfirmwindow"], div[id="registerMember"], div[id="loginPopWindow"],div[id="myMap"], div[id="signupWebUser"]{
+div[id="jobnoticement"], div[id="processWindow"], 
+div[id="registerPDUser"], div[id="popUpWindow"], 
+div[id="deleteConfirmwindow"], div[id="registerMember"], 
+div[id="loginPopWindow"],div[id="myMap"], div[id="signupWebUser"]{
     display:none;
 }
 div[aria-describedby="registerPDUser"].ui-dialog {
@@ -1583,14 +1587,7 @@ div[aria-describedby="myMap"].ui-dialog {
 	width: 634px!important;
 	
 }
-div[aria-describedby="loginPopWindow"].ui-dialog {
-    z-index: 1054!important;
-    position: fixed;
-    width: 70%!important;
-    max-width: 400px;
-    left: calc(~"50% - 200px")!important;
-    top: 40%!important;
-}
+
 div[aria-describedby="registerMember"].ui-dialog{
     z-index: 1055!important;
     top: 400px!important;
@@ -1620,10 +1617,16 @@ a#createAccount {
 #processWindow h3, #popUpWindow h3, #deleteConfirmwindow h3{
     color: #009fda;
 }
-div[aria-describedby="jobnoticement"] .ui-widget-header, div[aria-describedby="registerPDUser"] .ui-widget-header, div[aria-describedby="processWindow"] .ui-widget-header, div[aria-describedby="popUpWindow"] .ui-widget-header, div[aria-describedby="deleteConfirmwindow"] .ui-widget-header, div[aria-describedby="registerMember"] .ui-widget-header, div[aria-describedby="loginPopWindow"] .ui-widget-header, div[aria-describedby="myMap"] .ui-widget-header{
+div[aria-describedby="jobnoticement"] .ui-widget-header, 
+div[aria-describedby="registerPDUser"] .ui-widget-header, 
+div[aria-describedby="processWindow"] .ui-widget-header, 
+div[aria-describedby="popUpWindow"] .ui-widget-header, 
+div[aria-describedby="deleteConfirmwindow"] .ui-widget-header, 
+div[aria-describedby="registerMember"] .ui-widget-header, 
+div[aria-describedby="loginPopWindow"] .ui-widget-header, 
+div[aria-describedby="myMap"] .ui-widget-header{
     border:none!important;
-	background-color:white!important;
-	
+	background-color:white!important;	
 }
  div[aria-describedby="registerPDUser"] .ui-dialog-content, div[aria-describedby="registerMember"] .ui-dialog-content{
     overflow:hidden!important;
@@ -1813,21 +1816,55 @@ input[name="Couponcode"]{
 }
 
 div[aria-describedby="signupWebUser"]{
-    position: fixed!important;
-    top: 15%!important;
-    left: 25%!important;
-    width: 50%!important;
-    max-width: 718px;
+    position: fixed !important;
+    top: 10vh !important;
+    left: 25vw !important;
+    width: 50vw !important;
+    max-height: 80vh;
+    overflow: hidden;
     #signupWebUser{
         overflow: auto;
         overflow-x: hidden;
-        max-height: 80vh!important;
+        max-height: 73vh!important;
         input{
             background: #fff;
+            min-height: 48px;
         }
+        select{
+            min-height: 48px;
+        }
+    }
+    .locked:before{
+           bottom: 20px; 
+    }
+    @media all and (max-width: @desktop-width){
+        .locked:before{
+            bottom: 12px; 
+        }
+    }
+    @media all and (max-width: @tablet-width + 1px) {
+        left: 15vw !important;
+        width: 70vw !important;
+    }
+    @media all and (max-width: @phone-width) {
+        left: 10vw !important;
+        width: 80vw !important;
     }
 }
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
     background: none!important;
+    border: 0!important;
+}
+
+div[aria-describedby="loginPopWindow"].ui-dialog {
+    position: fixed!important;
+    z-index: 1054!important;
+    width: 400px !important;
+    left: calc(~"50vw - 200px")!important;
+    top: 30vh !important;
+    @media all and (max-width: @phone-width) {
+        width: 300px !important;
+        left: calc(~"50vw - 150px")!important;
+    }
 }
