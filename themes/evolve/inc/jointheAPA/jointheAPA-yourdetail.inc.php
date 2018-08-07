@@ -6,7 +6,8 @@ $filterMemberProduct = array("10007","10008","10009","9997");
 // 1. for new user who join a member
 // 2. web user who join a member use $_SESSION]['userID'] to get user info
 
-if (isset($_POST['step1'])) {
+//if (isset($_POST['step1'])) {this part code has already moved to the login file
+	if (isset($_POST['step1'])) {
     $postData = array();
     if (isset($_SESSION['UserId'])) {
         $postData['userID'] = $_SESSION['UserId'];
@@ -302,7 +303,7 @@ if (isset($_POST['step1'])) {
     } else {
         $postData['Findpublicbuddy'] = "False";
     }
-   if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} else{$postData['Dietary']=array();}
+  if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} 
     // Process workplace data
     
     if (isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ) {
@@ -514,7 +515,7 @@ if (isset($_POST['step1'])) {
         // for new user join a member call user registeration web service
        
         $resultdata = GetAptifyData("25", $postData);
-		Print_r($resultdata);       
+		
         // when create user successfully call login web service to login in APA website automatically.
         // after login successfully get UserID as well to store on APA shopping cart database
         
@@ -526,6 +527,7 @@ if (isset($_POST['step1'])) {
             // login sucessful unset session
             
             loginManager($_SESSION["UserName"], $_SESSION["Password"]);
+			//header("Refresh:0");
             unset($_SESSION["UserName"]);
             unset($_SESSION["Password"]);
         }
@@ -728,7 +730,7 @@ if (isset($_SESSION['UserId'])):
                     <div class="col-xs-6 col-md-3">
                        <label for="">Gender</label>
                        <div class="chevron-select-box">
-                       <select class="form-control" id="Gender" name="Gender" required>
+                       <select class="form-control" id="Gender" name="Gender">
                         <?php
     $Gendercode = file_get_contents("sites/all/themes/evolve/json/Gender.json");
     $Gender     = json_decode($Gendercode, true);
@@ -737,7 +739,7 @@ if (isset($_SESSION['UserId'])):
         if ($details['Gender'] == $Gender[$key]['ID']) {
             echo "selected='selected'";
         }
-        if (empty($details['Gender']) && $Gender[$key]['ID']=="2" ) {
+        if (empty($details['Gender']) && $Gender[$key]['ID']=="3" ) {
             echo "selected='selected'";
         }
         echo '> ' . $Gender[$key]['Description'] . ' </option>';
@@ -1765,10 +1767,12 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <?php
         //$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
         //$country     = json_decode($countrycode, true);
+		$countser = 0;	
         foreach ($country as $pair => $value) {
             echo '<option value="'. $country[$pair]['TelephoneCode'].'"';
-            if ($details['Workplaces'][$key]['WPhoneCountryCode'] == $country[$pair]['TelephoneCode']) {
+            if ($details['Workplaces'][$key]['WPhoneCountryCode'] == preg_replace('/\s+/', '', $country[$pair]['TelephoneCode']) && $countser == 0) {
                 echo "selected='selected'";
+				$countser++;
             }
             elseif(empty($details['Workplaces'][$key]['WPhoneCountryCode']) && $country[$pair]['ID']=="14"){
 				echo "selected='selected'";
@@ -1794,7 +1798,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 ?>  maxlength="5">
                             </div>
                             <div class="col-xs-6 col-md-3">
-                                <label for="">Phone number</label>
+                                <label for="">Phone number<span class="tipstyle">*</span></label>
                                 <input type="text" class="form-control" name="Wphone<?php
         echo $key;
 ?>" <?php
@@ -2385,6 +2389,7 @@ if(isset($_GET['MT'])){
    <form id="your-detail-form" action="jointheapa" method="POST" autocomplete="off">
         <input type="hidden" name="step1" value="1"/>
         <input type="hidden" name="insuranceTag" id="insuranceTag"/>
+		<input type="hidden" name="refreshTag"/>
             <input type="hidden" name="Status" value="1"/>
                 <div class="down1" <?php
     if (isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['step2-1']) || isset($_POST['goI']) || isset($_POST['goP']))
@@ -2452,7 +2457,7 @@ if(isset($_GET['MT'])){
     $Gender     = json_decode($Gendercode, true);
     foreach ($Gender as $key => $value) {
         echo '<option value="' . $Gender[$key]['ID'] . '"';
-		if($Gender[$key]['ID'] =="2") {echo "selected='selected'";}
+		if($Gender[$key]['ID'] =="3") {echo "selected='selected'";}
         echo '> ' . $Gender[$key]['Description'] . ' </option>';
     }
     
