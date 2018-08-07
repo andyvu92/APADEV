@@ -726,18 +726,18 @@ if($resultdata['result']) {
 	  
 		<div  id="loginPopWindow" >
 			<form name="signInForm" method="POST" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>">
-				 <p style="color: #009FDA !important;">Have a member account? Please sign in below:</p>
+				 <h3 style="color: #009FDA; text-align: center; margin-top: 0; margin-bottom: 20px">Have a member account?</br>Please sign in below:</h3>
 				<!--<input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
 				 <input type="password" class="form-control"  name="Password"  placeholder="Password"><br>-->
-				<input name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" />
-				<input placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" />
-				<p>
-				<input class type="checkbox" name="remember"  <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> />
-				<label for="remember">Remember me</label>
-				</p>
+				<input class="form-control" name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" />
+				<input class="form-control" placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" />
+				<div class="col-xs-12 none-padding" style="margin: 10px 0 8px 0">
+				<input class="styled-checkbox" id="remember1" type="checkbox" name="remember"  <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> />
+				<label for="remember1">Remember me</label>
+				</div>
 				<p><a class="forgotPS" data-dismiss="modal" data-toggle="modal" data-target="#passwordReset" >Forgot password?</a></p>
 
-				 <p style="color: #009FDA !important;">Not a member? <a id="createAccount">Create an account.</a></p>
+				 <p>Not a member? <a id="createAccount">Create an account.</a></p>
 				
 				  <input type="submit" value="Sign in">
 			</form>
@@ -795,7 +795,7 @@ if($resultdata['result']) {
 				  </div>
 				 <div class="row">
 				     <div class="col-lg-12">
-					   <input type="text" class="form-control" name="Memberid"  <?php if (empty($details['Memberid'])) {echo "placeholder='Member ID(Your email address)'";}   else{ echo 'value="'.$details['Memberid'].'"'; }?> readonly>
+					   <input type="text" class="form-control" name="Memberid"  <?php if (empty($details['Memberid'])) {echo "placeholder='Member ID (Your email address)'";}   else{ echo 'value="'.$details['Memberid'].'"'; }?> readonly>
 					</div>
 					
 				 </div>
@@ -991,8 +991,8 @@ if($resultdata['result']) {
 				</div>
 				<div class="row">
 				   <div class="col-xs-12">
-					<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professionalinsurance" required>
-					<label for="Professionalinsurance">I have current adequate professional indemnity insurance.</label>
+					<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance" required>
+					<label for="Professional-insurance">I have current adequate professional indemnity insurance.</label>
 				   </div>
 				</div>
 				<div class="row">
@@ -1167,58 +1167,63 @@ if($resultdata['result']) {
 			<div class="row"><h4 class="modal-title">Don’t have an account? Please register below:</h4></div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">
                     <div class="row">
-                        <div class="col-lg-6">
+                        <div class="col-lg-3">
 				            <label for="prefix">Prefix<span class="tipstyle">*</span></label>
 							<?php 
 							$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
 							$Prefix=json_decode($Prefixcode, true);
 							?>
-                            <select class="form-control" id="Prefix" name="Prefix">
-							<?php 
-							foreach($Prefix  as $key => $value){
-								echo '<option value="'.$Prefix[$key]['ID'].'"';
-								echo '> '.$Prefix[$key]['Prefix'].' </option>';
-							}
-							?>
-							</select>
+							<div class="chevron-select-box">
+								<select class="form-control" id="Prefix" name="Prefix">
+								<?php 
+								foreach($Prefix  as $key => $value){
+									echo '<option value="'.$Prefix[$key]['ID'].'"';
+									echo '> '.$Prefix[$key]['Prefix'].' </option>';
+								}
+								?>
+								</select>
+							</div>
                         </div>
-						
-                        <div class="col-lg-6">
+					</div>
+					
+                    <div class="row">
+						<div class="col-lg-6">
                            <label for="">First name<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control"  name="Firstname">
-                        </div>
+						</div>
 						
-                    </div>
-                    <div class="row">
-                        
                         <div class="col-lg-6">
                            <label for="">Last name<span class="tipstyle">*</span></label>
                            <input type="text" class="form-control" name="Lastname">
                         </div>
-                     </div>
+					 </div>
+					 
                     <div class="row">
-                        <div class="col-lg-4">
+                        <div class="col-lg-6">
                            <label for="">Birth Date<span class="tipstyle">*</span></label>
                            <input type="date" class="form-control" name="Birth">
                         </div>
-                        <div class="col-lg-3 col-lg-offset-1">
-                           <label for="">Gender<span class="tipstyle">*</span></label>
-							<select class="form-control" id="Gender" name="Gender">
-							  <?php
-									$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
-									$Gender=json_decode($Gendercode, true);						
-									foreach($Gender  as $key => $value){
-										echo '<option value="'.$Gender[$key]['ID'].'"';
-									
-										echo '> '.$Gender[$key]['Description'].' </option>';
-									}
-								?>
-						    </select>
+                        <div class="col-lg-3">
+						   <label for="">Gender<span class="tipstyle">*</span></label>
+						   	<div class="chevron-select-box">
+								<select class="form-control" id="Gender" name="Gender">
+								<?php
+										$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
+										$Gender=json_decode($Gendercode, true);						
+										foreach($Gender  as $key => $value){
+											echo '<option value="'.$Gender[$key]['ID'].'"';
+										
+											echo '> '.$Gender[$key]['Description'].' </option>';
+										}
+									?>
+								</select>
+							</div>
                         </div>
-                    </div>
+					</div>
+					
 					<div class="row">
 					<div class="col-lg-6">
-						<label for="">Member ID(Your email address)<span class="tipstyle">*</span></label>
+						<label for="">Member ID (Your email address)<span class="tipstyle">*</span></label>
 						<input type="text" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)">
 					<div id="checkMessage"></div>
 					<script>
@@ -1248,6 +1253,7 @@ if($resultdata['result']) {
 					</script>
 					</div>
 				</div>
+
 				<div class="row">
 					<div class="col-lg-6">
 						<label for="">Your password<span class="tipstyle">*</span></label>
@@ -1276,23 +1282,20 @@ if($resultdata['result']) {
 						}					
 					}
 				</script>
-				
 			    </div>
 									
 					<div class="row">
-						<div class="col-lg-4">
-						<label for="">Address line 1<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
-						</div>
-					
-					</div>
-					<div class="row">
 						<div class="col-lg-12">
-							<label for="">Address L
-								line 2<span class="tipstyle">*</span></label>
+							<label for="">Address line 1<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
+						</div>
+
+						<div class="col-lg-12">
+							<label for="">Address line 2<span class="tipstyle">*</span></label>
 							<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
 						</div>
 					</div>
+
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">City or town<span class="tipstyle">*</span></label>
@@ -1306,32 +1309,36 @@ if($resultdata['result']) {
 						</div>
 						<div class="col-lg-3">
 							<label for="">State<span class="tipstyle">*</span></label>
-							<select class="form-control" id="State" name="State">
-								<option value="" selected disabled> State </option>
-								<?php 
-								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
-								$State=json_decode($statecode, true);
-								foreach($State  as $key => $value){
-								echo '<option value="'.$State[$key]['Abbreviation'].'"';
-							    echo '> '.$State[$key]['Abbreviation'].' </option>';
-							
-								}
-								?>
-							</select>
+							<div class="chevron-select-box">
+								<select class="form-control" id="State" name="State">
+									<option value="" selected disabled> State </option>
+									<?php 
+									$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+									$State=json_decode($statecode, true);
+									foreach($State  as $key => $value){
+									echo '<option value="'.$State[$key]['Abbreviation'].'"';
+									echo '> '.$State[$key]['Abbreviation'].' </option>';
+								
+									}
+									?>
+								</select>
+							</div>
 						</div>
 						<div class="col-lg-6">
 							<label for="">Country<span class="tipstyle">*</span></label>
-							<select class="form-control" id="Country" name="Country">
-							<?php 
-							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							$country=json_decode($countrycode, true);
-							foreach($country  as $key => $value){
-								echo '<option value="'.$country[$key]['Country'].'"';
-								echo '> '.$country[$key]['Country'].' </option>';
-								
-							}
-							?>
-					        </select>
+							<div class="chevron-select-box">
+								<select class="form-control" id="Country" name="Country">
+								<?php 
+								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+								$country=json_decode($countrycode, true);
+								foreach($country  as $key => $value){
+									echo '<option value="'.$country[$key]['Country'].'"';
+									echo '> '.$country[$key]['Country'].' </option>';
+									
+								}
+								?>
+								</select>
+							</div>
 						</div>
 					</div>
 					            			
@@ -1339,7 +1346,7 @@ if($resultdata['result']) {
                 	
 				
             </div>
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Submit</span></a></div>
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4" style="width: 100%; margin-top: 10px;"><span class="dashboard-button-name">Submit</span></a></div>
 		
     </form>
 
@@ -1357,8 +1364,8 @@ if($resultdata['result']) {
 	    <input type="hidden" name="Couponcode" value="<?php echo $Couponcode;?>"> 		
 		<div class="row">
 		   <div class="col-lg-12">
-				<input class="styled-checkbox" type="checkbox" name="Professionalinsurance"  required>
-				<label for="Professionalinsurance">I have current adequate professional indemnity insurance.</label>
+				<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance1"  required>
+				<label for="Professional-insurance1">I have current adequate professional indemnity insurance.</label>
 		   </div>
 		</div>
 		<div class="row">
@@ -1538,28 +1545,28 @@ if($resultdata['result']) {
 			</span>
 		</div>
 
-		<div class="session-cta">
+		<div class="session-cta <?php echo $pd_detail['Typeofpd']; ?>">
 			<a class="add-to-wishlist"><span>Add to Wishlist</span></a>
-			<!--<a class="add-to-card"><span>Add to Card</span></a>-->
+			<!--<a class="add-to-cart"><span>Add to Card</span></a>-->
 			<?php 
 			if(isset($_SESSION["UserId"])){
 				//$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
 				$userTag = checkPDUser($_SESSION['MemberTypeID']);
 				if($fullStatus) {
-					echo '<span class="add-to-card disable '.$pd_detail['Typeofpd'].'">Registration closed</span>';
+					echo '<span class="add-to-cart disable '.$pd_detail['Typeofpd'].'">Registration closed</span>';
 				} elseif ($userTag =="0"){ // any logged in users
 					if(isset($pd_detail['Typeofpd']) && $pd_detail['Typeofpd'] == "Course") {
 						if($_SESSION['MemberTypeID'] =='31' || $_SESSION['MemberTypeID'] =='32') {
-							echo '<span class="add-to-card disable '.$pd_detail['Typeofpd'].'"></span>';
+							echo '<span class="add-to-cart disable '.$pd_detail['Typeofpd'].'"></span>';
 							// student message
 						} else {
-							echo '<a class="add-to-card '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
+							echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
 						}
 					} else {
-						echo '<a class="add-to-card '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
+						echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
 					}
 				} else { // Not-logged in
-					echo '<a class="add-to-card '.$pd_detail['Typeofpd'].'" id="registerNonMember"><span>Add to cart</span></a>';
+					echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerNonMember"><span>Add to cart</span></a>';
 				} 
 			}	
 		   ?>

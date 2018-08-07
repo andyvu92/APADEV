@@ -292,18 +292,17 @@
         }
     }
     .accent-btn{
-        float: none!important;
+        float: none !important;
         display: inline-block;
         margin-bottom: 20px;
-        margin-top: 4px;
-        background-color: @bright-blue;
+        background-color: #009fda;
         border-width: 0px !important;
-        color: #fff!important;
-        text-transform: uppercase;
-        font-size: 12px;
-        font-weight: 400;
-        font-family: 'Roboto';
-        padding: 15px 45px;
+        color: #fff !important;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: Cairo;
+        padding: 10px 30px;
+        letter-spacing: 0.5px;
         &:hover{
             color: #fff;
             opacity: 0.9;
@@ -409,18 +408,17 @@
             padding-bottom: 6px;
         }
         .accent-btn{
-            float: none!important;
+            float: none !important;
             display: inline-block;
             margin-bottom: 20px;
-            margin-top: 4px;
-            background-color: @bright-blue;
+            background-color: #009fda;
             border-width: 0px !important;
-            color: #fff!important;
-            text-transform: uppercase;
-            font-size: 12px;
-            font-weight: 400;
-            font-family: 'Roboto';
-            padding: 15px 45px;
+            color: #fff !important;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: Cairo;
+            padding: 10px 30px;
+            letter-spacing: 0.5px;
             &:hover{
                 color: #fff;
                 opacity: 0.9;
@@ -966,7 +964,7 @@ body.page-node{
                         background: @blue;
                         color: #fff;
                         border: 1px solid #fff;
-                        padding: 15px 0px;
+                        padding: 15px 10px;
                         text-align: center;
                         display: block;
                         margin-top: 15px;
@@ -985,6 +983,41 @@ body.page-node{
                     background: #009fda;
                     border-top: 1px solid #fff;
                     font-family: Roboto;
+                    &.Lecture{
+                        .add-to-cart{
+                            background: #ffa02f; 
+                        }
+                    }
+                    &.Branch{
+                        .add-to-cart{
+                            background: #00424f;             
+                        }
+                    }
+                    &.College{
+                        .add-to-cart{
+                            background: #0772b0;    
+                        }
+                    }
+                    &.Course{
+                        .add-to-cart{
+                            background: #5e6067;                     
+                        }
+                    }
+                    &.Masterclass{
+                        .add-to-cart{
+                            background: #910674;               
+                        }
+                    }
+                    &.Symposium{
+                        .add-to-cart{
+                            background: #23c1fc;              
+                        }
+                    }
+                    &.Virtual{
+                        .add-to-cart{
+                            background: #a2ad00;             
+                        }
+                    }
                     .add-to-wishlist{
                         background: #c3c8c8;
                         color: #fff;
@@ -994,7 +1027,7 @@ body.page-node{
                         font-size: 1.2em;
                         cursor: pointer;
                     }
-                    .add-to-card{
+                    .add-to-cart{
                         color: #fff;
                         display: block;
                         text-transform: uppercase;
@@ -1006,6 +1039,27 @@ body.page-node{
                             cursor: no-drop;
                             opacity: 0.8;
                         }
+                            &.Lecture{
+                                background: #ffa02f; 
+                            }
+                            &.Branch{
+                                background: #00424f;
+                            }
+                            &.College{
+                                background: #0772b0;
+                            }
+                            &.Course{
+                                background: #5e6067;  
+                            }
+                            &.Masterclass{
+                                background: #910674; 
+                            }
+                            &.Symposium{
+                                background: #23c1fc; 
+                            }
+                            &.Virtual{
+                                background: #a2ad00;
+                            }
                     }
                     span{
                         padding: 15px 20px;
@@ -1493,13 +1547,23 @@ div#block-block-241 a:not(.btn) i {
     padding-bottom:40px!important;
 }
 input[value="Sign in"], input[value="Submit"], input[value="Next"]{
-    float: right;
-    width: 60px;
-    height: 30px;
-    padding: 5px;
+    float: none;
+    display: inline-block;
+    margin-bottom: 20px;
     background-color: #009fda;
-    text-align: center;
-    color: white;
+    border-width: 0px !important;
+    color: #fff !important;
+    font-size: 15px;
+    font-weight: 700;
+    font-family: Cairo;
+    padding: 10px 30px;
+    letter-spacing: 0.5px;
+    width: 100%;
+    &:hover{
+        color: #fff;
+        opacity: 0.9;
+        cursor: pointer;
+    }
 }
 #registerMember .submitMember{
     float: right;
@@ -1822,6 +1886,10 @@ div[aria-describedby="signupWebUser"]{
     width: 50vw !important;
     max-height: 80vh;
     overflow: hidden;
+    .ui-dialog-titlebar{
+        background: none;
+        border: none;
+    }
     #signupWebUser{
         overflow: auto;
         overflow-x: hidden;
@@ -1854,7 +1922,7 @@ div[aria-describedby="signupWebUser"]{
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
     background: none!important;
-    border: 0!important;
+    border: 1px solid #eceef0!important;
 }
 
 div[aria-describedby="loginPopWindow"].ui-dialog {
@@ -1863,8 +1931,24 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
     width: 400px !important;
     left: calc(~"50vw - 200px")!important;
     top: 30vh !important;
+    input.form-control{
+        background: none;
+        min-height: 41px;
+        margin: 10px 0;
+    }
     @media all and (max-width: @phone-width) {
         width: 300px !important;
         left: calc(~"50vw - 150px")!important;
+    }
+}
+
+#processWindow{
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    button{
+        margin: 10px 0;
+        min-width: 181px;
     }
 }

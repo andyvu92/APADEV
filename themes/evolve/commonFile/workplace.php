@@ -245,6 +245,10 @@ jQuery(document).ready(function() {
 	  $(this).removeClass("focuscss");
 	});
 
+	$("select").on("click",function() {
+		$(this).removeClass("focuscss");
+	  });
+
 	$("#tabmenu li").click(function(){
 		$(this).removeClass("warning");
 	});
