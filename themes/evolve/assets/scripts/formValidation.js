@@ -82,8 +82,8 @@ jQuery(document).ready(function($) {
 				if($("input[name=newPassword]").val() ==''){$("input[name=newPassword]").addClass("focuscss");}else{$("input[name=newPassword]").removeClass("focuscss");}
 			}
 			if($("select[name=MemberType]").val() ===''){$("select[name=MemberType]").addClass("focuscss");}else{$("select[name=MemberType]").removeClass("focuscss");}
-			if($("select[name=Branch]").val() ===''){$("select[name=Branch]").addClass("focuscss");}else{$("select[name=Branch]").removeClass("focuscss");}
-		    if($("input[name=Memberid]").val() =='' || !isValidEmailAddress($("input[name=Memberid]").val()) ||$("select[name=MemberType]").val() ===''||$("select[name=Branch]").val() ===''){
+			//if($("select[name=Branch]").val() ===''){$("select[name=Branch]").addClass("focuscss");}else{$("select[name=Branch]").removeClass("focuscss");}
+		    if($("input[name=Memberid]").val() =='' || !isValidEmailAddress($("input[name=Memberid]").val()) ||$("select[name=MemberType]").val() ===''){
 				return false;
 		    }
 			if($("input[name=Password]").length !==0) {
@@ -106,9 +106,9 @@ jQuery(document).ready(function($) {
 					if($("input[name=Wphone"+x+"]").val() ==''){$("input[name=Wphone"+x+"]").addClass("focuscss");}else{$("input[name=Wphone"+x+"]").removeClass("focuscss");}
 					if($("input[name=Wcountry"+x+"]").val() ==''){$("input[name=Wcountry"+x+"]").addClass("focuscss");}else{$("input[name=Wcountry"+x+"]").removeClass("focuscss");}
 					//if($("input[name=Wemail"+x+"]").val() ==''){$("input[name=Wemail"+x+"]").addClass("focuscss");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss");}
-					if (!isValidEmailAddress($("input[name=Wemail"+x+"]").val())) {$("input[name=Wemail"+x+"]").addClass("focuscss");$('#erroMessage').html("this email address is not valid");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss"); $('#errorMessage').html("");}
+					//if($("input[name=Wemail"+x+"]").val()!="") {if (!isValidEmailAddress($("input[name=Wemail"+x+"]").val())) {$("input[name=Wemail"+x+"]").addClass("focuscss");$('#erroMessage').html("this email address is not valid");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss"); $('#errorMessage').html("");}}
 					//if($("input[name=Wwebaddress"+x+"]").val() ==''){$("input[name=Wwebaddress"+x+"]").addClass("focuscss");}else{$("input[name=Wwebaddress"+x+"]").removeClass("focuscss");}
-					if($("input[name=Number-worked-hours"+x+"]").val() ==''){$("input[name=Number-worked-hours"+x+"]").addClass("focuscss");}else{$("input[name=Number-worked-hours"+x+"]").removeClass("focuscss");}
+					if($("select[name=Number-worked-hours"+x+"]").val() ==''){$("select[name=Number-worked-hours"+x+"]").addClass("focuscss");}else{$("select[name=Number-worked-hours"+x+"]").removeClass("focuscss");}
 				}
 							
 				for (x = 0; x<i;x++){

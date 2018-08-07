@@ -224,14 +224,18 @@ if(isset($_SESSION["UserId"])){
 		array_push($ListProductID ,$arrPID);
 			echo "<div class='flex-cell flex-flow-row'>";
 			echo	"<div class='flex-col-3'><span class='mobile-visible'>Product name: </span>".$productt['Title']."</div>";
-			echo	"<div class='flex-col-3 pd-spcart-date'><span class='start-date'>".$productt['Sdate']."</span><span class='end-date'>".$productt['Edate']."</span></div>";
+			$bdate = explode(" ",$productt['Sdate']);
+			$edate = explode(" ",$productt['Edate']);
+			$t = strtotime($bdate[0]);
+			$j = strtotime($edate[0]);
+			echo	"<div class='flex-col-3 pd-spcart-date'><span class='start-date'>".date("d M Y",$t)."</span><span class='end-date'>".date("d M Y",$j)."</span></div>";
 			echo	"<div class='flex-col-2 pd-spcart-location'><span class='mobile-visible'>Location: </span>".$productt['City'].", ".$productt['State']."</div>";
 			// add by jinghu
 			if($couponCode!=""){
-				echo	"<div class='flex-col-1 pd-spcart-price'><span class='mobile-visible'>Price: </span>".$productt['Product Cost With Coupon']."</div>";
+				echo	"<div class='flex-col-1 pd-spcart-price'><span class='mobile-visible'>Price: </span>".number_format($pd_detail['Product Cost With Coupon'],2)."</div>";
 			}
 			else{
-				echo	"<div class='flex-col-1 pd-spcart-price'><span class='mobile-visible'>Price: </span>".$productt['Product Cost Without Coupon']."</div>";
+				echo	"<div class='flex-col-1 pd-spcart-price'><span class='mobile-visible'>Price: </span>".number_format($pd_detail['Product Cost Without Coupon'],2)."</div>";
 			}
 			$discountPrice += $productt['Product Cost Without Coupon']-$productt['Product Cost With Coupon'];
 			// end add by jinghu

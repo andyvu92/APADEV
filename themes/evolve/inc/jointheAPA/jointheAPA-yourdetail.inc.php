@@ -31,6 +31,7 @@ if (isset($_POST['step1'])) {
     if (isset($_POST['Maiden-name'])) {
         $postData['Maiden-name'] = $_POST['Maiden-name'];
     }
+	else{ $postData['Maiden-name'] ="";}
     
     if (isset($_POST['Lastname'])) {
         $postData['Lastname'] = $_POST['Lastname'];
@@ -62,7 +63,7 @@ if (isset($_POST['step1'])) {
     
     if (isset($_POST['Mobile-area-code'])) {
         $postData['Mobile-area-code'] = $_POST['Mobile-area-code'];
-    }
+    }else {$postData['Mobile-area-code'] = "";}
     
     if (isset($_POST['Mobile-number'])) {
         $postData['Mobile-number'] = $_POST['Mobile-number'];
@@ -273,6 +274,7 @@ if (isset($_POST['step1'])) {
     if (isset($_POST['Branch'])) {
         $postData['Branch'] = $_POST['Branch'];
     }
+	
     
     if (isset($_SESSION['Regional-group'])) {
         $postData['Regional-group'] = $_SESSION['Regional-group'];
@@ -300,7 +302,7 @@ if (isset($_POST['step1'])) {
     } else {
         $postData['Findpublicbuddy'] = "False";
     }
-    if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} else{$postData['Dietary']=array();}
+   if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} else{$postData['Dietary']=array();}
     // Process workplace data
     
     if (isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ) {
@@ -441,12 +443,14 @@ if (isset($_POST['step1'])) {
             
             if (isset($_POST['WTreatmentarea' . $i])) {
                 $workplaceArray['SpecialInterestAreaID'] = implode(",", $_POST['WTreatmentarea' . $i]);
-            }
+            }else{
+				$workplaceArray['SpecialInterestAreaID'] = "";
+			}
             
             if (isset($_POST['Additionallanguage' . $i])) {
-                $workplaceArray['AdditionalLanguage'] = implode(",", $_POST['Additionallanguage' . $i]);
+				$workplaceArray['AdditionalLanguage'] = implode(",", $_POST['Additionallanguage' . $i]);
             }
-			else{ $workplaceArray['AdditionalLanguage'] = array();}
+			else{ $workplaceArray['AdditionalLanguage'] = ""; }
             
             array_push($tempWork, $workplaceArray);
         }
@@ -504,6 +508,7 @@ if (isset($_POST['step1'])) {
     
     if (isset($_SESSION['UserId'])) {
         $testdata = GetAptifyData("5", $postData);
+	
     } else {
         
         // for new user join a member call user registeration web service
@@ -690,16 +695,16 @@ if (isset($_SESSION['UserId'])):
                     
                     <!--BREAK-->
 
-                    <div class="col-xs-6 col-md-3">
+                    <!--<div class="col-xs-6 col-md-3">
                         <label for="">Maiden name</label>
                         <input type="text" class="form-control" name="Maiden-name" placeholder='Maiden name'<?php
-    if (empty($details['Maiden-name'])) {
+    /*if (empty($details['Maiden-name'])) {
         echo "";
     } else {
         echo 'value="' . $details['Maiden-name'] . '"';
-    }
+    }*/
 ?>>
-                    </div>
+                    </div>-->
                     <div class="col-xs-6 col-md-3">
                        <label for="">Family name<span class="tipstyle"> *</span></label>
                        <input type="text" class="form-control" name="Lastname" placeholder='Family name'<?php
@@ -805,16 +810,16 @@ if (isset($_SESSION['UserId'])):
                         <?php
     $_SESSION['country'] = $country;
 ?>
-                      <!--<div class="col-xs-6 col-md-3">
+                      <div class="col-xs-6 col-md-3">
                             <label for="">Area code</label>
                             <input type="text" class="form-control" name="area-code" placeholder='Area code'<?php
-    /*if (empty($details['Home-phone-areacode'])) {
+    if (empty($details['Home-phone-areacode'])) {
         echo "";
     } else {
         echo 'value="' . $details['Home-phone-areacode'] . '"';
-    }*/
+    }
 ?>  maxlength="5">
-                        </div>-->
+                        </div>
                         <div class="col-xs-12 col-md-3">
                             <label for="">Phone number</label>
                             <input type="text" class="form-control" name="phone-number" placeholder='Phone number'<?php
@@ -934,7 +939,7 @@ if (isset($_SESSION['UserId'])):
                     <!--BREAK-->
 
                     <div class="col-xs-6 col-md-3">
-                        <label for="">City or town<span class="tipstyle"> *</span></label>
+                        <label for="">City or Town<span class="tipstyle"> *</span></label>
                         <input type="text" class="form-control" name="Suburb" id="Suburb" placeholder='City or town'<?php
     if (empty($details['Suburb'])) {
         echo "";
@@ -1268,9 +1273,10 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
             </div>
             <div class="row">
             <div class="col-xs-12 col-md-6">
-                    <label for="">What branch would you like to join?<span class="tipstyle">*</span></label>
+                    <label for="">What branch would you like to join?</label>
                     <div class="chevron-select-box">
                     <select class="form-control" id="Branch" name="Branch">
+					<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>Please select</option>
                     <?php
     $Branchcode = file_get_contents("sites/all/themes/evolve/json/Branch.json");
     $Branch     = json_decode($Branchcode, true);
@@ -2012,7 +2018,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 
                         <div class="row">
                         <div class="col-xs-12 col-md-6">
-                            <label>Workplace setting</label>
+                            <label>Workplace setting<span class="tipstyle">*</span></label>
                             <div class="chevron-select-box">
                             <select class="form-control" id="Workplace-setting<?php
                                             echo $key;
@@ -2424,10 +2430,10 @@ if(isset($_GET['MT'])){
 
                         <!--BREAK-->
 
-                        <div class="col-xs-6 col-md-3">
+                        <!--<div class="col-xs-6 col-md-3">
                            <label for="">Maiden name</label>
                            <input type="text" class="form-control" name="Maiden-name">
-                        </div>
+                        </div>-->
                         <div class="col-xs-6 col-md-3">
                            <label for="">Family name<span class="tipstyle"> *</span></label>
                            <input type="text" class="form-control" name="Lastname">
@@ -2501,10 +2507,10 @@ if(isset($_GET['MT'])){
                                </select>
                                </div>
                             </div>
-                            <!--<div class="col-xs-6 col-md-3">
+                            <div class="col-xs-6 col-md-3">
                                 <label for="">Area code</label>
                                 <input type="text" class="form-control" name="area-code" maxlength="5">
-                            </div>-->
+                            </div>
                             <div class="col-xs-12 col-md-3">
                                 <label for="">Phone number</label>
                                 <input type="text" class="form-control" name="phone-number" >
@@ -2855,7 +2861,7 @@ if(isset($_GET['MT'])){
                 <input type="hidden" class="form-control" name="Specialty">
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
-                        <label for="">What branch would you like to join?<span class="tipstyle"> *</span></label>
+                        <label for="">What branch would you like to join?</label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="Branch" name="Branch">
                             <option value="" selected disabled>What branch would you like to join?</option>
@@ -3129,7 +3135,7 @@ if(isset($_GET['MT'])){
 <?php
 endif;
 ?> 
-<?php logRecorder();  ?>       
+      
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $(".chosen-select").chosen({width: "100%"});
@@ -3220,3 +3226,4 @@ echo json_encode($_SESSION['University']);
         $('input[name=addtionalNumber]').val(i);
     });
 </script>
+<?php logRecorder();  ?> 

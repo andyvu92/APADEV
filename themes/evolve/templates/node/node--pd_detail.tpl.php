@@ -1452,7 +1452,7 @@ if($resultdata['result']) {
 					}
 					else {
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-						echo "$".number_format($pd_detail['Cost'],2);
+						echo "$".number_format($pd_detail['Product Cost Without Coupon'],2);
 					}
 				}
 				else{
@@ -1481,17 +1481,20 @@ if($resultdata['result']) {
 
 			<span class="small-heading">Event status:</span>
 			<span>
-				<?php 
-				$Totalnumber = $pd_detail['Totalnumber'];
-				$Enrollednumber = $pd_detail['Enrollednumber'];
+			<?php 
+				$Totalnumber = doubleval($pd_detail['Totalnumber']);
+				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
 				$Now = strtotime(date('d-m-Y'));
+				$fullStatus = false;
 				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";  
-				} elseif($Totalnumber-$Enrollednumber<=5){
+					$fullStatus = true;
+				} elseif($Enrollednumber/$Totalnumber>=0.9 && $Enrollednumber/$Totalnumber<1){
 					echo "Almost Full"; 
 				} elseif(($Totalnumber-$Enrollednumber)==0){
 					echo "Full"; 
-				} elseif(($Totalnumber-$Enrollednumber)>5){
+					$fullStatus = true;
+				} elseif(($Enrollednumber/$Totalnumber)<0.9){
 					echo "Open"; 
 				}
 		 		?>
@@ -1542,15 +1545,13 @@ if($resultdata['result']) {
 			if(isset($_SESSION["UserId"])){
 				//$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
 				$userTag = checkPDUser($_SESSION['MemberTypeID']);
-				$closedate = strtotime($pd_detail['Close_date']);
-				$today = strtotime("today");
-				$t = $closedate < $today;
-				if($t) {
+				if($fullStatus) {
 					echo '<span class="add-to-card disable '.$pd_detail['Typeofpd'].'">Registration closed</span>';
 				} elseif ($userTag =="0"){ // any logged in users
 					if(isset($pd_detail['Typeofpd']) && $pd_detail['Typeofpd'] == "Course") {
 						if($_SESSION['MemberTypeID'] =='31' || $_SESSION['MemberTypeID'] =='32') {
 							echo '<span class="add-to-card disable '.$pd_detail['Typeofpd'].'"></span>';
+							// student message
 						} else {
 							echo '<a class="add-to-card '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
 						}
@@ -1584,7 +1585,7 @@ if($resultdata['result']) {
 					}
 					else {
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-						echo "$".number_format($pd_detail['Cost'],2);
+						echo "$".number_format($pd_detail['Product Cost Without Coupon'],2);
 					}
 				}
 				else{
@@ -1610,17 +1611,17 @@ if($resultdata['result']) {
 
 			<span class="small-heading">Event status:</span>
 			<span>
-				<?php 
-				$Totalnumber = $pd_detail['Totalnumber'];
-				$Enrollednumber = $pd_detail['Enrollednumber'];
+			<?php 
+				$Totalnumber = doubleval($pd_detail['Totalnumber']);
+				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
 				$Now = strtotime(date('d-m-Y'));
 				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";  
-				} elseif($Totalnumber-$Enrollednumber<=5){
+				} elseif($Enrollednumber/$Totalnumber>=0.9 && $Enrollednumber/$Totalnumber<1){
 					echo "Almost Full"; 
 				} elseif(($Totalnumber-$Enrollednumber)==0){
-					echo "Full"; 
-				} elseif(($Totalnumber-$Enrollednumber)>5){
+					echo "Full";
+				} elseif(($Enrollednumber/$Totalnumber)<0.9){
 					echo "Open"; 
 				}
 		 		?>

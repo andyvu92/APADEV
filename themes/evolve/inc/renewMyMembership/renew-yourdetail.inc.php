@@ -29,7 +29,7 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Firstname'])){ $postData['Firstname'] = $_POST['Firstname']; }
 	if(isset($_POST['Middle-name'])){ $postData['Middle-name'] = $_POST['Middle-name']; }
 	if(isset($_POST['Preferred-name'])){ $postData['Preferred-name'] = $_POST['Preferred-name']; }
-	if(isset($_POST['Maiden-name'])){ $postData['Maiden-name'] = $_POST['Maiden-name']; }
+	if(isset($_POST['Maiden-name'])){ $postData['Maiden-name'] = $_POST['Maiden-name']; } else{ $postData['Maiden-name'] ="";}
 	if(isset($_POST['Lastname'])){ $postData['Lastname'] = $_POST['Lastname']; }
 	if(isset($_POST['Birth'])){ $postData['birth'] = str_replace("-","/",$_POST['Birth']); }
 	if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
@@ -37,7 +37,7 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['area-code'])){ $postData['Home-area-code'] = $_POST['area-code']; }
 	if(isset($_POST['phone-number'])){ $postData['Home-phone-number'] = $_POST['phone-number']; }
 	if(isset($_POST['Mobile-country-code'])){ $postData['Mobile-country-code'] = $_POST['Mobile-country-code']; }
-	if(isset($_POST['Mobile-area-code'])){ $postData['Mobile-area-code'] = $_POST['Mobile-area-code']; }
+	if(isset($_POST['Mobile-area-code'])){ $postData['Mobile-area-code'] = $_POST['Mobile-area-code']; } else {$postData['Mobile-area-code'] = "";}
 	if(isset($_POST['Mobile-number'])){ $postData['Mobile-number'] = $_POST['Mobile-number']; }
     if(isset($_POST['Aboriginal'])){ $postData['Aboriginal'] = $_POST['Aboriginal']; }
 	/***put the logic when post Pobox******/
@@ -151,12 +151,13 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['MAdditionallanguage'])){ $postData['PAdditionalLanguageID'] = implode(",",$_POST['MAdditionallanguage']); }
 	
 	if(isset($_POST['Findpublicbuddy'])){ $postData['Findpublicbuddy'] = $_POST['Findpublicbuddy']; } else{ $postData['Findpublicbuddy'] = "False";}
-	if(isset($_POST['Dietary'])){ 
+	/*if(isset($_POST['Dietary'])){ 
 		$testD['ID']=$_POST['Dietary'];
 		$testDietaryArray = array();
 		array_push($testDietaryArray, $testD);
 		$postData['Dietary'] = $testDietaryArray;
-	}
+	}*/
+	if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} else{$postData['Dietary']=array();}
 	if(isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ){ 
 	$num = $_POST['wpnumber']; 
 	$tempWork = array();
@@ -190,8 +191,8 @@ if(isset($_POST['step1'])) {
 		if(isset($_POST['Homehospital'.$i])) { $workplaceArray['Homehospital'] = $_POST['Homehospital'.$i];} else {$workplaceArray['Homehospital']="False";}
 		if(isset($_POST['MobilePhysio'.$i])) { $workplaceArray['MobilePhysio'] = $_POST['MobilePhysio'.$i];}else {$workplaceArray['MobilePhysio']="False";}
 		if(isset($_POST['Number-worked-hours'.$i])) { $workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours'.$i];}
-		if(isset($_POST['WTreatmentarea'.$i])){ $workplaceArray['SpecialInterestAreaID'] = implode(",",$_POST['WTreatmentarea'.$i]); }
-		if(isset($_POST['Additionallanguage'.$i])){ $workplaceArray['AdditionalLanguage'] = implode(",",$_POST['Additionallanguage'.$i]); } else{ $workplaceArray['AdditionalLanguage'] = array();}
+		if(isset($_POST['WTreatmentarea'.$i])){ $workplaceArray['SpecialInterestAreaID'] = implode(",",$_POST['WTreatmentarea'.$i]); } else { $workplaceArray['SpecialInterestAreaID'] = ""; }
+		if(isset($_POST['Additionallanguage'.$i])){ $workplaceArray['AdditionalLanguage'] = implode(",",$_POST['Additionallanguage'.$i]); } else{ $workplaceArray['AdditionalLanguage'] = "";}
 		array_push($tempWork, $workplaceArray);
 	}
         $postData['Workplaces'] =  $tempWork ;
@@ -364,17 +365,17 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				</div>
 				
 				<div class="row">
-					<div class="col-xs-6 col-md-3">
+					<!--<div class="col-xs-6 col-md-3">
 						<label for="">Maiden name</label>
-					   <input type="text" class="form-control" name="Maiden-name" <?php if (empty($details['Maiden-name'])) {echo "placeholder='Maiden name'";}   else{ echo 'value="'.$details['Maiden-name'].'"'; }?>>
-					</div>
+					   <input type="text" class="form-control" name="Maiden-name" <?php /*if (empty($details['Maiden-name'])) {echo "placeholder='Maiden name'";}   else{ echo 'value="'.$details['Maiden-name'].'"'; }*/?>>
+					</div>-->
 					<div class="col-xs-6 col-md-3">
 					   <label for="">Family name<span class="tipstyle"> *</span></label>
 					   <input type="text" class="form-control" name="Lastname" <?php if (empty($details['Lastname'])) {echo "placeholder='Family name'";}   else{ echo 'value="'.$details['Lastname'].'"'; }?>>
 					</div>
 
 					<div class="col-xs-6 col-md-3">
-					    <label for="">Birth Date<span class="tipstyle"> *</span></label>
+					    <label for="">Birth date<span class="tipstyle"> *</span></label>
 					    <input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?>>
 					</div>
 					<div class="col-xs-6 col-md-3">
@@ -504,10 +505,10 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						</select>
 						</div>
 					</div>
-					<div class="col-xs-6 col-md-3">
+					<!--<div class="col-xs-6 col-md-3">
 						<label for="">Area code</label>
-						<input type="text" class="form-control" name="Mobile-areacode" <?php if (empty($details['Mobile-area-code'])) {echo "placeholder='Mobile Area code'";}   else{ echo 'value="'.$details['Mobile-area-code'].'"'; }?>  maxlength="5">
-					</div>
+						<input type="text" class="form-control" name="Mobile-areacode" <?php /*if (empty($details['Mobile-area-code'])) {echo "placeholder='Mobile Area code'";}   else{ echo 'value="'.$details['Mobile-area-code'].'"'; }*/?>  maxlength="5">
+					</div>-->
 					<div class="col-xs-12 col-md-6">
 						<label for="">Mobile number</label>
 						<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  >
@@ -541,7 +542,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				
 				<div class="row">
 					<div class="col-xs-6 col-md-3">
-					   <label for="">City or town<span class="tipstyle"> *</span></label>
+					   <label for="">City or Town<span class="tipstyle"> *</span></label>
 					   <input type="text" class="form-control" name="Suburb" id="Suburb" <?php if (empty($details['Suburb'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Suburb'].'"'; }?>>
 					</div>
 
@@ -757,9 +758,10 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<input type="hidden"  name="Specialty"  <?php   echo 'value="'.$details['Specialty'].'"'; ?>>
 				<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<label for="">What branch would you like to join?<span class="tipstyle"> *</span></label>
+					<label for="">What branch would you like to join?</label>
 					<div class="chevron-select-box">
 					<select class="form-control" id="Branch" name="Branch">
+					<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>Please select</option>
 						<?php 
 							$Branchcode  = file_get_contents("sites/all/themes/evolve/json/Branch.json");
 							$Branch=json_decode($Branchcode, true);
@@ -1162,9 +1164,9 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 
 				<div class="row">
 					<div class="col-xs-12 col-md-6">
-						<label>Workplace setting</label>
+						<label>Workplace setting<span class="tipstyle">*</span></label>
 						<div class="chevron-select-box">	
-						<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting0">
+						<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting<?php echo $key;?>">
 						<?php
 							// 2.2.36 - get workplace settings list
 							// Send - 

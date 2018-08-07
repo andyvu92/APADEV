@@ -12,7 +12,7 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Firstname'])){ $postData['Firstname'] = $_POST['Firstname']; }
 	if(isset($_POST['Middle-name'])){ $postData['Middle-name'] = $_POST['Middle-name']; }
 	if(isset($_POST['Preferred-name'])){ $postData['Preferred-name'] = $_POST['Preferred-name']; }
-	if(isset($_POST['Maiden-name'])){ $postData['Maiden-name'] = $_POST['Maiden-name']; }
+	if(isset($_POST['Maiden-name'])){ $postData['Maiden-name'] = $_POST['Maiden-name']; }else{ $postData['Maiden-name'] ="";}
 	if(isset($_POST['Lastname'])){ $postData['Lastname'] = $_POST['Lastname']; }
 	if(isset($_POST['Birth'])){ $postData['birth'] = str_replace("-","/",$_POST['Birth']); }
 	if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
@@ -20,7 +20,7 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['area-code'])){ $postData['Home-area-code'] = $_POST['area-code']; }
 	if(isset($_POST['phone-number'])){ $postData['Home-phone-number'] = $_POST['phone-number']; }
 	if(isset($_POST['Mobile-country-code'])){ $postData['Mobile-country-code'] = $_POST['Mobile-country-code']; }
-	if(isset($_POST['Mobile-area-code'])){ $postData['Mobile-area-code'] = $_POST['Mobile-area-code']; }
+	if(isset($_POST['Mobile-area-code'])){ $postData['Mobile-area-code'] = $_POST['Mobile-area-code']; }else {$postData['Mobile-area-code'] = "";}
 	if(isset($_POST['Mobile-number'])){ $postData['Mobile-number'] = $_POST['Mobile-number']; }
     if(isset($_POST['Aboriginal'])){ $postData['Aboriginal'] = $_POST['Aboriginal']; }
 	/***put the logic when post Pobox******/
@@ -178,8 +178,8 @@ if(isset($_POST['step1'])) {
 		if(isset($_POST['Homehospital'.$i])) { $workplaceArray['Homehospital'] = $_POST['Homehospital'.$i];} else {$workplaceArray['Homehospital']="False";}
 		if(isset($_POST['MobilePhysio'.$i])) { $workplaceArray['MobilePhysio'] = $_POST['MobilePhysio'.$i];}else {$workplaceArray['MobilePhysio']="False";}
 		if(isset($_POST['Number-worked-hours'.$i])) { $workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours'.$i];}
-		if(isset($_POST['WTreatmentarea'.$i])){ $workplaceArray['SpecialInterestAreaID'] = implode(",",$_POST['WTreatmentarea'.$i]); }
-		if(isset($_POST['Additionallanguage'.$i])){ $workplaceArray['AdditionalLanguage'] = implode(",",$_POST['Additionallanguage'.$i]); }else{ $workplaceArray['AdditionalLanguage'] = array();}
+		if(isset($_POST['WTreatmentarea'.$i])){ $workplaceArray['SpecialInterestAreaID'] = implode(",",$_POST['WTreatmentarea'.$i]); }else { $workplaceArray['SpecialInterestAreaID'] = ""; }
+		if(isset($_POST['Additionallanguage'.$i])){ $workplaceArray['AdditionalLanguage'] = implode(",",$_POST['Additionallanguage'.$i]); }else{ $workplaceArray['AdditionalLanguage'] = "";}
 		array_push($tempWork, $workplaceArray);
 	}
         $postData['Workplaces'] =  $tempWork ;
@@ -220,7 +220,8 @@ if(isset($_POST['step1'])) {
 	// Send - 
 	// UserID 
 	// Response - UserID & detail data
-	GetAptifyData("5", $postData);
+	$test = GetAptifyData("5", $postData);
+	
 	unset($_SESSION["Regional-group"]);
 	/*General function: save data to APA shopping cart database;*/
 	/*Parameters: $userID, $productID,$type;*/
@@ -331,7 +332,6 @@ if(isset($_POST["setCardID"]) && $_POST["setCardID"] != ""){
 	// UserID, Creditcard-ID
 	// Response -
 	// N/A.
-	echo "End here";
 	$updateCards = GetAptifyData("13", $updateCardSubmit); 
 	//print_r($updateCards);
 	
@@ -444,10 +444,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<input type="text" class="form-control" name="Middle-name" <?php if (empty($details['Middle-name'])) {echo "placeholder='Middle name'";}   else{ echo 'value="'.$details['Middle-name'].'"'; }?>>
 							</div>
 
-							<div class="col-xs-12 col-sm-6 col-md-6">
+							<!--<div class="col-xs-12 col-sm-6 col-md-6">
 								<label for="">Maiden name</label>
-								<input type="text" class="form-control" name="Maiden-name"  <?php if (empty($details['Maiden-name'])) {echo "placeholder='Maiden name'";}   else{ echo 'value="'.$details['Maiden-name'].'"'; }?>>
-							</div>
+								<input type="text" class="form-control" name="Maiden-name"  <?php /*if (empty($details['Maiden-name'])) {echo "placeholder='Maiden name'";}   else{ echo 'value="'.$details['Maiden-name'].'"'; }*/?>>
+							</div>-->
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
 								<label for="">Family name<span class="tipstyle"> *</span></label>
@@ -590,10 +590,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								</select>
 								</div>
 							</div>
-							<div class="col-xs-4 col-sm-3 col-md-2">
+							<!--<div class="col-xs-4 col-sm-3 col-md-2">
 								<label for="">Area code</label>
 								<input type="text" class="form-control" name="Mobile-area-code" <?php if (empty($details['Mobile-area-code'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Mobile-area-code'].'"'; }?> maxlength="5">
-							</div>
+							</div>-->
 							<div class="col-xs-8 col-sm-6 col-md-4">
 								<label for="">Mobile number</label>
 								<input type="text" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  >
@@ -826,9 +826,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 
 						<div class="col-xs-12 col-md-6">
-							<label for="">Your Branch<span class="tipstyle"> *</span></label>
+							<label for="">Your Branch</label>
 							<div class="chevron-select-box">
-							<select class="form-control" name="Branch" id="Branch" disabled>
+							<select class="form-control" name="Branch" id="Branch">
+							<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>Please select</option>
 								<?php 
 								$Branchcode  = file_get_contents("sites/all/themes/evolve/json/Branch.json");
 								$Branch=json_decode($Branchcode, true);
@@ -1232,7 +1233,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 
 						<div class="row">
 							<div class="col-xs-6 col-md-6">
-								<label for="Wcity<?php echo $key;?>">City/Town<span class="tipstyle"> *</span></label>
+								<label for="Wcity<?php echo $key;?>">City or Town<span class="tipstyle"> *</span></label>
 								<input type="text" class="form-control" name="Wcity<?php echo $key;?>" id="Wcity<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wcity'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wcity'].'"'; }?> required>
 							</div>
 
@@ -1414,9 +1415,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<div class="row">
 
 							<div class="col-xs-12 col-md-6">
-								<label>Workplace setting</label>
+								<label>Workplace setting<span class="tipstyle">*</span></label>
 								<div class="chevron-select-box">
-								<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting0" required>
+								<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting<?php echo $key;?>" required>
 								<?php
 							// 2.2.36 - get workplace settings list
 							// Send - 
