@@ -74,12 +74,11 @@ var list = $(".accordian-container");
 });
 
 //READMORE
-jQuery(document).ready(function ($) {
-  var lineHeight = 20;
-  var numLines = 10;
-  $('.readmore').readmore({
-    collapsedHeight: lineHeight * numLines,
-    heightMargin: lineHeight * 1
+jQuery(document).ready(function($) {
+  $('.pd-description-mobile .readmore').readmore({
+    speed: 800,
+    collapsedHeight: 207,
+    lessLink: '<a class="readless-link" href="#" onclick="topFunction()">Read less</a>',
   });
 });
 
@@ -87,44 +86,19 @@ jQuery(document).ready(function ($) {
 
 // When the user clicks on the button, scroll to the top of the document
 function topFunction() {
-    //document.body.scrollTop = 0; // For Safari
-    //document.documentElement.scrollTop = 50; // For Chrome, Firefox, IE and Opera
     jQuery(document).ready(function(){
       $("html, body").animate({ scrollTop: "280" }, 600);
     });
 }
 
+function topFunction215() {
+  jQuery(document).ready(function(){
+    $("html, body").animate({ scrollTop: "215" }, 600);
+  });
+}
+
 //-------------------------------------
 jQuery(document).ready(function() {
-  /******************************
-      BOTTOM SCROLL TOP BUTTON
-   ******************************/
-
-  // declare variable
-  var scrollTop = $(".scrollTop");
-
-  $(window).scroll(function() {
-    // declare variable
-    var topPos = $(this).scrollTop();
-
-    // if user scrolls down - show scroll to top button
-    if (topPos > $(document).height()*0.8) {
-      $(scrollTop).css("opacity", "1");
-
-    } else {
-      $(scrollTop).css("opacity", "0");
-    }
-
-  }); // scroll END
-
-  //Click event to scroll to top
-  $(scrollTop).click(function() {
-    $('html, body').animate({
-      scrollTop: 400
-    }, 600);
-    return false;
-
-  }); // click() scroll top EMD
 
   /*************************************
     LEFT MENU SMOOTH SCROLL ANIMATION
