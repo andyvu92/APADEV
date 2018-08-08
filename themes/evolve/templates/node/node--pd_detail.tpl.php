@@ -478,7 +478,7 @@ if($resultdata['result']) {
 		<div class="section description">
 			<div class="pd-description-mobile">
 				<div class="readmore">
-					<div class="pd-descriptionM">
+					<div class="pd-description">
 						<?php 
 						if (!empty($pd_detail['Description'])){
 							echo $pd_detail['Description'];
@@ -492,16 +492,32 @@ if($resultdata['result']) {
 			</div>
 
 			<div class="pd-description-nonmobile">
-				<div class="pd-descriptionN">
+				<div class="pd-description">
 					<?php 
 					if (!empty($pd_detail['Description'])){
-						echo $pd_detail['Description'];
+						if (strlen($pd_detail['Description']) > 600){
+							echo '<div class="readmore">';
+							echo $pd_detail['Description'];
+							echo '</div>';
+						}
+						else{
+							echo $pd_detail['Description'];
+						}	
 					}
 					else{
 						echo "<h4>No record found!</h4>";
 					}
 					?>
 				</div>
+				<script>
+					jQuery(document).ready(function($) {
+						$('.pd-description-nonmobile .readmore').readmore({
+							collapsedHeight: 233,
+							lessLink: '<a class="readless-link" href="#" onclick="topFunction215()">Read less</a>',
+							speed: 500,
+						});
+					});
+				</script>
 			</div>
 		</div>
 
@@ -539,16 +555,33 @@ if($resultdata['result']) {
 				<div class="left-icon">
 					<span class="presenters-bio-icon large-icon"></span>
 				</div>
-				<div class="right-content">
+				<div class="right-content presenters-bio">
 					<h2 class="blue-heading">Presenter's bio</h2>
 					<p>
 						<?php 
 						foreach($pd_detail['Presenter'] as $bios) {
 							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
 							echo '<p>'.$bios['Comments'].'</p><br>';
+
+							if (strlen($pd_detail['Presenter']) > 300){
+								echo '<div class="readmore">';
+								echo $pd_detail['Presenter'];
+								echo '</div>';
+							}
+							else{
+								echo $pd_detail['Presenter'];
+							}
 						}
 						?>
 					</p>
+					<script>
+					jQuery(document).ready(function($) {
+						$('.presenters-bio .readmore').readmore({
+							collapsedHeight: 133,
+							speed: 500,
+						});
+					});
+				</script>
 				</div>
 			</div>
 		<?php endif; ?>
