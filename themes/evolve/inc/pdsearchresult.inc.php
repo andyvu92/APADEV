@@ -105,6 +105,7 @@ if(isset($results['MResponse'])) {
 
 <h3 class="light-lead-heading align-center">PD BASED ON YOUR PROFILE</h3>
 <?php if($outputEmpty): ?>
+	<?php //This is for when there is no result on PD search ?>
 	<b stlye="text-align: center;">No result found!</b>
 <?php else: ?>
 <?php
