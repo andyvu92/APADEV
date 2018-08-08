@@ -78,7 +78,12 @@ $background = getBackgroundImage($userID);
 </div>
 <?php logRecorder(); ?>
 <div id="privacypolicyWindow" style="display:none;">
-	<h3>APA privacy policy</h3>
+	<div class="modal-header">
+		<button type="button" class="apa_policy_button close" data-dismiss="modal">×</button>
+		<h4 class="modal-title">APA privacy policy</h4>
+	</div>
+
+	<div class="modal-body">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
 	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
 	<h5 class="doc-header">Our Commitment to Your Privacy</h5>
@@ -292,12 +297,16 @@ Facsimile: (03) 9092 0899</p>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
 		<input class="styled-checkbox" type="checkbox" id="privacypolicyp" checked name="privacy-policy">
-		<label for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label>
+		<label class="apa_policy_button" for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreePolicyDescription"> 
         Please agree to the APA Privacy Policy to continue with your membership
 	</div> 
-	<button type="button" class="btn btn-default" id="apa_policy_button">Submit</button>	
+	</div>
+
+	<div class="modal-footer">
+	<button type="button" class="btn btn-default apa_policy_button">Submit</button>
+	</div>	
 </div>
 <div id="installmentpolicyWindow" style="display:none;">
 	<h3>APA installment policy</h3>

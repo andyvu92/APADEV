@@ -259,7 +259,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 				</ul>
 				
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<input class="styled-checkbox" type="checkbox" id="insuranceTerms" checked>
+					<input class="styled-checkbox" type="checkbox" id="insuranceTerms" data-dismiss="modal">
 					<label for="insuranceTerms">Yes. I’ve read and understand the insurance terms and conditions</label>
 				</div>   
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeDescription"> 

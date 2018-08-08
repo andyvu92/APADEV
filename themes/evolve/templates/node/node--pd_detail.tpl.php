@@ -736,7 +736,7 @@ if($resultdata['result']) {
 		
 	 <div id="myMap">
                  
-        <h4 class="modal-title">View map</h4>
+        <h4 class="modal-title">Event location</h4>
 
                                <?php
     if(strlen($pd_detail['AddressLine1']) > 5){
@@ -1076,7 +1076,7 @@ if($resultdata['result']) {
 
 				   <div class="col-xs-12">
 					<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance" required>
-					<label for="Professional-insurance">I have current adequate professional indemnity insurance.</label>
+					<label for="Professional-insurance">I have current and adequate professional indemnity insurance.</label>
 				   </div>
 
 				   <div class="col-xs-12">
@@ -1445,8 +1445,8 @@ if($resultdata['result']) {
 
 </div>
 
-<!---End Sign up Web User--->
-<!---Member update detail-->
+<!--End Sign up Web User-->
+<!--Member update detail-->
  <?php if(isset($details)): ?>
 <div id="registerPDUser">
 	<form action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" autocomplete="off" >
@@ -1458,7 +1458,7 @@ if($resultdata['result']) {
 		<div class="row">
 		   <div class="col-lg-12">
 				<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance1"  required>
-				<label for="Professional-insurance1">I have current adequate professional indemnity insurance.</label>
+				<label for="Professional-insurance1">I have current and adequate professional indemnity insurance.</label>
 		   </div>
 		</div>
 		<div class="row">
@@ -1537,7 +1537,7 @@ if($resultdata['result']) {
 		</div>
 
 		<div class="session-register-info">
-			<span class="small-heading">Tickets:</span>
+			<span class="small-heading">Price:</span>
 			<span>
 				<?php 
 				$priceList = array();
@@ -1671,7 +1671,7 @@ if($resultdata['result']) {
 <div class="acordian-label">At a glance</div>
 <div class="accordian-content">
 	<div class="session-register-info">
-			<span class="small-heading">Tickets:</span>
+			<span class="small-heading">Price:</span>
 			<span>
 				<?php 
 				$priceList = array();

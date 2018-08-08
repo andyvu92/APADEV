@@ -1105,8 +1105,12 @@ jQuery(document).ready(function($) {
 		$('a.join-details-button7').removeClass('disabled');
 	}
 	});
-	$('#apa_policy_button').click(function() {
-		$('#privacypolicyWindow').dialog('close');
+	$('.apa_policy_button').click(function() {
+		$('[aria-describedby=privacypolicyWindow]').fadeOut();
+	});
+	
+	$('#privacypolicyl').click(function() {
+		$('[aria-describedby=privacypolicyWindow]').fadeIn();
 	});
 	/*  end check APA policy*/
 	/*  check Installment policy*/

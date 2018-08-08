@@ -402,19 +402,41 @@ div[aria-describedby="deleteCardWindow"] .ui-dialog-content{
 div[aria-describedby="privacypolicyWindow"].ui-dialog, 
 div[aria-describedby="installmentpolicyWindow"].ui-dialog {
     z-index: 1050 !important;
-    width: 50%!important;
-    overflow-y: hidden!important;
-    position: fixed!important;
-    top: 20%!important;
-    left: 25%!important;
-    @media all and (max-width: @tablet-width) {
-        width: 70%!important;
-        left: 15%!important;
+    width: 700px !important;
+    overflow: hidden !important;
+    position: fixed !important;
+    top: 15vh !important;
+    height: 70vh!important;
+    left: calc(~"50vw - 350px") !important;
+    .ui-draggable-handle{
+        display: none;
     }
-    @media all and (max-width: @phone-width) {
-        width: 80%!important;
-        left: 10%!important;
-        top: 15%!important;
+    #privacypolicyWindow, #installmentpolicyWindow{
+        overflow: hidden!important;
+        padding: 0!important;
+        .modal-body{
+           max-height: 55vh!important;
+           padding: 10px 0;
+           overflow-y: auto;
+        }
+        .modal-footer{
+           margin: 0;
+        }
+        @media all and (max-width: @larger-phone-width){
+           .modal-body{
+               max-height: 300px!important;
+            }
+        }
+    }
+    @media all and (max-width: @tablet-width) {
+        width: 500px!important;
+        left: calc(~"50vw - 250px") !important;
+    }
+    @media all and (max-width: @larger-phone-width) {
+        width: 300px!important;
+        left: calc(~"50vw - 150px") !important;
+        top: 10vh !important;
+        height: 80vh!important;
     }
 }
 div[aria-describedby="privacypolicyWindow"] .ui-widget-header{
@@ -1002,13 +1024,14 @@ a#insuranceControl{
     float: right;
     margin-bottom: 20px;
     margin-top: 4px;
-	background-color: @bright-blue;
+    background-color: #009fda;
     border-width: 0px !important;
     color: #fff;
-    text-transform: uppercase;
-    font-size: 12px;
-    font-weight: 300;
-    font-family: 'Roboto';
+    font-size: 15px;    
+    padding: 3px 20px;
+    min-width: 110px;
+    font-weight: 600;
+    font-family: Cairo;
     &:hover{
         color: #fff;
         opacity: 0.9;
@@ -2849,80 +2872,6 @@ form{
     }
  }
 
- /*POLICY POPUPS */
-
- #privacypolicyWindow, #installmentpolicyWindow{
-     max-height: 600px!important;
-     @media all and (max-width: @larger-phone-width){
-         max-height: 300px!important;
-     }
-    .styled-checkbox {
-        position: absolute; /* take it out of document flow */
-        opacity: 0; /* hide it */
-      
-        & + label {
-          position: relative;
-          cursor: pointer;
-          padding: 0;
-          display: flex;
-          text-align: left;
-        }
-      
-        /* Box. */
-        & + label:before {
-          content: '';
-          margin-right: 20px;
-          display: inline-block;
-          vertical-align: text-top;
-          width: 20px;
-          min-width: 20px;
-          height: 20px;
-          background: none;
-          box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
-        }
-      
-        /* Box hover */
-        &:hover + label:before {
-          background: none;
-        }
-      
-        /* Box checked */
-        &:checked + label:before {
-          background: none;
-        }
-        
-        /* Disabled state label. */
-        &:disabled + label {
-          color: #b8b8b8;
-          cursor: auto;
-        }
-      
-        /* Disabled box. */
-        &:disabled + label:before {
-          box-shadow: none;
-          background: #fff;
-        }
-      
-        /* Checkmark. Could be replaced with an image */
-        &:checked + label:after {
-          content: '';
-          position: absolute;
-          left: 5px;
-          top: 10px;
-          background: #000;
-          width: 2px;
-          height: 2px;
-          box-shadow: 
-            2px 0 0 #000,
-            4px 0 0 #000,
-            4px -2px 0 #000,
-            4px -4px 0 #000,
-            4px -6px 0 #000,
-            4px -8px 0 #000;
-          transform: rotate(45deg);
-        }
-      }
- }
  
  .page-node-154, .page-node-211, .page-node-209, 
  .page-node-207, .page-node-385, .page-node-388,

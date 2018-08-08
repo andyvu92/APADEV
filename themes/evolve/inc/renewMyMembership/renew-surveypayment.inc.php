@@ -125,14 +125,16 @@ if(isset($_POST['step2-1'])) {
 				<label for="prftag" id="prftagAgree">No, I do not want to make a donation to the PRF</label>
 			</div>
 			<div class="col-xs-6 col-md-3">
-				<select class="form-control" id="PRF" name="PRF">
-					<option value="5" selected>$5.00</option>
-					<option value="10">$10.00</option>
-					<option value="20">$20.00</option>
-					<option value="50">$50.00</option>
-					<option value="100">$100.00</option>
-					<option value="Other">Other</option>
-				</select>
+				<div class="chevron-select-box">
+					<select class="form-control" id="PRF" name="PRF">
+						<option value="5" selected>$5.00</option>
+						<option value="10">$10.00</option>
+						<option value="20">$20.00</option>
+						<option value="50">$50.00</option>
+						<option value="100">$100.00</option>
+						<option value="Other">Other</option>
+					</select>
+				</div>
 				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="">
 				<a style="color: black;" id="PRFDescription">What is this?</a>
 				
@@ -150,18 +152,20 @@ if(isset($_POST['step2-1'])) {
 		<div class="row">	
 		<div class="col-xs-12 col-sm-6">				
 			<fieldset>
-				<select id="Paymentcard" name="Paymentcard">
-				<?php
-						foreach( $cardsnum["results"] as $cardnum) {
-							echo '<option value="'.$cardnum["Creditcards-ID"].'"';
-							if($cardnum["IsDefault"]=="1") {
-							echo "selected ";
-						}
-						echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
-						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
-						}
-				?>
-				</select>
+				<div class="chevron-select-box">
+					<select id="Paymentcard" name="Paymentcard">
+					<?php
+							foreach( $cardsnum["results"] as $cardnum) {
+								echo '<option value="'.$cardnum["Creditcards-ID"].'"';
+								if($cardnum["IsDefault"]=="1") {
+								echo "selected ";
+							}
+							echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
+							echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+							}
+					?>
+					</select>
+				</div>
 			</fieldset>
 			</div>
 		</div> 
@@ -172,17 +176,19 @@ if(isset($_POST['step2-1'])) {
 	<div id="anothercardBlock" class="display-none row">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
-				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-				<?php 
-					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
-					$PaymentType=json_decode($PaymentTypecode, true);
-					foreach($PaymentType  as $pair => $value){
-						echo '<option value="'.$PaymentType[$pair]['ID'].'"';
-						echo '> '.$PaymentType[$pair]['Name'].' </option>';
-						
-					}
-				?>
-				</select>
+				<div class="chevron-select-box">
+					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
+					<?php 
+						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+						$PaymentType=json_decode($PaymentTypecode, true);
+						foreach($PaymentType  as $pair => $value){
+							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+							echo '> '.$PaymentType[$pair]['Name'].' </option>';
+							
+						}
+					?>
+					</select>
+				</div>
 			</div>
 		</div>
 		<div class="row">
@@ -214,17 +220,19 @@ if(isset($_POST['step2-1'])) {
 	<div id="anothercardBlock" class="row">					   
 		<div class="row">
 			<div class="col-xs-6 col-sm-6">
-				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-					<?php 
-					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
-					$PaymentType=json_decode($PaymentTypecode, true);
-					foreach($PaymentType  as $pair => $value){
-						echo '<option value="'.$PaymentType[$pair]['ID'].'"';
-						echo '> '.$PaymentType[$pair]['Name'].' </option>';
-						
-					}
-				?>	
-				</select>
+				<div class="chevron-select-box">
+					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
+						<?php 
+						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+						$PaymentType=json_decode($PaymentTypecode, true);
+						foreach($PaymentType  as $pair => $value){
+							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+							echo '> '.$PaymentType[$pair]['Name'].' </option>';
+							
+						}
+					?>	
+					</select>
+				</div>
 			</div>
 		</div>
 		<div class="row">

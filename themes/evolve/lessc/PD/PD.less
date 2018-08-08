@@ -15,7 +15,12 @@
     .region {
         .region-right-sidebar, .post-content{
            .top-banner, .mobile-top-banner{
-               background-size: cover;
+                background-size: cover;
+                border-bottom: 5px solid #ffa02f;
+                background: url(/sites/default/files/pd-featured-images/lecture-image.png) no-repeat center center;
+                    .pd-type{
+                        background: #ffa02f;
+                    }  
                &.Lecture{
                 border-bottom: 5px solid #ffa02f;
                 background: url(/sites/default/files/pd-featured-images/lecture-image.png) no-repeat center center;
@@ -963,6 +968,9 @@ body.page-node{
                     background: #009fda;
                     border-top: 1px solid #fff;
                     font-family: Roboto;
+                    .add-to-cart{
+                        background: #ffa02f; 
+                    }
                     &.Lecture{
                         .add-to-cart{
                             background: #ffa02f; 
@@ -1658,6 +1666,7 @@ div[aria-describedby="registerMember"].ui-dialog{
             select{
                 min-height: 48px;
                 border: 1px solid #eceef0;
+                width: 100%;
             }
             input{
                 background: none;
@@ -1666,8 +1675,13 @@ div[aria-describedby="registerMember"].ui-dialog{
             label{
                 margin-bottom: 6px;
             }
-            .locked:before{
-                bottom: 20px;
+            .locked{
+                :before{
+                    bottom: 20px;
+                }
+                @media all and (max-width: @desktop-width) {
+                    bottom: 12px;
+                }
             }
             .down22{
                 .question-boxes{
@@ -1685,11 +1699,23 @@ div[aria-describedby="registerMember"].ui-dialog{
             .chevron-select-box::after{
                 top: 15px;
             }
+            div[class^="col-xs-"]{
+                padding-left: 15px!important;
+                padding-right: 15px!important;
+            }
+            .none-padding{
+                margin-left: -15px;
+                margin-right: -15px;
+            }
         }
     }
     @media all and (max-width: @tablet-width) {
-        left: calc(50vw - 250px)!important;
+        left: calc(~"50vw - 250px")!important;
         width: 500px !important;
+    }
+    @media all and (max-width: @larger-phone-width) {
+        left: calc(~"50vw - 150px")!important;
+        width: 300px !important;
     }
 }
 div[aria-describedby="deleteConfirmwindow"].ui-dialog {
