@@ -1003,7 +1003,7 @@ jQuery(document).ready(function($) {
 	 /*   Membership Types questions end   */
 
 	/*insurance page for join a new member */
-	$('#join-insurance-form2 input').click(function() {
+	$('#join-insurance-form2 input, #renew-insurance-form2 input').click(function() {
        if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked"))
 	   { 
 			
@@ -1015,6 +1015,16 @@ jQuery(document).ready(function($) {
             $( "#insuranceStatus" ).val('0');				
 		}
     });
+	if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked"))
+   { 
+		
+		$( "#insuranceStatus" ).val('1');			
+   }
+   else if($('#Claim2').is(":checked") && $('#Facts2').is(":checked") && $('#Disciplinary2').is(":checked") && $('#Decline2').is(":checked") && $('#Oneclaim2').is(":checked")){
+		
+	   
+		$( "#insuranceStatus" ).val('0');				
+	}
 	/*delete PRF from member shoppingcart  */
 	$(".deletePRFButton").click(function(){
 		$('#deletePRFForm').submit();
