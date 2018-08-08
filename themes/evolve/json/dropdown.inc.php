@@ -228,6 +228,16 @@ function getDropdown(){
 	$fp = fopen(__DIR__ . '/../json/University.json', 'w');
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);
+	// write PDTypes json file
+	foreach($result['PDTypes']  as $lines){
+		$ID = $lines['ID'];
+		$Name = $lines['Column1'];
+		$arrayPDTypes[] = array('ID'=>$ID, 'Name'=>$Name);	
+    }
+	$response= $arrayPDTypes;
+	$fp = fopen(__DIR__ . '/../json/PDTypes.json', 'w');
+    $test = fwrite($fp, json_encode($response));
+	fclose($fp);
 }
 getDropdown();
 ?>
