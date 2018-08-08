@@ -205,20 +205,20 @@ if(isset($results['MResponse'])) {
         <div class="flex-col-1">
             <span class="table-heading">CPD Hours</span>
         </div>
-        <div class="flex-col-1">
+        <div class="flex-col-2">
             <span class="table-heading">City</span>
         </div>
-        <div class="flex-col-1">
+        <div class="flex-col-2">
             <span class="table-heading">State</span>
         </div>
-        <div class="flex-col-2">
+        <div class="flex-col-1">
             <span class="table-heading">Start date</span>
         </div>
-        <div class="flex-col-2">
+        <div class="flex-col-1">
             <span class="table-heading">End date</span>
         </div>
         <div class="flex-col-1">
-            <span class="table-heading">Add to wishlist</span>
+            <span class="table-heading">Status</span>
         </div>
     </div>
 
@@ -245,29 +245,29 @@ if(isset($results['MResponse'])) {
 		}
 
         if(!empty($result['City'])) {
-			echo	"<div class='flex-col-1 pd-detail-city'><span class='pd-header-mobile'>City: </span>".$result['City']."</div>";
+			echo	"<div class='flex-col-2 pd-detail-city'><span class='pd-header-mobile'>City: </span>".$result['City']."</div>";
 		} else {
-			echo	"<div class='flex-col-1'><span class='pd-header-mobile'>City: </span>N/A</div>";
+			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>City: </span>N/A</div>";
 		}
 
 		if(!empty($result['State'])) {
-			echo	"<div class='flex-col-1'><span class='pd-header-mobile'>State: </span>".$result['State']."</div>";
+			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>State: </span>".$result['State']."</div>";
 		} else {
-			echo	"<div class='flex-col-1'><span class='pd-header-mobile'>State: </span>N/A</div>";
+			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>State: </span>N/A</div>";
 		}
 
 		if(!empty($result['StartDate'])) {
 			$t = strtotime($result['StartDate']);
-			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>Start date: </span>".date("d M, Y",$t)."</div>";
+			echo	"<div class='flex-col-1'><span class='pd-header-mobile'>Start date: </span>".date("d M, Y",$t)."</div>";
 		} else {
-			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>Start date: </span>N/A</div>";
+			echo	"<div class='flex-col-1'><span class='pd-header-mobile'>Start date: </span>N/A</div>";
 		}
 
 		if(!empty($result['EndDate'])) {
 			$j = strtotime($result['EndDate']);
-			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>End date: </span>".date("d M, Y",$j)."</div>";
+			echo	"<div class='flex-col-1'><span class='pd-header-mobile'>End date: </span>".date("d M, Y",$j)."</div>";
 		} else {
-			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>End date: </span>N/A</div>";
+			echo	"<div class='flex-col-1'><span class='pd-header-mobile'>End date: </span>N/A</div>";
 		}
 		
 		echo	"<div class='flex-col-1 pd-status'>";
@@ -289,7 +289,7 @@ if(isset($results['MResponse'])) {
 </div>
 
 <?php  /*******************************right item******************/?>
-<div class="pager-bottom col-xs-12 col-sm-6 col-md-7"></div>
+<div class="pager-bottom col-xs-12 col-sm-6 col-md-7 none-padding"></div>
 <div class="col-xs-12 col-sm-6 col-md-5 none-padding align-right page-size-setting">
 	<div class="pageSetting"><p>Showing</p><select id="pagesize" name="pagesize" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option><option value="3" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==20)){ echo "selected";  }  ?>> 20 </option></select><p>events</p></div>
 	<div class="pageItem"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php echo $pageNfront; ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php echo $pageNrear; ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>

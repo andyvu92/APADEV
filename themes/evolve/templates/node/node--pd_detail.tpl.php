@@ -787,319 +787,377 @@ if($resultdata['result']) {
 				<div class="down20">
 				   <div class="row"><h4 class="modal-title">Please fill in below details :</h4></div>
                   	<div class="row">
-                     <div class="col-lg-6">
-                        <?php 
-							$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
-							$Prefix=json_decode($Prefixcode, true);
-							?>
-                            <select class="form-control"  name="Prefix">
-							<?php 
-							foreach($Prefix  as $key => $value){
-								echo '<option value="'.$Prefix[$key]['ID'].'"';
-								if ($details['Prefix'] == $Prefix[$key]['ID']){ echo "selected='selected'"; } 
-								echo '> '.$Prefix[$key]['Prefix'].' </option>';
-							}
-							
-						?>
-						</select>
-                     </div>
-					   <div class="col-lg-6">
-						
-						   <select class="form-control"  name="Gender">
-							  <?php
-									$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
-									$Gender=json_decode($Gendercode, true);						
-									foreach($Gender  as $key => $value){
-										echo '<option value="'.$Gender[$key]['ID'].'"';
-										if ($details['Gender'] == $Gender[$key]['ID']){ echo "selected='selected'"; } 
-										echo '> '.$Gender[$key]['Description'].' </option>';
-									}
+						<div class="col-lg-3">
+							<label for="prefix">Prefix</label>
+							<div class="chevron-select-box">
+								<?php 
+								$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
+								$Prefix=json_decode($Prefixcode, true);
 								?>
-						   </select>
+								<select class="form-control"  name="Prefix">
+								<?php 
+								foreach($Prefix  as $key => $value){
+									echo '<option value="'.$Prefix[$key]['ID'].'"';
+									if ($details['Prefix'] == $Prefix[$key]['ID']){ echo "selected='selected'"; } 
+									echo '> '.$Prefix[$key]['Prefix'].' </option>';
+								}
+								
+								?>
+								</select>
+							</div>
 						</div>
-                  </div>
+					 </div>
+					 <div class="row">
+					   <div class="col-lg-6">
+							<label for="Gender">Gender</label>
+							<div class="chevron-select-box">
+								<select class="form-control"  name="Gender">
+									<?php
+											$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
+											$Gender=json_decode($Gendercode, true);						
+											foreach($Gender  as $key => $value){
+												echo '<option value="'.$Gender[$key]['ID'].'"';
+												if ($details['Gender'] == $Gender[$key]['ID']){ echo "selected='selected'"; } 
+												echo '> '.$Gender[$key]['Description'].' </option>';
+											}
+										?>
+								</select>
+						   </div>
+						</div>
+				  </div>
+				  
 				  <div class="row">
 					<div class="col-lg-6">
-					   <input type="text" class="form-control"  name="Firstname" <?php if (empty($details['Firstname'])) {echo "placeholder='First name'";}   else{ echo 'value="'.$details['Firstname'].'"'; }?>>
+						<label for="">First name<span class="tipstyle"> *</span></label>
+					   	<input type="text" class="form-control"  name="Firstname" <?php if (empty($details['Firstname'])) {echo "placeholder='First name'";}   else{ echo 'value="'.$details['Firstname'].'"'; }?>>
 					</div>
 				   <div class="col-lg-6">
-					<input type="text" class="form-control" name="Lastname" <?php if (empty($details['Lastname'])) {echo "placeholder='Last name'";}   else{ echo 'value="'.$details['Lastname'].'"'; }?>>
+						<label for="">Last name<span class="tipstyle"> *</span></label>
+						<input type="text" class="form-control" name="Lastname" <?php if (empty($details['Lastname'])) {echo "placeholder='Last name'";}   else{ echo 'value="'.$details['Lastname'].'"'; }?>>
 				   </div>
 				  </div>
+
 				 <div class="row">
-				     <div class="col-lg-12">
-					   <input type="text" class="form-control" name="Memberid"  <?php if (empty($details['Memberid'])) {echo "placeholder='Member ID (Your email address)'";}   else{ echo 'value="'.$details['Memberid'].'"'; }?> readonly>
+				    <div class="col-lg-12">
+					 	<label for="">Member ID (Your email address)<span class="tipstyle"> *</span></label>
+					   	<input type="text" class="form-control" name="Memberid"  <?php if (empty($details['Memberid'])) {echo "placeholder='Member ID (Your email address)'";}   else{ echo 'value="'.$details['Memberid'].'"'; }?> readonly>
 					</div>
-					
 				 </div>
 				 
 				<div class="row">
-						<div class="col-lg-12">Residential address:</div>
+						<div class="col-lg-12">
+							<span class="light-lead-heading cairo" style="font-weight: 200">Residential address:</span>
+						</div>
 				</div>
-				<div class="row">
-						<div class="col-lg-4">
+
+					<div class="row">
+						<div class="col-lg-12">
 							<label for="">Building name</label>
 							<input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['BuildingName'])) {echo "placeholder='Building name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
 						</div>
+
+						<div class="col-lg-6">
+							<label for="">PO Box</label>
+							<input type="text" class="form-control" name="Pobox" placeholder="PO Box" <?php if (!empty($details['Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
+						</div>
 					</div>
+
 					<div class="row">
-						<div class="col-lg-4">
-						<label for="">Address line 1<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" name="Address_Line_1"  <?php if (empty($details['Unit'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Unit'].'"'; }?> >
-						</div>
-						<div class="col-lg-6 col-lg-offset-2">
-						<label for="">PO box</label>
-						<input type="text" class="form-control" name="Pobox"  <?php if (!empty($details['Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
-						</div>
-				</div>
-				<div class="row">
 						<div class="col-lg-12">
-							<label for="">Address Line 2<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Address_Line_2"  <?php if (empty($details['Street'])) {echo "placeholder='Address 2'";}   else{ echo 'value="'.$details['Street'].'"'; }?> >
+							<label for="">Address line 1<span class="tipstyle">*</span></label>
+							<input type="text" class="form-control" name="Address_Line_1"  <?php if (empty($details['Unit'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Unit'].'"'; }?> >
 						</div>
 					</div>
+
+					<div class="row">
+						<div class="col-lg-12">
+							<label for="">Address line 2</label>
+							<input type="text" class="form-control" name="Address_Line_2"  <?php if (empty($details['Street'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Street'].'"'; }?> >
+						</div>
+					</div>
+
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">City or town<span class="tipstyle">*</span></label>
 							<input type="text" class="form-control" name="Suburb" <?php if (empty($details['Suburb'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Suburb'].'"'; }?>>
 						</div>
-				</div>
-				<div class="row">
+					</div>
+
+					<div class="row">
 						<div class="col-lg-3">
 							<label for="">Postcode<span class="tipstyle">*</span></label>
 							<input type="text" class="form-control" name="Postcode"  <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?>>
 						</div>
 						<div class="col-lg-3">
 							<label for="">State<span class="tipstyle">*</span></label>
-							<select class="form-control" name="State">
-								<option value="" selected disabled> State </option>
-								<?php 
-								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
-								$State=json_decode($statecode, true);
-								foreach($State  as $key => $value){
-								echo '<option value="'.$State[$key]['Abbreviation'].'"';
-								if ($details['State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
-							    echo '> '.$State[$key]['Abbreviation'].' </option>';
-							
-								}
-								?>
-							</select>
+							<div class="chevron-select-box">
+								<select class="form-control" name="State">
+									<option value="" selected disabled> State </option>
+									<?php 
+									$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+									$State=json_decode($statecode, true);
+									foreach($State  as $key => $value){
+									echo '<option value="'.$State[$key]['Abbreviation'].'"';
+									if ($details['State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+									echo '> '.$State[$key]['Abbreviation'].' </option>';
+								
+									}
+									?>
+								</select>
+							</div>
 						</div>
 						<div class="col-lg-6">
 							<label for="">Country<span class="tipstyle">*</span></label>
-							<select class="form-control"  name="Country">
-							<?php 
-							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							$country=json_decode($countrycode, true);
-							foreach($country  as $key => $value){
-								echo '<option value="'.$country[$key]['Country'].'"';
-								if ($details['Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
-								echo '> '.$country[$key]['Country'].' </option>';
-								
-							}
-							?>
-					        </select>
+							<div class="chevron-select-box">
+								<select class="form-control"  name="Country">
+								<?php 
+								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+								$country=json_decode($countrycode, true);
+								foreach($country  as $key => $value){
+									echo '<option value="'.$country[$key]['Country'].'"';
+									if ($details['Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+									echo '> '.$country[$key]['Country'].' </option>';
+									
+								}
+								?>
+								</select>
+							</div>
 						</div>
 				</div>
-				<div class="row">
-						<div class="col-lg-12"><label for="Shipping-address-join"><strong>Billing address:(Sames as Above address)</strong></label><input type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="1" checked></div>
+
+				<div class="row flex-cell flex-flow-row">
+							<div class="col-xs-12 col-sm-6">
+								<span class="light-lead-heading cairo" style="font-weight: 200">Billing address:</span>
+							</div>
+
+							<div class="col-xs-12 col-sm-6 align-item-end">
+								<input class="styled-checkbox" type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="0">
+								<label style="font-weight: 300;" for="Shipping-address-join">Sames as Above address</label>
+							</div>
 				</div>
-				<div class="row" id="shippingAddress">
+
+				<div id="shippingAddress">
 						<div class="row">
-							<div class="col-lg-4">
+							<div class="col-lg-12">
 								<label for="">Building name</label>
 								<input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['BuildingName1'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 							</div>
-							<div class="col-lg-6 col-lg-offset-2">
-								<label for="">PO box</label>
-								<input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
+							<div class="col-lg-6">
+								<label for="">PO Box</label>
+								<input type="text" class="form-control" name="Billing-Pobox" placeholder="PO Box" <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 							</div>
 						</div>
-						<div class="col-lg-4">
-							<label for="">Address 1<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Address 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?> required>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<label for="">Address line 1<span class="tipstyle">*</span></label>
+								<input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?> required>
+							</div>
 						</div>
-						<div class="col-lg-12">
-							<label for="">Address 2<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Street'])) {echo "placeholder='Billing Address 2'";}   else{ echo 'value="'.$details['Billing-Street'].'"'; }?> required>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<label for="">Address line 2<span class="tipstyle">*</span></label>
+								<input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Street'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Billing-Street'].'"'; }?> required>
+							</div>
 						</div>
-						<div class="col-lg-12">
-							<label for="">City or town<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" <?php if (empty($details['Billing-Suburb'])) {echo "placeholder='Billing City/Town'";}   else{ echo 'value="'.$details['Billing-Suburb'].'"'; }?>>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<label for="">City or town<span class="tipstyle">*</span></label>
+								<input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" <?php if (empty($details['Billing-Suburb'])) {echo "placeholder='Billing City/Town'";}   else{ echo 'value="'.$details['Billing-Suburb'].'"'; }?>>
+							</div>
 						</div>
-						<div class="col-lg-3">
-							<label for="">Postcode<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?>>
-						</div>
-						<div class="col-lg-3">
-							<label for="">State<span class="tipstyle">*</span></label>
-							<select class="form-control" name="Billing-State" id="Billing-State" required>
-								<option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
-								<?php 
-								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
-								$State=json_decode($statecode, true);
-								foreach($State  as $key => $value){
-								echo '<option value="'.$State[$key]['Abbreviation'].'"';
-								if ($details['Billing-State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
-								echo '> '.$State[$key]['Abbreviation'].' </option>';
-							
-								}
-							    ?>
-							</select>
-						</div>
-						<div class="col-lg-6">
-							<label for="">Country<span class="tipstyle">*</span></label>
-							<select class="form-control" id="Billing-Country" name="Billing-Country" required>
-							<?php 
-							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							$country=json_decode($countrycode, true);
-							foreach($country  as $key => $value){
-								
-								echo '<option value="'.$country[$key]['Country'].'"';
-								if ($details['Billing-Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
-								echo '> '.$country[$key]['Country'].' </option>';
-							}
-							?>
-							</select>
+
+						<div class="row">
+							<div class="col-lg-3">
+								<label for="">Postcode<span class="tipstyle">*</span></label>
+								<input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?>>
+							</div>
+							<div class="col-lg-3">
+								<label for="">State<span class="tipstyle">*</span></label>
+								<div class="chevron-select-box">
+									<select class="form-control" name="Billing-State" id="Billing-State" required>
+										<option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
+										<?php 
+										$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+										$State=json_decode($statecode, true);
+										foreach($State  as $key => $value){
+										echo '<option value="'.$State[$key]['Abbreviation'].'"';
+										if ($details['Billing-State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+										echo '> '.$State[$key]['Abbreviation'].' </option>';
+									
+										}
+										?>
+									</select>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<label for="">Country<span class="tipstyle">*</span></label>
+								<div class="chevron-select-box">
+									<select class="form-control" id="Billing-Country" name="Billing-Country" required>
+									<?php 
+									$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+									$country=json_decode($countrycode, true);
+									foreach($country  as $key => $value){
+										
+										echo '<option value="'.$country[$key]['Country'].'"';
+										if ($details['Billing-Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+										echo '> '.$country[$key]['Country'].' </option>';
+									}
+									?>
+									</select>
+								</div>
+							</div>
 						</div>
 					</div>
-				<div class="row">
 					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button21"><span class="dashboard-button-name">Next</span></a></div>
-				</div>
 			</div>
 			<div class="down22" style="display:none;">
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-lg-5">
 						<label for="">Country code</label>
-						<select class="form-control" id="country-code" name="country-code">
-						<?php
-							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							$country=json_decode($countrycode, true);						
-							foreach($country  as $key => $value){
-								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
-								if ($details['Home-phone-countrycode'] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; } 
-								echo '> '.$country[$key]['Country'].' </option>';
-							}
-						?>
-						</select>
+						<div class="chevron-select-box">
+							<select class="form-control" id="country-code" name="country-code">
+							<?php
+								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+								$country=json_decode($countrycode, true);						
+								foreach($country  as $key => $value){
+									echo '<option value="'.$country[$key]['TelephoneCode'].'"';
+									if ($details['Home-phone-countrycode'] == $country[$key]['TelephoneCode']){ echo "selected='selected'"; } 
+									echo '> '.$country[$key]['Country'].' </option>';
+								}
+							?>
+							</select>
+						</div>
 					</div>
 					<div class="col-lg-2">
 						<label for="">Area code</label>
 						<input type="text" class="form-control" name="area-code" <?php if (empty($details['Home-phone-areacode'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-areacode'].'"'; }?> maxlength="5">
 					</div>
-					<div class="col-lg-4">
+					<div class="col-lg-5">
 						<label for="">Phone number</label>
 						<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  >
 					</div>
-					
 				</div>
+
 				<div class="row">
 				    <div class="col-lg-6">
 						<label for="">Birth Date<span class="tipstyle">*</span></label>
 						<input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> required>
 					</div>
 				 </div>
+
 				 <div class="row">
-				    <div class="col-lg-3"><p>I am a:</p></div>
-					<div class="col-lg-9">
-					   <select class="form-control" id="Job" name="Job" >
-							 <option value=""  disabled selected>Please select</option> 
-                              <option value="Physiotherapist">Physiotherapist</option>
-							  <option value="Osteopath">Osteopath</option>
-							  <option value="Occupational therapist">Occupational therapist</option>
-							  <option value="Chiropractor">Chiropractor</option>
-							  <option value="Massage therapist">Massage therapist</option>
-							  <option value="Exercise physiologist">Exercise physiologist</option>
-							  <option value="GP/Doctor">GP/Doctor</option>
-							  <option value="Podiatrist">Podiatrist</option>
-							  <option value="other">Other, please specify</option>
-				      </select>
+					<div class="col-lg-12">
+						<label>I am a:</label>
+						<div class="chevron-select-box">
+							<select class="form-control" id="Job" name="Job" >
+									<option value=""  disabled selected>Please select</option> 
+									<option value="Physiotherapist">Physiotherapist</option>
+									<option value="Osteopath">Osteopath</option>
+									<option value="Occupational therapist">Occupational therapist</option>
+									<option value="Chiropractor">Chiropractor</option>
+									<option value="Massage therapist">Massage therapist</option>
+									<option value="Exercise physiologist">Exercise physiologist</option>
+									<option value="GP/Doctor">GP/Doctor</option>
+									<option value="Podiatrist">Podiatrist</option>
+									<option value="other">Other, please specify</option>
+							</select>
+						</div>
 					</div>
 				 </div>
-				<div class="row">
+
+				<div class="row question-boxes">
 				   <div class="col-xs-12">
 				  <input class="styled-checkbox" type="checkbox" name="Registrationboard" id="Registrationboard" required>
 				  <label for="Registrationboard">I am registered with my profession's registration board.</label>
 				   </div>
-				</div>
-				<div class="row">
+
 				   <div class="col-xs-12">
 					<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance" required>
 					<label for="Professional-insurance">I have current adequate professional indemnity insurance.</label>
 				   </div>
-				</div>
-				<div class="row">
+
 				   <div class="col-xs-12">
 				  <input class="styled-checkbox" type="checkbox" name="Professionalbody" id="Professionalbody">
 				  <label for="Professionalbody">I am a member of my professional body.</label>
 				   </div>
 				</div>
-				<div class="row">
+
+				<div class="row" style="margin-top: 10px; margin-bottom: 10px">
 					<div class="col-xs-12">
 					<label>Your dietary requirements</label>
-						<select class="chosen-select"  name="Dietary[]" multiple>
-						<option value=""  <?php if (empty($details['Dietary'])) echo "selected='selected'";?> disabled> None </option>
-						<?php 
-						$Dietarycode  = file_get_contents("sites/all/themes/evolve/json/Dietary.json");
-						$Dietary=json_decode($Dietarycode, true);
-						foreach($Dietary  as $key => $value){
-						echo '<option value="'.$Dietary[$key]['ID'].'"';
-						  foreach($details['Dietary'] as $MemberDietary) {if ($MemberDietary['ID'] == $Dietary[$key]['ID']){ echo "selected='selected'"; } }
-						echo '> '.$Dietary[$key]['Name'].' </option>';
-					
-						}
-						?>
+						<div class="plus-select-box">
+							<select class="chosen-select"  name="Dietary[]" multiple>
+							
+							<?php 
+							$Dietarycode  = file_get_contents("sites/all/themes/evolve/json/Dietary.json");
+							$Dietary=json_decode($Dietarycode, true);
+							foreach($Dietary  as $key => $value){
+							echo '<option value="'.$Dietary[$key]['ID'].'"';
+							foreach($details['Dietary'] as $MemberDietary) {if ($MemberDietary['ID'] == $Dietary[$key]['ID']){ echo "selected='selected'"; } }
+							echo '> '.$Dietary[$key]['Name'].' </option>';
 						
-						</select>
+							}
+							?>
+							</select>
+						</div>
 					</div>
 				</div>
+
 				<div class="row">
-				   <div class="col-lg-6">How did you hear about APA PD?</div>
-				   <div class="col-lg-6">
-				       <select class="form-control" id="HearaboutAPA" name="HearaboutAPA">
-					    <option value="" selected disabled>Please select</option>
-							     <?php
-						
-                              $b = '<option value="wordofmouth">Word of mouth</option>';
-							  $c = '<option value="inmotion">InMotion</option>';
-							  $d = '<option value="socialmedia">Social media</option>';
-							  $e = '<option value="apawebsite">APA website</option>';
-							  $f = '<option value="other">Other</option>';
-                                                 $optionarrays = array();
-                                                  array_push($optionarrays,$b,$c,$d,$e,$f );
-                                                  shuffle($optionarrays);
-                                                  foreach ($optionarrays as $data) {
-                                                                     echo  $data;
-                                                        }
-                                              ?>
-					   </select>
+				   <div class="col-lg-12">
+					   <label>How did you hear about APA PD?</label>
+					   <div class="chevron-select-box">
+							<select class="form-control" id="HearaboutAPA" name="HearaboutAPA">
+								<option value="" selected disabled>Please select</option>
+										<?php
+								
+									$b = '<option value="wordofmouth">Word of mouth</option>';
+									$c = '<option value="inmotion">InMotion</option>';
+									$d = '<option value="socialmedia">Social media</option>';
+									$e = '<option value="apawebsite">APA website</option>';
+									$f = '<option value="other">Other</option>';
+														$optionarrays = array();
+														array_push($optionarrays,$b,$c,$d,$e,$f );
+														shuffle($optionarrays);
+														foreach ($optionarrays as $data) {
+																			echo  $data;
+																}
+													?>
+							</select>
+					   </div>
 				   </div>
 				</div>
-				<div class="row"> 
-                    <div class="col-lg-9">
-                        <p>Would you like to hear about other APA products?</p>
+
+				<div class="row question-boxes"> 
+                    <div class="col-lg-12">
+                        <label>Would you like to hear about other APA products?</label>
                     </div>
-                </div>
-				<div class="row">
-                    <div class="col-lg-4">
-                    <input type="checkbox" name="Membership-product" id="Membership-product" value="1" checked> <label for="Membership-product">Membership</label>
+
+                    <div class="col-xs-6 col-md-4 col-lg-4">
+                    	<input class="styled-checkbox" type="checkbox" name="Membership-product" id="Membership-product" value="1" checked> <label for="Membership-product">Membership</label>
+					</div>
+					
+                    <div class="col-xs-6 col-md-4 col-lg-4">
+                    	<input class="styled-checkbox" type="checkbox" name="Pdemails-product" id="Pdemails-product" value="1" checked> <label for="Pdemails-product">PD emails</label>
+					</div>
+					
+					 <div class="col-xs-6 col-md-4 col-lg-4">
+                    	<input class="styled-checkbox" type="checkbox" name="Jobs-product" id="Jobs-product" value="1" checked> <label for="Jobs-product">Jobs4physios</label>
                     </div>
-                    <div class="col-lg-4">
-                    <input type="checkbox" name="Pdemails-product" id="Pdemails-product" value="1" checked> <label for="Pdemails-product">PD emails</label>
-                    </div>
-					 <div class="col-lg-4">
-                    <input type="checkbox" name="Jobs-product" id="Jobs-product" value="1" checked> <label for="Jobs-product">Jobs4physios</label>
-                    </div>
-                </div>
-				<div class="row">
-                    <div class="col-lg-4">
-                    <input type="checkbox" name="Shop-product" id="Shop-product" value="1" checked> <label for="Shop-product">Shop4physios</label>
-                    </div>
-                    <div class="col-lg-4">
-                    <input type="checkbox" name="Campaigns-product" id="Campaigns-product" value="1" checked> <label for="Campaigns-product">Campaigns</label>
-                    </div>
-					 <div class="col-lg-4">
-                    <input type="checkbox" name="Partner-product" id="Partner-product" value="1" checked> <label for="Partner-product">Partner offers</label>
+
+                    <div class="col-xs-6 col-md-4 col-lg-4">
+                    	<input class="styled-checkbox" type="checkbox" name="Shop-product" id="Shop-product" value="1" checked> <label for="Shop-product">Shop4physios</label>
+					</div>
+					
+                    <div class="col-xs-6 col-md-4 col-lg-4">
+                    	<input class="styled-checkbox" type="checkbox" name="Campaigns-product" id="Campaigns-product" value="1" checked> <label for="Campaigns-product">Campaigns</label>
+					</div>
+					
+					<div class="col-xs-6 col-md-4 col-lg-4">
+                    	<input class="styled-checkbox" type="checkbox" name="Partner-product" id="Partner-product" value="1" checked> <label for="Partner-product">Partner offers</label>
                     </div>
                 </div>
 				<!--
@@ -1174,12 +1232,14 @@ if($resultdata['result']) {
                         <input type="text" class="form-control" name="Billing-country" id="Billing-country" placeholder="Country" required>
                      </div>
                 </div>-->
-				<div class="row"> 
-					  <div class="col-lg-6">
-					  <label for="Confirm-policy">Yes. I have read the APA Privacy policy</label><input type="checkbox" name="Confirm-policy" id="Confirm-policy" required>
+				<div class="row question-boxes"> 
+					  <div class="col-lg-12" style="margin: 20px 0;">
+						<input class="styled-checkbox" type="checkbox" name="Confirm-policy" id="Confirm-policy" required>
+						<label for="Confirm-policy">Yes. I have read the APA Privacy policy</label>
 					  </div>
-					  <div class="col-lg-6">
-					  <input type="submit" value="Submit">
+
+					  <div class="col-lg-12">
+					  	<button class="accent-btn" type="submit" value="Submit">Submit</button>
 					  </div>
 				</div>
 				   </form>

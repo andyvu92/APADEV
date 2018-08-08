@@ -100,7 +100,7 @@ if(isset($_SESSION["UserId"])) {
 				</a>
 				<?php else:?>
 				<a href="/membership-question">
-					<div class="dashboard-button-name"><span class="left-nav-icon renew-icon"></span>Join a member</div>
+					<div class="dashboard-button-name"><span class="left-nav-icon renew-icon"></span>Join the APA</div>
 				</a>
 				<?php endif;?>
 				

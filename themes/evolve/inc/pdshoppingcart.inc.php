@@ -266,7 +266,7 @@ if(isset($_SESSION["UserId"])){
 
 		<div class="flex-cell">
 			<input class="styled-checkbox" type="checkbox" id="accept1" <?php if($price!=0) echo " required";?>>
-			<label for="accept1">I accept the APA events terms and conditions including the APA cancellation clause</label>
+			<label for="accept1">I accept the APA events terms and conditions, including the APA cancellation clause</label>
 		</div>
 
 		<?php if($tag==1): ?>
@@ -366,7 +366,7 @@ if(isset($_SESSION["UserId"])){
 		<label for="anothercard"><a class="event10" style="cursor: pointer;">Use another card</a></label>
 	</div>
 
-	<div class="down10" <?php if(isset($_SESSION["tempcard"])){ echo 'style="display:block;"';} else { echo 'style="display:none;"';}?>>
+	<div class="down10 extra-card" <?php if(isset($_SESSION["tempcard"])){ echo 'style="display:block;"';} else { echo 'style="display:none;"';}?>>
 		<form action="pd-shopping-cart?action=addcard" method="POST" id="formaddcard">
 		<div class="row">
 			<div class="col-lg-12">
@@ -406,7 +406,7 @@ if(isset($_SESSION["UserId"])){
 			<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
 		</div>
-		<div class="col-xs-12 none-padding" style="pading-left: 1px; margin: 5px 0;">
+		<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
 			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" <?php if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>>
 			<label for="addcardtag">Do you want to save this card?</label>
 		</div>
@@ -489,7 +489,7 @@ if(isset($_SESSION["UserId"])){
 				echo '<input type="hidden" name="totalNG" id="totalNG" value="'.$ngTotal.'">';
 			}
 			?>
-			<input class="placeorder" type="submit" value="PLACE YOUR ORDER">
+			<button class="placeorder" type="submit" value="PLACE YOUR ORDER">Place your order</button>
 			<!--a target="_blank" class="addCartlink">
 				<button class="placeorder" type="submit">PLACE YOUR ORDER</button>
 			</a-->
