@@ -34,7 +34,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 </div>
 
 	<div class="col-xs-12 col-md-6">
-		<label for="WAddress_Line_1'.$i.'">Address line 1</label>
+		<label for="WAddress_Line_1'.$i.'">Address line 1<span class="tipstyle">*</span></label>
 		<input type="text" class="form-control" name="WAddress_Line_1'.$i.'" id="WAddress_Line_1'.$i.'" value="" placeholder="Address line 1">
 	</div>
 
@@ -46,7 +46,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 
 <div class="row">
 	<div class="col-xs-6 col-md-6">
-		<label for="Wcity'.$i.'">City/Town<span class="tipstyle">*</span></label>
+		<label for="Wcity'.$i.'">City or town<span class="tipstyle">*</span></label>
 		<input type="text" class="form-control" name="Wcity'.$i.'" id="Wcity'.$i.'" value="">
 	</div>
 

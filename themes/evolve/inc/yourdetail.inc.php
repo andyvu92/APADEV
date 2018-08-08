@@ -1183,7 +1183,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<div class="col-xs-12">
 						<ul class="nav nav-tabs" id="tabmenu">
 						<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
-						<li <?php if($key=='Workplace0') echo 'class ="active" ';?>><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a></li>
+						<li <?php if($key=='Workplace0') echo 'class ="active" ';?> id="workplaceli<?php echo $key;?>"><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a><span class="deletewp<?php echo $key;?>"></span></li>
 						<?php endforeach; ?> 
 						<?php //if(sizeof($details['Workplaces'])==0):?>
 					
@@ -1304,10 +1304,11 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 											<select class="form-control" id="WPhoneCountryCode<?php echo $key;?>" name="WPhoneCountryCode<?php echo $key;?>">
 												<?php
 													$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-													$country = json_decode($countrycode, true);						
+													$country = json_decode($countrycode, true);	
+													$countser = 0;
 													foreach($country  as $wcpair => $value){
 														echo '<option value="'.$country[$wcpair]['TelephoneCode'].'"';
-														if ($details['Workplaces'][$key]['WPhoneCountryCode'] == $country[$wcpair]['TelephoneCode']){ echo "selected='selected'"; } 
+														if ($details['Workplaces'][$key]['WPhoneCountryCode'] == preg_replace('/\s+/', '', $country[$pair]['TelephoneCode']) && $countser == 0) { echo "selected='selected'"; $countser++;} 
 														elseif(empty($details['Workplaces'][$key]['WPhoneCountryCode']) && $country[$wcpair]['ID']=="14"){
 															echo "selected='selected'";
 														}

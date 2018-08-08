@@ -7,7 +7,7 @@ $filterMemberProduct = array("10007","10008","10009","9997");
 // 2. web user who join a member use $_SESSION]['userID'] to get user info
 
 //if (isset($_POST['step1'])) {this part code has already moved to the login file
-	if (isset($_POST['step1'])) {
+	if (isset($_POST['step1']) && !isset($_POST['refreshTag'])) {
     $postData = array();
     if (isset($_SESSION['UserId'])) {
         $postData['userID'] = $_SESSION['UserId'];

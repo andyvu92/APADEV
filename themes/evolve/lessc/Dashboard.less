@@ -458,10 +458,14 @@ button.deletecardbutton {
     color: white !important;
 }
 
-.disabled{
+.stop{
     opacity: 0.5;
     pointer-events: none;
     cursor: default;
+}
+.form-control[disabled], .form-control[readonly], fieldset[disabled]{
+   	cursor: default!important;
+	
 }
 /* ********************************************************* */
 /* -----------------Join the member page added by jinghu End---------- */
