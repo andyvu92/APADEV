@@ -1054,11 +1054,13 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 						<div class="chevron-select-box">
 						<select class="form-control" id="WPhoneCountryCode<?php echo $key;?>" name="WPhoneCountryCode<?php echo $key;?>">
 						<?php
+						
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							$country = json_decode($countrycode, true);						
+							$country = json_decode($countrycode, true);	
+							$countser = 0;								
 							foreach($country  as $pair => $value){
 								echo '<option value="'.$country[$pair]['TelephoneCode'].'"';
-								if ($details['Workplaces'][$key]['WPhoneCountryCode'] == $country[$pair]['TelephoneCode']){ echo "selected='selected'"; } 
+								if ($details['Workplaces'][$key]['WPhoneCountryCode'] == preg_replace('/\s+/', '', $country[$pair]['TelephoneCode']) && $countser == 0) { echo "selected='selected'"; $countser++;} 
 								elseif(empty($details['Workplaces'][$key]['WPhoneCountryCode']) && $country[$pair]['ID']=="14"){
 									echo "selected='selected'";
 								}
