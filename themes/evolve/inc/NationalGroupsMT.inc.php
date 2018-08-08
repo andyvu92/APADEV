@@ -78,6 +78,9 @@ if(count($PostArray) == 0) { // Just GET data
 				}
 				$counter++;
 			}
+			if(($counter % 2) == 1) {
+				echo "</div>";
+			}
 		?>
 
 </div>

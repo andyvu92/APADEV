@@ -78,6 +78,24 @@ if(isset($results['MResponse'])) {
 	if($totalNum % $request["PageSize"] > 0) {
 		$totalPage++;
 	}
+
+	// page numbers control (Item N to N of Total)
+	$itemPerPage = intval($numItem);
+	$totalNumItems = intval($totalNum);
+	$pageNfront = 1;
+	$pageNum = 1;
+	$pageNrear = ($itemPerPage * $pageNum);
+	if($pageNrear > $totalNumItems) {
+		$pageNrear = $totalNumItems;
+	}
+	if(isset($_GET["page"])) {
+		$pageNum = intval($_GET["page"]);
+		$pageNrear = ($itemPerPage * $pageNum);
+		$pageNfront = 1 + ($itemPerPage * ($pageNum - 1));
+		if($pageNrear > $totalNumItems) {
+			$pageNrear = $totalNumItems;
+		}
+	}
 }
 
 
@@ -171,7 +189,7 @@ if(isset($results['MResponse'])) {
  ?>
  <div class="col-xs-12 col-sm-6 col-md-5 none-padding align-right page-size-setting">
 	<div class="pageSetting"><p>Showing</p><select id="pagesize" name="pagesize" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option><option value="3" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==20)){ echo "selected";  }  ?>> 20 </option></select><p> events</p></div>
-	<div class="pageItem"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $numItem;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
+	<div class="pageItem"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php echo $pageNfront; ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php echo $pageNrear; ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
 </div>		
 <?php              /**************************************pagination settings***************************/        ?>  
 <div class="col-xs-12" style="padding:0;">
@@ -239,29 +257,28 @@ if(isset($results['MResponse'])) {
 		}
 
 		if(!empty($result['StartDate'])) {
-			$bdate = explode(" ",$result['StartDate']);
-			$t = strtotime($bdate[0]);
+			$t = strtotime($result['StartDate']);
 			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>Start date: </span>".date("d M, Y",$t)."</div>";
 		} else {
 			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>Start date: </span>N/A</div>";
 		}
 
 		if(!empty($result['EndDate'])) {
-			$edate = explode(" ",$result['EndDate']);
-			$j = strtotime($edate[0]);
+			$j = strtotime($result['EndDate']);
 			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>End date: </span>".date("d M, Y",$j)."</div>";
 		} else {
 			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>End date: </span>N/A</div>";
 		}
 		
 		echo	"<div class='flex-col-1 pd-status'>";
-		$gap = intval($result['Totalnumber']) - intval($result['Enrollednumber']);
-		$tenP = intval($result['Totalnumber'])/10;
-		if($gap == 0) {
-			echo  "<i class='fa fa-ban fa-lg' aria-hidden='true'></i><span>Course full</span>";
-		} elseif($gap < $tenP) {
+		$Totalnumber = doubleval($result['Totalnumber']);
+		$Enrollednumber = doubleval($result['Enrollednumber']);
+		$Div = $Enrollednumber/$Totalnumber;
+		if($Div>=0.9 && $Div<1){
 			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Almost full</span></a>';
-		} else {
+		} elseif(($Totalnumber-$Enrollednumber)==0){
+			echo  "<i class='fa fa-ban fa-lg' aria-hidden='true'></i><span>Course full</span>";
+		} elseif($Div<0.9){
 			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Open</span></a>';
 		}
 		echo	"</div>";
@@ -275,7 +292,7 @@ if(isset($results['MResponse'])) {
 <div class="pager-bottom col-xs-12 col-sm-6 col-md-7"></div>
 <div class="col-xs-12 col-sm-6 col-md-5 none-padding align-right page-size-setting">
 	<div class="pageSetting"><p>Showing</p><select id="pagesize" name="pagesize" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option><option value="3" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==20)){ echo "selected";  }  ?>> 20 </option></select><p>events</p></div>
-	<div class="pageItem"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $numItem;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
+	<div class="pageItem"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php echo $pageNfront; ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php echo $pageNrear; ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
 </div>
 	<?php /*
 	<div class="pageItemBottom"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $totalNum+1;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $totalNum+$numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
