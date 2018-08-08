@@ -562,8 +562,7 @@ if($resultdata['result']) {
 						else{
 							echo $pd_detail['Description'];
 						}	
-					}
-					else{
+					} else{
 						echo "<h4>No record found!</h4>";
 					}
 					?>
@@ -620,15 +619,14 @@ if($resultdata['result']) {
 						<?php 
 						foreach($pd_detail['Presenter'] as $bios) {
 							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
-							echo '<p>'.$bios['Comments'].'</p><br>';
+							//echo '<p>'.$bios['Comments'].'</p><br>';
 
-							if (strlen($pd_detail['Presenter']) > 300){
+							if (strlen($bios['Comments']) > 300){
 								echo '<div class="readmore">';
-								echo $pd_detail['Presenter'];
+								echo $bios['Comments'];
 								echo '</div>';
-							}
-							else{
-								echo $pd_detail['Presenter'];
+							} else{
+								echo $bios['Comments'];
 							}
 						}
 						?>

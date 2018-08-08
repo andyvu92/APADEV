@@ -141,12 +141,14 @@ function comparePrice($priceList, $cost){
 		} else {
 			$y = str_replace($x[0], "", $key);
 		}
+		$cost = doubleval($cost);
+		$value = doubleval($value);
 		$valuet = number_format($value,2);
 		if($cost>$value) {
 			echo '<span class="redprice">'.$y.":&nbsp;$".$valuet."</span><br>";
-		} elseif($cost<$valuet){
+		} elseif($cost<$value){
 			echo '<span class="greenprice">'.$y.":&nbsp;$".$valuet."</span><br>";
-		} elseif($cost==$valuet){
+		} elseif($cost==$value){
 			echo $y.":&nbsp;$".$valuet."<br>";
 		}
 	}
