@@ -1150,7 +1150,7 @@ if (isset($_SESSION['UserId'])):
                        <input type="hidden" name="Shipping-postcode" value="<?php
     echo $details['Shipping-postcode'];
 ?>">
-                       <input type="hidden" name="Shipping-state" value="<?php
+                       <input type="hidden" name="Shipping-State" value="<?php
     echo $details['Shipping-state'];
 ?>">
                        <input type="hidden" name="Shipping-country" value="<?php
@@ -1170,7 +1170,7 @@ if (isset($_SESSION['UserId'])):
                        <input type="hidden" name="Mailing-postcode" value="<?php
     echo $details['Mailing-postcode'];
 ?>">
-                       <input type="hidden" name="Mailing-state" value="<?php
+                       <input type="hidden" name="Mailing-State" value="<?php
     echo $details['Mailing-state'];
 ?>">
                        <input type="hidden" name="Mailing-country" value="<?php

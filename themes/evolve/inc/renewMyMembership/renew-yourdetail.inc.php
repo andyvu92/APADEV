@@ -521,6 +521,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 					   <label for="">Building name</label>
 					   <input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['Unit'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
 					</div>
+					</div>
 					
 					<div class="col-xs-12 col-sm-6 col-md-3">
 
@@ -687,7 +688,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<input type="hidden" name="Shipping-PObox" value="<?php if(empty($details['Shipping-unitno'])){echo $details['Shipping-BuildingName'];}?>">
 				<input type="hidden" name="Shipping-city-town" value="<?php echo $details['Shipping-city-town'];?>">
 				<input type="hidden" name="Shipping-postcode" value="<?php echo $details['Shipping-postcode'];?>">
-				<input type="hidden" name="Shipping-state" value="<?php echo $details['Shipping-state'];?>">
+				<input type="hidden" name="Shipping-State" value="<?php echo $details['Shipping-state'];?>">
 				<input type="hidden" name="Shipping-country" value="<?php echo $details['Shipping-country'];?>">
 				<input type="hidden" name="Mailing-BuildingName" value="<?php if(!empty($details['Mailing-unitno'])) {echo $details['Mailing-BuildingName'];}?>">
 				<input type="hidden" name="Mailing-Address_Line_1" value="<?php echo $details['Mailing-unitno'];?>">
@@ -695,7 +696,7 @@ if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details
 				<input type="hidden" name="Mailing-PObox" value="<?php if(empty($details['Mailing-unitno'])){echo $details['Mailing-BuildingName'];}?>">
 				<input type="hidden" name="Mailing-city-town" value="<?php echo $details['Mailing-city-town'];?>">
 				<input type="hidden" name="Mailing-postcode" value="<?php echo $details['Mailing-postcode'];?>">
-				<input type="hidden" name="Mailing-state" value="<?php echo $details['Mailing-state'];?>">
+				<input type="hidden" name="Mailing-State" value="<?php echo $details['Mailing-state'];?>">
 				<input type="hidden" name="Mailing-country" value="<?php echo $details['Mailing-country'];?>">
 			<!---Hidden mailing address and shipping address End here-->
 		  <!--<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-right">
