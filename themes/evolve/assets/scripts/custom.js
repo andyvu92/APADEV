@@ -537,6 +537,13 @@ jQuery(document).ready(function($) {
 	    if(($('select[name=Job]').val()!="Physiotherapist")){
 			$( "#jobnoticement" ).dialog();
 		}
+		if(($('select[name=Job]').val()=="other")){
+			$( "#jobother" ).removeClass('display-none');
+		}
+		else{
+			$( "#jobother" ).addClass('display-none');
+		}
+		
 		   
 	});
 	$('#uploadImageButton').click(function(){
@@ -585,6 +592,9 @@ jQuery(document).ready(function($) {
 	});
 	$('#privacypolicyl').click(function(){
 		$( "#privacypolicyWindow" ).dialog();
+	});
+	$('#accept1').click(function(){
+		$( "#PDTermsWindow" ).dialog();
 	});
 	$('#PRFDescription').click(function(){
 		$( "#PRFDesPopUp" ).dialog();
