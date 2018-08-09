@@ -26,11 +26,13 @@
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Type of PD</label>
 		<select  class="chosen-select" name="Typeofpd" id="Typeofpd" multiple data-placeholder="Type of PD">
-			<option value="Course" <?php if(isset($_POST["Typeofpd"]) && $_POST["Typeofpd"]=="Course") { echo "selected";} ?>>Course</option>
-			<option value="Lecture" <?php if(isset($_POST["Typeofpd"]) && $_POST["Typeofpd"]=="Lecture") { echo "selected";} ?>>Lecture</option>
-			<option value="ProfessionalE" <?php if(isset($_POST["Typeofpd"]) && $_POST["Typeofpd"]=="ProfessionalE") { echo "selected";} ?>>Professional interest event</option>
-			<option value="Conference" <?php if(isset($_POST["Typeofpd"]) && $_POST["Typeofpd"]=="Conference") { echo "selected";} ?>>Conference/tour</option> 
-			<option value="Vclass" <?php if(isset($_POST["Typeofpd"]) && $_POST["Typeofpd"]=="Vclass") { echo "selected";} ?>>Virtual classroom</option>
+			<?php 
+				$PDtypecode = file_get_contents("sites/all/themes/evolve/json/PDTypes.json");
+				$PDType = json_decode($PDtypecode, true);
+				foreach($PDType  as $key => $value){
+					echo '<option value="'.$PDType[$key]['ID'].'">'.$PDType[$key]['Name'].' </option>';
+				}
+			?>
 		</select>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
