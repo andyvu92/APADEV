@@ -1617,7 +1617,7 @@
 			<div class="col-xs-12">
 				<label>Your dietary requirements</label>
 				<select class="chosen-select" id="Dietary" name="Dietary[]" multiple>
-				<option value=""  <?php if (empty($details['Dietary'])) echo "selected='selected'";?> disabled> None </option>
+				
 				<?php 
 				$Dietarycode  = file_get_contents("sites/all/themes/evolve/json/Dietary.json");
 				$Dietary=json_decode($Dietarycode, true);
