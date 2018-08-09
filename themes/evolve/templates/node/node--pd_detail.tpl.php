@@ -790,7 +790,10 @@
       </div>
 	  
 		<div  id="loginPopWindow" >
-			<form name="signInForm" method="POST" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>">
+		<div class="form">        
+      <div class="tab-content">
+        <div id="signin-form">             
+          <form name="signInForm" method="POST" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>">
 				<div class="flex-container">
 					<div class="flex-cell">
 						<h3 class="light-lead-heading cairo">Please login to see this page</h3>
@@ -816,7 +819,7 @@
 						</div>
 						<div class="flex-col-7 forgot-password">
 							<span>Forgot your
-								<a class="forgotPS" data-dismiss="modal" data-toggle="modal" data-target="#passwordReset" >username/password</a>
+								<div class="tab"><span data-form="#forgot-pw-form">username/password</span></div>
 							</span>
 						</div>
 					</div>
@@ -826,16 +829,63 @@
 					</div>
 				</div>
 			</form>
-       <script>
-		   	function overlayOff() {
-				document.getElementById("overlay").style.display = "none";
-			}
-			jQuery('document').ready(function($) {
-				$( ".ui-dialog").wrap( "<div id='overlay' class='new'></div>");
-				$( ".ui-dialog button").attr('onlick', 'overlayOff');
-			});
+            <script>
+                jQuery('document').ready(function($) {
+                    //$( ".ui-dialog").wrap( "<div id='overlay' class='new'></div>");
+                });
+            </script>
+        </div>
+        
+        <div id="forgot-pw-form" style="display: none">   
+        <form method="POST" action="/pd/pd-product?id=5400" name="resetPass" id="resetPass">
+            <div class="flex-container">
+                <div class="flex-cell">
+					<h3 class="light-lead-heading cairo">Forgot your password?</h3>
+					<span>Submit your email address and we'll send you a link to reset your password</span>
+                </div>
+                
+                <div class="flex-cell">
+					<div class="flex-cell email-field">
+						<input class="form-control" id="Fid" name="Fid" placeholder="Email address" type="text">
+					</div>
+                </div>
 
-		</script>
+                <div class="flex-cell submit-btn">
+                    <input type="submit" value="Submit">
+				</div>
+				
+				<div class="flex-cell create-account">
+					<span>Not a member? <a id="createAccount">Join us today.</a></span>
+				</div>
+            </div>
+		</form>
+
+        </div>
+        
+      </div><!-- tab-content -->
+      <script>
+$('a#login').on('click', function (e) {
+	$('#forgot-pw-form').hide();
+	$('#signin-form').show();
+});
+$('.tab span').on('click', function (e) {
+  
+  e.preventDefault();
+  
+  $(this).parent().addClass('active');
+  $(this).parent().siblings().removeClass('active');
+  
+  target = $(this).attr('data-form');
+
+  $('.tab-content > div').not(target).hide();
+  
+  $(target).fadeIn(600);
+  
+});
+</script>
+</div> <!-- /form -->
+
+		
       </div>
 	  <?php if(isset($details)): ?>
 	  <?php

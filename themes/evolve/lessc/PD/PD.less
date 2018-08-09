@@ -2030,6 +2030,8 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
             color: #000;
             margin-top: 0;
             text-align: center;
+            display: block;
+            width: 100%;
         }
         .email-field{
             width: 100%;
@@ -2061,7 +2063,7 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
                 background-image: url(/sites/default/files/dashboard-icon/presenters-B.png);
             }
         }
-        .login-btn{
+        .login-btn, .submit-btn{
             margin: 15px 0;
             input{
                 width: 100%!important;
@@ -2085,9 +2087,16 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            a{
-                text-decoration: underline;
-            }
+            .tab{
+                display: inline-block;
+                span{
+                    text-decoration: underline;
+                    cursor: pointer;
+                    &:hover{
+                        color: @bright-blue;
+                    }
+                }
+            }  
         }
         .create-account{
             display: flex;
@@ -2097,6 +2106,16 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
             text-align: center;
             a{
                 text-decoration: underline;
+            }
+        }
+        #forgot-pw-form{
+            .light-lead-heading{
+                font-size: 2.2em;
+                &+span{
+                    margin-bottom: 10px;
+                    font-family: Roboto;
+                    font-weight: 400;
+                }
             }
         }
     }

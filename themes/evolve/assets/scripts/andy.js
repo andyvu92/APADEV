@@ -178,14 +178,6 @@ jQuery(document).ready(function() {
   $('[class^="down"]').removeClass('locked');
 });
 
-//ADD OVERLAY CONTAINER FOR POPUPS
-jQuery('document').ready(function() {
-  $( ".ui-dialog" ).wrap( "<div class='new'></div>");
-
-  $('.ui-dialog-titlebar-close span').click(function() {
-    $('.new').fadeOut();
-  });
-});
 //ADD WARNING ICON FOR MISSING INFO ON WORKPALCE TABS
 jQuery(document).ready(function() {
   $(".join-details-button3").on("click",function() {
@@ -254,3 +246,4 @@ jQuery(document).ready(function() {
 
 });
 
+//LOGIN FORM
