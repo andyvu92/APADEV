@@ -263,7 +263,7 @@ if(isset($_SESSION["UserId"])) {
 
 
 
-if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details['Regional-group'];}
+if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Regionalgp'];}
 ////print_r($details);
 // 2.2.10 - GET Picture
 // Send - 

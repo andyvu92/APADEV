@@ -627,8 +627,8 @@ if (isset($_SESSION['UserId'])):
 		}
 		$Dietary = $testDietaryArray;
 	}
-    if (!empty($details['Regional-group'])) {
-        $_SESSION['Regional-group'] = $details['Regional-group'];
+    if (!empty($details['Regionalgp'])) {
+        $_SESSION['Regional-group'] = $details['Regionalgp'];
     }
     
 ?>
