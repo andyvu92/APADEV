@@ -482,8 +482,11 @@
 			if(isset($_POST['Campaigns-product'])){ $CreateNewUserPD["Campaigns-product"] = $_POST["Campaigns-product"];  }else { $CreateNewUserPD["Campaigns-product"] = 0;  } 
 			if(isset($_POST['Partner-product'])){ $CreateNewUserPD["Partner-product"] = $_POST["Partner-product"];  }else { $CreateNewUserPD["Partner-product"] = 0;  } 
 			$CreateNewUserPD["CreateDate"] = date('Y-m-d');
-			$_SESSION['SurveyData'] = $CreateNewUserPD;
 			SavePDSurvey($CreateNewUserPD=$CreateNewUserPD);
+			//store the survey data in the session for half hour expiry date
+			$_SESSION['SurveyData'] = $CreateNewUserPD;
+			$_SESSION['start'] = time(); 
+			$_SESSION['expire'] = $_SESSION['start'] + (30 * 60);
 		}	
 		
 	}
@@ -885,6 +888,13 @@ $('.tab span').on('click', function (e) {
 		
       </div>
 	  <?php if(isset($details)): ?>
+	  <?php
+		/*hanled survey data session */
+		$now = time();  
+		if ($now > $_SESSION['expire']) {
+            unset($_SESSION['SurveyData']);
+        }
+	  ?>
 	  <div id="registerMember">
             <form action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" id="registerMemberForm" autocomplete="off">
 			    <input type="hidden" name="updateDetail">
@@ -1191,15 +1201,15 @@ $('.tab span').on('click', function (e) {
 						<div class="chevron-select-box">
 							<select class="form-control" id="Job" name="Job" >
 									<option value=""  disabled selected>Please select</option> 
-									<option value="Physiotherapist">Physiotherapist</option>
-									<option value="Osteopath">Osteopath</option>
-									<option value="Occupational therapist">Occupational therapist</option>
-									<option value="Chiropractor">Chiropractor</option>
-									<option value="Massage therapist">Massage therapist</option>
-									<option value="Exercise physiologist">Exercise physiologist</option>
-									<option value="GP/Doctor">GP/Doctor</option>
-									<option value="Podiatrist">Podiatrist</option>
-									<option value="other">Other, please specify</option>
+									<option value="Physiotherapist" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Job'] =="Physiotherapist") echo "selected='selected'";?>>Physiotherapist</option>
+									<option value="Osteopath" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Job'] =="Osteopath") echo "selected='selected'";?>>Osteopath</option>
+									<option value="Occupational therapist" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Job'] =="Occupational therapist") echo "selected='selected'";?>>Occupational therapist</option>
+									<option value="Chiropractor" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Job'] =="Chiropractor") echo "selected='selected'";?>>Chiropractor</option>
+									<option value="Massage therapist" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Job'] =="Massage therapist") echo "selected='selected'";?>>Massage therapist</option>
+									<option value="Exercise physiologist" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Job'] =="Exercise physiologist") echo "selected='selected'";?>>Exercise physiologist</option>
+									<option value="GP/Doctor" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Job'] =="GP/Doctor") echo "selected='selected'";?>>GP/Doctor</option>
+									<option value="Podiatrist" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Job'] =="Podiatrist") echo "selected='selected'";?>>Podiatrist</option>
+									<option value="other" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Job'] =="other") echo "selected='selected'";?>>Other, please specify</option>
 							</select>
 						</div>
 					</div>
@@ -1207,17 +1217,17 @@ $('.tab span').on('click', function (e) {
 
 				<div class="row question-boxes">
 				   <div class="col-xs-12">
-				  <input class="styled-checkbox" type="checkbox" name="Registrationboard" id="Registrationboard" required>
+				  <input class="styled-checkbox" type="checkbox" name="Registrationboard" id="Registrationboard" required  value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Registrationboard'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Registrationboard']=="1") echo 'checked="checked"';?>">
 				  <label for="Registrationboard">I am registered with my profession's registration board.</label>
 				   </div>
 
 				   <div class="col-xs-12">
-					<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance" required>
+					<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance" required value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Professionalinsurance'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Professionalinsurance']=="1") echo 'checked="checked"';?>>
 					<label for="Professional-insurance">I have current and adequate professional indemnity insurance.</label>
 				   </div>
 
 				   <div class="col-xs-12">
-				  <input class="styled-checkbox" type="checkbox" name="Professionalbody" id="Professionalbody">
+				  <input class="styled-checkbox" type="checkbox" name="Professionalbody" id="Professionalbody" required value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Professionalbody'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Professionalbody']=="1") echo 'checked="checked"';?>>
 				  <label for="Professionalbody">I am a member of my professional body.</label>
 				   </div>
 				</div>
@@ -1277,27 +1287,27 @@ $('.tab span').on('click', function (e) {
                     </div>
 
                     <div class="col-xs-6 col-md-4 col-lg-4">
-                    	<input class="styled-checkbox" type="checkbox" name="Membership-product" id="Membership-product" value="1" checked> <label for="Membership-product">Membership</label>
+                    	<input class="styled-checkbox" type="checkbox" name="Membership-product" id="Membership-product" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Membership-product'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Membership-product']=="1") echo 'checked="checked"';?>> <label for="Membership-product">Membership</label>
 					</div>
 					
                     <div class="col-xs-6 col-md-4 col-lg-4">
-                    	<input class="styled-checkbox" type="checkbox" name="Pdemails-product" id="Pdemails-product" value="1" checked> <label for="Pdemails-product">PD emails</label>
+                    	<input class="styled-checkbox" type="checkbox" name="Pdemails-product" id="Pdemails-product" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Pdemails-product'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Pdemails-product']=="1") echo 'checked="checked"';?>> <label for="Pdemails-product">PD emails</label>
 					</div>
 					
 					 <div class="col-xs-6 col-md-4 col-lg-4">
-                    	<input class="styled-checkbox" type="checkbox" name="Jobs-product" id="Jobs-product" value="1" checked> <label for="Jobs-product">Jobs4physios</label>
+                    	<input class="styled-checkbox" type="checkbox" name="Jobs-product" id="Jobs-product" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Jobs-product'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Jobs-product']=="1") echo 'checked="checked"';?>> <label for="Jobs-product">Jobs4physios</label>
                     </div>
 
                     <div class="col-xs-6 col-md-4 col-lg-4">
-                    	<input class="styled-checkbox" type="checkbox" name="Shop-product" id="Shop-product" value="1" checked> <label for="Shop-product">Shop4physios</label>
+                    	<input class="styled-checkbox" type="checkbox" name="Shop-product" id="Shop-product" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Shop-product'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Shop-product']=="1") echo 'checked="checked"';?>> <label for="Shop-product">Shop4physios</label>
 					</div>
 					
                     <div class="col-xs-6 col-md-4 col-lg-4">
-                    	<input class="styled-checkbox" type="checkbox" name="Campaigns-product" id="Campaigns-product" value="1" checked> <label for="Campaigns-product">Campaigns</label>
+                    	<input class="styled-checkbox" type="checkbox" name="Campaigns-product" id="Campaigns-product" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Campaigns-product'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Campaigns-product']=="1") echo 'checked="checked"';?>> <label for="Campaigns-product">Campaigns</label>
 					</div>
 					
 					<div class="col-xs-6 col-md-4 col-lg-4">
-                    	<input class="styled-checkbox" type="checkbox" name="Partner-product" id="Partner-product" value="1" checked> <label for="Partner-product">Partner offers</label>
+                    	<input class="styled-checkbox" type="checkbox" name="Partner-product" id="Partner-product" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Partner-product'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Partner-product']=="1") echo 'checked="checked"';?>> <label for="Partner-product">Partner offers</label>
                     </div>
                 </div>
 				<!--
@@ -1657,7 +1667,7 @@ $('.tab span').on('click', function (e) {
 			<div class="col-xs-12">
 				<label>Your dietary requirements</label>
 				<select class="chosen-select" id="Dietary" name="Dietary[]" multiple>
-				<option value=""  <?php if (empty($details['Dietary'])) echo "selected='selected'";?> disabled> None </option>
+				
 				<?php 
 				$Dietarycode  = file_get_contents("sites/all/themes/evolve/json/Dietary.json");
 				$Dietary=json_decode($Dietarycode, true);

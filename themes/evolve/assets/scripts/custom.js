@@ -319,6 +319,7 @@ jQuery(document).ready(function($) {
 		$("#CardUsed").val(CardID);
 	});		
 	$('body').on('change', 'select', function() {
+		if($('.down4:visible').length !== 0){
 			var x = $(this).attr("id").replace('Udegree', '');
 			if(($('#Udegree'+ x).val()=="0")){
 				
@@ -335,7 +336,7 @@ jQuery(document).ready(function($) {
 			else{
 				$( "#Undergraduate-university-name-other" + y).addClass('display-none');
 			}
-		    		
+		}  		
 	});
 	var PRF = $("#PRF").val();
 	$( "#POSTPRF").val(PRF);
