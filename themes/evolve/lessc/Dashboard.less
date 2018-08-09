@@ -446,7 +446,7 @@ div[aria-describedby="privacypolicyWindow"] .ui-widget-header{
 
 div[aria-describedby="installmentpolicyWindow"] .ui-widget-header{
     border:none!important;
-	background:white!important;
+    background:white!important;
 }
 
 label[for="privacypolicyp"]{
@@ -2678,13 +2678,20 @@ form{
             }
         }
         &::after{
-            content: '\f078';
+            content: '';
             font-family: 'fontawesome';
             color: #c3c8c8;
             position: absolute;
-            top: 33%;
+            top: 35%;
             right: 10px;
+            width: 15px;
+            height: 15px;
             z-index: 0;
+            background-image: url(/sites/default/files/general-icon/chevron-lg.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transform: rotate(90deg);
         }
         &.chevron-adjust{
             &::after{
@@ -2859,6 +2866,9 @@ form{
     }
     .chosen-container-multi .chosen-choices li.search-choice{
         padding: 3px 5px 3px 5px;
+        span{
+            padding-right: 15px;
+        }
         .search-choice-close{
             opacity: 0.5;
             width: 15px;
@@ -2995,5 +3005,46 @@ form{
             height: 15px;
             background: url(/sites/default/files/general-icon/red-notify.png) center no-repeat;
         }
+    }
+}
+
+/* POPUP GENERAL ATTRIBUTES */
+.popup-general{
+    z-index: 1050 !important;
+    width: 700px !important;
+    overflow: hidden !important;
+    position: fixed !important;
+    top: 15vh !important;
+    height: 70vh!important;
+    left: calc(~"50vw - 350px") !important;
+    .ui-draggable-handle{
+        display: none;
+    }
+    #privacypolicyWindow, #installmentpolicyWindow{
+        overflow: hidden!important;
+        padding: 0!important;
+        .modal-body{
+           max-height: 55vh!important;
+           padding: 10px 0;
+           overflow-y: auto;
+        }
+        .modal-footer{
+           margin: 0;
+        }
+        @media all and (max-width: @larger-phone-width){
+           .modal-body{
+               max-height: 300px!important;
+            }
+        }
+    }
+    @media all and (max-width: @tablet-width) {
+        width: 500px!important;
+        left: calc(~"50vw - 250px") !important;
+    }
+    @media all and (max-width: @larger-phone-width) {
+        width: 300px!important;
+        left: calc(~"50vw - 150px") !important;
+        top: 10vh !important;
+        height: 80vh!important;
     }
 }

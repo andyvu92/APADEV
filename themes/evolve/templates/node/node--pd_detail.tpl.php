@@ -837,7 +837,7 @@
         </div>
         
         <div id="forgot-pw-form" style="display: none">   
-        <form method="POST" action="/pd/pd-product?id=5400" name="resetPass" id="resetPass">
+        <form method="POST" action="<?php echo $url; ?>" name="resetPass" id="resetPass">
             <div class="flex-container">
                 <div class="flex-cell">
 					<h3 class="light-lead-heading cairo">Forgot your password?</h3>

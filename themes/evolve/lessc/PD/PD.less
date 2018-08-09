@@ -369,6 +369,8 @@
 
 
 #registerPDUser{
+    overflow: hidden;
+    overflow-y: auto;
     .chosen-container-multi{
         .chosen-choices{
             background: none;
@@ -382,6 +384,9 @@
                 &:active {
                     outline: none;
                     border: none;
+                    }
+                    span{
+                        padding-right: 15px;
                     }
                 .search-choice-close{
                     opacity: 0.5;
@@ -1630,7 +1635,8 @@ div[aria-describedby="registerPDUser"].ui-dialog {
     z-index: 1050!important;
     left: 25%!important;
 	width: 620px!important;
-	
+    top: 35vh!important;
+    position: fixed!important;
 }
 div[aria-describedby="popUpWindow"].ui-dialog {
     z-index: 1053!important;
@@ -2039,11 +2045,12 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
             &:before{
                 content: "";
                 position: absolute;
-                left: 15px;
-                top: calc(~'50% - 10px');
-                width: 20px;
-                height: 20px;
-                background-image: url(/sites/default/files/dashboard-icon/presenters-B.png);
+                left: 20px;
+                top: calc(~'50% - 7.5px');
+                width: 15px;
+                height: 15px;
+                background-position: center;
+                background-image: url(/sites/default/files/dashboard-icon/account-G.png);
                 background-size: contain;
                 background-repeat: no-repeat;
             }
@@ -2054,13 +2061,14 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
             &:before{
                 content: "";
                 position: absolute;
-                left: 15px;
-                top: calc(~'50% - 10px');
-                width: 20px;
-                height: 20px;
+                left: 20px;
+                top: calc(~'50% - 7.5px');
+                width: 15px;
+                height: 15px;
                 background-size: contain;
+                background-position: center;
                 background-repeat: no-repeat;
-                background-image: url(/sites/default/files/dashboard-icon/presenters-B.png);
+                background-image: url(/sites/default/files/general-icon/password-icon-lg.png);
             }
         }
         .login-btn, .submit-btn{
