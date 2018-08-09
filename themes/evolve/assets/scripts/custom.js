@@ -593,6 +593,9 @@ jQuery(document).ready(function($) {
 	$('#privacypolicyl').click(function(){
 		$( "#privacypolicyWindow" ).dialog();
 	});
+	$('#accept1').click(function(){
+		$( "#PDTermsWindow" ).dialog();
+	});
 	$('#PRFDescription').click(function(){
 		$( "#PRFDesPopUp" ).dialog();
 	});
