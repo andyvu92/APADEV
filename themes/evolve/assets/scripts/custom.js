@@ -537,6 +537,13 @@ jQuery(document).ready(function($) {
 	    if(($('select[name=Job]').val()!="Physiotherapist")){
 			$( "#jobnoticement" ).dialog();
 		}
+		if(($('select[name=Job]').val()=="other")){
+			$( "#jobother" ).removeClass('display-none');
+		}
+		else{
+			$( "#jobother" ).addClass('display-none');
+		}
+		
 		   
 	});
 	$('#uploadImageButton').click(function(){
