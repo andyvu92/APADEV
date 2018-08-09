@@ -539,7 +539,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<label for="">Address line 2</label>
 						<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2" <?php if (empty($details['Street'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Street'].'"'; }?>>
 					</div>
-				</div>
+				
 				
 				<div class="row">
 					<div class="col-xs-6 col-md-3">

@@ -2751,6 +2751,14 @@ form{
             font-size: 1.2em;
             font-weight: 400;
         }
+        .payment-details{
+            .flex-cell{
+                max-width: 350px;
+                .flex-col-6:nth-child(2){
+                    text-align: right;
+                }
+            }
+        }
     }
 }
 
@@ -2785,12 +2793,31 @@ form{
             font-size: 1em;
             font-weight: 600;
         }
+        .pd-header-mobile{
+            display: none;
+        }
+        @media all and (max-width: @larger-phone-width){
+            .table-header{
+                display: none;
+            }
+            .pd-header-mobile{
+                display: inline-block;
+                font-weight: 400;
+                padding-right: 5px;
+            }
+            .table-cell{
+                flex-flow: column;
+            }
+            [class^="flex-col"]{
+                width: 100%;
+            }
+        }
     }
     .placeorder{
         font-family: Cairo;
         font-weight: 700;
         font-size: 15px;
-        background: #0f7ac9;
+        background: @bright-blue;
         text-transform: lowercase;
         &::first-letter{
             text-transform: uppercase;

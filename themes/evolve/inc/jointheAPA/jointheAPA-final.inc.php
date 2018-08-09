@@ -278,8 +278,8 @@ $PRFPrice = 0;
 						if(sizeof($prodcutArray)!=0){
 							foreach( $memberProducts as $memberProduct){
 								echo "<div class='flex-cell flex-flow-row table-cell'>";
-								echo "<div class='flex-col-8 title-col'>".$memberProduct['Title']."</div>";
-								echo "<div class='flex-col-2 price-col'>A$".$memberProduct['Price']."</div>";
+								echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$memberProduct['Title']."</div>";
+								echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$memberProduct['Price']."</div>";
 								$price += $memberProduct['Price'];
 								echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
 								echo "</div>";  
@@ -290,8 +290,8 @@ $PRFPrice = 0;
 						    foreach($NGProductsArray as $NGProduct){
 								if($NGProduct == $NGArray['ProductID']){
 									echo "<div class='flex-cell flex-flow-row table-cell'>";
-									echo "<div class='flex-col-8 title-col'>".$NGArray['ProductName']."</div>";
-									echo "<div class='flex-col-2 price-col'>A$".$NGArray['NGprice']."</div>";
+									echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$NGArray['ProductName']."</div>";
+									echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$NGArray['NGprice']."</div>";
 									$price += $NGArray['NGprice'];
 									echo '<div class="flex-col-2 action-col"><a class="deleteNGButton'.$NGArray['ProductID'].'">delete</a></div>';
 									echo "</div>";
@@ -302,8 +302,8 @@ $PRFPrice = 0;
 						if(sizeof($FPListArray)!=0){
 							foreach( $FPListArray as $FProduct){
 									echo "<div class='flex-cell flex-flow-row table-cell'>";
-									echo "<div class='flex-col-8 title-col'>".$FProduct['FPtitle']."</div>";
-									echo "<div class='flex-col-2 price-col'>A$".$FProduct['FPprice']."</div>";
+									echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>".$FProduct['FPtitle']."</div>";
+									echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$FProduct['FPprice']."</div>";
 									$price += $FProduct['FPprice'];
 									echo '<div class="flex-col-2 action-col">';if($FProduct['ProductID']!="9973"){ echo '<a class="deleteMGButton'.$FProduct['ProductID'].'">delete</a>';} echo '</div>';
 									echo "</div>";  
@@ -312,8 +312,8 @@ $PRFPrice = 0;
                         //if((!isset($_POST['prftag'])) && isset($_POST['PRF'])&& $_POST['PRF']!=""){ 
 						if($reviewData['PRFdonation']!=""){ 
                             echo '<div class="flex-cell flex-flow-row table-cell">
-                            <div class="flex-col-8 title-col">Physiotherapy Research Foundation donation</div>
-                            <div class="flex-col-2 price-col">A$'.$reviewData['PRFdonation'].'</div>
+                            <div class="flex-col-8 title-col"><span class="pd-header-mobile">Physiotherapy Research Foundation donation</div>
+                            <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.$reviewData['PRFdonation'].'</div>
                             <div class="flex-col-2 action-col"><a class="deletePRFButton">delete</a></div>
                             </div>'; 
                             $price +=$reviewData['PRFdonation']; }
@@ -378,7 +378,7 @@ $PRFPrice = 0;
 		
 		<?php endif; ?>
 		</div>
-			<div class="flex-container flex-flow-column">
+			<div class="flex-container flex-flow-column payment-details">
 
 				<div class="flex-cell ordersummary">
 					<span>YOUR ORDER</span>

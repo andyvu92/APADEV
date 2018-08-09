@@ -791,22 +791,51 @@
 	  
 		<div  id="loginPopWindow" >
 			<form name="signInForm" method="POST" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>">
-				 <h3 style="color: #009FDA; text-align: center; margin-top: 0; margin-bottom: 20px">Have a member account?</br>Please sign in below:</h3>
-				<!--<input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
-				 <input type="password" class="form-control"  name="Password"  placeholder="Password"><br>-->
-				<input class="form-control" name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" required />
-				<input class="form-control" placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" required />
-				<div class="col-xs-12 none-padding" style="margin: 10px 0 8px 0">
-				<input class="styled-checkbox" id="remember1" type="checkbox" name="remember"  <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> />
-				<label for="remember1">Remember me</label>
-				</div>
-				<p><a class="forgotPS" data-dismiss="modal" data-toggle="modal" data-target="#passwordReset" >Forgot password?</a></p>
+				<div class="flex-container">
+					<div class="flex-cell">
+						<h3 class="light-lead-heading cairo">Please login to see this page</h3>
+					</div>
+					<!--<input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
+					<input type="password" class="form-control"  name="Password"  placeholder="Password"><br>-->
+					<div class="flex-cell email-field">
+						<input class="form-control" name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" required />
+					</div>
 
-				 <p>Not a member? <a id="createAccount">Create an account.</a></p>
-				
-				  <input type="submit" value="Sign in">
+					<div class="flex-cell password-field">
+						<input class="form-control" placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" required />
+					</div>
+
+					<div class="flex-cell login-btn">
+						<input type="submit" value="Login">
+					</div>
+
+					<div class="flex-cell">
+						<div class="flex-col-5 remember-opt">
+							<input class="styled-checkbox" id="remember1" type="checkbox" name="remember"  <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> />
+							<label for="remember1">Remember me</label>
+						</div>
+						<div class="flex-col-7 forgot-password">
+							<span>Forgot your
+								<a class="forgotPS" data-dismiss="modal" data-toggle="modal" data-target="#passwordReset" >username/password</a>
+							</span>
+						</div>
+					</div>
+
+					<div class="flex-cell create-account">
+						<span>Not a member? <a id="createAccount">Join us today.</a></span>
+					</div>
+				</div>
 			</form>
-       
+       <script>
+		   	function overlayOff() {
+				document.getElementById("overlay").style.display = "none";
+			}
+			jQuery('document').ready(function($) {
+				$( ".ui-dialog").wrap( "<div id='overlay' class='new'></div>");
+				$( ".ui-dialog button").attr('onlick', 'overlayOff');
+			});
+
+		</script>
       </div>
 	  <?php if(isset($details)): ?>
 	  <?php
