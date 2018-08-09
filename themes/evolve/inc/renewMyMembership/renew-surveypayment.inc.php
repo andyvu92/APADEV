@@ -135,7 +135,7 @@ if(isset($_POST['step2-1'])) {
 						<option value="Other">Other</option>
 					</select>
 				</div>
-				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="">
+				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="" oninput="this.value = Math.abs(this.value)" min="0">
 				<a style="color: black;" id="PRFDescription">What is this?</a>
 				
 			</div>

@@ -324,7 +324,7 @@ if(sizeof($details['Dietary'])!=0){
 	}
 	$Dietary = $testDietaryArray;
 }
-if (!empty($details['Regional-group'])) { $_SESSION['Regional-group'] = $details['Regional-group'];}
+if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Regionalgp'];}
 
 ?>
 

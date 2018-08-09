@@ -79,39 +79,7 @@
 * @ingroup themeable
 */
 
-//1. for create web user
 
-if(isset($_POST['step1'])) {
-	$postData = array();
-	if(isset($_POST['Firstname'])){ $postData['Firstname'] = $_POST['Firstname']; }
-	if(isset($_POST['Lastname'])){ $postData['Lastname'] = $_POST['Lastname']; }
-	if(isset($_POST['Prefix'])){ $postData['Prefix'] = $_POST['Prefix']; }
-	if(isset($_POST['Birth'])){ $postData['birth'] = str_replace("-","/",$_POST['Birth']); }
-	if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
-	if(isset($_POST['Address_Line_1'])){ $postData['Unit'] = $_POST['Address_Line_1']; }
-	if(isset($_POST['Address_Line_2'])){ $postData['Street'] = $_POST['Address_Line_2']; }
-	if(isset($_POST['Suburb'])){ $postData['Suburb'] = $_POST['Suburb']; }
-	if(isset($_POST['Postcode'])){ $postData['Postcode'] = $_POST['Postcode']; }
-	if(isset($_POST['State'])){ $postData['State'] = $_POST['State']; }
-	if(isset($_POST['Country'])){ $postData['Country'] = $_POST['Country']; }
-	if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid'];}
-	if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password'];}
-	
-
-// for new user join a member call user registeration web service	
-$resultdata = GetAptifyData("42", $postData); print_r($resultdata);
-//when create user successfully call login web service to login in APA website automatically.
-//after login successfully get UserID as well to store on APA shopping cart database
-if($resultdata['result']) { 
-	$_SESSION["UserName"] = $postData['Memberid'];
-	$_SESSION["Password"] = $postData['Password'];
-	// call webservice login. Eddy will provide login -process functionality---put code here
-	// login sucessful unset session
-	loginManager($_SESSION["UserName"], $_SESSION["Password"]);
-	unset($_SESSION["UserName"]);
-	unset($_SESSION["Password"]);
-}
-}
 ?>
 <?php 
 	    if(isset($_SESSION["UserId"])&&($_SESSION["UserId"]!="0")){ $userId=$_SESSION["UserId"];
@@ -398,7 +366,7 @@ if($resultdata['result']) {
 		if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid']; } else {$postData['Memberid'] = $details['Memberid'];}
 		if(isset($_POST['Ahpranumber'])){ $postData['Ahpranumber'] = $_POST['Ahpranumber']; }else {$postData['Ahpranumber'] = $details['Ahpranumber'];}
 		if(isset($_POST['Branch'])){ $postData['Branch'] = $_POST['Branch']; }else {$postData['Branch'] = $details['PreferBranch'];}
-		$postData['Regional-group'] =$details['Regional-group'];
+		$postData['Regional-group'] =$details['Regionalgp'];
 		
 		if(isset($_POST['SpecialInterest'])){ $postData['PSpecialInterestAreaID'] = implode(",",$_POST['SpecialInterest']); }else {$postData['PSpecialInterestAreaID'] = $details['PSpecialInterestAreaID'];}
 		
@@ -496,23 +464,27 @@ if($resultdata['result']) {
 		GetAptifyData("5", $postData);
 		//update PD shopping care 
 		PDShoppingCart($userID=$_SESSION['UserId'], $productID=$_POST['productID'], $meetingID=$_POST['meetingID'],$type=$_POST['type'],$Coupon=$_POST['Couponcode']);
-		//save survey data in APA side
-		$CreateNewUserPD = array();
-		$CreateNewUserPD["UserID"] = $_SESSION['UserId'];
-		if(isset($_POST['Memberid'])){ $CreateNewUserPD["EmailAddress"] = $_POST['Memberid']; } else {$CreateNewUserPD["EmailAddress"] = $details['Memberid'];}
-		if(isset($_POST['Job'])){ $CreateNewUserPD["Job"] = $_POST["Job"];  }
-		if(isset($_POST['Registrationboard'])){ $CreateNewUserPD["Registrationboard"] = $_POST["Registrationboard"];  } else { $CreateNewUserPD["Registrationboard"] = 0;  } 
-		if(isset($_POST['Professionalinsurance'])){ $CreateNewUserPD["Professionalinsurance"] = $_POST["Professionalinsurance"];  }else { $CreateNewUserPD["Professionalinsurance"] = 0;  } 
-		if(isset($_POST['Professionalbody'])){ $CreateNewUserPD["Professionalbody"] = $_POST["Professionalbody"];  }else { $CreateNewUserPD["Professionalbody"] = 0;  } 
-		if(isset($_POST['HearaboutAPA'])){ $CreateNewUserPD["HearaboutAPA"] = $_POST["HearaboutAPA"];  }
-		if(isset($_POST['Membership-product'])){ $CreateNewUserPD["Membership-product"] = $_POST["Membership-product"];  }else { $CreateNewUserPD["Membership-product"] = 0;  } 
-		if(isset($_POST['Pdemails-product'])){ $CreateNewUserPD["Pdemails-product"] = $_POST["Pdemails-product"];  }else { $CreateNewUserPD["Pdemails-product"] = 0;  } 
-		if(isset($_POST['Jobs-product'])){ $CreateNewUserPD["Jobs-product"] = $_POST["Jobs-product"];  }else { $CreateNewUserPD["Jobs-product"] = 0;  } 
-		if(isset($_POST['Shop-product'])){ $CreateNewUserPD["Shop-product"] = $_POST["Shop-product"];  }else { $CreateNewUserPD["Shop-product"] = 0;  } 
-		if(isset($_POST['Campaigns-product'])){ $CreateNewUserPD["Campaigns-product"] = $_POST["Campaigns-product"];  }else { $CreateNewUserPD["Campaigns-product"] = 0;  } 
-		if(isset($_POST['Partner-product'])){ $CreateNewUserPD["Partner-product"] = $_POST["Partner-product"];  }else { $CreateNewUserPD["Partner-product"] = 0;  } 
-		$CreateNewUserPD["CreateDate"] = date('Y-m-d');
-		SavePDSurvey($CreateNewUserPD=$CreateNewUserPD);	
+		//save survey data for non-member in APA side
+		if(isset($_POST['updateNonMemberDetail']))
+		{
+			$CreateNewUserPD = array();
+			$CreateNewUserPD["UserID"] = $_SESSION['UserId'];
+			if(isset($_POST['Memberid'])){ $CreateNewUserPD["EmailAddress"] = $_POST['Memberid']; } else {$CreateNewUserPD["EmailAddress"] = $details['Memberid'];}
+			if(isset($_POST['Job'])){ $CreateNewUserPD["Job"] = $_POST["Job"];  }
+			if(isset($_POST['Registrationboard'])){ $CreateNewUserPD["Registrationboard"] = $_POST["Registrationboard"];  } else { $CreateNewUserPD["Registrationboard"] = 0;  } 
+			if(isset($_POST['Professionalinsurance'])){ $CreateNewUserPD["Professionalinsurance"] = $_POST["Professionalinsurance"];  }else { $CreateNewUserPD["Professionalinsurance"] = 0;  } 
+			if(isset($_POST['Professionalbody'])){ $CreateNewUserPD["Professionalbody"] = $_POST["Professionalbody"];  }else { $CreateNewUserPD["Professionalbody"] = 0;  } 
+			if(isset($_POST['HearaboutAPA'])){ $CreateNewUserPD["HearaboutAPA"] = $_POST["HearaboutAPA"];  } else { $CreateNewUserPD["HearaboutAPA"] = "";}
+			if(isset($_POST['Membership-product'])){ $CreateNewUserPD["Membership-product"] = $_POST["Membership-product"];  }else { $CreateNewUserPD["Membership-product"] = 0;  } 
+			if(isset($_POST['Pdemails-product'])){ $CreateNewUserPD["Pdemails-product"] = $_POST["Pdemails-product"];  }else { $CreateNewUserPD["Pdemails-product"] = 0;  } 
+			if(isset($_POST['Jobs-product'])){ $CreateNewUserPD["Jobs-product"] = $_POST["Jobs-product"];  }else { $CreateNewUserPD["Jobs-product"] = 0;  } 
+			if(isset($_POST['Shop-product'])){ $CreateNewUserPD["Shop-product"] = $_POST["Shop-product"];  }else { $CreateNewUserPD["Shop-product"] = 0;  } 
+			if(isset($_POST['Campaigns-product'])){ $CreateNewUserPD["Campaigns-product"] = $_POST["Campaigns-product"];  }else { $CreateNewUserPD["Campaigns-product"] = 0;  } 
+			if(isset($_POST['Partner-product'])){ $CreateNewUserPD["Partner-product"] = $_POST["Partner-product"];  }else { $CreateNewUserPD["Partner-product"] = 0;  } 
+			$CreateNewUserPD["CreateDate"] = date('Y-m-d');
+			$_SESSION['SurveyData'] = $CreateNewUserPD;
+			SavePDSurvey($CreateNewUserPD=$CreateNewUserPD);
+		}	
 		
 	}
 	// in case of user update the details get the new data.
@@ -562,8 +534,7 @@ if($resultdata['result']) {
 						else{
 							echo $pd_detail['Description'];
 						}	
-					}
-					else{
+					} else{
 						echo "<h4>No record found!</h4>";
 					}
 					?>
@@ -620,15 +591,14 @@ if($resultdata['result']) {
 						<?php 
 						foreach($pd_detail['Presenter'] as $bios) {
 							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
-							echo '<p>'.$bios['Comments'].'</p><br>';
+							//echo '<p>'.$bios['Comments'].'</p><br>';
 
-							if (strlen($pd_detail['Presenter']) > 300){
+							if (strlen($bios['Comments']) > 300){
 								echo '<div class="readmore">';
-								echo $pd_detail['Presenter'];
+								echo $bios['Comments'];
 								echo '</div>';
-							}
-							else{
-								echo $pd_detail['Presenter'];
+							} else{
+								echo $bios['Comments'];
 							}
 						}
 						?>
@@ -868,6 +838,7 @@ if($resultdata['result']) {
 	  <div id="registerMember">
             <form action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" id="registerMemberForm" autocomplete="off">
 			    <input type="hidden" name="updateDetail">
+				<input type="hidden" name="updateNonMemberDetail">
 				<input type="hidden" name="meetingID" value="<?php echo $pd_detail['MeetingID'];?>"> 
 				<input type="hidden" name="productID" value="<?php echo $pd_detail['ProductID'];?>"> 
 			    <input type="hidden" name="type" value="PD">
@@ -941,7 +912,7 @@ if($resultdata['result']) {
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">Building name</label>
-							<input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['BuildingName'])) {echo "placeholder='Building name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
+							<input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['Unit'])) {echo "placeholder='Building name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
 						</div>
 
 						<div class="col-lg-6">
@@ -1031,7 +1002,7 @@ if($resultdata['result']) {
 						<div class="row">
 							<div class="col-lg-12">
 								<label for="">Building name</label>
-								<input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['BuildingName1'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
+								<input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 							</div>
 							<div class="col-lg-6">
 								<label for="">PO Box</label>
@@ -1234,9 +1205,12 @@ if($resultdata['result']) {
 									$c = '<option value="inmotion">InMotion</option>';
 									$d = '<option value="socialmedia">Social media</option>';
 									$e = '<option value="apawebsite">APA website</option>';
-									$f = '<option value="other">Other</option>';
+									$f = '<option value="searchengine">Search engine</option>';
+									$g = '<option value="email">Email</option>';
+									$h = '<option value="one">I have been to one before</option>';
+									$i = '<option value="other">Other</option>';
 														$optionarrays = array();
-														array_push($optionarrays,$b,$c,$d,$e,$f );
+														array_push($optionarrays,$b,$c,$d,$e,$f,$g,$h,$i);
 														shuffle($optionarrays);
 														foreach ($optionarrays as $data) {
 																			echo  $data;
@@ -1370,8 +1344,8 @@ if($resultdata['result']) {
           </div>  
 <!--Sign up Web User-->
 <div id="signupWebUser">
-<form id="your-detail-form" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST">
-		<input type="hidden" name="step1" value="1"/>
+<form id="create-webuser-form" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST">
+		<input type="hidden" name="CreateUser" value=""/>
 		    <div class="down33" style="display:block;">
 			<div class="row"><h4 class="modal-title">Don’t have an account? Please register below:</h4></div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">
@@ -1398,22 +1372,22 @@ if($resultdata['result']) {
                     <div class="row">
 						<div class="col-lg-6">
                            <label for="">First name<span class="tipstyle">*</span></label>
-                           <input type="text" class="form-control"  name="Firstname">
+                           <input type="text" class="form-control"  name="Firstname" required>
 						</div>
 						
                         <div class="col-lg-6">
                            <label for="">Last name<span class="tipstyle">*</span></label>
-                           <input type="text" class="form-control" name="Lastname">
+                           <input type="text" class="form-control" name="Lastname" required>
                         </div>
 					 </div>
 					 
                     <div class="row">
                         <div class="col-lg-6">
-                           <label for="">Birth Date<span class="tipstyle">*</span></label>
-                           <input type="date" class="form-control" name="Birth">
+                           <label for="">Birth date<span class="tipstyle">*</span></label>
+                           <input type="date" class="form-control" name="Birth" required>
                         </div>
                         <div class="col-lg-3">
-						   <label for="">Gender<span class="tipstyle">*</span></label>
+						   <label for="">Gender</label>
 						   	<div class="chevron-select-box">
 								<select class="form-control" id="Gender" name="Gender">
 								<?php
@@ -1421,7 +1395,7 @@ if($resultdata['result']) {
 										$Gender=json_decode($Gendercode, true);						
 										foreach($Gender  as $key => $value){
 											echo '<option value="'.$Gender[$key]['ID'].'"';
-										
+											if($Gender[$key]['ID'] =="3") {echo "selected='selected'";}
 											echo '> '.$Gender[$key]['Description'].' </option>';
 										}
 									?>
@@ -1432,8 +1406,8 @@ if($resultdata['result']) {
 					
 					<div class="row">
 					<div class="col-lg-6">
-						<label for="">Member ID (Your email address)<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)">
+						<label for="">User ID (Your email address)<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)" required>
 					<div id="checkMessage"></div>
 					<script>
 					function checkEmailFunction(email) {
@@ -1466,12 +1440,12 @@ if($resultdata['result']) {
 				<div class="row">
 					<div class="col-lg-6">
 						<label for="">Your password<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" id="newPassword" name="newPassword" >
+						<input type="password" class="form-control" id="newPassword" name="newPassword" required>
 					</div>
 					
 					<div class="col-lg-6">
 						<label for="">Confirm password<span class="tipstyle">*</span></label>
-						<input type="password" class="form-control" id="Password" name="Password" value="" onchange="checkPasswordFunction(this.value)">
+						<input type="password" class="form-control" id="Password" name="Password" value="" onchange="checkPasswordFunction(this.value)" required>
 					</div>
 					<div id="checkPasswordMessage"></div>
 				<script>
@@ -1492,32 +1466,44 @@ if($resultdata['result']) {
 					}
 				</script>
 			    </div>
-									
+					<div class="col-xs-12"><span class="light-lead-heading cairo">Residential address:</span></div>				
+					<div class="row">
+						<div class="col-xs-12">
+						   <label for="">Building name</label>
+						   <input type="text" class="form-control"  name="BuildingName">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+						   <label for="">PO Box</label>
+						    <input type="text" class="form-control" name="Pobox">
+						</div>
+					</div>
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">Address line 1<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
+							<input type="text" class="form-control"  name="Address_Line_1" >
 						</div>
 
 						<div class="col-lg-12">
-							<label for="">Address line 2<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
+							<label for="">Address line 2</label>
+							<input type="text" class="form-control" name="Address_Line_2">
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">City or town<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Suburb" >
+							<input type="text" class="form-control" name="Suburb" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-3">
 							<label for="">Postcode<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Postcode" >
+							<input type="text" class="form-control" name="Postcode" required>
 						</div>
 						<div class="col-lg-3">
-							<label for="">State<span class="tipstyle">*</span></label>
+							<label for="">State</label>
 							<div class="chevron-select-box">
 								<select class="form-control" id="State" name="State">
 									<option value="" selected disabled> State </option>
@@ -1542,6 +1528,7 @@ if($resultdata['result']) {
 								$country=json_decode($countrycode, true);
 								foreach($country  as $key => $value){
 									echo '<option value="'.$country[$key]['Country'].'"';
+									if($country[$key]['ID']=="14"){echo "selected='selected'";}
 									echo '> '.$country[$key]['Country'].' </option>';
 									
 								}
@@ -1555,7 +1542,10 @@ if($resultdata['result']) {
                 	
 				
             </div>
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4" style="width: 100%; margin-top: 10px;"><span class="dashboard-button-name">Submit</span></a></div>
+			<div class="col-lg-12">
+				<button class="accent-btn" type="submit" value="Submit">Submit</button>
+			</div>
+				<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4" style="width: 100%; margin-top: 10px;"><span class="dashboard-button-name">Submit</span></a></div>-->
 		
     </form>
 
@@ -2033,7 +2023,7 @@ if($resultdata['result']) {
             }         
         },
      });
-	   $("#registerMemberForm").validate({
+	   $("#registerMemberForm, ").validate({
             rules: {
               Prefix:{
                 required: true,
