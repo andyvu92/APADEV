@@ -46,7 +46,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-			Have you had more than one claim?<span class="tipstyle">*</span>
+				<label>Have you had more than one claim?<span class="tipstyle">*</span>
 			</div>
 			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Oneclaim" id="Oneclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="1") echo 'checked="checked"';?>><label style="min-height:0" for="Oneclaim1">Yes</label></div>
 			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Oneclaim" id="Oneclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Oneclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label style="min-height:0" for="Oneclaim2">No</label></div>

@@ -619,6 +619,7 @@ body.page-node{
 
 /*----------------PREDEFINED COLORS-------------------*/
 @blue: #009fda;
+@grey: #b5b5b5;
 
 
 /*----------------PD SEARCH RESULT-------------------*/
@@ -1987,14 +1988,143 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
     width: 400px !important;
     left: calc(~"50vw - 200px")!important;
     top: 30vh !important;
-    input.form-control{
+    .ui-dialog-titlebar-close{
+        display: flex;
+        justify-content: center;
+        align-items: center;
         background: none;
-        min-height: 41px;
-        margin: 10px 0;
+        .ui-button-icon-primary{
+            background-image: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:before{
+                content: "";
+                position: absolute;
+                width: 15px;
+                height: 2px;
+                transform: rotate(45deg);
+                background: @grey;
+            }
+            &:after{
+                content: "";
+                position: absolute;
+                width: 15px;
+                height: 2px;
+                transform: rotate(-45deg);
+                background: @grey;
+            }
+        }
+    }
+    #loginPopWindow{
+        margin: 0 auto;
+        padding-bottom: 40px;
+        max-width: 90%;
+        input.form-control{
+            background: none;
+            min-height: 41px;
+            margin: 5px 0;
+            text-indent: 40px;
+        }
+        .light-lead-heading{
+            color: #000;
+            margin-top: 0;
+            text-align: center;
+        }
+        .email-field{
+            width: 100%;
+            position: relative;
+            &:before{
+                content: "";
+                position: absolute;
+                left: 15px;
+                top: calc(~'50% - 10px');
+                width: 20px;
+                height: 20px;
+                background-image: url(/sites/default/files/dashboard-icon/presenters-B.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+        }
+        .password-field{
+            width: 100%;
+            position: relative;
+            &:before{
+                content: "";
+                position: absolute;
+                left: 15px;
+                top: calc(~'50% - 10px');
+                width: 20px;
+                height: 20px;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-image: url(/sites/default/files/dashboard-icon/presenters-B.png);
+            }
+        }
+        .login-btn{
+            margin: 15px 0;
+            input{
+                width: 100%!important;
+                background: @bright-blue;
+                color: #fff;
+                &:hover{
+                    opacity: 0.8;
+                }
+            }
+        }
+        .remember-opt{
+            font-size: 0.8em;
+            label{
+                display: flex;
+                align-items: center;
+                margin: 0;
+            }
+        }
+        .forgot-password{
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            a{
+                text-decoration: underline;
+            }
+        }
+        .create-account{
+            display: flex;
+            justify-content: center;
+            font-size: 1.4em;
+            margin-top: 20px;
+            text-align: center;
+            a{
+                text-decoration: underline;
+            }
+        }
     }
     @media all and (max-width: @phone-width) {
         width: 300px !important;
+        top: 20vh!important;
         left: calc(~"50vw - 150px")!important;
+        #loginPopWindow{
+            .flex-cell{
+                flex-direction: column;
+                [class^="flex-col"]{
+                    width: 100%;
+                }
+            }
+            .forgot-password{
+                justify-content: flex-start;
+                margin-top: 15px;
+            }
+            .create-account{
+                font-size: 1.2em;
+            }
+            .light-lead-heading{
+                font-size: 2em;
+            }
+        }
+    }
+    @media all and (max-width: 345px){
+        top: 15vh!important;
     }
 }
 
