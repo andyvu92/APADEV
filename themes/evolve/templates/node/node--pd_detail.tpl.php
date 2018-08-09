@@ -79,39 +79,7 @@
 * @ingroup themeable
 */
 
-//1. for create web user
 
-if(isset($_POST['step1'])) {
-	$postData = array();
-	if(isset($_POST['Firstname'])){ $postData['Firstname'] = $_POST['Firstname']; }
-	if(isset($_POST['Lastname'])){ $postData['Lastname'] = $_POST['Lastname']; }
-	if(isset($_POST['Prefix'])){ $postData['Prefix'] = $_POST['Prefix']; }
-	if(isset($_POST['Birth'])){ $postData['birth'] = str_replace("-","/",$_POST['Birth']); }
-	if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
-	if(isset($_POST['Address_Line_1'])){ $postData['Unit'] = $_POST['Address_Line_1']; }
-	if(isset($_POST['Address_Line_2'])){ $postData['Street'] = $_POST['Address_Line_2']; }
-	if(isset($_POST['Suburb'])){ $postData['Suburb'] = $_POST['Suburb']; }
-	if(isset($_POST['Postcode'])){ $postData['Postcode'] = $_POST['Postcode']; }
-	if(isset($_POST['State'])){ $postData['State'] = $_POST['State']; }
-	if(isset($_POST['Country'])){ $postData['Country'] = $_POST['Country']; }
-	if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid'];}
-	if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password'];}
-	
-
-// for new user join a member call user registeration web service	
-$resultdata = GetAptifyData("42", $postData); print_r($resultdata);
-//when create user successfully call login web service to login in APA website automatically.
-//after login successfully get UserID as well to store on APA shopping cart database
-if($resultdata['result']) { 
-	$_SESSION["UserName"] = $postData['Memberid'];
-	$_SESSION["Password"] = $postData['Password'];
-	// call webservice login. Eddy will provide login -process functionality---put code here
-	// login sucessful unset session
-	loginManager($_SESSION["UserName"], $_SESSION["Password"]);
-	unset($_SESSION["UserName"]);
-	unset($_SESSION["Password"]);
-}
-}
 ?>
 <?php 
 	    if(isset($_SESSION["UserId"])&&($_SESSION["UserId"]!="0")){ $userId=$_SESSION["UserId"];
@@ -1341,8 +1309,8 @@ if($resultdata['result']) {
           </div>  
 <!--Sign up Web User-->
 <div id="signupWebUser">
-<form id="your-detail-form" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST">
-		<input type="hidden" name="step1" value="1"/>
+<form id="create-webuser-form" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST">
+		<input type="hidden" name="CreateUser" value=""/>
 		    <div class="down33" style="display:block;">
 			<div class="row"><h4 class="modal-title">Don’t have an account? Please register below:</h4></div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">
@@ -1369,22 +1337,22 @@ if($resultdata['result']) {
                     <div class="row">
 						<div class="col-lg-6">
                            <label for="">First name<span class="tipstyle">*</span></label>
-                           <input type="text" class="form-control"  name="Firstname">
+                           <input type="text" class="form-control"  name="Firstname" required>
 						</div>
 						
                         <div class="col-lg-6">
                            <label for="">Last name<span class="tipstyle">*</span></label>
-                           <input type="text" class="form-control" name="Lastname">
+                           <input type="text" class="form-control" name="Lastname" required>
                         </div>
 					 </div>
 					 
                     <div class="row">
                         <div class="col-lg-6">
-                           <label for="">Birth Date<span class="tipstyle">*</span></label>
-                           <input type="date" class="form-control" name="Birth">
+                           <label for="">Birth date<span class="tipstyle">*</span></label>
+                           <input type="date" class="form-control" name="Birth" required>
                         </div>
                         <div class="col-lg-3">
-						   <label for="">Gender<span class="tipstyle">*</span></label>
+						   <label for="">Gender</label>
 						   	<div class="chevron-select-box">
 								<select class="form-control" id="Gender" name="Gender">
 								<?php
@@ -1392,7 +1360,7 @@ if($resultdata['result']) {
 										$Gender=json_decode($Gendercode, true);						
 										foreach($Gender  as $key => $value){
 											echo '<option value="'.$Gender[$key]['ID'].'"';
-										
+											if($Gender[$key]['ID'] =="3") {echo "selected='selected'";}
 											echo '> '.$Gender[$key]['Description'].' </option>';
 										}
 									?>
@@ -1403,8 +1371,8 @@ if($resultdata['result']) {
 					
 					<div class="row">
 					<div class="col-lg-6">
-						<label for="">Member ID (Your email address)<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)">
+						<label for="">User ID (Your email address)<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)" required>
 					<div id="checkMessage"></div>
 					<script>
 					function checkEmailFunction(email) {
@@ -1437,12 +1405,12 @@ if($resultdata['result']) {
 				<div class="row">
 					<div class="col-lg-6">
 						<label for="">Your password<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" id="newPassword" name="newPassword" >
+						<input type="password" class="form-control" id="newPassword" name="newPassword" required>
 					</div>
 					
 					<div class="col-lg-6">
 						<label for="">Confirm password<span class="tipstyle">*</span></label>
-						<input type="password" class="form-control" id="Password" name="Password" value="" onchange="checkPasswordFunction(this.value)">
+						<input type="password" class="form-control" id="Password" name="Password" value="" onchange="checkPasswordFunction(this.value)" required>
 					</div>
 					<div id="checkPasswordMessage"></div>
 				<script>
@@ -1463,7 +1431,19 @@ if($resultdata['result']) {
 					}
 				</script>
 			    </div>
-									
+					<div class="col-xs-12"><span class="light-lead-heading cairo">Residential address:</span></div>				
+					<div class="row">
+						<div class="col-xs-12">
+						   <label for="">Building name</label>
+						   <input type="text" class="form-control"  name="BuildingName">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-xs-12">
+						   <label for="">PO Box</label>
+						    <input type="text" class="form-control" name="Pobox">
+						</div>
+					</div>
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">Address line 1<span class="tipstyle">*</span></label>
@@ -1471,7 +1451,7 @@ if($resultdata['result']) {
 						</div>
 
 						<div class="col-lg-12">
-							<label for="">Address line 2<span class="tipstyle">*</span></label>
+							<label for="">Address line 2</label>
 							<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
 						</div>
 					</div>
@@ -1479,16 +1459,16 @@ if($resultdata['result']) {
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">City or town<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Suburb" >
+							<input type="text" class="form-control" name="Suburb" required>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-3">
 							<label for="">Postcode<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Postcode" >
+							<input type="text" class="form-control" name="Postcode" required>
 						</div>
 						<div class="col-lg-3">
-							<label for="">State<span class="tipstyle">*</span></label>
+							<label for="">State</label>
 							<div class="chevron-select-box">
 								<select class="form-control" id="State" name="State">
 									<option value="" selected disabled> State </option>
@@ -1513,6 +1493,7 @@ if($resultdata['result']) {
 								$country=json_decode($countrycode, true);
 								foreach($country  as $key => $value){
 									echo '<option value="'.$country[$key]['Country'].'"';
+									if($country[$key]['ID']=="14"){echo "selected='selected'";}
 									echo '> '.$country[$key]['Country'].' </option>';
 									
 								}
@@ -1526,7 +1507,10 @@ if($resultdata['result']) {
                 	
 				
             </div>
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4" style="width: 100%; margin-top: 10px;"><span class="dashboard-button-name">Submit</span></a></div>
+			<div class="col-lg-12">
+				<button class="accent-btn" type="submit" value="Submit">Submit</button>
+			</div>
+				<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4" style="width: 100%; margin-top: 10px;"><span class="dashboard-button-name">Submit</span></a></div>-->
 		
     </form>
 
@@ -2004,7 +1988,7 @@ if($resultdata['result']) {
             }         
         },
      });
-	   $("#registerMemberForm").validate({
+	   $("#registerMemberForm, ").validate({
             rules: {
               Prefix:{
                 required: true,

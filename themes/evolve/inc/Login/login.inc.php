@@ -571,6 +571,52 @@ if (isset($_POST['refreshTag'])) {
 		}
 	}
 } 
+
+//1. for create web user
+
+if(isset($_POST['CreateUser'])) {
+	$postData = array();
+	if(isset($_POST['Firstname'])){ $postData['Firstname'] = $_POST['Firstname']; }
+	if(isset($_POST['Lastname'])){ $postData['Lastname'] = $_POST['Lastname']; }
+	if(isset($_POST['Prefix'])){ $postData['Prefix'] = $_POST['Prefix']; }
+	if(isset($_POST['Birth'])){ $postData['birth'] = str_replace("-","/",$_POST['Birth']); }
+	if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
+	/**fixed address issue for create web user web service***/
+	if($_POST['Pobox']!="") {
+			$postData['BuildingName'] =$_POST['Pobox'];
+			$postData['Address_Line_1'] ="";
+			$postData['Address_Line_2'] ="";
+			
+	}else {
+		$postData['BuildingName'] = $_POST['BuildingName']; 
+		$postData['Address_Line_1'] = $_POST['Address_Line_1'];
+		$postData['Address_Line_2'] = $_POST['Address_Line_2'];
+		
+	}
+	//if(isset($_POST['Address_Line_1'])){ $postData['Unit'] = $_POST['Address_Line_1']; }
+	//if(isset($_POST['Address_Line_2'])){ $postData['Street'] = $_POST['Address_Line_2']; }
+	if(isset($_POST['Suburb'])){ $postData['Suburb'] = $_POST['Suburb']; }
+	if(isset($_POST['Postcode'])){ $postData['Postcode'] = $_POST['Postcode']; }
+	if(isset($_POST['State'])){ $postData['State'] = $_POST['State']; }
+	if(isset($_POST['Country'])){ $postData['Country'] = $_POST['Country']; }
+	if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid'];}
+	if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password'];}
+	
+
+// for new user join a member call user registeration web service	
+$resultdata = GetAptifyData("42", $postData);
+//when create user successfully call login web service to login in APA website automatically.
+//after login successfully get UserID as well to store on APA shopping cart database
+if($resultdata['result']) { 
+	$_SESSION["UserName"] = $postData['Memberid'];
+	$_SESSION["Password"] = $postData['Password'];
+	// call webservice login. Eddy will provide login -process functionality---put code here
+	// login sucessful unset session
+	loginManager($_SESSION["UserName"], $_SESSION["Password"]);
+	unset($_SESSION["UserName"]);
+	unset($_SESSION["Password"]);
+}
+}
 	// current page's url. log-in to the same page before log-in.
 	$url =  "{$_SERVER['REQUEST_URI']}";
 	
