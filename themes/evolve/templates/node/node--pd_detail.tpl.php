@@ -891,7 +891,7 @@ $('.tab span').on('click', function (e) {
 	  <?php
 		/*hanled survey data session */
 		$now = time();  
-		if ($now > $_SESSION['expire']) {
+		if (isset($_SESSION['expire']) && $now > $_SESSION['expire']) {
             unset($_SESSION['SurveyData']);
         }
 	  ?>
