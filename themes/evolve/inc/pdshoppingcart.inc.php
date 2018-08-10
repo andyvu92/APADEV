@@ -158,7 +158,7 @@ if(isset($_POST['addCard']) && $_POST['addCard'] == "1"){
 	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
 	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
 	$out = GetAptifyData("15",$postPaymentData); 
-	echo "testhere";
+	
 } 
 /*if(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])) {
 	$tempcard = array();
@@ -176,7 +176,7 @@ if(isset($_SESSION["UserId"])){
 	$userid = $_SESSION["UserId"];
 	$test['id'] = $_SESSION["UserId"];
 	$cardsnum = GetAptifyData("12", $test);
-	print_r($cardsnum);
+	
 	   
 	
 } 
@@ -193,7 +193,7 @@ if(isset($_SESSION["UserId"])){
 		<div class="flex-col-3"><span class="table-heading">Date</span></div>
 		<div class="flex-col-2 pd-spcart-location"><span class="table-heading">Location</span></div>
 		<div class="flex-col-1 pd-spcart-price"><span class="table-heading">Price</span></div>
-		<div class="flex-col-2 pd-spcart-wishlist"><span class="table-heading">Action</span></div>
+		<!--<div class="flex-col-2 pd-spcart-wishlist"><span class="table-heading">Action</span></div>-->
 		<div class="flex-col-1 pd-spcart-delete"><span class="table-heading">Delete</span></div>
 	</div>
 	<?php 
@@ -230,7 +230,7 @@ if(isset($_SESSION["UserId"])){
 				//echo	"<td>".$productt['Pricelist'][0]['Price']."</td>";
 				//echo	"<td>NM price</td>";
 			//}
-			echo        '<div class="flex-col-2 pd-spcart-wishlist"><a target="_blank" href="pd-wishlist?addWishList&UID='.$pass.'">ADD TO WISHLIST</a></div>';
+			//echo        '<div class="flex-col-2 pd-spcart-wishlist"><a target="_blank" href="pd-wishlist?addWishList&UID='.$pass.'">ADD TO WISHLIST</a></div>';
 			echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
 			echo "</div>";    
 			$n=$n+1;
@@ -453,20 +453,21 @@ if(isset($_SESSION["UserId"])){
 		</div>
 	</form>	
 	<?php endif; ?>
-	<?php  if(($productList->rowCount()>0) && (sizeof($NGProductsArray)!=0)):?>
+	<?php  if(($productList->rowCount()>0) || (sizeof($NGProductsArray)!=0)):?>
 		<div class="row">
 			<div class="col-xs-12"><span class="sidebardis">PRF donation</span></div>
 			<div class="col-xs-12 col-md-12">
 				<div class="chevron-select-box">
 					<select class="form-control" id="PRF" name="PRF">
-						<option value="10" selected>$10.00</option>
+						<option value="5" selected>$5.00</option>
+						<option value="10">$10.00</option>
 						<option value="20">$20.00</option>
 						<option value="50">$50.00</option>
 						<option value="100">$100.00</option>
 						<option value="Other">Other</option>
 					</select>
 				</div>
-				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="">
+				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="" oninput="this.value = Math.abs(this.value)" min="0">
 				<a style="color: black;" id="PRFDescription">What is this?</a>
 			</div>
 		</div>
@@ -482,22 +483,22 @@ if(isset($_SESSION["UserId"])){
 		<div class="flex-container flex-flow-column pd-spcart-order">
 			<div class="flex-cell">
                 <div class="flex-col-6"><?php echo $i;?> items</div>
-                <div class="flex-col-6">A$<?php echo $price;?></div>
+                <div class="flex-col-6">$<?php echo $price;?></div>
             </div>
             
 			<div class="flex-cell">
                 <div class="flex-col-6">Discount</div>
-                <div class="flex-col-6">A$<?php echo $discountPrice;?></div>
+                <div class="flex-col-6">$<?php echo $discountPrice;?></div>
             </div>
             
 			<div class="flex-cell">
 			    <div class="flex-col-6">GST</div>
-				<div class="flex-col-6">A$<?php echo $scheduleDetails['GST'];?></div>
+				<div class="flex-col-6">$<?php echo $scheduleDetails['GST'];?></div>
             </div>
             
 			<div class="flex-cell">
                 <div class="flex-col-6">Total(Inc.GST)</div>
-                <div class="flex-col-6">A$<?php echo $scheduleDetails['OrderTotal'];?></div>
+                <div class="flex-col-6">$<?php echo $scheduleDetails['OrderTotal'];?></div>
 			</div>
 		</div>
 		         
