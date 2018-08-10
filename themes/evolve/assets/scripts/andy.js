@@ -181,9 +181,8 @@ jQuery(document).ready(function() {
 //ADD WARNING ICON FOR MISSING INFO ON WORKPALCE TABS
 jQuery(document).ready(function() {
   $(".join-details-button3").on("click",function() {
-
     if ($('#workplaceblocks #workplace1').find(".focuscss").length > 0){ 
-      $('#tabmenu #workplaceli1').addClass("warning");
+      $('#tabmenu li#workplaceli1').addClass("warning");
     }
     if ($('#workplaceblocks #workplace2').find(".focuscss").length > 0){ 
       $('#tabmenu li#workplaceli2').addClass("warning");
@@ -243,7 +242,22 @@ jQuery(document).ready(function() {
       $('#tabmenu li#workplaceli20').addClass("warning");
     }
   });
-
 });
 
-//LOGIN FORM
+//TRIGGER DELETE WORKPLACE(S) POPUPS
+jQuery(document).ready(function() {
+  $("#tabmenu li [class^=calldeletewp]").on("click",function(){
+    var x = $(this).attr("class").replace("calldeletewp", "");
+    $("#deleteWorkplaceWindow [value=yes]").attr("class", "");
+    $("#deleteWorkplaceWindow [value=yes]").addClass("deletewp"+x);
+    $('#deleteWorkplaceWindow').fadeIn();
+  });
+
+  $("#deleteWorkplaceWindow [value=yes]").on("click",function(){
+    $('#deleteWorkplaceWindow').hide();
+  });
+
+  $("#deleteWorkplaceWindow .cancelDeleteButton").on("click",function(){
+    $('#deleteWorkplaceWindow').fadeOut();
+  });
+});

@@ -1112,6 +1112,7 @@ input{
     position: fixed !important;
     top: 15vh !important;
     left: calc(~"50vw - 350px") !important;
+    background: #fff;
     .ui-draggable-handle{
         position: absolute;
         right: 10px;
@@ -1154,12 +1155,10 @@ input{
     width: 500px !important;
     top: 30vh!important;
     position: fixed!important;
+    background: #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     @media all and (max-width: @larger-phone-width) {
-        left: calc(50vw - 200px) !important;
-        width: 400px !important; 
-    }
-    @media all and (max-width: 340px) {
-        left: calc(50vw - 150px) !important;
+        left: calc(~"50vw - 150px") !important;
         width: 300px !important; 
     }
 }
@@ -1349,5 +1348,63 @@ input{
     }
     @media all and (max-width: 345px){
         top: 15vh!important;
+    }
+}
+
+//POPUPS 
+#deleteWorkplaceWindow{
+    .popup-small;
+    padding: 40px 80px;
+    .light-lead-heading{
+        color: #000;
+        margin-top: 0;
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+    .buttons-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;   
+        margin-top: 30px;
+        [value="yes"], [value="no"]{
+            float: none;
+            display: inline-block;
+            margin-bottom: 0px;
+            margin-top: 2px;
+            background-color: #009fda;
+            color: #fff;
+            padding: 8px 20px;
+            text-align: center;
+            font-family: Cairo;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 45%;
+            margin: 0;
+            &:hover{
+                opacity: 0.8;
+            }
+        }
+        [value="yes"], [value="no"]{
+
+        }
+        [value="no"]{
+            color: #848589;
+            background: none;
+            border: 1px solid #d6d6d6;
+        }
+    }
+    @media all and (max-width: @larger-phone-width){
+        padding: 40px 20px;
+    }
+    @media all and (max-width: @phone-width) {
+        .light-lead-heading{
+            font-size: 2em;
+        }
     }
 }
