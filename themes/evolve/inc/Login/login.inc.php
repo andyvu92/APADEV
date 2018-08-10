@@ -806,7 +806,7 @@ if(isset($_SESSION['UserId'])) {
 		<div class="form-container">        
       <div class="tab-content">
         <div id="main-signin-form">             
-          <form name="signInForm" method="POST" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>">
+          <form name="signInForm" method="POST" action="<?php echo $url;?>">
 				<div class="flex-container">
 					<div class="flex-cell">
 						<h3 class="light-lead-heading cairo">Please login to see this page</h3>
