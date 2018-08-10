@@ -401,43 +401,8 @@ div[aria-describedby="deleteCardWindow"] .ui-dialog-content{
 }
 div[aria-describedby="privacypolicyWindow"].ui-dialog, 
 div[aria-describedby="installmentpolicyWindow"].ui-dialog {
-    z-index: 1050 !important;
-    width: 700px !important;
-    overflow: hidden !important;
-    position: fixed !important;
-    top: 15vh !important;
-    height: 70vh!important;
-    left: calc(~"50vw - 350px") !important;
-    .ui-draggable-handle{
-        display: none;
-    }
-    #privacypolicyWindow, #installmentpolicyWindow{
-        overflow: hidden!important;
-        padding: 0!important;
-        .modal-body{
-           max-height: 55vh!important;
-           padding: 10px 0;
-           overflow-y: auto;
-        }
-        .modal-footer{
-           margin: 0;
-        }
-        @media all and (max-width: @larger-phone-width){
-           .modal-body{
-               max-height: 300px!important;
-            }
-        }
-    }
-    @media all and (max-width: @tablet-width) {
-        width: 500px!important;
-        left: calc(~"50vw - 250px") !important;
-    }
-    @media all and (max-width: @larger-phone-width) {
-        width: 300px!important;
-        left: calc(~"50vw - 150px") !important;
-        top: 10vh !important;
-        height: 80vh!important;
-    }
+    z-index: 1056 !important;
+    .popup-general;
 }
 div[aria-describedby="privacypolicyWindow"] .ui-widget-header{
     border:none!important;
@@ -3005,46 +2970,5 @@ form{
             height: 15px;
             background: url(/sites/default/files/general-icon/red-notify.png) center no-repeat;
         }
-    }
-}
-
-/* POPUP GENERAL ATTRIBUTES */
-.popup-general{
-    z-index: 1050 !important;
-    width: 700px !important;
-    overflow: hidden !important;
-    position: fixed !important;
-    top: 15vh !important;
-    height: 70vh!important;
-    left: calc(~"50vw - 350px") !important;
-    .ui-draggable-handle{
-        display: none;
-    }
-    #privacypolicyWindow, #installmentpolicyWindow{
-        overflow: hidden!important;
-        padding: 0!important;
-        .modal-body{
-           max-height: 55vh!important;
-           padding: 10px 0;
-           overflow-y: auto;
-        }
-        .modal-footer{
-           margin: 0;
-        }
-        @media all and (max-width: @larger-phone-width){
-           .modal-body{
-               max-height: 300px!important;
-            }
-        }
-    }
-    @media all and (max-width: @tablet-width) {
-        width: 500px!important;
-        left: calc(~"50vw - 250px") !important;
-    }
-    @media all and (max-width: @larger-phone-width) {
-        width: 300px!important;
-        left: calc(~"50vw - 150px") !important;
-        top: 10vh !important;
-        height: 80vh!important;
     }
 }

@@ -800,18 +800,94 @@ if(isset($_SESSION['UserId'])) {
 	<div class="modal-content">
 
 	<div class="modal-body">
-		<button class="close" data-dismiss="modal" type="button">×</button>
-		<div class="form-container">
-			<h4 class="modal-title">Sign in to your account</h4>
-			<form method="POST" action="<?php echo $url; ?>" name="forLogin">
-				<input id="id" name="id" placeholder="Email address" type="email" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" />
-				<input id="password" placeholder="Password" name="password" type="password" required value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" />
-				<input type="submit" value="Login" />
-				<p><input type="checkbox" name="remember" id="remember" <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> /><label for="remember">Remember me</label><a class="forgotPS" data-dismiss="modal" data-toggle="modal" data-target="#passwordReset" >Forgot password?</a></p>
+
+			<button class="close" data-dismiss="modal" type="button"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span></button>
+
+		<div class="form-container">        
+      <div class="tab-content">
+        <div id="main-signin-form">             
+          <form name="signInForm" method="POST" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>">
+				<div class="flex-container">
+					<div class="flex-cell">
+						<h3 class="light-lead-heading cairo">Please login to see this page</h3>
+					</div>
+					<!--<input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
+					<input type="password" class="form-control"  name="Password"  placeholder="Password"><br>-->
+					<div class="flex-cell email-field">
+						<input class="form-control" name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" required />
+					</div>
+
+					<div class="flex-cell password-field">
+						<input class="form-control" placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" required />
+					</div>
+
+					<div class="flex-cell login-btn">
+						<input type="submit" value="Login">
+					</div>
+
+					<div class="flex-cell">
+						<div class="flex-col-5 remember-opt">
+							<input class="styled-checkbox" id="remember1" type="checkbox" name="remember"  <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> /><label for="remember1">Remember me</label>
+						</div>
+						<div class="flex-col-7 forgot-password">
+							<span>Forgot your
+								<div class="tab"><span data-form="#main-forgot-pw-form">username/password</span></div>
+							</span>
+						</div>
+					</div>
+
+					<div class="flex-cell create-account">
+						<span>Not a member? <a id="createAccount">Join us today.</a></span>
+					</div>
+				</div>
 			</form>
-			<p>Not a member? <a href="jointheapa">Join us today</a>.</p>
-			<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
-		</div>
+        </div>
+        
+        <div id="main-forgot-pw-form" style="display: none">   
+        <form method="POST" action="<?php echo $url; ?>" name="resetPass" id="resetPass">
+            <div class="flex-container">
+                <div class="flex-cell">
+					<h3 class="light-lead-heading cairo">Forgot your password?</h3>
+					<span>Submit your email address and we'll send you a link to reset your password</span>
+                </div>
+                
+                <div class="flex-cell">
+					<div class="flex-cell email-field">
+						<input class="form-control" id="Fid" name="Fid" placeholder="Email address" type="text">
+					</div>
+                </div>
+
+                <div class="flex-cell submit-btn">
+                    <input type="submit" value="Submit">
+				</div>
+				
+				<div class="flex-cell create-account">
+					<span>Not a member? <a id="createAccount">Join us today.</a></span>
+				</div>
+            </div>
+		</form>
+
+        </div>
+        
+      </div><!-- tab-content -->
+      <script>
+$('[data-target="#loginAT"]').on('click', function (e) {
+	$('#main-forgot-pw-form').hide();
+	$('#main-signin-form').show();
+});
+$('.tab span').on('click', function (e) {
+  
+  e.preventDefault();
+  
+  target = $(this).attr('data-form');
+
+  $('.tab-content > div').not(target).hide();
+  
+  $(target).fadeIn(600);
+  
+});
+</script>
+</div> <!-- /form -->
 	</div>
 	</div>
 </div>

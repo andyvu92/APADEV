@@ -370,13 +370,21 @@
 
 #registerPDUser{
     overflow: hidden;
-    overflow-y: auto;
     .chosen-container-multi{
         .chosen-choices{
             background: none;
             border: 1px solid #655e5e;
-            padding: 0;
+            padding: 0 10px;
             background-image: none;
+            @media all and (max-width: @phone-width) {
+                max-width: 99%;
+                margin: 0 auto;
+            }
+            li.search-field{
+                input{
+                    width: auto!important;
+                }
+            }
             li.search-choice{
                 background: rgba(58, 60, 60,0.8);
                 background-color: rgba(0,0,0,0);
@@ -1633,10 +1641,14 @@ div[id="loginPopWindow"],div[id="myMap"], div[id="signupWebUser"]{
 }
 div[aria-describedby="registerPDUser"].ui-dialog {
     z-index: 1050!important;
-    left: 25%!important;
-	width: 620px!important;
+    left: calc(~"50vw - 300px")!important;
+	width: 600px!important;
     top: 35vh!important;
     position: fixed!important;
+    @media all and (max-width: @larger-phone-width) {
+        left: calc(~"50vw - 150px")!important;
+        width: 300px!important;
+    }
 }
 div[aria-describedby="popUpWindow"].ui-dialog {
     z-index: 1053!important;
@@ -1645,16 +1657,13 @@ div[aria-describedby="popUpWindow"].ui-dialog {
 	
 }
 div[aria-describedby="jobnoticement"].ui-dialog {
-    z-index: 1051!important;
-    left: 27%!important;
-	width: 549px!important;
-	
+    z-index: 1057!important;
+    .popup-small;
 }
 div[aria-describedby="myMap"].ui-dialog {
     z-index: 1051!important;
     left: 27%!important;
 	width: 634px!important;
-	
 }
 
 div[aria-describedby="registerMember"].ui-dialog{
@@ -1683,7 +1692,7 @@ div[aria-describedby="registerMember"].ui-dialog{
                 margin-bottom: 6px;
             }
             .locked{
-                :before{
+                &:before{
                     bottom: 20px;
                 }
                 @media all and (max-width: @desktop-width) {
@@ -1704,7 +1713,7 @@ div[aria-describedby="registerMember"].ui-dialog{
                 top: 37%;
             }
             .chevron-select-box::after{
-                top: 15px;
+                top: 18px;
             }
             div[class^="col-xs-"]{
                 padding-left: 15px!important;
@@ -1988,12 +1997,15 @@ div[aria-describedby="signupWebUser"]{
     border: 1px solid #eceef0!important;
 }
 
-div[aria-describedby="loginPopWindow"].ui-dialog {
+div[aria-describedby="loginPopWindow"].ui-dialog, #loginAT .modal-dialog {
     position: fixed!important;
     z-index: 1054!important;
     width: 400px !important;
     left: calc(~"50vw - 200px")!important;
     top: 30vh !important;
+    .modal-body{
+        overflow-x: hidden;
+    }
     .ui-dialog-titlebar-close{
         display: flex;
         justify-content: center;
@@ -2022,7 +2034,7 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
             }
         }
     }
-    #loginPopWindow{
+    #loginPopWindow, .form-container{
         margin: 0 auto;
         padding-bottom: 40px;
         max-width: 90%;
@@ -2030,7 +2042,7 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
             background: none;
             min-height: 41px;
             margin: 5px 0;
-            text-indent: 40px;
+            text-indent: 28px;
         }
         .light-lead-heading{
             color: #000;
@@ -2045,7 +2057,7 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
             &:before{
                 content: "";
                 position: absolute;
-                left: 20px;
+                left: 12px;
                 top: calc(~'50% - 7.5px');
                 width: 15px;
                 height: 15px;
@@ -2061,7 +2073,7 @@ div[aria-describedby="loginPopWindow"].ui-dialog {
             &:before{
                 content: "";
                 position: absolute;
-                left: 20px;
+                left: 12px;
                 top: calc(~'50% - 7.5px');
                 width: 15px;
                 height: 15px;

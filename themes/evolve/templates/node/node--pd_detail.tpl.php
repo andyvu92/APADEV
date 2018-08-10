@@ -872,9 +872,6 @@ $('.tab span').on('click', function (e) {
   
   e.preventDefault();
   
-  $(this).parent().addClass('active');
-  $(this).parent().siblings().removeClass('active');
-  
   target = $(this).attr('data-form');
 
   $('.tab-content > div').not(target).hide();

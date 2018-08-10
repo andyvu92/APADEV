@@ -266,7 +266,7 @@ if(isset($_SESSION["UserId"])){
 
 		<div class="flex-cell">
 			<input class="styled-checkbox" type="checkbox" id="accept1" <?php if($price!=0) echo " required";?>>
-			<label for="accept1">I accept the APA events terms and conditions, including the APA cancellation clause</label>
+			<label id="pd_terms_open" for="accept1">I accept the APA events terms and conditions, including the APA cancellation clause</label>
 		</div>
 
 		<?php if($tag==1): ?>
@@ -507,8 +507,11 @@ if(isset($_SESSION["UserId"])){
 <p><a href="/reserach/purpose-prf" target="_blank">Tell me more</a></p>
 </div>
 <div id="PDTermsWindow" style="display:none;">
-	<h3>APA events terms and conditions</h3>
-	
+	<div class="modal-header">
+		<h4 class="modal-title">APA events terms and conditions</h4>
+	</div>
+
+	<div class="modal-body">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
 	<h2>Registration:</h2>
@@ -563,6 +566,11 @@ is &ldquo;personal information&rdquo; as defined by the Privacy Act 1988. The in
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeInstallmentDescription"> 
          Please agree to the APA events terms and conditions to continue with your purchase
+	</div>
+	</div>
+
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default pd_terms_close" id="installment_policy_button">Submit</button>	
 	</div>
 </div>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
