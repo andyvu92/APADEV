@@ -1,5 +1,6 @@
 <?php
 if(isset($_POST["POSTPRF"])) {
+	
 	// 2.2.32 - Order confirmation
 	// Send - 
 	// PRFdonation, Card number, Term+Condition, Product ID
@@ -16,11 +17,13 @@ if(isset($_POST["POSTPRF"])) {
 		array_push($PIDs, $PID);
 		
 	}
-	for($i = 1; $i <= intval($_POST["totalNG"]); $i++) {
-		//$PID["PID"] = $_POST["PID".$i];
-		$PID = $_POST["NG".$i];
-		array_push($PIDs, $PID);
-		
+	if(isset($_POST["totalNG"])){
+		for($i = 1; $i <= intval($_POST["totalNG"]); $i++) {
+			//$PID["PID"] = $_POST["PID".$i];
+			$PID = $_POST["NG".$i];
+			array_push($PIDs, $PID);
+			
+		}
 	}
 	$OrderSend["productID"] = $PIDs;
 	if(isset($_SESSION["tempcard"])){
@@ -42,7 +45,9 @@ if(isset($_POST["POSTPRF"])) {
 	$OrderSend['InstallmentFor'] = "Membership";
 	$OrderSend['InstallmentFrequency'] = "";
 	$OrderSend['CampaignCode'] = $_POST["CouponCode"];
+	print_r($OrderSend);
 	$registerOuts = GetAptifyData("26", $OrderSend);
+	print_r($registerOuts);
 	//delete session: really important!!!!!!!!
 	unset($_SESSION["tempcard"]);
 	if($registerOuts['Invoice_ID']!=="0") {

@@ -276,11 +276,13 @@ if(isset($results['MResponse'])) {
 		$Enrollednumber = doubleval($result['Enrollednumber']);
 		$Div = $Enrollednumber/$Totalnumber;
 		if($Div>=0.9 && $Div<1){
-			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Almost full</span></a>';
+			//echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Almost full</span></a>';
+			echo '<i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Almost full</span>';
 		} elseif(($Totalnumber-$Enrollednumber)==0){
 			echo  "<i class='fa fa-ban fa-lg' aria-hidden='true'></i><span>Course full</span>";
 		} elseif($Div<0.9){
-			echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Open</span></a>';
+			//echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Open</span></a>';
+			echo '<i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Open</span>';
 		}
 		echo	"</div>";
 		echo "</div>";
