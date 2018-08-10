@@ -1119,9 +1119,15 @@ jQuery(document).ready(function($) {
 	$('.apa_policy_button').click(function() {
 		$('[aria-describedby=privacypolicyWindow]').fadeOut();
 	});
-	
 	$('#privacypolicyl').click(function() {
 		$('[aria-describedby=privacypolicyWindow]').fadeIn();
+	});
+
+	$('.pd_terms_close').click(function() {
+		$('[aria-describedby=PDTermsWindow]').fadeOut();
+	});
+	$('#pd_terms_open').click(function() {
+		$('[aria-describedby=PDTermsWindow]').fadeIn();
 	});
 	/*  end check APA policy*/
 	/*  check Installment policy*/

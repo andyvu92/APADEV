@@ -18,7 +18,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 		case "2":
 			// Eddy - done check;
 			//echo "<br />2. Get membership Certificate PDF: <br />";
-			$AptifyAuth = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=Rajesh.Waman&Password=Raj@121184";
+			$AptifyAuth = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=appsvruser&Password=R#D8_Hn@4p';
 			$AuthToken = curlRequest($AptifyAuth, "Get", "");
 			$AuthToken = json_decode($AuthToken, true);
 			$AuthToken = $AuthToken["TokenId"];
@@ -35,7 +35,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 		case "3":
 			// Eddy - done check;
 			//echo "<br />3. Get membership insurance certificate PDF: <br />";
-			$AptifyAuth = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=Rajesh.Waman&Password=Raj@121184";
+			$AptifyAuth = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=appsvruser&Password=R#D8_Hn@4p';
 			$AuthToken = curlRequest($AptifyAuth, "Get", "");
 			$AuthToken = json_decode($AuthToken, true);
 			$AuthToken = $AuthToken["TokenId"];
@@ -147,7 +147,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 		case "18":
 			// Eddy
 			//echo "// 18. Get payment invoice PDF: <br />";
-			$AptifyAuth = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=Rajesh.Waman&Password=Raj@121184";
+			$AptifyAuth = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=appsvruser&Password=R#D8_Hn@4p';
 			$AuthToken = curlRequest($AptifyAuth, "Get", "");
 			$AuthToken = json_decode($AuthToken, true);
 			$AuthToken = $AuthToken["TokenId"];
@@ -290,7 +290,7 @@ function AptifyAPI($APItype, $variables, $jsonVersion){
 		case "38":
 			// Eddy
 			//echo "<br />38. Get NON-APA CPD point's PDF<br />";
-			$AptifyAuth = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=Rajesh.Waman&Password=Raj@121184";
+			$AptifyAuth = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=appsvruser&Password=R#D8_Hn@4p';
 			$AuthToken = curlRequest($AptifyAuth, "Get", "");
 			$AuthToken = json_decode($AuthToken, true);
 			$AuthToken = $AuthToken["TokenId"];

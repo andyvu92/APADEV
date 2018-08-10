@@ -208,12 +208,20 @@ fieldset {
               background: none!important;
           }
           &::after{
-              content: '\f078';
-              font-family: 'fontawesome';
-              color: #c3c8c8;
-              position: absolute;
-              top: 33%;
-              right: 10px;
+            content: '';
+            font-family: 'fontawesome';
+            color: #c3c8c8;
+            position: absolute;
+            top: 35%;
+            right: 10px;
+            width: 15px;
+            height: 15px;
+            z-index: 0;
+            background-image: url(/sites/default/files/general-icon/chevron-lg.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            transform: rotate(90deg);
           }
           &.chevron-adjust{
               &::after{
@@ -487,3 +495,10 @@ fieldset {
 }
 
 /*--END PD WISHLIST--*/
+
+/* PD POPUPS */
+div[aria-describedby="PDTermsWindow"].ui-dialog{
+  .popup-general;
+  max-height: 70vh;
+  
+}
