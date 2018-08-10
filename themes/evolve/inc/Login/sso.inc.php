@@ -1,56 +1,68 @@
 <?php
 
 	$url =  "{$_SERVER['REQUEST_URI']}";
-	// log-in
-	if(isset($_POST["id"])) {
-		if(!empty($_POST["remember"])) {
-			setcookie ("member_login",$_POST["id"],time()+ (10 * 365 * 24 * 60 * 60));
-			setcookie ("member_password",$_POST["password"],time()+ (10 * 365 * 24 * 60 * 60));
-		} else {
-			if(isset($_COOKIE["member_login"])) {
-				setcookie ("member_login","");
-			}
-			if(isset($_COOKIE["member_password"])) {
-				setcookie ("member_password","");
-			}
-		}
-		loginManager($_POST["id"], $_POST["password"]);
+	
+	// when a user is coming from a log-in
+	if(isset($_SESSION["outputReturn"])) {
+		
+		$result = $_SESSION["outputReturn"];
+		print_r($result);
+		
+		$id= $result["UserId"];
+		$UserName= $result["UserName"];
+		$Email= $result["Email"];
+		$FirstName= $result["FirstName"];
+		$LastName= $result["LastName"];
+		$Title= $result["Title"];
+		$LinkId= $result["LinkId"];
+		$CompanyId= $result["CompanyId"];
+		$TokenId= $result["TokenId"];
+		$Server= $result["Server"];
+		$Database= $result["Database"];
+		$AptifyUserID= $result["AptifyUserID"];
+
+		newSessionLogIn($id, $UserName, $Email, $FirstName, $LastName, $Title, $LinkId, $CompanyId, $TokenId, $Server, $Database, $AptifyUserID);
+			
+		$_SESSION["Log-in"] = "in";
+		//echo "<br>logged in!!";
+		
+		$data = "UserID=".$_SESSION["UserId"];
+		$details = GetAptifyData("4", $data,"");
+		newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"]);
+		
 	} else {
 		// no id has been entered
+		echo "<p>This page cannot be called directly on the browser. it must receive a valid HTTP POST or GET/Redirect SAML 2 request.</p>";
 	}
 	
-	function loginManager($id, $pass) {
-		// SAML SSO log-in
-		// Send - 
-		// UserID, User password
-		// Response - SAML Assertion
-		// log-in
-		$arrIn["ID"] = $id;
-		$arrIn["Password"] = $pass;
-		$resultSAML = GetAptifyData("", $arrIn);
-		if(isset($result["ErrorInfo"])) {
-			//echo $result["ErrorInfo"]["ErrorMessage"];
-			//echo "log-in fail";
-		} else {
-			// logged in
-			//SAML response message;
-			//SAML response message;
-			//SAML response message;
-			//SAML response message; put here
-			
-		}
-	}
-	
-	function logoutManager() {
-		// SSO - log-out
-		// Send - 
-		// 
-		// Response -
-		// 
-		$result = GetAptifyData("", "logout");
+	/*
+	// log-out
+	if(isset($_POST["logout"])) {
+		// same with this commend.
+		// isset($_SESSION["Log-in"])
 		
+		// todo
+		// figure this out later
+		logoutManager();
 	}
+	
+	// test get data
+	if(isset($_POST["Getdata"])) {
+		$data = "UserID=".$_SESSION["UserId"];
+		$output = GetAptifyData("1", $data);
+		print_r($output);
+	}
+	
+	// forgot password
+	if(isset($_POST["Fid"])) {
+		$input["email"] = $_POST["Fid"];
+		$output = GetAptifyData("6", $input);
+		//print_r($output);
+	}
+	
+	*/
 ?>
+<p>sso page! </p>
 <?php if(isset($_SESSION["TokenID"])): //check the TokenID from third part web site?>
 <div>
 	<form method="POST" action="<?php echo $url; ?>" name="forlogout">
@@ -72,5 +84,10 @@
 			
 	</div>
 
+<?php endif; ?>
+<?php if(isset($_SESSION['Log-in'])): //check the TokenID from third part web site?>
+<p>logged in!</p>
+<?php else: ?>
+<p>Not logged in!</p>
 <?php endif; ?>
 <?php logRecorder(); ?>
