@@ -252,6 +252,21 @@ jQuery(document).ready(function() {
 	$("#tabmenu li").click(function(){
 		$(this).removeClass("warning");
 	});
+
+	$("#tabmenu li [class^=calldeletewp]").on("click",function(){
+		var x = $(this).attr("class").replace("calldeletewp", "");
+		$("#deleteWorkplaceWindow [value=yes]").attr("class", "");
+		$("#deleteWorkplaceWindow [value=yes]").addClass("deletewp"+x);
+		$("#deleteWorkplaceWindow").fadeIn();
+	  });
+	
+	  $("#deleteWorkplaceWindow [value=yes]").on("click",function(){
+		$("#deleteWorkplaceWindow").hide();
+	  });
+	
+	  $("#deleteWorkplaceWindow .cancelDeleteButton").on("click",function(){
+		$("#deleteWorkplaceWindow").fadeOut();
+	  });
 });
 </script>
 ';

@@ -1183,7 +1183,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<div class="col-xs-12">
 						<ul class="nav nav-tabs" id="tabmenu">
 						<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
-						<li <?php if($key=='Workplace0') echo 'class ="active pre'.$key.'"';?> id="workplaceli<?php echo $key;?>"><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a><span class="deletewp<?php echo $key;?>"></span></li>
+						<li <?php if($key=='Workplace0') echo 'class ="active prewp'.$key.'"';?> id="workplaceli<?php echo $key;?>"><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a><span class="calldeletewp<?php echo $key;?>"></span></li>
 						<?php endforeach; ?> 
 						<?php //if(sizeof($details['Workplaces'])==0):?>
 					
@@ -1196,7 +1196,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			 <div id="workplaceblocks">
 
 				<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
-					<div id="workplace<?php echo $key;?>" class='tab-pane fade pre<?php echo $key;?>  <?php if($key=='Workplace0') echo "in active ";?> '>
+					<div id="workplace<?php echo $key;?>" class='tab-pane fade prewp<?php echo $key;?>  <?php if($key=='Workplace0') echo "in active ";?> '>
 					    <input type="hidden" name="WorkplaceID<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['WorkplaceID'];?>">
 					<?php if($details['MemberTypeID']!="17" && $details['MemberTypeID']!="18" && $details['MemberTypeID']!="21" && $details['MemberTypeID']!="22" && $details['MemberTypeID']!="31" && $details['MemberTypeID']!="32" && $details['MemberTypeID']!="34" && $details['MemberTypeID']!="35" && $details['MemberTypeID']!="36" && $details['MemberTypeID']!="37") :?>
 					<div class="row FapTagC">
@@ -1926,10 +1926,14 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 	    </div>
 		<div id="deleteWorkplaceWindow" style="display:none;">
 			<form action="your-details" method="POST" id="deleteWorlplaceForm">
-				<h3>fdfdfdfdf</h3>
+				<div class="flex-cell">
+					<h3 class="light-lead-heading cairo">Are you sure you want to delete this workplace</h3>
+				</div>
 				<input type="hidden" name="WorkplaceID" value="">
-			    <button class="yes accent-btn" type="submit" value="Yes">Yes</button>
-				<a class="no accent-btn cancelDeleteButton" target="_self">No</a>
+				<div class="flex-cell buttons-container">
+					<a class="" value="yes" target="_self">Yes</a>
+					<a class="no accent-btn cancelDeleteButton" value="no" target="_self">No</a>
+				</div>
 			</form>
 		</div>
 	</div>
@@ -1946,7 +1950,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			var number = Number($('#wpnumber').val());
 			var i = Number(number +1);
 			//var j = Number(number +2);
-			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
+			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span></li>' );
 			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
 			//$('#wpnumber').text(i);
 			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
@@ -1973,7 +1977,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			var number = Number($('#wpnumber').val());
 			var i = Number(number +1);
 			//var j = Number(number +2);
-			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
+			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span></li>' );
 			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in"></div>');
 			//$('#wpnumber').text(i);
 			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
@@ -1992,7 +1996,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			var x = $(this).attr("class").replace('deletewp', '');
 			$("#workplaceli"+ x).remove();
 			$("#workplace"+ x).remove();
-			$(".deletewp"+ x).remove();
+			//$(".deletewp"+ x).remove();
 			var n = Number($('#wpnumber').val());
 		  var t = Number(n -1);
 		  $('input[name=wpnumber]').val(t);
