@@ -146,28 +146,7 @@ $scheduleDetails = GetAptifyData("47", $postScheduleData);
 $price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
 //print_r($scheduleDetails);
 /********End get Order Total and Schedule Payments  from Aptify******/
-if(isset($_SESSION["UserId"])){
-    
-	$userid = $_SESSION["UserId"];
-	
-	//if(isset($_SESSION["cardsnum"])){
-		//$cardsnum = $_SESSION["cardsnum"];
-	//} else {
-		// 2.2.12 - GET payment listing
-		// Send - 
-		// UserID
-		// Response -
-		// Credit cards details [Credit card ID, Payment-method,
-		// Name on card, Digits, Exp date, Roll over],  Main card
-		
-		$test['id'] = $_SESSION["UserId"];
-		//print_r($test['id']);
-		$cardsnum = GetAptifyData("12", $test);
-	    //$_SESSION["cardsnum"]= $cardsnum;
-	//}
-	//print_r($cardsnum);
-	
-	if(isset($_GET["action"])&& ($_GET["action"]=="addcard")&& isset($_POST['addcardtag'])) {
+if(isset($_POST['addCard']) && $_POST['addCard'] == "1"){
 	// 2.2.15 - Add payment method
 	// Send - 
 	// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
@@ -179,23 +158,28 @@ if(isset($_SESSION["UserId"])){
 	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
 	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
 	$out = GetAptifyData("15",$postPaymentData); 
-	} 
-    if(isset($_GET["action"])&& ($_GET["action"]=="addcard")&& !isset($_POST['addcardtag'])) {
-	    $tempcard = array();
-		$tempcard['Payment-method'] = $_POST['Cardtype'];
-		$tempcard['Cardno'] = $_POST['Cardnumber'];
-		$tempcard['CardName'] = $_POST['Cardname'];
-		$tempcard['Expiry-date'] = $_POST['Expirydate']; 
-		$tempcard['CCV'] = $_POST['CCV'];
-		$_SESSION['tempcard'] = $tempcard;
-		
-	}	
-	/* $cardnum=substr( $creditcard,-4);  */
-	/*  Get shopping cart data via $user from Aptify  */         
-} //else {
-	//$product_id = $_GET["id"];
-	//header("Location:/sign-in?id=$product_id"); /* Redirect browser */
-//}
+	echo "testhere";
+} 
+/*if(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])) {
+	$tempcard = array();
+	$tempcard['Payment-method'] = $_POST['Cardtype'];
+	$tempcard['Cardno'] = $_POST['Cardnumber'];
+	$tempcard['CardName'] = $_POST['Cardname'];
+	$tempcard['Expiry-date'] = $_POST['Expirydate']; 
+	$tempcard['CCV'] = $_POST['CCV'];
+	$_SESSION['tempcard'] = $tempcard;
+
+	
+}	*/
+if(isset($_SESSION["UserId"])){
+    
+	$userid = $_SESSION["UserId"];
+	$test['id'] = $_SESSION["UserId"];
+	$cardsnum = GetAptifyData("12", $test);
+	print_r($cardsnum);
+	   
+	
+} 
 ?>
 <?php  if(($productList->rowCount()>0) || (sizeof($NGProductsArray)!=0)):?>
 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 left-content">
@@ -337,7 +321,8 @@ if(isset($_SESSION["UserId"])){
 <?php endif; ?>	
 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 paymentsiderbar">
 	<p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
-		<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
+	<?php if (sizeof($cardsnum["results"])!=0): ?>
+	<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
 		<fieldset>
 			<div class="chevron-select-box">
 				<select  id="Paymentcard" name="Paymentcard" >
@@ -366,8 +351,9 @@ if(isset($_SESSION["UserId"])){
 		<label for="anothercard"><a class="event10" style="cursor: pointer;">Use another card</a></label>
 	</div>
 
-	<div class="down10 extra-card" <?php if(isset($_SESSION["tempcard"])){ echo 'style="display:block;"';} else { echo 'style="display:none;"';}?>>
-		<form action="pd-shopping-cart?action=addcard" method="POST" id="formaddcard">
+	<div class="col-xs-12 none-padding down10 extra-card" style="display:none;"<?php //if(isset($_SESSION["tempcard"])){ echo 'style="display:block;"';} else { echo 'style="display:none;"';}?>>
+		<form action="/pd/pd-shopping-cart" method="POST" >
+		<input type="hidden" name="addCard" value="1"/>
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="chevron-select-box">
@@ -388,34 +374,85 @@ if(isset($_SESSION["UserId"])){
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CardName'].''; ?>>
+			<input type="text" class="form-control"  name="Cardname" placeholder="Name on card" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CardName'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" required maxlength="16" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
+			<input type="text" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="Expire date" required maxlength="4" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
+			<input type="text" class="form-control"  name="Expirydate" placeholder="Expire date" required maxlength="4" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+			<input type="text" class="form-control"  name="CCV" placeholder="CCV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
 		</div>
-		<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
-			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" <?php if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>>
+		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
+			<input class="styled-checkbox" type="hidden" id="addcardtag" name="addcardtag" <?php //if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>>
 			<label for="addcardtag">Do you want to save this card?</label>
-		</div>
+		</div>-->
 		<div class="col-xs-12 none-padding">
 			<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
 		</div>
 		</form>
 	</div>
 	</div>
+	<?php endif; ?>
+    <?php if (sizeof($cardsnum["results"])==0): ?>
+	<form action="/pd/pd-shopping-cart" method="POST" >
+	    <input type="hidden" name="addCard" value="1">
+		<div class="row">
+			<div class="col-lg-12">
+				<div class="chevron-select-box">
+					<select class="form-control"  name="Cardtype" placeholder="Card type">
+					<?php 
+						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+						$PaymentType=json_decode($PaymentTypecode, true);
+						foreach($PaymentType  as $pair => $value){
+							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+							if(isset($_SESSION["tempcard"]) && $_SESSION["tempcard"]['Payment-method'] ==$PaymentType[$pair]['ID']) {echo "selected ";}
+							echo '> '.$PaymentType[$pair]['Name'].' </option>';
+							
+						}
+					?>
+					</select>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+			<input type="text" class="form-control"  name="Cardname" placeholder="Name on card" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CardName'].''; ?>>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+			<input type="text" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+			<input type="text" class="form-control"  name="Expirydate" placeholder="Expire date" required maxlength="4" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-lg-12">
+			<input type="text" class="form-control"  name="CCV" placeholder="CCV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+			</div>
+		</div>
+		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
+			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" <?php //if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>>
+			<label for="addcardtag">Do you want to save this card?</label>
+		</div>-->
+		<div class="col-xs-12 none-padding">
+			<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
+		</div>
+	</form>	
+	<?php endif; ?>
 	<?php  if(($productList->rowCount()>0) && (sizeof($NGProductsArray)!=0)):?>
 		<div class="row">
 			<div class="col-xs-12"><span class="sidebardis">PRF donation</span></div>
