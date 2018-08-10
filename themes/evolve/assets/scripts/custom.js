@@ -360,11 +360,11 @@ jQuery(document).ready(function($) {
 	$('#anothercard').click(function(){
         if($(this).is(":checked")){
 			$('#anothercardBlock').removeClass("display-none");
-			$('input[name=addCard]').val('0');
+			$('input[name=addCard]').val('1');
 		}
         else{
             $('#anothercardBlock').addClass("display-none");
-			$('input[name=addCard]').val('1');
+			$('input[name=addCard]').val('0');
         }
 	});
 	$('input[type="radio"]').click(function(){
