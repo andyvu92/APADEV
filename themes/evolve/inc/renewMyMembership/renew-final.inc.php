@@ -16,8 +16,7 @@ if(isset($_POST['step2-3'])){
 	else{
 		foreach($_SESSION["MGProductID"] as $deleteM){
 			if (($key = array_search($_POST['step2-3'], $deleteM)) !== false) {
-				echo "try to delete product";
-				unset($deleteM[$key]);
+			unset($deleteM[$key]);
 			}    
 		}
 		//print_r($deleteM);

@@ -1183,7 +1183,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<div class="col-xs-12">
 						<ul class="nav nav-tabs" id="tabmenu">
 						<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
-						<li <?php if($key=='Workplace0') echo 'class ="active" ';?> id="workplaceli<?php echo $key;?>"><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a><span class="deletewp<?php echo $key;?>"></span></li>
+						<li <?php if($key=='Workplace0') echo 'class ="active pre'.$key.'"';?> id="workplaceli<?php echo $key;?>"><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a><span class="deletewp<?php echo $key;?>"></span></li>
 						<?php endforeach; ?> 
 						<?php //if(sizeof($details['Workplaces'])==0):?>
 					
@@ -1196,7 +1196,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			 <div id="workplaceblocks">
 
 				<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
-					<div id="workplace<?php echo $key;?>" class='tab-pane fade  <?php if($key=='Workplace0') echo "in active ";?> '>
+					<div id="workplace<?php echo $key;?>" class='tab-pane fade pre<?php echo $key;?>  <?php if($key=='Workplace0') echo "in active ";?> '>
 					    <input type="hidden" name="WorkplaceID<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['WorkplaceID'];?>">
 					<?php if($details['MemberTypeID']!="17" && $details['MemberTypeID']!="18" && $details['MemberTypeID']!="21" && $details['MemberTypeID']!="22" && $details['MemberTypeID']!="31" && $details['MemberTypeID']!="32" && $details['MemberTypeID']!="34" && $details['MemberTypeID']!="35" && $details['MemberTypeID']!="36" && $details['MemberTypeID']!="37") :?>
 					<div class="row FapTagC">
@@ -1924,7 +1924,14 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				</div>
 			</form>
 	    </div>
-
+		<div id="deleteWorkplaceWindow" style="display:none;">
+			<form action="your-details" method="POST" id="deleteWorlplaceForm">
+				<h3>fdfdfdfdf</h3>
+				<input type="hidden" name="WorkplaceID" value="">
+			    <button class="yes accent-btn" type="submit" value="Yes">Yes</button>
+				<a class="no accent-btn cancelDeleteButton" target="_self">No</a>
+			</form>
+		</div>
 	</div>
 	</div>
 	</div>

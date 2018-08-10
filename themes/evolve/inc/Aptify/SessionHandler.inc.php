@@ -45,6 +45,7 @@ function deleteSession() {
 	unset($_SESSION["Language"]);
 	unset($_SESSION['country']);
 	unset($_SESSION['Dietary']);
+	unset($_SESSION['QuatationTag']);
 	completeOrderDeleteSession();
 	//End Added by JingHu
 	/*

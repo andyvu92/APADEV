@@ -268,6 +268,8 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 		createShoppingCart($userID, "9977",$type="MG2",$coupon=""); 
 		
 	}
+	
+	
 }   
 ?> 
 
@@ -296,15 +298,18 @@ $userFPProduct = getProduct($_SESSION['UserId'],"FP");
 if(sizeof($userFPProduct)!=0){ foreach($userFPProduct as $singFP) { $_SESSION["FPProductID"] = $singFP;}}
 $userMGProduct = array();
 $userMG1Product = getProduct($_SESSION['UserId'],"MG1");
+
 if(sizeof($userMG1Product)!=0){ 
     array_push($userMGProduct, $userMG1Product); 
 	
 }
 $userMG2Product = getProduct($_SESSION['UserId'],"MG2");
+
 if(sizeof($userMG2Product)!=0){ 
     array_push($userMGProduct, $userMG2Product); 
 }
-if(sizeof($userMGProduct)!=0){$_SESSION["MGProductID"] = $userMGProduct; }
+if(sizeof($userMGProduct)==0) {unset($_SESSION["MGProductID"]);}
+if(sizeof($userMGProduct)!=0){  $_SESSION["MGProductID"] = $userMGProduct; }
 
 
 // 2.2.4 - Dashboard - Get member detail
