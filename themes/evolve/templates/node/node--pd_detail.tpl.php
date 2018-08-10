@@ -789,101 +789,6 @@
        
       </div>
 	  
-		<div  id="loginPopWindow" >
-		<div class="form">        
-      <div class="tab-content">
-        <div id="signin-form">             
-          <form name="signInForm" method="POST" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>">
-				<div class="flex-container">
-					<div class="flex-cell">
-						<h3 class="light-lead-heading cairo">Please login to see this page</h3>
-					</div>
-					<!--<input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
-					<input type="password" class="form-control"  name="Password"  placeholder="Password"><br>-->
-					<div class="flex-cell email-field">
-						<input class="form-control" name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" required />
-					</div>
-
-					<div class="flex-cell password-field">
-						<input class="form-control" placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" required />
-					</div>
-
-					<div class="flex-cell login-btn">
-						<input type="submit" value="Login">
-					</div>
-
-					<div class="flex-cell">
-						<div class="flex-col-5 remember-opt">
-							<input class="styled-checkbox" id="remember1" type="checkbox" name="remember"  <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> />
-							<label for="remember1">Remember me</label>
-						</div>
-						<div class="flex-col-7 forgot-password">
-							<span>Forgot your
-								<div class="tab"><span data-form="#forgot-pw-form">username/password</span></div>
-							</span>
-						</div>
-					</div>
-
-					<div class="flex-cell create-account">
-						<span>Not a member? <a id="createAccount">Join us today.</a></span>
-					</div>
-				</div>
-			</form>
-            <script>
-                jQuery('document').ready(function($) {
-                    //$( ".ui-dialog").wrap( "<div id='overlay' class='new'></div>");
-                });
-            </script>
-        </div>
-        
-        <div id="forgot-pw-form" style="display: none">   
-        <form method="POST" action="<?php echo $url; ?>" name="resetPass" id="resetPass">
-            <div class="flex-container">
-                <div class="flex-cell">
-					<h3 class="light-lead-heading cairo">Forgot your password?</h3>
-					<span>Submit your email address and we'll send you a link to reset your password</span>
-                </div>
-                
-                <div class="flex-cell">
-					<div class="flex-cell email-field">
-						<input class="form-control" id="Fid" name="Fid" placeholder="Email address" type="text">
-					</div>
-                </div>
-
-                <div class="flex-cell submit-btn">
-                    <input type="submit" value="Submit">
-				</div>
-				
-				<div class="flex-cell create-account">
-					<span>Not a member? <a id="createAccount">Join us today.</a></span>
-				</div>
-            </div>
-		</form>
-
-        </div>
-        
-      </div><!-- tab-content -->
-      <script>
-$('a#login').on('click', function (e) {
-	$('#forgot-pw-form').hide();
-	$('#signin-form').show();
-});
-$('.tab span').on('click', function (e) {
-  
-  e.preventDefault();
-  
-  target = $(this).attr('data-form');
-
-  $('.tab-content > div').not(target).hide();
-  
-  $(target).fadeIn(600);
-  
-});
-</script>
-</div> <!-- /form -->
-
-		
-      </div>
 	  <?php if(isset($details)): ?>
 	  <?php
 		/*hanled survey data session */
@@ -1834,7 +1739,7 @@ $('.tab span').on('click', function (e) {
 					*/
 				}
 				else{
-					echo '<a class="member-login" id="login">Login to see your status</a>';
+					echo '<a id="login" data-target="#loginAT" data-toggle="modal">Login to see your status</a>';
 					//echo '<a class="info" data-target="#loginAT" data-toggle="modal" type="button">Login to see your status</a>';
 				}
 				?>

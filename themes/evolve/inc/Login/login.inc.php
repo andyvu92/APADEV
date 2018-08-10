@@ -893,9 +893,9 @@ $('.tab span').on('click', function (e) {
 </div>
 </div>
 
-<!-- Modal forgot password -->
+<!-- Modal forgot password 
 <div class="modal fade" id="passwordReset" role="dialog">
-<div class="modal-dialog"><!-- Modal content-->
+<div class="modal-dialog">
 	<div class="modal-content">
 	<div class="modal-header">
 		<button class="close" data-dismiss="modal" type="button">×</button>
@@ -903,7 +903,7 @@ $('.tab span').on('click', function (e) {
 	</div>
 
 	<div class="modal-body">
-		<form method="POST" action="<?php echo $url; ?>" name="resetPass">
+		<form method="POST" action="<//?php echo $url; ?>" name="resetPass">
 			<label for="id">ID</label>
 			<input id="Fid" name="Fid" placeholder="ID" type="text" />
 			<input type="submit" value="submit" />
@@ -914,7 +914,7 @@ $('.tab span').on('click', function (e) {
 	</div>
 	</div>
 </div>
-</div>
+</div> -->
 <?php logRecorder(); ?>
 <?php if(isset($_SESSION['LogInFirstTime'])): ?>
 <div class="GetCentreLayout">
