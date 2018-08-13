@@ -1,6 +1,5 @@
 <?php
 	// current page's url. log-in to the same page before log-in.
-	
 	$url =  "{$_SERVER['REQUEST_URI']}";
 	$wrong = false;
 	$outputs;
@@ -20,13 +19,6 @@
 		}
 		$outputs = loginSSO($_POST["idso"], $_POST["passwordso"]);
 		
-		/**
-		 * need request urls
-		 * $urlReturn = SSO endpoint;
-		 * $type = "JSON";
-		 * $variable = array of ID, token and Return data;
-		 */
-		
 		if(sizeof($outputs) == 2) {
 			$wrong = true;
 		} else {
@@ -38,14 +30,6 @@
 	} else {
 		// no id has been entered
 		echo "tf";
-	}
-	
-	
-	// log-out
-	if(isset($_POST["logout"])) {
-		// same with this commend.
-		// isset($_SESSION["Log-in"])
-		logoutManager();
 	}
 	
 	// forgot password
@@ -69,42 +53,58 @@
 			//echo $Got["ErrorInfo"]["ErrorMessage"];
 			return ["log-in fail", $Got["ErrorInfo"]["ErrorMessage"]];
 		} else {
+			$ThirdParty = $_SESSION["thirdParty"];
+			
 			// logged in
+			$returnSSO["UserId"] = $Got["UserId"];
+			$returnSSO["UserName"] = $Got["UserName"];
+			$returnSSO["Email"] = $Got["Email"];
+			$returnSSO["FirstName"] = $Got["FirstName"];
+			$returnSSO["LastName"] = $Got["LastName"];
+			$returnSSO["Title"] = $Got["Title"];
+			$returnSSO["LinkId"] = $Got["LinkId"];
+			$returnSSO["CompanyId"] = $Got["CompanyId"];
+			$returnSSO["TokenId"] = $Got["TokenId"];
+			$returnSSO["Server"] = $Got["Server"];
+			$returnSSO["Database"] = $Got["Database"];
+			$returnSSO["AptifyUserID"] = $Got["AptifyUserID"];
 
-			$retrunSSO["UserId"] = $Got["UserId"];
-			$retrunSSO["UserName"] = $Got["UserName"];
-			$retrunSSO["Email"] = $Got["Email"];
-			$retrunSSO["FirstName"] = $Got["FirstName"];
-			$retrunSSO["LastName"] = $Got["LastName"];
-			$retrunSSO["Title"] = $Got["Title"];
-			$retrunSSO["LinkId"] = $Got["LinkId"];
-			$retrunSSO["CompanyId"] = $Got["CompanyId"];
-			$retrunSSO["TokenId"] = $Got["TokenId"];
-			$retrunSSO["Server"] = $Got["Server"];
-			$retrunSSO["Database"] = $Got["Database"];
-			$retrunSSO["AptifyUserID"] = $Got["AptifyUserID"];
+			$date = date('Y-m-d h:i:s');
+			// Create db data
+			$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+			// Create log
+			$SSOlogCreate = $dbt->prepare('INSERT INTO ssolog (Provider, Token, LogDateTime, LogIO, Data, Option) VALUES (:Provider, :Token, :LogDateTime, :LogIO, :Data, :Option)');
+			$SSOlogCreate->bindParam(':Provider', $ThirdParty);
+			$SSOlogCreate->bindParam(':Token', $returnSSO["TokenId"]);
+			$SSOlogCreate->bindParam(':LogDateTime', $date);
+			$SSOlogCreate->bindParam(':LogIO', "1");
+			$SSOlogCreate->bindParam(':Data', $returnSSO);
+			$SSOlogCreate->bindParam(':Option', "");
+			if(!$SSOlogCreate->execute()) {
+				echo "<br />RunFail- Mstr<br>";
+				print_r($SSOlogCreate->errorInfo());
+			}
 
-			return $retrunSSO;
+			// Create data
+			$SSODataCreate = $dbt->prepare('INSERT INTO ssodata (DateTime, Token, Data) VALUES (:Token, :DateTime, :Data)');
+			$SSODataCreate->bindParam(':Token', $returnSSO["TokenId"]);
+			$SSODataCreate->bindParam(':DateTime', $date);
+			$SSODataCreate->bindParam(':Data', $returnSSO);
+			if(!$SSODataCreate->execute()) {
+				echo "<br />RunFail- Mstr<br>";
+				print_r($SSODataCreate->errorInfo());
+			}
+
+			$SSOlogCreate = null;
+			$SSODataCreate = null;
+			$dbt = null;
+
+			return $returnSSO;
 		}
 	}
 
 ?>
-<?php if(isset($_SESSION["Log-in"])): ?>
-	<p>This page cannot be called directly after logged in!!!!!</p>
-	<div class="pull-right borderLeftForTop DashboardPadding">
-		<div id="DashboardButton" class="ButtonIconHolder withButtonIcon DashboardwithButtonIcon" title="Dashboard">
-			<i class="Dashboard">&nbsp;</i>
-		</div>
-	</div>
-	<div class="pull-right borderLeftForTop LogOutPadding">
-		<form method="POST" action="<?php echo $url; ?>" name="forlogout">
-			<input id="logoutAcButton"type="hidden" name="logout" value="out" style="display: none;" />
-			<div id="logoutButton" class="ButtonIconHolder withButtonIcon OutwithButtonIcon" title="Log out">
-				<input type="submit" value="log-out" />
-			</div>
-		</form>
-	</div>
-<?php else: ?>
+<?php if(!isset($_SESSION["Log-in"])): ?>
 	<?php if($wrong): ?>
 	<h2>Your log-in failed!</h2>
 	<p><?php echo $outputs[1]; ?></p>
@@ -151,33 +151,30 @@
 	</div>
 	</div>
 	<?php endif; ?>
+	<!-- Modal forgot password -->
+	<div class="modal fade" id="passwordReset" role="dialog">
+	<div class="modal-dialog"><!-- Modal content-->
+		<div class="modal-content">
+		<div class="modal-header">
+			<button class="close" data-dismiss="modal" type="button">×</button>
+			<h4 class="modal-title">Reset password</h4>
+		</div>
+
+		<div class="modal-body">
+			<form method="POST" action="<?php echo $url; ?>" name="resetPass">
+				<label for="id">ID</label>
+				<input id="Fid" name="Fid" placeholder="ID" type="text" />
+				<input type="submit" value="submit" />
+			</form>
+		</div>
+		<div class="modal-footer">
+		<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+		</div>
+		</div>
+	</div>
+	</div>
 <?php endif; ?>
 
-<!-- Modal log-in -->
-
-
-<!-- Modal forgot password -->
-<div class="modal fade" id="passwordReset" role="dialog">
-<div class="modal-dialog"><!-- Modal content-->
-	<div class="modal-content">
-	<div class="modal-header">
-		<button class="close" data-dismiss="modal" type="button">×</button>
-		<h4 class="modal-title">Reset password</h4>
-	</div>
-
-	<div class="modal-body">
-		<form method="POST" action="<?php echo $url; ?>" name="resetPass">
-			<label for="id">ID</label>
-			<input id="Fid" name="Fid" placeholder="ID" type="text" />
-			<input type="submit" value="submit" />
-		</form>
-	</div>
-	<div class="modal-footer">
-	<button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
-	</div>
-	</div>
-</div>
-</div>
 <script type="text/javascript">
 $(document).ready(function(){	
 	var x = $( document ).height() - $('.sticky-wrapper').height() - $('#section-bottom').height() - 130;
