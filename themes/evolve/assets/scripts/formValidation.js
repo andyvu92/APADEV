@@ -228,7 +228,60 @@ jQuery(document).ready(function($) {
 				return false;
 			}
 		}
+		
+		if($('.down20:visible').length !== 0){
+			if($(".down20 input[name=Firstname]").val() ==''){
+				$(".down20 input[name=Firstname]").addClass("focuscss");
+			} else{
+				$(".down20 input[name=Firstname]").removeClass("focuscss");
+			}
+			if($(".down20 input[name=Lastname]").val() ==''){$(".down20 input[name=Lastname]").addClass("focuscss");} else{$(".down20 input[name=Lastname]").removeClass("focuscss");}
+			
+			if($(".down20 select[name=State]").val() ==''){$(".down20 select[name=State]").addClass("focuscss");}else{$(".down20 select[name=State]").removeClass("focuscss");}
+			if($(".down20 input[name=Pobox]").val() ==''){
+				if($(".down20 input[name=Address_Line_1]").val() ==''){$(".down20 input[name=Address_Line_1]").addClass("focuscss");}else{$(".down20 input[name=Address_Line_1]").removeClass("focuscss");}
+			}
+			if($(".down20 input[name=Suburb]").val() ==''){$(".down20 input[name=Suburb]").addClass("focuscss");}else{$(".down20 input[name=Suburb]").removeClass("focuscss");}
+			if($(".down20 input[name=Postcode]").val() ==''){$(".down20 input[name=Postcode]").addClass("focuscss");}else{$(".down20 input[name=Postcode]").removeClass("focuscss");}
+			if($(".down20 input[name=Country]").val() ==''){$(".down20 input[name=Country]").addClass("focuscss");}else{$(".down20 input[name=Country]").removeClass("focuscss");}
+			if(!$("#Shipping-address-join").is(":checked")){
+				if($(".down20 input[name=Billing-Pobox]").val() ==''){
+						if($(".down20 input[name=Billing-Address_Line_1]").val() ==''){$(".down20 input[name=Billing-Address_Line_1]").addClass("focuscss");}else{$(".down20 input[name=Billing-Address_Line_1]").removeClass("focuscss");}
+				}
+				if($(".down20 input[name=Billing-Suburb]").val() ==''){$(".down20 input[name=Billing-Suburb]").addClass("focuscss");}else{$(".down20 input[name=Billing-Suburb]").removeClass("focuscss");}
+				if($(".down20 input[name=Billing-Postcode]").val() ==''){$(".down20 input[name=Billing-Postcode]").addClass("focuscss");}else{$(".down20 input[name=Billing-Postcode]").removeClass("focuscss");}
+				if($(".down20 select[name=Billing-State]").val() ==''){$(".down20 select[name=Billing-State]").addClass("focuscss");}else{$(".down20 select[name=Billing-State]").removeClass("focuscss");}
+				if($(".down20 input[name=Billing-Country]").val() ==''){$(".down20 input[name=Billing-Country]").addClass("focuscss");}else{$(".down20 input[name=Billing-Country]").removeClass("focuscss");}
+			}
+			if($(".down20 input[name=Firstname]").val() ==''||$(".down20 input[name=Lastname]").val() ==''){
+				return false;
+			}
+			if($(".down20 input[name=Pobox]").val() ==''){
+				if($(".down20 input[name=Address_Line_1]").val() ==''){
+					return false;	
+				}
+			}
+			if($(".down20 input[name=Country]").val() ==''||$(".down20 input[name=Postcode]").val() ==''||$(".down20 input[name=Suburb]").val() ==''){
+				return false;
+			}
+			if(!$(".down20 #Shipping-address-join").is(":checked")){
+				if($(".down20 input[name=Billing-Pobox]").val() ==''){
+					if($(".down20 input[name=Billing-Address_Line_1]").val() ==''){
+						return false;
+					}
+				}
 				
+				if($(".down20 input[name=Billing-Country").val() ==''||$(".down20 input[name=Billing-Postcode]").val() ==''||$(".down20 input[name=Billing-Suburb]").val() ==''){
+					return false;
+				}
+			}
+		}
+		if($('.down22:visible').length !== 0){
+			if($(".down22 #Registrationboard").val() !=='1'){$(".down22 label[for=Registrationboard]").addClass("focuscss");}else{$(".down22 label[for=Registrationboard]").removeClass("focuscss");}
+			if($(".down22 #Professional-insurance").val() !=='1'){$(".down22 label[for=Professional-insurance]").addClass("focuscss");}else{$(".down22 label[for=Professional-insurance]").removeClass("focuscss");}
+			if($(".down22 #Professionalbody").val() !=='1'){$(".down22 label[for=Professionalbody]").addClass("focuscss");}else{$(".down22 label[for=Professionalbody]").removeClass("focuscss");}
+			if($(".down22 #Confirm-policy").val() !=='1'){$(".down22 label[for=jprivacy-policy]").addClass("focuscss");}else{$(".down22 label[for=jprivacy-policy]").removeClass("focuscss");}
+		}
 	};
 
 	function isValidEmailAddress(emailAddress) {
@@ -276,6 +329,11 @@ jQuery(document).ready(function($) {
 		if((x==5) && ($('#insuranceTag').val()=="0")){var eventtitle = "eventtitle6";}
 		else{var eventtitle = "eventtitle"+x;}
 		$("span." + eventtitle).addClass("text-underline");
+	});
+
+	$('.pd-register-submit').click(function(){
+		if(validateFun()==false){alert("please fill out all required fields *");return false;}
+		if ( $('.down22').find('.focuscss').length > 0 ){alert("please fill out all required fields *");return false;}
 	});
 	
 	$('[class^=your-details-prevbutton]').click(function(){

@@ -1723,9 +1723,6 @@ div[aria-describedby="registerMember"].ui-dialog{
                 &:before{
                     bottom: 20px;
                 }
-                @media all and (max-width: @desktop-width) {
-                    bottom: 12px;
-                }
             }
             .down22{
                 .question-boxes{
@@ -1921,7 +1918,14 @@ input[name="otherjob"]{
     padding: 0 1px;
 }
 form#registerMemberForm .error, form#updatePaymentForm .error{
-    color: red;
+    color: #ffa22b;
+}
+
+form{
+    label.focuscss{
+        color: #ffa22b;
+        border: 0!important;
+    }
 }
 
 input[name="Couponcode"]::-webkit-input-placeholder {
