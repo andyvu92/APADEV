@@ -1,7 +1,15 @@
 <?php
  include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
  /* get background image****/
-if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID =0; }
+if(isset($_SESSION['UserId'])) { 
+$userID = $_SESSION['UserId'];
+$userTag = getInsuranceStatus($userID);
+if($userTag ==1){
+	$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+	header("Location:".$link."/insuranceprocess");
+}
+
+} else { $userID =0; }
 $background = getBackgroundImage($userID);
 /* get background image****/ 
  ?> 

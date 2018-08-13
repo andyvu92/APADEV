@@ -331,6 +331,7 @@ function getBackgroundImage($userID){
 	
 }
 
+
 /**
  *  Member only content display controller.
  *  
@@ -472,6 +473,43 @@ function SavePDSurvey($CreateNewUserPD){
 	}	
 	
 }
+function createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type){
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	try {
+		$insuranceUpdate= $dbt->prepare('INSERT INTO insurance (UserID, EmailAddress, CreateDate, Type) VALUES (:UserID, :EmailAddress, :CreateDate, :Type)');
+		$insuranceUpdate->bindValue(':UserID', $UserID);
+		$insuranceUpdate->bindValue(':EmailAddress', $EmailAddress);
+		$insuranceUpdate->bindValue(':CreateDate', $CreateDate);
+		$insuranceUpdate->bindValue(':Type', $Type);
+		$insuranceUpdate->execute();	
+		$insuranceUpdate = null;
+	}
+	catch (PDOException $e) {
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}	
+}
+function getInsuranceStatus($UserID){
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	try {
+		$insuranceGet= $dbt->prepare('SELECT * FROM insurance WHERE UserID= :UserID');
+		$insuranceGet->bindValue(':UserID', $UserID);
+		$insuranceGet->execute();
+		if($insuranceGet->rowCount()>0) { 
+		    $userTag = 1;
+		}
+		else{
+			$userTag=0; 
+		}
+		return $userTag;
+	}
+	catch (PDOException $e) {
+		print "Error!: " . $e->getMessage() . "<br/>";
+		die();
+	}	
+	
+}
+
 
 /**
  *  Unique multip-dimensionarray function.

@@ -57,6 +57,17 @@ if(isset($_POST['step2-1'])) {
 	// Response -??????????????????????set in the future
    
 	if($submitTag){$testData = GetAptifyData("41", $postInsuranceData); }
+	//force the not eligible user
+	//added on 13/08/2018
+	if(isset($_POST['insuranceStatus'])&& $_POST['insuranceStatus']=="1") {
+		if(isset($_SESSION['UserId'])){ $UserID = $_SESSION['UserId'];  } 
+		if(isset($_SESSION['UserName'])){ $EmailAddress = $_SESSION['UserName'];  } 
+		$CreateDate = date('Y-m-d');
+		$Type = "R";
+		createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type);
+		$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+		header("Location:".$link."/insuranceprocess");
+	}
 }
 // Added product table on 13/08/2018
 	/************************/
