@@ -118,7 +118,11 @@ $background = getBackgroundImage($userID);
 					//$invoiceAPI = GetAptifyData("18", $apis);
 					?> 
 					<br>
+					<?php
+					/*
 					<a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
+					*/
+					?>
 					<p style="color:#000;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>
 				</div>
 				<?php /*

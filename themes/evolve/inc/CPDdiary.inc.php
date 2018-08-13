@@ -22,7 +22,7 @@ if(isset($_POST["nonAPA"])) {
 	$CPDsend["Reflection"] = $_POST["Reflection"];
 	// send and get response
 	$resultst = GetAptifyData("34", $CPDsend);
-	print_r($resultst);
+	//print_r($resultst);
 	if($resultst == "type of value") {// to be used later
 		// to do
 	} else {
@@ -38,7 +38,7 @@ if(isset($_POST["nonAPA"])) {
 // PD_id, NPD_id, CPD hours, PD title, PD date, CPD points
 // Description, Date, Time, Provider, Reflection
 $results = GetAptifyData("33", $_SESSION["UserId"]);
-print_r($results);
+//print_r($results);
 $totalNum = sizeof($results);
 $CPDHousrs = $results["CurrentCPDHour"];
 $APA = array();
@@ -242,8 +242,12 @@ function move(input) {
 //echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&amp;ViewEntityName=Persons&amp;ReportId=151&amp;EntityRecordID=55280'width='900' height='900'></iframe>";
 //echo "<a href='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=151&EntityRecordID=".$_SESSION['LinkId']."'>ttttt</a>";
 ?>
-<!--input type="submit" class="Non-APA-hour" name="NONAPA" id="NONAPA" value="Download NON-APA PDF"-->
+<?php 
+/*
+<input type="submit" class="Non-APA-hour" name="NONAPA" id="NONAPA" value="Download NON-APA PDF">
 <button type="button" class="btn btn-info btn-lg Non-APA-hour" data-toggle="modal" data-target="#NonCPDPDF"><span style="text-decoration: underline; color:white;">Download NON-APA PDF</span></button>
+*/
+?>
 <?php /*
 <div id="NonCPDPDF" class="modal fade big-screen" role="dialog">
 	<div class="modal-dialog">
@@ -274,7 +278,7 @@ $(document).ready(function() {
 */ ?>
 <br />
 
-<strong><a href="http://www.physiotherapyboard.gov.au/documents/default.aspx?record=WD15%2f18489&dbid=AP&chksum=ewqLtzOm4m%2fsRUrlGCmo1A%3d%3d">This is based on Physiotherapy Board of Australia's Continuing professional development form.</a></strong>
+<!--strong><a href="http://www.physiotherapyboard.gov.au/documents/default.aspx?record=WD15%2f18489&dbid=AP&chksum=ewqLtzOm4m%2fsRUrlGCmo1A%3d%3d">This is based on Physiotherapy Board of Australia's Continuing professional development form.</a></strong-->
 <div class="NAPAhours">
   <div class="NAPAhoursHead">
     <div>Date</div><div>Description</div><div>Time</div><div>Provider</div><div>Reflection</div>

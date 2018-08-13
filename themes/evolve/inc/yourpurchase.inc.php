@@ -39,13 +39,13 @@ $products = $product["Orders"];
 
 						<div class="flex-cell flex-flow-row border-btm">
 
-							<div class="flex-col-4">
+							<div class="flex-col-6">
 								<span class="table-heading">Product Name</span>
 							</div>
-							<div class="flex-col-3 flex-center">
+							<!--div class="flex-col-3 flex-center">
 								<span class="table-heading">Download Invoice</span>
-							</div>
-							<div class="flex-col-2">
+							</div-->
+							<div class="flex-col-3">
 								<span class="table-heading">Price</span>
 							</div>
 							<div class="flex-col-3">
@@ -59,9 +59,9 @@ $products = $product["Orders"];
 								$now = date('d-m-Y');
 								if(strtotime($now)<strtotime('+1 years',strtotime($product['Orderdate']))){
 									echo "<div class='flex-cell flex-flow-row'>";
-									echo "<div class='flex-col-4'>".$product['OrderLines'][0]['ProductName']."</div>";
-									echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
-									echo "<div class='flex-col-2'>".number_format($product['Paymenttotal'],2)."</div>";
+									echo "<div class='flex-col-6'>".$product['OrderLines'][0]['ProductName']."</div>";
+									//echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
+									echo "<div class='flex-col-3'>".number_format($product['Paymenttotal'],2)."</div>";
 									$OrderDate = date('d-m-Y', strtotime($product['Orderdate']));
 									echo "<div class='flex-col-3'>".$OrderDate."</div>";
 									echo "</div>";
@@ -78,13 +78,13 @@ $products = $product["Orders"];
 
 					<div class="flex-cell flex-flow-row border-btm">
 
-						<div class="flex-col-4">
+						<div class="flex-col-6">
 							<span class="table-heading">Product Name</span>
 						</div>
-						<div class="flex-col-3 flex-center">
+						<!--div class="flex-col-3 flex-center">
 							<span class="table-heading">Download Invoice</span>
-						</div>
-						<div class="flex-col-2">
+						</div-->
+						<div class="flex-col-3">
 							<span class="table-heading">Price</span>
 						</div>
 						<div class="flex-col-3">
@@ -99,9 +99,9 @@ $products = $product["Orders"];
 								foreach($products as $product){
 									array_push($apis, $product["ID"]);
 									echo "<div class='flex-cell flex-flow-row'>";
-									echo "<div class='flex-col-4'>".$product['OrderLines'][0]['ProductName']."</div>";
-									echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
-									echo "<div class='flex-col-2'>".number_format($product['Paymenttotal'],2)."</div>";
+									echo "<div class='flex-col-6'>".$product['OrderLines'][0]['ProductName']."</div>";
+									//echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
+									echo "<div class='flex-col-3'>".number_format($product['Paymenttotal'],2)."</div>";
 									$OrderDate = date('d-m-Y', strtotime($product['Orderdate']));
 									echo "<div class='flex-col-3'>".$OrderDate."</div>";
 									echo "</div>";

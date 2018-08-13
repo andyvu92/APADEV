@@ -65,8 +65,8 @@ if(count($PostArray) == 0) { // Just GET data
 					echo "<div class='flex-cell'>";
 				}
 				echo '<div class="flex-col-6"><div class="flex-col-10">
-						<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
-					'" id="'.$Subs["SubscriptionID"].'" class="NGname'.$counter.'" value="'.$Subs["Subscribed"].'"';
+						<input class="NGname'.$counter.' styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
+					'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
 				if($Subs['Subscribed']==1){ 
 					echo "checked";
 				}

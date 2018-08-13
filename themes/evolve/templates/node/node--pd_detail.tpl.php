@@ -555,7 +555,7 @@
 		</div>
 
 	<div class="mobile-hidden">
-		<?php if (!empty($pd_detail['Learning_outcomes'])): ?>
+		<?php if (false): //!empty($pd_detail['Learning_outcomes'])): ?>
 			<div class="section flex-cell" style="flex-wrap: unset">
 				<div class="left-icon">
 					<span class="learning-outcome-icon large-icon"></span>
@@ -565,6 +565,20 @@
 					<p>
 						<?php echo $pd_detail['Learning_outcomes']; ?>
 					</p>
+				</div>
+			</div>
+		<?php endif; ?>
+
+		<?php if (!empty($pd_detail['LearningOutcomes'])): ?>
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="learning-outcome-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Learning outcomes</h2>
+					<?php foreach($pd_detail['LearningOutcomes'] as $outcomes) {
+						echo "<p>".$outcomes['LearningOutcomes']."</p>";
+					} ?>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -1904,9 +1918,7 @@
 	</div>
 <?php endif; ?>
 
-
-
-<?php if (!empty($pd_detail['Learning_outcomes'])): ?>
+<?php if (false): //!empty($pd_detail['Learning_outcomes'])): ?>
 	<div class="acordian-label">Learning outcomes</div>
 	<div class="accordian-content">
 			<div class="section flex-cell" style="flex-wrap: unset">
@@ -1916,6 +1928,23 @@
 				<div class="right-content">
 					<h2 class="blue-heading">Learning outcomes</h2>
 					<p><?php echo $pd_detail['Learning_outcomes']; ?></p>
+				</div>
+			</div>
+	</div>
+<?php endif; ?>
+
+<?php if (!empty($pd_detail['LearningOutcomes'])): ?>
+	<div class="acordian-label">Learning outcomes</div>
+	<div class="accordian-content">
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="learning-outcome-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Learning outcomes</h2>
+					<?php foreach($pd_detail['LearningOutcomes'] as $outcomes) {
+						echo "<p>".$outcomes['LearningOutcomes']."</p>";
+					} ?>
 				</div>
 			</div>
 	</div>
