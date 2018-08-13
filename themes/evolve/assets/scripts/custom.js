@@ -273,13 +273,18 @@ jQuery(document).ready(function($) {
 		{
 			$('#rolloverblock').removeClass("display-none");
 			$('#Installpayment-frequency').val("Monthly");
+			var tempTotal = Number($('#totalPayment').html());
+			var Total = Number(tempTotal +12);
+			$('#totalPayment').html(Total);
 		}
 				 
     });
 	$('#p1-1').click(function(){
 		if($(this).is(":checked")){
 			$('#rolloverblock').addClass("display-none");
-			
+			var tempTotal = Number($('#totalPayment').html());
+			var Total = Number(tempTotal -12);
+			$('#totalPayment').html(Total);
 		}
 	});
 	$('input[type="checkbox"]').click(function(){
@@ -350,6 +355,10 @@ jQuery(document).ready(function($) {
 			var PRF = $("#PRF").val();
 			$( "#POSTPRF").val(PRF);
 		}
+		//var tempTotal = Number($('#totalPayment').html());
+		//var prf = Number($('#PRF').val());
+		//var Total = Number(tempTotal + prf);
+		//$('#totalPayment').html(Total);
 		
 	});
 	$( "#PRFOther" ).blur(function() {
