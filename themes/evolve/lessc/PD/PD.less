@@ -1674,6 +1674,34 @@ div[aria-describedby="registerMember"].ui-dialog{
     left: calc(~"50vw - 350px") !important;
     width: 700px !important;
     overflow: hidden;
+    .ui-dialog-titlebar-close{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+        .ui-button-icon-primary{
+            background-image: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:before{
+                content: "";
+                position: absolute;
+                width: 15px;
+                height: 2px;
+                transform: rotate(45deg);
+                background: @grey;
+            }
+            &:after{
+                content: "";
+                position: absolute;
+                width: 15px;
+                height: 2px;
+                transform: rotate(-45deg);
+                background: @grey;
+            }
+        }
+    }
     #registerMember{
         overflow-y: auto;
         max-height: 76vh!important;

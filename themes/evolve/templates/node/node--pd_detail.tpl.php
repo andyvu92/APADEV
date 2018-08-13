@@ -1300,10 +1300,18 @@
             </div>
         </div>   
         <?php endif;?>
-          <div id="jobnoticement">
-              <p><span class="registerDes">We’ve noticed you’re not a physiotherapist.</span></p>
-              <p>Please note, if a course or event is for registered physiotherapists only, this will be indicated in the event description.</p>
-              <p><span class="registerDes">Please make sure you are attending an event that is open to everyone.</span></p>
+          	<div id="jobnoticement">
+				<div class="flex-container">
+					<div class="flex-cell">
+						<h3 class="light-lead-heading cairo">Sorry, it looks like you're not yet eligible to attend APA courses.</h3>
+					</div>
+					<div class="flex-cell">
+						<span class="bold">Check out our range of lectures and events filled with content for students.</span>
+					</div>
+					<div class="flex-cell">
+						<a class="pd-research" href="#">Search again</a>
+					</div>
+				</div>
           </div>  
 <!--Sign up Web User-->
 <div id="signupWebUser">

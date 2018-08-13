@@ -1157,6 +1157,34 @@ input{
     position: fixed!important;
     background: #fff;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    .ui-dialog-titlebar-close{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+        .ui-button-icon-primary{
+            background-image: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:before{
+                content: "";
+                position: absolute;
+                width: 15px;
+                height: 2px;
+                transform: rotate(45deg);
+                background: @grey;
+            }
+            &:after{
+                content: "";
+                position: absolute;
+                width: 15px;
+                height: 2px;
+                transform: rotate(-45deg);
+                background: @grey;
+            }
+        }
+    }
     @media all and (max-width: @larger-phone-width) {
         left: calc(~"50vw - 150px") !important;
         width: 300px !important; 
@@ -1351,6 +1379,17 @@ input{
     }
 }
 
+.accent-button-general{
+    font-size: 15px;
+    font-family: Cairo;
+    font-weight: 600;
+    color: #fff;
+    background: #009fda;
+    padding: 9px 0;
+    width: 100%;
+    text-align: center;
+}
+
 //POPUPS 
 #deleteWorkplaceWindow{
     .popup-small;
@@ -1390,9 +1429,6 @@ input{
                 opacity: 0.8;
             }
         }
-        [value="yes"], [value="no"]{
-
-        }
         [value="no"]{
             color: #848589;
             background: none;
@@ -1405,6 +1441,41 @@ input{
     @media all and (max-width: @phone-width) {
         .light-lead-heading{
             font-size: 2em;
+        }
+    }
+}
+
+[aria-describedby="jobnoticement"].ui-dialog{
+    .popup-small;
+    #jobnoticement{
+        padding: 0px 80px 40px 80px;
+        .light-lead-heading{
+            color: #000;
+            margin-top: 0;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+        .bold{
+            font-family: Roboto;
+            font-weight: 400;
+            font-size: 1em;
+            margin: 30px 0;
+        }
+        .pd-research{
+            .accent-button-general;
+        }
+    }
+    @media all and (max-width: @larger-phone-width){
+        #jobnoticement{
+            padding: 40px 20px;
+        }
+    }
+    @media all and (max-width: @phone-width) {
+        #jobnoticement{
+            .light-lead-heading{
+                font-size: 2em;
+            }
         }
     }
 }
