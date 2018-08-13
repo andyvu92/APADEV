@@ -2,6 +2,7 @@
 
 	$url =  "{$_SERVER['REQUEST_URI']}";
 	
+
 	// when a user is coming from a log-in
 	if(isset($_SESSION["outputReturn"])) {
 		
@@ -30,37 +31,25 @@
 		$details = GetAptifyData("4", $data,"");
 		newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"]);
 		
+		
+		// detail is created!!
+		// need to configure how we are going to set the messages
 	} else {
-		// no id has been entered
+		
+		if(isset($_SESSION["Log-in"])) {
+			// send response when they are already logged in
+			header("Location: /pageA");
+			exit;
+		} else {
+			// send users to log-in page for log-in
+			header("Location: /log-in");
+			exit;
+		}
+		// or show this message if they are not coming from the expected source.
+
 		echo "<p>This page cannot be called directly on the browser. it must receive a valid HTTP POST or GET/Redirect SAML 2 request.</p>";
 	}
 	
-	/*
-	// log-out
-	if(isset($_POST["logout"])) {
-		// same with this commend.
-		// isset($_SESSION["Log-in"])
-		
-		// todo
-		// figure this out later
-		logoutManager();
-	}
-	
-	// test get data
-	if(isset($_POST["Getdata"])) {
-		$data = "UserID=".$_SESSION["UserId"];
-		$output = GetAptifyData("1", $data);
-		print_r($output);
-	}
-	
-	// forgot password
-	if(isset($_POST["Fid"])) {
-		$input["email"] = $_POST["Fid"];
-		$output = GetAptifyData("6", $input);
-		//print_r($output);
-	}
-	
-	*/
 ?>
 <p>sso page! </p>
 <?php if(isset($_SESSION["TokenID"])): //check the TokenID from third part web site?>
@@ -86,8 +75,8 @@
 
 <?php endif; ?>
 <?php if(isset($_SESSION['Log-in'])): //check the TokenID from third part web site?>
-<p>logged in!</p>
+	<p>logged in!</p>
 <?php else: ?>
-<p>Not logged in!</p>
+	<p>Not logged in!</p>
 <?php endif; ?>
 <?php logRecorder(); ?>
