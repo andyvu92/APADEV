@@ -1275,7 +1275,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
             </div>
             <div class="row">
             <div class="col-xs-12 col-md-6">
-                    <label for="">What branch would you like to join?</label>
+                    <label for=""><?php if(!empty($details['State'])) {echo "You are in the &nbsp;".$details['State']."&nbsp;Branch ,&nbsp;would you like to addd an additional Branch?";} else { echo "Would you like to add an additional Branch?";}?></label>
                     <div class="chevron-select-box">
                     <select class="form-control" id="Branch" name="Branch">
 					<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>Please select</option>
@@ -2853,20 +2853,14 @@ if(isset($_GET['MT'])){
                     </div>
                     <div id="ahpblock" class="col-xs-6 col-md-3">
                         <label for="">AHPRA number</label>
-                        <input type="text" class="form-control" name="Ahpranumber"  <?php
-							if (empty($details['Ahpranumber'])) {
-								echo "placeholder='AHPRA number'";
-							} else {
-								echo 'value="' . $details['Ahpranumber'] . '"';
-							}
-						?>>
+                        <input type="text" class="form-control" name="Ahpranumber"  placeholder='AHPRA number'>
                     </div>
                 </div>
                 
                 <input type="hidden" class="form-control" name="Specialty">
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
-                        <label for="">What branch would you like to join?</label>
+                        <label for="">You are in the <span id="homebranch"></span>&nbsp;Branch, would you like to addd an additional Branch?</label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="Branch" name="Branch">
                             <option value="" selected disabled>What branch would you like to join?</option>

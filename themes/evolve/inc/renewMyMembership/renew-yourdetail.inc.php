@@ -760,11 +760,11 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				</div>
 			</div>
 
-			<div clas="row">	
+			<div class="row">	
 				<input type="hidden"  name="Specialty"  <?php   echo 'value="'.$details['Specialty'].'"'; ?>>
 				<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<label for="">What branch would you like to join?</label>
+					<label for=""><?php if(!empty($details['State'])) {echo "You are in the &nbsp;".$details['State']."&nbsp;Branch ,&nbsp;would you like to addd an additional Branch?";} else { echo "Would you like to add an additional Branch?";}?></label>
 					<div class="chevron-select-box">
 					<select class="form-control" id="Branch" name="Branch">
 					<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>Please select</option>

@@ -377,7 +377,7 @@ Facsimile: (03) 9092 0899</p>
 	<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
 
 	<p>If this isn’t quite right, and you’d like to change your member type, or add some National Groups to your membership, follow the link below:</p>
-	<a href="javascript:document.getElementById('renew-membertype-form2').submit();"  target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change member type or national group</span></a><br>
+	<a href="javascript:document.getElementById('renew-membertype-form2').submit();"  target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change member category or national group</span></a><br>
 
 	<p>If you’ve changed address recently or would like to update any of your personal details, follow this link:</p>
 	<a href="renewmymembership" target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change your details</span></a>

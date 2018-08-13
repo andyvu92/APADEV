@@ -301,6 +301,11 @@ jQuery(document).ready(function($) {
          }
 		
     });
+	$('#State1').change(function(){
+		var state = $('#State1').val();
+		$('#homebranch').html(state);
+		
+	});
 	$('body').on('change', '[type="checkbox"]', function() {
 		$('#workplaceblocks input[type="checkbox"]').click(function(){
 			if($(this).is(":checked")){
