@@ -64,6 +64,7 @@
 		$arrIn["ID"] = $id;
 		$arrIn["Password"] = $pass;
 		$Got = GetAptifyData("7", $arrIn);
+		logRecorder();
 		if(isset($Got["ErrorInfo"])) {
 			//echo $Got["ErrorInfo"]["ErrorMessage"];
 			return ["log-in fail", $Got["ErrorInfo"]["ErrorMessage"]];
@@ -89,7 +90,7 @@
 
 ?>
 <?php if(isset($_SESSION["Log-in"])): ?>
-	<?php print_r($outputs);  ?>
+	<p>This page cannot be called directly after logged in!!!!!</p>
 	<div class="pull-right borderLeftForTop DashboardPadding">
 		<div id="DashboardButton" class="ButtonIconHolder withButtonIcon DashboardwithButtonIcon" title="Dashboard">
 			<i class="Dashboard">&nbsp;</i>
@@ -177,9 +178,6 @@
 	</div>
 </div>
 </div>
-
-<?php logRecorder(); ?>
-
 <script type="text/javascript">
 $(document).ready(function(){	
 	var x = $( document ).height() - $('.sticky-wrapper').height() - $('#section-bottom').height() - 130;
