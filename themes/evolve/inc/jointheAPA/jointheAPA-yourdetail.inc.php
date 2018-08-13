@@ -1,7 +1,7 @@
 <?php
 
 //Put filter condition to display member type
-$filterMemberProduct = array("10007","10008","10009","9997");
+$filterMemberProduct = array("10007","10008","10009","9997","10006");
 // Put two scenarios here;
 // 1. for new user who join a member
 // 2. web user who join a member use $_SESSION]['userID'] to get user info

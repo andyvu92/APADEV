@@ -1,7 +1,7 @@
 <?php
 
 //Put filter condition to display member type
-$filterMemberProduct = array("10007","10008","10009","9997");
+$filterMemberProduct = array("10007","10008","10009","9997","10006");
 // 2.2.21 - Get Fellowship product
 	// Send - 
 	// ProductID 
