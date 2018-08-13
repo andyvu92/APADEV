@@ -569,6 +569,20 @@
 			</div>
 		<?php endif; ?>
 
+		<?php if (!empty($pd_detail['LearningOutcomes'])): ?>
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="learning-outcome-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Learning outcomes</h2>
+					<?php foreach($pd_detail['LearningOutcomes'] as $ourcomes) {
+						echo "<p>".$ourcomes."</p>";
+					} ?>
+				</div>
+			</div>
+		<?php endif; ?>
+
 		<?php if (!empty($pd_detail['Prerequisites'])): ?>
 			<div class="section flex-cell" style="flex-wrap: unset">
 				<div class="left-icon">
@@ -1916,6 +1930,23 @@
 				<div class="right-content">
 					<h2 class="blue-heading">Learning outcomes</h2>
 					<p><?php echo $pd_detail['Learning_outcomes']; ?></p>
+				</div>
+			</div>
+	</div>
+<?php endif; ?>
+
+<?php if (!empty($pd_detail['LearningOutcomes'])): ?>
+	<div class="acordian-label">Learning outcomes</div>
+	<div class="accordian-content">
+			<div class="section flex-cell" style="flex-wrap: unset">
+				<div class="left-icon">
+					<span class="learning-outcome-icon large-icon"></span>
+				</div>
+				<div class="right-content">
+					<h2 class="blue-heading">Learning outcomes</h2>
+					<?php foreach($pd_detail['LearningOutcomes'] as $ourcomes) {
+						echo "<p>".$ourcomes."</p>";
+					} ?>
 				</div>
 			</div>
 	</div>

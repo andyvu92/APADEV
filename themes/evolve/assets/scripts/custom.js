@@ -843,6 +843,7 @@ jQuery(document).ready(function($) {
 		}
 		$("."+type).show();
 	});
+	
   $(".prev").click(function() {
     var x = $(".active").attr('id').replace('Section','');
     if(x != '1') {
@@ -920,7 +921,8 @@ jQuery(document).ready(function($) {
 	  $('#chosenNGName').text(firstString + finalString);
 	  $("#chosenNGid").text(firstStringID + finalStringID);
     }
-  })
+  });
+  
   $('.restart').click(function() {
     location.reload();
   });
