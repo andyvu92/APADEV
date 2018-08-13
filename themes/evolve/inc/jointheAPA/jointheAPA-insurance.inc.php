@@ -18,7 +18,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 	
 	<div class="row">
 			<div class="col-xs-12">
-			<label>Has there been any medical malpractice or liability claim in the last five years(whether insured or uninsured)?<span class="tipstyle">*</span></label>
+			<label>Has there been any medical malpractice or liability claim in the last five years (whether insured or uninsured)?<span class="tipstyle">*</span></label>
 			</div>
 			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Claim" id="Claim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="1") echo 'checked="checked"';?>><label for="Claim1">Yes</label></div>
 			<div class="col-xs-6 col-md-3"><input class="styled-radio-select" style="min-height:0" type="radio" name="Claim" id="Claim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Claim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>><label for="Claim2">No</label></div>
@@ -67,8 +67,8 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 			</div>
 			<div class="row">
 				<div class="col-xs-6 col-md-3">
-					<label>Year of claim</label>
-					<input type="text" class="form-control" name="Yearclaim" id="Yearclaim" placeholder="Year of claim"<?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Yearclaim']; }else{ echo '';}?> >
+					<label>Year of claim of incident</label>
+					<input type="text" class="form-control" name="Yearclaim" id="Yearclaim" placeholder="Year of claim of incident"<?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Yearclaim']; }else{ echo '';}?> >
 				</div>
 				<div class="col-xs-6 col-md-3">
 					<label>Name of claimant</label>

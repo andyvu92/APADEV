@@ -16,7 +16,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 	<div class="down5 <?php if((isset($_POST['step1'])&& $_POST['insuranceTag']!="0")||isset($_POST['goI']))echo 'display'; else { echo 'display-none';}?>">
 		<div class="row">
 			<div class="col-xs-12">
-			<label>Has there been any medical malpractice or liability claim in the last five years(whether insured or uninsured)?<span class="tipstyle">*</span></label>
+			<label>Has there been any medical malpractice or liability claim in the last five years (whether insured or uninsured)?<span class="tipstyle">*</span></label>
 			</div>
 
 			<div class="col-xs-6 col-md-3">
@@ -105,14 +105,17 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			
 			<div class="row">
 				<div class="col-xs-6 col-md-3">
-					<input type="text" class="form-control" name="Yearclaim" id="Yearclaim" placeholder="Year claim" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Yearclaim']; }else{ echo 'placeholder="Year of claim"';}?> >
+					<label>Year of claim of incident</label>
+					<input type="text" class="form-control" name="Yearclaim" id="Yearclaim" placeholder="Year of claim of incident" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Yearclaim']; }else{ echo 'placeholder="Year of claim"';}?> >
 				</div>
 				<div class="col-xs-6 col-md-3">
+					<label>Name of claimant</label>
 					<input type="text" class="form-control" name="Nameclaim" id="Nameclaim" placeholder="Name of claimant" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Nameclaim']; }else{ echo 'placeholder="Name of claimant"';}?>>
 				</div>
 			</div>
 			
 			<div class="row"><div class="col-xs-12 col-md-6">
+				<label>Full description</label>
 				<textarea rows="5" type="text" class="form-control" name="Fulldescription" id="Fulldescription" placeholder="Full description of insurance" <?php if($insuranceDataTag==1 && strlen($insuarnceData['results'][0]['Fulldescription']) > 1) {echo " value='".$insuarnceData['results'][0]['Fulldescription']."'"; } ?>>
 				</textarea>
 			</div></div>
@@ -127,6 +130,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 				</div>
 
 				<div class="col-xs-12">
+				<label>Amount paid</label>
 				<label>Has the claim been finalised?</label>
 				</div>
 				<div class="col-xs-6 col-md-3">
