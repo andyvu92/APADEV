@@ -231,6 +231,7 @@ if(isset($_POST['step2'])) {
 		$fpData['ProductID'] = $fpProdcutArray;
 		$FPListArray = GetAptifyData("21", $fpData);
 		
+		
 	}
 // 2.2.13 - update payment method-3-set main card
 // Send - 
@@ -317,7 +318,42 @@ $PRFPrice = 0;
                             <div class="flex-col-2 action-col"><a class="deletePRFButton">delete</a></div>
                             </div>'; 
                             $price +=$reviewData['PRFdonation']; }
+						if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"){ 
+							echo '<div class="flex-cell flex-flow-row table-cell">
+                            <div class="flex-col-8 title-col"><span class="pd-header-mobile">Admin fee</div>
+                            <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.$scheduleDetails['AdminFee'].'</div>
+                            <div class="flex-col-2 action-col"></div>
+                            </div>'; 
+							
+						}
 				?>
+			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				
+				<div class="flex-cell flex-flow-row">
+					<div class="flex-col-6">
+					Subtotal (exc. GST)	
+					</div>
+					<div class="flex-col-6">
+			        $<?php echo $scheduleDetails['SubTotal'];?>
+					</div>
+				</div>
+				<div class="flex-cell flex-flow-row">
+					<div class="flex-col-6">
+					GST	
+					</div>
+					<div class="flex-col-6">
+			        $<?php echo $scheduleDetails['GST'];?>
+					</div>
+				</div>
+				<div class="flex-cell flex-flow-row">
+					<div class="flex-col-6">
+					Total(inc.GST)	
+					</div>
+					<div class="flex-col-6">
+			        $<span id="totalPayment"><?php echo $scheduleDetails['OrderTotal'];?></span>
+					</div>
+				</div>
 			</div>
 		</div>
 	<!--<a class="your-details-prevbutton8"><span class="dashboard-button-name">Last</span></a>-->
@@ -386,17 +422,45 @@ $PRFPrice = 0;
 
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-12">
-					Membership payment total:	
+					Today's payment:	
 					</div>
 				</div>
-				<div class="flex-cell flex-flow-row">
+				<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"):?>
+					<div class="flex-cell flex-flow-row">
 					<div class="flex-col-6">
-					Subtotal (exc. GST)	
+					Admin fee	
 					</div>
 					<div class="flex-col-6">
-			        $<?php echo $scheduleDetails['SubTotal'];?>
+			        $<?php echo $scheduleDetails['AdminFee'];?>
 					</div>
 				</div>
+				<?php endif;?>
+				<?php if($reviewData['PRFdonation']!=""):?>
+					<div class="flex-cell flex-flow-row">
+						<div class="flex-col-6">
+						PRF donation	
+						</div>
+						<div class="flex-col-6">
+						$<?php echo $reviewData['PRFdonation'];?>
+						</div>
+					</div>
+						
+				<?php endif;?>
+				<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"):?>
+				<?php  
+					$InitialPaymentAmount = $scheduleDetails['InitialPaymentAmount'];
+					$OccuringPayment = $scheduleDetails['OccuringPayment'];
+					$LastPayment = $scheduleDetails['LastPayment'];
+				?>
+					<div class="flex-cell flex-flow-row">
+						<div class="flex-col-6">
+						First instalment	
+						</div>
+						<div class="flex-col-6">
+						$<?php echo $scheduleDetails['InitialPaymentAmount'];?>
+						</div>
+					</div>
+				<?php endif;?>
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-6">
 					GST	
@@ -407,14 +471,19 @@ $PRFPrice = 0;
 				</div>
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-6">
-					Total(inc.GST)	
+					Today's total(inc.GST)	
 					</div>
 					<div class="flex-col-6">
-			        $<?php echo $scheduleDetails['OrderTotal'];?>
+			        $<?php echo $scheduleDetails['InitialPaymentAmount'];?>
 					</div>
 				</div>
+				<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"):?>
+					<div class="flex-col-12" style="text-align: center">
+						<button style="margin-top: 30px;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payment</button>	
+					</div>
+				<?php endif;?>
 				<?php 
-					if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"){ 
+					/*if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"){ 
 						$AdminFee =$scheduleDetails['AdminFee']; 
 						$InitialPaymentAmount = $scheduleDetails['InitialPaymentAmount'];
 						$OccuringPayment = $scheduleDetails['OccuringPayment'];
@@ -461,7 +530,7 @@ $PRFPrice = 0;
 									<button style="margin-top: 30px;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payment</button>	
 								</div>
 							</div>'; 								
-					}
+					}*/
 				?>
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-12">
@@ -480,7 +549,7 @@ $PRFPrice = 0;
 <form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>
 <form id="deleteNGForm" action="" method="POST"><input type="hidden" name="step2-4" value=""></form>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="your-details-prevbutton8"><span class="dashboard-button-name">Back</span></a></div>
-<?php if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"): ?>
+<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"): ?>
 <div id="schedulePOPUp" class="modal fade" role="dialog">
 	<div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
 	<!-- Modal content-->
