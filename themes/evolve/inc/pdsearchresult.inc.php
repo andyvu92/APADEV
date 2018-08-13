@@ -68,7 +68,7 @@ $results = GetAptifyData("28", $request);
 
 $outputEmpty = false;
 if(isset($results['MResponse'])) {
-	echo 'no record!!!';
+	//echo 'no record!!!';
 	$outputEmpty = true;
 } else {
 	$totalNum = $results["MeetingDetails"][0]["PDcount"]; //sizeof($results);
@@ -103,13 +103,16 @@ if(isset($results['MResponse'])) {
 //echo "totalpage: ".$totalPage;
 ?>
 
-<h3 class="light-lead-heading align-center">PD BASED ON YOUR PROFILE</h3>
 <?php if($outputEmpty): ?>
 	<?php //This is for when there is no result on PD search ?>
-	<b stlye="text-align: center;">No result found!</b>
+	<h3 class="light-lead-heading align-center">We didn't find anything</br>that matched your search.</h3>
+	<div class="col-xs-12 search-again">
+		<a class="accent-btn" href="#block-block-240"><i class="fa fa-search"></i> Search again</a>
+	</div>
+	<div class="flex-col-12 pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+	
 <?php else: ?>
 <?php
-
    /********sort search result*****/
    /*
 	usort($results, function($a, $b) {
@@ -150,6 +153,7 @@ if(isset($results['MResponse'])) {
 		$front = (10 * $i);
 		$back = 10 * ($i + 1) + 1;
 		if($front < $current && $current <= ($back - 1)) {
+			echo '<h3 class="light-lead-heading align-center">PD BASED ON YOUR PROFILE</h3>';
 			if($front == 0) {
 				echo '<div class="pager col-xs-12 col-sm-6 col-md-7"><a href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.$passString.'"><div class="Pagebutton"><<</div></a>';
 			} else {
@@ -297,6 +301,7 @@ if(isset($results['MResponse'])) {
 	<div class="pageSetting"><p>Showing</p><select id="pagesize" name="pagesize" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option><option value="3" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==20)){ echo "selected";  }  ?>> 20 </option></select><p>events</p></div>
 	<div class="pageItem"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php echo $pageNfront; ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php echo $pageNrear; ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
 </div>
+<div class="flex-col-12 pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
 	<?php /*
 	<div class="pageItemBottom"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $totalNum+1;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $totalNum+$numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
 	*/ ?>
