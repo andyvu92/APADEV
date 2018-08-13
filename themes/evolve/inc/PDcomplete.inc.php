@@ -47,7 +47,6 @@ if(isset($_POST["POSTPRF"])) {
 	$OrderSend['CampaignCode'] = $_POST["CouponCode"];
 	print_r($OrderSend);
 	$registerOuts = GetAptifyData("26", $OrderSend);
-	print_r($registerOuts);
 	//delete session: really important!!!!!!!!
 	unset($_SESSION["tempcard"]);
 	if($registerOuts['Invoice_ID']!=="0") {
@@ -56,7 +55,7 @@ if(isset($_POST["POSTPRF"])) {
 		//put extra code when using API to get the status of order, if it is successful, will save terms and conditions on APA side
 		//save the terms and conditons on APA side
 		$dataArray = array();
-		$dataArray['MemberID'] = $_SESSION['userID'];
+		$dataArray['MemberID'] = $_SESSION['UserId'];
 		$dataArray['CreateDate']= date('Y-m-d');
 		$dataArray['MembershipYear'] = "";
 		$dataArray['ProductList'] = implode(",",$OrderSend["productID"]);

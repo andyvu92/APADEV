@@ -58,7 +58,60 @@ if(isset($_POST['step2-1'])) {
    
 	if($submitTag){$testData = GetAptifyData("41", $postInsuranceData); }
 }
-
+// Added product table on 13/08/2018
+	/************************/
+	// 2.2.31 Get Membership prodcut price
+	// Send - 
+	// userID & product list
+	// Response -Membership prodcut price
+	$prodcutArray = array();
+	if(isset($_SESSION["MembershipProductID"])) { array_push($prodcutArray,$_SESSION["MembershipProductID"]);}
+	if(sizeof($prodcutArray)!=0){
+		$memberProductsArray['ProductID']=$prodcutArray;
+		$memberProdcutID = $memberProductsArray;
+		$memberProducts = GetAptifyData("31", $memberProdcutID);
+	}
+	
+	// 2.2.19 - GET list National Group
+	// Send - 
+	// userID
+	// Response -National Group product
+	$sendData["UserID"] = $_SESSION['UserId'];
+	$NGListArray = GetAptifyData("19", $sendData);
+	//print_r($NGListArray);
+	if(isset($_SESSION["NationalProductID"])) {$NGProductsArray=$_SESSION["NationalProductID"];} else{$NGProductsArray=array();}
+	// 2.2.21 - GET Fellowship product price
+	// Send - 
+	// userID
+	// Response -Fellowship product list
+	$FPListArray = array();
+	$fpProdcutArray = array();
+	if(isset($_SESSION["MGProductID"])){
+		foreach($_SESSION["MGProductID"] as $singleM){
+			foreach($singleM as $key => $value){
+				array_push($fpProdcutArray,$value);
+			}
+		}
+	}
+	if(sizeof($fpProdcutArray)!=0){
+		$fpData['ProductID'] = $fpProdcutArray;
+		$FPListArray = GetAptifyData("21", $fpData);
+		
+	}
+	//Get calculating the Order Total and Schedule Payments
+	// 2.2.47 Get calculating the Order Total and Schedule Payments
+	// Send - 
+	// userID & Paymentoption & InstallmentFor & InstallmentFrequency & PRFdonation & productID & CampaignCode
+	// Response -AdminFee & SubTotal & GST & OrderTotal & InitialPaymentAmount & OccuringPayment & LastPayment
+	if(isset($_SESSION['UserId'])){ $postScheduleData['userID'] = $_SESSION['UserId'];  } 
+	$postScheduleData['Paymentoption'] = 0;
+	$postScheduleData['InstallmentFor'] = "Membership";
+	$postScheduleData['InstallmentFrequency'] = "";
+	$postScheduleData['PRFdonation'] = "0"; 
+	$postScheduleData['productID'] = getProductList($_SESSION['UserId']);
+	$postScheduleData['CampaignCode'] = "";
+	$scheduleDetails = GetAptifyData("47", $postScheduleData);
+	/************************/
   ?>
 <div id="tipsBlock" class="<?php if(isset($_POST['insuranceStatus'])&& $_POST['insuranceStatus']=="1") {echo "display";} else { echo "display-none";}?>"><span style="color:red;">Unfortunately, we cannot let you proceed with this membership purchase. Please contact the APA member hub (include email link) or on 1 300 306 622 for more information.</span></div>
 <form id="renew-insurance-form" action="renewmymembership" method="POST">
@@ -101,6 +154,88 @@ if(isset($_POST['step2-1'])) {
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button6"><span class="dashboard-button-name">Next</span></a><a  class="your-details-prevbutton<?php //if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>
 	</div>-->
 	<!--<div class="down7" <?php //if(isset($_POST['goP']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>-->
+			<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="flex-container join-apa-final">
+				<div class="flex-cell flex-flow-row table-header">
+					<div class="flex-col-8">
+						<span class="table-heading">Product name</span>
+					</div>
+					<div class="flex-col-2">
+						<span class="table-heading">Price</span>
+					</div>
+				</div>
+
+    			<?php 
+						$price = "";
+						if(sizeof($prodcutArray)!=0){
+							foreach( $memberProducts as $memberProduct){
+								echo "<div class='flex-cell flex-flow-row table-cell'>";
+								echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$memberProduct['Title']."</div>";
+								echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$memberProduct['Price']."</div>";
+								$price += $memberProduct['Price'];
+								echo "</div>";  
+							}
+						}	
+						foreach( $NGListArray as $NGArray){
+						if(sizeof($NGProductsArray)!=0){
+						    foreach($NGProductsArray as $NGProduct){
+								if($NGProduct == $NGArray['ProductID']){
+									echo "<div class='flex-cell flex-flow-row table-cell'>";
+									echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$NGArray['ProductName']."</div>";
+									echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$NGArray['NGprice']."</div>";
+									$price += $NGArray['NGprice'];
+									echo "</div>";
+								}	  
+							}
+						}
+						}
+						if(sizeof($FPListArray)!=0){
+							foreach( $FPListArray as $FProduct){
+									echo "<div class='flex-cell flex-flow-row table-cell'>";
+									echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>".$FProduct['FPtitle']."</div>";
+									echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$FProduct['FPprice']."</div>";
+									$price += $FProduct['FPprice'];
+									echo "</div>";  
+							}
+						}
+                        
+				?>
+			</div>
+		</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				
+				<div class="flex-cell flex-flow-row">
+					<div class="flex-col-12">
+					Membership payment total:	
+					</div>
+				</div>
+				<div class="flex-cell flex-flow-row">
+					<div class="flex-col-6">
+					Subtotal (exc. GST)	
+					</div>
+					<div class="flex-col-6">
+			        $<?php echo $scheduleDetails['SubTotal'];?>
+					</div>
+				</div>
+				<div class="flex-cell flex-flow-row">
+					<div class="flex-col-6">
+					GST	
+					</div>
+					<div class="flex-col-6">
+			        $<?php echo $scheduleDetails['GST'];?>
+					</div>
+				</div>
+				<div class="flex-cell flex-flow-row">
+					<div class="flex-col-6">
+					Total(inc.GST)	
+					</div>
+					<div class="flex-col-6">
+			        $<span id="totalPayment"><?php echo $scheduleDetails['OrderTotal'];?></span>
+					</div>
+				</div>
+			</div>
+		</div>		
 			<div class="col-xs-12">
 			<label>Payment options:</label>
 			</div>
