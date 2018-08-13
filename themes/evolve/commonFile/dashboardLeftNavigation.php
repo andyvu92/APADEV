@@ -70,7 +70,7 @@ if(isset($_SESSION["UserId"])) {
 	<div class="navbar-collapse">
 		<div class="user-avatar">
 			<?php 
-				$AptifyAuthI = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=appsvruser&Password=R#D8_Hn@4p';
+				$AptifyAuthI = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=Yamith.Wickramasinghe&Password=So3y@s!a17d@rd';
 				$AuthTokenI = curlRequest($AptifyAuthI, "Get", "");
 				$AuthTokenI = json_decode($AuthTokenI, true);
 				$AuthTokenI = $AuthTokenI["TokenId"];
