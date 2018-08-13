@@ -254,7 +254,7 @@ $background = getBackgroundImage($userID);
 					</tbody>
 				</table>
 				
-				<div class="col-xs-12 none-padding">
+				<!--div class="col-xs-12 none-padding">
 					<a href class="black-underline-link" data-toggle="modal" data-target="#YInkFroamame">
 						<span>Membership certificate</span></a>
 				</div>
@@ -262,7 +262,8 @@ $background = getBackgroundImage($userID);
 				<div class="col-xs-12 none-padding">
 					<a href class="black-underline-link" data-toggle="modal" data-target="#KiNsuraneCiynbC">
 						<span>Insurance certification</span></a>	
-				</div>
+				</div-->
+				
 				<?php /*
 				<div id="YInkFroamame" class="modal fade big-screen" role="dialog">
 				  <div class="modal-dialog">

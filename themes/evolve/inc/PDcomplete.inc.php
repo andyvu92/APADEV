@@ -113,6 +113,7 @@ if(isset($_POST["Invoice_ID"])) {
 <h2>Thank you for your purchase</h2>
 <p>We hope you enjoy your event.</p>
 
+<?php /*
 <!--<form action="/pd/completed-purchase" method="POST">
 	<input type="hidden" value="1" name="Invoice_ID" id="Invoice_ID">
 	<input type="submit" value="Download your receipt">
@@ -123,6 +124,7 @@ if(isset($_POST["Invoice_ID"])) {
 //$invoiceAPI = GetAptifyData("18", $apis);
 ?></a></p>-->
 <a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
+*/ ?>
 <p>A copy will be sent to your inbox and stored in your new dashboard</p>
 <?php  /*
 <div id="Iaksbnkvoice" class="modal fade big-screen" role="dialog">
