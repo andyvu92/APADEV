@@ -169,6 +169,9 @@ jQuery(document).ready(function() {
   $('select').on('click',function() {
     $(this).removeClass('focuscss');
   });
+  $('label').on('click',function() {
+    $(this).removeClass('focuscss');
+  });
 });
 
 jQuery(document).ready(function() {

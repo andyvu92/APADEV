@@ -33,7 +33,7 @@
 	}
 
 .focuscss{
-    border: 1px solid red!important;
+    border: 1px solid #ffa22b!important;
 }
 /* ********************************************************* */
 /* -----------------Dashboard page backgroud picture settings ---------- */
@@ -837,7 +837,7 @@ a.accent-btn, button.accent-btn{
     background-color: #009fda;
     border-width: 0px;
     padding: 3px 20px;
-    color: #fff;
+    color: #fff !important;
     font-size: 15px;
     font-weight: 700;
     font-family: 'Cairo';
@@ -1984,8 +1984,8 @@ iframe{
             }
             span{
                 position: relative;
-                opacity:0;
-                width: 0px;
+                opacity: 0.6;
+                width: 15px;
                 height: 43px;
                 margin-top: auto;
                 display: block;
@@ -1995,19 +1995,12 @@ iframe{
                 cursor: pointer;
                 z-index: 0;
                 transition: 0.2s linear;
-                margin: 0 0px 0 0;
+                margin: 0 10px 0 0;
                 padding: 0;
                 background-position: center;
                 background-image: url(/sites/default/files/dashboard-icon/close-icon.png);
-            }
-            &:hover{
-                span{
-                    width: 15px;
-                    margin: 0 10px 0 0;
-                    opacity: 0.6;
-                    &:hover{
-                        opacity: 1;
-                    }
+                &:hover{
+                    opacity: 1;
                 }
             }
         }
@@ -2920,7 +2913,7 @@ form{
             top: 0px;
             width: 15px;
             height: 15px;
-            background: url(/sites/default/files/general-icon/red-notify.png) center no-repeat;
+            background: url(/sites/default/files/general-icon/orange-notify.png) center no-repeat;
         }
     }
 }

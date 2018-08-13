@@ -1430,7 +1430,7 @@ input{
             }
         }
         [value="no"]{
-            color: #848589;
+            color: #848589!important;
             background: none;
             border: 1px solid #d6d6d6;
         }
@@ -1448,6 +1448,41 @@ input{
 [aria-describedby="jobnoticement"].ui-dialog{
     .popup-small;
     #jobnoticement{
+        padding: 0px 60px 40px 60px;
+        .light-lead-heading{
+            color: #000;
+            margin-top: 0;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+        .bold{
+            font-family: Roboto;
+            font-weight: 400;
+            font-size: 1em;
+            margin: 10px 0;
+        }
+        .pd-research{
+            .accent-button-general;
+        }
+    }
+    @media all and (max-width: @larger-phone-width){
+        #jobnoticement{
+            padding: 40px 20px;
+        }
+    }
+    @media all and (max-width: @phone-width) {
+        #jobnoticement{
+            .light-lead-heading{
+                font-size: 2em;
+            }
+        }
+    }
+}
+
+[aria-describedby="student-limitation"].ui-dialog{
+    .popup-small;
+    #student-limitation{
         padding: 0px 80px 40px 80px;
         .light-lead-heading{
             color: #000;
@@ -1467,12 +1502,12 @@ input{
         }
     }
     @media all and (max-width: @larger-phone-width){
-        #jobnoticement{
+        #student-limitation{
             padding: 40px 20px;
         }
     }
     @media all and (max-width: @phone-width) {
-        #jobnoticement{
+        #student-limitation{
             .light-lead-heading{
                 font-size: 2em;
             }

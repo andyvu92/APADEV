@@ -850,11 +850,11 @@
 				  <div class="row">
 					<div class="col-lg-6">
 						<label for="">First name<span class="tipstyle"> *</span></label>
-					   	<input type="text" class="form-control"  name="Firstname" <?php if (empty($details['Firstname'])) {echo "placeholder='First name'";}   else{ echo 'value="'.$details['Firstname'].'"'; }?>>
+					   	<input type="text" class="form-control"  name="Firstname" placeholder='First name'<?php if (empty($details['Firstname'])) {echo "placeholder='First name'";}   else{ echo 'value="'.$details['Firstname'].'"'; }?>>
 					</div>
 				   <div class="col-lg-6">
 						<label for="">Last name<span class="tipstyle"> *</span></label>
-						<input type="text" class="form-control" name="Lastname" <?php if (empty($details['Lastname'])) {echo "placeholder='Last name'";}   else{ echo 'value="'.$details['Lastname'].'"'; }?>>
+						<input type="text" class="form-control" name="Lastname" placeholder='Last name'<?php if (empty($details['Lastname'])) {echo "placeholder='Last name'";}   else{ echo 'value="'.$details['Lastname'].'"'; }?>>
 				   </div>
 				  </div>
 
@@ -900,14 +900,14 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">City or town<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Suburb" <?php if (empty($details['Suburb'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Suburb'].'"'; }?>>
+							<input type="text" class="form-control" name="Suburb" placeholder='City or town'<?php if (empty($details['Suburb'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Suburb'].'"'; }?>>
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-lg-3">
 							<label for="">Postcode<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Postcode"  <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?>>
+							<input type="text" class="form-control" name="Postcode" placeholder='Postcode' <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?>>
 						</div>
 						<div class="col-lg-3">
 							<label for="">State<span class="tipstyle">*</span></label>
@@ -989,14 +989,14 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<label for="">City or town<span class="tipstyle">*</span></label>
-								<input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" <?php if (empty($details['Billing-Suburb'])) {echo "placeholder='Billing City/Town'";}   else{ echo 'value="'.$details['Billing-Suburb'].'"'; }?>>
+								<input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" placeholder='Billing City or Town'<?php if (empty($details['Billing-Suburb'])) {echo "placeholder='Billing City/Town'";}   else{ echo 'value="'.$details['Billing-Suburb'].'"'; }?>>
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-lg-3">
 								<label for="">Postcode<span class="tipstyle">*</span></label>
-								<input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?>>
+								<input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" placeholder='Billing Postcode'<?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?>>
 							</div>
 							<div class="col-lg-3">
 								<label for="">State<span class="tipstyle">*</span></label>
@@ -1120,17 +1120,17 @@
 
 				<div class="row question-boxes">
 				   <div class="col-xs-12">
-				  <input class="styled-checkbox" type="checkbox" name="Registrationboard" id="Registrationboard" required  value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Registrationboard'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Registrationboard']=="1") echo 'checked="checked"';?>">
+				  <input class="styled-checkbox" type="checkbox" name="Registrationboard" id="Registrationboard"  value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Registrationboard'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Registrationboard']=="1") echo 'checked="checked"';?>">
 				  <label for="Registrationboard">I am registered with my profession's registration board.</label>
 				   </div>
 
 				   <div class="col-xs-12">
-					<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance" required value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Professionalinsurance'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Professionalinsurance']=="1") echo 'checked="checked"';?>>
+					<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Professionalinsurance'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Professionalinsurance']=="1") echo 'checked="checked"';?>>
 					<label for="Professional-insurance">I have current and adequate professional indemnity insurance.</label>
 				   </div>
 
 				   <div class="col-xs-12">
-				  <input class="styled-checkbox" type="checkbox" name="Professionalbody" id="Professionalbody" required value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Professionalbody'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Professionalbody']=="1") echo 'checked="checked"';?>>
+				  <input class="styled-checkbox" type="checkbox" name="Professionalbody" id="Professionalbody" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Professionalbody'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Professionalbody']=="1") echo 'checked="checked"';?>>
 				  <label for="Professionalbody">I am a member of my professional body.</label>
 				   </div>
 				</div>
@@ -1287,29 +1287,28 @@
                 </div>-->
 				<div class="row question-boxes"> 
 					  <div class="col-lg-12" style="margin: 20px 0;">
-						<input class="styled-checkbox" type="checkbox" name="Confirm-policy" id="jprivacy-policy" required>
+						<input class="styled-checkbox" type="checkbox" name="Confirm-policy" id="jprivacy-policy">
 						<label for="jprivacy-policy" id="privacypolicyl">Yes. I have read the APA Privacy policy</label>
 					  </div>
 
 					  <div class="col-lg-12">
-					  	<button class="accent-btn" type="submit" value="Submit">Submit</button>
+					  	<button class="accent-btn pd-register-submit" type="submit" value="Submit">Submit</button>
 					  </div>
 				</div>
 				   </form>
-              
             </div>
         </div>   
         <?php endif;?>
           	<div id="jobnoticement">
 				<div class="flex-container">
 					<div class="flex-cell">
-						<h3 class="light-lead-heading cairo">Sorry, it looks like you're not yet eligible to attend APA courses.</h3>
+						<h3 class="light-lead-heading cairo">We've noticed you're not a physiotherapist.</h3>
 					</div>
 					<div class="flex-cell">
-						<span class="bold">Check out our range of lectures and events filled with content for students.</span>
+						<span class="bold">Please note, if a course or event is for registered physiotherapists only, this will be indicated in the event description.</span>
 					</div>
 					<div class="flex-cell">
-						<a class="pd-research" href="#">Search again</a>
+					<span class="bold">Please make sure you are attending an event that is open to everyone.</span>
 					</div>
 				</div>
           </div>  
@@ -2197,7 +2196,7 @@ Facsimile: (03) 9092 0899</p>
 	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pretium
 	tellus non ex mattis feugiat a in est. Praesent est leo, viverra ac
 	hendrerit ac, facilisis at ante. Phasellus elementum hendrerit risus,
-	eu luctus dolor sollicitudin vitae. Cras ac tellus ut mauris scelerisque
+	eu luctus dolor sollicitudin vitae. CrasJob ac tellus ut mauris scelerisque
 	mollis. Sed nibh ipsum, fringilla sed pellentesque non, luctus ut diam.
 	In viverra neque lacus, vel pulvinar nulla convallis id. Curabitur porttitor
 	eleifend quam in tincidunt.</p>
@@ -2270,24 +2269,16 @@ Facsimile: (03) 9092 0899</p>
                 required: true,
            },
          
-            Firstname: {
-                required: true,
-            },
-            Lastname: {
-                required: true,
-            },
             Emailaddress: {
                 required: true,
             },
             
              Birth: {
                 required: true,
-            },
-              Job: {
+			},
+			State: {
                 required: true,
-            }     
-            
-         
+			},
         },
       
         messages: {
