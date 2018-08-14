@@ -1428,10 +1428,10 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
     
 ?>
                <div class="col-xs-12">
-                    <label>Choose the languages you speak in your practice?</label>
+                    <label>What language do you speak?</label>
                     
                     <div class="plus-select-box">
-                    <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
+                    <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="What language do you speak...">
                        
                        <?php
     $Languagecode         = file_get_contents("sites/all/themes/evolve/json/Language.json");
@@ -3000,10 +3000,10 @@ if(isset($_GET['MT'])){
 
                 <div class="row">
 					<div class="col-xs-12">
-						<label>Choose the languages you speak in your practice?</label>
+						<label>What language do you speak?</label>
 						
                         <div class="plus-select-box">
-                        <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
+                        <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="What language do you speak...">
 						<option value="NONE" disabled>no</option>
 						<?php
 								$Languagecode         = file_get_contents("sites/all/themes/evolve/json/Language.json");
