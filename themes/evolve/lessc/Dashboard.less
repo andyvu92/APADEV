@@ -324,6 +324,12 @@ div[aria-describedby="uploadImage"].ui-dialog {
     width: 40% !important;
     max-width: 350px;
     font-family: Roboto;
+    .ui-dialog-titlebar {
+        padding: 0;
+        .ui-dialog-titlebar-close{
+            margin: 0;
+        }
+    }
 }
 div[aria-describedby="uploadImage"] .ui-widget-header{
     border:none!important;
@@ -2679,6 +2685,26 @@ form{
     }
 }
 
+#renew-insurance-form{
+    .flex-table{
+        max-width: 865px; 
+        padding: 0 15px;
+    }
+}
+#renew-insurance-form2, #join-insurance-form2{
+    .down5{
+        .row{
+            margin-bottom: 15px;
+        }
+        div[class^="col-"]{
+            margin-top: 9px;
+        }
+        .col-xs-6{
+            max-width: 100px;
+        }
+    }
+}
+
 /*--JOIN THE APA--*/
 .form-control[disabled]{
     color: rgba(0,0,0,0)!important;
@@ -2745,6 +2771,12 @@ form{
     }
     .Membpaymentsiderbar{
         margin-bottom: 20px;
+    }
+}
+
+#join-insurance-form{
+    .flex-table{
+        max-width: 865px;
     }
 }
 

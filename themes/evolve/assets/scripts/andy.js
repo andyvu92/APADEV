@@ -264,3 +264,8 @@ jQuery(document).ready(function() {
     $('#deleteWorkplaceWindow').fadeOut();
   });
 });
+
+//SET LINK WRAPPERS FOR ABOUT US PAGE FEATURES
+jQuery(document).ready(function() {
+
+});

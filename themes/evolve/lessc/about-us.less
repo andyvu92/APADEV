@@ -1,0 +1,265 @@
+@import (reference) "predefined-styles.less";
+
+/*-- ABOUT US --*/
+.page-node-127{
+    #block-block-170{
+        .top-banner{
+            padding: 200px 25% 2%;
+            .page-main-header{
+                color: #fff;
+                font-family: Cairo;
+                font-size: 4em;
+                margin: 0px auto;
+                line-height: 1em;
+            }
+            .separator{
+                width: 100%;
+                position: relative;
+                height: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 0;
+                margin: 20px 0;
+                &:after{
+                    content: "";
+                    position: absolute;
+                    height: 3px;
+                    width: 20px;
+                    background: #fff;
+                }
+            }
+            .text-container{
+                font-family: Roboto;
+                color: #fff;
+                font-size: 1.4em;
+                font-weight: 300;
+                text-align: left;
+            }
+            .arrowDown{
+                border: 1px #fff solid;
+                transform: scale(0.7);
+                margin: 25px auto 15px;
+            }
+            @media all and (max-width: @larger-tablet-width){
+                padding: 200px 15% 2%;
+            }
+            @media all and (max-width: @larger-phone-width){
+                padding: 150px 10% 2%;
+                .page-main-header{
+                    font-size: 3em;
+                }
+                .text-container{
+                    font-size: 1.2em;
+                }
+            }
+        }
+    }  
+
+    #section-feature{
+        padding: 20px 0;
+        margin: 0 auto;
+        background: @bright-blue;
+        .sub-top-banner{
+            font-family: Roboto;
+            color: #fff;
+            font-size: 2em;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            padding: 30px 0;
+        }
+        @media all and (max-width: @larger-phone-width){
+            .sub-top-banner{
+                padding: 10px 0;
+                font-size: 1.9em;
+            } 
+        }
+    }
+
+    #section-main-content{
+        margin: 80px 0 40px;
+        .dexp-shortcodes-box{
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 15px 50px;
+            &:hover{
+                .box-icon{
+                    background: @bright-blue;
+                    &:before{
+                        top: calc(~"-50% - 15px");
+                        opacity: 0;
+                    }
+                    &:after{
+                        top: calc(~"50% - 15px");
+                        opacity: 1;
+                    }
+                }
+            }
+            .box-icon{
+                float: none;
+                display: flex;
+                justify-content: center;
+                width: 60px;
+                min-width: 60px;
+                height: 60px;
+                background: #fff;
+                border-radius: 100%;
+                border: 1px solid #009fda;
+                transition: 0.2s linear;
+                &:before{
+                    content: '';
+                    position: absolute;
+                    top: calc(~"50% - 15px");
+                    width: 30px;
+                    min-width: 30px;
+                    height: 30px;
+                    background-size: contain;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    opacity: 1;
+                    transition: 0.2s linear;
+                }
+                &:after{
+                    content: '';
+                    position: absolute;
+                    top: calc(~"150% - 15px");
+                    width: 30px;
+                    min-width: 30px;
+                    height: 30px;
+                    background-size: contain;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    opacity: 0;
+                    transition: 0.2s linear;
+                }
+                /* ICONS */
+                &.history{
+                    &:before{
+                        background-image: url(/sites/default/files/about-us-icon/history-B.png);
+                    }
+                    &:after{
+                        background-image: url(/sites/default/files/about-us-icon/history-W.png);
+                    }
+                }
+                &.strategicPlan{
+                    &:before{
+                        background-image: url(/sites/default/files/about-us-icon/strategic-B.png);
+                    }
+                    &:after{
+                        background-image: url(/sites/default/files/about-us-icon/strategic-W.png);
+                    }
+                }
+                &.annualReports{
+                    &:before{
+                        background-image: url(/sites/default/files/about-us-icon/annual-B.png);
+                    }
+                    &:after{
+                        background-image: url(/sites/default/files/about-us-icon/annual-W.png);
+                    }
+                }
+                &.governance{
+                    &:before{
+                        background-image: url(/sites/default/files/about-us-icon/governance-B.png);
+                    }
+                    &:after{
+                        background-image: url(/sites/default/files/about-us-icon/governance-W.png);
+                    }
+                }
+                &.workWithUs{
+                    &:before{
+                        background-image: url(/sites/default/files/about-us-icon/partners-B.png);
+                    }
+                    &:after{
+                        background-image: url(/sites/default/files/about-us-icon/partners-W.png);
+                    }
+                }
+                &.theAPATeam{
+                    &:before{
+                        background-image: url(/sites/default/files/about-us-icon/team-B.png);
+                    }
+                    &:after{
+                        background-image: url(/sites/default/files/about-us-icon/team-W.png);
+                    }
+                }
+                &.awardsRecognition{
+                    &:before{
+                        background-image: url(/sites/default/files/about-us-icon/award-B.png);
+                    }
+                    &:after{
+                        background-image: url(/sites/default/files/about-us-icon/award-W.png);
+                    }
+                }
+                &.reconciliation{
+                    &:before{
+                        background-image: url(/sites/default/files/about-us-icon/reconciliation-B.png);
+                    }
+                    &:after{
+                        background-image: url(/sites/default/files/about-us-icon/reconciliation-W.png);
+                    }
+                }
+                &.internationalConnections{
+                    &:before{
+                        background-image: url(/sites/default/files/about-us-icon/international-B.png);
+                    }
+                    &:after{
+                        background-image: url(/sites/default/files/about-us-icon/international-W.png);
+                    }
+                }
+            }
+            .box-title{
+                margin: 10px 0;
+                font-size: 1.6em;
+                font-weight: 600;
+                font-family: Roboto!important;
+                text-align: center;
+            }
+            .box-content{
+                text-align: center;
+                margin: 10px 0;
+                p{
+                    font-size: 1.4em;
+                }
+            }
+        }
+    }
+    #section-main-content{
+        #about-us-features{
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .dexp-shortcodes-box{
+            p{
+                margin: 0;
+            }
+            .box-content{
+                .dexp-shortcodes-button{
+                    font-size: 0;
+                    background: none!important;
+                    border: 0px solid #009fda;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    &:hover{
+                        background: none!important;
+                        border: 0px solid #009fda!important;
+                    }
+                }
+            }  
+        }
+        @media all and (max-width: @larger-phone-width) {
+            .dexp-shortcodes-box{
+                padding: 5px 20px 15px;
+                border-bottom: 1px solid #e7e8e9; 
+                margin: 0 10px;
+            }
+        }
+    }
+    #section-ad-block{
+        background: #fff!important;
+    }
+}
