@@ -381,7 +381,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 					<div class="col-xs-6 col-md-3">
 					    <label for="">Birth date<span class="tipstyle"> *</span></label>
-					    <input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?>>
+					    <input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
 					</div>
 					<div class="col-xs-6 col-md-3">
 					    <label for="">Gender<span class="tipstyle"> *</span></label>
@@ -524,7 +524,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				<div class="row">
 					<div class="col-xs-12">
 					   <label for="">Building name</label>
-					   <input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['Unit'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
+					   <input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['Unit'])) {echo "placeholder='Building name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
 					</div>
 					</div>
 					
@@ -783,7 +783,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				</div>
 
 				<div class="col-xs-12">
-					<label for="">Your National group<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
+					<label for="">Choose which National Groups you would like to join:<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
 					<div class="plus-select-box">
 					<select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
 					<?php 
@@ -824,7 +824,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					if(!empty($details['PSpecialInterestAreaID'])) {$PSpecialInterestAreaID = explode(",",$details['PSpecialInterestAreaID']); } else {$PSpecialInterestAreaID =array();}
 				?>
 				<div class="col-xs-12">
-					<label>Choose as many interest areas as you like from the list below</label>
+					<label>Choose as many interest areas as you like from the list below:</label>
 					<div class="plus-select-box">
 					<select class="chosen-select" id="interest-area" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
 					  <?php 
@@ -864,15 +864,16 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID =array();}
 						
 				?>
-					<label>Choose the languages you speak in your practice?</label>
+					<label>What language do you speak?</label>
 					<div class="plus-select-box">
-					<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
+					<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="What language do you speak...">
 						<?php 
                         $Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
 						$Language=json_decode($Languagecode, true);
 						$_SESSION["Language"] = $Language;
 						foreach($Language  as $key => $value){
 						    echo '<option value="'.$Language[$key]['ID'].'"';
+							//if(sizeof($PAdditionalLanguageID)==0 && $Language[$key]["ID"]=="11"){ echo "selected='selected'"; }
 							if (in_array( $Language[$key]["ID"],$PAdditionalLanguageID)){ echo "selected='selected'"; } 
 							echo '> '.$Language[$key]['Name'].' </option>';
 						}
@@ -975,7 +976,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 				<div class="row">
 					<div class="col-xs-12">
-						<label for="BuildingName">Building Name</label>
+						<label for="BuildingName">Building name</label>
 						<input type="text" class="form-control" name="WBuildingName<?php echo $key;?>" id="WBuildingName<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WBuildingName'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WBuildingName'].'"'; }?>>
 					</div>
 
@@ -1236,7 +1237,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<div class="row">
 							<div class="row">
 								<div class="col-xs-12 col-sm-6">
-									<label for="Udegree<?php echo $key;?>">Degree Level<span class="tipstyle"> *</span></label>
+									<label for="Udegree<?php echo $key;?>">Degree level<span class="tipstyle"> *</span></label>
 									<?php 
 										$degreecode  = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
 										$degree=json_decode($degreecode, true);
@@ -1320,7 +1321,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								<div class="chevron-select-box">
 								<select class="form-control" name="Ugraduate-yearattained<?php echo $key;?>" id="Ugraduate-yearattained<?php echo $key;?>">
 								<?php 
-								$y = date("Y") + 5;
+								$y = date("Y") + 10;
 								for ($i=1940; $i<= $y; $i++){
 								echo '<option value="'.$i.'"';
 								if ($details['PersonEducation'][$key]['Yearattained'] == $i){

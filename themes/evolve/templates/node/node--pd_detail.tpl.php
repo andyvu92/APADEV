@@ -1107,7 +1107,7 @@
 				<div class="row">
 				    <div class="col-lg-6">
 						<label for="">Birth date<span class="tipstyle">*</span></label>
-						<input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> required>
+						<input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> required max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
 					</div>
 				 </div>
 
@@ -1368,7 +1368,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                            <label for="">Birth date<span class="tipstyle">*</span></label>
-                           <input type="date" class="form-control" name="Birth" required>
+                           <input type="date" class="form-control" name="Birth" required max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
                         </div>
                         <div class="col-lg-3">
 						   <label for="">Gender</label>
@@ -1421,6 +1421,28 @@
 						}
 					</script>
 					</div>
+					<div class="col-lg-6">
+						<label for="">Confirm your email address<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="CMemberid" id="CMemberid" value="" onchange="confirmEmailFunction(this.value)" required>
+					<div id="confirmMessage"></div>
+					</div>
+					<script>
+						function confirmEmailFunction(Email) {
+							if($('#Memberid').val()!= Email){
+								$('#confirmMessage').html("Your confirm email address does not match");
+								$( "#CMemberid" ).focus();
+								$("#CMemberid").css("border", "1px solid red");
+								$(".join-details-button2").addClass("display-none");
+								
+							}
+							else{
+								$('#confirmMessage').html("");
+								$( "#CMemberid" ).blur();
+								$("#CMemberid").css("border", "");
+								$(".join-details-button2").removeClass("display-none");
+							}					
+						}
+					</script>
 				</div>
 
 				<div class="row">
@@ -1437,7 +1459,7 @@
 				<script>
 					function checkPasswordFunction(Password) {
 						if($('#newPassword').val()!= Password){
-							$('#checkPasswordMessage').html("Please confirm your password is same");
+							$('#checkPasswordMessage').html("Your passwords do not match");
 							$( "#Password" ).focus();
 							$("#Password").css("border", "1px solid red");
 							$(".join-details-button2").addClass("display-none");

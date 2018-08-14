@@ -725,7 +725,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . str_replace("/", "-", $details['birth']) . '"';
     }
-?>>
+?> max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
                     </div>
                     <div class="col-xs-6 col-md-3">
                        <label for="">Gender</label>
@@ -1297,7 +1297,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                 </div>
 
                 <div class="col-xs-12">
-                    <label for="">Your National group<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
+                    <label for="">Choose which National Groups you would like to join:<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
                     
                     <div class="plus-select-box">
                     <select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
@@ -1358,7 +1358,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 ?>
 
                <div class="col-xs-12">
-                    <label>Tell us what you'd like to know more about</label>
+                    <label>Choose as many interest areas as you like from the list below:</label>
 
                     
                     <div class="plus-select-box">
@@ -1428,10 +1428,10 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
     
 ?>
                <div class="col-xs-12">
-                    <label>Choose the languages you speak in your practice?</label>
+                    <label>What language do you speak?</label>
                     
                     <div class="plus-select-box">
-                    <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
+                    <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="What language do you speak...">
                        
                        <?php
     $Languagecode         = file_get_contents("sites/all/themes/evolve/json/Language.json");
@@ -1439,6 +1439,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
     $_SESSION["Language"] = $Language;
     foreach ($Language as $key => $value) {
         echo '<option value="' . $Language[$key]['ID'] . '"';
+		//if(sizeof($PAdditionalLanguageID)==0 && $Language[$key]["ID"]=="11"){ echo "selected='selected'"; }
         if (in_array($Language[$key]["ID"], $PAdditionalLanguageID)) {
             echo "selected='selected'";
         }
@@ -1595,14 +1596,14 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                         <!--BREAK-->
 
                         <div class="col-xs-12">
-                            <label for="BuildingName">Building Name</label>
+                            <label for="BuildingName">Building name</label>
                             <input type="text" class="form-control" name="WBuildingName<?php
         echo $key;
 ?>" id="WBuildingName<?php
         echo $key;
 ?>" <?php
         if (empty($details['Workplaces'][$key]['WBuildingName'])) {
-            echo "placeholder='Building Name'";
+            echo "placeholder='Building name'";
         } else {
             echo 'value="' . $details['Workplaces'][$key]['WBuildingName'] . '"';
         }
@@ -2110,7 +2111,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             <div class="col-xs-12 col-sm-6">
                                 <label for="Udegree<?php
         echo $key;
-?>">Degree Level<span class="tipstyle"> *</span></label>
+?>">Degree level<span class="tipstyle"> *</span></label>
                                 <?php
         $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
         $degree             = json_decode($degreecode, true);
@@ -2332,7 +2333,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
                                 <?php
-                                    $y = date("Y") + 5;
+                                    $y = date("Y") + 10;
                                     for ($i = 1940; $i <= $y; $i++) {
                                         echo '<option value="' . $i . '">' . $i . '</option>';
                                     }
@@ -2446,7 +2447,7 @@ if(isset($_GET['MT'])){
 
                         <div class="col-xs-6 col-md-3">
                            <label for="">Birth date<span class="tipstyle"> *</span></label>
-                           <input type="date" class="form-control" name="Birth">
+                           <input type="date" class="form-control" name="Birth" max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">Gender</label>
@@ -2786,23 +2787,47 @@ if(isset($_GET['MT'])){
                     }
                     </script>
                     </div>
-
-                    <div class="col-xs-6 col-md-3">
+					<div class="col-lg-6">
+						<label for="">Confirm your email address<span class="tipstyle">*</span></label>
+						<input type="text" class="form-control" name="CMemberid" id="CMemberid" value="" onchange="confirmEmailFunction(this.value)" required>
+					<div id="confirmMessage"></div>
+					</div>
+					<script>
+						function confirmEmailFunction(Email) {
+							if($('#Memberid').val()!= Email){
+								$('#confirmMessage').html("Your confirm email address does not match");
+								$( "#CMemberid" ).focus();
+								$("#CMemberid").css("border", "1px solid red");
+								$(".join-details-button2").addClass("display-none");
+								
+							}
+							else{
+								$('#confirmMessage').html("");
+								$( "#CMemberid" ).blur();
+								$("#CMemberid").css("border", "");
+								$(".join-details-button2").removeClass("display-none");
+							}					
+						}
+					</script>
+                          
+                </div>
+				<div class="row">
+					<div class="col-xs-6 col-md-6">
                         <label for="">Your password<span class="tipstyle"> *</span></label>
                         <input type="password" class="form-control" id="newPassword" name="newPassword">
                     </div>
 
-                    <div class="col-xs-6 col-md-3">
+                    <div class="col-xs-6 col-md-6">
                         <label for="">Confirm password<span class="tipstyle"> *</span></label>
                         <input type="password" class="form-control" id="Password" name="Password" value="" onchange="checkPasswordFunction(this.value)">
 						<div id="checkPasswordMessage"></div>
-					</div>           
-                </div>
-
+					</div>  
+				
+				</div>
                 <script>
                     function checkPasswordFunction(Password) {
                         if($('#newPassword').val()!= Password){
-                            $('#checkPasswordMessage').html("Please confirm your password is same");
+                            $('#checkPasswordMessage').html("Your passwords do not match");
                             $( "#Password" ).focus();
                             $("#Password").css("border", "1px solid red");
                             $(".join-details-button2").addClass("display-none");
@@ -2878,7 +2903,7 @@ if(isset($_GET['MT'])){
                     </div>
 
                     <div class="col-xs-12">
-                        <label for="">Your National group</label>
+                        <label for="">Choose which National Groups you would like to join:</label>
                         
                         <div class="plus-select-box">
                         <select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
@@ -2927,7 +2952,7 @@ if(isset($_GET['MT'])){
                 <div class="row"> 
 
                     <div class="col-xs-12">
-						<label>Choose as many interest areas as you like from the list below</label>
+						<label>Choose as many interest areas as you like from the list below:</label>
                         
                         <div class="plus-select-box">
                         <select class="chosen-select" id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
@@ -2976,17 +3001,18 @@ if(isset($_GET['MT'])){
 
                 <div class="row">
 					<div class="col-xs-12">
-						<label>Choose the languages you speak in your practice?</label>
+						<label>What language do you speak?</label>
 						
                         <div class="plus-select-box">
-                        <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose your favourite language...">
-						<option value="NONE" disabled>no</option>
+                        <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="What language do you speak...">
+						
 						<?php
 								$Languagecode         = file_get_contents("sites/all/themes/evolve/json/Language.json");
 								$Language             = json_decode($Languagecode, true);
 								$_SESSION["Language"] = $Language;
 								foreach ($Language as $key => $value) {
 									echo '<option value="' . $Language[$key]['ID'] . '"';
+									if($Language[$key]["ID"]=="11"){ echo "selected='selected'"; }
 									echo '> ' . $Language[$key]['Name'] . ' </option>';
 								}
 							?>
@@ -3043,7 +3069,7 @@ if(isset($_GET['MT'])){
                     <div class="row">
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
-                                <label for="Udegree">Degree Level<span class="tipstyle"> *</span></label>
+                                <label for="Udegree">Degree level<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Udegree0" id="Udegree0">
 									<option value="" selected disabled>Please select</option>
@@ -3094,7 +3120,7 @@ if(isset($_GET['MT'])){
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
                                 <option value="" selected disabled>Please select</option>
 								<?php
-                                    $y = date("Y") + 5;
+                                    $y = date("Y") + 10;
                                     for ($i = 1940; $i <= $y; $i++) {
                                         echo '<option value="' . $i . '">' . $i . '</option>';
                                     }
