@@ -725,7 +725,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . str_replace("/", "-", $details['birth']) . '"';
     }
-?>>
+?> max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
                     </div>
                     <div class="col-xs-6 col-md-3">
                        <label for="">Gender</label>
@@ -2446,7 +2446,7 @@ if(isset($_GET['MT'])){
 
                         <div class="col-xs-6 col-md-3">
                            <label for="">Birth date<span class="tipstyle"> *</span></label>
-                           <input type="date" class="form-control" name="Birth">
+                           <input type="date" class="form-control" name="Birth" max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">Gender</label>

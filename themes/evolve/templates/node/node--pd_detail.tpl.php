@@ -1107,7 +1107,7 @@
 				<div class="row">
 				    <div class="col-lg-6">
 						<label for="">Birth date<span class="tipstyle">*</span></label>
-						<input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> required>
+						<input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> required max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
 					</div>
 				 </div>
 
@@ -1368,7 +1368,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                            <label for="">Birth date<span class="tipstyle">*</span></label>
-                           <input type="date" class="form-control" name="Birth" required>
+                           <input type="date" class="form-control" name="Birth" required max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
                         </div>
                         <div class="col-lg-3">
 						   <label for="">Gender</label>
