@@ -135,10 +135,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
         <input type="text" class="form-control" name="Wphone'.$i.'">
 </div>
 
-<div class="col-xs-6 col-md-3">
-        <label for="">Extention Number</label>
-        <input type="text" class="form-control" name="WPhoneExtentions'.$i.'">
-</div>
+
 
 </div>
 
@@ -148,7 +145,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 	
 
 	<div class="col-xs-6 col-md-6">
-		<label>Quality In Practice number(QIP)</label>
+		<label>Quality In Practice number&nbsp;(QIP)</label>
 		<input type="text" class="form-control" name="QIP'.$i.'" id="QIP'.$i.'" value="" placeholder="QIP Number">
 	</div>
 </div>

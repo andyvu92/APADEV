@@ -701,12 +701,12 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 
 						<div class="col-xs-12 col-sm-6 col-md-9">
 							<label for="">Address line 1</label>
-							<input type="text" class="form-control" name="Mailing-Address_Line_1" id="Mailing-Address_Line_1"  <?php if (empty($details['Mailing-unitno'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Mailing-unitno'].'"'; }?> required>
+							<input type="text" class="form-control" name="Mailing-Address_Line_1" id="Mailing-Address_Line_1"  <?php if (empty($details['Mailing-unitno'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Mailing-unitno'].'"'; }?> required>
 						</div> 
 						
 						<div class="col-xs-12">
 							<label for="">Address line 2</label>
-							<input type="text" class="form-control" name="Mailing-Address_Line_2" id="Mailing-Address_Line_2"  <?php if (empty($details['Mailing-streetname'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Mailing-streetname'].'"'; }?> >
+							<input type="text" class="form-control" name="Mailing-Address_Line_2" id="Mailing-Address_Line_2"  <?php if (empty($details['Mailing-streetname'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Mailing-streetname'].'"'; }?> >
 						</div> 
 
 						<div class="col-xs-6 col-md-6">
@@ -1022,12 +1022,12 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 
 						<div class="col-xs-12 col-sm-6 col-md-9">
 							<label for="">Address line 1</label>
-							<input type="text" class="form-control" name="Shipping-Address_Line_1" id="Shipping-Address_Line_1"  <?php if (empty($details['Shipping-unitno'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Shipping-unitno'].'"'; }?> required>
+							<input type="text" class="form-control" name="Shipping-Address_Line_1" id="Shipping-Address_Line_1"  <?php if (empty($details['Shipping-unitno'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Shipping-unitno'].'"'; }?> required>
 						</div> 
 
 						<div class="col-xs-12">
 							<label for="">Address line 2</label>
-							<input type="text" class="form-control" name="Shipping-Address_Line_2" id="Shipping-Address_Line_2"  <?php if (empty($details['Shipping-streetname'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Shipping-streetname'].'"'; }?> required>
+							<input type="text" class="form-control" name="Shipping-Address_Line_2" id="Shipping-Address_Line_2"  <?php if (empty($details['Shipping-streetname'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Shipping-streetname'].'"'; }?> required>
 						</div> 
 
 						<div class="col-xs-6 col-md-6">
@@ -1233,7 +1233,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 
 						<div class="row">
 							<div class="col-xs-6 col-md-6">
-								<label for="Wcity<?php echo $key;?>">City or Town<span class="tipstyle"> *</span></label>
+								<label for="Wcity<?php echo $key;?>">City or town<span class="tipstyle"> *</span></label>
 								<input type="text" class="form-control" name="Wcity<?php echo $key;?>" id="Wcity<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wcity'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wcity'].'"'; }?> required>
 							</div>
 
@@ -1308,7 +1308,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 													$countser = 0;
 													foreach($country  as $wcpair => $value){
 														echo '<option value="'.$country[$wcpair]['TelephoneCode'].'"';
-														if ($details['Workplaces'][$key]['WPhoneCountryCode'] == preg_replace('/\s+/', '', $country[$pair]['TelephoneCode']) && $countser == 0) { echo "selected='selected'"; $countser++;} 
+														if ($details['Workplaces'][$key]['WPhoneCountryCode'] == preg_replace('/\s+/', '', $country[$wcpair]['TelephoneCode']) && $countser == 0) { echo "selected='selected'"; $countser++;} 
 														elseif(empty($details['Workplaces'][$key]['WPhoneCountryCode']) && $country[$wcpair]['ID']=="14"){
 															echo "selected='selected'";
 														}
@@ -1325,12 +1325,12 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 							<div class="col-xs-6 col-md-3">
 								<label for="">Phone number<span class="tipstyle">*</span></label>
-								<input type="text" class="form-control" name="WPhone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  >
+								<input type="text" class="form-control" name="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  >
 							</div>
-							<div class="col-xs-6 col-md-3">
+							<!--<div class="col-xs-6 col-md-3">
 								<label for="">Extention Number</label>
-								<input type="text" class="form-control" name="WPhoneExtentions<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WPhoneExtentions'])) {echo "placeholder='Extentions Number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WPhoneExtentions'].'"'; }?>  >
-							</div>
+								<input type="text" class="form-control" name="WPhoneExtentions<?php //echo $key;?>" <?php //if (empty($details['Workplaces'][$key]['WPhoneExtentions'])) {echo "placeholder='Extentions Number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WPhoneExtentions'].'"'; }?>  >
+							</div>-->
 						</div>
 
 
@@ -1357,7 +1357,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>-->
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
-								<label>Quality In practice number(QIP)</label>
+								<label>Quality In practice number&nbsp;(QIP)</label>
 								<input type="text" class="form-control" name="QIP<?php echo $key;?>" id="QIP<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['QIP'])) {echo "placeholder='QIP Number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['QIP'].'"'; }?>>
 							</div>
 						</div>

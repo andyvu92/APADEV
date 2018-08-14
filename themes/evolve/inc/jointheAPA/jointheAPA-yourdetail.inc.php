@@ -941,7 +941,7 @@ if (isset($_SESSION['UserId'])):
                     <!--BREAK-->
 
                     <div class="col-xs-6 col-md-3">
-                        <label for="">City or Town<span class="tipstyle"> *</span></label>
+                        <label for="">City or town<span class="tipstyle"> *</span></label>
                         <input type="text" class="form-control" name="Suburb" id="Suburb" placeholder='City or town'<?php
     if (empty($details['Suburb'])) {
         echo "";
@@ -1809,18 +1809,18 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
         }
 ?>  >
                             </div>
-                            <div class="col-xs-6 col-md-3">
+                            <!--<div class="col-xs-6 col-md-3">
                                 <label for="">Extention Number</label>
                                 <input type="text" class="form-control" name="WPhoneExtentions<?php
-        echo $key;
+        //echo $key;
 ?>" <?php
-        if (empty($details['Workplaces'][$key]['WPhoneExtentions'])) {
-            echo "placeholder='Extentions Number'";
-        } else {
-            echo 'value="' . $details['Workplaces'][$key]['WPhoneExtentions'] . '"';
-        }
+        //if (empty($details['Workplaces'][$key]['WPhoneExtentions'])) {
+           // echo "placeholder='Extentions Number'";
+        //} else {
+           // echo 'value="' . $details['Workplaces'][$key]['WPhoneExtentions'] . '"';
+        //}
 ?>  >
-                            </div>
+                            </div>-->
                             
                         <!--BREAK-->
                     
@@ -1858,7 +1858,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 </div>
                             </div>-->
                             <div class="col-xs-12 col-md-6">
-                                <label>Quality In Practice number(QIP)</label>
+                                <label>Quality In Practice number&nbsp;(QIP)</label>
                                 <input type="text" class="form-control" name="QIP<?php
         echo $key;
 ?>" id="QIP<?php
