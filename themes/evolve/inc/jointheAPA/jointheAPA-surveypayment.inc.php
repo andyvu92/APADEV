@@ -187,13 +187,13 @@ if(isset($_POST['step2-1'])) {
 	<!--</div>
 	<div class="down7" <?php //if(isset($_POST['goP']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>-->
 		<div class="row">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="flex-container join-apa-final">
+
+			<div class="flex-container flex-table">
 				<div class="flex-cell flex-flow-row table-header">
-					<div class="flex-col-8">
+					<div class="flex-col-7">
 						<span class="table-heading">Product name</span>
 					</div>
-					<div class="flex-col-2">
+					<div class="flex-col-5">
 						<span class="table-heading">Price</span>
 					</div>
 				</div>
@@ -203,8 +203,8 @@ if(isset($_POST['step2-1'])) {
 						if(sizeof($prodcutArray)!=0){
 							foreach( $memberProducts as $memberProduct){
 								echo "<div class='flex-cell flex-flow-row table-cell'>";
-								echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$memberProduct['Title']."</div>";
-								echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$memberProduct['Price']."</div>";
+								echo "<div class='flex-col-7 title-col'>".$memberProduct['Title']."</div>";
+								echo "<div class='flex-col-5 price-col'>$".$memberProduct['Price']."</div>";
 								$price += $memberProduct['Price'];
 								echo "</div>";  
 							}
@@ -214,8 +214,8 @@ if(isset($_POST['step2-1'])) {
 						    foreach($NGProductsArray as $NGProduct){
 								if($NGProduct == $NGArray['ProductID']){
 									echo "<div class='flex-cell flex-flow-row table-cell'>";
-									echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$NGArray['ProductName']."</div>";
-									echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$NGArray['NGprice']."</div>";
+									echo "<div class='flex-col-7 title-col'>".$NGArray['ProductName']."</div>";
+									echo "<div class='flex-col-5 price-col'>$".$NGArray['NGprice']."</div>";
 									$price += $NGArray['NGprice'];
 									echo "</div>";
 								}	  
@@ -225,8 +225,8 @@ if(isset($_POST['step2-1'])) {
 						if(sizeof($FPListArray)!=0){
 							foreach( $FPListArray as $FProduct){
 									echo "<div class='flex-cell flex-flow-row table-cell'>";
-									echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>".$FProduct['FPtitle']."</div>";
-									echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$FProduct['FPprice']."</div>";
+									echo "<div class='flex-col-7 title-col'>".$FProduct['FPtitle']."</div>";
+									echo "<div class='flex-col-5 price-col'>$".$FProduct['FPprice']."</div>";
 									$price += $FProduct['FPprice'];
 									echo "</div>";  
 							}
@@ -234,40 +234,40 @@ if(isset($_POST['step2-1'])) {
                         
 				?>
 			</div>
-		</div>
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-				
-				<div class="flex-cell flex-flow-row">
+
+			<div class="flex-container flex-table">	
+				<div class="flex-cell table-header">
 					<div class="flex-col-12">
-					Membership payment total:	
+						<span class="table-heading">Membership payment total</span>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
-					<div class="flex-col-6">
+					<div class="flex-col-7">
 					Subtotal (exc. GST)	
 					</div>
-					<div class="flex-col-6">
+					<div class="flex-col-5">
 			        $<?php echo $scheduleDetails['SubTotal'];?>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
-					<div class="flex-col-6">
+					<div class="flex-col-7">
 					GST	
 					</div>
-					<div class="flex-col-6">
+					<div class="flex-col-5">
 			        $<?php echo $scheduleDetails['GST'];?>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
-					<div class="flex-col-6">
+					<div class="flex-col-7">
 					Total(inc.GST)	
 					</div>
-					<div class="flex-col-6">
+					<div class="flex-col-5">
 			        $<span id="totalPayment"><?php echo $scheduleDetails['OrderTotal'];?></span>
 					</div>
 				</div>
 			</div>
 		</div>
+
 		<div class="row">
 			<div class="col-xs-12">
 			<label>Payment options:</label>
