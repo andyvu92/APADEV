@@ -197,4 +197,18 @@
 	}
 }
 
-
+.flex-table{
+	margin: 50px 0;
+	.flex-cell{
+		border: 1px solid rgba(0,0,0,0.12);
+		border-bottom: 0px;
+		border-right: 0;
+		&:last-child{
+			border-bottom: 1px solid rgba(0,0,0,0.12);
+		}
+		[class^="flex-col"]{
+			border-right: 1px solid rgba(0,0,0,0.12);
+    		padding: 10px;
+		}
+	}
+}

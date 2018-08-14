@@ -60,7 +60,6 @@ $background = getBackgroundImage($userID);
 </div>
 <div id="privacypolicyWindow" style="display:none;">
 	<div class="modal-header">
-		<button type="button" class="apa_policy_button close" data-dismiss="modal">×</button>
 		<h4 class="modal-title">Australian Physiotherapy Association Privacy Policy</h4>
 	</div>
 	
@@ -297,33 +296,40 @@ Facsimile: (03) 9092 0899</p>
         Please agree to the APA Privacy Policy to continue with your membership
 	</div> 
 </div>
-<div id="installmentpolicyWindow" style="display:none;">
-	<h3>APA installment policy</h3>
-	
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
-	<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pretium
-	tellus non ex mattis feugiat a in est. Praesent est leo, viverra ac
-	hendrerit ac, facilisis at ante. Phasellus elementum hendrerit risus,
-	eu luctus dolor sollicitudin vitae. Cras ac tellus ut mauris scelerisque
-	mollis. Sed nibh ipsum, fringilla sed pellentesque non, luctus ut diam.
-	In viverra neque lacus, vel pulvinar nulla convallis id. Curabitur porttitor
-	eleifend quam in tincidunt.</p>
-	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-		
-		<input class="styled-checkbox" type="checkbox" id="installmentpolicyp" checked name="instalmentpolicy"> 
-		<label class="apa_policy_button" for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label>
-
-	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeInstallmentDescription"> 
-         Please agree to the APA Installment Policy to continue with your membership
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default apa_policy_button" id="installment_policy_button">Submit</button>	
 	</div>
 </div>
+
+<div id="installmentpolicyWindow" style="display:none;">
+	<div class="modal-header">
+		<h4 class="modal-title">APA installment policy</h4>
+	</div>
+	
+	<div class="modal-body">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pretium
+		tellus non ex mattis feugiat a in est. Praesent est leo, viverra ac
+		hendrerit ac, facilisis at ante. Phasellus elementum hendrerit risus,
+		eu luctus dolor sollicitudin vitae. Cras ac tellus ut mauris scelerisque
+		mollis. Sed nibh ipsum, fringilla sed pellentesque non, luctus ut diam.
+		In viverra neque lacus, vel pulvinar nulla convallis id. Curabitur porttitor
+		eleifend quam in tincidunt.</p>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+			<input class="styled-checkbox" type="checkbox" id="installmentpolicyp" checked name="instalmentpolicy"> 
+			<label class="apa_policy_button" for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label>
+		</div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeInstallmentDescription"> 
+			Please agree to the APA Installment Policy to continue with your membership
+		</div>
+	</div>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-default apa_policy_button" id="installment_policy_button">Submit</button>	
 	</div>	
-</div>	
+</div>
+
 <?php logRecorder(); ?>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
