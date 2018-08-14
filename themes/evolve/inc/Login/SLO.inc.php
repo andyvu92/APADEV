@@ -1,24 +1,26 @@
 <?php
 
 	$url =  "{$_SERVER['REQUEST_URI']}";
-	// log-in
-	if(isset($_POST["id"])) {
-		if(!empty($_POST["remember"])) {
-			setcookie ("member_login",$_POST["id"],time()+ (10 * 365 * 24 * 60 * 60));
-			setcookie ("member_password",$_POST["password"],time()+ (10 * 365 * 24 * 60 * 60));
-		} else {
-			if(isset($_COOKIE["member_login"])) {
-				setcookie ("member_login","");
-			}
-			if(isset($_COOKIE["member_password"])) {
-				setcookie ("member_password","");
-			}
-		}
-		loginManager($_POST["id"], $_POST["password"]);
-	} else {
-		// no id has been entered
+	// log-out
+	if(isset($_POST["logouttt"])) {
+		// same with this commend.
+		// isset($_SESSION["Log-in"])
+		logoutManager();
+
+		header("Location: /pageA");
+		exit;
 	}
-	
+
+	function logoutManager() {
+		// 2.2.8 - log-out
+		// Send - 
+		// 
+		// Response -
+		// 
+		$result = GetAptifyData("8", "logout");
+		//print_r($result);
+		deleteSession();
+	}
 ?>
 <?php if(isset($_SESSION["TokenID"])): //check the TokenID from third part web site?>
 <div>

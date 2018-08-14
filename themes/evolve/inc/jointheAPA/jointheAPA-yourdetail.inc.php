@@ -941,7 +941,7 @@ if (isset($_SESSION['UserId'])):
                     <!--BREAK-->
 
                     <div class="col-xs-6 col-md-3">
-                        <label for="">City or Town<span class="tipstyle"> *</span></label>
+                        <label for="">City or town<span class="tipstyle"> *</span></label>
                         <input type="text" class="form-control" name="Suburb" id="Suburb" placeholder='City or town'<?php
     if (empty($details['Suburb'])) {
         echo "";
@@ -1275,7 +1275,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
             </div>
             <div class="row">
             <div class="col-xs-12 col-md-6">
-                    <label for="">What branch would you like to join?</label>
+                    <label for=""><?php if(!empty($details['State'])) {echo "You are in the &nbsp;".$details['State']."&nbsp;Branch ,&nbsp;would you like to addd an additional Branch?";} else { echo "Would you like to add an additional Branch?";}?></label>
                     <div class="chevron-select-box">
                     <select class="form-control" id="Branch" name="Branch">
 					<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>Please select</option>
@@ -1809,18 +1809,18 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
         }
 ?>  >
                             </div>
-                            <div class="col-xs-6 col-md-3">
+                            <!--<div class="col-xs-6 col-md-3">
                                 <label for="">Extention Number</label>
                                 <input type="text" class="form-control" name="WPhoneExtentions<?php
-        echo $key;
+        //echo $key;
 ?>" <?php
-        if (empty($details['Workplaces'][$key]['WPhoneExtentions'])) {
-            echo "placeholder='Extentions Number'";
-        } else {
-            echo 'value="' . $details['Workplaces'][$key]['WPhoneExtentions'] . '"';
-        }
+        //if (empty($details['Workplaces'][$key]['WPhoneExtentions'])) {
+           // echo "placeholder='Extentions Number'";
+        //} else {
+           // echo 'value="' . $details['Workplaces'][$key]['WPhoneExtentions'] . '"';
+        //}
 ?>  >
-                            </div>
+                            </div>-->
                             
                         <!--BREAK-->
                     
@@ -1858,7 +1858,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 </div>
                             </div>-->
                             <div class="col-xs-12 col-md-6">
-                                <label>Quality In Practice number(QIP)</label>
+                                <label>Quality In Practice number&nbsp;(QIP)</label>
                                 <input type="text" class="form-control" name="QIP<?php
         echo $key;
 ?>" id="QIP<?php
@@ -2853,20 +2853,14 @@ if(isset($_GET['MT'])){
                     </div>
                     <div id="ahpblock" class="col-xs-6 col-md-3">
                         <label for="">AHPRA number</label>
-                        <input type="text" class="form-control" name="Ahpranumber"  <?php
-							if (empty($details['Ahpranumber'])) {
-								echo "placeholder='AHPRA number'";
-							} else {
-								echo 'value="' . $details['Ahpranumber'] . '"';
-							}
-						?>>
+                        <input type="text" class="form-control" name="Ahpranumber"  placeholder='AHPRA number'>
                     </div>
                 </div>
                 
                 <input type="hidden" class="form-control" name="Specialty">
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
-                        <label for="">What branch would you like to join?</label>
+                        <label for="">You are in the <span id="homebranch"></span>&nbsp;Branch, would you like to addd an additional Branch?</label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="Branch" name="Branch">
                             <option value="" selected disabled>What branch would you like to join?</option>

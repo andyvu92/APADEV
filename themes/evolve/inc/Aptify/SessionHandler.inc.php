@@ -38,6 +38,8 @@ function deleteSession() {
 	unset($_SESSION['MemberTypeID']);
 	unset($_SESSION['MemberType']);
 	unset($_SESSION['Status']);
+	// SSO data
+	unset($_SESSION["outputReturn"]);
 	// user details' data
 	//Added by JingHu
 	unset($_SESSION["workplaceSettings"]);
