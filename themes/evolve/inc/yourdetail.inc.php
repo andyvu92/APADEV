@@ -690,7 +690,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 
 					<div class="row">
 						<div class="col-xs-12">
-							<label for="">Building Name</label>
+							<label for="">Building name</label>
 							<input type="text" class="form-control" name="Mailing-BuildingName" id="Mailing-BuildingName"  <?php if (empty($details['Mailing-unitno'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?>>
 						</div>
 
@@ -800,7 +800,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 					
 						<div class="col-xs-12">
-							<label for="">Your National group</label>
+							<label for="">Your National Group</label>
 							<div class="plus-select-box">
 							<select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple disabled data-placeholder="Choose from our 21 National Groups">
 							<?php 
@@ -854,7 +854,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						
 						?>
 						<div class="col-xs-12">
-							<label>Choose as many interest areas as you like from the list below</label>
+							<label>Choose as many interest areas as you like from the list below:</label>
 							<div class="plus-select-box">
 							<select class="chosen-select" id="interest-area" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area..."data-placeholder="Choose interest area...">
 							<?php 
@@ -915,7 +915,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 									$_SESSION["Language"] = $Language;
 									foreach($Language  as $key => $value){
 										echo '<option value="'.$Language[$key]['ID'].'"';
-										
+										//if(sizeof($PAdditionalLanguageID)==0 && $Language[$key]["ID"]=="11"){ echo "selected='selected'"; }
 										if (in_array( $Language[$key]["ID"],$PAdditionalLanguageID)){ echo "selected='selected'"; } 
 										echo '> '.$Language[$key]['Name'].' </option>';
 									}
@@ -1618,7 +1618,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<div class="col-xs-12 space-line"><div class="col-xs-12 separater"></div></div>
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
-								<label for="Udegree<?php echo $key;?>">Degree Level<span class="tipstyle"> *</span></label>
+								<label for="Udegree<?php echo $key;?>">Degree level<span class="tipstyle"> *</span></label>
 								<?php 
 									$degreecode  = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
 									$degree=json_decode($degreecode, true);
@@ -1677,7 +1677,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<div class="chevron-select-box">
 								<select class="form-control" name="Ugraduate-yearattained<?php echo $key;?>" id="Ugraduate-yearattained<?php echo $key;?>">
 								<?php 
-								$y = date("Y") + 15; 
+								$y = date("Y") + 10; 
 								for ($i=1940; $i<= $y; $i++){
 								echo '<option value="'.$i.'"';
 								if ($details['PersonEducation'][$key]['Yearattained'] == $i){

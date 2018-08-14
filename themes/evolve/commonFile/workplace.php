@@ -28,7 +28,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 </div>
 <div class="row">
 	<div class="col-xs-12">
-		<label for="BuildingName'.$i.'">Building Name</label>
+		<label for="BuildingName'.$i.'">Building name</label>
 		<input type="text" class="form-control" name="WBuildingName'.$i.'" id="WBuildingName'.$i.'" value="">
 	</div>
 </div>
