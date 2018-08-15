@@ -330,6 +330,19 @@ Facsimile: (03) 9092 0899</p>
 	</div>	
 </div>
 
+		<div id="deleteWorkplaceWindow" style="display:none;">
+			<form action="your-details" method="POST" id="deleteWorlplaceForm">
+				<div class="flex-cell">
+					<h3 class="light-lead-heading cairo">Are you sure you want to delete this workplace</h3>
+				</div>
+				<input type="hidden" name="WorkplaceID" value="">
+				<div class="flex-cell buttons-container">
+					<a class="" value="yes" target="_self">Yes</a>
+					<a class="no accent-btn cancelDeleteButton" value="no" target="_self">No</a>
+				</div>
+			</form>
+		</div>
+
 <?php logRecorder(); ?>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
