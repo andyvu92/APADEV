@@ -201,26 +201,34 @@ $background = getBackgroundImage($userID);
 							<td><strong>AHPRA NO:</strong></td>
 							<td><?php echo $user['Ahpranumber']; ?></td>
 						</tr>
+						<?php if(isset($user['Specialty']) && $user['Specialty'] != ""): ?>
 						<tr>
 							<td><strong>Specialty:</strong></td>
 							<td><?php echo $user['Specialty']; ?></td>
 						</tr>
+						<?php endif; ?>
+						<?php if(isset($user['Officebearer']) && $user['Officebearer'] != ""): ?>
 						<tr>
 							<td><strong>Officebearer positions:</strong></td>
 							<td><?php echo $user['Officebearer']; ?></td>
 						</tr>
+						<?php endif; ?>
 						<tr>
 							<td><strong>Your Branch:</strong></td>
 							<td><?php echo $user['HomeBranch']; ?></td>
 						</tr>
+						<?php if(isset($user['PreferBranch']) && $user['PreferBranch'] != ""): ?>
 						<tr>
 							<td><strong>Additional Branch:</strong></td>
 							<td><?php echo $user['PreferBranch']; ?></td>
 						</tr>
+						<?php endif; ?>
+						<?php if(isset($user['PHN']) && $user['PHN'] != ""): ?>
 						<tr>
 							<td><strong>Primary health care network:</strong></td>
 							<td><?php echo $user['PHN']; ?></td>
 						</tr>
+						<?php endif; ?>
 						<tr>
 						<?php
 						// 2.2.2 - GET Membership certification PDF
