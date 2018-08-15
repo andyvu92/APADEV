@@ -1134,7 +1134,7 @@
 
 				<div class="row question-boxes">
 				   <div class="col-xs-12">
-				  <input class="styled-checkbox" type="checkbox" name="Registrationboard" id="Registrationboard"  value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Registrationboard'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Registrationboard']=="1") echo 'checked="checked"';?>">
+				  <input class="styled-checkbox" type="checkbox" name="Registrationboard" id="Registrationboard"  value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Registrationboard'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Registrationboard']=="1") echo 'checked="checked"';?>>
 				  <label for="Registrationboard">I am registered with my profession's registration board.</label>
 				   </div>
 
