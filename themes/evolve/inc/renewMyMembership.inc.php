@@ -376,13 +376,27 @@ Facsimile: (03) 9092 0899</p>
 	
 	<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
 
-	<p>If this isn’t quite right, and you’d like to change your member type, or add some National Groups to your membership, follow the link below:</p>
-	<a href="javascript:document.getElementById('renew-membertype-form2').submit();"  target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change member category or national group</span></a><br>
+	<!--<p>If this isn’t quite right, and you’d like to change your member type, or add some National Groups to your membership, follow the link below:</p>-->
+	<a href="javascript:document.getElementById('renew-membertype-form2').submit();"  target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change member category or national group</span></a>
 
-	<p>If you’ve changed address recently or would like to update any of your personal details, follow this link:</p>
+	<!--<p>If you’ve changed address recently or would like to update any of your personal details, follow this link:</p>-->
 	<a href="renewmymembership" target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change your details</span></a>
 
 </div>
+
+		<div id="deleteWorkplaceWindow" style="display:none;">
+			<form action="your-details" method="POST" id="deleteWorlplaceForm">
+				<div class="flex-cell">
+					<h3 class="light-lead-heading cairo">Are you sure you want to delete this workplace</h3>
+				</div>
+				<input type="hidden" name="WorkplaceID" value="">
+				<div class="flex-cell buttons-container">
+					<a class="" value="yes" target="_self">Yes</a>
+					<a class="no accent-btn cancelDeleteButton" value="no" target="_self">No</a>
+				</div>
+			</form>
+		</div>
+		
 <form id="renew-survey-form2" action="" method="POST"><input type="hidden" name="QOrder"></form>
 <form id="renew-membertype-form2" action="" method="POST"><input type="hidden" name="MType"></form>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		

@@ -1231,8 +1231,9 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 			<div id="additional-qualifications-block">
 				<?php foreach($details['PersonEducation'] as $key => $value) :?>
-				<input type="hidden" name="ID<?php echo $key;?>" value="<?php  echo $details['PersonEducation'][$key]['ID'];?>">
+				
 					<div id="additional<?php echo $key;?>">
+					<input type="hidden" name="ID<?php echo $key;?>" value="<?php  echo $details['PersonEducation'][$key]['ID'];?>">
 					<div class="col-xs-12 space-line"><div class="col-xs-12 separater"></div></div>
 						<div class="row">
 							<div class="row">
@@ -1246,6 +1247,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 									<?php if (!empty($details['PersonEducation'][$key]['DegreeID'])):?>
 									<div class="chevron-select-box">
 									<select class="form-control" name="Udegree<?php echo $key;?>" id="Udegree<?php echo $key;?>">
+										
 										<?php 
 											foreach($degree  as $pair => $value){
 												echo '<option value="'.$degree[$pair]['ID'].'"';
@@ -1276,6 +1278,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 									<?php if (!empty($details['PersonEducation'][$key]['InstituteID'])):?>
 									<div class="chevron-select-box">
 									<select class="form-control" name="Undergraduate-university-name<?php echo $key;?>" id="Undergraduate-university-name<?php echo $key;?>">
+										
 										<?php 
 											foreach($University  as $pair => $value){
 												echo '<option value="'.$University[$pair]['ID'].'"';
@@ -1283,7 +1286,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 												echo '> '.$University[$pair]['Name'].' </option>';
 											}
 										?>
-										<!--<option value="0">Other</option>-->
+										<option value="0">Other</option>
 									</select>
 									</div>
 									<input type="text" class="form-control display-none" name="Undergraduate-university-name-other<?php echo $key;?>" id="Undergraduate-university-name-other<?php echo $key;?>">
@@ -1320,6 +1323,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								<label for="Ugraduate-yearattained<?php echo $key;?>">Year attained<span class="tipstyle"> *</span></label>
 								<div class="chevron-select-box">
 								<select class="form-control" name="Ugraduate-yearattained<?php echo $key;?>" id="Ugraduate-yearattained<?php echo $key;?>">
+								
 								<?php 
 								$y = date("Y") + 10;
 								for ($i=1940; $i<= $y; $i++){
@@ -1334,16 +1338,19 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								</div>
 							</div>
 					</div>
+					<a class="no accent-btn" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>	
 					</div>
 				<?php endforeach;?>
 				<?php if(sizeof($details['PersonEducation'])==0):?>
 					<div id="additional0">
+						<input type="hidden" name="ID0" value="-1">
 					   <div class="row">
                             <div class="col-xs-12 col-sm-6">
                                 <label for="Udegree">Degree<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Udegree0" id="Udegree0">
-                                    <?php
+                                   <option value="" selected disabled>Please select</option>
+								   <?php
                                         $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
                                         $degree             = json_decode($degreecode, true);
                                         $_SESSION["degree"] = $degree;
@@ -1369,7 +1376,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 ?>
                             <div class="chevron-select-box">
                             <select class="form-control" name="Undergraduate-university-name0" id="Undergraduate-university-name0">
-                                <?php
+                                <option value="" selected disabled>Please select</option>
+								<?php
                                     foreach ($University as $pair => $value) {
                                         echo '<option value="' . $University[$pair]['ID'] . '"';
                                         echo '> ' . $University[$pair]['Name'] . ' </option>';
@@ -1387,7 +1395,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 <label for="Ugraduate-yearattained0">Year attained<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
-                                <?php
+                                <option value="" selected disabled>Please select</option>
+								<?php
                                     $y = date("Y") + 5;
                                     for ($i = 1940; $i <= $y; $i++) {
                                         echo '<option value="' . $i . '">' . $i . '</option>';
@@ -1414,6 +1423,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 </div>
                             </div>
                         </div>
+						<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
 					</div>
 				<?php endif; ?>
 
@@ -1425,7 +1435,12 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 	</div>
 
-</form>   
+</form> 
+<div id="confirmDelete" style="display:none;">
+	<h3 class="light-lead-heading cairo" style="color:black">Are you sure you want to delete your qualification record?</h3>
+		<button id="deleteQButton" class=""  value="Yes" >Yes</button>
+	<a class="no accent-btn " target="_self">No</a>
+</div>  
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 	$(".chosen-select").chosen({width: "100%"});
@@ -1436,7 +1451,7 @@ jQuery(document).ready(function($) {
 			var number = Number($('#wpnumber').val());
 			var i = Number(number +1);
 			//var j = Number(number +2);
-			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
+			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span></li>' );
 			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
 			//$('#wpnumber').text(i);
 			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
@@ -1463,7 +1478,7 @@ jQuery(document).ready(function($) {
 		var number = Number($('#wpnumber').val());
 		var i = Number(number +1);
 		//var j = Number(number +2);
-		$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="deletewp'+ i + '"></span></li>' );
+		$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span></li>' );
 		$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in"></div>');
 		//$('#wpnumber').text(i);
 		$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
@@ -1482,7 +1497,7 @@ jQuery(document).ready(function($) {
 		  var x = $(this).attr("class").replace('deletewp', '');
 		  $("#workplaceli"+ x).remove();
 		  $("#workplace"+ x).remove();
-		  $(".deletewp"+ x).remove();
+		  //$(".deletewp"+ x).remove();
 		  var n = Number($('#wpnumber').val());
 		  var t = Number(n -1);
 		  
@@ -1501,4 +1516,16 @@ $('.add-additional-qualification').click(function(){
         var i = Number(number +1);
 		$('input[name=addtionalNumber]').val(i);
  });
+ $("#deleteQButton").on( "click", function(){
+		var x = $(this).attr("class").replace('deleteEducation', '');
+		$("#additional"+ x).remove();
+		$("#deleteQButton").removeAttr('class');
+		var en = Number($('#addtionalNumber').val());
+		
+		var et = Number(en -1);
+		$('input[name=addtionalNumber]').val(et);
+		//$('#confirmDelete').dialog('close');
+		$('div[aria-describedby=confirmDelete] button').click();
+		
+});
 </script>

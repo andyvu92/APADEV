@@ -346,7 +346,15 @@ jQuery(document).ready(function($) {
 			else{
 				$( "#Undergraduate-university-name-other" + y).addClass('display-none');
 			}
-		}  		
+		}
+		
+		
+	});
+	$('[id^=deleteEducation]').live("click",function(){
+			var x = $(this).attr("id");
+			$("#deleteQButton").addClass(x);
+			$( "#confirmDelete" ).dialog();
+					
 	});
 	var PRF = $("#PRF").val();
 	$( "#POSTPRF").val(PRF);
@@ -560,6 +568,7 @@ jQuery(document).ready(function($) {
 		
 		   
 	});
+	
 	$('#uploadImageButton').click(function(){
 		$( "#uploadImage" ).dialog();
 	});
@@ -577,7 +586,8 @@ jQuery(document).ready(function($) {
     });	
 	$('.deletecardbutton').click(function(){
 		$( "#deleteCardWindow" ).dialog();
-	}); 
+	});
+	
 	$('#insuranceControl').click(function(){
 		$("#insurancePopUp").dialog();
 		
@@ -657,9 +667,7 @@ jQuery(document).ready(function($) {
 	
 	//  add additional education
 	//$( "#datepicker" ).datepicker({dateFormat: 'yy'});
-    $('#Paymentcard').change(function(){
-	    $('#Paymentcardvalue').val($('#Paymentcard').val());
-	});
+	
     $("input[name=Pobox]").on("change paste keyup", function() {
 		if($(this).val()!==""){
 			$("input[name=Address_Line_1]").prop('disabled', true);

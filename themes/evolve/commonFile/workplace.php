@@ -235,8 +235,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 		</select>
 		</div>
 	</div>
-</div>
-<script>
+	<script>
 jQuery(document).ready(function() {
 	$("input").on("keyup",function() {
 	  $(this).removeClass("focuscss");
@@ -266,5 +265,6 @@ jQuery(document).ready(function() {
 	  });
 });
 </script>
+</div>
 ';
 ?>
