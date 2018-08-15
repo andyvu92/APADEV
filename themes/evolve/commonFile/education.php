@@ -49,8 +49,8 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 		<select class="form-control" name="Ugraduate-yearattained'.$i.'" id="Ugraduate-yearattained'.$i.'">';
 		echo '<option value="" selected disabled>Please select</option>';
 		$y = date("Y") + 10; 
-		for ($i=1940; $i<= $y; $i++){
-		echo '<option value="'.$i.'">'.$i.'</option>';  
+		for ($t=1940; $t<= $y; $t++){
+		echo '<option value="'.$t.'">'.$t.'</option>';  
 		}
 		echo '</select>
 		</div>
@@ -63,15 +63,19 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 			';
 				$country = $sessionCountry;
 				foreach($country  as $key => $object){
-					echo '<option value="'.$country[$key]['ID'].'">'.$country[$key]['Country'].'</option>';
+					echo '<option value="'.$country[$key]['ID'];
+					echo '"';
 					if($country[$key]['ID']=="14"){
 						echo "selected='selected'";
 					}
+					echo '>'.$country[$key]['Country'].'</option>';
+					
 				}
 			echo '
 		</select>
 		</div>
 	</div>
 </div>
+<a class="no accent-btn" id="deleteEducation'.$i.'"><span class="dashboard-button-name">Delete</span></a>
 ';
 ?>
