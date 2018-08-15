@@ -2277,17 +2277,20 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             </div>
                             
                         </div>
+					<a class="no accent-btn" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>	
                     </div>
                 <?php
     endforeach;
 ?>
 	<?php if(sizeof($details['PersonEducation'])==0):?>
 					<div id="additional0">
+					
 					   <div class="row">
                             <div class="col-xs-12 col-sm-6">
                                 <label for="Udegree">Degree<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Udegree0" id="Udegree0">
+								<option value="" selected disabled>Please select</option>
                                     <?php
                                         $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
                                         $degree             = json_decode($degreecode, true);
@@ -2314,7 +2317,8 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 ?>
                             <div class="chevron-select-box">
                             <select class="form-control" name="Undergraduate-university-name0" id="Undergraduate-university-name0">
-                                <?php
+                                <option value="" selected disabled>Please select</option>
+								<?php
                                     foreach ($University as $pair => $value) {
                                         echo '<option value="' . $University[$pair]['ID'] . '"';
                                         echo '> ' . $University[$pair]['Name'] . ' </option>';
@@ -2332,7 +2336,8 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <label for="Ugraduate-yearattained0">Year attained<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
-                                <?php
+								<option value="" selected disabled>Please select</option>                               
+							   <?php
                                     $y = date("Y") + 10;
                                     for ($i = 1940; $i <= $y; $i++) {
                                         echo '<option value="' . $i . '">' . $i . '</option>';
@@ -2359,6 +2364,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 </div>
                             </div>
                         </div>
+						<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
 					</div>
 				<?php endif; ?>
 
@@ -3059,13 +3065,15 @@ if(isset($_GET['MT'])){
                 </div>
             </div>
             <div class="down4" style="display:none;" >
-                <input type="hidden" name="ID" value="-1">
+                
                 <input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php
     $addtionalNumber = 1;
     echo $addtionalNumber;
 ?>"/>
 
                 <div id="additional-qualifications-block">
+					<div id="additional0">
+					<input type="hidden" name="ID0" value="-1">
                     <div class="row">
                         <div class="row">
                             <div class="col-xs-12 col-sm-6">
@@ -3147,6 +3155,8 @@ if(isset($_GET['MT'])){
                             </div>
                         </div>
                     </div>
+					</div>
+					<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
                 </div>
 
                 <div class="col-xs-12">
@@ -3160,7 +3170,11 @@ if(isset($_GET['MT'])){
 <?php
 endif;
 ?> 
-      
+<div id="confirmDelete" style="display:none;">
+		<h3 class="light-lead-heading cairo" style="color:black">Are you sure you want to delete your qualification record?</h3>
+			<button id="deleteQButton" class=""  value="Yes" >Yes</button>
+		<a class="no accent-btn " target="_self">No</a>
+</div>      
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $(".chosen-select").chosen({width: "100%"});
@@ -3250,5 +3264,17 @@ echo json_encode($_SESSION['University']);
         var i = Number(number +1);
         $('input[name=addtionalNumber]').val(i);
     });
+	$("#deleteQButton").on( "click", function(){
+		var x = $(this).attr("class").replace('deleteEducation', '');
+		$("#additional"+ x).remove();
+		$("#deleteQButton").removeAttr('class');
+		var en = Number($('#addtionalNumber').val());
+		
+		var et = Number(en -1);
+		$('input[name=addtionalNumber]').val(et);
+		//$('#confirmDelete').dialog('close');
+		$('div[aria-describedby=confirmDelete] button').click();
+		
+});
 </script>
 <?php logRecorder();  ?> 

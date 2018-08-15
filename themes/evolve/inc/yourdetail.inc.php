@@ -950,9 +950,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<div class="row" >
 						<div class="col-xs-12 none-margin">
 							<label class="black-underline-link" style="text-decoration: none;">Credit card</label>
+							<input type="hidden" id="defaultCard" value="">
 							<div class="paymentsidecredit"> 
 								<div class="row">
-								<fieldset class="col-xs-12 col-sm-6 none-padding">
+								<fieldset class="col-xs-12 col-sm-6 none-padding" id="cardinfo">
 									<select  id="Paymentcard" name="Paymentcard" style="width:100%;">
 									<?php
 									if (sizeof($cardsnum)!=0) {
@@ -983,9 +984,18 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 
 						<script type="text/javascript">
 						jQuery(document).ready(function($) {
+							$("#defaultCard").val($('#Paymentcard').val());
 							$(".deletecardbutton").click(function() {
 								var CardID = $("#Paymentcard").val();
 								$("#deleteID").val(CardID);
+								if($("#defaultCard").val()==CardID){
+									$('#deletecardMessage').html("Can not delete your main card");
+									$('#deleteCardForm button').addClass("stop");
+								}
+								else{
+									$('#deletecardMessage').html("Are you sure you want to delete this card?");
+									$('#deleteCardForm button').removeClass("stop");
+								}
 							});
 							$(".updatecard").click(function() {
 								var CardID = $("#Paymentcard").val();
@@ -1635,9 +1645,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 											
 										}
 									?>
-									<!--<option value="0" >Other</option>-->
+									<option value="0" >Other</option>
 								</select>
 								</div>
+								<input type="text" class="form-control display-none" name="University-degree<?php echo $key;?>" id="University-degree<?php echo $key;?>">
 								<?php endif;?>
 								<?php if (empty($details['PersonEducation'][$key]['DegreeID'])):?>
 								<input type="text" class="form-control" name="University-degree<?php echo $key;?>" id="University-degree<?php echo $key;?>" value="<?php echo $details['PersonEducation'][$key]['Degree'];?>">
@@ -1645,7 +1656,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 
 							<div class="col-xs-12">
-								<label for="Undergraduate-university-name<?php echo $key;?>">Name of institution<span class="tipstyle"> *</span></label>
+								<label for="Undergraduate-university-name<?php echo $key;?>">University name<span class="tipstyle"> *</span></label>
 								<?php 
 									$universityCode  = file_get_contents("sites/all/themes/evolve/json/University.json");
 									$University=json_decode($universityCode, true);
@@ -1662,9 +1673,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 											
 										}
 									?>
-									<!--<option value="0">Other</option>-->
+									<option value="0">Other</option>
 								</select>
 								</div>
+								<input type="text" class="form-control display-none" name="Undergraduate-university-name-other<?php echo $key;?>" id="Undergraduate-university-name-other<?php echo $key;?>">
 								<?php endif;?>
 								<?php if (empty($details['PersonEducation'][$key]['InstituteID'])):?>
 								<input type="text" class="form-control" name="Undergraduate-university-name-other<?php echo $key;?>" id="Undergraduate-university-name-other<?php echo $key;?>" value="<?php echo $details['PersonEducation'][$key]['Institute'];?>">
@@ -1712,16 +1724,19 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								</div>
 							</div>
 						</div>
+						<a class="no accent-btn" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>
 					</div>
 
 				<?php endforeach;?>
 				<?php if(sizeof($details['PersonEducation'])==0):?>
 					<div id="additional0">
+					<input type="hidden" name="ID0" value="-1">
 					   <div class="row">
                             <div class="col-xs-12 col-sm-6">
                                 <label for="Udegree">Degree<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Udegree0" id="Udegree0">
+								<option value="" selected disabled>Please select</option>
                                     <?php
                                         $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
                                         $degree             = json_decode($degreecode, true);
@@ -1748,7 +1763,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                                 ?>
                             <div class="chevron-select-box">
                             <select class="form-control" name="Undergraduate-university-name0" id="Undergraduate-university-name0">
-                                <?php
+                                <option value="" selected disabled>Please select</option>
+								<?php
                                     foreach ($University as $pair => $value) {
                                         echo '<option value="' . $University[$pair]['ID'] . '"';
                                         echo '> ' . $University[$pair]['Name'] . ' </option>';
@@ -1766,7 +1782,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                                 <label for="Ugraduate-yearattained0">Year attained<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
-                                <?php
+                                <option value="" selected disabled>Please select</option>
+								<?php
                                     $y = date("Y");
                                     for ($i = 1940; $i <= $y; $i++) {
                                         echo '<option value="' . $i . '">' . $i . '</option>';
@@ -1793,6 +1810,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                                 </div>
                             </div>
                         </div>
+						<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
 					</div>
 				<?php endif; ?>
 				</div>
@@ -1886,7 +1904,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 		</div>
 		<div id="deleteCardWindow" style="display:none;">
 			<form action="your-details?action=delete" method="POST" id="deleteCardForm">
-				<h3>Are you sure you want to delete this card?</h3>
+				<h3 id="deletecardMessage">Are you sure you want to delete this card?</h3>
 				<input type="hidden" name="deleteID" id="deleteID" value="">
 				<button class="yes accent-btn" type="submit" value="Yes">Yes</button>
 				<a class="no accent-btn cancelDeleteButton" target="_self">No</a>
@@ -1935,6 +1953,11 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<a class="no accent-btn cancelDeleteButton" value="no" target="_self">No</a>
 				</div>
 			</form>
+		</div>
+		<div id="confirmDelete" style="display:none;">
+				<h3 class="light-lead-heading cairo" style="color:black">Are you sure you want to delete your qualification record?</h3>
+					<button id="deleteQButton" class=""  value="Yes" >Yes</button>
+				<a class="no accent-btn " target="_self">No</a>
 		</div>
 	</div>
 	</div>
@@ -2017,6 +2040,7 @@ wrapper = $( "<div>", { text: item.label } );
 if ( item.disabled ) {
 li.addClass( "ui-state-disabled" );
 }
+
 $( "<span>", {
 style: item.element.attr( "data-style" ),
 "class": "ui-icon " + item.element.attr( "data-class" )
@@ -2029,6 +2053,19 @@ $( "#Paymentcard" )
 .iconselectmenu()
 .iconselectmenu( "menuWidget" )
 .addClass( "ui-menu-icons customicons" );
+
+//$('#Paymentcard-button').click(function(){
+	//alert($('#Paymentcard-menu').attr("aria-activedescendant"));
+	//$('#Paymentcardvalue').val($('#Paymentcard').val());
+	//if($('#Paymentcard').val()!= $("#defaultCard").val()){
+		
+		//$('.deletecardbutton').removeClass('display-none');
+	//}
+	//else{
+		//$('.deletecardbutton').addClass('display-none');
+	//}
+	
+//});
 } );
 
 $('.add-additional-qualification').click(function(){
@@ -2042,7 +2079,19 @@ $('.add-additional-qualification').click(function(){
         var i = Number(number +1);
 		$('input[name=addtionalNumber]').val(i);
 });
-
+$("#deleteQButton").on( "click", function(){
+		var x = $(this).attr("class").replace('deleteEducation', '');
+		$("#additional"+ x).remove();
+		$("#deleteQButton").removeAttr('class');
+		var en = Number($('#addtionalNumber').val());
+		
+		var et = Number(en -1);
+		$('input[name=addtionalNumber]').val(et);
+		//$('#confirmDelete').dialog('close');
+		$('div[aria-describedby=confirmDelete] button').click();
+		
+});
+ 
 </script>
 
 <style>
