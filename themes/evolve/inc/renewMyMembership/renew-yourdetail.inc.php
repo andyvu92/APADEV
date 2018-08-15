@@ -1338,7 +1338,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								</div>
 							</div>
 					</div>
-					<a class="no accent-btn" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>	
+					<a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>	
 					</div>
 				<?php endforeach;?>
 				<?php if(sizeof($details['PersonEducation'])==0):?>
@@ -1436,11 +1436,15 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 	</div>
 
 </form> 
-<div id="confirmDelete" style="display:none;">
-	<h3 class="light-lead-heading cairo" style="color:black">Are you sure you want to delete your qualification record?</h3>
-		<button id="deleteQButton" class=""  value="Yes" >Yes</button>
-	<a class="no accent-btn " target="_self">No</a>
-</div>  
+		<div id="confirmDelete" style="display:none;">
+				<div class="flex-cell">
+					<h3 class="light-lead-heading cairo">Are you sure you want to delete this qualification record?</h3>
+				</div>
+				<div class="flex-cell buttons-container">
+					<a id="deleteQButton" class="" value="yes" target="_self">Yes</a>
+					<a class="cancelDeleteButton" value="no" target="_self">No</a>
+				</div>
+		</div>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 	$(".chosen-select").chosen({width: "100%"});
@@ -1526,6 +1530,14 @@ $('.add-additional-qualification').click(function(){
 		$('input[name=addtionalNumber]').val(et);
 		//$('#confirmDelete').dialog('close');
 		$('div[aria-describedby=confirmDelete] button').click();
-		
+});
+
+jQuery(document).ready(function() {
+  $("#confirmDelete .cancelDeleteButton").on("click",function(){
+    $('div[aria-describedby=confirmDelete]').fadeOut();
+  });
+  $(".callDeleteEdu").on("click",function(){
+    $('div[aria-describedby=confirmDelete]').fadeIn();
+  });
 });
 </script>

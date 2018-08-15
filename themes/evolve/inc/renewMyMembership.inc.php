@@ -86,7 +86,6 @@ $background = getBackgroundImage($userID);
 <?php logRecorder(); ?>
 <div id="privacypolicyWindow" style="display:none;">
 	<div class="modal-header">
-		<button type="button" class="apa_policy_button close" data-dismiss="modal">×</button>
 		<h4 class="modal-title">APA privacy policy</h4>
 	</div>
 

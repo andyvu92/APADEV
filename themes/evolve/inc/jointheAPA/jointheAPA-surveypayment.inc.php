@@ -322,20 +322,22 @@ if(isset($_POST['step2-1'])) {
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">					
 				<fieldset>
-					<select id="Paymentcard" name="Paymentcard">
-						<?php
-						
-							foreach( $cardsnum["results"] as $cardnum) {
-								echo '<option value="'.$cardnum["Creditcards-ID"].'"';
-								if($cardnum["IsDefault"]=="1") {
-								echo "selected ";
-							}
-							echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
-							echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
-							}
-						
-						?>
-					</select>
+					<div class="chevron-select-box">
+						<select id="Paymentcard" name="Paymentcard">
+							<?php
+							
+								foreach( $cardsnum["results"] as $cardnum) {
+									echo '<option value="'.$cardnum["Creditcards-ID"].'"';
+									if($cardnum["IsDefault"]=="1") {
+									echo "selected ";
+								}
+								echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
+								echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+								}
+							
+							?>
+						</select>
+					</div>
 				</fieldset>
 			</div>
 		</div>

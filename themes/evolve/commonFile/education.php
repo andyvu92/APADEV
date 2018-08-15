@@ -76,6 +76,16 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 		</div>
 	</div>
 </div>
-<a class="no accent-btn" id="deleteEducation'.$i.'"><span class="dashboard-button-name">Delete</span></a>
+<a class="callDeleteEdu" id="deleteEducation'.$i.'"><span class="dashboard-button-name">Delete</span></a>
+<script>
+jQuery(document).ready(function() {
+	$("#confirmDelete .cancelDeleteButton").on("click",function(){
+	  $("div[aria-describedby=confirmDelete]").fadeOut();
+	});
+	$(".callDeleteEdu").on("click",function(){
+	  $("div[aria-describedby=confirmDelete]").fadeIn();
+	});
+  });
+</script>
 ';
 ?>

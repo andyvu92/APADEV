@@ -261,7 +261,7 @@ $PRFPrice = 0;
 	<input type="hidden" name="step3" value="3">
 	<div class="down8" <?php if(isset($_POST['step2'])||isset($_POST['step2-2'])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
 		<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
-			<div class="flex-container join-apa-final">
+			<div class="flex-container join-apa-final flex-table">
 				<div class="flex-cell flex-flow-row table-header">
 					<div class="flex-col-8">
 						<span class="table-heading">Product name</span>
@@ -303,7 +303,7 @@ $PRFPrice = 0;
 						if(sizeof($FPListArray)!=0){
 							foreach( $FPListArray as $FProduct){
 									echo "<div class='flex-cell flex-flow-row table-cell'>";
-									echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>".$FProduct['FPtitle']."</div>";
+									echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$FProduct['FPtitle']."</div>";
 									echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$FProduct['FPprice']."</div>";
 									$price += $FProduct['FPprice'];
 									echo '<div class="flex-col-2 action-col">';if($FProduct['ProductID']!="9973"){ echo '<a class="deleteMGButton'.$FProduct['ProductID'].'">delete</a>';} echo '</div>';
@@ -313,14 +313,14 @@ $PRFPrice = 0;
                         //if((!isset($_POST['prftag'])) && isset($_POST['PRF'])&& $_POST['PRF']!=""){ 
 						if($reviewData['PRFdonation']!=""){ 
                             echo '<div class="flex-cell flex-flow-row table-cell">
-                            <div class="flex-col-8 title-col"><span class="pd-header-mobile">Physiotherapy Research Foundation donation</div>
+                            <div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Physiotherapy Research Foundation donation</div>
                             <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.$reviewData['PRFdonation'].'</div>
                             <div class="flex-col-2 action-col"><a class="deletePRFButton">delete</a></div>
                             </div>'; 
                             $price +=$reviewData['PRFdonation']; }
 						if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"){ 
 							echo '<div class="flex-cell flex-flow-row table-cell">
-                            <div class="flex-col-8 title-col"><span class="pd-header-mobile">Admin fee</div>
+                            <div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Admin fee
                             <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.$scheduleDetails['AdminFee'].'</div>
                             <div class="flex-col-2 action-col"></div>
                             </div>'; 
@@ -328,7 +328,7 @@ $PRFPrice = 0;
 						}
 				?>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="flex-container flex-table">
 				
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-6">
@@ -362,20 +362,22 @@ $PRFPrice = 0;
 		<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
 		<?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>   
 			<fieldset>
-				<select  id="Paymentcard" name="Paymentcard" readonly>
-				<?php
-					
-						foreach( $cardsnum["results"] as $cardnum) {
-							echo '<option value="'.$cardnum["Creditcards-ID"].'"';
-							if($cardnum["IsDefault"]=="1") {
-							echo "selected ";
-						}
-						echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
-						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
-						}
-					
-				?>
-				</select>
+				<div class="chevron-select-box">
+					<select  id="Paymentcard" name="Paymentcard" readonly>
+					<?php
+						
+							foreach( $cardsnum["results"] as $cardnum) {
+								echo '<option value="'.$cardnum["Creditcards-ID"].'"';
+								if($cardnum["IsDefault"]=="1") {
+								echo "selected ";
+							}
+							echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
+							echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+							}
+						
+					?>
+					</select>
+				</div>
 			</fieldset>
 		<?php endif; ?>  
 		<?php if(isset($_SESSION['tempcard']) && !isset($_POST['addcardtag'])) : ?>
