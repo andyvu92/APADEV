@@ -54,7 +54,8 @@
 			return ["log-in fail", $Got["ErrorInfo"]["ErrorMessage"]];
 		} else {
 			$ThirdParty = $_SESSION["thirdParty"];
-			
+			$LoginStatus = "1";
+			$options = "Initial login slnpage";
 			// logged in
 			$returnSSO["UserId"] = $Got["UserId"];
 			$returnSSO["UserName"] = $Got["UserName"];
@@ -69,29 +70,32 @@
 			$returnSSO["Database"] = $Got["Database"];
 			$returnSSO["AptifyUserID"] = $Got["AptifyUserID"];
 
+			$RecordAll = json_encode($returnSSO, true);
 			$date = date('Y-m-d h:i:s');
 			// Create db data
 			$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
 			// Create log
-			$SSOlogCreate = $dbt->prepare('INSERT INTO ssolog (Provider, Token, LogDateTime, LogIO, Data, Option) VALUES (:Provider, :Token, :LogDateTime, :LogIO, :Data, :Option)');
+			
+			$SSOlogCreate = $dbt->prepare('INSERT INTO ssolog (Provider, User, Token, LogDateTime, LogIO, Data, OptionString) VALUES (:Provider, :User, :Token, :LogDateTime, :LogIO, :Data, :Option)');
 			$SSOlogCreate->bindParam(':Provider', $ThirdParty);
+			$SSOlogCreate->bindParam(':User', $returnSSO["UserName"]);
 			$SSOlogCreate->bindParam(':Token', $returnSSO["TokenId"]);
 			$SSOlogCreate->bindParam(':LogDateTime', $date);
-			$SSOlogCreate->bindParam(':LogIO', "1");
-			$SSOlogCreate->bindParam(':Data', $returnSSO);
-			$SSOlogCreate->bindParam(':Option', "");
+			$SSOlogCreate->bindParam(':LogIO', $LoginStatus);
+			$SSOlogCreate->bindParam(':Data', $RecordAll);
+			$SSOlogCreate->bindParam(':Option', $options);
 			if(!$SSOlogCreate->execute()) {
-				echo "<br />RunFail- Mstr<br>";
+				echo "<br />RunFail- SSOlogCreate<br>";
 				print_r($SSOlogCreate->errorInfo());
 			}
 
 			// Create data
-			$SSODataCreate = $dbt->prepare('INSERT INTO ssodata (DateTime, Token, Data) VALUES (:Token, :DateTime, :Data)');
+			$SSODataCreate = $dbt->prepare('INSERT INTO ssodata (Token, DateTime, Data) VALUES (:Token, :DateTime, :Data)');
 			$SSODataCreate->bindParam(':Token', $returnSSO["TokenId"]);
 			$SSODataCreate->bindParam(':DateTime', $date);
-			$SSODataCreate->bindParam(':Data', $returnSSO);
+			$SSODataCreate->bindParam(':Data', $RecordAll);
 			if(!$SSODataCreate->execute()) {
-				echo "<br />RunFail- Mstr<br>";
+				echo "<br />RunFail- SSODataCreate<br>";
 				print_r($SSODataCreate->errorInfo());
 			}
 
