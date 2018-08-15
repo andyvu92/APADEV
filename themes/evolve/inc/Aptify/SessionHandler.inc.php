@@ -40,6 +40,7 @@ function deleteSession() {
 	unset($_SESSION['Status']);
 	// SSO data
 	unset($_SESSION["outputReturn"]);
+	unset($_SESSION["thirdParty"]);
 	// user details' data
 	//Added by JingHu
 	unset($_SESSION["workplaceSettings"]);

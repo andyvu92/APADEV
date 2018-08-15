@@ -1,6 +1,6 @@
 <div class="<?php print $classes;?>">
   <?php if ($icon): ?>
-    <div class="box-icon"><span><i class="<?php print $icon; ?>"></i><br/><i class="<?php print $icon; ?>"></i></span></div>
+    <div class="box-icon <?php print $icon; ?>"></div>
   <?php endif; ?>
   <?php if ($title): ?>
     <h3 class="box-title"><?php print $title; ?></h3>

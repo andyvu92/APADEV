@@ -4,13 +4,36 @@
 	// log-out
 	if(isset($_POST["logouttt"])) {
 		// same with this commend.
+		$LoginStatus = '0';
+		$date = date('Y-m-d h:i:s');
 		// isset($_SESSION["Log-in"])
-		logoutManager();
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+		$dataDelete = $dbt->prepare('DELETE FROM ssodata WHERE Token = :Token');
+		$dataDelete->bindParam(':Token', $_SESSION['TokenId']);
+		if(!$dataDelete->execute()) {
+			echo "<br />RunFail- Mstr<br>";
+			print_r($dataDelete->errorInfo());
+		}
+		$dataDelete = null;
 
+		$SSOlogCreate = $dbt->prepare('INSERT INTO ssolog (Provider, User, Token, LogDateTime, LogIO, OptionString) VALUES (:Provider, :User, "log-out", :LogDateTime, :LogIO, "log-out")');
+		$SSOlogCreate->bindParam(':Provider', $_SESSION["thirdParty"]);
+		$SSOlogCreate->bindParam(':User', $_SESSION["UserName"]);
+		$SSOlogCreate->bindParam(':LogDateTime', $date);
+		$SSOlogCreate->bindParam(':LogIO', $LoginStatus);
+		if(!$SSOlogCreate->execute()) {
+			echo "<br />RunFail- Mstr<br>";
+			print_r($SSOlogCreate->errorInfo());
+		}
+		$SSOlogCreate = null;
+
+		logoutManager();
+		
+		///echo "here!";
 		header("Location: /pageA");
 		exit;
 	}
-
+	//echo "there!";
 	function logoutManager() {
 		// 2.2.8 - log-out
 		// Send - 
