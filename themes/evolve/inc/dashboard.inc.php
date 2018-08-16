@@ -35,6 +35,7 @@ $background = getBackgroundImage($userID);
 	function drawChart() {
 		var fin =  Number(document.getElementById('cpd').innerHTML);
 		var unfin = Number(20 - fin);
+		if(unfin < 0) {unfin = 0;}
 		var data = google.visualization.arrayToDataTable([
 		['CPD', 'Hours per Day'],
 		['Finished',     fin],
