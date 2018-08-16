@@ -103,7 +103,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
-					<input class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0" data-target="#insuranceTermsandConditions" data-toggle="modal"><label for="conditions"><span class="tipstyle">* </span>I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
+					<input class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0" popup-target="insuranceTermsandConditions"><label for="conditions" popup-target="insuranceTermsandConditions"><span class="tipstyle">* </span>I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
 				other material information to be disclosed</label>
 				</div>
 			</div>
@@ -118,13 +118,10 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 	<a target="_self" class="cancelInsuranceButton accent-btn"><span class="dashboard-button-name">No</span></a>
 	
 </div>
-<div id="insuranceTermsandConditions" class="modal fade" role="dialog">
-	<div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
-	<!-- Modal content-->
-		<div class="modal-content">
+<div id="insuranceTermsandConditions" style="display:none;">
+			<span class="close-popup"></span>
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">FINANCIAL SERVICES GUIDE</h4>
+				<h4 class="modal-title">Financial Services Guide</h4>
 			</div>
 			<div class="modal-body">
 				<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>
@@ -222,11 +219,8 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 			</div> 
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" id="insurance_terms_button" data-dismiss="modal">Submit</button>
-				
+				<a class="popup-submit" href="" popup-dismiss="insuranceTermsandConditions">Submit</a>
 			</div>
-		</div>
-	</div>
 </div>
 <?php logRecorder();  ?>
 <!--  this part will be merged with Andy's Dashboard less file-->

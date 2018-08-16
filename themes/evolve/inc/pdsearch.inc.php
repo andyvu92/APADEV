@@ -94,8 +94,11 @@
 		</select>
 	</div>
 	<div class="locationAutomatic">
-		<div class="UseLocation"><img style="float: left; margin-left: 15px;" src="/sites/all/themes/evolve/lessc/YOUAREHERE_25x25.png"><span>Use current location</span></div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<div class="UseLocation">
+			<input type="checkbox" class="styled-checkbox" id="autoLocation">
+			<label for="autoLocation">Use current location</label>
+		</div>
+		<div>
 			<input id="lat" type="hidden" name="lat" value="-37.81361100000001" style="display: none;" hidden="">
 			<input id="lng" type="hidden" name="lng" value="144.96305600000005" hidden="" style="display: none;">
 		</div>

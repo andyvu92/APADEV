@@ -354,7 +354,6 @@ jQuery(document).ready(function($) {
 			var x = $(this).attr("id");
 			$("#deleteQButton").addClass(x);
 			$( "#confirmDelete" ).dialog();
-					
 	});
 	var PRF = $("#PRF").val();
 	$( "#POSTPRF").val(PRF);
@@ -565,8 +564,6 @@ jQuery(document).ready(function($) {
 		else{
 			$( "#jobother" ).addClass('display-none');
 		}
-		
-		   
 	});
 	
 	$('#uploadImageButton').click(function(){
@@ -587,17 +584,10 @@ jQuery(document).ready(function($) {
 	$('.deletecardbutton').click(function(){
 		$( "#deleteCardWindow" ).dialog();
 	});
-	
-	$('#insuranceControl').click(function(){
-		$("#insurancePopUp").dialog();
-		
-	});
-    $('.cancelDeleteButton').click(function() {
+
+	$('.cancelDeleteButton').click(function() {
         $('#deleteCardWindow').dialog('close');
     });	
-	$('.cancelInsuranceButton').click(function() {
-        $('#insurancePopUp').dialog('close');
-    });
 	$('#registerPDUserButton').click(function(){
 		$( "#registerPDUser" ).dialog();
     });
@@ -1116,9 +1106,6 @@ jQuery(document).ready(function($) {
        
     });
 	
-		
-	
-	
 	/*  check APA policy*/
 	if($('#privacypolicyp').val()=="0"){
 		$( "#disagreePolicyDescription" ).removeClass('display-none');
@@ -1140,19 +1127,7 @@ jQuery(document).ready(function($) {
 		$('a.join-details-button7').removeClass('disabled');
 	}
 	});
-	$('.apa_policy_button').click(function() {
-		$('[aria-describedby=privacypolicyWindow]').fadeOut();
-	});
-	$('#privacypolicyl').click(function() {
-		$('[aria-describedby=privacypolicyWindow]').fadeIn();
-	});
 
-	$('.pd_terms_close').click(function() {
-		$('[aria-describedby=PDTermsWindow]').fadeOut();
-	});
-	$('#pd_terms_open').click(function() {
-		$('[aria-describedby=PDTermsWindow]').fadeIn();
-	});
 	/*  end check APA policy*/
 	/*  check Installment policy*/
 	if(!$("#rolloverblock").hasClass("display-none")){

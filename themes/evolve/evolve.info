@@ -101,6 +101,7 @@ lessc[] = lessc/flex-box.less
 lessc[] = lessc/Andy.less
 lessc[] = lessc/about-us.less
 lessc[] = lessc/initial.less
+lessc[] = lessc/popups.less
 
 
 scripts[] = assets/scripts/evolve.js
@@ -114,6 +115,7 @@ scripts[] = Survey/GFunction.js
 scripts[] = assets/scripts/Distance.js
 scripts[] = assets/scripts/FindPhysio.js
 scripts[] = assets/scripts/Eddy.js
+scripts[] = assets/scripts/popups.js
 
 settings[body] = 'Open Sans:regular:14px:24px'
 settings[h1] = 'Raleway:regular:36px:'

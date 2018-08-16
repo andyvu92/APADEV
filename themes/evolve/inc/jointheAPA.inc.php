@@ -342,7 +342,7 @@ Facsimile: (03) 9092 0899</p>
 				</div>
 			</form>
 		</div>
-
+<div class="overlay"></div>
 <?php logRecorder(); ?>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
