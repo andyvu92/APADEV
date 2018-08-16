@@ -109,6 +109,7 @@ if(isset($_POST["Invoice_ID"])) {
 }
 ?>
 <?php logRecorder();  ?>
+<?php if($registerOuts['Invoice_ID']!=="0"):?>
 <h2>Thank you for your purchase</h2>
 <p>We hope you enjoy your event.</p>
 
@@ -124,7 +125,11 @@ if(isset($_POST["Invoice_ID"])) {
 ?></a></p>-->
 <a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 */ ?>
-<p>A copy will be sent to your inbox and stored in your new dashboard</p>
+<p>Your invoice will be sent to your inbox shortly</p>
+<?php else:?>
+<p>Your purchase is not successfull.</p>
+<?php endif;?>
+
 <?php  /*
 <div id="Iaksbnkvoice" class="modal fade big-screen" role="dialog">
 	<div class="modal-dialog">
