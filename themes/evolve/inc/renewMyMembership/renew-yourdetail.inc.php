@@ -847,9 +847,9 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						?>
 					</select>
 					</div>
-					<input type="hidden" name="fapnum" value="<?php echo sizeof($details['Specialty']);?>">
-					<?php if(!empty($details['Specialty'])){
-						echo '<input class="styled-checkbox" type="checkbox" id="fap" name="fap" checked value="1" >';
+					<input type="hidden" name="fapnum" value="<?php //echo sizeof($details['Specialty']);?>">
+					<?php if(sizeof($details['PersonSpecialisation'])!=0){
+						echo '<input class="styled-checkbox" type="checkbox" id="fap" name="fap">';
 						echo '<label class="light-font-weight" style="margin-top: 15px;" for="fap">I am part of the Australian College of Physiotherapists</label>';
 						echo '<p style="margin-bottom: 0"><span class="note-text">Please note:</span> Ticking this box adds an extra $200 to the price of your membership.
 	If you have passed Specialisation, Fellowship by Original Contribution or are
@@ -922,7 +922,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 			</div>-->
 		<ul class="nav nav-tabs" id="tabmenu">
 		<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
-		<li <?php if($key=='Workplace0') echo 'class ="active" ';?>><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a></li>
+		<li <?php if($key=='Workplace0') echo 'class ="active" ';?>><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a><span class="calldeletewp<?php echo $key;?>"></span></li>
 		<?php endforeach ?> 
 		<?php //if(sizeof($details['Workplaces'])==0):?>
 		<!--<li class ="active"><a data-toggle="tab" href="#workplace0"><?php //echo "Workplace1";?></a></li>-->
@@ -1501,7 +1501,7 @@ jQuery(document).ready(function($) {
 		  var x = $(this).attr("class").replace('deletewp', '');
 		  $("#workplaceli"+ x).remove();
 		  $("#workplace"+ x).remove();
-		  //$(".deletewp"+ x).remove();
+		  $(".deletewp"+ x).remove();
 		  var n = Number($('#wpnumber').val());
 		  var t = Number(n -1);
 		  

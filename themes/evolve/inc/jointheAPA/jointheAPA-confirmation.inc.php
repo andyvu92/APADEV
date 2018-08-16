@@ -35,6 +35,11 @@ if(isset($_POST['step3'])) {
 	// Response -Register a new order successfully
 	$registerOuts = GetAptifyData("26", $postReviewData);
     if($registerOuts['Invoice_ID']!=="0") {
+		//refresh session data
+		$data = "UserID=".$_SESSION["UserId"];
+		$details = GetAptifyData("4", $data,"");
+		newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"]);
+		//end refresh session data
 		$invoice_ID = $registerOuts['Invoice_ID'];
 		//save the terms and conditons on APA side
 		$dataArray = array();

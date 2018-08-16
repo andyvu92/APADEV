@@ -283,7 +283,7 @@ if(isset($_POST['step2-1'])) {
 					</select>
 				</div>
 				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="" oninput="this.value = Math.abs(this.value)" min="0">
-				<a style="color: black;" id="PRFDescription">What is this?</a>
+				<div class="chevron-select-box" style="margin-top: 10px;"><a style="color: black;" id="PRFDescription">What is this?</a></div>
 				
 			</div>
 		</div>
@@ -389,7 +389,7 @@ if(isset($_POST['step2-1'])) {
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
-				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number">
+				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
 
 			<div class="col-xs-6 col-sm-3">

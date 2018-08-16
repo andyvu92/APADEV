@@ -53,6 +53,11 @@ if(isset($_POST['step3'])) {
 	//submit data to complete renew membership web service 2.2.27
 	$renewOuts=GetAptifyData("27", $postReviewData);
 	if($renewOuts['Invoice_ID']!=="0") {
+	//refresh session data
+	$data = "UserID=".$_SESSION["UserId"];
+	$details = GetAptifyData("4", $data,"");
+	newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"]);
+	//end refresh session data
 	  $invoice_ID = $registerOuts['Invoice_ID'];
 	//save the terms and conditons on APA side
 	$dataArray = array();

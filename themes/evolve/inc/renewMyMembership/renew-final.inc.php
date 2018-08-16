@@ -419,13 +419,16 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 					$InitialPaymentAmount = $scheduleDetails['InitialPaymentAmount'];
 					$OccuringPayment = $scheduleDetails['OccuringPayment'];
 					$LastPayment = $scheduleDetails['LastPayment'];
+					$firstInstallment = $InitialPaymentAmount-$scheduleDetails['AdminFee']-$scheduleDetails['GST']-$reviewData['PRFdonation'];
 				?>
 					<div class="flex-cell flex-flow-row">
 						<div class="flex-col-6">
-						First instalment	
+						First installment	
 						</div>
 						<div class="flex-col-6">
-						$<?php echo $scheduleDetails['InitialPaymentAmount'];?>
+						$<?php //echo $scheduleDetails['InitialPaymentAmount'];
+						echo $firstInstallment;
+						?>
 						</div>
 					</div>
 				<?php endif;?>
@@ -448,7 +451,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 				</div>
 				<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"):?>
 					<div class="flex-col-12" style="text-align: center">
-						<button style="margin-top: 30px;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payment</button>	
+						<button style="margin-top: 30px;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payments</button>	
 					</div>
 				<?php endif;?>
 				<?php 

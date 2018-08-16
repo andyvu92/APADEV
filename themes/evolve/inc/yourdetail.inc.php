@@ -220,8 +220,8 @@ if(isset($_POST['step1'])) {
 	// Send - 
 	// UserID 
 	// Response - UserID & detail data
-	$test = GetAptifyData("5", $postData);
 	
+	$test = GetAptifyData("5", $postData);
 	unset($_SESSION["Regional-group"]);
 	/*General function: save data to APA shopping cart database;*/
 	/*Parameters: $userID, $productID,$type;*/
@@ -318,7 +318,7 @@ if(isset($_Get["action"]) && $_Get["action"] = "updatecard") {
 	// N/A.
 	$updateCards = GetAptifyData("13", $updateCardSubmit); 
 	//print_r($updateCards);
-	echo "End here";
+	
 }
 if(isset($_POST["setCardID"]) && $_POST["setCardID"] != ""){
 	$updateCardSubmit["UserID"] = $_SESSION['UserId'];
