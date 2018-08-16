@@ -225,7 +225,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 <div class="down8" <?php if(isset($_POST['step2'])|| isset($_POST['stepAdd'])||isset($_POST['step2-2'])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
 
 	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 review-main-container">
-	<div class="flex-container join-apa-final">
+	<div class="flex-container join-apa-final flex-table">
 				<div class="flex-cell flex-flow-row table-header">
 					<div class="flex-col-8">
 						<span class="table-heading">Product name</span>
@@ -286,7 +286,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 					}
 				if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"){ 
 					echo '<div class="flex-cell flex-flow-row table-cell">
-					<div class="flex-col-8 title-col"><span class="pd-header-mobile">Admin fee</div>
+					<div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Admin fee</div>
 					<div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.$scheduleDetails['AdminFee'].'</div>
 					<div class="flex-col-2 action-col"></div>
 					</div>'; 
@@ -294,7 +294,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 				}
 				?>
             </div>
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<div class="flex-container flex-table">
 				
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-6">
@@ -327,20 +327,22 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 				<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
 		<?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>   
 			<fieldset>
-				<select  id="Paymentcard" name="Paymentcard" readonly>
-				<?php
-					
-						foreach( $cardsnum["results"] as $cardnum) {
-							echo '<option value="'.$cardnum["Creditcards-ID"].'"';
-							if($cardnum["IsDefault"]=="1") {
-							echo "selected ";
-						}
-						echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
-						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
-						}
-					
-				?>
-				</select>
+				<div class="chevron-select-box">
+					<select  id="Paymentcard" name="Paymentcard" readonly>
+					<?php
+						
+							foreach( $cardsnum["results"] as $cardnum) {
+								echo '<option value="'.$cardnum["Creditcards-ID"].'"';
+								if($cardnum["IsDefault"]=="1") {
+								echo "selected ";
+							}
+							echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
+							echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+							}
+						
+					?>
+					</select>
+				</div>
 			</fieldset>
 		<?php endif; ?>  
 		<?php if(isset($_SESSION['tempcard'])) : ?>

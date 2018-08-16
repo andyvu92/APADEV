@@ -263,6 +263,16 @@ jQuery(document).ready(function() {
   $("#deleteWorkplaceWindow .cancelDeleteButton").on("click",function(){
     $('#deleteWorkplaceWindow').fadeOut();
   });
+  $(".callDeleteEdu").on("click",function(){
+    $('div[aria-describedby=confirmDelete]').fadeIn();
+  });
+});
+
+//TRIGGER DELETE QUALIFICATION(SS) POPUPS
+jQuery(document).ready(function() {
+  $("#confirmDelete .cancelDeleteButton").on("click",function(){
+    $('div[aria-describedby=confirmDelete]').fadeOut();
+  });
 });
 
 //SET LINK WRAPPERS FOR ABOUT US PAGE FEATURES

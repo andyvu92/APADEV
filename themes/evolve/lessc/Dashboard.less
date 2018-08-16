@@ -621,7 +621,7 @@ a.uploadImageButton {
 }
 
 .Membpaymentsiderbar {
-    border: 1px solid white;
+    border: 1px solid #d1cfcd;
     background-color: transparent;
     padding: 15px;
 }
@@ -2428,6 +2428,16 @@ form{
     }
 }
 
+#additional-qualifications-block{
+    [id^="additional"]{
+        &:first-child{
+            .space-line{
+                display: none;
+            }
+        }
+    }
+}
+
 /* --------------SUBSCRIPTIONS------------------ */
 #block-block-216 input[type=checkbox]{
     float: none;
@@ -2724,12 +2734,8 @@ form{
         }
     }
     .join-apa-final{
-        .table-header{
-            border-bottom: 1px solid #b8bcbf;
-            padding: 5px 0;
-        }
+        margin-top: 0;
         .table-cell{
-            padding: 5px 0;
             font-size: 1.2em;
         }
         .table-heading{
@@ -2837,6 +2843,11 @@ form{
 
 #insurancePopUp{
     text-align: center;
+    .center{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
 }
 
  /*--TEMPORARILY REMOVED--*/

@@ -1417,7 +1417,10 @@ input{
     text-align: center;
 }
 
-//POPUPS 
+/*---------------------------------------
+---------------------POPUPS------------- 
+---------------------------------------*/
+/*DELETE WORKPALCE*/
 #deleteWorkplaceWindow{
     .popup-small;
     padding: 40px 80px;
@@ -1472,6 +1475,65 @@ input{
     }
 }
 
+/* DELETE EDUCATION(S) */
+div[aria-describedby="confirmDelete"].ui-dialog{
+    .popup-small;
+    padding: 40px 80px;
+    .ui-draggable-handle{
+        display: none!important;
+    }
+    .light-lead-heading{
+        color: #000;
+        margin-top: 0;
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+    .buttons-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;   
+        margin-top: 30px;
+        [value="yes"], [value="no"]{
+            float: none;
+            display: inline-block;
+            margin-bottom: 0px;
+            margin-top: 2px;
+            background-color: #009fda;
+            color: #fff;
+            padding: 8px 20px;
+            text-align: center;
+            font-family: Cairo;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 45%;
+            margin: 0;
+            &:hover{
+                opacity: 0.8;
+            }
+        }
+        [value="no"]{
+            color: #848589!important;
+            background: none;
+            border: 1px solid #d6d6d6;
+        }
+    }
+    @media all and (max-width: @larger-phone-width){
+        padding: 40px 20px;
+    }
+    @media all and (max-width: @phone-width) {
+        .light-lead-heading{
+            font-size: 2em;
+        }
+    }
+}
+
+/* JOB NOTICEMENT ON PD DETAIL */
 [aria-describedby="jobnoticement"].ui-dialog{
     .popup-small;
     #jobnoticement{
@@ -1507,6 +1569,7 @@ input{
     }
 }
 
+/* STUDENT LIMITATION ON PD DETAIL */
 [aria-describedby="student-limitation"].ui-dialog{
     .popup-small;
     #student-limitation{
@@ -1541,3 +1604,4 @@ input{
         }
     }
 }
+
