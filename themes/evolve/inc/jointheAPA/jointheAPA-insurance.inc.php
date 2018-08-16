@@ -103,7 +103,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 			</div>
 			<div class="row">
 				<div class="col-xs-12">
-					<input class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0" popup-target="insuranceTermsandConditions"><label for="conditions" popup-target="insuranceTermsandConditions"><span class="tipstyle">* </span>I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
+					<input class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0"><label for="conditions" popup-target="insuranceTermsandConditions"><span class="tipstyle">* </span>I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
 				other material information to be disclosed</label>
 				</div>
 			</div>

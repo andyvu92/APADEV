@@ -506,7 +506,6 @@ a.uploadImageButton {
     color: white;
     padding: 8px;
     line-height: 32px;
-   
 }
 
 .Membpaymentsiderbar {
@@ -2227,7 +2226,14 @@ form{
         &:checked + label:before {
           background: none;
         }
-        
+        &:checked{
+            width: 100%;
+            z-index: 10;
+            margin: 0;
+            height: 22px;
+            cursor: pointer;
+        }
+
         /* Disabled state label. */
         &:disabled + label {
           color: #b8b8b8;

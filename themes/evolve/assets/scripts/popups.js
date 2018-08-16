@@ -23,7 +23,6 @@ jQuery(document).ready(function() {
     $('.close-popup').on('click', function (e) {
         $('.overlay').fadeOut();
         $(this).parent().fadeOut();
-
     });
 
 	$('.apa_policy_button').click(function() {
