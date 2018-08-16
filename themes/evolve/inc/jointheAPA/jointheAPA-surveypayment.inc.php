@@ -295,7 +295,7 @@ if(isset($_POST['step2-1'])) {
 				<label for="prftag" id="prftagAgree">No, I do not want to make a donation to the PRF</label>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-3">
-				<div class="chevron-select-box">
+				<div class="chevron-select-box" style="margin-top: 10px;">
 				<select class="form-control" id="PRF" name="PRF">
 					<option value="5" selected>$5.00</option>
 					<option value="10">$10.00</option>
@@ -306,7 +306,7 @@ if(isset($_POST['step2-1'])) {
 				</select>
 				</div>
 				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="" oninput="this.value = Math.abs(this.value)" min="0">
-				<a style="color: black;" href="#">What is this?</a>
+				<div class="chevron-select-box" style="margin-top: 10px;"><a style="color: black;" id="PRFDescription">What is this?</a></div>
 				
 			</div>
 		</div>
