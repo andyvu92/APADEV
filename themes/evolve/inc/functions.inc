@@ -264,7 +264,7 @@ function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 		$shoppingcartGet->bindValue(':type', $type);
 		$shoppingcartGet->execute();
 		if($shoppingcartGet->rowCount()>0) {
-			header("Location:".$link."/pd/pd-product?saveShoppingCart&id=".$productID);
+			header("Location:".$link."/pd/pd-product?id=".$meetingID);
 		} else{
 			$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, meetingID, type, Coupon) VALUES (:userID, :productID, :meetingID, :type, :Coupon)');
 			$shoppingcartGet = null;
@@ -288,7 +288,8 @@ function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
 	}
-	header("Location:".$link."/pd/pd-product?saveShoppingCart&id=".$productID);
+	header("Location:".$link."/pd/pd-product?saveShoppingCart&id=".$meetingID);
+	//header("Location:".$link."/pd/pd-product?id=".$productID);
 }
 function PDSaveCoupon($userID, $type, $Coupon){
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
