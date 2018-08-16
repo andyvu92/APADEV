@@ -45,7 +45,6 @@ if(isset($_POST["POSTPRF"])) {
 	$OrderSend['InstallmentFor'] = "Membership";
 	$OrderSend['InstallmentFrequency'] = "";
 	$OrderSend['CampaignCode'] = $_POST["CouponCode"];
-	print_r($OrderSend);
 	$registerOuts = GetAptifyData("26", $OrderSend);
 	//delete session: really important!!!!!!!!
 	unset($_SESSION["tempcard"]);

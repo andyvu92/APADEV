@@ -1368,7 +1368,7 @@
                     <div class="row">
                         <div class="col-lg-6">
                            <label for="">Birth date<span class="tipstyle">*</span></label>
-                           <input type="date" class="form-control" name="Birth" required max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
+                           <input type="date" class="form-control" name="Birth" required>
                         </div>
                         <div class="col-lg-3">
 						   <label for="">Gender</label>
