@@ -729,15 +729,19 @@ if(isset($_SESSION['UserId'])) {
 		$shoppingcartGetPD->bindValue(':userID', $userID);
 		$shoppingcartGetPD->bindValue(':type', $type);
 		$shoppingcartGetPD->execute();
-		$counts += count($shoppingcartGetPD);
+		foreach($shoppingcartGetPD as $ttt) {
+			$counts++;
+		}
 		$shoppingcartGetPD= null;               
 		$type="PDNG";
-		$shoppingcartGetPD= $dbt->prepare('SELECT ID, productID, meetingID,coupon FROM shopping_cart WHERE userID= :userID AND type= :type');
-		$shoppingcartGetPD->bindValue(':userID', $userID);
-		$shoppingcartGetPD->bindValue(':type', $type);
-		$shoppingcartGetPD->execute();
-		$counts += count($shoppingcartGetPD);
-		$shoppingcartGetPD= null;               
+		$shoppingcartGetPDNG= $dbt->prepare('SELECT ID, productID, meetingID,coupon FROM shopping_cart WHERE userID= :userID AND type= :type');
+		$shoppingcartGetPDNG->bindValue(':userID', $userID);
+		$shoppingcartGetPDNG->bindValue(':type', $type);
+		$shoppingcartGetPDNG->execute();
+		foreach($shoppingcartGetPDNG as $ttt) {
+			$counts++;
+		}
+		$shoppingcartGetPDNG= null;               
 	} catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
