@@ -250,7 +250,8 @@ if(isset($results['MResponse'])) {
 		}
 
         if(!empty($result['City'])) {
-			echo	"<div class='flex-col-2 pd-detail-city'><span class='pd-header-mobile'>City: </span>".$result['City']."</div>";
+			$cityLower = strtolower($result['City']);
+			echo	"<div class='flex-col-2 pd-detail-city'><span class='pd-header-mobile'>City: </span>".$cityLower."</div>";
 		} else {
 			echo	"<div class='flex-col-2'><span class='pd-header-mobile'>City: </span>N/A</div>";
 		}
