@@ -159,6 +159,8 @@ if(isset($_POST['addCard']) && $_POST['addCard'] == "1"){
 	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
 	$out = GetAptifyData("15",$postPaymentData); 
 	
+	if($out["result"]=="Failed"){ echo "Submit unsuccessful, Please check your card details";}
+	
 } 
 /*if(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])) {
 	$tempcard = array();
