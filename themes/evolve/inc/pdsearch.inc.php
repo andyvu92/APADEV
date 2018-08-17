@@ -157,7 +157,7 @@
 	<div class="row">
 		<div class="col-xs-12 col-md-5">
 			<span class="small-text"><a target="_blank">Terms and conditions</a></span>
-			<span class="small-text"><a target="_blank">Event registeration form</a></span>
+			<span class="small-text"><a target="_blank">Event registration form</a></span>
 		</div>
 		<div class="col-xs-12 col-md-7 searchds align-right">
 			<button class="accent-btn your-details-submit pdSearchButton" type="submit"><i class="fa fa-search"></i> Search now</button>

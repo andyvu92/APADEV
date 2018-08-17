@@ -719,7 +719,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 			<input type="hidden"  name="Status" <?php if (empty($details['Status'])) {echo "value='1'";}   else{ echo 'value="'.$details['Status'].'"'; }?>>
 				<div class="col-xs-12 col-md-6">
 					<label for="">Member ID (Your email address)<span class="tipstyle"> *</span></label>
-					<input type="text" class="form-control" name="Memberid" <?php if (empty($details['Memberid'])) {echo "placeholder='Member no.'";}   else{ echo 'value="'.$details['Memberid'].'"';}?> >
+					<input type="text" class="form-control" name="Memberid" readonly <?php if (empty($details['Memberid'])) {echo "placeholder='Member no.'";}   else{ echo 'value="'.$details['Memberid'].'"';}?> >
 				</div>
 
 				<div class="col-xs-12 col-md-6">
@@ -1423,7 +1423,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 </div>
                             </div>
                         </div>
-						<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
+						<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
 					</div>
 				<?php endif; ?>
 
@@ -1501,7 +1501,7 @@ jQuery(document).ready(function($) {
 		  var x = $(this).attr("class").replace('deletewp', '');
 		  $("#workplaceli"+ x).remove();
 		  $("#workplace"+ x).remove();
-		  $(".deletewp"+ x).remove();
+		  //$(".deletewp"+ x).remove();
 		  var n = Number($('#wpnumber').val());
 		  var t = Number(n -1);
 		  

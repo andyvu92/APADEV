@@ -43,8 +43,8 @@
         padding: 15px 15px;
         overflow-y: auto;
         .warning{
-            color: #ffa02e;
-            background: none;
+            color: #ffa02e!important;
+            background: none!important;
         }
      }
     .modal-footer{
@@ -380,7 +380,14 @@ div[aria-describedby="uploadImage"].ui-dialog {
 }
 
 /* QUOTATION POPUP */
-div[aria-describedby="QuatationPopUp"].ui-dialog {
+div[aria-describedby="QuatationPopUp"].ui-dialog{
+    position: fixed;
+    top: 40%!important;
+    width: 60%!important;
+    left: 20%!important;
+    text-align: center;
+    background: #fff;
+    z-index: 9999;
     .ui-widget-header{
         border:none!important;
         background-color:white!important;
@@ -393,18 +400,9 @@ div[aria-describedby="QuatationPopUp"].ui-dialog {
         font-family: Roboto;
         text-align: center;
     }
-}
-div[aria-describedby="QuatationPopUp"].ui-dialog{
-    position: fixed;
-    top: 40%!important;
-    width: 60%!important;
-    left: 20%!important;
-    text-align: center;
-    background: #fff;
-    z-index: 9999;
      @media all and (max-width: @larger-phone-width) {
         max-height: 500px;
-        overflow-y: scroll!important;
+        overflow-y: auto!important;
         top: 15% !important;
         width: 70%!important;
         left: 15%!important;

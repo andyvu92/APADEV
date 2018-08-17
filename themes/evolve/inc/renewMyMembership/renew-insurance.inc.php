@@ -148,8 +148,8 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 
 		<div class="row">
 			<div class="col-xs-12">
-				<input class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0" data-target="#insuranceTermsandConditions" data-toggle="modal">
-				<label class="light-font-weight" for="conditions"><span class="tipstyle">* </span>I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
+				<input class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0">
+				<label class="light-font-weight" for="conditions" popup-target="insuranceTermsandConditions"><span class="tipstyle">* </span>I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
 				other material information to be disclosed</label>
 			</div>
 		</div>
@@ -165,13 +165,10 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 		<a target="_self" class="cancelInsuranceButton accent-btn"><span class="dashboard-button-name">No</span></a>
 	</div>
 </div>
-<div id="insuranceTermsandConditions" class="modal fade" role="dialog">
-	<div class="modal-dialog" style="overflow-y: scroll; max-height:85%; margin-bottom:50px;">
-	<!-- Modal content-->
-		<div class="modal-content">
+<div id="insuranceTermsandConditions" style="display: none">
+	<span class="close-popup"></span>
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">FINANCIAL SERVICES GUIDE</h4>
+				<h4 class="modal-title">Financial Services Guide</h4>
 			</div>
 
 			<div class="modal-body">
@@ -266,15 +263,13 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 					<input class="styled-checkbox" type="checkbox" id="insuranceTerms" data-dismiss="modal">
 					<label for="insuranceTerms">Yes. I’ve read and understand the insurance terms and conditions</label>
 				</div>   
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeDescription"> 
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none warning" id="disagreeDescription"> 
 					Please agree with the insurance Terms and Conditions to continue with your membership
 				</div> 
 			</div>
 			<div class="modal-footer">
-				<button type="button" class="btn btn-default" id="insurance_terms_button" data-dismiss="modal">Submit</button>
+				<a class="popup-submit" href="" popup-dismiss="insuranceTermsandConditions">Submit</a>
 			</div>
-		</div>
-	</div>
 </div>
 <?php logRecorder();  ?>
 <!--  this part will be merged with Andy's Dashboard less file-->

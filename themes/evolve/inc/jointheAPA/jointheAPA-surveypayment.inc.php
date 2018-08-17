@@ -306,8 +306,15 @@ if(isset($_POST['step2-1'])) {
 				</select>
 				</div>
 				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="" oninput="this.value = Math.abs(this.value)" min="0">
-				<div class="chevron-select-box" style="margin-top: 10px;"><a style="color: black;" id="PRFDescription">What is this?</a></div>
-				
+				<div class="col-xs-12 none-padding tooltip-container top" style="margin-top: 10px;">
+					<input class="tooltip-act" type="checkbox">
+					<div class="tooltip-content">
+						The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot.
+					</br>
+						<a href="/reserach/purpose-prf" target="_blank">Tell me more</a>
+					</div>
+					<span>What is this?</span>
+				</div>				
 			</div>
 		</div>
 	<?php 

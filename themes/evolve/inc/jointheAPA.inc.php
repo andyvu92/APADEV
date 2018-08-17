@@ -334,7 +334,7 @@ Facsimile: (03) 9092 0899</p>
 		<div id="deleteWorkplaceWindow" style="display:none;">
 			<form action="your-details" method="POST" id="deleteWorlplaceForm">
 				<div class="flex-cell">
-					<h3 class="light-lead-heading cairo">Are you sure you want to delete this workplace</h3>
+					<h3 class="light-lead-heading cairo">Are you sure you want to delete this workplace?</h3>
 				</div>
 				<input type="hidden" name="WorkplaceID" value="">
 				<div class="flex-cell buttons-container">

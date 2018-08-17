@@ -292,3 +292,6 @@ jQuery(document).ready(function() {
 $(document).on("click","#id .class", function(){
   console.log("Clicked.");
 });
+
+//CAPITALIZE TEXT
+

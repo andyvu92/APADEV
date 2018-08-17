@@ -1095,6 +1095,7 @@ jQuery(document).ready(function($) {
 		//$("#conditions" ).attr('checked', true);
 		
 	}
+
 	//INSURANCE CHECKBOX IN POPUP
 	$('#insuranceTerms, #insurance_terms_button').click(function() {
 		if($('#insuranceTerms').val()=="0"){
@@ -1116,6 +1117,9 @@ jQuery(document).ready(function($) {
 	$('label[for="conditions"]').click(function(){
 		$('#insuranceTerms').removeAttr('checked');
 		$("#insuranceTerms" ).attr('value', '0');
+		$('#insuranceTermsandConditions .modal-body').animate({
+			scrollTop: $(".note-text").position().top
+		}, 1);
 		if ( $('input#conditions').attr("value", "1") ){
 			$(this).attr('popup-target','insuranceTermsandConditions');
 		}
@@ -1140,6 +1144,9 @@ jQuery(document).ready(function($) {
 	$('label[for="jprivacy-policy"]').click(function(){
 		$('input#privacypolicyp').removeAttr('checked');
 		$("input#privacypolicyp" ).attr('value', '0');
+		$('#privacypolicyWindow .modal-body').animate({
+			scrollTop: $(".note-text").position().top
+		}, 1);
 	});
 
 	//-------------------------------------
@@ -1154,29 +1161,6 @@ jQuery(document).ready(function($) {
        
     });
 	
-	/*  check APA policy*/
-	//if($('#privacypolicyp').val()=="0"){
-	//	$( "#disagreePolicyDescription" ).removeClass('display-none');
-	//	$('a.join-details-button7').addClass('disabled');
-		
-	//}
-	//else{
-	//	$( "#disagreePolicyDescription" ).addClass('display-none');
-	//	$('a.join-details-button7').removeClass('disabled');
-	//}
-	//$('#privacypolicyp').click(function() {
-	//	if($('#privacypolicyp').val()=="0"){
-	//	$( "#disagreePolicyDescription" ).removeClass('display-none');
-	//	$('a.join-details-button7').addClass('disabled');
-	//}
-	//else{
-		
-	//	$( "#disagreePolicyDescription" ).addClass('display-none');
-	//	$('a.join-details-button7').removeClass('disabled');
-	//}
-	//});
-
-	/*  end check APA policy*/
 	/*  check Installment policy*/
 	if(!$("#rolloverblock").hasClass("display-none")){
 		if($('#installmentpolicyp').val()=="0"){
@@ -1188,7 +1172,6 @@ jQuery(document).ready(function($) {
 			$( "#disagreePolicyDescription" ).addClass('display-none');
 			$('a.join-details-button7').removeClass('disabled');
 		}
-		
 		
 	}
 	$('#installmentpolicyp').click(function() {

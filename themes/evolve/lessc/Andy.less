@@ -544,73 +544,126 @@ div[id^="home-tile-view-block"]{
 /*--END DIARY PAGE--*/
 
 
-
 /*--TOOLTIP--*/
     /*--USAGE--
 
-    <p data-tooltip="I’m the tooltip text.">I’m a link with a tooltip.</p>
+    	<div class="col-xs-12 none-padding tooltip-container top" style="margin-top: 10px;">
+			<input class="tooltip-act" type="checkbox">
+			<div class="tooltip-content">
+                Put any content here
+				<a href="#" target="_blank">Link in tooltip</a>
+			</div>
+			<span>What is this?</span> <--- Tooltip placeholders
+		</div>	
 
     */
-[data-tooltip] {
+
+.tooltip-container {
     position: relative;
-    z-index: 2;
-    cursor: pointer;
-  }
-  
-  /* Hide the tooltip content by default */
-  [data-tooltip]:before,
-  [data-tooltip]:after {
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-  }
-  
-  /* Position tooltip above the element */
-  [data-tooltip]:before {
-    position: absolute;
-    bottom: 150%;
-    left: 50%;
-    margin-bottom: 5px;
-    margin-left: -80px;
-    padding: 7px;
-    width: 160px;
-    -webkit-border-radius: 3px;
-    -moz-border-radius: 3px;
-    border-radius: 3px;
-    background-color: #000;
-    background-color: hsla(0, 0%, 20%, 0.9);
-    color: #fff;
-    content: attr(data-tooltip);
-    text-align: center;
-    font-size: 14px;
-    line-height: 1.2;
-  }
-  
-  /* Triangle hack to make tooltip look like a speech bubble */
-  [data-tooltip]:after {
-    position: absolute;
-    bottom: 150%;
-    left: 50%;
-    margin-left: -5px;
-    width: 0;
-    border-top: 5px solid #000;
-    border-top: 5px solid hsla(0, 0%, 20%, 0.9);
-    border-right: 5px solid transparent;
-    border-left: 5px solid transparent;
-    content: " ";
-    font-size: 0;
-    line-height: 0;
-  }
-  
-  /* Show tooltip content on hover */
-  [data-tooltip]:hover:before,
-  [data-tooltip]:hover:after {
-    visibility: visible;
-    opacity: 1;
+    .tooltip-act{
+        width: 100%;
+        opacity: 0;
+        height: 20px;
+        position: absolute;
+        z-index: 10;
+        cursor: pointer;
+        &:checked{
+            & + .tooltip-content{
+                opacity: 1;
+                z-index: 9999;
+            }
+        }
+    }
+    
+    .tooltip-content {
+        box-shadow: 0 5px 25px 5px rgba(205,210,214,.8);
+        background-color: #000;
+        background-color: hsla(0, 0%, 20%, 0.9);
+        box-sizing: border-box;
+        font-size: 12px;
+        line-height: 1.2;
+        letter-spacing: 1px;
+        max-width: 300px;
+        min-width: 145px;
+        padding: 1em;
+        position: absolute;
+        opacity: 0;
+        z-index: 0;
+        color: #fff;
+        z-index: 9999;
+        border-radius: 15px;
+        transition: all .3s linear;
+        a{
+            position: relative;
+            display: block;
+            padding-top: 15px;
+            color: #00b8f1;
+            font-size: 1.2em;
+            :hover{
+                text-decoration: underline;
+            }
+        }
+      &:after {
+        background: none;
+        content: "";
+        height: 10px;
+        position: absolute;
+        transform: rotate(45deg);
+        width: 10px;
+      }
+    }
+    
+    &.top {
+      .tooltip-content {
+        bottom: 2.5em;
+        &:after {
+            bottom: -5px;
+            left: 25%;
+            background-color: rgba(51,51,51,0.9);
+            background: linear-gradient(135deg, rgba(0,0,0,0) 50%, rgba(51,51,51,0.9) 50%);
+            margin-left: -5px;
+        }
+      }
+    }
+    
+    &.bottom {
+      .tooltip-content {
+        bottom: calc(-100% - 1.8em);
+        left: 50%;
+        transform: translateX(-50%);
+        &::after {
+          top: -5px;
+        }
+      }
+    }
+    
+    &.right {
+      .tooltip-content {
+        left: calc(100% + 1.5em);
+        top: 50%;
+        transform: translateY(-50%);
+        &::after {
+          left: -5px;
+          margin-top: -5px;
+          top: 50%;
+        }
+      }
+    }
+    &.left {
+      .tooltip-content {
+        right: calc(100% + 1.5em);
+        top: 50%;
+        transform: translateY(-50%);
+        &::after {
+          right: -5px;
+          margin-top: -5px;
+          top: 50%;
+        }
+      }
+    }
   }
 
 /*--END TOOLTIP--*/
-
 
 /*--MEDIA MOBILE NAV--*/
 .media_filter{
@@ -948,7 +1001,7 @@ input{
 }
 
 .chosen-container-multi .chosen-choices li.search-choice{
-    padding: 3px 5px 3px 5px;
+    padding: 5px;
     .search-choice-close{
         opacity: 0.5;
         width: 15px;

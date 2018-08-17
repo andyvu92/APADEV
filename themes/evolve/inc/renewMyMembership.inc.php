@@ -85,6 +85,7 @@ $background = getBackgroundImage($userID);
 </div>
 <?php logRecorder(); ?>
 <div id="privacypolicyWindow" style="display:none;">
+	<span class="close-popup"></span>
 	<div class="modal-header">
 		<h4 class="modal-title">APA privacy policy</h4>
 	</div>
@@ -311,8 +312,8 @@ Facsimile: (03) 9092 0899</p>
 	</div>
 
 	<div class="modal-footer">
-	<button type="button" class="btn btn-default apa_policy_button">Submit</button>
-	</div>	
+		<a class="popup-submit" href="" popup-dismiss="privacypolicyWindow">Submit</a>
+	</div>
 </div>
 <div id="installmentpolicyWindow" style="display:none;">
 	<h3>APA installment policy</h3>
@@ -335,6 +336,7 @@ Facsimile: (03) 9092 0899</p>
 	</div>
 	<button type="button" class="btn btn-default" id="installment_policy_button">Submit</button>
 </div>
+<div class="overlay"></div>
 <div id="QuatationPopUp" style="display:none;" class="container">
 	<h3 style="color:black;">Renewing your APA membership is easy…</h3>
 	<p>If your membership category hasn’t changed, simply click continue to proceed with the following purchase:</p>
@@ -386,7 +388,7 @@ Facsimile: (03) 9092 0899</p>
 		<div id="deleteWorkplaceWindow" style="display:none;">
 			<form action="your-details" method="POST" id="deleteWorlplaceForm">
 				<div class="flex-cell">
-					<h3 class="light-lead-heading cairo">Are you sure you want to delete this workplace</h3>
+					<h3 class="light-lead-heading cairo">Are you sure you want to delete this workplace?</h3>
 				</div>
 				<input type="hidden" name="WorkplaceID" value="">
 				<div class="flex-cell buttons-container">

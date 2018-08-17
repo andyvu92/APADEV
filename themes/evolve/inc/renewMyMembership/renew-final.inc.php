@@ -294,29 +294,29 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 				}
 				?>
             </div>
-			<div class="flex-container flex-table">
+			<div class="flex-container flex-table total-price">
 				
 				<div class="flex-cell flex-flow-row">
-					<div class="flex-col-6">
+					<div class="flex-col-8">
 					Subtotal (exc. GST)	
 					</div>
-					<div class="flex-col-6">
+					<div class="flex-col-4">
 			        $<?php echo $scheduleDetails['SubTotal'];?>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
-					<div class="flex-col-6">
+					<div class="flex-col-8">
 					GST	
 					</div>
-					<div class="flex-col-6">
+					<div class="flex-col-4">
 			        $<?php echo $scheduleDetails['GST'];?>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
-					<div class="flex-col-6">
+					<div class="flex-col-8">
 					Total(inc.GST)	
 					</div>
-					<div class="flex-col-6">
+					<div class="flex-col-4">
 			        $<span id="totalPayment"><?php echo $scheduleDetails['OrderTotal'];?></span>
 					</div>
 				</div>
