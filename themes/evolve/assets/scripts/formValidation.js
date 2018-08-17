@@ -280,7 +280,7 @@ jQuery(document).ready(function($) {
 			if($(".down22 #Registrationboard").val() !=='1'){$(".down22 label[for=Registrationboard]").addClass("focuscss");}else{$(".down22 label[for=Registrationboard]").removeClass("focuscss");}
 			if($(".down22 #Professional-insurance").val() !=='1'){$(".down22 label[for=Professional-insurance]").addClass("focuscss");}else{$(".down22 label[for=Professional-insurance]").removeClass("focuscss");}
 			if($(".down22 #Professionalbody").val() !=='1'){$(".down22 label[for=Professionalbody]").addClass("focuscss");}else{$(".down22 label[for=Professionalbody]").removeClass("focuscss");}
-			if($(".down22 #Confirm-policy").val() !=='1'){$(".down22 label[for=jprivacy-policy]").addClass("focuscss");}else{$(".down22 label[for=jprivacy-policy]").removeClass("focuscss");}
+			if($(".down22 #jprivacy-policy").val() !=='1'){$(".down22 label[for=jprivacy-policy]").addClass("focuscss");}else{$(".down22 label[for=jprivacy-policy]").removeClass("focuscss");}
 		}
 	};
 

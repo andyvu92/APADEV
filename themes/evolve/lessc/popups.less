@@ -13,6 +13,8 @@
     left: calc(~"50vw - 350px") !important;
     background: #fff;
     height: auto;
+    border: 1px solid #b5b5b5;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     .ui-draggable-handle{
         position: absolute;
         right: 10px;
@@ -1013,9 +1015,8 @@ div[aria-describedby="processWindow"].ui-dialog{
 }
 
 /* PD SHOPPING CART - TERMS & CONDITIONS */
-div[aria-describedby="PDTermsWindow"].ui-dialog{
-    .general-popup;
-    max-height: 70vh;
+#PDTermsWindow{
+    .large-popup;
   }
 
 /* UNKNOW POPUPS */
@@ -1026,9 +1027,34 @@ div[aria-describedby="popUpWindow"].ui-dialog {
 }
 
 div[aria-describedby="myMap"].ui-dialog {
-    z-index: 1051!important;
-    left: 27%!important;
-	width: 634px!important;
+    position: fixed!important;
+    top: 30vh!important;
+    width: 500px!important;
+    height: 500px!important;
+    left: calc(~"50vw - 250px")!important;
+    #myMap{
+        padding: 0;
+        height: calc(~"100% - 33.97px")!important;
+        width: 100%!important;
+        overflow: hidden;
+        iframe{
+            width: 100%;
+            height: calc(~"100% - 28px");
+        }
+    }
+    @media all and (max-width: @tablet-width) {
+        width: 400px!important;
+        height: 400px!important;
+        top: 20vh!important;
+        left: calc(~"50vw - 200px")!important;
+    }
+    @media all and (max-width: @phone-width) {
+        width: 300px!important;
+        height: 300px!important;
+        top: 20vh!important;
+        left: calc(~"50vw - 150px")!important;
+    }
+
 }
 
 div[aria-describedby="deleteConfirmwindow"].ui-dialog {

@@ -481,6 +481,20 @@
             &:checked + label:before {
               background: none;
             }
+            &:checked{
+                width: 100%;
+                z-index: 10;
+                margin: 0;
+                height: 22px;
+                cursor: pointer;
+            }
+            &[popup=""]:checked{
+                width: 100%;
+                z-index: 10;
+                margin: 0;
+                min-height: 22px;
+                cursor: pointer;
+            }
             
             // Disabled state label.
             &:disabled + label {
@@ -578,6 +592,7 @@ body.page-node{
                         .pd-detail-city{
                             word-break: break-all;
                             -ms-word-break: break-all;
+                            text-transform: capitalize;
                         }
                         .pd-header-mobile{
                             display: inline-block;
@@ -1048,8 +1063,16 @@ body.page-node{
                         font-size: 1.2em;
                         margin-top: 10px;
                         cursor: pointer;
+                        &.student-disable{
+                            background: none!important;
+                            border: 1px solid #fff;
+                            cursor: default;
+                            &:hover{
+                                opacity: 1;
+                            }
+                        }
                         &.disable{
-                            cursor: no-drop;
+                            cursor: default;
                             opacity: 0.8;
                         }
                             &.Lecture{
@@ -1434,7 +1457,6 @@ body.page-node{
     color: #fff;
 }
 #accept1{
-    margin-left:32px!important;
 	position: absolute;
 }
 #accept2{

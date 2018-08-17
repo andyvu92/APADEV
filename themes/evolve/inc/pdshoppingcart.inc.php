@@ -251,8 +251,8 @@ if(isset($_SESSION["UserId"])){
 		</div>
 
 		<div class="flex-cell">
-			<input class="styled-checkbox" type="checkbox" id="accept1" <?php if($price!=0) echo " required";?>>
-			<label id="pd_terms_open" for="accept1">I accept the APA events terms and conditions, including the APA cancellation clause</label>
+			<input popup class="styled-checkbox" type="checkbox" id="accept1" <?php if($price!=0) echo " required";?>>
+			<label popup-target="PDTermsWindow" id="pd_terms_open" for="accept1">I accept the APA events terms and conditions, including the APA cancellation clause</label>
 		</div>
 
 		<?php if($tag==1): ?>
@@ -283,7 +283,7 @@ if(isset($_SESSION["UserId"])){
 			?>
 		</div>
 		
-		<span class="note-text">Please note that not all APA PD events include catering.</span>
+		<span class="">Please note that not all APA PD events include catering.</span>
 	</div>
 	<?php endif; ?>	
 	<?php if(sizeof($NGProductsArray)!=0):?>
@@ -547,6 +547,7 @@ if(isset($_SESSION["UserId"])){
 <p><a href="/reserach/purpose-prf" target="_blank">Tell me more</a></p>
 </div>
 <div id="PDTermsWindow" style="display:none;">
+	<span class="close-popup"></span>
 	<div class="modal-header">
 		<h4 class="modal-title">APA events terms and conditions</h4>
 	</div>
@@ -592,11 +593,7 @@ if(isset($_SESSION["UserId"])){
 <h2>Australian Physiotherapy Association Privacy Statement for Professional Development Website and Manual Registration Forms:</h2>
 <p>The APA acknowledges and respects the privacy of its members and customers. The information that you provide on this form
 is &ldquo;personal information&rdquo; as defined by the Privacy Act 1988. The information is being collected by the APA and will be held by the APA. It may be given to service providers engaged by the APA. This information is being collected for the purpose of processing your registration for this event and keeping you informed about other upcoming events. The provision of information is voluntary but if it is not provided the APA may not be able to process your registration. You have the right to access and alter personal information about yourself in accordance with the Australian Privacy Principles and the APA privacy policy which is available for you to read on <a href="http://www.privacy@physiotherapy.asn.au" target="_self">physiotherapy.asn.au</a>. Direct any enquiries you may have in relation to this matter to our Privacy Officer who can be contacted on <strong>03 9092 0888</strong> or by email at <a href="mailto:privacy@physiotherapy.asn.au">privacy@physiotherapy.asn.au</a>.</p>
-<br />
-<p>&nbsp;</p>
-<div><em><span style="font-size: 10px;"><br />
-</span></em></div>
-<p>&nbsp;</p>
+
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
 		
@@ -604,15 +601,16 @@ is &ldquo;personal information&rdquo; as defined by the Privacy Act 1988. The in
 		<label class="apa_policy_button" for="installmentpolicyp">Yes. I’ve read and understand the APA events terms and conditions</label>
 
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeInstallmentDescription"> 
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none warning" id="disagreeInstallmentDescription"> 
          Please agree to the APA events terms and conditions to continue with your purchase
 	</div>
 	</div>
 
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default pd_terms_close" id="installment_policy_button">Submit</button>	
+		<a class="popup-submit" href="" popup-dismiss="PDTermsWindow">Submit</a>
 	</div>
 </div>
+<div class="overlay"></div>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">
  <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
@@ -645,11 +643,11 @@ $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
       .iconselectmenu( "menuWidget" )
         .addClass( "ui-menu-icons customicons" );
 
-	$("#accept1").change(function() {
-		if(changeV() == "1") {
-			$("TandC").val("1");
-		}
-	});
+	//$("#accept1").change(function() {
+	//	if(changeV() == "1") {
+	//		$("TandC").val("1");
+	//	}
+	//});
 	$("#accept2").change(function() {
 		if(changeV() == "1") {
 			$("TandC").val("1");
@@ -661,16 +659,16 @@ $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
 		}
 	});
 	
-	function changeV() {
-		
-		if($("#accept1").is(":checked")) {
-			if($("#accept2").is(":checked")) {
-				if($("#accept3").is(":checked")) {
-					return "1";
-				}
-			}
-		}
-	}
+	//function changeV() {
+	//	
+	//	if($("#accept1").is(":checked")) {
+	//		if($("#accept2").is(":checked")) {
+	//			if($("#accept3").is(":checked")) {
+	//				return "1";
+	//			}
+	//		}
+	//	}
+	//}
 } );
 
 </script>

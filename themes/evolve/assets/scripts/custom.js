@@ -621,9 +621,6 @@ jQuery(document).ready(function($) {
 		$( "#myMap" ).dialog();
 	});
 
-	$('#accept1').click(function(){
-		$( "#PDTermsWindow" ).dialog();
-	});
 	$('#PRFDescription').click(function(){
 		$( "#PRFDesPopUp" ).dialog();
 	});
@@ -1125,6 +1122,15 @@ jQuery(document).ready(function($) {
 		}
 	});
 
+	$('#conditions').change(function() {
+        if($(this).is(":checked")) {
+          $('#conditions').removeAttr('data-target');
+        }
+		else{
+		  $('#conditions').attr('data-target','#insuranceTermsandConditions');
+		}
+       
+    });
 	//PRIVACY POLICY CHECKBOX IN POPUP
 	$('label[for="privacypolicyp"]').click(function() {
 		if($('#privacypolicyp').val()=="0"){
@@ -1151,45 +1157,48 @@ jQuery(document).ready(function($) {
 
 	//-------------------------------------
 
-	 $('#conditions').change(function() {
-        if($(this).is(":checked")) {
-          $('#conditions').removeAttr('data-target');
-        }
-		else{
-		  $('#conditions').attr('data-target','#insuranceTermsandConditions');
-		}
-       
-    });
+	// TERMS & CONDITIONS CHECKBOX IN POPUP
+	$('label[for="installmentpolicyp"]').click(function() {
+		if($('#installmentpolicyp').val()=="0"){
+		$( "#disagreeInstallmentDescription" ).addClass('display-none');
+		$('a.join-details-button5').removeClass('disabled');
+		$("input#accept1" ).attr('checked', true);
+		$("input#accept1" ).attr('value', '1');
+	}
+	else{
+		$( "#disagreeInstallmentDescription" ).removeClass('display-none');
+		$('a.join-details-button5').addClass('disabled');
+		$("input#accept1" ).removeAttr('checked');
+		$("input#accept1" ).attr('value', '0');
+	}
+	});
+
+	$('label[for="accept1"]').click(function(){
+		$('input#installmentpolicyp').removeAttr('checked');
+		$("input#installmentpolicyp" ).attr('value', '0');
+		$('#PDTermsWindow .modal-body').animate({
+			scrollTop: $("#PDTermsWindow .modal-body .note-text").position().top
+		}, 1);
+	});
+
+	//-------------------------------------
 	
 	/*  check Installment policy*/
-	if(!$("#rolloverblock").hasClass("display-none")){
-		if($('#installmentpolicyp').val()=="0"){
-			$( "#disagreeInstallmentDescription" ).removeClass('display-none');
-			$('a.join-details-button7').addClass('disabled');
+	//if(!$("#rolloverblock").hasClass("display-none")){
+	//	if($('#installmentpolicyp').val()=="0"){
+	//		$( "#disagreeInstallmentDescription" ).removeClass('display-none');
+	//		$('a.join-details-button7').addClass('disabled');
 			
-		}
-		else{
-			$( "#disagreePolicyDescription" ).addClass('display-none');
-			$('a.join-details-button7').removeClass('disabled');
-		}
+	//	}
+	//	else{
+	//		$( "#disagreePolicyDescription" ).addClass('display-none');
+	//		$('a.join-details-button7').removeClass('disabled');
+	//	}
 		
-	}
-	$('#installmentpolicyp').click(function() {
-		if($('#installmentpolicyp').val()=="0"){
-		$( "#disagreeInstallmentDescription" ).removeClass('display-none');
-		$('a.join-details-button7').addClass('disabled');
-		}
-		else{
-			
-			$( "#disagreeInstallmentDescription" ).addClass('display-none');
-			$('a.join-details-button7').removeClass('disabled');
-		}
-	});
-	$('#installment_policy_button').click(function() {
-		$('#installmentpolicyWindow').dialog('close');
-	});
-	/*  end check Installment policy*/
-	
+	//}
+
+	//-------------------------------------
+
 	$('#logoutButton').click(function() {
 		document.getElementById("logoutAcButton").click();
 	});

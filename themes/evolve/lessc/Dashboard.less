@@ -323,9 +323,7 @@ label[for="privacypolicyp"]{
     margin-bottom: 22px;
     margin-left: 13px;
 }
-input#privacypolicyp, input#installmentpolicyp{
-    margin-left: 14px;
-}
+
 a.cancelDeleteButton {
     padding: 8px 46px;
     background-color: #009fda;
@@ -2226,11 +2224,11 @@ form{
         &:checked + label:before {
           background: none;
         }
-        &:checked{
+        &[popup=""]:checked{
             width: 100%;
             z-index: 10;
             margin: 0;
-            height: 22px;
+            min-height: 22px;
             cursor: pointer;
         }
 

@@ -879,6 +879,13 @@ div[id^="home-tile-view-block"]{
     &:checked + label:before {
       background: none;
     }
+    &[popup=""]:checked{
+        width: 100%;
+        z-index: 10;
+        margin: 0;
+        min-height: 22px;
+        cursor: pointer;
+    }
     
     /* Disabled state label. */
     &:disabled + label {

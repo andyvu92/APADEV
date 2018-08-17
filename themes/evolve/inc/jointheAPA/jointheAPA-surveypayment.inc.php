@@ -447,7 +447,7 @@ if(isset($_POST['step2-1'])) {
 	<?php endif; ?>  
 		<div class="row">
 			<div class="col-xs-12">
-				<input class="styled-checkbox" type="checkbox" id="jprivacy-policy">
+				<input popup class="styled-checkbox" type="checkbox" id="jprivacy-policy">
 				<label for="jprivacy-policy" id="privacypolicyl" popup-target="privacypolicyWindow"><span class="tipstyle">*&nbsp;</span>I agree to the APA Privacy policy</label>
 			</div>
 

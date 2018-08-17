@@ -1801,7 +1801,7 @@
 				} elseif ($userTag =="0"){ // any logged in users
 					if(isset($pd_detail['Typeofpd']) && $pd_detail['Typeofpd'] == "Course") {
 						if($_SESSION['MemberTypeID'] =='31' || $_SESSION['MemberTypeID'] =='32') {
-							echo '<span class="add-to-cart disable '.$pd_detail['Typeofpd'].'" data-target="#student-limitation">Not for students</span>';
+							echo '<span class="add-to-cart student-disable '.$pd_detail['Typeofpd'].'" data-target="#student-limitation">Not available to students</span>';
 							// student message
 						} else {
 							echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
