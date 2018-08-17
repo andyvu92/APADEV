@@ -144,36 +144,38 @@ jQuery(document).ready(function() {
 jQuery(function ($) {
   var someId = $(".dexp-grid-items .portfolio-image .content");
   someId.css('background', function () {
-      console.log('x')
       return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
   })
 }) 
 
 //REMOVE RED BORDER ON FIELD VALIDATION
 jQuery(document).ready(function() {
-  $('input.form-control').on('keyup',function() {
-    $(this).removeClass('focuscss');
+  $(document).on("keyup","input", function(){
+    $(this).removeClass("focuscss");
   });
 
-  $('input').on('change',function() {
-    $(this).removeClass('focuscss');
+  $(document).on("change","input", function(){
+    $(this).removeClass("focuscss");
   });
 
-  $('input[name="Pobox"]').on('keyup',function() {
-    $(this).removeClass('focuscss');
+  $(document).on('click','input[type="date"]', function(){
+    $(this).removeClass("focuscss");
   });
 
-  $('input[type="date"]').on('click',function() {
-    $(this).removeClass('focuscss');
+  $(document).on("click","select", function(){
+    $(this).removeClass("focuscss");
   });
-  $('select').on('click',function() {
-    $(this).removeClass('focuscss');
+
+  $(document).on("click","label", function(){
+    $(this).removeClass("focuscss");
   });
-  $('label').on('click',function() {
-    $(this).removeClass('focuscss');
+
+  $(document).on("click","#tabmenu li", function(){
+    $(this).removeClass("warning");
   });
 });
 
+//ADD LOCKER ICON ON DISABLED FORM FIELDS
 jQuery(document).ready(function() {
   $('input[readonly]').parent().addClass('locked');
   $('input[disabled]').parent().addClass('locked');
@@ -249,33 +251,44 @@ jQuery(document).ready(function() {
 
 //TRIGGER DELETE WORKPLACE(S) POPUPS
 jQuery(document).ready(function() {
-  $("#tabmenu li [class^=calldeletewp]").on("click",function(){
+  $(document).on("click","#tabmenu li [class^=calldeletewp]", function(){
     var x = $(this).attr("class").replace("calldeletewp", "");
     $("#deleteWorkplaceWindow [value=yes]").attr("class", "");
     $("#deleteWorkplaceWindow [value=yes]").addClass("deletewp"+x);
+    $( ".overlay" ).fadeIn();
     $('#deleteWorkplaceWindow').fadeIn();
   });
 
-  $("#deleteWorkplaceWindow [value=yes]").on("click",function(){
+  $(document).on("click","#deleteWorkplaceWindow [value=yes]", function(){
     $('#deleteWorkplaceWindow').hide();
+    $( ".overlay" ).hide();
   });
 
-  $("#deleteWorkplaceWindow .cancelDeleteButton").on("click",function(){
+  $(document).on("click","#deleteWorkplaceWindow .cancelDeleteButton", function(){
     $('#deleteWorkplaceWindow').fadeOut();
-  });
-  $(".callDeleteEdu").on("click",function(){
-    $('div[aria-describedby=confirmDelete]').fadeIn();
+    $( ".overlay" ).fadeOut();
   });
 });
 
 //TRIGGER DELETE QUALIFICATION(SS) POPUPS
 jQuery(document).ready(function() {
-  $("#confirmDelete .cancelDeleteButton").on("click",function(){
-    $('div[aria-describedby=confirmDelete]').fadeOut();
+  $(document).on("click",".callDeleteEdu", function(){
+    $('.overlay').fadeIn();
+    $('div[aria-describedby=confirmDelete]').fadeIn();
   });
+
+  $(document).on("click","#confirmDelete .cancelDeleteButton", function(){
+    $('div[aria-describedby=confirmDelete]').fadeOut();
+    $('.overlay').fadeOut();
+  });
+
+  $(document).on("click","#confirmDelete a[value='yes']", function(){
+    $('.overlay').hide();
+  });
+
 });
 
-//SET LINK WRAPPERS FOR ABOUT US PAGE FEATURES
-jQuery(document).ready(function() {
-
+//ONCLICK FUNCTION FOR DYNAMIC CONTENTS
+$(document).on("click","#id .class", function(){
+  console.log("Clicked.");
 });

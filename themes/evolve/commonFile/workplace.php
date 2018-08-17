@@ -235,36 +235,6 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 		</select>
 		</div>
 	</div>
-	<script>
-jQuery(document).ready(function() {
-	$("input").on("keyup",function() {
-	  $(this).removeClass("focuscss");
-	});
-
-	$("select").on("click",function() {
-		$(this).removeClass("focuscss");
-	  });
-
-	$("#tabmenu li").click(function(){
-		$(this).removeClass("warning");
-	});
-
-	$("#tabmenu li [class^=calldeletewp]").on("click",function(){
-		var x = $(this).attr("class").replace("calldeletewp", "");
-		$("#deleteWorkplaceWindow [value=yes]").attr("class", "");
-		$("#deleteWorkplaceWindow [value=yes]").addClass("deletewp"+x);
-		$("#deleteWorkplaceWindow").fadeIn();
-	  });
-	
-	  $("#deleteWorkplaceWindow [value=yes]").on("click",function(){
-		$("#deleteWorkplaceWindow").hide();
-	  });
-	
-	  $("#deleteWorkplaceWindow .cancelDeleteButton").on("click",function(){
-		$("#deleteWorkplaceWindow").fadeOut();
-	  });
-});
-</script>
 </div>
 ';
 ?>

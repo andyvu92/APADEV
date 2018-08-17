@@ -370,7 +370,6 @@ jQuery(document).ready(function($) {
 			var x = $(this).attr("id");
 			$("#deleteQButton").addClass(x);
 			$( "#confirmDelete" ).dialog();
-					
 	});
 	var PRF = $("#PRF").val();
 	$( "#POSTPRF").val(PRF);
@@ -581,8 +580,6 @@ jQuery(document).ready(function($) {
 		else{
 			$( "#jobother" ).addClass('display-none');
 		}
-		
-		   
 	});
 	
 	$('#uploadImageButton').click(function(){
@@ -603,17 +600,10 @@ jQuery(document).ready(function($) {
 	$('.deletecardbutton').click(function(){
 		$( "#deleteCardWindow" ).dialog();
 	});
-	
-	$('#insuranceControl').click(function(){
-		$("#insurancePopUp").dialog();
-		
-	});
-    $('.cancelDeleteButton').click(function() {
+
+	$('.cancelDeleteButton').click(function() {
         $('#deleteCardWindow').dialog('close');
     });	
-	$('.cancelInsuranceButton').click(function() {
-        $('#insurancePopUp').dialog('close');
-    });
 	$('#registerPDUserButton').click(function(){
 		$( "#registerPDUser" ).dialog();
     });
@@ -630,9 +620,7 @@ jQuery(document).ready(function($) {
 	$('#viewMap').click(function(){
 		$( "#myMap" ).dialog();
 	});
-	$('#privacypolicyl').click(function(){
-		$( "#privacypolicyWindow" ).dialog();
-	});
+
 	$('#accept1').click(function(){
 		$( "#PDTermsWindow" ).dialog();
 	});
@@ -1107,21 +1095,55 @@ jQuery(document).ready(function($) {
 		//$("#conditions" ).attr('checked', true);
 		
 	}
+	//INSURANCE CHECKBOX IN POPUP
 	$('#insuranceTerms, #insurance_terms_button').click(function() {
 		if($('#insuranceTerms').val()=="0"){
 		$( "#disagreeDescription" ).removeClass('display-none');
 		$('a.join-details-button5').addClass('disabled');
 		$("#conditions" ).removeAttr('checked');
-		$('#conditions').attr('data-target','#insuranceTermsandConditions');
+		$("#conditions" ).attr('value', '0');
+		$('label[for="conditions"]').attr('popup-target','insuranceTermsandConditions');
 	}
 	else{
-		
 		$( "#disagreeDescription" ).addClass('display-none');
 		$('a.join-details-button5').removeClass('disabled');
 		$("#conditions" ).attr('checked', true);
-		$('#conditions').removeAttr('data-target');
+		$("#conditions" ).attr('value', '1');
+		$('label[for="conditions"]').removeAttr('popup-target');
 	}
 	});
+
+	$('label[for="conditions"]').click(function(){
+		$('#insuranceTerms').removeAttr('checked');
+		$("#insuranceTerms" ).attr('value', '0');
+		if ( $('input#conditions').attr("value", "1") ){
+			$(this).attr('popup-target','insuranceTermsandConditions');
+		}
+	});
+
+	//PRIVACY POLICY CHECKBOX IN POPUP
+	$('label[for="privacypolicyp"]').click(function() {
+		if($('#privacypolicyp').val()=="0"){
+		$( "#disagreePolicyDescription" ).addClass('display-none');
+		$('a.join-details-button5').removeClass('disabled');
+		$("input#jprivacy-policy" ).attr('checked', true);
+		$("input#jprivacy-policy" ).attr('value', '1');
+	}
+	else{
+		$( "#disagreePolicyDescription" ).removeClass('display-none');
+		$('a.join-details-button5').addClass('disabled');
+		$("input#jprivacy-policy" ).removeAttr('checked');
+		$("input#jprivacy-policy" ).attr('value', '0');
+	}
+	});
+
+	$('label[for="jprivacy-policy"]').click(function(){
+		$('input#privacypolicyp').removeAttr('checked');
+		$("input#privacypolicyp" ).attr('value', '0');
+	});
+
+	//-------------------------------------
+
 	 $('#conditions').change(function() {
         if($(this).is(":checked")) {
           $('#conditions').removeAttr('data-target');
@@ -1132,43 +1154,28 @@ jQuery(document).ready(function($) {
        
     });
 	
-		
-	
-	
 	/*  check APA policy*/
-	if($('#privacypolicyp').val()=="0"){
-		$( "#disagreePolicyDescription" ).removeClass('display-none');
-		$('a.join-details-button7').addClass('disabled');
+	//if($('#privacypolicyp').val()=="0"){
+	//	$( "#disagreePolicyDescription" ).removeClass('display-none');
+	//	$('a.join-details-button7').addClass('disabled');
 		
-	}
-	else{
-		$( "#disagreePolicyDescription" ).addClass('display-none');
-		$('a.join-details-button7').removeClass('disabled');
-	}
-	$('#privacypolicyp').click(function() {
-		if($('#privacypolicyp').val()=="0"){
-		$( "#disagreePolicyDescription" ).removeClass('display-none');
-		$('a.join-details-button7').addClass('disabled');
-	}
-	else{
+	//}
+	//else{
+	//	$( "#disagreePolicyDescription" ).addClass('display-none');
+	//	$('a.join-details-button7').removeClass('disabled');
+	//}
+	//$('#privacypolicyp').click(function() {
+	//	if($('#privacypolicyp').val()=="0"){
+	//	$( "#disagreePolicyDescription" ).removeClass('display-none');
+	//	$('a.join-details-button7').addClass('disabled');
+	//}
+	//else{
 		
-		$( "#disagreePolicyDescription" ).addClass('display-none');
-		$('a.join-details-button7').removeClass('disabled');
-	}
-	});
-	$('.apa_policy_button').click(function() {
-		$('[aria-describedby=privacypolicyWindow]').fadeOut();
-	});
-	$('#privacypolicyl').click(function() {
-		$('[aria-describedby=privacypolicyWindow]').fadeIn();
-	});
+	//	$( "#disagreePolicyDescription" ).addClass('display-none');
+	//	$('a.join-details-button7').removeClass('disabled');
+	//}
+	//});
 
-	$('.pd_terms_close').click(function() {
-		$('[aria-describedby=PDTermsWindow]').fadeOut();
-	});
-	$('#pd_terms_open').click(function() {
-		$('[aria-describedby=PDTermsWindow]').fadeIn();
-	});
 	/*  end check APA policy*/
 	/*  check Installment policy*/
 	if(!$("#rolloverblock").hasClass("display-none")){

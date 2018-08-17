@@ -2364,7 +2364,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 </div>
                             </div>
                         </div>
-						<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
+						<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
 					</div>
 				<?php endif; ?>
 

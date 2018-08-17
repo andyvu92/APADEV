@@ -299,126 +299,15 @@ form[name="formradio"] label {
 	margin-top: 6px;
 }
 
-div[aria-describedby="addPaymentCardForm"].ui-dialog {
-    z-index: 1050!important;
-    left: 33%!important;
-	top: 47%!important;
-    width: 486px!important;
-    font-family: Roboto;
-}
-div[aria-describedby="addPaymentCardForm"] .ui-widget-header{
-    border:none!important;
-	background-color:white!important;
-}
-div[aria-describedby="addPaymentCardForm"] .ui-dialog-content{
-    overflow:hidden!important;
-    font-family: Roboto;
-}
-div[aria-describedby="uploadImage"].ui-dialog {
-    z-index: 1050 !important;
-    position: fixed!important;
-    left: calc(~"50% - 175px") !important;
-    top: 40% !important;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    border: 0;
-    width: 40% !important;
-    max-width: 350px;
-    font-family: Roboto;
-    .ui-dialog-titlebar {
-        padding: 0;
-        .ui-dialog-titlebar-close{
-            margin: 0;
-        }
-    }
-}
-div[aria-describedby="uploadImage"] .ui-widget-header{
-    border:none!important;
-	background-color:white!important;
-}
-div[aria-describedby="uploadImage"] .ui-dialog-content{
-    overflow:hidden!important;
-    font-family: Roboto;
-}
 
-div[aria-describedby="QuatationPopUp"] .ui-widget-header{
-    border:none!important;
-	background-color:white!important;
-}
-div[aria-describedby="QuatationPopUp"] .ui-dialog-content{
-    overflow:hidden!important;
-    font-family: Roboto;
-}
-div[aria-describedby="insurancePopUp"].ui-dialog {
-    z-index: 1050!important;
-    left: 33%!important;
-	top: 47%!important;
-    width: 486px!important;
-    font-family: Roboto;
-    position: fixed;
-}
-div[aria-describedby="insurancePopUp"] .ui-widget-header{
-    border:none!important;
-	background-color:white!important;
-}
-div[aria-describedby="insurancePopUp"] .ui-dialog-content{
-    overflow:hidden!important;
-    font-family: Roboto;
-}
-div[aria-describedby="updateCardForm"].ui-dialog {
-    z-index: 1050!important;
-    left: 33%!important;
-	top: 47%!important;
-    width: 486px!important;
-    font-family: Roboto;
-}
-div[aria-describedby="updateCardForm"] .ui-widget-header{
-    border:none!important;
-	background-color:white!important;
-}
-div[aria-describedby="updateCardForm"] .ui-dialog-content{
-    overflow:hidden!important;
-}
-div[aria-describedby="rollOverWindow"].ui-dialog,  div[aria-describedby="setCardWindow"].ui-dialog{
-    z-index: 1050!important;
-    left: 33%!important;
-	top: 47%!important;
-	width: 486px!important;
-}
-div[aria-describedby="rollOverWindow"] .ui-widget-header, div[aria-describedby="setCardWindow"] .ui-widget-header{
-    border:none!important;
-	background-color:white!important;
-}
-div[aria-describedby="rollOverWindow"] .ui-dialog-content, div[aria-describedby="setCardWindow"] .ui-dialog-content{
-    overflow:hidden!important;
-}
-div[aria-describedby="deleteCardWindow"].ui-dialog {
-    z-index: 1050!important;
-    left: 33%!important;
-	top: 47%!important;
-	width: 429px!important;
-	height: 175px!important;
-}
-div[aria-describedby="deleteCardWindow"] .ui-widget-header{
-    border:none!important;
-	background-color:white!important;
-}
-div[aria-describedby="deleteCardWindow"] .ui-dialog-content{
-    overflow:hidden!important;
-}
-div[aria-describedby="privacypolicyWindow"].ui-dialog, 
-div[aria-describedby="installmentpolicyWindow"].ui-dialog {
-    z-index: 1056 !important;
-    .popup-general;
-}
-div[aria-describedby="privacypolicyWindow"] .ui-widget-header{
-    border:none!important;
-	background:white!important;
-}
 
-div[aria-describedby="installmentpolicyWindow"] .ui-widget-header{
-    border:none!important;
-    background:white!important;
-}
+
+
+
+
+
+
+
 
 label[for="privacypolicyp"]{
     margin-left:-3px;
@@ -617,7 +506,6 @@ a.uploadImageButton {
     color: white;
     padding: 8px;
     line-height: 32px;
-   
 }
 
 .Membpaymentsiderbar {
@@ -2338,7 +2226,14 @@ form{
         &:checked + label:before {
           background: none;
         }
-        
+        &:checked{
+            width: 100%;
+            z-index: 10;
+            margin: 0;
+            height: 22px;
+            cursor: pointer;
+        }
+
         /* Disabled state label. */
         &:disabled + label {
           color: #b8b8b8;
@@ -2532,36 +2427,7 @@ form{
         font-weight: 600;   
      }
  }
- div[aria-describedby="QuatationPopUp"].ui-dialog{
-    position: fixed;
-    top: 40%!important;
-    width: 60%!important;
-    left: 20%!important;
-    text-align: center;
-    background: #fff;
-    z-index: 9999;
-     @media all and (max-width: @larger-phone-width) {
-        max-height: 500px;
-        overflow-y: scroll!important;
-        top: 15% !important;
-        width: 70%!important;
-        left: 15%!important;
-     }
-     @media all and (max-width: 340px) {
-        max-height: 400px;
-     }
-     @media all and (max-width: @desktop-width) {
-        top: 30%!important;
-     }
- }
- div[aria-describedby="QuatationPopUp"] .ui-widget-header{
-    position: absolute;
-    right: 5px;
-    z-index: 99999;
- }
- div[aria-describedby="QuatationPopUp"] .ui-dialog-content {
-    text-align: center;
-}
+
 
 .form-control{
     padding-left: 10px;
@@ -2701,19 +2567,21 @@ form{
         padding: 0 15px;
     }
 }
-#renew-insurance-form2, #join-insurance-form2{
-    .down5{
-        .row{
-            margin-bottom: 15px;
-        }
-        div[class^="col-"]{
-            margin-top: 9px;
-        }
-        .col-xs-6{
-            max-width: 100px;
+
+#dashboard-right-content{
+    #renew-insurance-form2, #join-insurance-form2{
+        .down5{
+            .row{
+                margin-bottom: 15px;
+            }
+            .col-xs-6{
+                max-width: 100px;
+                margin-top: 9px;
+            }
         }
     }
 }
+
 
 /*--JOIN THE APA--*/
 .form-control[disabled]{
@@ -2792,33 +2660,16 @@ form{
             margin-right: 5px;
         }
     }
-    #insuranceTermsandConditions{
-        .modal-dialog{
-            margin-top: 0!important;
-        }
-        .modal-content{
-            .modal-body{
-                max-width: 650px;
-                max-height: 550px;
-                @media all and (max-width: @larger-phone-width) {
-                    max-height: 400px;
-                }
-                @media all and (max-width: 335px) {
-                    max-height: 300px;
-                }
-            }
-            .modal-footer{
-                margin-top: 0;
-            }
-        }
-    }
+
     .chosen-container-multi .chosen-choices li.search-choice{
-        padding: 3px 5px 3px 5px;
-        span{
-            padding-right: 15px;
-        }
+        padding: 5px;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
         .search-choice-close{
             opacity: 0.5;
+            margin-left: 5px;
             width: 15px;
             height: 15px;
             display: inline-block;

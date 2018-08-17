@@ -1,0 +1,1048 @@
+/*--------------------------------------------------------------
+-----------ALL POPUPS TO BE PLACED IN THIS FILE-----------------
+--------------------------------------------------------------*/
+@import "predefined-styles.less";
+
+/*------------------- GENERAL POPUP STYLES -------------------*/
+.large-popup{
+    z-index: 1050;
+    width: 700px !important;
+    overflow: hidden !important;
+    position: fixed !important;
+    top: 15vh !important;
+    left: calc(~"50vw - 350px") !important;
+    background: #fff;
+    height: auto;
+    .ui-draggable-handle{
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background: none;
+        border: 0;
+        z-index: 10;
+    }
+    .ui-dialog-content{
+        overflow: hidden!important;
+        padding: 0!important;
+        .modal-body{
+           height: 55vh;
+           padding: 10px 0;
+           overflow-y: auto;
+        }
+        .modal-footer{
+           margin: 0;
+        }
+        @media all and (max-width: @larger-phone-width){
+           .modal-body{
+            height: 53vh;
+            }
+        }
+    }
+    .modal-body{
+        height: 55vh;
+        padding: 15px 15px;
+        overflow-y: auto;
+        .warning{
+            color: #ffa02e;
+            background: none;
+        }
+     }
+    .modal-footer{
+        margin: 0;
+    }
+    .close-popup{
+        background-image: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        width: 25px;
+        height: 25px;
+        border: 1px solid #b5b5b5;
+        cursor: pointer;
+        &:before{
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 2px;
+            transform: rotate(45deg);
+            background: @grey;
+        }
+        &:after{
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 2px;
+            transform: rotate(-45deg);
+            background: @grey;
+        }
+    }
+    .popup-submit{
+        padding: 5px 30px;
+        border: 1px solid #adadad;
+        border-radius: 5px;
+        color: #333;
+        font-weight: 600;
+        font-family: Cairo;
+        font-size: 15px;
+        &:hover{
+            background-color: #ebebeb;
+        }
+    }
+     @media all and (max-width: @larger-phone-width){
+        .modal-body{
+         height: 53vh;
+         }
+     }
+    @media all and (max-width: @tablet-width) {
+        width: 500px!important;
+        left: calc(~"50vw - 250px") !important;
+    }
+    @media all and (max-width: @larger-phone-width) {
+        width: 300px!important;
+        left: calc(~"50vw - 150px") !important;
+        top: 10vh !important;
+    }
+}
+
+.small-popup{
+    z-index: 1051;
+    left: calc(~"50vw - 250px") !important;
+    width: 500px !important;
+    top: 30vh!important;
+    position: fixed!important;
+    background: #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    .ui-dialog-titlebar-close{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+        .ui-button-icon-primary{
+            background-image: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:before{
+                content: "";
+                position: absolute;
+                width: 15px;
+                height: 2px;
+                transform: rotate(45deg);
+                background: @grey;
+            }
+            &:after{
+                content: "";
+                position: absolute;
+                width: 15px;
+                height: 2px;
+                transform: rotate(-45deg);
+                background: @grey;
+            }
+        }
+    }
+    @media all and (max-width: @larger-phone-width) {
+        left: calc(~"50vw - 150px") !important;
+        width: 300px !important; 
+        top: 20vh!important;
+    }
+    @media all and (max-width: 345px){
+        top: 15vh!important;
+    }
+}
+
+/* -------------- END GENERAL POPUP STYLES --------------*/
+
+/*----------------------- POPUP OVERLAY -------------
+include the following div to the template where overlay is needed
+<div class="overlay"></div>
+-----------------------------------------------------------------*/
+.overlay{
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+}
+
+.ui-resizable-handle{
+    display: none!important;
+}
+/*--------------- POPUPS ORIGIN ------------------*/
+div[id="jobnoticement"], div[id="processWindow"], 
+div[id="registerPDUser"], div[id="popUpWindow"], 
+div[id="deleteConfirmwindow"], div[id="registerMember"], 
+div[id="loginPopWindow"],div[id="myMap"], div[id="signupWebUser"],
+#insuranceTermsandConditions{
+    display:none;
+}
+
+div[aria-describedby="jobnoticement"] .ui-widget-header, 
+div[aria-describedby="registerPDUser"] .ui-widget-header, 
+div[aria-describedby="processWindow"] .ui-widget-header, 
+div[aria-describedby="popUpWindow"] .ui-widget-header, 
+div[aria-describedby="deleteConfirmwindow"] .ui-widget-header, 
+div[aria-describedby="registerMember"] .ui-widget-header, 
+div[aria-describedby="loginPopWindow"] .ui-widget-header, 
+div[aria-describedby="myMap"] .ui-widget-header{
+    border:none!important;
+	background-color:white!important;	
+}
+/*--------------- END HIDE POPUPS ORIGIN ------------------*/
+
+/* JOIN/RENEW INSURANCE */
+#insuranceTermsandConditions{
+    .large-popup;
+    .modal-dialog{
+        margin-top: 0!important;
+    }
+    .modal-content{
+        .modal-body{
+            max-width: 650px;
+            max-height: 550px;
+            @media all and (max-width: @larger-phone-width) {
+                max-height: 400px;
+            }
+            @media all and (max-width: 335px) {
+                max-height: 300px;
+            }
+        }
+        .modal-footer{
+            margin-top: 0;
+        }
+    }
+}
+
+/* JOIN/RENEW FORMS - ADD PAYMENT CART */
+div[aria-describedby="addPaymentCardForm"].ui-dialog {
+    z-index: 1050!important;
+    left: 33%!important;
+	top: 47%!important;
+    width: 486px!important;
+    font-family: Roboto;
+    .ui-widget-header{
+        border:none!important;
+        background-color:white!important;
+    }
+    .ui-dialog-content{
+        overflow:hidden!important;
+        font-family: Roboto;
+    }
+}
+
+/* MEMBERSHIP DASHBOARD - USER AVATAR - UPLOAD IMAGE */
+div[aria-describedby="uploadImage"].ui-dialog {
+    z-index: 1050 !important;
+    position: fixed!important;
+    left: calc(~"50% - 175px") !important;
+    top: 40% !important;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    border: 0;
+    width: 40% !important;
+    max-width: 350px;
+    min-width: 350px;
+    font-family: Roboto;
+    .ui-resizable-handle.ui-icon-gripsmall-diagonal-se{
+        display: none!important;
+    }
+    .ui-dialog-titlebar {
+        padding: 0;
+        background: #fff!important;
+        .ui-dialog-titlebar-close{
+            margin: 0;
+            float: right;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            font-size: 0px!important;
+            position: relative;
+            width: 30px;
+            height: 30px;
+            border: 0;
+            border-radius: 0;
+            background: rgba(255, 0, 0, 0.5);
+            transition: 0.2s linear;
+            &:hover{
+                background: rgba(255, 0, 0, 1);
+            }
+            span.ui-icon-closethick{
+                display: none;
+            }
+            &:after{
+                content: '';
+                position: absolute;
+                width: 20px;
+                transform: rotate(135deg);
+                height: 2px;
+                background: #fff;
+            }
+            &:before{
+                content: '';
+                width: 20px;
+                transform: rotate(45deg);
+                height: 2px;
+                position: absolute;
+                background: #fff;
+            }
+        }
+    }
+    .ui-widget-header{
+        border:none!important;
+        background-color:white!important;
+    }
+    .ui-dialog-content{
+        overflow:hidden!important;
+        font-family: Roboto;
+    }
+}
+
+/*--IMAGE UPLOAD BOX--*/
+#uploadImage{
+    border: 0;
+}
+#upload-btn{
+    width: 100%!important;
+    background: #009fda;
+    color: #fff;
+    font-family: Cairo;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 15px;
+    border-radius: 0;
+    &:hover{
+        opacity: 0.9;
+    }
+}
+.avatar-upload {
+    position: relative;
+    max-width: 205px;
+    margin: 50px auto;
+    .avatar-edit {
+        position: absolute;
+        right: 12px;
+        z-index: 1;
+        top: 10px;
+        input {
+            display: none;
+            + label {
+                display: inline-block;
+                width: 34px;
+                height: 34px;
+                margin-bottom: 0;
+                border-radius: 100%;
+                background: #FFFFFF;
+                border: 1px solid transparent;
+                box-shadow: 0px 2px 4px 0px rgb(166, 168, 171);
+                cursor: pointer;
+                font-weight: normal;
+                transition: all .2s ease-in-out;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &:hover {
+                    background: #f1f1f1;
+                    border-color: #d6d6d6;
+                }
+                &:after {
+                    content: "\f040";
+                    font-family: 'FontAwesome';
+                    color: #757575;
+                    position: absolute;
+                    text-align: center;
+                    margin: auto;
+                }
+            }
+        }
+    }
+    .avatar-preview {
+        width: 192px;
+        height: 192px;
+        position: relative;
+        margin: 0 auto;
+        border-radius: 100%;
+        border: 6px solid #F8F8F8;
+        box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
+        > div {
+            width: 100%;
+            height: 100%;
+            border-radius: 100%;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+}
+
+/* QUOTATION POPUP */
+div[aria-describedby="QuatationPopUp"].ui-dialog {
+    .ui-widget-header{
+        border:none!important;
+        background-color:white!important;
+        position: absolute;
+        right: 5px;
+        z-index: 99999;
+    }
+    .ui-dialog-content{
+        overflow:hidden!important;
+        font-family: Roboto;
+        text-align: center;
+    }
+}
+div[aria-describedby="QuatationPopUp"].ui-dialog{
+    position: fixed;
+    top: 40%!important;
+    width: 60%!important;
+    left: 20%!important;
+    text-align: center;
+    background: #fff;
+    z-index: 9999;
+     @media all and (max-width: @larger-phone-width) {
+        max-height: 500px;
+        overflow-y: scroll!important;
+        top: 15% !important;
+        width: 70%!important;
+        left: 15%!important;
+     }
+     @media all and (max-width: 340px) {
+        max-height: 400px;
+     }
+     @media all and (max-width: @desktop-width) {
+        top: 30%!important;
+     }
+}
+
+/* JOIN/RENEW FORMS - INSURANCE */
+#insurancePopUp {
+    padding: 30px;
+    .small-popup;
+    .ui-widget-header{
+        border:none!important;
+        background-color:white!important;
+    }
+    .ui-dialog-content{
+        overflow:hidden!important;
+        font-family: Roboto;
+    }
+    a{
+        margin-bottom: 0;
+    }
+}
+
+/* JOIN/RENEW FORMS - PRIVACY POLICY */
+#privacypolicyWindow {
+    z-index: 1056 !important;
+    .large-popup;
+}
+
+/* JOIN/RENEW FORMS - INSTALMENT */
+div[aria-describedby="installmentpolicyWindow"].ui-dialog {
+    z-index: 1056 !important;
+    .large-popup;
+    .ui-widget-header{
+        border:none!important;
+        background:white!important;
+    }
+}
+
+/* JOIN/RENEW - UPDATE CARD */
+div[aria-describedby="updateCardForm"].ui-dialog {
+    z-index: 1050!important;
+    left: 33%!important;
+	top: 47%!important;
+    width: 486px!important;
+    font-family: Roboto;
+    .ui-widget-header{
+        border:none!important;
+        background-color:white!important;
+    }
+    .ui-dialog-content{
+        overflow:hidden!important;
+    }
+}
+
+/* SET PAYMENT CARD */
+div[aria-describedby="setCardWindow"].ui-dialog{
+    z-index: 1050!important;
+    left: 33%!important;
+	top: 47%!important;
+    width: 486px!important;
+    .ui-widget-header{
+        border:none!important;
+        background-color:white!important;
+    }
+    .ui-dialog-content{
+        overflow:hidden!important;
+    }
+} 
+
+/* DELETE PAYMENT CARD */
+div[aria-describedby="deleteCardWindow"].ui-dialog {
+    z-index: 1050!important;
+    left: 33%!important;
+	top: 47%!important;
+	width: 429px!important;
+    height: 175px!important;
+    .ui-widget-header{
+        border:none!important;
+        background-color:white!important;
+    }
+    .ui-dialog-content{
+        overflow:hidden!important;
+    }
+}
+
+/* ROLL OVER WINDOW*/
+div[aria-describedby="rollOverWindow"].ui-dialog {
+    z-index: 1050!important;
+    left: 33%!important;
+	top: 47%!important;
+    width: 486px!important;
+    .ui-widget-header{
+        border:none!important;
+        background-color:white!important;
+    }
+    .ui-dialog-content{
+        overflow:hidden!important;
+    }
+}
+
+/* DELETE EDUCATION(S) */
+div[aria-describedby="confirmDelete"].ui-dialog{
+    .small-popup;
+    padding: 40px 80px;
+    .ui-draggable-handle{
+        display: none!important;
+    }
+    .light-lead-heading{
+        color: #000;
+        margin-top: 0;
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+    .buttons-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;   
+        margin-top: 30px;
+        [value="yes"], [value="no"]{
+            float: none;
+            display: inline-block;
+            margin-bottom: 0px;
+            margin-top: 2px;
+            background-color: #009fda;
+            color: #fff;
+            padding: 8px 20px;
+            text-align: center;
+            font-family: Cairo;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 45%;
+            margin: 0;
+            &:hover{
+                opacity: 0.8;
+            }
+        }
+        [value="no"]{
+            color: #848589!important;
+            background: none;
+            border: 1px solid #d6d6d6;
+        }
+    }
+    @media all and (max-width: @larger-phone-width){
+        padding: 40px 20px;
+    }
+    @media all and (max-width: @phone-width) {
+        .light-lead-heading{
+            font-size: 2em;
+        }
+    }
+}
+
+/* JOB NOTICEMENT ON PD DETAIL */
+[aria-describedby="jobnoticement"].ui-dialog{
+    .small-popup;
+    #jobnoticement{
+        padding: 0px 60px 40px 60px;
+        .light-lead-heading{
+            color: #000;
+            margin-top: 0;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+        .bold{
+            font-family: Roboto;
+            font-weight: 400;
+            font-size: 1em;
+            margin: 10px 0;
+        }
+        .pd-research{
+            .accent-button-general;
+        }
+    }
+    @media all and (max-width: @larger-phone-width){
+        #jobnoticement{
+            padding: 40px 20px;
+        }
+    }
+    @media all and (max-width: @phone-width) {
+        #jobnoticement{
+            .light-lead-heading{
+                font-size: 2em;
+            }
+        }
+    }
+}
+
+/* STUDENT LIMITATION ON PD DETAIL */
+[aria-describedby="student-limitation"].ui-dialog{
+    .small-popup;
+    #student-limitation{
+        padding: 0px 80px 40px 80px;
+        .light-lead-heading{
+            color: #000;
+            margin-top: 0;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+        .bold{
+            font-family: Roboto;
+            font-weight: 400;
+            font-size: 1em;
+            margin: 30px 0;
+        }
+        .pd-research{
+            .accent-button-general;
+        }
+    }
+    @media all and (max-width: @larger-phone-width){
+        #student-limitation{
+            padding: 40px 20px;
+        }
+    }
+    @media all and (max-width: @phone-width) {
+        #student-limitation{
+            .light-lead-heading{
+                font-size: 2em;
+            }
+        }
+    }
+}
+
+/*DELETE WORKPALCE*/
+#deleteWorkplaceWindow{
+    .small-popup;
+    padding: 40px 80px;
+    .light-lead-heading{
+        color: #000;
+        margin-top: 0;
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+    .buttons-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-around;   
+        margin-top: 30px;
+        [value="yes"], [value="no"]{
+            float: none;
+            display: inline-block;
+            margin-bottom: 0px;
+            margin-top: 2px;
+            background-color: #009fda;
+            color: #fff;
+            padding: 8px 20px;
+            text-align: center;
+            font-family: Cairo;
+            font-weight: 700;
+            font-size: 15px;
+            letter-spacing: 0.5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 45%;
+            margin: 0;
+            &:hover{
+                opacity: 0.8;
+            }
+        }
+        [value="no"]{
+            color: #848589!important;
+            background: none;
+            border: 1px solid #d6d6d6;
+        }
+    }
+    @media all and (max-width: @larger-phone-width){
+        padding: 40px 20px;
+    }
+    @media all and (max-width: @phone-width) {
+        .light-lead-heading{
+            font-size: 2em;
+        }
+    }
+}
+
+/* PD USER REGISTER */
+div[aria-describedby="registerPDUser"].ui-dialog {
+    z-index: 1050!important;
+    left: calc(~"50vw - 300px")!important;
+	width: 600px!important;
+    top: 35vh!important;
+    position: fixed!important;
+    @media all and (max-width: @larger-phone-width) {
+        left: calc(~"50vw - 150px")!important;
+        width: 300px!important;
+    }
+}
+
+div[aria-describedby="registerMember"].ui-dialog{
+    z-index: 1055 !important;
+    position: fixed!important;
+    top: 10vh!important;
+    max-height: 80vh;
+    left: calc(~"50vw - 350px") !important;
+    width: 700px !important;
+    overflow: hidden;
+    .ui-dialog-titlebar-close{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: none;
+        .ui-button-icon-primary{
+            background-image: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:before{
+                content: "";
+                position: absolute;
+                width: 15px;
+                height: 2px;
+                transform: rotate(45deg);
+                background: @grey;
+            }
+            &:after{
+                content: "";
+                position: absolute;
+                width: 15px;
+                height: 2px;
+                transform: rotate(-45deg);
+                background: @grey;
+            }
+        }
+    }
+
+/* PD DETAIL - MEMBER REGISTER */
+#registerMember{
+        overflow-y: auto;
+        max-height: 76vh!important;
+        overflow-x: hidden;
+        form{
+            select{
+                min-height: 48px;
+                border: 1px solid #eceef0;
+                width: 100%;
+            }
+            input{
+                background: none;
+                width: 100%!important;
+            }
+            label{
+                margin-bottom: 6px;
+            }
+            .locked{
+                &:before{
+                    bottom: 20px;
+                }
+            }
+            .down22{
+                .question-boxes{
+                    label{
+                        padding-left: 1px;
+                    }
+                }
+            }
+            ul.chosen-choices{
+                background: none;
+            }
+            .plus-select-box::after{
+                top: 37%;
+            }
+            .chevron-select-box::after{
+                top: 18px;
+            }
+            div[class^="col-xs-"]{
+                padding-left: 15px!important;
+                padding-right: 15px!important;
+            }
+            .none-padding{
+                margin-left: -15px;
+                margin-right: -15px;
+            }
+        }
+    }
+    @media all and (max-width: @tablet-width) {
+        left: calc(~"50vw - 250px")!important;
+        width: 500px !important;
+    }
+    @media all and (max-width: @larger-phone-width) {
+        left: calc(~"50vw - 150px")!important;
+        width: 300px !important;
+    }
+}
+
+/* PD DETAIL - JOB NOTICEMENT */
+div[aria-describedby="jobnoticement"].ui-dialog {
+    z-index: 1057!important;
+    .small-popup;
+    .registerDes{
+        margin-left:0px!important;
+    }
+}
+
+/* WEB USER SIGNUP */
+div[aria-describedby="signupWebUser"]{
+    position: fixed !important;
+    top: 10vh !important;
+    left: 25vw !important;
+    width: 50vw !important;
+    max-height: 80vh;
+    overflow: hidden;
+    .ui-dialog-titlebar{
+        background: none;
+        border: none;
+    }
+    #signupWebUser{
+        overflow: auto;
+        overflow-x: hidden;
+        max-height: 73vh!important;
+        input{
+            background: #fff;
+            min-height: 48px;
+        }
+        select{
+            min-height: 48px;
+        }
+    }
+    .locked:before{
+           bottom: 20px; 
+    }
+    @media all and (max-width: @desktop-width){
+        .locked:before{
+            bottom: 12px; 
+        }
+    }
+    @media all and (max-width: @tablet-width + 1px) {
+        left: 15vw !important;
+        width: 70vw !important;
+    }
+    @media all and (max-width: @phone-width) {
+        left: 10vw !important;
+        width: 80vw !important;
+    }
+}
+
+/* LOGIN POPUP */
+div[aria-describedby="loginPopWindow"].ui-dialog, #loginAT .modal-dialog {
+    .small-popup;
+    width: 400px !important;
+    left: calc(~"50vw - 200px")!important;
+    .modal-body{
+        overflow-x: hidden;
+    }
+    #loginPopWindow, .form-container{
+        margin: 0 auto;
+        padding-bottom: 40px;
+        max-width: 90%;
+        input.form-control{
+            background: none;
+            min-height: 41px;
+            margin: 5px 0;
+            text-indent: 28px;
+        }
+        .light-lead-heading{
+            color: #000;
+            margin-top: 0;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+        .email-field{
+            width: 100%;
+            position: relative;
+            &:before{
+                content: "";
+                position: absolute;
+                left: 12px;
+                top: calc(~'50% - 7.5px');
+                width: 15px;
+                height: 15px;
+                background-position: center;
+                background-image: url(/sites/default/files/dashboard-icon/account-G.png);
+                background-size: contain;
+                background-repeat: no-repeat;
+            }
+        }
+        .password-field{
+            width: 100%;
+            position: relative;
+            &:before{
+                content: "";
+                position: absolute;
+                left: 12px;
+                top: calc(~'50% - 7.5px');
+                width: 15px;
+                height: 15px;
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-image: url(/sites/default/files/general-icon/password-icon-lg.png);
+            }
+        }
+        .login-btn, .submit-btn{
+            margin: 15px 0;
+            input{
+                width: 100%!important;
+                background: @bright-blue;
+                color: #fff;
+                &:hover{
+                    opacity: 0.8;
+                }
+            }
+        }
+        .remember-opt{
+            font-size: 0.8em;
+            label{
+                display: flex;
+                align-items: center;
+                margin: 0;
+            }
+        }
+        .forgot-password{
+            font-size: 0.8em;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            .tab{
+                display: inline-block;
+                span{
+                    text-decoration: underline;
+                    cursor: pointer;
+                    &:hover{
+                        color: @bright-blue;
+                    }
+                }
+            }  
+        }
+        .create-account{
+            display: flex;
+            justify-content: center;
+            font-size: 1.4em;
+            margin-top: 20px;
+            text-align: center;
+            a{
+                text-decoration: underline;
+            }
+        }
+        #forgot-pw-form{
+            .light-lead-heading{
+                font-size: 2.2em;
+                &+span{
+                    margin-bottom: 10px;
+                    font-family: Roboto;
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+    @media all and (max-width: @phone-width) {
+        #loginPopWindow{
+            .flex-cell{
+                flex-direction: column;
+                [class^="flex-col"]{
+                    width: 100%;
+                }
+            }
+            .forgot-password{
+                justify-content: flex-start;
+                margin-top: 15px;
+            }
+            .create-account{
+                font-size: 1.2em;
+            }
+            .light-lead-heading{
+                font-size: 2em;
+            }
+        }
+    }
+}
+
+/* PD PROCESS */
+div[aria-describedby="processWindow"].ui-dialog{
+    position: fixed!important;
+    left: calc(~"50% - 175px")!important;
+    width: 350px;
+    #processWindow{
+        display: flex!important;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        button{
+            margin: 10px 0;
+            min-width: 181px;
+        }
+    }
+    @media all and (max-width: @phone-width)  {
+        width: 300px!important;
+        left: calc(~"50% - 150px")!important;
+    }
+}
+
+/* PD SHOPPING CART - TERMS & CONDITIONS */
+div[aria-describedby="PDTermsWindow"].ui-dialog{
+    .general-popup;
+    max-height: 70vh;
+  }
+
+/* UNKNOW POPUPS */
+div[aria-describedby="popUpWindow"].ui-dialog {
+    z-index: 1053!important;
+    left: 36%!important;
+	width: 309px!important;
+}
+
+div[aria-describedby="myMap"].ui-dialog {
+    z-index: 1051!important;
+    left: 27%!important;
+	width: 634px!important;
+}
+
+div[aria-describedby="deleteConfirmwindow"].ui-dialog {
+    z-index: 1051!important;
+    left: 27%!important;
+	width: 350px!important;
+}
+
+div[aria-describedby="processWindow"].ui-dialog {
+    z-index: 1052!important;
+    left: 30%!important;
+    width: 350px!important;
+    width:351px!important;
+	left:578px!important;
+}

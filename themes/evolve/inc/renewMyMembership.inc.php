@@ -305,7 +305,7 @@ Facsimile: (03) 9092 0899</p>
 		<input class="styled-checkbox" type="checkbox" id="privacypolicyp" checked name="privacy-policy">
 		<label class="apa_policy_button" for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label>
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreePolicyDescription"> 
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none warning" id="disagreePolicyDescription"> 
         Please agree to the APA Privacy Policy to continue with your membership
 	</div> 
 	</div>
@@ -330,7 +330,7 @@ Facsimile: (03) 9092 0899</p>
 		<input class="styled-checkbox" type="checkbox" id="installmentpolicyp" checked name="instalmentpolicy">
 		<label for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label>
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeInstallmentDescription"> 
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none warning" id="disagreeInstallmentDescription"> 
          Please agree to the APA Installment Policy to continue with your membership
 	</div>
 	<button type="button" class="btn btn-default" id="installment_policy_button">Submit</button>
