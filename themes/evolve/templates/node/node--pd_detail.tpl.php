@@ -1432,7 +1432,7 @@
 					<script>
 						function confirmEmailFunction(Email) {
 							if($('#Memberid').val()!= Email){
-								$('#confirmMessage').html("Your confirm email address does not match");
+								$('#confirmMessage').html("These passwords do not match");
 								$( "#CMemberid" ).focus();
 								$("#CMemberid").css("border", "1px solid red");
 								$(".join-details-button2").addClass("display-none");

@@ -1426,10 +1426,10 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
     
 ?>
                <div class="col-xs-12">
-                    <label>What language do you speak?</label>
+                    <label>Choose the languages you speak</label>
                     
                     <div class="plus-select-box">
-                    <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="What language do you speak...">
+                    <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
                        
                        <?php
     $Languagecode         = file_get_contents("sites/all/themes/evolve/json/Language.json");
@@ -1575,7 +1575,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                         echo $key;
                                 ?>" <?php
                                         if (empty($details['Workplaces'][$key]['Name-of-workplace'])) {
-                                            echo "placeholder='Name of workplace'";
+                                            echo "placeholder='Practice name'";
                                         } else {
                                             echo 'value="' . $details['Workplaces'][$key]['Name-of-workplace'] . '"';
                                         }
@@ -1797,7 +1797,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 ?>  maxlength="5">
                             </div>
                             <div class="col-xs-6 col-md-3">
-                                <label for="">Phone number<span class="tipstyle">*</span></label>
+                                <label for="">Phone number<span class="tipstyle"> *</span></label>
                                 <input type="text" class="form-control" name="Wphone<?php
         echo $key;
 ?>" <?php
@@ -2021,7 +2021,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 
                         <div class="row">
                         <div class="col-xs-12 col-md-6">
-                            <label>Workplace setting<span class="tipstyle">*</span></label>
+                            <label>Workplace setting<span class="tipstyle"> *</span></label>
                             <div class="chevron-select-box">
                             <select class="form-control" id="Workplace-setting<?php
                                             echo $key;
@@ -2797,14 +2797,14 @@ if(isset($_GET['MT'])){
                     </script>
                     </div>
 					<div class="col-lg-6">
-						<label for="">Confirm your email address<span class="tipstyle">*</span></label>
+						<label for="">Confirm your email address<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" name="CMemberid" id="CMemberid" value="" onchange="confirmEmailFunction(this.value)" required>
 					<div id="confirmMessage"></div>
 					</div>
 					<script>
 						function confirmEmailFunction(Email) {
 							if($('#Memberid').val()!= Email){
-								$('#confirmMessage').html("Your confirm email address does not match");
+								$('#confirmMessage').html("These passwords do not match");
 								$( "#CMemberid" ).focus();
 								$("#CMemberid").css("border", "1px solid red");
 								$(".join-details-button2").addClass("display-none");
@@ -3010,10 +3010,10 @@ if(isset($_GET['MT'])){
 
                 <div class="row">
 					<div class="col-xs-12">
-						<label>What language do you speak?</label>
+						<label>Choose the languages you speak</label>
 						
                         <div class="plus-select-box">
-                        <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="What language do you speak...">
+                        <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
 						
 						<?php
 								$Languagecode         = file_get_contents("sites/all/themes/evolve/json/Language.json");

@@ -862,9 +862,9 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID =array();}
 						
 				?>
-					<label>What language do you speak?</label>
+					<label>Choose the languages you speak</label>
 					<div class="plus-select-box">
-					<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="What language do you speak...">
+					<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
 						<?php 
                         $Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
 						$Language=json_decode($Languagecode, true);
@@ -1082,7 +1082,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 
 					<div class="col-xs-6 col-md-3">
-						<label for="">Phone number<span class="tipstyle">*</span></label>
+						<label for="">Phone number<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" name="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  >
 					</div>
 
@@ -1171,7 +1171,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 				<div class="row">
 					<div class="col-xs-12 col-md-6">
-						<label>Workplace setting<span class="tipstyle">*</span></label>
+						<label>Workplace setting<span class="tipstyle"> *</span></label>
 						<div class="chevron-select-box">	
 						<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting<?php echo $key;?>">
 						<?php
