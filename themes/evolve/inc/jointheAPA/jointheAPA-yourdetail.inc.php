@@ -821,7 +821,7 @@ if (isset($_SESSION['UserId'])):
 ?>  maxlength="5">
                         </div>
                         <div class="col-xs-12 col-md-3">
-                            <label for="">Phone number</label>
+                            <label for="">Phone number<span class="tipstyle"> *</span></label>
                             <input type="text" class="form-control" name="phone-number" placeholder='Phone number'<?php
     if (empty($details['Home-phone-number'])) {
         echo "";
@@ -875,7 +875,7 @@ if (isset($_SESSION['UserId'])):
 ?>  maxlength="5">
                         </div>-->
                         <div class="col-xs-12 col-md-3">
-                            <label for="">Mobile number</label>
+                            <label for="">Mobile number<span class="tipstyle"> *</span></label>
                             <input type="text" class="form-control" name="phone-number" placeholder='Mobile number'<?php
     if (empty($details['Mobile-number'])) {
         echo "";
@@ -2464,8 +2464,7 @@ if(isset($_GET['MT'])){
     $Gender     = json_decode($Gendercode, true);
     foreach ($Gender as $key => $value) {
         echo '<option value="' . $Gender[$key]['ID'] . '"';
-		if($Gender[$key]['ID'] =="3") {echo "selected='selected'";}
-        echo '> ' . $Gender[$key]['Description'] . ' </option>';
+		echo '> ' . $Gender[$key]['Description'] . ' </option>';
     }
     
 ?>
@@ -2524,7 +2523,7 @@ if(isset($_GET['MT'])){
                                 <input type="text" class="form-control" name="area-code" maxlength="5">
                             </div>
                             <div class="col-xs-12 col-md-3">
-                                <label for="">Phone number</label>
+                                <label for="">Phone number<span class="tipstyle"> *</span></label>
                                 <input type="text" class="form-control" name="phone-number" >
                             </div>
                         </div>
@@ -2561,7 +2560,7 @@ if(isset($_GET['MT'])){
                                 <input type="text" class="form-control" name="Mobile-area-code"  maxlength="5">
                             </div>-->
                             <div class="col-xs-12 col-md-3">
-                                <label for="">Mobile number</label>
+                                <label for="">Mobile number<span class="tipstyle"> *</span></label>
                                 <input type="text" class="form-control" name="Mobile-number">
                             </div>
                         </div>
@@ -2765,7 +2764,10 @@ if(isset($_GET['MT'])){
                     <div class="col-xs-12 col-md-6">
                         <label for="">Member ID (Your email address)<span class="tipstyle"> *</span></label>
                         <input type="email" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)">
-                    <div id="checkMessage"></div>
+                    <div id="checkMessage" class="display-none">This email address matches one that’s already registered, please use a different one or <a class="info" data-target="#loginAT" data-toggle="modal" type="button">
+	
+		<i class="Log-in">&nbsp;</i>login 
+	</a>to your existing account.</div>
                     <script>
                     function checkEmailFunction(email) {
                     $.ajax({
@@ -2776,8 +2778,9 @@ if(isset($_GET['MT'])){
                     success:function(response) {						
                     var result = response;
                     if(result=="T"){
-						$('#checkMessage').html("this email address has already registered, please use another one");
-                        $( "#Memberid" ).focus();
+						//$('#checkMessage').html("This email address matches one that’s already registered, please use a different one or login to your existing account.");
+                        $('#checkMessage').removeClass("display-none");
+						$( "#Memberid" ).focus();
                         $("#Memberid").css("border", "1px solid red");
                         $(".join-details-button2").addClass("display-none");
                         
