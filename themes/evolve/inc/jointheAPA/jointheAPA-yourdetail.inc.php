@@ -2776,7 +2776,7 @@ if(isset($_GET['MT'])){
                     success:function(response) {						
                     var result = response;
                     if(result=="T"){
-						$('#checkMessage').html("this email address has already registered, please use another one");
+						$('#checkMessage').html("This email address matches one that’s already registered, please use a different one or <span data-target='#loginAT' data-toggle='modal' style='text-decoration: underline; cursor: pointer;'>login to your existing account</span>.");
                         $( "#Memberid" ).focus();
                         $("#Memberid").css("border", "1px solid red");
                         $(".join-details-button2").addClass("display-none");
@@ -2833,7 +2833,7 @@ if(isset($_GET['MT'])){
                 <script>
                     function checkPasswordFunction(Password) {
                         if($('#newPassword').val()!= Password){
-                            $('#checkPasswordMessage').html("Your passwords do not match");
+                            $('#checkPasswordMessage').html("These passwords do not match");
                             $( "#Password" ).focus();
                             $("#Password").css("border", "1px solid red");
                             $(".join-details-button2").addClass("display-none");

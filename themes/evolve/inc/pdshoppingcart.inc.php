@@ -555,7 +555,8 @@ if(isset($_SESSION["UserId"])){
 	<div class="modal-body">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
-	<h2>Registration:</h2>
+	<h3>Registration</h3>
+
 <p>Online registration is the simplest way to secure your place. Advice concerning remaining places in any event activity does not guarantee a place, as that information is subject to continual change. Registration will not be accepted without payment. Places are allocated according to the date that an application form and payment are received by the Australian Physiotherapy Association (APA), unless otherwise stated.</p>
 <br />
 <p>The APA reserves the right to cancel or change an event activity to an alternative date. The APA will notify those who have already registered for that particular cancelled event of the cancellation or change of date. In this case, all registered participants will receive a full refund of the event registration fee, should it be required. The APA is not responsible for other associated expenses. Registration is transferable.</p>

@@ -91,7 +91,7 @@ $background = getBackgroundImage($userID);
 	</div>
 
 	<div class="modal-body">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+	<br class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
 	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
 	<h5 class="doc-header">Our Commitment to Your Privacy</h5>
 
@@ -121,7 +121,7 @@ $background = getBackgroundImage($userID);
 
 
 
-<p>APA is the controller responsible for your personal data. It has appointed a privacy officer who is responsible for overseeing issues of privacy. If you have any questions about this privacy policy, including requests to exercise your legal rights, please contact the privacy officer at <a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a>.</p>
+<p>APA is the controller responsible for your personal data. It has appointed a privacy officer who is responsible for overseeing issues of privacy. If you have any questions about this privacy policy, including requests to exercise your legal rights, please contact the privacy officer at <a href="mailto:privacy@australian.physio" style="text-decoration: underline; color: #000">privacy@australian.physio</a>.</p>
 
 
 
@@ -203,30 +203,30 @@ $background = getBackgroundImage($userID);
 
 
 
-<p>To change your personal information you must login to your account with your unique login and password via the APA website <a href="http://www.physiotherapy.asn.au" target="_blank" style="text-decoration: underline; color: #000">www.physiotherapy.asn.au</a>.</p>
+<p>To change your personal information you must login to your account with your member ID and password via the APA website <a href="http://www.australian.physio" target="_blank" style="text-decoration: underline; color: #000">www.australian.physio</a>.</p>
 
 
 
 <h5 class="doc-header">Opt-Out</h5>
 
-<p>By choosing to register on the APA web site or as a member of the APA, you may receive information from the APA about membership, APA services, partner information and offers. The APA uses this method to communicate quickly with you. You have the right to refuse inclusion on a mailing list. You can make a request to remove your email address from a mailing list by contacting the privacy officer at <a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a>.</p>
+<p>By choosing to register on the APA web site or as a member of the APA, you may receive information from the APA about membership, APA services, partner information and offers. The APA uses this method to communicate quickly with you. You have the right to refuse inclusion on a mailing list. You can make a request to remove your email address from a mailing list by contacting the privacy officer at <a href="mailto:privacy@australian.physio" style="text-decoration: underline; color: #000">privacy@australian.physio</a>.</p>
 
 
 
-<p>The APA uses your email address, your mailing address and phone number to contact you regarding administrative notices, publications, and communications relevant to your use of the site and your APA membership. If you do not wish to receive these communications, you have the ability to opt out by contacting the privacy officer at <a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a>.</p>
+<p>The APA uses your email address, your mailing address and phone number to contact you regarding administrative notices, publications, and communications relevant to your use of the site and your APA membership. If you do not wish to receive these communications, you have the ability to opt out by contacting the privacy officer at <a href="mailto:privacy@australian.physio" style="text-decoration: underline; color: #000">privacy@australian.physio</a>.</p>
 
 
 <p>From time to time, the APA arranges mailings using the contact information you have provided, from its business partners (including corporate partners and endorsed product manufacturers/suppliers). These mailings aim to provide you with information and benefits available to you.</p>
 
 
 
-<p>If you do not wish to receive information from APA's business partners you should advise your local APA Branch or notify the APA’s privacy officer at <a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a>. For any information about privacy, please contact the APA’s privacy officer by phoning <a href="tel:03 9092 0888" style="text-decoration: underline; color: #000">03 9092 0888</a> or by email <a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a>.</p>
+<p>If you do not wish to receive information from APA's business partners you should advise your local APA Branch or notify the APA’s privacy officer at <a href="mailto:privacy@australian.physio" style="text-decoration: underline; color: #000">privacy@australian.physio</a>. For any information about privacy, please contact the APA’s privacy officer by phoning <a href="tel:03 9092 0888" style="text-decoration: underline; color: #000">03 9092 0888</a> or by email <a href="mailto:privacy@australian.physio" style="text-decoration: underline; color: #000">privacy@australian.physio</a>.</p>
 
 
 
 <h5 class="doc-header">Cookies</h5>
 
-<p>As part of the normal operation of this site, your internet browser will be sent a "cookie" (a temporary internet file). This cookie enhances the site's functionality with features such as membership logon and electronic ordering. By itself, this cookie can only identify your computer to APA’s server; it is not used to identify you personally.</p>
+<p>As part of the normal operation of this site, your internet browser will be sent a 'cookie' (a temporary internet file). This cookie enhances the site's functionality with features such as membership logon and electronic ordering. By itself, this cookie can only identify your computer to APA’s server; it is not used to identify you personally.</p>
 
 <p>Your personal password to access the APA website protects your privacy. We recommend that you do not disclose, share or reveal this password to any other individual.</p>
 
@@ -244,7 +244,7 @@ $background = getBackgroundImage($userID);
 
 <h5 class="doc-header">Privacy Enquires</h5>
 
-<p>You have the right to complain regarding any aspect of your privacy rights.&nbsp;If you have a complaint please contact the privacy officer at <a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a> or on <a href="tel:03 9092 0888" style="text-decoration: underline; color: #000">03 9092 0888</a>.</p>
+<p>You have the right to complain regarding any aspect of your privacy rights.&nbsp;If you have a complaint please contact the privacy officer at <a href="mailto:privacy@australian.physio" style="text-decoration: underline; color: #000">privacy@australian.physio</a> or on <a href="tel:03 9092 0888" style="text-decoration: underline; color: #000">03 9092 0888</a>.</p>
 
 
 <h5 class="doc-header">APA Membership</h5>
@@ -254,7 +254,7 @@ $background = getBackgroundImage($userID);
 
 <h5 class="doc-header">Security</h5>
 
-<p>Your information is stored on the APA's server located in a secure data housing facility. While, it is important to recognise that "perfect security" does not exist on the internet, the APA is committed to using industry standard mechanisms to safeguard the confidentiality of your personal information such as firewalls and Secure Socket Layers.&nbsp;&nbsp;</p>
+<p>Your information is stored on the APA's server located in a secure data housing facility. While, it is important to recognise that 'perfect security' does not exist on the internet, the APA is committed to using industry standard mechanisms to safeguard the confidentiality of your personal information such as firewalls and Secure Socket Layers.&nbsp;&nbsp;</p>
 
 
 <h5 class="doc-header">Credit Card Information</h5>
@@ -266,7 +266,7 @@ $background = getBackgroundImage($userID);
 
 <p>The APA has a strong commitment to protecting your privacy and ensuring the confidentiality and security of personal information provided to the APA by you. As an organisation with an annual turnover of more than $3 million, the APA is required to comply with the Privacy Act 1988 as amended by the Privacy Amendment (Enhancing Privacy Protection) Act 2012 which came into effect in March 2014.<br />
 
-You have the right to access the personal information about yourself held by the APA and to correct information which is inaccurate. To change your information you must log into your account with your unique login and password via the APA website <a href="http://www.physiotherapy.asn.au" target="_blank" style="text-decoration: underline; color: #000">www.physiotherapy.asn.au</a>.</p>
+You have the right to access the personal information about yourself held by the APA and to correct information which is inaccurate. To change your information you must log into your account with your member ID and password via the APA website <a href="http://www.australian.physio" target="_blank" style="text-decoration: underline; color: #000">www.australian.physio</a>.</p>
 
 <p>Information you have provided to the APA is used to:</p>
 
@@ -286,20 +286,18 @@ You have the right to access the personal information about yourself held by the
 <p>You acknowledge and agree that by providing your personal and/or sensitive information to the APA that the APA, its related bodies corporate and partners and each of their officers, employees, agents and contractors are permitted to collect, store, use and disclose your personal information in the manner set out in this privacy policy and in accordance with the Australian Privacy Principles.</p>
 
 
-<h5 class="doc-header">Contact Us</h5>
+<h4>3. Membership cancellation and refund policies</h4>
 
+<h5 class="doc-header">Instalment policy</h5>
 
-<p>Please do not hesitate to contact us if you have a concern or issue in relation to how we collect, store, use or disclose your personal information.</p>
+<p>The first monthly instalment will be deducted upon receipt of renewal. The first instalment will include the full amount of GST payable for the year and the administration fee.  It will also include any donations that you may have agreed to provide. Subsequent instalments for the year will equal the remaining amount due divided by the respective number of months of the year remaining. Monthly instalments will be deducted from your nominated credit or debit card on the first working day of the month. By electing to pay by instalments you are also opting to have your membership automatically rolled over into the forthcoming year, authorising the APA to continue deducting membership fees until you notify the APA in writing to cease deductions or your membership is cancelled or withdrawn and outstanding fees are collected. Instalments can only be cancelled in December at the end of our membership year. You will be notified in writing of any change to your deductions at least 30 days prior to that change. If there are insufficient funds available to make the deduction or the payment is rejected for other reasons, the APA may pass associated bank fees on to you.</p>
 
+<h5 class="doc-header">Refund policy</h5>
 
+<p>The Australian Physiotherapy Association will not issue membership refunds throughout the year unless under extraordinary circumstances. Applications for refund must be made in writing to the Senior Finance and Systems Officer. All applications will be considered on a case-by-case basis and the decision made will be final. Please note that membership to the APA is done on a yearly basis. If any refund of membership fees is granted the APA reserves its right to charge an administrative fee of $100.00 (inclusive of GST), which will be deducted before membership fees are refunded.</p>
 
-<p>If your concern relates to your APA membership or another APA function or service please contact us by email to&nbsp;<a href="mailto:privacy@physiotherapy.asn.au" style="text-decoration: underline; color: #000">privacy@physiotherapy.asn.au</a>&nbsp;or call or mail us at the following address:</p>
-
-
-<p>Australian Physiotherapy Association<br />
-Postal address: PO Box 437 Hawthorn BC VIC 3122<br />
-Telephone: 1300 306 622<br />
-Facsimile: (03) 9092 0899</p>
+<p><strong>AUSTRALIAN PHYSIOTHERAPY ASSOCIATION</strong></p>
+<p><strong>ABN: 89 004 265 150</strong></p>
 
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
