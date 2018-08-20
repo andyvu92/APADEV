@@ -13,14 +13,14 @@ jQuery(document).ready(function($) {
 			if($("input[name=Lastname]").val() ==''){$("input[name=Lastname]").addClass("focuscss");} else{$("input[name=Lastname]").removeClass("focuscss");}
 			if($("input[name=Birth]").val() ==''){$("input[name=Birth]").addClass("focuscss");}else{$("input[name=Birth]").removeClass("focuscss");}
 			//if($("select[name=Gender]").val() ==''){$("select[name=Gender]").addClass("focuscss");}else{$("select[name=Gender]").removeClass("focuscss");}
-			//if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ 
-				//$("input[name=phone-number]").addClass("focuscss");
-				//$("input[name=Mobile-number]").addClass("focuscss");
-			//} 
-			//else{
-				//$("input[name=phone-number]").removeClass("focuscss");
-				//$("input[name=Mobile-number]").removeClass("focuscss");
-			//}				
+			if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ 
+				$("input[name=phone-number]").addClass("focuscss");
+				$("input[name=Mobile-number]").addClass("focuscss");
+			} 
+			else{
+				$("input[name=phone-number]").removeClass("focuscss");
+				$("input[name=Mobile-number]").removeClass("focuscss");
+			}				
 			
 			if($("select[name=Aboriginal]").val() ==''){$("select[name=Aboriginal]").addClass("focuscss");}else{$("select[name=Aboriginal]").removeClass("focuscss");}
 			if($("input[name=Pobox]").val() ==''){
@@ -48,7 +48,7 @@ jQuery(document).ready(function($) {
 			if($("input[name=Birth]").val() ==''||$("select[name=Aboriginal]").val() ==''){
 				return false;
 			}
-			//if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ return false; }
+			if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ return false; }
 			if($("input[name=Pobox]").val() ==''){
 				if($("input[name=Address_Line_1]").val() ==''){
 					return false;	

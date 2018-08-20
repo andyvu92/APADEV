@@ -731,15 +731,13 @@ if (isset($_SESSION['UserId'])):
                        <label for="">Gender</label>
                        <div class="chevron-select-box">
                        <select class="form-control" id="Gender" name="Gender">
+					   <option value="" <?php if (empty($details['Gender'])) echo "selected='selected'";?> disabled>Please select</option>
                         <?php
     $Gendercode = file_get_contents("sites/all/themes/evolve/json/Gender.json");
     $Gender     = json_decode($Gendercode, true);
     foreach ($Gender as $key => $value) {
         echo '<option value="' . $Gender[$key]['ID'] . '"';
         if ($details['Gender'] == $Gender[$key]['ID']) {
-            echo "selected='selected'";
-        }
-        if (empty($details['Gender']) && $Gender[$key]['ID']=="3" ) {
             echo "selected='selected'";
         }
         echo '> ' . $Gender[$key]['Description'] . ' </option>';
@@ -2459,7 +2457,9 @@ if(isset($_GET['MT'])){
                            <label for="">Gender</label>
                            <div class="chevron-select-box">
                            <select class="form-control" id="Gender" name="Gender">
-                             <?php
+						  
+                            <option value="" selected disabled>Please select</option>
+							<?php
     $Gendercode = file_get_contents("sites/all/themes/evolve/json/Gender.json");
     $Gender     = json_decode($Gendercode, true);
     foreach ($Gender as $key => $value) {
