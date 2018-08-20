@@ -2836,7 +2836,7 @@ if(isset($_GET['MT'])){
                 <script>
                     function checkPasswordFunction(Password) {
                         if($('#newPassword').val()!= Password){
-                            $('#checkPasswordMessage').html("Your passwords do not match");
+                            $('#checkPasswordMessage').html("These passwords do not match");
                             $( "#Password" ).focus();
                             $("#Password").css("border", "1px solid red");
                             $(".join-details-button2").addClass("display-none");
