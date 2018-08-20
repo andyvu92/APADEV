@@ -387,16 +387,14 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					    <label for="">Gender<span class="tipstyle"> *</span></label>
 						<div class="chevron-select-box">
 						<select class="form-control" id="Gender" name="Gender">
+						 <option value="" <?php if (empty($details['Gender'])) echo "selected='selected'";?> disabled>Please select</option>
 							<?php
 								$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
 								$Gender=json_decode($Gendercode, true);						
 								foreach($Gender  as $key => $value){
 									echo '<option value="'.$Gender[$key]['ID'].'"';
 									if ($details['Gender'] == $Gender[$key]['ID']){ echo "selected='selected'"; }
-									if (empty($details['Gender']) && $Gender[$key]['ID']=="3" ) {
-										echo "selected='selected'";
-									}
-									echo '> '.$Gender[$key]['Description'].' </option>';
+								    echo '> '.$Gender[$key]['Description'].' </option>';
 								}
 							?>
 					   </select>
@@ -476,7 +474,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<input type="text" class="form-control" name="area-code" <?php if (empty($details['Home-phone-areacode'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-areacode'].'"'; }?>  maxlength="5">
 					</div>
 					<div class="col-xs-12 col-md-6">
-						<label for="">Phone number</label>
+						<label for="">Phone number<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  >
 					</div>
 				</div>
@@ -515,7 +513,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<input type="text" class="form-control" name="Mobile-areacode" <?php /*if (empty($details['Mobile-area-code'])) {echo "placeholder='Mobile Area code'";}   else{ echo 'value="'.$details['Mobile-area-code'].'"'; }*/?>  maxlength="5">
 					</div>-->
 					<div class="col-xs-12 col-md-6">
-						<label for="">Mobile number</label>
+						<label for="">Mobile number<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  >
 					</div>
 				</div>

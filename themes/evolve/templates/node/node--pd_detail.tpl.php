@@ -1392,7 +1392,9 @@
 					<div class="col-lg-6">
 						<label for="">User ID (Your email address)<span class="tipstyle">*</span></label>
 						<input type="text" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)" required>
-					<div id="checkMessage"></div>
+					<div id="checkMessage" class="display-none">This email address matches one that’s already registered, please use a different one or <a class="info" data-target="#loginAT" data-toggle="modal" type="button">
+				    <i class="Log-in">&nbsp;</i>login 
+				    </a>to your existing account.</div>
 					<script>
 					function checkEmailFunction(email) {
 						$.ajax({
@@ -1402,7 +1404,8 @@
 						success:function(response) { 
 						var result = response;
 						if(result=="T"){
-							$('#checkMessage').html("this email address has already registered, please use another one");
+							//$('#checkMessage').html("this email address has already registered, please use another one");
+							$('#checkMessage').removeClass("display-none");
 							$( "#Memberid" ).focus();
 							$("#Memberid").css("border", "1px solid red");
 							//$(".join-details-button2").addClass("display-none");
