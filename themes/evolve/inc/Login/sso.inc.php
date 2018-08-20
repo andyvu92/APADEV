@@ -3,6 +3,32 @@
 	$url =  "{$_SERVER['REQUEST_URI']}";
 	$date = date('Y-m-d h:i:s');
 
+	require_once('/var/simplesamlphp/lib/_autoload.php');
+
+	$as = new SimpleSAML_Auth_Simple('default-sp');
+ 
+	// require authentication
+	$as->requireAuth();
+	 
+	// get the attributes
+	$attributes = $as->getAttributes();
+	 
+	// print the attributes and the NameID
+	print_r($attributes);
+	print_r($as->getAuthData('saml:sp:NameID'));
+	 
+	// print out eduPersonTargetedID (which is a DOM XML NameID node as of SimpleSAMLphp 1.14)
+	if (isset($attributes['eduPersonTargetedID'])) {
+	  $eptid = $attributes['eduPersonTargetedID'][0]->item(0);
+	  $nameID = new SAML2_XML_saml_NameID($eptid);
+	  print_r($nameID);
+	};
+
+	/**
+	 * Get data (SAML request)
+	 * Set third party
+	 */
+
 	// when a user is coming from a log-in
 	if(isset($_SESSION["outputReturn"])) {
 		//unset($_SESSION["thirdParty"]);
