@@ -2796,7 +2796,7 @@ if(isset($_GET['MT'])){
                     }
                     </script>
                     </div>
-					<div class="col-lg-6">
+					<div class="col-xs-12 col-md-6">
 						<label for="">Confirm your email address<span class="tipstyle">*</span></label>
 						<input type="text" class="form-control" name="CMemberid" id="CMemberid" value="" onchange="confirmEmailFunction(this.value)" required>
 					<div id="confirmMessage"></div>
