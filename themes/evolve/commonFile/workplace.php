@@ -22,19 +22,19 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 	echo'
 <div class="row">
 <div class="col-xs-12">
-<label for="Name-of-workplace'.$i.'">Practice name<span class="tipstyle">*</span></label>
-<input type="text" class="form-control" name="Name-of-workplace'.$i.'" id="Name-of-workplace'.$i.'">
+<label for="Name-of-workplace'.$i.'">Practice name<span class="tipstyle"> *</span></label>
+<input type="text" class="form-control" name="Name-of-workplace'.$i.'" id="Name-of-workplace'.$i.'" placeholder="Practice name">
 </div>
 </div>
 <div class="row">
 	<div class="col-xs-12">
 		<label for="BuildingName'.$i.'">Building name</label>
-		<input type="text" class="form-control" name="WBuildingName'.$i.'" id="WBuildingName'.$i.'" value="">
+		<input type="text" class="form-control" name="WBuildingName'.$i.'" id="WBuildingName'.$i.'" value="" placeholder="Building name">
 	</div>
 </div>
 
 	<div class="col-xs-12 col-md-6">
-		<label for="WAddress_Line_1'.$i.'">Address line 1<span class="tipstyle">*</span></label>
+		<label for="WAddress_Line_1'.$i.'">Address line 1<span class="tipstyle"> *</span></label>
 		<input type="text" class="form-control" name="WAddress_Line_1'.$i.'" id="WAddress_Line_1'.$i.'" value="" placeholder="Address line 1">
 	</div>
 
@@ -46,13 +46,13 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 
 <div class="row">
 	<div class="col-xs-6 col-md-6">
-		<label for="Wcity'.$i.'">City or town<span class="tipstyle">*</span></label>
-		<input type="text" class="form-control" name="Wcity'.$i.'" id="Wcity'.$i.'" value="">
+		<label for="Wcity'.$i.'">City or town<span class="tipstyle"> *</span></label>
+		<input type="text" class="form-control" name="Wcity'.$i.'" id="Wcity'.$i.'" value="" placeholder="City or town">
 	</div>
 
 	<div class="col-xs-6 col-md-6">
-		<label for="Wpostcode'.$i.'">Postcode<span class="tipstyle">*</span></label>
-		<input type="text" class="form-control" name="Wpostcode'.$i.'" id="Wpostcode'.$i.'" value="">
+		<label for="Wpostcode'.$i.'">Postcode<span class="tipstyle"> *</span></label>
+		<input type="text" class="form-control" name="Wpostcode'.$i.'" id="Wpostcode'.$i.'" value="" placeholder="Postcode">
 	</div>
 
 	<div class="col-xs-6 col-md-6">
@@ -73,7 +73,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 	</div>
 
 	<div class="col-xs-6 col-md-6">
-	<label for="Wcountry'.$i.'">Country<span class="tipstyle">*</span></label>
+	<label for="Wcountry'.$i.'">Country<span class="tipstyle"> *</span></label>
 	<div class="chevron-select-box">
 		<select class="form-control" id="Wcountry'.$i.'" name="Wcountry'.$i.'">
 		';
@@ -96,12 +96,12 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 <div class="row">
 	<div class="col-xs-12 col-sm-6 col-md-6">
 		<label for="Wemail'.$i.'">Workplace email</label>
-		<input type="email" class="form-control" name="Wemail'.$i.'" id="Wemail'.$i.'" value="">
+		<input type="email" class="form-control" name="Wemail'.$i.'" id="Wemail'.$i.'" value="" placeholder="Workplace email">
 	</div>
 
 	<div class="col-xs-12 col-sm-6 col-md-6">
 		<label for="Wwebaddress'.$i.'">Website</label>
-		<input type="text" class="form-control" name="Wwebaddress'.$i.'" id="Wwebaddress'.$i.'" value="">
+		<input type="text" class="form-control" name="Wwebaddress'.$i.'" id="Wwebaddress'.$i.'" value="" placeholder="Website">
 	</div>
 
 </div>
@@ -127,12 +127,12 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 
 <div class="col-xs-6 col-md-3">
         <label for="">Area code</label>
-        <input type="text" class="form-control" name="WPhoneAreaCode'.$i.'" maxlength="5">
+        <input type="text" class="form-control" name="WPhoneAreaCode'.$i.'" maxlength="5" placeholder="Area code">
 </div>
 
 <div class="col-xs-6 col-md-3">
-        <label for="">Phone number<span class="tipstyle">*</span></label>
-        <input type="text" class="form-control" name="Wphone'.$i.'">
+        <label for="">Phone number<span class="tipstyle"> *</span></label>
+        <input type="text" class="form-control" name="Wphone'.$i.'" placeholder="Phone number">
 </div>
 
 
@@ -204,7 +204,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 <div class="row">
 
 	<div class="col-xs-12 col-md-6">
-		<label>Workplace setting<span class="tipstyle">*</span></label>
+		<label>Workplace setting<span class="tipstyle"> *</span></label>
 		<div class="chevron-select-box">
 		<select class="form-control" id="Workplace-setting'.$i.'" name="Workplace-setting'.$i.'">';
 			echo '<option value="" selected disabled>Please select</option>';
@@ -218,7 +218,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 	</div>
 
 	<div class="col-xs-12 col-sm-6 col-md-6">
-		<label>Numbers of hours worked<span class="tipstyle">*</span></label>
+		<label>Numbers of hours worked<span class="tipstyle"> *</span></label>
 		<div class="chevron-select-box">
 		<select class="form-control" id="Number-worked-hours'.$i.'" name="Number-worked-hours'.$i.'">
 			<option value="" selected disabled>Please select</option>

@@ -721,7 +721,7 @@ $type = "PD";
 $counts = 0;
 if(isset($_SESSION['UserId'])) {
 	$userID = $_SESSION['UserId'];
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	/********Get user shopping product form APA server******/
 	try {
 		$type="PD";

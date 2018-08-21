@@ -439,7 +439,7 @@ function curlRequest($API, $type, $variables) {
 }
 
 function logTransaction($APINum, $Sent, $Got) {
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	$profile = $dbt->prepare('INSERT INTO logprofile (userID, text) VALUES (:userID, :text)');	
 	
 	$txt = "UserID: ";
@@ -490,7 +490,7 @@ function logRecorder() {
 		fclose($myfilet);
 	}
 	/* load logged records to a single text */
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	$profileFinal= $dbt->prepare('SELECT * FROM logprofile WHERE userID= :userID');	
 	if(isset($_SESSION["UserId"])) {
 		$profileFinal->bindValue(':userID', $_SESSION["UserId"]);
