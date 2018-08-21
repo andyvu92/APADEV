@@ -156,6 +156,9 @@ jQuery(document).ready(function($) {
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);	
 		$('#downHomeT6').hide(500);	
+		$('#downHomeT7').hide(500);
+		$('#downHomeT8').hide(500);	
+		$('#downHomeT9').hide(500);	
 
 	});
 
@@ -166,6 +169,9 @@ jQuery(document).ready(function($) {
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
 		$('#downHomeT6').hide(500);	
+		$('#downHomeT7').hide(500);
+		$('#downHomeT8').hide(500);	
+		$('#downHomeT9').hide(500);	
 	});
 
 	$("#homePublication").click(function() {
@@ -175,6 +181,9 @@ jQuery(document).ready(function($) {
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
 		$('#downHomeT6').hide(500);	
+		$('#downHomeT7').hide(500);
+		$('#downHomeT8').hide(500);	
+		$('#downHomeT9').hide(500);	
 	});
 
 	$("#homeStateNews").click(function() {
@@ -193,6 +202,9 @@ jQuery(document).ready(function($) {
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').show(500);
 		$('#downHomeT6').hide(500);	
+		$('#downHomeT7').hide(500);
+		$('#downHomeT8').hide(500);	
+		$('#downHomeT9').hide(500);	
 	});
 
 	$("#homeHighlights").click(function() {
@@ -202,6 +214,42 @@ jQuery(document).ready(function($) {
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
 		$('#downHomeT6').show(500);	
+		$('#downHomeT7').hide(500);
+		$('#downHomeT8').hide(500);	
+		$('#downHomeT9').hide(500);	
+	});
+	$("#homeBIP").click(function() {
+		$('#downHomeT1').hide(500);
+		$('#downHomeT2').hide(500);
+		$('#downHomeT3').hide(500);
+		$('#downHomeT4').hide(500);
+		$('#downHomeT5').hide(500);
+		$('#downHomeT6').hide(500);	
+		$('#downHomeT7').show(500);
+		$('#downHomeT8').hide(500);	
+		$('#downHomeT9').hide(500);	
+	});
+	$("#homeIn").click(function() {
+		$('#downHomeT1').hide(500);
+		$('#downHomeT2').hide(500);
+		$('#downHomeT3').hide(500);
+		$('#downHomeT4').hide(500);
+		$('#downHomeT5').hide(500);
+		$('#downHomeT6').hide(500);	
+		$('#downHomeT7').hide(500);
+		$('#downHomeT8').show(500);	
+		$('#downHomeT9').hide(500);	
+	});
+	$("#homeS").click(function() {
+		$('#downHomeT1').hide(500);
+		$('#downHomeT2').hide(500);
+		$('#downHomeT3').hide(500);
+		$('#downHomeT4').hide(500);
+		$('#downHomeT5').hide(500);
+		$('#downHomeT6').hide(500);	
+		$('#downHomeT7').hide(500);
+		$('#downHomeT8').hide(500);	
+		$('#downHomeT9').show(500);	
 	});
 
 	$("#showall").click(function() {
