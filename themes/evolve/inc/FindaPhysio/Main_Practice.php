@@ -2,7 +2,7 @@
 	// if session is empty (came here without values)
 	// since lat is always set in anytime,
 	// empty in SESSION['lat'] means session is not there.
-	if(strpos($_SERVER['REQUEST_URI'], 'finda')) {
+	if(strpos($_SERVER['REQUEST_URI'], 'find-ph')) {
 		unset($_SESSION['practiceName']);
 		unset($_SESSION['state']);
 		unset($_SESSION['treatment']);
@@ -119,7 +119,7 @@
 					<label><input class="currentLocation" type="checkbox" value=""><h2 class="LocationNo">Using current location</h2></label>
 				</div>
 				<div class="orState"><p>or</p><h2>Enter a location below</h2></div>
-				<form id="FindForm" action="find-result" method="POST">
+				<form id="FindForm" action="practice-ressult" method="POST">
 					<div id="find">
 					<?php /*<input id="geocomplete" placeholder="Enter location" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter location'" type="text" name="name" size="40" >*/ ?>
 					<div id="bloodhound">

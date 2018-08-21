@@ -277,7 +277,7 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 //get productID list from local database;
 /*	function getProduct($userID,$type){
 		$arrayReturn = array();
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 		$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND type=:type');
 		$shoppingcartGet->bindValue(':userID', $userID);
 		$shoppingcartGet->bindValue(':type', $type);

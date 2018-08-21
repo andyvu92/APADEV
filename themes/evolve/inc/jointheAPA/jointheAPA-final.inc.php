@@ -2,7 +2,7 @@
 //use session: $_SESSION['UserID'],$_SESSION["postReviewData"],
 //save PRF product into APA database function
 /*function createShoppingCart($userID, $productID,$coupon){
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	try {
 		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, coupon) VALUES (:userID, :productID, :coupon)');
 		$shoppingcartUpdate->bindValue(':userID', $userID);
@@ -19,7 +19,7 @@
 }
 // check the user product in case of duplicated shopping cart data
 function checkShoppingCart($userID, $productID){
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 		try {
 			$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID and productID=:productID');
 			$shoppingcartGet->bindValue(':userID', $userID);

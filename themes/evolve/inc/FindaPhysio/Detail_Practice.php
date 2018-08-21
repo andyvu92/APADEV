@@ -485,7 +485,7 @@
 				$UserIncludes = array();
 				try {
                     //$db = new PDO('mysql:host=localhost;dbname=c0FindPhysio', 'c0FindAPhysio', 'jc4X2ERLpn_');
-                    $dbt = new PDO('mysql:host=localhost;dbname=findaphysio', 'c0DefaultMain', 'Apa2017Config');
+                    $db = new PDO('mysql:host=localhost;dbname=findaphysio', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 					$stmt = $db->prepare('SELECT * FROM practicesearch WHERE PID = :pid');
 					$stmt->bindValue(':pid', $id);
 					$stmt->execute();
@@ -530,7 +530,7 @@
 							////  $UserIncludes
 							if($Users->rowCount() != 0) {
 								foreach($Users as $row) {
-									$UserData = array('UserName' => $row['FirstName'].' '.$row['LastName'] ,'FAP' => $row['FAP'], 
+									$UserData = array('UID' => $row['UID'] ,'UserName' => $row['FirstName'].' '.$row['LastName'] ,'FAP' => $row['FAP'], 
 										'Titled' => $row['Titled'], 'Languages' => $row['Language'], 'Interest' => $row['Interest'], 'LastName' => $row['LastName']);
 
 									if(isset($_SESSION['userName'])) {
@@ -582,6 +582,42 @@
 											array_push($UserDetail, $UserData);
 										}
 									}
+									// Put user detail pop-up in medal form
+									echo '<div id="UserInfo'.$row['UID'].'" class="modal fade big-screen" role="dialog">
+											<div class="modal-dialog">
+			
+											<!-- Modal content-->
+											<div class="modal-content">
+												<div class="modal-header">
+												<button type="button" class="close" data-dismiss="modal">&times;</button>
+												</div>
+												<div class="modal-body">
+													<div>List them and place them!!!!</div>
+													<p>Clinical area:</p>
+													<p>'.$row['Interest'].'</p>
+													<p>APA Credentials:</p>
+													<p>'.$row['Titled'].'</p>
+													<p>Language:</p>
+													<p>'.$row['Language'].'</p>
+														<p>practices:</p>';
+									$listPractice = explode(",",$row['PID']);
+									foreach($listPractice as $p) {
+										$Pracs = $db->prepare('Select * from practice where PID = :pid');
+										$Pracs->bindValue(':pid', $p);
+										$Pracs->execute();
+										foreach($Pracs as $tt) {
+											echo "<div class='physio'>".$tt['PracticeName']."</div>";
+											break;
+										}
+										$Pracs = null;
+									}
+									echo '</div>
+												</div>
+												<div class="modal-footer">
+												<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+												</div>
+											</div>
+										</div>';
 									break; // only one user
 								}
 							}
@@ -748,7 +784,7 @@ $oo .= '<div id="directions'.$MapCounter.'" style="display:none;">'.'https://map
 								<?php if($DVA == 1){ echo '<li>DVA</li>'; }?>
 								<?php if($COMP == 1){ echo '<li>Workers Compensation</li>'; }?>
 								<?php if($MOTOR == 1){ echo '<li>Motor Accident Compensation</li>'; }?>
-								<?php if($HEALTHPOINT == 1 or HICAPS == 1){ echo '<li>Electronic claiming</li>'; }?>
+								<?php if($HEALTHPOINT == 1 or $HICAPS == 1){ echo '<li>Electronic claiming</li>'; }?>
 							</ul>
 						<?php //if(isset($_SESSION['language']) || isset($_SESSION['treatment'])): ?>
 							<h3 style="padding-left: 5px;">Physios</h3>
@@ -757,7 +793,7 @@ $oo .= '<div id="directions'.$MapCounter.'" style="display:none;">'.'https://map
 								<?php foreach($sortNames as $users)://($i = 0; $i < $userCount; $i++): ?>
 									<div class="physio">
 										<div class="left">
-											<h3 class="name"><?php echo $users['UserName'] ?></h3>
+											<h3 class="name"><a data-toggle="modal" data-target="#<?php echo 'UserInfo'.$users['UID']; ?>"><?php echo $users['UserName'] ?></a></h3>
 											<?php /*  //if(isset($_SESSION['treatment'])): ?>
 												<h4 class="smallTitle">Accredited</h4>
 												<ul>
@@ -808,7 +844,7 @@ $oo .= '<div id="directions'.$MapCounter.'" style="display:none;">'.'https://map
 								<?php foreach($sortNames as $users)://($i = 0; $i < $userCount; $i++): ?>
 									<div class="physio">
 										<div class="left">
-											<h3 class="name"><?php echo $users['UserName'] ?></h3>
+											<h3 class="name"><a data-toggle="modal" data-target="#<?php echo 'UserInfo'.$users['UID']; ?>"><?php echo $users['UserName'] ?></a></h3>
 											<?php if(isset($_SESSION['treatment'])): ?>
 												<h4 class="smallTitle">Accredited</h4>
 												<ul>

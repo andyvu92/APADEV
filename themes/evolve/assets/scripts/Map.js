@@ -273,7 +273,7 @@ function initialize() {
 		});
 		bounds.extend(position, marker);
 		google.maps.event.clearListeners(map);
-		map.setCenter(bounds.getCenter);
+		//map.setCenter(bounds.getCenter);
 		map.fitBounds(bounds);
 	} else {
 		map = new google.maps.Map(document.getElementById('map-canvas'),

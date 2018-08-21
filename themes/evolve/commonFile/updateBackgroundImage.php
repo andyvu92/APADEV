@@ -7,7 +7,7 @@ else{
 /******require user login, set userID as 1 temporarily****/
 	$userID=1;
 }
-$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 /*********update background image to local server******/
 if(isset($_POST["update"]) && isset($_POST["background"]) &&($_POST['background']!=0)){
 	$userID = $_POST['userID'];
