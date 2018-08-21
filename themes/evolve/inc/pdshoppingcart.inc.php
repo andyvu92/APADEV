@@ -56,7 +56,7 @@ if(isset($_POST['Couponcode'])) {
 /***************End Save coupon code on APA side************/
 
 
-$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 /*********Delete shopping product from APAserver******/
 if(isset($_GET["action"])&&$_GET["action"]=="del"){
 	$productID = $_GET['productid'];

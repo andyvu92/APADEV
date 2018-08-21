@@ -9,7 +9,7 @@ if(isset($_SESSION["UserId"])&& ($_SESSION["UserId"]!=0)){
 	$userid = $_SESSION["UserId"];
 
    /*********save wishlist to APAserver******/
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	if(isset($_GET["create"])){
 		$userID = $userid;
 		if(isset($_GET["id"])){	

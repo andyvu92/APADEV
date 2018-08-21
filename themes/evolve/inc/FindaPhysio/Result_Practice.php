@@ -430,7 +430,7 @@
 	  *  This is exclusive function for find-result page
 	  *  $pageNum (current page number) will be considered to be here in this page
 	  */
-	function loopPageNumber($pageStart, $pageEnd, $pageNums, $optionStrings) {
+	function loopPageNumber($url, $pageStart, $pageEnd, $pageNums, $optionStrings) {
 		for($i = $pageStart; $i <= $pageEnd; $i++) {
 			if($i == $pageNums) {echo '<div class="PagebuttonHighlight">'.$i.'</div>';}
 			else {echo '<a href="'.$url.'?'.$optionStrings.'page='.$i.'"><div class="Pagebutton">'.$i.'</div></a>';}
@@ -441,7 +441,7 @@
 	// if session is empty (came here without values)
 	// since lat is always set in anytime,
 	// empty in SESSION['lat'] means session is not there.
-	if(strpos($_SERVER['REQUEST_URI'], 'finda')) {
+	if(strpos($_SERVER['REQUEST_URI'], 'find-ph')) {
 		unset($_SESSION['practiceName']);
 		unset($_SESSION['state']);
 		unset($_SESSION['treatment']);
@@ -496,7 +496,7 @@
 			$lngsCom = "";
 			try {
                 //$dbt = new PDO('mysql:host=localhost;dbname=c0FindPhysio', 'c0FindAPhysio', 'jc4X2ERLpn_');
-                $dbt = new PDO('mysql:host=localhost;dbname=findaphysio', 'c0DefaultMain', 'Apa2017Config');
+                $dbt = new PDO('mysql:host=localhost;dbname=findaphysio', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 				$latlng = $dbt->prepare('SELECT * FROM locSearch WHERE Suburb = :suburbC AND State = :stateC AND Pcode = :pCodeC');
 				$latlng->bindValue(':stateC', $_POST['stateComp']);
 				$latlng->bindValue(':suburbC', $_POST['suburbComp']);
@@ -658,7 +658,7 @@
 <?php if(isset($_SESSION['CurrentLocation'])) echo '<div style="display:none">yes!</div>'; ?>
 <?php if(isset($_SESSION['CurrentLocation'])) echo '<div style="display:none">latCu: '.$_SESSION['latCurrent'].'</div>'; ?>
 <?php if(isset($_SESSION['CurrentLocation'])) echo '<div style="display:none">LngCu: '.$_SESSION['lngCurrent'].'</div>'; ?>
-				<a href="/findaphysio"><div class="backButton">< GO BACK</div></a>
+				<a href="/find-physio-practice"><div class="backButton">< GO BACK</div></a>
 				<div class="clearfix-FAP"></div>
 				<h2 style="font-size: 38px; margin: 0 25px 15px 0;">Search results</h2>
 				<div class="clearfix-FAP"></div>
@@ -667,7 +667,7 @@
 					$array = array();
 					$numResult = 0;
 					try {
-                        $db = new PDO('mysql:host=localhost;dbname=findaphysio', 'c0DefaultMain', 'Apa2017Config');
+                        $db = new PDO('mysql:host=localhost;dbname=findaphysio', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 						//$db = new PDO('mysql:host=localhost;dbname=c0FindPhysio', 'c0FindAPhysio', 'jc4X2ERLpn_');
 						
 						$distSet = true;
@@ -1506,8 +1506,8 @@
 						if(preg_match("/[a-zA-Z0-9]+/",$items['Address2'])) { $oo .= $items['Address2'].' '.$items['Address3'].'</br>'; }
 						$oo .= $items['City'].' '.$items['State'].' '.$items['Postcode'].'</p>';
 						$oo .= '<div id="val'.$MapCounter.'" name="val'.$MapCounter.'" style="display:none;">'.$items['Lat'].' '.$items['Lon'].'</div>';
-						$oo .= '<p><a href="/find-detail?PracticeID='.$items['PracticeID'].'">'.'Find out more'.'</a></p></div>';
-						$oo .= '<div id="mores'.$MapCounter.'" style="display:none;">'.'/find-detail?PracticeID='.$items['PracticeID'].'</div>'; 
+						$oo .= '<p><a href="/practice-detail?PracticeID='.$items['PracticeID'].'">'.'Find out more'.'</a></p></div>';
+						$oo .= '<div id="mores'.$MapCounter.'" style="display:none;">'.'/practice-detail?PracticeID='.$items['PracticeID'].'</div>'; 
 						$oo .= '<div class="right-content results">';
 						$oo .= '<div class="contacts">';
 						if($items['Phone'] != '') {
@@ -1543,7 +1543,7 @@
 							$outp .= $items['Address1'].'</br>';
 							if(preg_match("/[a-zA-Z0-9]+/",$items['Address2'])) { $outp .= $items['Address2'].' '.$items['Address3'].'</br>'; }
 							$outp .= $items['City'].' '.$items['State'].' '.$items['Postcode'].'</p>';
-							$outp .= '<p class="Finalbutton"><a href="/find-detail?PracticeID='.$items['PracticeID'].'">'.'Find out more'.'</a></p><div class="contacts">';
+							$outp .= '<p class="Finalbutton"><a href="/practice-detail?PracticeID='.$items['PracticeID'].'">'.'Find out more'.'</a></p><div class="contacts">';
 							
 							if($items['Phone'] != '') {
 								$phoneNumber = str_replace(' ', '', $items['Phone']);
@@ -1642,30 +1642,30 @@ if($page != 1 && $page != 0) {
 // page array
 if(0 <= $page && $page <= 10) {
 	if($PageItem > 10) {
-		loopPageNumber(1, 10, $pageNum, $optionString);
+		loopPageNumber($url, 1, 10, $pageNum, $optionString);
 	} else {
-		loopPageNumber(1, $PageItem, $pageNum, $optionString);
+		loopPageNumber($url, 1, $PageItem, $pageNum, $optionString);
 	}
 } elseif(11 <= $page && $page <= 20) {
 	if($PageItem > 20) {
-		loopPageNumber(11, 20, $pageNum, $optionString);
+		loopPageNumber($url, 11, 20, $pageNum, $optionString);
 	} else {
-		loopPageNumber(11, $PageItem, $pageNum, $optionString);
+		loopPageNumber($url, 11, $PageItem, $pageNum, $optionString);
 	}
 } elseif(21 <= $page && $page <= 30) {
 	if($PageItem > 30) {
-		loopPageNumber(21, 30, $pageNum, $optionString);
+		loopPageNumber($url, 21, 30, $pageNum, $optionString);
 	} else {
-		loopPageNumber(21, $PageItem, $pageNum, $optionString);
+		loopPageNumber($url, 21, $PageItem, $pageNum, $optionString);
 	}
 } elseif(31 <= $page && $page <= 40) {
 	if($PageItem > 40) {
-		loopPageNumber(31, 40, $pageNum, $optionString);
+		loopPageNumber($url, 31, 40, $pageNum, $optionString);
 	} else {
-		loopPageNumber(31, $PageItem, $pageNum, $optionString);
+		loopPageNumber($url, 31, $PageItem, $pageNum, $optionString);
 	}
 } else {
-	loopPageNumber(1, $PageItem, $pageNum, $optionString);
+	loopPageNumber($url, 1, $PageItem, $pageNum, $optionString);
 } 
 
 // next page

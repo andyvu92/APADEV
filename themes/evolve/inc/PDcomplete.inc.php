@@ -63,7 +63,7 @@ if(isset($_POST["POSTPRF"])) {
 		
 		// delete shopping cart data from APA database; put the response status validation here!!!!!!!
 		$userID = $_SESSION["UserId"];
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 		//$type = array("PD","PDNG");
 		
 		//$in  = str_repeat('?,', count($type) - 1) . '?';
