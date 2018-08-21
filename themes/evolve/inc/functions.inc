@@ -179,7 +179,7 @@ function checkPDUser($memberType){
 /*save product data including membership type product, national group product, fellowship & PRF product*/
 function createShoppingCart($userID, $productID,$type,$coupon){
 	try {
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 		$dbt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
@@ -199,7 +199,7 @@ function createShoppingCart($userID, $productID,$type,$coupon){
 }
 // check the user product in case of duplicated shopping cart data
 function checkShoppingCart($userID, $type, $productID){
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 		try {
 			if($type!=""){
 				$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID and type=:type');
@@ -234,7 +234,7 @@ function checkShoppingCart($userID, $type, $productID){
 //get productID list from local database;
 function getProduct($userID,$type){
 		$arrayReturn = array();
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 		$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND type=:type');
 		$shoppingcartGet->bindValue(':userID', $userID);
 		$shoppingcartGet->bindValue(':type', $type);
@@ -250,9 +250,9 @@ function getProduct($userID,$type){
 
 function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 	$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	try {
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 		$dbt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
@@ -292,7 +292,7 @@ function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 	//header("Location:".$link."/pd/pd-product?id=".$productID);
 }
 function PDSaveCoupon($userID, $type, $Coupon){
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	try {
 	$shoppingcartSave= $dbt->prepare('UPDATE shopping_cart SET Coupon = :Coupon WHERE userID= :userID AND type= :type');
 	$shoppingcartSave->bindValue(':userID', $userID);
@@ -306,7 +306,7 @@ function PDSaveCoupon($userID, $type, $Coupon){
 	}
 }
 function getBackgroundImage($userID){
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	$background=0;
 	try {
 		$backgroundInfo= $dbt->prepare('SELECT * FROM background_images WHERE userID= :userID');
@@ -448,7 +448,7 @@ function SavePDSurvey($CreateNewUserPD){
 	$Campaignsproduct = $CreateNewUserPD["Campaigns-product"];
 	$Partnerproduct = $CreateNewUserPD["Partner-product"];
 	$CreateDate = $CreateNewUserPD["CreateDate"];
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 	try {
 		$PDSurvey= $dbt->prepare('INSERT INTO pdsurvey (UserID, Job, EmailAddress, Registrationboard, Professionalinsurance,Professionalbody,HearaboutAPA,Membershipproduct,Pdemailsproduct,Jobsproduct,Shopproduct,Campaignsproduct,Partnerproduct,CreateDate) VALUES (:UserID, :Job, :EmailAddress, :Registrationboard, :Professionalinsurance, :Professionalbody, :HearaboutAPA, :Membershipproduct, :Pdemailsproduct, :Jobsproduct, :Shopproduct, :Campaignsproduct, :Partnerproduct, :CreateDate)');
 		$PDSurvey->bindValue(':UserID', $UserID);
@@ -475,7 +475,7 @@ function SavePDSurvey($CreateNewUserPD){
 	
 }
 function createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type){
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	try {
 		$insuranceUpdate= $dbt->prepare('INSERT INTO insurance (UserID, EmailAddress, CreateDate, Type) VALUES (:UserID, :EmailAddress, :CreateDate, :Type)');
 		$insuranceUpdate->bindValue(':UserID', $UserID);
@@ -491,7 +491,7 @@ function createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type){
 	}	
 }
 function getInsuranceStatus($UserID){
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	try {
 		$insuranceGet= $dbt->prepare('SELECT * FROM insurance WHERE UserID= :UserID');
 		$insuranceGet->bindValue(':UserID', $UserID);
@@ -535,7 +535,7 @@ function unique_multidim_array($array, $key) {
 //get productID list from local database;
 function getProductList($userID){
 	$arrayReturn = array();
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config');
+	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 	$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND productID != "PRF" AND type != "PD" AND type != "PDNG"');
 	$shoppingcartGet->bindValue(':userID', $userID);
 	$shoppingcartGet->execute();

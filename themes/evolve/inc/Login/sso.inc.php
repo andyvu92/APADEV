@@ -70,7 +70,7 @@
 		
 		$oldData = false;
 
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Apa2017Config'); 
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 		$SSODataGet = $dbt->prepare('SELECT * FROM ssodata WHERE Token = :Token');
 		$SSODataGet->bindParam(':Token', $_SESSION['TokenId']);
 		if(!$SSODataGet->execute()) {
