@@ -3,8 +3,8 @@
 	$url =  "{$_SERVER['REQUEST_URI']}";
 	$date = date('Y-m-d h:i:s');
 
-	require_once('/var/simplesamlphp/lib/_autoload.php');
-
+	require_once('.../var/simplesamlphp/lib/_autoload.php');
+	/*
 	$as = new SimpleSAML_Auth_Simple('default-sp');
  
 	// require authentication
@@ -23,6 +23,7 @@
 	  $nameID = new SAML2_XML_saml_NameID($eptid);
 	  print_r($nameID);
 	};
+	*/
 
 	/**
 	 * Get data (SAML request)
