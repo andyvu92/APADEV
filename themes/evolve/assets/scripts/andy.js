@@ -108,18 +108,17 @@ jQuery(document).ready(function() {
   var h2 = $("#h2").position();
   var h3 = $("#h3").position();
 
-  $("[class^='join-details-button'").click(function() {
-    $('html, body').animate({
-      scrollTop: h1.top
-    }, 500);
-    //return false;
+  $("[class^='join-details-button']").click(function() {
 
+    $('html, body').animate({
+			scrollTop: $('#dashboard-right-content').offset().top
+		}, 600);
   }); // left menu link2 click() scroll END
 
-  $("[class^='your-details-prevbutton'").click(function() {
+  $("[class^='your-details-prevbutton']").click(function() {
     $('html, body').animate({
-      scrollTop: h1.top
-    }, 500);
+			scrollTop: $(".nav-tabs").offset().top
+		}, 600);
     //return false;
 
   }); // left menu link2 click() scroll END
@@ -293,5 +292,23 @@ $(document).on("click","#id .class", function(){
   console.log("Clicked.");
 });
 
-//CAPITALIZE TEXT
+
+//TEST MULTISELECT
+jQuery(document).ready(function() {
+  $('.chosen-container').parent().on('touchstart', function(e) {
+    x = $(this).find(".chosen-container");
+    console.log(x);
+    // Trigger the mousedown event.
+    if ( $(this).find(".chosen-container").hasClass('chosen-container-active') ){
+      $(this).find(".chosen-container").removeClass('chosen-container-active');
+      $(this).find(".chosen-container").removeClass('chosen-with-drop');
+      $(this).find(".chosen-container").addClass('chosen-container-active');
+      $(this).find(".chosen-container").addClass('chosen-with-drop');
+    }
+    else{
+      $(this).find(".chosen-container").removeClass('chosen-container-active');
+      $(this).find(".chosen-container").removeClass('chosen-with-drop');
+    }
+  });
+});
 
