@@ -904,18 +904,24 @@ jQuery(document).ready(function($) {
 			$('.Join').html("<a href='/jointheapa?MT="+MembershipType+"&NG="+NationalGroups+"' style='color: white;'>Join now</a>");
 		}
 		$("."+type).show();
+		
+		$('html, body').animate({
+			scrollTop: $('#section-main-content').offset().top
+		}, 500, 'linear');
 	});
 	
   $(".prev").click(function() {
     var x = $(".active").attr('id').replace('Section','');
     if(x != '1') {
-      $("#Section"+x).removeClass("passed active");
-       x = parseInt(x) - 1;
-       $(".MainQuestionHolder #Sections"+x).show();
-      $("#Section"+x).addClass("active");
-       $('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
-      ProgressMove(x);
-    }
+		$("#Section"+x).removeClass("passed active");
+		x = parseInt(x) - 1;
+		$(".MainQuestionHolder #Sections"+x).show();
+		$("#Section"+x).addClass("active");
+		$('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
+		ProgressMove(x);
+    } else { // when this button is clicked on first page.
+		window.history.back();
+	}
     BringSurveyBack();
     if(x == 2) {
       $(".node-membership-type").hide();
@@ -924,11 +930,15 @@ jQuery(document).ready(function($) {
       $('#question65').show();
       $('#question65').removeClass("function");
     }
+	$('html, body').animate({
+		scrollTop: $('#section-main-content').offset().top
+	}, 500, 'linear');
   });
   $("[class^=NGname]").change(function() {
 	var id = $(this).attr('id');
     if($('#'+id).is(':checked')) {
       var ins = $(this).attr('class').replace('NGname','');
+	  var ins = ins.replace(' styled-checkbox','');
       var NGtext = $(".NGnameText"+ins).text();
       var NGtotalText = $('#chosenNGName').text();
       var NGpriceT = $('.NGprice'+ ins).text();
@@ -937,7 +947,7 @@ jQuery(document).ready(function($) {
       var totalPrice = totalNG.replace(/^\D+|\D+$/g, "");
       if(totalPrice == '') totalPrice = 0;
       var Sum = parseInt(NGPrice) + parseInt(totalPrice);
-      console.log("ins: "+ins+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
+      console.log("ins: "+ins+" /Text: "+NGtext+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
       $(".NGpriceT").text(Sum);
       if(NGtotalText == "" || NGtotalText == "Not selected") {
         $('#chosenNGName').text(NGtext);
@@ -952,6 +962,7 @@ jQuery(document).ready(function($) {
 	  }
     } else {
       var ins = $(this).attr('class').replace('NGname','');
+	  var ins = ins.replace(' styled-checkbox','');
       var NGtext = $(".NGnameText"+ins).text();
       var NGtotalText = $('#chosenNGName').text();
       var NGpriceT = $('.NGprice'+ ins).text();
@@ -961,6 +972,7 @@ jQuery(document).ready(function($) {
       if(totalPrice == '') totalPrice = 0;
 	  var Sum = parseInt(totalPrice) - parseInt(NGPrice);
 	  // get original ids
+	  console.log("ins: "+ins+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
 	  var original = $("#chosenNGid").text();
       
       $(".NGpriceT").text(Sum);

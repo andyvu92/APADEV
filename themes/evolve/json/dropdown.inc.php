@@ -1,19 +1,32 @@
 <?php
 
-function curlRequest($API) {
+function curlRequesttttt($API, $type) {
 	// create curl resource 
 	$ch = curl_init(); 
+
 	// set url 
-	$urlcurl = $API;
-	curl_setopt($ch, CURLOPT_URL, $urlcurl); 
-	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
-	
+	if($type == "Get") {
+		curl_setopt($ch, CURLOPT_URL, $API); 
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+	} else {
+		//echo "else!";
+		$prodcutArray = array();
+		$memberProductsArray['ProductID']=$prodcutArray;
+		$memberProdcutID = $memberProductsArray;
+		$memberProdcutID = json_encode($memberProdcutID, true);
+		curl_setopt($ch, CURLOPT_URL, $API); 
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_POSTFIELDS,$memberProdcutID);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+			"Content-Type:application/json"
+		));
+	}
 	//return the transfer as a string 
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
 	curl_setopt($ch, CURLOPT_ENCODING, "");
 	curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
-	curl_setopt($ch, CURLOPT_TIMEOUT, 300000000);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 300000);
 	curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	
@@ -23,7 +36,6 @@ function curlRequest($API) {
 		//echo 'error:' . curl_error($ch);
 		return curl_error($ch);
 	}
-	////echo $JSONreturn.'this is call from Aptify';
 	// close curl resource to free up system resources 
 	curl_close($ch);
 	return $JSONreturn;
@@ -38,11 +50,38 @@ function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
 	return $json;
 }
 
+function getMemberTypePrice(){
+    // 2.2.31 Get Membership prodcut price
+    // Send - 
+    // userID & product list
+    // Response -Membership prodcut price
+	$API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/-1";
+	$tt = curlRequesttttt($API, "JSON");
+	//echo $tt;
+	$MemberType = json_clean_decode($tt, true);
+    //print_r($MemberType);
+    // write Country json file
+	foreach($MemberType as $key => $value){
+        $x = explode(" ", $MemberType[$key]['Title']);
+        $y = str_replace(":", "", $x[0]);
+        $z = str_replace($x[0]." ", "", $MemberType[$key]['Title']);
+        $ID = $MemberType[$key]['ProductID'];
+        $code = $y;
+        $Title = $z;
+		$Price = $MemberType[$key]['Price'];
+		$arrayCountry[] = array('ID'=>$ID, 'Title'=>$Title, 'Price'=>$Price, 'Code'=>$code);	
+    }
+	$response= $arrayCountry;
+	$fp = fopen(__DIR__ . '/../json/TypePrice.json', 'w');
+    $test = fwrite($fp, json_encode($response));
+    fclose($fp);
+}
+
 function getDropdown(){
 	$API = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOptionValues';
-	$resultt = curlRequest($API);
+	$resultt = curlRequesttttt($API, "Get");
 	$result = json_clean_decode($resultt, true);
-	
+
 	// write Country json file
 	foreach($result['Country']  as $lines){
 		$ID = $lines['ID'];
@@ -240,4 +279,6 @@ function getDropdown(){
 	fclose($fp);
 }
 getDropdown();
+getMemberTypePrice();
+
 ?>
