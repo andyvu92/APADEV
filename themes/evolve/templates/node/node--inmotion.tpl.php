@@ -200,7 +200,7 @@
          <div class="content">
             <?php echo views_embed_view('inmotioncategory', 'block_10');?>
          </div>
-		 <h3 class="headline">Archives</h3>
+		 <!--<h3 class="headline">Archives</h3>
          <span class="brd-headling"></span>
          <div class="content">
             <ul class="socialMediaIcon">
@@ -209,7 +209,7 @@
 				<li>2016</li>
 				<li>2015</li>
 			</ul>
-         </div>
+         </div>-->
       </div>
 	
 	<?php 
