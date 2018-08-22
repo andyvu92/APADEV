@@ -48,11 +48,11 @@ if(isset($_POST["Suburb"]) || isset($_GET["Suburb"])) {
 } else { $request["Suburb"] = ""; }
 if(isset($_POST["BeginDate"]) || isset($_GET["BeginDate"])) {	
 	if(isset($_POST["BeginDate"])) {$request["BeginDate"] = str_replace("-","/",$_POST["BeginDate"]);}
-	else {$request["BeginDate"] = $_GET["BeginDate"];}
+	else {$request["BeginDate"] = str_replace("-","/",$_GET["BeginDate"]);}
 } else { $request["BeginDate"] = ""; }
 if(isset($_POST["EndDate"]) || isset($_GET["EndDate"])) {	
 	if(isset($_POST["EndDate"])) {$request["EndDate"] = str_replace("-","/",$_POST["EndDate"]);}
-	else {$request["EndDate"] = $_GET["EndDate"];}
+	else {$request["EndDate"] = str_replace("-","/",$_GET["EndDate"]);}
 } else { $request["EndDate"] = ""; }
 if(isset($_GET["pagesize"])) {
 	$request["PageSize"] = $_GET["pagesize"];
@@ -320,12 +320,12 @@ if(isset($results['MResponse'])) {
 	  // urls = "/pd/pd-search?";
 	 
 		if(value== 1) {
-						window.location.href= urls + "?pagesize=5";
+						window.location.href= urls + "?pagesize=5"+"<?php echo $passString; ?>";
 		} else if(value== 2) {
-						window.location.href= urls + "?pagesize=10";
+						window.location.href= urls + "?pagesize=10"+"<?php echo $passString; ?>";
 		}
 		else{
-			window.location.href= urls + "?pagesize=20";
+			window.location.href= urls + "?pagesize=20"+"<?php echo $passString; ?>";
 		}
                 
 	}
