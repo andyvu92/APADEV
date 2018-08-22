@@ -562,9 +562,11 @@
 				</div>
 				<div class="right-content">
 					<h2 class="blue-heading">Learning outcomes</h2>
-					<p>
-						<?php echo $pd_detail['Learning_outcomes']; ?>
-					</p>
+					<ul>
+					<?php foreach($pd_detail['LearningOutcomes'] as $outcomes) {
+						echo "<li>".$outcomes['LearningOutcomes']."</li>";
+					} ?>
+					</ul>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -576,9 +578,11 @@
 				</div>
 				<div class="right-content">
 					<h2 class="blue-heading">Learning outcomes</h2>
+					<ul>
 					<?php foreach($pd_detail['LearningOutcomes'] as $outcomes) {
-						echo "<p>".$outcomes['LearningOutcomes']."</p>";
+						echo "<li>".$outcomes['LearningOutcomes']."</li>";
 					} ?>
+					</ul>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -590,9 +594,18 @@
 				</div>
 				<div class="right-content">
 					<h2 class="blue-heading">Prerequiresites</h2>
-					<p>
-						<?php echo $pd_detail['Prerequisites']; ?>
-					</p>
+					<ul>
+					<?php 
+						$seperatedPre = explode(",",$pd_detail['Prerequisites']);
+						if(sizeof($seperatedPre) == 1) {
+							echo "<li>".$pd_detail['Prerequisites']."</li>";
+						} else {
+							foreach($seperatedPre as $prSep) {
+								echo "<li>".$prSep."</li>";
+							}
+						}
+					?>
+					</ul>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -776,8 +789,8 @@
         ?>
 		<div id="processWindow">
 		   <h3>This item has been successfully added to your cart.</h3>
-           <a target="_self" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
-           <a target="_self" class="addCartlink" href="pd-shopping-cart"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Checkout now</button></a>
+           <a target="_self" id="continue-shopping" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
+           <a target="_self" id="checkout" class="addCartlink" href="pd-shopping-cart"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Checkout now</button></a>
 		</div>
 		
 	 <div id="myMap">
@@ -1634,7 +1647,7 @@
 			</div>
 		</div>
 
-	 <input class="accent-btn" style="margin-top: 10px;" type="submit" value="Go to my cart">
+	 <input id="go-to-card" class="accent-btn" style="margin-top: 10px;" type="submit" value="Go to my cart">
 
 	</form>
 	</div>
@@ -1952,7 +1965,11 @@
 				</div>
 				<div class="right-content">
 					<h2 class="blue-heading">Learning outcomes</h2>
-					<p><?php echo $pd_detail['Learning_outcomes']; ?></p>
+					<ul>
+					<?php foreach($pd_detail['LearningOutcomes'] as $outcomes) {
+						echo "<li>".$outcomes['LearningOutcomes']."</li>";
+					} ?>
+					</ul>
 				</div>
 			</div>
 	</div>
@@ -1967,9 +1984,11 @@
 				</div>
 				<div class="right-content">
 					<h2 class="blue-heading">Learning outcomes</h2>
+					<ul>
 					<?php foreach($pd_detail['LearningOutcomes'] as $outcomes) {
-						echo "<p>".$outcomes['LearningOutcomes']."</p>";
+						echo "<li>".$outcomes['LearningOutcomes']."</li>";
 					} ?>
+					</ul>
 				</div>
 			</div>
 	</div>
@@ -1984,9 +2003,18 @@
 				</div>
 				<div class="right-content">
 					<h2 class="blue-heading">Prerequiresites</h2>
-					<p>
-						<?php echo $pd_detail['Prerequisites']; ?>
-					</p>
+					<ul>
+					<?php 
+						$seperatedPre = explode(",",$pd_detail['Prerequisites']);
+						if(sizeof($seperatedPre) == 1) {
+							echo "<li>".$pd_detail['Prerequisites']."</li>";
+						} else {
+							foreach($seperatedPre as $prSep) {
+								echo "<li>".$prSep."</li>";
+							}
+						}
+					?>
+					</ul>
 				</div>
 			</div>
 	</div>
@@ -2268,7 +2296,24 @@ Facsimile: (03) 9092 0899</p>
 	<div class="modal-footer">
 		<button type="button" class="btn btn-default apa_policy_button" id="installment_policy_button">Submit</button>	
 	</div>	
-</div>	
+</div>
+
+<!-- OVERLAY / LOADING SCREEN -->
+<div class="overlay">
+	<section class="loaders">
+		<span class="loader loader-quart">
+			<div class="loading">
+				<div class="loading__element">L</div>
+				<div class="loading__element">O</div>
+				<div class="loading__element">A</div>
+				<div class="loading__element">D</div>
+				<div class="loading__element">I</div>
+				<div class="loading__element">N</div>
+				<div class="loading__element">G</div>
+			</div>
+		</span>   
+	</section>
+</div>
 <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script type="text/javascript">

@@ -1269,8 +1269,126 @@ input{
 }
 
 /*---------------------------------------
----------------------POPUPS------------- 
+---------------------LOADING SCREEN------------- 
 ---------------------------------------*/
+.square(@size) {
+    width: @size;
+    height: @size;
+}
+.absPosition (@border-size) {
+    position: absolute;
+    top: @border-size;
+    right: @border-size;
+    bottom: @border-size;
+    left: @border-size;
+}
+.animation(@animation) {
+    -o-animation: @animation;
+    -moz-animation: @animation;
+    -webkit-animation: @animation;
+    animation: @animation;
+}
+
+@loader-size: 180px;
+/* ANIMATIONS */
+@keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      tranform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      tranform: rotate(360deg);
+    }
+}
+@-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      tranform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      tranform: rotate(360deg);
+    }
+}
+@keyframes bouncing {
+    0%, 100% {
+      transform: scale3d(1,1,1);
+    }
+    50% {
+      transform: scale3d(0,0,1);
+    }
+}
+@-webkit-keyframes bouncing {
+    0%, 100% {
+      transform: scale3d(1,1,1);
+    }
+    50% {
+      transform: scale3d(0,0,1);
+    }
+}
+/* BASE */
+.loaders {
+    visibility: hidden;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: none;
+    .loader {
+        display: inline-block;
+        position: relative;
+        .square(@loader-size);
+        vertical-align: middle;
+        display: flex;
+    }
+    /*	Loader Quadrant */
+    .loader-quart {
+        border-radius: 100%;
+        border: 6px solid rgba(255, 255, 255, 0.4);
+        &:after {
+          content: "";
+          .absPosition(-6px);
+          border-radius: 100%;
+          border: 6px solid transparent;
+          border-top-color: #fff;
+          .animation(spin 1.5s linear infinite);
+        }
+    }
+}
+
+.loading {
+    display: flex;
+    color: #fff;
+    margin: auto auto;
+    .loading__element {
+        font: normal 100 2rem/1 Roboto;
+        letter-spacing: .5em;
+        animation: bouncing 2s infinite ease;
+        &:nth-child(1){
+            animation-delay: 0.1s;
+        }
+        &:nth-child(2){
+            animation-delay: 0.2s;
+        }
+        &:nth-child(3){
+            animation-delay: 0.3s;
+        }
+        &:nth-child(4){
+            animation-delay: 0.4s;
+        }
+        &:nth-child(5){
+            animation-delay: 0.5s;
+        }
+        &:nth-child(6){
+            animation-delay: 0.6s;
+        }
+        &:nth-child(7){
+            animation-delay: 0.7s;
+        }
+    }
+}
 
 
 

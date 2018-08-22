@@ -904,18 +904,24 @@ jQuery(document).ready(function($) {
 			$('.Join').html("<a href='/jointheapa?MT="+MembershipType+"&NG="+NationalGroups+"' style='color: white;'>Join now</a>");
 		}
 		$("."+type).show();
+		
+		$('html, body').animate({
+			scrollTop: $('#section-main-content').offset().top
+		}, 500, 'linear');
 	});
 	
   $(".prev").click(function() {
     var x = $(".active").attr('id').replace('Section','');
     if(x != '1') {
-      $("#Section"+x).removeClass("passed active");
-       x = parseInt(x) - 1;
-       $(".MainQuestionHolder #Sections"+x).show();
-      $("#Section"+x).addClass("active");
-       $('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
-      ProgressMove(x);
-    }
+		$("#Section"+x).removeClass("passed active");
+		x = parseInt(x) - 1;
+		$(".MainQuestionHolder #Sections"+x).show();
+		$("#Section"+x).addClass("active");
+		$('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
+		ProgressMove(x);
+    } else { // when this button is clicked on first page.
+		window.history.back();
+	}
     BringSurveyBack();
     if(x == 2) {
       $(".node-membership-type").hide();
@@ -924,11 +930,15 @@ jQuery(document).ready(function($) {
       $('#question65').show();
       $('#question65').removeClass("function");
     }
+	$('html, body').animate({
+		scrollTop: $('#section-main-content').offset().top
+	}, 500, 'linear');
   });
   $("[class^=NGname]").change(function() {
 	var id = $(this).attr('id');
     if($('#'+id).is(':checked')) {
       var ins = $(this).attr('class').replace('NGname','');
+	  var ins = ins.replace(' styled-checkbox','');
       var NGtext = $(".NGnameText"+ins).text();
       var NGtotalText = $('#chosenNGName').text();
       var NGpriceT = $('.NGprice'+ ins).text();
@@ -937,7 +947,7 @@ jQuery(document).ready(function($) {
       var totalPrice = totalNG.replace(/^\D+|\D+$/g, "");
       if(totalPrice == '') totalPrice = 0;
       var Sum = parseInt(NGPrice) + parseInt(totalPrice);
-      console.log("ins: "+ins+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
+      console.log("ins: "+ins+" /Text: "+NGtext+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
       $(".NGpriceT").text(Sum);
       if(NGtotalText == "" || NGtotalText == "Not selected") {
         $('#chosenNGName').text(NGtext);
@@ -952,6 +962,7 @@ jQuery(document).ready(function($) {
 	  }
     } else {
       var ins = $(this).attr('class').replace('NGname','');
+	  var ins = ins.replace(' styled-checkbox','');
       var NGtext = $(".NGnameText"+ins).text();
       var NGtotalText = $('#chosenNGName').text();
       var NGpriceT = $('.NGprice'+ ins).text();
@@ -961,6 +972,7 @@ jQuery(document).ready(function($) {
       if(totalPrice == '') totalPrice = 0;
 	  var Sum = parseInt(totalPrice) - parseInt(NGPrice);
 	  // get original ids
+	  console.log("ins: "+ins+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
 	  var original = $("#chosenNGid").text();
       
       $(".NGpriceT").text(Sum);
@@ -1132,7 +1144,6 @@ jQuery(document).ready(function($) {
 		$( "#disagreeDescription" ).removeClass('display-none');
 		$('a.join-details-button5').addClass('disabled');
 		//$("#conditions" ).removeAttr('checked');
-		
 	}
 	else{
 		$( "#disagreeDescription" ).addClass('display-none');
@@ -1229,24 +1240,78 @@ jQuery(document).ready(function($) {
 		}, 1);
 	});
 
-	//-------------------------------------
+	//ADD WORKPLACE SCROLL TOP
+	$(document).on('click', '.add-workplace-join', function(){
+		$('html, body').animate({
+			scrollTop: $('#dashboard-right-content').offset().top
+		}, 600);
+	});
+//======================== LOADING SCREEN BUTTONS =================================
 	
-	/*  check Installment policy*/
-	//if(!$("#rolloverblock").hasClass("display-none")){
-	//	if($('#installmentpolicyp').val()=="0"){
-	//		$( "#disagreeInstallmentDescription" ).removeClass('display-none');
-	//		$('a.join-details-button7').addClass('disabled');
-			
-	//	}
-	//	else{
-	//		$( "#disagreePolicyDescription" ).addClass('display-none');
-	//		$('a.join-details-button7').removeClass('disabled');
-	//	}
-		
-	//}
+//------------- JOIN THE APA / RENEW MEMBERSHIP-----------------------
+	$(document).on('click', '.join-details-button4', function(){
+		$('.down4').show();
+		$('.down5').hide();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
 
-	//-------------------------------------
+	$(document).on('click', '.join-details-button5', function(){
+		$('.down5').show();
+		$('#insurancePopUp').fadeOut();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
 
+	$(document).on('click', '.join-details-button7', function(){
+		$('.down6').show();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
+
+	$(document).on('click', '.placeorder', function(){
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
+
+	$(document).on('click', '.your-details-prevbutton6', function(){
+		$('.down6').stop();
+		$('.down6').show();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
+
+	$(document).on('click', '.your-details-prevbutton8', function(){
+		$('.down8').stop();
+		$('.down8').show();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
+
+	//---------------------------------------------------------------------------
+
+//------------- PD PAGES -----------------------
+$(document).on('click', '#go-to-card', function(){
+	if ( $('#Professional-insurance1').is(':checked') ) {
+		$('[aria-describedby="registerPDUser"]').fadeOut();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	}
+});
+
+$(document).on('click', '#continue-shopping', function(){
+		$('[aria-describedby="processWindow"]').fadeOut();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+});
+
+$(document).on('click', '#checkout', function(){
+	$('[aria-describedby="processWindow"]').fadeOut();
+	$('.overlay').fadeIn();
+	$('.loaders').css('visibility','visible').hide().fadeIn();
+});
+
+//===============================================================================	
 	$('#logoutButton').click(function() {
 		document.getElementById("logoutAcButton").click();
 	});

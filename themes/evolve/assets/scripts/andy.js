@@ -292,16 +292,19 @@ $(document).on("click","#id .class", function(){
   console.log("Clicked.");
 });
 
+// IF THE DEVICE IS TOUCH SCREEN
+function isTouchDevice() {
+  return 'ontouchstart' in document.documentElement;
+}
 
-//TEST MULTISELECT
+// MULTISELECT 
 jQuery(document).ready(function() {
   $('.chosen-container').parent().on('touchstart', function(e) {
-    x = $(this).find(".chosen-container");
-    console.log(x);
     // Trigger the mousedown event.
     if ( $(this).find(".chosen-container").hasClass('chosen-container-active') ){
       $(this).find(".chosen-container").removeClass('chosen-container-active');
       $(this).find(".chosen-container").removeClass('chosen-with-drop');
+      $(this).find(".active-result").removeClass('highlighted');
       $(this).find(".chosen-container").addClass('chosen-container-active');
       $(this).find(".chosen-container").addClass('chosen-with-drop');
     }
@@ -310,5 +313,39 @@ jQuery(document).ready(function() {
       $(this).find(".chosen-container").removeClass('chosen-with-drop');
     }
   });
+
+    $notCall = $("body").not( $(".chosen-container") );
+    $notCall.on("click", function (e) {
+      if (isTouchDevice()) {
+        $(".chosen-container").removeClass('chosen-container-active');
+        $(".chosen-container").removeClass('chosen-with-drop');
+        $('.chosen-results li').hasClass('active-result').addClass('active-result');
+      }
+    });
+  
+
+  $(document).on('touchstart', '.search-choice-close', function(e){
+    var x = $(this).attr('data-option-array-index');
+    $(this).parent().remove();
+    $('.chosen-results li[data-option-array-index="'+ x +'"]').removeClass('result-selected');
+    $('.chosen-results li[data-option-array-index="'+ x +'"]').addClass('active-result');
+    $('.chosen-select').trigger("chosen:updated");
+  });
+
 });
+
+jQuery(document).ready(function() {
+  $('#Nationalgp').selectize({
+    plugins: ['remove_button'],
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+        return {
+            value: input,
+            text: input
+        }
+    }
+});
+});
+
 

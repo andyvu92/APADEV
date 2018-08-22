@@ -1298,7 +1298,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                     <label for="">Choose which National Groups you would like to join:<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
                     
                     <div class="plus-select-box">
-                    <select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
+                    <select id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups" multiple>
                     
                     <?php
     

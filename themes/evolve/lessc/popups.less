@@ -994,9 +994,7 @@ div[aria-describedby="loginPopWindow"].ui-dialog, #loginAT .modal-dialog {
 
 /* PD PROCESS */
 div[aria-describedby="processWindow"].ui-dialog{
-    position: fixed!important;
-    left: calc(~"50% - 175px")!important;
-    width: 350px;
+    .small-popup;
     #processWindow{
         display: flex!important;
         flex-direction: column;
@@ -1007,10 +1005,6 @@ div[aria-describedby="processWindow"].ui-dialog{
             margin: 10px 0;
             min-width: 181px;
         }
-    }
-    @media all and (max-width: @phone-width)  {
-        width: 300px!important;
-        left: calc(~"50% - 150px")!important;
     }
 }
 
@@ -1063,10 +1057,3 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
 	width: 350px!important;
 }
 
-div[aria-describedby="processWindow"].ui-dialog {
-    z-index: 1052!important;
-    left: 30%!important;
-    width: 350px!important;
-    width:351px!important;
-	left:578px!important;
-}

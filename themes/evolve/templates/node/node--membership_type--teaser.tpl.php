@@ -107,7 +107,7 @@ $rens = str_replace('</div>',"",$rens);
 				if($TypePrice[$key]["Code"] == strtoupper($rens)) {
 					//echo "ever?????????????????!!!!!!!!!!!!!!!!!!";
 					print '<div class="MTprice">$'.$TypePrice[$key]["Price"].'</div>';
-					print '<div class="MTid" style="display: hidden;">'.$TypePrice[$key]["ID"].'</div>';
+					print '<div class="MTid" style="display: none;">'.$TypePrice[$key]["ID"].'</div>';
 				}
 			}
 			?>
