@@ -299,18 +299,18 @@ You have the right to access the personal information about yourself held by the
 <p><strong>AUSTRALIAN PHYSIOTHERAPY ASSOCIATION</strong></p>
 <p><strong>ABN: 89 004 265 150</strong></p>
 
-	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-		<input class="styled-checkbox" type="checkbox" id="privacypolicyp" checked name="privacy-policy">
-		<label class="apa_policy_button" for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label>
-	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none warning" id="disagreePolicyDescription"> 
-        Please agree to the APA Privacy Policy to continue with your membership
-	</div> 
+		<div class="col-xs-12">  
+			<input class="styled-checkbox" type="checkbox" id="privacypolicyp" checked name="privacy-policy">
+			<label class="apa_policy_button" for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label>
+		</div>
+		<div class="col-xs-12 display-none warning" id="disagreePolicyDescription"> 
+			Please agree to the APA Privacy Policy to continue with your membership
+		</div> 
 	</div>
 
 	<div class="modal-footer">
 		<a class="popup-submit" href="" popup-dismiss="privacypolicyWindow">Submit</a>
+	</div>
 	</div>
 </div>
 <div id="installmentpolicyWindow" style="display:none;">
@@ -334,7 +334,23 @@ You have the right to access the personal information about yourself held by the
 	</div>
 	<button type="button" class="btn btn-default" id="installment_policy_button">Submit</button>
 </div>
-<div class="overlay"></div>
+
+<!-- OVERLAY / LOADING SCREEN -->
+<div class="overlay">
+	<section class="loaders">
+		<span class="loader loader-quart">
+			<div class="loading">
+				<div class="loading__element">L</div>
+				<div class="loading__element">O</div>
+				<div class="loading__element">A</div>
+				<div class="loading__element">D</div>
+				<div class="loading__element">I</div>
+				<div class="loading__element">N</div>
+				<div class="loading__element">G</div>
+			</div>
+		</span>   
+	</section>
+</div>
 <div id="QuatationPopUp" style="display:none;" class="container">
 	<h3 style="color:black;">Renewing your APA membership is easy…</h3>
 	<p>If your membership category hasn’t changed, simply click continue to proceed with the following purchase:</p>

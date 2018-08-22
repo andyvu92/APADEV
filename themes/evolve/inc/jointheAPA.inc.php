@@ -310,7 +310,23 @@ You have the right to access the personal information about yourself held by the
 				</div>
 			</form>
 		</div>
-<div class="overlay"></div>
+
+<!-- OVERLAY / LOADING SCREEN -->
+<div class="overlay">
+	<section class="loaders">
+		<span class="loader loader-quart">
+			<div class="loading">
+				<div class="loading__element">L</div>
+				<div class="loading__element">O</div>
+				<div class="loading__element">A</div>
+				<div class="loading__element">D</div>
+				<div class="loading__element">I</div>
+				<div class="loading__element">N</div>
+				<div class="loading__element">G</div>
+			</div>
+		</span>   
+	</section>
+</div>
 <?php logRecorder(); ?>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>

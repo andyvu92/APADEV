@@ -119,8 +119,8 @@ $background = getBackgroundImage($userID);
 				<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 text-underline" id="Review"><strong>Review</strong></span></a></li>
 				</ul>
 				<div class="row">
-					<h2 style="color:white;">Thank you for your joining</h2>
-					<p style="color:white;">We’re glad to have you on board.</p>
+					<h2 style="color:#000;">Thank you for your joining</h2>
+					<p style="color:#000;">We’re glad to have you on board.</p>
 					<?php 
 					// after web service 2.2.26 Aptify response the invoice_id;
 					// 2.2.18 Get payment invoice PDF
@@ -137,7 +137,7 @@ $background = getBackgroundImage($userID);
 					<a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 					*/
 					?>
-					<p style="color:white;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>
+					<p style="color:#000;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>
 				</div>
 				<?php /*
 				<div id="Iaksbnkvoice" class="modal fade big-screen" role="dialog">

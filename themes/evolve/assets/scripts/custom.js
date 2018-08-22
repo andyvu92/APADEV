@@ -1132,7 +1132,6 @@ jQuery(document).ready(function($) {
 		$( "#disagreeDescription" ).removeClass('display-none');
 		$('a.join-details-button5').addClass('disabled');
 		//$("#conditions" ).removeAttr('checked');
-		
 	}
 	else{
 		$( "#disagreeDescription" ).addClass('display-none');
@@ -1229,24 +1228,78 @@ jQuery(document).ready(function($) {
 		}, 1);
 	});
 
-	//-------------------------------------
+	//ADD WORKPLACE SCROLL TOP
+	$(document).on('click', '.add-workplace-join', function(){
+		$('html, body').animate({
+			scrollTop: $('#dashboard-right-content').offset().top
+		}, 600);
+	});
+//======================== LOADING SCREEN BUTTONS =================================
 	
-	/*  check Installment policy*/
-	//if(!$("#rolloverblock").hasClass("display-none")){
-	//	if($('#installmentpolicyp').val()=="0"){
-	//		$( "#disagreeInstallmentDescription" ).removeClass('display-none');
-	//		$('a.join-details-button7').addClass('disabled');
-			
-	//	}
-	//	else{
-	//		$( "#disagreePolicyDescription" ).addClass('display-none');
-	//		$('a.join-details-button7').removeClass('disabled');
-	//	}
-		
-	//}
+//------------- JOIN THE APA / RENEW MEMBERSHIP-----------------------
+	$(document).on('click', '.join-details-button4', function(){
+		$('.down4').show();
+		$('.down5').hide();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
 
-	//-------------------------------------
+	$(document).on('click', '.join-details-button5', function(){
+		$('.down5').show();
+		$('#insurancePopUp').fadeOut();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
 
+	$(document).on('click', '.join-details-button7', function(){
+		$('.down6').show();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
+
+	$(document).on('click', '.placeorder', function(){
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
+
+	$(document).on('click', '.your-details-prevbutton6', function(){
+		$('.down6').stop();
+		$('.down6').show();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
+
+	$(document).on('click', '.your-details-prevbutton8', function(){
+		$('.down8').stop();
+		$('.down8').show();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
+
+	//---------------------------------------------------------------------------
+
+//------------- PD PAGES -----------------------
+$(document).on('click', '#go-to-card', function(){
+	if ( $('#Professional-insurance1').is(':checked') ) {
+		$('[aria-describedby="registerPDUser"]').fadeOut();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	}
+});
+
+$(document).on('click', '#continue-shopping', function(){
+		$('[aria-describedby="processWindow"]').fadeOut();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+});
+
+$(document).on('click', '#checkout', function(){
+	$('[aria-describedby="processWindow"]').fadeOut();
+	$('.overlay').fadeIn();
+	$('.loaders').css('visibility','visible').hide().fadeIn();
+});
+
+//===============================================================================	
 	$('#logoutButton').click(function() {
 		document.getElementById("logoutAcButton").click();
 	});

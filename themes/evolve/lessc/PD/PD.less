@@ -1845,7 +1845,7 @@ input[name="Couponcode"]{
 }
 
 //PD MAIN PAGE
-/*-- ABOUT US --*/
+
 .page-node-86{
     #block-block-123{
         .top-banner{
@@ -1903,6 +1903,7 @@ input[name="Couponcode"]{
     }  
 
     #block-block-123{
+        background-position: 70% 50px!important;  
         .sub-top-banner{
             padding: 20px 0;
             margin: 0 auto;
@@ -1944,6 +1945,8 @@ input[name="Couponcode"]{
             }
         }
         @media all and (max-width: @tablet-width){
+            background-position: 70% 100px !important;
+            background-size: 235%;
             .sub-top-banner{
                 text-align: center;
                 .flex-container{
@@ -1960,10 +1963,16 @@ input[name="Couponcode"]{
             } 
         }
         @media all and (max-width: @larger-phone-width){
+            background-position: 70% 150px !important;
+            background-size: 350%;
             .sub-top-banner{
                 padding: 10px 0;
                 font-size: 1.1em;
             }
+        }
+        @media all and (max-width: @phone-width){
+            background-position: 70% 150px !important;
+            background-size: 350%;
         }
     }
 
@@ -2148,11 +2157,5 @@ input[name="Couponcode"]{
     }
     #section-ad-block{
         background: #fff!important;
-    }
-}
-
-.page-node-86{
-    #block-block-123{
-        background-position: 70% 50px!important;  
     }
 }

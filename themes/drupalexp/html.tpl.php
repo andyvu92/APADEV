@@ -4,6 +4,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="/sites/all/themes/evolve/assets/scripts/typeahead.js-master/dist/typeahead.bundle.min.js" type="text/javascript"></script>
+
+	<!-- SELECTIZE -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/sifter/0.5.3/sifter.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.legacy.min.css">
+
 	<script type="text/javascript" language="javascript">
 	$(document).ready(function(){
 		var jsonResult = new Bloodhound({
