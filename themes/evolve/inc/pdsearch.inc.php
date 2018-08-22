@@ -19,6 +19,9 @@
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<h2 class="light-lead-heading">Explore our Professional Development options below:</h2>
 	</div>
+	<div class="col-xs-12">
+		<span>Please note: For online learning visit <a href="https://cpd4physios.com.au/" target="_blank"><strong>cpd4physios</strong></a></span>
+	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Keyword</label>
 		<input type="text" name="Keywords" placeholder="Keyword" <?php if(isset($_POST["Keywords"]) || isset($_GET["Keywords"])) { if(isset($_POST["Keywords"])) {echo "value='".$_POST["Keywords"]."'";} else {echo "value='".$_GET["Keywords"]."'";} } ?>>
@@ -103,6 +106,12 @@
 			<input id="lng" type="hidden" name="lng" value="144.96305600000005" hidden="" style="display: none;">
 		</div>
 	</div>
+	<div class="hiddenPageNums">
+		<div class="PageNums">
+			<input id="pagesize" type="hidden" name="pagesize" style="display: none;" hidden="" <?php if(isset($_POST["pagesize"]) || isset($_GET["pagesize"])) { if(isset($_POST["pagesize"])) { echo "value='".$_POST["pagesize"]."'"; } else {echo "value='".$_GET["pagesize"]."'";} } ?>>
+			<input id="page" type="hidden" name="page" hidden="" style="display: none;" <?php if(isset($_POST["page"]) || isset($_GET["page"])) { if(isset($_POST["page"])) { echo "value='".$_POST["page"]."'"; } else {echo "value='".$_GET["page"]."'";} } ?>>
+		</div>
+	</div>
 	<script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".locationAutomatic").click(function() {
@@ -149,9 +158,6 @@
 	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 		<label>End date</label>
 		<input type="date" name="EndDate" placeholder="End date"<?php if(isset($_POST["EndDate"]) || isset($_GET["EndDate"])) { if(isset($_POST["EndDate"])) {echo "value='".$_POST["EndDate"]."'";} else {echo "value='".str_replace("/","-",$_GET["EndDate"])."'";} } ?>>
-	</div>
-	<div class="col-xs-12">
-		<span>Please note: For online learning visit <a href="https://cpd4physios.com.au/" target="_blank"><strong>cpd4physios</strong></a></span>
 	</div>
 
 	<div class="row">

@@ -15,10 +15,12 @@ function newSessionLogIn($id, $UserName, $Email, $FirstName, $LastName, $Title, 
 	$_SESSION['Database'] = $Database;
 	$_SESSION['AptifyUserID'] = $AptifyUserID;
 }
-function newSessionStats($MemberTypeID, $MemberType, $Status) {
+function newSessionStats($MemberTypeID, $MemberType, $Status, $Speciality, $payThroughDate) {
 	$_SESSION['MemberTypeID'] = $MemberTypeID;
 	$_SESSION['MemberType'] = $MemberType;
 	$_SESSION['Status'] = $Status;
+	$_SESSION['Speciality'] = $Speciality;
+	$_SESSION['payThroughDate'] = $payThroughDate;
 }
 function deleteSession() {
 	// login related data
@@ -38,6 +40,8 @@ function deleteSession() {
 	unset($_SESSION['MemberTypeID']);
 	unset($_SESSION['MemberType']);
 	unset($_SESSION['Status']);
+	unset($_SESSION['Speciality']);
+	unset($_SESSION['payThroughDate']);
 	// SSO data
 	unset($_SESSION["outputReturn"]);
 	unset($_SESSION["thirdParty"]);

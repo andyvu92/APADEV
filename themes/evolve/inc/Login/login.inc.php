@@ -699,7 +699,7 @@ if($resultdata['result']) {
 			
 			$data = "UserID=".$_SESSION["UserId"];
 			$details = GetAptifyData("4", $data,"");
-			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"]);
+			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"]);
 		}
 	}
 	
@@ -710,6 +710,21 @@ if($resultdata['result']) {
 		// Response -
 		// 
 		$result = GetAptifyData("8", "logout");
+		if(isset($result["ErrorInfo"])) {
+			echo $result["ErrorInfo"]["ErrorMessage"];
+			echo "<br>log-out fail";
+		} else {
+			echo '<div class="GetCentreLayout">
+					<div class="ASection">
+						<div class="Desktop">
+							<p>You are successfully logged out!</p>
+						</div>
+						<div class="Mobile">
+							<p>You are successfully logged out!</p>
+						</div>
+					</div>
+				</div>';
+		}
 		//print_r($result);
 		deleteSession();
 		//echo "logged out";

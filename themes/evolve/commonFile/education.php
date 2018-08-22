@@ -43,8 +43,8 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 	</div>
 
 <div class="row">
-	<div class="col-xs-6 col-sm-3 col-md-3">
-		<label for="Ugraduate-yearattained'.$i.'">Year attained<span class="tipstyle">*</span></label>
+	<div class="col-xs-6 col-sm-6 col-md-6">
+		<label for="Ugraduate-yearattained'.$i.'">Year attained or expected graduation date<span class="tipstyle">*</span></label>
 		<div class="chevron-select-box">
 		<select class="form-control" name="Ugraduate-yearattained'.$i.'" id="Ugraduate-yearattained'.$i.'">';
 		echo '<option value="" selected disabled>Please select</option>';
@@ -56,7 +56,7 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 		</div>
 	</div>
 
-	<div class="col-xs-6 col-sm-9 col-md-9">
+	<div class="col-xs-6 col-sm-6 col-md-6">
 		<label for="Ugraduate-country'.$i.'">Country<span class="tipstyle">*</span></label>
 		<div class="chevron-select-box">
 		<select class="form-control" id="Ugraduate-country'.$i.'" name="Ugraduate-country'.$i.'">
