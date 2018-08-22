@@ -562,9 +562,11 @@
 				</div>
 				<div class="right-content">
 					<h2 class="blue-heading">Learning outcomes</h2>
-					<p>
-						<?php echo $pd_detail['Learning_outcomes']; ?>
-					</p>
+					<ul>
+					<?php foreach($pd_detail['LearningOutcomes'] as $outcomes) {
+						echo "<li>".$outcomes['LearningOutcomes']."</li>";
+					} ?>
+					</ul>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -576,9 +578,11 @@
 				</div>
 				<div class="right-content">
 					<h2 class="blue-heading">Learning outcomes</h2>
+					<ul>
 					<?php foreach($pd_detail['LearningOutcomes'] as $outcomes) {
-						echo "<p>".$outcomes['LearningOutcomes']."</p>";
+						echo "<li>".$outcomes['LearningOutcomes']."</li>";
 					} ?>
+					</ul>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -590,9 +594,18 @@
 				</div>
 				<div class="right-content">
 					<h2 class="blue-heading">Prerequiresites</h2>
-					<p>
-						<?php echo $pd_detail['Prerequisites']; ?>
-					</p>
+					<ul>
+					<?php 
+						$seperatedPre = explode(",",$pd_detail['Prerequisites']);
+						if(sizeof($seperatedPre) == 1) {
+							echo "<li>".$pd_detail['Prerequisites']."</li>";
+						} else {
+							foreach($seperatedPre as $prSep) {
+								echo "<li>".$prSep."</li>";
+							}
+						}
+					?>
+					</ul>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -1952,7 +1965,11 @@
 				</div>
 				<div class="right-content">
 					<h2 class="blue-heading">Learning outcomes</h2>
-					<p><?php echo $pd_detail['Learning_outcomes']; ?></p>
+					<ul>
+					<?php foreach($pd_detail['LearningOutcomes'] as $outcomes) {
+						echo "<li>".$outcomes['LearningOutcomes']."</li>";
+					} ?>
+					</ul>
 				</div>
 			</div>
 	</div>
@@ -1967,9 +1984,11 @@
 				</div>
 				<div class="right-content">
 					<h2 class="blue-heading">Learning outcomes</h2>
+					<ul>
 					<?php foreach($pd_detail['LearningOutcomes'] as $outcomes) {
-						echo "<p>".$outcomes['LearningOutcomes']."</p>";
+						echo "<li>".$outcomes['LearningOutcomes']."</li>";
 					} ?>
+					</ul>
 				</div>
 			</div>
 	</div>
@@ -1984,9 +2003,18 @@
 				</div>
 				<div class="right-content">
 					<h2 class="blue-heading">Prerequiresites</h2>
-					<p>
-						<?php echo $pd_detail['Prerequisites']; ?>
-					</p>
+					<ul>
+					<?php 
+						$seperatedPre = explode(",",$pd_detail['Prerequisites']);
+						if(sizeof($seperatedPre) == 1) {
+							echo "<li>".$pd_detail['Prerequisites']."</li>";
+						} else {
+							foreach($seperatedPre as $prSep) {
+								echo "<li>".$prSep."</li>";
+							}
+						}
+					?>
+					</ul>
 				</div>
 			</div>
 	</div>

@@ -929,6 +929,7 @@ jQuery(document).ready(function($) {
 	var id = $(this).attr('id');
     if($('#'+id).is(':checked')) {
       var ins = $(this).attr('class').replace('NGname','');
+	  var ins = ins.replace(' styled-checkbox','');
       var NGtext = $(".NGnameText"+ins).text();
       var NGtotalText = $('#chosenNGName').text();
       var NGpriceT = $('.NGprice'+ ins).text();
@@ -937,7 +938,7 @@ jQuery(document).ready(function($) {
       var totalPrice = totalNG.replace(/^\D+|\D+$/g, "");
       if(totalPrice == '') totalPrice = 0;
       var Sum = parseInt(NGPrice) + parseInt(totalPrice);
-      console.log("ins: "+ins+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
+      console.log("ins: "+ins+" /Text: "+NGtext+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
       $(".NGpriceT").text(Sum);
       if(NGtotalText == "" || NGtotalText == "Not selected") {
         $('#chosenNGName').text(NGtext);
@@ -952,6 +953,7 @@ jQuery(document).ready(function($) {
 	  }
     } else {
       var ins = $(this).attr('class').replace('NGname','');
+	  var ins = ins.replace(' styled-checkbox','');
       var NGtext = $(".NGnameText"+ins).text();
       var NGtotalText = $('#chosenNGName').text();
       var NGpriceT = $('.NGprice'+ ins).text();
@@ -961,6 +963,7 @@ jQuery(document).ready(function($) {
       if(totalPrice == '') totalPrice = 0;
 	  var Sum = parseInt(totalPrice) - parseInt(NGPrice);
 	  // get original ids
+	  console.log("ins: "+ins+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
 	  var original = $("#chosenNGid").text();
       
       $(".NGpriceT").text(Sum);
