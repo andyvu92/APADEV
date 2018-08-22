@@ -348,19 +348,23 @@ if(isset($_POST['step2-1'])) {
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
+				<label for="">Name on card:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-6 col-sm-6">
+				<label for="">Card number:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
 
 			<div class="col-xs-6 col-sm-3">
+				<label for="">Expiry date:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
 			</div>
 
 			<div class="col-xs-6 col-sm-3">
+				<label for="">CCV:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV">
 			</div>
 		</div>
@@ -392,20 +396,24 @@ if(isset($_POST['step2-1'])) {
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
+				<label for="">Name on card:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
+				<label for="">Card number:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
 
 			<div class="col-xs-6 col-sm-3">
+				<label for="">Expiry date:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
 			</div>
 
 			<div class="col-xs-6 col-sm-3">
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
+				<label for="">CCV:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV" maxlength="4">
 			</div>
 		</div>
 		<div class="col-xs-12">

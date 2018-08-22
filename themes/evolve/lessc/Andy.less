@@ -1,18 +1,4 @@
-/*--PREDEFINED COLOURS--*/
-@light-background: rgb(242, 243, 244);
-@light-transparent-background: rgba(255, 255, 255, 0.9);
-@dark-background: rgb(94, 96, 103);
-@dark-transparent-background: rgba(94, 96, 103, 0.8);
-@bright-blue: rgb(0, 159, 218);
-@brighter-blue: rgb(0,184,241);
-
-/*--RESPONSIVE BREAKPOINTS--*/
-@phone-width: 480px;
-@larger-phone-width: 570px;
-@tablet-width: 768px;
-@larger-tablet-width: 992px;
-@desktop-width: 1200px;
-@larger-desktop-width: 1500px;
+@import "predefined-styles.less";
 
 /*--HOMEPAGE--*/
 
@@ -588,7 +574,7 @@ div[id^="home-tile-view-block"]{
         padding: 1em;
         position: absolute;
         opacity: 0;
-        z-index: 0;
+        z-index: -1;
         color: #fff;
         border-radius: 15px;
         transition: all .3s linear;
@@ -970,7 +956,7 @@ div[id^="home-tile-view-block"]{
         width: 15px;
         height: 15px;
         position: absolute;
-        top: 40%;
+        top: calc(~"50% - 10.5px");
         right: 10px;
         z-index: 0;
         background-repeat:no-repeat;
@@ -1390,7 +1376,89 @@ input{
     }
 }
 
-
+/*-------------------------------------------------------------------------
+---------------------SELECTIZE CUSTOMISE STYLES---------------------------
+-------------------------------------------------------------------------*/
+.selectize-control.multi{
+    .selectize-input{
+        background: none;
+        padding: 6px 12px;
+        &.has-items{
+            padding-right: 30px!important;
+            padding: 6px 12px;
+        }
+        & >input{
+            &::placeholder {
+                color: @grey;
+                opacity: 1; /* Firefox */
+            }
+            
+            &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+               color: @grey;
+            }
+            
+            &::-ms-input-placeholder { /* Microsoft Edge */
+               color: @grey;
+            }
+        }
+        .item{
+            position: relative;
+            margin: 3px 5px 3px 0;
+            border: 1px solid #aaa;
+            border-radius: 3px;
+            background-color: #eeeeee;
+            background-image: linear-gradient(#f4f4f4 20%,#f0f0f0 50%,#e8e8e8 52%,#eee 100%);
+            background-size: 100% 19px;
+            background-repeat: repeat-x;
+            background-clip: padding-box;
+            box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0,0,0,0.05);
+            color: #333;
+            line-height: 13px;
+            cursor: default;
+            padding: 5px;
+            font-size: 1.2em;
+            font-family: Roboto;
+            .remove{
+                opacity: 0.5;
+                position: absolute;
+                top: calc(~"50% - 7.5px");
+                right: 5.5px;
+                margin-left: 5px;
+                font-size: 0;
+                width: 15px;
+                height: 15px;
+                display: inline-block;
+                cursor: pointer;
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+                background-image: url(/sites/default/files/dashboard-icon/close-icon.png);
+                &:hover{
+                    opacity: 1;
+                }
+            }
+            &.active{
+                background: #eeeeee;
+                color: #333;
+                border: 1px solid #aaa;
+            }
+        }
+    }
+}
+.selectize-control.multi{
+    .selectize-dropdown.multi{
+        .selectize-dropdown-content{
+            background: #eceae8;
+            .option{
+                cursor: pointer;
+                &.active{
+                    background: @blue;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}
 
 
 

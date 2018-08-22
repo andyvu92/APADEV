@@ -335,7 +335,7 @@ jQuery(document).ready(function() {
 });
 
 jQuery(document).ready(function() {
-  $('#Nationalgp').selectize({
+  $('select[multiple=""]').selectize({
     plugins: ['remove_button'],
     delimiter: ',',
     persist: false,

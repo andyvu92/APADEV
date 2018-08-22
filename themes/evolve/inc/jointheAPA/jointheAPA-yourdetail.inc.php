@@ -1360,7 +1360,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 
                     
                     <div class="plus-select-box">
-                    <select class="chosen-select" id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
+                    <select id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
                           <?php
     
     // 2.2.37 - get interest area list
@@ -1396,7 +1396,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                 <div class="col-lg-6">
                     
                 <div class="plus-select-box">    
-                <select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+                <select id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
                     <?php
     
     // $interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
@@ -1429,7 +1429,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                     <label>Choose the languages you speak</label>
                     
                     <div class="plus-select-box">
-                    <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
+                    <select id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
                        
                        <?php
     $Languagecode         = file_get_contents("sites/all/themes/evolve/json/Language.json");
@@ -1836,7 +1836,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 ?>
                                
                                <div class="plus-select-box">
-                               <select class="chosen-select" id="Additionallanguage<?php
+                               <select id="Additionallanguage<?php
         //echo $key;
 ?>" name="Additionallanguage<?php
         echo $key;
@@ -2915,7 +2915,7 @@ if(isset($_GET['MT'])){
                         <label for="">Choose which National Groups you would like to join:</label>
                         
                         <div class="plus-select-box">
-                        <select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
+                        <select id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
                         <?php
 							
 							// get national group from Aptify via webserice return Json data;
@@ -2964,7 +2964,7 @@ if(isset($_GET['MT'])){
 						<label>Choose as many interest areas as you like from the list below:</label>
                         
                         <div class="plus-select-box">
-                        <select class="chosen-select" id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
+                        <select id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
                         <?php
 							
 							// get interest area from Aptify via webserice return Json data;
@@ -2988,7 +2988,7 @@ if(isset($_GET['MT'])){
 						<label>Your treatment area:</label>
                         
                         <div class="plus-select-box">
-                        <select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+                        <select id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
                         <?php
 								
 								// get interest area from Aptify via webserice return Json data;
@@ -3013,7 +3013,7 @@ if(isset($_GET['MT'])){
 						<label>Choose the languages you speak</label>
 						
                         <div class="plus-select-box">
-                        <select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
+                        <select id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
 						
 						<?php
 								$Languagecode         = file_get_contents("sites/all/themes/evolve/json/Language.json");
