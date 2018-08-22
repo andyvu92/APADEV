@@ -380,7 +380,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 
 					<div class="col-xs-6 col-md-3">
-					    <label for="">Birth date<span class="tipstyle"> *</span></label>
+					    <label for="">Date of birth<span class="tipstyle"> *</span></label>
 					    <input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
 					</div>
 					<div class="col-xs-6 col-md-3">
@@ -411,7 +411,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						 <?php
 									$Aboriginalcode  = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
 									$Aboriginal=json_decode($Aboriginalcode, true);
-									sort($Aboriginal);									
+									//sort($Aboriginal);									
 									foreach($Aboriginal  as $key => $value){
 										echo '<option value="'.$Aboriginal[$key]['ID'].'"';
 										if ($details['Aboriginal'] == $Aboriginal[$key]['ID']){ echo "selected='selected'"; } 
@@ -421,6 +421,28 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					   </select>
 					   </div>
 					</div>
+					<div class="col-xs-6">
+				<?php  
+					if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID =array();}
+						
+				?>
+					<label>Choose the languages you speak</label>
+					<div class="plus-select-box">
+					<select id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
+						<?php 
+                        $Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
+						$Language=json_decode($Languagecode, true);
+						$_SESSION["Language"] = $Language;
+						foreach($Language  as $key => $value){
+						    echo '<option value="'.$Language[$key]['ID'].'"';
+							//if(sizeof($PAdditionalLanguageID)==0 && $Language[$key]["ID"]=="11"){ echo "selected='selected'"; }
+							if (in_array( $Language[$key]["ID"],$PAdditionalLanguageID)){ echo "selected='selected'"; } 
+							echo '> '.$Language[$key]['Name'].' </option>';
+						}
+						?>
+					</select>
+					</div>
+				</div>
 				</div>
 				
 				
@@ -514,7 +536,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>-->
 					<div class="col-xs-12 col-md-6">
 						<label for="">Mobile number<span class="tipstyle"> *</span></label>
-						<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  >
+						<input type="text" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  >
 					</div>
 				</div>
 
@@ -762,7 +784,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				<input type="hidden"  name="Specialty"  <?php   echo 'value="'.$details['Specialty'].'"'; ?>>
 				<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<label for=""><?php if(!empty($details['State'])) {echo "You are in the &nbsp;".$details['State']."&nbsp;Branch ,&nbsp;would you like to addd an additional Branch?";} else { echo "Would you like to add an additional Branch?";}?></label>
+					<label for=""><?php if(!empty($details['State'])) {echo "You are in the &nbsp;".$details['State']."&nbsp;Branch ,&nbsp;would you like to add an additional Branch?";} else { echo "Would you like to add an additional Branch?";}?></label>
 					<div class="chevron-select-box">
 					<select class="form-control" id="Branch" name="Branch">
 					<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>Please select</option>
@@ -779,7 +801,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</select>
 					</div>
 				</div>
-
+			
 				<div class="col-xs-12">
 					<label for="">Choose which National Groups you would like to join:<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
 					<div class="plus-select-box">
@@ -797,6 +819,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						// Response -National Group product
 						$sendData["UserID"] = $_SESSION['UserId'];
 						$nationalGroups = GetAptifyData("19", $sendData);
+						sort($nationalGroups);
 						
 				    ?>
 					<?php 
@@ -857,28 +880,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					?>	
 				</div>
 
-				<div class="col-xs-12">
-				<?php  
-					if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID =array();}
-						
-				?>
-					<label>Choose the languages you speak</label>
-					<div class="plus-select-box">
-					<select id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
-						<?php 
-                        $Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
-						$Language=json_decode($Languagecode, true);
-						$_SESSION["Language"] = $Language;
-						foreach($Language  as $key => $value){
-						    echo '<option value="'.$Language[$key]['ID'].'"';
-							//if(sizeof($PAdditionalLanguageID)==0 && $Language[$key]["ID"]=="11"){ echo "selected='selected'"; }
-							if (in_array( $Language[$key]["ID"],$PAdditionalLanguageID)){ echo "selected='selected'"; } 
-							echo '> '.$Language[$key]['Name'].' </option>';
-						}
-						?>
-					</select>
-					</div>
-				</div>
+				
 			</div>
 			<!--
 			<div class="row"> 
@@ -1271,6 +1273,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 									<?php 
 										$universityCode  = file_get_contents("sites/all/themes/evolve/json/University.json");
 										$University=json_decode($universityCode, true);
+										sort($University);
 										$_SESSION["University"] = $University;	
 									?>
 									<?php if (!empty($details['PersonEducation'][$key]['InstituteID'])):?>
@@ -1295,7 +1298,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								</div>
 							</div>
 
-							<div class="col-xs-6 col-sm-3 col-md-3">
+							<div class="col-xs-6 col-sm-6 col-md-6">
 								<label for="Ugraduate-country<?php echo $key;?>">Country<span class="tipstyle"> *</span></label>
 								<div class="chevron-select-box">
 								<select class="form-control" id="Ugraduate-country<?php echo $key;?>" name="Ugraduate-country<?php echo $key;?>">
@@ -1317,8 +1320,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								</div>
 							</div>
 
-							<div class="col-xs-6 col-sm-9 col-md-9">
-								<label for="Ugraduate-yearattained<?php echo $key;?>">Year attained<span class="tipstyle"> *</span></label>
+							<div class="col-xs-6 col-sm-6 col-md-6">
+								<label for="Ugraduate-yearattained<?php echo $key;?>">Year attained or expected graduation date<span class="tipstyle"> *</span></label>
 								<div class="chevron-select-box">
 								<select class="form-control" name="Ugraduate-yearattained<?php echo $key;?>" id="Ugraduate-yearattained<?php echo $key;?>">
 								
@@ -1370,6 +1373,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 <?php
                                     $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
                                     $University             = json_decode($universityCode, true);
+									sort($University);
                                     $_SESSION["University"] = $University;
                                 ?>
                             <div class="chevron-select-box">
@@ -1389,8 +1393,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                         </div>
 
 						<div class="row">
-                            <div class="col-xs-6 col-sm-3">
-                                <label for="Ugraduate-yearattained0">Year attained<span class="tipstyle"> *</span></label>
+                            <div class="col-xs-6 col-sm-6">
+                                <label for="Ugraduate-yearattained0">Year attained or expected graduation date<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
                                 <option value="" selected disabled>Please select</option>
@@ -1404,7 +1408,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 </div>
                             </div>
 
-                            <div class="col-xs-6 col-sm-9">
+                            <div class="col-xs-6 col-sm-6">
                                 <label for="Ugraduate-country0">Country<span class="tipstyle"> *</span></label>
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="Ugraduate-country0" name="Ugraduate-country0">
