@@ -330,7 +330,13 @@ jQuery(document).ready(function($) {
 		else{var eventtitle = "eventtitle"+x;}
 		$("span." + eventtitle).addClass("text-underline");
 	});
-
+    $(document).on("click", ".skip",function(){
+		var n = Number($('#wpnumber').val());
+		var t = Number(n -1);
+	    $('input[name=wpnumber]').val(t);
+		$('.down3').slideUp(200);
+		$('.down4').slideToggle(200);
+	});
 	$('.pd-register-submit').click(function(){
 		if(validateFun()==false){alert("please fill out all required fields *");return false;}
 		if ( $('.down22').find('.focuscss').length > 0 ){alert("please fill out all required fields *");return false;}
