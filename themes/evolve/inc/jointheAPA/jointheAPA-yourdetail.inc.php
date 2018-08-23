@@ -1487,11 +1487,11 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 						<li <?php
 					if ($key == 'Workplace0')
 						echo 'class ="active" ';
-			?>><a data-toggle="tab" href="#workplace<?php
+			?> id="workplaceli<?php echo $key;?>"><a data-toggle="tab" href="#workplace<?php
 					echo $key;
 			?>"><?php $newkey =$key+1;
 					echo "Workplace " . $newkey;
-			?></a></li>
+			?></a><span class="calldeletewp<?php echo $key;?>"></span></li>
 						<?php
 				endforeach;
 			?> 
@@ -3217,7 +3217,7 @@ endif;
 			echo json_encode($_SESSION['country']);
 ?>;
 		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
-		  $(".chosen-select").chosen({width: "100%"});	 
+		 
 			 
 		}
          $('.add-workplace-join').click(function(){
