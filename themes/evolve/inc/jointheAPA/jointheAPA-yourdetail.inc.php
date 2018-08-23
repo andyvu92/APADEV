@@ -2172,7 +2172,12 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <?php
         $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
         $University             = json_decode($universityCode, true);
-		sort($University);
+		$name = array();
+		foreach ($University as $ukey => $row)
+		{
+			$name[$ukey] = $row['Name'];
+		}
+		array_multisort($name, SORT_ASC, $University);
         $_SESSION["University"] = $University;
 ?>
                                <?php
@@ -2316,7 +2321,12 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <?php
                                     $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
                                     $University             = json_decode($universityCode, true);
-									sort($University);
+									$name = array();
+										foreach ($University as $ukey => $row)
+										{
+											$name[$ukey] = $row['Name'];
+										}
+										array_multisort($name, SORT_ASC, $University);
                                     $_SESSION["University"] = $University;
                                 ?>
                             <div class="chevron-select-box">
@@ -3112,7 +3122,12 @@ if(isset($_GET['MT'])){
                                 								<?php
                                     $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
                                     $University             = json_decode($universityCode, true);
-									sort($University);
+									$name = array();
+									foreach ($University as $ukey => $row)
+									{
+										$name[$ukey] = $row['Name'];
+									}
+									array_multisort($name, SORT_ASC, $University);
                                     $_SESSION["University"] = $University;
                                 ?>
                             <div class="chevron-select-box">

@@ -1273,7 +1273,14 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 									<?php 
 										$universityCode  = file_get_contents("sites/all/themes/evolve/json/University.json");
 										$University=json_decode($universityCode, true);
-										sort($University);
+										$name = array();
+										foreach ($University as $ukey => $row)
+										{
+											$name[$ukey] = $row['Name'];
+										}
+										array_multisort($name, SORT_ASC, $University);
+										
+										
 										$_SESSION["University"] = $University;	
 									?>
 									<?php if (!empty($details['PersonEducation'][$key]['InstituteID'])):?>
@@ -1375,7 +1382,14 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 <?php
                                     $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
                                     $University             = json_decode($universityCode, true);
-									sort($University);
+									
+									$name = array();
+										foreach ($University as $ukey => $row)
+										{
+											$name[$ukey] = $row['Name'];
+										}
+									array_multisort($name, SORT_ASC, $University);
+									
                                     $_SESSION["University"] = $University;
                                 ?>
                             <div class="chevron-select-box">
