@@ -2278,8 +2278,10 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             </div>
                             
                         </div>
+					<?php if($key!="0"):?>
 					<a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>	
-                    </div>
+                    <?php endif;?>
+					</div>
                 <?php
     endforeach;
 ?>
@@ -2366,7 +2368,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 </div>
                             </div>
                         </div>
-						<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
+						<!--<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>-->
 					</div>
 				<?php endif; ?>
 
@@ -2827,7 +2829,7 @@ if(isset($_GET['MT'])){
 					<script>
 						function confirmEmailFunction(Email) {
 							if($('#Memberid').val()!= Email){
-								$('#confirmMessage').html("These email do not match");
+								$('#confirmMessage').html("These emails do not match");
 								$( "#CMemberid" ).focus();
 								$("#CMemberid").css("border", "1px solid red");
 								$(".join-details-button2").addClass("display-none");
@@ -3164,7 +3166,7 @@ if(isset($_GET['MT'])){
                         </div>
                     </div>
 					</div>
-					<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
+					<!--<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>-->
                 </div>
 
                 <div class="col-xs-12">
