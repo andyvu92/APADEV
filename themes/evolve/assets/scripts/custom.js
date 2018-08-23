@@ -353,9 +353,9 @@ jQuery(document).ready(function($) {
 		$('#homebranch').html(state);
 		
 	});
-	$('body').on('change', '[type="checkbox"]', function() {
+	/*$('body').on('change', '[type="checkbox"]', function() {
 		$('#workplaceblocks input[type="checkbox"]').click(function(){
-			//console.log("ddddd");
+			alert("testcoming");
 			if($(this).is(":checked")){
 			$(this).attr('checked', true);
 			   $(this).val('True');
@@ -370,8 +370,23 @@ jQuery(document).ready(function($) {
 			
 		});
 		
+	});*/
+	$('body').on('click', '#workplaceblocks input[type="checkbox"]', function() {
+		
+		if($(this).is(":checked")){
+			$(this).attr('checked', true);
+			   $(this).val('True');
+			
+			  }
+			 else{
+			 
+			  $(this).removeAttr('checked');
+			  $(this).val('False');
+			  
+			 }
+			
 	});
-	/*$('#workplaceblocks input[type="checkbox"]').click(function(){
+	$('#workplaceblocks input[type="checkbox"]').click(function(){
 		
 			if($(this).is(":checked")){
 			$(this).attr('checked', true);
@@ -385,7 +400,7 @@ jQuery(document).ready(function($) {
 			  
 			 }
 			
-	});*/
+	});
 	$("#CardUsed").val($("#Paymentcard").val());
 	$("input[value='PLACE YOUR ORDER']").click(function(){
 		var CardID = $("#Paymentcard").val();
