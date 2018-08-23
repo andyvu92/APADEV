@@ -798,7 +798,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<label for="">Member Category<span class="tipstyle"> *</span></label>
 							<div class="chevron-select-box">
 							<select class="form-control" id="MemberType" name="MemberType" disabled>
-								<option value="" <?php if (empty($details['MemberType'])) echo "selected='selected'";?> disabled>Member Category</option>
+								<option value="" <?php if (empty($details['MemberTypeID'])) echo "selected='selected'";?> disabled>Member Category</option>
 								<?php
 								
 								$MemberTypecode  = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
@@ -849,7 +849,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<label for=""><?php if(!empty($details['State'])) {echo "You are in the &nbsp;".$details['State']."&nbsp;Branch ,&nbsp;would you like to add an additional Branch?";} else { echo "Would you like to add an additional Branch?";}?></label>
 							<div class="chevron-select-box">
 							<select class="form-control" name="Branch" id="Branch">
-							<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>Please select</option>
+							<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>What additional Branch would you like to join?</option>
 								<?php 
 								$Branchcode  = file_get_contents("sites/all/themes/evolve/json/Branch.json");
 								$Branch=json_decode($Branchcode, true);

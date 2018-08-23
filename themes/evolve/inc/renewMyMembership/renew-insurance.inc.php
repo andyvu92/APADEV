@@ -16,7 +16,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 	<div class="down5 <?php if((isset($_POST['step1'])&& $_POST['insuranceTag']!="0")||isset($_POST['goI']))echo 'display'; else { echo 'display-none';}?>">
 		<div class="row">
 			<div class="col-xs-12">
-			<label>Has there been any medical malpractice or liability claim in the last five years (whether insured or uninsured)?<span class="tipstyle">*</span></label>
+			<label>Have you been the subject of a medical malpractice or liability claim in the last five years (whether insured or uninsured)?<span class="tipstyle">*</span></label>
 			</div>
 
 			<div class="col-xs-6 col-md-3">
@@ -31,7 +31,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 
 		<div class="row">
 			<div class="col-xs-12">
-			<label>Are there any facts or circumstances that may give risk to a claim against any insured, including any predecessors in business?<span class="tipstyle">*</span></label>
+			<label>Are you aware of any circumstances that may give rise to a claim, including but not limited to predecessors in your workplace?<span class="tipstyle">*</span></label>
 			</div>
 
 			<div class="col-xs-6 col-md-3">
@@ -46,7 +46,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 
 		<div class="row">
 			<div class="col-xs-12">
-			<label>Has there been any external disciplinary proceeding or been subject to a complaint to a professional society or statutory registration board in the last five years?<span class="tipstyle">*</span></label>
+			<label>Have there been any external disciplinary proceedings, or have you been subject to a complaint to a professional society or statutory registration board in the last five years?<span class="tipstyle">*</span></label>
 			</div>
 
 			<div class="col-xs-6 col-md-3">
@@ -61,7 +61,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 
 		<div class="row">
 			<div class="col-xs-12">
-			<label>Has any insurer ever declined a proposal, impose special terms, decline to renew or cancel an insurance policy?<span class="tipstyle">*</span></label>
+			<label>Has any insurer declined a proposal, imposed special terms, declined to renew or cancelled your insurance policy?<span class="tipstyle">*</span></label>
 			</div>
 
 			<div class="col-xs-6 col-md-3">
@@ -76,7 +76,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 
 		<div class="row">
 			<div class="col-xs-12">
-			<label>Have you had more than one claim?<span class="tipstyle">*</span></label>
+			<label>Have you made more than one claim?<span class="tipstyle">*</span></label>
 			</div>
 
 			<div class="col-xs-6 col-md-3">
