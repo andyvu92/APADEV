@@ -28,7 +28,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Type of PD</label>
-		<select  class="chosen-select" name="Typeofpd" id="Typeofpd" multiple data-placeholder="Type of PD">
+		<select  name="Typeofpd" id="Typeofpd" multiple data-placeholder="Type of PD">
 			<?php 
 				$PDtypecode = file_get_contents("sites/all/themes/evolve/json/PDTypes.json");
 				$PDType = json_decode($PDtypecode, true);
@@ -40,7 +40,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>National group</label>
-		<select  class="chosen-select" name="Nationalgp" id="Nationalgp" multiple data-placeholder="National group">
+		<select  name="Nationalgp" id="Nationalgp" multiple data-placeholder="National group">
 		<?php
 		//$_SESSION["testTTdad"]["NationalGroup"]
 		foreach($details as $lines) {
@@ -53,7 +53,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Region</label>
-		<select  class="chosen-select" name="Regionalgp" id="Regionalgp" multiple data-placeholder="Region">
+		<select  name="Regionalgp" id="Regionalgp" multiple data-placeholder="Region">
 			<option value="NSW-CC" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-CC") { echo "selected";} ?>> NSW - CENTRAL COAST  </option>
 			<option value="NSW-CH" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-CH") { echo "selected";} ?>> NSW - COFFS HARBOUR  </option>
 			<option value="NSW-CW" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-CW") { echo "selected";} ?>> NSW - CENTRAL WEST  </option>
@@ -96,14 +96,16 @@
 																																																
 		</select>
 	</div>
-	<div class="locationAutomatic">
-		<div class="UseLocation">
-			<input type="checkbox" class="styled-checkbox" id="autoLocation">
-			<label for="autoLocation">Use current location</label>
-		</div>
-		<div>
-			<input id="lat" type="hidden" name="lat" value="-37.81361100000001" style="display: none;" hidden="">
-			<input id="lng" type="hidden" name="lng" value="144.96305600000005" hidden="" style="display: none;">
+	<div class="col-xs-12">
+		<div class="locationAutomatic">
+			<div class="UseLocation">
+				<input type="checkbox" class="styled-checkbox" id="autoLocation">
+				<label for="autoLocation">Use current location</label>
+			</div>
+			<div>
+				<input id="lat" type="hidden" name="lat" value="-37.81361100000001" style="display: none;" hidden="">
+				<input id="lng" type="hidden" name="lng" value="144.96305600000005" hidden="" style="display: none;">
+			</div>
 		</div>
 	</div>
 	<div class="hiddenPageNums">
@@ -132,7 +134,7 @@
 	<div class="locationManual">
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<label>State</label>
-			<select class="chosen-select" name="State" id="State" multiple data-placeholder="State" id="State">
+			<select name="State" id="State" multiple data-placeholder="State" id="State">
 				<?php 
 				$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 				$State=json_decode($statecode, true);

@@ -2,13 +2,7 @@
 /* -------------------------- PD --------------------------- */
 /* --------------------------------------------------------- */
 
-/*--RESPONSIVE BREAKPOINTS--*/
-@phone-width: 480px;
-@larger-phone-width: 570px;
-@tablet-width: 768px;
-@larger-tablet-width: 992px;
-@desktop-width: 1200px;
-@larger-desktop-width: 1500px;
+@import "predefined-styles.less";
 
 /*--PD TYPE IMAGES--*/
 #section-main-content{
@@ -265,17 +259,27 @@
     }
     input, select{
         font-size: 1.4em;
-        height: 40px;
         margin: 0;
         background: none;
         color: rgba(255,255,255,0.8);
-        width: 100%!important;
         line-height: 40px;
         border: 1px solid #665f5e;
         &:focus{
             border: 1px solid #665f5e;
             box-shadow: 0 0px 0px rgba(0, 0, 0, 0.075) inset, 0 0 0px rgba(126, 239, 104, 0.6);
             outline: 0 none;
+        }
+        &::placeholder {
+            color: @grey;
+            opacity: 1; /* Firefox */
+        }
+        
+        &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+           color: @grey;
+        }
+        
+        &::-ms-input-placeholder { /* Microsoft Edge */
+           color: @grey;
         }
     }
     input[type="date"]::-webkit-inner-spin-button { 
@@ -322,7 +326,7 @@
     }
     textarea, select, input{
         border: 1px solid #665f5e;
-        padding: 8px 15px;
+        padding: 8px 10px;
     }
 }
 
@@ -367,26 +371,28 @@
 }
 
 
-
-
-#registerPDUser{
+.pd{
     overflow: hidden;
-    .chosen-container-multi{
-        .chosen-choices{
+    .selectize-control.multi{
+        .selectize-input{
             background: none;
             border: 1px solid #655e5e;
             padding: 0 10px;
             background-image: none;
-            @media all and (max-width: @phone-width) {
-                max-width: 99%;
-                margin: 0 auto;
-            }
-            li.search-field{
-                input{
-                    width: auto!important;
+            min-height: 40px;
+            display: flex;
+            flex-wrap: wrap;
+            .item{
+                background: none;
+                background-image: none;
+                color: #a5a5a5;
+                &.active{
+                    background: none;
+                    color: #a5a5a5;
+                    border: 1px solid #aaa;
                 }
             }
-            li.search-choice{
+            .selectize-dropdown.multi {
                 background: rgba(58, 60, 60,0.8);
                 background-color: rgba(0,0,0,0);
                 margin: 8px;
@@ -417,8 +423,30 @@
             }
         }
     }
+    div[class^="col-"]{
+        & > input{
+            width: 100%;
+            height: 40px;
+        }
+    }
 }
 
+.pd{
+    .styled-checkbox{
+        & +label{
+            &:before{
+                box-shadow: 0 0 0 1px #655e5e;
+            }
+        }
+        &:checked + label{
+            &:after{
+                background: #655e5e;
+                box-shadow: 2px 0 0 #655e5e, 4px 0 0 #655e5e, 4px -2px 0 #655e5e, 4px -4px 0 #655e5e, 4px -6px 0 #655e5e, 4px -8px 0 #655e5e;
+                        transform: rotate(45deg);
+            }
+        }
+    }
+}
 
 .ui-dialog{
     #registerPDUser{
@@ -1834,7 +1862,6 @@ input[name="Couponcode"]{
 }
 .locationAutomatic {
 	width: 100%;
-	height: 35px;
 	text-align: left;
 }
 .locationManual {

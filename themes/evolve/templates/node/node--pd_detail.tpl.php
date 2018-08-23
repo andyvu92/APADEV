@@ -1166,7 +1166,7 @@
 					<div class="col-xs-12">
 					<label>Your dietary requirements</label>
 						<div class="plus-select-box">
-							<select class="chosen-select"  name="Dietary[]" multiple>
+							<select  name="Dietary[]" multiple>
 							
 							<?php 
 							$Dietarycode  = file_get_contents("sites/all/themes/evolve/json/Dietary.json");
@@ -1630,7 +1630,7 @@
 		<div class="row">
 			<div class="col-xs-12">
 				<label>Your dietary requirements</label>
-				<select class="chosen-select" id="Dietary" name="Dietary[]" multiple>
+				<select id="Dietary" name="Dietary[]" multiple>
 				
 				<?php 
 				$Dietarycode  = file_get_contents("sites/all/themes/evolve/json/Dietary.json");

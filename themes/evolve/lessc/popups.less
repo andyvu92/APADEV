@@ -699,11 +699,16 @@ div[aria-describedby="confirmDelete"].ui-dialog{
 
 /* PD USER REGISTER */
 div[aria-describedby="registerPDUser"].ui-dialog {
+    .small-popup;
     z-index: 1050!important;
     left: calc(~"50vw - 300px")!important;
 	width: 600px!important;
     top: 35vh!important;
     position: fixed!important;
+    #registerPDUser{
+        overflow: hidden;
+        overflow-y: auto;
+    }
     @media all and (max-width: @larger-phone-width) {
         left: calc(~"50vw - 150px")!important;
         width: 300px!important;

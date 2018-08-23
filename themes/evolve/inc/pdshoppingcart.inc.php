@@ -353,7 +353,7 @@ if(isset($_SESSION["UserId"])){
 		<label for="anothercard"><a class="event10" style="cursor: pointer;">Use another card</a></label>
 	</div>
 
-	<div class="col-xs-12 none-padding down10 extra-card" style="display:none;"<?php //if(isset($_SESSION["tempcard"])){ echo 'style="display:block;"';} else { echo 'style="display:none;"';}?>>
+	<div id="anothercardBlock" class="col-xs-12 none-padding down10 extra-card" style="display:none;"<?php //if(isset($_SESSION["tempcard"])){ echo 'style="display:block;"';} else { echo 'style="display:none;"';}?>>
 		<form action="/pd/pd-shopping-cart" method="POST" >
 		<input type="hidden" name="addCard" value="1"/>
 		<div class="row">
