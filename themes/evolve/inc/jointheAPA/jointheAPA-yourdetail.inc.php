@@ -3189,7 +3189,7 @@ endif;
 		</div>    
 <script type="text/javascript">
     jQuery(document).ready(function($) {
-        $(".chosen-select").chosen({width: "100%"});
+
         $('#workplace').click(function(){
             $('#dashboard-right-content').addClass("autoscroll");
         });
@@ -3245,9 +3245,9 @@ endif;
             echo json_encode($_SESSION['country']);
 ?>;
           $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
-          $(".chosen-select").chosen({width: "100%"});
+          
         });
-        $("a[href^=#workplace]").live( "click", function(){ $(".chosen-select").chosen({width: "100%"});});
+        $("a[href^=#workplace]").live( "click", function(){ });
         $("[class^=deletewp]").live( "click", function(){
              var x = $(this).attr("class").replace('deletewp', '');
             $("#workplaceli"+ x).remove();

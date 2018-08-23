@@ -2019,7 +2019,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			$("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry,"memberType":memberType});
 			$(".chosen-select").chosen({width: "100%"});
 		});
-		$("a[href^=#workplace]").live( "click", function(){ $(".chosen-select").chosen({width: "100%"});});
+		$("a[href^=#workplace]").live( "click", function(){ });
 		$("[class^=deletewp]").live( "click", function(){
 			var x = $(this).attr("class").replace('deletewp', '');
 			$("#workplaceli"+ x).remove();
