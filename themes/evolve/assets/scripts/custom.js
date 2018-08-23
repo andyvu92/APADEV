@@ -781,14 +781,13 @@ jQuery(document).ready(function($) {
 			$("input[name=Billing-Address_Line_1]").parent().removeClass('locked');
 			$("input[name=Billing-Address_Line_2]").parent().removeClass('locked');
 			$("input[name=Billing-BuildingName]").parent().removeClass('locked');
-		}		
+		}
     });
 	if($("input[name=Billing-Pobox]").val()!=""){
 		$("input[name=Billing-Address_Line_1]").prop('disabled', true);
 		$("input[name=Billing-Address_Line_2]").prop('disabled', true);
 		$("input[name=Billing-BuildingName]").prop('disabled', true);
-	}
-	else{
+	} else{
 		$("input[name=Billing-Address_Line_1]").prop('disabled', false);
 		$("input[name=Billing-Address_Line_2]").prop('disabled', false);
 		$("input[name=Billing-BuildingName]").prop('disabled', false);
@@ -948,6 +947,12 @@ jQuery(document).ready(function($) {
 		scrollTop: $('#section-main-content').offset().top
 	}, 500, 'linear');
   });
+  $("#resetQuestion").click(function() {
+	  $('[id^=question]').hide();
+      $('[id^=question]').addClass("function");
+      $('#question65').show();
+      $('#question65').removeClass("function");
+  })
   $("[class^=NGname]").change(function() {
 	var id = $(this).attr('id');
     if($('#'+id).is(':checked')) {
