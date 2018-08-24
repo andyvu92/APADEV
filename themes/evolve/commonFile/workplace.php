@@ -160,15 +160,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 		<label class="light-font-weight" for="Electronic-claiming'.$i.'">Electronic claiming</label>
 	</div>
 
-	<div class="col-xs-12 col-sm-6 col-md-6">
-		<input class="styled-checkbox" type="checkbox" name="Hicaps'.$i.'" id="Hicaps'.$i.'" value="False" >
-		<label class="light-font-weight" for="Hicaps'.$i.'">HICAPS</label>
-	</div>
 
-	<div class="col-xs-12 col-sm-6 col-md-6">
-		<input class="styled-checkbox" type="checkbox" name="Healthpoint'.$i.'" id="Healthpoint'.$i.'" value="False">
-		<label class="light-font-weight" for="Healthpoint'.$i.'">Healthpoint</label>
-	</div>
 
 	<div class="col-xs-12 col-sm-6 col-md-6">
 		<input class="styled-checkbox" type="checkbox" name="Departmentva'.$i.'" id="Departmentva'.$i.'" value="False">

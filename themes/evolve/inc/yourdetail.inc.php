@@ -1381,15 +1381,15 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<label class="light-font-weight" for="Electronic-claiming<?php echo $key;?>">Electronic claiming</label>
 							</div>
 
-							<div class="col-xs-12 col-sm-6 col-md-6">
-								<input class="styled-checkbox" type="checkbox" name="Hicaps<?php echo $key;?>" id="Hicaps<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Hicaps'];?>" <?php if($details['Workplaces'][$key]['Hicaps']=="True"){echo "checked";} ?>>
-								<label class="light-font-weight" for="Hicaps<?php echo $key;?>">HICAPS</label>
+							<!--<div class="col-xs-12 col-sm-6 col-md-6">
+								<input class="styled-checkbox" type="checkbox" name="Hicaps<?php //echo $key;?>" id="Hicaps<?php //echo $key;?>" value="<?php  //echo $details['Workplaces'][$key]['Hicaps'];?>" <?php //if($details['Workplaces'][$key]['Hicaps']=="True"){echo "checked";} ?>>
+								<label class="light-font-weight" for="Hicaps<?php //echo $key;?>">HICAPS</label>
 							</div>
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
-								<input class="styled-checkbox" type="checkbox" name="Healthpoint<?php echo $key;?>" id="Healthpoint<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Healthpoint'];?>" <?php if($details['Workplaces'][$key]['Healthpoint']=="True"){echo "checked";} ?>>
-								<label class="light-font-weight" for="Healthpoint<?php echo $key;?>">Healthpoint</label>
-							</div>
+								<input class="styled-checkbox" type="checkbox" name="Healthpoint<?php //echo $key;?>" id="Healthpoint<?php //echo $key;?>" value="<?php  //echo $details['Workplaces'][$key]['Healthpoint'];?>" <?php //if($details['Workplaces'][$key]['Healthpoint']=="True"){echo "checked";} ?>>
+								<label class="light-font-weight" for="Healthpoint<?php //echo $key;?>">Healthpoint</label>
+							</div>-->
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
 								<input class="styled-checkbox" type="checkbox" name="Departmentva<?php echo $key;?>" id="Departmentva<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Departmentva'];?>" <?php if($details['Workplaces'][$key]['Departmentva']=="True"){echo "checked";} ?>>

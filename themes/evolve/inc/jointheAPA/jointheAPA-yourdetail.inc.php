@@ -1895,36 +1895,36 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                         echo $key;
                                 ?>">Electronic claiming</label>
                             </div>
-                            <div class="col-xs-6 col-md-3">
+                            <!--<div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Hicaps<?php
-                                    echo $key;
+                                   // echo $key;
                             ?>" id="Hicaps<?php
-                                    echo $key;
+                                    //echo $key;
                             ?>" value="<?php
-                                    echo $details['Workplaces'][$key]['Hicaps'];
+                                    //echo $details['Workplaces'][$key]['Hicaps'];
                             ?>" <?php
-                                    if ($details['Workplaces'][$key]['Hicaps'] == "True") {
-                                        echo "checked";
-                                    }
+                                    //if ($details['Workplaces'][$key]['Hicaps'] == "True") {
+                                        //echo "checked";
+                                    //}
                             ?>> <label for="Hicaps<?php
-                                    echo $key;
+                                    //echo $key;
                             ?>">HICAPS</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Healthpoint<?php
-                                echo $key;
+                                //echo $key;
                         ?>" id="Healthpoint<?php
-                                echo $key;
+                                //echo $key;
                         ?>" value="<?php
-                                echo $details['Workplaces'][$key]['Healthpoint'];
+                                //echo $details['Workplaces'][$key]['Healthpoint'];
                         ?>" <?php
-                                if ($details['Workplaces'][$key]['Healthpoint'] == "True") {
-                                    echo "checked";
-                                }
+                                //if ($details['Workplaces'][$key]['Healthpoint'] == "True") {
+                                   // echo "checked";
+                                //}
                         ?>> <label for="Healthpoint<?php
-                                echo $key;
+                                //echo $key;
                         ?>">Healthpoint</label>
-                            </div>
+                            </div>-->
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Departmentva<?php
                                     echo $key;
