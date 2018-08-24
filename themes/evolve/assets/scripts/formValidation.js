@@ -336,6 +336,9 @@ jQuery(document).ready(function($) {
 	    $('input[name=wpnumber]').val(t);
 		$('.down3').slideUp(200);
 		$('.down4').slideToggle(200);
+		$('.tabtitle3 span').removeClass("text-underline");
+		$('.tabtitle4 span').addClass("text-underline");
+		
 	});
 	$('.pd-register-submit').click(function(){
 		if(validateFun()==false){alert("please fill out all required fields *");return false;}
