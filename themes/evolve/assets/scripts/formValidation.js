@@ -177,14 +177,14 @@ jQuery(document).ready(function($) {
 		   	//}
 			if(!$("#anothercardBlock").hasClass("display-none")){
 				if($("select[name=Cardtype]").val() =='') {$("select[name=Cardtype]").addClass("focuscss");}else{$("select[name=Cardtype]").removeClass("focuscss");}
-				//if($("input[name=Cardname]").val() =='') {$("input[name=Cardname").addClass("focuscss");}else{$("input[name=Cardname").removeClass("focuscss");}
+				if($("input[name=Cardname]").val() =='') {$("input[name=Cardname").addClass("focuscss");}else{$("input[name=Cardname").removeClass("focuscss");}
 				if($("input[name=Cardnumber]").val() =='') {$("input[name=Cardnumber").addClass("focuscss");}else{$("input[name=Cardnumber").removeClass("focuscss");}
 				if($("input[name=Expirydate]").val() =='') {$("input[name=Expirydate").addClass("focuscss");}else{$("input[name=Expirydate").removeClass("focuscss");}
 				if($("input[name=CCV]").val() =='') {$("input[name=CCV").addClass("focuscss");}else{$("input[name=CCV").removeClass("focuscss");}
 			}
 			if(!$("#anothercardBlock").hasClass("display-none")){
 				if($("select[name=Cardtype]").val() =='') { return false;}
-				//if($("input[name=Cardname]").val() =='') { return false;}
+				if($("input[name=Cardname]").val() =='') { return false;}
 				if($("input[name=Cardnumber]").val() =='') { return false;}
 				if($("input[name=Expirydate]").val() =='') { return false;}
 				if($("input[name=CCV]").val() =='') { return false;}

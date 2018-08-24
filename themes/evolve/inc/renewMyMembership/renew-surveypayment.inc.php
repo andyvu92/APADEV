@@ -271,7 +271,7 @@ if(isset($_POST['step2-1'])) {
 				<input class="styled-checkbox" type="checkbox" id="prftag" name="prftag">
 				<label for="prftag" id="prftagAgree">No, I do not want to make a donation to the PRF</label>
 			</div>
-			<div class="col-xs-6 col-md-3">
+			<div class="col-xs-6 col-md-3" id="prfselect">
 				<div class="chevron-select-box">
 					<select class="form-control" id="PRF" name="PRF">
 						<option value="5" selected>$5.00</option>

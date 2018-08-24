@@ -1258,7 +1258,21 @@ jQuery(document).ready(function($) {
 			scrollTop: $("#PDTermsWindow .modal-body .note-text").position().top
 		}, 1);
 	});
-
+    $('#prftag').click(function(){
+		if($('#prftag').val()=="1"){
+			$('#prfselect').addClass("display-none");
+		}
+		else{
+			$('#prfselect').removeClass("display-none");
+		}
+		
+	});
+	if($('#prftag').val()=="1"){
+		$('#prfselect').addClass("display-none");
+	}
+	else{
+		$('#prfselect').removeClass("display-none");
+	}
 	//ADD WORKPLACE SCROLL TOP
 	$(document).on('click', '.add-workplace-join', function(){
 		$('html, body').animate({
