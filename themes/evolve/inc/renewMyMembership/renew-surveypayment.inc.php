@@ -364,8 +364,8 @@ if(isset($_POST['step2-1'])) {
 			</div>
 
 			<div class="col-xs-6 col-sm-3">
-				<label for="">CCV:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV">
+				<label for="">CVV:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 			</div>
 		</div>
 		<div class="col-xs-12">
@@ -412,8 +412,8 @@ if(isset($_POST['step2-1'])) {
 			</div>
 
 			<div class="col-xs-6 col-sm-3">
-				<label for="">CCV:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV" maxlength="4">
+				<label for="">CVV:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 		</div>
 		<div class="col-xs-12">

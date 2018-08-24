@@ -394,7 +394,7 @@ if(isset($_SESSION["UserId"])){
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="CCV" placeholder="CCV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+			<input type="text" class="form-control"  name="CCV" placeholder="CVV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
 		</div>
 		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
@@ -446,7 +446,7 @@ if(isset($_SESSION["UserId"])){
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="CCV" placeholder="CCV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+			<input type="text" class="form-control"  name="CCV" placeholder="CVV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
 		</div>
 		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
