@@ -854,13 +854,13 @@ if (isset($_SESSION['UserId'])):
                         </div>
                         <div class="col-xs-12 col-md-3">
                             <label for="">Phone number<span class="tipstyle"> *</span></label>
-                            <input type="text" class="form-control" name="phone-number" placeholder='Phone number'<?php
+                            <input type="number" class="form-control" name="phone-number" placeholder='Phone number'<?php
     if (empty($details['Home-phone-number'])) {
         echo "";
     } else {
         echo 'value="' . $details['Home-phone-number'] . '"';
     }
-?>  >
+?>  oninput="this.value = Math.abs(this.value)" min="0">
                         </div>
                     </div>
 
@@ -908,13 +908,13 @@ if (isset($_SESSION['UserId'])):
                         </div>-->
                         <div class="col-xs-12 col-md-3">
                             <label for="">Mobile number<span class="tipstyle"> *</span></label>
-                            <input type="text" class="form-control" name="Mobile-number" placeholder='Mobile number'<?php
+                            <input type="number" class="form-control" name="Mobile-number" placeholder='Mobile number'<?php
     if (empty($details['Mobile-number'])) {
         echo "";
     } else {
         echo 'value="' . $details['Mobile-number'] . '"';
     }
-?>  >
+?>  oninput="this.value = Math.abs(this.value)" min="0">
                         </div>
                     </div>
                     
@@ -1800,7 +1800,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <label for="">Phone number<span class="tipstyle"> *</span></label>
-                                <input type="text" class="form-control" name="Wphone<?php
+                                <input type="number" class="form-control" name="Wphone<?php
         echo $key;
 ?>" <?php
         if (empty($details['Workplaces'][$key]['Wphone'])) {
@@ -1808,7 +1808,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
         } else {
             echo 'value="' . $details['Workplaces'][$key]['Wphone'] . '"';
         }
-?>  >
+?>  oninput="this.value = Math.abs(this.value)" min="0">
                             </div>
                             <!--<div class="col-xs-6 col-md-3">
                                 <label for="">Extention Number</label>
@@ -2559,7 +2559,7 @@ if(isset($_GET['MT'])){
                             </div>
                             <div class="col-xs-12 col-md-3">
                                 <label for="">Phone number<span class="tipstyle"> *</span></label>
-                                <input type="text" class="form-control" name="phone-number" >
+                                <input type="number" class="form-control" name="phone-number" oninput="this.value = Math.abs(this.value)" min="0">
                             </div>
                         </div>
 
@@ -2596,7 +2596,7 @@ if(isset($_GET['MT'])){
                             </div>-->
                             <div class="col-xs-12 col-md-3">
                                 <label for="">Mobile number<span class="tipstyle"> *</span></label>
-                                <input type="text" class="form-control" name="Mobile-number">
+                                <input type="number" class="form-control" name="Mobile-number" oninput="this.value = Math.abs(this.value)" min="0">
                             </div>
                         </div>
 
