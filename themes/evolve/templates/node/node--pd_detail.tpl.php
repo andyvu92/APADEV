@@ -843,6 +843,7 @@
 								$Prefix=json_decode($Prefixcode, true);
 								?>
 								<select class="form-control"  name="Prefix">
+								<option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> disabled>Please select</option>
 								<?php 
 								foreach($Prefix  as $key => $value){
 									echo '<option value="'.$Prefix[$key]['ID'].'"';
@@ -860,6 +861,7 @@
 							<label for="Gender">Gender</label>
 							<div class="chevron-select-box">
 								<select class="form-control"  name="Gender">
+								<option value="" <?php if (empty($details['Gender'])) echo "selected='selected'";?> disabled>Please select</option>
 									<?php
 											$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
 											$Gender=json_decode($Gendercode, true);						
@@ -1002,7 +1004,7 @@
 						<div class="row">
 							<div class="col-lg-12">
 								<label for="">Address line 1<span class="tipstyle">*</span></label>
-								<input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?> required>
+								<input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?>>
 							</div>
 						</div>
 
@@ -1028,7 +1030,7 @@
 							<div class="col-lg-3">
 								<label for="">State<span class="tipstyle">*</span></label>
 								<div class="chevron-select-box">
-									<select class="form-control" name="Billing-State" id="Billing-State" required>
+									<select class="form-control" name="Billing-State" id="Billing-State" >
 										<option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
 										<?php 
 										$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
@@ -1046,7 +1048,7 @@
 							<div class="col-lg-6">
 								<label for="">Country<span class="tipstyle">*</span></label>
 								<div class="chevron-select-box">
-									<select class="form-control" id="Billing-Country" name="Billing-Country" required>
+									<select class="form-control" id="Billing-Country" name="Billing-Country" >
 									<?php 
 									$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 									$country=json_decode($countrycode, true);
@@ -1348,13 +1350,14 @@
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">
                     <div class="row">
                         <div class="col-lg-3">
-				            <label for="prefix">Prefix<span class="tipstyle">*</span></label>
+				            <label for="prefix">Prefix</label>
 							<?php 
 							$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
 							$Prefix=json_decode($Prefixcode, true);
 							?>
 							<div class="chevron-select-box">
 								<select class="form-control" id="Prefix" name="Prefix">
+								<option value="" selected disabled>Please select</option>
 								<?php 
 								foreach($Prefix  as $key => $value){
 									echo '<option value="'.$Prefix[$key]['ID'].'"';
@@ -1381,19 +1384,19 @@
                     <div class="row">
                         <div class="col-lg-6">
                            <label for="">Birth date<span class="tipstyle">*</span></label>
-                           <input type="date" class="form-control" name="Birth" required>
+                           <input type="date" class="form-control" name="Birth" required max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
                         </div>
                         <div class="col-lg-3">
 						   <label for="">Gender</label>
 						   	<div class="chevron-select-box">
 								<select class="form-control" id="Gender" name="Gender">
+								<option value="" selected disabled>Please select</option>
 								<?php
 										$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
 										$Gender=json_decode($Gendercode, true);						
-										foreach($Gender  as $key => $value){
-											echo '<option value="'.$Gender[$key]['ID'].'"';
-											if($Gender[$key]['ID'] =="3") {echo "selected='selected'";}
-											echo '> '.$Gender[$key]['Description'].' </option>';
+										foreach ($Gender as $key => $value) {
+											echo '<option value="' . $Gender[$key]['ID'] . '"';
+											echo '> ' . $Gender[$key]['Description'] . ' </option>';
 										}
 									?>
 								</select>
@@ -1445,7 +1448,7 @@
 					<script>
 						function confirmEmailFunction(Email) {
 							if($('#Memberid').val()!= Email){
-								$('#confirmMessage').html("These passwords do not match");
+								$('#confirmMessage').html("These emails do not match");
 								$( "#CMemberid" ).focus();
 								$("#CMemberid").css("border", "1px solid red");
 								$(".join-details-button2").addClass("display-none");
