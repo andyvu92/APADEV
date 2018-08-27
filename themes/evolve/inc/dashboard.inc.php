@@ -202,10 +202,17 @@ $background = getBackgroundImage($userID);
 							<td><strong>AHPRA NO:</strong></td>
 							<td><?php echo $user['Ahpranumber']; ?></td>
 						</tr>
-						<?php if(isset($user['Specialty']) && $user['Specialty'] != ""): ?>
+						<?php if(isset($_SESSION['Speciality']) && sizeof($_SESSION['Speciality']) != 0): ?>
 						<tr>
 							<td><strong>Specialty:</strong></td>
-							<td><?php echo $user['Specialty']; ?></td>
+							<td>
+							<?php 
+								foreach($_SESSION['Speciality'] as $Speciality){
+									echo $Speciality['Specialisation'];
+									echo "&nbsp;";
+								}
+							?>
+							</td>
 						</tr>
 						<?php endif; ?>
 						<?php if(isset($user['Officebearer']) && $user['Officebearer'] != ""): ?>
