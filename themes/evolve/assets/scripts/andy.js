@@ -79,6 +79,11 @@ jQuery(document).ready(function($) {
     speed: 800,
     collapsedHeight: 207,
     lessLink: '<a class="readless-link" href="#" onclick="topFunction()">Read less</a>',
+    afterToggle: function(trigger, element, expanded) {
+      if(! expanded) { // The "Close" link was clicked
+        $('html, body').animate( { scrollTop: element.offset().top }, {duration: 100 } );
+      }
+    }
   });
 });
 
@@ -297,61 +302,8 @@ function isTouchDevice() {
   return 'ontouchstart' in document.documentElement;
 }
 
-// MULTISELECT 
-jQuery(document).ready(function() {
-  $('.chosen-container').parent().on('touchstart', function(e) {
-    // Trigger the mousedown event.
-    if ( $(this).find(".chosen-container").hasClass('chosen-container-active') ){
-      $(this).find(".chosen-container").removeClass('chosen-container-active');
-      $(this).find(".chosen-container").removeClass('chosen-with-drop');
-      $(this).find(".active-result").removeClass('highlighted');
-      $(this).find(".chosen-container").addClass('chosen-container-active');
-      $(this).find(".chosen-container").addClass('chosen-with-drop');
-    }
-    else{
-      $(this).find(".chosen-container").removeClass('chosen-container-active');
-      $(this).find(".chosen-container").removeClass('chosen-with-drop');
-    }
-  });
-
-    $notCall = $("body").not( $(".chosen-container") );
-    $notCall.on("click", function (e) {
-      if (isTouchDevice()) {
-        $(".chosen-container").removeClass('chosen-container-active');
-        $(".chosen-container").removeClass('chosen-with-drop');
-        $('.chosen-results li').hasClass('active-result').addClass('active-result');
-      }
-    });
-  
-
-  $(document).on('touchstart', '.search-choice-close', function(e){
-    var x = $(this).attr('data-option-array-index');
-    $(this).parent().remove();
-    $('.chosen-results li[data-option-array-index="'+ x +'"]').removeClass('result-selected');
-    $('.chosen-results li[data-option-array-index="'+ x +'"]').addClass('active-result');
-    $('.chosen-select').trigger("chosen:updated");
-  });
-
-});
 
 jQuery(document).ready(function() {
-  var jq14 = jQuery.noConflict(true); 
-
-  (function ($) {
-      $(document).ready(function () {
-              $('select[multiple=""]').selectize({
-                plugins: ['remove_button'],
-                delimiter: ',',
-                persist: false,
-                create: function(input) {
-                    return {
-                        value: input,
-                        text: input
-                    }
-                }
-              });
-      });
-  }(jq14));
 
   $('select[multiple=""]').selectize({
     plugins: ['remove_button'],
@@ -365,7 +317,5 @@ jQuery(document).ready(function() {
     }
 });
 
-
 });
-
 

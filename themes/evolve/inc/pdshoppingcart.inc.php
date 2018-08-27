@@ -620,15 +620,6 @@ is &ldquo;personal information&rdquo; as defined by the Privacy Act 1988. The in
 <div class="overlay">
 	<section class="loaders">
 		<span class="loader loader-quart">
-			<div class="loading">
-				<div class="loading__element">L</div>
-				<div class="loading__element">O</div>
-				<div class="loading__element">A</div>
-				<div class="loading__element">D</div>
-				<div class="loading__element">I</div>
-				<div class="loading__element">N</div>
-				<div class="loading__element">G</div>
-			</div>
 		</span>   
 	</section>
 </div>
