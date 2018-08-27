@@ -149,7 +149,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 		<div class="row">
 			<div class="col-xs-12">
 				<input popup class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0">
-				<label class="light-font-weight" for="conditions" popup-target="insuranceTermsandConditions"><span class="tipstyle">* </span>I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
+				<label for="conditions" popup-target="insuranceTermsandConditions"><span class="tipstyle">* </span>I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
 				other material information to be disclosed</label>
 			</div>
 		</div>
@@ -258,17 +258,12 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 					<li>Contact us first via phone (03)9993 6920; email at enquiries_au@bmsgroup.com ; or in writing to Level 3, 360 Little Collins Street, Melbourne, VIC 3000</li>
 					<li>If we cannot reach a satisfactory resolution within a further 45 days you can send your complaint to FOS at phone 1300 780 808; email at info@fos.org.au; or in writing to Financial Ombudsman Service, GPO Box 3, Melbourne, VIC 3001. The FOS website is www.fos.org.au. </li>
 				</ul>
-				
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-					<input class="styled-checkbox" type="checkbox" id="insuranceTerms" data-dismiss="modal">
-					<label for="insuranceTerms">Yes. I’ve read and understand the insurance terms and conditions</label>
-				</div>   
-				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none warning" id="disagreeDescription"> 
-					Please agree with the insurance Terms and Conditions to continue with your membership
-				</div> 
+				  
+
 			</div>
 			<div class="modal-footer">
-				<a class="popup-submit" href="" popup-dismiss="insuranceTermsandConditions">Submit</a>
+				<a class="disagree-btn" href="" popup-dismiss="privacypolicyWindow">Disagree</a>
+				<a id="insuranceTerms" class="agree-btn" href="" popup-dismiss="privacypolicyWindow">Agree</a>
 			</div>
 </div>
 <?php logRecorder();  ?>

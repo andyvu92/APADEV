@@ -335,6 +335,24 @@ jQuery(document).ready(function() {
 });
 
 jQuery(document).ready(function() {
+  var jq14 = jQuery.noConflict(true); 
+
+  (function ($) {
+      $(document).ready(function () {
+              $('select[multiple=""]').selectize({
+                plugins: ['remove_button'],
+                delimiter: ',',
+                persist: false,
+                create: function(input) {
+                    return {
+                        value: input,
+                        text: input
+                    }
+                }
+              });
+      });
+  }(jq14));
+
   $('select[multiple=""]').selectize({
     plugins: ['remove_button'],
     delimiter: ',',
@@ -346,6 +364,8 @@ jQuery(document).ready(function() {
         }
     }
 });
+
+
 });
 
 

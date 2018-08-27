@@ -118,6 +118,7 @@ scripts[] = assets/scripts/popups.js
 scripts[] = assets/scripts/selectize.js-master/src/contrib/microevent.js
 scripts[] = assets/scripts/selectize.js-master/src/contrib/highlight.js
 
+
 settings[body] = 'Open Sans:regular:14px:24px'
 settings[h1] = 'Raleway:regular:36px:'
 settings[h2] = 'Raleway:regular:30px:'

@@ -2318,7 +2318,6 @@ Facsimile: (03) 9092 0899</p>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script type="text/javascript">
    jQuery(document).ready(function($) {
-	    $(".chosen-select").chosen({width: "100%"});
 		  
 		 if($('#popUp').text()!='0' && $('#popUp').text()!='3'){
 		   var x = $('#popUp').text();

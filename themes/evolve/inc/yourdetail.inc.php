@@ -381,6 +381,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 */
 ?>
 </div>
+
 <?php include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php'); ?>  
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?> autoscroll" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
@@ -502,7 +503,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<div class="col-xs-12">
 								<label>Your dietary requirements</label>
 								<div class="plus-select-box">
-								<select class="chosen-select" id="Dietary" name="Dietary[]" data-placeholder="Your dietary requirements..." multiple>
+								<select id="Dietary" name="Dietary[]" data-placeholder="Your dietary requirements..." multiple>
 								<?php 
 									$Dietarycode  = file_get_contents("sites/all/themes/evolve/json/Dietary.json");
 									$Dietary=json_decode($Dietarycode, true);
@@ -523,7 +524,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<div class="col-xs-12">
 							<label>Choose the languages you speak</label>
 							<div class="plus-select-box">
-							<select class="chosen-select" id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
+							<select id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
 								<?php 
 									$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
 									$Language=json_decode($Languagecode, true);
@@ -708,7 +709,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 						</div>
 
-					<div class="row">
+					<div class="row" id="mailing-address-block">
 						<div class="col-xs-12">
 							<label for="">Building name</label>
 							<input type="text" class="form-control" name="Mailing-BuildingName" id="Mailing-BuildingName"  <?php if (empty($details['Mailing-unitno'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?>>
@@ -822,7 +823,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<div class="col-xs-12">
 							<label for="">Your National Group</label>
 							<div class="plus-select-box">
-							<select class="chosen-select" id="Nationalgp" name="Nationalgp[]" multiple disabled data-placeholder="Choose from our 21 National Groups">
+							<select id="Nationalgp" name="Nationalgp[]" multiple disabled data-placeholder="Choose from our 21 National Groups">
 							<?php 
 							// get national group from Aptify via webserice return Json data;
 							// 2.2.19 - get national group
@@ -876,7 +877,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<div class="col-xs-12">
 							<label>Choose as many interest areas as you like from the list below:</label>
 							<div class="plus-select-box">
-							<select class="chosen-select" id="interest-area" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area..."data-placeholder="Choose interest area...">
+							<select id="interest-area" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area..."data-placeholder="Choose interest area...">
 							<?php 
 							  // 2.2.37 - get interest area list
 							  // Send - 
@@ -905,7 +906,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					
 						<div class="col-lg-9">
 						<div class="plus-select-box">	
-						<select class="chosen-select" id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+						<select id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
 							<?php 
 							//$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
 							//$interestAreas=json_decode($interestAreascode, true);	
@@ -1350,7 +1351,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<!--<div class="col-xs-12 col-md-6">
 								<label>Choose the languages you speak in your practice?</label>
 								<div class="plus-select-box">
-								<select class="chosen-select" id="Additionallanguage<?php echo $key;?>" name="Additionallanguage<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
+								<select id="Additionallanguage<?php echo $key;?>" name="Additionallanguage<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
 									
 									<?php /*
 									$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
@@ -1866,21 +1867,25 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
+					<label for="">Name on card:<span class="tipstyle"> *</span></label>
 					<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-12">
+						<label for="">Card number:<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number"  required maxlength="16">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-lg-6">
+						<label for="">Expiry date:<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" required maxlength="4">
 					</div>
 				</div>
 				<div class="row"> 
 					<div class="col-lg-6">
+						<label for="">CCV:<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 					</div>
 					<div class="col-lg-6">
@@ -1890,7 +1895,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					</div>
 				</div>				 
 				<div class="row">
-					<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
+					<div class="col-xs-12 none-padding">
+						<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
+					</div>
 				</div>
 			</form>
 		</div>
@@ -1998,7 +2005,6 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			echo json_encode($_SESSION['country']);
 ?>;
 		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
-		  $(".chosen-select").chosen({width: "100%"});	 
 			 
 		}
 		$('.add-workplace-join').click(function(){
@@ -2017,9 +2023,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			var sessionLanguage = '<?php echo json_encode($_SESSION["Language"]);?>';
 			var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
 			$("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry,"memberType":memberType});
-			$(".chosen-select").chosen({width: "100%"});
 		});
-		$("a[href^=#workplace]").live( "click", function(){ $(".chosen-select").chosen({width: "100%"});});
 		$("[class^=deletewp]").live( "click", function(){
 			var x = $(this).attr("class").replace('deletewp', '');
 			$("#workplaceli"+ x).remove();

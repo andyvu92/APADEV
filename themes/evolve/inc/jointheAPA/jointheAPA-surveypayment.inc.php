@@ -356,7 +356,7 @@ if(isset($_POST['step2-1'])) {
 			</div>
 		</div> 
 
-		<div id="anothercardBlock" style="margin: 0; padding:0" class="display-none col-xs-12">
+		<div id="anothercardBlock" style="margin: 0; padding:0" class="col-xs-12">
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-3">
 				<div class="chevron-select-box">
@@ -455,7 +455,7 @@ if(isset($_POST['step2-1'])) {
 	<?php endif; ?>  
 		<div class="row">
 			<div class="col-xs-12">
-				<input class="styled-checkbox" type="checkbox" id="jprivacy-policy">
+				<input popup class="styled-checkbox" type="checkbox" id="jprivacy-policy">
 				<label for="jprivacy-policy" id="privacypolicyl" popup-target="privacypolicyWindow"><span class="tipstyle">*&nbsp;</span>I agree to the APA Privacy policy</label>
 			</div>
 

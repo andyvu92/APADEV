@@ -328,7 +328,7 @@ if(isset($_POST['step2-1'])) {
 			<input type="checkbox" class="styled-checkbox" id="anothercard">
 			<label for="anothercard">Use another card</label>
 		</div>
-	<div id="anothercardBlock" class="display-none row">
+	<div id="anothercardBlock" class="row">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6">
 				<div class="chevron-select-box">

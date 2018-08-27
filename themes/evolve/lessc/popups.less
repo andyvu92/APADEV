@@ -51,6 +51,10 @@
      }
     .modal-footer{
         margin: 0;
+        text-align: center;
+        a{
+            margin: 0 10px;
+        }
     }
     .close-popup{
         background-image: none;
@@ -81,7 +85,22 @@
             background: @grey;
         }
     }
-    .popup-submit{
+    .agree-btn{
+        padding: 5px 30px;
+        border: 1px solid #adadad;
+        border-radius: 5px;
+        color: #fff;
+        font-weight: 600;
+        font-family: Cairo;
+        font-size: 15px;
+        background: @blue;
+        opacity: 1;
+        min-width: 120px;
+        &:hover{
+            opacity: 0.8;
+        }
+    }
+    .disagree-btn{
         padding: 5px 30px;
         border: 1px solid #adadad;
         border-radius: 5px;
@@ -89,6 +108,7 @@
         font-weight: 600;
         font-family: Cairo;
         font-size: 15px;
+        min-width: 120px;
         &:hover{
             background-color: #ebebeb;
         }
@@ -155,6 +175,16 @@
     }
 }
 
+.ui-dialog{
+    div.ui-dialog-content {
+        overflow: hidden;
+        overflow-y: auto;
+    }
+    div.ui-widget-header {
+        border: 0px solid #dddddd;
+        background: none;
+    }
+}
 /* -------------- END GENERAL POPUP STYLES --------------*/
 
 /*----------------------- POPUP OVERLAY -------------
@@ -222,18 +252,15 @@ div[aria-describedby="myMap"] .ui-widget-header{
 
 /* JOIN/RENEW FORMS - ADD PAYMENT CART */
 div[aria-describedby="addPaymentCardForm"].ui-dialog {
-    z-index: 1050!important;
-    left: 33%!important;
-	top: 47%!important;
-    width: 486px!important;
-    font-family: Roboto;
-    .ui-widget-header{
-        border:none!important;
-        background-color:white!important;
+    .small-popup;
+    input[type="text"]{
+        background: #fff;
     }
-    .ui-dialog-content{
-        overflow:hidden!important;
-        font-family: Roboto;
+    div[class^="col-"]{
+        margin-top: 8px;
+    }
+    label{
+        margin-botom: 6px;
     }
 }
 

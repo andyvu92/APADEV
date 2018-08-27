@@ -176,7 +176,6 @@
 <?php logRecorder(); ?>
  <script type="text/javascript">
 	  jQuery(document).ready(function($) {
-		   $(".chosen-select").chosen({width: "100%"});
 	  if(!(window.location.href.indexOf("?search-result") > -1)) 
 	{  
 		$("#block-block-241").addClass("display-none");

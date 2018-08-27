@@ -211,16 +211,12 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 					<li>Contact us first via phone (03)9993 6920; email at enquiries_au@bmsgroup.com ; or in writing to Level 3, 360 Little Collins Street, Melbourne, VIC 3000</li>
 					<li>If we cannot reach a satisfactory resolution within a further 45 days you can send your complaint to FOS at phone 1300 780 808; email at info@fos.org.au; or in writing to Financial Ombudsman Service, GPO Box 3, Melbourne, VIC 3001. The FOS website is www.fos.org.au. </li>
 				</ul>
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12"> 
-				<input class="styled-checkbox" type="checkbox" id="insuranceTerms">
-				<label data-dismiss="modal" for="insuranceTerms">Yes. I’ve read and understand the insurance terms and conditions</label>
-			</div>   
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeDescription"> 
-            	Please agree with the insurance Terms and Conditions to continue with your membership
-			</div> 
+
 			</div>
+
 			<div class="modal-footer">
-				<a class="popup-submit" href="" popup-dismiss="insuranceTermsandConditions">Submit</a>
+				<a class="disagree-btn" href="" popup-dismiss="insuranceTermsandConditions">Disagree</a>
+				<a id="insuranceTerms" class="agree-btn" href="" popup-dismiss="insuranceTermsandConditions">Agree</a>
 			</div>
 </div>
 <?php logRecorder();  ?>

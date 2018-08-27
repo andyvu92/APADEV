@@ -354,7 +354,7 @@ if(isset($_SESSION["UserId"])){
 	</div>
 
 	<div id="anothercardBlock" class="col-xs-12 none-padding down10 extra-card" style="display:none;"<?php //if(isset($_SESSION["tempcard"])){ echo 'style="display:block;"';} else { echo 'style="display:none;"';}?>>
-		<form action="/pd/pd-shopping-cart" method="POST" >
+		<form action="/pd/pd-shopping-cart" method="POST" class="display-none">
 		<input type="hidden" name="addCard" value="1"/>
 		<div class="row">
 			<div class="col-lg-12">
@@ -403,6 +403,7 @@ if(isset($_SESSION["UserId"])){
 		</div>
 		</form>
 	</div>
+	
 	</div>
 	<?php endif; ?>
     <?php if (sizeof($cardsnum["results"])==0): ?>
@@ -535,11 +536,23 @@ if(isset($_SESSION["UserId"])){
 			</a-->
 		</form>
 </div>
+		</div>
+		
 <?php endif; ?>
-<?php if($productList->rowCount()==0 && sizeof($NGProductsArray)==0) : ?>   <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center"><h3 style="color:black;">You do not have any products in your shopping cart.</h3></div>      <?php endif;?>
+<?php if($productList->rowCount()==0 && sizeof($NGProductsArray)==0) : ?>  
+
+<div class="col-xs-12">
+<h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3>
+<?php endif;?>
+
 <div class="col-xs-12 bottom-buttons">
- <a target="_blank" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
- <a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
+ 	<a target="_blank" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
+ 	<a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
+</div>
+
+<div class="flex-col-12 pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+
+
 </div>
 <?php logRecorder();  ?>
 <div id="PRFDesPopUp" style="display:none;" class="container">
@@ -553,28 +566,29 @@ if(isset($_SESSION["UserId"])){
 	</div>
 
 	<div class="modal-body">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
-	<h3>Registration</h3>
+	<h4>Registration</h4>
 
 <p>Online registration is the simplest way to secure your place. Advice concerning remaining places in any event activity does not guarantee a place, as that information is subject to continual change. Registration will not be accepted without payment. Places are allocated according to the date that an application form and payment are received by the Australian Physiotherapy Association (APA), unless otherwise stated.</p>
-<br />
+
 <p>The APA reserves the right to cancel or change an event activity to an alternative date. The APA will notify those who have already registered for that particular cancelled event of the cancellation or change of date. In this case, all registered participants will receive a full refund of the event registration fee, should it be required. The APA is not responsible for other associated expenses. Registration is transferable.</p>
-<br />
+
 <p>If transferring your registration or if you wish to cancel your registration, please contact the PD Officer in the state that the course is held. Transfer and cancellation requests must be received in writing. Transfers and cancellations may be subject to a fee.</p>
-<br />
+
 <p>By registering for this course, you provide consent to the APA to use your comments/responses, or any photographs taken of you, for their publications and associated media and marketing channels. If you do not provide consent, it is your duty to inform the APA in writing.</p>
-<br />
-<h2>Courses:</h2>
+
+
+	<h4>Courses</h4>
 <p>In most cases, course registration closes two weeks prior to the course commencement date. It is the participant&rsquo;s responsibility to ensure that they meet any pre-requisites as stated in the course outline found on the APA website. </p>
-<br />
+
 <p>The APA requires that all participants hold current personal professional indemnity insurance for all courses and workshops. We recommend that participants who are travelling interstate to attend an APA event purchase travel insurance. </p>
-<br />
+
 <p>Membership must be current at the time of the APA event to receive the APA Member or group member rates. Letters of attendance are provided at the completion of every course. Replacement copies are available at $25 (includes postage and handling). </p>
-<br />
+
 <p>APA accredited courses are not available to students unless advertised otherwise. Students are able to register and attend APA lectures and PD events other than courses.</p>
-<br />
-<h2>Cancellation:</h2>
+
+
+	<h4>Cancellation:</h4>
 <p>For APA courses:</p>
 <ul>
     <li>a participant may substitute their registration to another person or apply for a refund of monies paid prior to the course registration closing date</li>
@@ -582,33 +596,26 @@ if(isset($_SESSION["UserId"])){
     <li>from seven calendar days prior to and up to the course commencement date, a participant may substitute their registration to another person. NO refund will be supplied</li>
     <li>a participant may apply for a refund with a supporting Medical Certificate. Each case will be assessed on its own merits and a refund is not guaranteed. Where a refund is granted, the APA will withhold 20% of the registration fee paid, as cancellation fee.</li>
 </ul>
-<br />
-<h2>Part payments</h2>
+
+
+<h4>Part payments</h4>
 <p>Part payments may be offered to APA members for courses over $2000. The payment plan is as follows:</p>
 <ul>
     <li>50 per cent is required to secure booking. </li>
     <li>25 per cent is required 2 months prior to the course date, and </li>
     <li>The final 25 per cent is required 1 month prior to course date. </li>
 </ul>
-<br />
-<h2>Australian Physiotherapy Association Privacy Statement for Professional Development Website and Manual Registration Forms:</h2>
+
+
+<h4>Australian Physiotherapy Association Privacy Statement for Professional Development Website and Manual Registration Forms:</h4>
 <p>The APA acknowledges and respects the privacy of its members and customers. The information that you provide on this form
-is &ldquo;personal information&rdquo; as defined by the Privacy Act 1988. The information is being collected by the APA and will be held by the APA. It may be given to service providers engaged by the APA. This information is being collected for the purpose of processing your registration for this event and keeping you informed about other upcoming events. The provision of information is voluntary but if it is not provided the APA may not be able to process your registration. You have the right to access and alter personal information about yourself in accordance with the Australian Privacy Principles and the APA privacy policy which is available for you to read on <a href="http://www.privacy@physiotherapy.asn.au" target="_self">physiotherapy.asn.au</a>. Direct any enquiries you may have in relation to this matter to our Privacy Officer who can be contacted on <strong>03 9092 0888</strong> or by email at <a href="mailto:privacy@physiotherapy.asn.au">privacy@physiotherapy.asn.au</a>.</p>
+is &ldquo;personal information&rdquo; as defined by the Privacy Act 1988. The information is being collected by the APA and will be held by the APA. It may be given to service providers engaged by the APA. This information is being collected for the purpose of processing your registration for this event and keeping you informed about other upcoming events. The provision of information is voluntary but if it is not provided the APA may not be able to process your registration. You have the right to access and alter personal information about yourself in accordance with the Australian Privacy Principles and the APA privacy policy which is available for you to read on <a href="http://www.privacy@physiotherapy.asn.au" target="_self">physiotherapy.asn.au</a>. Direct any enquiries you may have in relation to this matter to our Privacy Officer who can be contacted on <a href="tel:03 9092 0888" target="_self">03 9092 0888</a> or by email at <a href="mailto:privacy@physiotherapy.asn.au">privacy@physiotherapy.asn.au</a>.</p>
 
-	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-		
-		<input class="styled-checkbox" type="checkbox" id="installmentpolicyp" checked name="instalmentpolicy"> 
-		<label class="apa_policy_button" for="installmentpolicyp">Yes. I’ve read and understand the APA events terms and conditions</label>
-
-	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none warning" id="disagreeInstallmentDescription"> 
-         Please agree to the APA events terms and conditions to continue with your purchase
-	</div>
 	</div>
 
 	<div class="modal-footer">
-		<a class="popup-submit" href="" popup-dismiss="PDTermsWindow">Submit</a>
+		<a class="disagree-btn" href="" popup-dismiss="PDTermsWindow">Disagree</a>
+		<a id="installmentpolicyp" class="agree-btn" href="" popup-dismiss="PDTermsWindow">Agree</a>
 	</div>
 </div>
 

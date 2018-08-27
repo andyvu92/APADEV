@@ -413,7 +413,7 @@ jQuery(document).ready(function($) {
 		
 		
 	});
-	$('[id^=deleteEducation]').live("click",function(){
+	$(document).on("click", "[id^=deleteEducation]", function(){
 			var x = $(this).attr("id");
 			$("#deleteQButton").addClass(x);
 			$( "#confirmDelete" ).dialog();
@@ -441,16 +441,32 @@ jQuery(document).ready(function($) {
 		$( "#POSTPRF").val(PRF);
 	});
 	
+	// HIDE / SHOW PAYMENT CARD FORM 
 	$('#anothercard').click(function(){
         if($(this).is(":checked")){
 			$('#anothercardBlock').slideDown();
 			$('input[name=addCard]').val('1');
 		}
         else{
-            $('#anothercardBlock').addClass("display-none");
+			$('#anothercardBlock').slideUp();
 			$('input[name=addCard]').val('0');
         }
 	});
+
+	// HIDE / SHOW MAILING ADDRESS ON DASHBOARD > ACCOUNT
+	$('#Mailing-address').click(function(){
+		console.log('clicked');
+        if($(this).is(":checked")){
+			$('#mailing-address-block').slideUp();
+			$('input[name=addCard]').val('1');
+		}
+        else{
+            $('#mailing-address-block').slideDown();
+			$('input[name=addCard]').val('0');
+        }
+	});
+
+	//-----------------------------------------
 	$('input[type="radio"]').click(function(){
         if($(this).is(":checked")){
             $(this).attr('checked', true);
@@ -1153,61 +1169,27 @@ jQuery(document).ready(function($) {
 
 	//INSURANCE CHECKBOX IN POPUP
 	$('#insuranceTerms, #insurance_terms_button').click(function() {
-		if($('#insuranceTerms').val()=="0"){
-		$( "#disagreeDescription" ).removeClass('display-none');
-		$('a.join-details-button5').addClass('disabled');
-		$("#conditions" ).removeAttr('checked');
-		$("#conditions" ).attr('value', '0');
-		$('label[for="conditions"]').attr('popup-target','insuranceTermsandConditions');
-	}
-	else{
-		$( "#disagreeDescription" ).addClass('display-none');
-		$('a.join-details-button5').removeClass('disabled');
-		$("#conditions" ).attr('checked', true);
+		$("#conditions" ).prop('checked', true);
 		$("#conditions" ).attr('value', '1');
-		$('label[for="conditions"]').removeAttr('popup-target');
-	}
 	});
 
 	$('label[for="conditions"]').click(function(){
-		$('#insuranceTerms').removeAttr('checked');
-		$("#insuranceTerms" ).attr('value', '0');
+		$('#conditions').removeAttr('checked');
+		$("#conditions" ).attr('value', '0');
 		$('#insuranceTermsandConditions .modal-body').animate({
 			scrollTop: $(".note-text").position().top
 		}, 1);
-		if ( $('input#conditions').attr("value", "1") ){
-			$(this).attr('popup-target','insuranceTermsandConditions');
-		}
 	});
 
-	$('#conditions').change(function() {
-        if($(this).is(":checked")) {
-          $('#conditions').removeAttr('data-target');
-        }
-		else{
-		  $('#conditions').attr('data-target','#insuranceTermsandConditions');
-		}
-       
-    });
 	//PRIVACY POLICY CHECKBOX IN POPUP
-	$('label[for="privacypolicyp"]').click(function() {
-		if($('#privacypolicyp').val()=="0"){
-		$( "#disagreePolicyDescription" ).addClass('display-none');
-		$('a.join-details-button5').removeClass('disabled');
-		$("input#jprivacy-policy" ).attr('checked', true);
-		$("input#jprivacy-policy" ).attr('value', '1');
-	}
-	else{
-		$( "#disagreePolicyDescription" ).removeClass('display-none');
-		$('a.join-details-button5').addClass('disabled');
-		$("input#jprivacy-policy" ).removeAttr('checked');
-		$("input#jprivacy-policy" ).attr('value', '0');
-	}
+	$('#privacypolicyp').click(function() {
+		$("#jprivacy-policy" ).prop('checked', true);
+		$("#jprivacy-policy" ).attr('value', '1');
 	});
 
 	$('label[for="jprivacy-policy"]').click(function(){
-		$('input#privacypolicyp').removeAttr('checked');
-		$("input#privacypolicyp" ).attr('value', '0');
+		$('#jprivacy-policy').removeAttr('checked');
+		$("#jprivacy-policy" ).attr('value', '0');
 		$('#privacypolicyWindow .modal-body').animate({
 			scrollTop: $(".note-text").position().top
 		}, 1);
@@ -1216,26 +1198,16 @@ jQuery(document).ready(function($) {
 	//-------------------------------------
 
 	// TERMS & CONDITIONS CHECKBOX IN POPUP
-	$('label[for="installmentpolicyp"]').click(function() {
-		if($('#installmentpolicyp').val()=="0"){
-		$( "#disagreeInstallmentDescription" ).addClass('display-none');
-		$('a.join-details-button5').removeClass('disabled');
-		$("input#accept1" ).attr('checked', true);
+	$('#installmentpolicyp').click(function() {
+		$("input#accept1" ).prop('checked', true);
 		$("input#accept1" ).attr('value', '1');
-	}
-	else{
-		$( "#disagreeInstallmentDescription" ).removeClass('display-none');
-		$('a.join-details-button5').addClass('disabled');
-		$("input#accept1" ).removeAttr('checked');
-		$("input#accept1" ).attr('value', '0');
-	}
 	});
 
 	$('label[for="accept1"]').click(function(){
-		$('input#installmentpolicyp').removeAttr('checked');
-		$("input#installmentpolicyp" ).attr('value', '0');
+		$('input#accept1').removeAttr('checked');
+		$("input#accept1" ).attr('value', '0');
 		$('#PDTermsWindow .modal-body').animate({
-			scrollTop: $("#PDTermsWindow .modal-body .note-text").position().top
+			scrollTop: $(".note-text").offset().top
 		}, 1);
 	});
 

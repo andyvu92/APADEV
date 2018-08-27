@@ -93,15 +93,13 @@ $background = getBackgroundImage($userID);
 	<div class="modal-body">
 	<br class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
 	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
-	<h5 class="doc-header">Our Commitment to Your Privacy</h5>
-
-
+	<h4 class="doc-header">Our Commitment to Your Privacy</h4>
 
 <p>Your privacy is very important to the Australian Physiotherapy Association (APA). As part of the normal operation of this site, the APA may collect certain information from you. This privacy policy details what information the APA collects, how it uses that information and what your rights are regarding any information that you supply to it. The APA is subject to the requirements of applicable Australian law and strives to meet the requirements of the Australian Privacy Principles.</p>
 
 
 
-<h5 class="doc-header">Your information and Your Right to Privacy</h5>
+<h4 class="doc-header">Your information and Your Right to Privacy</h4>
 
 <p>You can elect to provide as much or as little information as you choose although the APA requires a minimum set of information to provide access to its site. What you provide is your choice.</p>
 
@@ -150,7 +148,7 @@ $background = getBackgroundImage($userID);
 
 
 
-<h5 class="doc-header">Collecting Information</h5>
+<h4 class="doc-header">Collecting Information</h4>
 
 <p>The APA may collect, use, store and transfer different kinds of personal data about you. It collects and process personal data about you when you:</p>
 
@@ -207,7 +205,7 @@ $background = getBackgroundImage($userID);
 
 
 
-<h5 class="doc-header">Opt-Out</h5>
+<h4 class="doc-header">Opt-Out</h4>
 
 <p>By choosing to register on the APA web site or as a member of the APA, you may receive information from the APA about membership, APA services, partner information and offers. The APA uses this method to communicate quickly with you. You have the right to refuse inclusion on a mailing list. You can make a request to remove your email address from a mailing list by contacting the privacy officer at <a href="mailto:privacy@australian.physio" style="text-decoration: underline; color: #000">privacy@australian.physio</a>.</p>
 
@@ -224,14 +222,14 @@ $background = getBackgroundImage($userID);
 
 
 
-<h5 class="doc-header">Cookies</h5>
+<h4 class="doc-header">Cookies</h4>
 
 <p>As part of the normal operation of this site, your internet browser will be sent a 'cookie' (a temporary internet file). This cookie enhances the site's functionality with features such as membership logon and electronic ordering. By itself, this cookie can only identify your computer to APA’s server; it is not used to identify you personally.</p>
 
 <p>Your personal password to access the APA website protects your privacy. We recommend that you do not disclose, share or reveal this password to any other individual.</p>
 
 
-<h5 class="doc-header">Change of Purpose</h5>
+<h4 class="doc-header">Change of Purpose</h4>
 
 
 
@@ -242,27 +240,27 @@ $background = getBackgroundImage($userID);
 <p>From time to time, the APA may decide to collect different kinds of information. When this occurs, the APA will update this privacy page.</p>
 
 
-<h5 class="doc-header">Privacy Enquires</h5>
+<h4 class="doc-header">Privacy Enquires</h4>
 
 <p>You have the right to complain regarding any aspect of your privacy rights.&nbsp;If you have a complaint please contact the privacy officer at <a href="mailto:privacy@australian.physio" style="text-decoration: underline; color: #000">privacy@australian.physio</a> or on <a href="tel:03 9092 0888" style="text-decoration: underline; color: #000">03 9092 0888</a>.</p>
 
 
-<h5 class="doc-header">APA Membership</h5>
+<h4 class="doc-header">APA Membership</h4>
 
 <p>If you decide to become a member of the APA, and we hope that you do, the APA will ask you for additional personal details. You may also opt to provide the APA with more information such as special interest areas you may have where you are employed and your date of birth. Relevant information is disclosed to the public on the internet via the APA's 'Find a Physio' online searchable database only. You must approve the use of your details on this database. Whether you decide to use this service is your choice.</p>
 
 
-<h5 class="doc-header">Security</h5>
+<h4 class="doc-header">Security</h4>
 
 <p>Your information is stored on the APA's server located in a secure data housing facility. While, it is important to recognise that 'perfect security' does not exist on the internet, the APA is committed to using industry standard mechanisms to safeguard the confidentiality of your personal information such as firewalls and Secure Socket Layers.&nbsp;&nbsp;</p>
 
 
-<h5 class="doc-header">Credit Card Information</h5>
+<h4 class="doc-header">Credit Card Information</h4>
 
 <p>The APA does not permanently store credit card information anywhere on this site.&nbsp;&nbsp;</p>
 
 
-<h5 class="doc-header">APA Members Privacy</h5>
+<h4 class="doc-header">APA Members Privacy</h4>
 
 <p>The APA has a strong commitment to protecting your privacy and ensuring the confidentiality and security of personal information provided to the APA by you. As an organisation with an annual turnover of more than $3 million, the APA is required to comply with the Privacy Act 1988 as amended by the Privacy Amendment (Enhancing Privacy Protection) Act 2012 which came into effect in March 2014.<br />
 
@@ -281,36 +279,30 @@ You have the right to access the personal information about yourself held by the
 </ul>
 
 
-<h5 class="doc-header">Consent</h5>
+<h4 class="doc-header">Consent</h4>
 
 <p>You acknowledge and agree that by providing your personal and/or sensitive information to the APA that the APA, its related bodies corporate and partners and each of their officers, employees, agents and contractors are permitted to collect, store, use and disclose your personal information in the manner set out in this privacy policy and in accordance with the Australian Privacy Principles.</p>
 
 
 <h4>3. Membership cancellation and refund policies</h4>
 
-<h5 class="doc-header">Instalment policy</h5>
+<h4 class="doc-header">Instalment policy</h4>
 
 <p>The first monthly instalment will be deducted upon receipt of renewal. The first instalment will include the full amount of GST payable for the year and the administration fee.  It will also include any donations that you may have agreed to provide. Subsequent instalments for the year will equal the remaining amount due divided by the respective number of months of the year remaining. Monthly instalments will be deducted from your nominated credit or debit card on the first working day of the month. By electing to pay by instalments you are also opting to have your membership automatically rolled over into the forthcoming year, authorising the APA to continue deducting membership fees until you notify the APA in writing to cease deductions or your membership is cancelled or withdrawn and outstanding fees are collected. Instalments can only be cancelled in December at the end of our membership year. You will be notified in writing of any change to your deductions at least 30 days prior to that change. If there are insufficient funds available to make the deduction or the payment is rejected for other reasons, the APA may pass associated bank fees on to you.</p>
 
-<h5 class="doc-header">Refund policy</h5>
+<h4 class="doc-header">Refund policy</h4>
 
 <p>The Australian Physiotherapy Association will not issue membership refunds throughout the year unless under extraordinary circumstances. Applications for refund must be made in writing to the Senior Finance and Systems Officer. All applications will be considered on a case-by-case basis and the decision made will be final. Please note that membership to the APA is done on a yearly basis. If any refund of membership fees is granted the APA reserves its right to charge an administrative fee of $100.00 (inclusive of GST), which will be deducted before membership fees are refunded.</p>
 
 <p><strong>AUSTRALIAN PHYSIOTHERAPY ASSOCIATION</strong></p>
 <p><strong>ABN: 89 004 265 150</strong></p>
 
-		<div class="col-xs-12">  
-			<input class="styled-checkbox" type="checkbox" id="privacypolicyp" checked name="privacy-policy">
-			<label class="apa_policy_button" for="privacypolicyp">Yes. I’ve read and understand the APA privacy policy</label>
-		</div>
-		<div class="col-xs-12 display-none warning" id="disagreePolicyDescription"> 
-			Please agree to the APA Privacy Policy to continue with your membership
-		</div> 
 	</div>
 
-	<div class="modal-footer">
-		<a class="popup-submit" href="" popup-dismiss="privacypolicyWindow">Submit</a>
-	</div>
+			<div class="modal-footer">
+				<a class="disagree-btn" href="" popup-dismiss="privacypolicyWindow">Disagree</a>
+				<a id="privacypolicyp" class="agree-btn" href="" popup-dismiss="privacypolicyWindow">Agree</a>
+			</div>
 	</div>
 </div>
 <div id="installmentpolicyWindow" style="display:none;">
