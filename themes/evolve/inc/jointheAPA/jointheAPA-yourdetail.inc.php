@@ -3206,10 +3206,6 @@ endif;
 		</div>    
 <script type="text/javascript">
     jQuery(document).ready(function($) {
-<<<<<<< HEAD
-=======
-
->>>>>>> 5589c4322217b74845b54c63f86fdaa666730ba4
         $('#workplace').click(function(){
             $('#dashboard-right-content').addClass("autoscroll");
         });
@@ -3265,13 +3261,9 @@ endif;
             echo json_encode($_SESSION['country']);
 ?>;
           $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
-<<<<<<< HEAD
-        });
-=======
           
         });
         $("a[href^=#workplace]").live( "click", function(){ });
->>>>>>> 5589c4322217b74845b54c63f86fdaa666730ba4
         $("[class^=deletewp]").live( "click", function(){
              var x = $(this).attr("class").replace('deletewp', '');
             $("#workplaceli"+ x).remove();

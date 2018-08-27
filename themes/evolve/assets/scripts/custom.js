@@ -1296,7 +1296,7 @@ jQuery(document).ready(function($) {
 	//---------------------------------------------------------------------------
 
 //------------- PD PAGES -----------------------
-$(document).on('click', '#go-to-card', function(){
+$(document).on('click', '#go-to-cart', function(){
 	if ( $('#Professional-insurance1').is(':checked') ) {
 		$('[aria-describedby="registerPDUser"]').fadeOut();
 		$('.overlay').fadeIn();

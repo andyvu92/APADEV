@@ -544,10 +544,10 @@
 				</div>
 				<script>
 					jQuery(document).ready(function($) {
-						$('.pd-description-nonmobile .readmore').readmore({
-							collapsedHeight: 233,
-							lessLink: '<a class="readless-link" href="#" onclick="topFunction215()">Read less</a>',
-							speed: 500,
+						$('.readmore').readmore({
+							speed: 800,
+							collapsedHeight: 207,
+							lessLink: '<a class="readless-link" href="#" onclick="topFunction()">Read less</a>',
 						});
 					});
 				</script>
@@ -1650,7 +1650,7 @@
 			</div>
 		</div>
 
-	 <input id="go-to-card" class="accent-btn" style="margin-top: 10px;" type="submit" value="Go to my cart">
+	 <input id="go-to-cart" class="accent-btn" style="margin-top: 10px;" type="submit" value="Go to my cart">
 
 	</form>
 	</div>
@@ -2305,15 +2305,6 @@ Facsimile: (03) 9092 0899</p>
 <div class="overlay">
 	<section class="loaders">
 		<span class="loader loader-quart">
-			<div class="loading">
-				<div class="loading__element">L</div>
-				<div class="loading__element">O</div>
-				<div class="loading__element">A</div>
-				<div class="loading__element">D</div>
-				<div class="loading__element">I</div>
-				<div class="loading__element">N</div>
-				<div class="loading__element">G</div>
-			</div>
 		</span>   
 	</section>
 </div>
