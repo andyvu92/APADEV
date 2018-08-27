@@ -340,10 +340,10 @@ jQuery(document).ready(function($) {
 		$('.tabtitle4 span').addClass("text-underline");
 		
 	});
-	$('.PDPlaceOrder').click(function(){
+	$('#PDPlaceOrder').click(function(){
 		if($('#checkTerm').val() == "1"){
-			if($('#accept1').val()!="1")  {$('#accept1').addClass("focuscss");alert("please fill out all required fields *");return false;}
-			if($('#accept2').val()!="1")  {$('#accept2').addClass("focuscss");alert("please fill out all required fields *");return false;}
+			if($('#accept1').val()!="1")  {$('#pd_terms_open').addClass("focuscss");alert("please fill out all required fields *");return false;}
+			if($('#accept3').val()!="1")  {$('#accept3label').addClass("focuscss");alert("please fill out all required fields *");return false;}
 		}
 	});
 	$('.pd-register-submit').click(function(){

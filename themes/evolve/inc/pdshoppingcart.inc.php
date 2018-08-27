@@ -261,13 +261,13 @@ if(isset($_SESSION["UserId"])){
 		<?php if($tag==1): ?>
 		<div class="flex-cell">
 			<input class="styled-checkbox" type="checkbox" id="accept2">
-			<label for="accept2">I understand that I must have appropriate Professional Indemnity insurance current on the date/s of any APA course/workshop that I’m registered for.</label>
+			<label for="accept2" id="accept2label">I understand that I must have appropriate Professional Indemnity insurance current on the date/s of any APA course/workshop that I’m registered for.</label>
 		</div>
 
 		<?php endif; ?>
 		<div class="flex-cell">
 			<input class="styled-checkbox" type="checkbox" id="accept3">
-			<label for="accept3">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled. The APA recommends travelling participants purchase travel insurance to cover this.</label>
+			<label for="accept3" id="accept3label">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled. The APA recommends travelling participants purchase travel insurance to cover this.</label>
 		</div>
 	</div>
 	<div class="flex-container flex-flow-column">
@@ -534,7 +534,7 @@ if(isset($_SESSION["UserId"])){
 				echo '<input type="hidden" name="totalNG" id="totalNG" value="'.$ngTotal.'">';
 			}
 			?>
-			<a href="javascript:document.getElementById('PDShoppingcartForm').submit();" class="placeorder" type="submit" value="PLACE YOUR ORDER" id="PDPlaceOrder"><span class="dashboard-button-name">Place your order</span></a>
+			<a href="javascript:document.getElementById('PDShoppingcartForm').submit();" class="placeorder" value="PLACE YOUR ORDER" id="PDPlaceOrder"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</button></a>
 			<!--a target="_blank" class="addCartlink">
 				<button class="placeorder" type="submit">PLACE YOUR ORDER</button>
 			</a-->
@@ -656,30 +656,6 @@ $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
       .iconselectmenu( "menuWidget" )
         .addClass( "ui-menu-icons customicons" );
 
-	//$("#accept1").change(function() {
-	//	if(changeV() == "1") {
-	//		$("TandC").val("1");
-	//	}
-	//});
-	$("#accept2").change(function() {
-		if(changeV() == "1") {
-			$("TandC").val("1");
-		}
-	});
-	$("#accept3").change(function() {
-		if(changeV() == "1") {
-			$("TandC").val("1");
-		}
-	});
-	
-	function changeV() {
-		
-		if($("#accept1").is(":checked") && $("#accept2").is(":checked") && $("#accept3").is(":checked")) {
-			return "1";
-			}
-		}
-		}
-	}
 } );
 
 </script>
