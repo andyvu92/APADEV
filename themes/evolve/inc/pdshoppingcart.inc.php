@@ -122,10 +122,12 @@ if(sizeof($NGProductsArray)!=0) {
 // Title, PD type, Time, Start & End date, Registration closing date,
 // Where[Building Name, Address1, Address2, State, Suburb, Country],
 // Cost, Your registration.
-$RequestCart["userID"] = $_SESSION["UserId"];
-$RequestCart["MeetingCoupons"] = $PDarray;
-$product = GetAptifyData("30", $RequestCart); //$_SESSON["UserID"]
-$products = $product["MeetingDetails"];
+if(sizeof($PDarray)!=0){
+	$RequestCart["userID"] = $_SESSION["UserId"];
+	$RequestCart["MeetingCoupons"] = $PDarray;
+	$product = GetAptifyData("30", $RequestCart); //$_SESSON["UserID"]
+	$products = $product["MeetingDetails"];
+}
 //print_r($products);
 
 /********End get Product details  from Aptify******/
@@ -183,9 +185,9 @@ if(isset($_SESSION["UserId"])){
 	
 } 
 ?>
-<?php  if(($productList->rowCount()>0) || (sizeof($NGProductsArray)!=0)):?>
+<?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0)):?>
 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 left-content">
-	<?php   if($productList->rowCount()>0):?>
+	<?php   if(sizeof($products)!=0):?>
 	<h1 class="SectionHeader">Summary of cart</h1>
 	<div class="brd-headling">&nbsp;</div>
 	
@@ -245,7 +247,7 @@ if(isset($_SESSION["UserId"])){
 	?>
 	</div>
 
-    <div class="flex-container flex-flow-column <?php if($price==0) echo " display-none";?>">
+    <div class="flex-container flex-flow-column">
 		<div class="flex-cell">	
 			<span class="small-lead-heading">Terms & conditions</span>
 		</div>
@@ -267,7 +269,7 @@ if(isset($_SESSION["UserId"])){
 			<label for="accept3">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled. The APA recommends travelling participants purchase travel insurance to cover this.</label>
 		</div>
 	</div>
-	<div class="flex-container flex-flow-column <?php if(($price==0)) echo " display-none";?>">
+	<div class="flex-container flex-flow-column">
 		<div class="flex-cell">
 			<span class="small-lead-heading">Your dietary requirements</span>
 		</div>
@@ -320,11 +322,12 @@ if(isset($_SESSION["UserId"])){
 		</div>
 	<?php endif; ?>		
 </div>
-<?php endif; ?>	
+
+
 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 paymentsiderbar">
-	<p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
+	<p><span class="sidebardis">Payment Information:</span></p>
 	<?php if (sizeof($cardsnum["results"])!=0): ?>
-	<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
+	<div class="paymentsidecredit"> 
 		<fieldset>
 			<div class="chevron-select-box">
 				<select  id="Paymentcard" name="Paymentcard" >
@@ -346,7 +349,7 @@ if(isset($_SESSION["UserId"])){
 	</div>
 
 
-	<div class="paymentsideuse <?php if($price==0) echo " display-none";?>">
+	<div class="paymentsideuse">
 	
 	<div class="col-xs-12 none-padding" style="margin: 5px 0;">
 		<input class="styled-checkbox" type="checkbox" id="anothercard">
@@ -391,7 +394,7 @@ if(isset($_SESSION["UserId"])){
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="CCV" placeholder="CCV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+			<input type="text" class="form-control"  name="CCV" placeholder="CVV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
 		</div>
 		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
@@ -444,7 +447,7 @@ if(isset($_SESSION["UserId"])){
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="CCV" placeholder="CCV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+			<input type="text" class="form-control"  name="CCV" placeholder="CVV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
 		</div>
 		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
@@ -475,14 +478,14 @@ if(isset($_SESSION["UserId"])){
 			</div>
 		</div>
 	<?php endif; ?>
-	<?php if(isset($_SESSION["UserId"]) && $productList->rowCount()>0):?><p>
+	<?php if(sizeof($products)!=0):?><p>
 		<form id="discount" action="pd-shopping-cart" method="POST">
 			<input type="text" name="Couponcode" placeholder="Enter discount code" value="">
 			<button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button>
 		</form></p><br>
 	<?php endif; ?>
-		<?php if($productList->rowCount()>0 || sizeof($NGProductsArray)!=0 ): ?>      
-		<div class="row ordersummary"><div class="col-xs-12"><span class="blue-sidebardis">YOUR ORDER</span></div></div>
+     
+	<div class="row ordersummary"><div class="col-xs-12"><span class="blue-sidebardis">YOUR ORDER</span></div></div>
 		<div class="flex-container flex-flow-column pd-spcart-order">
 			<div class="flex-cell">
                 <div class="flex-col-6"><?php echo $i;?> items</div>
@@ -535,16 +538,10 @@ if(isset($_SESSION["UserId"])){
 				<button class="placeorder" type="submit">PLACE YOUR ORDER</button>
 			</a-->
 		</form>
-</div>
-		</div>
-		
+	</div>
+
 <?php endif; ?>
-<?php if($productList->rowCount()==0 && sizeof($NGProductsArray)==0) : ?>  
-
-<div class="col-xs-12">
-<h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3>
-<?php endif;?>
-
+<?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0) : ?>   <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center"><h3 style="color:black;">You do not have any products in your shopping cart.</h3></div>      <?php endif;?>
 <div class="col-xs-12 bottom-buttons">
  	<a target="_blank" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
  	<a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>

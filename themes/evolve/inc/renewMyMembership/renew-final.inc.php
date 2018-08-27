@@ -96,6 +96,7 @@ elseif(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['ad
 	$tempcard = array();
 	$tempcard['Payment-method'] = $_POST['Cardtype'];
 	$tempcard['Cardno'] = $_POST['Cardnumber'];
+	$tempcard['Name-on-card'] = $_POST['Cardname'];
 	$tempcard['Expiry-date'] = $_POST['Expirydate']; 
 	$tempcard['CCV'] = $_POST['CCV'];
 	if(isset($_SESSION['tempcard'])){ unset($_SESSION["tempcard"]);}
@@ -361,6 +362,11 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 						}
 				    ?>	
 					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<input type="text" class="form-control" id="Cardname" name="Cardname" value="<?php echo $tempcards['Name-on-card']; ?>"  placeholder="Card Name" readonly>
 				</div>
 			</div>
 			<div class="row">

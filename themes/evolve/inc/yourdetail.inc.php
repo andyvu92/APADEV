@@ -576,7 +576,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 							<div class="col-xs-8 col-sm-6 col-md-4">
 								<label for="">Phone number<span class="tipstyle"> *</span></label>
-								<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  >
+								<input type="number" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  oninput="this.value = Math.abs(this.value)" min="0">
 							</div>
 						</div>
 
@@ -617,7 +617,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>-->
 							<div class="col-xs-8 col-sm-6 col-md-4">
 								<label for="">Mobile number<span class="tipstyle"> *</span></label>
-								<input type="text" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  >
+								<input type="number" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  oninput="this.value = Math.abs(this.value)" min="0">
 							</div>
 						</div>
 
@@ -1212,12 +1212,12 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<div class="row FapTagC">
 						<div class="col-xs-12">
 							<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
-							<label  style="font-weight: 300" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
+							<label  style="font-weight: 300" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the corporate australian.physio site</label>
 						</div>
 
 						<div class="col-xs-12"> 
 							<input class="styled-checkbox" type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" <?php if($details['Workplaces'][$key]['Findphysio']=="True"){echo "checked";} ?>>
-							<label  style="font-weight: 300" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>
+							<label  style="font-weight: 300" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the consumer choose.physio site</label>
 						</div>
 					</div>
 					<?php endif;?>
@@ -1335,7 +1335,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 							<div class="col-xs-6 col-md-3">
 								<label for="">Phone number<span class="tipstyle">*</span></label>
-								<input type="text" class="form-control" name="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  >
+								<input type="number" class="form-control" name="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  oninput="this.value = Math.abs(this.value)" min="0">
 							</div>
 							<!--<div class="col-xs-6 col-md-3">
 								<label for="">Extention Number</label>
@@ -1382,15 +1382,15 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<label class="light-font-weight" for="Electronic-claiming<?php echo $key;?>">Electronic claiming</label>
 							</div>
 
-							<div class="col-xs-12 col-sm-6 col-md-6">
-								<input class="styled-checkbox" type="checkbox" name="Hicaps<?php echo $key;?>" id="Hicaps<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Hicaps'];?>" <?php if($details['Workplaces'][$key]['Hicaps']=="True"){echo "checked";} ?>>
-								<label class="light-font-weight" for="Hicaps<?php echo $key;?>">HICAPS</label>
+							<!--<div class="col-xs-12 col-sm-6 col-md-6">
+								<input class="styled-checkbox" type="checkbox" name="Hicaps<?php //echo $key;?>" id="Hicaps<?php //echo $key;?>" value="<?php  //echo $details['Workplaces'][$key]['Hicaps'];?>" <?php //if($details['Workplaces'][$key]['Hicaps']=="True"){echo "checked";} ?>>
+								<label class="light-font-weight" for="Hicaps<?php //echo $key;?>">HICAPS</label>
 							</div>
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
-								<input class="styled-checkbox" type="checkbox" name="Healthpoint<?php echo $key;?>" id="Healthpoint<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Healthpoint'];?>" <?php if($details['Workplaces'][$key]['Healthpoint']=="True"){echo "checked";} ?>>
-								<label class="light-font-weight" for="Healthpoint<?php echo $key;?>">Healthpoint</label>
-							</div>
+								<input class="styled-checkbox" type="checkbox" name="Healthpoint<?php //echo $key;?>" id="Healthpoint<?php //echo $key;?>" value="<?php  //echo $details['Workplaces'][$key]['Healthpoint'];?>" <?php //if($details['Workplaces'][$key]['Healthpoint']=="True"){echo "checked";} ?>>
+								<label class="light-font-weight" for="Healthpoint<?php //echo $key;?>">Healthpoint</label>
+							</div>-->
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
 								<input class="styled-checkbox" type="checkbox" name="Departmentva<?php echo $key;?>" id="Departmentva<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Departmentva'];?>" <?php if($details['Workplaces'][$key]['Departmentva']=="True"){echo "checked";} ?>>
@@ -1660,7 +1660,12 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<?php 
 									$universityCode  = file_get_contents("sites/all/themes/evolve/json/University.json");
 									$University=json_decode($universityCode, true);
-									sort($University);
+									$name = array();
+									foreach ($University as $ukey => $row)
+									{
+										$name[$ukey] = $row['Name'];
+									}
+									array_multisort($name, SORT_ASC, $University);
 									$_SESSION["University"] = $University;	
 								?>
 								<?php if (!empty($details['PersonEducation'][$key]['InstituteID'])):?>
@@ -1725,7 +1730,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								</div>
 							</div>
 						</div>
+						<?php if($key!="0"):?>
 						<a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>
+						<?php endif;?>
 					</div>
 
 				<?php endforeach;?>
@@ -1760,7 +1767,12 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                                 <?php
                                     $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
                                     $University             = json_decode($universityCode, true);
-									sort($University);
+									$name = array();
+									foreach ($University as $ukey => $row)
+									{
+										$name[$ukey] = $row['Name'];
+									}
+									array_multisort($name, SORT_ASC, $University);
                                     $_SESSION["University"] = $University;
                                 ?>
                             <div class="chevron-select-box">
@@ -1812,7 +1824,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                                 </div>
                             </div>
                         </div>
-						<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
+						<!--<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>-->
 					</div>
 				<?php endif; ?>
 				</div>
@@ -2005,6 +2017,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			echo json_encode($_SESSION['country']);
 ?>;
 		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
+		 
 			 
 		}
 		$('.add-workplace-join').click(function(){
@@ -2024,6 +2037,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
 			$("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry,"memberType":memberType});
 		});
+		$("a[href^=#workplace]").live( "click", function(){ });
 		$("[class^=deletewp]").live( "click", function(){
 			var x = $(this).attr("class").replace('deletewp', '');
 			$("#workplaceli"+ x).remove();

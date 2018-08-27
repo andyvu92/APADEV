@@ -854,13 +854,13 @@ if (isset($_SESSION['UserId'])):
                         </div>
                         <div class="col-xs-12 col-md-3">
                             <label for="">Phone number<span class="tipstyle"> *</span></label>
-                            <input type="text" class="form-control" name="phone-number" placeholder='Phone number'<?php
+                            <input type="number" class="form-control" name="phone-number" placeholder='Phone number'<?php
     if (empty($details['Home-phone-number'])) {
         echo "";
     } else {
         echo 'value="' . $details['Home-phone-number'] . '"';
     }
-?>  >
+?>  oninput="this.value = Math.abs(this.value)" min="0">
                         </div>
                     </div>
 
@@ -908,13 +908,13 @@ if (isset($_SESSION['UserId'])):
                         </div>-->
                         <div class="col-xs-12 col-md-3">
                             <label for="">Mobile number<span class="tipstyle"> *</span></label>
-                            <input type="text" class="form-control" name="Mobile-number" placeholder='Mobile number'<?php
+                            <input type="number" class="form-control" name="Mobile-number" placeholder='Mobile number'<?php
     if (empty($details['Mobile-number'])) {
         echo "";
     } else {
         echo 'value="' . $details['Mobile-number'] . '"';
     }
-?>  >
+?>  oninput="this.value = Math.abs(this.value)" min="0">
                         </div>
                     </div>
                     
@@ -1487,11 +1487,11 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 						<li <?php
 					if ($key == 'Workplace0')
 						echo 'class ="active" ';
-			?>><a data-toggle="tab" href="#workplace<?php
+			?> id="workplaceli<?php echo $key;?>"><a data-toggle="tab" href="#workplace<?php
 					echo $key;
 			?>"><?php $newkey =$key+1;
 					echo "Workplace " . $newkey;
-			?></a></li>
+			?></a><span class="calldeletewp<?php echo $key;?>"></span></li>
 						<?php
 				endforeach;
 			?> 
@@ -1544,10 +1544,10 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             echo $key;
                     ?>" value="<?php
                             echo $details['Workplaces'][$key]['Findphysio'];
-                    ?>" >
+                    ?>" <?php if($details['Workplaces'][$key]['Findphysio']=="True"){echo "checked";} ?>>
                                                 <label class="light-font-weight" for="Findphysio<?php
                             echo $key;
-                    ?>"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
+                    ?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the consumer choose.physio site </label>
                         </div>
 
                         <div class="col-xs-12 FapTagA"> 
@@ -1564,7 +1564,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                         ?>>
                             <label class="light-font-weight" for="Findabuddy<?php
                                 echo $key;
-                        ?>"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site </label>
+                        ?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the corporate australian.physio site </label>
                         </div>
 
                         <!--BREAK-->
@@ -1800,7 +1800,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <label for="">Phone number<span class="tipstyle"> *</span></label>
-                                <input type="text" class="form-control" name="Wphone<?php
+                                <input type="number" class="form-control" name="Wphone<?php
         echo $key;
 ?>" <?php
         if (empty($details['Workplaces'][$key]['Wphone'])) {
@@ -1808,7 +1808,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
         } else {
             echo 'value="' . $details['Workplaces'][$key]['Wphone'] . '"';
         }
-?>  >
+?>  oninput="this.value = Math.abs(this.value)" min="0">
                             </div>
                             <!--<div class="col-xs-6 col-md-3">
                                 <label for="">Extention Number</label>
@@ -1895,36 +1895,36 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                         echo $key;
                                 ?>">Electronic claiming</label>
                             </div>
-                            <div class="col-xs-6 col-md-3">
+                            <!--<div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Hicaps<?php
-                                    echo $key;
+                                   // echo $key;
                             ?>" id="Hicaps<?php
-                                    echo $key;
+                                    //echo $key;
                             ?>" value="<?php
-                                    echo $details['Workplaces'][$key]['Hicaps'];
+                                    //echo $details['Workplaces'][$key]['Hicaps'];
                             ?>" <?php
-                                    if ($details['Workplaces'][$key]['Hicaps'] == "True") {
-                                        echo "checked";
-                                    }
+                                    //if ($details['Workplaces'][$key]['Hicaps'] == "True") {
+                                        //echo "checked";
+                                    //}
                             ?>> <label for="Hicaps<?php
-                                    echo $key;
+                                    //echo $key;
                             ?>">HICAPS</label>
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Healthpoint<?php
-                                echo $key;
+                                //echo $key;
                         ?>" id="Healthpoint<?php
-                                echo $key;
+                                //echo $key;
                         ?>" value="<?php
-                                echo $details['Workplaces'][$key]['Healthpoint'];
+                                //echo $details['Workplaces'][$key]['Healthpoint'];
                         ?>" <?php
-                                if ($details['Workplaces'][$key]['Healthpoint'] == "True") {
-                                    echo "checked";
-                                }
+                                //if ($details['Workplaces'][$key]['Healthpoint'] == "True") {
+                                   // echo "checked";
+                                //}
                         ?>> <label for="Healthpoint<?php
-                                echo $key;
+                                //echo $key;
                         ?>">Healthpoint</label>
-                            </div>
+                            </div>-->
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Departmentva<?php
                                     echo $key;
@@ -2172,7 +2172,12 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <?php
         $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
         $University             = json_decode($universityCode, true);
-		sort($University);
+		$name = array();
+		foreach ($University as $ukey => $row)
+		{
+			$name[$ukey] = $row['Name'];
+		}
+		array_multisort($name, SORT_ASC, $University);
         $_SESSION["University"] = $University;
 ?>
                                <?php
@@ -2278,8 +2283,10 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             </div>
                             
                         </div>
+					<?php if($key!="0"):?>
 					<a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>	
-                    </div>
+                    <?php endif;?>
+					</div>
                 <?php
     endforeach;
 ?>
@@ -2314,7 +2321,12 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <?php
                                     $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
                                     $University             = json_decode($universityCode, true);
-									sort($University);
+									$name = array();
+										foreach ($University as $ukey => $row)
+										{
+											$name[$ukey] = $row['Name'];
+										}
+										array_multisort($name, SORT_ASC, $University);
                                     $_SESSION["University"] = $University;
                                 ?>
                             <div class="chevron-select-box">
@@ -2366,7 +2378,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 </div>
                             </div>
                         </div>
-						<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
+						<!--<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>-->
 					</div>
 				<?php endif; ?>
 
@@ -2547,7 +2559,7 @@ if(isset($_GET['MT'])){
                             </div>
                             <div class="col-xs-12 col-md-3">
                                 <label for="">Phone number<span class="tipstyle"> *</span></label>
-                                <input type="text" class="form-control" name="phone-number" >
+                                <input type="number" class="form-control" name="phone-number" oninput="this.value = Math.abs(this.value)" min="0">
                             </div>
                         </div>
 
@@ -2584,7 +2596,7 @@ if(isset($_GET['MT'])){
                             </div>-->
                             <div class="col-xs-12 col-md-3">
                                 <label for="">Mobile number<span class="tipstyle"> *</span></label>
-                                <input type="text" class="form-control" name="Mobile-number">
+                                <input type="number" class="form-control" name="Mobile-number" oninput="this.value = Math.abs(this.value)" min="0">
                             </div>
                         </div>
 
@@ -2827,7 +2839,7 @@ if(isset($_GET['MT'])){
 					<script>
 						function confirmEmailFunction(Email) {
 							if($('#Memberid').val()!= Email){
-								$('#confirmMessage').html("These passwords do not match");
+								$('#confirmMessage').html("These emails do not match");
 								$( "#CMemberid" ).focus();
 								$("#CMemberid").css("border", "1px solid red");
 								$(".join-details-button2").addClass("display-none");
@@ -3110,7 +3122,12 @@ if(isset($_GET['MT'])){
                                 								<?php
                                     $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
                                     $University             = json_decode($universityCode, true);
-									sort($University);
+									$name = array();
+									foreach ($University as $ukey => $row)
+									{
+										$name[$ukey] = $row['Name'];
+									}
+									array_multisort($name, SORT_ASC, $University);
                                     $_SESSION["University"] = $University;
                                 ?>
                             <div class="chevron-select-box">
@@ -3164,7 +3181,7 @@ if(isset($_GET['MT'])){
                         </div>
                     </div>
 					</div>
-					<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
+					<!--<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>-->
                 </div>
 
                 <div class="col-xs-12">
@@ -3189,6 +3206,10 @@ endif;
 		</div>    
 <script type="text/javascript">
     jQuery(document).ready(function($) {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 5589c4322217b74845b54c63f86fdaa666730ba4
         $('#workplace').click(function(){
             $('#dashboard-right-content').addClass("autoscroll");
         });
@@ -3196,7 +3217,7 @@ endif;
 			var number = Number($('#wpnumber').val());
 			var i = Number(number +1);
 			//var j = Number(number +2);
-			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span></li>' );
+			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span><a class="skip">Skip this step</a></li>' );
 			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
 			//$('#wpnumber').text(i);
 			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
@@ -3216,6 +3237,7 @@ endif;
 			echo json_encode($_SESSION['country']);
 ?>;
 		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
+		 
 			 
 		}
          $('.add-workplace-join').click(function(){
@@ -3243,7 +3265,13 @@ endif;
             echo json_encode($_SESSION['country']);
 ?>;
           $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
+<<<<<<< HEAD
         });
+=======
+          
+        });
+        $("a[href^=#workplace]").live( "click", function(){ });
+>>>>>>> 5589c4322217b74845b54c63f86fdaa666730ba4
         $("[class^=deletewp]").live( "click", function(){
              var x = $(this).attr("class").replace('deletewp', '');
             $("#workplaceli"+ x).remove();

@@ -294,7 +294,7 @@ if(isset($_POST['step2-1'])) {
 				<input class="styled-checkbox" type="checkbox" id="prftag" name="prftag">
 				<label for="prftag" id="prftagAgree">No, I do not want to make a donation to the PRF</label>
 			</div>
-			<div class="col-xs-6 col-sm-6 col-md-3">
+			<div class="col-xs-6 col-sm-6 col-md-3" id="prfselect">
 				<div class="chevron-select-box" style="margin-top: 10px;">
 				<select class="form-control" id="PRF" name="PRF">
 					<option value="5" selected>$5.00</option>
@@ -394,8 +394,8 @@ if(isset($_POST['step2-1'])) {
 			</div>
 
 			<div class="col-xs-6 col-md-3">
-				<label for="">CCV:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV" maxlength="4">
+				<label for="">CVV:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 		</div>
 		<div class="col-xs-12">
@@ -442,8 +442,8 @@ if(isset($_POST['step2-1'])) {
 			</div>
 
 			<div class="col-xs-6 col-md-3">
-				<label for="">CCV:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV" maxlength="4">
+				<label for="">CVV:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 		</div>
 		<div class="col-xs-12">

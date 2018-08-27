@@ -132,6 +132,7 @@ if(isset($_POST['step2'])) {
 	elseif(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])){
 		$tempcard = array();
 		$tempcard['Payment-method'] = $_POST['Cardtype'];
+		$tempcard['Name-on-card'] = $_POST['Cardname'];
 	    $tempcard['Cardno'] = $_POST['Cardnumber'];
 		$tempcard['Expiry-date'] = $_POST['Expirydate']; 
 		$tempcard['CCV'] = $_POST['CCV'];
@@ -396,6 +397,11 @@ $PRFPrice = 0;
 						}
 				    ?>	
 					</select>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<input type="text" class="form-control" id="Cardname" name="Cardname" value="<?php echo $tempcards['Name-on-card']; ?>"  placeholder="Card Name" readonly>
 				</div>
 			</div>
 			<div class="row">

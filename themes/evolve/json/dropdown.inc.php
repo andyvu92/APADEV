@@ -69,7 +69,9 @@ function getMemberTypePrice(){
         $code = $y;
         $Title = $z;
 		$Price = $MemberType[$key]['Price'];
-		$arrayCountry[] = array('ID'=>$ID, 'Title'=>$Title, 'Price'=>$Price, 'Code'=>$code);	
+		$unitprice = $MemberType[$key]['UnitPrice'];
+		$Quantity = $MemberType[$key]['Quantity'];
+		$arrayCountry[] = array('ID'=>$ID, 'Title'=>$Title, 'Price'=>$Price, 'Code'=>$code, "UnitPrice"=>$unitprice, "Quantity"=>$Quantity);
     }
 	$response= $arrayCountry;
 	$fp = fopen(__DIR__ . '/../json/TypePrice.json', 'w');

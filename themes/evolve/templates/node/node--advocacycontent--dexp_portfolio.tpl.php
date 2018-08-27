@@ -78,12 +78,11 @@
 *
 * @ingroup themeable
 */
-
-// for image
+// for title
 ?>
-<section id="advocacyBackground<?php print $node->nid; ?>" class="advocacyList advocacyBackground <?php print $classes; ?>" <?php print $attributes; ?>>
-	<div class="advocacyBackgroundSub">
-		<?php print render($content['field_pdf']);?>
-		<?php //print render($content['field_advobackground']);?>
+<section id="sections<?php print $node->nid; ?>" class="advocacyList advocacyTitle" <?php print $attributes; ?>>
+	<div class="sectionSub">
+		<h2><?php print $title; ?></h2>
 	</div>
 </section>
+<div class="sectionDots Dots<?php print $node->nid; ?>"><span class="glyphicon"></span></div>

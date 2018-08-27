@@ -1,695 +1,1558 @@
 <?php
-$creditcard='';
-$i=0;
-$price=0;
-$tag=0;
-$products = array();
-$localProducts = array();
-$pdtype= array("event", "course", "workshop");
-$type = "PD";
-$couponCode ="";
-$userID = $_SESSION['UserId'];
-//Post NG Product
-if(isset($_POST["PostNG"])) {
-	$NGPostArray = Array();
-	foreach($_POST as $key => $value){
-		if($key!="PostNG"){
-		array_push($NGPostArray,$key);}
-	}
-	/**
-	 *  Save National Group in PD shopping cart
-	 *  added by jing hu
-	 */
-	
-	foreach($NGPostArray as $NG){
-		checkShoppingCart($userID=$_SESSION['UserId'], $type="PDNG", $productID=$NG,$coupon = "");
-        createShoppingCart($userID, $productID=$NG, $type = "PDNG", $coupon = "");
-		//PDShoppingCart($userID=$_SESSION['UserId'], $productID=$NG, $meetingID="",$type="PDNG",$Coupon="");
-	}
-/***************End Save National Group in PD shopping cart***********/
-}
 
-/**
- *  Get National Group products for PD shopping cart
- *  added by jing hu
- */
-$NGProductsArray = array(); 
-$NGProductsArray = getProduct($userID=$_SESSION['UserId'],$type="PDNG"); 
-
-// 2.2.19 - GET list National Group
-// Send - 
-// userID
-// Response -National Group product
-$sendData["UserID"] = $_SESSION['UserId'];
-$NGListArray = GetAptifyData("19", $sendData);
-/***************get userinfo from Aptify******************/
-if(isset($_SESSION['Dietary'])) {
-	$Dietary = $_SESSION['Dietary'];	
-}
-else {$Dietary = array();}
-
-/****************End get userinfo from Aptify************/
-/***************Save coupon code on APA side******************/
-if(isset($_POST['Couponcode'])) {
-	PDSaveCoupon($userID=$_SESSION['UserId'], $type="PD", $Coupon=$_POST['Couponcode']);
-}
-/***************End Save coupon code on APA side************/
-
-
-$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
-/*********Delete shopping product from APAserver******/
-if(isset($_GET["action"])&&$_GET["action"]=="del"){
-	$productID = $_GET['productid'];
-	$deltype =  $_GET['type'];
-	$shoppingcartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE productID=:productID AND userID=:userID AND type= :type');
-	$shoppingcartDel->bindValue(':productID', $productID);
-	$shoppingcartDel->bindValue(':userID', $userID);
-	$shoppingcartDel->bindValue(':type', $deltype);
-	$shoppingcartDel->execute();
-	$shoppingcartDel= null;
-}
-
-/*********End delete shopping product from APAserver******/
-/********Get user shopping product form APA server******/
-try {
-	$type="PD";
-	$shoppingcartGet= $dbt->prepare('SELECT ID, productID, meetingID,coupon FROM shopping_cart WHERE userID= :userID AND type= :type');
-	$shoppingcartGet->bindValue(':userID', $userID);
-	$shoppingcartGet->bindValue(':type', $type);
-	$shoppingcartGet->execute();
-	$productList = $shoppingcartGet;
-	$shoppingcartGet= null;               
-} catch (PDOException $e) {
-	print "Error!: " . $e->getMessage() . "<br/>";
-	die();
-}
-/********End get user shopping product form APA server******/
-/********Get Product details  from Aptify******/
-// Eddy's code next 3
-$UserID = "";
-$PDarray = array();
-$PDProductarray = array();
-foreach ($productList as $productDetail){
-	$productID = $productDetail['productID'];
-	$meetingID = $productDetail['meetingID'];
-	$coupon =  $productDetail['coupon'];
-	$UID = $productDetail['ID'];
-	$Lproduct = array('UID'=>$UID,'ProductID' =>$productID,'MeetingID' =>$meetingID, 'coupon' =>$coupon);
-	array_push($localProducts, $Lproduct);
-		
-	// Eddy's code next 3
-	
-	$PDtotalArray["PDid"] = $Lproduct['MeetingID'];
-	$SingleProduct = $Lproduct['ProductID'];
-	array_push($PDProductarray, $SingleProduct);
-	$UserID = $productDetail['ID'];
-	$PDtotalArray["Coupon"] = $Lproduct['coupon'];
-	$couponCode = $Lproduct['coupon'];
-	array_push($PDarray, $PDtotalArray);
-}
-if(sizeof($NGProductsArray)!=0) {
-	foreach($NGProductsArray as $singleNG){
-		array_push($PDProductarray, $singleNG);
-	}
-}
-
-//$RequestCart = array('Id' => $PIDArray, "userID" => $UserID, "Coupon" => $CouponArray);
-// 2.2.30 - GET event detail list
-// Send - 
-// ProductIDs, UserID, Coupons
-// Response -
-// Max Number of enrolment, Current people enrolled, PD ID,
-// Title, PD type, Time, Start & End date, Registration closing date,
-// Where[Building Name, Address1, Address2, State, Suburb, Country],
-// Cost, Your registration.
-$RequestCart["userID"] = $_SESSION["UserId"];
-$RequestCart["MeetingCoupons"] = $PDarray;
-$product = GetAptifyData("30", $RequestCart); //$_SESSON["UserID"]
-$products = $product["MeetingDetails"];
-//print_r($products);
-
-/********End get Product details  from Aptify******/
-
-//Get calculating the Order Total and Schedule Payments
-// 2.2.47 Get calculating the Order Total and Schedule Payments
-// Send - 
-// userID & Paymentoption & InstallmentFor & InstallmentFrequency & PRFdonation & productID & CampaignCode
-// Response -AdminFee & SubTotal & GST & OrderTotal & InitialPaymentAmount & OccuringPayment & LastPayment
-$postScheduleData['userID'] = $_SESSION["UserId"];
-$postScheduleData['Paymentoption'] = 0;
-$postScheduleData['InstallmentFor'] = "Membership";
-$postScheduleData['InstallmentFrequency'] = "";
-$postScheduleData['PRFdonation'] = "";
-$postScheduleData['productID'] = $PDProductarray;
-$postScheduleData['CampaignCode'] = $couponCode;
-$scheduleDetails = GetAptifyData("47", $postScheduleData);
-$price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
-//print_r($scheduleDetails);
-/********End get Order Total and Schedule Payments  from Aptify******/
-if(isset($_POST['addCard']) && $_POST['addCard'] == "1"){
-	// 2.2.15 - Add payment method
+//Put filter condition to display member type
+$filterMemberProduct = array("10007","10008","10009","9997","10006");
+// 2.2.21 - Get Fellowship product
 	// Send - 
-	// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
-	// Response -
-	// N/A.
-	if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
-	if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
-	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
-	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
-	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
-	$out = GetAptifyData("15",$postPaymentData); 
-	
-	if($out["result"]=="Failed"){ echo "Submit unsuccessful, Please check your card details";}
-	
-} 
-/*if(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])) {
-	$tempcard = array();
-	$tempcard['Payment-method'] = $_POST['Cardtype'];
-	$tempcard['Cardno'] = $_POST['Cardnumber'];
-	$tempcard['CardName'] = $_POST['Cardname'];
-	$tempcard['Expiry-date'] = $_POST['Expirydate']; 
-	$tempcard['CCV'] = $_POST['CCV'];
-	$_SESSION['tempcard'] = $tempcard;
-
-	
-}	*/
-if(isset($_SESSION["UserId"])){
-    
-	$userid = $_SESSION["UserId"];
-	$test['id'] = $_SESSION["UserId"];
-	$cardsnum = GetAptifyData("12", $test);
-	
-	   
-	
-} 
-?>
-<?php  if(($productList->rowCount()>0) || (sizeof($NGProductsArray)!=0)):?>
-<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 left-content">
-	<?php   if($productList->rowCount()>0):?>
-	<h1 class="SectionHeader">Summary of cart</h1>
-	<div class="brd-headling">&nbsp;</div>
-	
-	<div class="flex-container" id="pd-shopping-cart">
-	<div class="flex-cell flex-flow-row heading-row">
-		<div class="flex-col-3"><span class="table-heading">Product name</span></div>
-		<div class="flex-col-3"><span class="table-heading">Date</span></div>
-		<div class="flex-col-2 pd-spcart-location"><span class="table-heading">Location</span></div>
-		<div class="flex-col-1 pd-spcart-price"><span class="table-heading">Price</span></div>
-		<!--<div class="flex-col-2 pd-spcart-wishlist"><span class="table-heading">Action</span></div>-->
-		<div class="flex-col-1 pd-spcart-delete"><span class="table-heading">Delete</span></div>
-	</div>
-	<?php 
-		////print_r($products);
-		$ListProductID = Array();
-		$discountPrice=0;
-		foreach($products as $productt){
-		$n = 0;
-		$pass=$localProducts[$n]['UID'];
-		//$arrPID["PID"] = $productt['MeetingID'];
-		$arrPID["PID"] = $productt['ProductID'];
-		array_push($ListProductID ,$arrPID);
-			echo "<div class='flex-cell flex-flow-row'>";
-			echo	"<div class='flex-col-3'><span class='mobile-visible'>Product name: </span>".$productt['Title']."</div>";
-			$bdate = explode(" ",$productt['Sdate']);
-			$edate = explode(" ",$productt['Edate']);
-			$t = strtotime($bdate[0]);
-			$j = strtotime($edate[0]);
-			echo	"<div class='flex-col-3 pd-spcart-date'><span class='start-date'>".date("d M Y",$t)."</span><span class='end-date'>".date("d M Y",$j)."</span></div>";
-			echo	"<div class='flex-col-2 pd-spcart-location'><span class='mobile-visible'>Location: </span>".$productt['City'].", ".$productt['State']."</div>";
-			// add by jinghu
-			if($couponCode!=""){
-				echo	"<div class='flex-col-1 pd-spcart-price'><span class='mobile-visible'>Price: </span>$".number_format($productt['Product Cost With Coupon'],2)."</div>";
-			}
-			else{
-				echo	"<div class='flex-col-1 pd-spcart-price'><span class='mobile-visible'>Price: </span>$".number_format($productt['Product Cost Without Coupon'],2)."</div>";
-			}
-			$discountPrice += $productt['Product Cost Without Coupon']-$productt['Product Cost With Coupon'];
-			// end add by jinghu
-			//if($_SESSION['MemberTypeID'] == "1" || $_SESSION['MemberTypeID'] == 1) {
-				//echo	"<td>".$productt['Pricelist'][1]['Price']."</td>";
-				//echo	"<td>M price</td>";
-			//} else {
-				//echo	"<td>".$productt['Pricelist'][0]['Price']."</td>";
-				//echo	"<td>NM price</td>";
-			//}
-			//echo        '<div class="flex-col-2 pd-spcart-wishlist"><a target="_blank" href="pd-wishlist?addWishList&UID='.$pass.'">ADD TO WISHLIST</a></div>';
-			echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
-			echo "</div>";    
-			$n=$n+1;
-			$i=$i+1;
-			//$price=$price+(int)str_replace('$', '', $productt['Pricelist'][0]['Price']);
-		if (in_array($productt['Typeofpd'],  $pdtype)){ $tag=1; }
+	// ProductID 
+	// Response - UserID & detail data
+	$tt["ProductID"] = "";
+    $fellowshipProducts = GetAptifyData("21", $tt);
+	//$fellow = array_shift($fellowshipProducts);
+	foreach ($fellowshipProducts as $fellowshipProduct){
+		if($fellowshipProduct['FPid'] !="0"){
+			$fellowshipProductID = $fellowshipProduct['ProductID'];
 		}
+	}
+	// 2.2.36 - get workplace settings list
+	// Send - 
+	// Response - get workplace settings from Aptify via webserice return Json data;
+	// stroe workplace settings into the session
+	$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
+	$workplaceSettings=json_decode($workplaceSettingscode, true);	
+	$_SESSION["workplaceSettings"] = $workplaceSettings;
+    
+if(isset($_POST['step1'])) {
+	$postData = array();
+	if(isset($_SESSION['UserId'])) {$postData['userID'] = $_SESSION['UserId'];}
+	if(isset($_POST['Prefix'])){ $postData['Prefix'] = $_POST['Prefix']; }
+	if(isset($_POST['Firstname'])){ $postData['Firstname'] = $_POST['Firstname']; }
+	if(isset($_POST['Middle-name'])){ $postData['Middle-name'] = $_POST['Middle-name']; }
+	if(isset($_POST['Preferred-name'])){ $postData['Preferred-name'] = $_POST['Preferred-name']; }
+	if(isset($_POST['Maiden-name'])){ $postData['Maiden-name'] = $_POST['Maiden-name']; } else{ $postData['Maiden-name'] ="";}
+	if(isset($_POST['Lastname'])){ $postData['Lastname'] = $_POST['Lastname']; }
+	if(isset($_POST['Birth'])){ $postData['birth'] = str_replace("-","/",$_POST['Birth']); }
+	if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
+	if(isset($_POST['country-code'])){ $postData['Home-country-code'] = $_POST['country-code']; }
+	if(isset($_POST['area-code'])){ $postData['Home-area-code'] = $_POST['area-code']; }
+	if(isset($_POST['phone-number'])){ $postData['Home-phone-number'] = $_POST['phone-number']; }
+	if(isset($_POST['Mobile-country-code'])){ $postData['Mobile-country-code'] = $_POST['Mobile-country-code']; }
+	if(isset($_POST['Mobile-area-code'])){ $postData['Mobile-area-code'] = $_POST['Mobile-area-code']; } else {$postData['Mobile-area-code'] = "";}
+	if(isset($_POST['Mobile-number'])){ $postData['Mobile-number'] = $_POST['Mobile-number']; }
+    if(isset($_POST['Aboriginal'])){ $postData['Aboriginal'] = $_POST['Aboriginal']; }
+	/***put the logic when post Pobox******/
+	/***Updated on 02082018**/
+	if($_POST['Pobox']!="") {
+			$postData['BuildingName'] =$_POST['Pobox'];
+			$postData['Address_Line_1'] ="";
+			$postData['Address_Line_2'] ="";
+			
+	}else {
+		$postData['BuildingName'] = $_POST['BuildingName']; 
+		$postData['Address_Line_1'] = $_POST['Address_Line_1'];
+		$postData['Address_Line_2'] = $_POST['Address_Line_2'];
 		
+	}
+	/*if(isset($_POST['BuildingName'])){ $postData['BuildingName'] = $_POST['BuildingName']; }
+	if(isset($_POST['Address_Line_1'])){ $postData['Address_Line_1'] = $_POST['Address_Line_1']; }
+	if(isset($_POST['Pobox'])){ $postData['Pobox'] = $_POST['Pobox']; }
+	if(isset($_POST['Address_Line_2'])){ $postData['Address_Line_2'] = $_POST['Address_Line_2']; }*/
+	if(isset($_POST['Suburb'])){ $postData['Suburb'] = $_POST['Suburb']; }
+	if(isset($_POST['Postcode'])){ $postData['Postcode'] = $_POST['Postcode']; }
+	if(isset($_POST['State'])){ $postData['State'] = $_POST['State']; }  else {$postData['State'] = "";}
+	if(isset($_POST['Country'])){ $postData['Country'] = $_POST['Country']; }
+	if(isset($_POST['Status'])){ $postData['Status'] = $_POST['Status']; }
+	if(isset($_POST['Specialty'])){ $postData['Specialty'] = $_POST['Specialty']; }
+
+	//change from shipping address to billing address
+	if(isset($_POST['Shipping-address-join']) && $_POST['Shipping-address-join']=='1'){ 
+	if(isset($_POST['BuildingName'])) {$postData['Billing-BuildingName']  = $_POST['BuildingName']; }
+	if(isset($_POST['Address_Line_1'])) {$postData['BillingAddress_Line_1'] = $_POST['Address_Line_1'];} else{$postData['BillingAddress_Line_1'] = "";}
+    if(isset($_POST['Address_Line_2'])) {$postData['BillingAddress_Line_2'] = $_POST['Address_Line_2']; } else {$postData['BillingAddress_Line_2'] ="";}
+	$postData['Billing-Pobox'] = $_POST['Pobox'];
+	$postData['Billing-Suburb'] = $_POST['Suburb'];
+	$postData['Billing-Postcode'] = $_POST['Postcode'];
+	if(isset($_POST['State'])) {$postData['Billing-State']  = $_POST['State'];} else{$postData['Billing-State']  = "";}
+	$postData['Billing-Country'] = $_POST['Country'];
+	}else{
+		if($_POST['Billing-Pobox']!="") {
+			//$postData['Billing-Pobox'] = $_POST['Billing-Pobox'];
+			$postData['Billing-BuildingName'] =$_POST['Billing-Pobox'];
+			$postData['BillingAddress_Line_1'] ="";
+			$postData['BillingAddress_Line_2'] ="";
+		}else {
+			$postData['Billing-BuildingName'] = $_POST['Billing-BuildingName']; 
+			$postData['BillingAddress_Line_1'] = $_POST['Billing-Address_Line_1'];
+			$postData['BillingAddress_Line_2'] = $_POST['Billing-Address_Line_2'];
+			//$postData['Billing-Pobox'] = "";
+		}
+	
+	$postData['Billing-Suburb'] = $_POST['Billing-Suburb'];
+	$postData['Billing-Postcode'] = $_POST['Billing-Postcode'];
+	if(isset($_POST['Billing-State'])) {$postData['Billing-State'] = $_POST['Billing-State']; } else{$postData['Billing-State'] ="";}
+	$postData['Billing-Country'] = $_POST['Billing-Country'];  
+	}
+	//Add shipping address & mailing address post data
+	/***put the logic when post Shipping-PObox******/
+	/***Updated on 02082018**/
+	if($_POST['Shipping-PObox']!="") {
+			//$postData['Shipping-PObox'] = $_POST['Shipping-PObox'];
+			$postData['Shipping-BuildingName'] =$_POST['Shipping-PObox'];
+			$postData['Shipping-Address_line_1'] ="";
+			$postData['Shipping-Address_line_2'] ="";
+			
+	}else {
+		$postData['Shipping-BuildingName'] = $_POST['Shipping-BuildingName']; 
+		$postData['Shipping-Address_line_1'] = $_POST['Shipping-Address_Line_1'];
+		$postData['Shipping-Address_line_2'] = $_POST['Shipping-Address_Line_2'];
+		//$postData['Shipping-PObox'] = "";
+	}
+	//if(isset($_POST['Shipping-BuildingName'])){ $postData['Shipping-BuildingName'] = $_POST['Shipping-BuildingName']; }
+	//if(isset($_POST['Shipping-Address_Line_1'])){ $postData['Shipping-Address_line_1'] = $_POST['Shipping-Address_Line_1']; }
+	//if(isset($_POST['Shipping-Address_Line_2'])){ $postData['Shipping-Address_line_2'] = $_POST['Shipping-Address_Line_2']; }
+	//if(isset($_POST['Shipping-PObox'])){ $postData['Shipping-PObox'] = $_POST['Shipping-PObox']; } 
+	if(isset($_POST['Shipping-city-town'])){ $postData['Shipping-city-town'] = $_POST['Shipping-city-town']; } 
+	if(isset($_POST['Shipping-postcode'])){ $postData['Shipping-postcode'] = $_POST['Shipping-postcode']; } 
+	if(isset($_POST['Shipping-State'])){ $postData['Shipping-state'] = $_POST['Shipping-State']; }
+	if(isset($_POST['Shipping-country'])){ $postData['Shipping-country'] = $_POST['Shipping-country']; }
+	/***put the logic when post Mailing-PObox******/
+	/***Updated on 02082018**/
+	if($_POST['Mailing-PObox']!="") {
+			//$postData['Mailing-PObox'] = $_POST['Mailing-PObox'];
+			$postData['Mailing-BuildingName'] =$_POST['Mailing-PObox'];
+			$postData['Mailing-Address_line_1'] ="";
+			$postData['Mailing-Address_line_2'] ="";
+			
+	}else {
+		$postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName']; 
+		$postData['Mailing-Address_line_1'] = $_POST['Mailing-Address_Line_1'];
+		$postData['Mailing-Address_line_2'] = $_POST['Mailing-Address_Line_2'];
+		//$postData['Mailing-PObox'] = "";
+	}
+	//if(isset($_POST['Mailing-BuildingName'])){ $postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName']; } 
+	//if(isset($_POST['Mailing-Address_Line_1'])){ $postData['Mailing-Address_line_1'] = $_POST['Mailing-Address_Line_1']; } 
+	//if(isset($_POST['Mailing-Address_Line_2'])){ $postData['Mailing-Address_line_2'] = $_POST['Mailing-Address_Line_2']; } 
+	//if(isset($_POST['Mailing-PObox'])){ $postData['Mailing-PObox'] = $_POST['Mailing-PObox']; }
+	if(isset($_POST['Mailing-city-town'])){ $postData['Mailing-city-town'] = $_POST['Mailing-city-town']; } 
+	if(isset($_POST['Mailing-postcode'])){ $postData['Mailing-postcode'] = $_POST['Mailing-postcode']; }
+	if(isset($_POST['Mailing-State'])){ $postData['Mailing-state'] = $_POST['Mailing-State']; } 
+	if(isset($_POST['Mailing-country'])){ $postData['Mailing-country'] = $_POST['Mailing-country']; } 
+	if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid']; }
+	//if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password']; }
+	if(isset($_POST['MemberType'])){ $postLocalData['MemberType'] = $_POST['MemberType']; }
+	if(isset($_POST['Ahpranumber'])){ $postData['Ahpranumber'] = $_POST['Ahpranumber']; }
+	if(isset($_POST['Branch'])){ $postData['PreferBranch'] = $_POST['Branch']; }
+	
+	if(isset($_SESSION['Regional-group'])){ $postData['Regional-group'] = $_SESSION['Regional-group']; } else{ $postData['Regional-group'] ="";}
+	if(isset($_POST['Nationalgp'])){ $ngData['Nationalgp'] = $_POST['Nationalgp']; } else{$ngData = array();}
+	if(isset($_POST['SpecialInterest'])){ $postData['PSpecialInterestAreaID'] = implode(",",$_POST['SpecialInterest']); }
+	
+	//if(isset($_POST['Treatmentarea'])){ $postData['Treatmentarea'] = $_POST['Treatmentarea']; }
+	if(isset($_POST['MAdditionallanguage'])){ $postData['PAdditionalLanguageID'] = implode(",",$_POST['MAdditionallanguage']); }
+	
+	if(isset($_POST['Findpublicbuddy'])){ $postData['Findpublicbuddy'] = $_POST['Findpublicbuddy']; } else{ $postData['Findpublicbuddy'] = "False";}
+	/*if(isset($_POST['Dietary'])){ 
+		$testD['ID']=$_POST['Dietary'];
+		$testDietaryArray = array();
+		array_push($testDietaryArray, $testD);
+		$postData['Dietary'] = $testDietaryArray;
+	}*/
+	if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} 
+	if(isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ){ 
+	$num = $_POST['wpnumber']; 
+	$tempWork = array();
+	for($i=0; $i<$num; $i++){
+		$workplaceArray = array();
+		$workplaceArray['WorkplaceID'] = $_POST['WorkplaceID'.$i];
+		if(isset($_POST['Findabuddy'.$i])) { $workplaceArray['Find-a-buddy'] = $_POST['Findabuddy'.$i];}else{ $workplaceArray['Findabuddy'] = "False";}
+		if(isset($_POST['Findphysio'.$i])) { $workplaceArray['Findphysio'] = $_POST['Findphysio'.$i];}else{ $workplaceArray['Findphysio'] = "False";}
+		if(isset($_POST['Name-of-workplace'.$i])) { $workplaceArray['Name-of-workplace'] = $_POST['Name-of-workplace'.$i];}
+		if(isset($_POST['Workplace-setting'.$i])) { $workplaceArray['Workplace-settingID'] = $_POST['Workplace-setting'.$i];}
+		if(isset($_POST['WBuildingName'.$i])) { $workplaceArray['WBuildingName'] = $_POST['WBuildingName'.$i];}
+		if(isset($_POST['WAddress_Line_1'.$i])) { $workplaceArray['Address_Line_1'] = $_POST['WAddress_Line_1'.$i];}
+		if(isset($_POST['WAddress_Line_2'.$i])) { $workplaceArray['Address_Line_2'] = $_POST['WAddress_Line_2'.$i];}
+		if(isset($_POST['Wcity'.$i])) { $workplaceArray['Wcity'] = $_POST['Wcity'.$i];}
+		if(isset($_POST['Wpostcode'.$i])) { $workplaceArray['Wpostcode'] = $_POST['Wpostcode'.$i];}
+		if(isset($_POST['Wstate'.$i])) { $workplaceArray['Wstate'] = $_POST['Wstate'.$i];}
+		if(isset($_POST['Wcountry'.$i])) { $workplaceArray['Wcountry'] = $_POST['Wcountry'.$i];}
+		if(isset($_POST['Wemail'.$i])) { $workplaceArray['Wemail'] = $_POST['Wemail'.$i];}
+		if(isset($_POST['Wwebaddress'.$i])) { $workplaceArray['Wwebaddress'] = $_POST['Wwebaddress'.$i];}
+		if(isset($_POST['WPhoneCountryCode'.$i])) { $workplaceArray['WPhoneCountryCode'] = $_POST['WPhoneCountryCode'.$i];}
+		if(isset($_POST['WPhoneAreaCode'.$i])) { $workplaceArray['WPhoneAreaCode'] = $_POST['WPhoneAreaCode'.$i];}
+		if(isset($_POST['Wphone'.$i])) { $workplaceArray['WPhone'] = $_POST['Wphone'.$i];}
+		if(isset($_POST['WPhoneExtentions'.$i])) { $workplaceArray['WPhoneExtentions'] = $_POST['WPhoneExtentions'.$i];}
+		if(isset($_POST['Electronic-claiming'.$i])) { $workplaceArray['Electronic-claiming'] = $_POST['Electronic-claiming'.$i];}else {$workplaceArray['Electronic-claiming']="False";}
+		if(isset($_POST['Hicaps'.$i])) { $workplaceArray['Hicaps'] = $_POST['Hicaps'.$i];}else {$workplaceArray['Hicaps']="False";}
+		if(isset($_POST['Healthpoint'.$i])) { $workplaceArray['Healthpoint'] = $_POST['Healthpoint'.$i];}else {$workplaceArray['Healthpoint']="False";}
+		if(isset($_POST['Departmentva'.$i])) { $workplaceArray['Departmentva'] = $_POST['Departmentva'.$i];}else {$workplaceArray['Departmentva']="False";}
+		if(isset($_POST['Workerscompensation'.$i])) { $workplaceArray['Workerscompensation'] = $_POST['Workerscompensation'.$i];}else {$workplaceArray['Workerscompensation']="False";}
+		if(isset($_POST['Motora'.$i])) { $workplaceArray['Motora'] = $_POST['Motora'.$i];}else {$workplaceArray['Motora']="False";}
+		if(isset($_POST['Medicare'.$i])) { $workplaceArray['Medicare'] = $_POST['Medicare'.$i];}else {$workplaceArray['Medicare']="False";}
+		if(isset($_POST['Homehospital'.$i])) { $workplaceArray['Homehospital'] = $_POST['Homehospital'.$i];} else {$workplaceArray['Homehospital']="False";}
+		if(isset($_POST['MobilePhysio'.$i])) { $workplaceArray['MobilePhysio'] = $_POST['MobilePhysio'.$i];}else {$workplaceArray['MobilePhysio']="False";}
+		if(isset($_POST['Number-worked-hours'.$i])) { $workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours'.$i];}
+		if(isset($_POST['WTreatmentarea'.$i])){ $workplaceArray['SpecialInterestAreaID'] = implode(",",$_POST['WTreatmentarea'.$i]); } else { $workplaceArray['SpecialInterestAreaID'] = ""; }
+		if(isset($_POST['Additionallanguage'.$i])){ $workplaceArray['AdditionalLanguage'] = implode(",",$_POST['Additionallanguage'.$i]); } else{ $workplaceArray['AdditionalLanguage'] = "";}
+		array_push($tempWork, $workplaceArray);
+	}
+        $postData['Workplaces'] =  $tempWork ;
+	}
+if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
+	if(isset($_POST['addtionalNumber'])){
+			$n =  $_POST['addtionalNumber'];
+			$temp = array();
+			for($j=0; $j<$n; $j++){
+				$additionalQualifications = array();
+				if(isset($_POST['ID'.$j])) { $additionalQualifications['ID'] = $_POST['ID'.$j];}
+				if(isset($_POST['University-degree'.$j]) && $_POST['University-degree'.$j]!=""){
+					$additionalQualifications['Degree'] = $_POST['University-degree'.$j]; 
+					$additionalQualifications['DegreeID'] = "";
+				}
+				else{
+					$additionalQualifications['DegreeID'] = $_POST['Udegree'.$j];
+					$additionalQualifications['Degree'] = "";
+				}
+				if(isset($_POST['Undergraduate-university-name-other'.$j]) && $_POST['Undergraduate-university-name-other'.$j]!=""){
+					$additionalQualifications['Institute'] = $_POST['Undergraduate-university-name-other'.$j]; 
+					$additionalQualifications['InstituteID'] = "";
+				}
+				else{
+					$additionalQualifications['InstituteID'] = $_POST['Undergraduate-university-name'.$j];
+					$additionalQualifications['Institute'] = "";
+				}
+				if(isset($_POST['Ugraduate-country'.$j])) { $additionalQualifications['Country'] = $_POST['Ugraduate-country'.$j];}
+				if(isset($_POST['Ugraduate-yearattained'.$j])) { $additionalQualifications['Yearattained'] = $_POST['Ugraduate-yearattained'.$j];}
+				array_push($temp , $additionalQualifications);
+			}
+			$postData['PersonEducation'] =  $temp ;
+	}
+    // 2.2.5 - Dashboard - update member detail
+	// Send - 
+	// UserID 
+	// Response - UserID & detail data
+	$postData['userID']=$_SESSION['UserId'];$testdata = GetAptifyData("5", $postData);
+	unset($_SESSION["Regional-group"]);
+	
+	 if(isset($_SESSION['UserId'])){$userID = $_SESSION['UserId']; }
+
+	$products = array();
+	checkShoppingCart($userID, $type="membership", $productID="");
+	checkShoppingCart($userID, $type="MG1", $productID="");
+	checkShoppingCart($userID, $type="MG2", $productID="");
+	createShoppingCart($userID, $productID =$postLocalData['MemberType'],$type="membership",$coupon="");
+	if(sizeof($ngData)!="0"){
+	foreach($ngData['Nationalgp'] as $key=>$value){
+		array_push($products,$value);
+	}
+	$type = "NG";
+	checkShoppingCart($userID, $type="NG",$productID="");
+	
+	foreach($products as $key=>$value){
+		$productID = $value;
+		createShoppingCart($userID, $productID,$type,$coupon="");
+	}
+	}
+	//save fellowship product on APA side
+	if(isset($_POST['fap']) && $_POST['fap'] =="1" ) { 
+		checkShoppingCart($userID, $type="FP",$productID="");
+		createShoppingCart($userID, $fellowshipProductID,$type="FP",$coupon="");
+	}
+	//save magazine products on APA side
+	 /*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
+	if(isset($_POST['ngmusculo']) && $_POST['ngmusculo'] =="1"){ 
+		checkShoppingCart($userID, $type="MG1",$productID="");
+		createShoppingCart($userID, "9978",$type="MG1",$coupon=""); 
+	}
+	if(isset($_POST['ngsports']) && $_POST['ngsports'] =="1" ) {
+		checkShoppingCart($userID, $type="MG2",$productID="");
+		createShoppingCart($userID, "9977",$type="MG2",$coupon=""); 
 		
-	?>
-	</div>
+	}
+	
+	
+}   
+?> 
 
-    <div class="flex-container flex-flow-column <?php if($price==0) echo " display-none";?>">
-		<div class="flex-cell">	
-			<span class="small-lead-heading">Terms & conditions</span>
-		</div>
+<?php 
+//get productID list from local database;
+/*	function getProduct($userID,$type){
+		$arrayReturn = array();
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+		$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND type=:type');
+		$shoppingcartGet->bindValue(':userID', $userID);
+		$shoppingcartGet->bindValue(':type', $type);
+		$shoppingcartGet->execute();
+		if($shoppingcartGet->rowCount()>0) { 
+			foreach ($shoppingcartGet as $row) {
+				array_push($arrayReturn, $row['productID']);
+			}
+		}	
+		$shoppingcartGet = null;
+		return $arrayReturn;
+	}*/
+$userMemberProduct = getProduct($_SESSION['UserId'],"membership");
+if(sizeof($userMemberProduct)!=0){ foreach($userMemberProduct as $singProduct) { $_SESSION["MembershipProductID"] = $singProduct;}}
+$userNGProduct = getProduct($_SESSION['UserId'],"NG");
+if(sizeof($userNGProduct)!=0){$_SESSION['NationalProductID'] = $userNGProduct; }
+$userFPProduct = getProduct($_SESSION['UserId'],"FP");
+if(sizeof($userFPProduct)!=0){ foreach($userFPProduct as $singFP) { $_SESSION["FPProductID"] = $singFP;}}
+$userMGProduct = array();
+$userMG1Product = getProduct($_SESSION['UserId'],"MG1");
 
-		<div class="flex-cell">
-			<input popup class="styled-checkbox" type="checkbox" id="accept1" <?php if($price!=0) echo " required";?>>
-			<label popup-target="PDTermsWindow" id="pd_terms_open" for="accept1">I accept the APA events terms and conditions, including the APA cancellation clause</label>
-		</div>
+if(sizeof($userMG1Product)!=0){ 
+    array_push($userMGProduct, $userMG1Product); 
+	
+}
+$userMG2Product = getProduct($_SESSION['UserId'],"MG2");
 
-		<?php if($tag==1): ?>
-		<div class="flex-cell">
-			<input class="styled-checkbox" type="checkbox" id="accept2" <?php if($price!=0) echo " required";?>>
-			<label for="accept2">I understand that I must have appropriate Professional Indemnity insurance current on the date/s of any APA course/workshop that I’m registered for.</label>
-		</div>
+if(sizeof($userMG2Product)!=0){ 
+    array_push($userMGProduct, $userMG2Product); 
+}
+if(sizeof($userMGProduct)==0) {unset($_SESSION["MGProductID"]);}
+if(sizeof($userMGProduct)!=0){  $_SESSION["MGProductID"] = $userMGProduct; }
 
-		<?php endif; ?>
-		<div class="flex-cell">
-			<input class="styled-checkbox" type="checkbox" id="accept3" <?php if($price!=0) echo " required";?>>
-			<label for="accept3">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled. The APA recommends travelling participants purchase travel insurance to cover this.</label>
-		</div>
-	</div>
-	<div class="flex-container flex-flow-column <?php if(($price==0)) echo " display-none";?>">
-		<div class="flex-cell">
-			<span class="small-lead-heading">Your dietary requirements</span>
-		</div>
 
-		<p>Based on your details, we’ve recognised you are:</p>
+// 2.2.4 - Dashboard - Get member detail
+// Send - 
+// UserID 
+// Response - UserID & detail data
 
-		<div class="flex-cell flex-flow-column">
-			<?php if(sizeof($Dietary)>0) {
-				foreach($Dietary as $item) {
-					echo '<span class="diet-name">'.$item['Name'].'</span>';} }  
-				else { 
-					echo "<span style='text-transform: uppercase; color: grey; font-size: 1.1em; font-weight: 500;'>None</span>";}
-			?>
-		</div>
-		
-		<span class="">Please note that not all APA PD events include catering.</span>
-	</div>
-	<?php endif; ?>	
-	<?php if(sizeof($NGProductsArray)!=0):?>
-    	<div class="flex-container join-apa-final">
-		    <h1 class="SectionHeader">National Group Product</h1>
-			<div class="flex-cell flex-flow-row table-header">
-				<div class="flex-col-8">
-					<span class="table-heading">Product name</span>
-				</div>
-				<div class="flex-col-2">
-					<span class="table-heading">Price</span>
+$data = "UserID=".$_SESSION["UserId"];
+$details = GetAptifyData("4", $data,"");// #_SESSION["UserID"];
+//Get Member Dietary data when member renew a member
+if(sizeof($details['Dietary'])!=0){
+	$Dietary = array();
+	$testDietaryArray = array();
+	foreach($details['Dietary'] as $MemberDietary) {
+		$testD['ID'] = $MemberDietary['ID'];
+		array_push($testDietaryArray, $testD);
+	}
+	$Dietary = $testDietaryArray;
+}
+if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Regionalgp'];}
+
+?>
+
+<form id="your-detail-form" action="renewmymembership" method="POST">
+	<input type="hidden" name="step1" value="1"/>
+	<input type="hidden" name="insuranceTag" id="insuranceTag"/>
+		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_POST['goI'])|| isset($_POST['goP'])||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['QOrder']) || isset($_POST["MType"]) || isset($_POST['step2-4']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
+				<div class="row">
+					<div class="col-xs-6 col-md-3">
+						<label for="prefix">Prefix</label>
+						<div class="chevron-select-box">
+						<select class="form-control" id="Prefix" name="Prefix">
+							<option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> disabled>Please select</option>
+						    <?php
+							$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
+							$Prefix=json_decode($Prefixcode, true);							
+							foreach($Prefix  as $key => $value){
+								echo '<option value="'.$Prefix[$key]['ID'].'"';
+								if ($details['Prefix'] == $Prefix[$key]['ID']){ echo "selected='selected'"; } 
+								echo '> '.$Prefix[$key]['Prefix'].' </option>';
+							}
+							?>
+						</select>
+						</div>
+					</div>
+					<div class="col-xs-6 col-md-3">
+					   <label for="">Given name<span class="tipstyle"> *</span></label>
+					   <input type="text" class="form-control"  name="Firstname" <?php if (empty($details['Firstname'])) {echo "placeholder='Given name'";}   else{ echo 'value="'.$details['Firstname'].'"'; }?>>
+					</div>
+					<div class="col-xs-6 col-md-3">
+					   <label for="">Preferred name</label>
+					   <input type="text" class="form-control"  name="Preferred-name" <?php if (empty($details['Preferred-name'])) {echo "placeholder='Preferred name'";}   else{ echo 'value="'.$details['Preferred-name'].'"'; }?>>
+					</div>
+					<div class="col-xs-6 col-md-3">
+					   <label for="">Middle name</label>
+					   <input type="text" class="form-control" name="Middle-name" <?php if (empty($details['Middle-name'])) {echo "placeholder='Middle name'";}   else{ echo 'value="'.$details['Middle-name'].'"'; }?>>
+					</div>
 				</div>
 				
-			</div>
+				<div class="row">
+					<!--<div class="col-xs-6 col-md-3">
+						<label for="">Maiden name</label>
+					   <input type="text" class="form-control" name="Maiden-name" <?php /*if (empty($details['Maiden-name'])) {echo "placeholder='Maiden name'";}   else{ echo 'value="'.$details['Maiden-name'].'"'; }*/?>>
+					</div>-->
+					<div class="col-xs-6 col-md-3">
+					   <label for="">Family name<span class="tipstyle"> *</span></label>
+					   <input type="text" class="form-control" name="Lastname" <?php if (empty($details['Lastname'])) {echo "placeholder='Family name'";}   else{ echo 'value="'.$details['Lastname'].'"'; }?>>
+					</div>
 
-    			<?php 
-							
-				foreach( $NGListArray as $NGArray){
-				if(sizeof($NGProductsArray)!=0){
-					foreach($NGProductsArray as $NGProduct){
-						if($NGProduct == $NGArray['ProductID']){
-							echo "<div class='flex-cell flex-flow-row table-cell'>";
-							echo "<div class='flex-col-8 title-col'>".$NGArray['ProductName']."</div>";
-							echo "<div class='flex-col-2 price-col'>A$".$NGArray['NGprice']."</div>";
-							//$price += $NGArray['NGprice'];
-							//echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
-							echo "</div>";
-						}	  
-					}
-				}
-				}
-						                       
+					<div class="col-xs-6 col-md-3">
+					    <label for="">Date of birth<span class="tipstyle"> *</span></label>
+					    <input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
+					</div>
+					<div class="col-xs-6 col-md-3">
+					    <label for="">Gender<span class="tipstyle"> *</span></label>
+						<div class="chevron-select-box">
+						<select class="form-control" id="Gender" name="Gender">
+						 <option value="" <?php if (empty($details['Gender'])) echo "selected='selected'";?> disabled>Please select</option>
+							<?php
+								$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
+								$Gender=json_decode($Gendercode, true);						
+								foreach($Gender  as $key => $value){
+									echo '<option value="'.$Gender[$key]['ID'].'"';
+									if ($details['Gender'] == $Gender[$key]['ID']){ echo "selected='selected'"; }
+								    echo '> '.$Gender[$key]['Description'].' </option>';
+								}
+							?>
+					   </select>
+					   </div>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-6 col-md-6">
+					<label>Aboriginal and Torres Strait Islander origin<span class="tipstyle"> *</span></label>
+					<div class="chevron-select-box">   
+					<select class="form-control" id="Aboriginal" name="Aboriginal">
+							<option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?> disabled>Please select</option>
+						 <?php
+									$Aboriginalcode  = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
+									$Aboriginal=json_decode($Aboriginalcode, true);
+									//sort($Aboriginal);									
+									foreach($Aboriginal  as $key => $value){
+										echo '<option value="'.$Aboriginal[$key]['ID'].'"';
+										if ($details['Aboriginal'] == $Aboriginal[$key]['ID']){ echo "selected='selected'"; } 
+										echo '> '.$Aboriginal[$key]['Name'].' </option>';
+									}
+								?>
+					   </select>
+					   </div>
+					</div>
+					<div class="col-xs-6">
+				<?php  
+					if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID =array();}
+						
 				?>
-		</div>
-	<?php endif; ?>		
-</div>
-<?php endif; ?>	
-<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 paymentsiderbar">
-	<p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
-	<?php if (sizeof($cardsnum["results"])!=0): ?>
-	<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
-		<fieldset>
-			<div class="chevron-select-box">
-				<select  id="Paymentcard" name="Paymentcard" >
-					<?php
-					if (sizeof($cardsnum)!=0) {
-						foreach( $cardsnum["results"] as $cardnum) {
-							echo '<option value="'.$cardnum["Creditcards-ID"].'"';
-							if($cardnum["IsDefault"]=="1") {
-							echo "selected ";
+					<label>Choose the languages you speak</label>
+					<div class="plus-select-box">
+					<select id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
+						<?php 
+                        $Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
+						$Language=json_decode($Languagecode, true);
+						$_SESSION["Language"] = $Language;
+						foreach($Language  as $key => $value){
+						    echo '<option value="'.$Language[$key]['ID'].'"';
+							//if(sizeof($PAdditionalLanguageID)==0 && $Language[$key]["ID"]=="11"){ echo "selected='selected'"; }
+							if (in_array( $Language[$key]["ID"],$PAdditionalLanguageID)){ echo "selected='selected'"; } 
+							echo '> '.$Language[$key]['Name'].' </option>';
 						}
-						echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
-						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
-						}
-					}
-					?>
-				</select>
-			</div>
-		</fieldset>
-	</div>
-
-
-	<div class="paymentsideuse <?php if($price==0) echo " display-none";?>">
-	
-	<div class="col-xs-12 none-padding" style="margin: 5px 0;">
-		<input class="styled-checkbox" type="checkbox" id="anothercard">
-		<label for="anothercard"><a class="event10" style="cursor: pointer;">Use another card</a></label>
-	</div>
-
-	<div id="anothercardBlock" class="col-xs-12 none-padding down10 extra-card" style="display:none;"<?php //if(isset($_SESSION["tempcard"])){ echo 'style="display:block;"';} else { echo 'style="display:none;"';}?>>
-		<form action="/pd/pd-shopping-cart" method="POST" >
-		<input type="hidden" name="addCard" value="1"/>
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="chevron-select-box">
-					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
+						?>
+					</select>
+					</div>
+				</div>
+				</div>
+				
+				
+					<div class="col-xs-6 col-md-6 display-none">
+					<select id="Dietary"  name="Dietary[]" data-placeholder="Your dietary requirements..." multiple >
 					<?php 
-						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
-						$PaymentType=json_decode($PaymentTypecode, true);
-						foreach($PaymentType  as $pair => $value){
-							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
-							if(isset($_SESSION["tempcard"]) && $_SESSION["tempcard"]['Payment-method'] ==$PaymentType[$pair]['ID']) {echo "selected ";}
-							echo '> '.$PaymentType[$pair]['Name'].' </option>';
+						$Dietarycode  = file_get_contents("sites/all/themes/evolve/json/Dietary.json");
+						$Dietary=json_decode($Dietarycode, true);
+						foreach($Dietary  as $key => $value){
+						echo '<option value="'.$Dietary[$key]['ID'].'"';
+						foreach($details['Dietary'] as $MemberDietary) {if ($MemberDietary['ID'] == $Dietary[$key]['ID']){ echo "selected='selected'"; } }
+						echo '> '.$Dietary[$key]['Name'].' </option>';
+					
+						}
+					?>
+					</select>
+					</div>
+				
+				<div class="row">
+					<div class="col-xs-12">
+						<span class="light-lead-heading cairo" style="font-weight: 200; margin-bottom: 18px;">Phone numbers:</span>
+						<span class="text-underline smaller-lead-heading" style="color: #000">Home</span>
+					</div>
+
+					<div class="col-xs-6 col-md-3">
+						<label for="">Country code</label>
+						<div class="chevron-select-box">
+						<select class="form-control" id="country-code" name="country-code">
+						<?php
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							$countser = 0;							
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
+								if ($details['Home-phone-countrycode'] == preg_replace('/\s+/', '', $country[$key]['TelephoneCode']) && $countser == 0){ 
+									echo "selected='selected'"; 
+									$countser++;
+								}
+								elseif(empty($details['Home-phone-countrycode']) && $country[$key]['ID']=="14"){
+											echo "selected='selected'";
+								}
+								echo '> '.$country[$key]['Country'].' </option>';
+							}
+						?>
+						</select>
+						</div>
+					</div>
+					<?php  $_SESSION['country'] =$country;?>
+					<div class="col-xs-6 col-md-3">
+						<label for="">Area code</label>
+						<input type="text" class="form-control" name="area-code" <?php if (empty($details['Home-phone-areacode'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-areacode'].'"'; }?>  maxlength="5">
+					</div>
+					<div class="col-xs-12 col-md-6">
+						<label for="">Phone number<span class="tipstyle"> *</span></label>
+						<input type="number" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  oninput="this.value = Math.abs(this.value)" min="0">
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-12">
+						<span class="text-underline smaller-lead-heading" style="color: #000">Mobile</span>
+					</div>
+
+					<div class="col-xs-6 col-md-3">
+						<label for="">Country code</label>
+						<div class="chevron-select-box">
+						<select class="form-control" id="Mobile-countrycode" name="Mobile-country-code">
+						<?php
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							$countser = 0;							
+							foreach($country  as $key => $value){
+								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
+								if ($details['Mobile-country-code'] ==  preg_replace('/\s+/', '', $country[$key]['TelephoneCode'])&& $countser == 0)
+									{ 
+										echo "selected='selected'"; 
+										$countser++;
+									} 
+								elseif(empty($details['Mobile-country-code']) && $country[$key]['ID']=="14"){
+											echo "selected='selected'";
+										}
+								echo '> '.$country[$key]['Country'].' </option>';
+							}
+						?>
+						</select>
+						</div>
+					</div>
+					<!--<div class="col-xs-6 col-md-3">
+						<label for="">Area code</label>
+						<input type="text" class="form-control" name="Mobile-areacode" <?php /*if (empty($details['Mobile-area-code'])) {echo "placeholder='Mobile Area code'";}   else{ echo 'value="'.$details['Mobile-area-code'].'"'; }*/?>  maxlength="5">
+					</div>-->
+					<div class="col-xs-12 col-md-6">
+						<label for="">Mobile number<span class="tipstyle"> *</span></label>
+						<input type="number" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  oninput="this.value = Math.abs(this.value)" min="0">
+					</div>
+				</div>
+
+					<div class="col-xs-12"><span class="light-lead-heading cairo">Residential address:</span></div>
+				<div class="row">
+					<div class="col-xs-12">
+					   <label for="">Building name</label>
+					   <input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['Unit'])) {echo "placeholder='Building name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
+					</div>
+					</div>
+					
+					<div class="col-xs-12 col-sm-6 col-md-3">
+
+					   <label for="">PO Box</label>
+					   <input type="text" class="form-control" name="Pobox" <?php if (!empty($details['Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['Pobox'].'"'; }?>>
+
+					</div>
+					
+					<div class="col-xs-12 col-sm-6 col-md-9">
+						<label for="">Address line 1<span class="tipstyle"> *</span></label>
+						<input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1" <?php if (empty($details['Unit'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Unit'].'"'; }?>>
+					</div>
+
+					<div class="col-xs-12">
+						<label for="">Address line 2</label>
+						<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2" <?php if (empty($details['Street'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Street'].'"'; }?>>
+					</div>
+				
+				
+				<div class="row">
+					<div class="col-xs-6 col-md-3">
+					   <label for="">City or town<span class="tipstyle"> *</span></label>
+					   <input type="text" class="form-control" name="Suburb" id="Suburb" <?php if (empty($details['Suburb'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Suburb'].'"'; }?>>
+					</div>
+
+					<div class="col-xs-6 col-md-3">
+					   <label for="">Postcode<span class="tipstyle"> *</span></label>
+					   <input type="text" class="form-control" name="Postcode" id="Postcode" <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?>>
+					</div>
+					
+					<div class="col-xs-6 col-md-3">
+					   <label for="">State</label>
+					 <div class="chevron-select-box">  
+					   <select class="form-control" id="State1" name="State">
+					   <option value=""  <?php if (empty($details['State'])) echo "selected='selected'";?> disabled> State </option>
+							<?php
+							$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+							$State=json_decode($statecode, true);						
+							foreach($State  as $key => $value){
+								//echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
+								echo '<option value="'.$State[$key]['Abbreviation'].'"';
+								if ($details['State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+								echo '> '.$State[$key]['Abbreviation'].' </option>';
+						    }
+						    ?>
+					   </select>
+					   </div>
+					</div>
+					
+					<div class="col-xs-6 col-md-3">
+					   <label for="">Country<span class="tipstyle"> *</span></label>
+					 <div class="chevron-select-box">  
+					   <select class="form-control" id="Country1" name="Country">
+						<?php
+                        $countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+						$country=json_decode($countrycode, true);						
+						foreach($country  as $key => $value){
+						    
+							echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
+							if ($details['Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+							elseif(empty($details['Country']) && $country[$key]['ID']=="14"){
+											echo "selected='selected'";
+							}
+							echo '> '.$country[$key]['Country'].' </option>';
 							
 						}
-					?>
-					</select>
+						?>
+						</select>
+						</div>
+					</div>
 				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="Cardname" placeholder="Name on card" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CardName'].''; ?>>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="Expirydate" placeholder="Expire date" required maxlength="4" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="CCV" placeholder="CCV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
-			</div>
-		</div>
-		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
-			<input class="styled-checkbox" type="hidden" id="addcardtag" name="addcardtag" <?php //if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>>
-			<label for="addcardtag">Do you want to save this card?</label>
-		</div>-->
-		<div class="col-xs-12 none-padding">
-			<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
-		</div>
-		</form>
-	</div>
-	</div>
-	<?php endif; ?>
-    <?php if (sizeof($cardsnum["results"])==0): ?>
-	<form action="/pd/pd-shopping-cart" method="POST" >
-	    <input type="hidden" name="addCard" value="1">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="chevron-select-box">
-					<select class="form-control"  name="Cardtype" placeholder="Card type">
-					<?php 
-						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
-						$PaymentType=json_decode($PaymentTypecode, true);
-						foreach($PaymentType  as $pair => $value){
-							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
-							if(isset($_SESSION["tempcard"]) && $_SESSION["tempcard"]['Payment-method'] ==$PaymentType[$pair]['ID']) {echo "selected ";}
-							echo '> '.$PaymentType[$pair]['Name'].' </option>';
+				
+				<div class="row payment-line flex-column">
+					<div class="col-xs-12 col-sm-6">
+						<span class="light-lead-heading cairo">Billing address:</span>
+					</div>
+
+					<div class="col-xs-12 col-sm-6 align-item-end">
+						<input class="styled-checkbox" style="margin-left: 20px" type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="0" >
+						<label class="light-font-weight" for="Shipping-address-join">Use my residential address</label>
+					</div>
+				</div>
+
+			<div class="row" id="shippingAddress">
+				<div class="row">
+					<div class="col-xs-12">
+					   <label for="">Building name</label>
+					   <input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
+					</div>
+				
+					<div class="col-xs-12 col-sm-6 col-md-3">
+					   <label for="">PO Box</label>
+					   <input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO Box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
+					</div>
+					
+					<div class="col-xs-12 col-sm-6 col-md-9">
+					   <label for="">Address line 1<span class="tipstyle"> *</span></label>
+					   <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit']) || $details['Billing-Unit']=="") {echo "placeholder='Billing address line 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?>>
+					</div>
+					
+					<div class="col-xs-12">
+					   <label for="">Address line 2</label>
+					   <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Street'])) {echo "placeholder='Billing address line 2'";}   else{ echo 'value="'.$details['Billing-Street'].'"'; }?>>
+					</div>
+				</div>
+				
+				<div class="row">
+					<div class="col-xs-6 col-md-3">
+					   <label for="">City or town<span class="tipstyle"> *</span></label>
+					   <input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" <?php if (empty($details['Billing-Suburb'])) {echo "placeholder='Billing City/Town'";}   else{ echo 'value="'.$details['Billing-Suburb'].'"'; }?>>
+					</div>
+					
+					<div class="col-xs-6 col-md-3">
+					   <label for="">Postcode<span class="tipstyle"> *</span></label>
+					   <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?>>
+					</div>
+					
+					<div class="col-xs-6 col-md-3">
+					   <label for="">State</label>
+					 <div class="chevron-select-box">  
+					   <select class="form-control" name="Billing-State" id="State2">
+							<option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
+							<?php 
+								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+								$State=json_decode($statecode, true);
+								foreach($State  as $key => $value){
+								//echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
+								echo '<option value="'.$State[$key]['Abbreviation'].'"';
+								if ($details['Billing-State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+								echo '> '.$State[$key]['Abbreviation'].' </option>';
 							
+								}
+							?>
+					   </select>
+					   </div>
+					</div>
+					
+					<div class="col-xs-6 col-md-3">
+					   <label for="">Country<span class="tipstyle"> *</span></label>
+					 <div class="chevron-select-box">  
+					   <select class="form-control" id="Country2" name="Billing-Country">
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $key => $value){
+								
+								echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
+								if ($details['Billing-Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+								elseif(empty($details['Billing-Country']) && $country[$key]['ID']=="14"){
+											echo "selected='selected'";
+								}
+								echo '> '.$country[$key]['Country'].' </option>';
+							}
+							?>
+							</select>
+							</div>
+					</div>
+				</div>
+			</div>
+			<!---Hidden mailing address and shipping address Start from here-->
+				<input type="hidden" name="Shipping-BuildingName" value="<?php if (!empty($details['Shipping-unitno'])) {echo $details['Shipping-BuildingName'];}?>">
+				<input type="hidden" name="Shipping-Address_Line_1" value="<?php echo $details['Shipping-unitno'];?>">
+				<input type="hidden" name="Shipping-Address_Line_2" value="<?php echo $details['Shipping-streetname'];?>">
+				<input type="hidden" name="Shipping-PObox" value="<?php if(empty($details['Shipping-unitno'])){echo $details['Shipping-BuildingName'];}?>">
+				<input type="hidden" name="Shipping-city-town" value="<?php echo $details['Shipping-city-town'];?>">
+				<input type="hidden" name="Shipping-postcode" value="<?php echo $details['Shipping-postcode'];?>">
+				<input type="hidden" name="Shipping-State" value="<?php echo $details['Shipping-state'];?>">
+				<input type="hidden" name="Shipping-country" value="<?php echo $details['Shipping-country'];?>">
+				<input type="hidden" name="Mailing-BuildingName" value="<?php if(!empty($details['Mailing-unitno'])) {echo $details['Mailing-BuildingName'];}?>">
+				<input type="hidden" name="Mailing-Address_Line_1" value="<?php echo $details['Mailing-unitno'];?>">
+				<input type="hidden" name="Mailing-Address_Line_2" value="<?php echo $details['Mailing-streetname'];?>">
+				<input type="hidden" name="Mailing-PObox" value="<?php if(empty($details['Mailing-unitno'])){echo $details['Mailing-BuildingName'];}?>">
+				<input type="hidden" name="Mailing-city-town" value="<?php echo $details['Mailing-city-town'];?>">
+				<input type="hidden" name="Mailing-postcode" value="<?php echo $details['Mailing-postcode'];?>">
+				<input type="hidden" name="Mailing-State" value="<?php echo $details['Mailing-state'];?>">
+				<input type="hidden" name="Mailing-country" value="<?php echo $details['Mailing-country'];?>">
+			<!---Hidden mailing address and shipping address End here-->
+		  <!--<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-right">
+			 <div class="row form-image">
+				<div class="col-lg-12">
+				   Upload/change image
+				</div>
+			 </div>
+									   
+		  </div>-->
+		    <div class="col-xs-12">   <a class="join-details-button1"><span class="dashboard-button-name">Next</span></a></div>
+		</div>
+		<div class="down2" <?php if(isset($_POST["MType"]))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
+			<div class="row">
+			<input type="hidden"  name="Status" <?php if (empty($details['Status'])) {echo "value='1'";}   else{ echo 'value="'.$details['Status'].'"'; }?>>
+				<div class="col-xs-12 col-md-6">
+					<label for="">Member ID (Your email address)<span class="tipstyle"> *</span></label>
+					<input type="text" class="form-control" name="Memberid" readonly <?php if (empty($details['Memberid'])) {echo "placeholder='Member no.'";}   else{ echo 'value="'.$details['Memberid'].'"';}?> >
+				</div>
+
+				<div class="col-xs-12 col-md-6">
+					<label for="">Member Category<span class="tipstyle"> *</span></label>
+					<div class="chevron-select-box">
+					<select class="form-control" id="MemberType" name="MemberType">
+						
+						<?php
+						// 2.2.31 Get Membership prodcut price
+						// Send - 
+						// userID & product list
+						// Response -Membership prodcut price
+						$prodcutArray = array();
+						$memberProductsArray['ProductID']=$prodcutArray;
+						$memberProdcutID = $memberProductsArray;
+						$MemberTypes = GetAptifyData("31", $memberProdcutID);
+						$MemberType = unique_multidim_array($MemberTypes,'ProductID'); 					
+                        //$MemberTypecode  = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
+						//$MemberType=json_decode($MemberTypecode, true);
+						foreach($MemberType  as $key => $value){
+							if(!in_array($MemberType[$key]['ProductID'],$filterMemberProduct)){
+								echo '<option value="'.$MemberType[$key]['ProductID'].'"';
+								if(isset($_SESSION["MembershipProductID"])){if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']){ echo "selected='selected'"; }} 
+								//elseif ($details['MemberTypeID'] == $MemberType[$key]['ID']){ echo "selected='selected'"; } 
+								echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.$MemberType[$key]['Price'].') </option>';
+							}
 						}
+					    ?>
+					</select>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" id="ahpblock">
+				<div class="col-xs-6 col-md-3">
+					<label for="">AHPRA number</label>
+					<input type="text" class="form-control" name="Ahpranumber"  <?php if (empty($details['Ahpranumber'])) {echo "placeholder='AHPRA number'";}   else{ echo 'value="'.$details['Ahpranumber'].'"'; }?>>
+				</div>
+			</div>
+
+			<div class="row">	
+				<input type="hidden"  name="Specialty"  <?php   echo 'value="'.$details['Specialty'].'"'; ?>>
+				<div class="row">
+				<div class="col-xs-12 col-md-6">
+					<label for=""><?php if(!empty($details['State'])) {echo "You are in the &nbsp;".$details['State']."&nbsp;Branch ,&nbsp;would you like to add an additional Branch?";} else { echo "Would you like to add an additional Branch?";}?></label>
+					<div class="chevron-select-box">
+					<select class="form-control" id="Branch" name="Branch">
+					<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>What additional Branch would you like to join?</option>
+						<?php 
+							$Branchcode  = file_get_contents("sites/all/themes/evolve/json/Branch.json");
+							$Branch=json_decode($Branchcode, true);
+							foreach($Branch  as $key => $value){
+							echo '<option value="'.$Branch[$key]['Abbreviation'].'"';
+							if ($details['PreferBranch'] == $Branch[$key]['Abbreviation']){ echo "selected='selected'"; } 
+							echo '> '.$Branch[$key]['FullName'].' </option>';
+						
+							}
+						?>
+					</select>
+					</div>
+				</div>
+			
+				<div class="col-xs-12">
+					<label for="">Choose which National Groups you would like to join:<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
+					<div class="plus-select-box">
+					<select id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
+					<?php 
+						// get national group from Aptify via webserice return Json data;
+						// 2.2.19 - get national group
+						// Send - 
+						// Response - national group
+						//$nationalGroupsCode= file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
+						//$nationalGroups=json_decode($nationalGroupsCode, true);
+						// 2.2.19 - GET list National Group
+						// Send - 
+						// userID
+						// Response -National Group product
+						$sendData["UserID"] = $_SESSION['UserId'];
+						$nationalGroups = GetAptifyData("19", $sendData);
+						sort($nationalGroups);
+						
+				    ?>
+					<?php 
+						foreach($nationalGroups as $key=>$value) {
+						   echo '<option value="'.$nationalGroups[$key]["ProductID"].'"';
+						   if(isset($_SESSION["NationalProductID"])){ if (in_array( $nationalGroups[$key]["ProductID"],$_SESSION["NationalProductID"])){ echo "selected='selected'"; } }
+						   //elseif (in_array( $nationalGroups[$key]["ID"],$details['Nationalgp'])){ echo "selected='selected'"; } 
+						   echo '> '.$nationalGroups[$key]["NGtitle"]. ' ($'.$nationalGroups[$key]['NGprice'].')  </option>';
+						}
+						
 					?>
 					</select>
+					</div>
 				</div>
+
+				</div>
+				<div class="col-xs-12 display-none" id="ngsports"><input type="checkbox" id="ngsportsbox" name="ngsports" value="0"> <label class="light-font-weight" for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label></div>
+				<div class="col-xs-12 display-none" id="ngmusculo"><input type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"> <label class="light-font-weight" for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label></div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="Cardname" placeholder="Name on card" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CardName'].''; ?>>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="Expirydate" placeholder="Expire date" required maxlength="4" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="CCV" placeholder="CCV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
-			</div>
-		</div>
-		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
-			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" <?php //if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>>
-			<label for="addcardtag">Do you want to save this card?</label>
-		</div>-->
-		<div class="col-xs-12 none-padding">
-			<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
-		</div>
-	</form>	
-	<?php endif; ?>
-	<?php  if(($productList->rowCount()>0) || (sizeof($NGProductsArray)!=0)):?>
-		<div class="row">
-			<div class="col-xs-12"><span class="sidebardis">PRF donation</span></div>
-			<div class="col-xs-12 col-md-12">
-				<div class="chevron-select-box">
-					<select class="form-control" id="PRF" name="PRF">
-						<option value="5" selected>$5.00</option>
-						<option value="10">$10.00</option>
-						<option value="20">$20.00</option>
-						<option value="50">$50.00</option>
-						<option value="100">$100.00</option>
-						<option value="Other">Other</option>
+
+			<div class="row"> 
+				<?php  
+					if(!empty($details['PSpecialInterestAreaID'])) {$PSpecialInterestAreaID = explode(",",$details['PSpecialInterestAreaID']); } else {$PSpecialInterestAreaID =array();}
+				?>
+				<div class="col-xs-12">
+					<label>Choose as many interest areas as you like from the list below:</label>
+					<div class="plus-select-box">
+					<select id="interest-area" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
+					  <?php 
+						  // 2.2.37 - get interest area list
+                          // Send - 
+                          // Response - interest area list
+						    $interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
+						    $interestAreas=json_decode($interestAreascode, true);	
+							$_SESSION["interestAreas"] = $interestAreas;
+						  ?>
+						                    
+						   <?php 
+						     foreach($interestAreas as $key => $value){
+								echo '<option value="'.$interestAreas[$key]["ID"].'"';
+								if (in_array( $interestAreas[$key]["ID"],$PSpecialInterestAreaID)){ echo "selected='selected'"; } 
+								echo '> '.$interestAreas[$key]["Name"].' </option>'; 
+								 
+							 }
+												   
+						?>
 					</select>
+					</div>
+					<input type="hidden" name="fapnum" value="<?php //echo sizeof($details['Specialty']);?>">
+					<?php if(sizeof($details['PersonSpecialisation'])!=0){
+						echo '<input class="styled-checkbox" type="checkbox" id="fap" name="fap">';
+						echo '<label class="light-font-weight" style="margin-top: 15px;" for="fap">I am part of the Australian College of Physiotherapists</label>';
+						echo '<p style="margin-bottom: 0"><span class="note-text">Please note:</span> Ticking this box adds an extra $200 to the price of your membership.
+	If you have passed Specialisation, Fellowship by Original Contribution or are
+	a Fellow of the Australian College of Physiotherapists, you must tick this box.</p>';
+						
+						}
+					?>	
 				</div>
-				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="" oninput="this.value = Math.abs(this.value)" min="0">
-				<a style="color: black;" id="PRFDescription">What is this?</a>
+
+				
 			</div>
+			<!--
+			<div class="row"> 
+				<div class="col-lg-3">
+				Your treatment area:
+				</div>
+			</div>
+			<div class="row"> 
+				<div class="col-lg-6">
+				<div class="plus-select-box">	
+				<select id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+					<?php 
+					//$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
+				    //$interestAreas=json_decode($interestAreascode, true);	
+					?>
+					<?php 
+					//foreach($interestAreas  as $key => $value){
+						//echo '<option value="'.$interestAreas[$key]["ID"].'"';
+						//if (in_array( $interestAreas[$key]["ID"],$details['Treatmentarea'])){ echo "selected='selected'"; } 
+						//echo '> '.$interestAreas[$key]["Name"].' </option>'; 
+					//}
+					?>
+					</select>
+					</div>
+				</div>
+			</div>-->
+
+			<div class="col-xs-12">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Back</span></a></div>
 		</div>
-	<?php endif; ?>
-	<?php if(isset($_SESSION["UserId"]) && $productList->rowCount()>0):?><p>
-		<form id="discount" action="pd-shopping-cart" method="POST">
-			<input type="text" name="Couponcode" placeholder="Enter discount code" value="">
-			<button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button>
-		</form></p><br>
-	<?php endif; ?>
-		<?php if($productList->rowCount()>0 || sizeof($NGProductsArray)!=0 ): ?>      
-		<div class="row ordersummary"><div class="col-xs-12"><span class="blue-sidebardis">YOUR ORDER</span></div></div>
-		<div class="flex-container flex-flow-column pd-spcart-order">
-			<div class="flex-cell">
-                <div class="flex-col-6"><?php echo $i;?> items</div>
-                <div class="flex-col-6">$<?php echo $price;?></div>
-            </div>
-            
-			<div class="flex-cell">
-                <div class="flex-col-6">Discount</div>
-                <div class="flex-col-6">$<?php echo $discountPrice;?></div>
-            </div>
-            
-			<div class="flex-cell">
-			    <div class="flex-col-6">GST</div>
-				<div class="flex-col-6">$<?php echo $scheduleDetails['GST'];?></div>
-            </div>
-            
-			<div class="flex-cell">
-                <div class="flex-col-6">Total(Inc.GST)</div>
-                <div class="flex-col-6">$<?php echo $scheduleDetails['OrderTotal'];?></div>
+       
+        <input type="hidden" id="wpnumber" name="wpnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =0; echo $wpnumber;} ?>"/>
+
+		<div class="down3" style="display:none;">
+			<!--<div class="row">
+				<div class="col-lg-12"> 
+					<input class="styled-checkbox" type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="<?php  //echo $details['Findpublicbuddy'];?>" <?php //if($details['Findpublicbuddy']==1){echo "checked";} ?>>
+					<label class="light-font-weight" class="light-font-weight" for="Findpublicbuddy"><span class="note-text">NOTE: </span>Please list my details in the public (visbile to other health professionals)</label>
+				</div>
+			</div>-->
+		<ul class="nav nav-tabs" id="tabmenu">
+		<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
+		<li <?php if($key=='Workplace0') echo 'class ="active" ';?> id="workplaceli<?php echo $key;?>"><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a><span class="calldeletewp<?php echo $key;?>"></span></li>
+		<?php endforeach ?> 
+		<?php //if(sizeof($details['Workplaces'])==0):?>
+		<!--<li class ="active"><a data-toggle="tab" href="#workplace0"><?php //echo "Workplace1";?></a></li>-->
+		<?php //endif; ?>
+		</ul>
+		<div id="workplaceblocks">
+			<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
+				<div id="workplace<?php echo $key;?>" class='tab-pane fade <?php if($key=='Workplace0') echo "in active ";?>'> 
+				<input type="hidden" name="WorkplaceID<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['WorkplaceID'];?>">
+
+				<div class="col-xs-12 FapTagC">
+					<input class="styled-checkbox" type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" <?php if($details['Workplaces'][$key]['Findphysio']=="True"){echo "checked";} ?>>
+					<label class="light-font-weight" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the consumer choose.physio site</label>
+				</div>
+
+				<div class="col-xs-12 FapTagA"> 
+					<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
+					<label class="light-font-weight" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the corporate australian.physio site</label>	
+				</div>
+
+					<div class="col-xs-12">
+						<label for="Name-of-workplace">Practice name<span class="tipstyle"> *</span></label>
+						<input type="text" class="form-control" name="Name-of-workplace<?php echo $key;?>" id="Name-of-workplace<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Name-of-workplace'])) {echo "placeholder='Name of workplace'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Name-of-workplace'].'"'; }?>>
+					</div>
+
+				<!--<div class="row"> 
+						<div class="col-xs-12 col-md-6">
+						<label>Workplace treatment area:</label>
+						<?php  
+					if(!empty($details['Workplaces'][$key]['SpecialInterestAreaID'])) {$SpecialInterestAreaID = explode(",",$details['Workplaces'][$key]['SpecialInterestAreaID']); } else {$SpecialInterestAreaID = array();}
+					?>
+						<div class="plus-select-box">
+						<select id="WTreatmentarea<?php //echo $key;?>" name="WTreatmentarea<?php //echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
+						<?php 
+							// get interest area from Aptify via webserice return Json data;
+							$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
+				            $interestAreas=json_decode($interestAreascode, true);	
+						?>
+						<?php 
+							//foreach($interestAreas  as $pair => $value){
+								//echo '<option value="'.$interestAreas[$pair]["ID"].'"';
+								//if (in_array( $interestAreas[$pair]["ID"],$SpecialInterestAreaID)){ echo "selected='selected'"; } 
+								//echo '> '.$interestAreas[$pair]["Name"].' </option>'; 
+							//}
+					    ?>
+						</select>
+						</div>
+					</div>
+					
+				</div>-->
+
+				<div class="row">
+					<div class="col-xs-12">
+						<label for="BuildingName">Building name</label>
+						<input type="text" class="form-control" name="WBuildingName<?php echo $key;?>" id="WBuildingName<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WBuildingName'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WBuildingName'].'"'; }?>>
+					</div>
+
+					<div class="col-xs-12 col-md-6">
+						<label for="WAddress_Line_1">Address line 1<span class="tipstyle"> *</span></label>
+						<input type="text" class="form-control" name="WAddress_Line_1<?php echo $key;?>" id="WAddress_Line_1<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Address_Line_1'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Address_Line_1'].'"'; }?>>
+					</div>
+
+					<div class="col-xs-12 col-md-6">
+						<label for="WAddress_Line_2">Address line 2</label>
+						<input type="text" class="form-control" name="WAddress_Line_2<?php echo $key;?>" id="Wstreet<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Address_Line_2'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Address_Line_2'].'"'; }?>>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-6 col-md-3">
+						<label for="Wcity">City/Town<span class="tipstyle"> *</span></label>
+						<input type="text" class="form-control" name="Wcity<?php echo $key;?>" id="Wcity<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wcity'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wcity'].'"'; }?>>
+					</div>
+
+					<div class="col-xs-6 col-md-3">
+						<label for="Wpostcode">Postcode<span class="tipstyle"> *</span></label>
+						<input type="text" class="form-control" name="Wpostcode<?php echo $key;?>" id="Wpostcode<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wpostcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wpostcode'].'"'; }?>>
+					</div>
+
+					<div class="col-xs-6 col-md-3">
+						<label for="Wstate">State</label>
+						<div class="chevron-select-box">
+						<select class="form-control" id="Wstate<?php echo $key;?>" name="Wstate<?php echo $key;?>">
+						   	<option value="" <?php if (empty($details['Workplaces'][$key]['Wstate'])) echo "selected='selected'";?> disabled>State</option>
+							<?php
+							//$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+							//$State=json_decode($statecode, true);						
+							foreach($State  as $pair => $value){
+								//echo '<option class="StateOption'.$State[$pair]['CountryID'].'" value="'.$State[$pair]['Abbreviation'].'"';
+								echo '<option value="'.$State[$pair]['Abbreviation'].'"';
+								if ($details['Workplaces'][$key]['Wstate'] == $State[$pair]['Abbreviation']){ echo "selected='selected'"; } 
+								echo '> '.$State[$pair]['Abbreviation'].' </option>';
+							}
+							?>
+						</select>
+						</div>
+					</div>
+
+					<div class="col-xs-6 col-md-3">
+						<label for="Wcountry<?php echo $key;?>">Country<span class="tipstyle"> *</span></label>
+						<div class="chevron-select-box">
+						<select class="form-control" id="Wcountry<?php echo $key;?>" name="Wcountry<?php echo $key;?>" required>
+							<?php 
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country=json_decode($countrycode, true);
+							foreach($country  as $pair => $value){
+								echo '<option class="CountryOption'.$country[$pair]['ID'].'" value="'.$country[$pair]['Country'].'"';
+								if ($details['Workplaces'][$key]['Wcountry'] == $country[$pair]['Country']){ echo "selected='selected'"; } 
+								elseif(empty($details['Workplaces'][$key]['Wcountry']) && $country[$pair]['ID']=="14"){
+									echo "selected='selected'";
+								}
+								echo '> '.$country[$pair]['Country'].' </option>';
+								
+							}
+							?>
+						</select>
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-6 col-md-3">
+						<label for="Wemail">Workplace email</label>
+						<input type="text" class="form-control" name="Wemail<?php echo $key;?>" id="Wemail<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wemail'])) {echo "placeholder='Workplace email'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wemail'].'"'; }?>>
+					</div>
+
+					<div class="col-xs-6 col-md-3">
+						<label for="Wwebaddress">Website</label>
+						<input type="text" class="form-control" name="Wwebaddress<?php echo $key;?>" id="Wwebaddress<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wwebaddress'])) {echo "placeholder='Website'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wwebaddress'].'"'; }?>>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-6 col-md-3">
+						<label for="">Country code</label>
+						<div class="chevron-select-box">
+						<select class="form-control" id="WPhoneCountryCode<?php echo $key;?>" name="WPhoneCountryCode<?php echo $key;?>">
+						<?php
+						
+							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							$country = json_decode($countrycode, true);	
+							$countser = 0;								
+							foreach($country  as $pair => $value){
+								echo '<option value="'.$country[$pair]['TelephoneCode'].'"';
+								if ($details['Workplaces'][$key]['WPhoneCountryCode'] == preg_replace('/\s+/', '', $country[$pair]['TelephoneCode']) && $countser == 0) { echo "selected='selected'"; $countser++;} 
+								elseif(empty($details['Workplaces'][$key]['WPhoneCountryCode']) && $country[$pair]['ID']=="14"){
+									echo "selected='selected'";
+								}
+								echo '> '.$country[$pair]['Country'].' </option>';
+							}
+						?>
+						</select>
+						</div>
+					</div>
+
+					<div class="col-xs-6 col-md-3">
+						<label for="">Area code</label>
+						<input type="text" class="form-control" name="WPhoneAreaCode<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['WPhoneAreaCode'])) {echo "placeholder='Phone Area code'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WPhoneAreaCode'].'"'; }?>  maxlength="5">
+					</div>
+
+					<div class="col-xs-6 col-md-3">
+						<label for="">Phone number<span class="tipstyle"> *</span></label>
+						<input type="number" class="form-control" name="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  oninput="this.value = Math.abs(this.value)" min="0">
+					</div>
+
+					<!--<div class="col-xs-6 col-md-3">
+						<label for="">Extention Number</label>
+						<input type="text" class="form-control" name="WPhoneExtentions<?php //echo $key;?>" <?php //if (empty($details['Workplaces'][$key]['WPhoneExtentions'])) {echo "placeholder='Extentions Number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WPhoneExtentions'].'"'; }?>  >
+					</div>-->		
+				</div>
+
+				<div class="row">
+
+					 <?php  
+						//if(!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {$WAdditionalLanguage = explode(",",$details['Workplaces'][$key]['AdditionalLanguage']); } else {$WAdditionalLanguage = array();}
+						
+						?>
+					<!--<div class="col-xs-12">
+						<label>Choose the languages you speak in your practice?</label>
+						<div class="plus-select-box">
+						<select id="Additionallanguage<?php echo $key;?>" name="Additionallanguage<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
+							<?php 
+							/*
+								$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
+								$Language=json_decode($Languagecode, true);
+								foreach($Language  as $pair => $value){
+									echo '<option value="'.$Language[$pair]['ID'].'"';
+									if (in_array($Language[$pair]['ID'],$WAdditionalLanguage)){ echo "selected='selected'"; } 
+									echo '> '.$Language[$pair]['Name'].' </option>';
+								}*/
+						    ?>	
+						</select>
+						</div>
+					</div>-->
+
+					<div class="col-xs-6 col-md-6">
+						<label>Quality In Practice number&nbsp;(QIP)</label>
+						<input type="text" class="form-control" name="QIP<?php echo $key;?>" id="QIP<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['QIP'])) {echo "placeholder='QIP Number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['QIP'].'"'; }?>>
+					</div>
+				</div>
+
+					<div class="col-xs-12">
+					<label>What services does this workplace provide?</label>
+					</div>
+
+				<div class="row">
+					<div class="col-xs-6 col-md-4">
+						<input class="styled-checkbox" type="checkbox" name="Electronic-claiming<?php echo $key;?>" id="Electronic-claiming<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Electronic-claiming'];?>" <?php if($details['Workplaces'][$key]['Electronic-claiming']=="True"){echo "checked";} ?>>
+						<label class="light-font-weight" for="Electronic-claiming<?php echo $key;?>">Electronic claiming</label>
+					</div>
+					<!--<div class="col-xs-6 col-md-4">
+						<input class="styled-checkbox" type="checkbox" name="Hicaps<?php //echo $key;?>" id="Hicaps<?php //echo $key;?>" value="<?php  //echo $details['Workplaces'][$key]['Hicaps'];?>" <?php //if($details['Workplaces'][$key]['Hicaps']=="True"){echo "checked";} ?>>
+						<label class="light-font-weight" for="Hicaps<?php //echo $key;?>">HICAPS</label>
+					</div>-->
+
+					<!--<div class="col-xs-6 col-md-4">
+						<input class="styled-checkbox" type="checkbox" name="Healthpoint<?php //echo $key;?>" id="Healthpoint<?php //echo $key;?>" value="<?php  //echo $details['Workplaces'][$key]['Healthpoint'];?>" <?php //if($details['Workplaces'][$key]['Healthpoint']=="True"){echo "checked";} ?>>
+						<label class="light-font-weight" for="Healthpoint<?php //echo $key;?>">Healthpoint</label>
+					</div>-->
+					<div class="col-xs-6 col-md-4">
+						<input class="styled-checkbox" type="checkbox" name="Departmentva<?php echo $key;?>" id="Departmentva<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Departmentva'];?>" <?php if($details['Workplaces'][$key]['Departmentva']=="True"){echo "checked";} ?>>
+						<label class="light-font-weight" for="Departmentva<?php echo $key;?>">Department of Vetarans' Affairs</label>
+					</div>
+
+					<div class="col-xs-6 col-md-4">
+						<input class="styled-checkbox" type="checkbox" name="Workerscompensation<?php echo $key;?>" id="Workerscompensation<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Workerscompensation'];?>" <?php if($details['Workplaces'][$key]['Workerscompensation']=="True"){echo "checked";} ?>>
+						<label class="light-font-weight" for="Workerscompensation<?php echo $key;?>">Workers compensation</label>
+					</div>
+					<div class="col-xs-6 col-md-4">
+						<input class="styled-checkbox" type="checkbox" name="Motora<?php echo $key;?>" id="Motora<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Motora'];?>" <?php if($details['Workplaces'][$key]['Motora']=="True"){echo "checked";} ?>>
+						<label class="light-font-weight" for="Motora<?php echo $key;?>">Motor accident compensation</label>
+					</div>
+
+					<div class="col-xs-6 col-md-4">
+						<input class="styled-checkbox" type="checkbox" name="Medicare<?php echo $key;?>" id="Medicare<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Medicare'];?>" <?php if($details['Workplaces'][$key]['Medicare']=="True"){echo "checked";} ?>>
+						<label class="light-font-weight" for="Medicare<?php echo $key;?>">Medicare Chronic Disease Management</label>
+					</div>
+					<div class="col-xs-6 col-md-4">
+						<input class="styled-checkbox" type="checkbox" name="Homehospital<?php echo $key;?>" id="Homehospital<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Homehospital'];?>" <?php if($details['Workplaces'][$key]['Homehospital']=="True"){echo "checked";} ?> >
+						<label class="light-font-weight" for="Homehospital<?php echo $key;?>">Home and hospital visits</label>
+					</div>
+
+					<div class="col-xs-6 col-md-4">
+						<input class="styled-checkbox" type="checkbox" name="Mobilephysiotherapist<?php echo $key;?>" id="Mobilephysiotherapist<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['MobilePhysio'];?>" <?php if($details['Workplaces'][$key]['MobilePhysio']=="True"){echo "checked";} ?>>
+						<label class="light-font-weight" for="Mobilephysiotherapist<?php echo $key;?>">Mobile physiotherapist</label>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-xs-12 col-md-6">
+						<label>Workplace setting<span class="tipstyle"> *</span></label>
+						<div class="chevron-select-box">	
+						<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting<?php echo $key;?>">
+						<?php
+							// 2.2.36 - get workplace settings list
+							// Send - 
+							// Response - get workplace settings from Aptify via webserice return Json data;
+							// stroe workplace settings into the session
+							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
+							$workplaceSettings=json_decode($workplaceSettingscode, true);	
+							$_SESSION["workplaceSettings"] = $workplaceSettings;
+							foreach($workplaceSettings  as $pair => $value){
+							echo '<option value="'.$workplaceSettings[$pair]["ID"].'"';
+							if ($details['Workplaces'][$key]['Workplace-settingID'] == $workplaceSettings[$pair]["ID"]){ echo "selected='selected'"; } 
+							echo '> '.$workplaceSettings[$pair]["Name"].' </option>'; 
+							}							
+							?>
+						</select>
+						</div>
+					</div>
+
+					<div class="col-xs-12 col-md-6">
+						<label>Numbers of hours worked<span class="tipstyle"> *</span></label>
+						<div class="chevron-select-box">
+						<select class="form-control" id="Number-worked-hours<?php echo $key;?>" name="Number-worked-hours<?php echo $key;?>">
+						<?php 
+							$NumberOfHourscode  = file_get_contents("sites/all/themes/evolve/json/NumberOfHours.json");
+							$NumberOfHours=json_decode($NumberOfHourscode, true);
+							foreach($NumberOfHours  as $pair => $value){
+								echo '<option value="'.$NumberOfHours[$pair]['ID'].'"';
+								if ($details['Workplaces'][$key]['Number-workedhours'] == $NumberOfHours[$pair]['ID']){ echo "selected='selected'"; } 
+								echo '> '.$NumberOfHours[$pair]['Name'].' </option>';
+							}
+						?>
+						</select>
+						</div>
+					</div>
+				</div>
+
 			</div>
+			<?php endforeach; ?>
+			
+			</div>
+			
+			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+				<a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a>
+			</div>
+
+			<div class="col-xs-12">   
+				<a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Back</span></a>
+			</div>
+		
 		</div>
-		         
-		<form action="/pd/completed-purchase" method="POST">
-			<input type="hidden" name="POSTPRF" id="POSTPRF" value="">
-			<input type="hidden" name="TandC" id="TandC" value="0">
-			<input type="hidden" name="CardUsed" id="CardUsed" value="">
-			<input type="hidden" name="CouponCode"  value="<?php echo $couponCode; ?>">
-			<?php
-				$counterTotal = count($ListProductID);
-				$counters = 0;
-				foreach($ListProductID as $PIDs) {
-					$counters++;
-					echo '<input type="hidden" name="PID'.$counters.'" id="PID'.$counters.'" value="'.$PIDs["PID"].'">';
-				}
-				echo '<input type="hidden" name="total" id="total" value="'.$counterTotal.'">';
-			?>
-			<?php
-			if(sizeof($NGProductsArray)!=0) {
-				$ngTotal = count($NGProductsArray);
-				$ct = 0;
-				foreach($NGProductsArray as $NGP) {
-					$ct++;
-					echo '<input type="hidden" name="NG'.$ct.'" id="NG'.$ct.'" value="'.$NGP.'">';
-				}
-				echo '<input type="hidden" name="totalNG" id="totalNG" value="'.$ngTotal.'">';
-			}
-			?>
-			<button class="placeorder" type="submit" value="PLACE YOUR ORDER">Place your order</button>
-			<!--a target="_blank" class="addCartlink">
-				<button class="placeorder" type="submit">PLACE YOUR ORDER</button>
-			</a-->
-		</form>
-</div>
+		<div class="down4" style="display:none;" >
+		<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =1;} echo  $addtionalNumber;  ?>"/>
 
-<?php endif; ?>
-<?php if($productList->rowCount()==0 && sizeof($NGProductsArray)==0) : ?>  
+			<div id="additional-qualifications-block">
+				<?php foreach($details['PersonEducation'] as $key => $value) :?>
+				
+					<div id="additional<?php echo $key;?>">
+					<input type="hidden" name="ID<?php echo $key;?>" value="<?php  echo $details['PersonEducation'][$key]['ID'];?>">
+					<div class="col-xs-12 space-line"><div class="col-xs-12 separater"></div></div>
+						<div class="row">
+							<div class="row">
+								<div class="col-xs-12 col-sm-6">
+									<label for="Udegree<?php echo $key;?>">Degree level<span class="tipstyle"> *</span></label>
+									<?php 
+										$degreecode  = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
+										$degree=json_decode($degreecode, true);
+										$_SESSION["degree"] = $degree;	
+									?>
+									<?php if (!empty($details['PersonEducation'][$key]['DegreeID'])):?>
+									<div class="chevron-select-box">
+									<select class="form-control" name="Udegree<?php echo $key;?>" id="Udegree<?php echo $key;?>">
+										
+										<?php 
+											foreach($degree  as $pair => $value){
+												echo '<option value="'.$degree[$pair]['ID'].'"';
+												if ($details['PersonEducation'][$key]['DegreeID'] == $degree[$pair]['ID']){ echo "selected='selected'"; } 
+												echo '> '.$degree[$pair]['Name'].' </option>';
+												
+											}
+										?>
+										<option value="0" >Other</option>
+									</select>
+									</div>
+									<input type="text" class="form-control display-none" name="University-degree<?php echo $key;?>" id="University-degree<?php echo $key;?>">
+									<?php endif;?>
+									<?php if (empty($details['PersonEducation'][$key]['DegreeID'])):?>
+									<input type="text" class="form-control" name="University-degree<?php echo $key;?>" id="University-degree<?php echo $key;?>" value="<?php echo $details['PersonEducation'][$key]['Degree'];?>">
+									<?php endif;?>
+								</div>
+							</div>
 
-<h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3>
-<?php endif;?>
+							<div class="row">
+								<div class="col-xs-12 col-sm-6">
+									<label for="Undergraduate-university-name<?php echo $key;?>">University name<span class="tipstyle"> *</span></label>
+									<?php 
+										$universityCode  = file_get_contents("sites/all/themes/evolve/json/University.json");
+										$University=json_decode($universityCode, true);
+										$name = array();
+										foreach ($University as $ukey => $row)
+										{
+											$name[$ukey] = $row['Name'];
+										}
+										array_multisort($name, SORT_ASC, $University);
+										
+										
+										$_SESSION["University"] = $University;	
+									?>
+									<?php if (!empty($details['PersonEducation'][$key]['InstituteID'])):?>
+									<div class="chevron-select-box">
+									<select class="form-control" name="Undergraduate-university-name<?php echo $key;?>" id="Undergraduate-university-name<?php echo $key;?>">
+										
+										<?php 
+											foreach($University  as $pair => $value){
+												echo '<option value="'.$University[$pair]['ID'].'"';
+												if ($details['PersonEducation'][$key]['InstituteID'] == $University[$pair]['ID']){ echo "selected='selected'"; } 
+												echo '> '.$University[$pair]['Name'].' </option>';
+											}
+										?>
+										<option value="0">Other</option>
+									</select>
+									</div>
+									<input type="text" class="form-control display-none" name="Undergraduate-university-name-other<?php echo $key;?>" id="Undergraduate-university-name-other<?php echo $key;?>">
+									<?php endif;?>
+									<?php if (empty($details['PersonEducation'][$key]['InstituteID'])):?>
+									<input type="text" class="form-control" name="Undergraduate-university-name-other<?php echo $key;?>" id="Undergraduate-university-name-other<?php echo $key;?>" value="<?php echo $details['PersonEducation'][$key]['Institute'];?>">
+									<?php endif;?>
+								</div>
+							</div>
 
-<div class="col-xs-12 bottom-buttons">
- 	<a target="_blank" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
- 	<a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
-</div>
+							<div class="col-xs-6 col-sm-6 col-md-6">
+								<label for="Ugraduate-country<?php echo $key;?>">Country<span class="tipstyle"> *</span></label>
+								<div class="chevron-select-box">
+								<select class="form-control" id="Ugraduate-country<?php echo $key;?>" name="Ugraduate-country<?php echo $key;?>">
+								<?php 
+								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+								$country=json_decode($countrycode, true);
+								foreach($country  as $pair => $value){
+									echo '<option value="'.$country[$pair]['ID'].'"';
+									if ($details['PersonEducation'][$key]['Country'] == $country[$pair]['ID']){ echo "selected='selected'"; } 
+									elseif(empty($details['PersonEducation'][$key]['Country']) && $country[$pair]['ID']=="14"){
+											echo "selected='selected'";
+									}
 
-<div class="flex-col-12 pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+									echo '> '.$country[$pair]['Country'].' </option>';
+									
+								}
+								?>
+								</select>
+								</div>
+							</div>
 
+							<div class="col-xs-6 col-sm-6 col-md-6">
+								<label for="Ugraduate-yearattained<?php echo $key;?>">Year attained or expected graduation date<span class="tipstyle"> *</span></label>
+								<div class="chevron-select-box">
+								<select class="form-control" name="Ugraduate-yearattained<?php echo $key;?>" id="Ugraduate-yearattained<?php echo $key;?>">
+								
+								<?php 
+								$y = date("Y") + 10;
+								for ($i=1940; $i<= $y; $i++){
+								echo '<option value="'.$i.'"';
+								if ($details['PersonEducation'][$key]['Yearattained'] == $i){
+								echo 'selected="selected"';
+								}
+								echo '>'.$i.'</option>';
+								}
+								?>
+								</select>
+								</div>
+							</div>
+					</div>
+					<?php if($key!="0"):?>
+					<a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>	
+					<?php endif;?>
+					</div>
+				<?php endforeach;?>
+				<?php if(sizeof($details['PersonEducation'])==0):?>
+					<div id="additional0">
+						<input type="hidden" name="ID0" value="-1">
+					   <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label for="Udegree">Degree<span class="tipstyle"> *</span></label>
+                                <div class="chevron-select-box">
+                                <select class="form-control" name="Udegree0" id="Udegree0">
+                                   <option value="" selected disabled>Please select</option>
+								   <?php
+                                        $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
+                                        $degree             = json_decode($degreecode, true);
+                                        $_SESSION["degree"] = $degree;
+                                        foreach ($degree as $pair => $value) {
+                                            echo '<option value="' . $degree[$pair]['ID'] . '"';
+                                            echo '> ' . $degree[$pair]['Name'] . ' </option>';
+                                        }
+                                    ?>
+                                <option value="0">Other</option>
+                                </select>
+                                </div>
+                                <input type="text" class="form-control display-none" name="University-degree0" id="University-degree0">
+                            </div>
+                        </div>
 
-<?php logRecorder();  ?>
-<div id="PRFDesPopUp" style="display:none;" class="container">
-<p>The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot. </p>
-<p><a href="/reserach/purpose-prf" target="_blank">Tell me more</a></p>
-</div>
-<div id="PDTermsWindow" style="display:none;">
-	<span class="close-popup"></span>
-	<div class="modal-header">
-		<h4 class="modal-title">APA events terms and conditions</h4>
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-6">
+                                <label for="Undergraduateuniversity-name0">University name<span class="tipstyle"> *</span></label>
+                                <?php
+                                    $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
+                                    $University             = json_decode($universityCode, true);
+									
+									$name = array();
+										foreach ($University as $ukey => $row)
+										{
+											$name[$ukey] = $row['Name'];
+										}
+									array_multisort($name, SORT_ASC, $University);
+									
+                                    $_SESSION["University"] = $University;
+                                ?>
+                            <div class="chevron-select-box">
+                            <select class="form-control" name="Undergraduate-university-name0" id="Undergraduate-university-name0">
+                                <option value="" selected disabled>Please select</option>
+								<?php
+                                    foreach ($University as $pair => $value) {
+                                        echo '<option value="' . $University[$pair]['ID'] . '"';
+                                        echo '> ' . $University[$pair]['Name'] . ' </option>';
+                                    }
+                                ?>    
+                                    <option value="0">Other</option>
+                                </select>
+                                </div>
+                                <input type="text" class="form-control display-none" name="Undergraduate-university-name-other0" id="Undergraduate-university-name-other0">
+                            </div>
+                        </div>
+
+						<div class="row">
+                            <div class="col-xs-6 col-sm-6">
+                                <label for="Ugraduate-yearattained0">Year attained or expected graduation date<span class="tipstyle"> *</span></label>
+                                <div class="chevron-select-box">
+                                <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
+                                <option value="" selected disabled>Please select</option>
+								<?php
+                                    $y = date("Y") + 5;
+                                    for ($i = 1940; $i <= $y; $i++) {
+                                        echo '<option value="' . $i . '">' . $i . '</option>';
+                                    }
+                                ?>
+                                </select>
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 col-sm-6">
+                                <label for="Ugraduate-country0">Country<span class="tipstyle"> *</span></label>
+                                <div class="chevron-select-box">
+                                <select class="form-control" id="Ugraduate-country0" name="Ugraduate-country0">
+                                <?php
+                                    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+                                    $country     = json_decode($countrycode, true);
+                                    foreach ($country as $key => $value) {
+                                        echo '<option value="' . $country[$key]['ID'] . '"';
+                                        if($country[$key]['ID']=="14"){echo "selected='selected'";}
+                                        echo '> ' . $country[$key]['Country'] . ' </option>';
+                                    }
+                                ?>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+						<!--<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>-->
+					</div>
+				<?php endif; ?>
+
+		</div>
+		<div class="col-xs-12">
+				<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>		
+		</div>
+		<div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Back</span></a></div>
+
 	</div>
 
-	<div class="modal-body">
-	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
-	<h4>Registration</h4>
-
-<p>Online registration is the simplest way to secure your place. Advice concerning remaining places in any event activity does not guarantee a place, as that information is subject to continual change. Registration will not be accepted without payment. Places are allocated according to the date that an application form and payment are received by the Australian Physiotherapy Association (APA), unless otherwise stated.</p>
-
-<p>The APA reserves the right to cancel or change an event activity to an alternative date. The APA will notify those who have already registered for that particular cancelled event of the cancellation or change of date. In this case, all registered participants will receive a full refund of the event registration fee, should it be required. The APA is not responsible for other associated expenses. Registration is transferable.</p>
-
-<p>If transferring your registration or if you wish to cancel your registration, please contact the PD Officer in the state that the course is held. Transfer and cancellation requests must be received in writing. Transfers and cancellations may be subject to a fee.</p>
-
-<p>By registering for this course, you provide consent to the APA to use your comments/responses, or any photographs taken of you, for their publications and associated media and marketing channels. If you do not provide consent, it is your duty to inform the APA in writing.</p>
-
-
-	<h4>Courses</h4>
-<p>In most cases, course registration closes two weeks prior to the course commencement date. It is the participant&rsquo;s responsibility to ensure that they meet any pre-requisites as stated in the course outline found on the APA website. </p>
-
-<p>The APA requires that all participants hold current personal professional indemnity insurance for all courses and workshops. We recommend that participants who are travelling interstate to attend an APA event purchase travel insurance. </p>
-
-<p>Membership must be current at the time of the APA event to receive the APA Member or group member rates. Letters of attendance are provided at the completion of every course. Replacement copies are available at $25 (includes postage and handling). </p>
-
-<p>APA accredited courses are not available to students unless advertised otherwise. Students are able to register and attend APA lectures and PD events other than courses.</p>
-
-
-	<h4>Cancellation:</h4>
-<p>For APA courses:</p>
-<ul>
-    <li>a participant may substitute their registration to another person or apply for a refund of monies paid prior to the course registration closing date</li>
-    <li>a participant may substitute their registration to another person or apply for a refund of monies paid (less a 20% cancellation fee) between the course registration close date and seven calendar days prior to the course commencement date</li>
-    <li>from seven calendar days prior to and up to the course commencement date, a participant may substitute their registration to another person. NO refund will be supplied</li>
-    <li>a participant may apply for a refund with a supporting Medical Certificate. Each case will be assessed on its own merits and a refund is not guaranteed. Where a refund is granted, the APA will withhold 20% of the registration fee paid, as cancellation fee.</li>
-</ul>
-
-
-<h4>Part payments</h4>
-<p>Part payments may be offered to APA members for courses over $2000. The payment plan is as follows:</p>
-<ul>
-    <li>50 per cent is required to secure booking. </li>
-    <li>25 per cent is required 2 months prior to the course date, and </li>
-    <li>The final 25 per cent is required 1 month prior to course date. </li>
-</ul>
-
-
-<h4>Australian Physiotherapy Association Privacy Statement for Professional Development Website and Manual Registration Forms:</h4>
-<p>The APA acknowledges and respects the privacy of its members and customers. The information that you provide on this form
-is &ldquo;personal information&rdquo; as defined by the Privacy Act 1988. The information is being collected by the APA and will be held by the APA. It may be given to service providers engaged by the APA. This information is being collected for the purpose of processing your registration for this event and keeping you informed about other upcoming events. The provision of information is voluntary but if it is not provided the APA may not be able to process your registration. You have the right to access and alter personal information about yourself in accordance with the Australian Privacy Principles and the APA privacy policy which is available for you to read on <a href="http://www.privacy@physiotherapy.asn.au" target="_self">physiotherapy.asn.au</a>. Direct any enquiries you may have in relation to this matter to our Privacy Officer who can be contacted on <a href="tel:03 9092 0888" target="_self">03 9092 0888</a> or by email at <a href="mailto:privacy@physiotherapy.asn.au">privacy@physiotherapy.asn.au</a>.</p>
-
-	</div>
-
-	<div class="modal-footer">
-		<a class="disagree-btn" href="" popup-dismiss="PDTermsWindow">Disagree</a>
-		<a id="installmentpolicyp" class="agree-btn" href="" popup-dismiss="PDTermsWindow">Agree</a>
-	</div>
-</div>
-
-<!-- OVERLAY / LOADING SCREEN -->
-<div class="overlay">
-	<section class="loaders">
-		<span class="loader loader-quart">
-			<div class="loading">
-				<div class="loading__element">L</div>
-				<div class="loading__element">O</div>
-				<div class="loading__element">A</div>
-				<div class="loading__element">D</div>
-				<div class="loading__element">I</div>
-				<div class="loading__element">N</div>
-				<div class="loading__element">G</div>
-			</div>
-		</span>   
-	</section>
-</div>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
- <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-$( function() {
-$.widget( "custom.iconselectmenu", $.ui.selectmenu, {
-      _renderItem: function( ul, item ) {
-        var li = $( "<li>" ),
-          wrapper = $( "<div>", { text: item.label } );
- 
-        if ( item.disabled ) {
-          li.addClass( "ui-state-disabled" );
-        }
- 
-        $( "<span>", {
-          style: item.element.attr( "data-style" ),
-          "class": "ui-icon " + item.element.attr( "data-class" )
-        })
-          .appendTo( wrapper );
- 
-        return li.append( wrapper ).appendTo( ul );
-      }
-    });
- 
- 
- 
-    $( "#Paymentcard" )
-      .iconselectmenu()
-      .iconselectmenu( "menuWidget" )
-        .addClass( "ui-menu-icons customicons" );
-
-	//$("#accept1").change(function() {
-	//	if(changeV() == "1") {
-	//		$("TandC").val("1");
-	//	}
-	//});
-	$("#accept2").change(function() {
-		if(changeV() == "1") {
-			$("TandC").val("1");
-		}
+</form> 
+		<div id="confirmDelete" style="display:none;">
+				<div class="flex-cell">
+					<h3 class="light-lead-heading cairo">Are you sure you want to delete this qualification record?</h3>
+				</div>
+				<div class="flex-cell buttons-container">
+					<a id="deleteQButton" class="" value="yes" target="_self">Yes</a>
+					<a class="cancelDeleteButton" value="no" target="_self">No</a>
+				</div>
+		</div>
+<script type="text/javascript">
+jQuery(document).ready(function($) {
+	$('#workplace').click(function(){
+		$('#dashboard-right-content').addClass("autoscroll");
 	});
-	$("#accept3").change(function() {
-		if(changeV() == "1") {
-			$("TandC").val("1");
-		}
+	if($('#wpnumber').val()=="0"){
+			var number = Number($('#wpnumber').val());
+			var i = Number(number +1);
+			//var j = Number(number +2);
+			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span></li>' );
+			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
+			//$('#wpnumber').text(i);
+			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
+			$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
+			$('input[name=wpnumber]').val(i);
+			var memberType = $('select[name=MemberType]').val();
+			var sessionvariable = '<?php
+			echo json_encode($_SESSION["workplaceSettings"]);
+			?>';
+						var sessionInterest = '<?php
+			echo json_encode($_SESSION["interestAreas"]);
+			?>';
+					var sessionLanguage = '<?php
+			echo json_encode($_SESSION["Language"]);
+			?>';
+					var sessionCountry = <?php
+			echo json_encode($_SESSION['country']);
+?>;
+		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
+			 
+	}
+	$('.add-workplace-join').click(function(){
+		var number = Number($('#wpnumber').val());
+		var i = Number(number +1);
+		//var j = Number(number +2);
+		$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span></li>' );
+		$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in"></div>');
+		//$('#wpnumber').text(i);
+		$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
+		$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
+		$('input[name=wpnumber]').val(i);
+		var memberType = $('select[name=MemberType]').val();
+		var sessionvariable = '<?php echo json_encode($_SESSION["workplaceSettings"]);?>';
+		var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
+		var sessionLanguage = '<?php echo json_encode($_SESSION["Language"]);?>';
+		var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
+		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
+
+	});
+	$("[class^=deletewp]").live( "click", function(){
+		  var x = $(this).attr("class").replace('deletewp', '');
+		  $("#workplaceli"+ x).remove();
+		  $("#workplace"+ x).remove();
+		  //$(".deletewp"+ x).remove();
+		  var n = Number($('#wpnumber').val());
+		  var t = Number(n -1);
+		  
+		$('input[name=wpnumber]').val(t);
 	});
 	
-	//function changeV() {
-	//	
-	//	if($("#accept1").is(":checked")) {
-	//		if($("#accept2").is(":checked")) {
-	//			if($("#accept3").is(":checked")) {
-	//				return "1";
-	//			}
-	//		}
-	//	}
-	//}
-} );
+});
+$('.add-additional-qualification').click(function(){
+		$('#dashboard-right-content').addClass("autoscroll");
+        var number = Number($('#addtionalNumber').val());
+		var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
+		var sessionDegree = <?php echo json_encode($_SESSION['degree']);?>;
+		var sessionUniversity = <?php echo json_encode($_SESSION['University']);?>;
+		$('div[id="additional-qualifications-block"]').append('<div id="additional'+ number +'"></div>');
+		$("#additional"+ number ).load("sites/all/themes/evolve/commonFile/education.php", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree,"sessionUniversity":sessionUniversity});
+        var i = Number(number +1);
+		$('input[name=addtionalNumber]').val(i);
+ });
+ $("#deleteQButton").on( "click", function(){
+		var x = $(this).attr("class").replace('deleteEducation', '');
+		$("#additional"+ x).remove();
+		$("#deleteQButton").removeAttr('class');
+		var en = Number($('#addtionalNumber').val());
+		
+		var et = Number(en -1);
+		$('input[name=addtionalNumber]').val(et);
+		//$('#confirmDelete').dialog('close');
+		$('div[aria-describedby=confirmDelete] button').click();
+});
 
+jQuery(document).ready(function() {
+  $("#confirmDelete .cancelDeleteButton").on("click",function(){
+    $('div[aria-describedby=confirmDelete]').fadeOut();
+  });
+  $(".callDeleteEdu").on("click",function(){
+    $('div[aria-describedby=confirmDelete]').fadeIn();
+  });
+});
 </script>
-  

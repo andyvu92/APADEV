@@ -124,7 +124,7 @@ $invoiceAPI = GetAptifyData("18", $apis);
 			</div>
 
 			<div class="col-xs-6 col-md-3">
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CCV">
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 			</div>
 		</div>
 		<div class="col-xs-12">

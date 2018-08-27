@@ -353,9 +353,9 @@ jQuery(document).ready(function($) {
 		$('#homebranch').html(state);
 		
 	});
-	$('body').on('change', '[type="checkbox"]', function() {
+	/*$('body').on('change', '[type="checkbox"]', function() {
 		$('#workplaceblocks input[type="checkbox"]').click(function(){
-			//console.log("ddddd");
+			alert("testcoming");
 			if($(this).is(":checked")){
 			$(this).attr('checked', true);
 			   $(this).val('True');
@@ -370,8 +370,23 @@ jQuery(document).ready(function($) {
 			
 		});
 		
+	});*/
+	$('body').on('click', '#workplaceblocks input[type="checkbox"]', function() {
+		
+		if($(this).is(":checked")){
+			$(this).attr('checked', true);
+			   $(this).val('True');
+			
+			  }
+			 else{
+			 
+			  $(this).removeAttr('checked');
+			  $(this).val('False');
+			  
+			 }
+			
 	});
-	/*$('#workplaceblocks input[type="checkbox"]').click(function(){
+	$('#workplaceblocks input[type="checkbox"]').click(function(){
 		
 			if($(this).is(":checked")){
 			$(this).attr('checked', true);
@@ -385,7 +400,7 @@ jQuery(document).ready(function($) {
 			  
 			 }
 			
-	});*/
+	});
 	$("#CardUsed").val($("#Paymentcard").val());
 	$("input[value='PLACE YOUR ORDER']").click(function(){
 		var CardID = $("#Paymentcard").val();
@@ -782,14 +797,13 @@ jQuery(document).ready(function($) {
 			$("input[name=Billing-Address_Line_1]").parent().removeClass('locked');
 			$("input[name=Billing-Address_Line_2]").parent().removeClass('locked');
 			$("input[name=Billing-BuildingName]").parent().removeClass('locked');
-		}		
+		}
     });
 	if($("input[name=Billing-Pobox]").val()!=""){
 		$("input[name=Billing-Address_Line_1]").prop('disabled', true);
 		$("input[name=Billing-Address_Line_2]").prop('disabled', true);
 		$("input[name=Billing-BuildingName]").prop('disabled', true);
-	}
-	else{
+	} else{
 		$("input[name=Billing-Address_Line_1]").prop('disabled', false);
 		$("input[name=Billing-Address_Line_2]").prop('disabled', false);
 		$("input[name=Billing-BuildingName]").prop('disabled', false);
@@ -949,6 +963,12 @@ jQuery(document).ready(function($) {
 		scrollTop: $('#section-main-content').offset().top
 	}, 500, 'linear');
   });
+  $("#resetQuestion").click(function() {
+	  $('[id^=question]').hide();
+      $('[id^=question]').addClass("function");
+      $('#question65').show();
+      $('#question65').removeClass("function");
+  })
   $("[class^=NGname]").change(function() {
 	var id = $(this).attr('id');
     if($('#'+id).is(':checked')) {
@@ -1210,7 +1230,21 @@ jQuery(document).ready(function($) {
 			scrollTop: $(".note-text").offset().top
 		}, 1);
 	});
-
+    $('#prftag').click(function(){
+		if($('#prftag').val()=="1"){
+			$('#prfselect').addClass("display-none");
+		}
+		else{
+			$('#prfselect').removeClass("display-none");
+		}
+		
+	});
+	if($('#prftag').val()=="1"){
+		$('#prfselect').addClass("display-none");
+	}
+	else{
+		$('#prfselect').removeClass("display-none");
+	}
 	//ADD WORKPLACE SCROLL TOP
 	$(document).on('click', '.add-workplace-join', function(){
 		$('html, body').animate({

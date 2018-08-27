@@ -12,12 +12,12 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
  {echo '   
 	<div class="col-xs-12 FapTagC">
 		<input class="styled-checkbox" type="checkbox" name="Findphysio'.$i.'" id="Findphysio'.$i.'" value="" >
-		<label class="light-font-weight" for="Findphysio'.$i.'"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the consumer choose.physio site</label>
+		<label class="light-font-weight" for="Findphysio'.$i.'"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the consumer choose.physio site</label>
 	</div>
 
 	<div class="col-xs-12 FapTagA">
 		<input class="styled-checkbox" type="checkbox" name="Findabuddy'.$i.'" id="Findabuddy'.$i.'" value="" >
-		<label class="light-font-weight" for="Findabuddy'.$i.'"><span class="note-text">NOTE:&nbsp;</span>I want this workplace to be listed on Find a Physio on the corporate australian.physio site</label>
+		<label class="light-font-weight" for="Findabuddy'.$i.'"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the corporate australian.physio site</label>
  </div>';}
 	echo'
 <div class="row">
@@ -132,7 +132,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 
 <div class="col-xs-6 col-md-3">
         <label for="">Phone number<span class="tipstyle"> *</span></label>
-        <input type="text" class="form-control" name="Wphone'.$i.'" placeholder="Phone number">
+        <input type="number" class="form-control" name="Wphone'.$i.'" placeholder="Phone number" oninput="this.value = Math.abs(this.value)" min="0">
 </div>
 
 
@@ -160,15 +160,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 		<label class="light-font-weight" for="Electronic-claiming'.$i.'">Electronic claiming</label>
 	</div>
 
-	<div class="col-xs-12 col-sm-6 col-md-6">
-		<input class="styled-checkbox" type="checkbox" name="Hicaps'.$i.'" id="Hicaps'.$i.'" value="False" >
-		<label class="light-font-weight" for="Hicaps'.$i.'">HICAPS</label>
-	</div>
 
-	<div class="col-xs-12 col-sm-6 col-md-6">
-		<input class="styled-checkbox" type="checkbox" name="Healthpoint'.$i.'" id="Healthpoint'.$i.'" value="False">
-		<label class="light-font-weight" for="Healthpoint'.$i.'">Healthpoint</label>
-	</div>
 
 	<div class="col-xs-12 col-sm-6 col-md-6">
 		<input class="styled-checkbox" type="checkbox" name="Departmentva'.$i.'" id="Departmentva'.$i.'" value="False">

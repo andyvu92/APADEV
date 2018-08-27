@@ -177,14 +177,14 @@ jQuery(document).ready(function($) {
 		   	//}
 			if($("#anothercardBlock").is(":visible")){
 				if($("select[name=Cardtype]").val() =='') {$("select[name=Cardtype]").addClass("focuscss");}else{$("select[name=Cardtype]").removeClass("focuscss");}
-				//if($("input[name=Cardname]").val() =='') {$("input[name=Cardname").addClass("focuscss");}else{$("input[name=Cardname").removeClass("focuscss");}
+				if($("input[name=Cardname]").val() =='') {$("input[name=Cardname").addClass("focuscss");}else{$("input[name=Cardname").removeClass("focuscss");}
 				if($("input[name=Cardnumber]").val() =='') {$("input[name=Cardnumber").addClass("focuscss");}else{$("input[name=Cardnumber").removeClass("focuscss");}
 				if($("input[name=Expirydate]").val() =='') {$("input[name=Expirydate").addClass("focuscss");}else{$("input[name=Expirydate").removeClass("focuscss");}
 				if($("input[name=CCV]").val() =='') {$("input[name=CCV").addClass("focuscss");}else{$("input[name=CCV").removeClass("focuscss");}
 			}
 			if($("#anothercardBlock").is(":visible")){
 				if($("select[name=Cardtype]").val() =='') { return false;}
-				//if($("input[name=Cardname]").val() =='') { return false;}
+				if($("input[name=Cardname]").val() =='') { return false;}
 				if($("input[name=Cardnumber]").val() =='') { return false;}
 				if($("input[name=Expirydate]").val() =='') { return false;}
 				if($("input[name=CCV]").val() =='') { return false;}
@@ -330,7 +330,16 @@ jQuery(document).ready(function($) {
 		else{var eventtitle = "eventtitle"+x;}
 		$("span." + eventtitle).addClass("text-underline");
 	});
-
+    $(document).on("click", ".skip",function(){
+		var n = Number($('#wpnumber').val());
+		var t = Number(n -1);
+	    $('input[name=wpnumber]').val(t);
+		$('.down3').slideUp(200);
+		$('.down4').slideToggle(200);
+		$('.tabtitle3 span').removeClass("text-underline");
+		$('.tabtitle4 span').addClass("text-underline");
+		
+	});
 	$('.pd-register-submit').click(function(){
 		if(validateFun()==false){alert("please fill out all required fields *");return false;}
 		if ( $('.down22').find('.focuscss').length > 0 ){alert("please fill out all required fields *");return false;}
