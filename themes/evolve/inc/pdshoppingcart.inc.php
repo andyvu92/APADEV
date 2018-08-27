@@ -188,6 +188,7 @@ if(isset($_SESSION["UserId"])){
 <?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0)):?>
 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 left-content">
 	<?php   if(sizeof($products)!=0):?>
+	<input type="hidden" id="checkTerm" value="1">
 	<h1 class="SectionHeader">Summary of cart</h1>
 	<div class="brd-headling">&nbsp;</div>
 	
@@ -247,25 +248,25 @@ if(isset($_SESSION["UserId"])){
 	?>
 	</div>
 
-    <div class="flex-container flex-flow-column">
+    <div class="flex-container flex-flow-column" id="termc">
 		<div class="flex-cell">	
 			<span class="small-lead-heading">Terms & conditions</span>
 		</div>
 
 		<div class="flex-cell">
-			<input popup class="styled-checkbox" type="checkbox" id="accept1" <?php if($price!=0) echo " required";?>>
+			<input popup class="styled-checkbox" type="checkbox" id="accept1">
 			<label popup-target="PDTermsWindow" id="pd_terms_open" for="accept1">I accept the APA events terms and conditions, including the APA cancellation clause</label>
 		</div>
 
 		<?php if($tag==1): ?>
 		<div class="flex-cell">
-			<input class="styled-checkbox" type="checkbox" id="accept2" <?php if($price!=0) echo " required";?>>
+			<input class="styled-checkbox" type="checkbox" id="accept2">
 			<label for="accept2">I understand that I must have appropriate Professional Indemnity insurance current on the date/s of any APA course/workshop that I’m registered for.</label>
 		</div>
 
 		<?php endif; ?>
 		<div class="flex-cell">
-			<input class="styled-checkbox" type="checkbox" id="accept3" <?php if($price!=0) echo " required";?>>
+			<input class="styled-checkbox" type="checkbox" id="accept3">
 			<label for="accept3">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled. The APA recommends travelling participants purchase travel insurance to cover this.</label>
 		</div>
 	</div>
@@ -508,7 +509,7 @@ if(isset($_SESSION["UserId"])){
 			</div>
 		</div>
 		         
-		<form action="/pd/completed-purchase" method="POST">
+		<form action="/pd/completed-purchase" method="POST" id="PDShoppingcartForm">
 			<input type="hidden" name="POSTPRF" id="POSTPRF" value="">
 			<input type="hidden" name="TandC" id="TandC" value="0">
 			<input type="hidden" name="CardUsed" id="CardUsed" value="">
@@ -533,7 +534,7 @@ if(isset($_SESSION["UserId"])){
 				echo '<input type="hidden" name="totalNG" id="totalNG" value="'.$ngTotal.'">';
 			}
 			?>
-			<button class="placeorder" type="submit" value="PLACE YOUR ORDER">Place your order</button>
+			<a href="javascript:document.getElementById('PDShoppingcartForm').submit();" class="placeorder" type="submit" value="PLACE YOUR ORDER" id="PDPlaceOrder"><span class="dashboard-button-name">Place your order</span></a>
 			<!--a target="_blank" class="addCartlink">
 				<button class="placeorder" type="submit">PLACE YOUR ORDER</button>
 			</a-->
@@ -671,16 +672,14 @@ $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
 		}
 	});
 	
-	//function changeV() {
-	//	
-	//	if($("#accept1").is(":checked")) {
-	//		if($("#accept2").is(":checked")) {
-	//			if($("#accept3").is(":checked")) {
-	//				return "1";
-	//			}
-	//		}
-	//	}
-	//}
+	function changeV() {
+		
+		if($("#accept1").is(":checked") && $("#accept2").is(":checked") && $("#accept3").is(":checked")) {
+			return "1";
+			}
+		}
+		}
+	}
 } );
 
 </script>

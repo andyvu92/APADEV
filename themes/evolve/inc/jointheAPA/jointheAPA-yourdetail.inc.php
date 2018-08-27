@@ -2863,7 +2863,7 @@ if(isset($_GET['MT'])){
 
                     <div class="col-xs-6 col-md-6">
                         <label for="">Confirm password<span class="tipstyle"> *</span></label>
-                        <input type="password" class="form-control" id="Password" name="Password" value="" onchange="checkPasswordFunction(this.value)">
+                        <input type="password" class="form-control" id="Password" name="Password" value="" onkeyup="checkPasswordFunction(this.value)">
 						<div id="checkPasswordMessage"></div>
 					</div>  
 				

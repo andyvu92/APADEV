@@ -825,7 +825,7 @@
         }
 	  ?>
 	  <div id="registerMember">
-            <form action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" id="registerMemberForm" autocomplete="off">
+            <form action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" id="registerMemberForm">
 			    <input type="hidden" name="updateDetail">
 				<input type="hidden" name="updateNonMemberDetail">
 				<input type="hidden" name="meetingID" value="<?php echo $pd_detail['MeetingID'];?>"> 
@@ -1467,14 +1467,15 @@
 				<div class="row">
 					<div class="col-lg-6">
 						<label for="">Your password<span class="tipstyle">*</span></label>
-						<input type="password" class="form-control" id="newPassword" name="newPassword" required>
+						<input type="password" class="form-control" id="newPassword" name="newPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" title="Either 0 OR (8 chars minimum)" required>
 					</div>
 					
 					<div class="col-lg-6">
 						<label for="">Confirm password<span class="tipstyle">*</span></label>
-						<input type="password" class="form-control" id="Password" name="Password" value="" onchange="checkPasswordFunction(this.value)" required>
-					</div>
+						<input type="password" class="form-control" id="Password" name="Password" value="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" title="Either 0 OR (8 chars minimum)" onkeyup="checkPasswordFunction(this.value)" required>
 					<div id="checkPasswordMessage"></div>
+					</div>
+					
 				<script>
 					function checkPasswordFunction(Password) {
 						if($('#newPassword').val()!= Password){

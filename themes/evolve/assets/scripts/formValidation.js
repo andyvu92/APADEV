@@ -340,6 +340,12 @@ jQuery(document).ready(function($) {
 		$('.tabtitle4 span').addClass("text-underline");
 		
 	});
+	$('.PDPlaceOrder').click(function(){
+		if($('#checkTerm').val() == "1"){
+			if($('#accept1').val()!="1")  {$('#accept1').addClass("focuscss");alert("please fill out all required fields *");return false;}
+			if($('#accept2').val()!="1")  {$('#accept2').addClass("focuscss");alert("please fill out all required fields *");return false;}
+		}
+	});
 	$('.pd-register-submit').click(function(){
 		if(validateFun()==false){alert("please fill out all required fields *");return false;}
 		if ( $('.down22').find('.focuscss').length > 0 ){alert("please fill out all required fields *");return false;}
