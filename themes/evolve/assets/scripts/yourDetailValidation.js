@@ -226,5 +226,5 @@ jQuery(document).ready(function($) {
 		
 		}
 	});
-	 
+	
 });

@@ -577,7 +577,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<div class="row">
 							<div class="col-xs-12">
 								<span class="light-lead-heading cairo" style="font-weight: 200; margin-bottom: 18px;">Phone numbers:</span>
-								<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Home</span>
+								<span class="text-underline smaller-lead-heading" style="color: #000">Home</span>
 							</div>
 							<div class="col-xs-12 col-sm-3 col-md-6">
 								<label for="">Country</label>
@@ -605,17 +605,35 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<?php  $_SESSION['country'] =$country;?>
 							<div class="col-xs-4 col-sm-3 col-md-2">
 								<label for="">Area code</label>
-								<input type="text" class="form-control" name="area-code" <?php if (empty($details['Home-phone-areacode'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-areacode'].'"'; }?> maxlength="5">
+								<input type="number" class="form-control" id="area-code" onchange="areaCodeFunction(this.value)" name="area-code" <?php if (empty($details['Home-phone-areacode'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-areacode'].'"'; }?>>
+							    <div id="areaMessage"></div>
 							</div>
+							<script>
+								function areaCodeFunction(ps){
+									if($('#area-code').val().length >= 6){
+										$('#areaMessage').html("no more than 5 characters");
+										$( "#area-code" ).focus();
+										$("#area-code").css("border", "1px solid red");
+										$("#your-details-submit-button").addClass("stop");
+										
+									}
+									else{
+										$('#areaMessage').html("");
+										$( "#area-code" ).blur();
+										$("#area-code").css("border", "");
+										$("#your-details-submit-button").removeClass("stop");
+									}					
+								}
+							</script>
 							<div class="col-xs-8 col-sm-6 col-md-4">
 								<label for="">Phone number<span class="tipstyle"> *</span></label>
-								<input type="number" class="form-control" name="phone-number" pattern="[0-9]{10}" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?> oninput="this.value = Math.abs(this.value)" min="0">
+								<input type="number" class="form-control" name="phone-number" pattern="[0-9]{10}" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?> >
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-xs-12">
-								<span class="eventtitle1 text-underline smaller-lead-heading" style="color: #000">Mobile</span>
+								<span class="text-underline smaller-lead-heading" style="color: #000">Mobile</span>
 							</div>
 							<div class="col-xs-12 col-sm-3 col-md-6">
 								<label for="">Country</label>
@@ -650,7 +668,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>-->
 							<div class="col-xs-8 col-sm-6 col-md-4">
 								<label for="">Mobile number<span class="tipstyle"> *</span></label>
-								<input type="number" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  oninput="this.value = Math.abs(this.value)" min="0">
+								<input type="number" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>>
 							</div>
 						</div>
 
@@ -1374,7 +1392,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							</div>
 							<div class="col-xs-6 col-md-3">
 								<label for="">Phone number<span class="tipstyle">*</span></label>
-								<input type="number" class="form-control" name="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  oninput="this.value = Math.abs(this.value)" min="0">
+								<input type="number" class="form-control" name="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>>
 							</div>
 							<!--<div class="col-xs-6 col-md-3">
 								<label for="">Extention Number</label>
@@ -1873,7 +1891,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				</div>
 				<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>-->
 			</div>
-		<div class="col-xs-12" id="your-details-button">   <button type="submit" id="your-details-submit-button" class="accet-button"><span class="dashboard-button-name">Submit</span></button></div>
+		<div class="col-xs-12" id="your-details-button">   <button type="submit" id="your-details-submit-button" class=""><span class="dashboard-button-name">Submit</span></button></div>
 	</form>
 		<form id="changePasswordForm">
 			<div class="down7" style="display:none;" >

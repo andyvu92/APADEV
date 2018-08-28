@@ -132,7 +132,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 
 <div class="col-xs-6 col-md-3">
         <label for="">Phone number<span class="tipstyle"> *</span></label>
-        <input type="number" class="form-control" name="Wphone'.$i.'" placeholder="Phone number" oninput="this.value = Math.abs(this.value)" min="0">
+        <input type="number" class="form-control" name="Wphone'.$i.'" placeholder="Phone number">
 </div>
 
 

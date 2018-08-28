@@ -844,13 +844,14 @@ if (isset($_SESSION['UserId'])):
 ?>
                       <div class="col-xs-6 col-md-3">
                             <label for="">Area code</label>
-                            <input type="text" class="form-control" name="area-code" placeholder='Area code'<?php
+                            <input type="number" class="form-control" name="area-code" id="area-code" onchange="areaCodeFunction(this.value)" placeholder='Area code'<?php
     if (empty($details['Home-phone-areacode'])) {
         echo "";
     } else {
         echo 'value="' . $details['Home-phone-areacode'] . '"';
     }
 ?>  maxlength="5">
+						<div id="areaMessage"></div>
                         </div>
                         <div class="col-xs-12 col-md-3">
                             <label for="">Phone number<span class="tipstyle"> *</span></label>
@@ -860,7 +861,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['Home-phone-number'] . '"';
     }
-?>  oninput="this.value = Math.abs(this.value)" min="0">
+?>>
                         </div>
                     </div>
 
@@ -914,7 +915,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['Mobile-number'] . '"';
     }
-?>  oninput="this.value = Math.abs(this.value)" min="0">
+?>  >
                         </div>
                     </div>
                     
@@ -1808,7 +1809,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
         } else {
             echo 'value="' . $details['Workplaces'][$key]['Wphone'] . '"';
         }
-?>  oninput="this.value = Math.abs(this.value)" min="0">
+?>>
                             </div>
                             <!--<div class="col-xs-6 col-md-3">
                                 <label for="">Extention Number</label>
@@ -2555,11 +2556,12 @@ if(isset($_GET['MT'])){
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <label for="">Area code</label>
-                                <input type="text" class="form-control" name="area-code" maxlength="5">
+                                <input type="number" class="form-control" id="area-code" onchange="areaCodeFunction(this.value)" name="area-code" placeholder="Area code">
+							    <div id="areaMessage"></div>
                             </div>
                             <div class="col-xs-12 col-md-3">
                                 <label for="">Phone number<span class="tipstyle"> *</span></label>
-                                <input type="number" class="form-control" name="phone-number" oninput="this.value = Math.abs(this.value)" min="0">
+                                <input type="number" class="form-control" name="phone-number">
                             </div>
                         </div>
 
@@ -2596,7 +2598,7 @@ if(isset($_GET['MT'])){
                             </div>-->
                             <div class="col-xs-12 col-md-3">
                                 <label for="">Mobile number<span class="tipstyle"> *</span></label>
-                                <input type="number" class="form-control" name="Mobile-number" oninput="this.value = Math.abs(this.value)" min="0">
+                                <input type="number" class="form-control" name="Mobile-number">
                             </div>
                         </div>
 
@@ -3328,5 +3330,22 @@ jQuery(document).ready(function() {
     $('div[aria-describedby=confirmDelete]').fadeIn();
   });
 });
+</script>
+<script>
+	function areaCodeFunction(ps){
+		if($('#area-code').val().length >= 6){
+			$('#areaMessage').html("no more than 5 characters");
+			$( "#area-code" ).focus();
+			$("#area-code").css("border", "1px solid red");
+			$(".join-details-button1").addClass("stop");
+			
+		}
+		else{
+			$('#areaMessage').html("");
+			$( "#area-code" ).blur();
+			$("#area-code").css("border", "");
+			$(".join-details-button1").removeClass("stop");
+		}					
+	}
 </script>
 <?php logRecorder();  ?> 
