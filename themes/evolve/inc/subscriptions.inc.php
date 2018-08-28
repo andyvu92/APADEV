@@ -12,7 +12,7 @@ $background = getBackgroundImage($userID);
 // Response -
 // National Group ID, National Group title
 $sendData["UserID"] = $_SESSION['UserId'];
-$nationalGroups = GetAptifyData("20", $sendData);
+//$nationalGroups = GetAptifyData("20", $sendData);
 //echo "national Groups:<br>";
 //print_r($nationalGroups);
 
@@ -36,7 +36,7 @@ $nationalGroups = GetAptifyData("20", $sendData);
 // UserID
 // Response -
 // List of Fellowship ID and its titles.
-$Fellows = GetAptifyData("22", $sendData);
+//$Fellows = GetAptifyData("22", $sendData);
 //echo "Fellow ships:<br>";
 //print_r($Fellows);
 /* We may use this as "Session" data and won't need to load. */
@@ -71,6 +71,7 @@ if(count($PostArray) == 0) { // GET data
 		$ArrayRe["Subscribed"] = $Subs["Subscribed"];
 		array_push($SubListAll, $ArrayRe);
 	}
+	/*
 	$nationalGroup = $nationalGroups["results"];
 	foreach($nationalGroup as $Subs) {
 		$ArrayRe["SubscriptionID"] = $Subs["SubscriptionID"];
@@ -85,6 +86,7 @@ if(count($PostArray) == 0) { // GET data
 		$ArrayRe["Subscribed"] = 1;
 		array_push($SubListAll, $ArrayRe);
 	}
+	*/
 } else { // send & get updated data
 	$ArrayReturn = Array();
 	$ArrayReturn["UserID"] = $_SESSION['UserId'];
@@ -106,6 +108,7 @@ if(count($PostArray) == 0) { // GET data
 		$ArrayRe["Subscription"] = $Subs["Consent"];
 		array_push($SubListAll, $ArrayRe);
 	}
+	/*
 	$nationalGroup = $nationalGroups["results"];
 	foreach($nationalGroup as $Subs) {
 		$ArrayUpdate["SubscriptionID"] = $Subs["SubscriptionID"];
@@ -144,6 +147,7 @@ if(count($PostArray) == 0) { // GET data
 		}
 		array_push($subArray, $ArrayUpdate);
 	}
+	*/
 	$ArrayReturn["Subscriptions"] = $subArray;
 	$ArrayReturn["Consents"] = $consArray;
 	echo "<br /><br />";

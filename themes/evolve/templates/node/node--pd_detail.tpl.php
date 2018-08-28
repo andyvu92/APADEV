@@ -1714,7 +1714,14 @@
 					</div>
 				</div>
 				<span class="session-time">
-					<?php echo $timeOutput;//$edate[1]."-".$edate[1]; ?> AEST
+					<?php 
+					$timeZone = "AEST";
+					if($pd_detail['State'] == "NT" || $pd_detail['State'] == "SA") {
+						$timeZone = "ACST";
+					} elseif($pd_detail['State'] == "WA") {
+						$timeZone = "AWST";
+					} ?>
+					<?php echo $timeOutput." ".$timeZone;//$edate[1]."-".$edate[1]; ?>
 				</span>
 			</div>
 
