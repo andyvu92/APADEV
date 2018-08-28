@@ -435,6 +435,7 @@ jQuery(document).ready(function($) {
 	});
 	var PRF = $("#PRF").val();
 	$( "#POSTPRF").val(PRF);
+	$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
 	$( "#PRF" ).change(function() {
 		if(($('#PRF').val()=="Other")){
 			$( "#PRFOther").removeClass('display-none');
@@ -442,8 +443,10 @@ jQuery(document).ready(function($) {
 		}
 		else{
 			$( "#PRFOther").addClass('display-none');
+			$( "#PRFOther").val('');
 			var PRF = $("#PRF").val();
 			$( "#POSTPRF").val(PRF);
+			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
 		}
 		//var tempTotal = Number($('#totalPayment').html());
 		//var prf = Number($('#PRF').val());
@@ -454,6 +457,7 @@ jQuery(document).ready(function($) {
 	$( "#PRFOther" ).blur(function() {
 		var PRF = $("#PRFOther").val();
 		$( "#POSTPRF").val(PRF);
+		$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
 	});
 	
 	// HIDE / SHOW PAYMENT CARD FORM 
