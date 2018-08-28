@@ -5,6 +5,10 @@ include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID =0; }
 $background = getBackgroundImage($userID);
 /* get background image****/ 
+/*****get current url*****/
+$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+$url= $link.$_SERVER['REQUEST_URI']; 
+/*****get current url*****/
 if(isset($_POST['step1'])) {
 	$postData = array();
 	if(isset($_SESSION['UserId'])) {$postData['userID'] = $_SESSION['UserId'];}
@@ -223,6 +227,9 @@ if(isset($_POST['step1'])) {
 	
 	$test = GetAptifyData("5", $postData);
 	unset($_SESSION["Regional-group"]);
+	if(isset($_GET['Goback']) && ($_GET['Goback']=="PD")){
+		header("Location:".$link."/pd/pd-shopping-cart");	
+	}
 	/*General function: save data to APA shopping cart database;*/
 	/*Parameters: $userID, $productID,$type;*/
 	/*save product data including membership type product, national group product, fellowship & PRF product*/
@@ -403,7 +410,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<li><a class="event4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
 					</ul>
 				</div>
-			<form action="your-details" name="your-details" method="POST" novalidate>
+			<form action="<?php echo $url;?>" name="your-details" method="POST" novalidate>
 			    <input type="hidden" name="step1" value="1"/>
 				<input type="hidden" name="Specialty" value="<?php echo$details['Specialty'];?>">
 				<div class="down1">
