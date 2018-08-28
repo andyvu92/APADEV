@@ -529,7 +529,9 @@
 				<div class="pd-description">
 					<?php 
 					if (!empty($pd_detail['Description'])){
-						if (strlen($pd_detail['Description']) > 600){
+						if($pd_detail['Typeofpd'] == "Lecture") {
+							echo $pd_detail['Description'];
+						} elseif (strlen($pd_detail['Description']) > 600){
 							echo '<div class="readmore">';
 							echo $pd_detail['Description'];
 							echo '</div>';
@@ -616,7 +618,7 @@
 					<span class="presenters-bio-icon large-icon"></span>
 				</div>
 				<div class="right-content presenters-bio">
-					<h2 class="blue-heading">Presenter's bio</h2>
+					<h2 class="blue-heading">Presenters</h2>
 					<p>
 						<?php 
 						foreach($pd_detail['Presenter'] as $bios) {
@@ -1776,6 +1778,19 @@
 				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
 				$Now = strtotime(date('d-m-Y'));
 				$fullStatus = false;
+				$Div = $Totalnumber - $Enrollednumber;
+				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+					echo "Closed";  
+					$fullStatus = true;
+				} elseif($Div <= 5){
+					echo "Almost Full"; 
+				} elseif($Div==0){
+					echo "Full"; 
+					$fullStatus = true;
+				} elseif($Div >= 5){
+					echo "Open"; 
+				}
+				/* for 10% or less logic 
 				$Div = $Enrollednumber/$Totalnumber;
 				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";  
@@ -1787,7 +1802,7 @@
 					$fullStatus = true;
 				} elseif($Div<0.9){
 					echo "Open"; 
-				}
+				} */
 		 		?>
 			</span>
 
@@ -1911,13 +1926,16 @@
 				$Totalnumber = doubleval($pd_detail['Totalnumber']);
 				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
 				$Now = strtotime(date('d-m-Y'));
+				$Div = $Totalnumber - $Enrollednumber;
 				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";  
-				} elseif($Enrollednumber/$Totalnumber>=0.9 && $Enrollednumber/$Totalnumber<1){
+					$fullStatus = true;
+				} elseif($Div <= 5){
 					echo "Almost Full"; 
-				} elseif(($Totalnumber-$Enrollednumber)==0){
-					echo "Full";
-				} elseif(($Enrollednumber/$Totalnumber)<0.9){
+				} elseif($Div==0){
+					echo "Full"; 
+					$fullStatus = true;
+				} elseif($Div >= 5){
 					echo "Open"; 
 				}
 		 		?>
@@ -1971,7 +1989,7 @@
 				<span class="presenters-bio-icon large-icon"></span>
 			</div>
 			<div class="right-content">
-				<h2 class="blue-heading">Presenter's bio</h2>
+				<!--h2 class="blue-heading">Presenters</h2-->
 				<p>
 					<?php 
 					foreach($pd_detail['Presenter'] as $bios) {
