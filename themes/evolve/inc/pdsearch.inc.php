@@ -17,7 +17,7 @@
 ?>
 <form action="pd-search?search-result" method="POST">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<h2 class="light-lead-heading">Explore our Professional Development options below:</h2>
+		<h2 class="light-lead-heading">Explore our professional development options below:</h2>
 	</div>
 	<div class="col-xs-12">
 		<span>Please note: For online learning visit <a href="https://cpd4physios.com.au/" target="_blank"><strong>cpd4physios</strong></a></span>

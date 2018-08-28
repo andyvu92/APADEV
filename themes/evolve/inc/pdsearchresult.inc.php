@@ -27,9 +27,9 @@ if(isset($_SESSION['UserID'])) { $sendData["UserID"] = $_SESSION['UserId'];
 if(isset($_POST["Radius"])) { $request["Radius"] = $_POST["Radius"];
 } else { $request["Radius"] = ""; }
 if(isset($_POST["Keywords"]) || isset($_GET["Keywords"])) {	
-	if(isset($_POST["Keywords"])) {$request["Keywords"] = $_POST["Keywords"];}
-	else {$request["Keywords"] = $_GET["Keywords"];}
-} else { $request["Keywords"] = ""; }
+	if(isset($_POST["Keywords"])) {$request["Keyword"] = $_POST["Keywords"];}
+	else {$request["Keyword"] = $_GET["Keywords"];}
+} else { $request["Keyword"] = ""; }
 if(isset($_POST["Typeofpd"])) {	$request["Typeofpd"] = $_POST["Typeofpd"];
 } else { $request["Typeofpd"] = ""; }
 if(isset($_POST["Nationalgp"]) || isset($_GET["Nationalgp"])) {	
