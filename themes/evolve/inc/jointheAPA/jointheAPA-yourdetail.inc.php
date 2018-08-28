@@ -2858,17 +2858,33 @@ if(isset($_GET['MT'])){
 				<div class="row">
 					<div class="col-xs-6 col-md-6">
                         <label for="">Your password<span class="tipstyle"> *</span></label>
-                        <input type="password" class="form-control" id="newPassword" name="newPassword">
-                    </div>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="8 characters minimum" onkeyup="PasswordFunction(this.value)">
+						<div id="PasswordMessage"></div>
+					</div>
 
                     <div class="col-xs-6 col-md-6">
                         <label for="">Confirm password<span class="tipstyle"> *</span></label>
-                        <input type="password" class="form-control" id="Password" name="Password" value="" onkeyup="checkPasswordFunction(this.value)">
+                        <input type="password" class="form-control" id="Password" name="Password" value="" placeholder="8 characters minimum" onkeyup="checkPasswordFunction(this.value)">
 						<div id="checkPasswordMessage"></div>
 					</div>  
 				
 				</div>
                 <script>
+					function PasswordFunction(ps){
+						if($('#newPassword').val().length <= 8){
+							$('#PasswordMessage').html("8 characters minimum");
+							$( "#newPassword" ).focus();
+							$("#newPassword").css("border", "1px solid red");
+							$(".join-details-button2").addClass("display-none");
+							
+						}
+						else{
+							$('#PasswordMessage').html("");
+							$( "#newPassword" ).blur();
+							$("#newPassword").css("border", "");
+							$(".join-details-button2").removeClass("display-none");
+						}					
+					}
                     function checkPasswordFunction(Password) {
                         if($('#newPassword').val()!= Password){
                             $('#checkPasswordMessage').html("These passwords do not match");

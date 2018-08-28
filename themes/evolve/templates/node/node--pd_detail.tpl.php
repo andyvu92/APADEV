@@ -1407,7 +1407,7 @@
 					<div class="row">
 					<div class="col-lg-6">
 						<label for="">User ID (Your email address)<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)" required>
+						<input type="email" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)" required>
 					<div id="checkMessage" class="display-none">This email address matches one that’s already registered, please use a different one or <a class="info" data-target="#loginAT" data-toggle="modal" type="button">
 				    <i class="Log-in">&nbsp;</i>login 
 				    </a>to your existing account.</div>
@@ -1442,7 +1442,7 @@
 					</div>
 					<div class="col-lg-6">
 						<label for="">Confirm your email address<span class="tipstyle">*</span></label>
-						<input type="text" class="form-control" name="CMemberid" id="CMemberid" value="" onchange="confirmEmailFunction(this.value)" required>
+						<input type="email" class="form-control" name="CMemberid" id="CMemberid" value="" onchange="confirmEmailFunction(this.value)" required>
 					<div id="confirmMessage"></div>
 					</div>
 					<script>
@@ -1466,18 +1466,34 @@
 
 				<div class="row">
 					<div class="col-lg-6">
-						<label for="">Your password<span class="tipstyle">*</span></label>
-						<input type="password" class="form-control" id="newPassword" name="newPassword" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" title="Either 0 OR (8 chars minimum)" required>
+						<label for="">Your password<span class="tipstyle">*</span></label> 
+						<input type="password" class="form-control" id="newPassword" name="newPassword" pattern=".{8,}" required title="8 characters minimum" placeholder="8 characters minimum" onkeyup="PasswordFunction(this.value)">
+						<div id="PasswordMessage"></div>
 					</div>
 					
 					<div class="col-lg-6">
 						<label for="">Confirm password<span class="tipstyle">*</span></label>
-						<input type="password" class="form-control" id="Password" name="Password" value="" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" title="Either 0 OR (8 chars minimum)" onkeyup="checkPasswordFunction(this.value)" required>
+						<input type="password" class="form-control" id="Password" name="Password" value="" pattern=".{8,}" required title="8 characters minimum" placeholder="8 characters minimum" onkeyup="checkPasswordFunction(this.value)" required>
 					<div id="checkPasswordMessage"></div>
 					</div>
 					
 				<script>
-					function checkPasswordFunction(Password) {
+				    function PasswordFunction(ps){
+						if($('#newPassword').val().length <= 8){
+							$('#PasswordMessage').html("8 characters minimum");
+							$( "#newPassword" ).focus();
+							$("#newPassword").css("border", "1px solid red");
+							$(".join-details-button2").addClass("display-none");
+							
+						}
+						else{
+							$('#PasswordMessage').html("");
+							$( "#newPassword" ).blur();
+							$("#newPassword").css("border", "");
+							$(".join-details-button2").removeClass("display-none");
+						}					
+					}
+				   	function checkPasswordFunction(Password) {
 						if($('#newPassword').val()!= Password){
 							$('#checkPasswordMessage').html("Your passwords do not match");
 							$( "#Password" ).focus();
