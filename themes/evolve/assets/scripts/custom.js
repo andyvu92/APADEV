@@ -1383,22 +1383,17 @@ $(document).on('click', '.pd-spcart-delete a', function(){
 	});
 	
 });
-/*
-$( window ).on( "load", function() {
-	console.log( "window loaded" );
-	$('#workplaceblocks [id^=workplace] input[type="checkbox"]').click(function(){
-        if($(this).is(":checked")){
-        $(this).attr('checked', true);
-           $(this).val('True');
-		
-		  }
-         else{
-         
-          $(this).removeAttr('checked');
-          $(this).val('False');
-		  
-         }
-		
-    });
+
+// RETURN USERS GET PASSWORD RESET
+jQuery(document).ready(function(){
+	$('#return-users').on('click', function(){
+		$('#main-forgot-pw-form .current-users').hide();
+		$('#main-forgot-pw-form .return-users').show();
+		$('.create-account').hide();
+	});
+	$('.forgot-password [data-form="#main-forgot-pw-form"]').on('click', function(){
+		$('#main-forgot-pw-form .current-users').show();
+		$('#main-forgot-pw-form .return-users').hide();
+		$('.create-account').show();
+	});
 });
-*/
