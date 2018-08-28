@@ -102,6 +102,7 @@ lessc[] = lessc/Andy.less
 lessc[] = lessc/about-us.less
 lessc[] = lessc/initial.less
 lessc[] = lessc/popups.less
+lessc[] = lessc/join-national-group.less
 
 
 scripts[] = assets/scripts/evolve.js
@@ -115,6 +116,7 @@ scripts[] = assets/scripts/Distance.js
 scripts[] = assets/scripts/FindPhysio.js
 scripts[] = assets/scripts/Eddy.js
 scripts[] = assets/scripts/popups.js
+scripts[] = assets/scripts/yourDetailValidation.js
 
 
 settings[body] = 'Open Sans:regular:14px:24px'

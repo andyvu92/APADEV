@@ -1116,7 +1116,7 @@
 						<input type="text" class="form-control" name="area-code" <?php if (empty($details['Home-phone-areacode'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-areacode'].'"'; }?> maxlength="5">
 					</div>
 					<div class="col-lg-5">
-						<label for="">Phone number</label>
+						<label for="">Phone number<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  >
 					</div>
 				</div>
@@ -1152,17 +1152,17 @@
 				<div class="row question-boxes">
 				   <div class="col-xs-12">
 				  <input class="styled-checkbox" type="checkbox" name="Registrationboard" id="Registrationboard"  value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Registrationboard'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Registrationboard']=="1") echo 'checked="checked"';?>>
-				  <label for="Registrationboard">I am registered with my profession's registration board.</label>
+				  <label for="Registrationboard">I am registered with my profession's registration board.<span class="tipstyle"> *</span></label>
 				   </div>
 
 				   <div class="col-xs-12">
 					<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Professionalinsurance'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Professionalinsurance']=="1") echo 'checked="checked"';?>>
-					<label for="Professional-insurance">I have current and adequate professional indemnity insurance.</label>
+					<label for="Professional-insurance">I have current and adequate professional indemnity insurance.<span class="tipstyle"> *</span></label>
 				   </div>
 
 				   <div class="col-xs-12">
 				  <input class="styled-checkbox" type="checkbox" name="Professionalbody" id="Professionalbody" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Professionalbody'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Professionalbody']=="1") echo 'checked="checked"';?>>
-				  <label for="Professionalbody">I am a member of my professional body.</label>
+				  <label for="Professionalbody">I am a member of my professional body.<span class="tipstyle"> *</span></label>
 				   </div>
 				</div>
 
@@ -1327,8 +1327,8 @@
                 </div>-->
 				<div class="row question-boxes"> 
 					  <div class="col-lg-12" style="margin: 20px 0;">
-						<input class="styled-checkbox" type="checkbox" name="Confirm-policy" id="jprivacy-policy">
-						<label for="jprivacy-policy" id="privacypolicyl">Yes. I have read the APA Privacy policy</label>
+						<input class="styled-checkbox" popup type="checkbox" name="Confirm-policy" id="jprivacy-policy">
+						<label for="jprivacy-policy" id="privacypolicyl" popup-target="privacypolicyWindow">Yes. I have read the APA Privacy policy<span class="tipstyle"> *</span></label>
 					  </div>
 
 					  <div class="col-lg-12">
@@ -1521,7 +1521,7 @@
 					}
 				</script>
 			    </div>
-					<div class="col-xs-12"><span class="light-lead-heading cairo">Residential address:</span></div>				
+					<div class="col-xs-12 none-padding"><span class="light-lead-heading cairo">Residential address:</span></div>				
 					<div class="row">
 						<div class="col-xs-12">
 						   <label for="">Building name</label>
@@ -1597,7 +1597,7 @@
                 	
 				
             </div>
-			<div class="col-lg-12">
+			<div class="col-lg-12 none-padding">
 				<button class="accent-btn" type="submit" value="Submit">Submit</button>
 			</div>
 				<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4" style="width: 100%; margin-top: 10px;"><span class="dashboard-button-name">Submit</span></a></div>-->
@@ -1825,13 +1825,14 @@
 				?>
 			</span>
 
-			<span class="small-heading">Your registration status:</span>
 			<span>
 				<?php 
 				if(isset($userId)&& ($userId!="0")){
 					if($pd_detail['AttendeeStatus'] > 0) {
+						echo '<span class="small-heading">Your registration status:</span>';
 						echo "Registered";
 					} else {
+						echo '<span class="small-heading">Your registration status:</span>';
 						echo "Not registered";
 					}
 					/*
@@ -1844,8 +1845,7 @@
 					*/
 				}
 				else{
-					echo '<a id="login" data-target="#loginAT" data-toggle="modal">Login to see your status</a>';
-					//echo '<a class="info" data-target="#loginAT" data-toggle="modal" type="button">Login to see your status</a>';
+
 				}
 				?>
 			</span>
@@ -1854,6 +1854,16 @@
 		<div class="session-cta <?php echo $pd_detail['Typeofpd']; ?>">
 			<!--<a class="add-to-wishlist"><span>Add to Wishlist</span></a>-->
 			<!--<a class="add-to-cart"><span>Add to Card</span></a>-->
+			<?php 
+				if(isset($userId)&& ($userId!="0")){
+				}
+				else{
+					echo '<div id="login-section">';
+					echo '<a id="login" href="#" data-target="#loginAT" data-toggle="modal">Login to register</a>';
+					echo "<span>Don't have an account?</span><span class='small-heading'><a id='signup' popup-target='signupWebUser' href='#'>Sign up now</a></span>";
+					echo '</div>';
+				}
+				?>
 			<?php 
 			if(isset($_SESSION["UserId"])){
 				//$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
@@ -1979,7 +1989,7 @@
 					*/
 				}
 				else{
-					echo '<a class="member-login" id="login">Login to see your status</a>';
+					echo '<a class="member-login" id="login">Login to register</a>';
 					//echo '<a class="info" data-target="#loginAT" data-toggle="modal" type="button">Login to see your status</a>';
 				}
 				?>
@@ -2086,15 +2096,15 @@
   
 </div> 
 <div id="privacypolicyWindow" style="display:none;">
+	<span class="close-popup"></span>
 	<div class="modal-header">
-		<button type="button" class="apa_policy_button close" data-dismiss="modal">×</button>
 		<h4 class="modal-title">Australian Physiotherapy Association Privacy Policy</h4>
 	</div>
 	
 	<div class="modal-body">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
 	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>
-	<h5 class="doc-header">Our Commitment to Your Privacy</h5>
+	<h4 class="doc-header">Our Commitment to Your Privacy</h4>
 
 
 
@@ -2102,7 +2112,7 @@
 
 
 
-<h5 class="doc-header">Your information and Your Right to Privacy</h5>
+<h4 class="doc-header">Your information and Your Right to Privacy</h4>
 
 
 
@@ -2156,7 +2166,7 @@ The APA will under no circumstances sell, trade or rent any personal information
 
 
 
-<h5 class="doc-header">Collecting Information</h5>
+<h4 class="doc-header">Collecting Information</h4>
 
 <p>The APA may collect, use, store and transfer different kinds of personal data about you. It collects and process personal data about you when you:</p>
 
@@ -2201,7 +2211,7 @@ The APA will under no circumstances sell, trade or rent any personal information
 
 
 
-<h5 class="doc-header">Access to Personal Information</h5>
+<h4 class="doc-header">Access to Personal Information</h4>
 
 
 
@@ -2213,7 +2223,7 @@ The APA will under no circumstances sell, trade or rent any personal information
 
 
 
-<h5 class="doc-header">Opt-Out</h5>
+<h4 class="doc-header">Opt-Out</h4>
 
 <p>By choosing to register on the APA web site or as a member of the APA, you may receive information from the APA about membership, APA services, partner information and offers. The APA uses this method to communicate quickly with you. You have the right to refuse inclusion on a mailing list. You can make a request to remove your email address from a mailing list by contacting the privacy officer at <a target="_self" style="text-decoration: underline; color: #000" href="mailto:privacy@physiotherapy.asn.au">privacy@physiotherapy.asn.au</a>.</p>
 
@@ -2230,7 +2240,7 @@ The APA will under no circumstances sell, trade or rent any personal information
 
 
 
-<h5 class="doc-header">Cookies</h5>
+<h4 class="doc-header">Cookies</h4>
 
 <p>
 As part of the normal operation of this site, your internet browser will be sent a "cookie" (a temporary internet file). This cookie enhances the site's functionality with features such as membership logon and electronic ordering. By itself, this cookie can only identify your computer to APA’s server; it is not used to identify you personally.</p>
@@ -2240,7 +2250,7 @@ Your personal password to access the APA website protects your privacy. We recom
 
 
 
-<h5 class="doc-header">Change of Purpose</h5>
+<h4 class="doc-header">Change of Purpose</h4>
 
 
 
@@ -2250,7 +2260,7 @@ Your personal password to access the APA website protects your privacy. We recom
 
 <p>From time to time, the APA may decide to collect different kinds of information. When this occurs, the APA will update this privacy page.</p>
 
-<h5 class="doc-header">Privacy Enquires</h5>
+<h4 class="doc-header">Privacy Enquires</h4>
 
 
 
@@ -2258,19 +2268,19 @@ Your personal password to access the APA website protects your privacy. We recom
 
 
 
-<h5 class="doc-header">APA Membership</h5>
+<h4 class="doc-header">APA Membership</h4>
 
 <p>If you decide to become a member of the APA, and we hope that you do, the APA will ask you for additional personal details. You may also opt to provide the APA with more information such as special interest areas you may have where you are employed and your date of birth. Relevant information is disclosed to the public on the internet via the APA's 'Find a Physio' online searchable database only. You must approve the use of your details on this database. Whether you decide to use this service is your choice.</p>
 
-<h5 class="doc-header">Security</h5>
+<h4 class="doc-header">Security</h4>
 
 <p>Your information is stored on the APA's server located in a secure data housing facility. While, it is important to recognise that "perfect security" does not exist on the internet, the APA is committed to using industry standard mechanisms to safeguard the confidentiality of your personal information such as firewalls and Secure Socket Layers.&nbsp;&nbsp;</p>
 
-<h5 class="doc-header">Credit Card Information</h5>
+<h4 class="doc-header">Credit Card Information</h4>
 
 <p>The APA does not permanently store credit card information anywhere on this site.&nbsp;&nbsp;</p>
 
-<h5 class="doc-header">APA Members Privacy</h5>
+<h4 class="doc-header">APA Members Privacy</h4>
 
 <p>The APA has a strong commitment to protecting your privacy and ensuring the confidentiality and security of personal information provided to the APA by you. As an organisation with an annual turnover of more than $3 million, the APA is required to comply with the Privacy Act 1988 as amended by the Privacy Amendment (Enhancing Privacy Protection) Act 2012 which came into effect in March 2014.<br />
 &nbsp;<br />
@@ -2290,7 +2300,7 @@ You have the right to access the personal information about yourself held by the
 
 
 
-<h5 class="doc-header">Consent</h5>
+<h4 class="doc-header">Consent</h4>
 
 
 
@@ -2298,7 +2308,7 @@ You have the right to access the personal information about yourself held by the
 
 
 
-<h5 class="doc-header">Contact Us</h5>
+<h4 class="doc-header">Contact Us</h4>
 
 
 <p>Please do not hesitate to contact us if you have a concern or issue in relation to how we collect, store, use or disclose your personal information.</p>
@@ -2343,13 +2353,13 @@ Facsimile: (03) 9092 0899</p>
 		<label class="apa_policy_button" for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label>
 
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none" id="disagreeInstallmentDescription"> 
-         Please agree to the APA Installment Policy to continue with your membership
-	</div>
+
 </div>
+	
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default apa_policy_button" id="installment_policy_button">Submit</button>	
-	</div>	
+		<a id="non-member-disagreepd" class="disagree-btn" href="#" >Disagree</a>
+		<a id="non-member-privacypolicy" class="agree-btn" href="#" >Agree</a>
+	</div>
 </div>
 
 <!-- OVERLAY / LOADING SCREEN -->

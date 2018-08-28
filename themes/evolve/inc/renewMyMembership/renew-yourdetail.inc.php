@@ -493,11 +493,29 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<?php  $_SESSION['country'] =$country;?>
 					<div class="col-xs-6 col-md-3">
 						<label for="">Area code</label>
-						<input type="text" class="form-control" name="area-code" <?php if (empty($details['Home-phone-areacode'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-areacode'].'"'; }?>  maxlength="5">
+						<input type="number" class="form-control" id="area-code" onchange="areaCodeFunction(this.value)" name="area-code" <?php if (empty($details['Home-phone-areacode'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-areacode'].'"'; }?>>
+						<div id="areaMessage"></div>
 					</div>
+					<script>
+						function areaCodeFunction(ps){
+							if($('#area-code').val().length >= 6){
+								$('#areaMessage').html("no more than 5 characters");
+								$( "#area-code" ).focus();
+								$("#area-code").css("border", "1px solid red");
+								$(".join-details-button1").addClass("stop");
+								
+							}
+							else{
+								$('#areaMessage').html("");
+								$( "#area-code" ).blur();
+								$("#area-code").css("border", "");
+								$(".join-details-button1").removeClass("stop");
+							}					
+						}
+					</script>
 					<div class="col-xs-12 col-md-6">
 						<label for="">Phone number<span class="tipstyle"> *</span></label>
-						<input type="number" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  oninput="this.value = Math.abs(this.value)" min="0">
+						<input type="number" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>>
 					</div>
 				</div>
 				
@@ -536,7 +554,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>-->
 					<div class="col-xs-12 col-md-6">
 						<label for="">Mobile number<span class="tipstyle"> *</span></label>
-						<input type="number" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>  oninput="this.value = Math.abs(this.value)" min="0">
+						<input type="number" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>>
 					</div>
 				</div>
 
@@ -1085,7 +1103,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 					<div class="col-xs-6 col-md-3">
 						<label for="">Phone number<span class="tipstyle"> *</span></label>
-						<input type="number" class="form-control" name="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>  oninput="this.value = Math.abs(this.value)" min="0">
+						<input type="number" class="form-control" name="Wphone<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wphone'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wphone'].'"'; }?>>
 					</div>
 
 					<!--<div class="col-xs-6 col-md-3">

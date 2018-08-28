@@ -393,7 +393,7 @@ if(isset($_SESSION["UserId"])){
 		<div class="row">
 			<div class="col-lg-12">
 			<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-			<input type="text" class="form-control"  name="Expirydate" placeholder="mmyy(eg: 0225)" required maxlength="4" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
+			<input type="text" class="form-control"  name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
@@ -450,7 +450,7 @@ if(isset($_SESSION["UserId"])){
 		<div class="row">
 			<div class="col-lg-12">
 			<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-			<input type="text" class="form-control"  name="Expirydate" placeholder="mmyy(eg: 0225)" required maxlength="4" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
+			<input type="text" class="form-control"  name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
 			</div>
 		</div>
 		<div class="row">

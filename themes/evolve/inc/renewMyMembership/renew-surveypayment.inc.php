@@ -360,7 +360,7 @@ if(isset($_POST['step2-1'])) {
 
 			<div class="col-xs-6 col-sm-3">
 				<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
+				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" maxlength="4">
 			</div>
 
 			<div class="col-xs-6 col-sm-3">
@@ -368,10 +368,10 @@ if(isset($_POST['step2-1'])) {
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 			</div>
 		</div>
-		<div class="col-xs-12">
+		<!--<div class="col-xs-12">
 			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked>
 			<label for="addcardtag">Save this card</label>
-		</div>
+		</div>-->
 		<input type="hidden" name="addCard" value="0">
 	</div>
 	<?php endif; ?>  
@@ -408,7 +408,7 @@ if(isset($_POST['step2-1'])) {
 
 			<div class="col-xs-6 col-sm-3">
 				<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
+				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" maxlength="4">
 			</div>
 
 			<div class="col-xs-6 col-sm-3">
@@ -416,10 +416,10 @@ if(isset($_POST['step2-1'])) {
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 		</div>
-		<div class="col-xs-12">
+		<!--<div class="col-xs-12">
 			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked>
 			<label for="addcardtag">Save this card</label>
-		</div>
+		</div>-->
 		
 		<input type="hidden" name="addCard" value="1">
 	</div>				 
