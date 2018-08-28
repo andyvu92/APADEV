@@ -521,7 +521,8 @@ if(isset($_SESSION["UserId"])){
             
 			<div class="flex-cell">
                 <div class="flex-col-6">Total(Inc.GST)</div>
-                <div class="flex-col-6">$<?php echo $scheduleDetails['OrderTotal'];?></div>
+				<input type="hidden" id="totalhidden" value="<?php echo $scheduleDetails['OrderTotal'];?>"/>
+                <div class="flex-col-6">$<span id="Amount"></span></div>
 			</div>
 		</div>
 		         
@@ -561,7 +562,7 @@ if(isset($_SESSION["UserId"])){
 <?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0) : ?>   <div  class="col-xs-12 no-item-title" style="text-align: center"><h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3></div>      <?php endif;?>
 <div class="col-xs-12 bottom-buttons">
  	<a target="_blank" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
- 	<a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
+ 	<a target="_blank" class="addCartlink" href="../your-details?Goback=PD"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
 </div>
 
 <div class="flex-container pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>

@@ -26,11 +26,11 @@ function GetAptifyData($TypeAPI, $ArrayIn) {
 	}
 	//echo "<br>".$TypeAPI."<br>";
 	if($TypeAPI == "2" || $TypeAPI == "3" || $TypeAPI == "18" || $TypeAPI == "38") {
-		return $jsonreturn;
+		return $jsonreturn[0];
 	} else {
-		logTransaction($TypeAPI,$arrayToJson,$jsonreturn);
+		logTransaction($jsonreturn[1],$arrayToJson,$jsonreturn[0]);
 	}
-    return JSONArrayConverter("toArray", $jsonreturn);
+    return JSONArrayConverter("toArray", $jsonreturn[0]);
 	
 	
 }

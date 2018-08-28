@@ -130,7 +130,7 @@ $filterMemberProduct = array("10007","10008","10009","9997","10006");
     // change from shipping address to billing address
     
     if (isset($_POST['Shipping-address-join']) && $_POST['Shipping-address-join'] == '1') {
-        if(isset($_POST['BuildingName'])) {$postData['Billing-BuildingName']  = $_POST['BuildingName']; }
+        if(isset($_POST['BuildingName'])) {$postData['Billing-BuildingName']  = $_POST['BuildingName']; } else{ $postData['Billing-BuildingName'] = "";}
         if(isset($_POST['Address_Line_1'])) {$postData['BillingAddress_Line_1'] = $_POST['Address_Line_1'];} else{$postData['BillingAddress_Line_1'] = "";}
         if(isset($_POST['Address_Line_2'])) {$postData['BillingAddress_Line_2'] = $_POST['Address_Line_2']; } else {$postData['BillingAddress_Line_2'] ="";}
         $postData['Billing-Pobox']         = $_POST['Pobox'];
@@ -2871,7 +2871,7 @@ if(isset($_GET['MT'])){
 				</div>
                 <script>
 					function PasswordFunction(ps){
-						if($('#newPassword').val().length <= 8){
+						if($('#newPassword').val().length <= 7){
 							$('#PasswordMessage').html("8 characters minimum");
 							$( "#newPassword" ).focus();
 							$("#newPassword").css("border", "1px solid red");

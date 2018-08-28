@@ -529,7 +529,9 @@
 				<div class="pd-description">
 					<?php 
 					if (!empty($pd_detail['Description'])){
-						if (strlen($pd_detail['Description']) > 600){
+						if($pd_detail['Typeofpd'] == "Lecture") {
+							echo $pd_detail['Description'];
+						} elseif (strlen($pd_detail['Description']) > 600){
 							echo '<div class="readmore">';
 							echo $pd_detail['Description'];
 							echo '</div>';
@@ -616,7 +618,7 @@
 					<span class="presenters-bio-icon large-icon"></span>
 				</div>
 				<div class="right-content presenters-bio">
-					<h2 class="blue-heading">Presenter's bio</h2>
+					<h2 class="blue-heading">Presenters</h2>
 					<p>
 						<?php 
 						foreach($pd_detail['Presenter'] as $bios) {
@@ -1122,7 +1124,7 @@
 				<div class="row">
 				    <div class="col-lg-6">
 						<label for="">Birth date<span class="tipstyle">*</span></label>
-						<input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> required max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
+						<input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> required>
 					</div>
 				 </div>
 
@@ -1191,12 +1193,20 @@
 					   <div class="chevron-select-box">
 							<select class="form-control" id="HearaboutAPA" name="HearaboutAPA">
 								<option value="" selected disabled>Please select</option>
+								<option value="socialmedia">Social media</option>
+								<option value="wordofmouth">Word of mouth</option>
+								<option value="apawebsite">APA website</option>
+								<option value="inmotion">InMotion</option>
+								<option value="searchengine">Search engine</option>
+								<option value="one">I have been before</option>
+								<option value="email">APA email</option>
+								<option value="other">Other</option>
 										<?php
-								
+								/*
 									$b = '<option value="wordofmouth">Word of mouth</option>';
 									$c = '<option value="inmotion">InMotion</option>';
 									$d = '<option value="socialmedia">Social media</option>';
-									$e = '<option value="apawebsite">APA website</option>';
+									$e = '<option value="wordofmouth">Word of mouth</option>';
 									$f = '<option value="searchengine">Search engine</option>';
 									$g = '<option value="email">Email</option>';
 									$h = '<option value="one">I have been to one before</option>';
@@ -1206,7 +1216,8 @@
 														shuffle($optionarrays);
 														foreach ($optionarrays as $data) {
 																			echo  $data;
-																}
+																}*/
+									
 													?>
 							</select>
 					   </div>
@@ -1479,7 +1490,7 @@
 					
 				<script>
 				    function PasswordFunction(ps){
-						if($('#newPassword').val().length <= 8){
+						if($('#newPassword').val().length <= 7){
 							$('#PasswordMessage').html("8 characters minimum");
 							$( "#newPassword" ).focus();
 							$("#newPassword").css("border", "1px solid red");
@@ -1703,7 +1714,14 @@
 					</div>
 				</div>
 				<span class="session-time">
-					<?php echo $timeOutput;//$edate[1]."-".$edate[1]; ?> AEST
+					<?php 
+					$timeZone = "AEST";
+					if($pd_detail['State'] == "NT" || $pd_detail['State'] == "SA") {
+						$timeZone = "ACST";
+					} elseif($pd_detail['State'] == "WA") {
+						$timeZone = "AWST";
+					} ?>
+					<?php echo $timeOutput." ".$timeZone;//$edate[1]."-".$edate[1]; ?>
 				</span>
 			</div>
 
@@ -1744,14 +1762,8 @@
 				}
 				else{
 					foreach($pricelistGet as $key=>$value){
-						$x = explode(" ", $key);
-						if(count($x) == 1) {
-							$y = $key;
-						} else {
-							$y = str_replace($x[0], "", $key);
-						}
 						$valuet = number_format($value,2);
-						echo $y.":&nbsp;$".$valuet."<br>";
+						echo $key.":&nbsp;$".$valuet."<br>";
 					}
 				}	
 				?>
@@ -1773,6 +1785,19 @@
 				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
 				$Now = strtotime(date('d-m-Y'));
 				$fullStatus = false;
+				$Div = $Totalnumber - $Enrollednumber;
+				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+					echo "Closed";  
+					$fullStatus = true;
+				} elseif($Div <= 5){
+					echo "Almost Full"; 
+				} elseif($Div==0){
+					echo "Full"; 
+					$fullStatus = true;
+				} elseif($Div >= 5){
+					echo "Open"; 
+				}
+				/* for 10% or less logic 
 				$Div = $Enrollednumber/$Totalnumber;
 				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";  
@@ -1784,7 +1809,7 @@
 					$fullStatus = true;
 				} elseif($Div<0.9){
 					echo "Open"; 
-				}
+				} */
 		 		?>
 			</span>
 
@@ -1888,11 +1913,16 @@
 				}
 				else{
 					foreach($pricelistGet as $key=>$value){
+						/*
 						$x = explode(" ", $key);
-						$y = str_replace($x[0], "", $key);
+						if(count($x) == 1) {
+							$y = $key;
+						} else {
+							$y = str_replace($x[0], "", $key);
+						}
+						*/
 						$valuet = number_format($value,2);
-						//echo "key: $key, x: $x, y: $y <br>";
-						echo $y.":&nbsp;$".$valuet."<br>";
+						echo $key.":&nbsp;$".$valuet."<br>";
 					}
 				}	
 				?>
@@ -1913,13 +1943,16 @@
 				$Totalnumber = doubleval($pd_detail['Totalnumber']);
 				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
 				$Now = strtotime(date('d-m-Y'));
+				$Div = $Totalnumber - $Enrollednumber;
 				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";  
-				} elseif($Enrollednumber/$Totalnumber>=0.9 && $Enrollednumber/$Totalnumber<1){
+					$fullStatus = true;
+				} elseif($Div <= 5){
 					echo "Almost Full"; 
-				} elseif(($Totalnumber-$Enrollednumber)==0){
-					echo "Full";
-				} elseif(($Enrollednumber/$Totalnumber)<0.9){
+				} elseif($Div==0){
+					echo "Full"; 
+					$fullStatus = true;
+				} elseif($Div >= 5){
 					echo "Open"; 
 				}
 		 		?>
@@ -1973,7 +2006,7 @@
 				<span class="presenters-bio-icon large-icon"></span>
 			</div>
 			<div class="right-content">
-				<h2 class="blue-heading">Presenter's bio</h2>
+				<!--h2 class="blue-heading">Presenters</h2-->
 				<p>
 					<?php 
 					foreach($pd_detail['Presenter'] as $bios) {

@@ -435,6 +435,7 @@ jQuery(document).ready(function($) {
 	});
 	var PRF = $("#PRF").val();
 	$( "#POSTPRF").val(PRF);
+	$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
 	$( "#PRF" ).change(function() {
 		if(($('#PRF').val()=="Other")){
 			$( "#PRFOther").removeClass('display-none');
@@ -442,8 +443,10 @@ jQuery(document).ready(function($) {
 		}
 		else{
 			$( "#PRFOther").addClass('display-none');
+			$( "#PRFOther").val('');
 			var PRF = $("#PRF").val();
 			$( "#POSTPRF").val(PRF);
+			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
 		}
 		//var tempTotal = Number($('#totalPayment').html());
 		//var prf = Number($('#PRF').val());
@@ -454,6 +457,7 @@ jQuery(document).ready(function($) {
 	$( "#PRFOther" ).blur(function() {
 		var PRF = $("#PRFOther").val();
 		$( "#POSTPRF").val(PRF);
+		$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
 	});
 	
 	// HIDE / SHOW PAYMENT CARD FORM 
@@ -614,6 +618,7 @@ jQuery(document).ready(function($) {
 		  
            if($(this).is(":checked")){
 			$(this).attr('checked', true);
+			$('#shippingaddressblock').addClass('shipping');  
 			$('#Shipping-BuildingName').val($('input[name="BuildingName"]').val());
             $('#Shipping-Address_Line_1').val($('input[name="Address_Line_1"]').val());
             $('#Shipping-Address_Line_2').val($('input[name="Address_Line_2"]').val());
@@ -623,6 +628,17 @@ jQuery(document).ready(function($) {
             $('#Shipping-state').val($('select[name="State"]').val());
             $('#Shipping-country').val($('select[name="Country"]').val());
         }
+		else{
+			$('#shippingaddressblock').removeClass('shipping');  
+			$('#Shipping-BuildingName').val('');
+            $('#Shipping-Address_Line_1').val('');
+            $('#Shipping-Address_Line_2').val('');
+			$('#Shipping-PObox').val('');
+            $('#Shipping-city-town').val('');
+            $('#Shipping-postcode').val('');
+            $('#Shipping-state').val('');
+            $('#Shipping-country').val(''); 	
+		}
         
     }); 
 	$('#Mailing-address').click(function(){
