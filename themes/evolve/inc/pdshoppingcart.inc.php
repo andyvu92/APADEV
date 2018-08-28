@@ -357,7 +357,7 @@ if(isset($_SESSION["UserId"])){
 	</div>
 
 	<div id="anothercardBlock" class="col-xs-12 none-padding down10 extra-card" style="display:none;"<?php //if(isset($_SESSION["tempcard"])){ echo 'style="display:block;"';} else { echo 'style="display:none;"';}?>>
-		<form action="/pd/pd-shopping-cart" method="POST" class="display-none">
+		<form action="/pd/pd-shopping-cart" method="POST" class="">
 		<input type="hidden" name="addCard" value="1"/>
 		<div class="row">
 			<div class="col-lg-12">
@@ -379,22 +379,26 @@ if(isset($_SESSION["UserId"])){
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
+			<label for="">Name on card:<span class="tipstyle"> *</span></label>
 			<input type="text" class="form-control"  name="Cardname" placeholder="Name on card" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CardName'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
+			<label for="">Card number:<span class="tipstyle"> *</span></label>
 			<input type="text" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="Expirydate" placeholder="Expire date" required maxlength="4" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
+			<label for="">Expiry date:<span class="tipstyle"> *</span></label>
+			<input type="text" class="form-control"  name="Expirydate" placeholder="mmyy(eg: 0225)" required maxlength="4" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="CCV" placeholder="CVV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+			<label for="">CCV:<span class="tipstyle"> *</span></label>
+			<input type="text" class="form-control"  name="CCV" placeholder="CCV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
 		</div>
 		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
@@ -432,22 +436,26 @@ if(isset($_SESSION["UserId"])){
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
+			<label for="">Name on card:<span class="tipstyle"> *</span></label>
 			<input type="text" class="form-control"  name="Cardname" placeholder="Name on card" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CardName'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
+			<label for="">Card number:<span class="tipstyle"> *</span></label>
 			<input type="text" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="Expirydate" placeholder="Expire date" required maxlength="4" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
+			<label for="">Expiry date:<span class="tipstyle"> *</span></label>
+			<input type="text" class="form-control"  name="Expirydate" placeholder="mmyy(eg: 0225)" required maxlength="4" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<input type="text" class="form-control"  name="CCV" placeholder="CVV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+			<label for="">CCV:<span class="tipstyle"> *</span></label>
+			<input type="text" class="form-control"  name="CCV" placeholder="CCV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
 		</div>
 		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
@@ -474,7 +482,15 @@ if(isset($_SESSION["UserId"])){
 					</select>
 				</div>
 				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="" oninput="this.value = Math.abs(this.value)" min="0">
-				<a style="color: black;" id="PRFDescription">What is this?</a>
+				<div class="col-xs-12 none-padding tooltip-container top" style="margin-top: 10px;">
+					<input class="tooltip-act" type="checkbox" value="0">
+					<div class="tooltip-content">
+						The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot.
+					<br>
+						<a href="/reserach/purpose-prf" target="_blank">Tell me more</a>
+					</div>
+					<span>What is this?</span>
+				</div>
 			</div>
 		</div>
 	<?php endif; ?>
@@ -541,21 +557,18 @@ if(isset($_SESSION["UserId"])){
 	</div>
 
 <?php endif; ?>
-<?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0) : ?>   <div  class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="text-align: center"><h3 style="color:black;">You do not have any products in your shopping cart.</h3></div>      <?php endif;?>
+<?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0) : ?>   <div  class="col-xs-12 no-item-title" style="text-align: center"><h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3></div>      <?php endif;?>
 <div class="col-xs-12 bottom-buttons">
  	<a target="_blank" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
  	<a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
 </div>
 
-<div class="flex-col-12 pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+<div class="flex-container pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
 
 
 </div>
 <?php logRecorder();  ?>
-<div id="PRFDesPopUp" style="display:none;" class="container">
-<p>The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot. </p>
-<p><a href="/reserach/purpose-prf" target="_blank">Tell me more</a></p>
-</div>
+
 <div id="PDTermsWindow" style="display:none;">
 	<span class="close-popup"></span>
 	<div class="modal-header">

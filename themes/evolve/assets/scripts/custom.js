@@ -699,9 +699,6 @@ jQuery(document).ready(function($) {
 		$( "#myMap" ).dialog();
 	});
 
-	$('#PRFDescription').click(function(){
-		$( "#PRFDesPopUp" ).dialog();
-	});
 	$('#instalmentpolicyl').click(function(){
 		$( "#installmentpolicyWindow" ).dialog();
 	});
@@ -1292,6 +1289,7 @@ jQuery(document).ready(function($) {
 		$('.overlay').fadeIn();
 		$('.loaders').css('visibility','visible').hide().fadeIn();
 	});
+
 
 	//---------------------------------------------------------------------------
 

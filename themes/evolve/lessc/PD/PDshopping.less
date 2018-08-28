@@ -45,6 +45,11 @@ fieldset {
       .content{
         .bottom-buttons{
           text-align: center;
+          a.addCartlink{
+            button{
+              text-transform: unset;
+            }
+          }
         }
         #pd-shopping-cart{
           div[class^="flex-col-"]{
@@ -95,7 +100,7 @@ fieldset {
             align-items: center;
             a{
               i{
-                color: red;
+                color: #ffa02e;
               }
             }
           }
@@ -163,7 +168,7 @@ fieldset {
             width: auto;
             height: auto;
             padding: 9px 25px;
-            margin-left: 10px;
+            margin: 20px 0 0 10px;
             display: block;
             &:hover{
               opacity: 0.8;
@@ -175,6 +180,7 @@ fieldset {
           label{
             font-weight: 300;
             color: #000;
+            margin: 5px 0;
             a{
               color: #000;
               font-weight: 300;
@@ -189,10 +195,10 @@ fieldset {
             margin-bottom: 20px;
             form{
               .row{
-                background: #fff;
+                background: #f3f5f5;
               }
               input{
-                background: none;
+                background: #fff;
               }
             }
           }
@@ -286,6 +292,7 @@ fieldset {
   }
 }
 
+/*------------- NO ITEMS IN CART -----------------*/
 #node-250{
   .bottom-buttons{
     display: flex;
@@ -293,6 +300,57 @@ fieldset {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+  }
+  h3.light-lead-heading{
+    color: @blue;
+    font-size: 3.5em;
+    margin-bottom: 25px;
+    font-weight: 400;
+  }
+  .no-item-title{
+    margin: 10vh 0 3vh 0;
+  }
+  .pd-featured{
+    margin: 10vh 0 5vh 0;
+    position: relative;
+    float: left;
+    justify-content: center;
+  }
+}
+
+/*------------- FAIL PURCHASE -----------------*/
+#node-255{
+  .fail-purchase{
+    .flex-cell{
+      justify-content: center;
+    }
+  }
+  .sub-text{
+    text-align: center;
+    h3.light-lead-heading{
+      margin: 0;
+      font-size: 2em;
+      a{
+        color: #009fda;
+        text-decoration: underline;
+        font-weight: 600;
+      }
+    }
+  }
+  h3.light-lead-heading{
+    color: @blue;
+    font-size: 3.5em;
+    font-weight: 400;
+    max-width: 600px;
+  }
+  .fail-purchase-title{
+    margin: 10vh 0 3vh 0;
+  }
+  .featured{
+    margin: 10vh 0 5vh 0;
+    position: relative;
+    float: left;
+    justify-content: center;
   }
 }
 
@@ -379,6 +437,9 @@ fieldset {
 
 //MOBILE VERSION
 #section-main-content{
+  .chevron-select-box{
+    background: #fff;
+  }
   .container{
     .region{
       .content{

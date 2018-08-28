@@ -126,8 +126,19 @@ if(isset($_POST["Invoice_ID"])) {
 <a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 */ ?>
 <p>Your invoice will be sent to your inbox shortly</p>
+<a target="_blank" class="addCartlink" href="../your-purchases"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>
+
 <?php else:?>
-<p>Your purchase is not successfull.</p>
+<!-- FAIL PURCHASE -->
+<div class="flex-container fail-purchase">
+<div  class="flex-cell fail-purchase-title" style="text-align: center"><h3 class="light-lead-heading align-center">We had issues processing your payment request.</h3></div>
+<div class="flex-cell sub-text">
+	<h3 class="light-lead-heading align-center">Please <a href="/pd/pd-shopping-cart">update your card details</a> or <a href="/contact-us">contact us</a></h3>
+</div>
+
+<div class="flex-cell featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+
+</div>
 <?php endif;?>
 
 <?php  /*
@@ -150,7 +161,6 @@ if(isset($_POST["Invoice_ID"])) {
 	</div>
 </div>
 */ ?>
-<a target="_blank" class="addCartlink" href="../your-purchases"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>
 <?php /*
 <style type="text/css">
 	.big-screen {

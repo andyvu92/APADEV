@@ -1697,6 +1697,7 @@ a#insuranceControl{
 
 .dexp-body-inner{
     overflow: hidden;
+    min-height: auto;
 	.container{
 		max-width: 1500px;
 		width: 100%;
@@ -1863,6 +1864,9 @@ iframe{
                 font-size: 1em;
                 color: #000;
                 font-family: cairo;
+                .skip{
+                    cursor: pointer;
+                }
                 &:hover{
                     a{
                         text-decoration: underline;
@@ -2480,6 +2484,9 @@ form{
     }
     .chevron-select-box{
         position: relative;
+        .ui-selectmenu-icon{
+            display: none;
+        }
         select{
             -webkit-appearance: none;
             position: relative;
@@ -2610,7 +2617,7 @@ form{
 
 /*--JOIN THE APA--*/
 .form-control[disabled]{
-    color: rgba(0,0,0,0)!important;
+    color:  rgb(176, 176, 175) !important;
 }
 #join-review-form{
     .review-main-container{

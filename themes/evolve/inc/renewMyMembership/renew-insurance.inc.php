@@ -262,8 +262,8 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 
 			</div>
 			<div class="modal-footer">
-				<a class="disagree-btn" href="" popup-dismiss="privacypolicyWindow">Disagree</a>
-				<a id="insuranceTerms" class="agree-btn" href="" popup-dismiss="privacypolicyWindow">Agree</a>
+				<a class="disagree-btn" href="" popup-dismiss="insuranceTermsandConditions">Disagree</a>
+				<a id="insuranceTerms" class="agree-btn" href="" popup-dismiss="insuranceTermsandConditions">Agree</a>
 			</div>
 </div>
 <?php logRecorder();  ?>
