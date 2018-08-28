@@ -24,7 +24,7 @@ if(isset($_POST["POSTPRF"])) {
 	$registerOuts = GetAptifyData("26", $OrderSend);
 	
 	$invoice_ID = $registerOuts['Invoice_ID'];
-	if(isset($_POST['addcardtag'])){
+	//if(isset($_POST['addcardtag'])){
 		// 2.2.15 - Add payment method
 		// Send - 
 		// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
@@ -37,7 +37,7 @@ if(isset($_POST["POSTPRF"])) {
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
 		$out = GetAptifyData("15",$postPaymentData); 
 		
-	}
+	//}
 	
 }
 $test['id'] = $_SESSION["UserId"];

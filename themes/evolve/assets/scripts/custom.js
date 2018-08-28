@@ -1379,7 +1379,7 @@ $(document).on('click', '.pd-spcart-delete a', function(){
 		$(".OtherSitesList").animate({right: "0px"}, 300);
 	});
 	$(".OthersiteButtonClose").click( function() {
-		$(".OtherSitesList").animate({right: "-300px"}, 300);
+		$(".OtherSitesList").animate({right: "-370px"}, 300);
 	});
 	
 });
