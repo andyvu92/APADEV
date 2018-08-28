@@ -1753,14 +1753,8 @@
 				}
 				else{
 					foreach($pricelistGet as $key=>$value){
-						$x = explode(" ", $key);
-						if(count($x) == 1) {
-							$y = $key;
-						} else {
-							$y = str_replace($x[0], "", $key);
-						}
 						$valuet = number_format($value,2);
-						echo $y.":&nbsp;$".$valuet."<br>";
+						echo $key.":&nbsp;$".$valuet."<br>";
 					}
 				}	
 				?>
@@ -1887,11 +1881,16 @@
 				}
 				else{
 					foreach($pricelistGet as $key=>$value){
+						/*
 						$x = explode(" ", $key);
-						$y = str_replace($x[0], "", $key);
+						if(count($x) == 1) {
+							$y = $key;
+						} else {
+							$y = str_replace($x[0], "", $key);
+						}
+						*/
 						$valuet = number_format($value,2);
-						//echo "key: $key, x: $x, y: $y <br>";
-						echo $y.":&nbsp;$".$valuet."<br>";
+						echo $key.":&nbsp;$".$valuet."<br>";
 					}
 				}	
 				?>
