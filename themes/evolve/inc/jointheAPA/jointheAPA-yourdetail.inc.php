@@ -2871,7 +2871,7 @@ if(isset($_GET['MT'])){
 				</div>
                 <script>
 					function PasswordFunction(ps){
-						if($('#newPassword').val().length <= 8){
+						if($('#newPassword').val().length <= 7){
 							$('#PasswordMessage').html("8 characters minimum");
 							$( "#newPassword" ).focus();
 							$("#newPassword").css("border", "1px solid red");

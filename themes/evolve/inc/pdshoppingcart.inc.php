@@ -521,7 +521,8 @@ if(isset($_SESSION["UserId"])){
             
 			<div class="flex-cell">
                 <div class="flex-col-6">Total(Inc.GST)</div>
-                <div class="flex-col-6">$<?php echo $scheduleDetails['OrderTotal'];?></div>
+				<input type="hidden" id="totalhidden" value="<?php echo $scheduleDetails['OrderTotal'];?>"/>
+                <div class="flex-col-6">$<span id="Amount"></span></div>
 			</div>
 		</div>
 		         
