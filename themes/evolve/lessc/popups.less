@@ -47,6 +47,9 @@
            height: 55vh;
            padding: 10px 0;
            overflow-y: auto;
+           ul{
+               font-size: 1.2em;
+           }
         }
         .modal-footer{
            margin: 0;
@@ -103,7 +106,7 @@
         }
     }
     .agree-btn{
-        padding: 5px 30px;
+        padding: 8px 30px;
         border: 1px solid #adadad;
         border-radius: 5px;
         color: #fff;
@@ -113,12 +116,13 @@
         background: @blue;
         opacity: 1;
         min-width: 120px;
+        display: inline-block;
         &:hover{
             opacity: 0.8;
         }
     }
     .disagree-btn{
-        padding: 5px 30px;
+        padding: 8px 30px;
         border: 1px solid #adadad;
         border-radius: 5px;
         color: #333;
@@ -126,6 +130,7 @@
         font-family: Cairo;
         font-size: 15px;
         min-width: 120px;
+        display: inline-block;
         &:hover{
             background-color: #ebebeb;
         }
@@ -203,8 +208,15 @@
     }
 }
 
+.modal-body{
+    ul{
+        font-size: 1.2em;
+        color: #000;
+    }
+ }
+
 .ui-draggable .ui-dialog-titlebar{
-    cursor: default;
+    cursor: default!important;
 }
 /* -------------- END GENERAL POPUP STYLES --------------*/
 
@@ -756,6 +768,16 @@ div[aria-describedby="registerPDUser"].ui-dialog {
     #registerPDUser{
         overflow: hidden;
         overflow-y: auto;
+        h3{
+            color: #009fda;
+            font-family: Cairo;
+            font-size: 2em;
+            font-weight: 400;
+            margin: 0 0 20px 0;
+        }
+        #go-to-cart{
+            text-transform: unset;
+        }
     }
     @media all and (max-width: @larger-phone-width) {
         left: calc(~"50vw - 150px")!important;

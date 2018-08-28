@@ -834,17 +834,6 @@ div[id^="home-tile-view-block"]{
 
 /*--END MEDIA MOBILE NAV--*/
 
-/*
-#section-content-top .container {
-    width: 100%;
-    max-width: 1170px!important;
-}
-
-.dexp-body-inner .container {
-    max-width: 1170px!important;
-    width: 100%;
-}
-*/
 
 /* FORM ELEMENTS */
 .styled-checkbox {
@@ -1057,6 +1046,7 @@ input{
     font-size: 1.2em;
     margin-top: 10px;
     float: left;
+    margin-bottom: 20px;
   }
 
 /* POPUP OVERLAY */
@@ -1399,10 +1389,14 @@ input{
 .selectize-control.multi{
     .selectize-input{
         background: none;
-        padding: 6px 12px;
+        padding: 12px 12px;
+        &:before{
+            display: none;
+        }
         &.has-items{
             padding-right: 30px!important;
-            padding: 6px 12px;
+            padding: 8px 12px;
+            cursor: default;
         }
         & >input{
             &::placeholder {

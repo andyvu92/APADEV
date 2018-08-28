@@ -803,7 +803,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						</div>
 					
 						<div class="col-xs-12 col-sm-6 col-md-6">
-							<label for="">Member Category<span class="tipstyle"> *</span></label>
+							<label for="">Member category<span class="tipstyle"> *</span></label>
 							<div class="chevron-select-box">
 							<select class="form-control" id="MemberType" name="MemberType" disabled>
 								<option value="" <?php if (empty($details['MemberTypeID'])) echo "selected='selected'";?> disabled>Member Category</option>
@@ -961,6 +961,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<div class="paymentsidecredit"> 
 								<div class="row">
 								<fieldset class="col-xs-12 col-sm-6 none-padding" id="cardinfo">
+									<div class="chevron-select-box">
 									<select  id="Paymentcard" name="Paymentcard" style="width:100%;">
 									<?php
 									if (sizeof($cardsnum)!=0) {
@@ -980,6 +981,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 									<?php endforeach; ?>
 									<?php endif; */?>  
 									</select>
+									</div>
 								</fieldset>
 								</div>
 								<a class="deletecardbutton black-underline-link">Delete selected</a>
@@ -2059,7 +2061,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 jQuery(document).ready(function($){

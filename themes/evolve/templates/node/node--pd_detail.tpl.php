@@ -1599,6 +1599,7 @@
 <!--Member update detail-->
  <?php if(isset($details)): ?>
 <div id="registerPDUser">
+	<h3>Please confirm a few details before adding this event to your cart</h2>
 	<form action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" autocomplete="off" >
 		<input type="hidden" name="updateDetail">
 		<input type="hidden" name="meetingID" value="<?php echo $pd_detail['MeetingID'];?>"> 
