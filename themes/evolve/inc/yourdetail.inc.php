@@ -421,16 +421,19 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 		</div>
     <?php
 		include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
+		$workplaceSettingscode         = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
+		$workplaceSettings             = json_decode($workplaceSettingscode, true);
+		$_SESSION["workplaceSettings"] = $workplaceSettings; 
 	?>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div class="col-xs-12 none-padding" >
 				<div class="nav-chevron">
 					<ul class="nav nav-tabs">
-							<li><a class="event1" style="cursor: pointer;"><span class="text-underline eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
-							<li><a class="event2" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li>
-							<li><a class="event13" style="cursor: pointer;"><span class="eventtitle13" id="payment"><strong>Payment information</strong></span></a></li>
-							<?php if($details['MemberType']!="31" && $details['MemberType']!="32"): ?><li><a class="event3" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li><?php endif; ?>
-							<li><a class="event4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
+							<li id="yourdetail1"><a class="event1" style="cursor: pointer;"><span class="text-underline eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
+							<li id="yourdetail2"><a class="event2" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li>
+							<li id="yourdetail3"><a class="event13" style="cursor: pointer;"><span class="eventtitle13" id="payment"><strong>Payment information</strong></span></a></li>
+							<?php if($details['MemberType']!="31" && $details['MemberType']!="32"): ?><li id="yourdetail4"><a class="event3" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li><?php endif; ?>
+							<li id="yourdetail5"><a class="event4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
 					</ul>
 				</div>
 			<form action="<?php echo $url;?>" name="your-details" method="POST" novalidate>
@@ -445,7 +448,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<div class="col-xs-6 col-md-2">
 								<label for="prefix">Prefix</label>
 								<div class="chevron-select-box">
-								<select class="form-control" id="Prefix" name="Prefix" required>
+								<select class="form-control" id="Prefix" name="Prefix">
 									<option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> disabled>Please select</option>
 								<?php
 									$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
@@ -1870,7 +1873,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				</div>
 				<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>-->
 			</div>
-		<div class="col-xs-12" id="your-details-button">   <button type="submit" id="your-details-submit-button" class="accent-button"><span class="dashboard-button-name">Submit</span></button></div>
+		<div class="col-xs-12" id="your-details-button">   <button type="submit" id="your-details-submit-button" class="accet-button"><span class="dashboard-button-name">Submit</span></button></div>
 	</form>
 		<form id="changePasswordForm">
 			<div class="down7" style="display:none;" >
