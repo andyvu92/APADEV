@@ -75,8 +75,9 @@ $nationalGroup = $nationalGroups;
 <?php logRecorder(); ?>
 <form action="/pd/pd-shopping-cart" method="POST" style="width:100%;">
 <input type="hidden" name="PostNG" />
-<table class="table MTtable">
-	<tbody>
+<div class="container">
+<div class="flex-container join-NGtable">
+
 		<?php
 			$countSubs = count($nationalGroups);
 			$countSubType = $countSubs%2;
@@ -84,10 +85,10 @@ $nationalGroup = $nationalGroups;
 			foreach($SubListAll as $Subs) {
 				$tr = $counter % 2;
 				if($tr == 0) {
-					echo "<tr>";
+					echo "<div class='flex-cell'>";
 				}
-				echo '<td><input type="checkbox" name="'.$Subs["SubscriptionID"].
-					'" id="'.$Subs["SubscriptionID"].'" class="NGname'.$counter.'" ';
+				echo '<div class="flex-col-6"><div class="flex-col-10"><input type="checkbox" name="'.$Subs["SubscriptionID"].
+					'" id="'.$Subs["SubscriptionID"].'" class="styled-checkbox NGname'.$counter.'" ';
 				
 				if(isset($_GET["ProductID"]) && in_array($Subs['SubscriptionID'],$choseProduct)){ 
 					echo 'value="1"';
@@ -103,16 +104,17 @@ $nationalGroup = $nationalGroups;
 					echo "checked disabled";
 				}
 				echo '>&nbsp;&nbsp;&nbsp;<label class="NGnameText'.$counter.'" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
-					.'</label></td>';
-				echo '<td><div class="NGprice'.$counter.'">$'.$Subs["NGprice"].'</div></td>';
+					.'</label></div>';
+				echo '<div class="flex-col-2"><div class="NGprice'.$counter.'">$'.$Subs["NGprice"].'</div></div></div>';
 				if($tr == 1) {
-					echo "</tr>";
+					echo "</div>";
 				}
 				$counter++;
 			}
 		?>
-	</tbody>
-</table>
+
+</div>
+</div>
 <input class="placeorder" type="submit" value="Join now"/>
 </form>
 <div class="NGpriceT" style="display: none;"></div>

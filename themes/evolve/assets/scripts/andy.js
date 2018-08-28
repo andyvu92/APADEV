@@ -302,6 +302,7 @@ function isTouchDevice() {
   return 'ontouchstart' in document.documentElement;
 }
 
+// MULTISELECTIONS SELECTIZE
 jQuery(document).ready(function() {
   $('select[multiple=""]').selectize({
     plugins: ['remove_button'],
@@ -315,4 +316,3 @@ jQuery(document).ready(function() {
     }
   });
 });
-
