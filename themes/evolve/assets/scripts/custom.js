@@ -618,6 +618,7 @@ jQuery(document).ready(function($) {
 		  
            if($(this).is(":checked")){
 			$(this).attr('checked', true);
+			$('#shippingaddressblock').addClass('shipping');  
 			$('#Shipping-BuildingName').val($('input[name="BuildingName"]').val());
             $('#Shipping-Address_Line_1').val($('input[name="Address_Line_1"]').val());
             $('#Shipping-Address_Line_2').val($('input[name="Address_Line_2"]').val());
@@ -627,6 +628,17 @@ jQuery(document).ready(function($) {
             $('#Shipping-state').val($('select[name="State"]').val());
             $('#Shipping-country').val($('select[name="Country"]').val());
         }
+		else{
+			$('#shippingaddressblock').removeClass('shipping');  
+			$('#Shipping-BuildingName').val('');
+            $('#Shipping-Address_Line_1').val('');
+            $('#Shipping-Address_Line_2').val('');
+			$('#Shipping-PObox').val('');
+            $('#Shipping-city-town').val('');
+            $('#Shipping-postcode').val('');
+            $('#Shipping-state').val('');
+            $('#Shipping-country').val(''); 	
+		}
         
     }); 
 	$('#Mailing-address').click(function(){
