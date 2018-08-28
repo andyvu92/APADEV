@@ -110,8 +110,7 @@ if(isset($_POST["Invoice_ID"])) {
 ?>
 <?php logRecorder();  ?>
 <?php if($registerOuts['Invoice_ID']!=="0"):?>
-<h2>Thank you for your purchase</h2>
-<p>We hope you enjoy your event.</p>
+<h2>We hope you enjoy your event</h2>
 
 <?php /*
 <!--<form action="/pd/completed-purchase" method="POST">

@@ -1122,7 +1122,7 @@
 				<div class="row">
 				    <div class="col-lg-6">
 						<label for="">Birth date<span class="tipstyle">*</span></label>
-						<input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> required max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
+						<input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> required>
 					</div>
 				 </div>
 
@@ -1191,12 +1191,20 @@
 					   <div class="chevron-select-box">
 							<select class="form-control" id="HearaboutAPA" name="HearaboutAPA">
 								<option value="" selected disabled>Please select</option>
+								<option value="socialmedia">Social media</option>
+								<option value="wordofmouth">Word of mouth</option>
+								<option value="apawebsite">APA website</option>
+								<option value="inmotion">InMotion</option>
+								<option value="searchengine">Search engine</option>
+								<option value="one">I have been before</option>
+								<option value="email">APA email</option>
+								<option value="other">Other</option>
 										<?php
-								
+								/*
 									$b = '<option value="wordofmouth">Word of mouth</option>';
 									$c = '<option value="inmotion">InMotion</option>';
 									$d = '<option value="socialmedia">Social media</option>';
-									$e = '<option value="apawebsite">APA website</option>';
+									$e = '<option value="wordofmouth">Word of mouth</option>';
 									$f = '<option value="searchengine">Search engine</option>';
 									$g = '<option value="email">Email</option>';
 									$h = '<option value="one">I have been to one before</option>';
@@ -1206,7 +1214,8 @@
 														shuffle($optionarrays);
 														foreach ($optionarrays as $data) {
 																			echo  $data;
-																}
+																}*/
+									
 													?>
 							</select>
 					   </div>
@@ -1479,7 +1488,7 @@
 					
 				<script>
 				    function PasswordFunction(ps){
-						if($('#newPassword').val().length <= 8){
+						if($('#newPassword').val().length <= 7){
 							$('#PasswordMessage').html("8 characters minimum");
 							$( "#newPassword" ).focus();
 							$("#newPassword").css("border", "1px solid red");
