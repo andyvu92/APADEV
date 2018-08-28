@@ -10,7 +10,7 @@ $QuestionList = ListQuestions(5);
 		</div>
 		<div class="col-lg-12 buttons">
 			<?php foreach($QuestionList[$i][3] as $option){
-			echo '<label id="label'.$option[2].'" class="optionLabel'.$option[0].'">'.$option[1].'</label>';
+			echo '<label id="labelmQ'.$option[2].'" class="optionLabel'.$option[0].'">'.$option[1].'</label>';
 			echo '<input type="hidden" id="Answer'.$option[0].'" value="'.$option[3]. '">';
 			} ?>
 		</div>
