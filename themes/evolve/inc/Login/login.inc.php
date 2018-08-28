@@ -768,6 +768,7 @@ if(isset($_SESSION['UserId'])) {
 	$counts = 0;
 }
 ?>
+<?php if(isset($_SESSION["Log-in"])): ?>
 <?php if($counts == 0): ?>
 <div class="pull-right borderLeftForTop ShoppingCartBorder" title="Shopping cart">
 	<div class="ButtonIconHolder">
@@ -781,7 +782,6 @@ if(isset($_SESSION['UserId'])) {
 	</div>
 </div>
 <?php endif; ?>
-<?php if(isset($_SESSION["Log-in"])): ?>
 <div class="pull-right borderLeftForTop DashboardPadding">
 	<div id="DashboardButton" class="ButtonIconHolder withButtonIcon DashboardwithButtonIcon" title="Dashboard">
 		<i class="Dashboard">&nbsp;</i>
@@ -791,7 +791,7 @@ if(isset($_SESSION['UserId'])) {
 	<form method="POST" action="<?php echo $url; ?>" name="forlogout">
 		<input id="logoutAcButton"type="hidden" name="logout" value="out" style="display: none;" />
 		<div id="logoutButton" class="ButtonIconHolder withButtonIcon OutwithButtonIcon" title="Log out">
-			<input type="submit" value="log-out" />
+			<input type="submit" value="log out" />
 		</div>
 	</form>
 </div>
@@ -807,8 +807,8 @@ if(isset($_SESSION['UserId'])) {
 <?php else: ?>
 <div class="pull-right borderLeftForTop LogInPadding">
 	<button class="info" data-target="#loginAT" data-toggle="modal" type="button">
-	<div class="ButtonIconHolder withButtonIcon InwithButtonIcon" title="Log-in">
-		<i class="Log-in">&nbsp;</i>Log-in
+	<div class="ButtonIconHolder withButtonIcon InwithButtonIcon" title="Log in">
+		<i class="Log-in">&nbsp;</i>Log in
 	</div></button>
 </div>
 <?php endif; ?>
