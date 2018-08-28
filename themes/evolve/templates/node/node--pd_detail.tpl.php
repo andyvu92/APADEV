@@ -529,7 +529,9 @@
 				<div class="pd-description">
 					<?php 
 					if (!empty($pd_detail['Description'])){
-						if (strlen($pd_detail['Description']) > 600){
+						if($pd_detail['Typeofpd'] == "Lecture") {
+							echo $pd_detail['Description'];
+						} elseif (strlen($pd_detail['Description']) > 600){
 							echo '<div class="readmore">';
 							echo $pd_detail['Description'];
 							echo '</div>';
