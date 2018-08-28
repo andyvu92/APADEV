@@ -390,7 +390,7 @@ if(isset($_POST['step2-1'])) {
 
 			<div class="col-xs-6 col-md-3">
 				<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
+				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" maxlength="4">
 			</div>
 
 			<div class="col-xs-6 col-md-3">
@@ -438,7 +438,7 @@ if(isset($_POST['step2-1'])) {
 
 			<div class="col-xs-6 col-md-3">
 				<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
+				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" maxlength="4">
 			</div>
 
 			<div class="col-xs-6 col-md-3">

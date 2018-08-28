@@ -828,7 +828,7 @@ if(isset($_SESSION['UserId'])) {
           <form name="signInForm" method="POST" action="<?php echo $url;?>">
 				<div class="flex-container">
 					<div class="flex-cell">
-						<h3 class="light-lead-heading cairo">Please login to see this page</h3>
+						<h3 class="light-lead-heading cairo">Sign in to your account</h3>
 					</div>
 					<!--<input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
 					<input type="password" class="form-control"  name="Password"  placeholder="Password"><br>-->
@@ -856,7 +856,7 @@ if(isset($_SESSION['UserId'])) {
 					</div>
 
 					<div class="flex-cell create-account">
-						<span>Not a member? <a id="createAccount">Join us today.</a></span>
+						<span>Not a member? <a href="/membership-question">Join us today.</a></span>
 					</div>
 				</div>
 			</form>

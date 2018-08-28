@@ -1028,9 +1028,17 @@ body.page-node{
                         &:nth-child(1){
                             padding-top: 0;
                         }
-                    .cross-price{
-                        color: rgba(255,255,255,0.7);
-                    }
+                        .cross-price{
+                            color: rgba(255,255,255,0.7);
+                        }
+                        a{
+                            color: #fff;
+                            text-decoration: underline;
+                            opacity: 1;
+                            &:hover{
+                                opacity: 0.9;
+                            }
+                        }
                     }
                     #login{
                         background: @blue;
@@ -1043,6 +1051,7 @@ body.page-node{
                         font-family: Roboto;
                         text-transform: uppercase;
                         transition: 0.1s linear;
+                        margin-bottom: 15px;
                         cursor: pointer;
                         &:hover{
                             background: #fff;
@@ -1058,6 +1067,8 @@ body.page-node{
                     background: #009fda;
                     border-top: 1px solid #fff;
                     font-family: Roboto;
+                    font-size: 1.2em;
+                    color: #fff;
                     .add-to-cart{
                         background: #ffa02f; 
                     }
@@ -1153,6 +1164,47 @@ body.page-node{
                     }
                     a:hover{
                         opacity: 0.9;
+                    }
+                    #login-section{
+                        span{
+                            padding: 0;
+                        }
+                    }
+                    #login{
+                        background: @blue;
+                        color: #fff;
+                        border: 1px solid #fff;
+                        padding: 15px 10px;
+                        text-align: center;
+                        display: block;
+                        font-family: Roboto;
+                        text-transform: uppercase;
+                        transition: 0.1s linear;
+                        margin-bottom: 15px;
+                        cursor: pointer;
+                        &:hover{
+                            background: #fff;
+                            color: @blue;
+                        }
+                    }
+                    .small-heading{
+                        display: block;
+                        font-weight: 500;
+                        padding-top: 10px;
+                        &:nth-child(1){
+                            padding-top: 0;
+                        }
+                        .cross-price{
+                            color: rgba(255,255,255,0.7);
+                        }
+                        a{
+                            color: #fff;
+                            text-decoration: underline;
+                            opacity: 1;
+                            &:hover{
+                                opacity: 0.9;
+                            }
+                        }
                     }
                 }
                 .extra-info{
@@ -1776,7 +1828,6 @@ a#createAccount {
 .paymentsiderbar .dashboard-button{
     width: 92px;
 	height: 36px;
-    margin-left: -29px;
     color: white;
 }
 .discountcode{

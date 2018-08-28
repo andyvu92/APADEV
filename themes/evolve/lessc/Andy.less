@@ -984,7 +984,7 @@ button:not(.info), input[type="button"], input[type="submit"]{
     padding: 10px 30px!important;
     width: auto!important; 
     height: auto!important;
-    text-transform: capitalize;
+    text-transform: unset;
     
     &.ui-dialog-titlebar-close{
         padding: 10px !important;
@@ -1390,6 +1390,7 @@ input{
     .selectize-input{
         background: none;
         padding: 12px 12px;
+        min-height: 48px;
         &:before{
             display: none;
         }

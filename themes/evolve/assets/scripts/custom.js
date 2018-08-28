@@ -686,12 +686,25 @@ jQuery(document).ready(function($) {
 		$( "#registerPDUser" ).dialog();
     });
 	$('#registerNonMember').click(function(){
+		$('.overlay').fadeIn();
 		$( "#registerMember" ).dialog();
-    });
+	});
+	$(document).on('click', '.ui-dialog-titlebar-close', function(){
+		$('.overlay').fadeOut();
+	});
+
 	$('#createAccount').click(function(){
+		$('#loginAT').dialog();
+		$('.modal-backdrop').fadeOut();
+		$('#loginAT').dialog('close');
+		$('.overlay').fadeIn();
 		$( "#signupWebUser" ).dialog();
-		$( "#loginPopWindow" ).dialog('close');
-    });
+	});
+
+	$('#signup').click(function(){
+		$( "#signupWebUser" ).dialog();
+	});
+
 	$('.member-login').click(function(){
 		$( "#loginPopWindow" ).dialog();
 	});
@@ -1198,6 +1211,22 @@ jQuery(document).ready(function($) {
 		}, 1);
 	});
 
+	//PRIVACY POLICY CHECKBOX IN POPUP FOR NON-MEMBER PD PURCHASE
+	$('#non-member-privacypolicy').click(function() {
+		$('#privacypolicyWindow').fadeOut();
+		$("#jprivacy-policy" ).prop('checked', true);
+		$("#jprivacy-policy" ).attr('value', '1');
+	});
+	$('#non-member-disagreepd').click(function() {
+		$('#privacypolicyWindow').fadeOut();
+	});
+
+	$('label[for="jprivacy-policy"]').click(function(){
+		$('#privacypolicyWindow .modal-body').animate({
+			scrollTop: $(".note-text").position().top
+		}, 1);
+	});
+
 	//PRIVACY POLICY CHECKBOX IN POPUP
 	$('#privacypolicyp').click(function() {
 		$("#jprivacy-policy" ).prop('checked', true);
@@ -1290,6 +1319,10 @@ jQuery(document).ready(function($) {
 		$('.loaders').css('visibility','visible').hide().fadeIn();
 	});
 
+	$(document).on('click', '.join-apa-final a', function(){
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
 
 	//---------------------------------------------------------------------------
 
