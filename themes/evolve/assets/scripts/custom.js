@@ -1080,8 +1080,8 @@ jQuery(document).ready(function($) {
 		$("#totalCost").text('$'+Sum);
 	}
 	 
-	$('[id^=label]').click(function() {
-		var i = $(this).attr("id").replace('label', '');
+	$('[id^=labelmQ]').click(function() {
+		var i = $(this).attr("id").replace('labelmQ', '');
 		if(i!=="0"){
 			$('[id^=question]:not(.function)').hide();
 			$('[id^=question]:not(.function)').addClass("function");
