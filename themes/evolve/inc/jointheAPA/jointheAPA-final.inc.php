@@ -119,7 +119,7 @@ if(isset($_POST['step2'])) {
 	// Send - 
 	// userID, Payment-method,Name-on-card,Cardno,Expiry-date,CCV
 	// Response -Add Success message 
-	if(isset($_POST['addCard']) && $_POST['addCard'] == "1"  && isset($_POST['addcardtag'])){
+	if(isset($_POST['addCard']) && $_POST['addCard'] == "1"){
 		if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
 		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
 		//if(isset($_POST['Cardname'])){ $postPaymentData['Name-on-card'] = $_POST['Cardname']; }
@@ -127,9 +127,9 @@ if(isset($_POST['step2'])) {
 		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
 		GetAptifyData("15", $postPaymentData);
-		if(isset($_SESSION['tempcard'])){ unset($_SESSION["tempcard"]);}
+		//if(isset($_SESSION['tempcard'])){ unset($_SESSION["tempcard"]);}
 	}
-	elseif(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])){
+	/*elseif(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])){
 		$tempcard = array();
 		$tempcard['Payment-method'] = $_POST['Cardtype'];
 		$tempcard['Name-on-card'] = $_POST['Cardname'];
@@ -139,7 +139,7 @@ if(isset($_POST['step2'])) {
 		if(isset($_SESSION['tempcard'])){ unset($_SESSION["tempcard"]);}
 		$_SESSION['tempcard'] = $tempcard;
 		
-	}
+	}*/
     // 2.2.26 Register a new member order
 	// Send - 
 	// userID & order data
