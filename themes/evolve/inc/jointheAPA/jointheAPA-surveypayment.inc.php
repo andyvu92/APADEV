@@ -330,7 +330,7 @@ if(isset($_POST['step2-1'])) {
 			<div class="col-xs-12 col-sm-6">	
 				<fieldset>
 					<div class="chevron-select-box">
-						<select id="Paymentcard" name="Paymentcard">
+						<select class="form-control" id="Paymentcard" name="Paymentcard">
 							<?php
 							
 								foreach( $cardsnum["results"] as $cardnum) {
@@ -406,7 +406,7 @@ if(isset($_POST['step2-1'])) {
 		</div>
 	<?php endif; ?>  
 	<?php if (sizeof($cardsnum["results"])==0): ?> 
-	<div id="" class="row">				   
+	<div id="anothercardBlock" class="row show">				   
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-3">
 				<div class="chevron-select-box">

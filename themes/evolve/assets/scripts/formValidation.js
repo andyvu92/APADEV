@@ -143,7 +143,7 @@ jQuery(document).ready(function($) {
 					}
 					if($("input[name=Ugraduate-country"+t+"]").val() ==''){$("input[name=Ugraduate-country"+t+"").addClass("focuscss");}else{$("input[name=Ugraduate-country"+t+"").removeClass("focuscss");}
 					if($("select[name=Ugraduate-yearattained"+t+"]").val() ==''){$("select[name=Ugraduate-yearattained"+t+"]").addClass("focuscss");}else{$("select[name=Ugraduate-year-attained"+t+"]").removeClass("focuscss");}
-					if($("select[name=Udegree"+t+"]").val() ==''||$("select[name=Undergraduate-university-name"+t+"]").val() ==''||$("input[name=Ugraduate-country"+t+"]").val() ==''||$("select[name=Ugraduate-year-attained"+t+"]").val() ==''){
+					if($("select[name=Udegree"+t+"]").val() ==''||$("select[name=Undergraduate-university-name"+t+"]").val() ==''||$("input[name=Ugraduate-country"+t+"]").val() ==''||$("select[name=Ugraduate-yearattained"+t+"]").val() ==''){
 						return false;
 					}
 					if(!$("input[name=Undergraduate-university-name-other"+t+"]").hasClass("display-none")){
@@ -308,7 +308,10 @@ jQuery(document).ready(function($) {
 		
 	});
 	$('[class^=join-details-button]').click(function(){
-		if(validateFun()==false){alert("please fill out all required fields *");return false;} 
+		if(validateFun()==false){
+			$('.overlay').fadeOut();
+			$('#insurancePopUp').fadeOut();
+			alert("please fill out all required fields *");return false;} 
         var i = Number($(this).attr("class").replace('join-details-button', ''));
 		var x = Number(i + 1);
 		

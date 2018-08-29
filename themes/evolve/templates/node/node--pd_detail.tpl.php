@@ -835,7 +835,7 @@
 			    <input type="hidden" name="type" value="PD">
 				<input type="hidden" name="Couponcode" value="<?php echo $Couponcode;?>"> 
 				<div class="down20">
-				   <div class="row"><h4 class="modal-title">Please fill out your details below:</h4></div>
+				   <div class="row"><h4 class="modal-title">Don't have an account? Please sign up below:</h4></div>
                   	<div class="row">
 						<div class="col-lg-3">
 							<label for="prefix">Prefix</label>

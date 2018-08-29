@@ -68,7 +68,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 			<div class="row">
 				<div class="col-xs-6 col-md-3">
 					<label>Year of claim of incident</label>
-					<input type="text" class="form-control" name="Yearclaim" id="Yearclaim" placeholder="Year of claim of incident"<?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Yearclaim']; }else{ echo '';}?> >
+					<input type="number" class="form-control" name="Yearclaim" id="Yearclaim" placeholder="Year of claim of incident"<?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Yearclaim']; }else{ echo '';}?> oninput="this.value = Math.abs(this.value)" min="0">
 				</div>
 				<div class="col-xs-6 col-md-3">
 					<label>Name of claimant</label>
@@ -87,7 +87,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 				<div class="row">
 					<div class="col-xs-6">
 						<label>Amount paid</label>
-						<input type="text" class="form-control" name="Amountpaid" id="Amountpaid" placeholder="Amount paid (if nil, please state NIL)"<?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Amountpaid']; }else{ echo '';}?>>
+						<input type="number" class="form-control" name="Amountpaid" id="Amountpaid" placeholder="Amount paid (if nil, please state NIL)"<?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Amountpaid']; }else{ echo '';}?> oninput="this.value = Math.abs(this.value)" min="0">
 					</div>
 				</div>
 				<div class="row">

@@ -2291,9 +2291,9 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             </div>
                             
                         </div>
-					<?php if($key!="0"):?>
+					<!--<?php //if($key!="0"):?>-->
 					<a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>	
-                    <?php endif;?>
+                    <!--<?php //endif;?>-->
 					</div>
                 <?php
     endforeach;
@@ -2386,7 +2386,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 </div>
                             </div>
                         </div>
-						<!--<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>-->
+						<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
 					</div>
 				<?php endif; ?>
 
@@ -3207,7 +3207,7 @@ if(isset($_POST['MT'])){
                         </div>
                     </div>
 					</div>
-					<!--<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>-->
+					<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
                 </div>
 
                 <div class="col-xs-12">
@@ -3263,7 +3263,7 @@ endif;
 			 
 		}
          $('.add-workplace-join').click(function(){
-			
+			$('#workplaceblocks [id^="workplace"]').addClass('fade');
             var number = Number($('#wpnumber').val());
             var i = Number(number +1);
 			if(i>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
@@ -3291,8 +3291,8 @@ endif;
           $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
           
         });
-        $("a[href^=#workplace]").live( "click", function(){ });
-        $("[class^=deletewp]").live( "click", function(){
+        $(document).on( "click", "a[href^=#workplace]", function(){ });
+        $(document).on( "click", "[class^=deletewp]",function(){
              var x = $(this).attr("class").replace('deletewp', '');
             $("#workplaceli"+ x).remove();
             $("#workplace"+ x).remove();
@@ -3301,7 +3301,7 @@ endif;
 		  var t = Number(n -1);
 		 
 		$('input[name=wpnumber]').val(t);
-		if(i>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
+			if($('input[name=wpnumber]').val()>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
         });
     });
     $('.add-additional-qualification').click(function(){
