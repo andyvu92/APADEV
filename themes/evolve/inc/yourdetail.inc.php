@@ -1920,6 +1920,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<input type="hidden" name="addCard">
 					<div class="col-lg-12">
 						<div class="chevron-select-box">
+						<label for="">Payment method:<span class="tipstyle"> *</span></label>
 						<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 						<?php 
 							$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
