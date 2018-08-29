@@ -1005,7 +1005,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								<div class="row">
 								<fieldset class="col-xs-12 col-sm-6 none-padding" id="cardinfo">
 									<div class="chevron-select-box">
-									<select  id="Paymentcard" name="Paymentcard" style="width:100%;">
+									<select class="form-control" id="Paymentcard" name="Paymentcard" style="width:100%;">
 									<?php
 									if (sizeof($cardsnum)!=0) {
 										foreach( $cardsnum["results"] as $cardnum) {
@@ -1915,7 +1915,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 		</form>
 		<div id="addPaymentCardForm" style="display:none;">
 			<form action="/your-details?action=addcard" method="POST" id="formaddcard">
-				<div class="row"><div class="col-lg-12">Add a new card:</div></div>
+				<div class="row"><div class="col-lg-12"><h3 style="color:#000; margin-top: 0" class="light-lead-heading cairo">Add a new card:</h3></div></div>
 				<div class="row">
 					<input type="hidden" name="addCard">
 					<div class="col-lg-12">
@@ -1950,7 +1950,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				<div class="row">
 					<div class="col-lg-6">
 						<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-						<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" required maxlength="4">
+						<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4">
 					</div>
 				</div>
 				<div class="row"> 
@@ -2044,6 +2044,12 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 	</div>
 	</div>
 	</div>
+</div>
+<div class="overlay">
+	<section class="loaders">
+		<span class="loader loader-quart">
+		</span>   
+	</section>
 </div>
 <?php logRecorder(); ?>
 <script type="text/javascript">

@@ -885,7 +885,7 @@ if(isset($_SESSION['UserId'])) {
 					</div>
 					<div id="checkMessage" class="display-none">
 					<span>Oops! The email you entered does not exist.</span>
-					<span>Please try another emai laddress or join the APA today.</span>
+					<span>Please try another email address or join the APA today.</span>
 					</div>
                 </div>
 
@@ -921,8 +921,14 @@ if(isset($_SESSION['UserId'])) {
 						}
 						});
 			}
-
-			
+		</script>
+		<script>
+		jQuery(document).ready(function(){
+			$('#Fid').on('keyup', function(){
+				console.log('asd');
+				$(this).trigger('checkEmailFunction');
+			});
+		});
 		</script>
         </div>
         

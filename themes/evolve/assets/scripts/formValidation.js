@@ -308,7 +308,10 @@ jQuery(document).ready(function($) {
 		
 	});
 	$('[class^=join-details-button]').click(function(){
-		if(validateFun()==false){alert("please fill out all required fields *");return false;} 
+		if(validateFun()==false){
+			$('.overlay').fadeOut();
+			$('#insurancePopUp').fadeOut();
+			alert("please fill out all required fields *");return false;} 
         var i = Number($(this).attr("class").replace('join-details-button', ''));
 		var x = Number(i + 1);
 		

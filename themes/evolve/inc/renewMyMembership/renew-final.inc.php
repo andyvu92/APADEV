@@ -329,7 +329,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 		<?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>   
 			<fieldset>
 				<div class="chevron-select-box">
-					<select  id="Paymentcard" name="Paymentcard" readonly>
+					<select class="form-control" id="Paymentcard" name="Paymentcard" readonly>
 					<?php
 						
 							foreach( $cardsnum["results"] as $cardnum) {
@@ -457,7 +457,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 				</div>
 				<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"):?>
 					<div class="flex-col-12" style="text-align: center">
-						<button style="margin-top: 30px;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payments</button>	
+						<button style="margin: 30px 0 0 0;" type="button" class="accent-btn" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payments</button>	
 					</div>
 				<?php endif;?>
 				<?php 
