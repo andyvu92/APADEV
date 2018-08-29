@@ -1782,7 +1782,7 @@
 			<?php 
 				$Totalnumber = doubleval($pd_detail['Totalnumber']);
 				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
-				$Now = strtotime(date('d-m-Y'));
+				$Now = strtotime(date('m-d-Y'));
 				$fullStatus = false;
 				$Div = $Totalnumber - $Enrollednumber;
 				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
@@ -1941,7 +1941,7 @@
 			<?php 
 				$Totalnumber = doubleval($pd_detail['Totalnumber']);
 				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
-				$Now = strtotime(date('d-m-Y'));
+				$Now = strtotime(date('m-d-Y'));
 				$Div = $Totalnumber - $Enrollednumber;
 				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";  
