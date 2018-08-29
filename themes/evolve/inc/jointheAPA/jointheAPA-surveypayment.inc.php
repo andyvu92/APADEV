@@ -259,7 +259,7 @@ if(isset($_POST['step2-1'])) {
 				</div>
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-7">
-					Total(inc.GST)	
+					Total (inc. GST)	
 					</div>
 					<div class="flex-col-5">
 			        $<span id="totalPayment"><?php echo $scheduleDetails['OrderTotal'];?></span>
@@ -360,6 +360,7 @@ if(isset($_POST['step2-1'])) {
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-3">
 				<div class="chevron-select-box">
+				<label for="">Payment method:<span class="tipstyle"> *</span></label>
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 				<?php 
 					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
@@ -405,10 +406,11 @@ if(isset($_POST['step2-1'])) {
 		</div>
 	<?php endif; ?>  
 	<?php if (sizeof($cardsnum["results"])==0): ?> 
-	<div id="anothercardBlock" class="row">				   
+	<div id="" class="row">				   
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-3">
 				<div class="chevron-select-box">
+				<label for="">Payment method:<span class="tipstyle"> *</span></label>
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 				<?php 
 					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
@@ -457,7 +459,7 @@ if(isset($_POST['step2-1'])) {
 		<div class="row">
 			<div class="col-xs-12">
 				<input popup class="styled-checkbox" type="checkbox" id="jprivacy-policy">
-				<label for="jprivacy-policy" id="privacypolicyl" popup-target="privacypolicyWindow"><span class="tipstyle">*&nbsp;</span>I agree to the APA Privacy policy</label>
+				<label for="jprivacy-policy" id="privacypolicyl" popup-target="privacypolicyWindow"><span class="tipstyle">*&nbsp;</span>I agree to the APA Terms and Conditions</label>
 			</div>
 
 			<!--<div class="col-xs-12 display-none" id="rolloverblock">
