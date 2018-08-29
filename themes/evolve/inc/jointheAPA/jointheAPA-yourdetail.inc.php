@@ -3294,7 +3294,7 @@ endif;
 		  var t = Number(n -1);
 		 
 		$('input[name=wpnumber]').val(t);
-		if(i>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
+			if($('input[name=wpnumber]').val()>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
         });
     });
     $('.add-additional-qualification').click(function(){
