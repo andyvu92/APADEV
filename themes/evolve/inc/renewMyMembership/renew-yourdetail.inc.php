@@ -1486,7 +1486,8 @@ jQuery(document).ready(function($) {
 	$('#workplace').click(function(){
 		$('#dashboard-right-content').addClass("autoscroll");
 	});
-	if($('#wpnumber').val()=="0"){
+	/*****just hidden the workplace when the user has no workplace data******/
+	/*if($('#wpnumber').val()=="0"){
 			var number = Number($('#wpnumber').val());
 			var i = Number(number +1);
 			//var j = Number(number +2);
@@ -1511,7 +1512,7 @@ jQuery(document).ready(function($) {
 ?>;
 		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
 			 
-	}
+	}*/
 	$('.add-workplace-join').click(function(){
 		var number = Number($('#wpnumber').val());
 		var i = Number(number +1);
