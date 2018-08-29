@@ -131,19 +131,15 @@ div[id^="home-tile-view-block"] .homeBottom .content .item-description .NextIcon
 }
 div.ButtonIconHolder {
 	width: 60px;
-	height: 40px;
+	height: 38px;
 	overflow: hidden;
 	transition: 0.3s;
 	-webkit-transition-timing-function: cubic-bezier(0.2,0.45,0.75,0.8);
 	transition-timing-function: cubic-bezier(0.2,0.45,0.75,0.8);
 	.OtherSites {
-		background-image: url('/sites/default/files/OTHER SITES G 22X18.png');
-		width: 22px;
+		width: 60px;
 		height: 20px;
 		margin: 10px auto 0px;
-		&:hover {
-			background-image: url('/sites/default/files/OTHER SITES B 22X18.png');
-		}
 	}
 	.ShoppingCartEmpty {
 		background-image: url('/sites/default/files/SHOPPING CART G 24X18.png');
@@ -186,16 +182,16 @@ div.ButtonIconHolder {
 	}
 }
 div.borderLeftForTop {
-	border-left: rgba(0,0,0,0.1) 2px solid;
+	border-left: rgba(0,0,0,0.3) 0.3px solid;
 }
 div.borderLeftForTopRight {
-	border-right: rgba(0,0,0,0.1) 2px solid;
+	border-right: rgba(0,0,0,0.3) 0.3px solid;
 }
 div.LogOutPadding {
 	width: 80px;
 }
 div.LogInPadding {
-	width: 110px;
+	width: 125px;
 }
 div.DashboardPadding {
 	width: 60px;
@@ -214,10 +210,10 @@ div.DashboardwithButtonIcon {
 	width: 48px;
 }
 .LogInPadding .info {
-	width: 105px;
+	width: 120px;
     height: 38px;
     margin: auto;
-    padding: 7px 0 2px;
+    padding: 10px 0 2px;
     background-color: transparent;
     border: none;
 	.withButtonIcon {
@@ -226,12 +222,53 @@ div.DashboardwithButtonIcon {
 }
 .OtherSitesList {
 	position: fixed;
-    width: 300px;
-    height: 500px;
-    right: -300px;
+    width: 350px;
+    height: 100%;
+    right: -370px;
     top: 0;
 	background-color: white;
 	z-index: 15;
+	padding: 82px 50px;
+	box-shadow: 3px 0 43px 0;
+	$:first-child {
+		margin-bottom: 14px;
+	}
+	.OtherListTop {
+		margin-bottom: 15px;
+		a {
+			color: #2D3E52;
+			letter-spacing: 0.4px;
+			font-size: 16px;
+			&:hover {
+				color: rgb(0,159,218);
+			}
+		}
+	}
+	h4.OtherListTop {
+		color: rgb(0,159,218);
+	}
+}
+.OthersiteButtonClose {
+	float: left;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    width: 30px;
+    top: 0;
+    margin: 0;
+    background-color: rgb(0,159,218);
+    z-index: 16;
+	cursor: pointer;
+	.OthersiteButtonCloseArrow {
+		top: calc(~'50% - 20px');
+		position: absolute;
+		width: 20px;
+		background-image: url("/sites/default/files/dashboard-icon/CHEVRON FORWARD-W -3.png");
+		height: 38px;
+		z-index: 20;
+		background-repeat: no-repeat;
+		left: calc(~'50% - 10px');
+	}
 }
 div.OutwithButtonIcon  input{
 	background-color:transparent;
@@ -242,8 +279,38 @@ div.OutwithButtonIcon  input{
 div#logoutButton, div#loginButton, div#DashboardButton {
 	cursor: pointer;
 }
+div.OthersiteButton {
+	width: 120px;
+}
 div.ShoppingCartBorder, div.OthersiteButton {
 	cursor: pointer;
+}
+/* homepage top nav icons */
+.social-icons .instagram:before {
+	content: '';
+	color: white;
+}
+.region-socials .social-icons ul:not(.contextual-links) li a.instagram {
+	background-image: url("/sites/default/files/INSTAGRAM/INSTAGRAM ICON G15.png");
+    background-repeat: no-repeat;
+    background-position: 50%;
+	:before {
+		content: '';
+		color: white;
+	}
+	:hover {
+		background-repeat: no-repeat;
+	}
+	.insta {
+		background-image: url("/sites/default/files/INSTAGRAM/INSTAGRAM ICON W15.png");
+		background-repeat: no-repeat;
+		background-position: 50%;
+		content: '';
+		z-index: 10;
+	}
+}
+.page-node-84 .dexp-body-inner .sticky-wrapper {
+	margin: 0;
 }
 /* homepage nav hover cancel */
 #section-header .dexp-dropdown > ul > li:hover > a, #section-header .dexp-dropdown > ul > li.active > a {
@@ -251,6 +318,18 @@ div.ShoppingCartBorder, div.OthersiteButton {
 }
 div.SSOlogin {
     min-height: 0;
+}
+.region-socials .block {
+	height: 38px;
+}
+.region-socials ul:not(.contextual-links) li {
+	border-left: 0.5px solid rgba(0,0,0,0.3);
+}
+.SocialIcons {
+	border-bottom: 0.5px solid rgba(0,0,0,0.3);
+}
+.region-socials ul:not(.contextual-links) li a {
+	width: 43px;
 }
 @media screen and (max-width: 767px) {
 	div[id^="home-tile-view-block"] .homeBottom .content .portfolio-image {
@@ -295,7 +374,7 @@ div.SSOlogin {
 		display: none;
 	}
 	div.ButtonIconHolder {
-		width: 40px;
+		width: 38px;
 	}
 	div.ButtonIconHolder .Log-out {
 		margin-left: 5px;
@@ -323,11 +402,11 @@ div.SSOlogin {
 		width: 85px
 	}
 	.region-socials ul:not(.contextual-links) li:last-child {
-		border-right: 2px solid rgba(0,0,0,0.1);
+		border-right: rgba(0,0,0,0.3) 0.3px solid;
 	}
 	div.borderLeftForTop {
 		border-left: 0;
-		border-right: rgba(0,0,0,0.1) 2px solid;
+		border-right: rgba(0,0,0,0.3) 0.3px solid;
 	}
 	div.ShoppingCartBorder {
 		border-right: 0;
@@ -336,7 +415,7 @@ div.SSOlogin {
 
 @media screen and (max-width: 450px) {
 	div.ButtonIconHolder {
-		width: 40px;
+		width: 38px;
 	}
 	div.ButtonIconHolder .Log-out {
 		margin-left: 5px;
@@ -365,13 +444,13 @@ div.SSOlogin {
 	}
 	div.borderLeftForTop {
 		border-left: 0;
-		border-right: rgba(0,0,0,0.1) 2px solid;
+		border-right: rgba(0,0,0,0.3) 0.3px solid;
 	}
 }
 
 @media screen and (max-width: 420px) {
 	div.ButtonIconHolder {
-		width: 40px;
+		width: 38px;
 	}
 	div.ButtonIconHolder .Log-out {
 		margin-left: 5px;
@@ -402,7 +481,7 @@ div.SSOlogin {
 
 @media screen and (max-width: 380px) {
 	div.ButtonIconHolder {
-		width: 40px;
+		width: 38px;
 	}
 	div.ButtonIconHolder .Log-out {
 		margin-left: 5px;
@@ -434,7 +513,7 @@ div.SSOlogin {
 
 @media screen and (max-width: 350px) {
 	div.ButtonIconHolder {
-		width: 40px;
+		width: 38px;
 	}
 	div.ButtonIconHolder .Log-out {
 		margin-left: 5px;

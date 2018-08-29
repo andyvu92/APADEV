@@ -1463,7 +1463,6 @@
 								$( "#CMemberid" ).focus();
 								$("#CMemberid").css("border", "1px solid red");
 								$(".join-details-button2").addClass("display-none");
-								
 							}
 							else{
 								$('#confirmMessage').html("");
