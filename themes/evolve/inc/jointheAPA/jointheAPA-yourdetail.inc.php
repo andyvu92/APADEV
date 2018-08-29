@@ -3256,7 +3256,7 @@ endif;
 			 
 		}
          $('.add-workplace-join').click(function(){
-			
+			$('#workplaceblocks [id^="workplace"]').addClass('fade');
             var number = Number($('#wpnumber').val());
             var i = Number(number +1);
 			if(i>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
@@ -3284,8 +3284,8 @@ endif;
           $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
           
         });
-        $("a[href^=#workplace]").on( "click", function(){ });
-        $("[class^=deletewp]").on( "click", function(){
+        $(document).on( "click", "a[href^=#workplace]", function(){ });
+        $(document).on( "click", "[class^=deletewp]",function(){
              var x = $(this).attr("class").replace('deletewp', '');
             $("#workplaceli"+ x).remove();
             $("#workplace"+ x).remove();

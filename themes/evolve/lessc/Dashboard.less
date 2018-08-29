@@ -2876,7 +2876,10 @@ form{
 }
 
 form{
-    input[type="text"]:not([readonly]):not([disabled]), select, textarea[type="text"]:not([readonly]):not([disabled]){
+    input[type="text"]:not([readonly]):not([disabled]), select, 
+    textarea[type="text"]:not([readonly]):not([disabled]), 
+    input[type="date"]:not([readonly]):not([disabled]),
+    input[type="number"]:not([readonly]):not([disabled]){
         &:focus{
             border-color: #66afe9!important;
             outline: 0!important;

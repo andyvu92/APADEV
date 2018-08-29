@@ -274,6 +274,21 @@ jQuery(document).ready(function() {
   });
 });
 
+jQuery(document).ready(function() {
+  $(document).on( "click", "[class^=deletewp]",function(){
+    var t = $('#wpnumber').val();
+    $('[id^="workplaceli"]').removeClass('active');
+    $('[id^="workplaceli"]:nth-child(' + t + ')').addClass('active');
+    $('#workplaceblocks [id^="workplace"]:nth-child(' + t + ')').addClass('active in');
+  });
+
+  $(document).on( "click", "[id^='workplaceli']",function(){
+    var x = $(this).attr("id").replace('workplaceli', '');
+    $('#workplaceblocks [id^="workplace"]').removeClass('active in').addClass('fade');
+    $('#workplaceblocks [id^="workplace' + x +'"]').addClass('active in');
+  });
+});
+
 //TRIGGER DELETE QUALIFICATION(SS) POPUPS
 jQuery(document).ready(function() {
   $(document).on("click",".callDeleteEdu", function(){
