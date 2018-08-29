@@ -1787,9 +1787,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								</div>
 							</div>
 						</div>
-						<?php if($key!="0"):?>
+						<!--<?php //if($key!="0"):?>-->
 						<a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>
-						<?php endif;?>
+						<!--<?php //endif;?>-->
 					</div>
 
 				<?php endforeach;?>
@@ -1881,7 +1881,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                                 </div>
                             </div>
                         </div>
-						<!--<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>-->
+						<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
 					</div>
 				<?php endif; ?>
 				</div>
@@ -1920,6 +1920,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 					<input type="hidden" name="addCard">
 					<div class="col-lg-12">
 						<div class="chevron-select-box">
+						<label for="">Payment method:<span class="tipstyle"> *</span></label>
 						<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 						<?php 
 							$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
@@ -2056,7 +2057,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 		$('#workplace').click(function(){
 		$('#dashboard-right-content').addClass("autoscroll");
 		});
-		if($('#wpnumber').val()=="0"){
+		/*****just hidden the workplace when the user has no workplace data******/
+		/*if($('#wpnumber').val()=="0"){
 			var number = Number($('#wpnumber').val());
 			var i = Number(number +1);
 			//var j = Number(number +2);
@@ -2082,7 +2084,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
 		 
 			 
-		}
+		}*/
 		$('.add-workplace-join').click(function(){
 			var number = Number($('#wpnumber').val());
 			var i = Number(number +1);

@@ -74,7 +74,9 @@ jQuery(document).ready(function($) {
 		}
 		if($('.down2:visible').length !== 0){
 			if($("input[name=Memberid]").val() ==''){$("input[name=Memberid]").addClass("focuscss");}else{$("input[name=Memberid]").removeClass("focuscss");}
-			if (!isValidEmailAddress($("input[name=Memberid]").val())) {$("input[name=Memberid]").addClass("focuscss");$('#checkMessage').html("this email address is not valid");}else{$("input[name=Memberid]").removeClass("focuscss"); $('#checkMessage').html("");}
+			if($("input[name=CMemberid]").val() ==''){$("input[name=CMemberid]").addClass("focuscss");}else{$("input[name=CMemberid]").removeClass("focuscss");}
+			if ($("input[name=Memberid]").val() !=='') {if(!isValidEmailAddress($("input[name=Memberid]").val())) {$("input[name=Memberid]").addClass("focuscss");$('#validateMessage').html("this email address is not valid");}else{$("input[name=Memberid]").removeClass("focuscss"); $('#validateMessage').html("");}}
+			if ($("input[name=CMemberid]").val() !==''){if(!isValidEmailAddress($("input[name=CMemberid]").val())) {$("input[name=CMemberid]").addClass("focuscss");$('#confirmMessage').html("this email address is not valid");}else{$("input[name=CMemberid]").removeClass("focuscss"); $('#confirmMessage').html("");}}
 			if($("input[name=Password]").length !==0){
 				if($("input[name=Password]").val() ==''){$("input[name=Password]").addClass("focuscss");}else{$("input[name=Password]").removeClass("focuscss");}
 			}
@@ -83,7 +85,7 @@ jQuery(document).ready(function($) {
 			}
 			if($("select[name=MemberType]").val() ===''){$("select[name=MemberType]").addClass("focuscss");}else{$("select[name=MemberType]").removeClass("focuscss");}
 			//if($("select[name=Branch]").val() ===''){$("select[name=Branch]").addClass("focuscss");}else{$("select[name=Branch]").removeClass("focuscss");}
-		    if($("input[name=Memberid]").val() =='' || !isValidEmailAddress($("input[name=Memberid]").val()) ||$("select[name=MemberType]").val() ===''){
+		    if($("input[name=Memberid]").val() =='' || !isValidEmailAddress($("input[name=Memberid]").val()) || $("input[name=CMemberid]").val() =='' ||$("select[name=MemberType]").val() ===''){
 				return false;
 		    }
 			if($("input[name=Password]").length !==0) {
@@ -141,7 +143,7 @@ jQuery(document).ready(function($) {
 					}
 					if($("input[name=Ugraduate-country"+t+"]").val() ==''){$("input[name=Ugraduate-country"+t+"").addClass("focuscss");}else{$("input[name=Ugraduate-country"+t+"").removeClass("focuscss");}
 					if($("select[name=Ugraduate-yearattained"+t+"]").val() ==''){$("select[name=Ugraduate-yearattained"+t+"]").addClass("focuscss");}else{$("select[name=Ugraduate-year-attained"+t+"]").removeClass("focuscss");}
-					if($("select[name=Udegree"+t+"]").val() ==''||$("select[name=Undergraduate-university-name"+t+"]").val() ==''||$("input[name=Ugraduate-country"+t+"]").val() ==''||$("select[name=Ugraduate-year-attained"+t+"]").val() ==''){
+					if($("select[name=Udegree"+t+"]").val() ==''||$("select[name=Undergraduate-university-name"+t+"]").val() ==''||$("input[name=Ugraduate-country"+t+"]").val() ==''||$("select[name=Ugraduate-yearattained"+t+"]").val() ==''){
 						return false;
 					}
 					if(!$("input[name=Undergraduate-university-name-other"+t+"]").hasClass("display-none")){
@@ -342,6 +344,11 @@ jQuery(document).ready(function($) {
 		$('.tabtitle3 span').removeClass("text-underline");
 		$('.tabtitle4 span').addClass("text-underline");
 		
+	});
+	$('.your-details-prevbutton4').click(function(){
+		if($('input[name=wpnumber]').val() == "0"){
+			$('input[name=wpnumber]').val("1"); 
+		}
 	});
 	$('#PDPlaceOrder').click(function(){
 		if($('#checkTerm').val() == "1"){

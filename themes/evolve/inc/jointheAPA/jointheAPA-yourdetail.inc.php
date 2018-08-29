@@ -2284,9 +2284,9 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                             </div>
                             
                         </div>
-					<?php if($key!="0"):?>
+					<!--<?php //if($key!="0"):?>-->
 					<a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>	
-                    <?php endif;?>
+                    <!--<?php //endif;?>-->
 					</div>
                 <?php
     endforeach;
@@ -2379,7 +2379,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 </div>
                             </div>
                         </div>
-						<!--<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>-->
+						<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
 					</div>
 				<?php endif; ?>
 
@@ -2802,9 +2802,10 @@ if(isset($_GET['MT'])){
                         <label for="">Member ID (Your email address)<span class="tipstyle"> *</span></label>
                         <input type="email" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)">
                     <div id="checkMessage" class="display-none">This email address matches one that’s already registered, please use a different one or <a class="info" data-target="#loginAT" data-toggle="modal" type="button">
-	
+					
 		<i class="Log-in">&nbsp;</i>login 
 	</a>to your existing account.</div>
+					<div id="validateMessage"></div>
                     <script>
                     function checkEmailFunction(email) {
                     $.ajax({
@@ -3199,7 +3200,7 @@ if(isset($_GET['MT'])){
                         </div>
                     </div>
 					</div>
-					<!--<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>-->
+					<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
                 </div>
 
                 <div class="col-xs-12">
@@ -3251,15 +3252,17 @@ endif;
 			echo json_encode($_SESSION['country']);
 ?>;
 		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
-		 
+		  
 			 
 		}
          $('.add-workplace-join').click(function(){
 			
             var number = Number($('#wpnumber').val());
             var i = Number(number +1);
+			if(i>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
             //var j = Number(number +2);
-            $('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span></li>' );
+			if(number ==0){$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span><a class="skip">Skip this step</a></li>' );}
+            else {$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span></li>' );}
             $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
             //$('#wpnumber').text(i);
 			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
@@ -3291,6 +3294,7 @@ endif;
 		  var t = Number(n -1);
 		 
 		$('input[name=wpnumber]').val(t);
+		if(i>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
         });
     });
     $('.add-additional-qualification').click(function(){

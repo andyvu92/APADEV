@@ -449,7 +449,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-6">
-					Today's total(inc.GST)	
+					Today's total (inc. GST)	
 					</div>
 					<div class="flex-col-6">
 			        $<?php echo $scheduleDetails['InitialPaymentAmount'];?>

@@ -1782,11 +1782,11 @@
 			<?php 
 				$Totalnumber = doubleval($pd_detail['Totalnumber']);
 				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
-				$Now = strtotime(date('d-m-Y'));
+				$Now = strtotime(date('m-d-Y'));
 				$fullStatus = false;
 				$Div = $Totalnumber - $Enrollednumber;
 				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
-					echo "Closed";  
+					echo "Closed";
 					$fullStatus = true;
 				} elseif($Div <= 5){
 					echo "Almost Full"; 
@@ -1794,7 +1794,7 @@
 					echo "Full"; 
 					$fullStatus = true;
 				} elseif($Div >= 5){
-					echo "Open"; 
+					echo "Open";
 				}
 				/* for 10% or less logic 
 				$Div = $Enrollednumber/$Totalnumber;
@@ -1941,7 +1941,7 @@
 			<?php 
 				$Totalnumber = doubleval($pd_detail['Totalnumber']);
 				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
-				$Now = strtotime(date('d-m-Y'));
+				$Now = strtotime(date('m-d-Y'));
 				$Div = $Totalnumber - $Enrollednumber;
 				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";  
