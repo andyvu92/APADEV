@@ -727,6 +727,9 @@ if($resultdata['result']) {
 		}
 		//print_r($result);
 		deleteSession();
+		// re-direct users to the homepage
+		header("Location: /");
+		exit;
 		//echo "logged out";
 	}
 ?>
