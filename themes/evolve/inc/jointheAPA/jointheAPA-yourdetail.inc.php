@@ -3281,8 +3281,8 @@ endif;
           $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
           
         });
-        $("a[href^=#workplace]").live( "click", function(){ });
-        $("[class^=deletewp]").live( "click", function(){
+        $("a[href^=#workplace]").on( "click", function(){ });
+        $("[class^=deletewp]").on( "click", function(){
              var x = $(this).attr("class").replace('deletewp', '');
             $("#workplaceli"+ x).remove();
             $("#workplace"+ x).remove();

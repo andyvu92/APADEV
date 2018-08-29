@@ -1109,7 +1109,7 @@ jQuery(document).ready(function($) {
 		$("#totalCost").text('$'+Sum);
 	}
 	 
-	$('[id^=labelmQ]').click(function() {
+	$(document).on('click', '[id^=labelmQ]', function() {
 		var i = $(this).attr("id").replace('labelmQ', '');
 		if(i!=="0"){
 			$('[id^=question]:not(.function)').hide();
@@ -1336,6 +1336,11 @@ jQuery(document).ready(function($) {
 	});
 
 	$(document).on('click', '.join-apa-final a', function(){
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
+
+	$(document).on('click', '#your-details-submit-button', function(){
 		$('.overlay').fadeIn();
 		$('.loaders').css('visibility','visible').hide().fadeIn();
 	});

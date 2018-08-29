@@ -133,11 +133,11 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 				<label>Amount paid</label>
 				<label>Has the claim been finalised?</label>
 				</div>
-				<div class="col-xs-6 col-md-3">
+				<div class="col-xs-6 col-md-3 restricted-width">
 					<input class="styled-radio-select" type="radio" name="Finalisedclaim" id="Finalisedclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="1") echo 'checked="checked"';?>>
 					<label class="light-font-weight" for="Finalisedclaim1">Yes</label>	
 				</div>
-				<div class="col-xs-6 col-md-3">
+				<div class="col-xs-6 col-md-3 restricted-width">
 					<input class="styled-radio-select" type="radio" name="Finalisedclaim" id="Finalisedclaim2" value="false" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="0") echo 'checked="checked"';?><?php if($insuranceDataTag==0) echo 'checked="checked"';?>>
 					<label class="light-font-weight" for="Finalisedclaim2">No</label>	
 				</div>

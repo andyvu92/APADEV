@@ -321,7 +321,7 @@ $PRFPrice = 0;
                             $price +=$reviewData['PRFdonation']; }
 						if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"){ 
 							echo '<div class="flex-cell flex-flow-row table-cell">
-                            <div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Admin fee
+                            <div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Admin fee</div>
                             <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.$scheduleDetails['AdminFee'].'</div>
                             <div class="flex-col-2 action-col"></div>
                             </div>'; 
@@ -364,7 +364,7 @@ $PRFPrice = 0;
 		<?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>   
 			<fieldset>
 				<div class="chevron-select-box">
-					<select  id="Paymentcard" name="Paymentcard" readonly>
+					<select class="form-control" id="Paymentcard" name="Paymentcard" readonly>
 					<?php
 						
 							foreach( $cardsnum["results"] as $cardnum) {
@@ -489,7 +489,7 @@ $PRFPrice = 0;
 				</div>
 				<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"):?>
 					<div class="flex-col-12" style="text-align: center">
-						<button style="margin-top: 30px;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payments</button>	
+						<button style="margin: 30px 0 0 0;" type="button" class="accent-btn" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payments</button>	
 					</div>
 				<?php endif;?>
 				<?php 
