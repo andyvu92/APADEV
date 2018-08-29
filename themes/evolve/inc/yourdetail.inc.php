@@ -1787,9 +1787,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								</div>
 							</div>
 						</div>
-						<?php if($key!="0"):?>
+						<!--<?php //if($key!="0"):?>-->
 						<a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>
-						<?php endif;?>
+						<!--<?php //endif;?>-->
 					</div>
 
 				<?php endforeach;?>
@@ -1881,7 +1881,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
                                 </div>
                             </div>
                         </div>
-						<!--<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>-->
+						<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
 					</div>
 				<?php endif; ?>
 				</div>
