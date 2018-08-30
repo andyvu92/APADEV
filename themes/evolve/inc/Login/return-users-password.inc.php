@@ -1,3 +1,11 @@
+<?php
+	// forgot password
+	if(isset($_POST["Fid"])) {
+		$input["email"] = $_POST["Fid"];
+		$output = GetAptifyData("6", $input);
+		//print_r($output);
+	}
+?>
 <div id="forgot-pw-form">   
 <form method="POST" action="<?php echo $url; ?>" name="resetPass" id="resetPass">
 	<div class="flex-container">
