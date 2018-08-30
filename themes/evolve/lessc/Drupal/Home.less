@@ -154,7 +154,7 @@ div.ButtonIconHolder {
 	}
 	.ShoppingCart {
 		background-image: url('/sites/default/files/SHOPPING CART B 24X18.png');
-		background-position: 0 20px;
+		background-position: 0 18px;
 		width: 24px;
 		height: 18px;
 		margin: 10px auto 0px;
@@ -173,12 +173,15 @@ div.ButtonIconHolder {
 		margin-right: 5px;
 	}
 	.Dashboard {
-		background-image: url('/sites/default/files/MEMBER ICON.png');
+		background-image: url('/sites/default/files/DASHBOARD/dashboard-G20x20.png');
 		background-position: 0 60px;
 		width: 20px;
 		height: 20px;
 		float: left;
 		margin: 8px 0 0 14px;
+		&:hover {
+			background-image: url('/sites/default/files/DASHBOARD/dashboard-B20x20.png');
+		}
 	}
 }
 div.borderLeftForTop {
@@ -187,8 +190,10 @@ div.borderLeftForTop {
 div.borderLeftForTopRight {
 	border-right: rgba(0,0,0,0.3) 0.3px solid;
 }
-div.LogOutPadding {
-	width: 80px;
+div.LogOutPadding form div.nameHello {
+	float: right;
+	height: 38px;
+	padding: 9px 5px 0 20px;
 }
 div.LogInPadding {
 	width: 125px;
@@ -201,7 +206,9 @@ div.withButtonIcon {
 	margin: auto;
 }
 div.OutwithButtonIcon {
-	width: 78px;
+	width: 70px;
+	margin: 0 1px;
+	float: right;
 }
 div.InwithButtonIcon {
 	width: 105px;
@@ -270,11 +277,14 @@ div.DashboardwithButtonIcon {
 		left: calc(~'50% - 10px');
 	}
 }
-div.OutwithButtonIcon  input{
+div.OutwithButtonIcon input{
 	background-color:transparent;
-	padding: 10px 0 0 21px;
-	font-weight: 200;
+	padding: 0 !important;
+	font-weight: 300 !important;
 	font-size: 13px;
+	width: 65px !important;
+	min-height: 35px;
+	text-decoration: underline;
 }
 div#logoutButton, div#loginButton, div#DashboardButton {
 	cursor: pointer;
@@ -331,6 +341,11 @@ div.SSOlogin {
 .region-socials ul:not(.contextual-links) li a {
 	width: 43px;
 }
+@media screen and (max-width: 848px) {
+	.social-icons {
+		display: none;
+	}
+}
 @media screen and (max-width: 767px) {
 	div[id^="home-tile-view-block"] .homeBottom .content .portfolio-image {
 		margin: 15px 0;
@@ -361,48 +376,36 @@ div.SSOlogin {
 		margin-bottom: 2px;
 		margin-top: 2px;
 	}
-}
-
-@media screen and (max-width: 767px) {
 	.dexp-section.SocialIcons, .dexp-section.SocialIcons .container {
 		padding: 0;
 	}
 }
-
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 540px) {
 	.OthersiteButton {
 		display: none;
 	}
+	div.OthersiteButtonNoLogIn {
+		display: block;
+	}
+}
+@media screen and (max-width: 480px) {
 	div.ButtonIconHolder {
 		width: 38px;
+	}
+	div.OthersiteButtonNoLogIn {
+		width: 120px;
 	}
 	div.ButtonIconHolder .Log-out {
 		margin-left: 5px;
 	}
 	div.DashboardPadding {
 		width: 50px;
-		float: left !important;
-	}
-	div.LogOutPadding {
-		width: 110px;
 	}
 	div.LogInPadding {
 		width: 130px;
 	}
-	div.OutwithButtonIcon input {
-		padding-left: 22px;
-	}
-	div.LogInPadding, div.LogOutPadding, div.DashboardPadding {
-		float: left !important;
-	}
-	.pull-right.social-icons {
-		float: right !important;
-	}
 	div.withButtonIcon {
 		width: 85px
-	}
-	.region-socials ul:not(.contextual-links) li:last-child {
-		border-right: rgba(0,0,0,0.3) 0.3px solid;
 	}
 	div.borderLeftForTop {
 		border-left: 0;
@@ -417,6 +420,9 @@ div.SSOlogin {
 	div.ButtonIconHolder {
 		width: 38px;
 	}
+	div.OthersiteButtonNoLogIn {
+		width: 120px;
+	}
 	div.ButtonIconHolder .Log-out {
 		margin-left: 5px;
 	}
@@ -426,18 +432,8 @@ div.SSOlogin {
 	div.ButtonIconHolder .Dashboard {
 		margin-left: 15px;
 	}
-	div.OutwithButtonIcon input {
-		padding-left: 22px;
-	}
-	div.LogOutPadding {
-		width: 100px;
-		border-right: 0;
-	}
 	div.LogInPadding {
 		width: 115px;
-	}
-	div.DashboardPadding, div.LogOutPadding, div.LogInPadding {
-		float: left !important;
 	}
 	div.withButtonIcon {
 		width: 85px
@@ -452,6 +448,9 @@ div.SSOlogin {
 	div.ButtonIconHolder {
 		width: 38px;
 	}
+	div.OthersiteButtonNoLogIn {
+		width: 120px;
+	}
 	div.ButtonIconHolder .Log-out {
 		margin-left: 5px;
 	}
@@ -461,27 +460,23 @@ div.SSOlogin {
 	div.ButtonIconHolder .Dashboard {
 		margin-left: 12px;
 	}
-	div.OutwithButtonIcon input {
-		padding-left: 20px;
-	}
 	div.LogOutPadding {
-		width: 92px;
 		border-right: 0;
 	}
 	div.LogInPadding {
 		width: 110px;
 	}
-	div.DashboardPadding, div.LogOutPadding, div.LogInPadding {
-		float: left !important;
-	}
 	div.withButtonIcon {
-		width: 85px
+		width: 65px
 	}
 }
 
 @media screen and (max-width: 380px) {
 	div.ButtonIconHolder {
 		width: 38px;
+	}
+	div.OthersiteButtonNoLogIn {
+		width: 120px;
 	}
 	div.ButtonIconHolder .Log-out {
 		margin-left: 5px;
@@ -492,28 +487,27 @@ div.SSOlogin {
 	div.ButtonIconHolder .Dashboard {
 		margin-left: 10px;
 	}
-	div.OutwithButtonIcon input {
-		padding-left: 13px;
-	}
 	div.LogOutPadding {
-		width: 67px;
 		border-right: 0;
 	}
 	div.LogInPadding {
 		width: 107px;
 		border-right: 0;
 	}
-	div.DashboardPadding, div.LogOutPadding, div.LogInPadding {
-		float: left !important;
+	div.LogOutPadding form div.nameHello {
+		padding: 9px 0 0 3px;
 	}
 	div.withButtonIcon {
-		width: 85px
+		width: 60px
 	}
 }
 
 @media screen and (max-width: 350px) {
 	div.ButtonIconHolder {
 		width: 38px;
+	}
+	div.OthersiteButtonNoLogIn {
+		width: 120px;
 	}
 	div.ButtonIconHolder .Log-out {
 		margin-left: 5px;
@@ -524,11 +518,7 @@ div.SSOlogin {
 	div.ButtonIconHolder .Dashboard {
 		margin-left: 6px;
 	}
-	div.OutwithButtonIcon input {
-		padding-left: 4px;
-	}
 	div.LogOutPadding {
-		width: 55px;
 		border-right: 0;
 	}
 	div.LogInPadding {
@@ -537,17 +527,26 @@ div.SSOlogin {
 	div.InwithButtonIcon {
 		margin: 0 4px;
 	}
-	div.DashboardPadding, div.LogOutPadding, div.LogInPadding {
-		float: left !important;
+	div.LogOutPadding form div.nameHello {
+		padding: 9px 0 0 2px;
+	}
+	div.OutwithButtonIcon input {
+		width: 55px !important;
 	}
 	div.withButtonIcon {
-		width: 85px
+		width: 54px;
+	}
+	div.OtherSitesList {
+		width: 320px;
 	}
 }
 
 @media screen and (max-width: 330px) {
 	div.ButtonIconHolder {
 		width: 30px;
+	}
+	div.OthersiteButtonNoLogIn {
+		width: 120px;
 	}
 	div.ButtonIconHolder .Log-out {
 		margin-left: 5px;
@@ -556,7 +555,6 @@ div.SSOlogin {
 		width: 30px;
 	}
 	div.LogOutPadding {
-		width: 58px;
 		border-right: 0;
 	}
 	div.LogInPadding .info .withButtonIcon {
@@ -566,17 +564,11 @@ div.SSOlogin {
 	div.LogInPadding {
 		width: 86px;
 	}
-	div.DashboardPadding, div.LogOutPadding, div.LogInPadding, .pull-right.social-icons {
-		float: left !important;
-	}
 	div.ButtonIconHolder .Dashboard {
 		margin-left: 4px;
 	}
 	div.OutwithButtonIcon {
-		width: 58px;
-	}
-	div.OutwithButtonIcon input {
-		padding-left: 8px;
+		width: 54px;
 	}
 	div.ShoppingCartBorder {
 		border-right: 0;
