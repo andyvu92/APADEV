@@ -579,50 +579,74 @@ if(isset($_SESSION["UserId"])){
 
 	<div class="modal-body">
 	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
-	<h4>Registration</h4>
-
-<p>Online registration is the simplest way to secure your place. Advice concerning remaining places in any event activity does not guarantee a place, as that information is subject to continual change. Registration will not be accepted without payment. Places are allocated according to the date that an application form and payment are received by the Australian Physiotherapy Association (APA), unless otherwise stated.</p>
-
-<p>The APA reserves the right to cancel or change an event activity to an alternative date. The APA will notify those who have already registered for that particular cancelled event of the cancellation or change of date. In this case, all registered participants will receive a full refund of the event registration fee, should it be required. The APA is not responsible for other associated expenses. Registration is transferable.</p>
-
-<p>If transferring your registration or if you wish to cancel your registration, please contact the PD Officer in the state that the course is held. Transfer and cancellation requests must be received in writing. Transfers and cancellations may be subject to a fee.</p>
-
-<p>By registering for this course, you provide consent to the APA to use your comments/responses, or any photographs taken of you, for their publications and associated media and marketing channels. If you do not provide consent, it is your duty to inform the APA in writing.</p>
-
-
-	<h4>Courses</h4>
-<p>In most cases, course registration closes two weeks prior to the course commencement date. It is the participant&rsquo;s responsibility to ensure that they meet any pre-requisites as stated in the course outline found on the APA website. </p>
-
-<p>The APA requires that all participants hold current personal professional indemnity insurance for all courses and workshops. We recommend that participants who are travelling interstate to attend an APA event purchase travel insurance. </p>
-
-<p>Membership must be current at the time of the APA event to receive the APA Member or group member rates. Letters of attendance are provided at the completion of every course. Replacement copies are available at $25 (includes postage and handling). </p>
-
-<p>APA accredited courses are not available to students unless advertised otherwise. Students are able to register and attend APA lectures and PD events other than courses.</p>
-
-
-	<h4>Cancellation:</h4>
-<p>For APA courses:</p>
+	<h4>Registration:</h4>
+<p>Online registration is the simplest way to secure a place at an APA course or event.  If unable to register online for any reason, a manual registration form [hyperlink] may be completed and returned to the APA Branch office in the state that the event is being held (see state office details).</p>
+<br />
+<p>Registration will not be accepted without payment.  Places are allocated according to the date that an application form and payment are received by the Australian Physiotherapy Association (&lsquo;APA&rsquo;), unless otherwise stated.  (Information concerning remaining places in any event activity does not guarantee a place, as that information is subject to continual change).</p>
+<br />
+<p>For events (all professional development activities) where the registration fee is greater than AUD$2,000, a payment plan can be adopted as follows:</p>
 <ul>
-    <li>a participant may substitute their registration to another person or apply for a refund of monies paid prior to the course registration closing date</li>
-    <li>a participant may substitute their registration to another person or apply for a refund of monies paid (less a 20% cancellation fee) between the course registration close date and seven calendar days prior to the course commencement date</li>
-    <li>from seven calendar days prior to and up to the course commencement date, a participant may substitute their registration to another person. NO refund will be supplied</li>
-    <li>a participant may apply for a refund with a supporting Medical Certificate. Each case will be assessed on its own merits and a refund is not guaranteed. Where a refund is granted, the APA will withhold 20% of the registration fee paid, as cancellation fee.</li>
+    <li>50% deposit to secure booking</li>
+    <li>25% not less than two months prior to the event commencement</li>
+    <li>final 25% is required not less than one month prior to the event commencement.</li>
 </ul>
-
-
-<h4>Part payments</h4>
+<br />
+<h4>Confirmation of event proceeding</h4>
+<p>The APA will always make best endeavours to proceed with an event as advertised. <strong>Please note however that an event is not confirmed as proceeding</strong> until registrants have <strong>been sent confirmation notification in writing</strong> from the APA. In most cases, registrations close 2 (two) weeks prior to event commencement date and, with the exception of extenuating circumstances, events should be confirmed or cancelled not less than 2 (two) weeks prior to event commencement date. </p>
+<br />
+<p><span style="text-decoration: underline;">Lectures:</span> Please note that the 2 (two) week registration closing period does not apply to lectures and they are considered as proceeding at the time of registration.  Reminders for lectures are sent in the days prior to the lecture.  If, in the unfortunate event that a lecture needs to be cancelled, registrants will be notified as soon as practicable. </p>
+<br />
+<p><span style="text-decoration: underline;">Travelling:</span> If a registrant is travelling significant distances or interstate to attend an APA event, we strongly recommend that <strong>travel and accommodation is not booked until the event has been confirmed</strong> as per above. In the instance that an event is cancelled by the APA, registration fees are fully refundable or transferrable to another APA available event, however the APA is not responsible for a participant&rsquo;s other associated expenses with attending an APA event. </p>
+<br />
+<h4>Cancellation of events by the APA</h4>
+<p>The APA reserves the right to cancel or change an event activity to an alternative date. As such:</p>
+<ul>
+    <li>the APA will notify those who have already registered for that particular event of the cancellation or change of date usually not less than 2 (two) weeks prior the event commencement date.</li>
+    <li>in the situation of an event being cancelled or postponed/transferred to an alternative date, registrants will have the option to receive a full refund of their registration fee or transfer the registration fee to another available APA event.</li>
+</ul>
+<p>Registration cancellation by participant</p>
+<ul>
+    <li>A participant may substitute their registration to another eligible person at any time.</li>
+    <li>A participant may apply for a refund of registration monies paid in line with the following timelines:
+    <ul>
+        <li><strong>until event registration closing date:</strong> A full refund of registration monies may be honoured</li>
+        <li><strong>between the event registration close date and 7 (seven) calendar days prior to the event commencement date:</strong>  A refund of monies paid (less a 20% cancellation fee) may be honoured</li>
+        <li><strong>from 7 (seven) calendar days prior to and up to the event commencement date: </strong> No refund of registration monies paid will be provided.  A participant may apply for a refund of registration monies with a supporting Medical Certificate.  Each case will be assessed on its own merits and a refund is not guaranteed.  Where a refund is granted, the APA will withhold 20% of the registration fee paid, as a cancellation fee.  </li>
+    </ul>
+    </li>
+    <li>Participants requesting a transfer or cancellation of their registration, must contact the Professional Development Officer in the state that the event is held.  Transfer and cancellation requests must be received in writing.</li>
+</ul>
+<br />
+<h4>Participant Requirements</h4>
 <p>Part payments may be offered to APA members for courses over $2000. The payment plan is as follows:</p>
 <ul>
-    <li>50 per cent is required to secure booking. </li>
-    <li>25 per cent is required 2 months prior to the course date, and </li>
-    <li>The final 25 per cent is required 1 month prior to course date. </li>
+    <li>It is the participant&rsquo;s responsibility to ensure they meet any pre-requisites as stated in the PD event outline found on the APA website.</li>
+    <li>APA accredited courses are not available to students unless otherwise advertised.  Students are able to register and attend APA lectures and PD events other than courses.  </li>
+    <li> The APA requires that all participants hold current professional indemnity insurance that covers their participation in all professional development courses and workshops and other events, particularly those that include practical sessions.</li>
+    <li>For participants who are travelling interstate to attend an APA event, the APA suggests considering purchasing appropriate travel insurance (The APA recommend checking the policy terms and conditions to confirm what situations are covered).</li>
+    <li>APA membership must be current at the time of an APA event to receive the APA member or group member rates.  </li>
 </ul>
-
-
-<h4>Australian Physiotherapy Association Privacy Statement for Professional Development Website and Manual Registration Forms:</h4>
+<br />
+<h4>Photographs/Images/Comments</h4>
+<ul>
+    <li>By registering for any APA PD event, participants provide consent to the APA to use their comments/responses or any photographs/images taken of them for their publications and associated media and marketing channels; that is, appropriate use only for the everyday business of the APA.  If a participant does not consent, it is their duty to inform the APA in writing.  </li>
+    <li>Participants are not permitted to take photos/video recordings of other participants at an APA event (nor share them via social media or other channels) without their direct consent. </li>
+</ul>
+<br />
+<h4>CPD Hours &amp; Confirmation of Attendance</h4>
+<p><span style="text-decoration: underline;">Courses, workshops and masterclasses</span></p>
+<ul>
+    <li>Letters of attendance are provided at the completion of every course, workshop and masterclass.  Replacement copies are available at $25 (includes postage and handling).  </li>
+    <li>CPD hours will not be allocated to a member participant until all components of a course have been completed including any pre-course content (online or otherwise) and any post-course content or requirements.</li>
+</ul>
+<p><span style="text-decoration: underline;">Lectures</span> </p>
+<ul>
+    <li>Upon attendance at an APA lecture, CPD hours will be allocated to a member participant.  Please note that letters of attendance are not provided for lectures.</li>
+</ul>
 <p>The APA acknowledges and respects the privacy of its members and customers. The information that you provide on this form
-is &ldquo;personal information&rdquo; as defined by the Privacy Act 1988. The information is being collected by the APA and will be held by the APA. It may be given to service providers engaged by the APA. This information is being collected for the purpose of processing your registration for this event and keeping you informed about other upcoming events. The provision of information is voluntary but if it is not provided the APA may not be able to process your registration. You have the right to access and alter personal information about yourself in accordance with the Australian Privacy Principles and the APA privacy policy which is available for you to read on <a href="http://www.privacy@physiotherapy.asn.au" target="_self">physiotherapy.asn.au</a>. Direct any enquiries you may have in relation to this matter to our Privacy Officer who can be contacted on <a href="tel:03 9092 0888" target="_self">03 9092 0888</a> or by email at <a href="mailto:privacy@physiotherapy.asn.au">privacy@physiotherapy.asn.au</a>.</p>
-
+</p>
+<h4>Privacy</h4>
+<p>The APA acknowledges and respects the privacy of its members and customers.  The information provided by registering for an APA event is &lsquo;personal information&rsquo; as defined by the Privacy Act 1988.  The information is being collected by the APA and will be held by the APA.  It may be given to service providers engaged by the APA.  This information is being collected for the purpose of processing registrations for this event and keeping registrants/participants informed about other upcoming events.  The provision of information is voluntary but if it is not provided the APA may not be able to process registrations.  Registrants/participants have the right to access and alter personal information in accordance with the Australian Privacy Principles and the APA privacy policy, which is available to read at australian.physio. Please direct any enquiries in relation to this matter to our Privacy Officer who can be contacted on 03 9092 0888 or by email at <a href="mailto:privacy@australian.physio">privacy@australian.physio. </a></p>
 	</div>
 
 	<div class="modal-footer">
