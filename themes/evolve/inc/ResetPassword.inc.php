@@ -38,7 +38,7 @@
 		</form>
 	</div>
 		<?php
-	/*} elseif(isset($_POST["UserName"])) {
+	} elseif(isset($_POST["UserName"])) {
 		// do update!
 		$input["UserName"] = $_POST["UserName"];
 		$input["Password"] = $_POST["NPassword"];
@@ -58,7 +58,7 @@
 		// when user come here for no reason.
 		echo "<h1>Session expired!!</h1>";
 		echo "<div class='TokenExist' style='display: none;'>1</div>";
-	}*/
+	}
 	echo "<div class='TTTTT'>click here!</div>";
 ?>
 <?php logRecorder(); ?>
