@@ -30,7 +30,9 @@ if(isset($_POST["Keywords"]) || isset($_GET["Keywords"])) {
 	if(isset($_POST["Keywords"])) {$request["Keyword"] = $_POST["Keywords"];}
 	else {$request["Keyword"] = $_GET["Keywords"];}
 } else { $request["Keyword"] = ""; }
-if(isset($_POST["Typeofpd"])) {	$request["Typeofpd"] = $_POST["Typeofpd"];
+if(isset($_POST["Typeofpd"]) || isset($_GET["Typeofpd"])) {	
+	if(isset($_POST["Typeofpd"])) {$request["Typeofpd"] = $_POST["Typeofpd"];}
+	else {$request["Typeofpd"] = $_GET["Typeofpd"];}
 } else { $request["Typeofpd"] = ""; }
 if(isset($_POST["Nationalgp"]) || isset($_GET["Nationalgp"])) {	
 	if(isset($_POST["Nationalgp"])) {$request["Nationalgp"] = $_POST["Nationalgp"];}
@@ -65,7 +67,6 @@ if(isset($_GET["page"])) {
 	$request["PageNumber"] = "1";
 }
 $results = GetAptifyData("28", $request);
-
 $outputEmpty = false;
 if(isset($results['MResponse'])) {
 	//echo 'no record!!!';
@@ -308,7 +309,6 @@ if(isset($results['MResponse'])) {
 	*/ ?>
 <?php /*****************************end right item*************/?>
 </div>
-<?php logRecorder(); ?>
 <script type="text/javascript">
 	function pagesize(selectObject) {
 		var value = selectObject.value;
@@ -331,3 +331,4 @@ if(isset($results['MResponse'])) {
 	}
 </script>
 <?php endif; ?>
+<?php logRecorder(); ?>

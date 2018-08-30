@@ -772,6 +772,11 @@ if(isset($_SESSION['UserId'])) {
 }
 ?>
 <?php if(isset($_SESSION["Log-in"])): ?>
+<div class="pull-right borderLeftForTop borderLeftForTopRight" title="Other websites">
+<div class="ButtonIconHolder OthersiteButton">
+<div class="OtherSites">APA sites</div>
+</div>
+</div>
 <?php if($counts == 0): ?>
 <div class="pull-right borderLeftForTop ShoppingCartBorder" title="Shopping cart">
 	<div class="ButtonIconHolder">
@@ -792,10 +797,11 @@ if(isset($_SESSION['UserId'])) {
 </div>
 <div class="pull-right borderLeftForTop LogOutPadding">
 	<form method="POST" action="<?php echo $url; ?>" name="forlogout">
-		<input id="logoutAcButton"type="hidden" name="logout" value="out" style="display: none;" />
+		<div><input id="logoutAcButton"type="hidden" name="logout" value="out" style="display: none;" /></div>
 		<div id="logoutButton" class="ButtonIconHolder withButtonIcon OutwithButtonIcon" title="Log out">
-			<input type="submit" value="log out" />
+			<input type="submit" value="Log out" />
 		</div>
+		<div class="nameHello">Hi <?php echo $_SESSION["FirstName"]; ?></div>
 	</form>
 </div>
 
@@ -808,6 +814,11 @@ if(isset($_SESSION['UserId'])) {
 </form>
 </div-->
 <?php else: ?>
+<div class="pull-right borderLeftForTop borderLeftForTopRight" title="Other websites">
+<div class="ButtonIconHolder OthersiteButton OthersiteButtonNoLogIn">
+<div class="OtherSites">APA sites</div>
+</div>
+</div>
 <div class="pull-right borderLeftForTop LogInPadding">
 	<button class="info" data-target="#loginAT" data-toggle="modal" type="button">
 	<div class="ButtonIconHolder withButtonIcon InwithButtonIcon" title="Log in">
@@ -815,6 +826,27 @@ if(isset($_SESSION['UserId'])) {
 	</div></button>
 </div>
 <?php endif; ?>
+
+<!-- other Sites -->
+<div class="OtherSitesList"><img src="/sites/default/files/HOME/OTHER SITES ICON.png" />
+<h4 class="OtherListTop">Other APA websites</h4>
+
+<div class="OtherListTop"><a href="https://choose.physio/">Choose physio</a></div>
+
+<div class="OtherListTop"><a href="https://www.jobs4physios.com.au/">jobs4physios</a></div>
+
+<div class="OtherListTop"><a href="https://cpd4physios.com.au/">cpd4physios</a></div>
+
+<div class="OtherListTop"><a href="https://www.classifieds4physios.com.au/">classifieds4physios</a></div>
+
+<div class="OtherListTop"><a href="https://www.shop4physios.com.au/">shop4physios</a></div>
+
+<div class="OtherListTop"><a href="http://apanext2018.com.au/">APA Conference 2018</a></div>
+
+<div class="OthersiteButtonClose">
+<div class="OthersiteButtonCloseArrow">&nbsp;</div>
+</div>
+</div>
 
 <!-- Modal log-in -->
 <div class="modal fade" id="loginAT" role="dialog">

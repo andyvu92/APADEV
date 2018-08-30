@@ -33,7 +33,13 @@
 				$PDtypecode = file_get_contents("sites/all/themes/evolve/json/PDTypes.json");
 				$PDType = json_decode($PDtypecode, true);
 				foreach($PDType  as $key => $value){
-					echo '<option value="'.$PDType[$key]['ID'].'">'.$PDType[$key]['Name'].' </option>';
+					$vals = '';
+					if(isset($_POST["Typeofpd"])) {
+						if($_POST["Typeofpd"]==$PDType[$key]['ID']) { $vals = "selected='selected'"; }
+					} elseif(isset($_GET["Typeofpd"])) {
+						if($_GET["Typeofpd"]==$PDType[$key]['ID']) { $vals = "selected='selected'"; }
+					}
+					echo '<option value="'.$PDType[$key]['ID'].'" '.$vals.'>'.$PDType[$key]['Name'].' </option>';
 				}
 			?>
 		</select>
@@ -45,15 +51,17 @@
 		//$_SESSION["testTTdad"]["NationalGroup"]
 		foreach($details as $lines) {
 			$vals = '';
-			if(isset($_POST["Nationalgp"])  || isset($_GET["Nationalgp"])) {
-				if($_GET["Nationalgp"]==$lines["NGid"] || $_POST["Nationalgp"]==$lines["NGid"]) { $vals = "selected";}
+			if(isset($_POST["Nationalgp"])) {
+				if($_POST["Nationalgp"]==$lines["NGid"]) { $vals = "selected='selected'"; }
+			} elseif(isset($_GET["Nationalgp"])) {
+				if($_GET["Nationalgp"]==$lines["NGid"]) { $vals = "selected='selected'"; }
 			}
 			echo '<option value="'.$lines["NGid"].'" '.$vals.'> '.$lines["NGtitle"].' </option>';
 		}
 		?>
 		</select>
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<!--div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Region</label>
 		<select  name="Regionalgp" id="Regionalgp" multiple data-placeholder="Region">
 			<option value="NSW-CC" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="NSW-CC") { echo "selected";} ?>> NSW - CENTRAL COAST  </option>
@@ -97,7 +105,7 @@
 			<option value="WA-SW" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="WA-SW") { echo "selected";} ?>> WA - SOUTH WEST   </option>
 																																																
 		</select>
-	</div>
+	</div-->
 	<div class="col-xs-12">
 		<div class="locationAutomatic">
 			<div class="UseLocation">
@@ -143,9 +151,11 @@
 				$t = 0;
 				foreach($State  as $key => $value){
 					echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
-					if (isset($_POST["State"]) || isset($_GET["State"])) {
-						if($_GET["State"]==$State[$key]['Abbreviation'] || $_POST["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; } 
-					} 
+					if (isset($_POST["State"])) {
+						if($_POST["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+					} elseif(isset($_GET["State"])) {
+						if($_GET["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+					}
 					echo '> '.$State[$key]['Abbreviation'].' </option>';
 				}
 				?>
