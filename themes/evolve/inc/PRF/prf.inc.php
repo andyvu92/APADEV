@@ -55,43 +55,50 @@ $invoiceAPI = GetAptifyData("18", $apis);
 <p>A copy will be sent to your inbox and stored in your new dashboard</p>
 </div>
 <?php endif;?>
-<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 paymentsiderbar">
+<div id="prf-donation-container">
+	<div class="header-banner">
+		<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="">
+		<h1 class="lead-heading cairo">Donate to the PRF.</h1>
+	</div>
 <form action="" method="POST" style="width:100%;">
 	<input type="hidden" name="POSTPRF" id="POSTPRF">
 
-	<p><span class="sidebardis">Payment Information:</span></p>
 		<?php if (sizeof($cardsnum["results"])!=0): ?>  
-		<div class="row">
-			<div class="col-xs-12 col-sm-6">					
+	<div class="flex-container">
+		<div class="flex-cell">
+			<div class="flex-col-12">					
 				<fieldset>
-					<select id="Paymentcard" name="Paymentcard">
-						<?php
-						
-							foreach( $cardsnum["results"] as $cardnum) {
-								echo '<option value="'.$cardnum["Creditcards-ID"].'"';
-								if($cardnum["IsDefault"]=="1") {
-								echo "selected ";
-							}
-							echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
-							echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
-							}
-						
-						?>
-					</select>
+					<div class="chevron-select-box">
+						<select id="Paymentcard" name="Paymentcard">
+							<?php
+							
+								foreach( $cardsnum["results"] as $cardnum) {
+									echo '<option value="'.$cardnum["Creditcards-ID"].'"';
+									if($cardnum["IsDefault"]=="1") {
+									echo "selected ";
+								}
+								echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
+								echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+								}
+							
+							?>
+						</select>
+					</div>
 				</fieldset>
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-xs-12 col-sm-6">
+		<div class="flex-cell">
+			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" id="anothercard">
 				<label for="anothercard">Use another card</label>
 			</div>
 		</div> 
+	</div>
 
-		<div id="anothercardBlock" style="margin: 0; padding:0" class="display-none col-xs-12">
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-3">
+	<div class="flex-container" id="anothercardBlock" style="margin: 0; padding:0" class="display-none col-xs-12">
+		<div class="flex-cell">
+			<div class="flex-col-12">
 				<div class="chevron-select-box">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 				<?php 
@@ -108,97 +115,118 @@ $invoiceAPI = GetAptifyData("18", $apis);
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-xs-12 col-sm-6">
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<label>Name on card:</label>
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-xs-12 col-md-6">
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<label>Card number:</label>
 				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
+		</div>
 
-			<div class="col-xs-6 col-md-3">
+		<div class="flex-cell card-uniq">
+			<div class="flex-col-6">
+				<label>Expiry date:</label>
 				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
 			</div>
 
-			<div class="col-xs-6 col-md-3">
+			<div class="flex-col-6">
+				<label>CVV:</label>
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 			</div>
 		</div>
-		<div class="col-xs-12">
-			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label></div>
-			<input type="hidden" name="addCard" value="0">
+
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label>
+			</div>
+				<input type="hidden" name="addCard" value="0">
 		</div>
+	</div>
 	<?php endif; ?>  
 	<?php if (sizeof($cardsnum["results"])==0): ?> 
-	<div id="anothercardBlock" class="row show">				   
-		<div class="row">
-			<div class="col-xs-6 col-sm-6 col-md-3">
+	<div class="flex-container" id="anothercardBlock" class="row show">				   
+		<div class="flex-cell">
+			<div class="flex-col-12">
 				<div class="chevron-select-box">
-				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-				<?php 
-					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
-					$PaymentType=json_decode($PaymentTypecode, true);
-					foreach($PaymentType  as $pair => $value){
-						echo '<option value="'.$PaymentType[$pair]['ID'].'"';
-						echo '> '.$PaymentType[$pair]['Name'].' </option>';
-						
-					}
-				?>
-				</select>
+					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
+					<?php 
+						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+						$PaymentType=json_decode($PaymentTypecode, true);
+						foreach($PaymentType  as $pair => $value){
+							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+							echo '> '.$PaymentType[$pair]['Name'].' </option>';
+							
+						}
+					?>
+					</select>
 				</div>
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-xs-12 col-sm-6">
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<label>Name on card:</label>
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>
 
-		<div class="row">
-			<div class="col-xs-12 col-md-6">
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<label>Card number:</label>
 				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
+		</div>
 
-			<div class="col-xs-6 col-md-3">
+		<div class="flex-cell card-uniq">
+			<div class="flex-col-6">
+				<label>Expiry date:</label>
 				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
 			</div>
 
-			<div class="col-xs-6 col-md-3">
+			<div class="flex-col-6">
+				<label>CVV:</label>
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 			</div>
 		</div>
-		<div class="col-xs-12">
-			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label>
-			<input type="hidden" name="addCard" value="1">
+
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label>
+				<input type="hidden" name="addCard" value="1">
+			</div>
 		</div>
 
 	</div>
 	<?php endif; ?>  
-	<div class="row">
-		<div class="col-xs-12"><span class="sidebardis">PRF donation</span></div>
-		<div class="col-xs-12 col-md-12">
-			<div class="chevron-select-box">
-				<select class="form-control" id="PRF" name="PRF">
-					<option value="10" selected>$10.00</option>
-					<option value="20">$20.00</option>
-					<option value="50">$50.00</option>
-					<option value="100">$100.00</option>
-					<option value="Other">Other</option>
-				</select>
+	<div class="flex-container">
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<label>Please select amount to donate:</label>
+				<div class="chevron-select-box">
+					<select class="form-control" id="PRF" name="PRF">
+						<option value="10" selected>$10.00</option>
+						<option value="20">$20.00</option>
+						<option value="50">$50.00</option>
+						<option value="100">$100.00</option>
+						<option value="Other">Other</option>
+					</select>
+				</div>
+				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="">
 			</div>
-			<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="">
-			<a style="color: black;" id="PRFDescription">What is this?</a>
+			<div class="flex-col-12">
+				<span><strong>Please note: </strong>We will send a receipt to your inbox</span>
+			</div>
 		</div>
 	</div>
+	
+	<button class="submit-donate" type="submit" value="Donate now">Donate now</button>
 		
-			
-			<input class="placeorder" type="submit" value="Purchase PRF">
-		
-
 </form>
 </div>
 <?php logRecorder();  ?>

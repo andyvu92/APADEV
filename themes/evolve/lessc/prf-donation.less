@@ -1,0 +1,90 @@
+
+/*--PREDEFINED COLOURS--*/
+@light-grey: rgb(242, 243, 244);
+@light-transparent-background: rgba(255, 255, 255, 0.9);
+@dark-background: rgb(94, 96, 103);
+@dark-transparent-background: rgba(94, 96, 103, 0.8);
+@bright-blue: rgb(0, 159, 218);
+@brighter-blue: rgb(0,184,241);
+@blue: #009fda;
+@grey: #b5b5b5;
+@orange: #ffa02e;
+
+/*--RESPONSIVE BREAKPOINTS--*/
+@phone-width: 480px;
+@larger-phone-width: 570px;
+@tablet-width: 768px;
+@larger-tablet-width: 992px;
+@desktop-width: 1200px;
+@larger-desktop-width: 1500px;
+
+.page-node-391{
+    #block-block-272{
+        float: left;
+        width: 100%;
+        &>.content{
+            display: flex;
+        }
+    }
+}
+#prf-donation-container{
+    width: 450px;
+    margin: 100px auto;
+    background: #fff;
+    padding: 50px;
+    @media all and (max-width: 451px) {
+        margin: 0;
+        #Paymentcard{
+            letter-spacing: 3px;
+        }
+    }
+    .header-banner{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        .lead-heading{
+            padding: 15px 0 30px 0;
+            font-weight: 300;
+        }
+    }
+    #Paymentcard{
+        width: 100%;
+        min-height: 48px;
+        background: none;
+        padding: 6px 12px;
+        letter-spacing: 5px;
+    }
+    .flex-container{
+        [class^="flex-col"]{
+            padding: 0 1px;
+            padding-bottom: 16px;
+        }
+    }
+    .submit-donate{
+        width: 100%!important;
+        background: #7ea6d6;
+        color: #fff;
+        text-transform: uppercase;
+        font-family: Roboto!important;
+        font-weight: 300!important;
+        border: 0;
+        padding: 20px 30px!important;
+        opacity: 1;
+        transition: all 0.2s linear;
+        &:hover{
+            opacity: 0.9;
+        }
+    }
+    input[type="text"]{
+        background: none;
+        border: 1px solid #e0e0e0;
+    }
+    .card-uniq{
+        justify-content: space-between;
+        &>div{
+            max-width: 48%;
+        }
+    }
+}
