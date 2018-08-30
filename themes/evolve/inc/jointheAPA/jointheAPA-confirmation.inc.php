@@ -112,8 +112,8 @@ $background = getBackgroundImage($userID);
 				</ul>
 				<?php if($registerOuts['Invoice_ID']!=="0"):?>
 				<div class="row">
-					<h2 style="color:#000;">Thank you for your joining</h2>
-					<p style="color:#000;">We’re glad to have you on board.</p>
+					<h2 style="color:#000;">Welcome to the APA!</h2>
+					<p style="color:#000;">We’re glad to have you on board, a copy of your purchase receipt will be sent to your inbox, along with your membership certification.</p>
 					<?php 
 					// after web service 2.2.26 Aptify response the invoice_id;
 					// 2.2.18 Get payment invoice PDF
@@ -132,7 +132,7 @@ $background = getBackgroundImage($userID);
 					<a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 					*/
 					?>
-					<p style="color:#000;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>
+					<p style="color:#000;">In the meantime, go to your <a href="dashboard">dashboard </a> to review your membership information or check out the great <a href="/membership/membership-benefits">range of benefits</a> available to APA members. </p>
 				</div>
 				<?php else:?>
 					<p style="color:#000;">There are some errors for purchasing order.</p>
