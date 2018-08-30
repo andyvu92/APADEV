@@ -1287,8 +1287,112 @@ input{
     }
 }
 
+/*=================FORGET PASSWORD PAGES =================*/
+.page-node-406, .page-node-407, .page-node-390{
+    #section-main-content{
+      .MainContent{
+          width: 100%;
+          margin: 0;
+          padding: 0;
+      }  
+    }
+}
+#forgot-pw-form, #reset-password-form{
+    max-width: 460px;
+    margin: 100px auto;
+    border: 1px solid #c5c5c5;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    padding: 50px;
+    .user-info{
+        flex-direction: column;
+        .light-lead-heading{
+            color: #000;
+            text-align: center;
+            font-size: 3em;
+            line-height: 1.3em;
+            margin-bottom: 20px;
+        }
+        .sub-heading{
+            font-family: Roboto;
+            font-size: 1.2em;
+            font-weight: 400;
+        }
+        @media all and (max-width: @phone-width) {
+            .light-lead-heading{
+                font-size: 2.5em;
+            }
+            .sub-heading{
+                font-size: 1em;
+            }
+        }
+    }
+    .submit-btn{
+        input, button{
+            width: 100%!important;
+        }
+    }
+    .email-field{
+        width: 100%;
+        position: relative;
+        margin: 25px 0;
+        &:before{
+            content: "";
+            position: absolute;
+            left: 12px;
+            top: calc(~'50% - 7.5px');
+            width: 15px;
+            height: 15px;
+            background-position: center;
+            background-image: url(/sites/default/files/dashboard-icon/account-G.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .form-control{
+            background: none;
+            min-height: 48px;
+            margin: 5px 0;
+            text-indent: 28px;
+        }
+    }
+    .password-field{
+        width: 100%;
+        position: relative;
+        margin: 0 0 25px 0;
+        &:before{
+            content: "";
+            position: absolute;
+            left: 12px;
+            top: calc(~'50% - 7.5px');
+            width: 15px;
+            height: 15px;
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-image: url(/sites/default/files/general-icon/password-icon-lg.png);
+        }
+        .form-control {
+            background: none;
+            min-height: 41px;
+            margin: 5px 0;
+            text-indent: 28px;
+        }
+    }
+    #checkMessage{
+        margin-bottom: 20px;
+    }
+}
 
-
-
+#reset-password-form{
+   #NewPass{
+       .flex-cell{
+           margin: 0;
+       }
+       .submit-btn{
+           button{
+               margin-top: 30px;
+           }
+       }
+   } 
+}
 
 

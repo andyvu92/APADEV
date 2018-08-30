@@ -833,7 +833,7 @@ if(isset($_SESSION['UserId'])) {
 					<div class="flex-cell">
 						<h3 class="light-lead-heading cairo">Sign in to your account</h3>
 						<p style="margin-bottom: 0"><span class="strong-subhead">First time logging in to our new website?</a></span></p>
-						<p style="margin-top: 0" class="tab"><span data-form="#main-forgot-pw-form" class="strong-subhead"><a id="return-users" href="/membership-question">Click here</a> and we'll help you get started.</span></p>
+						<p style="margin-top: 0"><span class="strong-subhead"><a id="return-users" href="/return-user-welcome">Click here</a> and we'll help you get started.</span></p>
 					</div>
 					<!--<input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
 					<input type="password" class="form-control"  name="Password"  placeholder="Password"><br>-->
@@ -854,8 +854,7 @@ if(isset($_SESSION['UserId'])) {
 							<input class="styled-checkbox" id="remember1" type="checkbox" name="remember"  <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> /><label for="remember1">Remember me</label>
 						</div>
 						<div class="flex-col-7 forgot-password">
-							<span>Forgot your
-								<div class="tab"><span data-form="#main-forgot-pw-form">username/password</span></div>
+							<span>Forgot your <a href="/forget-password">username/password</a>
 							</span>
 						</div>
 					</div>
@@ -865,74 +864,6 @@ if(isset($_SESSION['UserId'])) {
 					</div>
 				</div>
 			</form>
-        </div>
-        
-        <div id="main-forgot-pw-form" style="display: none">   
-        <form method="POST" action="<?php echo $url; ?>" name="resetPass" id="resetPass">
-            <div class="flex-container">
-                <div class="flex-cell current-users">
-					<h3 class="light-lead-heading cairo">Forgot your password?</h3>
-					<span class="sub-heading">Submit your email address and we'll send you a link to reset your password</span>
-				</div>
-				<div class="flex-cell return-users" style="display: none">
-					<h3 class="light-lead-heading cairo">Welcome to our new website.</h3>
-					<span class="sub-heading">From now on you should use the email address linked to your APA membership to login.</span>
-					<span class="sub-heading">But first, let's reset your password.</span>
-					</br></br>
-					<span class="sub-heading">Enter your email address below.</span>
-				</div>
-                
-                <div class="flex-cell">
-					<div class="flex-cell email-field">
-						<input class="form-control" id="Fid" name="Fid" onchange="checkEmailFunction(this.value)" placeholder="Email address" type="text">
-					</div>
-					<div id="checkMessage" class="display-none">
-					<span>Oops! The email you entered does not exist.</span>
-					<span>Please try another email address or join the APA today.</span>
-					</div>
-                </div>
-
-                <div class="flex-cell submit-btn">
-                    <input type="submit" value="Submit">
-				</div>
-				
-				<div class="flex-cell create-account">
-					<span>Not a member? <a href="/membership-question">Join today.</a></span>
-				</div>
-            </div>
-		</form>
-		<script>
-			function checkEmailFunction(email) {
-						jQuery.ajax({
-						url:"/sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
-						type: "POST", 
-						data: {CheckEmailID: email},
-						success:function(response) { 
-						var result = response;
-						if(result=="T"){
-							$('#checkMessage').removeClass("display-none");
-							$( "#Memberid" ).focus();
-							$("#Memberid").css("border", "1px solid red");
-							$(".accent-btn").addClass("stop");
-						}
-						else{
-							$('#checkMessage').html("");
-							$( "#Memberid" ).blur();
-							$("#Memberid").css("border", "");
-							$(".accent-btn").removeClass("stop");
-						}					
-						}
-						});
-			}
-		</script>
-		<script>
-		jQuery(document).ready(function(){
-			$('#Fid').on('keyup', function(){
-				console.log('asd');
-				$(this).trigger('checkEmailFunction');
-			});
-		});
-		</script>
         </div>
         
       </div><!-- tab-content -->
