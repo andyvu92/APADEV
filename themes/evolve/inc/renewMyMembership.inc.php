@@ -347,11 +347,13 @@ You have the right to access the personal information about yourself held by the
 	<h3 style="color:black;">Renewing your APA membership is easy…</h3>
 	<p>If your membership category hasn’t changed, simply click continue to proceed with the following purchase:</p>
 	<p><?php if(sizeof($orderDetails)!=0): ?>
-	<?php foreach($orderDetails['Order'] as $orders){
+	<?php 
+	if(!isset($_SESSION['QuatationTag'])){
+		foreach($orderDetails['Order'] as $orders){
 		foreach($orders['OrderLines'] as $order){
 //  put the code here to save the quatation order products into the database firstly.
         
-		if(!isset($_SESSION['QuatationTag'])){
+		
 			
 			if($order['ProductCategory'] =="Memberships"){
 				//checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID=$order['ProductID']);
@@ -359,8 +361,10 @@ You have the right to access the personal information about yourself held by the
 				createShoppingCart($userID, $productID =$order['ProductID'],$type="membership",$coupon="");
 			}
 			if($order['ProductCategory'] =="Subscription"){
+				
 				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
 				createShoppingCart($userID, $productID =$order['ProductID'],$type="NG",$coupon="");
+			
 			}
 			if($order['ProductID'] =="9978"){
 				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
@@ -375,11 +379,9 @@ You have the right to access the personal information about yourself held by the
 				createShoppingCart($userID, $productID =$order['ProductID'],$type="FP",$coupon="");
 			}
 			$_SESSION['QuatationTag'] = "1";
-			
-		}
 		
 		echo $order['ProductName']; echo ",";} 
-	}?><?php endif;?></p>
+	}}?><?php endif;?></p>
 	
 	<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
 
