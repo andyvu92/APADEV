@@ -16,27 +16,23 @@ $sendData["UserID"] = $_SESSION['UserId'];
 //echo "national Groups:<br>";
 //print_r($nationalGroups);
 
-///
-//$ttt = GetAptifyData("19", $sendData);
-//echo "ttt:<br>";
-//print_r($ttt);
-///
-
-///
-//$tt["Userid"] = $userID;
-//$ttt = GetAptifyData("21", $tt);
-//echo ">21:<br>";
-//print_r($ttt);
-///
-
-
 /* We may use this as "Session" data and won't need to load. */
 // 2.2.22 - Get list of subscribed Fellowship Products
 // Send - 
 // UserID
 // Response -
 // List of Fellowship ID and its titles.
-//$Fellows = GetAptifyData("22", $sendData);
+$Fellows = GetAptifyData("22", $sendData);
+$MagSubs = Array();
+$Fellow = $Fellows["results"];
+foreach($Fellow as $Subs) {
+	if(strpos($Subs["FPtitle"], "Magazine") !== false) {
+		$divs = explode(" ", $Subs["FPtitle"]);
+		if($divs[0] == "InTouch" || $divs[0] == "Sports") {
+			array_push($MagSubs, $divs[0]);
+		}
+	}
+}
 //echo "Fellow ships:<br>";
 //print_r($Fellows);
 /* We may use this as "Session" data and won't need to load. */
@@ -88,6 +84,7 @@ if(count($PostArray) == 0) { // GET data
 	}
 	*/
 } else { // send & get updated data
+	//print_r($PostArray);
 	$ArrayReturn = Array();
 	$ArrayReturn["UserID"] = $_SESSION['UserId'];
 	$SubListAll = Array();
@@ -96,18 +93,26 @@ if(count($PostArray) == 0) { // GET data
 	foreach($Subscription as $Subs) {
 		$ArrayRe["SubscriptionID"] = $Subs["ConsentID"];
 		$arrayUpdate["ConsentID"] = $Subs["ConsentID"];
+		$ArrayRe["Subscribed"] = '1';//$Subs["Subscribed"];
+		$arrayUpdate["Subscribed"] = '1';//$Subs["Subscribed"];
 		if(!isset($PostArray[$Subs["ConsentID"]])) {
 			// When it's not set (unticked on check box)
 			$ArrayRe["Subscribed"] = '0';
 			$arrayUpdate["Subscribed"] = '0';
-		} else {
-			$ArrayRe["Subscribed"] = '1';//$Subs["Subscribed"];
-			$arrayUpdate["Subscribed"] = '1';//$Subs["Subscribed"];
+			if($Subs["ConsentID"] == '20' || $Subs["ConsentID"] == '19') {
+				foreach($MagSubs as $mags) {
+					if(strpos($Subs["Consent"], $mags)) {
+						$ArrayRe["Subscribed"] = '1';//$Subs["Subscribed"];
+						$arrayUpdate["Subscribed"] = '1';//$Subs["Subscribed"];
+					}
+				}
+			}
 		}
 		array_push($consArray, $arrayUpdate);
 		$ArrayRe["Subscription"] = $Subs["Consent"];
 		array_push($SubListAll, $ArrayRe);
 	}
+	//print_r($consArray);
 	/*
 	$nationalGroup = $nationalGroups["results"];
 	foreach($nationalGroup as $Subs) {
@@ -176,26 +181,39 @@ if(count($PostArray) == 0) { // GET data
 				<p><span style="color:#009fda; font-size: 1.2em;"><strong>What you're signed up for</strong></span></p>
 				<form action="/subscriptions" method="POST">
 					<ul>
-							<?php
-								$countSubs = count($Subscription);
-								$countSubType = $countSubs%2;
-								$counter = 0;
-								foreach($SubListAll as $Subs) {
-
+						<?php
+							$countSubs = count($Subscription);
+							$countSubType = $countSubs%2;
+							$counter = 0;
+							foreach($SubListAll as $Subs) {
+								$counter++;
+								if($counter < 5) {
 									echo '
-									<li>
-										<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
-										'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
-										if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){ 
-											echo "checked";
+										<li>
+											<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
+											'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
+											if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){ 
+												echo "checked='checked'";
+											}
+											echo '>
+											<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
+											.'</label>
+										</li>';
+								} else {										
+									foreach($MagSubs as $mags) {
+										if(strpos($Subs["Subscription"], $mags)) {
+											echo '
+											<li>
+												<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
+												'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'" checked="checked" disabled />
+												<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
+												.'</label>
+											</li>';
 										}
-										echo '>
-										<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
-										.'</label>
-									</li>';
-
+									}
 								}
-							?>
+							}
+						?>
 					</ul>
 					<button id="your-details-submit-button" class="dashboard-button dashboard-bottom-button subscriptions-submit"><span class="dashboard-button-name">Submit</span></button>
 				</form>

@@ -576,12 +576,19 @@ if (isset($_SESSION['UserId'])):
 ?>
 <?php
 	//Implement membertype questionaries 
-	if(isset($_GET['MT'])){
-		$_SESSION["MembershipProductID"] = $_GET['MT'];
+	if(isset($_POST['MT'])){
+		$_SESSION["MembershipProductID"] = $_POST['MT'];
+		if(isset($_POST['NG'])){
+			$_SESSION['NationalProductID'] = explode(",", $_POST['NG']);
+        }
+        echo $_POST['MT']." ////////////POSt//////////// ".$_POST['NG'];
+    } elseif(isset($_GET['MT'])) {
+        $_SESSION["MembershipProductID"] = $_GET['MT'];
 		if(isset($_GET['NG'])){
 			$_SESSION['NationalProductID'] = explode(",", $_GET['NG']);
-		}
-	}
+        }
+        echo $_GET['MT']." ////////////POSt//////////// ".$_GET['MT'];
+    }    
 	else{
 		$userMemberProduct = getProduct($_SESSION['UserId'], "membership");
 		if (sizeof($userMemberProduct) != 0) {
@@ -2400,10 +2407,10 @@ endif;
 
 if (!isset($_SESSION['UserId'])):
 //Implement membertype questionaries 
-if(isset($_GET['MT'])){
-	$_SESSION["MembershipProductID"] = $_GET['MT'];
-	if(isset($_GET['NG'])){
-		$_SESSION['NationalProductID'] = explode(",", $_GET['NG']);
+if(isset($_POST['MT'])){
+	$_SESSION["MembershipProductID"] = $_POST['MT'];
+	if(isset($_POST['NG'])){
+		$_SESSION['NationalProductID'] = explode(",", $_POST['NG']);
 	}
 }
 

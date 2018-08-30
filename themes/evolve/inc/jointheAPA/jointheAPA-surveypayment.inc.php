@@ -359,8 +359,8 @@ if(isset($_POST['step2-1'])) {
 		<div id="anothercardBlock" style="margin: 0; padding:0" class="col-xs-12">
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-3">
-				<div class="chevron-select-box">
 				<label for="">Payment method:<span class="tipstyle"> *</span></label>
+				<div class="chevron-select-box">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 				<?php 
 					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
@@ -409,8 +409,8 @@ if(isset($_POST['step2-1'])) {
 	<div id="anothercardBlock" class="row show">				   
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-3">
-				<div class="chevron-select-box">
 				<label for="">Payment method:<span class="tipstyle"> *</span></label>
+				<div class="chevron-select-box">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 				<?php 
 					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
