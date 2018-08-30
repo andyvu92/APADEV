@@ -618,7 +618,7 @@ jQuery(document).ready(function($) {
 		  
            if($(this).is(":checked")){
 			$(this).attr('checked', true);
-			$('#shippingaddressblock').addClass('shipping');  
+			$('#shippingaddressblock').slideUp();  
 			$('#Shipping-BuildingName').val($('input[name="BuildingName"]').val());
             $('#Shipping-Address_Line_1').val($('input[name="Address_Line_1"]').val());
             $('#Shipping-Address_Line_2').val($('input[name="Address_Line_2"]').val());
@@ -629,7 +629,7 @@ jQuery(document).ready(function($) {
             $('#Shipping-country').val($('select[name="Country"]').val());
         }
 		else{
-			$('#shippingaddressblock').removeClass('shipping');  
+			$('#shippingaddressblock').slideDown();  
 			$('#Shipping-BuildingName').val('');
             $('#Shipping-Address_Line_1').val('');
             $('#Shipping-Address_Line_2').val('');
@@ -680,19 +680,45 @@ jQuery(document).ready(function($) {
 		$( "#uploadImage" ).dialog();
 	});
 	$('#addPaymentCard').click(function(){
-		$( "#addPaymentCardForm" ).dialog();
-    }); 
+		$('.overlay').fadeIn();
+		$( "#addPaymentCardForm" ).dialog().fadeIn();
+	});
+	 
+	$('[aria-describedby="addPaymentCardForm"] .ui-dialog-titlebar-close').click(function(){
+		$( '[aria-describedby="addPaymentCardForm"]' ).show().fadeOut();
+	});
+	
 	$('#setCardButton').click(function(){
-		$( "#setCardWindow" ).dialog();
-    }); 
+		$( ".overlay" ).fadeIn()
+		$( "#setCardWindow" ).fadeIn();
+	});
+	$('#setCardWindow .no').click(function(){
+		$( "#setCardWindow" ).fadeOut();
+		$( ".overlay" ).fadeOut()
+	});
+	$('#setCardWindow .yes').click(function(){
+		$( "#setCardWindow" ).fadeOut();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
+
 	$('#rolloverButton').click(function(){
 		$( "#rollOverWindow" ).dialog();
     });
     $('#updatecard').click(function(){
 		$( "#updateCardForm" ).dialog();
-    });	
-	$('.deletecardbutton').click(function(){
-		$( "#deleteCardWindow" ).dialog();
+	});	
+	
+	$(document).on('click', '.deletecardbutton', function(){
+		$( ".overlay" ).fadeIn()
+		$( "#deleteCardWindow" ).fadeIn();
+	});
+	$('#deleteCardWindow .no').click(function(){
+		$( "#deleteCardWindow" ).fadeOut();
+		$( ".overlay" ).fadeOut()
+	});
+	$('#deleteCardWindow .yes').click(function(){
+		$( "#deleteCardWindow" ).fadeOut();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
 	});
 
 	$('.cancelDeleteButton').click(function() {
