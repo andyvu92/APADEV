@@ -1042,10 +1042,12 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								$("#deleteID").val(CardID);
 								if($("#defaultCard").val()==CardID){
 									$('#deletecardMessage').html("Can not delete your main card");
+									$('#deleteCardWindow #checkMessage').removeClass('display-none');
 									$('#deleteCardForm button').addClass("stop");
 								}
 								else{
 									$('#deletecardMessage').html("Are you sure you want to delete this card?");
+									$('#deleteCardWindow #checkMessage').addClass('display-none');
 									$('#deleteCardForm button').removeClass("stop");
 								}
 							});
@@ -1919,8 +1921,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				<div class="row">
 					<input type="hidden" name="addCard">
 					<div class="col-lg-12">
-						<div class="chevron-select-box">
 						<label for="">Payment method:<span class="tipstyle"> *</span></label>
+						<div class="chevron-select-box">
 						<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 						<?php 
 							$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
@@ -1982,18 +1984,26 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 		</div>
 		<div id="deleteCardWindow" style="display:none;">
 			<form action="your-details?action=delete" method="POST" id="deleteCardForm">
-				<h3 id="deletecardMessage">Are you sure you want to delete this card?</h3>
+				<h3 id="deletecardMessage" class="light-lead-heading cairo">Are you sure you want to delete this card?</h3>
+				<div id="checkMessage" class="display-none">
+					<span>Sorry, we are not able to delete these payment details.</span><br>
+					<span>Please select another card as your default payment method before deleting this one.</span>
+				</div>
 				<input type="hidden" name="deleteID" id="deleteID" value="">
-				<button class="yes accent-btn" type="submit" value="Yes">Yes</button>
-				<a class="no accent-btn cancelDeleteButton" target="_self">No</a>
+				<div class="flex-cell buttons-container">
+					<button class="yes accent-btn" type="submit" value="yes">Yes</button>
+					<a class="no accent-btn cancelDeleteButton" value="no" target="_self">No</a>
+				</div>
 			</form>
 		</div>
 		<div id="setCardWindow" style="display:none;">
 			<form action="your-details" method="POST" id="setCardForm">
-				<h3>Are you sure you do want to save this card for future purposes?</h3>
+				<h3 class="light-lead-heading cairo">Are you sure you do want to save this card for future purposes?</h3>
 				<input type="hidden" name="setCardID" id="setCardID" value="">
-			    <button class="yes accent-btn" type="submit" value="Yes">Yes</button>
-				<a class="no accent-btn cancelDeleteButton" target="_self">No</a>
+				<div class="flex-cell buttons-container">
+					<button class="yes accent-btn" type="submit" value="yes">Yes</button>
+					<a class="no accent-btn cancelDeleteButton" value="no" target="_self">No</a>
+				</div>
 			</form>
 		</div>
 		<div id="updateCardForm" style="display:none;">

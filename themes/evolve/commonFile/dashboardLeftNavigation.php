@@ -29,14 +29,14 @@ if(isset($_POST["submit"])) {
     //$uploadOk = 0;
 //}
 // Check file size
-if ($_FILES["fileToUpload"]["size"] > 500000) {
-    echo "Sorry, your file is too large.";
+if ($_FILES["fileToUpload"]["size"] > 2100000) {
+    //echo "Sorry, your file is too large.";
     $uploadOk = 0;
 }
 // Allow certain file formats
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
 && $imageFileType != "gif" ) {
-    echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+    //echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
     $uploadOk = 0;
 }
 
@@ -122,11 +122,15 @@ if(isset($_SESSION["UserId"])) {
 				<label for="imageUpload"></label>
 			</div>
 			<div class="avatar-preview">
-				<div id="imagePreview" style="background-image: url(https://aptifyweb.australian.physio/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo?NoImageObject=CRM.NoPhotoAvailable&amp;ds=636682564840400000<?php echo "&AptifyAuthorization=DomainWithContainer%20".$AuthTokenI; ?>);">
+				<div id="imagePreview" style="background-image: url(/sites/default/files/dashboard-icon/upload-image-placeholder.png);">
 				</div>
 			</div>
 		</div>
-		<input id="upload-btn" type="submit" value="Upload Image" name="PictureUpdate">
+		<input id="upload-btn" type="submit" value="Save image" name="PictureUpdate">
+		<div id="checkMessage" class="display-none">
+			<span>Oops! The image you uploaded is too big.</span></br>
+			<span>Please make sure it's less than 2MB in size.</span>
+		</div>
 		<script>
 			function readURL(input) {
 			if (input.files && input.files[0]) {
@@ -140,7 +144,24 @@ if(isset($_SESSION["UserId"])) {
 			}
 			}
 			$("#imageUpload").change(function() {
-			readURL(this);
+				readURL(this);
+			});
+
+			$(document).ready(function () {
+				$('#imageUpload').change(function () {
+					if (this.files.length > 0) {
+						$.each(this.files, function (index, value) {
+							if( Math.round((value.size / 1024)) > 2000 ){
+								$('#uploadImage #checkMessage').removeClass('display-none');
+								$('#uploadImage #upload-btn').prop( "disabled", true );
+							}
+							else{
+								$('#uploadImage #checkMessage').addClass('display-none');
+								$('#uploadImage #upload-btn').prop( "disabled", false );
+							}
+						});
+					}
+				});
 			});
 		</script>
 	</form>

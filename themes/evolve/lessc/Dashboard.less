@@ -331,20 +331,10 @@ form[name="formradio"] label {
 	margin-top: 6px;
 }
 
-
-
-
-
-
-
-
-
-
-
 label[for="privacypolicyp"]{
     margin-left:-3px;
 }
-#deleteCardWindow h3, #rollOverWindow h3,#setCardWindow h3, #insurancePopUp h3{
+#rollOverWindow h3, #insurancePopUp h3{
     color: #009fda!important;
 	margin-top: -6px;
 	margin-bottom: 28px;
@@ -1818,6 +1808,11 @@ iframe{
         font-size: 1.25em;
         color: #009fda;
         font-family: cairo;
+        &.warning{
+            a{
+                color: @orange;
+            }
+        }
     }
 
     .member-purchases{
@@ -2382,6 +2377,9 @@ form{
             li{
                 padding: 5px 0;
                 font-size: 1.2em;
+                &:before{
+                    display: none;
+                }
             }
             .styled-checkbox {
                 position: absolute; /* take it out of document flow */
@@ -2427,8 +2425,12 @@ form{
                 /* Disabled box. */
                 &:disabled + label:before {
                   box-shadow: none;
-                  background: #fff;
+                  background: #c2c2c2;
                 }
+                &:disabled + label:after {
+                    background: #eeece9!important;
+                    box-shadow: 2px 0 0 #eeece9, 4px 0 0 #eeece9, 4px -2px 0 #eeece9, 4px -4px 0 #eeece9, 4px -6px 0 #eeece9, 4px -8px 0 #eeece9!important;
+                  }
               
                 /* Checkmark. Could be replaced with an image */
                 &:checked + label:after {

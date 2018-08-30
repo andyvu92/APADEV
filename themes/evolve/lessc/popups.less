@@ -340,21 +340,22 @@ div[aria-describedby="uploadImage"].ui-dialog {
         background: #fff!important;
         .ui-dialog-titlebar-close{
             margin: 0;
+            top: 15px;
+            right: 15px;
             float: right;
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
             font-size: 0px!important;
-            position: relative;
-            width: 30px;
-            height: 30px;
-            border: 0;
+            position: absolute;
+            z-index: 999;
             border-radius: 0;
-            background: rgba(255, 0, 0, 0.5);
+            background: none;
+            border: 1px solid @grey;
             transition: 0.2s linear;
             &:hover{
-                background: rgba(255, 0, 0, 1);
+                background: @light-grey;
             }
             span.ui-icon-closethick{
                 display: none;
@@ -365,7 +366,7 @@ div[aria-describedby="uploadImage"].ui-dialog {
                 width: 20px;
                 transform: rotate(135deg);
                 height: 2px;
-                background: #fff;
+                background: @grey;
             }
             &:before{
                 content: '';
@@ -373,7 +374,7 @@ div[aria-describedby="uploadImage"].ui-dialog {
                 transform: rotate(45deg);
                 height: 2px;
                 position: absolute;
-                background: #fff;
+                background: @grey;
             }
         }
     }
@@ -390,6 +391,9 @@ div[aria-describedby="uploadImage"].ui-dialog {
 /*--IMAGE UPLOAD BOX--*/
 #uploadImage{
     border: 0;
+    #checkMessage{
+        margin-top: 15px;
+    }
 }
 #upload-btn{
     width: 100%!important;
@@ -406,40 +410,44 @@ div[aria-describedby="uploadImage"].ui-dialog {
 }
 .avatar-upload {
     position: relative;
-    max-width: 205px;
+    max-width: 192px;
+    max-height: 192px;
     margin: 50px auto;
     .avatar-edit {
         position: absolute;
-        right: 12px;
+        bottom: 5px;
+        right: 5px;
         z-index: 1;
-        top: 10px;
+        border-radius: 100%;
+        border: 5px solid #fff;
+        background: #fff;
+        transition: all .2s ease-in-out;
+        box-shadow: 0 0px 0px rgba(0,0,0,0.19), 0 px px rgba(0,0,0,0.23);
+        &:hover{
+            box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+        }
         input {
             display: none;
             + label {
-                display: inline-block;
-                width: 34px;
-                height: 34px;
-                margin-bottom: 0;
-                border-radius: 100%;
-                background: #FFFFFF;
-                border: 1px solid transparent;
-                box-shadow: 0px 2px 4px 0px rgb(166, 168, 171);
-                cursor: pointer;
-                font-weight: normal;
-                transition: all .2s ease-in-out;
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                width: 62.5px;
+                height: 62.5px;
+                margin-bottom: 0;
+                border-radius: 100%;
+                cursor: pointer;
+                transition: all .2s ease-in-out;
                 &:hover {
-                    background: #f1f1f1;
                     border-color: #d6d6d6;
                 }
                 &:after {
-                    content: "\f040";
-                    font-family: 'FontAwesome';
-                    color: #757575;
+                    content: "";
+                    background: url(/sites/default/files/dashboard-icon/avatar-plus-icon.png) no-repeat center center;
+                    background-size: cover;
+                    width: 62.5px;
+                    height: 62.5px;
                     position: absolute;
-                    text-align: center;
                     margin: auto;
                 }
             }
@@ -451,8 +459,6 @@ div[aria-describedby="uploadImage"].ui-dialog {
         position: relative;
         margin: 0 auto;
         border-radius: 100%;
-        border: 6px solid #F8F8F8;
-        box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.1);
         > div {
             width: 100%;
             height: 100%;
@@ -549,34 +555,107 @@ div[aria-describedby="updateCardForm"].ui-dialog {
     }
 }
 
-/* SET PAYMENT CARD */
-div[aria-describedby="setCardWindow"].ui-dialog{
-    z-index: 1050!important;
-    left: 33%!important;
-	top: 47%!important;
-    width: 486px!important;
-    .ui-widget-header{
-        border:none!important;
-        background-color:white!important;
+/* SET PAYMENT CARD */ 
+    #setCardWindow{
+        .small-popup;
+        padding: 40px 80px;
+        .light-lead-heading {
+            color: #000;
+            margin-top: 0;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+        .buttons-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            margin-top: 30px;
+            [value="yes"], [value="no"]{
+                float: none;
+                display: inline-block;
+                margin-bottom: 0px;
+                margin-top: 2px;
+                background-color: #009fda;
+                color: #fff;
+                padding: 8px 20px;
+                text-align: center;
+                font-family: Cairo;
+                font-weight: 700;
+                font-size: 15px;
+                letter-spacing: 0.5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 45%!important;
+                margin: 0;
+            }
+            [value="no"] {
+                color: #848589 !important;
+                background: none;
+                border: 1px solid #d6d6d6;
+            }
+        }
+        @media all and (max-width: @larger-phone-width){
+            padding: 40px 20px;
+        }
+        @media all and (max-width: @phone-width) {
+            .light-lead-heading{
+                font-size: 2em;
+            }
+        }     
     }
-    .ui-dialog-content{
-        overflow:hidden!important;
-    }
-} 
 
 /* DELETE PAYMENT CARD */
-div[aria-describedby="deleteCardWindow"].ui-dialog {
-    z-index: 1050!important;
-    left: 33%!important;
-	top: 47%!important;
-	width: 429px!important;
-    height: 175px!important;
-    .ui-widget-header{
-        border:none!important;
-        background-color:white!important;
-    }
-    .ui-dialog-content{
-        overflow:hidden!important;
+#deleteCardWindow {
+    .small-popup;
+        padding: 40px 80px;
+        .light-lead-heading {
+            color: #000;
+            margin-top: 0;
+            text-align: center;
+            display: block;
+            width: 100%;
+        }
+        .buttons-container {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: space-around;
+            margin-top: 30px;
+            [value="yes"], [value="no"]{
+                float: none;
+                display: inline-block;
+                margin-bottom: 0px;
+                margin-top: 2px;
+                background-color: #009fda;
+                color: #fff;
+                padding: 8px 20px;
+                text-align: center;
+                font-family: Cairo;
+                font-weight: 700;
+                font-size: 15px;
+                letter-spacing: 0.5px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 45%!important;
+                margin: 0;
+            }
+            [value="no"] {
+                color: #848589 !important;
+                background: none;
+                border: 1px solid #d6d6d6;
+            }
+        }
+        @media all and (max-width: @larger-phone-width){
+            padding: 40px 20px;
+        }
+        @media all and (max-width: @phone-width) {
+            .light-lead-heading{
+                font-size: 2em;
+        }
     }
 }
 
