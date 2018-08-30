@@ -655,13 +655,6 @@ if($resultdata['result']) {
 		print_r($output);
 	}
 	
-	// forgot password
-	if(isset($_POST["Fid"])) {
-		$input["email"] = $_POST["Fid"];
-		$output = GetAptifyData("6", $input);
-		//print_r($output);
-	}
-	
 	function loginManager($id, $pass) {
 		// 2.2.7 - log-in
 		// Send - 
