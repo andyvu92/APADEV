@@ -23,7 +23,7 @@ $CPDHousrs = $results["CurrentCPDHour"];
 	}
 	
 	?></span>
-	<span class="text">CPD hours <a target="_blank" href="/pd/cpd-diary">Full CPD diary</a></span>
+	<span class="text">CPD hours</span>
 </div>
 <?php logRecorder(); ?>
 
