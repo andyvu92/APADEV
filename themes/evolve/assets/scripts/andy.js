@@ -114,19 +114,16 @@ jQuery(document).ready(function() {
   var h3 = $("#h3").position();
 
   $("[class^='join-details-button']").click(function() {
-
     $('html, body').animate({
 			scrollTop: $('#dashboard-right-content').offset().top
 		}, 600);
-  }); // left menu link2 click() scroll END
+  }); 
 
   $("[class^='your-details-prevbutton']").click(function() {
     $('html, body').animate({
 			scrollTop: $(".nav-tabs").offset().top
 		}, 600);
-    //return false;
-
-  }); // left menu link2 click() scroll END
+  }); 
 
 }); // ready() END
 
@@ -174,7 +171,12 @@ jQuery(document).ready(function() {
     $(this).removeClass("focuscss");
   });
 
+  // REMOVE WARNING CLASS ON CLICK
   $(document).on("click","#tabmenu li", function(){
+    $(this).removeClass("warning");
+  });
+
+  $(document).on("click",".nav-tabs > li", function(){
     $(this).removeClass("warning");
   });
 });

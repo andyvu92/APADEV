@@ -1364,9 +1364,9 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								</div>
 							</div>
 					</div>
-					<?php if($key!="0"):?>
+					<!--<?php //if($key!="0"):?>-->
 					<a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>	
-					<?php endif;?>
+					<?php //endif;?>
 					</div>
 				<?php endforeach;?>
 				<?php if(sizeof($details['PersonEducation'])==0):?>

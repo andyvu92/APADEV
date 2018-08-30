@@ -52,13 +52,13 @@ if(isset($_POST['step3'])) {
 	// Response -Renew a membership order successfully
 	//submit data to complete renew membership web service 2.2.27
 	$renewOuts=GetAptifyData("27", $postReviewData);
-	if($renewOuts['Invoice_ID']!=="0") {
+	if($renewOuts['MResponse'] =="Order updated successfully") {
 	//refresh session data
 	$data = "UserID=".$_SESSION["UserId"];
 	$details = GetAptifyData("4", $data,"");
-	newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"]);
+	newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"]);
 	//end refresh session data
-	  $invoice_ID = $registerOuts['Invoice_ID'];
+	  $invoice_ID = $renewOuts['Invoice_ID'];
 	//save the terms and conditons on APA side
 	$dataArray = array();
 	$dataArray['MemberID'] = $postReviewData['userID'];
@@ -121,10 +121,10 @@ $background = getBackgroundImage($userID);
 				<li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7" id="Payment"><strong>Payment</strong></span></a></li>
 				<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 text-underline" id="Review"><strong>Review</strong></span></a></li>
 				</ul>
-				<?php if($renewOuts['Invoice_ID']!=="0"): ?>
+				<?php if($renewOuts['MResponse'] =="Order updated successfully"): ?>
 				<div class="row">
-					<h2 style="color:#000;">Thank you for your joining</h2>
-					<p style="color:#000;">We’re glad to have you on board.</p>
+					<h2 style="color:#000;">Thanks for renewing your APA membership! </h2>
+					<p style="color:#000;">We’re glad to welcome you back for another year, a copy of your purchase receipt will be sent to your inbox, along with your membership certification.</p>
 					<?php 
 					// after web service 2.2.26 Aptify response the invoice_id;
 					// 2.2.18 Get payment invoice PDF
@@ -141,7 +141,7 @@ $background = getBackgroundImage($userID);
 					<a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 					*/
 					?>
-					<p style="color:#000;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>
+					<p style="color:#000;">In the meantime, go to your <a href="dashboard">dashboard</a> to review your membership information or take a look at the <a href="/pd/pd-search">professional development options</a> available at the APA this year.</p>
 				</div>
 				<?php else: ?>
 				<p style="color:#000;">There are some errors for purchasing order.</p>
