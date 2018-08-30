@@ -937,6 +937,12 @@ jQuery(document).ready(function($) {
 	/*   Membership Types questions start  */	
 	$(".next").click(function() {
 		var x = $(".active").attr('id').replace('Section','');
+		var type = $("#chosenType").text();
+		var title = $("."+type+" .MTtitle").text();
+		var typeID = $('.'+type+' .MTid').text();
+		$("#chosenTypeName").text(title);
+		$("#chosenTid").text(typeID);
+		console.log(type);
 		if(x != '5') { // if it is not the last section
 		  $("#Section"+x).removeClass("active");
 		  x = parseInt(x) + 1;
@@ -945,19 +951,16 @@ jQuery(document).ready(function($) {
 		   $('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
 		  ProgressMove(x);
 		}
-		BringSurveyBack();
-		var type = $("#chosenType").text();
-		var title = $("."+type+" .MTtitle").text();
-		var typeID = $('.'+type+' .MTid').text();
-		$("#chosenTypeName").text(title);
-		$("#chosenTid").text(typeID);
-		console.log(type);
-		if(x == 5) {
+		
+		if(x == 5) { // if it is the last section
 			convertAndCalculate(type);
-			var MembershipType = $("#chosenTid").text();
-			var NationalGroups = $("#chosenNGid").text();
-			$('.Join').html("<a href='/jointheapa?MT="+MembershipType+"&NG="+NationalGroups+"' style='color: white;'>Join now</a>");
+			$('.TidPAss').val($("#chosenTid").text());
+			$('.NGidPAss').val($("#chosenNGid").text());
+			console.log($("#chosenTid").text());
+			console.log($("#chosenNGid").text());
+			//$('.Join').html("<a href='/jointheapa?MT="+MembershipType+"&NG="+NationalGroups+"' style='color: white;'>Join now</a>");
 		}
+		BringSurveyBack();
 		$("."+type).show();
 		
 		$('html, body').animate({
