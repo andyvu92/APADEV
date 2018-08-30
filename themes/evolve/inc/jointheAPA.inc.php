@@ -10,12 +10,16 @@ if($userTag ==1){
 }
 
 } else { $userID =0; }
+
 $background = getBackgroundImage($userID);
 /* get background image****/ 
  ?> 
 
 <div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 autoscroll background_<?php echo $background;?> " id="dashboard-right-content">
+	<?php if(isset($_SESSION['UserId']) && ($_SESSION['MemberTypeID'] !=="1")):?>
+	<p>You are already a member.</p>
+	<?php else: ?>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div class="col-xs-12"><span class="dashboard-name cairo">Become a member</span></div>
@@ -24,6 +28,7 @@ $background = getBackgroundImage($userID);
 	<?php
 	include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
 	?>
+	
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
 			<ul class="nav nav-tabs">
@@ -57,6 +62,8 @@ $background = getBackgroundImage($userID);
 		</div>
 	</div>
 	</div>
+	
+	<?php endif;?>
 </div>
 <div id="privacypolicyWindow" style="display:none;">
 	<span class="close-popup"></span>

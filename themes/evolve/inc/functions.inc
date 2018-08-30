@@ -470,6 +470,7 @@ function SavePDSurvey($CreateNewUserPD){
 }
 function createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type){
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	$dbt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	try {
 		$insuranceUpdate= $dbt->prepare('INSERT INTO insurance (UserID, EmailAddress, CreateDate, Type) VALUES (:UserID, :EmailAddress, :CreateDate, :Type)');
 		$insuranceUpdate->bindValue(':UserID', $UserID);
@@ -541,4 +542,20 @@ function getProductList($userID){
 	$shoppingcartGet = null;
 	return $arrayReturn;
 } 
+function checkRenew($Paidthrough, $tag){
+	$currentDate = strtotime(date('m-d-Y'));
+	//Todo:  in the future change the 5 month to 3 month
+	
+	if(date("m-d-Y",strtotime('-5 month')) <= date("m-d-Y",strtotime($Paidthrough)) && strtotime(date("m-d-Y",strtotime($Paidthrough))) <= strtotime(date("m-d-Y",strtotime('+5 month'))))  {
+		if($tag){
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	else{
+		return false;
+	}
+}
 ?>

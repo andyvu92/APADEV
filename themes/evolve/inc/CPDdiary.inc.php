@@ -200,8 +200,7 @@ function move(input) {
 <div class="container">
 <div class="row">
 <div class="region region-content col-xs-12 col-sm-12 col-md-9 col-lg-9">
-<h1 class="SectionHeader">Your APA hours</h1>
-<div class="brd-headling">&nbsp;</div>
+<h1 class="SectionHeader">Your CPD diary</h1>
 
 <div class="APAhours">
   <div class="APAhoursHead">

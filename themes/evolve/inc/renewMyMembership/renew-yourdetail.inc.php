@@ -889,7 +889,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<input type="hidden" name="fapnum" value="<?php //echo sizeof($details['Specialty']);?>">
 					<?php if(sizeof($details['PersonSpecialisation'])!=0){
 						echo '<input class="styled-checkbox" type="checkbox" id="fap" name="fap">';
-						echo '<label class="light-font-weight" style="margin-top: 15px;" for="fap">I am part of the Australian College of Physiotherapists</label>';
+						echo '<label class="light-font-weight" style="margin-top: 15px; font-weight: 700;" for="fap">I am part of the Australian College of Physiotherapists</label>';
 						echo '<p style="margin-bottom: 0"><span class="note-text">Please note:</span> Ticking this box adds an extra $200 to the price of your membership.
 	If you have passed Specialisation, Fellowship by Original Contribution or are
 	a Fellow of the Australian College of Physiotherapists, you must tick this box.</p>';
@@ -1364,9 +1364,9 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								</div>
 							</div>
 					</div>
-					<?php if($key!="0"):?>
+					<!--<?php //if($key!="0"):?>-->
 					<a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>	
-					<?php endif;?>
+					<?php //endif;?>
 					</div>
 				<?php endforeach;?>
 				<?php if(sizeof($details['PersonEducation'])==0):?>

@@ -87,6 +87,9 @@ if(isset($_POST['step3'])) {
 	}
 	
 }
+else{
+	header("Location: /");
+}
 ?>
 <?php
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
@@ -118,6 +121,7 @@ $background = getBackgroundImage($userID);
 				<li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7" id="Payment"><strong>Payment</strong></span></a></li>
 				<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 text-underline" id="Review"><strong>Review</strong></span></a></li>
 				</ul>
+				<?php if($renewOuts['Invoice_ID']!=="0"): ?>
 				<div class="row">
 					<h2 style="color:#000;">Thank you for your joining</h2>
 					<p style="color:#000;">We’re glad to have you on board.</p>
@@ -139,6 +143,9 @@ $background = getBackgroundImage($userID);
 					?>
 					<p style="color:#000;">A copy will be sent to your inbox and stored in your new ‘Member dashboard’under the ‘Purchases’ tab.</p>
 				</div>
+				<?php else: ?>
+				<p style="color:#000;">There are some errors for purchasing order.</p>
+				<?php endif; ?>
 				<?php /*
 				<div id="Iaksbnkvoice" class="modal fade big-screen" role="dialog">
 					<div class="modal-dialog">

@@ -1,4 +1,35 @@
-<?php if(isset($_SESSION["UserId"])) : ?>
+<?php if(isset($_SESSION["UserId"])): ?>
+<?php if(!empty($_SESSION['payThroughDate'])):?>
+<?php 
+//This is to get the renewal quatation order details from Aptify!!!!!!!!
+// 2.2.45 - Renewal Quatation OrderID
+// Send - 
+// userID
+// Response -Renewal Quatation OrderID
+
+	$variableData['id'] = $_SESSION["UserId"];
+	$Quatation = GetAptifyData("45", $variableData);
+	if(sizeof($Quatation["results"])!=0){
+		$tag = true;
+		foreach ($Quatation["results"] as $quatationOrderArray){
+			$quatationOrderID =  $quatationOrderArray["ID"];
+		}
+
+
+// after web service 2.2.45 Get renewal quatation orderID from Aptify;
+// 2.2.44 Get Order details this web service is to use renew membership to get the order detail for next year
+// Send - 
+// Invoice_ID
+// Response -Order details
+	$orderDetails = GetAptifyData("44", $quatationOrderID); 
+	}
+	else{$orderDetails = array();$tag = false; }
+    //$paythrough = date_create_from_format('m/d/Y', $_SESSION['payThroughDate']);
+    //echo $_SESSION['payThroughDate'];
+	//echo $paythrough;
+   
+?>
+<?php if(checkRenew($_SESSION['payThroughDate'], $tag)): ?>
 <?php
 include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
@@ -44,29 +75,7 @@ $background = getBackgroundImage($userID);
 				<label class="note-text"><span class="tipstyle">*</span>Required fields</label>
 			</div>
 			<?php
-			//This is to get the renewal quatation order details from Aptify!!!!!!!!
-			// 2.2.45 - Renewal Quatation OrderID
-			// Send - 
-			// userID
-			// Response -Renewal Quatation OrderID
-			if(isset($_SESSION["UserId"])){
-				$variableData['id'] = $_SESSION["UserId"];
-				$Quatation = GetAptifyData("45", $variableData);
-				if(sizeof($Quatation["results"])!=0){
-					foreach ($Quatation["results"] as $quatationOrderArray){
-						$quatationOrderID =  $quatationOrderArray["ID"];
-					}
-
-
-			// after web service 2.2.45 Get renewal quatation orderID from Aptify;
-			// 2.2.44 Get Order details this web service is to use renew membership to get the order detail for next year
-			// Send - 
-			// Invoice_ID
-			// Response -Order details
-				$orderDetails = GetAptifyData("44", $quatationOrderID); 
-				}
-				else{$orderDetails = array();}
-			}      
+			
 			include('sites/all/themes/evolve/inc/renewMyMembership/renew-yourdetail.inc.php');
 			if((isset($_POST["step1"]) && $_POST["step1"] == "1"&& $_POST['insuranceTag']!="0") || isset($_POST['goI'])){
 			include('sites/all/themes/evolve/inc/renewMyMembership/renew-insurance.inc.php'); 
@@ -338,11 +347,13 @@ You have the right to access the personal information about yourself held by the
 	<h3 style="color:black;">Renewing your APA membership is easy…</h3>
 	<p>If your membership category hasn’t changed, simply click continue to proceed with the following purchase:</p>
 	<p><?php if(sizeof($orderDetails)!=0): ?>
-	<?php foreach($orderDetails['Order'] as $orders){
+	<?php 
+	if(!isset($_SESSION['QuatationTag'])){
+		foreach($orderDetails['Order'] as $orders){
 		foreach($orders['OrderLines'] as $order){
 //  put the code here to save the quatation order products into the database firstly.
         
-		if(!isset($_SESSION['QuatationTag'])){
+		
 			
 			if($order['ProductCategory'] =="Memberships"){
 				//checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID=$order['ProductID']);
@@ -350,8 +361,10 @@ You have the right to access the personal information about yourself held by the
 				createShoppingCart($userID, $productID =$order['ProductID'],$type="membership",$coupon="");
 			}
 			if($order['ProductCategory'] =="Subscription"){
+				
 				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
 				createShoppingCart($userID, $productID =$order['ProductID'],$type="NG",$coupon="");
+			
 			}
 			if($order['ProductID'] =="9978"){
 				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
@@ -366,11 +379,9 @@ You have the right to access the personal information about yourself held by the
 				createShoppingCart($userID, $productID =$order['ProductID'],$type="FP",$coupon="");
 			}
 			$_SESSION['QuatationTag'] = "1";
-			
-		}
 		
 		echo $order['ProductName']; echo ",";} 
-	}?><?php endif;?></p>
+	}}?><?php endif;?></p>
 	
 	<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
 
@@ -397,6 +408,20 @@ You have the right to access the personal information about yourself held by the
 		
 <form id="renew-survey-form2" action="" method="POST"><input type="hidden" name="QOrder"></form>
 <form id="renew-membertype-form2" action="" method="POST"><input type="hidden" name="MType"></form>
+<?php else:?>
+<p>The renew process has not open yet</p>
+<?php endif; ?>
+<?php  else: ?>
+<p>Renew process is for member only</p>
+<?php endif;?>
+
+
+<?php else: 
+	// todo
+	// add log-in button with message - you must be logged in
+	?>
+<p>please log-in to use this page</p>
+<?php endif; ?>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -404,20 +429,16 @@ You have the right to access the personal information about yourself held by the
 jQuery(document).ready(function($) {
 	var isshow = sessionStorage.getItem('isshow');
 	var user ='<?php if(isset($_SESSION['UserId'])) {echo $_SESSION['UserId']; } else{ echo "";}?>';
-	if(isshow== null && user!== ''){
+	if(isshow == null && user != ""){
        sessionStorage.setItem('isshow', 1);
-       $("#QuatationPopUp" ).dialog();
+	   
+       $("#QuatationPopUp").dialog();
        
     }
-	$('input[value="log-out"]').click(function(){
+	$('input[value="log out"]').click(function(){
 	   sessionStorage.removeItem("isshow");
+	   
 	});
 	
 });
 </script>
-<?php else : 
-	// todo
-	// add log-in button with message - you must be logged in
-	?>
-<p>please log-in to use this page</p>
-<?php endif; ?>

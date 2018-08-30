@@ -1224,7 +1224,7 @@
 				   </div>
 				</div>
 
-				<div class="row question-boxes"> 
+				<div class="row question-boxes display-none"> 
                     <div class="col-lg-12">
                         <label>Would you like to hear about other APA products?</label>
                     </div>

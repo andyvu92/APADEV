@@ -133,7 +133,7 @@ $invoiceAPI = GetAptifyData("18", $apis);
 		</div>
 	<?php endif; ?>  
 	<?php if (sizeof($cardsnum["results"])==0): ?> 
-	<div id="anothercardBlock" class="row">				   
+	<div id="anothercardBlock" class="row show">				   
 		<div class="row">
 			<div class="col-xs-6 col-sm-6 col-md-3">
 				<div class="chevron-select-box">
