@@ -52,13 +52,13 @@ if(isset($_POST['step3'])) {
 	// Response -Renew a membership order successfully
 	//submit data to complete renew membership web service 2.2.27
 	$renewOuts=GetAptifyData("27", $postReviewData);
-	if($renewOuts['Invoice_ID']!=="0") {
+	if($renewOuts['MResponse'] =="Order updated successfully") {
 	//refresh session data
 	$data = "UserID=".$_SESSION["UserId"];
 	$details = GetAptifyData("4", $data,"");
-	newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"]);
+	newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"]);
 	//end refresh session data
-	  $invoice_ID = $registerOuts['Invoice_ID'];
+	  $invoice_ID = $renewOuts['Invoice_ID'];
 	//save the terms and conditons on APA side
 	$dataArray = array();
 	$dataArray['MemberID'] = $postReviewData['userID'];
@@ -121,7 +121,7 @@ $background = getBackgroundImage($userID);
 				<li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7" id="Payment"><strong>Payment</strong></span></a></li>
 				<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 text-underline" id="Review"><strong>Review</strong></span></a></li>
 				</ul>
-				<?php if($renewOuts['Invoice_ID']!=="0"): ?>
+				<?php if($renewOuts['MResponse'] =="Order updated successfully"): ?>
 				<div class="row">
 					<h2 style="color:#000;">Thank you for your joining</h2>
 					<p style="color:#000;">We’re glad to have you on board.</p>
