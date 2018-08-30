@@ -1,4 +1,5 @@
 <?php
+	$url =  "{$_SERVER['REQUEST_URI']}";
 	// forgot password
 	if(isset($_POST["Fid"])) {
 		$input["email"] = $_POST["Fid"];
