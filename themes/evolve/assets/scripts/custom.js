@@ -1274,18 +1274,18 @@ jQuery(document).ready(function($) {
 	});
     $('#prftag').click(function(){
 		if($('#prftag').val()=="1"){
-			$('#prfselect').addClass("display-none");
+			$('#prfselect').slideUp().css('overflow', 'hidden');
 		}
 		else{
-			$('#prfselect').removeClass("display-none");
+			$('#prfselect').slideDown().css('overflow', 'unset');
 		}
 		
 	});
 	if($('#prftag').val()=="1"){
-		$('#prfselect').addClass("display-none");
+		$('#prfselect').slideUp().css('overflow', 'hidden');
 	}
 	else{
-		$('#prfselect').removeClass("display-none");
+		$('#prfselect').slideDown().css('overflow', 'unset').delay( 800 );
 	}
 	//ADD WORKPLACE SCROLL TOP
 	$(document).on('click', '.add-workplace-join', function(){
