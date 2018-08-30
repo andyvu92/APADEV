@@ -142,12 +142,11 @@
 				$State=json_decode($statecode, true);
 				$t = 0;
 				foreach($State  as $key => $value){
-				echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
-				if (isset($_POST["State"]) || isset($_GET["State"])) {
-					($_GET["State"]==$State[$key]['Abbreviation'] || $_POST["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; } 
-				} 
-				echo '> '.$State[$key]['Abbreviation'].' </option>';
-			
+					echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
+					if (isset($_POST["State"]) || isset($_GET["State"])) {
+						if($_GET["State"]==$State[$key]['Abbreviation'] || $_POST["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+					} 
+					echo '> '.$State[$key]['Abbreviation'].' </option>';
 				}
 				?>
 			</select>
