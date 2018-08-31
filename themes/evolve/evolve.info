@@ -96,6 +96,7 @@ lessc[] = lessc/Drupal/Resource.less
 lessc[] = lessc/custom.less
 lessc[] = lessc/Drupal/Advocacy.less
 lessc[] = lessc/Drupal/Home.less
+lessc[] = lessc/Drupal/inmotion.less
 lessc[] = Survey/Survey.less
 lessc[] = lessc/flex-box.less
 lessc[] = lessc/Andy.less

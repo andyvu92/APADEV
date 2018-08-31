@@ -1,5 +1,5 @@
 <?php
-	//if(isset($_GET["Token"])) {
+	if(isset($_GET["Token"])) {
 		// change password
 		echo "<div class='TokenExist' style='display: none;'>0</div>";
 		?>

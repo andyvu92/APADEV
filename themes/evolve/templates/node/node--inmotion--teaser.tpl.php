@@ -113,6 +113,7 @@
 		<?php endforeach; ?>
 		</div>
 	<?php endif; ?>
+	<?php   //print render($content); ?>
 </div> 
 </a>
 

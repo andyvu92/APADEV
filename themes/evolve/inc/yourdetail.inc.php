@@ -1961,11 +1961,18 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 					</div>
 					<div class="col-lg-6">
-						<div class="tooltip">What is this?
-						<span class="tooltiptext"><img src="http://localhost/sites/default/files/MEDIA/CVV number.png" ></span>
-						</div>
+						<div class="col-xs-12 none-padding tooltip-container top" style="margin-top: 10px;">
+							<input class="tooltip-act" type="checkbox">
+							<div class="tooltip-content">
+								<h4>What is a Card Verification Number?</h4>
+								<span class="tooltip-img"><img src="sites/default/files/general-icon/cvn-image.png"></span>
+								<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
+							</div>
+							<span>What is this?</span>
+						</div>				
 					</div>
-				</div>				 
+				</div>		
+
 				<div class="row">
 					<div class="col-xs-12 none-padding">
 						<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
