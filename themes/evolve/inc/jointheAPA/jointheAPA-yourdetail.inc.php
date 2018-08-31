@@ -538,37 +538,38 @@ $filterMemberProduct = array("10007","10008","10009","9997","10006");
     unset($_SESSION["Regional-group"]);
     if (isset($_SESSION['UserId'])) {
         $userID = $_SESSION['UserId'];
+		$products = array();
+		checkShoppingCart($userID, $type = "membership", $productID = "");
+		checkShoppingCart($userID, $type = "MG1", $productID = "");
+		checkShoppingCart($userID, $type = "MG2", $productID = "");
+		createShoppingCart($userID, $productID = $postLocalData['MemberType'], $type = "membership", $coupon = "");
+		if(sizeof($ngData)!="0"){
+		foreach ($ngData['Nationalgp'] as $key => $value) {
+			array_push($products, $value);
+		}
+		
+		$type = "NG";
+		checkShoppingCart($userID, $type = "NG", $productID = "");
+		foreach ($products as $key => $value) {
+			$productID = $value;
+			createShoppingCart($userID, $productID, $type, $coupon = "");
+		}
+		}
+		// save magazine products on APA side
+		
+		/*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
+		if (isset($_POST['ngmusculo']) && $_POST['ngmusculo'] == "1") {
+			checkShoppingCart($userID, $type = "MG1", $productID = "");
+			createShoppingCart($userID, "9978", $type = "MG1", $coupon = "");
+		}
+		
+		if (isset($_POST['ngsports']) && $_POST['ngsports'] == "1") {
+			checkShoppingCart($userID, $type = "MG2", $productID = "");
+			createShoppingCart($userID, "9977", $type = "MG2", $coupon = "");
+		}
     }
     
-    $products = array();
-    checkShoppingCart($userID, $type = "membership", $productID = "");
-    checkShoppingCart($userID, $type = "MG1", $productID = "");
-    checkShoppingCart($userID, $type = "MG2", $productID = "");
-    createShoppingCart($userID, $productID = $postLocalData['MemberType'], $type = "membership", $coupon = "");
-    if(sizeof($ngData)!="0"){
-	foreach ($ngData['Nationalgp'] as $key => $value) {
-        array_push($products, $value);
-    }
-    
-    $type = "NG";
-    checkShoppingCart($userID, $type = "NG", $productID = "");
-    foreach ($products as $key => $value) {
-        $productID = $value;
-        createShoppingCart($userID, $productID, $type, $coupon = "");
-    }
-    }
-    // save magazine products on APA side
-    
-    /*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
-    if (isset($_POST['ngmusculo']) && $_POST['ngmusculo'] == "1") {
-        checkShoppingCart($userID, $type = "MG1", $productID = "");
-        createShoppingCart($userID, "9978", $type = "MG1", $coupon = "");
-    }
-    
-    if (isset($_POST['ngsports']) && $_POST['ngsports'] == "1") {
-        checkShoppingCart($userID, $type = "MG2", $productID = "");
-        createShoppingCart($userID, "9977", $type = "MG2", $coupon = "");
-    }
+   
 }
 
 ?> 
@@ -3275,7 +3276,7 @@ endif;
 			if(i>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
             //var j = Number(number +2);
 			if(number ==0){$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span><a class="skip">Skip this step</a></li>' );}
-            else {$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span></li>' );}
+            else {$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span></li>' );}
             $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
             //$('#wpnumber').text(i);
 			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");

@@ -580,7 +580,7 @@ if(isset($_SESSION["UserId"])){
 	<div class="modal-body">
 	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
 	<h4>Registration:</h4>
-<p>Online registration is the simplest way to secure a place at an APA course or event.  If unable to register online for any reason, a manual registration form [hyperlink] may be completed and returned to the APA Branch office in the state that the event is being held (see state office details).</p>
+<p>Online registration is the simplest way to secure a place at an APA course or event.  If unable to register online for any reason, a <a href="/sites/default/files/PROFESSIONAL DEVELOPMENT/LD039_Event_registration_form_fillable.pdf">manual registration form</a> may be completed and returned to the APA Branch office in the state that the event is being held (<a href="/contact-us" target="_blank">see state office details</a>).</p>
 <br />
 <p>Registration will not be accepted without payment.  Places are allocated according to the date that an application form and payment are received by the Australian Physiotherapy Association (&lsquo;APA&rsquo;), unless otherwise stated.  (Information concerning remaining places in any event activity does not guarantee a place, as that information is subject to continual change).</p>
 <br />
@@ -618,7 +618,7 @@ if(isset($_SESSION["UserId"])){
 </ul>
 <br />
 <h4>Participant Requirements</h4>
-<p>Part payments may be offered to APA members for courses over $2000. The payment plan is as follows:</p>
+
 <ul>
     <li>It is the participant&rsquo;s responsibility to ensure they meet any pre-requisites as stated in the PD event outline found on the APA website.</li>
     <li>APA accredited courses are not available to students unless otherwise advertised.  Students are able to register and attend APA lectures and PD events other than courses.  </li>
@@ -643,8 +643,8 @@ if(isset($_SESSION["UserId"])){
 <ul>
     <li>Upon attendance at an APA lecture, CPD hours will be allocated to a member participant.  Please note that letters of attendance are not provided for lectures.</li>
 </ul>
-<p>The APA acknowledges and respects the privacy of its members and customers. The information that you provide on this form
-</p>
+
+
 <h4>Privacy</h4>
 <p>The APA acknowledges and respects the privacy of its members and customers.  The information provided by registering for an APA event is &lsquo;personal information&rsquo; as defined by the Privacy Act 1988.  The information is being collected by the APA and will be held by the APA.  It may be given to service providers engaged by the APA.  This information is being collected for the purpose of processing registrations for this event and keeping registrants/participants informed about other upcoming events.  The provision of information is voluntary but if it is not provided the APA may not be able to process registrations.  Registrants/participants have the right to access and alter personal information in accordance with the Australian Privacy Principles and the APA privacy policy, which is available to read at australian.physio. Please direct any enquiries in relation to this matter to our Privacy Officer who can be contacted on 03 9092 0888 or by email at <a href="mailto:privacy@australian.physio">privacy@australian.physio. </a></p>
 	</div>
