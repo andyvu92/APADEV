@@ -1247,7 +1247,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 		
 		</div>
 		<div class="down4" style="display:none;" >
-		<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =1;} echo  $addtionalNumber;  ?>"/>
+		<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =0;} echo  $addtionalNumber;  ?>"/>
 
 			<div id="additional-qualifications-block">
 				<?php foreach($details['PersonEducation'] as $key => $value) :?>
@@ -1372,7 +1372,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 				<?php endforeach;?>
 				<?php if(sizeof($details['PersonEducation'])==0):?>
-					<div id="additional0">
+				<div class="col-xs-12 col-sm-12 col-md-12"><p>Please add your qualifications or click submit to continue</p></div>
+					<!--<div id="additional0">
 						<input type="hidden" name="ID0" value="-1">
 					   <div class="row">
                             <div class="col-xs-12 col-sm-6">
@@ -1381,13 +1382,13 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 <select class="form-control" name="Udegree0" id="Udegree0">
                                    <option value="" selected disabled>Please select</option>
 								   <?php
-                                        $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
+                                        /*$degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
                                         $degree             = json_decode($degreecode, true);
                                         $_SESSION["degree"] = $degree;
                                         foreach ($degree as $pair => $value) {
                                             echo '<option value="' . $degree[$pair]['ID'] . '"';
                                             echo '> ' . $degree[$pair]['Name'] . ' </option>';
-                                        }
+                                        }*/
                                     ?>
                                 <option value="0">Other</option>
                                 </select>
@@ -1416,10 +1417,10 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                             <select class="form-control" name="Undergraduate-university-name0" id="Undergraduate-university-name0">
                                 <option value="" selected disabled>Please select</option>
 								<?php
-                                    foreach ($University as $pair => $value) {
+                                   /* foreach ($University as $pair => $value) {
                                         echo '<option value="' . $University[$pair]['ID'] . '"';
                                         echo '> ' . $University[$pair]['Name'] . ' </option>';
-                                    }
+                                    }*/
                                 ?>    
                                     <option value="0">Other</option>
                                 </select>
@@ -1435,10 +1436,10 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
                                 <option value="" selected disabled>Please select</option>
 								<?php
-                                    $y = date("Y") + 5;
+                                   /* $y = date("Y") + 5;
                                     for ($i = 1940; $i <= $y; $i++) {
                                         echo '<option value="' . $i . '">' . $i . '</option>';
-                                    }
+                                    }*/
                                 ?>
                                 </select>
                                 </div>
@@ -1449,20 +1450,20 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="Ugraduate-country0" name="Ugraduate-country0">
                                 <?php
-                                    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+                                    /*$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
                                     $country     = json_decode($countrycode, true);
                                     foreach ($country as $key => $value) {
                                         echo '<option value="' . $country[$key]['ID'] . '"';
                                         if($country[$key]['ID']=="14"){echo "selected='selected'";}
                                         echo '> ' . $country[$key]['Country'] . ' </option>';
-                                    }
+                                    }*/
                                 ?>
                                 </select>
                                 </div>
                             </div>
                         </div>
 						<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
-					</div>
+					</div>-->
 				<?php endif; ?>
 
 		</div>
