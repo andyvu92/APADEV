@@ -1,18 +1,42 @@
 <?php
-	if(isset($_GET["Token"])) {
+	//if(isset($_GET["Token"])) {
 		// change password
 		echo "<div class='TokenExist' style='display: none;'>0</div>";
 		?>
-	<form id="NewPass" name="formradio" action="/resetpassword" method="POST">
-		<input type="hidden" name="Token" value="<?php echo $_GET["Token"]; ?>" placeholder="" id="hidden">
-		<label for="UserName">UserName</label>
-		<input type="text" required="true" name="UserName" placeholder="UserName" id="UserName">
-		<label for="NPassword">New password</label>
-		<input type="password" required="true" name="NPassword" placeholder="New password" id="NPassword">
-		<label for="CfNPassword">Confirm New password</label>
-		<input type="password" class="form-control" placeholder="Confirm password" id="CfNPassword" name="CfNPassword">
-		<button type="Submit" class="btn btn-default" id="saveNA">Submit</button>
-	</form>
+	<div id="reset-password-form">
+		<form id="NewPass" name="formradio" action="/resetpassword" method="POST">
+			<div class="flex-container">
+				<div class="flex-cell user-info">
+					<h3 class="light-lead-heading cairo">Reset your password:</h3>
+				</div>
+				
+				<div class="flex-cell email-field">
+					<input type="hidden" name="Token" value="<?php echo $_GET["Token"]; ?>" placeholder="" id="hidden">
+					<input class="form-control" type="text" required="true" name="UserName" placeholder="Email address" id="UserName">
+				</div>
+
+				<div class="flex-cell password-field">
+					<input class="form-control" type="password" required="true" name="NPassword" required pattern=".{8,}" placeholder="New password" id="NPassword" onkeyup="PasswordFunction(this.value)">
+				</div>
+
+				<div class="flexcell">
+					<div class="checkMessage" id="PasswordMessage"><span></span></div>
+				</div>
+
+				<div class="flex-cell password-field">
+					<input class="form-control" type="password" class="form-control" required pattern=".{8,}" placeholder="Confirm new password" id="CfNPassword" name="CfNPassword" onkeyup="checkPasswordFunction(this.value)">
+				</div>
+
+				<div class="flexcell">
+					<div class="checkMessage" id="checkPasswordMessage"><span></span></div>
+				</div>
+
+				<div class="flex-cell submit-btn">
+					<button class="accent-btn" type="submit" id="saveNA">Submit</button>
+				</div>
+			</div>
+		</form>
+	</div>
 		<?php
 	} elseif(isset($_POST["UserName"])) {
 		// do update!
@@ -38,23 +62,7 @@
 	echo "<div class='TTTTT'>click here!</div>";
 ?>
 <?php logRecorder(); ?>
-<script>
-	function checkPasswordFunction(Password) {
-		if($('#newPassword').val()!= Password){
-			$('#checkPasswordMessage').html("Please confirm your password is same");
-			$( "#Password" ).focus();
-			$("#Password").css("border", "1px solid red");
-			$(".join-details-button2").addClass("display-none");
-			
-		}
-		else{
-			$('#checkPasswordMessage').html("");
-			$( "#Password" ).blur();
-			$("#Password").css("border", "");
-			$(".join-details-button2").removeClass("display-none");
-		}                    
-	}
-</script>
+
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 	$("#NewPass").validate({
@@ -79,4 +87,34 @@ jQuery(document).ready(function($) {
         }
     });
 });
+
+function PasswordFunction(ps){
+	if($('#NPassword').val().length <= 7){
+		$('#PasswordMessage').html("8 characters minimum");
+		$( "#NPassword" ).focus();
+		$("#NPassword").css("border", "1px solid #ffa02e");
+		$("#saveNA").addClass("stop");
+	}
+	else{
+		$('#PasswordMessage').html("");
+		$( "#NPassword" ).blur();
+		$("#NPassword").css("border", "");
+		$("#saveNA").removeClass("stop");
+	}					
+}
+
+function checkPasswordFunction(Password) {
+	if($('#NPassword').val()!= Password){
+		$('#checkPasswordMessage').html("Your passwords do not match");
+		$( "#CfNPassword" ).focus();
+		$("#CfNPassword").css("border", "1px solid #ffa02e");
+		$("#saveNA").addClass("stop");
+	}
+	else{
+		$('#checkPasswordMessage').html("");
+		$( "#CfNPassword" ).blur();
+		$("#CfNPassword").css("border", "");
+		$("#saveNA").removeClass("stop");
+	}					
+}
 </script>

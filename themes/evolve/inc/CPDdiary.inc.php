@@ -1,5 +1,5 @@
 <?php 
-include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
+//include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 
 /* get background image****/
 if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID =0; }
@@ -69,8 +69,8 @@ echo "<br /><br />apa <br />";
 print_r($APA);
 echo "<br /><br />nonpap <br />";
 print_r($NAPA);
-*/
-?>
+
+
 
 <script type="text/javascript">
 	function changeStatus(number){
@@ -197,9 +197,13 @@ function move(input) {
 }
 </script>
 
+*/
+?>
+
+<div id="CPD-diary-main">
 <div class="container">
 <div class="row">
-<div class="region region-content col-xs-12 col-sm-12 col-md-9 col-lg-9">
+<div class="region region-content col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <h1 class="SectionHeader">Your CPD diary</h1>
 
 <div class="APAhours">
@@ -297,9 +301,6 @@ $(document).ready(function() {
   </div>
 </div>
 
-</div>
-<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3">
-<img alt="" src="/sites/default/files/SKINS%20280x600.png" style="width: 260px;">
 </div>
 </div></div>
 <!--div class="container"-->

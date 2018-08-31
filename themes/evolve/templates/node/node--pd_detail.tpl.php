@@ -1492,9 +1492,8 @@
 						if($('#newPassword').val().length <= 7){
 							$('#PasswordMessage').html("8 characters minimum");
 							$( "#newPassword" ).focus();
-							$("#newPassword").css("border", "1px solid red");
+							$("#newPassword").css("border", "1px solid #ffa02e");
 							$(".join-details-button2").addClass("display-none");
-							
 						}
 						else{
 							$('#PasswordMessage').html("");
@@ -1507,7 +1506,7 @@
 						if($('#newPassword').val()!= Password){
 							$('#checkPasswordMessage').html("Your passwords do not match");
 							$( "#Password" ).focus();
-							$("#Password").css("border", "1px solid red");
+							$("#Password").css("border", "1px solid #ffa02e");
 							$(".join-details-button2").addClass("display-none");
 							
 						}
