@@ -2085,8 +2085,8 @@
 </div>
 
 		<div class="extra-info">
-			<span>By registering for this course, you agree to the <a href="">APA Events Terms and Conditions.</a></span>
-			<span>You could save $55 on future courses by joining an <a href="/membership/national-groups">APA National Group.</a> Pay $54 today and keeping saving on PD throughout the year.</span>
+			<span>By registering for this course, you agree to the <a href="../PDtermsandconditions">APA Events Terms and Conditions.</a></span>
+			<span>You could save on future events by joining an <a href="/membership/national-groups">APA National Group</a>. Pay $54 today and keep saving throughout the year.</span>
 		</div>
 	</div>
 
