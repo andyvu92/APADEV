@@ -187,7 +187,9 @@ if(count($PostArray) == 0) { // GET data
 							$counter = 0;
 							foreach($SubListAll as $Subs) {
 								$counter++;
-								if($counter < 5) {
+								if($counter < 4) { 
+									// for normal subscriptions
+									// from 1st to 3rd items
 									echo '
 										<li>
 											<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
@@ -199,6 +201,24 @@ if(count($PostArray) == 0) { // GET data
 											<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
 											.'</label>
 										</li>';
+								} elseif($counter < 5) {
+									// for InMotion print copy
+									if($_SESSION['MemberType'] == "M7" || $_SESSION['MemberType'] == "M7A" || $_SESSION['MemberType'] == "M7a" || $_SESSION['MemberType'] == "M10" || $_SESSION['MemberType'] == "M9") {
+										// No InMotion print copy for 
+										// student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
+									} else {
+										echo '
+										<li>
+											<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
+											'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
+											if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){ 
+												echo "checked='checked'";
+											}
+											echo '>
+											<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
+											.'</label>
+										</li>';
+									}
 								} else {										
 									foreach($MagSubs as $mags) {
 										if(strpos($Subs["Subscription"], $mags)) {

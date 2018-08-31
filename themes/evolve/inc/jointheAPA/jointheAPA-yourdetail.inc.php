@@ -307,10 +307,11 @@ $filterMemberProduct = array("10007","10008","10009","9997","10006");
     // Process workplace data
     
     if (isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ) {
-        $num      = $_POST['wpnumber'];
+        $num      = $_POST['maxumnumber']; 
         $tempWork = array();
-        for ($i = 0; $i < $num; $i++) {
-            $workplaceArray                = array();
+        for ($i = 0; $i <=$num; $i++) {
+            $workplaceArray  = array();
+		if(isset($_POST['WorkplaceID'.$i])){
             $workplaceArray['WorkplaceID'] = $_POST['WorkplaceID' . $i];
             if (isset($_POST['Findabuddy' . $i])) {
                 $workplaceArray['Find-a-buddy'] = $_POST['Findabuddy' . $i];
@@ -454,6 +455,7 @@ $filterMemberProduct = array("10007","10008","10009","9997","10006");
 			else{ $workplaceArray['AdditionalLanguage'] = ""; }
             
             array_push($tempWork, $workplaceArray);
+		}
         }
         
         $postData['Workplaces'] = $tempWork;
@@ -536,37 +538,38 @@ $filterMemberProduct = array("10007","10008","10009","9997","10006");
     unset($_SESSION["Regional-group"]);
     if (isset($_SESSION['UserId'])) {
         $userID = $_SESSION['UserId'];
+		$products = array();
+		checkShoppingCart($userID, $type = "membership", $productID = "");
+		checkShoppingCart($userID, $type = "MG1", $productID = "");
+		checkShoppingCart($userID, $type = "MG2", $productID = "");
+		createShoppingCart($userID, $productID = $postLocalData['MemberType'], $type = "membership", $coupon = "");
+		if(sizeof($ngData)!="0"){
+		foreach ($ngData['Nationalgp'] as $key => $value) {
+			array_push($products, $value);
+		}
+		
+		$type = "NG";
+		checkShoppingCart($userID, $type = "NG", $productID = "");
+		foreach ($products as $key => $value) {
+			$productID = $value;
+			createShoppingCart($userID, $productID, $type, $coupon = "");
+		}
+		}
+		// save magazine products on APA side
+		
+		/*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
+		if (isset($_POST['ngmusculo']) && $_POST['ngmusculo'] == "1") {
+			checkShoppingCart($userID, $type = "MG1", $productID = "");
+			createShoppingCart($userID, "9978", $type = "MG1", $coupon = "");
+		}
+		
+		if (isset($_POST['ngsports']) && $_POST['ngsports'] == "1") {
+			checkShoppingCart($userID, $type = "MG2", $productID = "");
+			createShoppingCart($userID, "9977", $type = "MG2", $coupon = "");
+		}
     }
     
-    $products = array();
-    checkShoppingCart($userID, $type = "membership", $productID = "");
-    checkShoppingCart($userID, $type = "MG1", $productID = "");
-    checkShoppingCart($userID, $type = "MG2", $productID = "");
-    createShoppingCart($userID, $productID = $postLocalData['MemberType'], $type = "membership", $coupon = "");
-    if(sizeof($ngData)!="0"){
-	foreach ($ngData['Nationalgp'] as $key => $value) {
-        array_push($products, $value);
-    }
-    
-    $type = "NG";
-    checkShoppingCart($userID, $type = "NG", $productID = "");
-    foreach ($products as $key => $value) {
-        $productID = $value;
-        createShoppingCart($userID, $productID, $type, $coupon = "");
-    }
-    }
-    // save magazine products on APA side
-    
-    /*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
-    if (isset($_POST['ngmusculo']) && $_POST['ngmusculo'] == "1") {
-        checkShoppingCart($userID, $type = "MG1", $productID = "");
-        createShoppingCart($userID, "9978", $type = "MG1", $coupon = "");
-    }
-    
-    if (isset($_POST['ngsports']) && $_POST['ngsports'] == "1") {
-        checkShoppingCart($userID, $type = "MG2", $productID = "");
-        createShoppingCart($userID, "9977", $type = "MG2", $coupon = "");
-    }
+   
 }
 
 ?> 
@@ -1474,7 +1477,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
        echo $wpnumber;
     }
 ?>"/>
-
+    <input id="maxumnumber" type="hidden" name="maxumnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =0; echo $wpnumber;} ?>">
         <div class="down3" style="display:none;">
             <!--<div class="col-xs-12"> 
                 <input style="min-height: 0" type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="<?php
@@ -1493,7 +1496,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 				foreach ($details['Workplaces'] as $key => $value):
 			?>
 						<li <?php
-					if ($key == 'Workplace0')
+					if ($key == '0')
 						echo 'class ="active" ';
 			?> id="workplaceli<?php echo $key;?>"><a data-toggle="tab" href="#workplace<?php
 					echo $key;
@@ -2099,7 +2102,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
             </div>
         </div>
         <div class="down4" style="display:none;" >
-        <input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =1;} echo  $addtionalNumber;  ?>"/>
+        <input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =0;} echo  $addtionalNumber;  ?>"/>
             <div id="additional-qualifications-block">
                 <?php
     foreach ($details['PersonEducation'] as $key => $value):
@@ -2299,7 +2302,8 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
     endforeach;
 ?>
 	<?php if(sizeof($details['PersonEducation'])==0):?>
-					<div id="additional0">
+	<div class="col-xs-12 col-sm-12 col-md-12"><p>Please add your qualifications or click submit to continue</p></div>
+					<!--<div id="additional0">
 					
 					   <div class="row">
                             <div class="col-xs-12 col-sm-6">
@@ -2360,10 +2364,10 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
 								<option value="" selected disabled>Please select</option>                               
 							   <?php
-                                    $y = date("Y") + 10;
+                                    /*$y = date("Y") + 10;
                                     for ($i = 1940; $i <= $y; $i++) {
                                         echo '<option value="' . $i . '">' . $i . '</option>';
-                                    }
+                                    }*/
                                 ?>
                                 </select>
                                 </div>
@@ -2374,20 +2378,20 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="Ugraduate-country0" name="Ugraduate-country0">
                                 <?php
-                                    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+                                    /*$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
                                     $country     = json_decode($countrycode, true);
                                     foreach ($country as $key => $value) {
                                         echo '<option value="' . $country[$key]['ID'] . '"';
                                         if($country[$key]['ID']=="14"){echo "selected='selected'";}
                                         echo '> ' . $country[$key]['Country'] . ' </option>';
-                                    }
+                                    }*/
                                 ?>
                                 </select>
                                 </div>
                             </div>
                         </div>
 						<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
-					</div>
+					</div>-->
 				<?php endif; ?>
 
             </div>
@@ -3089,6 +3093,7 @@ if(isset($_POST['MT'])){
     $wpnumber = 0;
     echo $wpnumber;
 ?>"/>
+     <input id="maxumnumber" type="hidden" name="maxumnumber" value="0">
             
             <div class="down3" style="display:none;">
                     <!--<div class="col-xs-12"><input type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="0"> <label for="Findpublicbuddy"><strong>NOTE:</strong>Please list my details in the public (visbile to other health professionals)</label>
@@ -3112,12 +3117,12 @@ if(isset($_POST['MT'])){
             <div class="down4" style="display:none;" >
                 
                 <input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php
-    $addtionalNumber = 1;
+    $addtionalNumber = 0;
     echo $addtionalNumber;
 ?>"/>
-
+				<div class="col-xs-12 col-sm-12 col-md-12"><p>Please add your qualifications or click submit to continue</p></div>
                 <div id="additional-qualifications-block">
-					<div id="additional0">
+					<!--<div id="additional0">
 					<input type="hidden" name="ID0" value="-1">
                     <div class="row">
                         <div class="row">
@@ -3160,10 +3165,10 @@ if(isset($_POST['MT'])){
                             <select class="form-control" name="Undergraduate-university-name0" id="Undergraduate-university-name0">
                                 <option value="" selected disabled>Please select</option>
 								<?php
-                                    foreach ($University as $pair => $value) {
+                                    /*foreach ($University as $pair => $value) {
                                         echo '<option value="' . $University[$pair]['ID'] . '"';
                                         echo '> ' . $University[$pair]['Name'] . ' </option>';
-                                    }
+                                    }*/
                                 ?>    
                                     <option value="0">Other</option>
                                 </select>
@@ -3179,10 +3184,10 @@ if(isset($_POST['MT'])){
                                 <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
                                 <option value="" selected disabled>Please select</option>
 								<?php
-                                    $y = date("Y") + 10;
+                                    /*$y = date("Y") + 10;
                                     for ($i = 1940; $i <= $y; $i++) {
                                         echo '<option value="' . $i . '">' . $i . '</option>';
-                                    }
+                                    }*/
                                 ?>
                                 </select>
                                 </div>
@@ -3193,21 +3198,22 @@ if(isset($_POST['MT'])){
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="Ugraduate-country0" name="Ugraduate-country0">
                                 <?php
-                                    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+                                    /*$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
                                     $country     = json_decode($countrycode, true);
                                     foreach ($country as $key => $value) {
                                         echo '<option value="' . $country[$key]['ID'] . '"';
                                         if($country[$key]['ID']=="14"){echo "selected='selected'";}
                                         echo '> ' . $country[$key]['Country'] . ' </option>';
-                                    }
+                                    }*/
                                 ?>
                                 </select>
                                 </div>
                             </div>
                         </div>
                     </div>
-					</div>
-					<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
+						<a class="no accent-btn" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
+					</div>-->
+					
                 </div>
 
                 <div class="col-xs-12">
@@ -3245,6 +3251,7 @@ endif;
 			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
 			$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
 			$('input[name=wpnumber]').val(i);
+			$('input[name=maxumnumber]').val(i);
 			var memberType = $('select[name=MemberType]').val();
 			var sessionvariable = '<?php
 			echo json_encode($_SESSION["workplaceSettings"]);
@@ -3258,23 +3265,26 @@ endif;
 					var sessionCountry = <?php
 			echo json_encode($_SESSION['country']);
 ?>;
-		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
+		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
 		  
 			 
 		}
          $('.add-workplace-join').click(function(){
 			$('#workplaceblocks [id^="workplace"]').addClass('fade');
             var number = Number($('#wpnumber').val());
-            var i = Number(number +1);
+			var maxNumber = Number($('#maxumnumber').val());
+            var j = Number(number +1);
+			var i = Number(maxNumber +1);
 			if(i>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
             //var j = Number(number +2);
-			if(number ==0){$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span><a class="skip">Skip this step</a></li>' );}
-            else {$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span></li>' );}
+			if(number ==0){$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span><a class="skip">Skip this step</a></li>' );}
+            else {$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span></li>' );}
             $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
             //$('#wpnumber').text(i);
 			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
 			$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
-            $('input[name=wpnumber]').val(i);
+            $('input[name=wpnumber]').val(j);
+			$('input[name=maxumnumber]').val(i);
 			var memberType = $('select[name=MemberType]').val();
             var sessionvariable = '<?php
             echo json_encode($_SESSION["workplaceSettings"]);
@@ -3288,7 +3298,7 @@ endif;
                     var sessionCountry = <?php
             echo json_encode($_SESSION['country']);
 ?>;
-          $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
+          $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
           
         });
         $(document).on( "click", "a[href^=#workplace]", function(){ });
@@ -3301,8 +3311,11 @@ endif;
 		  var t = Number(n -1);
 		 
 		$('input[name=wpnumber]').val(t);
-			if($('input[name=wpnumber]').val()>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
-        });
+		if($('input[name=wpnumber]').val()>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
+        for (m = 1; m<=t;m++){
+			$('div[class="down3"] #tabmenu li:nth-child(' + m + ') a').html("Workplace "+m);
+		}
+		});
     });
     $('.add-additional-qualification').click(function(){
         $('#dashboard-right-content').addClass("autoscroll");

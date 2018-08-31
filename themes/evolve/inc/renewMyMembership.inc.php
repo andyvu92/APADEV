@@ -419,7 +419,7 @@ jQuery(document).ready(function($) {
        $("#QuatationPopUp").dialog();
        
     }
-	$('input[value="log out"]').click(function(){
+	$('input[value="Log out"]').click(function(){
 	   sessionStorage.removeItem("isshow");
 	   
 	});

@@ -24,7 +24,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Keyword</label>
-		<input type="text" name="Keywords" placeholder="Keyword" <?php if(isset($_POST["Keywords"]) || isset($_GET["Keywords"])) { if(isset($_POST["Keywords"])) {echo "value='".$_POST["Keywords"]."'";} else {echo "value='".$_GET["Keywords"]."'";} } ?>>
+		<input type="text" name="Keyword" placeholder="Keyword" <?php if(isset($_POST["Keyword"]) || isset($_GET["Keyword"])) { if(isset($_POST["Keyword"])) {echo "value='".$_POST["Keyword"]."'";} else {echo "value='".$_GET["Keyword"]."'";} } ?>>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Type of PD</label>
@@ -177,8 +177,8 @@
 
 	<div class="row">
 		<div class="col-xs-12 col-md-5">
-			<span class="small-text"><a target="_blank">Terms and conditions</a></span>
-			<span class="small-text"><a target="_blank">Event registration form</a></span>
+			<span class="small-text"><a href="../PDtermsandconditions" target="_blank">Terms and conditions</a></span>
+			<span class="small-text"><a href="/sites/default/files/PROFESSIONAL DEVELOPMENT/LD039_Event_registration_form_fillable.pdf" target="_blank">Event registration form</a></span>
 		</div>
 		<div class="col-xs-12 col-md-7 searchds align-right">
 			<button class="accent-btn your-details-submit pdSearchButton" type="submit"><i class="fa fa-search"></i> Search now</button>

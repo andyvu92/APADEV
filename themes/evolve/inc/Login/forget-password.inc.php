@@ -61,3 +61,4 @@
 	});
 </script>
 </div>
+<?php logRecorder(); ?>
