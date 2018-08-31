@@ -24,7 +24,7 @@
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Keyword</label>
-		<input type="text" name="Keywords" placeholder="Keyword" <?php if(isset($_POST["Keywords"]) || isset($_GET["Keywords"])) { if(isset($_POST["Keywords"])) {echo "value='".$_POST["Keywords"]."'";} else {echo "value='".$_GET["Keywords"]."'";} } ?>>
+		<input type="text" name="Keyword" placeholder="Keyword" <?php if(isset($_POST["Keyword"]) || isset($_GET["Keyword"])) { if(isset($_POST["Keyword"])) {echo "value='".$_POST["Keyword"]."'";} else {echo "value='".$_GET["Keyword"]."'";} } ?>>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Type of PD</label>

@@ -35,7 +35,6 @@ function GetAptifyData($TypeAPI, $ArrayIn) {
 	
 }
 
-
 /**
  *  Conversion begin!
  *  Private function
