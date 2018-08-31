@@ -23,7 +23,7 @@
 // Response -Order details
 	$orderDetails = GetAptifyData("44", $quatationOrderID); 
 	}
-	else{$orderDetails = array();$tag = false; }
+	else{$orderDetails = array();$tag = true; }
     //$paythrough = date_create_from_format('m/d/Y', $_SESSION['payThroughDate']);
     //echo $_SESSION['payThroughDate'];
 	//echo $paythrough;
