@@ -598,7 +598,7 @@
 					<h2 class="blue-heading">Prerequiresites</h2>
 					<ul>
 					<?php 
-						$seperatedPre = explode(",",$pd_detail['Prerequisites']);
+						$seperatedPre = explode("_",$pd_detail['Prerequisites']);
 						if(sizeof($seperatedPre) == 1) {
 							echo "<li>".$pd_detail['Prerequisites']."</li>";
 						} else {
@@ -2067,7 +2067,7 @@
 					<h2 class="blue-heading">Prerequiresites</h2>
 					<ul>
 					<?php 
-						$seperatedPre = explode(",",$pd_detail['Prerequisites']);
+						$seperatedPre = explode("_",$pd_detail['Prerequisites']);
 						if(sizeof($seperatedPre) == 1) {
 							echo "<li>".$pd_detail['Prerequisites']."</li>";
 						} else {
