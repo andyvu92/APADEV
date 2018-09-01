@@ -3,43 +3,41 @@
 /* --------------------------------------------------------- */
 
 div#CPD-diary-main { 
-  height: 400px; 
-  .container{
-    button.dashboard-backgroud{
-      @media all and (max-width: @larger-phone-width) {
-          position: absolute;
-          right: 10%;
-          z-index: 99999;
-      }
-      @media all and (max-width: @tablet-width) {
-          position: absolute;
-          top: -80px;
-          z-index: 99999;
-          right: 0;
-      }
-      span.customise_background{
-          padding: 5px 10px;
-          background: #c3c8c8;
-          border-radius: 100px;
-          color: #fff;
-          transition: 0.1s linear;
-          @media all and (max-width: @larger-phone-width) {
-              display: none;
-          }
-          &:hover{
-              background: #5ac0de
-          }
-      }
-
-      span.customise_icon{
-          @media all and (max-width: @larger-phone-width) {
-              display: block;
-          }
-      }
-  }
-  }
+	height: 400px; 
+	.container{
+		button.dashboard-backgroud{
+			@media all and (max-width: @larger-phone-width) {
+				position: absolute;
+				right: 10%;
+				z-index: 99999;
+			}
+			@media all and (max-width: @tablet-width) {
+				position: absolute;
+				top: -80px;
+				z-index: 99999;
+				right: 0;
+			}
+			span.customise_background{
+				padding: 5px 10px;
+				background: #c3c8c8;
+				border-radius: 100px;
+				color: #fff;
+				transition: 0.1s linear;
+				@media all and (max-width: @larger-phone-width) {
+					display: none;
+				}
+				&:hover{
+					background: #5ac0de
+				}
+			}
+			span.customise_icon{
+				@media all and (max-width: @larger-phone-width) {
+					display: block;
+				}
+			}
+		}
+	}
 }
-
 #block-block-265 {
 	.content {
 		height: 300px;
