@@ -29,12 +29,7 @@ if(isset($_POST["PostNG"])) {
 /***************End Save National Group in PD shopping cart***********/
 }
 
-/**
- *  Get National Group products for PD shopping cart
- *  added by jing hu
- */
-$NGProductsArray = array(); 
-$NGProductsArray = getProduct($userID=$_SESSION['UserId'],$type="PDNG"); 
+
 
 // 2.2.19 - GET list National Group
 // Send - 
@@ -107,6 +102,12 @@ foreach ($productList as $productDetail){
 	$couponCode = $Lproduct['coupon'];
 	array_push($PDarray, $PDtotalArray);
 }
+/**
+ *  Get National Group products for PD shopping cart
+ *  added by jing hu
+ */
+$NGProductsArray = array(); 
+$NGProductsArray = getProduct($userID=$_SESSION['UserId'],$type="PDNG"); 
 if(sizeof($NGProductsArray)!=0) {
 	foreach($NGProductsArray as $singleNG){
 		array_push($PDProductarray, $singleNG);
@@ -187,8 +188,8 @@ if(isset($_SESSION["UserId"])){
 ?>
 <?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0)):?>
 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 left-content">
-	<?php   if(sizeof($products)!=0):?>
-	<input type="hidden" id="checkTerm" value="1">
+	<?php if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0)):?>
+	
 	<h1 class="SectionHeader">Summary of cart</h1>
 	<div class="brd-headling">&nbsp;</div>
 	
@@ -201,7 +202,9 @@ if(isset($_SESSION["UserId"])){
 		<!--<div class="flex-col-2 pd-spcart-wishlist"><span class="table-heading">Action</span></div>-->
 		<div class="flex-col-1 pd-spcart-delete"><span class="table-heading">Delete</span></div>
 	</div>
+	
 	<?php 
+	if(sizeof($products)!=0){
 		////print_r($products);
 		$ListProductID = Array();
 		$discountPrice=0;
@@ -243,12 +246,34 @@ if(isset($_SESSION["UserId"])){
 			//$price=$price+(int)str_replace('$', '', $productt['Pricelist'][0]['Price']);
 		if (in_array($productt['Typeofpd'],  $pdtype)){ $tag=1; }
 		}
-		
+	}
+    if(sizeof($NGProductsArray)!=0){
+		foreach( $NGListArray as $NGArray){
+			if(sizeof($NGProductsArray)!=0){
+				foreach($NGProductsArray as $NGProduct){
+					if($NGProduct == $NGArray['ProductID']){
+						echo "<div class='flex-cell flex-flow-row table-cell'>";
+						
+						echo "<div class='flex-col-3 title-col'>".$NGArray['ProductName']."</div>";
+						echo	"<div class='flex-col-3 pd-spcart-date'>N/A</div>";
+						echo	"<div class='flex-col-2 pd-spcart-location'><span class='mobile-visible'>Location: </span>N/A</div>";
+						echo "<div class='flex-col-1 pd-spcart-price'>A$".$NGArray['NGprice']."</div>";
+						//$price += $NGArray['NGprice'];
+						//echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
+						echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PDNG&productid='.$NGArray['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
+						echo "</div>";
+					}	  
+				}
+			}
+		}
+	}	
 		
 	?>
 	</div>
-
+	<?php endif; ?>
+	<?php   if(sizeof($products)!=0):?>
     <div class="flex-container flex-flow-column" id="termc">
+	<input type="hidden" id="checkTerm" value="1">
 		<div class="flex-cell">	
 			<span class="small-lead-heading">Terms & conditions</span>
 		</div>
@@ -275,7 +300,7 @@ if(isset($_SESSION["UserId"])){
 			<span class="small-lead-heading">Your dietary requirements</span>
 		</div>
 
-		<p>Based on your details, we’ve recognised you are:</p>
+		<p>Based on your details, we’ve recognised you have the following dietary requirements:</p>
 
 		<div class="flex-cell flex-flow-column">
 			<?php if(sizeof($Dietary)>0) {
@@ -289,39 +314,7 @@ if(isset($_SESSION["UserId"])){
 		<span class="">Please note that not all APA PD events include catering.</span>
 	</div>
 	<?php endif; ?>	
-	<?php if(sizeof($NGProductsArray)!=0):?>
-    	<div class="flex-container join-apa-final">
-		    <h1 class="SectionHeader">National Group Product</h1>
-			<div class="flex-cell flex-flow-row table-header">
-				<div class="flex-col-8">
-					<span class="table-heading">Product name</span>
-				</div>
-				<div class="flex-col-2">
-					<span class="table-heading">Price</span>
-				</div>
-				
-			</div>
-
-    			<?php 
-							
-				foreach( $NGListArray as $NGArray){
-				if(sizeof($NGProductsArray)!=0){
-					foreach($NGProductsArray as $NGProduct){
-						if($NGProduct == $NGArray['ProductID']){
-							echo "<div class='flex-cell flex-flow-row table-cell'>";
-							echo "<div class='flex-col-8 title-col'>".$NGArray['ProductName']."</div>";
-							echo "<div class='flex-col-2 price-col'>A$".$NGArray['NGprice']."</div>";
-							//$price += $NGArray['NGprice'];
-							//echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
-							echo "</div>";
-						}	  
-					}
-				}
-				}
-						                       
-				?>
-		</div>
-	<?php endif; ?>		
+		
 </div>
 
 
@@ -468,7 +461,7 @@ if(isset($_SESSION["UserId"])){
 		</div>
 	</form>	
 	<?php endif; ?>
-	<?php  if(($productList->rowCount()>0) || (sizeof($NGProductsArray)!=0)):?>
+	<?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0)):?>
 		<div class="row">
 			<div class="col-xs-12"><span class="sidebardis">PRF donation</span></div>
 			<div class="col-xs-12 col-md-12">
@@ -508,12 +501,12 @@ if(isset($_SESSION["UserId"])){
                 <div class="flex-col-6"><?php echo $i;?> items</div>
                 <div class="flex-col-6">$<?php echo $price;?></div>
             </div>
-            
+            <?php   if(sizeof($products)!=0):?>
 			<div class="flex-cell">
                 <div class="flex-col-6">Discount</div>
                 <div class="flex-col-6">$<?php echo $discountPrice;?></div>
             </div>
-            
+            <?php endif;?>
 			<div class="flex-cell">
 			    <div class="flex-col-6">GST</div>
 				<div class="flex-col-6">$<?php echo $scheduleDetails['GST'];?></div>
@@ -532,6 +525,7 @@ if(isset($_SESSION["UserId"])){
 			<input type="hidden" name="CardUsed" id="CardUsed" value="">
 			<input type="hidden" name="CouponCode"  value="<?php echo $couponCode; ?>">
 			<?php
+			if(sizeof($products)!=0){	
 				$counterTotal = count($ListProductID);
 				$counters = 0;
 				foreach($ListProductID as $PIDs) {
@@ -539,6 +533,7 @@ if(isset($_SESSION["UserId"])){
 					echo '<input type="hidden" name="PID'.$counters.'" id="PID'.$counters.'" value="'.$PIDs["PID"].'">';
 				}
 				echo '<input type="hidden" name="total" id="total" value="'.$counterTotal.'">';
+			}
 			?>
 			<?php
 			if(sizeof($NGProductsArray)!=0) {
