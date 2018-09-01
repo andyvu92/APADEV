@@ -238,6 +238,7 @@ $background = getBackgroundImage($userID);
 						</tr>
 						<?php endif; ?>
 						<tr>
+							<td style="padding-top: 25px;"><a href="/changepassword"><strong style="text-decoration: underline;">change your password</strong></a></td>
 						<?php
 						// 2.2.2 - GET Membership certification PDF
 						// Send - 
