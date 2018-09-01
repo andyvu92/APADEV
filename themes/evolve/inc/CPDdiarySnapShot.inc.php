@@ -12,7 +12,7 @@ $CPDHousrs = $results["CurrentCPDHour"];
 <h2>Your 2018 CPD snapshot</h2>
 
 <div id="cpd" style="display:none"><?php echo $CPDHousrs; ?></div>
-<div class="col-xs-6 col-md-6 circle-container" id="goo-chart">
+<div class="col-xs-12 col-md-12 circle-container" id="goo-chart">
 	<div id="donutchart"></div>
 	<span class="number"><?php  
 	if (!empty($CPDHousrs)){
@@ -23,7 +23,7 @@ $CPDHousrs = $results["CurrentCPDHour"];
 	}
 	
 	?></span>
-	<span class="text">CPD hours</span>
+	<span class="text">CPD hours<br>Completed</span>
 </div>
 <?php logRecorder(); ?>
 

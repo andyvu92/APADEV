@@ -3,42 +3,199 @@
 /* --------------------------------------------------------- */
 
 div#CPD-diary-main { 
-  height: 400px; 
-  .container{
-    button.dashboard-backgroud{
-      @media all and (max-width: @larger-phone-width) {
-          position: absolute;
-          right: 10%;
-          z-index: 99999;
-      }
-      @media all and (max-width: @tablet-width) {
-          position: absolute;
-          top: -80px;
-          z-index: 99999;
-          right: 0;
-      }
-      span.customise_background{
-          padding: 5px 10px;
-          background: #c3c8c8;
-          border-radius: 100px;
-          color: #fff;
-          transition: 0.1s linear;
-          @media all and (max-width: @larger-phone-width) {
-              display: none;
-          }
-          &:hover{
-              background: #5ac0de
-          }
-      }
-
-      span.customise_icon{
-          @media all and (max-width: @larger-phone-width) {
-              display: block;
-          }
-      }
-  }
-  }
+	height: 400px; 
+	.container{
+		button.dashboard-backgroud{
+			@media all and (max-width: @larger-phone-width) {
+				position: absolute;
+				right: 10%;
+				z-index: 99999;
+			}
+			@media all and (max-width: @tablet-width) {
+				position: absolute;
+				top: -80px;
+				z-index: 99999;
+				right: 0;
+			}
+			span.customise_background{
+				padding: 5px 10px;
+				background: #c3c8c8;
+				border-radius: 100px;
+				color: #fff;
+				transition: 0.1s linear;
+				@media all and (max-width: @larger-phone-width) {
+					display: none;
+				}
+				&:hover{
+					background: #5ac0de
+				}
+			}
+			span.customise_icon{
+				@media all and (max-width: @larger-phone-width) {
+					display: block;
+				}
+			}
+		}
+	}
 }
+#block-block-291 {
+	.content {
+		height: 300px;
+		h2 {
+			text-align: center;
+			color: white;
+			font-weight: 300;
+			font-size: 46px;
+		}
+		@media all and (max-width: @larger-phone-width) {
+			h2 {
+				font-size: 38px;
+			}
+		}
+		@media all and (max-width: @phone-width) {
+			h2 {
+				font-size: 29px;
+			}
+		}
+	}
+	#goo-chart{
+		padding: 0;
+		@media all and (max-width: 1300px) and (min-width: @larger-tablet-width) {
+			padding-left: 10px;
+			span.number{
+				left: 60%;
+			}
+			span.text{
+				margin-left: -32px;
+			}
+		}
+		#donutchart{
+			position: relative;
+			top: 12px;
+			z-index: 10;
+			div[dir="ltr"]{
+				margin: 0 auto;
+			}
+		}
+		span.number{
+			position: absolute;
+			top: 74px;
+			left: 49.8%;
+			-webkit-transform: translateX(-50%);
+			transform: translateX(-50%);
+			font-size: 4em;
+			display: block;
+			line-height: 1em;
+			color: white;
+		}
+		span.text{
+			font-size: 1.2em;
+			position: absolute;
+			top: 158px;
+			left: 48%;
+			margin-left: -8px;
+			z-index: 11;
+			font-size: 18px;
+			font-weight: 300;
+			text-align: center;
+			color: white;
+		}
+		@media all and (max-width: @larger-desktop-width) {
+			#donutchart{
+				top: 12px;
+			}
+			span.number{
+				font-size: 3.5em;
+				top: 67px;
+				/*left: 49.8%;*/
+				-webkit-transform: translateX(-50%);
+				transform: translateX(-50%);
+			}
+			span.text{
+				font-size: 1.0em;
+				margin-left: -12px;
+				top: 141px;
+				line-height: 18px;
+			}
+		}
+		@media all and (max-width: 1300px) and (min-width: @desktop-width + 1px ){
+			span.number{
+				/*left: 49.8%;*/
+			}
+			span.text{
+				/*margin-left: -37px;*/
+			}
+		}
+		@media all and (max-width: @desktop-width) {
+			#donutchart{
+				top: 22px;
+			}
+			span.number{
+				font-size: 3em;
+				/*left: 49.8%;*/
+				-webkit-transform: translateX(-50%);
+				transform: translateX(-50%);
+			}
+			span.text{
+				font-size: 0.9em;
+				margin-left: -6px;
+				top: 129px;
+			}
+		}
+		@media all and (max-width: @larger-tablet-width){
+			#donutchart{
+				top: -3px;
+			}
+			span.number{
+				font-size: 4em;
+				/*left: 49.8%;*/
+				top: 50px;
+				-webkit-transform: translateX(-50%);
+				transform: translateX(-50%);
+			}
+			span.text{
+				font-size: 1.2em;
+				margin-left: -25px;
+				top: 150px;
+			}
+		}
+		@media all and (max-width: @larger-phone-width) {
+			#donutchart{
+				top: 18px;
+			}
+			span.number{
+				font-size: 3em;
+				/*left: 49.8%;*/
+				-webkit-transform: translateX(-50%);
+				transform: translateX(-50%);
+			}
+			span.text{
+				font-size: 0.8em;
+				margin-left: -18px;
+				top: 123px;
+				line-height: 14px;
+			}
+		}
+		@media all and (max-width: @phone-width) {
+			#donutchart{
+				top: 10px;
+			}
+			span.number{
+				font-size: 3.5em;
+				/*left: 49.8%;*/
+				-webkit-transform: translateX(-50%);
+				transform: translateX(-50%);
+			}
+			span.text{
+				font-size: 1.1em;
+				margin-left: -32px;
+				top: 143px;
+				line-height: 16px;
+			}
+		}
+	}
+}
+
 div#CPD-diary-main .container:nth-child(2) {
   padding-top: 70px;
 }
