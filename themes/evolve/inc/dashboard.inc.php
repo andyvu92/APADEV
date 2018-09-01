@@ -385,12 +385,12 @@ $background = getBackgroundImage($userID);
 						?>
 
 					</div>
-				<a class="accent-button" href="#" id="ng-join-btn"><span>Join more</span></a>
+				<a class="accent-button" href="/joinnationalgroup" id="ng-join-btn"><span>Join more</span></a>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
 					<span class="small-heading cairo">Donate to the PRF</span>
 					<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="">
-					<a class="accent-button" href="#"><span>Donate today</span></a>
+					<a class="accent-button" href="/PRFdonation"><span>Donate today</span></a>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
 				<span class="small-heading cairo">Suggestions /feedback</span>
