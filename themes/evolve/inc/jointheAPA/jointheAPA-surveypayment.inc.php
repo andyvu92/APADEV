@@ -259,7 +259,7 @@ if(isset($_POST['step2-1'])) {
 				</div>
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-7">
-					Total (inc. GST)	
+					<strong>Total</strong> (inc. GST)	
 					</div>
 					<div class="flex-col-5">
 			        $<span id="totalPayment"><?php echo $scheduleDetails['OrderTotal'];?></span>

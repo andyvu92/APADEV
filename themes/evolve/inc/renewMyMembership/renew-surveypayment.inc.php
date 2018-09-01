@@ -97,6 +97,9 @@ if(isset($_POST['step2-1'])) {
 	// Response -Fellowship product list
 	$FPListArray = array();
 	$fpProdcutArray = array();
+	if(isset($_SESSION["FPProductID"])){
+	array_push($fpProdcutArray,$_SESSION["FPProductID"]);
+}
 	if(isset($_SESSION["MGProductID"])){
 		foreach($_SESSION["MGProductID"] as $singleM){
 			foreach($singleM as $key => $value){
@@ -105,6 +108,7 @@ if(isset($_POST['step2-1'])) {
 		}
 	}
 	if(sizeof($fpProdcutArray)!=0){
+		
 		$fpData['ProductID'] = $fpProdcutArray;
 		$FPListArray = GetAptifyData("21", $fpData);
 		
@@ -202,6 +206,7 @@ if(isset($_POST['step2-1'])) {
 						}
 						}
 						if(sizeof($FPListArray)!=0){
+							
 							foreach( $FPListArray as $FProduct){
 									echo "<div class='flex-cell flex-flow-row table-cell'>";
 									echo "<div class='flex-col-7 title-col'>".$FProduct['FPtitle']."</div>";
@@ -239,7 +244,7 @@ if(isset($_POST['step2-1'])) {
 				</div>
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-7">
-						Total (inc. GST)	
+						<strong>Total</strong> (inc. GST)	
 					</div>
 					<div class="flex-col-5">
 			        	$<span id="totalPayment"><?php echo $scheduleDetails['OrderTotal'];?></span>

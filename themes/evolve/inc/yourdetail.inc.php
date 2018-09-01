@@ -579,6 +579,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 						<div class="row">
 							<div class="col-xs-12">
 								<span class="light-lead-heading cairo" style="font-weight: 200; margin-bottom: 18px;">Phone numbers:</span>
+								<label for="">Please enter at least one phone number</label>
 								<span class="text-underline smaller-lead-heading" style="color: #000">Home</span>
 							</div>
 							<div class="col-xs-12 col-sm-3 col-md-6">
