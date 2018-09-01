@@ -36,7 +36,7 @@ if(isset($_POST["POSTPRF"])) {
 		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
 		$out = GetAptifyData("15",$postPaymentData); 
-		
+	
 	//}
 	
 }
@@ -47,14 +47,15 @@ $cardsnum = GetAptifyData("12", $test);
 <?php 
 
 if(isset($registerOuts['Invoice_ID']) && $registerOuts['Invoice_ID']!="0"):
-$apis[0] = $invoice_ID;
-$invoiceAPI = GetAptifyData("18", $apis);
+//$apis[0] = $invoice_ID;
+//$invoiceAPI = GetAptifyData("18", $apis);
 ?>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
-<p>A copy will be sent to your inbox and stored in your new dashboard</p>
+<p>Andy put the recored here.....</p>
+<p>A copy will be sent to your inbox and stored in <a href="/dashboard">your new dashboard</a></p>
 </div>
 <?php endif;?>
+<?php if(!isset($_POST["POSTPRF"])): ?>
 <div id="prf-donation-container">
 	<div class="header-banner">
 		<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="">
@@ -69,6 +70,7 @@ $invoiceAPI = GetAptifyData("18", $apis);
 			<div class="flex-col-12">					
 				<fieldset>
 					<div class="chevron-select-box">
+					<label for="">Payment method:<span class="tipstyle"> *</span></label>
 						<select id="Paymentcard" name="Paymentcard">
 							<?php
 							
@@ -90,7 +92,7 @@ $invoiceAPI = GetAptifyData("18", $apis);
 
 		<div class="flex-cell">
 			<div class="flex-col-12">
-				<input class="styled-checkbox" type="checkbox" id="anothercard">
+				<input class="styled-checkbox" type="checkbox" id="anothercard" name="anothercard">
 				<label for="anothercard">Use another card</label>
 			</div>
 		</div> 
@@ -117,43 +119,50 @@ $invoiceAPI = GetAptifyData("18", $apis);
 
 		<div class="flex-cell">
 			<div class="flex-col-12">
-				<label>Name on card:</label>
+				<label>Name on card:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>
 
 		<div class="flex-cell">
 			<div class="flex-col-12">
-				<label>Card number:</label>
+				<label>Card number:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
 		</div>
 
 		<div class="flex-cell card-uniq">
 			<div class="flex-col-6">
-				<label>Expiry date:</label>
+				<label>Expiry date:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
 			</div>
 
 			<div class="flex-col-6">
-				<label>CVV:</label>
+				<label>CVV:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 			</div>
 		</div>
 
-		<div class="flex-cell">
+		<!--<div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label>
 			</div>
 				<input type="hidden" name="addCard" value="0">
-		</div>
+		</div>-->
 	</div>
 	<?php endif; ?>  
 	<?php if (sizeof($cardsnum["results"])==0): ?> 
-	<div class="flex-container" id="anothercardBlock" class="row show">				   
+	<div class="flex-container row show" id="anothercardBlock">	
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<input class="styled-checkbox" type="checkbox" name="anothercard">
+				
+			</div>
+		</div> 
 		<div class="flex-cell">
 			<div class="flex-col-12">
 				<div class="chevron-select-box">
+				<label for="">Payment method:<span class="tipstyle"> *</span></label>
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 					<?php 
 						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
@@ -171,36 +180,36 @@ $invoiceAPI = GetAptifyData("18", $apis);
 
 		<div class="flex-cell">
 			<div class="flex-col-12">
-				<label>Name on card:</label>
+				<label>Name on card:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>
 
 		<div class="flex-cell">
 			<div class="flex-col-12">
-				<label>Card number:</label>
+				<label>Card number:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
 		</div>
 
 		<div class="flex-cell card-uniq">
 			<div class="flex-col-6">
-				<label>Expiry date:</label>
+				<label>Expiry date:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
 			</div>
 
 			<div class="flex-col-6">
-				<label>CVV:</label>
+				<label>CVV:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 			</div>
 		</div>
 
-		<div class="flex-cell">
+		<!--<div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label>
 				<input type="hidden" name="addCard" value="1">
 			</div>
-		</div>
+		</div>-->
 
 	</div>
 	<?php endif; ?>  
@@ -225,10 +234,29 @@ $invoiceAPI = GetAptifyData("18", $apis);
 		</div>
 	</div>
 	
-	<button class="submit-donate" type="submit" value="Donate now">Donate now</button>
+	<button class="submit-donate" type="submit" value="Donate now" onclick="return checkCard();">Donate now</button>
 		
 </form>
+<script>
+  function checkCard(){
+		if($("#anothercardBlock").is(":visible")){
+				if($("select[name=Cardtype]").val() =='') {$("select[name=Cardtype]").addClass("focuscss");}else{$("select[name=Cardtype]").removeClass("focuscss");}
+				if($("input[name=Cardname]").val() =='') {$("input[name=Cardname").addClass("focuscss");}else{$("input[name=Cardname").removeClass("focuscss");}
+				if($("input[name=Cardnumber]").val() =='') {$("input[name=Cardnumber").addClass("focuscss");}else{$("input[name=Cardnumber").removeClass("focuscss");}
+				if($("input[name=Expirydate]").val() =='') {$("input[name=Expirydate").addClass("focuscss");}else{$("input[name=Expirydate").removeClass("focuscss");}
+				if($("input[name=CCV]").val() =='') {$("input[name=CCV").addClass("focuscss");}else{$("input[name=CCV").removeClass("focuscss");}
+			}
+			if($("#anothercardBlock").is(":visible")){
+				if($("select[name=Cardtype]").val() =='') { return false;}
+				if($("input[name=Cardname]").val() =='') { return false;}
+				if($("input[name=Cardnumber]").val() =='') { return false;}
+				if($("input[name=Expirydate]").val() =='') { return false;}
+				if($("input[name=CCV]").val() =='') { return false;}
+			}
+}
+</script>
 </div>
+<?php endif; ?>
 <?php logRecorder();  ?>
 <div id="PRFDesPopUp" style="display:none;" class="container">
 <p>The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot. </p>

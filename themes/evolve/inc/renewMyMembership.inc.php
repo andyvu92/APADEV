@@ -393,10 +393,10 @@ You have the right to access the personal information about yourself held by the
 <form id="renew-survey-form2" action="" method="POST"><input type="hidden" name="QOrder"></form>
 <form id="renew-membertype-form2" action="" method="POST"><input type="hidden" name="MType"></form>
 <?php else:?>
-<p>The renew process has not open yet</p>
+<p>Looks like you’ve already renewed your APA membership. If you’re looking to update your membership details, go <a href="/dashboard">your dashboard</a>.</p>
 <?php endif; ?>
 <?php  else: ?>
-<p>Renew process is for member only</p>
+<p>If you’re not already a member, <a href="/membership-question">join us today.</a></p>
 <?php endif;?>
 
 
