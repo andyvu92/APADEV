@@ -1,4 +1,5 @@
-
+<?php if(isset($_SESSION['UserId'])):?>
+<?php  if($_SESSION['MemberTypeID']!="1"): ?>
 <?php
 $choseProduct = array();
 if(isset($_GET["ProductID"])){
@@ -118,3 +119,9 @@ $nationalGroup = $nationalGroups;
 <input class="placeorder" type="submit" value="Join now"/>
 </form>
 <div class="NGpriceT" style="display: none;"></div>
+<?php  else: ?>
+<p>If you’re not already a member, <a href="/membership-question">join us today.</a></p>
+<?php endif;?>
+<?php else:?>
+<p>Please log in to use this page</p>
+<?php endif;?>

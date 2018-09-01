@@ -11,11 +11,14 @@ if(isset($_POST["POSTPRF"])) {
 	//$OrderSend["TandC"] = $_POST["TandC"];
 	$OrderSend["Card_number"] = $_POST["CardUsed"];
 	$PIDs = array();
-	for($i = 1; $i <= intval($_POST["total"]); $i++) {
-		//$PID["PID"] = $_POST["PID".$i];
-		$PID = $_POST["PID".$i];
-		array_push($PIDs, $PID);
+	if(isset($_POST["total"])){
 		
+		for($i = 1; $i <= intval($_POST["total"]); $i++) {
+			//$PID["PID"] = $_POST["PID".$i];
+			$PID = $_POST["PID".$i];
+			array_push($PIDs, $PID);
+			
+		}
 	}
 	if(isset($_POST["totalNG"])){
 		for($i = 1; $i <= intval($_POST["totalNG"]); $i++) {
