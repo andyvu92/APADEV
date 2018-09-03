@@ -3362,14 +3362,14 @@ jQuery(document).ready(function() {
 		if($('#area-code').val().length >= 6){
 			$('#areaMessage').html("no more than 5 characters");
 			$( "#area-code" ).focus();
-			$("#area-code").css("border", "1px solid red");
+			$("#area-code").addClass('focuscss');
 			$(".join-details-button1").addClass("stop");
 			
 		}
 		else{
 			$('#areaMessage').html("");
 			$( "#area-code" ).blur();
-			$("#area-code").css("border", "");
+			$("#area-code").removeClass('focuscss');
 			$(".join-details-button1").removeClass("stop");
 		}					
 	}
