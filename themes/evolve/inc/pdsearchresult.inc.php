@@ -283,13 +283,13 @@ if(isset($results['MResponse'])) {
 		$Enrollednumber = doubleval($result['Enrollednumber']);
 		$Div = $Totalnumber - $Enrollednumber;
 		if($result['AttendeeStatus'] == "Registered") {
-			echo '<i class="fa fa-heart fa-lg registered" aria-hidden="true"></i><span>registered</span>';
+			echo '<i class="fa fa-lg registered" aria-hidden="true"></i><span>Registered</span>';
 		} elseif($Div <= 5){
-			echo '<i class="fa fa-heart fa-lg almost-full" aria-hidden="true"></i><span>Almost full</span>';
+			echo '<i class="fa fa-lg almost-full" aria-hidden="true"></i><span>Almost full</span>';
 		} elseif($Div==0){
-			echo  "<i class='fa fa-ban fa-lg course-full' aria-hidden='true'></i><span>Course full</span>";
+			echo  "<i class='fa fa-lg course-full' aria-hidden='true'></i><span>Course full</span>";
 		} elseif($Div >= 5){
-			echo '<i class="fa fa-heart fa-lg open" aria-hidden="true"></i><span>Open</span>';
+			echo '<i class="fa fa-lg open" aria-hidden="true"></i><span>Open</span>';
 		}
 		//echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Almost full</span></a>';
 		//echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Open</span></a>';	

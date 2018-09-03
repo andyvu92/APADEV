@@ -848,10 +848,8 @@ body.page-node{
             }
             .pd-status{
                 display: flex;
+                align-items: center;
                 flex-direction: column;
-                i.fa-ban{
-                    font-size: 1.5em;
-                }
                 a{
                     display: flex;
                     flex-direction: column;
@@ -860,6 +858,26 @@ body.page-node{
                     font-weight: 400;
                     color: #5e5f67;
                     margin-top: 5px;
+                }
+                i{
+                    width: 25px;
+                    height: 25px;
+                    background-size: contain;
+                    background-position: center center;
+                    background-repeat: no-repeat;
+                    
+                }
+                i.registered{
+                    background-image: url(/sites/default/files/pd-status-icons/registered-DG.png);
+                }
+                i.almost-full{
+                    background-image: url(/sites/default/files/pd-status-icons/almost-full-DG.png);
+                }
+                i.course-full{
+                    background-image: url(/sites/default/files/pd-status-icons/full-DG.png);
+                }
+                i.open{
+                    background-image: url(/sites/default/files/pd-status-icons/open-DG.png);
                 }
             }
         }
