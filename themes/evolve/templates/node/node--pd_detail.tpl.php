@@ -82,6 +82,7 @@
 
 ?>
 <?php 
+$userRetisterStatus = false;
 	    if(isset($_SESSION["UserId"])&&($_SESSION["UserId"]!="0")){ $userId=$_SESSION["UserId"];
 		} else {$userId="0";}
 		if(isset($_POST["Emailaddress"]) && isset($_POST["Password"])) {
@@ -491,8 +492,12 @@
 		
 	}
 	// in case of user update the details get the new data.
-	
-	?>
+
+	if($pd_detail['AttendeeStatus'] == "Registered") {
+		$userRetisterStatus = true;
+	} 
+
+?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
 	<div class="post-content">
 	
@@ -1784,16 +1789,21 @@
 				$Now = strtotime(date('m-d-Y'));
 				$fullStatus = false;
 				$Div = $Totalnumber - $Enrollednumber;
-				if($Now > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
-					echo "Closed";
+				if($userRetisterStatus) {
+					echo "Registered";  
 					$fullStatus = true;
-				} elseif($Div <= 5){
-					echo "Almost Full"; 
-				} elseif($Div==0){
-					echo "Full"; 
-					$fullStatus = true;
-				} elseif($Div >= 5){
-					echo "Open";
+				} else {
+					if($Now > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+						echo "Closed";  
+						$fullStatus = true;
+					} elseif($Div <= 5){
+						echo "Almost Full"; 
+					} elseif($Div==0){
+						echo "Full"; 
+						$fullStatus = true;
+					} elseif($Div >= 5){
+						echo "Open"; 
+					}
 				}
 				/* for 10% or less logic 
 				$Div = $Enrollednumber/$Totalnumber;
@@ -1826,7 +1836,7 @@
 			<span>
 				<?php 
 				if(isset($userId)&& ($userId!="0")){
-					if($pd_detail['AttendeeStatus'] > 0) {
+					if($userRetisterStatus) {
 						echo '<span class="small-heading">Your registration status:</span>';
 						echo "Registered";
 					} else {
@@ -1867,7 +1877,11 @@
 				//$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
 				$userTag = checkPDUser($_SESSION['MemberTypeID']);
 				if($fullStatus) {
-					echo '<span class="add-to-cart disable '.$pd_detail['Typeofpd'].'">Registration closed</span>';
+					if($userRetisterStatus) {
+						echo '<span class="add-to-cart disable '.$pd_detail['Typeofpd'].'">Already registered</span>';
+					} else {
+						echo '<span class="add-to-cart disable '.$pd_detail['Typeofpd'].'">Registration closed</span>';
+					}
 				} elseif ($userTag =="0"){ // any logged in users
 					if(isset($pd_detail['Typeofpd']) && $pd_detail['Typeofpd'] == "Course") {
 						if($_SESSION['MemberTypeID'] =='31' || $_SESSION['MemberTypeID'] =='32') {
@@ -1942,16 +1956,21 @@
 				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
 				$Now = strtotime(date('m-d-Y'));
 				$Div = $Totalnumber - $Enrollednumber;
-				if($Now > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
-					echo "Closed";  
+				if($userRetisterStatus) {
+					echo "Registered";  
 					$fullStatus = true;
-				} elseif($Div <= 5){
-					echo "Almost Full"; 
-				} elseif($Div==0){
-					echo "Full"; 
-					$fullStatus = true;
-				} elseif($Div >= 5){
-					echo "Open"; 
+				} else {
+					if($Now > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+						echo "Closed";  
+						$fullStatus = true;
+					} elseif($Div <= 5){
+						echo "Almost Full"; 
+					} elseif($Div==0){
+						echo "Full"; 
+						$fullStatus = true;
+					} elseif($Div >= 5){
+						echo "Open"; 
+					}
 				}
 		 		?>
 			</span>
@@ -1972,7 +1991,7 @@
 			<span>
 				<?php 
 				if(isset($userId)&& ($userId!="0")){
-					if($pd_detail['AttendeeStatus'] > 0) {
+					if($userRetisterStatus) {
 						echo "Registered";
 					} else {
 						echo "Not registered";
