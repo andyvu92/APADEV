@@ -226,10 +226,12 @@ $background = getBackgroundImage($userID);
 							<td><?php echo $user['Officebearer']; ?></td>
 						</tr>
 						<?php endif; ?>
+						<?php if($_SESSION['MemberTypeID']!="1"): ?>
 						<tr>
 							<td><strong>Your Branch:</strong></td>
 							<td><?php echo $user['HomeBranch']; ?></td>
 						</tr>
+						<?php endif;?>
 						<?php if(isset($user['PreferBranch']) && $user['PreferBranch'] != ""): ?>
 						<tr>
 							<td><strong>Additional Branch:</strong></td>
@@ -353,6 +355,7 @@ $background = getBackgroundImage($userID);
 			});
 			*/ ?>
 			</script>
+			<?php if($_SESSION['MemberTypeID']!="1"): ?>
 			<div class="col-xs-12 col-md-6 mobile_line" >
 				<div class="col-xs-12 center">				 
 					<span class="cairo lead-heading">Your membership</br> snapshot</span>		
@@ -379,8 +382,10 @@ $background = getBackgroundImage($userID);
 					<span class="text">CPD hours <a target="_blank" href="/pd/cpd-diary">Full CPD diary</a></span>
 				</div>
 			</div>
+			<?php endif;?>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bottom-space bottom-section flex-column">
+		<?php if($_SESSION['MemberTypeID']!="1"): ?>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line" id="national-groups">
 				<span class="small-heading cairo">Your National Groups</span>
 				<div class="col-xs-12 dashboard-content-bottom ng-icons-group">
@@ -392,6 +397,7 @@ $background = getBackgroundImage($userID);
 					</div>
 				<a class="accent-button" href="/joinnationalgroup" id="ng-join-btn"><span>Join more</span></a>
 			</div>
+			<?php endif;?>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
 					<span class="small-heading cairo">Donate to the PRF</span>
 					<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="">
