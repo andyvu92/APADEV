@@ -40,5 +40,16 @@
                 }
             }
         }
+        div[class^="flex-col"].locked{
+            &:before{
+                display: none;
+            }
+            .not-avalable{
+                display: block;
+            }
+        }
+        .not-avalable{
+            display: none;
+        }
     }
 }

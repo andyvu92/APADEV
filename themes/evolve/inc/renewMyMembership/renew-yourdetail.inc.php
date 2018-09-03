@@ -762,6 +762,12 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<label for="">Member ID (Your email address)<span class="tipstyle"> *</span></label>
 					<input type="text" class="form-control" name="Memberid" readonly <?php if (empty($details['Memberid'])) {echo "placeholder='Member no.'";}   else{ echo 'value="'.$details['Memberid'].'"';}?> >
 				</div>
+				
+				<div class="mobile-note">
+					<div class="col-xs-12">
+						<span class="note-text">Note: </span>to update your email address, please contact the APA member hub via email at <a href="mailto:info@australian.physio" target="_self">info@australian.physio</a> or phone on <a href="tel:1300 306 622" target="_self">1300 306 622</a>.
+					</div>
+				</div>
 
 				<div class="col-xs-12 col-md-6">
 					<label for="">Member Category<span class="tipstyle"> *</span></label>
@@ -790,6 +796,12 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						}
 					    ?>
 					</select>
+					</div>
+				</div>
+
+				<div class="desktop-note">
+					<div class="col-xs-12">
+						<span class="note-text">Note: </span>to update your email address, please contact the APA member hub via email at <a href="mailto:info@australian.physio" target="_self">info@australian.physio</a> or phone on <a href="tel:1300 306 622" target="_self">1300 306 622</a>.
 					</div>
 				</div>
 			</div>
@@ -857,8 +869,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				</div>
 
 				</div>
-				<div class="col-xs-12 display-none" id="ngsports"><input type="checkbox" id="ngsportsbox" name="ngsports" value="0"> <label class="light-font-weight" for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label></div>
-				<div class="col-xs-12 display-none" id="ngmusculo"><input type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"> <label class="light-font-weight" for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label></div>
+				<div class="col-xs-12 display-none" id="ngsports"><input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0"> <label class="light-font-weight" for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label></div>
+				<div class="col-xs-12 display-none" id="ngmusculo"><input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"> <label class="light-font-weight" for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label></div>
 			</div>
 
 			<div class="row"> 
@@ -1373,7 +1385,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 				<?php endforeach;?>
 				<?php if(sizeof($details['PersonEducation'])==0):?>
-				<div class="col-xs-12 col-sm-12 col-md-12"><p>Please add your qualifications or click submit to continue</p></div>
+				<div class="col-xs-12 col-sm-12 col-md-12 note"><p>Please add your qualification(s) or click Next to continue</p></div>
 					<!--<div id="additional0">
 						<input type="hidden" name="ID0" value="-1">
 					   <div class="row">

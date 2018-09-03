@@ -1555,7 +1555,7 @@ body.page-node{
     display: block;
     float: left;
     width: auto;
-    margin: 15px;
+    margin: 0px 15px;
     color: #fff;
 }
 #accept1{
@@ -1855,10 +1855,13 @@ a#createAccount {
 .placeorder{
     width: 252px;
     border: none;
-    background: #009fda;
+    background: none;
     color: white;
-    height: 36px;
-
+    display: flex;
+    justify-content: center;
+    .shopCartButton{
+        max-width: 170px;
+    }
 }
 .sidebardis{
     color: #009fda;
@@ -2046,9 +2049,12 @@ input[name="Couponcode"]{
                 max-width: 294px;
             }
         }
+        @media all and (max-width: @larger-tablet-width) {
+            background-position: 70% 0px !important;
+            background-size: cover;
+            background-attachment: scroll;
+        }
         @media all and (max-width: @tablet-width){
-            background-position: 70% 100px !important;
-            background-size: 235%;
             .sub-top-banner{
                 text-align: center;
                 .flex-container{
@@ -2065,16 +2071,10 @@ input[name="Couponcode"]{
             } 
         }
         @media all and (max-width: @larger-phone-width){
-            background-position: 70% 150px !important;
-            background-size: 350%;
             .sub-top-banner{
                 padding: 10px 0;
                 font-size: 1.1em;
             }
-        }
-        @media all and (max-width: @phone-width){
-            background-position: 70% 150px !important;
-            background-size: 350%;
         }
     }
 

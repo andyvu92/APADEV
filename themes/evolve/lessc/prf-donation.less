@@ -27,7 +27,7 @@
         }
     }
 }
-#prf-donation-container{
+#prf-donation-container, #prf-donation-container-after{
     width: 450px;
     margin: 100px auto;
     background: #fff;
@@ -54,6 +54,7 @@
         min-height: 48px;
         background: none;
         padding: 6px 12px;
+        padding-right: 30px;
         letter-spacing: 5px;
     }
     .flex-container{
@@ -86,5 +87,46 @@
         &>div{
             max-width: 48%;
         }
+    }
+
+    @media all and (max-width: @larger-phone-width) {
+        width: 100%;
+        margin: 0px auto;
+        background: #fff;
+        padding: 50px 0 0 0;
+        .header-banner h1.lead-heading{
+            padding: 0 10%;
+        }
+        .sub-heading{
+            padding: 0 10%;
+        }
+        .featured-image{
+            width: 100%!important;
+            margin: 0!important;
+            padding-top: 50px;
+        }
+        .form{
+            padding: 0 10%;
+        }
+    }
+}
+
+#prf-donation-container-after{
+    border-bottom: 20px solid #7fa7d8;
+    h1{
+        text-align: center;
+        font-size: 3.5em;
+    }
+    .sub-heading{
+        font-family: Roboto;
+        font-size: 1.8em;
+        text-align: center;
+        display: flex;
+        font-weight: 900;
+        color: #a6a8ab;
+    }
+    .featured-image{
+        width: 450px;
+        margin: 50px -50px -50px -50px;
     }
 }

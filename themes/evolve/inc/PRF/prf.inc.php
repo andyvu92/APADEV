@@ -50,15 +50,24 @@ if(isset($registerOuts['Invoice_ID']) && $registerOuts['Invoice_ID']!="0"):
 //$apis[0] = $invoice_ID;
 //$invoiceAPI = GetAptifyData("18", $apis);
 ?>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<p>Andy put the recored here.....</p>
-<p>A copy will be sent to your inbox and stored in <a href="/dashboard">your new dashboard</a></p>
+<div class="flex-container">
+
+
+<div id="prf-donation-container-after">
+	<div class="header-banner">
+		<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="Physiotherapy Research Foundation">
+		<h1 class="lead-heading cairo">Thankyou for your support.</h1>
+	</div>
+	<span class="sub-heading">Your donation is now on its way to funding the latest physiotherapy research.</span>
+	<div class="featured-image"><img src="sites/default/files/imageedit_1_9081445887_4.jpg"></div>
+</div>
+
 </div>
 <?php endif;?>
 <?php if(!isset($_POST["POSTPRF"])): ?>
 <div id="prf-donation-container">
 	<div class="header-banner">
-		<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="">
+		<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="Physiotherapy Research Foundation">
 		<h1 class="lead-heading cairo">Donate to the PRF.</h1>
 	</div>
 <form action="" method="POST" style="width:100%;">
@@ -69,8 +78,8 @@ if(isset($registerOuts['Invoice_ID']) && $registerOuts['Invoice_ID']!="0"):
 		<div class="flex-cell">
 			<div class="flex-col-12">					
 				<fieldset>
-					<div class="chevron-select-box">
 					<label for="">Payment method:<span class="tipstyle"> *</span></label>
+					<div class="chevron-select-box">
 						<select id="Paymentcard" name="Paymentcard">
 							<?php
 							
