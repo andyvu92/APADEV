@@ -1,3 +1,5 @@
+<?php if(isset($_SESSION['UserId'])):?>
+<?php  if($_SESSION['MemberTypeID']!="1"): ?>
 <?php 
 // 2.2.33 - GET CPD diary
 // Send - 
@@ -163,3 +165,9 @@ $CPDHousrs = $results["CurrentCPDHour"];
 		chart.draw(data, options);
 	}
 </script>
+<?php  else: ?>
+<p>If you’re not already a member, <a href="/membership-question">join us today.</a></p>
+<?php endif;?>
+<?php else:?>
+<p>Please log in to use this page</p>
+<?php endif;?>

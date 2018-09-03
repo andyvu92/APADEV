@@ -432,10 +432,10 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				<div class="nav-chevron">
 					<ul class="nav nav-tabs">
 							<li id="yourdetail1"><a class="event1" style="cursor: pointer;"><span class="text-underline eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
-							<li id="yourdetail2"><a class="event2" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li>
+							<?php if($details['MemberTypeID']!="1"): ?><li id="yourdetail2"><a class="event2" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li><?php endif;?>
 							<li id="yourdetail3"><a class="event13" style="cursor: pointer;"><span class="eventtitle13" id="payment"><strong>Payment information</strong></span></a></li>
-							<?php if($details['MemberType']!="31" && $details['MemberType']!="32"): ?><li id="yourdetail4"><a class="event3" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li><?php endif; ?>
-							<li id="yourdetail5"><a class="event4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
+							<?php if($details['MemberTypeID']!="31" && $details['MemberTypeID']!="32" && $details['MemberTypeID']!="1"): ?><li id="yourdetail4"><a class="event3" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li><?php endif; ?>
+							<?php if($details['MemberTypeID']!="1"): ?><li id="yourdetail5"><a class="event4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li><?php endif;?>
 					</ul>
 				</div>
 			<form action="<?php echo $url;?>" name="your-details" method="POST" novalidate>
@@ -1897,7 +1897,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				</div>
 				<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>-->
 			</div>
-		<div class="col-xs-12" id="your-details-button">   <button type="submit" id="your-details-submit-button" class=""><span class="dashboard-button-name">Submit</span></button></div>
+		<div class="col-xs-12" id="your-details-button">   <button type="submit" id="your-details-submit-button" class="<?php if($details['MemberTypeID']=="1") {echo"stop";}?>"><span class="dashboard-button-name">Submit</span></button></div>
 	</form>
 		<form id="changePasswordForm">
 			<div class="down7" style="display:none;" >

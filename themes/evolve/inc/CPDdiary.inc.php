@@ -1,3 +1,6 @@
+<?php if(isset($_SESSION['UserId'])):?>
+<?php  if($_SESSION['MemberTypeID']!="1"): ?>
+
 <?php 
 //include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 
@@ -153,6 +156,8 @@ if(isset($_POST["NONAPA"])) {
 </div>
 <!--/div-->
 <?php logRecorder(); ?>
+<?php endif;?>
+<?php endif;?>
 
 <?php
 // 2.2.2 - GET Membership certification PDF
