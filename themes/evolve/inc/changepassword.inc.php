@@ -30,8 +30,8 @@ if(isset($_SESSION["Log-in"])) : ?>
 <div class="col-xs-12 col-md-10 background_<?php echo $background; ?>" id="dashboard-right-content">
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Change your password</strong></span></div>
-         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
+         <div class="col-xs-12"><span class="dashboard-name"><strong>Change your password</strong></span></div>
+         <!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>-->
       </div>
       <!-- Modal -->
   <div id="myModal" class="modal fade" role="dialog">
@@ -81,8 +81,10 @@ if(isset($_SESSION["Log-in"])) : ?>
 				 <div class="col-lg-6">
 					<input type="password" class="form-control" placeholder="Confirm password" id="Confirm_password" name="Confirm_password">
 				 </div>
-			  </div>
-			  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0;">   <button  class="dashboard-button dashboard-bottom-button change-password-button"><span class="dashboard-button-name">Save</span></button></div>
+        </div>
+        <div class="row">
+			    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">   <button  class="accent-btn change-password-button"><span class="dashboard-button-name">Save</span></button></div>
+        </div>
 		   </div>
 		</form>
                                             

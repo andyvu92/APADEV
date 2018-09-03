@@ -105,7 +105,7 @@ $nationalGroup = $nationalGroups;
 					echo "checked disabled";
 				}
 				echo '>&nbsp;&nbsp;&nbsp;<label class="NGnameText'.$counter.'" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
-					.'</label></div>';
+					.'</label> <span class="not-avalable">You are already a member</span> </div>';
 				echo '<div class="flex-col-2"><div class="NGprice'.$counter.'">$'.$Subs["NGprice"].'</div></div></div>';
 				if($tr == 1) {
 					echo "</div>";
@@ -116,7 +116,7 @@ $nationalGroup = $nationalGroups;
 
 </div>
 </div>
-<input class="placeorder" type="submit" value="Join now"/>
+<button class="placeorder accent-btn" type="submit" value="Join now">Join now</button>
 </form>
 <div class="NGpriceT" style="display: none;"></div>
 <?php  else: ?>

@@ -944,11 +944,22 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
       cursor: auto;
     }
   
-    /* Disabled box. */
+    /* Disabled checkbox. */
     &:disabled + label:before {
       box-shadow: none;
       background: #fff;
     }
+
+    &:disabled + label:after {
+        background: #bababa!important;
+        box-shadow: 
+        2px 0 0 #bababa,
+        4px 0 0 #bababa,
+        4px -2px 0 #bababa,
+        4px -4px 0 #bababa,
+        4px -6px 0 #bababa,
+        4px -8px 0 #bababa!important;
+      }
   
     /* Checkmark. Could be replaced with an image */
     &:checked + label:after {
@@ -978,6 +989,7 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
         z-index: 1;
         background: none;
         font-family: Roboto!important;
+        padding-right: 30px;
     }
     &::after{
         content: '';
@@ -1450,5 +1462,3 @@ input{
        }
    } 
 }
-
-
