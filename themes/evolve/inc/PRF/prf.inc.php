@@ -44,12 +44,7 @@ $test['id'] = $_SESSION["UserId"];
 $cardsnum = GetAptifyData("12", $test);
   	
 ?>
-<?php 
-
-if(isset($registerOuts['Invoice_ID']) && $registerOuts['Invoice_ID']!="0"):
-//$apis[0] = $invoice_ID;
-//$invoiceAPI = GetAptifyData("18", $apis);
-?>
+<?php if(isset($registerOuts['Invoice_ID']) && $registerOuts['Invoice_ID']!=="0"): ?>
 <div class="flex-container">
 
 
@@ -63,6 +58,214 @@ if(isset($registerOuts['Invoice_ID']) && $registerOuts['Invoice_ID']!="0"):
 </div>
 
 </div>
+<?php elseif(isset($_POST["POSTPRF"])):?>
+
+<div id="prf-donation-container">
+	<div class="header-banner">
+		<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="Physiotherapy Research Foundation">
+		<h1 class="lead-heading cairo">Donate to the PRF.</h1>
+	</div>
+<form action="" method="POST" style="width:100%;">
+	<input type="hidden" name="POSTPRF" id="POSTPRF">
+
+		<?php if (sizeof($cardsnum["results"])!=0): ?>  
+	<div class="flex-container">
+		<div class="flex-cell">
+			<div class="flex-col-12">					
+				<fieldset>
+					<label for="">Payment method:<span class="tipstyle"> *</span></label>
+					<div class="chevron-select-box">
+						<select id="Paymentcard" name="Paymentcard">
+							<?php
+							
+								foreach( $cardsnum["results"] as $cardnum) {
+									echo '<option value="'.$cardnum["Creditcards-ID"].'"';
+									if($cardnum["IsDefault"]=="1") {
+									echo "selected ";
+								}
+								echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
+								echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+								}
+							
+							?>
+						</select>
+					</div>
+				</fieldset>
+			</div>
+		</div>
+
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<input class="styled-checkbox" type="checkbox" id="anothercard" name="anothercard">
+				<label for="anothercard">Use another card</label>
+			</div>
+		</div> 
+	</div>
+
+	<div class="flex-container" id="anothercardBlock" style="margin: 0; padding:0" class="display-none col-xs-12">
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<div class="chevron-select-box">
+				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
+				<?php 
+					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+					$PaymentType=json_decode($PaymentTypecode, true);
+					foreach($PaymentType  as $pair => $value){
+						echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+						echo '> '.$PaymentType[$pair]['Name'].' </option>';
+						
+					}
+				?>	
+				</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<label>Name on card:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
+			</div>
+		</div>
+
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<label>Card number:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
+			</div>
+		</div>
+
+		<div class="flex-cell card-uniq">
+			<div class="flex-col-6">
+				<label>Expiry date:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
+			</div>
+
+			<div class="flex-col-6">
+				<label>CVV:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+			</div>
+		</div>
+
+		<!--<div class="flex-cell">
+			<div class="flex-col-12">
+				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label>
+			</div>
+				<input type="hidden" name="addCard" value="0">
+		</div>-->
+	</div>
+	<?php endif; ?>  
+	<?php if (sizeof($cardsnum["results"])==0): ?> 
+	<div class="flex-container row show" id="anothercardBlock">	
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<input class="styled-checkbox" type="checkbox" name="anothercard">
+				
+			</div>
+		</div> 
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<div class="chevron-select-box">
+				<label for="">Payment method:<span class="tipstyle"> *</span></label>
+					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
+					<?php 
+						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+						$PaymentType=json_decode($PaymentTypecode, true);
+						foreach($PaymentType  as $pair => $value){
+							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+							echo '> '.$PaymentType[$pair]['Name'].' </option>';
+							
+						}
+					?>
+					</select>
+				</div>
+			</div>
+		</div>
+
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<label>Name on card:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
+			</div>
+		</div>
+
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<label>Card number:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
+			</div>
+		</div>
+
+		<div class="flex-cell card-uniq">
+			<div class="flex-col-6">
+				<label>Expiry date:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
+			</div>
+
+			<div class="flex-col-6">
+				<label>CVV:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+			</div>
+		</div>
+
+		<!--<div class="flex-cell">
+			<div class="flex-col-12">
+				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label>
+				<input type="hidden" name="addCard" value="1">
+			</div>
+		</div>-->
+
+	</div>
+	<?php endif; ?>
+	<div class="flex-container">
+		<div class="flex-cell">
+			<span class="fail-payment-message">Payment has failed. Please check your card details and try again or <a href="/contact-us" target="_blank">contact us</a>.</span>
+		</div>
+	</div>  
+	<div class="flex-container">
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<label>Please select amount to donate:</label>
+				<div class="chevron-select-box">
+					<select class="form-control" id="PRF" name="PRF">
+						<option value="10" selected>$10.00</option>
+						<option value="20">$20.00</option>
+						<option value="50">$50.00</option>
+						<option value="100">$100.00</option>
+						<option value="Other">Other</option>
+					</select>
+				</div>
+				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="">
+			</div>
+			<div class="flex-col-12">
+				<span><strong>Please note: </strong>We will send a receipt to your inbox</span>
+			</div>
+		</div>
+	</div>
+	
+	<button class="submit-donate" type="submit" value="Donate now" onclick="return checkCard();">Donate now</button>
+		
+</form>
+<script>
+  function checkCard(){
+		if($("#anothercardBlock").is(":visible")){
+				if($("select[name=Cardtype]").val() =='') {$("select[name=Cardtype]").addClass("focuscss");}else{$("select[name=Cardtype]").removeClass("focuscss");}
+				if($("input[name=Cardname]").val() =='') {$("input[name=Cardname").addClass("focuscss");}else{$("input[name=Cardname").removeClass("focuscss");}
+				if($("input[name=Cardnumber]").val() =='') {$("input[name=Cardnumber").addClass("focuscss");}else{$("input[name=Cardnumber").removeClass("focuscss");}
+				if($("input[name=Expirydate]").val() =='') {$("input[name=Expirydate").addClass("focuscss");}else{$("input[name=Expirydate").removeClass("focuscss");}
+				if($("input[name=CCV]").val() =='') {$("input[name=CCV").addClass("focuscss");}else{$("input[name=CCV").removeClass("focuscss");}
+			}
+			if($("#anothercardBlock").is(":visible")){
+				if($("select[name=Cardtype]").val() =='') { return false;}
+				if($("input[name=Cardname]").val() =='') { return false;}
+				if($("input[name=Cardnumber]").val() =='') { return false;}
+				if($("input[name=Expirydate]").val() =='') { return false;}
+				if($("input[name=CCV]").val() =='') { return false;}
+			}
+}
+</script>
+</div>
+
 <?php endif;?>
 <?php if(!isset($_POST["POSTPRF"])): ?>
 <div id="prf-donation-container">

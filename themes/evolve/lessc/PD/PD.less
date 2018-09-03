@@ -236,6 +236,15 @@
             background-size: cover;
             background-repeat: no-repeat;
             background-position: 50% 50px !important;
+            @media all and (max-width: @larger-tablet-width) {
+                background-attachment: scroll!important;
+                -webkit-background-size: cover;
+                -moz-background-size: cover;
+                -o-background-size: cover;
+                background-size: cover!important;
+                background-repeat: no-repeat;
+                background-position: 50% 0px !important;
+            }
         }
     }
 }
