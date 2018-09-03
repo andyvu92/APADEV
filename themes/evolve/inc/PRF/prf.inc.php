@@ -54,7 +54,7 @@ $cardsnum = GetAptifyData("12", $test);
 		<h1 class="lead-heading cairo">Thankyou for your support.</h1>
 	</div>
 	<span class="sub-heading">Your donation is now on its way to funding the latest physiotherapy research.</span>
-	<div class="featured-image"><img src="sites/default/files/imageedit_1_9081445887_4.jpg"></div>
+	<div class="featured-image"><img src="sites/default/files/prf-images/prf-thankyou.png"></div>
 </div>
 
 </div>
