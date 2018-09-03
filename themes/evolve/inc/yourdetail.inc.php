@@ -852,7 +852,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<label for="">Member category<span class="tipstyle"> *</span></label>
 							<div class="chevron-select-box">
 							<select class="form-control" id="MemberType" name="MemberType" disabled>
-								<option value="" <?php if (empty($details['MemberTypeID'])) echo "selected='selected'";?> disabled>Member Category</option>
+								<option value="" <?php if (empty($details['MemberTypeID']) || $details['MemberTypeID']=="1") echo "selected='selected'";?> disabled>Member Category</option>
 								<?php
 								
 								$MemberTypecode  = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
