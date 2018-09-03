@@ -18,9 +18,10 @@ global $base_url;
 // PDcount,
 // [ PD id, PD title, PD type, CPD hour, City, State,
 // Begin date, End date ]
-if(isset($_POST["lat"])) {	$request["Latitude"] = "";//$_POST["lat"];
+if(isset($_SESSION['UserId'])) {	$request["UserID"] = $_SESSION['UserId']; }
+if(isset($_POST["lat"])) {	$request["Latitude"] = "";
 } else { $request["Latitude"] = ""; }
-if(isset($_POST["lng"])) {	$request["Longitude"] = "";//$_POST["lng"];
+if(isset($_POST["lng"])) {	$request["Longitude"] = "";
 } else { $request["Longitude"] = ""; }
 if(isset($_SESSION['UserID'])) { $sendData["UserID"] = $_SESSION['UserId'];
 } else { $sendData["UserID"] = "-1"; }
@@ -280,18 +281,18 @@ if(isset($results['MResponse'])) {
 		echo	"<div class='flex-col-1 pd-status'>";
 		$Totalnumber = doubleval($result['Totalnumber']);
 		$Enrollednumber = doubleval($result['Enrollednumber']);
-		$Div = $Enrollednumber/$Totalnumber;
-		if($Div>=0.9 && $Div<1){
-			//echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Almost full</span></a>';
+		$Div = $Totalnumber - $Enrollednumber;
+		if($result['AttendeeStatus'] == "Registered") {
+			echo '<i class="fa fa-heart fa-lg registered" aria-hidden="true"></i><span>registered</span>';
+		} elseif($Div <= 5){
 			echo '<i class="fa fa-heart fa-lg almost-full" aria-hidden="true"></i><span>Almost full</span>';
-		} elseif(($Totalnumber-$Enrollednumber)==0){
+		} elseif($Div==0){
 			echo  "<i class='fa fa-ban fa-lg course-full' aria-hidden='true'></i><span>Course full</span>";
-		} elseif($Div == 1){
-			echo '<i class="fa fa-heart fa-lg closed" aria-hidden="true"></i><span>Closed</span>';
-		} elseif($Div<0.9){
-			//echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Open</span></a>';
+		} elseif($Div >= 5){
 			echo '<i class="fa fa-heart fa-lg open" aria-hidden="true"></i><span>Open</span>';
 		}
+		//echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Almost full</span></a>';
+		//echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Open</span></a>';	
 		echo	"</div>";
 		echo "</div>";
 

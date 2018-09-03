@@ -1,3 +1,6 @@
+<?php if(isset($_SESSION['UserId'])):?>
+<?php  if($_SESSION['MemberTypeID']!="1"): ?>
+
 <?php 
 //include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 
@@ -59,6 +62,153 @@ if(isset($_POST["NONAPA"])) {
 	$NCPDPDF = GetAptifyData("38", "UserID");//$_SESSON["UserID"]
 	// todo!
 }
+
+?>
+
+<div id="CPD-diary-main">
+<div class="container">
+<div class="row">
+<div class="region region-content col-xs-12 col-sm-12 col-md-12 col-lg-12">
+<h1 class="SectionHeader">Your CPD diary</h1>
+
+<div class="APAhours">
+  <div class="APAhoursHead">
+    <div>Completed PD</div><div>Date</div><div>Hours</div>
+  </div>
+  <div class="APAhoursContent">
+    <?php
+		if(sizeof($APA) > 0) {
+			foreach($APA as $rowData) {
+				$date = date("d-m-Y", strtotime($rowData["Date"]));
+				echo "<div style='display: none;'>".$rowData["Id"]."</div><div>".$rowData["Title"]."&nbsp;</div><div>".$date."</div><div>".$rowData["Hours"]."</div>";
+				echo "<div class='lineBreak'>&nbsp;</div>";
+			}
+		} else {
+			echo "<div style='display: none;'>&nbsp;</div><div>No PD information found.</div><div>&nbsp;</div><div>0</div>";
+		}
+    ?> 
+  </div>
+</div>
+
+<h1 class="SectionHeader">Non-APA hours</h1>
+<div class="brd-headling">&nbsp;</div>
+
+<button class="Non-APA-hour" data-toggle="modal" data-target="#nonAPAhour"><span>Add non-APA hours</span></button><br />
+<form action="/pd/cpd-diary" method="POST">
+</form>
+<br />
+
+<!--strong><a href="http://www.physiotherapyboard.gov.au/documents/default.aspx?record=WD15%2f18489&dbid=AP&chksum=ewqLtzOm4m%2fsRUrlGCmo1A%3d%3d">This is based on Physiotherapy Board of Australia's Continuing professional development form.</a></strong-->
+<div class="NAPAhours">
+  <div class="NAPAhoursHead">
+    <div>Date</div><div>Description</div><div>Time</div><div>Provider</div><div>Reflection</div>
+  </div>
+  <div class="NAPAhoursContent">
+    <?php
+	if(sizeof($NAPA) > 0) {
+		foreach($NAPA as $rowData) {
+			$date = date("d-m-Y", strtotime($rowData["Date"]));
+			echo "<div style='display: none;'>".$rowData["NPDid"]."</div><div>".$date."</div><div>".$rowData["Description"]."</div><div>".$rowData["Time"]."</div><div>".$rowData["Provider"]."</div><div>".$rowData["Reflection"]."</div>";
+			echo "<div class='lineBreak'>&nbsp;</div>";
+		}
+	}else {
+		echo "<div style='display: none;'>&nbsp;</div><div>&nbsp;</div><div>No PD information was found.</div><div>0</div><div>&nbsp;</div><div>&nbsp;</div>";
+	}
+    ?> 
+  </div>
+</div>
+
+</div>
+</div></div>
+<!--div class="container"-->
+<!-- Modal -->
+<div id="nonAPAhour" class="modal fade" role="dialog">
+	<div class="modal-dialog" <!--style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;"-->>
+
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<h4 class="modal-title">Please enter non-APA PD activity details</h4>
+		</div>
+		<form name="formradio" action="cpd-diary" method="POST">
+		<div class="modal-body">
+			<input type="hidden" name="nonAPA" value="1" placeholder="" id="hidden">
+			<label for="DateNA">Date</label>
+			<input type="date" required="true" name="Date" placeholder="" id="DateNA">
+			<label for="DescripotionNA">Description</label>
+			<input type="text" required="true" name="Description" placeholder="" id="Description">
+			<label for="TimeNA">Time</label>
+			<input type="number" required="true" name="Time" placeholder="" id="TimeNA">
+			<label for="ProviderNA">Provider</label>
+			<input type="text" required="true" name="Provider" placeholder="" id="ProviderNA">
+			<label for="ReflectionNA">Reflection</label>
+			<input type="text" required="true" name="Reflection" placeholder="" id="ReflectionNA">
+		</div>
+		<div class="modal-footer">
+			<button type="Submit" class="btn btn-default" id="saveNA">Save</button>
+			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+		</form>
+	</div>
+
+	</div>
+</div>
+<!--/div-->
+<?php logRecorder(); ?>
+<?php endif;?>
+<?php endif;?>
+
+<?php
+// 2.2.2 - GET Membership certification PDF
+// Send - 
+// UserID
+// Response -
+// Membership certificate PDF
+//echo "<iframe name='YInkFroamame' src='http://www.physiotherapy.asn.au'></iframe>";
+// $Certi = GetAptifyData("38", $_SESSION['LinkId']);
+//echo "<iframe id="YInkFroamame" srcdoc='".$MemberCerti."'></iframe>";
+//echo "<iframe src='".$MemberCerti."'></iframe>";
+//echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=aptifyuser&Password=!@-auser-Apatest1-2468' style='display: none;'></iframe>";
+//echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&amp;ViewEntityName=Persons&amp;ReportId=151&amp;EntityRecordID=55280'width='900' height='900'></iframe>";
+//echo "<a href='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=151&EntityRecordID=".$_SESSION['LinkId']."'>ttttt</a>";
+?>
+<?php 
+/*
+<input type="submit" class="Non-APA-hour" name="NONAPA" id="NONAPA" value="Download NON-APA PDF">
+<button type="button" class="btn btn-info btn-lg Non-APA-hour" data-toggle="modal" data-target="#NonCPDPDF"><span style="text-decoration: underline; color:white;">Download NON-APA PDF</span></button>
+*/
+?>
+<?php /*
+<div id="NonCPDPDF" class="modal fade big-screen" role="dialog">
+	<div class="modal-dialog">
+
+	<!-- Modal content-->
+	<div class="modal-content">
+		<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">&times;</button>
+		</div>
+		<div class="modal-body">
+		<iframe name='NonCPDPDF' src='http://www.physiotherapy.asn.au'></iframe>
+		</div>
+		<div class="modal-footer">
+		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		</div>
+	</div>
+
+	</div>
+</div>
+<script>
+$(document).ready(function() {
+	if (window.frames['NonCPDPDF'] && !window.userSet){
+		window.userSet = true;
+		frames['NonCPDPDF'].location.href='<?php echo $Certi; ?>';
+	}
+});
+</script>
+*/
+?>
+<?php
 /*
 echo "Result: <br />";
 echo $results;
@@ -199,143 +349,3 @@ function move(input) {
 
 */
 ?>
-
-<div id="CPD-diary-main">
-<div class="container">
-<div class="row">
-<div class="region region-content col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<h1 class="SectionHeader">Your CPD diary</h1>
-
-<div class="APAhours">
-  <div class="APAhoursHead">
-    <div>Completed PD</div><div>Date</div><div>Hours</div>
-  </div>
-  <div class="APAhoursContent">
-    <?php
-		if(sizeof($APA) > 0) {
-			foreach($APA as $rowData) {
-				$date = date("d-m-Y", strtotime($rowData["Date"]));
-				echo "<div style='display: none;'>".$rowData["Id"]."</div><div>".$rowData["Title"]."&nbsp;</div><div>".$date."</div><div>".$rowData["Hours"]."</div>";
-				echo "<div class='lineBreak'>&nbsp;</div>";
-			}
-		} else {
-			echo "<div style='display: none;'>&nbsp;</div><div>No PD information found.</div><div>&nbsp;</div><div>0</div>";
-		}
-    ?> 
-  </div>
-</div>
-
-<h1 class="SectionHeader">Non-APA hours</h1>
-<div class="brd-headling">&nbsp;</div>
-
-<button class="Non-APA-hour" data-toggle="modal" data-target="#nonAPAhour"><span>Add non-APA hours</span></button><br />
-<form action="/pd/cpd-diary" method="POST">
-</form>
-<?php
-// 2.2.2 - GET Membership certification PDF
-// Send - 
-// UserID
-// Response -
-// Membership certificate PDF
-//echo "<iframe name='YInkFroamame' src='http://www.physiotherapy.asn.au'></iframe>";
-// $Certi = GetAptifyData("38", $_SESSION['LinkId']);
-//echo "<iframe id="YInkFroamame" srcdoc='".$MemberCerti."'></iframe>";
-//echo "<iframe src='".$MemberCerti."'></iframe>";
-//echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=aptifyuser&Password=!@-auser-Apatest1-2468' style='display: none;'></iframe>";
-//echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&amp;ViewEntityName=Persons&amp;ReportId=151&amp;EntityRecordID=55280'width='900' height='900'></iframe>";
-//echo "<a href='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=151&EntityRecordID=".$_SESSION['LinkId']."'>ttttt</a>";
-?>
-<?php 
-/*
-<input type="submit" class="Non-APA-hour" name="NONAPA" id="NONAPA" value="Download NON-APA PDF">
-<button type="button" class="btn btn-info btn-lg Non-APA-hour" data-toggle="modal" data-target="#NonCPDPDF"><span style="text-decoration: underline; color:white;">Download NON-APA PDF</span></button>
-*/
-?>
-<?php /*
-<div id="NonCPDPDF" class="modal fade big-screen" role="dialog">
-	<div class="modal-dialog">
-
-	<!-- Modal content-->
-	<div class="modal-content">
-		<div class="modal-header">
-		<button type="button" class="close" data-dismiss="modal">&times;</button>
-		</div>
-		<div class="modal-body">
-		<iframe name='NonCPDPDF' src='http://www.physiotherapy.asn.au'></iframe>
-		</div>
-		<div class="modal-footer">
-		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		</div>
-	</div>
-
-	</div>
-</div>
-<script>
-$(document).ready(function() {
-	if (window.frames['NonCPDPDF'] && !window.userSet){
-		window.userSet = true;
-		frames['NonCPDPDF'].location.href='<?php echo $Certi; ?>';
-	}
-});
-</script>
-*/ ?>
-<br />
-
-<!--strong><a href="http://www.physiotherapyboard.gov.au/documents/default.aspx?record=WD15%2f18489&dbid=AP&chksum=ewqLtzOm4m%2fsRUrlGCmo1A%3d%3d">This is based on Physiotherapy Board of Australia's Continuing professional development form.</a></strong-->
-<div class="NAPAhours">
-  <div class="NAPAhoursHead">
-    <div>Date</div><div>Description</div><div>Time</div><div>Provider</div><div>Reflection</div>
-  </div>
-  <div class="NAPAhoursContent">
-    <?php
-	if(sizeof($NAPA) > 0) {
-		foreach($NAPA as $rowData) {
-			$date = date("d-m-Y", strtotime($rowData["Date"]));
-			echo "<div style='display: none;'>".$rowData["NPDid"]."</div><div>".$date."</div><div>".$rowData["Description"]."</div><div>".$rowData["Time"]."</div><div>".$rowData["Provider"]."</div><div>".$rowData["Reflection"]."</div>";
-			echo "<div class='lineBreak'>&nbsp;</div>";
-		}
-	}else {
-		echo "<div style='display: none;'>&nbsp;</div><div>&nbsp;</div><div>No PD information was found.</div><div>0</div><div>&nbsp;</div><div>&nbsp;</div>";
-	}
-    ?> 
-  </div>
-</div>
-
-</div>
-</div></div>
-<!--div class="container"-->
-<!-- Modal -->
-<div id="nonAPAhour" class="modal fade" role="dialog">
-	<div class="modal-dialog" <!--style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;"-->>
-
-	<!-- Modal content-->
-	<div class="modal-content">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal">&times;</button>
-			<h4 class="modal-title">Please enter non-APA PD activity details</h4>
-		</div>
-		<form name="formradio" action="cpd-diary" method="POST">
-		<div class="modal-body">
-			<input type="hidden" name="nonAPA" value="1" placeholder="" id="hidden">
-			<label for="DateNA">Date</label>
-			<input type="date" required="true" name="Date" placeholder="" id="DateNA">
-			<label for="DescripotionNA">Description</label>
-			<input type="text" required="true" name="Description" placeholder="" id="Description">
-			<label for="TimeNA">Time</label>
-			<input type="number" required="true" name="Time" placeholder="" id="TimeNA">
-			<label for="ProviderNA">Provider</label>
-			<input type="text" required="true" name="Provider" placeholder="" id="ProviderNA">
-			<label for="ReflectionNA">Reflection</label>
-			<input type="text" required="true" name="Reflection" placeholder="" id="ReflectionNA">
-		</div>
-		<div class="modal-footer">
-			<button type="Submit" class="btn btn-default" id="saveNA">Save</button>
-			<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		</div>
-		</form>
-	</div>
-
-	</div>
-</div>
-<!--/div-->
-<?php logRecorder(); ?>

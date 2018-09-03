@@ -1784,7 +1784,7 @@
 				$Now = strtotime(date('m-d-Y'));
 				$fullStatus = false;
 				$Div = $Totalnumber - $Enrollednumber;
-				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+				if($Now > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";
 					$fullStatus = true;
 				} elseif($Div <= 5){
@@ -1942,7 +1942,7 @@
 				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
 				$Now = strtotime(date('m-d-Y'));
 				$Div = $Totalnumber - $Enrollednumber;
-				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+				if($Now > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 					echo "Closed";  
 					$fullStatus = true;
 				} elseif($Div <= 5){
