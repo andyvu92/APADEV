@@ -106,7 +106,7 @@
 																																																
 		</select>
 	</div-->
-	<div class="col-xs-12">
+	<div class="col-xs-12 hide">
 		<div class="locationAutomatic">
 			<div class="UseLocation">
 				<input type="checkbox" class="styled-checkbox" id="autoLocation">
