@@ -15,12 +15,13 @@ function newSessionLogIn($id, $UserName, $Email, $FirstName, $LastName, $Title, 
 	$_SESSION['Database'] = $Database;
 	$_SESSION['AptifyUserID'] = $AptifyUserID;
 }
-function newSessionStats($MemberTypeID, $MemberType, $Status, $Speciality, $payThroughDate) {
+function newSessionStats($MemberTypeID, $MemberType, $Status, $Speciality, $payThroughDate, $nationGP) {
 	$_SESSION['MemberTypeID'] = $MemberTypeID;
 	$_SESSION['MemberType'] = $MemberType;
 	$_SESSION['Status'] = $Status;
 	$_SESSION['Speciality'] = $Speciality;
 	$_SESSION['payThroughDate'] = $payThroughDate;
+	$_SESSION['nationGP'] = $nationGP;
 }
 function deleteSession() {
 	// login related data

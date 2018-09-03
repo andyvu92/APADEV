@@ -695,7 +695,7 @@ if($resultdata['result']) {
 			
 			$data = "UserID=".$_SESSION["UserId"];
 			$details = GetAptifyData("4", $data,"");
-			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"]);
+			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
 		}
 	}
 	
