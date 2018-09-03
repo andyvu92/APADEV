@@ -105,7 +105,7 @@ lessc[] = lessc/initial.less
 lessc[] = lessc/popups.less
 lessc[] = lessc/join-national-group.less
 lessc[] = lessc/prf-donation.less
-
+lessc[] = lessc/tools.less
 
 scripts[] = assets/scripts/evolve.js
 scripts[] = assets/scripts/formValidation.js
