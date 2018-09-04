@@ -318,6 +318,7 @@ if(isset($_GET["action"])&& ($_GET["action"]=="addcard")) {
 	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
 	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
 	$out = GetAptifyData("15",$postPaymentData); 
+	
 } 
 if(isset($_POST["deleteID"]) && $_POST["deleteID"] != "") {
 	$deleteCardSubmit["UserID"] = $_SESSION['UserId'];
@@ -438,6 +439,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<?php if($details['MemberTypeID']!="1"): ?><li id="yourdetail5"><a class="event4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li><?php endif;?>
 					</ul>
 				</div>
+				<?php if(isset($_GET["action"])&& ($_GET["action"]=="addcard")) :?>
+					<?php if($out["result"]=="Failed") { echo "<div>Add your payment card unsucessfull, Please check your card details.</div>";}  ?>
+				<?php endif; ?>
 			<form action="<?php echo $url;?>" name="your-details" method="POST" novalidate>
 			    <input type="hidden" name="step1" value="1"/>
 				<input type="hidden" name="Specialty" value="<?php echo$details['Specialty'];?>">
@@ -1898,7 +1902,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 				</div>
 				<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Last</span></a></div>-->
 			</div>
-		<div class="col-xs-12" id="your-details-button">   <button type="submit" id="your-details-submit-button" class="<?php if($details['MemberTypeID']=="1") {echo"stop";}?>"><span class="dashboard-button-name">Submit</span></button></div>
+		<div class="col-xs-12" id="your-details-button">   <button type="submit" id="your-details-submit-button" ><span class="dashboard-button-name">Submit</span></button></div>
 	</form>
 		<form id="changePasswordForm">
 			<div class="down7" style="display:none;" >
