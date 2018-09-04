@@ -30,15 +30,18 @@ $sendData["UserID"] = $_SESSION['UserId'];
 $Fellows = GetAptifyData("22", $sendData);
 $MagSubs = Array();
 $Fellow = $Fellows["results"];
-print_r($Fellow);
+$TMag = false;
+$SMag = false;
 foreach($Fellow as $Subs) {
-	if(strpos($Subs["FPtitle"], "Magazine") !== false) {
-		$divs = explode(" ", $Subs["FPtitle"]);
-		if($divs[0] == "InTouch" || $divs[0] == "Sports") {
-			array_push($MagSubs, $divs[0]);
-		}
+	if($Subs["ProductID"] == "9978") {
+		$TMag = true;
+	}
+	
+	if($Subs["ProductID"] == "9977") {
+		$SMag = true;
 	}
 }
+
 //Get magazine products
 $fpData['ProductID'] = ["9977","9978"];
 $FPListArray = GetAptifyData("21", $fpData);
@@ -136,9 +139,22 @@ $nationalGroup = $nationalGroups;
 			foreach($FPListArray as $MG){
 								
 				echo '<div class="flex-col-6"><div class="flex-col-10"><input type="checkbox" name="'.$MG["ProductID"].
-					'" id="'.$MG["ProductID"].'" class="styled-checkbox NGname'.$mgCounter.'" ';
+					'" id="'.$MG["ProductID"].'" class="styled-checkbox MGname'.$mgCounter.'" ';
+				if($MG["ProductID"]=="9977"){
+		
+					echo "disabled";
+					if($SMag){
+						echo " checked";
+					}
+				}
+				if($MG["ProductID"]=="9978"){
+					echo "disabled";
+					if($TMag){
+						echo " checked";
+					}
+				}
 				echo '>&nbsp;&nbsp;&nbsp;<label class="NGnameText'.$mgCounter.'" for="'.$MG["ProductID"].'">'.$MG["FPtitle"]
-					.'</label> <span class="not-avalable">You are already a member</span> </div>';	
+					.'</label></div>';	
 				echo '<div class="flex-col-2"><div class="NGprice'.$mgCounter.'">$'.$Subs["NGprice"].'</div></div></div>';
 				$mgCounter++;
 			}

@@ -1234,6 +1234,22 @@ jQuery(document).ready(function($) {
 	   
 		$( "#insuranceStatus" ).val('0');				
 	}
+	$("#10021").click(function(){
+		if($("#10021").val()=="1"){
+			$("#9977").removeAttr('disabled');
+		}
+		else{
+			$("#9977").attr('disabled', 'disabled');
+		}
+	});
+	$("#10015").click(function(){
+		if($("#10015").val()=="1"){
+			$("#9978").removeAttr('disabled');
+		}
+		else{
+			$("#9978").attr('disabled', 'disabled');
+		}
+	});
 	/*delete PRF from member shoppingcart  */
 	$(".deletePRFButton").click(function(){
 		$('#deletePRFForm').submit();
@@ -1264,7 +1280,7 @@ jQuery(document).ready(function($) {
 		//$("#conditions" ).attr('checked', true);
 		
 	}
-
+    
 	//INSURANCE CHECKBOX IN POPUP
 	$('#insuranceTerms, #insurance_terms_button').click(function() {
 		$("#conditions" ).prop('checked', true);
