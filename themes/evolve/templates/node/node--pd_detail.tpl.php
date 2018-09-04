@@ -1816,7 +1816,7 @@ $userRetisterStatus = false;
 					echo "Registered";  
 					$fullStatus = true;
 				} else {
-					if($Now > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+					if($Now > $Cls){
 						echo "Closed";  
 						$fullStatus = true;
 					} elseif($Div <= 5){
@@ -1966,9 +1966,9 @@ $userRetisterStatus = false;
 			<span class="small-heading">Registration closing date:</span>
 			<span>
 				<?php 
-				$closingDate = explode(" ",$pd_detail['Close_date']);
-				$Cls = strtotime($closingDate[0]);
-				$ClsDateFinal = date("d M Y",$Cls);
+				//$closingDate = explode(" ",$pd_detail['Close_date']);
+				//$Cls = strtotime($closingDate[0]);
+				//$ClsDateFinal = date("d M Y",$Cls);
 				echo $ClsDateFinal; ?>
 			</span>
 
@@ -1980,19 +1980,16 @@ $userRetisterStatus = false;
 				$Now = strtotime(date('m-d-Y'));
 				$Div = $Totalnumber - $Enrollednumber;
 				if($userRetisterStatus) {
-					echo "Registered";  
-					$fullStatus = true;
+					echo "Registered";
 				} else {
-					if($Now > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
-						echo "Closed";  
-						$fullStatus = true;
+					if($Now > $Cls){
+						echo "Closed";
 					} elseif($Div <= 5){
 						echo "Almost Full"; 
 					} elseif($Div==0){
-						echo "Full"; 
-						$fullStatus = true;
+						echo "Full";
 					} elseif($Div >= 5){
-						echo "Open"; 
+						echo "Open";
 					}
 				}
 		 		?>

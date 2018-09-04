@@ -24,6 +24,22 @@ jQuery(document).ready(function($) {
 			$("i." + faclass).addClass("fa-angle-down");
         }
 	});
+	$('[class^=Tabs]').click(function(){
+		var x = $(this).attr("class").replace('Tabs', '');
+        $('[class^=TabContents]:not(.TabContents'+x+')').slideUp(400);
+	    $('.TabContents' + x).slideToggle(450);
+		$('[class^=Tabs]:not(.Tabs'+x+') span').removeClass("text-underline");
+		var eventtitle = "eventtitle"+x;
+		$("span." + eventtitle).addClass("text-underline");
+        var faclass = "fa"+x;
+        if($("i." + faclass).hasClass("fa-angle-down")) {
+			$("i." + faclass).removeClass("fa-angle-down");
+			$("i." + faclass).addClass("fa-angle-up");
+        } else {
+			$("i." + faclass).removeClass("fa-angle-up");
+			$("i." + faclass).addClass("fa-angle-down");
+        }
+	});
 	$('[id^=Country]').change(function(){
 		var x = $(this).attr("id").replace('Country', '');
 		//var y = $('select[id="Country'+x+'"] :selected').attr('class').replace('CountryOption', '');
