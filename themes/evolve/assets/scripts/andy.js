@@ -149,6 +149,14 @@ jQuery(function ($) {
   })
 }) 
 
+//SET BACKGROUND FOR EACH MEDIA PAGE ARTICLE CONTENT
+jQuery(function ($) {
+  var someId = $(".node-media .post-img");
+  someId.css('background', function () {
+      return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
+  })
+}) 
+
 //REMOVE RED BORDER ON FIELD VALIDATION
 jQuery(document).ready(function() {
   $(document).on("keyup","input", function(){
@@ -368,20 +376,13 @@ $('.modal-body').on('mouseleave', function(){
 });
 
 
-
-
-
+// NATIONAL GROUP MULTI-SELECT ON CHANGE
 jQuery(document).ready(function(){
-  var $accountsSelectize = $('#MAdditionallanguage').selectize({
-    plugins: ['click2deselect'],
-  });
 
-  $(document).on('change', $accountsSelectize, function(){
-      console.log('changed');
-  });
    var $nationalSelectize = $('#Nationalgp').selectize({
     plugins: ['click2deselect'],
   });
+
   $(document).on('change', $nationalSelectize, function(){
       if(jQuery.inArray( "10021", $('select[id=Nationalgp]').val())!==-1)
 		{
@@ -399,3 +400,4 @@ jQuery(document).ready(function(){
 		}
   });
 });
+
