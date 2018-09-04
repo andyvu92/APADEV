@@ -148,6 +148,11 @@ jQuery(document).ready(function($) {
 		$(this).addClass('active');
 	});
 
+	$("#block-block-283 .media_filter ul li").click(function(){
+		$('li').siblings().removeClass('active');
+		$(this).addClass('active');
+	});
+
 	$("#homeShowAll").click(function() {
 		$('#downHomeT1').show(500);
 		$('#downHomeT2').hide(500);
@@ -757,6 +762,8 @@ jQuery(document).ready(function($) {
 	$('#instalmentpolicyl').click(function(){
 		$( "#installmentpolicyWindow" ).dialog();
 	});
+
+
 	$('[id=Nationalgp]').change(function(){
 	    if(jQuery.inArray( "10021", $('select[id=Nationalgp]').val())!==-1)
 		{
