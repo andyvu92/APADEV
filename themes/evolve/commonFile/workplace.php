@@ -97,6 +97,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 	<div class="col-xs-12 col-sm-6 col-md-6">
 		<label for="Wemail'.$i.'">Workplace email</label>
 		<input type="email" class="form-control" name="Wemail'.$i.'" id="Wemail'.$i.'" value="" placeholder="Workplace email">
+	    <div id="EmailMessage'.$i.'"></div>
 	</div>
 
 	<div class="col-xs-12 col-sm-6 col-md-6">

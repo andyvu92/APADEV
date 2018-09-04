@@ -1427,8 +1427,25 @@ $userRetisterStatus = false;
 					<div id="checkMessage" class="display-none">This email address matches one that’s already registered, please use a different one or <a class="info" data-target="#loginAT" data-toggle="modal" type="button">
 				    <i class="Log-in">&nbsp;</i>login 
 				    </a>to your existing account.</div>
+					<div id="errorFormat"></div>
 					<script>
 					function checkEmailFunction(email) {
+						if(!isValidEmailAddress(email)) {
+							
+							$('#errorFormat').html("This email address is not valid format");
+							$( "#Memberid" ).focus();
+							$("#Memberid").css("border", "1px solid red");
+							//$(".join-details-button2").addClass("display-none");
+							$(".accent-btn").addClass("stop");
+							return;
+						}
+						else{
+							$('#errorFormat').html("");
+							$( "#Memberid" ).blur();
+							$("#Memberid").css("border", "");
+							//$(".join-details-button2").removeClass("display-none");
+							$(".accent-btn").removeClass("stop");
+						}
 						$.ajax({
 						url:"../sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
 						type: "POST", 
@@ -1453,7 +1470,11 @@ $userRetisterStatus = false;
 						}					
 						}
 						});
-						}
+					}
+					function isValidEmailAddress(emailAddress) {
+						var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+						return pattern.test(emailAddress);
+					}
 					</script>
 					</div>
 					<div class="col-lg-6">
@@ -1468,12 +1489,14 @@ $userRetisterStatus = false;
 								$( "#CMemberid" ).focus();
 								$("#CMemberid").css("border", "1px solid red");
 								$(".join-details-button2").addClass("display-none");
+								$(".accent-btn").addClass("stop");
 							}
 							else{
 								$('#confirmMessage').html("");
 								$( "#CMemberid" ).blur();
 								$("#CMemberid").css("border", "");
 								$(".join-details-button2").removeClass("display-none");
+								$(".accent-btn").removeClass("stop");
 							}					
 						}
 					</script>
@@ -1793,7 +1816,7 @@ $userRetisterStatus = false;
 					echo "Registered";  
 					$fullStatus = true;
 				} else {
-					if($Now > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
+					if($Now > $Cls){
 						echo "Closed";  
 						$fullStatus = true;
 					} elseif($Div <= 5){
@@ -1943,9 +1966,9 @@ $userRetisterStatus = false;
 			<span class="small-heading">Registration closing date:</span>
 			<span>
 				<?php 
-				$closingDate = explode(" ",$pd_detail['Close_date']);
-				$Cls = strtotime($closingDate[0]);
-				$ClsDateFinal = date("d M Y",$Cls);
+				//$closingDate = explode(" ",$pd_detail['Close_date']);
+				//$Cls = strtotime($closingDate[0]);
+				//$ClsDateFinal = date("d M Y",$Cls);
 				echo $ClsDateFinal; ?>
 			</span>
 
@@ -1957,19 +1980,16 @@ $userRetisterStatus = false;
 				$Now = strtotime(date('m-d-Y'));
 				$Div = $Totalnumber - $Enrollednumber;
 				if($userRetisterStatus) {
-					echo "Registered";  
-					$fullStatus = true;
+					echo "Registered";
 				} else {
-					if($Now > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
-						echo "Closed";  
-						$fullStatus = true;
+					if($Now > $Cls){
+						echo "Closed";
 					} elseif($Div <= 5){
 						echo "Almost Full"; 
 					} elseif($Div==0){
-						echo "Full"; 
-						$fullStatus = true;
+						echo "Full";
 					} elseif($Div >= 5){
-						echo "Open"; 
+						echo "Open";
 					}
 				}
 		 		?>

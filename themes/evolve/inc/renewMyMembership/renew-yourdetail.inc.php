@@ -1080,6 +1080,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<div class="col-xs-6 col-md-3">
 						<label for="Wemail">Workplace email</label>
 						<input type="text" class="form-control" name="Wemail<?php echo $key;?>" id="Wemail<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wemail'])) {echo "placeholder='Workplace email'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wemail'].'"'; }?>>
+						<div id="EmailMessage<?php echo $key;?>"></div>
 					</div>
 
 					<div class="col-xs-6 col-md-3">

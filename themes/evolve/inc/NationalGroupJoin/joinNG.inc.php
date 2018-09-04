@@ -24,6 +24,25 @@ foreach($myGroups["results"] as $group){
 	array_push($myNG, $group["NGid"]);
 }
 }
+//Added code by JingHu04092018
+//Get user's subscribed magezine products
+$sendData["UserID"] = $_SESSION['UserId'];
+$Fellows = GetAptifyData("22", $sendData);
+$MagSubs = Array();
+$Fellow = $Fellows["results"];
+print_r($Fellow);
+foreach($Fellow as $Subs) {
+	if(strpos($Subs["FPtitle"], "Magazine") !== false) {
+		$divs = explode(" ", $Subs["FPtitle"]);
+		if($divs[0] == "InTouch" || $divs[0] == "Sports") {
+			array_push($MagSubs, $divs[0]);
+		}
+	}
+}
+//Get magazine products
+$fpData['ProductID'] = ["9977","9978"];
+$FPListArray = GetAptifyData("21", $fpData);
+//End added code by JingHu04092018inghu
 // use one of above to get "current" data
 // and combine with existing data ("$Subsctiption")
 // Then send it to Aptify.
@@ -83,6 +102,7 @@ $nationalGroup = $nationalGroups;
 			$countSubs = count($nationalGroups);
 			$countSubType = $countSubs%2;
 			$counter = 0;
+			$mgCounter = 0;
 			foreach($SubListAll as $Subs) {
 				$tr = $counter % 2;
 				if($tr == 0) {
@@ -112,6 +132,17 @@ $nationalGroup = $nationalGroups;
 				}
 				$counter++;
 			}
+			echo "<div class='flex-cell'>";
+			foreach($FPListArray as $MG){
+								
+				echo '<div class="flex-col-6"><div class="flex-col-10"><input type="checkbox" name="'.$MG["ProductID"].
+					'" id="'.$MG["ProductID"].'" class="styled-checkbox NGname'.$mgCounter.'" ';
+				echo '>&nbsp;&nbsp;&nbsp;<label class="NGnameText'.$mgCounter.'" for="'.$MG["ProductID"].'">'.$MG["FPtitle"]
+					.'</label> <span class="not-avalable">You are already a member</span> </div>';	
+				echo '<div class="flex-col-2"><div class="NGprice'.$mgCounter.'">$'.$Subs["NGprice"].'</div></div></div>';
+				$mgCounter++;
+			}
+			echo "</div>";
 		?>
 
 </div>

@@ -379,4 +379,23 @@ jQuery(document).ready(function(){
   $(document).on('change', $accountsSelectize, function(){
       console.log('changed');
   });
+   var $nationalSelectize = $('#Nationalgp').selectize({
+    plugins: ['click2deselect'],
+  });
+  $(document).on('change', $nationalSelectize, function(){
+      if(jQuery.inArray( "10021", $('select[id=Nationalgp]').val())!==-1)
+		{
+			$( "#ngsports" ).removeClass('display-none');
+		}
+		else{
+			$( "#ngsports" ).addClass('display-none');
+		}
+		if(jQuery.inArray( "10015", $('select[id=Nationalgp]').val())!==-1)	
+		{
+			$( "#ngmusculo" ).removeClass('display-none');
+	    }
+		else{
+			$( "#ngmusculo" ).addClass('display-none');
+		}
+  });
 });

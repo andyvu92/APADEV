@@ -89,7 +89,7 @@ if(isset($_POST['addCard']) && $_POST['addCard'] == "1"){
 		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
 		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
-		GetAptifyData("15", $postPaymentData);
+		$out = GetAptifyData("15", $postPaymentData);
 		//if(isset($_SESSION['tempcard'])){ unset($_SESSION["tempcard"]);}
 }
 /*elseif(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])){
@@ -223,6 +223,9 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 ?> 
 <form id ="join-review-form" action="renewconfirmation" method="POST">
 <input type="hidden" name="step3" value="3">
+<?php if ((sizeof($cardsnum["results"])==0) || $out["result"]=="Failed"): ?>  
+	<div>Add your payment card unsucessfull, Please check your card details.</div>
+<?php endif;?>
 <div class="down8" <?php if(isset($_POST['step2'])|| isset($_POST['stepAdd'])||isset($_POST['step2-2'])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
 
 	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 review-main-container">
@@ -514,7 +517,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			
 			<!--<input type="hidden" name="Paymentcard" id="Paymentcardvalue" value="">-->
 			<div class="flex-col-12" style="text-align: center">
-				<a target="_blank" class="addCartlink"><button style="margin-top: 30px;" class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
+				<a target="_blank" class="addCartlink"><button style="margin-top: 30px;" class="placeorder <?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" type="submit">PLACE YOUR ORDER</button></a>
 			</div>
 	</div>
 </div>
