@@ -2890,14 +2890,14 @@ if(isset($_POST['MT'])){
 						if($('#newPassword').val().length <= 7){
 							$('#PasswordMessage').html("8 characters minimum");
 							$( "#newPassword" ).focus();
-							$("#newPassword").css("border", "1px solid red");
+							$("#newPassword").addClass('focuscss');
 							$(".join-details-button2").addClass("display-none");
 							
 						}
 						else{
 							$('#PasswordMessage').html("");
 							$( "#newPassword" ).blur();
-							$("#newPassword").css("border", "");
+							$("#newPassword").removeClass('focuscss');
 							$(".join-details-button2").removeClass("display-none");
 						}					
 					}

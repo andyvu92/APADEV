@@ -1018,7 +1018,7 @@ jQuery(document).ready(function($) {
       $(".node-membership-type").hide();
       $('[id^=question]').hide();
       $('[id^=question]').addClass("function");
-      $('#question65').show();
+      $('#question65').fadeIn();
       $('#question65').removeClass("function");
     }
 	$('html, body').animate({
@@ -1028,7 +1028,7 @@ jQuery(document).ready(function($) {
   $("#resetQuestion").click(function() {
 	  $('[id^=question]').hide();
       $('[id^=question]').addClass("function");
-      $('#question65').show();
+      $('#question65').fadeIn();
       $('#question65').removeClass("function");
   })
   $("[class^=NGname]").change(function() {
@@ -1095,7 +1095,7 @@ jQuery(document).ready(function($) {
   });
   
   $('.restart').click(function() {
-    location.reload();
+    $('#Section1').click();
   });
   function ProgressMove(input) {
     var left = -931.0 + (parseFloat(input) * 184.55);
@@ -1150,7 +1150,7 @@ jQuery(document).ready(function($) {
 		if(i!=="0"){
 			$('[id^=question]:not(.function)').hide();
 			$('[id^=question]:not(.function)').addClass("function");
-			$('#question'+ i).show();
+			$('#question'+ i).fadeIn();
 			$('#question'+ i).removeClass("function");
 		} else if(i === "0") { 
 			n = $(this).attr("class").replace('optionLabel', '');
@@ -1186,7 +1186,7 @@ jQuery(document).ready(function($) {
 				$(".node-membership-type").hide();
 				$('[id^=question]').hide();
 				$('[id^=question]').addClass("function");
-				$('#question65').show();
+				$('#question65').fadeIn();
 				$('#question65').removeClass("function");
 			}
 		} 

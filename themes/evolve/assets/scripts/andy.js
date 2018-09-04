@@ -372,32 +372,6 @@ $('.modal-body').on('mouseleave', function(){
 
 
 jQuery(document).ready(function(){
-  Selectize.define('click2deselect', function(options) {
-    var self = this;
-    var setup = self.setup;
-    this.setup = function() {
-      setup.apply(self, arguments);
-  
-      // Intercept default handlers
-      self.$dropdown.off('mousedown click', '[data-selectable]').on('mousedown click', '[data-selectable]', function(e) {
-        var value = $(this).attr('data-value'),
-            inputValue = self.$input.attr('value');
-  
-        if (inputValue.indexOf(value) !== -1) {
-          var inputValueArray = inputValue.split(','),
-              index = inputValueArray.indexOf(value);
-  
-          inputValueArray.splice(index, 1);
-  
-          self.setValue(inputValueArray);
-          self.focus();
-        } else {
-          return self.onOptionSelect.apply(self, arguments);
-        }
-      });
-    }
-  });
-  
   var $accountsSelectize = $('#MAdditionallanguage').selectize({
     plugins: ['click2deselect'],
   });

@@ -411,17 +411,19 @@
 	border: 0.5px solid rgba(195,200,200,0.5);
     padding: 25px 40px;
 	overflow: hidden;
+	p{
+		display: none;
+	}
+	.node{
+		margin-top: 0!important;
+	}
 }
 .MainQuestionHolder .SectionHolder #Sections5 .MPcontainer {
-    margin: 30px auto 50px;
+    margin: 30px auto;
 }
 
-.MainQuestionHolder .SectionHolder #Sections2 h2 {
-	font-size: 4em;
-	padding: 30px;
-	margin: 0;
-}
-.MainQuestionHolder .SectionHolder #Sections3 h2:not(.MTtitle),
+
+MainQuestionHolder .SectionHolder #Sections3 h2:not(.MTtitle),
 .MainQuestionHolder .SectionHolder #Sections4 h2:not(.MTtitle),
 .MainQuestionHolder .SectionHolder #Sections5 h2:not(.MTtitle) {
 	font-size: 50px;
@@ -475,11 +477,11 @@ table.MTtable td {
 	margin: 85px auto 10px;
 }
 .MainQuestionHolder div[id^="Sections"] .buttons div {
-	color: white;
+	color: #000;
 	padding: 10px 20px;
 	float: left;
 	cursor: pointer;
-	background-color: rgb(195,200,200);
+	background-color: rgba(195, 200, 200,0.6);
 	transition: 0.3s;
 	-webkit-transition-timing-function: cubic-bezier(0.2, 0.45, 0.75, 0.8);
 	transition-timing-function: cubic-bezier(0.2, 0.45, 0.75, 0.8);
@@ -491,9 +493,7 @@ table.MTtable td {
 .MainQuestionHolder div[id^="Sections"] .buttons .restart {
 	margin-right: 4px;
 }
-.MainQuestionHolder div[id^="Sections"] .buttons .next {
-	background-color: rgb(0,159,218);
-}
+
 .MainQuestionHolder div[id^="Sections"] .buttons .Join {
 	background: none;
 	padding: 0;
@@ -551,7 +551,8 @@ table.MTtable td {
 				padding-top: 60px;
 				font-weight: 200;
 				font-family: Cairo;
-				margin: 0;
+				margin: 0 auto;
+				max-width: 860px;
 				@media all and (max-width: @tablet-width){
 					font-size: 2em!important;
 				}
@@ -561,25 +562,52 @@ table.MTtable td {
 			}
 			.buttons{
 				display: flex;
-				flex-direction: row;
-    			justify-content: center;
-				&.col-lg-12{
-					display: flex;
-					flex-direction: column;
-					align-items: center;
-					@media screen and (max-width: 335px) {
-						div{
-							font-size: 0.87em;
+				flex-direction: column;
+				justify-content: center;
+				@media screen and (max-width: @phone-width) {
+					div{
+						font-size: 1em!important;
+						min-width: 100px!important;
+					}
+				}
+				@media screen and (max-width: 335px) {
+					div{
+						font-size: 0.87em!important;
+						min-width: 100px!important;
+					}
+				}
+				&.main{
+					flex-direction: row;
+					button{
+						color: #000;
+						font-weight: 400!important;
+						padding: 10px 20px;
+						min-height: 43px;
+						float: left;
+						cursor: pointer;
+						border: 0;
+						background-color: rgba(195,200,200,0.6);
+						transition: 0.3s;
+						-webkit-transition-timing-function: cubic-bezier(0.2,0.45,0.75,0.8);
+						transition-timing-function: cubic-bezier(0.2,0.45,0.75,0.8);
+						&:hover{
+							background: @bright-blue;
+							color: #fff!important;
 						}
 					}
 				}
-				.prev, .next{
+			}
+				.prev, .next, #resetQuestion, .restart, button{
 					min-width: 200px;
-					font-size: 1.4em;
+					font-size: 1.2em!important;
+					&:hover{
+						background-color: @bright-blue;
+						color: #fff;
+					}
 				}
 				#resetQuestion{
 					text-transform: lowercase;
-					font-size: 1.4em;
+					font-size: 1.2em;
 					&::first-letter{
 						text-transform: uppercase;
 					}
@@ -590,6 +618,7 @@ table.MTtable td {
 			}
 			.question{
 				.buttons{
+					margin: 50px auto;
 					label{
 						float: left;
 						clear: both;
@@ -601,15 +630,35 @@ table.MTtable td {
 						font-size: 1.4em;
 						font-family: Cairo;
 						font-weight: 400;
-						color: white;
-						background-color: #c3c8c8;
+						color: #333;
 						transition: 0.1s linear;
+						width: 100%;
+						max-width: 900px;
+						padding: 25px 50px;
+						margin: 0 auto;
+						background: none;
+						border: 0.5px solid rgba(0,0,0,0.1);
+						border-bottom: 0.5px solid rgba(0,159,218,0);
+						&:last-of-type{
+							border-bottom: 0.5px solid rgba(0,0,0,0.1);
+						}
 						&:hover{
-							background-color: #009fda;
+							color: #009fda;
+							background: rgba(0,0,0,0.012);
 						}
 						@media all and (max-width: @phone-width){
 							width: 100%;
 							max-width: 100%;
+						}
+					}
+					&.main{
+						flex-direction: row;
+						margin-top: 0;
+					}
+					@media all and (max-width: @phone-width){
+						margin: 15px auto;
+						label{
+							font-size: 1.2em;
 						}
 					}
 				}
@@ -618,15 +667,16 @@ table.MTtable td {
 				.buttons{
 					flex-direction: row;
     				justify-content: center;
-					.prev{
+					.prev, .next{
 						display: inline-block;
 						float: none;
+						text-decoration: none;
 					}
-					.next{
-						display: inline-block;
-						float: none;
+					&.main{
+						flex-direction: row;
 					}
 				}
+
 			}
 			#Sections2{
 				.question{
@@ -634,19 +684,16 @@ table.MTtable td {
 						label{
 							float: left;
 							clear: both;
-							padding: 5px 20px;
-							margin: 10px;
-							min-width: 100px;
+							padding: 20px 20px;
+							min-width: 200px;
 							text-align: center;
-							font-size: 1.4em;
 							font-family: Cairo;
 							font-weight: 400;
-							color: white;
-							background-color: #c3c8c8;
 							transition: 0.1s linear;
-							&:hover{
-								background-color: #009fda;
-							}
+						}
+						&.main{
+							flex-direction: row;
+							margin-top: 0;
 						}
 					}
 				}
@@ -655,9 +702,17 @@ table.MTtable td {
 				.buttons{
 					flex-direction: row;
 					justify-content: center;
+					&.main{
+						flex-direction: row;
+						margin-top: 0;
+					}
 				}
 				.MPcontainer{
 					overflow-y: auto;
+					margin: 50px auto;
+					padding: 50px;
+					width: 100%;
+					max-width: 1000px;
 					h2{
 						position: relative;
 						padding: 30px 0;
@@ -671,6 +726,9 @@ table.MTtable td {
 				.buttons{
 					flex-direction: row;
 					justify-content: center;
+					&.main{
+						flex-direction: row;
+					}
 				}
 				#mt-national-group{
 					.flex-cell{
@@ -703,6 +761,10 @@ table.MTtable td {
 					.prev, .restart, .Join{
 						margin: 10px;
 					}
+					&.main{
+						flex-direction: row;
+						margin-top: 0;
+					}
 				}
 				@media all and (max-width: @larger-phone-width) {
 					.buttons{
@@ -712,7 +774,6 @@ table.MTtable td {
 			}
 		}
 	}
-}
 
 /*-- MEMBERSHIP PAGE --*/
 .page-node-108{

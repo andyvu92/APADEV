@@ -165,6 +165,8 @@
         align-items: center;
         background: none;
         font-size: 0!important;
+        right: 10px!important;
+        border-radius: 0;
         .ui-button-icon-primary{
             background-image: none;
             display: flex;
@@ -209,6 +211,9 @@
                 background: @grey;
             }
         }
+    }
+    .ui-widget-content{
+        max-height: 70vh!important;
     }
     @media all and (max-width: @larger-phone-width) {
         left: calc(~"50vw - 150px") !important;
@@ -309,6 +314,9 @@ div[aria-describedby="myMap"] .ui-widget-header{
 /* JOIN/RENEW FORMS - ADD PAYMENT CART */
 div[aria-describedby="addPaymentCardForm"].ui-dialog {
     .small-popup;
+    padding: 30px;
+    top: 20vh!important;
+    border-radius: 0;
     input[type="text"]{
         background: #fff;
     }
@@ -317,6 +325,15 @@ div[aria-describedby="addPaymentCardForm"].ui-dialog {
     }
     label{
         margin-bottom: 6px;
+    }
+    @media all and (max-width: @phone-width) {
+        top: 5vh!important;
+        padding: 15px;
+        #addPaymentCardForm{
+            &::-webkit-scrollbar{
+                display: none;
+            }
+        }
     }
 }
 
@@ -1217,7 +1234,7 @@ div[aria-describedby="signupWebUser"]{
     }
     @media all and (max-width: @phone-width) {
         width: 300px !important;
-        top: 20vh!important;
+        top: 10vh!important;
         left: calc(~"50vw - 150px")!important;
         .modal-body{
             .flex-cell{
@@ -1239,7 +1256,7 @@ div[aria-describedby="signupWebUser"]{
         }
     }
     @media all and (max-width: 345px){
-        top: 15vh!important;
+        top: 2vh!important;
     }
 }
 

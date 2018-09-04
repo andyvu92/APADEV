@@ -1044,7 +1044,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 								var CardID = $("#Paymentcard").val();
 								$("#deleteID").val(CardID);
 								if($("#defaultCard").val()==CardID){
-									$('#deletecardMessage').html("Can not delete your main card");
+									$('#deletecardMessage').html("Sorry, you cannot delete this card.");
 									$('#deleteCardWindow #checkMessage').removeClass('display-none');
 									$('#deleteCardForm button').addClass("stop");
 								}
@@ -1997,7 +1997,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			<form action="your-details?action=delete" method="POST" id="deleteCardForm">
 				<h3 id="deletecardMessage" class="light-lead-heading cairo">Are you sure you want to delete this card?</h3>
 				<div id="checkMessage" class="display-none">
-					<span>Sorry, we are not able to delete these payment details.</span><br>
+					<span>We are not able to delete these payment details.</span><br>
 					<span>Please select another card as your default payment method before deleting this one.</span>
 				</div>
 				<input type="hidden" name="deleteID" id="deleteID" value="">
