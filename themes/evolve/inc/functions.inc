@@ -77,7 +77,8 @@ function nationalIcons(){
 						
 						if($j<$length){
 							echo "<div class='flex-col-4'>";
-							echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons ng-'.$NGs[$j]["NGid"].'">';
+							//echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons ng-'.$NGs[$j]["NGid"].'">';
+							echo '<a href="/membership/national-groups" class="icons ng-'.$NGs[$j]["NGid"].'">';
 							echo '<i class="fa">';
 							/*
 							$num = intval($userIcons[$j]);
