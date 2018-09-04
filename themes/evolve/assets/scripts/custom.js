@@ -764,7 +764,7 @@ jQuery(document).ready(function($) {
 	});
 
 
-	$('[id=Nationalgp]').change(function(){
+	/*$('[id=Nationalgp]').change(function(){
 	    if(jQuery.inArray( "10021", $('select[id=Nationalgp]').val())!==-1)
 		{
 			$( "#ngsports" ).removeClass('display-none');
@@ -779,7 +779,7 @@ jQuery(document).ready(function($) {
 		else{
 			$( "#ngmusculo" ).addClass('display-none');
 		}
-	});
+	});*/
 	if(jQuery.inArray( "10021", $('select[id=Nationalgp]').val())!==-1)
 		{
 			$( "#ngsports" ).removeClass('display-none');

@@ -1359,6 +1359,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 							<div class="col-xs-12 col-sm-6 col-md-6">
 								<label for="Wemail<?php echo $key;?>">Workplace email</label>
 								<input type="email" class="form-control" name="Wemail<?php echo $key;?>" id="Wemail<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wemail'])) {echo "placeholder='Workplace email'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wemail'].'"'; }?> required>
+								<div id="EmailMessage<?php echo $key;?>"></div>
 							</div>
 
 							<div class="col-xs-12 col-sm-6 col-md-6">

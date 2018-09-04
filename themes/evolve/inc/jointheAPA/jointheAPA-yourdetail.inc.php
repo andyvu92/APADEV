@@ -1753,6 +1753,9 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                             echo 'value="' . $details['Workplaces'][$key]['Wemail'] . '"';
                                         }
                                 ?>>
+								<div id="EmailMessage<?php echo $key;?>"></div>
+                                        
+          
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <label for="Wwebaddress">Website</label>
