@@ -2,8 +2,8 @@
 /* ----------------------- CPD diary ----------------------- */
 /* --------------------------------------------------------- */
 
-div#CPD-diary-main { 
-	height: 400px; 
+div#CPD-diary-main {
+	padding-bottom: 70px;
 	.container{
 		button.dashboard-backgroud{
 			@media all and (max-width: @larger-phone-width) {
@@ -273,6 +273,7 @@ div#ProgressCPDback .back {
    color: black;
 }
 .APAhoursHead, .NAPAhoursHead { width: 100%; }
+/*
 .APAhoursContent, .NAPAhoursContent {
     height: 240px;
     overflow-y: auto;
@@ -292,52 +293,91 @@ div#ProgressCPDback .back {
   padding: 10px;
   float: left;
 }
-.APAhoursHead div:nth-child(1) {
-  width: 70%;
+*
+.APAhoursHead div:nth-child(1), .APAhoursContent .flex-cell div:nth-child(7n + 2) {
+  width: 50%;
 }
-.APAhoursHead div:nth-child(2) {
-  width: 15%;
+.APAhoursHead div:nth-child(2), .APAhoursContent .flex-cell div:nth-child(7n + 3) {
+  width: 10%;
 }
-.APAhoursHead div:nth-child(3) {
-  width: 15%;
+.APAhoursHead div:nth-child(3), .APAhoursContent .flex-cell div:nth-child(7n + 4) {
+  width: 10%;
 }
-.APAhoursContent div:nth-child(5n + 2) {
-  width: 70%;
-}
-.APAhoursContent div:nth-child(5n + 3) {
-  width: 15%;
-}
-.APAhoursContent div:nth-child(5n + 4) {
-  width: 15%;
-}
-.NAPAhoursHead div:nth-child(1) {
-  width: 15%;
-}
-.NAPAhoursHead div:nth-child(2) {
-  width: 20%;
-}
-.NAPAhoursHead div:nth-child(3) {
-  width: 15%;
-}
-.NAPAhoursHead div:nth-child(4) {
-  width: 20%;
-}
-.NAPAhoursHead div:nth-child(5) {
+.APAhoursHead div:nth-child(4), .APAhoursContent .flex-cell div:nth-child(7n + 5) {
   width: 30%;
 }
-.NAPAhoursContent div:nth-child(7n + 2) {
-  width: 15%;
-}
-.NAPAhoursContent div:nth-child(7n + 3) {
-  width: 20%;
-}
-.NAPAhoursContent div:nth-child(7n + 4) {
-  width: 15%;
-}
-.NAPAhoursContent div:nth-child(7n + 5) {
-  width: 20%;
-}
-.NAPAhoursContent div:nth-child(7n + 6) {
+*
+.NAPAhoursHead div:nth-child(1), .NAPAhoursContent .flex-cell div:nth-child(7n + 2) {
   width: 30%;
+}
+.NAPAhoursHead div:nth-child(2), .NAPAhoursContent .flex-cell div:nth-child(7n + 3) {
+  width: 10%;
+}
+.NAPAhoursHead div:nth-child(3), .NAPAhoursContent .flex-cell div:nth-child(7n + 4) {
+  width: 10%;
+}
+.NAPAhoursHead div:nth-child(4), .NAPAhoursContent .flex-cell div:nth-child(7n + 5) {
+  width: 20%;
+}
+.NAPAhoursHead div:nth-child(5), .NAPAhoursContent .flex-cell div:nth-child(7n + 6) {
+  width: 30%;
+}*/
+.content{
+	#CPD-diary-main {
+		h1.SectionHeader {
+			text-align: center;
+			font-size: 44px;
+		}
+		div[class^="flex-col-"]{
+			padding: 0px 5px;
+			font-size: 1em;
+		}
+		.heading-row{
+			border-top: 1px solid #d3d4d5;
+			padding: 10px 0 !important;
+			align-items: center;
+		}
+		.flex-cell{
+			position: relative;
+			transition: 0.1s linear;
+			background: none;
+			border-bottom: 1px solid #d3d4d5;
+			padding: 20px 0;
+			font-size: 1.2em;
+			color: #000;
+		}
+		.table-heading{
+			font-size: 0.8em;
+			font-weight: 500;
+			color: #000;
+			text-transform: uppercase;
+		}
+		.spcart-date{
+			display: flex;
+			flex-direction:column;
+			.start-date:before {
+				content: 'Start date: ';
+				color: @brighter-blue;
+			}
+		}
+		.end-date:before{
+			content: 'End date: ';
+			color: @brighter-blue;
+		}
+		div[class^="Tabs"] {
+			float: left;
+			margin: 25px 27px 20px 0;
+			font-weight: 700;
+			font-size: 1.5em;
+		}
+		button.Non-APA-hour {
+			margin-top: 30px;
+		}
+		@media all and (max-width: @phone-width) {
+			h1.SectionHeader {
+				font-size: 38px;
+			}
+		}
+	}
 }
 .lineBreak { clear: both; height: 1px; }
