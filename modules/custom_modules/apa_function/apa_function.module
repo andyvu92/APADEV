@@ -1,0 +1,243 @@
+<?php
+/**
+ * @file
+ * APA's, Function Module.
+ *
+ * Functionality for Single Signon
+ *
+ * @author Web Prophets
+ */
+
+//require_once __DIR__."/vendor/autoload.php";
+require_once __DIR__."/admin/apa_function_admin.inc";
+
+
+/**
+ * Implements hook_permission().
+ */
+function apa_function_permission()
+{
+    //setting module permissions
+    return [
+        'access function settings' => [
+            'title' => t('access function module settings'),
+            'description' => t('Access Function Settings'),
+        ],
+    ];
+}
+
+/*
+ * Implementation of hook_menu
+ */
+function apa_function_menu()
+{
+    $items = [];
+
+    // This form is for Administration Settings.
+    // i.e., Global SAML URL etc.
+    $items['admin/config/function'] = [
+        'title' => "APA SSO Settings",
+        'description' => "Set global variables for SAML.",
+        'page callback' => 'drupal_get_form',
+        'page arguments' => array('apa_function_admin'),
+        'access arguments' => array('access function settings'),
+        'type' => MENU_NORMAL_ITEM,
+    ];
+
+    // The path where third party will come to login
+    /*$items['apa/sso/login'] = [
+        'title' => "APA SSO Test",
+        'page callback' => 'drupal_get_page',
+        'page arguments' => ['apa_sso_login_form'],
+        'access callback' => true,
+        'type' => MENU_CALLBACK,
+    ];
+
+  $items['apa/sso/login'] = [
+    'title' => "APA SSO Test",
+    'page callback' => 'drupal_get_page',
+    'page arguments' => ['apa_sso_login_form'],
+    'access callback' => true,
+    'type' => MENU_CALLBACK,
+  ];
+
+    // A test path to
+    $items['apa/sso/test'] = [
+        'title' => "APA SSO Test",
+        'page callback' => '_apa_sso_test',
+        'page arguments' => [],
+        'access callback' => true,
+        'type' => MENU_CALLBACK,
+    ];
+*/
+    return $items;
+}
+/**
+ * Page callback: Global function.
+ *
+ * @see apa_global_function_menu()
+ */
+function apa_function_init() {
+        
+    include __DIR__."/Survey/SurveyFunction.inc.php";
+	include __DIR__."/inc/Aptify/JSONarray.inc.php";
+	include __DIR__."/inc/functions.inc";
+	include __DIR__."/inc/TandC/TandCFunction.inc.php";
+	include __DIR__."/inc/Aptify/SessionHandler.inc.php";
+	//require_once dirname(__FILE__) . '/Survey/SurveyFunction.inc.php';
+	//require_once dirname(__FILE__) . '/inc/Aptify/JSONarray.inc.php';
+	//require_once dirname(__FILE__) . '/inc/functions.inc';
+	//require_once dirname(__FILE__) . '/inc/TandC/TandCFunction.inc.php';
+	//require_once dirname(__FILE__) . '/inc/Aptify/SessionHandler.inc.php';
+}
+/**
+ * Page callback: Custom login form.
+ *
+ * @see apa_function_menu()
+ */
+function apa_function_join_the_APA_form() {
+    
+    include __DIR__."/inc/jointheAPA.inc.php";
+   
+}
+function apa_function_join_your_detail_form() {
+    
+    include __DIR__."/inc/jointheAPA/jointheAPA-yourdetail.inc.php";
+}
+/*
+function _apa_sso_login_form_validate($form, &$form_state) {
+    //  Any validation you want to do here.
+    //  Submitted values are available in $form_state variable.
+    //  i.e., $form_state['username'][0]['value'] will give you the value of what user submitted.
+}
+
+*/
+function _apa_sso_login($form, &$form_state) {
+
+    // Capture the values entered to the form in variables
+    $id = $form["username"]["#value"];
+    $password = $form["password"]["#value"];
+
+    // If user is logged-in already redirect user to pageA.
+    if(_apa_sso_check_login_status($id, $password)){
+        drupal_goto('path/to/pageA');
+        exit;
+    }
+
+    //  If not then check user for login.
+    //  Ideally this would be inside try-catch block.
+    //  For simplicity I am using if statements.
+    $meta_information = loginSSO($id,$password);
+
+    if(!$meta_information) {
+        // Do redirection to SAML
+
+        _apa_redirect_saml($meta_information);
+        drupal_set_message(t('You are now logged in'), 'status');
+
+    } else {
+        //  This is how Drupal shows the error message.
+        drupal_set_message(t('Username or password wrong. Process did not complete.'), 'error');
+        //  This is how you log to Drupal.
+
+    }
+}
+
+/**
+ * Function to determine if user is loggedin.
+ * @param $id
+ * @param $password
+ * @return boolean
+ */
+function _apa_sso_check_login_status($id, $password){
+    $result = false;
+    //Check if user is already logged in.
+    return $result;
+}
+
+/**
+ * Function to determine
+ * @param $meta_information
+ */
+function _apa_redirect_saml($meta_information) {
+    //  Send user to SAML with token.
+    //  Do whatever it needs to do and redirect from there.
+    // You can get 'Global' information we set from variable_get() function.
+    // i.e., to get IDP URL you will use variable_get('apa_sso_idp');
+    //       which we set in apa_sso_admin.inc file.
+}
+
+/**
+ * Function to login user to SSO.
+ * @param $id
+ * @param $pass
+ * @return array
+ */
+function loginSSO($id, $pass) {
+    // 2.2.7 - log-in
+    // Send -
+    // UserID, User password
+    // Response -
+    // log-in
+    $arrIn["ID"] = $id;
+    $arrIn["Password"] = $pass;
+    $Got = GetAptifyData("7", $arrIn);
+    logRecorder();
+    if(isset($Got["ErrorInfo"])) {
+        //echo $Got["ErrorInfo"]["ErrorMessage"];
+        return ["log-in fail", $Got["ErrorInfo"]["ErrorMessage"]];
+    } else {
+        $ThirdParty = $_SESSION["thirdParty"];
+        $LoginStatus = "1";
+        $options = "Initial login slnpage";
+        // logged in
+        $returnSSO["UserId"] = $Got["UserId"];
+        $returnSSO["UserName"] = $Got["UserName"];
+        $returnSSO["Email"] = $Got["Email"];
+        $returnSSO["FirstName"] = $Got["FirstName"];
+        $returnSSO["LastName"] = $Got["LastName"];
+        $returnSSO["Title"] = $Got["Title"];
+        $returnSSO["LinkId"] = $Got["LinkId"];
+        $returnSSO["CompanyId"] = $Got["CompanyId"];
+        $returnSSO["TokenId"] = $Got["TokenId"];
+        $returnSSO["Server"] = $Got["Server"];
+        $returnSSO["Database"] = $Got["Database"];
+        $returnSSO["AptifyUserID"] = $Got["AptifyUserID"];
+
+        $RecordAll = json_encode($returnSSO, true);
+        $date = date('Y-m-d h:i:s');
+        // Create db data
+        $dbt = new PDO('mysql:host=192.168.64.100;port=32770;dbname=apa_extra_information', 'user', 'user');
+        // Create log
+
+        $SSOlogCreate = $dbt->prepare('INSERT INTO ssolog (Provider, User, Token, LogDateTime, LogIO, Data, OptionString) VALUES (:Provider, :User, :Token, :LogDateTime, :LogIO, :Data, :Option)');
+        $SSOlogCreate->bindParam(':Provider', $ThirdParty);
+        $SSOlogCreate->bindParam(':User', $returnSSO["UserName"]);
+        $SSOlogCreate->bindParam(':Token', $returnSSO["TokenId"]);
+        $SSOlogCreate->bindParam(':LogDateTime', $date);
+        $SSOlogCreate->bindParam(':LogIO', $LoginStatus);
+        $SSOlogCreate->bindParam(':Data', $RecordAll);
+        $SSOlogCreate->bindParam(':Option', $options);
+        if(!$SSOlogCreate->execute()) {
+            echo "<br />RunFail- SSOlogCreate<br>";
+            print_r($SSOlogCreate->errorInfo());
+        }
+
+        // Create data
+        $SSODataCreate = $dbt->prepare('INSERT INTO ssodata (Token, DateTime, Data) VALUES (:Token, :DateTime, :Data)');
+        $SSODataCreate->bindParam(':Token', $returnSSO["TokenId"]);
+        $SSODataCreate->bindParam(':DateTime', $date);
+        $SSODataCreate->bindParam(':Data', $RecordAll);
+        if(!$SSODataCreate->execute()) {
+            echo "<br />RunFail- SSODataCreate<br>";
+            print_r($SSODataCreate->errorInfo());
+        }
+
+        $SSOlogCreate = null;
+        $SSODataCreate = null;
+        $dbt = null;
+
+        return $returnSSO;
+    }
+    return false;
+}
