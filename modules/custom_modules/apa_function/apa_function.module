@@ -43,7 +43,13 @@ function apa_function_menu()
         'access arguments' => array('access function settings'),
         'type' => MENU_NORMAL_ITEM,
     ];
-
+	$items['apa/checkemail'] = [
+        'title' => "APA SSO Test",
+        'page callback' => 'apa_function_checkemail_form',
+        'page arguments' => ['1'],
+        'access callback' => true,
+        'type' => MENU_CALLBACK,
+    ];
     // The path where third party will come to login
     /*$items['apa/sso/login'] = [
         'title' => "APA SSO Test",
@@ -91,7 +97,7 @@ function apa_function_init() {
 	//require_once dirname(__FILE__) . '/inc/Aptify/SessionHandler.inc.php';
 }
 /**
- * Page callback: Custom login form.
+ * Page Join Page.
  *
  * @see apa_function_menu()
  */
@@ -104,6 +110,32 @@ function apa_function_join_your_detail_form() {
     
     include __DIR__."/inc/jointheAPA/jointheAPA-yourdetail.inc.php";
 }
+function apa_function_join_the_apa_insurance_form() {
+    
+    include __DIR__."/inc/jointheAPA/jointheAPA-insurance.inc.php";
+}
+function apa_function_join_the_apa_surveypayment_form() {
+    
+    include __DIR__."/inc/jointheAPA/jointheAPA-surveypayment.inc.php";
+}
+function apa_function_join_the_apa_final_form() {
+    
+    include __DIR__."/inc/jointheAPA/jointheAPA-final.inc.php";
+}
+function apa_function_join_the_apa_confirmation_form() {
+    
+    include __DIR__."/inc/jointheAPA/jointheAPA-confirmation.inc.php";
+}
+function apa_function_checkemail_form() {
+    
+    include __DIR__."/inc/jointheAPA/jointheAPA-checkEmail.php";
+}
+
+//function apa_function_join_the_apa_confirmation_form() {
+    
+    //include __DIR__."/inc/jointheAPA/jointheAPA-confirmation.inc.php";
+//}
+
 /*
 function _apa_sso_login_form_validate($form, &$form_state) {
     //  Any validation you want to do here.

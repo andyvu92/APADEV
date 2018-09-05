@@ -2825,9 +2825,8 @@ if(isset($_POST['MT'])){
                     <script>
                     function checkEmailFunction(email) {
                     $.ajax({
-					
-                    url:"sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
-                    type: "POST", 
+					url:"apa/checkemail",
+					type: "POST", 
                     data: {CheckEmailID: email},
                     success:function(response) {						
                     var result = response;

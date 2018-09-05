@@ -50,14 +50,17 @@ $background = getBackgroundImage($userID);
 		//include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-yourdetail.inc.php');
 		apa_function_join_your_detail_form();
 		if((isset($_POST["step1"]) && $_POST["step1"] == "1" && $_POST['insuranceTag']!="0") || isset($_POST['goI'])) {
-		include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-insurance.inc.php'); 
+		//include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-insurance.inc.php'); 
+		apa_function_join_the_apa_insurance_form();
 		
 		}
 		elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")) {
-		include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-surveypayment.inc.php');
+		//include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-surveypayment.inc.php');
+		apa_function_join_the_apa_surveypayment_form();
 		} 
 		elseif((isset($_POST["step2"]) && $_POST["step2"] == "2")||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4'])) {
-		include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-final.inc.php');
+		//include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-final.inc.php');
+		apa_function_join_the_apa_final_form();
 		} 
 		?>
 		</div>
