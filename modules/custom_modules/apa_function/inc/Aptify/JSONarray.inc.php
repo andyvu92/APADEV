@@ -1,6 +1,5 @@
 <?php
-include('sites/all/themes/evolve/inc/Aptify/AptifyAPI.inc.php');
-
+include __DIR__.'/AptifyAPI.inc.php';
 /**
  *  GetData, whichever form they are.
  *  open to public
