@@ -1,4 +1,8 @@
 <?php
+if(!function_exists('drupal_session_started'))
+{
+  die("Unauthorized Access");
+}
 
 /*Dashboard page render national icons fuction*/
 /*Dashboard page*/

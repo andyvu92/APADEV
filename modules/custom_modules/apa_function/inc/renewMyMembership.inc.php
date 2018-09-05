@@ -1,3 +1,9 @@
+<?php
+if(!function_exists('drupal_session_started'))
+{
+  die("Unauthorized Access");
+}
+?>
 <?php if(isset($_SESSION["UserId"])): ?>
 <?php if(!empty($_SESSION['payThroughDate'])):?>
 <?php 
@@ -23,7 +29,7 @@
 // Response -Order details
 	$orderDetails = GetAptifyData("44", $quatationOrderID); 
 	}
-	else{$orderDetails = array();$tag = false; }
+	else{$orderDetails = array();$tag = true; }
     //$paythrough = date_create_from_format('m/d/Y', $_SESSION['payThroughDate']);
     //echo $_SESSION['payThroughDate'];
 	//echo $paythrough;
@@ -31,8 +37,10 @@
 ?>
 <?php if(checkRenew($_SESSION['payThroughDate'], $tag)): ?>
 <?php
-include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
-include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
+//include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
+apa_function_updateBackgroundImage_form();
+//include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
+apa_function_dashboardLeftNavigation_form();
 /* get background image****/
 if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];
 $userTag = getInsuranceStatus($userID);
@@ -56,7 +64,8 @@ $background = getBackgroundImage($userID);
 		<!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background <?php if(!isset($_SESSION["userID"])) echo "display-none";?>">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>-->
 		</div>
 	<?php
-		include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
+		//include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
+		apa_function_customizeBackgroundImage_form();
 	?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
@@ -76,15 +85,19 @@ $background = getBackgroundImage($userID);
 			</div>
 			<?php
 			
-			include('sites/all/themes/evolve/inc/renewMyMembership/renew-yourdetail.inc.php');
+			//include('sites/all/themes/evolve/inc/renewMyMembership/renew-yourdetail.inc.php');
+			apa_function_renew_your_detail_form();
 			if((isset($_POST["step1"]) && $_POST["step1"] == "1"&& $_POST['insuranceTag']!="0") || isset($_POST['goI'])){
-			include('sites/all/themes/evolve/inc/renewMyMembership/renew-insurance.inc.php'); 
+			//include('sites/all/themes/evolve/inc/renewMyMembership/renew-insurance.inc.php'); 
+			apa_function_renew_the_apa_insurance_form();
 			}
             elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder'])) {
-		    include('sites/all/themes/evolve/inc/renewMyMembership/renew-surveypayment.inc.php');
+		    //include('sites/all/themes/evolve/inc/renewMyMembership/renew-surveypayment.inc.php');
+			apa_function_renew_the_apa_surveypayment_form();
 		    } 			
 			elseif((isset($_POST["step2"]) && $_POST["step2"] == "2") || (isset($_POST["stepAdd"]) && $_POST["stepAdd"] == "2") ||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['step2-4'])) {
-			include('sites/all/themes/evolve/inc/renewMyMembership/renew-final.inc.php');
+			//include('sites/all/themes/evolve/inc/renewMyMembership/renew-final.inc.php');
+			apa_function_renew_the_apa_final_form();
 			}
 			?>
 			</div>

@@ -1,4 +1,10 @@
 <?php
+if(!function_exists('drupal_session_started'))
+{
+  die("Unauthorized Access");
+}
+?>
+<?php
 /* Survey Group List */
 if(isset($_POST["action"])) { $action=$_POST["action"]; UpdateGroupList($action); }
 if(isset($_POST["delete"])) { $delete= $_POST["delete"]; DeleteGroup($delete); }//$action=$_POST["action"]; UpdateGroupList($action); }

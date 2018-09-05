@@ -1,4 +1,10 @@
 <?php
+if(!function_exists('drupal_session_started'))
+{
+  die("Unauthorized Access");
+}
+?>
+<?php
 global $base_url;
 // todo
 // This will only be displayed when there is any results.

@@ -1,4 +1,10 @@
 <?php
+if(!function_exists('drupal_session_started'))
+{
+  die("Unauthorized Access");
+}
+?>
+<?php
 $NGProductsArray = Array();
 foreach($_POST as $key => $value){
 	array_push($NGProductsArray,$key);

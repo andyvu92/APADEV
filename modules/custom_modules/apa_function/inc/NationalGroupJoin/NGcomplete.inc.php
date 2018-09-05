@@ -1,4 +1,10 @@
 <?php
+if(!function_exists('drupal_session_started'))
+{
+  die("Unauthorized Access");
+}
+?>
+<?php
 if(isset($_POST["POSTPRF"])) {
 	// 2.2.32 - Order confirmation
 	// Send - 

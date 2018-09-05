@@ -1,4 +1,10 @@
 <?php
+if(!function_exists('drupal_session_started'))
+{
+  die("Unauthorized Access");
+}
+?>
+<?php
 global $base_url;
 // 2.2.1 - GET Dashboard main details
 // Send - 
@@ -15,7 +21,8 @@ if(isset($_SESSION["UserId"])) {
 	//echo "CPD: ".$cpd;
 	$user = $users["results"][0];
 }
-include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php'); 
+//include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php'); 
+apa_function_updateBackgroundImage_form();
 /* get background image****/
 if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID =0; }
 $background = getBackgroundImage($userID);
@@ -159,7 +166,9 @@ $background = getBackgroundImage($userID);
 		chart.draw(data, options);
 	}
 </script>
-<?php include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php'); ?> 
+<?php //include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
+apa_function_dashboardLeftNavigation_form();
+ ?> 
 <div class="col-xs-12 col-md-10 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -173,7 +182,8 @@ $background = getBackgroundImage($userID);
 			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="display: none"><button class="dashboard-backgroud" data-toggle="modal" data-target="#myModal"><span class="customise_background" >Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
 	<?php
-		include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
+		//include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
+		apa_function_customizeBackgroundImage_form();
 	?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 top-info bottom-space">
 			<div class="col-xs-12 col-md-6 mobile_line" >

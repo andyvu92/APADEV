@@ -1,3 +1,9 @@
+<?php
+if(!function_exists('drupal_session_started'))
+{
+  die("Unauthorized Access");
+}
+?>
 <?php if(isset($_SESSION['UserId'])):?>
 <?php  if($_SESSION['MemberTypeID']!="1"): ?>
 <?php

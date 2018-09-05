@@ -1,4 +1,10 @@
 <?php
+if(!function_exists('drupal_session_started'))
+{
+  die("Unauthorized Access");
+}
+?>
+<?php
 
 //Put filter condition to display member type
 $filterMemberProduct = array("10007","10008","10009","9997","10006");
@@ -1503,42 +1509,16 @@ jQuery(document).ready(function($) {
 	$('#workplace').click(function(){
 		$('#dashboard-right-content').addClass("autoscroll");
 	});
-	/*****just hidden the workplace when the user has no workplace data******/
-	/*if($('#wpnumber').val()=="0"){
-			var number = Number($('#wpnumber').val());
-			var i = Number(number +1);
-			//var j = Number(number +2);
-			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span></li>' );
-			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
-			//$('#wpnumber').text(i);
-			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
-			$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
-			$('input[name=wpnumber]').val(i);
-			var memberType = $('select[name=MemberType]').val();
-			var sessionvariable = '<?php
-			echo json_encode($_SESSION["workplaceSettings"]);
-			?>';
-						var sessionInterest = '<?php
-			echo json_encode($_SESSION["interestAreas"]);
-			?>';
-					var sessionLanguage = '<?php
-			echo json_encode($_SESSION["Language"]);
-			?>';
-					var sessionCountry = <?php
-			echo json_encode($_SESSION['country']);
-?>;
-		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
-			 
-	}*/
+	
 	$('.add-workplace-join').click(function(){
 		var number = Number($('#wpnumber').val());
 		var maxNumber = Number($('#maxumnumber').val());
 		var j = Number(number +1);
 		var i = Number(maxNumber +1);
-		//var j = Number(number +2);
+	
 		$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span></li>' );
 		$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in"></div>');
-		//$('#wpnumber').text(i);
+		
 		$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
 		$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
 		$('input[name=wpnumber]').val(j);
@@ -1548,14 +1528,14 @@ jQuery(document).ready(function($) {
 		var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
 		var sessionLanguage = '<?php echo json_encode($_SESSION["Language"]);?>';
 		var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
-		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
+		  $("#workplace"+ i ).load("load/workplace", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
 
 	});
 	$("[class^=deletewp]").live( "click", function(){
 		  var x = $(this).attr("class").replace('deletewp', '');
 		  $("#workplaceli"+ x).remove();
 		  $("#workplace"+ x).remove();
-		  //$(".deletewp"+ x).remove();
+		  
 		  var n = Number($('#wpnumber').val());
 		  var t = Number(n -1);
 		  

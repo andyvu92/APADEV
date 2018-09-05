@@ -50,6 +50,20 @@ function apa_function_menu()
         'access callback' => true,
         'type' => MENU_CALLBACK,
     ];
+	$items['load/workplace'] = [
+        'title' => "APA SSO Test",
+        'page callback' => 'apa_function_loadworkplace_form',
+        'page arguments' => ['6'],
+        'access callback' => true,
+        'type' => MENU_CALLBACK,
+    ];
+	$items['load/education'] = [
+        'title' => "APA SSO Test",
+        'page callback' => 'apa_function_loadeducation_form',
+        'page arguments' => ['4'],
+        'access callback' => true,
+        'type' => MENU_CALLBACK,
+    ];
     // The path where third party will come to login
     /*$items['apa/sso/login'] = [
         'title' => "APA SSO Test",
@@ -84,8 +98,9 @@ function apa_function_menu()
  * @see apa_global_function_menu()
  */
 function apa_function_init() {
-        
-    include __DIR__."/Survey/SurveyFunction.inc.php";
+	//$module_path = DRUPAL_ROOT."/".drupal_get_path('module','apa_function');
+    //variable_set('apa_function_path',$module_path);
+	include __DIR__."/Survey/SurveyFunction.inc.php";
 	include __DIR__."/inc/Aptify/JSONarray.inc.php";
 	include __DIR__."/inc/functions.inc";
 	include __DIR__."/inc/TandC/TandCFunction.inc.php";
@@ -95,6 +110,56 @@ function apa_function_init() {
 	//require_once dirname(__FILE__) . '/inc/functions.inc';
 	//require_once dirname(__FILE__) . '/inc/TandC/TandCFunction.inc.php';
 	//require_once dirname(__FILE__) . '/inc/Aptify/SessionHandler.inc.php';
+}
+function apa_function_updateBackgroundImage_form() {
+    //$module_path = variable_get('apa_function_path','');
+    include __DIR__.'/commonFile/updateBackgroundImage.php';
+   
+}
+function apa_function_customizeBackgroundImage_form() {
+   
+    include __DIR__.'/commonFile/customizeBackgroundImage.php';
+   
+}
+function apa_function_dashboardLeftNavigation_form() {
+   
+    include __DIR__.'/commonFile/dashboardLeftNavigation.php';
+   
+}
+function apa_function_loadworkplace_form() {
+   
+    include __DIR__.'/commonFile/workplace.php';
+   
+}
+function apa_function_loadeducation_form() {
+   
+    include __DIR__.'/commonFile/education.php';
+   
+}
+function apa_function_updateshoppingcart_form() {
+   
+    include __DIR__.'/commonFile/updateShoppingCart.php';
+   
+}
+function apa_function_updatewishlist_form() {
+   
+    include __DIR__.'/commonFile/updateWishlist.php';
+   
+}
+function apa_function_uploadImage_form() {
+   
+    include __DIR__.'/commonFile/uploadImage.php';
+   
+}
+function apa_function_changeState_form() {
+   
+    include __DIR__.'/commonFile/changeState.php';
+   
+}
+function apa_function_login_form() {
+    
+    include __DIR__."/inc/Login/login.inc.php";
+   
 }
 /**
  * Page Join Page.
@@ -131,11 +196,139 @@ function apa_function_checkemail_form() {
     include __DIR__."/inc/jointheAPA/jointheAPA-checkEmail.php";
 }
 
-//function apa_function_join_the_apa_confirmation_form() {
+/**
+ * Page Renew Page.
+ *
+ * @see apa_function_menu()
+ */
+function apa_function_renew_the_APA_form() {
     
-    //include __DIR__."/inc/jointheAPA/jointheAPA-confirmation.inc.php";
-//}
+    include __DIR__."/inc/renewMyMembership.inc.php";
+   
+}
+function apa_function_renew_your_detail_form() {
+    
+    include __DIR__."/inc/renewMyMembership/renew-yourdetail.inc.php";
+}
+function apa_function_renew_the_apa_insurance_form() {
+    
+    include __DIR__."/inc/renewMyMembership/renew-insurance.inc.php";
+}
+function apa_function_renew_the_apa_surveypayment_form() {
+    
+    include __DIR__."/inc/renewMyMembership/renew-surveypayment.inc.php";
+}
+function apa_function_renew_the_apa_final_form() {
+    
+    include __DIR__."/inc/renewMyMembership/renew-final.inc.php";
+}
+function apa_function_renew_the_apa_confirmation_form() {
+    
+    include __DIR__."/inc/renewMyMembership/renew-confirmation.inc.php";
+}
 
+/**
+ * Page Sign up Page.
+ *
+ * @see apa_function_menu()
+ */
+function apa_function_sign_up_form() {
+    
+    include __DIR__."/inc/Signup/signUp.inc.php";
+}
+/**
+ * Page Your detail Page.
+ *
+ * @see apa_function_menu()
+ */
+function apa_function_your_detail_form() {
+    
+    include __DIR__."/inc/yourdetail.inc.php";
+}
+function apa_function_your_dashboard_form() {
+    
+    include __DIR__."/inc/dashboard.inc.php";
+}
+function apa_function_your_purchase_form() {
+    
+    include __DIR__."/inc/yourpurchase.inc.php";
+}
+function apa_function_your_subscription_form() {
+    
+    include __DIR__."/inc/subscriptions.inc.php";
+}
+/**
+ * Page PD Page.
+ *
+ * @see apa_function_menu()
+ */
+function apa_function_pdsearch_form() {
+    
+    include __DIR__."/inc/pdsearch.inc.php";
+}
+function apa_function_pdsearchresult_form() {
+    
+    include __DIR__."/inc/pdsearchresult.inc.php";
+}
+function apa_function_pdshoppingcart_form() {
+    
+    include __DIR__."/inc/pdshoppingcart.inc.php";
+}
+function apa_function_pdcomplete_form() {
+    
+    include __DIR__."/inc/PDcomplete.inc.php";
+}
+function apa_function_pdwishlist_form() {
+    
+    include __DIR__."/inc/pdwishlist.inc.php";
+}
+/**
+ * Page Join the national group Page.
+ *
+ * @see apa_function_menu()
+ */
+function apa_function_joinng_form() {
+    
+    include __DIR__."/inc/NationalGroupJoin/joinNG.inc.php";
+}
+function apa_function_ngshoppingcart_form() {
+    
+    include __DIR__."/inc/NationalGroupJoin/NGShoppingCart.inc.php";
+}
+function apa_function_ngcomplete_form() {
+    
+    include __DIR__."/inc/NationalGroupJoin/NGcomplete.inc.php";
+}
+/**
+ * Page PRF donation Page.
+ *
+ * @see apa_function_menu()
+ */
+function apa_function_purchasePRF_form() {
+    
+    include __DIR__."/inc/PRF/prf.inc.php";
+}
+/**
+ * Page Survey Page.
+ *
+ * @see apa_function_menu()
+ */
+function apa_function_surveyquestions_form() {
+    
+    include __DIR__."/Survey/SurveyQuestions.inc.php";
+}
+function apa_function_surveyedit_form() {
+    
+    include __DIR__."/Survey/SurveyEdit.inc.php";
+}
+function apa_function_surveylist_form() {
+    
+    include __DIR__."/Survey/SurveyList.inc.php";
+}
+function apa_function_surveyquestionslist_form() {
+    
+    include __DIR__."/Survey/SurveyQuestionsList.inc.php";
+}
 /*
 function _apa_sso_login_form_validate($form, &$form_state) {
     //  Any validation you want to do here.

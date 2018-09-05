@@ -1,5 +1,10 @@
 <?php
- include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
+if(!function_exists('drupal_session_started'))
+{
+  die("Unauthorized Access");
+}
+ //include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
+ apa_function_updateBackgroundImage_form();
  /* get background image****/
 if(isset($_SESSION['UserId'])) { 
 $userID = $_SESSION['UserId'];
@@ -26,7 +31,8 @@ $background = getBackgroundImage($userID);
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="display: none"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background <?php if(!isset($_SESSION["userID"])) echo "display-none";?>">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
 	<?php
-	include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
+	//include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
+	apa_function_customizeBackgroundImage_form();
 	?>
 	
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">

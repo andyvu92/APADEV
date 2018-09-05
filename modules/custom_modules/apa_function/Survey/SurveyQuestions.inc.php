@@ -1,4 +1,10 @@
 <?php
+if(!function_exists('drupal_session_started'))
+{
+  die("Unauthorized Access");
+}
+?>
+<?php
 /* Qeustions for survey List */
 $GroupList = array();
 //include('SurveyFunction.inc.php');

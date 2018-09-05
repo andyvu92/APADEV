@@ -82,6 +82,7 @@ if(isset($_POST['step2'])) {
 	// Send - 
 	// UserID&Payment-method&Name-on-card&Cardno&Expiry-date&CCV
 	// Response - Add payment card successful
+
 if(isset($_POST['addCard']) && $_POST['addCard'] == "1"){
 		if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
 		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
@@ -223,8 +224,13 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 ?> 
 <form id ="join-review-form" action="renewconfirmation" method="POST">
 <input type="hidden" name="step3" value="3">
-<?php if ((sizeof($cardsnum["results"])==0) || $out["result"]=="Failed"): ?>  
+<?php if ((sizeof($cardsnum["results"])==0)): ?>  
 	<div>Add your payment card unsucessfull, Please check your card details.</div>
+<?php endif;?>
+<?php if (isset($_POST['addCard']) && $_POST['addCard'] == "1"): ?>  
+   <?php if($out["result"]=="Failed"):?>
+	<div>Add your payment card unsucessfull, Please check your card details.</div>
+	<?php endif;?>
 <?php endif;?>
 <div class="down8" <?php if(isset($_POST['step2'])|| isset($_POST['stepAdd'])||isset($_POST['step2-2'])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
 

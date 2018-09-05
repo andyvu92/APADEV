@@ -1,3 +1,9 @@
+<?php
+if(!function_exists('drupal_session_started'))
+{
+  die("Unauthorized Access");
+}
+?>
 <span class="col-xs-12 col-sm-8 col-md-6 col-lg-5" id="pdSearch">
 <?php
 	// 2.2.19 - GET list of National Group

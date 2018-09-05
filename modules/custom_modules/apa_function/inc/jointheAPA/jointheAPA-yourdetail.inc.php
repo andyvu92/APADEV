@@ -2831,7 +2831,7 @@ if(isset($_POST['MT'])){
                     success:function(response) {						
                     var result = response;
                     if(result=="T"){
-						//$('#checkMessage').html("This email address matches one that’s already registered, please use a different one or login to your existing account.");
+						
                         $('#checkMessage').removeClass("display-none");
 						$( "#Memberid" ).focus();
                         $("#Memberid").css("border", "1px solid red");
@@ -3248,10 +3248,10 @@ endif;
 		if($('#wpnumber').val()=="0"){
 			var number = Number($('#wpnumber').val());
 			var i = Number(number +1);
-			//var j = Number(number +2);
+			
 			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span><a class="skip">Skip this step</a></li>' );
 			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
-			//$('#wpnumber').text(i);
+			
 			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
 			$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
 			$('input[name=wpnumber]').val(i);
@@ -3269,7 +3269,7 @@ endif;
 					var sessionCountry = <?php
 			echo json_encode($_SESSION['country']);
 ?>;
-		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
+		  $("#workplace"+ i ).load("load/workplace", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
 		  
 			 
 		}
@@ -3302,7 +3302,7 @@ endif;
                     var sessionCountry = <?php
             echo json_encode($_SESSION['country']);
 ?>;
-          $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
+          $("#workplace"+ i ).load("load/workplace", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
           
         });
         $(document).on( "click", "a[href^=#workplace]", function(){ });

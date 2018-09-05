@@ -1,6 +1,13 @@
+<?php
+if(!function_exists('drupal_session_started'))
+{
+  die("Unauthorized Access");
+}
+?>
 <?php if(isset($_SESSION["UserId"])) : ?>
 <?php
-include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
+//include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
+apa_function_updateBackgroundImage_form();
 /* get background image****/
 if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID =0; }
 $background = getBackgroundImage($userID);
@@ -415,7 +422,9 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 ?>
 </div>
 
-<?php include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php'); ?>  
+<?php //include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php'); 
+apa_function_dashboardLeftNavigation_form();
+?>  
 <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?> autoscroll" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -423,7 +432,8 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			<div class="col-xs-12 col-sm-6" style="display: none"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
     <?php
-		include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
+		//include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
+		apa_function_customizeBackgroundImage_form();
 		$workplaceSettingscode         = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
 		$workplaceSettings             = json_decode($workplaceSettingscode, true);
 		$_SESSION["workplaceSettings"] = $workplaceSettings; 
@@ -2083,43 +2093,16 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 		$('#workplace').click(function(){
 		$('#dashboard-right-content').addClass("autoscroll");
 		});
-		/*****just hidden the workplace when the user has no workplace data******/
-		/*if($('#wpnumber').val()=="0"){
-			var number = Number($('#wpnumber').val());
-			var i = Number(number +1);
-			//var j = Number(number +2);
-			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span></li>' );
-			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
-			//$('#wpnumber').text(i);
-			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
-			$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
-			$('input[name=wpnumber]').val(i);
-			var memberType = $('select[name=MemberType]').val();
-			var sessionvariable = '<?php
-			echo json_encode($_SESSION["workplaceSettings"]);
-			?>';
-						var sessionInterest = '<?php
-			echo json_encode($_SESSION["interestAreas"]);
-			?>';
-					var sessionLanguage = '<?php
-			echo json_encode($_SESSION["Language"]);
-			?>';
-					var sessionCountry = <?php
-			echo json_encode($_SESSION['country']);
-?>;
-		  $("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":number,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
-		 
-			 
-		}*/
+		
 		$('.add-workplace-join').click(function(){
 			var number = Number($('#wpnumber').val());
 			var maxNumber = Number($('#maxumnumber').val());
 			var j = Number(number +1);
 			var i = Number(maxNumber +1);
-			//var j = Number(number +2);
+
 			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span></li>' );
 			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in"></div>');
-			//$('#wpnumber').text(i);
+			
 			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
 			$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
 			$('input[name=wpnumber]').val(j);
@@ -2129,14 +2112,15 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 			var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
 			var sessionLanguage = '<?php echo json_encode($_SESSION["Language"]);?>';
 			var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
-			$("#workplace"+ i ).load("sites/all/themes/evolve/commonFile/workplace.php", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry,"memberType":memberType});
+			
+		    $("#workplace"+ i ).load("load/workplace", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry,"memberType":memberType});
 		});
 		$("a[href^=#workplace]").live( "click", function(){ });
 		$("[class^=deletewp]").live( "click", function(){
 			var x = $(this).attr("class").replace('deletewp', '');
 			$("#workplaceli"+ x).remove();
 			$("#workplace"+ x).remove();
-			//$(".deletewp"+ x).remove();
+			
 			var n = Number($('#wpnumber').val());
 			var t = Number(n -1);
 			$('input[name=wpnumber]').val(t);
@@ -2195,7 +2179,7 @@ $('.add-additional-qualification').click(function(){
 		var sessionDegree = <?php echo json_encode($_SESSION['degree']);?>;
 		var sessionUniversity = <?php echo json_encode($_SESSION['University']);?>;
 		$('div[id="additional-qualifications-block"]').append('<div id="additional'+ number +'"></div>');
-		$("#additional"+ number ).load("sites/all/themes/evolve/commonFile/education.php", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree,"sessionUniversity":sessionUniversity});
+		$("#additional"+ number ).load("load/education", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree,"sessionUniversity":sessionUniversity});
         var i = Number(number +1);
 		$('input[name=addtionalNumber]').val(i);
 });

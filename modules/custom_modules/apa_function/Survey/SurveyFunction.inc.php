@@ -1,7 +1,7 @@
 <?php
 /* Survey Functions - Functional layer */
-
-include('Surveydatabase.inc.php');
+include __DIR__.'/Surveydatabase.inc.php';
+//include('Surveydatabase.inc.php');
 
 function GetGroupList() {
 	$arrayIn = forGetGroupList();//returnGetList();
