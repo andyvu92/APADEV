@@ -113,53 +113,68 @@ function apa_function_init() {
 }
 function apa_function_updateBackgroundImage_form() {
     //$module_path = variable_get('apa_function_path','');
+	/// in 'jointheAPA.inc.php', 'renewMyMembership.inc.php'
+	/// 'yourdetail.inc.php', 'dashboard.inc.php'
     include __DIR__.'/commonFile/updateBackgroundImage.php';
    
 }
 function apa_function_customizeBackgroundImage_form() {
-   
+   /// in 'jointheAPA.inc.php', 'renewMyMembership.inc.php'
+   /// 'yourdetail.inc.php', 'dashboard.inc.php'
     include __DIR__.'/commonFile/customizeBackgroundImage.php';
    
 }
 function apa_function_dashboardLeftNavigation_form() {
-   
+	/// in 'renewMyMembership.inc.php', 'yourdetail.inc.php'
+	/// 'dashboard.inc.php'
     include __DIR__.'/commonFile/dashboardLeftNavigation.php';
    
 }
 function apa_function_loadworkplace_form() {
-   
+	/// in this file
     include __DIR__.'/commonFile/workplace.php';
    
 }
 function apa_function_loadeducation_form() {
-   
+	/// in this file
     include __DIR__.'/commonFile/education.php';
    
 }
 function apa_function_updateshoppingcart_form() {
-   
+	/// merged in function.inc
     include __DIR__.'/commonFile/updateShoppingCart.php';
-   
 }
 function apa_function_updatewishlist_form() {
-   
+	/// not in use
     include __DIR__.'/commonFile/updateWishlist.php';
-   
 }
 function apa_function_uploadImage_form() {
-   
+	/// merged / not in use
     include __DIR__.'/commonFile/uploadImage.php';
-   
 }
 function apa_function_changeState_form() {
-   
+	/// not in use
     include __DIR__.'/commonFile/changeState.php';
-   
 }
 function apa_function_login_form() {
-    
+    /// block
     include __DIR__."/inc/Login/login.inc.php";
-   
+}
+function apa_function_forgot_password_form() {
+    /// block
+    include __DIR__."/inc/Login/forget-password.inc.php";
+}
+function apa_function_return_udsers_form() {
+    /// page
+    include __DIR__."/inc/Login/return-users-password.inc.php";
+}
+function apa_function_reset_password_from_email_form() {
+    /// page
+    include __DIR__."/inc/ResetPassword.inc.php";
+}
+function apa_function_change_existing_password_form() {
+    /// block
+    include __DIR__."/inc/changepassword.inc.php";
 }
 /**
  * Page Join Page.
@@ -167,32 +182,31 @@ function apa_function_login_form() {
  * @see apa_function_menu()
  */
 function apa_function_join_the_APA_form() {
-    
+    /// block
     include __DIR__."/inc/jointheAPA.inc.php";
-   
 }
 function apa_function_join_your_detail_form() {
-    
+	/// in 'jointheAPA.inc.php'
     include __DIR__."/inc/jointheAPA/jointheAPA-yourdetail.inc.php";
 }
 function apa_function_join_the_apa_insurance_form() {
-    
+    /// in 'jointheAPA.inc.php'
     include __DIR__."/inc/jointheAPA/jointheAPA-insurance.inc.php";
 }
 function apa_function_join_the_apa_surveypayment_form() {
-    
+    /// in 'jointheAPA.inc.php'
     include __DIR__."/inc/jointheAPA/jointheAPA-surveypayment.inc.php";
 }
 function apa_function_join_the_apa_final_form() {
-    
+    /// in 'jointheAPA.inc.php'
     include __DIR__."/inc/jointheAPA/jointheAPA-final.inc.php";
 }
 function apa_function_join_the_apa_confirmation_form() {
-    
+    /// block
     include __DIR__."/inc/jointheAPA/jointheAPA-confirmation.inc.php";
 }
 function apa_function_checkemail_form() {
-    
+    /// in this file
     include __DIR__."/inc/jointheAPA/jointheAPA-checkEmail.php";
 }
 
@@ -202,28 +216,27 @@ function apa_function_checkemail_form() {
  * @see apa_function_menu()
  */
 function apa_function_renew_the_APA_form() {
-    
+    /// block
     include __DIR__."/inc/renewMyMembership.inc.php";
-   
 }
 function apa_function_renew_your_detail_form() {
-    
+    /// in 'renewMyMembership.inc.php'
     include __DIR__."/inc/renewMyMembership/renew-yourdetail.inc.php";
 }
 function apa_function_renew_the_apa_insurance_form() {
-    
+    /// in 'renewMyMembership.inc.php'
     include __DIR__."/inc/renewMyMembership/renew-insurance.inc.php";
 }
 function apa_function_renew_the_apa_surveypayment_form() {
-    
+    /// in 'renewMyMembership.inc.php'
     include __DIR__."/inc/renewMyMembership/renew-surveypayment.inc.php";
 }
 function apa_function_renew_the_apa_final_form() {
-    
+    /// in 'renewMyMembership.inc.php'
     include __DIR__."/inc/renewMyMembership/renew-final.inc.php";
 }
 function apa_function_renew_the_apa_confirmation_form() {
-    
+    /// block
     include __DIR__."/inc/renewMyMembership/renew-confirmation.inc.php";
 }
 
@@ -242,19 +255,19 @@ function apa_function_sign_up_form() {
  * @see apa_function_menu()
  */
 function apa_function_your_detail_form() {
-    
+    /// block
     include __DIR__."/inc/yourdetail.inc.php";
 }
 function apa_function_your_dashboard_form() {
-    
+    /// block
     include __DIR__."/inc/dashboard.inc.php";
 }
 function apa_function_your_purchase_form() {
-    
+    /// block
     include __DIR__."/inc/yourpurchase.inc.php";
 }
 function apa_function_your_subscription_form() {
-    
+	/// block
     include __DIR__."/inc/subscriptions.inc.php";
 }
 /**
@@ -263,23 +276,23 @@ function apa_function_your_subscription_form() {
  * @see apa_function_menu()
  */
 function apa_function_pdsearch_form() {
-    
+    /// block
     include __DIR__."/inc/pdsearch.inc.php";
 }
 function apa_function_pdsearchresult_form() {
-    
+    /// block
     include __DIR__."/inc/pdsearchresult.inc.php";
 }
 function apa_function_pdshoppingcart_form() {
-    
+    /// page
     include __DIR__."/inc/pdshoppingcart.inc.php";
 }
 function apa_function_pdcomplete_form() {
-    
+    /// page
     include __DIR__."/inc/PDcomplete.inc.php";
 }
 function apa_function_pdwishlist_form() {
-    
+    /// page
     include __DIR__."/inc/pdwishlist.inc.php";
 }
 /**
@@ -288,15 +301,15 @@ function apa_function_pdwishlist_form() {
  * @see apa_function_menu()
  */
 function apa_function_joinng_form() {
-    
+    /// block
     include __DIR__."/inc/NationalGroupJoin/joinNG.inc.php";
 }
 function apa_function_ngshoppingcart_form() {
-    
+    /// not in use
     include __DIR__."/inc/NationalGroupJoin/NGShoppingCart.inc.php";
 }
 function apa_function_ngcomplete_form() {
-    
+    /// not in use
     include __DIR__."/inc/NationalGroupJoin/NGcomplete.inc.php";
 }
 /**
@@ -305,7 +318,7 @@ function apa_function_ngcomplete_form() {
  * @see apa_function_menu()
  */
 function apa_function_purchasePRF_form() {
-    
+    /// block
     include __DIR__."/inc/PRF/prf.inc.php";
 }
 /**
@@ -314,7 +327,7 @@ function apa_function_purchasePRF_form() {
  * @see apa_function_menu()
  */
 function apa_function_surveyquestions_form() {
-    
+    /// block   
     include __DIR__."/Survey/SurveyQuestions.inc.php";
 }
 function apa_function_surveyedit_form() {
@@ -322,12 +335,68 @@ function apa_function_surveyedit_form() {
     include __DIR__."/Survey/SurveyEdit.inc.php";
 }
 function apa_function_surveylist_form() {
-    
+ 
     include __DIR__."/Survey/SurveyList.inc.php";
 }
 function apa_function_surveyquestionslist_form() {
-    
+    /// block
     include __DIR__."/Survey/SurveyQuestionsList.inc.php";
+}
+/**
+ * National Group MT component
+ *
+ * @see apa_function_menu()
+ */
+function apa_function_NationalGroupsMT_form() {
+    /// block
+    include __DIR__."/inc/NationalGroupsMT.inc.php";
+}
+/**
+ * National Group CPD diary
+ *
+ * @see apa_function_menu()
+ */
+function apa_function_CPD_diary_snapshot_form() {
+    /// block
+    include __DIR__."/inc/CPDdiarySnapShot.inc.php";
+}
+function apa_function_CPD_diary_form() {
+    /// block
+    include __DIR__."/inc/CPDdiary.inc.php";
+}
+/**
+ * Find a physios
+ *
+ * @see apa_function_menu()
+ */
+function apa_function_Find_Physio_Main_Practice_form() {
+    /// not in use
+    include __DIR__."/inc/FindaPhysio/Main_Practice.php";
+}
+function apa_function_Find_Physio_Result_Practice_form() {
+    /// not in use
+    include __DIR__."/inc/FindaPhysio/Result_Practice.php";
+}
+function apa_function_Find_Physio_Detail_Practice_form() {
+    /// not in use
+    include __DIR__."/inc/FindaPhysio/Detail_Practice.php";
+}
+/**
+ * SSO
+ *
+ * @see apa_function_menu()
+ */
+function apa_function_SSO_form() {
+    /// not in use
+    include __DIR__."/inc/Login/SSO.inc.php";
+}
+function apa_function_SLO_form() {
+    /// not in use
+    include __DIR__."/inc/Login/SLO.inc.php";
+}
+function apa_function_SAML_login_form() {
+    /// not in use
+    include __DIR__."/inc/Login/SAMLlogin.php";
 }
 /*
 function _apa_sso_login_form_validate($form, &$form_state) {
