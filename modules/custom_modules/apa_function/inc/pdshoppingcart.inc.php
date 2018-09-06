@@ -5,6 +5,10 @@ if(!function_exists('drupal_session_started'))
 }
 ?>
 <?php
+
+if (isset($_SESSION['UserId'])):
+?>
+<?php
 $creditcard='';
 $i=0;
 $price=0;
@@ -755,4 +759,9 @@ $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
 } );
 
 </script>
-  
+ <?php else : 
+	// todo
+	// add log-in button with message - you must be logged in
+	?>
+<p>please log-in to use this page</p>
+<?php endif; ?> 

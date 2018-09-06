@@ -234,7 +234,7 @@ if(isset($_POST['step2-1'])) {
 			        	$<?php echo $scheduleDetails['SubTotal'];?>
 					</div>
 				</div>
-				<div class="flex-cell flex-flow-row">
+				<div class="flex-cell flex-flow-row" id="installmentafter">
 					<div class="flex-col-7">
 						GST	
 					</div>

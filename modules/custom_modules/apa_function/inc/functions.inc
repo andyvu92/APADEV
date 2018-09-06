@@ -547,7 +547,7 @@ function checkRenew($Paidthrough, $tag){
 	$currentDate = strtotime(date('m-d-Y'));
 	//Todo:  in the future change the 5 month to 3 month
 	
-	if(date("m-d-Y",strtotime('-5 month')) <= date("m-d-Y",strtotime($Paidthrough)) && strtotime(date("m-d-Y",strtotime($Paidthrough))) <= strtotime(date("m-d-Y",strtotime('+5 month'))))  {
+	if(date("m-d-Y",strtotime('-1 month')) <= date("m-d-Y",strtotime($Paidthrough)) && strtotime(date("m-d-Y",strtotime($Paidthrough))) <= strtotime(date("m-d-Y",strtotime('+2 month'))))  {
 		if($tag){
 			return true;
 		}
