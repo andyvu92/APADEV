@@ -1994,7 +1994,7 @@ apa_function_dashboardLeftNavigation_form();
 
 				<div class="row">
 					<div class="col-xs-12 none-padding">
-						<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
+						<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
 					</div>
 				</div>
 			</form>
@@ -2052,7 +2052,7 @@ apa_function_dashboardLeftNavigation_form();
 					</div>
 				</div>				 
 				<div class="row">
-					<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
+					<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
 				</div>
 			</form>
 	    </div>

@@ -219,7 +219,7 @@ $cardsnum = GetAptifyData("12", $test);
 	<?php endif; ?>
 	<div class="flex-container">
 		<div class="flex-cell">
-			<span class="fail-payment-message">Payment has failed. Please check your card details and try again or <a href="/contact-us" target="_blank">contact us</a>.</span>
+			<span class="fail-payment-message">Payment has failed. Please check your card details and try again or <a href="/contact-us">contact us</a>.</span>
 		</div>
 	</div>  
 	<div class="flex-container">
@@ -472,7 +472,7 @@ $cardsnum = GetAptifyData("12", $test);
 <?php logRecorder();  ?>
 <div id="PRFDesPopUp" style="display:none;" class="container">
 <p>The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot. </p>
-<p><a href="/reserach/purpose-prf" target="_blank">Tell me more</a></p>
+<p><a href="/reserach/purpose-prf">Tell me more</a></p>
 </div>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
   <link rel="stylesheet" href="/resources/demos/style.css">

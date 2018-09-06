@@ -188,7 +188,7 @@ $scheduleDetails = GetAptifyData("47", $postScheduleData);
 			</div>
 			
 			<div class="flex-col-12" style="text-align: center">
-				<a target="_blank" class="addCartlink"><button style="margin-top: 30px;" class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
+				<a class="addCartlink"><button style="margin-top: 30px;" class="placeorder" type="submit">PLACE YOUR ORDER</button></a>
 			</div>	
 	</div>
 	</div>

@@ -293,7 +293,7 @@ if(isset($_POST['step2-1'])) {
 					<div class="tooltip-content">
 						The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot.
 					</br>
-						<a href="/reserach/purpose-prf" target="_blank">Tell me more</a>
+						<a href="/reserach/purpose-prf">Tell me more</a>
 					</div>
 					<span>What is this?</span>
 				</div>
@@ -449,5 +449,5 @@ if(isset($_POST['step2-1'])) {
 <?php logRecorder();  ?>	
 <div id="PRFDesPopUp" style="display:none;" class="container">
 <p>The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot. </p>
-<p><a href="/reserach/purpose-prf" target="_blank">Tell me more</a></p>
+<p><a href="/reserach/purpose-prf">Tell me more</a></p>
 </div>
