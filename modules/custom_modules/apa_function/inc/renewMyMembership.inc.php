@@ -417,7 +417,17 @@ You have the right to access the personal information about yourself held by the
 	// todo
 	// add log-in button with message - you must be logged in
 	?>
-<p>please log-in to use this page</p>
+		<div class="flex-container" id="non-member">
+			<div class="flex-cell">
+				<h3 class="light-lead-heading">Please login to see this page.</h3>
+			</div>
+			<div class="flex-cell cta">
+				<a data-target="#loginAT" data-toggle="modal" href="#" class="login">Login</a>
+				<a href="/membership-question" class="join">Join now</a>
+			</div>
+			<div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+		</div>
+
 <?php endif; ?>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>

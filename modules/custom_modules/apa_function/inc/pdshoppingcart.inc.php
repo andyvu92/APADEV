@@ -620,6 +620,7 @@ if(isset($_SESSION["UserId"])){
 	</div>
 
 <?php endif; ?>
+
 <?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0 && sizeof($FPListArray)==0) : ?>   <div  class="col-xs-12 no-item-title" style="text-align: center"><h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3></div>      <?php endif;?>
 <div class="col-xs-12 bottom-buttons">
  	<a class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>

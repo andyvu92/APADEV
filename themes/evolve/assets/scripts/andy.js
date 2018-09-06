@@ -292,6 +292,17 @@ function isTouchDevice() {
 
 // MULTISELECTIONS SELECTIZE
 jQuery(document).ready(function() {
+  var prevSetup = Selectize.prototype.setup;
+
+  Selectize.prototype.setup = function () {
+      prevSetup.call(this);
+  
+      // This property is set in native setup
+      // Unless the source code changes, it should
+      // work with any version
+      this.$control_input.prop('readonly', true);
+  };
+
   $('select[multiple=""]').selectize({
     plugins: ['remove_button'],
     delimiter: ',',
