@@ -12,6 +12,7 @@
 @bright-blue: rgb(0, 159, 218);
 @brighter-blue: rgb(0,184,241);
 @blue: #009fda;
+@alt-grey: #a6a8ab;
 @grey: #b5b5b5;
 @orange: #ffa02e;
 
@@ -2789,6 +2790,56 @@ select.form-control{
         display: flex;
         flex-direction: row;
         justify-content: space-evenly;
+    }
+}
+
+#fail-purchase, #exist-member, #non-member{
+    .flex-cell{
+        justify-content: center;
+        h3.light-lead-heading{
+            color: @bright-blue;
+            font-size: 3.5em;
+            margin-bottom: 25px;
+            font-weight: 400;
+            text-align: center;
+            margin-top: 100px;
+        }
+        span.sub-heading{
+            color: @bright-blue;
+            font-size: 2em;
+            margin-bottom: 25px;
+            font-weight: 400;
+            text-align: center;
+            a{
+                color: @bright-blue;
+                font-weight: 500;
+                text-decoration: underline;
+            }
+        }
+        &.pd-featured{
+            margin: 100px 0 50px 0;
+        }
+        &.cta{
+            margin-top: 30px;
+            .login, .join{
+                padding: 10px;
+                background: #a6a8ab;
+                font-family: Roboto;
+                font-size: 1em;
+                color: #fff;
+                font-weight: 500;
+                text-transform: uppercase;
+                min-width: 150px;
+                text-align: center;
+                margin: 10px;
+                &:hover{
+                    opacity: 0.9;
+                }
+            }
+            .join{
+                background: @bright-blue;
+            }
+        }
     }
 }
 

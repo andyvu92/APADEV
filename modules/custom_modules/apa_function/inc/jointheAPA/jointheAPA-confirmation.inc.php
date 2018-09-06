@@ -92,7 +92,7 @@ $background = getBackgroundImage($userID);
 <div class="col-xs-12 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-12"><span class="dashboard-name"><strong>Become a member</strong></span></div>
+			<div class="col-xs-12"><span class="dashboard-name"><strong>Thank you for joining</strong></span></div>
 		<!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background <?php if(!isset($_SESSION["userID"])) echo "display-none";?>">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>-->
 		</div>
 	<?php
@@ -135,7 +135,28 @@ $background = getBackgroundImage($userID);
 					<p style="color:#000;">In the meantime, go to your <a href="dashboard">dashboard </a> to review your membership information or check out the great <a href="/membership/membership-benefits">range of benefits</a> available to APA members. </p>
 				</div>
 				<?php else:?>
-					<p style="color:#000;">There are some errors for purchasing order.</p>
+					<style>
+						#dashboard-right-content .nav-tabs{
+							display: none;
+						}
+						span.dashboard-name{
+							display: none;
+						}
+					</style>
+					<script>
+						jQuery(document).ready(function(){
+							$('#dashboard-right-content .nav-tabs').remove();
+							$('span.dashboard-name').remove();						});
+					</script>
+					<div class="flex-container" id="fail-purchase">
+						<div class="flex-cell">
+							<h3 class="light-lead-heading">We had issues processing<br>your payment request.</h3>
+						</div>
+						<div class="flex-cell">
+							<span class="sub-heading">Please <a href="/jointheapa">try again</a> or <a href="/contact-us">contact us</a>.</span>
+						</div>
+						<div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+					</div>
 				<?php endif; ?>
 				<?php /*
 				<div id="Iaksbnkvoice" class="modal fade big-screen" role="dialog">
