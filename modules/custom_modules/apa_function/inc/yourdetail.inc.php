@@ -290,13 +290,13 @@ if(isset($_POST['step1'])) {
 // QIP}, Undergraduate degree, Undergraduate Uni name, Undergraduate Country,
 // Year attained, Post graduate degree, post graduate name, 
 // Post graduate country, Year attained, Additional qualifications
-if(isset($_SESSION["UserId"])) {
+/*if(isset($_SESSION["UserId"])) {
 	$data = "UserID=".$_SESSION["UserId"];
 	$details = GetAptifyData("4", $data,""); // #_SESSION["UserID"];
 	//2.2.43 -get user installment data test part
 	$installmentData['id'] = $_SESSION["UserId"];
 	$installmentOrder = GetAptifyData("43", $installmentData);
-}
+}*/
 
 
 
@@ -1994,7 +1994,7 @@ apa_function_dashboardLeftNavigation_form();
 
 				<div class="row">
 					<div class="col-xs-12 none-padding">
-						<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
+						<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
 					</div>
 				</div>
 			</form>
@@ -2052,7 +2052,7 @@ apa_function_dashboardLeftNavigation_form();
 					</div>
 				</div>				 
 				<div class="row">
-					<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
+					<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
 				</div>
 			</form>
 	    </div>

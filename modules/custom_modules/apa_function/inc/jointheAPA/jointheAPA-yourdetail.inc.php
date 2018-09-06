@@ -3317,7 +3317,7 @@ endif;
 		$('input[name=wpnumber]').val(t);
 		if($('input[name=wpnumber]').val()>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
         for (m = 1; m<=t;m++){
-			$('div[class="down3"] #tabmenu li:nth-child(' + m + ') a').html("Workplace "+m);
+			$('div[class="down3"] #tabmenu li:nth-child(' + m + ') a:not(.skip)').html("Workplace "+m);
 		}
 		});
     });
@@ -3334,7 +3334,7 @@ echo json_encode($_SESSION['degree']);
 echo json_encode($_SESSION['University']);
 ?>;
         $('div[id="additional-qualifications-block"]').append('<div id="additional'+ number +'"></div>');
-        $("#additional"+ number ).load("sites/all/themes/evolve/commonFile/education.php", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree,"sessionUniversity":sessionUniversity});
+        $("#additional"+ number ).load("load/education", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree,"sessionUniversity":sessionUniversity});
         var i = Number(number +1);
         $('input[name=addtionalNumber]').val(i);
     });

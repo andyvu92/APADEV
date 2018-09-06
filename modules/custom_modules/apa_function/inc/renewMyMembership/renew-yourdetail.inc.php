@@ -1553,7 +1553,7 @@ $('.add-additional-qualification').click(function(){
 		var sessionDegree = <?php echo json_encode($_SESSION['degree']);?>;
 		var sessionUniversity = <?php echo json_encode($_SESSION['University']);?>;
 		$('div[id="additional-qualifications-block"]').append('<div id="additional'+ number +'"></div>');
-		$("#additional"+ number ).load("sites/all/themes/evolve/commonFile/education.php", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree,"sessionUniversity":sessionUniversity});
+		$("#additional"+ number ).load("load/education", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree,"sessionUniversity":sessionUniversity});
         var i = Number(number +1);
 		$('input[name=addtionalNumber]').val(i);
  });

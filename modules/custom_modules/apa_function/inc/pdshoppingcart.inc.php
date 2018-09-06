@@ -270,7 +270,6 @@ if(isset($_SESSION["UserId"])){
 				//echo	"<td>".$productt['Pricelist'][0]['Price']."</td>";
 				//echo	"<td>NM price</td>";
 			//}
-			//echo        '<div class="flex-col-2 pd-spcart-wishlist"><a target="_blank" href="pd-wishlist?addWishList&UID='.$pass.'">ADD TO WISHLIST</a></div>';
 			echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
 			echo "</div>";    
 			$n=$n+1;
@@ -451,7 +450,7 @@ if(isset($_SESSION["UserId"])){
 			<label for="addcardtag">Do you want to save this card?</label>
 		</div>-->
 		<div class="col-xs-12 none-padding">
-			<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
+			<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
 		</div>
 		</form>
 	</div>
@@ -508,7 +507,7 @@ if(isset($_SESSION["UserId"])){
 			<label for="addcardtag">Do you want to save this card?</label>
 		</div>-->
 		<div class="col-xs-12 none-padding">
-			<a target="_blank" class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
+			<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
 		</div>
 	</form>	
 	<?php endif; ?>
@@ -536,7 +535,7 @@ if(isset($_SESSION["UserId"])){
 					<div class="tooltip-content">
 						The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot.
 					<br>
-						<a href="/reserach/purpose-prf" target="_blank">Tell me more</a>
+						<a href="/reserach/purpose-prf">Tell me more</a>
 					</div>
 					<span>What is this?</span>
 				</div>
@@ -612,18 +611,15 @@ if(isset($_SESSION["UserId"])){
 				echo '<input type="hidden" name="totalMG" id="totalMG" value="'.$mgTotal.'">';
 			}
 			?>
-			<a href="javascript:document.getElementById('PDShoppingcartForm').submit();" class="placeorder" value="PLACE YOUR ORDER" id="PDPlaceOrder"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton<?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>">Place your order</button></a>
-			<!--a target="_blank" class="addCartlink">
-				<button class="placeorder" type="submit">PLACE YOUR ORDER</button>
-			</a-->
+			<a href="javascript:document.getElementById('PDShoppingcartForm').submit();" class="placeorder<?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" value="PLACE YOUR ORDER" id="PDPlaceOrder"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</button></a>
 		</form>
 	</div>
 
 <?php endif; ?>
 <?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0 && sizeof($FPListArray)==0) : ?>   <div  class="col-xs-12 no-item-title" style="text-align: center"><h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3></div>      <?php endif;?>
 <div class="col-xs-12 bottom-buttons">
- 	<a target="_blank" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
- 	<a target="_blank" class="addCartlink" href="../your-details?Goback=PD"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
+ 	<a class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
+ 	<a class="addCartlink" href="../your-details?Goback=PD"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
 </div>
 
 <div class="flex-container pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
@@ -641,7 +637,7 @@ if(isset($_SESSION["UserId"])){
 	<div class="modal-body">
 	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
 	<h4>Registration:</h4>
-<p>Online registration is the simplest way to secure a place at an APA course or event.  If unable to register online for any reason, a <a href="/sites/default/files/PROFESSIONAL DEVELOPMENT/LD039_Event_registration_form_fillable.pdf">manual registration form</a> may be completed and returned to the APA Branch office in the state that the event is being held (<a href="/contact-us" target="_blank">see state office details</a>).</p>
+<p>Online registration is the simplest way to secure a place at an APA course or event.  If unable to register online for any reason, a <a href="/sites/default/files/PROFESSIONAL DEVELOPMENT/LD039_Event_registration_form_fillable.pdf">manual registration form</a> may be completed and returned to the APA Branch office in the state that the event is being held (<a href="/contact-us">see state office details</a>).</p>
 <br />
 <p>Registration will not be accepted without payment.  Places are allocated according to the date that an application form and payment are received by the Australian Physiotherapy Association (&lsquo;APA&rsquo;), unless otherwise stated.  (Information concerning remaining places in any event activity does not guarantee a place, as that information is subject to continual change).</p>
 <br />

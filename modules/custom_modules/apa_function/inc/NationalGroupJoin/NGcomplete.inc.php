@@ -119,7 +119,7 @@ $invoiceAPI = GetAptifyData("18", $apis);
 
 	</div>
 </div>
-<a target="_blank" class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>
+<a class="addCartlink" href="../your-details"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>
 <style type="text/css">
 	.big-screen {
 		width: 62%;

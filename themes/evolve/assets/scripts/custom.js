@@ -1355,9 +1355,13 @@ jQuery(document).ready(function($) {
     $('#prftag').click(function(){
 		if($('#prftag').val()=="1"){
 			$('#prfselect').slideUp().css('overflow', 'hidden');
+			$( "#POSTPRF").val("");
+			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
 		}
 		else{
 			$('#prfselect').slideDown().css('overflow', 'unset');
+			$( "#POSTPRF").val(Number($("#PRF").val()));
+			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
 		}
 		
 	});

@@ -389,7 +389,7 @@ apa_function_dashboardLeftNavigation_form();
 					}
 					
 					?></span>
-					<span class="text">CPD hours <a target="_blank" href="/pd/cpd-diary">Full CPD diary</a></span>
+					<span class="text">CPD hours <a href="/pd/cpd-diary">Full CPD diary</a></span>
 				</div>
 			</div>
 			<?php endif;?>

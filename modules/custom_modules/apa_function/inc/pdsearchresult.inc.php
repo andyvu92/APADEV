@@ -241,9 +241,9 @@ if(isset($results['MResponse'])) {
 
 		echo "<div class='flex-cell flex-flow-row'>";
 		echo	'<div class="flex-col-3">
-					<span class="title"><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a></span>
+					<span class="title"><a href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a></span>
 					<div class='excerpt'><p>".$result['Description'].'</p></div>
-					<span class="readmore"><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Tell me more</span></a></span>
+					<span class="readmore"><a href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Tell me more</span></a></span>
 				</div>';
 
         if(!empty($result['PDType'])) {
@@ -298,8 +298,6 @@ if(isset($results['MResponse'])) {
 		} elseif($Div >= 5){
 			echo '<i class="fa fa-lg open" aria-hidden="true"></i><span>Open</span>';
 		}
-		//echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Almost full</span></a>';
-		//echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Open</span></a>';	
 		echo	"</div>";
 		echo "</div>";
 
