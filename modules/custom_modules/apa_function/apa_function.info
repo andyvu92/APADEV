@@ -1,0 +1,5 @@
+name = APA Function Module
+description = Handle all functions files
+
+package = APA Custom
+core = 7.x

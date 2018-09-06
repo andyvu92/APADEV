@@ -1435,7 +1435,7 @@ $userRetisterStatus = false;
 							$('#errorFormat').html("This email address is not valid format");
 							$( "#Memberid" ).focus();
 							$("#Memberid").css("border", "1px solid red");
-							//$(".join-details-button2").addClass("display-none");
+							
 							$(".accent-btn").addClass("stop");
 							return;
 						}
@@ -1443,21 +1443,21 @@ $userRetisterStatus = false;
 							$('#errorFormat').html("");
 							$( "#Memberid" ).blur();
 							$("#Memberid").css("border", "");
-							//$(".join-details-button2").removeClass("display-none");
+							
 							$(".accent-btn").removeClass("stop");
 						}
 						$.ajax({
-						url:"../sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
+						url:"apa/checkemail", 
 						type: "POST", 
 						data: {CheckEmailID: email},
 						success:function(response) { 
 						var result = response;
 						if(result=="T"){
-							//$('#checkMessage').html("this email address has already registered, please use another one");
+							
 							$('#checkMessage').removeClass("display-none");
 							$( "#Memberid" ).focus();
 							$("#Memberid").css("border", "1px solid red");
-							//$(".join-details-button2").addClass("display-none");
+							
 							$(".accent-btn").addClass("stop");
 							
 						}
