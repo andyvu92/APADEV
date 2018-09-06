@@ -135,8 +135,8 @@ if(isset($_POST["Invoice_ID"])) {
 ?></a></p>-->
 <a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 */ ?>
-<p>Your invoice will be sent to your inbox shortly</p>
-<a class="addCartlink" href="../your-purchases"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>
+<p>Order confirmation or invoice will be email to you shortly.</p>
+<!--<a class="addCartlink" href="../your-purchases"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>-->
 
 <?php else:?>
 <!-- FAIL PURCHASE -->
