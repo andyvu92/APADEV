@@ -159,7 +159,6 @@
     width: 500px !important;
     top: 30vh!important;
     max-height: 80vh;
-    overflow-y: auto;
     position: fixed!important;
     background: #fff;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
@@ -320,6 +319,10 @@ div[aria-describedby="myMap"] .ui-widget-header{
         .modal-footer{
             margin-top: 0;
         }
+    }
+    .modal-footer{
+        display: flex;
+        justify-content: center;
     }
 }
 
@@ -564,8 +567,18 @@ div[aria-describedby="QuatationPopUp"].ui-dialog{
         overflow:hidden!important;
         font-family: Roboto;
     }
-    a{
-        margin-bottom: 0;
+    .buttons{
+        display: flex;
+        justify-content: center;
+        a{
+            margin-bottom: 0;
+            display: flex;
+            justify-content: center;
+            margin: 0 5px;
+            span{
+                padding: 0!important;
+            }
+        }
     }
 }
 
@@ -573,6 +586,10 @@ div[aria-describedby="QuatationPopUp"].ui-dialog{
 #privacypolicyWindow {
     z-index: 1056 !important;
     .large-popup;
+    .modal-footer {
+        display: flex;
+        justify-content: center;
+    }
 }
 
 /* JOIN/RENEW FORMS - INSTALMENT */
