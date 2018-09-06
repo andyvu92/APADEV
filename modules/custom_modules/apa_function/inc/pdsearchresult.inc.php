@@ -240,9 +240,9 @@ if(isset($results['MResponse'])) {
 
 		echo "<div class='flex-cell flex-flow-row'>";
 		echo	'<div class="flex-col-3">
-					<span class="title"><a target="_blank" href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a></span>
+					<span class="title"><a href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a></span>
 					<div class='excerpt'><p>".$result['Description'].'</p></div>
-					<span class="readmore"><a target="_blank" href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Tell me more</span></a></span>
+					<span class="readmore"><a href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Tell me more</span></a></span>
 				</div>';
 
         if(!empty($result['PDType'])) {
