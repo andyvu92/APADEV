@@ -290,13 +290,13 @@ if(isset($_POST['step1'])) {
 // QIP}, Undergraduate degree, Undergraduate Uni name, Undergraduate Country,
 // Year attained, Post graduate degree, post graduate name, 
 // Post graduate country, Year attained, Additional qualifications
-if(isset($_SESSION["UserId"])) {
+/*if(isset($_SESSION["UserId"])) {
 	$data = "UserID=".$_SESSION["UserId"];
 	$details = GetAptifyData("4", $data,""); // #_SESSION["UserID"];
 	//2.2.43 -get user installment data test part
 	$installmentData['id'] = $_SESSION["UserId"];
 	$installmentOrder = GetAptifyData("43", $installmentData);
-}
+}*/
 
 
 
