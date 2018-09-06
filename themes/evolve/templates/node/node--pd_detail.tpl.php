@@ -1522,6 +1522,11 @@ $userRetisterStatus = false;
 							$( "#newPassword" ).focus();
 							$("#newPassword").css("border", "1px solid #ffa02e");
 							$(".join-details-button2").addClass("display-none");
+						}else if($( "#Password" ).val().length <= 7){
+							$('#checkPasswordMessage').html("8 characters minimum");
+							$( "#Password" ).focus();
+							$("#Password").addClass('focuscss');
+							$(".join-details-button2").addClass("display-none");
 						}
 						else{
 							$('#PasswordMessage').html("");
@@ -1537,6 +1542,11 @@ $userRetisterStatus = false;
 							$("#Password").css("border", "1px solid #ffa02e");
 							$(".join-details-button2").addClass("display-none");
 							
+						}else if($( "#Password" ).val().length <= 7){
+							$('#checkPasswordMessage').html("8 characters minimum");
+							$( "#Password" ).focus();
+							$("#Password").addClass('focuscss');
+							$(".join-details-button2").addClass("display-none");
 						}
 						else{
 							$('#checkPasswordMessage').html("");
