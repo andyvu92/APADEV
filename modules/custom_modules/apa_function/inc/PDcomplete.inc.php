@@ -28,6 +28,14 @@ if(isset($_POST["POSTPRF"])) {
 			
 		}
 	}
+	if(isset($_POST["totalMG"])){
+		for($i = 1; $i <= intval($_POST["totalMG"]); $i++) {
+			//$PID["PID"] = $_POST["PID".$i];
+			$PID = $_POST["MG".$i];
+			array_push($PIDs, $PID);
+			
+		}
+	}
 	$OrderSend["productID"] = $PIDs;
 	if(isset($_SESSION["tempcard"])){
 		$cardDetails = $_SESSION["tempcard"];

@@ -26,11 +26,19 @@ if(isset($_POST["PostNG"])) {
 	 *  Save National Group in PD shopping cart
 	 *  added by jing hu
 	 */
-	
-	foreach($NGPostArray as $NG){
-		checkShoppingCart($userID=$_SESSION['UserId'], $type="PDNG", $productID=$NG,$coupon = "");
-        createShoppingCart($userID, $productID=$NG, $type = "PDNG", $coupon = "");
-		//PDShoppingCart($userID=$_SESSION['UserId'], $productID=$NG, $meetingID="",$type="PDNG",$Coupon="");
+	if(sizeof($NGPostArray)!=0){
+		foreach($NGPostArray as $NG){
+			if($NG=="9977" || $NG=="9978"){
+				checkShoppingCart($userID=$_SESSION['UserId'], $type="PDMG", $productID=$NG,$coupon = "");
+				createShoppingCart($userID, $productID=$NG, $type = "PDMG", $coupon = "");
+			}
+			else{
+				checkShoppingCart($userID=$_SESSION['UserId'], $type="PDNG", $productID=$NG,$coupon = "");
+				createShoppingCart($userID, $productID=$NG, $type = "PDNG", $coupon = "");
+			}
+			
+			//PDShoppingCart($userID=$_SESSION['UserId'], $productID=$NG, $meetingID="",$type="PDNG",$Coupon="");
+		}
 	}
 /***************End Save National Group in PD shopping cart***********/
 }
@@ -114,10 +122,28 @@ foreach ($productList as $productDetail){
  */
 $NGProductsArray = array(); 
 $NGProductsArray = getProduct($userID=$_SESSION['UserId'],$type="PDNG"); 
+
 if(sizeof($NGProductsArray)!=0) {
 	foreach($NGProductsArray as $singleNG){
 		array_push($PDProductarray, $singleNG);
 	}
+}
+/**
+ *  Get Magazine products for PD shopping cart
+ *  added by jing hu 06092018
+ */
+$MGProductsArray = array();
+
+$MGProductsArray = getProduct($userID=$_SESSION['UserId'],$type="PDMG"); 
+if(sizeof($MGProductsArray)!=0) {
+	foreach($MGProductsArray as $singleMG){
+		array_push($PDProductarray, $singleMG);
+	}
+}
+$FPListArray = array();
+if(sizeof($MGProductsArray)!=0){
+		$fpData['ProductID'] = $MGProductsArray;
+		$FPListArray = GetAptifyData("21", $fpData);
 }
 
 //$RequestCart = array('Id' => $PIDArray, "userID" => $UserID, "Coupon" => $CouponArray);
@@ -192,9 +218,9 @@ if(isset($_SESSION["UserId"])){
 	
 } 
 ?>
-<?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0)):?>
+<?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0) || (sizeof($FPListArray)!=0)):?>
 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 left-content">
-	<?php if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0)):?>
+	<?php if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0) || (sizeof($FPListArray)!=0)):?>
 	
 	<h1 class="SectionHeader">Summary of cart</h1>
 	<div class="brd-headling">&nbsp;</div>
@@ -273,7 +299,26 @@ if(isset($_SESSION["UserId"])){
 			}
 		}
 	}	
-		
+	if(sizeof($FPListArray)!=0){
+		foreach( $FPListArray as $MGArray){
+			
+				
+					
+						echo "<div class='flex-cell flex-flow-row table-cell'>";
+						
+						echo "<div class='flex-col-3 title-col'>".$MGArray['FPtitle']."</div>";
+						echo	"<div class='flex-col-3 pd-spcart-date'>N/A</div>";
+						echo	"<div class='flex-col-2 pd-spcart-location'><span class='mobile-visible'>Location: </span>N/A</div>";
+						echo "<div class='flex-col-1 pd-spcart-price'>A$".$MGArray['FPprice']."</div>";
+						//$price += $NGArray['NGprice'];
+						//echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
+						echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PDMG&productid='.$MGArray['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
+						echo "</div>";
+						  
+				
+			
+		}
+	}		
 	?>
 	</div>
 	<?php endif; ?>
@@ -467,10 +512,14 @@ if(isset($_SESSION["UserId"])){
 		</div>
 	</form>	
 	<?php endif; ?>
-	<?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0)):?>
+	<?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0) || (sizeof($FPListArray)!=0)):?>
 		<div class="row">
 			<div class="col-xs-12"><span class="sidebardis">PRF donation</span></div>
-			<div class="col-xs-12 col-md-12">
+			<div class="col-xs-12">
+				<input class="styled-checkbox" type="checkbox" id="prftag" name="prftag">
+				<label for="prftag" id="prftagAgree">No, I do not want to make a donation to the PRF</label>
+			</div>
+			<div class="col-xs-12 col-md-12" id="prfselect">
 				<div class="chevron-select-box">
 					<select class="form-control" id="PRF" name="PRF">
 						<option value="5" selected>$5.00</option>
@@ -552,6 +601,17 @@ if(isset($_SESSION["UserId"])){
 				echo '<input type="hidden" name="totalNG" id="totalNG" value="'.$ngTotal.'">';
 			}
 			?>
+			<?php
+			if(sizeof($MGProductsArray)!=0) {
+				$mgTotal = count($MGProductsArray);
+				$mt = 0;
+				foreach($MGProductsArray as $MGP) {
+					$mt++;
+					echo '<input type="hidden" name="MG'.$mt.'" id="MG'.$mt.'" value="'.$MGP.'">';
+				}
+				echo '<input type="hidden" name="totalMG" id="totalMG" value="'.$mgTotal.'">';
+			}
+			?>
 			<a href="javascript:document.getElementById('PDShoppingcartForm').submit();" class="placeorder" value="PLACE YOUR ORDER" id="PDPlaceOrder"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton<?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>">Place your order</button></a>
 			<!--a target="_blank" class="addCartlink">
 				<button class="placeorder" type="submit">PLACE YOUR ORDER</button>
@@ -560,7 +620,7 @@ if(isset($_SESSION["UserId"])){
 	</div>
 
 <?php endif; ?>
-<?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0) : ?>   <div  class="col-xs-12 no-item-title" style="text-align: center"><h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3></div>      <?php endif;?>
+<?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0 && sizeof($FPListArray)==0) : ?>   <div  class="col-xs-12 no-item-title" style="text-align: center"><h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3></div>      <?php endif;?>
 <div class="col-xs-12 bottom-buttons">
  	<a target="_blank" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
  	<a target="_blank" class="addCartlink" href="../your-details?Goback=PD"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
