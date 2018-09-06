@@ -17,6 +17,7 @@ if(isset($_GET["ProductID"])){
 // Response - national group
 $sendData["UserID"] = "-1";
 $nationalGroups = GetAptifyData("19", $sendData);
+sort($nationalGroups);
 // 2.2.20 - GET list of subscribed National Group
 // Send - 
 // User ID

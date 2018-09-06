@@ -5,6 +5,7 @@
 // Response - national group
 $sendData["UserID"] = "-1";
 $nationalGroups = GetAptifyData("19", $sendData);
+sort($nationalGroups);
 // use one of above to get "current" data
 // and combine with existing data ("$Subsctiption")
 // Then send it to Aptify.
