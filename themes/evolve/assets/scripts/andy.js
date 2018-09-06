@@ -136,10 +136,18 @@ jQuery(document).ready(function ($) {
 
 //AUTO SCROLL ON SEARCH
 jQuery(document).ready(function() {
+  var is_mobile = true;
+  if( $('#mobile-detector').is(':visible')) {
+    is_mobile = false;       
+  }
 	if(window.location.href.indexOf("?page") > -1||window.location.href.indexOf("?pagesize") > -1 || window.location.href.indexOf("?search-result") > -1){
-    var scrollpoint = $('#section-content-top').offset().top  - 200;
-		$('html, body').animate({ scrollTop: scrollpoint }, 1000);
-	}
+    var scrollpoint = $('#section-content-top').offset().top  - 265;
+    if (is_mobile == true) {
+      var scrollpoint = $('#section-content-top').offset().top  - 200;
+    }
+    $('html, body').animate({ scrollTop: scrollpoint }, 1000);
+  }
+  
 });
 
 //SET BACKGROUND FOR EACH HOME PAGE ARTICLE CONTENT

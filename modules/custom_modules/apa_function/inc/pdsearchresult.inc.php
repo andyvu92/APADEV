@@ -206,6 +206,7 @@ if(isset($results['MResponse'])) {
 </div>		
 <?php              /**************************************pagination settings***************************/        ?>  
 <div class="col-xs-12" style="padding:0;">
+<div id="mobile-detector"></div>
 <div class="flex-container" id="pd-search-results">
 
     <div class="flex-cell flex-flow-row heading-row">
