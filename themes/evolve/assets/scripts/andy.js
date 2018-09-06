@@ -137,7 +137,8 @@ jQuery(document).ready(function ($) {
 //AUTO SCROLL ON SEARCH
 jQuery(document).ready(function() {
 	if(window.location.href.indexOf("?page") > -1||window.location.href.indexOf("?pagesize") > -1 || window.location.href.indexOf("?search-result") > -1){
-		$('html, body').animate({ scrollTop: $('#section-content-top').offset().top  - $('#section-header').height() }, 1000);
+    var scrollpoint = $('#section-content-top').offset().top  - 200;
+		$('html, body').animate({ scrollTop: scrollpoint }, 1000);
 	}
 });
 
@@ -150,6 +151,14 @@ jQuery(function ($) {
 }) 
 
 //SET BACKGROUND FOR EACH MEDIA PAGE ARTICLE CONTENT
+jQuery(function ($) {
+  var someId = $(".node-inmotion .file-image .content");
+  someId.css('background', function () {
+      return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
+  })
+}) 
+
+//SET BACKGROUND FOR EACH MEDIA ARTICLE CONTENT SIDEBAR
 jQuery(function ($) {
   var someId = $(".node-media .post-img");
   someId.css('background', function () {
@@ -401,3 +410,7 @@ jQuery(document).ready(function(){
   });
 });
 
+// INMOTION BLOG: BRING PREV BUTTON ABOVE ADS
+jQuery(document).ready(function(){
+  $('#prev-btn .prev').replaceWith( $('.go-back-button') );
+});

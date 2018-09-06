@@ -62,7 +62,7 @@ if(isset($_POST["NONAPA"])) {
 	$NCPDPDF = GetAptifyData("38", "UserID");//$_SESSON["UserID"]
 	// todo!
 }
-
+$DiaryAll = Array();
 ?>
 
 <div id="CPD-diary-main">
@@ -71,51 +71,108 @@ if(isset($_POST["NONAPA"])) {
 <div class="region region-content col-xs-12 col-sm-12 col-md-12 col-lg-12">
 <h1 class="SectionHeader">Your CPD diary</h1>
 
-<div class="APAhours">
-  <div class="APAhoursHead">
-    <div>Completed PD</div><div>Date</div><div>Hours</div>
-  </div>
-  <div class="APAhoursContent">
-    <?php
-		if(sizeof($APA) > 0) {
-			foreach($APA as $rowData) {
-				$date = date("d-m-Y", strtotime($rowData["Date"]));
-				echo "<div style='display: none;'>".$rowData["Id"]."</div><div>".$rowData["Title"]."&nbsp;</div><div>".$date."</div><div>".$rowData["Hours"]."</div>";
-				echo "<div class='lineBreak'>&nbsp;</div>";
+
+<div class="Tabs1"><a>APA hours</a></div>
+<div class="Tabs2"><a>Non-APA hours</a></div>
+<div class="Tabs3"><a>All hours</a></div>
+<div class='lineBreak'>&nbsp;</div>
+<div class="TabContents1">
+	<div class="APAhours">
+		<div class="APAhoursHead flex-cell flex-flow-row heading-row">
+			<div class="flex-col-5 table-heading">Completed PD</div><div class="flex-col-2 table-heading">Date</div><div class="flex-col-2 table-heading">Hours</div><div class="flex-col-3 table-heading">Provider</div>
+		</div>
+		<div class="APAhoursContent">
+		<?php
+			if(sizeof($APA) > 0) {
+				function date_sortA($a, $b) {
+					$c = strtotime($b["Date"]) - strtotime($a["Date"]);
+					$c .= strcmp($b["Title"], $a["Title"]);
+					return $c;
+				}
+				usort($APA, "date_sortA");
+				foreach($APA as $rowData) {
+					echo "<div class='flex-cell flex-flow-row'>";
+					$date = date("d/m/Y", strtotime($rowData["Date"]));
+					echo "<div style='display: none;'>".$rowData["Id"]."</div><div class='flex-col-5'><b>".$rowData["Title"]."&nbsp;</b></div><div class='flex-col-2'>".$date."</div><div class='flex-col-2'>".$rowData["Hours"]."</div>";
+					echo "<div class='flex-col-3'>Australian Physiotherapy Association</div><div class='lineBreak'>&nbsp;</div>";
+					echo "</div>";
+					$arrT["ID"] = $rowData["Id"];
+					$arrT["Description"] = $rowData["Title"];
+					$arrT["Date"] = $rowData["Date"];
+					$arrT["Hours"] = $rowData["Hours"];
+					$arrT["Provider"] = "Australian Physiotherapy Association";
+					$arrT["Reflection"] = "";
+					array_push($DiaryAll, $arrT);
+				}
+			} else {
+				echo "<div style='display: none;'>&nbsp;</div><div>No PD information found.</div><div>&nbsp;</div><div>0</div>";
 			}
-		} else {
-			echo "<div style='display: none;'>&nbsp;</div><div>No PD information found.</div><div>&nbsp;</div><div>0</div>";
-		}
-    ?> 
-  </div>
+		?> 
+		</div>
+	</div>
 </div>
 
-<h1 class="SectionHeader">Non-APA hours</h1>
-<div class="brd-headling">&nbsp;</div>
-
-<button class="Non-APA-hour" data-toggle="modal" data-target="#nonAPAhour"><span>Add non-APA hours</span></button><br />
-<form action="/pd/cpd-diary" method="POST">
-</form>
-<br />
-
+<div class="TabContents2" style="display: none;">
 <!--strong><a href="http://www.physiotherapyboard.gov.au/documents/default.aspx?record=WD15%2f18489&dbid=AP&chksum=ewqLtzOm4m%2fsRUrlGCmo1A%3d%3d">This is based on Physiotherapy Board of Australia's Continuing professional development form.</a></strong-->
 <div class="NAPAhours">
-  <div class="NAPAhoursHead">
-    <div>Date</div><div>Description</div><div>Time</div><div>Provider</div><div>Reflection</div>
+  <div class="NAPAhoursHead flex-cell flex-flow-row heading-row">
+    <div class="flex-col-4 table-heading ">Description</div><div class="flex-col-1 table-heading ">Date</div><div class="flex-col-1 table-heading ">Hours</div><div class="flex-col-2 table-heading ">Provider</div><div class="flex-col-4 table-heading ">Reflection</div>
   </div>
   <div class="NAPAhoursContent">
     <?php
 	if(sizeof($NAPA) > 0) {
+		function date_sort($a, $b) {
+			$c = strtotime($b["Date"]) - strtotime($a["Date"]);
+			$c .= strcmp($b["Description"], $a["Description"]);
+			return $c;
+		}
+		usort($NAPA, "date_sort");
 		foreach($NAPA as $rowData) {
-			$date = date("d-m-Y", strtotime($rowData["Date"]));
-			echo "<div style='display: none;'>".$rowData["NPDid"]."</div><div>".$date."</div><div>".$rowData["Description"]."</div><div>".$rowData["Time"]."</div><div>".$rowData["Provider"]."</div><div>".$rowData["Reflection"]."</div>";
+			echo "<div class='flex-cell flex-flow-row'>";
+			$date = date("d/m/Y", strtotime($rowData["Date"]));
+			echo "<div style='display: none;'>".$rowData["NPDid"]."</div><div class='flex-col-4'><b>".$rowData["Description"]."</b></div><div class='flex-col-1'>".$date."</div><div class='flex-col-1'>".$rowData["Time"]."</div><div class='flex-col-2'>".$rowData["Provider"]."</div><div class='flex-col-4'>".$rowData["Reflection"]."</div>";
 			echo "<div class='lineBreak'>&nbsp;</div>";
+			echo "</div>";
+			$arrT["ID"] = $rowData["NPDid"];
+			$arrT["Description"] = $rowData["Description"];
+			$arrT["Date"] = $rowData["Date"];
+			$arrT["Hours"] = $rowData["Time"];
+			$arrT["Provider"] = $rowData["Provider"];
+			$arrT["Reflection"] = $rowData["Reflection"];
+			array_push($DiaryAll, $arrT);
 		}
 	}else {
 		echo "<div style='display: none;'>&nbsp;</div><div>&nbsp;</div><div>No PD information was found.</div><div>0</div><div>&nbsp;</div><div>&nbsp;</div>";
 	}
     ?> 
   </div>
+</div>
+<button class="Non-APA-hour" data-toggle="modal" data-target="#nonAPAhour"><span>Add non-APA hours</span></button><br />
+<form action="/pd/cpd-diary" method="POST">
+</form>
+</div>
+<div class="TabContents3" style="display: none;">
+	<div class="NAPAhours">
+	<div class="NAPAhoursHead flex-cell flex-flow-row heading-row">
+		<div class="flex-col-4 table-heading ">Description</div><div class="flex-col-1 table-heading ">Date</div><div class="flex-col-1 table-heading ">Hours</div><div class="flex-col-2 table-heading ">Provider</div><div class="flex-col-4 table-heading ">Reflection</div>
+	</div>
+	<div class="NAPAhoursContent">
+		<?php
+		if(sizeof($DiaryAll) > 0) {
+			usort($DiaryAll, "date_sort");
+			foreach($DiaryAll as $rowData) {
+				$date = date("d/m/Y", strtotime($rowData["Date"]));
+				echo "<div class='flex-cell flex-flow-row'>";
+				echo "<div style='display: none;'>".$rowData["ID"]."</div><div class='flex-col-4'><b>".$rowData["Description"]."</b></div><div class='flex-col-1'>".$date."</div><div class='flex-col-1'>".$rowData["Hours"]."</div><div class='flex-col-2'>".$rowData["Provider"]."</div><div class='flex-col-4'>".$rowData["Reflection"]."</div>";
+				echo "<div class='lineBreak'>&nbsp;</div>";
+				echo "</div>";
+			}
+		}else {
+			echo "<div style='display: none;'>&nbsp;</div><div>&nbsp;</div><div>No PD information was found.</div><div>0</div><div>&nbsp;</div><div>&nbsp;</div>";
+		}
+		?> 
+	</div>
+	</div>
 </div>
 
 </div>
@@ -134,16 +191,22 @@ if(isset($_POST["NONAPA"])) {
 		<form name="formradio" action="cpd-diary" method="POST">
 		<div class="modal-body">
 			<input type="hidden" name="nonAPA" value="1" placeholder="" id="hidden">
-			<label for="DateNA">Date</label>
-			<input type="date" required="true" name="Date" placeholder="" id="DateNA">
+			<div class="col-lg-12">
 			<label for="DescripotionNA">Description</label>
 			<input type="text" required="true" name="Description" placeholder="" id="Description">
+			</div><div class="col-lg-12">
+			<label for="DateNA">Date</label>
+			<input type="date" required="true" name="Date" placeholder="" id="DateNA">
+			</div><div class="col-lg-12">
 			<label for="TimeNA">Time</label>
 			<input type="number" required="true" name="Time" placeholder="" id="TimeNA">
+			</div><div class="col-lg-12">
 			<label for="ProviderNA">Provider</label>
 			<input type="text" required="true" name="Provider" placeholder="" id="ProviderNA">
+			</div><div class="col-lg-12">
 			<label for="ReflectionNA">Reflection</label>
 			<input type="text" required="true" name="Reflection" placeholder="" id="ReflectionNA">
+			</div>
 		</div>
 		<div class="modal-footer">
 			<button type="Submit" class="btn btn-default" id="saveNA">Save</button>

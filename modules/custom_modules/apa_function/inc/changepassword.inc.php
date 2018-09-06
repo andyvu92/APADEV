@@ -1,5 +1,5 @@
 <?php
-include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
+apa_function_updateBackgroundImage_form();
 /* get background image****/
 if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID =0; }
 $background = getBackgroundImage($userID);
@@ -26,7 +26,7 @@ if(isset($_SESSION["Log-in"])) : ?>
 ?>	
 <?php	else: ?> 
 <div id="pre_background" style="display:none">background_<?php echo $background;  ?></div>
-<?php include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php'); ?> 
+<?php apa_function_dashboardLeftNavigation_form(); ?> 
 <div class="col-xs-12 col-md-10 background_<?php echo $background; ?>" id="dashboard-right-content">
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">

@@ -107,7 +107,7 @@
       </header>
       */ //['field_emailauthor']['und'][0]['value']?>
       <?php /*print_r ($content['field_research_author']['#items']); */?>	
-      <div class="region col-xs-12 col-sm-12 col-md-9 col-lg-9">
+      <div class="region col-xs-12 col-sm-12 col-md-8 col-lg-8">
          <h1 class="SectionHeader"><?php print $node->title;?></h1>
          <div class="brd-headling">&nbsp;</div>
 			
@@ -189,7 +189,7 @@
 	
       </div>
 	  
-      <div class="block CampaignSidebar contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
+      <div class="block CampaignSidebar contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-4 col-lg-4" style="margin:0 0 50px">
          <h3 class="headline">Most Popular</h3>
          <span class="brd-headling"></span>
          <div class="content">
@@ -221,7 +221,7 @@
 	?>
 	
    </section>
-	<a class="go-back-button button" href="javascript:history.go(-1)">&lt;&nbsp;GO BACK</a>
+	<a class="go-back-button button" href="javascript:history.go(-1)">&lt;&nbsp;Back to previous</a>
    <!---line-->
    <!----line--->
 </div>
