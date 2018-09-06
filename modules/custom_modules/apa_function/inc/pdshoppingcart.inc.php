@@ -270,7 +270,6 @@ if(isset($_SESSION["UserId"])){
 				//echo	"<td>".$productt['Pricelist'][0]['Price']."</td>";
 				//echo	"<td>NM price</td>";
 			//}
-			//echo        '<div class="flex-col-2 pd-spcart-wishlist"><a target="_blank" href="pd-wishlist?addWishList&UID='.$pass.'">ADD TO WISHLIST</a></div>';
 			echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
 			echo "</div>";    
 			$n=$n+1;
@@ -613,9 +612,6 @@ if(isset($_SESSION["UserId"])){
 			}
 			?>
 			<a href="javascript:document.getElementById('PDShoppingcartForm').submit();" class="placeorder<?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" value="PLACE YOUR ORDER" id="PDPlaceOrder"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</button></a>
-			<!--a target="_blank" class="addCartlink">
-				<button class="placeorder" type="submit">PLACE YOUR ORDER</button>
-			</a-->
 		</form>
 	</div>
 

@@ -297,8 +297,6 @@ if(isset($results['MResponse'])) {
 		} elseif($Div >= 5){
 			echo '<i class="fa fa-lg open" aria-hidden="true"></i><span>Open</span>';
 		}
-		//echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Almost full</span></a>';
-		//echo '<a target="_blank" href="pd-wishlist?source=PD&create&id='.$result['MeetingID'].'&pd_type='.$result['PDType'].'"><i class="fa fa-heart fa-lg" aria-hidden="true"></i><span>Open</span></a>';	
 		echo	"</div>";
 		echo "</div>";
 
