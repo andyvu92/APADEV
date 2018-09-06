@@ -26,13 +26,14 @@
 		</div>
 
 		<div class="flex-cell submit-btn">
-			<input type="submit" value="Submit">
+			<input id="checkpassword" type="submit" value="Submit">
 		</div>
 		
 	</div>
 </form>
 <script>
 	function checkEmailFunction(email) {
+				email = $('#Fid').val();
 				jQuery.ajax({
 				url:"/sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
 				type: "POST", 
@@ -40,13 +41,15 @@
 				success:function(response) { 
 				var result = response;
 				if(result=="T"){
-					return;
+					$('#checkMessage').addClass("display-none");
+					$("#Fid").removeClass("focuscss");
+					$("#checkpassword").removeClass("stop");
 				}
 				else{
 					$('#checkMessage').removeClass("display-none");
-					$( "#Memberid" ).focus();
-					$("#Memberid").css("border", "1px solid red");
-					$(".accent-btn").addClass("stop");
+					$("#Fid").addClass("focuscss");
+					$("#checkpassword").addClass("stop");
+					return false;
 				}					
 				}
 				});
@@ -55,8 +58,26 @@
 <script>
 	jQuery(document).ready(function(){
 		$('#Fid').on('keyup', function(){
-			console.log('asd');
-			$(this).trigger('checkEmailFunction');
+			email = $(this).val();
+			jQuery.ajax({
+				url:"/sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
+				type: "POST", 
+				data: {CheckEmailID: email},
+				success:function(response) { 
+				var result = response;
+				if(result=="T"){
+					$('#checkMessage').addClass("display-none");
+					$("#Fid").removeClass("focuscss");
+					$("#checkpassword").removeClass("stop");
+				}
+				else{
+					$('#checkMessage').removeClass("display-none");
+					$("#Fid").addClass("focuscss");
+					$("#checkpassword").addClass("stop");
+					return false;
+				}					
+				}
+				});
 		});
 	});
 </script>

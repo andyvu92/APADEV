@@ -2029,6 +2029,25 @@ input[name="Couponcode"]{
                 }
             }
         }
+        @media all and (max-width: @larger-phone-width){
+            .sub-top-banner{
+                padding: 25px 25px;
+                font-size: 1.7em;
+            }
+            -webkit-background-size: 150%!important;
+            -moz-background-size: 150%!important;
+            -o-background-size: 150%!important;
+            background-size: 150%!important;
+                .top-banner{
+                    background-image: linear-gradient(to top,#000000 0%,#000000 40%,#000000 52%,rgba(255,255,255,0) 85%);                
+                .separator{
+                    margin: 10px 0;
+                }
+                .page-main-header{
+                    font-size: 2.5em;
+                }
+            }
+        }
     }  
 
     #block-block-123{
@@ -2099,8 +2118,19 @@ input[name="Couponcode"]{
         }
         @media all and (max-width: @larger-phone-width){
             .sub-top-banner{
-                padding: 10px 0;
-                font-size: 1.1em;
+                .left-content{
+                    padding-right: 0;
+                }
+                .lead-text{
+                    padding: 10px 0;
+                    font-size: 1.1em;
+                    & + span{
+                        display: none;
+                    }
+                }
+                .secondary-button{
+                    font-size: 0.8em;
+                }
             }
         }
     }
