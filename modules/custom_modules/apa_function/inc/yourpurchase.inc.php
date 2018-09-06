@@ -50,7 +50,7 @@ apa_function_dashboardLeftNavigation_form();
 						<div class="flex-cell flex-flow-row border-btm">
 
 							<div class="flex-col-6">
-								<span class="table-heading">Product Name</span>
+								<span class="table-heading">Order number</span>
 							</div>
 							<!--div class="flex-col-3 flex-center">
 								<span class="table-heading">Download Invoice</span>
@@ -72,23 +72,23 @@ apa_function_dashboardLeftNavigation_form();
 									$counter++;
 									$instal = false;
 									echo "<div class='flex-cell flex-flow-row'>";
-									echo "<div class='flex-col-6'><a class='Tabs".$counter."'>".$product['OrderLines'][0]['ProductName']."</a></div>";
+									echo "<div class='flex-col-6'><a class='Tabs".$counter."'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
 									//echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
-									echo "<div class='flex-col-3'>".number_format($product['Paymenttotal'],2)."</div>";
+									echo "<div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div>";
 									$OrderDate = date('d-m-Y', strtotime($product['Orderdate']));
 									echo "<div class='flex-col-3'>".$OrderDate."</div>";
 									echo "</div><div class='TabContents".$counter."' style='display: none;'>";
 									foreach($product["OrderLines"] as $orderDetails) {
 										echo "<div class='flex-cell flex-flow-row'>";
 										echo "<div class='flex-col-6'>".$orderDetails['ProductName']."</div>";
-										echo "<div class='flex-col-3'>".number_format($orderDetails['ProductPrice'],2)."</div>";
+										echo "<div class='flex-col-3'>$".number_format($orderDetails['ProductPrice'],2)."</div>";
 										echo "<div class='flex-col-3'></div></div>";
 										if($orderDetails['ProductName'] == "Administrative Fee") {$instal = true;}
 									}
 									if($instal) {
 										echo "<div class='flex-cell flex-flow-row'>";
 										echo "<div class='flex-col-6'><b>Left to pay</b></div>";
-										echo "<div class='flex-col-3'>".$product['Balance']."</div>";
+										echo "<div class='flex-col-3'>$".number_format($product['Balance'],2)."</div>";
 										echo "<div class='flex-col-3'></div></div>";
 									}
 									echo "</div>";
