@@ -327,8 +327,8 @@ jQuery(document).ready(function($) {
           $(this).val('0');
          }
     });
-	$('#p1-2').click(function(){
-        if($(this).is(":checked")){
+	$('input[name="Paymentoption"]').change(function(){
+        if($("#p1-2").is(":checked")){
 			$(this).attr('checked', true);
 			$(this).val('1');
 		
@@ -337,24 +337,29 @@ jQuery(document).ready(function($) {
             $(this).removeAttr('checked');
             $(this).val('0');
 		}
-		if($('#p1-2').is(":checked"))
+		if($("#p1-2").is(":checked"))
 		{
 			$('#rolloverblock').removeClass("display-none");
 			$('#Installpayment-frequency').val("Monthly");
 			var tempTotal = Number($('#totalPayment').html());
 			var Total = Number(tempTotal +12);
 			$('#totalPayment').html(Total);
+			$("#installmentafter").after('<div class="flex-cell flex-flow-row" id="installmentline"><div class="flex-col-7">Admin fee</div><div class="flex-col-5">$12</div></div>');
 		}
-				 
-    });
-	$('#p1-1').click(function(){
-		if($(this).is(":checked")){
+		else{
 			$('#rolloverblock').addClass("display-none");
 			var tempTotal = Number($('#totalPayment').html());
 			var Total = Number(tempTotal -12);
 			$('#totalPayment').html(Total);
+			$("#installmentline").remove();
 		}
-	});
+		
+			
+		
+		
+				 
+    });
+	
 	$('input[type="checkbox"]').click(function(){
         if($(this).is(":checked")){
         $(this).attr('checked', true);
