@@ -34,15 +34,17 @@ if(!function_exists('drupal_session_started'))
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Type of PD</label>
-		<select  name="Typeofpd" id="Typeofpd" multiple data-placeholder="Type of PD">
+		<select  name="Typeofpd[]" id="Typeofpd" multiple data-placeholder="Type of PD">
 			<?php 
 				$PDtypecode = file_get_contents("sites/all/themes/evolve/json/PDTypes.json");
 				$PDType = json_decode($PDtypecode, true);
 				foreach($PDType  as $key => $value){
 					$vals = '';
 					if(isset($_POST["Typeofpd"])) {
+						foreach($_POST['Typeofpd'] as $Typeofpdt) {if ($Typeofpdt == $PDType[$key]['ID']){ $vals = "selected='selected'"; } }
 						if($_POST["Typeofpd"]==$PDType[$key]['ID']) { $vals = "selected='selected'"; }
 					} elseif(isset($_GET["Typeofpd"])) {
+						foreach($_GET['Typeofpd'] as $Typeofpdt) {if ($Typeofpdt == $PDType[$key]['ID']){ $vals = "selected='selected'"; } }
 						if($_GET["Typeofpd"]==$PDType[$key]['ID']) { $vals = "selected='selected'"; }
 					}
 					echo '<option value="'.$PDType[$key]['ID'].'" '.$vals.'>'.$PDType[$key]['Name'].' </option>';
@@ -52,15 +54,15 @@ if(!function_exists('drupal_session_started'))
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>National group</label>
-		<select  name="Nationalgp" id="Nationalgp" multiple data-placeholder="National group">
+		<select  name="Nationalgp[]" id="Nationalgp" multiple data-placeholder="National group">
 		<?php
 		//$_SESSION["testTTdad"]["NationalGroup"]
 		foreach($details as $lines) {
 			$vals = '';
 			if(isset($_POST["Nationalgp"])) {
-				if($_POST["Nationalgp"]==$lines["NGid"]) { $vals = "selected='selected'"; }
+				foreach($_POST['Nationalgp'] as $Nationalgpt) {if ($Nationalgpt == $lines["NGid"]){ $vals = "selected='selected'"; } }
 			} elseif(isset($_GET["Nationalgp"])) {
-				if($_GET["Nationalgp"]==$lines["NGid"]) { $vals = "selected='selected'"; }
+				foreach($_GET['Nationalgp'] as $Nationalgpt) {if ($Nationalgpt == $lines["NGid"]){ $vals = "selected='selected'"; } }
 			}
 			echo '<option value="'.$lines["NGid"].'" '.$vals.'> '.$lines["NGtitle"].' </option>';
 		}
@@ -150,7 +152,8 @@ if(!function_exists('drupal_session_started'))
 	<div class="locationManual">
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<label>State</label>
-			<select name="State" id="State" multiple data-placeholder="State" id="State">
+			<select name="State" id="State" data-placeholder="State">
+				<option class="StateOption" select="selected" disabled>State</option>
 				<?php 
 				$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 				$State=json_decode($statecode, true);

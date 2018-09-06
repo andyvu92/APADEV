@@ -38,17 +38,17 @@ if(isset($_POST["Keyword"]) || isset($_GET["Keyword"])) {
 	else {$request["Keyword"] = $_GET["Keyword"];}
 } else { $request["Keyword"] = ""; }
 if(isset($_POST["Typeofpd"]) || isset($_GET["Typeofpd"])) {	
-	if(isset($_POST["Typeofpd"])) {$request["Typeofpd"] = $_POST["Typeofpd"];}
-	else {$request["Typeofpd"] = $_GET["Typeofpd"];}
+	if(isset($_POST["Typeofpd"])) {$request["Typeofpd"] = $_POST["Typeofpd"]; }
+	else {$request["Typeofpd"] = $_GET["Typeofpd"]; }
 } else { $request["Typeofpd"] = ""; }
 if(isset($_POST["Nationalgp"]) || isset($_GET["Nationalgp"])) {	
-	if(isset($_POST["Nationalgp"])) {$request["Nationalgp"] = $_POST["Nationalgp"];}
+	if(isset($_POST["Nationalgp"])) {$request["Nationalgp"] = $_POST["Nationalgp"]; }
 	else {$request["Nationalgp"] = $_GET["Nationalgp"];}
 } else { $request["Nationalgp"] = ""; }
 if(isset($_POST["Regionalgp"])) {	$request["Regionalgp"] = $_POST["Regionalgp"];
 } else { $request["Regionalgp"] = ""; }
 if(isset($_POST["State"]) || isset($_GET["State"])) {	
-	if(isset($_POST["State"])) {$request["State"] = $_POST["State"];}
+	if(isset($_POST["State"])) {$request["State"] = $_POST["State"]; }
 	else {$request["State"] = $_GET["State"];}
 } else { $request["State"] = ""; }
 if(isset($_POST["Suburb"]) || isset($_GET["Suburb"])) {	
@@ -135,7 +135,13 @@ if(isset($results['MResponse'])) {
 			$key = array_search($reqt, $request);
 			if($key != "PageSize") {
 				if($key != "PageNumber") {
-					$passString = $passString.$key."=".$reqt."&";
+					if(is_array($reqt)) {
+						foreach($reqt as $ty) {
+							$passString = $passString.$key."[]=".$ty."&";
+						}
+					} else {
+						$passString = $passString.$key."=".$reqt."&";
+					}					
 				}
 			}
 		}
@@ -161,7 +167,7 @@ if(isset($results['MResponse'])) {
 		$front = (10 * $i);
 		$back = 10 * ($i + 1) + 1;
 		if($front < $current && $current <= ($back - 1)) {
-			echo '<h3 class="light-lead-heading align-center">PD BASED ON YOUR PROFILE</h3>';
+			echo '<h3 class="light-lead-heading align-center">PD BASED ON YOUR SEARCH</h3>';
 			if($front == 0) {
 				echo '<div class="pager col-xs-12 col-sm-6 col-md-7"><a href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.$passString.'"><div class="Pagebutton"><<</div></a>';
 			} else {
