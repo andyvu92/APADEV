@@ -722,7 +722,7 @@ apa_function_dashboardLeftNavigation_form();
 
 							<div class="col-xs-6 col-md-6">
 								<label for="">Postcode<span class="tipstyle"> *</span></label>
-								<input type="text" class="form-control" name="Postcode"  <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?> required>
+								<input type="number" class="form-control" name="Postcode"  <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?> required>
 							</div>
 
 							<div class="col-xs-6 col-md-6">
@@ -806,7 +806,7 @@ apa_function_dashboardLeftNavigation_form();
 
 						<div class="col-xs-6 col-md-6">
 							<label for="">Postcode</label>
-							<input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?> required>
+							<input type="number" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?> required>
 						</div>
 
 						<div class="col-xs-6 col-md-6">
@@ -1122,7 +1122,7 @@ apa_function_dashboardLeftNavigation_form();
 
 						<div class="col-xs-6 col-md-6">
 							<label for="">Postcode</label>
-							<input type="text" class="form-control" name="Shipping-postcode" id="Shipping-postcode"  <?php if (empty($details['Shipping-postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Shipping-postcode'].'"'; }?> required>
+							<input type="number" class="form-control" name="Shipping-postcode" id="Shipping-postcode"  <?php if (empty($details['Shipping-postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Shipping-postcode'].'"'; }?> required>
 						</div>
 
 						<div class="col-xs-6 col-md-6">
@@ -1207,7 +1207,7 @@ apa_function_dashboardLeftNavigation_form();
 
 						<div class="col-xs-6 col-md-6">
 							<label for="">Postcode</label>
-							<input type="text" class="form-control" name="Mailing-postcode" id="Mailing-postcode"  <?php if (empty($details['Mailing-postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Mailing-postcode'].'"'; }?> required>
+							<input type="number" class="form-control" name="Mailing-postcode" id="Mailing-postcode"  <?php if (empty($details['Mailing-postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Mailing-postcode'].'"'; }?> required>
 						</div>
 
 						<div class="col-xs-6 col-md-6">
