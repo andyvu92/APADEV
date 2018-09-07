@@ -8,7 +8,7 @@ $memberType = $_POST['memberType'];
 $interestAreas= $sessioninterestAreas;
 
 echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
- if($memberType!="9993" && $memberType!="9994" && $memberType!="9968" && $memberType!="9997" && $memberType!="10004" && $memberType!="17" && $memberType!="18" && $memberType!="21" && $memberType!="22" && $memberType!="31" && $memberType!="32" && $memberType!="34"  && $memberType!="35" && $memberType!="36" && $memberType!="37")
+ if($memberType!="9966" && $memberType!="9993" && $memberType!="9994" && $memberType!="9968" && $memberType!="9997" && $memberType!="10004" && $memberType!="17" && $memberType!="18" && $memberType!="21" && $memberType!="22" && $memberType!="31" && $memberType!="32" && $memberType!="34"  && $memberType!="35" && $memberType!="36" && $memberType!="37")
  {echo '   
 	<div class="col-xs-12 FapTagC">
 		<input class="styled-checkbox" type="checkbox" name="Findphysio'.$i.'" id="Findphysio'.$i.'" value="" >

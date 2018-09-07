@@ -966,7 +966,7 @@ jQuery(document).ready(function($) {
 	
 	$('body').on('change', 'select', function() {
 		
-			if($('select[name=MemberType]').val()=="9993" || $('select[name=MemberType]').val()=="9994" || $('select[name=MemberType]').val()=="9968"|| $('select[name=MemberType]').val()=="9997"|| $('select[name=MemberType]').val()=="10004"){
+			if($('select[name=MemberType]').val()=="9966" || $('select[name=MemberType]').val()=="9993" || $('select[name=MemberType]').val()=="9994" || $('select[name=MemberType]').val()=="9968"|| $('select[name=MemberType]').val()=="9997"|| $('select[name=MemberType]').val()=="10004"){
 				$( ".FapTagC" ).addClass('display-none');
 				$( ".FapTagA" ).addClass('display-none');
 					
@@ -978,7 +978,7 @@ jQuery(document).ready(function($) {
 		
 		
 	});
-	if($('select[name=MemberType]').val()=="9993" || $('select[name=MemberType]').val()=="9994" || $('select[name=MemberType]').val()=="9968"|| $('select[name=MemberType]').val()=="9997" || $('select[name=MemberType]').val()=="10004"){
+	if($('select[name=MemberType]').val()=="9966" || $('select[name=MemberType]').val()=="9993" || $('select[name=MemberType]').val()=="9994" || $('select[name=MemberType]').val()=="9968"|| $('select[name=MemberType]').val()=="9997" || $('select[name=MemberType]').val()=="10004"){
 			$( ".FapTagC" ).addClass('display-none');
 			$( ".FapTagA" ).addClass('display-none');
 				
