@@ -535,6 +535,10 @@ if (isset($_POST['refreshTag'])) {
 				unset($_SESSION["UserName"]);
 				unset($_SESSION["Password"]);
 			}
+			else{
+				
+				header("Location: /failure");
+			}
 		}
 		
 		unset($_SESSION["Regional-group"]);

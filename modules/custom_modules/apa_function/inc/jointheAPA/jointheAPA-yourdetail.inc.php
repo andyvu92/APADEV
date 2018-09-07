@@ -2895,7 +2895,7 @@ if(isset($_POST['MT'])){
 							$("#newPassword").addClass('focuscss');
 							$(".join-details-button2").addClass("display-none");
 							
-						}else if($( "#Password" ).val().length <= 7){
+						}else if($( "#Password" ).val()!="" && $( "#Password" ).val().length <= 7){
 							$('#checkPasswordMessage').html("8 characters minimum");
 							$( "#Password" ).focus();
 							$("#Password").addClass('focuscss');
