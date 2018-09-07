@@ -262,6 +262,7 @@ if(isset($_POST['step1'])) {
 	if(isset($_GET['Goback']) && ($_GET['Goback']=="PD")){
 		header("Location:".$link."/pd/pd-shopping-cart");	
 	}
+	nameUpdate($postData['Firstname'], $postData['Preferred-name']);
 	/*General function: save data to APA shopping cart database;*/
 	/*Parameters: $userID, $productID,$type;*/
 	/*save product data including membership type product, national group product, fellowship & PRF product*/

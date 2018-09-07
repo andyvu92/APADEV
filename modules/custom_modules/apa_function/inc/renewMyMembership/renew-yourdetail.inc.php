@@ -277,7 +277,7 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 		
 	}
 	
-	
+	nameUpdate($postData['Firstname'], $postData['Preferred-name']);
 }   
 ?> 
 

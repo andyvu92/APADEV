@@ -23,6 +23,10 @@ function newSessionStats($MemberTypeID, $MemberType, $Status, $Speciality, $payT
 	$_SESSION['payThroughDate'] = $payThroughDate;
 	$_SESSION['nationGP'] = $nationGP;
 }
+function nameUpdate($FirstName, $PrefName) {
+	$_SESSION['FirstName'] = $FirstName;
+	$_SESSION['Preferred-name'] = $PrefName;
+}
 function deleteSession() {
 	// login related data
 	unset($_SESSION['Log-in']);
