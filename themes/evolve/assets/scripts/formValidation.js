@@ -29,7 +29,7 @@ jQuery(document).ready(function($) {
 			}
 			if($("input[name=Suburb]").val() ==''){$("input[name=Suburb]").addClass("focuscss");}else{$("input[name=Suburb]").removeClass("focuscss");}
 			if($("input[name=Postcode]").val() ==''){$("input[name=Postcode]").addClass("focuscss");}else{$("input[name=Postcode]").removeClass("focuscss");}
-			//if($("select[name=State]").val() ==''){$("select[name=State]").addClass("focuscss");}else{$("select[name=State]").removeClass("focuscss");}
+			if($("select[name=Country]").val()=="Australia"){if($("select[name=State]").val() ==''){$("select[name=State]").addClass("focuscss");}else{$("select[name=State]").removeClass("focuscss");}}
 			if($("input[name=Country]").val() ==''){$("input[name=Country]").addClass("focuscss");}else{$("input[name=Country]").removeClass("focuscss");}
 			if(!$("#Shipping-address-join").is(":checked")){
 				if($("input[name=Billing-Pobox]").val() ==''){
@@ -54,9 +54,11 @@ jQuery(document).ready(function($) {
 					return false;	
 				}
 			}
-			//if($("select[name=State]").val() ==''){
-				//return false;
-			//}
+			if($("select[name=Country]").val()=="Australia"){	
+				if($("select[name=State]").val() ==''){
+					return false;
+				}
+			}
 			if($("input[name=Country]").val() ==''||$("input[name=Postcode]").val() ==''||$("input[name=Suburb]").val() ==''){
 				return false;
 			}
