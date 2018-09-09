@@ -201,11 +201,6 @@ apa_function_dashboardLeftNavigation_form();
 							<td><?php echo $user['MemberID']; ?></td>
 						</tr>
 						<tr>
-							<td class="note" colspan="2">
-								<span class="note-text">Note: </span>to update your email address, please contact the APA member hub via email at <a href="mailto:info@australian.physio" target="_self">info@australian.physio</a> or phone on <a href="tel:1300 306 622" target="_self">1300 306 622</a>.
-							</td>
-						</tr>
-						<tr>
 							<td><strong>Member type:</strong></td>
 							<td><?php echo $user['MemberType']; ?></td>
 						</tr>

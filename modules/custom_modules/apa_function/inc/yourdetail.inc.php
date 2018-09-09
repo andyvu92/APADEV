@@ -699,13 +699,13 @@ apa_function_dashboardLeftNavigation_form();
 								<input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['Unit'])) {echo "placeholder='Building name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
 							</div>
 							
-							<div class="col-xs-12 col-sm-6 col-md-3">
+							<div class="col-xs-12 col-sm-6 col-md-6">
 								<label for="">PO Box</label>
 								<input type="text" class="form-control" name="Pobox"  <?php if (!empty($details['Unit'])) {echo "placeholder='PO Box'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
 							</div>
 
 							<div class="col-xs-12 col-sm-6 col-md-9">
-								<label for="">Address line 1<span class="tipstyle"> *</span></label>
+								<label for="">Address line 1<span class="tipstyle pobox-stat"> *</span></label>
 								<input type="text" class="form-control" name="Address_Line_1"  <?php if (empty($details['Unit'])) {echo "placeholder='Address 1'";}   else{ echo 'value="'.$details['Unit'].'"'; }?> required>
 							</div>
 
@@ -783,7 +783,7 @@ apa_function_dashboardLeftNavigation_form();
 							<input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 						</div>
 
-						<div class="col-xs-12 col-sm-6 col-md-3">
+						<div class="col-xs-12 col-sm-6 col-md-6">
 							<label for="">PO Box</label>
 							<input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO Box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 						</div>
@@ -861,7 +861,9 @@ apa_function_dashboardLeftNavigation_form();
 							<label for="">Member ID (Your email address)<span class="tipstyle"> *</span></label>
 							<input type="text" class="form-control" name="Memberid"  <?php if (empty($details['Memberid'])) {echo "placeholder='Member ID(Your email address)'";}   else{ echo 'value="'.$details['Memberid'].'"'; }?> readonly>
 						</div>
-					
+						<div class="col-xs-12 desktop-hidden">
+							<span class="note-text">Note: </span>to update your email address, please contact the APA member hub via email at <a href="mailto:info@australian.physio" target="_self">info@australian.physio</a> or phone on <a href="tel:1300 306 622" target="_self">1300 306 622</a>.
+						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
 							<label for="">Member category<span class="tipstyle"> *</span></label>
 							<div class="chevron-select-box">
@@ -880,6 +882,10 @@ apa_function_dashboardLeftNavigation_form();
 								?>
 							</select>
 							</div>
+						</div>
+
+						<div class="col-xs-12 mobile-hidden">
+							<span class="note-text">Note: </span>to update your email address, please contact the APA member hub via email at <a href="mailto:info@australian.physio" target="_self">info@australian.physio</a> or phone on <a href="tel:1300 306 622" target="_self">1300 306 622</a>.
 						</div>
 
 						<div class="col-xs-12 col-sm-6 col-md-6">
@@ -1060,12 +1066,14 @@ apa_function_dashboardLeftNavigation_form();
 								if($("#defaultCard").val()==CardID){
 									$('#deletecardMessage').html("Sorry, you cannot delete this card.");
 									$('#deleteCardWindow #checkMessage').removeClass('display-none');
-									$('#deleteCardForm button').addClass("stop");
+									$('#deleteCardForm button').addClass("stop").hide();
+									$('#deleteCardWindow a.no').html('Okay');
 								}
 								else{
 									$('#deletecardMessage').html("Are you sure you want to delete this card?");
 									$('#deleteCardWindow #checkMessage').addClass('display-none');
-									$('#deleteCardForm button').removeClass("stop");
+									$('#deleteCardForm button').removeClass("stop").show();
+									$('#deleteCardWindow a.no').html('No');
 								}
 							});
 							$(".updatecard").click(function() {
@@ -1087,7 +1095,7 @@ apa_function_dashboardLeftNavigation_form();
 						<div class="col-xs-12 none-margin">
 							<span class="light-lead-heading">Shipping address:</span>
 						</div>
-						<div class="col-lg-12 align-item-end">
+						<div class="col-xs-12 col-md-12 align-item-end">
 								<input class="styled-checkbox" type="checkbox" id="Shipping-address-dup" value="0" name="Shipping-address-dup">
 								<label style="font-weight: 300;" for="Shipping-address-dup">Use my residential address</label>
 						</div>
@@ -1099,7 +1107,7 @@ apa_function_dashboardLeftNavigation_form();
 							<input type="text" class="form-control" name="Shipping-BuildingName" id="Shipping-BuildingName"  <?php if (empty($details['Shipping-unitno'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Shipping-BuildingName'].'"'; }?>>
 						</div>
 
-						<div class="col-xs-12 col-sm-6 col-md-3">
+						<div class="col-xs-12 col-sm-6 col-md-6">
 							<label for="">PO Box</label>
 							<input type="text" class="form-control" name="Shipping-PObox" id="Shipping-PObox"  <?php if (!empty($details['Shipping-unitno'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Shipping-BuildingName'].'"'; }?>>
 						</div>
@@ -1172,7 +1180,7 @@ apa_function_dashboardLeftNavigation_form();
 								<span class="light-lead-heading cairo" style="font-weight: 200">Mailing address:</span>
 							</div>
 
-							<div class="col-lg-12 align-item-end">
+							<div class="col-xs-12 col-md-12 align-item-end">
 								<input class="styled-checkbox" type="checkbox" id="Mailing-address" name="Mailing-address">
 								<label style="font-weight: 300;" for="Mailing-address">Use my residential address</strong></label>
 							</div>
@@ -1184,7 +1192,7 @@ apa_function_dashboardLeftNavigation_form();
 							<input type="text" class="form-control" name="Mailing-BuildingName" id="Mailing-BuildingName"  <?php if (empty($details['Mailing-unitno'])) {echo "placeholder='Building Name'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?>>
 						</div>
 
-					    <div class="col-xs-12 col-sm-6 col-md-3">
+					    <div class="col-xs-12 col-sm-6 col-md-6">
 							<label for="">PO Box</label>
 							<input type="text" class="form-control" name="Mailing-PObox" id="Mailing-PObox"  <?php if (!empty($details['Mailing-unitno'])) {echo "placeholder='PObox'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?>>
 						</div>
@@ -1288,12 +1296,12 @@ apa_function_dashboardLeftNavigation_form();
 					<div class="row FapTagC">
 						<div class="col-xs-12">
 							<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
-							<label  style="font-weight: 300" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the corporate australian.physio site</label>
+							<label  style="font-weight: 300" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the &nbsp;<b>corporate australian.physio site</b></label>
 						</div>
 
 						<div class="col-xs-12"> 
 							<input class="styled-checkbox" type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" <?php if($details['Workplaces'][$key]['Findphysio']=="True"){echo "checked";} ?>>
-							<label  style="font-weight: 300" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the consumer choose.physio site</label>
+							<label  style="font-weight: 300" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the &nbsp;<b>consumer choose.physio site</b></label>
 						</div>
 					</div>
 					<?php endif;?>
@@ -1917,17 +1925,17 @@ apa_function_dashboardLeftNavigation_form();
 		<form id="changePasswordForm">
 			<div class="down7" style="display:none;" >
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-xs-12 col-md-6">
 						<input type="password" class="form-control" placeholder="Current password" value="" name="Password">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-xs-12 col-md-6">
 						<input type="password" class="form-control" placeholder="New password" id="New_password" name="New_password">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-xs-12 col-md-6">
 						<input type="password" class="form-control" placeholder="Confirm password" id="Confirm_password" name="Confirm_password">
 					</div>
 				</div>
@@ -1936,10 +1944,10 @@ apa_function_dashboardLeftNavigation_form();
 		</form>
 		<div id="addPaymentCardForm" style="display:none;">
 			<form action="/your-details?action=addcard" method="POST" id="formaddcard">
-				<div class="row"><div class="col-lg-12"><h3 style="color:#000; margin-top: 0" class="light-lead-heading cairo">Add a new card:</h3></div></div>
+				<div class="row"><div class="col-xs-12"><h3 style="color:#000; margin-top: 0" class="light-lead-heading cairo">Add a new card:</h3></div></div>
 				<div class="row">
 					<input type="hidden" name="addCard">
-					<div class="col-lg-12">
+					<div class="col-xs-12">
 						<label for="">Payment method:<span class="tipstyle"> *</span></label>
 						<div class="chevron-select-box">
 						<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
@@ -1957,38 +1965,38 @@ apa_function_dashboardLeftNavigation_form();
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-xs-12">
 					<label for="">Name on card:<span class="tipstyle"> *</span></label>
 					<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-12">
+					<div class="col-xs-12">
 						<label for="">Card number:<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number"  required maxlength="16">
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-xs-6">
 						<label for="">Expiry date:<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4">
 					</div>
 				</div>
 				<div class="row"> 
-					<div class="col-lg-6">
-						<label for="">CCV:<span class="tipstyle"> *</span></label>
+					<div class="col-xs-12 col-md-6">
+						<label for="">CVV:<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 					</div>
-					<div class="col-lg-6">
+					<div class="col-xs-12 col-md-6">
 						<div class="col-xs-12 none-padding tooltip-container top" style="margin-top: 10px;">
-							<input class="tooltip-act" type="checkbox">
+							<span class="tooltip-activate">What is CVV?</span>
 							<div class="tooltip-content">
 								<h4>What is a Card Verification Number?</h4>
 								<span class="tooltip-img"><img src="sites/default/files/general-icon/cvn-image.png"></span>
 								<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
 							</div>
-							<span>What is this?</span>
-						</div>				
+						</div>		
+						
 					</div>
 				</div>		
 
@@ -2034,20 +2042,25 @@ apa_function_dashboardLeftNavigation_form();
 		</div>
 		<div id="updateCardForm" style="display:none;">
 			<form action="/your-details?action=updatecard" method="POST" id="updatecard">
-				<div class="row"><div class="col-lg-12">Update your card:</div></div>
+				<div class="row"><div class="col-xs-12">Update your card:</div></div>
 				<input type="hidden" name="selectedCard">
 				<div class="row">
-					<div class="col-lg-6">
+					<div class="col-xs-12 col-md-6">
 						<input type="text" class="form-control"  name="Expirydate" placeholder="Expire date">
 					</div>
 				</div>
 				<div class="row"> 
-					<div class="col-lg-6">
+					<div class="col-xs-12 col-md-6">
 						<input type="text" class="form-control"  name="CVV" placeholder="CVV">
 					</div>
-					<div class="col-lg-6">
-						<div class="tooltip">What is this?
-						<span class="tooltiptext"><img src="http://localhost/sites/default/files/MEDIA/CVV number.png" ></span>
+					<div class="col-xs-12 col-md-6">
+						<div class="col-xs-12 none-padding tooltip-container top" style="margin-top: 10px;">
+							<span class="tooltip-activate">What is CVV?</span>
+							<div class="tooltip-content">
+								<h4>What is a Card Verification Number?</h4>
+								<span class="tooltip-img"><img src="sites/default/files/general-icon/cvn-image.png"></span>
+								<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
+							</div>
 						</div>
 					</div>
 				</div>				 

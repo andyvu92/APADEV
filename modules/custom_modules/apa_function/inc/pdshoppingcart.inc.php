@@ -445,9 +445,17 @@ if(isset($_SESSION["UserId"])){
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<label for="">CCV:<span class="tipstyle"> *</span></label>
-			<input type="text" class="form-control"  name="CCV" placeholder="CCV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+				<label for="">CVV:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control"  name="CCV" placeholder="CVV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
+				<div class="col-xs-12 tooltip-container top" style="margin-top: 10px;">
+					<span class="tooltip-activate">What is CVV?</span>
+					<div class="tooltip-content">
+						<h4>What is a Card Verification Number?</h4>
+						<span class="tooltip-img"><img src="sites/default/files/general-icon/cvn-image.png"></span>
+						<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
+					</div>
+				</div>	
 		</div>
 		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
 			<input class="styled-checkbox" type="hidden" id="addcardtag" name="addcardtag" <?php //if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>>
@@ -502,8 +510,16 @@ if(isset($_SESSION["UserId"])){
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
-			<label for="">CCV:<span class="tipstyle"> *</span></label>
-			<input type="text" class="form-control"  name="CCV" placeholder="CCV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+				<label for="">CVV:<span class="tipstyle"> *</span></label>
+				<input type="text" class="form-control"  name="CCV" placeholder="CVV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+			</div>
+			<div class="col-xs-12 tooltip-container top" style="margin-top: 10px;">
+				<span class="tooltip-activate">What is this?</span>
+				<div class="tooltip-content">
+					<h4>What is a Card Verification Number?</h4>
+					<span class="tooltip-img"><img src="sites/default/files/general-icon/cvn-image.png"></span>
+					<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
+				</div>
 			</div>
 		</div>
 		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
@@ -518,6 +534,14 @@ if(isset($_SESSION["UserId"])){
 	<?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0) || (sizeof($FPListArray)!=0)):?>
 		<div class="row">
 			<div class="col-xs-12"><span class="sidebardis">PRF donation</span></div>
+				<div class="col-xs-12 tooltip-container top" style="margin-top: 10px;">
+					<span class="tooltip-activate">What is this?</span>
+					<div class="tooltip-content">
+						The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot.
+					<br>
+						<a href="/reserach/purpose-prf">Tell me more</a>
+					</div>
+				</div>
 			<div class="col-xs-12">
 				<input class="styled-checkbox" type="checkbox" id="prftag" name="prftag">
 				<label for="prftag" id="prftagAgree">No, I do not want to make a donation to the PRF</label>
@@ -534,15 +558,6 @@ if(isset($_SESSION["UserId"])){
 					</select>
 				</div>
 				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="" oninput="this.value = Math.abs(this.value)" min="0">
-				<div class="col-xs-12 none-padding tooltip-container top" style="margin-top: 10px;">
-					<input class="tooltip-act" type="checkbox" value="0">
-					<div class="tooltip-content">
-						The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot.
-					<br>
-						<a href="/reserach/purpose-prf">Tell me more</a>
-					</div>
-					<span>What is this?</span>
-				</div>
 			</div>
 		</div>
 	<?php endif; ?>
@@ -763,5 +778,14 @@ $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
 	// todo
 	// add log-in button with message - you must be logged in
 	?>
-<p>please log-in to use this page</p>
+		<div class="flex-container" id="non-member">
+			<div class="flex-cell">
+				<h3 class="light-lead-heading">Please login to see this page.</h3>
+			</div>
+			<div class="flex-cell cta">
+				<a data-target="#loginAT" data-toggle="modal" href="#" class="login">Login</a>
+				<a href="/membership-question" class="join">Join now</a>
+			</div>
+			<div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+		</div>
 <?php endif; ?> 

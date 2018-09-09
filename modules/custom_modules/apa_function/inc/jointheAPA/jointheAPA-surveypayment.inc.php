@@ -289,6 +289,14 @@ if(isset($_POST['step2-1'])) {
 
 		<div class="row">
 			<div class="col-xs-12"><label>PRF donation</label></div>
+				<div class="col-xs-12 tooltip-container top" style="margin-top: 10px;">
+					<span class="tooltip-activate">What is this?</span>
+					<div class="tooltip-content">
+						The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot.
+					<br>
+						<a href="/reserach/purpose-prf">Tell me more</a>
+					</div>
+				</div>
 			<div class="col-xs-12">A small proportion of all membership fees directly support physiotherapy research. We also appreciate member donations to further the important work of the Physiotherapy Research Foundation.</div>
 			<div class="col-xs-12">
 				<input class="styled-checkbox" type="checkbox" id="prftag" name="prftag">
@@ -306,15 +314,7 @@ if(isset($_POST['step2-1'])) {
 				</select>
 				</div>
 				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="" oninput="this.value = Math.abs(this.value)" min="0">
-				<div class="col-xs-12 none-padding tooltip-container top" style="margin-top: 10px;">
-					<input class="tooltip-act" type="checkbox">
-					<div class="tooltip-content">
-						The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot.
-					</br>
-						<a href="/reserach/purpose-prf" target="_blank">Tell me more</a>
-					</div>
-					<span>What is this?</span>
-				</div>				
+							
 			</div>
 		</div>
 	<?php 

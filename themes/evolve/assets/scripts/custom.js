@@ -838,6 +838,7 @@ jQuery(document).ready(function($) {
 			$("input[name=Address_Line_1]").parent().addClass('locked');
 			$("input[name=Address_Line_2]").parent().addClass('locked');
 			$("input[name=BuildingName]").parent().addClass('locked');
+			$('.pobox-stat').hide();
 		}
         else{
 			$("input[name=Address_Line_1]").prop('disabled', false);
@@ -846,6 +847,7 @@ jQuery(document).ready(function($) {
 			$("input[name=Address_Line_1]").parent().removeClass('locked');
 			$("input[name=Address_Line_2]").parent().removeClass('locked');
 			$("input[name=BuildingName]").parent().removeClass('locked');
+			$('.pobox-stat').show();
 		}		
     });	
 	if($("input[name=Pobox]").val()!=""){
@@ -869,6 +871,7 @@ jQuery(document).ready(function($) {
 			$("input[name=Billing-Address_Line_1]").parent().addClass('locked');
 			$("input[name=Billing-Address_Line_2]").parent().addClass('locked');
 			$("input[name=Billing-BuildingName]").parent().addClass('locked');
+			$('.billing-pobox-stat').hide();
 		}
         else{
 			$("input[name=Billing-Address_Line_1]").prop('disabled', false);
@@ -877,6 +880,7 @@ jQuery(document).ready(function($) {
 			$("input[name=Billing-Address_Line_1]").parent().removeClass('locked');
 			$("input[name=Billing-Address_Line_2]").parent().removeClass('locked');
 			$("input[name=Billing-BuildingName]").parent().removeClass('locked');
+			$('.billing-pobox-stat').show();
 		}
     });
 	if($("input[name=Billing-Pobox]").val()!=""){
@@ -899,7 +903,7 @@ jQuery(document).ready(function($) {
 			$("input[name=Shipping-Address_Line_1]").parent().addClass('locked');
 			$("input[name=Shipping-Address_Line_2]").parent().addClass('locked');
 			$("input[name=Shipping-BuildingName]").parent().addClass('locked');
-			
+			$('.shipping-pobox-stat').hide();
 		}
         else{
 			$("input[name=Shipping-Address_Line_1]").prop('disabled', false);
@@ -908,6 +912,7 @@ jQuery(document).ready(function($) {
 			$("input[name=Shipping-Address_Line_1]").parent().removeClass('locked');
 			$("input[name=Shipping-Address_Line_2]").parent().removeClass('locked');
 			$("input[name=Shipping-BuildingName]").parent().removeClass('locked');
+			$('.shippng-pobox-stat').show();
 		}		
     });
 	if($("input[name=Shipping-PObox]").val()!=""){

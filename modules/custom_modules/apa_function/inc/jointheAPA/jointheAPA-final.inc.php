@@ -392,7 +392,7 @@ $PRFPrice = 0;
 		<?php if(isset($_SESSION['tempcard']) && !isset($_POST['addcardtag'])) : ?>
 		<?php $tempcards = $_SESSION['tempcard'];?>
 		    <div class="row">
-				<div class="col-lg-12">
+				<div class="col-xs-12 col-md-12">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type" disabled>
 					<?php 
 						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
@@ -408,22 +408,22 @@ $PRFPrice = 0;
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-xs-12 col-md-12">
 					<input type="text" class="form-control" id="Cardname" name="Cardname" value="<?php echo $tempcards['Name-on-card']; ?>"  placeholder="Card Name" readonly>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-xs-12 col-md-12">
 					<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" value="<?php echo $tempcards['Cardno']; ?>"  placeholder="Card number" readonly>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-xs-12 col-md-12">
 					<input type="text" class="form-control" id="Expirydate" name="Expirydate" value="<?php echo $tempcards['Expiry-date']; ?>" placeholder="Expire date" readonly>
 				</div>
 			</div>
 			<div class="row">
-				<div class="col-lg-12">
+				<div class="col-xs-12 col-md-12">
 					<input type="text" class="form-control" id="CCV" name="CCV" value="<?php echo $tempcards['CCV']; ?>" placeholder="CCV" readonly>
 				</div>
 			</div>

@@ -54,6 +54,8 @@
            }
         }
         .modal-footer{
+            display: flex;
+            justify-content: center;
            margin: 0;
         }
         @media all and (max-width: @larger-phone-width){
@@ -65,6 +67,7 @@
     .modal-body{
         height: 55vh;
         padding: 15px 15px;
+        overflow: hidden;
         overflow-y: auto;
         .warning{
             color: #ffa02e!important;
@@ -74,6 +77,8 @@
     .modal-footer{
         margin: 0;
         text-align: center;
+        display: flex;
+        justify-content: center;
         a{
             margin: 0 10px;
         }
@@ -158,6 +163,7 @@
     left: calc(~"50vw - 250px") !important;
     width: 500px !important;
     top: 30vh!important;
+    padding: 30px;
     max-height: 80vh;
     position: fixed!important;
     background: #fff;
@@ -225,6 +231,13 @@
     }
     .ui-widget-content{
         max-height: 80vh!important;
+        h3{
+            padding-right: 35px;
+        }
+    }
+    .modal-footer{
+        display: flex;
+        justify-content: center;
     }
     @media all and (max-width: @larger-phone-width) {
         left: calc(~"50vw - 150px") !important;
@@ -374,7 +387,6 @@ div[aria-describedby="uploadImage"].ui-dialog {
     max-width: 350px;
     min-width: 350px;
     font-family: Roboto;
-    padding: 0px 40px 40px 40px;
     .ui-resizable-handle.ui-icon-gripsmall-diagonal-se{
         display: none!important;
     }
@@ -440,6 +452,7 @@ div[aria-describedby="uploadImage"].ui-dialog {
 /*--IMAGE UPLOAD BOX--*/
 #uploadImage{
     border: 0;
+    padding: 0px 40px 40px 40px;
     #checkMessage{
         margin: 15px;
     }
@@ -1286,6 +1299,11 @@ div[aria-describedby="signupWebUser"]{
             }
         }
     }
+    @media all and (max-width: @larger-phone-width){
+        .create-account{
+            font-size: 1.1em;
+        }
+    }
     @media all and (max-width: @phone-width) {
         width: 300px !important;
         top: 10vh!important;
@@ -1302,7 +1320,7 @@ div[aria-describedby="signupWebUser"]{
                 margin-top: 15px;
             }
             .create-account{
-                font-size: 1.2em;
+                font-size: 1.4em;
             }
             .light-lead-heading{
                 font-size: 2em;
@@ -1310,12 +1328,12 @@ div[aria-describedby="signupWebUser"]{
         }
     }
     @media all and (max-width: 345px){
-        top: 2vh!important;
+        top: calc(~'50vh - 255px') !important;
     }
 }
 
 /* LOGIN POPUP */
-div[aria-describedby="loginPopWindow"].ui-dialog, #loginAT .modal-dialog {
+div[aria-describedby="loginPopWindow"].ui-dialog {
     .small-popup;
     background: none;
     box-shadow: none;

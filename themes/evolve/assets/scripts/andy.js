@@ -433,3 +433,5 @@ jQuery(document).ready(function(){
 jQuery(document).ready(function(){
   $('#prev-btn .prev').replaceWith( $('.go-back-button') );
 });
+
+// TOOLTIP

@@ -54,6 +54,7 @@ $cardsnum = GetAptifyData("12", $test);
 		<h1 class="lead-heading cairo">Thankyou for your support.</h1>
 	</div>
 	<span class="sub-heading">Your donation is now on its way to funding the latest physiotherapy research.</span>
+	<span class="direction-link">Go to my <a href="/your-purchases">Dashboard</a></span>
 	<div class="featured-image"><img src="sites/default/files/prf-images/prf-thankyou.png"></div>
 </div>
 
@@ -145,6 +146,14 @@ $cardsnum = GetAptifyData("12", $test);
 				<label>CVV:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 			</div>
+			<div class="flex-col-6 tooltip-container top" style="margin-top: 10px;">
+					<span class="tooltip-activate">What is CVV?</span>
+					<div class="tooltip-content">
+						<h4>What is a Card Verification Number?</h4>
+						<span class="tooltip-img"><img src="sites/default/files/general-icon/cvn-image.png"></span>
+						<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
+					</div>
+			</div>
 		</div>
 
 		<!--<div class="flex-cell">
@@ -205,6 +214,14 @@ $cardsnum = GetAptifyData("12", $test);
 			<div class="flex-col-6">
 				<label>CVV:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+			</div>
+			<div class="flex-col-6 tooltip-container top" style="margin-top: 10px;">
+				<span class="tooltip-activate">What is CVV?</span>
+				<div class="tooltip-content">
+						<h4>What is a Card Verification Number?</h4>
+						<span class="tooltip-img"><img src="sites/default/files/general-icon/cvn-image.png"></span>
+						<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
+				</div>
 			</div>
 		</div>
 
@@ -353,6 +370,14 @@ $cardsnum = GetAptifyData("12", $test);
 				<label>CVV:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 			</div>
+			<div class="flex-col-6 tooltip-container top" style="margin-top: 10px;">
+					<span class="tooltip-activate">What is CVV?</span>
+					<div class="tooltip-content">
+						<h4>What is a Card Verification Number?</h4>
+						<span class="tooltip-img"><img src="sites/default/files/general-icon/cvn-image.png"></span>
+						<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
+					</div>
+			</div>
 		</div>
 
 		<!--<div class="flex-cell">
@@ -413,6 +438,14 @@ $cardsnum = GetAptifyData("12", $test);
 			<div class="flex-col-6">
 				<label>CVV:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+			</div>
+			<div class="flex-col-6 tooltip-container top" style="margin-top: 10px;">
+					<span class="tooltip-activate">What is CVV?</span>
+					<div class="tooltip-content">
+						<h4>What is a Card Verification Number?</h4>
+						<span class="tooltip-img"><img src="sites/default/files/general-icon/cvn-image.png"></span>
+						<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
+					</div>
 			</div>
 		</div>
 

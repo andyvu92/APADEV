@@ -575,7 +575,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 					</div>
 					
-					<div class="col-xs-12 col-sm-6 col-md-3">
+					<div class="col-xs-12 col-sm-6 col-md-6">
 
 					   <label for="">PO Box</label>
 					   <input type="text" class="form-control" name="Pobox" <?php if (!empty($details['Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['Pobox'].'"'; }?>>
@@ -583,7 +583,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 					
 					<div class="col-xs-12 col-sm-6 col-md-9">
-						<label for="">Address line 1<span class="tipstyle"> *</span></label>
+						<label for="">Address line 1<span class="tipstyle pobox-stat"> *</span></label>
 						<input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1" <?php if (empty($details['Unit'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Unit'].'"'; }?>>
 					</div>
 
@@ -664,13 +664,13 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					   <input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 					</div>
 				
-					<div class="col-xs-12 col-sm-6 col-md-3">
+					<div class="col-xs-12 col-sm-6 col-md-6">
 					   <label for="">PO Box</label>
 					   <input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO Box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
 					</div>
 					
 					<div class="col-xs-12 col-sm-6 col-md-9">
-					   <label for="">Address line 1<span class="tipstyle"> *</span></label>
+					   <label for="">Address line 1<span class="tipstyle billing-pobox-stat"> *</span></label>
 					   <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit']) || $details['Billing-Unit']=="") {echo "placeholder='Billing address line 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?>>
 					</div>
 					
@@ -974,12 +974,12 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 				<div class="col-xs-12 FapTagC">
 					<input class="styled-checkbox" type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" <?php if($details['Workplaces'][$key]['Findphysio']=="True"){echo "checked";} ?>>
-					<label class="light-font-weight" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the consumer choose.physio site</label>
+					<label class="light-font-weight" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the &nbsp;<b>consumer choose.physio site</b></label>
 				</div>
 
 				<div class="col-xs-12 FapTagA"> 
 					<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
-					<label class="light-font-weight" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the corporate australian.physio site</label>	
+					<label class="light-font-weight" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the &nbsp;<b>corporate australian.physio site</b></label>	
 				</div>
 
 					<div class="col-xs-12">

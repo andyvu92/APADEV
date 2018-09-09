@@ -736,8 +736,10 @@ if (isset($_SESSION['UserId'])):
         echo 'value="' . str_replace("/", "-", $details['birth']) . '"';
     }
 ?> max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
+
                     </div>
                     <div class="col-xs-6 col-md-3">
+
                        <label for="">Gender</label>
                        <div class="chevron-select-box">
                        <select class="form-control" id="Gender" name="Gender">
@@ -946,7 +948,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                         </div>
-                        <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
 
                             <label for="">PO box</label>
                             <input type="text" class="form-control" name="Pobox" placeholder='PO box'<?php
@@ -960,7 +962,7 @@ if (isset($_SESSION['UserId'])):
                         </div>
                     
                     <div class="col-xs-12 col-sm-6 col-md-9">
-                        <label for="">Address line 1<span class="tipstyle"> *</span></label>
+                        <label for="">Address line 1<span class="tipstyle pobox-stat"> *</span></label>
                         <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1" placeholder='Address line 1'<?php
     if (empty($details['Unit'])) {
         echo "";
@@ -1075,7 +1077,7 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
                             </div>
-                            <div class="col-xs-12 col-sm-6 col-md-3">
+                            <div class="col-xs-12 col-sm-6 col-md-6">
                             <label for="">PO Box</label>
                             <input type="text" class="form-control" name="Billing-Pobox" placeholder='PO Box'<?php
     if (!empty($details['Billing-Unit'])) {
@@ -1087,7 +1089,7 @@ if (isset($_SESSION['UserId'])):
                             </div>
                         
                         <div class="col-xs-12 col-sm-6 col-md-9">
-                           <label for="">Address line 1<span class="tipstyle"> *</span></label>
+                           <label for="">Address line 1<span class="tipstyle billing-pobox-stat"> *</span></label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" placeholder='Billing address line 1'<?php
     if (empty($details['Billing-Unit'])) {
         echo "";
@@ -1559,7 +1561,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                     ?>" <?php if($details['Workplaces'][$key]['Findphysio']=="True"){echo "checked";} ?>>
                                                 <label class="light-font-weight" for="Findphysio<?php
                             echo $key;
-                    ?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the consumer choose.physio site </label>
+                    ?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the &nbsp;<b>consumer choose.physio site</b> </label>
                         </div>
 
                         <div class="col-xs-12 FapTagA"> 
@@ -1576,7 +1578,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                         ?>>
                             <label class="light-font-weight" for="Findabuddy<?php
                                 echo $key;
-                        ?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the corporate australian.physio site </label>
+                        ?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the &nbsp;<b>corporate australian.physio site</b> </label>
                         </div>
 
                         <!--BREAK-->
@@ -2400,7 +2402,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 
             </div>
             
-            <div class="col-lg-6">
+            <div class="col-xs-12 col-md-6">
                 <a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>         
             </div>
 
@@ -2483,7 +2485,50 @@ if(isset($_POST['MT'])){
 
                         <div class="col-xs-6 col-md-3">
                            <label for="">Date of birth<span class="tipstyle"> *</span></label>
-                           <input type="date" class="form-control" name="Birth" max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
+                            <div class="dateselect">
+                                <div class="chevron-select-box date">
+                                    <select class="form-control" id="birthdate" name="birthdate">
+                                        <option value="" selected disabled>Date</option>
+                                        <?php 
+                                            $start_date = 1;
+                                            $end_date   = 31;
+                                            for( $j=$start_date; $j<=$end_date; $j++ ) {
+                                                echo '<option value='.$j.'>'.$j.'</option>';
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="chevron-select-box month">
+                                    <select class="form-control" id="birthmonth" name="birthmonth">
+                                        <option value="" selected disabled>Month</option>
+                                        <option value="01" >Jan</option>
+                                        <option value="02" >Feb</option>
+                                        <option value="03" >Mar</option>
+                                        <option value="04" >Apr</option>
+                                        <option value="05" >May</option>
+                                        <option value="06" >Jun</option>
+                                        <option value="07" >Jul</option>
+                                        <option value="08" >Aug</option>
+                                        <option value="09" >Sep</option>
+                                        <option value="10" >Oct</option>
+                                        <option value="11" >Nov</option>
+                                        <option value="12" >Dev</option>
+                                    </select>
+                                </div>
+                                <div class="chevron-select-box year">
+                                    <select class="form-control" id="birthyear" name="birthyear">
+                                        <option value="" selected disabled>Year</option>
+                                        <?php 
+                                            $year = date('Y');
+                                            $min = $year - 118;
+                                            $max = $year;
+                                            for( $i=$max; $i>=$min; $i-- ) {
+                                                echo '<option value='.$i.'>'.$i.'</option>';
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">Gender</label>
@@ -2629,13 +2674,13 @@ if(isset($_POST['MT'])){
                             <input type="text" class="form-control"  name="BuildingName">
                         </div>
 
-                        <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
                         <label for="">PO Box</label>
                         <input type="text" class="form-control" name="Pobox">
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-9">
-                        <label for="">Address line 1<span class="tipstyle"> *</span></label>
+                        <label for="">Address line 1<span class="tipstyle pobox-stat"> *</span></label>
                         <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
                         </div>
 
@@ -2713,13 +2758,13 @@ if(isset($_POST['MT'])){
                             <input type="text" class="form-control"  name="Billing-BuildingName">
                         </div>
 
-                        <div class="col-xs-12 col-sm-6 col-md-3">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
                             <label for="">PO Box</label>
                             <input type="text" class="form-control" name="Billing-Pobox" id="Billing-Pobox">
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-9">
-                           <label for="">Address Line 1<span class="tipstyle"> *</span></label>
+                           <label for="">Address Line 1<span class="tipstyle billing-pobox-stat"> *</span></label>
                            <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1">
                         </div>
 
@@ -2849,7 +2894,7 @@ if(isset($_POST['MT'])){
                     }
                     </script>
                     </div>
-					<div class="col-lg-6">
+					<div class="col-xs-12 col-md-6">
 						<label for="">Confirm your email address<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" name="CMemberid" id="CMemberid" value="" onchange="confirmEmailFunction(this.value)" required>
 					<div id="confirmMessage"></div>
