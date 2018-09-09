@@ -943,7 +943,7 @@ $userRetisterStatus = false;
 					<div class="row">
 						<div class="col-lg-3">
 							<label for="">Postcode<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Postcode" placeholder='Postcode' <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?>>
+							<input type="number" class="form-control" name="Postcode" placeholder='Postcode' <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?>>
 						</div>
 						<div class="col-lg-3">
 							<label for="">State<span class="tipstyle">*</span></label>
@@ -1032,7 +1032,7 @@ $userRetisterStatus = false;
 						<div class="row">
 							<div class="col-lg-3">
 								<label for="">Postcode<span class="tipstyle">*</span></label>
-								<input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" placeholder='Billing Postcode'<?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?>>
+								<input type="number" class="form-control" name="Billing-Postcode" id="Billing-Postcode" placeholder='Billing Postcode'<?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?>>
 							</div>
 							<div class="col-lg-3">
 								<label for="">State<span class="tipstyle">*</span></label>
@@ -1443,11 +1443,10 @@ $userRetisterStatus = false;
 							$('#errorFormat').html("");
 							$( "#Memberid" ).blur();
 							$("#Memberid").css("border", "");
-							
 							$(".accent-btn").removeClass("stop");
 						}
 						$.ajax({
-						url:"apa/checkemail", 
+						url:"/apa/checkemail", 
 						type: "POST", 
 						data: {CheckEmailID: email},
 						success:function(response) { 
@@ -1591,7 +1590,7 @@ $userRetisterStatus = false;
 					<div class="row">
 						<div class="col-lg-3">
 							<label for="">Postcode<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Postcode" required>
+							<input type="number" class="form-control" name="Postcode" required>
 						</div>
 						<div class="col-lg-3">
 							<label for="">State</label>

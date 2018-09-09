@@ -535,6 +535,10 @@ if (isset($_POST['refreshTag'])) {
 				unset($_SESSION["UserName"]);
 				unset($_SESSION["Password"]);
 			}
+			else{
+				
+				header("Location: /failure");
+			}
 		}
 		
 		unset($_SESSION["Regional-group"]);
@@ -797,7 +801,24 @@ if(isset($_SESSION['UserId'])) {
 		<div id="logoutButton" class="ButtonIconHolder withButtonIcon OutwithButtonIcon" title="Log out">
 			<input type="submit" value="Log out" />
 		</div>
-		<div class="nameHello">Hi <?php echo $_SESSION["FirstName"]; ?></div>
+		<?php
+			$name = $_SESSION["FirstName"];
+			if(isset($_SESSION['Preferred-name']) && $_SESSION['Preferred-name'] != "") {
+				if(isset($_POST['Preferred-name']) && $_POST['Preferred-name'] != "") {
+					$name = $_POST['Preferred-name'];
+				} elseif(isset($_POST['Firstname']) && $_POST['Firstname'] != "") {
+					$name = $_POST['Firstname'];
+				} else {
+					$name = $_SESSION['Preferred-name'];
+				}
+			} elseif(isset($_POST['Preferred-name']) && $_POST['Preferred-name'] != "") {
+				$name = $_POST['Preferred-name'];
+			} elseif(isset($_POST['Firstname']) && $_POST['Firstname'] != "") {
+				$name = $_POST['Firstname'];
+			} 
+			
+		?>
+		<div class="nameHello">Hi <?php echo $name; ?></div>
 	</form>
 </div>
 

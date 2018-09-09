@@ -261,7 +261,7 @@ if(isset($_POST['step2-1'])) {
 				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-1" value="0" checked="checked">
 				<label for="p1-1">Pay in full today</label>
 			</div>
-			<?php if($_SESSION["MembershipProductID"] !="9968" ||$_SESSION["MembershipProductID"] !="10005"|| $_SESSION["MembershipProductID"] !="9967"|| $_SESSION["MembershipProductID"] !="10006"): ?>
+			<?php if($_SESSION["MembershipProductID"]!="9964" && $_SESSION["MembershipProductID"]!="9965" && $_SESSION["MembershipProductID"]!="9966" && $_SESSION["MembershipProductID"] !="9968" ||$_SESSION["MembershipProductID"] !="10005"|| $_SESSION["MembershipProductID"] !="9967"|| $_SESSION["MembershipProductID"] !="10006"): ?>
 			<div class="col-xs-12">
 				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-2" value="1">
 				<label for="p1-2">Pay by monthly instalments (This option incurs a $12.00 admin fee)</label>

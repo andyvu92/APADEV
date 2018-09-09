@@ -277,7 +277,7 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 		
 	}
 	
-	
+	nameUpdate($postData['Firstname'], $postData['Preferred-name']);
 }   
 ?> 
 
@@ -601,7 +601,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 					<div class="col-xs-6 col-md-3">
 					   <label for="">Postcode<span class="tipstyle"> *</span></label>
-					   <input type="text" class="form-control" name="Postcode" id="Postcode" <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?>>
+					   <input type="number" class="form-control" name="Postcode" id="Postcode" <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?>>
 					</div>
 					
 					<div class="col-xs-6 col-md-3">
@@ -688,7 +688,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					
 					<div class="col-xs-6 col-md-3">
 					   <label for="">Postcode<span class="tipstyle"> *</span></label>
-					   <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?>>
+					   <input type="number" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?>>
 					</div>
 					
 					<div class="col-xs-6 col-md-3">

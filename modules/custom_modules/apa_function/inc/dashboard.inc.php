@@ -197,7 +197,7 @@ apa_function_dashboardLeftNavigation_form();
 							<td class="user-name"><?php echo $user['Firstname']." ".$user['Lastname']; ?></td>
 						</tr>
 						<tr>
-							<td><strong>Member ID:</strong></td>
+							<td><strong><?php if($_SESSION['MemberTypeID']=="1"){ echo "User ID:";} else{ echo "Member ID:";}?></strong></td>
 							<td><?php echo $user['MemberID']; ?></td>
 						</tr>
 						<tr>
