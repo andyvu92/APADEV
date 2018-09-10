@@ -40,10 +40,13 @@ if (isset($_POST['refreshTag'])) {
 			$postData['Lastname'] = $_POST['Lastname'];
 		}
 		
-		if (isset($_POST['Birth'])) {
-			$postData['birth'] = str_replace("-", "/", $_POST['Birth']);
-		}
-		
+		//if (isset($_POST['Birth'])) {
+			//$postData['birth'] = str_replace("-", "/", $_POST['Birth']);
+		//}
+		if(isset($_POST['birthdate']) && isset($_POST['birthmonth']) && isset($_POST['birthyear'])) {
+			$postData['birth'] = $_POST['birthyear']."/".$_POST['birthmonth']."/".$_POST['birthdate'];
+        }
+	
 		if (isset($_POST['Gender'])) {
 			$postData['Gender'] = $_POST['Gender'];
 		}

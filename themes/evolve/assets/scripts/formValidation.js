@@ -11,8 +11,11 @@ jQuery(document).ready(function($) {
 			//if($("select[name=Prefix]").val() =='' ){$("select[name=Prefix]").addClass("focuscss");} else{$("select[name=Prefix]").removeClass("focuscss");}
 			if($("input[name=Firstname]").val() ==''){$("input[name=Firstname]").addClass("focuscss");} else{$("input[name=Firstname]").removeClass("focuscss");}
 			if($("input[name=Lastname]").val() ==''){$("input[name=Lastname]").addClass("focuscss");} else{$("input[name=Lastname]").removeClass("focuscss");}
-			if($("input[name=Birth]").val() ==''){$("input[name=Birth]").addClass("focuscss");}else{$("input[name=Birth]").removeClass("focuscss");}
+			//if($("input[name=Birth]").val() ==''){$("input[name=Birth]").addClass("focuscss");}else{$("input[name=Birth]").removeClass("focuscss");}
 			//if($("select[name=Gender]").val() ==''){$("select[name=Gender]").addClass("focuscss");}else{$("select[name=Gender]").removeClass("focuscss");}
+			if($("select[name=birthdate]").val() ==''){$("select[name=birthdate]").addClass("focuscss");}else{$("select[name=birthdate]").removeClass("focuscss");}
+			if($("select[name=birthmonth]").val() ==''){$("select[name=birthmonth]").addClass("focuscss");}else{$("select[name=birthmonth]").removeClass("focuscss");}
+			if($("select[name=birthyear]").val() ==''){$("select[name=birthyear]").addClass("focuscss");}else{$("select[name=birthyear]").removeClass("focuscss");}
 			if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ 
 				$("input[name=phone-number]").addClass("focuscss");
 				$("input[name=Mobile-number]").addClass("focuscss");
@@ -45,7 +48,7 @@ jQuery(document).ready(function($) {
 			if($("input[name=Firstname]").val() ==''||$("input[name=Lastname]").val() ==''){
 				return false;
 			}
-			if($("input[name=Birth]").val() ==''||$("select[name=Aboriginal]").val() ==''){
+			if($("select[name=birthdate]").val() ==''||$("select[name=birthmonth]").val() ==''||$("select[name=birthyear]").val() ==''||$("select[name=Aboriginal]").val() ==''){
 				return false;
 			}
 			if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ return false; }
