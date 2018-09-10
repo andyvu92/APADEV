@@ -38,7 +38,7 @@ if(isset($_SESSION["Log-in"])) : ?>
   <div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
 
     <!-- Modal content-->
-    <div class="modal-content">
+    <!--div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Please select background image</h4>
@@ -59,7 +59,7 @@ if(isset($_SESSION["Log-in"])) : ?>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
        </form>
-    </div>
+    </div-->
 
   </div>
 </div>
