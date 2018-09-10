@@ -100,6 +100,7 @@ $rens = str_replace('</div>',"",$rens);
 		<div class="MTcontent">
 			<div class="MTcontentTitle">Price:</div>
 			<?php
+			/*
 			$TypePrice = file_get_contents("sites/all/themes/evolve/json/TypePrice.json");
 			$TypePrice = json_decode($TypePrice, true);
 			foreach ($TypePrice as $key => $value) {
@@ -109,8 +110,39 @@ $rens = str_replace('</div>',"",$rens);
 					print '<div class="MTprice">$'.$TypePrice[$key]["UnitPrice"].'</div>';
 					print '<div class="MTid" style="display: none;">'.$TypePrice[$key]["ID"].'</div>';
 				}
-			}
+			}*/
 			?>
+
+			<?php
+
+				// 2.2.31 Get Membership prodcut price
+				// Send - 
+				// userID & product list
+				// Response -Membership prodcut price
+				$prodcutArray = array();
+				$memberProductsArray['ProductID']=$prodcutArray;
+				$memberProdcutID = $memberProductsArray;
+				$MemberTypes = GetAptifyData("31", $memberProdcutID);
+				$MemberType = unique_multidim_array($MemberTypes,'ProductID'); 
+				//$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
+				//$MemberType     = json_decode($MemberTypecode, true);
+				foreach ($MemberType as $key => $value) {
+					$x = explode(" ", $MemberType[$key]['Title']);
+					$y = str_replace(":", "", $x[0]);
+					//$z = str_replace($x[0]." ", "", $MemberType[$key]['Title']);
+					$ID = $MemberType[$key]['ProductID'];
+					$code = $y;
+					//$Title = $z;
+					$Price = $MemberType[$key]['Price'];
+					if($code == strtoupper($rens)) {
+						//echo "ever?????????????????!!!!!!!!!!!!!!!!!!";
+						print '<div class="MTprice">$'.$Price.'</div>';
+						print '<div class="MTid" style="display: none;">'.$ID.'</div>';
+					}
+				}
+				
+			?>
+
 			<?php //print '$'.render($content['field_member_type_price']);?>
 			<?php 
 				/*
