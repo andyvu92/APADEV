@@ -537,6 +537,7 @@ if (isset($_POST['refreshTag'])) {
 				//header("Refresh:0");
 				unset($_SESSION["UserName"]);
 				unset($_SESSION["Password"]);
+				
 			}
 			else{
 				

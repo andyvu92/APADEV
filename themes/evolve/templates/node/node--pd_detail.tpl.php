@@ -1136,7 +1136,7 @@ $userRetisterStatus = false;
 						   <div class="dateselect">
 
                                 <div class="chevron-select-box date">
-                                    <select class="form-control" id="birthdate" name="birthdate">
+                                    <select class="form-control" name="birthdate">
                                         <option value="" selected disabled>Date</option>
                                         <?php 
                                             $start_date = 1;
@@ -1152,7 +1152,7 @@ $userRetisterStatus = false;
                                     </select>
                                 </div>
                                 <div class="chevron-select-box month">
-                                    <select class="form-control" id="birthmonth" name="birthmonth">
+                                    <select class="form-control"  name="birthmonth">
                                         <option value="" selected disabled>Month</option>
 
                                         <option value="01" <?php  if($birthdata[1] == "01") {echo "selected='selected'";}?>>Jan</option>
@@ -1171,7 +1171,7 @@ $userRetisterStatus = false;
                                     </select>
                                 </div>
                                 <div class="chevron-select-box year">
-                                    <select class="form-control" id="birthyear" name="birthyear">
+                                    <select class="form-control" name="birthyear">
                                         <option value="" selected disabled>Year</option>
                                         <?php 
                                             $year = date('Y');
