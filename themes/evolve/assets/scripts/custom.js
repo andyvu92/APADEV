@@ -1483,4 +1483,44 @@ $(document).on('click', '.pd-spcart-delete a', function(){
 	
 });
 
-// RETURN USERS GET PASSWORD RESET
+// PREFIX "PHY" FOR AHPRA NUMBER AND INPUT RULES
+jQuery(document).ready(function(){
+	$("#ahpblock input").keydown(function(e) {
+		var oldvalue=$(this).val();
+		var field=this;
+		setTimeout(function () {
+			if(field.value.indexOf('PHY') !== 0) {
+				$(field).val(oldvalue);
+			} 
+		}, 1);
+
+			// Allow: backspace, delete, tab, escape, enter and .
+			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+			// Allow: Ctrl+A, Command+A
+			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+			// Allow: home, end, left, right, down, up
+			(e.keyCode >= 35 && e.keyCode <= 40)) {
+				// let it happen, don't do anything
+				return;
+			}
+			// Ensure that it is a number and stop the keypress
+			if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				e.preventDefault();
+			}
+	});
+
+	var max_chars = 13;
+
+	$('#ahpblock input').keydown( function(e){
+		if ($(this).val().length >= max_chars) { 
+			$(this).val($(this).val().substr(0, max_chars));
+		}
+	});
+	
+	$('#ahpblock input').keyup( function(e){
+		if ($(this).val().length >= max_chars) { 
+			$(this).val($(this).val().substr(0, max_chars));
+		}
+	});
+});
+

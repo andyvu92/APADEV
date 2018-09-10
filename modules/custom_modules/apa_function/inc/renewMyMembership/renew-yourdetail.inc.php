@@ -388,9 +388,52 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 
 					<div class="col-xs-6 col-md-3">
-					    <label for="">Date of birth<span class="tipstyle"> *</span></label>
-					    <input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) {echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> max="<?php $nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">
-					</div>
+                           <label for="">Date of birth<span class="tipstyle"> *</span></label>
+                            <div class="dateselect">
+                                <div class="chevron-select-box date">
+                                    <select class="form-control" id="birthdate" name="birthdate">
+                                        <option value="" selected disabled>Date</option>
+                                        <?php 
+                                            $start_date = 1;
+                                            $end_date   = 31;
+                                            for( $j=$start_date; $j<=$end_date; $j++ ) {
+                                                echo '<option value='.$j.'>'.$j.'</option>';
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                                <div class="chevron-select-box month">
+                                    <select class="form-control" id="birthmonth" name="birthmonth">
+                                        <option value="" selected disabled>Month</option>
+                                        <option value="01" >Jan</option>
+                                        <option value="02" >Feb</option>
+                                        <option value="03" >Mar</option>
+                                        <option value="04" >Apr</option>
+                                        <option value="05" >May</option>
+                                        <option value="06" >Jun</option>
+                                        <option value="07" >Jul</option>
+                                        <option value="08" >Aug</option>
+                                        <option value="09" >Sep</option>
+                                        <option value="10" >Oct</option>
+                                        <option value="11" >Nov</option>
+                                        <option value="12" >Dev</option>
+                                    </select>
+                                </div>
+                                <div class="chevron-select-box year">
+                                    <select class="form-control" id="birthyear" name="birthyear">
+                                        <option value="" selected disabled>Year</option>
+                                        <?php 
+                                            $year = date('Y');
+                                            $min = $year - 118;
+                                            $max = $year;
+                                            for( $i=$max; $i>=$min; $i-- ) {
+                                                echo '<option value='.$i.'>'.$i.'</option>';
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
 					<div class="col-xs-6 col-md-3">
 					    <label for="">Gender<span class="tipstyle"> *</span></label>
 						<div class="chevron-select-box">

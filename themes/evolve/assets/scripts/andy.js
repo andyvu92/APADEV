@@ -307,13 +307,19 @@ jQuery(document).ready(function() {
     plugins: ['remove_button'],
     delimiter: ',',
     persist: false,
+    onItemAdd: function() {
+      this.blur();
+    },
     create: function(input) {
         return {
             value: input,
             text: input
         }
     }
+    
   });
+
+
 });
 
 
@@ -434,4 +440,14 @@ jQuery(document).ready(function(){
   $('#prev-btn .prev').replaceWith( $('.go-back-button') );
 });
 
-// TOOLTIP
+// REMOVE UNDERLINE ON WORKPLACE ON SKIP HOVER
+jQuery(document).ready(function(){
+  $(document).on('mouseover', '#tabmenu li .skip',function(){
+    $('#tabmenu li.active a').css('text-decoration', 'none');
+    $(this).css('text-decoration', 'underline');
+  });
+  $(document).on('mouseout', '#tabmenu li .skip',function(){
+    $('#tabmenu li.active a').css('text-decoration', '');
+    $(this).css('text-decoration', '');
+  });
+});

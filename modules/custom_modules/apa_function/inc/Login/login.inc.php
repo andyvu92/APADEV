@@ -672,8 +672,15 @@ if($resultdata['result']) {
 		$arrIn["Password"] = $pass;
 		$result = GetAptifyData("7", $arrIn);
 		if(isset($result["ErrorInfo"])) {
-			echo $result["ErrorInfo"]["ErrorMessage"];
-			echo "<br>log-in fail";
+			//echo $result["ErrorInfo"]["ErrorMessage"];
+			echo "
+				<script>
+					jQuery(document).ready(function(){
+						$('#main-signin-form .checkmessage').show();
+						$('.LogInPadding .info').click();
+					});
+				</script>
+			";
 		} else {
 			// logged in
 			//print_r($result);
@@ -892,6 +899,10 @@ if(isset($_SESSION['UserId'])) {
 
 					<div class="flex-cell password-field">
 						<input class="form-control" placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" required />
+					</div>
+
+					<div class="flex-cell checkmessage" style="display: none">
+						<span>Incorrect username or password</span>
 					</div>
 
 					<div class="flex-cell login-btn">

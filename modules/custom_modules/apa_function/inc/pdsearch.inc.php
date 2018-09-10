@@ -152,23 +152,25 @@ if(!function_exists('drupal_session_started'))
 	<div class="locationManual">
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<label>State</label>
-			<select name="State" id="State" data-placeholder="State">
-				<option class="StateOption" select="selected" disabled>State</option>
-				<?php 
-				$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
-				$State=json_decode($statecode, true);
-				$t = 0;
-				foreach($State  as $key => $value){
-					echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
-					if (isset($_POST["State"])) {
-						if($_POST["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; } 
-					} elseif(isset($_GET["State"])) {
-						if($_GET["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+			<div class="chevron-select-box">
+				<select name="State" id="State" data-placeholder="State">
+					<option class="StateOption" select="selected" disabled>State</option>
+					<?php 
+					$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
+					$State=json_decode($statecode, true);
+					$t = 0;
+					foreach($State  as $key => $value){
+						echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
+						if (isset($_POST["State"])) {
+							if($_POST["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+						} elseif(isset($_GET["State"])) {
+							if($_GET["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+						}
+						echo '> '.$State[$key]['Abbreviation'].' </option>';
 					}
-					echo '> '.$State[$key]['Abbreviation'].' </option>';
-				}
-				?>
-			</select>
+					?>
+				</select>
+			</div>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 			<label>Suburb/city</label>
