@@ -49,7 +49,7 @@ function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
 	$json = json_decode($json, $assoc);
 	return $json;
 }
-/*
+
 function getMemberTypePrice(){
     // 2.2.31 Get Membership prodcut price
     // Send - 
@@ -78,7 +78,7 @@ function getMemberTypePrice(){
     $test = fwrite($fp, json_encode($response));
     fclose($fp);
 }
-*/
+
 function getDropdown(){
 	$API = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOptionValues';
 	$resultt = curlRequesttttt($API, "Get");
@@ -283,6 +283,6 @@ function getDropdown(){
 	fclose($fp);
 }
 getDropdown();
-//getMemberTypePrice();
+getMemberTypePrice();
 
 ?>

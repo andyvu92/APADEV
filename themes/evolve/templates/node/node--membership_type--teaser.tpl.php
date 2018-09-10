@@ -100,21 +100,21 @@ $rens = str_replace('</div>',"",$rens);
 		<div class="MTcontent">
 			<div class="MTcontentTitle">Price:</div>
 			<?php
-			/*
+			
 			$TypePrice = file_get_contents("sites/all/themes/evolve/json/TypePrice.json");
 			$TypePrice = json_decode($TypePrice, true);
 			foreach ($TypePrice as $key => $value) {
 				//echo $TypePrice[$key]["Code"]." vs ".strtoupper($rens)."<br>";
 				if($TypePrice[$key]["Code"] == strtoupper($rens)) {
 					//echo "ever?????????????????!!!!!!!!!!!!!!!!!!";
-					print '<div class="MTprice">$'.$TypePrice[$key]["UnitPrice"].'</div>';
+					print '<div class="MTprice">$'.$TypePrice[$key]["Price"].'</div>';
 					print '<div class="MTid" style="display: none;">'.$TypePrice[$key]["ID"].'</div>';
 				}
-			}*/
+			}
 			?>
 
 			<?php
-
+				/*
 				// 2.2.31 Get Membership prodcut price
 				// Send - 
 				// userID & product list
@@ -140,7 +140,7 @@ $rens = str_replace('</div>',"",$rens);
 						print '<div class="MTid" style="display: none;">'.$ID.'</div>';
 					}
 				}
-				
+				*/
 			?>
 
 			<?php //print '$'.render($content['field_member_type_price']);?>
