@@ -409,7 +409,7 @@ apa_function_dashboardLeftNavigation_form();
 					<a class="accent-button" href="/PRFdonation"><span>Donate today</span></a>
 			</div>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
-				<span class="small-heading cairo">Suggestions /feedback</span>
+				<span class="small-heading cairo">Suggestions/ feedback</span>
 				<span class="dashboard-content-bottom">If you have a question or concern, please don’t hesitate to contact us. We’re always looking for ways to improve our member offering.</span>
 				<a class="accent-button" href="/contact-us"><span>Submit</span></a>
 			</div>

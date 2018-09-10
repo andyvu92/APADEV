@@ -630,7 +630,7 @@ if(isset($_SESSION["UserId"])){
 				echo '<input type="hidden" name="totalMG" id="totalMG" value="'.$mgTotal.'">';
 			}
 			?>
-			<a href="javascript:document.getElementById('PDShoppingcartForm').submit();" class="placeorder<?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" value="PLACE YOUR ORDER" id="PDPlaceOrder"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</button></a>
+			<a href="javascript:document.getElementById('PDShoppingcartForm').submit();" class="placeorder<?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" value="Place your order" id="PDPlaceOrder"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</button></a>
 		</form>
 	</div>
 

@@ -731,10 +731,12 @@ if (isset($_SESSION['UserId'])):
 ?>>
                     </div>
                     <div class="col-xs-6 col-md-3">
+
 					
 <?php $birthdata = explode("/",$details['birth']);?>
                        <label for="">Date of birth<span class="tipstyle"> *</span></label>
 					       <div class="dateselect">
+
                                 <div class="chevron-select-box date">
                                     <select class="form-control" id="birthdate" name="birthdate">
                                         <option value="" selected disabled>Date</option>
@@ -742,9 +744,11 @@ if (isset($_SESSION['UserId'])):
                                             $start_date = 1;
                                             $end_date   = 31;
                                             for( $j=$start_date; $j<=$end_date; $j++ ) {
+
                                                 echo '<option value='.$j;
 											    if($j ==$birthdata[2]) {echo " selected='selected'";}
 												echo '>'.$j.'</option>';
+
                                             }
                                         ?>
                                     </select>
@@ -752,6 +756,7 @@ if (isset($_SESSION['UserId'])):
                                 <div class="chevron-select-box month">
                                     <select class="form-control" id="birthmonth" name="birthmonth">
                                         <option value="" selected disabled>Month</option>
+
                                         <option value="01" <?php  if($birthdata[1] == "01") {echo "selected='selected'";}?>>Jan</option>
                                         <option value="02" <?php  if($birthdata[1] == "02") {echo "selected='selected'";}?>>Feb</option>
                                         <option value="03" <?php  if($birthdata[1] == "03") {echo "selected='selected'";}?>>Mar</option>
@@ -764,6 +769,7 @@ if (isset($_SESSION['UserId'])):
                                         <option value="10" <?php  if($birthdata[1] == "10") {echo "selected='selected'";}?>>Oct</option>
                                         <option value="11" <?php  if($birthdata[1] == "11") {echo "selected='selected'";}?>>Nov</option>
                                         <option value="12" <?php  if($birthdata[1] == "12") {echo "selected='selected'";}?>>Dev</option>
+
                                     </select>
                                 </div>
                                 <div class="chevron-select-box year">
@@ -774,15 +780,19 @@ if (isset($_SESSION['UserId'])):
                                             $min = $year - 118;
                                             $max = $year;
                                             for( $i=$max; $i>=$min; $i-- ) {
+
                                                 echo '<option value='.$i;
 												 if($i == $birthdata[0]) {echo " selected='selected'";}
 												echo '>'.$i.'</option>';
+
                                             }
                                         ?>
                                     </select>
                                 </div>
                             </div>
+
                    </div>
+
                     <div class="col-xs-6 col-md-3">
 
                        <label for="">Gender</label>
@@ -1342,7 +1352,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
             <div class="row" id="ahpblock">
                 <div class="col-xs-6 col-md-3">
                     <label for="">AHPRA number</label>
-                    <input type="text" class="form-control" name="Ahpranumber" placeholder='AHPRA number'<?php
+                    <input type="text" value="PHY" class="form-control" name="Ahpranumber" placeholder='AHPRA number'<?php
     if (empty($details['Ahpranumber'])) {
         echo "placeholder='AHPRA number'";
     } else {
@@ -3058,7 +3068,7 @@ if(isset($_POST['MT'])){
                     </div>
                     <div id="ahpblock" class="col-xs-6 col-md-3">
                         <label for="">AHPRA number</label>
-                        <input type="text" class="form-control" name="Ahpranumber"  placeholder='AHPRA number'>
+                        <input type="text" pattern="[A-Z]{3}[0-9]{10}" value="PHY" class="form-control" name="Ahpranumber"  placeholder='AHPRA number'>
                     </div>
                 </div>
                 

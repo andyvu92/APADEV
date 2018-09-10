@@ -1,9 +1,5 @@
 <?php
-<<<<<<< HEAD
-$QuestionList = ListQuestions(3);
-=======
 $QuestionList = ListQuestions(9);
->>>>>>> d5d6c85c285e08f6c373560f46615adc76980674
 print_r($QuestionList);
 ?>
 
@@ -14,14 +10,6 @@ print_r($QuestionList);
 			<input type="hidden" name="QID" value="<?php echo $QuestionList[$i][0]; ?>">
 		</div>
         <div class="col-lg-12">
-<<<<<<< HEAD
-			<?php foreach($QuestionList[$i][3] as $option)
-				echo '<label id="label'.$option[2].'" class="optionLabel">'.$option[1].'</label>';
-			?>
-		</div>
-    </div>
-<?php endfor;?>
-=======
 		    <?php foreach($QuestionList[$i][3] as $option){
 			echo '<label id="label'.$option[2].'" class="optionLabel'.$option[0].'">'.$option[1].'</label>';
 			echo '<input type="hidden" id="Answer'.$option[0].'" value="'.$option[3]. '">';
@@ -34,4 +22,3 @@ print_r($QuestionList);
 <div id="memberTypeBlock">	</div>	
 
  
->>>>>>> d5d6c85c285e08f6c373560f46615adc76980674

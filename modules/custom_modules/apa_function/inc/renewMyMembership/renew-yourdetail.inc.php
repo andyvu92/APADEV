@@ -391,10 +391,12 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 
 					<div class="col-xs-6 col-md-3">
+
 					<?php $birthdata = explode("/",$details['birth']);?>
 					    <label for="">Date of birth<span class="tipstyle"> *</span></label>
 					    <!--<input type="date" class="form-control" name="Birth" <?php if (empty($details['birth'])) //{//echo "placeholder='DOB'";}   else{ echo 'value="'.str_replace("/","-",$details['birth']).'"';}?> max="<?php //$nowDate = date('Y-m-d', strtotime('-1 year'));echo $nowDate;?>">-->
 						 <div class="dateselect">
+
                                 <div class="chevron-select-box date">
                                     <select class="form-control" id="birthdate" name="birthdate">
                                         <option value="" selected disabled>Date</option>
@@ -402,9 +404,11 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                             $start_date = 1;
                                             $end_date   = 31;
                                             for( $j=$start_date; $j<=$end_date; $j++ ) {
+
                                                 echo '<option value='.$j;
 											    if($j ==$birthdata[2]) {echo " selected='selected'";}
 												echo '>'.$j.'</option>';
+
                                             }
                                         ?>
                                     </select>
@@ -412,6 +416,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 <div class="chevron-select-box month">
                                     <select class="form-control" id="birthmonth" name="birthmonth">
                                         <option value="" selected disabled>Month</option>
+
                                         <option value="01" <?php  if($birthdata[1] == "01") {echo "selected='selected'";}?>>Jan</option>
                                         <option value="02" <?php  if($birthdata[1] == "02") {echo "selected='selected'";}?>>Feb</option>
                                         <option value="03" <?php  if($birthdata[1] == "03") {echo "selected='selected'";}?>>Mar</option>
@@ -424,6 +429,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                         <option value="10" <?php  if($birthdata[1] == "10") {echo "selected='selected'";}?>>Oct</option>
                                         <option value="11" <?php  if($birthdata[1] == "11") {echo "selected='selected'";}?>>Nov</option>
                                         <option value="12" <?php  if($birthdata[1] == "12") {echo "selected='selected'";}?>>Dev</option>
+
                                     </select>
                                 </div>
                                 <div class="chevron-select-box year">
@@ -434,15 +440,19 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                             $min = $year - 118;
                                             $max = $year;
                                             for( $i=$max; $i>=$min; $i-- ) {
+
                                                 echo '<option value='.$i;
 												 if($i == $birthdata[0]) {echo " selected='selected'";}
 												echo '>'.$i.'</option>';
+
                                             }
                                         ?>
                                     </select>
                                 </div>
                             </div>
+
 					</div>
+
 					<div class="col-xs-6 col-md-3">
 					    <label for="">Gender<span class="tipstyle"> *</span></label>
 						<div class="chevron-select-box">
