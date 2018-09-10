@@ -276,10 +276,21 @@
 
 
 /*================== INMOTION POST LAYOUT =================*/
-.node-type-inmotion{
+.node-type-inmotion, .node-type-home-news-tiles{
 		#block-system-main{
-			.node-inmotion{
-
+			.node-inmotion, .node-home-news-tiles{
+				a.go-back-button{
+					color: #333;
+					background: @alt-grey;
+					text-transform: uppercase;
+					transition: .3s;
+					border-radius: 0;
+					margin: 50px 30px;
+					&:hover{
+						color: #fff;
+						background: @bright-blue;
+					}
+				}
 				/* POST DATE & AUTHOR */
 					.meta{
 						ul:not(.socialMediaIcon){
@@ -379,7 +390,7 @@
 					> .content{
 						margin-top: 25px;
 						.views-row{
-							.node-inmotion{
+							.node-inmotion, .node-home-news-tiles{
 								border-top: 0.5px solid #eceef0;
 								margin-top: 15px!important;
 								margin-bottom: 15px;
@@ -416,7 +427,7 @@
 								}
 							}
 							&:last-child{
-								.node-inmotion{
+								.node-inmotion, .node-home-news-tiles{
 									border-bottom: 0.5px solid #eceef0;
 									padding-bottom: 15px;
 								}
@@ -427,7 +438,7 @@
 
 				/* POST FEATURED IMAGE */
 				.post-img{
-					.field-name-field-inmotion-image{
+					.field-name-field-inmotion-image, .field-name-field-home-tile-image{
 						.file-image{
 							.content{
 								background-size: cover!important;

@@ -158,9 +158,9 @@ jQuery(function ($) {
   })
 }) 
 
-//SET BACKGROUND FOR EACH MEDIA PAGE ARTICLE CONTENT
+//SET BACKGROUND FOR EACH MEDIA ARTICLE CONTENT SIDEBAR
 jQuery(function ($) {
-  var someId = $(".node-inmotion .file-image .content");
+  var someId = $(".node-inmotion .file-image .content, .node-home-news-tiles .file-image .content");
   someId.css('background', function () {
       return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
   })
@@ -168,7 +168,7 @@ jQuery(function ($) {
 
 //SET BACKGROUND FOR EACH MEDIA ARTICLE CONTENT SIDEBAR
 jQuery(function ($) {
-  var someId = $(".node-media .post-img");
+  var someId = $(".node-media .post-img, ");
   someId.css('background', function () {
       return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
   })
