@@ -480,6 +480,10 @@ jQuery(document).ready(function($) {
 		//$('#totalPayment').html(Total);
 		
 	});
+	if(($('#PRF').val()=="Other")){
+			$( "#PRFOther").removeClass('display-none');
+			
+	}
 	$( "#PRFOther" ).blur(function() {
 		var PRF = $("#PRFOther").val();
 		$( "#POSTPRF").val(PRF);

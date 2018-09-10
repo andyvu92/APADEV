@@ -286,7 +286,7 @@ if(isset($_POST['step2-1'])) {
 
 				<input type="hidden" id="Installpayment-frequency" name="Installpayment-frequency" value="">
 			</div>
-
+        <?php if(isset($_SESSION["postReviewData"])) { $PRFTemp = $_SESSION["postReviewData"]['PRFdonation'];}?>
 		<div class="row">
 			<div class="col-xs-12"><label>PRF donation</label></div>
 				<div class="col-xs-12 tooltip-container top" style="margin-top: 10px;">
@@ -299,21 +299,21 @@ if(isset($_POST['step2-1'])) {
 				</div>
 			<div class="col-xs-12">A small proportion of all membership fees directly support physiotherapy research. We also appreciate member donations to further the important work of the Physiotherapy Research Foundation.</div>
 			<div class="col-xs-12">
-				<input class="styled-checkbox" type="checkbox" id="prftag" name="prftag">
+				<input class="styled-checkbox" type="checkbox" id="prftag" name="prftag" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp == "0") {echo 'value="1" check="checked"';}} ?>>
 				<label for="prftag" id="prftagAgree">No, I do not want to make a donation to the PRF</label>
 			</div>
 			<div class="col-xs-6 col-sm-6 col-md-3" id="prfselect">
 				<div class="chevron-select-box" style="margin-top: 10px;">
 				<select class="form-control" id="PRF" name="PRF">
-					<option value="5" selected>$5.00</option>
-					<option value="10">$10.00</option>
-					<option value="20">$20.00</option>
-					<option value="50">$50.00</option>
-					<option value="100">$100.00</option>
-					<option value="Other">Other</option>
+					<option value="5" <?php if(!isset($_SESSION["postReviewData"])) {echo "selected";} if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="5") {echo "selected";}}?>>$5.00</option>
+					<option value="10" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="10") {echo "selected";}}?>>$10.00</option>
+					<option value="20" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="20") {echo "selected";}}?>>$20.00</option>
+					<option value="50" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="50") {echo "selected";}}?>>$50.00</option>
+					<option value="100" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="100") {echo "selected";}}?>>$100.00</option>
+					<option value="Other" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp !="0" && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo "selected";}}?>>Other</option>
 				</select>
 				</div>
-				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="" oninput="this.value = Math.abs(this.value)" min="0">
+				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="<?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp !="0" && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo $PRFTemp;}}?>" oninput="this.value = Math.abs(this.value)" min="0">
 							
 			</div>
 		</div>
@@ -478,7 +478,7 @@ if(isset($_POST['step2-1'])) {
 
 <div id="PRFDesPopUp" style="display:none;" class="container">
 <p>The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot. </p>
-<p><a href="/reserach/purpose-prf" target="_blank">Tell me more</a></p>
+<p><a href="/reserach/purpose-prf">Tell me more</a></p>
 </div>
 
 <?php logRecorder();  ?>
