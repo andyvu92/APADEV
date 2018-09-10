@@ -26,6 +26,19 @@ jQuery(document).ready(function($) {
 	}
 	$(".pd-description-nonmobile").html(t);
 	
+	var originN = $("#pd-search-results .flex-flow-row .excerpt").html();
+	var t = '';
+	if(originN != null) {
+		var texts = originN.split('\n');
+		for(var i = 0;i < texts.length;i++){
+			//code here using lines[i] which will give you each line
+			//console.log('before: '+texts[i]);
+			t += removeSpan(texts[i]);
+			//console.log('after: '+t);
+		}
+	}
+	$("#pd-search-results .flex-flow-row .excerpt").html(t);
+	
 	function removeSpan(string) {
 		var returnTxt = string;
 		if(returnTxt.includes("span")) {

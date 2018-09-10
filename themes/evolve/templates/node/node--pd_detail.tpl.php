@@ -83,28 +83,28 @@
 ?>
 <?php 
 $userRetisterStatus = false;
-	    if(isset($_SESSION["UserId"])&&($_SESSION["UserId"]!="0")){ $userId=$_SESSION["UserId"];
-		} else {$userId="0";}
-		if(isset($_POST["Emailaddress"]) && isset($_POST["Password"])) {
-			// 2.2.7 - Log-in
-			// Send - 
-			// User ID, Password
-			// Response -
-			// N/A.
-			$User["ID"] = $_POST["Emailaddress"];
-			$User["Password"] = $_POST["Password"];
-			$LogIn = GetAptifyData("7", $User);
-			// todo
-			// once they successfully login, create userID Session
-			// and get User's detail data.
-			$userId = $LogIn["UserId"];
-			$_SESSION["UserId"] = $LogIn["UserId"];
-			echo $LogIn["TokenId"];
-			$data = "UserID=".$_SESSION["UserId"];
-			$details = GetAptifyData("4", $data,"");
-			$_SESSION['Dietary'] = $details["Dietary"];
-			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
-		}
+	if(isset($_SESSION["UserId"])&&($_SESSION["UserId"]!="0")){ $userId=$_SESSION["UserId"];
+	} else {$userId="0";}
+	if(isset($_POST["Emailaddress"]) && isset($_POST["Password"])) {
+		// 2.2.7 - Log-in
+		// Send - 
+		// User ID, Password
+		// Response -
+		// N/A.
+		$User["ID"] = $_POST["Emailaddress"];
+		$User["Password"] = $_POST["Password"];
+		$LogIn = GetAptifyData("7", $User);
+		// todo
+		// once they successfully login, create userID Session
+		// and get User's detail data.
+		$userId = $LogIn["UserId"];
+		$_SESSION["UserId"] = $LogIn["UserId"];
+		echo $LogIn["TokenId"];
+		$data = "UserID=".$_SESSION["UserId"];
+		$details = GetAptifyData("4", $data,"");
+		$_SESSION['Dietary'] = $details["Dietary"];
+		newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
+	}
 	if(isset($_SESSION["UserId"])){
 		if(!isset($details)) {
 			$data = "UserID=".$_SESSION["UserId"];
@@ -333,9 +333,9 @@ $userRetisterStatus = false;
 		/***put the logic when post Mailing-PObox******/
 		/***Updated on 02082018**/
 		if($_POST['Mailing-PObox']!="") {
-				$postData['Mailing-BuildingName'] =$_POST['Mailing-PObox'];
-				$postData['Mailing-Address_line_1'] ="";
-				$postData['Mailing-Address_line_2'] ="";
+			$postData['Mailing-BuildingName'] =$_POST['Mailing-PObox'];
+			$postData['Mailing-Address_line_1'] ="";
+			$postData['Mailing-Address_line_2'] ="";
 				
 		}else {
 			$postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName']; 
@@ -1905,7 +1905,7 @@ $userRetisterStatus = false;
 			<?php 
 				$Totalnumber = doubleval($pd_detail['Totalnumber']);
 				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
-				$Now = strtotime(date('m-d-Y'));
+				$Now = strtotime(date('m/d/Y'));
 				$fullStatus = false;
 				$Div = $Totalnumber - $Enrollednumber;
 				if($userRetisterStatus) {
@@ -1915,12 +1915,12 @@ $userRetisterStatus = false;
 					if($Now > $Cls){
 						echo "Closed";  
 						$fullStatus = true;
-					} elseif($Div <= 5){
-						echo "Almost Full"; 
-					} elseif($Div==0){
+					} elseif($Div == 0){
 						echo "Full"; 
 						$fullStatus = true;
-					} elseif($Div >= 5){
+					} elseif($Div <= 5){
+						echo "Almost Full"; 
+					} elseif($Div > 5){
 						echo "Open"; 
 					}
 				}
@@ -2073,19 +2073,19 @@ $userRetisterStatus = false;
 			<?php 
 				$Totalnumber = doubleval($pd_detail['Totalnumber']);
 				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
-				$Now = strtotime(date('m-d-Y'));
+				$Now = strtotime(date('m/d/Y'));
 				$Div = $Totalnumber - $Enrollednumber;
 				if($userRetisterStatus) {
 					echo "Registered";
 				} else {
 					if($Now > $Cls){
-						echo "Closed";
+						echo "Closed";  
+					} elseif($Div == 0){
+						echo "Full"; 
 					} elseif($Div <= 5){
 						echo "Almost Full"; 
-					} elseif($Div==0){
-						echo "Full";
-					} elseif($Div >= 5){
-						echo "Open";
+					} elseif($Div > 5){
+						echo "Open"; 
 					}
 				}
 		 		?>
@@ -2593,3 +2593,4 @@ Facsimile: (03) 9092 0899</p>
      });
    });
 </script>
+<?php logRecorder(); ?>
