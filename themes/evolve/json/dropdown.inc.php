@@ -49,7 +49,7 @@ function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
 	$json = json_decode($json, $assoc);
 	return $json;
 }
-
+/*
 function getMemberTypePrice(){
     // 2.2.31 Get Membership prodcut price
     // Send - 
@@ -78,7 +78,7 @@ function getMemberTypePrice(){
     $test = fwrite($fp, json_encode($response));
     fclose($fp);
 }
-
+*/
 function getDropdown(){
 	$API = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOptionValues';
 	$resultt = curlRequesttttt($API, "Get");
@@ -141,6 +141,7 @@ function getDropdown(){
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);
 	// write NationalGroup__c json file
+	/*
 	foreach($result['NationalGroup__c']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
@@ -152,6 +153,7 @@ function getDropdown(){
 	$fp = fopen(__DIR__ . '/../json/NationalGroup__c.json', 'w');
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);
+	*/
 	// write AreaOfInterest__c json file
 	foreach($result['AreaOfInterest__c']  as $lines){
 		$ID = $lines['ID'];
@@ -281,6 +283,6 @@ function getDropdown(){
 	fclose($fp);
 }
 getDropdown();
-getMemberTypePrice();
+//getMemberTypePrice();
 
 ?>
