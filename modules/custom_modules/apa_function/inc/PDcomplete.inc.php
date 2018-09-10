@@ -91,6 +91,12 @@ if(isset($_POST["POSTPRF"])) {
 			$shoppingCartDel->bindValue(':type', $type);
 			$shoppingCartDel->execute();
 			$shoppingCartDel = null;
+			$type="PDMG";
+			$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type=:type');
+			$shoppingCartDel->bindValue(':userID', $userID);
+			$shoppingCartDel->bindValue(':type', $type);
+			$shoppingCartDel->execute();
+			$shoppingCartDel = null;
 		}
 		/*
 		try {

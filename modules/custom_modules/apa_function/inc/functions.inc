@@ -532,7 +532,7 @@ function unique_multidim_array($array, $key) {
 function getProductList($userID){
 	$arrayReturn = array();
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-	$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND productID != "PRF" AND type != "PD" AND type != "PDNG"');
+	$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND productID != "PRF" AND type != "PD" AND type != "PDNG" AND type != "PDMG"');
 	$shoppingcartGet->bindValue(':userID', $userID);
 	$shoppingcartGet->execute();
 	if($shoppingcartGet->rowCount()>0) { 
