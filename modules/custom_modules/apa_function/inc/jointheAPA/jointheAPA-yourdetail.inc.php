@@ -38,10 +38,13 @@ $filterMemberProduct = array("10007","10008","10009","9997","10006");
         $postData['Lastname'] = $_POST['Lastname'];
     }
     
-    if (isset($_POST['Birth'])) {
-        $postData['birth'] = str_replace("-", "/", $_POST['Birth']);
+    //if (isset($_POST['Birth'])) {
+        //$postData['birth'] = str_replace("-", "/", $_POST['Birth']);
+    //}
+	if(isset($_POST['birthdate']) && isset($_POST['birthmonth']) && isset($_POST['birthyear'])) {
+		$postData['birth'] = $_POST['birthyear']."/".$_POST['birthmonth']."/".$_POST['birthdate'];
     }
-    
+	
     if (isset($_POST['Gender'])) {
         $postData['Gender'] = $_POST['Gender'];
     }
@@ -303,7 +306,7 @@ $filterMemberProduct = array("10007","10008","10009","9997","10006");
     } else {
         $postData['Findpublicbuddy'] = "False";
     }
-  if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} 
+  if(isset($_SESSION['Dietary'])) {$postData['Dietary'] = $_SESSION['Dietary'];} 
     // Process workplace data
     
     if (isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ) {
@@ -635,7 +638,7 @@ if (isset($_SESSION['UserId'])):
 			$testD['ID'] = $MemberDietary['ID'];
 			array_push($testDietaryArray, $testD);
 		}
-		$Dietary = $testDietaryArray;
+		$_SESSION['Dietary'] = $testDietaryArray;
 	}
     if (!empty($details['Regionalgp'])) {
         $_SESSION['Regional-group'] = $details['Regionalgp'];
@@ -728,8 +731,12 @@ if (isset($_SESSION['UserId'])):
 ?>>
                     </div>
                     <div class="col-xs-6 col-md-3">
-                           <label for="">Date of birth<span class="tipstyle"> *</span></label>
-                            <div class="dateselect">
+
+					
+<?php $birthdata = explode("/",$details['birth']);?>
+                       <label for="">Date of birth<span class="tipstyle"> *</span></label>
+					       <div class="dateselect">
+
                                 <div class="chevron-select-box date">
                                     <select class="form-control" id="birthdate" name="birthdate">
                                         <option value="" selected disabled>Date</option>
@@ -737,7 +744,11 @@ if (isset($_SESSION['UserId'])):
                                             $start_date = 1;
                                             $end_date   = 31;
                                             for( $j=$start_date; $j<=$end_date; $j++ ) {
-                                                echo '<option value='.$j.'>'.$j.'</option>';
+
+                                                echo '<option value='.$j;
+											    if($j ==$birthdata[2]) {echo " selected='selected'";}
+												echo '>'.$j.'</option>';
+
                                             }
                                         ?>
                                     </select>
@@ -745,18 +756,20 @@ if (isset($_SESSION['UserId'])):
                                 <div class="chevron-select-box month">
                                     <select class="form-control" id="birthmonth" name="birthmonth">
                                         <option value="" selected disabled>Month</option>
-                                        <option value="01" >Jan</option>
-                                        <option value="02" >Feb</option>
-                                        <option value="03" >Mar</option>
-                                        <option value="04" >Apr</option>
-                                        <option value="05" >May</option>
-                                        <option value="06" >Jun</option>
-                                        <option value="07" >Jul</option>
-                                        <option value="08" >Aug</option>
-                                        <option value="09" >Sep</option>
-                                        <option value="10" >Oct</option>
-                                        <option value="11" >Nov</option>
-                                        <option value="12" >Dev</option>
+
+                                        <option value="01" <?php  if($birthdata[1] == "01") {echo "selected='selected'";}?>>Jan</option>
+                                        <option value="02" <?php  if($birthdata[1] == "02") {echo "selected='selected'";}?>>Feb</option>
+                                        <option value="03" <?php  if($birthdata[1] == "03") {echo "selected='selected'";}?>>Mar</option>
+                                        <option value="04" <?php  if($birthdata[1] == "04") {echo "selected='selected'";}?>>Apr</option>
+                                        <option value="05" <?php  if($birthdata[1] == "05") {echo "selected='selected'";}?>>May</option>
+                                        <option value="06" <?php  if($birthdata[1] == "06") {echo "selected='selected'";}?>>Jun</option>
+                                        <option value="07" <?php  if($birthdata[1] == "07") {echo "selected='selected'";}?>>Jul</option>
+                                        <option value="08" <?php  if($birthdata[1] == "08") {echo "selected='selected'";}?>>Aug</option>
+                                        <option value="09" <?php  if($birthdata[1] == "09") {echo "selected='selected'";}?>>Sep</option>
+                                        <option value="10" <?php  if($birthdata[1] == "10") {echo "selected='selected'";}?>>Oct</option>
+                                        <option value="11" <?php  if($birthdata[1] == "11") {echo "selected='selected'";}?>>Nov</option>
+                                        <option value="12" <?php  if($birthdata[1] == "12") {echo "selected='selected'";}?>>Dev</option>
+
                                     </select>
                                 </div>
                                 <div class="chevron-select-box year">
@@ -767,13 +780,19 @@ if (isset($_SESSION['UserId'])):
                                             $min = $year - 118;
                                             $max = $year;
                                             for( $i=$max; $i>=$min; $i-- ) {
-                                                echo '<option value='.$i.'>'.$i.'</option>';
+
+                                                echo '<option value='.$i;
+												 if($i == $birthdata[0]) {echo " selected='selected'";}
+												echo '>'.$i.'</option>';
+
                                             }
                                         ?>
                                     </select>
                                 </div>
                             </div>
-                        </div>
+
+                   </div>
+
                     <div class="col-xs-6 col-md-3">
 
                        <label for="">Gender</label>

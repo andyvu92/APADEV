@@ -1,12 +1,45 @@
 <?php
 	$url =  "{$_SERVER['REQUEST_URI']}";
 	// forgot password
-	if(isset($_POST["Fid"])) {
+
+	if(isset($_POST["Fid"])) :
 		$input["email"] = $_POST["Fid"];
 		$output = GetAptifyData("6", $input);
 		//print_r($output);
-	}
 ?>
+<div id="forgot-pw-form">   
+
+<form method="POST" action="/" name="resetPass" id="resetPasst">
+	<div class="flex-container">
+		<div class="flex-cell user-info">
+			<h3 class="light-lead-heading cairo">Email has been sent out.</h3>
+			<span class="sub-heading">Please click this button to go back to the homepage or</span>
+			<span class="sub-heading">wait for <span id="timer">5</span> seconds to be redirected to the homepage.</span>
+			</br>
+		</div>
+		<div class="flex-cell submit-btn">
+			<input type="submit" value="Go back">
+		</div>
+		
+	</div>
+</form>
+<script>
+	var count = 6;
+	function countDown(){
+		var timer = document.getElementById("timer");
+		if(count > 0){
+			count--;
+			timer.innerHTML = count;
+			setTimeout("countDown()", 1000);
+			console.log(count);
+		}else{
+			window.location.href = "/";
+		}
+	}
+	countDown();
+</script>
+</div>
+<?php else: ?>	
 <div id="forgot-pw-form">   
 <form method="POST" action="<?php echo $url; ?>" name="resetPass" id="resetPass">
 	<div class="flex-container">
@@ -82,4 +115,7 @@
 	});
 </script>
 </div>
-<?php logRecorder(); ?>
+<?php
+endif;
+logRecorder();
+?>

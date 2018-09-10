@@ -141,6 +141,7 @@ function getDropdown(){
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);
 	// write NationalGroup__c json file
+	/*
 	foreach($result['NationalGroup__c']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
@@ -152,6 +153,7 @@ function getDropdown(){
 	$fp = fopen(__DIR__ . '/../json/NationalGroup__c.json', 'w');
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);
+	*/
 	// write AreaOfInterest__c json file
 	foreach($result['AreaOfInterest__c']  as $lines){
 		$ID = $lines['ID'];

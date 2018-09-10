@@ -40,10 +40,13 @@ if (isset($_POST['refreshTag'])) {
 			$postData['Lastname'] = $_POST['Lastname'];
 		}
 		
-		if (isset($_POST['Birth'])) {
-			$postData['birth'] = str_replace("-", "/", $_POST['Birth']);
-		}
-		
+		//if (isset($_POST['Birth'])) {
+			//$postData['birth'] = str_replace("-", "/", $_POST['Birth']);
+		//}
+		if(isset($_POST['birthdate']) && isset($_POST['birthmonth']) && isset($_POST['birthyear'])) {
+			$postData['birth'] = $_POST['birthyear']."/".$_POST['birthmonth']."/".$_POST['birthdate'];
+        }
+	
 		if (isset($_POST['Gender'])) {
 			$postData['Gender'] = $_POST['Gender'];
 		}
@@ -534,6 +537,7 @@ if (isset($_POST['refreshTag'])) {
 				//header("Refresh:0");
 				unset($_SESSION["UserName"]);
 				unset($_SESSION["Password"]);
+				
 			}
 			else{
 				
@@ -586,7 +590,10 @@ if(isset($_POST['CreateUser'])) {
 	if(isset($_POST['Firstname'])){ $postData['Firstname'] = $_POST['Firstname']; }
 	if(isset($_POST['Lastname'])){ $postData['Lastname'] = $_POST['Lastname']; }
 	if(isset($_POST['Prefix'])){ $postData['Prefix'] = $_POST['Prefix']; }
-	if(isset($_POST['Birth'])){ $postData['birth'] = str_replace("-","/",$_POST['Birth']); }
+	//if(isset($_POST['Birth'])){ $postData['birth'] = str_replace("-","/",$_POST['Birth']); }
+	if(isset($_POST['birthdate']) && isset($_POST['birthmonth']) && isset($_POST['birthyear'])) {
+			$postData['birth'] = $_POST['birthyear']."/".$_POST['birthmonth']."/".$_POST['birthdate'];
+    }
 	if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
 	/**fixed address issue for create web user web service***/
 	if($_POST['Pobox']!="") {
