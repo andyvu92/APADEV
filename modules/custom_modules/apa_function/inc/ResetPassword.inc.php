@@ -48,12 +48,15 @@
 		// todo
 		if($output["success"] == 1 ||$output["success"] == "1") {
 			// success
+			echo "<h1>Password update success!!</h1>";
+			echo "<p>Please wait..</p>";
+			echo "<div class='TokenExist' style='display: none;'>1</div>";
 		} else {
 			// when failed
+			echo "<h1>Password update failed</h1>";
+			echo "<p>Please try again..</p>";
+			echo "<div class='TokenExist' style='display: none;'>1</div>";
 		}
-		echo "<h1>Password update success!!</h1>";
-		echo "<p>Please wait..</p>";
-		echo "<div class='TokenExist' style='display: none;'>1</div>";
 	} else {
 		// when user come here for no reason.
 		echo "<h1>Session expired!!</h1>";
