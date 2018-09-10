@@ -166,7 +166,7 @@ if(isset($_POST['step1'])) {
 		array_push($testDietaryArray, $testD);
 		$postData['Dietary'] = $testDietaryArray;
 	}*/
-	if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} 
+	if(isset($_SESSION['Dietary'])) {$postData['Dietary'] = $_SESSION['Dietary'];} 
 	if(isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ){ 
 	$num = $_POST['maxumnumber']; 
 	$tempWork = array();
@@ -338,7 +338,7 @@ if(sizeof($details['Dietary'])!=0){
 		$testD['ID'] = $MemberDietary['ID'];
 		array_push($testDietaryArray, $testD);
 	}
-	$Dietary = $testDietaryArray;
+	$_SESSION['Dietary'] = $testDietaryArray;
 }
 if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Regionalgp'];}
 

@@ -306,7 +306,7 @@ $filterMemberProduct = array("10007","10008","10009","9997","10006");
     } else {
         $postData['Findpublicbuddy'] = "False";
     }
-  if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} 
+  if(isset($_SESSION['Dietary'])) {$postData['Dietary'] = $_SESSION['Dietary'];} 
     // Process workplace data
     
     if (isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ) {
@@ -638,7 +638,7 @@ if (isset($_SESSION['UserId'])):
 			$testD['ID'] = $MemberDietary['ID'];
 			array_push($testDietaryArray, $testD);
 		}
-		$Dietary = $testDietaryArray;
+		$_SESSION['Dietary'] = $testDietaryArray;
 	}
     if (!empty($details['Regionalgp'])) {
         $_SESSION['Regional-group'] = $details['Regionalgp'];
