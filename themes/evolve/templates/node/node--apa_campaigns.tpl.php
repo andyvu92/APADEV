@@ -100,8 +100,8 @@
 	
 	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	    
-		<h1 class="SectionHeader"><?php print $node->title;?></h1>
-		<div class="brd-headling">&nbsp;</div>
+		<!--<h1 class="SectionHeader"><?php //print $node->title;?></h1>
+		<div class="brd-headling">&nbsp;</div>-->
 		<div class="content">	
 			<?php print render($content['field_campaignimage']);?>
 		</div>
