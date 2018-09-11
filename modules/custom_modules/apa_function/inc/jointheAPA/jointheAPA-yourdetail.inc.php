@@ -3003,7 +3003,7 @@ if(isset($_POST['MT'])){
 						}
 						else{
 							$('#PasswordMessage').html("");
-							$( "#newPassword" ).blur();
+							
 							$("#newPassword").removeClass('focuscss');
 							$(".join-details-button2").removeClass("display-none");
 						}					
@@ -3025,7 +3025,7 @@ if(isset($_POST['MT'])){
 						}
                         else{
                             $('#checkPasswordMessage').html("");
-                            $( "#Password" ).blur();
+                          
                             $("#Password").css("border", "");
                             $(".join-details-button2").removeClass("display-none");
                         }                    
