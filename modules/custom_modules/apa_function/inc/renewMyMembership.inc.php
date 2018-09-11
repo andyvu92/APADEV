@@ -412,7 +412,7 @@ You have the right to access the personal information about yourself held by the
 			<h3 class="light-lead-heading">Looks like you’ve already renewed your APA membership. <br>If you’re looking to update your membership details, <br>go to your dashboard.</h3>
 		</div>
 		<div class="flex-cell cta">
-			<a href="/membership-question" class="join">Go to Dashboard ></a>
+			<a href="/dashboard" class="join">Go to Dashboard ></a>
 		</div>
 		<div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
 	</div>

@@ -15,24 +15,20 @@ if(isset($_SESSION["Log-in"])) : ?>
 <?php	// when logged in;
 	if(isset($_POST["Password"])): ?>
 <?php
-	echo "password is there: asdasd";
+	//echo "password is there: asdasd";
 	$data["userID"] = $_SESSION["UserName"];
 	$data["Password"] = $_POST["Password"];
 	$data["New_password"] = $_POST["New_password"];
-	print_r($data);
+	//print_r($data);
   $product = GetAptifyData("9", $data); 
   
-	echo $product["Update"]."!!";
-  print_r($product);
+	//echo $product["Update"]."!!";
+  //print_r($product);
 
   if(isset($product) && $product['Error'] != ""):
-    ?>	
-    <h1>incorrect things! try again!</h1>
-<?php	else: ?> 
-    <h1>password updated successful!</h1>
-<?php endif; ?>
+    ?>
 
-<!-- WRONG CURRENT PASSWORD -->
+    <!-- WRONG CURRENT PASSWORD -->
 <div id="pre_background" style="display:none">background_<?php echo $background;  ?></div>
 <?php apa_function_dashboardLeftNavigation_form(); ?> 
 <div class="col-xs-12 col-md-10 background_<?php echo $background; ?>" id="dashboard-right-content">
@@ -128,6 +124,20 @@ if(isset($_SESSION["Log-in"])) : ?>
   });     
 </script>
 <!-- END WRONG CURRENT PASSWORD -->
+
+<?php	else: ?>
+
+    <!-- UPDATE PASSWORD SUCCESSFUL  -->
+	<div class="flex-container" id="non-member">
+		<div class="flex-cell">
+			<h3 class="light-lead-heading">Password updated successful.</h3>
+		</div>
+		<div class="flex-cell cta">
+			<a href="/dashboard" class="join">Go to Dashboard ></a>
+		</div>
+		<div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+	</div>
+<?php endif; ?>
 
 <?php	else: ?> 
 <div id="pre_background" style="display:none">background_<?php echo $background;  ?></div>
