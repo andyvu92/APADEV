@@ -43,8 +43,9 @@ if(isset($_SESSION["Log-in"])) : ?>
 		   <div class="changePassword">
 			  <div class="row">
 				 <div class="col-lg-6">
-					 <label>Current password</label>
-					<input type="password" class="form-control" placeholder="Current password" id="Cpassword" value="" name="Password">
+					 	<label>Current password</label>
+						<input type="password" class="form-control" placeholder="Current password" id="Cpassword" value="" name="Password">
+						<a href="/forget-password">Don't know your password?</a>
 				 </div>
 				</div>
 				<div class="row">
@@ -162,6 +163,7 @@ if(isset($_SESSION["Log-in"])) : ?>
 				 <div class="col-lg-6">
 				 	<label>Current password</label>
 					<input type="password" class="form-control" placeholder="Current password" id="Cpassword" value="" name="Password">
+				 	<a href="/forget-password">Don't know your password?</a>
 				 </div>
 			  </div>
 			  <div class="row">
