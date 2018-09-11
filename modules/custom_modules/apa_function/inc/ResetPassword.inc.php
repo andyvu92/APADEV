@@ -60,6 +60,8 @@
 	} else {
 		// when user come here for no reason.
 		echo "<h1>Session expired!!</h1>";
+		header("Location: /forget-password", true, 301);
+		exit();
 		echo "<div class='TokenExist' style='display: none;'>1</div>";
 	}
 	echo "<div class='TTTTT'>click here!</div>";

@@ -50,7 +50,7 @@
 		
 		<div class="flex-cell">
 			<div class="email-field">
-				<input class="form-control" id="Fid" name="Fid" onchange="checkEmailFunction(this.value)" placeholder="Email address" type="text">
+				<input class="form-control" id="Fid" name="Fid" placeholder="Email address" type="text">
 			</div>
 			<div id="checkMessage" class="display-none">
 			<span>Oops! The email you entered does not exist.</span>
@@ -65,10 +65,14 @@
 	</div>
 </form>
 <script>
-	function checkEmailFunction(email) {
-				email = $('#Fid').val();
-				jQuery.ajax({
-				url:"/sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
+	jQuery(document).ready(function(){
+		var targetKey = "@";
+
+		$('#Fid').keyup(function(event) {
+		if($('#Fid').val() == targetKey) {
+			email = $('#Fid').val();
+			jQuery.ajax({
+				url:"apa/checkemail", 
 				type: "POST", 
 				data: {CheckEmailID: email},
 				success:function(response) { 
@@ -86,14 +90,48 @@
 				}					
 				}
 				});
-	}
+		}
+		else{}
+			targetKey = $('#Fid').val();
+		});
+
+		var timer = null;
+		$('#Fid').keydown(function(){
+			clearTimeout(timer); 
+			timer = setTimeout(validateEmail, 1000)
+		});
+
+		function validateEmail() {
+			email = $('#Fid').val();
+			jQuery.ajax({
+				url:"apa/checkemail", 
+				type: "POST", 
+				data: {CheckEmailID: email},
+				success:function(response) { 
+				var result = response;
+				if(result=="T"){
+					$('#checkMessage').addClass("display-none");
+					$("#Fid").removeClass("focuscss");
+					$("#checkpassword").removeClass("stop");
+				}
+				else{
+					$('#checkMessage').removeClass("display-none");
+					$("#Fid").addClass("focuscss");
+					$("#checkpassword").addClass("stop");
+					return false;
+				}					
+				}
+				});
+		}
+	});
 </script>
+
 <script>
 	jQuery(document).ready(function(){
 		$('#Fid').on('keyup', function(){
 			email = $(this).val();
 			jQuery.ajax({
-				url:"/sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
+				url:"apa/checkemail", 
 				type: "POST", 
 				data: {CheckEmailID: email},
 				success:function(response) { 

@@ -1364,7 +1364,7 @@ input{
     }
 }
 
-/*=================FORGET PASSWORD PAGES =================*/
+/*=================FORGET/RESET PASSWORD PAGES =================*/
 .page-node-406, .page-node-407, .page-node-390, .page-node-507, .page-node-508{
     #section-main-content{
       .MainContent{
@@ -1374,12 +1374,23 @@ input{
       }  
     }
 }
+
+#block-block-290, #block-block-296{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
 #forgot-pw-form, #reset-password-form{
     max-width: 460px;
     margin: 100px auto;
     border: 1px solid #c5c5c5;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     padding: 50px;
+    background: rgba(255,255,255,0.8);
     .user-info{
         flex-direction: column;
         .light-lead-heading{
