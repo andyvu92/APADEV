@@ -15,16 +15,23 @@ if(isset($_SESSION["Log-in"])) : ?>
 <?php	// when logged in;
 	if(isset($_POST["Password"])): ?>
 <?php
-	//echo "password is there: asdasd";
-	//$data["userID"] = $_SESSION["UserName"];
-	//$data["Password"] = $_POST["Password"];
-	//$data["New_password"] = $_POST["New_password"];
-	//print_r($data);
-	//$product = GetAptifyData("9", $data); 
-	//echo $product["Update"]."!!";
-  //print_r($product);
+	echo "password is there: asdasd";
+	$data["userID"] = $_SESSION["UserName"];
+	$data["Password"] = $_POST["Password"];
+	$data["New_password"] = $_POST["New_password"];
+	print_r($data);
+  $product = GetAptifyData("9", $data); 
   
-?>
+	echo $product["Update"]."!!";
+  print_r($product);
+
+  if(isset($product) && $product['Error'] != ""):
+    ?>	
+    <h1>incorrect things! try again!</h1>
+<?php	else: ?> 
+    <h1>password updated successful!</h1>
+<?php endif; ?>
+
 <!-- WRONG CURRENT PASSWORD -->
 <div id="pre_background" style="display:none">background_<?php echo $background;  ?></div>
 <?php apa_function_dashboardLeftNavigation_form(); ?> 
