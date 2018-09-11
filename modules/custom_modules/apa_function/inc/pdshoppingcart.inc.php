@@ -11,6 +11,7 @@ if (isset($_SESSION['UserId'])):
 <?php
 $creditcard='';
 $i=0;
+
 $price=0;
 $tag=0;
 $products = array();
@@ -300,6 +301,7 @@ if(isset($_SESSION["UserId"])){
 					}	  
 				}
 			}
+			
 		}
 	}	
 	if(sizeof($FPListArray)!=0){
@@ -321,7 +323,8 @@ if(isset($_SESSION["UserId"])){
 				
 			
 		}
-	}		
+	}
+$i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	?>
 	</div>
 	<?php endif; ?>

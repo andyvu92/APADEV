@@ -1616,7 +1616,7 @@ $userRetisterStatus = false;
 						}
 						else{
 							$('#PasswordMessage').html("");
-							$( "#newPassword" ).blur();
+							
 							$("#newPassword").css("border", "");
 							$(".join-details-button2").removeClass("display-none");
 						}					
@@ -1636,7 +1636,7 @@ $userRetisterStatus = false;
 						}
 						else{
 							$('#checkPasswordMessage').html("");
-							$( "#Password" ).blur();
+							
 							$("#Password").css("border", "");
 							$(".join-details-button2").removeClass("display-none");
 						}					
