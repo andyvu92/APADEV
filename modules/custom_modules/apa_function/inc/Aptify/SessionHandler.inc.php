@@ -60,6 +60,7 @@ function deleteSession() {
 	unset($_SESSION['QuatationTag']);
 	completeOrderDeleteSession();
 	//End Added by JingHu
+	unset($_SESSION['Preferred-name']);
 	/*
 	unset($_SESSION['Logfgh']);
 	unset($_SESSION['Logfgh']);
