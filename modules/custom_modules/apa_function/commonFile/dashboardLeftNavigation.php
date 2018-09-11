@@ -7,7 +7,10 @@ $url= $link.$_SERVER['REQUEST_URI'];
 // Response -
 // N/A.
 if(isset($_POST["PictureUpdate"])) {
-$target_dir =__DIR__ . '/../uploads/';
+//$target_dir =__DIR__ . '/../uploads/';
+
+$target_dir = __DIR__ .'/../../../themes/evolve/uploads/';
+
 $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
 $name = $_FILES["fileToUpload"]["name"];
 $uploadOk = 1;
