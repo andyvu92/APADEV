@@ -943,7 +943,7 @@ if (isset($_SESSION['UserId'])):
                         <div class="col-xs-6 col-md-3">
                             <label for="">Country code</label>
                             <div class="chevron-select-box">
-                            <select class="form-control" id="Mobile-countrycode" name="Mobile-country-code">
+                            <select class="form-control" id="Mobile-countrycode" name="Mobile-country-code" autocomplete="mobilecountry">
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
@@ -1001,7 +1001,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['BuildingName'] . '"';
     }
-?>>
+?> autocomplete="Building-Name">
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
 
@@ -1013,7 +1013,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['BuildingName'] . '"';
     }
-?>>
+?> autocomplete="Pobox">
                         </div>
                     
                     <div class="col-xs-12 col-sm-6 col-md-9">
@@ -1024,7 +1024,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['Unit'] . '"';
     }
-?>>
+?> autocomplete="address-line1">
                     </div>
                     <div class="col-xs-12">
                         <label for="">Address line 2</label>
@@ -1034,7 +1034,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['Street'] . '"';
     }
-?>>
+?> autocomplete="address-line2">
                     </div>
 
                     <!--BREAK-->
@@ -1047,7 +1047,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['Suburb'] . '"';
     }
-?>>
+?> autocomplete="address-level2">
                     </div>
                     
                     <div class="col-xs-6 col-md-3">
@@ -1058,12 +1058,12 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['Postcode'] . '"';
     }
-?>>
+?> autocomplete="postal-code">
                     </div>
                     <div class="col-xs-6 col-md-3">
                         <label for="">State</label>
                         <div class="chevron-select-box">
-                        <select class="form-control" id="State3" name="State">
+                        <select class="form-control" id="State3" name="State" autocomplete="address-level1">
 						<option value=""  <?php if (empty($details['State'])) echo "selected='selected'";?> disabled> State </option>
                         <?php
     $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
@@ -1086,7 +1086,7 @@ if (isset($_SESSION['UserId'])):
                     <div class="col-xs-6 col-md-3">
                         <label for="">Country<span class="tipstyle"> *</span></label>
                         <div class="chevron-select-box">
-                        <select class="form-control" id="Country3" name="Country">
+                        <select class="form-control" id="Country3" name="Country" autocomplete="country">
                         <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
@@ -1130,7 +1130,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['BuildingName1'] . '"';
     }
-?>>
+?> autocomplete="Building-Name">
                             </div>
                             <div class="col-xs-12 col-sm-6 col-md-6">
                             <label for="">PO Box</label>
@@ -1140,7 +1140,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['BuildingName1'] . '"';
     }
-?>>
+?> autocomplete="Pobox">
                             </div>
                         
                         <div class="col-xs-12 col-sm-6 col-md-9">
@@ -1151,7 +1151,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['Billing-Unit'] . '"';
     }
-?>>
+?> autocomplete="address-line1">
                         </div>
                         <div class="col-xs-12">
                            <label for="">Address line 2</label>
@@ -1161,7 +1161,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['Billing-Street'] . '"';
     }
-?>>
+?> autocomplete="address-line2">
                         </div>
                         
                         <!--BREAK-->
@@ -1174,7 +1174,7 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['Billing-Suburb'] . '"';
     }
-?>>
+?> autocomplete="address-level2">
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">Postcode<span class="tipstyle"> *</span></label>
@@ -1184,12 +1184,12 @@ if (isset($_SESSION['UserId'])):
     } else {
         echo 'value="' . $details['Billing-Postcode'] . '"';
     }
-?>>
+?> autocomplete="postal-code">
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">State</label>
                             <div class="chevron-select-box">
-                            <select class="form-control" name="Billing-State" id="State4">
+                            <select class="form-control" name="Billing-State" id="State4" autocomplete="address-level1">
                               <option value=""  <?php
     if (empty($details['Billing-State']))
         echo "selected='selected'";
@@ -1214,7 +1214,7 @@ if (isset($_SESSION['UserId'])):
                         <div class="col-xs-6 col-md-3">
                            <label for="">Country<span class="tipstyle"> *</span></label>
                               <div class="chevron-select-box">
-                              <select class="form-control" id="Country4" name="Billing-Country" required>
+                              <select class="form-control" id="Country4" name="Billing-Country" required autocomplete="country">
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
@@ -2726,40 +2726,40 @@ if(isset($_POST['MT'])){
                             
                         <div class="col-xs-12">
                             <label for="">Building name</label>
-                            <input type="text" class="form-control"  name="BuildingName">
+                            <input type="text" class="form-control"  name="BuildingName" autocomplete="Building-Name">
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-6">
                         <label for="">PO Box</label>
-                        <input type="text" class="form-control" name="Pobox">
+                        <input type="text" class="form-control" name="Pobox" autocomplete="Pobox">
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-9">
                         <label for="">Address line 1<span class="tipstyle pobox-stat"> *</span></label>
-                        <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1">
+                        <input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1" autocomplete="address-line1">
                         </div>
 
                         <div class="col-xs-12">
                             <label for="">Address line 2</label>
-                            <input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2">
+                            <input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2" autocomplete="address-line2">
                         </div>
 
                             <!--BREAK-->
 
                         <div class="col-xs-6 col-md-3">
                             <label for="">City or town<span class="tipstyle"> *</span></label>
-                            <input type="text" class="form-control" name="Suburb" id="Suburb">
+                            <input type="text" class="form-control" name="Suburb" id="Suburb" autocomplete="address-level2">
                         </div>
 
                         <div class="col-xs-6 col-md-3">
                             <label for="">Postcode<span class="tipstyle"> *</span></label>
-                            <input type="number" class="form-control" name="Postcode" id="Postcode">
+                            <input type="number" class="form-control" name="Postcode" id="Postcode" autocomplete="postal-code">
                         </div>
 
                         <div class="col-xs-6 col-md-3">
                             <label for="">State</label>
                             <div class="chevron-select-box">
-                            <select class="form-control" id="State1" name="State">
+                            <select class="form-control" id="State1" name="State" autocomplete="address-level1">
                                 <option value="" selected disabled> State </option>
                                 <?php
     $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
@@ -2778,7 +2778,7 @@ if(isset($_POST['MT'])){
                         <div class="col-xs-6 col-md-3">
                             <label for="">Country<span class="tipstyle"> *</span></label>
                             <div class="chevron-select-box">
-                            <select class="form-control" id="Country1" name="Country">
+                            <select class="form-control" id="Country1" name="Country" autocomplete="country">
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
