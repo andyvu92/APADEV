@@ -913,45 +913,45 @@ $userRetisterStatus = false;
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">Building name</label>
-							<input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['Unit'])) {echo "placeholder='Building name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
+							<input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['Unit'])) {echo "placeholder='Building name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?> autocomplete="Building-Name">
 						</div>
 
 						<div class="col-lg-6">
 							<label for="">PO Box</label>
-							<input type="text" class="form-control" name="Pobox" placeholder="PO Box" <?php if (!empty($details['Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?>>
+							<input type="text" class="form-control" name="Pobox" placeholder="PO Box" <?php if (!empty($details['Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?> autocomplete="Pobox">
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">Address line 1<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Address_Line_1"  <?php if (empty($details['Unit'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Unit'].'"'; }?> >
+							<input type="text" class="form-control" name="Address_Line_1"  <?php if (empty($details['Unit'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Unit'].'"'; }?> autocomplete="address-line1">
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">Address line 2</label>
-							<input type="text" class="form-control" name="Address_Line_2"  <?php if (empty($details['Street'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Street'].'"'; }?> >
+							<input type="text" class="form-control" name="Address_Line_2"  <?php if (empty($details['Street'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Street'].'"'; }?> autocomplete="address-line2">
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">City or town<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Suburb" placeholder='City or town'<?php if (empty($details['Suburb'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Suburb'].'"'; }?>>
+							<input type="text" class="form-control" name="Suburb" placeholder='City or town'<?php if (empty($details['Suburb'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Suburb'].'"'; }?> autocomplete="address-level2">
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-lg-3">
 							<label for="">Postcode<span class="tipstyle">*</span></label>
-							<input type="number" class="form-control" name="Postcode" placeholder='Postcode' <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?>>
+							<input type="number" class="form-control" name="Postcode" placeholder='Postcode' <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?> autocomplete="postal-code">
 						</div>
 						<div class="col-lg-3">
 							<label for="">State<span class="tipstyle">*</span></label>
 							<div class="chevron-select-box">
-								<select class="form-control" name="State">
+								<select class="form-control" name="State" autocomplete="address-level1">
 									<option value="" selected disabled> State </option>
 									<?php 
 									$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
@@ -969,7 +969,7 @@ $userRetisterStatus = false;
 						<div class="col-lg-6">
 							<label for="">Country<span class="tipstyle">*</span></label>
 							<div class="chevron-select-box">
-								<select class="form-control"  name="Country">
+								<select class="form-control"  name="Country" autocomplete="country">
 								<?php 
 								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 								$country=json_decode($countrycode, true);
@@ -1003,44 +1003,44 @@ $userRetisterStatus = false;
 						<div class="row">
 							<div class="col-lg-12">
 								<label for="">Building name</label>
-								<input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
+								<input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?> autocomplete="Building-Name">
 							</div>
 							<div class="col-lg-6">
 								<label for="">PO Box</label>
-								<input type="text" class="form-control" name="Billing-Pobox" placeholder="PO Box" <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?>>
+								<input type="text" class="form-control" name="Billing-Pobox" placeholder="PO Box" <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?> autocomplete="Pobox">
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-lg-12">
 								<label for="">Address line 1<span class="tipstyle">*</span></label>
-								<input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?>>
+								<input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?> autocomplete="address-line1">
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-lg-12">
 								<label for="">Address line 2</label>
-								<input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Street'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Billing-Street'].'"'; }?>>
+								<input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Street'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Billing-Street'].'"'; }?> autocomplete="address-line2">
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-lg-12">
 								<label for="">City or town<span class="tipstyle">*</span></label>
-								<input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" placeholder='Billing City or Town'<?php if (empty($details['Billing-Suburb'])) {echo "placeholder='Billing City/Town'";}   else{ echo 'value="'.$details['Billing-Suburb'].'"'; }?>>
+								<input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" placeholder='Billing City or Town'<?php if (empty($details['Billing-Suburb'])) {echo "placeholder='Billing City/Town'";}   else{ echo 'value="'.$details['Billing-Suburb'].'"'; }?> autocomplete="address-level2">
 							</div>
 						</div>
 
 						<div class="row">
 							<div class="col-lg-3">
 								<label for="">Postcode<span class="tipstyle">*</span></label>
-								<input type="number" class="form-control" name="Billing-Postcode" id="Billing-Postcode" placeholder='Billing Postcode'<?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?>>
+								<input type="number" class="form-control" name="Billing-Postcode" id="Billing-Postcode" placeholder='Billing Postcode'<?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?> autocomplete="postal-code">
 							</div>
 							<div class="col-lg-3">
 								<label for="">State<span class="tipstyle">*</span></label>
 								<div class="chevron-select-box">
-									<select class="form-control" name="Billing-State" id="Billing-State" >
+									<select class="form-control" name="Billing-State" id="Billing-State" autocomplete="address-level1">
 										<option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
 										<?php 
 										$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
@@ -1058,7 +1058,7 @@ $userRetisterStatus = false;
 							<div class="col-lg-6">
 								<label for="">Country<span class="tipstyle">*</span></label>
 								<div class="chevron-select-box">
-									<select class="form-control" id="Billing-Country" name="Billing-Country" >
+									<select class="form-control" id="Billing-Country" name="Billing-Country" autocomplete="country">
 									<?php 
 									$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 									$country=json_decode($countrycode, true);
@@ -1647,42 +1647,42 @@ $userRetisterStatus = false;
 					<div class="row">
 						<div class="col-xs-12">
 						   <label for="">Building name</label>
-						   <input type="text" class="form-control"  name="BuildingName">
+						   <input type="text" class="form-control"  name="BuildingName" autocomplete="Building-Name">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-xs-12">
 						   <label for="">PO Box</label>
-						    <input type="text" class="form-control" name="Pobox">
+						    <input type="text" class="form-control" name="Pobox" autocomplete="Pobox">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">Address line 1<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control"  name="Address_Line_1" >
+							<input type="text" class="form-control"  name="Address_Line_1" autocomplete="address-line1">
 						</div>
 
 						<div class="col-lg-12">
 							<label for="">Address line 2</label>
-							<input type="text" class="form-control" name="Address_Line_2">
+							<input type="text" class="form-control" name="Address_Line_2" autocomplete="address-line2">
 						</div>
 					</div>
 
 					<div class="row">
 						<div class="col-lg-12">
 							<label for="">City or town<span class="tipstyle">*</span></label>
-							<input type="text" class="form-control" name="Suburb" required>
+							<input type="text" class="form-control" name="Suburb" required autocomplete="address-level2">
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-lg-3">
 							<label for="">Postcode<span class="tipstyle">*</span></label>
-							<input type="number" class="form-control" name="Postcode" required>
+							<input type="number" class="form-control" name="Postcode" required autocomplete="postal-code">
 						</div>
 						<div class="col-lg-3">
 							<label for="">State</label>
 							<div class="chevron-select-box">
-								<select class="form-control" id="State" name="State">
+								<select class="form-control" id="State" name="State" autocomplete="address-level1">
 									<option value="" selected disabled> State </option>
 									<?php 
 									$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
@@ -1699,7 +1699,7 @@ $userRetisterStatus = false;
 						<div class="col-lg-6">
 							<label for="">Country<span class="tipstyle">*</span></label>
 							<div class="chevron-select-box">
-								<select class="form-control" id="Country" name="Country">
+								<select class="form-control" id="Country" name="Country" autocomplete="country">
 								<?php 
 								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 								$country=json_decode($countrycode, true);
