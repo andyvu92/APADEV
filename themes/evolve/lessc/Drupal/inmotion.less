@@ -277,9 +277,9 @@
 
 
 /*================== INMOTION POST LAYOUT =================*/
-.node-type-inmotion, .node-type-home-news-tiles{
+.node-type-inmotion, .node-type-home-news-tiles, .page-node-501{
 		#block-system-main{
-			.node-inmotion, .node-home-news-tiles{
+			.node-inmotion, .node-home-news-tiles, #node-501{
 				a.go-back-button{
 					color: #333;
 					background: @alt-grey;
@@ -573,12 +573,18 @@
 /* INMOTION BOTTOM INFO GRID */
 #block-block-287{
 	background: @light-grey;
-	.container{
-		.region{
+	#inmotion-bottom-features{
+		margin: 50px 0 70px;
+		.flex-cell{
+			margin: 0 -25px;
+		}
+		.flex-col-3{
 			font-family: Roboto;
-			.block{
-				margin: 50px 0 70px;
-			}
+			padding: 0 25px;
+			border-right: 2px solid @alt-grey;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
 			.box-title{
 				a{
 					font-size: 1em;
@@ -596,6 +602,143 @@
 					color: #000;
 					font-weight: 500;
 					text-decoration: underline;
+				}
+			}
+			&:last-of-type{
+				border: 0;
+			}
+		}
+		@media all and (max-width: @tablet-width) {
+			.flex-col-3{
+				width: 50%;
+				&:nth-child(1){
+					border-bottom: 2px solid #e7e8e9;
+					padding-bottom: 25px;
+				}
+				&:nth-child(2){
+					border-right: 0;
+					border-bottom: 2px solid #e7e8e9;
+					padding-bottom: 25px;
+				}
+			}
+		}
+		@media all and (max-width: @phone-width){
+			width: 100vw;
+			position: relative;
+			left: 50%;
+			right: 50%;
+			margin-left: -50vw;
+			margin-right: -50vw;
+			margin-top: 0;
+			margin-bottom: 0;
+			.flex-cell{
+				margin: 0;
+				.flex-col-3{
+					width: 100%;
+					padding: 0;
+					border: 0;
+					.box-content, .box-bottom{
+						display: none;
+					}
+					.box-title{
+						font-weight: 600;
+						margin: 0;
+						padding: 0.5px 0;
+						a{
+							font-size: 0.8em;
+							font-weight: 300;
+							color: #fff;
+							display: block;
+							padding: 10px 12px;
+							text-align: center;
+							background: #009fda;
+						}
+					}
+				}
+			}
+		}
+	}
+	#copyright{
+		font-family: Roboto;
+		padding: 10px 0px;
+		border-top: 1px solid #dcdfdf;
+		.heading{
+			font-size: 1.2em;
+			font-weight: 500;
+			margin-bottom: 10px;
+			display: block;
+		}
+		p{
+			font-size: 1.2em;
+		}
+		@media all and (max-width: @phone-width){
+			font-size: 0.8em;
+		}
+	}
+}
+
+/* ABOUT INMOTION PAGE */
+.page-node-501{
+	#block-system-main{
+		#node-501{
+			.CampaignSidebar{
+				h3.headline{
+					margin-bottom: 10px;
+				}
+			}
+			.field-type-text-with-summary{
+				.inmotionteam{
+					.inmotiondes{
+						display: flex;
+						.headshot{
+							width: 22%;
+    						min-width: 175px;
+						}
+						.description{
+							width: 78%;
+							padding-left: 50px;
+							padding-bottom: 30px;
+							p{
+								margin-bottom: 0!important;
+							}
+						}
+						&:last-of-type{
+							.description{
+								padding-bottom: 0;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	#block-webform-client-block-502{
+		padding: 0 15px;
+		.webform-client-form{
+			.form-item{
+				display: flex;
+				label{
+					min-width: 150px;
+					margin: 0;
+					font-size: 1.2em;
+					color: #000;
+					padding: 12px 0;
+					.form-required{
+						display: none;
+					}
+				}
+				input, textarea, .form-textarea-wrapper{
+					width: 100%;
+					background: #fff;
+				}
+			}
+			.form-actions{
+				display: flex;
+				justify-content: flex-end;
+				input.form-submit{
+					min-height: unset;
+					font-weight: 300!important;
 				}
 			}
 		}

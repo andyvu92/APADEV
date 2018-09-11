@@ -403,12 +403,12 @@ apa_function_dashboardLeftNavigation_form();
 				<a class="accent-button" href="/joinnationalgroup" id="ng-join-btn"><span>Join more</span></a>
 			</div>
 			<?php endif;?>
-			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
+			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line prf">
 					<span class="small-heading cairo">Donate to the PRF</span>
 					<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="">
 					<a class="accent-button" href="/PRFdonation"><span>Donate today</span></a>
 			</div>
-			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line">
+			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line feedback">
 				<span class="small-heading cairo">Suggestions/ feedback</span>
 				<span class="dashboard-content-bottom">If you have a question or concern, please don’t hesitate to contact us. We’re always looking for ways to improve our member offering.</span>
 				<a class="accent-button" href="/contact-us"><span>Submit</span></a>

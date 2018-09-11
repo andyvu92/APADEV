@@ -1193,7 +1193,7 @@ a#insuranceControl{
 
     .bottom-section{
         flex-direction: row;
-        .mobile_line:nth-child(2){
+        .mobile_line.prf, .mobile_line.feedback{
             padding: 0 80px;
             margin: 0 50px;
             border-left: 1px solid #a6a8ab;
@@ -1225,8 +1225,12 @@ a#insuranceControl{
                 margin: 0 20px;  
                 border-left: 0px solid #a6a8ab;
                 border-right: 0px solid #a6a8ab;
+                img{
+                    margin: 30px 0;
+                }
             }
         }
+        
         @media all and (max-width: @tablet-width){
             .mobile_line{
                 min-height: 180px;
@@ -1335,6 +1339,9 @@ a#insuranceControl{
     }
     
     .bottom-section .mobile_line:nth-child(1){
+        border: 0px;
+        padding-left: 0;
+        margin-left: 15px;
         .accent-button{
             position: relative;
         }
