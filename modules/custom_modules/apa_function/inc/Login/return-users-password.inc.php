@@ -68,24 +68,65 @@
 	</div>
 </form>
 <script>
-	function checkEmailFunction(email) {
-		jQuery.ajax({
-		url:"/sites/all/themes/evolve/inc/jointheAPA/jointheAPA-checkEmail.php", 
-		type: "POST", 
-		data: {CheckEmailID: email},
-		success:function(response) { 
-			var result = response;
-			if(result=="T"){
-				$('#checkMessage').addClass("display-none");
-				$("submit-btn input").removeClass("stop");
-			}
-			else{
-				$('#checkMessage').removeClass("display-none");
-				$("submit-btn input").addClass("stop");
-			}					
+	jQuery(document).ready(function(){
+		var targetKey = "@";
+
+		$('#Fid').keyup(function(event) {
+		if($('#Fid').val() == targetKey) {
+			email = $('#Fid').val();
+			jQuery.ajax({
+				url:"apa/checkemail", 
+				type: "POST", 
+				data: {CheckEmailID: email},
+				success:function(response) { 
+				var result = response;
+				if(result=="T"){
+					$('#checkMessage').addClass("display-none");
+					$("#Fid").removeClass("focuscss");
+					$("#checkpassword").removeClass("stop");
+				}
+				else{
+					$('#checkMessage').removeClass("display-none");
+					$("#Fid").addClass("focuscss");
+					$("#checkpassword").addClass("stop");
+					return false;
+				}					
+				}
+				});
+		}
+		else{}
+			targetKey = $('#Fid').val();
+		});
+
+		var timer = null;
+		$('#Fid').keydown(function(){
+			clearTimeout(timer); 
+			timer = setTimeout(validateEmail, 1000)
+		});
+
+		function validateEmail() {
+			email = $('#Fid').val();
+			jQuery.ajax({
+				url:"apa/checkemail", 
+				type: "POST", 
+				data: {CheckEmailID: email},
+				success:function(response) { 
+				var result = response;
+				if(result=="T"){
+					$('#checkMessage').addClass("display-none");
+					$("#Fid").removeClass("focuscss");
+					$(".submit-btn input").removeClass("stop");
+				}
+				else{
+					$('#checkMessage').removeClass("display-none");
+					$("#Fid").addClass("focuscss");
+					$(".submit-btn input").addClass("stop");
+					return false;
+				}					
+				}
+				});
 		}
 	});
-	}
 </script>
 </div>
 <?php

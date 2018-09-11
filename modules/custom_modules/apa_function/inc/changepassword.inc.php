@@ -40,23 +40,31 @@ if(isset($_SESSION["Log-in"])) : ?>
 		   <div class="changePassword">
 			  <div class="row">
 				 <div class="col-lg-6">
+					 <label>Current password</label>
 					<input type="password" class="form-control" placeholder="Current password" id="Cpassword" value="" name="Password">
 				 </div>
-			  </div>
+				</div>
+				<div class="row">
+				 <div class="col-lg-6">
+            <span id="PasswordMessage">Your password is incorrect. Please try again.</span>
+  				</div>
+        </div>
 			  <div class="row">
 				 <div class="col-lg-6">
+				 	<label>New password</label>
 					<input type="password" class="form-control" placeholder="New password" id="New_password" name="New_password">
 				 </div>
 			  </div>
 			  <div class="row">
 				 <div class="col-lg-6">
-					<input type="password" class="form-control" placeholder="Confirm password" id="Confirm_password" name="Confirm_password">
+				 	<label>Confirm new password</label>
+					<input type="password" class="form-control" placeholder="Confirm new password" id="Confirm_password" name="Confirm_password">
 				 </div>
-        </div>
-        <div class="row">
+				</div>
+				<div class="row">
 				 <div class="col-lg-6">
-            <span id="PasswordMessage">Your password is incorrect. Please try again.</span>
-  				</div>
+           <span id="checkPasswordMessage" style="display: none"></span>
+				 </div>
         </div>
         <div class="row">
 			    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">   <button  class="accent-btn change-password-button"><span class="dashboard-button-name">Save</span></button></div>
@@ -68,6 +76,50 @@ if(isset($_SESSION["Log-in"])) : ?>
    </div>
 </div>
 
+<script>
+  jQuery(document).ready(function(){
+		$('#Cpassword').on('keydown', function(){
+			$('#PasswordMessage').hide();
+			$('#PasswordMessage').parent().css('margin', '0');
+		});
+
+    $('#New_password').on('keyup', function(){
+      CurrentPassword = $('#Cpassword').val();
+			if($(this).val().length <= 7){
+				$('#checkPasswordMessage').html("8 characters minimum").show();
+				$( "#New_password" ).focus();
+				$("#New_password").addClass('focuscss');
+				$(".change-password-button").addClass("stop");				
+      }
+      else if ($(this).val().length > 7 && $(this).val() == CurrentPassword) {
+        $('#checkPasswordMessage').html("The new password cannot be same as the current password").show();
+        $( "#New_password" ).focus();
+        $("#New_password").addClass('focuscss');
+        $(".change-password-button").addClass("stop"); 
+      }
+			else{
+        $('#checkPasswordMessage').hide();
+				$("#New_password").removeClass('focuscss');
+				$(".change-password-button").removeClass("stop");
+			}					
+    });
+
+    $('#Confirm_password').on('keyup', function(){
+        NewPassword = $('#New_password').val();
+        if($(this).val() != NewPassword){
+          $('#checkPasswordMessage').html("These passwords do not match").show();
+          $( "#Confirm_password" ).focus();
+          $("#Confirm_password").addClass('focuscss');
+          $(".change-password-button").addClass("stop");                            
+        }
+        else{
+          $('#checkPasswordMessage').hide();
+          $("#Confirm_password").removeClass('focuscss');
+          $(".change-password-button").removeClass("stop");
+        }                    
+    });
+  });     
+</script>
 <!-- END WRONG CURRENT PASSWORD -->
 
 <?php	else: ?> 
@@ -91,16 +143,19 @@ if(isset($_SESSION["Log-in"])) : ?>
 		   <div class="changePassword">
 			  <div class="row">
 				 <div class="col-lg-6">
+				 	<label>Current password</label>
 					<input type="password" class="form-control" placeholder="Current password" id="Cpassword" value="" name="Password">
 				 </div>
 			  </div>
 			  <div class="row">
 				 <div class="col-lg-6">
+				 	<label>New password</label>
 					<input type="password" class="form-control" placeholder="New password" id="New_password" name="New_password">
 				 </div>
 			  </div>
 			  <div class="row">
 				 <div class="col-lg-6">
+				 	<label>Confirm new password</label>
 					<input type="password" class="form-control" placeholder="Confirm password" id="Confirm_password" name="Confirm_password">
 				 </div>
         </div>
@@ -162,6 +217,16 @@ if(isset($_SESSION["Log-in"])) : ?>
 </script>
 <?php endif; ?>
 <?php 	else: ?>
-	<p>not logged in</p>
+		<!-- USER NOT LOGIN  -->
+		<div class="flex-container" id="non-member">
+			<div class="flex-cell">
+				<h3 class="light-lead-heading">Please login to see this page.</h3>
+			</div>
+			<div class="flex-cell cta">
+				<a data-target="#loginAT" data-toggle="modal" href="#" class="login">Login</a>
+				<a href="/membership-question" class="join">Join now</a>
+			</div>
+			<div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+		</div>
 <?php endif; ?>
 <?php logRecorder(); ?>

@@ -80,12 +80,12 @@
 				if(result=="T"){
 					$('#checkMessage').addClass("display-none");
 					$("#Fid").removeClass("focuscss");
-					$("#checkpassword").removeClass("stop");
+					$(".submit-btn input").removeClass("stop");
 				}
 				else{
 					$('#checkMessage').removeClass("display-none");
 					$("#Fid").addClass("focuscss");
-					$("#checkpassword").addClass("stop");
+					$(".submit-btn input").addClass("stop");
 					return false;
 				}					
 				}
@@ -112,12 +112,12 @@
 				if(result=="T"){
 					$('#checkMessage').addClass("display-none");
 					$("#Fid").removeClass("focuscss");
-					$("#checkpassword").removeClass("stop");
+					$(".submit-btn input").removeClass("stop");
 				}
 				else{
 					$('#checkMessage').removeClass("display-none");
 					$("#Fid").addClass("focuscss");
-					$("#checkpassword").addClass("stop");
+					$(".submit-btn input").addClass("stop");
 					return false;
 				}					
 				}
@@ -126,32 +126,6 @@
 	});
 </script>
 
-<script>
-	jQuery(document).ready(function(){
-		$('#Fid').on('keyup', function(){
-			email = $(this).val();
-			jQuery.ajax({
-				url:"apa/checkemail", 
-				type: "POST", 
-				data: {CheckEmailID: email},
-				success:function(response) { 
-				var result = response;
-				if(result=="T"){
-					$('#checkMessage').addClass("display-none");
-					$("#Fid").removeClass("focuscss");
-					$("#checkpassword").removeClass("stop");
-				}
-				else{
-					$('#checkMessage').removeClass("display-none");
-					$("#Fid").addClass("focuscss");
-					$("#checkpassword").addClass("stop");
-					return false;
-				}					
-				}
-				});
-		});
-	});
-</script>
 </div>
 <?php
 endif;
