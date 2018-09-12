@@ -75,8 +75,8 @@ if(isset($_SESSION["Log-in"])) : ?>
         </div>
 		   </div>
 		</form>
-                                            
-         </div>
+
+				 </div>
    </div>
 </div>
 
@@ -189,7 +189,8 @@ if(isset($_SESSION["Log-in"])) : ?>
 		   </div>
 		</form>
 
-         </div>
+				 </div>
+				
       </div>
    </div>
 </div>
