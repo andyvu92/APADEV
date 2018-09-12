@@ -437,19 +437,19 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		<div class="row">
 			<div class="col-lg-12">
 			<label for="">Card number:<span class="tipstyle"> *</span></label>
-			<input type="text" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
+			<input type="number" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
 			<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-			<input type="text" class="form-control"  name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
+			<input type="number" class="form-control"  name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
 				<label for="">CVV:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control"  name="CCV" placeholder="CVV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+				<input type="number" class="form-control"  name="CCV" placeholder="CVV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
 				<div class="col-xs-12 tooltip-container top" style="margin-top: 10px;">
 					<span class="tooltip-activate">What is CVV?</span>
@@ -502,19 +502,19 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		<div class="row">
 			<div class="col-lg-12">
 			<label for="">Card number:<span class="tipstyle"> *</span></label>
-			<input type="text" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
+			<input type="number" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
 			<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-			<input type="text" class="form-control"  name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
+			<input type="number" class="form-control"  name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
 				<label for="">CVV:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control"  name="CCV" placeholder="CVV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+				<input type="number" class="form-control"  name="CCV" placeholder="CVV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
 			<div class="col-xs-12 tooltip-container top" style="margin-top: 10px;">
 				<span class="tooltip-activate">What is this?</span>

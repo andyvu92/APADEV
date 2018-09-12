@@ -2029,19 +2029,19 @@ apa_function_dashboardLeftNavigation_form();
 				<div class="row">
 					<div class="col-xs-12">
 						<label for="">Card number:<span class="tipstyle"> *</span></label>
-						<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number"  required maxlength="16">
+						<input type="number" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number"  required maxlength="16">
 					</div>
 				</div>
 				<div class="row">
 					<div class="col-xs-6">
 						<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-						<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4">
+						<input type="number" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4">
 					</div>
 				</div>
 				<div class="row"> 
 					<div class="col-xs-12 col-md-6">
 						<label for="">CVV:<span class="tipstyle"> *</span></label>
-						<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+						<input type="number" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 					</div>
 					<div class="col-xs-12 col-md-6">
 						<div class="col-xs-12 none-padding tooltip-container top" style="margin-top: 10px;">
