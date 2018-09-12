@@ -260,7 +260,7 @@ $PRFPrice = 0;
  ?> 
 <form id ="join-review-form" action="joinconfirmation" method="POST">
 	<input type="hidden" name="step3" value="3">
-	<?php if ((sizeof($cardsnum["results"])==0)): ?>  
+	<?php if ((sizeof($cardsnum["results"])==0) && !isset($_POST['addCard'])): ?>  
 	<div>Add your payment card unsucessfull, Please check your card details.</div>
 	<?php endif;?>
 	<?php if (isset($_POST['addCard']) && $_POST['addCard'] == "1"): ?>  

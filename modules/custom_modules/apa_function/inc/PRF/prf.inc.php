@@ -132,19 +132,19 @@ $cardsnum = GetAptifyData("12", $test);
 		<div class="flex-cell">
 			<div class="flex-col-12">
 				<label>Card number:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
+				<input type="number" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
 		</div>
 
 		<div class="flex-cell card-uniq">
 			<div class="flex-col-6">
 				<label>Expiry date:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
+				<input type="number" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
 			</div>
 
 			<div class="flex-col-6">
 				<label>CVV:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+				<input type="number" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 			</div>
 			<div class="flex-col-6 tooltip-container top" style="margin-top: 10px;">
 					<span class="tooltip-activate">What is CVV?</span>
@@ -201,19 +201,19 @@ $cardsnum = GetAptifyData("12", $test);
 		<div class="flex-cell">
 			<div class="flex-col-12">
 				<label>Card number:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
+				<input type="number" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
 		</div>
 
 		<div class="flex-cell card-uniq">
 			<div class="flex-col-6">
 				<label>Expiry date:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
+				<input type="number" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy(eg:0225)" maxlength="4">
 			</div>
 
 			<div class="flex-col-6">
 				<label>CVV:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+				<input type="number" class="form-control" id="CCV" name="CCV" placeholder="CVV">
 			</div>
 			<div class="flex-col-6 tooltip-container top" style="margin-top: 10px;">
 				<span class="tooltip-activate">What is CVV?</span>

@@ -2363,7 +2363,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
     endforeach;
 ?>
 	<?php if(sizeof($details['PersonEducation'])==0):?>
-	<div class="col-xs-12 col-sm-12 col-md-12"><p>Please add your qualifications or click submit to continue</p></div>
+	<div class="col-xs-12 col-sm-12 col-md-12"><p>Please add your qualifications or click next to continue</p></div>
 					<!--<div id="additional0">
 					
 					   <div class="row">
@@ -3236,7 +3236,7 @@ if(isset($_POST['MT'])){
     $addtionalNumber = 0;
     echo $addtionalNumber;
 ?>"/>
-				<div class="col-xs-12 col-sm-12 col-md-12"><p>Please add your qualifications or click submit to continue</p></div>
+				<div class="col-xs-12 col-sm-12 col-md-12"><p>Please add your qualifications or click next to continue</p></div>
                 <div id="additional-qualifications-block">
 					<!--<div id="additional0">
 					<input type="hidden" name="ID0" value="-1">
