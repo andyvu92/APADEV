@@ -199,8 +199,13 @@ if(isset($_POST['addCard']) && $_POST['addCard'] == "1"){
 	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
 	$out = GetAptifyData("15",$postPaymentData); 
 	
-	if($out["result"]=="Failed"){ echo "Submit unsuccessful, Please check your card details";}
-	
+	if($out["result"]=="Failed"){ echo "Submit unsuccessful, Please check your card details. ";}
+	if($out["result"]=="Failed" && $out["Message"]=="Expiry date lenght should be 4.CCV accepts up to 4 digit."){ echo "CVV is incorrect";}
+	if($out["result"]=="Failed" && $out["Message"]=="CCV accepts up to 4 digit."){ echo "CVV is incorrect";}
+	if($out["result"]=="Failed" && $out["Message"]=="Error in Create Person Saved Payment Method:Month must be between one and twelve. Parameter name: month"){ echo "Expiry date is incorrect";}
+	if($out["result"]=="Failed" && $out["Message"]=="Please enter a valid End Date occurring after the Start Date."){ echo "Expiry date is incorrect";}
+	if($out["result"]=="Failed" && (strpos($out["Message"], 'credit card number') !== false)){ echo "Credit Card Number is incorrect";}
+    if($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)){ echo "Credit Card Number is incorrect";}
 } 
 /*if(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])) {
 	$tempcard = array();

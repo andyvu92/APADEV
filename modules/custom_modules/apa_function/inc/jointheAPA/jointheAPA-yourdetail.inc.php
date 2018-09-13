@@ -1,7 +1,17 @@
+<?php 
+	//Get magazine products
+	$fpData['ProductID'] = ["9977","9978"];
+	$FPListArray = GetAptifyData("21", $fpData);
+	foreach($FPListArray as $MagazineProduct){ 
+		if($MagazineProduct['ProductID']=="9977") { $SportPrice =$MagazineProduct['FPprice']; }
+		if($MagazineProduct['ProductID']=="9978") { $IntouchPrice =$MagazineProduct['FPprice']; }
+	}
+	
+?>
 <?php
 
 //Put filter condition to display member type
-$filterMemberProduct = array("10007","10008","10009","9997","10006");
+$filterMemberProduct = array("10007","10008","10009","9997");
 // Put two scenarios here;
 // 1. for new user who join a member
 // 2. web user who join a member use $_SESSION]['userID'] to get user info
@@ -891,6 +901,7 @@ if (isset($_SESSION['UserId'])):
                             <?php
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
+							 usort($country, "cmp");
 							$countser = 0;							
 							foreach($country  as $key => $value){
 								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
@@ -947,6 +958,7 @@ if (isset($_SESSION['UserId'])):
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
+	 usort($country, "cmp");
 	$countser = 0;
     foreach ($country as $key => $value) {
         echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
@@ -1090,6 +1102,7 @@ if (isset($_SESSION['UserId'])):
                         <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
+	 usort($country, "cmp");
     foreach ($country as $key => $value) {
         echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$key]['Country'] . '"';
         if ($details['Country'] == $country[$key]['Country']) {
@@ -1218,6 +1231,7 @@ if (isset($_SESSION['UserId'])):
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
+	 usort($country, "cmp");
     foreach ($country as $key => $value) {
         echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$key]['Country'] . '"';
         if ($details['Billing-Country'] == $country[$key]['Country']) {
@@ -1435,13 +1449,14 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                      </select>
                     </div>
                 </div>
+				
                 <div class="col-xs-12 display-none" id="ngsports">
                     <input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0">
-                    <label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label>
+                    <label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?($<?php echo $SportPrice;?>)</label>
                 </div>
                 <div class="col-xs-12 display-none" id="ngmusculo">
                     <input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value="0">
-                    <label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label>
+                    <label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?($<?php echo $IntouchPrice;?>)</label>
                 </div>
 
 
@@ -1585,6 +1600,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 				$State     = json_decode($statecode, true);
 				$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
 				$country     = json_decode($countrycode, true);
+				usort($country, "cmp");
 				$Languagecode = file_get_contents("sites/all/themes/evolve/json/Language.json");
 				$Language     = json_decode($Languagecode, true);
 				$NumberOfHourscode = file_get_contents("sites/all/themes/evolve/json/NumberOfHours.json");
@@ -2338,6 +2354,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <?php
         $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
         $country     = json_decode($countrycode, true);
+		usort($country, "cmp");
         foreach ($country as $pair => $value) {
             echo '<option value="' . $country[$pair]['ID'] . '"';
             if ($details['PersonEducation'][$key]['Country'] == $country[$pair]['ID']) {
@@ -2660,6 +2677,7 @@ if(isset($_POST['MT'])){
                                 <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
+	usort($country, "cmp");
     foreach ($country as $key => $value) {
         echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
 		if($country[$key]['ID']=="14"){echo "selected='selected'";}
@@ -2695,6 +2713,7 @@ if(isset($_POST['MT'])){
                                 <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
+	usort($country, "cmp");
     foreach ($country as $key => $value) {
         echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
 		if($country[$key]['ID']=="14"){echo "selected='selected'";}
@@ -2780,8 +2799,8 @@ if(isset($_POST['MT'])){
                             <div class="chevron-select-box">
                             <select class="form-control" id="Country1" name="Country" autocomplete="country">
                             <?php
-    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
-    $country     = json_decode($countrycode, true);
+    //$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+    //$country     = json_decode($countrycode, true);
     foreach ($country as $key => $value) {
         echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$key]['Country'] . '"';
 		if($country[$key]['ID']=="14"){echo "selected='selected'";}
@@ -2861,8 +2880,8 @@ if(isset($_POST['MT'])){
                                <div class="chevron-select-box">
                                <select class="form-control" id="Country2" name="Billing-Country">
                             <?php
-    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
-    $country     = json_decode($countrycode, true);
+    //$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+    //$country     = json_decode($countrycode, true);
     foreach ($country as $key => $value) {
         echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$key]['Country'] . '"';
 		if($country[$key]['ID']=="14"){echo "selected='selected'";}
@@ -3132,11 +3151,11 @@ if(isset($_POST['MT'])){
 
                     <div class="col-xs-12 display-none" id="ngsports">
                         <input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0">
-                        <label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label>
+                        <label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?($<?php echo $SportPrice;?>)</label>
                     </div>
                     <div class="col-xs-12 display-none" id="ngmusculo">
                         <input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value="0">
-                        <label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label>
+                        <label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?($<?php echo $IntouchPrice;?>)</label>
                     </div>
 			    </div>
 

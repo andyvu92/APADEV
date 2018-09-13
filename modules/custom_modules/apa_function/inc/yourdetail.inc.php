@@ -659,6 +659,8 @@ apa_function_dashboardLeftNavigation_form();
 								<?php
 									$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 									$country=json_decode($countrycode, true);
+								    usort($country, "cmp");
+		
 									$countser = 0;
 									foreach($country  as $key => $value){
 										echo '<option value="'.$country[$key]['TelephoneCode'].'"';
@@ -717,6 +719,7 @@ apa_function_dashboardLeftNavigation_form();
 								<?php
 									$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 									$country=json_decode($countrycode, true);
+									usort($country, "cmp");
 									$countser = 0;									
 									foreach($country  as $key => $value){
 										echo '<option value="'.$country[$key]['TelephoneCode'].'"';
@@ -805,7 +808,8 @@ apa_function_dashboardLeftNavigation_form();
 								<select class="form-control" id="Country1" name="Country" required autocomplete="country">
 								<?php
 								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-								$country=json_decode($countrycode, true);						
+								$country=json_decode($countrycode, true);	
+                                usort($country, "cmp");								
 								foreach($country  as $key => $value){
 									
 									echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
@@ -891,6 +895,7 @@ apa_function_dashboardLeftNavigation_form();
 							<?php 
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
+							 usort($country, "cmp");
 							foreach($country  as $key => $value){
 								
 								echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
@@ -1216,6 +1221,7 @@ apa_function_dashboardLeftNavigation_form();
 							<?php 
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
+							 usort($country, "cmp");
 							foreach($country  as $key => $value){
 								
 								echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
@@ -1301,6 +1307,7 @@ apa_function_dashboardLeftNavigation_form();
 							<?php 
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
+							 usort($country, "cmp");
 							foreach($country  as $key => $value){
 								
 								echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
@@ -1418,6 +1425,7 @@ apa_function_dashboardLeftNavigation_form();
 								<?php 
 								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 								$country=json_decode($countrycode, true);
+								 usort($country, "cmp");
 								foreach($country  as $pair => $value){
 									echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$pair]['Country'].'"';
 									if ($details['Workplaces'][$key]['Wcountry'] == $country[$pair]['Country']){ echo "selected='selected'"; }
@@ -1456,6 +1464,7 @@ apa_function_dashboardLeftNavigation_form();
 												<?php
 													$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 													$country = json_decode($countrycode, true);	
+													 usort($country, "cmp");
 													$countser = 0;
 													foreach($country  as $wcpair => $value){
 														echo '<option value="'.$country[$wcpair]['TelephoneCode'].'"';
@@ -1856,6 +1865,7 @@ apa_function_dashboardLeftNavigation_form();
 								<?php 
 								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 								$country=json_decode($countrycode, true);
+								 usort($country, "cmp");
 								foreach($country  as $pair => $value){
 									echo '<option value="'.$country[$pair]['ID'].'"';
 									if ($details['PersonEducation'][$key]['Country'] == $country[$pair]['ID']){ echo "selected='selected'"; } 

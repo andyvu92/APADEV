@@ -7,7 +7,7 @@ if(!function_exists('drupal_session_started'))
 <?php
 
 //Put filter condition to display member type
-$filterMemberProduct = array("10007","10008","10009","9997","10006");
+$filterMemberProduct = array("10007","10008","10009","9997");
 // 2.2.21 - Get Fellowship product
 	// Send - 
 	// ProductID 
@@ -19,6 +19,8 @@ $filterMemberProduct = array("10007","10008","10009","9997","10006");
 		if($fellowshipProduct['FPid'] !="0"){
 			$fellowshipProductID = $fellowshipProduct['ProductID'];
 		}
+		if($fellowshipProduct['ProductID']=="9977") { $SportPrice =$fellowshipProduct['FPprice']; }
+		if($fellowshipProduct['ProductID']=="9978") { $IntouchPrice =$fellowshipProduct['FPprice']; }
 	}
 	// 2.2.36 - get workplace settings list
 	// Send - 
@@ -545,6 +547,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<?php
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
+							usort($country, "cmp");
 							$countser = 0;							
 							foreach($country  as $key => $value){
 								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
@@ -602,6 +605,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<?php
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
+							usort($country, "cmp");
 							$countser = 0;							
 							foreach($country  as $key => $value){
 								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
@@ -690,8 +694,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					 <div class="chevron-select-box">  
 					   <select class="form-control" id="Country1" name="Country" autocomplete="country">
 						<?php
-                        $countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-						$country=json_decode($countrycode, true);						
+                        //$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+						//$country=json_decode($countrycode, true);						
 						foreach($country  as $key => $value){
 						    
 							echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
@@ -778,8 +782,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					 <div class="chevron-select-box">  
 					   <select class="form-control" id="Country2" name="Billing-Country" autocomplete="country">
 							<?php 
-							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							$country=json_decode($countrycode, true);
+							//$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							//$country=json_decode($countrycode, true);
 							foreach($country  as $key => $value){
 								
 								echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
@@ -937,8 +941,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				</div>
 
 				</div>
-				<div class="col-xs-12 display-none" id="ngsports"><input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0"> <label class="light-font-weight" for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label></div>
-				<div class="col-xs-12 display-none" id="ngmusculo"><input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"> <label class="light-font-weight" for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label></div>
+				<div class="col-xs-12 display-none" id="ngsports"><input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0"> <label class="light-font-weight" for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?($<?php echo $SportPrice;?>)</label></div>
+				<div class="col-xs-12 display-none" id="ngmusculo"><input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"> <label class="light-font-weight" for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?($<?php echo $IntouchPrice;?>)</label></div>
 			</div>
 
 			<div class="row"> 
@@ -1127,8 +1131,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<div class="chevron-select-box">
 						<select class="form-control" id="Wcountry<?php echo $key;?>" name="Wcountry<?php echo $key;?>" required>
 							<?php 
-							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							$country=json_decode($countrycode, true);
+							//$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							//$country=json_decode($countrycode, true);
 							foreach($country  as $pair => $value){
 								echo '<option class="CountryOption'.$country[$pair]['ID'].'" value="'.$country[$pair]['Country'].'"';
 								if ($details['Workplaces'][$key]['Wcountry'] == $country[$pair]['Country']){ echo "selected='selected'"; } 
@@ -1164,8 +1168,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<select class="form-control" id="WPhoneCountryCode<?php echo $key;?>" name="WPhoneCountryCode<?php echo $key;?>">
 						<?php
 						
-							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							$country = json_decode($countrycode, true);	
+							//$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+							//$country = json_decode($countrycode, true);	
 							$countser = 0;								
 							foreach($country  as $pair => $value){
 								echo '<option value="'.$country[$pair]['TelephoneCode'].'"';
@@ -1412,8 +1416,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								<div class="chevron-select-box">
 								<select class="form-control" id="Ugraduate-country<?php echo $key;?>" name="Ugraduate-country<?php echo $key;?>">
 								<?php 
-								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-								$country=json_decode($countrycode, true);
+								//$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
+								//$country=json_decode($countrycode, true);
 								foreach($country  as $pair => $value){
 									echo '<option value="'.$country[$pair]['ID'].'"';
 									if ($details['PersonEducation'][$key]['Country'] == $country[$pair]['ID']){ echo "selected='selected'"; } 
