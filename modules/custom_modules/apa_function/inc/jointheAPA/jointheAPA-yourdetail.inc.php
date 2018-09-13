@@ -901,6 +901,7 @@ if (isset($_SESSION['UserId'])):
                             <?php
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
+							 usort($country, "cmp");
 							$countser = 0;							
 							foreach($country  as $key => $value){
 								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
@@ -957,6 +958,7 @@ if (isset($_SESSION['UserId'])):
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
+	 usort($country, "cmp");
 	$countser = 0;
     foreach ($country as $key => $value) {
         echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
@@ -1100,6 +1102,7 @@ if (isset($_SESSION['UserId'])):
                         <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
+	 usort($country, "cmp");
     foreach ($country as $key => $value) {
         echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$key]['Country'] . '"';
         if ($details['Country'] == $country[$key]['Country']) {
@@ -1228,6 +1231,7 @@ if (isset($_SESSION['UserId'])):
                             <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
+	 usort($country, "cmp");
     foreach ($country as $key => $value) {
         echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$key]['Country'] . '"';
         if ($details['Billing-Country'] == $country[$key]['Country']) {
@@ -1596,6 +1600,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 				$State     = json_decode($statecode, true);
 				$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
 				$country     = json_decode($countrycode, true);
+				usort($country, "cmp");
 				$Languagecode = file_get_contents("sites/all/themes/evolve/json/Language.json");
 				$Language     = json_decode($Languagecode, true);
 				$NumberOfHourscode = file_get_contents("sites/all/themes/evolve/json/NumberOfHours.json");
@@ -2349,6 +2354,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <?php
         $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
         $country     = json_decode($countrycode, true);
+		usort($country, "cmp");
         foreach ($country as $pair => $value) {
             echo '<option value="' . $country[$pair]['ID'] . '"';
             if ($details['PersonEducation'][$key]['Country'] == $country[$pair]['ID']) {
@@ -2671,6 +2677,7 @@ if(isset($_POST['MT'])){
                                 <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
+	usort($country, "cmp");
     foreach ($country as $key => $value) {
         echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
 		if($country[$key]['ID']=="14"){echo "selected='selected'";}
@@ -2706,6 +2713,7 @@ if(isset($_POST['MT'])){
                                 <?php
     $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     $country     = json_decode($countrycode, true);
+	usort($country, "cmp");
     foreach ($country as $key => $value) {
         echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
 		if($country[$key]['ID']=="14"){echo "selected='selected'";}
@@ -2791,8 +2799,8 @@ if(isset($_POST['MT'])){
                             <div class="chevron-select-box">
                             <select class="form-control" id="Country1" name="Country" autocomplete="country">
                             <?php
-    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
-    $country     = json_decode($countrycode, true);
+    //$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+    //$country     = json_decode($countrycode, true);
     foreach ($country as $key => $value) {
         echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$key]['Country'] . '"';
 		if($country[$key]['ID']=="14"){echo "selected='selected'";}
@@ -2872,8 +2880,8 @@ if(isset($_POST['MT'])){
                                <div class="chevron-select-box">
                                <select class="form-control" id="Country2" name="Billing-Country">
                             <?php
-    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
-    $country     = json_decode($countrycode, true);
+    //$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+    //$country     = json_decode($countrycode, true);
     foreach ($country as $key => $value) {
         echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$key]['Country'] . '"';
 		if($country[$key]['ID']=="14"){echo "selected='selected'";}

@@ -973,6 +973,7 @@ $userRetisterStatus = false;
 								<?php 
 								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 								$country=json_decode($countrycode, true);
+								usort($country, "cmp");
 								foreach($country  as $key => $value){
 									echo '<option value="'.$country[$key]['Country'].'"';
 									if ($details['Country'] == $country[$key]['Country']){ echo "selected='selected'"; }
@@ -1062,6 +1063,7 @@ $userRetisterStatus = false;
 									<?php 
 									$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 									$country=json_decode($countrycode, true);
+									usort($country, "cmp");
 									foreach($country  as $key => $value){
 										
 										echo '<option value="'.$country[$key]['Country'].'"';
@@ -1106,6 +1108,7 @@ $userRetisterStatus = false;
 							<?php
 								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 								$country=json_decode($countrycode, true);
+								usort($country, "cmp");
 								$countser = 0;									
 								foreach($country  as $key => $value){
 									echo '<option value="'.$country[$key]['TelephoneCode'].'"';
@@ -1703,6 +1706,7 @@ $userRetisterStatus = false;
 								<?php 
 								$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 								$country=json_decode($countrycode, true);
+								usort($country, "cmp");
 								foreach($country  as $key => $value){
 									echo '<option value="'.$country[$key]['Country'].'"';
 									if($country[$key]['ID']=="14"){echo "selected='selected'";}

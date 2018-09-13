@@ -559,4 +559,9 @@ function checkRenew($Paidthrough, $tag){
 		return false;
 	}
 }
+// sort array by specific key
+function cmp($a, $b)
+    {
+        return strcmp($a['Country'], $b['Country']);
+    }
 ?>
