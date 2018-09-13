@@ -7,7 +7,7 @@ if(!function_exists('drupal_session_started'))
 <?php
 
 //Put filter condition to display member type
-$filterMemberProduct = array("10007","10008","10009","9997","10006");
+$filterMemberProduct = array("10007","10008","10009","9997");
 // 2.2.21 - Get Fellowship product
 	// Send - 
 	// ProductID 
