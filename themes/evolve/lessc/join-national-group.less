@@ -55,3 +55,198 @@
         }
     }
 }
+
+/* APA NATIONAL GROUP MAIN PAGE */
+.page-node-110{
+    #section-banner{
+        #block-block-169{
+            min-height: 60vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .header-banner{
+                h1{
+                    font-family: Roboto;
+                    font-weight: 400;
+                    text-transform: uppercase;
+                    color: #fff;
+                    font-size: 5em;
+                }
+            }
+        }
+    }
+
+    #national-group-main-content{
+
+    /* LEFT CONTENT */
+      .left-content{
+          .national-groups-nav{
+              margin-bottom: 50px;
+          }
+          .bottom-nav{
+            border-top: 1px solid rgba(0,0,0,0.12);
+            margin-right: -50px;
+              a{
+                color: #333;
+                padding-left: 0;
+                padding-top: 20px;
+                text-decoration: underline;
+                transition: all .3s linear;
+                &:hover{
+                    color: @bright-blue;
+                }
+              }
+          }
+        h2.lead-heading{
+            font-weight: 500;
+        }
+        p{
+            margin: 0 0px 10px;
+        }
+        .intro{
+            font-size: 1.4em;
+            padding-bottom: 20px;
+            display: block;
+        }
+        h3.sub-heading{
+            color: #333;
+            margin: 50px 0 20px;
+            text-transform: uppercase;
+        }
+        .flex-cell{
+            flex-wrap: nowrap;
+            .flex-col-6{
+                margin-right: 1px;
+                margin-bottom: 1px;
+                background: @bright-blue;
+                color: #fff;
+                a{
+                    display: flex;
+                    flex-direction: row;
+                    height: 100%;
+                    justify-content: flex-start;
+                    align-items: center;
+                    color: #fff;
+                    padding: 15px 15px 15px 0;
+                    .ng-title{
+                        font-size: 1.3em;
+                    }
+                    .ng-icon{
+                        min-width: 100px;
+                        height: 30px;
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        &.acupuncture{
+                            background-image: url(/sites/default/files/national-group-icons/Acupuncture-W.png);
+                        }
+                        &.mental{
+                            background-image: url(/sites/default/files/national-group-icons/Mental-Health-W.png);
+                        }
+                        &.animal{
+                            background-image: url(/sites/default/files/national-group-icons/Animal-W.png);
+                        }
+                        &.muscu{
+                            background-image: url(/sites/default/files/national-group-icons/Musculoskeletal-W.png);
+                        }
+                        &.aquatic{
+                            background-image: url(/sites/default/files/national-group-icons/Aquatic-W.png);
+                        }
+                        &.neurology{
+                            background-image: url(/sites/default/files/national-group-icons/Neurology-W.png);
+                        }
+                        &.business{
+                            background-image: url(/sites/default/files/national-group-icons/Business-W.png);
+                        }
+                        &.occupa{
+                            background-image: url(/sites/default/files/national-group-icons/Occ-Health-W.png);
+                        }
+                        &.cancer{
+                            background-image: url(/sites/default/files/national-group-icons/Cancer-W.png);
+                        }
+                        &.ortho{
+                            background-image: url(/sites/default/files/national-group-icons/Orthopaedic-W.png);
+                        }
+                        &.cardio{
+                            background-image: url(/sites/default/files/national-group-icons/Cardio-W.png);
+                        }
+                        &.paediatric{
+                            background-image: url(/sites/default/files/national-group-icons/Paediatrics-W.png);
+                        }
+                        &.disability{
+                            background-image: url(/sites/default/files/national-group-icons/Disability-W.png);
+                        }
+                        &.pain{
+                            background-image: url(/sites/default/files/national-group-icons/Pain-W.png);
+                        }
+                        &.educators{
+                            background-image: url(/sites/default/files/national-group-icons/Educators-W.png);
+                        }
+                        &.sports{
+                            background-image: url(/sites/default/files/national-group-icons/Sports-W.png);
+                        }
+                        &.emergency{
+                            background-image: url(/sites/default/files/national-group-icons/ED-W.png);
+                        }
+                        &.student{
+                            background-image: url(/sites/default/files/national-group-icons/Student-W.png);
+                        }
+                        &.geron{
+                            background-image: url(/sites/default/files/national-group-icons/Gerontology-W.png);
+                        }
+                        &.women-men{
+                            background-image: url(/sites/default/files/national-group-icons/Pelvic-Health-W.png);
+                        }
+                        &.leadership{
+                            background-image: url(/sites/default/files/national-group-icons/Physio-Leadership-W.png);
+                        }
+                    }    
+                }
+            }
+        }
+      }  
+      .right-sidebar{
+          .underline-heading{
+            position: relative;
+            font-family: Cairo;
+            font-size: 1.4em;
+            &:after{
+                content: '';
+                position: absolute;
+                width: 30px;
+                height: 3px;
+                background: @bright-blue;
+                left: 0;
+                top: 100%;
+            }
+          }
+          .nav{
+              margin-top: 30px;
+              max-width: 230px;
+              li{
+                  a{
+                    padding: 15px 0;
+                    border-top: 1px solid rgba(0,0,0,0.05);
+                    color: #333;
+                    font-weight: 500;
+                    font-family: Roboto;
+                    transition: all .3s linear;
+                    &:hover{
+                        color: @bright-blue;
+                    }
+                  }
+                  &:first-child{
+                    a{
+                        border-top: 0px;
+                    }
+                }
+                  &:last-child{
+                      a{
+                          border-bottom: 1px solid rgba(0,0,0,0.05);
+                      }
+                  }
+              }
+          }
+      }
+    }
+}

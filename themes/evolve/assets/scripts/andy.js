@@ -451,3 +451,29 @@ jQuery(document).ready(function(){
     $(this).css('text-decoration', '');
   });
 });
+
+// BUSINESS RESTRICT POPUP HIDE LOGIN LINKS FOR LOGGED IN
+jQuery(document).ready(function(){
+  $(document).on('click', '.business-restrict .restrict-overlay', function(){
+    if( $('#block-block-2').find('#logoutButton').length > 0 ){
+      $('#businessrestrictWindow .login-logic').remove();
+    }
+    else{ return; }
+  });
+
+  $(document).on('click', '#businessrestrictWindow .login-logic .login', function(){
+    $('#businessrestrictWindow').fadeOut();
+    $('.overlay').fadeOut();
+  });
+});
+
+//NATIONAL GROUP LINKS HOVER FADE OTHERS
+jQuery(document).ready(function(){
+  $('.national-group-grid .flex-col-6 a').on('mouseenter', function(){
+    $('.national-group-grid .flex-col-6 a').fadeTo(0, 0.6);
+    $(this).fadeTo(0, 1);
+  });
+  $('.national-group-grid .flex-col-6 a').on('mouseleave', function(){
+    $('.national-group-grid .flex-col-6 a').fadeTo(0, 1);
+  });
+});

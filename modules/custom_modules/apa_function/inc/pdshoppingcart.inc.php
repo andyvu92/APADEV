@@ -455,7 +455,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 					<span class="tooltip-activate">What is CVV?</span>
 					<div class="tooltip-content">
 						<h4>What is a Card Verification Number?</h4>
-						<span class="tooltip-img"><img src="sites/default/files/general-icon/cvn-image.png"></span>
+						<span class="tooltip-img"><img src="/sites/default/files/general-icon/cvn-image.png"></span>
 						<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
 					</div>
 				</div>	
