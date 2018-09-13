@@ -104,29 +104,13 @@ $background = getBackgroundImage($userID);
 <div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
 <div class="col-xs-12 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><span class="dashboard-name"><strong>Renew my membership</strong></span></div>
-		<!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background <?php if(!isset($_SESSION["userID"])) echo "display-none";?>">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>-->
-		</div>
 	<?php
 	//include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
 	?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
-				<ul class="nav nav-tabs">
-				<li><a class="tabtitle1 inactiveLink" style="cursor: pointer;"><span class="eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
-				<li><a class="tabtitle2 inactiveLink" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li>
-				<li><a class="tabtitle3 inactiveLink" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li>
-				<li><a class="tabtitle4 inactiveLink" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
-				<li><a class="tabtitle5 inactiveLink" style="cursor: pointer;"><span class="eventtitle5" id="Insurance"><strong>Insurance</strong></span></a></li>
-				<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6" id="Survey"><strong>Survey</strong></span></a></li>
-				<li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7" id="Payment"><strong>Payment</strong></span></a></li>
-				<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 text-underline" id="Review"><strong>Review</strong></span></a></li>
-				</ul>
+
 				<?php if($renewOuts['MResponse'] =="Order updated successfully"): ?>
-				<div class="row">
-					<h2 style="color:#000;">Thanks for renewing your APA membership! </h2>
-					<p style="color:#000;">We’re glad to welcome you back for another year, a copy of your purchase receipt will be sent to your inbox, along with your membership certification.</p>
 					<?php 
 					// after web service 2.2.26 Aptify response the invoice_id;
 					// 2.2.18 Get payment invoice PDF
@@ -143,31 +127,50 @@ $background = getBackgroundImage($userID);
 					<a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 					*/
 					?>
-					<p style="color:#000;">In the meantime, go to your <a href="dashboard">dashboard</a> to review your membership information or take a look at the <a href="/pd/pd-search">professional development options</a> available at the APA this year.</p>
+
+					<style>
+						#dashboard-right-content .dashboard_detail{
+							width: 100%;
+						}
+					</style>
+				<div class="flex-container" id="renew-membership-success">
+					<div class="flex-cell heading">
+						<h2 class="light-lead-heading">Thanks for renewing your APA membership!</h2>
+						<h3 class="lead-heading">We're glad to welcome you back.</h3>
+					</div>
+					<div class="flex-cell body-text">
+						<span>A copy of your purchase receipt and membership certification will be sent to your inbox.</span>
+						<span>In the meantime, you might like to:</span>
+					</div>
+					<div class="flex-cell cta">
+						<a href="/dashboard" class="cta-item">
+							<span class="icon dashboard-icon"></span>
+							<span class="description">Go to your dashboard to review your membership information</span>
+						</a>
+						<a href="/membership/membership-benefits" class="cta-item">
+							<span class="icon benefit-icon"></span>
+							<span class="description">Take advantage of the great range of APA member benefits</span>
+						</a>
+						<a href="/pd/pd-search" class="cta-item">
+							<span class="icon location-icon"></span>
+							<span class="description">Check out upcoming professional development events near you</span>
+						</a>
+					</div>
 				</div>
+
 				<?php else: ?>
-				<p style="color:#000;">There are some errors for purchasing order.</p>
+
+					<div class="flex-container" id="fail-purchase">
+						<div class="flex-cell">
+							<h3 class="light-lead-heading">We had issues processing<br> your payment request.</h3>
+						</div>
+						<div class="flex-cell">
+							<span class="sub-heading">Please <a href="/renewmymembership">try again</a> or <a href="/contact-us">contact us</a>.</span>
+						</div>
+						<!-- <div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div> -->
+					</div>
 				<?php endif; ?>
-				<?php /*
-				<div id="Iaksbnkvoice" class="modal fade big-screen" role="dialog">
-					<div class="modal-dialog">
-
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						</div>
-						<div class="modal-body">
-						<iframe name="stsIaksbnkvoice" src="http://www.physiotherapy.asn.au"></iframe>
-						</div>
-						<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-
-					</div>
-				</div>
-				*/ ?>
+				<?php ?>
 			</div>
 		</div>
 	</div>

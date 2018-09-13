@@ -109,7 +109,7 @@ $background = getBackgroundImage($userID);
 <div id="privacypolicyWindow" style="display:none;">
 	<span class="close-popup"></span>
 	<div class="modal-header">
-		<h4 class="modal-title">APA privacy policy</h4>
+		<h4 class="modal-title">Australian Physiotherapy Association Terms & Conditions</h4>
 	</div>
 
 <div class="modal-body">

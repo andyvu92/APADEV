@@ -250,7 +250,6 @@ apa_function_dashboardLeftNavigation_form();
 						</tr>
 						<?php endif; ?>
 						<tr>
-							<td style="padding-top: 25px;"><a href="/changepassword"><strong style="text-decoration: underline;">change your password</strong></a></td>
 						<?php
 						// 2.2.2 - GET Membership certification PDF
 						// Send - 
@@ -283,6 +282,7 @@ apa_function_dashboardLeftNavigation_form();
 					</tbody>
 				</table>
 				
+				<div class="col-xs-12 none-padding" style="font-size: 1.2em"><a href="/changepassword"><strong style="text-decoration: underline;">Change your password</strong></a></div>
 				<!--div class="col-xs-12 none-padding">
 					<a href class="black-underline-link" data-toggle="modal" data-target="#YInkFroamame">
 						<span>Membership certificate</span></a>
