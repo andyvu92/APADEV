@@ -19,6 +19,8 @@ $filterMemberProduct = array("10007","10008","10009","9997","10006");
 		if($fellowshipProduct['FPid'] !="0"){
 			$fellowshipProductID = $fellowshipProduct['ProductID'];
 		}
+		if($fellowshipProduct['ProductID']=="9977") { $SportPrice =$fellowshipProduct['FPprice']; }
+		if($fellowshipProduct['ProductID']=="9978") { $IntouchPrice =$fellowshipProduct['FPprice']; }
 	}
 	// 2.2.36 - get workplace settings list
 	// Send - 
@@ -937,8 +939,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				</div>
 
 				</div>
-				<div class="col-xs-12 display-none" id="ngsports"><input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0"> <label class="light-font-weight" for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label></div>
-				<div class="col-xs-12 display-none" id="ngmusculo"><input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"> <label class="light-font-weight" for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label></div>
+				<div class="col-xs-12 display-none" id="ngsports"><input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0"> <label class="light-font-weight" for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?($<?php echo $SportPrice;?>)</label></div>
+				<div class="col-xs-12 display-none" id="ngmusculo"><input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"> <label class="light-font-weight" for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?($<?php echo $IntouchPrice;?>)</label></div>
 			</div>
 
 			<div class="row"> 

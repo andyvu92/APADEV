@@ -1,3 +1,13 @@
+<?php 
+	//Get magazine products
+	$fpData['ProductID'] = ["9977","9978"];
+	$FPListArray = GetAptifyData("21", $fpData);
+	foreach($FPListArray as $MagazineProduct){ 
+		if($MagazineProduct['ProductID']=="9977") { $SportPrice =$MagazineProduct['FPprice']; }
+		if($MagazineProduct['ProductID']=="9978") { $IntouchPrice =$MagazineProduct['FPprice']; }
+	}
+	
+?>
 <?php
 
 //Put filter condition to display member type
@@ -1435,13 +1445,14 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                      </select>
                     </div>
                 </div>
+				
                 <div class="col-xs-12 display-none" id="ngsports">
                     <input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0">
-                    <label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label>
+                    <label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?($<?php echo $SportPrice;?>)</label>
                 </div>
                 <div class="col-xs-12 display-none" id="ngmusculo">
                     <input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value="0">
-                    <label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label>
+                    <label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?($<?php echo $IntouchPrice;?>)</label>
                 </div>
 
 
@@ -3132,11 +3143,11 @@ if(isset($_POST['MT'])){
 
                     <div class="col-xs-12 display-none" id="ngsports">
                         <input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0">
-                        <label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?</label>
+                        <label for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?($<?php echo $SportPrice;?>)</label>
                     </div>
                     <div class="col-xs-12 display-none" id="ngmusculo">
                         <input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value="0">
-                        <label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?</label>
+                        <label for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?($<?php echo $IntouchPrice;?>)</label>
                     </div>
 			    </div>
 
