@@ -224,13 +224,24 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 ?> 
 <form id ="join-review-form" action="renewconfirmation" method="POST">
 <input type="hidden" name="step3" value="3">
-<?php if ((sizeof($cardsnum["results"])==0) && !isset($_POST['addCard'])): ?>  
-	<div>Add your payment card unsucessfull, Please check your card details.</div>
-<?php endif;?>
 <?php if (isset($_POST['addCard']) && $_POST['addCard'] == "1"): ?>  
-   <?php if($out["result"]=="Failed"):?>
-	<div>Add your payment card unsucessfull, Please check your card details.</div>
-	<?php endif;?>
+	   <?php if($out["result"]=="Failed"):?>
+			<?php if($out["Message"]=="Expiry date lenght should be 4."):?>
+			<div class="checkMessage">Please go back to enter a valid expiry date before proceeding with your order. </div>
+			<?php elseif($out["Message"]=="CCV accepts up to 4 digit."):?>
+			<div class="checkMessage">Please go back to enter a valid CVV number before proceeding with your order.</div>
+			<?php elseif($out["Message"]=="Error in Create Person Saved Payment Method:Month must be between one and twelve. Parameter name: month"):?>
+			<div class="checkMessage">Please go back to enter a valid expiry date before proceeding with your order. </div>
+			<?php elseif($out["Message"]=="Please enter a valid End Date occurring after the Start Date."):?>
+			<div class="checkMessage">Please go back to enter a valid expiry date before proceeding with your order. </div>
+			<?php elseif((strpos($out["Message"], 'credit card number') !== false)):?>
+			<div class="checkMessage">Please go back to enter a valid credit card number before proceeding with your order. </div>
+			<?php elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)):?>
+			<div class="checkMessage">Please go back to enter a valid credit card number before proceeding with your order. </div>
+			<?php else:?>
+			<div class="checkMessage">there was an unexpected error with your payment details, Please go back and check they are correct, or contact the APA.</div>
+			<?php endif;?>	
+		<?php endif;?>		
 <?php endif;?>
 <div class="down8" <?php if(isset($_POST['step2'])|| isset($_POST['stepAdd'])||isset($_POST['step2-2'])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
 
@@ -523,7 +534,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			
 			<!--<input type="hidden" name="Paymentcard" id="Paymentcardvalue" value="">-->
 			<div class="flex-col-12" style="text-align: center">
-				<a target="_blank" class="addCartlink"><button style="margin-top: 30px;" class="placeorder <?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" type="submit">Place your order</button></a>
+				<!--<a target="_blank" class="addCartlink"><button style="margin-top: 30px;" class="placeorder <?php //if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" type="submit">Place your order</button></a>-->
 				<a class="addCartlink"><button style="margin-top: 30px;" class="placeorder <?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" type="submit">Place your order</button></a>
 			</div>
 	</div>
