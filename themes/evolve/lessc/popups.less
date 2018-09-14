@@ -221,6 +221,35 @@
             }
         }
     }
+    .close-popup{
+        background-image: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        width: 25px;
+        height: 25px;
+        border: 1px solid #b5b5b5;
+        cursor: pointer;
+        &:before{
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 2px;
+            transform: rotate(45deg);
+            background: @grey;
+        }
+        &:after{
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 2px;
+            transform: rotate(-45deg);
+            background: @grey;
+        }
+    }
     .ui-draggable-handle{
         position: absolute;
         right: 10px;
@@ -880,7 +909,7 @@ div[aria-describedby="confirmDelete"].ui-dialog{
     }
 }
 
-/*DELETE WORKPALCE*/
+/*DELETE WORKPLACE*/
 #deleteWorkplaceWindow{
     .small-popup;
     padding: 40px 80px;
@@ -1547,6 +1576,43 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
             border-radius: 0;
             input{
                 border-radius: 0;
+            }
+        }  
+    }
+}
+
+/* BUSINESS RESTRICTION POPUP */
+#businessrestrictWindow{
+    .small-popup;
+    padding: 40px 80px;
+    .light-lead-heading{
+        color: #000;
+        margin-top: 0;
+        text-align: center;
+        display: block;
+        width: 100%;
+    }
+    .buttons-container{
+        
+    }
+    @media all and (max-width: @larger-phone-width){
+        padding: 40px 20px;
+    }
+    @media all and (max-width: @phone-width) {
+        .light-lead-heading{
+            font-size: 2em;
+        }
+    }
+}
+
+
+#nonAPAhour.modal{
+    .modal-dialog{
+		.large-popup;
+        .modal-content{
+            input{
+                border-radius: 0;
+				background-color: #f8fafc;
             }
         }  
     }

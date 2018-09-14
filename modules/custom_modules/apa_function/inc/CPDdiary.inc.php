@@ -180,7 +180,7 @@ $DiaryAll = Array();
 <!--div class="container"-->
 <!-- Modal -->
 <div id="nonAPAhour" class="modal fade" role="dialog">
-	<div class="modal-dialog" <!--style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;"-->>
+	<div class="modal-dialog">
 
 	<!-- Modal content-->
 	<div class="modal-content">
@@ -193,19 +193,19 @@ $DiaryAll = Array();
 			<input type="hidden" name="nonAPA" value="1" placeholder="" id="hidden">
 			<div class="col-lg-12">
 			<label for="DescripotionNA">Description</label>
-			<input type="text" required="true" name="Description" placeholder="" id="Description">
+			<input class="form-control" type="text" required="true" name="Description" placeholder="" id="Description">
 			</div><div class="col-lg-12">
 			<label for="DateNA">Date</label>
-			<input type="date" required="true" name="Date" placeholder="" id="DateNA">
+			<input class="form-control" type="date" required="true" name="Date" placeholder="" id="DateNA">
 			</div><div class="col-lg-12">
 			<label for="TimeNA">Hours</label>
-			<input type="number" required="true" name="Time" placeholder="" id="TimeNA">
+			<input class="form-control" type="number" required="true" name="Time" placeholder="" id="TimeNA">
 			</div><div class="col-lg-12">
 			<label for="ProviderNA">Provider</label>
-			<input type="text" required="true" name="Provider" placeholder="" id="ProviderNA">
+			<input class="form-control" type="text" required="true" name="Provider" placeholder="" id="ProviderNA">
 			</div><div class="col-lg-12">
 			<label for="ReflectionNA">Reflection</label>
-			<input type="text" required="true" name="Reflection" placeholder="" id="ReflectionNA">
+			<input class="form-control" type="text" required="true" name="Reflection" placeholder="" id="ReflectionNA">
 			</div>
 		</div>
 		<div class="modal-footer">
