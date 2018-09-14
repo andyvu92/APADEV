@@ -436,10 +436,10 @@ if(isset($_POST['step2-1'])) {
 				<input popup class="styled-checkbox" type="checkbox" id="jprivacy-policy">
 				<label for="jprivacy-policy" id="privacypolicyl" popup-target="privacypolicyWindow"><span class="tipstyle">*&nbsp;</span>I agree to the APA Terms and Conditions</label>
 			</div>
-			<div class="col-xs-12 display-none" id="rolloverblock">
+			<!--<div class="col-xs-12 display-none" id="rolloverblock">
 				<input class="styled-checkbox" type="checkbox" id="instalmentpolicy">
 				<label for="instalmentpolicy" id="instalmentpolicyl"><span class="tipstyle">*&nbsp;</span>I agree to the APA Instalment Payment Policy</label>
-			</div>
+			</div>-->
 			<!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 display-none" id="rolloverblock"><label for="Rollover">Roll over</label><input type="checkbox" name="Rollover" id="Rollover"></div>-->
 		</div>   
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  <a href="javascript:document.getElementById('renew-insurance-form').submit();" class="join-details-button7 <?php if(isset($_POST["insuranceStatus"])&& $_POST["insuranceStatus"]=="1") { echo "stop"; }?>"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>

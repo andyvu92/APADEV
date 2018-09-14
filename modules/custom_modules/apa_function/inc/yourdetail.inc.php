@@ -454,7 +454,23 @@ apa_function_dashboardLeftNavigation_form();
 					</ul>
 				</div>
 				<?php if(isset($_GET["action"])&& ($_GET["action"]=="addcard")) :?>
-					<?php if($out["result"]=="Failed") { echo "<div>Add your payment card unsucessfull, Please check your card details.</div>";}  ?>
+					<?php if($out["result"]=="Failed"):?>
+						<?php if($out["Message"]=="Expiry date lenght should be 4."):?>
+						<div class="checkMessage">Please enter a valid expiry date.</div>
+						<?php elseif($out["Message"]=="CCV accepts up to 4 digit."):?>
+						<div class="checkMessage">Please enter a valid CVV number.</div>
+						<?php elseif($out["Message"]=="Error in Create Person Saved Payment Method:Month must be between one and twelve. Parameter name: month"):?>
+						<div class="checkMessage">Please enter a valid expiry date.</div>
+						<?php elseif($out["Message"]=="Please enter a valid End Date occurring after the Start Date."):?>
+						<div class="checkMessage">Please enter a valid expiry date.</div>
+						<?php elseif((strpos($out["Message"], 'credit card number') !== false)):?>
+						<div class="checkMessage">Please enter a valid credit card number.</div>
+						<?php elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)):?>
+						<div class="checkMessage">Please enter a valid credit card number.</div>
+						<?php else:?>
+						<div class="checkMessage">there was an unexpected error with your payment details, Please go back and check they are correct, or contact the APA.</div>
+						<?php endif;?>	
+					<?php endif;?>	
 				<?php endif; ?>
 			<form action="<?php echo $url;?>" name="your-details" method="POST" novalidate>
 			    <input type="hidden" name="step1" value="1"/>
