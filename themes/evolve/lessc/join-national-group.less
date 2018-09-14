@@ -64,6 +64,15 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            &:before{
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0,0,0,0.05);
+            }
             .header-banner{
                 h1{
                     font-family: Roboto;
@@ -71,15 +80,28 @@
                     text-transform: uppercase;
                     color: #fff;
                     font-size: 5em;
+                    line-height: 1em;
+                }
+            }
+            .content{
+                text-align: center;
+                position: relative;
+            }
+            @media all and (max-width: @larger-phone-width) {
+                .header-banner{
+                    h1{
+                        font-size: 3em;
+                    }
                 }
             }
         }
     }
 
-    #national-group-main-content{
+    #section-main-content #national-group-main-content{
 
     /* LEFT CONTENT */
       .left-content{
+        padding-bottom: 50px;
           .national-groups-nav{
               margin-bottom: 50px;
           }
@@ -204,8 +226,27 @@
                 }
             }
         }
+
+        @media all and (max-width: @larger-tablet-width) {
+            padding-right: 50px;
+        }
+        @media all and (max-width: @tablet-width) {
+            padding-right: 0px;
+            width: 100%;
+            .bottom-nav{
+                margin-right: 0px;
+            }
+        }
+        @media all and (max-width: @larger-phone-width) {
+            h2.lead-heading{
+                font-size: 1.9em;
+                font-weight: 600;
+            }
+        }
       }  
       .right-sidebar{
+        position: relative;
+        top: 20px;
           .underline-heading{
             position: relative;
             font-family: Cairo;
@@ -247,6 +288,32 @@
                   }
               }
           }
+
+        @media all and (max-width: @tablet-width) {
+            display: none;
+        }
+      }
+
+      @media all and (max-width: @larger-phone-width) {
+        .national-groups-nav{
+            h3.sub-heading{
+                border-top: 1px solid rgba(0,0,0,0.12);
+                padding-top: 20px;
+                font-size: 1.2em;
+            }
+            .national-group-grid{
+                flex-flow: column;
+                width: 100vw;
+                left: -30px;
+                position: relative;
+                .flex-cell{
+                    flex-flow: column;
+                    .flex-col-6{
+                        width: 100%;
+                    }
+                }
+            }
+        }
       }
     }
 }

@@ -131,10 +131,10 @@ if(isset($_SESSION["Log-in"])) : ?>
     <!-- UPDATE PASSWORD SUCCESSFUL  -->
 	<div class="flex-container" id="non-member">
 		<div class="flex-cell">
-			<h3 class="light-lead-heading">Password updated successful.</h3>
+			<h3 class="light-lead-heading">Password updated successfully.</h3>
 		</div>
 		<div class="flex-cell cta">
-			<a href="/dashboard" class="join">Go to Dashboard ></a>
+			<a href="/dashboard" class="join">Go to Dashboard</a>
 		</div>
 		<div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
 	</div>
@@ -146,7 +146,7 @@ if(isset($_SESSION["Log-in"])) : ?>
 <div class="col-xs-12 col-md-10 background_<?php echo $background; ?>" id="dashboard-right-content">
    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-         <div class="col-xs-12"><span class="dashboard-name"><strong>Change your password</strong></span></div>
+         <div class="col-xs-12"><span class="dashboard-name cairo"><strong>Change your password</strong></span></div>
          <!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>-->
       </div>
       <!-- Modal -->

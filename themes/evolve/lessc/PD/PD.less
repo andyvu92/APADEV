@@ -1991,7 +1991,13 @@ input[name="Couponcode"]{
 .page-node-86{
     #block-block-123{
         .top-banner{
-            padding: 200px 25% 2%;
+            padding: 5vh 27% 0%;
+            display: flex;
+            flex-direction: column;
+            height: 60vh;
+            justify-content: center;
+            align-items: center;
+
             .page-main-header{
                 color: #fff;
                 font-family: Cairo;
@@ -2030,7 +2036,7 @@ input[name="Couponcode"]{
                 margin: 25px auto 15px;
             }
             @media all and (max-width: @larger-tablet-width){
-                padding: 200px 15% 2%;
+                padding: 5vh 15% 0%;
             }
             @media all and (max-width: @larger-phone-width){
                 padding: 150px 10% 2%;
@@ -2040,6 +2046,11 @@ input[name="Couponcode"]{
                 .text-container{
                     font-size: 1.2em;
                 }
+            }
+        }
+        @media all and (max-width: @tablet-width){
+            .top-banner{
+                height: 58vh;
             }
         }
         @media all and (max-width: @larger-phone-width){
@@ -2069,7 +2080,7 @@ input[name="Couponcode"]{
         .sub-top-banner{
             padding: 20px 0;
             margin: 0 auto;
-            background: rgba(0, 159, 218, 0.8);
+            background: rgba(0, 159, 218, 0.9);
             font-family: Roboto;
             color: #fff;
             font-size: 1.4em;
@@ -2080,22 +2091,30 @@ input[name="Couponcode"]{
             padding: 30px 0;
             & > .flex-container{
                 flex-wrap: nowrap;
+                max-width: 1300px;
             }
             .left-content{
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
                 padding-right: 30px;
+                span:not(.lead-text){
+                    letter-spacing: 0.5px;
+                }
             }
             .right-content{
                 display: flex;
                 flex-direction: row;
                 align-items: center;
+                justify-content: flex-end;
             }
             .lead-text{
                 font-size: 1.6em;
                 line-height: 1em;
                 margin-bottom: 10px;
+                .mobile-hidden{
+                    display: inline;
+                }
             }
             .secondary-button{
                 color: #fff;
@@ -2107,6 +2126,12 @@ input[name="Couponcode"]{
                 width: 80%;
                 text-align: center;
                 max-width: 294px;
+                letter-spacing: 1px;
+                transition: all .3s linear;
+                &:hover{
+                    border: 4px solid #fff;
+                    font-weight: 500;
+                }
             }
         }
         @media all and (max-width: @larger-tablet-width) {
@@ -2115,7 +2140,9 @@ input[name="Couponcode"]{
             background-attachment: scroll;
         }
         @media all and (max-width: @tablet-width){
+            background-position: 66% -100px !important;
             .sub-top-banner{
+                background: rgba(0,159,218,1);
                 text-align: center;
                 .flex-container{
                     flex-direction: column;
@@ -2127,6 +2154,11 @@ input[name="Couponcode"]{
                 .right-content{
                     width: 100%;
                     justify-content: center;
+                }
+                .lead-text{
+                    .mobile-hidden{
+                        display: none;
+                    }
                 }
             } 
         }
@@ -2156,7 +2188,7 @@ input[name="Couponcode"]{
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 15px 50px;
+            padding: 17px 50px;
             &:hover{
                 .box-icon{
                     background: @bright-blue;
@@ -2279,12 +2311,20 @@ input[name="Couponcode"]{
                 font-weight: 600;
                 font-family: Roboto!important;
                 text-align: center;
+                letter-spacing: 0.5px;
+                @media all and (max-width: @tablet-width) {
+                    font-weight: 500;
+                }
             }
             .box-content{
                 text-align: center;
                 margin: 10px 0;
                 p{
                     font-size: 1.4em;
+                    @media all and (max-width: @tablet-width) {
+                        font-size: 1.2em;
+                        letter-spacing: 0.25px;
+                    }
                 }
             }
         }
@@ -2332,3 +2372,82 @@ input[name="Couponcode"]{
         background: #fff!important;
     }
 }
+
+
+#section03{
+    position: relative;
+    margin-top: 20px;
+    a {
+        padding-top: 60px;
+      }
+}
+  #section03 a span {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 46px;
+    height: 46px;
+    margin-left: -23px;
+    border: 1px solid #fff;
+    border-radius: 100%;
+    box-sizing: border-box;
+  }
+  #section03 a span::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    content: '';
+    width: 16px;
+    height: 16px;
+    margin: -12px 0 0 -8px;
+    border-left: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    box-sizing: border-box;
+  }
+  #section03 a span::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    content: '';
+    width: 44px;
+    height: 44px;
+    box-shadow: 0 0 0 0 rgba(255,255,255,.1);
+    border-radius: 100%;
+    opacity: 0;
+    -webkit-animation: sdb03 3s infinite;
+    animation: sdb03 3s infinite;
+    box-sizing: border-box;
+  }
+  @-webkit-keyframes sdb03 {
+    0% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    60% {
+      box-shadow: 0 0 0 60px rgba(255,255,255,.1);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  @keyframes sdb03 {
+    0% {
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    60% {
+      box-shadow: 0 0 0 60px rgba(255,255,255,.1);
+      opacity: 0;
+    }
+    100% {
+      opacity: 0;
+    }
+  }

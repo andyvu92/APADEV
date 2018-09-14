@@ -336,6 +336,7 @@ You have the right to access the personal information about yourself held by the
 	<section class="loaders">
 		<span class="loader loader-quart">
 		</span>   
+		<span class="edu-step-note">We are creating your member profile...</span>
 	</section>
 </div>
 <?php logRecorder(); ?>

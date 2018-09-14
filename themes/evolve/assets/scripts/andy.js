@@ -477,3 +477,12 @@ jQuery(document).ready(function(){
     $('.national-group-grid .flex-col-6 a').fadeTo(0, 1);
   });
 });
+
+
+jQuery(document).ready(function(){
+  $(window).on('scroll', function(){
+    if ( $(this).scrollTop() > 400 ){
+      
+    }
+  });
+});

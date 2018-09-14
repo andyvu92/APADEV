@@ -1413,6 +1413,7 @@ jQuery(document).ready(function($) {
 	$(document).on('click', '.join-details-button4', function(){
 		$('.down4').show();
 		$('.down5').hide();
+		$('.overlay .edu-step-note').show();
 		$('.overlay').fadeIn();
 		$('.loaders').css('visibility','visible').hide().fadeIn();
 	});
@@ -1537,10 +1538,29 @@ jQuery(document).ready(function(){
 		}
 	});
 	
-	$('#ahpblock input').keyup( function(e){
+	$('#ahpblock input').keydown( function(e){
 		if ($(this).val().length >= max_chars) { 
 			$(this).val($(this).val().substr(0, max_chars));
 		}
 	});
 });
 
+// NO NUMBER IN FORMS FIELS TOWN/CITY
+jQuery(document).ready(function(){
+	$("input[name='Suburb'], input[name='Billing-Suburb']").keydown(function(e) {
+		console.log('right');
+			// Allow: backspace, delete, tab, escape, enter and .
+			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+			// Allow: Ctrl+A, Command+A
+			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+			// Allow: home, end, left, right, down, up
+			(e.keyCode >= 35 && e.keyCode <= 40)) {
+				// let it happen, don't do anything
+				return;
+			}
+			// Ensure that it is a letter and stop the keypress
+			if (e.keyCode >= 48 && e.keyCode <= 57){
+				e.preventDefault();
+			}
+	});
+});
