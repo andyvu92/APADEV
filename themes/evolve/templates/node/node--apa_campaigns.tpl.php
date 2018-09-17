@@ -132,10 +132,10 @@
 		<?php echo "member, but not eligible!"; ?>
 	<?php else: ?>
 		<?php if ($result[0] == "0") : ?>
-			<?php echo "!!!!"; ?>
+			<?php //echo "!!!!"; ?>
 		<?php elseif ($result[0] == "3") : ?>
 		
-			<?php print_r($result[1]); ?>
+			<?php //print_r($result[1]); ?>
 		<?php elseif($result == "2"): ?>
 			<?php
 			$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
@@ -143,7 +143,7 @@
 			$imgLink = $link.$base_path."sites/default/files/Member-access-page.png"; 
             echo "<img src='".$imgLink."'/>";
 		    ?>
-			<?php print_r($result[1]); ?>
+			<?php //print_r($result[1]); ?>
 		<?php elseif($result == "3"): ?>
 			<?php echo "member, but not eligible!"; ?>
 		<?php endif; ?>
