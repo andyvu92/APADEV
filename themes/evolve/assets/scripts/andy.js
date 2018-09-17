@@ -141,7 +141,7 @@ jQuery(document).ready(function() {
     is_mobile = false;       
   }
 	if(window.location.href.indexOf("?page") > -1||window.location.href.indexOf("?pagesize") > -1 || window.location.href.indexOf("?search-result") > -1){
-    var scrollpoint = $('#section-content-top').offset().top  - 265;
+    var scrollpoint = $('#section-content-top').offset().top  - 200;
     if (is_mobile == true) {
       var scrollpoint = $('#section-content-top').offset().top  - 200;
     }
@@ -486,3 +486,4 @@ jQuery(document).ready(function(){
     }
   });
 });
+
