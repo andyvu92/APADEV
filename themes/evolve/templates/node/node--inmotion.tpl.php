@@ -213,7 +213,7 @@
       </div>
 	
 	<?php 
-		$block = block_load('block', '285');
+		$block = block_load('block', '307');
 		$get = _block_get_renderable_array(_block_render_blocks(array($block)));
 		$output = drupal_render($get);        
 		print $output;

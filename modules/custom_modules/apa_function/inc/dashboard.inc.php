@@ -31,6 +31,7 @@ $background = getBackgroundImage($userID);
 <?php if(isset($_SESSION["UserId"])) : ?>
 <div id="cpd" style="display:none"><?php echo $cpd; ?></div>
 <div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
+<?php if($_SESSION['MemberTypeID']!="1"): ?>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
 	window.onresize = function(event) {
@@ -166,6 +167,7 @@ $background = getBackgroundImage($userID);
 		chart.draw(data, options);
 	}
 </script>
+<?php endif; ?>
 <?php //include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 apa_function_dashboardLeftNavigation_form();
  ?> 
@@ -432,3 +434,11 @@ apa_function_dashboardLeftNavigation_form();
 		</div>
 <?php endif; ?>
 <?php logRecorder(); ?>
+<?php 
+	// ads
+	$block = block_load('block', '308');
+	$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+	$output = drupal_render($get);        
+	print $output;
+	
+?>

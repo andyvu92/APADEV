@@ -148,8 +148,6 @@ $DiaryAll = Array();
   </div>
 </div>
 <button class="Non-APA-hour" data-toggle="modal" data-target="#nonAPAhour"><span>Add non-APA hours</span></button><br />
-<form action="/pd/cpd-diary" method="POST">
-</form>
 </div>
 <div class="TabContents3" style="display: none;">
 	<div class="NAPAhours">
