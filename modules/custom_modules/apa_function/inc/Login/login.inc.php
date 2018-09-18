@@ -734,7 +734,7 @@ if($resultdata['result']) {
 			echo $result["ErrorInfo"]["ErrorMessage"];
 			echo "<br>log-out fail";
 		} else {
-			echo '<div class="GetCentreLayout">
+			echo '<div class="GetCentreLayoutHome">
 					<div class="ASection">
 						<div class="Desktop">
 							<p>You are successfully logged out!</p>
@@ -987,7 +987,7 @@ $('.tab span').on('click', function (e) {
 </div> -->
 <?php logRecorder(); ?>
 <?php if(isset($_SESSION['LogInFirstTime'])): ?>
-<div class="GetCentreLayout">
+<div class="GetCentreLayoutHome">
 	<div class="ASection">
 		<div class="Desktop">
 			<p>Welcome <b><?php if(isset($_SESSION['FirstName'])) {echo $_SESSION['FirstName'];} ?>!</b></p>
@@ -1001,13 +1001,13 @@ $('.tab span').on('click', function (e) {
 <?php endif; ?>
 <script type="text/javascript">
 $(document).ready(function(){
-	$('.GetCentreLayout .ASection .Desktop')
+	$('.GetCentreLayoutHome .ASection .Desktop')
 		.animate({ "padding-left": "1px" }, 500 )
 		.animate({ "margin-top": "0px" }, 300 )
 		.animate({ "padding-left": "1px" }, 3000 )
 		.animate({ "margin-top": "-84px" }, 300 );
 	
-	$('.GetCentreLayout .ASection .Mobile')
+	$('.GetCentreLayoutHome .ASection .Mobile')
 		.animate({ "padding-left": "1px" }, 500 )
 		.animate({ "margin-top": "0px" }, 300 )
 		.animate({ "padding-left": "1px" }, 3000 )
