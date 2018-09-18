@@ -564,4 +564,52 @@ function cmp($a, $b)
     {
         return strcmp($a['Country'], $b['Country']);
     }
+// find product ID in national group page	
+function findPID($ngtag){
+	switch($ngtag){
+		case "201":
+			return "9970";
+		case "202":
+			return "9971";
+		case "203":
+			return "10010";
+		case "204":
+			return "";
+		case "205":
+			return "10011";
+		case "206":
+			return "10027";
+		case "207":
+			return "10012";
+		case "208":
+			return "10026";
+		case "209":
+			return "10013";
+		case "210":
+			return "10023";
+		case "211":
+			return "10014";
+		case "212":
+			return "10020";
+		case "213":
+			return "10025";
+		case "214":
+			return "10015";
+		case "215":
+			return "10016";
+		case "216":
+			return "10022";
+		case "217":
+			return "10024";
+		case "218":
+			return "10018";
+		case "219":
+			return "10022";
+		case "219":
+			return "10022";
+		case "222":
+			return "10021";
+		
+	}
+}
 ?>
