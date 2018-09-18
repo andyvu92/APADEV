@@ -170,7 +170,7 @@ jQuery(document).ready(function($) {
 	});
 
 	$("#homeShowAll").click(function() {
-		$('#downHomeT1').show(500);
+		$('#downHomeT1').fadeIn(500);
 		$('#downHomeT2').hide(500);
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);

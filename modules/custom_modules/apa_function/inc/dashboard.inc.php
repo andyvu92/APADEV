@@ -414,6 +414,13 @@ apa_function_dashboardLeftNavigation_form();
 				<a class="accent-button" href="/contact-us"><span>Submit</span></a>
 			</div>
 		</div>
+		<?php 
+			$block = block_load('block', '308');
+			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+			$output = drupal_render($get);        
+			print $output;
+			
+		?>
 	</div>
 </div>
 <?php else : 
