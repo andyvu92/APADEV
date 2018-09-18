@@ -1,0 +1,32 @@
+/* --------------------------------------------------------- */
+/* ------------------- APA Advertisement ------------------- */
+/* --------------------------------------------------------- */
+.GetCentreLayout {
+	left: 0;
+	position: fixed;
+	width: 100%;
+	top:100%;
+	z-index: 1000;
+	.ASection .Desktop {
+		display: block;
+		width: 600px;
+		z-index: 1000;
+		margin: auto;
+		margin-top: -84px;
+	}
+	.ASection .Mobile {
+		display: none;
+		width: 234px;
+		z-index: 1000;
+		margin: auto;
+		margin-top: -70px;
+	}
+}
+@media screen and (max-width: 600px) {
+	.GetCentreLayout .ASection .Desktop {
+		display: none;
+	}
+	.GetCentreLayout .ASection .Mobile {
+		display: block;
+	}
+}
