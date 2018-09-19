@@ -1114,7 +1114,7 @@ jQuery(document).ready(function($) {
 		window.history.back();
 	}
     BringSurveyBack();
-    if(x == 2) {
+    if(x == 2 || x == 3) {
       $(".node-membership-type").hide();
       $('[id^=question]').hide();
       $('[id^=question]').addClass("function");
