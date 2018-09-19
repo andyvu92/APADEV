@@ -169,8 +169,20 @@ jQuery(document).ready(function($) {
 		$(this).addClass('active');
 	});
 
+	$('.media_filter ul li').click(function(){
+		$(this).siblings().removeClass('active');
+		$(this).addClass('active');
+	});
+
+	// ANIMATED SECTION ON CAMPAIGN/ABOUT-CAMPAIGN
+	$('.media_filter ul li[id^="section"]').click(function(){
+		getid = $(this).attr('id');
+		$('.media_contents_filtered [id^="section"]').hide();
+		$('.media_contents_filtered #' + getid + '-content').fadeIn();
+	});
+
 	$("#homeShowAll").click(function() {
-		$('#downHomeT1').fadeIn(500);
+		$('#downHomeT1').show(500);
 		$('#downHomeT2').hide(500);
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);

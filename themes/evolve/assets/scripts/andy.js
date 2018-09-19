@@ -487,3 +487,9 @@ jQuery(document).ready(function(){
   });
 });
 
+// DISALLOW TYPING IN YOUTUBE EMBED INPUT
+jQuery(document).ready(function(){
+  $('.link-type input').on('keydown', function(e){
+    e.preventDefault();
+  });
+});
