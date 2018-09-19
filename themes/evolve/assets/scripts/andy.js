@@ -493,3 +493,16 @@ jQuery(document).ready(function(){
     e.preventDefault();
   });
 });
+
+// CHOOSE PHYSIO - AUDIO CONTROLER
+jQuery(document).ready(function(){
+  $('.radio-btn').click(function(){
+    if ( $(this).html() == 'Pause' ) {
+      $('#choose-physio-radio').trigger("pause");
+      $(this).html('Play');
+    } else {
+      $('#choose-physio-radio').trigger("play");
+        $(this).html('Pause');
+    }
+  });
+});
