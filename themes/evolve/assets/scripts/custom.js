@@ -1103,7 +1103,9 @@ jQuery(document).ready(function($) {
 			//$('.Join').html("<a href='/jointheapa?MT="+MembershipType+"&NG="+NationalGroups+"' style='color: white;'>Join now</a>");
 		}
 		BringSurveyBack();
-		$("."+type).show();
+		if(x == 3) {
+			$("."+type).show();
+		}
 		
 		$('html, body').animate({
 			scrollTop: $('#section-main-content').offset().top
