@@ -97,8 +97,9 @@
 		   <?php print $title; ?></a></h2>
     </header>
 		*/ ?>
-	<div class="andyuse" style="margin: 0 10%;">
-	<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
+	<div id="section-main-content" class="container">
+		<div class="row">
+	<div class="region region-content col-xs-12 col-sm-12 col-md-9 col-lg-9 MainContent">
 	    
 		<!--<h1 class="SectionHeader"><?php //print $node->title;?></h1>
 		<div class="brd-headling">&nbsp;</div>-->
@@ -112,7 +113,7 @@
         ?>
 	
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3">
 	 	<?php 
 			$block = block_load('block', '297');
 			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
@@ -128,7 +129,8 @@
 	
 	</div>
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	</div>
+	<div class="container">
 	<?php 
 		$block = block_load('block', '302');
 		$get = _block_get_renderable_array(_block_render_blocks(array($block)));
@@ -136,44 +138,46 @@
 		print $output;
 	?>
 	</div>
-    <div class="andyuse" style="margin: 0 10%;">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<?php 
-			$block = block_load('block', '303');
-			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-			$output = drupal_render($get);        
-			print $output;
-		?>
+    <div id="section-content-bottom-second">
+		<div class="container">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
+			<?php 
+				$block = block_load('block', '303');
+				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+				$output = drupal_render($get);        
+				print $output;
+			?>
+			</div>
 		</div>
 	</div>
-	<div class="andyuse" style="margin: 0 10%;">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<?php 
-			$block = block_load('block', '304');
-			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-			$output = drupal_render($get);        
-			print $output;
-		?>
+	<div id="section-content-bottom-third">
+		<div class="container">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<?php 
+				$block = block_load('block', '304');
+				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+				$output = drupal_render($get);        
+				print $output;
+			?>
+			</div>
 		</div>
 	</div>
-	<div class="andyuse" style="margin: 0 10%;">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<?php 
-			$block = block_load('block', '305');
-			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-			$output = drupal_render($get);        
-			print $output;
-		?>
-		</div>
-	</div>
-	<div class="andyuse" style="margin: 0 10%;">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<?php 
+	<div id="section-content-bottom-fourth">
+		<div class="container">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<?php 
+				$block = block_load('block', '305');
+				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+				$output = drupal_render($get);        
+				print $output;
+			?>
+			<?php 
 			$block = block_load('block', '306');
 			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
 			$output = drupal_render($get);        
 			print $output;
-		?>
+			?>
+			</div>
 		</div>
 	</div>
     <?php elseif($result == "1"): $url =  "{$_SERVER['REQUEST_URI']}";?>
