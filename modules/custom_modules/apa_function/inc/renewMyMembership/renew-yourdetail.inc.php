@@ -174,7 +174,7 @@ if(isset($_POST['step1'])) {
 	$tempWork = array();
 	for($i=0; $i<=$num; $i++){
 		$workplaceArray = array();
-		if(isset($_POST['WorkplaceID'.$i])){
+		if(isset($_POST['WorkplaceID'.$i]) && !empty($_POST['Name-of-workplace' . $i])){
 			$workplaceArray['WorkplaceID'] = $_POST['WorkplaceID'.$i];
 			if(isset($_POST['Findabuddy'.$i])) { $workplaceArray['Find-a-buddy'] = $_POST['Findabuddy'.$i];}else{ $workplaceArray['Findabuddy'] = "False";}
 			if(isset($_POST['Findphysio'.$i])) { $workplaceArray['Findphysio'] = $_POST['Findphysio'.$i];}else{ $workplaceArray['Findphysio'] = "False";}

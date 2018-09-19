@@ -288,6 +288,7 @@ function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 }
 function PDSaveCoupon($userID, $type, $Coupon){
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	// use drupal db_update by jinghu 18/09/2018
 	try {
 	$shoppingcartSave= $dbt->prepare('UPDATE shopping_cart SET Coupon = :Coupon WHERE userID= :userID AND type= :type');
 	$shoppingcartSave->bindValue(':userID', $userID);
@@ -299,6 +300,12 @@ function PDSaveCoupon($userID, $type, $Coupon){
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
 	}
+	
+	/*$db_result = db_update('shopping_cart', $options = array('target' => 'slave'))
+	->fields(array('Coupon' => $Coupon,))
+	->condition ('userID', $userID, '=')
+	->condition ('type', $type, '=')
+	->execute();*/
 }
 function getBackgroundImage($userID){
 	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
@@ -346,7 +353,7 @@ function getBackgroundImage($userID){
  */
 function MtypeContent($Only, $type) {
 	$MemberOnly = ((array)$Only['#items'][0]["taxonomy_term"])['name'];
-	echo $MemberOnly;
+	//echo $MemberOnly;
 	$content = ((array)$Only['#object'])["body"]['und'];
 	if($MemberOnly == "Full") {
 		//echo "F";

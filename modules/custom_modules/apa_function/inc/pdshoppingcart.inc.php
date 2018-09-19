@@ -480,7 +480,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	</div>
 	<?php endif; ?>
     <?php if (sizeof($cardsnum["results"])==0): ?>
-	<form action="/pd/pd-shopping-cart" method="POST" >
+	<form action="/pd/pd-shopping-cart" method="POST" id="addPaymentCardForm">
 	    <input type="hidden" name="addCard" value="1">
 		<div class="row">
 			<div class="col-lg-12">

@@ -474,6 +474,14 @@ jQuery(document).ready(function($) {
 	var PRF = $("#PRF").val();
 	$( "#POSTPRF").val(PRF);
 	$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
+	if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
+		$('#addPaymentCardForm').addClass('display-none');
+		$('#PDPlaceOrder').removeClass('stop');
+	}
+	else{
+		$('#addPaymentCardForm').removeClass('display-none');
+		if($('#Paymentcard:visible').length === 0){ $('#PDPlaceOrder').addClass('stop');}
+	}
 	$( "#PRF" ).change(function() {
 		if(($('#PRF').val()=="Other")){
 			$( "#PRFOther").removeClass('display-none');
@@ -485,6 +493,14 @@ jQuery(document).ready(function($) {
 			var PRF = $("#PRF").val();
 			$( "#POSTPRF").val(PRF);
 			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
+			if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
+				$('#addPaymentCardForm').addClass('display-none');
+				$('#PDPlaceOrder').removeClass('stop');
+			}
+			else{
+				$('#addPaymentCardForm').removeClass('display-none');
+				if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
+			}
 		}
 		//var tempTotal = Number($('#totalPayment').html());
 		//var prf = Number($('#PRF').val());
@@ -500,8 +516,59 @@ jQuery(document).ready(function($) {
 		var PRF = $("#PRFOther").val();
 		$( "#POSTPRF").val(PRF);
 		$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
+		if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
+			$('#addPaymentCardForm').addClass('display-none');
+			$('#PDPlaceOrder').removeClass('stop');
+		}
+		else{
+			$('#addPaymentCardForm').removeClass('display-none');
+			if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
+		}
 	});
-	
+	    $('#prftag').click(function(){
+		if($('#prftag').val()=="1"){
+			$('#prfselect').slideUp().css('overflow', 'hidden');
+			$( "#POSTPRF").val("");
+			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
+			if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
+				$('#addPaymentCardForm').addClass('display-none');
+				$('#PDPlaceOrder').removeClass('stop');
+			}
+			else{
+				$('#addPaymentCardForm').removeClass('display-none');
+				if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
+			}
+			if($('.down6:visible').length !== 0){
+				if(Number($( "#totalPayment").val())=="0"){$("#anothercardBlock").removeClass('show');}
+				
+			}
+			
+		}
+		else{
+			$('#prfselect').slideDown().css('overflow', 'unset');
+			$( "#POSTPRF").val(Number($("#PRF").val()));
+			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
+			if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
+				$('#addPaymentCardForm').addClass('display-none');
+				$('#PDPlaceOrder').removeClass('stop');
+			}
+			else{
+				$('#addPaymentCardForm').removeClass('display-none');
+				if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
+			}
+		}
+		
+	});
+	if($('#prftag').val()=="1"){
+		$('#prfselect').slideUp().css('overflow', 'hidden');
+		if($('.down6:visible').length !== 0){
+				if(Number($( "#totalPayment").val())=="0"){$("#anothercardBlock").removeClass('show');}
+				
+		}
+	}
+	else{
+		$('#prfselect').slideDown().css('overflow', 'unset').delay( 800 );
+	}
 	// HIDE / SHOW PAYMENT CARD FORM 
 	$('#anothercard').click(function(){
         if($(this).is(":checked")){
@@ -1056,7 +1123,7 @@ jQuery(document).ready(function($) {
 		window.history.back();
 	}
     BringSurveyBack();
-    if(x == 2) {
+    if(x == 1 || x == 2) {
       $(".node-membership-type").hide();
       $('[id^=question]').hide();
       $('[id^=question]').addClass("function");
@@ -1378,25 +1445,7 @@ jQuery(document).ready(function($) {
 			scrollTop: $(".note-text").offset().top
 		}, 1);
 	});
-    $('#prftag').click(function(){
-		if($('#prftag').val()=="1"){
-			$('#prfselect').slideUp().css('overflow', 'hidden');
-			$( "#POSTPRF").val("");
-			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
-		}
-		else{
-			$('#prfselect').slideDown().css('overflow', 'unset');
-			$( "#POSTPRF").val(Number($("#PRF").val()));
-			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
-		}
-		
-	});
-	if($('#prftag').val()=="1"){
-		$('#prfselect').slideUp().css('overflow', 'hidden');
-	}
-	else{
-		$('#prfselect').slideDown().css('overflow', 'unset').delay( 800 );
-	}
+
 	//ADD WORKPLACE SCROLL TOP
 	$(document).on('click', '.add-workplace-join', function(){
 		$('html, body').animate({
