@@ -10,6 +10,7 @@ if(isset($_POST["POSTPRF"])) {
 	$OrderSend["PRFdonation"] = $_POST["POSTPRF"];
 	//$OrderSend["TandC"] = $_POST["TandC"];
 	$OrderSend["Card_number"] = $_POST["CardUsed"];
+	//$OrderSend["Card_number"] = "";
 	$PIDs = array();
 	if(isset($_POST["total"])){
 		
