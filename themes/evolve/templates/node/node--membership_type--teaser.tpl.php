@@ -94,7 +94,7 @@ $rens = str_replace('</div>',"",$rens);
 			<div class="MTcontentTitle">Category:</div>
 			<?php //print render($content['field_member_type_category']);?>
 			<?php 
-				print '<div>'.$rens.'</div>';
+				print '<div style="text-transform: uppercase;">'.$rens.'</div>';
 			?>
 		</div>
 		<div class="MTcontent">
