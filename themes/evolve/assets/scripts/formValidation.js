@@ -139,7 +139,7 @@ jQuery(document).ready(function($) {
 				}
 			}	
 			}
-		}else { return true;}
+		}
 		
 		if($('.down4:visible').length !== 0){
 			var num = $("input[name=addtionalNumber]").val();
@@ -318,6 +318,7 @@ jQuery(document).ready(function($) {
 		
 	});
 	$('[class^=join-details-button]').click(function(){
+		
 		if(validateFun()==false){
 			$('.overlay').fadeOut();
 			$('#insurancePopUp').fadeOut();

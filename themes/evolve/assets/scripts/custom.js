@@ -538,6 +538,11 @@ jQuery(document).ready(function($) {
 				$('#addPaymentCardForm').removeClass('display-none');
 				if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 			}
+			if($('.down6:visible').length !== 0){
+				if(Number($( "#totalPayment").val())=="0"){$("#anothercardBlock").removeClass('show');}
+				
+			}
+			
 		}
 		else{
 			$('#prfselect').slideDown().css('overflow', 'unset');
@@ -556,6 +561,10 @@ jQuery(document).ready(function($) {
 	});
 	if($('#prftag').val()=="1"){
 		$('#prfselect').slideUp().css('overflow', 'hidden');
+		if($('.down6:visible').length !== 0){
+				if(Number($( "#totalPayment").val())=="0"){$("#anothercardBlock").removeClass('show');}
+				
+		}
 	}
 	else{
 		$('#prfselect').slideDown().css('overflow', 'unset').delay( 800 );
