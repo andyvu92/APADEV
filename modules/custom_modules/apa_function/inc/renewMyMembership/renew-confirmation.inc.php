@@ -167,7 +167,6 @@ $background = getBackgroundImage($userID);
 						<div class="flex-cell">
 							<span class="sub-heading">Please <a href="/renewmymembership">try again</a> or <a href="/contact-us">contact us</a>.</span>
 						</div>
-						<!-- <div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div> -->
 					</div>
 				<?php endif; ?>
 				<?php ?>

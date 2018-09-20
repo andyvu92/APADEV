@@ -505,4 +505,27 @@ jQuery(document).ready(function(){
         $(this).html('Pause');
     }
   });
+
+// ALERT WINDOWS FOR IE/EGDE
+  $( window ).load(function() {
+    if( /msie|trident|edge/g.test(navigator.userAgent.toLowerCase()) && !sessionStorage.getItem('firstVisit') ) { 
+        //show the Popup
+      $("body").css('overflow', 'hidden');
+      $(".html").append( "<div class='msie-alert'><div class='alert-container'><div class=''alert-header><h3 class='light-lead-heading cairo'>It looks like you may be using a web browser that we don’t support.</h3></div> <div class='alert-body'>We recommend using Google Chrome to get the best experience on the APA website. Click the image below to download Google Chrome.</span></div> <div class='alert-footer'><a href='https://www.google.com/chrome/' target='_blank'><span class='chrome-icon'></span></a></div><span class='close-ie-alert'>x</span></div> </div>" ); 
+        //Set the key
+      sessionStorage.setItem('firstVisit', '1');
+    } 
+  });
+
+  $(document).on('click', '.close-ie-alert', function(){
+    //Fade popup out
+    $("body").css('overflow', 'scroll');
+    $('.msie-alert').fadeOut();
+  });
+
+  $( window ).unload(function() {
+    //Destroy the key
+    localStorage.removeItem("firstVisit");
+  });
 });
+

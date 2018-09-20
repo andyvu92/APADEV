@@ -1816,3 +1816,84 @@ input{
         display: none;
     }
 }
+
+.msie-alert{
+    position: fixed; 
+    top:0; 
+    left: 0; 
+    width: 100vw;
+    height: 100vh;
+    opacity: 1;
+    background: rgba(0,0,0,0.7);
+    z-index: 999999;
+    animation-name: alert-slidedown;
+    animation-duration: 1s; 
+	animation-timing-function: ease-out; 
+	animation-delay: 0;
+	animation-direction: alternate;
+    animation-iteration-count: 1;
+	animation-fill-mode: none;
+    animation-play-state: running;
+    -webkit-animation-name: alert-slidedown;
+    -webkit-animation-duration: 1s; 
+	-webkit-animation-timing-function: ease-out; 
+	-webkit-animation-delay: 0;
+	-webkit-animation-direction: alternate;
+    -webkit-animation-iteration-count: 1;
+	-webkit-animation-fill-mode: none;
+    -webkit-animation-play-state: running;
+    .alert-container{
+        width: 650px;
+        padding: 30px;
+        height: auto;
+        top: calc(~'50% - 150px');
+        left: calc(~'50% - 325px');
+        position: fixed;
+        background: #fff;
+        h3{
+            color: #333;
+            margin-top: 0;
+        }
+        .close-ie-alert{
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            padding: 0 5px;
+            border: 1px solid @grey;
+            cursor: pointer;
+        }
+        .alert-body{
+            color: #000;
+            font-size: 1.2em;
+            padding-bottom: 20px;
+        }
+        .alert-footer{
+            .chrome-icon{
+                width: auto;
+                height: 100px;
+                display: block;
+                background-size: contain;
+                background-repeat: no-repeat;
+                background-position: center center;
+                background-image: url(/sites/default/files/general-icon/chrome-button.png);
+            }
+        }
+    }
+}
+
+@keyframes alert-slidedown {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+@-webkit-keyframes alert-slidedown {
+	0% {
+		top: -50px;
+	}
+	100% {
+		top: 0px;
+	}
+}

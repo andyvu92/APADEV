@@ -23,15 +23,7 @@ $background = getBackgroundImage($userID);
 <div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 autoscroll background_<?php echo $background;?> " id="dashboard-right-content">
 	<?php if(isset($_SESSION['UserId']) && ($_SESSION['MemberTypeID'] !=="1")):?>
-		<!--<div class="flex-container" id="exist-member">
-			<div class="flex-cell">
-				<h3 class="light-lead-heading">Looks like you're<br>already a member.</h3>
-			</div>
-			<div class="flex-cell">
-				<span class="sub-heading">Go to your <a href="/dashboard">dashboard</a> to view your membership details.</span>
-			</div>
-			<div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
-		</div>-->
+		<!-- EXIST MEMBER -->
 		<?php header("Location: /dashboard");?>
 	<?php else: ?>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
@@ -336,7 +328,7 @@ You have the right to access the personal information about yourself held by the
 	<section class="loaders">
 		<span class="loader loader-quart">
 		</span>   
-		<span class="edu-step-note">This may take a moment while we create your account.</span>
+		<span class="edu-step-note">This may take a moment while we create your account</span>
 	</section>
 </div>
 <?php logRecorder(); ?>

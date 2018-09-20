@@ -150,8 +150,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 		<div class="row">
 			<div class="col-xs-12">
 				<input popup class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0">
-				<label for="conditions" popup-target="insuranceTermsandConditions"><span class="tipstyle">* </span>I acknowledge I have read the conditions, declare my responses are correct and I am not aware of any
-				other material information to be disclosed</label>
+				<label for="conditions" popup-target="insuranceTermsandConditions"><span class="tipstyle">* </span>I have read and agree to the terms and conditions within the Financial Services</label>
 			</div>
 		</div>
 
@@ -276,5 +275,4 @@ div#insuranceTermsandConditions {
 #disagreeDescription{
 	color:red!important;
 }
-
 </style>	
