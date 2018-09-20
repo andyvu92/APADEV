@@ -543,7 +543,11 @@ jQuery(document).ready(function($) {
 					$("#anothercardBlock").removeClass('show');
 					$("input[name='addCard']").val('0');
 				}
-				else{ $("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1'); }
+				else{ 
+					if($('#Paymentcard:visible').length === 0)	{
+						$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1'); 
+					}
+				}
 				
 				
 			}
@@ -562,7 +566,11 @@ jQuery(document).ready(function($) {
 				if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 			}
 			if($('.down6:visible').length !== 0){
-				if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0"){$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1');}
+				if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0"){
+					if($('#Paymentcard:visible').length === 0)	{
+						$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1');
+					}
+				}
 				
 			}
 		}
@@ -579,8 +587,11 @@ jQuery(document).ready(function($) {
 	else{
 		$('#prfselect').slideDown().css('overflow', 'unset').delay( 800 );
 		if($('.down6:visible').length !== 0){
-				if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0"){$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1');}
-				
+			
+			if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0"){
+				if($('#Paymentcard:visible').length === 0)	{
+					$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1');}
+			}
 		}
 	}
 	// HIDE / SHOW PAYMENT CARD FORM 
