@@ -1,44 +1,4 @@
 <?php
-//use session: $_SESSION['UserID'],$_SESSION["postReviewData"],
-//save PRF product into APA database function
-/*function createShoppingCart($userID, $productID,$coupon){
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
-	try {
-		$shoppingcartUpdate= $dbt->prepare('INSERT INTO shopping_cart (userID, productID, coupon) VALUES (:userID, :productID, :coupon)');
-		$shoppingcartUpdate->bindValue(':userID', $userID);
-		$shoppingcartUpdate->bindValue(':productID', $productID);
-		$shoppingcartUpdate->bindValue(':coupon', $coupon);
-		$shoppingcartUpdate->execute();	
-		$shoppingcartUpdate = null;
-	   
-	}
-	catch (PDOException $e) {
-			print "Error!: " . $e->getMessage() . "<br/>";
-			die();
-	}
-}
-// check the user product in case of duplicated shopping cart data
-function checkShoppingCart($userID, $productID){
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
-		try {
-			$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID and productID=:productID');
-			$shoppingcartGet->bindValue(':userID', $userID);
-			$shoppingcartGet->bindValue(':productID', $productID);
-			$shoppingcartGet->execute();
-			if($shoppingcartGet->rowCount()>0) { 
-			   $shoppingcartDel = $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and productID=:productID');
-			   $shoppingcartDel->bindValue(':userID', $userID);
-			   $shoppingcartDel->bindValue(':productID', $productID);
-			   $shoppingcartDel->execute();	
-			   $shoppingcartDel = null;
-			}
-			$shoppingcartGet = null; 
-	    }
-		catch (PDOException $e) {
-				print "Error!: " . $e->getMessage() . "<br/>";
-				die();
-	    }
-}*/
 //delete PRF
 if(isset($_POST['step2-2'])){
 	checkShoppingCart($userID=$_SESSION['UserId'],$type="", $prodcutID="PRF");
@@ -568,7 +528,7 @@ $PRFPrice = 0;
 			</div>
 			
 			<div class="flex-col-12" style="text-align: center">
-				<a class="addCartlink"><button style="margin-top: 30px;" class="placeorder <?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" type="submit">Place your order</button></a>
+				<a class="addCartlink"><button style="margin-top: 30px;" class="placeorder <?php if(sizeof($cardsnum["results"])==0 && $scheduleDetails['OrderTotal']!="0"){ echo " stop";} ?>" type="submit">Place your order</button></a>
 			</div>	
 	</div>
 	</div>
