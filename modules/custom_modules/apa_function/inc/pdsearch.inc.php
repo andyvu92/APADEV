@@ -22,7 +22,7 @@ if(!function_exists('drupal_session_started'))
 	//print_r($details);
 ?>
 <form action="pd-search?search-result" method="POST">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<div id="mobile-banner" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<h2 class="light-lead-heading">Explore our professional development options below:</h2>
 	</div>
 	<div class="col-xs-12">
