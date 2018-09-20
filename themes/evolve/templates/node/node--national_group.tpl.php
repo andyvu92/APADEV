@@ -84,7 +84,7 @@
 	<section class="post-content">
    
 	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-9 col-lg-9">
-		<h1 class="SectionHeader"><?php print render($content['field_contenttitle']);?></h1>
+		<h1 class="SectionHeader"><?php print $node->title;?></h1>
 		<div class="intro">
 		  
 			<?php print $node->body['und'][0]['summary'];?>
