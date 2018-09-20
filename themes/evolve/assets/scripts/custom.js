@@ -539,7 +539,16 @@ jQuery(document).ready(function($) {
 				if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 			}
 			if($('.down6:visible').length !== 0){
-				if(Number($( "#totalPayment").val())=="0"){$("#anothercardBlock").removeClass('show');}
+				if($( "#totalPayment").html()=="0"){
+					$("#anothercardBlock").removeClass('show');
+					$("input[name='addCard']").val('0');
+				}
+				else{ 
+					if($('#Paymentcard:visible').length === 0)	{
+						$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1'); 
+					}
+				}
+				
 				
 			}
 			
@@ -556,18 +565,34 @@ jQuery(document).ready(function($) {
 				$('#addPaymentCardForm').removeClass('display-none');
 				if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 			}
+			if($('.down6:visible').length !== 0){
+				if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0"){
+					if($('#Paymentcard:visible').length === 0)	{
+						$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1');
+					}
+				}
+				
+			}
 		}
 		
 	});
 	if($('#prftag').val()=="1"){
 		$('#prfselect').slideUp().css('overflow', 'hidden');
 		if($('.down6:visible').length !== 0){
-				if(Number($( "#totalPayment").val())=="0"){$("#anothercardBlock").removeClass('show');}
+			if($( "#totalPayment").html()=="0"){$("#anothercardBlock").removeClass('show');$("input[name='addCard']").val('0');}
+			else{ $("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1'); }
 				
 		}
 	}
 	else{
 		$('#prfselect').slideDown().css('overflow', 'unset').delay( 800 );
+		if($('.down6:visible').length !== 0){
+			
+			if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0"){
+				if($('#Paymentcard:visible').length === 0)	{
+					$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1');}
+			}
+		}
 	}
 	// HIDE / SHOW PAYMENT CARD FORM 
 	$('#anothercard').click(function(){

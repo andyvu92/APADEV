@@ -535,7 +535,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			<!--<input type="hidden" name="Paymentcard" id="Paymentcardvalue" value="">-->
 			<div class="flex-col-12" style="text-align: center">
 				<!--<a target="_blank" class="addCartlink"><button style="margin-top: 30px;" class="placeorder <?php //if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" type="submit">Place your order</button></a>-->
-				<a class="addCartlink"><button style="margin-top: 30px;" class="placeorder <?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" type="submit">Place your order</button></a>
+				<a class="addCartlink"><button style="margin-top: 30px;" class="placeorder <?php if(sizeof($cardsnum["results"])==0 && $scheduleDetails['OrderTotal']!="0"){ echo " stop";} ?>" type="submit">Place your order</button></a>
 			</div>
 	</div>
 </div>
