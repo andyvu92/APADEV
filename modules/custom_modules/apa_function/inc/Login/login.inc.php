@@ -691,7 +691,7 @@ if($resultdata['result']) {
 		} else {
 			// logged in
 			//print_r($result);
-			
+			logRecorder();
 			$_SESSION["LogInFirstTime"] = "T";
 
 			$id= $result["UserId"];
@@ -720,6 +720,7 @@ if($resultdata['result']) {
 			$detailstt = GetAptifyData("0", $checkSSO);
 			print_r($detailstt);
 			*/
+			logRecorder();
 		}
 	}
 	
@@ -746,6 +747,7 @@ if($resultdata['result']) {
 				</div>';
 		}
 		//print_r($result);
+		logRecorder();
 		deleteSession();
 		// re-direct users to the homepage
 		header("Location: /");
@@ -985,7 +987,6 @@ $('.tab span').on('click', function (e) {
 	</div>
 </div>
 </div> -->
-<?php logRecorder(); ?>
 <?php if(isset($_SESSION['LogInFirstTime'])): ?>
 <div class="GetCentreLayoutHome">
 	<div class="ASection">
