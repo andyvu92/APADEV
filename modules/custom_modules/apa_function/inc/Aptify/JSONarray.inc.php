@@ -73,6 +73,7 @@ function GetAptifyData($TypeAPI, $ArrayIn) {
 	} else {
 		logTransaction($jsonreturn[1],$arrayToJson,$jsonreturn[0]);
 	}
+	//var_dump($jsonreturn[0]);
     return JSONArrayConverter("toArray", $jsonreturn[0]);
 	
 	
@@ -91,11 +92,15 @@ function JSONArrayConverter($type, $Input) {
 }
 function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
 	// search and remove line space \r\n and tabs \t
-	$json = preg_replace("!\r?\n!", "", $json);
-	$json = preg_replace("!\t!", " ", $json);
-	$json = preg_replace("/&nbsp;/", " ", $json);
-	$json = json_decode($json, $assoc);
-	return $json;
+	// remove any empty space code to just a single space
+	// remove any HEX color to 'black'
+	$t = preg_replace("!\r?\n!", "", $json);
+	$t = preg_replace("!\n!", "", $t);
+	$t = preg_replace("!\t!", " ", $t);
+	$t = preg_replace("/&nbsp;/", " ", $t);
+	$t = preg_replace("/#[a-f0-9]{6}/i", "black", $t);
+	$t = json_decode($t, $assoc);
+	return $t;
 }
 
 function encrypt_String($inputString) {

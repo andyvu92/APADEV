@@ -82,5 +82,35 @@ jQuery(document).ready(function($) {
 		window.location = "/pd/pd-shopping-cart";		
 	});
 	
-	
+	/* Menu control */
+	if(window.location.pathname.indexOf("/aboutus") == 0) {
+		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.aboutusnavicon').parent().addClass("active");
+	}
+	if(window.location.pathname.indexOf("/membership") == 0) {
+		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.membershipnavicon').parent().addClass("active");
+	}
+	if(window.location.pathname.indexOf("/pd") == 0) {
+		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.pdnavicon').parent().addClass("active");
+	}
+	if(window.location.pathname.indexOf("/tools") == 0) {
+		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.toolsnavicon').parent().addClass("active");
+	}
+	if(window.location.pathname.indexOf("/research") == 0) {
+		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.researchnavicon').parent().addClass("active");
+	}
+	if(window.location.pathname.indexOf("/inmotion") == 0) {
+		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.inmotionnavicon').parent().addClass("active");
+	}
+	if(window.location.pathname.indexOf("/advocacy") == 0) {
+		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.advocacynavicon').parent().addClass("active");
+	}
+	if(window.location.pathname.indexOf("/media") == 0) {
+		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.medianavicon').parent().addClass("active");
+	}
+	if(window.location.pathname.indexOf("/campaign") == 0) {
+		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.campaignnavicon').parent().addClass("active");
+	}
+	if(window.location.pathname.indexOf("/contact-us") == 0) {
+		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.contact-usnavicon').parent().addClass("active");
+	}
 });
