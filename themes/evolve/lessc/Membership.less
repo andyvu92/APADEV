@@ -412,12 +412,24 @@
     padding: 25px 40px;
 	overflow: hidden;
 	margin-top: 35px;
+	font-size: 1.2em;
 	p{
 		display: none;
 	}
 	.node{
 		margin-top: 0!important;
 	}
+	label{
+		float: left;
+		font-weight: 400;
+		color: #000;
+	}
+	.flex-col-10, .flex-col-2{
+		padding-top: 0!important;
+	}
+}
+.node-membership-type section.post-content .MTcontent{
+	font-size: 1.2em;
 }
 .MainQuestionHolder .SectionHolder #Sections5 .MPcontainer {
     margin: 30px auto;
@@ -741,8 +753,18 @@ table.MTtable td {
 						}
 					}
 				}
+				.MPcontainer{
+					.node-membership-type{
+						h2.MTtitle{
+							font-size: 3em;
+						}
+					}
+				}
 			}
 			#Sections4{
+				h2{
+					max-width: 560px;
+				}
 				.buttons{
 					flex-direction: row;
 					justify-content: center;
