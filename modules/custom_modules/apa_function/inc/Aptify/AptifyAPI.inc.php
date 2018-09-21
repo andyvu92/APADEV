@@ -537,15 +537,19 @@ function curlRequest($API, $type, $variables) {
 }
 
 function logTransaction($APINum, $Sent, $Got) {
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
-	$profile = $dbt->prepare('INSERT INTO logprofile (userID, text) VALUES (:userID, :text)');	
-	
+	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	//$profile = $dbt->prepare('INSERT INTO logprofile (userID, text) VALUES (:userID, :text)');	
+	$profile	=  db_insert('logprofile'); 
+				
 	$txt = "UserID: ";
 	if(isset($_SESSION["UserId"])) {
-		$profile->bindValue(':userID', $_SESSION["UserId"]);
 		$txt .= $_SESSION["UserId"]."\n";
+		//$profile->bindValue(':userID', $_SESSION["UserId"]);
+		$userlogID =$_SESSION["UserId"];
+		
 	} else {
-		$profile->bindValue(':userID', 'noValue');
+		//$profile->bindValue(':userID', 'noValue');
+		$userlogID ="noValue";
 		$txt .= "noValue\n";
 	}
 	$txt .= "Date/time: ".date("Y-m-d h-i-s")."\n";
@@ -556,13 +560,16 @@ function logTransaction($APINum, $Sent, $Got) {
 	$txt .= $Got."\n";
 	$txt .= "---End of Log (".date("Y-m-d h-i-s").")---\n\n\n\n\n";
 	
-	$profile->bindValue(':text', $txt);		  
-	
+	//$profile->bindValue(':text', $txt);		  
+	$profile->fields(array(
+				  'userID' => $userlogID,
+				  'text' => $txt,
+	));
 	// log file output.
 	$profile->execute();	
-	$profile->closeCursor();
-	$profile = null;
-	$dbt = null;
+	//$profile->closeCursor();
+	//$profile = null;
+	//$dbt = null;
 }
 
 /** Log record start / end
@@ -588,20 +595,30 @@ function logRecorder() {
 		fclose($myfilet);
 	}
 	/* load logged records to a single text */
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
-	$profileFinal= $dbt->prepare('SELECT * FROM logprofile WHERE userID= :userID');	
+	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	//$profileFinal= $dbt->prepare('SELECT * FROM logprofile WHERE userID= :userID');	
 	if(isset($_SESSION["UserId"])) {
-		$profileFinal->bindValue(':userID', $_SESSION["UserId"]);
-		$Mdelete = $dbt->prepare('DELETE FROM logprofile WHERE userID = '.$_SESSION["UserId"].'');
+		//$profileFinal->bindValue(':userID', $_SESSION["UserId"]);
+	    $userlog = $_SESSION["UserId"];
+		//$Mdelete = $dbt->prepare('DELETE FROM logprofile WHERE userID = '.$_SESSION["UserId"].'');
+		//$Mdelete ->condition('userID', $_SESSION["UserId"], '=');
 	} else {
-		$profileFinal->bindValue(':userID', 'noValue');
-		$Mdelete = $dbt->prepare('DELETE FROM logprofile WHERE userID = "noValue"');
+		//$profileFinal->bindValue(':userID', 'noValue');
+		//$profileFinal->condition('userID', 'noValue', '=');
+		//$Mdelete = $dbt->prepare('DELETE FROM logprofile WHERE userID = "noValue"');
+		//$Mdelete ->condition('userID', 'noValue', '='); 
+		$userlog = "noValue";
 	}
-	$profileFinal->execute();
+	$profileFinal=db_select('logprofile','logfile')
+	->fields('logfile')
+	->condition('userID', $userlog, '=')
+    ->execute()
+	->fetchAll();
+	$profileFinal = json_decode(json_encode($profileFinal), True);
 	$finalLog = "";
 	foreach($profileFinal as $profiles) {
-		$finalLog .= $profiles[1];
-		////echo $profiles[1];
+		$finalLog .= $profiles["text"];
+		
 	}
 	/* add final version of log record to existing log file */
 	$myfile = fopen("sites/Log/APA_Aptify_Communication.log", "w");
@@ -611,14 +628,16 @@ function logRecorder() {
 	fwrite($myfile, $fileContinue);
 	fwrite($myfile, $finalLog);
 	fclose($myfile);
-	
+	$Mdelete = db_delete('logprofile');
+	$Mdelete ->condition('userID', $userlog, '=');
 	$Mdelete->execute();
 	/* close connection */
-	$Mdelete->closeCursor();
-	$Mdelete = null;
-	$profileFinal->closeCursor();
-	$profileFinal = null;
-	$dbt = null;
+	//$Mdelete->closeCursor();
+	//$Mdelete = null;
+	//$profileFinal->closeCursor();
+	//$profileFinal = null;
+	//$dbt = null;
+	
 }
 
 // push file names' number increased by 1.

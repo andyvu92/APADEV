@@ -253,8 +253,7 @@ apa_function_dashboardLeftNavigation_form();
 	<?php logRecorder(); ?>
 </div>
  <?php else : 
-	// todo
-	// add log-in button with message - you must be logged in
+	// when user is not logged in
 	?>
 	<!-- NON-LOGIN USERS -->
 	<div class="flex-container" id="non-member">

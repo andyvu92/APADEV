@@ -53,19 +53,19 @@ if(isset($_POST['step3'])) {
 		completeOrderDeleteSession();
 		// delete shopping cart data from APA database; put the response status validation here!!!!!!!
 		$userID = $_SESSION["UserId"];
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-		$type = "PD";
-		try {
-			$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type!=:type');
-			$shoppingCartDel->bindValue(':userID', $userID);
-			$shoppingCartDel->bindValue(':type', $type);
-			$shoppingCartDel->execute();
-			$shoppingCartDel = null;
-		}
-		catch (PDOException $e) {
-			print "Error!: " . $e->getMessage() . "<br/>";
-			die();
-		} 
+		
+		// use drupal db_select by jinghu 20/09/2018
+		$type = "membership";
+		checkShoppingCart($userID, $type, $productID="");
+		$type = "NG";
+		checkShoppingCart($userID, $type, $productID="");
+		$type = "MG1";
+		checkShoppingCart($userID, $type, $productID="");
+		$type = "MG2";
+		checkShoppingCart($userID, $type, $productID="");
+		$productID = "PRF";
+		checkShoppingCart($userID, $type="", $productID);
+		
 //2.2.46 -get order payment schedules test part
    //$paymentData['id'] = $registerOuts['Invoice_ID'];
    //$paymentDataSchedules = GetAptifyData("46", $paymentData);
