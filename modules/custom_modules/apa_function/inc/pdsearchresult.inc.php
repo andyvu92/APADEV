@@ -38,8 +38,26 @@ if(isset($_POST["Keyword"]) || isset($_GET["Keyword"])) {
 	else {$request["Keyword"] = $_GET["Keyword"];}
 } else { $request["Keyword"] = ""; }
 if(isset($_POST["Typeofpd"]) || isset($_GET["Typeofpd"])) {	
-	if(isset($_POST["Typeofpd"])) {$request["Typeofpd"] = $_POST["Typeofpd"]; }
-	else {$request["Typeofpd"] = $_GET["Typeofpd"]; }
+	$returnTypePD = "";
+	/* for single pd types */
+	if(isset($_POST["Typeofpd"])) {
+		$returnTypePD = $_POST["Typeofpd"];
+	} else {
+		$returnTypePD = $_GET["Typeofpd"];
+	}
+	/* for multiple pd types
+	if(isset($_POST["Typeofpd"])) {
+		foreach($_POST["Typeofpd"] as $types) {
+			$returnTypePD .= $types.",";
+		}
+	} else {
+		foreach($_GET["Typeofpd"] as $types) {
+			$returnTypePD .= $types.",";
+		}
+	}
+	$returnTypePD = substr($returnTypePD, 0, -1);
+	*/
+	$request["Typeofpd"] = $returnTypePD;
 } else { $request["Typeofpd"] = ""; }
 if(isset($_POST["Nationalgp"]) || isset($_GET["Nationalgp"])) {	
 	if(isset($_POST["Nationalgp"])) {$request["Nationalgp"] = $_POST["Nationalgp"]; }
