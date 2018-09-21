@@ -94,7 +94,6 @@ $userRetisterStatus = false;
 		$User["ID"] = $_POST["Emailaddress"];
 		$User["Password"] = $_POST["Password"];
 		$LogIn = GetAptifyData("7", $User);
-		// todo
 		// once they successfully login, create userID Session
 		// and get User's detail data.
 		$userId = $LogIn["UserId"];
@@ -655,6 +654,33 @@ $userRetisterStatus = false;
 			</div>
 		<?php endif; ?>
 
+		<?php 
+			$bdate = explode(" ",$pd_detail['Sdate']);
+			$edate = explode(" ",$pd_detail['Edate']);
+			echo $bdate[0]."//".$edate[0];
+			$dateOutput = "";
+			$timeOutput = "";
+			$t = strtotime($bdate[0]);
+			$j = strtotime($edate[0]);
+			$q = strtotime($bdate[1]);
+			$r = strtotime($edate[1]);
+			$dateStart = date("d",$t);
+			$timeOutput = date("h:i",$q)." - ".date("h:i",$r);
+			if($bdate[0] == $edate[0]) {
+				if(date("F",$t) != date("F",$j)) {
+					$dateOutput = date("D d M",$t)."<br>- ".date("D d M",$j);
+				} else {
+					$dateOutput = date("l",$t)."<br>".date("d F",$t);
+				}
+			} elseif(date("F",$t) != date("F",$j)) {
+				$dateOutput = date("D d M",$t)."<br>- ".date("D d M",$j);
+			} else {
+				$dateOutput = date("D d",$t)." - ".date("D d",$j)."<br>".date("F",$t);
+			}
+			//if Aptify give the StartDate&EndDate as timestamp, use below code to get the time and start date and end date;
+			//echo date('d-m-Y h:i:s',$bdata);
+		?>
+
 	</div>
         <!--
 		 <div class="detailContent">
@@ -681,34 +707,6 @@ $userRetisterStatus = false;
 			 //}
 		 
 		 ?></p></div>
-		<?php 
-			$bdate = explode(" ",$pd_detail['Sdate']);
-			$edate = explode(" ",$pd_detail['Edate']);
-			echo $bdate[0]."//".$edate[0];
-			$dateOutput = "";
-			$timeOutput = "";
-			$t = strtotime($bdate[0]);
-			$j = strtotime($edate[0]);
-			$q = strtotime($bdate[1]);
-			$r = strtotime($edate[1]);
-			$dateStart = date("d",$t);
-			$timeOutput = date("h:i",$q)." - ".date("h:i",$r);
-			if($bdate[0] == $edate[0]) {
-				if(date("F",$t) != date("F",$j)) {
-					$dateOutput = date("D d M",$t)."<br>- ".date("D d M",$j);
-				} else {
-					$dateOutput = date("l",$t)."<br>".date("d F",$t);
-				}
-			} elseif(date("F",$t) != date("F",$j)) {
-				$dateOutput = date("D d M",$t)."<br>- ".date("D d M",$j);
-			} else {
-				$dateOutput = date("D d",$t)." - ".date("D d",$j)."<br>".date("F",$t);
-			}
-			//if Aptify give the StartDate&EndDate as timestamp, use below code to get the time and start date and end date;
-			//echo date('d-m-Y h:i:s',$bdata);
-			
-			
-		?>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>When:</h3><p><?php //echo $bdata[1]."-".$edata[1]; ?></p><p><?php //echo $bdata[0]." - ".$edata[0] ; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Registration closing date:</h3><p><?php //echo $pd_detail['Close_date']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -718,75 +716,11 @@ $userRetisterStatus = false;
 		
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>CPD hours:</h3><p><?php //echo $pd_detail['CPD']; ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Cost:</h3><p>
-		 <?php 
-		  //$priceList = array();
-		  //$cost = 0;
-		 // todo
-		 // apply coupon one
-		 // ["Product Cost With Coupon"]
-		 
-		 //if($prices!="NULL"&& isset($_SESSION["UserId"])){
-			//if(in_array($pd_detail['Product Cost Without Coupon'],$pricelistGet)) {
-				//comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-			//}
-			//else {
-				//comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-				//echo "$".$pd_detail['Cost'];
-			//}
-		 //}
-		//else{
-			//foreach($pricelistGet as $key=>$value){echo //$key.":&nbsp;$".$value."<br>";}
-		//}	
-		 ?>
-		 
-		 
+
 		 </p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>Your registration status:</h3><p>
-		 <?php 
-		    if(isset($userId)&& ($userId!="0")){
-				if($pd_detail['AttendeeStatus'] > 0) {
-					//echo "Registered";
-				} else {
-					//echo "Not registered";
-				}
-				/*
-				if(!in_array( $user->uid,$pd_detail['Users'])){
-					echo "Not registered";
-				}
-				else{
-					echo "Registered";
-				}
-				*/
-			}
-			else{
-				//echo '<a >Login to see your status</a>';
-				//echo '<a class="info" data-target="#loginAT" data-toggle="modal" type="button">Login to see your status</a>';
-			}
-		 
-		 ?>
 		 </p></div>
 		 <p>&nbsp;</p>
-		 
-		
-		 <?php 
-		     
-		
-		// if(isset($_SESSION["UserId"])){
-			 //$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
-	        // $userTag = checkPDUser($_SESSION['MemberTypeID']);
-			// if ($userTag =="0"){
-				   // echo '<a class="dashboard-button dashboard-bottom-button your-details-submit addCartButton" id="registerPDUserButton" style="float:right;">Add to cart</a><br>  
-						//<br>';
-					
-			// }
-			// else
-				 
-				// {
-					// echo '<a class="dashboard-button dashboard-bottom-button your-details-submit addCartButton" id="registerNonMember" style="float:right;">Add to cart</a><br>  
-						//<br>';
-				 //}
-       
-	   //}   ?>
 	  
 		 <p>By registering for this course, you agree to the <a target="_blank">APA Events Terms and Conditions.</a></p>
 		 <p>You could save $55 on future courses by <a target="_blank">joining an APA national group</a>. Pay $54 today and keeping saving on PD throughout the year.</p>
@@ -1873,10 +1807,7 @@ $userRetisterStatus = false;
 				<?php 
 				$priceList = array();
 				$cost = 0;
-				// todo
-				// apply coupon one
-				// ["Product Cost With Coupon"]
-				
+
 				if($prices!="NULL"&& isset($_SESSION["UserId"])){
 					if(in_array($pd_detail['Product Cost Without Coupon'],$pricelistGet)) {
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
@@ -1885,8 +1816,7 @@ $userRetisterStatus = false;
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
 						echo "$".number_format($pd_detail['Product Cost Without Coupon'],2);
 					}
-				}
-				else{
+				} else{
 					foreach($pricelistGet as $key=>$value){
 						$valuet = number_format($value,2);
 						echo $key.":&nbsp;$".$valuet."<br>";
@@ -1974,8 +1904,7 @@ $userRetisterStatus = false;
 						echo "Registered";
 					}
 					*/
-				}
-				else{
+				} else{
 
 				}
 				?>
@@ -2033,9 +1962,6 @@ $userRetisterStatus = false;
 				<?php 
 				$priceList = array();
 				$cost = 0;
-				// todo
-				// apply coupon one
-				// ["Product Cost With Coupon"]
 				
 				if($prices!="NULL"&& isset($_SESSION["UserId"])){
 					if(in_array($pd_detail['Product Cost Without Coupon'],$pricelistGet)) {
@@ -2045,8 +1971,7 @@ $userRetisterStatus = false;
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
 						echo "$".number_format($pd_detail['Product Cost Without Coupon'],2);
 					}
-				}
-				else{
+				} else{
 					foreach($pricelistGet as $key=>$value){
 						/*
 						$x = explode(" ", $key);
@@ -2124,8 +2049,7 @@ $userRetisterStatus = false;
 						echo "Registered";
 					}
 					*/
-				}
-				else{
+				} else{
 					echo '<a class="member-login" id="login">Login to register</a>';
 					//echo '<a class="info" data-target="#loginAT" data-toggle="modal" type="button">Login to see your status</a>';
 				}
@@ -2133,7 +2057,6 @@ $userRetisterStatus = false;
 			</span>
 		</div>
 </div>
-
 
 <?php if(!empty($pd_detail['Presenter'])): ?>
 	<div class="acordian-label">Presenters</div>
@@ -2222,12 +2145,11 @@ $userRetisterStatus = false;
 <?php endif; ?>
 
 </div>
-
-		<div class="extra-info">
-			<span>By registering for this course, you agree to the <a href="../PDtermsandconditions">APA Events Terms and Conditions.</a></span>
-			<span>You could save on future events by joining an <a href="/membership/national-groups">APA National Group</a>. Pay $54 today and keep saving throughout the year.</span>
-		</div>
+	<div class="extra-info">
+		<span>By registering for this course, you agree to the <a href="../PDtermsandconditions">APA Events Terms and Conditions.</a></span>
+		<span>You could save on future events by joining an <a href="/membership/national-groups">APA National Group</a>. Pay $54 today and keep saving throughout the year.</span>
 	</div>
+</div>
 
 	</section>
   
