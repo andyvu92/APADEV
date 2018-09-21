@@ -165,19 +165,5 @@ $CPDHousrs = $results["CurrentCPDHour"];
 		chart.draw(data, options);
 	}
 </script>
-<?php  else: ?>
-<p>If you’re not already a member, <a href="/membership-question">join us today.</a></p>
 <?php endif;?>
-<?php else:?>
-	<!-- NON-LOGIN MESSAGE -->
-		<div class="flex-container" id="non-member">
-			<div class="flex-cell">
-				<h3 class="light-lead-heading">Please login to see this page.</h3>
-			</div>
-			<div class="flex-cell cta">
-				<a data-target="#loginAT" data-toggle="modal" href="#" class="login">Login</a>
-				<a href="/membership-question" class="join">Join now</a>
-			</div>
-			<div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
-		</div>
 <?php endif;?>

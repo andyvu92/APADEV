@@ -122,7 +122,12 @@ if(isset($_POST["Invoice_ID"])) {
 	<h3 class="light-lead-heading align-center">Please <a href="/pd/pd-shopping-cart">update your card details</a> or <a href="/contact-us">contact us</a></h3>
 </div>
 
-<div class="flex-cell featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+<?php 
+		$block = block_load('block', '309');
+		$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+		$output = drupal_render($get);        
+		print $output;
+?>
 
 </div>
 <?php endif;?>

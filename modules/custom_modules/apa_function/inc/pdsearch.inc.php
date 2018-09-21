@@ -22,7 +22,7 @@ if(!function_exists('drupal_session_started'))
 	//print_r($details);
 ?>
 <form action="pd-search?search-result" method="POST">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<div id="mobile-banner" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<h2 class="light-lead-heading">Explore our professional development options below:</h2>
 	</div>
 	<div class="col-xs-12">
@@ -34,20 +34,27 @@ if(!function_exists('drupal_session_started'))
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Type of PD</label>
-		<select  name="Typeofpd[]" id="Typeofpd" multiple data-placeholder="Type of PD">
+		<select  name="Typeofpd" id="Typeofpd" data-placeholder="Type of PD">
+			<option class="type" selected disabled>Type of PD</option>
 			<?php 
 				$PDtypecode = file_get_contents("sites/all/themes/evolve/json/PDTypes.json");
 				$PDType = json_decode($PDtypecode, true);
 				foreach($PDType  as $key => $value){
 					$vals = '';
 					if(isset($_POST["Typeofpd"])) {
-						foreach($_POST['Typeofpd'] as $Typeofpdt) {if ($Typeofpdt == $PDType[$key]['ID']){ $vals = "selected='selected'"; } }
-						if($_POST["Typeofpd"]==$PDType[$key]['ID']) { $vals = "selected='selected'"; }
+						if($_POST["Typeofpd"] == $PDType[$key]['Name']) { $vals = "selected='selected'"; }
+						/* for multiple pd type. make usre put 'multiple' attribute and change name to "Typeofpd[]"
+						foreach($_POST['Typeofpd'] as $Typeofpdt) {if ($Typeofpdt == $PDType[$key]['Name']){ $vals = "selected='selected'"; } }
+						if($_POST["Typeofpd"]==$PDType[$key]['Name']) { $vals = "selected='selected'"; }
+						*/
 					} elseif(isset($_GET["Typeofpd"])) {
-						foreach($_GET['Typeofpd'] as $Typeofpdt) {if ($Typeofpdt == $PDType[$key]['ID']){ $vals = "selected='selected'"; } }
-						if($_GET["Typeofpd"]==$PDType[$key]['ID']) { $vals = "selected='selected'"; }
+						if($_GET["Typeofpd"]==$PDType[$key]['Name']) { $vals = "selected='selected'"; }
+						/* for multiple pd type. make usre put 'multiple' attribute and change name to "Typeofpd[]"
+						foreach($_GET['Typeofpd'] as $Typeofpdt) {if ($Typeofpdt == $PDType[$key]['Name']){ $vals = "selected='selected'"; } }
+						if($_GET["Typeofpd"]==$PDType[$key]['Name']) { $vals = "selected='selected'"; }
+						*/
 					}
-					echo '<option value="'.$PDType[$key]['ID'].'" '.$vals.'>'.$PDType[$key]['Name'].' </option>';
+					echo '<option value="'.$PDType[$key]['Name'].'" '.$vals.'>'.$PDType[$key]['Name'].' </option>';
 				}
 			?>
 		</select>

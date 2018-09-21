@@ -83,7 +83,7 @@
 		
 	<section class="post-content">
    
-	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-9 col-lg-9">
+	<div class="region main-content col-xs-12 col-sm-12 col-md-9 col-lg-9">
 		<h1 class="SectionHeader"><?php print $node->title;?></h1>
 		<div class="intro">
 		  
@@ -108,45 +108,46 @@
         print render($content['body']);
 		
         ?>
-		<a class="accent-button" href="/joinnationalgroup?ProductID=<?php echo $PID;?>" id="ng-join-btn"><span>Join now</span></a>
+		<a class="accent-btn" href="/joinnationalgroup?ProductID=<?php echo $PID;?>" id="ng-join-btn"><span>Join now</span></a>
+
+		<div class="bottom-nav"><a class="go-back-button button" href="javascript:history.go(-1)">&lt; Back to previous</a></div>
 	</div>
-	<div class="block policyright contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
+	<div class="block contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
 		<h3 class="headline">National Groups</h3>
 		<span class="brd-headling"></span>
 		<div class="content">
 		<div class="view view-current-apa-campaign view-id-current_apa_campaign view-display-id-block_1 view-dom-id-32635ceaef40fd2d990939d49ac29284">
 		<div class="view-content">
 		  
-			<div class="dexp-grid-items row">
+			<div class="dexp-grid-items">
 			<?php //echo views_embed_view('blog_categories', 'block_5');?>
-			<ul>
-				<li><a href="#">Acupuncture and dry needling</a></li>
-				<li><a href="#">Mental Health</a></li>
-				<li><a href="#">Animal</a></li>
-				<li><a href="#">Musculoskeletal</a></li>
-				<li><a href="#">Aquatic</a></li>
-				<li><a href="#">Neurology</a></li>
-				<li><a href="#">Business</a></li>
-				<li><a href="#">Occupational Health</a></li>
-				<li><a href="#">Cancer, Palliative Care and Lymphoedema</a></li>
-				<li><a href="#">Orthopaedic</a></li>
-				<li><a href="#">Cardiorespiratory</a></li>
-				<li><a href="#">Paediatric</a></li>
-				<li><a href="#">Disability</a></li>
-				<li><a href="#">Pain</a></li>
-				<li><a href="#">Educators</a></li>
-				<li><a href="#">Sports and Exercise</a></li>
-				<li><a href="#">Emergency Department</a></li>
-				<li><a href="#">Student</a></li>
-				<li><a href="#">Gerontology</a></li>
-				<li><a href="#">Women's, Men's and Pelvic Health</a></li>
-				<li><a href="#">Leadership and Management</a></li>
+			<ul class="side-nav">
+				<li><a href="/nationalgroups/acupuncture-and-dry-needling">Acupuncture and dry needling</a></li>
+				<li><a href="/nationalgroups/animal">Animal</a></li>
+				<li><a href="/nationalgroups/aquatic">Aquatic</a></li>
+				<li><a href="/nationalgroups/business">Business</a></li>
+				<li><a href="/nationalgroups/cancer-palliative-care-and-lymphoedema">Cancer, Palliative Care and Lymphoedema</a></li>
+				<li><a href="/nationalgroups/cardiorespiratory">Cardiorespiratory</a></li>
+				<li><a href="/nationalgroups/disability">Disability</a></li>
+				<li><a href="/nationalgroups/educators">Educators</a></li>
+				<li><a href="/nationalgroups/emergency-department">Emergency Department</a></li>
+				<li><a href="/nationalgroups/gerontology">Gerontology</a></li>
+				<li><a href="/nationalgroups/leadership-and-management">Leadership and Management</a></li>
+				<li><a href="/nationalgroups/mental-health-physiotherapy">Mental Health Physiotherapy</a></li>
+				<li><a href="/nationalgroups/musculoskeletal">Musculoskeletal</a></li>
+				<li><a href="/nationalgroups/neurology">Neurology</a></li>
+				<li><a href="/nationalgroups/occupational-health">Occupational Health</a></li>
+				<li><a href="/nationalgroups/orthopaedic">Orthopaedic</a></li>
+				<li><a href="/nationalgroups/paediatric">Paediatric</a></li>
+				<li><a href="/nationalgroups/pain">Pain</a></li>
+				<li><a href="/nationalgroups/rural">Rural</a></li>
+				<li><a href="/nationalgroups/sports-and-exercise">Sports and Exercise</a></li>
+				<li><a href="/nationalgroups/womens-mens-and-pelvic-health">Women's, Men's and Pelvic Health</a></li>
 			<ul>
 			</div>
 		  
 		</div></div></div>
 	</div>
 	</section>
-    <div class="bottom-nav"><a class="go-back-button button" href="javascript:history.go(-1)">&lt; Back to previous</a></div>
 </div> 
 

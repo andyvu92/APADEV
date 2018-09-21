@@ -361,6 +361,33 @@
         width: 100%;
         min-height: 48px;
     }
+
+    /* MOBILE */
+    @media all and (max-width: @larger-phone-width) {
+        #mobile-banner{
+            background-image: url(http://localhost/sites/default/files/MEDIA/PD_EVENT_SEARCH_IMAGE_1.jpg);
+            background-position: 62% 82%;
+            background-size: 200%;
+            background-repeat: no-repeat;
+            padding: 30px 0 10px;
+            width: 100vw;
+            position: relative;
+            left: -15px;
+            margin-top: 0;
+        }
+        .light-lead-heading{
+            color: #fff;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            padding: 0 15px;
+        }
+    }
+}
+
+#block-block-240{
+    @media all and (max-width: @larger-phone-width){
+        background: none!important;
+    }
 }
 
 .pd{
@@ -901,7 +928,7 @@ body.page-node{
         .pd-featured{
             text-align: center;
             img{
-                margin: 50px 0;
+                margin: 50px auto;
             }
         }
     }
@@ -2331,6 +2358,14 @@ input[name="Couponcode"]{
                     }
                     &:after{
                         background-image: url(/sites/default/files/professional-development/pd-icons/Terms-W.png);
+                    }
+                }
+                &.pd-search{
+                    &:before{
+                        background-image: url(/sites/default/files/professional-development/pd-icons/pd-search-B.png);
+                    }
+                    &:after{
+                        background-image: url(/sites/default/files/professional-development/pd-icons/pd-search-W.png);
                     }
                 }
             }

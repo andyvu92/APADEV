@@ -1,0 +1,144 @@
+/* ********************************************************* */
+/* -----------------NATIONAL GROUP SINGLE PAGE ---------- */
+/* ********************************************************* */
+@import url('https://fonts.googleapis.com/css?family=Roboto:200,300,500,700');
+@import url('https://fonts.googleapis.com/css?family=Cairo:200,300,400,500,700,900');
+
+/*--PREDEFINED COLOURS--*/
+@light-grey: rgb(242, 243, 244);
+@light-transparent-background: rgba(255, 255, 255, 0.9);
+@dark-background: rgb(94, 96, 103);
+@dark-transparent-background: rgba(94, 96, 103, 0.8);
+@bright-blue: rgb(0, 159, 218);
+@brighter-blue: rgb(0,184,241);
+@blue: #009fda;
+@alt-grey: #a6a8ab;
+@grey: #b5b5b5;
+@orange: #ffa02e;
+
+/*--RESPONSIVE BREAKPOINTS--*/
+@phone-width: 480px;
+@larger-phone-width: 570px;
+@tablet-width: 768px;
+@larger-tablet-width: 992px;
+@desktop-width: 1200px;
+@larger-desktop-width: 1500px;
+
+
+.node-type-national-group{
+    #block-system-main .node-national-group{
+        /* MAIN CONTENT */
+        .main-content{
+            padding-right: 60px;
+            .SectionHeader{
+                font-weight: 400;
+                font-size: 4em;
+                line-height: 1.1em;
+                font-family: Cairo;
+                margin-bottom: 50px;
+            }
+            .intro{
+                p{
+                    font-size: 1.7em;
+                    line-height: 1.3em;
+                }
+            }
+            .post-img{
+                margin: 80px 0;
+            }
+            p{
+                margin-bottom: 1.2em !important;
+            }
+            h4{
+                margin-bottom: 5px;
+                font-size: 1.2em;
+            }
+            ul{
+                color: #000;
+                list-style: none;
+                padding: 0;
+                font-size: 1.2em;
+                li{
+                    &:before{
+                        content: '';
+                        width: 4px;
+                        height: 4px;
+                        border-radius: 100%;
+                        display: inline-block;
+                        background: #000;
+                        position: relative;
+                        vertical-align: middle;
+                        margin-right: 20px;
+                    }
+                }
+            }
+            .no-space{
+                p{
+                    margin-bottom: 5px!important;
+                }
+            }
+            #ng-join-btn{
+                text-transform: uppercase;
+                font-weight: 300;
+                font-family: Roboto;
+                margin-top: 20px;
+                span{
+                    padding: 8px 60px;
+                    display: block;
+                }
+            }
+        }
+
+        /* BACK TO PREVIOUS */
+        .bottom-nav{
+            display: block;
+            float: left;
+            width: 100%;
+            border-top: 1px solid #e2e2e2;
+            margin-top: 30px;
+            .go-back-button{
+                padding-left: 0;
+                margin-top: 15px;
+                text-decoration: underline;
+                color: #5e6067;
+                font-family: Cairo;
+                font-size: 1.2em;
+                font-weight: 500;
+                transition: all .2s linear;
+                &:hover{
+                    color: @bright-blue;
+                }
+            }
+        }
+
+        /* RIGHT SIDEBAR */
+        .region-right-sidebar{
+            .headline{
+                color: #000;
+                font-weight: 300;
+                text-transform: capitalize;
+                font-size: 1.4em;
+                letter-spacing: 1px;
+            }
+            .brd-headling{
+                width: 30px;
+            }
+            .side-nav{
+                list-style: none;
+                padding: 0;
+                li{
+                    margin: 0;
+                    a{
+                        color: #74767c;
+                        font-weight: 500;
+                        font-family: Roboto;
+                        transition: all .2s linear;
+                        &:hover{
+                            color: @bright-blue;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

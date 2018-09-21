@@ -419,8 +419,7 @@ apa_function_dashboardLeftNavigation_form();
 	</div>
 </div>
 <?php else : 
-	// todo
-	// add log-in button with message - you must be logged in
+	// when a user is not logged in:
 	?>
 		<div class="flex-container" id="non-member">
 			<div class="flex-cell">
@@ -430,7 +429,14 @@ apa_function_dashboardLeftNavigation_form();
 				<a data-target="#loginAT" data-toggle="modal" href="#" class="login">Login</a>
 				<a href="/membership-question" class="join">Join now</a>
 			</div>
-			<div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+			
+			<?php 
+				$block = block_load('block', '309');
+				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+				$output = drupal_render($get);        
+				print $output;
+			?>
+
 		</div>
 <?php endif; ?>
 <?php logRecorder(); ?>

@@ -6,9 +6,6 @@ if(!function_exists('drupal_session_started'))
 ?>
 <?php
 global $base_url;
-// todo
-// This will only be displayed when there is any results.
-
 // 2.2.28 - GET event search result list
 // It has four different cases, but we are going to use
 // only one scenario 
@@ -38,8 +35,26 @@ if(isset($_POST["Keyword"]) || isset($_GET["Keyword"])) {
 	else {$request["Keyword"] = $_GET["Keyword"];}
 } else { $request["Keyword"] = ""; }
 if(isset($_POST["Typeofpd"]) || isset($_GET["Typeofpd"])) {	
-	if(isset($_POST["Typeofpd"])) {$request["Typeofpd"] = $_POST["Typeofpd"]; }
-	else {$request["Typeofpd"] = $_GET["Typeofpd"]; }
+	$returnTypePD = "";
+	/* for single pd types */
+	if(isset($_POST["Typeofpd"])) {
+		$returnTypePD = $_POST["Typeofpd"];
+	} else {
+		$returnTypePD = $_GET["Typeofpd"];
+	}
+	/* for multiple pd types
+	if(isset($_POST["Typeofpd"])) {
+		foreach($_POST["Typeofpd"] as $types) {
+			$returnTypePD .= $types.",";
+		}
+	} else {
+		foreach($_GET["Typeofpd"] as $types) {
+			$returnTypePD .= $types.",";
+		}
+	}
+	$returnTypePD = substr($returnTypePD, 0, -1);
+	*/
+	$request["Typeofpd"] = $returnTypePD;
 } else { $request["Typeofpd"] = ""; }
 if(isset($_POST["Nationalgp"]) || isset($_GET["Nationalgp"])) {	
 	if(isset($_POST["Nationalgp"])) {$request["Nationalgp"] = $_POST["Nationalgp"]; }
@@ -117,10 +132,17 @@ if(isset($results['MResponse'])) {
 	<div class="col-xs-12 search-again">
 		<a class="accent-btn" href="#block-block-240"><i class="fa fa-search"></i> Search again</a>
 	</div>
-	<div class="flex-col-12 pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
-	
+
+	<?php 
+			$block = block_load('block', '309');
+			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+			$output = drupal_render($get);        
+			print $output;
+	?>
+
 <?php else: ?>
 <?php
+	// This will only be displayed when there is any results.
    /********sort search result*****/
    /*
 	usort($results, function($a, $b) {
@@ -317,7 +339,14 @@ if(isset($results['MResponse'])) {
 	<div class="pageSetting"><p>Showing</p><select id="pagesize" name="pagesize" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option><option value="3" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==20)){ echo "selected";  }  ?>> 20 </option></select><p>events</p></div>
 	<div class="pageItem"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php echo $pageNfront; ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php echo $pageNrear; ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
 </div>
-<div class="flex-col-12 pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+
+<?php 
+	$block = block_load('block', '310');
+	$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+	$output = drupal_render($get);        
+	print $output;
+?>
+
 	<?php /*
 	<div class="pageItemBottom"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php  if(isset($_GET["page"])&&($_GET["page"]!=1)){ echo $totalNum+1;} else{ echo "1";}  ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php if((isset($_GET["page"])&&$_GET["page"]!=$totalPage)||!isset($_GET["page"])){ echo $totalNum+$numItem;} else{ echo $totalNum;} ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
 	*/ ?>

@@ -414,7 +414,14 @@ You have the right to access the personal information about yourself held by the
 		<div class="flex-cell cta">
 			<a href="/dashboard" class="join">Go to Dashboard ></a>
 		</div>
-		<div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+
+		<?php 
+				$block = block_load('block', '309');
+				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+				$output = drupal_render($get);        
+				print $output;
+		?>
+
 	</div>
 <?php endif; ?>
 <?php  else: ?>
@@ -426,13 +433,19 @@ You have the right to access the personal information about yourself held by the
 		<div class="flex-cell cta">
 			<a href="/membership-question" class="join">Join now</a>
 		</div>
-		<div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+
+		<?php 
+				$block = block_load('block', '309');
+				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+				$output = drupal_render($get);        
+				print $output;
+		?>
+
 	</div>
 <?php endif;?>
 
 <?php else: 
-	// todo
-	// add log-in button with message - you must be logged in
+	// when user is not logged in
 	?>
 		<!-- USER NOT LOGIN BUT NOT A MEMBER  -->
 		<div class="flex-container" id="non-member">
@@ -443,7 +456,14 @@ You have the right to access the personal information about yourself held by the
 				<a data-target="#loginAT" data-toggle="modal" href="#" class="login">Login</a>
 				<a href="/membership-question" class="join">Join now</a>
 			</div>
-			<div class="flex-cell pd-featured"><img src="/sites/default/files/pd-featured-images/next-18.5.png"></div>
+
+			<?php 
+					$block = block_load('block', '309');
+					$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+					$output = drupal_render($get);        
+					print $output;
+			?>
+
 		</div>
 
 <?php endif; ?>

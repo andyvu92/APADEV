@@ -505,4 +505,61 @@ jQuery(document).ready(function(){
         $(this).html('Pause');
     }
   });
+
+// ALERT WINDOWS FOR IE/EGDE
+  $( window ).load(function() {
+    if( /msie|trident|edge/g.test(navigator.userAgent.toLowerCase()) && !sessionStorage.getItem('firstVisit') ) { 
+        //show the Popup
+      $("body").css('overflow', 'hidden');
+      $(".html").append( "<div class='msie-alert'><div class='alert-container'><div class=''alert-header><h3 class='light-lead-heading cairo'>It looks like you may be using a web browser that we don’t support.</h3></div> <div class='alert-body'>We recommend using Google Chrome to get the best experience on the APA website. Click the image below to download Google Chrome.</span></div> <div class='alert-footer'><a href='https://www.google.com/chrome/' target='_blank'><span class='chrome-icon'></span></a></div><span class='close-ie-alert'>x</span></div> </div>" ); 
+        //Set the key
+      sessionStorage.setItem('firstVisit', '1');
+    } 
+  });
+
+  $(document).on('click', '.close-ie-alert', function(){
+    //Fade popup out
+    $("body").css('overflow', 'scroll');
+    $('.msie-alert').fadeOut();
+  });
+
+  $( window ).unload(function() {
+    //Destroy the key
+    localStorage.removeItem("firstVisit");
+  });
+
+
+  //PD MOBILE BANNER
+  
 });
+
+// PARALLAX
+
+jQuery(document).ready(function(){
+  img = $('.region-banner .parallaxie').css('background-image');
+  //img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
+  console.log(img);
+  $('.region-banner .parallaxie').append("<div class='parallax-img' style='background-image: " + img + "'></div>");
+
+  (function() {
+    // Tutorial: https://medium.com/@PatrykZabielski/how-to-make-multi-layered-parallax-illustration-with-css-javascript-2b56883c3f27
+    window.addEventListener('scroll', function(event) {
+      var depth, i, layer, layers, len, movement, topDistance, translate3d;
+      topDistance = this.pageYOffset;
+      layers = document.querySelectorAll(".region-banner .parallaxie .parallax-img");
+      for (i = 0, len = layers.length; i < len; i++) {
+        layer = layers[i];
+        depth = layer.getAttribute('data-depth');
+        movement = -(topDistance * 0.4);
+        translate3d = 'translate3d(0, ' + movement + 'px, 0)';
+        layer.style['-webkit-transform'] = translate3d;
+        layer.style['-moz-transform'] = translate3d;
+        layer.style['-ms-transform'] = translate3d;
+        layer.style['-o-transform'] = translate3d;
+        layer.style.transform = translate3d;
+      }
+    });
+  
+  }).call(this);
+});
+
