@@ -1898,19 +1898,53 @@ input{
 	}
 }
 
-.parallax{
+.parallaxie{
     overflow: hidden;
 }
 .parallax-img{
-    background-position: center center;
+    background-position: 50% 35%;
     background-size: cover;
     background-repeat: no-repeat;
-    width: 100%;
-    height: 110vh;
+    width: 110%;
+    height: 930px;
     position: fixed;
-    z-index: -1;
+    z-index: -2;
     top: 0px;
+    @media all and (max-width: @tablet-width) {
+        width: 100%;
+        height: 870px;
+        background-position: 60% 15%;
+    }
+    @media all and (max-width: @larger-phone-width){
+        /*background-position: 80% 0px !important;
+        background-size: 700px !important;
+        transform: translate3d(0px, 0px, 0px)!important;
+        position: absolute!important;*/
+        display: none;
+    }
 }
-#block-block-123{
+#section-pd-features{
+    position: relative;
+    z-index: 10;
+}
+.page-node-86 #block-block-123{
     overflow: hidden;
+    background-attachment: scroll!important;
+    position: relative;
+    z-index: 1;
+    background-repeat: no-repeat;
+    .content{
+        position: relative;
+    }
+    @media all and (max-width: @larger-phone-width) {
+        background-position: 80% 0px !important;
+        background-size: 100% !important;
+        background-image: url(/sites/default/files/pd-featured-images/pd-mobile.png)!important;
+    }
+}
+
+#section-pd-features{
+    z-index: 99999;
+    background: #fff;
+    position: relative;
 }
