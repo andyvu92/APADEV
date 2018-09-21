@@ -86,7 +86,9 @@ jQuery(document).ready(function($) {
 	if(window.location.pathname.indexOf("/aboutus") == 0) {
 		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.aboutusnavicon').parent().addClass("active");
 	}
-	if(window.location.pathname.indexOf("/membership") == 0) {
+	if(window.location.pathname.indexOf("/membership") == 0 || window.location.pathname.indexOf("/membership-question") == 0 || window.location.pathname.indexOf("/jointheapa") == 0 || window.location.pathname.indexOf("/renewmymembership") == 0 || window.location.pathname.indexOf("/dashboard") == 0 || window.location.pathname.indexOf("/your-details") == 0 || window.location.pathname.indexOf("/your-purchases") == 0 || window.location.pathname.indexOf("/subscriptions") == 0) {
+		// this includes join, membership question, renew pages
+		// and dashboard related pages
 		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.membershipnavicon').parent().addClass("active");
 	}
 	if(window.location.pathname.indexOf("/pd") == 0) {
@@ -95,7 +97,8 @@ jQuery(document).ready(function($) {
 	if(window.location.pathname.indexOf("/tools") == 0) {
 		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.toolsnavicon').parent().addClass("active");
 	}
-	if(window.location.pathname.indexOf("/research") == 0) {
+	if(window.location.pathname.indexOf("/research") == 0 || window.location.pathname.indexOf("/PRFdonation") == 0) {
+		// PRF donation page is included here
 		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.researchnavicon').parent().addClass("active");
 	}
 	if(window.location.pathname.indexOf("/inmotion") == 0) {
