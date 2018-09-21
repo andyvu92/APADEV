@@ -527,16 +527,16 @@ if (isset($_POST['refreshTag'])) {
 			// after login successfully get UserID as well to store on APA shopping cart database
 			
 			if ($resultdata['result'] == "Success") {
-				$_SESSION["UserName"] = $postData['Memberid'];
-				$_SESSION["Password"] = $postData['Password'];
+				$_SESSION["LoginName"] = $postData['Memberid'];
+				$_SESSION["LoginPassword"] = $postData['Password'];
 				
 				// call webservice login. Eddy will provide login -process functionality---put code here
 				// login sucessful unset session
 				
-				loginManager($_SESSION["UserName"], $_SESSION["Password"]);
+				loginManager($_SESSION["LoginName"], $_SESSION["LoginPassword"]);
 				//header("Refresh:0");
-				unset($_SESSION["UserName"]);
-				unset($_SESSION["Password"]);
+				unset($_SESSION["LoginName"]);
+				unset($_SESSION["LoginPassword"]);
 				
 			}
 			else{
@@ -622,13 +622,13 @@ $resultdata = GetAptifyData("42", $postData);
 //when create user successfully call login web service to login in APA website automatically.
 //after login successfully get UserID as well to store on APA shopping cart database
 if($resultdata['result']) { 
-	$_SESSION["UserName"] = $postData['Memberid'];
-	$_SESSION["Password"] = $postData['Password'];
+	$_SESSION["LoginName"] = $postData['Memberid'];
+	$_SESSION["LoginPassword"] = $postData['Password'];
 	// call webservice login. Eddy will provide login -process functionality---put code here
 	// login sucessful unset session
-	loginManager($_SESSION["UserName"], $_SESSION["Password"]);
-	unset($_SESSION["UserName"]);
-	unset($_SESSION["Password"]);
+	loginManager($_SESSION["LoginName"], $_SESSION["LoginPassword"]);
+	unset($_SESSION["LoginName"]);
+	unset($_SESSION["LoginPassword"]);
 }
 }
 	// current page's url. log-in to the same page before log-in.
@@ -761,9 +761,9 @@ $type = "PD";
 $counts = 0;
 if(isset($_SESSION['UserId'])) {
 	$userID = $_SESSION['UserId'];
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	/********Get user shopping product form APA server******/
-	try {
+	/*try {
 		$type="PD";
 		$shoppingcartGetPD= $dbt->prepare('SELECT ID, productID, meetingID,coupon FROM shopping_cart WHERE userID= :userID AND type= :type');
 		$shoppingcartGetPD->bindValue(':userID', $userID);
@@ -786,7 +786,22 @@ if(isset($_SESSION['UserId'])) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
 	}
-	$dbt = null;
+	$dbt = null;*/
+	$type="PD";
+	$shoppingcartGetPD = getPDProduct($userID,$type);
+	foreach($shoppingcartGetPD as $ttt) {
+			$counts++;
+	}
+	$type="PDNG";
+	$shoppingcartGetPDNG = getProduct($userID=$_SESSION['UserId'],$type="PDNG"); 
+	foreach($shoppingcartGetPDNG as $ttt) {
+			$counts++;
+	}
+	$type="PDMG";
+	$shoppingcartGetPDMG = getProduct($userID=$_SESSION['UserId'],$type="PDMG");
+	foreach($shoppingcartGetPDMG as $ttt) {
+			$counts++;
+	}
 	/********End get user shopping product form APA server******/
 } else {
 	$userID = '';

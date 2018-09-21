@@ -36,22 +36,24 @@ if(isset($_POST['step2-4'])){
 	if (sizeof($userNGProduct) != 0) {
 		$_SESSION['NationalProductID'] = $userNGProduct;
 	}
-	if(sizeof($_SESSION["MGProductID"]!= 0)){
-		deleteMGR($totalMGProduct=$_SESSION["MGProductID"], $NGProduct=$_POST['step2-4'], $userID=$_SESSION['UserId']);
-		unset($_SESSION["MGProductID"]);
-		$userMGProduct  = array();
-		$userMG1Product = getProduct($_SESSION['UserId'], "MG1");
-		if (sizeof($userMG1Product) != 0) {
-			array_push($userMGProduct, $userMG1Product);
-		}
-		
-		$userMG2Product = getProduct($_SESSION['UserId'], "MG2");
-		if (sizeof($userMG2Product) != 0) {
-			array_push($userMGProduct, $userMG2Product);
-		}
-		
-		if (sizeof($userMGProduct) != 0) {
-			$_SESSION["MGProductID"] = $userMGProduct;
+	if(isset($_SESSION["MGProductID"])){
+		if(sizeof($_SESSION["MGProductID"]!= 0)){
+			deleteMGR($totalMGProduct=$_SESSION["MGProductID"], $NGProduct=$_POST['step2-4'], $userID=$_SESSION['UserId']);
+			unset($_SESSION["MGProductID"]);
+			$userMGProduct  = array();
+			$userMG1Product = getProduct($_SESSION['UserId'], "MG1");
+			if (sizeof($userMG1Product) != 0) {
+				array_push($userMGProduct, $userMG1Product);
+			}
+			
+			$userMG2Product = getProduct($_SESSION['UserId'], "MG2");
+			if (sizeof($userMG2Product) != 0) {
+				array_push($userMGProduct, $userMG2Product);
+			}
+			
+			if (sizeof($userMGProduct) != 0) {
+				$_SESSION["MGProductID"] = $userMGProduct;
+			}
 		}
 	}
 

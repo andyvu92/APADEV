@@ -69,34 +69,16 @@ if(isset($_POST['Couponcode'])) {
 }
 /***************End Save coupon code on APA side************/
 
-
-$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 /*********Delete shopping product from APAserver******/
 if(isset($_GET["action"])&&$_GET["action"]=="del"){
 	$productID = $_GET['productid'];
 	$deltype =  $_GET['type'];
-	$shoppingcartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE productID=:productID AND userID=:userID AND type= :type');
-	$shoppingcartDel->bindValue(':productID', $productID);
-	$shoppingcartDel->bindValue(':userID', $userID);
-	$shoppingcartDel->bindValue(':type', $deltype);
-	$shoppingcartDel->execute();
-	$shoppingcartDel= null;
+	deletePDProduct($userID,$productID,$deltype);
 }
 
 /*********End delete shopping product from APAserver******/
 /********Get user shopping product form APA server******/
-try {
-	$type="PD";
-	$shoppingcartGet= $dbt->prepare('SELECT ID, productID, meetingID,coupon FROM shopping_cart WHERE userID= :userID AND type= :type');
-	$shoppingcartGet->bindValue(':userID', $userID);
-	$shoppingcartGet->bindValue(':type', $type);
-	$shoppingcartGet->execute();
-	$productList = $shoppingcartGet;
-	$shoppingcartGet= null;               
-} catch (PDOException $e) {
-	print "Error!: " . $e->getMessage() . "<br/>";
-	die();
-}
+$productList = getPDProduct($userID,$type);
 /********End get user shopping product form APA server******/
 /********Get Product details  from Aptify******/
 // Eddy's code next 3

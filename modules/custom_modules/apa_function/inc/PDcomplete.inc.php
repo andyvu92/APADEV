@@ -75,44 +75,13 @@ if(isset($_POST["POSTPRF"])) {
 		
 		// delete shopping cart data from APA database; put the response status validation here!!!!!!!
 		$userID = $_SESSION["UserId"];
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-		//$type = array("PD","PDNG");
-		
-		//$in  = str_repeat('?,', count($type) - 1) . '?';
-		try {
-			$type="PD";
-			$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type=:type');
-			$shoppingCartDel->bindValue(':userID', $userID);
-			$shoppingCartDel->bindValue(':type', $type);
-			$shoppingCartDel->execute();
-			$shoppingCartDel = null;
-			$type="PDNG";
-			$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type=:type');
-			$shoppingCartDel->bindValue(':userID', $userID);
-			$shoppingCartDel->bindValue(':type', $type);
-			$shoppingCartDel->execute();
-			$shoppingCartDel = null;
-			$type="PDMG";
-			$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type=:type');
-			$shoppingCartDel->bindValue(':userID', $userID);
-			$shoppingCartDel->bindValue(':type', $type);
-			$shoppingCartDel->execute();
-			$shoppingCartDel = null;
+		$type = "PD";
+		checkShoppingCart($userID, $type, $productID="");
+		$type = "PDNG";
+		checkShoppingCart($userID, $type, $productID="");
+		$type = "PDMG";
+		checkShoppingCart($userID, $type, $productID="");
 		}
-		/*
-		try {
-			$type="PDNG";
-			$shoppingCartDel= $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type=:type');
-			$shoppingCartDel->bindValue(':userID', $userID);
-			$shoppingCartDel->bindValue(':type', $type);
-			$shoppingCartDel->execute();
-			$shoppingCartDel = null;
-		}*/
-		catch (PDOException $e) {
-				print "Error!: " . $e->getMessage() . "<br/>";
-				die();
-	    }
-	}
 }
 
 if(isset($_POST["Invoice_ID"])) {

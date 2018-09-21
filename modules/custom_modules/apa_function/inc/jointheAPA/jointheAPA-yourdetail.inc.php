@@ -535,16 +535,16 @@ $filterMemberProduct = array("10007","10008","10009","9997");
         // after login successfully get UserID as well to store on APA shopping cart database
         
         if ($resultdata['result'] == "Success") {
-            $_SESSION["UserName"] = $postData['Memberid'];
-            $_SESSION["Password"] = $postData['Password'];
+            $_SESSION["LoginName"] = $postData['Memberid'];
+            $_SESSION["LoginPassword"] = $postData['Password'];
             
             // call webservice login. Eddy will provide login -process functionality---put code here
             // login sucessful unset session
             
-            loginManager($_SESSION["UserName"], $_SESSION["Password"]);
+            loginManager($_SESSION["LoginName"], $_SESSION["LoginPassword"]);
 			//header("Refresh:0");
-            unset($_SESSION["UserName"]);
-            unset($_SESSION["Password"]);
+            unset($_SESSION["LoginName"]);
+            unset($_SESSION["LoginPassword"]);
         }
     }
     

@@ -173,7 +173,7 @@ function checkPDUser($memberType){
 /*Parameters: $userID, $productID,$type;*/
 /*save product data including membership type product, national group product, fellowship & PRF product*/
 function createShoppingCart($userID, $productID,$type,$coupon){
-	try {
+	/*try {
 		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 		$dbt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} catch (PDOException $e) {
@@ -190,11 +190,21 @@ function createShoppingCart($userID, $productID,$type,$coupon){
 	} catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
-	}
+	}*/
+	// use drupal db_insert by jinghu 20/09/2018
+	$shoppingcartUpdate	=  db_insert('shopping_cart') 
+							->fields(array(
+							  'userID' => $userID,
+							  'productID' => $productID,
+							  'type' => $type,
+							  'coupon' => $coupon,
+							))
+							->execute();
+	
 }
 // check the user product in case of duplicated shopping cart data
 function checkShoppingCart($userID, $type, $productID){
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+		/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 		try {
 			if($type!=""){
 				$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID and type=:type');
@@ -224,12 +234,39 @@ function checkShoppingCart($userID, $type, $productID){
 		catch (PDOException $e) {
 				print "Error!: " . $e->getMessage() . "<br/>";
 				die();
-	    }
+	    }*/
+		
+		/*$shoppingcartGet = db_select('shopping_cart','s');
+		$shoppingcartGet ->fields('s');
+		$shoppingcartGet ->condition('userID', $userID, '=');
+		if($type!=""){
+			$shoppingcartGet ->condition('type', $type, '=');
+        }
+		if($productID!=""){
+			$shoppingcartGet ->condition('productID', $productID, '=');
+		}
+		$shoppingcartGet ->execute();
+		$shoppingcartGet ->fetchAll();*/
+		// use drupal db_select by jinghu 20/09/2018
+		//if(sizeof($shoppingcartGet)!=0){
+			$shoppingcartDel = db_delete('shopping_cart');
+			$shoppingcartDel ->condition('userID', $userID, '=');
+			if($type!=""){
+				$shoppingcartDel ->condition('type', $type, '=');
+			}
+			if($productID!=""){
+				$shoppingcartDel ->condition('productID', $productID, '=');
+			}
+			$shoppingcartDel ->execute();
+		//}			
+					
+					
+					
 }
 //get productID list from local database;
 function getProduct($userID,$type){
 		$arrayReturn = array();
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+		/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 		$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND type=:type');
 		$shoppingcartGet->bindValue(':userID', $userID);
 		$shoppingcartGet->bindValue(':type', $type);
@@ -239,14 +276,27 @@ function getProduct($userID,$type){
 				array_push($arrayReturn, $row['productID']);
 			}
 		}	
-		$shoppingcartGet = null;
+		$shoppingcartGet = null;*/
+		// use drupal db_select by jinghu 20/09/2018
+		$shoppingcartGet = db_select('shopping_cart','s')
+					->fields('s')
+					->condition('userID', $userID, '=')
+					->condition('type', $type, '=')
+					->execute()
+					->fetchAll();
+		if(sizeof($shoppingcartGet)!=0){
+			$shoppingcartGet = json_decode(json_encode($shoppingcartGet), True);
+			foreach ($shoppingcartGet as $row) {
+				array_push($arrayReturn, $row['productID']);
+			}
+		}
 		return $arrayReturn;
 }
 
 function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 	$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
-	try {
+	/*try {
 		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 		$dbt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} catch (PDOException $e) {
@@ -282,14 +332,59 @@ function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 	catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
+	}*/
+	// use drupal db_update by jinghu 20/09/2018
+	$shoppingcartGet = db_select('shopping_cart','s')
+					->fields('s')
+					->condition('userID', $userID, '=')
+					->condition('productID', $productID, '=')
+					->condition('type', $type, '=')
+					->execute()
+					->fetchAssoc();
+	if(!empty($shoppingcartGet)) {
+		header("Location:".$link."/pd/pd-product?id=".$meetingID);
+	}
+	else{
+		$shoppingcartUpdate	=  db_insert('shopping_cart') 
+							->fields(array(
+							  'userID' => $userID,
+							  'productID' => $productID,
+							  'meetingID' => $meetingID,
+							  'type' => $type,
+							  'Coupon' => $Coupon,
+							))
+							->execute();
 	}
 	header("Location:".$link."/pd/pd-product?saveShoppingCart&id=".$meetingID);
-	//header("Location:".$link."/pd/pd-product?id=".$productID);
+	
+}
+//get productID list from local database;
+function getPDProduct($userID,$type){
+		$arrayReturn = array();
+		$shoppingcartGet = db_select('shopping_cart','s')
+					->fields('s')
+					->condition('userID', $userID, '=')
+					->condition('type', $type, '=')
+					->execute()
+					->fetchAll();
+		if(sizeof($shoppingcartGet)!=0){
+			$arrayReturn = json_decode(json_encode($shoppingcartGet), True);
+		}
+		return $arrayReturn;
+}
+//delete productID list from local database;
+function deletePDProduct($userID,$productID,$deltype){
+		$shoppingcartDel = db_delete('shopping_cart');
+		$shoppingcartDel ->condition('userID', $userID, '=');
+		$shoppingcartDel ->condition('productID', $productID, '=');
+		$shoppingcartDel ->condition('type', $deltype, '=');
+		$shoppingcartDel ->execute();			
+		
 }
 function PDSaveCoupon($userID, $type, $Coupon){
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	// use drupal db_update by jinghu 18/09/2018
-	try {
+	/*try {
 	$shoppingcartSave= $dbt->prepare('UPDATE shopping_cart SET Coupon = :Coupon WHERE userID= :userID AND type= :type');
 	$shoppingcartSave->bindValue(':userID', $userID);
 	$shoppingcartSave->bindValue(':type', $type);
@@ -299,18 +394,18 @@ function PDSaveCoupon($userID, $type, $Coupon){
 	} catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
-	}
+	}*/
 	
-	/*$db_result = db_update('shopping_cart', $options = array('target' => 'slave'))
-	->fields(array('Coupon' => $Coupon,))
-	->condition ('userID', $userID, '=')
-	->condition ('type', $type, '=')
-	->execute();*/
+	$db_result = db_update('shopping_cart')
+				->fields(array('coupon' => $Coupon,))
+				->condition ('userID', $userID, '=')
+				->condition ('type', $type, '=')
+				->execute();
 }
 function getBackgroundImage($userID){
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	$background=0;
-	try {
+	/*try {
 		$backgroundInfo= $dbt->prepare('SELECT * FROM background_images WHERE userID= :userID');
 		$backgroundInfo->bindValue(':userID', $userID);
 		$backgroundInfo->execute();
@@ -330,8 +425,21 @@ function getBackgroundImage($userID){
 	catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
-	}	
-	
+	}*/
+	// use drupal db_select by jinghu 20/09/2018
+	$backgroundInfo = db_select('background_images','b')
+					->fields('b')
+					->condition('userID', $userID, '=')
+					->execute()
+					->fetchAssoc();
+	if(!empty($backgroundInfo)) { 
+	    $background= $backgroundInfo['imageID'];
+		return $background;
+	}
+	else{
+		$background=1; 
+		return $background;
+	}
 }
 
 
@@ -450,7 +558,7 @@ function SavePDSurvey($CreateNewUserPD){
 	$Campaignsproduct = $CreateNewUserPD["Campaigns-product"];
 	$Partnerproduct = $CreateNewUserPD["Partner-product"];
 	$CreateDate = $CreateNewUserPD["CreateDate"];
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+	/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 	try {
 		$PDSurvey= $dbt->prepare('INSERT INTO pdsurvey (UserID, Job, EmailAddress, Registrationboard, Professionalinsurance,Professionalbody,HearaboutAPA,Membershipproduct,Pdemailsproduct,Jobsproduct,Shopproduct,Campaignsproduct,Partnerproduct,CreateDate) VALUES (:UserID, :Job, :EmailAddress, :Registrationboard, :Professionalinsurance, :Professionalbody, :HearaboutAPA, :Membershipproduct, :Pdemailsproduct, :Jobsproduct, :Shopproduct, :Campaignsproduct, :Partnerproduct, :CreateDate)');
 		$PDSurvey->bindValue(':UserID', $UserID);
@@ -473,11 +581,29 @@ function SavePDSurvey($CreateNewUserPD){
 	catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
-	}	
+	}*/	
+	$PDSurvey	=  db_insert('pdsurvey') 
+				->fields(array(
+				  'UserID' => $UserID,
+				  'Job' => $Job,
+				  'EmailAddress' => $EmailAddress,
+				  'Registrationboard' => $Registrationboard,
+				  'Professionalinsurance' => $Professionalinsurance,
+				  'Professionalbody' => $Professionalbody,
+				  'HearaboutAPA' => $HearaboutAPA,
+				  'Membershipproduct' => $Membershipproduct,
+				  'Pdemailsproduct' => $Pdemailsproduct,
+				  'Jobsproduct' => $Jobsproduct,
+				  'Shopproduct' => $Shopproduct,
+				  'Campaignsproduct' => $Campaignsproduct,
+				  'Partnerproduct' => $Partnerproduct,
+				  'CreateDate' => $CreateDate,
+				))
+				->execute();
 	
 }
 function createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type){
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	$dbt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	try {
 		$insuranceUpdate= $dbt->prepare('INSERT INTO insurance (UserID, EmailAddress, CreateDate, Type) VALUES (:UserID, :EmailAddress, :CreateDate, :Type)');
@@ -491,10 +617,18 @@ function createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type){
 	catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
-	}	
+	}*/
+	$insuranceUpdate	=  db_insert('insurance') 
+				->fields(array(
+				  'UserID' => $UserID,
+				  'EmailAddress' => $EmailAddress,
+				  'CreateDate' => $CreateDate,
+				  'Type' => $Type,
+				))
+				->execute();
 }
 function getInsuranceStatus($UserID){
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	try {
 		$insuranceGet= $dbt->prepare('SELECT * FROM insurance WHERE UserID= :UserID');
 		$insuranceGet->bindValue(':UserID', $UserID);
@@ -510,7 +644,21 @@ function getInsuranceStatus($UserID){
 	catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
-	}	
+	}*/
+    // use drupal db_select by jinghu 20/09/2018
+	$insuranceGet = db_select('insurance','i')
+					->fields('i')
+					->condition('UserID', $UserID, '=')
+					->execute()
+					->fetchAssoc();
+					
+	if(!empty($insuranceGet)) { 
+		$userTag = 1;
+	}
+	else{
+		$userTag=0;  
+	}
+	return $userTag;	
 	
 }
 
@@ -538,7 +686,7 @@ function unique_multidim_array($array, $key) {
 //get productID list from local database;
 function getProductList($userID){
 	$arrayReturn = array();
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+	/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 	$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND productID != "PRF" AND type != "PD" AND type != "PDNG" AND type != "PDMG"');
 	$shoppingcartGet->bindValue(':userID', $userID);
 	$shoppingcartGet->execute();
@@ -547,7 +695,23 @@ function getProductList($userID){
 			array_push($arrayReturn, $row['productID']);
 		}
 	}	
-	$shoppingcartGet = null;
+	$shoppingcartGet = null;*/
+	// use drupal db_update by jinghu 20/09/2018
+	$shoppingcartGet = db_select('shopping_cart','s')
+					->fields('s')
+					->condition('userID', $userID, '=')
+					->condition('productID', 'PRF', '!=')
+					->condition('type', "PD", '!=')
+					->condition('type', "PDNG", '!=')
+					->condition('type', "PDMG", '!=')
+					->execute()
+					->fetchAll();
+	if(sizeof($shoppingcartGet)!=0) {
+		$shoppingcartGet = json_decode(json_encode($shoppingcartGet), True);
+		foreach ($shoppingcartGet as $row) {
+			array_push($arrayReturn, $row['productID']);
+		}
+	}					
 	return $arrayReturn;
 } 
 function checkRenew($Paidthrough, $tag){
