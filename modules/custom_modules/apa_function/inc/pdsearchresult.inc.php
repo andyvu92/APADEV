@@ -6,9 +6,6 @@ if(!function_exists('drupal_session_started'))
 ?>
 <?php
 global $base_url;
-// todo
-// This will only be displayed when there is any results.
-
 // 2.2.28 - GET event search result list
 // It has four different cases, but we are going to use
 // only one scenario 
@@ -145,6 +142,7 @@ if(isset($results['MResponse'])) {
 
 <?php else: ?>
 <?php
+	// This will only be displayed when there is any results.
    /********sort search result*****/
    /*
 	usort($results, function($a, $b) {
