@@ -789,8 +789,7 @@ $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
 
 </script>
  <?php else : 
-	// todo
-	// add log-in button with message - you must be logged in
+	// when user is not logged in
 	?>
 		<div class="flex-container" id="non-member">
 			<div class="flex-cell">

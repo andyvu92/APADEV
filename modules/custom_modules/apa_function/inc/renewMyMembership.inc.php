@@ -445,8 +445,7 @@ You have the right to access the personal information about yourself held by the
 <?php endif;?>
 
 <?php else: 
-	// todo
-	// add log-in button with message - you must be logged in
+	// when user is not logged in
 	?>
 		<!-- USER NOT LOGIN BUT NOT A MEMBER  -->
 		<div class="flex-container" id="non-member">
