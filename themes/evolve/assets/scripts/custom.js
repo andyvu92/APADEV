@@ -1103,7 +1103,7 @@ jQuery(document).ready(function($) {
 
 	/*   Membership Types questions start  */	
 	$(".next").click(function() {
-		var x = $(".MainQuestionHolder .active").attr('id').replace('Section','');
+		var x = $(".active").attr('id').replace('Section','');
 		var type = $("#chosenType").text();
 		var title = $("."+type+" .MTtitle").text();
 		var typeID = $('.'+type+' .MTid').text();
@@ -1138,7 +1138,7 @@ jQuery(document).ready(function($) {
 	});
 	
   $(".prev").click(function() {
-    var x = $(".MainQuestionHolder .active").attr('id').replace('Section','');
+    var x = $(".active").attr('id').replace('Section','');
     if(x != '1') {
 		$("#Section"+x).removeClass("passed active");
 		x = parseInt(x) - 1;
