@@ -194,7 +194,7 @@
 		margin: 100px 0;
 	}
 	#block-block-302{
-		min-height: 60vh;
+		min-height: 500px;
 	}
 
 	/* CAMPAIGN TOOLKIT SECTION */
@@ -228,7 +228,7 @@
 
 	/* DYNAMIC SECTION */
 	#section-content-bottom-third{
-		background: @alt-grey;
+		background: #e7e8e9!important;
 		padding-bottom: 50px;
 		.media_filter{
 			ul{
@@ -683,17 +683,29 @@
 /* RADIO PULSE ANIMATION */
 @keyframes audio-pulse {
 	0% {
+		background-size: 70%;
+		transform: scale(0.95);
+	}
+	70%{
+		transform: scale(1);
 		background-size: 100%;
 	}
 	100% {
 		background-size: 70%;
+		transform: scale(0.95);
 	}
 }
 @-webkit-keyframes audio-pulse {
 	0% {
+		background-size: 70%;
+		transform: scale(0.95);
+	}
+	70%{
+		transform: scale(1);
 		background-size: 100%;
 	}
 	100% {
 		background-size: 70%;
+		transform: scale(0.95);
 	}
 }

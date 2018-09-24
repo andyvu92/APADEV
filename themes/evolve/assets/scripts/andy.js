@@ -280,11 +280,6 @@ jQuery(document).ready(function() {
 
 });
 
-//ONCLICK FUNCTION FOR DYNAMIC CONTENTS
-$(document).on("click","#id .class", function(){
-  console.log("Clicked.");
-});
-
 // IF THE DEVICE IS TOUCH SCREEN
 function isTouchDevice() {
   return 'ontouchstart' in document.documentElement;
@@ -536,17 +531,27 @@ jQuery(document).ready(function(){
 // PARALLAX
 
 jQuery(document).ready(function(){
-  img = $('.region-banner .parallaxie').css('background-image');
-  //img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
-  console.log(img);
-  $('.region-banner .parallaxie').append("<div class='parallax-img' style='background-image: " + img + "'></div>");
+  img = $('.jarallax').css('background-image');
+  img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
+
+  img01 = $('.jarallax01').css('background-image');
+  img01 = img01.replace('url(','').replace(')','').replace(/\"/gi, "");
+
+  $('.jarallax').append("<img data-speed='1' class='img-parallax' src=' " + img + "'>");
+  $('.jarallax01').append("<img data-speed='1' class='img-parallax' src=' " + img01 + "'>");
+
+  //$('.jarallax').jarallax({
+  //  speed: 0.4,
+  //  imgSize: 'cover',
+  //  type: 'scroll',
+  //});
 
   (function() {
     // Tutorial: https://medium.com/@PatrykZabielski/how-to-make-multi-layered-parallax-illustration-with-css-javascript-2b56883c3f27
     window.addEventListener('scroll', function(event) {
       var depth, i, layer, layers, len, movement, topDistance, translate3d;
       topDistance = this.pageYOffset;
-      layers = document.querySelectorAll(".region-banner .parallaxie .parallax-img");
+      layers = document.querySelectorAll(".parallaxie .parallax-img");
       for (i = 0, len = layers.length; i < len; i++) {
         layer = layers[i];
         depth = layer.getAttribute('data-depth');
@@ -561,5 +566,45 @@ jQuery(document).ready(function(){
     });
   
   }).call(this);
+
+  
+  
+$('.img-parallax').each(function(){
+  var img = $(this);
+  var imgParent = $(this).parent();
+  function parallaxImg () {
+    var speed = img.data('speed');
+    var imgY = imgParent.offset().top;
+    var winY = $(this).scrollTop();
+    var winH = $(this).height();
+    var parentH = imgParent.innerHeight();
+
+
+    // The next pixel to show on screen      
+    var winBottom = winY + winH;
+
+    // If block is shown on screen
+    if (winBottom > imgY && winY < imgY + parentH) {
+      // Number of pixels shown after block appear
+      var imgBottom = ((winBottom - imgY) * speed);
+      // Max number of pixels until block disappear
+      var imgTop = winH + parentH;
+      // Porcentage between start showing until disappearing
+      var imgPercent = ((imgBottom / imgTop) * 100) + (50 - (speed * 50));
+    }
+    img.css({
+      top: imgPercent + '%',
+      transform: 'translate(-50%, -' + imgPercent + '%)'
+    });
+  }
+  $(document).on({
+    scroll: function () {
+      parallaxImg();
+    }, ready: function () {
+      parallaxImg();
+    }
+  });
+});
+
 });
 
