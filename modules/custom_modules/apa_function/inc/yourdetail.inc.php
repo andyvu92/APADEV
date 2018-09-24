@@ -317,13 +317,13 @@ $picture = GetAptifyData("10","","");
 			
 
 
-if(isset($_GET["action"])&& ($_GET["action"]=="addcard")) {
+if(isset($_POST["addCard"])) {
 	// 2.2.15 - Add payment method
 	// Send - 
 	// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
 	// Response -
 	// N/A.
-	if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
+   	if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
 	if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
 	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
 	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
@@ -453,7 +453,7 @@ apa_function_dashboardLeftNavigation_form();
 							<?php if($details['MemberTypeID']!="1"): ?><li id="yourdetail5"><a class="event4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li><?php endif;?>
 					</ul>
 				</div>
-				<?php if(isset($_GET["action"])&& ($_GET["action"]=="addcard")) :?>
+				<?php if(isset($_POST["addCard"])) :?>
 					<?php if($out["result"]=="Failed"):?>
 						<?php if($out["Message"]=="Expiry date lenght should be 4."):?>
 						<div class="checkMessage">Please enter a valid expiry date.</div>
@@ -2025,7 +2025,7 @@ apa_function_dashboardLeftNavigation_form();
 			</div>
 		</form>
 		<div id="addPaymentCardForm" style="display:none;">
-			<form action="/your-details?action=addcard" method="POST" id="formaddcard">
+			<!--<form action="/your-details?action=addcard" method="POST" id="formaddcard">
 				<div class="row"><div class="col-xs-12"><h3 style="color:#000; margin-top: 0" class="light-lead-heading cairo">Add a new card:</h3></div></div>
 				<div class="row">
 					<input type="hidden" name="addCard">
@@ -2034,13 +2034,13 @@ apa_function_dashboardLeftNavigation_form();
 						<div class="chevron-select-box">
 						<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 						<?php 
-							$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+							/*$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 							$PaymentType=json_decode($PaymentTypecode, true);
 							foreach($PaymentType  as $pair => $value){
 								echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 								echo '> '.$PaymentType[$pair]['Name'].' </option>';
 								
-							}
+							}*/
 						?>
 						</select>
 						</div>
@@ -2087,7 +2087,12 @@ apa_function_dashboardLeftNavigation_form();
 						<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
 					</div>
 				</div>
-			</form>
+			</form>-->
+			<?php //apa_payment_card_form();
+			// print drupal_render(drupal_get_form('apa_payment_card_form')));
+			$the_form = drupal_get_form('apa_create_payment_card_form');
+             print drupal_render($the_form);			 
+			?>
 		</div>
 		<div id="rollOverWindow" style="display:none;">
 			<form action="your-details?action=rollover" method="POST" id="rollOverForm">
