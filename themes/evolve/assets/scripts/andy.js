@@ -1,13 +1,8 @@
 /*
- * jQuery appear plugin
- *
- * Copyright (c) 2012 Andrey Sidorov
- * licensed under MIT license.
- *
- * https://github.com/morr/jquery.appear/
- *
- * Version: 0.3.3
- */
+
+ * * * ANDY CUSTOM JS CODE * * *
+
+*/
 
 //ADD BACKGROUND IMAGE TO CONTAINER
 jQuery(document).ready(function() {
@@ -36,7 +31,7 @@ jQuery(document).ready(function(){
 });
 
 //ADD ACTIVE CLASS
-jQuery(document).ready(function($){
+jQuery(document).ready(function(){
   // Get current path and find target link
   var path = window.location.pathname.split("/").pop();
   
@@ -46,11 +41,29 @@ jQuery(document).ready(function($){
   }
 
   // Add active class to target link
-  var target = jQuery('.nav a[href="/'+path+'"]');
+  var target = $('.nav a[href="/'+path+'"]');
   target.parent().addClass('active');
 
-  var target = jQuery('.nav a[href="'+path+'"]');
+  var target = $('.nav a[href="'+path+'"]');
   target.parent().addClass('active');
+
+  var target1 = $('.side-nav li a[href="/'+path+'"]');
+  target1.parent().addClass('active');
+
+  var target1 = $('.side-nav li a[href="'+path+'"]');
+  target1.parent().addClass('active');
+});
+
+jQuery(document).ready(function(){
+  // Get current path and find target link
+  var path1 = window.location.pathname.split("/").pop();
+  console.log(path1);
+  // Add active class to target link
+  var target1 = $('.side-nav li a[href="/nationalgroups/'+path1+'"]');
+  target1.parent().addClass('active');
+
+  var target1 = $('.side-nav li a[href="'+path1+'"]');
+  target1.parent().addClass('active');
 });
 
 //ACORDIAN 
@@ -531,20 +544,6 @@ jQuery(document).ready(function(){
 // PARALLAX
 
 jQuery(document).ready(function(){
-  img = $('.jarallax').css('background-image');
-  img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
-
-  img01 = $('.jarallax01').css('background-image');
-  img01 = img01.replace('url(','').replace(')','').replace(/\"/gi, "");
-
-  $('.jarallax').append("<img data-speed='1' class='img-parallax' src=' " + img + "'>");
-  $('.jarallax01').append("<img data-speed='1' class='img-parallax' src=' " + img01 + "'>");
-
-  //$('.jarallax').jarallax({
-  //  speed: 0.4,
-  //  imgSize: 'cover',
-  //  type: 'scroll',
-  //});
 
   (function() {
     // Tutorial: https://medium.com/@PatrykZabielski/how-to-make-multi-layered-parallax-illustration-with-css-javascript-2b56883c3f27
@@ -567,44 +566,19 @@ jQuery(document).ready(function(){
   
   }).call(this);
 
+});
+
+
+//ADD ACTIVE CLASS - NATIONAL GROUP SIDE BAR NAV
+jQuery(document).ready(function($){
+  // Get current path and find target link
+  var path = window.location.pathname.split("/").pop();
   
-  
-$('.img-parallax').each(function(){
-  var img = $(this);
-  var imgParent = $(this).parent();
-  function parallaxImg () {
-    var speed = img.data('speed');
-    var imgY = imgParent.offset().top;
-    var winY = $(this).scrollTop();
-    var winH = $(this).height();
-    var parentH = imgParent.innerHeight();
-
-
-    // The next pixel to show on screen      
-    var winBottom = winY + winH;
-
-    // If block is shown on screen
-    if (winBottom > imgY && winY < imgY + parentH) {
-      // Number of pixels shown after block appear
-      var imgBottom = ((winBottom - imgY) * speed);
-      // Max number of pixels until block disappear
-      var imgTop = winH + parentH;
-      // Porcentage between start showing until disappearing
-      var imgPercent = ((imgBottom / imgTop) * 100) + (50 - (speed * 50));
-    }
-    img.css({
-      top: imgPercent + '%',
-      transform: 'translate(-50%, -' + imgPercent + '%)'
-    });
+  // Account for home page with empty path
+  if ( path == '' ) {
+    path = 'index.php';
   }
-  $(document).on({
-    scroll: function () {
-      parallaxImg();
-    }, ready: function () {
-      parallaxImg();
-    }
-  });
-});
+
+  // Add active class to target link
 
 });
-

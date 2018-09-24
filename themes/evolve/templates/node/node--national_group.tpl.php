@@ -140,7 +140,6 @@
 				<li><a href="/nationalgroups/orthopaedic">Orthopaedic</a></li>
 				<li><a href="/nationalgroups/paediatric">Paediatric</a></li>
 				<li><a href="/nationalgroups/pain">Pain</a></li>
-				<li><a href="/nationalgroups/rural">Rural</a></li>
 				<li><a href="/nationalgroups/sports-and-exercise">Sports and Exercise</a></li>
 				<li><a href="/nationalgroups/womens-mens-and-pelvic-health">Women's, Men's and Pelvic Health</a></li>
 			<ul>

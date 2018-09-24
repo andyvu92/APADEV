@@ -121,6 +121,7 @@ scripts[] = assets/scripts/FindPhysio.js
 scripts[] = assets/scripts/Eddy.js
 scripts[] = assets/scripts/popups.js
 scripts[] = assets/scripts/yourDetailValidation.js
+scripts[] = assets/scripts/parallax.js
 
 
 settings[body] = 'Open Sans:regular:14px:24px'
