@@ -168,7 +168,7 @@ $scheduleDetails = GetAptifyData("47", $postScheduleData);
 $price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
 //print_r($scheduleDetails);
 /********End get Order Total and Schedule Payments  from Aptify******/
-if(isset($_POST['addCard']) && $_POST['addCard'] == "1"){
+if(isset($_POST['addCard'])){
 	// 2.2.15 - Add payment method
 	// Send - 
 	// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
@@ -397,21 +397,21 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	</div>
 
 	<div id="anothercardBlock" class="col-xs-12 none-padding down10 extra-card" style="display:none;"<?php //if(isset($_SESSION["tempcard"])){ echo 'style="display:block;"';} else { echo 'style="display:none;"';}?>>
-		<form action="/pd/pd-shopping-cart" method="POST" class="">
+		<!--<form action="/pd/pd-shopping-cart" method="POST" class="">
 		<input type="hidden" name="addCard" value="1"/>
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="chevron-select-box">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 					<?php 
-						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+						/*$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 						$PaymentType=json_decode($PaymentTypecode, true);
 						foreach($PaymentType  as $pair => $value){
 							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 							if(isset($_SESSION["tempcard"]) && $_SESSION["tempcard"]['Payment-method'] ==$PaymentType[$pair]['ID']) {echo "selected ";}
 							echo '> '.$PaymentType[$pair]['Name'].' </option>';
 							
-						}
+						}*/
 					?>
 					</select>
 				</div>
@@ -453,30 +453,32 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			<input class="styled-checkbox" type="hidden" id="addcardtag" name="addcardtag" <?php //if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>>
 			<label for="addcardtag">Do you want to save this card?</label>
 		</div>-->
-		<div class="col-xs-12 none-padding">
+		<!--<div class="col-xs-12 none-padding">
 			<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
 		</div>
-		</form>
+		</form>-->
+		<?php $the_form = drupal_get_form('apa_create_payment_card_form');
+             print drupal_render($the_form);	?>
 	</div>
 	
 	</div>
 	<?php endif; ?>
     <?php if (sizeof($cardsnum["results"])==0): ?>
-	<form action="/pd/pd-shopping-cart" method="POST" id="addPaymentCardForm">
+	<!--<form action="/pd/pd-shopping-cart" method="POST" id="addPaymentCardForm">
 	    <input type="hidden" name="addCard" value="1">
 		<div class="row">
 			<div class="col-lg-12">
 				<div class="chevron-select-box">
 					<select class="form-control"  name="Cardtype" placeholder="Card type">
 					<?php 
-						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+						/*$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 						$PaymentType=json_decode($PaymentTypecode, true);
 						foreach($PaymentType  as $pair => $value){
 							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 							if(isset($_SESSION["tempcard"]) && $_SESSION["tempcard"]['Payment-method'] ==$PaymentType[$pair]['ID']) {echo "selected ";}
 							echo '> '.$PaymentType[$pair]['Name'].' </option>';
 							
-						}
+						}*/
 					?>
 					</select>
 				</div>
@@ -485,25 +487,25 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		<div class="row">
 			<div class="col-lg-12">
 			<label for="">Name on card:<span class="tipstyle"> *</span></label>
-			<input type="text" class="form-control"  name="Cardname" placeholder="Name on card" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CardName'].''; ?>>
+			<input type="text" class="form-control"  name="Cardname" placeholder="Name on card" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CardName'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
 			<label for="">Card number:<span class="tipstyle"> *</span></label>
-			<input type="number" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
+			<input type="number" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
 			<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-			<input type="number" class="form-control"  name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
+			<input type="number" class="form-control"  name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col-lg-12">
 				<label for="">CVV:<span class="tipstyle"> *</span></label>
-				<input type="number" class="form-control"  name="CCV" placeholder="CVV" <?php if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
+				<input type="number" class="form-control"  name="CCV" placeholder="CVV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
 			</div>
 			<div class="col-xs-12 tooltip-container top" style="margin-top: 10px;">
 				<span class="tooltip-activate">What is this?</span>
@@ -518,10 +520,12 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" <?php //if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>>
 			<label for="addcardtag">Do you want to save this card?</label>
 		</div>-->
-		<div class="col-xs-12 none-padding">
+		<!--<div class="col-xs-12 none-padding">
 			<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
 		</div>
-	</form>	
+	</form>	-->
+	<?php $the_form = drupal_get_form('apa_create_payment_card_form');
+             print drupal_render($the_form);?>
 	<?php endif; ?>
 	<?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0) || (sizeof($FPListArray)!=0)):?>
 		<div class="row">

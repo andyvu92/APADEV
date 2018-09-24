@@ -64,6 +64,12 @@ function apa_function_menu()
         'access callback' => true,
         'type' => MENU_CALLBACK,
     ];
+	$items['user/addpaymentcard'] = [
+        'title' => "Add payment card",
+        'page callback' => 'apa_payment_card_form',
+        'access callback' => true,
+        'type' => MENU_CALLBACK,
+    ];
     // The path where third party will come to login
     /*$items['apa/sso/login'] = [
         'title' => "APA SSO Test",
@@ -91,6 +97,9 @@ function apa_function_menu()
     ];
 */
     return $items;
+}
+function apa_payment_card_form() {
+	return drupal_get_form('apa_create_payment_card_form');
 }
 /**
  * Page callback: Global function.
@@ -397,6 +406,74 @@ function apa_function_SLO_form() {
 function apa_function_SAML_login_form() {
     /// not in use
     include __DIR__."/inc/Login/SAMLlogin.php";
+}
+//create add payment card form
+function apa_create_payment_card_form($form, &$form_state){
+	$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+	$PaymentType=json_decode($PaymentTypecode, true);
+	$paymentArray = array();
+	foreach($PaymentType  as $pair => $value){
+		$key = $PaymentType[$pair]['ID'];
+		$paymentArray[$key] = $PaymentType[$pair]['Name'];
+	}
+	$form['addCard'] = array(
+		'#type' => 'hidden',
+	);
+	$form['Cardtype'] = array(
+		'#type' => 'select',
+		'#title' => t('Payment method:'),
+		'#default_value' => '',
+		'#attributes' => array(' class' => 'form-control'),
+		'#options' => $paymentArray,
+		'#required' => TRUE,
+	);
+	$form['Cardname'] = array(
+		'#type' => 'textfield',
+		'#title' => t('Name on card:'),
+		'#attributes' => array(
+			
+			' class' => 'form-control',
+		),
+		'#default_value' => '',
+		'#size' => 16,
+		'#maxlength' => 16,
+		'#required' => TRUE,
+	);
+	$form['Cardnumber'] = array(
+		'#type' => 'textfield',
+		'#attributes' => array(
+			' type' => 'number', 
+			' class' => 'form-control',
+		),
+		'#title' => t('Card number:'),
+		'#default_value' => '',
+		'#maxlength' => 16,
+		'#required' => TRUE,
+	);
+	$form['Expirydate'] = array(
+		'#type' => 'textfield',
+		'#attributes' => array(
+			' type' => 'number', 
+			' class' => 'form-control',
+		),
+		'#title' => t('Expiry date:'),
+		'#default_value' => '',
+		'#maxlength' => 16,
+		'#required' => TRUE,
+	);
+	$form['CCV'] = array(
+		'#type' => 'textfield',
+		'#attributes' => array(
+			' type' => 'number', 
+			' class' => 'form-control',
+		),
+		'#title' => t('CVV:'),
+		'#default_value' => '',
+		'#maxlength' => 4,
+		'#required' => TRUE,
+	);
+	$form['submit'] = array('#type' => 'submit', '#value' => t('Add')); 
+	return $form;
 }
 /*
 function _apa_sso_login_form_validate($form, &$form_state) {
