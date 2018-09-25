@@ -386,17 +386,17 @@ if(isset($_POST['step2-1'])) {
 		<div class="row">
 			<div class="col-xs-12 col-md-6">
 				<label for="">Card number:<span class="tipstyle"> *</span></label>
-				<input type="number" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
+				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
 
 			<div class="col-xs-6 col-md-3">
 				<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-				<input type="number" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" maxlength="4">
+				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" maxlength="4">
 			</div>
 
 			<div class="col-xs-6 col-md-3">
 				<label for="">CVV:<span class="tipstyle"> *</span></label>
-				<input type="number" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 		</div>
 		<div class="col-xs-12">
@@ -436,17 +436,17 @@ if(isset($_POST['step2-1'])) {
 		<div class="row">
 			<div class="col-xs-12 col-md-6">
 				<label for="">Card number:<span class="tipstyle"> *</span></label>
-				<input type="number" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
+				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
 
 			<div class="col-xs-6 col-md-3">
 				<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-				<input type="number" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" maxlength="4">
+				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" maxlength="4">
 			</div>
 
 			<div class="col-xs-6 col-md-3">
 				<label for="">CVV:<span class="tipstyle"> *</span></label>
-				<input type="number" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="3">
 			</div>
 		</div>
 		<div class="col-xs-12">

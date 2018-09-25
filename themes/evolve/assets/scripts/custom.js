@@ -1103,7 +1103,7 @@ jQuery(document).ready(function($) {
 
 	/*   Membership Types questions start  */	
 	$(".next").click(function() {
-		var x = $(".active").attr('id').replace('Section','');
+		var x = $(".MainQuestionHolder .activated").attr('id').replace('Sections','');
 		var type = $("#chosenType").text();
 		var title = $("."+type+" .MTtitle").text();
 		var typeID = $('.'+type+' .MTid').text();
@@ -1111,9 +1111,11 @@ jQuery(document).ready(function($) {
 		$("#chosenTid").text(typeID);
 		console.log(type);
 		if(x != '5') { // if it is not the last section
-		  $("#Section"+x).removeClass("active");
+		  $(".MainQuestionHolder #Sections"+x).removeClass("activated");
+		  $(".ProgressHolder #Section"+x).removeClass("activated");
 		  x = parseInt(x) + 1;
-		  $("#Section"+x).addClass("active passed");
+		  $(".MainQuestionHolder #Sections"+x).addClass("activated passed");
+		  $(".ProgressHolder #Section"+x).addClass("activated passed");
 		   $(".MainQuestionHolder #Sections"+x).show();
 		   $('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
 		  ProgressMove(x);
@@ -1138,12 +1140,14 @@ jQuery(document).ready(function($) {
 	});
 	
   $(".prev").click(function() {
-    var x = $(".active").attr('id').replace('Section','');
+    var x = $(".MainQuestionHolder .activated").attr('id').replace('Sections','');
     if(x != '1') {
-		$("#Section"+x).removeClass("passed active");
+		$(".MainQuestionHolder #Sections"+x).removeClass("passed activated");
+		$(".ProgressHolder #Section"+x).removeClass("passed activated");
 		x = parseInt(x) - 1;
 		$(".MainQuestionHolder #Sections"+x).show();
-		$("#Section"+x).addClass("active");
+		$(".MainQuestionHolder #Sections"+x).addClass("activated");
+		$(".ProgressHolder #Section"+x).addClass("activated");
 		$('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
 		ProgressMove(x);
     } else { // when this button is clicked on first page.
@@ -1180,7 +1184,7 @@ jQuery(document).ready(function($) {
       var totalPrice = totalNG.replace(/^\D+|\D+$/g, "");
       if(totalPrice == '') totalPrice = 0;
       var Sum = parseInt(NGPrice) + parseInt(totalPrice);
-      console.log("ins: "+ins+" /Text: "+NGtext+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
+      //console.log("ins: "+ins+" /Text: "+NGtext+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
       $(".NGpriceT").text(Sum);
       if(NGtotalText == "" || NGtotalText == "Not selected") {
         $('#chosenNGName').text(NGtext);
@@ -1239,7 +1243,7 @@ jQuery(document).ready(function($) {
     $(".ProgressHolder .ProgressBar .ProgressBarBar").css('margin-left',left);
   }
   function BringSurveyBack() {
-	var x = $(".MainQuestionHolder .active").attr('id').replace('Section','');
+	var x = $(".activated").attr('id').replace('Sections','');
     if(x == '1') {
         $(".firstSection").show();
         $(".secondSection").hide();
@@ -1300,9 +1304,9 @@ jQuery(document).ready(function($) {
 	if ( $('[type="date"]').prop('type') != 'date' ) {
 		$('[type="date"]').datepicker();
 	}
-	$('[id^=Section]').click(function() {
+	$('.ProgressHolder [id^=Section]').click(function() {
 		var x = $(this).attr("id").replace('Section', '');
-		var i = $(".ProgressHolder .active").attr('id').replace('Section','');
+		var i = $(".ProgressHolder .activated").attr('id').replace('Section','');
 		if(x < i) { // when clicked section is previous one.
 			var i = parseInt(i);
 			var x = parseInt(x)
@@ -1310,11 +1314,14 @@ jQuery(document).ready(function($) {
 			console.log("i:"+i+" x:"+x+" gap:"+gap);
 			for(y = x + 1; y <= (i); y++) {
 				console.log("in " +y);
-				$("#Section"+y).removeClass("passed active");
-				$("#Section"+y).removeClass("active passed");
+				$(".MainQuestionHolder #Sections"+y).removeClass("passed activated");
+				$(".MainQuestionHolder #Sections"+y).removeClass("activated passed");
+				$(".ProgressHolder #Section"+y).removeClass("passed activated");
+				$(".ProgressHolder #Section"+y).removeClass("activated passed");
 			}
 			$(".MainQuestionHolder #Sections"+x).show();
-			$("#Section"+x).addClass("active");
+			$(".ProgressHolder #Section"+x).addClass("activated");
+			$(".MainQuestionHolder #Sections"+x).addClass("activated");
 			$('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
 			ProgressMove(x);
 			BringSurveyBack();
@@ -1481,6 +1488,21 @@ jQuery(document).ready(function($) {
 	});
 	
 	$("input[type=number]").keydown(function (e) {
+      // Allow: backspace, delete, tab, escape, enter and .
+      if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+           // Allow: Ctrl+A, Command+A
+          (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+           // Allow: home, end, left, right, down, up
+          (e.keyCode >= 35 && e.keyCode <= 40)) {
+               // let it happen, don't do anything
+               return;
+      }
+      // Ensure that it is a number and stop the keypress
+      if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+          e.preventDefault();
+      }
+  });
+  $("input[name='Cardnumber'], input[name='Expirydate'], input[name='CCV']").keydown(function (e) {
       // Allow: backspace, delete, tab, escape, enter and .
       if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
            // Allow: Ctrl+A, Command+A
