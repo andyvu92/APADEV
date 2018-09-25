@@ -655,7 +655,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	</div>
 
 	<div class="modal-body">
-	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
+	<span class="note-text" style="display: block">Please scroll down to accept the full APA terms and conditions</span>	
 	<h4>Registration:</h4>
 <p>Online registration is the simplest way to secure a place at an APA course or event.  If unable to register online for any reason, a <a href="/sites/default/files/PROFESSIONAL DEVELOPMENT/LD039_Event_registration_form_fillable.pdf">manual registration form</a> may be completed and returned to the APA Branch office in the state that the event is being held (<a href="/contact-us">see state office details</a>).</p>
 <br />

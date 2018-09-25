@@ -1103,7 +1103,7 @@ $userRetisterStatus = false;
                                         <option value="09" <?php  if($birthdata[1] == "09") {echo "selected='selected'";}?>>Sep</option>
                                         <option value="10" <?php  if($birthdata[1] == "10") {echo "selected='selected'";}?>>Oct</option>
                                         <option value="11" <?php  if($birthdata[1] == "11") {echo "selected='selected'";}?>>Nov</option>
-                                        <option value="12" <?php  if($birthdata[1] == "12") {echo "selected='selected'";}?>>Dev</option>
+                                        <option value="12" <?php  if($birthdata[1] == "12") {echo "selected='selected'";}?>>Dec</option>
 
                                     </select>
                                 </div>
@@ -1416,7 +1416,7 @@ $userRetisterStatus = false;
                                         <option value="09">Sep</option>
                                         <option value="10">Oct</option>
                                         <option value="11">Nov</option>
-                                        <option value="12">Dev</option>
+                                        <option value="12">Dec</option>
                                     </select>
                                 </div>
                                 <div class="chevron-select-box year">

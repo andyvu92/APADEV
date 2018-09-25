@@ -114,7 +114,7 @@ $background = getBackgroundImage($userID);
 
 <div class="modal-body">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>
+	<span class="note-text" style="display: block">Please scroll down to accept the full APA terms and conditions</span>
 	
 	<h4>1. Eligibility for all members</h4>
 <p>In order to be eligible for APA membership, all members must:</p>
