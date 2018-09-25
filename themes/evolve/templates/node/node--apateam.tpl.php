@@ -106,31 +106,27 @@
 			<h3 class="headline">About us</h3>
 			<span class="brd-headling"></span>
 			<div class="dexp-grid-items row">
-				<ul>
-					<li><a href="/aboutus/annual-reports">Annual reports</a></li>
-					<li><a href="/aboutus/annual-reports">About physiotherapy</a></li>
-					<li><a href="/aboutus/annual-reports">APA partners</a></li>
-					<li><a href="/aboutus/awards-recognition">Awards and recognition</a></li>
-					<li><a href="/aboutus/governance">Governance</a></li>
-					<li><a href="/aboutus/our-history">History</a></li>
-					<li><a href="/aboutus/strategic-plan">International connections</a></li>
-					<li><a href="/aboutus/reconciliation">Reconciliation</a></li>
-					<li><a href="/aboutus/strategic-plan">Strategic plan</a></li>
-					<li><a href="/aboutus/reconciliation">Studying physiotherapy</a></li>
-					<li><a href="/aboutus/apa-team">The APA team</a></li>
-					<li><a href="/aboutus/work-us">Working in Australia</a></li>
-				</ul>
+	            <?php 
+					$block = block_load('block', '311');
+					$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+					$output = drupal_render($get);        
+					print $output; 
+				?>
 		    </div>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<?php
+		    
 			if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="224"){
+				echo "<h1>Other Borader of Directors</h1>";
 				echo views_embed_view('apateammember', 'block');
 			}
 			if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="225"){
+				echo "<h1>Other national advisory council</h1>";
 				echo views_embed_view('apateammember', 'block_1');
 			}
 			if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="226"){
+				echo "<h1>Other Executive Leadership Team members</h1>";
 				echo views_embed_view('apateammember', 'block_2');
 			}
 		?>

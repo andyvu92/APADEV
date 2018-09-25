@@ -104,6 +104,7 @@
         hide($content['links']);
         print render($content['body']);
         ?>
+		<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
 	</div>
 	<div class="block SidebarNav contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
 		<h3 class="headline">About us</h3>
@@ -112,9 +113,9 @@
 		<div class="view view-current-apa-campaign view-id-current_apa_campaign view-display-id-block_1 view-dom-id-32635ceaef40fd2d990939d49ac29284">
 		<div class="view-content">
 		  
-			<div class="dexp-grid-items row">
+			<!--<div class="dexp-grid-items row">
 			<?php 
-			$rens = render($content['field_quicklinks']);
+			/*$rens = render($content['field_quicklinks']);
 			$linksList = explode("\n", $rens);
 			$count = 0;
 			$total = count($linksList);
@@ -139,11 +140,20 @@
 					print $ren;
 					print '</span>  </div>';
 				}
-			}
+			}*/
 			?>
 			</div>
 		  
-		</div></div></div>
+		</div>-->
+		<div class="dexp-grid-items row">
+	            <?php 
+					$block = block_load('block', '311');
+					$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+					$output = drupal_render($get);        
+					print $output; 
+				?>
+		</div>
+		</div></div>
 	</div>
 	</section>
   
