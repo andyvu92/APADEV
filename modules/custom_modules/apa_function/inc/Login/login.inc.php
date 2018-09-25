@@ -550,6 +550,7 @@ if (isset($_POST['refreshTag'])) {
 			$userID = $_SESSION['UserId'];
 			$products = array();
 			checkShoppingCart($userID, $type = "membership", $productID = "");
+			checkShoppingCart($userID, $type = "NG", $productID = "");
 			checkShoppingCart($userID, $type = "MG1", $productID = "");
 			checkShoppingCart($userID, $type = "MG2", $productID = "");
 			createShoppingCart($userID, $productID = $postLocalData['MemberType'], $type = "membership", $coupon = "");

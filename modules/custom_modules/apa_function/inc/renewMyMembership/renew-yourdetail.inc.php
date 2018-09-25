@@ -250,6 +250,7 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 
 	$products = array();
 	checkShoppingCart($userID, $type="membership", $productID="");
+	checkShoppingCart($userID, $type = "NG", $productID = "");
 	checkShoppingCart($userID, $type="MG1", $productID="");
 	checkShoppingCart($userID, $type="MG2", $productID="");
 	createShoppingCart($userID, $productID =$postLocalData['MemberType'],$type="membership",$coupon="");
@@ -306,12 +307,14 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 $userMemberProduct = getProduct($_SESSION['UserId'],"membership");
 if(sizeof($userMemberProduct)!=0){ foreach($userMemberProduct as $singProduct) { $_SESSION["MembershipProductID"] = $singProduct;}}
 $userNGProduct = getProduct($_SESSION['UserId'],"NG");
+unset($_SESSION["NationalProductID"]);
 if(sizeof($userNGProduct)!=0){$_SESSION['NationalProductID'] = $userNGProduct; }
 $userFPProduct = getProduct($_SESSION['UserId'],"FP");
+unset($_SESSION["FPProductID"]);
 if(sizeof($userFPProduct)!=0){ foreach($userFPProduct as $singFP) { $_SESSION["FPProductID"] = $singFP;}}
 $userMGProduct = array();
 $userMG1Product = getProduct($_SESSION['UserId'],"MG1");
-
+unset($_SESSION["FPProductID"]);
 if(sizeof($userMG1Product)!=0){ 
     array_push($userMGProduct, $userMG1Product); 
 	

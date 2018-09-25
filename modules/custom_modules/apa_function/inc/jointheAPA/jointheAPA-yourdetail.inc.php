@@ -523,7 +523,7 @@ $filterMemberProduct = array("10007","10008","10009","9997");
     // Response -Update Success message & UserID & detail data
     
     if (isset($_SESSION['UserId'])) {
-        $testdata = GetAptifyData("5", $postData);
+		$testdata = GetAptifyData("5", $postData);
 	
     } else {
         
@@ -553,6 +553,7 @@ $filterMemberProduct = array("10007","10008","10009","9997");
         $userID = $_SESSION['UserId'];
 		$products = array();
 		checkShoppingCart($userID, $type = "membership", $productID = "");
+		checkShoppingCart($userID, $type = "NG", $productID = "");
 		checkShoppingCart($userID, $type = "MG1", $productID = "");
 		checkShoppingCart($userID, $type = "MG2", $productID = "");
 		createShoppingCart($userID, $productID = $postLocalData['MemberType'], $type = "membership", $coupon = "");
@@ -580,6 +581,7 @@ $filterMemberProduct = array("10007","10008","10009","9997");
 			checkShoppingCart($userID, $type = "MG2", $productID = "");
 			createShoppingCart($userID, "9977", $type = "MG2", $coupon = "");
 		}
+		
     }
     
    
@@ -606,7 +608,7 @@ if (isset($_SESSION['UserId'])):
         //echo $_GET['MT']." ////////////POSt//////////// ".$_GET['MT'];
     }    
 	else{
-		$userMemberProduct = getProduct($_SESSION['UserId'], "membership");
+	    $userMemberProduct = getProduct($_SESSION['UserId'], "membership");
 		if (sizeof($userMemberProduct) != 0) {
 			foreach ($userMemberProduct as $singProduct) {
 				$_SESSION["MembershipProductID"] = $singProduct;
@@ -614,12 +616,14 @@ if (isset($_SESSION['UserId'])):
 		}
 		
 		$userNGProduct = getProduct($_SESSION['UserId'], "NG");
+		unset($_SESSION["NationalProductID"]);
 		if (sizeof($userNGProduct) != 0) {
 			$_SESSION['NationalProductID'] = $userNGProduct;
 		}
 		
 		$userMGProduct  = array();
 		$userMG1Product = getProduct($_SESSION['UserId'], "MG1");
+		unset($_SESSION["MGProductID"]);
 		if (sizeof($userMG1Product) != 0) {
 			array_push($userMGProduct, $userMG1Product);
 		}
