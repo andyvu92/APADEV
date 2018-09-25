@@ -1142,10 +1142,12 @@ jQuery(document).ready(function($) {
   $(".prev").click(function() {
     var x = $(".MainQuestionHolder .activated").attr('id').replace('Sections','');
     if(x != '1') {
-		$("#Sections"+x).removeClass("passed activated");
+		$(".MainQuestionHolder #Sections"+x).removeClass("passed activated");
+		$(".ProgressHolder #Section"+x).removeClass("passed activated");
 		x = parseInt(x) - 1;
 		$(".MainQuestionHolder #Sections"+x).show();
-		$("#Sections"+x).addClass("activated");
+		$(".MainQuestionHolder #Sections"+x).addClass("activated");
+		$(".ProgressHolder #Section"+x).addClass("activated");
 		$('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
 		ProgressMove(x);
     } else { // when this button is clicked on first page.
@@ -1303,7 +1305,6 @@ jQuery(document).ready(function($) {
 		$('[type="date"]').datepicker();
 	}
 	$('.ProgressHolder [id^=Section]').click(function() {
-		console.log('clicked!');
 		var x = $(this).attr("id").replace('Section', '');
 		var i = $(".ProgressHolder .activated").attr('id').replace('Section','');
 		if(x < i) { // when clicked section is previous one.
@@ -1313,12 +1314,15 @@ jQuery(document).ready(function($) {
 			console.log("i:"+i+" x:"+x+" gap:"+gap);
 			for(y = x + 1; y <= (i); y++) {
 				console.log("in " +y);
-				$("#Section"+y).removeClass("passed activated");
-				$("#Section"+y).removeClass("activated passed");
+				$(".MainQuestionHolder #Sections"+y).removeClass("passed activated");
+				$(".MainQuestionHolder #Sections"+y).removeClass("activated passed");
+				$(".ProgressHolder #Section"+y).removeClass("passed activated");
+				$(".ProgressHolder #Section"+y).removeClass("activated passed");
 			}
-			$(".MainQuestionHolder #Section"+x).show();
-			$("#Section"+x).addClass("activated");
-			$('.MainQuestionHolder [id^=Section]:not(.MainQuestionHolder #Section'+x+')').hide(400);
+			$(".MainQuestionHolder #Sections"+x).show();
+			$(".ProgressHolder #Section"+x).addClass("activated");
+			$(".MainQuestionHolder #Sections"+x).addClass("activated");
+			$('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
 			ProgressMove(x);
 			BringSurveyBack();
 			if(x == 2) {
