@@ -1103,7 +1103,7 @@ jQuery(document).ready(function($) {
 
 	/*   Membership Types questions start  */	
 	$(".next").click(function() {
-		var x = $(".activated").attr('id').replace('Section','');
+		var x = $(".activated").attr('id').replace('Sections','');
 		var type = $("#chosenType").text();
 		var title = $("."+type+" .MTtitle").text();
 		var typeID = $('.'+type+' .MTid').text();
@@ -1111,9 +1111,9 @@ jQuery(document).ready(function($) {
 		$("#chosenTid").text(typeID);
 		console.log(type);
 		if(x != '5') { // if it is not the last section
-		  $("#Section"+x).removeClass("activated");
+		  $("#Sections"+x).removeClass("activated");
 		  x = parseInt(x) + 1;
-		  $("#Section"+x).addClass("activated passed");
+		  $("#Sections"+x).addClass("activated passed");
 		   $(".MainQuestionHolder #Sections"+x).show();
 		   $('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
 		  ProgressMove(x);
@@ -1138,12 +1138,12 @@ jQuery(document).ready(function($) {
 	});
 	
   $(".prev").click(function() {
-    var x = $(".activated").attr('id').replace('Section','');
+    var x = $(".activated").attr('id').replace('Sections','');
     if(x != '1') {
-		$("#Section"+x).removeClass("passed activated");
+		$("#Sections"+x).removeClass("passed activated");
 		x = parseInt(x) - 1;
 		$(".MainQuestionHolder #Sections"+x).show();
-		$("#Section"+x).addClass("activated");
+		$("#Sections"+x).addClass("activated");
 		$('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
 		ProgressMove(x);
     } else { // when this button is clicked on first page.
@@ -1180,7 +1180,7 @@ jQuery(document).ready(function($) {
       var totalPrice = totalNG.replace(/^\D+|\D+$/g, "");
       if(totalPrice == '') totalPrice = 0;
       var Sum = parseInt(NGPrice) + parseInt(totalPrice);
-      console.log("ins: "+ins+" /Text: "+NGtext+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
+      //console.log("ins: "+ins+" /Text: "+NGtext+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
       $(".NGpriceT").text(Sum);
       if(NGtotalText == "" || NGtotalText == "Not selected") {
         $('#chosenNGName').text(NGtext);
@@ -1239,7 +1239,7 @@ jQuery(document).ready(function($) {
     $(".ProgressHolder .ProgressBar .ProgressBarBar").css('margin-left',left);
   }
   function BringSurveyBack() {
-	var x = $(".activated").attr('id').replace('Section','');
+	var x = $(".activated").attr('id').replace('Sections','');
     if(x == '1') {
         $(".firstSection").show();
         $(".secondSection").hide();
