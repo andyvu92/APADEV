@@ -435,14 +435,12 @@ function apa_create_payment_card_form($form, &$form_state){
 			' class' => 'form-control',
 		),
 		'#default_value' => '',
-		'#size' => 16,
-		'#maxlength' => 16,
 		'#required' => TRUE,
 	);
 	$form['Cardnumber'] = array(
 		'#type' => 'textfield',
 		'#attributes' => array(
-			' type' => 'number', 
+			//' type' => 'number', 
 			' class' => 'form-control',
 		),
 		'#title' => t('Card number:'),
@@ -453,23 +451,25 @@ function apa_create_payment_card_form($form, &$form_state){
 	$form['Expirydate'] = array(
 		'#type' => 'textfield',
 		'#attributes' => array(
-			' type' => 'number', 
+			//' type' => 'number', 
 			' class' => 'form-control',
+			' placeholder' => 'mmyy (eg: 0225)',
 		),
 		'#title' => t('Expiry date:'),
 		'#default_value' => '',
-		'#maxlength' => 16,
+		'#maxlength' => 4,
 		'#required' => TRUE,
 	);
 	$form['CCV'] = array(
 		'#type' => 'textfield',
 		'#attributes' => array(
-			' type' => 'number', 
+			//' type' => 'number', 
 			' class' => 'form-control',
+			' placeholder' => 'CVV',
 		),
 		'#title' => t('CVV:'),
 		'#default_value' => '',
-		'#maxlength' => 4,
+		'#maxlength' => 3,
 		'#required' => TRUE,
 	);
 	$form['submit'] = array('#type' => 'submit', '#value' => t('Add')); 

@@ -106,7 +106,7 @@
         ?>
 	</div>
 	<div class="block SidebarNav contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
-		<h3 class="headline">Quick links</h3>
+		<h3 class="headline">About us</h3>
 		<span class="brd-headling"></span>
 		<div class="content">
 		<div class="view view-current-apa-campaign view-id-current_apa_campaign view-display-id-block_1 view-dom-id-32635ceaef40fd2d990939d49ac29284">
