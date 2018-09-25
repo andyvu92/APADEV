@@ -1239,7 +1239,7 @@ jQuery(document).ready(function($) {
     $(".ProgressHolder .ProgressBar .ProgressBarBar").css('margin-left',left);
   }
   function BringSurveyBack() {
-	var x = $(".MainQuestionHolder .activated").attr('id').replace('Section','');
+	var x = $(".activated").attr('id').replace('Section','');
     if(x == '1') {
         $(".firstSection").show();
         $(".secondSection").hide();
