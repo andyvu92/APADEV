@@ -1103,7 +1103,7 @@ jQuery(document).ready(function($) {
 
 	/*   Membership Types questions start  */	
 	$(".next").click(function() {
-		var x = $(".activated").attr('id').replace('Sections','');
+		var x = $(".MainQuestionHolder .activated").attr('id').replace('Sections','');
 		var type = $("#chosenType").text();
 		var title = $("."+type+" .MTtitle").text();
 		var typeID = $('.'+type+' .MTid').text();
@@ -1111,9 +1111,11 @@ jQuery(document).ready(function($) {
 		$("#chosenTid").text(typeID);
 		console.log(type);
 		if(x != '5') { // if it is not the last section
-		  $("#Sections"+x).removeClass("activated");
+		  $(".MainQuestionHolder #Sections"+x).removeClass("activated");
+		  $(".ProgressHolder #Section"+x).removeClass("activated");
 		  x = parseInt(x) + 1;
-		  $("#Sections"+x).addClass("activated passed");
+		  $(".MainQuestionHolder #Sections"+x).addClass("activated passed");
+		  $(".ProgressHolder #Section"+x).addClass("activated passed");
 		   $(".MainQuestionHolder #Sections"+x).show();
 		   $('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
 		  ProgressMove(x);
@@ -1138,7 +1140,7 @@ jQuery(document).ready(function($) {
 	});
 	
   $(".prev").click(function() {
-    var x = $(".activated").attr('id').replace('Sections','');
+    var x = $(".MainQuestionHolder .activated").attr('id').replace('Sections','');
     if(x != '1') {
 		$("#Sections"+x).removeClass("passed activated");
 		x = parseInt(x) - 1;
@@ -1300,9 +1302,10 @@ jQuery(document).ready(function($) {
 	if ( $('[type="date"]').prop('type') != 'date' ) {
 		$('[type="date"]').datepicker();
 	}
-	$('[id^=Section]').click(function() {
+	$('.ProgressHolder [id^=Section]').click(function() {
+		console.log('clicked!');
 		var x = $(this).attr("id").replace('Section', '');
-		var i = $(".ProgressHolder .active").attr('id').replace('Section','');
+		var i = $(".ProgressHolder .activated").attr('id').replace('Section','');
 		if(x < i) { // when clicked section is previous one.
 			var i = parseInt(i);
 			var x = parseInt(x)
@@ -1310,12 +1313,12 @@ jQuery(document).ready(function($) {
 			console.log("i:"+i+" x:"+x+" gap:"+gap);
 			for(y = x + 1; y <= (i); y++) {
 				console.log("in " +y);
-				$("#Section"+y).removeClass("passed active");
-				$("#Section"+y).removeClass("active passed");
+				$("#Section"+y).removeClass("passed activated");
+				$("#Section"+y).removeClass("activated passed");
 			}
-			$(".MainQuestionHolder #Sections"+x).show();
-			$("#Section"+x).addClass("active");
-			$('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
+			$(".MainQuestionHolder #Section"+x).show();
+			$("#Section"+x).addClass("activated");
+			$('.MainQuestionHolder [id^=Section]:not(.MainQuestionHolder #Section'+x+')').hide(400);
 			ProgressMove(x);
 			BringSurveyBack();
 			if(x == 2) {
