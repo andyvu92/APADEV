@@ -1,25 +1,6 @@
 
 @import 'mixin';
 
-/*--PREDEFINED COLOURS--*/
-@light-grey: rgb(242, 243, 244);
-@light-transparent-background: rgba(255, 255, 255, 0.9);
-@dark-background: rgb(94, 96, 103);
-@dark-transparent-background: rgba(94, 96, 103, 0.8);
-@bright-blue: rgb(0, 159, 218);
-@brighter-blue: rgb(0,184,241);
-@blue: #009fda;
-@grey: #b5b5b5;
-@orange: #ffa02e;
-
-/*--RESPONSIVE BREAKPOINTS--*/
-@phone-width: 480px;
-@larger-phone-width: 570px;
-@tablet-width: 768px;
-@larger-tablet-width: 992px;
-@desktop-width: 1200px;
-@larger-desktop-width: 1500px;
-
 /*-- ABOUT US --*/
 .page-node-127{
     #block-block-170{
@@ -455,8 +436,9 @@
 			}
         }
         
-        #apateammember-block{
+        div[id*="apateammember-block"], #apateammember-block{
             .node-apateam{
+                position: relative;
                 .item-description{
                     .member-header{
                         .member-name{
@@ -467,6 +449,7 @@
                             font-family: Roboto;
                             a{
                                 color: #000;
+                                transition: all .2s linear;
                             }
                         }
                         .member-title{
@@ -485,12 +468,200 @@
                         background: rgba(0,0,0,0.1);
                     }
                 }
+                .block-cover{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    &:hover{
+                        & + .block-container{
+                            .item-description .member-header{
+                                .member-name{
+                                    a{
+                                        color: @bright-blue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
       }
 }
 
-/*  */
+/* MEMBER SINGLE PAGE */
 .node-type-apateam{
     .page-node-149;
+    .left-content{
+        p{
+            font-size: 1.2em;
+        }
+    }
+
+    /* RELATED MEMBERS */
+    #related-members{
+        background: #e7e8e9 !important;
+        padding-bottom: 50px;
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        .lead-heading{
+            font-size: 2.4em;
+            color: @bright-blue;
+            margin-top: 50px;
+            font-family: Roboto;
+        }
+        #apateammember-block{
+            .page-node-149 #block-block-312 #apateammember-block;
+            .node-apateam{
+                .item-description{
+                    .separater{
+                        margin: 20px 0px;
+                    }
+                }
+            }
+        }
+    }
+
+    /* MEMBER BODY CONTENT */
+    .teaminfo{
+        .page-node-149 #block-block-312 #apateammember-block .node-apateam .item-description;
+        .description{
+            margin: -25px 0;
+        }
+    }
+
+    /* BACK TO PREVIOUS */
+    #prev-btn{
+        margin: -50px 0 80px 0;
+        a{
+            color: #5c6067;
+            font-size: 1.2em;
+            padding: 0;
+            text-decoration: underline;
+            &:hover{
+                color: @bright-blue;
+            }
+        }
+    }
+}
+
+/* ANNUAL REPORTS */
+.page-node-138{
+    .page-node-149;
+
+    /* BACK TO PREVIOUS */
+    #prev-btn{
+        .node-type-apateam #prev-btn;
+        margin: 30px 0 50px;
+        border-top: 1px solid rgba(0,0,0,0.12);
+        padding-top: 30px;
+    }
+
+    .left-content{
+    /* REPORT GRID */
+        .brochure-grid{
+            display: flex;
+            flex-direction: row;
+            max-width: 1300px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            .item{
+                max-width: 31%;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0px 0px 5% 0;
+                position: relative;
+                .brochure-cover{
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                }
+                .bruchure-title{
+                    align-self: flex-start;
+                    color: @bright-blue;
+                    text-decoration: underline;
+                    margin-top: 15px;
+                    font-size: 1.1em;
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+}
+
+    /* RIGHT SIDEBAR ACTIVE URL */
+    .nav{
+        .active{
+            a{
+                color: @bright-blue!important;
+            }
+        }
+    }
+
+/* AWARDS & RECOGNITION */
+.page-node-141{
+    .page-node-149;
+
+    /* MAIN CONTENT */
+    #block-system-main{
+        .left-content{
+            h2.lead-heading{
+                padding-bottom: 0;
+            }
+            .sub-heading{
+                color: @bright-blue;
+                font-size: 1.8em;
+                font-family: Roboto;
+                font-weight: 700;
+                padding-top: 20px;
+            }
+            .intro{
+                font-size: 1.4em;
+            }
+            p{
+                font-size: 1em;
+                padding-bottom: 0;
+            }
+            ul.custom-list{
+                padding-left: 15px;
+                color: #000;
+            }
+            a{
+                text-decoration: underline;
+            }
+            .dark-url{
+                color: #000;
+                font-weight: 500;
+            }
+            .featured-img{
+                padding: 40px 0 20px;
+            }
+
+            /* BACK TO PREVIOUS */
+            #prev-btn{
+                margin: 80px 0 0px;
+                padding-top: 20px;
+                border-top: 1px solid rgba(0,0,0,0.12);
+                a{
+                    color: #5c6067;
+                    font-size: 1.2em;
+                    padding: 0;
+                    text-decoration: underline;
+                    &:hover{
+                        color: @bright-blue;
+                    }
+                }
+            }
+        }
+    }
 }

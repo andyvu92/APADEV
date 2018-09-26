@@ -79,19 +79,39 @@
 * @ingroup themeable
 */
 ?>
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large policybottom flex-container" <?php print $attributes; ?>>
+<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> flex-container" <?php print $attributes; ?>>
 	<section class="post-content flex-cell">
     	<div class="flex-col-9 left-content">
-			<h1 class="SectionHeader"><?php print render($content['field_apateamtitle']);?></h1>
+			<h2 class="lead-heading"><?php //print render($content['field_apateamtitle']);
+				if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="224"){
+					echo "Board of Director";
+				
+				}
+				if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="225"){
+					echo "National advisory council";
+					
+				}
+				if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="226"){
+					echo "Executive leadership team";
+					
+				}
+			
+			?></h2>
 			<div class="post-img media">
 				<div class='mediaholder'>
 					<?php print render($content['field_apateamimage']);?>
 				</div>
 			</div>
 			<div class="teaminfo">
-                <h5><?php print render($content['field_apateamname']); ?></h5>
-                <h5><?php print render($content['field_apateamposition']); ?></h5>
-				<p><?php print render($content['body']); ?></p>
+				<div class="member-header">
+					<h5 class="member-name"><?php print render($content['field_apateamname']); ?></h5>
+					<span class="member-title"><?php print render($content['field_apateamposition']); ?></span>
+				</div>
+				<span class="separater"></span>
+				<div class="description">
+					<p><?php print render($content['body']); ?></p>
+				</div>
+				
             </div>
 			
 		  <?php
@@ -100,7 +120,7 @@
 			hide($content['links']);
 			
 			?>
-			<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
+			<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">< Back to previous</a></div>
 		</div>
 		<div class="flex-col-3 right-sidebar">
 			<span class="underline-heading">About us</span>
@@ -111,6 +131,8 @@
 					print $output; 
 				?>
 		</div>
+	</section>
+</div>
 		<div id="related-members">
 			<div class="container">
 				<?php

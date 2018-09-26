@@ -5,23 +5,25 @@
         hide($content['comments']);
         hide($content['links']);
         ?>
-		<div class="portfolio-image">
-			
-          <a href="<?php print $node_url; ?>">
-            <?php print render($content['field_apateamimage']); ?></a>
-            
+        <a class="block-cover" href="<?php print $node_url; ?>"></a>
+        <div class="block-container">
+            <div class="portfolio-image">
+                
+            <a href="<?php print $node_url; ?>">
+                <?php print render($content['field_apateamimage']); ?></a>
+                
+            </div>
+            <div class="item-description">
+                <div class="member-header">
+                    <h5 class="member-name"> <a href="<?php print $node_url; ?>"><?php print render($content['field_apateamname']); ?></a></h5>
+                    <span class="member-title"><?php print render($content['field_apateamposition']); ?></span>
+                </div>
+                <span class="separater"></span>
+                <div class="description">
+                    <p><?php print $node->body['und'][0]['summary']; ?></p>
+                    <h5><?php print render($content['field_nac_state']); ?></h5>
+                </div>
+            </div>
         </div>
-        <div class="item-description">
-			<div class="member-header">
-				<h5 class="member-name"> <a href="<?php print $node_url; ?>"><?php print render($content['field_apateamname']); ?></a></h5>
-                <span class="member-title"><?php print render($content['field_apateamposition']); ?></span>
-		    </div>
-			<span class="separater"></span>
-			<div class="description">
-				<p><?php print $node->body['und'][0]['summary']; ?></p>
-				<h5><?php print render($content['field_nac_state']); ?></h5>
-			</div>
-        </div>
-       
     </div>    
 </div>

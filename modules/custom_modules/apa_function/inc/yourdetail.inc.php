@@ -313,7 +313,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 // UserID
 // Response -
 // Profile image
-$picture = GetAptifyData("10","",""); 
+//$picture = GetAptifyData("10","",""); 
 			
 
 
