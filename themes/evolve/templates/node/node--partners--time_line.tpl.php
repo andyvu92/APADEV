@@ -79,11 +79,11 @@
 * @ingroup themeable
 */
 ?>
-<div id="myModal-node-<?php print $node->nid; ?>" class="PartnersDetail modal fade " role="dialog">
-    <div class="modal-dialog" style="max-height:100%;  margin-top: 0px; margin-bottom:50px;width: 100%;">
-		<div class="modal-content">
-		   
-		    <div class="modal-body container">
+<div id="myModal-node-<?php print $node->nid; ?>" class="PartnersDetail" style="display:none;">
+    <!--<div class="modal-dialog" style="max-height:100%;  margin-top: 0px; margin-bottom:50px;width: 100%;">
+		<div class="modal-content">-->
+		 
+		    <div class="container">
 				<h2><?php print $title; ?></h2>
 		
 				<div class="post-img media">
@@ -111,10 +111,10 @@
 					</dl>
 				</section>
 			</div>
-			<div class="modal-footer">
+			<!--<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
         </div>		
-	</div>
+	</div>-->
 </div> 
 
