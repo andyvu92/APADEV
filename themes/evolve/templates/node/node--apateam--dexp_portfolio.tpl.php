@@ -19,7 +19,7 @@
 		    </div>
 						
 			<div class="description">
-				<p><?php print render($content['body']); ?></p>
+				<p><?php print $node->body['und'][0]['summary']; ?></p>
 				<h5><?php print render($content['field_nac_state']); ?></h5>
 			</div>
         </div>
