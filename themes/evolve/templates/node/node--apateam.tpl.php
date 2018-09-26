@@ -82,7 +82,21 @@
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large policybottom" <?php print $attributes; ?>>
 	<section class="post-content">
     	<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-			<h1 class="SectionHeader"><?php print render($content['field_apateamtitle']);?></h1>
+			<h1 class="SectionHeader"><?php //print render($content['field_apateamtitle']);
+				if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="224"){
+					echo "Board of Director";
+				
+				}
+				if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="225"){
+					echo "National advisory council";
+					
+				}
+				if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="226"){
+					echo "Executive leadership team";
+					
+				}
+			
+			?></h1>
 			<div class="post-img media">
 				<div class='mediaholder'>
 					<?php print render($content['field_apateamimage']);?>
@@ -118,11 +132,11 @@
 		<?php
 		    
 			if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="224"){
-				echo "<h1>Other Borader of Directors</h1>";
+				echo "<h1>Other Board of Directors</h1>";
 				echo views_embed_view('apateammember', 'block');
 			}
 			if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="225"){
-				echo "<h1>Other national advisory council</h1>";
+				echo "<h1>Other National Advisory Council</h1>";
 				echo views_embed_view('apateammember', 'block_1');
 			}
 			if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="226"){
