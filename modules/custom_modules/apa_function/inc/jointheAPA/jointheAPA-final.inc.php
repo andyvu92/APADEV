@@ -237,7 +237,7 @@ $PRFPrice = 0;
 			<?php elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)):?>
 			<div class="checkMessage">Please go back to enter a valid credit card number before proceeding with your order. </div>
 			<?php else:?>
-			<div class="checkMessage">there was an unexpected error with your payment details, Please go back and check they are correct, or contact the APA.</div>
+			<div class="checkMessage">There was an unexpected error with your payment details, please go back and check they are correct, or contact the APA.</div>
 			<?php endif;?>	
 		<?php endif;?>		
 	<?php endif;?>

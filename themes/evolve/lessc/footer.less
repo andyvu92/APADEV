@@ -1,3 +1,5 @@
+@import 'mixin';
+
 .region-socials-bottom{
 	.block{
 		width: 100%;
@@ -6,11 +8,9 @@
 	ul:not(.contextual-links){
 		li{
 			font-size: 12px;
-			height: 20px;
 			margin: 0;
 			padding-bottom: 0;
 			display: inline;
-			float: left;
 			margin-right: 4px;
 			a{
 				color: #232D37;
@@ -170,4 +170,98 @@
 #subscribe input[type="submit"] {
   margin-left:-1px;
   height:35px;
+}
+
+/* FOOTER STYLES */
+#section-bottom{
+  padding: 20px 10px 20px;
+  background: #32353d!important;
+  #block-block-311 .content > .row{
+    display: flex;
+    flex-wrap: wrap;
+    &div:nth-child(1){
+
+    }
+  }
+  .footer-block{
+    position: relative;
+    margin-bottom: 10px;
+    .footer-block-header{
+      position: relative;
+      .footer-heading{
+        color: #FFFFFF;
+        font-size: 1.4em;
+        font-weight: 100;
+        text-transform: uppercase;
+        font-family: Roboto;
+        margin: 0;
+        padding: 15px 0;
+      }
+      .chevron-circle{
+        display: none;
+        position: absolute;
+        top: 23%;
+        right: 0;
+        background-repeat: no-repeat;
+        background-size: contain;
+        background-image: url('/sites/default/files/general-icon/chevron-circle-W.png');
+        .square(25px);
+        transform: rotate(0deg);
+        transition: all .3s linear;
+        opacity: 0.7;
+        &.active{
+          transform: rotate(90deg);
+        }
+      }
+    }
+    p{
+      margin: 0;
+    }
+    ul li h6{
+      margin-top: 0;
+    }
+  }
+
+  @media @larger-phone-width-down{
+    #block-block-311 .content > .row{
+      div:nth-child(1){
+        order: 1;
+      }
+      div:nth-child(3){
+        order: 2;
+      }
+      div:nth-child(4){
+        order: 3;
+      }
+      div:nth-child(2){
+        order: 4;
+      }
+      div:nth-child(5){
+        order: 5;
+      }
+    }
+
+    #block-block-265{
+      .footer-block{
+        border-bottom: 0;
+      }
+    }
+    .footer-block{
+      margin: 0;
+      padding: 10px 0 20px;
+      border-bottom: 1px solid #6f7175;
+      .footer-block-header{
+        .chevron-circle{
+          display: block;
+        }
+        .footer-heading{
+          padding: 15px 0 5px;
+        }
+      }
+      div[id*='content-footer-block']{
+        padding-right: 50px;
+        display: none;
+      }
+    }
+  }
 }

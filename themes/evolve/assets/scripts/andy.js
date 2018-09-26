@@ -57,7 +57,7 @@ jQuery(document).ready(function(){
 jQuery(document).ready(function(){
   // Get current path and find target link
   var path1 = window.location.pathname.split("/").pop();
-  console.log(path1);
+
   // Add active class to target link
   var target1 = $('.side-nav li a[href="/nationalgroups/'+path1+'"]');
   target1.parent().addClass('active');
@@ -568,17 +568,30 @@ jQuery(document).ready(function(){
 
 });
 
+jQuery(document).ready(function(){
 
-//ADD ACTIVE CLASS - NATIONAL GROUP SIDE BAR NAV
-jQuery(document).ready(function($){
-  // Get current path and find target link
-  var path = window.location.pathname.split("/").pop();
-  
-  // Account for home page with empty path
-  if ( path == '' ) {
-    path = 'index.php';
-  }
+  // FOOTER NAVIGATION DROPDOWN ON MOBILE
+  $(document).on('click', '.footer-block .chevron-circle', function(){
+    target = $(this).attr('id');
+    if ( $(this).hasClass('active') ){
+      $(this).removeClass('active');
+      $('#content-' + target).slideUp();
+    }
+    else{
+      $(this).addClass('active');
+      $('#content-' + target).slideDown();
+    }
+  });
 
-  // Add active class to target link
+
+  // REMOVE EDUCATION INSTRUCTION IF EDUCATION BLOCK IS PRESENT
+    if ( $('#additional-qualifications-block').find('div').length > 0 ){
+      $('.instruction').hide();
+    }
+
+    $(document).on('click', '.add-additional-qualification', function(){
+      $('.instruction').hide();
+    });
 
 });
+

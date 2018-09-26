@@ -1658,7 +1658,7 @@ jQuery(document).ready(function(){
 // NO NUMBER IN FORMS FIELS TOWN/CITY
 jQuery(document).ready(function(){
 	$("input[name='Suburb'], input[name='Billing-Suburb']").keydown(function(e) {
-		console.log('right');
+
 			// Allow: backspace, delete, tab, escape, enter and .
 			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 			// Allow: Ctrl+A, Command+A

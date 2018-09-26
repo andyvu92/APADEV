@@ -782,7 +782,7 @@ if (isset($_SESSION['UserId'])):
                                         <option value="09" <?php  if($birthdata[1] == "09") {echo "selected='selected'";}?>>Sep</option>
                                         <option value="10" <?php  if($birthdata[1] == "10") {echo "selected='selected'";}?>>Oct</option>
                                         <option value="11" <?php  if($birthdata[1] == "11") {echo "selected='selected'";}?>>Nov</option>
-                                        <option value="12" <?php  if($birthdata[1] == "12") {echo "selected='selected'";}?>>Dev</option>
+                                        <option value="12" <?php  if($birthdata[1] == "12") {echo "selected='selected'";}?>>Dec</option>
 
                                     </select>
                                 </div>
@@ -2384,7 +2384,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
     endforeach;
 ?>
 	<?php if(sizeof($details['PersonEducation'])==0):?>
-	<div class="col-xs-12 col-sm-12 col-md-12"><p>Please add your qualifications or click next to continue</p></div>
+	<div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please add your qualifications or click next to continue</p></div>
 					<!--<div id="additional0">
 					
 					   <div class="row">
@@ -2588,7 +2588,7 @@ if(isset($_POST['MT'])){
                                         <option value="09" >Sep</option>
                                         <option value="10" >Oct</option>
                                         <option value="11" >Nov</option>
-                                        <option value="12" >Dev</option>
+                                        <option value="12" >Dec</option>
                                     </select>
                                 </div>
                                 <div class="chevron-select-box year">
@@ -3259,7 +3259,7 @@ if(isset($_POST['MT'])){
     $addtionalNumber = 0;
     echo $addtionalNumber;
 ?>"/>
-				<div class="col-xs-12 col-sm-12 col-md-12"><p>Please add your qualifications or click next to continue</p></div>
+				<div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please add your qualifications or click next to continue</p></div>
                 <div id="additional-qualifications-block">
 					<!--<div id="additional0">
 					<input type="hidden" name="ID0" value="-1">

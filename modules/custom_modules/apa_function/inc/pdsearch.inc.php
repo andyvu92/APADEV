@@ -26,7 +26,8 @@ if(!function_exists('drupal_session_started'))
 		<h2 class="light-lead-heading">Explore our professional development options below:</h2>
 	</div>
 	<div class="col-xs-12">
-		<span>Please note: For online learning visit <a href="https://cpd4physios.com.au/" target="_blank"><strong>cpd4physios</strong></a></span>
+		<h3 class="sub-heading mobile">Search the following:</h3>
+		<span class="desktop">Please note: For online learning visit <a href="https://cpd4physios.com.au/" target="_blank"><strong>cpd4physios</strong></a></span>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Keyword</label>
@@ -34,6 +35,7 @@ if(!function_exists('drupal_session_started'))
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Type of PD</label>
+		<div class="chevron-select-box">
 		<select  name="Typeofpd" id="Typeofpd" data-placeholder="Type of PD">
 			<option class="type" selected disabled>Type of PD</option>
 			<?php 
@@ -58,6 +60,7 @@ if(!function_exists('drupal_session_started'))
 				}
 			?>
 		</select>
+		</div>
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>National group</label>
@@ -194,6 +197,9 @@ if(!function_exists('drupal_session_started'))
 	</div>
 
 	<div class="row">
+		<div class="col-xs-12">
+			<span class="alt-text mobile">Please note: For online learning visit <a class="alt-link" href="https://cpd4physios.com.au/" target="_blank">cpd4physios</a></span>
+		</div>
 		<div class="col-xs-12 col-md-5">
 			<span class="small-text"><a href="../PDtermsandconditions">Terms and conditions</a></span>
 			<span class="small-text"><a href="/sites/default/files/PROFESSIONAL DEVELOPMENT/LD039_Event_registration_form_fillable.pdf" target="_blank">Event registration form</a></span>

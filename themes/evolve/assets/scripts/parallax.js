@@ -5,7 +5,38 @@
 */
 
 jQuery(document).ready(function(){
-  // MAIN IMAGE PARALLAX WORKS FOR MOBILE
+  //====================PARALLAX IMAGE LOCATION=======================
+  
+    // CAMPAIGN LANDING PAGE: /campaign/choosephysio 
+    if( $('.html').find('.jarallax').length > 0 ){
+      img = $('.jarallax').css('background-image');
+      img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
+      $('.jarallax').append("<img data-speed='1' class='img-parallax' src=' " + img + "'>");
+    }
+  
+    //ABOUT CAMPAIGN MIDDLE IMAGE: /campaign/about-campaign
+    if( $('.html').find('.jarallax01').length > 0 ){
+      img = $('.jarallax01').css('background-image');
+      img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
+      $('.jarallax01').append("<img data-speed='1' class='img-parallax' src=' " + img + "'>");
+    }
+  
+    //CHOOSE NATIONAL GROUP: /membership/national-groups
+    if( $('.html').find('.national-group-jarallax').length > 0 ){
+      img = $('.national-group-jarallax').css('background-image');
+      img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
+      $('.national-group-jarallax').append("<img data-speed='1' class='img-parallax' src=' " + img + "'>");
+    }
+
+    //CHOOSE NATIONAL GROUP: /membership/national-groups
+    if( $('.html').find('.pd-jarallax').length > 0 ){
+      img = $('.pd-jarallax').css('background-image');
+      img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
+      $('.pd-jarallax').append("<img data-speed='1.2' class='img-parallax' src=' " + img + "'>");
+    }
+
+
+      // MAIN IMAGE PARALLAX WORKS FOR MOBILE - THIS MUST BE ALWAYS AT THE BOTTOM
   $('.img-parallax').each(function(){
     var img = $(this);
     var imgParent = $(this).parent();
@@ -42,27 +73,4 @@ jQuery(document).ready(function(){
       }
     });
   });
-
-  //====================PARALLAX IMAGE LOCATION=======================
-  
-    // CAMPAIGN LANDING PAGE: /campaign/choosephysio 
-    if( $('.html').find('.jarallax').length > 0 ){
-      img = $('.jarallax').css('background-image');
-      img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
-      $('.jarallax').append("<img data-speed='1' class='img-parallax' src=' " + img + "'>");
-    }
-  
-    //ABOUT CAMPAIGN MIDDLE IMAGE: /campaign/about-campaign
-    if( $('.html').find('.jarallax01').length > 0 ){
-      img = $('.jarallax01').css('background-image');
-      img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
-      $('.jarallax01').append("<img data-speed='1' class='img-parallax' src=' " + img + "'>");
-    }
-  
-    //CHOOSE NATIONAL GROUP: /membership/national-groups
-    if( $('.html').find('.national-group-jarallax').length > 0 ){
-      img = $('.national-group-jarallax').css('background-image');
-      img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
-      $('.national-group-jarallax').append("<img data-speed='1' class='img-parallax' src=' " + img + "'>");
-    }
 });
