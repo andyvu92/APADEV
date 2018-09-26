@@ -62,6 +62,9 @@ jQuery(document).ready(function(){
   var target1 = $('.side-nav li a[href="/nationalgroups/'+path1+'"]');
   target1.parent().addClass('active');
 
+  var target1 = $('.nav li a[href="/aboutus/'+path1+'"]');
+  target1.parent().addClass('active');
+
   var target1 = $('.side-nav li a[href="'+path1+'"]');
   target1.parent().addClass('active');
 });
@@ -507,9 +510,11 @@ jQuery(document).ready(function(){
   $('.radio-btn').click(function(){
     if ( $(this).html() == 'Pause' ) {
       $('#choose-physio-radio').trigger("pause");
+      $(this).removeClass('pause');
       $(this).html('Play');
     } else {
       $('#choose-physio-radio').trigger("play");
+        $(this).addClass('pause');
         $(this).html('Pause');
     }
   });

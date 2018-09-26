@@ -79,10 +79,10 @@
 * @ingroup themeable
 */
 ?>
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large policybottom" <?php print $attributes; ?>>
-	<section class="post-content">
-    	<div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-			<h1 class="SectionHeader"><?php //print render($content['field_apateamtitle']);
+<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> flex-container" <?php print $attributes; ?>>
+	<section class="post-content flex-cell">
+    	<div class="flex-col-9 left-content">
+			<h2 class="lead-heading"><?php //print render($content['field_apateamtitle']);
 				if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="224"){
 					echo "Board of Director";
 				
@@ -96,16 +96,22 @@
 					
 				}
 			
-			?></h1>
+			?></h2>
 			<div class="post-img media">
 				<div class='mediaholder'>
 					<?php print render($content['field_apateamimage']);?>
 				</div>
 			</div>
 			<div class="teaminfo">
-                <h5><?php print render($content['field_apateamname']); ?></h5>
-                <h5><?php print render($content['field_apateamposition']); ?></h5>
-				<p><?php print render($content['body']); ?></p>
+				<div class="member-header">
+					<h5 class="member-name"><?php print render($content['field_apateamname']); ?></h5>
+					<span class="member-title"><?php print render($content['field_apateamposition']); ?></span>
+				</div>
+				<span class="separater"></span>
+				<div class="description">
+					<p><?php print render($content['body']); ?></p>
+				</div>
+				
             </div>
 			
 		  <?php
@@ -114,36 +120,36 @@
 			hide($content['links']);
 			
 			?>
-			<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
+			<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">< Back to previous</a></div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
-			<h3 class="headline">About us</h3>
-			<span class="brd-headling"></span>
-			<div class="dexp-grid-items row">
+		<div class="flex-col-3 right-sidebar">
+			<span class="underline-heading">About us</span>
 	            <?php 
 					$block = block_load('block', '311');
 					$get = _block_get_renderable_array(_block_render_blocks(array($block)));
 					$output = drupal_render($get);        
 					print $output; 
 				?>
-		    </div>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<?php
-		    
-			if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="224"){
-				echo "<h1>Other Board of Directors</h1>";
-				echo views_embed_view('apateammember', 'block');
-			}
-			if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="225"){
-				echo "<h1>Other National Advisory Council</h1>";
-				echo views_embed_view('apateammember', 'block_1');
-			}
-			if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="226"){
-				echo "<h1>Other Executive Leadership Team members</h1>";
-				echo views_embed_view('apateammember', 'block_2');
-			}
-		?>
+	</section>
+</div>
+		<div id="related-members">
+			<div class="container">
+				<?php
+				if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="224"){
+					echo "<h3 class='lead-heading'>Other Board of Director members</h3>";
+					echo views_embed_view('apateammember', 'block');
+				}
+				if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="225"){
+					echo "<h3 class='lead-heading'>Other National Advisory Council members</h3>";
+					echo views_embed_view('apateammember', 'block_1');
+				}
+				if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="226"){
+					echo "<h3 class='lead-heading'>Other Executive Leadership Team members</h3>";
+					echo views_embed_view('apateammember', 'block_2');
+				}
+				?>
+			</div>
 		</div>
 	</section>
 	
