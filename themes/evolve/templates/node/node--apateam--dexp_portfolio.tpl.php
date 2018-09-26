@@ -12,12 +12,11 @@
             
         </div>
         <div class="item-description">
-			<div class="">
-				<h5> <a href="<?php print $node_url; ?>"><?php print render($content['field_apateamname']); ?></a></h5>
-                <h5><?php print render($content['field_apateamposition']); ?></h5>
-				
+			<div class="member-header">
+				<h5 class="member-name"> <a href="<?php print $node_url; ?>"><?php print render($content['field_apateamname']); ?></a></h5>
+                <span class="member-title"><?php print render($content['field_apateamposition']); ?></span>
 		    </div>
-						
+			<span class="separater"></span>
 			<div class="description">
 				<p><?php print render($content['body']); ?></p>
 				<h5><?php print render($content['field_nac_state']); ?></h5>

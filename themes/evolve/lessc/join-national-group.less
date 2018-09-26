@@ -1,3 +1,5 @@
+@import 'mixin';
+
 /*--PREDEFINED COLOURS--*/
 @light-grey: rgb(242, 243, 244);
 @light-transparent-background: rgba(255, 255, 255, 0.9);
@@ -276,7 +278,7 @@
           .underline-heading{
             position: relative;
             font-family: Cairo;
-            font-size: 1.4em;
+            font-size: 1.6em;
             &:after{
                 content: '';
                 position: absolute;
@@ -284,7 +286,7 @@
                 height: 3px;
                 background: @bright-blue;
                 left: 0;
-                top: 100%;
+                bottom: -15px;
             }
           }
           .nav{
@@ -292,9 +294,9 @@
               max-width: 230px;
               li{
                   a{
-                    padding: 15px 0;
-                    border-top: 1px solid rgba(0,0,0,0.05);
-                    color: #333;
+                    padding: 10px 0;
+                    border-top: 1px solid rgba(0,0,0,0.1);
+                    color: #5e6067;
                     font-weight: 500;
                     font-family: Roboto;
                     transition: all .3s linear;
@@ -309,7 +311,7 @@
                 }
                   &:last-child{
                       a{
-                          border-bottom: 1px solid rgba(0,0,0,0.05);
+                          border-bottom: 1px solid rgba(0,0,0,0.1);
                       }
                   }
               }

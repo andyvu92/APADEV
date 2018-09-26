@@ -79,9 +79,9 @@
 * @ingroup themeable
 */
 ?>
-<div id="node-<?php print $node->nid; ?>" style="margin-top:30px;" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
+<div id="node-<?php print $node->nid; ?>" style="margin-top:30px;" class="<?php print $classes; ?> clearfix post large flex-container" <?php print $attributes; ?>>
 	
-	<section class="post-content">
+	<section class="post-content flex-cell">
     
 	<?php /*
 	use this header as reference, but delete at the end
@@ -95,9 +95,9 @@
 		   <?php print $title; ?></a></h2>
     </header>
 		*/ ?>
-	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-9 col-lg-9">
-		<h1 class="SectionHeader"><?php print render($content['field_contenttitle']);?></h1>
-		<div class="brd-headling">&nbsp;</div>
+	<div class="flex-col-9 left-content">
+		<h2 class="lead-heading"><?php print render($content['field_contenttitle']);?></h2>
+
 	  <?php
         // We hide the comments and links now so that we can render them later.
         hide($content['comments']);
@@ -106,55 +106,17 @@
         ?>
 		<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
 	</div>
-	<div class="block SidebarNav contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
-		<h3 class="headline">About us</h3>
-		<span class="brd-headling"></span>
-		<div class="content">
-		<div class="view view-current-apa-campaign view-id-current_apa_campaign view-display-id-block_1 view-dom-id-32635ceaef40fd2d990939d49ac29284">
-		<div class="view-content">
-		  
-			<!--<div class="dexp-grid-items row">
-			<?php 
-			/*$rens = render($content['field_quicklinks']);
-			$linksList = explode("\n", $rens);
-			$count = 0;
-			$total = count($linksList);
-			foreach($linksList as $ren) {
-				$count++;
-				// when it reached the max, break;
-				if($count == $total) { break; }
-				// get rid of <p> tags
-				$ren = str_replace("<p>","",$ren);
-				$ren = str_replace("</p>","",$ren);
-				// get rid of &nbsp;
-				$string = htmlentities($ren, null, 'utf-8');
-				$checks = str_replace("&nbsp;", " ", $string);
-				$checks = html_entity_decode($checks);
-				//
-				if($count != 1) {
-					if(strcmp($checks, " ") == 0) {
-						print '<div class="views-field"><span class="field-content"><br>';
-					} else {
-						print '<div class="views-field SidebarItems"><span class="field-content">';
-					}
-					print $ren;
-					print '</span>  </div>';
-				}
-			}*/
-			?>
-			</div>
-		  
-		</div>-->
-		<div class="dexp-grid-items row">
+	<div class="flex-col-3 right-sidebar" style="margin:0 0 50px">
+		<span class="underline-heading">About us</span>
+
 	            <?php 
 					$block = block_load('block', '311');
 					$get = _block_get_renderable_array(_block_render_blocks(array($block)));
 					$output = drupal_render($get);        
 					print $output; 
 				?>
-		</div>
-		</div></div>
 	</div>
+
 	</section>
   
 </div> 
