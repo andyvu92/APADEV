@@ -1,4 +1,6 @@
 
+@import 'mixin';
+
 /*--PREDEFINED COLOURS--*/
 @light-grey: rgb(242, 243, 244);
 @light-transparent-background: rgba(255, 255, 255, 0.9);
@@ -307,7 +309,7 @@
     }
 }
 
-/* ABOUT US - ANNUAL REPORTS*/
+/* ABOUT US - ANNUAL REPORTS */
 .page-node-138{
     #block-block-237{
         min-height: 60vh;
@@ -329,3 +331,161 @@
 }
 
 
+/* ABOUT US - APA TEAM */
+.page-node-149{
+    /* BANNER */
+    #block-block-314{
+        min-height: 350px;
+    }
+
+    /* RIGHT SIDEBAR */
+    #block-system-main .right-sidebar{
+        position: relative;
+        top: 20px;
+          .underline-heading{
+            position: relative;
+            font-family: Cairo;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            &:after{
+                content: '';
+                position: absolute;
+                width: 30px;
+                height: 3px;
+                background: @bright-blue;
+                left: 0;
+                bottom: -5px;
+            }
+          }
+          .nav{
+              margin-top: 30px;
+              max-width: 230px;
+              li{
+                  a{
+                    padding: 10px 0;
+                    border-top: 1px solid rgba(0,0,0,0.1);
+                    color: #5e6067;
+                    font-weight: 500;
+                    font-family: Roboto;
+                    transition: all .3s linear;
+                    &:hover{
+                        color: @bright-blue;
+                    }
+                  }
+                  &:first-child{
+                    a{
+                        border-top: 0px;
+                    }
+                }
+                  &:last-child{
+                      a{
+                          border-bottom: 1px solid rgba(0,0,0,0.1);
+                      }
+                  }
+              }
+          }
+
+        @media all and (max-width: @tablet-width) {
+            display: none;
+        }
+      }
+
+      /* MAIN CONTENT */
+      #block-system-main .left-content{
+          h2.lead-heading{
+            font-size: 3em;
+            line-height: 1.1em;
+            display: block;
+            padding-bottom: 0.8em;
+            font-weight: 500;
+          }
+          p{
+            font-size: 1.4em;
+            padding-bottom: 20px;
+            display: block;
+            line-height: 1.4em;
+          }
+      }
+
+      #node-149 #prev-btn{
+          display: none;
+      }
+
+      /* THE APA TEAM */
+      #block-block-312{
+        background: #e7e8e9!important;
+        padding-bottom: 50px;
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+		.media_filter{
+            margin: 40px 0 50px;
+			ul{
+				display: flex;
+				justify-content: center;
+				li{
+					min-width: 200px;
+					text-align: center;
+					border: 0.5px #c0c2c4 solid;
+					border-right: 0px;
+					margin: 0;
+					&:last-of-type{
+						border-right: 0.5px #c0c2c4 solid;
+					}
+					a{
+						color: #333;
+						font-weight: 500;
+					}
+					&:hover{
+						background: @bright-blue;
+						a{
+							color: #fff;
+						}
+					}
+					&.active{
+						background: @bright-blue;
+						a{
+							color: #fff;
+						}
+					}
+				}
+			}
+        }
+        
+        #apateammember-block{
+            .node-apateam{
+                .item-description{
+                    .member-header{
+                        .member-name{
+                            color: #333;
+                            font-size: 1.2em;
+                            margin: 25px 0 0 0;
+                            font-weight: 600;
+                            font-family: Roboto;
+                            a{
+                                color: #000;
+                            }
+                        }
+                        .member-title{
+                            margin: 5px 0 10px;
+                            font-weight: 300;
+                            font-family: Roboto;
+                            color: #333;
+                            font-size: 1.2em;
+                        }
+                    }
+                    .separater{
+                        margin: 15px 0;
+                        display: block;
+                        height: 1px;
+                        width: 90%;
+                        background: rgba(0,0,0,0.1);
+                    }
+                }
+            }
+        }
+      }
+}
