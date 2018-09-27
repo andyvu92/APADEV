@@ -1617,14 +1617,6 @@ $(document).on('click', '.pd-spcart-delete a', function(){
 // PREFIX "PHY" FOR AHPRA NUMBER AND INPUT RULES
 jQuery(document).ready(function(){
 	$("#ahpblock input").keydown(function(e) {
-		var oldvalue=$(this).val();
-		var field=this;
-		setTimeout(function () {
-			if(field.value.indexOf('PHY') !== 0) {
-				$(field).val(oldvalue);
-			} 
-		}, 1);
-
 			// Allow: backspace, delete, tab, escape, enter and .
 			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 			// Allow: Ctrl+A, Command+A
@@ -1648,11 +1640,6 @@ jQuery(document).ready(function(){
 		}
 	});
 	
-	$('#ahpblock input').keydown( function(e){
-		if ($(this).val().length >= max_chars) { 
-			$(this).val($(this).val().substr(0, max_chars));
-		}
-	});
 });
 
 // NO NUMBER IN FORMS FIELS TOWN/CITY

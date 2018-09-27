@@ -93,7 +93,7 @@
 			if($only == "Yes"):
 		?>
 		<?php if(!isset($_SESSION['UserId'])): ?>	
-			<a class="popup-login"></a><?php print render($content['field_company_logo']); ?>
+			<a data-target="#loginAT" data-toggle="modal" href="#" class="login"></a><?php print render($content['field_company_logo']); ?>
 		<?php endif;?>
 		<?php if(isset($_SESSION['UserId'])): ?>
 			<?php if($_SESSION['MemberTypeID']=="1"):    ?>
@@ -109,9 +109,9 @@
 		</div>
 		<?php 
 			if($only == "Yes") {
-				echo "<div class='MonlyIconHolder'><div class='MonlyIcon'></div></div>";
+				echo "<div class='MonlyIconHolder'><div class='MonlyIcon'></div>Member access</div>";
 			} else {
-				echo "<div class='MonlyIconHolder'><div class='MonlyIcon'></div></div>";
+				echo "<div class='MonlyIconHolder'></div>";
 			}
 		
 		?>

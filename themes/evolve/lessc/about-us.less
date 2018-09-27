@@ -1,5 +1,5 @@
 
-@import 'mixin';
+@import (reference) 'mixin';
 
 /*-- ABOUT US --*/
 .page-node-127{
@@ -630,8 +630,11 @@
                 font-size: 1.4em;
             }
             p{
-                font-size: 1em;
+                font-size: 1.2em;
                 padding-bottom: 0;
+                & > strong{
+                    font-size: 1em;
+                }
             }
             ul.custom-list{
                 padding-left: 15px;
@@ -639,6 +642,10 @@
             }
             a{
                 text-decoration: underline;
+            }
+            strong{
+                font-size: 1.2em;
+                color: #333;
             }
             .dark-url{
                 color: #000;
@@ -670,6 +677,25 @@
 /* APA PARTNERS */
 .page-node-241{
     .page-node-141;
+    #block-system-main{
+        .sub-heading {
+            color: #009fda;
+            font-size: 1.8em;
+            font-family: Roboto;
+            font-weight: 700;
+            padding-top: 20px;
+        }
+        p{
+            font-size: 1.2em;
+            padding-bottom: 0;
+        }
+        a.dark-text{
+            color: #000;
+            &:hover{
+                color: @bright-blue;
+            }
+        }
+    }
     /* BANNER */
     #section-banner{
         #block-block-246{
@@ -691,6 +717,8 @@
     /* PARTNER LOGOS */
     #partners-info{
         .page-node-149 #block-block-312;
+        padding-left: 0;
+        padding-right: 0;
         background: #fff !important;
         width: 100%;
         position: relative;
@@ -698,11 +726,21 @@
         right: unset;
         margin-left: 0;
         margin-right: 0;
-        margin: 60px 0 40px;
+        margin: 60px 0 10px;
+        .media_filter{
+            margin: 40px 0 30px;
+        }
         .node-partners{
             position: relative;
             display: flex;
             justify-content: center;
+            &:hover{
+                .MonlyIconHolder{
+                    .MonlyIcon{
+                        background-position: 0 0px;
+                    }
+                }
+            }
             .MonlyIconHolder {
                 position: absolute;
                 top: 0;
@@ -719,7 +757,7 @@
                     height: 20px;
                 }
             }
-            a[popup-target]{
+            a[popup-target], a[data-target]{
                 position: absolute;
                 top: 0;
                 left: 0;
@@ -727,6 +765,139 @@
                 height: 100%;
             }
         }
-        
+    }
+
+    /* RIGHT SIDEBAR */
+    .right-sidebar{
+        .sidebar-feature{
+            background: #f0f1f3;
+            padding: 40px 30px;
+            margin-top: 50px;
+            .feature-sidebar-img{
+                box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.5);
+            }
+            .feature-sidebar-sub-heading{
+                font-size: 1.7em;
+                font-weight: 700;
+                color: @bright-blue;
+                text-align: center;
+                display: block;
+                margin: 50px 0 20px;
+            }
+        }
+    }
+}
+
+/* BOTTOM CONTACT DETAILS */
+.page-node-241{
+    .contact-details{
+        margin-bottom: 70px;
+        .contact-block:nth-child(1){
+            margin: 25px 0 35px;
+        }
+        p{
+            margin-bottom: 20px !important;
+        }
+    }
+}
+
+/* PARTNER DETAILS POPUP */
+@import (reference) 'popups';
+.PartnersDetail{
+    .medium-popup;
+    .close-popup{
+        width: 20px;
+        height: 20px;
+        border: 1px solid #fff;
+        &:before, &:after{
+            background: #fff;
+        }
+    }
+    .modal-header{
+        background: @bright-blue;
+        height: 50px;
+        border-bottom: 0;
+    }
+    .modal-body{
+        max-height: 450px;
+        padding-bottom: 0;
+        .modal-title{
+            margin: 30px 0 15px;
+            color: @bright-blue;
+            font-size: 1.8em;
+            text-transform: capitalize;
+        }
+        .ckeditor-accordion-container > dl{
+            border: 0;
+            dt{
+                margin-bottom: 2px;
+                &.active{
+                    margin-bottom: 0;
+                }
+            }
+            dd{
+                border: 2px solid #f0f1f3;
+                border-top: 0;
+                margin-bottom: 10px;
+            }
+            dt > .ckeditor-accordion-toggle{
+                width: 30px;
+                height: 30px;
+                top: calc(~'50% - 15px');
+                left: 10px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                &:before, &:after{
+                    top: unset;
+                    left: unset;
+                    background: none;
+                }
+                &:before{
+                    border: 1px solid #333;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 100%;
+                }
+                &:after{
+                    transform: rotate(-45deg);
+                    width: 6px;
+                    height: 6px;
+                    border-bottom: 1px solid;
+                    border-right: 1px solid;
+                    transition: 0.3s linear;           
+                }
+            }
+            dt.active > .ckeditor-accordion-toggle{
+                &:after{
+                    transform: rotate(45deg);
+                    left: 12px;
+                }
+            }
+        }
+        .ckeditor-accordion-container > dl dt > a{
+            background-color: #f0f1f3;
+            color: #333;
+            border-bottom: 0;
+            font-size: 1.2em;
+            padding: 15px 15px 15px 50px;
+        }
+    }
+    .modal-footer{
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-end;
+        border: 0;
+        padding-top: 0;
+        .partner-address{
+            font-size: 1em;
+            font-weight: 900;
+            color: @bright-blue;
+        }
+        .partner-logo{
+            img{
+                margin-bottom: -17px;
+            }
+        }
     }
 }

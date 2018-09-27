@@ -1370,7 +1370,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
             <div class="row" id="ahpblock">
                 <div class="col-xs-6 col-md-3">
                     <label for="">AHPRA number</label>
-                    <input type="text" value="PHY" class="form-control" name="Ahpranumber" placeholder='AHPRA number'<?php
+                    <input type="text" class="form-control" name="Ahpranumber" placeholder='AHPRA number'<?php
     if (empty($details['Ahpranumber'])) {
         echo "placeholder='AHPRA number'";
     } else {
@@ -3091,7 +3091,7 @@ if(isset($_POST['MT'])){
                     </div>
                     <div id="ahpblock" class="col-xs-6 col-md-3">
                         <label for="">AHPRA number</label>
-                        <input type="text" pattern="[A-Z]{3}[0-9]{10}" value="PHY" class="form-control" name="Ahpranumber"  placeholder='AHPRA number'>
+                        <input type="text" pattern="[A-Z][0-9]{10}" class="form-control" name="Ahpranumber"  placeholder='AHPRA number'>
                     </div>
                 </div>
                 
