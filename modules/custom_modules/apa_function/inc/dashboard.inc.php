@@ -210,10 +210,12 @@ apa_function_dashboardLeftNavigation_form();
 							<td><strong>Status:</strong></td>
 							<td><?php echo $user['Status']; ?></td>
 						</tr>
+						<?php if(isset($user['Ahpranumber']) && $user['Ahpranumber'] != ""): ?>
 						<tr>
 							<td><strong>AHPRA NO:</strong></td>
 							<td><?php echo $user['Ahpranumber']; ?></td>
 						</tr>
+						<?php endif; ?>
 						<?php if(isset($_SESSION['Speciality']) && sizeof($_SESSION['Speciality']) != 0): ?>
 						<tr>
 							<td><strong>Specialty:</strong></td>
