@@ -168,7 +168,7 @@ $scheduleDetails = GetAptifyData("47", $postScheduleData);
 $price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
 //print_r($scheduleDetails);
 /********End get Order Total and Schedule Payments  from Aptify******/
-if(isset($_POST['addCard'])){
+/*if(isset($_POST['addCard'])){
 	// 2.2.15 - Add payment method
 	// Send - 
 	// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
@@ -190,7 +190,7 @@ if(isset($_POST['addCard'])){
 	    elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)){ echo '<div class="checkMessage">Please enter a valid credit card number before proceeding with your order.</div>';}
 	    else{ echo '<div class="checkMessage">there was an unexpected error with your payment details, Please go back and check they are correct, or contact the APA.</div> ';}
 	}
-} 
+} */
 /*if(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])) {
 	$tempcard = array();
 	$tempcard['Payment-method'] = $_POST['Cardtype'];
