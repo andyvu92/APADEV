@@ -168,7 +168,7 @@ $scheduleDetails = GetAptifyData("47", $postScheduleData);
 $price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
 //print_r($scheduleDetails);
 /********End get Order Total and Schedule Payments  from Aptify******/
-if(isset($_POST['addCard'])){
+/*if(isset($_POST['addCard'])){
 	// 2.2.15 - Add payment method
 	// Send - 
 	// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
@@ -190,7 +190,7 @@ if(isset($_POST['addCard'])){
 	    elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)){ echo '<div class="checkMessage">Please enter a valid credit card number before proceeding with your order.</div>';}
 	    else{ echo '<div class="checkMessage">there was an unexpected error with your payment details, Please go back and check they are correct, or contact the APA.</div> ';}
 	}
-} 
+} */
 /*if(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])) {
 	$tempcard = array();
 	$tempcard['Payment-method'] = $_POST['Cardtype'];
@@ -365,8 +365,10 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 
 
 <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 paymentsiderbar">
-	<p><span class="sidebardis">Payment Information:</span></p>
 	<?php if (sizeof($cardsnum["results"])!=0): ?>
+	<div id="hiddenPayment">
+	<p><span class="sidebardis">Payment Information:</span></p>
+	
 	<div class="paymentsidecredit"> 
 		<fieldset>
 			<div class="chevron-select-box">
@@ -462,6 +464,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	</div>
 	
 	</div>
+	</div>
 	<?php endif; ?>
     <?php if (sizeof($cardsnum["results"])==0): ?>
 	<!--<form action="/pd/pd-shopping-cart" method="POST" id="addPaymentCardForm">
@@ -524,9 +527,12 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
 		</div>
 	</form>	-->
+	<div id="addPaymentCardForm">
 	<?php $the_form = drupal_get_form('apa_create_payment_card_form');
              print drupal_render($the_form);?>
+    </div>
 	<?php endif; ?>
+	
 	<?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0) || (sizeof($FPListArray)!=0)):?>
 		<div class="row">
 			<div class="col-xs-12"><span class="sidebardis">PRF donation</span></div>

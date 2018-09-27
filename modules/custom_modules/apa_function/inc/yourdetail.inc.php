@@ -317,7 +317,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 			
 
 
-if(isset($_POST["addCard"])) {
+/*if(isset($_POST["addCard"])) {
 	// 2.2.15 - Add payment method
 	// Send - 
 	// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
@@ -330,7 +330,7 @@ if(isset($_POST["addCard"])) {
 	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
 	$out = GetAptifyData("15",$postPaymentData); 
 	
-} 
+} */
 if(isset($_POST["deleteID"]) && $_POST["deleteID"] != "") {
 	$deleteCardSubmit["UserID"] = $_SESSION['UserId'];
 	$deleteCardSubmit["SpmID"] = $_POST["deleteID"];
@@ -453,25 +453,25 @@ apa_function_dashboardLeftNavigation_form();
 							<?php if($details['MemberTypeID']!="1"): ?><li id="yourdetail5"><a class="event4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li><?php endif;?>
 					</ul>
 				</div>
-				<?php if(isset($_POST["addCard"])) :?>
-					<?php if($out["result"]=="Failed"):?>
-						<?php if($out["Message"]=="Expiry date lenght should be 4."):?>
+				<!--<?php //if(isset($_POST["addCard"])) :?>
+					<?php //if($out["result"]=="Failed"):?>
+						<?php //if($out["Message"]=="Expiry date lenght should be 4."):?>
 						<div class="checkMessage">Please enter a valid expiry date.</div>
-						<?php elseif($out["Message"]=="CCV accepts up to 4 digit."):?>
+						<?php //elseif($out["Message"]=="CCV accepts up to 4 digit."):?>
 						<div class="checkMessage">Please enter a valid CVV number.</div>
-						<?php elseif($out["Message"]=="Error in Create Person Saved Payment Method:Month must be between one and twelve. Parameter name: month"):?>
+						<?php //elseif($out["Message"]=="Error in Create Person Saved Payment Method:Month must be between one and twelve. Parameter name: month"):?>
 						<div class="checkMessage">Please enter a valid expiry date.</div>
-						<?php elseif($out["Message"]=="Please enter a valid End Date occurring after the Start Date."):?>
+						<?php //elseif($out["Message"]=="Please enter a valid End Date occurring after the Start Date."):?>
 						<div class="checkMessage">Please enter a valid expiry date.</div>
-						<?php elseif((strpos($out["Message"], 'credit card number') !== false)):?>
+						<?php //elseif((strpos($out["Message"], 'credit card number') !== false)):?>
 						<div class="checkMessage">Please enter a valid credit card number.</div>
-						<?php elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)):?>
+						<?php //elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)):?>
 						<div class="checkMessage">Please enter a valid credit card number.</div>
-						<?php else:?>
+						<?php //else:?>
 						<div class="checkMessage">there was an unexpected error with your payment details, Please go back and check they are correct, or contact the APA.</div>
-						<?php endif;?>	
-					<?php endif;?>	
-				<?php endif; ?>
+						<?php //endif;?>	
+					<?php //endif;?>	
+				<?php //endif; ?>-->
 			<form action="<?php echo $url;?>" name="your-details" method="POST" novalidate>
 			    <input type="hidden" name="step1" value="1"/>
 				<input type="hidden" name="Specialty" value="<?php echo$details['Specialty'];?>">

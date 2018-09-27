@@ -416,6 +416,7 @@ function apa_create_payment_card_form($form, &$form_state){
 		$key = $PaymentType[$pair]['ID'];
 		$paymentArray[$key] = $PaymentType[$pair]['Name'];
 	}
+	//$form['#id'] = 'addPaymentCardForm';
 	$form['addCard'] = array(
 		'#type' => 'hidden',
 	);
@@ -472,8 +473,43 @@ function apa_create_payment_card_form($form, &$form_state){
 		'#maxlength' => 3,
 		'#required' => TRUE,
 	);
-	$form['submit'] = array('#type' => 'submit', '#value' => t('Add')); 
+	//$form['submit'] = array('#type' => 'submit', '#value' => t('Add')); 
+	$form['submit'] = array('#type' => 'submit', '#value' => t('Add'), '#submit'=>['add_payment_card']); 
 	return $form;
+}
+function add_payment_card($form, &$form_state){
+	$postPaymentData['userID'] = $_SESSION['UserId'];
+	$postPaymentData['Payment-method'] = $form["Cardtype"]["#value"];
+	$postPaymentData['Cardno'] = $form["Cardnumber"]["#value"];
+	$postPaymentData['Expiry-date'] = $form["Expirydate"]["#value"];
+	$postPaymentData['CCV'] = $form["CCV"]["#value"];
+	$out = GetAptifyData("15",$postPaymentData);
+	if($out["result"]=="Failed"){ 
+		if($out["Message"]=="Expiry date lenght should be 4."){
+			drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
+		}
+		elseif($out["Message"]=="CCV accepts up to 4 digit."){
+			drupal_set_message('<div class="checkMessage">Please enter a valid CVV number.</div>',"error");
+		}
+		elseif($out["Message"]=="Error in Create Person Saved Payment Method:Month must be between one and twelve. Parameter name: month"){
+			drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
+		}
+		elseif($out["Message"]=="Please enter a valid End Date occurring after the Start Date."){
+			drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
+		}
+		elseif((strpos($out["Message"], 'credit card number') !== false)){
+			drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
+		}
+		elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)){
+			drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
+		}
+		else{
+			drupal_set_message('<div class="checkMessage">there was an unexpected error with your payment details, Please go back and check they are correct, or contact the APA.</div>',"error");
+		}
+	}
+	
+	
+
 }
 /*
 function _apa_sso_login_form_validate($form, &$form_state) {

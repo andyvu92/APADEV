@@ -309,6 +309,7 @@ if(isset($_POST['step2-1'])) {
 	$cardsnum = GetAptifyData("12", $test);
 	//print_r($cardsnum);?>
 	<?php if (sizeof($cardsnum["results"])!=0): ?>  
+	<div id="hiddenPayment">
 		<div class="row">	
 		<div class="col-xs-12 col-sm-6">				
 			<fieldset>
@@ -379,6 +380,7 @@ if(isset($_POST['step2-1'])) {
 			<label for="addcardtag">Save this card</label>
 		</div>-->
 		<input type="hidden" name="addCard" value="0">
+	</div>
 	</div>
 	<?php endif; ?>  
 	<?php if (sizeof($cardsnum["results"])==0): ?> 

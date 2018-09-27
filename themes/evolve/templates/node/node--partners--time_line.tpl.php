@@ -79,12 +79,53 @@
 * @ingroup themeable
 */
 ?>
+<?php 
+	$only = ((array)$content['field_members_only']['#items'][0]['taxonomy_term'])["name"];	
+
+?>
+
+
 <div id="myModal-node-<?php print $node->nid; ?>" class="PartnersDetail" style="display:none;">
+
     <!--<div class="modal-dialog" style="max-height:100%;  margin-top: 0px; margin-bottom:50px;width: 100%;">
 		<div class="modal-content">-->
-		 
-		    
-	<span class="close-popup"></span>
+		<?php 
+			if($only == "Yes"):
+		?> 
+		<?php if(isset($_SESSION['UserId']) && $_SESSION['MemberTypeID']!="1"):?>
+			<span class="close-popup"></span>
+			<div class="modal-header">
+			</div>
+		
+		<div class="modal-body">
+			<h4 class="modal-title"><?php print $title; ?></h4>
+			<?php print render($content['body']);?>
+
+			<section class="post-content">
+				<dl class="ckeditor-accordion">
+					<dt>Benefit to APA members</dt>
+						<dd>
+							<p><?php print render($content['field_benefit_to_members']);?></p>
+						</dd>
+					<!-- <dt>Current discount that's on offer (not always applicable)</dt>
+						<dd>
+							<p><?php //print render($content['field_offer']);?></p>
+						</dd> -->
+					<dt>Contact details</dt>
+						<dd>
+							<p><?php print render($content['field_contact_details']);?></p>
+						</dd>
+				</dl>
+			</section>
+		</div>
+
+		<div class="modal-footer">
+			<a class="partner-logo" href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_company_logo']);?></a>
+			<a class="partner-address" href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_web_address']);?></a>
+		</div>
+			<?php endif;?>
+			<?php else: ?>
+			<span class="close-popup"></span>
 	<div class="modal-header">
 	</div>
 	
@@ -114,11 +155,17 @@
 		<a class="partner-logo" href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_company_logo']);?></a>
 		<a class="partner-address" href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_web_address']);?></a>
 	</div>
-
+			<?php endif;?>
+			
 			<!--<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 			</div>
         </div>		
 	</div>-->
 </div> 
+
+
+
+
+
 
