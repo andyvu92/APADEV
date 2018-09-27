@@ -416,6 +416,7 @@ function apa_create_payment_card_form($form, &$form_state){
 		$key = $PaymentType[$pair]['ID'];
 		$paymentArray[$key] = $PaymentType[$pair]['Name'];
 	}
+	//$form['#id'] = 'addPaymentCardForm';
 	$form['addCard'] = array(
 		'#type' => 'hidden',
 	);
