@@ -115,6 +115,16 @@
 					$output = drupal_render($get);        
 					print $output; 
 				?>
+		<?php if($node->nid=="139"):?>
+		<span class="underline-heading">APA Regulations</span>
+
+	            <?php 
+					$block = block_load('block', '316');
+					$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+					$output = drupal_render($get);        
+					print $output; 
+				?>
+		<?php endif;?>
 	</div>
 
 	</section>
