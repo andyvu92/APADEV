@@ -316,7 +316,7 @@
 .page-node-149{
     /* BANNER */
     #block-block-314{
-        min-height: 350px;
+        min-height: 400px;
     }
 
     /* RIGHT SIDEBAR */
@@ -613,6 +613,10 @@
 .page-node-141{
     .page-node-149;
 
+    /* BANNER */
+    #block-block-315{
+        min-height: 400px;
+    }
     /* MAIN CONTENT */
     #block-system-main{
         .left-content{
@@ -650,6 +654,12 @@
             .dark-url{
                 color: #000;
                 font-weight: 500;
+                &:hover{
+                    color: @bright-blue;
+                }
+                strong{
+                    font-size: 1em;
+                }
             }
             .featured-img{
                 padding: 40px 0 20px;
@@ -792,7 +802,7 @@
 .page-node-241{
     .contact-details{
         margin-bottom: 70px;
-        .contact-block:nth-child(1){
+        .contact-block:first-of-type{
             margin: 25px 0 35px;
         }
         p{
@@ -831,6 +841,7 @@
             border: 0;
             dt{
                 margin-bottom: 2px;
+                background-color: #f0f1f3;
                 &.active{
                     margin-bottom: 0;
                 }
@@ -848,6 +859,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                z-index: 9;
                 &:before, &:after{
                     top: unset;
                     left: unset;
@@ -876,11 +888,13 @@
             }
         }
         .ckeditor-accordion-container > dl dt > a{
-            background-color: #f0f1f3;
+            background: none;
             color: #333;
             border-bottom: 0;
             font-size: 1.2em;
             padding: 15px 15px 15px 50px;
+            position: relative;
+            z-index: 10;
         }
     }
     .modal-footer{
@@ -900,4 +914,81 @@
             }
         }
     }
+}
+
+/* GOVERNANCE */
+.page-node-139{
+    .page-node-141;
+
+    /* BANNER */
+    #block-block-175{
+        .img-parallax{
+            margin-top: 120px;
+        }
+    }
+
+    /* MAIN CONTENT */
+    #block-system-main{
+        .left-content{
+            h2.lead-heading{
+                padding-bottom: 30px;
+            }
+            .intro{
+                padding-bottom: 20px;
+            }
+            .dark-url{
+                strong{
+                    font-size: 1em;
+                }
+                &:hover{
+                    color: @bright-blue;
+                }
+            }
+        }
+    }
+}
+
+/* HISTORY */
+.page-node-133{
+    .page-node-141;
+
+    /* BANNER */
+    #block-block-173{
+        .img-parallax{
+            margin-top: 65px;
+        }
+    }
+
+    /* MAIN CONTENT */
+    #block-system-main{
+        .left-content{
+            h2.lead-heading{
+                padding-bottom: 30px;
+            }
+            .intro{
+                padding-bottom: 20px;
+            }
+            .dark-url{
+                strong{
+                    font-size: 1em;
+                }
+                &:hover{
+                    color: @bright-blue;
+                }
+            }
+            .primary-highlight{
+                color: @bright-blue;
+                font-weight: 500;
+            }
+            .ful-width-text-overlay{
+                background-image: url('/sites/default/files/ABOUT US/history-2-1500x800.jpg');
+                min-height: 400px;
+                margin: 50px 0;
+            }
+        }
+    }
+}
+
+.page-node-137{
+    .page-node-133;
 }
