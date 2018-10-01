@@ -315,14 +315,16 @@
 /* ABOUT US - APA TEAM */
 .page-node-149{
     /* BANNER */
-    #block-block-314{
+    #section-banner .region-banner > div{
         min-height: 400px;
+    }
+    .border-10{
+        border-bottom: 10px solid #e7e8ea;
     }
 
     /* RIGHT SIDEBAR */
     #block-system-main .right-sidebar{
         position: relative;
-        top: 20px;
           .underline-heading{
             position: relative;
             font-family: Cairo;
@@ -631,7 +633,7 @@
                 padding-top: 20px;
             }
             .intro{
-                font-size: 1.4em;
+                font-size: 1.6em;
             }
             p{
                 font-size: 1.2em;
@@ -646,9 +648,10 @@
             }
             a{
                 text-decoration: underline;
+                color: @bright-blue;
             }
             strong{
-                font-size: 1.2em;
+                font-size: 1em;
                 color: #333;
             }
             .dark-url{
@@ -663,6 +666,8 @@
             }
             .featured-img{
                 padding: 40px 0 20px;
+                width: 100%!important;
+                height: auto!important;
             }
 
             /* BACK TO PREVIOUS */
@@ -688,6 +693,12 @@
 .page-node-241{
     .page-node-141;
     #block-system-main{
+        #node-241{
+            padding-top: 50px;
+            h2.lead-heading{
+                margin-top: 0;
+            }
+        }
         .sub-heading {
             color: #009fda;
             font-size: 1.8em;
@@ -923,7 +934,14 @@
     /* BANNER */
     #block-block-175{
         .img-parallax{
-            margin-top: 120px;
+            margin-top: 100px;
+        }
+    }
+
+    /* RIGHT SIDEBAR */
+    .right-sidebar{
+        #block-block-311{
+            margin-bottom: 50px;
         }
     }
 
@@ -955,7 +973,7 @@
     /* BANNER */
     #block-block-173{
         .img-parallax{
-            margin-top: 65px;
+            margin-top: 90px;
         }
     }
 
@@ -984,11 +1002,94 @@
                 background-image: url('/sites/default/files/ABOUT US/history-2-1500x800.jpg');
                 min-height: 400px;
                 margin: 50px 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                span{
+                    width: 80%;
+                    display: block;
+                    margin: 0 auto;
+                    color: rgba(255,255,255,0.9);
+                    font-size: 2.5em;
+                    font-family: Cairo;
+                    font-weight: 300;
+                    text-align: center;
+                }
             }
         }
     }
 }
 
+/* INTERNATIONAL CONNECTIONS */
+.page-node-145{
+    .page-node-133;
+
+    /* MAIN CONTENT */
+    #block-system-main{
+        .left-content{
+            .representative{
+                margin-top: 20px;
+                p{
+                    display: flex;
+                    margin-top: 15px;
+                    .left-one-third{
+                        width: 30%;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* RECONCILIATION */
+.page-node-143{
+    .page-node-133;
+}
+
+/* STRATEGIC PLAN */
 .page-node-137{
+    .page-node-133;
+
+    /* MAIN CONTENT */
+    #block-system-main{
+        .left-content{
+            .primary{
+                color: @bright-blue;
+                margin-top: 10px;
+                strong{
+                    color: @bright-blue;
+                }
+            }
+            .one-third-content{
+                padding-top: 40px;
+                .flex-col-8{
+                    padding-left: 25px;
+                }
+                .featured-img{
+                    padding-top: 0;
+                    width: 100%!important;
+                    height: auto!important;
+                }
+            }
+            .half-content{
+                img{
+                    max-height: 460px;
+                }
+                .flex-col-6:nth-child(2){
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+
+/* STUDYING PHYSIOTHERAPY */
+.page-node-574{
+    .page-node-133;
+}
+
+/* WORKING IN AUSTRALIA */
+.page-node-144{
     .page-node-133;
 }

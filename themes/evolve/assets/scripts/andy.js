@@ -594,6 +594,10 @@ jQuery(document).ready(function(){
       $('.instruction').hide();
     }
 
+    if ( $('#additional-qualifications-block').find('.callDeleteEdu').length == 0 ){
+      $('.instruction').show();
+    }
+
     $(document).on('click', '.add-additional-qualification', function(){
       $('.instruction').hide();
     });
