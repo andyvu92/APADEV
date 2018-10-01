@@ -1904,7 +1904,7 @@ apa_function_dashboardLeftNavigation_form();
 
 				<?php endforeach;?>
 				<?php if(sizeof($details['PersonEducation'])==0):?>
-				<div class="col-xs-12 col-sm-12 col-md-12"><p>Please add your qualifications or click submit to continue</p></div>
+				<div class="col-xs-12 col-sm-12 col-md-12" id="educationNotice"><p>Please add your qualifications or click submit to continue</p></div>
 					<!--<div id="additional0">
 					<input type="hidden" name="ID0" value="-1">
 					   <div class="row">
@@ -2282,6 +2282,7 @@ $('.add-additional-qualification').click(function(){
 		$("#additional"+ number ).load("load/education", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree,"sessionUniversity":sessionUniversity});
         var i = Number(number +1);
 		$('input[name=addtionalNumber]').val(i);
+		if(i==0){ $('#educationNotice').removeClass("display-none");} else{$('#educationNotice').addClass("display-none");}
 });
 $("#deleteQButton").on( "click", function(){
 		var x = $(this).attr("class").replace('deleteEducation', '');
@@ -2293,6 +2294,7 @@ $("#deleteQButton").on( "click", function(){
 		$('input[name=addtionalNumber]').val(et);
 		//$('#confirmDelete').dialog('close');
 		$('div[aria-describedby=confirmDelete] button').click();
+		if(et==0){ $('#educationNotice').removeClass("display-none");} else{$('#educationNotice').addClass("display-none");}
 		
 });
 jQuery(document).ready(function() {
