@@ -236,6 +236,12 @@
         display: none;
     }
     @media @larger-tablet-width-down{
+        a.site-logo{
+            text-align: left;
+        }
+        #nav-old-toggle{
+            display: none;
+        }
         #search-mobile{
             display: block;
             position: fixed;
@@ -290,9 +296,10 @@
                 height: calc(~'100vh - 120px');
                 display: block;
                 opacity: 0;
-                border-bottom: 5px solid @bright-blue;
+                border-bottom: 10px solid @bright-blue;
                 background: #fff;
                 transition: all .3s linear;
+                overflow-y: auto;
                 ul.menu{
                     padding: 0px 30px;
                     li{
@@ -340,6 +347,7 @@
             #block-dexp-menu-dexp-menu-block-1{
                 #dexp-dropdown{
                     top: 148px;
+                    height: calc(~'100vh - 148px');
                 }
             }
             #search-mobile{
@@ -348,3 +356,4 @@
         }
     }
 }
+

@@ -30,6 +30,22 @@
         /* MAIN CONTENT */
         .main-content{
             padding-right: 60px;
+            @media @larger-tablet-width-down{
+                padding-right: 15px;
+                #ng-join-btn{
+                    width: 100%;
+                    text-align: center;
+                }
+            }
+            @media @larger-phone-width-down{
+                .SectionHeader{
+                    font-size: 3em;
+                    margin-bottom: 30px;
+                }
+                .intro p{
+                    font-size: 1.4em;
+                }
+            }
             .SectionHeader{
                 font-weight: 400;
                 font-size: 4em;
@@ -44,7 +60,7 @@
                 }
             }
             .post-img{
-                margin: 80px 0;
+                margin: 8% 0;
             }
             p{
                 margin-bottom: 1.2em !important;
@@ -84,6 +100,7 @@
                 font-weight: 300;
                 font-family: Roboto;
                 margin-top: 20px;
+                text-align: center;
                 span{
                     padding: 8px 60px;
                     display: block;
@@ -145,6 +162,9 @@
                         }
                     }
                 }
+            }
+            @media @larger-tablet-width-down{
+                display: none;
             }
         }
     }

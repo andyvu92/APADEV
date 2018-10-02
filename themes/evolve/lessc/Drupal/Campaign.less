@@ -91,10 +91,22 @@
 	/* BANNER */
 	#section-banner{
         #block-block-301{
-            min-height: 60vh;
+            min-height: 600px;
             display: flex;
             justify-content: center;
-            align-items: center;
+			align-items: center;
+			@media @desktop-width-down{
+				min-height: 500px;
+			}
+			@media @larger-tablet-width-down{
+				min-height: 400px;
+			}
+			@media @larger-phone-width-down{
+				min-height: 300px;
+				.img-parallax{
+					display: block;
+				}
+			}
             &:before{
                 content: '';
                 position: absolute;
@@ -202,6 +214,12 @@
 		background:none!important;
 		border: none;
 		margin-bottom: 100px;
+		@media @tablet-width-down {
+			margin-bottom: 50px;
+		}
+		@media @phone-width-down {
+			margin-bottom: 10px;
+		}
 		#node-528;
 		.block-title{
 			margin-bottom: 50px;
@@ -218,6 +236,20 @@
 				display: flex;
 				flex-direction: column;
 				justify-content: space-between;
+			}
+			@media @tablet-width-down{
+				flex-direction: column;
+				.img{
+					display: none;
+				}
+				.content{
+					padding: 0 30px;
+				}
+			}
+			@media @phone-width-down{
+				.content{
+					padding: 0 15px;
+				}
 			}
 		}
 		.intro{
@@ -258,6 +290,27 @@
 						a{
 							color: #fff;
 						}
+					}
+				}
+			}
+			@media @tablet-width-down {
+				ul{
+					li{
+						min-width: 170px;
+					}
+				}
+			}
+			@media @larger-phone-width-down {
+				ul{
+					li{
+						min-width: 140px;
+					}
+				}
+			}
+			@media @phone-width-down {
+				ul{
+					li{
+						min-width: 105px;
 					}
 				}
 			}
@@ -316,6 +369,12 @@
 				padding: 15px;
 				display: flex;
 				flex-direction: column;
+				@media @tablet-width-down {
+					width: 50%;
+				}
+				@media @phone-width-down {
+					width: 100%;
+				}
 				.embed-container{
 					position: relative; 
 					padding-bottom: 56.25%; 
@@ -516,6 +575,22 @@
 .page-node-547{
 	#section-main-content{
 		padding: 100px 0;
+		@media @larger-tablet-width-down{
+			.MainContent{
+				width: 100%;
+			}
+		}
+		@media @larger-phone-width-down{
+			padding: 50px 0;
+			.MainContent{
+				.pre-header{
+					font-size: 1.7em;
+				}	
+				.SectionHeader{
+					font-size: 3em;
+				}
+			}
+		}
 	}
 	h1.SectionHeader{
 		margin: 5px 0 50px;
@@ -614,6 +689,9 @@
 			margin: 80px 0;
 			& + .featured-img-left{
 				margin: 20px 0;
+			}
+			@media @tablet-width-down{
+				margin: 50px 0;
 			}
 		}
 	}
