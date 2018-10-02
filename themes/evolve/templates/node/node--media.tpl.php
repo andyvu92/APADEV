@@ -166,7 +166,8 @@
 		
 	<?php if($content['field_media_type']['#items'][0]['taxonomy_term']->name == 'Media Release') {
 		$block = block_load('block', '219');      
-		$output = drupal_render(_block_get_renderable_array(_block_render_blocks(array($block))));        
+		$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+		$output = drupal_render($get);
 		print $output;
 	} ?>
 	<?php print render($content['field_media_tag']); ?>
