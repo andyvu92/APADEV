@@ -636,7 +636,7 @@ if($resultdata['result']) {
 	$url =  "{$_SERVER['REQUEST_URI']}";
 	
 	// log-in
-	if(isset($_POST["id"])) {
+	/*if(isset($_POST["id"])) {
 		if(!empty($_POST["remember"])) {
 			setcookie ("member_login",$_POST["id"],time()+ (10 * 365 * 24 * 60 * 60));
 			setcookie ("member_password",$_POST["password"],time()+ (10 * 365 * 24 * 60 * 60));
@@ -651,7 +651,7 @@ if($resultdata['result']) {
 		loginManager($_POST["id"], $_POST["password"]);
 	} else {
 		// no id has been entered
-	}
+	}*/
 	
 	// log-out
 	if(isset($_POST["logout"])) {
@@ -915,7 +915,7 @@ if(isset($_SESSION['UserId'])) {
 		<div class="form-container">        
       <div class="tab-content">
         <div id="main-signin-form">             
-          <form name="signInForm" method="POST" action="<?php echo $url;?>">
+          <!--<form name="signInForm" method="POST" action="<?php //echo $url;?>">-->
 				<div class="flex-container">
 					<div class="flex-cell">
 						<h3 class="light-lead-heading cairo">Sign in to your account</h3>
@@ -924,37 +924,39 @@ if(isset($_SESSION['UserId'])) {
 					</div>
 					<!--<input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>
 					<input type="password" class="form-control"  name="Password"  placeholder="Password"><br>-->
-					<div class="flex-cell email-field">
-						<input class="form-control" name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" required />
+					<!--<div class="flex-cell email-field">
+						<input class="form-control" name="id" placeholder="Email address" type="text" value="<?php //if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" required />
 					</div>
 
 					<div class="flex-cell password-field">
-						<input class="form-control" placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" required />
-					</div>
+						<input class="form-control" placeholder="Password" name="password" type="password" value="<?php //if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" required />
+					</div>-->
+					<?php $the_form = drupal_get_form('apa_create_log_in_form');
+                    print drupal_render($the_form);	?>
 
 					<div class="flex-cell checkmessage" style="display: none">
 						<span>Incorrect username or password</span>
 					</div>
 
-					<div class="flex-cell login-btn">
+					<!--<div class="flex-cell login-btn">
 						<input type="submit" value="Login">
-					</div>
+					</div>-->
 
-					<div class="flex-cell">
+					<!--<div class="flex-cell">
 						<div class="flex-col-5 remember-opt">
-							<input class="styled-checkbox" id="remember1" type="checkbox" name="remember"  <?php if(isset($_COOKIE["member_login"])) { ?> checked <?php } ?> /><label for="remember1">Remember me</label>
+							<input class="styled-checkbox" id="remember1" type="checkbox" name="remember"  <?php //if(isset($_COOKIE["member_login"])) { ?> checked <?php //} ?> /><label for="remember1">Remember me</label>
 						</div>
 						<div class="flex-col-7 forgot-password">
 							<span>Forgot your <a href="/forget-password">username/password</a>
 							</span>
 						</div>
-					</div>
+					</div>-->
 
 					<div class="flex-cell create-account">
 						<span>Not a member? <a href="/membership-question">Join today.</a></span>
 					</div>
 				</div>
-			</form>
+			<!--</form>-->
         </div>
         
       </div><!-- tab-content -->
