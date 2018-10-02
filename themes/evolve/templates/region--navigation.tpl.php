@@ -11,9 +11,21 @@ if ($content):
   }
   ?>
   <?php if ($search_block): ?>
-    <div class="col-lg-1 col-md-1 col-sm-1 col-xs-2 pull-right right search-toggle-bar">
-      <a href="#" class="search-toggle"><span class="fa fa-search"></span></a>
+    <a href="#" class="search-toggle"><span class="fa fa-search"></span></a>
+    <div class="dexp-menu-toggle" id='custom-nav-toggle'>
+      <span class="bar-1"></span><span class="bar-2"></span><span class="bar-3"></span>
+      </span><span class="fa fa-search"></span>
     </div>
+  
+  <div id="search-mobile">
+    <form action="" method="post" id="search-block-form-mobile" accept-charset="UTF-8">
+        <div class="form-item form-type-textfield form-item-search-block-form">
+          <input title="Enter the terms you wish to search for." placeholder="Search" type="text" id="edit-search-block-form--2-mobile" name="search_block_form" value="" size="15" maxlength="128" class="form-text">
+          <button type="submit" id="edit-submit-mobile" name="op"><span class="fa fa-search"></span></button>
+        </div>
+    </form>
+  </div>
+
     <?php endif; ?>
   <div class="<?php print $classes; ?>">
   <?php print $content; ?>

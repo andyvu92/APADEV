@@ -602,5 +602,17 @@ jQuery(document).ready(function(){
       $('.instruction').hide();
     });
 
+
+    // TOP NAV MOBILE
+    $(document).on('click', '#custom-nav-toggle', function(){
+      $(this).toggleClass('active');
+      $('.html').toggleClass('menu-open');
+    });
+
+    // SEARCH FUNCTION MOBILE
+    $(document).on('keyup', '#edit-search-block-form--2-mobile', function(){
+      value = $(this).val();
+      $('#search-block-form-mobile').attr('action', '/search/node/' + value)
+    });
 });
 

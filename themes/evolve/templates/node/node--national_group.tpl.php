@@ -122,26 +122,26 @@
 			<div class="dexp-grid-items">
 			<?php //echo views_embed_view('blog_categories', 'block_5');?>
 			<ul class="side-nav">
-				<li><a href="/nationalgroups/acupuncture-and-dry-needling">Acupuncture and dry needling</a></li>
-				<li><a href="/nationalgroups/animal">Animal</a></li>
-				<li><a href="/nationalgroups/aquatic">Aquatic</a></li>
-				<li><a href="/nationalgroups/business">Business</a></li>
-				<li><a href="/nationalgroups/cancer-palliative-care-and-lymphoedema">Cancer, Palliative Care and Lymphoedema</a></li>
-				<li><a href="/nationalgroups/cardiorespiratory">Cardiorespiratory</a></li>
-				<li><a href="/nationalgroups/disability">Disability</a></li>
-				<li><a href="/nationalgroups/educators">Educators</a></li>
-				<li><a href="/nationalgroups/emergency-department">Emergency Department</a></li>
-				<li><a href="/nationalgroups/gerontology">Gerontology</a></li>
-				<li><a href="/nationalgroups/leadership-and-management">Leadership and Management</a></li>
-				<li><a href="/nationalgroups/mental-health-physiotherapy">Mental Health Physiotherapy</a></li>
-				<li><a href="/nationalgroups/musculoskeletal">Musculoskeletal</a></li>
-				<li><a href="/nationalgroups/neurology">Neurology</a></li>
-				<li><a href="/nationalgroups/occupational-health">Occupational Health</a></li>
-				<li><a href="/nationalgroups/orthopaedic">Orthopaedic</a></li>
-				<li><a href="/nationalgroups/paediatric">Paediatric</a></li>
-				<li><a href="/nationalgroups/pain">Pain</a></li>
-				<li><a href="/nationalgroups/sports-and-exercise">Sports and Exercise</a></li>
-				<li><a href="/nationalgroups/womens-mens-and-pelvic-health">Women's, Men's and Pelvic Health</a></li>
+				<li><a href="/membership/national-groups/acupuncture-and-dry-needling">Acupuncture and dry needling</a></li>
+				<li><a href="/membership/national-groups/animal">Animal</a></li>
+				<li><a href="/membership/national-groups/aquatic">Aquatic</a></li>
+				<li><a href="/membership/national-groups/business">Business</a></li>
+				<li><a href="/membership/national-groups/cancer-palliative-care-and-lymphoedema">Cancer, Palliative Care and Lymphoedema</a></li>
+				<li><a href="/membership/national-groups/cardiorespiratory">Cardiorespiratory</a></li>
+				<li><a href="/membership/national-groups/disability">Disability</a></li>
+				<li><a href="/membership/national-groups/educators">Educators</a></li>
+				<li><a href="/membership/national-groups/emergency-department">Emergency Department</a></li>
+				<li><a href="/membership/national-groups/gerontology">Gerontology</a></li>
+				<li><a href="/membership/national-groups/leadership-and-management">Leadership and Management</a></li>
+				<li><a href="/membership/national-groups/mental-health-physiotherapy">Mental Health Physiotherapy</a></li>
+				<li><a href="/membership/national-groups/musculoskeletal">Musculoskeletal</a></li>
+				<li><a href="/membership/national-groups/neurology">Neurology</a></li>
+				<li><a href="/membership/national-groups/occupational-health">Occupational Health</a></li>
+				<li><a href="/membership/national-groups/orthopaedic">Orthopaedic</a></li>
+				<li><a href="/membership/national-groups/paediatric">Paediatric</a></li>
+				<li><a href="/membership/national-groups/pain">Pain</a></li>
+				<li><a href="/membership/national-groups/sports-and-exercise">Sports and Exercise</a></li>
+				<li><a href="/membership/national-groups/womens-mens-and-pelvic-health">Women's, Men's and Pelvic Health</a></li>
 			<ul>
 			</div>
 		  
