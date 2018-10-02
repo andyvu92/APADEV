@@ -407,6 +407,73 @@ function apa_function_SAML_login_form() {
     /// not in use
     include __DIR__."/inc/Login/SAMLlogin.php";
 }
+//create log in form
+function apa_create_log_in_form($form, &$form_state){
+	$form['id'] = array(
+		'#type' => 'textfield',
+		'#prefix'=>'<div class="flex-cell email-field">',
+		'#suffix'=>'</div>',
+		'#attributes' => array(
+			
+			' class' => 'form-control',
+			' placeholder' => 'Email address',
+		),
+		'#default_value' => isset($_COOKIE["member_login"])?$_COOKIE["member_login"]:'',
+		'#required' => TRUE,
+	);
+	$form['password'] = array(
+		'#type' => 'password',
+	    '#prefix'=>'<div class="flex-cell password-field">',
+		'#suffix'=>'</div>',
+		'#attributes' => array(
+			
+			' class' => 'form-control',
+			' placeholder' => 'Password',
+		),
+		'#default_value' => isset($_COOKIE["member_password"])?$_COOKIE["member_password"]:'',
+		'#required' => TRUE,
+	);
+	$form['submit'] = array(
+		'#type' => 'submit',
+		'#prefix'=>'<div class="flex-cell login-btn">',
+		'#suffix'=>'</div>',		
+		'#value' => t('Login'),
+		'#submit'=>['log_in'],
+		
+	); 
+	$form['remember'] = array(
+		'#type' => 'checkbox',
+		'#prefix'=>'<div class="flex-cell"><div class="flex-col-5 remember-opt">',
+		'#suffix'=>'</div><div class="flex-col-7 forgot-password">
+					<span>Forgot your <a href="/forget-password">username/password</a>
+					</span>
+					</div></div>',
+		'#default_value' => isset($_COOKIE["member_login"])?1:0,
+		'#attributes' => array(
+			
+			' class' => 'styled-checkbox',
+			
+		),						
+		'#title' => t('Remember me'),
+		
+	); 
+	return $form;
+}
+//create log in function
+function log_in($form, &$form_state){
+	if(!empty($form["remember"]["#value"])) {
+			setcookie ("member_login",$_POST["id"],time()+ (10 * 365 * 24 * 60 * 60));
+			setcookie ("member_password",$_POST["password"],time()+ (10 * 365 * 24 * 60 * 60));
+	} else {
+		if(isset($_COOKIE["member_login"])) {
+			setcookie ("member_login","");
+		}
+		if(isset($_COOKIE["member_password"])) {
+			setcookie ("member_password","");
+		}
+	}
+	loginManager($form["id"]["#value"], $form["password"]["#value"]);
+}
 //create add payment card form
 function apa_create_payment_card_form($form, &$form_state){
 	$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
