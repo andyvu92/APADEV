@@ -5,20 +5,20 @@
         if (lightbox2 !== null) {
 
         }
-        $("a[href*=#]").click(function (e) {
-          e.preventDefault();
+         $("a[href*=#]").click(function (e) {
+          //e.preventDefault();
           if($(this).is('[data-slide]')) return true;
           var url = $(this).attr('href');
           var hash = url.substring(url.indexOf("#") + 1);
           if(hash == '') return true;
           var element = $('[id=' + hash + ']');
           if (element.length > 0) {
-            e.preventDefault();
+            //e.preventDefault();
             $('html, body').animate({
               scrollTop: element.offset().top
             }, 800);
           }
-        });
+        }); 
       }
     }
     /*Set detect device*/

@@ -4,11 +4,25 @@
 /*-- ABOUT US --*/
 .page-node-127{
     #block-block-170{
+        /* MOBILE BACKGROUND */
+        @media @larger-phone-width-down{
+            background-image: url(http://localhost/sites/default/files/ABOUT%20US/ABOUT-US-MOBILE.jpg)!important;
+            -webkit-background-size: 100%!important;
+            -moz-background-size: 100%!important;
+            -o-background-size: 100%!important;
+            background-size: cover!important;
+            background-position: 50% 0% !important;
+            background-repeat: no-repeat;
+        }
+
         .content{
             background: rgba(0,0,0,0.15);
         }
         .top-banner{
             padding: 200px 25% 4%;
+            @media @desktop-width-down {
+                padding: 100px 25% 4%;
+            }
             .page-main-header{
                 color: #fff;
                 font-family: Cairo;
@@ -47,7 +61,7 @@
                 margin: 25px auto 15px;
             }
             @media all and (max-width: @larger-tablet-width){
-                padding: 200px 15% 2%;
+                padding: 50px 15% 2%;
             }
             @media all and (max-width: @larger-phone-width){
                 padding: 150px 10% 2%;
@@ -81,20 +95,14 @@
                 background: rgba(0,159,218,1);
             }
             background-attachment: unset;
-            -webkit-background-size: 130%!important;
-            -moz-background-size: 130%!important;
-            -o-background-size: 130%!important;
-            background-size: 130%!important;
-            background-position: 50% 0% !important;
                 .top-banner{
-                    background-image: linear-gradient(to top,#000000 0%,#000000 40%,#000000 52%,rgba(255,255,255,0) 85%);                
-                .separator{
-                    margin: 10px 0;
+                    .separator{
+                        margin: 10px 0;
+                    }
+                    .page-main-header{
+                        font-size: 2.5em;
+                    }
                 }
-                .page-main-header{
-                    font-size: 2.5em;
-                }
-            }
         }
     }
 
@@ -229,6 +237,22 @@
                         background-image: url(/sites/default/files/ABOUT%20US/about-us-icon/international-W.png);
                     }
                 }
+                &.study-physio{
+                    &:before{
+                        background-image: url(/sites/default/files/ABOUT%20US/about-us-icon/study-physio-B.png);
+                    }
+                    &:after{
+                        background-image: url(/sites/default/files/ABOUT%20US/about-us-icon/study-physio-W.png);
+                    }
+                }
+                &.work-in-oz{
+                    &:before{
+                        background-image: url(/sites/default/files/ABOUT%20US/about-us-icon/work-in-oz-B.png);
+                    }
+                    &:after{
+                        background-image: url(/sites/default/files/ABOUT%20US/about-us-icon/work-in-oz-W.png);
+                    }
+                }
             }
             .box-title{
                 margin: 10px 0;
@@ -306,8 +330,18 @@
             top: 0;
             left: 50%;
             transform: translate(-50%,0);
-            pointer-events: none
-          }
+            pointer-events: none;
+            @media @larger-phone-width-down{
+                width: 150vw;
+            }
+        }
+    }
+
+    /* IPAD SCREEN */
+    @media @tablet-width-down{
+        #block-system-main .content .node .post-content{
+            padding-top: 0;
+        }
     }
 }
 
@@ -316,7 +350,16 @@
 .page-node-149{
     /* BANNER */
     #section-banner .region-banner > div{
-        min-height: 450px;
+        min-height: 500px;
+        @media @desktop-width-down {
+            min-height: 400px
+        }
+        @media @tablet-width-down {
+            min-height: 300px
+        }
+        @media @larger-phone-width-down {
+            min-height: 200px
+        }
     }
     .border-10{
         border-bottom: 10px solid #e7e8ea;
@@ -582,6 +625,9 @@
                 align-items: center;
                 margin: 0px 0px 5% 0;
                 position: relative;
+                @media @larger-phone-width-down{
+                    max-width: 48%;
+                }
                 .brochure-cover{
                     position: absolute;
                     top: 0;
@@ -937,6 +983,9 @@
     #block-block-175{
         .img-parallax{
             margin-top: 140px;
+            @media @larger-tablet-width-down {
+                margin-top: 30px;
+            }
         }
     }
 
