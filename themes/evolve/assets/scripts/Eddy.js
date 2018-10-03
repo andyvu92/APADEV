@@ -123,4 +123,7 @@ jQuery(document).ready(function($) {
 	if(window.location.pathname.indexOf("/contact-us") == 0) {
 		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.contact-usnavicon').parent().addClass("active");
 	}
+	
+	/* Client link new page */
+	$("#clients-block div.bxslide a").attr("target", "_blank");
 });
