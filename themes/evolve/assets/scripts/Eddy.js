@@ -83,9 +83,10 @@ jQuery(document).ready(function($) {
 	});
 	
 	/* Menu control */
-	if(window.location.pathname.indexOf("/home/homeMain") == 0) {
+	if(window.location.pathname.indexOf("/home/homeMain") == 0 || window.location.pathname.indexOf("aboutus/partners") == 0) {
 		window.location.replace("/");
 	}
+	
 	if(window.location.pathname.indexOf("/home") == 0) {
 		$('#block-dexp-menu-dexp-menu-block-1 .menu li a i.homenavicon').parent().addClass("active");
 	}

@@ -446,9 +446,9 @@ apa_function_dashboardLeftNavigation_form();
 		<div class="col-xs-12 none-padding" >
 				<div class="nav-chevron">
 					<ul class="nav nav-tabs">
-							<li id="yourdetail1"><a class="event1" style="cursor: pointer;"><span class="text-underline eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
+							<li id="yourdetail1"><a class="event1" style="cursor: pointer;"><span class="<?php if(!isset($_SESSION["paymentTabTag"]) && !isset($_POST["deleteID"]) && !isset($_POST["setCardID"]))echo 'text-underline';?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
 							<?php if($details['MemberTypeID']!="1"): ?><li id="yourdetail2"><a class="event2" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li><?php endif;?>
-							<li id="yourdetail3"><a class="event13" style="cursor: pointer;"><span class="eventtitle13" id="payment"><strong>Payment information</strong></span></a></li>
+							<li id="yourdetail3"><a class="event13" style="cursor: pointer;"><span class="eventtitle13 <?php if(isset($_SESSION["paymentTabTag"]) || isset($_POST["deleteID"]) || isset($_POST["setCardID"]))echo 'text-underline';?>" id="payment"><strong>Payment information</strong></span></a></li>
 							<?php if($details['MemberTypeID']!="31" && $details['MemberTypeID']!="32" && $details['MemberTypeID']!="1"): ?><li id="yourdetail4"><a class="event3" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li><?php endif; ?>
 							<?php if($details['MemberTypeID']!="1"): ?><li id="yourdetail5"><a class="event4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li><?php endif;?>
 					</ul>
@@ -475,7 +475,7 @@ apa_function_dashboardLeftNavigation_form();
 			<form action="<?php echo $url;?>" name="your-details" method="POST" novalidate>
 			    <input type="hidden" name="step1" value="1"/>
 				<input type="hidden" name="Specialty" value="<?php echo$details['Specialty'];?>">
-				<div class="down1">
+				<div class="down1" <?php if(isset($_SESSION["paymentTabTag"]) || isset($_POST["deleteID"]) || isset($_POST["setCardID"]))echo 'style="display:none;"';?>>
 					<div class="col-xs-12 none-padding none-margin">
 						<div class="col-xs-12 none-margin">
 							<label class="note-text"><span class="tipstyle"> *</span>Required fields</label>
@@ -1083,7 +1083,7 @@ apa_function_dashboardLeftNavigation_form();
 				</div>-->
 					<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button12"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>-->
 				</div>
-				<div class="down13"  style="display:none;" >
+				<div class="down13"  <?php if(!isset($_SESSION["paymentTabTag"]) && !isset($_POST["deleteID"]) && !isset($_POST["setCardID"])) {echo 'style="display:none;"';}?> >
 				<?php
 				// 2.2.12 - GET payment listing
 				// Send - 
@@ -1093,6 +1093,7 @@ apa_function_dashboardLeftNavigation_form();
 				// Name on card, Digits, Exp date, Roll over],  Main card
 				$test['id'] = $_SESSION["UserId"];
 				$cardsnum = GetAptifyData("12", $test);
+				unset($_SESSION["paymentTabTag"]);
 				//print_r($cardsnum);
 				//$cardsnum = $cardsnums["paymentcards"];
 				//$_SESSION["cardsnum"]= $cardsnum;
@@ -2104,7 +2105,7 @@ apa_function_dashboardLeftNavigation_form();
 			</form>
 		</div>
 		<div id="deleteCardWindow" style="display:none;">
-			<form action="your-details?action=delete" method="POST" id="deleteCardForm">
+			<form action="your-details" method="POST" id="deleteCardForm">
 				<h3 id="deletecardMessage" class="light-lead-heading cairo">Are you sure you want to delete this card?</h3>
 				<div id="checkMessage" class="display-none">
 					<span>We are not able to delete these payment details.</span><br>

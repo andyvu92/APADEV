@@ -678,18 +678,9 @@ if($resultdata['result']) {
 		// log-in
 		$arrIn["ID"] = $id;
 		$arrIn["Password"] = $pass;
-		$result = GetAptifyData("7", $arrIn);
-		if(isset($result["ErrorInfo"])) {
-			//echo $result["ErrorInfo"]["ErrorMessage"];
-			echo "
-				<script>
-					jQuery(document).ready(function(){
-						$('#main-signin-form .checkmessage').show();
-						$('.LogInPadding .info').click();
-					});
-				</script>
-			";
-		} else {
+		//$result = GetAptifyData("7", $arrIn);
+		$result = aptify_api_login($email_address=$id, $password=$pass);
+		if(!isset($_SESSION["loginFail"])) {
 			// logged in
 			//print_r($result);
 			logRecorder();
@@ -733,19 +724,12 @@ if($resultdata['result']) {
 		// 
 		$result = GetAptifyData("8", "logout");
 		if(isset($result["ErrorInfo"])) {
+			
 			echo $result["ErrorInfo"]["ErrorMessage"];
 			echo "<br>log-out fail";
 		} else {
-			echo '<div class="GetCentreLayoutHome">
-					<div class="ASection">
-						<div class="Desktop">
-							<p>You are successfully logged out!</p>
-						</div>
-						<div class="Mobile">
-							<p>You are successfully logged out!</p>
-						</div>
-					</div>
-				</div>';
+			$_SESSION['logoutmessage'] =1;
+			
 		}
 		//print_r($result);
 		logRecorder();
@@ -809,6 +793,30 @@ if(isset($_SESSION['UserId'])) {
 	$counts = 0;
 }
 ?>
+<?php if(isset($_SESSION["loginFail"])): ?>
+	
+	<script>
+		jQuery(document).ready(function(){
+			
+			$('#main-signin-form .checkmessage').show();
+			$('.LogInPadding .info').click();
+		});
+	</script>
+	<?php unset($_SESSION["loginFail"]); ?>
+<?php endif; ?>
+<?php if(isset($_SESSION['logoutmessage'])):?>
+<div class="GetCentreLayoutHome">
+	<div class="ASection">
+		<div class="Desktop">
+			<p>You are successfully logged out!</p>
+		</div>
+		<div class="Mobile">
+			<p>You are successfully logged out!</p>
+		</div>
+	</div>
+</div>
+<?php unset($_SESSION["logoutmessage"]); ?>
+<?php endif;?>
 <?php if(isset($_SESSION["Log-in"])): ?>
 <div class="pull-right borderLeftForTop borderLeftForTopRight" title="Other websites">
 <div class="ButtonIconHolder OthersiteButton">
@@ -933,11 +941,6 @@ if(isset($_SESSION['UserId'])) {
 					</div>-->
 					<?php $the_form = drupal_get_form('apa_create_log_in_form');
                     print drupal_render($the_form);	?>
-
-					<div class="flex-cell checkmessage" style="display: none">
-						<span>Incorrect username or password</span>
-					</div>
-
 					<!--<div class="flex-cell login-btn">
 						<input type="submit" value="Login">
 					</div>-->
