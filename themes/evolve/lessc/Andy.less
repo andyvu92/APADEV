@@ -1964,6 +1964,9 @@ input{
     left: 50%;
     pointer-events: none;
     max-width: unset;
+    @media @larger-phone-width-down{
+        width: 150vw;
+    }
 }
 
 
@@ -2032,9 +2035,9 @@ input{
                     cursor: default;
                 }
                 & + h2{
-                    font-family: Roboto;
-                    color: #848688;
-                    font-size: 2em;
+                        font-family: Roboto;
+                        color: #848688;
+                        font-size: 2em;
                 }
             }
         }
