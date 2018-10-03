@@ -83,7 +83,7 @@ jQuery(document).ready(function($) {
 	});
 	
 	/* Menu control */
-	if(window.location.pathname.indexOf("/home/homeMain") == 0 || window.location.pathname.indexOf("aboutus/partners") == 0) {
+	if(window.location.pathname.indexOf("/home/homeMain") == 0 || window.location.pathname.indexOf("aboutus/partners") == 0 || window.location.pathname.indexOf("advocacy/submission") == 0) {
 		window.location.replace("/");
 	}
 	

@@ -260,7 +260,7 @@ if(isset($_POST['step1'])) {
 	// Send - 
 	// UserID 
 	// Response - UserID & detail data
-	$test = GetAptifyData("5", $postData);
+	$test = aptify_get_GetAptifyData("5", $postData);
 	unset($_SESSION["Regional-group"]);
 	if(isset($_GET['Goback']) && ($_GET['Goback']=="PD")){
 		header("Location:".$link."/pd/pd-shopping-cart");	
@@ -296,7 +296,7 @@ if(isset($_POST['step1'])) {
 // Post graduate country, Year attained, Additional qualifications
 if(isset($_SESSION["UserId"])) {
 	$data = "UserID=".$_SESSION["UserId"];
-	$details = GetAptifyData("4", $data,""); // #_SESSION["UserID"];
+	$details = aptify_get_GetAptifyData("4", $data,""); // #_SESSION["UserID"];
 	//2.2.43 -get user installment data test part
 	//$installmentData['id'] = $_SESSION["UserId"];
 	//$installmentOrder = GetAptifyData("43", $installmentData);

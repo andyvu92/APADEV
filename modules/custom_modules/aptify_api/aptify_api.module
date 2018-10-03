@@ -170,9 +170,18 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
         $headers[]="AptifyAuthorization: Web ".$token;
     }
 
-    $headers[] = "Content-Type:application/json";
+    if($method == "Image" || $method == "Order" || $method == "JSON") {
+        $headers[] = "Content-Type:application/json";
+    } elseif($method == "Secure" || $method == "SecureNoToken") {
+        $headers[] = "Content-Type:application/x-www-form-urlencoded";
+    } elseif($method == "JSON") {
+        $headers[] = "Content-Type:application/json";
+    } elseif($method == "PDF") {
+        $headers[] = "AptifyAuthorization: DomainWithContainer ".$data;
+    }
+    //$headers[] = "Content-Type:application/json";
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
+    /*
     if($method === 'POST') {
         $request_data = drupal_json_encode($data);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $request_data);
@@ -183,17 +192,47 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
         $request_data = drupal_json_encode($data);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $request_data);
         curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-    }
+    }*/
+
+    if($method == "JSON"||$method == "Image"|| $method == "Order") {
+		if(!empty($data) || $data != null) {
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS,$data);
+		}
+    } elseif($method == "Secure" || $method == "SecureNoToken") {
+		if(!empty($data) || $data != null) {
+			$secureData = http_build_query($data);
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS,$secureData);
+		}
+	} elseif($method == "GetPost") {
+		curl_setopt($ch, CURLOPT_POST, 1);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Length: 0'));
+		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(array()));
+	} elseif($method == "PDF") {
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+	}
 
     /** @todo : Add custom calls i.e, "GetPost" from AptifyAPI.php */
 
     // URL.
     $request_url = $base_url . $path;
-    if ($method === 'GET' && !empty($data)) {
-        $request_url .= '?' . http_build_query($data);
+    if (!empty($data)) {
+        if($method === 'GET' || $method === 'GetPost') {
+            //$request_url .= '?' . http_build_query($data);
+            $request_url .= '?' . $data;
+            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+        }
     }
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     curl_setopt($ch, CURLOPT_URL, $request_url);
+    curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+	curl_setopt($ch, CURLOPT_ENCODING, "");
+	curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+	curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+	curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+    // todo! You must do this before go live!
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
     $result = curl_exec($ch);
 
@@ -287,6 +326,456 @@ function aptify_get_event_search_result(array $data) {
     return _aptify_api_call("28",$path, _aptify_get('TokenId'), $data);
 }
 
+
+
+/**
+ * Call every APIs' url here
+ * -Eddy-
+ */
+function aptify_get_GetAptifyData($TypeAPI, $ArrayIn) {
+	// Array to JSON
+	$arrayToJson = drupal_json_encode($ArrayIn);
+	// pass array and JSON version together and use them as needed.
+    $jsonreturn = aptify_get_url_by_number($TypeAPI, $ArrayIn, $arrayToJson);
+
+    return $jsonreturn;
+}
+
+function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
+    switch($APItype){
+        case "0":
+            // JSON persar
+            // Eddy - done check;
+            //echo "<br />1. Dashboard Main: <br />";
+            $API = "/services/DataObjects/spGetMemberDetailsForSSO__c?";
+            $passInput = "Userid=".$variables;
+            $APIreturn = $API. $passInput;
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "0. SSO details Endpoint");
+            return $outputReturn;
+            //return "Test! 0 in";
+        case "1":
+            // Eddy - done check;
+            //echo "<br />1. Dashboard Main: <br />";
+            $API = "/DataObjects/spGetDashboardMainDetailsForUserID__c";
+            $passInput = "Userid=".$variables;
+            //return $outputReturn;
+            return _aptify_api_call("1. Dashboard Main",$API, _aptify_get('TokenId'), $passInput);
+        case "2":
+            // Eddy - done check;
+            //echo "<br />2. Get membership Certificate PDF: <br />";
+            $AptifyAuth = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=appsvruser&Password=R#D8_Hn@4p';
+            $AuthToken = curlRequest($AptifyAuth, "Get", "");
+            $AuthToken = json_decode($AuthToken, true);
+            $AuthToken = $AuthToken["TokenId"];
+
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=151&";
+            $passInput = "EntityRecordID=".$variables."&AptifyAuthorization=DomainWithContainer%20".$AuthToken;
+            $API = $API.$passInput;
+            $APItt = "https://aptifyweb.australian.physio/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=150&";
+            $passInputt = "EntityRecordID=".$variables."&AptifyAuthorization=DomainWithContainer%20".$AuthToken;
+            $APItt = $APItt.$passInput;
+            $APIs["M"] = $API;
+            $APIs["I"] = $APItt;
+            return $APIs;
+        case "3":
+            // Eddy - done check;
+            //echo "<br />3. Get membership insurance certificate PDF: <br />";
+            $AptifyAuth = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=appsvruser&Password=R#D8_Hn@4p';
+            $AuthToken = curlRequest($AptifyAuth, "Get", "");
+            $AuthToken = json_decode($AuthToken, true);
+            $AuthToken = $AuthToken["TokenId"];
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=150&";
+            $passInput = "EntityRecordID=".$variables."&AptifyAuthorization=DomainWithContainer%20".$AuthToken;
+            $API = $API.$passInput;
+            $JSONreturn = curlRequest($API, "PDF", $AuthToken);
+            return $API;
+        case "4":
+            //API test by JingHu
+            //echo "<br />4. Dashboard - Get member detail: <br />";
+            $API = "/GetDBMemberDetails";		
+            return _aptify_api_call("4. Dashboard - Get member detail",$API, _aptify_get('TokenId'), $variables);
+            break;
+        case "5":
+            //API test by JingHu
+            //echo "<br />5. Member detail - Update: <br />";
+            $API = "/DMemberDetailUpdate";
+            return _aptify_api_call("5. Member detail - Update",$API, _aptify_get('TokenId'), $jsonVersion,"JSON");
+            break;
+        case "6":
+            // Eddy;
+            //echo "<br />6. Dashboard - Forgot password: <br />";
+            if(isset($variables["Token"])) {
+                $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/PasswordReset/Web";
+                $JSONreturn = curlRequest($API, "SecureNoToken", $variables);
+            } else {
+                $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/PasswordResetRequest/Web?";
+                $variable = "UserName=".$variables["email"]."&email=".$variables["email"];
+                $JSONreturn = curlRequest($API, "GetPost", $variable);
+            }
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "6. Dashboard - Forgot password");
+            return $outputReturn;
+        case "7":
+            // Eddy - done check;
+            //echo "<br />7. Dashboard - log-in: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/Web?";
+            $variable = "UserName=".$variables['ID']."&Password=".$variables['Password'];
+            $JSONreturn = curlRequest($API, "Get", $variable);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "7. Dashboard - log-in");
+            return $outputReturn;
+        case "8":
+            // Eddy - done check;
+            //echo "<br />8. Dashboard - Log-out: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Logout";
+            $JSONreturn = curlRequest($API, "", "");
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "8. Dashboard - Log-out");
+            return $outputReturn;
+        case "9":
+            // Eddy - done check;
+            //echo "<br />9. Dashboard - change password: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/UpdatePassword";
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "9. Dashboard - change password");
+            return $outputReturn;
+        case "10":
+            //API test by JingHu
+            //echo "<br />10. Dashboard - Get picture: <br />";
+            $PersonID = $_SESSION['LinkId'];
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/ImageField/Persons/".$PersonID."/Photo";		
+            $JSONreturn = curlRequest($API, "Get", "");
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "10. Dashboard - Get picture");
+            return $outputReturn;
+            break;
+        case "11":
+            //API test by JingHu
+            //echo "<br />11. Dashboard - Update picture: <br />";
+            $API = "/GenericEntity/SaveData";
+            return _aptify_api_call("11. Dashboard - Update picture",$API, _aptify_get('TokenId'), $jsonVersion,"Image");
+            break;
+        case "12":
+            //API test by JingHu
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/DataObjects/spGetPaymentListing__c?";
+            //echo "<br />12. Dashboard - Get payment listing: <br />";
+            $data = "UserID=".$variables["id"];
+            $JSONreturn = curlRequest($API, "Get", $data);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "12. Dashboard - Get payment listing");
+            return $outputReturn;
+            break;
+        case "13":
+            //API test by JingHu
+            //echo "<br />13. Dashboard - update payment method: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/ProcessFlow/UpdatePaymentMethod__c";
+            $JSONreturn = curlRequest($API, "Secure", $variables); 
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "13. Dashboard - update payment method");
+            return $outputReturn;
+            break;
+        case "14":
+            // Merged together with Case 13
+            //echo "<br />14. Delete payment method: <br />";
+            $JSONreturn = "";
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "14. Delete payment method");
+            return $outputReturn;
+        case "15":
+            //API test by JingHu
+            //echo "<br />15. Dashboard - Add payment method: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/AddPaymentMethod";
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "15. Dashboard - Add payment method");
+            return $outputReturn;
+            break;
+        case "16":
+            //API test by JingHu
+            //echo "<br />16. Dashboard - Check existing email: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/VerifyUserName/".$variables["ID"];
+            $JSONreturn = curlRequest($API, "JSON",""); 
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "16. Dashboard - Check existing email");
+            return $outputReturn;
+        case "17":
+            // Eddy - done check;
+            //echo "<br />17. Dashboard - Get payment history list: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOrderDetails?";
+            $sent = "UserID=".$variables["ID"];
+            $JSONreturn = curlRequest($API, "Get", $sent);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "17. Dashboard - Get payment history list");
+            return $outputReturn;
+        case "18":
+            // Eddy
+            //echo "// 18. Get payment invoice PDF: <br />";
+            $AptifyAuth = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=appsvruser&Password=R#D8_Hn@4p';
+            $AuthToken = curlRequest($AptifyAuth, "Get", "");
+            $AuthToken = json_decode($AuthToken, true);
+            $AuthToken = $AuthToken["TokenId"];
+            $returnArr = Array();
+            foreach($variables as $var) {
+                $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Orders&ReportId=154&";
+                $passInput = "EntityRecordID=".$var."&AptifyAuthorization=DomainWithContainer%20".$AuthToken;
+                $API = $API.$passInput;
+                array_push($returnArr, $API);
+            }
+            return $returnArr;
+        case "19":
+            // Eddy - done check;
+            //echo "<br />19. Dashbaord - Get list of National Group: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/NationalGroupProducts/";
+            $API = $API.$variables["UserID"];
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "19. Dashbaord - Get list of National Group");
+            return $outputReturn;
+        case "20":
+            // Eddy - done check;
+            //echo "<br />20. Dashboard - Get list of subscribed National Group: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/DataObjects/spGetListOfSubscribedNationalGroup__c?";
+            $var = "UserID=".$variables["UserID"];
+            $JSONreturn = curlRequest($API, "Get", $var);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "20. Dashboard - Get list of subscribed National Group");
+            return $outputReturn;
+        case "21":
+            // Eddy - done check;
+            //echo "<br />21. Dashboard - Get list of Fellowship Products: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/FellowshipProducts/-1";
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "21. Dashboard - Get list of Fellowship Products");
+            return $outputReturn;
+        case "22":
+            // Eddy - done check;
+            //echo "<br />22. Dashboard - Get list of subscribed Fellowship Product: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/DataObjects/spGetListOfSubscribedFellowshipProducts__c?";
+            $var = "UserID=".$variables["UserID"];
+            $JSONreturn = curlRequest($API, "Get", $var);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "22. Dashboard - Get list of subscribed Fellowship Product");
+            return $outputReturn;
+        case "23":
+            // Eddy - done check;
+            //echo "<br />23. Dashbard - Get list of Subscription preferences: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/DataObjects/spGetListOfSubscriptionPreferences__c?";
+            $var = "UserID=".$variables["UserID"];
+            $JSONreturn = curlRequest($API, "Get", $var);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "23. Dashbard - Get list of Subscription preferences");
+            return $outputReturn;
+        case "24":
+            // Eddy - done check;
+            //echo "<br />24. Dashbaord - Update subscription preferences: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/UpdateSubscriptionPref";
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "24. Dashbaord - Update subscription preferences");
+            return $outputReturn;
+        case "25":
+            //API test by JingHu
+            //echo "<br />25. User Registration: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/UserRegistration";
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "25. User Registration");
+            return $outputReturn;
+            break;
+        case "26":
+            //API test by JingHu
+            //echo "<br />26. REgister a new member order: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/PlaceOrder";
+            $JSONreturn = curlRequest($API, "Order", $jsonVersion);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "26. REgister a new member order");
+            return $outputReturn;
+            break;
+        case "27":
+            //API test by JingHu
+            //echo "<br />27. Renew membership order: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/RenewMembershipOrder";
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "27. Renew membership order");
+            return $outputReturn;
+        case "28":
+            // Eddy 
+            //echo "<br />28. PD - Get event search result list: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/PDGetEventSearchResultsList";
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "28. PD - Get event search result list");
+            return $outputReturn;
+        case "29":
+            // Eddy 
+            //echo "<br />29. PD - Get event detail: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/PDGetEventDetail";
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "29. PD - Get event detail");
+            return $outputReturn;
+        case "30":
+            // Eddy 
+            //echo "<br />30. PD - Get event detail list: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/PDGetEventDetailList";
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "30. PD - Get event detail list");
+            return $outputReturn;
+        case "31":
+            //API test by JingHu
+            //echo "<br />31. Get Membership product price: <br />";
+            //$API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/".$_SESSION['UserId'];
+            if(isset($_SESSION['UserId'])){
+                $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/".$_SESSION['UserId'];}
+            else{
+                $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/-1";	
+            }
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "31. Get MEmbership product price");
+            return $outputReturn;
+        case "32":
+            //echo "<br />32. Order confirmation: <br />";
+            // For the actual API use - user User registration instead
+            $JSONreturn = '{
+                "Orderstatus":"done!",
+                "InvoiceID":"12"
+            }';
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "32. Order confirmation");
+            return $outputReturn;
+        case "33":
+            // Eddy - done check;
+            //echo "<br />33. Get CPD diary: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetEducationUnits__c/";
+            $var = $variables;
+            $JSONreturn = curlRequest($API, "Get", $var);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "33. Get CPD diary");
+            return $outputReturn;
+        case "34":
+            // Eddy - done check;
+            //echo "<br />34. Insert CPD diary: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/CreateNonAPAEducationUnits";
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+            //$JSONreturn = "Successfully updated!! :)";
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "34. Insert CPD diary");
+            return $outputReturn;
+        case "35":
+            // Eddy
+            // echo "<br />35. Find a Physio data: <br />";
+            // cron.
+            $JSONreturn = "";
+            return $JSONreturn;
+        case "36":
+            //API test by JingHu
+            //echo "<br />36. Get workplace settings list <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/DataObjects/spGetWorkPlaceSettings__c";
+            $JSONreturn = curlRequest($API, "Get", "");
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "36. Get workplace settings list ");
+            return $outputReturn;
+        case "37":
+            // Merged to 39
+            //echo "<br />37. Get special interest area list <br />";
+            $JSONreturn = "";
+            return $JSONreturn;
+        case "38":
+            // Eddy
+            //echo "<br />38. Get NON-APA CPD point's PDF<br />";
+            $AptifyAuth = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=appsvruser&Password=R#D8_Hn@4p';
+            $AuthToken = curlRequest($AptifyAuth, "Get", "");
+            $AuthToken = json_decode($AuthToken, true);
+            $AuthToken = $AuthToken["TokenId"];
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=152&";
+            $passInput = "EntityRecordID=".$variables."&AptifyAuthorization=DomainWithContainer%20".$AuthToken;
+            $API = $API.$passInput;
+            return $API;
+        case "39":
+            // For the actual API use
+            //echo "<br />39. Get dropdown option list: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOptionValues";		
+            $JSONreturn = curlRequest($API, "", "Get");
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "39. Get dropdown option list");
+            return $outputReturn;
+        case "40":
+            // test by Jing Hu
+            //echo "<br />40. Get Insurance Data: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/DataObjects/spGetPersonInsuranceData__c?";
+            $insuranceData ="UserID=".$variables["ID"];
+            $JSONreturn = curlRequest($API, "Get", $insuranceData);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "40. Get Insurance Data");
+            return $outputReturn;
+        case "41":
+            // test by Jing Hu
+            //echo "<br />41. Save Insurance Data: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/GenericEntity/SaveData";
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "41. Save Insurance Data");
+            return $outputReturn;
+        case "42":
+            // test by Jing Hu
+            //echo "<br />42. Sign up: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/CreateWebUser";
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "42. Sign up");
+            return $outputReturn;
+        case "43":
+            // test by Jing Hu
+            //echo "<br />43. Get installment details for the user: <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/DataObjects/spGetUserInstallmentDetails__c?";
+            $data = "UserID=".$variables["id"];
+            $JSONreturn = curlRequest($API, "Get", $data);	
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "43. Get installment details for the user");
+            return $outputReturn;
+        case "44":
+            // test by Jing Hu
+            //echo "<br />44. Get Order Details <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/OrderDetails/";
+            $JSONreturn = curlRequest($API, "Get", $variables);	
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "44. Get Order Details ");
+            return $outputReturn;
+        case "45":
+            // test by Jing Hu
+            //echo "<br />45. Get Renewal Quatation OrderID <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/DataObjects/spGetQuatationOrderID__c?";
+            $data = "UserID=".$variables["id"];
+            $JSONreturn = curlRequest($API, "Get", $data);	
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "45. Get Renewal Quatation OrderID ");
+            return $outputReturn;
+        case "46":
+            // test by Jing Hu
+            //echo "<br />46. Get Order payment schedules <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/DataObjects/spGetOrderPaymentScheduledDetails__c?";
+            $data = "OrderID=".$variables["id"];
+            $JSONreturn = curlRequest($API, "Get", $data);	
+            return $JSONreturn['results'];
+            array_push($outputReturn, $JSONreturn['results']);
+            array_push($outputReturn, "46. Get Order payment schedules ");
+            return $outputReturn;
+        case "47":
+            // test by Jing Hu
+            //echo "<br />47. Get calculating the Order Total and Schedule Payments <br />";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOrderPaymentDetail";
+            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);	
+            array_push($outputReturn, $JSONreturn);
+            array_push($outputReturn, "47. Get calculating the Order Total and Schedule Payments ");
+            return $outputReturn;
+    }
+}
 /**
  * Helper function to log values in Drupal's Watchdog (DBlog)
  * It will only work if Debug mode is on at admin/config/system/aptifyapi
