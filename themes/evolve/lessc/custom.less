@@ -1564,7 +1564,7 @@ ul.socials li a {
 	font-size: 9px;
 } */
 
-/*--DEFAULT BEHAVIOURS*/
+/* DEFAULT APPEARANCE */
 a{
 	cursor: pointer;
 	color: #007ac9;
@@ -1584,4 +1584,32 @@ input, select, button{
 /* DASHBOARD ADS BLOCK */
 #block-block-308{
 	position: absolute;
+}
+
+/* MULTI SELECT CUSTOM STYLES */
+.selectize-control.multi .selectize-input.disabled>div{
+	color: grey;
+    background: #eeeeee;
+    border: 1px solid rgba(77,77,77, 0.7);
+}
+
+/* DRUPAL FORM ELEMENTS */
+.form-type-select select:focus{
+	background: none;
+}
+
+/* DRUPAL ERROR MESSAGEs */
+#messages{
+	.alert-danger{
+		border-color: @orange;
+		color: @orange;
+		font-size: 1.2em;
+		background: none;
+		border-radius: 0;
+	}
+	.alert-dismissable .close{
+		font-size: 2em!important;
+		top: -8px;
+		padding: 0!important;
+	}
 }

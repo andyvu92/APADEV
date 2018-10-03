@@ -218,7 +218,23 @@ $DiaryAll = Array();
 <!--/div-->
 <?php logRecorder(); ?>
 <?php  else: ?>
-<p>If you’re not already a member, <a href="/membership-question">join us today.</a></p>
+	<!-- USER LOGGED IN BUT NOT A MEMBER  -->
+	<div class="flex-container" id="non-member">
+		<div class="flex-cell">
+			<h3 class="light-lead-heading">If you’re not already a member,<br> join us today.</h3>
+		</div>
+		<div class="flex-cell cta">
+			<a href="/membership-question" class="join">Join now</a>
+		</div>
+
+		<?php 
+				$block = block_load('block', '309');
+				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+				$output = drupal_render($get);        
+				print $output;
+		?>
+
+	</div>
 <?php endif;?>
 <?php else:?>
 	<!-- NON-LOGIN MESSAGE -->

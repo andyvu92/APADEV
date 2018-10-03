@@ -571,7 +571,7 @@ function add_payment_card($form, &$form_state){
 			drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
 		}
 		else{
-			drupal_set_message('<div class="checkMessage">there was an unexpected error with your payment details, Please go back and check they are correct, or contact the APA.</div>',"error");
+			drupal_set_message('<div class="checkMessage">There was an unexpected error with your payment details, please go back and check they are correct, or contact the APA.</div>',"error");
 		}
 	}
 	

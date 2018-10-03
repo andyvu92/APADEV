@@ -1992,3 +1992,88 @@ input{
 #section-banner .contextual-links-region {
     z-index: 10!important;
 }
+
+/* SEARCH RESULT PAGE */
+.page-search-node{
+    #section-main-content{
+        padding: 50px 0;
+        .MainContent{
+            width: 100%;
+            .search-form{
+                display: block;
+                width: 50%;
+                margin: 0 auto;
+                position: relative;
+                margin-bottom: 50px;
+                #edit-basic .form-item{
+                    text-align: center;
+                    label{
+                        font-size: 3em;
+                        margin-bottom: 25px;
+                        display: block;
+                        color: @bright-blue;
+                    }
+                    input{
+                        width: 100%;
+                        background: none;
+                        padding-left: 100px;
+                    }
+                }
+                #edit-basic{
+                    position: relative;
+                }
+                #edit-submit{
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    background: none;
+                    color: #848688;
+                    pointer-events: none;
+                    cursor: default;
+                }
+                & + h2{
+                    font-family: Roboto;
+                    color: #848688;
+                    font-size: 2em;
+                }
+            }
+        }
+
+        /* ADVANCED SEARCH BLOCK */
+        .search-advanced{
+            margin-top: 25px;
+            legend{
+                border: 0!important;
+            }
+        }
+        .criterion{
+            width: 40%;
+            margin-right: 0;
+            padding-right: 20px;
+            input{
+                background: none;
+            }
+            & + .criterion{
+                width: 60%;
+                margin-right: 0;
+                .form-checkboxes{
+                    .form-item{
+                        width: 50%;
+                        float: left;
+                    }
+                }
+            }
+        }
+        .action{
+            input{
+                &:hover{
+                    color: #fff;
+                    opacity: 0.8;
+                }
+                &:focus{
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

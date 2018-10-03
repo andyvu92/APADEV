@@ -10,8 +10,8 @@ jQuery(document).ready(function($) {
     $('.bx-next').html("<i class='fa fa-angle-right'></i>");
     $('[class^=event]').click(function(){
 		var x = $(this).attr("class").replace('event', '');
-        $('[class^=down]:not(.down'+x+')').slideUp(400);
-	    $('.down' + x).slideToggle(450);
+        $('[class^=down]:not(.down'+x+')').hide();
+	    $('.down' + x).fadeIn();
 		$('[class^=event]:not(.event'+x+') span').removeClass("text-underline");
 		var eventtitle = "eventtitle"+x;
 		$("span." + eventtitle).addClass("text-underline");

@@ -638,5 +638,13 @@ jQuery(document).ready(function(){
       $('#'+ target + ' dt').removeClass('active');
       $('#'+ target + ' dd').hide();
     });
+
+    // MOVE ERROR MESSAGES TO TOP
+    $( ".dashboard_detail" ).prepend( $('#messages') );
+
+    // STYLED CHECKBOX FOR SEARCH RESULT PAGE
+    if ( $('.html').find('.form-checkboxes').length > 0 ){
+      $('.form-checkboxes input').addClass('styled-checkbox');
+    }
 });
 
