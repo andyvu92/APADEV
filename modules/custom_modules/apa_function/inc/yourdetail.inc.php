@@ -2090,7 +2090,7 @@ apa_function_dashboardLeftNavigation_form();
 			</form>-->
 			<?php //apa_payment_card_form();
 			// print drupal_render(drupal_get_form('apa_payment_card_form')));
-			$the_form = drupal_get_form('apa_create_log_in_form');
+			$the_form = drupal_get_form('apa_create_payment_card_form');
              print drupal_render($the_form);			 
 			?>
 		</div>
