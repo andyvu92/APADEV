@@ -519,6 +519,11 @@ jQuery(document).ready(function(){
     }
   });
 
+  $('#choose-physio-radio').on('ended', function(){
+    $('.radio-btn').removeClass('pause');
+    $('.radio-btn').html('Play');
+  });
+
 // ALERT WINDOWS FOR IE/EGDE
   $( window ).load(function() {
     if( /msie|trident|edge/g.test(navigator.userAgent.toLowerCase()) && !sessionStorage.getItem('firstVisit') ) { 
@@ -576,7 +581,7 @@ jQuery(document).ready(function(){
 jQuery(document).ready(function(){
 
   // FOOTER NAVIGATION DROPDOWN ON MOBILE
-  $(document).on('click', '.footer-block .chevron-circle', function(){
+  $(document).on('click', '.footer-block .footer-block-header', function(){
     target = $(this).attr('id');
     if ( $(this).hasClass('active') ){
       $(this).removeClass('active');
@@ -607,12 +612,31 @@ jQuery(document).ready(function(){
     $(document).on('click', '#custom-nav-toggle', function(){
       $(this).toggleClass('active');
       $('.html').toggleClass('menu-open');
+
+      if( $('.html').hasClass('menu-open') ){
+        //$('.html').delay(5000).css('overflow', 'hidden');
+        $('.html').delay(300).queue(function (next) { 
+            $(this).css('overflow', 'hidden'); 
+            next();
+        });
+      }
+      else{
+        $('.html').css('overflow', 'auto');
+      }
     });
 
     // SEARCH FUNCTION MOBILE
     $(document).on('keyup', '#edit-search-block-form--2-mobile', function(){
       value = $(this).val();
       $('#search-block-form-mobile').attr('action', '/search/node/' + value)
+    });
+
+    // MINIMIZE ACCORDION ON PARTNERS POPUP
+    $(document).on('click', '.node-partners .portfolio-image > a', function() {
+      target = $(this).attr('popup-target');
+      console.log(target);
+      $('#'+ target + ' dt').removeClass('active');
+      $('#'+ target + ' dd').hide();
     });
 });
 

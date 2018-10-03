@@ -79,99 +79,32 @@
 * @ingroup themeable
 */
 ?>
-<div id="node-<?php print $node->nid; ?>" style="margin-top:30px;" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
-    <div class="post-img media">
-      <div class='mediaholder'>
-        <?php print render($content['field_picture']);?>
-      </div>
-    </div>
-    
-	<section class="post-content">
-    <header class="meta">
+<div id="node-<?php print $node->nid; ?>" style="margin-top:30px;" class="<?php print $classes; ?> clearfix post large flex-container" <?php print $attributes; ?>>
+	
+	
+	<?php /*
+	use this header as reference, but delete at the end
+	<header class="meta">
 		   <ul>
-          <?php /*
-		  <li><a href="#"><?php print t('Posted by'); ?><?php print theme('username', array('account' => $node)); ?></a></li>
-          */ ?>
-		  <li><?php print render($content['field_media_type']);?></li>
+          <li><a href="#"><?php print t('Posted by'); ?><?php print theme('username', array('account' => $node)); ?></a></li>
+          <li><?php print render($content['field_media_type']);?></li>
 		  <li><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></li>
 		   </ul>
-		   <h2><?php print $title; ?></h2>
+		   <h2><a href="<?php print $node_url; ?>">
+		   <?php print $title; ?></a></h2>
     </header>
-	<!-- hamburger init -->
-	<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 HamburgerTesterButton"><span class="fa dexp-menu-toggle">
-		<div class="hamburger hamburger--arrowalt-r" type="button">
-			<div class="hamburger-box HamburgerTester">
-				<div class="hamburger-inner"></div>
-			</div>
-		</div>
-	</span></div>
-	<script>
-		jQuery(document).ready(function($) {
-			$('.hamburger').click(function() {
-				$(this).toggleClass("is-active");
-			});
-			$('.page-node-273 #section-main-content .container .region-right-sidebar').attr('id', "out");
-			$('.HamburgerTester').click(function() {
-				var HamChanger = $('.page-node-273 #section-main-content .container .region-right-sidebar').attr('id');
-				if(HamChanger == "out") {
-					$('.page-node-273 #section-main-content .container .region-right-sidebar').attr('id', "in");
-				} else {
-					$('.page-node-273 #section-main-content .container .region-right-sidebar').attr('id', "out");
-				}
-				/*
-				var rightVal = $('.page-node-273 #section-main-content .container .region-right-sidebar').css("right");
-				if(rightVal != "0px") {
-					$('.page-node-273 #section-main-content .container .region-right-sidebar').animate({ right: "0px" }, 700 )
-				} else {
-					$('.page-node-273 #section-main-content .container .region-right-sidebar').animate({ right: "-800px" }, 700 )
-				}
-				*/
-			});
-		});
-	</script
-	<!-- hamburger done -->
-	<script src="https://apis.google.com/js/platform.js" async defer></script>
-	<ul class="socialMediaIcon">
-		<li>
-		<div class="fb-share-button" data-layout="button_count" data-mobile-iframe="true" data-size="small">&nbsp;</div>
-		</li>
-		<li><a class="twitter-share-button" data-show-count="false" href="https://twitter.com/share">Tweet</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8">&nbsp;</script></li>
-		<li><script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;</li>
-		<li><!-- Place this tag where you want the share button to render. -->
-		<div class="g-plus" data-action="share" data-annotation="none">&nbsp;</div>
-		</li>
-	</ul>
-	<div id="fb-root">&nbsp;</div>
-	<script>(function(d, s, id) {
-	  var js, fjs = d.getElementsByTagName(s)[0];
-	  if (d.getElementById(id)) return;
-	  js = d.createElement(s); js.id = id;
-	  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.9";
-	  fjs.parentNode.insertBefore(js, fjs);
-	}(document, 'script', 'facebook-jssdk'));</script><script type="text/javascript">
-	jQuery(document).ready(function($) {
-	var x = $(location).attr('href');
-	jQuery(document).ready(function($) {
-		$('.fb-share-button').html("<a class='fb-xfbml-parse-ignore' target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=" +  x  +  "&amp;src=sdkpreparse'></a>")
-	});
-
-	})
-	  </script>
-	  <?php
-        // We hide the comments and links now so that we can render them later.
+		*/ ?>
+	<?php
+		// We hide the comments and links now so that we can render them later.
+		//redirect:
+		$outLink = $content['field_externallinkclient']['#items'][0]["safe_value"];
+		
+		header("Location: ".$outLink);
+		exit;
         hide($content['comments']);
         hide($content['links']);
-        print render($content['body']);
+        print render($content['field_image']);
         ?>
-		
-	<?php if($content['field_media_type']['#items'][0]['taxonomy_term']->name == 'Media Release') {
-		$block = block_load('block', '219');      
-		$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-		$output = drupal_render($get);
-		print $output;
-	} ?>
-	<?php print render($content['field_media_tag']); ?>
-	</section>
-  
+
 </div> 
 
