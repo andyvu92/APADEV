@@ -88,6 +88,15 @@
 
 /* CAMPAIGN MAIN CONTENT / ABOUT || CHOOSE PHYSIO*/
 .page-node-528, .page-node-547{
+
+	/* MAIN CONTENT */
+	@media @larger-tablet-width-down{
+		padding: 50px 0px;
+		.MainContent{
+			width: 100%;
+		}
+	}
+
 	/* BANNER */
 	#section-banner{
         #block-block-301{
@@ -146,6 +155,9 @@
 		line-height: 1.1em;
 		display: block;
 		font-family: Cairo;
+		@media @larger-phone-width-down{
+			font-size: 3em;
+		}
 	}
 	h2.SectionHeader{
 		font-size: 2.2em;
@@ -153,6 +165,10 @@
 		font-family: Roboto;
 		padding-bottom: 0.5em;
 		margin-top: 50px;
+		@media @larger-phone-width-down{
+			font-size: 1.7em;
+			margin-top: 30px;
+		}
 	}
 	p{
 		line-height: 20px;
@@ -485,6 +501,9 @@
 	}
 
 	#section-content-bottom-fourth{
+		#block-block-305{
+			margin-bottom: 50px;
+		}
 		#node-528;
 		margin: 100px 0;
 		.block-title{
@@ -571,6 +590,89 @@
 		}
 	}
 }
+
+/* ABOUT CAMPAIGN MOBILE SPECIFIC */
+.page-node-528{
+	/* FULL WIDTH MIDDLE BANNER */
+	#section-main-content + .container{
+		padding: 0;
+		margin: 80px 0;
+		max-width: unset;
+	}
+
+	@media @larger-tablet-width-down{
+		/* REMOVING ECCESIVE PADDING */
+		#section-content-bottom-second{
+			.container{
+				div[class^="col-"]{
+					padding: 0;
+				}
+			}
+			.featured-img-left{
+				margin: 25px 0 20px;
+			}
+			.content{
+				padding: 0;
+			}
+		}
+		#section-content-bottom-fourth{
+			margin: 50px 0;
+		}
+
+		/* REDUCE MIDDLE BANNER SIDE */
+		#block-block-302{
+			padding: 200px 60px!important;
+			min-height: unset;
+		}
+
+
+	}
+	@media @larger-phone-width-down{
+		#block-block-302{
+			padding: 150px 60px!important;
+		}
+
+		#section-main-content + .container{
+			padding: 0;
+			margin: 50px 0;
+			max-width: unset;
+		}
+
+		/* MEDIA SECTION */
+		#section-content-bottom-third{
+			.media_filter{
+				ul li{
+					min-width: 140px;
+				}
+			}
+
+		/* POSTERS */
+			.heading-wrapper{
+				.sub-heading{
+						
+				}
+			}
+		}
+	}
+	@media @phone-width-down{
+		/* MEDIA SECTION */
+		#section-content-bottom-third{
+			.media_filter{
+				ul{
+					flex-wrap: wrap;
+					li{
+						min-width: 49%;
+						font-size: 0.9em;
+						margin: 1px;
+						width: 49%;
+						border: 0.5px #c0c2c4 solid;
+					}
+				}
+			}
+		}
+	}
+}
+
 /* CHOOSE PHYSIO SPECIFIC */
 .page-node-547{
 	#section-main-content{
@@ -582,24 +684,24 @@
 		}
 		@media @larger-phone-width-down{
 			padding: 50px 0;
-			.MainContent{
-				.pre-header{
-					font-size: 1.7em;
-				}	
-				.SectionHeader{
-					font-size: 3em;
-				}
-			}
 		}
 	}
 	h1.SectionHeader{
 		margin: 5px 0 50px;
+		@media @larger-phone-width-down{
+			font-size: 3em;
+		}
 	}
 	.pre-header{
 		font-family: Cairo;
 		font-size: 2em;
 		font-weight: 700;
 		color: @bright-blue;
+		@media @larger-phone-width-down{
+			font-size: 1.7em;
+			line-height: 1em;
+			margin-bottom: 10px;
+		}
 	}
 	#section-content-bottom-second{
 		.page-node-528 #section-content-bottom-third;
