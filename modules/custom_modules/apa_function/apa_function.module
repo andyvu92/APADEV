@@ -424,13 +424,15 @@ function apa_create_log_in_form($form, &$form_state){
 	$form['password'] = array(
 		'#type' => 'password',
 	    '#prefix'=>'<div class="flex-cell password-field">',
-		'#suffix'=>'</div>',
+		'#suffix'=>'</div><div class="flex-cell checkmessage" style="display: none">
+						<span>Incorrect username or password</span>
+					</div>',
 		'#attributes' => array(
-			
+			' value' => isset($_COOKIE["member_password"])?$_COOKIE["member_password"]:'',
 			' class' => 'form-control',
 			' placeholder' => 'Password',
 		),
-		'#default_value' => isset($_COOKIE["member_password"])?$_COOKIE["member_password"]:'',
+		//'#default_value' => isset($_COOKIE["member_password"])?$_COOKIE["member_password"]:'',
 		'#required' => TRUE,
 	);
 	$form['submit'] = array(
@@ -462,8 +464,8 @@ function apa_create_log_in_form($form, &$form_state){
 //create log in function
 function log_in($form, &$form_state){
 	if(!empty($form["remember"]["#value"])) {
-			setcookie ("member_login",$_POST["id"],time()+ (10 * 365 * 24 * 60 * 60));
-			setcookie ("member_password",$_POST["password"],time()+ (10 * 365 * 24 * 60 * 60));
+			setcookie ("member_login",$form["id"]["#value"],time()+ (10 * 365 * 24 * 60 * 60));
+			setcookie ("member_password",$form["password"]["#value"],time()+ (10 * 365 * 24 * 60 * 60));
 	} else {
 		if(isset($_COOKIE["member_login"])) {
 			setcookie ("member_login","");
@@ -501,6 +503,7 @@ function apa_create_payment_card_form($form, &$form_state){
 		'#attributes' => array(
 			
 			' class' => 'form-control',
+			' placeholder' => 'Name on card',
 		),
 		'#default_value' => '',
 		'#required' => TRUE,
@@ -510,6 +513,7 @@ function apa_create_payment_card_form($form, &$form_state){
 		'#attributes' => array(
 			//' type' => 'number', 
 			' class' => 'form-control',
+			' placeholder' => 'Card number',
 		),
 		'#title' => t('Card number:'),
 		'#default_value' => '',
@@ -551,6 +555,7 @@ function add_payment_card($form, &$form_state){
 	$postPaymentData['Expiry-date'] = $form["Expirydate"]["#value"];
 	$postPaymentData['CCV'] = $form["CCV"]["#value"];
 	$out = GetAptifyData("15",$postPaymentData);
+	$_SESSION["paymentTabTag"]=1;
 	if($out["result"]=="Failed"){ 
 		if($out["Message"]=="Expiry date lenght should be 4."){
 			drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
