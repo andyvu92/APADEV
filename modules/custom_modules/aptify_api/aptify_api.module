@@ -1,0 +1,311 @@
+<?php
+
+/**
+ * @file
+ * Aptify API Module.
+ * This module will be responsible to communicate with Aptify.
+ * The reason for moving the code to the module is it will provide with better perfomance and decoupled methods.
+ */
+
+
+require __DIR__ . '/aptify_api.admin.inc';
+require __DIR__ . '/classes/AptifyFailure.php';
+
+/**
+ * Constant to identify log messages in Drupal DB Log.
+ */
+define('APTIFY_API_WATCHDOG', 'Aptify');
+
+/**
+ * Implements hook_menu().
+ */
+function aptify_api_menu() {
+  // A path where all Global config lives.
+  $items['admin/config/system/aptifyapi'] = array(
+    'title' => 'Aptify API',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('aptify_api_admin_settings'),
+    'type' => MENU_LOCAL_ACTION | MENU_NORMAL_ITEM,
+    'access arguments' => array('administer site configuration'),
+    'file' => 'aptify_api.admin.inc',
+  );
+
+
+  // This is test page corresponds to aptify_test_calls_logged_in() function to test the calls.
+  // This will only work if debug-mode is on
+    global $debug_mode;
+    if($debug_mode) {
+        $items['apa/test-api'] = [
+            'title' => "apa SSO Test",
+            'page callback' => 'aptify_test_calls_logged_in',
+            'page arguments' => [],
+            'access callback' => TRUE,
+            'type' => MENU_CALLBACK,
+        ];
+    }
+
+  return $items;
+}
+
+/**
+ * Initial function to get token and login user for further communication.
+ * If successful all the values will be set to the session.
+ *  This is same as calling Case#7 as of AptifyAPI
+ * @param $email_address
+ * @param $password
+ * @return boolean
+ * @throws AptifyFailure
+ */
+function aptify_api_login($email_address, $password) {
+  $base_url = variable_get('aptify_api_base_url', APTIFY_API_BASE_URL_DEFAULT);
+
+  $parameters = [
+      'UserName' => $email_address,
+      'Password' => $password
+  ];
+
+  // This step is important as it filters out any malicious code.
+  $query = drupal_http_build_query($parameters);
+
+  $login_path = "/Authentication/Login/Web?".$query;
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $base_url . $login_path);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $headers = array();
+    $headers[] = "Content-Type: application/json";
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    $result = curl_exec($ch);
+    $response_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if (curl_errno($ch)) {
+        $message_detail = 'Error:' . curl_error($ch);
+        throw new AptifyFailure($message_detail);
+    }
+
+    curl_close ($ch);
+    // Request authentication and HTTP response check.
+    //$response = drupal_http_request($base_url . $login_path, $options);
+    if ($response_status_code != 200) {
+        watchdog(APTIFY_API_WATCHDOG, $result, array(), WATCHDOG_CRITICAL);
+        //throw new AptifyFailure("Communication Error.\nError Code : {$response_status_code}");
+    }
+
+    $response = new stdClass();
+    $response->data = $result;
+
+  // Response decode and decode check.
+  $r = drupal_json_decode($response->data);
+  if ($r === NULL) {
+    $message_detail = 'JSON decode failure: ' . $response->data;
+    watchdog(APTIFY_API_WATCHDOG, $message_detail, array(), WATCHDOG_CRITICAL);
+    throw new AptifyFailure($message_detail);
+  }
+
+  // Aptify response status.
+  if (isset($r['ErrorInfo']) === TRUE) {
+    $message_detail = 'aptify error detected: ';// . $r['ErrorInfo']->ErrorMessage;
+    watchdog(APTIFY_API_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
+	$_SESSION["loginFail"] = 1;
+    //throw new AptifyFailure($r['ErrorInfo'], $r['extra_info']);
+  }
+  else {
+      if (!($r['UserId'] || $r['TokenId'])) {
+          $message_detail = 'No UserId or Token found.';
+          watchdog(APTIFY_API_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
+          throw new AptifyFailure($message_detail, $r);
+      }
+
+      // If all okay we will  set data to the session.
+      $_SESSION['Log-in'] = "in";
+      foreach($r as $key=>$value) {
+          $_SESSION[$key] = $value;
+      }
+    //return TRUE;
+	return $r;
+  }
+}
+
+/**
+ * A function to get key from session.
+ * The session is setup when user is logged in.
+ * @param $key
+ * @return mixed
+ */
+function _aptify_get($key){
+  return $_SESSION[$key];
+}
+
+/**
+ * Function to test out functionality and API Calls.
+ */
+function aptify_test_calls_logged_in(){
+    $return = NULL;
+    $return = aptify_get_member_details();
+     drupal_json_output($return);
+}
+
+/**
+ * This is the main method makes call to APTIFY api.
+ * Very similar to curlRequest function.
+ * Each API function should use this function as central call.
+ * @param $api_number string name to identify the call.
+ * @param $path string "Must start with / (ForwardSlash)"
+ * @param $token string
+ * @param $data  mixed (Can be used as query for GET Parameters)
+ * @param string $method
+ * @return mixed
+ * @throws AptifyFailure
+ */
+function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
+    $base_url = variable_get('aptify_api_base_url', APTIFY_API_BASE_URL_DEFAULT);
+
+    $ch = curl_init();
+    $headers = array();
+
+    if ($token) {
+        $headers[]="AptifyAuthorization: Web ".$token;
+    }
+
+    $headers[] = "Content-Type:application/json";
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    if($method === 'POST') {
+        $request_data = drupal_json_encode($data);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $request_data);
+        curl_setopt($ch, CURLOPT_POST, TRUE);
+    }
+
+    if($method === 'PUT') {
+        $request_data = drupal_json_encode($data);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $request_data);
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+    }
+
+    /** @todo : Add custom calls i.e, "GetPost" from AptifyAPI.php */
+
+    // URL.
+    $request_url = $base_url . $path;
+    if ($method === 'GET' && !empty($data)) {
+        $request_url .= '?' . http_build_query($data);
+    }
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_URL, $request_url);
+
+    $result = curl_exec($ch);
+
+    $response_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if (curl_errno($ch)) {
+        $message_detail = 'Error:' . curl_error($ch);
+        throw new AptifyFailure($message_detail);
+    }
+
+    curl_close ($ch);
+    // Request authentication and HTTP response check.
+    //$response = drupal_http_request($base_url . $login_path, $options);
+    if ($response_status_code != 200) {
+        $message = "There is a problem at <strong>!request_url</strong><br/>";
+
+        $message .= "Response came is  was <pre>!response</pre><br/>";
+        $replacements = [
+            '!request_url' => $method."//".$request_url,
+            '!response' => $result,
+        ];
+        if(isset($request_data)) {
+            $replacements['!data'] = var_dump($request_data);
+            $message .= "The data sent was <pre>!data</pre><br/>";
+        }
+        watchdog(APTIFY_API_WATCHDOG, $message, $replacements, WATCHDOG_CRITICAL,$request_url);
+        throw new AptifyFailure("Communication Error.\nError Code : {$response_status_code}");
+    }
+
+    // Request authentication and HTTP response check.
+    $response = new stdClass();
+    $response->data = $result;
+
+    // if debugging is on
+    $data_sent = isset($request_data) ? $request_data : "No data was sent.";
+    aptify_log_to_watchdog($api_number, $request_url, $data_sent, $response);
+
+    // Response decode and decode check.
+    $r = drupal_json_decode($response->data);
+    if ($r === NULL) {
+        $message_detail = $name . ' JSON decode failure: ' . $response->data;
+        watchdog(APTIFY_API_WATCHDOG, $message_detail, array(), WATCHDOG_CRITICAL);
+        throw new AptifyFailure($message_detail);
+    }
+    // Aptify response status.
+    if (isset($r['ErrorInfo']) === TRUE) {
+        $message_detail = 'aptify error detected: ' . $r['ErrorInfo']->ErrorMessage;
+        watchdog(APTIFY_API_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
+        throw new AptifyFailure($r['ErrorInfo'], $r['extra_info']);
+    }
+    else {
+        return $r;
+    }
+}
+
+/***********************************************************************************************
+ * All the AptifyCalls goes below:
+/***********************************************************************************************
+
+/**
+ * Function to return member details.
+ * @return mixed
+ * @throws AptifyFailure
+ */
+function aptify_get_member_details() {
+  $path = "/GetDBMemberDetails";
+  $data = ['UserId' => _aptify_get('UserId')];
+  return _aptify_api_call("4",$path, _aptify_get('TokenId'), $data);
+}
+
+/**
+ * Get renewal Quatation OrderID
+ * @return mixed
+ * @throws AptifyFailure
+ */
+function aptify_get_renewal_quotation_order_id() {
+    $path = "/DataObjects/spGetQuatationOrderID__c";
+    $data = ['UserId' => _aptify_get('UserId')];
+    return _aptify_api_call("45",$path, _aptify_get('TokenId'), $data);
+}
+
+/**
+ * Returns event HTML based on data sent to function
+ * @param array $data
+ * $data requires requires Latitude,Longtitude,Radius,Keyword,Typeofpd,Nationalgp,Regionalgp,State,Suburb,BeginDate,Endate,PageSize,PageNumber
+ * @return mixed
+ * @throws AptifyFailure
+ */
+function aptify_get_event_search_result(array $data) {
+    $path = "/PDGetEventSearchResultsList";
+    return _aptify_api_call("28",$path, _aptify_get('TokenId'), $data);
+}
+
+/**
+ * Helper function to log values in Drupal's Watchdog (DBlog)
+ * It will only work if Debug mode is on at admin/config/system/aptifyapi
+ * @param $api_number
+ * @param $request_url
+ * @param $request_data
+ * @param $result
+ */
+function aptify_log_to_watchdog($api_number, $request_url, $request_data, $result) {
+    $debug_mode = variable_get('aptify_api_debug', FALSE);
+    if($debug_mode) {
+        $txt  = "Web Service No: ".$api_number."\n";
+        $txt .= "Path Sent to: \n";
+        $txt .= $request_url."\n";
+        $txt .= "Date Sent: \n";
+        $txt .= var_dump($request_data)."\n";
+        $txt .= "Data Received: \n";
+        $txt .= $result."\n";
+        $txt .= "---End of Log (".date("Y-m-d h-i-s").")---\n\n\n\n\n";
+        watchdog(APTIFY_API_WATCHDOG, $txt, array(), WATCHDOG_INFO);
+    }
+}

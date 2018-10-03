@@ -1,0 +1,8 @@
+name = Aptify API
+description = Aptify API integration.
+package = APA
+core = 7.x
+
+files[] = aptify_api.admin.inc
+files[] = aptify_api.module
+files[] = class/AptifyFailure.php
