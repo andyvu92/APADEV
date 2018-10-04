@@ -80,25 +80,10 @@
 */
 ?>
 <div id="node-<?php print $node->nid; ?>" style="margin-top:30px;" class="<?php print $classes; ?> clearfix post large flex-container" <?php print $attributes; ?>>
-	
-	
-	<?php /*
-	use this header as reference, but delete at the end
-	<header class="meta">
-		   <ul>
-          <li><a href="#"><?php print t('Posted by'); ?><?php print theme('username', array('account' => $node)); ?></a></li>
-          <li><?php print render($content['field_media_type']);?></li>
-		  <li><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></li>
-		   </ul>
-		   <h2><a href="<?php print $node_url; ?>">
-		   <?php print $title; ?></a></h2>
-    </header>
-		*/ ?>
 	<?php
 		// We hide the comments and links now so that we can render them later.
 		//redirect:
 		$outLink = $content['field_externallinkclient']['#items'][0]["safe_value"];
-		
 		header("Location: ".$outLink);
 		exit;
         hide($content['comments']);
