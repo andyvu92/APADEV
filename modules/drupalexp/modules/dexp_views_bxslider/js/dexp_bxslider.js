@@ -12,7 +12,7 @@
 				var slide = $(this).bxSlider(options);
 				//console.log(options);
 				if(options.auto){
-					console.log($(this).attr('id'));
+					//console.log($(this).attr('id'));
 				}
         var windowW = $(window).width();
         $(window).resize(function(){

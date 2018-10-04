@@ -956,7 +956,10 @@ a#insuranceControl{
                     height: 100%;
                     left: 0;
                     filter: blur(100px);
-                    transition: all .3s linear;
+                    transition: all .3s ease-in-out;
+                    border-radius: 100%;
+                    display: flex;
+                    align-items: center;
                 }
                 &:hover{
                     &:after{
@@ -1268,6 +1271,7 @@ a#insuranceControl{
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
             @media all and (max-width: @tablet-width) {
                 min-height: 170px;
                 margin-bottom: 20px;
@@ -1791,7 +1795,10 @@ a#insuranceControl{
 		width: 100%;
 	}
 	.sticky-wrapper{
-		position: relative;
+        position: relative;
+        @media @larger-tablet-width-up{
+            height: 103px!important;
+        }
 	}
 }
 
@@ -2917,11 +2924,10 @@ select.form-control{
             .login, .join{
                 padding: 10px;
                 background: #a6a8ab;
-                font-family: Roboto;
-                font-size: 1em;
+                font-family: Cairo;
+                font-size: 15px;
                 color: #fff;
-                font-weight: 500;
-                text-transform: uppercase;
+                font-weight: 700;
                 min-width: 150px;
                 text-align: center;
                 margin: 10px;

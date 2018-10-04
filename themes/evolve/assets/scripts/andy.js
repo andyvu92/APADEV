@@ -478,11 +478,11 @@ jQuery(document).ready(function(){
   });
 });
 
-//NATIONAL GROUP LINKS HOVER FADE OTHERS
+//NATIONAL GROUP LINKS HOVER FADING EFFECT
 jQuery(document).ready(function(){
   $('.national-group-grid .flex-col-6 a').on('mouseenter', function(){
-    $('.national-group-grid .flex-col-6 a').fadeTo(0, 0.6);
-    $(this).fadeTo(0, 1);
+    $(this).siblings().fadeTo(0, 0.6);
+    //$(this).fadeTo(0, 1);
   });
   $('.national-group-grid .flex-col-6 a').on('mouseleave', function(){
     $('.national-group-grid .flex-col-6 a').fadeTo(0, 1);
@@ -490,13 +490,17 @@ jQuery(document).ready(function(){
 });
 
 
+// ABOUT - ANUAL REPORT HOVER FADING EFFEC
 jQuery(document).ready(function(){
-  $(window).on('scroll', function(){
-    if ( $(this).scrollTop() > 400 ){
-      
-    }
+  $('.page-node-138 .brochure-grid .item').on('mouseenter', function(){
+    $(this).siblings().addClass('faded');
+    //$(this).fadeTo(0, 1);
+  });
+  $('.page-node-138 .brochure-grid .item').on('mouseleave', function(){
+    $('.page-node-138 .brochure-grid .item').removeClass('faded');
   });
 });
+
 
 // DISALLOW TYPING IN YOUTUBE EMBED INPUT
 jQuery(document).ready(function(){
