@@ -342,7 +342,7 @@ if(isset($_POST["deleteID"]) && $_POST["deleteID"] != "") {
 	// Send - 
 	// Response -
 	// N/A.
-	$deleteCards = GetAptifyData("13", $deleteCardSubmit); 
+	$deleteCards = aptify_get_GetAptifyData("13", $deleteCardSubmit); 
 	//print_r($deleteCards);
 	
 }
@@ -360,7 +360,7 @@ if(isset($_Get["action"]) && $_Get["action"] = "updatecard") {
 	// UserID, Creditcard-ID,Expiry-date,CVV
 	// Response -
 	// N/A.
-	$updateCards = GetAptifyData("13", $updateCardSubmit); 
+	$updateCards = aptify_get_GetAptifyData("13", $updateCardSubmit); 
 	//print_r($updateCards);
 	
 }
@@ -376,7 +376,7 @@ if(isset($_POST["setCardID"]) && $_POST["setCardID"] != ""){
 	// UserID, Creditcard-ID
 	// Response -
 	// N/A.
-	$updateCards = GetAptifyData("13", $updateCardSubmit); 
+	$updateCards = aptify_get_GetAptifyData("13", $updateCardSubmit); 
 	//print_r($updateCards);
 	
 }
@@ -388,7 +388,7 @@ if(isset($_Get["action"]) && $_Get["action"] = "rollover") {
 	// UserID, Rollover
 	// Response -
 	// N/A.
-	GetAptifyData("13", $updateCardSubmit); 
+	aptify_get_GetAptifyData("13", $updateCardSubmit); 
 }
 
 ?>
@@ -1092,7 +1092,7 @@ apa_function_dashboardLeftNavigation_form();
 				// Credit cards details [Credit card ID, Payment-method,
 				// Name on card, Digits, Exp date, Roll over],  Main card
 				$test['id'] = $_SESSION["UserId"];
-				$cardsnum = GetAptifyData("12", $test);
+				$cardsnum = aptify_get_GetAptifyData("12", $test);
 				unset($_SESSION["paymentTabTag"]);
 				//print_r($cardsnum);
 				//$cardsnum = $cardsnums["paymentcards"];

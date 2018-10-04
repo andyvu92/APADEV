@@ -549,12 +549,12 @@ function apa_create_payment_card_form($form, &$form_state){
 	return $form;
 }
 function add_payment_card($form, &$form_state){
-	$postPaymentData['userID'] = $_SESSION['UserId'];
+    $postPaymentData['userID'] = $_SESSION['UserId'];
 	$postPaymentData['Payment-method'] = $form["Cardtype"]["#value"];
 	$postPaymentData['Cardno'] = $form["Cardnumber"]["#value"];
 	$postPaymentData['Expiry-date'] = $form["Expirydate"]["#value"];
 	$postPaymentData['CCV'] = $form["CCV"]["#value"];
-	$out = GetAptifyData("15",$postPaymentData);
+	$out = aptify_get_GetAptifyData("15",$postPaymentData);
 	$_SESSION["paymentTabTag"]=1;
 	if($out["result"]=="Failed"){ 
 		if($out["Message"]=="Expiry date lenght should be 4."){
@@ -563,7 +563,7 @@ function add_payment_card($form, &$form_state){
 		elseif($out["Message"]=="CCV accepts up to 4 digit."){
 			drupal_set_message('<div class="checkMessage">Please enter a valid CVV number.</div>',"error");
 		}
-		elseif($out["Message"]=="Error in Create Person Saved Payment Method:Month must be between one and twelve. Parameter name: month"){
+		elseif((strpos($out["Message"], 'Month must be between one and twelve') !== false)){
 			drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
 		}
 		elseif($out["Message"]=="Please enter a valid End Date occurring after the Start Date."){
