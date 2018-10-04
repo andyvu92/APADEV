@@ -894,17 +894,17 @@ if(isset($_SESSION['UserId'])) {
 <div class="OtherSitesList"><img src="/sites/default/files/HOME/OTHER SITES ICON.png" />
 <h4 class="OtherListTop">Other APA websites</h4>
 
-<div class="OtherListTop"><a href="https://choose.physio/">Choose physio</a></div>
+<div class="OtherListTop"><a href="https://choose.physio/" target="_blank">Choose physio</a></div>
 
-<div class="OtherListTop"><a href="https://www.jobs4physios.com.au/">jobs4physios</a></div>
+<div class="OtherListTop"><a href="https://www.jobs4physios.com.au/" target="_blank">jobs4physios</a></div>
 
-<div class="OtherListTop"><a href="https://cpd4physios.com.au/">cpd4physios</a></div>
+<div class="OtherListTop"><a href="https://cpd4physios.com.au/" target="_blank">cpd4physios</a></div>
 
-<div class="OtherListTop"><a href="https://www.classifieds4physios.com.au/">classifieds4physios</a></div>
+<div class="OtherListTop"><a href="https://www.classifieds4physios.com.au/" target="_blank">classifieds4physios</a></div>
 
-<div class="OtherListTop"><a href="https://www.shop4physios.com.au/">shop4physios</a></div>
+<div class="OtherListTop"><a href="https://www.shop4physios.com.au/" target="_blank">shop4physios</a></div>
 
-<div class="OtherListTop"><a href="http://apanext2018.com.au/">APA Conference 2018</a></div>
+<div class="OtherListTop"><a href="http://apanext2018.com.au/" target="_blank">APA Conference 2018</a></div>
 
 <div class="OthersiteButtonClose">
 <div class="OthersiteButtonCloseArrow">&nbsp;</div>
