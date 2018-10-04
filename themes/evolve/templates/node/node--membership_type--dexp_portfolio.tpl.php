@@ -86,7 +86,7 @@ $rens = str_replace('<div class="field-items">',"",$rens);
 $rens = str_replace('<div class="field-item even">',"",$rens);
 $rens = str_replace('</div>',"",$rens);
 ?>
-<div id="node-<?php print $node->nid; ?>" style="display: none; margin-top:30px;" class="<?php print $classes; echo ' '.$rens; ?> clearfix large" <?php print $attributes; ?>>
+<div id="node-<?php print $node->nid; ?>" style="margin-top:30px;" class="<?php print $classes; echo ' '.$rens; ?> clearfix large" <?php print $attributes; ?>>
 	<section class="post-content">
 	<h2 class="MTtitle"><?php print $title; ?></h2>
 	<div class="contents">
@@ -104,9 +104,7 @@ $rens = str_replace('</div>',"",$rens);
 			$TypePrice = file_get_contents("sites/all/themes/evolve/json/TypePrice.json");
 			$TypePrice = json_decode($TypePrice, true);
 			foreach ($TypePrice as $key => $value) {
-				//echo $TypePrice[$key]["Code"]." vs ".strtoupper($rens)."<br>";
 				if($TypePrice[$key]["Code"] == strtoupper($rens)) {
-					//echo "ever?????????????????!!!!!!!!!!!!!!!!!!";
 					print '<div class="MTprice">$'.$TypePrice[$key]["Price"].'</div>';
 					print '<div class="MTid" style="display: none;">'.$TypePrice[$key]["ID"].'</div>';
 				}
