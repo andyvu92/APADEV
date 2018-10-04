@@ -15,7 +15,7 @@ global $base_url;
 // CPD hours, Private health care Network, Home branch, Preferred branch
 $user = Array();
 if(isset($_SESSION["UserId"])) {
-	$users = GetAptifyData("1", $_SESSION["UserId"]);
+	$users = aptify_get_GetAptifyData("1", $_SESSION["UserId"]);
 	//print_r($users);
 	$cpd = $users["results"][0]["CPD"];
 	//echo "CPD: ".$cpd;

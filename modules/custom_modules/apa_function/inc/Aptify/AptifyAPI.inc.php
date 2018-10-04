@@ -8,6 +8,7 @@ if(!function_exists('drupal_session_started'))
 /*Dashboard page*/
 function AptifyAPI($APItype, $variables, $jsonVersion){
 	$outputReturn = Array();
+	/*
 	switch($APItype){
 		case "0":
 			// JSON persar
@@ -522,6 +523,7 @@ function curlRequest($API, $type, $variables) {
 	curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
 	curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 	curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+	// todo! You must do this before go live!
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 	
 	$JSONreturn = curl_exec($ch);
@@ -534,6 +536,8 @@ function curlRequest($API, $type, $variables) {
 	// close curl resource to free up system resources 
 	curl_close($ch);
 	return $JSONreturn;
+	*/
+	return "";
 }
 
 function logTransaction($APINum, $Sent, $Got) {

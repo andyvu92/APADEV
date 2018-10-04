@@ -88,7 +88,7 @@ if(isset($_POST['step2'])) {
 		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
 		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
-		$out = GetAptifyData("15", $postPaymentData);
+		$out = aptify_get_GetAptifyData("15", $postPaymentData);
 		//if(isset($_SESSION['tempcard'])){ unset($_SESSION["tempcard"]);}
 	}
 	/*elseif(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])){
@@ -154,7 +154,7 @@ if(isset($_POST['step2'])) {
 	//$postScheduleData['PRFdonation'] = getProduct($_SESSION['UserId'],$type="");
 	$postScheduleData['productID'] = getProductList($_SESSION['UserId']);
 	$postScheduleData['CampaignCode'] = "";
-	$scheduleDetails = GetAptifyData("47", $postScheduleData);
+	$scheduleDetails = aptify_get_GetAptifyData("47", $postScheduleData);
 	
 	
 	// 2.2.31 Get Membership prodcut price
@@ -166,7 +166,7 @@ if(isset($_POST['step2'])) {
 	if(sizeof($prodcutArray)!=0){
 		$memberProductsArray['ProductID']=$prodcutArray;
 		$memberProdcutID = $memberProductsArray;
-		$memberProducts = GetAptifyData("31", $memberProdcutID);
+		$memberProducts = aptify_get_GetAptifyData("31", $memberProdcutID);
 	}
 	
 	// 2.2.19 - GET list National Group
@@ -174,7 +174,7 @@ if(isset($_POST['step2'])) {
 	// userID
 	// Response -National Group product
 	$sendData["UserID"] = $_SESSION['UserId'];
-	$NGListArray = GetAptifyData("19", $sendData);
+	$NGListArray = aptify_get_GetAptifyData("19", $sendData);
 	//print_r($NGListArray);
 	if(isset($_SESSION["NationalProductID"])) {$NGProductsArray=$_SESSION["NationalProductID"];} else{$NGProductsArray=array();}
 	// 2.2.21 - GET Fellowship product price
@@ -192,7 +192,7 @@ if(isset($_POST['step2'])) {
 	}
 	if(sizeof($fpProdcutArray)!=0){
 		$fpData['ProductID'] = $fpProdcutArray;
-		$FPListArray = GetAptifyData("21", $fpData);
+		$FPListArray = aptify_get_GetAptifyData("21", $fpData);
 		
 		
 	}
@@ -208,7 +208,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 		$updateCard["CCSNumber"] = "";
 		$updateCard["IsDefault"] = "1";
 		$updateCard["IsActive"] = "";
-		$updateCards = GetAptifyData("13", $updateCard); 
+		$updateCards = aptify_get_GetAptifyData("13", $updateCard); 
 
 } 
 	// 2.2.12 - Get payment list
@@ -216,7 +216,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 	// UserID 
 	// Response -payment card list
 	$cardData['id'] = $_SESSION["UserId"];
-	$cardsnum = GetAptifyData("12", $cardData);
+	$cardsnum = aptify_get_GetAptifyData("12", $cardData);
 	//print_r($cardsnum);
 $PRFPrice = 0;
  ?> 

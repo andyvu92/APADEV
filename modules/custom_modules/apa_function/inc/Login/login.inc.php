@@ -515,13 +515,13 @@ if (isset($_POST['refreshTag'])) {
 		// Response -Update Success message & UserID & detail data
 		
 		if (isset($_SESSION['UserId'])) {
-			$testdata = GetAptifyData("5", $postData);
+			$testdata = aptify_get_GetAptifyData("5", $postData);
 		
 		} else {
 			
 			// for new user join a member call user registeration web service
 		   
-			$resultdata = GetAptifyData("25", $postData);
+			$resultdata = aptify_get_GetAptifyData("25", $postData);
 			
 			// when create user successfully call login web service to login in APA website automatically.
 			// after login successfully get UserID as well to store on APA shopping cart database
@@ -619,7 +619,7 @@ if(isset($_POST['CreateUser'])) {
 	
 
 // for new user join a member call user registeration web service	
-$resultdata = GetAptifyData("42", $postData);
+$resultdata = aptify_get_GetAptifyData("42", $postData);
 //when create user successfully call login web service to login in APA website automatically.
 //after login successfully get UserID as well to store on APA shopping cart database
 if($resultdata['result']) { 
@@ -704,7 +704,7 @@ if($resultdata['result']) {
 			//echo "<br>logged in!!";
 			
 			$data = "UserID=".$_SESSION["UserId"];
-			$details = GetAptifyData("4", $data,"");
+			$details = aptify_get_GetAptifyData("4", $data,"");
 			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
 			nameUpdate($details["Firstname"], $details["Preferred-name"]);
 			/*
@@ -894,17 +894,17 @@ if(isset($_SESSION['UserId'])) {
 <div class="OtherSitesList"><img src="/sites/default/files/HOME/OTHER SITES ICON.png" />
 <h4 class="OtherListTop">Other APA websites</h4>
 
-<div class="OtherListTop"><a href="https://choose.physio/">Choose physio</a></div>
+<div class="OtherListTop"><a href="https://choose.physio/" target="_blank">Choose physio</a></div>
 
-<div class="OtherListTop"><a href="https://www.jobs4physios.com.au/">jobs4physios</a></div>
+<div class="OtherListTop"><a href="https://www.jobs4physios.com.au/" target="_blank">jobs4physios</a></div>
 
-<div class="OtherListTop"><a href="https://cpd4physios.com.au/">cpd4physios</a></div>
+<div class="OtherListTop"><a href="https://cpd4physios.com.au/" target="_blank">cpd4physios</a></div>
 
-<div class="OtherListTop"><a href="https://www.classifieds4physios.com.au/">classifieds4physios</a></div>
+<div class="OtherListTop"><a href="https://www.classifieds4physios.com.au/" target="_blank">classifieds4physios</a></div>
 
-<div class="OtherListTop"><a href="https://www.shop4physios.com.au/">shop4physios</a></div>
+<div class="OtherListTop"><a href="https://www.shop4physios.com.au/" target="_blank">shop4physios</a></div>
 
-<div class="OtherListTop"><a href="http://apanext2018.com.au/">APA Conference 2018</a></div>
+<div class="OtherListTop"><a href="http://apanext2018.com.au/" target="_blank">APA Conference 2018</a></div>
 
 <div class="OthersiteButtonClose">
 <div class="OthersiteButtonCloseArrow">&nbsp;</div>
