@@ -1954,6 +1954,15 @@ input{
     .content{
         z-index: 0;
     }
+    @media @desktop-width-down{
+        min-height: 400px;
+    }
+    @media @tablet-width-down{
+        min-height: 300px;
+    }
+    @media @larger-phone-width-down{
+        min-height: 200px;
+    }
 }
 .img-parallax {
     width: 100vmax;
@@ -1970,12 +1979,21 @@ input{
 }
 
 
-/* HIDE PARALLAX ON MOBILE */
-.region-banner{
+/* ADJUST PARALLAX ON MOBILE */
+#section-banner .region-banner{
     @media all and (max-width: @larger-phone-width) {
         .block{
             .img-parallax{
-                display: none;
+                top: -25%;
+                transform: translate(-50%,0);
+            }
+        }
+    }
+    @media all and (max-width: @desktop-width) {
+        .block{
+            .img-parallax{
+                top: -40%;
+                transform: translate(-50%,0);
             }
         }
     }

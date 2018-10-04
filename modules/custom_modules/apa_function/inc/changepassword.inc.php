@@ -134,7 +134,7 @@ if(isset($_SESSION["Log-in"])) : ?>
 			<h3 class="light-lead-heading">Password updated successfully.</h3>
 		</div>
 		<div class="flex-cell cta">
-			<a href="/dashboard" class="join">Go to Dashboard</a>
+			<a href="/dashboard" class="join">Go to dashboard</a>
 		</div>
 
 		<?php 
