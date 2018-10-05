@@ -660,5 +660,19 @@ jQuery(document).ready(function(){
     if ( $('.html').find('.form-checkboxes').length > 0 ){
       $('.form-checkboxes input').addClass('styled-checkbox');
     }
+
+    
+    //if ( $('.html').find('#dexp-accordions-wrapper').length > 0 ){
+    //  $('#dexp-accordions-wrapper a').addClass('collapsed');
+    //  $('#dexp-accordions-wrapper .panel-collapse').removeClass('in');
+    //}
+
+    //$(document).on('click', '#dexp-accordions-wrapper a', function(){
+    //  if ( $(this).hasClass('collapsed') ){
+    //    linktarget = $(this).attr('href');
+    //    $(this).attr('data-target', linktarget);
+    //    $(this).attr('href', '#disabled');
+      //}
+    //});
 });
 
