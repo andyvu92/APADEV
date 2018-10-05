@@ -13,6 +13,9 @@
             background-size: cover!important;
             background-position: 50% 0% !important;
             background-repeat: no-repeat;
+            .img-parallax{
+                display: none;
+            }
         }
 
         .content{
@@ -816,6 +819,28 @@
             position: relative;
             display: flex;
             justify-content: center;
+            border-color: rgba(195,200,200,0.8)!important;
+            @media @larger-tablet-width-down{
+                border-left-width: 0;
+                &:nth-child(odd){
+                    border-left-width: 0.5px;
+                    border-top-width: 0;
+                }
+                &:nth-child(3n + 1){
+                    border-top-width: 0;
+                }
+                &:first-of-type{
+                    border-top-width: 0.5px;
+                }
+            }
+            @media all and (max-width: @tablet-width - 1px){
+                border-width: 0.5px;
+                border-top-width: 0.5px!important;
+                border-bottom-width: 0;
+                &:last-of-type{
+                    border-bottom-width: 0.5px;
+                }
+            }
             &:hover{
                 .MonlyIconHolder{
                     .MonlyIcon{

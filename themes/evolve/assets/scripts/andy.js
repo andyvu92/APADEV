@@ -490,17 +490,27 @@ jQuery(document).ready(function(){
 });
 
 
-// ABOUT - ANUAL REPORT HOVER FADING EFFEC
+// ABOUT - ANUAL REPORT HOVER FADING EFFECT
 jQuery(document).ready(function(){
   $('.page-node-138 .brochure-grid .item').on('mouseenter', function(){
     $(this).siblings().addClass('faded');
-    //$(this).fadeTo(0, 1);
+    
   });
   $('.page-node-138 .brochure-grid .item').on('mouseleave', function(){
     $('.page-node-138 .brochure-grid .item').removeClass('faded');
   });
 });
 
+// HOVER FADING EFFECT
+jQuery(document).ready(function(){
+  $('.faded-on-hover > div').on('mouseenter', function(){
+    $(this).siblings().addClass('faded');
+    
+  });
+  $('.faded-on-hover > div').on('mouseleave', function(){
+    $('.faded-on-hover > div').removeClass('faded');
+  });
+});
 
 // DISALLOW TYPING IN YOUTUBE EMBED INPUT
 jQuery(document).ready(function(){

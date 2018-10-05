@@ -978,6 +978,22 @@ embed {
 .dropcap.gray {
     color: #555;
 }
+
+#search-block-form input{
+    &::placeholder {
+        color: @grey;
+        opacity: 1; /* Firefox */
+    }
+    
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+       color: @grey;
+    }
+    
+    &::-ms-input-placeholder { /* Microsoft Edge */
+       color: @grey;
+    }
+}
+
 .region-left-sidebar #search-block-form input[type="submit"]{
     display: inline-block !important;
     float: right;

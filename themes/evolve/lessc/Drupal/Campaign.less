@@ -833,8 +833,10 @@
 		font-family: Cairo;
 		background: @bright-blue;
 		margin-top: 1px;
+		transition: all .2s linear;
 		&:hover{
 			color: #fff;
+			background: @brighter-blue;
 		}
 		.link-block-title{
 			font-size: 1.3em;
@@ -882,6 +884,15 @@
 		.brd-headling{
 			display: none;
 		}
+	}
+}
+
+/* CAMPAIGN - DIGITAL ASSETS HOVER EFFECT */
+#block-block-304 .image-grid .item{
+	opacity: 1;
+	transition: all .3s ease-in-out;
+	&.faded{
+		opacity: 0.6;
 	}
 }
 

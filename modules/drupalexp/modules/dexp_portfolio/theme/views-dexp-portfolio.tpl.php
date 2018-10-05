@@ -25,7 +25,7 @@
 	</div>
   <?php endif;?>
 <?php endif;?>  
-<div id="<?php print $view_id;?>" class="dexp-grid-items row">
+<div id="<?php print $view_id;?>" class="dexp-grid-items">
   <?php foreach($rows as $row):?>
     <?php print $row; ?>
   <?php endforeach;?>

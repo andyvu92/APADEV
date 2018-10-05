@@ -2007,6 +2007,12 @@ input{
 /* NON-MEMBER CTA */
 #non-member{
     background: #fff;
+    .light-heading{
+        color: @bright-blue;
+        text-align: center;
+        font-weight: 500;
+        font-size: 2em;
+    }
 }
 
 /* FOR ADMIN CONTEXTTUAL LINKS */
@@ -2095,6 +2101,17 @@ input{
                     color: #fff;
                 }
             }
+        }
+    }
+}
+
+/* FADED EFFECT */
+.faded-on-hover{
+    & > div{
+        opacity: 1;
+        transition: all .3s ease-in-out;
+        &.faded{
+            opacity: 0.6;
         }
     }
 }

@@ -97,7 +97,27 @@ if(isset($_POST["Invoice_ID"])) {
 ?>
 <?php logRecorder();  ?>
 <?php if($registerOuts['Invoice_ID']!=="0"):?>
-<h2>We hope you enjoy your event</h2>
+
+<div class="flex-container" id="non-member">
+	<div class="flex-cell">
+		<h3 class="light-lead-heading">Purchase successful!</h3>
+	</div>
+
+	<div class="flex-cell">
+		<h3 class="light-heading">A copy of your purchase receipt will be send to your inbox.<br />
+		You can also find a record on your dashboard.</h3>
+	</div>
+
+	<div class="flex-cell cta"><a class="join" href="/dashboard">Go to dashboard &gt;</a></div>
+
+	<?php 
+		$block = block_load('block', '309');
+		$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+		$output = drupal_render($get);        
+		print $output;
+	?>
+
+</div>
 
 <?php /*
 <!--<form action="/pd/completed-purchase" method="POST">
@@ -111,7 +131,7 @@ if(isset($_POST["Invoice_ID"])) {
 ?></a></p>-->
 <a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 */ ?>
-<p>Order confirmation or invoice will be email to you shortly.</p>
+
 <!--<a class="addCartlink" href="../your-purchases"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>-->
 
 <?php else:?>
