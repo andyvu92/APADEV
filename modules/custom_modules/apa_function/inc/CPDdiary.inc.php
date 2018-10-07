@@ -42,11 +42,6 @@ if(isset($_POST["nonAPA"])) {
 // Description, Date, Time, Provider, Reflection
 $results = aptify_get_GetAptifyData("33", $_SESSION["UserId"]);
 //print_r($results);
-/*
-?>
-<?php var_dump($results); ?>
-<?php
-*/
 $totalNum = sizeof($results);
 $CPDHousrs = $results["CurrentCPDHour"];
 $APA = array();
