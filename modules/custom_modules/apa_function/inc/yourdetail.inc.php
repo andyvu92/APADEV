@@ -260,7 +260,7 @@ if(isset($_POST['step1'])) {
 	// Send - 
 	// UserID 
 	// Response - UserID & detail data
-	$test = aptify_get_GetAptifyData("5", $postData);
+	$test = GetAptifyData("5", $postData);
 	unset($_SESSION["Regional-group"]);
 	if(isset($_GET['Goback']) && ($_GET['Goback']=="PD")){
 		header("Location:".$link."/pd/pd-shopping-cart");	
@@ -296,7 +296,7 @@ if(isset($_POST['step1'])) {
 // Post graduate country, Year attained, Additional qualifications
 if(isset($_SESSION["UserId"])) {
 	$data = "UserID=".$_SESSION["UserId"];
-	$details = aptify_get_GetAptifyData("4", $data,""); // #_SESSION["UserID"];
+	$details = GetAptifyData("4", $data,""); // #_SESSION["UserID"];
 	//2.2.43 -get user installment data test part
 	//$installmentData['id'] = $_SESSION["UserId"];
 	//$installmentOrder = GetAptifyData("43", $installmentData);
@@ -342,7 +342,7 @@ if(isset($_POST["deleteID"]) && $_POST["deleteID"] != "") {
 	// Send - 
 	// Response -
 	// N/A.
-	$deleteCards = aptify_get_GetAptifyData("13", $deleteCardSubmit); 
+	$deleteCards = GetAptifyData("13", $deleteCardSubmit); 
 	//print_r($deleteCards);
 	
 }
@@ -360,7 +360,7 @@ if(isset($_Get["action"]) && $_Get["action"] = "updatecard") {
 	// UserID, Creditcard-ID,Expiry-date,CVV
 	// Response -
 	// N/A.
-	$updateCards = aptify_get_GetAptifyData("13", $updateCardSubmit); 
+	$updateCards = GetAptifyData("13", $updateCardSubmit); 
 	//print_r($updateCards);
 	
 }
@@ -376,7 +376,7 @@ if(isset($_POST["setCardID"]) && $_POST["setCardID"] != ""){
 	// UserID, Creditcard-ID
 	// Response -
 	// N/A.
-	$updateCards = aptify_get_GetAptifyData("13", $updateCardSubmit); 
+	$updateCards = GetAptifyData("13", $updateCardSubmit); 
 	//print_r($updateCards);
 	
 }
@@ -388,7 +388,7 @@ if(isset($_Get["action"]) && $_Get["action"] = "rollover") {
 	// UserID, Rollover
 	// Response -
 	// N/A.
-	aptify_get_GetAptifyData("13", $updateCardSubmit); 
+	GetAptifyData("13", $updateCardSubmit); 
 }
 
 ?>
@@ -1092,7 +1092,7 @@ apa_function_dashboardLeftNavigation_form();
 				// Credit cards details [Credit card ID, Payment-method,
 				// Name on card, Digits, Exp date, Roll over],  Main card
 				$test['id'] = $_SESSION["UserId"];
-				$cardsnum = aptify_get_GetAptifyData("12", $test);
+				$cardsnum = GetAptifyData("12", $test);
 				unset($_SESSION["paymentTabTag"]);
 				//print_r($cardsnum);
 				//$cardsnum = $cardsnums["paymentcards"];

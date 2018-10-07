@@ -33,11 +33,11 @@ if(isset($_POST['step3'])) {
 	// Send - 
 	// userID&Paymentoption&PRFdonation&Rollover&Card_number&productID
 	// Response -Register a new order successfully
-	$registerOuts = aptify_get_GetAptifyData("26", $postReviewData);
+	$registerOuts = GetAptifyData("26", $postReviewData);
     if($registerOuts['Invoice_ID']!=="0") {
 		//refresh session data
 		$data = "UserID=".$_SESSION["UserId"];
-		$details = aptify_get_GetAptifyData("4", $data,"");
+		$details = GetAptifyData("4", $data,"");
 		newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
 		//end refresh session data
 		$invoice_ID = $registerOuts['Invoice_ID'];
