@@ -25,7 +25,7 @@ if(isset($_SESSION["Log-in"])) : ?>
 	//echo $product["Update"]."!!";
   //print_r($product);
 
-  if(isset($product) && $product['Error'] != ""):
+  if(isset($product) && isset($product['Error']) && $product['Error'] != ""):
     ?>
 
     <!-- WRONG CURRENT PASSWORD -->
