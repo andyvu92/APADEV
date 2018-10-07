@@ -78,30 +78,32 @@ if(isset($_GET["action"])&&$_GET["action"]=="del"){
 
 /*********End delete shopping product from APAserver******/
 /********Get user shopping product form APA server******/
-$productList = getPDProduct($userID,$type);
+$productList = getPDProduct($userID,"PD");
 /********End get user shopping product form APA server******/
 /********Get Product details  from Aptify******/
 // Eddy's code next 3
 $UserID = "";
 $PDarray = array();
 $PDProductarray = array();
-foreach ($productList as $productDetail){
-	$productID = $productDetail['productID'];
-	$meetingID = $productDetail['meetingID'];
-	$coupon =  $productDetail['coupon'];
-	$UID = $productDetail['ID'];
-	$Lproduct = array('UID'=>$UID,'ProductID' =>$productID,'MeetingID' =>$meetingID, 'coupon' =>$coupon);
-	array_push($localProducts, $Lproduct);
+if(sizeof($productList)!=0){
+	foreach ($productList as $productDetail){
+		$productID = $productDetail['productID'];
+		$meetingID = $productDetail['meetingID'];
+		$coupon =  $productDetail['coupon'];
+		$UID = $productDetail['ID'];
+		$Lproduct = array('UID'=>$UID,'ProductID' =>$productID,'MeetingID' =>$meetingID, 'coupon' =>$coupon);
+		array_push($localProducts, $Lproduct);
+			
+		// Eddy's code next 3
 		
-	// Eddy's code next 3
-	
-	$PDtotalArray["PDid"] = $Lproduct['MeetingID'];
-	$SingleProduct = $Lproduct['ProductID'];
-	array_push($PDProductarray, $SingleProduct);
-	$UserID = $productDetail['ID'];
-	$PDtotalArray["Coupon"] = $Lproduct['coupon'];
-	$couponCode = $Lproduct['coupon'];
-	array_push($PDarray, $PDtotalArray);
+		$PDtotalArray["PDid"] = $Lproduct['MeetingID'];
+		$SingleProduct = $Lproduct['ProductID'];
+		array_push($PDProductarray, $SingleProduct);
+		$UserID = $productDetail['ID'];
+		$PDtotalArray["Coupon"] = $Lproduct['coupon'];
+		$couponCode = $Lproduct['coupon'];
+		array_push($PDarray, $PDtotalArray);
+	}
 }
 /**
  *  Get National Group products for PD shopping cart
