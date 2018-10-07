@@ -58,7 +58,7 @@ $imageBlob = base64_encode(file_get_contents("sites/all/themes/evolve/uploads/".
 $postImageData['ID'] = $_SESSION['LinkId'];
 $postImageData['EntityName'] = "Persons";
 $postImageData['Photo'] = $imageBlob;
-$outImage = aptify_get_GetAptifyData("11",$postImageData); 
+$outImage = GetAptifyData("11",$postImageData); 
 unlink("sites/all/themes/evolve/uploads/".$name);
     
 }
