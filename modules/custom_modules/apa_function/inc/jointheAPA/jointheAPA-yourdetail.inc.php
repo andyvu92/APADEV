@@ -406,7 +406,7 @@ $filterMemberProduct = array("10007","10008","10009","9997");
                 $workplaceArray['Electronic-claiming'] = "False";
             }
             
-            if (isset($_POST['Hicaps' . $i])) {
+            /*if (isset($_POST['Hicaps' . $i])) {
                 $workplaceArray['Hicaps'] = $_POST['Hicaps' . $i];
             } else {
                 $workplaceArray['Hicaps'] = "False";
@@ -416,7 +416,7 @@ $filterMemberProduct = array("10007","10008","10009","9997");
                 $workplaceArray['Healthpoint'] = $_POST['Healthpoint' . $i];
             } else {
                 $workplaceArray['Healthpoint'] = "False";
-            }
+            }*/
             
             if (isset($_POST['Departmentva' . $i])) {
                 $workplaceArray['Departmentva'] = $_POST['Departmentva' . $i];
@@ -525,9 +525,9 @@ $filterMemberProduct = array("10007","10008","10009","9997");
     // Response -Update Success message & UserID & detail data
     
     if (isset($_SESSION['UserId'])) {
+		
 		$testdata = GetAptifyData("5", $postData);
-	
-    } else {
+	} else {
         
         // for new user join a member call user registeration web service
        

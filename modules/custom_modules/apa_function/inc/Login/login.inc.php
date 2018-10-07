@@ -396,17 +396,17 @@ if (isset($_POST['refreshTag'])) {
 					$workplaceArray['Electronic-claiming'] = "False";
 				}
 				
-				if (isset($_POST['Hicaps' . $i])) {
+				/*if (isset($_POST['Hicaps' . $i])) {
 					$workplaceArray['Hicaps'] = $_POST['Hicaps' . $i];
 				} else {
 					$workplaceArray['Hicaps'] = "False";
-				}
+				}*/
 				
-				if (isset($_POST['Healthpoint' . $i])) {
+				/*if (isset($_POST['Healthpoint' . $i])) {
 					$workplaceArray['Healthpoint'] = $_POST['Healthpoint' . $i];
 				} else {
 					$workplaceArray['Healthpoint'] = "False";
-				}
+				}*/
 				
 				if (isset($_POST['Departmentva' . $i])) {
 					$workplaceArray['Departmentva'] = $_POST['Departmentva' . $i];
