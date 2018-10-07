@@ -8,7 +8,6 @@ if(!function_exists('drupal_session_started'))
 /*Dashboard page*/
 function AptifyAPI($APItype, $variables, $jsonVersion){
 	$outputReturn = Array();
-	/*
 	switch($APItype){
 		case "0":
 			// JSON persar
@@ -536,7 +535,6 @@ function curlRequest($API, $type, $variables) {
 	// close curl resource to free up system resources 
 	curl_close($ch);
 	return $JSONreturn;
-	*/
 	return "";
 }
 

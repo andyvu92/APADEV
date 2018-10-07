@@ -347,7 +347,6 @@ function aptify_get_GetAptifyData($TypeAPI, $ArrayIn) {
 
 function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
     return "";
-    /*
     switch($APItype){
         case "0":
             // JSON persar
@@ -731,7 +730,6 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
             $API = "/GetOrderPaymentDetail";
             return _aptify_api_call("47. Get calculating the Order Total and Schedule Payments ",$API, _aptify_get('TokenId'),$jsonVersion,"JSON");
     }
-    */
 }
 /**
  * Helper function to log values in Drupal's Watchdog (DBlog)
