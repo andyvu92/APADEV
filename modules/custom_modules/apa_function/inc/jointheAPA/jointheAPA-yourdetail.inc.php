@@ -3,7 +3,7 @@
     // todo for future
     // this is uses unique variable that cannot be filtered
 	$fpData['ProductID'] = ["9977","9978"];
-	$FPListArray = GetAptifyData("21", $fpData);
+	$FPListArray = aptify_get_GetAptifyData("21", $fpData);
 	foreach($FPListArray as $MagazineProduct){ 
 		if($MagazineProduct['ProductID']=="9977") { $SportPrice =$MagazineProduct['FPprice']; }
 		if($MagazineProduct['ProductID']=="9978") { $IntouchPrice =$MagazineProduct['FPprice']; }
@@ -526,12 +526,12 @@ $filterMemberProduct = array("10007","10008","10009","9997");
     
     if (isset($_SESSION['UserId'])) {
 		
-		$testdata = GetAptifyData("5", $postData);
+		$testdata = aptify_get_GetAptifyData("5", $postData);
 	} else {
         
         // for new user join a member call user registeration web service
        
-        $resultdata = GetAptifyData("25", $postData);
+        $resultdata = aptify_get_GetAptifyData("25", $postData);
 		
         // when create user successfully call login web service to login in APA website automatically.
         // after login successfully get UserID as well to store on APA shopping cart database
@@ -645,7 +645,7 @@ if (isset($_SESSION['UserId'])):
     // Response - UserID & detail data
     
     $data    = "UserID=" . $_SESSION["UserId"];
-    $details = GetAptifyData("4", $data, ""); // #_SESSION["UserId"];
+    $details = aptify_get_GetAptifyData("4", $data, ""); // #_SESSION["UserId"];
    	//Get Member Dietary data when non-member join a member
 	if(sizeof($details['Dietary'])!=0){
 		$Dietary = array();
@@ -1348,7 +1348,7 @@ if (isset($_SESSION['UserId'])):
 $prodcutArray = array();
 $memberProductsArray['ProductID']=$prodcutArray;
 $memberProdcutID = $memberProductsArray;
-$MemberTypes = GetAptifyData("31", $memberProdcutID);
+$MemberTypes = aptify_get_GetAptifyData("31", $memberProdcutID);
 $MemberType = unique_multidim_array($MemberTypes,'ProductID'); 
     //$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
     //$MemberType     = json_decode($MemberTypecode, true);
@@ -1435,7 +1435,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 	// userID
 	// Response -National Group product
 	$sendData["UserID"] = $_SESSION['UserId'];
-	$nationalGroups = GetAptifyData("19", $sendData);
+	$nationalGroups = aptify_get_GetAptifyData("19", $sendData);
 	sort($nationalGroups);
 	//print_r($nationalGroups);
 ?>
@@ -3071,7 +3071,7 @@ if(isset($_POST['MT'])){
 								$prodcutArray = array();
 								$memberProductsArray['ProductID']=$prodcutArray;
 								$memberProdcutID = $memberProductsArray;
-								$MemberTypes = GetAptifyData("31", $memberProdcutID);
+								$MemberTypes = aptify_get_GetAptifyData("31", $memberProdcutID);
 								$MemberType = unique_multidim_array($MemberTypes,'ProductID'); 
 								//$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
 								//$MemberType     = json_decode($MemberTypecode, true);
@@ -3136,7 +3136,7 @@ if(isset($_POST['MT'])){
 							// userID
 							// Response -National Group product
 							$sendData["UserID"] = "-1";
-							$nationalGroups = GetAptifyData("19", $sendData);
+							$nationalGroups = aptify_get_GetAptifyData("19", $sendData);
 							sort($nationalGroups);
 						?>
                        <?php

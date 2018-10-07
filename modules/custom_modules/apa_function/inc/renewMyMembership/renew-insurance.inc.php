@@ -5,7 +5,7 @@
 // Response -UserID & insurance data
 $data = array();
 $data['ID'] = $_SESSION["UserId"];
-$insuarnceData = GetAptifyData("40", $data,""); // #_SESSION["UserID"];
+$insuarnceData = aptify_get_GetAptifyData("40", $data,""); // #_SESSION["UserID"];
 if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceDataTag=0;}// this is important key, to check the user is whether the first time to submit insuranceData;
 
 
