@@ -36,7 +36,7 @@ if(isset($_POST['step3'])) {
 	// userID
 	// Response -Renewal Quatation OrderID
 	$variableData['id'] = $_SESSION["UserId"];
-	$Quatation = aptify_get_GetAptifyData("45", $variableData);
+	$Quatation = GetAptifyData("45", $variableData);
 	foreach ($Quatation["results"] as $quatationOrderArray){
 		$quatationOrderID =  $quatationOrderArray["ID"];
 	}
@@ -51,11 +51,11 @@ if(isset($_POST['step3'])) {
 	// userID&Paymentoption&PRFdonation&Rollover&Card_number&productID
 	// Response -Renew a membership order successfully
 	//submit data to complete renew membership web service 2.2.27
-	$renewOuts=aptify_get_GetAptifyData("27", $postReviewData);
+	$renewOuts=GetAptifyData("27", $postReviewData);
 	if($renewOuts['MResponse'] =="Order updated successfully") {
 	//refresh session data
 	$data = "UserID=".$_SESSION["UserId"];
-	$details = aptify_get_GetAptifyData("4", $data,"");
+	$details = GetAptifyData("4", $data,"");
 	newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
 	//end refresh session data
 	  $invoice_ID = $renewOuts['Invoice_ID'];

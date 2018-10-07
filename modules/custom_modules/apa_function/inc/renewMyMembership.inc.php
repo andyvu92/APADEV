@@ -14,7 +14,7 @@ if(!function_exists('drupal_session_started'))
 // Response -Renewal Quatation OrderID
 
 	$variableData['id'] = $_SESSION["UserId"];
-	$Quatation = aptify_get_GetAptifyData("45", $variableData);
+	$Quatation = GetAptifyData("45", $variableData);
 	if(sizeof($Quatation["results"])!=0){
 		$tag = true;
 		foreach ($Quatation["results"] as $quatationOrderArray){
@@ -27,7 +27,7 @@ if(!function_exists('drupal_session_started'))
 // Send - 
 // Invoice_ID
 // Response -Order details
-	$orderDetails = aptify_get_GetAptifyData("44", $quatationOrderID); 
+	$orderDetails = GetAptifyData("44", $quatationOrderID); 
 	}
 	else{$orderDetails = array();$tag = true; }
     //$paythrough = date_create_from_format('m/d/Y', $_SESSION['payThroughDate']);
