@@ -437,10 +437,7 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
             // Eddy - done check;
             //echo "<br />8. Dashboard - Log-out: <br />";
             $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Logout";
-            $JSONreturn = curlRequest($API, "", "");
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "8. Dashboard - Log-out");
-            return $outputReturn;
+            return _aptify_api_call("8. Dashboard - Log-out",$API, _aptify_get('TokenId'),"");
         case "9":
             // Eddy - done check;
             //echo "<br />9. Dashboard - change password: <br />";
