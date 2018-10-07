@@ -27,8 +27,10 @@ if(isset($_SESSION['UserId'])){
 $sendData["UserID"] = $_SESSION['UserId'];
 $myGroups = aptify_get_GetAptifyData("20", $sendData);
 $myNG = array();
-foreach($myGroups["results"] as $group){
-	array_push($myNG, $group["NGid"]);
+if(sizeof($myGroups["results"])!=0){
+	foreach($myGroups["results"] as $group){
+		array_push($myNG, $group["NGid"]);
+	}
 }
 }
 //Added code by JingHu04092018
