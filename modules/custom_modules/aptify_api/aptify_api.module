@@ -502,10 +502,9 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "17":
             // Eddy - done check;
             //echo "<br />17. Dashboard - Get payment history list: <br />";
-            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOrderDetails";
+            $API = "/GetOrderDetails?";
             $sent = "UserID=".$variables["ID"];
             return _aptify_api_call("17. Dashboard - Get payment history list",$API, _aptify_get('TokenId'),$sent);
-            return $outputReturn;
         case "18":
             // Eddy
             //echo "// 18. Get payment invoice PDF: <br />";
