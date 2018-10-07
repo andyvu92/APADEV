@@ -13,7 +13,7 @@ $filterMemberProduct = array("10007","10008","10009","9997");
 	// ProductID 
 	// Response - UserID & detail data
 	$tt["ProductID"] = "";
-    $fellowshipProducts = GetAptifyData("21", $tt);
+    $fellowshipProducts = aptify_get_GetAptifyData("21", $tt);
 	//$fellow = array_shift($fellowshipProducts);
 	foreach ($fellowshipProducts as $fellowshipProduct){
 		if($fellowshipProduct['FPid'] !="0"){
@@ -243,7 +243,7 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 	// Send - 
 	// UserID 
 	// Response - UserID & detail data
-	$postData['userID']=$_SESSION['UserId'];$testdata = GetAptifyData("5", $postData);
+	$postData['userID']=$_SESSION['UserId'];$testdata = aptify_get_GetAptifyData("5", $postData);
 	unset($_SESSION["Regional-group"]);
 	
 	 if(isset($_SESSION['UserId'])){$userID = $_SESSION['UserId']; }
@@ -334,7 +334,7 @@ if(sizeof($userMGProduct)!=0){  $_SESSION["MGProductID"] = $userMGProduct; }
 // Response - UserID & detail data
 
 $data = "UserID=".$_SESSION["UserId"];
-$details = GetAptifyData("4", $data,"");// #_SESSION["UserID"];
+$details = aptify_get_GetAptifyData("4", $data,"");// #_SESSION["UserID"];
 //Get Member Dietary data when member renew a member
 if(sizeof($details['Dietary'])!=0){
 	$Dietary = array();
@@ -857,7 +857,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						$prodcutArray = array();
 						$memberProductsArray['ProductID']=$prodcutArray;
 						$memberProdcutID = $memberProductsArray;
-						$MemberTypes = GetAptifyData("31", $memberProdcutID);
+						$MemberTypes = aptify_get_GetAptifyData("31", $memberProdcutID);
 						$MemberType = unique_multidim_array($MemberTypes,'ProductID'); 					
                         //$MemberTypecode  = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
 						//$MemberType=json_decode($MemberTypecode, true);
@@ -926,7 +926,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						// userID
 						// Response -National Group product
 						$sendData["UserID"] = $_SESSION['UserId'];
-						$nationalGroups = GetAptifyData("19", $sendData);
+						$nationalGroups = aptify_get_GetAptifyData("19", $sendData);
 						sort($nationalGroups);
 						
 				    ?>

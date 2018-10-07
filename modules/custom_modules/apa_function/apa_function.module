@@ -554,7 +554,7 @@ function add_payment_card($form, &$form_state){
 	$postPaymentData['Cardno'] = $form["Cardnumber"]["#value"];
 	$postPaymentData['Expiry-date'] = $form["Expirydate"]["#value"];
 	$postPaymentData['CCV'] = $form["CCV"]["#value"];
-	$out = GetAptifyData("15",$postPaymentData);
+	$out = aptify_get_GetAptifyData("15",$postPaymentData);
 	$_SESSION["paymentTabTag"]=1;
 	if($out["result"]=="Failed"){ 
 		if($out["Message"]=="Expiry date lenght should be 4."){

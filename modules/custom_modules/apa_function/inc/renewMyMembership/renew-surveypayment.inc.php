@@ -33,7 +33,7 @@ if(isset($_POST['step2-1'])) {
 	// Response -UserID & insurance data
 	$data = array();
 	$data['ID'] = $_SESSION["UserId"];
-	$insuarnceData = GetAptifyData("40", $data,""); // #_SESSION["UserID"];
+	$insuarnceData = aptify_get_GetAptifyData("40", $data,""); // #_SESSION["UserID"];
 	if(sizeof($insuarnceData['results'])!=0){
 		if($postInsuranceData['MalpracticeClaim']!=$insuarnceData['results'][0]['Claim'] || $postInsuranceData['InsuredClaimRisk']!=$insuarnceData['results'][0]['Facts'] || $postInsuranceData['ExternalDisciplinaryProceedings']!=$insuarnceData['results'][0]['Disciplinary'] || $postInsuranceData['InsurerDeclinedInsurance']!=$insuarnceData['results'][0]['Decline']|| $postInsuranceData['MoreThanOneClaim']!=$insuarnceData['results'][0]['Oneclaim']){
 		$submitTag=true;
@@ -56,7 +56,7 @@ if(isset($_POST['step2-1'])) {
 	// userID & insurance data
 	// Response -??????????????????????set in the future
    
-	if($submitTag){$testData = GetAptifyData("41", $postInsuranceData); }
+	if($submitTag){$testData = aptify_get_GetAptifyData("41", $postInsuranceData); }
 	//force the not eligible user
 	//added on 13/08/2018
 	if(isset($_POST['insuranceStatus'])&& $_POST['insuranceStatus']=="1") {
@@ -80,7 +80,7 @@ if(isset($_POST['step2-1'])) {
 	if(sizeof($prodcutArray)!=0){
 		$memberProductsArray['ProductID']=$prodcutArray;
 		$memberProdcutID = $memberProductsArray;
-		$memberProducts = GetAptifyData("31", $memberProdcutID);
+		$memberProducts = aptify_get_GetAptifyData("31", $memberProdcutID);
 	}
 	
 	// 2.2.19 - GET list National Group
@@ -88,7 +88,7 @@ if(isset($_POST['step2-1'])) {
 	// userID
 	// Response -National Group product
 	$sendData["UserID"] = $_SESSION['UserId'];
-	$NGListArray = GetAptifyData("19", $sendData);
+	$NGListArray = aptify_get_GetAptifyData("19", $sendData);
 	//print_r($NGListArray);
 	if(isset($_SESSION["NationalProductID"])) {$NGProductsArray=$_SESSION["NationalProductID"];} else{$NGProductsArray=array();}
 	// 2.2.21 - GET Fellowship product price
@@ -110,7 +110,7 @@ if(isset($_POST['step2-1'])) {
 	if(sizeof($fpProdcutArray)!=0){
 		
 		$fpData['ProductID'] = $fpProdcutArray;
-		$FPListArray = GetAptifyData("21", $fpData);
+		$FPListArray = aptify_get_GetAptifyData("21", $fpData);
 		
 	}
 	//Get calculating the Order Total and Schedule Payments
@@ -125,7 +125,7 @@ if(isset($_POST['step2-1'])) {
 	$postScheduleData['PRFdonation'] = "0"; 
 	$postScheduleData['productID'] = getProductList($_SESSION['UserId']);
 	$postScheduleData['CampaignCode'] = "";
-	$scheduleDetails = GetAptifyData("47", $postScheduleData);
+	$scheduleDetails = aptify_get_GetAptifyData("47", $postScheduleData);
 	/************************/
   ?>
 <div id="tipsBlock" class="<?php if(isset($_POST['insuranceStatus'])&& $_POST['insuranceStatus']=="1") {echo "display";} else { echo "display-none";}?>"><span style="color:red;">Unfortunately, we cannot let you proceed with this membership purchase. Please contact the APA member hub (include email link) or on 1 300 306 622 for more information.</span></div>
@@ -306,7 +306,7 @@ if(isset($_POST['step2-1'])) {
 	// UserID 
 	// Response -payment card list
 	$test['id'] = $_SESSION["UserId"];
-	$cardsnum = GetAptifyData("12", $test);
+	$cardsnum = aptify_get_GetAptifyData("12", $test);
 	//print_r($cardsnum);?>
 	<?php if (sizeof($cardsnum["results"])!=0): ?>  
 	<div id="hiddenPayment">

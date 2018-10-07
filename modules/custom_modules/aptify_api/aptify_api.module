@@ -444,10 +444,7 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
             // Eddy - done check;
             //echo "<br />8. Dashboard - Log-out: <br />";
             $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Logout";
-            $JSONreturn = curlRequest($API, "", "");
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "8. Dashboard - Log-out");
-            return $outputReturn;
+            return _aptify_api_call("8. Dashboard - Log-out",$API, _aptify_get('TokenId'),"");
         case "9":
             // Eddy - done check;
             //echo "<br />9. Dashboard - change password: <br />";
@@ -539,9 +536,7 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
             $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/DataObjects/spGetListOfSubscribedNationalGroup__c?";
             $var = "UserID=".$variables["UserID"];
             $JSONreturn = curlRequest($API, "Get", $var);
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "20. Dashboard - Get list of subscribed National Group");
-            return $outputReturn;
+            return _aptify_api_call("20. Dashboard - Get list of subscribed National Group",$API, _aptify_get('TokenId'),$var);
         case "21":
             // Eddy - done check;
             //echo "<br />21. Dashboard - Get list of Fellowship Products: <br />";
@@ -684,7 +679,7 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "43":
             // test by Jing Hu
             //echo "<br />43. Get installment details for the user: <br />";
-            $API = "/DataObjects/spGetUserInstallmentDetails__c";
+            $API = "/DataObjects/spGetUserInstallmentDetails__c?";
             $data = "UserID=".$variables["id"];
             return _aptify_api_call("43. Get installment details for the user",$API, _aptify_get('TokenId'),$data);
         case "44":
@@ -696,13 +691,13 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "45":
             // test by Jing Hu
             //echo "<br />45. Get Renewal Quatation OrderID <br />";
-            $API = "/DataObjects/spGetQuatationOrderID__c";
+            $API = "/DataObjects/spGetQuatationOrderID__c?";
             $data = "UserID=".$variables["id"];
             return _aptify_api_call("45. Get Renewal Quatation OrderID",$API, _aptify_get('TokenId'),$data);
         case "46":
             // test by Jing Hu
             //echo "<br />46. Get Order payment schedules <br />";
-            $API = "/DataObjects/spGetOrderPaymentScheduledDetails__c";
+            $API = "/DataObjects/spGetOrderPaymentScheduledDetails__c?";
             $data = "OrderID=".$variables["id"];
             return _aptify_api_call("46. Get Order payment schedules ",$API, _aptify_get('TokenId'),$data);
         case "47":

@@ -21,7 +21,7 @@ if(isset($_POST["POSTPRF"])) {
 	if($_POST["PRF"]=="Other") {$OrderSend['PRFdonation'] = $_POST["PRFOther"];} 
 	else {$OrderSend['PRFdonation']=$_POST["PRF"];}
 	$OrderSend['productID'] = array();
-	$registerOuts = GetAptifyData("26", $OrderSend);
+	$registerOuts = aptify_get_GetAptifyData("26", $OrderSend);
 	
 	$invoice_ID = $registerOuts['Invoice_ID'];
 	//if(isset($_POST['addcardtag'])){
@@ -35,13 +35,13 @@ if(isset($_POST["POSTPRF"])) {
 		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
 		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
-		$out = GetAptifyData("15",$postPaymentData); 
+		$out = aptify_get_GetAptifyData("15",$postPaymentData); 
 	
 	//}
 	
 }
 $test['id'] = $_SESSION["UserId"];
-$cardsnum = GetAptifyData("12", $test);
+$cardsnum = aptify_get_GetAptifyData("12", $test);
   	
 ?>
 <?php if(isset($registerOuts['Invoice_ID']) && $registerOuts['Invoice_ID']!=="0"): ?>
