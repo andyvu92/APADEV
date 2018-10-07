@@ -88,7 +88,7 @@ if(isset($_GET["page"])) {
 } else { // default page number
 	$request["PageNumber"] = "1";
 }
-$results = GetAptifyData("28", $request);
+$results = aptify_get_GetAptifyData("28", $request);
 $outputEmpty = false;
 if(isset($results['MResponse'])) {
 	//echo 'no record!!!';

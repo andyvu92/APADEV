@@ -58,13 +58,13 @@ $imageBlob = base64_encode(file_get_contents("sites/all/themes/evolve/uploads/".
 $postImageData['ID'] = $_SESSION['LinkId'];
 $postImageData['EntityName'] = "Persons";
 $postImageData['Photo'] = $imageBlob;
-$outImage = GetAptifyData("11",$postImageData); 
+$outImage = aptify_get_GetAptifyData("11",$postImageData); 
 unlink("sites/all/themes/evolve/uploads/".$name);
     
 }
 if(isset($_SESSION["UserId"])) {
 	$data = "UserID=".$_SESSION["UserId"];
-	$details = GetAptifyData("4", $data,""); // #_SESSION["UserID"];
+	$details = aptify_get_GetAptifyData("4", $data,""); // #_SESSION["UserID"];
 }
 ?>
 <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 dashboard-left-nav">

@@ -515,13 +515,13 @@ if (isset($_POST['refreshTag'])) {
 		// Response -Update Success message & UserID & detail data
 		
 		if (isset($_SESSION['UserId'])) {
-			$testdata = GetAptifyData("5", $postData);
+			$testdata = aptify_get_GetAptifyData("5", $postData);
 		
 		} else {
 			
 			// for new user join a member call user registeration web service
 		   
-			$resultdata = GetAptifyData("25", $postData);
+			$resultdata = aptify_get_GetAptifyData("25", $postData);
 			
 			// when create user successfully call login web service to login in APA website automatically.
 			// after login successfully get UserID as well to store on APA shopping cart database
@@ -619,7 +619,7 @@ if(isset($_POST['CreateUser'])) {
 	
 
 // for new user join a member call user registeration web service	
-$resultdata = GetAptifyData("42", $postData);
+$resultdata = aptify_get_GetAptifyData("42", $postData);
 //when create user successfully call login web service to login in APA website automatically.
 //after login successfully get UserID as well to store on APA shopping cart database
 if($resultdata['result']) { 
@@ -666,7 +666,7 @@ if($resultdata['result']) {
 	// test get data
 	if(isset($_POST["Getdata"])) {
 		$data = "UserID=".$_SESSION["UserId"];
-		$output = GetAptifyData("1", $data);
+		$output = aptify_get_GetAptifyData("1", $data);
 		print_r($output);
 	}
 	
@@ -704,12 +704,12 @@ if($resultdata['result']) {
 			//echo "<br>logged in!!";
 			
 			$data = "UserID=".$_SESSION["UserId"];
-			$details = GetAptifyData("4", $data,"");
+			$details = aptify_get_GetAptifyData("4", $data,"");
 			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
 			nameUpdate($details["Firstname"], $details["Preferred-name"]);
 			/*
 			$checkSSO = $_SESSION["UserId"];
-			$detailstt = GetAptifyData("0", $checkSSO);
+			$detailstt = aptify_get_GetAptifyData("0", $checkSSO);
 			print_r($detailstt);
 			*/
 			logRecorder();
@@ -722,7 +722,7 @@ if($resultdata['result']) {
 		// 
 		// Response -
 		// 
-		$result = GetAptifyData("8", "logout");
+		$result = aptify_get_GetAptifyData("8", "logout");
 		if(isset($result["ErrorInfo"])) {
 			
 			echo $result["ErrorInfo"]["ErrorMessage"];
