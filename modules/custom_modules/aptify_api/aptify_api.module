@@ -222,7 +222,7 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
     if (!empty($data)) {
         if($method === 'GET' || $method === 'GetPost') {
             //$request_url .= '?' . http_build_query($data);
-            $request_url .= '?' . $data;
+            $request_url .= $data;
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         }
     }
@@ -341,6 +341,11 @@ function aptify_get_GetAptifyData($TypeAPI, $ArrayIn) {
 	$arrayToJson = drupal_json_encode($ArrayIn);
 	// pass array and JSON version together and use them as needed.
     $jsonreturn = aptify_get_url_by_number($TypeAPI, $ArrayIn, $arrayToJson);
+    /*
+    ?>
+    <?php if($TypeAPI == "22") {var_dump($jsonreturn);} ?>
+    <?php
+    */
     return $jsonreturn;
 }
 
@@ -360,7 +365,7 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "1":
             // Eddy - done check;
             //echo "<br />1. Dashboard Main: <br />";
-            $API = "/DataObjects/spGetDashboardMainDetailsForUserID__c";
+            $API = "/DataObjects/spGetDashboardMainDetailsForUserID__c?";
             $passInput = "Userid=".$variables;
             //return $outputReturn;
             return _aptify_api_call("1. Dashboard Main",$API, _aptify_get('TokenId'), $passInput);
@@ -396,7 +401,7 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "4":
             //API test by JingHu
             //echo "<br />4. Dashboard - Get member detail: <br />";
-            $API = "/GetDBMemberDetails";		
+            $API = "/GetDBMemberDetails?";		
             return _aptify_api_call("4. Dashboard - Get member detail",$API, _aptify_get('TokenId'), $variables);
             break;
         case "5":
@@ -462,7 +467,7 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
             break;
         case "12":
             //API test by JingHu
-            $API = "/DataObjects/spGetPaymentListing__c";
+            $API = "/DataObjects/spGetPaymentListing__c?";
             //echo "<br />12. Dashboard - Get payment listing: <br />";
             $data = "UserID=".$variables["id"];
             return _aptify_api_call("12. Dashboard - Get payment listing",$API, _aptify_get('TokenId'),$data);
@@ -470,7 +475,7 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "13":
             //API test by JingHu
             //echo "<br />13. Dashboard - update payment method: <br />";
-            $API = "/ProcessFlow/UpdatePaymentMethod__c";
+            $API = "/ProcessFlow/UpdatePaymentMethod__c?";
             return _aptify_api_call("13. Dashboard - update payment method",$API, _aptify_get('TokenId'),$variables, "Secure");
             break;
         case "14":
@@ -497,11 +502,9 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "17":
             // Eddy - done check;
             //echo "<br />17. Dashboard - Get payment history list: <br />";
-            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOrderDetails?";
+            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOrderDetails";
             $sent = "UserID=".$variables["ID"];
-            $JSONreturn = curlRequest($API, "Get", $sent);
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "17. Dashboard - Get payment history list");
+            return _aptify_api_call("17. Dashboard - Get payment history list",$API, _aptify_get('TokenId'),$sent);
             return $outputReturn;
         case "18":
             // Eddy
@@ -541,29 +544,20 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "22":
             // Eddy - done check;
             //echo "<br />22. Dashboard - Get list of subscribed Fellowship Product: <br />";
-            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/DataObjects/spGetListOfSubscribedFellowshipProducts__c?";
+            $API = "/DataObjects/spGetListOfSubscribedFellowshipProducts__c?";
             $var = "UserID=".$variables["UserID"];
-            $JSONreturn = curlRequest($API, "Get", $var);
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "22. Dashboard - Get list of subscribed Fellowship Product");
-            return $outputReturn;
+            return _aptify_api_call("22. Dashboard - Get list of subscribed Fellowship Product",$API, _aptify_get('TokenId'),$var);
         case "23":
             // Eddy - done check;
             //echo "<br />23. Dashbard - Get list of Subscription preferences: <br />";
-            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/DataObjects/spGetListOfSubscriptionPreferences__c?";
+            $API = "/DataObjects/spGetListOfSubscriptionPreferences__c?";
             $var = "UserID=".$variables["UserID"];
-            $JSONreturn = curlRequest($API, "Get", $var);
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "23. Dashbard - Get list of Subscription preferences");
-            return $outputReturn;
+            return _aptify_api_call("23. Dashbard - Get list of Subscription preferences",$API, _aptify_get('TokenId'),$var);
         case "24":
             // Eddy - done check;
             //echo "<br />24. Dashbaord - Update subscription preferences: <br />";
-            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/UpdateSubscriptionPref";
-            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "24. Dashbaord - Update subscription preferences");
-            return $outputReturn;
+            $API = "/UpdateSubscriptionPref";
+            return _aptify_api_call("24. Dashbaord - Update subscription preferences",$API, _aptify_get('TokenId'),$jsonVersion, "JSON");
         case "25":
             //API test by JingHu
             //echo "<br />25. User Registration: <br />";
@@ -584,27 +578,18 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "28":
             // Eddy 
             //echo "<br />28. PD - Get event search result list: <br />";
-            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/PDGetEventSearchResultsList";
-            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "28. PD - Get event search result list");
-            return $outputReturn;
+            $API = "/PDGetEventSearchResultsList";
+            return _aptify_api_call("28. PD - Get event search result list",$API, _aptify_get('TokenId'),$jsonVersion,"JSON");
         case "29":
             // Eddy 
             //echo "<br />29. PD - Get event detail: <br />";
-            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/PDGetEventDetail";
-            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "29. PD - Get event detail");
-            return $outputReturn;
+            $API = "/PDGetEventDetail";
+            return _aptify_api_call("29. PD - Get event detail",$API, _aptify_get('TokenId'),$jsonVersion,"JSON");
         case "30":
             // Eddy 
             //echo "<br />30. PD - Get event detail list: <br />";
-            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/PDGetEventDetailList";
-            $JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "30. PD - Get event detail list");
-            return $outputReturn;
+            $API = "/PDGetEventDetailList";
+            return _aptify_api_call("30. PD - Get event detail list",$API, _aptify_get('TokenId'),$jsonVersion,"JSON");
         case "31":
             //API test by JingHu
             //echo "<br />31. Get Membership product price: <br />";
@@ -629,21 +614,13 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "33":
             // Eddy - done check;
             //echo "<br />33. Get CPD diary: <br />";
-            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetEducationUnits__c/";
-            $var = $variables;
-            $JSONreturn = curlRequest($API, "Get", $var);
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "33. Get CPD diary");
-            return $outputReturn;
+            $API = "/GetEducationUnits__c/";
+            return _aptify_api_call("33. Get CPD diary",$API, _aptify_get('TokenId'),$variables);
         case "34":
             // Eddy - done check;
             //echo "<br />34. Insert CPD diary: <br />";
-            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/CreateNonAPAEducationUnits";
-            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
-            //$JSONreturn = "Successfully updated!! :)";
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "34. Insert CPD diary");
-            return $outputReturn;
+            $API = "/CreateNonAPAEducationUnits";
+            return _aptify_api_call("34. Insert CPD diary",$API, _aptify_get('TokenId'),$jsonVersion, "JSON");
         case "35":
             // Eddy
             // echo "<br />35. Find a Physio data: <br />";
@@ -685,7 +662,7 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "40":
             // test by Jing Hu
             //echo "<br />40. Get Insurance Data: <br />";
-            $API = "/DataObjects/spGetPersonInsuranceData__c";
+            $API = "/DataObjects/spGetPersonInsuranceData__c?";
             $insuranceData ="UserID=".$variables["ID"];
             return _aptify_api_call("40. Get Insurance Data",$API, _aptify_get('TokenId'),$insuranceData);
         case "41":

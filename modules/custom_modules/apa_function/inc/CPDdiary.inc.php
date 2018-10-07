@@ -42,6 +42,11 @@ if(isset($_POST["nonAPA"])) {
 // Description, Date, Time, Provider, Reflection
 $results = aptify_get_GetAptifyData("33", $_SESSION["UserId"]);
 //print_r($results);
+/*
+?>
+<?php var_dump($results); ?>
+<?php
+*/
 $totalNum = sizeof($results);
 $CPDHousrs = $results["CurrentCPDHour"];
 $APA = array();
@@ -59,7 +64,7 @@ if(isset($_POST["NONAPA"])) {
 	// UserID
 	// Response -
 	// PDF file of NON-CPD hours
-	$NCPDPDF = aptify_get_GetAptifyData("38", "UserID");//$_SESSON["UserID"]
+	//$NCPDPDF = aptify_get_GetAptifyData("38", "UserID");//$_SESSON["UserID"]
 	// todo!
 }
 $DiaryAll = Array();
