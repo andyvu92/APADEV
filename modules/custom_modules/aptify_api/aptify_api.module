@@ -341,12 +341,10 @@ function aptify_get_GetAptifyData($TypeAPI, $ArrayIn) {
 	$arrayToJson = drupal_json_encode($ArrayIn);
 	// pass array and JSON version together and use them as needed.
     $jsonreturn = aptify_get_url_by_number($TypeAPI, $ArrayIn, $arrayToJson);
-
     return $jsonreturn;
 }
 
 function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
-    return "";
     switch($APItype){
         case "0":
             // JSON persar
