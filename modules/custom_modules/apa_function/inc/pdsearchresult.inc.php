@@ -89,23 +89,17 @@ if(isset($_GET["page"])) {
 	$request["PageNumber"] = "1";
 }
 $results = aptify_get_GetAptifyData("28", $request);
+/*
 ?>
 <p>test</p>
 <?php var_dump($results); ?>
 <?php
+*/
 $outputEmpty = false;
 if(isset($results['MResponse'])) {
 	//echo 'no record!!!';
-	?>
-	<p>no record</p>
-	<?php var_dump($results); ?>
-	<?php
 	$outputEmpty = true;
 } else {
-	?>
-	<p>record!</p>
-	<?php var_dump($results); ?>
-	<?php
 	$totalNum = $results["MeetingDetails"][0]["PDcount"]; //sizeof($results);
 	$results = $results["MeetingDetails"];
 	$numItem = $request["PageSize"];

@@ -535,7 +535,6 @@ function curlRequest($API, $type, $variables) {
 	// close curl resource to free up system resources 
 	curl_close($ch);
 	return $JSONreturn;
-	return "";
 }
 
 function logTransaction($APINum, $Sent, $Got) {

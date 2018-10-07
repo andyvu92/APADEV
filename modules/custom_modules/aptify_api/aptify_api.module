@@ -242,7 +242,8 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
 
     if (curl_errno($ch)) {
         $message_detail = 'Error:' . curl_error($ch);
-        throw new AptifyFailure($message_detail);
+        //throw new AptifyFailure($message_detail);
+        return curl_error($ch);
     }
 
     curl_close ($ch);
@@ -275,17 +276,23 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
     aptify_log_to_watchdog($api_number, $request_url, $data_sent, $response);
 
     // Response decode and decode check.
-    $r = drupal_json_decode($response->data);
+    if($api_number == '28. PD - Get event search result list' || $api_number == '29. PD - Get event detail') {
+        $r = json_clean_decode($result, true);
+    } else {
+        $r = drupal_json_decode($response->data);
+    }
     if ($r === NULL) {
         $message_detail = $api_number . ' JSON decode failure: ' . $response->data;
         watchdog(APTIFY_API_WATCHDOG, $message_detail, array(), WATCHDOG_CRITICAL);
         //throw new AptifyFailure($message_detail);
+        return $r;
     }
     // Aptify response status.
     if (isset($r['ErrorInfo']) === TRUE) {
         $message_detail = 'aptify error detected: ' . $r['ErrorInfo']->ErrorMessage;
         watchdog(APTIFY_API_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
         //throw new AptifyFailure($r['ErrorInfo'], $r['extra_info']);
+        return $r;
     }
     else {
         return $r;
