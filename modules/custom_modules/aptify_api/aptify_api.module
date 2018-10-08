@@ -223,8 +223,7 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
     if (!empty($data)) {
         if($method === 'GET' || $method === 'GetPost');
             $request_url .= $data; {
-            //$request_url .= '?' . http_build_query($
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+            if($method === 'GET') { curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET"); }
         }
     }
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
@@ -421,8 +420,6 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "6":
             // Eddy;
             //echo "<br />6. Dashboard - Forgot password: <br />";
-            // todo. we need to do this one. Not working properly yet.
-            // Can do after go live!
             if(isset($variables["Token"])) {
                 $API = "/Authentication/PasswordReset/Web";
                 return _aptify_api_call("6. Dashboard - Forgot password",$API, _aptify_get('TokenId'), $variables,"SecureNoTokenJSON");
