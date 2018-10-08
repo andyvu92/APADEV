@@ -21,7 +21,7 @@ if(!function_exists('drupal_session_started'))
 	$details = GetAptifyData("19", $sendData);
 	//print_r($details);
 ?>
-<form action="pd-search?search-result" method="POST">
+<form id="pd-search-form" action="pd-search?search-result" method="POST">
 	<div id="mobile-banner" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<h2 class="light-lead-heading">Explore our professional development options below:</h2>
 	</div>
@@ -37,7 +37,7 @@ if(!function_exists('drupal_session_started'))
 		<label>Type of PD</label>
 		<div class="chevron-select-box">
 		<select  name="Typeofpd" id="Typeofpd" data-placeholder="Type of PD">
-			<option class="type" selected disabled>Type of PD</option>
+			<option class="type" selected>Any type</option>
 			<?php 
 				$PDtypecode = file_get_contents("sites/all/themes/evolve/json/PDTypes.json");
 				$PDType = json_decode($PDtypecode, true);
@@ -206,6 +206,7 @@ if(!function_exists('drupal_session_started'))
 		</div>
 		<div class="col-xs-12 col-md-7 searchds align-right">
 			<button class="accent-btn your-details-submit pdSearchButton" type="submit"><i class="fa fa-search"></i> Search now</button>
+			<span id="reset-search">Reset search filters</span>
 		</div>
 	</div>
 </form>
