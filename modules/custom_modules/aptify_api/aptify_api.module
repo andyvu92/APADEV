@@ -276,7 +276,7 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
     aptify_log_to_watchdog($api_number, $request_url, $data_sent, $response);
 
     // Response decode and decode check.
-    if($api_number == '28. PD - Get event search result list' || $api_number == '29. PD - Get event detail') {
+    if($api_number == '28. PD - Get event search result list' || $api_number == '29. PD - Get event detail' || $api_number == '30. PD - Get event detail list') {
         $r = json_clean_decode($result, true);
     } else {
         $r = drupal_json_decode($response->data);

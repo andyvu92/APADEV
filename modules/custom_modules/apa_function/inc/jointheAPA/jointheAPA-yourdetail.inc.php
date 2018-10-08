@@ -1897,10 +1897,10 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                 <input type="number" class="form-control" name="Wphone<?php
         echo $key;
 ?>" <?php
-        if (empty($details['Workplaces'][$key]['Wphone'])) {
+        if (empty($details['Workplaces'][$key]['WPhone'])) {
             echo "placeholder='Phone number'";
         } else {
-            echo 'value="' . $details['Workplaces'][$key]['Wphone'] . '"';
+            echo 'value="' . $details['Workplaces'][$key]['WPhone'] . '"';
         }
 ?>>
                             </div>
