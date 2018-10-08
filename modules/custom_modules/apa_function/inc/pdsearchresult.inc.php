@@ -42,6 +42,9 @@ if(isset($_POST["Typeofpd"]) || isset($_GET["Typeofpd"])) {
 	} else {
 		$returnTypePD = $_GET["Typeofpd"];
 	}
+	if($returnTypePD == "Any type") {
+		$returnTypePD = "";
+	}
 	/* for multiple pd types
 	if(isset($_POST["Typeofpd"])) {
 		foreach($_POST["Typeofpd"] as $types) {
