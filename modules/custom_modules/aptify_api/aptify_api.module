@@ -224,7 +224,7 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
         if($method === 'GET' || $method === 'GetPost') {
             $request_url .= $data;
             //$request_url .= '?' . http_build_query($
-            curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+            if($method === 'GET') { curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET"); }
         }
     }
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
