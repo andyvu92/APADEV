@@ -43,7 +43,7 @@
 		$input["UserName"] = $_POST["UserName"];
 		$input["Password"] = $_POST["NPassword"];
 		$input["Token"] = $_POST["Token"];
-		$output = aptify_get_GetAptifyData("6", $input);
+		$output = GetAptifyData("6", $input);
 		print_r($output);
 		// todo
 		if($output["success"] == 1 ||$output["success"] == "1") {

@@ -180,6 +180,8 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
         $headers[] = "Content-Type:application/json";
     } elseif($method == "PDF") {
         $headers[] = "AptifyAuthorization: DomainWithContainer ".$data;
+    } elseif($method == "GetPost") {
+        $headers[] = 'Content-Length: 0';
     }
     //$headers[] = "Content-Type:application/json";
     curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
@@ -209,7 +211,6 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
 		}
 	} elseif($method == "GetPost") {
 		curl_setopt($ch, CURLOPT_POST, 1);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Length: 0'));
 		curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode(array()));
 	} elseif($method == "PDF") {
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
@@ -220,9 +221,9 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
     // URL.
     $request_url = $base_url . $path;
     if (!empty($data)) {
-        if($method === 'GET' || $method === 'GetPost') {
-            //$request_url .= '?' . http_build_query($data);
-            $request_url .= $data;
+        if($method === 'GET' || $method === 'GetPost');
+            $request_url .= $data; {
+            //$request_url .= '?' . http_build_query($
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
         }
     }
@@ -421,16 +422,13 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
             // Eddy;
             //echo "<br />6. Dashboard - Forgot password: <br />";
             if(isset($variables["Token"])) {
-                $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/PasswordReset/Web";
-                $JSONreturn = curlRequest($API, "SecureNoToken", $variables);
+                $API = "/Authentication/PasswordReset/Web";
+                return _aptify_api_call("6. Dashboard - Forgot password",$API, _aptify_get('TokenId'), $variables,"SecureNoTokenJSON");
             } else {
-                $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/PasswordResetRequest/Web?";
+                $API = "/Authentication/PasswordResetRequest/Web?";
                 $variable = "UserName=".$variables["email"]."&email=".$variables["email"];
-                $JSONreturn = curlRequest($API, "GetPost", $variable);
+                return _aptify_api_call("6. Dashboard - Forgot password",$API, _aptify_get('TokenId'), $variable,"GetPost");
             }
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "6. Dashboard - Forgot password");
-            return $outputReturn;
         case "7":
             // Eddy - done check;
             //echo "<br />7. Dashboard - log-in: <br />";
@@ -449,18 +447,12 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
             // Eddy - done check;
             //echo "<br />9. Dashboard - change password: <br />";
             $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/UpdatePassword";
-            $JSONreturn = curlRequest($API, "JSON", $jsonVersion);
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "9. Dashboard - change password");
-            return $outputReturn;
+            return _aptify_api_call("9. Dashboard - change password",$API, _aptify_get('TokenId'),$jsonVersion, "JSON");
         case "10":
             //API test by JingHu
             //echo "<br />10. Dashboard - Get picture: <br />";
             $PersonID = $_SESSION['LinkId'];
-            $API = "/ImageField/Persons/".$PersonID."/Photo";		
-            $JSONreturn = curlRequest($API, "Get", "");
-            array_push($outputReturn, $JSONreturn);
-            array_push($outputReturn, "10. Dashboard - Get picture");
+            $API = "/ImageField/Persons/".$PersonID."/Photo";
             return _aptify_api_call("10. Dashboard - Get picture",$API, _aptify_get('TokenId'),"");
             break;
         case "11":
