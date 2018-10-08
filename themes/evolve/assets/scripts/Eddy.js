@@ -26,6 +26,7 @@ jQuery(document).ready(function($) {
 	}
 	$(".pd-description-nonmobile").html(t);
 	
+	/*
 	var originN = $("#pd-search-results .flex-flow-row .excerpt").html();
 	var t = '';
 	if(originN != null) {
@@ -38,6 +39,7 @@ jQuery(document).ready(function($) {
 		}
 	}
 	$("#pd-search-results .flex-flow-row .excerpt").html(t);
+	*/
 	
 	function removeSpan(string) {
 		var returnTxt = string;

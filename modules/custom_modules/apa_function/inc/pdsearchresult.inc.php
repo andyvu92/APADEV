@@ -57,8 +57,22 @@ if(isset($_POST["Typeofpd"]) || isset($_GET["Typeofpd"])) {
 	$request["Typeofpd"] = $returnTypePD;
 } else { $request["Typeofpd"] = ""; }
 if(isset($_POST["Nationalgp"]) || isset($_GET["Nationalgp"])) {	
+	$returnNGs = "";
+	if(isset($_POST["Nationalgp"])) {
+		foreach($_POST["Nationalgp"] as $types) {
+			$returnNGs .= $types.",";
+		}
+	} else {
+		foreach($_GET["Nationalgp"] as $types) {
+			$returnNGs .= $types.",";
+		}
+	}
+	$returnNGs = substr($returnNGs, 0, -1);
+	$request["Nationalgp"] = $returnNGs;
+	/* for a single NG types
 	if(isset($_POST["Nationalgp"])) {$request["Nationalgp"] = $_POST["Nationalgp"]; }
 	else {$request["Nationalgp"] = $_GET["Nationalgp"];}
+	*/
 } else { $request["Nationalgp"] = ""; }
 if(isset($_POST["Regionalgp"])) {	$request["Regionalgp"] = $_POST["Regionalgp"];
 } else { $request["Regionalgp"] = ""; }
@@ -158,18 +172,22 @@ if(isset($results['MResponse'])) {
 	
 	$_SESSION["`searchResult`"] = $results;
 	$passString = "";
-	foreach($request as $reqt) {
-		if($reqt != "") {
-			$key = array_search($reqt, $request);
+	foreach($request as $key => $value) {
+		if($value != "") {
 			if($key != "PageSize") {
 				if($key != "PageNumber") {
-					if(is_array($reqt)) {
-						foreach($reqt as $ty) {
+					if(is_array($value)) {
+						foreach($value as $ty) {
+							$passString = $passString.$key."[]=".$ty."&";
+						}
+					} elseif($key == "Nationalgp") {
+						$commaOnes = explode(",",$value);
+						foreach($commaOnes as $ty) {
 							$passString = $passString.$key."[]=".$ty."&";
 						}
 					} else {
-						$passString = $passString.$key."=".$reqt."&";
-					}					
+						$passString = $passString.$key."=".$value."&";
+					}			
 				}
 			}
 		}
@@ -270,7 +288,8 @@ if(isset($results['MResponse'])) {
         </div>
     </div>
 
-    <?php
+	<?php
+	//var_dump($results);
 	foreach($results as $result){
 
 		echo "<div class='flex-cell flex-flow-row'>";
