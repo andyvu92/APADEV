@@ -164,7 +164,7 @@ $nationalGroup = $nationalGroups;
 				}
 				echo '>&nbsp;&nbsp;&nbsp;<label class="NGnameText'.$mgCounter.'" for="'.$MG["ProductID"].'">'.$MG["FPtitle"]
 					.'</label></div>';	
-				echo '<div class="flex-col-2"><div class="NGprice'.$mgCounter.'">$'.$Subs["NGprice"].'</div></div></div>';
+				echo '<div class="flex-col-2"><div class="NGprice'.$mgCounter.'">$'.$MG["FPprice"].'</div></div></div>';
 				$mgCounter++;
 			}
 			echo "</div>";
