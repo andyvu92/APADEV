@@ -19,7 +19,7 @@ $background = getBackgroundImage($userID);
 // Invoice ID, product name, Invoice, Price, date
 if(isset($_SESSION["Log-in"])) {
 	$data["ID"] = $_SESSION["UserId"];
-	$product = GetAptifyData("17", $data);
+	$product = aptify_get_GetAptifyData("17", $data);
 	//print_r($product);
 } else {
 	echo "not logged in";
@@ -155,7 +155,7 @@ apa_function_dashboardLeftNavigation_form();
 							// UserID, Invoice_ID
 							// Response -
 							// Invoice PDF
-							//$invoiceAPI = GetAptifyData("18", $apis);
+							//$invoiceAPI = aptify_get_GetAptifyData("18", $apis);
 							?>	
 				</div>
 

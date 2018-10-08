@@ -396,17 +396,17 @@ if (isset($_POST['refreshTag'])) {
 					$workplaceArray['Electronic-claiming'] = "False";
 				}
 				
-				if (isset($_POST['Hicaps' . $i])) {
+				/*if (isset($_POST['Hicaps' . $i])) {
 					$workplaceArray['Hicaps'] = $_POST['Hicaps' . $i];
 				} else {
 					$workplaceArray['Hicaps'] = "False";
-				}
+				}*/
 				
-				if (isset($_POST['Healthpoint' . $i])) {
+				/*if (isset($_POST['Healthpoint' . $i])) {
 					$workplaceArray['Healthpoint'] = $_POST['Healthpoint' . $i];
 				} else {
 					$workplaceArray['Healthpoint'] = "False";
-				}
+				}*/
 				
 				if (isset($_POST['Departmentva' . $i])) {
 					$workplaceArray['Departmentva'] = $_POST['Departmentva' . $i];
@@ -666,7 +666,7 @@ if($resultdata['result']) {
 	// test get data
 	if(isset($_POST["Getdata"])) {
 		$data = "UserID=".$_SESSION["UserId"];
-		$output = GetAptifyData("1", $data);
+		$output = aptify_get_GetAptifyData("1", $data);
 		print_r($output);
 	}
 	
@@ -709,7 +709,7 @@ if($resultdata['result']) {
 			nameUpdate($details["Firstname"], $details["Preferred-name"]);
 			/*
 			$checkSSO = $_SESSION["UserId"];
-			$detailstt = GetAptifyData("0", $checkSSO);
+			$detailstt = aptify_get_GetAptifyData("0", $checkSSO);
 			print_r($detailstt);
 			*/
 			logRecorder();
@@ -722,7 +722,7 @@ if($resultdata['result']) {
 		// 
 		// Response -
 		// 
-		$result = GetAptifyData("8", "logout");
+		$result = aptify_get_GetAptifyData("8", "logout");
 		if(isset($result["ErrorInfo"])) {
 			
 			echo $result["ErrorInfo"]["ErrorMessage"];

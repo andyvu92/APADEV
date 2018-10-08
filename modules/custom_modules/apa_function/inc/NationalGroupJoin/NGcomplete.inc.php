@@ -42,7 +42,7 @@ if(isset($_POST["POSTPRF"])) {
 	$OrderSend['InstallmentFor'] = "Membership";
 	$OrderSend['InstallmentFrequency'] = "";
 	$OrderSend['CampaignCode'] = $_POST["CouponCode"];
-	$registerOuts = GetAptifyData("26", $OrderSend);
+	$registerOuts = aptify_get_GetAptifyData("26", $OrderSend);
 	if($registerOuts['Invoice_ID']!=="0") {
 		$invoice_ID = $registerOuts['Invoice_ID'];
 		
@@ -83,7 +83,7 @@ if(isset($_POST["Invoice_ID"])) {
 	// Invoice
 	$User["UserID"] = "UserID";
 	$User["Invoice_ID"] = $_POST["Invoice_ID"];
-	$GetPDF = GetAptifyData("18", $User);
+	$GetPDF = aptify_get_GetAptifyData("18", $User);
 }
 ?>
 <?php logRecorder();  ?>
@@ -97,7 +97,7 @@ if(isset($_POST["Invoice_ID"])) {
 
 <!--<p>Download <a><?php //if(isset($GetPDF)) //echo $GetPDF["Invoice"]; 
 $apis[0] = $invoice_ID;
-$invoiceAPI = GetAptifyData("18", $apis);
+$invoiceAPI = aptify_get_GetAptifyData("18", $apis);
 ?></a></p>-->
 <a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 <p>A copy will be sent to your inbox and stored in your new dashboard</p>

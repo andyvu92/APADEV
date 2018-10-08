@@ -19,7 +19,7 @@ $background = getBackgroundImage($userID);
 // Response -
 // National Group ID, National Group title
 $sendData["UserID"] = $_SESSION['UserId'];
-//$nationalGroups = GetAptifyData("20", $sendData);
+//$nationalGroups = aptify_get_GetAptifyData("20", $sendData);
 //echo "national Groups:<br>";
 //print_r($nationalGroups);
 
@@ -29,7 +29,7 @@ $sendData["UserID"] = $_SESSION['UserId'];
 // UserID
 // Response -
 // List of Fellowship ID and its titles.
-$Fellows = GetAptifyData("22", $sendData);
+$Fellows = aptify_get_GetAptifyData("22", $sendData);
 $MagSubs = Array();
 $Fellow = $Fellows["results"];
 foreach($Fellow as $Subs) {
@@ -48,7 +48,7 @@ foreach($Fellow as $Subs) {
 // UserID
 // Response -
 // List of subscriptions and its T/F values.
-$subscriptions = GetAptifyData("23", $sendData);
+$subscriptions = aptify_get_GetAptifyData("23", $sendData);
 //echo "Subs:<br>";
 //print_r($subscriptions);
 $Subscription = $subscriptions["results"];
@@ -168,7 +168,7 @@ if(count($PostArray) == 0) { // GET data
 	// UserID, List of subscriptions and its F/F values.
 	// Response -
 	// Response, List of subscriptions and it's T/F values.
-	$subscriptions = GetAptifyData("24", $ArrayReturn);
+	$subscriptions = aptify_get_GetAptifyData("24", $ArrayReturn);
 	
 }
 ?>

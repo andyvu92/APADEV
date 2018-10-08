@@ -7,7 +7,7 @@
 // Response -
 // PD_id, NPD_id, CPD hours, PD title, PD date, CPD points
 // Description, Date, Time, Provider, Reflection
-$results = GetAptifyData("33", $_SESSION["UserId"]);
+$results = aptify_get_GetAptifyData("33", $_SESSION["UserId"]);
 $CPDHousrs = $results["CurrentCPDHour"];
 ?>
 

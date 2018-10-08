@@ -55,7 +55,7 @@ if(isset($_POST["PostNG"])) {
 // userID
 // Response -National Group product
 $sendData["UserID"] = $_SESSION['UserId'];
-$NGListArray = GetAptifyData("19", $sendData);
+$NGListArray = aptify_get_GetAptifyData("19", $sendData);
 /***************get userinfo from Aptify******************/
 if(isset($_SESSION['Dietary'])) {
 	$Dietary = $_SESSION['Dietary'];	
@@ -78,30 +78,32 @@ if(isset($_GET["action"])&&$_GET["action"]=="del"){
 
 /*********End delete shopping product from APAserver******/
 /********Get user shopping product form APA server******/
-$productList = getPDProduct($userID,$type);
+$productList = getPDProduct($userID,"PD");
 /********End get user shopping product form APA server******/
 /********Get Product details  from Aptify******/
 // Eddy's code next 3
 $UserID = "";
 $PDarray = array();
 $PDProductarray = array();
-foreach ($productList as $productDetail){
-	$productID = $productDetail['productID'];
-	$meetingID = $productDetail['meetingID'];
-	$coupon =  $productDetail['coupon'];
-	$UID = $productDetail['ID'];
-	$Lproduct = array('UID'=>$UID,'ProductID' =>$productID,'MeetingID' =>$meetingID, 'coupon' =>$coupon);
-	array_push($localProducts, $Lproduct);
+if(sizeof($productList)!=0){
+	foreach ($productList as $productDetail){
+		$productID = $productDetail['productID'];
+		$meetingID = $productDetail['meetingID'];
+		$coupon =  $productDetail['coupon'];
+		$UID = $productDetail['ID'];
+		$Lproduct = array('UID'=>$UID,'ProductID' =>$productID,'MeetingID' =>$meetingID, 'coupon' =>$coupon);
+		array_push($localProducts, $Lproduct);
+			
+		// Eddy's code next 3
 		
-	// Eddy's code next 3
-	
-	$PDtotalArray["PDid"] = $Lproduct['MeetingID'];
-	$SingleProduct = $Lproduct['ProductID'];
-	array_push($PDProductarray, $SingleProduct);
-	$UserID = $productDetail['ID'];
-	$PDtotalArray["Coupon"] = $Lproduct['coupon'];
-	$couponCode = $Lproduct['coupon'];
-	array_push($PDarray, $PDtotalArray);
+		$PDtotalArray["PDid"] = $Lproduct['MeetingID'];
+		$SingleProduct = $Lproduct['ProductID'];
+		array_push($PDProductarray, $SingleProduct);
+		$UserID = $productDetail['ID'];
+		$PDtotalArray["Coupon"] = $Lproduct['coupon'];
+		$couponCode = $Lproduct['coupon'];
+		array_push($PDarray, $PDtotalArray);
+	}
 }
 /**
  *  Get National Group products for PD shopping cart
@@ -130,7 +132,7 @@ if(sizeof($MGProductsArray)!=0) {
 $FPListArray = array();
 if(sizeof($MGProductsArray)!=0){
 		$fpData['ProductID'] = $MGProductsArray;
-		$FPListArray = GetAptifyData("21", $fpData);
+		$FPListArray = aptify_get_GetAptifyData("21", $fpData);
 }
 
 //$RequestCart = array('Id' => $PIDArray, "userID" => $UserID, "Coupon" => $CouponArray);
@@ -145,7 +147,7 @@ if(sizeof($MGProductsArray)!=0){
 if(sizeof($PDarray)!=0){
 	$RequestCart["userID"] = $_SESSION["UserId"];
 	$RequestCart["MeetingCoupons"] = $PDarray;
-	$product = GetAptifyData("30", $RequestCart); //$_SESSON["UserID"]
+	$product = aptify_get_GetAptifyData("30", $RequestCart); //$_SESSON["UserID"]
 	$products = $product["MeetingDetails"];
 }
 //print_r($products);
@@ -164,7 +166,7 @@ $postScheduleData['InstallmentFrequency'] = "";
 $postScheduleData['PRFdonation'] = "";
 $postScheduleData['productID'] = $PDProductarray;
 $postScheduleData['CampaignCode'] = $couponCode;
-$scheduleDetails = GetAptifyData("47", $postScheduleData);
+$scheduleDetails = aptify_get_GetAptifyData("47", $postScheduleData);
 $price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
 //print_r($scheduleDetails);
 /********End get Order Total and Schedule Payments  from Aptify******/
@@ -179,7 +181,7 @@ $price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
 	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
 	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
 	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
-	$out = GetAptifyData("15",$postPaymentData); 
+	$out = aptify_get_GetAptifyData("15",$postPaymentData); 
 	
 	if($out["result"]=="Failed"){
 	    if($out["Message"]=="Expiry date lenght should be 4."){ echo '<div class="checkMessage">Please enter a valid expiry date before proceeding with your order.</div>';}
@@ -206,7 +208,7 @@ if(isset($_SESSION["UserId"])){
     
 	$userid = $_SESSION["UserId"];
 	$test['id'] = $_SESSION["UserId"];
-	$cardsnum = GetAptifyData("12", $test);
+	$cardsnum = aptify_get_GetAptifyData("12", $test);
 	
 	   
 	

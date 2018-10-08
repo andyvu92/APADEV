@@ -20,12 +20,12 @@ if(isset($_SESSION["Log-in"])) : ?>
 	$data["Password"] = $_POST["Password"];
 	$data["New_password"] = $_POST["New_password"];
 	//print_r($data);
-  $product = GetAptifyData("9", $data); 
+  $product = aptify_get_GetAptifyData("9", $data); 
   
 	//echo $product["Update"]."!!";
   //print_r($product);
 
-  if(isset($product) && $product['Error'] != ""):
+  if(isset($product) && isset($product['Error']) && $product['Error'] != ""):
     ?>
 
     <!-- WRONG CURRENT PASSWORD -->

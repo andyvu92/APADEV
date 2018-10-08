@@ -16,7 +16,7 @@ if(isset($_GET["ProductID"])){
 // Send - 
 // Response - national group
 $sendData["UserID"] = "-1";
-$nationalGroups = GetAptifyData("19", $sendData);
+$nationalGroups = aptify_get_GetAptifyData("19", $sendData);
 sort($nationalGroups);
 // 2.2.20 - GET list of subscribed National Group
 // Send - 
@@ -25,16 +25,18 @@ sort($nationalGroups);
 // National Group ID, National Group title
 if(isset($_SESSION['UserId'])){
 $sendData["UserID"] = $_SESSION['UserId'];
-$myGroups = GetAptifyData("20", $sendData);
+$myGroups = aptify_get_GetAptifyData("20", $sendData);
 $myNG = array();
-foreach($myGroups["results"] as $group){
-	array_push($myNG, $group["NGid"]);
+if(sizeof($myGroups["results"])!=0){
+	foreach($myGroups["results"] as $group){
+		array_push($myNG, $group["NGid"]);
+	}
 }
 }
 //Added code by JingHu04092018
 //Get user's subscribed magezine products
 $sendData["UserID"] = $_SESSION['UserId'];
-$Fellows = GetAptifyData("22", $sendData);
+$Fellows = aptify_get_GetAptifyData("22", $sendData);
 $MagSubs = Array();
 $Fellow = $Fellows["results"];
 $TMag = false;
@@ -51,7 +53,7 @@ foreach($Fellow as $Subs) {
 
 //Get magazine products
 $fpData['ProductID'] = ["9977","9978"];
-$FPListArray = GetAptifyData("21", $fpData);
+$FPListArray = aptify_get_GetAptifyData("21", $fpData);
 //End added code by JingHu04092018inghu
 // use one of above to get "current" data
 // and combine with existing data ("$Subsctiption")
@@ -99,7 +101,7 @@ $nationalGroup = $nationalGroups;
 	// UserID, List of subscriptions and its F/F values.
 	// Response -
 	// Response, List of subscriptions and it's T/F values.
-	$subscriptions = GetAptifyData("24", $ArrayReturn);
+	$subscriptions = aptify_get_GetAptifyData("24", $ArrayReturn);
 }*/
 ?>
 <?php logRecorder(); ?>
@@ -162,7 +164,7 @@ $nationalGroup = $nationalGroups;
 				}
 				echo '>&nbsp;&nbsp;&nbsp;<label class="NGnameText'.$mgCounter.'" for="'.$MG["ProductID"].'">'.$MG["FPtitle"]
 					.'</label></div>';	
-				echo '<div class="flex-col-2"><div class="NGprice'.$mgCounter.'">$'.$Subs["NGprice"].'</div></div></div>';
+				echo '<div class="flex-col-2"><div class="NGprice'.$mgCounter.'">$'.$MG["FPprice"].'</div></div></div>';
 				$mgCounter++;
 			}
 			echo "</div>";

@@ -15,8 +15,8 @@ if(!function_exists('drupal_session_started'))
 
 	$variableData['id'] = $_SESSION["UserId"];
 	$Quatation = aptify_get_GetAptifyData("45", $variableData);
-	if(sizeof($Quatation["results"])!=0){
-		$tag = true;
+	 if(sizeof($Quatation["results"])!=0){
+	    $tag = true;
 		foreach ($Quatation["results"] as $quatationOrderArray){
 			$quatationOrderID =  $quatationOrderArray["ID"];
 		}
@@ -28,8 +28,9 @@ if(!function_exists('drupal_session_started'))
 // Invoice_ID
 // Response -Order details
 	$orderDetails = aptify_get_GetAptifyData("44", $quatationOrderID); 
+	
 	}
-	else{$orderDetails = array();$tag = true; }
+	else{$orderDetails = array();$tag = false; }
     //$paythrough = date_create_from_format('m/d/Y', $_SESSION['payThroughDate']);
     //echo $_SESSION['payThroughDate'];
 	//echo $paythrough;

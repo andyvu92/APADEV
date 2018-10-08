@@ -24,7 +24,7 @@ if(isset($_POST["nonAPA"])) {
 	$CPDsend["Provider"] = $_POST["Provider"];
 	$CPDsend["Reflection"] = $_POST["Reflection"];
 	// send and get response
-	$resultst = GetAptifyData("34", $CPDsend);
+	$resultst = aptify_get_GetAptifyData("34", $CPDsend);
 	//print_r($resultst);
 	if($resultst == "type of value") {// to be used later
 		// to do
@@ -40,7 +40,7 @@ if(isset($_POST["nonAPA"])) {
 // Response -
 // PD_id, NPD_id, CPD hours, PD title, PD date, CPD points
 // Description, Date, Time, Provider, Reflection
-$results = GetAptifyData("33", $_SESSION["UserId"]);
+$results = aptify_get_GetAptifyData("33", $_SESSION["UserId"]);
 //print_r($results);
 $totalNum = sizeof($results);
 $CPDHousrs = $results["CurrentCPDHour"];
@@ -59,7 +59,7 @@ if(isset($_POST["NONAPA"])) {
 	// UserID
 	// Response -
 	// PDF file of NON-CPD hours
-	$NCPDPDF = GetAptifyData("38", "UserID");//$_SESSON["UserID"]
+	//$NCPDPDF = aptify_get_GetAptifyData("38", "UserID");//$_SESSON["UserID"]
 	// todo!
 }
 $DiaryAll = Array();
@@ -264,7 +264,7 @@ $DiaryAll = Array();
 // Response -
 // Membership certificate PDF
 //echo "<iframe name='YInkFroamame' src='http://www.physiotherapy.asn.au'></iframe>";
-// $Certi = GetAptifyData("38", $_SESSION['LinkId']);
+// $Certi = aptify_get_GetAptifyData("38", $_SESSION['LinkId']);
 //echo "<iframe id="YInkFroamame" srcdoc='".$MemberCerti."'></iframe>";
 //echo "<iframe src='".$MemberCerti."'></iframe>";
 //echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=aptifyuser&Password=!@-auser-Apatest1-2468' style='display: none;'></iframe>";

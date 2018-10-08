@@ -82,6 +82,7 @@
 
 ?>
 <?php 
+
 $userRetisterStatus = false;
 	if(isset($_SESSION["UserId"])&&($_SESSION["UserId"]!="0")){ $userId=$_SESSION["UserId"];
 	} else {$userId="0";}
@@ -93,21 +94,21 @@ $userRetisterStatus = false;
 		// N/A.
 		$User["ID"] = $_POST["Emailaddress"];
 		$User["Password"] = $_POST["Password"];
-		$LogIn = GetAptifyData("7", $User);
+		$LogIn = aptify_get_GetAptifyData("7", $User);
 		// once they successfully login, create userID Session
 		// and get User's detail data.
 		$userId = $LogIn["UserId"];
 		$_SESSION["UserId"] = $LogIn["UserId"];
 		echo $LogIn["TokenId"];
 		$data = "UserID=".$_SESSION["UserId"];
-		$details = GetAptifyData("4", $data,"");
+		$details = aptify_get_GetAptifyData("4", $data,"");
 		$_SESSION['Dietary'] = $details["Dietary"];
 		newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
 	}
 	if(isset($_SESSION["UserId"])){
 		if(!isset($details)) {
 			$data = "UserID=".$_SESSION["UserId"];
-			$details = GetAptifyData("4", $data,"");
+			$details = aptify_get_GetAptifyData("4", $data,"");
 			$_SESSION['Dietary'] = $details["Dietary"];
 		}
 	}
@@ -207,7 +208,7 @@ $userRetisterStatus = false;
 	// Presenters, Time, Start date, End date, Registration closing
 	// Where:{Address1, Address2, Address3(if exist), Address4(if exist), City,
 	//	state, Postcode}, CPD hours, Cost, Your registration stats
-	$pd_detail = GetAptifyData("29", $pdArr);
+	$pd_detail = aptify_get_GetAptifyData("29", $pdArr);
     $pd_detail = $pd_detail['MeetingDetails'][0];
 	$prices = $pd_detail['Pricelist'];
 	$pricelistGet = Array();
@@ -459,12 +460,13 @@ $userRetisterStatus = false;
 				$postData['PersonEducation'] =  $temp ;
 		}*/
 		$postData['Workplaces'] =  $details['Workplaces'] ;
+		
 		$postData['PersonEducation'] = $details['PersonEducation'] ;
 		// 2.2.5 - Dashboard - update member detail
 		// Send - 
 		// UserID 
 		// Response - UserID & detail data
-		GetAptifyData("5", $postData);
+		aptify_get_GetAptifyData("5", $postData);
 		//update PD shopping care 
 		PDShoppingCart($userID=$_SESSION['UserId'], $productID=$_POST['productID'], $meetingID=$_POST['meetingID'],$type=$_POST['type'],$Coupon=$_POST['Couponcode']);
 		//save survey data for non-member in APA side

@@ -15,13 +15,13 @@ foreach($_POST as $key => $value){
 // userID
 // Response -National Group product
 $sendData["UserID"] = $_SESSION['UserId'];
-$NGListArray = GetAptifyData("19", $sendData);
+$NGListArray = aptify_get_GetAptifyData("19", $sendData);
 // 2.2.12 - Get payment list
 // Send - 
 // UserID 
 // Response -payment card list
 $cardData['id'] = $_SESSION["UserId"];
-$cardsnum = GetAptifyData("12", $cardData);
+$cardsnum = aptify_get_GetAptifyData("12", $cardData);
 //Get calculating the Order Total and Schedule Payments
 // 2.2.47 Get calculating the Order Total and Schedule Payments
 // Send - 
@@ -34,7 +34,7 @@ $postScheduleData['InstallmentFrequency'] = "";
 $postScheduleData['PRFdonation'] = "";
 $postScheduleData['productID'] = $NGProductsArray;
 $postScheduleData['CampaignCode'] = "";
-$scheduleDetails = GetAptifyData("47", $postScheduleData);
+$scheduleDetails = aptify_get_GetAptifyData("47", $postScheduleData);
 
  ?> 
 <form action="" method="POST">
