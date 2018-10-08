@@ -1,0 +1,363 @@
+<?php
+/**
+ * @file
+ *
+ * Functionality for Single Signon
+ *
+ * @author Web Prophets
+ */
+
+require_once __DIR__."/vendor/autoload.php";
+require_once "apa_sso_admin.inc";
+
+use Jose\Object\JWKSet;
+use Jose\Factory\JWEFactory;
+use Jose\Loader;
+use Jose\Factory\JWKFactory;
+use Jose\Encrypter;
+use Jose\Object\Recipient;
+use Jose\Decrypter;
+use Jose\Object\JWK;
+
+define("APA_SSO_WATCHDOG","APA_SSO");
+/**
+ * Implements hook_permission().
+ */
+function apa_sso_permission()
+{
+  //setting module permissions
+  return [
+    'access sso settings' => [
+      'title' => t('access sso settings'),
+      'description' => t('Access SSO Settings'),
+    ],
+  ];
+}
+
+/*
+ * Implementation of hook_menu
+ */
+function apa_sso_menu()
+{
+  $items = [];
+  $items['admin/config/sso'] = [
+    'title' => "APA SSO Settings",
+    'description' => "Various field for generating JWT Encoded URL.",
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apa_sso_admin'),
+    'access arguments' => array('access sso settings'),
+    'type' => MENU_NORMAL_ITEM,
+  ];
+
+  $items['sso/redirect-target'] = [
+    'title' => "apa SSO Test",
+    'page callback' => '_apa_sso_redirect_target',
+    'page arguments' => [],
+    'access callback' => true,
+    'type' => MENU_CALLBACK,
+  ];
+
+  // A test path to
+  $items['apa/sso'] = [
+    'title' => "apa SSO Test",    
+    'page callback' => '_apa_sso_test',
+    'page arguments' => [],
+    'access callback' => '_apa_card_logged_in',
+    'type' => MENU_CALLBACK,
+  ];
+
+  // This path will output JWKs for origins(Third Party Websites).
+  $items['apa/sso/jwks'] = [
+    'title' => "apa SSO Test",
+    'page callback' => '_apa_sso_generate_jwk',
+    'page arguments' => [],
+    'access callback' => TRUE,
+    'type' => MENU_CALLBACK,
+  ];
+
+  // This is where origins will pass their token through "Token" Argument
+  $items['apa/sso/source'] = [
+    'title' => "apa SSO Test",
+    'page callback' => '_apa_sso_source',
+    'page arguments' => [],
+    'access callback' => true,
+    'type' => MENU_CALLBACK,
+  ];
+
+  return $items;
+}
+
+function apa_sso_get_token($data=NULL)
+{
+
+  // Get JWKS from Target JWK URLs
+  $jku_url = variable_get('apa_sso_target_key_url', '');
+  $jwk_set = JWKFactory::createFromJKU($jku_url,TRUE ,null, 86400, TRUE);
+  
+  // Create playload
+  $playload = [
+    'jti' => 'somestring',
+    'exp' => time()+(60*3),
+  ];
+  if($data){
+    $playload['data'] = $data;
+  }
+  $playLoadJson = drupal_json_encode($playload);
+
+  // Create JWE with playload and Algoritham
+  $jwe = JWEFactory::createJWE(
+    $playLoadJson,// The message to encrypt
+    [
+      'alg' => 'ECDH-ES',
+      'enc' => 'A128CBC-HS256',
+    ]
+  );
+  $jwe = $jwe->addRecipientInformation($jwk_set->selectKey('enc'));
+
+  // Create encryption with the alogritham
+  $encrypter = Encrypter::createEncrypter(
+    ['ECDH-ES'], // The Key Encryption Algorithms to be used
+    ['A128CBC-HS256'],             // The Content Encryption Algorithms to be used
+    ['DEF']                        // The Compression Methods to be used
+  );
+
+  // Then we encrypt
+  $encrypter->encrypt($jwe);
+  
+  return $jwe->toCompactJSON(0);
+}
+
+function _apa_sso_test() {
+  print "<pre>";
+  print fake_encrypt();
+  print "</pre>";
+}
+
+function _apa_sso_redirect_target()
+{
+  //Check if user is logged in if not get the user to Login page
+  if (!$_SESSION['TokenId']) {
+    drupal_goto("/apa/login", ['query' => ['destination' => 'sso/redirect-target']]);
+  }
+  $data = [];
+  $data['user_info'] = [
+    'UserId' => $_SESSION['UserId'],
+    'TokenId' => $_SESSION['TokenId']
+  ];
+  $token = apa_sso_get_token($data);
+  // Create token from 3rdParty JWKs
+
+  $target_argument = variable_get('apa_sso_target_sso_arg', '');
+  $target_path = variable_get('apa_sso_target_sso_url', '');
+  $target_auth_server = variable_get('apa_sso_target_aud', '');
+  $target_url = _apa_sso_get_target_url($token, $target_argument, $target_path, $target_auth_server);
+  drupal_goto($target_url);
+
+}
+
+
+function _apa_sso_get_target_url($token,$target_argument, $target_path, $target_auth_server) {
+  return $target_auth_server."/".$target_path."?".$target_argument."=".$token;  
+}
+
+function _apa_sso_source() {
+ if(isset($_GET['token'])) {
+   
+     // A private key
+    $jwk = JWKFactory::createFromValues([
+      'kty' => 'EC',
+      'crv' => 'P-521',
+      'use' => 'enc',
+      'x' => 'AekpBQ8ST8a8VcfVOTNl353vSrDCLLJXmPk06wTjxrrjcBpXp5EOnYG_NjFZ6OvLFV1jSfS9tsz4qUxcWceqwQGk',
+      'y' => 'ADSmRA43Z1DSNx_RvcLI87cdL07l6jQyyBXMoxVg_l2Th-x3S1WDhjDly79ajL4Kkd0AZMaZmh9ubmf63e3kyMj2',
+      'd' => 'AY5pb7A0UFiB3RELSD64fTLOSV_jazdF7fLYyuTw8lOfRhWg6Y6rUrPAxerEzgdRhajnu0ferB0d53vM9mE15j2C',
+    ]);
+
+    // We create our loader .
+    $loader = new Loader();
+
+    // This is the input we want to load verify.
+    
+    $input = $_GET['token'];
+
+    // The payload is decrypted using our key.
+    $jwe = $loader->loadAndDecryptUsingKey(
+      $input,
+      $jwk,
+      ['ECDH-ES'],
+      ['A128CBC-HS256']
+    );
+    $playload = $jwe->getPayload();
+    
+    if(sizeof($playload) > 0) {
+      $user_info = app_sso_get_user_info($playload['username'],$playload['password']);
+      if(!$user_info) {
+        $response = ["error"=>"Invalid username or password"];
+      } else {
+        $response = ["user_info" => $user_info];
+      }
+
+      // Create token from 3rdParty JWKs
+      $token = apa_sso_get_token($response);
+      $target_argument = variable_get('apa_sso_target_sso_arg', '');
+      $target_path = variable_get('apa_sso_target_sso_url', '');
+      $target_auth_server = variable_get('apa_sso_target_aud', '');
+      $target_url = _apa_sso_get_target_url($token, $target_argument, $target_path, $target_auth_server);
+      //die($target_url);
+      drupal_goto($target_url);
+
+    } else {
+      throw new Exception("Play load Not Valid");
+    }
+
+  } else {
+    print "No token found.";
+  }
+}
+
+function _apa_sso_generate_jwk() {
+  
+  // A private key
+  $jwk = JWKFactory::createFromValues([
+    'kty' => 'EC',
+    'crv' => 'P-521',
+    'use' => 'enc',
+    'x' => 'AekpBQ8ST8a8VcfVOTNl353vSrDCLLJXmPk06wTjxrrjcBpXp5EOnYG_NjFZ6OvLFV1jSfS9tsz4qUxcWceqwQGk',
+    'y' => 'ADSmRA43Z1DSNx_RvcLI87cdL07l6jQyyBXMoxVg_l2Th-x3S1WDhjDly79ajL4Kkd0AZMaZmh9ubmf63e3kyMj2',
+    'd' => 'AY5pb7A0UFiB3RELSD64fTLOSV_jazdF7fLYyuTw8lOfRhWg6Y6rUrPAxerEzgdRhajnu0ferB0d53vM9mE15j2C',
+  ]);
+
+  $public_key = ["keys"=>[$jwk->toPublic()]];
+  //return drupal_json_output($rotatable_key_set);
+  return drupal_json_output($public_key);
+}
+
+function app_sso_get_user_info($email_address, $password) {
+    $base_url = variable_get('aptify_api_base_url', "https://aptifyweb.australian.physio/AptifyServicesAPI/services");
+
+    $parameters = [
+      'UserName' => $email_address,
+      'Password' => $password
+    ];
+
+    // This step is important as it filters out any malicious code.
+    $query = drupal_http_build_query($parameters);
+
+    $login_path = "/Authentication/Login/Web?".$query;
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $base_url . $login_path);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $headers = array();
+    $headers[] = "Content-Type: application/json";
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $result = curl_exec($ch);
+    $response_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if (curl_errno($ch)) {
+      $message_detail = 'Error:' . curl_error($ch);
+      throw new AptifyFailure($message_detail);
+    }
+
+    curl_close ($ch);
+    // Request authentication and HTTP response check.
+    //$response = drupal_http_request($base_url . $login_path, $options);
+    if ($response_status_code != 200 || $response_status_code == 400) {
+      watchdog(APA_SSO_WATCHDOG, $result, array(), WATCHDOG_CRITICAL);
+      return FALSE;
+    }
+
+    $response = new stdClass();
+    $response->data = $result;
+
+    // Response decode and decode check.
+    $r = drupal_json_decode($response->data);
+    if ($r === NULL) {
+      $message_detail = 'JSON decode failure: ' . $response->data;
+      watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_CRITICAL);
+      return FALSE;
+    }
+
+    // Aptify response status.
+    if (isset($r['ErrorInfo']) === TRUE) {
+      $message_detail = 'aptify error detected: ' . $r['ErrorInfo']->ErrorMessage;
+      watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
+      return FALSE;
+    }
+    else {
+      if (!($r['UserId'] || $r['TokenId'])) {
+        $message_detail = 'No UserId or Token found.';
+        watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
+        return FALSE;
+      }
+
+      $user_details =  app_sso_user_details($r['UserId'], $r['TokenId']);
+
+      if(!$user_details) {
+        $message_detail = 'Can\'t get user information.';
+        watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
+        return FALSE;
+      }
+	
+	return drupal_json_encode(reset($user_details['results']));
+    }
+  }
+
+  function app_sso_user_details($user_id, $token) {
+    $base_url = variable_get('aptify_api_base_url', "https://aptifyweb.australian.physio/AptifyServicesAPI/services");
+
+    // This step is important as it filters out any malicious code.
+    $query = drupal_http_build_query(['UserId'=>$user_id]);
+
+    $path = "/DataObjects/spGetMemberDetailsForSSO__c?".$query;
+
+    $ch = curl_init();
+
+    curl_setopt($ch, CURLOPT_URL, $base_url . $path);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+
+    $headers[]="AptifyAuthorization: Web ".$token;
+    $headers[] = "Content-Type: application/json";
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+
+    $result = curl_exec($ch);
+    $response_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+
+    if (curl_errno($ch)) {
+      $message_detail = 'Error:' . curl_error($ch);
+      watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_CRITICAL);
+    }
+
+    curl_close ($ch);
+    
+    if ($response_status_code != 200 || $response_status_code == 400) {
+      watchdog(APA_SSO_WATCHDOG, $result, array(), WATCHDOG_CRITICAL);
+      return FALSE;
+    }
+
+    $response = new stdClass();
+    $response->data = $result;
+
+    // Response decode and decode check.
+    $r = drupal_json_decode($response->data);
+    if ($r === NULL) {
+      $message_detail = 'JSON decode failure: ' . $response->data;
+      watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_CRITICAL);
+      return FALSE;
+    }
+
+    // Aptify response status.
+    if (isset($r['ErrorInfo']) === TRUE) {
+      $message_detail = 'aptify error detected: ' . $r['ErrorInfo']->ErrorMessage;
+      watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
+      return FALSE;
+    }
+    else {     
+      return $r;
+    }
+  }
+
+

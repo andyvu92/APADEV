@@ -1,0 +1,5 @@
+name = Single Sign on
+description = Single signon functionality
+
+package = APA
+core = 7.x
