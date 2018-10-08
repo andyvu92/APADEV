@@ -659,7 +659,7 @@ $userRetisterStatus = false;
 		<?php 
 			$bdate = explode(" ",$pd_detail['Sdate']);
 			$edate = explode(" ",$pd_detail['Edate']);
-			echo $bdate[0]."//".$edate[0];
+			//echo $bdate[0]."//".$edate[0];
 			$dateOutput = "";
 			$timeOutput = "";
 			$t = strtotime($bdate[0]);
