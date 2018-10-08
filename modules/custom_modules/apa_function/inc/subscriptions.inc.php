@@ -106,7 +106,7 @@ if(count($PostArray) == 0) { // GET data
 			// When it's not set (unticked on check box)
 			$ArrayRe["Subscribed"] = '0';
 			$arrayUpdate["Subscribed"] = '0';
-			if($Subs["ConsentID"] == '20' || $Subs["ConsentID"] == '19') {
+			if($Subs["ConsentID"] == '16' || $Subs["ConsentID"] == '17') {
 				foreach($MagSubs as $mags) {
 					if(strpos($Subs["Consent"], $mags)) {
 						$ArrayRe["Subscribed"] = '1';//$Subs["Subscribed"];
@@ -171,6 +171,7 @@ if(count($PostArray) == 0) { // GET data
 	$subscriptions = aptify_get_GetAptifyData("24", $ArrayReturn);
 	
 }
+
 ?>
 <div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
 <?php //include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
@@ -197,7 +198,7 @@ apa_function_dashboardLeftNavigation_form();
 							$counter = 0;
 							foreach($SubListAll as $Subs) {
 								$counter++;
-								if($counter < 4) { 
+								if($counter < 2) { 
 									// for normal subscriptions
 									// from 1st to 3rd items
 									echo '
@@ -211,7 +212,7 @@ apa_function_dashboardLeftNavigation_form();
 											<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
 											.'</label>
 										</li>';
-								} elseif($counter < 5) {
+								} elseif($counter < 3) {
 									// for InMotion print copy
 									if($_SESSION['MemberType'] == "M7" || $_SESSION['MemberType'] == "M7A" || $_SESSION['MemberType'] == "M7a" || $_SESSION['MemberType'] == "M10" || $_SESSION['MemberType'] == "M9") {
 										// No InMotion print copy for 
