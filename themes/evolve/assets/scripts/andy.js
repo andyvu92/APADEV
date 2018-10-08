@@ -663,20 +663,12 @@ jQuery(document).ready(function(){
       $('.form-checkboxes input').addClass('styled-checkbox');
     }
 
-    
-    //if ( $('.html').find('#dexp-accordions-wrapper').length > 0 ){
-    //  $('#dexp-accordions-wrapper a').addClass('collapsed');
-    //  $('#dexp-accordions-wrapper .panel-collapse').removeClass('in');
-    //}
-
-    //$(document).on('click', '#dexp-accordions-wrapper a', function(){
-    //  if ( $(this).hasClass('collapsed') ){
-    //    linktarget = $(this).attr('href');
-    //    $(this).attr('data-target', linktarget);
-    //    $(this).attr('href', '#disabled');
-      //}
-    //});
-
-
+    // RESET SEARCH FILTERS
+    $('#reset-search').on('click', function(){
+      $('#pd-search-form input[type="text"]').val('');
+      $('#pd-search-form input[type="date"]').val('');
+      $("#pd-search-form select").prop("selectedIndex", 0);
+      $("#Nationalgp")[0].selectize.clear();
+    });
 });
 
