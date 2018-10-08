@@ -421,6 +421,8 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "6":
             // Eddy;
             //echo "<br />6. Dashboard - Forgot password: <br />";
+            // todo. we need to do this one. Not working properly yet.
+            // Can do after go live!
             if(isset($variables["Token"])) {
                 $API = "/Authentication/PasswordReset/Web";
                 return _aptify_api_call("6. Dashboard - Forgot password",$API, _aptify_get('TokenId'), $variables,"SecureNoTokenJSON");
@@ -592,7 +594,7 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
             else{
                 $API = "/MembershipProducts/-1";	
             }
-            $JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
+            //$JSONreturn = curlRequest($API, "JSON", $jsonVersion); 
             return _aptify_api_call("31. Get MEmbership product price",$API, _aptify_get('TokenId'),$jsonVersion,"JSON");
         case "32":
             //echo "<br />32. Order confirmation: <br />";
