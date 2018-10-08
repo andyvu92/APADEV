@@ -52,6 +52,7 @@ jQuery(document).ready(function(){
 
   var target1 = $('.side-nav li a[href="'+path+'"]');
   target1.parent().addClass('active');
+
 });
 
 jQuery(document).ready(function(){
@@ -67,9 +68,12 @@ jQuery(document).ready(function(){
 
   var target1 = $('.side-nav li a[href="'+path1+'"]');
   target1.parent().addClass('active');
+
+  var target1 = $('.nav li a[href="/membership/'+path1+'"]');
+  target1.parent().addClass('active');
 });
 
-//ACORDIAN 
+//ACORDION 
 jQuery(document).ready(function($){
 var list = $(".accordian-container");
 
@@ -481,8 +485,8 @@ jQuery(document).ready(function(){
 //NATIONAL GROUP LINKS HOVER FADING EFFECT
 jQuery(document).ready(function(){
   $('.national-group-grid .flex-col-6 a').on('mouseenter', function(){
-    $(this).siblings().fadeTo(0, 0.6);
-    //$(this).fadeTo(0, 1);
+    $('.national-group-grid .flex-col-6 a').fadeTo(0, 0.6);
+    $(this).fadeTo(0, 1);
   });
   $('.national-group-grid .flex-col-6 a').on('mouseleave', function(){
     $('.national-group-grid .flex-col-6 a').fadeTo(0, 1);
@@ -628,7 +632,6 @@ jQuery(document).ready(function(){
       $('.html').toggleClass('menu-open');
 
       if( $('.html').hasClass('menu-open') ){
-        //$('.html').delay(5000).css('overflow', 'hidden');
         $('.html').delay(300).queue(function (next) { 
             $(this).css('overflow', 'hidden'); 
             next();
@@ -648,7 +651,6 @@ jQuery(document).ready(function(){
     // MINIMIZE ACCORDION ON PARTNERS POPUP
     $(document).on('click', '.node-partners .portfolio-image > a', function() {
       target = $(this).attr('popup-target');
-      console.log(target);
       $('#'+ target + ' dt').removeClass('active');
       $('#'+ target + ' dd').hide();
     });
@@ -674,5 +676,7 @@ jQuery(document).ready(function(){
     //    $(this).attr('href', '#disabled');
       //}
     //});
+
+
 });
 

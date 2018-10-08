@@ -152,10 +152,26 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
                     @media all and (min-width: @tablet-width + 1) {
                         background: none!important;
                     }
+                    @media @larger-phone-width-up{
+                        overflow: hidden;
+                        align-items: center;
+                        justify-content: center;
+                        text-align: center;
+                        display: flex;
+                    }
                 }
                 img{
                     width: 100%;
                     max-height: 175px;
+                    @media @larger-phone-width-up{
+                        max-height: 175px;
+                        width: auto;
+                        height: 175px;
+                        max-width: unset;
+                    }
+                    @media @larger-phone-width-down{
+                        min-height: 113px;
+                    }
                 }
                 @media all and (max-width: @tablet-width - 1px) {
                     width: 40%;
@@ -2032,6 +2048,15 @@ input{
                 margin: 0 auto;
                 position: relative;
                 margin-bottom: 50px;
+                @media @desktop-width-down{
+                    width: 70%;
+                }
+                @media @tablet-width-down{
+                    width: 90%;
+                }
+                @media @phone-width-down{
+                    width: 100%;
+                }
                 #edit-basic .form-item{
                     text-align: center;
                     label{
@@ -2039,6 +2064,9 @@ input{
                         margin-bottom: 25px;
                         display: block;
                         color: @bright-blue;
+                        @media @larger-phone-width-down{
+                            font-size: 2em;
+                        }
                     }
                     input{
                         width: 100%;
@@ -2062,7 +2090,13 @@ input{
                         font-family: Roboto;
                         color: #848688;
                         font-size: 2em;
+                        @media @larger-phone-width-down{
+                            font-size: 1.6em;
+                        }
                 }
+            }
+            .search-results{
+                padding: 0;
             }
         }
 
@@ -2077,12 +2111,20 @@ input{
             width: 40%;
             margin-right: 0;
             padding-right: 20px;
+            @media @larger-phone-width-down{
+                width: 100%;
+                padding: 1px;
+            }
             input{
                 background: none;
             }
             & + .criterion{
                 width: 60%;
                 margin-right: 0;
+                margin-bottom: 25px;
+                @media @larger-phone-width-down{
+                    width: 100%;
+                }
                 .form-checkboxes{
                     .form-item{
                         width: 50%;

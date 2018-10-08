@@ -617,7 +617,7 @@
 		}
 	}
 	@media @larger-tablet-width-down{
-		/* REMOVING ECCESIVE PADDING */
+		/* REMOVING EXCCESIVE PADDING */
 		#section-content-bottom-second{
 			.container{
 				div[class^="col-"]{
@@ -790,6 +790,22 @@
 		}
 		.full-img-wrapper{
 			max-width: 100%;
+		}
+		#block-block-299{
+			#section03-content{
+				.full-img-wrapper{
+					img{
+						@media @larger-phone-width-down{
+							margin: 0 auto;
+							padding: 0;
+							width: 250%;
+							position: relative;
+							max-width: unset;
+							left: -77.5%;
+						}
+					}
+				}
+			}
 		}
 	}
 	#section-content-bottom-third{

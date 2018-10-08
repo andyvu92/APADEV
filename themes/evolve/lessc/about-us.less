@@ -516,6 +516,12 @@
                         width: 90%;
                         background: rgba(0,0,0,0.1);
                     }
+                    .description{
+                        padding-bottom: 55px;
+                        @media @larger-phone-width-down{
+                            padding-bottom: 30px;
+                        }
+                    }
                 }
                 .block-cover{
                     position: absolute;
@@ -543,6 +549,9 @@
 /* MEMBER SINGLE PAGE */
 .node-type-apateam{
     .page-node-149;
+    .MainContent{
+        width: 100%;
+    }
     .left-content{
         p{
             font-size: 1.2em;
@@ -565,7 +574,7 @@
             margin-top: 50px;
             font-family: Roboto;
         }
-        #apateammember-block{
+        [id^="apateammember-block"]{
             .page-node-149 #block-block-312 #apateammember-block;
             .node-apateam{
                 .item-description{
@@ -711,11 +720,13 @@
             .dark-url{
                 color: #000;
                 font-weight: 500;
+                transition: all .2s linear;
                 &:hover{
                     color: @bright-blue;
                 }
                 strong{
                     font-size: 1em;
+                    color: unset;
                 }
             }
             .featured-img{
@@ -880,8 +891,20 @@
             background: #f0f1f3;
             padding: 40px 30px;
             margin-top: 50px;
-            .feature-sidebar-img{
-                box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.5);
+            a{
+                transition: all .3s ease-in-out;
+                top: 0px;
+                position: relative;
+                .feature-sidebar-img{
+                    box-shadow: 0px 1px 10px 0px rgba(0,0,0,0.5);
+                    transition: all .3s ease-in-out;
+                }
+                &:hover{
+                    top: -10px;
+                    .feature-sidebar-img{
+                        box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.5);
+                    }
+                }
             }
             .feature-sidebar-sub-heading{
                 font-size: 1.7em;
@@ -1216,6 +1239,7 @@
             .half-content{
                 img{
                     max-height: 460px;
+                    width: auto!important;
                 }
                 .flex-col-6:nth-child(2){
                     text-align: center;
