@@ -477,9 +477,11 @@ jQuery(document).ready(function($) {
 	if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
 		$('#addPaymentCardForm').addClass('display-none');
 		$('#PDPlaceOrder').removeClass('stop');
+		$('#hiddenPayment').addClass('display-none');
 	}
 	else{
 		$('#addPaymentCardForm').removeClass('display-none');
+		$('#hiddenPayment').removeClass('display-none');
 		if($('#Paymentcard:visible').length === 0){ $('#PDPlaceOrder').addClass('stop');}
 	}
 	$( "#PRF" ).change(function() {
@@ -496,9 +498,11 @@ jQuery(document).ready(function($) {
 			if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
 				$('#addPaymentCardForm').addClass('display-none');
 				$('#PDPlaceOrder').removeClass('stop');
+				$('#hiddenPayment').addClass('display-none');
 			}
 			else{
 				$('#addPaymentCardForm').removeClass('display-none');
+				$('#hiddenPayment').removeClass('display-none');
 				if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 			}
 		}
@@ -519,10 +523,27 @@ jQuery(document).ready(function($) {
 		if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
 			$('#addPaymentCardForm').addClass('display-none');
 			$('#PDPlaceOrder').removeClass('stop');
+			$('#hiddenPayment').addClass('display-none');
 		}
 		else{
 			$('#addPaymentCardForm').removeClass('display-none');
+			$('#hiddenPayment').removeClass('display-none');
 			if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
+		}
+		if($('.down6:visible').length !== 0){
+				if($('#PRFOther').val()=="0" && $( "#totalPayment").html()=="0"){
+					$("#anothercardBlock").removeClass('show');
+					$("input[name='addCard']").val('0');
+					$('#hiddenPayment').addClass('display-none');
+				}
+				else{ 
+				   	$('#hiddenPayment').removeClass('display-none');
+					if($('#Paymentcard:visible').length === 0)	{
+						$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1'); 
+					}
+				}
+				
+				
 		}
 	});
 	    $('#prftag').click(function(){
@@ -550,7 +571,7 @@ jQuery(document).ready(function($) {
 					$('#hiddenPayment').addClass('display-none');
 				}
 				else{ 
-				    $('#hiddenPayment').removeClass('display-none');
+					$('#hiddenPayment').removeClass('display-none');
 					if($('#Paymentcard:visible').length === 0)	{
 						$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1'); 
 					}
@@ -572,9 +593,10 @@ jQuery(document).ready(function($) {
 			}
 			else{
 				$('#addPaymentCardForm').removeClass('display-none');
+				$('#hiddenPayment').removeClass('display-none');
 				if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 				$('.sidebardis').removeClass('display-none');
-				$('#hiddenPayment').removeClass('display-none');
+				
 			}
 			if($('.down6:visible').length !== 0){
 				if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0"){
