@@ -279,6 +279,8 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
     // Response decode and decode check.
     if($api_number == '28. PD - Get event search result list' || $api_number == '29. PD - Get event detail' || $api_number == '30. PD - Get event detail list') {
         $r = json_clean_decode($result, true);
+    } elseif($api_number == '8. Dashboard - Log-out') {
+        $r = "";
     } else {
         $r = drupal_json_decode($response->data);
     }
@@ -441,8 +443,8 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "8":
             // Eddy - done check;
             //echo "<br />8. Dashboard - Log-out: <br />";
-            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Logout";
-            return _aptify_api_call("8. Dashboard - Log-out",$API, _aptify_get('TokenId'),"");
+            $API = "/Authentication/Logout";
+            return _aptify_api_call("8. Dashboard - Log-out",$API, _aptify_get('TokenId'),"", "t");
         case "9":
             // Eddy - done check;
             //echo "<br />9. Dashboard - change password: <br />";
