@@ -200,7 +200,7 @@ apa_function_dashboardLeftNavigation_form();
 								$counter++;
 								if($counter < 2) { 
 									// for normal subscriptions
-									// from 1st to 3rd items
+									// from 1st item
 									echo '
 										<li>
 											<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
@@ -212,7 +212,21 @@ apa_function_dashboardLeftNavigation_form();
 											<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
 											.'</label>
 										</li>';
-								} elseif($counter < 3) {
+								} elseif($counter < 4) {
+									// for extra magazine copy
+									foreach($MagSubs as $mags) {
+										$tt = strpos($Subs["Subscription"], $mags);
+										if($tt !== FALSE) {
+											echo '
+											<li>
+												<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
+												'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'" checked="checked" disabled />
+												<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
+												.'</label>
+											</li>';
+										}
+									}
+								} else {										
 									// for InMotion print copy
 									if($_SESSION['MemberType'] == "M7" || $_SESSION['MemberType'] == "M7A" || $_SESSION['MemberType'] == "M7a" || $_SESSION['MemberType'] == "M10" || $_SESSION['MemberType'] == "M9") {
 										// No InMotion print copy for 
@@ -229,18 +243,6 @@ apa_function_dashboardLeftNavigation_form();
 											<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
 											.'</label>
 										</li>';
-									}
-								} else {										
-									foreach($MagSubs as $mags) {
-										if(strpos($Subs["Subscription"], $mags)) {
-											echo '
-											<li>
-												<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
-												'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'" checked="checked" disabled />
-												<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
-												.'</label>
-											</li>';
-										}
 									}
 								}
 							}
