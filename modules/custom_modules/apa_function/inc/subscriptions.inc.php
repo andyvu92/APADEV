@@ -4,8 +4,7 @@ if(!function_exists('drupal_session_started'))
   die("Unauthorized Access");
 }
 ?>
-<?php if(isset($_SESSION["UserId"])) : ?>
-<?php
+<?php if(isset($_SESSION["UserId"])) : 
 //include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 apa_function_updateBackgroundImage_form();
 /* get background image****/
@@ -63,9 +62,11 @@ foreach ($_POST as $key => $value) {
 	//echo "Field ".htmlspecialchars($key)." is ".htmlspecialchars($value)."<br>";
 	$PostArray[htmlspecialchars($key)] = htmlspecialchars($value);
 }
-//echo "@@@@";
-//print_r($PostArray);
-//echo "@@@@";
+/*
+echo "@@@@";
+var_dump($PostArray);
+echo "@@@@";
+*/
 if(count($PostArray) == 0) { // GET data
 	$SubListAll = Array();
 	foreach($Subscription as $Subs) {
@@ -108,7 +109,8 @@ if(count($PostArray) == 0) { // GET data
 			$arrayUpdate["Subscribed"] = '0';
 			if($Subs["ConsentID"] == '16' || $Subs["ConsentID"] == '17') {
 				foreach($MagSubs as $mags) {
-					if(strpos($Subs["Consent"], $mags)) {
+					$tts = strpos($Subs["Consent"], $mags);
+					if($tts !== FALSE) {
 						$ArrayRe["Subscribed"] = '1';//$Subs["Subscribed"];
 						$arrayUpdate["Subscribed"] = '1';//$Subs["Subscribed"];
 					}
@@ -191,6 +193,7 @@ apa_function_dashboardLeftNavigation_form();
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
 				<p><span style="color:#009fda; font-size: 1.2em;"><strong>What you're signed up for</strong></span></p>
 				<form action="/subscriptions" method="POST">
+					<input name="validator" tyle="hidden" value="0" style="display: none;" />
 					<ul>
 						<?php
 							$countSubs = count($Subscription);
