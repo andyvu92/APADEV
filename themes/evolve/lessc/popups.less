@@ -1152,6 +1152,14 @@ div[aria-describedby="signupWebUser"]{
 }
 
 /* MAIN LOGIN POPUP */
+#loginAT{
+    @media @larger-phone-width-down{
+        position: absolute!important;
+        .modal-dialog{
+            position: absolute!important;
+        }
+    }
+}
 #loginAT .modal-dialog {
     position: fixed!important;
     z-index: 1054!important;
@@ -1351,7 +1359,7 @@ div[aria-describedby="signupWebUser"]{
     @media all and (max-width: @phone-width) {
         width: 300px !important;
         top: 10vh!important;
-        left: calc(~"50vw - 150px")!important;
+        left: calc(~"50vw - 140px")!important;
         .modal-body{
             .flex-cell{
                 flex-direction: column;
