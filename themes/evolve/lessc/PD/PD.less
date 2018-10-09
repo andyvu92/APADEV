@@ -2,6 +2,13 @@
 /* -------------------------- PD --------------------------- */
 /* --------------------------------------------------------- */
 
+@phone-width: 480px;
+@larger-phone-width: 570px;
+@tablet-width: 768px;
+@larger-tablet-width: 992px;
+@desktop-width: 1200px;
+@larger-desktop-width: 1500px;
+
 /*--PREDEFINED COLOURS--*/
 @light-grey: rgb(242, 243, 244);
 @light-transparent-background: rgba(255, 255, 255, 0.9);
@@ -2059,7 +2066,7 @@ input[name="Couponcode"]{
 //PD MAIN PAGE
 
 .page-node-86{
-    #block-block-123{
+    #section-banner #block-block-123{
         .img-parallax{
             margin-top: 180px;
             @media all and (max-width: @tablet-width) {
@@ -2123,20 +2130,26 @@ input[name="Couponcode"]{
             }
         }
         @media all and (max-width: @tablet-width){
+            .img-parallax{
+               top: -15%;
+            }
             .top-banner{
                 padding: 5% 18% 5%;
             }
         }
         @media all and (max-width: @larger-phone-width){
+            .img-parallax{
+                display: none;
+            }
             .sub-top-banner{
                 padding: 25px 25px;
                 font-size: 1.7em;
                 background: rgba(0,159,218,1);
             }
-            -webkit-background-size: 150%!important;
-            -moz-background-size: 150%!important;
-            -o-background-size: 150%!important;
-            background-size: 150%!important;
+            -webkit-background-size: cover!important;
+            -moz-background-size: cover!important;
+            -o-background-size: cover!important;
+            background-size: cover!important;
                 .top-banner{
                     background-image: linear-gradient(to top,#000000 0%,#000000 40%,#000000 52%,rgba(255,255,255,0) 85%); 
                     height: auto;
@@ -2156,7 +2169,7 @@ input[name="Couponcode"]{
         }
     }  
 
-    #block-block-123{
+    #section-banner #block-block-123{
         background-position: 70% 70px!important;  
         .sub-top-banner{
             padding: 20px 0;
@@ -2248,7 +2261,7 @@ input[name="Couponcode"]{
         }
         @media all and (max-width: @larger-phone-width){
             background-position: 90% -35px !important;
-            background-size: 190% !important;
+            background-size: cover !important;
             background-attachment: scroll !important;
             .top-banner{
                 padding: 36% 15% 5%;

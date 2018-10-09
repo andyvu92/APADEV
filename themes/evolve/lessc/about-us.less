@@ -3,7 +3,7 @@
 
 /*-- ABOUT US --*/
 .page-node-127{
-    #block-block-170{
+    #section-banner #block-block-170{
         /* MOBILE BACKGROUND */
         @media @larger-phone-width-down{
             background-image: url(/sites/default/files/ABOUT-US/ABOUT-US-MOBILE.jpg)!important;
@@ -15,6 +15,17 @@
             background-repeat: no-repeat;
             .img-parallax{
                 display: none;
+            }
+        }
+
+        @media @desktop-width-down{
+            .img-parallax{
+                top: -20%;
+            }
+        }
+        @media @tablet-width-down{
+            .img-parallax{
+                top: -10%;
             }
         }
 
@@ -78,7 +89,7 @@
         }
     }  
 
-    #block-block-170{
+    #section-banner #block-block-170{
         .sub-top-banner{
             padding: 20px 0;
             margin: 0 auto;
