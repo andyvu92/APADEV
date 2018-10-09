@@ -527,7 +527,7 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "20":
             // Eddy - done check;
             //echo "<br />20. Dashboard - Get list of subscribed National Group: <br />";
-            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/DataObjects/spGetListOfSubscribedNationalGroup__c?";
+            $API = "/DataObjects/spGetListOfSubscribedNationalGroup__c?";
             $var = "UserID=".$variables["UserID"];
             $JSONreturn = curlRequest($API, "Get", $var);
             return _aptify_api_call("20. Dashboard - Get list of subscribed National Group",$API, _aptify_get('TokenId'),$var);
