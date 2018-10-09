@@ -63,6 +63,12 @@ if(isset($_POST["NONAPA"])) {
 	// todo!
 }
 $DiaryAll = Array();
+
+function date_sort($a, $b) {
+	$c = strtotime($b["Date"]) - strtotime($a["Date"]);
+	$c .= strcmp($b["Description"], $a["Description"]);
+	return $c;
+}
 ?>
 
 <div id="CPD-diary-main">
@@ -121,11 +127,6 @@ $DiaryAll = Array();
   <div class="NAPAhoursContent">
     <?php
 	if(sizeof($NAPA) > 0) {
-		function date_sort($a, $b) {
-			$c = strtotime($b["Date"]) - strtotime($a["Date"]);
-			$c .= strcmp($b["Description"], $a["Description"]);
-			return $c;
-		}
 		usort($NAPA, "date_sort");
 		foreach($NAPA as $rowData) {
 			echo "<div class='flex-cell flex-flow-row'>";

@@ -202,7 +202,8 @@ if(!function_exists('drupal_session_started'))
 		</div>
 		<div class="col-xs-12 col-md-5">
 			<span class="small-text"><a href="../PDtermsandconditions">Terms and conditions</a></span>
-			<span class="small-text"><a href="/sites/default/files/PROFESSIONAL DEVELOPMENT/LD039_Event_registration_form_fillable.pdf" target="_blank">Event registration form</a></span>
+			<!--<span class="small-text"><a href="/sites/default/files/PROFESSIONAL DEVELOPMENT/LD039_Event_registration_form_fillable.pdf" target="_blank">Event registration form</a></span>-->
+			<span class="small-text"><a href="">Event registration form</a></span>
 		</div>
 		<div class="col-xs-12 col-md-7 searchds align-right">
 			<button class="accent-btn your-details-submit pdSearchButton" type="submit"><i class="fa fa-search"></i> Search now</button>

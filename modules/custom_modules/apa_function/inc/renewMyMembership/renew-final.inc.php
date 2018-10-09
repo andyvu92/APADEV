@@ -559,7 +559,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			<ul>
 			    <?php 
                     $month = date("m");		
-					$currentMonth = trim($month,"0"); 
+					if($month!="10") {$currentMonth = trim($month,"0"); }else{$currentMonth =$month;}
 					$currentYear = date("Y"); 
 					echo '<div class="flex-cell flex-flow-row">
 								<div class="flex-col-6">

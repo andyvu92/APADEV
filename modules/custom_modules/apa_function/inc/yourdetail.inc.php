@@ -1915,13 +1915,13 @@ apa_function_dashboardLeftNavigation_form();
                                 <select class="form-control" name="Udegree0" id="Udegree0">
 								<option value="" selected disabled>Please select</option>
                                     <?php
-                                        /*$degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
+                                        $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
                                         $degree             = json_decode($degreecode, true);
                                         $_SESSION["degree"] = $degree;
                                         foreach ($degree as $pair => $value) {
                                             echo '<option value="' . $degree[$pair]['ID'] . '"';
                                             echo '> ' . $degree[$pair]['Name'] . ' </option>';
-                                        }*/
+                                        }
                                     ?>
                                 <option value="0">Other</option>
                                 </select>

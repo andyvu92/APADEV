@@ -579,6 +579,45 @@ if (isset($_POST['refreshTag'])) {
 				createShoppingCart($userID, "9977", $type = "MG2", $coupon = "");
 			}
 		}
+		//update subscription for the web user 
+		//added by jinghu 09/10/2018
+		if(isset($_SESSION['UserId'])) {
+			// 2.2.23 - GET list of subscription preferences
+			// Send - 
+			// UserID
+			// Response -
+			// List of subscriptions and its T/F values.
+			$sendData["UserID"] = $_SESSION['UserId'];
+			$subscriptions = aptify_get_GetAptifyData("23", $sendData);
+			$Subscription = $subscriptions["results"];
+			$ArrayReturn = Array();
+			$ArrayReturn["UserID"] = $_SESSION['UserId'];
+			$SubListAll = Array();
+			$subArray = Array();
+			$consArray = Array();
+			foreach($Subscription as $Subs) {
+				$ArrayRe["SubscriptionID"] = $Subs["ConsentID"];
+				$arrayUpdate["ConsentID"] = $Subs["ConsentID"];
+				if($Subs["ConsentID"] == '15') {
+					$ArrayRe["Subscribed"] = '1';//$Subs["Subscribed"];
+					$arrayUpdate["Subscribed"] = '1';//$Subs["Subscribed"];
+				} else {
+					$ArrayRe["Subscribed"] = '0';//$Subs["Subscribed"];
+					$arrayUpdate["Subscribed"] = '0';//$Subs["Subscribed"];
+				}
+				array_push($consArray, $arrayUpdate);
+				$ArrayRe["Subscription"] = $Subs["Consent"];
+				array_push($SubListAll, $ArrayRe);
+			}
+			$ArrayReturn["Subscriptions"] = $subArray;
+			$ArrayReturn["Consents"] = $consArray;
+			// 2.2.24 - Update subscription preferences
+			// Send - 
+			// UserID, List of subscriptions and its F/F values.
+			// Response -
+			// Response, List of subscriptions and it's T/F values.
+			$subscriptions = aptify_get_GetAptifyData("24", $ArrayReturn);
+		}
 		
 		
 	}
@@ -631,6 +670,47 @@ if($resultdata['result']) {
 	unset($_SESSION["LoginName"]);
 	unset($_SESSION["LoginPassword"]);
 }
+		//update subscription for the web user 
+		//added by jinghu 09/10/2018
+		if(isset($_SESSION['UserId'])) {
+			// 2.2.23 - GET list of subscription preferences
+			// Send - 
+			// UserID
+			// Response -
+			// List of subscriptions and its T/F values.
+			$sendData["UserID"] = $_SESSION['UserId'];
+			$subscriptions = aptify_get_GetAptifyData("23", $sendData);
+			$Subscription = $subscriptions["results"];
+			$ArrayReturn = Array();
+			$ArrayReturn["UserID"] = $_SESSION['UserId'];
+			$SubListAll = Array();
+			$subArray = Array();
+			$consArray = Array();
+			foreach($Subscription as $Subs) {
+				$ArrayRe["SubscriptionID"] = $Subs["ConsentID"];
+				$arrayUpdate["ConsentID"] = $Subs["ConsentID"];
+				if($Subs["ConsentID"] == '15') {
+					$ArrayRe["Subscribed"] = '1';//$Subs["Subscribed"];
+					$arrayUpdate["Subscribed"] = '1';//$Subs["Subscribed"];
+				} else {
+					$ArrayRe["Subscribed"] = '0';//$Subs["Subscribed"];
+					$arrayUpdate["Subscribed"] = '0';//$Subs["Subscribed"];
+				}
+				array_push($consArray, $arrayUpdate);
+				$ArrayRe["Subscription"] = $Subs["Consent"];
+				array_push($SubListAll, $ArrayRe);
+			}
+			$ArrayReturn["Subscriptions"] = $subArray;
+			$ArrayReturn["Consents"] = $consArray;
+			// 2.2.24 - Update subscription preferences
+			// Send - 
+			// UserID, List of subscriptions and its F/F values.
+			// Response -
+			// Response, List of subscriptions and it's T/F values.
+			$subscriptions = aptify_get_GetAptifyData("24", $ArrayReturn);
+		}
+		
+	
 }
 	// current page's url. log-in to the same page before log-in.
 	$url =  "{$_SERVER['REQUEST_URI']}";

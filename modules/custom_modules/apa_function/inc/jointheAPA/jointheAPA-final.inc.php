@@ -552,8 +552,8 @@ $PRFPrice = 0;
 			<div class="modal-body">
 			<ul>
 			    <?php 
-                    $month = date("m");		
-					$currentMonth = trim($month,"0"); 
+                    $month = date("m");	
+                   	if($month!="10") {$currentMonth = trim($month,"0"); }else{$currentMonth =$month;}
 					$currentYear = date("Y"); 
 					echo '<div class="flex-cell flex-flow-row">
 								<div class="flex-col-6">
