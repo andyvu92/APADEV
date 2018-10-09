@@ -113,7 +113,6 @@ if(isset($_SESSION["UserId"])) {
 				<?php endif;?>
 				
 			</li>
-			<li><span id="reset-search">Reset search filters</span></li>
 		</ul>
 	</div>
 </div >
