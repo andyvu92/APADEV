@@ -796,6 +796,7 @@ body.page-node{
                 color: @blue;
                 font-size: 3.5em;
                 margin-bottom: 25px;
+                margin-top: 50px;
                 font-weight: 400;
             }
             .pager{
@@ -2578,3 +2579,52 @@ input[name="Couponcode"]{
     cursor: pointer;
 }
 
+/* CPD DIARY */
+#block-block-242 #CPD-diary-main{
+    /* Navigation tabs mobile */
+    div[class^="Tabs"]{
+        @media @larger-phone-width-down{
+            font-size: 1.2em;
+            margin: 0;
+            padding: 0px 20px 0 0;
+        }
+    }
+
+    /* Header on mobile */
+    .mobile-header{
+        display: none;
+        @media @larger-phone-width-down{
+            display: block;
+            font-weight: 500;
+        }
+    }
+
+    /* Mobile styles layout */
+    .APAhours, .NAPAhours{
+        @media @larger-phone-width-down{
+            margin-top: 30px;
+        }
+        .APAhoursHead, .NAPAhoursHead{
+            @media @larger-phone-width-down{
+                display: none;
+            }
+        }
+    }
+    .APAhoursContent, .NAPAhours{
+        @media @larger-phone-width-down{
+            .flex-cell{
+                flex-direction: column;
+                padding: 0;
+                border-bottom: 0px;
+                div[class^="flex-col-"]{
+                    padding: 15px 5px;
+                    border-top: 1px solid rgba(0,0,0,0.12);
+                    width: 100%;
+                }
+                .flex-col-3{
+                    border-bottom: 1px solid rgba(0,0,0,0.12);
+                }
+            }
+        }
+    }
+}

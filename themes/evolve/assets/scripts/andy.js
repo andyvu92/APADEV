@@ -599,15 +599,23 @@ jQuery(document).ready(function(){
 jQuery(document).ready(function(){
 
   // FOOTER NAVIGATION DROPDOWN ON MOBILE
+
+  var window_width = $(window).width();
+  if (window_width < 570) {
+    $('#section-bottom .footer-block div[id*="content-footer-block"]').slideUp();
+  }
+
   $(document).on('click', '.footer-block .footer-block-header', function(){
     target = $(this).attr('id');
     if ( $(this).hasClass('active') ){
       $(this).removeClass('active');
-      $('#content-' + target).slideUp();
+      $(this).next().slideUp();
+      //$('#content-' + target).slideUp();
     }
     else{
       $(this).addClass('active');
-      $('#content-' + target).slideDown();
+      $(this).next().slideDown();
+      //$('#content-' + target).slideDown();
     }
   });
 

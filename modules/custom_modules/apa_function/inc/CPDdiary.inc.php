@@ -93,8 +93,8 @@ $DiaryAll = Array();
 				foreach($APA as $rowData) {
 					echo "<div class='flex-cell flex-flow-row'>";
 					$date = date("d/m/Y", strtotime($rowData["Date"]));
-					echo "<div style='display: none;'>".$rowData["Id"]."</div><div class='flex-col-5'><b>".$rowData["Title"]."&nbsp;</b></div><div class='flex-col-2'>".$date."</div><div class='flex-col-2'>".$rowData["Hours"]."</div>";
-					echo "<div class='flex-col-3'>Australian Physiotherapy Association</div><div class='lineBreak'>&nbsp;</div>";
+					echo "<div style='display: none;'>".$rowData["Id"]."</div><div class='flex-col-5'><span class='mobile-header'>Completed PD</span><b>".$rowData["Title"]."&nbsp;</b></div><div class='flex-col-2'><span class='mobile-header'>Date</span>".$date."</div><div class='flex-col-2'><span class='mobile-header'>Hours</span>".$rowData["Hours"]."</div>";
+					echo "<div class='flex-col-3'><span class='mobile-header'>Provider</span>Australian Physiotherapy Association</div><div class='lineBreak'>&nbsp;</div>";
 					echo "</div>";
 					$arrT["ID"] = $rowData["Id"];
 					$arrT["Description"] = $rowData["Title"];
@@ -130,7 +130,7 @@ $DiaryAll = Array();
 		foreach($NAPA as $rowData) {
 			echo "<div class='flex-cell flex-flow-row'>";
 			$date = date("d/m/Y", strtotime($rowData["Date"]));
-			echo "<div style='display: none;'>".$rowData["NPDid"]."</div><div class='flex-col-4'><b>".$rowData["Description"]."</b></div><div class='flex-col-1'>".$date."</div><div class='flex-col-1'>".$rowData["Time"]."</div><div class='flex-col-2'>".$rowData["Provider"]."</div><div class='flex-col-4'>".$rowData["Reflection"]."</div>";
+			echo "<div style='display: none;'>".$rowData["NPDid"]."</div><div class='flex-col-4'><b><span class='mobile-header'>Description</span>".$rowData["Description"]."</b></div><div class='flex-col-1'><span class='mobile-header'>Date</span>".$date."</div><div class='flex-col-1'><span class='mobile-header'>Hours</span>".$rowData["Time"]."</div><div class='flex-col-2'><span class='mobile-header'>Provider</span>".$rowData["Provider"]."</div><div class='flex-col-4'><span class='mobile-header'>Reflection</span>".$rowData["Reflection"]."</div>";
 			echo "<div class='lineBreak'>&nbsp;</div>";
 			echo "</div>";
 			$arrT["ID"] = $rowData["NPDid"];
@@ -161,7 +161,7 @@ $DiaryAll = Array();
 			foreach($DiaryAll as $rowData) {
 				$date = date("d/m/Y", strtotime($rowData["Date"]));
 				echo "<div class='flex-cell flex-flow-row'>";
-				echo "<div style='display: none;'>".$rowData["ID"]."</div><div class='flex-col-4'><b>".$rowData["Description"]."</b></div><div class='flex-col-1'>".$date."</div><div class='flex-col-1'>".$rowData["Hours"]."</div><div class='flex-col-2'>".$rowData["Provider"]."</div><div class='flex-col-4'>".$rowData["Reflection"]."</div>";
+				echo "<div style='display: none;'>".$rowData["ID"]."</div><div class='flex-col-4'><b><span class='mobile-header'>Description</span>".$rowData["Description"]."</b></div><div class='flex-col-1'><span class='mobile-header'>Date</span>".$date."</div><div class='flex-col-1'><span class='mobile-header'>Hours</span>".$rowData["Hours"]."</div><div class='flex-col-2'><span class='mobile-header'>Provider</span>".$rowData["Provider"]."</div><div class='flex-col-4'><span class='mobile-header'>Reflection</span>".$rowData["Reflection"]."</div>";
 				echo "<div class='lineBreak'>&nbsp;</div>";
 				echo "</div>";
 			}

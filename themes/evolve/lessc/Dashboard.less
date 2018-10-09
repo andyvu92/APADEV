@@ -2904,6 +2904,9 @@ select.form-control{
             font-weight: 400;
             text-align: center;
             margin-top: 100px;
+            @media @larger-phone-width-down{
+                margin-top: 50px;
+            }
         }
         span.sub-heading{
             color: @bright-blue;
@@ -3170,6 +3173,7 @@ form{
             max-width: 278px;
             color: @bright-blue;
             font-family: Cairo;
+            transition: all .2s ease-in-out;
             @media @larger-phone-width-up{
                 &:hover{
                     box-shadow: 5px 8px 30px 0px rgba(0,0,0,0.5);    

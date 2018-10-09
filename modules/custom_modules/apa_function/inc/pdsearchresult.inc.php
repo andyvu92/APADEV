@@ -216,7 +216,7 @@ if(isset($results['MResponse'])) {
 		$front = (10 * $i);
 		$back = 10 * ($i + 1) + 1;
 		if($front < $current && $current <= ($back - 1)) {
-			echo '<h3 class="light-lead-heading align-center">PD BASED ON YOUR SEARCH</h3>';
+			echo '<h3 class="light-lead-heading align-center">PD based on your search</h3>';
 			if($front == 0) {
 				echo '<div class="pager col-xs-12 col-sm-6 col-md-7"><a href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.$passString.'"><div class="Pagebutton"><<</div></a>';
 			} else {
