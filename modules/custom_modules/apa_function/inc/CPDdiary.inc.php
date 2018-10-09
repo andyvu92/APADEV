@@ -355,7 +355,7 @@ print_r($NAPA);
 			<input type="hidden" name="userID" value="<?php echo $userID; ?>"> 
 			<input type="hidden" name="update">  
 			<label> <input type="radio" name="background" value="1" id="background1"><img src="/sites/default/files/PARALLAX_TRADIES.jpg"></label>
-			<label> <input type="radio" name="background" value="2"  id="background2"><img src="/sites/default/files/ABOUT%20US/ABOUTUS1170X600.jpg"></label>
+			<label> <input type="radio" name="background" value="2"  id="background2"><img src="/sites/default/files/ABOUT-US/ABOUTUS1170X600.jpg"></label>
 			<label> <input type="radio" name="background" value="3"  id="background3"><img src="/sites/default/files/NG_1200X600_RURAL.png"></label>
 			<label> <input type="radio" name="background" value="4"  id="background4"><img src="/sites/default/files/MEDIA1170X600_5.jpg"></label>
 		</div>
