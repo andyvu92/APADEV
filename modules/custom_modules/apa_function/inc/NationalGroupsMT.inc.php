@@ -4,7 +4,7 @@
 // Send - 
 // Response - national group
 $sendData["UserID"] = "-1";
-$nationalGroups = GetAptifyData("19", $sendData);
+$nationalGroups = aptify_get_GetAptifyData("19", $sendData);
 sort($nationalGroups);
 // use one of above to get "current" data
 // and combine with existing data ("$Subsctiption")
@@ -12,45 +12,16 @@ sort($nationalGroups);
 // May go through Session
 //print_r($Subscription);
 //echo "<br /><br />";
-$PostArray = Array();
-foreach ($_POST as $key => $value) {
-	//echo "Field ".htmlspecialchars($key)." is ".htmlspecialchars($value)."<br>";
-	$PostArray[htmlspecialchars($key)] = htmlspecialchars($value);
-}
 $nationalGroup = $nationalGroups;
-if(count($PostArray) == 0) { // Just GET data
-	$SubListAll = Array();
-	//$nationalGroup = $nationalGroups["NationalGroup"];
-	foreach($nationalGroup as $Subs) {
-		$ArrayRe["SubscriptionID"] = $Subs["ProductID"];//$Subs["NGid"];
-		$ArrayRe["Subscription"] = $Subs["NGtitle"];
-		$ArrayRe["NGprice"] = $Subs["NGprice"];
-		$ArrayRe["Subscribed"] = 0;
-		array_push($SubListAll, $ArrayRe);
-	}
-} else {
-	$SubListAll = Array();
-	//$nationalGroup = $nationalGroups["NationalGroup"];
-	foreach($nationalGroup as $Subs) {
-		$ArrayRe["SubscriptionID"] = $Subs["ProductID"];//$Subs["NGid"];
-		$ArrayRe["Subscription"] = $Subs["NGtitle"];
-		$ArrayRe["NGprice"] = $Subs["NGprice"];
-		if(!isset($PostArray[$Subs["NGid"]])) {
-			// When it's not set (unticked on check box)
-			$ArrayRe["Subscribed"] = 0;
-		} else {
-			$ArrayRe["Subscribed"] = 1;
-		}
-		array_push($SubListAll, $ArrayRe);
-	}
-	array_push($ArrayReturn, $SubListAll);
-	echo "<br /><br />";
-	// 2.2.24 - Update subscription preferences
-	// Send - 
-	// UserID, List of subscriptions and its F/F values.
-	// Response -
-	// Response, List of subscriptions and it's T/F values.
-	$subscriptions = GetAptifyData("24", $ArrayReturn);
+
+$SubListAll = Array();
+//$nationalGroup = $nationalGroups["NationalGroup"];
+foreach($nationalGroup as $Subs) {
+	$ArrayRe["SubscriptionID"] = $Subs["ProductID"];//$Subs["NGid"];
+	$ArrayRe["Subscription"] = $Subs["NGtitle"];
+	$ArrayRe["NGprice"] = $Subs["NGprice"];
+	$ArrayRe["Subscribed"] = 0;
+	array_push($SubListAll, $ArrayRe);
 }
 ?>
 <?php logRecorder(); ?>
