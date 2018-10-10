@@ -1443,7 +1443,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								
 								<?php 
 								$y = date("Y") + 10;
-								for ($i=1940; $i<= $y; $i++){
+								for ($i=$y; $i>= 1940; $i--){
 								echo '<option value="'.$i.'"';
 								if ($details['PersonEducation'][$key]['Yearattained'] == $i){
 								echo 'selected="selected"';

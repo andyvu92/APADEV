@@ -448,7 +448,7 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "9":
             // Eddy - done check;
             //echo "<br />9. Dashboard - change password: <br />";
-            $API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/UpdatePassword";
+            $API = "/UpdatePassword";
             return _aptify_api_call("9. Dashboard - change password",$API, _aptify_get('TokenId'),$jsonVersion, "JSON");
         case "10":
             //API test by JingHu

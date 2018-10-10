@@ -2332,8 +2332,8 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                                     echo $key;
                             ?>">
                                                             <?php
-                                    $y = date("Y") + 5;
-                                    for ($i = 1940; $i <= $y; $i++) {
+                                    $y = date("Y") + 10;
+                                    for ($i=$y; $i>= 1940; $i--){
                                         echo '<option value="' . $i . '"';
                                         if ($details['PersonEducation'][$key]['Yearattained'] == $i) {
                                             echo 'selected="selected"';
