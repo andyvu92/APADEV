@@ -49,8 +49,8 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 		<select class="form-control" name="Ugraduate-yearattained'.$i.'" id="Ugraduate-yearattained'.$i.'">';
 		echo '<option value="" selected disabled>Please select</option>';
 		$y = date("Y") + 10; 
-		for ($t=1940; $t<= $y; $t++){
-		echo '<option value="'.$t.'">'.$t.'</option>';  
+		for ($t=$y; $t>= 1940; $t--){
+			echo '<option value="'.$t.'">'.$t.'</option>';  
 		}
 		echo '</select>
 		</div>

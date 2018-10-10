@@ -1863,7 +1863,7 @@ apa_function_dashboardLeftNavigation_form();
 								<select class="form-control" name="Ugraduate-yearattained<?php echo $key;?>" id="Ugraduate-yearattained<?php echo $key;?>">
 								<?php 
 								$y = date("Y") + 10; 
-								for ($i=1940; $i<= $y; $i++){
+								for ($i=$y; $i>= 1940; $i--){
 								echo '<option value="'.$i.'"';
 								if ($details['PersonEducation'][$key]['Yearattained'] == $i){
 								echo 'selected="selected"';
