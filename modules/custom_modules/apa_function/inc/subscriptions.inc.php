@@ -51,6 +51,7 @@ $subscriptions = aptify_get_GetAptifyData("23", $sendData);
 //echo "Subs:<br>";
 //print_r($subscriptions);
 $Subscription = $subscriptions["results"];
+
 // use one of above to get "current" data
 // and combine with existing data ("$Subsctiption")
 // Then send it to Aptify.
@@ -231,7 +232,7 @@ apa_function_dashboardLeftNavigation_form();
 									}
 								} else {										
 									// for InMotion print copy
-									if($_SESSION['MemberType'] == "M7" || $_SESSION['MemberType'] == "M7A" || $_SESSION['MemberType'] == "M7a" || $_SESSION['MemberType'] == "M10" || $_SESSION['MemberType'] == "M9") {
+									if($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") {
 										// No InMotion print copy for 
 										// student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
 									} else {
