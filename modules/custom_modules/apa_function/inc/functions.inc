@@ -76,9 +76,11 @@ function nationalIcons(){
 					for($j=$k; $j<$k+3; $j++){
 						
 						if($j<$length){
+							$pageURL = findPageUrl($NGs[$j]["NGid"]);
 							echo "<div class='flex-col-4'>";
 							//echo '<a href="'.$NGs[$j]["NGtitle"].'" class="icons ng-'.$NGs[$j]["NGid"].'">';
-							echo '<a href="/membership/national-groups" class="icons ng-'.$NGs[$j]["NGid"].'">';
+							echo '<a href="/membership/national-groups/';
+							echo $pageURL.'" class="icons ng-'.$NGs[$j]["NGid"].'">';
 							echo '<i class="fa">';
 							/*
 							$num = intval($userIcons[$j]);
@@ -779,6 +781,53 @@ function findPID($ngtag){
 			return "10021";
 		case "223":
 			return "10015";
+		
+	}
+}
+//find the NG page url for NG type
+function findPageUrl($nid){
+	switch($nid){
+		case "1":
+			return "acupuncture-and-dry-needling";
+		case "19":
+			return "leadership-and-management";
+		case "2":
+			return "animal";
+		case "10":
+			return "mental-health-physiotherapy";
+		case "3":
+			return "aquatic";
+		case "11":
+			return "musculoskeletal";
+		case "18":
+			return "business";
+		case "12":
+			return "neurology";
+		case "9":
+			return "cancer-palliative-care-and-lymphoedema";
+		case "13":
+			return "occupational-health";
+		case "4":
+			return "cardiorespiratory";
+		case "14":
+			return "orthopaedic";
+		case "5":
+			return "disability";
+		case "15":
+			return "paediatric";
+		case "6":
+			return "educators";
+		case "16":
+			return "pain";
+		case "7":
+			return "emergency-department";
+		case "20":
+			return "sports-and-exercise";
+		case "8":
+			return "gerontology";
+		case "21":
+			return "womens-mens-and-pelvic-health";
+		
 		
 	}
 }
