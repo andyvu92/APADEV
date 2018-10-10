@@ -104,7 +104,7 @@ if(isset($_POST["Invoice_ID"])) {
 	</div>
 
 	<div class="flex-cell">
-		<h3 class="light-heading">A copy of your purchase receipt will be send to your inbox.<br />
+		<h3 class="light-heading">A copy of your purchase receipt will be sent to your inbox.<br />
 		You can also find a record on your dashboard.</h3>
 	</div>
 

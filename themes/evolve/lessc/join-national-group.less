@@ -9,6 +9,10 @@
         div[class^="flex-col"]{
             display: flex;
             align-items: center;
+            [class^="NGprice"]{
+                padding-right: 15px;
+                margin-left: auto;
+            }
         }
         .flex-cell{
             margin: 0px 0;
@@ -28,13 +32,17 @@
                 display: none;
             }
             .not-avalable{
-                display: block;
+                display: inline;
                 margin: 0 0 5px 5px;
             }
         }
         .not-avalable{
             display: none;
             margin: 0 0 5px 5px;
+        }
+        .styled-checkbox:disabled + label:before {
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.12);
+            background: #fff;
         }
     }
 }

@@ -105,10 +105,18 @@ $nationalGroup = $nationalGroups;
 }*/
 ?>
 <?php logRecorder(); ?>
-<form action="/pd/pd-shopping-cart" method="POST" style="width:100%;">
+<form id="single-ng-join" action="/pd/pd-shopping-cart" method="POST" style="width:100%;">
 <input type="hidden" name="PostNG" />
 <div class="container">
 <div class="flex-container join-NGtable">
+
+	<div class="flex-cell heading">
+		<h2>Now, let's choose your National Groups</h2>
+	</div>
+	<div class="flex-cell info-text">
+		<span>Join an APA National Group to connect with physiotherapists working in similar areas to keep up to date with the latest research and developments.</span>
+		<div class="MTcontentTitle">Here's the full list of National Groups, select which groups suit you:</div>
+	</div>
 
 		<?php
 			$countSubs = count($nationalGroups);
@@ -169,10 +177,12 @@ $nationalGroup = $nationalGroups;
 			}
 			echo "</div>";
 		?>
+</div>
+
+<div class='flex-cell btn-container'><button class='placeorder accent-btn' type='submit' value='Join now'>Join now</button></div>
 
 </div>
-</div>
-<button class="placeorder accent-btn" type="submit" value="Join now">Join now</button>
+
 </form>
 <div class="NGpriceT" style="display: none;"></div>
 <?php  else: ?>

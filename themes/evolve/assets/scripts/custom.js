@@ -474,6 +474,7 @@ jQuery(document).ready(function($) {
 	var PRF = $("#PRF").val();
 	$( "#POSTPRF").val(PRF);
 	$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
+	$('#prf-donation').html(Number($( "#POSTPRF").val()) );
 	if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
 		$('#addPaymentCardForm').addClass('display-none');
 		$('#PDPlaceOrder').removeClass('stop');
@@ -487,7 +488,6 @@ jQuery(document).ready(function($) {
 	$( "#PRF" ).change(function() {
 		if(($('#PRF').val()=="Other")){
 			$( "#PRFOther").removeClass('display-none');
-			
 		}
 		else{
 			$( "#PRFOther").addClass('display-none');
@@ -495,6 +495,7 @@ jQuery(document).ready(function($) {
 			var PRF = $("#PRF").val();
 			$( "#POSTPRF").val(PRF);
 			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
+			$('#prf-donation').html(Number($( "#POSTPRF").val()) );
 			if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
 				$('#addPaymentCardForm').addClass('display-none');
 				$('#PDPlaceOrder').removeClass('stop');
@@ -520,6 +521,7 @@ jQuery(document).ready(function($) {
 		var PRF = $("#PRFOther").val();
 		$( "#POSTPRF").val(PRF);
 		$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
+		$('#prf-donation').html(Number($( "#POSTPRF").val()) );
 		if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
 			$('#addPaymentCardForm').addClass('display-none');
 			$('#PDPlaceOrder').removeClass('stop');
@@ -551,6 +553,7 @@ jQuery(document).ready(function($) {
 			$('#prfselect').slideUp().css('overflow', 'hidden');
 			$( "#POSTPRF").val("");
 			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
+			$('#prf-donation').html(Number($( "#POSTPRF").val()) );
 			if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
 				$('#addPaymentCardForm').addClass('display-none');
 				$('#PDPlaceOrder').removeClass('stop');
@@ -585,6 +588,7 @@ jQuery(document).ready(function($) {
 			$('#prfselect').slideDown().css('overflow', 'unset');
 			$( "#POSTPRF").val(Number($("#PRF").val()));
 			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
+			$('#prf-donation').html(Number($( "#POSTPRF").val()) );
 			if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
 				$('#addPaymentCardForm').addClass('display-none');
 				$('#PDPlaceOrder').removeClass('stop');
@@ -1671,6 +1675,14 @@ jQuery(document).ready(function(){
 	$('#ahpblock input').keydown( function(e){
 		if ($(this).val().length >= max_chars) { 
 			$(this).val($(this).val().substr(0, max_chars));
+		}
+	});
+
+	// PHONE NUMBER MAX 13
+	var max_phone_chars = 12;
+    $(document).on('keydown', 'input[name="phone-number"], input[name="Mobile-number"]', function(e){
+		if ($(this).val().length >= max_phone_chars) { 
+			$(this).val($(this).val().substr(0, max_phone_chars));
 		}
 	});
 	

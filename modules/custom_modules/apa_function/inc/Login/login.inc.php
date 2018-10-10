@@ -1007,7 +1007,7 @@ if(isset($_SESSION['UserId'])) {
 				<div class="flex-container">
 					<div class="flex-cell">
 						<h3 class="light-lead-heading cairo">Sign in to your account</h3>
-						<p style="margin-bottom: 0"><span class="strong-subhead">First time logging in to our new website?</a></span></p>
+						<p style="margin-bottom: 0"><span class="strong-subhead">Are you an existing member logging in for the first time?</a></span></p>
 						<p style="margin-top: 0"><span class="strong-subhead"><a id="return-users" href="/return-user-welcome">Click here</a> and we'll help you get started.</span></p>
 					</div>
 					<!--<input type="email" class="form-control"  name="Emailaddress" id="Emailaddress" placeholder="Email address"><br>

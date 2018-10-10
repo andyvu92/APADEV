@@ -294,6 +294,11 @@ fieldset {
         .pd-spcart-order{
           color: #000;
           margin-bottom: 25px;
+          .flex-cell:last-child{
+            margin-top: 5px;
+            padding-top: 5px;
+            border-top: 1px solid rgba(0,0,0,0.12);
+          }
         }
 
         .placeorder{
@@ -406,8 +411,11 @@ fieldset {
           position: relative;
           cursor: pointer;
           padding: 0;
-          display: flex;
+          padding-left: 40px;
           text-align: left;
+            &:before{
+              margin-left: -40px;
+            }
         }
       
         // Box.

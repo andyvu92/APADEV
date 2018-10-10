@@ -12,9 +12,9 @@
 <form method="POST" action="/" name="resetPass" id="resetPasst">
 	<div class="flex-container">
 		<div class="flex-cell user-info">
-			<h3 class="light-lead-heading cairo">Email has been sent out.</h3>
-			<span class="sub-heading">Please click this button to go back to the homepage or</span>
-			<span class="sub-heading">wait for <span id="timer">5</span> seconds to be redirected to the homepage.</span>
+			<h3 class="light-lead-heading cairo">An email has been sent to you</h3>
+			<span class="sub-heading">Please follow the prompts to reset your password.</span>
+			<span class="sub-heading">Click the button below to go back to the homepage or wait for <span id="timer">15</span> seconds to be redirected.</span>
 			</br>
 		</div>
 		<div class="flex-cell submit-btn">
@@ -24,7 +24,7 @@
 	</div>
 </form>
 <script>
-	var count = 6;
+	var count = 16;
 	function countDown(){
 		var timer = document.getElementById("timer");
 		if(count > 0){
@@ -45,7 +45,7 @@
 	<div class="flex-container">
 		<div class="flex-cell user-info">
 			<h3 class="light-lead-heading cairo">Welcome to our new website.</h3>
-			<span class="sub-heading">From now on you should use the email address linked to your APA membership to login.</span>
+			<span class="sub-heading">From now on you should use the email address linked to your APA membership as your username.</span>
 			<span class="sub-heading">But first, let's reset your password.</span>
 			</br>
 			<span class="sub-heading">Enter your email address below.</span>

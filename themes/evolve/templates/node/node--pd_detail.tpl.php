@@ -1453,22 +1453,22 @@ $userRetisterStatus = false;
 					<div id="checkMessage" class="display-none">This email address matches one that’s already registered, please use a different one or <a class="info" data-target="#loginAT" data-toggle="modal" type="button">
 				    <i class="Log-in">&nbsp;</i>login 
 				    </a>to your existing account.</div>
-					<div id="errorFormat"></div>
+					<div id="error-format" class="checkMessage"></div>
 					<script>
 					function checkEmailFunction(email) {
 						if(!isValidEmailAddress(email)) {
 							
-							$('#errorFormat').html("This email address is not valid format");
+							$('#error-format').html("This email address is not valid format");
 							$( "#Memberid" ).focus();
-							$("#Memberid").css("border", "1px solid red");
+							$('#Memberid').css('border', '1px solid #ffa02e');
 							
 							$(".accent-btn").addClass("stop");
 							return;
 						}
 						else{
-							$('#errorFormat').html("");
+							$('#error-format').html("");
 							$( "#Memberid" ).blur();
-							$("#Memberid").css("border", "");
+							$("#Memberid").css('border', '');
 							$(".accent-btn").removeClass("stop");
 						}
 						$.ajax({
@@ -1481,7 +1481,7 @@ $userRetisterStatus = false;
 							
 							$('#checkMessage').removeClass("display-none");
 							$( "#Memberid" ).focus();
-							$("#Memberid").css("border", "1px solid red");
+							$("#Memberid").css('border', '1px solid #ffa02e');
 							
 							$(".accent-btn").addClass("stop");
 							
@@ -1489,7 +1489,7 @@ $userRetisterStatus = false;
 						else{
 							$('#checkMessage').addClass("display-none");
 							$( "#Memberid" ).blur();
-							$("#Memberid").css("border", "");
+							$("#Memberid").css('border', '');
 							//$(".join-details-button2").removeClass("display-none");
 							$(".accent-btn").removeClass("stop");
 						}					
@@ -1512,14 +1512,14 @@ $userRetisterStatus = false;
 							if($('#Memberid').val()!= Email){
 								$('#confirmMessage').html("These emails do not match");
 								$( "#CMemberid" ).focus();
-								$("#CMemberid").css("border", "1px solid red");
+								$("#CMemberid").css('border', '1px solid #ffa02e');
 								$(".join-details-button2").addClass("display-none");
 								$(".accent-btn").addClass("stop");
 							}
 							else{
 								$('#confirmMessage').html("");
 								$( "#CMemberid" ).blur();
-								$("#CMemberid").css("border", "");
+								$("#CMemberid").css('border', '');
 								$(".join-details-button2").removeClass("display-none");
 								$(".accent-btn").removeClass("stop");
 							}					
@@ -1584,13 +1584,13 @@ $userRetisterStatus = false;
 			    </div>
 					<div class="col-xs-12 none-padding"><span class="light-lead-heading cairo">Residential address:</span></div>				
 					<div class="row">
-						<div class="col-xs-12">
+						<div class="col-lg-12">
 						   <label for="">Building name</label>
 						   <input type="text" class="form-control"  name="BuildingName" autocomplete="Building-Name">
 						</div>
 					</div>
 					<div class="row">
-						<div class="col-xs-12">
+						<div class="col-lg-12">
 						   <label for="">PO Box</label>
 						    <input type="text" class="form-control" name="Pobox" autocomplete="Pobox">
 						</div>

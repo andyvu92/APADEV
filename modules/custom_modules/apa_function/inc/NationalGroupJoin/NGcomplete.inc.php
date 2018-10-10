@@ -87,8 +87,26 @@ if(isset($_POST["Invoice_ID"])) {
 }
 ?>
 <?php logRecorder();  ?>
-<h2>Thank you for your purchase</h2>
-<p>We hope you enjoy your event.</p>
+<div class="flex-container" id="non-member">
+	<div class="flex-cell">
+		<h3 class="light-lead-heading">Purchase successful!</h3>
+	</div>
+
+	<div class="flex-cell">
+		<h3 class="light-heading">A copy of your purchase receipt will be sent to your inbox.<br />
+		You can also find a record on your dashboard.</h3>
+	</div>
+
+	<div class="flex-cell cta"><a class="join" href="/dashboard">Go to dashboard &gt;</a></div>
+
+	<?php 
+		$block = block_load('block', '309');
+		$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+		$output = drupal_render($get);        
+		print $output;
+	?>
+
+</div>
 
 <!--<form action="/pd/completed-purchase" method="POST">
 	<input type="hidden" value="1" name="Invoice_ID" id="Invoice_ID">

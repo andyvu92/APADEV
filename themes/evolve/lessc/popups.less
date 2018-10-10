@@ -1109,6 +1109,7 @@ div[aria-describedby="jobnoticement"].ui-dialog {
 div[aria-describedby="signupWebUser"]{
     .small-popup;
     position: fixed !important;
+    padding: 50px 30px;
     top: 10vh !important;
     left: 25vw !important;
     width: 50vw !important;
@@ -1117,6 +1118,9 @@ div[aria-describedby="signupWebUser"]{
     overflow: hidden;
     -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
     box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    .none-padding{
+        float: left;
+    }
     .ui-dialog-titlebar{
         background: none;
         border: none;
@@ -1144,6 +1148,10 @@ div[aria-describedby="signupWebUser"]{
     @media all and (max-width: @tablet-width + 1px) {
         left: 15vw !important;
         width: 70vw !important;
+    }
+    @media @larger-phone-width-down{
+        padding: 50px 20px;
+        top: 10vh!important;
     }
     @media all and (max-width: @phone-width) {
         left: 10vw !important;
@@ -1352,6 +1360,7 @@ div[aria-describedby="signupWebUser"]{
         }
     }
     @media all and (max-width: @larger-phone-width){
+        position: absolute!important;
         .create-account{
             font-size: 1.1em;
         }

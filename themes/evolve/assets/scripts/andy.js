@@ -678,5 +678,34 @@ jQuery(document).ready(function(){
       $("#pd-search-form select").prop("selectedIndex", 0);
       $("#Nationalgp")[0].selectize.clear();
     });
+
+    // RENAME PD PURCHASE BUTTON BASED ON PRICE
+    if ( $('.html, body').find('#Amount').length > 0 ){
+      if ( $('.paymentsiderbar #Amount').text() == '0' ) {
+        $('.paymentsiderbar .shopCartButton').html('Place your order');
+      }
+      else{
+        $('.paymentsiderbar .shopCartButton').html('Confirm payment');
+      }
+
+      $(document).bind('click', '#prftagAgree', function(){
+        if ( $('.paymentsiderbar #Amount').text() == '0' ) {
+          $('.paymentsiderbar .shopCartButton').html('Place your order');
+        }
+        else{
+          $('.paymentsiderbar .shopCartButton').html('Confirm payment');
+        }
+      });
+
+      $(document).bind('keyup', '.paymentsiderbar #PRFOther', function(){
+        if( $(this).val() == '1' ){
+          //console.log('0');
+        }
+        else{
+          //console.log('others');
+        }
+      });
+    }
+
 });
 

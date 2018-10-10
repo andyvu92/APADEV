@@ -199,6 +199,9 @@ div.LogOutPadding form div.nameHello {
 	float: right;
 	height: 38px;
 	padding: 9px 5px 0 20px;
+	@media @larger-phone-width-down{
+		display: none;
+	}
 }
 div.LogInPadding {
 	width: 125px;
@@ -336,6 +339,31 @@ div.SSOlogin {
 }
 .region-socials .block {
 	height: 38px;
+	@media @larger-phone-width-down {
+		.content{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			.borderLeftForTopRight{
+				display: none;
+			}
+			.DashboardPadding{
+				order: 1;
+			}
+			.LogOutPadding{
+				order: 2;
+			}
+			.social-icons{
+				order: 3;
+				display: block;
+			}
+			.ShoppingCartBorder{
+				order: 4;
+				border-left: rgba(0,0,0,0.3) 0.3px solid;
+				border-right: 0;
+			}
+		}
+	}
 }
 .region-socials ul:not(.contextual-links) li {
 	border-left: 0.5px solid rgba(0,0,0,0.3);
@@ -345,6 +373,9 @@ div.SSOlogin {
 }
 .region-socials ul:not(.contextual-links) li a {
 	width: 43px;
+	@media all and (max-width: 324px){
+		width: 40px;
+	}
 }
 i.fa-homea {
     background-image: url('/sites/default/files/pictures/iconmonstr-home-BLACK.png');
@@ -353,11 +384,7 @@ i.fa-homea {
     width: 14px;
     height: 12px;
 }
-@media screen and (max-width: 848px) {
-	.social-icons {
-		display: none;
-	}
-}
+
 @media screen and (max-width: 767px) {
 	div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
 		.homeBottom{

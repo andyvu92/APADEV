@@ -86,3 +86,18 @@
 /* DESKTOP MEDIA QUERY */
 @desktop-width-down:   ~"all and (max-width: 1200px)";
 @desktop-width-up:   ~"all and (min-width: 1200px)";
+
+.absPosition (@border-size) {
+  position: absolute;
+  top: @border-size;
+  right: @border-size;
+  bottom: @border-size;
+  left: @border-size;
+}
+
+.animation(@animation) {
+  -o-animation: @animation;
+  -moz-animation: @animation;
+  -webkit-animation: @animation;
+  animation: @animation;
+}
