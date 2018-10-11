@@ -71,6 +71,9 @@ jQuery(document).ready(function(){
 
   var target1 = $('.nav li a[href="/membership/'+path1+'"]');
   target1.parent().addClass('active');
+
+  var target1 = $('.nav li a[href="/pd/'+path1+'"]');
+  target1.parent().addClass('active');
 });
 
 //ACORDION 
@@ -707,5 +710,9 @@ jQuery(document).ready(function(){
       });
     }
 
+    // REMOVE MESSAGE ON RESET PASSWORD FAIL PROCESS
+    $('#NewPass input').one('keydown', function(){
+      $('#NewPass #reset-pw-fail').hide();
+    });
 });
 

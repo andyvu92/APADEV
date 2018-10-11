@@ -427,7 +427,7 @@ button.deletecardbutton {
    width:90%;     
 }
 #block-block-216 #dashboard-right-content{
-   height:100%;
+   min-height:100%;
 }
 .subscriptions-submit{
    float:left; 
@@ -3285,5 +3285,12 @@ form{
         &::after{
             top: 27%;
         }
+    }
+}
+
+/* ADJUST FOOTER ON FIXED MENU BOTTOM */
+.page-node-154, .page-node-211, .page-node-209, .page-node-207{
+    @media @larger-tablet-width-down{
+        padding-bottom: 65px;
     }
 }
