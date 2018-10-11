@@ -44,19 +44,18 @@
 		$input["Password"] = $_POST["NPassword"];
 		$input["Token"] = $_POST["Token"];
 		$output = aptify_get_GetAptifyData("6", $input);
-		print_r($output);
 		// todo
-		if($output["success"] == 1 ||$output["success"] == "1") {
-			// success
-			echo "<h1>Password update success!!</h1>";
-			echo "<p>Please wait..</p>";
-			echo "<div class='TokenExist' style='display: none;'>1</div>";
-		} else {
-			// when failed
-			echo "<h1>Password update failed</h1>";
-			echo "<p>Please try again..</p>";
-			echo "<div class='TokenExist' style='display: none;'>1</div>";
-		}
+		?>
+		<?php  if($output["success"] == 1 ||$output["success"] == "1"):?>
+			<h1>Password update success!!</h1>
+			<p>Please wait..</p>
+			<div class='TokenExist' style='display: none;'>1</div>
+		<?php else:?>
+			<h1>Password update failed</h1>
+			<p>Please try again..</p>
+			<div class='TokenExist' style='display: none;'>1</div>
+		<?php endif;?>
+		<?php
 	} else {
 		// when user come here for no reason.
 		echo "<h1>Session expired!!</h1>";
