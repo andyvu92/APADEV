@@ -159,15 +159,18 @@ div.ButtonIconHolder {
 	}
 	.ShoppingCart {
 		background-image: url('/sites/default/files/SHOPPING CART B 24X18.png');
-		background-position: 0 18px;
+		background-position: 0 1px;
 		width: 24px;
 		height: 18px;
 		margin: 10px auto 0px;
 		text-align: center;
-		font-size: 11px;
+		font-size: 10px;
 		padding-right: 2px;
 		color: rgb(0,159,218);
 		font-weight: 700;
+		background-repeat: no-repeat;
+		background-size: contain;
+		overflow: visible;
 	}
 	.Log-in {
 		background-image: url('/sites/default/files/MEMBER ICON.png');
@@ -190,15 +193,14 @@ div.ButtonIconHolder {
 	}
 }
 div.borderLeftForTop {
-	border-left: rgba(0,0,0,0.3) 0.3px solid;
+	border-left: rgba(0,0,0,0.3) 0.5px solid;
 }
 div.borderLeftForTopRight {
-	border-right: rgba(0,0,0,0.3) 0.3px solid;
+	border-right: rgba(0,0,0,0.3) 0.5px solid;
 }
 div.LogOutPadding form div.nameHello {
 	float: right;
-	height: 38px;
-	padding: 9px 5px 0 20px;
+	padding: 9px 5px 0 12px;
 	@media @larger-phone-width-down{
 		display: none;
 	}
@@ -224,15 +226,19 @@ div.InwithButtonIcon {
 div.DashboardwithButtonIcon {
 	width: 48px;
 }
-.LogInPadding .info {
-	width: 120px;
-    height: 38px;
-    margin: auto;
-    padding: 10px 0 2px;
-    background-color: transparent;
-    border: none;
-	.withButtonIcon {
-		height: 24px;
+#section-socials .LogInPadding{
+	border-right: 0;
+	.info {
+		width: 120px;
+		height: 38px;
+		margin: auto;
+		padding: 10px 0 2px;
+		background-color: transparent;
+		border: none;
+		transform: scale(0.9);
+		.withButtonIcon {
+			height: 24px;
+		}
 	}
 }
 .OtherSitesList {
@@ -296,6 +302,18 @@ div.OutwithButtonIcon input{
 }
 div#logoutButton, div#loginButton, div#DashboardButton {
 	cursor: pointer;
+	text-align: center;
+	@media @larger-phone-width-down{
+		width: 100%;
+	}
+}
+div#DashboardButton{
+	display: flex;
+    align-items: center;
+	justify-content: center;
+	i.Dashboard{
+		margin: 0;
+	}
 }
 div.OthersiteButton {
 	width: 120px;
@@ -339,6 +357,12 @@ div.SSOlogin {
 }
 .region-socials .block {
 	height: 38px;
+	.content{
+		.ShoppingCartBorder{
+			filter: grayscale(100);
+			opacity: 0.8;
+		}
+	}
 	@media @larger-phone-width-down {
 		.content{
 			display: flex;
@@ -349,32 +373,47 @@ div.SSOlogin {
 			}
 			.DashboardPadding{
 				order: 1;
+				width: 12%;
 			}
 			.LogOutPadding{
 				order: 2;
+				width: 20%;
 			}
 			.social-icons{
+				width: 56%;
 				order: 3;
 				display: block;
 			}
 			.ShoppingCartBorder{
+				width: 12%;
 				order: 4;
 				border-left: rgba(0,0,0,0.3) 0.3px solid;
 				border-right: 0;
+				div.ButtonIconHolder{
+					width: 100%;
+				}
 			}
 		}
 	}
 }
 .region-socials ul:not(.contextual-links) li {
-	border-left: 0.5px solid rgba(0,0,0,0.3);
+	border-left: 0.3px solid rgba(0,0,0,0.3);
+	width: 20%;
+	@media @larger-phone-width-up{
+		width: 43px;
+	}
 }
 .SocialIcons {
-	border-bottom: 0.5px solid rgba(0,0,0,0.3);
+	border-bottom: 0.3px solid rgba(0,0,0,0.3);
 }
 .region-socials ul:not(.contextual-links) li a {
-	width: 43px;
+	width: 100%;
+	@media @larger-phone-width-down{
+		width: 100%;
+		transform: scale(0.9);
+	}
 	@media all and (max-width: 324px){
-		width: 40px;
+		width: 100%;
 	}
 }
 i.fa-homea {
@@ -517,7 +556,7 @@ i.fa-homea {
 		width: 110px;
 	}
 	div.withButtonIcon {
-		width: 65px
+		width: 100%;
 	}
 }
 

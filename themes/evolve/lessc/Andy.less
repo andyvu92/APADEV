@@ -47,6 +47,9 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
     &.dexp-grid-items{
         div[id^="node-"]{
             &.node-home-news-tiles{
+                > br{
+                    display: none;
+                }
                 @media all and (max-width: 1025px) and (min-width: @tablet-width + 1px) {
                     width: 33.33%;
                     padding: 7px;
@@ -135,7 +138,7 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
                     border: 0;
                     border-top: 0.5px solid #eceef0;
                 }
-                @media all and (max-width: 335px) {
+                @media all and (max-width: 326px) {
                     flex-direction: column;
                     .portfolio-image{
                         width: 100%
@@ -1970,9 +1973,11 @@ input{
     min-height: 500px;
     position: relative;
     overflow: hidden;
-    z-index: -2;
+    z-index: 0;
+    position: relative;
     .content{
-        z-index: 0;
+        z-index: 2;
+        position: relative;
     }
     @media @desktop-width-down{
         min-height: 400px;
@@ -1987,7 +1992,7 @@ input{
 
 .img-parallax {
     width: 100vmax;
-    z-index: -1;
+    z-index: 1;
     position: absolute;
     top: 48.4435%;
     transform: translate(-50%, -48.4435%);

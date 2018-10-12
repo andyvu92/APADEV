@@ -84,6 +84,7 @@ lessc[] = lessc/quicksettings.less
 lessc[] = lessc/Dashboard.less
 lessc[] = lessc/Membership.less
 lessc[] = lessc/PD/PD.less
+lessc[] = lessc/PD/college.less
 lessc[] = lessc/PD/CPDdiary.less
 lessc[] = lessc/PD/PDshopping.less
 lessc[] = lessc/Drupal/Advocacy.less
