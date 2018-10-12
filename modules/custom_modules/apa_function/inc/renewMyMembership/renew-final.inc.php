@@ -559,8 +559,8 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			<ul>
 			    <?php 
                     $month = date("m");		
-					if($month!="10") {$currentMonth = trim($month,"0"); }else{$currentMonth =$month;}
-					$currentYear = date("Y"); 
+					//if($month!="10") {$currentMonth = trim($month,"0"); }else{$currentMonth =$month;}
+					if($month =="01"){$currentYear = date("Y");} else{$currentYear = date("Y")+1; }
 					echo '<div class="flex-cell flex-flow-row">
 								<div class="flex-col-6">
 								Date	
@@ -569,7 +569,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 								Payment amount	
 								</div>
 							</div>';
-					for($i=$currentMonth+1; $i<12; $i++){
+					for($i=2; $i<12; $i++){
 						echo '<div class="flex-cell flex-flow-row"><div class="flex-col-6">01/'.$i.'/'.$currentYear.'</div>
 								<div class="flex-col-6">$'.$OccuringPayment.'</div>
 							</div>';
