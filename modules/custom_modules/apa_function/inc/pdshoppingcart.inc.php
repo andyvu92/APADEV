@@ -334,13 +334,13 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		<?php if($tag==1): ?>
 		<div class="flex-cell">
 			<input class="styled-checkbox" type="checkbox" id="accept2">
-			<label for="accept2" id="accept2label">I understand that I must have appropriate Professional Indemnity insurance current on the date/s of any APA course/workshop that I’m registered for.</label>
+			<label for="accept2" id="accept2label">I understand that I must have appropriate Professional Indemnity insurance current on the date/s of any APA course/workshop that I’m registered for<span class="tipstyle">*</span></label>
 		</div>
 
 		<?php endif; ?>
 		<div class="flex-cell">
 			<input class="styled-checkbox" type="checkbox" id="accept3">
-			<label for="accept3" id="accept3label">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled. The APA recommends travelling participants purchase travel insurance to cover this.</label>
+			<label for="accept3" id="accept3label">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled. The APA recommends travelling participants purchase travel insurance to cover this<span class="tipstyle">*</span></label>
 		</div>
 	</div>
 	<div class="flex-container flex-flow-column">
