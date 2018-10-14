@@ -355,12 +355,53 @@ div.ShoppingCartBorder, div.OthersiteButton {
 div.SSOlogin {
     min-height: 0;
 }
+
+#section-socials{
+	padding: 0;
+	> .container{
+		padding: 0 15px;;
+	}
+}
+
 .region-socials .block {
 	height: 38px;
 	.content{
+		display: flex;
+		justify-content: flex-end;
 		.ShoppingCartBorder{
 			filter: grayscale(100);
 			opacity: 0.8;
+			order: 6;
+			@media @larger-tablet-width-up{
+				border-right: rgba(0,0,0,0.3) 0.3px solid;
+			}
+		}
+		.borderLeftForTopRight{
+			order: 5;
+			border-right: 0;
+			border-left: rgba(0,0,0,0.3) 0.3px solid
+		}
+		.LogOutPadding, .LogInPadding{
+			margin-right: auto;
+			@media @larger-phone-width-down{
+				&.borderLeftForTop{
+					border-left: 0;
+				}
+			}
+			.nameHello{
+				padding: 9px 0px 0 25px;
+			}
+			@media @larger-phone-width-down{
+				border-left: 0;
+			}
+		}
+		div.borderLeftForTop{
+			border-left: rgba(0,0,0,0.3) 0.3px solid;
+		}
+		div.DashboardPadding{
+			@media @larger-tablet-width-down{
+				border-left: 0;
+			}
 		}
 	}
 	@media @larger-phone-width-down {
@@ -375,7 +416,7 @@ div.SSOlogin {
 				order: 1;
 				width: 12%;
 			}
-			.LogOutPadding{
+			.LogOutPadding, .LogInPadding{
 				order: 2;
 				width: 20%;
 			}
@@ -416,12 +457,26 @@ div.SSOlogin {
 		width: 100%;
 	}
 }
-i.fa-homea {
-    background-image: url('/sites/default/files/pictures/iconmonstr-home-BLACK.png');
-    background-repeat:  no-repeat;
-    background-size: contain;
-    width: 14px;
-    height: 12px;
+
+.menu{
+	li{
+		a{
+			i.fa-homea {
+				background-image: url('/sites/default/files/general-icon/iconmonstr-home-G.png');
+				background-repeat:  no-repeat;
+				background-size: contain;
+				width: 20px;
+				height: 20px;
+				position: relative;
+				top: 5px;
+			}
+			&.active{
+				i.fa-homea {
+					background-image: url('/sites/default/files/general-icon/iconmonstr-home-B.png');
+				}
+			}
+		}
+	}
 }
 
 @media screen and (max-width: 767px) {

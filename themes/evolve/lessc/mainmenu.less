@@ -1,5 +1,7 @@
+@import 'mixin';
 @level1_line_height: 100;
 @boxedwidth: 1280px;
+
 @media screen and (min-width: 992px) {
   #section-header {
     background-color: #FFF;
@@ -108,6 +110,8 @@
     }
     .search-toggle {
       line-height: 100px;
+      position: relative;
+      top: 2px;
       .transition(line-height, 0.3s);
     }
     &.fixed-transition {
@@ -165,16 +169,24 @@
 ul.menu {
   text-align: start;
 }
-@media screen and (max-width: 991px) {
+
+body.html #section-header{
+  @media @larger-phone-width-down{
+    padding: 5px 0;
+  }
+}
+
+@media @larger-tablet-width-down {
   body {
     #section-header {
+      padding: 15px 0;
       box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.2);
+      background: #fff;
       .search-toggle {
         line-height: 80px;
         font-size: 22px;
         border-top: 0 solid;
       }
-      background: #fff;
     }
     a.site-logo {
       img {
@@ -228,6 +240,11 @@ ul.menu {
       input{
         padding: 0px!important;
       }
+    }
+  }
+  > .container > .row > .region{
+    @media @larger-tablet-width-down{
+      padding: 0;
     }
   }
 }
