@@ -113,7 +113,13 @@ fieldset {
         }
 
         .left-content{
-          padding-right: 5%;
+          padding-left: 15px;
+          @media @tablet-width-down{
+            padding: 0 30px;
+          }
+          @media all and (max-width: 345px){
+            padding: 0 0px;
+          }
           label{
             font-weight: 300;
             color: #000;
@@ -137,9 +143,11 @@ fieldset {
             }
           }
           @media all and (max-width: @tablet-width) {
-            padding-right: 0px;
             width: 100%;
           }
+        }
+        .right-sidebar{
+          padding-left: 4%;
         }
         .dashboard-button{
           &:hover{

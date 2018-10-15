@@ -986,9 +986,13 @@ if(isset($_SESSION['UserId'])) {
 
 <div class="OtherListTop"><a href="http://apanext2018.com.au/" target="_blank">APA Conference 2018</a></div>
 
-<div class="OthersiteButtonClose">
-<div class="OthersiteButtonCloseArrow">&nbsp;</div>
+<div class="OtherListTop">
+	<div class="OthersiteButtonClose">
+		<div class="OthersiteButtonCloseArrow">&nbsp;</div>
+	</div>
 </div>
+
+
 </div>
 
 <!-- Modal log-in -->

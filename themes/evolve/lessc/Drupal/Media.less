@@ -461,16 +461,18 @@ div#node-102 .content .item-list .pagination li {
 				flex-direction: column;
 				align-items: center;
 				padding: 15px 50px;
-				&:hover{
-					.box-icon{
-						background: @bright-blue;
-						&:before{
-							top: calc(~"-50% - 15px");
-							opacity: 0;
-						}
-						&:after{
-							top: calc(~"50% - 15px");
-							opacity: 1;
+				@media @larger-phone-width-up{
+					&:hover{
+						.box-icon{
+							background: @bright-blue;
+							&:before{
+								top: calc(~"-50% - 15px");
+								opacity: 0;
+							}
+							&:after{
+								top: calc(~"50% - 15px");
+								opacity: 1;
+							}
 						}
 					}
 				}
