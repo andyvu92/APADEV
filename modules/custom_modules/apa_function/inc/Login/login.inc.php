@@ -971,27 +971,22 @@ if(isset($_SESSION['UserId'])) {
 <?php endif; ?>
 
 <!-- other Sites -->
-<div class="OtherSitesList"><img src="/sites/default/files/HOME/OTHER SITES ICON.png" />
-<h4 class="OtherListTop">Other APA websites</h4>
-
-<div class="OtherListTop"><a href="https://choose.physio/" target="_blank">Choose physio</a></div>
-
-<div class="OtherListTop"><a href="https://www.jobs4physios.com.au/" target="_blank">jobs4physios</a></div>
-
-<div class="OtherListTop"><a href="https://cpd4physios.com.au/" target="_blank">cpd4physios</a></div>
-
-<div class="OtherListTop"><a href="https://www.classifieds4physios.com.au/" target="_blank">classifieds4physios</a></div>
-
-<div class="OtherListTop"><a href="https://www.shop4physios.com.au/" target="_blank">shop4physios</a></div>
-
-<div class="OtherListTop"><a href="http://apanext2018.com.au/" target="_blank">APA Conference 2018</a></div>
-
-<div class="OtherListTop">
+<div class="OtherSitesList">
 	<div class="OthersiteButtonClose">
-		<div class="OthersiteButtonCloseArrow">&nbsp;</div>
+		<i class="fa fa-times"></i>
 	</div>
-</div>
 
+	<div class="OtherListTop"><a class="apa" href="https://choose.physio/" target="_blank">APA consumer website</a></div>
+
+	<div class="OtherListTop"><a class="jobs" href="https://www.jobs4physios.com.au/" target="_blank"><span class="uniq">jobs</span>4physios</a></div>
+
+	<div class="OtherListTop"><a class="cpd" href="https://cpd4physios.com.au/" target="_blank"><span class="uniq">cpd</span>4physios</a></div>
+
+	<div class="OtherListTop"><a class="classifieds" href="https://www.classifieds4physios.com.au/" target="_blank"><span class="uniq">classifieds</span>4physios</a></div>
+
+	<div class="OtherListTop"><a class="shop" href="https://www.shop4physios.com.au/" target="_blank"><span class="uniq">shop</span>4physios</a></div>
+
+	<div class="OtherListTop"><a class="ifompt" href="https://physiotherapy.eventsair.com/QuickEventWebsitePortal/ifompt-2020/ifompt2020" target="_blank"><span class="uniq">IFOMPT2020</a></div>
 
 </div>
 

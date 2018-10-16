@@ -714,5 +714,15 @@ jQuery(document).ready(function(){
     $('#NewPass input').one('keydown', function(){
       $('#NewPass #reset-pw-fail').hide();
     });
+
+    $(document).ready(function(){
+      $('#block-block-291').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+    });
+
+    $(window).load(function(){
+      $('#block-block-291 .overlay').fadeOut();
+      $('.CPD_snapshot').fadeIn().addClass('visible');
+    });
+
 });
 

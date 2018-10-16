@@ -241,46 +241,157 @@ div.DashboardwithButtonIcon {
 		}
 	}
 }
+
 .OtherSitesList {
 	position: fixed;
     width: 350px;
     height: 100%;
-    right: -370px;
+	transform: translate3d(110%, 0, 0) scale(0.7);
+	right: 0;
     top: 0;
 	background-color: white;
-	z-index: 15;
 	padding: 82px 50px;
 	box-shadow: 3px 0 43px 0;
 	z-index: 99999;
+	transition: all .3s ease-in-out;
 	&:first-child {
 		margin-bottom: 14px;
 	}
 	.OtherListTop {
-		margin-bottom: 15px;
+		display: block;
+		margin-bottom: 25px;
+		opacity: 0;
+		right: 20px;
+		position: relative;
+		font-family: Cairo;
 		a {
-			color: #2D3E52;
-			letter-spacing: 0.4px;
-			font-size: 16px;
-			&:hover {
-				color: rgb(0,159,218);
+			font-size: 1.4em;
+			color: #000;
+			transition: all .2s ease-in-out;
+			position: relative;
+			display: block;
+			transform: translate(0px, 0px);
+			&:hover{
+				    transform: translate(10px, 0px);
+			}
+			.uniq{
+				font-weight: 700;
+			}
+			&.jobs{
+				color: @orange;
+				.uniq{
+					color: @orange;
+				}
+			}
+			&.cpd{
+				color: @pink;
+				.uniq{
+					color: @pink;			
+				}
+			}
+			&.classifieds{
+				color: #0080C6;
+				.uniq{
+					color: #0080C6;
+				}
+			}
+			&.shop{
+				color: @brighter-blue;
+				.uniq{
+					color: @brighter-blue;			
+				}
+			}
+			&.apa{
+				color: @brighter-blue;
+				font-weight: 700;
+			}
+			&.ifompt{
+				color: @pink;
+				opacity: 0.7;
 			}
 		}
 	}
 	h4.OtherListTop {
 		color: rgb(0,159,218);
 	}
+
+	&.expand{
+		.OthersiteButtonClose{
+			animation: closefadein 1.2s linear 0s 1 forwards;
+			animation-delay: 1.5s;
+			opacity: 0
+		}
+
+		transform: translate3d(0%, 0, 0) scale(1);
+		.OtherListTop{
+			animation: fadein .3s linear 0s 1 forwards;
+			&:nth-child(1){
+				animation-delay: .1s;
+			}
+			&:nth-child(2){
+				animation-delay: .2s;
+			}
+			&:nth-child(3){
+				animation-delay: .3s;
+			}
+			&:nth-child(4){
+				animation-delay: .4s;
+			}
+			&:nth-child(5){
+				animation-delay: .5s;
+			}
+			&:nth-child(6){
+				animation-delay: .6s;
+			}
+			&:nth-child(7){
+				animation-delay: .7s;
+			}
+			&:nth-child(8){
+				animation-delay: .8s;
+			}
+			&:nth-child(9){
+				animation-delay: .9s;
+			}
+		}
+	}
 }
+
+@keyframes fadein{
+	from{
+		opacity: 0;
+		transform: translate3d(5%, -20%, 0);
+	}
+	to{
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes closefadein{
+	from{
+		opacity: 0;
+		transform: translate3d(5%, -20%, 0);
+	}
+	to{
+		opacity: 1;
+		transform: translate3d(0, 0, 0);
+	}
+}
+
 .OthersiteButtonClose {
 	cursor: pointer;
-	padding-top: 20px;
-	.OthersiteButtonCloseArrow {
-		width: 20px;
-		background-image: url('/sites/default/files/dashboard-icon/CHEVRON FORWARD-W -3.png');
-		height: 38px;
-		z-index: 20;
-		background-repeat: no-repeat;
-		-webkit-filter: invert(100%);
-		filter: invert(100%);
+    display: block;
+    position: absolute;
+    top: 36px;
+    left: 30px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    line-height: 0;
+    border: 1px solid rgba(0,0,0,0.12);
+	i{
 		opacity: 0.7;
 	}
 }

@@ -1644,10 +1644,10 @@ $(document).on('click', '.pd-spcart-delete a', function(){
 		window.location = "/dashboard";
 	});
 	$(".OthersiteButton").click( function() {
-		$(".OtherSitesList").animate({right: "0px"}, 300);
+		$(".OtherSitesList").addClass('expand');
 	});
 	$(".OthersiteButtonClose").click( function() {
-		$(".OtherSitesList").animate({right: "-370px"}, 300);
+		$(".OtherSitesList").removeClass('expand');
 	});
 	
 });

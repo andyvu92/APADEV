@@ -22,6 +22,13 @@
             }
         }
         ?>
+        			<span class="link-block"><?php if(is_null(render($content['field_url_for_page']))): ?>
+            <a href="<?php print $node_url; ?>">
+			<?php else: ?>
+			<a href="<?php echo $content['field_url_for_page']['#items'][0]['value']; ?>">
+			<?php endif; ?>
+            </a></span>
+            
 		<div class="portfolio-image">
 			<div class="HomeType"><?php print render($content['field_inmotion_type']); ?></div>
             <?php print render($content['field_inmotion_image']); ?>
