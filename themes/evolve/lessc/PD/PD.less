@@ -1476,17 +1476,26 @@ body.page-node{
                       .pd-description-mobile{
                           display: none;
                           p, ul, li{
-                            font-size: 16px!important;
+                            font-size: 1.2em;
+                            span{
+                                font-size: 1em;
+                            }
+                          }
+                          span{
+                              font-size: 1.2em;
+                              font-family: Roboto!important;
+                              span{
+                                font-size: 1em!important;
+                              }
                           }
                           @media all and (max-width: @larger-phone-width) {
                               display: block;
                           }
                       }
                       .pd-description-nonmobile{
-                          display: block;
-                          font-size: 1.2em;
-                          p, ul, li{
-                            font-size: 16px!important;
+                          display: block;    
+                          p, ul, li, span{
+                            font-size: 1.2em;
                           }
                           .readmore{
                             transition: height 0.5s;
@@ -2079,12 +2088,6 @@ input[name="Couponcode"]{
 
 .page-node-86{
     #section-banner #block-block-123{
-        .img-parallax{
-            margin-top: 180px;
-            @media all and (max-width: @tablet-width) {
-                margin-top: -80px;
-            }
-        }
         .top-banner{
             padding: 9% 27% 2%;
             display: flex;
@@ -2343,7 +2346,7 @@ input[name="Couponcode"]{
             flex-direction: column;
             align-items: center;
             padding: 17px 50px;
-            margin-bottom: 22px;
+            margin-bottom: 25px;
             @media @tablet-width-down {
                 margin-bottom: 15px;
             }
@@ -2643,6 +2646,11 @@ input[name="Couponcode"]{
             margin: 0;
             padding: 0px 20px 0 0;
         }
+        @media @phone-width-down{
+            font-size: 1em;
+            margin: 0;
+            padding: 0px 20px 0 0;
+        }
     }
 
     /* Header on mobile */
@@ -2682,11 +2690,20 @@ input[name="Couponcode"]{
             }
         }
     }
+    h2.lead-heading{
+        text-align: center;
+        @media @larger-phone-width-down{
+            font-size: 2.5em;
+        }
+    }
 }
 
 
 /* PD - ONLINE LEARNING PAGE */
 .page-node-113{
+    .pd #section-main-content{
+        margin: 40px 0;
+    }
     #node-113{
         padding-top: 50px;
         padding-bottom: 30px;
@@ -2898,6 +2915,13 @@ input[name="Couponcode"]{
                 padding-bottom: 50px;
                 margin-bottom: 80px;
             }
+        }
+    }
+
+    .bottom-nav{
+        padding: 0 15px;
+        a{
+            font-size: 1.2em;
         }
     }
 }

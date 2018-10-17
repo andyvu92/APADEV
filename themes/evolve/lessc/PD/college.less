@@ -4,11 +4,8 @@
 
 //COLLEGE MAIN PAGE
 
-.page-node-578{
+.page-node-611{
     #section-banner #block-block-322{
-        .img-parallax{
-
-        }
         .top-banner{
             padding: 9% 16% 2%;
             display: flex;
@@ -21,7 +18,7 @@
             .page-main-header{
                 color: #fff;
                 font-family: Cairo;
-                font-size: 0em;
+                font-size: 0em!important;
                 margin: 0px auto;
                 line-height: 1em;
                 text-transform: uppercase;
@@ -37,6 +34,9 @@
                 margin-top: 0;
                 font-weight: 300;
                 font-size: 1.7em;
+            }
+            p{
+                color: #fff;
             }
             .separator{
                 width: 100%;
@@ -121,7 +121,7 @@
     #section-banner #block-block-322{
         background-position: 70% 70px!important;  
         .sub-top-banner{
-            padding: 2% 0;
+            padding: 2%;
             margin: 0 auto;
             background: rgba(0, 159, 218, 0.9);
             font-family: Roboto;
@@ -143,6 +143,9 @@
                 justify-content: center;
                 align-items: center;
                 position: relative;
+                @media @larger-tablet-width-down{
+                    display: none;
+                }
                 &:after{
                     content: '';
                     position: absolute;
@@ -150,6 +153,9 @@
                     height: 100%;
                     width: 1px;
                     background: #fff;
+                    @media @desktop-width-down {
+                        right: 5%;
+                    }
                 }
                 img{
                     max-height: 67px;
@@ -160,6 +166,10 @@
                 flex-direction: column;
                 justify-content: center;
                 padding-right: 30px;
+                @media @larger-tablet-width-down{
+                    width: 70%;
+                    padding-left: 30px;
+                }
                 span:not(.lead-text){
                     letter-spacing: 0.5px;
                     font-size: 1em;
@@ -262,6 +272,7 @@
                 }
             }
             .sub-top-banner{
+                padding: 20px 0 40px;
                 .left-content{
                     padding-right: 0;
                 }
@@ -455,4 +466,10 @@
     #section-ad-block{
         background: #fff!important;
     }
+}
+
+
+/* COLLEGE INFO PAGE */
+.page-node-633{
+    .page-node-578;
 }

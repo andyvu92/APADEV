@@ -42,6 +42,9 @@ div#CPD-diary-main {
 	display: flex;
     justify-content: center;
 	align-items: center;
+	@media @larger-phone-width-down{
+		padding: 0!important;
+	}
 	.overlay{
 		position: absolute;
 		display: block;
@@ -85,6 +88,10 @@ div#CPD-diary-main {
 		display: flex;
 		justify-content: center;
 		align-items: center;
+		@media @larger-phone-width-down{
+			transform: scale(0.8);
+			margin-top: -10px;
+		}
 		#donutchart{
 			position: relative;
 			top: 12px;
@@ -291,25 +298,13 @@ div#ProgressCPDback .back {
 			font-weight: 700;
 			font-size: 1.5em;
 			a{
-				color: @brighter-blue;
+				color: @bright-blue;
 			}
 		}
 		button.Non-APA-hour {
 			margin-top: 30px;
 		}
 		@media all and (max-width: 1300px) and (min-width: @desktop-width + 1px ){
-			.flex-col-5 {
-				
-			}
-			.flex-col-4 {
-				
-			}
-			.flex-col-3 {
-				
-			}
-			.flex-col-2 {
-				
-			}
 			.flex-col-1 {
 				width: 12%;
 			}
