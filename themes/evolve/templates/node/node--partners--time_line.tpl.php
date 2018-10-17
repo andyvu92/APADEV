@@ -143,10 +143,14 @@
 					<dd>
 						<p><?php print render($content['field_offer']);?></p>
 					</dd> -->
+					
+				<?php if (!empty($node->field_contact_details['und'][0]['value'])):  
+				?>	
 				<dt>Contact details</dt>
 					<dd>
 						<p><?php print render($content['field_contact_details']);?></p>
 					</dd>
+				<?php endif;?>
 			</dl>
 		</section>
 	</div>
