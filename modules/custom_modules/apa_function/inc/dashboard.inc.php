@@ -200,7 +200,7 @@ apa_function_dashboardLeftNavigation_form();
 						</tr>
 						<tr>
 							<td><strong><?php if($_SESSION['MemberTypeID']=="1"){ echo "User ID:";} else{ echo "Member ID:";}?></strong></td>
-							<td><?php echo $user['MemberID']; ?></td>
+							<td><span class="email-field"><?php echo $user['MemberID']; ?></span></td>
 						</tr>
 						<tr>
 							<td><strong>Member type:</strong></td>

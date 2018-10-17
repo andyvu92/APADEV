@@ -75,7 +75,7 @@ function date_sort($a, $b) {
 <div class="container">
 <div class="row">
 <div class="region region-content col-xs-12 col-sm-12 col-md-12 col-lg-12">
-<h1 class="SectionHeader">Your CPD diary</h1>
+<h2 class="lead-heading">Your CPD diary</h2>
 
 
 <div class="Tabs1"><a>APA hours</a></div>
@@ -148,7 +148,7 @@ function date_sort($a, $b) {
     ?> 
   </div>
 </div>
-<button class="Non-APA-hour" data-toggle="modal" data-target="#nonAPAhour"><span>Add non-APA hours</span></button><br />
+<button class="Non-APA-hour accent-btn" data-toggle="modal" data-target="#nonAPAhour"><span>Add non-APA hours</span></button><br />
 </div>
 <div class="TabContents3" style="display: none;">
 	<div class="NAPAhours">

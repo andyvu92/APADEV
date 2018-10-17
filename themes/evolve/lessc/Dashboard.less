@@ -1877,9 +1877,6 @@ iframe{
             td{
                 padding: 8px 0;
                 line-height: 15px;
-                &::first-letter{
-                    text-transform: uppercase;
-                }
                 &:nth-child(3){
                     text-align: right;
                     padding-right: 50px!important;
@@ -3087,7 +3084,17 @@ form{
 
 /* DEFAULT EMAIL LOWERCASE */
 form{
-    input[type="email"]{
+    input[type="email"], .email-field{
+        text-transform: lowercase!important;
+        &::first-letter{
+            text-transform: lowercase!important;
+        }
+    }
+}
+
+input[type="email"], .email-field{
+    text-transform: lowercase!important;
+    &::first-letter{
         text-transform: lowercase!important;
     }
 }

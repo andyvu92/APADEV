@@ -152,7 +152,7 @@ jQuery(document).ready(function() {
 
 //CHANGE "JOIN BUTTON" FOR NATIONAL GROUP ON DASHBOARD
 jQuery(document).ready(function ($) {
-  if ($("#national-groups").find(".carousel").length == 0){ 
+  if ($("#national-groups").find(".ng-title").length == 0){ 
     $("#ng-join-btn").html('<span>Join now</span>');
   }
 });
