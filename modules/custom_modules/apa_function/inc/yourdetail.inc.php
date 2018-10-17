@@ -297,6 +297,7 @@ if(isset($_POST['step1'])) {
 if(isset($_SESSION["UserId"])) {
 	$data = "UserID=".$_SESSION["UserId"];
 	$details = aptify_get_GetAptifyData("4", $data,""); // #_SESSION["UserID"];
+	//$details = GetAptifyData("4", $data,"");
 	//2.2.43 -get user installment data test part
 	//$installmentData['id'] = $_SESSION["UserId"];
 	//$installmentOrder = GetAptifyData("43", $installmentData);
