@@ -9,9 +9,12 @@ jQuery(document).ready(function(){
   
     // CAMPAIGN LANDING PAGE: /campaign/choosephysio 
     if( $('.html').find('.jarallax').length > 0 ){
-      img = $('.jarallax').css('background-image');
-      img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
-      $('.jarallax').append("<img data-speed='1' class='img-parallax' src=' " + img + "'>");
+
+      $('.jarallax').each(function(){
+        img = $(this).css('background-image');
+        img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
+        $(this).append("<img data-speed='1' class='img-parallax' src=' " + img + "'>");
+      })
     }
   
     //ABOUT CAMPAIGN MIDDLE IMAGE: /campaign/about-campaign
