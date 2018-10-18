@@ -972,9 +972,7 @@ if(isset($_SESSION['UserId'])) {
 
 <!-- other Sites -->
 <div class="OtherSitesList">
-	<div class="OthersiteButtonClose">
-		<i class="fa fa-times"></i>
-	</div>
+	<span class="OthersiteButtonClose"></span>
 
 	<div class="OtherListTop"><a class="apa" href="https://choose.physio/" target="_blank">APA consumer website</a></div>
 

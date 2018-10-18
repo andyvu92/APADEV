@@ -187,7 +187,7 @@ if(isset($_POST["Invoice_ID"])) {
 		You can also find a record on your dashboard.</h3>
 	</div>
 
-	<div class="flex-cell cta"><a class="join" href="/dashboard">Go to dashboard &gt;</a></div>
+	<div class="flex-cell cta"><a class="join" href="/dashboard">Go to dashboard</a></div>
 
 	<?php 
 		$block = block_load('block', '309');

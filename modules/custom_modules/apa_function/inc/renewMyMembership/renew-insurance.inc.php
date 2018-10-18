@@ -150,7 +150,9 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 		<div class="row">
 			<div class="col-xs-12">
 				<input popup class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0">
+
 				<label for="conditions" popup-target="insuranceTermsandConditions"><span class="tipstyle">* </span>I have read and agree to the terms and conditions within the financial services guide</label>
+
 			</div>
 		</div>
 

@@ -63,7 +63,7 @@ $FPListArray = aptify_get_GetAptifyData("21", $fpData);
 //echo "<br /><br />";
 //$PostArray = Array();
 //foreach ($_POST as $key => $value) {
-	//echo "Field ".htmlspecialchars($key)." is ".htmlspecialchars($value)."<br>";
+	//echo "Field ".htmlspecialchars($key)." is ".htmlspecialchars($value)."<h2>";
 	//$PostArray[htmlspecialchars($key)] = htmlspecialchars($value);
 //}
 $nationalGroup = $nationalGroups;
@@ -111,7 +111,7 @@ $nationalGroup = $nationalGroups;
 <div class="flex-container join-NGtable">
 
 	<div class="flex-cell heading">
-		<h2>Now, let's choose your National Groups</h2>
+		<h2>Join an APA <br>National Group</h2>
 	</div>
 	<div class="flex-cell info-text">
 		<span>Join an APA National Group to connect with physiotherapists working in similar areas to keep up to date with the latest research and developments.</span>

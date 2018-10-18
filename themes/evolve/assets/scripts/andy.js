@@ -724,5 +724,19 @@ jQuery(document).ready(function(){
       $('.CPD_snapshot').fadeIn().addClass('visible');
     });
 
+    //STANDARD CONTENT ACCORDION
+    $('.content-block h6+p').hide();
+
+    $('.content-block h6').on('click', function(){
+      $(this).siblings().removeClass('active');
+      $(this).toggleClass('active');
+      $('.content-block h6+p').slideUp();
+      if ( $(this).next('p').is(':visible') ) {
+        $(this).next('p').slideUp();
+      }
+      else{
+        $(this).next('p').slideDown();
+      }
+    });
 });
 
