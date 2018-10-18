@@ -320,7 +320,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 				
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-8">
-					Subtotal (exc. GST)	
+					Subtotal (ex. GST)	
 					</div>
 					<div class="flex-col-4">
 			        $<?php echo $scheduleDetails['SubTotal'];?>
@@ -336,7 +336,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 				</div>
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-8">
-					Total(inc.GST)	
+					Total (inc. GST)	
 					</div>
 					<div class="flex-col-4">
 			        $<span id="totalPayment"><?php echo $scheduleDetails['OrderTotal'];?></span>
@@ -423,23 +423,12 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 				<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"):?>
 					<div class="flex-cell flex-flow-row">
 					<div class="flex-col-6">
-					Admin fee	
+					Admin fee (ex. GST)
 					</div>
 					<div class="flex-col-6">
 			        $<?php echo $scheduleDetails['AdminFee'];?>
 					</div>
 				</div>
-				<?php endif;?>
-				<?php if($reviewData['PRFdonation']!=""):?>
-					<div class="flex-cell flex-flow-row">
-						<div class="flex-col-6">
-						PRF donation	
-						</div>
-						<div class="flex-col-6">
-						$<?php echo $reviewData['PRFdonation'];?>
-						</div>
-					</div>
-						
 				<?php endif;?>
 				<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"):?>
 				<?php  
@@ -450,7 +439,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 				?>
 					<div class="flex-cell flex-flow-row">
 						<div class="flex-col-6">
-						First installment	
+						First installment (ex. GST)
 						</div>
 						<div class="flex-col-6">
 						$<?php //echo $scheduleDetails['InitialPaymentAmount'];
@@ -467,10 +456,19 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			        $<?php echo $scheduleDetails['GST'];?>
 					</div>
 				</div>
-
+				<?php if($reviewData['PRFdonation']!=""):?>
+					<div class="flex-cell flex-flow-row">
+						<div class="flex-col-6">
+						<strong>PRF donation</strong>
+						</div>
+						<div class="flex-col-6">
+						$<?php echo $reviewData['PRFdonation'];?>
+						</div>
+					</div>		
+				<?php endif;?>
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-6">
-					Today's total (inc. GST)	
+					<strong>Today's total (inc. GST)</strong>
 					</div>
 					<div class="flex-col-6">
 			        $<?php echo $scheduleDetails['InitialPaymentAmount'];?>
