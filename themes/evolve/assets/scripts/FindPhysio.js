@@ -1,17 +1,52 @@
 jQuery(document).ready(function($) {
 
-  $('a[href^="#"]').on('click', function(event) {
+	// AUTO SCROLL TO ANCHOR MINUS NAV HEIGHT
+  	$('a[href^="#"]').on('click', function(event) {
 		var target = $(this.getAttribute('href'));
-
+		var alt_target = $(this).attr('href');
 		if( target.length ) {
 			event.preventDefault();
-			$('html, body').stop().animate({
-				scrollTop: target.offset().top
-			}, 600);
-		}
 
+			var window_width = $(window).width();
+			if (window_width >= 993) {
+				$('html, body').stop().animate({
+					scrollTop: target.offset().top - $('#section-header').height()
+				}, 1000, function(){
+					window.location.href = alt_target;
+					$('html, body').stop().animate({
+						scrollTop: target.offset().top - $('#section-header').height()
+					}, 0);
+				});
+			} else {
+				$('html, body').stop().animate({
+					scrollTop: target.offset().top
+				}, 1000, function(){
+					window.location.href = alt_target;
+					$('html, body').stop().animate({
+						scrollTop: target.offset().top
+					}, 0);
+				});
+			}
+		}
 	});
+
+	// smooth scroll to the anchor id
+	if(window.location.hash){
+		// direct browser to top right away
+		scroll(0,0);
+		// takes care of some browsers issue
+		setTimeout(function(){scroll(0,0);}, 0);
+		
+		$(window).load(function(){
+			var target = window.location.hash;
+			$('html, body').stop().animate({
+				scrollTop: $(target).offset().top - $('#section-header').height()
+			}, 1000);
+		});
+	}
 	
+	//END AUTO SCROLL TO ANCHOR
+
 	$('#useCurrent').click(function() {
 		var currentLocation = window.location; 
 		if(!String(currentLocation).includes("?")) currentLocation += "?";
