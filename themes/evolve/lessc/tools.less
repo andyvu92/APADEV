@@ -22,7 +22,9 @@
 .page-node-510{
     #block-block-292{
         .top-banner{
-            padding: 200px 25% 2%;
+            padding: 150px 30px 80px;
+            max-width: 680px;
+            margin: 0 auto;
             .page-main-header{
                 color: #fff;
                 font-family: Cairo;
@@ -113,7 +115,7 @@
     }
 
     #section-map{
-        margin: 80px 0 40px;
+        margin: 80px 0 0px;
         .dexp-shortcodes-box{
             position: relative;
             display: flex;
@@ -121,6 +123,7 @@
             align-items: center;
             padding: 15px 50px;
             width: 100%;
+            margin: 0;
             .box-icon{
                 float: none;
                 display: flex;
@@ -159,28 +162,28 @@
                     transition: 0.2s linear;
                 }
                 /* ICONS */
-                &.NationalGroup{
+                &.clinical{
                     &:before{
-                        background-image: url(/sites/default/files/ABOUT-US/about-us-icon/history-B.png);
+                        background-image: url(/sites/default/files/tools/icons/CLINICAL_B.png);
                     }
                     &:after{
-                        background-image: url(/sites/default/files/ABOUT-US/about-us-icon/history-W.png);
+                        background-image: url(/sites/default/files/tools/icons/CLINICAL_W.png);
                     }
                 }
-                &.Information{
+                &.profession{
                     &:before{
-                        background-image: url(/sites/default/files/ABOUT-US/about-us-icon/strategic-B.png);
+                        background-image: url(/sites/default/files/tools/icons/PROFESSION_B.png);
                     }
                     &:after{
-                        background-image: url(/sites/default/files/ABOUT-US/about-us-icon/strategic-W.png);
+                        background-image: url(/sites/default/files/tools/icons/PROFESSION_W.png);
                     }
                 }
                 &.BusinessGroup{
                     &:before{
-                        background-image: url(/sites/default/files/ABOUT-US/about-us-icon/annual-B.png);
+                        background-image: url(/sites/default/files/tools/icons/BUSINESS_B.png);
                     }
                     &:after{
-                        background-image: url(/sites/default/files/ABOUT-US/about-us-icon/annual-W.png);
+                        background-image: url(/sites/default/files/tools/icons/BUSINESS_W.png);
                     }
                 }
                 
@@ -193,8 +196,8 @@
                 text-align: center;
             }
             .box-content{
-                text-align: left;
-                margin: 10px 0;
+                text-align: center;
+                margin: 0 auto;
                 p{
                     font-size: 1.4em;
                 }
@@ -205,11 +208,11 @@
         #tools-features{
             display: flex;
             flex-wrap: wrap;
-            margin: 80px 0 40px;
+            margin: 20px 0 40px;
             justify-content: center;
             h3.box-title{
-                margin: 10px 0 30px;
-                font-size: 1.6em;
+                margin: 20px 0;
+                font-size: 2.5em;
                 font-weight: 600;
                 font-family: Roboto;
                 text-align: left;
@@ -217,8 +220,17 @@
             }
 
             .tool-block{
-                max-width: 1000px;
+                max-width: 1200px;
                 margin: 0 auto;
+                border-bottom: 1px solid rgba(0,0,0,0.12);
+                padding: 100px 0;
+                &:first-child{
+                    padding-top: 0;
+                }
+                &:last-child{
+                    padding-bottom: 0;
+                    border-bottom: 0;
+                }
                 &:hover{
                     .box-icon{
                         background: @bright-blue;
@@ -229,6 +241,51 @@
                         &:after{
                             top: calc(~"50% - 15px");
                             opacity: 1;
+                        }
+                    }
+                }
+
+                /* LOGIN URL */
+                #business-note{
+                    font-size: 1.6em;
+                    padding-bottom: 60px;
+                    display: block;
+                    a{
+                        color: @brighter-blue;
+                        transition: all .3s linear;
+                        &:hover{
+                            color: @bright-blue;
+                        }
+                    }
+                }
+
+                /* CHILD BLOCK IN BUSINESS BLOCK */
+                .child-block{
+                    padding-bottom: 20px;
+                    .child-block-title{
+                        font-size: 1.6em;
+                        color: black;
+                    }
+                    .url-block{
+                        font-size: 1.2em;
+                        li{
+                            padding: 2px 0 2px 15px;
+                            position: relative;
+                            &:before{
+                                content: '-';
+                                position: absolute;
+                                display: block;
+                                left: 0;
+                                top: 50%;
+                                line-height: 0;
+                                color: black;
+                                transition: all .3s linear;
+                            }
+                            &:hover{
+                                &:before{
+                                    color: @bright-blue;
+                                }
+                            }
                         }
                     }
                 }
@@ -248,8 +305,74 @@
                     list-style: none;
                     padding-left: 0;
                     font-size: 1.5em;
+                    li{
+                        padding: 10px 0;
+                    }
                     a{
                         color: #000;
+                        transition: all .3s linear;
+                        &:hover{
+                            color: @bright-blue;
+                            strong{
+                                color: @bright-blue;
+                                opacity: 1;
+                            }
+                        }
+                    }
+                    strong{
+                        color: #333;
+                        opacity: 0.8;
+                        transition: all .3s linear;
+                    }
+                }
+                .flex-col-4{
+                    padding: 0 30px;
+                }
+            }
+
+            /* BUSINESS USEFUL LINKS */
+            .business-useful-links{
+                background: @light-grey;
+                padding: 20px 0 40px;
+                margin-top: 50px;
+                position: relative;
+                &:before, &:after{
+                    content: '';
+                    position: absolute;
+                    left: -30px;
+                    top: 0;
+                    display: block;
+                    width: 30px;
+                    height: 100%;
+                    background: @light-grey;
+                }
+                &:after{
+                    right: -30px;
+                    left: unset;
+                }
+                .flex-col-4{
+                    padding: 0 30px;
+                }
+                .block-title{
+                    text-align: center;
+                    color: #5e6067;
+                    font-weight: 700;
+                    margin-bottom: 60px;
+                }
+                .url-block{
+                    font-size: 1em;
+                    padding: 0;
+                    list-style-type: none;
+                    a{
+                        color: black;
+                        text-decoration: underline;
+                        transition: all .3s linear;
+                        &:hover{
+                            color: @bright-blue;
+                        }
+                    }
+                    li{
+                        padding: 2px 0;
                     }
                 }
             }
@@ -310,11 +433,18 @@
 
 /* BUSINESS RESTRICTION POPUP */
 #businessrestrictWindow{
-    .buttons-container{
+    .cta{
         margin-top: 25px;
         span{
             font-weight: 500;
             color: #000;
+        }
+        a{
+            color: @bright-blue;
+            transition: all .3s linear;
+            &:hover{
+                color: @brighter-blue;
+            }
         }
     }
 }

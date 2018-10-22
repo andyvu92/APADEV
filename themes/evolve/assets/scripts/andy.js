@@ -164,7 +164,7 @@ jQuery(document).ready(function() {
     is_mobile = false;       
   }
 	if(window.location.href.indexOf("?page") > -1||window.location.href.indexOf("?pagesize") > -1 || window.location.href.indexOf("?search-result") > -1){
-    var scrollpoint = $('#section-content-top').offset().top  - 200;
+    var scrollpoint = $('#section-content-top').offset().top - 200;
     if (is_mobile == true) {
       var scrollpoint = $('#section-content-top').offset().top  - 200;
     }
@@ -738,5 +738,12 @@ jQuery(document).ready(function(){
         $(this).next('p').slideDown();
       }
     });
+
+    //AUTO SORT APA MEMBER IN ALPHABETICAL ORDER
+    var $divs = $("#apateammember-block-2 div.node-apateam");
+    var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
+      return $(a).find("h5 a .field-item").text() > $(b).find("h5 a .field-item").text();
+    });
+    $("#apateammember-block-2").html(alphabeticallyOrderedDivs);
 });
 
