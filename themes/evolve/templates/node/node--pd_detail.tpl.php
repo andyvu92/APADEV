@@ -667,7 +667,8 @@ $userRetisterStatus = false;
 			$q = strtotime($bdate[1]);
 			$r = strtotime($edate[1]);
 			$dateStart = date("d",$t);
-			$timeOutput = date("h:i",$q)." - ".date("h:i",$r);
+			//$timeOutput = date("h:i",$q)." - ".date("h:i",$r);
+			$timeOutput = date("h:i",$q).$bdate[2]." - ".date("h:i",$r).$edate[2];
 			if($bdate[0] == $edate[0]) {
 				if(date("F",$t) != date("F",$j)) {
 					$dateOutput = date("D d M",$t)."<br>- ".date("D d M",$j);
@@ -1808,14 +1809,14 @@ $userRetisterStatus = false;
 				<?php 
 				$priceList = array();
 				$cost = 0;
-
+                if($pd_detail['IsDistanceDiscountApplied']=="Yes"){$distanceprice="Distance Discount:";}  else{$distanceprice="";}
 				if($prices!="NULL"&& isset($_SESSION["UserId"])){
 					if(in_array($pd_detail['Product Cost Without Coupon'],$pricelistGet)) {
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
 					}
 					else {
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-						echo "$".number_format($pd_detail['Product Cost Without Coupon'],2);
+						echo $distanceprice."$".number_format($pd_detail['Product Cost Without Coupon'],2);
 					}
 				} else{
 					foreach($pricelistGet as $key=>$value){
