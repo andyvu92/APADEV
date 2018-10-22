@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
 				$('html, body').stop().animate({
 					scrollTop: target.offset().top - $('#section-header').height()
 				}, 1000, function(){
-					window.location.href = alt_target;
+					window.location.hash = alt_target;
 					$('html, body').stop().animate({
 						scrollTop: target.offset().top - $('#section-header').height()
 					}, 0);
@@ -21,7 +21,7 @@ jQuery(document).ready(function($) {
 				$('html, body').stop().animate({
 					scrollTop: target.offset().top
 				}, 1000, function(){
-					window.location.href = alt_target;
+					window.location.hash = alt_target;
 					$('html, body').stop().animate({
 						scrollTop: target.offset().top
 					}, 0);

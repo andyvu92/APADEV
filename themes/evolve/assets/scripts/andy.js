@@ -739,7 +739,5 @@ jQuery(document).ready(function(){
       }
     });
 
-    
-
 });
 
