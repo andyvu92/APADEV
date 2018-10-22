@@ -5,17 +5,29 @@
         hide($content['comments']);
         hide($content['links']);
         ?>
-        <a class="block-cover" href="<?php print $node_url; ?>"></a>
-        <div class="block-container">
+        
+        <?php if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] !="225"):?>
+		<a class="block-cover" href="<?php print $node_url;?>"></a>
+	    <?php endif;?>
+		<div class="block-container">
             <div class="portfolio-image">
-                
+            <?php if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] !="225"):?>   
             <a href="<?php print $node_url; ?>">
                 <?php print render($content['field_apateamimage']); ?></a>
-                
+			<?php else:?>
+				<?php print render($content['field_apateamimage']); ?>
+			<?php endif;?>
+			              
             </div>
             <div class="item-description">
                 <div class="member-header">
-                    <h5 class="member-name"> <a href="<?php print $node_url; ?>"><?php print render($content['field_apateamname']); ?></a></h5>
+                    <h5 class="member-name"> 
+					<?php if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] !="225"):?>
+					<a href="<?php print $node_url; ?>"><?php print render($content['field_apateamname']); ?></a>
+					<?php else:?>
+					<?php print render($content['field_apateamname']); ?>
+					<?php endif;?>
+					</h5>
                     <span class="member-title"><?php print render($content['field_apateamposition']); ?></span>
                 </div>
                 <span class="separater"></span>
