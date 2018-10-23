@@ -12,7 +12,7 @@ jQuery(document).ready(function($) {
 				$('html, body').stop().animate({
 					scrollTop: target.offset().top - $('#section-header').height()
 				}, 1000, function(){
-					window.location.hash = alt_target;
+					window.location.href = alt_target;
 					$('html, body').stop().animate({
 						scrollTop: target.offset().top - $('#section-header').height()
 					}, 0);
@@ -26,6 +26,30 @@ jQuery(document).ready(function($) {
 						scrollTop: target.offset().top
 					}, 0);
 				});
+			}
+		}
+		if ( $(this).attr('href') == '#scroll-point' ) {
+			if( target.length ) {
+				event.preventDefault();
+	
+				var window_width = $(window).width();
+				if (window_width >= 993) {
+					$('html, body').stop().animate({
+						scrollTop: target.offset().top - $('#section-header').height()
+					}, 1000, function(){
+						$('html, body').stop().animate({
+							scrollTop: target.offset().top - $('#section-header').height()
+						}, 0);
+					});
+				} else {
+					$('html, body').stop().animate({
+						scrollTop: target.offset().top
+					}, 1000, function(){
+						$('html, body').stop().animate({
+							scrollTop: target.offset().top
+						}, 0);
+					});
+				}
 			}
 		}
 	});
