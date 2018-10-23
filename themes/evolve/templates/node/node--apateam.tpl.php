@@ -84,15 +84,15 @@
     	<div class="flex-col-9 left-content">
 			<h2 class="lead-heading"><?php //print render($content['field_apateamtitle']);
 				if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="224"){
-					echo "Board of Director";
+					echo "Board Of Directors";
 				
 				}
 				if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="225"){
-					echo "National advisory council";
+					echo "National Advisory Council";
 					
 				}
 				if(((array)$content['field_apateamtype']['#items'][0]["taxonomy_term"])['tid'] =="226"){
-					echo "Executive leadership team";
+					echo "Executive Leadership Team";
 					
 				}
 			
