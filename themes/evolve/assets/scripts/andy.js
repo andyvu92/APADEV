@@ -724,7 +724,7 @@ jQuery(document).ready(function(){
       $('.CPD_snapshot').fadeIn().addClass('visible');
     });
 
-    //STANDARD CONTENT ACCORDION
+    // STANDARD CONTENT ACCORDION
     $('.content-block h6+p').hide();
 
     $('.content-block h6').on('click', function(){
@@ -739,11 +739,27 @@ jQuery(document).ready(function(){
       }
     });
 
-    //AUTO SORT APA MEMBER IN ALPHABETICAL ORDER
+    // AUTO SORT APA MEMBER IN ALPHABETICAL ORDER
     var $divs = $("#apateammember-block-2 div.node-apateam");
     var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
       return $(a).find("h5 a .field-item").text() > $(b).find("h5 a .field-item").text();
     });
     $("#apateammember-block-2").html(alphabeticallyOrderedDivs);
+
+    // BACK TO TOP BUTTON
+    $('#back-to-top').click( function(e){
+      e.preventDefault();
+      $('html, body').stop().animate({
+        scrollTop: 0
+      }, 1000);
+    });
+
+    // MOVE BACK TO PREV BUTTON INTO GREY CONTAINER - AWARDS AND RECOGNITION
+    $('.page-node-689 #prev-btn').appendTo( $('.page-node-689 .grey-background .content') );
+
+    // HIGHLIGHT NAV URL - AWARDS AND RECOGNITION
+    if ( window.location.href.indexOf('awards-and-recognition') > -1 ) {
+      $('a[href="/aboutus/awards-and-recognition"]').parent().addClass('active');
+    }
 });
 

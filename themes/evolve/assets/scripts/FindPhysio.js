@@ -28,6 +28,8 @@ jQuery(document).ready(function($) {
 				});
 			}
 		}
+
+		// RESOLVE ISSUE WITH PARALLAX IMAGE
 		if ( $(this).attr('href') == '#scroll-point' ) {
 			if( target.length ) {
 				event.preventDefault();
@@ -51,6 +53,12 @@ jQuery(document).ready(function($) {
 					});
 				}
 			}
+		}
+
+		//STOP PAGE SCROLLING ON ACCORDION PANEL
+		if ( $(this).attr('data-parent') ) {
+			event.preventDefault();
+			$('html, body').stop();
 		}
 	});
 
