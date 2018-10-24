@@ -351,6 +351,11 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
                         }
                 }
                 .image-grid{
+                    &:hover{
+                        .node img{
+                            transform: scale(1.1);
+                        }
+                    }
                     .row{
                         margin: 0;
                     }
@@ -382,6 +387,11 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
                     .node{
                         position: relative;
                         height: 100%;
+                        overflow: hidden;
+                        img{
+                            transform: scale(1);
+                            transition: all .5s linear;
+                        }
                         .HomeTitle{
                             position: absolute;
                             bottom: 0;

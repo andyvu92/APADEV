@@ -82,54 +82,32 @@
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large policybottom" <?php print $attributes; ?>>
 	<?php $result = MtypeContent($content['field_member_content_type'],$content['field_member_type_list']); ?>
 	<?php if ($result == "0"): ?>
-	  <div class="post-img media">
-      <div class='mediaholder'>
-        <?php print render($content['field_policyimage']);?>
-      </div>
-    </div>
 	<section class="post-content">
-    
-	<?php /*
-	use this header as reference, but delete at the end
-	<header class="meta">
-		   <ul>
-          <li><a href="#"><?php print t('Posted by'); ?><?php print theme('username', array('account' => $node)); ?></a></li>
-          <li><?php print render($content['field_media_type']);?></li>
-		  <li><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></li>
-		   </ul>
-		   <h2><a href="<?php print $node_url; ?>">
-		   <?php print $title; ?></a></h2>
-    </header>
-		*/ ?>
-	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-9 col-lg-9">
-		<h1 class="SectionHeader"><?php print render($content['field_contenttitle']);?></h1>
-		<div class="brd-headling">&nbsp;</div>
-	  <?php
-        // We hide the comments and links now so that we can render them later.
-        hide($content['comments']);
-        hide($content['links']);
-        print render($content['body']);
-        ?>
+    	<div class="flex-container" id="about-college">
+			<div class="flex-cell">
+
+	<div class="flex-col-9 left-content">
+		<h2 class="lead-heading"><?php print render($content['field_contenttitle']);?></h2>
+		<?php
+			// We hide the comments and links now so that we can render them later.
+			hide($content['comments']);
+			hide($content['links']);
+			print render($content['body']);
+		?>
 	</div>
-	<div class="block policyright contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
-		<h3 class="headline">Our Work</h3>
-		<span class="brd-headling"></span>
-		<div class="content">
-		<div class="view view-current-apa-campaign view-id-current_apa_campaign view-display-id-block_1 view-dom-id-32635ceaef40fd2d990939d49ac29284">
-		<div class="view-content">
-		  
-			<div class="dexp-grid-items row">
-			<ul>
-				<li><strong>Priorities</strong></li>
-				<li style="border-bottom:none !important" class="PrioritiesSidebar"><?php echo views_embed_view('our_priorities', 'block_1');?></li>
-				<li><strong>Submissions</strong></li>
-				<li><strong>Ongoing work</strong></li>
-				<li>If you would like information on past position statements, background papers, elections and budgets, please email policy@physiotherapy.asn.au</li>
-</ul>
+
+	<div class="flex-col-3 right-sidebar">
+		<span class="underline-heading">Our work</span>
+		<?php 
+			$block = block_load('block', '340');
+			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+			$output = drupal_render($get);        
+			print $output; 
+		?>
+	</div>
+
 			</div>
-		  
-		</div></div></div>
-	</div>
+		</div> 
 	</section>
     <?php elseif($result == "1"): ?>
 		<?php   
