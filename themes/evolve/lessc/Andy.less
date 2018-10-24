@@ -2023,6 +2023,14 @@ input{
     @media @larger-phone-width-down{
         min-height: 200px;
     }
+    &.general-banner{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    &.border-10{
+        border-bottom: 10px solid #e7e8ea;
+    }
 }
 
 .img-parallax {
@@ -2278,6 +2286,9 @@ body #block-system-main{
             font-size: 1.6em;
         }
     }
+    ul{
+        font-size: 1.2em;
+    }
     ul.custom-list{
         padding-left: 15px;
         li{
@@ -2409,5 +2420,18 @@ body #block-system-main{
                 color: @bright-blue;
             }
         }
+    }
+}
+
+/* HIDE/SHOW ON LOGIN STATE */
+.user-logged-in{
+    .user-logged-in-hide{
+        display: none;
+    }
+}
+
+.user-log-out{
+    .user-log-out-hide{
+        display: none;
     }
 }

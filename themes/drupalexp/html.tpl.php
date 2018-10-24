@@ -47,6 +47,18 @@
 				$('.postcodeComp').val(rss[num-1]+"");
 			}
 		});
+
+	<?php
+		if(isset($_SESSION["UserId"])){ 
+			echo '$(document).ready(function(){
+					$("body").addClass("user-logged-in");
+				});';
+		} else {
+			echo '$(document).ready(function(){
+				$("body").addClass("user-log-out");
+			});';
+		}
+	?>
 	});
 	</script>
 	<link href="/sites/all/themes/evolve/assets/css/hamburgers-master/dist/hamburgers.css" rel="stylesheet">

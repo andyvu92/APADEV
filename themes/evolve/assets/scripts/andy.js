@@ -761,5 +761,10 @@ jQuery(document).ready(function(){
     if ( window.location.href.indexOf('awards-and-recognition') > -1 ) {
       $('a[href="/aboutus/awards-and-recognition"]').parent().addClass('active');
     }
-});
 
+    // REMOVE EXCESSIVE URL PATH IN CAIPAIGN SIDEBAR 
+    if ( window.location.href.indexOf('about-campaign') > -1 ) {
+      $('a[href="/campaign/about-campaign#campaign-toolkit"]').attr('href', '#campaign-toolkit');
+      $('a[href="/campaign/about-campaign#FAQ"]').attr('href', '#FAQ');
+    }
+});
