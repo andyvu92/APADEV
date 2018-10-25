@@ -725,17 +725,17 @@ jQuery(document).ready(function(){
     });
 
     // STANDARD CONTENT ACCORDION
-    $('.content-block h6+p').hide();
+    $('.content-block h6+div').hide();
 
     $('.content-block h6').on('click', function(){
       $(this).siblings().removeClass('active');
       $(this).toggleClass('active');
-      $('.content-block h6+p').slideUp();
-      if ( $(this).next('p').is(':visible') ) {
-        $(this).next('p').slideUp();
+      $('.content-block h6+div').slideUp();
+      if ( $(this).next('div').is(':visible') ) {
+        $(this).next('div').slideUp();
       }
       else{
-        $(this).next('p').slideDown();
+        $(this).next('div').slideDown();
       }
     });
 

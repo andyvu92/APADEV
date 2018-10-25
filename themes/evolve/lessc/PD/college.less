@@ -6,6 +6,27 @@
 
 .page-node-611{
     #section-banner #block-block-322{
+        @media @larger-phone-with-up{
+            position: relative;
+            &:before{
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #000;
+            }
+        }
+        @media @larger-phone-width-down{
+            &:before{
+                display: none;
+            }
+            background-image: url(/sites/default/files/professional-development/college/PICS/college-mobile.jpg)!important;
+            .img-parallax{
+                display: none;
+            }
+        }
         .top-banner{
             padding: 9% 16% 2%;
             display: flex;
@@ -15,9 +36,6 @@
             align-items: center;
             max-width: 1500px;
             margin: 0 auto;
-            @media all and (max-width: 1300px){
-                background: black;
-            }
             @media @desktop-width-down{
                 padding: 9% 17% 2%;
             }
@@ -556,8 +574,9 @@
         font-size: 1.8em;
         font-family: Roboto;
         font-weight: 700;
-        padding-top: 20px;
+        padding-top: 25px;
         margin: 12px 0px 10px;
+        letter-spacing: 0.5px;
     }
     h2{
         font-size: 3em;
@@ -623,6 +642,13 @@
 
     /* BACKGROUND FEATURED CONTAINER */
     .background-featured{
+        
+        .inner-container{
+            width: 75%;
+            @media @tablet-width-down{
+                width: 100%;
+            }
+        }
         .content{
             max-width: 1500px;
             padding: 0px 20px;
@@ -688,11 +714,11 @@
             &:after{
                 transform: rotate(90deg) scale(0);
             }
-            & + p{
+            & + div{
                 animation: fadeineffect .5s linear 0s 1 forwards;
             }
         }
-        & + p{
+        & + div{
             padding-left: 35px;
             margin: 25px 0;
             opacity: 0;

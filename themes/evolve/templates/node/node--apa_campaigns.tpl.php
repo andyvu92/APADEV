@@ -181,11 +181,23 @@
 		</div>
 	</div>
     <?php elseif($result == "1"): $url =  "{$_SERVER['REQUEST_URI']}";?>
-		<form method="POST" action="<?php echo $url; ?>" name="forLogin">
-			<input  name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" />
-			<input  placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" />
-			<input type="submit" value="Login" />
-		</form>
+	<div class="flex-container" id="non-member">
+			<div class="flex-cell">
+				<h3 class="light-lead-heading">Please login to see this page.</h3>
+			</div>
+			<div class="flex-cell cta">
+				<a data-target="#loginAT" data-toggle="modal" href="#" class="login">Login</a>
+				<a href="/membership-question" class="join">Join now</a>
+			</div>
+
+			<?php 
+					$block = block_load('block', '309');
+					$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+					$output = drupal_render($get);        
+					print $output;
+			?>
+
+		</div>
 	<?php elseif($result == "2"): ?>
 		<?php   
 			$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
