@@ -82,13 +82,9 @@
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large policybottom" <?php print $attributes; ?>>
 	<?php $result = MtypeContent($content['field_member_content_type'],$content['field_member_type_list']); ?>
 	<?php if ($result == "0") : ?>
-		<div class="post-img media">
-      <div class='mediaholder'>
-        <?php print render($content['field_policyimage']);?>
-      </div>
-    </div>
+
 	<section class="post-content">
-    	<div class="flex-container" id="about-college">
+    	<div class="flex-container">
 			<div class="flex-cell">
 
 	<div class="flex-col-9 left-content">

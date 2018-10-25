@@ -83,7 +83,7 @@
 	<?php $result = MtypeContent($content['field_member_content_type'],$content['field_member_type_list']); ?>
 	<?php if ($result == "0"): ?>
 	<section class="post-content">
-    	<div class="flex-container" id="about-college">
+    	<div class="flex-container">
 			<div class="flex-cell">
 
 	<div class="flex-col-9 left-content">
