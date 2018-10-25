@@ -79,14 +79,14 @@
 * @ingroup themeable
 */
 ?>
+<?php $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large policybottom" <?php print $attributes; ?>>
-	<?php $result = MtypeContent($content['field_member_content_type'],$content['field_member_type_list']); ?>
-	<?php if ($result == "0") : ?>
 
 	<section class="post-content">
     	<div class="flex-container">
 			<div class="flex-cell">
-
+			<?php print render($content['field_policyimage']);?>
+            <a href="<?php echo $imgLink = $link.$base_path."sites/default/files/".str_replace("public://","",$node->field_policyimage['und'][0]['uri']);?>" target="_blank">Andy this is image link code!!!!!!</a>
 	<div class="flex-col-9 left-content">
 		<h2 class="lead-heading"><?php print render($content['field_contenttitle']);?></h2>
 		<?php
@@ -110,39 +110,6 @@
 			</div>
 		</div> 
 	</section>
-	<?php elseif($result == "1"): $url =  "{$_SERVER['REQUEST_URI']}";?>
-		<form method="POST" action="<?php echo $url; ?>" name="forLogin">
-			<input  name="id" placeholder="Email address" type="text" value="<?php if(isset($_COOKIE["member_login"])) { echo $_COOKIE["member_login"]; } ?>" />
-			<input  placeholder="Password" name="password" type="password" value="<?php if(isset($_COOKIE["member_password"])) { echo $_COOKIE["member_password"]; } ?>" />
-			<input type="submit" value="Login" />
-		</form>
-	<?php elseif($result == "2"): ?>
-		<?php
-				
-			$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-			$base_path = base_path();
-			$imgLink = $link.$base_path."sites/default/files/Member-access-page.png"; 
-            echo "<img src='".$imgLink."'/>";
-		?>
-	<?php elseif($result == "3"): ?>
-		<?php echo "member, but not eligible!"; ?>
-	<?php else: ?>
-		<?php if ($result[0] == "0") : ?>
-			<?php echo "!!"; ?>
-		<?php elseif ($result[0] == "3") : ?>
-		
-			<?php print_r($result[1]); ?>
-		<?php elseif($result == "2"): ?>
-			<?php
-			$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-			$base_path = base_path();
-			$imgLink = $link.$base_path."sites/default/files/Member-access-page.png"; 
-            echo "<img src='".$imgLink."'/>";
-		?>
-			<?php print_r($result[1]); ?>
-		<?php elseif($result == "3"): ?>
-			<?php echo "member, but not eligible!"; ?>
-		<?php endif; ?>
-	<?php endif; ?>
+	
 </div> 
 
