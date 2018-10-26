@@ -80,13 +80,28 @@
 */
 ?>
 <?php $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();?>
+<div class="dexp-section" id="section-banner">
+	<div class="dexp-container">
+		<div class="row">
+			<!-- .region-banner-->
+			<div class="region region-banner col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<div class="block block-block jarallax border-10 dexp-animate" data-animate="fadeInLeft" style='background-image:url(<?php echo $imgLink = $link.$base_path."sites/default/files/".str_replace("public://","",$node->field_policyimage["und"][0]["uri"]);?>);background-position:center center;background-size:cover'>
+					<div class="content">
+					&nbsp;
+					</div>
+				</div>  
+			</div>
+		<!-- END .region-banner-->
+		</div>
+	</div>
+</div>
+
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large policybottom" <?php print $attributes; ?>>
 
 	<section class="post-content">
     	<div class="flex-container">
 			<div class="flex-cell">
-			<?php print render($content['field_policyimage']);?>
-            <a href="<?php echo $imgLink = $link.$base_path."sites/default/files/".str_replace("public://","",$node->field_policyimage['und'][0]['uri']);?>" target="_blank">Andy this is image link code!!!!!!</a>
+
 	<div class="flex-col-9 left-content">
 		<h2 class="lead-heading"><?php print render($content['field_contenttitle']);?></h2>
 		<?php
