@@ -816,6 +816,11 @@ body.page-node{
                     padding: 0 5px;
                     float: left;
                 }
+                a{
+                    &:hover{
+                        font-weight: 700;
+                    }
+                }
                 .Pagebutton{
                     font-size: 1.2em;
                     display: inline;
@@ -823,7 +828,10 @@ body.page-node{
 				.current {
 					color: rgb(0,159,218);
 					font-weight: 700;
-					font-size: 18px;
+                    font-size: 18px;
+                    width: 14px;
+                    position: relative;
+                    top: -1px;
 				}
             }
             .pager-bottom{
@@ -2265,8 +2273,8 @@ input[name="Couponcode"]{
             background-attachment: scroll;
         }
         @media all and (max-width: @tablet-width){
-            background-position: 72% 60px !important;
-            background-attachment: fixed!important;
+            background-position: 66% -70px !important;
+            background-attachment: scroll!important;
             .top-banner{
                 padding: 10% 18% 5%;
             }
@@ -2594,8 +2602,9 @@ input[name="Couponcode"]{
     animation: pulse 3s infinite;
     box-sizing: border-box;
   }
-  #scroll-point{
+  #scroll-point, .scroll-point{
       height: 0;
+      float: left;
   }
 
 @keyframes pulse {
@@ -2996,4 +3005,23 @@ input[name="Couponcode"]{
                 }
             }
         }
+}
+
+/* ADJUST PARALLAX IMG PD */
+#section-banner .region-banner{
+    @media @destop-width-down {
+        #block-block-123{
+            .img-parallax{
+                top: 48.7918%;
+                transform: translate(-50%, -48.7918%);
+            }
+        }
+    }
+    @media @tablet-width-down{
+        #block-block-123{
+            .img-parallax{
+                display: none;
+            }
+        }
+    }
 }

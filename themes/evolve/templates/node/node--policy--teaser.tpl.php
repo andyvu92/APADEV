@@ -1,8 +1,9 @@
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> dexp-animate clearfix"<?php print $attributes; ?> data-animate="bounceIn">
+<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> dexp-animate clearfix"<?php print $attributes; ?> data-animate="fadeInUp">
   
 
- <h2><a href="<?php print $node_url; ?>"><?php print render($title); ?></a></h2>
+ <h2><?php print render($title); ?></h2>
   <div class="content"<?php print $content_attributes; ?>>
+  <a href="<?php print $node_url; ?>"></a>
     <?php
 // We hide the comments and links now so that we can render them later.
     hide($content['comments']);

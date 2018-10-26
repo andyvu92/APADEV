@@ -767,4 +767,5 @@ jQuery(document).ready(function(){
       $('a[href="/campaign/about-campaign#campaign-toolkit"]').attr('href', '#campaign-toolkit');
       $('a[href="/campaign/about-campaign#FAQ"]').attr('href', '#FAQ');
     }
+
 });

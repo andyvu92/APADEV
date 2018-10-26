@@ -474,6 +474,63 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
         }
 }
 
+/* ADS LAYOUT UPDATE */
+.home-leader-ad{
+    margin: 20px auto;
+    @media all and (max-width: @larger-phone-width) {
+        margin-bottom: 0;
+    }
+    .image-grid{
+        text-align: center;
+        &.desktop-ad{
+            @media all and (max-width: @phone-width) {
+                display: none;
+            }
+        }
+        &.mobile-ad{
+            @media all and (min-width: @phone-width + 1px) {
+                display: none;
+            }
+        }
+    }
+    .flex-col-12{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .home-bt-leader-ad{
+        margin: 20px auto;
+        float: left;
+        width: 100%;
+        .image-grid{
+            text-align: center;
+            &.desktop-ad{
+                @media all and (max-width: @phone-width) {
+                    display: none;
+                }
+            }
+            &.mobile-ad{
+                @media all and (min-width: @phone-width + 1px) {
+                    display: none;
+                }
+            }
+        }
+    }
+    .image-grid{
+        text-align: center;
+        &.desktop-ad{
+            @media all and (max-width: @phone-width) {
+                display: none;
+            }
+        }
+        &.mobile-ad{
+            @media all and (min-width: @phone-width + 1px) {
+                display: none;
+            }
+        }
+    }
+}
+
 #section-main-content{
         .home-leader-ad{
             margin: 20px auto;
@@ -514,6 +571,19 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
                     @media all and (min-width: @phone-width + 1px) {
                         display: none;
                     }
+                }
+            }
+        }
+        .image-grid{
+            text-align: center;
+            &.desktop-ad{
+                @media all and (max-width: @phone-width) {
+                    display: none;
+                }
+            }
+            &.mobile-ad{
+                @media all and (min-width: @phone-width + 1px) {
+                    display: none;
                 }
             }
         }
@@ -2084,6 +2154,11 @@ input{
     }
 }
 /* NEXT FEATURED BANNERS */
+#block-block-310, #block-block-309{
+    display: block;
+    float: left;
+    width: 100%;
+}
 #block-block-309{
     display: block;
     margin: 100px auto 50px;
@@ -2270,6 +2345,7 @@ body #block-system-main{
         margin-top: 0;
         padding-bottom: 0;
         font-family: Cairo;
+        margin-bottom: 20px;
     }
     
     h3.sub-heading{
@@ -2283,6 +2359,7 @@ body #block-system-main{
     }
     
     .intro{
+        padding-bottom: 30px;
         p{
             font-size: 1.6em;
         }
@@ -2302,6 +2379,15 @@ body #block-system-main{
         padding-left: 15px;
         li{
             padding-left: 0px;
+        }
+    }
+    .spacing{
+        height: 100px;
+        display: block;
+        float: left;
+        width: 100%;
+        @media @larger-phone-width-down{
+            height: 50px;
         }
     }
 }
