@@ -110,7 +110,7 @@
         ?>
 		<a class="accent-btn" href="/joinnationalgroup?ProductID=<?php echo $PID;?>" id="ng-join-btn"><span>Join now</span></a>
 
-		<div class="bottom-nav"><a class="go-back-button button" href="javascript:history.go(-1)">&lt; Back to previous</a></div>
+		<div class="bottom-nav"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
 	</div>
 	<div class="block contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
 		<h3 class="headline">National Groups</h3>

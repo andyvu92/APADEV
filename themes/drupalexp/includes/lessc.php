@@ -93,7 +93,7 @@ class drupalexp_lessc {
   }
 
   private function __addBaseCSS() {
-      $this->output .= 'body{color: @text_color;}a:not(.btn){color:@link_color; &:hover{color:@link_hover_color}}h1,h2,h3,h4,h5,h6{color:@heading_color}';
+      $this->output .= 'body{color: @text_color;}a{color:@link_color; &:hover{color:@link_hover_color}}h1,h2,h3,h4,h5,h6{color:@heading_color}';
   }
   private function __setupFonts() {
     $elements = array('body','h1','h2','h3','h4','h5','h6','custom_font_1','custom_font_2','custom_font_3','custom_font_4','custom_font_5');

@@ -207,10 +207,7 @@
 .pd_adrrow.arrowDown a i {
     color:black;
 }
-.pdcontent{
-    border-top: 1px solid #ECEEF0;
-    border-bottom: 1px solid #ECEEF0;
-}
+
 
 /* --------------------------------------------------------- */
 /* ----------------------- PD search Added by Jinghu ----------------------- */
@@ -1390,13 +1387,6 @@ body.page-node{
             }
         }
     }
-    p{
-        line-height: 20px;
-        margin: 0;
-        margin-bottom: 10px!important;
-        font-size: 1.2em;
-        color: black;
-    }
 }
 
 //PD DETAIL PAGES
@@ -2236,23 +2226,6 @@ input[name="Couponcode"]{
                     display: inline;
                 }
             }
-            .secondary-button{
-                color: #fff;
-                border: 1px solid #fff;
-                font-family: Cairo;
-                font-weight: 300;
-                text-transform: uppercase;
-                padding: 15px 0px;
-                width: 80%;
-                text-align: center;
-                max-width: 294px;
-                letter-spacing: 1px;
-                transition: all .2s ease-in-out;
-                &:hover{
-                    border: 4px solid #fff;
-                    font-weight: 500;
-                }
-            }
         }
         @media @desktop-width-down{
             .sub-top-banner{
@@ -3023,5 +2996,37 @@ input[name="Couponcode"]{
                 display: none;
             }
         }
+    }
+}
+
+/* ADVANCING YOUR CAREER */
+#section-banner #block-block-211{
+    .top-banner {
+        padding: 150px 25% 100px;
+        @media @desktop-width-down{
+            padding: 100px 25% 100px;
+        }
+        @media @larger-tablet-width-down{
+            padding: 70px 12% 50px;
+            .img-parallax{
+                top: 0;
+            }
+        }
+        @media @larger-phone-width-down{
+            padding: 70px 10% 50px;
+        }
+    }
+    @media @larger-phone-width-down{
+        background-image: url(/sites/default/files/professional-development/PD_ADVANCING_MOBILE_F.jpg)!important;
+        .img-parallax{
+            display: none;
+        }
+    }
+}
+
+/* CAREER PATHWAY */
+#section-banner #block-block-159{
+    @media @larger-tablet-width-down{
+        display: none;
     }
 }

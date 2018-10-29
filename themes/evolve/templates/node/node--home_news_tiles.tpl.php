@@ -202,7 +202,7 @@
 	
 	
    </section>
-	<a class="go-back-button button" href="javascript:history.go(-1)">&lt;&nbsp;Back to previous</a>
+	<a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a>
    <!---line-->
    <!----line--->
 </div>
