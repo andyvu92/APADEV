@@ -17,6 +17,16 @@ jQuery(document).ready(function(){
       })
     }
   
+    // SLOW PARALLAX
+    if( $('.html').find('.jarallax-slow').length > 0 ){
+
+      $('.jarallax-slow').each(function(){
+        img = $(this).css('background-image');
+        img = img.replace('url(','').replace(')','').replace(/\"/gi, "");
+        $(this).append("<img data-speed='0.4' class='img-parallax' src=' " + img + "'>");
+      })
+    }
+
     //ABOUT CAMPAIGN MIDDLE IMAGE: /campaign/about-campaign
     if( $('.html').find('.jarallax01').length > 0 ){
       img = $('.jarallax01').css('background-image');

@@ -269,55 +269,6 @@
             }
         }
       }  
-      .right-sidebar{
-        position: relative;
-        top: 20px;
-          .underline-heading{
-            position: relative;
-            font-family: Cairo;
-            font-size: 1.6em;
-            &:after{
-                content: '';
-                position: absolute;
-                width: 30px;
-                height: 3px;
-                background: @bright-blue;
-                left: 0;
-                bottom: -15px;
-            }
-          }
-          .nav{
-              margin-top: 30px;
-              max-width: 230px;
-              li{
-                  a{
-                    padding: 10px 0;
-                    border-top: 1px solid rgba(0,0,0,0.1);
-                    color: #000;
-                    font-weight: 400;
-                    font-family: Roboto;
-                    transition: all .3s linear;
-                    &:hover{
-                        color: @bright-blue;
-                    }
-                  }
-                  &:first-child{
-                    a{
-                        border-top: 0px;
-                    }
-                }
-                  &:last-child{
-                      a{
-                          border-bottom: 1px solid rgba(0,0,0,0.1);
-                      }
-                  }
-              }
-          }
-
-        @media all and (max-width: @tablet-width) {
-            display: none;
-        }
-      }
 
       @media all and (max-width: @larger-phone-width) {
         .national-groups-nav{

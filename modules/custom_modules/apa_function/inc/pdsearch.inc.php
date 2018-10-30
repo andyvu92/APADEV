@@ -4,7 +4,7 @@ if(!function_exists('drupal_session_started'))
   die("Unauthorized Access");
 }
 ?>
-<span class="col-xs-12 col-sm-8 col-md-6 col-lg-5" id="pdSearch">
+<span class="col-xs-12 col-sm-10 col-md-8 col-lg-5" id="pdSearch">
 <?php
 	// 2.2.19 - GET list of National Group
 	// For this page, we are going to get NG list only. 
@@ -187,11 +187,11 @@ if(!function_exists('drupal_session_started'))
 			<input type="text" name="Suburb" placeholder="Suburb/city" style="margin-top:0px"<?php if(isset($_POST["Suburb"])  || isset($_GET["Suburb"])) { if(isset($_POST["Suburb"])) {echo "value='".$_POST["Suburb"]."'";} else {echo "value='".$_GET["Suburb"]."'";} } ?>>
 		</div>
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 		<label>Start date</label>
 		<input type="date" name="BeginDate" placeholder="Begin date" required <?php if(isset($_POST["BeginDate"]) || isset($_GET["BeginDate"])) { if(isset($_POST["BeginDate"])) {echo "value='".$_POST["BeginDate"]."'";} else {echo "value='".str_replace("/","-",$_GET["BeginDate"])."'";} } else {echo "value='".date("Y-m-d")."'";} ?>>
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 		<label>End date</label>
 		<input type="date" name="EndDate" placeholder="End date"<?php if(isset($_POST["EndDate"]) || isset($_GET["EndDate"])) { if(isset($_POST["EndDate"])) {echo "value='".$_POST["EndDate"]."'";} else {echo "value='".str_replace("/","-",$_GET["EndDate"])."'";} } ?>>
 	</div>
@@ -200,14 +200,14 @@ if(!function_exists('drupal_session_started'))
 		<div class="col-xs-12">
 			<span class="alt-text mobile">Please note: For online learning visit <a class="alt-link" href="https://cpd4physios.com.au/" target="_blank">cpd4physios</a></span>
 		</div>
-		<div class="col-xs-12 col-md-5">
+		<div class="col-xs-12 col-sm-6 col-md-5">
 			<span class="small-text"><a href="../PDtermsandconditions">Terms and conditions</a></span>
+			<span id="reset-search">Reset search filters</span>
 			<!--<span class="small-text"><a href="/sites/default/files/PROFESSIONAL DEVELOPMENT/LD039_Event_registration_form_fillable.pdf" target="_blank">Event registration form</a></span>-->
 		
 		</div>
-		<div class="col-xs-12 col-md-7 searchds align-right">
+		<div class="col-xs-12 col-sm-6 col-md-7 searchds align-right">
 			<button class="accent-btn your-details-submit pdSearchButton" type="submit"><i class="fa fa-search"></i> Search now</button>
-			<span id="reset-search">Reset search filters</span>
 		</div>
 	</div>
 </form>

@@ -74,6 +74,9 @@ jQuery(document).ready(function(){
 
   var target1 = $('.nav li a[href="/pd/'+path1+'"]');
   target1.parent().addClass('active');
+
+  var target1 = $('.nav li a[href="/membership/national-groups/'+path1+'"]');
+  target1.parent().addClass('active');
 });
 
 //ACORDION 
@@ -321,7 +324,7 @@ jQuery(document).ready(function() {
       this.$control_input.prop('readonly', true);
   };
 
-  $('select[multiple=""]').selectize({
+  $('select').selectize({
     plugins: ['remove_button'],
     delimiter: ',',
     persist: false,
@@ -336,7 +339,6 @@ jQuery(document).ready(function() {
     }
     
   });
-
 
 });
 
@@ -749,7 +751,7 @@ jQuery(document).ready(function(){
     });
 
     // BACK TO TOP BUTTON
-    $('#back-to-top').click( function(e){
+    $('.back-to-top span').click( function(e){
       e.preventDefault();
       $('html, body').stop().animate({
         scrollTop: 0
