@@ -740,11 +740,13 @@ jQuery(document).ready(function(){
     });
 
     // AUTO SORT APA MEMBER IN ALPHABETICAL ORDER
-    var $divs = $("#apateammember-block-2 div.node-apateam");
-    var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
-      return $(a).find("h5 a .field-item").text() > $(b).find("h5 a .field-item").text();
+    $('#apateammember-block-2').each(function(){
+      var $divs = $(".node-apateam", this);
+      var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
+        return $(a).find("h5 a .field-item").text() > $(b).find("h5 a .field-item").text();
+      });
+      $(this).html(alphabeticallyOrderedDivs);
     });
-    $("#apateammember-block-2").html(alphabeticallyOrderedDivs);
 
     // BACK TO TOP BUTTON
     $('#back-to-top').click( function(e){

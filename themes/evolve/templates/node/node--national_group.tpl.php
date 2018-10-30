@@ -79,26 +79,31 @@
 * @ingroup themeable
 */
 ?>
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large policybottom" <?php print $attributes; ?>>
-		
-	<section class="post-content">
-   
-	<div class="region main-content col-xs-12 col-sm-12 col-md-9 col-lg-9">
-		<h1 class="SectionHeader"><?php print $node->title;?></h1>
-		<div class="intro">
-		  
-			<?php print $node->body['und'][0]['summary'];?>
-			<?php 
-			   
-				$ngtag = ((array)$content['field_nationalgrouptag']['#items'][0]["taxonomy_term"])['tid'];
-				$PID = findPID($ngtag);
-			?>
-		</div>
-		<div class="post-img media">
-		  <div class='mediaholder'>
-			<?php print render($content['field_ngimage']);?>
-		  </div>
-		</div>
+<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> post" <?php print $attributes; ?>>
+<div class="space-50">&nbsp;</div>
+<div class="flex-container">
+	<div class="flex-cell">
+
+		<div class="flex-col-9 left-content">
+
+		<h2 class="lead-heading"><?php print $node->title;?></h2>
+			<div class="intro">
+			  
+				<?php print $node->body['und'][0]['summary'];?>
+				<?php 
+				   
+					$ngtag = ((array)$content['field_nationalgrouptag']['#items'][0]["taxonomy_term"])['tid'];
+					$PID = findPID($ngtag);
+				?>
+			</div>
+
+			<div class="space-30">&nbsp;</div>
+
+			<div class="post-img media">
+			  <div class='mediaholder'>
+				<?php print render($content['field_ngimage']);?>
+			  </div>
+			</div>
 
 
 		<?php
@@ -110,43 +115,24 @@
         ?>
 		<a class="accent-btn" href="/joinnationalgroup?ProductID=<?php echo $PID;?>" id="ng-join-btn"><span>Join now</span></a>
 
-		<div class="bottom-nav"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
+		</div>
+
+		<div class="flex-col-3 right-sidebar">
+			<span class="underline-heading">National Groups</span>
+
+							<?php 
+								$block = block_load('block', '350');
+								$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+								$output = drupal_render($get);        
+								print $output; 
+							?>
+
+		</div>
 	</div>
-	<div class="block contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
-		<h3 class="headline">National Groups</h3>
-		<span class="brd-headling"></span>
-		<div class="content">
-		<div class="view view-current-apa-campaign view-id-current_apa_campaign view-display-id-block_1 view-dom-id-32635ceaef40fd2d990939d49ac29284">
-		<div class="view-content">
-		  
-			<div class="dexp-grid-items">
-			<?php //echo views_embed_view('blog_categories', 'block_5');?>
-			<ul class="side-nav">
-				<li><a href="/membership/national-groups/acupuncture-and-dry-needling">Acupuncture and dry needling</a></li>
-				<li><a href="/membership/national-groups/animal">Animal</a></li>
-				<li><a href="/membership/national-groups/aquatic">Aquatic</a></li>
-				<li><a href="/membership/national-groups/business">Business</a></li>
-				<li><a href="/membership/national-groups/cancer-palliative-care-and-lymphoedema">Cancer, Palliative Care and Lymphoedema</a></li>
-				<li><a href="/membership/national-groups/cardiorespiratory">Cardiorespiratory</a></li>
-				<li><a href="/membership/national-groups/disability">Disability</a></li>
-				<li><a href="/membership/national-groups/educators">Educators</a></li>
-				<li><a href="/membership/national-groups/emergency-department">Emergency Department</a></li>
-				<li><a href="/membership/national-groups/gerontology">Gerontology</a></li>
-				<li><a href="/membership/national-groups/leadership-and-management">Leadership and Management</a></li>
-				<li><a href="/membership/national-groups/mental-health-physiotherapy">Mental Health Physiotherapy</a></li>
-				<li><a href="/membership/national-groups/musculoskeletal">Musculoskeletal</a></li>
-				<li><a href="/membership/national-groups/neurology">Neurology</a></li>
-				<li><a href="/membership/national-groups/occupational-health">Occupational Health</a></li>
-				<li><a href="/membership/national-groups/orthopaedic">Orthopaedic</a></li>
-				<li><a href="/membership/national-groups/paediatric">Paediatric</a></li>
-				<li><a href="/membership/national-groups/pain">Pain</a></li>
-				<li><a href="/membership/national-groups/sports-and-exercise">Sports and Exercise</a></li>
-				<li><a href="/membership/national-groups/womens-mens-and-pelvic-health">Women's, Men's and Pelvic Health</a></li>
-			<ul>
-			</div>
-		  
-		</div></div></div>
-	</div>
-	</section>
+</div>
+
+<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>	
+
+<div class="space-50">&nbsp;</div>
 </div> 
 
