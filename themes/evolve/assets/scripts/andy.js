@@ -77,6 +77,12 @@ jQuery(document).ready(function(){
 
   var target1 = $('.nav li a[href="/membership/national-groups/'+path1+'"]');
   target1.parent().addClass('active');
+
+  var target1 = $('.nav li a[href="/tools/clinical-practice/'+path1+'"]');
+  target1.parent().addClass('active');
+
+  var target1 = $('.nav li a[href="/tools/profession/'+path1+'"]');
+  target1.parent().addClass('active');
 });
 
 //ACORDION 
@@ -324,7 +330,7 @@ jQuery(document).ready(function() {
       this.$control_input.prop('readonly', true);
   };
 
-  $('select').selectize({
+  $('select').not('#PRF, #Paymentcard').selectize({
     plugins: ['remove_button'],
     delimiter: ',',
     persist: false,
@@ -337,9 +343,7 @@ jQuery(document).ready(function() {
             text: input
         }
     }
-    
   });
-
 });
 
 
@@ -678,10 +682,12 @@ jQuery(document).ready(function(){
 
     // RESET SEARCH FILTERS
     $('#reset-search').on('click', function(){
-      $('#pd-search-form input[type="text"]').val('');
-      $('#pd-search-form input[type="date"]').val('');
+      $('#pd-search-form input:visible').val('');
+      //$('#pd-search-form input[type="date"]').val('');
       $("#pd-search-form select").prop("selectedIndex", 0);
       $("#Nationalgp")[0].selectize.clear();
+      $("#State")[0].selectize.clear();
+      $(".selectized")[0].selectize.clear();
     });
 
     // RENAME PD PURCHASE BUTTON BASED ON PRICE
@@ -730,7 +736,7 @@ jQuery(document).ready(function(){
     $('.content-block h6+div').hide();
 
     $('.content-block h6').on('click', function(){
-      $(this).siblings().removeClass('active');
+      $('.content-block h6').not(this).removeClass('active');
       $(this).toggleClass('active');
       $('.content-block h6+div').slideUp();
       if ( $(this).next('div').is(':visible') ) {

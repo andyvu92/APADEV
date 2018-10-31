@@ -888,13 +888,7 @@ div.SSOlogin {
 .GetCentreLayoutHome .ASection div {
 	background-color: white;
 }
-.GetCentreLayoutHome .ASection .Desktop {
-	display: block;
-	width: 600px;
-	z-index: 1000;
-	margin: auto;
-	margin-top: -84px;
-}
+
 .GetCentreLayoutHome .ASection .Mobile {
 	display: none;
 	width: 234px;
@@ -902,11 +896,37 @@ div.SSOlogin {
 	margin: auto;
 	margin-top: -84px;
 }
-@media screen and (max-width: 600px) {
-	.GetCentreLayoutHome .ASection .Desktop {
+.GetCentreLayoutHome {
+	.ASection .Desktop {
+		display: block;
+		max-width: 1450px;
+		z-index: 99999;
+		min-height: 37px;
+		margin: auto;
+		display: flex;
+		align-items: center;
+		margin-top: -84px;
+		p{
+			margin: 0;
+			padding-left: 5px;
+			b, strong{
+				color: #333;
+			}
+		}
+	}
+	.ASection .Mobile {
 		display: none;
+		width: 234px;
+		z-index: 1000;
+		margin: auto;
+		margin-top: -140px;
+	}
+}
+@media @larger-phone-width-down {
+	.GetCentreLayoutHome .ASection .Desktop {
+		display: flex;
 	}
 	.GetCentreLayoutHome .ASection .Mobile {
-		display: block;
+		display: none;
 	}
 }

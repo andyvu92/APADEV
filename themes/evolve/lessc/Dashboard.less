@@ -401,9 +401,7 @@ button.deletecardbutton {
 /* ********************************************************* */
 /* -----------------Join the member page added by jinghu End---------- */
 /* ********************************************************* */
-.shipping{
-    display:none!important;
-}
+
 
 
 #conditions {
@@ -1815,6 +1813,13 @@ a#insuranceControl{
 	display: none;
 }
 
+#section-main-content .region-content{
+    padding-right: 60px;
+    @media @larger-tablet-width-down{
+        padding-right: 15px;
+    }
+}
+
 #section-content-top .container .row .region-content-top{
     padding: 0px;
     
@@ -3110,7 +3115,10 @@ input[type="email"], .email-field{
         position: relative;
         text-align: left;
         top: 0px;
-        z-index: 1;
+        z-index: 999;
+        span{
+            background: none;
+        }
     }
 
     .chevron-select-box{

@@ -141,7 +141,7 @@
 	margin: 140px 0 0;
 }
 #section-main-content {
-	margin-top: 40px;
+	margin-top: 10px;
 }
 .pd .region-right-sidebar .brd-headling {
 	border-bottom: 3px solid rgba(94,97,103,0.7);
@@ -271,11 +271,6 @@
     margin: 0 auto;
     float: none;
     text-align: left;
-    .pd-bottom-button{
-        .flex-cell{
-
-        }
-    }
     .row{
         margin: 0;
     }
@@ -389,11 +384,11 @@
         }
         #mobile-banner{
             background-image: url(/sites/default/files/MEDIA/PD_EVENT_SEARCH_IMAGE_1.jpg);
-            background-position: 62% 82%;
-            background-size: 200%;
+            background-position: 63% 106%;
+            background-size: 210%;
             background-repeat: no-repeat;
             padding: 30px 0 10px;
-            width: 100vw;
+            width: 105vw;
             position: relative;
             left: -15px;
             margin-top: 0;
@@ -434,6 +429,67 @@
         .pdSearchButton{
             width: 100%!important;
             padding: 15px 30px!important;
+        }
+    }
+
+    /* SELECTIZE SELECT */
+    .selectize-control.single{
+        max-height: 48px;
+        input{
+            font-size: 18px;
+        }
+        .remove-single{
+            display: none;
+        }
+        .selectize-input.input-active, .selectize-input{
+            background: none;
+            padding: 14px 10px;
+            font-size: 18px;
+            line-height: 1em;
+            border: 1px solid #665f5e;
+            max-height: 48px;
+            border-radius: 0;
+            &:after{
+                display: none;
+            }
+            span{
+                color: rgba(255,255,255,0.8);
+                font-size: 18px;
+            }
+        }
+        .selectize-input.input-active{
+            border-color: #66afe9 !important;
+        }
+        .selectize-dropdown{
+            background: #fff;
+            color: #000;
+            border-radius: 0;
+            margin-top: 0;
+            .option{
+                color: #333;
+                background: #fff;
+                &.active{
+                    color: #fff;
+                    background: @bright-blue;
+                }
+            }
+        }
+    }
+
+    .selectize-control.multi{
+        max-height: 48px;
+        .selectize-input.input-active, .selectize-input{
+            border-radius: 0;
+        }
+        .selectize-input.input-active{
+            border-color: #66afe9 !important;
+        }
+        .selectize-dropdown.multi{
+            border-radius: 0;
+            margin-top: 0;
+            .selectize-dropdown-content{
+                background: #fff;
+            }
         }
     }
 }
@@ -791,7 +847,7 @@ body.page-node{
 
 /*----------------PD SEARCH RESULT-------------------*/
 #block-block-240{
-    padding: 30px 0px 80px!important;
+    padding: 0px 0px 80px!important;
     background-position: 50% 1% !important;
     @media all and (max-width: @desktop-width) {
         background-position: 60% 1% !important;

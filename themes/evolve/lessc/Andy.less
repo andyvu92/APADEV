@@ -1528,6 +1528,81 @@ input{
     }
 }
 
+/* SELECTIZE SELECT */
+#dashboard-right-content, body, #section-content-top{
+    .selectize-control.single{
+        max-height: 48px;
+        padding: 0;
+        input{
+            font-size: 18px;
+            line-height: 1em!important;
+            color: #000;
+            width: auto!important;
+            vertical-align: baseline;
+            &::placeholder{
+                color: #000;
+            }
+        }
+        .remove-single{
+            display: none;
+        }
+        .selectize-input.input-active, .selectize-input{
+            background: none;
+            padding: 14px 10px;
+            font-size: 18px;
+            line-height: 1em;
+            border: 1px solid rgba(0,0,0,0.12);
+            max-height: 48px;
+            border-radius: 0;
+            &:after{
+                display: none;
+            }
+            span{
+                color: #000;
+            }
+            &.has-items{
+                input{
+                    font-size: 16px;
+                }
+            }
+        }
+        .selectize-input.input-active{
+            border-color: #66afe9 !important;
+        }
+        .selectize-dropdown{
+            background: #fff;
+            color: #000;
+            border-radius: 0;
+            margin-top: 0;
+            padding: 0;
+            .option{
+                color: #333;
+                background: #fff;
+                &.active{
+                    color: #fff;
+                    background: @bright-blue;
+                }
+            }
+        }
+    }
+}
+
+
+.selectize-control.multi{
+    max-height: 48px;
+    .selectize-input.input-active, .selectize-input{
+        border-radius: 0;
+    }
+
+    .selectize-dropdown.multi{
+        border-radius: 0;
+        margin-top: 0;
+        .selectize-dropdown-content{
+            background: #fff;
+        }
+    }
+}
+
 /*=================FORGET/RESET PASSWORD PAGES =================*/
 .page-node-406, .page-node-407, .page-node-390, .page-node-507, .page-node-508{
     #section-main-content{
@@ -2431,8 +2506,26 @@ body .block, body{
             font-family: Roboto;
             font-weight: 700;
             opacity: 1;
+            padding-top: 0;
         }
     }
+
+    .dark-link{
+        color: #000;
+        transition: all .2s linear;
+        &:hover{
+            color: @bright-blue;
+        }
+        a{
+            color: #000;
+            transition: all .2s linear;
+            &:hover{
+                color: @bright-blue;
+            }
+        }
+    }
+
+    /* PREDEFINED WHITE SPACE */
     .space-100{
         height: 100px;
         display: block;
@@ -2481,6 +2574,8 @@ body .block, body{
             height:5px;
         }
     }
+
+    /* PREDEFINED WHITE SPACE WITH KEYLINE */
     .separator-50{
         display: block;
         float: left;
@@ -2491,6 +2586,13 @@ body .block, body{
         border-top: 1px solid rgba(0,0,0,0.2);
     }
 
+    /* PREDEFINED PADDING-BOTTOM */
+    .bottom-space-50{
+        margin-bottom: 50px;
+    }
+    .bottom-space-20{
+        margin-bottom: 20px;
+    }
 }
 
 /* STANDARD RIGHT SIDEBAR */
@@ -2517,6 +2619,7 @@ body .block, body{
           padding-left: 0;
           li{
               padding-left: 0;
+              font-size: 1em;
               > a{
                 padding: 10px 0;
                 border-top: 1px solid rgba(0,0,0,0.1);
@@ -3105,7 +3208,7 @@ body .block .secondary-button{
 }
 
 /* FULL WIDTH ELEMENT */
-.full-width {
+.full-width{
     width: 100vw;
     position: relative;
     display: flex;
@@ -3113,4 +3216,51 @@ body .block .secondary-button{
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-  }
+}
+
+/* GRID BLOCK STYLE */
+.grid-block{
+    display: flex;
+    flex-wrap: wrap;
+    .item{
+        width: 33.33%;
+        padding: 15px;
+        @media @larger-phone-width-down{
+            width: 50%;
+            text-align: center;
+        }
+    }
+}
+
+/* RESPONSIVE EMBED VIDEO */
+.video-embed{
+    position: relative;
+    padding: 0px;
+    padding-top: 56.25%;
+    margin-top: 8px;
+    display: block;
+    width: 100%;
+    height: 0;
+    overflow: hidden;
+    .iframe{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%!important;
+        height: 100%!important;
+        border: 0; 
+    }
+}
+
+/* FEATURED BLOCK */
+.featured-block{
+    background: #f2f3f4;
+    padding: 25px;
+    margin-top: 20px;
+    display: block;
+    float: left;
+    h4{
+        font-weight: 500;
+        color: @bright-blue;
+    }
+}

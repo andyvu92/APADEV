@@ -754,7 +754,7 @@ jQuery(document).ready(function($) {
     }); 
 	$('#Shipping-address-join').click(function(){
            if($(this).is(":checked")){
-			$('#shippingAddress').addClass('shipping');  
+			$('#shippingAddress').addClass('shipping').slideUp();  
             $(this).attr('checked', true);
 			$('#Billing-BuildingName').val($('input[name="BuildingName"]').val());
             $('#Billing-Address_Line_1').val($('input[name="Address_Line_1"]').val());
@@ -772,7 +772,7 @@ jQuery(document).ready(function($) {
           
           $(this).removeAttr('checked');
 		  $(this).val('0');
-		  $('#shippingAddress').removeClass('shipping');
+		  $('#shippingAddress').removeClass('shipping').slideDown();
 		  $('#dashboard-right-content').addClass("autoscroll");
           $('#Billing-BuildingName').val('');
 		  $('#Billing-Address_Line_1').val('');

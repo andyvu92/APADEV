@@ -64,7 +64,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 <div id="prf-donation-container">
 	<div class="header-banner">
 		<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="Physiotherapy Research Foundation">
-		<h1 class="lead-heading cairo">Donate to the PRF.</h1>
+		<h2 class="lead-heading cairo">Donate to the PRF.</h2>
 	</div>
 <form action="" method="POST" style="width:100%;">
 	<input type="hidden" name="POSTPRF" id="POSTPRF">
@@ -288,7 +288,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 <div id="prf-donation-container">
 	<div class="header-banner">
 		<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="Physiotherapy Research Foundation">
-		<h1 class="lead-heading cairo">Donate to the PRF.</h1>
+		<h2 class="lead-heading cairo">Donate to the PRF.</h2>
 	</div>
 <form action="" method="POST" style="width:100%;">
 	<input type="hidden" name="POSTPRF" id="POSTPRF">
