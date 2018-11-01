@@ -80,7 +80,7 @@
 */
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> post" <?php print $attributes; ?>>
-<div class="space-50">&nbsp;</div>
+<div class="bottom-space-50 border-10 full-width">&nbsp;</div>
 <div class="flex-container">
 	<div class="flex-cell">
 
@@ -105,6 +105,7 @@
 			  </div>
 			</div>
 
+			<div class="space-30">&nbsp;</div>
 
 		<?php
         // We hide the comments and links now so that we can render them later.
@@ -114,6 +115,8 @@
 		
         ?>
 		<a class="accent-btn" href="/joinnationalgroup?ProductID=<?php echo $PID;?>" id="ng-join-btn"><span>Join now</span></a>
+
+		<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>	
 
 		</div>
 
@@ -131,8 +134,5 @@
 	</div>
 </div>
 
-<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>	
-
-<div class="space-50">&nbsp;</div>
 </div> 
 

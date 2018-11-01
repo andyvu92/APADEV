@@ -26,6 +26,9 @@
 
 
 .node-type-national-group{
+    #section-main-content{
+        margin-top: 0;
+    }
     #block-system-main .node-national-group{
         /* MAIN CONTENT */
         .left-content{
@@ -51,16 +54,35 @@
                 margin-bottom: 50px;
             }
             .post-img{
-                float: left;
+                float: none;
+                width: 100%;
             }
             h4{
                 margin-bottom: 5px;
                 font-size: 1.2em;
             }
+            .featured-block{
+                h4{
+                    font-size: 1.7em;
+                    font-family: Cairo;
+                    font-weight: 100;
+                    position: relative;
+                    padding-bottom: 20px;
+                    margin-bottom: 20px;
+                    &:after{
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        bottom: 0px;
+                        height: 1px;
+                        width: 100%;
+                        background: rgba(0,0,0,0.12);
+                    }
+                }
+            }
             ul{
                 color: #000;
                 list-style: none;
-                padding: 0;
                 font-size: 1.2em;
                 li{
                     padding-left: 20px;

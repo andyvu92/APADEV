@@ -27,12 +27,11 @@ jQuery(document).ready(function($) {
 	$('[class^=Tabs]').click(function(){
 		var x = $(this).attr("class").replace('Tabs', '');
 		if ( $(this).hasClass('active') ){
-			console.log('11111');
+			return;
 		}
 		else{
 			$(this).siblings().removeClass('active');
 			$(this).addClass('active');
-			console.log('asdsad');
 			$('[class^=TabContents]:not(.TabContents'+x+')').slideUp(400);
 			$('.TabContents' + x).slideToggle(450);
 			$('[class^=Tabs]:not(.Tabs'+x+') span').removeClass("text-underline");

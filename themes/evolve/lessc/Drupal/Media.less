@@ -72,6 +72,9 @@ ul.socialMediaIcon li{
 	list-style-type: none;
 	float: inherit;
 	margin-right: 8px;
+	.fb_iframe_widget{
+		top: -2px;
+	}
 }
 .media-tag-list {
 	float: left;
@@ -202,6 +205,14 @@ div#node-102 .content .item-list .pagination li {
 .media_filter {
 	height: 46px;
 	margin-top: 40px;
+	&.content-tabs{
+		.active{
+			background-color: @bright-blue;
+			a{
+				color: #fff;
+			}
+		}
+	}
 }
 .media_filter ul {
 	margin-left: 0;

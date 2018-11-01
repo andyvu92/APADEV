@@ -155,11 +155,28 @@ jQuery(document).ready(function() {
     is_mobile = false;       
   }
 	if(window.location.href.indexOf("?page") > -1||window.location.href.indexOf("?pagesize") > -1 || window.location.href.indexOf("?search-result") > -1){
-    var scrollpoint = $('#section-content-top').offset().top - 200;
-    if (is_mobile == true) {
-      var scrollpoint = $('#section-content-top').offset().top  - 200;
+    var window_width = $(window).width();
+    var target = $('#section-content-top');
+
+    if (window_width >= 993) {
+      $('html, body').stop().animate({
+        scrollTop: target.offset().top - $('#section-header').height()
+      }, 1000, function(){
+        window.location.href = alt_target;
+        $('html, body').stop().animate({
+          scrollTop: target.offset().top - $('#section-header').height()
+        }, 0);
+      });
+    } else {
+      $('html, body').stop().animate({
+        scrollTop: target.offset().top
+      }, 1000, function(){
+        window.location.hash = alt_target;
+        $('html, body').stop().animate({
+          scrollTop: target.offset().top
+        }, 0);
+      });
     }
-    $('html, body').animate({ scrollTop: scrollpoint }, 1000);
   }
   
 });
@@ -706,12 +723,15 @@ jQuery(document).ready(function(){
     });
 
     $(document).ready(function(){
+      // ADD LOADING SCREEN FOR CPD DIARY
       $('#block-block-291').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+    
     });
 
     $(window).load(function(){
-      $('#block-block-291 .overlay').fadeOut();
+      $('#block-block-291 .overlay, #block-block-240 .overlay').fadeOut();
       $('.CPD_snapshot').fadeIn().addClass('visible');
+
     });
 
     // STANDARD CONTENT ACCORDION

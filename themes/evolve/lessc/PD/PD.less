@@ -213,6 +213,12 @@
 /* ----------------------- PD search Added by Jinghu ----------------------- */
 
 .page-node-248{
+    #section-main-content, #section-content-top{
+        margin-top: 0;
+        .region{
+            min-height: 0;
+        }
+    }
     .pd{
         #section-bannersdf{
             .dexp-container{
@@ -285,7 +291,7 @@
     .light-lead-heading{
         color: #fff;
         font-size: 3.5em;
-        margin-bottom: 10px;
+        margin: 30px 0 10px ;
         @media @tablet-widtn-down{
             font-size: 3em;
         }
@@ -871,7 +877,7 @@ body.page-node{
 /*----------------PD SEARCH RESULT-------------------*/
 #block-block-240{
     padding: 0px 0px 80px!important;
-    background-position: 50% 1% !important;
+    background-position: 15% 1% !important;
     @media all and (max-width: @desktop-width) {
         background-position: 60% 1% !important;
     }
@@ -1716,6 +1722,7 @@ body.page-node{
 
 
 #block-block-240{
+    position: relative;
     .form-control{
         background-color:transparent!important;
         border: 1px solid white!important;

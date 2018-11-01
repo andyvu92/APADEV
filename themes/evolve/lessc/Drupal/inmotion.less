@@ -567,6 +567,27 @@
 		}
 }
 
+/* INMOTION HEADS */
+.node-type-inmotion{
+	#block-block-281{
+		padding-bottom: 11%;
+		background-size: 65%;
+		&:after{
+			content: '';
+			position: absolute;
+			top: 0;
+			right: 0;
+			height: 100%;
+			width: 60%;
+			background: #fff;
+		}
+	}
+	.CampaignSidebar{
+		position: relative;
+    	top: -170px;
+	}
+}
+
 /* INMOTION BOTTOM INFO GRID */
 #block-block-287{
 	background: @light-grey;
@@ -690,9 +711,17 @@
 				.inmotionteam{
 					.inmotiondes{
 						display: flex;
+						padding: 0 0 30px;
+						@media @larger-phone-width-down{
+							flex-direction: column;
+						}
 						.headshot{
 							width: 22%;
-    						min-width: 175px;
+							min-width: 175px;
+							padding: 0 20px 20px 20px;
+							@media @larger-phone-width-down{
+								padding: 20px 0;
+							}
 						}
 						.description{
 							width: 78%;
@@ -700,6 +729,14 @@
 							padding-bottom: 30px;
 							p{
 								margin-bottom: 0!important;
+							}
+							@media @larger-phone-width-down{
+								width: 100%;
+								padding-left: 0;
+								padding-bottom: 0px;
+								.space-10{
+									height: 10px;
+								}
 							}
 						}
 						&:last-of-type{

@@ -1,3 +1,4 @@
+<div class="border-10 full-width"></div>
 <?php
    /**
    * @file
@@ -79,7 +80,6 @@
    * @ingroup themeable
    */
    ?>
-<div style="height: 10px; width: 1px;">&nbsp;</div>
 
 <div class="Pagination">
 
