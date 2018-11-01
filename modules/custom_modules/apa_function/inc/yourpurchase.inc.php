@@ -66,13 +66,15 @@ apa_function_dashboardLeftNavigation_form();
 						<?php 
 						$counter = 0;
 						if(!empty($products)) {
+							$counterTwo = 0;
 							foreach($products as $product){
 								$now = date('d-m-Y');
 								if(strtotime($now)<strtotime('+1 years',strtotime($product['Orderdate']))){
 									$counter++;
 									$instal = false;
 									echo "<div class='flex-cell flex-flow-row'>";
-									if($counter == 1) {
+									if($counterTwo == 0) {
+										$counterTwo++;
 										echo "<div class='flex-col-6'><a class='Tabs".$counter." active'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
 									} else {
 										echo "<div class='flex-col-6'><a class='Tabs".$counter."'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
@@ -138,10 +140,11 @@ apa_function_dashboardLeftNavigation_form();
 									echo "<div class='flex-cell flex-flow-row'>";
 									if($counterTwo == 0) {
 										$counterTwo++;
-										echo "<div class='flex-col-6'><a class='Tabs".$counter." active'>".$product['OrderLines'][0]['ProductName']."</a></div>";
+										echo "<div class='flex-col-6'><a class='Tabs".$counter." active'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
 									} else {
-										echo "<div class='flex-col-6'><a class='Tabs".$counter."'>".$product['OrderLines'][0]['ProductName']."</a></div>";
+										echo "<div class='flex-col-6'><a class='Tabs".$counter."'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
 									}
+									// echo "<div class='flex-col-6'><a class='Tabs".$counter."'>".$product['OrderLines'][0]['ProductName']."</a></div>";
 									//echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
 									echo "<div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div>";
 									$OrderDate = date('d-m-Y', strtotime($product['Orderdate']));
