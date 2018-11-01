@@ -77,7 +77,10 @@ apa_function_dashboardLeftNavigation_form();
 									echo "<div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div>";
 									$OrderDate = date('d-m-Y', strtotime($product['Orderdate']));
 									echo "<div class='flex-col-3'>".$OrderDate."</div>";
-									echo "</div><div class='TabContents".$counter."' style='display: none;'>";
+									/// original copy for order detail:
+									/// echo "</div><div class='TabContents".$counter."' style='display: none;'>";
+									/// Made this change to hide the details
+									echo "</div><div class='noTabContents".$counter."' style='display: none;'>";
 									foreach($product["OrderLines"] as $orderDetails) {
 										echo "<div class='flex-cell flex-flow-row'>";
 										echo "<div class='flex-col-6'>".$orderDetails['ProductName']."</div>";
@@ -133,7 +136,10 @@ apa_function_dashboardLeftNavigation_form();
 									echo "<div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div>";
 									$OrderDate = date('d-m-Y', strtotime($product['Orderdate']));
 									echo "<div class='flex-col-3'>".$OrderDate."</div>";
-									echo "</div><div class='TabContents".$counter."' style='display: none;'>";
+									/// original copy for order detail:
+									/// echo "</div><div class='TabContents".$counter."' style='display: none;'>";
+									/// Made this change to hide the details
+									echo "</div><div class='noTabContents".$counter."' style='display: none;'>";
 									foreach($product["OrderLines"] as $orderDetails) {
 										echo "<div class='flex-cell flex-flow-row'>";
 										echo "<div class='flex-col-6'>".$orderDetails['ProductName']."</div>";
