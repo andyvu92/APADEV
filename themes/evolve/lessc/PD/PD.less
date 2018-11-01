@@ -290,12 +290,31 @@
             font-size: 3em;
         }
     }
+    .selectize-control{
+        input{
+            @media @larger-phone-width-down{
+                border: none!important;
+            }
+        }
+        .selectize-input{
+            @media @larger-phone-width-down{
+                border: 1px solid rgba(0,0,0,0.12)!important;
+            }
+        }
+    }
     input, select{
         font-size: 1.4em;
         margin: 0;
         background: none;
         color: rgba(255,255,255,0.8);
         border: 1px solid #665f5e;
+        @media @larger-phone-width-down{
+            border: 1px solid rgba(0,0,0,0.12)!important;
+            &::placeholder {
+                color: #333!important;
+                opacity: 1; /* Firefox */
+            }
+        }
         &::-ms-expand {
             display: none;
         }
@@ -409,7 +428,6 @@
             }
         }
         label{
-            color: #333;
             font-size: 1.1em;
         }
         .sub-heading.mobile{
@@ -455,6 +473,9 @@
             span{
                 color: rgba(255,255,255,0.8);
                 font-size: 18px;
+                @media @larger-phone-width-down {
+                    color: #333;
+                }
             }
         }
         .selectize-input.input-active{
@@ -477,7 +498,7 @@
     }
 
     .selectize-control.multi{
-        max-height: 48px;
+        max-height: unset;
         .selectize-input.input-active, .selectize-input{
             border-radius: 0;
         }
@@ -498,6 +519,7 @@
     @media all and (max-width: @larger-phone-width){
         background: none!important;
     }
+
 }
 
 .pd{
@@ -735,6 +757,7 @@ body.page-node{
         .container{
             .row{
                 #block-block-241{
+                    
                     @media all and (max-width: @larger-desktop-width){
                         padding: 0 50px;
                     }
@@ -938,6 +961,13 @@ body.page-node{
             .align-right{
                 text-align: right;
             }
+            .home-leader-ad{
+                .flex-container{
+                    .flex-cell{
+                        border-bottom: 0;
+                    }
+                }
+            }
             .flex-container{
                 .flex-cell{
                     border-bottom: 1px solid #d3d4d5;
@@ -1038,7 +1068,7 @@ body.page-node{
         }
         .search-again{
             text-align: center;
-            margin: 50px 0;
+            margin: 40px 0;
             .accent-btn{
                 padding: 10px 30px;
                 i{
@@ -2602,8 +2632,47 @@ input[name="Couponcode"]{
 
 /* CPD DIARY */
 #block-block-242 #CPD-diary-main{
+
+    .APAhours, .NAPAhours{
+        @media @desktop-width-down{
+            font-size: 0.9em;
+        }
+        b, strong{
+            padding: 0;
+        }
+        .table-heading{
+            font-size: 0.8em;
+        }
+        .date{
+            text-align: center;
+            top: 0;
+            float: none;
+            height: auto;
+            span{
+                background: none;
+            }
+            @media @larger-phone-width-down{
+                text-align: left;
+            }
+        }
+        .hours{
+            text-align: center;
+            @media @larger-phone-width-down{
+                text-align: left;
+            }
+        }
+        .reflection{
+            @media @desktop-width-down{
+                width: 26%;
+            }
+        }
+    }
+
     /* Navigation tabs mobile */
     div[class^="Tabs"]{
+        @media @desktop-width-down{
+            font-size: 1.4em;
+        }
         @media @larger-phone-width-down{
             font-size: 1.2em;
             margin: 0;
@@ -2628,7 +2697,10 @@ input[name="Couponcode"]{
     /* Mobile styles layout */
     .APAhours, .NAPAhours{
         @media @larger-phone-width-down{
-            margin-top: 30px;
+            margin-top: 20px;
+            .flex-col-1{
+                width: 12%;
+            }
         }
         .APAhoursHead, .NAPAhoursHead{
             @media @larger-phone-width-down{
@@ -2642,12 +2714,16 @@ input[name="Couponcode"]{
                 flex-direction: column;
                 padding: 0;
                 border-bottom: 0px;
+                border-top: 1px solid rgba(0,0,0,0.12);
+                padding: 15px 0;
+                b, strong{
+                    font-weight: 400;
+                }
                 div[class^="flex-col-"]{
-                    padding: 15px 5px;
-                    border-top: 1px solid rgba(0,0,0,0.12);
+                    padding: 5px;
                     width: 100%;
                 }
-                .flex-col-3{
+                &:last-child{
                     border-bottom: 1px solid rgba(0,0,0,0.12);
                 }
             }

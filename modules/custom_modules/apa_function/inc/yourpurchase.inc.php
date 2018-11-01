@@ -72,7 +72,11 @@ apa_function_dashboardLeftNavigation_form();
 									$counter++;
 									$instal = false;
 									echo "<div class='flex-cell flex-flow-row'>";
-									echo "<div class='flex-col-6'><a class='Tabs".$counter."'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
+									if($counter == 1) {
+										echo "<div class='flex-col-6'><a class='Tabs".$counter." active'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
+									} else {
+										echo "<div class='flex-col-6'><a class='Tabs".$counter."'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
+									}
 									//echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
 									echo "<div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div>";
 									$OrderDate = date('d-m-Y', strtotime($product['Orderdate']));
@@ -125,13 +129,19 @@ apa_function_dashboardLeftNavigation_form();
 
 					<?php
 							$apis = Array();
+							$counterTwo = 0;
 							if(!empty($products)) {
 								foreach($products as $product){
 									$counter++;
 									$instal = false;
 									array_push($apis, $product["ID"]);
 									echo "<div class='flex-cell flex-flow-row'>";
-									echo "<div class='flex-col-6'><a class='Tabs".$counter."'>".$product['OrderLines'][0]['ProductName']."</a></div>";
+									if($counterTwo == 0) {
+										$counterTwo++;
+										echo "<div class='flex-col-6'><a class='Tabs".$counter." active'>".$product['OrderLines'][0]['ProductName']."</a></div>";
+									} else {
+										echo "<div class='flex-col-6'><a class='Tabs".$counter."'>".$product['OrderLines'][0]['ProductName']."</a></div>";
+									}
 									//echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
 									echo "<div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div>";
 									$OrderDate = date('d-m-Y', strtotime($product['Orderdate']));

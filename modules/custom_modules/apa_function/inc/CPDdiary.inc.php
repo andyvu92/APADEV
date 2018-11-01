@@ -78,14 +78,14 @@ function date_sort($a, $b) {
 <h2 class="lead-heading">Your CPD diary</h2>
 
 
-<div class="Tabs1"><a>APA hours</a></div>
+<div class="Tabs1 active"><a>APA hours</a></div>
 <div class="Tabs2"><a>Non-APA hours</a></div>
 <div class="Tabs3"><a>All hours</a></div>
 <div class='lineBreak'>&nbsp;</div>
 <div class="TabContents1">
 	<div class="APAhours">
 		<div class="APAhoursHead flex-cell flex-flow-row heading-row">
-			<div class="flex-col-5 table-heading">Completed PD</div><div class="flex-col-2 table-heading">Date</div><div class="flex-col-2 table-heading">Hours</div><div class="flex-col-3 table-heading">Provider</div>
+			<div class="flex-col-5 table-heading">Completed PD</div><div class="flex-col-1 table-heading date">Date</div><div class="flex-col-2 table-heading hours">Hours</div><div class="flex-col-3 table-heading">Provider</div>
 		</div>
 		<div class="APAhoursContent">
 		<?php
@@ -99,7 +99,7 @@ function date_sort($a, $b) {
 				foreach($APA as $rowData) {
 					echo "<div class='flex-cell flex-flow-row'>";
 					$date = date("d/m/Y", strtotime($rowData["Date"]));
-					echo "<div style='display: none;'>".$rowData["Id"]."</div><div class='flex-col-5'><span class='mobile-header'>Completed PD</span><b>".$rowData["Title"]."&nbsp;</b></div><div class='flex-col-2'><span class='mobile-header'>Date</span>".$date."</div><div class='flex-col-2'><span class='mobile-header'>Hours</span>".$rowData["Hours"]."</div>";
+					echo "<div style='display: none;'>".$rowData["Id"]."</div><div class='flex-col-5'><span class='mobile-header'>Completed PD</span><b>".$rowData["Title"]."&nbsp;</b></div><div class='flex-col-1 date'><span class='mobile-header'>Date</span>".$date."</div><div class='flex-col-2 hours'><span class='mobile-header'>Hours</span>".$rowData["Hours"]."</div>";
 					echo "<div class='flex-col-3'><span class='mobile-header'>Provider</span>Australian Physiotherapy Association</div><div class='lineBreak'>&nbsp;</div>";
 					echo "</div>";
 					$arrT["ID"] = $rowData["Id"];
@@ -122,7 +122,7 @@ function date_sort($a, $b) {
 <!--strong><a href="http://www.physiotherapyboard.gov.au/documents/default.aspx?record=WD15%2f18489&dbid=AP&chksum=ewqLtzOm4m%2fsRUrlGCmo1A%3d%3d">This is based on Physiotherapy Board of Australia's Continuing professional development form.</a></strong-->
 <div class="NAPAhours">
   <div class="NAPAhoursHead flex-cell flex-flow-row heading-row">
-    <div class="flex-col-4 table-heading ">Description</div><div class="flex-col-1 table-heading ">Date</div><div class="flex-col-1 table-heading ">Hours</div><div class="flex-col-2 table-heading ">Provider</div><div class="flex-col-4 table-heading ">Reflection</div>
+    <div class="flex-col-4 table-heading ">Description</div><div class="flex-col-1 table-heading date">Date</div><div class="flex-col-1 table-heading hours">Hours</div><div class="flex-col-2 table-heading ">Provider</div><div class="flex-col-4 table-heading reflection">Reflection</div>
   </div>
   <div class="NAPAhoursContent">
     <?php
@@ -131,7 +131,7 @@ function date_sort($a, $b) {
 		foreach($NAPA as $rowData) {
 			echo "<div class='flex-cell flex-flow-row'>";
 			$date = date("d/m/Y", strtotime($rowData["Date"]));
-			echo "<div style='display: none;'>".$rowData["NPDid"]."</div><div class='flex-col-4'><b><span class='mobile-header'>Description</span>".$rowData["Description"]."</b></div><div class='flex-col-1'><span class='mobile-header'>Date</span>".$date."</div><div class='flex-col-1'><span class='mobile-header'>Hours</span>".$rowData["Time"]."</div><div class='flex-col-2'><span class='mobile-header'>Provider</span>".$rowData["Provider"]."</div><div class='flex-col-4'><span class='mobile-header'>Reflection</span>".$rowData["Reflection"]."</div>";
+			echo "<div style='display: none;'>".$rowData["NPDid"]."</div><div class='flex-col-4'><b><span class='mobile-header'>Description</span>".$rowData["Description"]."</b></div><div class='flex-col-1 date'><span class='mobile-header'>Date</span>".$date."</div><div class='flex-col-1 hours'><span class='mobile-header'>Hours</span>".$rowData["Time"]."</div><div class='flex-col-2'><span class='mobile-header'>Provider</span>".$rowData["Provider"]."</div><div class='flex-col-4 reflection'><span class='mobile-header'>Reflection</span>".$rowData["Reflection"]."</div>";
 			echo "<div class='lineBreak'>&nbsp;</div>";
 			echo "</div>";
 			$arrT["ID"] = $rowData["NPDid"];
@@ -153,7 +153,7 @@ function date_sort($a, $b) {
 <div class="TabContents3" style="display: none;">
 	<div class="NAPAhours">
 	<div class="NAPAhoursHead flex-cell flex-flow-row heading-row">
-		<div class="flex-col-4 table-heading ">Description</div><div class="flex-col-1 table-heading ">Date</div><div class="flex-col-1 table-heading ">Hours</div><div class="flex-col-2 table-heading ">Provider</div><div class="flex-col-4 table-heading ">Reflection</div>
+		<div class="flex-col-4 table-heading ">Description</div><div class="flex-col-1 table-heading date">Date</div><div class="flex-col-1 table-heading hours">Hours</div><div class="flex-col-2 table-heading ">Provider</div><div class="flex-col-4 table-heading reflection">Reflection</div>
 	</div>
 	<div class="NAPAhoursContent">
 		<?php
@@ -162,7 +162,7 @@ function date_sort($a, $b) {
 			foreach($DiaryAll as $rowData) {
 				$date = date("d/m/Y", strtotime($rowData["Date"]));
 				echo "<div class='flex-cell flex-flow-row'>";
-				echo "<div style='display: none;'>".$rowData["ID"]."</div><div class='flex-col-4'><b><span class='mobile-header'>Description</span>".$rowData["Description"]."</b></div><div class='flex-col-1'><span class='mobile-header'>Date</span>".$date."</div><div class='flex-col-1'><span class='mobile-header'>Hours</span>".$rowData["Hours"]."</div><div class='flex-col-2'><span class='mobile-header'>Provider</span>".$rowData["Provider"]."</div><div class='flex-col-4'><span class='mobile-header'>Reflection</span>".$rowData["Reflection"]."</div>";
+				echo "<div style='display: none;'>".$rowData["ID"]."</div><div class='flex-col-4'><b><span class='mobile-header'>Description</span>".$rowData["Description"]."</b></div><div class='flex-col-1 date'><span class='mobile-header'>Date</span>".$date."</div><div class='flex-col-1 hours'><span class='mobile-header'>Hours</span>".$rowData["Hours"]."</div><div class='flex-col-2'><span class='mobile-header'>Provider</span>".$rowData["Provider"]."</div><div class='flex-col-4 reflection'><span class='mobile-header'>Reflection</span>".$rowData["Reflection"]."</div>";
 				echo "<div class='lineBreak'>&nbsp;</div>";
 				echo "</div>";
 			}

@@ -57,32 +57,14 @@ jQuery(document).ready(function(){
 
 jQuery(document).ready(function(){
   // Get current path and find target link
-  var path1 = window.location.pathname.split("/").pop();
+  currentPath = window.location.pathname;
 
   // Add active class to target link
-  var target1 = $('.side-nav li a[href="/nationalgroups/'+path1+'"]');
-  target1.parent().addClass('active');
+  var target = $('.side-nav li a[href="'+currentPath+'"]');
+  target.parent().addClass('active');
 
-  var target1 = $('.nav li a[href="/aboutus/'+path1+'"]');
-  target1.parent().addClass('active');
-
-  var target1 = $('.side-nav li a[href="'+path1+'"]');
-  target1.parent().addClass('active');
-
-  var target1 = $('.nav li a[href="/membership/'+path1+'"]');
-  target1.parent().addClass('active');
-
-  var target1 = $('.nav li a[href="/pd/'+path1+'"]');
-  target1.parent().addClass('active');
-
-  var target1 = $('.nav li a[href="/membership/national-groups/'+path1+'"]');
-  target1.parent().addClass('active');
-
-  var target1 = $('.nav li a[href="/tools/clinical-practice/'+path1+'"]');
-  target1.parent().addClass('active');
-
-  var target1 = $('.nav li a[href="/tools/profession/'+path1+'"]');
-  target1.parent().addClass('active');
+  var target = $('.nav li a[href="'+currentPath+'"]');
+  target.parent().addClass('active');
 });
 
 //ACORDION 
@@ -330,7 +312,7 @@ jQuery(document).ready(function() {
       this.$control_input.prop('readonly', true);
   };
 
-  $('select').not('#PRF, #Paymentcard').selectize({
+  $('select').not('#PRF, #Paymentcard, #pagesize').selectize({
     plugins: ['remove_button'],
     delimiter: ',',
     persist: false,

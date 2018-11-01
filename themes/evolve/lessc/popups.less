@@ -1646,12 +1646,33 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
 
 #nonAPAhour.modal{
     .modal-dialog{
-		.large-popup;
+        .large-popup;
+        .close{
+            display: none;
+        }
         .modal-content{
+            border: none;
+            padding: 0 5px;
             input{
                 border-radius: 0;
 				background-color: #f8fafc;
             }
-        }  
+        }
+        .modal-header{
+            padding: 15px 20px;
+        }
+        .modal-body{
+            height: auto;
+            padding: 15px 20px;
+            div[class^="col-"]{
+                padding: 10px 0 0 0;
+            }
+        }
+        .modal-footer{
+            padding: 15px 20px;
+            button.btn{
+                padding: 5px 30px !important;
+            }
+        }
     }
 }

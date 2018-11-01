@@ -552,6 +552,9 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
 #section-main-content{
         .home-leader-ad{
             margin: 20px auto;
+            .flex-container .flex-cell{
+                border-bottom: 0;
+            }
             @media all and (max-width: @larger-phone-width) {
                 margin-bottom: 0;
             }
@@ -1485,6 +1488,7 @@ input{
             cursor: default;
             padding: 5px;
             font-size: 1.2em;
+            line-height: 1.2em;
             font-family: Roboto;
             .remove{
                 opacity: 0.5;
@@ -2258,7 +2262,7 @@ input{
 }
 #block-block-309{
     display: block;
-    margin: 100px auto 50px;
+    margin: 50px auto 50px;
     float: left;
     width: 100%;
     a{
@@ -2518,6 +2522,7 @@ body .block, body{
         }
         a{
             color: #000;
+            text-decoration: underline;
             transition: all .2s linear;
             &:hover{
                 color: @bright-blue;
@@ -2589,9 +2594,15 @@ body .block, body{
     /* PREDEFINED PADDING-BOTTOM */
     .bottom-space-50{
         margin-bottom: 50px;
+        @media @larger-phone-width-down{
+            margin-bottom: 25px;
+        }
     }
     .bottom-space-20{
         margin-bottom: 20px;
+        @media @larger-phone-width-down{
+            margin-bottom: 10px;
+        }
     }
 }
 
@@ -3216,6 +3227,9 @@ body .block .secondary-button{
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
+    &.border-10{
+        width: 105vw;
+    }
 }
 
 /* GRID BLOCK STYLE */

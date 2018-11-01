@@ -111,7 +111,7 @@
 				<?php 
 					$only = ((array)$content['field_members_only']['#items'][0]['taxonomy_term'])["name"];
 					if($only == "Yes") {
-						echo "<li><strong><div class='MonlyIconHolder'><div class='MonlyIcon'>Member Only Icon</div></div></strong></li>";
+						echo "<li><strong><div class='MonlyIconHolder'><div class='MonlyIcon'></div></div></strong></li>";
 					} 
 				?>
 			    <?php if(!is_null(render($content['field_members_only']))): ?> 

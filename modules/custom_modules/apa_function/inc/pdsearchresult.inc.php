@@ -151,6 +151,7 @@ if(isset($results['MResponse'])) {
 
 <?php if($outputEmpty): ?>
 	<?php //This is for when there is no result on PD search ?>
+	<div class="space-50"></div>
 	<h3 class="light-lead-heading align-center">We didn't find anything</br>that matched your search.</h3>
 	<div class="col-xs-12 search-again">
 		<a class="accent-btn" href="#block-block-240"><i class="fa fa-search"></i> Search again</a>
@@ -216,7 +217,7 @@ if(isset($results['MResponse'])) {
 		$front = (10 * $i);
 		$back = 10 * ($i + 1) + 1;
 		if($front < $current && $current <= ($back - 1)) {
-			echo '<h3 class="light-lead-heading align-center">PD based on your search</h3>';
+			echo '<div class="space-70"></div><h2 class="lead-heading align-center">PD based on your search</h2>';
 			if($front == 0) {
 				echo '<div class="pager col-xs-12 col-sm-6 col-md-7"><a href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.$passString.'"><div class="Pagebutton"><<</div></a>';
 			} else {

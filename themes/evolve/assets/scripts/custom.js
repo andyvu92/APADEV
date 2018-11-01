@@ -26,19 +26,27 @@ jQuery(document).ready(function($) {
 	});
 	$('[class^=Tabs]').click(function(){
 		var x = $(this).attr("class").replace('Tabs', '');
-        $('[class^=TabContents]:not(.TabContents'+x+')').slideUp(400);
-	    $('.TabContents' + x).slideToggle(450);
-		$('[class^=Tabs]:not(.Tabs'+x+') span').removeClass("text-underline");
-		var eventtitle = "eventtitle"+x;
-		$("span." + eventtitle).addClass("text-underline");
-        var faclass = "fa"+x;
-        if($("i." + faclass).hasClass("fa-angle-down")) {
-			$("i." + faclass).removeClass("fa-angle-down");
-			$("i." + faclass).addClass("fa-angle-up");
-        } else {
-			$("i." + faclass).removeClass("fa-angle-up");
-			$("i." + faclass).addClass("fa-angle-down");
-        }
+		if ( $(this).hasClass('active') ){
+			console.log('11111');
+		}
+		else{
+			$(this).siblings().removeClass('active');
+			$(this).addClass('active');
+			console.log('asdsad');
+			$('[class^=TabContents]:not(.TabContents'+x+')').slideUp(400);
+			$('.TabContents' + x).slideToggle(450);
+			$('[class^=Tabs]:not(.Tabs'+x+') span').removeClass("text-underline");
+			var eventtitle = "eventtitle"+x;
+			$("span." + eventtitle).addClass("text-underline");
+			var faclass = "fa"+x;
+			if($("i." + faclass).hasClass("fa-angle-down")) {
+				$("i." + faclass).removeClass("fa-angle-down");
+				$("i." + faclass).addClass("fa-angle-up");
+			} else {
+				$("i." + faclass).removeClass("fa-angle-up");
+				$("i." + faclass).addClass("fa-angle-down");
+			}
+		}
 	});
 	$('[id^=Country]').change(function(){
 		var x = $(this).attr("id").replace('Country', '');
