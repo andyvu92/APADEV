@@ -272,10 +272,13 @@ function getDropdown(){
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);
 	// write PDTypes json file
+	$selections = ['Course', 'Lecture', 'Workshops', 'Symposium', 'Forum', 'Member Engagement Event', 'Information session', 'Student Event'];
 	foreach($result['PDTypes']  as $lines){
-		$ID = $lines['ID'];
-		$Name = $lines['Column1'];
-		$arrayPDTypes[] = array('ID'=>$ID, 'Name'=>$Name);	
+		if(in_array($lines['Column1'], $selections)) {
+			$ID = $lines['ID'];
+			$Name = $lines['Column1'];
+			$arrayPDTypes[] = array('ID'=>$ID, 'Name'=>$Name);	
+		}
     }
 	$response= $arrayPDTypes;
 	$fp = fopen(__DIR__ . '/../json/PDTypes.json', 'w');
