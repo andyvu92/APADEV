@@ -293,40 +293,73 @@
 			.node-inmotion, .node-home-news-tiles, #node-501{
 				/* POST DATE & AUTHOR */
 					.meta{
-						ul:not(.socialMediaIcon){
-							&:before{
-								content: '';
-								display: block;
-								width: 60px;
-								height: 35px;
-								margin-top: 5px;
-								background-image: url(/sites/default/files/inmotion/icons/member-b.png);
-								float: left;
-								margin-right: 20px;
-								background-repeat: no-repeat;
-								background-size: contain;
-								border-right: 0.5px solid #000;
-							}
-							li{
-								font-style: unset;
-								display: block;
-								font-size: 1.2em;
-								color: #000;
-								strong{
-									font-weight: 300;
+						@media all and (max-width: @tablet-width - 5px){
+							.flex-container .flex-cell{
+								flex-direction: column;
+								.meta-info{
+									width: 100%;
 								}
-								.field-item{
-									font-weight: 500;
-    							color: #000;
-									&:before{
-										content: 'By';
+								.meta-share-url{
+									position: relative;
+									width: 100%;
+									.socialMediaIcon{
 										display: block;
-										float: left;
-										margin-right: 5px;
-										font-weight: 300;
-    								color: #000;
+										position: relative;
+										bottom: unset;
+										margin: 30px 0px !important;
+										float: left!important;
 									}
 								}
+							}
+						}
+						.post-meta{
+							margin-bottom: 30px;
+						}
+						.meta-info{
+							display: flex;
+							flex-direction: row;
+							.MonlyIconHolder{
+								width: 60px;
+								height: 40px;
+								padding-right: 20px;
+								margin-right: 20px;
+								display: flex;
+								align-items: center;
+								justify-content: center;
+								border-right: 0.5px solid #000;
+								.MonlyIcon{									
+									font-size: 0px!important;
+									background-image: url(/sites/default/files/inmotion/icons/member-b.png);
+									background-repeat: no-repeat;
+									background-size: contain;
+									display: block;
+									.square(40px);
+								}
+							}
+							.meta-author-date{
+								display: flex;
+								flex-direction: column;
+								align-items: flex-start;
+								justify-content: center;
+								font-size: 1.2em;
+								.meta-author{
+									b, strong{
+										padding-top: 0;
+										font-family: Roboto;
+										font-weight: 500;
+										color: #000;
+										opacity: 1;
+									}
+								}
+							}
+						}
+						.meta-share-url{
+							position: relative;
+							.socialMediaIcon{
+								display: block;
+								position: absolute;
+								bottom: 5px;
+								margin: 0!important;
 							}
 						}
 					}
@@ -581,10 +614,20 @@
 			width: 60%;
 			background: #fff;
 		}
+		@media @larger-phone-width-down{
+			padding-bottom: 15%;
+			background-size: contain;
+			&:after{
+				display: none;
+			}
+		}
 	}
 	.CampaignSidebar{
 		position: relative;
-    	top: -170px;
+		top: -170px;
+		@media @desktop-width-down{
+			top: -130px;
+		}
 	}
 }
 

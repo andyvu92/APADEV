@@ -112,36 +112,43 @@
          <div class="brd-headling">&nbsp;</div>
 			
          <header class="meta">
-            <ul>
-				<?php 
-					$only = ((array)$content['field_members_only']['#items'][0]['taxonomy_term'])["name"];
-					if($only == "Yes") {
-						echo "<li><strong><div class='MonlyIconHolder'><div class='MonlyIcon'></div></div></strong></li>";
-					} 
-				?>
-			    <?php if(!is_null(render($content['field_members_only']))): ?> <?php echo "<li><strong>";?>
-			   <?php print render($content['field_research_issue']);?><?php echo "</strong></li>";?> <?php endif?>
-               <li><strong><?php print render($content['field_inmotion_author']); ?></strong></li>
-              
-			   
-               <li><strong><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></strong></li>
-            </ul>
-			<ul class="socialMediaIcon" style="float:right;margin-top:-3%;">
-				
-				<li>
-				   <div class="fb-share-button" data-layout="button_count" data-mobile-iframe="true" data-size="small">&nbsp;</div>
-				</li>
-				<li>
-				   <a class="twitter-share-button" data-show-count="false" href="https://twitter.com/share">Tweet</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8">&nbsp;</script>
-				</li>
-				<li>
-				   <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;
-				</li>
-				<li>
-				   <!-- Place this tag where you want the share button to render. -->
-				   <div class="g-plus" data-action="share" data-annotation="none">&nbsp;</div>
-				</li>
-         </ul>
+            <div class="flex-container post-meta">
+
+                <div class="flex-cell">
+                    <div class="flex-col-6 meta-info">
+                        <?php 
+                            $only = ((array)$content['field_members_only']['#items'][0]['taxonomy_term'])["name"];
+                            if($only == "Yes") {
+                                echo "<div class='MonlyIconHolder'><div class='MonlyIcon'>Member only</div></div>";
+                            } 
+                        ?>
+                        <?php //if(!is_null(render($content['field_members_only']))): ?> <?php //echo "<li><strong>";?>
+                        <?php //print render($content['field_research_issue']);?><?php //echo "</strong></li>";?> <?php //endif?>
+                        <div class="meta-author-date">
+                            <span class="meta-author">By <b><?php print render($content['field_inmotion_author']); ?></b></span>
+                            <span class="meta-date"><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></span>
+                        </div>
+                    </div>
+
+                    <div class="flex-col-6 meta-share-url">
+                        <ul class="socialMediaIcon" style="float:right;margin-top:-3%;">
+                            <li>
+                                <div class="fb-share-button" data-layout="button_count" data-mobile-iframe="true" data-size="small">&nbsp;</div>
+                            </li>
+                            <li>
+                                <a class="twitter-share-button" data-show-count="false" href="https://twitter.com/share">Tweet</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8">&nbsp;</script>
+                            </li>
+                            <li>
+                                <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;
+                            </li>
+                            <li>
+                                <div class="g-plus" data-action="share" data-annotation="none">&nbsp;</div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
          </header>
 		 
 		<div class="post-img media">
