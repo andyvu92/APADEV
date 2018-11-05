@@ -97,6 +97,7 @@
 		   </ul>
 		   <h2><?php print $title; ?></h2>
     </header>
+	<?php /*
 	<!-- hamburger init -->
 	<div class="col-lg-1 col-md-1 col-xs-1 col-sm-1 HamburgerTesterButton"><span class="fa dexp-menu-toggle">
 		<div class="hamburger hamburger--arrowalt-r" type="button">
@@ -125,11 +126,12 @@
 				} else {
 					$('.page-node-273 #section-main-content .container .region-right-sidebar').animate({ right: "-800px" }, 700 )
 				}
-				*/
+				*
 			});
 		});
-	</script
+	</script>
 	<!-- hamburger done -->
+	*/ ?>
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
 	<ul class="socialMediaIcon">
 		<li>
