@@ -164,7 +164,7 @@ if(!function_exists('drupal_session_started'))
 			<label>State</label>
 			<div class="chevron-select-box">
 				<select name="State" id="State" data-placeholder="State">
-					<option class="StateOption" selected disabled>State</option>
+					<option class="StateOption" selected disabled></option>
 					<?php 
 					$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 					$State=json_decode($statecode, true);
