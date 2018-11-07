@@ -862,27 +862,29 @@ a.join-details-button5, a.join-details-button7{
     float: right;
 }
 
-a[class^="your-details-prevbutton"], a.accent-left-btn{
-    float: left;
-    margin-bottom: 20px;
-    margin-top: 4px;
-    background-color: #009fda;
-    border-width: 0px !important;
-    color: #fff;
-    font-size: 15px;
-    padding: 3px 20px;
-    min-width: 110px;
-    text-align: center;
-    font-weight: 700;
-    font-family: 'Cairo';
-    letter-spacing: 0.5px;
-    .dashboard-button-name{
-        padding: 0;
-    }
-    &:hover{
+body .block{
+    a[class^="your-details-prevbutton"], a.accent-left-btn{
+        float: left;
+        margin-bottom: 20px;
+        margin-top: 4px;
+        background-color: #009fda;
+        border-width: 0px !important;
         color: #fff;
-        opacity: 0.9;
-        cursor: pointer;
+        font-size: 15px;
+        padding: 3px 20px;
+        min-width: 110px;
+        text-align: center;
+        font-weight: 700;
+        font-family: 'Cairo';
+        letter-spacing: 0.5px;
+        .dashboard-button-name{
+            padding: 0;
+        }
+        &:hover{
+            color: #fff;
+            opacity: 0.9;
+            cursor: pointer;
+        }
     }
 }
 
@@ -1314,6 +1316,11 @@ a#insuranceControl{
         @media all and (max-width: @tablet-width) {
             width: 100%;
         }
+
+        strong, b{
+            padding-top: 0;
+        }
+
         .member-info{
             .flex-cell{
                 padding: 5px 0;

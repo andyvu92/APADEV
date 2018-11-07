@@ -1363,7 +1363,7 @@ $userRetisterStatus = false;
 			<div class="row"><h4 class="modal-title">Don’t have an account? Please register below:</h4></div>
                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-6">
 				            <label for="prefix">Prefix</label>
 							<?php 
 							$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
@@ -1428,7 +1428,7 @@ $userRetisterStatus = false;
                                 </div>
                             </div>
                         </div>
-                        <div class="col-lg-3">
+                        <div class="col-lg-6">
 						   <label for="">Gender</label>
 						   	<div class="chevron-select-box">
 								<select class="form-control" id="Gender" name="Gender">

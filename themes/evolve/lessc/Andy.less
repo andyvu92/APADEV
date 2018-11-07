@@ -1541,7 +1541,6 @@ input{
             font-size: 18px;
             line-height: 1em!important;
             color: #000;
-            width: auto!important;
             vertical-align: baseline;
             &::placeholder{
                 color: #000;
@@ -1558,6 +1557,10 @@ input{
             border: 1px solid rgba(0,0,0,0.12);
             max-height: 48px;
             border-radius: 0;
+            font-family: Roboto;
+            span{
+                font-weight: 400;
+            }
             &:after{
                 display: none;
             }
@@ -2038,7 +2041,7 @@ input{
 .mobile-hidden{
     display: block;
 }
-@media all and (max-width: @tablet-width){
+@media all and (max-width: @tablet-width - 5px){
     .desktop-hidden{
         display: block;
     }
@@ -2485,6 +2488,9 @@ body .block, body{
         b, strong{
             padding-top: 0;
         }
+        &.no-bottom-space{
+            margin-bottom: 0;
+        }
     }
     ul, ol{
         font-size: 1.2em;
@@ -2602,6 +2608,14 @@ body .block, body{
         margin-bottom: 20px;
         @media @larger-phone-width-down{
             margin-bottom: 10px;
+        }
+    }
+
+    .ui-widget{
+        input, select, textarea, button{
+            font-family: Roboto;
+            font-size: 18px;
+            color: #000;
         }
     }
 }
@@ -3281,4 +3295,11 @@ body .featured-block{
         margin-bottom: 0px;
         padding-left: 0px;
     }
+}
+
+/* PRIMARY BANNER */
+.primary-banner{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

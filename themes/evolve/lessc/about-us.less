@@ -352,9 +352,9 @@
             width: 100vmax;
             z-index: -1;
             position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translate(-50%,0);
+            //top: 0;
+            //left: 50%;
+            //transform: translate(-50%,0);
             pointer-events: none;
             @media @larger-phone-width-down{
                 width: 150vw;
@@ -392,15 +392,7 @@
 
       /* MAIN CONTENT */
       #block-system-main .left-content{
-          h2.lead-heading{
-            font-size: 3em;
-            line-height: 1.1em;
-            display: block;
-            padding-bottom: 0.8em;
-            font-weight: 500;
-          }
           p{
-            font-size: 1.4em;
             padding-bottom: 20px;
             display: block;
             line-height: 1.4em;
@@ -425,7 +417,10 @@
             margin: 40px 0 50px;
 			ul{
 				display: flex;
-				justify-content: center;
+                justify-content: center;
+                @media @larger-phone-width-down{
+                    padding-left: 0;
+                }
 				li{
 					min-width: 200px;
 					text-align: center;
@@ -433,12 +428,26 @@
 					border-right: 0px;
                     margin: 0;
                     cursor: pointer;
+                    padding: 10px 20px;
+                    @media @larger-phone-width-down{
+                        font-size: 0.8em;
+                        min-width: 140px;
+                    }
+                    @media @phone-width-down{
+                        font-size: 0.6em;
+                        min-width: 0px;
+                        padding: 10px;
+                    }
+                    @media all and (max-width: 345px){
+                        padding: 5px;
+                    }
 					&:last-of-type{
 						border-right: 0.5px #c0c2c4 solid;
 					}
 					a{
 						color: #333;
-						font-weight: 500;
+                        font-weight: 500;
+                        padding: 0;
 					}
 					&:hover{
 						background: @bright-blue;
@@ -539,11 +548,6 @@
     .page-node-149;
     .MainContent{
         width: 100%;
-    }
-    .left-content{
-        p{
-            font-size: 1.2em;
-        }
     }
 
     /* RELATED MEMBERS */
@@ -656,18 +660,7 @@
     /* MAIN CONTENT */
     #block-system-main{
         .left-content{
-            h2.lead-heading{
-                padding-bottom: 0;
-            }
-            .sub-heading{
-                color: @bright-blue;
-                font-size: 1.8em;
-                font-family: Roboto;
-                font-weight: 700;
-                padding-top: 20px;
-            }
             p{
-                font-size: 1.2em;
                 padding-bottom: 0;
                 & > strong{
                     font-size: 1em;
@@ -677,6 +670,9 @@
                 padding-left: 15px;
                 color: #000;
                 font-size: 1.2em;
+                & + h3.sub-heading{
+                    padding-top: 10px;
+                }
             }
             a{
                 text-decoration: underline;
@@ -728,11 +724,6 @@
             font-size: 1.8em;
             font-family: Roboto;
             font-weight: 700;
-            padding-top: 20px;
-        }
-        p{
-            font-size: 1.2em;
-            padding-bottom: 0;
         }
         a.dark-text{
             color: #000;
@@ -797,6 +788,9 @@
         margin-left: 0;
         margin-right: 0;
         margin: 60px 0 10px;
+        @media @larger-phone-width-down{
+            margin: 0px 0 10px;
+        }
         .portfolio-image{
             max-width: 100%;
         }
@@ -999,11 +993,20 @@
     }
     .modal-footer{
         flex-direction: row;
-        justify-content: space-between;
+        justify-content: flex-start;
         align-items: flex-end;
         border: 0;
-        padding-top: 0;
-        box-shadow: 0px -30px 50px 0px rgba(255,255,255,1);
+        position: relative;
+        &:before{
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: calc(~'100% - 25px');
+            height: 20px;
+            background: #fff;
+            filter: blur(9px);
+        }
         .partner-address{
             font-size: 1em;
             font-weight: 900;
@@ -1011,7 +1014,6 @@
         }
         .partner-logo{
             img{
-                margin-bottom: -25px;
                 max-height: 150px;
                 width: auto;
             }
@@ -1046,12 +1048,6 @@
     /* MAIN CONTENT */
     #block-system-main{
         .left-content{
-            h2.lead-heading{
-                padding-bottom: 30px;
-            }
-            .intro{
-                padding-bottom: 20px;
-            }
             .dark-url{
                 strong{
                     font-size: 1em;
@@ -1072,10 +1068,7 @@
     #block-block-173{
         .img-parallax{
             margin-top: 150px;
-            @media @tablet-width-down{
-                margin-top: 100px;
-            }
-            @media @larger-phone-width-down{
+            @media @larger-tablet-width-down{
                 display: none;
             }
         }
@@ -1084,12 +1077,6 @@
     /* MAIN CONTENT */
     #block-system-main{
         .left-content{
-            h2.lead-heading{
-                padding-bottom: 30px;
-            }
-            .intro{
-                padding-bottom: 20px;
-            }
             .dark-url{
                 strong{
                     font-size: 1em;
@@ -1109,6 +1096,14 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
+                @media @tablet-width-down{
+                    width: 100vw;
+                    position: relative;
+                    left: 50%;
+                    right: 50%;
+                    margin-left: -50vw;
+                    margin-right: -50vw;
+                }
                 @media @tablet-width-down{
                     min-height: 300px;
                 }
@@ -1250,14 +1245,6 @@
 
 /* DEFAULT ABOUT US CONTENT STYLES */
 .node-type-about-us #block-system-main{
-    h3{
-        color: #009fda;
-        font-size: 1.8em;
-        font-family: Roboto;
-        font-weight: 700;
-        padding-top: 20px;
-        margin: 12px 0px 10px;
-    }
     ul{
         color: black;
         font-size: 1.2em;
@@ -1322,6 +1309,12 @@
 
     #node-689{
         margin-bottom: 0!important;
+    }
+
+    .content .node .post-content{
+        @media @tablet-width-down{
+            padding-top: 0;
+        }
     }
 }
 

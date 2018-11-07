@@ -1,3 +1,5 @@
+<div class="border-10 full-width"></div>
+
 <?php
    /**
    * @file
@@ -103,45 +105,61 @@
       */ //['field_emailauthor']['und'][0]['value']?>
       <?php /*print_r ($content['field_research_author']['#items']); */?>	
       <div class="region col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+        <!-- MOBILE POST FEATURED IMG -->
+        <div class="post-img media mobile">
+            <div class='mediaholder fullwidthimage'>
+                <?php print render($content['field_home_tile_image']);?>
+            </div>
+        </div>
+
          <h1 class="SectionHeader"><?php print $node->title;?></h1>
          <div class="brd-headling">&nbsp;</div>
 			
          <header class="meta">
-            <ul>
-				<?php 
-					$only = ((array)$content['field_members_only']['#items'][0]['taxonomy_term'])["name"];
-					if($only == "Yes") {
-						echo "<li><strong><div class='MonlyIconHolder'><div class='MonlyIcon'></div></div></strong></li>";
-					} 
-				?>
-			    <?php if(!is_null(render($content['field_members_only']))): ?> 
-			    <?php endif?>
-               
-              
-			   
-               <li><strong><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></strong></li>
-            </ul>
-			<ul class="socialMediaIcon" style="float:right;margin-top:-3%;">
-				
-				<li>
-				   <div class="fb-share-button" data-layout="button_count" data-mobile-iframe="true" data-size="small">&nbsp;</div>
-				</li>
-				<li>
-				   <a class="twitter-share-button" data-show-count="false" href="https://twitter.com/share">Tweet</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8">&nbsp;</script>
-				</li>
-				<li>
-				   <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;
-				</li>
-				<li>
-				   <!-- Place this tag where you want the share button to render. -->
-				   <div class="g-plus" data-action="share" data-annotation="none">&nbsp;</div>
-				</li>
-         </ul>
-         </header>
+    <div class="flex-container post-meta">
+
+        <div class="flex-cell">
+            <div class="flex-col-6 meta-info">
+                        <?php 
+							$only = ((array)$content['field_members_only']['#items'][0]['taxonomy_term'])["name"];
+							if($only == "Yes") {
+								echo "<li><strong><div class='MonlyIconHolder'><div class='MonlyIcon'></div></div></strong></li>";
+							} 
+						?>
+						<?php if(!is_null(render($content['field_members_only']))): ?> 
+			    		<?php endif?>
+                <div class="meta-author-date">
+                    <!-- <span class="meta-author">By <b><?php //print render($content['field_inmotion_author']); ?></b></span> -->
+                    <span class="meta-date"><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></span>
+                </div>
+            </div>
+
+            <div class="flex-col-6 meta-share-url">
+                <ul class="socialMediaIcon" style="float:right;margin-top:-3%;">
+					<li>
+					   <div class="fb-share-button" data-layout="button_count" data-mobile-iframe="true" data-size="small">&nbsp;</div>
+					</li>
+					<li>
+					   <a class="twitter-share-button" data-show-count="false" href="https://twitter.com/share">Tweet</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8">&nbsp;</script>
+					</li>
+					<li>
+					   <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;
+					</li>
+					<li>
+					   <!-- Place this tag where you want the share button to render. -->
+					   <div class="g-plus" data-action="share" data-annotation="none">&nbsp;</div>
+					</li>
+	         	</ul>
+            </div>
+        </div>
+
+    </div>
+</header>
 		 
         
          
-         <p>&nbsp;</p>
+        <!-- DESKTOP POST FEATURED IMG -->
 		<div class="post-img media">
 			<div class='mediaholder fullwidthimage'>
 				<?php print render($content['field_home_tile_image']);?>
@@ -175,7 +193,10 @@
             })
               
          </script>
-		
+        
+        <div id="prev-btn">
+            <a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a>
+        </div>
 	
       </div>
 	  
@@ -187,22 +208,12 @@
 	
          </div>
 		
-		 <!--<h3 class="headline">Archives</h3>
-         <span class="brd-headling"></span>
-         <div class="content">
-            <ul class="socialMediaIcon">
-				<li>2018</li>
-				<li>2017</li>
-				<li>2016</li>
-				<li>2015</li>
-			</ul>
-         </div>-->
       </div>
 	
 	
 	
    </section>
-	<a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a>
+
    <!---line-->
    <!----line--->
 </div>

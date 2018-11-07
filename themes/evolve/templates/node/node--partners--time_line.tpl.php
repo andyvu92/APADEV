@@ -121,7 +121,7 @@
 
 		<div class="modal-footer">
 			<a class="partner-logo" href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_company_logo']);?></a>
-			<a class="partner-address" href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_web_address']);?></a>
+			<!-- <a class="partner-address" href="<?php //echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php //print render($content['field_web_address']);?></a> -->
 		</div>
 			<?php endif;?>
 			<?php else: ?>
@@ -157,7 +157,7 @@
 
 	<div class="modal-footer">
 		<a class="partner-logo" href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_company_logo']);?></a>
-		<a class="partner-address" href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_web_address']);?></a>
+		<!-- <a class="partner-address" href="<?php //echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php //print render($content['field_web_address']);?></a> -->
 	</div>
 			<?php endif;?>
 			

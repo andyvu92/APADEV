@@ -93,16 +93,23 @@
 			if($only == "Yes"):
 		?>
 		<?php if(!isset($_SESSION['UserId'])): ?>	
+			<!-- NOT LOG IN -->
 			<a data-target="#loginAT" data-toggle="modal" href="#" class="login"></a><?php print render($content['field_company_logo']); ?>
 		<?php endif;?>
 		<?php if(isset($_SESSION['UserId'])): ?>
 			<?php if($_SESSION['MemberTypeID']=="1"):    ?>
-			   <a class="popup-JoinMemberPage"><?php print render($content['field_company_logo']); ?></a>
+
+				<!-- LOGGED IN NOT A MEMBER -->
+			   <a popup-target="nationalGroupRestrictWindow"></a><?php print render($content['field_company_logo']); ?>
 			<?php else:?>
+
+			<!-- LOGGED IN AS A MEMBER -->
 			<a popup-target="myModal-node-<?php print $node->nid; ?>"></a><?php print render($content['field_company_logo']); ?>
 			<?php endif; ?>
 		<?php endif;?>
 		<?php else:?>
+		
+		<!-- LOGGED IN AS A MEMBER -->
 			<a popup-target="myModal-node-<?php print $node->nid; ?>"></a><?php print render($content['field_company_logo']); ?>
 		<?php endif;?>
 		

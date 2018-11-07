@@ -364,7 +364,7 @@ $('.modal-body').on('mouseleave', function(){
       var trapElement;
       var scrollableDist;
       var trapClassName = 'trapScroll-enabled';
-      var trapSelector = '.modal-body';
+      var trapSelector = '.modal-body, #signupWebUser';
       
       var trapWheel = function(e){
         

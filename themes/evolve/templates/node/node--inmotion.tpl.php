@@ -80,10 +80,7 @@
    * @ingroup themeable
    */
    ?>
-
-<div class="Pagination">
-
-</div> 
+        
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
    
    <section class="post-content container" style="float:none; margin:auto;">
@@ -108,6 +105,14 @@
       */ //['field_emailauthor']['und'][0]['value']?>
       <?php /*print_r ($content['field_research_author']['#items']); */?>	
       <div class="region col-xs-12 col-sm-12 col-md-8 col-lg-8">
+
+        <!-- MOBILE POST FEATURED IMG -->
+        <div class="post-img media mobile">
+            <div class='mediaholder fullwidthimage'>
+                <?php print render($content['field_inmotion_image']);?>
+            </div>
+        </div>
+
          <h1 class="SectionHeader"><?php print $node->title;?></h1>
          <div class="brd-headling">&nbsp;</div>
 			
@@ -150,7 +155,8 @@
 
             </div>
          </header>
-		 
+         
+         <!-- DESKTOP POST FEATURED IMG -->
 		<div class="post-img media">
 			<div class='mediaholder fullwidthimage'>
 				<?php print render($content['field_inmotion_image']);?>
@@ -190,7 +196,17 @@
 			$output = drupal_render($get);        
 			print $output;
 		?>
-	
+    
+        <!-- SMALLER SCREEN AD BLOCK -->
+        <div class="smaller-screen-ad">
+            <?php 
+                $block = block_load('block', '307');
+                $get = _block_get_renderable_array(_block_render_blocks(array($block)));
+                $output = drupal_render($get);        
+                print $output;
+            ?>
+        </div>
+
       </div>
 	  
       <div class="block CampaignSidebar contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-4 col-lg-4" style="margin:0 0 50px">
@@ -204,26 +220,18 @@
          <div class="content">
             <?php echo views_embed_view('inmotioncategory', 'block_10');?>
          </div>
-		 <!--<h3 class="headline">Archives</h3>
-         <span class="brd-headling"></span>
-         <div class="content">
-            <ul class="socialMediaIcon">
-				<li>2018</li>
-				<li>2017</li>
-				<li>2016</li>
-				<li>2015</li>
-			</ul>
-         </div>-->
       </div>
-	
-	<?php 
-		$block = block_load('block', '307');
-		$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-		$output = drupal_render($get);        
-		print $output;
-		
-	?>
-	
+    
+    <!-- DESKTOP AD BLOCK -->
+    <div class="large-screen-ad">
+        <?php 
+            $block = block_load('block', '307');
+            $get = _block_get_renderable_array(_block_render_blocks(array($block)));
+            $output = drupal_render($get);        
+            print $output;
+        ?>
+    </div>
+    
    </section>
 	<a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a>
    <!---line-->
