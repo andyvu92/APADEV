@@ -789,8 +789,8 @@ if($resultdata['result']) {
 			nameUpdate($details["Firstname"], $details["Preferred-name"]);
 			/*
 			$checkSSO = $_SESSION["UserId"];
-			$detailstt = aptify_get_GetAptifyData("0", $checkSSO);
-			print_r($detailstt);
+			$detailstt = GetAptifyData("0", $checkSSO);
+			$_SESSION["tasjdfksdkfsd"] = $detailstt;
 			*/
 			logRecorder();
 		}
@@ -945,6 +945,16 @@ if(isset($_SESSION['UserId'])) {
 			
 		?>
 		<div class="nameHello">Hi <?php echo $name; ?></div>
+		<?php
+		/*
+		if(isset($_SESSION["tasjdfksdkfsd"])) {
+			echo "aaaaaaaaaaaaa";
+			var_dump($_SESSION["tasjdfksdkfsd"]);
+		} else {
+			echo "dddddddddddd";
+		}
+		*/
+		?>
 	</form>
 </div>
 
