@@ -329,20 +329,21 @@ jQuery(document).ready(function() {
       this.$control_input.prop('readonly', true);
   };
 
-  $('select').not('#PRF, #Paymentcard, #pagesize').selectize({
-    plugins: ['remove_button'],
-    delimiter: ',',
-    persist: false,
-    onItemAdd: function() {
-      this.blur();
-    },
-    create: function(input) {
-        return {
-            value: input,
-            text: input
-        }
-    }
-  });
+    $('#pd-search-form select, select[multiple=""]').not('#PRF, #Paymentcard, #pagesize').selectize({
+      plugins: ['remove_button'],
+      delimiter: ',',
+      persist: false,
+      onItemAdd: function() {
+        this.blur();
+      },
+      create: function(input) {
+          return {
+              value: input,
+              text: input
+          }
+      }
+    });
+
 });
 
 
