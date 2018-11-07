@@ -47,6 +47,12 @@
 				$('.postcodeComp').val(rss[num-1]+"");
 			}
 		});
+		
+		var allTxLinks = $('a').attr("href");
+		
+		if(allTxLinks.charAt(0) != '/') {
+			$('a').attr("rel", "nofollow");
+		}
 
 	<?php
 		if(isset($_SESSION["UserId"])){ 

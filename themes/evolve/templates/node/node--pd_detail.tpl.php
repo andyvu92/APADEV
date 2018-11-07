@@ -209,7 +209,8 @@ $userRetisterStatus = false;
 	// Where:{Address1, Address2, Address3(if exist), Address4(if exist), City,
 	//	state, Postcode}, CPD hours, Cost, Your registration stats
 	$pd_detail = aptify_get_GetAptifyData("29", $pdArr);
-    $pd_detail = $pd_detail['MeetingDetails'][0];
+	//var_dump($pd_detail);
+	$pd_detail = $pd_detail['MeetingDetails'][0];
 	$prices = $pd_detail['Pricelist'];
 	$pricelistGet = Array();
 	foreach($prices as $t) {

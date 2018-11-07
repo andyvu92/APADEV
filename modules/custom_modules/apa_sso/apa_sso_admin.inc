@@ -47,5 +47,45 @@ function apa_sso_admin() {
     '#description' => "Preferred with HTTPS, Please enter full url path https://example.com/jwks.",
   ];
 
+  /**
+   * Community Brands (Your Career Details).
+   */
+  $form['community_brands'] = [
+    '#type' => 'fieldset',
+    '#title' => t('Your Career Endpoint'),
+    '#collapsible' => true,
+    '#collapsed' => false,
+  ];
+
+  $form['community_brands']['site_id'] = [
+    '#type'          => 'textfield',
+    '#title'         => "Site ID",
+    '#default_value' => variable_get('apa_sso_cb_site_id', 21871),
+    '#size'          => 5,
+  ];
+
+  $form['community_brands']['customer_code'] = [
+    '#type'          => 'textfield',
+    '#title'         => "Site ID",
+    '#default_value' => variable_get('apa_sso_cb_customer_code', 'APA1214'),
+    '#size'          => 7,
+  ];
+
+  $form['community_brands']['candidate_endpoint'] = [
+    '#type'          => 'textfield',
+    '#title'         => "Candidate Endpoint",
+    '#default_value' => variable_get('apa_sso_cb_candidate_endpoint', 'https://www.careerwebsite.com/c/login/autocreate.cfm'),
+    '#size'          => 100,
+    '#description'   => "Don't Change it unless Community Brand Changes it.",
+  ];
+
+  $form['community_brands']['recruiters_endpoint'] = [
+    '#type'          => 'textfield',
+    '#title'         => "Recruiters Endpoint",
+    '#default_value' => variable_get('apa_sso_cb_recruiters_endpoint', 'https://www.careerwebsite.com/r/login/autologin.cfm'),
+    '#size'          => 100,
+    '#description'   => "Don't Change it unless Community Brand Changes it.",
+  ];
+
   return system_settings_form($form);
 }

@@ -49,16 +49,24 @@ function apa_sso_menu()
     'type' => MENU_NORMAL_ITEM,
   ];
 
-  $items['sso/redirect-target'] = [
+  $items['sso/redirect-cpd4physio'] = [
     'title' => "apa SSO Test",
-    'page callback' => '_apa_sso_redirect_target',
+    'page callback' => '_apa_sso_redirect_to_cpd4physio',
+    'page arguments' => [],
+    'access callback' => true,
+    'type' => MENU_CALLBACK,
+  ];
+
+  $items['sso/redirect-jobs4physio'] = [
+    'title' => "apa SSO Test",
+    'page callback' => '_apa_sso_redirect_to_cpd4physio',
     'page arguments' => [],
     'access callback' => true,
     'type' => MENU_CALLBACK,
   ];
 
   // A test path to
-  $items['apa/sso'] = [
+  $items['apa/sso/test'] = [
     'title' => "apa SSO Test",    
     'page callback' => '_apa_sso_test',
     'page arguments' => [],
@@ -76,7 +84,7 @@ function apa_sso_menu()
   ];
 
   // This is where origins will pass their token through "Token" Argument
-  $items['apa/sso/source'] = [
+  $items['apa/sso'] = [
     'title' => "apa SSO Test",
     'page callback' => '_apa_sso_source',
     'page arguments' => [],
@@ -84,12 +92,162 @@ function apa_sso_menu()
     'type' => MENU_CALLBACK,
   ];
 
+  /**
+   * FOR COMMUNITY BRANDS LOGIN.
+   */
+  $items['apa/cm/login'] = [
+    'title' => "Login to continue",
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['apa_get_cm_login_form'],
+    'access callback' => true,
+    'type' => MENU_CALLBACK,
+  ];
+  /**
+   * For cpd4Phsyio login
+   */
+  $items['apa/sso/login'] = [
+    'title' => "Login to continue",
+    'page callback' => 'drupal_get_form',
+    'page arguments' => ['apa_get_sso_login_form'],
+    'access callback' => true,
+    'type' => MENU_CALLBACK,
+  ];
   return $items;
 }
 
+/**
+ * Helper function to create login form for Community Brands.
+ */
+function apa_get_cm_login_form($form, &$form_state) {
+  $form['username'] = [
+    '#type'          => 'textfield',
+    '#title'         => "Email",
+    '#size'          => 50,
+    '#required'      => true,
+    '#description'   => "Enter your membership email.",
+  ];
+
+  $form['password'] = [
+    '#type'          => 'password',
+    '#title'         => "Password",
+    '#size'          => 50,
+    '#required'      => true,
+    '#description'   => "Enter your password.",
+  ];
+
+  $login_as_options = [
+    'employer' => 'Employer',
+    'jobseeker' => 'Job-seeker'
+  ];
+  /**
+   * If goto variable is given it will hide the radio and save values in hidden.
+   * Otherwise nothing will be selected and user must select the option.
+   */
+  $default_login = _apa_cm_get_member_type_from_goto();
+
+  if($default_login) {
+    $form['login_as'] = [
+      '#type'=>'hidden',
+      '#value'=> $default_login
+    ];
+  } else {
+    $form['login_as'] = [
+      '#type' => 'radios',
+      '#title' => t('Login As'),
+      '#options' => $login_as_options,
+      '#description' => t('Please select any of above option to login'),
+      '#required' => true
+    ];
+  }
+
+
+  $form['submit'] = [
+    '#type'          => 'submit',
+    '#value' => t('Login'),
+  ];
+
+  return $form;
+}
+
+function apa_get_cm_login_form_submit($form, &$form_state){
+  $email =  $form_state['values']['username'];
+  $password =  $form_state['values']['password'];
+  $login_as = $form_state['values']['login_as'];
+
+  try{
+    $user_details = drupal_json_decode(app_sso_get_user_info($email, $password));
+  }catch (Exception $e){
+    form_set_error("Can't connect.",$e->getMessage());
+    $form_state['redirect'] = "/apa/cm/login";
+    return;
+  }
+
+  if($user_details) {
+    $site_id = variable_get('apa_sso_cb_site_id', 21871);
+    $params = [
+      'site_id' => $site_id,
+      'cust_code' => variable_get('apa_sso_cb_customer_code', 'APA1214'),
+      'email' => $user_details['Email'],
+      'member_number' => $user_details['Membernumber'],
+      'first_name' => $user_details['Firstname'],
+      'last_name' => $user_details['Lastname'],
+      'company_name' => $user_details['Companyname'],
+      'phonenumber' => $user_details['Lastname'],
+      'company_address1' => $user_details['CompanyUnit'].$user_details['CompanyBuildingName'].$user_details['CompanyStreet'],
+      'company_city' => $user_details['CompanyCity'],
+      'company_state' => $user_details['CompanyState'],
+      'company_zip' => $user_details['CompanyZip'],
+      'company_country' => $user_details['CompanyCountry'],
+      #'member_type' => $user_details['MemberType'] == 'Non-Member' ? "nonmember":"Members",
+
+    ];
+
+    if(isset($_REQUEST['goto'])){
+      $params['goto'] = urldecode($_REQUEST['goto']);
+    }
+
+    $redirect_url = FALSE;
+    if($login_as == "employer") {
+      $redirect_url = "https://www.careerwebsite.com/r/login/autologin.cfm";
+    } else {
+      $redirect_url = "https://www.careerwebsite.com/c/login/autocreate.cfm";
+    }
+
+    if($redirect_url){
+      $query = drupal_http_build_query($params);
+      $form_state['redirect'] = $redirect_url."?".$query;
+    }
+
+  }
+}
+
+function _apa_cm_get_member_type_from_goto() {
+  /**
+   * If no goto let user choose what type they want thus return False.
+   */
+  if(!isset($_REQUEST['goto'])){
+    return FALSE;
+  }
+  $goto = urldecode($_REQUEST['goto']);
+  $type = explode("/",$goto);
+  /**
+   * If goto contains r which is for recruiter.
+   */
+  if($type[1]==='r') {
+    return "employer";
+  }
+  if($type[1] === 'c'){
+    return "jobseeker";
+  }
+  return FALSE;
+}
+
+
+/**
+ * General SSO Functions
+ */
 function apa_sso_get_token($data=NULL)
 {
-
   // Get JWKS from Target JWK URLs
   $jku_url = variable_get('apa_sso_target_key_url', '');
   $jwk_set = JWKFactory::createFromJKU($jku_url,TRUE ,null, 86400, TRUE);
@@ -128,29 +286,76 @@ function apa_sso_get_token($data=NULL)
 }
 
 function _apa_sso_test() {
-  print "<pre>";
-  print fake_encrypt();
-  print "</pre>";
+  //print "<pre>";
+  //print fake_encrypt();
+  //print "</pre>";
 }
 
-function _apa_sso_redirect_target()
+/**
+ * Helper function to create login form for JWT SSO Targets.
+ */
+function apa_get_sso_login_form($form, &$form_state) {
+  $form['username'] = [
+    '#type'          => 'textfield',
+    '#title'         => "Email",
+    '#size'          => 50,
+    '#required'      => true,
+    '#description'   => "Enter your membership email.",
+  ];
+
+  $form['password'] = [
+    '#type'          => 'password',
+    '#title'         => "Password",
+    '#size'          => 50,
+    '#required'      => true,
+    '#description'   => "Enter your password.",
+  ];
+
+  $form['submit'] = [
+    '#type'          => 'submit',
+    '#value' => t('Login'),
+  ];
+
+  return $form;
+}
+
+function apa_get_sso_login_form_submit($form, &$form_state){
+  $email =  $form_state['values']['username'];
+  $password =  $form_state['values']['password'];
+  try{
+      app_sso_get_user_info($email, $password, TRUE);
+      if(isset($_GET['destination'])){
+        drupal_goto(drupal_get_destination());
+      } else {
+        drupal_goto("/");
+      }
+  }catch (Exception $e){
+    form_set_error("Can't connect.",$e->getMessage());
+    $form_state['redirect'] = "/apa/sso/login";
+    return;
+  }
+}
+
+/**
+ * cpd4phsyio Stuff.
+ */
+function _apa_sso_redirect_to_cpd4physio()
 {
   //Check if user is logged in if not get the user to Login page
-  if (!$_SESSION['TokenId']) {
-    drupal_goto("/apa/login", ['query' => ['destination' => 'sso/redirect-target']]);
+  if (!isset($_SESSION['TokenId'])) {
+    drupal_goto("/apa/sso/login", ['query' => ['destination' => 'sso/redirect-cpd4physio']]);
   }
-  $data = [];
-  $data['user_info'] = [
-    'UserId' => $_SESSION['UserId'],
-    'TokenId' => $_SESSION['TokenId']
-  ];
-  $token = apa_sso_get_token($data);
-  // Create token from 3rdParty JWKs
+
+  $user_details =  app_sso_user_details($_SESSION['UserId'], $_SESSION['TokenId']);
+  $array = reset($user_details['results']);
+  $token = apa_sso_get_token(['user_info'=>drupal_json_encode($array)]);
+
 
   $target_argument = variable_get('apa_sso_target_sso_arg', '');
   $target_path = variable_get('apa_sso_target_sso_url', '');
   $target_auth_server = variable_get('apa_sso_target_aud', '');
   $target_url = _apa_sso_get_target_url($token, $target_argument, $target_path, $target_auth_server);
+  //die($target_url);
   drupal_goto($target_url);
 
 }
@@ -164,14 +369,7 @@ function _apa_sso_source() {
  if(isset($_GET['token'])) {
    
      // A private key
-    $jwk = JWKFactory::createFromValues([
-      'kty' => 'EC',
-      'crv' => 'P-521',
-      'use' => 'enc',
-      'x' => 'AekpBQ8ST8a8VcfVOTNl353vSrDCLLJXmPk06wTjxrrjcBpXp5EOnYG_NjFZ6OvLFV1jSfS9tsz4qUxcWceqwQGk',
-      'y' => 'ADSmRA43Z1DSNx_RvcLI87cdL07l6jQyyBXMoxVg_l2Th-x3S1WDhjDly79ajL4Kkd0AZMaZmh9ubmf63e3kyMj2',
-      'd' => 'AY5pb7A0UFiB3RELSD64fTLOSV_jazdF7fLYyuTw8lOfRhWg6Y6rUrPAxerEzgdRhajnu0ferB0d53vM9mE15j2C',
-    ]);
+    $jwk = _apa_sso_get_private_jwk();
 
     // We create our loader .
     $loader = new Loader();
@@ -190,6 +388,11 @@ function _apa_sso_source() {
     $playload = $jwe->getPayload();
     
     if(sizeof($playload) > 0) {
+      if(time() >= $playload['exp']){
+        watchdog(APA_SSO_WATCHDOG, "Token has expired", array(), WATCHDOG_CRITICAL);
+        drupal_set_message("Token Expired");
+        drupal_goto("/");
+      }
       $user_info = app_sso_get_user_info($playload['username'],$playload['password']);
       if(!$user_info) {
         $response = ["error"=>"Invalid username or password"];
@@ -207,32 +410,29 @@ function _apa_sso_source() {
       drupal_goto($target_url);
 
     } else {
-      throw new Exception("Play load Not Valid");
+        watchdog(APA_SSO_WATCHDOG, "Play load Not Valid from Source", array(), WATCHDOG_CRITICAL);
+        $target_path = variable_get('apa_sso_target_sso_url', '');
+        drupal_goto($target_path);
     }
 
   } else {
-    print "No token found.";
+     watchdog(APA_SSO_WATCHDOG, "No Token Found", array(), WATCHDOG_CRITICAL);
+     drupal_set_message("Token Not Found");
+     drupal_goto("/");
   }
 }
 
 function _apa_sso_generate_jwk() {
   
   // A private key
-  $jwk = JWKFactory::createFromValues([
-    'kty' => 'EC',
-    'crv' => 'P-521',
-    'use' => 'enc',
-    'x' => 'AekpBQ8ST8a8VcfVOTNl353vSrDCLLJXmPk06wTjxrrjcBpXp5EOnYG_NjFZ6OvLFV1jSfS9tsz4qUxcWceqwQGk',
-    'y' => 'ADSmRA43Z1DSNx_RvcLI87cdL07l6jQyyBXMoxVg_l2Th-x3S1WDhjDly79ajL4Kkd0AZMaZmh9ubmf63e3kyMj2',
-    'd' => 'AY5pb7A0UFiB3RELSD64fTLOSV_jazdF7fLYyuTw8lOfRhWg6Y6rUrPAxerEzgdRhajnu0ferB0d53vM9mE15j2C',
-  ]);
+  $jwk = _apa_sso_get_private_jwk();
 
   $public_key = ["keys"=>[$jwk->toPublic()]];
   //return drupal_json_output($rotatable_key_set);
   return drupal_json_output($public_key);
 }
 
-function app_sso_get_user_info($email_address, $password) {
+function app_sso_get_user_info($email_address, $password, $login=TRUE) {
     $base_url = variable_get('aptify_api_base_url', "https://aptifyweb.australian.physio/AptifyServicesAPI/services");
 
     $parameters = [
@@ -301,63 +501,84 @@ function app_sso_get_user_info($email_address, $password) {
         watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
         return FALSE;
       }
-	
-	return drupal_json_encode(reset($user_details['results']));
+	    if($login) {
+        // If all okay we will  set data to the session.
+        $_SESSION['Log-in'] = "in";
+        foreach($r as $key=>$value) {
+          $_SESSION[$key] = $value;
+        }
+      }
+	    return drupal_json_encode(reset($user_details['results']));
     }
   }
 
-  function app_sso_user_details($user_id, $token) {
-    $base_url = variable_get('aptify_api_base_url', "https://aptifyweb.australian.physio/AptifyServicesAPI/services");
+function app_sso_user_details($user_id, $token) {
+  $base_url = variable_get('aptify_api_base_url', "https://aptifyweb.australian.physio/AptifyServicesAPI/services");
 
-    // This step is important as it filters out any malicious code.
-    $query = drupal_http_build_query(['UserId'=>$user_id]);
+  // This step is important as it filters out any malicious code.
+  $query = drupal_http_build_query(['UserId'=>$user_id]);
 
-    $path = "/DataObjects/spGetMemberDetailsForSSO__c?".$query;
+  $path = "/DataObjects/spGetMemberDetailsForSSO__c?".$query;
 
-    $ch = curl_init();
+  $ch = curl_init();
 
-    curl_setopt($ch, CURLOPT_URL, $base_url . $path);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+  curl_setopt($ch, CURLOPT_URL, $base_url . $path);
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 
-    $headers[]="AptifyAuthorization: Web ".$token;
-    $headers[] = "Content-Type: application/json";
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+  $headers[]="AptifyAuthorization: Web ".$token;
+  $headers[] = "Content-Type: application/json";
+  curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
 
-    $result = curl_exec($ch);
-    $response_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+  $result = curl_exec($ch);
+  $response_status_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 
-    if (curl_errno($ch)) {
-      $message_detail = 'Error:' . curl_error($ch);
-      watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_CRITICAL);
-    }
-
-    curl_close ($ch);
-    
-    if ($response_status_code != 200 || $response_status_code == 400) {
-      watchdog(APA_SSO_WATCHDOG, $result, array(), WATCHDOG_CRITICAL);
-      return FALSE;
-    }
-
-    $response = new stdClass();
-    $response->data = $result;
-
-    // Response decode and decode check.
-    $r = drupal_json_decode($response->data);
-    if ($r === NULL) {
-      $message_detail = 'JSON decode failure: ' . $response->data;
-      watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_CRITICAL);
-      return FALSE;
-    }
-
-    // Aptify response status.
-    if (isset($r['ErrorInfo']) === TRUE) {
-      $message_detail = 'aptify error detected: ' . $r['ErrorInfo']->ErrorMessage;
-      watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
-      return FALSE;
-    }
-    else {     
-      return $r;
-    }
+  if (curl_errno($ch)) {
+    $message_detail = 'Error:' . curl_error($ch);
+    watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_CRITICAL);
   }
+
+  curl_close ($ch);
+
+  if ($response_status_code != 200 || $response_status_code == 400) {
+    watchdog(APA_SSO_WATCHDOG, $result, array(), WATCHDOG_CRITICAL);
+    return FALSE;
+  }
+
+  $response = new stdClass();
+  $response->data = $result;
+
+  // Response decode and decode check.
+  $r = drupal_json_decode($response->data);
+  if ($r === NULL) {
+    $message_detail = 'JSON decode failure: ' . $response->data;
+    watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_CRITICAL);
+    return FALSE;
+  }
+
+  // Aptify response status.
+  if (isset($r['ErrorInfo']) === TRUE) {
+    $message_detail = 'aptify error detected: ' . $r['ErrorInfo']->ErrorMessage;
+    watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
+    return FALSE;
+  }
+  else {
+    return $r;
+  }
+}
+
+/**
+ * @return \Jose\Object\JWK|\Jose\Object\JWKInterface|null
+ */
+function _apa_sso_get_private_jwk() {
+  $private_jwk = NULL;
+  if ($cache = cache_get('apa_sso_private_jwk')) {
+    $private_jwk = $cache->data;
+  }
+  else {
+    $private_jwk = \Jose\Factory\JWKFactory::createECKey(['crv'=>'P-521','use'=>'enc']);
+    cache_set('apa_sso_private_jwk', $private_jwk, 'cache');
+  }
+  return $private_jwk;
+}
 
 

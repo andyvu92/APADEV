@@ -25,11 +25,12 @@ if(isset($_POST["nonAPA"])) {
 	$CPDsend["Reflection"] = $_POST["Reflection"];
 	// send and get response
 	$resultst = aptify_get_GetAptifyData("34", $CPDsend);
-	//print_r($resultst);
-	if($resultst == "type of value") {// to be used later
-		// to do
+	print_r($resultst);
+	if($resultst["Status"] == "Success") {
+		header("Location: /pd/cpd-diary");
+		exit;
 	} else {
-		// to do
+		echo "error!";
 	}
 	// this should be executed before load the data.
 }

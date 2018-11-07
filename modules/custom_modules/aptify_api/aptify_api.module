@@ -277,7 +277,7 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
     aptify_log_to_watchdog($api_number, $request_url, $data_sent, $response);
 
     // Response decode and decode check.
-    if($api_number == '28. PD - Get event search result list' || $api_number == '29. PD - Get event detail' || $api_number == '30. PD - Get event detail list' || $api_number == '4. Dashboard - Get member detail') {
+    if($api_number == '28. PD - Get event search result list' || $api_number == '29. PD - Get event detail' || $api_number == '30. PD - Get event detail list' || $api_number == '4. Dashboard - Get member detail' || $api_number == '0. SSO details Endpoint') {
         $r = json_clean_decode($result, true);
     } elseif($api_number == '8. Dashboard - Log-out') {
         $r = "";
@@ -368,6 +368,7 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
             $API = "/services/DataObjects/spGetMemberDetailsForSSO__c?";
             $passInput = "Userid=".$variables;
             $APIreturn = $API. $passInput;
+            return _aptify_api_call("0. SSO details Endpoint",$APIreturn, _aptify_get('TokenId'), '');
             array_push($outputReturn, $JSONreturn);
             array_push($outputReturn, "0. SSO details Endpoint");
             return $outputReturn;
