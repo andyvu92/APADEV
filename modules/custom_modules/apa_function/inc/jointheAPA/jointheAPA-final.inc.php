@@ -262,7 +262,7 @@ $PRFPrice = 0;
 							foreach( $memberProducts as $memberProduct){
 								echo "<div class='flex-cell flex-flow-row table-cell'>";
 								echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$memberProduct['Title']."</div>";
-								echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$memberProduct['Price']."</div>";
+								echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($memberProduct['Price'],2)."</div>";
 								$price += $memberProduct['Price'];
 								echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
 								echo "</div>";  
@@ -274,7 +274,7 @@ $PRFPrice = 0;
 								if($NGProduct == $NGArray['ProductID']){
 									echo "<div class='flex-cell flex-flow-row table-cell'>";
 									echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$NGArray['ProductName']."</div>";
-									echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$NGArray['NGprice']."</div>";
+									echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($NGArray['NGprice'],2)."</div>";
 									$price += $NGArray['NGprice'];
 									echo '<div class="flex-col-2 action-col"><a class="deleteNGButton'.$NGArray['ProductID'].'">delete</a></div>';
 									echo "</div>";
@@ -286,7 +286,7 @@ $PRFPrice = 0;
 							foreach( $FPListArray as $FProduct){
 									echo "<div class='flex-cell flex-flow-row table-cell'>";
 									echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$FProduct['FPtitle']."</div>";
-									echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$FProduct['FPprice']."</div>";
+									echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($FProduct['FPprice'],2)."</div>";
 									$price += $FProduct['FPprice'];
 									echo '<div class="flex-col-2 action-col">';if($FProduct['ProductID']!="9973"){ echo '<a class="deleteMGButton'.$FProduct['ProductID'].'">delete</a>';} echo '</div>';
 									echo "</div>";  
@@ -296,14 +296,14 @@ $PRFPrice = 0;
 						if($reviewData['PRFdonation']!=""){ 
                             echo '<div class="flex-cell flex-flow-row table-cell">
                             <div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Physiotherapy Research Foundation donation</div>
-                            <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.$reviewData['PRFdonation'].'</div>
+                            <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.number_format($reviewData['PRFdonation'],2).'</div>
                             <div class="flex-col-2 action-col"><a class="deletePRFButton">delete</a></div>
                             </div>'; 
                             $price +=$reviewData['PRFdonation']; }
 						if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"){ 
 							echo '<div class="flex-cell flex-flow-row table-cell">
                             <div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Admin fee</div>
-                            <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.$scheduleDetails['AdminFee'].'</div>
+                            <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.number_format($scheduleDetails['AdminFee'],2).'</div>
                             <div class="flex-col-2 action-col"></div>
                             </div>'; 
 							
@@ -317,7 +317,7 @@ $PRFPrice = 0;
 					Subtotal (ex. GST)	
 					</div>
 					<div class="flex-col-4">
-			        $<?php echo $scheduleDetails['SubTotal'];?>
+			        $<?php echo number_format($scheduleDetails['SubTotal'],2);?>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
@@ -325,7 +325,7 @@ $PRFPrice = 0;
 					GST	
 					</div>
 					<div class="flex-col-4">
-			        $<?php echo $scheduleDetails['GST'];?>
+			        $<?php echo number_format($scheduleDetails['GST'],2);?>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
@@ -333,7 +333,7 @@ $PRFPrice = 0;
 					Total (inc. GST)	
 					</div>
 					<div class="flex-col-4">
-			        $<span id="totalPayment"><?php echo $scheduleDetails['OrderTotal'];?></span>
+			        $<span id="totalPayment"><?php echo number_format($scheduleDetails['OrderTotal'],2);?></span>
 					</div>
 				</div>
 			</div>
@@ -419,15 +419,15 @@ $PRFPrice = 0;
 					Admin fee (ex. GST)
 					</div>
 					<div class="flex-col-6">
-			        $<?php echo $scheduleDetails['AdminFee'];?>
+			        $<?php echo number_format($scheduleDetails['AdminFee'],2);?>
 					</div>
 				</div>
 				<?php endif;?>
 				<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"):?>
 				<?php  
-					$InitialPaymentAmount = $scheduleDetails['InitialPaymentAmount'];
-					$OccuringPayment = $scheduleDetails['OccuringPayment'];
-					$LastPayment = $scheduleDetails['LastPayment'];
+					$InitialPaymentAmount = number_format($scheduleDetails['InitialPaymentAmount'],2);
+					$OccuringPayment = number_format($scheduleDetails['OccuringPayment'],2);
+					$LastPayment = number_format($scheduleDetails['LastPayment'],2);
 					$firstInstallment = $InitialPaymentAmount-$scheduleDetails['AdminFee']-$scheduleDetails['GST']-$reviewData['PRFdonation'];
 				?>
 					<div class="flex-cell flex-flow-row">
@@ -436,7 +436,7 @@ $PRFPrice = 0;
 						</div>
 						<div class="flex-col-6">
 						$<?php //echo $scheduleDetails['InitialPaymentAmount']; 
-						echo $firstInstallment;?>
+						echo number_format($firstInstallment,2);?>
 						</div>
 					</div>
 				<?php endif;?>
@@ -445,7 +445,7 @@ $PRFPrice = 0;
 					GST	
 					</div>
 					<div class="flex-col-6">
-			        $<?php echo $scheduleDetails['GST'];?>
+			        $<?php echo number_format($scheduleDetails['GST'],2);?>
 					</div>
 				</div>
 				<?php if($reviewData['PRFdonation']!=""):?>
@@ -454,7 +454,7 @@ $PRFPrice = 0;
 						<strong>PRF donation</strong>
 						</div>
 						<div class="flex-col-6">
-						$<?php echo $reviewData['PRFdonation'];?>
+						$<?php echo number_format($reviewData['PRFdonation'],2);?>
 						</div>
 					</div>		
 				<?php endif;?>
@@ -463,7 +463,7 @@ $PRFPrice = 0;
 					<strong>Today's total (inc. GST)</strong>
 					</div>
 					<div class="flex-col-6">
-			        $<?php echo $scheduleDetails['InitialPaymentAmount'];?>
+			        $<?php echo number_format($scheduleDetails['InitialPaymentAmount'],2);?>
 					</div>
 				</div>
 				<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"):?>
@@ -563,11 +563,11 @@ $PRFPrice = 0;
 							</div>';
 					for($i=$currentMonth+1; $i<12; $i++){
 						echo '<div class="flex-cell flex-flow-row"><div class="flex-col-6">01/'.$i.'/'.$currentYear.'</div>
-								<div class="flex-col-6">$'.$OccuringPayment.'</div>
+								<div class="flex-col-6">$'.number_format($OccuringPayment,2).'</div>
 							</div>';
 					}
 				echo '<div class="flex-cell flex-flow-row"><div class="flex-col-6">01/12/'.$currentYear.'</div>
-						<div class="flex-col-6">$'.$LastPayment.'</div>
+						<div class="flex-col-6">$'.number_format($LastPayment,2).'</div>
 					</div>';
 				?>
 			</ul>			

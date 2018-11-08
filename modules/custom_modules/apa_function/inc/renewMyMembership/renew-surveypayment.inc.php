@@ -187,7 +187,7 @@ if(isset($_POST['step2-1'])) {
 							foreach( $memberProducts as $memberProduct){
 								echo "<div class='flex-cell flex-flow-row table-cell'>";
 								echo "<div class='flex-col-7 title-col'>".$memberProduct['Title']."</div>";
-								echo "<div class='flex-col-5 price-col'>$".$memberProduct['Price']."</div>";
+								echo "<div class='flex-col-5 price-col'>$".number_format($memberProduct['Price'],2)."</div>";
 								$price += $memberProduct['Price'];
 								echo "</div>";  
 							}
@@ -198,7 +198,7 @@ if(isset($_POST['step2-1'])) {
 								if($NGProduct == $NGArray['ProductID']){
 									echo "<div class='flex-cell flex-flow-row table-cell'>";
 									echo "<div class='flex-col-7 title-col'>".$NGArray['ProductName']."</div>";
-									echo "<div class='flex-col-5 price-col'>$".$NGArray['NGprice']."</div>";
+									echo "<div class='flex-col-5 price-col'>$".number_format($NGArray['NGprice'],2)."</div>";
 									$price += $NGArray['NGprice'];
 									echo "</div>";
 								}	  
@@ -210,7 +210,7 @@ if(isset($_POST['step2-1'])) {
 							foreach( $FPListArray as $FProduct){
 									echo "<div class='flex-cell flex-flow-row table-cell'>";
 									echo "<div class='flex-col-7 title-col'>".$FProduct['FPtitle']."</div>";
-									echo "<div class='flex-col-5 price-col'>$".$FProduct['FPprice']."</div>";
+									echo "<div class='flex-col-5 price-col'>$".number_format($FProduct['FPprice'],2)."</div>";
 									$price += $FProduct['FPprice'];
 									echo "</div>";  
 							}
@@ -231,7 +231,7 @@ if(isset($_POST['step2-1'])) {
 						Subtotal (exc. GST)	
 					</div>
 					<div class="flex-col-5">
-			        	$<?php echo $scheduleDetails['SubTotal'];?>
+			        	$<?php echo number_format($scheduleDetails['SubTotal'],2);?>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row" id="installmentafter">
@@ -239,7 +239,7 @@ if(isset($_POST['step2-1'])) {
 						GST	
 					</div>
 					<div class="flex-col-5">
-			        	$<?php echo $scheduleDetails['GST'];?>
+			        	$<?php echo number_format($scheduleDetails['GST'],2);?>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
@@ -247,7 +247,7 @@ if(isset($_POST['step2-1'])) {
 						<strong>Total</strong> (inc. GST)	
 					</div>
 					<div class="flex-col-5">
-			        	$<span id="totalPayment"><?php echo $scheduleDetails['OrderTotal'];?></span>
+			        	$<span id="totalPayment"><?php echo number_format($scheduleDetails['OrderTotal'],2);?></span>
 					</div>
 				</div>
 			</div>

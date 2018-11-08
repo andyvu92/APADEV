@@ -266,7 +266,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 					foreach( $memberProducts as $memberProduct){
 						echo "<div class='flex-cell flex-flow-row table-cell memberproduct'>";
 						echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$memberProduct['Title']."</div>";
-						echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$memberProduct['Price']."</div>";
+						echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($memberProduct['Price'],2)."</div>";
 						$price += $memberProduct['Price'];
 						echo '<div class="flex-col-2 action-col"><a href="renewmymembership" target="_self">delete</a></div>';
 						echo "</div>";  
@@ -278,7 +278,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 							if($NGProduct == $NGArray['ProductID']){
 								echo "<div class='flex-cell flex-flow-row table-cell NG'>";
 								echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$NGArray['ProductName']."</div>";
-								echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$NGArray['NGprice']."</div>";
+								echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($NGArray['NGprice'],2)."</div>";
 								$price += $NGArray['NGprice'];
 								echo '<div class="flex-col-2 action-col"><a class="deleteNGButton'.$NGArray['ProductID'].'">delete</a></div>';
 								echo "</div>";
@@ -291,7 +291,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 						    echo '<input type="hidden" name="MGProductID" value="'.$FProduct['ProductID'].'">';
 							echo "<div class='flex-cell flex-flow-row table-cell FP'>";
 							echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$FProduct['FPtitle']."</div>";
-							echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".$FProduct['FPprice']."</div>";
+							echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($FProduct['FPprice'],2)."</div>";
 							$price += $FProduct['FPprice'];
 							echo '<div class="flex-col-2 action-col">'; echo '<a class="deleteMGButton'.$FProduct['ProductID'].'">delete</a>'; echo '</div>';
 							echo "</div>";  
@@ -301,7 +301,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 				if($reviewData['PRFdonation']!=""){ 
                     echo '<div class="flex-cell flex-flow-row table-cell PRF">
                     <div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Physiotherapy Research Foundation donation</div>
-                    <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.$reviewData['PRFdonation'].'</div>
+                    <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.number_format($reviewData['PRFdonation'],2).'</div>
                     <div class="flex-col-2 action-col"><a class="deletePRFButton">delete</a></div>
                     </div>'; 
 					$price +=$reviewData['PRFdonation']; 
@@ -309,7 +309,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 				if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"){ 
 					echo '<div class="flex-cell flex-flow-row table-cell">
 					<div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Admin fee</div>
-					<div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.$scheduleDetails['AdminFee'].'</div>
+					<div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.number_format($scheduleDetails['AdminFee'],2).'</div>
 					<div class="flex-col-2 action-col"></div>
 					</div>'; 
 							
@@ -323,7 +323,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 					Subtotal (ex. GST)	
 					</div>
 					<div class="flex-col-4">
-			        $<?php echo $scheduleDetails['SubTotal'];?>
+			        $<?php echo number_format($scheduleDetails['SubTotal'],2);?>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
@@ -331,7 +331,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 					GST	
 					</div>
 					<div class="flex-col-4">
-			        $<?php echo $scheduleDetails['GST'];?>
+			        $<?php echo number_format($scheduleDetails['GST'],2);?>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
@@ -339,7 +339,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 					Total (inc. GST)	
 					</div>
 					<div class="flex-col-4">
-			        $<span id="totalPayment"><?php echo $scheduleDetails['OrderTotal'];?></span>
+			        $<span id="totalPayment"><?php echo number_format($scheduleDetails['OrderTotal'],2);?></span>
 					</div>
 				</div>
 			</div>
@@ -443,7 +443,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 						</div>
 						<div class="flex-col-6">
 						$<?php //echo $scheduleDetails['InitialPaymentAmount'];
-						echo $firstInstallment;
+						echo number_format($firstInstallment,2);
 						?>
 						</div>
 					</div>
@@ -453,7 +453,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 					GST	
 					</div>
 					<div class="flex-col-6">
-			        $<?php echo $scheduleDetails['GST'];?>
+			        $<?php echo number_format($scheduleDetails['GST'],2);?>
 					</div>
 				</div>
 				<?php if($reviewData['PRFdonation']!=""):?>
@@ -462,7 +462,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 						<strong>PRF donation</strong>
 						</div>
 						<div class="flex-col-6">
-						$<?php echo $reviewData['PRFdonation'];?>
+						$<?php echo number_format($reviewData['PRFdonation'],2);?>
 						</div>
 					</div>		
 				<?php endif;?>
@@ -471,7 +471,7 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 					<strong>Today's total (inc. GST)</strong>
 					</div>
 					<div class="flex-col-6">
-			        $<?php echo $scheduleDetails['InitialPaymentAmount'];?>
+			        $<?php echo number_format($scheduleDetails['InitialPaymentAmount'],2);?>
 					</div>
 				</div>
 				<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"):?>
