@@ -801,4 +801,7 @@ jQuery(document).ready(function(){
 
     // REMOVE SUBMIT FEEDBACK FROM ADVOCACY SIDEBAR
     $('.node-type-policy .right-sidebar a:contains("We want to hear")').parent().parent().remove();
+
+    // MEMBERSHIP/CATEGORIES-FEES/* -> MOVE RIGHT SIDEBAR TO CONTENT CONTAINER
+    $('.node-type-membership .region-right-sidebar').appendTo( $('#section-main-content > .container > .row') );
 });
