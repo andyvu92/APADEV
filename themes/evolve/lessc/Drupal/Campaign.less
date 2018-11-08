@@ -298,6 +298,9 @@
 			ul{
 				display: flex;
 				justify-content: center;
+				@media @larger-phone-width-down{
+					padding-left: 0;
+				}
 				li{
 					min-width: 200px;
 					text-align: center;
@@ -366,6 +369,8 @@
 			@media @larger-phone-width-down{
 				.sub-heading{
 					font-size: 1.9em;
+					display: block;
+					padding-top: 30px;
 				}
 			}
 		}
@@ -386,11 +391,20 @@
 				display: flex;
 				justify-content: flex-start;
 				position: relative;
+				flex-wrap: wrap;
 				margin-left: -25px;
 				margin-right: -25px;
 				.item{
 					width: 25%;
 					padding: 0 25px;
+					@media @tablet-width-down{
+						width: 33.33%;
+						padding: 0 25px 50px 25px;
+					}
+					@media @larger-phone-width-down{
+						width: 50%;
+    					padding: 15px;
+					}
 				}
 			}
 		}
@@ -464,12 +478,21 @@
 				align-items: center;
 				padding: 35px;
 				position: relative;
+				@media @tablet-width-down{
+					padding: 25px;
+				}
+				@media @larger-phone-width-down{
+					max-width: 100%;
+				}
 				.bruchure-title{
 					text-align: center;
 					font-size: 1.4em;
 					font-weight: 500;
 					color: @bright-blue;
 					margin-bottom: 25px;
+					@media @larger-phone-width-down{
+						max-width: 100%;
+					}
 				}
 				a{
 					position: absolute;
@@ -490,6 +513,13 @@
 			color: #000;
 			font-weight: 400;
 			margin-top: 50px;
+			@media @tablet-width-down{
+				margin-top: 20px;
+			}
+			@media @larger-phone-width-down{
+				margin-top: 0;
+				padding: 0 25px;
+			}
 		}
 		.image-grid{
 			display: flex;
@@ -507,7 +537,7 @@
 				padding: 20px;
 				position: relative;
 				@media @larger-tablet-width-down{
-					max-width: 48%;
+					max-width: 49%;
 				}
 				@media @phone-width-down{
 					max-width: 98%;
@@ -666,13 +696,6 @@
 			.media_filter{
 				ul li{
 					min-width: 140px;
-				}
-			}
-
-		/* POSTERS */
-			.heading-wrapper{
-				.sub-heading{
-						
 				}
 			}
 		}

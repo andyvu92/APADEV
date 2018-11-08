@@ -784,4 +784,21 @@ jQuery(document).ready(function(){
     // REPLACE URL FOR ADVOCACY PAGE
     $('.page-node-157 .node a[href="/advocacy/reconciliation"], .node-type-policy .node a[href="/advocacy/reconciliation"]').attr('href', '/aboutus/reconciliation');
     $('.page-node-157 .node a[href="/advocacy/we-want-hear-you-submit-your-feedback-here"], .node-type-policy .node a[href="/advocacy/we-want-hear-you-submit-your-feedback-here"]').attr('href', 'mailto:policy@australian.physio?subject=Have%20your%20say');
+
+    // ADD AUTO LINE BREAK FOR ADVOCACY MAIN BLOCKS
+    $('.view .node-policy h2').each(function(){
+      var addBr = $(this).text().replace('_', '<br>');
+      $(this).html(addBr);
+      console.log('123');
+    });
+
+    // ADD SPACING FOR ADVOCACY MAIN BLOCKS
+    $('.node-type-policy .right-sidebar a').each(function(){
+      var addSpace = $(this).text().replace('_', ' ');
+      $(this).html(addSpace);
+      console.log('123');
+    });
+
+    // REMOVE SUBMIT FEEDBACK FROM ADVOCACY SIDEBAR
+    $('.node-type-policy .right-sidebar a:contains("We want to hear")').parent().parent().remove();
 });

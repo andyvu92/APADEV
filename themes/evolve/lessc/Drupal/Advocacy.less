@@ -316,11 +316,29 @@ div.AdvocacyBackground {
 					display: flex;
 					justify-content: center;
 					align-items: center;
+					img{
+						max-height: 35px;
+					}
 				}
 			}
 			.lead-heading{
 				& + .icon-featured-sib-heading{
 					padding: 40px 0 30px;
+				}
+			}
+			.post-parallax{
+				min-height: 500px;
+				@media @tablet-width-down{
+					min-height: 350px;
+				}
+				@media @larger-phone-width-down{
+					min-height: 200px;
+				}
+			}
+			ul, ol{
+				padding-left: 15px;
+				li{
+					padding-left: 10px;
 				}
 			}
 		}
@@ -330,6 +348,9 @@ div.AdvocacyBackground {
 
 /* ADVOCACY LANDING PAGE */
 .page-node-157{
+	div[class*="space"]{
+		float: left;
+	}
 	#block-system-main{
 		padding: 50px 0;
 	}
@@ -425,6 +446,7 @@ div.AdvocacyBackground {
 			border: 0;
 			padding: 0;
 			display: inline;
+			font-weight: 500;
 			color: #333;
 			transition: all .3s linear;
 			&:hover{
@@ -499,8 +521,18 @@ div.AdvocacyBackground {
 				border-bottom: 1px solid rgba(0,0,0,0.1);
 				margin-bottom: 50px!important;
 			}
+			.meta ul li{
+				font-style: unset;
+			}
+			h2 a{
+				color: #333;
+			}
 			.post-content{
 				margin: 15px 0;
+				width: 85%;
+				@media @tablet-width-down{
+					width: 100%;
+				}
 				.meta{
 					margin: 0 0 5px 0;
 					h2{
@@ -532,12 +564,13 @@ div.AdvocacyBackground {
 	}
 
 	/* PAGER LAYOUT */
-	.pagination{
+	.pagination.pager{
 		li > a{
 			border: 0;
 			color: #333;
 			font-weight: 300;
 			&:hover{
+				color: #333;
 				background: none;
 				font-weight: 700;
 			}
@@ -577,6 +610,7 @@ div.AdvocacyBackground {
 					border: 0;
 					padding: 0;
 					display: inline;
+					font-weight: 500;
 					color: #333;
 					transition: all .3s linear;
 					&:hover{

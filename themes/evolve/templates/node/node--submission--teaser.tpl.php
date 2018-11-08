@@ -81,7 +81,7 @@
 ?>
 <?php $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();?>
 <div id="node-<?php print $node->nid; ?>" style="margin-top:30px;" class="<?php print $classes; ?> clearfix post large MediaListing" <?php print $attributes; ?>>
-    <section class="post-content" style="width:85%;">
+    <section class="post-content">
 		<header class="meta">
 			<ul>
 				<li><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></li>
