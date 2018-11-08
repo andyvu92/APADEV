@@ -781,4 +781,7 @@ jQuery(document).ready(function(){
       $('a[href="/campaign/about-campaign#FAQ"]').attr('href', '#FAQ');
     }
 
+    // REPLACE URL FOR ADVOCACY PAGE
+    $('.page-node-157 .node a[href="/advocacy/reconciliation"], .node-type-policy .node a[href="/advocacy/reconciliation"]').attr('href', '/aboutus/reconciliation');
+    $('.page-node-157 .node a[href="/advocacy/we-want-hear-you-submit-your-feedback-here"], .node-type-policy .node a[href="/advocacy/we-want-hear-you-submit-your-feedback-here"]').attr('href', 'mailto:policy@australian.physio?subject=Have%20your%20say');
 });

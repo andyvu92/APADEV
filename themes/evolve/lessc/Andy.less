@@ -2761,7 +2761,7 @@ body .block, body{
 }
 
 /* DEFAULT RIGHT SIDEBAR WITH DRUPAL BLOCKS */
-.region-right-sidebar{
+.region-right-sidebar, .right-sidebar{
     h3.headline{
         position: relative;
         font-family: Cairo;
@@ -2791,6 +2791,41 @@ body .block, body{
                 text-decoration: none;
                 display: block;
                 &:hover{
+                    color: @bright-blue;
+                }
+            }
+            &:first-child{
+                a{
+                    border-top: 0;
+                }
+            }
+            &.active a{
+                color: @bright-blue;
+            }
+        }
+    }
+
+    .nav{
+        .views-field-title{
+            border: 0;
+            margin: 0;
+            padding: 0;
+            line-height: 1.2em;
+            font-size: 1.2em;
+            list-style: none;
+            a{
+                padding: 10px 0;
+                border-top: 1px solid rgba(0,0,0,0.1);
+                color: #000;
+                font-weight: 400;
+                font-family: Roboto;
+                transition: all .3s linear;
+                text-decoration: none;
+                display: block;
+                &:hover{
+                    color: @bright-blue;
+                }
+                &.active{
                     color: @bright-blue;
                 }
             }
@@ -3243,6 +3278,18 @@ body .block .secondary-button{
     margin-right: -50vw;
     &.border-10{
         width: 105vw;
+    }
+}
+
+.full-width-alt{
+    width: 100vw;
+    position: relative;
+    left: 66%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    @media @tablet-width-down{
+        left: 50%;
     }
 }
 
