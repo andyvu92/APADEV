@@ -348,27 +348,27 @@ jQuery(document).ready(function($) {
     });
 	$('input[name="Paymentoption"]').change(function(){
         if($("#p1-2").is(":checked")){
-			$(this).attr('checked', true);
+			//$(this).attr('checked', true);
 			$(this).val('1');
 		
 		}
         else{
-            $(this).removeAttr('checked');
+            //$(this).removeAttr('checked');
             $(this).val('0');
 		}
 		if($("#p1-2").is(":checked"))
 		{
 			$('#rolloverblock').removeClass("display-none");
 			$('#Installpayment-frequency').val("Monthly");
-			var tempTotal = Number($('#totalPayment').html());
-			var Total = Number(tempTotal +12);
+			var tempTotal = Number($('#totalPayment').html().replace(',',''));
+			var Total = Number(tempTotal +12).toFixed(2);
 			$('#totalPayment').html(Total);
-			$("#installmentafter").after('<div class="flex-cell flex-flow-row" id="installmentline"><div class="flex-col-7">Admin fee</div><div class="flex-col-5">$12</div></div>');
+			$("#installmentafter").after('<div class="flex-cell flex-flow-row" id="installmentline"><div class="flex-col-7">Admin fee</div><div class="flex-col-5">$12.00</div></div>');
 		}
 		else{
 			$('#rolloverblock').addClass("display-none");
 			var tempTotal = Number($('#totalPayment').html());
-			var Total = Number(tempTotal -12);
+			var Total = Number(tempTotal -12).toFixed(2);
 			$('#totalPayment').html(Total);
 			$("#installmentline").remove();
 		}

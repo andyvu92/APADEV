@@ -1079,7 +1079,7 @@ if (isset($_SESSION['UserId'])):
 ?> autocomplete="postal-code">
                     </div>
                     <div class="col-xs-6 col-md-3">
-                        <label for="">State</label>
+                        <label for="">State<span class="tipstyle"> *</span></label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="State3" name="State" autocomplete="address-level1">
 						<option value=""  <?php if (empty($details['State'])) echo "selected='selected'";?> disabled> State </option>
@@ -1206,7 +1206,7 @@ if (isset($_SESSION['UserId'])):
 ?> autocomplete="postal-code">
                         </div>
                         <div class="col-xs-6 col-md-3">
-                           <label for="">State</label>
+                           <label for="">State<span class="tipstyle"> *</span></label>
                             <div class="chevron-select-box">
                             <select class="form-control" name="Billing-State" id="State4" autocomplete="address-level1">
                               <option value=""  <?php
@@ -1360,7 +1360,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
 					echo "selected='selected'";
 				}
 			}
-			echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.$MemberType[$key]['Price'].') </option>';
+			echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';
 		}
     }
     
@@ -1448,7 +1448,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
             }
         }
         
-        echo '> ' . $nationalGroups[$key]["NGtitle"] . ' ($'.$nationalGroups[$key]['NGprice'].')  </option>';
+        echo '> ' . $nationalGroups[$key]["NGtitle"] . ' ($'.number_format($nationalGroups[$key]['NGprice'],2).')  </option>';
     }
     
 ?>
@@ -2782,7 +2782,7 @@ if(isset($_POST['MT'])){
                         </div>
 
                         <div class="col-xs-6 col-md-3">
-                            <label for="">State</label>
+                            <label for="">State<span class="tipstyle"> *</span></label>
                             <div class="chevron-select-box">
                             <select class="form-control" id="State1" name="State" autocomplete="address-level1">
                                 <option value="" selected disabled> State </option>
@@ -3083,7 +3083,7 @@ if(isset($_POST['MT'])){
 												echo "selected='selected'";
 											}
 										}
-										echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.$MemberType[$key]['Price'].') </option>';
+										echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';
 									}
 								}
 								
@@ -3147,7 +3147,7 @@ if(isset($_POST['MT'])){
 										echo "selected='selected'";
 									}
 								}
-								echo '> ' . $nationalGroups[$key]["NGtitle"]  . ' ($'.$nationalGroups[$key]['NGprice'].')  </option>';
+								echo '> ' . $nationalGroups[$key]["NGtitle"]  . ' ($'.number_format($nationalGroups[$key]['NGprice'],2).')  </option>';
 							}
 							
 						?>

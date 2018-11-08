@@ -866,7 +866,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								echo '<option value="'.$MemberType[$key]['ProductID'].'"';
 								if(isset($_SESSION["MembershipProductID"])){if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']){ echo "selected='selected'"; }} 
 								//elseif ($details['MemberTypeID'] == $MemberType[$key]['ID']){ echo "selected='selected'"; } 
-								echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.$MemberType[$key]['Price'].') </option>';
+								echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';
 							}
 						}
 					    ?>
@@ -935,7 +935,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						   echo '<option value="'.$nationalGroups[$key]["ProductID"].'"';
 						   if(isset($_SESSION["NationalProductID"])){ if (in_array( $nationalGroups[$key]["ProductID"],$_SESSION["NationalProductID"])){ echo "selected='selected'"; } }
 						   //elseif (in_array( $nationalGroups[$key]["ID"],$details['Nationalgp'])){ echo "selected='selected'"; } 
-						   echo '> '.$nationalGroups[$key]["NGtitle"]. ' ($'.$nationalGroups[$key]['NGprice'].')  </option>';
+						   echo '> '.$nationalGroups[$key]["NGtitle"]. ' ($'.number_format($nationalGroups[$key]['NGprice'],2).')  </option>';
 						}
 						
 					?>
