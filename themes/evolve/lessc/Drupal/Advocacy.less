@@ -292,6 +292,42 @@ div.AdvocacyBackground {
 	}
 }
 
+/* GENERAL ADVOCACY LAYOUT */
+.node-type-policy{
+	#block-system-main{
+		.content{
+			.post-content{
+				padding-top: 0;
+			}
+			.icon-featured-sub-heading{
+				display: flex;
+				align-items: center;
+    			padding: 40px 0 30px;
+				h3{
+					padding: 0;
+					margin: 0;
+				}
+				span{
+					margin-right: 15px;
+					border: 1px solid @bright-blue;;
+					border-radius: 100%;
+					.square(60px);
+					padding: 10px;
+					display: flex;
+					justify-content: center;
+					align-items: center;
+				}
+			}
+			.lead-heading{
+				& + .icon-featured-sib-heading{
+					padding: 40px 0 30px;
+				}
+			}
+		}
+	}
+}
+  
+
 /* ADVOCACY LANDING PAGE */
 .page-node-157{
 	#block-system-main{
@@ -379,8 +415,12 @@ div.AdvocacyBackground {
 		border-bottom: 1px solid rgba(0,0,0,0.1);
 		border-top: 1px solid rgba(0,0,0,0.1);
 		padding: 10px 0;
-		margin-top: 80px;
+		margin-top: 50px;
 		display: block;
+		font-size: 1.2em;
+		font-family: Roboto;
+		color: #333;
+		font-weight: 400;
 		a{
 			border: 0;
 			padding: 0;
@@ -527,8 +567,12 @@ div.AdvocacyBackground {
 				border-bottom: 1px solid rgba(0,0,0,0.1);
 				border-top: 1px solid rgba(0,0,0,0.1);
 				padding: 10px 0;
-				margin-top: 80px;
+				margin-top: 50px;
 				display: block;
+				font-size: 1.2em;
+				font-family: Roboto;
+				color: #333;
+				font-weight: 400;
 				a{
 					border: 0;
 					padding: 0;

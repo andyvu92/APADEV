@@ -1245,6 +1245,11 @@
 
 /* DEFAULT ABOUT US CONTENT STYLES */
 .node-type-about-us #block-system-main{
+    .intro{
+        & + h3{
+            padding-top: 10px;
+        }
+    }
     ul{
         color: black;
         font-size: 1.2em;
@@ -1252,6 +1257,18 @@
         &.nav{
             padding-left: 0;
         }
+        & + h3{
+            padding-top: 20px;
+        }
+    }
+    h3{
+        color: #009fda;
+        font-size: 1.8em;
+        font-family: Roboto;
+        font-weight: 700;
+        padding-top: 35px;
+        margin: 12px 0px 10px;
+        letter-spacing: 0px;
     }
         /* BACK TO PREVIOUS */
         #prev-btn{
@@ -1266,15 +1283,26 @@
         right: 50%;
         margin-left: -50vw;
         margin-right: -50vw;
+        float: left;
         background: @background-grey;
+        margin-top: 50px;
         @media @tablet-width-down{
             left: 50%;
+        }
+        @media @larger-phone-width-down{
+            margin-top: 25px;
+        }
+        h3{
+            padding-top: 0;
         }
         .content{
             max-width: 1500px;
             margin: 0;
             width: 75%;
-            padding: 0px 35px;
+            padding: 50px 40px;
+            @media @larger-desktop-width-down{
+                padding: 30px 35px;
+            }
             @media @larger-desktop-width-up{
                 margin: 0 auto;
                 width: 100%;
@@ -1282,13 +1310,13 @@
             }
             @media @tablet-width-down{
                 width: 100%;
-                padding: 0 50px;
+                padding: 30px 50px;
             }
             @media @larger-phone-width-down{
-                padding: 0px 30px;
+                padding: 20px 30px;
             }
             @media all and (max-width: 345px){
-                padding: 0px 20px;
+                padding: 20px 20px;
             }
         }
     }

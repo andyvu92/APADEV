@@ -96,6 +96,8 @@
 	</div>
 </div>
 
+<div class="space-70"></div>
+
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large policybottom" <?php print $attributes; ?>>
 
 	<section class="post-content">
@@ -103,13 +105,19 @@
 			<div class="flex-cell">
 
 	<div class="flex-col-9 left-content">
-		<h2 class="lead-heading"><?php print render($content['field_contenttitle']);?></h2>
+		<?php 
+			if ( !empty($content['field_contenttitle']) ) {
+				echo '<h2 class="lead-heading">'.render($content['field_contenttitle']).'</h2>';
+			}
+		?>
 		<?php
 			// We hide the comments and links now so that we can render them later.
 			hide($content['comments']);
 			hide($content['links']);
 			print render($content['body']);
 		?>
+
+		<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
 	</div>
 
 	<div class="flex-col-3 right-sidebar">
@@ -124,6 +132,8 @@
 
 			</div>
 		</div> 
+
+	
 	</section>
 	
 </div> 
