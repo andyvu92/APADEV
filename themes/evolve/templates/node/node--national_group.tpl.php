@@ -114,6 +114,22 @@
         print render($content['body']);
 		
         ?>
+		<?php
+			// ToDoAfterGoLive - 09.Nov.2018
+			/**
+			 * This message will only display until the 31st of December 2018.
+			 * May need to update this again for 2019 or
+			 * Fixed the join issue with Aptify later
+			 */
+			if(date("Y") == date("2018")) {
+				echo '<div class="messages">
+					<div class="alert alert-danger alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<span>National Group memberships are based on a calendar year and fees listed are relevant to the end of the current year.</span>
+						</div>
+				</div>';
+			}
+		?>
 		<a class="accent-btn" href="/joinnationalgroup?ProductID=<?php echo $PID;?>" id="ng-join-btn"><span>Join now</span></a>
 
 		<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>	

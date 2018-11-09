@@ -99,7 +99,7 @@
 		   <?php print $title; ?></a></h2>
     </header>
 		*/ ?>
-	<div class="region region-content col-xs-12 col-sm-12 col-md-9 col-lg-9">
+	<div class="region left-content col-xs-12">
 		<h1 class="SectionHeader"><?php print $node->title;?></h1>
 		<div class="brd-headling">&nbsp;</div>
 	  <?php
@@ -108,10 +108,6 @@
         hide($content['links']);
         print render($content['body']);
         ?>
-	</div>
-	
-	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
-		
 	</div>
 	</section>
   

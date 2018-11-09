@@ -165,12 +165,25 @@
          </script>
 		 
       </div>
-      <div class="block CampaignSidebar contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
-         <h3 class="headline">RELATED ARTICLES</h3>
-         <span class="brd-headling"></span>
-         <div class="content">
-            <?php echo views_embed_view('current_apa_campaign', 'block_4');?>
-         </div>
+      <div class="region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
+         <!--<h3 class="headline">RELATED ARTICLES</h3>
+         <span class="brd-headling"></span>-->
+         <!--<div class="content">-->
+            <?php //echo views_embed_view('current_apa_campaign', 'block_4');
+                  $block = block_load('block', '223');
+                  $get = _block_get_renderable_array(_block_render_blocks(array($block)));
+                  $output = drupal_render($get);        
+                  print $output;
+            ?>
+          
+            <?php 
+                  $block = block_load('block', '225');
+                  $get = _block_get_renderable_array(_block_render_blocks(array($block)));
+                  $output = drupal_render($get);        
+                  print $output;
+            
+            ?>
+         <!--</div>-->
       </div>
    </section>
    <div class="dexp-section" id="section-content-bottom-third">
@@ -225,16 +238,17 @@
                                                    </div>
                                                    </p>
                                                 </div>
-                                                <div class="team-email">
+                                                <!--<div class="team-email">
                                                    <i class="icon-envelope"></i> 
                                                    <div class="field field-name-field-team-email field-type-text field-label-hidden">
                                                       <div class="field-items">
                                                          <div class="field-item even">
-                                                            <?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_emailauthor['und'][0]['value']; ?>
+                                                            <?php //echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_emailauthor['und'][0]['value'];
+                                                             ?>
                                                          </div>
                                                       </div>
                                                    </div>
-                                                </div>
+                                                </div>-->
                                              </div>
                                              <div class="clearfix"></div>
                                           </div>

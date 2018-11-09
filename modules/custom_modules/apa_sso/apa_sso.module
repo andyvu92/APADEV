@@ -507,6 +507,10 @@ function app_sso_get_user_info($email_address, $password, $login=TRUE) {
         foreach($r as $key=>$value) {
           $_SESSION[$key] = $value;
         }
+        $data = "UserID=".$_SESSION["UserId"];
+        $details = aptify_get_GetAptifyData("4", $data,"");
+        newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
+        nameUpdate($details["Firstname"], $details["Preferred-name"]);
       }
 	    return drupal_json_encode(reset($user_details['results']));
     }

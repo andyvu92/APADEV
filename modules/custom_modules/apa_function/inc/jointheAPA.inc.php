@@ -27,6 +27,24 @@ $background = getBackgroundImage($userID);
 		<?php header("Location: /dashboard");?>
 	<?php else: ?>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
+		<?php
+			// ToDoAfterGoLive - 09.Nov.2018
+			/**
+			 * This message will only display until the 31st of December 2018.
+			 * May need to update this again for 2019 or
+			 * Fixed the join issue with Aptify later
+			 */
+			if(date("Y") == date("2018")) {
+				echo '<div class="messages">
+					<div class="alert alert-danger alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+							<span>APA memberships are based on a calendar year. The fees currently displayed are pro-rata and valid to 31 December 2018. </span><br />
+							<span>If you are a new or lapsed member and wish to join the APA in 2019, please call us on 1300 306 622 or email <a href="mailto:info@australian.physio">info@australian.physio</a>.</span><br />
+							<span>If you are a current APA member, 2019 APA memberships will open online on Monday 19 November.</span>
+						</div>
+				</div>';
+			}
+		?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div class="col-xs-12"><span class="dashboard-name cairo">Become a member</span></div>
 		<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="display: none"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background <?php if(!isset($_SESSION["userID"])) echo "display-none";?>">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
