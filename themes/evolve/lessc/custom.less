@@ -1599,19 +1599,21 @@ input, select, button{
 }
 
 /* DRUPAL ERROR MESSAGEs */
-#messages, .messages{
-	border: 0;
-    padding: 0;
-	.alert-danger{
-		border-color: @orange;
-		color: @orange;
-		font-size: 1.2em;
-		background: none;
-		border-radius: 0;
-	}
-	.alert-dismissable .close{
-		font-size: 2em!important;
-		top: -8px;
-		padding: 0!important;
+body{
+	#messages, div.messages{
+		border: 0;
+		padding: 0;
+		.alert-danger{
+			border-color: @orange;
+			color: @orange;
+			font-size: 1.2em;
+			background: none;
+			border-radius: 0;
+		}
+		.alert-dismissable .close{
+			font-size: 2em!important;
+			top: -8px;
+			padding: 0!important;
+		}
 	}
 }
