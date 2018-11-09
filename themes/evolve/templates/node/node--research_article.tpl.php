@@ -165,12 +165,31 @@
          </script>
 		 
       </div>
-      <div class="block CampaignSidebar contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
-         <h3 class="headline">RELATED ARTICLES</h3>
-         <span class="brd-headling"></span>
-         <div class="content">
-            <?php echo views_embed_view('current_apa_campaign', 'block_4');?>
-         </div>
+      <div class="region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
+         <!--<h3 class="headline">RELATED ARTICLES</h3>
+         <span class="brd-headling"></span>-->
+         <!--<div class="content">-->
+            <?php //echo views_embed_view('current_apa_campaign', 'block_4');
+                  $block = block_load('block', '223');
+                  $get = _block_get_renderable_array(_block_render_blocks(array($block)));
+                  $output = drupal_render($get);        
+                  print $output;
+            ?>
+            <?php 
+                  $block = block_load('block', '224');
+                  $get = _block_get_renderable_array(_block_render_blocks(array($block)));
+                  $output = drupal_render($get);        
+                  print $output;
+            
+            ?>
+            <?php 
+                  $block = block_load('block', '225');
+                  $get = _block_get_renderable_array(_block_render_blocks(array($block)));
+                  $output = drupal_render($get);        
+                  print $output;
+            
+            ?>
+         <!--</div>-->
       </div>
    </section>
    <div class="dexp-section" id="section-content-bottom-third">
