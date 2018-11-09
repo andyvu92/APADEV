@@ -243,7 +243,8 @@
                                                    <div class="field field-name-field-team-email field-type-text field-label-hidden">
                                                       <div class="field-items">
                                                          <div class="field-item even">
-                                                            <?php echo //$content['field_research_author']['#items'][0]['taxonomy_term']->field_emailauthor['und'][0]['value']; ?>
+                                                            <?php //echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_emailauthor['und'][0]['value'];
+                                                             ?>
                                                          </div>
                                                       </div>
                                                    </div>
