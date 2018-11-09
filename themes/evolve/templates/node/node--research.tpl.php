@@ -99,7 +99,7 @@
 		   <?php print $title; ?></a></h2>
     </header>
 		*/ ?>
-	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-9 col-lg-9">
+	<div class="region region-content col-xs-12 col-sm-12 col-md-9 col-lg-9">
 		<h1 class="SectionHeader"><?php print $node->title;?></h1>
 		<div class="brd-headling">&nbsp;</div>
 	  <?php

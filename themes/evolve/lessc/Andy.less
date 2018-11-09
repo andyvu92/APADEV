@@ -2624,8 +2624,14 @@ body .block, body{
 }
 
 /* STANDARD RIGHT SIDEBAR */
-#block-system-main .right-sidebar, .right-sidebar{
+#block-system-main .right-sidebar, .right-sidebar, .region-right-sidebar{
     position: relative;
+    @media @larger-tablet-width-down{
+        display: none;
+    }
+        .block{
+            margin-bottom: 40px;
+        }
       .underline-heading{
         position: relative;
         font-family: Cairo;
@@ -2797,7 +2803,7 @@ body .block, body{
             margin: 0;
             padding: 0;
             line-height: 1.2em;
-            font-size: 1.2em;
+            font-size: 1em;
             list-style: none;
             a{
                 padding: 10px 0;
@@ -3437,6 +3443,100 @@ body .featured-block{
         margin: 10px 0;
         p{
             font-size: 1.4em;
+        }
+    }
+}
+
+/* STATE MAP FOR NDIS */
+
+#ausmap-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    float: left;
+    width: 100%;
+    min-height: 600px;
+    @media @tablet-width-down{
+        min-height: 500px;
+    }
+    @media @larger-phone-width-down{
+        min-height: 300px;
+    }
+}
+#ausmap{
+    background: url("/sites/default/files/RESOURCES/BW_map.png") top left no-repeat;
+    position: absolute;
+    width:779px;
+    height:625px;
+    transform:scale(0.8);
+    display: block;
+    padding: 0;
+    margin: 0;
+    @media @tablet-width-down{
+        transform:scale(0.7);
+    }
+    @media @larger-phone-width-down{
+        transform:scale(0.4);
+    }
+
+    li {margin: 0; padding: 0; list-style: none; display: block; position: absolute;}
+    a {display: block; text-decoration: none; font-size:11px; font-weight:bold; line-height:normal;}
+
+    #wa { 
+        left: 14px; top: 77px; width: 275px; z-index:10;
+        a {
+            height: 382px; text-align:center; padding-top:10px; padding-left:0px; color:#fff;
+            &:hover {background: url('/sites/default/files/RESOURCES/Color_map2.png') -14px -47px no-repeat; text-decoration:none;}
+        }
+    }
+    #nt { 
+        left: 290px; top: 41px; width: 161px; z-index:10;
+        a {
+            height: 260px; text-align:center; padding-top:60px; padding-left:0px; color:#fff;
+            &:hover {background: url('/sites/default/files/RESOURCES/Color_map2.png') -291px -8px no-repeat; text-decoration:none;}
+        }
+    }
+    #sa { 
+        left: 290px; top: 302px; width: 214px; z-index:10;
+        a {
+            height: 222px; text-align:center; padding-top:15px; padding-left:0px; color:#fff;
+            &:hover {background: url('/sites/default/files/RESOURCES/Color_map2.png') -292px -272px no-repeat; text-decoration:none;}
+        }
+    }
+    #tas { 
+        left: 570px; top: 550px; width: 72px; z-index:10;
+        a {
+            height: 69px; text-align:center; padding-top:2px; padding-left:0px; color:#fff; letter-spacing:-1px;
+            &:hover {background: url('/sites/default/files/RESOURCES/Color_map2.png') -570px -518px no-repeat; text-decoration:none;}
+        }
+    }
+    #qld { 
+        left: 451px; top: 26px; width: 283px; z-index:9;
+        a {
+            height: 345px; text-align:center; padding-top:80px; padding-right:20px; color:#fff;
+            &:hover {background: url('/sites/default/files/RESOURCES/Color_map1.png') 1px -27px no-repeat; text-decoration:none;}
+        }
+    }
+    #nsw { 
+        left: 506px; top: 340px; width: 229px; z-index:10;
+        a {
+            height: 171px; text-align:center; padding-top:20px; padding-right:20px; padding-bottom:10px; color:#fff;
+            &:hover {background: url('/sites/default/files/RESOURCES/Color_map2.png') -507px -309px no-repeat; text-decoration:none;}
+        }
+    }
+    #vic { 
+        left: 504px; top: 444px; width: 166px; z-index:11;
+        a {
+            height: 95px; text-align:center; padding-top:13px; padding-right:25px; color:#fff;
+            &:hover {background: url('/sites/default/files/RESOURCES/Color_map1.png') -51px -442px no-repeat; text-decoration:none;}
+        }
+    }
+    #act { 
+        display:none; left: 636px; top: 460px; width: 24px; z-index:12;
+        a {
+            height: 25px; text-align:right; padding-top:0px; padding-right:0px; color:#ea9034;
+            &:hover {background: url('/sites/default/files/RESOURCES/Color_map3.png') 7px 5px no-repeat; text-decoration:none; color:#322e2b;}
         }
     }
 }

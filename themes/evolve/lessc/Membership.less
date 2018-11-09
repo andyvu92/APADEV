@@ -1348,3 +1348,61 @@ table.MTtable td {
 		}
 	}
 }
+
+/* JOIN BUTTON */
+.node-type-membership{
+	#section-main-content{
+		#ng-join-btn{
+			text-transform: uppercase;
+			font-weight: 300;
+			font-family: Roboto;
+			margin-top: 20px;
+			text-align: center;
+			span{
+				padding: 8px 60px;
+				display: block;
+			}
+			@media @tablet-width-down{
+                width: 100%;
+            	text-align: center;
+            }
+		}
+	}
+}
+
+/* DYNAMIC MEMBERSHIP TYPE */
+#block-system-main{
+	#dynamic-membership-type{
+		.node-membership-type{
+			padding: 0!important;
+			margin: 0!important;
+			& + .node{
+				h2.MTtitle{
+					padding-top: 15px;
+				}
+			}
+			.post-content{
+				padding: 0;
+				margin: 0;
+			}
+			h2.MTtitle{
+				color: #009fda;
+				font-size: 1.8em;
+				font-family: Roboto;
+				font-weight: 700;
+				padding-top: 35px;
+				margin: 12px 0px 10px;
+				letter-spacing: 0px;
+			}
+			.MTcontentTitle{
+				color: #333;
+			}
+			.MTcontent{
+				font-size: 1.2em;
+				ul{
+					font-size: 1em;
+				}
+			}
+		}
+	}
+}

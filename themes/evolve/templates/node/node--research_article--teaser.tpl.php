@@ -79,7 +79,7 @@
 * @ingroup themeable
 */
 ?>
-<div id="node-<?php print $node->nid; ?>" style="margin-top:30px;" class="<?php print $classes; ?> clearfix post large MediaListing" <?php print $attributes; ?>>
+<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large MediaListing" <?php print $attributes; ?>>
     <div class="post-img media">
       <div class='mediaholder'>
         <?php print render($content['field_research_article_image']);?>
@@ -104,7 +104,7 @@
         print render($content);
         ?>
 	<div class="more">
-		<p><a href="<?php print $node_url; ?>">Read more ></a></p>
+		<a class="cta-primary" href="<?php print $node_url; ?>">Read more</a>
 	</div>
 	</section>
   

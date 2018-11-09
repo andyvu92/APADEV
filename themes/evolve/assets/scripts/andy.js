@@ -197,10 +197,10 @@ jQuery(function ($) {
   })
 }) 
 
-//SET BACKGROUND FOR EACH MEDIA ARTICLE CONTENT SIDEBAR
+//SET BACKGROUND FOR EACH MEDIA/RESEARCH ARTICLE CONTENT SIDEBAR
 jQuery(function ($) {
-  var someId = $(".node-media .post-img, ");
-  someId.css('background', function () {
+  var target = $(".node-media .post-img, .node-research-article .post-img");
+  target.css('background', function () {
       return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
   })
 }) 
@@ -804,4 +804,16 @@ jQuery(document).ready(function(){
 
     // MEMBERSHIP/CATEGORIES-FEES/* -> MOVE RIGHT SIDEBAR TO CONTENT CONTAINER
     $('.node-type-membership .region-right-sidebar').appendTo( $('#section-main-content > .container > .row') );
+
+    // LIMIT WORD COUNT TO 40 IN MEDIA
+
+    $('.node-media').each(function(){
+      var text = $(this).find(".post-content .field-item p").text();
+      var wordCount = text.trim().split(' ').length;
+      var splittext = text.split(/\s+/).slice(0,41).join(" ");
+
+      if ( wordCount > 42 ) {
+        $(this).find(".post-content .field-item p").text( splittext + '...');
+      }
+    });
 });

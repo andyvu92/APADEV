@@ -79,7 +79,7 @@
 * @ingroup themeable
 */
 ?>
-<div id="node-<?php print $node->nid; ?>" style="margin-top:30px;" class="<?php print $classes; ?> clearfix post large MediaListing" <?php print $attributes; ?>>
+<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large MediaListing" <?php print $attributes; ?>>
     <div class="post-img media">
       <div class='mediaholder'>
         <?php print render($content['field_picture']);?>
@@ -112,9 +112,9 @@
         ?>
 	<div class="more">
 		<?php if(!is_null(render($content['field_external_link']))): ?>
-			<p><a href="<?php echo $content['field_external_link']['#items'][0]['value'];?>" target="_blank">Discover more ></a></p>
+			<a  class="cta-primary" href="<?php echo $content['field_external_link']['#items'][0]['value'];?>" target="_blank">Discover more</a>
 	    <?php else: ?>
-			<p><a href="<?php print $node_url; ?>">Discover more ></a></p>
+			<a class="cta-primary" href="<?php print $node_url; ?>">Discover more</a>
 		<?php endif ?>
 	</div>
 	</section>
