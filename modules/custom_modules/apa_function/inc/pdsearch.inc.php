@@ -4,6 +4,10 @@ if(!function_exists('drupal_session_started'))
   die("Unauthorized Access");
 }
 ?>
+<?php
+header("Location: /pd-outage");
+die;
+?>
 <span class="col-xs-12 col-sm-10 col-md-8 col-lg-5" id="pdSearch">
 <?php
 	// 2.2.19 - GET list of National Group
