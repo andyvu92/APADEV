@@ -514,7 +514,7 @@
 						display: none;
 						width: 100vw;
 						position: relative;
-						margin-left: -30px;
+						margin-left: -15px;
 						@media @larger-phone-width-down{
 							display: block;
 							max-height: 200px;
@@ -794,8 +794,14 @@
 		}
 	}
 	#block-system-main .content .node .post-content{
+		padding-left: 0;
+		padding-right: 0;
+		.region{
+			padding-left: 0;
+			padding-right: 0;
+		}
 		@media @larger-phone-width-down{
-			padding: 10px 15px;
+			padding: 10px 0px;
 			div[class*="col-"]{
 				padding: 0;
 			}

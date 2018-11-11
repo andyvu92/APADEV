@@ -331,7 +331,7 @@
 		}
 		&:last-child{
 			border-bottom: 1px solid rgba(0,0,0,0.12);
-		}
+        }
 		.post-content{
 			@media @tablet-width-down{
 				padding-top: 30px!important;
@@ -398,6 +398,15 @@
             margin-bottom: 0;
             padding: 15px;
             width: 100%;
+        }
+    }
+}
+
+/* ADJUST CTA ARROW */
+.page-node-213{
+    .node-research-article{
+        .cta-primary:before{
+            top: unset;
         }
     }
 }
