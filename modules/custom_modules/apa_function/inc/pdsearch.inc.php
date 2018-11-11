@@ -5,6 +5,7 @@ if(!function_exists('drupal_session_started'))
 }
 ?>
 <?php
+/// tmp re-direct while PD updates the contents
 header("Location: /pd-outage");
 die;
 ?>
