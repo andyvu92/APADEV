@@ -52,7 +52,7 @@
 		
 		if(allTxLinks.substring(0,25) != 'https://australian.physio') {
 			$('a').attr("rel", "nofollow");
-		} elseif(allTxLinks.charAt(0) != '/') {
+		} else if(allTxLinks.charAt(0) != '/') {
 			$('a').attr("rel", "nofollow");
 		}
 	<?php
