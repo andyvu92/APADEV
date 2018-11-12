@@ -330,6 +330,9 @@ body .block .media_filter, body .media_filter{
 			.MediaListing{
 				display: flex;
 				flex-direction: row;
+				@media @tablet-width-down{
+					flex-direction: column;
+				}
 				.post-img{
 					width: 40%;
 					position: relative;
@@ -337,6 +340,10 @@ body .block .media_filter, body .media_filter{
 					margin: 15px;
 					height: 0;
 					padding-bottom: 25%;
+					@media @tablet-width-down{
+						width: 100%;
+						padding-bottom: 50%;
+					}
 					img{
 						visibility: hidden;
 					}
@@ -345,6 +352,11 @@ body .block .media_filter, body .media_filter{
 					width: 60%;
 					padding: 0;
 					margin: 15px;
+					@media @tablet-width-down{
+						padding-top: 0!important;
+						width: 100%;
+						margin: 0;
+					}
 				}
 				.more{
 					margin-top: 30px;
