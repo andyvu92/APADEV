@@ -79,10 +79,11 @@
 * @ingroup themeable
 */
 ?>
+<?php if(isset($_SESSION['UserId']) && $_SESSION['MemberTypeID']!="1"): ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix" <?php print $attributes; ?>>
-	<?php $result = MtypeContent($content['field_member_content_type'],$content['field_member_type_list']); ?>
+	<?php //$result = MtypeContent($content['field_member_content_type'],$content['field_member_type_list']); ?>
 	
-	<?php if ($result == "0"): ?>
+	<?php //if ($result == "0"): ?>
 	
 		
 	<?php /*
@@ -180,10 +181,10 @@
 			</div>
 		</div>
 	</div>
-    <?php elseif($result == "1"): $url =  "{$_SERVER['REQUEST_URI']}";?>
-	<div class="flex-container" id="non-member">
+    <?php else: $url =  "{$_SERVER['REQUEST_URI']}";?>
+<div class="flex-container" id="non-member">
 			<div class="flex-cell">
-				<h3 class="light-lead-heading">Please login to see this page.</h3>
+				<h3 class="light-lead-heading">Please join a member to see this page.</h3>
 			</div>
 			<div class="flex-cell cta">
 				<a data-target="#loginAT" data-toggle="modal" href="#" class="login">Login</a>
@@ -198,32 +199,7 @@
 			?>
 
 		</div>
-	<?php elseif($result == "2"): ?>
-		<?php   
-			$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-			$base_path = base_path();
-			$imgLink = $link.$base_path."sites/default/files/Member-access-page.png"; 
-            echo "<img src='".$imgLink."'/>";
-		?>
-	<?php elseif($result == "3"): ?>
-		<?php echo "member, but not eligible!"; ?>
-	<?php else: ?>
-		<?php if ($result[0] == "0") : ?>
-			<?php //echo "!!!!"; ?>
-		<?php elseif ($result[0] == "3") : ?>
-		
-			<?php //print_r($result[1]); ?>
-		<?php elseif($result == "2"): ?>
-			<?php
-			$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-			$base_path = base_path();
-			$imgLink = $link.$base_path."sites/default/files/Member-access-page.png"; 
-            echo "<img src='".$imgLink."'/>";
-		    ?>
-			<?php //print_r($result[1]); ?>
-		<?php elseif($result == "3"): ?>
-			<?php echo "member, but not eligible!"; ?>
-		<?php endif; ?>
-	<?php endif; ?>
+
+<?php endif; ?>
 </div> 
 
