@@ -82,7 +82,7 @@
 <?php $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();?>
 
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large MediaListing" <?php print $attributes; ?>>
-    <div class="post-img media" style='background:url("<?php echo $Link = $link.$base_path."sites/default/files/".str_replace("public://","",$node->field_picture['und'][0]['file']->uri);?>)'>
+    <div class="post-img media" style='background:url("<?php echo $Link = $link.$base_path."sites/default/files/".str_replace("public://","",$node->field_picture['und'][0]['file']->uri);?>")'>
       <div class='mediaholder'>
         <?php print render($content['field_picture']);?>
       </div>
