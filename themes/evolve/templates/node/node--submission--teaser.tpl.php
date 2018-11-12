@@ -83,7 +83,7 @@
 <div id="node-<?php print $node->nid; ?>" style="margin-top:30px;" class="<?php print $classes; ?> clearfix post large MediaListing" <?php print $attributes; ?>>
     <section class="post-content">
 		<header class="meta">
-			<ul>
+			<ul class="hide">
 				<li><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></li>
 			</ul>
 			
