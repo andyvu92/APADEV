@@ -82,7 +82,11 @@
 <?php if(is_null(render($content['field_url_for_page']))): ?>
 <a class="home-tile-block-anchor" href="<?php print $node_url; ?>">
 <?php else: ?>
+<?php if($content['field_url_for_page']['#items'][0]['value'] == "https://choose.physio/findaphysio"): ?>
+<a class="home-tile-block-anchor" href="<?php echo $content['field_url_for_page']['#items'][0]['value']; ?>" target="_blank">
+<?php else: ?>
 <a class="home-tile-block-anchor" href="<?php echo $content['field_url_for_page']['#items'][0]['value']; ?>">
+<?php endif; ?>
 <?php endif; ?>
 <div id="node-<?php print $node->nid; ?>" class="node" <?php print $attributes; ?>>
 	<?php $test = render($content['field_home_image']);
