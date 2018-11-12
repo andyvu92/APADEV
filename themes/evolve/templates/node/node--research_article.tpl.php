@@ -184,10 +184,6 @@
             ?>
       </section>	
 
-      <div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
-
-      </div>
-
     <div class="space-30"></div>
 
     <div class="featured-block">
@@ -207,6 +203,10 @@
     </div>
 
     <div class="space-50"></div>
+
+      <div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
+
+      </div>
 
       <div class="region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
          <!--<h3 class="headline">RELATED ARTICLES</h3>
