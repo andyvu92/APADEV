@@ -50,7 +50,8 @@
 		
 		var allTxLinks = $('a').attr("href");
 		
-		if(allTxLinks.substring(0,25) != 'https://australian.physio' || allTxLinks.charAt(0) != '/') {
+		if(allTxLinks.substring(0,25) == 'https://australian.physio' || allTxLinks.charAt(0) == '/') {
+		} else {
 			$('a').attr("rel", "nofollow");
 		}
 	<?php
