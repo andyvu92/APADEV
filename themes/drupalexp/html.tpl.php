@@ -48,12 +48,17 @@
 			}
 		});
 		
-		var allTxLinks = $('a').attr("href");
-		
-		if(allTxLinks.substring(0,25) == 'https://australian.physio' || allTxLinks.charAt(0) == '/') {
-		} else {
-			$('a').attr("rel", "nofollow");
-		}
+		$('a').each(function() {
+			var allTxLinks = $(this).attr("href");
+			if(allTxLinks != null) {
+				if(allTxLinks.charAt(0) != '/') {
+					$(this).attr("rel", "nofollow");
+					if(allTxLinks.substr(0,21) == "https://choose.physio") {
+						$(this).removeAttr("rel");
+					}
+				}
+			}
+		});
 	<?php
 		if(isset($_SESSION["UserId"])){ 
 			echo '$(document).ready(function(){
