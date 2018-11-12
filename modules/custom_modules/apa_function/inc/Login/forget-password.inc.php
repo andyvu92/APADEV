@@ -68,8 +68,10 @@
 	jQuery(document).ready(function(){
 		$('#checkpassword').click(function(){
 			if($("#Fid").val()=="") {
-				emptyMessage = '<div class="checkMessage"><span>Email field cannot be empty.</span></div>';
-				$('#checkMessage').after(emptyMessage);
+				if( $('#resetPass').find('.checkMessage').length == 0 ){
+					emptyMessage = '<div class="checkMessage"><span>Email field cannot be empty.</span></div>';
+					$('#checkMessage').one().after(emptyMessage);
+				}
 				return false; 
 			}
 		});
@@ -78,7 +80,7 @@
 
 		$('#Fid').keyup(function(event) {
 			$('.checkMessage').remove();
-			
+
 		if($('#Fid').val() == targetKey) {
 			email = $('#Fid').val();
 			jQuery.ajax({
