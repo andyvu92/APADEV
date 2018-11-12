@@ -79,53 +79,45 @@
 * @ingroup themeable
 */
 ?>
-<div id="node-<?php print $node->nid; ?>" style="margin-top:30px;" class="<?php print $classes; ?>post large MediaListing" <?php print $attributes; ?>>
-   <div class="bxslide bx-clone" style="float: left; list-style: none; position: relative; width: 270px; margin-right: 20px;">
-                                 <div id="node-14" class="node node-team node-teaser view-mode-teaser" about="/evolve/content/jane-smith-0" typeof="sioc:Item foaf:Document">
-                                    <span property="dc:title" content="Jane Smith" class="rdf-meta element-hidden"></span><span property="sioc:num_replies" content="0" datatype="xsd:integer" class="rdf-meta element-hidden"></span>
-                                    <div class="content">
-                                       <div class="team">
-                                          <div class="team-item img-wrp">
-                                             <div class="field field-name-field-team-image field-type-image field-label-hidden">
-                                                <div class="field-items">
-                                                   <div class="field-item even">
-                                                      <?php print render($content['field_research_article_image']);?>
-													 
-                                                   </div>
-                                                </div>
-                                             </div>
-                                             <div class="overlay"></div>
-                                          </div>
-                                          <div class="team-item team-member-info-wrp">
-                                             <div class="team-name">
-                                                <h5><?php print render($content['field_research_author']);?></h5>
-                                                <span>
-                                                   <div class="field field-name-field-team-position field-type-text field-label-hidden">
-                                                      <div class="field-items">
-                                                         <div class="field-item even"><a href="<?php print $node_url; ?>">
-		   <?php print $title; ?></a></div>
-                                                      </div>
-                                                   </div>
-                                                </span>
-                                             </div>
-                                             <div class="team-about">
-                                                <p></p>
-                                                <div class="field field-name-body field-type-text-with-summary field-label-hidden">
-                                                   <div class="field-items">
-                                                      <div class="field-item even" property="content:encoded">
-                                                         <p><?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_grant['und'][0]['value']; ?></p>
-                                                      </div>
-                                                   </div>
-                                                </div>
-                                                <p></p>
-                                             </div>
-                                            
-                                          </div>
-                                         <div class="clearfix"></div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-  
+<div id="node-<?php print $node->nid; ?>" style="margin-top:20px;padding-left:0px;" class="<?php print $classes; ?>post large MediaListing" <?php print $attributes; ?>>
+  	<div class="team">
+		<div class="team-item img-wrp">
+			<div class="field field-name-field-team-image field-type-image field-label-hidden">
+				<div class="field-items">
+				   <div class="field-item even">
+					  <?php print render($content['field_research_article_image']);?>
+					 
+				   </div>
+				</div>
+			</div>
+        </div>
+		<div class="team-item team-member-info-wrp">
+			<div class="team-name">
+				<h5><?php print render($content['field_research_author']);?></h5>
+				
+				   <div class="field field-name-field-team-position field-type-text field-label-hidden">
+					  <div class="field-items">
+						<div class="field-item even"><a href="<?php print $node_url; ?>">
+	                        <?php print $title; ?></a>
+						</div>
+					  </div>
+				   </div>
+				
+			</div>
+			<div class="team-about">
+			
+				<div class="field field-name-body field-type-text-with-summary field-label-hidden">
+				   <div class="field-items">
+					  <div class="field-item even" property="content:encoded">
+						 <p><?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_grant['und'][0]['value']; ?></p>
+					  </div>
+				   </div>
+				</div>
+				
+			</div>
+			
+		</div>                              
+    </div>
+              
 </div> 
 
