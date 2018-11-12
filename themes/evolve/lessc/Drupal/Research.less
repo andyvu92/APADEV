@@ -91,9 +91,6 @@
 #block-block-238 .arrowDown{
     border: 2px lightgrey solid!important;
 }
-#node-214 .team{
-    margin-right: 20px;
-}
 
 .fullwidthimage .field-items {
 	display: block;
@@ -506,6 +503,7 @@
 
 		/* POST FEATURED IMAGE */
 		.post-img{
+            max-height: 400px;
 			&.mobile{
 				display: none;
 				width: 100vw;
@@ -896,6 +894,148 @@
 					}
 				}
 			}
-		}
+        }
+        
+        /* AUTHOR SECTION */
+        .featured-block{
+            float: left;
+            @media all and (max-width: @larger-tablet-width - 5px){
+                width: 100vw;
+                margin-left: -15px;
+            }
+            h4{
+                font-size: 1.8em;
+            }
+            .author{
+                .author-name{
+                    color: #333;
+                    font-weight: 500;
+                    padding: 15px 0 0;
+                    margin: 0;
+                }
+                .author-bio{
+                    padding-top: 15px;
+                    margin-top: 15px;
+                    position: relative;
+                    &:before{
+                        content: '';
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 60%;
+                        height: 1px;
+                        background: rgba(0,0,0,0.12);
+                    }
+                }
+            }
+        }
+        div[class^="space-"]{
+            float: left;
+        }
 	}
+}
+
+/* COMPLETED RESERCH STORIES */
+.page-node-214{
+    #section-main-content #block-system-main{
+        .region{
+            padding-left: 0;
+            padding-right: 0;
+        }
+        .post-img{
+            display: none;
+        }
+        .post-content{
+            padding-top: 0;
+            padding-left: 0;
+            padding-right: 0;
+            .SectionHeader{
+                display: none;
+                & + .brd-headling{
+                    display: none;
+                }
+            }
+
+            /* STORIES */
+            .view-media{
+                .dexp-grid-items{
+                    display: flex;
+                    flex-wrap: wrap;
+                    .node{
+                        padding: 15px 10px;
+                        border: 0px;
+                        @media all and (max-width: @tablet-width - 5px){
+                            padding: 15px 0px;
+                        }
+                        .team{
+                            margin-bottom: 0;
+                            border: 0.5px solid #eceef0;
+                            width: 100%;
+                            position: relative;
+                            display: flex;
+                            flex-wrap: wrap;
+                            flex-direction: column;
+                            transition: all .3s linear;
+                            a{
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                width: 100%;
+                                height: 100%;
+                                z-index: 10;
+                            }
+                            /* TEAM IMAGE */
+                            .team-image{
+                                .field-item{
+                                    overflow: hidden;
+                                    align-items: center;
+                                    justify-content: center;
+                                    text-align: center;
+                                    display: flex;
+                                    img{
+                                        max-height: 175px;
+                                        width: auto;
+                                        height: 175px;
+                                        max-width: unset;
+                                    }
+                                }
+                            }
+
+                            /* TEAM INFO */
+                            .team-info{
+                                padding: 0 15px;
+                                .team-name{
+                                    margin: 0;
+                                    padding: 15px 0;
+                                    color: #333;
+                                    font-family: Roboto;
+                                    border: 0;
+                                    font-size: 1.4em;
+                                    font-weight: 500;
+                                }
+                                .team-intro{
+                                    color: #000;
+                                    font-family: Roboto;
+                                    padding-bottom: 15px;
+                                    display: block;
+                                    font-size: 1.2em;
+                                }
+                            }
+                            .team-extra{
+                                width: 100%;
+                                color: #333;
+                                font-weight: 700;
+                                font-family: Roboto;
+                                display: block;
+                                float: left;
+                                margin-top: auto;
+                                padding: 0 15px 15px 15px;
+                                opacity: 0.6;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

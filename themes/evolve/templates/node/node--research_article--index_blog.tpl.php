@@ -79,45 +79,19 @@
 * @ingroup themeable
 */
 ?>
-<div id="node-<?php print $node->nid; ?>" style="margin-top:20px;padding-left:0px;" class="<?php print $classes; ?>post large MediaListing" <?php print $attributes; ?>>
+<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?>post large MediaListing" <?php print $attributes; ?>>
   	<div class="team">
-		<div class="team-item img-wrp">
-			<div class="field field-name-field-team-image field-type-image field-label-hidden">
-				<div class="field-items">
-				   <div class="field-item even">
-					  <?php print render($content['field_research_article_image']);?>
-					 
-				   </div>
-				</div>
-			</div>
+	  <a href="<?php print $node_url; ?>"></a>
+		<div class="team-image">
+			<?php print render($content['field_research_article_image']);?>
         </div>
-		<div class="team-item team-member-info-wrp">
-			<div class="team-name">
-				<h5><?php print render($content['field_research_author']);?></h5>
+		<div class="team-info">
+				<h3 class="team-name"><?php print render($content['field_research_author']);?></h3>
 				
-				   <div class="field field-name-field-team-position field-type-text field-label-hidden">
-					  <div class="field-items">
-						<div class="field-item even"><a href="<?php print $node_url; ?>">
-	                        <?php print $title; ?></a>
-						</div>
-					  </div>
-				   </div>
-				
-			</div>
-			<div class="team-about">
-			
-				<div class="field field-name-body field-type-text-with-summary field-label-hidden">
-				   <div class="field-items">
-					  <div class="field-item even" property="content:encoded">
-						 <p><?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_grant['und'][0]['value']; ?></p>
-					  </div>
-				   </div>
-				</div>
-				
-			</div>
-			
-		</div>                              
-    </div>
-              
+				<span class="team-intro"><?php print $title; ?></span>
+		</div>
+		
+		<span class="team-extra"><?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_grant['und'][0]['value']; ?></span>                             
+    </div>           
 </div> 
 

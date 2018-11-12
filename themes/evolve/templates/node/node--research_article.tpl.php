@@ -184,6 +184,27 @@
             ?>
       </section>	
 
+<div class="space-30"></div>
+
+    <div class="featured-block">
+        <h4>About the author/s</h4>
+
+        <?php if(sizeof($content['field_research_author']['#items'])==1): ?>
+        <div class="author">
+            <p class="author-name"><?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->name; ?></p>
+            <p class="author-education"><?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_education['und'][0]['value']; ?></p>
+            <div class="author-bio"><?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_bio['und'][0]['value']?></div>
+        </div>
+        <?php endif; ?>
+    
+        <?php //if(sizeof($content['field_research_author']['#items'])>1): ?>
+
+        <?php //endif; ?>
+
+    </div>
+
+    <div class="space-50"></div>
+
       <div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
 
       </div>
@@ -236,13 +257,8 @@
                                                 <div class="field field-name-field-team-image field-type-image field-label-hidden">
                                                    <div class="field-items">
                                                       <div class="field-item even">
-<<<<<<< HEAD
                                                          <?php   //$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();$imgLink = $link.$base_path."sites/default/files/".$content['field_research_author']['#items'][0]['taxonomy_term']->field_profile_picture['und'][0]['filename']; 
                                                            // echo "<img src='".$imgLink."'/>"; ?>
-=======
-                                                         <?php   $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();$imgLink = $link.$base_path."sites/default/files/".$content['field_research_author']['#items'][0]['taxonomy_term']->field_profile_picture['und'][0]['filename']; 
-                                                            echo "<img class='display-none' src='".$imgLink."'/>"; ?>
->>>>>>> 4a41a8f4733bedbd308f47bddf79f7b3c9e02fd5
                                                       </div>
                                                    </div>
                                                 </div>
