@@ -86,13 +86,17 @@
 
 <div class="Docpage">00.06.05.01</div>
 </div> 
+
+<div class="container">
+
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
-   <div class="post-img media">
-      <div class='mediaholder fullwidthimage'>
-         <?php print render($content['field_research_article_image']);?>
+
+   	<div class="post-img media mobile">
+        <div class='mediaholder fullwidthimage'>
+            <?php print render($content['field_research_article_image']);?>
+        </div>
       </div>
-   </div>
-   <section class="post-content container" style="float:none; margin:auto;">
+
       <?php /*
          use this header as reference, but delete at the end
          <header class="meta">
@@ -108,63 +112,82 @@
       */ //['field_emailauthor']['und'][0]['value']?>
       <?php /*print_r ($content['field_research_author']['#items']); */?>	
       <div class="region col-xs-12 col-sm-12 col-md-9 col-lg-9">
-         <h1 class="SectionHeader"><?php print $node->title;?></h1>
-         <div class="brd-headling">&nbsp;</div>
+      
+      <section class="post-content">
+
+      <h1 class="SectionHeader"><?php print $node->title;?></h1>
+
          <header class="meta">
-            <ul>
-               <li><strong><?php print render($content['field_research_author']); ?></strong></li>
-               <li><strong><?php print render($content['field_research_article_category']);?></strong></li>
-			    <?php if(!is_null(render($content['field_research_issue']))): ?> <?php echo "<li><strong>";?>
-			   <?php print render($content['field_research_issue']);?><?php echo "</strong></li>";?> <?php endif?>
-               <li><strong><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></strong></li>
-            </ul>
-         </header>
-         <?php
+        <div class="flex-container post-meta">
+
+            <div class="flex-cell">
+                <div class="flex-col-6 meta-info">
+                    <div class="meta-type-date">
+                        <span class="meta-type category"><b><?php print render($content['field_research_article_category']);?></b></span>
+                        <span class="meta-type"><b><?php print render($content['field_research_author']); ?></b></span>
+                        
+                        <?php if(!is_null(render($content['field_research_issue']))): ?> <?php echo '<span class="meta-date">';?>
+                        <?php print render($content['field_research_issue']);?><?php echo '</span>';?> <?php endif?>
+                        
+                        <span class="meta-date"><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></span>
+                    </div>
+                </div>
+
+                <div class="flex-col-6 meta-share-url">
+                    <ul class="socialMediaIcon" style="float:right;margin-top:-3%;">
+                        <li>
+                            <div class="fb-share-button" data-layout="button_count" data-mobile-iframe="true" data-size="small">&nbsp;</div>
+                        </li>
+                        <li>
+                            <a class="twitter-share-button" data-show-count="false" href="https://twitter.com/share">Tweet</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8">&nbsp;</script>
+                        </li>
+                        <li>
+                            <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;
+                        </li>
+                        <li>
+                            <div class="g-plus" data-action="share" data-annotation="none">&nbsp;</div>
+                        </li>
+					</ul>
+					<div id="fb-root">&nbsp;</div>
+					<script src="https://apis.google.com/js/platform.js" async defer></script>
+					<script>(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id)) return;
+					js = d.createElement(s); js.id = id;
+					js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.9";
+					fjs.parentNode.insertBefore(js, fjs);
+					}(document, 'script', 'facebook-jssdk'));</script><script type="text/javascript">
+					jQuery(document).ready(function($) {
+					var x = $(location).attr('href');
+					jQuery(document).ready(function($) {
+						$('.fb-share-button').html("<a class='fb-xfbml-parse-ignore' target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=" +  x  +  "&amp;src=sdkpreparse'></a>")
+					});
+					});
+					</script>
+                </div>
+            </div>
+
+        </div>
+      </header>
+
+            <div class="post-img media">
+			<div class='mediaholder fullwidthimage'>
+                        <?php print render($content['field_research_article_image']);?>
+			</div>
+            </div>
+            
+            <?php
             // We hide the comments and links now so that we can render them later.
             hide($content['comments']);
             hide($content['links']);
             print render($content['body']);
             ?>
-         <p>&nbsp;</p>
-         <p>&nbsp;</p>
-         <script src="https://apis.google.com/js/platform.js" async defer></script>
-         <ul class="socialMediaIcon">
-            <li>Share this page:</li>
-            <li>
-               <div class="fb-share-button" data-layout="button_count" data-mobile-iframe="true" data-size="small">&nbsp;</div>
-            </li>
-            <li>
-               <a class="twitter-share-button" data-show-count="false" href="https://twitter.com/share">Tweet</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8">&nbsp;</script>
-            </li>
-            <li>
-               <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;
-            </li>
-            <li>
-               <!-- Place this tag where you want the share button to render. -->
-               <div class="g-plus" data-action="share" data-annotation="none">&nbsp;</div>
-            </li>
-         </ul>
-         <div id="fb-root">&nbsp;</div>
-         <script>(function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.9";
-            fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-         </script><script type="text/javascript">
-            jQuery(document).ready(function($) {
-				
-            var x = $(location).attr('href');
-            jQuery(document).ready(function($) {
-            	$('.fb-share-button').html("<a class='fb-xfbml-parse-ignore' target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=" +  x  +  "&amp;src=sdkpreparse'></a>")
-            });
-            
-            })
-              
-         </script>
-		 
+      </section>	
+
+      <div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
+
       </div>
+
       <div class="region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
          <!--<h3 class="headline">RELATED ARTICLES</h3>
          <span class="brd-headling"></span>-->
@@ -185,15 +208,20 @@
             ?>
          <!--</div>-->
       </div>
-   </section>
+
+   </div>
+   </div>
+</div>
+
+   <!--
    <div class="dexp-section" id="section-content-bottom-third">
       <div class="container">
          <div class="row">
             <div class="region region-content-bottom-third col-xs-12 col-sm-12 col-md-12 col-lg-12">
                <div id="block-views-team-block-7" class="block block-views main-headline dexp-animate" data-animate="fadeInUp" style="padding:50px 0 50px 0">
                   <h3 class="block-title"> About the author/s:</h3>
-                  <!----line--->
-                  <?php if(sizeof($content['field_research_author']['#items'])==1): ?>
+
+                  <?php //if(sizeof($content['field_research_author']['#items'])==1): ?>
                   <div class="content" style="padding:50px 0 50px 0">
                      <div class="view view-team view-id-team view-display-id-block_4 team-style-1 view-dom-id-433fc8a824a3e8fb0c7a672ba6bd61d2">
                         <div class="view-content">
@@ -208,8 +236,8 @@
                                                 <div class="field field-name-field-team-image field-type-image field-label-hidden">
                                                    <div class="field-items">
                                                       <div class="field-item even">
-                                                         <?php   $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();$imgLink = $link.$base_path."sites/default/files/".$content['field_research_author']['#items'][0]['taxonomy_term']->field_profile_picture['und'][0]['filename']; 
-                                                            echo "<img src='".$imgLink."'/>"; ?>
+                                                         <?php   //$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();$imgLink = $link.$base_path."sites/default/files/".$content['field_research_author']['#items'][0]['taxonomy_term']->field_profile_picture['und'][0]['filename']; 
+                                                           // echo "<img src='".$imgLink."'/>"; ?>
                                                       </div>
                                                    </div>
                                                 </div>
@@ -217,11 +245,11 @@
                                              </div>
                                              <div class="team-item-right team-member-info-wrp">
                                                 <div class="team-name">
-                                                   <h5><?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->name; ?></h5>
+                                                   <h5><?php // echo $content['field_research_author']['#items'][0]['taxonomy_term']->name; ?></h5>
                                                    <span>
                                                       <div class="field field-name-field-team-position field-type-text field-label-hidden">
                                                          <div class="field-items">
-                                                            <div class="field-item even"><?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_education['und'][0]['value']; ?>
+                                                            <div class="field-item even"><?php // echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_education['und'][0]['value']; ?>
                                                             </div>
                                                          </div>
                                                       </div>
@@ -232,13 +260,13 @@
                                                    <div class="field field-name-body field-type-text-with-summary field-label-hidden">
                                                       <div class="field-items">
                                                          <div class="field-item even" property="content:encoded">
-                                                            <p><?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_bio['und'][0]['value']?></p>
+                                                            <p><?php // echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_bio['und'][0]['value']?></p>
                                                          </div>
                                                       </div>
                                                    </div>
                                                    </p>
                                                 </div>
-                                                <!--<div class="team-email">
+                                                <div class="team-email">
                                                    <i class="icon-envelope"></i> 
                                                    <div class="field field-name-field-team-email field-type-text field-label-hidden">
                                                       <div class="field-items">
@@ -248,7 +276,7 @@
                                                          </div>
                                                       </div>
                                                    </div>
-                                                </div>-->
+                                                </div>
                                              </div>
                                              <div class="clearfix"></div>
                                           </div>
@@ -260,17 +288,16 @@
                         </div>
                      </div>
                   </div>
-                  <?php endif; ?>
-                  <!----line--->
-                  <?php if(sizeof($content['field_research_author']['#items'])>1): ?>
+                  <?php //endif; ?>
+ 
+                  <?php //if(sizeof($content['field_research_author']['#items'])>1): ?>
                   <div class="content">
                      <div class="view view-team view-id-team view-display-id-block_7 view-dom-id-4ff5a51ef6d43d50dc3f1537f4ee9ee1">
                         <div class="view-content">
-						 
-						
+						 	
                            <div id="team-block-7" class="dexp-bxslider">
-                              <?php $number = sizeof($content['field_research_author']['#items']);
-                                 for($i=0; $i<$number; $i++):
+                              <?php //$number = sizeof($content['field_research_author']['#items']);
+                                 //for($i=0; $i<$number; $i++):
                                    ?>
                               <div class="bxslide bx-clone" style="float: left; list-style: none; position: relative; width: 270px; margin-right: 20px;">
                                  <div id="node-14" class="node node-team node-teaser view-mode-teaser clearfix" about="/evolve/content/jane-smith-0" typeof="sioc:Item foaf:Document">
@@ -281,8 +308,8 @@
                                              <div class="field field-name-field-team-image field-type-image field-label-hidden">
                                                 <div class="field-items">
                                                    <div class="field-item even">
-                                                      <?php $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();$imgLink = $link.$base_path."sites/default/files/".$content['field_research_author']['#items'][0]['taxonomy_term']->field_profile_picture['und'][0]['filename'];  
-                                                         echo "<img src='".$imgLink."'/>"; ?>
+                                                      <?php //$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();$imgLink = $link.$base_path."sites/default/files/".$content['field_research_author']['#items'][0]['taxonomy_term']->field_profile_picture['und'][0]['filename'];  
+                                                         //echo "<img src='".$imgLink."'/>"; ?>
                                                    </div>
                                                 </div>
                                              </div>
@@ -290,11 +317,11 @@
                                           </div>
                                           <div class="team-item team-member-info-wrp">
                                              <div class="team-name">
-                                                <h5><?php echo $content['field_research_author']['#items'][$i]['taxonomy_term']->name; ?></h5>
+                                                <h5><?php //echo $content['field_research_author']['#items'][$i]['taxonomy_term']->name; ?></h5>
                                                 <span>
                                                    <div class="field field-name-field-team-position field-type-text field-label-hidden">
                                                       <div class="field-items">
-                                                         <div class="field-item even"><?php echo $content['field_research_author']['#items'][$i]['taxonomy_term']->field_education['und'][0]['value']; ?></div>
+                                                         <div class="field-item even"><?php //echo $content['field_research_author']['#items'][$i]['taxonomy_term']->field_education['und'][0]['value']; ?></div>
                                                       </div>
                                                    </div>
                                                 </span>
@@ -304,7 +331,7 @@
                                                 <div class="field field-name-body field-type-text-with-summary field-label-hidden">
                                                    <div class="field-items">
                                                       <div class="field-item even" property="content:encoded">
-                                                         <p><?php echo $content['field_research_author']['#items'][$i]['taxonomy_term']->field_bio['und'][0]['value']?></p>
+                                                         <p><?php //echo $content['field_research_author']['#items'][$i]['taxonomy_term']->field_bio['und'][0]['value']?></p>
                                                       </div>
                                                    </div>
                                                 </div>
@@ -315,7 +342,7 @@
                                                 <div class="field field-name-field-team-email field-type-text field-label-hidden">
                                                    <div class="field-items">
                                                       <div class="field-item even">
-                                                         <?php echo $content['field_research_author']['#items'][$i]['taxonomy_term']->field_emailauthor['und'][0]['value']; ?>
+                                                         <?php //echo $content['field_research_author']['#items'][$i]['taxonomy_term']->field_emailauthor['und'][0]['value']; ?>
                                                       </div>
                                                    </div>
                                                 </div>
@@ -326,21 +353,17 @@
                                     </div>
                                  </div>
                               </div>
-                              <?php endfor; ?>
-                           </div>
-						   
-						   
-						   
+                              <?php //endfor; ?>
+                           </div>	   
                         </div>
                      </div>
                   </div>
-                  <?php endif; ?>
-                  <!--line-->
+                  <?php //endif; ?>
+
                </div>
             </div>
          </div>
       </div>
    </div>
-   <!---line-->
-   <!----line--->
+
 </div>

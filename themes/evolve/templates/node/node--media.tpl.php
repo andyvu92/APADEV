@@ -79,6 +79,7 @@
 * @ingroup themeable
 */
 ?>
+
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>	
 	<div class="post-img media mobile">
         <div class='mediaholder fullwidthimage'>
@@ -87,7 +88,6 @@
 	</div>
 	
 	<h1 class="SectionHeader"><?php print $title; ?></h1>
-    <div class="brd-headling">&nbsp;</div>
 
 	<header class="meta">
         <div class="flex-container post-meta">

@@ -79,8 +79,10 @@
 * @ingroup themeable
 */
 ?>
+<?php $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();?>
+
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large MediaListing" <?php print $attributes; ?>>
-    <div class="post-img media">
+    <div class="post-img media"style="background:url(<?php echo $imgLink = $link.$base_path."sites/default/files/".str_replace("public://","",$node->field_research_article_image['und'][0]['uri']);?>)">
       <div class='mediaholder'>
         <?php print render($content['field_research_article_image']);?>
       </div>

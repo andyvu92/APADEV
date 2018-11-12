@@ -162,7 +162,6 @@ jQuery(document).ready(function() {
       $('html, body').stop().animate({
         scrollTop: target.offset().top - $('#section-header').height()
       }, 1000, function(){
-        window.location.href = alt_target;
         $('html, body').stop().animate({
           scrollTop: target.offset().top - $('#section-header').height()
         }, 0);
@@ -171,7 +170,6 @@ jQuery(document).ready(function() {
       $('html, body').stop().animate({
         scrollTop: target.offset().top
       }, 1000, function(){
-        window.location.hash = alt_target;
         $('html, body').stop().animate({
           scrollTop: target.offset().top
         }, 0);
@@ -186,24 +184,16 @@ jQuery(function ($) {
   var someId = $(".dexp-grid-items .portfolio-image .content");
   someId.css('background', function () {
       return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
-  })
-}) 
+  });
+}); 
 
 //SET BACKGROUND FOR EACH MEDIA ARTICLE CONTENT SIDEBAR
 jQuery(function ($) {
   var someId = $(".node-inmotion .file-image .content, .node-home-news-tiles .file-image .content");
   someId.css('background', function () {
       return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
-  })
-}) 
-
-//SET BACKGROUND FOR EACH MEDIA/RESEARCH ARTICLE CONTENT SIDEBAR
-jQuery(function ($) {
-  var target = $(".node-media .post-img, .node-research-article .post-img");
-  target.css('background', function () {
-      return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
-  })
-}) 
+  });
+}); 
 
 //REMOVE RED BORDER ON FIELD VALIDATION
 jQuery(document).ready(function() {

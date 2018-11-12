@@ -750,6 +750,10 @@ body .block .media_filter, body .media_filter{
 	.node-media{
 		margin-top: 0;
 		padding-top: 0;
+		padding-right: 50px;
+		@media @larger-tablet-width-down{
+			padding-right: 0;
+		}
 		/* POST FEATURED IMAGE */
 		.post-img{
 			&.mobile{
@@ -1059,7 +1063,7 @@ body .block .media_filter, body .media_filter{
 					flex-direction: column;
 					border-top: 1px solid rgba(0,0,0,0.12);
 					border-bottom: 1px solid rgba(0,0,0,0.12);
-					padding: 10px 0 15px;
+					padding: 15px 0 15px;
 					.meta-info{
 						width: 100%;
 					}
