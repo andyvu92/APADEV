@@ -209,7 +209,7 @@
                                                    <div class="field-items">
                                                       <div class="field-item even">
                                                          <?php   $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();$imgLink = $link.$base_path."sites/default/files/".$content['field_research_author']['#items'][0]['taxonomy_term']->field_profile_picture['und'][0]['filename']; 
-                                                            echo "<img src='".$imgLink."'/>"; ?>
+                                                            echo "<img class='display-none' src='".$imgLink."'/>"; ?>
                                                       </div>
                                                    </div>
                                                 </div>
@@ -282,7 +282,7 @@
                                                 <div class="field-items">
                                                    <div class="field-item even">
                                                       <?php $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";$base_path = base_path();$imgLink = $link.$base_path."sites/default/files/".$content['field_research_author']['#items'][0]['taxonomy_term']->field_profile_picture['und'][0]['filename'];  
-                                                         echo "<img src='".$imgLink."'/>"; ?>
+                                                         echo "<img class='display-none' src='".$imgLink."'/>"; ?>
                                                    </div>
                                                 </div>
                                              </div>
