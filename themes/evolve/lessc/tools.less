@@ -21,6 +21,11 @@
 /*-- TOOL LAYOUT --*/
 .page-node-510{
     #block-block-292{
+        @media @tablet-width-down{
+            .img-parallax{
+                display: none;
+            }
+        }
         .top-banner{
             padding: 150px 30px 80px;
             max-width: 680px;
@@ -66,7 +71,7 @@
                 padding: 200px 15% 2%;
             }
             @media all and (max-width: @larger-phone-width){
-                padding: 150px 10% 2%;
+                padding: 100px 10% 5%;
                 .page-main-header{
                     font-size: 3em;
                 }
@@ -103,14 +108,13 @@
             background-size: 130%;
             background-position: 50% 0% !important;
                 .top-banner{
-                    background-image: linear-gradient(to top,#000000 0%,#000000 40%,#000000 52%,rgba(255,255,255,0) 85%);                
-                .separator{
-                    margin: 10px 0;
+                    .separator{
+                        margin: 10px 0;
+                    }
+                    .page-main-header{
+                        font-size: 2.5em;
+                    }
                 }
-                .page-main-header{
-                    font-size: 2.5em;
-                }
-            }
         }
     }
 

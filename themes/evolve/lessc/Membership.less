@@ -833,7 +833,7 @@ table.MTtable td {
 .page-node-108, .page-node-155, .page-node-109{
     #block-block-137{
         .top-banner{
-            padding: 200px 25% 2%;
+            padding: 100px 25% 2%;
             .page-main-header{
                 color: #fff;
                 font-family: Cairo;
@@ -870,12 +870,16 @@ table.MTtable td {
                 border: 1px #fff solid;
                 transform: scale(0.7);
                 margin: 25px auto 15px;
-            }
+			}
+			@media @larger-tablet-width-down{
+				.img-parallax{
+					display: none;				}
+			}
             @media all and (max-width: @larger-tablet-width){
-                padding: 200px 15% 2%;
+                padding: 100px 15% 2%;
             }
             @media all and (max-width: @larger-phone-width){
-				padding: 150px 10% 2%;
+				padding: 100px 10% 2%;
 				.img-parallax{
 					display: none;
 				}
