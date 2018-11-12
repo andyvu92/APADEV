@@ -187,7 +187,27 @@
       <div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
 
       </div>
-<span class="hide"></span>
+
+    <div class="space-30"></div>
+
+    <div class="featured-block">
+        <h4>About the author/s</h4>
+
+        <?php if(sizeof($content['field_research_author']['#items'])==1): ?>
+        <div class="author">
+            <p class="author-name"><?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->name; ?></p>
+            <p class="author-education"><?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_education['und'][0]['value']; ?></p>
+            <div class="author-bio"><?php echo $content['field_research_author']['#items'][0]['taxonomy_term']->field_bio['und'][0]['value']?></div>
+        </div>
+        <?php endif; ?>
+
+        <?php //if(sizeof($content['field_research_author']['#items'])>1): ?>
+
+        <?php //endif; ?>
+    </div>
+
+    <div class="space-50"></div>
+
       <div class="region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
          <!--<h3 class="headline">RELATED ARTICLES</h3>
          <span class="brd-headling"></span>-->
