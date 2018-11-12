@@ -56,9 +56,10 @@
 				<input class="form-control" id="Fid" name="Fid" onchange="checkEmailFunction(this.value)" placeholder="Email address" type="text">
 			</div>
 			<div id="checkMessage" class="display-none">
-			<span>Oops! The email you entered does not exist.</span>
-			<span>Please try another email address or join the APA today.</span>
+				<span>Oops! The email you entered does not exist.</span>
+				<span>Please try another email address or join the APA today.</span>
 			</div>
+			
 		</div>
 
 		<div class="flex-cell submit-btn">
@@ -71,13 +72,17 @@
 	jQuery(document).ready(function(){
 		$('#checkpassword').click(function(){
 			if($("#Fid").val()=="") {
-				return false; 
+				emptyMessage = '<div class="checkMessage"><span>Email field cannot be empty.</span></div>';
+				$('#checkMessage').after(emptyMessage);
+				return false;
 			}
 		});
 				
 		var targetKey = "@";
 
 		$('#Fid').keyup(function(event) {
+			$('.checkMessage').remove();
+			
 		if($('#Fid').val() == targetKey) {
 			email = $('#Fid').val();
 			jQuery.ajax({

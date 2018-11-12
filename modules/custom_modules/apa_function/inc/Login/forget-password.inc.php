@@ -68,6 +68,8 @@
 	jQuery(document).ready(function(){
 		$('#checkpassword').click(function(){
 			if($("#Fid").val()=="") {
+				emptyMessage = '<div class="checkMessage"><span>Email field cannot be empty.</span></div>';
+				$('#checkMessage').after(emptyMessage);
 				return false; 
 			}
 		});
@@ -75,7 +77,8 @@
 		var targetKey = "@";
 
 		$('#Fid').keyup(function(event) {
-		
+			$('.checkMessage').remove();
+			
 		if($('#Fid').val() == targetKey) {
 			email = $('#Fid').val();
 			jQuery.ajax({

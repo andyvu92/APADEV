@@ -60,6 +60,14 @@ jQuery(document).ready(function($) {
 			event.preventDefault();
 			$('html, body').stop();
 		}
+
+		//STOP PAGE SCROLLING ON TAB CONTENT
+		if ( $(this).attr('data-toggle') ) {
+			event.preventDefault();
+			$('html, body').stop();
+		}
+
+
 	});
 
 	// smooth scroll to the anchor id
