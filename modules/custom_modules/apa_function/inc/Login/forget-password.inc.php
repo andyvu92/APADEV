@@ -31,7 +31,7 @@
 			count--;
 			timer.innerHTML = count;
 			setTimeout("countDown()", 1000);
-			console.log(count);
+			
 		}else{
 			window.location.href = "/";
 		}
@@ -66,9 +66,16 @@
 </form>
 <script>
 	jQuery(document).ready(function(){
+		$('#checkpassword').click(function(){
+			if($("#Fid").val()=="") {
+				return false; 
+			}
+		});
+				
 		var targetKey = "@";
 
 		$('#Fid').keyup(function(event) {
+		
 		if($('#Fid').val() == targetKey) {
 			email = $('#Fid').val();
 			jQuery.ajax({

@@ -62,13 +62,19 @@
 		</div>
 
 		<div class="flex-cell submit-btn">
-			<input type="submit" value="Submit">
+			<input id="checkpassword" type="submit" value="Submit">
 		</div>
 		
 	</div>
 </form>
 <script>
 	jQuery(document).ready(function(){
+		$('#checkpassword').click(function(){
+			if($("#Fid").val()=="") {
+				return false; 
+			}
+		});
+				
 		var targetKey = "@";
 
 		$('#Fid').keyup(function(event) {
