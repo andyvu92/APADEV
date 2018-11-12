@@ -157,7 +157,6 @@ function PasswordFunction(ps){
 	}
 	else{
 		$('#PasswordMessage').html("");
-		$( "#NPassword" ).blur();
 		$("#NPassword").css("border", "");
 		$("#saveNA").removeClass("stop");
 	}					
