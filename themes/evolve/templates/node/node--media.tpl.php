@@ -162,9 +162,12 @@
 
 	<div class="space-50">&nbsp;</div>
 
-	<p><b>Related tags</b></p>
-
-	<?php print render($content['field_media_tag']); ?>
+	<?php 
+	if (!empty($content['field_media_tag'])) {
+		echo "<p><b>Related tags</b></p>";
+		print render($content['field_media_tag']);
+	}
+	 ?>
 
 	<div class="space-50">&nbsp;</div>
 
