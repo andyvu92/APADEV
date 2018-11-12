@@ -238,13 +238,14 @@ if(isset($results['MResponse'])) {
 					}
 				}
 			}
-			if($current != $max) {
+			if($current != $max1) {
 				echo '<a href="'.$base_url.'/pd/pd-search?page='.($current + 1).'&pagesize='.$numItem.$passString.'"><div class="Pagebutton">></div></a>';
 			} else {
-				echo '<a href="'.$base_url.'/pd/pd-search?page='.$max.'&pagesize='.$numItem.$passString.'"><div class="Pagebutton">></div></a>';
+				//echo '<a href="'.$base_url.'/pd/pd-search?page='.$max1.'&pagesize='.$numItem.$passString.'"><div class="Pagebutton">></div></a>';
 			}
-			if($back >= $max) {
-				echo '<a href="'.$base_url.'/pd/pd-search?page='.$max.'&pagesize='.$numItem.$passString.'"><div class="Pagebutton">>></div></a></div>';
+			if($back >= $max1) {
+				//echo '<a href="'.$base_url.'/pd/pd-search?page='.$max1.'&pagesize='.$numItem.$passString.'"><div class="Pagebutton">>></div></a></div>';
+				echo "</div>";
 			} else {
 				echo '<a href="'.$base_url.'/pd/pd-search?page='.$back.'&pagesize='.$numItem.$passString.'"><div class="Pagebutton">>></div></a></div>';
 			}
