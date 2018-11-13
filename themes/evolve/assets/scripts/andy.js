@@ -801,7 +801,7 @@ jQuery(document).ready(function(){
       }
     });
 
-    // HIDE DASHBOARD DELETE PAYMENT CARD IF CARD OPTION IS EMPTY
+    // HIDE DASHBOARD PAYMENT CARD OPTIONS IF CARD OPTION IS EMPTY
     $('select#Paymentcard').each(function(){
       if ( $(this).find('option').length == 0 ){
         $('a.deletecardbutton').remove();
