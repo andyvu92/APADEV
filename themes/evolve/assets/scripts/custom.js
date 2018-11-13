@@ -521,7 +521,7 @@ jQuery(document).ready(function($) {
 			if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 		}
 		if($('.down6:visible').length !== 0){
-				if($('#PRFOther').val()=="0" && $( "#totalPayment").html()=="0"){
+				if($('#PRFOther').val()=="0" && $( "#totalPayment").html()=="0.00"){
 					$("#anothercardBlock").removeClass('show');
 					$("input[name='addCard']").val('0');
 					$('#hiddenPayment').addClass('display-none');
@@ -556,7 +556,7 @@ jQuery(document).ready(function($) {
 				
 			}
 			if($('.down6:visible').length !== 0){
-				if($( "#totalPayment").html()=="0"){
+				if($( "#totalPayment").html()=="0.00"){
 					$("#anothercardBlock").removeClass('show');
 					$("input[name='addCard']").val('0');
 					$('#hiddenPayment').addClass('display-none');
@@ -591,7 +591,7 @@ jQuery(document).ready(function($) {
 				
 			}
 			if($('.down6:visible').length !== 0){
-				if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0"){
+				if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0.00"){
 					$('#hiddenPayment').removeClass('display-none');
 					if($('#Paymentcard:visible').length === 0)	{
 						$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1');
@@ -605,7 +605,7 @@ jQuery(document).ready(function($) {
 	if($('#prftag').val()=="1"){
 		$('#prfselect').slideUp().css('overflow', 'hidden');
 		if($('.down6:visible').length !== 0){
-			if($( "#totalPayment").html()=="0"){$("#anothercardBlock").removeClass('show');$("input[name='addCard']").val('0');$('#hiddenPayment').addClass('display-none');}
+			if($( "#totalPayment").html()=="0.00"){$("#anothercardBlock").removeClass('show');$("input[name='addCard']").val('0');$('#hiddenPayment').addClass('display-none');}
 			else{ if($('#Paymentcard:visible').length === 0)	{$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1'); }}
 				
 		}
@@ -614,7 +614,7 @@ jQuery(document).ready(function($) {
 		$('#prfselect').slideDown().css('overflow', 'unset').delay( 800 );
 		if($('.down6:visible').length !== 0){
 			
-			if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0"){
+			if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0.00"){
 				if($('#Paymentcard:visible').length === 0)	{
 					$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1');}
 			}
