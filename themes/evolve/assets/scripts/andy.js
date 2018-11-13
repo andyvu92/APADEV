@@ -805,6 +805,8 @@ jQuery(document).ready(function(){
     $('select#Paymentcard').each(function(){
       if ( $(this).find('option').length == 0 ){
         $('a.deletecardbutton').remove();
+        $('#setCardButton').remove();
+        $('#addPaymentCard').text('Add a card');
       }
     });
 });
