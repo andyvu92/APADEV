@@ -544,8 +544,11 @@ function apa_create_payment_card_form($form, &$form_state){
 		'#maxlength' => 3,
 		'#required' => TRUE,
 	);
-	//$form['submit'] = array('#type' => 'submit', '#value' => t('Add')); 
-	$form['submit'] = array('#type' => 'submit', '#value' => t('Add'), '#submit'=>['add_payment_card']); 
+    //$form['submit'] = array('#type' => 'submit', '#value' => t('Add')); 
+    $form['Message']['notice'] = array(
+        '#markup' => '<div class="form-item form-type-textfield"><span style="font-size: 1.1em;">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</span></div>',
+    );
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Add'), '#submit'=>['add_payment_card']); 
 	return $form;
 }
 function add_payment_card($form, &$form_state){

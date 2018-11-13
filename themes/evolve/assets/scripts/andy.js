@@ -562,9 +562,6 @@ jQuery(document).ready(function(){
     //Destroy the key
     localStorage.removeItem("firstVisit");
   });
-
-
-  //PD MOBILE BANNER
   
 });
 

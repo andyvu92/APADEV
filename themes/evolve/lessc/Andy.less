@@ -61,6 +61,12 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
                     }
                 }
                 &:hover{
+                    .content .item-description .MonlyIconHolder .MonlyIcon{
+                        background-image: url('/sites/default/files/dashboard-icon/account-B.png');
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: unset;
+                    }
                     .portfolio-image{
                         img{
                             transform: scale3d(1.1,1.1,1);
@@ -2511,7 +2517,7 @@ body .block, body{
     }
     b, strong{
         padding-top: 10px;
-        display: inline-block; 
+        display: inline; 
     }
     a{
         color: @bright-blue;
@@ -2629,6 +2635,9 @@ body .block, body{
             font-family: Roboto;
             font-size: 18px;
             color: #000;
+            &[type="submit"]{
+                color: #fff;
+            }
         }
     }
 }

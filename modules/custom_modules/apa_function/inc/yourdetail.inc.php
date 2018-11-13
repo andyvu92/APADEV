@@ -2006,6 +2006,8 @@ apa_function_dashboardLeftNavigation_form();
 			</div>
 		<div class="col-xs-12" id="your-details-button">   <button type="submit" id="your-details-submit-button" ><span class="dashboard-button-name">Submit</span></button></div>
 	</form>
+
+	<!-- UPDATE PASSWORD -->
 		<form id="changePasswordForm">
 			<div class="down7" style="display:none;" >
 				<div class="row">
@@ -2026,7 +2028,12 @@ apa_function_dashboardLeftNavigation_form();
 				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="padding:0;">   <button  class="dashboard-button dashboard-bottom-button change-password-button"><span class="dashboard-button-name">Save</span></button></div>
 			</div>
 		</form>
-		<div id="addPaymentCardForm" style="display:none;">
+	<!-- END UPDATE PASSWORD -->
+
+		<!-- ADD PAYMENT CARD FORM -->
+	<div id="addPaymentCardForm-container" style="display:none;">
+		<span class="close-popup"></span>
+		<div id="addPaymentCardForm">
 			<!--<form action="/your-details?action=addcard" method="POST" id="formaddcard">
 				<div class="row"><div class="col-xs-12"><h3 style="color:#000; margin-top: 0" class="light-lead-heading cairo">Add a new card:</h3></div></div>
 				<div class="row">
@@ -2096,6 +2103,10 @@ apa_function_dashboardLeftNavigation_form();
              print drupal_render($the_form);			 
 			?>
 		</div>
+	</div>
+	<!-- END ADD PAYMENT CARD FORM -->
+
+		<!-- ROLL OVER POPUP -->
 		<div id="rollOverWindow" style="display:none;">
 			<form action="your-details?action=rollover" method="POST" id="rollOverForm">
 				<h3>Are you sure you do want to change roll over status next year?</h3>
@@ -2105,6 +2116,9 @@ apa_function_dashboardLeftNavigation_form();
 				<a target="_self" class="cancelDeleteButton">No</a>
 			</form>
 		</div>
+		<!-- END ROLL OVER POPUP -->
+
+		<!-- DELETE PAYMENT CARD POPUP -->
 		<div id="deleteCardWindow" style="display:none;">
 			<form action="your-details" method="POST" id="deleteCardForm">
 				<h3 id="deletecardMessage" class="light-lead-heading cairo">Are you sure you want to delete this card?</h3>
@@ -2119,6 +2133,9 @@ apa_function_dashboardLeftNavigation_form();
 				</div>
 			</form>
 		</div>
+		<!-- END DELETE PAYMENT CARD POPUP -->
+
+		<!-- SET PAYMENT CARD POPUP -->
 		<div id="setCardWindow" style="display:none;">
 			<form action="your-details" method="POST" id="setCardForm">
 				<h3 class="light-lead-heading cairo">Are you sure you do want to save this card for future purposes?</h3>
@@ -2129,6 +2146,9 @@ apa_function_dashboardLeftNavigation_form();
 				</div>
 			</form>
 		</div>
+		<!-- END SET PAYMENT CARD POPUP -->
+
+		<!-- UPDATE PAYMENT CARD POPUP -->	
 		<div id="updateCardForm" style="display:none;">
 			<form action="/your-details?action=updatecard" method="POST" id="updatecard">
 				<div class="row"><div class="col-xs-12">Update your card:</div></div>
@@ -2157,7 +2177,10 @@ apa_function_dashboardLeftNavigation_form();
 					<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Save</button></a>
 				</div>
 			</form>
-	    </div>
+		</div>
+		<!-- END UPDATE PAYMENT CARD POPUP -->
+
+		<!-- DELETE WORKPLACE POPUP -->
 		<div id="deleteWorkplaceWindow" style="display:none;">
 			<form action="your-details" method="POST" id="deleteWorlplaceForm">
 				<div class="flex-cell">
@@ -2170,6 +2193,9 @@ apa_function_dashboardLeftNavigation_form();
 				</div>
 			</form>
 		</div>
+		<!-- END DELETE WORKPLACE POPUP -->
+
+		<!-- DELETE QUALIFICATION POPUP -->
 		<div id="confirmDelete" style="display:none;">
 				<div class="flex-cell">
 					<h3 class="light-lead-heading cairo">Are you sure you want to delete this qualification record?</h3>
@@ -2179,6 +2205,8 @@ apa_function_dashboardLeftNavigation_form();
 					<a class="cancelDeleteButton" value="no" target="_self">No</a>
 				</div>
 		</div>
+		<!-- END DELETE WORKPLACE POPUP -->
+
 	</div>
 	</div>
 	</div>

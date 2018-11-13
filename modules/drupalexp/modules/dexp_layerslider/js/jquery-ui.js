@@ -9661,7 +9661,7 @@ $.widget( "ui.dialog", {
 		appendTo: "body",
 		autoOpen: true,
 		buttons: [],
-		closeOnEscape: true,
+		closeOnEscape: false,
 		closeText: "close",
 		dialogClass: "",
 		draggable: true,
