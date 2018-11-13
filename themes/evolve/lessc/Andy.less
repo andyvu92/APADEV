@@ -2881,22 +2881,29 @@ body .block, body{
     }
 }
 
+.Pagination{
+    display: none;
+}
 /* DEFAULT PAGINATION */
-.pagination.pager{
-    > li{
-        padding: 0;
-        float: left;
-        margin: 0;
-        border: 0;
-        font-size: 1.1em;
-        > a{
-            padding: 5px 10px;
+.pagination{
+    display: none;
+    &.pager{
+        display: block;
+        > li{
+            padding: 0;
+            float: left;
+            margin: 0;
             border: 0;
-            color: #333;
-            transition: all .3s linear;
-            &:hover{
-                color: @bright-blue;
-                background: none;
+            font-size: 1.1em;
+            > a{
+                padding: 5px 10px;
+                border: 0;
+                color: #333;
+                transition: all .3s linear;
+                &:hover{
+                    color: @bright-blue;
+                    background: none;
+                }
             }
         }
     }
