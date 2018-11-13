@@ -331,7 +331,7 @@ include the following div to the template where overlay is needed
 /*--------------- POPUPS ORIGIN ------------------*/
 div[id="jobnoticement"], div[id="processWindow"], 
 div[id="registerPDUser"], div[id="popUpWindow"], 
-div[id="deleteConfirmwindow"], div[id="registerMember"], 
+div[id="deleteConfirmwindow"], div[id="registerMember"],
 div[id="loginPopWindow"],div[id="myMap"], div[id="signupWebUser"],
 #insuranceTermsandConditions{
     display:none;
@@ -378,7 +378,7 @@ div[aria-describedby="myMap"] .ui-widget-header{
 }
 
 /* JOIN/RENEW FORMS - ADD PAYMENT CART */
-div[aria-describedby="addPaymentCardForm"].ui-dialog {
+#addPaymentCardForm-container{
     .small-popup;
     padding: 30px;
     top: calc(~'50vh - 332px')!important;
@@ -388,6 +388,27 @@ div[aria-describedby="addPaymentCardForm"].ui-dialog {
     input[type="text"]{
         background: #fff;
     }
+    input[type="submit"]{
+        float: none;
+        display: inline-block;
+        margin-bottom: 10px;
+        margin-top: 4px;
+        background-color: @bright-blue;
+        border-width: 0px;
+        padding: 3px 20px;
+        color: #fff !important;
+        font-size: 15px;
+        font-weight: 700;
+        font-family: 'Cairo';
+        min-width: 110px;
+        letter-spacing: 0.5px;
+        text-align: center;
+        &:hover{
+            color: #fff;
+            opacity: 0.9;
+            cursor: pointer;
+        }
+    }
     div[class^="col-"]{
         margin-top: 8px;
     }
@@ -395,7 +416,7 @@ div[aria-describedby="addPaymentCardForm"].ui-dialog {
         margin-bottom: 6px;
     }
     @media all and (max-width: @larger-phone-width) {
-        padding: 10px;
+        padding: 20px 10px 10px;
         top: calc(~'50vh - 312px')!important;
         .light-lead-heading{
             font-size: 2em;
@@ -414,7 +435,7 @@ div[aria-describedby="addPaymentCardForm"].ui-dialog {
 }
 
 /* MEMBERSHIP DASHBOARD - USER AVATAR - UPLOAD IMAGE */
-div[aria-describedby="uploadImage"].ui-dialog {
+#uploadImage-container {
     z-index: 1050 !important;
     position: fixed!important;
     left: calc(~"50% - 175px") !important;
@@ -425,6 +446,10 @@ div[aria-describedby="uploadImage"].ui-dialog {
     max-width: 350px;
     min-width: 350px;
     font-family: Roboto;
+    background: #fff;
+    .close-popup{
+        .small-popup .close-popup;
+    }
     .ui-resizable-handle.ui-icon-gripsmall-diagonal-se{
         display: none!important;
     }

@@ -840,9 +840,8 @@ jQuery(document).ready(function($) {
 		if ( $('.html').find('.overlay').length == 0 ){
             $('.html').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
         }
-		$( "#uploadImage" ).dialog();
+		$( "#uploadImage-container" ).fadeIn();
 		$('.overlay').fadeIn();
-		$('div[aria-describedby="uploadImage"].ui-dialog').hide().fadeIn();
 	});
 
 	$(document).on('click', 'div[aria-describedby="uploadImage"].ui-dialog .ui-dialog-titlebar-close', function(){
@@ -852,7 +851,7 @@ jQuery(document).ready(function($) {
 
 	$('#addPaymentCard').click(function(){
 		$('.overlay').fadeIn();
-		$( "#addPaymentCardForm" ).dialog().fadeIn();
+		$( "#addPaymentCardForm-container").fadeIn();
 	});
 	 
 	$('[aria-describedby="addPaymentCardForm"] .ui-dialog-titlebar-close').click(function(){

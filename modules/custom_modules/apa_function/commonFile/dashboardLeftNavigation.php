@@ -116,57 +116,61 @@ if(isset($_SESSION["UserId"])) {
 		</ul>
 	</div>
 </div >
-<div id="uploadImage" style="display:none;">
-	<form action="<?php echo $url;?>" method="POST" enctype="multipart/form-data">
-		<div class="avatar-upload">
-			<div class="avatar-edit">
-				<input type='file' id="imageUpload" name="fileToUpload" accept=".png, .jpg, .jpeg" />
-				<label for="imageUpload"></label>
-			</div>
-			<div class="avatar-preview">
-				<div id="imagePreview" style="background-image: url(/sites/default/files/dashboard-icon/upload-image-placeholder.png);">
+
+<!-- UPLOAD IMAGE POPUP -->
+<div id="uploadImage-container" style="display:none;">
+	<span class="close-popup"></span>
+	<div id="uploadImage">
+		<form action="<?php echo $url;?>" method="POST" enctype="multipart/form-data">
+			<div class="avatar-upload">
+				<div class="avatar-edit">
+					<input type='file' id="imageUpload" name="fileToUpload" accept=".png, .jpg, .jpeg" />
+					<label for="imageUpload"></label>
+				</div>
+				<div class="avatar-preview">
+					<div id="imagePreview" style="background-image: url(/sites/default/files/dashboard-icon/upload-image-placeholder.png);">
+					</div>
 				</div>
 			</div>
-		</div>
-		<input id="upload-btn" type="submit" value="Save image" name="PictureUpdate">
-		<div id="checkMessage" class="display-none">
-			<span>Oops! The image you uploaded is too big.</span></br>
-			<span>Please make sure it's less than 2MB in size.</span>
-		</div>
-		<script>
-			function readURL(input) {
-			if (input.files && input.files[0]) {
-				var reader = new FileReader();
-				reader.onload = function(e) {
-					$('#imagePreview').css('background-image', 'url('+e.target.result +')');
-					$('#imagePreview').hide();
-					$('#imagePreview').fadeIn(650);
-				}
-				reader.readAsDataURL(input.files[0]);
-			}
-			}
-			$("#imageUpload").change(function() {
-				readURL(this);
-			});
-
-			$(document).ready(function () {
-				$('#imageUpload').change(function () {
-					if (this.files.length > 0) {
-						$.each(this.files, function (index, value) {
-							if( Math.round((value.size / 1024)) > 2000 ){
-								$('#uploadImage #checkMessage').removeClass('display-none');
-								$('#uploadImage #upload-btn').prop( "disabled", true );
-							}
-							else{
-								$('#uploadImage #checkMessage').addClass('display-none');
-								$('#uploadImage #upload-btn').prop( "disabled", false );
-							}
-						});
+			<input id="upload-btn" type="submit" value="Save image" name="PictureUpdate">
+			<div id="checkMessage" class="display-none">
+				<span>Oops! The image you uploaded is too big.</span></br>
+				<span>Please make sure it's less than 2MB in size.</span>
+			</div>
+			<script>
+				function readURL(input) {
+				if (input.files && input.files[0]) {
+					var reader = new FileReader();
+					reader.onload = function(e) {
+						$('#imagePreview').css('background-image', 'url('+e.target.result +')');
+						$('#imagePreview').hide();
+						$('#imagePreview').fadeIn(650);
 					}
+					reader.readAsDataURL(input.files[0]);
+				}
+				}
+				$("#imageUpload").change(function() {
+					readURL(this);
 				});
-			});
-		</script>
-	</form>
+
+				$(document).ready(function () {
+					$('#imageUpload').change(function () {
+						if (this.files.length > 0) {
+							$.each(this.files, function (index, value) {
+								if( Math.round((value.size / 1024)) > 2000 ){
+									$('#uploadImage #checkMessage').removeClass('display-none');
+									$('#uploadImage #upload-btn').prop( "disabled", true );
+								}
+								else{
+									$('#uploadImage #checkMessage').addClass('display-none');
+									$('#uploadImage #upload-btn').prop( "disabled", false );
+								}
+							});
+						}
+					});
+				});
+			</script>
+		</form>
+	</div>
 </div>
-<!-----this is for dialog function JS--->
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- END UPLOAD IMAGE POPUP -->
