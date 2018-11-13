@@ -78,6 +78,16 @@
 		<?php print $styles; ?>
 		<?php print $scripts; ?>
 	<script type="text/javascript" src="/sites/all/themes/evolve/assets/scripts/Map.js"></script>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-32728465-9"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-32728465-9');
+		</script>
+
 	</head>
 	<?php
 	// variables changed TODO
