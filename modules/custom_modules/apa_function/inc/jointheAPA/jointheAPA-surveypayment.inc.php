@@ -405,6 +405,7 @@ if(isset($_POST['step2-1'])) {
 		</div>
 			<input type="hidden" name="addCard" value="0">
 		</div>
+		<div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</div>
 		</div>
 	<?php endif; ?>  
 	<?php if (sizeof($cardsnum["results"])==0): ?> 
@@ -455,7 +456,7 @@ if(isset($_POST['step2-1'])) {
 			<!--<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Save this card</label>-->
 			<input type="hidden" name="addCard" value="1">
 		</div>
-
+		<div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</div>
 	</div>
 	<?php endif; ?>  
 		<div class="row">
