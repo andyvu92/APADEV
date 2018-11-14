@@ -2647,6 +2647,9 @@ body .block, body{
     position: relative;
     @media @larger-tablet-width-down{
         display: none;
+        &.pd-sidebar{
+            display: block;
+        }
     }
         .block{
             margin-bottom: 40px;
@@ -2875,6 +2878,11 @@ body .block, body{
             &:first-child{
                 a{
                     border-top: 0;
+                }
+            }
+            &:last-child{
+                a{
+                    border-bottom: 1px solid rgba(0,0,0,0.1);
                 }
             }
         }
