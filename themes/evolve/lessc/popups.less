@@ -331,7 +331,7 @@ include the following div to the template where overlay is needed
 /*--------------- POPUPS ORIGIN ------------------*/
 div[id="jobnoticement"], div[id="processWindow"], 
 div[id="registerPDUser"], div[id="popUpWindow"], 
-div[id="deleteConfirmwindow"], div[id="registerMember"],
+div[id="deleteConfirmwindow"], #registerMember-container,
 div[id="loginPopWindow"],div[id="myMap"], div[id="signupWebUser"],
 #insuranceTermsandConditions{
     display:none;
@@ -1026,48 +1026,23 @@ div[aria-describedby="registerPDUser"].ui-dialog {
     }
 }
 
-div[aria-describedby="registerMember"].ui-dialog{
-    z-index: 1055 !important;
-    position: fixed!important;
-    top: 10vh!important;
-    max-height: 80vh;
-    left: calc(~"50vw - 350px") !important;
-    width: 700px !important;
+#registerMember-container{
+    .large-popup;
+    z-index: 1055 ;
+    position: fixed;
+    top: 10vh;
+    left: calc(~"50vw - 350px") ;
+    width: 700px ;
     overflow: hidden;
-    .ui-dialog-titlebar-close{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background: none;
-        .ui-button-icon-primary{
-            background-image: none;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            &:before{
-                content: "";
-                position: absolute;
-                width: 15px;
-                height: 2px;
-                transform: rotate(45deg);
-                background: @grey;
-            }
-            &:after{
-                content: "";
-                position: absolute;
-                width: 15px;
-                height: 2px;
-                transform: rotate(-45deg);
-                background: @grey;
-            }
-        }
-    }
-
-/* PD DETAIL - MEMBER REGISTER */
-#registerMember{
+    background: #fff;
+    padding-top: 50px!important;
+    /* PD DETAIL - MEMBER REGISTER */
+    #registerMember{
         overflow-y: auto;
-        max-height: 76vh!important;
+        height: 76vh;
         overflow-x: hidden;
+        padding: 0px 30px 15px;
+        position: relative;
         form{
             select{
                 min-height: 48px;
@@ -1083,6 +1058,19 @@ div[aria-describedby="registerMember"].ui-dialog{
             .locked{
                 &:before{
                     bottom: 20px;
+                }
+                @media @desktop-width-down{
+                    &:before{
+                        bottom: 12px;
+                    }
+                }
+                @media @larger-phone-width-down{
+                    &:before{
+                        display: none;
+                    }
+                    input{
+                        background: #fafafa!important;
+                    }
                 }
             }
             .down22{
@@ -1108,6 +1096,18 @@ div[aria-describedby="registerMember"].ui-dialog{
             .none-padding{
                 margin-left: -15px;
                 margin-right: -15px;
+            }
+        }
+        .light-lead-heading{
+            @media @larger-phone-width-down{
+                font-size: 2em;
+            }
+        }
+        #shippingAddress{
+            margin-top: 15px;
+            .row{
+                margin-left: 0;
+                margin-right: 0;
             }
         }
     }

@@ -771,6 +771,10 @@ $userRetisterStatus = false;
             unset($_SESSION['SurveyData']);
         }
 	  ?>
+
+	<!-- NON-MEMBER ADD TO CARD PD FORM -->
+	<div id="registerMember-container">
+		<span class="close-popup"></span>
 	  <div id="registerMember">
             <form action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" id="registerMemberForm">
 			    <input type="hidden" name="updateDetail">
@@ -927,17 +931,17 @@ $userRetisterStatus = false;
 				</div>
 
 				<div class="row flex-cell flex-flow-row">
-							<div class="col-xs-12 col-sm-12">
+							<div class="flex-col-12">
 								<span class="light-lead-heading cairo" style="font-weight: 200">Billing address</span>
 							</div>
 
-							<div class="col-xs-12 col-sm-12 align-item-end">
+							<div class="flex-col-12 align-item-end">
 								<input class="styled-checkbox" type="checkbox" id="Shipping-address-join" name="Shipping-address-join" value="0">
 								<label style="font-weight: 300;" for="Shipping-address-join">Use my residential address</label>
 							</div>
 				</div>
 
-				<div id="shippingAddress">
+				<div id="shippingAddress" class="row">
 						<div class="row">
 							<div class="col-lg-12">
 								<label for="">Building name</label>
@@ -1034,7 +1038,7 @@ $userRetisterStatus = false;
 					<input type="hidden" name="Mailing-State" value="<?php echo $details['Mailing-state'];?>">
 					<input type="hidden" name="Mailing-country" value="<?php echo $details['Mailing-country'];?>">
 					<!---Hidden mailing address and shipping address End here-->
-					<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button21"><span class="dashboard-button-name">Next</span></a></div>
+					<div class="row"> <a class="join-details-button21"><span class="dashboard-button-name">Next</span></a></div>
 			</div>
 			<div class="down22" style="display:none;">
 				<div class="row">
@@ -1340,8 +1344,13 @@ $userRetisterStatus = false;
 					  </div>
 				</div>
 				   </form>
-            </div>
-        </div>   
+			</div>
+			<!-- END NON-MEMBER ADD TO CARD PD FORM -->
+		</div>
+
+	</div>
+
+
         <?php endif;?>
           	<div id="jobnoticement">
 				<div class="flex-container">
@@ -1949,7 +1958,7 @@ $userRetisterStatus = false;
 						echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
 					}
 				} else { // Not-logged in
-					echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerNonMember"><span>Add to cart</span></a>';
+					echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerNonMember" popup-target="registerMember-container"><span>Add to cart</span></a>';
 				} 
 			}
 		   ?>

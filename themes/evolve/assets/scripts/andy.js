@@ -809,6 +809,12 @@ jQuery(document).ready(function(){
         $('#addPaymentCard').text('Add a card');
       }
     });
+
+    $('#nonAPAhour form').submit(function(){
+      $("#saveNA", this).attr('disabled', 'disabled');
+      return true;
+    });
+
 });
 
 

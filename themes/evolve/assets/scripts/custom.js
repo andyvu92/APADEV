@@ -897,10 +897,7 @@ jQuery(document).ready(function($) {
 	$('#registerPDUserButton').click(function(){
 		$( "#registerPDUser" ).dialog();
     });
-	$('#registerNonMember').click(function(){
-		$('.overlay').fadeIn();
-		$( "#registerMember" ).dialog();
-	});
+
 	$(document).on('click', '.ui-dialog-titlebar-close', function(){
 		$('.overlay').fadeOut();
 	});

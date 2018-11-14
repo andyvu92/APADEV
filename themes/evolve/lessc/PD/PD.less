@@ -644,6 +644,17 @@
     }
 }
 
+.pd{
+    .region{
+        .region{
+            @media @larger-phone-width-down{
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+}
+
 .ui-dialog{
     #registerPDUser{
         label{
@@ -1359,6 +1370,12 @@ body.page-node{
                         font-size: 1.2em;
                         margin-top: 10px;
                         cursor: pointer;
+                        @media @desktop-width-down{
+                            font-size: 1em;
+                        }
+                        @media @larger-tablet-width-down{
+                            font-size: 1.2em;
+                        }
                         &.student-disable{
                             background: none!important;
                             border: 1px solid #fff;
@@ -1530,7 +1547,7 @@ body.page-node{
                           font-size: 1.2em;
                         }
                         .acordian-label {
-                          padding: 10px 30px;
+                          padding: 10px 15px;
                           position: relative;
                           cursor: pointer;
                           margin: 2px 0;
@@ -1575,13 +1592,13 @@ body.page-node{
                       .pd-description-mobile{
                           display: none;
                           p, ul, li{
-                            font-size: 1.2em;
+                            font-size: 1.2em!important;
                             span{
-                                font-size: 1em;
+                                font-size: 1em!important;
                             }
                           }
                           span{
-                              font-size: 1.2em;
+                              font-size: 1.2em!important;
                               font-family: Roboto!important;
                               span{
                                 font-size: 1em!important;
@@ -1594,7 +1611,20 @@ body.page-node{
                       .pd-description-nonmobile{
                           display: block;    
                           p, ul, li, span{
-                            font-size: 1.2em;
+                            font-size: 1.2em!important;
+                          }
+                          p, ul, li{
+                            font-size: 1.2em!important;
+                            span{
+                                font-size: 1em!important;
+                            }
+                          }
+                          span{
+                              font-size: 1.2em!important;
+                              font-family: Roboto!important;
+                              span{
+                                font-size: 1em!important;
+                              }
                           }
                           .readmore{
                             transition: height 0.5s;
@@ -1837,8 +1867,8 @@ div[id^="myCart"] .modal-body a.addCartlink{
 }
 #node-249 .region div {
     padding: 0;
-	
 }
+
 .detailContent div{
     border-bottom: 1px solid lightgray;
     border-right: 1px solid lightgray;
@@ -1972,8 +2002,7 @@ input[value="Sign in"], input[value="Submit"], input[value="Next"]{
 	margin-bottom: -10px;
 }
 #registerMember h4.modal-title, #signupWebUser h4.modal-title{
-    margin-bottom: 11px;
-    margin-left: 13px;
+    margin-bottom: 16px;
 }
 #registerMember .modal-header, #signupWebUser .modal-header{
     border-bottom: none!important;
@@ -2014,9 +2043,6 @@ a#createAccount {
     color: #009fda;
 }
 
-#node-249 div#registerMember{
-    margin-left: -13%!important;
-}
 #node-249 div#registerMember .modal-dialog{
     overflow-x: hidden;
 	width:29%;

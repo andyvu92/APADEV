@@ -895,6 +895,9 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
     .media_filter{
         position: relative;
         min-height: 80px;
+        @media @larger-phone-width-down{
+            padding-top: 20px;
+        }
         nav{
             .nav-mobile-title{
                 display: block;
@@ -908,6 +911,7 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
         }
         ul{
             z-index: inherit;
+            padding-left: 0;
         }
         input{
             display: none;
@@ -1052,6 +1056,7 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
                 ul{
                     li{
                         min-width: 105px;
+                        width: 100%;
                     }
                 }
             }
