@@ -81,11 +81,6 @@
 
 
 ?>
-<?php
-/// tmp re-direct while PD updates the contents
-header("Location: /pd-outage");
-die;
-?>
 <?php 
 
 $userRetisterStatus = false;
