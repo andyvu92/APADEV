@@ -80,7 +80,7 @@
 */
 ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> post" <?php print $attributes; ?>>
-<div class="bottom-space-50 border-10 full-width">&nbsp;</div>
+<div class="bottom-space-50 border-10 full-width"></div>
 <div class="flex-container">
 	<div class="flex-cell">
 

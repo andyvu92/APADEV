@@ -81,11 +81,6 @@
 
 
 ?>
-<?php
-/// tmp re-direct while PD updates the contents
-header("Location: /pd-outage");
-die;
-?>
 <?php 
 
 $userRetisterStatus = false;
@@ -1761,7 +1756,7 @@ $userRetisterStatus = false;
       
 	  
 	  <!--PD RIGHT SIDEBAR-->
-	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3">
+	<div class="region region-right-sidebar pd-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3">
 		<div class="top-banner <?php echo $pd_detail['Typeofpd']; ?>">
 			<span class="pd-type"><?php echo $pd_detail['Typeofpd']; ?></span>
 		</div>
