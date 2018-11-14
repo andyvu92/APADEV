@@ -800,6 +800,15 @@ jQuery(document).ready(function(){
         $(this).find(".post-content .field-item p").text( splittext + '...');
       }
     });
+
+    // HIDE DASHBOARD PAYMENT CARD OPTIONS IF CARD OPTION IS EMPTY
+    $('select#Paymentcard').each(function(){
+      if ( $(this).find('option').length == 0 ){
+        $('a.deletecardbutton').remove();
+        $('#setCardButton').remove();
+        $('#addPaymentCard').text('Add a card');
+      }
+    });
 });
 
 

@@ -2881,22 +2881,29 @@ body .block, body{
     }
 }
 
+.Pagination{
+    display: none;
+}
 /* DEFAULT PAGINATION */
-.pagination.pager{
-    > li{
-        padding: 0;
-        float: left;
-        margin: 0;
-        border: 0;
-        font-size: 1.1em;
-        > a{
-            padding: 5px 10px;
+.pagination{
+    display: none;
+    &.pager{
+        display: block;
+        > li{
+            padding: 0;
+            float: left;
+            margin: 0;
             border: 0;
-            color: #333;
-            transition: all .3s linear;
-            &:hover{
-                color: @bright-blue;
-                background: none;
+            font-size: 1.1em;
+            > a{
+                padding: 5px 10px;
+                border: 0;
+                color: #333;
+                transition: all .3s linear;
+                &:hover{
+                    color: @bright-blue;
+                    background: none;
+                }
             }
         }
     }
@@ -3591,5 +3598,24 @@ body .featured-block{
 #block-block-355{
     @media @larger-phone-width-down{
         margin-bottom: 0;
+    }
+}
+
+/* FIXED LINKED SHARE BUTTON */
+body .socialMediaIcon{
+    li{
+        .IN-widget{
+            span{
+                line-height: 0!important;
+            }
+            button{
+                font-family: Roboto!important;
+                font-style: normal;
+                padding: 0px 8px !important;
+                font-size: 11px!important;
+                font-weight: 500!important;
+                height: 20px!important;
+            }
+        }
     }
 }
