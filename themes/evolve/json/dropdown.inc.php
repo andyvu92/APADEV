@@ -272,7 +272,7 @@ function getDropdown(){
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);
 	// write PDTypes json file
-	$selections = ['Course', 'Lecture', 'Workshops', 'Symposium', 'Forum', 'Member Engagement Event', 'Information session', 'Student Event'];
+	$selections = ['Courses and Workshops', 'Lecture', 'Symposia and Forums', 'Networking Event', 'Information Event', 'Student Event'];
 	foreach($result['PDTypes']  as $lines){
 		if(in_array($lines['Column1'], $selections)) {
 			$ID = $lines['ID'];
