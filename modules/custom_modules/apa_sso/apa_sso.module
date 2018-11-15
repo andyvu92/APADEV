@@ -181,7 +181,8 @@ function apa_get_cm_login_form($form, &$form_state) {
   }
   $form['submit'] = [
     '#type'          => 'submit',
-    '#suffix'=>'</div>',	
+    '#prefix'=>'<div class="flex-cell submit-container">',
+    '#suffix'=>'</div></div>',	
     '#value' => t('Login'),
    
   ];
