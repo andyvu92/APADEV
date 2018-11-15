@@ -170,7 +170,7 @@ function apa_get_cm_login_form($form, &$form_state) {
       //jinghu added on 15/11/2018
       '#prefix'=>'<div class="flex-cell"><div class="option-field">',
       '#suffix'=>'</div></div><div class="flex-cell forgot-password">
-					<span><a href="https://www.jobs4physios.com.au/">Visiting jobs4physio for the first time Create login</a>
+					<span>Visiting jobs4physio for the first time? <a href="https://www.jobs4physios.com.au/">Create login</a>
 					</span>
 					</div><div class="flex-cell create-account">
           <span>Not an APA member? <a href="/membership-question">Join today.</a></span>
