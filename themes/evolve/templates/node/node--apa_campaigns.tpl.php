@@ -182,23 +182,22 @@
 		</div>
 	</div>
     <?php else: $url =  "{$_SERVER['REQUEST_URI']}";?>
-<div class="flex-container" id="non-member">
-			<div class="flex-cell">
-				<h3 class="light-lead-heading">Please join a member to see this page.</h3>
-			</div>
-			<div class="flex-cell cta">
-				<a data-target="#loginAT" data-toggle="modal" href="#" class="login">Login</a>
-				<a href="/membership-question" class="join">Join now</a>
-			</div>
+	<div class="flex-container" id="non-member">
+		<?php 
+				$block = block_load('block', '358');
+				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+				$output = drupal_render($get);        
+				print $output;
+		?>
 
-			<?php 
-					$block = block_load('block', '309');
-					$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-					$output = drupal_render($get);        
-					print $output;
-			?>
+		<?php 
+				$block = block_load('block', '309');
+				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+				$output = drupal_render($get);        
+				print $output;
+		?>
 
-		</div>
+	</div>
 
 <?php endif; ?>
 </div> 
