@@ -361,6 +361,15 @@ div.AdvocacyBackground {
 	}
 	#section-banner{
 		#block-block-186{
+			.img-parallax{
+				top: 56.5817%;
+				transform: translate(-50%, -56.5817%);
+			}
+			@media all and (max-width: @tablet-width){
+				.img-parallax{
+					display: none;
+				}
+			}
 			.top-banner{
 				padding: 100px 25% 4%;
 				@media @desktop-width-down {
@@ -407,7 +416,7 @@ div.AdvocacyBackground {
 					padding: 50px 15% 2%;
 				}
 				@media all and (max-width: @larger-phone-width){
-					padding: 0px 10% 2%;
+					padding: 50px 10% 2%;
 					.img-parallax{
 						display: none;
 					}
@@ -574,14 +583,21 @@ div.AdvocacyBackground {
 
 	/* PAGER LAYOUT */
 	.pagination.pager{
-		li > a{
-			border: 0;
-			color: #333;
-			font-weight: 300;
-			&:hover{
+		li{
+			&.pager-current{
+				a{
+					font-weight: 700;
+				}
+			}
+			& > a{
+				border: 0;
 				color: #333;
-				background: none;
-				font-weight: 700;
+				font-weight: 300;
+				&:hover{
+					color: #333;
+					background: none;
+					font-weight: 700;
+				}
 			}
 		}
 	}
