@@ -109,6 +109,7 @@ lessc[] = lessc/join-national-group.less
 lessc[] = lessc/prf-donation.less
 lessc[] = lessc/tools.less
 lessc[] = lessc/national-group-single.less
+lessc[] = lessc/sso-login.less
 
 scripts[] = assets/scripts/evolve.js
 scripts[] = assets/scripts/formValidation.js

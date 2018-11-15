@@ -563,6 +563,9 @@ jQuery(document).ready(function(){
     localStorage.removeItem("firstVisit");
   });
   
+  if( /msie|trident/g.test(navigator.userAgent.toLowerCase())){
+    $('.html').addClass('ie-browser');
+  }
 });
 
 // PARALLAX
@@ -817,13 +820,23 @@ jQuery(document).ready(function(){
       return true;
     });
 
-    // -- END FORM SUBMISSION --
     $('#apa-create-log-in-form').submit(function(){
       $(".login-btn input", this).hide();
       $(".login-btn", this).append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');
       return true;
     });
 
+    $('#apa-get-cm-login-form').submit(function(){
+      $(".submit-container input", this).hide();
+      $(".submit-container", this).append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');
+      return true;
+    });
+    // -- END FORM SUBMISSION --
+
+    // SSO LOGIN ERROR MESSAGES
+    $('.page-apa-cm-login').find('#messages').each(function(){
+      $('form .password-field').after($('#messages'));
+    });
 });
 
 

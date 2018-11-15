@@ -1158,6 +1158,58 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
     }
   }
 
+  /* RADIO STYLED */
+  .styled-radio-select:checked,
+      .styled-radio-select:not(:checked) {
+          position: absolute;
+          left: -9999px;
+      }
+      .styled-radio-select:checked + label,
+      .styled-radio-select:not(:checked) + label
+      {
+          position: relative;
+          padding-left: 28px;
+          cursor: pointer;
+          line-height: 20px;
+          display: inline-block;
+          color: #666;
+      }
+      .styled-radio-select:checked + label:before,
+      .styled-radio-select:not(:checked) + label:before {
+          content: '';
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 18px;
+          height: 18px;
+          border: 1px solid rgba(0,0,0,0.12);
+          border-radius: 100%;
+          background: none;
+      }
+      .styled-radio-select:checked + label:after,
+      .styled-radio-select:not(:checked) + label:after {
+          content: '';
+          width: 10px;
+          height: 10px;
+          background: rgba(0,0,0,0.7);
+          position: absolute;
+          top: 4px;
+          left: 4px;
+          border-radius: 100%;
+          -webkit-transition: all 0.2s ease;
+          transition: all 0.2s ease;
+      }
+      .styled-radio-select:not(:checked) + label:after {
+          opacity: 0;
+          -webkit-transform: scale(0);
+          transform: scale(0);
+      }
+      .styled-radio-select:checked + label:after {
+          opacity: 1;
+          -webkit-transform: scale(1);
+          transform: scale(1);
+      }
+
   .chevron-select-box{
     position: relative;
     select{
@@ -3239,7 +3291,7 @@ body .block .secondary-button{
     }
 }
 
-/* PULSE CHEVRON IN CIRLE */
+/* PULSE CHEVRON IN CIRCLE */
 #scroll-chevron{
     position: relative;
     margin: 35px 0 0;
@@ -3671,3 +3723,117 @@ body .socialMediaIcon{
     min-width: 92.75px;
     color: #000;
 }
+
+/* 
+----------------------------------------------------------------
+LET'S ADJUST OUR WEBSITE TO SCOPE WITH BLOODY IE 
+----------------------------------------------------------------
+*/
+
+/* HIDE PARALLAX IN IE */
+.ie-browser{
+    .img-parallax{
+        display: none;
+    }
+}
+
+/* LOGIN FORM ADJUSTMENT FOR IE */
+.ie-browser{
+    #apa-create-log-in-form{
+        width: 100%;
+    }
+}
+
+/* BOX ICONS */
+.ie-browser{
+    .dexp-shortcodes-box{
+        .box-icon{
+            &:before, &:after{
+                display: block;
+                left: calc(~'50% - 15px');
+            }
+        }
+        .box-content{
+            width: 100%;
+        }
+    }
+}
+
+/* POPUP CLOSE BUTTON */
+.ie-browser{
+    .close-popup{
+        position: relative;
+        &:before, &:after{
+            display: block;
+            left: 5px;
+        }
+    }
+    .OthersiteButtonClose{
+        &:before, &:after{
+            display: block;
+            left: 2px;
+        }
+    }
+    .modal-dialog .close .ui-button-icon-primary{
+        position: relative;
+        &:before, &:after{
+            left: 0;
+            display: block;
+        }
+    }
+}
+
+/* TOP NAV */
+.ie-browser{
+    #section-socials{
+        .pull-right.social-icons{
+            background: none;
+            ul{
+                position: absolute;
+                right: 135px;
+                top: -1px;
+            }
+        }
+        .LogInPadding, .DashboardPadding{
+            position: absolute;
+            left: 0px;
+        }
+        .LogOutPadding{
+            position: absolute;
+            left: 60px;
+        }
+    }
+    &.user-logged-in{
+        .pull-right.social-icons{
+            ul{
+                right: 196px!important;
+            }
+        }
+    }
+}
+
+/* TOOLS BLOCKS */
+.ie-browser{
+    #section-map #tools-features .tool-block{
+        max-width: none!important;
+        padding: 100px 10%!important;
+    }
+}
+
+/* CPA DIARY */
+.ie-browser{
+    #block-block-291 #goo-chart{
+        span.number{
+            left: calc(~'50% - 45px');
+        }
+        span.text{
+            left: calc(~'50% - 40px');
+        }
+    }
+}
+
+/* 
+----------------------------------------------------------------
+END ADJUSTMENT FOR BLOODY IE 
+----------------------------------------------------------------
+*/

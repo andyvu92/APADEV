@@ -1,0 +1,159 @@
+/*--------------------------------------------------------------
+-----------STYLES FOR SSL LOGIN PAGE(S)-----------------
+--------------------------------------------------------------*/
+
+.page-apa-cm-login{
+    #section-main-content{
+        background-image: url(http://localhost/sites/default/files/LOGIN-PIC-%E2%80%93-1170X800-compressor.jpg);
+        background-position: center center;
+        background-size: cover;
+        min-height: 70vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .region{
+            form{
+                max-width: 460px;
+                position: relative;
+                left: calc(~'50% - 200px');
+                margin: 100px 0;
+                padding: 50px;
+                border: 1px solid #c5c5c5;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+                background: rgba(255,255,255,0.8);
+                @media @larger-phone-width-down{
+                    max-width: 300px;
+                    left: calc(~'50% - 150px');
+                    padding: 25px;
+                    margin: 50px 0;
+                }
+                .flex-container{
+                    .flex-cell{
+                        flex-direction: column;
+                        align-items: center;
+                        margin: 5px 0;
+                        &.forgot-password, &.create-account{
+                            align-items: flex-start;
+                        }
+                        > div{
+                            width: 100%;
+                            input{
+                                width: 100%;
+                                background: #fff;
+                                margin: 0;
+                            }
+                        }
+                        label, .description{
+                            display: none;
+                        }
+                        .form-item-login-as{
+                            padding: 10px 0;
+                            display: block;
+                            float: left;
+                            width: 100%;
+                            label{
+                                display: block;
+                            }
+                            .form-item-login-as{
+                                width: 50%;
+                                float: left;
+                                padding: 0 5px 0 0;
+                                &:nth-child(even){
+                                    padding: 0 0 0 5px;
+                                }
+                                label{
+                                    padding: 10px;
+                                    border: 1px solid rgba(0,0,0,0.12);
+                                    width: 100%;
+                                    text-align: center;
+                                    position: relative;
+                                    background: rgba(255,255,255,0);
+                                    transition: all .3s linear;
+                                    &:before, &:after{
+                                        display: none;
+                                    }
+                                }
+                                input{
+                                    &:checked + label{
+                                        background: @bright-blue;
+                                        color: #fff;
+                                    }
+                                }
+                            }
+                        }
+                        .form-radios{
+                            > div{
+                                input{
+                                    width: auto;
+                                }
+                                label{
+                                    display: inline-block;
+                                }
+                            }
+                        }
+                        .form-item, .form-actions{
+                            margin: 0;
+                        }
+                        .email-field{
+                            position: relative;
+                            margin: 0;
+                            &:before{
+                                content: "";
+                                position: absolute;
+                                left: 12px;
+                                top: calc(~'50% - 7.5px');
+                                width: 15px;
+                                height: 15px;
+                                background-position: center;
+                                background-image: url(/sites/default/files/dashboard-icon/account-G.png);
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                            }
+                            .form-control{
+                                background: none;
+                                min-height: 48px;
+                                text-indent: 28px;
+                            }
+                        }
+                        .password-field{
+                            position: relative;
+                            margin: 0;
+                            &:before{
+                                content: "";
+                                position: absolute;
+                                left: 12px;
+                                top: calc(~'50% - 7.5px');
+                                width: 15px;
+                                height: 15px;
+                                background-size: contain;
+                                background-position: center;
+                                background-repeat: no-repeat;
+                                background-image: url(/sites/default/files/general-icon/password-icon-lg.png);
+                            }
+                            .form-control {
+                                background: none;
+                                text-indent: 28px;
+                                max-height: 48px;
+                            }
+                        }
+                        #messages{
+                            .alert{
+                                margin: 0;
+                            }
+                        }
+                        &.submit-container{
+                            margin-top: 15px;
+                            input{
+                                min-width: 100%;
+                                &:hover{
+                                    color: #fff;
+                                    opacity: 0.8;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
