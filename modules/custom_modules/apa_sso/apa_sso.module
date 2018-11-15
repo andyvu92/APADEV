@@ -179,8 +179,10 @@ function apa_get_cm_login_form_submit($form, &$form_state){
  */
 function _apa_cm_get_redirection_url($user_details, $member_type) {
   $return_url = '/apa/cm/login';
-  if($user_details['results']) {
-    $user_details = $user_details['results'][0];
+  if($user_details) {
+    if(isset($user_details['results'])){
+      $user_details = $user_details['results'][0];
+    }
     $site_id = variable_get('apa_sso_cb_site_id', 21871);
     $params = [
       'site_id' => $site_id,
