@@ -810,8 +810,17 @@ jQuery(document).ready(function(){
       }
     });
 
+    // BUTTONS ON FORM SUBMISSION
     $('#nonAPAhour form').submit(function(){
-      $("#saveNA", this).attr('disabled', 'disabled');
+      $("#saveNA", this).hide();
+      $(".modal-footer", this).prepend('<div class="add-cpd-spinning-btn"><i class="fa fa-spinner fa-spin fa-fw"></i></div>');
+      return true;
+    });
+
+    // -- END FORM SUBMISSION --
+    $('#apa-create-log-in-form').submit(function(){
+      $(".login-btn input", this).hide();
+      $(".login-btn", this).append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');
       return true;
     });
 

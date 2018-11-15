@@ -919,7 +919,7 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
         input + label {
             position: absolute;
             top: 40px;
-            right: 0px;
+            right: 15px;
             height: 16px;
             width: 18px; 
             z-index: 5;
@@ -970,6 +970,7 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
             z-index: 3;
             transition: .5s;
             overflow: hidden;
+            padding: 0 15px;
             > ul {
               text-align: center;
               position: absolute;
@@ -3631,4 +3632,42 @@ body .socialMediaIcon{
             }
         }
     }
+}
+
+/* PAGE PAGINATION */
+.pagination.pager{
+    margin-bottom: 0;
+    padding-top: 30px;
+    padding-left: 0;
+    li{
+        &.pager-current{
+            a{
+                font-weight: 700;
+            }
+        }
+        a{
+            &:hover{
+                font-weight: 700;
+                color: #333;
+            }
+        }
+    }
+}
+
+/* BLUE SPINNING BUTTON */
+.blue-spinning-btn{
+    width: 100%;
+    text-align: center;
+    background: #009fda;
+    color: #fff;
+    padding: 9px;
+}
+.add-cpd-spinning-btn{
+    padding: 5px 30px;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 92.75px;
+    color: #000;
 }
