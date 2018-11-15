@@ -121,24 +121,32 @@ function apa_get_cm_login_form($form, &$form_state) {
   $form['username'] = [
     '#type'          => 'textfield',
     //jinghu added on 15/11/2018
+    '#attributes' => array(
+        ' class' => 'form-control',
+				' placeholder' => 'Email address'
+		),
     '#prefix'=>'<div class="flex-container"><div class="flex-cell"><div class="email-field">',
     '#suffix'=>'</div></div>',
     //added end	
     '#title'         => "Email",
     '#size'          => 50,
     '#required'      => true,
-    '#description'   => "Enter your membership email.",
+    
   ];
   $form['password'] = [
     '#type'          => 'password',
     //jinghu added on 15/11/2018
+    '#attributes' => array(
+      ' class' => 'form-control',
+			' placeholder' => 'Password'
+		),
     '#prefix'=>'<div class="flex-cell"><div class="password-field">',
     '#suffix'=>'</div></div>',
     //added end	
     '#title'         => "Password",
     '#size'          => 50,
     '#required'      => true,
-    '#description'   => "Enter your password.",
+   
   ];
   $login_as_options = [
     'employer' => 'Employer',
