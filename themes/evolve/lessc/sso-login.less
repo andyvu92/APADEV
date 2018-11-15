@@ -3,6 +3,9 @@
 --------------------------------------------------------------*/
 
 .page-apa-cm-login{
+    #messages{
+        display: none;
+    }
     #section-main-content{
         background-image: url(http://localhost/sites/default/files/LOGIN-PIC-%E2%80%93-1170X800-compressor.jpg);
         background-position: center center;
@@ -137,8 +140,15 @@
                             }
                         }
                         #messages{
+                            margin-top: 10px;
                             .alert{
                                 margin: 0;
+                                ul{
+                                    font-size: 0.8em;
+                                    padding-left: 15px;
+                                    color: @orange;
+                                    margin-bottom: 0;
+                                }
                             }
                         }
                         &.submit-container{

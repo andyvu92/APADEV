@@ -835,7 +835,7 @@ jQuery(document).ready(function(){
 
     // SSO LOGIN ERROR MESSAGES
     $('.page-apa-cm-login').find('#messages').each(function(){
-      $('form .password-field').after($('#messages'));
+      $('form .password-field').after($('#messages').show());
     });
 });
 
