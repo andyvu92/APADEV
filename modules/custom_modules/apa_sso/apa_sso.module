@@ -161,6 +161,9 @@ function apa_get_cm_login_form($form, &$form_state) {
     $form['login_as'] = [
       '#type' => 'radios',
       '#title' => t('Login As'),
+      '#attributes' => array(
+        ' class' => 'styled-radio-select'
+			 ),
       '#options' => $login_as_options,
       '#description' => t('Please select any of above option to login'),
       '#required' => true,
