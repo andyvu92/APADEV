@@ -120,6 +120,10 @@ function apa_get_cm_login_form($form, &$form_state) {
   }
   $form['username'] = [
     '#type'          => 'textfield',
+    //jinghu added on 15/11/2018
+    '#prefix'=>'<div class="flex-container"><div class="flex-cell"><div class="email-field">',
+    '#suffix'=>'</div></div>',
+    //added end	
     '#title'         => "Email",
     '#size'          => 50,
     '#required'      => true,
@@ -127,6 +131,10 @@ function apa_get_cm_login_form($form, &$form_state) {
   ];
   $form['password'] = [
     '#type'          => 'password',
+    //jinghu added on 15/11/2018
+    '#prefix'=>'<div class="flex-cell"><div class="password-field">',
+    '#suffix'=>'</div></div>',
+    //added end	
     '#title'         => "Password",
     '#size'          => 50,
     '#required'      => true,
@@ -147,12 +155,24 @@ function apa_get_cm_login_form($form, &$form_state) {
       '#title' => t('Login As'),
       '#options' => $login_as_options,
       '#description' => t('Please select any of above option to login'),
-      '#required' => true
+      '#required' => true,
+      //jinghu added on 15/11/2018
+      '#prefix'=>'<div class="flex-cell"><div class="option-field">',
+      '#suffix'=>'</div></div><div class="flex-cell forgot-password">
+					<span><a href="https://www.jobs4physios.com.au/">Visiting jobs4physio for the first time Create login</a>
+					</span>
+					</div><div class="flex-cell create-account">
+          <span>Not an APA member? <a href="/membership-question">Join today.</a></span>
+        </div>',
+        //added end
     ];
+
   }
   $form['submit'] = [
     '#type'          => 'submit',
+    '#suffix'=>'</div>',	
     '#value' => t('Login'),
+   
   ];
   return $form;
 }
@@ -165,6 +185,8 @@ function apa_get_cm_login_form_submit($form, &$form_state){
   }catch (Exception $e){
     form_set_error("Can't connect.",$e->getMessage());
     $form_state['redirect'] = "/apa/cm/login";
+    //jing hu put the log in failed meessage 15/11/2018
+    drupal_set_message('<div class="checkMessage"><span>Incorrect username or password</span>.</div>',"error");
     return;
   }
   $redirect_url = _apa_cm_get_redirection_url($user_details,$login_as);
