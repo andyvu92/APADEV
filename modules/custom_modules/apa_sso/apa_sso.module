@@ -523,6 +523,8 @@ function app_sso_user_details($user_id, $token) {
   curl_close ($ch);
   if ($response_status_code != 200 || $response_status_code == 400) {
     watchdog(APA_SSO_WATCHDOG, $result, array(), WATCHDOG_CRITICAL);
+     //jing hu put the log in failed meessage 15/11/2018
+     drupal_set_message('<div class="checkMessage"><span>Incorrect username or password</span>.</div>',"error");
     return FALSE;
   }
   $response = new stdClass();
