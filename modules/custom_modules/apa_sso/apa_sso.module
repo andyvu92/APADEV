@@ -197,7 +197,8 @@ function apa_get_cm_login_form_submit($form, &$form_state){
   }catch (Exception $e){
     form_set_error("Can't connect.",$e->getMessage());
     $form_state['redirect'] = "/apa/cm/login";
-    
+    //jing hu put the log in failed meessage 15/11/2018
+    drupal_set_message('<div class="checkMessage"><span>Incorrect username or password</span>.</div>',"error");
     return;
   }
   $redirect_url = _apa_cm_get_redirection_url($user_details,$login_as);
