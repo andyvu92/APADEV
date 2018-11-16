@@ -459,6 +459,8 @@ function app_sso_get_user_info($email_address, $password, $login=TRUE) {
     //$response = drupal_http_request($base_url . $login_path, $options);
     if ($response_status_code != 200 || $response_status_code == 400) {
       watchdog(APA_SSO_WATCHDOG, $result, array(), WATCHDOG_CRITICAL);
+       //jing hu put the log in failed meessage 15/11/2018
+     drupal_set_message('<div class="checkMessage"><span>Incorrect username or password</span>.</div>',"error");
       return FALSE;
     }
     $response = new stdClass();
@@ -523,8 +525,6 @@ function app_sso_user_details($user_id, $token) {
   curl_close ($ch);
   if ($response_status_code != 200 || $response_status_code == 400) {
     watchdog(APA_SSO_WATCHDOG, $result, array(), WATCHDOG_CRITICAL);
-     //jing hu put the log in failed meessage 15/11/2018
-     drupal_set_message('<div class="checkMessage"><span>Incorrect username or password</span>.</div>',"error");
     return FALSE;
   }
   $response = new stdClass();
@@ -536,14 +536,7 @@ function app_sso_user_details($user_id, $token) {
     watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_CRITICAL);
     return FALSE;
   }
-  if (isset($r['LinkId']) == "") {
-    $message_detail = 'login failed: ' . $r['ErrorInfo']->ErrorMessage;
-    watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
-    //jing hu put the log in failed meessage 15/11/2018
-    drupal_set_message('<div class="checkMessage"><span>Incorrect username or password</span>.</div>',"error");
-    return FALSE;
-  }
-  // Aptify response status.
+   // Aptify response status.
   if (isset($r['ErrorInfo']) === TRUE) {
     $message_detail = 'aptify error detected: ' . $r['ErrorInfo']->ErrorMessage;
     watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
