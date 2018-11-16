@@ -1752,6 +1752,29 @@ input{
             text-indent: 28px;
         }
     }
+    .email-field-alt{
+        width: 100%;
+        position: relative;
+        margin: 25px 0 20px;
+        &:before{
+            content: "";
+            position: absolute;
+            left: 12px;
+            top: calc(~'50% - 7.5px');
+            width: 15px;
+            height: 15px;
+            background-position: center;
+            background-image: url(/sites/default/files/dashboard-icon/account-G.png);
+            background-size: contain;
+            background-repeat: no-repeat;
+        }
+        .form-control{
+            background: none;
+            min-height: 48px;
+            margin: 5px 0;
+            text-indent: 28px;
+        }
+    }
     .password-field{
         width: 100%;
         position: relative;
@@ -1770,7 +1793,7 @@ input{
         }
         .form-control {
             background: none;
-            min-height: 41px;
+            min-height: 48px;
             margin: 5px 0;
             text-indent: 28px;
         }

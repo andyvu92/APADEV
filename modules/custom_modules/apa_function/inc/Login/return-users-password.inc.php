@@ -50,9 +50,9 @@
 			</br>
 			<span class="sub-heading">Enter your email address below.</span>
 		</div>
-		
+
 		<div class="flex-cell">
-			<div class="email-field">
+			<div class="email-field-alt">
 				<input class="form-control" id="Fid" name="Fid" onchange="checkEmailFunction(this.value)" placeholder="Email address" type="text">
 			</div>
 			<div id="checkMessage" class="display-none">
