@@ -197,8 +197,7 @@ function apa_get_cm_login_form_submit($form, &$form_state){
   }catch (Exception $e){
     form_set_error("Can't connect.",$e->getMessage());
     $form_state['redirect'] = "/apa/cm/login";
-    //jing hu put the log in failed meessage 15/11/2018
-    drupal_set_message('<div class="checkMessage"><span>Incorrect username or password</span>.</div>',"error");
+    
     return;
   }
   $redirect_url = _apa_cm_get_redirection_url($user_details,$login_as);
@@ -473,7 +472,10 @@ function app_sso_get_user_info($email_address, $password, $login=TRUE) {
     // Aptify response status.
     if (isset($r['ErrorInfo']) === TRUE) {
       $message_detail = 'aptify error detected: ' . $r['ErrorInfo']->ErrorMessage;
+      //jing hu put the log in failed meessage 15/11/2018
+    drupal_set_message('<div class="checkMessage"><span>Incorrect username or password</span>.</div>',"error");
       watchdog(APA_SSO_WATCHDOG, $message_detail, array(), WATCHDOG_INFO);
+
       return FALSE;
     }
     else {
