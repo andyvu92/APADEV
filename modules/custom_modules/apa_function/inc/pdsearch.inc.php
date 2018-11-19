@@ -201,7 +201,7 @@ if(!function_exists('drupal_session_started'))
 			<span class="alt-text mobile">Please note: For online learning visit <a class="alt-link" href="https://cpd4physios.com.au/" target="_blank">cpd4physios</a></span>
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-5">
-			<span class="small-text"><a href="../PDtermsandconditions">Terms and conditions</a></span>
+			<span class="small-text"><a href="/pd/termsandconditions">Terms and conditions</a></span>
 			<span id="reset-search">Reset search filters</span>
 			<!--<span class="small-text"><a href="/sites/default/files/PROFESSIONAL DEVELOPMENT/LD039_Event_registration_form_fillable.pdf" target="_blank">Event registration form</a></span>-->
 		

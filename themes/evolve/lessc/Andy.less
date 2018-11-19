@@ -1701,6 +1701,11 @@ input{
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     padding: 50px;
     background: rgba(255,255,255,0.8);
+    @media @larger-phone-width-down{
+        max-width: 300px;
+        margin: 50px auto;
+        padding: 25px;
+    }
     .user-info{
         flex-direction: column;
         .light-lead-heading{
@@ -3872,6 +3877,81 @@ LET'S ADJUST OUR WEBSITE TO SCOPE WITH BLOODY IE
     }
 }
 
+/* ---------------------ABOUT US---------------------- */
+/* annual report */
+.ie-browser{
+    &.page-node-138 .left-content .brochure-grid .item{
+        width: 31%;
+    }
+}
+/* partner services */
+.ie-browser{
+    &.page-node-241 #partners-info{
+        left: 0;
+        right: 0;
+    }
+}
+/* reconciliation */
+.ie-browser{
+    #section-main-content [id^='dexp-accordions-wrapper'].panel-group .panel{
+        box-shadow: none;
+    }
+}
+/* APA team */
+.ie-browser{
+    &.page-node-149 #block-block-312 div[id*='apateammember-block'] .node-apateam .portfolio-image .field-item, 
+    &.page-node-149 #block-block-312 #apateammember-block .node-apateam .portfolio-image .field-item,
+    &.node-type-apateam #related-members [id^='apateammember-block'] .node-apateam .portfolio-image .field-item{
+        display: block;
+        img{
+            height: 100%;
+        }
+    }
+}
+
+/* --------------------- PD ---------------------- */
+.ie-browser{
+    &.page-node-611 #section-banner #block-block-322{
+        background-position: 70% 0px !important;
+        background-repeat: no-repeat;
+        .sub-top-banner{
+            display: block;
+            .featured-logo:after{
+                top: 0;
+            }
+        }
+    }
+}
+
+/* --------------------- RESEARCH ---------------------- */
+/* share urls INMOTION/RESEARCH/MEDIA */
+.ie-browser{
+    .meta .meta-share-url{
+        display: block;
+        text-align: right;
+        ul.socialMediaIcon li .fb_iframe_widget{
+            top: -5px;
+        }
+        .IN-widget{
+            position: relative;
+            top: 1px;
+        }
+    }
+}
+
+/* research stories */
+.ie-browser{
+    &.page-node-214 #section-main-content #block-system-main .post-content .view-media .dexp-grid-items .node .team{
+        display: block;
+    }
+}
+
+/* --------------------- ADVOCACY ---------------------- */
+.ie-browser{
+    &.node-type-policy #block-system-main .content .icon-featured-sub-heading span img{
+        width: 100%;
+    }
+}
 
 /* 
 ----------------------------------------------------------------

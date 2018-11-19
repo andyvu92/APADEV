@@ -525,7 +525,7 @@ $userRetisterStatus = false;
 					<div class="pd-description">
 						<?php 
 						if (!empty($pd_detail['Description'])){
-							echo $pd_detail['Description'];
+							echo '<p>'.$pd_detail['Description'].'</p>';
 						}
 						else{
 							echo "<h4>No record found!</h4>";
@@ -541,10 +541,11 @@ $userRetisterStatus = false;
 					if (!empty($pd_detail['Description'])){
 						if($pd_detail['Typeofpd'] == "Lecture") {
 							echo $pd_detail['Description'];
-						} elseif (strlen($pd_detail['Description']) > 600){
+						} elseif (strlen($pd_detail['Description']) > 700){
 							echo '<div class="readmore">';
-							echo $pd_detail['Description'];
+							echo '<p>'.$pd_detail['Description'].'</p>';
 							echo '</div>';
+							echo '00000000000000000000000000000000000';
 						}
 						else{
 							echo $pd_detail['Description'];
@@ -635,12 +636,12 @@ $userRetisterStatus = false;
 							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
 							//echo '<p>'.$bios['Comments'].'</p><br>';
 
-							if (strlen($bios['Comments']) > 300){
+							if (strlen($bios['Comments']) > 700){
 								echo '<div class="readmore">';
-								echo $bios['Comments'];
+								echo '<p>'.$bios['Comments'].'</p>';
 								echo '</div>';
 							} else{
-								echo $bios['Comments'];
+								echo '<p>'.$bios['Comments'].'</p>';
 							}
 						}
 						?>
