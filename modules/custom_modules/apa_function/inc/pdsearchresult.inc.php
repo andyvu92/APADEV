@@ -190,7 +190,9 @@ if(isset($results['MResponse'])) {
 							$passString = $passString.$key."[]=".$ty."&";
 						}
 					} else {
-						$passString = $passString.$key."=".$value."&";
+						if($key != "UserID") {
+							$passString = $passString.$key."=".$value."&";
+						}
 					}			
 				}
 			}
