@@ -543,9 +543,8 @@ $userRetisterStatus = false;
 							echo $pd_detail['Description'];
 						} elseif (strlen($pd_detail['Description']) > 700){
 							echo '<div class="readmore">';
-							echo '<p>'.$pd_detail['Description'].'</p>';
+							echo $pd_detail['Description'];
 							echo '</div>';
-							echo '00000000000000000000000000000000000';
 						}
 						else{
 							echo $pd_detail['Description'];
