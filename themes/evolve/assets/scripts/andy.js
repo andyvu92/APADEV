@@ -874,12 +874,6 @@ jQuery(document).ready(function(){
       $('form .password-field').after($('#messages').show());
     });
 
-    // REMOVE EMPTY P TAG in PD Product
-    $('.node-pd-detail p').each(function(){
-      if ( $(this).html() == '' ){
-        $(this).remove();
-      }
-    });
 });
 
 
