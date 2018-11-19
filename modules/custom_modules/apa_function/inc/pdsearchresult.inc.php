@@ -388,15 +388,9 @@ if(isset($results['MResponse'])) {
 		var urls = "https://" + window.location.hostname + window.location.pathname;
 		//var urls = "http://" + window.location.hostname + ":" + window.location.port + window.location.pathname;
 		var param = window.location.href.replace(urls ,"");
-		/*
-		console.log(urls);
-		console.log(window.location.hostname);
-		console.log(window.location.port);
-		console.log(window.location.pathname);
-		console.log(window.location.urls);
-		*/
+
 		//urls += "?" + paramPass;
-	  // urls = "/pd/pd-search?";
+	  	// urls = "/pd/pd-search?";
 	 
 		if(value== 1) {
 						window.location.href= urls + "?pagesize=5"+"<?php echo $passString; ?>";
