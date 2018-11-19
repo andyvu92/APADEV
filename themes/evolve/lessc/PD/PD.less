@@ -1150,11 +1150,11 @@ body.page-node{
                     font-family: 'Roboto';
                     font-size: 2em;
                     font-weight: 700;
-
                 }
                 .left-icon{
                     max-width: 70px;
                     margin-right: 15px;
+                    margin-top: 20px;
                     @media all and (max-width: @larger-phone-width){
                         display: none;
                     }
@@ -1180,6 +1180,9 @@ body.page-node{
                 }
                 .section{
                     padding-bottom: 36px;
+                    &:first-of-type{
+                        padding-top: 36px;
+                    }
                 }
             }
             .region-right-sidebar{
@@ -1265,7 +1268,7 @@ body.page-node{
                     padding: 30px;
                     border-top: 1px solid #fff;
                     font-family: Roboto;
-                    font-size: 1.2em;
+                    font-size: 1em;
                     color: #fff;
                     .small-heading{
                         display: block;
@@ -1540,11 +1543,25 @@ body.page-node{
                         margin:  auto;
                         width: 100%;
                         .accordian-content {
-                          padding: 15px 30px;
+                          padding: 30px;
                           margin: 0;
                           background: #fff;
                           color: #000;
                           font-size: 1.2em;
+                          p, ul, ol{
+                                font-size: 1em;
+                                &:first-child{
+                                margin-top: 0;
+                                }
+                                li{
+                                    list-style: unset;
+                                }
+                          }
+                          h2, h3, h4, h5, h6{
+                              &:first-of-type{
+                                  margin-top: 0;
+                              }
+                          }
                         }
                         .acordian-label {
                           padding: 10px 15px;
@@ -1575,30 +1592,20 @@ body.page-node{
                          }
                         }
                       }
-                      .readmore-content {
-                        overflow: hidden;
-                        margin: 0;
-                        width: 100%;
-                        font-size: 1.4em;
-                        .read-more {
-                          display: none;
-                        }
-                        a {
-                          color: #000;
-                          font-weight: 400;
-                          transition: color 200ms ease-in;
-                        }
-                      }
-                      .pd-description-mobile{
-                          display: none;
-                          p, ul, li{
-                            font-size: 1.2em!important;
-                            span{
-                                font-size: 1em!important;
+                        .pd-description-mobile{
+                            display: none;
+                            font-size: 1.2em;
+                            .short-text, .full-text{
+                            font-size: 1em;
                             }
-                          }
+                            p, ul, li{
+                                font-size: 1em!important;
+                                span{
+                                font-size: 1em!important;
+                                }
+                            }
                           span{
-                              font-size: 1.2em!important;
+                              font-size: 1em!important;
                               font-family: Roboto!important;
                               span{
                                 font-size: 1em!important;
@@ -1610,17 +1617,21 @@ body.page-node{
                       }
                       .pd-description-nonmobile{
                           display: block;    
+                          font-size: 1.2em;
+                          .short-text, .full-text{
+                              font-size: 1em;
+                          }
                           p, ul, li, span{
-                            font-size: 1.2em!important;
+                            font-size: 1em!important;
                           }
                           p, ul, li{
-                            font-size: 1.2em!important;
+                            font-size: 1em!important;
                             span{
                                 font-size: 1em!important;
                             }
                           }
                           span{
-                              font-size: 1.2em!important;
+                              font-size: 1em!important;
                               font-family: Roboto!important;
                               span{
                                 font-size: 1em!important;

@@ -521,48 +521,33 @@ $userRetisterStatus = false;
 
 		<div class="section description">
 			<div class="pd-description-mobile">
-				<div class="readmore">
-					<div class="pd-description">
-						<?php 
+				<div class="pd-description readmore-content">
+					<?php 
 						if (!empty($pd_detail['Description'])){
-							echo '<p>'.$pd_detail['Description'].'</p>';
+							echo '<div class="short-text">'.$pd_detail['Description'].'</div><a class="readmore">Read more</a>';
 						}
 						else{
 							echo "<h4>No record found!</h4>";
 						}
-						?>
-					</div>
+					?>
 				</div>
 			</div>
 
 			<div class="pd-description-nonmobile">
-				<div class="pd-description">
+				<div class="pd-description readmore-content">
 					<?php 
 					if (!empty($pd_detail['Description'])){
 						if($pd_detail['Typeofpd'] == "Lecture") {
-							echo $pd_detail['Description'];
-						} elseif (strlen($pd_detail['Description']) > 700){
-							echo '<div class="readmore">';
-							echo $pd_detail['Description'];
-							echo '</div>';
+							echo '<div class="short-text">'.$pd_detail['Description'].'</div><a class="readmore pd-backtotop">Read more</a>';
 						}
 						else{
-							echo $pd_detail['Description'];
+							echo '<div class="short-text">'.$pd_detail['Description'].'</div><a class="readmore pd-backtotop">Read more</a>';
 						}	
 					} else{
 						echo "<h4>No record found!</h4>";
 					}
 					?>
 				</div>
-				<script>
-					jQuery(document).ready(function($) {
-						$('.readmore').readmore({
-							speed: 800,
-							collapsedHeight: 207,
-							lessLink: '<a class="readless-link" href="#" onclick="topFunction()">Read less</a>',
-						});
-					});
-				</script>
 			</div>
 		</div>
 
@@ -627,32 +612,16 @@ $userRetisterStatus = false;
 				<div class="left-icon">
 					<span class="presenters-bio-icon large-icon"></span>
 				</div>
-				<div class="right-content presenters-bio">
+				<div class="right-content presenters-bio readmore-content">
 					<h2 class="blue-heading">Presenters</h2>
-					<p>
 						<?php 
 						foreach($pd_detail['Presenter'] as $bios) {
 							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
-							//echo '<p>'.$bios['Comments'].'</p><br>';
 
-							if (strlen($bios['Comments']) > 700){
-								echo '<div class="readmore">';
-								echo '<p>'.$bios['Comments'].'</p>';
-								echo '</div>';
-							} else{
-								echo '<p>'.$bios['Comments'].'</p>';
-							}
+							echo '<div class="short-text">'.$bios['Comments'].'</div><a class="readmore">Read more</a>';
 						}
 						?>
-					</p>
-					<script>
-					jQuery(document).ready(function($) {
-						$('.presenters-bio .readmore').readmore({
-							collapsedHeight: 133,
-							speed: 500,
-						});
-					});
-				</script>
+
 				</div>
 			</div>
 		<?php endif; ?>
@@ -2078,15 +2047,12 @@ $userRetisterStatus = false;
 				<span class="presenters-bio-icon large-icon"></span>
 			</div>
 			<div class="right-content">
-				<!--h2 class="blue-heading">Presenters</h2-->
-				<p>
 					<?php 
 					foreach($pd_detail['Presenter'] as $bios) {
 						echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
 						echo '<p>'.$bios['Comments'].'</p><br>';
 					}
 					?>
-				</p>
 			</div>
 		</div>
 	</div>
@@ -2100,7 +2066,6 @@ $userRetisterStatus = false;
 					<span class="learning-outcome-icon large-icon"></span>
 				</div>
 				<div class="right-content">
-					<h2 class="blue-heading">Learning outcomes</h2>
 					<ul>
 					<?php foreach($pd_detail['LearningOutcomes'] as $outcomes) {
 						echo "<li>".$outcomes['LearningOutcomes']."</li>";
@@ -2119,7 +2084,6 @@ $userRetisterStatus = false;
 					<span class="learning-outcome-icon large-icon"></span>
 				</div>
 				<div class="right-content">
-					<h2 class="blue-heading">Learning outcomes</h2>
 					<ul>
 					<?php foreach($pd_detail['LearningOutcomes'] as $outcomes) {
 						echo "<li>".$outcomes['LearningOutcomes']."</li>";

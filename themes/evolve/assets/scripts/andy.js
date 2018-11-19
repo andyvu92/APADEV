@@ -89,26 +89,62 @@ var list = $(".accordian-container");
 
 //READMORE
 jQuery(document).ready(function($) {
-  $('.pd-description-mobile .readmore').readmore({
-    speed: 800,
-    collapsedHeight: 207,
-    lessLink: '<a class="readless-link" href="#" onclick="topFunction()">Read less</a>',
-    afterToggle: function(trigger, element, expanded) {
-      if(! expanded) { // The "Close" link was clicked
-        $('html, body').animate( { scrollTop: element.offset().top }, {duration: 100 } );
+  $('.readmore-content').each(function(){
+    var text = $(this).find(".short-text").text();
+    var fulltext = $(this).find(".short-text").html();
+    var wordCount = text.trim().split(' ').length;
+    //var splittext = text.split(/\s+/).slice(0,21).join(" ");
+    
+    var window_width = $(window).width();
+      if (window_width > 570){
+        // define word count
+        var splittext = text.split(/\s+/).slice(0,81).join(" ");
+        if ( wordCount > 80 ) {
+          $(this).find(".short-text").text( splittext + '...');
+          $('.short-text', this).after( '<div class="full-text" style="display: none;">' + fulltext + '</div>' );
+        }
       }
+			else if (window_width <= 570){
+        // define word count
+        var splittext = text.split(/\s+/).slice(0,26).join(" ");
+        if ( wordCount > 25 ) {
+          $(this).find(".short-text").text( splittext + '...');
+          $('.short-text', this).after( '<div class="full-text" style="display: none;">' + fulltext + '</div>' );
+        }
+      }
+  });
+
+  $(document).on('click', '.readmore-content .readmore', function(){
+    if( $(this).text() == 'Read less' ){
+      // SCROLL BACK TO TOP
+      var window_width = $(window).width();
+			if (window_width >= 993){
+        if( $(this).hasClass('pd-backtotop') ){
+          $('html, body').stop().animate({
+            scrollTop: $('#block-system-main').offset().top - $('#section-header').height()
+          });
+        }
+      }
+      else{
+        $('html, body').stop().animate({
+          scrollTop: $('#block-system-main').offset().top
+        });
+      }
+      // END SCROLL BACK TO TOP
+      $(this).parent().find('.full-text').slideUp(function(){
+        $(this).parent().find('.short-text').slideDown();
+      });
+      $(this).text('Read more');
+    }
+    else{
+      $(this).parent().find('.short-text').slideUp(function(){
+        $(this).parent().find('.full-text').slideDown();
+      });
+      $(this).text('Read less');
     }
   });
 });
-
-//SCROLL TOP AUTO
-
-// When the user clicks on the button, scroll to the top of the document
-function topFunction() {
-    jQuery(document).ready(function(){
-      $("html, body").animate({ scrollTop: "280" }, 600);
-    });
-}
+// END READMORE
 
 function topFunction215() {
   jQuery(document).ready(function(){
@@ -836,6 +872,13 @@ jQuery(document).ready(function(){
     // SSO LOGIN ERROR MESSAGES
     $('.page-apa-cm-login').find('#messages').each(function(){
       $('form .password-field').after($('#messages').show());
+    });
+
+    // REMOVE EMPTY P TAG in PD Product
+    $('.node-pd-detail p').each(function(){
+      if ( $(this).html() == '' ){
+        $(this).remove();
+      }
     });
 });
 

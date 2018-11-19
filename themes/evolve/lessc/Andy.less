@@ -1322,36 +1322,31 @@ input{
 /* END FORM ELEMENTS */
 
 /* READMORE */
-.readmore {
-    position: relative;
-    overflow: hidden;
-    -moz-transition: height 0.7s ease-in;
-    -o-transition: height 0.7s ease-in;
-    -webkit-transition: height 0.7s ease-in;
-    transition: height 0.7s ease-in;
-    &:before {
-        content: "";
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 18px;
-        opacity: 1;
-        background: linear-gradient(to right, rgba(255, 255, 255, 0), #ffffff 65%);
-      }
-  }
+.readmore-content {
+    font-family: Roboto;
+    p, ul, ol{
+        font-size: 1em;
+    }
+    .readmore{
+        color: #009fda;
+        font-weight: 300;
+        font-size: 17px;
+        margin-top: 10px;
+        float: left;
+        margin-bottom: 20px;
+    }
+    .short-text, .full-text{
+        font-size: 1.2em;
+        font-family: Roboto;
+        p, ul, ol{
+            font-size: 1em;
+        }
+    }
+}
 
-  .readmore[aria-expanded="true"]:before{
-      opacity: 0;
-  }
 
-  .readmore-link, .readless-link{
-    color: #009fda;
-    font-weight: 300;
-    font-size: 1.2em;
-    margin-top: 10px;
-    float: left;
-    margin-bottom: 20px;
-  }
+
+
 
 /* POPUP OVERLAY */
 .new{
@@ -2179,6 +2174,7 @@ input{
         h3{
             color: #333;
             margin-top: 0;
+            margin-bottom: 20px;
         }
         .close-ie-alert{
             position: absolute;
