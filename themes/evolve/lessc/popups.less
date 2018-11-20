@@ -1595,17 +1595,27 @@ div[aria-describedby="popUpWindow"].ui-dialog {
 	width: 309px!important;
 }
 
-div[aria-describedby="myMap"].ui-dialog {
+/* PD DETAIL MAP POPUP */
+#myMap {
     position: fixed!important;
     top: 30vh!important;
     width: 500px!important;
     height: 500px!important;
     left: calc(~"50vw - 250px")!important;
-    #myMap{
+    padding-top: 30px!important;
+    background: #fff;
+    z-index: 999;
+    .close-popup{
+        .small-popup .close-popup;
+    }
+    .map-container{
         padding: 0;
         height: calc(~"100% - 33.97px")!important;
         width: 100%!important;
         overflow: hidden;
+        .modal-title{
+            padding: 0 0 10px 10px;
+        }
         iframe{
             width: 100%;
             height: calc(~"100% - 28px");
@@ -1618,10 +1628,13 @@ div[aria-describedby="myMap"].ui-dialog {
         left: calc(~"50vw - 200px")!important;
     }
     @media all and (max-width: @phone-width) {
-        width: 300px!important;
-        height: 300px!important;
+        width: 94%!important;
+        height: 400px!important;
         top: 20vh!important;
-        left: calc(~"50vw - 150px")!important;
+        left: 3%!important;
+        iframe {
+            height: calc(100% - 37px);
+        }
     }
 
 }
@@ -1665,7 +1678,7 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
     }
 }
 
-
+/* NON-APA HOURS - CPD DIARY */
 #nonAPAhour.modal{
     .modal-dialog{
         .large-popup;

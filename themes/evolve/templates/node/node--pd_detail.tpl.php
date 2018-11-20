@@ -712,19 +712,23 @@ $userRetisterStatus = false;
 		
 	<!-- MAP POPUP -->
 	<div id="myMap">         
-        <h4 class="modal-title">Event location</h4>
+		<span class="close-popup"></span>
+		<div class="map-container">
+			<h4 class="modal-title">Event location</h4>
 
-        <?php
-		if(strlen($pd_detail['AddressLine1']) > 5){
-			echo ' <iframe 
-			width="600"
-			height="450"
-			frameborder="0" style="border:0"
-			src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBUXY9mb7uoQp8PtmLH8tNkLvr7Vdm6xAQ
-				&q='.$pd_detail['AddressLine1']." ".$pd_detail['AddressLine2']." ".$pd_detail['City']." ".$pd_detail['State']." ".$pd_detail['PostalCode'].'" allowfullscreen>
-			</iframe>';
-		}
-		?>    
+			<?php
+			if(strlen($pd_detail['AddressLine1']) > 5){
+				echo ' <iframe 
+				width="600"
+				height="450"
+				frameborder="0" style="border:0"
+				src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBUXY9mb7uoQp8PtmLH8tNkLvr7Vdm6xAQ
+					&q='.$pd_detail['AddressLine1']." ".$pd_detail['AddressLine2']." ".$pd_detail['City']." ".$pd_detail['State']." ".$pd_detail['PostalCode'].'" allowfullscreen>
+				</iframe>';
+			}
+			?>   
+		</div>
+ 
     </div>
 	  
 	  <?php if(isset($details)): ?>
@@ -1770,7 +1774,7 @@ $userRetisterStatus = false;
 						<span class="address">
 							<?php echo $pd_detail['AddressLine1']." ".$pd_detail['AddressLine2']." ".$pd_detail['AddressLine3']; ?><br />
 			<?php echo $pd_detail['City']." ".$pd_detail['State']." ".$pd_detail['PostalCode']; ?>
-							<a id="viewMap" class="direction" target="_blank">View map</a>
+							<a id="viewMap" class="direction" popup-target="myMap">View map</a>
 						</span>
 					</div>
 				</div>

@@ -918,7 +918,7 @@ jQuery(document).ready(function($) {
 		$( "#loginPopWindow" ).dialog();
 	});
 	$('#viewMap').click(function(){
-		$( "#myMap" ).dialog();
+		//$( "#myMap" ).dialog();
 	});
 
 	$('#instalmentpolicyl').click(function(){
