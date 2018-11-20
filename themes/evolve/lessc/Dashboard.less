@@ -3319,3 +3319,116 @@ input[type="email"], .email-field{
     }
 }
 
+/* LAYOUT FOR RENEW MEMBERSHIP PAGE */
+.page-node-385{
+    #section-content-top .container .row .region-content-top .content{
+        display: block;
+        display: block;
+        display: block;
+        display: block;
+    }
+    .banner-img{
+        flex-direction: column;
+        flex-wrap: wrap;
+        border-top: 10px solid #e7e8ea;
+        img{
+            width: 100%;
+            &.mobile{
+                display: none;
+            }
+            @media @larger-phone-width-down{
+                display: none;
+                &.mobile{
+                    display: block;
+                }
+            }
+        }
+    }
+    .header{
+        text-align: center;
+        h2.lead-heading{
+            font-size: 2.5em;
+            @media @tablet-width-down{
+                font-size: 2em;
+            }
+        }
+    }
+    .apa-member-grid{
+        font-size: 1.2em;
+        .item{
+            text-align: center;
+            @media @tablet-width-down{
+                padding: 10px;
+            }
+            @media @larger-phone-width-down{
+                width: 100%;
+                padding: 15px;
+            }
+            span{
+                display: block;
+                color: #000;
+            }
+            .item-body{
+                border: 1px solid rgba(0,0,0,0.12);
+                padding: 50px;
+                height: 100%;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                @media @desktop-width-down{
+                    padding: 25px;
+                }
+                @media @tablet-width-down{
+                    padding: 15px 15px 20px;
+                }
+                @media @larger-phone-width-down{
+                    padding: 30px 30px 40px 30px;
+                }
+            }
+            .item-title{
+                font-weight: 700;
+                margin-bottom: 20px;
+                color: @dark-green;
+            }
+            .item-description{
+                margin-bottom: 50px;
+            }
+            .item-action{
+                padding: 15px 10px;
+                width: 100%;
+                background: #009fda;
+                color: #fff;
+                display: block;
+                text-transform: uppercase;
+                font-weight: 500;
+                font-family: Roboto;
+                margin-top: auto;
+                opacity: 1;
+                &:hover{
+                    opacity: 0.8;
+                }
+                @media @tablet-width-down{
+                    padding: 10px;
+                    width: 90%;
+                }
+            }
+        }
+    }
+    .bottom-info{
+        text-align: center;
+        font-size: 1.2em;
+        padding: 0 30px;
+        span{
+            color: #000;
+        }
+        a{
+            font-weight: 700;
+            color: @dark-green;
+            opacity: 1;
+            &:hover{
+                opacity: 0.8;
+            }
+        }
+    }
+}

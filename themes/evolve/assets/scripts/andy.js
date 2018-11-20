@@ -103,6 +103,9 @@ jQuery(document).ready(function($) {
           $(this).find(".short-text").text( splittext + '...');
           $('.short-text', this).after( '<div class="full-text" style="display: none;">' + fulltext + '</div>' );
         }
+        else{
+          $('.readmore',this).remove();
+        }
       }
 			else if (window_width <= 570){
         // define word count
@@ -110,6 +113,9 @@ jQuery(document).ready(function($) {
         if ( wordCount > 25 ) {
           $(this).find(".short-text").text( splittext + '...');
           $('.short-text', this).after( '<div class="full-text" style="display: none;">' + fulltext + '</div>' );
+        }
+        else{
+          $('.readmore',this).remove();
         }
       }
   });

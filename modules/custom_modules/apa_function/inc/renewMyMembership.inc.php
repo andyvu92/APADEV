@@ -448,24 +448,51 @@ You have the right to access the personal information about yourself held by the
 <?php else: 
 	// when user is not logged in
 	?>
-		<!-- USER NOT LOGIN BUT NOT A MEMBER  -->
-		<div class="flex-container" id="non-member">
-			<div class="flex-cell">
-				<h3 class="light-lead-heading">Please login to see this page.</h3>
-			</div>
-			<div class="flex-cell cta">
-				<a data-target="#loginAT" data-toggle="modal" href="#" class="login">Login</a>
-				<a href="/membership-question" class="join">Join now</a>
-			</div>
-
-			<?php 
-					$block = block_load('block', '309');
-					$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-					$output = drupal_render($get);        
-					print $output;
-			?>
-
+		<!-- USER NOT LOGIN  -->
+		<div class="full-width banner-img">
+			<img src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_1500X500.png" alt="Every step a leader">
+			<img class="mobile" src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_376X366.png" alt="Every step a leader">
 		</div>
+
+		<span class="space-50">&nbsp;</span>
+
+		<div class="header">
+			<h2 class="lead-heading">Choose your current membership status below:</h2>
+		</div>
+
+		<div class="grid-block apa-member-grid">
+			<div class="item">
+				<div class="item-body">
+					<span class="item-title">Current APA member</span>
+					<span class="item-description">If you are a current APA member, please click below to renew your membership for 2019.</span>
+					<a class="item-action" href="#">Renew</a>
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="item-body">
+					<span class="item-title">Previous APA member</span>
+					<span class="item-description">Have you been an APA member prior to 2018? Rejoin below to purchase membership for the remainder of 2018, or call 1300&nbsp;306&nbsp;622 to purchase 2019 membership.</span>
+					<a class="item-action" href="#">Rejoin</a>
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="item-body">
+					<span class="item-title">New member</span>
+					<span class="item-description">New to the APA? Please join below to purchase membership for the remainder of 2018, or call 1300&nbsp;306&nbsp;622 to purchase 2019 membership.</span>
+					<a class="item-action" href="#">Join</a>
+				</div>
+			</div>
+		</div>
+
+		<span class="space-50">&nbsp;</span>
+
+		<div class="bottom-info">
+			<span>If you have any questions with regard to APA membership, please contact our Member Service Centre at <a href="mailto:info@australian.physio">info@australian.physio</a> or call <a href="tel:1300 306 622">1300&nbsp;306&nbsp;622</a></span>
+		</div>
+
+		<span class="space-100">&nbsp;</span>
 
 <?php endif; ?>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
