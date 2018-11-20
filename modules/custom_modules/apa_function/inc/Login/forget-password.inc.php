@@ -90,14 +90,16 @@
 				success:function(response) { 
 				var result = response;
 				if(result=="T"){
-					$('#checkMessage').addClass("display-none");
-					$("#Fid").removeClass("focuscss");
-					$(".submit-btn input").removeClass("stop");
+					//$('#checkMessage').addClass("display-none");
+					//$("#Fid").removeClass("focuscss");
+					//$(".submit-btn input").removeClass("stop");
+					// --- CHECK JQUERY CODE LINE 126 BELOW
 				}
 				else{
 					$('#checkMessage').removeClass("display-none");
 					$("#Fid").addClass("focuscss");
 					$(".submit-btn input").addClass("stop");
+					$("#checkpassword").prop("disabled", true);
 					return false;
 				}					
 				}
@@ -125,6 +127,7 @@
 					$('#checkMessage').addClass("display-none");
 					$("#Fid").removeClass("focuscss");
 					$(".submit-btn input").removeClass("stop");
+					$("#checkpassword").prop("disabled", false);
 				}
 				else{
 					$('#checkMessage').removeClass("display-none");

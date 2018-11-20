@@ -31,7 +31,6 @@
 			count--;
 			timer.innerHTML = count;
 			setTimeout("countDown()", 1000);
-			console.log(count);
 		}else{
 			window.location.href = "/";
 		}
@@ -53,7 +52,7 @@
 
 		<div class="flex-cell">
 			<div class="email-field-alt">
-				<input class="form-control" id="Fid" name="Fid" onchange="checkEmailFunction(this.value)" placeholder="Email address" type="text">
+				<input class="form-control" id="Fid" name="Fid" placeholder="Email address" type="text">
 			</div>
 			<div id="checkMessage" class="display-none">
 				<span>Oops! The email you entered does not exist.</span>
@@ -94,14 +93,18 @@
 				success:function(response) { 
 				var result = response;
 				if(result=="T"){
-					$('#checkMessage').addClass("display-none");
-					$("#Fid").removeClass("focuscss");
-					$("#checkpassword").removeClass("stop");
+					//$('#checkMessage').addClass("display-none");
+					//$("#Fid").removeClass("focuscss");
+					//$("#checkpassword").removeAttr("disabled", "false");
+					//$("#checkpassword").removeClass("stop");
+					//return true;
+					// --- CHECK JQUERY CODE LINE 131 BELOW ---
 				}
 				else{
 					$('#checkMessage').removeClass("display-none");
 					$("#Fid").addClass("focuscss");
 					$("#checkpassword").addClass("stop");
+					$("#checkpassword").prop("disabled", true);
 					return false;
 				}					
 				}
@@ -129,6 +132,7 @@
 					$('#checkMessage').addClass("display-none");
 					$("#Fid").removeClass("focuscss");
 					$(".submit-btn input").removeClass("stop");
+					$("#checkpassword").prop("disabled", false);
 				}
 				else{
 					$('#checkMessage').removeClass("display-none");
