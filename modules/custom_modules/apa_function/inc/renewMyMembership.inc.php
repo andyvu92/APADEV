@@ -465,7 +465,7 @@ You have the right to access the personal information about yourself held by the
 				<div class="item-body">
 					<span class="item-title">Current APA member</span>
 					<span class="item-description">If you are a current APA member, please click below to renew your membership for 2019.</span>
-					<a class="item-action" href="#">Renew</a>
+					<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#">Renew</a>
 				</div>
 			</div>
 
@@ -473,7 +473,7 @@ You have the right to access the personal information about yourself held by the
 				<div class="item-body">
 					<span class="item-title">Previous APA member</span>
 					<span class="item-description">Have you been an APA member prior to 2018? Rejoin below to purchase membership for the remainder of 2018, or call 1300&nbsp;306&nbsp;622 to purchase 2019 membership.</span>
-					<a class="item-action" href="#">Rejoin</a>
+					<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#">Rejoin</a>
 				</div>
 			</div>
 
@@ -481,7 +481,7 @@ You have the right to access the personal information about yourself held by the
 				<div class="item-body">
 					<span class="item-title">New member</span>
 					<span class="item-description">New to the APA? Please join below to purchase membership for the remainder of 2018, or call 1300&nbsp;306&nbsp;622 to purchase 2019 membership.</span>
-					<a class="item-action" href="#">Join</a>
+					<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#">Join</a>
 				</div>
 			</div>
 		</div>
