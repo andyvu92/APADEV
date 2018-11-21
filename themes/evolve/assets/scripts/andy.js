@@ -882,6 +882,17 @@ jQuery(document).ready(function(){
       $('form .password-field').after($('#messages').show());
     });
 
+    // SAVE MEDIA TYPE STATUS
+    $(document).on('click', '.page-node-102 .mediaSection .media_filter li', function(){
+      currentStatus = $(this).attr('id');
+      sessionStorage.setItem('currentStatus', currentStatus);
+    });
+
+    if( window.location.href.indexOf("media?page") > -1 ){
+      currentStatus = sessionStorage.getItem('currentStatus');
+			$('.mediaSection .media_filter li#' + currentStatus).click();
+    }
+    // END SAVE MEDIA TYPE STATUS
 });
 
 

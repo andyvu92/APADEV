@@ -106,7 +106,9 @@
         print render($content);
         ?>
 	<div class="more">
-		<a class="cta-primary" href="<?php print $node_url; ?>">Read more</a>
+        <div class="cta-primary">
+            <a href="<?php print $node_url; ?>"><span>Read more</span></a>
+        </div>
 	</div>
 	</section>
   

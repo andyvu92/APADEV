@@ -3193,33 +3193,40 @@ body .block .secondary-button{
     color: #333;
     transition: all .3s linear;
     position: relative;
-    &:before{
-        content: '\f054';
-        font-family: FontAwesome;
-        position: absolute;
-        right: -20px;
-        top: 0px;
-        transition: all .2s linear;
-    }
-    &:after{
-        content: '\f068';
-        font-family: FontAwesome;
-        position: absolute;
-        right: -20px;
-        top: -0.5px;
-        transform: translate(-8px);
-        opacity: 0;
-        transition: all .2s linear;
-    }
-    &:hover{
-        color: @bright-blue;
-        &:before{
-            right: -25px;
+    display: block;
+    float: left;
+    a{
+        display: flex;
+        span{
+            &:before{
+                content: '\f054';
+                font-family: FontAwesome;
+                position: absolute;
+                right: -20px;
+                transition: all .2s linear;
+            }
+            &:after{
+                content: '\f068';
+                font-family: FontAwesome;
+                position: absolute;
+                right: -20px;
+                transform: translate(-8px);
+                opacity: 0;
+                transition: all .2s linear;
+            }
         }
-        &:after{
-            right: -20px;
-            transform: translate(0px);
-            opacity: 1;
+        &:hover{
+            color: @bright-blue;
+            span{
+                &:before{
+                    right: -25px;
+                }
+                &:after{
+                    right: -20px;
+                    transform: translate(0px);
+                    opacity: 1;
+                }
+            }
         }
     }
 }

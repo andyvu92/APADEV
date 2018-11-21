@@ -612,13 +612,12 @@ $userRetisterStatus = false;
 				<div class="left-icon">
 					<span class="presenters-bio-icon large-icon"></span>
 				</div>
-				<div class="right-content presenters-bio readmore-content">
+				<div class="right-content presenters-bio">
 					<h2 class="blue-heading">Presenters</h2>
 						<?php 
 						foreach($pd_detail['Presenter'] as $bios) {
 							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
-
-							echo '<div class="short-text">'.$bios['Comments'].'</div><a class="readmore">Read more</a>';
+							echo '<div class="readmore-content"><div class="short-text">'.$bios['Comments'].'</div><a class="readmore">Read more</a></div>';
 						}
 						?>
 
