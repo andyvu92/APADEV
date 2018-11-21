@@ -1131,7 +1131,7 @@ div[aria-describedby="jobnoticement"].ui-dialog {
 }
 
 /* WEB USER SIGNUP */
-div[aria-describedby="signupWebUser"]{
+#signupWebUser{
     .small-popup;
     position: fixed !important;
     padding: 40px 0px;
@@ -1143,6 +1143,8 @@ div[aria-describedby="signupWebUser"]{
     overflow: hidden;
     -webkit-box-shadow: 0 5px 15px rgba(0,0,0,.5);
     box-shadow: 0 5px 15px rgba(0,0,0,.5);
+    padding: 40px 30px 30px 30px!important;
+    overflow-y: scroll;
     .none-padding{
         float: left;
     }
@@ -1150,16 +1152,35 @@ div[aria-describedby="signupWebUser"]{
         background: none;
         border: none;
     }
-    #signupWebUser{
-        overflow: auto;
-        overflow-x: hidden;
-        max-height: 73vh!important;
+    form, #create-webuser-form{
         input{
             background: #fff;
             min-height: 48px;
         }
         select{
             min-height: 48px;
+        }
+        .light-lead-heading{
+            font-size: 2.5em;
+            margin-top: 15px;
+            @media @larger-phone-width-down{
+                font-size: 2em;
+            }
+        }
+        .row{
+            .col-lg-6{
+                padding-right: 5px!important;
+                @media @larger-phone-width-down{
+                    padding-right: 0!important;
+                }
+                &:nth-child(even){
+                    padding-right: 0px!important;
+
+                }
+            }
+            .col-lg-3 + .col-lg-6{
+                padding-right: 0!important;
+            }
         }
     }
     .locked:before{

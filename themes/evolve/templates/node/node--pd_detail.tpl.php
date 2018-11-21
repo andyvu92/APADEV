@@ -1335,6 +1335,9 @@ $userRetisterStatus = false;
           </div>  
 <!--Sign up Web User-->
 <div id="signupWebUser">
+
+<span class="close-popup"></span>
+
 <form id="create-webuser-form" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST">
 		<input type="hidden" name="CreateUser" value=""/>
 		    <div class="down33" style="display:block;">
@@ -1560,7 +1563,7 @@ $userRetisterStatus = false;
 					}
 				</script>
 			    </div>
-					<div class="col-xs-12 none-padding"><span class="light-lead-heading cairo">Residential address:</span></div>				
+					<div class="row"><span class="light-lead-heading cairo">Residential address:</span></div>				
 					<div class="row">
 						<div class="col-lg-12">
 						   <label for="">Building name</label>
@@ -1637,16 +1640,15 @@ $userRetisterStatus = false;
                 	
 				
             </div>
-			<div class="col-lg-12 none-padding">
+			<div class="row">
 				<button class="accent-btn" type="submit" value="Submit">Submit</button>
 			</div>
-				<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4" style="width: 100%; margin-top: 10px;"><span class="dashboard-button-name">Submit</span></a></div>-->
 		
     </form>
 
 </div>
-
 <!--End Sign up Web User-->
+
 <!--Member update detail-->
  <?php if(isset($details)): ?>
 <div id="registerPDUser">
@@ -2121,7 +2123,7 @@ $userRetisterStatus = false;
 
 </div>
 	<div class="extra-info">
-		<span>By registering for this course, you agree to the <a href="../PDtermsandconditions">APA Events Terms and Conditions.</a></span>
+		<span>By registering for this course, you agree to the <a href="/pd/terms-and-conditions">APA Events Terms and Conditions.</a></span>
 		<span>You could save on future events by joining an <a href="/membership/national-groups">APA National Group</a>. Pay $54 today and keep saving throughout the year.</span>
 	</div>
 </div>

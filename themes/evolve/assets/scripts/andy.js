@@ -102,6 +102,7 @@ jQuery(document).ready(function($) {
         if ( wordCount > 80 ) {
           $(this).find(".short-text").text( splittext + '...');
           $('.short-text', this).after( '<div class="full-text" style="display: none;">' + fulltext + '</div>' );
+          $('.readmore',this).show();
         }
         else{
           $('.readmore',this).remove();
@@ -113,6 +114,7 @@ jQuery(document).ready(function($) {
         if ( wordCount > 25 ) {
           $(this).find(".short-text").text( splittext + '...');
           $('.short-text', this).after( '<div class="full-text" style="display: none;">' + fulltext + '</div>' );
+          $('.readmore',this).show();
         }
         else{
           $('.readmore',this).remove();

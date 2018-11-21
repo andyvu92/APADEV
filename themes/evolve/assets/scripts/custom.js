@@ -902,25 +902,6 @@ jQuery(document).ready(function($) {
 		$('.overlay').fadeOut();
 	});
 
-	$('#createAccount').click(function(){
-		$('#loginAT').dialog();
-		$('.modal-backdrop').fadeOut();
-		$('#loginAT').dialog('close');
-		$('.overlay').fadeIn();
-		$( "#signupWebUser" ).dialog();
-	});
-
-	$('#signup').click(function(){
-		$( "#signupWebUser" ).dialog();
-	});
-
-	$('.member-login').click(function(){
-		$( "#loginPopWindow" ).dialog();
-	});
-	$('#viewMap').click(function(){
-		//$( "#myMap" ).dialog();
-	});
-
 	$('#instalmentpolicyl').click(function(){
 		$( "#installmentpolicyWindow" ).dialog();
 	});
