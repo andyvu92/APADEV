@@ -112,11 +112,13 @@
         print render($content);
         ?>
 	<div class="more">
-		<?php if(!is_null(render($content['field_external_link']))): ?>
-			<a  class="cta-primary" href="<?php echo $content['field_external_link']['#items'][0]['value'];?>" target="_blank">Discover more</a>
-	    <?php else: ?>
-			<a class="cta-primary" href="<?php print $node_url; ?>">Discover more</a>
-		<?php endif ?>
+		<div class="cta-primary">
+			<?php if(!is_null(render($content['field_external_link']))): ?>
+				<a href="<?php echo $content['field_external_link']['#items'][0]['value'];?>" target="_blank"><span>Discover more</span></a>
+			<?php else: ?>
+				<a href="<?php print $node_url; ?>"><span>Discover more</span></a>
+			<?php endif ?>
+		</div>
 	</div>
 	</section>
   
