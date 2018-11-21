@@ -5,6 +5,15 @@ if(!function_exists('drupal_session_started'))
 }
 ?>
 <?php if(isset($_SESSION["UserId"])): ?>
+
+<?php if(isset($_SESSION["renewTag"])): ?>
+<?php
+	/*hanled renewTag session */
+	$now = time();  
+	if (isset($_SESSION['expireTag']) && $now > $_SESSION['expireTag']) {
+		unset($_SESSION['renewTag']);
+	}
+?>
 <?php if(!empty($_SESSION['payThroughDate'])):?>
 <?php 
 //This is to get the renewal quatation order details from Aptify!!!!!!!!
@@ -29,6 +38,7 @@ if(!function_exists('drupal_session_started'))
 // Response -Order details
 	$orderDetails = aptify_get_GetAptifyData("44", $quatationOrderID); 
 	
+	
 	}
 	else{$orderDetails = array();$tag = false; }
     //$paythrough = date_create_from_format('m/d/Y', $_SESSION['payThroughDate']);
@@ -36,6 +46,7 @@ if(!function_exists('drupal_session_started'))
 	//echo $paythrough;
    
 ?>
+
 <?php if(checkRenew($_SESSION['payThroughDate'], $tag)): ?>
 <?php
 //include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
@@ -444,7 +455,55 @@ You have the right to access the personal information about yourself held by the
 
 	</div>
 <?php endif;?>
+<?php else:
+	//when the renewTag session is not existed 	
+?>
+	<div class="full-width banner-img">
+			<img src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_1500X500.png" alt="Every step a leader">
+			<img class="mobile" src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_376X366.png" alt="Every step a leader">
+		</div>
 
+		<span class="space-50">&nbsp;</span>
+
+		<div class="header">
+			<h2 class="lead-heading">Choose your current membership status below:</h2>
+		</div>
+
+		<div class="grid-block apa-member-grid">
+			<div class="item">
+				<div class="item-body">
+					<span class="item-title">Current APA member</span>
+					<span class="item-description">If you are a current APA member, please click below to renew your membership for 2019.</span>
+					<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="item-body">
+					<span class="item-title">Previous APA member</span>
+					<span class="item-description">Have you been an APA member prior to 2018? Rejoin below to purchase membership for the remainder of 2018, or call 1300&nbsp;306&nbsp;622 to purchase 2019 membership.</span>
+					<a href="/membership-question" class="item-action">Rejoin</a>
+				</div>
+			</div>
+
+			<div class="item">
+				<div class="item-body">
+					<span class="item-title">New member</span>
+					<span class="item-description">New to the APA? Please join below to purchase membership for the remainder of 2018, or call 1300&nbsp;306&nbsp;622 to purchase 2019 membership.</span>
+					<a href="/membership-question" class="item-action">Join</a>
+				</div>
+			</div>
+		</div>
+
+		<span class="space-50">&nbsp;</span>
+
+		<div class="bottom-info">
+			<span>If you have any questions with regard to APA membership, please contact our Member Service Centre at <a href="mailto:info@australian.physio">info@australian.physio</a> or call <a href="tel:1300 306 622">1300&nbsp;306&nbsp;622</a></span>
+		</div>
+
+		<span class="space-100">&nbsp;</span>
+		
+<?php endif;?>
 <?php else: 
 	// when user is not logged in
 	?>
@@ -495,13 +554,20 @@ You have the right to access the personal information about yourself held by the
 		<span class="space-100">&nbsp;</span>
 
 <?php endif; ?>
+<!--Added renew landing page hidden form to check the login user eligible for renew process-->
+<div class="display-none">
+<?php 
+	$the_form = drupal_get_form('apa_renew_landingpage_form');
+	print drupal_render($the_form);			 
+?>
+</div>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 	var isshow = sessionStorage.getItem('isshow');
-	var user ='<?php if(isset($_SESSION['UserId'])) {echo $_SESSION['UserId']; } else{ echo "";}?>';
+	var user ='<?php if(isset($_SESSION['UserId']) && isset($_SESSION['renewTag']))  {echo $_SESSION['UserId']; } else{ echo "";}?>';
 	if(isshow == null && user != ""){
        sessionStorage.setItem('isshow', 1);
 	   

@@ -61,6 +61,8 @@ function deleteSession() {
 	completeOrderDeleteSession();
 	//End Added by JingHu
 	unset($_SESSION['Preferred-name']);
+	unset($_SESSION['renewTag']);
+	unset($_SESSION['expireTag']);
 	/*
 	unset($_SESSION['Logfgh']);
 	unset($_SESSION['Logfgh']);
@@ -97,5 +99,7 @@ function completeOrderDeleteSession(){
 	unset($_SESSION["NationalProductID"]);
 	unset($_SESSION["FPProductID"]);
 	unset($_SESSION["MGProductID"]);
+	unset($_SESSION['renewTag']);
+	unset($_SESSION['expireTag']);
 }
 ?>

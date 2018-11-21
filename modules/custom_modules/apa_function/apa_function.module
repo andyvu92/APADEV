@@ -587,6 +587,22 @@ function add_payment_card($form, &$form_state){
 
 }
 /*
+create renew landing page hidden form
+*/
+function apa_renew_landingpage_form($form, &$form_state){
+    $form['submit'] = array('#type' => 'submit','#value' => t('submit'), '#submit'=>['renew_landingpage_login']); 
+    return $form;
+}
+/*
+create session for the renew logic 
+*/
+function renew_landingpage_login($form, &$form_state){
+  
+    $_SESSION["renewTag"]=1;
+    // keep this session for half hour
+  	$_SESSION['expireTag'] = time() + (30 * 60);
+}
+/*
 function _apa_sso_login_form_validate($form, &$form_state) {
     //  Any validation you want to do here.
     //  Submitted values are available in $form_state variable.
