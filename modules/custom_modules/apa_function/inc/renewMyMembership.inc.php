@@ -357,7 +357,8 @@ You have the right to access the personal information about yourself held by the
 <div class="overlay">
 	<section class="loaders">
 		<span class="loader loader-quart">
-		</span>   
+		</span>  
+		<span class="edu-step-note"></span> 
 	</section>
 </div>
 <div id="QuatationPopUp" style="display:none;" class="container">
@@ -567,7 +568,6 @@ You have the right to access the personal information about yourself held by the
 	<section class="loaders">
 		<span class="loader loader-quart">
 		</span>
-		<span class="edu-step-note">This may take a moment while we create your account</span>
 	</section>
 </div>
 
