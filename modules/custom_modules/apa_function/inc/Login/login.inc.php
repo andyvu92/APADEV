@@ -988,7 +988,7 @@ if(isset($_SESSION['UserId'])) {
 
 	<div class="OtherListTop"><a class="jobs" href="https://www.jobs4physios.com.au/" target="_blank"><span class="uniq">jobs</span>4physios</a></div>
 
-	<div class="OtherListTop"><a class="cpd" href="https://cpd4physios.com.au/" target="_blank"><span class="uniq">cpd</span>4physios</a></div>
+	<div class="OtherListTop"><a href='<?php  if(isset($_SESSION['UserId']))  { echo "https://australian.physio/sso/redirect-cpd4physio";} else { echo "https://cpd4physios.com.au/";}?>' target="_blank"><span class="uniq">cpd</span>4physios.com.au</a></div>
 
 	<div class="OtherListTop"><a class="classifieds" href="https://www.classifieds4physios.com.au/" target="_blank"><span class="uniq">classifieds</span>4physios</a></div>
 
