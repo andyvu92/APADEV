@@ -144,7 +144,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 
 			<div class="flex-col-6">
 				<label>CVV:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="3">
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 			<div class="flex-col-6 tooltip-container top" style="margin-top: 10px;">
 					<span class="tooltip-activate">What is CVV?</span>
@@ -213,7 +213,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 
 			<div class="flex-col-6">
 				<label>CVV:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="3">
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 			<div class="flex-col-6 tooltip-container top" style="margin-top: 10px;">
 				<span class="tooltip-activate">What is CVV?</span>
@@ -368,7 +368,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 
 			<div class="flex-col-6">
 				<label>CVV:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 			<div class="flex-col-6 tooltip-container top" style="margin-top: 10px;">
 					<span class="tooltip-activate">What is CVV?</span>
@@ -437,7 +437,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 
 			<div class="flex-col-6">
 				<label>CVV:<span class="tipstyle"> *</span></label>
-				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV">
+				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 			<div class="flex-col-6 tooltip-container top" style="margin-top: 10px;">
 					<span class="tooltip-activate">What is CVV?</span>
