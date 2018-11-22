@@ -66,6 +66,14 @@ $background = getBackgroundImage($userID);
 /* get background image****/ 
  
 ?>
+<!-- PREVENT OVERLAY TO SHOW UP -->
+<style>
+	.white-overlay{
+		display: none;
+	}
+</style>
+
+<!-- PAGE CONTENT BEGIN -->
 <div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
 	<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?> autoscroll" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
@@ -471,7 +479,7 @@ You have the right to access the personal information about yourself held by the
 
 		<div class="grid-block apa-member-grid">
 			<div class="item">
-				<div class="item-body">
+				<div class="item-body current-member">
 					<span class="item-title">Current APA member</span>
 					<span class="item-description">If you are a current APA member, please click below to renew your membership for 2019.</span>
 					<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
@@ -479,7 +487,7 @@ You have the right to access the personal information about yourself held by the
 			</div>
 
 			<div class="item">
-				<div class="item-body">
+				<div class="item-body previous-member">
 					<span class="item-title">Previous APA member</span>
 					<span class="item-description">Have you been an APA member prior to 2018? Rejoin below to purchase membership for the remainder of 2018, or call 1300&nbsp;306&nbsp;622 to purchase 2019 membership.</span>
 					<a href="/membership-question" class="item-action">Rejoin</a>
@@ -487,7 +495,7 @@ You have the right to access the personal information about yourself held by the
 			</div>
 
 			<div class="item">
-				<div class="item-body">
+				<div class="item-body new-member">
 					<span class="item-title">New member</span>
 					<span class="item-description">New to the APA? Please join below to purchase membership for the remainder of 2018, or call 1300&nbsp;306&nbsp;622 to purchase 2019 membership.</span>
 					<a href="/membership-question" class="item-action">Join</a>
@@ -521,7 +529,7 @@ You have the right to access the personal information about yourself held by the
 
 		<div class="grid-block apa-member-grid">
 			<div class="item">
-				<div class="item-body">
+				<div class="item-body current-member">
 					<span class="item-title">Current APA member</span>
 					<span class="item-description">If you are a current APA member, please click below to renew your membership for 2019.</span>
 					<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#">Renew</a>
@@ -529,7 +537,7 @@ You have the right to access the personal information about yourself held by the
 			</div>
 
 			<div class="item">
-				<div class="item-body">
+				<div class="item-body previous-member">
 					<span class="item-title">Previous APA member</span>
 					<span class="item-description">Have you been an APA member prior to 2018? Rejoin below to purchase membership for the remainder of 2018, or call 1300&nbsp;306&nbsp;622 to purchase 2019 membership.</span>
 					<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#">Rejoin</a>
@@ -537,7 +545,7 @@ You have the right to access the personal information about yourself held by the
 			</div>
 
 			<div class="item">
-				<div class="item-body">
+				<div class="item-body new-member">
 					<span class="item-title">New member</span>
 					<span class="item-description">New to the APA? Please join below to purchase membership for the remainder of 2018, or call 1300&nbsp;306&nbsp;622 to purchase 2019 membership.</span>
 					<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#">Join</a>
@@ -554,6 +562,14 @@ You have the right to access the personal information about yourself held by the
 		<span class="space-100">&nbsp;</span>
 
 <?php endif; ?>
+
+<div class="white-overlay">
+	<section class="loaders">
+		<span class="loader loader-quart">
+		</span>   
+	</section>
+</div>
+
 <!--Added renew landing page hidden form to check the login user eligible for renew process-->
 <div class="display-none">
 <?php 

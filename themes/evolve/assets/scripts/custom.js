@@ -27,10 +27,12 @@ jQuery(document).ready(function($) {
 	$('[class^=Tabs]').click(function(){
 		var x = $(this).attr("class").replace('Tabs', '');
 		if ( $(this).hasClass('active') ){
-			return;
+			$(this).removeClass('active');
+			$('[class^=TabContents]').slideUp(400);
 		}
 		else{
 			$(this).siblings().removeClass('active');
+			$('[class^=Tabs]').removeClass('active');
 			$(this).addClass('active');
 			$('[class^=TabContents]:not(.TabContents'+x+')').slideUp(400);
 			$('.TabContents' + x).slideToggle(450);

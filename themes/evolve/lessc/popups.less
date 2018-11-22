@@ -325,6 +325,31 @@ include the following div to the template where overlay is needed
     }
 }
 
+.no-js{
+    .white-overlay{
+        display: none;
+    }
+}
+
+.white-overlay{
+    .overlay;
+    display: block;
+    background: #fff;
+    background-image: url(/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_1500X568.png);
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    .loaders{
+        visibility: visible;
+        .loader-quart{
+            border: 6px solid rgba(0,0,0,0.4);
+            &:after{
+                border-top-color: #000;
+            }
+        }
+    }
+}
+
 .ui-resizable-handle{
     display: none!important;
 }

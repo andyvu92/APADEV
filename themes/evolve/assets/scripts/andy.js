@@ -893,6 +893,41 @@ jQuery(document).ready(function(){
 			$('.mediaSection .media_filter li#' + currentStatus).click();
     }
     // END SAVE MEDIA TYPE STATUS
+
+    // AUTO  REDIRECT ON RENEW PAGE
+    if( window.location.href.indexOf("renew") > -1 ){
+      // SET SESSION
+      $(document).on('click', '.current-member .item-action', function(){
+        sessionStorage.setItem('userStatus', 'current');
+      });
+      $(document).on('click', '.previous-member .item-action', function(){
+        sessionStorage.setItem('userStatus', 'previous');
+      });
+      $(document).on('click', '.new-member .item-action', function(){
+        sessionStorage.setItem('userStatus', 'new');
+      });
+
+      // RETRIEVE SESSION & APPLY CONDITION
+      if( ($('body, .html').find('.nameHello').length > 0) && sessionStorage.getItem('userStatus') == 'current' ) { 
+        sessionStorage.setItem('userStatus', 'lodgedIn');
+        $('#apa-renew-landingpage-form').submit();
+      }
+      else if( ($('body, .html').find('.nameHello').length > 0) && sessionStorage.getItem('userStatus') == 'previous' ){
+        sessionStorage.setItem('userStatus', 'lodgedIn');
+        window.location = "/membership-question";
+      }
+      else if( ($('body, .html').find('.nameHello').length > 0) && sessionStorage.getItem('userStatus') == 'new' ){
+        sessionStorage.setItem('userStatus', 'lodgedIn');
+        window.location = "/membership-question";
+      }
+      else if( !($('body, .html').find('.nameHello').length > 0) && sessionStorage.getItem('userStatus') ){
+        $('.white-overlay').hide();
+      }
+      else{
+        $('.white-overlay').hide();
+      }
+    }
+
 });
 
 
