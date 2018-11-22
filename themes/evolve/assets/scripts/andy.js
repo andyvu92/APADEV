@@ -927,7 +927,10 @@ jQuery(document).ready(function(){
         $('.white-overlay').hide();
       }
     }
-
+    $( window ).unload(function() {
+      //Destroy the key
+      localStorage.removeItem("userStatus");
+    });
 });
 
 

@@ -566,7 +566,8 @@ You have the right to access the personal information about yourself held by the
 <div class="white-overlay">
 	<section class="loaders">
 		<span class="loader loader-quart">
-		</span>   
+		</span>
+		<span class="edu-step-note">This may take a moment while we create your account</span>
 	</section>
 </div>
 

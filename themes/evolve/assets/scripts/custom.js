@@ -1544,6 +1544,11 @@ jQuery(document).ready(function($) {
 		$('.loaders').css('visibility','visible').hide().fadeIn();
 	});
 
+	$(document).on('click', '.join-details-button7', function(){
+		$('.overlay .edu-step-note').html("Your order is being processes <br>Please don't refresh this page or press the back button");
+		$('.overlay .edu-step-note').show();
+	});
+
 	$(document).on('click', '.join-details-button5', function(){
 		$('.down5').show();
 		$('#insurancePopUp').fadeOut();

@@ -1446,6 +1446,7 @@ input{
         color: #fff;
         font-size: 1.5em;
         margin-top: 15px;
+        text-align: center;
     }
     .loader {
         display: inline-block;
@@ -2685,6 +2686,11 @@ body .block, body{
         }
     }
 
+    [class^='space-']{
+        & + div, span, ul, ol, p, h1, h2, h3, h4, h5, h6{
+            float: left;
+        }
+    }
     /* PREDEFINED WHITE SPACE WITH KEYLINE */
     .separator-50{
         display: block;
