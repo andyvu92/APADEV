@@ -1658,7 +1658,6 @@ input{
 
 
 .selectize-control.multi{
-    max-height: 48px;
     .selectize-input.input-active, .selectize-input{
         border-radius: 0;
     }
@@ -3034,6 +3033,68 @@ body .block .secondary-button{
 }
 
 /* DEFAULT TOP BANNER W BLUE STRIPE */
+body, .html{
+    #section-banner .block{
+        .top-banner{
+            padding: 170px 25% 70px;
+            @media @larger-tablet-width-down{
+                padding: 70px 15% 30px;
+            }
+            @media @larger-phone-width-down{
+                padding: 70px 10% 30px;
+            }
+            .page-main-header{
+                color: #fff;
+                font-family: Cairo;
+                font-size: 4em;
+                margin: 0px auto;
+                line-height: 1em;
+                text-transform: uppercase;
+                @media @tablet-width-down{
+                    font-size: 3.5em;
+                }
+                @media @larger-phone-width-down{
+                    font-size: 2.5em;
+                }
+            }
+            .separator{
+                width: 100%;
+                position: relative;
+                height: 20px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                font-size: 0;
+                margin: 20px 0;
+                @media @larger-phone-width-down{
+                    margin: 10px 0;
+                }
+                &:after{
+                    content: "";
+                    position: absolute;
+                    height: 3px;
+                    width: 20px;
+                    background: #fff;
+                }
+            }
+            .text-container{
+                font-family: Roboto;
+                color: #fff;
+                font-size: 1.4em;
+                font-weight: 300;
+                text-align: left;
+                @media @larger-phone-width-down{
+                    font-size: 1.2em;
+                }
+            }
+            .arrowDown{
+                border: 1px #fff solid;
+                transform: scale(0.7);
+                margin: 25px auto 15px;
+            }
+        }
+    }
+} 
 .block{
     .top-banner{
         padding: 100px 25% 2%;
@@ -3337,6 +3398,9 @@ body .block .secondary-button{
     margin: 35px 0 0;
     width: 100%;
     display: flex;
+    @media @larger-phone-width-down{
+        margin: 25px 0 0;
+    }
     a{
         padding-top: 60px;
         span{
