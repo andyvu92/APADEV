@@ -2530,7 +2530,7 @@ input{
 
 /* STANDARD FONT STYLE */
 body .block, body{
-    h2.lead-heading{
+    h2.lead-heading, h2{
         font-size: 3em;
         line-height: 1.1em;
         display: block;
@@ -2548,7 +2548,7 @@ body .block, body{
         }
     }
     
-    h3.sub-heading{
+    h3.sub-heading, h3{
         color: #009fda;
         font-size: 1.8em;
         font-family: Roboto;
@@ -2556,6 +2556,9 @@ body .block, body{
         padding-top: 35px;
         margin: 12px 0px 10px;
         letter-spacing: 0px;
+        & + table{
+            margin-top: 18px;
+        }
     }
     
     .intro{
@@ -2728,6 +2731,38 @@ body .block, body{
             &[type="submit"]{
                 color: #fff;
             }
+        }
+    }
+}
+
+/* STANDARD TABLE */
+body, body .block{
+    table{
+        width: 100%;
+        max-width: 700px;
+        font-family: Roboto;
+        font-size: 1.2em;
+        color: #000;
+        tbody{
+            border: 0;
+            box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+            tr{
+                font-size: 1em;
+                border-bottom: 1px solid rgba(224, 224, 224, 1);
+                &:last-of-type{
+                    border-bottom: 0;
+                }
+                &:hover{
+                    background: @light-grey;
+                }
+            }
+            td{
+                font-size: 1em;
+                padding: 10px 15px;
+            }
+        }
+        & + [class^="space-"]{
+            float: left;
         }
     }
 }
