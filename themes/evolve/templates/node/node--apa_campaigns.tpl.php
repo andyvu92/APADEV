@@ -98,39 +98,40 @@
 		   <?php print $title; ?></a></h2>
     </header>
 		*/ ?>
-	<div id="section-main-content" class="container">
-		<div class="row">
-	<div class="region region-content col-xs-12 col-sm-12 col-md-9 col-lg-9 MainContent">
-	    
-		<!--<h1 class="SectionHeader"><?php //print $node->title;?></h1>
-		<div class="brd-headling">&nbsp;</div>-->
-		
-	  <?php
-        // We hide the comments and links now so that we can render them later.
-        hide($content['comments']);
-        hide($content['links']);
-        print render($content['body']);
-		
-        ?>
-	
+	<div id="section-main-content">
+		<div class="container">
+			<div class="row">
+				<div class="region region-content col-xs-12 col-sm-12 col-md-9 col-lg-9 MainContent">
+					
+					<!--<h1 class="SectionHeader"><?php //print $node->title;?></h1>
+					<div class="brd-headling">&nbsp;</div>-->
+					
+				<?php
+					// We hide the comments and links now so that we can render them later.
+					hide($content['comments']);
+					hide($content['links']);
+					print render($content['body']);
+					?>
+				
+				</div>
+				<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3">
+					<?php 
+						$block = block_load('block', '297');
+						$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+						$output = drupal_render($get);        
+						print $output;
+					?>
+					<?php 
+						$block = block_load('block', '298');
+						$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+						$output = drupal_render($get);        
+						print $output;
+					?>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3">
-	 	<?php 
-			$block = block_load('block', '297');
-			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-			$output = drupal_render($get);        
-			print $output;
-		?>
-		<?php 
-			$block = block_load('block', '298');
-			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-			$output = drupal_render($get);        
-			print $output;
-		?>
-	
-	</div>
-	</div>
-	</div>
+
 	<div class="container">
 	<?php 
 		$block = block_load('block', '302');

@@ -1545,7 +1545,7 @@ jQuery(document).ready(function($) {
 	});
 
 	$(document).on('click', '.join-details-button7', function(){
-		$('.overlay .edu-step-note').html("Your order is being processes <br>Please don't refresh this page or press the back button");
+		$('.overlay .edu-step-note').html("Your order is being processed <br>Please don't refresh this page or press the back button");
 		$('.overlay .edu-step-note').show();
 	});
 
