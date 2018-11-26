@@ -126,7 +126,7 @@ function apa_get_cm_login_form($form, &$form_state) {
 				' placeholder' => 'Email address'
 		),
     '#prefix'=>'<div class="flex-container"><div class="flex-cell">
-    <h3 class="light-lead-heading cairo" style="color:black;margin-left: -5%;">Sign in to your account</h3>
+    <span class="light-lead-heading cairo" style="color:black;">Sign in to your account</span>
     <p style="margin-bottom: 0"><span class="strong-subhead">Are you an existing member logging in for the first time?</a></span></p>
     <p style="margin-top: 0;margin-left: -14%;" ><span class="strong-subhead"><a id="return-users" href="/return-user-welcome">Click here</a> and we will help you get started.</span></p>
   </div><div class="flex-cell"><div class="email-field">',
