@@ -399,7 +399,7 @@ $('.modal-body').on('mouseleave', function(){
       var trapElement;
       var scrollableDist;
       var trapClassName = 'trapScroll-enabled';
-      var trapSelector = '.modal-body, #signupWebUser';
+      var trapSelector = '.modal-body, #signupWebUser, .region-right-sidebar, .node .right-sidebar';
       
       var trapWheel = function(e){
         
@@ -948,7 +948,7 @@ jQuery(document).ready(function(){
         // HIDE SIDEBAR ON SWIPE RIGHT
         $(this).on('swiperight', function(){
           $(this).removeClass('active');
-          $('body, .html').css('overflow', 'auto');
+          $('body').removeClass('trapScroll-enabled');
         });
       }
     });
@@ -957,11 +957,11 @@ jQuery(document).ready(function(){
     $(document).on('click', '.sidebar-toggle', function(){
       if( $(this).parent().hasClass('active') ){
         $(this).parent().removeClass('active');
-        $('body, .html').css('overflow', 'auto');
+        $('body').removeClass('trapScroll-enabled');
       }
       else{
         $(this).parent().addClass('active');
-        $('body, .html').css('overflow', 'hidden');
+        $('body').addClass('trapScroll-enabled');
       }
     });
 
