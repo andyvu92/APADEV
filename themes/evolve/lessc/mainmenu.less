@@ -187,6 +187,8 @@ body.html #section-header{
       padding: 15px 0;
       box-shadow: 0 1px 1px -1px rgba(0, 0, 0, 0.2);
       background: #fff;
+      position: relative;
+      z-index: 999;
       .search-toggle {
         line-height: 80px;
         font-size: 22px;
@@ -237,6 +239,10 @@ body.html #section-header{
 }
 
 #section-socials{
+  @media @larger-tablet-width-down{
+    position: relative;
+    z-index: inherit;
+  }
   .contextual-links-region{
     #logoutButton{
       display: flex;

@@ -92,6 +92,12 @@
 @desktop-width-down:   ~"all and (max-width: 1200px)";
 @desktop-width-up:   ~"all and (min-width: 1200px)";
 
+
+/*----------------------- MIXINS -----------------------*/
+.square(@size) {
+  width: @size;
+  height: @size;
+}
 .absPosition (@border-size) {
   position: absolute;
   top: @border-size;
@@ -99,10 +105,81 @@
   bottom: @border-size;
   left: @border-size;
 }
-
-.animation(@animation) {
+.animation(@animation, @duration, @count) {
   -o-animation: @animation;
   -moz-animation: @animation;
   -webkit-animation: @animation;
   animation: @animation;
+  animation-duration: @duration;
+  animation-iteration-count: @count;
+}
+
+/*----------------------- ANIMATION -----------------------*/
+
+@keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    tranform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    tranform: rotate(360deg);
+  }
+}
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+    tranform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+    tranform: rotate(360deg);
+  }
+}
+@keyframes bouncing {
+  0%, 100% {
+    transform: scale3d(1,1,1);
+  }
+  50% {
+    transform: scale3d(0,0,1);
+  }
+}
+@-webkit-keyframes bouncing {
+  0%, 100% {
+    transform: scale3d(1,1,1);
+  }
+  50% {
+    transform: scale3d(0,0,1);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    box-shadow: 0 0 0 60px rgba(255,255,255,.1);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@-webkit-keyframes pulse {
+  0% {
+    opacity: 0;
+  }
+  30% {
+    opacity: 1;
+  }
+  60% {
+    box-shadow: 0 0 0 60px rgba(255,255,255,.1);
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
 }

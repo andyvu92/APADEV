@@ -931,6 +931,60 @@ jQuery(document).ready(function(){
       //Destroy the key
       localStorage.removeItem("userStatus");
     });
+
+    // CONSTRUCT RIGHT SIDEBAR ON MOBILE
+    $('.region-right-sidebar, .node .right-sidebar').each(function(){
+      var window_width = $(window).width();
+      var title = $('.underline-heading' ,this).text();
+      if (window_width < 570){
+        $(this).prepend('<span class="sidebar-toggle off-right">' + title + '</span>');
+        $(this).after('<div class="sidebar-overlay"></div>');
+
+        // if sidebar doesn't have class 'underline-heading'
+        if (window.location.href.indexOf("campaign") > -1) {
+          $('.sidebar-toggle').text('Quick links');
+        }
+
+        // HIDE SIDEBAR ON SWIPE RIGHT
+        $(this).on('swiperight', function(){
+          $(this).removeClass('active');
+          $('body, .html').css('overflow', 'auto');
+        });
+      }
+    });
+
+    // SHOW/HIDE SIDEBAR ON TOGGLE CLICK
+    $(document).on('click', '.sidebar-toggle', function(){
+      if( $(this).parent().hasClass('active') ){
+        $(this).parent().removeClass('active');
+        $('body, .html').css('overflow', 'auto');
+      }
+      else{
+        $(this).parent().addClass('active');
+        $('body, .html').css('overflow', 'hidden');
+      }
+    });
+
+    // HIDE/SHOW SIDEBAR TOGGLE ON SCROLL
+    $(document).scroll(function() {
+      if ( (!($('#section-clients').isInViewport())) && (!($('#section-header').isInViewport())) ) {
+        $('.sidebar-toggle').addClass('off-right');
+      } else {
+        $('.sidebar-toggle').removeClass('off-right');
+      }
+    });
+
+    // DETECT IF AN ELEMENT IS IN VIEWPORT
+    $.fn.isInViewport = function() {
+      var elementTop = $(this).offset().top;
+      var elementBottom = elementTop + $(this).outerHeight();
+      var viewportTop = $(window).scrollTop();
+      var viewportBottom = viewportTop + $(window).height();
+      return elementBottom > viewportTop && elementTop < viewportBottom;
+    };
+
+    //DISABLE JQUERY MOBILE AJAX PAGE NAVIGATION
+    $.mobile.ajaxEnabled = false;
 });
 
 

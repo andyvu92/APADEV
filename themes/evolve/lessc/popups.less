@@ -1234,17 +1234,9 @@ div[aria-describedby="jobnoticement"].ui-dialog {
 }
 
 /* MAIN LOGIN POPUP */
-#loginAT{
-    @media @larger-phone-width-down{
-        position: absolute!important;
-        .modal-dialog{
-            position: absolute!important;
-        }
-    }
-}
 #loginAT .modal-dialog {
     position: fixed!important;
-    z-index: 1054!important;
+    z-index: 9999 !important;
     width: 400px !important;
     left: calc(~"50vw - 200px")!important;
     top: calc(~'50vh - 216px') !important;
@@ -1253,8 +1245,12 @@ div[aria-describedby="jobnoticement"].ui-dialog {
     }
     .modal-body{
         overflow-x: hidden;
+        overflow-y: scroll;
         padding: 0;
         max-height: none;
+        &::-webkit-scrollbar{
+            width: 0px;
+        }
         .styled-checkbox + label:before{
             margin-right: 10px;
         }

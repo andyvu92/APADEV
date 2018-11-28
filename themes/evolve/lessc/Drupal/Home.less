@@ -506,8 +506,12 @@ div.SSOlogin {
 		justify-content: flex-end;
 		.ShoppingCartBorder{
 			filter: grayscale(100);
-			opacity: 0.8;
+			position: relative;
+			z-index: 20;
 			order: 6;
+			.ButtonIconHolder{
+				opacity: 0.8;
+			}
 			@media @larger-tablet-width-up{
 				border-right: rgba(0,0,0,0.3) 0.3px solid;
 			}
@@ -560,6 +564,9 @@ div.SSOlogin {
 				width: 56%;
 				order: 3;
 				display: block;
+				position: relative;
+				z-index: 20;
+				background: #fff;
 			}
 			.ShoppingCartBorder{
 				width: 12%;

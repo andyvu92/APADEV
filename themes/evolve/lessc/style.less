@@ -126,9 +126,17 @@ ul:not(.contextual-links)[class^="list-"]{
     }
 }
 #section-clients{
-    background-color: @link_color;
+    background-color: @bright-blue;
+    position: relative;
+    z-index: 999;
     .bx-wrapper img{
         margin: 0 auto;
+    }
+    .block{
+        h3{
+            padding-top: 0;
+            font-weight: 400;
+        }
     }
 }
 #section-footer{

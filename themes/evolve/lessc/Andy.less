@@ -1375,62 +1375,10 @@ input{
 /*---------------------------------------
 ---------------------LOADING SCREEN------------- 
 ---------------------------------------*/
-.square(@size) {
-    width: @size;
-    height: @size;
-}
-.absPosition (@border-size) {
-    position: absolute;
-    top: @border-size;
-    right: @border-size;
-    bottom: @border-size;
-    left: @border-size;
-}
-.animation(@animation) {
-    -o-animation: @animation;
-    -moz-animation: @animation;
-    -webkit-animation: @animation;
-    animation: @animation;
-}
 
 @loader-size: 125px;
 /* ANIMATIONS */
-@keyframes spin {
-    0% {
-      -webkit-transform: rotate(0deg);
-      tranform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-      tranform: rotate(360deg);
-    }
-}
-@-webkit-keyframes spin {
-    0% {
-      -webkit-transform: rotate(0deg);
-      tranform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-      tranform: rotate(360deg);
-    }
-}
-@keyframes bouncing {
-    0%, 100% {
-      transform: scale3d(1,1,1);
-    }
-    50% {
-      transform: scale3d(0,0,1);
-    }
-}
-@-webkit-keyframes bouncing {
-    0%, 100% {
-      transform: scale3d(1,1,1);
-    }
-    50% {
-      transform: scale3d(0,0,1);
-    }
-}
+
 /* BASE */
 .loaders {
     visibility: hidden;
@@ -3536,37 +3484,6 @@ body, .html{
     float: left;
 }
 
-@keyframes pulse {
-    0% {
-      opacity: 0;
-    }
-    30% {
-      opacity: 1;
-    }
-    60% {
-      box-shadow: 0 0 0 60px rgba(255,255,255,.1);
-      opacity: 0;
-    }
-    100% {
-      opacity: 0;
-    }
-}
-@-webkit-keyframes pulse {
-    0% {
-      opacity: 0;
-    }
-    30% {
-      opacity: 1;
-    }
-    60% {
-      box-shadow: 0 0 0 60px rgba(255,255,255,.1);
-      opacity: 0;
-    }
-    100% {
-      opacity: 0;
-    }
-}
-
 /* FULL WIDTH ELEMENT */
 .full-width{
     width: 100vw;
@@ -3656,7 +3573,7 @@ body .featured-block{
 }
 
 /* FEATURED BOX ICON LAYOUT */
-.featured-box-icon{
+.featured-box-icon, .dexp-shortcodes-box{
     .box-icon{
         float: none;
         display: flex;
@@ -3714,6 +3631,7 @@ body .featured-block{
         font-weight: 600;
         font-family: Roboto!important;
         text-align: center;
+        padding-top: 0;
     }
     .box-content{
         text-align: center;
@@ -3819,9 +3737,9 @@ body .featured-block{
 }
 
 /* DEFAULT HEADER BANNER */
-.header-banner h1 {
-    font-family: Roboto;
-    font-weight: 400;
+body .header-banner h1 {
+    font-family: Cairo;
+    font-weight: 300;
     text-transform: uppercase;
     color: #fff;
     font-size: 5em;
@@ -3907,6 +3825,73 @@ body .socialMediaIcon{
     min-width: 92.75px;
     color: #000;
 }
+
+/* RIGHT SIDEBAR ON MOBILE */
+.region-right-sidebar, .node .right-sidebar{
+    @media @larger-phone-width-down{
+        display: block!important;
+        position: fixed!important;
+        z-index: 11;
+        height: 100vh;
+        width: 100vw;
+        top: 0;
+        left: 0;
+        margin-top: 50px;
+        background: #fff;
+        transform: translate(100%, 0);
+        transition: all .5s ease-in-out;
+        box-shadow: 0px 0px 0px 0px white;
+        &.active{
+            transform: translate(0, 0);
+            box-shadow: -20px 0px 20px 20px white;
+            overflow-y: auto;
+            padding: 0 40px 100px 40px;
+            .sidebar-toggle{
+                left: -60px;
+            }
+            & + .sidebar-overlay{
+                transform: translate(0, 0);
+            }
+        }
+        .sidebar-toggle{
+            cursor: pointer;
+            display: block;
+            position: absolute;
+            opacity: 0;
+            top: 10vh;
+            min-width: 150px;
+            left: -90px;
+            text-align: center;
+            transform: rotate(-90deg) translate(0, 30px);
+            background: @bright-blue;
+            color: #fff;
+            padding: 5px;
+            transition: all .5s linear;
+            &.off-right{
+                transform: rotate(-90deg) translate(0, 0px);
+                opacity: 1;
+            }
+        }
+        .right-sidebar{
+            padding: 0;
+            display: block!important;
+        }
+    }
+    & + .sidebar-overlay{
+        position: fixed;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #fff;
+        transform: translate(100%, 0);
+        transition: all .5s ease-in-out;
+    }
+}
+
+/* REMOVE PAGE OUTLINE WHEN USING JQUERY MOBILE */
+.ui-page-active { outline: none; }
 
 /* 
 ----------------------------------------------------------------
