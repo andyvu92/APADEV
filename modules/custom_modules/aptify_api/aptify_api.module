@@ -262,7 +262,11 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
 			if(isset($request_data)) {
 				$replacements['!data'] = var_dump($request_data);
 				$message .= "The data sent was <pre>!data</pre><br/>";
-			}
+            }
+            $userIDcheck = _aptify_get('UserId');
+            if(isset($userIDcheck)) {
+                $message .= "User: "._aptify_get('UserId')." / "._aptify_get('Email')."<br/>";
+            }
 			watchdog(APTIFY_API_WATCHDOG, $message, $replacements, WATCHDOG_CRITICAL,$request_url);
 			//throw new AptifyFailure("Communication Error.\nError Code : {$response_status_code}");
 		}
