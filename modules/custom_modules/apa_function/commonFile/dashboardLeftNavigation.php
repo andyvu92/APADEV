@@ -72,12 +72,17 @@ if(isset($_SESSION["UserId"])) {
 	<div class="navbar-collapse">
 		<div class="user-avatar">
 			<?php 
+				/* todo
+				Taken out for a security issue
+				
 				$AptifyAuthI = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=Jing.Hu@aptifyAPAAUS.local&Password=APA%pw!58';
 				$AuthTokenI = curlRequest($AptifyAuthI, "Get", "");
 				$AuthTokenI = json_decode($AuthTokenI, true);
 				$AuthTokenI = $AuthTokenI["TokenId"];
 			?>
 			<a  style="cursor: pointer; color:white;" id="uploadImageButton"><div class="ava-circle" style='background: url(https://aptifyweb.australian.physio/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo?NoImageObject=CRM.NoPhotoAvailable&amp;ds=636682564840400000<?php echo "&AptifyAuthorization=DomainWithContainer%20".$AuthTokenI; ?>) no-repeat center center'></div></a> 
+			*/ ?>
+			<a><div class="ava-circle" style='background: url(https://australian.physio/sites/default/files/Photo.png) no-repeat center center'></div></a> 
 			<span class="user-name cairo"><?php echo $details['Firstname'].' '.$details['Lastname'];?></span>
 		</div>
 		<ul class="nav navbar-nav navbar-left">
