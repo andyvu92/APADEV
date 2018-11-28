@@ -235,7 +235,7 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
 	curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 	curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
     // todo! You must do this before go live!
-    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 
     $result = curl_exec($ch);
 
