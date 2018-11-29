@@ -84,7 +84,66 @@ if(isset($_POST['step3'])) {
 		$productID = "PRF";
 		checkShoppingCart($userID, $type="", $productID);			
 	}
-	
+	/*
+	if(isset($renewOuts['MResponse'])) {
+		if($renewOuts['MResponse'] =="Order updated successfully") {
+			//refresh session data
+			$data = "UserID=".$_SESSION["UserId"];
+			$details = aptify_get_GetAptifyData("4", $data,"");
+			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
+			//end refresh session data
+			  $invoice_ID = $renewOuts['Invoice_ID'];
+			//save the terms and conditons on APA side
+			$dataArray = array();
+			$dataArray['MemberID'] = $postReviewData['userID'];
+			$dataArray['CreateDate']= date('Y-m-d');
+			$dataArray['MembershipYear'] = date('Y',strtotime('+1 year'));
+			$dataArray['ProductList'] = implode(",",$postReviewData['productID']);
+			$dataArray['Type'] = "R";
+			forCreateRecordFunc($dataArray);
+			//delete session:
+			completeOrderDeleteSession();
+			// delete shopping cart data from APA database; put the response status validation here!!!!!!!
+			$userID = $_SESSION["UserId"];
+							
+			// use drupal db_select by jinghu 20/09/2018
+			$type = "membership";
+			checkShoppingCart($userID, $type, $productID="");
+			$type = "NG";
+			checkShoppingCart($userID, $type, $productID="");
+			$type = "MG1";
+			checkShoppingCart($userID, $type, $productID="");
+			$type = "MG2";
+			checkShoppingCart($userID, $type, $productID="");
+			$productID = "PRF";
+			checkShoppingCart($userID, $type="", $productID);			
+		} else {
+			// ???
+			$messageOut = "";
+			foreach($renewOuts as $turnText) {
+				// turn array into a String
+				$messageOut = $messageOut.$turnText."<br/><br/>";
+			}
+			watchdog("Aptify", $messageOut, $postReviewData, WATCHDOG_CRITICAL,"renew failed");
+		}
+	} elseif($renewOuts['ErrorInfo'])) {
+		// 
+		$messageOut = "";
+		foreach($renewOuts as $turnText) {
+			// turn array into a String
+			$messageOut = $messageOut.$turnText."<br/><br/>";
+		}
+		watchdog("Aptify", $messageOut, $postReviewData, WATCHDOG_CRITICAL,"renew failed");
+	} else {
+		// ???
+		$messageOut = "";
+		foreach($renewOuts as $turnText) {
+			// turn array into a String
+			$messageOut = $messageOut.$turnText."<br/><br/>";
+		}
+		watchdog("Aptify", $messageOut, $postReviewData, WATCHDOG_CRITICAL,"renew failed");
+	}
+	*/
 }
 else{
 	header("Location: /");
@@ -161,7 +220,7 @@ $background = getBackgroundImage($userID);
 
 					<div class="flex-container" id="fail-purchase">
 						<div class="flex-cell">
-							<h3 class="light-lead-heading">We had issues processing<br> your payment request.</h3>
+							<h3 class="light-lead-heading">We had unexpected issues processing<br> your payment request.</h3>
 						</div>
 						<div class="flex-cell">
 							<span class="sub-heading">Please <a href="/renewmymembership">try again</a> or <a href="/contact-us">contact us</a>.</span>
