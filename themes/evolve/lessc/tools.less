@@ -135,6 +135,11 @@
             flex-wrap: wrap;
             margin: 20px 0 40px;
             justify-content: center;
+            .dexp-shortcodes-box{
+                @media @larger-phone-width-down{
+                    min-height: 100px;
+                }
+            }
             h3.box-title{
                 margin: 20px 0;
                 font-size: 2.5em;
@@ -142,6 +147,11 @@
                 font-family: Roboto;
                 text-align: left;
                 color: @bright-blue;
+                @media @larger-phone-width-down{
+                    text-align: center;
+                    font-size: 2em;
+                    font-weight: 500;
+                }
             }
 
             .tool-block{
@@ -149,6 +159,9 @@
                 margin: 0 auto;
                 border-bottom: 1px solid rgba(0,0,0,0.12);
                 padding: 100px 0;
+                @media @larger-phone-width-down{
+                    padding: 50px 0;
+                }
                 &:first-child{
                     padding-top: 0;
                 }
@@ -175,6 +188,9 @@
                     font-size: 1.6em;
                     padding-bottom: 60px;
                     display: block;
+                    @media @larger-phone-width-down{
+                        padding-bottom: 30px;
+                    }
                     a{
                         color: @brighter-blue;
                         transition: all .3s linear;
@@ -226,6 +242,32 @@
 
             /* BLOCK CONTENT */
             .tools-block-content{
+                @media @larger-phone-width-down{
+                    flex-direction: column;
+                    div[class^="flex-col"]{
+                        width: 100%;
+                        position: relative;
+                        padding: 30px;
+                        &:after{
+                            content: '';
+                            position: absolute;
+                            bottom: 0px;
+                            width: 60%;
+                            left: 20%;
+                            height: 1px;
+                            background: rgba(0,0,0,0.12);
+                        }
+                        &:last-child{
+                            padding-bottom: 0;
+                            &:after{
+                                display: none;
+                            }
+                        }
+                        .url-block{
+                            margin-bottom: 0;
+                        }
+                    }
+                }
                 .url-block{
                     list-style: none;
                     padding-left: 0;
@@ -275,14 +317,24 @@
                     right: -30px;
                     left: unset;
                 }
+                @media @larger-phone-width-down{
+                    flex-direction: column;
+                }
                 .flex-col-4{
                     padding: 0 30px;
+                    @media @larger-phone-width-down{
+                        width: 100%;
+                    }
                 }
                 .block-title{
                     text-align: center;
                     color: #5e6067;
                     font-weight: 700;
                     margin-bottom: 60px;
+                    @media @larger-phone-width-down{
+                        margin-bottom: 30px;
+                        padding-top: 0;
+                    }
                 }
                 .url-block{
                     font-size: 1em;
