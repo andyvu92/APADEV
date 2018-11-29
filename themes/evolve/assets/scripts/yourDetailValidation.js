@@ -7,7 +7,6 @@
 })(this.jQuery);
 jQuery(document).ready(function($) {
 	var validateYourDetailFun = function(){
-	
 			//if($("select[name=Prefix]").val() =='' ){$("select[name=Prefix]").addClass("focuscss");} else{$("select[name=Prefix]").removeClass("focuscss");}
 			if($("input[name=Firstname]").val() ==''){$("input[name=Firstname]").addClass("focuscss");} else{$("input[name=Firstname]").removeClass("focuscss");}
 			if($("input[name=Lastname]").val() ==''){$("input[name=Lastname]").addClass("focuscss");} else{$("input[name=Lastname]").removeClass("focuscss");}
@@ -42,6 +41,52 @@ jQuery(document).ready(function($) {
 				//if($("select[name=Billing-State]").val() ==''){$("select[name=Billing-State]").addClass("focuscss");}else{$("select[name=Billing-State]").removeClass("focuscss");}
 				if($("input[name=Billing-Country]").val() ==''){$("input[name=Billing-Country]").addClass("focuscss");}else{$("input[name=Billing-Country]").removeClass("focuscss");}
 			}
+			
+		
+			
+			//if($("select[name=Branch]").val() ===''){$("select[name=Branch]").addClass("focuscss");}else{$("select[name=Branch]").removeClass("focuscss");}
+		   
+			var i = $("input[name=wpnumber]").val();
+			var n = $("input[name=maxumnumber]").val();
+		if($('select[name=MemberType]').val()!=="9964" && $('select[name=MemberType]').val()!=="9965" && $('select[name=MemberType]').val()!=="10004"&& $('select[name=MemberType]').val()!=="9966"&& $('select[name=MemberType]').val()!=="9967"&& $('select[name=MemberType]').val()!=="9968"&& $('select[name=MemberType]').val()!=="9997"&& $('select[name=MemberType]').val()!=="9967"){
+			if(i!=0){
+				for (x = 0; x<=n;x++){
+					if($("#workplace"+x).length !== 0){
+						if($("input[name=Name-of-workplace"+x+"]").val() ==''){$("input[name=Name-of-workplace"+x+"]").addClass("focuscss");}else{$("input[name=Name-of-workplace"+x+"]").removeClass("focuscss");}
+						if($("select[name=Workplace-setting"+x+"]").val() ==''){$("select[name=Workplace-setting"+x+"]").addClass("focuscss");}else{$("select[name=Workplace-setting"+x+"]").removeClass("focuscss");}
+						if($("input[name=WAddress_Line_1"+x+"]").val() ==''){$("input[name=WAddress_Line_1"+x+"]").addClass("focuscss");}else{$("input[name=WAddress_Line_1"+x+"]").removeClass("focuscss");}
+						if($("input[name=Wcity"+x+"]").val() ==''){$("input[name=Wcity"+x+"]").addClass("focuscss");}else{$("input[name=Wcity"+x+"]").removeClass("focuscss");}
+						if($("input[name=Wpostcode"+x+"]").val() ==''){$("input[name=Wpostcode"+x+"]").addClass("focuscss");}else{$("input[name=Wpostcode"+x+"]").removeClass("focuscss");}
+						if($("input[name=Wphone"+x+"]").val() ==''){$("input[name=Wphone"+x+"]").addClass("focuscss");}else{$("input[name=Wphone"+x+"]").removeClass("focuscss");}
+						if($("input[name=Wcountry"+x+"]").val() ==''){$("input[name=Wcountry"+x+"]").addClass("focuscss");}else{$("input[name=Wcountry"+x+"]").removeClass("focuscss");}
+						//if($("input[name=Wemail"+x+"]").val() ==''){$("input[name=Wemail"+x+"]").addClass("focuscss");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss");}
+						if($("input[name=Wemail"+x+"]").val()!="") {if (!isValidEmailAddress($("input[name=Wemail"+x+"]").val())) {$("input[name=Wemail"+x+"]").addClass("focuscss");$("#EmailMessage"+x).html("this email address is not valid");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss"); $("#EmailMessage"+x).html("");}}
+						//if($("input[name=Wwebaddress"+x+"]").val() ==''){$("input[name=Wwebaddress"+x+"]").addClass("focuscss");}else{$("input[name=Wwebaddress"+x+"]").removeClass("focuscss");}
+						if($("select[name=Number-worked-hours"+x+"]").val() ==''){$("select[name=Number-worked-hours"+x+"]").addClass("focuscss");}else{$("select[name=Number-worked-hours"+x+"]").removeClass("focuscss");}
+					}
+				}
+							
+				
+			}	
+			
+		}
+		
+		
+		
+			var num = $("input[name=addtionalNumber]").val();
+			if(num!=0){
+				for (t = 0; t<num;t++){
+					if($("select[name=Udegree"+t+"]").val() ==''){$("select[name=Udegree"+t+"]").addClass("focuscss");}else{$("select[name=Udegree]").removeClass("focuscss");}
+					if($("select[name=Undergraduate-university-name"+t+"]").val() ==''){$("select[name=Undergraduate-university-name"+t+"]").addClass("focuscss");}else{$("select[name=Undergraduate-university-name"+t+"]").removeClass("focuscss");}
+					if($("input[name=Undergraduate-university-name-other"+t+"]").length!== 0){
+						if($("input[name=Undergraduate-university-name-other"+t+"]").val() ==''){$("input[name=Undergraduate-university-name-other"+t+"]").addClass("focuscss");}else{$("input[name=Undergraduate-university-name-other"+t+"]").removeClass("focuscss");}
+					}
+					if($("input[name=Ugraduate-country"+t+"]").val() ==''){$("input[name=Ugraduate-country"+t+"").addClass("focuscss");}else{$("select[name=Ugraduate-country"+t+"").removeClass("focuscss");}
+					if($("select[name=Ugraduate-yearattained"+t+"]").val() ==''){$("select[name=Ugraduate-yearattained"+t+"]").addClass("focuscss");}else{$("select[name=Ugraduate-year-attained"+t+"]").removeClass("focuscss");}
+					
+				}
+			}
+	
 			if($("input[name=Firstname]").val() ==''||$("input[name=Lastname]").val() ==''){
 				return false;
 			}
@@ -71,66 +116,31 @@ jQuery(document).ready(function($) {
 					return false;
 				}
 			}
-		
-			
-			//if($("select[name=Branch]").val() ===''){$("select[name=Branch]").addClass("focuscss");}else{$("select[name=Branch]").removeClass("focuscss");}
-		   
-			
-		if($('select[name=MemberType]').val()!=="9964" && $('select[name=MemberType]').val()!=="9965" && $('select[name=MemberType]').val()!=="10004"&& $('select[name=MemberType]').val()!=="9966"&& $('select[name=MemberType]').val()!=="9967"&& $('select[name=MemberType]').val()!=="9968"&& $('select[name=MemberType]').val()!=="9997"&& $('select[name=MemberType]').val()!=="9967"){
-			
-				var i = $("input[name=wpnumber]").val();
-				var n = $("input[name=maxumnumber]").val();
+			if($('select[name=MemberType]').val()!=="9964" && $('select[name=MemberType]').val()!=="9965" && $('select[name=MemberType]').val()!=="10004"&& $('select[name=MemberType]').val()!=="9966"&& $('select[name=MemberType]').val()!=="9967"&& $('select[name=MemberType]').val()!=="9968"&& $('select[name=MemberType]').val()!=="9997"&& $('select[name=MemberType]').val()!=="9967"){
 				if(i!=0){
-					
-				for (x = 0; x<=n;x++){
-					if($("#workplace"+x).length !== 0){
-						if($("input[name=Name-of-workplace"+x+"]").val() ==''){$("input[name=Name-of-workplace"+x+"]").addClass("focuscss");}else{$("input[name=Name-of-workplace"+x+"]").removeClass("focuscss");}
-						if($("select[name=Workplace-setting"+x+"]").val() ==''){$("select[name=Workplace-setting"+x+"]").addClass("focuscss");}else{$("select[name=Workplace-setting"+x+"]").removeClass("focuscss");}
-						if($("input[name=WAddress_Line_1"+x+"]").val() ==''){$("input[name=WAddress_Line_1"+x+"]").addClass("focuscss");}else{$("input[name=WAddress_Line_1"+x+"]").removeClass("focuscss");}
-						if($("input[name=Wcity"+x+"]").val() ==''){$("input[name=Wcity"+x+"]").addClass("focuscss");}else{$("input[name=Wcity"+x+"]").removeClass("focuscss");}
-						if($("input[name=Wpostcode"+x+"]").val() ==''){$("input[name=Wpostcode"+x+"]").addClass("focuscss");}else{$("input[name=Wpostcode"+x+"]").removeClass("focuscss");}
-						if($("input[name=Wphone"+x+"]").val() ==''){$("input[name=Wphone"+x+"]").addClass("focuscss");}else{$("input[name=Wphone"+x+"]").removeClass("focuscss");}
-						if($("input[name=Wcountry"+x+"]").val() ==''){$("input[name=Wcountry"+x+"]").addClass("focuscss");}else{$("input[name=Wcountry"+x+"]").removeClass("focuscss");}
-						//if($("input[name=Wemail"+x+"]").val() ==''){$("input[name=Wemail"+x+"]").addClass("focuscss");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss");}
-						if($("input[name=Wemail"+x+"]").val()!="") {if (!isValidEmailAddress($("input[name=Wemail"+x+"]").val())) {$("input[name=Wemail"+x+"]").addClass("focuscss");$("#EmailMessage"+x).html("this email address is not valid");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss"); $("#EmailMessage"+x).html("");}}
-						//if($("input[name=Wwebaddress"+x+"]").val() ==''){$("input[name=Wwebaddress"+x+"]").addClass("focuscss");}else{$("input[name=Wwebaddress"+x+"]").removeClass("focuscss");}
-						if($("select[name=Number-worked-hours"+x+"]").val() ==''){$("select[name=Number-worked-hours"+x+"]").addClass("focuscss");}else{$("select[name=Number-worked-hours"+x+"]").removeClass("focuscss");}
-					}
-				}
+					for (x = 0; x<=n;x++){
+						if($("#workplace"+x).length !== 0){	
+							if($("input[name=Name-of-workplace"+x+"]").val() =='' || $("select[name=Workplace-setting"+x+"]").val() =='' ){
+								
+								return false;
+							}
+							if($("input[name=Wemail"+x+"]").val()!="") {if (!isValidEmailAddress($("input[name=Wemail"+x+"]").val())) { return false; }}
+							if($("input[name=Wcity"+x+"]").val() ==''||$("input[name=Wpostcode"+x+"]").val() =='' ||$("input[name=WAddress_Line_1"+x+"]").val() =='' ||$("input[name=Wphone"+x+"]").val() ==''){
+								
+								return false;
+							}
 							
-				for (x = 0; x<=n;x++){
-					if($("#workplace"+x).length !== 0){	
-						if($("input[name=Name-of-workplace"+x+"]").val() =='' || $("select[name=Workplace-setting"+x+"]").val() =='' ){
-							
-							return false;
-						}
-						if($("input[name=Wemail"+x+"]").val()!="") {if (!isValidEmailAddress($("input[name=Wemail"+x+"]").val())) { return false; }}
-						if($("input[name=Wcity"+x+"]").val() ==''||$("input[name=Wpostcode"+x+"]").val() =='' ||$("input[name=WAddress_Line_1"+x+"]").val() =='' ||$("input[name=Wphone"+x+"]").val() ==''){
-							
-							return false;
-						}
-						
-						if($("input[name=Wcountry"+x+"]").val() ==''||$("select[name=Number-worked-hours"+x+"]").val() ==''){
-							return false;
+							if($("input[name=Wcountry"+x+"]").val() ==''||$("select[name=Number-worked-hours"+x+"]").val() ==''){
+								return false;
+							}
 						}
 					}
 				}
-			}	
+			}
 			
-		}else { return true;}
-		
-		
-			var num = $("input[name=addtionalNumber]").val();
 			if(num!=0){
 				for (t = 0; t<num;t++){
-					if($("select[name=Udegree"+t+"]").val() ==''){$("select[name=Udegree"+t+"]").addClass("focuscss");}else{$("select[name=Udegree]").removeClass("focuscss");}
-					if($("select[name=Undergraduate-university-name"+t+"]").val() ==''){$("select[name=Undergraduate-university-name"+t+"]").addClass("focuscss");}else{$("select[name=Undergraduate-university-name"+t+"]").removeClass("focuscss");}
-					if($("input[name=Undergraduate-university-name-other"+t+"]").length!== 0){
-						if($("input[name=Undergraduate-university-name-other"+t+"]").val() ==''){$("input[name=Undergraduate-university-name-other"+t+"]").addClass("focuscss");}else{$("input[name=Undergraduate-university-name-other"+t+"]").removeClass("focuscss");}
-					}
-					if($("input[name=Ugraduate-country"+t+"]").val() ==''){$("input[name=Ugraduate-country"+t+"").addClass("focuscss");}else{$("input[name=Ugraduate-country"+t+"").removeClass("focuscss");}
-					if($("select[name=Ugraduate-yearattained"+t+"]").val() ==''){$("select[name=Ugraduate-yearattained"+t+"]").addClass("focuscss");}else{$("select[name=Ugraduate-year-attained"+t+"]").removeClass("focuscss");}
-					if($("select[name=Udegree"+t+"]").val() ==''||$("select[name=Undergraduate-university-name"+t+"]").val() ==''||$("input[name=Ugraduate-country"+t+"]").val() ==''||$("select[name=Ugraduate-year-attained"+t+"]").val() ==''){
+					if($("select[name=Udegree"+t+"]").val() ==''||$("select[name=Undergraduate-university-name"+t+"]").val() ==''||$("select[name=Ugraduate-country"+t+"]").val() ==''||$("select[name=Ugraduate-year-attained"+t+"]").val() ==''){
 						return false;
 					}
 					if(!$("input[name=Undergraduate-university-name-other"+t+"]").hasClass("display-none")){
@@ -138,8 +148,6 @@ jQuery(document).ready(function($) {
 					}
 				}
 			}
-	
-		
 	
 	};
 
@@ -173,13 +181,12 @@ jQuery(document).ready(function($) {
 		}
 
 		$( "#workplaceblocks > div" ).each(function() {
-      if ($(this).find(".focuscss").length > 0){ 
-        x = $(this).attr('id').replace('workplace', '');
-        $('#tabmenu li#workplaceli' + x).addClass("warning");
-      }
-    });
+			if ($(this).find(".focuscss").length > 0){ 
+				x = $(this).attr('id').replace('workplace', '');
+				$('#tabmenu li#workplaceli' + x).addClass("warning");
+			}
+   		 });
 		return false;
-		
 		}
 	});
 	
