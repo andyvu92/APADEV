@@ -937,7 +937,7 @@ jQuery(document).ready(function(){
       var window_width = $(window).width();
       var title = $('.underline-heading' ,this).text();
       if (window_width < 570){
-        $(this).prepend('<span class="sidebar-toggle off-right">' + title + '</span>');
+        $(this).prepend('<span class="sidebar-toggle">' + title + '</span>');
         $(this).after('<div class="sidebar-overlay"></div>');
 
         // if sidebar doesn't have class 'underline-heading'
@@ -946,9 +946,13 @@ jQuery(document).ready(function(){
         }
 
         // HIDE SIDEBAR ON SWIPE RIGHT
-        $(this).on('swiperight', function(){
-          $(this).removeClass('active');
-          $('body').removeClass('trapScroll-enabled');
+        $(this).swipe( {
+          //Generic swipe handler for all directions
+          swipeRight:function(event, direction, distance, duration, fingerCount, fingerData) {
+            $(this).removeClass('active');
+            $('body').removeClass('trapScroll-enabled');          },
+          //Default is 75px, set to 30px for this so swipe right 30px triggers swipe
+           threshold:30
         });
       }
     });
@@ -973,6 +977,11 @@ jQuery(document).ready(function(){
         $('.sidebar-toggle').removeClass('off-right');
       }
     });
+    $(window).on('load', function(){
+      if ( (!($('#section-clients').isInViewport())) && (!($('#section-header').isInViewport())) ) {
+        $('.sidebar-toggle').addClass('off-right');
+      }
+    });
 
     // DETECT IF AN ELEMENT IS IN VIEWPORT
     $.fn.isInViewport = function() {
@@ -982,9 +991,6 @@ jQuery(document).ready(function(){
       var viewportBottom = viewportTop + $(window).height();
       return elementBottom > viewportTop && elementTop < viewportBottom;
     };
-
-    //DISABLE JQUERY MOBILE AJAX PAGE NAVIGATION
-    $.mobile.ajaxEnabled = false;
 });
 
 

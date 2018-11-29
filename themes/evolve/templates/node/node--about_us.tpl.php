@@ -106,7 +106,7 @@
         ?>
 		<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
 	</div>
-	<div class="flex-col-3 right-sidebar" style="margin:0 0 50px">
+	<div class="flex-col-3 right-sidebar">
 		<span class="underline-heading">About us</span>
 
 	            <?php 
