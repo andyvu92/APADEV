@@ -399,7 +399,7 @@ $('.modal-body').on('mouseleave', function(){
       var trapElement;
       var scrollableDist;
       var trapClassName = 'trapScroll-enabled';
-      var trapSelector = '.modal-body, #signupWebUser, .region-right-sidebar, .node .right-sidebar';
+      var trapSelector = '.modal-body, #signupWebUser';
       
       var trapWheel = function(e){
         
@@ -680,16 +680,16 @@ jQuery(document).ready(function(){
     // TOP NAV MOBILE
     $(document).on('click', '#custom-nav-toggle', function(){
       $(this).toggleClass('active');
-      $('.html').toggleClass('menu-open');
+      $('body, .html').toggleClass('menu-open');
 
-      if( $('.html').hasClass('menu-open') ){
-        $('.html').delay(300).queue(function (next) { 
+      if( $('body, .html').hasClass('menu-open') ){
+        $('body, .html').delay(300).queue(function (next) { 
             $(this).css('overflow', 'hidden'); 
             next();
         });
       }
       else{
-        $('.html').css('overflow', 'auto');
+        $('body, .html').css('overflow', 'auto');
       }
     });
 
@@ -956,7 +956,7 @@ jQuery(document).ready(function(){
           //Generic swipe handler for all directions
           swipeRight:function(event, direction, distance, duration, fingerCount, fingerData) {
             $(this).removeClass('active');
-            $('body').css('overflow', 'auto');          },
+            $('body, .html').css('overflow', 'auto');          },
           //Default is 75px, set to 30px for this so swipe right 30px triggers swipe
            threshold:30
         });
@@ -967,11 +967,11 @@ jQuery(document).ready(function(){
     $(document).on('click', '.sidebar-toggle', function(){
       if( $(this).parent().hasClass('active') ){
         $(this).parent().removeClass('active');
-        $('body').css('overflow', 'auto');
+        $('body, .html').css('overflow', 'auto');
       }
       else{
         $(this).parent().addClass('active');
-        $('body').css('overflow', 'hidden');
+        $('body, .html').css('overflow', 'hidden');
       }
     });
 
