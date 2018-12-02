@@ -956,7 +956,10 @@ jQuery(document).ready(function(){
           //Generic swipe handler for all directions
           swipeRight:function(event, direction, distance, duration, fingerCount, fingerData) {
             $(this).removeClass('active');
-            $('body, .html').css('overflow', 'auto');          },
+            $('body, .html').css('overflow', 'auto');          
+            $('body, .html').removeClass('no-scroll');
+            $('.dexp-body-inner').removeClass('no-scroll');
+          },
           //Default is 75px, set to 30px for this so swipe right 30px triggers swipe
            threshold:30
         });
@@ -976,7 +979,6 @@ jQuery(document).ready(function(){
         $('body, .html').css('overflow', 'hidden');
         $('body, .html').addClass('no-scroll');
         $('.dexp-body-inner').addClass('no-scroll');
-        $('.underline-heading').css('color', 'coral');
       }
     });
 
