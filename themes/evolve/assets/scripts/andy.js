@@ -968,10 +968,15 @@ jQuery(document).ready(function(){
       if( $(this).parent().hasClass('active') ){
         $(this).parent().removeClass('active');
         $('body, .html').css('overflow', 'auto');
+        $('body, .html').removeClass('no-scroll');
+        $('.dexp-body-inner').removeClass('no-scroll');
       }
       else{
         $(this).parent().addClass('active');
         $('body, .html').css('overflow', 'hidden');
+        $('body, .html').addClass('no-scroll');
+        $('.dexp-body-inner').addClass('no-scroll');
+        $('.underline-heading').css('color', 'coral');
       }
     });
 
