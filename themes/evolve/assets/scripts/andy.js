@@ -938,7 +938,9 @@ jQuery(document).ready(function(){
       var title = $('.underline-heading' ,this).first().text();
       if (window_width < 570){
         //$(this).after('<div class="sidebar-overlay"></div>');
+        $(this).wrap('<div class="sidebar-overlay"></div>');
         $(this).prepend('<span class="sidebar-toggle">' + title.toLowerCase() + '</span>');
+        $('body, .html').prepend( $('.sidebar-overlay') );
 
         // IF SIDEBAR TOGGLE WIDTH IS MORE THAN 150PX, REPLACE TEXT WITH "QUICK LINKS"
         var buttonWidth = $('.sidebar-toggle').outerWidth();
@@ -955,30 +957,34 @@ jQuery(document).ready(function(){
         $(this).swipe( {
           //Generic swipe handler for all directions
           swipeRight:function(event, direction, distance, duration, fingerCount, fingerData) {
-            $(this).removeClass('active');
-            $('.html').css('overflow', 'auto');          
-            $('.html').removeClass('no-scroll');
-            //$('.dexp-body-inner').removeClass('no-scroll');
+            $(this).parent().removeClass('active');
+            $('body, .html').css('overflow', 'auto');  
+            $('body, .html').removeClass('no-scroll');        
           },
-          //Default is 75px, set to 30px for this so swipe right 30px triggers swipe
-           threshold:30
+          //Default is 75px, set to 50px for this so swipe right 30px triggers swipe
+           threshold:50
         });
       }
     });
 
     // SHOW/HIDE SIDEBAR ON TOGGLE CLICK
     $(document).on('click', '.sidebar-toggle', function(){
-      if( $(this).parent().hasClass('active') ){
-        $(this).parent().removeClass('active');
-        $('.html').css('overflow', 'auto');
-        $('.html').removeClass('no-scroll');
-        //$('.dexp-body-inner').removeClass('no-scroll');
+      const disableBodyScroll = bodyScrollLock.disableBodyScroll;
+      const enableBodyScroll = bodyScrollLock.enableBodyScroll;
+
+      const targetElement = document.querySelector(".sidebar-overlay");
+
+      if( $(this).parent().parent().hasClass('active') ){
+        $(this).parent().parent().removeClass('active');
+        $('body, .html').css('overflow', 'auto');
+        $('body, .html').removeClass('no-scroll');
+        enableBodyScroll(targetElement);
       }
       else{
-        $(this).parent().addClass('active');
-        $('.html').css('overflow', 'hidden');
-        $('.html').addClass('no-scroll');
-        //$('.dexp-body-inner').addClass('no-scroll');
+        $(this).parent().parent().addClass('active');
+        $('body, .html').css('overflow', 'hidden');
+        $('body, .html').addClass('no-scroll');
+        disableBodyScroll(targetElement);
       }
     });
 
@@ -990,6 +996,7 @@ jQuery(document).ready(function(){
         $('.sidebar-toggle').removeClass('off-right');
       }
     });
+
     // SHOW SIDEBAR TOGGLE ON LOAD
     $(window).on('load', function(){
       if ( (!($('#section-clients').isInViewport())) && (!($('#section-header').isInViewport())) ) {
@@ -1005,7 +1012,7 @@ jQuery(document).ready(function(){
       var viewportBottom = viewportTop + $(window).height();
       return elementBottom > viewportTop && elementTop < viewportBottom;
     };
-
+    
 });
 
 
