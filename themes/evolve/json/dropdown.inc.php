@@ -51,15 +51,15 @@ function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
 }
 
 function getMemberTypePrice(){
-    // 2.2.31 Get Membership prodcut price
+	// 2.2.31 Get Membership prodcut price
     // Send - 
     // userID & product list
-    // Response -Membership prodcut price
+	// Response -Membership prodcut price
 	$API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/-1";
 	$tt = curlRequesttttt($API, "JSON");
 	//echo $tt;
 	$MemberType = json_clean_decode($tt, true);
-    //print_r($MemberType);
+	//print_r($MemberType);
     // write Country json file
 	foreach($MemberType as $key => $value){
         $x = explode(" ", $MemberType[$key]['Title']);
