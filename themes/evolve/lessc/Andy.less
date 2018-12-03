@@ -3836,7 +3836,7 @@ body .socialMediaIcon{
         width: 100vw;
         top: 0;
         left: 0;
-        margin-top: 50px;
+        padding: 50px 40px 100px 40px;
         background: #fff;
         transform: translate(100%, 0);
         transition: all .5s ease-in-out;
@@ -3845,7 +3845,6 @@ body .socialMediaIcon{
             transform: translate(0, 0);
             box-shadow: -20px 0px 20px 20px white;
             overflow-y: auto;
-            padding: 0 40px 100px 40px;
             .sidebar-toggle{
                 left: -60px;
             }
@@ -3858,7 +3857,7 @@ body .socialMediaIcon{
             display: block;
             position: absolute;
             opacity: 0;
-            top: 10vh;
+            top: 117px;
             min-width: 150px;
             left: -90px;
             text-align: center;
@@ -3899,6 +3898,16 @@ body .socialMediaIcon{
     overflow: hidden;
     position: relative;
     height: 100vh;
+}
+
+// DEFAULT PADDING TOP FOR CLIENT SECTION
+#section-clients{
+    margin-top: 100px;
+}
+.space-100{
+    & + #section-clients{
+        margin-top: 0px;
+    }
 }
 
 /* 

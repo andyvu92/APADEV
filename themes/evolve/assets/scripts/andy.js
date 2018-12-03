@@ -937,7 +937,7 @@ jQuery(document).ready(function(){
       var window_width = $(window).width();
       var title = $('.underline-heading' ,this).first().text();
       if (window_width < 570){
-        $(this).after('<div class="sidebar-overlay"></div>');
+        //$(this).after('<div class="sidebar-overlay"></div>');
         $(this).prepend('<span class="sidebar-toggle">' + title.toLowerCase() + '</span>');
 
         // IF SIDEBAR TOGGLE WIDTH IS MORE THAN 150PX, REPLACE TEXT WITH "QUICK LINKS"
@@ -956,9 +956,9 @@ jQuery(document).ready(function(){
           //Generic swipe handler for all directions
           swipeRight:function(event, direction, distance, duration, fingerCount, fingerData) {
             $(this).removeClass('active');
-            $('body, .html').css('overflow', 'auto');          
-            $('body, .html').removeClass('no-scroll');
-            $('.dexp-body-inner').removeClass('no-scroll');
+            $('.html').css('overflow', 'auto');          
+            $('.html').removeClass('no-scroll');
+            //$('.dexp-body-inner').removeClass('no-scroll');
           },
           //Default is 75px, set to 30px for this so swipe right 30px triggers swipe
            threshold:30
@@ -970,15 +970,15 @@ jQuery(document).ready(function(){
     $(document).on('click', '.sidebar-toggle', function(){
       if( $(this).parent().hasClass('active') ){
         $(this).parent().removeClass('active');
-        $('body, .html').css('overflow', 'auto');
-        $('body, .html').removeClass('no-scroll');
-        $('.dexp-body-inner').removeClass('no-scroll');
+        $('.html').css('overflow', 'auto');
+        $('.html').removeClass('no-scroll');
+        //$('.dexp-body-inner').removeClass('no-scroll');
       }
       else{
         $(this).parent().addClass('active');
-        $('body, .html').css('overflow', 'hidden');
-        $('body, .html').addClass('no-scroll');
-        $('.dexp-body-inner').addClass('no-scroll');
+        $('.html').css('overflow', 'hidden');
+        $('.html').addClass('no-scroll');
+        //$('.dexp-body-inner').addClass('no-scroll');
       }
     });
 
