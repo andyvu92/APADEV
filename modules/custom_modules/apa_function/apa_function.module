@@ -564,7 +564,7 @@ function add_payment_card($form, &$form_state){
 			drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
 		}
 		elseif($out["Message"]=="CCV accepts up to 4 digit."){
-			drupal_set_message('<div class="checkMessage">Please enter a valid CVV number.</div>',"error");
+			drupal_set_message('<div class="checkMessage">Please enter a valid CCV number.</div>',"error");
 		}
 		elseif((strpos($out["Message"], 'Month must be between one and twelve') !== false)){
 			drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
@@ -574,6 +574,9 @@ function add_payment_card($form, &$form_state){
 		}
 		elseif((strpos($out["Message"], 'credit card number') !== false)){
 			drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
+        }
+        elseif((strpos($out["Message"], 'Invalid CCV number') !== false)){
+			drupal_set_message('<div class="checkMessage">Please enter a valid CCV number.</div>',"error");
 		}
 		elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)){
 			drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
