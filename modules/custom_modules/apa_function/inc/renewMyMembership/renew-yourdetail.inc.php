@@ -221,7 +221,7 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 					$additionalQualifications['Degree'] = $_POST['University-degree'.$j]; 
 					$additionalQualifications['DegreeID'] = "";
 				}
-				else{
+				elseif(isset($_POST['Udegree'.$j])){
 					$additionalQualifications['DegreeID'] = $_POST['Udegree'.$j];
 					$additionalQualifications['Degree'] = "";
 				}
@@ -229,7 +229,7 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 					$additionalQualifications['Institute'] = $_POST['Undergraduate-university-name-other'.$j]; 
 					$additionalQualifications['InstituteID'] = "";
 				}
-				else{
+				elseif(isset($_POST['Undergraduate-university-name'.$j])){
 					$additionalQualifications['InstituteID'] = $_POST['Undergraduate-university-name'.$j];
 					$additionalQualifications['Institute'] = "";
 				}
