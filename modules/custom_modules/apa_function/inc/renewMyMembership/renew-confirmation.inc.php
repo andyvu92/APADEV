@@ -216,7 +216,7 @@ $background = getBackgroundImage($userID);
 					</div>
 				</div>
 				<?php elseif(strpos($renewOuts['MResponse'], 'Order failed') !== false): ?>
-					<?php if(strpos($renewOuts['MResponse'], '50') !== false)): ?>
+					<?php if(strpos($renewOuts['MResponse'], '50') !== false): ?>
 						<div class="flex-container" id="fail-purchase">
 							<div class="flex-cell">
 								<h3 class="light-lead-heading">There are insufficient funds in this account.</h3>
@@ -225,7 +225,7 @@ $background = getBackgroundImage($userID);
 								<span class="sub-heading">Please use another card, or try again.</span>
 							</div>
 						</div>
-					<?php elseif(strpos($renewOuts['MResponse'], '12') !== false)): ?>
+					<?php elseif(strpos($renewOuts['MResponse'], '12') !== false): ?>
 						<div class="flex-container" id="fail-purchase">
 							<div class="flex-cell">
 								<h3 class="light-lead-heading">This card has been declined.</h3>
