@@ -6,7 +6,6 @@
 	<script src="/sites/all/themes/evolve/assets/scripts/typeahead.js-master/dist/typeahead.bundle.min.js" type="text/javascript"></script>
 
 	<script src="/sites/all/themes/evolve/assets/scripts/jquery.touchSwipe.min.js" type="text/javascript"></script>
-	<script src="/sites/all/themes/evolve/assets/scripts/body-scroll-lock.js" type="text/javascript"></script>
 
 	<!-- SELECTIZE -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.js"></script>

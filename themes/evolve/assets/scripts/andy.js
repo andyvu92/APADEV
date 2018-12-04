@@ -954,45 +954,107 @@ jQuery(document).ready(function(){
         }
 
         // HIDE SIDEBAR ON SWIPE RIGHT
-        $(this).swipe( {
+        /*$('.sidebar-overlay').swipe( {
           //Generic swipe handler for all directions
           swipeRight:function(event, direction, distance, duration, fingerCount, fingerData) {
-            $(this).parent().removeClass('active');
-            $('body, .html').css('overflow', 'auto');  
-            $('body, .html').removeClass('no-scroll');        
+            $('body, .html').removeClass('no-scroll');
+            overlayClose();
+            $(this).delay(200).queue(function(next){
+              $(this).removeClass('active');
+              next();
+            });
+            e.preventDefault();      
           },
-          //Default is 75px, set to 50px for this so swipe right 30px triggers swipe
-           threshold:50
-        });
+          //Default is 75px
+           threshold:75
+        });*/
       }
     });
 
-    // SHOW/HIDE SIDEBAR ON TOGGLE CLICK
-    $(document).on('click', '.sidebar-toggle', function(){
-      const disableBodyScroll = bodyScrollLock.disableBodyScroll;
-      const enableBodyScroll = bodyScrollLock.enableBodyScroll;
+    var $docEl = $('.html, body'),
+    $wrap = $('.dexp-body-inner'),
+    scrollTop;
+  
+  var overlayClose = function() {
+    $.unlockBody();
+  }
+  var overlayOpen = function() {
+    $.lockBody();
+  }
 
-      const targetElement = document.querySelector(".sidebar-overlay");
+  $.lockBody = function() {
+    if(window.pageYOffset) {
+      scrollTop = window.pageYOffset;
+      
+      //$wrap.css({
+      //  top: - (scrollTop)
+      //});
+    }
+
+    $docEl.css({
+      height: "100vh",
+      overflow: "hidden",
+      position: "fixed"
+    });
+  };
+
+  $.unlockBody = function() {
+    $docEl.css({
+      height: "",
+      overflow: "",
+      position: ""
+    });
+
+    $wrap.css({
+      top: ''
+    });
+
+    window.scrollTo(0, scrollTop);
+    window.setTimeout(function () {
+      scrollTop = null;
+    }, 0);
+  };
+
+    // SHOW/HIDE SIDEBAR ON TOGGLE CLICK
+    $(document).on('click', '.sidebar-toggle', function(e){  
 
       if( $(this).parent().parent().hasClass('active') ){
-        $(this).parent().parent().removeClass('active');
-        $('body, .html').css('overflow', 'auto');
         $('body, .html').removeClass('no-scroll');
-        enableBodyScroll(targetElement);
+        $('#section-header, #section-socials').css({
+          visibility: "visible"
+        });
+        overlayClose();
+        $(this).delay(200).queue(function(next){
+          $(this).parent().parent().removeClass('active');
+          next();
+        });
+        e.preventDefault();
       }
       else{
         $(this).parent().parent().addClass('active');
-        $('body, .html').css('overflow', 'hidden');
-        $('body, .html').addClass('no-scroll');
-        disableBodyScroll(targetElement);
+        $('#section-header, #section-socials').css({
+          visibility: "hidden"
+        });
+        setTimeout(overlayOpen, 500);
+        $('body, .html').delay(600).queue(function(next){
+          $(this).addClass('no-scroll');
+          next();
+        });
+        e.preventDefault();
       }
     });
+
+
 
     // HIDE/SHOW SIDEBAR TOGGLE ON SCROLL
     $(document).scroll(function() {
       if ( (!($('#section-clients').isInViewport())) && (!($('#section-header').isInViewport())) ) {
         $('.sidebar-toggle').addClass('off-right');
-      } else {
+      } 
+      else if ( ( (($('#section-clients').isInViewport())) || (($('#section-header').isInViewport())) ) && ( $('.sidebar-overlay').is('.active') ) ) {
+        $('.sidebar-toggle').addClass('off-right');
+      }
+      else {
         $('.sidebar-toggle').removeClass('off-right');
       }
     });

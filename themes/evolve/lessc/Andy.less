@@ -3901,6 +3901,7 @@ body .socialMediaIcon{
     transition: all .5s ease-in-out;
     &.active{
         transform: translate(0, 0);
+        z-index: 1050;
         .sidebar-toggle{
             left: -60px;
         }
@@ -3913,7 +3914,8 @@ body .socialMediaIcon{
 
 // DISABLE BODY SCROLLING WITH CLASS
 .no-scroll{
-    height: 100%;
+    position: fixed;
+    height: 100vh;
     overflow: hidden;
     #section-clients, #section-bottom, #section-socials, #section-header{
         z-index: 995;
