@@ -1785,6 +1785,7 @@ apa_function_dashboardLeftNavigation_form();
 		</div>
 
 			<div class="down4" style="display:none;" >
+			<div class="col-xs-12 col-sm-12 col-md-12"><p>Please note: all education undertaken with the APA or APC will already be recorded on your profile.</p></div>
 			<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) { $addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =0;} echo  $addtionalNumber;  ?>"/>
 
 				<div id="additional-qualifications-block">

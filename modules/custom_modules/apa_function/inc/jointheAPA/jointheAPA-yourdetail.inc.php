@@ -2185,6 +2185,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
             </div>
         </div>
         <div class="down4" style="display:none;" >
+        <div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please note: all education undertaken with the APA or APC will already be recorded on your profile.</p></div>
         <input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =0;} echo  $addtionalNumber;  ?>"/>
             <div id="additional-qualifications-block">
                 <?php
@@ -3262,6 +3263,7 @@ if(isset($_POST['MT'])){
     echo $addtionalNumber;
 ?>"/>
 				<div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please add your qualifications or click next to continue</p></div>
+                <div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please note: all education undertaken with the APA or APC will already be recorded on your profile.</p></div>
                 <div id="additional-qualifications-block">
 					<!--<div id="additional0">
 					<input type="hidden" name="ID0" value="-1">
