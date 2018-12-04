@@ -897,7 +897,7 @@ jQuery(document).ready(function(){
     // AUTO  REDIRECT ON RENEW PAGE
     if( window.location.href.indexOf("renew") > -1 ){
       // SET SESSION
-      $(document).on('click', '.current-member .item-action', function(){
+      $(document).on('click', '#renewItem', function(){
         sessionStorage.setItem('userStatus', 'current');
       });
       $(document).on('click', '.previous-member .item-action', function(){
