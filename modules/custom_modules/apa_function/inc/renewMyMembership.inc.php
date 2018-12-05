@@ -398,7 +398,7 @@ You have the right to access the personal information about yourself held by the
 			}
 			$_SESSION['QuatationTag'] = "1";
 		
-		echo $order['ProductName']; echo ",";} 
+		echo $order['ProductName']; echo "</br>";} 
 	}}?><?php endif;?></p>
 	
 	<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
@@ -533,7 +533,7 @@ You have the right to access the personal information about yourself held by the
 				<div class="item-body current-member">
 					<span class="item-title">Current APA member</span>
 					<span class="item-description">If you are a current APA member, please click below to renew your membership for 2019.</span>
-					<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#">Renew</a>
+					<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#" id="renewItem">Renew</a>
 				</div>
 			</div>
 

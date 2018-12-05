@@ -221,7 +221,7 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 					$additionalQualifications['Degree'] = $_POST['University-degree'.$j]; 
 					$additionalQualifications['DegreeID'] = "";
 				}
-				else{
+				elseif(isset($_POST['Udegree'.$j])){
 					$additionalQualifications['DegreeID'] = $_POST['Udegree'.$j];
 					$additionalQualifications['Degree'] = "";
 				}
@@ -229,7 +229,7 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 					$additionalQualifications['Institute'] = $_POST['Undergraduate-university-name-other'.$j]; 
 					$additionalQualifications['InstituteID'] = "";
 				}
-				else{
+				elseif(isset($_POST['Undergraduate-university-name'.$j])){
 					$additionalQualifications['InstituteID'] = $_POST['Undergraduate-university-name'.$j];
 					$additionalQualifications['Institute'] = "";
 				}
@@ -270,7 +270,7 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 	if(isset($_POST['fap']) && $_POST['fap'] =="1" ) { 
 		checkShoppingCart($userID, $type="FP",$productID="");
 		createShoppingCart($userID, $fellowshipProductID,$type="FP",$coupon="");
-	}
+	}else{ checkShoppingCart($userID, $type="FP",$productID="");}
 	//save magazine products on APA side
 	 /*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
 	if(isset($_POST['ngmusculo']) && $_POST['ngmusculo'] =="1"){ 
@@ -314,7 +314,6 @@ unset($_SESSION["FPProductID"]);
 if(sizeof($userFPProduct)!=0){ foreach($userFPProduct as $singFP) { $_SESSION["FPProductID"] = $singFP;}}
 $userMGProduct = array();
 $userMG1Product = getProduct($_SESSION['UserId'],"MG1");
-unset($_SESSION["FPProductID"]);
 if(sizeof($userMG1Product)!=0){ 
     array_push($userMGProduct, $userMG1Product); 
 	
@@ -980,7 +979,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<?php if(sizeof($details['PersonSpecialisation'])!=0){
 						echo '<input class="styled-checkbox" type="checkbox" id="fap" name="fap">';
 						echo '<label class="light-font-weight" style="margin-top: 15px; font-weight: 700;" for="fap">I am part of the Australian College of Physiotherapists</label>';
-						echo '<p style="margin-bottom: 0"><span class="note-text">Please note:</span> Ticking this box adds an extra $200 to the price of your membership.
+						echo '<p style="margin-bottom: 0"><span class="note-text">Please note:</span> Ticking this box adds an extra $220 to the price of your membership.
 	If you have passed Specialisation, Fellowship by Original Contribution or are
 	a Fellow of the Australian College of Physiotherapists, you must tick this box.</p>';
 						
@@ -1336,6 +1335,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 		
 		</div>
 		<div class="down4" style="display:none;" >
+		<div class="col-xs-12 col-sm-12 col-md-12"><p>Please note: all education undertaken with the APA or APC will already be recorded on your profile.</p></div>
 		<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =0;} echo  $addtionalNumber;  ?>"/>
 
 			<div id="additional-qualifications-block">

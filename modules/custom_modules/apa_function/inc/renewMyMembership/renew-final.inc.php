@@ -237,6 +237,8 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 			<div class="checkMessage">Please go back to enter a valid expiry date before proceeding with your order. </div>
 			<?php elseif((strpos($out["Message"], 'credit card number') !== false)):?>
 			<div class="checkMessage">Please go back to enter a valid credit card number before proceeding with your order. </div>
+			<?php elseif((strpos($out["Message"], 'Invalid CCV number') !== false)):?>
+			<div class="checkMessage">Please go back to enter a valid CVV number before proceeding with your order.</div>
 			<?php elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)):?>
 			<div class="checkMessage">Please go back to enter a valid credit card number before proceeding with your order. </div>
 			<?php else:?>

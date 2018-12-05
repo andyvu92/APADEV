@@ -215,7 +215,35 @@ $background = getBackgroundImage($userID);
 						</a>
 					</div>
 				</div>
-
+				<?php elseif(strpos($renewOuts['MResponse'], 'Order failed') !== false): ?>
+					<?php if(strpos($renewOuts['MResponse'], '50') !== false): ?>
+						<div class="flex-container" id="fail-purchase">
+							<div class="flex-cell">
+								<h3 class="light-lead-heading">There are insufficient funds in this account.</h3>
+							</div>
+							<div class="flex-cell">
+								<span class="sub-heading">Please use another card, or try again.</span>
+							</div>
+						</div>
+					<?php elseif(strpos($renewOuts['MResponse'], '12') !== false): ?>
+						<div class="flex-container" id="fail-purchase">
+							<div class="flex-cell">
+								<h3 class="light-lead-heading">This card has been declined.</h3>
+							</div>
+							<div class="flex-cell">
+							<span class="sub-heading">Please contact your financial institution or try again.</span>
+							</div>
+						</div>
+					<?php else: ?>
+						<div class="flex-container" id="fail-purchase">
+							<div class="flex-cell">
+								<h3 class="light-lead-heading">There were unexpected issues processing<br> your payment request.</h3>
+							</div>
+							<div class="flex-cell">
+								<span class="sub-heading">Please <a href="/renewmymembership">try again</a> or <a href="/contact-us">contact us</a>.</span>
+							</div>
+						</div>
+					<?php endif; ?>
 				<?php else: ?>
 
 					<div class="flex-container" id="fail-purchase">

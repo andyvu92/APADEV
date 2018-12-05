@@ -539,7 +539,11 @@ function aptify_get_url_by_number($APItype, $variables, $jsonVersion) {
         case "21":
             // Eddy - done check;
             //echo "<br />21. Dashboard - Get list of Fellowship Products: <br />";
-            $API = "/FellowshipProducts/-1";
+            if(isset($_SESSION['UserId'])){
+                $API = "/FellowshipProducts/".$_SESSION['UserId'];}
+            else{
+                $API = "/FellowshipProducts/-1";
+            }
             return _aptify_api_call("21. Dashboard - Get list of Fellowship Products",$API, _aptify_get('TokenId'),$jsonVersion,"JSON");
         case "22":
             // Eddy - done check;
