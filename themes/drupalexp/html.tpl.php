@@ -96,7 +96,7 @@
 		<link rel="icon" type="image/png" sizes="16x16" href="/sites/default/files/favicon-16x16.png">
 		<link rel="manifest" href="/sites/default/files/site.webmanifest">
 		<link rel="mask-icon" href="/sites/default/files/safari-pinned-tab.svg" color="#5bbad5">
-		<meta name="msapplication-TileColor" content="#ffc40d">
+		<meta name="msapplication-TileColor" content="#ffffff">
 	</head>
 	<?php
 	// variables changed TODO
