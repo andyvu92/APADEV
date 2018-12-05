@@ -249,7 +249,7 @@
             z-index: 99999;
             width: 100vw;
             left: 100vw;
-            top: 103px;
+            top: 145px;
             opacity: 0;
             transition: all .3s linear;
             #edit-search-block-form--2-mobile{
@@ -293,8 +293,8 @@
             #dexp-dropdown{
                 left: 100vw;
                 position: fixed;
-                top: 103px;
-                height: calc(~'100vh - 103px');
+                top: 145px;
+                height: calc(~'100vh - 145px');
                 display: block;
                 opacity: 0;
                 border-bottom: 10px solid @bright-blue;
@@ -352,12 +352,23 @@
         &.admin-menu{
             #block-dexp-menu-dexp-menu-block-1{
                 #dexp-dropdown{
-                    top: 148px;
-                    height: calc(~'100vh - 148px');
+                    top: 173px;
+                    height: calc(~'100vh - 173px');
                 }
             }
             #search-mobile{
-                top: 148px;
+                top: 173px;
+            }
+        }
+    }
+    @media @larger-phone-width-down{
+        #search-mobile{
+            top: 124px;
+        }
+        #block-dexp-menu-dexp-menu-block-1{
+            #dexp-dropdown{
+                top: 124px;
+                height: calc(~'100vh - 124px');
             }
         }
     }

@@ -324,6 +324,18 @@ body .block .media_filter, body .media_filter{
 								margin: 0;
 							}
 						}
+						@media @larger-phone-width-down{
+							.post-img{
+								width: 100%;
+								padding-bottom: 50%;
+								margin: 10px 0;
+								background-size: cover;
+								background-repeat: no-repeat;
+								.mediaholder{
+									visibility: hidden;
+								}
+							}
+						}
 					}
 				}
 			}
@@ -343,6 +355,9 @@ body .block .media_filter, body .media_filter{
 					@media @tablet-width-down{
 						width: 100%;
 						padding-bottom: 50%;
+					}
+					@media @larger-phone-width-down{
+						display: none;
 					}
 					img{
 						visibility: hidden;
@@ -800,7 +815,7 @@ body .block .media_filter, body .media_filter{
 					& + h6{
 						float: left;
 						padding-right: 40px;
-						margin-bottom: 30px;
+						margin-bottom: 20px;
 						width: 385px;
 						clear: both;
 						position: relative;
@@ -833,7 +848,7 @@ body .block .media_filter, body .media_filter{
 					width: 385px;
 					float: right;
 					clear: both;
-					padding-top: 5px;
+					padding-top: 25px;
 					padding-bottom: 25px;
 					@media @larger-phone-width-down{
 						width: 100%;
@@ -849,7 +864,7 @@ body .block .media_filter, body .media_filter{
 					& + h6{
 						float: right;
 						padding-left: 40px;
-						margin-bottom: 30px;
+						margin-bottom: 20px;
 						width: 385px;
 						clear: both;
 						position: relative;
@@ -1078,6 +1093,16 @@ body .block .media_filter, body .media_filter{
 
 					}
 				}
+			}
+		}
+	}
+}
+
+.region-right-sidebar, .right-sidebar{
+	.view{
+		.views-row-last{
+			@media @larger-tablet-width-down{
+				padding-bottom: 30px;
 			}
 		}
 	}

@@ -290,6 +290,9 @@
 
 /*================== INMOTION POST LAYOUT =================*/
 .node-type-inmotion, .node-type-home-news-tiles, .page-node-501{
+	#block-block-281{
+		margin: 0;
+	}
 	.MainContent{
 		width: 100%;
 	}
@@ -312,6 +315,39 @@
 						font-size: 1.7em;
 						@media @larger-phone-width-down{
 							font-size: 1.7em
+						}
+					}
+					.featured-caption{
+						padding-right: 40px;
+						width: 100%;
+						clear: both;
+						position: relative;
+						font-family: Roboto;
+						font-weight: 300;
+						font-style: italic;
+						line-height: 1.4em;
+						margin-top: -20px;
+						margin-bottom: 30px;
+						&:after{
+							content: "";
+							position: absolute;
+							width: 100%;
+							max-width: 343px;
+							height: 1px;
+							background: #a6a8ab;
+							left: 0;
+							bottom: -5px;
+						}
+						p, h2, h3, h4, h5, h6{
+							margin-bottom: 0;
+						}
+						@media @larger-phone-width-down{
+							display: none;
+						}
+					}
+					.inmotion-readmore-content{
+						.short-text, .full-text, .readmore{
+							display: none;
 						}
 					}
 				}
@@ -472,11 +508,32 @@
 									flex-direction: column;
 								}
 								.post-img{
-									margin: 0;
-									height: auto;
-									padding: 0;
-									max-width: 130px;
-									margin-right: 12px;
+									@media @tablet-width-up{
+										margin: 0;
+										height: auto;
+										padding: 0;
+										max-width: 130px;
+										margin-right: 12px;
+									}
+									@media @tablet-width-down{
+										width: 100%;
+										padding-bottom: 50%;
+										max-width: unset;
+										margin: 0;
+										.mediaholder{
+											visibility: hidden;
+											display: none;
+										}
+									}
+									@media @larger-phone-width-down{
+										width: 100%;
+										padding-bottom: 50%;
+										max-width: unset;
+										margin: 0;
+										.mediaholder{
+											visibility: hidden;
+										}
+									}
 									@media all and (max-width: 345px){
 										max-width: unset;
 										width: 100%;
@@ -500,6 +557,11 @@
 									font-weight: 900;
 									color: #b4b4b4;
 									min-height: 100px;
+									@media @larger-phone-with-down{
+										width: 100%;
+										min-height: unset;
+										padding: 15px 0 0 0;
+									}
 									@media all and (max-width: 345px){
 										width: 100%;
 										padding: 15px 0 0 0;
@@ -555,19 +617,16 @@
 				.field-type-text-with-summary{
 					.intro{
 						p{
-							font-size: 1.6em;
-						}
-					}
-					h3{
-						color: #000;
-						font-size: 1.7em;
-						margin: 50px 0 30px 0;
-						font-weight: 300;
-						font-family: Roboto;
-						line-height: 1.3em;
-						letter-spacing: 0.5px;
-						@media all and (max-width: @tablet-width - 5px){
-							margin: 20px 0 30px 0;
+							color: #000;
+							font-size: 1.7em;
+							margin: 50px 0 30px 0;
+							font-weight: 300;
+							font-family: Roboto;
+							line-height: 1.3em;
+							letter-spacing: 0.5px;
+							@media all and (max-width: @tablet-width - 5px){
+								margin: 20px 0 30px 0;
+							}
 						}
 					}
 					h2{
@@ -580,13 +639,11 @@
 					}
 					ul{
 						font-family: Roboto;
-						font-size: 1.2em;
 						color: #000;
 						margin-bottom: 20px;
 					}
 					ol{
 						font-family: Roboto;
-						font-size: 1.2em;
 						color: #000;
 						margin-bottom: 20px;
 						text-indent: 2px;
@@ -614,7 +671,7 @@
 						& + h6{
 							float: left;
 							padding-right: 40px;
-							margin-bottom: 30px;
+							margin-bottom: 20px;
     						width: 385px;
 							clear: both;
 							position: relative;
@@ -647,7 +704,7 @@
     					width: 385px;
 						float: right;
 						clear: both;
-						padding-top: 5px;
+						padding-top: 25px;
 						padding-bottom: 25px;
 						@media @larger-phone-width-down{
 							width: 100%;
@@ -665,7 +722,7 @@
 						& + h6{
 							float: right;
 							padding-left: 40px;
-							margin-bottom: 30px;
+							margin-bottom: 20px;
     						width: 385px;
 							clear: both;
 							position: relative;

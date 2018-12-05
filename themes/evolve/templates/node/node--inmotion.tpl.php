@@ -161,14 +161,22 @@
 			<div class='mediaholder fullwidthimage'>
 				<?php print render($content['field_inmotion_image']);?>
 			</div>
-		</div>
-		 <?php
-            // We hide the comments and links now so that we can render them later.
-            hide($content['comments']);
-            hide($content['links']);
-            print render($content['body']);
+        </div>
+        <div class="inmotion-readmore-content">
+                <div class="content-loading">
+                    <div class="line"></div>
+                    <div class="line"></div>
+                    <div class="line"></div>
+                </div>
+            <?php
+                // We hide the comments and links now so that we can render them later.
+                hide($content['comments']);
+                hide($content['links']);
+                //print render($content['body']);
+                echo '<div class="short-text">'. render($content['body']) .'</div><a class="readmore">Read more</a>';
             ?>
-			
+        </div>
+        
          <script src="https://apis.google.com/js/platform.js" async defer></script>
          
          <div id="fb-root">&nbsp;</div>
