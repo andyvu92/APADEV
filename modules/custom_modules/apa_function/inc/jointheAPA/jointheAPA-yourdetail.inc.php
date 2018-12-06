@@ -929,7 +929,7 @@ if (isset($_SESSION['UserId'])):
 ?>
                       <div class="col-xs-6 col-md-3">
                             <label for="">Area code</label>
-                            <input type="number" class="form-control" name="area-code" id="area-code" onchange="areaCodeFunction(this.value)" placeholder='Area code'<?php
+                            <input type="text" maxlength="5" class="form-control" name="area-code" id="area-code" onchange="areaCodeFunction(this.value)" placeholder='Area code'<?php
     if (empty($details['Home-phone-areacode'])) {
         echo "";
     } else {
@@ -940,7 +940,7 @@ if (isset($_SESSION['UserId'])):
                         </div>
                         <div class="col-xs-12 col-md-3">
                             <label for="">Phone number<span class="tipstyle"> *</span></label>
-                            <input type="number" class="form-control" name="phone-number" placeholder='Phone number'<?php
+                            <input type="text" class="form-control" name="phone-number" placeholder='Phone number'<?php
     if (empty($details['Home-phone-number'])) {
         echo "";
     } else {
@@ -995,7 +995,7 @@ if (isset($_SESSION['UserId'])):
                         </div>-->
                         <div class="col-xs-12 col-md-3">
                             <label for="">Mobile number<span class="tipstyle"> *</span></label>
-                            <input type="number" class="form-control" name="Mobile-number" placeholder='Mobile number'<?php
+                            <input type="text" class="form-control" name="Mobile-number" placeholder='Mobile number'<?php
     if (empty($details['Mobile-number'])) {
         echo "";
     } else {
@@ -2697,12 +2697,12 @@ if(isset($_POST['MT'])){
                             </div>
                             <div class="col-xs-6 col-md-3">
                                 <label for="">Area code</label>
-                                <input type="number" class="form-control" id="area-code" onchange="areaCodeFunction(this.value)" name="area-code" placeholder="Area code">
+                                <input type="text" maxlength="5" class="form-control" id="area-code" onchange="areaCodeFunction(this.value)" name="area-code" placeholder="Area code">
 							    <div id="areaMessage"></div>
                             </div>
                             <div class="col-xs-12 col-md-3">
                                 <label for="">Phone number<span class="tipstyle"> *</span></label>
-                                <input type="number" class="form-control" name="phone-number">
+                                <input type="text" class="form-control" name="phone-number">
                             </div>
                         </div>
 
@@ -2740,7 +2740,7 @@ if(isset($_POST['MT'])){
                             </div>-->
                             <div class="col-xs-12 col-md-3">
                                 <label for="">Mobile number<span class="tipstyle"> *</span></label>
-                                <input type="number" class="form-control" name="Mobile-number">
+                                <input type="text" class="form-control" name="Mobile-number">
                             </div>
                         </div>
 

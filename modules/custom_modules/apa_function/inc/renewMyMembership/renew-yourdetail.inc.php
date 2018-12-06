@@ -569,7 +569,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<?php  $_SESSION['country'] =$country;?>
 					<div class="col-xs-6 col-md-3">
 						<label for="">Area code</label>
-						<input type="number" class="form-control" id="area-code" onchange="areaCodeFunction(this.value)" name="area-code" <?php if (empty($details['Home-phone-areacode'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-areacode'].'"'; }?>>
+						<input type="text" class="form-control" maxlength="5" id="area-code" onchange="areaCodeFunction(this.value)" name="area-code" <?php if (empty($details['Home-phone-areacode'])) {echo "placeholder='Area code'";}   else{ echo 'value="'.$details['Home-phone-areacode'].'"'; }?>>
 						<div id="areaMessage"></div>
 					</div>
 					<script>
@@ -591,7 +591,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</script>
 					<div class="col-xs-12 col-md-6">
 						<label for="">Phone number<span class="tipstyle"> *</span></label>
-						<input type="number" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>>
+						<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>>
 					</div>
 				</div>
 				
@@ -631,7 +631,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>-->
 					<div class="col-xs-12 col-md-6">
 						<label for="">Mobile number<span class="tipstyle"> *</span></label>
-						<input type="number" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>>
+						<input type="text" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>>
 					</div>
 				</div>
 
