@@ -78,7 +78,7 @@ $background = getBackgroundImage($userID);
 	<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?> autoscroll" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<div class="col-xs-12">
+		<div class="col-xs-12 page-title">
 			<span class="dashboard-name cairo">Renew my membership</span>
 		</div>
 		<!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background <?php if(!isset($_SESSION["userID"])) echo "display-none";?>">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>-->
@@ -88,7 +88,7 @@ $background = getBackgroundImage($userID);
 		apa_function_customizeBackgroundImage_form();
 	?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 renew-membership-nav">
 				<ul class="nav nav-tabs">
 				<li><a class="tabtitle1 inactiveLink" style="cursor: pointer;"><span class="<?php if(!isset($_POST['step1']) && !isset($_POST['step2']) && !isset($_POST['stepAdd']) && !isset($_POST['step2-1']) && !isset($_POST['goI']) && !isset($_POST['goP'])&& !isset($_POST['step2-2'])&&!isset($_POST['step2-3'])&& !isset($_POST['QOrder']) && !isset($_POST["MType"]) && !isset($_POST['step2-4']))echo "text-underline";?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
 				<li><a class="tabtitle2 inactiveLink" style="cursor: pointer;"><span class="eventtitle2 <?php if(isset($_POST['MType']))echo 'text-underline';?>" id="Membership"><strong>Membership</strong></span></a></li>

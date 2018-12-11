@@ -999,6 +999,7 @@ a#insuranceControl{
             margin: 0!important;
             display: flex;
             flex-direction: row;
+            padding-left: 0px;
             &::-webkit-scrollbar { 
                 display: none; 
             }
@@ -1024,6 +1025,9 @@ a#insuranceControl{
             border-left: 5px solid @brighter-blue;
             background: @brighter-blue;
             position: relative;
+            @media @larger-tablet-width-down{
+                border-left: 0px;
+            }
             &:after{
                 content: '';
                 width: 15px;
@@ -1165,7 +1169,7 @@ a#insuranceControl{
 /*--DASHBOARD--*/
 
 #dashboard-right-content {
-    display: flex;;
+    display: flex;
     float: right;
     color: black;
     background: @light-transparent-background;
@@ -1176,7 +1180,7 @@ a#insuranceControl{
         }
     }
     @media all and (max-width: @larger-phone-width) {
-        padding: 0 10px;
+        padding: 25px 10px;
         .col-xs-12{
             padding: 0;
         }
@@ -1796,7 +1800,6 @@ a#insuranceControl{
 
 .dashboard-name{
     font-size: 4em;
-    word-spacing: 6px;
     @media all and (max-width: @tablet-width) {
         font-size: 3em;
     }
@@ -2249,57 +2252,9 @@ form{
 }
 
 #dashboard-right-content{
-    @media all and (max-width:@larger-phone-width) {
-        .nav-chevron{
-            position: relative;
-            ul.nav-tabs{
-                min-height: 50px;
-                height: auto;
-                padding: 0;
-                .text-underline{
-                    visibility: visible;
-                    color: #009fda;
-                    &:after{
-                        content: '\f078';
-                        font-family: 'fontawesome';
-                        color: #2aaddd;
-                        position: absolute;
-                        top: 15px;
-                        visibility: visible;
-                        font-size: 70%;
-                        padding-left: 10px;
-                    }
-                }
-                li{
-                    float: none;
-                    position: absolute;
-                    visibility: hidden;
-                }
-                &:hover{
-                    li{
-                        float: none;
-                        position: relative;
-                        visibility: visible;
-                        a{
-                            span{
-                                visibility: visible;
-                            }
-                        }
-                    }
-                    .text-underline{
-                        &:after{
-                            content: '\f078';
-                            font-family: 'fontawesome';
-                            color: #2aaddd;
-                            position: absolute;
-                            top: 15px;
-                            visibility: visible;
-                            font-size: 70%;
-                            padding-left: 10px;
-                        }
-                    }
-                }
-            }
+    ul.nav{
+        @media @larger-phone-width-down{
+            padding-left: 0;
         }
     }
 
@@ -2608,6 +2563,7 @@ select.form-control{
     .form-control{
         padding-left: 10px;
     }
+    /*
     .dashboard_detail{
         @media all and (max-width: @larger-phone-width ) {
             .nav-chevron .nav-tabs{
@@ -2626,6 +2582,7 @@ select.form-control{
             }   
         }
     }
+    */
     #Paymentcard{
         letter-spacing: 5px;
     }
@@ -3000,11 +2957,14 @@ select.form-control{
  .page-node-154, .page-node-211, .page-node-209, 
  .page-node-207, .page-node-385, .page-node-388,
  .page-node-291{
+    #section-clients{
+        margin-top: 0;
+    }
     .dexp-body-inner{
         #section-content-top{
             border-bottom: 30px solid #009fda;
         }
-     }
+    }
  }
  .dexp-body-inner{
     #section-content-top{
@@ -3337,6 +3297,9 @@ input[type="email"], .email-field{
 
 /* LAYOUT FOR RENEW MEMBERSHIP PAGE */
 .page-node-385{
+    #section-clients{
+        margin-top: 0;
+    }
     #section-content-top .container .row .region-content-top .content{
         display: block;
         display: block;
@@ -3444,6 +3407,116 @@ input[type="email"], .email-field{
             opacity: 1;
             &:hover{
                 opacity: 0.8;
+            }
+        }
+    }
+    #dashboard-right-content{
+        .dashboard_detail{
+            .page-title{
+                @media @larger-phone-width-up{
+                    padding: 0 20px;
+                }
+            }
+        }
+        .renew-membership-nav, .join-membership-nav{
+            ul.nav-tabs{
+                display: none;
+                li{
+                    @media @larger-phone-width-down{
+                        font-size: 1em;
+                    }
+                    @media @tablet-width-down{
+                        &.step-label{
+                            font-weight: 700;
+                        }
+                        a{
+                            margin: 0;
+                            padding: 10px;
+                            span{
+                                display: none;
+                                &.step-order{
+                                    font-weight: 700;
+                                    display: block;
+                                    color: @grey;
+                                }
+                                &.text-underline{
+                                    & + .step-order{
+                                        color: @bright-blue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                &.numberized{
+                    margin-bottom: 0;
+                    & + .current-step{
+                        padding: 10px 0px;
+                        font-size: 1.6em;
+                        font-weight: 500;
+                        display: block;
+                        margin-bottom: 25px;
+                        color: @bright-blue;
+                        @media @larger-phone-width-down{
+                            font-size: 1.4em;
+                            margin-bottom: 0px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// LAYOUT FOR JOIN MEMBERSHIP PAGE
+.page-node-291{
+    #dashboard-right-content{
+        .join-membership-nav{
+            ul.nav-tabs{
+                display: none;
+                li{
+                    @media @larger-phone-width-down{
+                        font-size: 1em;
+                    }
+                    @media @tablet-width-down{
+                        &.step-label{
+                            font-weight: 700;
+                        }
+                        a{
+                            margin: 0;
+                            padding: 10px;
+                            span{
+                                display: none;
+                                &.step-order{
+                                    font-weight: 700;
+                                    display: block;
+                                    color: @grey;
+                                }
+                                &.text-underline{
+                                    & + .step-order{
+                                        color: @bright-blue;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                &.numberized{
+                    margin-bottom: 0;
+                    & + .current-step{
+                        padding: 10px 15px;
+                        font-size: 1.6em;
+                        font-weight: 500;
+                        display: block;
+                        margin-bottom: 25px;
+                        color: @bright-blue;
+                        @media @larger-phone-width-down{
+                            padding: 10px 0px;
+                            font-size: 1.4em;
+                            margin-bottom: 0px;
+                        }
+                    }
+                }
             }
         }
     }

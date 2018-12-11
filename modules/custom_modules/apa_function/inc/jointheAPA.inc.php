@@ -54,7 +54,7 @@ $background = getBackgroundImage($userID);
 	?>
 	
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 join-membership-nav">
 			<ul class="nav nav-tabs">
 			<li><a class="tabtitle1 inactiveLink" style="cursor: pointer;"><span class="<?php if(!isset($_POST['step1']) && !isset($_POST['step2']) && !isset($_POST['step2-1'])&& !isset($_POST['goI']) && !isset($_POST['goP']) && !isset($_POST['step2-2']) && !isset($_POST['step2-3'])&& !isset($_POST['step2-4']))echo "text-underline";?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
 			<li><a class="tabtitle2 inactiveLink" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li>

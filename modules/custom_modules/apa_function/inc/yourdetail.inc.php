@@ -445,7 +445,7 @@ apa_function_dashboardLeftNavigation_form();
 	?>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div class="col-xs-12 none-padding" >
-				<div class="nav-chevron">
+				<div class="account-nav nav-chevron">
 					<ul class="nav nav-tabs">
 							<li id="yourdetail1"><a class="event1" style="cursor: pointer;"><span class="<?php if(!isset($_SESSION["paymentTabTag"]) && !isset($_POST["deleteID"]) && !isset($_POST["setCardID"]))echo 'text-underline';?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
 							<?php if($details['MemberTypeID']!="1"): ?><li id="yourdetail2"><a class="event2" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li><?php endif;?>

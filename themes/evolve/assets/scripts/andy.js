@@ -135,6 +135,7 @@ jQuery(document).ready(function($) {
     var window_width = $(window).width();
     if (window_width > 570){
       // LIMIT PRE-READ WORDS TO 300
+
       var splittext = text.split(/\s+/).slice(0,301).join(" ");
       if ( wordCount > 300 ) {
         $(this).find(".short-text").text( splittext + '...');
@@ -249,15 +250,10 @@ jQuery(document).ready(function() {
   var h2 = $("#h2").position();
   var h3 = $("#h3").position();
 
-  $("[class^='join-details-button']").click(function() {
+  //auto scroll top on Next/Prev in Join/Renew
+  $("[class^='join-details-button'], [class^='your-details-prevbutton']").click(function() {
     $('html, body').animate({
 			scrollTop: $('#dashboard-right-content').offset().top
-		}, 600);
-  }); 
-
-  $("[class^='your-details-prevbutton']").click(function() {
-    $('html, body').animate({
-			scrollTop: $(".nav-tabs").offset().top
 		}, 600);
   }); 
 
@@ -685,8 +681,13 @@ jQuery(document).ready(function(){
     localStorage.removeItem("firstVisit");
   });
   
+  // DETECT IE BROWSER
   if( /msie|trident/g.test(navigator.userAgent.toLowerCase())){
     $('.html').addClass('ie-browser');
+  }
+  // DETECT FIREFOX BROWSER
+  else if( /firefox/g.test(navigator.userAgent.toLowerCase())){
+    $('.html').addClass('firefox-browser');
   }
 });
 
@@ -1011,66 +1012,87 @@ jQuery(document).ready(function(){
     });
 
     // CONSTRUCT RIGHT SIDEBAR ON MOBILE
-    $('.region-right-sidebar, .node .right-sidebar').each(function(){
-      var window_width = $(window).width();
-      var title = $('.underline-heading' ,this).first().text();
-      if (window_width < 993){
-        $(this).wrap('<div class="sidebar-overlay"></div>');
-        $(this).before('<span class="sidebar-toggle">' + title.toLowerCase() + '</span>');
-        $(this).fadeIn();
+    var transformSidebar = function(){
+      $('.region-right-sidebar, .node .right-sidebar').each(function(){
+        var window_width = $(window).width();
+        var title = $('.underline-heading' ,this).first().text();
+        var origin = $(this).html();
+        if (window_width >= 993){
+          //$(this).parent().removeClass('sidebar-overlay');
+          //$(this).parent().find('.sidebar-toggle').remove();
+          //if( $(this).parent().is('.sidebar-overlay') ) {
+          //  $(this).parent().remove();
+          //  $('#block-system-main .left-content').after(origin);
+          //}
+        }
 
-        // SET POST IMAGES FOR INMOTION
-        if ( $(this).find('.post-img').length > 0 ) {
-          $('.post-img').each(function(){
-            targetImg = $('img' ,this).attr('src');
-            $(this).css('background-image', 'url(' + targetImg + ')');
+        if ( (window_width < 993) && !(window.location.href.indexOf("pd-product") > -1) ){
+          if ( $(this).parent().find('.sidebar-toggle').length == 0 ) {
+            $(this).wrap('<div class="sidebar-overlay"></div>');
+            $(this).before('<span class="sidebar-toggle">' + title.toLowerCase() + '</span>');
+            $(this).fadeIn();
+          }
+  
+          // SET POST IMAGES FOR INMOTION
+          if ( $(this).find('.post-img').length > 0 ) {
+            $('.post-img').each(function(){
+              targetImg = $('img' ,this).attr('src');
+              $(this).css('background-image', 'url(' + targetImg + ')');
+            });
+          }
+  
+          // IF SIDEBAR TOGGLE WIDTH IS MORE THAN 150PX, REPLACE TEXT WITH "QUICK LINKS"
+          var buttonWidth = $('.sidebar-toggle').outerWidth();
+          if( buttonWidth > 150 ){
+            $('.sidebar-toggle').text('Quick links');
+          }
+  
+          // if sidebar doesn't have class 'underline-heading'
+          if (window.location.href.indexOf("campaign") > -1) {
+            $('.sidebar-toggle').text('Quick links');
+          }
+  
+          if ( $(this).find('.underline-heading').length < 1 ) {
+            $('.sidebar-toggle').text('Quick links');
+          }
+          // HIDE SIDEBAR ON SWIPE RIGHT
+          $('.sidebar-overlay').swipe( {
+            //Generic swipe handler for all directions
+            swipeRight:function(event, direction, distance, duration, fingerCount, fingerData) {
+              $('body, .html').removeClass('no-scroll');
+              $(this).removeClass('active');
+            },
+            //Default is 75px
+             threshold:150
           });
         }
-
-        // IF SIDEBAR TOGGLE WIDTH IS MORE THAN 150PX, REPLACE TEXT WITH "QUICK LINKS"
-        var buttonWidth = $('.sidebar-toggle').outerWidth();
-        if( buttonWidth > 150 ){
-          $('.sidebar-toggle').text('Quick links');
+        if ( (window_width < 570) && !(window.location.href.indexOf("pd-product") > -1) ) {
+          // HIDE SIDEBAR ON SWIPE RIGHT
+          $('.sidebar-overlay').swipe( {
+            //Generic swipe handler for all directions
+            swipeRight:function(event, direction, distance, duration, fingerCount, fingerData) {
+              $('body, .html').removeClass('no-scroll');
+              $('#section-header, #section-socials').css({
+                visibility: "visible"
+              });
+              overlayClose();
+              $(this).delay(50).queue(function(next){
+                $(this).removeClass('active');
+                next();
+              });
+            },
+            //Default is 75px
+            threshold:150
+          });
         }
+      });
+    }
 
-        // if sidebar doesn't have class 'underline-heading'
-        if (window.location.href.indexOf("campaign") > -1) {
-          $('.sidebar-toggle').text('Quick links');
-        }
-
-        if ( $(this).find('.underline-heading').length < 1 ) {
-          $('.sidebar-toggle').text('Quick links');
-        }
-        // HIDE SIDEBAR ON SWIPE RIGHT
-        $('.sidebar-overlay').swipe( {
-          //Generic swipe handler for all directions
-          swipeRight:function(event, direction, distance, duration, fingerCount, fingerData) {
-            $('body, .html').removeClass('no-scroll');
-            $(this).removeClass('active');
-          },
-          //Default is 75px
-           threshold:150
-        });
-      }
-      if (window_width < 570){
-        // HIDE SIDEBAR ON SWIPE RIGHT
-        $('.sidebar-overlay').swipe( {
-          //Generic swipe handler for all directions
-          swipeRight:function(event, direction, distance, duration, fingerCount, fingerData) {
-            $('body, .html').removeClass('no-scroll');
-            $('#section-header, #section-socials').css({
-              visibility: "visible"
-            });
-            overlayClose();
-            $(this).delay(50).queue(function(next){
-              $(this).removeClass('active');
-              next();
-            });
-          },
-          //Default is 75px
-          threshold:150
-        });
-      }
+    // trigger sidebar function
+    transformSidebar();
+    // trigger sidebar function on window resizing
+    $(window).on('resize', function(){
+      transformSidebar();
     });
 
     var $docEl = $('.html, body'),
@@ -1192,6 +1214,154 @@ jQuery(document).ready(function(){
       return elementBottom > viewportTop && elementTop < viewportBottom;
     };
     
+    // ------ AUTO MENU-STYLE FOR MEDIA FILTER
+    var autoMediaChevron = function(){
+      $('.media_filter').each(function(id){
+        restrictWidth = $('.container').width();
+        elemWidth = $(this).outerWidth();
+        selected = $(this).find('ul li.active').text();
+        // apply if object width larger than container width
+        if ( (elemWidth > restrictWidth) && ( $(this).find('.media-chevron').length == 0 ) ) {
+          id++;
+          $('ul', this).addClass('minimize').hide();
+          $('ul .active', this).hide();
+          $(this).addClass('chevron-active');
+          $(this).prepend('<input class="media-chevron" id="media-chevron-'+id+'" type="checkbox"><div class="media-chevron-menu"><span class="selected">'+selected+'</span><label class="media-chevron-toggle" for="media-chevron-'+id+'"><span class="bar-1"></span><span class="bar-2"></span></label></div>');
+          // toggle behaviour
+          $('.media-chevron-toggle', this).on('click', function(){
+            if ( $(this).parent().parent().find('ul').is('.minimize') ){
+              $(this).parent().parent().find('ul').removeClass('minimize');
+              $(this).parent().parent().find('ul').stop().slideDown(600).animate({opacity: 1}, { queue: false, duration: 600 });
+            }
+            else{
+              $(this).parent().parent().find('ul').addClass('minimize');
+              $(this).parent().parent().find('ul').stop().slideUp(600).animate({opacity: 0}, { queue: false, duration: 600 });
+            }
+          });
+        }
+        // remove if object width smaller than container width
+        else if (elemWidth < restrictWidth) {
+          $('ul', this).removeClass('minimize').css('opacity', '1').show();
+          $('ul .active', this).show();
+          $(this).find('.media-chevron, .media-chevron-menu').remove();
+          $(this).removeClass('chevron-active');
+        }
+      });
+    }
+
+    var autoAccountMenu = function(){
+      $('.account-nav').find('.text-underline').parent().parent().addClass('active');
+
+      $('.account-nav').each(function(id){
+        var window_width = $(window).width();
+
+        selected = $(this).find('ul li.active').text();
+        // apply if object width larger than container width
+        if ( (window_width < 769) && ( $(this).find('.account-chevron').length == 0 ) ) {
+          id++;
+          $('ul', this).addClass('minimize').hide();
+          $('ul .active', this).hide();
+          $(this).addClass('chevron-active');
+          $(this).prepend('<input class="account-chevron" id="account-chevron-'+id+'" type="checkbox"><div class="account-chevron-menu"><span class="selected">'+selected+'</span><label class="account-chevron-toggle" for="account-chevron-'+id+'"><span class="bar-1"></span><span class="bar-2"></span></label></div>');
+          // toggle behaviour
+          $('.account-chevron-toggle', this).on('click', function(){
+            if ( $(this).parent().parent().find('ul').is('.minimize') ){
+              $(this).parent().parent().find('ul').removeClass('minimize');
+              $(this).parent().parent().find('ul').stop().slideDown(600).animate({opacity: 1}, { queue: false, duration: 600 });
+            }
+            else{
+              $(this).parent().parent().find('ul').addClass('minimize');
+              $(this).parent().parent().find('ul').stop().slideUp(600).animate({opacity: 0}, { queue: false, duration: 600 });
+            }
+          });
+        }
+        // remove if object width smaller than container width
+        else {
+          $('ul', this).removeClass('minimize').css('opacity', '1').show();
+          $('ul .active', this).show();
+          $(this).find('.account-chevron, .account-chevron-menu').remove();
+          $(this).removeClass('chevron-active');
+        }
+      });
+    }
+
+    var autoNumberRenewMenu = function(){
+      
+      $('.renew-membership-nav, .join-membership-nav').each(function(){
+        $('ul.nav', this).addClass('numberized').hide();
+        $(this).addClass('number-menu-active');
+
+        //assign step number
+        $('.nav li', this).each(function(id){
+          id++;
+          $('a span', this).after('<span class="step-order">'+id+'</span>');
+        });
+
+        //get current step number and label
+        var currentStep = $('.nav', this).find('.text-underline').text();
+        var stepNumber = $('.nav .text-underline', this).parent().find('.step-order').text();
+
+        //append customised elemen to show step order
+        $('ul.nav', this).after('<span class="current-step">Step <span class="step-number">'+stepNumber+'</span> of 7: <span class="step-label">'+currentStep+'</span></span>');
+
+        //update step number and label on Prev/Next click
+        $(document).on('click', 'a[class^="join-details-button"], a[class^="your-details-prevbutton"]', function(){
+          var currentStep = $('.numberized').find('.text-underline').text();
+          var stepNumber = $('.numberized .text-underline').parent().find('.step-order').text();
+          $('.number-menu-active .current-step .step-number').text(stepNumber);
+          $('.number-menu-active .current-step .step-label').text(currentStep);
+        });
+      });
+    }
+
+    // trigger function
+    autoMediaChevron();
+    autoAccountMenu();
+    autoNumberRenewMenu();
+
+    // trigger function on window resizing
+    $(window).on('resize', function(){
+      autoMediaChevron();
+      autoAccountMenu();
+    });
+
+    // trigger menu expand on placeholder click
+    $(document).on('click', '.chevron-active .media-chevron-menu .selected', function(){
+      $(this).parent().find('.media-chevron-toggle').click();
+    });
+    $(document).on('click', '.chevron-active .account-chevron-menu .selected', function(){
+      $(this).parent().find('.account-chevron-toggle').click();
+    });
+
+    // assign placeholder for selected option
+    $(document).on('click', '.chevron-active ul li', function(){
+      var section = $(this).text();
+      $(this).parent().parent().find('.selected').text(section).hide().fadeIn();
+      $(this).parent().parent().find('.media-chevron').prop('checked', false);
+      $(this).parent().addClass('minimize');
+      $(this).parent().stop().slideUp(600).animate({opacity: 0}, { queue: false, duration: 600, complete: function(){
+          $('li', this).show();
+          $('.active', this).hide();
+        } 
+      });
+    });
+    $(document).on('click', '.account-nav.chevron-active ul li', function(){
+      var section = $(this).text();
+      $(this).siblings().removeClass('active');
+      $(this).addClass('active');
+      $(this).parent().parent().find('.selected').text(section).hide().fadeIn();
+      $(this).parent().parent().find('.account-chevron').prop('checked', false);
+      $(this).parent().addClass('minimize');
+      $(this).parent().stop().slideUp(600).animate({opacity: 0}, { queue: false, duration: 600, complete: function(){
+          $('li', this).show();
+          $('.active', this).hide();
+        } 
+      });
+    });
+
+
+    // ------ END AUTO BURGER-STYLE FOR MEDIA FILTER / ACCOUNT MENU
+
 });
 
 
