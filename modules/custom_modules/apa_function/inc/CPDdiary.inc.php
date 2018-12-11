@@ -205,7 +205,7 @@ function date_sort($a, $b) {
 			<input class="form-control" type="text" required="true" name="Provider" placeholder="" id="ProviderNA">
 			</div><div class="col-lg-12">
 			<label for="ReflectionNA">Reflection</label>
-			<input class="form-control" type="text" required="true" name="Reflection" placeholder="" id="ReflectionNA">
+			<input class="form-control" type="text" required="true" name="Reflection" placeholder="" id="ReflectionNA" maxlength="250">
 			</div>
 		</div>
 		<div class="modal-footer">
