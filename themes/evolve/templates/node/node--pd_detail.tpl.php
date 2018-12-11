@@ -1036,7 +1036,7 @@ $userRetisterStatus = false;
 					</div>
 					<div class="col-lg-5">
 						<label for="">Phone number<span class="tipstyle"> *</span></label>
-						<input type="number" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  >
+						<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>  >
 					</div>
 				</div>
 

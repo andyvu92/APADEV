@@ -234,6 +234,15 @@ $background = getBackgroundImage($userID);
 							<span class="sub-heading">Please contact your financial institution or try again.</span>
 							</div>
 						</div>
+					<?php elseif(strpos($renewOuts['MResponse'], '13') !== false): ?>
+						<div class="flex-container" id="fail-purchase">
+							<div class="flex-cell">
+								<h3 class="light-lead-heading">Your financial institution requires verbal authoristion of yhis payment before it can be processed.</h3>
+							</div>
+							<div class="flex-cell">
+							<span class="sub-heading">Please contact your financial institution.</span>
+							</div>
+						</div>
 					<?php else: ?>
 						<div class="flex-container" id="fail-purchase">
 							<div class="flex-cell">

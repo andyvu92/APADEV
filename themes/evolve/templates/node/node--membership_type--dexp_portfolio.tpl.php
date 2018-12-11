@@ -100,13 +100,48 @@ $rens = str_replace('</div>',"",$rens);
 		<div class="MTcontent">
 			<div class="MTcontentTitle">Price:</div>
 			<?php
+			/* 
+			To get a static price (non-member price)
+			*/
+			$API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/-1";
+			$ch = curl_init(); 
+			$prodcutArray = array();
+			$memberProductsArray['ProductID']=$prodcutArray;
+			$memberProdcutID = $memberProductsArray;
+			$memberProdcutID = json_encode($memberProdcutID, true);
+			curl_setopt($ch, CURLOPT_URL, $API); 
+			curl_setopt($ch, CURLOPT_POST, 1);
+			curl_setopt($ch, CURLOPT_POSTFIELDS,$memberProdcutID);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+				"Content-Type:application/json"
+			));
+			//return the transfer as a string 
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
+			curl_setopt($ch, CURLOPT_ENCODING, "");
+			curl_setopt($ch, CURLOPT_MAXREDIRS, 10);
+			curl_setopt($ch, CURLOPT_TIMEOUT, 300000);
+			curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
+			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
 			
-			$TypePrice = file_get_contents("sites/all/themes/evolve/json/TypePrice.json");
-			$TypePrice = json_decode($TypePrice, true);
-			foreach ($TypePrice as $key => $value) {
-				if($TypePrice[$key]["Code"] == strtoupper($rens)) {
-					print '<div class="MTprice">$'.$TypePrice[$key]["Price"].'</div>';
-					print '<div class="MTid" style="display: none;">'.$TypePrice[$key]["ID"].'</div>';
+			$JSONreturn = curl_exec($ch);
+			if(curl_error($ch))
+			{
+				//echo 'error:' . curl_error($ch);
+				return curl_error($ch);
+			}
+			curl_close($ch);
+			$MemberTypes = json_decode($JSONreturn, true);
+			// to get data from the Drupal content
+			$getPriceObj = (array)$content['field_member_type_price']['#object'];
+			$FinalPrice = $getPriceObj['field_member_type_price']['und'][0]["value"];
+			foreach ($MemberTypes as $key => $value) {
+				$x = explode(" ", $MemberTypes[$key]['Title']);
+        		$y = str_replace(":", "", $x[0]);
+				if($y == strtoupper($rens)) {
+					print '<div class="MTprice">$'.$MemberTypes[$key]["Price"]." (2018 membership year)".'</div>';
+					print '<div class="MTprice">$'.$FinalPrice." (2019 membership year)".'</div>';
+					print '<div class="MTid" style="display: none;">'.$MemberTypes[$key]["ProductID"].'</div>';
 				}
 			}
 			?>
@@ -141,7 +176,6 @@ $rens = str_replace('</div>',"",$rens);
 				*/
 			?>
 
-			<?php //print '$'.render($content['field_member_type_price']);?>
 			<?php 
 				/*
 				$rens = render($content['field_member_type_price']);
