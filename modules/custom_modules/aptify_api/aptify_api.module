@@ -267,6 +267,9 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
             if(isset($userIDcheck)) {
                 $message .= "User: "._aptify_get('FirstName')." "._aptify_get('LastName')." / "._aptify_get('Email')."<br/>";
             }
+            if(!empty($data) && $api_number=="5. Member detail - Update"){
+                $message .=$data;
+            }
 			watchdog(APTIFY_API_WATCHDOG, $message, $replacements, WATCHDOG_CRITICAL,$request_url);
 			//throw new AptifyFailure("Communication Error.\nError Code : {$response_status_code}");
 		}
