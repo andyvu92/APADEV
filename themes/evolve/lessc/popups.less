@@ -347,7 +347,8 @@ include the following div to the template where overlay is needed
         .loader-quart{
             border: 6px solid rgba(0,0,0,0.4);
             &:after{
-                border-top-color: #000;
+                border-top-color: rgba(0,0,0,0.5);;
+                .animation(spin, 1.5s, linear, infinite);
             }
         }
     }
@@ -690,6 +691,9 @@ div[aria-describedby="QuatationPopUp"].ui-dialog{
 #privacypolicyWindow {
     z-index: 1056 !important;
     .large-popup;
+    @media @larger-phone-width-down{
+        top: 6vh!important;
+    }
     .modal-footer {
         display: flex;
         justify-content: center;

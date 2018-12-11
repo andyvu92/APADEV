@@ -105,13 +105,21 @@
   bottom: @border-size;
   left: @border-size;
 }
-.animation(@animation, @duration, @count) {
+/*
+.animation(@animation, @duration, @timing-function, @count) {
   -o-animation: @animation;
   -moz-animation: @animation;
   -webkit-animation: @animation;
   animation: @animation;
   animation-duration: @duration;
+  animation-timing-function: @timing-function;
   animation-iteration-count: @count;
+}*/
+.animation(@animation) {
+  -o-animation: @animation;
+  -moz-animation: @animation;
+  -webkit-animation: @animation;
+  animation: @animation;
 }
 
 /*----------------------- ANIMATION -----------------------*/
@@ -136,6 +144,7 @@
     tranform: rotate(360deg);
   }
 }
+
 @keyframes bouncing {
   0%, 100% {
     transform: scale3d(1,1,1);
