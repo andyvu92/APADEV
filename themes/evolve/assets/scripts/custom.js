@@ -1549,6 +1549,12 @@ jQuery(document).ready(function($) {
 		e.preventDefault();
 	}
 });
+$("input[type='text']").keydown(function (e) {
+	// Ensure text field not allow the double quote
+	if (e.keyCode == 222) {
+		e.preventDefault();
+	}
+});
 //======================== LOADING SCREEN BUTTONS =================================
 	
 //------------- JOIN THE APA / RENEW MEMBERSHIP-----------------------
