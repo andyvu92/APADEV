@@ -1338,6 +1338,7 @@ jQuery(document).ready(function(){
 
     // ------ END AUTO BURGER-STYLE FOR MEDIA FILTER / ACCOUNT MENU
 
+    /*
     $('.dashboard-left-nav').each(function(){
       var window_width = $(window).width();
 
@@ -1348,7 +1349,7 @@ jQuery(document).ready(function(){
       if ( $('.navbar-left li:last-child').isInViewport() ) {
         console.log('works');
       }
-    });
+    });*/
 
     $('.ckeditor-accordion-container').each(function(){
       if ( $('dt' ,this).is('.active') ){
