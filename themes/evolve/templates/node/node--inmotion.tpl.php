@@ -104,7 +104,7 @@
       </header>
       */ //['field_emailauthor']['und'][0]['value']?>
       <?php /*print_r ($content['field_research_author']['#items']); */?>	
-      <div class="region col-xs-12 col-sm-12 col-md-8 col-lg-8">
+      <div class="left-content region col-xs-12 col-sm-12 col-md-8 col-lg-8">
 
         <!-- MOBILE POST FEATURED IMG -->
         <div class="post-img media mobile">
@@ -162,7 +162,7 @@
 				<?php print render($content['field_inmotion_image']);?>
 			</div>
         </div>
-        <div class="inmotion-readmore-content">
+        <div class="inmotion-content">
                 <div class="content-loading">
                     <div class="line"></div>
                     <div class="line"></div>
@@ -173,7 +173,7 @@
                 hide($content['comments']);
                 hide($content['links']);
                 //print render($content['body']);
-                echo '<div class="short-text">'. render($content['body']) .'</div><a class="readmore">Read more</a>';
+                echo '<div class="inmotion-readmore-content">'. render($content['body']) .'</div>';
             ?>
         </div>
         

@@ -124,47 +124,60 @@ jQuery(document).ready(function($) {
 
   // INMOTION READMORE
   $('.inmotion-readmore-content').each(function(){
-    // MOVE INTRO AND FEATURED IMAGE CAPTION OUT OF THE READMORE CONTENT IF AVAILABLE
-    $(this).prepend( $('.intro') );
-    $(this).prepend( $('.featured-caption') );
-
-    // Initiate readmore viariables
-    var text = $(this).find(".short-text").text();
-    var fulltext = $(this).find(".short-text").html();
-    var wordCount = text.trim().split(' ').length;
-    var window_width = $(window).width();
-    if (window_width > 570){
-      // LIMIT PRE-READ WORDS TO 300
-
-      var splittext = text.split(/\s+/).slice(0,301).join(" ");
-      if ( wordCount > 300 ) {
-        $(this).find(".short-text").text( splittext + '...');
-        $('.short-text', this).after( '<div class="full-text" style="display: none;">' + fulltext + '</div>' );
-      }
-      else{
-        $('.readmore',this).remove();
-      }
+    if ( $(this).find('.featured-caption').length == 1 ){
+      $('.region.left-content .post-img').append( $('.featured-caption') );
     }
-    else{
-      // LIMIT PRE-READ WORDS TO 150 FOR MOBILE
-      var splittext = text.split(/\s+/).slice(0,151).join(" ");
-      if ( wordCount > 150 ) {
-        $(this).find(".short-text").text( splittext + '...');
-        $('.short-text', this).after( '<div class="full-text" style="display: none;">' + fulltext + '</div>' );
-      }
-      else{
-        $('.readmore',this).remove();
-      }
-    }
-    // define word count
 
+    // define min height
+    var minHeight = 500;
+
+    // set min height
+    $(this).css('height', minHeight);
+    $(this).addClass('minimized');
+
+    // construct wrapper and toggle
+    $(this).wrap('<div class="readmore-container"></div>');
+    $(this).after('<a class="readmore-toggle">Read more</a>');
 
     $(window).load(function(){
       $('.content-loading').hide();
-      $('.short-text, .readmore').fadeIn(1000);
+      $('.inmotion-readmore-content, .readmore-toggle').fadeIn(1000);
+      $('.readmore-toggle').css('display', 'block');
+    });
+
+      // READMORE BUTTON FOR INMOTION - toogle behaviour on click
+    $(document).on('click', '.inmotion-content .readmore-toggle', function(){
+      if ( $(this).text() == 'Read more' ) { // expanding
+        // get full height
+        var fullHeight = $(this).parent().find('.inmotion-readmore-content').css('height', 'auto').height();
+        // re-set min height
+        $(this).parent().find('.inmotion-readmore-content').css('height', minHeight);
+
+        //set full height
+        $(this).parent().find('.inmotion-readmore-content').animate({height: fullHeight}, 800);
+        $(this).parent().find('.inmotion-readmore-content').removeClass('minimized');
+        $(this).text('Read less');
+      }
+      else{ //minimizing
+          // auto scroll back to top
+          var window_width = $(window).width();
+          if (window_width >= 993){
+            $('html, body').stop().animate({
+              scrollTop: $('.SectionHeader').offset().top - $('#section-header').height()
+            });
+          }
+          else{
+            $('html, body').stop().animate({ scrollTop: $('.SectionHeader').offset().top - 25 }, 1000);
+          }
+        // set min height
+        $(this).parent().find('.inmotion-readmore-content').animate({height: minHeight}, 800);
+        $(this).parent().find('.inmotion-readmore-content').addClass('minimized');
+        $(this).text('Read more');
+      }
     });
   });
 
+  // READMORE BUTTON FOR PD PAGES
   $(document).on('click', '.readmore-content .readmore', function(){
     if( $(this).text() == 'Read less' ){
       // SCROLL BACK TO TOP
@@ -188,42 +201,6 @@ jQuery(document).ready(function($) {
       $(this).text('Read more');
     }
     else{
-      $(this).parent().find('.short-text').slideUp(function(){
-        $(this).parent().find('.full-text').slideDown();
-      });
-      $(this).text('Read less');
-    }
-  });
-
-  // READMORE BUTTON FOR INMOTION
-  $(document).on('click', '.inmotion-readmore-content .readmore', function(){
-    if( $(this).text() == 'Read less' ){
-      // SCROLL BACK TO TOP
-      var window_width = $(window).width();
-			if (window_width >= 993){
-          $('html, body').stop().animate({
-            scrollTop: $('.SectionHeader').offset().top - $('#section-header').height()
-          });
-          $(this).parent().find('.full-text').slideUp(function(){
-            $(this).parent().find('.short-text').slideDown();
-          });
-      }
-      else{
-        $('html, body').stop().animate({ scrollTop: $('.SectionHeader').offset().top - 25 }, 1000);
-        $(this).parent().find('.full-text').delay(500).slideUp(function(){
-          $(this).parent().find('.short-text').slideDown();
-        });
-      }
-      // END SCROLL BACK TO TOP
-      
-      $(this).text('Read more');
-    }
-    else{
-      // SCROLL BACK TO TOP
-      var window_width = $(window).width();
-			if (window_width < 571){
-        $('html, body').stop().animate({ scrollTop: $('.short-text').offset().top - 30 }, 1000);
-      }
       $(this).parent().find('.short-text').slideUp(function(){
         $(this).parent().find('.full-text').slideDown();
       });
@@ -1275,13 +1252,14 @@ jQuery(document).ready(function(){
             }
           });
         }
+        /*
         // remove if object width smaller than container width
         else {
           $('ul', this).removeClass('minimize').css('opacity', '1').show();
           $('ul .active', this).show();
           $(this).find('.account-chevron, .account-chevron-menu').remove();
           $(this).removeClass('chevron-active');
-        }
+        }*/
       });
     }
 
@@ -1322,7 +1300,6 @@ jQuery(document).ready(function(){
     // trigger function on window resizing
     $(window).on('resize', function(){
       autoMediaChevron();
-      autoAccountMenu();
     });
 
     // trigger menu expand on placeholder click
@@ -1336,7 +1313,7 @@ jQuery(document).ready(function(){
     // assign placeholder for selected option
     $(document).on('click', '.chevron-active ul li', function(){
       var section = $(this).text();
-      $(this).parent().parent().find('.selected').text(section).hide().fadeIn();
+      $(this).parent().parent().find('.selected').text(section);
       $(this).parent().parent().find('.media-chevron').prop('checked', false);
       $(this).parent().addClass('minimize');
       $(this).parent().stop().slideUp(600).animate({opacity: 0}, { queue: false, duration: 600, complete: function(){
@@ -1359,9 +1336,26 @@ jQuery(document).ready(function(){
       });
     });
 
-
     // ------ END AUTO BURGER-STYLE FOR MEDIA FILTER / ACCOUNT MENU
 
+    $('.dashboard-left-nav').each(function(){
+      var window_width = $(window).width();
+
+      if ( window_width < 571 ) {
+        $('.navbar-collapse', this).append('<span class="blink-arrows-right"><span class="arrow-1"></span><span class="arrow-2"></span></span>');
+      }
+
+      if ( $('.navbar-left li:last-child').isInViewport() ) {
+        console.log('works');
+      }
+    });
+
+    $('.ckeditor-accordion-container').each(function(){
+      if ( $('dt' ,this).is('.active') ){
+        $('dt.active' ,this).removeClass('active');
+        $('dd.active' ,this).removeClass('active').slideUp();
+      }
+    });
 });
 
 
