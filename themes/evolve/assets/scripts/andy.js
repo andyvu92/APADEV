@@ -1351,12 +1351,15 @@ jQuery(document).ready(function(){
       }
     });*/
 
+    // DEFAULT MINIMIZE ACCORDION
     $('.ckeditor-accordion-container').each(function(){
       if ( $('dt' ,this).is('.active') ){
         $('dt.active' ,this).removeClass('active');
         $('dd.active' ,this).removeClass('active').slideUp();
       }
     });
+
 });
+
 
 
