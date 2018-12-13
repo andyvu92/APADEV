@@ -1359,6 +1359,31 @@ jQuery(document).ready(function(){
       }
     });
 
+    // HIDE DESCRIPTION IF INPUT IS NOT EMPTY
+    $('.page-user #user-login, .page-user #user-pass').each(function(){
+      $('input', this).on('keyup change', function(){
+        if ( $(this).val() == '' ) {
+          $(this).removeClass('filled');
+        }
+        else{
+          $(this).removeClass('error');
+          $(this).addClass('filled');
+        }
+      });
+      $('ul.nav li:first-child').addClass('new-account');
+      $('ul.nav li:nth-child(2)').addClass('login');
+      $('ul.nav li:nth-child(3)').addClass('new-password');
+      $(this).submit(function(){
+        $('.form-actions input', this).hide();
+        $('.form-actions', this).append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');
+      });
+    });
+
+    $(document).on('click', '.page-user .user-info-from-cookie .form-actions input', function(){
+      $(this).hide();
+      $(this).parent().append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');
+    });
+
 });
 
 

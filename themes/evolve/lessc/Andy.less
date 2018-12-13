@@ -4517,3 +4517,195 @@ body{
         min-height: 0;
     }
 }
+
+/* STYLE LOGIN PAGE FOR ADMINS */
+.page-user{
+    #section-main-content{
+        padding: 50px 0 100px;
+        min-height: 500px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .dexp-page-toolbar{
+            ul.nav{
+                display: flex;
+                justify-content: center;
+                border-bottom: 0;
+                li.active{
+                    text-decoration: underline;
+                }
+            }
+        }
+        #user-login, #user-pass, #user-register-form{
+            display: flex;
+            justify-content: center;
+            .form-item-name, .form-item-pass{
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                &:before{
+                    content: "";
+                    position: absolute;
+                    left: 12px;
+                    top: calc(~'50% - 7.5px');
+                    width: 15px;
+                    height: 15px;
+                    background-position: center;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+                label{
+                    display: none;
+                }
+                .description{
+                    font-size: 1em;
+                    position: absolute;
+                    top: calc(~'50% - 9px');
+                    left: 40px;
+                    color: #333;
+                    z-index: 9;
+                    opacity: 1;
+                    transition: all .3s linear;
+                }
+                input{
+                    background: none;
+                    position: relative;
+                    z-index: 10;
+                    padding-left: 40px;
+                    &:focus + .description{
+                        top: 0;
+                        opacity: 0;
+                    }
+                    &.filled + .description{
+                        top: 0;
+                        opacity: 0;
+                    }
+                    &.error{
+                        border: 1px solid @orange;
+                    }
+                }
+            }
+            .form-item-name{
+                margin-top: 30px;
+                &:before{
+                    background-image: url(/sites/default/files/dashboard-icon/account-G.png);
+                }
+            }
+            .form-item-pass{
+                &:before{
+                    background-image: url(/sites/default/files/general-icon/password-icon-lg.png);
+                }
+            }
+            #edit-actions{
+                margin-top: 30px;
+                input{
+                    min-width: 100%;
+                    &:hover{
+                        color: #fff;
+                        opacity: 0.8;
+                        background: @bright-blue;
+                        border-color: @bright-blue;
+                    }
+                }
+            }
+        }
+    }
+    #section-clients{
+        margin-top: 0;
+    }
+    #modalContent{
+        position: fixed!important;
+        top: 30vh!important;
+        .ctools-modal-content{
+            height: auto!important;
+            .modal-header{
+                min-height: 35px;
+            }
+        }
+        #modal-content{
+            min-width: 100%;
+            min-height: 100%;
+            height: auto!important;
+            overflow: hidden;
+            .alert-danger{
+                background-color: #fff;
+                border-color: @orange;
+            }
+        }
+        .user-info-from-cookie{
+            display: flex;
+            justify-content: center;
+            & > div{
+                width: 90%;
+            }
+            .form-item-name, .form-item-mail{
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                &:before{
+                    content: "";
+                    position: absolute;
+                    left: 12px;
+                    top: 16px;
+                    width: 15px;
+                    height: 15px;
+                    background-position: center;
+                    background-size: contain;
+                    background-repeat: no-repeat;
+                }
+                label{
+                    display: none;
+                }
+                .description{
+                    font-size: 1em;
+                    position: relative;
+                    color: #333;
+                    padding-top: 20px;
+                }
+                input{
+                    background: none;
+                    position: relative;
+                    z-index: 10;
+                    padding-left: 40px;
+                    &.error{
+                        border: 1px solid @orange;
+                    }
+                }
+            }
+            .form-item-name{
+                margin-top: 30px;
+                &:before{
+                    background-image: url(/sites/default/files/dashboard-icon/account-G.png);
+                }
+            }
+            .form-item-mail{
+                &:before{
+                    background-image: url(/sites/default/files/contact-us/icons/MAILING_ADDRESS_G.png);
+                }
+            }
+            .form-actions{
+                margin-top: 30px;
+                input{
+                    min-width: 100%;
+                    &:hover, &:focus{
+                        color: #fff;
+                        opacity: 0.8;
+                        background: @bright-blue;
+                        border-color: @bright-blue;
+                    }
+                }
+                .blue-spinning-btn{
+                    height: 48px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+        }
+    }
+    .throbber{
+        display: none;
+    }
+}
