@@ -798,7 +798,7 @@ jQuery(document).ready(function(){
         }
       });
 
-      $(document).bind('keyup', '.paymentsiderbar #PRFOther', function(){
+      $(document).on('keyup', '.paymentsiderbar #PRFOther', function(){
         if( $(this).val() == '1' ){
           //console.log('0');
         }
@@ -1042,6 +1042,9 @@ jQuery(document).ready(function(){
             //Default is 75px
              threshold:150
           });
+        } else {
+          $('.sidebar-overlay > .sidebar-toggle').remove();
+          $('.sidebar-overlay > .region-right-sidebar').unwrap();
         }
         if ( (window_width < 570) && !(window.location.href.indexOf("pd-product") > -1) ) {
           // HIDE SIDEBAR ON SWIPE RIGHT
@@ -1384,6 +1387,72 @@ jQuery(document).ready(function(){
       $(this).parent().append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');
     });
 
+    /* ----------------------------------------------------------------
+            CUSTOM FONT STYLE WITH SPECIFIC CLASSES ADDED
+    -----------------------------------------------------------------*/
+    $('h2, h3, h4, h5, h6, p, ul, ol').each(function(){
+      var prev = $(this).prev();
+      if ( prev.is('h2') ){
+        $(this).addClass('font_style--after_h2');
+      }
+      else if ( prev.is('h3') ){
+        $(this).addClass('font_style--after_h3');
+      }
+      else if ( prev.is('h4') ){
+        $(this).addClass('font_style--after_h4');
+      }
+      else if ( prev.is('h5') ){
+        $(this).addClass('font_style--after_h5');
+      }
+      else if ( prev.is('h6') ){
+        $(this).addClass('font_style--after_h6');
+      }
+      else if ( prev.is('p') ){
+        $(this).addClass('font_style--after_p');
+      }
+      else if ( prev.is('ul') ){
+        $(this).addClass('font_style--after_ul');
+      }
+      else if ( prev.is('ol') ){
+        $(this).addClass('font_style--after_ol');
+      }
+      else {
+        return;
+      }
+    });
+
+    /*
+    $('.inmotion').find('h2, h3, h4, h5, h6, p, ul, ol').each(function(){
+      if (  $(this).text() != 'H2 Title style' && $(this).text() != 'H3 Title style' && $(this).text() != 'H4 Title style' && $(this).text() != 'H5 Title style' && $(this).text() != 'P tag style' && $(this).text() != 'UL list style' && $(this).text() != 'OL list style' && $(this).text() != 'Intro style' ) {
+        if ( $(this).is('h2') ) {
+          $(this).text('This is h2 tag');
+        }
+        else if ( $(this).is('h3') ) {
+          $(this).text('This is h3 tag');
+        }
+        else if ( $(this).is('h4') ) {
+          $(this).text('This is h4 tag');
+        }
+        else if ( $(this).is('h5') ) {
+          $(this).text('This is h5 tag');
+        }
+        else{
+          return;
+        }
+      }
+    });
+    */
+    /* ----------------------------------------------------------------
+            END CUSTOM FONT STYLE WITH SPECIFIC CLASSES ADDED
+    -----------------------------------------------------------------*/
+
+    // HIDE INMOTION SIDEBAR TITLE TAG IF BLOG CONTENT IS EMPTY
+    $('.CampaignSidebar .content').each(function(){
+      if( $(this).find('.views-row').length == 0 ){
+        $(this).prev().hide();
+        $(this).prev().prev().hide();
+      }
+    });
 });
 
 
