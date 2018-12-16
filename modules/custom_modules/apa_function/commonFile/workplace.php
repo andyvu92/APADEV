@@ -52,7 +52,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 
 	<div class="col-xs-6 col-md-6">
 		<label for="Wpostcode'.$i.'">Postcode<span class="tipstyle"> *</span></label>
-		<input type="number" class="form-control" name="Wpostcode'.$i.'" id="Wpostcode'.$i.'" value="" placeholder="Postcode">
+		<input type="text" class="form-control" name="Wpostcode'.$i.'" id="Wpostcode'.$i.'" value="" placeholder="Postcode">
 	</div>
 
 	<div class="col-xs-6 col-md-6">

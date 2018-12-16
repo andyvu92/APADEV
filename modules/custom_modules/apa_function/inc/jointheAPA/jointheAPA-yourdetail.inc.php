@@ -1070,7 +1070,7 @@ if (isset($_SESSION['UserId'])):
                     
                     <div class="col-xs-6 col-md-3">
                         <label for="">Postcode<span class="tipstyle"> *</span></label>
-                        <input type="number" class="form-control" name="Postcode" id="Postcode" placeholder='Postcode'<?php
+                        <input type="text" class="form-control" name="Postcode" id="Postcode" placeholder='Postcode'<?php
     if (empty($details['Postcode'])) {
         echo "";
     } else {
@@ -1197,7 +1197,7 @@ if (isset($_SESSION['UserId'])):
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">Postcode<span class="tipstyle"> *</span></label>
-                           <input type="number" class="form-control" name="Billing-Postcode" id="Billing-Postcode" placeholder='Billing Postcode'<?php
+                           <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" placeholder='Billing Postcode'<?php
     if (empty($details['Billing-Postcode'])) {
         echo "";
     } else {
@@ -1747,7 +1747,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                         </div>
                         <div class="col-xs-6 col-md-3">
                             <label for="Wpostcode">Postcode<span class="tipstyle"> *</span></label>
-                            <input type="number" class="form-control" name="Wpostcode<?php
+                            <input type="text" class="form-control" name="Wpostcode<?php
         echo $key;
 ?>" id="Wpostcode<?php
         echo $key;
@@ -2779,7 +2779,7 @@ if(isset($_POST['MT'])){
 
                         <div class="col-xs-6 col-md-3">
                             <label for="">Postcode<span class="tipstyle"> *</span></label>
-                            <input type="number" class="form-control" name="Postcode" id="Postcode" autocomplete="postal-code">
+                            <input type="text" class="form-control" name="Postcode" id="Postcode" autocomplete="postal-code">
                         </div>
 
                         <div class="col-xs-6 col-md-3">
@@ -2862,7 +2862,7 @@ if(isset($_POST['MT'])){
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">Postcode<span class="tipstyle"> *</span></label>
-                           <input type="number" class="form-control" name="Billing-Postcode" id="Billing-Postcode">
+                           <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode">
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">State</label>
