@@ -1555,6 +1555,170 @@ $("input[type='text']").keydown(function (e) {
 		e.preventDefault();
 	}
 });
+$(document).on('change', 'select[name="Country"]', function(){
+	if($('select[name="Country"]').val()=="Australia"){
+        $("input[name='Postcode']").keydown(function (e) {
+			// Allow: backspace, delete, tab, escape, enter and .
+			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+				 // Allow: Ctrl+A, Command+A
+				(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+				 // Allow: home, end, left, right, down, up
+				(e.keyCode >= 35 && e.keyCode <= 40)) {
+					 // let it happen, don't do anything
+					 return;
+			}
+			// Ensure that it is a number and stop the keypress
+			if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				e.preventDefault();
+			}
+		});   
+	}
+	else {
+		$("input[name='Postcode']").val("");
+		$("input[name='Postcode']").unbind("keydown");
+		
+	}
+});
+if($('select[name="Country"]').val()=="Australia"){
+	$("input[name='Postcode']").keydown(function (e) {
+		// Allow: backspace, delete, tab, escape, enter and .
+		if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+			 // Allow: Ctrl+A, Command+A
+			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+			 // Allow: home, end, left, right, down, up
+			(e.keyCode >= 35 && e.keyCode <= 40)) {
+				 // let it happen, don't do anything
+				 return;
+		}
+		// Ensure that it is a number and stop the keypress
+		if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+			e.preventDefault();
+		}
+	});   
+}
+$(document).on('change', 'select[name="Billing-Country"]', function(){
+	if($('select[name="Billing-Country"]').val()=="Australia"){
+        $("input[name='Billing-Postcode']").keydown(function (e) {
+			// Allow: backspace, delete, tab, escape, enter and .
+			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+				 // Allow: Ctrl+A, Command+A
+				(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+				 // Allow: home, end, left, right, down, up
+				(e.keyCode >= 35 && e.keyCode <= 40)) {
+					 // let it happen, don't do anything
+					 return;
+			}
+			// Ensure that it is a number and stop the keypress
+			if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				e.preventDefault();
+			}
+		});   
+	}
+	else {
+		$("input[name='Billing-Postcode']").val("");
+		$("input[name='Billing-Postcode']").unbind("keydown");
+		
+	}
+});
+if($('select[name="Billing-Country"]').val()=="Australia"){
+	$("input[name='Billing-Postcode']").keydown(function (e) {
+		// Allow: backspace, delete, tab, escape, enter and .
+		if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+			 // Allow: Ctrl+A, Command+A
+			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+			 // Allow: home, end, left, right, down, up
+			(e.keyCode >= 35 && e.keyCode <= 40)) {
+				 // let it happen, don't do anything
+				 return;
+		}
+		// Ensure that it is a number and stop the keypress
+		if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+			e.preventDefault();
+		}
+	});   
+}
+$(document).on('change', 'select[name="Shipping-Country"]', function(){
+	if($('select[name="Shipping-Country"]').val()=="Australia"){
+        $("input[name='Shipping-postcode']").keydown(function (e) {
+			// Allow: backspace, delete, tab, escape, enter and .
+			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+				 // Allow: Ctrl+A, Command+A
+				(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+				 // Allow: home, end, left, right, down, up
+				(e.keyCode >= 35 && e.keyCode <= 40)) {
+					 // let it happen, don't do anything
+					 return;
+			}
+			// Ensure that it is a number and stop the keypress
+			if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				e.preventDefault();
+			}
+		});   
+	}
+	else {
+		$("input[name='Shipping-postcode']").val("");
+		$("input[name='Shipping-postcode']").unbind("keydown");
+		
+	}
+});
+if($('select[name="Shipping-Country"]').val()=="Australia"){
+	$("input[name='Shipping-postcode']").keydown(function (e) {
+		// Allow: backspace, delete, tab, escape, enter and .
+		if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+			 // Allow: Ctrl+A, Command+A
+			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+			 // Allow: home, end, left, right, down, up
+			(e.keyCode >= 35 && e.keyCode <= 40)) {
+				 // let it happen, don't do anything
+				 return;
+		}
+		// Ensure that it is a number and stop the keypress
+		if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+			e.preventDefault();
+		}
+	});   
+}
+$(document).on('change', 'select[name="Mailing-Country"]', function(){
+	if($('select[name="Mailing-Country"]').val()=="Australia"){
+        $("input[name='Mailing-postcode']").keydown(function (e) {
+			// Allow: backspace, delete, tab, escape, enter and .
+			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+				 // Allow: Ctrl+A, Command+A
+				(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+				 // Allow: home, end, left, right, down, up
+				(e.keyCode >= 35 && e.keyCode <= 40)) {
+					 // let it happen, don't do anything
+					 return;
+			}
+			// Ensure that it is a number and stop the keypress
+			if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+				e.preventDefault();
+			}
+		});   
+	}
+	else {
+		$("input[name='Mailing-postcode']").val("");
+		$("input[name='Mailing-postcode']").unbind("keydown");
+		
+	}
+});
+if($('select[name="Mailing-Country"]').val()=="Australia"){
+	$("input[name='Mailing-postcode']").keydown(function (e) {
+		// Allow: backspace, delete, tab, escape, enter and .
+		if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
+			 // Allow: Ctrl+A, Command+A
+			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+			 // Allow: home, end, left, right, down, up
+			(e.keyCode >= 35 && e.keyCode <= 40)) {
+				 // let it happen, don't do anything
+				 return;
+		}
+		// Ensure that it is a number and stop the keypress
+		if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
+			e.preventDefault();
+		}
+	});   
+}
 //======================== LOADING SCREEN BUTTONS =================================
 	
 //------------- JOIN THE APA / RENEW MEMBERSHIP-----------------------
