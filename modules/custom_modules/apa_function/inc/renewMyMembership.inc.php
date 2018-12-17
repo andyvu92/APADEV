@@ -234,7 +234,7 @@ $background = getBackgroundImage($userID);
 
 <p>You have the right to review and alter any personal membership information that the APA stores about you. After all, it is your information, so you should be the person that controls it.&nbsp;Should you wish to access this information please&nbsp;contact the APA’s privacy officer. Unless the access you request will require special steps or significant resources, there will be no charge for providing you with this access.</p>
 
-<p>To change your personal information you must login to your account with your member ID and password via the APA website <a target="_blank" style="color: #000; text-decoration: underline" href="http://www.australian.physio">www.australian.physio</a>.</p>
+<p>To change your personal information you must login to your account with your member ID and password via the APA website <a target="_blank" style="color: #000; text-decoration: underline" href="https://australian.physio">www.australian.physio</a>.</p>
 
 
 <h4 class="doc-header">Opt-Out</h4>
@@ -286,7 +286,7 @@ $background = getBackgroundImage($userID);
 
 <p>The APA has a strong commitment to protecting your privacy and ensuring the confidentiality and security of personal information provided to the APA by you. As an organisation with an annual turnover of more than $3 million, the APA is required to comply with the Privacy Act 1988 as amended by the Privacy Amendment (Enhancing Privacy Protection) Act 2012 which came into effect in March 2014.<br />
 &nbsp;<br />
-You have the right to access the personal information about yourself held by the APA and to correct information which is inaccurate. To change your information you must log into your account with your member ID and password via the APA website <a href="http://www.australian.physio" target="_blank" style="text-decoration: underline; color: #000">www.australian.physio</a>.</p>
+You have the right to access the personal information about yourself held by the APA and to correct information which is inaccurate. To change your information you must log into your account with your member ID and password via the APA website <a href="https://australian.physio" target="_blank" style="text-decoration: underline; color: #000">www.australian.physio</a>.</p>
 
 <p>Information you have provided to the APA is used to:&nbsp;</p>
 
