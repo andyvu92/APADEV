@@ -1307,11 +1307,6 @@ jQuery(document).ready(function(){
     autoAccountMenu();
     autoNumberRenewMenu();
 
-    // trigger function on window resizing
-    $(window).on('resize', function(){
-      autoMediaChevron();
-    });
-
     // trigger menu expand on placeholder click
     $(document).on('click', '.chevron-active .media-chevron-menu .selected', function(){
       $(this).parent().find('.media-chevron-toggle').click();
@@ -1466,7 +1461,39 @@ jQuery(document).ready(function(){
       $("#ajax-target").load("/node/get/ajax/11");
     }
 
-    
+    // ARCHIVE CATEGORY EXPAND/MINIMIZE ON CLICK FOR MOBILE
+    var autoMinimizedArchive = function(){
+      $('.archive_year').each(function(){
+        var window_width = $(window).width();
+
+        $('p > .archive_toggle' ,this).unwrap();
+        
+        if ( window_width < 571 ){
+          if ( !$('.inmotion-archive-grid', this).parent().is('.archive_minimize') ) {
+            $('.inmotion-archive-grid', this).wrap('<div class="archive_minimize minimized"></div>');
+          }
+          $('.archive_category', this).on('click', function(){
+            if ( $(this).next().is('.minimized') ) {
+              $('.archive_toggle', this).addClass('active');
+              $(this).next().removeClass('minimized').slideDown('slow');
+            } else {
+              $('.archive_toggle', this).removeClass('active');
+              $(this).next().addClass('minimized').slideUp();
+            }
+          });
+        } else {
+          $('.archive_minimize .inmotion-archive-grid', this).unwrap();
+        }
+      });
+    }
+
+  // trigger archive auto minized function 
+  autoMinimizedArchive();
+
+  // trigger function on window resizing - ALWAYS PLACED IN THE BOTTOM
+  $(window).on('resize', function(){
+    autoMediaChevron();
+  });
 });
 
 
