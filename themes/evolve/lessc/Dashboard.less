@@ -1984,6 +1984,7 @@ iframe{
 
  #dashboard-right-content{
      form{
+         float: left;
          #tabmenu{
              li{
                 font-size: 1em;
@@ -2309,6 +2310,12 @@ form{
           cursor: pointer;
           display: flex;
           text-align: left;
+          span{
+              b, strong{
+                font-weight: 700;
+                opacity: 1;
+              }
+          }
         }
       
         /* Box. */
@@ -3456,6 +3463,14 @@ input[type="email"], .email-field{
                             margin-bottom: 0px;
                         }
                     }
+                }
+            }
+        }
+        .renew-membership-nav{
+            .numberized{
+                padding: 10px;
+                @media @larger-phone-width-down{
+                    padding: 10px 0;
                 }
             }
         }

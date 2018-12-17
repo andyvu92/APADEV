@@ -1638,7 +1638,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                     ?>" <?php if($details['Workplaces'][$key]['Findphysio']=="True"){echo "checked";} ?>>
                                                 <label class="light-font-weight" for="Findphysio<?php
                             echo $key;
-                    ?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the &nbsp;<b>consumer choose.physio site</b> </label>
+                    ?>"><span class="note-text">NOTE:&nbsp;</span><span>I want to be listed at this workplace within Find a Physio on the <b>consumer choose.physio site</b></span></label>
                         </div>
 
                         <div class="col-xs-12 FapTagA"> 
@@ -1655,7 +1655,7 @@ $MemberType = unique_multidim_array($MemberTypes,'ProductID');
                         ?>>
                             <label class="light-font-weight" for="Findabuddy<?php
                                 echo $key;
-                        ?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the &nbsp;<b>corporate australian.physio site</b> </label>
+                        ?>"><span class="note-text">NOTE:&nbsp;</span><span>I want to be listed at this workplace within Find a Physio on the <b>corporate australian.physio site</b></span></label>
                         </div>
 
                         <!--BREAK-->

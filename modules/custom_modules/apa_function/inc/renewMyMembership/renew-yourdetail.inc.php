@@ -1042,12 +1042,12 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 				<div class="col-xs-12 FapTagC">
 					<input class="styled-checkbox" type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" <?php if($details['Workplaces'][$key]['Findphysio']=="True"){echo "checked";} ?>>
-					<label class="light-font-weight" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the &nbsp;<b>consumer choose.physio site</b></label>
+					<label class="light-font-weight" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span><span>I want to be listed at this workplace within Find a Physio on the <b>consumer choose.physio site</b></span></label>
 				</div>
 
 				<div class="col-xs-12 FapTagA"> 
 					<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
-					<label class="light-font-weight" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span>I want to be listed at this workplace within Find a Physio on the &nbsp;<b>corporate australian.physio site</b></label>	
+					<label class="light-font-weight" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span><span>I want to be listed at this workplace within Find a Physio on the <b>corporate australian.physio site</b></span></label>	
 				</div>
 
 					<div class="col-xs-12">

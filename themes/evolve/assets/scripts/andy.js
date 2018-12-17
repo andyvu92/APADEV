@@ -1269,22 +1269,29 @@ jQuery(document).ready(function(){
     var autoNumberRenewMenu = function(){
       
       $('.renew-membership-nav, .join-membership-nav').each(function(){
-        $('ul.nav', this).addClass('numberized').hide();
-        $(this).addClass('number-menu-active');
-
-        //assign step number
-        $('.nav li', this).each(function(id){
-          id++;
-          $('a span', this).after('<span class="step-order">'+id+'</span>');
+        
+        $('ul.nav', this).each(function(){
+          if ( $(this).find('li[id^="workplaceli"]').length > 0 ) {
+            $(this).show();
+          } else{
+            $(this).addClass('numberized').hide();
+            $(this).parent().addClass('number-menu-active');
+    
+            //assign step number
+            $('li', this).each(function(id){
+              id++;
+              $('a span', this).after('<span class="step-order">'+id+'</span>');
+            });
+    
+            //get current step number and label
+            var currentStep = $(this).find('.text-underline').text();
+            var stepNumber = $('.text-underline', this).parent().find('.step-order').text();
+    
+            //append customised elemen to show step order
+            $(this).after('<span class="current-step">Step <span class="step-number">'+stepNumber+'</span> of 7: <span class="step-label">'+currentStep+'</span></span>');    
+          }
         });
-
-        //get current step number and label
-        var currentStep = $('.nav', this).find('.text-underline').text();
-        var stepNumber = $('.nav .text-underline', this).parent().find('.step-order').text();
-
-        //append customised elemen to show step order
-        $('ul.nav', this).after('<span class="current-step">Step <span class="step-number">'+stepNumber+'</span> of 7: <span class="step-label">'+currentStep+'</span></span>');
-
+        
         //update step number and label on Prev/Next click
         $(document).on('click', 'a[class^="join-details-button"], a[class^="your-details-prevbutton"]', function(){
           var currentStep = $('.numberized').find('.text-underline').text();
@@ -1453,6 +1460,13 @@ jQuery(document).ready(function(){
         $(this).prev().prev().hide();
       }
     });
+
+    // TEST AJAX CALL BLOCK
+    function myModule_ajax_load() {
+      $("#ajax-target").load("/node/get/ajax/11");
+    }
+
+    
 });
 
 
