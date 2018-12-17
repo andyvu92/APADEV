@@ -1349,7 +1349,22 @@ $prodcutArray = array();
 $memberProductsArray['ProductID']=$prodcutArray;
 $memberProdcutID = $memberProductsArray;
 $MemberTypes = aptify_get_GetAptifyData("31", $memberProdcutID);
-$MemberType = unique_multidim_array($MemberTypes,'ProductID'); 
+$temp_array = array();
+$MemberType = array();
+foreach($MemberTypes as $tempM){
+    $temp_array['ProductID'] = $tempM['ProductID'];
+    $temp_array['Title'] = substr($tempM['Title'], strpos($tempM['Title'],":")+1);
+    $temp_array['Price'] = $tempM['Price'];
+    $temp_array['UnitPrice'] = $tempM['UnitPrice'];
+    $temp_array['Quantity'] = $tempM['Quantity'];
+    array_push($MemberType, $temp_array);
+}
+$Title = array();
+foreach ($MemberType  as $ukey => $row)
+    {
+        $Title[$ukey] = $row['Title'];
+    }
+array_multisort($Title, SORT_ASC, $MemberType); 
     //$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
     //$MemberType     = json_decode($MemberTypecode, true);
     foreach ($MemberType as $key => $value) {
@@ -3073,7 +3088,22 @@ if(isset($_POST['MT'])){
 								$memberProductsArray['ProductID']=$prodcutArray;
 								$memberProdcutID = $memberProductsArray;
 								$MemberTypes = aptify_get_GetAptifyData("31", $memberProdcutID);
-								$MemberType = unique_multidim_array($MemberTypes,'ProductID'); 
+								$temp_array = array();
+                                $MemberType = array();
+                                foreach($MemberTypes as $tempM){
+                                    $temp_array['ProductID'] = $tempM['ProductID'];
+                                    $temp_array['Title'] = substr($tempM['Title'], strpos($tempM['Title'],":")+1);
+                                    $temp_array['Price'] = $tempM['Price'];
+                                    $temp_array['UnitPrice'] = $tempM['UnitPrice'];
+                                    $temp_array['Quantity'] = $tempM['Quantity'];
+                                    array_push($MemberType, $temp_array);
+                                }
+                                $Title = array();
+                                foreach ($MemberType  as $ukey => $row)
+                                    {
+                                        $Title[$ukey] = $row['Title'];
+                                    }
+                                array_multisort($Title, SORT_ASC, $MemberType);
 								//$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
 								//$MemberType     = json_decode($MemberTypecode, true);
 								foreach ($MemberType as $key => $value) {
