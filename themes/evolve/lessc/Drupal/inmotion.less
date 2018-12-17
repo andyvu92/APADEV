@@ -1222,6 +1222,57 @@
 // END CUSTOM FONT STYLE WITH ELEMENT CLASSES
 
 // INMOTION ARCHIVE
+.archive_year{
+	.archive_minimize{
+		@media @larger-phone-width-down{
+			display: none;
+		}
+	}
+	.archive_category{
+		position: relative;
+		display: flex;
+		align-items: center;
+		padding: 20px 0;
+		h3{
+			margin: 0;
+			padding: 0;
+		}
+	}
+	.archive_toggle{
+		position: relative;
+		margin-left: 15px;
+		width: 20px;
+		@media @larger-phone-width-up{
+			display: none;
+		}
+		&:before, &:after{
+			content: '';
+			position: absolute;
+			width: 15px;
+			height: 2px;
+			background: @bright-blue;
+			transition: all .3s linear;
+		}
+		&:before{
+			top: calc(~'50% - 1px');
+			left: 0;
+			transform: rotate(45deg);
+		}
+		&:after{
+			top: calc(~'50% - 1px');
+			left: 10px;
+			transform: rotate(-45deg);
+		}
+		&.active{
+			&:before{
+				transform: rotate(-45deg);
+			}
+			&:after{
+				transform: rotate(45deg);
+			}
+		}
+	}
+}
 .inmotion-archive-grid{
 	display: flex;
 	flex-direction: row;
