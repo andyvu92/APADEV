@@ -2263,7 +2263,7 @@ apa_function_dashboardLeftNavigation_form();
 </script>
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="http://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
 <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
@@ -2352,13 +2352,13 @@ width: 24px;
 top: 0.1em;
 }
 .ui-icon.Master{
-background: url("http://localhost/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
+background: url("/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
 }
 .ui-icon.Visa{
-background: url("http://localhost/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
+background: url("/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
 }
 .ui-icon.AE{
-background: url("http://localhost/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
+background: url("/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
 }
 </style>
 <?php else : 
