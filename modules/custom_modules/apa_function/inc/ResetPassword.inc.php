@@ -119,7 +119,6 @@
 		exit();
 		echo "<div class='TokenExist' style='display: none;'>1</div>";
 	}
-	echo "<div class='TTTTT'>click here!</div>";
 ?>
 <?php logRecorder(); ?>
 
