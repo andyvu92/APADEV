@@ -1271,7 +1271,7 @@ jQuery(document).ready(function(){
       $('.renew-membership-nav, .join-membership-nav').each(function(){
         
         $('ul.nav', this).each(function(){
-          if ( $(this).find('li[id^="workplaceli"]').length > 0 ) {
+          if ( $(this).find('li[id^="workplaceli"]').length > 0 || $(this).find('.inactiveLink').length == 0 ) {
             $(this).show();
           } else{
             $(this).addClass('numberized').hide();

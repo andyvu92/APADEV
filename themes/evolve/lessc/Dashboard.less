@@ -984,6 +984,7 @@ a#insuranceControl{
 
     ul.nav{
         width: 100%;
+        margin-bottom: 0;
         @media all and (max-width:@larger-tablet-width) {
             margin: 0;
             li.dashboard-nav{
@@ -1174,6 +1175,7 @@ a#insuranceControl{
     color: black;
     background: @light-transparent-background;
     padding: 0;
+    min-height: 476px;
     @media all and (max-width: @larger-tablet-width) {
         .mobile_line{
             margin: 0 0 50px !important;
@@ -3452,13 +3454,14 @@ input[type="email"], .email-field{
                 &.numberized{
                     margin-bottom: 0;
                     & + .current-step{
-                        padding: 10px 0px;
+                        padding: 10px;
                         font-size: 1.6em;
                         font-weight: 500;
                         display: block;
                         margin-bottom: 25px;
                         color: @bright-blue;
                         @media @larger-phone-width-down{
+                            padding: 10px 0px;
                             font-size: 1.4em;
                             margin-bottom: 0px;
                         }
