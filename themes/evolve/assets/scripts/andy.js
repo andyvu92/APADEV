@@ -1202,6 +1202,8 @@ jQuery(document).ready(function(){
         selected = $(this).find('ul li.active').text();
         // apply if object width larger than container width
         if ( (elemWidth > restrictWidth) && ( $(this).find('.media-chevron').length == 0 ) ) {
+          console.log ('element width: ' + elemWidth);
+          console.log ('Max width: ' + restrictWidth);
           id++;
           $('ul', this).addClass('minimize').hide();
           $('ul .active', this).hide();
@@ -1493,6 +1495,32 @@ jQuery(document).ready(function(){
   // trigger function on window resizing - ALWAYS PLACED IN THE BOTTOM
   $(window).on('resize', function(){
     autoMediaChevron();
+  });
+
+  // REORDER APA ELT TEAM BY SPECIFIC ORDER
+  $('.view-apateammember #apateammember-block-2 .node-apateam').each(function(){
+    console.log($('.member-name', this).text());
+    if ( $('.member-name .even', this).text() == 'Cris Massis' ) {
+      $(this).css('order', '1');
+    }
+    else if ( $('.member-name .even', this).text() == 'Anja Nikolic' ) {
+      $(this).css('order', '2');
+    }
+    else if ( $('.member-name .even', this).text() == 'Craig Maltman' ) {
+      $(this).css('order', '3');
+    }
+    else if ( $('.member-name .even', this).text() == 'Elles Vanderkley' ) {
+      $(this).css('order', '4');
+    }
+    else if ( $('.member-name .even', this).text() == 'James Fitzpatrick' ) {
+      $(this).css('order', '5');
+    }
+    else if ( $('.member-name .even', this).text() == 'Steve Gosbell' ) {
+      $(this).css('order', '6');
+    }
+    else{
+      $(this).css('order', '99');
+    }
   });
 });
 
