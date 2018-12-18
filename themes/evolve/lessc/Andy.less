@@ -351,7 +351,7 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
                                 min-height: 40%!important;
                                 @media all and (max-width: @phone-width) {
                                     font-size: 2em!important;
-                                    padding: 0 20px 20px 20px!important;
+                                    padding: 30px 20px 20px 20px!important;
                                 }
                             }
                         }
@@ -3799,13 +3799,6 @@ body .header-banner h1 {
     flex-wrap: wrap;
 }
 
-/* BORDER BANNER TOP */
-#block-block-355{
-    @media @larger-phone-width-down{
-        margin-bottom: 0;
-    }
-}
-
 /* FIXED LINKED SHARE BUTTON */
 body .socialMediaIcon{
     li{
@@ -4714,28 +4707,48 @@ body{
 .location_grid{
     display: flex;
     flex-wrap: wrap;
-    margin: 100px 0;
+    margin: 0 0 50px;
     span{
         color: #333;
     }
     .location_item{
         width: 33.33%;
         padding: 15px;
+        @media @tablet-width-down{
+            width: 50%;
+        }
+        @media @larger-phone-width-down{
+            width: 100%;
+        }
         .item_wrapper{
+            @wrapper_padding: 30px;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
             width: 100%;
             height: 100%;
-            padding: 15px;
+            padding: @wrapper_padding;
             border: 2px solid @light-grey;
+            .location_banner{
+                width: calc(~'100% +' @wrapper_padding*2);
+                left: -@wrapper_padding;
+                top: -@wrapper_padding;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                max-height: 200px;
+                overflow: hidden;
+            }
             .location_address{
                 display: flex;
                 flex-direction: column;
                 .state{
                     font-family: Cairo;
                     font-size: 2em;
-                    font-weight: 500;                
+                    font-weight: 500;
+                    @media @larger-phone-width-down{
+                        font-size: 1.5em;
+                    }                
                 }
             }
             .location_details{
@@ -4748,11 +4761,19 @@ body{
                 }
             }
             .location_contact{
+                position: relative;
                 display: flex;
                 flex-direction: column;
-                padding-top: 15px;
-                margin-top: 15px;
-                border-top: 1px solid @light-grey;
+                padding-top: 30px;
+                margin-top: auto;
+                &:before{
+                    content: '';
+                    position: absolute;
+                    top: 15px;
+                    width: 100%;
+                    height: 1px;
+                    background: @light-grey;
+                }
                 a{
                     font-size: 1.2em;
                 }
@@ -4763,6 +4784,43 @@ body{
                     a{
                         width: 50%;
                     }
+                }
+            }
+        }
+        &.main_item_full_width{
+            @media @tablet-width-up{
+                width: 100%;
+                .item_wrapper{
+                    padding-right: 33.33%;
+                    position: relative;
+                    .location_banner{
+                        position: absolute;
+                        left: 66.77%;
+                        top: 0;
+                        bottom: 0;
+                        padding-left: 15px;
+                        max-width: 33.33%;
+                        max-height: unset;
+                    }
+                    .location_details{
+                        flex-direction: row;
+                        .child_detail{
+                            display: flex;
+                            flex-direction: column;
+                            width: 50%;
+                        }
+                    }
+                    .location_contact{
+                        margin-right: 15px;
+                    }
+                }
+            }
+        }
+        .item_wrapper{
+            .location_details{
+                .child_detail{
+                    display: flex;
+                    flex-direction: column;
                 }
             }
         }
