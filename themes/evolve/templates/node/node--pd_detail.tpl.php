@@ -590,7 +590,7 @@ $userRetisterStatus = false;
 					<span class="prerequiresite-icon large-icon"></span>
 				</div>
 				<div class="right-content">
-					<h2 class="blue-heading">Prerequiresites</h2>
+					<h2 class="blue-heading">Prerequisites</h2>
 					<ul>
 					<?php 
 						$seperatedPre = explode("_",$pd_detail['Prerequisites']);
@@ -2102,7 +2102,7 @@ $userRetisterStatus = false;
 					<span class="prerequiresite-icon large-icon"></span>
 				</div>
 				<div class="right-content">
-					<h2 class="blue-heading">Prerequiresites</h2>
+					<h2 class="blue-heading">Prerequisites</h2>
 					<ul>
 					<?php 
 						$seperatedPre = explode("_",$pd_detail['Prerequisites']);
