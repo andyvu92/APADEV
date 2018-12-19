@@ -228,6 +228,15 @@
          <div class="content">
             <?php echo views_embed_view('inmotioncategory', 'block_10');?>
          </div>
+         <h3 class="headline">Archives</h3>
+         <span class="brd-headling"></span>
+         <div class="content">
+            <ul class="inmotion_archive">
+                <li><a href="/inmotion/archive#2018">2018</a></li>
+                <li><a href="/inmotion/archive#2017">2017</a></li>
+                <li><a href="/inmotion/archive#2016">2016</a></li>  
+            </ul>
+         </div>
       </div>
     
     <!-- DESKTOP AD BLOCK -->

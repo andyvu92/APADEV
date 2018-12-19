@@ -797,15 +797,6 @@ jQuery(document).ready(function(){
           $('.paymentsiderbar .shopCartButton').html('Confirm payment');
         }
       });
-
-      $(document).on('keyup', '.paymentsiderbar #PRFOther', function(){
-        if( $(this).val() == '1' ){
-          //console.log('0');
-        }
-        else{
-          //console.log('others');
-        }
-      });
     }
 
     // REMOVE MESSAGE ON RESET PASSWORD FAIL PROCESS
@@ -1044,7 +1035,7 @@ jQuery(document).ready(function(){
           });
         } else {
           $('.sidebar-overlay > .sidebar-toggle').remove();
-          $('.sidebar-overlay > .region-right-sidebar').unwrap();
+          $('.sidebar-overlay > .region-right-sidebar, .sidebar-overlay > .right-sidebar').unwrap();
         }
         if ( (window_width < 570) && !(window.location.href.indexOf("pd-product") > -1) ) {
           // HIDE SIDEBAR ON SWIPE RIGHT
@@ -1202,8 +1193,6 @@ jQuery(document).ready(function(){
         selected = $(this).find('ul li.active').text();
         // apply if object width larger than container width
         if ( (elemWidth > restrictWidth) && ( $(this).find('.media-chevron').length == 0 ) ) {
-          console.log ('element width: ' + elemWidth);
-          console.log ('Max width: ' + restrictWidth);
           id++;
           $('ul', this).addClass('minimize').hide();
           $('ul .active', this).hide();
@@ -1345,19 +1334,6 @@ jQuery(document).ready(function(){
 
     // ------ END AUTO BURGER-STYLE FOR MEDIA FILTER / ACCOUNT MENU
 
-    /*
-    $('.dashboard-left-nav').each(function(){
-      var window_width = $(window).width();
-
-      if ( window_width < 571 ) {
-        $('.navbar-collapse', this).append('<span class="blink-arrows-right"><span class="arrow-1"></span><span class="arrow-2"></span></span>');
-      }
-
-      if ( $('.navbar-left li:last-child').isInViewport() ) {
-        console.log('works');
-      }
-    });*/
-
     // DEFAULT MINIMIZE ACCORDION
     $('.ckeditor-accordion-container').each(function(){
       if ( $('dt' ,this).is('.active') ){
@@ -1452,16 +1428,11 @@ jQuery(document).ready(function(){
 
     // HIDE INMOTION SIDEBAR TITLE TAG IF BLOG CONTENT IS EMPTY
     $('.CampaignSidebar .content').each(function(){
-      if( $(this).find('.views-row').length == 0 ){
+      if( $(this).find('.views-row').length == 0 && $(this).find('.inmotion_archive').length == 0 ){
         $(this).prev().hide();
         $(this).prev().prev().hide();
       }
     });
-
-    // TEST AJAX CALL BLOCK
-    function myModule_ajax_load() {
-      $("#ajax-target").load("/node/get/ajax/11");
-    }
 
     // ARCHIVE CATEGORY EXPAND/MINIMIZE ON CLICK FOR MOBILE
     var autoMinimizedArchive = function(){
@@ -1474,32 +1445,31 @@ jQuery(document).ready(function(){
           if ( !$('.inmotion-archive-grid', this).parent().is('.archive_minimize') ) {
             $('.inmotion-archive-grid', this).wrap('<div class="archive_minimize minimized"></div>');
           }
-          $('.archive_category', this).on('click', function(){
-            if ( $(this).next().is('.minimized') ) {
-              $('.archive_toggle', this).addClass('active');
-              $(this).next().removeClass('minimized').slideDown('slow');
-            } else {
-              $('.archive_toggle', this).removeClass('active');
-              $(this).next().addClass('minimized').slideUp();
-            }
-          });
         } else {
           $('.archive_minimize .inmotion-archive-grid', this).unwrap();
+          $('.archive_toggle', this).removeClass('active')
         }
       });
     }
 
+    // EXPAND/MINIMIZE ARCHIVES ON CLICK
+    $(document).on('click', '.archive_year .archive_category', function(){
+      var window_width = $(window).width();
+      if ( window_width < 571 ){
+        if ( $(this).next().is('.minimized') ) {
+          $('.archive_toggle', this).addClass('active');
+          $(this).next().removeClass('minimized').slideDown('slow');
+        } else {
+          $('.archive_toggle', this).removeClass('active');
+          $(this).next().addClass('minimized').slideUp();
+        }
+      }
+    });
   // trigger archive auto minized function 
   autoMinimizedArchive();
 
-  // trigger function on window resizing - ALWAYS PLACED IN THE BOTTOM
-  $(window).on('resize', function(){
-    autoMediaChevron();
-  });
-
   // REORDER APA ELT TEAM BY SPECIFIC ORDER
   $('.view-apateammember #apateammember-block-2 .node-apateam').each(function(){
-    console.log($('.member-name', this).text());
     if ( $('.member-name .even', this).text() == 'Cris Massis' ) {
       $(this).css('order', '1');
     }
@@ -1521,6 +1491,12 @@ jQuery(document).ready(function(){
     else{
       $(this).css('order', '99');
     }
+  });
+
+  // trigger function on window resizing - ALWAYS PLACED IN THE BOTTOM
+  $(window).on('resize', function(){
+    autoMediaChevron();
+    autoMinimizedArchive();
   });
 });
 

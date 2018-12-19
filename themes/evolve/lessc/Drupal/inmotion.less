@@ -456,6 +456,10 @@
 				.CampaignSidebar{
 					h3.headline{
 						font-size: 1.5em;
+						padding-top: 30px;
+						&:first-of-type{
+							padding-top: 0;
+						}
 						& + .brd-headling{
 							width: 35px;
 							border-color: @bright-blue;
@@ -1233,6 +1237,9 @@
 		display: flex;
 		align-items: center;
 		padding: 20px 0;
+		@media @larger-phone-width-down{
+			cursor: pointer;
+		}
 		h3{
 			margin: 0;
 			padding: 0;
@@ -1313,6 +1320,39 @@
 		}
 		&.faded{
 			opacity: 0.6;
+		}
+	}
+}
+
+/* FULL WIDTH BANNER FOR INMOTION ARCHIVE PAGE */
+.page-node-829{
+	#section-banner{
+		.container{
+			max-width: unset;
+			padding: 0;
+		}
+	}
+}
+
+/* INMOTION ARCHIVE FOR SIDEBAR */
+.region-right-sidebar{
+	.inmotion_archive{
+		display: flex;
+		align-items: center;
+		border-top: 1px solid rgba(0,0,0,0.1);
+		border-bottom: 1px solid rgba(0,0,0,0.1);
+		li{
+			padding: 10px 15px;
+			border: 0;
+			a{
+				border: 0;
+			}
+			&:first-of-type{
+				padding-left: 0;
+			}
+			&:last-of-type{
+				padding-right: 0;
+			}
 		}
 	}
 }

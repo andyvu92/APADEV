@@ -24,6 +24,16 @@
 	}
 }
 #section-bottom {
+  .col-md-3{
+    @media @larger-tablet-width-up{
+      width: 24.9%;
+    }
+  }
+  .col-sm-6{
+    @media @tablet-width-up{
+      width: 49.9%;
+    }
+  }
   .tags ul {
     display: block;
     margin-bottom: -6px;
@@ -221,6 +231,11 @@
     }
     ul li h6{
       margin-top: 0;
+    }
+    div[id^="content-footer-block"]{
+      @media @larger-phone-width-down{
+        display: none;
+      }
     }
   }
 
