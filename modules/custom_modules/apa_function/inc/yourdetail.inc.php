@@ -866,7 +866,7 @@ apa_function_dashboardLeftNavigation_form();
 						</div>
 
 						<div class="col-xs-12 col-sm-6 col-md-9">
-							<label for="">Address line 1</label>
+							<label for="">Address line 1<span class="tipstyle pobox-stat"> *</span></label>
 							<input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Address 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?> required autocomplete="address-line1">
 						</div>
 
@@ -881,7 +881,7 @@ apa_function_dashboardLeftNavigation_form();
 						</div>
 
 						<div class="col-xs-6 col-md-6">
-							<label for="">Postcode</label>
+							<label for="">Postcode<span class="tipstyle pobox-stat"> *</span></label>
 							<input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?> required autocomplete="postal-code">
 						</div>
 
@@ -906,7 +906,7 @@ apa_function_dashboardLeftNavigation_form();
 						</div>
 
 						<div class="col-xs-6 col-md-6">
-							<label for="">Country</label>
+							<label for="">Country<span class="tipstyle pobox-stat"> *</span></label>
 							<div class="chevron-select-box">
 							<select class="form-control" id="Country4" name="Billing-Country" required autocomplete="country">
 							<?php 
