@@ -1035,9 +1035,11 @@ a#insuranceControl{
                 height: 15px;
                 position: absolute;
                 top: 35%;
-                right: -8px;
-                background: #edebe8;
+                right: -7px;
+                background: rgb(237, 235, 232);
                 transform: rotate(45deg);
+                background: linear-gradient(45deg, #edebe8 0%,#edebe8 50%,
+                                            rgb(237, 235, 232, 0) 51%,rgb(237, 235, 232, 0) 100%);
                 @media all and (max-width: @larger-tablet-width){
                     display: none;
                 }
@@ -1176,6 +1178,20 @@ a#insuranceControl{
     background: @light-transparent-background;
     padding: 0;
     min-height: 476px;
+    position: relative;
+    /* DASHBOARD LOADING STAGE */
+    .overlay{
+        position: absolute;
+        background: #f1f2f3;
+        display: block;
+        .loaders{
+            visibility: visible;
+            .loader-quart:after{
+                border-top-color: @bright-blue;
+            }
+        }
+    }
+
     @media all and (max-width: @larger-tablet-width) {
         .mobile_line{
             margin: 0 0 50px !important;

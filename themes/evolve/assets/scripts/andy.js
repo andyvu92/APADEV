@@ -1498,6 +1498,52 @@ jQuery(document).ready(function(){
     autoMediaChevron();
     autoMinimizedArchive();
   });
+
+
+  //TEST AJAX PAGE LOAD
+  $(document).on('click', '.dashboard-left-nav .navbar-nav li a', function(){
+    var target = $(this).attr('href');
+    if ( target != '/renewmymembership' ){
+      $(this).parent().siblings().removeClass('active');
+      $(this).parent().addClass('active');
+      $('#dashboard-right-content').html('');
+      $('#dashboard-right-content').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+      $('#dashboard-right-content .overlay').hide().fadeIn();
+      $('#dashboard-right-content').load(target + '#dashboard-right-content .dashboard_detail', function(){
+        if ( $('#dashboard-right-content').find('#donutchart').length > 0 ) {
+          google.charts.load("current", {packages:["corechart"]});
+          google.charts.setOnLoadCallback(drawChart);
+          drawChart();
+        }
+        $('select[multiple=""]').selectize({
+          plugins: ['remove_button'],
+          delimiter: ',',
+          persist: false,
+          onItemAdd: function() {
+            this.blur();
+          },
+          create: function(input) {
+              return {
+                  value: input,
+                  text: input
+              }
+          }
+        });
+        $('#dashboard-right-content').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+        $('#dashboard-right-content .overlay').fadeOut('1000');
+      });
+  
+      $(document).on('click', 'a[class^="event"]', function(){
+        var target = $(this).attr('class').replace('event', '');
+        $(this).parent().siblings().find('a span').removeClass('text-underline');
+        $('span', this).addClass('text-underline');
+        $('div[class^="down"]').hide();
+        $('.down' + target).fadeIn();
+      });
+  
+      return false;
+    }
+  });
 });
 
 
