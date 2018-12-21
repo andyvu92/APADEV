@@ -1,4 +1,11 @@
 <?php
+	/*hanled session */
+	$now = time();  
+	if (isset($_SESSION['expireSessionTag']) && $now > $_SESSION['expireSessionTag']) {
+		logoutManager();
+	}
+?>
+<?php
 //include('sites/all/themes/evolve/inc/Aptify/AptifyAPI.inc.php');
 	/*
 	 * Log-in and Log-out manager
