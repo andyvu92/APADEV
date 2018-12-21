@@ -14,6 +14,9 @@ function newSessionLogIn($id, $UserName, $Email, $FirstName, $LastName, $Title, 
 	$_SESSION['Server'] = $Server;
 	$_SESSION['Database'] = $Database;
 	$_SESSION['AptifyUserID'] = $AptifyUserID;
+	// keep this session for half hour
+	$_SESSION['expireSessionTag'] = time() + (60 * 60 * 24 * 6);
+	
 }
 function newSessionStats($MemberTypeID, $MemberType, $Status, $Speciality, $payThroughDate, $nationGP) {
 	$_SESSION['MemberTypeID'] = $MemberTypeID;
@@ -63,6 +66,7 @@ function deleteSession() {
 	unset($_SESSION['Preferred-name']);
 	unset($_SESSION['renewTag']);
 	unset($_SESSION['expireTag']);
+	unset($_SESSION['expireSessionTag']);
 	/*
 	unset($_SESSION['Logfgh']);
 	unset($_SESSION['Logfgh']);
