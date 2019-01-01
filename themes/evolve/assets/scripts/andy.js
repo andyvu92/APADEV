@@ -984,7 +984,6 @@ jQuery(document).ready(function(){
       $('.region-right-sidebar, .node .right-sidebar').each(function(){
         var window_width = $(window).width();
         var title = $('.underline-heading' ,this).first().text();
-        var origin = $(this).html();
         if (window_width >= 993){
           //$(this).parent().removeClass('sidebar-overlay');
           //$(this).parent().find('.sidebar-toggle').remove();
@@ -1499,22 +1498,51 @@ jQuery(document).ready(function(){
     autoMinimizedArchive();
   });
 
-
+  /*
   //TEST AJAX PAGE LOAD
-  $(document).on('click', '.dashboard-left-nav .navbar-nav li a', function(){
+  $(document).on('click', '.dashboard-left-nav .navbar-nav li a, a[href="/changepassword"]', function(){
     var target = $(this).attr('href');
-    if ( target != '/renewmymembership' ){
+    if ( target == 'dashboard' && ($('#section-content-top').find('#cpd').length == 0) ){
+      //load page
+    }
+    else if ( target != '/renewmymembership' ){
+      // RENAME PAGE TITLE AND HREF
+      if( target == 'dashboard' ){
+        var currentTitle = document.title.replace('Your details', 'DASHBOARD');
+        var currentTitle = document.title.replace('Your purchases', 'DASHBOARD');
+        var currentTitle = document.title.replace('Subscriptions', 'DASHBOARD');
+        document.title = currentTitle;
+      }
+      else if( target == 'your-details' ){
+        var currentTitle = document.title.replace('DASHBOARD', 'Your details');
+        var currentTitle = document.title.replace('Your purchases', 'Your details');
+        var currentTitle = document.title.replace('Subscriptions', 'Your details');
+        document.title = currentTitle;
+      }
+      
+      else if( target == 'your-purchases' ){
+        var currentTitle = document.title.replace('DASHBOARD', 'Your purchases');
+        var currentTitle = document.title.replace('Your details', 'Your purchases');
+        var currentTitle = document.title.replace('Subscriptions', 'Your purchases');
+        document.title = currentTitle;
+      }
+      else if( target == 'subscriptions' ){
+        var currentTitle = document.title.replace('DASHBOARD', 'Subscriptions');
+        var currentTitle = document.title.replace('Your details', 'Subscriptions');
+        var currentTitle = document.title.replace('Your purchases', 'Subscriptions');
+        document.title = currentTitle;
+      }
+
       $(this).parent().siblings().removeClass('active');
       $(this).parent().addClass('active');
       $('#dashboard-right-content').html('');
       $('#dashboard-right-content').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
       $('#dashboard-right-content .overlay').hide().fadeIn();
-      $('#dashboard-right-content').load(target + '#dashboard-right-content .dashboard_detail', function(){
-        if ( $('#dashboard-right-content').find('#donutchart').length > 0 ) {
-          google.charts.load("current", {packages:["corechart"]});
+      $('#dashboard-right-content').load(target + '#dashboard-right-content .dashboard_detail', function(){ 
+        if ( $(this).find('#donutchart').length > 0 ){
           google.charts.setOnLoadCallback(drawChart);
-          drawChart();
         }
+
         $('select[multiple=""]').selectize({
           plugins: ['remove_button'],
           delimiter: ',',
@@ -1529,10 +1557,10 @@ jQuery(document).ready(function(){
               }
           }
         });
+        autoAccountMenu();
         $('#dashboard-right-content').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
         $('#dashboard-right-content .overlay').fadeOut('1000');
       });
-  
       $(document).on('click', 'a[class^="event"]', function(){
         var target = $(this).attr('class').replace('event', '');
         $(this).parent().siblings().find('a span').removeClass('text-underline');
@@ -1544,7 +1572,6 @@ jQuery(document).ready(function(){
       return false;
     }
   });
+
+  */
 });
-
-
-

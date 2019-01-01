@@ -474,6 +474,7 @@ button.deletecardbutton {
    margin-top: 23px;
 }
 #changePasswordForm{
+    width: 100%;
     a{
         color: @bright-blue;
         margin-top: 5px;
@@ -1335,11 +1336,14 @@ a#insuranceControl{
         }
 	}
     
-    tbody.limit-width tr td:nth-child(1){
-        max-width: 110px;
-        line-height: 1.1em;
-        @media all and (max-width: @phone-width) {
-            max-width: none;
+    tbody.limit-width tr td{
+        border: 0;
+        &:nth-child(1){
+            max-width: 110px;
+            line-height: 1.1em;
+            @media all and (max-width: @phone-width) {
+                max-width: none;
+            }
         }
     }
     tbody.limit-width tr td:nth-child(2){
