@@ -139,8 +139,11 @@ $rens = str_replace('</div>',"",$rens);
 				$x = explode(" ", $MemberTypes[$key]['Title']);
         		$y = str_replace(":", "", $x[0]);
 				if($y == strtoupper($rens)) {
+					/*
 					print '<div class="MTprice">$'.$MemberTypes[$key]["Price"]." (2018 membership year)".'</div>';
 					print '<div class="MTprice">$'.$FinalPrice." (2019 membership year)".'</div>';
+					*/
+					print '<div class="MTprice">$'.$MemberTypes[$key]["Price"].'</div>';
 					print '<div class="MTid" style="display: none;">'.$MemberTypes[$key]["ProductID"].'</div>';
 				}
 			}
