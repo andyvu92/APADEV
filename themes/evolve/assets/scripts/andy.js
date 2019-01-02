@@ -1498,7 +1498,22 @@ jQuery(document).ready(function(){
     autoMinimizedArchive();
   });
 
-  /*
+  // SET PAGE RECOGNITIONS ON LOAD
+  $(window).load(function(){
+    if ( window.location.pathname == '/dashboard' ){
+      sessionStorage.setItem('recognition', 'DASHBOARD');
+    }
+    else if ( window.location.pathname == '/your-details' ){
+      sessionStorage.setItem('recognition', 'Your details');
+    }
+    else if ( window.location.pathname == '/your-purchases' ){
+      sessionStorage.setItem('recognition', 'Your purchases');
+    }
+    else if ( window.location.pathname == '/subscriptions' ){
+      sessionStorage.setItem('recognition', 'Subscriptions');
+    }
+  })
+
   //TEST AJAX PAGE LOAD
   $(document).on('click', '.dashboard-left-nav .navbar-nav li a, a[href="/changepassword"]', function(){
     var target = $(this).attr('href');
@@ -1508,35 +1523,39 @@ jQuery(document).ready(function(){
     else if ( target != '/renewmymembership' ){
       // RENAME PAGE TITLE AND HREF
       if( target == 'dashboard' ){
-        var currentTitle = document.title.replace('Your details', 'DASHBOARD');
-        var currentTitle = document.title.replace('Your purchases', 'DASHBOARD');
-        var currentTitle = document.title.replace('Subscriptions', 'DASHBOARD');
+        currentPage = sessionStorage.getItem('recognition');
+        var currentTitle = document.title.replace(currentPage, 'DASHBOARD');
         document.title = currentTitle;
+        sessionStorage.setItem('recognition', 'DASHBOARD');
+        history.pushState(null, '', '/dashboard');
       }
       else if( target == 'your-details' ){
-        var currentTitle = document.title.replace('DASHBOARD', 'Your details');
-        var currentTitle = document.title.replace('Your purchases', 'Your details');
-        var currentTitle = document.title.replace('Subscriptions', 'Your details');
+        currentPage = sessionStorage.getItem('recognition');
+        var currentTitle = document.title.replace(currentPage, 'Your details');
         document.title = currentTitle;
+        sessionStorage.setItem('recognition', 'Your details');
+        history.pushState(null, '', '/your-details');
       }
-      
       else if( target == 'your-purchases' ){
-        var currentTitle = document.title.replace('DASHBOARD', 'Your purchases');
-        var currentTitle = document.title.replace('Your details', 'Your purchases');
-        var currentTitle = document.title.replace('Subscriptions', 'Your purchases');
+        currentPage = sessionStorage.getItem('recognition');
+        var currentTitle = document.title.replace(currentPage, 'Your Purchases');
         document.title = currentTitle;
+        sessionStorage.setItem('recognition', 'Your Purchases');
+        history.pushState(null, '', '/your-purchases');
       }
       else if( target == 'subscriptions' ){
-        var currentTitle = document.title.replace('DASHBOARD', 'Subscriptions');
-        var currentTitle = document.title.replace('Your details', 'Subscriptions');
-        var currentTitle = document.title.replace('Your purchases', 'Subscriptions');
+        currentPage = sessionStorage.getItem('recognition');
+        var currentTitle = document.title.replace(currentPage, 'Subscriptions');
         document.title = currentTitle;
+        sessionStorage.setItem('recognition', 'Subscriptions');
+        history.pushState(null, '', '/subscriptions');
       }
 
+      // OTHER LOGICS
       $(this).parent().siblings().removeClass('active');
       $(this).parent().addClass('active');
       $('#dashboard-right-content').html('');
-      $('#dashboard-right-content').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+      $('#dashboard-right-content').append('<div class="dashboard_ajax_overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
       $('#dashboard-right-content .overlay').hide().fadeIn();
       $('#dashboard-right-content').load(target + '#dashboard-right-content .dashboard_detail', function(){ 
         if ( $(this).find('#donutchart').length > 0 ){
@@ -1558,8 +1577,8 @@ jQuery(document).ready(function(){
           }
         });
         autoAccountMenu();
-        $('#dashboard-right-content').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
-        $('#dashboard-right-content .overlay').fadeOut('1000');
+        $('#dashboard-right-content').append('<div class="dashboard_ajax_overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+        $('#dashboard-right-content .dashboard_ajax_overlay').fadeOut('1000');
       });
       $(document).on('click', 'a[class^="event"]', function(){
         var target = $(this).attr('class').replace('event', '');
@@ -1573,5 +1592,4 @@ jQuery(document).ready(function(){
     }
   });
 
-  */
 });
