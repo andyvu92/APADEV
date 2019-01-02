@@ -912,9 +912,13 @@ jQuery(document).ready(function(){
     });
 
     $('#apa-create-log-in-form').submit(function(){
-      $(".login-btn input", this).hide();
-      $(".login-btn", this).append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');
-      return true;
+      if( $(this).find('.blue-spinning-btn').length > 0 ){
+        return;
+      } else{
+        $(".login-btn input", this).attr('disabled', 'disabled').hide();
+        $(".login-btn", this).append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');
+        return true;
+      }
     });
 
     $('#apa-get-cm-login-form').submit(function(){
@@ -1364,14 +1368,21 @@ jQuery(document).ready(function(){
       $('ul.nav li:nth-child(2)').addClass('login');
       $('ul.nav li:nth-child(3)').addClass('new-password');
       $(this).submit(function(){
-        $('.form-actions input', this).hide();
-        $('.form-actions', this).append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');
+        if( $(this).parent().find('.blue-spinning-btn').length > 0 ){
+          return;
+        } else{
+          $('.form-actions input', this).attr('disabled', 'disabled').hide();
+          $('.form-actions', this).append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');  
+        }
       });
     });
 
     $(document).on('click', '.page-user .user-info-from-cookie .form-actions input', function(){
-      $(this).hide();
-      $(this).parent().append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');
+      if( $(this).parent().find('.blue-spinning-btn').length > 0 ){
+      } else {
+        $(this).hide();
+        $(this).parent().append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');  
+      }
     });
 
     /* ----------------------------------------------------------------
