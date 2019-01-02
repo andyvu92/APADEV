@@ -1343,6 +1343,14 @@ jQuery(document).ready(function(){
 
     // HIDE DESCRIPTION IF INPUT IS NOT EMPTY
     $('.page-user #user-login, .page-user #user-pass').each(function(){
+      if( $('input', this).val() != '' ){
+        $('input', this).addClass('filled');
+
+        $('input', this).filter(function() {
+          return !this.value;
+      }).removeClass('filled');
+      }
+
       $('input', this).on('keyup change', function(){
         if ( $(this).val() == '' ) {
           $(this).removeClass('filled');
@@ -1516,6 +1524,11 @@ jQuery(document).ready(function(){
 
   //TEST AJAX PAGE LOAD
   $(document).on('click', '.dashboard-left-nav .navbar-nav li a, a[href="/changepassword"]', function(){
+    // stop ajax load if clicked on current menu option
+    if( $(this).parent().is('.active') ){
+      return false;
+    }
+
     var target = $(this).attr('href');
     if ( target == 'dashboard' && ($('#section-content-top').find('#cpd').length == 0) ){
       //load page
