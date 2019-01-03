@@ -1535,12 +1535,6 @@ jQuery(document).ready(function(){
     }
   });
 
-  // trigger function on window resizing - ALWAYS PLACED IN THE BOTTOM
-  $(window).on('resize', function(){
-    autoMediaChevron();
-    autoMinimizedArchive();
-  });
-
   // SET PAGE RECOGNITIONS ON LOAD
   $(window).load(function(){
     if ( window.location.pathname == '/dashboard' ){
@@ -1557,10 +1551,10 @@ jQuery(document).ready(function(){
     }
   })
 
-  //TEST AJAX PAGE LOAD
+  // AJAX DASHBOARD PAGE LOAD
   $(document).on('click', '.dashboard-left-nav .navbar-nav li a, a[href="/changepassword"]', function(){
     // stop ajax load if clicked on current menu option
-    if( $(this).parent().is('.active') ){
+    if( $(this).parent().is('.active') && (sessionStorage.getItem('recognition') != 'Change password') ){
       return false;
     }
 
@@ -1597,6 +1591,9 @@ jQuery(document).ready(function(){
         document.title = currentTitle;
         sessionStorage.setItem('recognition', 'Subscriptions');
         history.pushState(null, '', '/subscriptions');
+      }
+      else if( target == '/changepassword' ){
+        sessionStorage.setItem('recognition', 'Change password');
       }
 
       // OTHER LOGICS
@@ -1640,4 +1637,60 @@ jQuery(document).ready(function(){
     }
   });
 
+  // ADD ELEMENT TO HIDE DASHBOARD MENU ON SWIPE DOWN FOR MOBILE
+  $('.dashboard-left-nav').each(function(){
+    var window_width = $(window).width();
+    if (window_width < 570){
+      $(this).prepend('<span class="nav_toggle minimized"></span>');
+      $(this).append('<div class="nav_notification"><span>Swipe down to hide</span></div>');
+      $('.dashboard-left-nav').find('.navbar-collapse').addClass('blur');
+    }
+    window.setTimeout(function () {
+      $('.dashboard-left-nav').find('.nav_notification').fadeOut(500);
+      $('.dashboard-left-nav').find('.navbar-collapse').removeClass('blur');
+    }, 5000);
+  });
+
+  // SWIPE TO HIDE DASHBOARD MENU ON MOBILE
+  $('.dashboard-left-nav').swipe( {
+    //Generic swipe handler for all directions
+    swipeDown:function(event, direction, distance, duration, fingerCount, fingerData) {
+      var window_width = $(window).width();
+      if (window_width < 570){
+        $(this).addClass('minimized');
+        $(this).delay(500).queue(function(next){
+          $('.nav_toggle', this).removeClass('minimized');
+          next();
+        });
+      }
+    },
+    //Default is 75px
+     threshold:50
+  });
+
+  // SHOW DASHBOARD NAV ON SWIPE UP
+  $('.dashboard-left-nav').find('.nav_toggle').swipe( {
+    //Generic swipe handler for all directions
+    swipeUp:function(event, direction, distance, duration, fingerCount, fingerData) {
+      var window_width = $(window).width();
+      if (window_width < 570){
+        $(this).addClass('minimized');
+        $(this).parent().removeClass('minimized');
+      }
+    },
+    //Default is 75px
+     threshold:10
+  });
+
+  // SHOW DASHBOARD NAV ON CLICK
+  $(document).on('click', '.dashboard-left-nav .nav_toggle', function(){
+    $(this).addClass('minimized');
+    $(this).parent().removeClass('minimized');
+  });
+
+    // trigger function on window resizing - ALWAYS PLACED IN THE BOTTOM
+    $(window).on('resize', function(){
+      autoMediaChevron();
+      autoMinimizedArchive();
+    });
 });

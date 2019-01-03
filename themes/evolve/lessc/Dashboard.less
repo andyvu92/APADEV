@@ -915,6 +915,50 @@ a#insuranceControl{
     background: @dark-transparent-background;
     padding: @no-padding;
     height: auto;
+    transform: translateY(0%);
+    transition: all .5s linear;
+    // minimize animation for mobile
+    &.minimized{
+        transform: translateY(100%);
+    }
+    .nav_toggle{
+        position: absolute;
+        top: -20px;
+        left: 0;
+        width: 100%;
+        height: 20px;
+        background: #5e6067;
+        transition: all .5s linear;
+        &:before{
+            content: '';
+            position: absolute;
+            width: 50px;
+            height: 4px;
+            background: @brighter-blue;
+            left: calc(~'50% - 25px');
+            top: calc(~'50% - 2px');
+            border-radius: 20%;
+        }
+        &.minimized{
+            top: 0;
+        }
+    }
+    .nav_notification{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: rgba(0,0,0,0.4);
+        span{
+            color: #fff;
+            font-family: Roboto;
+            font-size: 1.3em;
+        }
+    }
 
     @media all and (max-width:@larger-tablet-width) {
         position: fixed;
@@ -926,11 +970,18 @@ a#insuranceControl{
 
     .navbar-collapse{
         padding: @no-padding;
+        border-top: 0px;
+        filter: blur(0px);
+        transition: all .5s ease-in;
+        &.blur{
+            filter: blur(3px);
+        }
         @media all and (max-width: @larger-phone-width){
+            background: #5e6067;
             &::after{
                 content: '';
                 width: 35px;
-                height: 72px;
+                height: 77px;
                 position: absolute;
                 top: 0;
                 right: 0;
