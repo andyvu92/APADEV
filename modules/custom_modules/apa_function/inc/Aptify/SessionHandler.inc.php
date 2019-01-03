@@ -15,8 +15,8 @@ function newSessionLogIn($id, $UserName, $Email, $FirstName, $LastName, $Title, 
 	$_SESSION['Database'] = $Database;
 	$_SESSION['AptifyUserID'] = $AptifyUserID;
 	// keep this session for half hour
-	$_SESSION['expireSessionTag'] = time() + (60 * 60 * 24 * 6);
-	
+	//$_SESSION['expireSessionTag'] = time() + (60 * 60 * 24 * 6);
+	$_SESSION['expireSessionTag'] = time() + (60 * 59);
 }
 function newSessionStats($MemberTypeID, $MemberType, $Status, $Speciality, $payThroughDate, $nationGP) {
 	$_SESSION['MemberTypeID'] = $MemberTypeID;
