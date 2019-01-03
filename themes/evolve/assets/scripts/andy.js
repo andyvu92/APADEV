@@ -895,6 +895,30 @@ jQuery(document).ready(function(){
       }
     });
 
+    // SPECIAL ATTR FOR CHAR RESTRICTION
+    $('[maxChar]').each(function(){
+      var maxChar = $(this).attr('maxChar');
+      var text = $(this).text();
+      var charCount = text.trim().length;
+      var splittext = text.split('').slice(0,maxChar).join('');
+
+      if ( charCount > maxChar ){
+        $(this).text( splittext + '...');
+      }
+    });
+
+    // SPECIAL ATTR FOR WORD RESTRICTION
+    $('[maxWord]').each(function(){
+      var maxWord = $(this).attr('maxWord');
+      var text = $(this).text();
+      var wordCount = text.trim().split(' ').length;
+      var splittext = text.split(' ').slice(0,maxWord).join(' ');
+
+      if ( wordCount > maxWord ){
+        $(this).text( splittext + '...');
+      }
+    });
+
     // HIDE DASHBOARD PAYMENT CARD OPTIONS IF CARD OPTION IS EMPTY
     $('select#Paymentcard').each(function(){
       if ( $(this).find('option').length == 0 ){

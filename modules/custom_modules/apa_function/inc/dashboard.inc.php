@@ -174,7 +174,7 @@ apa_function_dashboardLeftNavigation_form();
 <div class="col-xs-12 col-md-10 background_<?php echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-12"><span class="dashboard-name cairo">Hello <?php 
+			<div class="col-xs-12"><span class="dashboard-name cairo" maxChar="30">Hello <?php 
 				if (!empty($user["Preferred-name"])){
 					echo $user["Preferred-name"];
 				} else{

@@ -154,7 +154,7 @@
     @media all and (max-width: @larger-phone-width) {
         width: 300px!important;
         left: calc(~"50vw - 150px") !important;
-        top: 10vh !important;
+        top: 5vh !important;
     }
 }
 
@@ -697,6 +697,11 @@ div[aria-describedby="QuatationPopUp"].ui-dialog{
     .modal-footer {
         display: flex;
         justify-content: center;
+    }
+    @media all and (max-width: 320px){
+        .modal-body{
+            height: 48vh;
+        }
     }
 }
 
