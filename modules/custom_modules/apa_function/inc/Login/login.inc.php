@@ -3,6 +3,9 @@
 	$now = time();  
 	if (isset($_SESSION['expireSessionTag']) && $now > $_SESSION['expireSessionTag']) {
 		logoutManager();
+	} else {
+		// if it is within session hour, renew session hour again.
+		$_SESSION['expireSessionTag'] = $now;
 	}
 ?>
 <?php
