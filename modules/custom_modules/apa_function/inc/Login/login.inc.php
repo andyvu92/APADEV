@@ -1,8 +1,13 @@
 <?php
 	/*hanled session */
-	$now = time();  
+	$now = time();
 	if (isset($_SESSION['expireSessionTag']) && $now > $_SESSION['expireSessionTag']) {
+		// todo
+		// put session expired message here.
 		logoutManager();
+	} elseif(isset($_SESSION['expireSessionTag'])) {
+		// if it is within session hour, renew session hour again.
+		$_SESSION['expireSessionTag'] = time() + (60 * 59);
 	}
 ?>
 <?php
