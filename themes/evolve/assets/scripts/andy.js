@@ -1600,6 +1600,7 @@ jQuery(document).ready(function(){
     }
   })
 
+  /*
   // AJAX DASHBOARD PAGE LOAD
   $(document).on('click', '.dashboard-left-nav .navbar-nav li a, a[href="/changepassword"]', function(){
     // stop ajax load if clicked on current menu option
@@ -1692,7 +1693,7 @@ jQuery(document).ready(function(){
       return false;
     }
   });
-
+*/
   
   // ADD ELEMENT TO HIDE DASHBOARD MENU ON SWIPE DOWN FOR MOBILE
   $('.dashboard-left-nav').each(function(){
