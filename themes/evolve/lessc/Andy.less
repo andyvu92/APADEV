@@ -4721,6 +4721,7 @@ body{
             width: 100%;
         }
         .item_wrapper{
+            position: relative;
             @wrapper_padding: 30px;
             display: flex;
             flex-direction: column;
@@ -4729,6 +4730,16 @@ body{
             height: 100%;
             padding: @wrapper_padding;
             border: 2px solid @light-grey;
+            .show_email{
+                position: absolute;
+                top: calc(~'3% + 200px');
+                right: 4%;
+                padding: 5px;
+                border: 1px solid rgba(0,0,0,0.12);
+                color: rgba(0,0,0,0.2);
+                font-weight: 500;
+                font-size: .9em;
+            }
             .location_banner{
                 width: calc(~'100% +' @wrapper_padding*2);
                 left: -@wrapper_padding;
@@ -4781,6 +4792,9 @@ body{
                     display: flex;
                     flex-direction: row;
                     flex-wrap: wrap;
+                    &.break_line{
+                        flex-direction: column;
+                    }
                     a{
                         width: 50%;
                     }
@@ -4793,6 +4807,10 @@ body{
                 .item_wrapper{
                     padding-right: 33.33%;
                     position: relative;
+                    .show_email{
+                        top: 5%;
+                        right: 33.5%;
+                    }
                     .location_banner{
                         position: absolute;
                         left: 66.77%;

@@ -895,29 +895,78 @@ jQuery(document).ready(function(){
       }
     });
 
-    // SPECIAL ATTR FOR CHAR RESTRICTION
-    $('[maxChar]').each(function(){
-      var maxChar = $(this).attr('maxChar');
-      var text = $(this).text();
-      var charCount = text.trim().length;
-      var splittext = text.split('').slice(0,maxChar).join('');
-
-      if ( charCount > maxChar ){
-        $(this).text( splittext + '...');
-      }
-    });
-
-    // SPECIAL ATTR FOR WORD RESTRICTION
-    $('[maxWord]').each(function(){
-      var maxWord = $(this).attr('maxWord');
-      var text = $(this).text();
-      var wordCount = text.trim().split(' ').length;
-      var splittext = text.split(' ').slice(0,maxWord).join(' ');
-
-      if ( wordCount > maxWord ){
-        $(this).text( splittext + '...');
-      }
-    });
+  var checkTextCondition = function(){
+      // SPECIAL ATTR FOR MAX CHAR DISPLAY RESTRICTION
+      $('[maxChar]').each(function(){
+        var maxChar = $(this).attr('maxChar');
+        var text = $(this).text();
+        var charCount = text.trim().length;
+        var splittext = text.split('').slice(0,maxChar).join('');
+  
+        if ( charCount > maxChar ){
+          $(this).text( splittext + '...');
+        }
+      });
+  
+      // SPECIAL ATTR FOR MAX CHAR ALLOW RESTRICTION
+      $('[maxChar_allow]').each(function(e){
+        var maxChar_allow = $(this).attr('maxChar_allow');
+        $(this).on('keypress keyup',function (event){
+          var currentLength = $(this).val().length;
+          console.log(maxChar_allow, currentLength);
+          if ( currentLength >= maxChar_allow ){
+            event.preventDefault();
+          }
+        });
+      });
+  
+      // SPECIAL ATTR FOR MAX WORD ALLOW RESTRICTION
+      $('[maxWord_allow]').each(function(e){
+        var maxWord_allow = $(this).attr('maxWord_allow');
+        $(this).on('keypress keyup',function (event){
+          var countSpace = $(this).val().split(' ').length;
+          if ( countSpace > maxWord_allow ){
+            event.preventDefault();
+          }
+        });
+      });
+  
+      // SPECIAL ATTR FOR MAX WORD DISPLAY RESTRICTION
+      $('[maxWord]').each(function(){
+        var maxWord = $(this).attr('maxWord');
+        var text = $(this).text();
+        var wordCount = text.trim().split(' ').length;
+        var splittext = text.split(' ').slice(0,maxWord).join(' ');
+  
+        if ( wordCount > maxWord ){
+          $(this).text( splittext + '...');
+        }
+      });
+  
+      // NUMERIC ONLY WITH DECIMAL FOR INPUT
+      $('.decimal_numeric').on('keypress keyup blur',function (event) {
+        $(this).val($(this).val().replace(/[^0-9\.]/g,''));
+        if ((event.which != 46 || $(this).val().indexOf('.') != -1) && (event.which < 48 || event.which > 57)) {
+          event.preventDefault();
+        }
+      });
+  
+      // NUMERIC ONLY WITHOUT DECIMAL FOR INPUT
+      $('.non_decimal_numeric').on('keypress keyup blur',function (event) {    
+        $(this).val($(this).val().replace(/[^\d].+/, ''));
+        if ((event.which < 48 || event.which > 57)) {
+          event.preventDefault();
+        }
+      });
+  
+      // TEXT ONLY WITHOUT NUMERIC & SYMBOLS FOR INPUT
+      $('.alphabet_only').on('keypress keyup blur',function (event) {    
+        if ( (event.which >= 48 && event.which <= 57) ) {
+          event.preventDefault();
+        }
+      });  
+  }
+  checkTextCondition();
 
     // HIDE DASHBOARD PAYMENT CARD OPTIONS IF CARD OPTION IS EMPTY
     $('select#Paymentcard').each(function(){
@@ -1535,7 +1584,7 @@ jQuery(document).ready(function(){
     }
   });
 
-  // SET PAGE RECOGNITIONS ON LOAD
+  // SET PAGE RECOGNITIONS ON LOAD - AJAX DASHBOARD
   $(window).load(function(){
     if ( window.location.pathname == '/dashboard' ){
       sessionStorage.setItem('recognition', 'DASHBOARD');
@@ -1559,7 +1608,9 @@ jQuery(document).ready(function(){
     }
 
     var target = $(this).attr('href');
-    if ( target == 'dashboard' && ($('#section-content-top').find('#cpd').length == 0) ){
+    if ( (target == 'dashboard' || target == 'your-details') && ($('#section-content-top').find('#cpd').length == 0) ){
+      //load page
+    } else if ( target == 'your-details'){
       //load page
     }
     else if ( target != '/renewmymembership' ){
@@ -1597,9 +1648,13 @@ jQuery(document).ready(function(){
       }
 
       // OTHER LOGICS
+      $('html, body').stop().animate({ scrollTop: 0 }, 1000);
       $(this).parent().siblings().removeClass('active');
       $(this).parent().addClass('active');
       $('#dashboard-right-content').html('');
+      if ( $('#section-content-top').find('.overlay').length == 0 ){
+        $('#dashboard-right-content').after('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+      }
       $('#dashboard-right-content').append('<div class="dashboard_ajax_overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
       $('#dashboard-right-content .overlay').hide().fadeIn();
       $('#dashboard-right-content').load(target + '#dashboard-right-content .dashboard_detail', function(){ 
@@ -1621,6 +1676,7 @@ jQuery(document).ready(function(){
               }
           }
         });
+        checkTextCondition();
         autoAccountMenu();
         $('#dashboard-right-content').append('<div class="dashboard_ajax_overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
         $('#dashboard-right-content .dashboard_ajax_overlay').fadeOut('1000');
@@ -1637,60 +1693,74 @@ jQuery(document).ready(function(){
     }
   });
 
+  
   // ADD ELEMENT TO HIDE DASHBOARD MENU ON SWIPE DOWN FOR MOBILE
   $('.dashboard-left-nav').each(function(){
     var window_width = $(window).width();
     if (window_width < 570){
-      $(this).prepend('<span class="nav_toggle minimized"></span>');
-      $(this).append('<div class="nav_notification"><span>Swipe down to hide</span></div>');
+      $(this).prepend('<span class="nav_toggle blur"></span>');
+      $(this).append('<div class="nav_notification"><span>Tap down arrow to hide</span></div>');
       $('.dashboard-left-nav').find('.navbar-collapse').addClass('blur');
     }
     window.setTimeout(function () {
       $('.dashboard-left-nav').find('.nav_notification').fadeOut(500);
+      $('.dashboard-left-nav').find('.nav_toggle').removeClass('blur');
       $('.dashboard-left-nav').find('.navbar-collapse').removeClass('blur');
     }, 5000);
   });
 
-  // SWIPE TO HIDE DASHBOARD MENU ON MOBILE
-  $('.dashboard-left-nav').swipe( {
-    //Generic swipe handler for all directions
-    swipeDown:function(event, direction, distance, duration, fingerCount, fingerData) {
-      var window_width = $(window).width();
-      if (window_width < 570){
-        $(this).addClass('minimized');
-        $(this).delay(500).queue(function(next){
-          $('.nav_toggle', this).removeClass('minimized');
-          next();
-        });
-      }
-    },
-    //Default is 75px
-     threshold:50
-  });
-
-  // SHOW DASHBOARD NAV ON SWIPE UP
-  $('.dashboard-left-nav').find('.nav_toggle').swipe( {
-    //Generic swipe handler for all directions
-    swipeUp:function(event, direction, distance, duration, fingerCount, fingerData) {
-      var window_width = $(window).width();
-      if (window_width < 570){
-        $(this).addClass('minimized');
-        $(this).parent().removeClass('minimized');
-      }
-    },
-    //Default is 75px
-     threshold:10
-  });
-
-  // SHOW DASHBOARD NAV ON CLICK
+  // SHOW/HIDE DASHBOARD NAV ON CLICK
   $(document).on('click', '.dashboard-left-nav .nav_toggle', function(){
-    $(this).addClass('minimized');
-    $(this).parent().removeClass('minimized');
+    if( $(this).is('.minimized') ){
+      $('.dashboard-left-nav').find('.nav_toggle').removeClass('minimized');
+      window.setTimeout(function () {
+        $('.dashboard-left-nav').removeClass('minimized');
+      }, 600);
+    } else{
+      $(this).parent().addClass('minimized');
+      window.setTimeout(function () {
+        $('.dashboard-left-nav').find('.nav_toggle').addClass('minimized');
+      }, 600);
+    }
+  });
+  
+
+  // ADD BUTTONS TO SHOW EMAIL ADDRESSES ON CONTACT PAGE
+  $(window).load(function(){
+    if ( window.location.pathname == '/contact-us' ){
+      $('.location_grid .location_item').each(function(){
+        $('.item_wrapper', this).prepend('<a class="show_email">Show email</a>');
+      });
+    }
+  });
+  $(document).on('click', '.location_item .item_wrapper .show_email', function(){
+      $(this).parent().find('a').each(function(){
+        $(this).fadeOut('fast', function(){
+          // get email address
+          var email = $(this).attr('href');
+          $(this).text(email);
+          // remove 'mailto:'
+          var txt = $(this).text().replace('mailto:', '')
+          $(this).text(txt);
+          $(this).fadeIn();
+        });
+      });
+      // break line for 2 emails
+      $(this).parent().find('.combine').addClass('break_line');
+      // hide the button
+      $(this).fadeOut(function(){
+        $(this).remove();
+      });
   });
 
-    // trigger function on window resizing - ALWAYS PLACED IN THE BOTTOM
-    $(window).on('resize', function(){
-      autoMediaChevron();
-      autoMinimizedArchive();
-    });
+  // CLEAR ALL PASSWORD ON INPUT CLICK
+  $('input[type="password"]').click(function(){
+    $(this).val('');
+  });
+
+  // trigger function on window resizing - ALWAYS PLACED IN THE BOTTOM
+  $(window).on('resize', function(){
+    autoMediaChevron();
+    autoMinimizedArchive();
+  });
 });
