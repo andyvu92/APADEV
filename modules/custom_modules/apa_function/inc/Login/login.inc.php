@@ -4,11 +4,13 @@
 	if (isset($_SESSION['expireSessionTag']) && $now > $_SESSION['expireSessionTag']) {
 		// todo
 		// put session expired message here.
-		logoutManager();
-	} elseif(isset($_SESSION['expireSessionTag'])) {
+		$_SESSION['logoutSession'] = 1;
+		//logoutManager();
+		
+	} //elseif(isset($_SESSION['expireSessionTag'])) {
 		// if it is within session hour, renew session hour again.
-		$_SESSION['expireSessionTag'] = time() + (60 * 59);
-	}
+		//$_SESSION['expireSessionTag'] = time() + (60 * 59);
+	//}
 ?>
 <?php
 //include('sites/all/themes/evolve/inc/Aptify/AptifyAPI.inc.php');
@@ -1120,8 +1122,25 @@ $('.tab span').on('click', function (e) {
 </div>
 <?php unset($_SESSION['LogInFirstTime']); ?>
 <?php endif; ?>
+<!--handle the session expired popup-->
+<div id="sessionExpiredWindow" style="display:none;">
+	<span class="close-popup"></span>
+	<div class="flex-cell">
+		<h3 class="light-lead-heading cairo">Your session is expired. Please log in.</h3>
+	</div>
+</div>
+<!--handle the session expired popup-->
 <script type="text/javascript">
 $(document).ready(function(){
+	var logoutTag ='<?php if(isset($_SESSION['logoutSession']))  {echo $_SESSION['logoutSession']; } else{ echo "";}?>';
+	if(logoutTag !== ""){
+        $("#sessionExpiredWindow").fadeIn();
+	 }
+	$(document).on('click', '#sessionExpiredWindow .close-popup', function(){
+		$('#sessionExpiredWindow').fadeOut();
+		$('.overlay').fadeOut();
+		$('input[value="Log out"]').click();
+  	});
 	$('.GetCentreLayoutHome .ASection .Desktop')
 		.animate({ "padding-left": "1px" }, 500 )
 		.animate({ "margin-top": "0px" }, 300 )

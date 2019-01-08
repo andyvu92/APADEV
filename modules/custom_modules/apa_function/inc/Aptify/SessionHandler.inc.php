@@ -67,6 +67,7 @@ function deleteSession() {
 	unset($_SESSION['renewTag']);
 	unset($_SESSION['expireTag']);
 	unset($_SESSION['expireSessionTag']);
+	unset($_SESSION['logoutSession']);
 	/*
 	unset($_SESSION['Logfgh']);
 	unset($_SESSION['Logfgh']);
