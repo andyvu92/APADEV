@@ -1877,3 +1877,7 @@ jQuery(document).ready(function(){
 	});
 });
 
+jQuery(document).ready(function(){
+	$("#dashboard-right-content .styled-checkbox#15").parents('li').remove();
+
+});
