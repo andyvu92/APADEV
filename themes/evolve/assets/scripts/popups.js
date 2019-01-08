@@ -5,8 +5,8 @@ jQuery(document).ready(function() {
     //CALL POPUPS
     $('[popup-target]').on('click', function (e) {
         e.preventDefault();
-        if ( $('.html').find('.overlay').length == 0 ){
-            $('.html').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+        if ( $('body, .html, html').find('.overlay').length == 0 ){
+            $('body').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
         }
         target = $(this).attr('popup-target');
         $('.overlay').fadeIn();

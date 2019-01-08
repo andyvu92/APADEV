@@ -984,7 +984,7 @@ jQuery(document).ready(function(){
       return true;
     });
 
-    $('#apa-create-log-in-form').submit(function(){
+    $('[id^="apa-create-log-in-form"]').submit(function(){
       if( $(this).find('.blue-spinning-btn').length > 0 ){
         return;
       } else{
@@ -1696,18 +1696,20 @@ jQuery(document).ready(function(){
 */
   
   // ADD ELEMENT TO HIDE DASHBOARD MENU ON SWIPE DOWN FOR MOBILE
-  $('.dashboard-left-nav').each(function(){
-    var window_width = $(window).width();
+  window_width = $(window).width();
+  const dashboard_leftnav = document.getElementsByClassName('dashboard-left-nav');
+  Array.prototype.forEach.call(dashboard_leftnav, (element) => {
     if (window_width < 570){
-      $(this).prepend('<span class="nav_toggle blur"></span>');
-      $(this).append('<div class="nav_notification"><span>Tap down arrow to hide</span></div>');
-      $('.dashboard-left-nav').find('.navbar-collapse').addClass('blur');
+      element.insertAdjacentHTML('afterbegin', `<span class="nav_toggle blur"></span>`);
+      element.insertAdjacentHTML('beforeend', '<div class="nav_notification"><span>Tap down arrow to hide</span></div>');
+      element.getElementsByClassName('navbar-collapse')[0].classList.add('blur');
+    
+      window.setTimeout(() => {
+        element.getElementsByClassName('nav_toggle')[0].classList.remove('blur');
+        element.getElementsByClassName('navbar-collapse')[0].classList.remove('blur');
+        $(element).find('.nav_notification').fadeOut(500);
+      }, 5000);
     }
-    window.setTimeout(function () {
-      $('.dashboard-left-nav').find('.nav_notification').fadeOut(500);
-      $('.dashboard-left-nav').find('.nav_toggle').removeClass('blur');
-      $('.dashboard-left-nav').find('.navbar-collapse').removeClass('blur');
-    }, 5000);
   });
 
   // SHOW/HIDE DASHBOARD NAV ON CLICK

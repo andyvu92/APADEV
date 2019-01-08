@@ -1,13 +1,18 @@
 <?php
 	/*hanled session */
 	$now = time();
+	$_SESSION['logoutSession'] = 0;
 	if (isset($_SESSION['expireSessionTag']) && $now > $_SESSION['expireSessionTag']) {
 		// todo
 		// put session expired message here.
 		$_SESSION['logoutSession'] = 1;
+		// todo
+		
 		//logoutManager();
 		
-	} //elseif(isset($_SESSION['expireSessionTag'])) {
+	}
+	
+	 //elseif(isset($_SESSION['expireSessionTag'])) {
 		// if it is within session hour, renew session hour again.
 		//$_SESSION['expireSessionTag'] = time() + (60 * 59);
 	//}
@@ -1124,22 +1129,67 @@ $('.tab span').on('click', function (e) {
 <?php endif; ?>
 <!--handle the session expired popup-->
 <div id="sessionExpiredWindow" style="display:none;">
-	<span class="close-popup"></span>
 	<div class="flex-cell">
-		<h3 class="light-lead-heading cairo">Your session is expired. Please log in.</h3>
+		<div id="expire_msg">
+			<span class="light-lead-heading cairo">Your session has expired.</span>
+			<div class="btn-wrapper">
+				<a class="accent-btn session_login">Login</a>
+				<a class="accent-btn session_logout">Logout</a>
+			</div>
+			
+		</div>
+		<div id="login_form">
+			<div class="form-container">        
+				<div class="tab-content">
+					<div id="main-signin-form">             
+						<div class="flex-container">
+							<div class="flex-cell">
+								<span class="light-lead-heading cairo">Sign in to your account</span>
+							</div>
+
+							<?php $the_form = drupal_get_form('apa_create_log_in_form');
+							print drupal_render($the_form);	?>
+							
+							<div class="flex-cell create-account">
+								<span>Not a member? <a href="/membership-question">Join today.</a></span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
 <!--handle the session expired popup-->
 <script type="text/javascript">
 $(document).ready(function(){
 	var logoutTag ='<?php if(isset($_SESSION['logoutSession']))  {echo $_SESSION['logoutSession']; } else{ echo "";}?>';
-	if(logoutTag !== ""){
-        $("#sessionExpiredWindow").fadeIn();
-	 }
-	$(document).on('click', '#sessionExpiredWindow .close-popup', function(){
-		$('#sessionExpiredWindow').fadeOut();
-		$('.overlay').fadeOut();
-		$('input[value="Log out"]').click();
+	if(logoutTag == "1"){
+		// prevent element inspect
+		document.addEventListener('contextmenu', function(e) {
+			e.preventDefault();
+		});
+		// remove duplicate login form
+		$('#loginAT').remove();
+		// append overlay
+		if( $('body, html, .html').find('.overlay').length == 0 ){
+			$('body').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+		}
+		$('.overlay').fadeIn();
+		// fade in session expired window
+		$("#sessionExpiredWindow").fadeIn();
+	}
+	else{
+		$("#sessionExpiredWindow").hide();
+	}
+	$(document).on('click', '#sessionExpiredWindow a', function(){
+		if ( $(this).is('.session_logout') ){
+			$('input[value="Log out"]').click();
+		} else {
+			$('#expire_msg').fadeOut( () => {
+				$('#login_form').fadeIn();
+			});
+		}
   	});
 	$('.GetCentreLayoutHome .ASection .Desktop')
 		.animate({ "padding-left": "1px" }, 500 )

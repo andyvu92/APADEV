@@ -2312,14 +2312,22 @@ $('.add-additional-qualification').click(function(){
 		var sessionDegree = <?php echo json_encode($_SESSION['degree']);?>;
 		var sessionUniversity = <?php echo json_encode($_SESSION['University']);?>;
 		$('div[id="additional-qualifications-block"]').append('<div id="additional'+ number +'"></div>');
-		$("#additional"+ number ).load("load/education", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree,"sessionUniversity":sessionUniversity});
-        var i = Number(number +1);
+		$("#additional"+ number ).hide();
+		$("#additional"+ number ).load("load/education", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree,"sessionUniversity":sessionUniversity}, function(){
+			$(this).slideDown();
+		});
+		//window.setTimeout(function () {
+		//	$("#additional"+ number ).slideDown();
+      	//}, 500);
+		var i = Number(number +1);
 		$('input[name=addtionalNumber]').val(i);
 		if(i==0){ $('#educationNotice').removeClass("display-none");} else{$('#educationNotice').addClass("display-none");}
 });
 $("#deleteQButton").on( "click", function(){
 		var x = $(this).attr("class").replace('deleteEducation', '');
-		$("#additional"+ x).remove();
+		$("#additional"+ x).slideUp(function(){
+			$(this).remove();
+		});
 		$("#deleteQButton").removeAttr('class');
 		var en = Number($('#addtionalNumber').val());
 		
