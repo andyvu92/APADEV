@@ -122,61 +122,6 @@ jQuery(document).ready(function($) {
       }
   });
 
-  // INMOTION READMORE
-  $('.inmotion-readmore-content').each(function(){
-    if ( $(this).find('.featured-caption').length == 1 ){
-      $('.region.left-content .post-img').append( $('.featured-caption') );
-    }
-
-    // define min height
-    var minHeight = 500;
-
-    // set min height
-    $(this).css('height', minHeight);
-    $(this).addClass('minimized');
-
-    // construct wrapper and toggle
-    $(this).wrap('<div class="readmore-container"></div>');
-    $(this).after('<a class="readmore-toggle">Read more</a>');
-
-    $(window).load(function(){
-      $('.content-loading').hide();
-      $('.inmotion-readmore-content, .readmore-toggle').fadeIn(1000);
-      $('.readmore-toggle').css('display', 'block');
-    });
-
-      // READMORE BUTTON FOR INMOTION - toogle behaviour on click
-    $(document).on('click', '.inmotion-content .readmore-toggle', function(){
-      if ( $(this).text() == 'Read more' ) { // expanding
-        // get full height
-        var fullHeight = $(this).parent().find('.inmotion-readmore-content').css('height', 'auto').height();
-        // re-set min height
-        $(this).parent().find('.inmotion-readmore-content').css('height', minHeight);
-
-        //set full height
-        $(this).parent().find('.inmotion-readmore-content').animate({height: fullHeight}, 800);
-        $(this).parent().find('.inmotion-readmore-content').removeClass('minimized');
-        $(this).text('Read less');
-      }
-      else{ //minimizing
-          // auto scroll back to top
-          var window_width = $(window).width();
-          if (window_width >= 993){
-            $('html, body').stop().animate({
-              scrollTop: $('.SectionHeader').offset().top - $('#section-header').height()
-            });
-          }
-          else{
-            $('html, body').stop().animate({ scrollTop: $('.SectionHeader').offset().top - 25 }, 1000);
-          }
-        // set min height
-        $(this).parent().find('.inmotion-readmore-content').animate({height: minHeight}, 800);
-        $(this).parent().find('.inmotion-readmore-content').addClass('minimized');
-        $(this).text('Read more');
-      }
-    });
-  });
-
   // READMORE BUTTON FOR PD PAGES
   $(document).on('click', '.readmore-content .readmore', function(){
     if( $(this).text() == 'Read less' ){
@@ -282,16 +227,9 @@ jQuery(function ($) {
   });
 }); 
 
-//SET BACKGROUND FOR EACH MEDIA ARTICLE CONTENT SIDEBAR
-jQuery(function ($) {
-  var someId = $(".node-inmotion .file-image .content, .node-home-news-tiles .file-image .content");
-  someId.css('background', function () {
-      return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
-  });
-}); 
-
 //REMOVE RED BORDER ON FIELD VALIDATION
 jQuery(document).ready(function() {
+  
   $(document).on("keyup","input", function(){
     $(this).removeClass("focuscss");
   });
@@ -979,7 +917,7 @@ jQuery(document).ready(function(){
 
     // BUTTONS ON FORM SUBMISSION
     $('#nonAPAhour form').submit(function(){
-      $("#saveNA", this).hide();
+      $("#saveNA", this).remove();
       $(".modal-footer", this).prepend('<div class="add-cpd-spinning-btn"><i class="fa fa-spinner fa-spin fa-fw"></i></div>');
       return true;
     });
@@ -1461,37 +1399,39 @@ jQuery(document).ready(function(){
     /* ----------------------------------------------------------------
             CUSTOM FONT STYLE WITH SPECIFIC CLASSES ADDED
     -----------------------------------------------------------------*/
-    $('h2, h3, h4, h5, h6, p, ul, ol').each(function(){
-      var prev = $(this).prev();
-      if ( prev.is('h2') ){
-        $(this).addClass('font_style--after_h2');
-      }
-      else if ( prev.is('h3') ){
-        $(this).addClass('font_style--after_h3');
-      }
-      else if ( prev.is('h4') ){
-        $(this).addClass('font_style--after_h4');
-      }
-      else if ( prev.is('h5') ){
-        $(this).addClass('font_style--after_h5');
-      }
-      else if ( prev.is('h6') ){
-        $(this).addClass('font_style--after_h6');
-      }
-      else if ( prev.is('p') ){
-        $(this).addClass('font_style--after_p');
-      }
-      else if ( prev.is('ul') ){
-        $(this).addClass('font_style--after_ul');
-      }
-      else if ( prev.is('ol') ){
-        $(this).addClass('font_style--after_ol');
-      }
-      else {
-        return;
-      }
-    });
-
+    const custom_font_style = () => {
+      $('h2, h3, h4, h5, h6, p, ul, ol').each(function(){
+        var prev = $(this).prev();
+        if ( prev.is('h2') ){
+          $(this).addClass('font_style--after_h2');
+        }
+        else if ( prev.is('h3') ){
+          $(this).addClass('font_style--after_h3');
+        }
+        else if ( prev.is('h4') ){
+          $(this).addClass('font_style--after_h4');
+        }
+        else if ( prev.is('h5') ){
+          $(this).addClass('font_style--after_h5');
+        }
+        else if ( prev.is('h6') ){
+          $(this).addClass('font_style--after_h6');
+        }
+        else if ( prev.is('p') ){
+          $(this).addClass('font_style--after_p');
+        }
+        else if ( prev.is('ul') ){
+          $(this).addClass('font_style--after_ul');
+        }
+        else if ( prev.is('ol') ){
+          $(this).addClass('font_style--after_ol');
+        }
+        else {
+          return;
+        }
+      });
+    }
+    custom_font_style();
     /*
     $('.inmotion').find('h2, h3, h4, h5, h6, p, ul, ol').each(function(){
       if (  $(this).text() != 'H2 Title style' && $(this).text() != 'H3 Title style' && $(this).text() != 'H4 Title style' && $(this).text() != 'H5 Title style' && $(this).text() != 'P tag style' && $(this).text() != 'UL list style' && $(this).text() != 'OL list style' && $(this).text() != 'Intro style' ) {
@@ -1516,6 +1456,72 @@ jQuery(document).ready(function(){
     /* ----------------------------------------------------------------
             END CUSTOM FONT STYLE WITH SPECIFIC CLASSES ADDED
     -----------------------------------------------------------------*/
+    // INMOTION READMORE
+    $('.inmotion-readmore-content').each(function(){
+      if ( $(this).find('.featured-caption').length == 1 ){
+        $('.region.left-content .post-img').append( $('.featured-caption') );
+      }
+
+      // define min height
+      var minHeight = 500;
+
+      // set min height
+      $(this).css('height', minHeight);
+      $(this).addClass('minimized');
+
+      // construct wrapper and toggle
+      $(this).wrap('<div class="readmore-container"></div>');
+      $(this).after('<a class="readmore-toggle">Read more</a>');
+
+      const inmotion_show_content = () => {
+        $(window).load(function(){
+          $('.content-loading').hide();
+          $('.inmotion-readmore-content, .readmore-toggle').fadeIn(1000);
+          $('.readmore-toggle').css('display', 'block');
+        });
+      }
+      inmotion_show_content();
+
+        // READMORE BUTTON FOR INMOTION - toogle behaviour on click
+      $(document).on('click', '.inmotion-content .readmore-toggle', function(){
+        if ( $(this).text() == 'Read more' ) { // expanding
+          // get full height
+          var fullHeight = $(this).parent().find('.inmotion-readmore-content').css('height', 'auto').height();
+          // re-set min height
+          $(this).parent().find('.inmotion-readmore-content').css('height', minHeight);
+
+          //set full height
+          $(this).parent().find('.inmotion-readmore-content').animate({height: fullHeight}, 800);
+          $(this).parent().find('.inmotion-readmore-content').removeClass('minimized');
+          $(this).text('Read less');
+        }
+        else{ //minimizing
+            // auto scroll back to top
+            var window_width = $(window).width();
+            if (window_width >= 993){
+              $('html, body').stop().animate({
+                scrollTop: $('.SectionHeader').offset().top - $('#section-header').height()
+              });
+            }
+            else{
+              $('html, body').stop().animate({ scrollTop: $('.SectionHeader').offset().top - 25 }, 1000);
+            }
+          // set min height
+          $(this).parent().find('.inmotion-readmore-content').animate({height: minHeight}, 800);
+          $(this).parent().find('.inmotion-readmore-content').addClass('minimized');
+          $(this).text('Read more');
+        }
+      });
+    });
+
+    //SET BACKGROUND FOR EACH MEDIA ARTICLE CONTENT SIDEBAR
+    const setImgBckgr = () => {
+      var someId = $(".node-inmotion .file-image .content, .node-home-news-tiles .file-image .content");
+    someId.css('background', function () {
+        return 'url(' + $(this).find('img').attr('src') + ') no-repeat'
+    });
+    }
+    setImgBckgr();
 
     // HIDE INMOTION SIDEBAR TITLE TAG IF BLOG CONTENT IS EMPTY
     $('.CampaignSidebar .content').each(function(){
@@ -1756,8 +1762,8 @@ jQuery(document).ready(function(){
       });
   });
 
-  // CLEAR ALL PASSWORD ON INPUT CLICK
-  $('input[type="password"]').click(function(){
+  // CLEAR ALL PASSWORD ON INPUT CLICK/FOCUS
+  $(document).on('click focus', 'input[type="password"]', function(){
     $(this).val('');
   });
 
@@ -1766,4 +1772,73 @@ jQuery(document).ready(function(){
     autoMediaChevron();
     autoMinimizedArchive();
   });
+
+  /*
+  // TEST AJAX INMOTION
+  $(document).on('click', '.CampaignSidebar .views-row a', function(e){
+    e.preventDefault();
+    var target = $(this).attr('href');
+    $('.left-content').load(target + ' .left-content > *', function(){
+      setImgBckgr();
+      custom_font_style();
+
+      $.ajax({
+        type: "GET",
+        url: "//platform.twitter.com/widgets.js",
+        dataType: "script"
+      });
+      $.ajax({
+        type: "GET",
+        url: "//platform.linkedin.com/in.js",
+        dataType: "script"
+      });
+      $.ajax({
+        type: "GET",
+        url: "https://apis.google.com/js/platform.js",
+        dataType: "script"
+      });
+      $.ajax({
+        type: "GET",
+        url: "//connect.facebook.net/en_GB/sdk.js",
+        dataType: "script"
+      });
+
+
+      $('.inmotion-readmore-content').each(function(){
+        if ( $(this).find('.featured-caption').length == 1 ){
+          $('.region.left-content .post-img').append( $('.featured-caption') );
+        }
+  
+        // define min height
+        var minHeight = 500;
+  
+        // set min height
+        $(this).css('height', minHeight);
+        $(this).addClass('minimized');
+  
+        // construct wrapper and toggle
+        $(this).wrap('<div class="readmore-container"></div>');
+        $(this).after('<a class="readmore-toggle">Read more</a>');
+      });
+
+      $('.SectionHeader, header.meta, header.meta + .post-img.media').hide().fadeIn();
+
+      const recall_contentload = () => {
+        $('.content-loading').hide();
+        $('.inmotion-readmore-content, .readmore-toggle').fadeIn(1000);
+        $('.readmore-toggle').css('display', 'block');
+      }
+
+      window.setTimeout(recall_contentload, 1000);
+
+      return false;
+    });
+    $('.CampaignSidebar').load(target + ' .CampaignSidebar > *', function(){
+      setImgBckgr();
+      return false;
+    });
+  });
+  */
 });
+
+

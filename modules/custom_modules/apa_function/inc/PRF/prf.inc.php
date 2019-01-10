@@ -165,7 +165,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 	</div>
 	<?php endif; ?>  
 	<?php if (sizeof($cardsnum["results"])==0): ?> 
-	<div class="flex-container row show" id="anothercardBlock">	
+	<div class="flex-container show" id="anothercardBlock">	
 		<div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" name="anothercard">
@@ -174,8 +174,8 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 		</div> 
 		<div class="flex-cell">
 			<div class="flex-col-12">
-				<div class="chevron-select-box">
 				<label for="">Payment method:<span class="tipstyle"> *</span></label>
+				<div class="chevron-select-box">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 					<?php 
 						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
@@ -389,7 +389,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 	</div>
 	<?php endif; ?>  
 	<?php if (sizeof($cardsnum["results"])==0): ?> 
-	<div class="flex-container row show" id="anothercardBlock">	
+	<div class="flex-container show" id="anothercardBlock">	
 		<div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" name="anothercard">
@@ -398,8 +398,8 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 		</div> 
 		<div class="flex-cell">
 			<div class="flex-col-12">
-				<div class="chevron-select-box">
 				<label for="">Payment method:<span class="tipstyle"> *</span></label>
+				<div class="chevron-select-box">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 					<?php 
 						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");

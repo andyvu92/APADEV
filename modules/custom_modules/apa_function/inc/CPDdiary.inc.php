@@ -199,7 +199,7 @@ function date_sort($a, $b) {
 			<input class="form-control" type="date" required="true" name="Date" placeholder="" id="DateNA">
 			</div><div class="col-lg-12">
 			<label for="TimeNA">Hours</label>
-			<input class="form-control" type="number" required="true" name="Time" placeholder="" id="TimeNA">
+			<input class="form-control decimal_numeric" type="text" required="true" name="Time" placeholder="" id="TimeNA">
 			</div><div class="col-lg-12">
 			<label for="ProviderNA">Provider</label>
 			<input class="form-control" type="text" required="true" name="Provider" placeholder="" id="ProviderNA">
