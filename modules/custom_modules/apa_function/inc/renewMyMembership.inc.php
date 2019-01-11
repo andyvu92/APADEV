@@ -479,7 +479,7 @@ You have the right to access the personal information about yourself held by the
 		</div>
 
 		<div class="grid-block apa-member-grid">
-			<!--
+			
 			<div class="item">
 				<div class="item-body current-member">
 					<span class="item-title">Current APA member</span>
@@ -487,7 +487,7 @@ You have the right to access the personal information about yourself held by the
 					<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
 				</div>
 			</div>
-			-->
+			
 			<div class="item">
 				<div class="item-body previous-member">
 					<span class="item-title">Existing account</span>
