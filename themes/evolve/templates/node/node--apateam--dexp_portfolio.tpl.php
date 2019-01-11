@@ -1,4 +1,4 @@
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix homeBottom"<?php print $attributes; ?>>
+<div id="node-<?php print $node->nid; ?>"  <?php if(sizeof($node->field_apateamorder)!=0) : ?> style='order:<?php print $node->field_apateamorder['und'][0]['value'];?>;' <?php else:?> style='order:100;'<?php endif;?>  class="<?php print $classes; ?> clearfix homeBottom"<?php print $attributes; ?>>
    <div class="content"<?php print $content_attributes; ?>>
         <?php
 // We hide the comments and links now so that we can render them later.
