@@ -218,7 +218,7 @@ apa_function_dashboardLeftNavigation_form();
 						<?php endif; ?>
 						<?php if(isset($_SESSION['Speciality']) && sizeof($_SESSION['Speciality']) != 0): ?>
 						<tr>
-							<td><strong>Specialty:</strong></td>
+							<td><strong>Specialist:</strong></td>
 							<td>
 							<?php 
 								foreach($_SESSION['Speciality'] as $Speciality){
