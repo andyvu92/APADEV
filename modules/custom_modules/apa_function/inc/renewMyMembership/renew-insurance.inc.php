@@ -90,6 +90,9 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
+				<label>Please note that adding an entity name to your Certificate of Currency will cover you for physiotherapy services only. If you have other services being performed at your clinic, including those performed by registered physios, you must contact BMS on 1800 931 068 to ensure you are adequately covered.</label>
+			</div>
+			<div class="col-xs-12">
 				<label>Business name</label>
 				<input type="text" class="form-control" name="Businiessname" id="Businiessname" placeholder="" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Businiessname']; }else{ echo '';}?>>
 			</div>
