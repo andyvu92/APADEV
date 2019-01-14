@@ -1896,7 +1896,7 @@ jQuery(document).ready(function(){
       });
      });
   }
-  add_help_bar();
+  //add_help_bar();
 
 });
 
