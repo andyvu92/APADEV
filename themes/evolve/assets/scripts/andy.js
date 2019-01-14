@@ -1763,7 +1763,7 @@ jQuery(document).ready(function(){
   });
 
   // CLEAR ALL PASSWORD ON INPUT CLICK/FOCUS
-  $(document).on('click focus', 'input[type="password"]', function(){
+  $(document).one('click focus', 'input[type="password"]', function(){
     $(this).val('');
   });
 
@@ -1839,6 +1839,65 @@ jQuery(document).ready(function(){
     });
   });
   */
+
+  // ADD HELP BAR FOR USERS
+  const add_help_bar = () => {
+    const path = window.location.pathname.split("/").pop();
+    const body_inner = document.getElementsByClassName('dexp-body-inner');
+    Array.prototype.forEach.call(body_inner, (element) => {
+      // Get cookie 
+      const getCookie = ( (cname) => {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      });
+      // Set cookie
+      const setCookie = ( (cname, cvalue) => {
+        //let d = new Date();
+        //d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        //let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue;
+        //document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      });
+
+      // Set cookie
+      //setCookie('add_help_bar_disable', 'false');
+
+      // set conditions for help_bar
+      if ( path == "renewmymembership" || path == "jointheapa" || getCookie("add_help_bar_disable") == "true" ){
+        setCookie('add_help_bar_disable', 'true');
+        return;
+      } else {
+        element.insertAdjacentHTML('beforeend', `<div id="users_help_bar" class="minimized"><span class="close"></span><div class="modal_header"><span>Need help?</span></div><div class="modal_content"></div></div>`);
+        $.ajax({
+          url : "/sites/default/files/test/test.txt",
+          dataType: "text",
+          success : function (data) {
+              $('.dexp-body-inner').find('#users_help_bar .modal_content').append(data);
+          }
+        });
+      }
+
+      $(document).on('click', '#users_help_bar .modal_header', function(){
+        $(this).parent().toggleClass('minimized');
+      });
+      $(document).on('click', '#users_help_bar .close', function(){
+        $(this).parent().addClass('modal_disabled');
+      });
+     });
+  }
+  //add_help_bar();
+
 });
 
 
