@@ -79,7 +79,7 @@
 * @ingroup themeable
 */
 ?>
-<?php if(isset($_SESSION['UserId']) && $_SESSION['MemberTypeID']!="1"): ?>
+<?php if(isset($_SESSION['UserId']) && $_SESSION['MemberTypeID']!="1" && strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate'])))>= strtotime(date("d-m-Y"))): ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix" <?php print $attributes; ?>>
 	<?php //$result = MtypeContent($content['field_member_content_type'],$content['field_member_type_list']); ?>
 	
