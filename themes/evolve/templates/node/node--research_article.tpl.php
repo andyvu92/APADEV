@@ -129,7 +129,7 @@
                         <?php if(!is_null(render($content['field_research_issue']))): ?> <?php echo '<span class="meta-date">';?>
                         <?php print render($content['field_research_issue']);?><?php echo '</span>';?> <?php endif?>
                         
-                        <span class="meta-date"><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></span>
+                        <span class="meta-date"><?php //print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></span>
                     </div>
                 </div>
 

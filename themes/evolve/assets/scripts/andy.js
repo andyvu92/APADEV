@@ -1514,6 +1514,173 @@ jQuery(document).ready(function(){
       });
     });
 
+    // PD DESCRIPTION READMORE
+    $('.pd-readmore-content').each(function(){
+      // define min height
+      let minHeight = 190;
+      // get window width
+      let window_width = $(window).width() + 10;
+
+      // re-define min-height based on window width
+      if (window_width >= 1200){
+        minHeight = 190;
+      }
+      else if (window_width < 1200 && window_width >= 993){
+        minHeight = 260;
+      } else if (window_width < 993 && window_width >= 769){
+        minHeight = 225;
+      } else if (window_width < 769 && window_width >= 571){
+        minHeight = 230;
+      } else if (window_width < 571 && window_width >= 481){
+        minHeight = 350;
+      } else {
+        minHeight = 410;
+      }
+
+      // hide loading & show content
+      const pd_show_content = () => {
+        $(window).load(function(){
+          $('.content-loading').hide();
+          $('.pd-description-container, .readmore-toggle').fadeIn(1000);
+          $('.readmore-toggle').css('display', 'block');
+        });
+      }
+      // get content full height
+      let fullHeight = $('.pd-description-container').show().height();
+      // re-set content height
+      $('.pd-description-container').hide();
+      // apply readmore with height conditions
+      if (fullHeight> minHeight + 100 ){
+        // set min height
+        $(this).css('height', minHeight);
+        $(this).addClass('minimized');
+
+        // construct wrapper and toggle
+        $(this).wrap('<div class="readmore-container"></div>');
+        $(this).after('<a class="readmore-toggle">Read more</a>');
+
+        pd_show_content();
+      } else {
+        pd_show_content();
+      }
+
+
+      // READMORE BUTTON FOR PD DESCRIPTION - toogle behaviour on click
+      $(document).on('click', '.left-side-content .pd-description-container .readmore-toggle', function(){
+        if ( $(this).text() == 'Read more' ) { // expanding
+          // get full height
+          fullHeight = $(this).parent().find('.pd-readmore-content').css('height', 'auto').height();
+          // re-set min height
+          $(this).parent().find('.pd-readmore-content').css('height', minHeight);
+
+          //set full height
+          $(this).parent().find('.pd-readmore-content').animate({height: fullHeight}, 800);
+          $(this).parent().find('.pd-readmore-content').removeClass('minimized');
+          $(this).text('Read less');
+        }
+        else{ //minimizing
+            // auto scroll back to top
+            var window_width = $(window).width();
+            if (window_width >= 993){
+              $('html, body').stop().animate({
+                scrollTop: $('#block-system-main').offset().top - $('#section-header').height()
+              });
+            }
+            else{
+              $('html, body').stop().animate({ scrollTop: $('#block-system-main').offset().top - 25 }, 1000);
+            }
+          // set min height
+          $(this).parent().find('.pd-readmore-content').animate({height: minHeight}, 800);
+          $(this).parent().find('.pd-readmore-content').addClass('minimized');
+          $(this).text('Read more');
+        }
+      });
+    });
+
+    // PD DESCRIPTION READMORE
+    $('.presenters-readmore-content').each(function(){
+      // define min height
+      let minHeight = 190;
+      // get window width
+      let window_width = $(window).width() + 10;
+
+      // re-define min-height based on window width
+      if (window_width >= 1200){
+        minHeight = 190;
+      }
+      else if (window_width < 1200 && window_width >= 993){
+        minHeight = 260;
+      } else if (window_width < 993 && window_width >= 769){
+        minHeight = 225;
+      } else if (window_width < 769 && window_width >= 571){
+        minHeight = 230;
+      } else if (window_width < 571 && window_width >= 481){
+        minHeight = 350;
+      } else {
+        minHeight = 410;
+      }
+
+      // hide loading & show content
+      const presenters_show_content = () => {
+        $(window).load(function(){
+          $('.content-loading').hide();
+          $('.presenters-readmore-content').fadeIn(1000);
+          $('.readmore-toggle').fadeIn(1000);
+          $('.readmore-toggle').css('display', 'block');
+        });
+      }
+      // get content full height
+      let fullHeight = $(this).show().height();
+      // re-set content height
+      $(this).hide();
+      // apply readmore with height conditions
+      if (fullHeight> minHeight + 100 ){
+        // set min height
+        $(this).css('height', minHeight);
+        $(this).addClass('minimized');
+
+        // construct wrapper and toggle
+        $(this).wrap('<div class="readmore-container"></div>');
+        $(this).after('<a class="readmore-toggle">Read more</a>');
+
+        presenters_show_content();
+      } else {
+        presenters_show_content();
+      }
+
+
+      // READMORE BUTTON FOR PD DESCRIPTION - toogle behaviour on click
+      $(document).on('click', '.left-side-content .presenters-bio .readmore-toggle', function(){
+        if ( $(this).text() == 'Read more' ) { // expanding
+          // get full height
+          fullHeight = $(this).parent().find('.presenters-readmore-content').css('height', 'auto').height();
+          // re-set min height
+          $(this).parent().find('.presenters-readmore-content').css('height', minHeight);
+
+          //set full height
+          $(this).parent().find('.presenters-readmore-content').animate({height: fullHeight}, 800);
+          $(this).parent().find('.presenters-readmore-content').removeClass('minimized');
+          $(this).text('Read less');
+        }
+        else{ //minimizing
+            // auto scroll back to top
+            var window_width = $(window).width();
+            if (window_width >= 993){
+              $('html, body').stop().animate({
+                scrollTop: $('#presenters-bio').offset().top - $('#section-header').height()
+              });
+            }
+            else{
+              $('html, body').stop().animate({ scrollTop: $('#presenters-bio').offset().top - 25 }, 1000);
+            }
+          // set min height
+          $(this).parent().find('.presenters-readmore-content').animate({height: minHeight}, 800);
+          $(this).parent().find('.presenters-readmore-content').addClass('minimized');
+          $(this).text('Read more');
+        }
+      });
+    });
+    
     //SET BACKGROUND FOR EACH MEDIA ARTICLE CONTENT SIDEBAR
     const setImgBckgr = () => {
       var someId = $(".node-inmotion .file-image .content, .node-home-news-tiles .file-image .content");
@@ -1862,23 +2029,26 @@ jQuery(document).ready(function(){
         return "";
       });
       // Set cookie
-      const setCookie = ( (cname, cvalue) => {
-        //let d = new Date();
-        //d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        //let expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue;
-        //document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      const setCookie = ( (cname, cvalue, exdays) => {
+        let d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        //document.cookie = cname + "=" + cvalue;
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
       });
 
       // Set cookie
-      //setCookie('add_help_bar_disable', 'false');
+      //setCookie('add_help_bar_disable', 'false', '1');
 
       // set conditions for help_bar
+      // disable for renew/join and if disable is true
       if ( path == "renewmymembership" || path == "jointheapa" || getCookie("add_help_bar_disable") == "true" ){
-        setCookie('add_help_bar_disable', 'true');
+        setCookie('add_help_bar_disable', 'true', '1');
         return;
       } else {
+        // append element
         element.insertAdjacentHTML('beforeend', `<div id="users_help_bar" class="minimized"><span class="close"></span><div class="modal_header"><span>Need help?</span></div><div class="modal_content"></div></div>`);
+        // get content from a file
         $.ajax({
           url : "/sites/default/files/test/test.txt",
           dataType: "text",
@@ -1888,9 +2058,11 @@ jQuery(document).ready(function(){
         });
       }
 
+      // hide/show modal
       $(document).on('click', '#users_help_bar .modal_header', function(){
         $(this).parent().toggleClass('minimized');
       });
+      // disable modal
       $(document).on('click', '#users_help_bar .close', function(){
         $(this).parent().addClass('modal_disabled');
       });

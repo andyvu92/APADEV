@@ -93,7 +93,7 @@
 		   <ul>
           <li><?php print render($content['field_research_article_category']);?></li>
 		 <?php if(!is_null(render($content['field_research_issue']))): ?> <?php echo "<li>";?><?php print render($content['field_research_issue']);?> <?php echo "</li>";?> <?php endif?>
-		  <li><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></li>
+		  <li><?php //print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></li>
 		   </ul>
 		   <h2><a href="<?php print $node_url; ?>">
 		   <?php print $title; ?></a></h2>

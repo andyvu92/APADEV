@@ -2900,3 +2900,89 @@ input[name="Couponcode"]{
         }
     }
 }
+
+/* PD READMORE */
+.node-pd-detail{
+    .pd-description-container{
+        display: none;
+        p, ul, span, ol{
+            p, span, ul, ol{
+                font-size: 1em!important;
+                line-height: 1.2em!important;
+            }
+        }
+    }
+    .pd-description-container, .presenters-bio{
+        .presenters-readmore-content{
+            display: none;
+            font-size: 1.2em;
+        }
+        .readmore-container{
+            p, ul, span, ol{
+                p, span, ul, ol{
+                    font-size: 1em!important;
+                    line-height: 1.2em!important;
+                }
+            }
+            .pd-readmore-content, .presenters-readmore-content{
+                overflow: hidden;
+                position: relative;
+                &:after{
+                    content: '';
+                    position: absolute;
+                    left: 0;
+                    bottom: 0;
+                    width: 100%;
+                    height: 0;
+                    background-image: linear-gradient(to top,#fff 0%,
+                                        rgba(255,255,255,0.95) 40%,
+                                        rgba(255,255,255,0.9) 50%,
+                                        rgba(255,255,255,0) 85%);
+                    transition: all .5s linear;
+                }
+                &.minimized{
+                    &:after{
+                        height: 100px;
+                    }
+                    & + .readmore-toggle{
+                        &:before{
+                            transform: rotate(-45deg);
+                        }
+                        &:after{
+                            transform: rotate(45deg);
+                        }
+                    }
+                }
+            }
+            .readmore-toggle{
+                display: none;
+                width: 125px;
+                padding: 10px 10px 10px 0;
+                font-size: 1em;
+                font-weight: 500;
+                text-align: left;
+                color: #009fda;
+                position: relative;
+                margin-top: 20px;
+                &:after, &:before{
+                    content: '';
+                    position: absolute;
+                    width: 10px;
+                    height: 2px;
+                    top: calc(~'50% - 1px');
+                    background: @bright-blue;
+                    transition: all .5s linear;
+                }
+                &:before{
+                    right: 18px;
+                    transform: rotate(45deg);
+                }
+                &:after{
+                    right: 25px;
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+    }
+}
+    

@@ -520,28 +520,20 @@ $userRetisterStatus = false;
 		</div>
 
 		<div class="section description">
-			<div class="pd-description-mobile">
-				<div class="pd-description readmore-content">
-					<?php 
-						if (!empty($pd_detail['Description'])){
-							echo '<div class="short-text">'.$pd_detail['Description'].'</div><a class="readmore">Read more</a>';
-						}
-						else{
-							echo "<h4>No record found!</h4>";
-						}
-					?>
-				</div>
-			</div>
-
-			<div class="pd-description-nonmobile">
-				<div class="pd-description readmore-content">
+			<div class="content-loading">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+			<div class="pd-description-container">
+				<div class="pd-description pd-readmore-content">
 					<?php 
 					if (!empty($pd_detail['Description'])){
 						if($pd_detail['Typeofpd'] == "Lecture") {
-							echo '<div class="short-text">'.$pd_detail['Description'].'</div><a class="readmore pd-backtotop">Read more</a>';
+							echo $pd_detail['Description'];
 						}
 						else{
-							echo '<div class="short-text">'.$pd_detail['Description'].'</div><a class="readmore pd-backtotop">Read more</a>';
+							echo $pd_detail['Description'];
 						}	
 					} else{
 						echo "<h4>No record found!</h4>";
@@ -608,7 +600,7 @@ $userRetisterStatus = false;
 		<?php endif; ?>
 
 		<?php if(!empty($pd_detail['Presenter'])): ?>
-			<div class="section flex-cell" style="flex-wrap: unset">
+			<div class="section flex-cell" id="presenters-bio" style="flex-wrap: unset">
 				<div class="left-icon">
 					<span class="presenters-bio-icon large-icon"></span>
 				</div>
@@ -617,7 +609,12 @@ $userRetisterStatus = false;
 						<?php 
 						foreach($pd_detail['Presenter'] as $bios) {
 							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
-							echo '<div class="readmore-content"><div class="short-text">'.$bios['Comments'].'</div><a class="readmore">Read more</a></div>';
+							echo '<div class="content-loading">
+									<div class="line"></div>
+									<div class="line"></div>
+									<div class="line"></div>
+								</div>'	;
+							echo '<div class="presenters-readmore-content">'.$bios['Comments'].'</div>';
 						}
 						?>
 
