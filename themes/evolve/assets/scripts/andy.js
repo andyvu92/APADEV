@@ -2006,6 +2006,20 @@ jQuery(document).ready(function(){
   }
   //add_help_bar();
 
+  // ADD HIDDEN HEADING FOR RESPONSIVE TABLE
+  const responsive_heading_table = () => {
+    for (x = 1; x <= 12; x++) {
+      $('.table_wrapper .table_header .table_col_' + x).each(function(){
+        let title = $('span', this).text();
+        $(this).parent().parent().find('.table_row').each(function(){
+          if ( !$(this).hasClass('table_header') ){
+            $('.table_col_' + x, this).prepend('<span class="title">'+ title +'</span>');
+          }
+        });
+      });
+    }
+  }
+  responsive_heading_table();
 });
 
 
