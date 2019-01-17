@@ -271,7 +271,7 @@ if(isset($_POST['step2-1'])) {
 		<?php if(isset($_SESSION["postReviewData"])) { $PRFTemp = $_SESSION["postReviewData"]['PRFdonation'];}?>
 		<div class="row">
 			<div class="col-xs-12"><label>PRF donation</label></div>
-				<div class="col-xs-12 tooltip-container top" style="margin-top: 10px;">
+				<div class="col-xs-12 tooltip-container top">
 					<span class="tooltip-activate">What is this?</span>
 					<div class="tooltip-content">
 						The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot.

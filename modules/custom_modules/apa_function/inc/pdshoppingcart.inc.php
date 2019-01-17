@@ -537,8 +537,8 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	
 	<?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0) || (sizeof($FPListArray)!=0)):?>
 		<div class="row">
-			<div class="col-xs-12"><span class="sidebardis">PRF donation</span></div>
-				<div class="col-xs-12 tooltip-container top" style="margin-top: 10px;">
+			<div class="col-xs-12"><span class="sidebardis sidebar_heading">PRF donation</span></div>
+				<div class="col-xs-12 tooltip-container top">
 					<span class="tooltip-activate">What is this?</span>
 					<div class="tooltip-content">
 						The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot.
