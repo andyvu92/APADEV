@@ -851,7 +851,6 @@ jQuery(document).ready(function(){
         var maxChar_allow = $(this).attr('maxChar_allow');
         $(this).on('keypress keyup',function (event){
           var currentLength = $(this).val().length;
-          console.log(maxChar_allow, currentLength);
           if ( currentLength >= maxChar_allow ){
             event.preventDefault();
           }
@@ -1432,27 +1431,7 @@ jQuery(document).ready(function(){
       });
     }
     custom_font_style();
-    /*
-    $('.inmotion').find('h2, h3, h4, h5, h6, p, ul, ol').each(function(){
-      if (  $(this).text() != 'H2 Title style' && $(this).text() != 'H3 Title style' && $(this).text() != 'H4 Title style' && $(this).text() != 'H5 Title style' && $(this).text() != 'P tag style' && $(this).text() != 'UL list style' && $(this).text() != 'OL list style' && $(this).text() != 'Intro style' ) {
-        if ( $(this).is('h2') ) {
-          $(this).text('This is h2 tag');
-        }
-        else if ( $(this).is('h3') ) {
-          $(this).text('This is h3 tag');
-        }
-        else if ( $(this).is('h4') ) {
-          $(this).text('This is h4 tag');
-        }
-        else if ( $(this).is('h5') ) {
-          $(this).text('This is h5 tag');
-        }
-        else{
-          return;
-        }
-      }
-    });
-    */
+
     /* ----------------------------------------------------------------
             END CUSTOM FONT STYLE WITH SPECIFIC CLASSES ADDED
     -----------------------------------------------------------------*/
@@ -1463,16 +1442,27 @@ jQuery(document).ready(function(){
       }
 
       // define min height
-      var minHeight = 500;
-
-      // set min height
-      $(this).css('height', minHeight);
-      $(this).addClass('minimized');
-
-      // construct wrapper and toggle
-      $(this).wrap('<div class="readmore-container"></div>');
-      $(this).after('<a class="readmore-toggle">Read more</a>');
-
+      let minHeight = 190;
+      // get window width
+      let window_width = $(window).width() + 10;
+ 
+      // re-define min-height based on window width
+      if (window_width >= 1200){
+        minHeight = 190;
+      }
+      else if (window_width < 1200 && window_width >= 993){
+        minHeight = 260;
+      } else if (window_width < 993 && window_width >= 769){
+        minHeight = 225;
+      } else if (window_width < 769 && window_width >= 571){
+        minHeight = 230;
+      } else if (window_width < 571 && window_width >= 481){
+        minHeight = 350;
+      } else {
+        minHeight = 410;
+      }
+ 
+      // hide loading & show content
       const inmotion_show_content = () => {
         $(window).load(function(){
           $('.content-loading').hide();
@@ -1480,9 +1470,26 @@ jQuery(document).ready(function(){
           $('.readmore-toggle').css('display', 'block');
         });
       }
-      inmotion_show_content();
+      // get content full height
+      let fullHeight = $(this).show().height();
+      // re-set content height
+      $(this).hide();
+      // apply readmore with height conditions
+      if (fullHeight > minHeight + 100 ){
+        // set min height
+        $(this).css('height', minHeight);
+        $(this).addClass('minimized');
+ 
+        // construct wrapper and toggle
+        $(this).wrap('<div class="readmore-container"></div>');
+        $(this).after('<a class="readmore-toggle">Read more</a>');
+ 
+        inmotion_show_content();
+      } else {
+        inmotion_show_content();
+      }
 
-        // READMORE BUTTON FOR INMOTION - toogle behaviour on click
+      // READMORE BUTTON FOR INMOTION - toogle behaviour on click
       $(document).on('click', '.inmotion-content .readmore-toggle', function(){
         if ( $(this).text() == 'Read more' ) { // expanding
           // get full height
@@ -1562,7 +1569,6 @@ jQuery(document).ready(function(){
       } else {
         pd_show_content();
       }
-
 
       // READMORE BUTTON FOR PD DESCRIPTION - toogle behaviour on click
       $(document).on('click', '.left-side-content .pd-description-container .readmore-toggle', function(){
@@ -1645,7 +1651,6 @@ jQuery(document).ready(function(){
       } else {
         presenters_show_content();
       }
-
 
       // READMORE BUTTON FOR PD DESCRIPTION - toogle behaviour on click
       $(document).on('click', '.left-side-content .presenters-bio .readmore-toggle', function(){
@@ -1937,73 +1942,6 @@ jQuery(document).ready(function(){
     autoMediaChevron();
     autoMinimizedArchive();
   });
-
-  /*
-  // TEST AJAX INMOTION
-  $(document).on('click', '.CampaignSidebar .views-row a', function(e){
-    e.preventDefault();
-    var target = $(this).attr('href');
-    $('.left-content').load(target + ' .left-content > *', function(){
-      setImgBckgr();
-      custom_font_style();
-
-      $.ajax({
-        type: "GET",
-        url: "//platform.twitter.com/widgets.js",
-        dataType: "script"
-      });
-      $.ajax({
-        type: "GET",
-        url: "//platform.linkedin.com/in.js",
-        dataType: "script"
-      });
-      $.ajax({
-        type: "GET",
-        url: "https://apis.google.com/js/platform.js",
-        dataType: "script"
-      });
-      $.ajax({
-        type: "GET",
-        url: "//connect.facebook.net/en_GB/sdk.js",
-        dataType: "script"
-      });
-
-
-      $('.inmotion-readmore-content').each(function(){
-        if ( $(this).find('.featured-caption').length == 1 ){
-          $('.region.left-content .post-img').append( $('.featured-caption') );
-        }
-  
-        // define min height
-        var minHeight = 500;
-  
-        // set min height
-        $(this).css('height', minHeight);
-        $(this).addClass('minimized');
-  
-        // construct wrapper and toggle
-        $(this).wrap('<div class="readmore-container"></div>');
-        $(this).after('<a class="readmore-toggle">Read more</a>');
-      });
-
-      $('.SectionHeader, header.meta, header.meta + .post-img.media').hide().fadeIn();
-
-      const recall_contentload = () => {
-        $('.content-loading').hide();
-        $('.inmotion-readmore-content, .readmore-toggle').fadeIn(1000);
-        $('.readmore-toggle').css('display', 'block');
-      }
-
-      window.setTimeout(recall_contentload, 1000);
-
-      return false;
-    });
-    $('.CampaignSidebar').load(target + ' .CampaignSidebar > *', function(){
-      setImgBckgr();
-      return false;
-    });
-  });
-  */
 
   // ADD HELP BAR FOR USERS
   const add_help_bar = () => {

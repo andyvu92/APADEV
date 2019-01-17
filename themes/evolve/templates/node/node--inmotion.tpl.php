@@ -130,7 +130,11 @@
                         <?php //if(!is_null(render($content['field_members_only']))): ?> <?php //echo "<li><strong>";?>
                         <?php //print render($content['field_research_issue']);?><?php //echo "</strong></li>";?> <?php //endif?>
                         <div class="meta-author-date">
-                            <span class="meta-author">By <b><?php print render($content['field_inmotion_author']); ?></b></span>
+                            <?php
+                            if ( !empty($content['field_inmotion_author']) ){
+                                echo '<span class="meta-author">By <b>'. render($content['field_inmotion_author']) .'</b></span>';
+                            }
+                            ?>
                             <span class="meta-date"><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></span>
                         </div>
                     </div>
