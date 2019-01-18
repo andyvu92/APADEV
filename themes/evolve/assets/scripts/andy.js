@@ -1983,7 +1983,7 @@ jQuery(document).ready(function(){
         return;
       } else {
         // append element
-        element.insertAdjacentHTML('beforeend', `<div id="users_help_bar" class="minimized"><span class="close"></span><div class="modal_header"><span>Need help?</span></div><div class="modal_content"></div></div>`);
+        element.insertAdjacentHTML('beforeend', `<div id="users_help_bar" class="minimized modal_disabled"><span class="close"></span><div class="modal_header"><span>Need help?</span></div><div class="modal_content"></div></div>`);
         // get content from a file
         $.ajax({
           url : "/sites/default/files/test/test.txt",
@@ -1993,6 +1993,10 @@ jQuery(document).ready(function(){
           }
         });
       }
+
+      window.setTimeout(function(){
+        $('#users_help_bar').removeClass('modal_disabled');
+      }, 10000);
 
       // hide/show modal
       $(document).on('click', '#users_help_bar .modal_header', function(){
