@@ -832,4 +832,16 @@ function findPageUrl($nid){
 		
 	}
 }
+function checkSP($products){
+	foreach ($products as $key => $value) {
+		if($value=="10021"){ return true;}
+		
+	}
+}
+function checkITouch($products){
+	foreach ($products as $key => $value) {
+		if($value=="10015"){ return true;}
+		
+	}
+}
 ?>

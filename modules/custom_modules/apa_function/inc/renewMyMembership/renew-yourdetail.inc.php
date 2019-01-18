@@ -272,12 +272,17 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 		createShoppingCart($userID, $fellowshipProductID,$type="FP",$coupon="");
 	}else{ checkShoppingCart($userID, $type="FP",$productID="");}
 	//save magazine products on APA side
+	 //check the Sports MG , Intouch MG
+	 $sportTag = false;
+	 $inTouchTag = false;
+	 $sportTag = checkSP($products);
+	 $inTouchTag = checkITouch($products);
 	 /*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
-	if(isset($_POST['ngmusculo']) && $_POST['ngmusculo'] =="1"){ 
+	if(isset($_POST['ngmusculo']) && $_POST['ngmusculo'] =="1" && $inTouchTag){ 
 		checkShoppingCart($userID, $type="MG1",$productID="");
 		createShoppingCart($userID, "9978",$type="MG1",$coupon=""); 
 	}
-	if(isset($_POST['ngsports']) && $_POST['ngsports'] =="1" ) {
+	if(isset($_POST['ngsports']) && $_POST['ngsports'] =="1" && $sportTag) {
 		checkShoppingCart($userID, $type="MG2",$productID="");
 		createShoppingCart($userID, "9977",$type="MG2",$coupon=""); 
 		

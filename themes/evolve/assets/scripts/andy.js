@@ -470,14 +470,18 @@ jQuery(document).ready(function(){
 			$( "#ngsports" ).removeClass('display-none');
 		}
 		else{
-			$( "#ngsports" ).addClass('display-none');
+      $( "#ngsports" ).addClass('display-none');
+      $( "#ngsportsbox" ).val('0');
+			$("#ngsportsbox").attr('checked', false);
 		}
 		if(jQuery.inArray( "10015", $('select[id=Nationalgp]').val())!==-1)	
 		{
 			$( "#ngmusculo" ).removeClass('display-none');
 	    }
 		else{
-			$( "#ngmusculo" ).addClass('display-none');
+      $( "#ngmusculo" ).addClass('display-none');
+      $( "#ngmusculobox" ).val('0');
+			$("#ngmusculobox").attr('checked', false);
 		}
   });
 });
