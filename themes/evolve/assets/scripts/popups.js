@@ -14,6 +14,7 @@ jQuery(document).ready(function() {
         $('#'+ target).focus();
     });
 
+    //DISMISS POPUPS
     $('[popup-dismiss]').on('click', function (e) {
         e.preventDefault();
         
@@ -22,6 +23,7 @@ jQuery(document).ready(function() {
         $('#'+ target).fadeOut();
     });
 
+    //CLOSE BUTTON FOR POPUP
     $('.close-popup').on('click', function (e) {
         $('.overlay').fadeOut();
         $(this).parent().fadeOut();

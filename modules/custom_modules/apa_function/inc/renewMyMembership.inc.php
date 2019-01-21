@@ -534,7 +534,7 @@ You have the right to access the personal information about yourself held by the
 			<div class="item">
 				<div class="item-body current-member">
 					<span class="item-title">Current APA member</span>
-					<span class="item-description">If you are a current APA member, please click below to renew your membership for 2019.</span>
+					<span class="item-description">If you were an APA member in 2018, please renew your membership for 2019 below.</span>
 					<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#" id="renewItem">Renew</a>
 				</div>
 			</div>
