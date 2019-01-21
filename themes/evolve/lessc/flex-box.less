@@ -95,6 +95,35 @@
 	}
 }
 
+.flex-container{
+	.flex-cell{
+		&.large-tablet-down-collapse{
+			@media @larger-tablet-width-down{
+				flex-direction: column;
+				div[class*="flex-col"]{
+					width: 100%;
+				}
+			}
+		}
+		&.tablet-down-collapse{
+			@media @tablet-width-down{
+				flex-direction: column;
+				div[class*="flex-col"]{
+					width: 100%;
+				}
+			}
+		}
+		&.mobile-down-collapse{
+			@media @larger-phone-width-down{
+				flex-direction: column;
+				div[class*="flex-col"]{
+					width: 100%;
+				}
+			}
+		}
+	}
+}
+
 .flex-cell{
 	width: 100%;
 	display: flex;
