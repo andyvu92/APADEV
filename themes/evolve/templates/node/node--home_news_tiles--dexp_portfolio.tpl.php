@@ -22,10 +22,12 @@
             }
         }
         ?>
-        	<span class="link-block"><?php if(is_null(render($content['field_url_for_page']))): ?>
+        	<span class="link-block"><?php if(is_null(render($content['field_url_for_page'])) && is_null(render($content['field_external_url_for_page']))): ?>
                 <a href="<?php print $node_url; ?>">
-                <?php else: ?>
+                <?php elseif(!is_null(render($content['field_url_for_page']))): ?>
                 <a href="<?php echo $content['field_url_for_page']['#items'][0]['value']; ?>">
+                <?php elseif(!is_null(render($content['field_external_url_for_page']))): ?>
+                <a href="<?php echo $content['field_external_url_for_page']['#items'][0]['value']; ?>" target="_blank">
                 <?php endif; ?></a></span>
             
         <div class="portfolio-image">
@@ -50,10 +52,12 @@
 				<div class="lineBreak"></div>
 			</div>
 			<h5>
-			<?php if(is_null(render($content['field_url_for_page']))): ?>
+			<?php if(is_null(render($content['field_url_for_page'])) && is_null(render($content['field_external_url_for_page']))): ?>
             <a href="<?php print $node_url; ?>">
-			<?php else: ?>
+			<?php elseif(!is_null(render($content['field_url_for_page']))): ?>
 			<a href="<?php echo $content['field_url_for_page']['#items'][0]['value']; ?>">
+            <?php elseif(!is_null(render($content['field_external_url_for_page']))): ?>
+            <a href="<?php echo $content['field_external_url_for_page']['#items'][0]['value']; ?>" target="_blank">
 			<?php endif; ?>
 			<?php print $title; ?>
 			</a></h5>
