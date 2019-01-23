@@ -4411,7 +4411,7 @@ END ADJUSTMENT FOR CLUMSY FIREFOX
 */
 
 .readmore-container{
-    .readmore-content{
+    .readmore-content, .a_readmore{
         overflow: hidden;
         position: relative;
         &:after{
@@ -4470,6 +4470,69 @@ END ADJUSTMENT FOR CLUMSY FIREFOX
         }
     }
 }
+
+// GENERAL READMORE
+.a_readmore_container{
+    .a_readmore{
+        overflow: hidden;
+        position: relative;
+        &:after{
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            height: 0;
+            background-image: linear-gradient(to top,#fff 0%,
+                                rgba(255,255,255,0.95) 40%,
+                                rgba(255,255,255,0.9) 50%,
+                                rgba(255,255,255,0) 85%);
+            transition: all .5s linear;
+        }
+        &.minimized{
+            &:after{
+                height: 100px;
+            }
+            & + .a_readmore_toggle{
+                &:before{
+                    transform: rotate(45deg);
+                }
+                &:after{
+                    transform: rotate(-45deg);
+                }
+            }
+        }
+    }
+    .a_readmore_toggle{
+        display: block;
+        width: max-content;
+        padding: 10px 10px 10px 0;
+        font-size: 1.2em;
+        font-weight: 500;
+        text-align: left;
+        color: #009fda;
+        position: relative;
+        margin-top: 20px;
+        &:after, &:before{
+            content: '';
+            position: absolute;
+            width: 10px;
+            height: 2px;
+            top: calc(~'50% - 1px');
+            background: @bright-blue;
+            transition: all .5s linear;
+        }
+        &:before{
+            right: -12px;
+            transform: rotate(-45deg);
+        }
+        &:after{
+            right: -19px;
+            transform: rotate(45deg);
+        }
+    }
+}
+
 
 .dashboard-left-nav{
     .navbar-collapse{
@@ -5119,6 +5182,32 @@ body{
         }
         .table_col_12{
             width: 100%;
+        }
+    }
+}
+
+.password_field{
+    display: flex;
+    flex-direction: row;
+    input{
+        background: none;
+        border-right: 0!important;
+    }
+    .show_password{
+        background: none;
+        border: 1px solid rgba(0,0,0,0.12);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 48px;
+        cursor: pointer;
+        i{
+            color: #5b5a58;
+        }
+        &.active{
+            i{
+                color: @bright-blue;
+            }
         }
     }
 }

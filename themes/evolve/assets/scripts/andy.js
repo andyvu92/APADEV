@@ -1502,7 +1502,9 @@ jQuery(document).ready(function(){
           $(this).parent().find('.inmotion-readmore-content').css('height', minHeight);
 
           //set full height
-          $(this).parent().find('.inmotion-readmore-content').animate({height: fullHeight}, 800);
+          $(this).parent().find('.inmotion-readmore-content').animate({height: fullHeight}, 800, function(){
+            $(this).css('height', 'auto');
+          });
           $(this).parent().find('.inmotion-readmore-content').removeClass('minimized');
           $(this).text('Read less');
         }
@@ -1583,7 +1585,9 @@ jQuery(document).ready(function(){
           $(this).parent().find('.pd-readmore-content').css('height', minHeight);
 
           //set full height
-          $(this).parent().find('.pd-readmore-content').animate({height: fullHeight}, 800);
+          $(this).parent().find('.pd-readmore-content').animate({height: fullHeight}, 800, function(){
+            $(this).css('height', 'auto');
+          });
           $(this).parent().find('.pd-readmore-content').removeClass('minimized');
           $(this).text('Read less');
         }
@@ -1688,6 +1692,98 @@ jQuery(document).ready(function(){
       });
     });
     
+  // GENERAL READMORE
+  $('.a_readmore').each(function(){
+    let minHeight = $(this).data('height');
+    let readmore_text = $(this).attr('showmore-text');
+    let readless_text = $(this).attr('showless-text');
+
+    // define default value for attributes
+    if (minHeight == undefined || minHeight == null){
+      minHeight = 200;
+    }
+    if (readmore_text == undefined || readmore_text == null){
+      readmore_text = 'Read more';
+    }
+    if (readless_text == undefined || readless_text == null){
+      readless_text = 'Read less';
+    }
+
+    // get window width
+    let window_width = $(window).width() + 10;
+
+    // re-define min-height based on window width
+    if (window_width >= 1200){
+      minHeight = minHeight;
+    } else if ( window_width < 1200 && window_width >= 993 ){
+      minHeight = minHeight + 70;
+    } else if ( window_width < 993 && window_width >= 769 ){
+      minHeight = minHeight + 35;
+    } else if ( window_width < 769 && window_width >= 571 ){
+      minHeight = minHeight + 40;
+    } else if ( window_width < 571 && window_width >= 481 ){
+      minHeight = minHeight + 160;
+    } else {
+      minHeight = minHeight + 220;
+    }
+
+    // get content full height
+    let fullHeight = $(this).height();
+
+    // apply readmore with height conditions
+
+    if ( fullHeight > minHeight + 100 ){
+      // set min height
+      $(this).css('height', minHeight);
+      $(this).addClass('minimized');
+      // construct wrapper and toggle
+      $(this).wrap('<div class="a_readmore_container"></div>');
+      $(this).after('<a class="a_readmore_toggle">'+ readmore_text +'</a>');
+    } else {
+      return;
+    }
+  });
+
+  // GENERAL READMORE TOGGLE
+  $(document).on('click', '.a_readmore_toggle', function(){
+    let minHeight = $(this).parent().find('.a_readmore').data('height');
+    let readmore_text = $(this).parent().find('.a_readmore').attr('showmore-text');
+    let readless_text = $(this).parent().find('.a_readmore').attr('showless-text');
+
+    // define default value for attributes
+    if (minHeight == undefined || minHeight == null){
+      minHeight = 200;
+    }
+    if (readmore_text == undefined || readmore_text == null){
+      readmore_text = 'Read more';
+    }
+    if (readless_text == undefined || readless_text == null){
+      readless_text = 'Read less';
+    }
+
+    if ( $(this).text() == readmore_text ) { // expanding
+      // get full height
+      fullHeight = $(this).parent().find('.a_readmore').css('height', 'auto').height();
+      // re-set min height
+      $(this).parent().find('.a_readmore').css('height', minHeight);
+
+      //set full height
+      $(this).parent().find('.a_readmore').animate({height: fullHeight}, 800, function(){
+        $(this).css('height', 'auto');
+      });
+      $(this).parent().find('.a_readmore').removeClass('minimized');
+      $(this).text(readless_text);
+      //$(this).parent().find('.a_readmore').finish();
+    }
+    else if ($(this).text() == readless_text){ //minimizing
+      // set min height
+      $(this).parent().find('.a_readmore').animate({height: minHeight}, 800);
+      $(this).parent().find('.a_readmore').addClass('minimized');
+      $(this).text(readmore_text);
+      //$(this).parent().find('.a_readmore').finish();
+    }
+  });
+
     //SET BACKGROUND FOR EACH MEDIA ARTICLE CONTENT SIDEBAR
     const setImgBckgr = () => {
       var someId = $(".node-inmotion .file-image .content, .node-home-news-tiles .file-image .content");
@@ -1779,101 +1875,6 @@ jQuery(document).ready(function(){
       sessionStorage.setItem('recognition', 'Subscriptions');
     }
   })
-
-  /*
-  // AJAX DASHBOARD PAGE LOAD
-  $(document).on('click', '.dashboard-left-nav .navbar-nav li a, a[href="/changepassword"]', function(){
-    // stop ajax load if clicked on current menu option
-    if( $(this).parent().is('.active') && (sessionStorage.getItem('recognition') != 'Change password') ){
-      return false;
-    }
-
-    var target = $(this).attr('href');
-    if ( (target == 'dashboard' || target == 'your-details') && ($('#section-content-top').find('#cpd').length == 0) ){
-      //load page
-    } else if ( target == 'your-details'){
-      //load page
-    }
-    else if ( target != '/renewmymembership' ){
-      // RENAME PAGE TITLE AND HREF
-      if( target == 'dashboard' ){
-        currentPage = sessionStorage.getItem('recognition');
-        var currentTitle = document.title.replace(currentPage, 'DASHBOARD');
-        document.title = currentTitle;
-        sessionStorage.setItem('recognition', 'DASHBOARD');
-        history.pushState(null, '', '/dashboard');
-      }
-      else if( target == 'your-details' ){
-        currentPage = sessionStorage.getItem('recognition');
-        var currentTitle = document.title.replace(currentPage, 'Your details');
-        document.title = currentTitle;
-        sessionStorage.setItem('recognition', 'Your details');
-        history.pushState(null, '', '/your-details');
-      }
-      else if( target == 'your-purchases' ){
-        currentPage = sessionStorage.getItem('recognition');
-        var currentTitle = document.title.replace(currentPage, 'Your Purchases');
-        document.title = currentTitle;
-        sessionStorage.setItem('recognition', 'Your Purchases');
-        history.pushState(null, '', '/your-purchases');
-      }
-      else if( target == 'subscriptions' ){
-        currentPage = sessionStorage.getItem('recognition');
-        var currentTitle = document.title.replace(currentPage, 'Subscriptions');
-        document.title = currentTitle;
-        sessionStorage.setItem('recognition', 'Subscriptions');
-        history.pushState(null, '', '/subscriptions');
-      }
-      else if( target == '/changepassword' ){
-        sessionStorage.setItem('recognition', 'Change password');
-      }
-
-      // OTHER LOGICS
-      $('html, body').stop().animate({ scrollTop: 0 }, 1000);
-      $(this).parent().siblings().removeClass('active');
-      $(this).parent().addClass('active');
-      $('#dashboard-right-content').html('');
-      if ( $('#section-content-top').find('.overlay').length == 0 ){
-        $('#dashboard-right-content').after('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
-      }
-      $('#dashboard-right-content').append('<div class="dashboard_ajax_overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
-      $('#dashboard-right-content .overlay').hide().fadeIn();
-      $('#dashboard-right-content').load(target + '#dashboard-right-content .dashboard_detail', function(){ 
-        if ( $(this).find('#donutchart').length > 0 ){
-          google.charts.setOnLoadCallback(drawChart);
-        }
-
-        $('select[multiple=""]').selectize({
-          plugins: ['remove_button'],
-          delimiter: ',',
-          persist: false,
-          onItemAdd: function() {
-            this.blur();
-          },
-          create: function(input) {
-              return {
-                  value: input,
-                  text: input
-              }
-          }
-        });
-        checkTextCondition();
-        autoAccountMenu();
-        $('#dashboard-right-content').append('<div class="dashboard_ajax_overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
-        $('#dashboard-right-content .dashboard_ajax_overlay').fadeOut('1000');
-      });
-      $(document).on('click', 'a[class^="event"]', function(){
-        var target = $(this).attr('class').replace('event', '');
-        $(this).parent().siblings().find('a span').removeClass('text-underline');
-        $('span', this).addClass('text-underline');
-        $('div[class^="down"]').hide();
-        $('.down' + target).fadeIn();
-      });
-  
-      return false;
-    }
-  });
-*/
   
   // ADD ELEMENT TO HIDE DASHBOARD MENU ON SWIPE DOWN FOR MOBILE
   window_width = $(window).width();
@@ -1939,12 +1940,6 @@ jQuery(document).ready(function(){
   // CLEAR ALL PASSWORD ON INPUT CLICK/FOCUS
   $(document).one('click focus', 'input[type="password"]', function(){
     $(this).val('');
-  });
-
-  // trigger function on window resizing - ALWAYS PLACED IN THE BOTTOM
-  $(window).on('resize', function(){
-    autoMediaChevron();
-    autoMinimizedArchive();
   });
 
   // ADD HELP BAR FOR USERS
@@ -2028,6 +2023,24 @@ jQuery(document).ready(function(){
     }
   }
   responsive_heading_table();
+
+  $(document).on('click', '.show_password', function(){
+    let target_input = $(this).parent().find('input');
+    if ( $(this).is('.active') ){
+      $(this).removeClass('active');
+      $(target_input).attr('type', 'password');
+    } else {
+      $(this).addClass('active');
+      $(target_input).attr('type', 'text');
+    }
+  });
+
+  // trigger function on window resizing - ALWAYS PLACED IN THE BOTTOM
+  $(window).on('resize', function(){
+    autoMediaChevron();
+    autoMinimizedArchive();
+  });
+
 });
 
 

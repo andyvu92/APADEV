@@ -56,8 +56,11 @@ if(isset($_SESSION["Log-in"])) : ?>
 			  <div class="row">
 				 <div class="col-lg-6">
 				 	<label>New password</label>
-					<input type="password" class="form-control" placeholder="New password" id="New_password" name="New_password">
-				 </div>
+					<div class="password_field">
+						<input type="password" class="form-control" placeholder="New password" id="New_password" name="New_password">
+						<span class="show_password"><i class="fa fa-eye">&nbsp;</i></span>
+					</div>
+				</div>
 			  </div>
 			  <div class="row">
 				 <div class="col-lg-6">
@@ -176,8 +179,11 @@ if(isset($_SESSION["Log-in"])) : ?>
 			  <div class="row">
 				 <div class="col-lg-6">
 				 	<label>New password</label>
-					<input type="password" class="form-control" placeholder="New password" id="New_password" name="New_password">
-				 </div>
+					<div class="password_field">
+						<input type="password" class="form-control" placeholder="New password" id="New_password" name="New_password">
+						<span class="show_password"><i class="fa fa-eye">&nbsp;</i></span>
+					</div> 
+				</div>
 			  </div>
 			  <div class="row">
 				 <div class="col-lg-6">
