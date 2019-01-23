@@ -92,7 +92,7 @@
 		<?php 
 			if($only == "Yes"):
 		?> 
-		<?php if(isset($_SESSION['UserId']) && $_SESSION['MemberTypeID']!="1" && strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate'])))>= strtotime(date("d-m-Y"))):?>
+		<?php if(isset($_SESSION['UserId']) && $_SESSION['MemberTypeID']!="1" && strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate'])))>= strtotime(date("d-m-Y",strtotime('-1 month')))):?>
 			<span class="close-popup"></span>
 			<div class="modal-header">
 			</div>
