@@ -1,0 +1,7 @@
+name = APA Member Module
+description = APA Member Functions.
+package = APA
+core = 7.x
+
+files[] = apa_member.admin.inc
+files[] = apa_member.module

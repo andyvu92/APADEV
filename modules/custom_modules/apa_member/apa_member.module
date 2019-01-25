@@ -1,0 +1,30 @@
+<?php
+require __DIR__ . '/apa_member.admin.inc';
+/**
+ * Implements hook_menu().
+ */
+function apa_member_menu() {
+    // A path where all Global config lives.
+    $items['admin/config/system/apamember'] = array(
+      'title' => 'APA Member Configurations',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('apa_member_admin_settings'),
+      'type' => MENU_LOCAL_ACTION | MENU_NORMAL_ITEM,
+      'access arguments' => array('administer site configuration'),
+      'file' => 'apa_member.admin.inc',
+    );
+    return $items;
+  }
+/**
+ * check the member status.
+ */
+  function apa_member_check_status() {
+    $month = variable_get('member_expire_month_setting', MEMBER_EXPIRE_MONTH_DEFAULT);
+    if(isset($_SESSION['UserId']) && $_SESSION['MemberTypeID']!="1" && strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate'])))>= strtotime(date("d-m-Y",strtotime("-$month month")))){
+        return true;
+    }
+    else {
+        return false;
+    }
+   
+}
