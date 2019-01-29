@@ -5,7 +5,7 @@ if(!function_exists('drupal_session_started'))
 }
 ?>
 <?php if(isset($_SESSION['UserId'])):?>
-<?php  if($_SESSION['MemberTypeID']!="1"): ?>
+<?php  if($_SESSION['MemberTypeID']!="1" && strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate'])))>= strtotime(date("d-m-Y",strtotime('-1 month')))): ?>
 <?php
 $choseProduct = array();
 if(isset($_GET["ProductID"])){
