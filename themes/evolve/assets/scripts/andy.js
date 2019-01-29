@@ -1446,24 +1446,24 @@ jQuery(document).ready(function(){
       }
 
       // define min height
-      let minHeight = 190;
+      let minHeight = 380;
       // get window width
       let window_width = $(window).width() + 10;
  
       // re-define min-height based on window width
       if (window_width >= 1200){
-        minHeight = 190;
+        minHeight = 380;
       }
       else if (window_width < 1200 && window_width >= 993){
-        minHeight = 260;
+        minHeight = minHeight + 70;
       } else if (window_width < 993 && window_width >= 769){
-        minHeight = 225;
+        minHeight = minHeight + 45;
       } else if (window_width < 769 && window_width >= 571){
-        minHeight = 230;
+        minHeight = minHeight + 40;
       } else if (window_width < 571 && window_width >= 481){
-        minHeight = 350;
+        minHeight = minHeight + 160;
       } else {
-        minHeight = 410;
+        minHeight = minHeight + 220;
       }
  
       // hide loading & show content
