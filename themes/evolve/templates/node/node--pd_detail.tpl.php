@@ -1821,46 +1821,47 @@ $userRetisterStatus = false;
 				$ClsDateFinal = date("d M Y",$Cls);
 				echo $ClsDateFinal; ?>
 			</span>
-
-			<span class="small-heading">Event status:</span>
-			<span>
-			<?php 
-				$Totalnumber = doubleval($pd_detail['Totalnumber']);
-				$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
-				$Now = strtotime(date('m/d/Y'));
-				$fullStatus = false;
-				$Div = $Totalnumber - $Enrollednumber;
-				if($userRetisterStatus) {
-					echo "Registered";  
-					$fullStatus = true;
-				} else {
-					if($Now > $Cls){
+			<?php if(!$IsExternal): ?>
+				<span class="small-heading">Event status:</span>
+				<span>
+				<?php 
+					$Totalnumber = doubleval($pd_detail['Totalnumber']);
+					$Enrollednumber = doubleval($pd_detail['Enrollednumber']);
+					$Now = strtotime(date('m/d/Y'));
+					$fullStatus = false;
+					$Div = $Totalnumber - $Enrollednumber;
+					if($userRetisterStatus) {
+						echo "Registered";  
+						$fullStatus = true;
+					} else {
+						if($Now > $Cls){
+							echo "Closed";  
+							$fullStatus = true;
+						} elseif($Div == 0){
+							echo "Full"; 
+							$fullStatus = true;
+						} elseif($Div <= 5){
+							echo "Almost Full"; 
+						} elseif($Div > 5){
+							echo "Open"; 
+						}
+					}
+					/* for 10% or less logic 
+					$Div = $Enrollednumber/$Totalnumber;
+					if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
 						echo "Closed";  
 						$fullStatus = true;
-					} elseif($Div == 0){
+					} elseif($Div>=0.9 && $Div<1){
+						echo "Almost Full"; 
+					} elseif(($Totalnumber-$Enrollednumber)==0){
 						echo "Full"; 
 						$fullStatus = true;
-					} elseif($Div <= 5){
-						echo "Almost Full"; 
-					} elseif($Div > 5){
+					} elseif($Div<0.9){
 						echo "Open"; 
-					}
-				}
-				/* for 10% or less logic 
-				$Div = $Enrollednumber/$Totalnumber;
-				if(strtotime($Now) > strtotime(str_replace("/","-",$pd_detail['Close_date']))){
-					echo "Closed";  
-					$fullStatus = true;
-				} elseif($Div>=0.9 && $Div<1){
-					echo "Almost Full"; 
-				} elseif(($Totalnumber-$Enrollednumber)==0){
-					echo "Full"; 
-					$fullStatus = true;
-				} elseif($Div<0.9){
-					echo "Open"; 
-				} */
-		 		?>
-			</span>
+					} */
+					?>
+				</span>
+			<?php endif; ?>
 
 			<span class="small-heading">CPD hours:</span>
 			<span>
@@ -1876,24 +1877,26 @@ $userRetisterStatus = false;
 
 			<span>
 				<?php 
-				if(isset($userId)&& ($userId!="0")){
-					if($userRetisterStatus) {
-						echo '<span class="small-heading">Your registration status:</span>';
-						echo "Registered";
-					} else {
-						echo '<span class="small-heading">Your registration status:</span>';
-						echo "Not registered";
-					}
-					/*
-					if(!in_array( $user->uid,$pd_detail['Users'])){
-						echo "Not registered";
-					}
-					else{
-						echo "Registered";
-					}
-					*/
-				} else{
+				if(!$IsExternal) {
+					if(isset($userId)&& ($userId!="0")){
+						if($userRetisterStatus) {
+							echo '<span class="small-heading">Your registration status:</span>';
+							echo "Registered";
+						} else {
+							echo '<span class="small-heading">Your registration status:</span>';
+							echo "Not registered";
+						}
+						/*
+						if(!in_array( $user->uid,$pd_detail['Users'])){
+							echo "Not registered";
+						}
+						else{
+							echo "Registered";
+						}
+						*/
+					} else{
 
+					}	
 				}
 				?>
 			</span>
@@ -1906,10 +1909,14 @@ $userRetisterStatus = false;
 				if(isset($userId)&& ($userId!="0")){
 				}
 				else{
-					echo '<div id="login-section">';
-					echo '<a id="login" href="#" data-target="#loginAT" data-toggle="modal">Login to register</a>';
-					echo "<span>Don't have an account?</span><span class='small-heading'><a id='signup' popup-target='signupWebUser' href='#'>Sign up now</a></span>";
-					echo '</div>';
+					if($IsExternal) {
+						echo '<span style="padding: 0;">Registration details for this event can be found in the description</span>';
+					} else {
+						echo '<div id="login-section">';
+						echo '<a id="login" href="#" data-target="#loginAT" data-toggle="modal">Login to register</a>';
+						echo "<span>Don't have an account?</span><span class='small-heading'><a id='signup' popup-target='signupWebUser' href='#'>Sign up now</a></span>";
+						echo '</div>';
+					}
 				}
 				?>
 			<?php 

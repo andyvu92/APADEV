@@ -358,14 +358,18 @@ if(isset($results['MResponse'])) {
 		$Totalnumber = doubleval($result['Totalnumber']);
 		$Enrollednumber = doubleval($result['Enrollednumber']);
 		$Div = $Totalnumber - $Enrollednumber;
-		if($result['AttendeeStatus'] == "Registered") {
-			echo '<i class="fa fa-lg registered" aria-hidden="true"></i><span>Registered</span>';
-		} elseif($Div == 0){
-			echo  "<i class='fa fa-lg course-full' aria-hidden='true'></i><span>Course full</span>";
-		} elseif($Div <= 5){
-			echo '<i class="fa fa-lg almost-full" aria-hidden="true"></i><span>Almost full</span>';
-		} elseif($Div >= 5){
-			echo '<i class="fa fa-lg open" aria-hidden="true"></i><span>Open</span>';
+		if($IsExternal) {
+			echo '<i class="fa fa-lg course-full" aria-hidden="true"></i><span>N/A</span>';
+		} else {
+			if($result['AttendeeStatus'] == "Registered") {
+				echo '<i class="fa fa-lg registered" aria-hidden="true"></i><span>Registered</span>';
+			} elseif($Div == 0){
+				echo  "<i class='fa fa-lg course-full' aria-hidden='true'></i><span>Course full</span>";
+			} elseif($Div <= 5){
+				echo '<i class="fa fa-lg almost-full" aria-hidden="true"></i><span>Almost full</span>';
+			} elseif($Div >= 5){
+				echo '<i class="fa fa-lg open" aria-hidden="true"></i><span>Open</span>';
+			}
 		}
 		echo	"</div>";
 		echo "</div>";
