@@ -1779,7 +1779,7 @@ if($('select[name="Mailing-Country"]').val()=="Australia"){
 		$('.loaders').css('visibility','visible').hide().fadeIn();
 	});
 
-	$(document).on('click', '.palceorder', function(){
+	$(document).on('click', '.placeorder', function(){
 		$('.overlay .edu-step-note').html("Your order is being processed <br>Please don't refresh this page or press the back button");
 		$('.overlay .edu-step-note').show();
 	});
