@@ -298,10 +298,19 @@ if(isset($results['MResponse'])) {
 	<?php
 	//var_dump($results);
 	foreach($results as $result){
+ 
+		$title = "";
+		$IsExternal = false;
+		if(substr($result['Title'], 0, 8) == "External") {
+			$title = substr($result['Title'], 8, 999);
+			$IsExternal = true;
+		} else {
+			$title = $result['Title'];
+		}
 
 		echo "<div class='flex-cell flex-flow-row'>";
 		echo	'<div class="flex-col-3">
-					<span class="title"><a href="pd-product?id='.$result['MeetingID'].'">'.$result['Title']."</a></span>
+					<span class="title"><a href="pd-product?id='.$result['MeetingID'].'">'.$title."</a></span>
 					<div class='excerpt'><p>".$result['Description'].'</p></div>
 					<span class="readmore"><a href="pd-product?id='.$result['MeetingID'].'"><span style="text-decoration:underline;">Tell me more</span></a></span>
 				</div>';

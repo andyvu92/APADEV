@@ -516,7 +516,17 @@ $userRetisterStatus = false;
 		<div id="saveShoppingCart" style="display:none;"><?php echo $saveShoppingCart; ?></div>
 
 		<div class="section mobile-no-padding">
-			<h1 class="light-lead-heading"><?php echo $pd_detail['Title'];?></h1>
+			<?php 
+			$title = "";
+			$IsExternal = false;
+			if(substr($pd_detail['Title'], 0, 8) == "External") {
+				$title = substr($pd_detail['Title'], 8, 999);
+				$IsExternal = true;
+			} else {
+				$title = $pd_detail['Title'];
+			}
+			?>
+			<h1 class="light-lead-heading"><?php echo $title;?></h1>
 		</div>
 
 		<div class="section description">
@@ -1906,26 +1916,30 @@ $userRetisterStatus = false;
 			if(isset($_SESSION["UserId"])){
 				//$userTag = checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList);
 				$userTag = checkPDUser($_SESSION['MemberTypeID']);
-				if($fullStatus) {
-					if($userRetisterStatus) {
-						echo '<span class="add-to-cart disable '.$pd_detail['Typeofpd'].'">Already registered</span>';
-					} else {
-						echo '<span class="add-to-cart disable '.$pd_detail['Typeofpd'].'">Registration closed</span>';
-					}
-				} elseif ($userTag =="0"){ // any logged in users
-					if(isset($pd_detail['Typeofpd']) && $pd_detail['Typeofpd'] == "Course") {
-						if($_SESSION['MemberTypeID'] =='31' || $_SESSION['MemberTypeID'] =='32') {
-							echo '<span class="add-to-cart student-disable '.$pd_detail['Typeofpd'].'" data-target="#student-limitation">Not available to students</span>';
-							// student message
+				if($IsExternal) {
+					echo '<span style="padding: 0;">Registration details for this event can be found in the description</span>';
+				} else {
+					if($fullStatus) {
+						if($userRetisterStatus) {
+							echo '<span class="add-to-cart disable '.$pd_detail['Typeofpd'].'">Already registered</span>';
+						} else {
+							echo '<span class="add-to-cart disable '.$pd_detail['Typeofpd'].'">Registration closed</span>';
+						}
+					} elseif ($userTag =="0"){ // any logged in users
+						if(isset($pd_detail['Typeofpd']) && $pd_detail['Typeofpd'] == "Course") {
+							if($_SESSION['MemberTypeID'] =='31' || $_SESSION['MemberTypeID'] =='32') {
+								echo '<span class="add-to-cart student-disable '.$pd_detail['Typeofpd'].'" data-target="#student-limitation">Not available to students</span>';
+								// student message
+							} else {
+								echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
+							}
 						} else {
 							echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
 						}
-					} else {
-						echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
-					}
-				} else { // Not-logged in
-					echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerNonMember" popup-target="registerMember-container"><span>Add to cart</span></a>';
-				} 
+					} else { // Not-logged in
+						echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerNonMember" popup-target="registerMember-container"><span>Add to cart</span></a>';
+					} 
+				}
 			}
 		   ?>
 		</div>
