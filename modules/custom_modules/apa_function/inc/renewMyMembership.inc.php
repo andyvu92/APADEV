@@ -3,6 +3,7 @@ if(!function_exists('drupal_session_started'))
 {
   die("Unauthorized Access");
 }
+unset($_SESSION['timeoutPopUp']);
 ?>
 <?php if(isset($_SESSION["UserId"])): ?>
 
@@ -21,11 +22,28 @@ if(!function_exists('drupal_session_started'))
 // Send - 
 // userID
 // Response -Renewal Quatation OrderID
-
+   
 	$variableData['id'] = $_SESSION["UserId"];
 	$Quatation = aptify_get_GetAptifyData("45", $variableData);
-	 if(sizeof($Quatation["results"])!=0){
-	    $tag = true;
+	// Put the unexpected scenario here to avoid getting the empty data or sever response is empty.
+    if(empty($Quatation)) {if(isset($_SESSION['reloadTag'])) { $_SESSION['reloadTag']++;} else{$_SESSION['reloadTag']=1;}}
+	$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
+	if(empty($Quatation)){
+		if($_SESSION['reloadTag'] == 4){
+			unset($_SESSION['reloadTag']);
+			$_SESSION['timeoutPopUp'] = 1;
+			//header("Location:".$link."/");
+			
+		}
+		else{
+			header("Location:".$link."/renewmymembership");
+		}
+		
+	}
+	//End unexpected scenario
+
+	if(!empty($Quatation) && sizeof($Quatation["results"])!=0){
+		
 		foreach ($Quatation["results"] as $quatationOrderArray){
 			$quatationOrderID =  $quatationOrderArray["ID"];
 		}
@@ -37,10 +55,25 @@ if(!function_exists('drupal_session_started'))
 // Invoice_ID
 // Response -Order details
 	$orderDetails = aptify_get_GetAptifyData("44", $quatationOrderID); 
-	
-	
+		// Put the unexpected scenario here to avoid getting the empty data or sever response is empty.
+		if(empty($orderDetails)) {if(isset($_SESSION['orderDetailsTag'])) { $_SESSION['orderDetailsTag']++; } else{$_SESSION['orderDetailsTag']=1;}}
+			if(empty($orderDetails)){
+			if($_SESSION['orderDetailsTag'] == 4){
+				unset($_SESSION['orderDetailsTag']);
+				$_SESSION['timeoutPopUp'] = 1;
+				//header("Location:".$link."/");
+				
+			}
+			else{
+				header("Location:".$link."/renewmymembership");
+			}
+			
+		}
+		//End unexpected scenario
+	    if(!empty($orderDetails)){ $tag = true; } else{ $tag = false;}	
 	}
-	else{$orderDetails = array();$tag = false; }
+	
+else{$orderDetails = array(); $tag = false; }
     //$paythrough = date_create_from_format('m/d/Y', $_SESSION['payThroughDate']);
     //echo $_SESSION['payThroughDate'];
 	//echo $paythrough;
@@ -72,7 +105,57 @@ $background = getBackgroundImage($userID);
 		display: none;
 	}
 </style>
+<!--Quotation order POP UP-->
+<div id="QuatationPopUp" style="display:none;" class="container">
+	<h3 style="color:black;">Renewing your APA membership is easy…</h3>
+	<p>If your membership category hasn’t changed, simply click continue to proceed with the following purchase:</p>
+	<p><?php if(sizeof($orderDetails)!=0): ?>
+	<?php 
+	if(!isset($_SESSION['QuatationTag'])){
+		foreach($orderDetails['Order'] as $orders){
+		foreach($orders['OrderLines'] as $order){
+//  put the code here to save the quatation order products into the database firstly.
+        
+		
+			
+			if($order['ProductCategory'] =="Memberships"){
+				//checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID=$order['ProductID']);
+				checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID="");
+				createShoppingCart($userID, $productID =$order['ProductID'],$type="membership",$coupon="");
+			}
+			if($order['ProductCategory'] =="Subscription"){
+				
+				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
+				createShoppingCart($userID, $productID =$order['ProductID'],$type="NG",$coupon="");
+			
+			}
+			if($order['ProductID'] =="9978"){
+				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
+				createShoppingCart($userID, $productID =$order['ProductID'],$type="MG1",$coupon="");
+			}
+			if($order['ProductID'] =="9977"){
+				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
+				createShoppingCart($userID, $productID =$order['ProductID'],$type="MG2",$coupon="");
+			}
+			if($order['ProductID'] =="9973"){
+				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
+				createShoppingCart($userID, $productID =$order['ProductID'],$type="FP",$coupon="");
+			}
+			$_SESSION['QuatationTag'] = "1";
+		
+		echo $order['ProductName']; echo "</br>";} 
+	}}?><?php endif;?></p>
+	
+	<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
 
+	<!--<p>If this isn’t quite right, and you’d like to change your member type, or add some National Groups to your membership, follow the link below:</p>-->
+	<a href="javascript:document.getElementById('renew-membertype-form2').submit();"  target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change member category or national group</span></a>
+
+	<!--<p>If you’ve changed address recently or would like to update any of your personal details, follow this link:</p>-->
+	<a href="renewmymembership" target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change your details</span></a>
+
+</div>
+<!--End Pop up--->
 <!-- PAGE CONTENT BEGIN -->
 <div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
 	<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?> autoscroll" id="dashboard-right-content">
@@ -361,55 +444,7 @@ You have the right to access the personal information about yourself held by the
 		<span class="edu-step-note"></span> 
 	</section>
 </div>
-<div id="QuatationPopUp" style="display:none;" class="container">
-	<h3 style="color:black;">Renewing your APA membership is easy…</h3>
-	<p>If your membership category hasn’t changed, simply click continue to proceed with the following purchase:</p>
-	<p><?php if(sizeof($orderDetails)!=0): ?>
-	<?php 
-	if(!isset($_SESSION['QuatationTag'])){
-		foreach($orderDetails['Order'] as $orders){
-		foreach($orders['OrderLines'] as $order){
-//  put the code here to save the quatation order products into the database firstly.
-        
-		
-			
-			if($order['ProductCategory'] =="Memberships"){
-				//checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID=$order['ProductID']);
-				checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID="");
-				createShoppingCart($userID, $productID =$order['ProductID'],$type="membership",$coupon="");
-			}
-			if($order['ProductCategory'] =="Subscription"){
-				
-				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
-				createShoppingCart($userID, $productID =$order['ProductID'],$type="NG",$coupon="");
-			
-			}
-			if($order['ProductID'] =="9978"){
-				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
-				createShoppingCart($userID, $productID =$order['ProductID'],$type="MG1",$coupon="");
-			}
-			if($order['ProductID'] =="9977"){
-				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
-				createShoppingCart($userID, $productID =$order['ProductID'],$type="MG2",$coupon="");
-			}
-			if($order['ProductID'] =="9973"){
-				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
-				createShoppingCart($userID, $productID =$order['ProductID'],$type="FP",$coupon="");
-			}
-			$_SESSION['QuatationTag'] = "1";
-		
-		echo $order['ProductName']; echo "</br>";} 
-	}}?><?php endif;?></p>
-	
-	<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
 
-	<!--<p>If this isn’t quite right, and you’d like to change your member type, or add some National Groups to your membership, follow the link below:</p>-->
-	<a href="javascript:document.getElementById('renew-membertype-form2').submit();"  target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change member category or national group</span></a>
-
-	<!--<p>If you’ve changed address recently or would like to update any of your personal details, follow this link:</p>-->
-	<a href="renewmymembership" target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change your details</span></a>
-
-</div>
 
 		<div id="deleteWorkplaceWindow" style="display:none;">
 			<form action="your-details" method="POST" id="deleteWorlplaceForm">
@@ -580,6 +615,17 @@ You have the right to access the personal information about yourself held by the
 	print drupal_render($the_form);			 
 ?>
 </div>
+<!---Handle the endpoint time out error start--->
+<div id="timeoutWindow" style="display:none;">
+	<div class="flex-cell">
+		<div id="time_msg">
+			<span class="light-lead-heading cairo">There was an unexpected server error. <br>Please contact the APA Member Hub on 1300 306 622 or try again later.</span>		
+		</div>
+	</div>
+</div>
+<a popup-target="timeoutWindow" id="triggerTimeout" syle="display:none;"></a>
+
+<!---Handle the endpoint time out error end--->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -605,6 +651,26 @@ $(document).ready(function() {
         window.history.pushState(null, "", window.location.href);        
         window.onpopstate = function() {
             window.history.pushState(null, "", window.location.href);
-        };
+		};
+	// handle the endpoint time out 
+	var timeoutTag ='<?php if(isset($_SESSION['timeoutPopUp']))  {echo $_SESSION['timeoutPopUp']; } else{ echo "";}?>';
+	if(timeoutTag == "1"){
+		// prevent element inspect
+		document.addEventListener('contextmenu', function(e) {
+			e.preventDefault();
+		});
+	   
+		// append overlay
+		if( $('body, html, .html').find('.overlay').length == 0 ){
+			$('body').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+		}
+		$('.overlay').fadeIn();
+		// fade in time out window
+		$("#timeoutWindow").fadeIn();
+		$("#QuatationPopUp").dialog('close');
+	}
+	else{
+		$("#timeoutWindow").hide();
+	}
  });
 </script>
