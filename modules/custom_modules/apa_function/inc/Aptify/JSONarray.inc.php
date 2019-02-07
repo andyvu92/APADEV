@@ -104,6 +104,7 @@ function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
 	$t = preg_replace("!\t!", " ", $t);
 	$t = preg_replace("/&nbsp;/", " ", $t);
 	$t = preg_replace("/#[a-f0-9]{6}/i", "black", $t);
+	$t = preg_replace("/’/", "'", $t);
 	$t = json_decode($t, $assoc);
 	return $t;
 }
