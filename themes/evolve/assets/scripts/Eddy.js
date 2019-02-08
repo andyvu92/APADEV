@@ -1,5 +1,5 @@
 jQuery(document).ready(function($) {
-	var originM = $(".pd-description-nonmobile").html();
+	var originM = $(".pd-description").html();
 	var t = '';
 	if(originM != null) {
 		var texts = originM.split('\n');
@@ -10,10 +10,10 @@ jQuery(document).ready(function($) {
 			//console.log('after: '+t);
 		}
 	}
-	$(".pd-description-nonmobile").html(t);
+	$(".pd-description").html(t);
 	
 	
-	var originN = $(".pd-description-nonmobile").html();
+	var originN = $(".pd-description").html();
 	var t = '';
 	if(originN != null) {
 		var texts = originN.split('\n');
@@ -24,7 +24,7 @@ jQuery(document).ready(function($) {
 			//console.log('after: '+t);
 		}
 	}
-	$(".pd-description-nonmobile").html(t);
+	$(".pd-description").html(t);
 	
 	/*
 	var originN = $("#pd-search-results .flex-flow-row .excerpt").html();
