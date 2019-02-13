@@ -1994,6 +1994,7 @@ $userRetisterStatus = false;
 				//$Cls = strtotime($closingDate[0]);
 				//$ClsDateFinal = date("d M Y",$Cls);
 				echo $ClsDateFinal; ?>
+				
 			</span>
 
 			<span class="small-heading">Event status:</span>
