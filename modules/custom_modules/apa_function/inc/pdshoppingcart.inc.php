@@ -250,8 +250,7 @@ if(isset($_SESSION["UserId"])){
 			$newj = str_replace('/', '-', $edate[0]);
 			$t = strtotime($newt);
 			$j = strtotime($newj);
-			//$t = strtotime($bdate[0]);
-			//$j = strtotime($edate[0]);
+		
 			echo	"<div class='flex-col-3 pd-spcart-date'><span class='start-date'>".date("d M Y",$t)."</span><span class='end-date'>".date("d M Y",$j)."</span></div>";
 			echo	"<div class='flex-col-2 pd-spcart-location'><span class='mobile-visible'>Location: </span>".$productt['City'].", ".$productt['State']."</div>";
 			// add by jinghu
