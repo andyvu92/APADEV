@@ -563,11 +563,6 @@ $userRetisterStatus = false;
 		<?php 
 			$bdate = explode(" ",$pd_detail['Sdate']);
 			$edate = explode(" ",$pd_detail['Edate']);
-			/*
-			echo $bdate[0]."//".$edate[0];
-			print_r($bdate);
-			print_r($edate);
-			*/
 			$dateOutput = "";
 			$timeOutput = "";
 			$bUdate = str_replace('/', '-', $bdate[0]);
@@ -577,7 +572,6 @@ $userRetisterStatus = false;
 			$q = strtotime($bdate[1]);
 			$r = strtotime($edate[1]);
 			$dateStart = date("d",$t);
-			//$timeOutput = date("h:i",$q)." - ".date("h:i",$r);
 			$timeOutput = date("h:i",$q).$bdate[2]." - ".date("h:i",$r).$edate[2];
 			if($bdate[0] == $edate[0]) {
 				if(date("F",$t) != date("F",$j)) {
