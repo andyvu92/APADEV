@@ -2011,7 +2011,7 @@ jQuery(document).ready(function(){
       });
      });
   }
-  add_help_bar();
+  //add_help_bar();
 
   // ADD HIDDEN HEADING FOR RESPONSIVE TABLE
   const responsive_heading_table = () => {
