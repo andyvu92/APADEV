@@ -23,7 +23,8 @@ function newSessionStats($MemberTypeID, $MemberType, $Status, $Speciality, $payT
 	$_SESSION['MemberType'] = $MemberType;
 	$_SESSION['Status'] = $Status;
 	$_SESSION['Speciality'] = $Speciality;
-	$_SESSION['payThroughDate'] = $payThroughDate;
+	$payThroughDateBefore = str_replace('/', '-', $payThroughDate);
+	$_SESSION['payThroughDate'] = $payThroughDateBefore;
 	$_SESSION['nationGP'] = $nationGP;
 }
 function nameUpdate($FirstName, $PrefName) {

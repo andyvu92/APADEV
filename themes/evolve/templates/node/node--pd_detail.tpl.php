@@ -209,7 +209,7 @@ $userRetisterStatus = false;
 	// Where:{Address1, Address2, Address3(if exist), Address4(if exist), City,
 	//	state, Postcode}, CPD hours, Cost, Your registration stats
 	$pd_detail = aptify_get_GetAptifyData("29", $pdArr);
-	//var_dump($pd_detail);
+
 	$pd_detail = $pd_detail['MeetingDetails'][0];
 	$prices = $pd_detail['Pricelist'];
 	$pricelistGet = Array();
@@ -387,79 +387,7 @@ $userRetisterStatus = false;
 			}
 			$postData['Dietary'] = $testDietaryArray;
 		}
-		/*
-		if(isset($_POST['wpnumber'])){ 
-		$num = $_POST['wpnumber']; 
-		$tempWork = array();
-		for($i=0; $i<$num; $i++){
-			$workplaceArray = array();
-			$workplaceArray['WorkplaceID'] = $_POST['WorkplaceID'.$i];
-			if(isset($_POST['Findabuddy'.$i])) { $workplaceArray['Find-a-buddy'] = $_POST['Findabuddy'.$i];}else{ $workplaceArray['Findabuddy'] = "False";}
-			if(isset($_POST['Findphysio'.$i])) { $workplaceArray['Findphysio'] = $_POST['Findphysio'.$i];}else{ $workplaceArray['Findphysio'] = "False";}
-			if(isset($_POST['Name-of-workplace'.$i])) { $workplaceArray['Name-of-workplace'] = $_POST['Name-of-workplace'.$i];}
-			if(isset($_POST['Workplace-setting'.$i])) { $workplaceArray['Workplace-settingID'] = $_POST['Workplace-setting'.$i];}
-			if(isset($_POST['WBuildingName'.$i])) { $workplaceArray['WBuildingName'] = $_POST['WBuildingName'.$i];}
-			if(isset($_POST['WAddress_Line_1'.$i])) { $workplaceArray['Address_Line_1'] = $_POST['WAddress_Line_1'.$i];}
-			if(isset($_POST['WAddress_Line_2'.$i])) { $workplaceArray['Address_Line_2'] = $_POST['WAddress_Line_2'.$i];}
-			if(isset($_POST['Wcity'.$i])) { $workplaceArray['Wcity'] = $_POST['Wcity'.$i];}
-			if(isset($_POST['Wpostcode'.$i])) { $workplaceArray['Wpostcode'] = $_POST['Wpostcode'.$i];}
-			if(isset($_POST['Wstate'.$i])) { $workplaceArray['Wstate'] = $_POST['Wstate'.$i];}
-			if(isset($_POST['Wcountry'.$i])) { $workplaceArray['Wcountry'] = $_POST['Wcountry'.$i];}
-			if(isset($_POST['Wemail'.$i])) { $workplaceArray['Wemail'] = $_POST['Wemail'.$i];}
-			if(isset($_POST['Wwebaddress'.$i])) { $workplaceArray['Wwebaddress'] = $_POST['Wwebaddress'.$i];}
-			if(isset($_POST['WPhoneCountryCode'.$i])) { $workplaceArray['WPhoneCountryCode'] = $_POST['WPhoneCountryCode'.$i];}
-			if(isset($_POST['WPhoneAreaCode'.$i])) { $workplaceArray['WPhoneAreaCode'] = $_POST['WPhoneAreaCode'.$i];}
-			if(isset($_POST['Wphone'.$i])) { $workplaceArray['WPhone'] = $_POST['Wphone'.$i];}
-			if(isset($_POST['WPhoneExtentions'.$i])) { $workplaceArray['WPhoneExtentions'] = $_POST['WPhoneExtentions'.$i];}
-			if(isset($_POST['Electronic-claiming'.$i])) { $workplaceArray['Electronic-claiming'] = $_POST['Electronic-claiming'.$i];}else {$workplaceArray['Electronic-claiming']="False";}
-			if(isset($_POST['Hicaps'.$i])) { $workplaceArray['Hicaps'] = $_POST['Hicaps'.$i];}else {$workplaceArray['Hicaps']="False";}
-			if(isset($_POST['Healthpoint'.$i])) { $workplaceArray['Healthpoint'] = $_POST['Healthpoint'.$i];}else {$workplaceArray['Healthpoint']="False";}
-			if(isset($_POST['Departmentva'.$i])) { $workplaceArray['Departmentva'] = $_POST['Departmentva'.$i];}else {$workplaceArray['Departmentva']="False";}
-			if(isset($_POST['Workerscompensation'.$i])) { $workplaceArray['Workerscompensation'] = $_POST['Workerscompensation'.$i];}else {$workplaceArray['Workerscompensation']="False";}
-			if(isset($_POST['Motora'.$i])) { $workplaceArray['Motora'] = $_POST['Motora'.$i];}else {$workplaceArray['Motora']="False";}
-			if(isset($_POST['Medicare'.$i])) { $workplaceArray['Medicare'] = $_POST['Medicare'.$i];}else {$workplaceArray['Medicare']="False";}
-			if(isset($_POST['Homehospital'.$i])) { $workplaceArray['Homehospital'] = $_POST['Homehospital'.$i];} else {$workplaceArray['Homehospital']="False";}
-			if(isset($_POST['MobilePhysio'.$i])) { $workplaceArray['MobilePhysio'] = $_POST['MobilePhysio'.$i];}else {$workplaceArray['MobilePhysio']="False";}
-			if(isset($_POST['Number-worked-hours'.$i])) { $workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours'.$i];}
-			if(isset($_POST['WTreatmentarea'.$i])){ $workplaceArray['SpecialInterestAreaID'] = implode(",",$_POST['WTreatmentarea'.$i]); }
-			if(isset($_POST['Additionallanguage'.$i])){ $workplaceArray['AdditionalLanguage'] = implode(",",$_POST['Additionallanguage'.$i]); }
-			array_push($tempWork, $workplaceArray);
-		}
-			$postData['Workplaces'] =  $tempWork ;
-		}
-		if(isset($_POST['wpnumber']) == "1" && empty($_POST['Name-of-workplace0'])){ $postData['Workplaces'] =array();}
 		
-		if(isset($_POST['addtionalNumber'])){
-				$n =  $_POST['addtionalNumber'];
-				$temp = array();
-				for($j=0; $j<$n; $j++){
-					$additionalQualifications = array();
-					if(isset($_POST['ID'.$j])) { $additionalQualifications['ID'] = $_POST['ID'.$j];}
-					
-					if(isset($_POST['University-degree'.$j]) && $_POST['University-degree'.$j]!=""){
-						$additionalQualifications['Degree'] = $_POST['University-degree'.$j]; 
-						$additionalQualifications['DegreeID'] = "";
-					}
-					else{
-						$additionalQualifications['DegreeID'] = $_POST['Udegree'.$j];
-						$additionalQualifications['Degree'] = "";
-					}
-					
-					if(isset($_POST['Undergraduate-university-name-other'.$j]) && $_POST['Undergraduate-university-name-other'.$j]!=""){
-						$additionalQualifications['Institute'] = $_POST['Undergraduate-university-name-other'.$j]; 
-						$additionalQualifications['InstituteID'] = "";
-					}
-					else{
-						$additionalQualifications['InstituteID'] = $_POST['Undergraduate-university-name'.$j];
-						$additionalQualifications['Institute'] = "";
-					}
-					
-					if(isset($_POST['Ugraduate-country'.$j])) { $additionalQualifications['Country'] = $_POST['Ugraduate-country'.$j];}
-					if(isset($_POST['Ugraduate-yearattained'.$j])) { $additionalQualifications['Yearattained'] = $_POST['Ugraduate-yearattained'.$j];}
-					array_push($temp , $additionalQualifications);
-				}
-				$postData['PersonEducation'] =  $temp ;
-		}*/
 		$postData['Workplaces'] =  $details['Workplaces'] ;
 		
 		$postData['PersonEducation'] = $details['PersonEducation'] ;
@@ -635,15 +563,15 @@ $userRetisterStatus = false;
 		<?php 
 			$bdate = explode(" ",$pd_detail['Sdate']);
 			$edate = explode(" ",$pd_detail['Edate']);
-			//echo $bdate[0]."//".$edate[0];
 			$dateOutput = "";
 			$timeOutput = "";
-			$t = strtotime($bdate[0]);
-			$j = strtotime($edate[0]);
+			$bUdate = str_replace('/', '-', $bdate[0]);
+			$eUdate = str_replace('/', '-', $edate[0]);
+			$t = strtotime($bUdate);
+			$j = strtotime($eUdate);
 			$q = strtotime($bdate[1]);
 			$r = strtotime($edate[1]);
 			$dateStart = date("d",$t);
-			//$timeOutput = date("h:i",$q)." - ".date("h:i",$r);
 			$timeOutput = date("h:i",$q).$bdate[2]." - ".date("h:i",$r).$edate[2];
 			if($bdate[0] == $edate[0]) {
 				if(date("F",$t) != date("F",$j)) {
@@ -717,7 +645,7 @@ $userRetisterStatus = false;
 		</div>
 		
 	<!-- MAP POPUP -->
-	<div id="myMap">         
+	<div id="myMap">
 		<span class="close-popup"></span>
 		<div class="map-container">
 			<h4 class="modal-title">Event location</h4>
@@ -1817,7 +1745,8 @@ $userRetisterStatus = false;
 			<span>
 			<?php 
 				$closingDate = explode(" ",$pd_detail['Close_date']);
-				$Cls = strtotime($closingDate[0]);
+				$cldate = str_replace('/', '-', $closingDate[0]);
+				$Cls = strtotime($cldate);
 				$ClsDateFinal = date("d M Y",$Cls);
 				echo $ClsDateFinal; ?>
 			</span>
@@ -1994,6 +1923,7 @@ $userRetisterStatus = false;
 				//$Cls = strtotime($closingDate[0]);
 				//$ClsDateFinal = date("d M Y",$Cls);
 				echo $ClsDateFinal; ?>
+				
 			</span>
 
 			<span class="small-heading">Event status:</span>

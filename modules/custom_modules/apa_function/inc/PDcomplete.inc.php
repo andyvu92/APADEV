@@ -179,12 +179,13 @@ if(isset($_POST["Invoice_ID"])) {
 
 <div class="flex-container" id="non-member">
 	<div class="flex-cell">
-		<h3 class="light-lead-heading">Purchase successful!</h3>
+		<h3 class="light-lead-heading">Thank you, your purchase was successful.</h3>
 	</div>
 
 	<div class="flex-cell">
-		<h3 class="light-heading">A copy of your purchase receipt will be sent to your inbox.<br />
-		You can also find a record on your dashboard.</h3>
+		<h3 class="light-heading extra-heading">A copy of your receipt has been sent to your nominated email address.<br />
+		<br/>You can also find a record of your purchase on your dashboard.<br/>
+		<br/>Please note: if you have registered to attend a face to face course, we will be in touch two weeks prior to the course start date with confirmation that the event is proceeding. If you haven’t received confirmation within one week of the event start date, please contact us at <a href="mailto:pd@australian.physio">pd@australian.physio</a> or 1300 306 622</h3>
 	</div>
 
 	<div class="flex-cell cta"><a class="join" href="/dashboard">Go to dashboard</a></div>

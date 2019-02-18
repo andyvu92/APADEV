@@ -246,8 +246,11 @@ if(isset($_SESSION["UserId"])){
 			echo	"<div class='flex-col-3'><span class='mobile-visible'>Product name: </span>".$productt['Title']."</div>";
 			$bdate = explode(" ",$productt['Sdate']);
 			$edate = explode(" ",$productt['Edate']);
-			$t = strtotime($bdate[0]);
-			$j = strtotime($edate[0]);
+			$newt = str_replace('/', '-', $bdate[0]);
+			$newj = str_replace('/', '-', $edate[0]);
+			$t = strtotime($newt);
+			$j = strtotime($newj);
+		
 			echo	"<div class='flex-col-3 pd-spcart-date'><span class='start-date'>".date("d M Y",$t)."</span><span class='end-date'>".date("d M Y",$j)."</span></div>";
 			echo	"<div class='flex-col-2 pd-spcart-location'><span class='mobile-visible'>Location: </span>".$productt['City'].", ".$productt['State']."</div>";
 			// add by jinghu
