@@ -1982,8 +1982,9 @@ jQuery(document).ready(function(){
         return;
       } else {
         // append element
-        element.insertAdjacentHTML('beforeend', `<div id="users_help_bar" class="minimized modal_disabled"><span class="close"></span><div class="modal_header"><span>Need help?</span></div><div class="modal_content"></div></div>`);
+        element.insertAdjacentHTML('beforeend', `<div id="users_help_bar" class="minimized modal_disabled"><span class="close"></span><div class="modal_header"><span>Technical difficulties are currently preventing some website functions. We apologise for any inconvenience.</span></div><div class="modal_content"></div></div>`);
         // get content from a file
+        /*
         $.ajax({
           url : "/sites/default/files/test/test.txt",
           dataType: "text",
@@ -1991,23 +1992,26 @@ jQuery(document).ready(function(){
               $('.dexp-body-inner').find('#users_help_bar .modal_content').append(data);
           }
         });
+        */
       }
 
       window.setTimeout(function(){
         $('#users_help_bar').removeClass('modal_disabled');
-      }, 10000);
+      }, 1000);
 
       // hide/show modal
+      /*
       $(document).on('click', '#users_help_bar .modal_header', function(){
         $(this).parent().toggleClass('minimized');
       });
+      */
       // disable modal
       $(document).on('click', '#users_help_bar .close', function(){
         $(this).parent().addClass('modal_disabled');
       });
      });
   }
-  //add_help_bar();
+  add_help_bar();
 
   // ADD HIDDEN HEADING FOR RESPONSIVE TABLE
   const responsive_heading_table = () => {

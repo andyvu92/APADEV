@@ -4912,22 +4912,24 @@ body{
 /* ADD HELP BAR */
 #users_help_bar{
     position: fixed;
-    bottom: 0;
+    top: 0;
     right: 0;
-    width: 350px;
-    height: 300px;
-    background: #fff;
-    border: 1px solid @bright-blue;
+    width: 100%;
+    max-height: 300px;
+    background: @pink;
+    /*border: 1px solid @pink;*/
     padding: 0px 20px 20px;
+    padding: 0px 20px 0px;
     transition: all 0.6s ease-in-out;
     transform: translateY( 0 );
     opacity: 1;
     z-index: 99999;
+    /*
     &.minimized{
         transform: translateY( calc(~'100% - 47px') );
-    }
+    } */
     &.modal_disabled{
-        transform: translateY( 100% );
+        transform: translateY( -100% );
         opacity: 0;
     }
     .close{
@@ -4945,6 +4947,14 @@ body{
         top: 12px;
         opacity: 0.4;
         transition: all .3s linear;
+        right: 13%;
+        @media @desktop-width-down{
+            right: 8%;
+        }
+        @media @tablet-width-down{
+            right: 5%;
+            opacity: 1;
+        }
         &:hover{
             opacity: 1;
         }
@@ -4963,20 +4973,41 @@ body{
         }
     }
     .modal_header{
-        padding: 10px 20px;
+        padding: 10px 50px;
+        max-width: 1500px;
+        margin: 0 auto;
         margin-bottom: 15px;
-        border-bottom: 2px solid rgba(255,255,255,0.3);
-        background: @bright-blue;
+        margin-bottom: 0px;
+        /*border-bottom: 2px solid rgba(255,255,255,0.3);*/
+        background: @pink;
         position: relative;
         z-index: 10;
         left: -20px;
         width: calc(~'100% + 40px');
-        cursor: pointer;
+        @media @desktop-width-down{
+            padding: 10px 30px;
+        }
+        @media @tablet-width-down{
+            padding: 10px 185px 10px 30px;
+        }
+        @media @larger-phone-width-down{
+            padding: 10px 90px 10px 30px;
+        }
+        @media all and (max-width: 380px){
+            padding: 10px 50px 10px 30px;
+        }
+        @media all and (max-width: 325px){
+            padding: 10px 70px 10px 30px;
+        }
+        cursor: default;
         span{
             font-family: Cairo;
             font-size: 1.3em;
             font-weight: 400;
             color: #fff;
+            @media all and (max-width: 325px){
+                font-size: 1em;
+            }
         }
     }
     .modal_content{
