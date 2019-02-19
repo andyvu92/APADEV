@@ -7,9 +7,17 @@ function apa_log_menu() {
   // A path where all Global config lives.
   $items['admin/config/system/memberlog'] = array(
     'title' => 'APA Member Transaction Error Log',
-    'page callback' => 'apa_log_admin_settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apa_log_admin_settings'),
     'access callback' => TRUE,
     'type' => MENU_LOCAL_ACTION | MENU_NORMAL_ITEM,
   );
   return $items;
+}
+/*
+* Create submit function to get the value
+*/
+function log_submit($form, &$form_state) {
+  $form_state['storage']['type'] = $form_state['values']['type'];
+  $form_state['rebuild'] = TRUE;  
 }
