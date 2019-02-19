@@ -1,0 +1,7 @@
+name = APA Log Module
+description = APA Log Functions.
+package = APA
+core = 7.x
+
+files[] = apa_log.admin.inc
+files[] = apa_log.module

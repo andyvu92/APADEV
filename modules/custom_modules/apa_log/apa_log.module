@@ -1,0 +1,15 @@
+<?php
+require __DIR__ . '/apa_log.admin.inc';
+/**
+ * Implements hook_menu().
+ */
+function apa_log_menu() {
+  // A path where all Global config lives.
+  $items['admin/config/system/memberlog'] = array(
+    'title' => 'APA Member Transaction Error Log',
+    'page callback' => 'apa_log_admin_settings',
+    'access callback' => TRUE,
+    'type' => MENU_LOCAL_ACTION | MENU_NORMAL_ITEM,
+  );
+  return $items;
+}
