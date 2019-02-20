@@ -1186,7 +1186,7 @@ $(document).ready(function(){
 		if ( $(this).is('.session_logout') ){
 			$('input[value="Log out"]').click();
 		} else {
-			$('#expire_msg').fadeOut( () => {
+			$('#expire_msg').fadeOut( function(){
 				$('#login_form').fadeIn();
 			});
 		}
