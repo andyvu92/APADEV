@@ -18,6 +18,17 @@ function apa_log_menu() {
 * Create submit function to get the value
 */
 function log_submit($form, &$form_state) {
-  $form_state['storage']['type'] = $form_state['values']['type'];
+  //$form_state['storage']['type'] = $form_state['values']['type'];
+  $_SESSION["type"] = $form_state['values']['type'];
   $form_state['rebuild'] = TRUE;  
+  unset($_SESSION["GetAll"]);
+}
+/*
+* Show all data from member_log table
+*/
+function log_all($form, &$form_state) {
+   $_SESSION["GetAll"] = 1;
+   $form_state['rebuild'] = TRUE; 
+   unset($_SESSION["type"]); 
+  
 }

@@ -11,26 +11,28 @@ function apa_log_admin_settings($form = array(), &$form_state= array()) {
   );
   $form['textfield_input']['type'] = array(
     '#type' => 'textfield',
-    '#default_value' => isset( $_GET['type']) ?  $_GET['type']  : 'PD',
+    '#default_value' => isset( $_SESSION["type"]) ?  $_SESSION["type"]  : 'PD',
     '#title' => t('type')
   ); 
-  $form['textfield_input']['submit'] = array(
+  $form['textfield_input']['submit1'] = array(
     '#type' => 'submit',
     '#value' => t('Search'),
-    '#submit'=>['log_submit']
+    '#submit'=>array('log_submit'),
   );
-  if(isset( $_GET['type'] )) { $type =  $_GET['type'] ;} else {  $type = 'PD';}
+  $form['textfield_input']['submit2'] = array(
+    '#type' => 'submit',
+    '#value' => t('Show All'),
+    '#submit'=>array('log_all'),
+  );
+  if(isset( $_SESSION["type"] )) { $type =  $_SESSION["type"] ;} else {  $type = 'PD';}
   $variables = array();
   $header = array('ID', 'User ID', 'Type');
-  $query = db_select('shopping_cart','s')
-          ->fields('s', array('ID','userID','type'))
-          ->condition('type', $type)
-					->execute()
-          ->fetchAll();
-  if(sizeof($query)!=0){
-    $arrayReturn = json_decode(json_encode($query), True);
-  }
-  $per_page = 10;
+  $query = db_select('shopping_cart','s');
+  $query ->fields('s', array('ID','userID','type'));
+  if(!isset($_SESSION["GetAll"])) {$query->condition('type', $type); }
+  $queryResult = $query->execute();
+  while ($row = $queryResult->fetchAssoc()) {$arrayReturn[] = $row;  }  
+  $per_page = 30;
   $current_page = pager_default_initialize(count($arrayReturn), $per_page);
   $chunks = array_chunk($arrayReturn, $per_page, TRUE);
   $form['table'] = array(
@@ -40,8 +42,8 @@ function apa_log_admin_settings($form = array(), &$form_state= array()) {
     '#empty' => t('Empty Rows')
     );	 
   $form['pager'] = array('#markup' => theme('pager'), '#quantity' => count($arrayReturn));
-  $form['#method'] = 'get';
   return $form;
+
 }
 
 
