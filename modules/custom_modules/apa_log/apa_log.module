@@ -19,9 +19,19 @@ function apa_log_menu() {
 */
 function log_submit($form, &$form_state) {
   //$form_state['storage']['type'] = $form_state['values']['type'];
-  $_SESSION["type"] = $form_state['values']['type'];
-  $form_state['rebuild'] = TRUE;  
-  unset($_SESSION["GetAll"]);
+  $filterConditions =  array();
+  $filterConditions["beginDate"] = $form_state['values']['beginDate'];
+  $filterConditions["endDate"] = $form_state['values']['endDate'];
+  $filterConditions["email"] = $form_state['values']['email'];
+  $filterConditions["type"] = $form_state['values']['type'];
+  $filterConditions["error"] = $form_state['values']['error'];
+  $form_state['rebuild'] = TRUE; 
+  if( $form_state['values']['type'] == "ALL") {
+    $_SESSION["GetAll"] = 1;
+  }else{
+    unset($_SESSION["GetAll"]);
+  }
+  $_SESSION["filterconditions"] = $filterConditions;
 }
 /*
 * Show all data from member_log table
@@ -29,6 +39,28 @@ function log_submit($form, &$form_state) {
 function log_all($form, &$form_state) {
    $_SESSION["GetAll"] = 1;
    $form_state['rebuild'] = TRUE; 
-   unset($_SESSION["type"]); 
+   unset($_SESSION["filterconditions"]); 
   
+}
+/*
+* Create log data for the member's transactions
+*/
+function add_Member_Log($addMemberLog) {
+  $userID = $addMemberLog["userID"];
+	$orderID = $addMemberLog["orderID"];
+	$jsonMessage = $addMemberLog["jsonMessage"];
+	$createDate = $addMemberLog["createDate"];
+	$type = $addMemberLog["type"];
+	$logError = $addMemberLog["logError"];
+  $memberLog	=  db_insert('member_log') 
+    ->fields(array(
+      'UserID' => $userID,
+      'OrderID' => $orderID,
+      'JsonMessage' => $jsonMessage,
+      'CreateDate' => $createDate,
+      'Type' => $type,
+      'LogError' => $logError,
+    ))
+    ->execute();
+ 
 }
