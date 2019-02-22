@@ -72,7 +72,14 @@ if(isset($_POST["POSTPRF"])) {
 		$dataArray['ProductList'] = implode(",",$OrderSend["productID"]);
 		$dataArray['Type'] = "P";
 		forCreateRecordFunc($dataArray);
-		
+		// record member log for successful process
+		if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+		$addMemberLog["orderID"] = "0";
+		$addMemberLog["jsonMessage"] = json_encode($OrderSend);
+		$addMemberLog["createDate"] = date('Y-m-d');
+		$addMemberLog["type"] =  "PD";
+		$addMemberLog["logError"] = 0;
+		add_Member_Log($addMemberLog);
 		// delete shopping cart data from APA database; put the response status validation here!!!!!!!
 		$userID = $_SESSION["UserId"];
 		$type = "PD";
@@ -215,6 +222,15 @@ if(isset($_POST["Invoice_ID"])) {
 <!--<a class="addCartlink" href="../your-purchases"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>-->
 
 <?php else:?>
+<!--this is handle record error log-->
+<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+		$addMemberLog["orderID"] = "0";
+		$addMemberLog["jsonMessage"] = json_encode($OrderSend).json_encode($registerOuts);
+		$addMemberLog["createDate"] = date('Y-m-d');
+		$addMemberLog["type"] =  "PD";
+		$addMemberLog["logError"] = 1;
+		add_Member_Log($addMemberLog);
+?>
 <!-- FAIL PURCHASE -->
 <div class="flex-container fail-purchase">
 <div  class="flex-cell fail-purchase-title" style="text-align: center"><h3 class="light-lead-heading align-center">We had issues processing your payment request.</h3></div>

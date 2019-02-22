@@ -185,7 +185,16 @@ $background = getBackgroundImage($userID);
 					<a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 					*/
 					?>
-
+                    <?php
+				    // record member log for successful process
+					if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+					$addMemberLog["orderID"] = $postReviewData['OrderID'];
+					$addMemberLog["jsonMessage"] = json_encode($postReviewData);
+					$addMemberLog["createDate"] = date('Y-m-d');
+					$addMemberLog["type"] =  "Renew";
+					$addMemberLog["logError"] = 0;
+					add_Member_Log($addMemberLog);
+					?>
 					<style>
 						#dashboard-right-content .dashboard_detail{
 							width: 100%;
@@ -217,6 +226,15 @@ $background = getBackgroundImage($userID);
 				</div>
 				<?php elseif(strpos($renewOuts['MResponse'], 'Order failed') !== false): ?>
 					<?php if(strpos($renewOuts['MResponse'], '50') !== false): ?>
+						<!--this is handle record error log-->
+						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+								$addMemberLog["orderID"] = $postReviewData['OrderID'];
+								$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
+								$addMemberLog["createDate"] = date('Y-m-d');
+								$addMemberLog["type"] =  "Renew";
+								$addMemberLog["logError"] = 1;
+								add_Member_Log($addMemberLog);
+						?>
 						<div class="flex-container" id="fail-purchase">
 							<div class="flex-cell">
 								<h3 class="light-lead-heading">There are insufficient funds in this account.</h3>
@@ -226,6 +244,15 @@ $background = getBackgroundImage($userID);
 							</div>
 						</div>
 					<?php elseif(strpos($renewOuts['MResponse'], '12') !== false): ?>
+						<!--this is handle record error log-->
+						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+								$addMemberLog["orderID"] = $postReviewData['OrderID'];
+								$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
+								$addMemberLog["createDate"] = date('Y-m-d');
+								$addMemberLog["type"] =  "Renew";
+								$addMemberLog["logError"] = 1;
+								add_Member_Log($addMemberLog);
+						?>
 						<div class="flex-container" id="fail-purchase">
 							<div class="flex-cell">
 								<h3 class="light-lead-heading">This card has been declined.</h3>
@@ -235,6 +262,15 @@ $background = getBackgroundImage($userID);
 							</div>
 						</div>
 					<?php elseif(strpos($renewOuts['MResponse'], '13') !== false): ?>
+						<!--this is handle record error log-->
+						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+								$addMemberLog["orderID"] = $postReviewData['OrderID'];
+								$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
+								$addMemberLog["createDate"] = date('Y-m-d');
+								$addMemberLog["type"] =  "Renew";
+								$addMemberLog["logError"] = 1;
+								add_Member_Log($addMemberLog);
+						?>
 						<div class="flex-container" id="fail-purchase">
 							<div class="flex-cell">
 								<h3 class="light-lead-heading">Your financial institution requires verbal authoristion of this payment before it can be processed.</h3>
@@ -244,6 +280,15 @@ $background = getBackgroundImage($userID);
 							</div>
 						</div>
 					<?php else: ?>
+					<!--this is handle record error log-->
+					<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+							$addMemberLog["orderID"] = $postReviewData['OrderID'];
+							$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
+							$addMemberLog["createDate"] = date('Y-m-d');
+							$addMemberLog["type"] =  "Renew";
+							$addMemberLog["logError"] = 1;
+							add_Member_Log($addMemberLog);
+					?>
 						<div class="flex-container" id="fail-purchase">
 							<div class="flex-cell">
 								<h3 class="light-lead-heading">There were unexpected issues processing<br> your payment request.</h3>
@@ -265,6 +310,15 @@ $background = getBackgroundImage($userID);
 						</div>
 						*/ ?>
 					<?php if(strpos($renewOuts['MResponse'], '12') !== false): ?>
+					    <!--this is handle record error log-->
+						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+								$addMemberLog["orderID"] = $postReviewData['OrderID'];
+								$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
+								$addMemberLog["createDate"] = date('Y-m-d');
+								$addMemberLog["type"] =  "Renew";
+								$addMemberLog["logError"] = 1;
+								add_Member_Log($addMemberLog);
+						?>
 						<div class="flex-container" id="fail-purchase">
 							<div class="flex-cell">
 								<h3 class="light-lead-heading">This card has been declined.</h3>
@@ -283,6 +337,15 @@ $background = getBackgroundImage($userID);
 							</div>
 						</div> */ ?>
 					<?php else: ?>
+					    <!--this is handle record error log-->
+						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+								$addMemberLog["orderID"] = $postReviewData['OrderID'];
+								$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
+								$addMemberLog["createDate"] = date('Y-m-d');
+								$addMemberLog["type"] =  "Renew";
+								$addMemberLog["logError"] = 1;
+								add_Member_Log($addMemberLog);
+						?>
 						<div class="flex-container" id="fail-purchase">
 							<div class="flex-cell">
 								<h3 class="light-lead-heading">There were unexpected issues processing<br> your payment request.</h3>

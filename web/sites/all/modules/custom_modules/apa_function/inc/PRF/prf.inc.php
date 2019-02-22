@@ -46,6 +46,16 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
   	
 ?>
 <?php if(isset($registerOuts['Invoice_ID']) && $registerOuts['Invoice_ID']!=="0"): ?>
+<?php
+	// record member log for successful process
+	if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+	$addMemberLog["orderID"] = "0";
+	$addMemberLog["jsonMessage"] = $OrderSend;
+	$addMemberLog["createDate"] = date('Y-m-d');
+	$addMemberLog["type"] =  "PRF";
+	$addMemberLog["logError"] = 0;
+	add_Member_Log($addMemberLog);
+	?>
 <div class="flex-container">
 
 
@@ -235,6 +245,16 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 
 	</div>
 	<?php endif; ?>
+	<!--this is handle record error log-->
+	<?php 
+		if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+		$addMemberLog["orderID"] = "0";
+		$addMemberLog["jsonMessage"] = json_encode($OrderSend).json_encode($registerOuts);
+		$addMemberLog["createDate"] = date('Y-m-d');
+		$addMemberLog["type"] =  "PRF";
+		$addMemberLog["logError"] = 1;
+		add_Member_Log($addMemberLog);
+	?>
 	<div class="flex-container">
 		<div class="flex-cell">
 			<span class="fail-payment-message">Payment has failed. Please check your card details and try again or <a href="/contact-us">contact us</a>.</span>

@@ -6,8 +6,8 @@
 function apa_log_admin_settings($form = array(), &$form_state= array()) {
   //init form data
   // get the type drop down list
-  $typelist = db_select('shopping_cart','s')
-          ->fields('s', array('type'))
+  $typelist = db_select('member_log','m')
+          ->fields('m', array('Type'))
           ->execute()
           ->fetchAll();
   if(sizeof($typelist)!=0){
@@ -22,7 +22,22 @@ function apa_log_admin_settings($form = array(), &$form_state= array()) {
   }
   $tempArray["ALL"] = "ALL";
   $defaultType = "ALL";
-  $defaultError = "N";
+  // get the error drop down list
+  $errorlist = db_select('member_log','m')
+          ->fields('m', array('LogError'))
+          ->execute()
+          ->fetchAll();
+  if(sizeof($errorlist)!=0){
+          $errorlistReturn = json_decode(json_encode($errorlist), True);
+  }
+  $tempErrorArray = array();
+  foreach ($errorlistReturn as $singleError) {
+    foreach ($singleError as $pair => $errorValue)
+      if(!in_array($errorValue,$tempErrorArray)) {
+        $tempErrorArray[$errorValue] = $errorValue;
+    }
+  }
+   $defaultError = 1;
   // generate form
   $form = array();
   $form['textfield_input'] = array(
@@ -55,7 +70,7 @@ function apa_log_admin_settings($form = array(), &$form_state= array()) {
   ); 
   $form['textfield_input']['error'] = array(
     '#type' => 'select',
-    '#options' => $tempArray,
+    '#options' => $tempErrorArray,
     '#default_value' => isset( $_SESSION['filterconditions']["error"]) ?  $_SESSION['filterconditions']["error"]  : $defaultError,
     '#title' => t('Is Error')
   ); 
@@ -70,32 +85,50 @@ function apa_log_admin_settings($form = array(), &$form_state= array()) {
     '#value' => t('Search'),
     '#submit'=>array('log_submit'),
   );
+  $form['textfield_input']['submit3'] = array(
+    '#type' => 'submit',
+    '#value' => t('Clear Search'),
+    '#submit'=>array('clear_all'),
+  );
   $form['textfield_input']['submit2'] = array(
     '#type' => 'submit',
     '#value' => t('Show All'),
     '#submit'=>array('log_all'),
   );
+  
    // filter automatically
-  if(isset( $_SESSION["type"] )) { $type =  $_SESSION['filterconditions']["type"] ;} else {  $type = $defaultType;}
+  if(isset( $_SESSION['filterconditions']["type"] )) { $type =  $_SESSION['filterconditions']["type"] ;} else {  $type = $defaultType;}
   $variables = array();
-  $header = array('ID', 'User ID', 'Type');
-  $query = db_select('shopping_cart','s');
-  $query ->fields('s', array('ID','userID','type'));
+  $header = array('User ID', 'Order ID', 'Message', 'Date', 'Type', 'Error');
+  $query = db_select('member_log','m');
+  $query ->fields('m', array('UserID','OrderID', 'JsonMessage', 'CreateDate', 'Type', 'LogError'));
   // handle display all data
-  if(!isset($_SESSION["GetAll"])) {$query->condition('type', $type); }
+  if(isset($_SESSION['filterconditions']["email"])) {$query->condition('UserID', $_SESSION['filterconditions']["email"]); }
+  if(!isset($_SESSION["GetAll"])) {$query->condition('Type', $type); }
+  if(isset($_SESSION['filterconditions']["beginDate"]) && isset($_SESSION['filterconditions']["endDate"])) {$query->condition('CreateDate', array($_SESSION['filterconditions']["beginDate"], $_SESSION['filterconditions']["endDate"]), 'BETWEEN'); }
+  if(isset($_SESSION['filterconditions']["error"])) {$query->condition('LogError', $_SESSION['filterconditions']["error"]); }
   $queryResult = $query->execute();
+  $arrayReturn = array();
   while ($row = $queryResult->fetchAssoc()) {$arrayReturn[] = $row;  }  
-  // handle pagenation
-  $per_page = 30;
-  $current_page = pager_default_initialize(count($arrayReturn), $per_page);
-  $chunks = array_chunk($arrayReturn, $per_page, TRUE);
-  $form['table'] = array(
-	  '#theme' => 'table',
-	  '#header' => $header,
-    '#rows' => $chunks[$current_page],
-    '#empty' => t('Empty Rows')
-    );	 
-  $form['pager'] = array('#markup' => theme('pager'), '#quantity' => count($arrayReturn));
+    // handle pagenation
+  if(sizeof($arrayReturn)!= 0){
+      $per_page = 30;
+      $current_page = pager_default_initialize(count($arrayReturn), $per_page);
+      $chunks = array_chunk($arrayReturn, $per_page, TRUE);
+      $form['table'] = array(
+        '#theme' => 'table',
+        '#header' => $header,
+        '#rows' => $chunks[$current_page],
+        '#empty' => t('Empty Rows')
+        );	 
+      $form['pager'] = array('#markup' => theme('pager'), '#quantity' => count($arrayReturn));
+  }
+  else{
+    $form['textfield_input_1'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('There is no result')
+    );
+  }
   return $form;
 
 }
