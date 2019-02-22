@@ -65,7 +65,14 @@ if(isset($_POST['step3'])) {
 		checkShoppingCart($userID, $type, $productID="");
 		$productID = "PRF";
 		checkShoppingCart($userID, $type="", $productID);
-		
+		 // record member log for successful process
+		 if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+		 $addMemberLog["orderID"] = "0";
+		 $addMemberLog["jsonMessage"] = json_encode($postReviewData);
+		 $addMemberLog["createDate"] = date('Y-m-d');
+		 $addMemberLog["type"] =  "Join";
+		 $addMemberLog["logError"] = 0;
+		 add_Member_Log($addMemberLog);
 		//2.2.46 -get order payment schedules test part
 	   //$paymentData['id'] = $registerOuts['Invoice_ID'];
 	   //$paymentDataSchedules = GetAptifyData("46", $paymentData);
@@ -211,7 +218,15 @@ $background = getBackgroundImage($userID);
 				</div>
 
 				<?php else:?>
-
+                    <!--this is handle record error log-->
+					<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+						$addMemberLog["orderID"] = "0";
+						$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($registerOuts);
+						$addMemberLog["createDate"] = date('Y-m-d');
+						$addMemberLog["type"] =  "Join";
+						$addMemberLog["logError"] = 1;
+						add_Member_Log($addMemberLog);
+					?>
 					<style>
 						#dashboard-right-content .nav-tabs{
 							display: none;
