@@ -66,8 +66,8 @@ if(isset($_POST["NONAPA"])) {
 $DiaryAll = Array();
 
 function date_sort($a, $b) {
-	$BB = str_replace('/', '-', $b["Date"]);
-	$AA = str_replace('/', '-', $a["Date"]);
+	$BB = $b["Date"];//str_replace('/', '-', $b["Date"]);
+	$AA = $a["Date"];//str_replace('/', '-', $a["Date"]);
 	$c = strtotime($BB) - strtotime($AA);
 	$c .= strcmp($b["Description"], $a["Description"]);
 	return $c;

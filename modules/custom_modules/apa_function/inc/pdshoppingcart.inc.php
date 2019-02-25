@@ -246,8 +246,8 @@ if(isset($_SESSION["UserId"])){
 			echo	"<div class='flex-col-3'><span class='mobile-visible'>Product name: </span>".$productt['Title']."</div>";
 			$bdate = explode(" ",$productt['Sdate']);
 			$edate = explode(" ",$productt['Edate']);
-			$newt = str_replace('/', '-', $bdate[0]);
-			$newj = str_replace('/', '-', $edate[0]);
+			$newt = $bdate[0];//str_replace('/', '-', $bdate[0]);
+			$newj = $edate[0];//str_replace('/', '-', $edate[0]);
 			$t = strtotime($newt);
 			$j = strtotime($newj);
 		

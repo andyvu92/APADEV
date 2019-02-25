@@ -565,8 +565,8 @@ $userRetisterStatus = false;
 			$edate = explode(" ",$pd_detail['Edate']);
 			$dateOutput = "";
 			$timeOutput = "";
-			$bUdate = str_replace('/', '-', $bdate[0]);
-			$eUdate = str_replace('/', '-', $edate[0]);
+			$bUdate = $bdate[0];//str_replace('/', '-', $bdate[0]);
+			$eUdate = $edate[0];//str_replace('/', '-', $edate[0]);
 			$t = strtotime($bUdate);
 			$j = strtotime($eUdate);
 			$q = strtotime($bdate[1]);
@@ -1745,7 +1745,7 @@ $userRetisterStatus = false;
 			<span>
 			<?php 
 				$closingDate = explode(" ",$pd_detail['Close_date']);
-				$cldate = str_replace('/', '-', $closingDate[0]);
+				$cldate = $closingDate[0];//str_replace('/', '-', $closingDate[0]);
 				$Cls = strtotime($cldate);
 				$ClsDateFinal = date("d M Y",$Cls);
 				echo $ClsDateFinal; ?>

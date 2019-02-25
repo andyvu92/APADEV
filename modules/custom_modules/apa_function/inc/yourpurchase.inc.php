@@ -69,7 +69,7 @@ apa_function_dashboardLeftNavigation_form();
 							$counterTwo = 0;
 							foreach($products as $product){
 								$now = date('d-m-Y');
-								$productDate = str_replace('/', '-', $product['Orderdate']);
+								$productDate = $product['Orderdate'];//str_replace('/', '-', $product['Orderdate']);
 								if(strtotime($now)<strtotime('+1 years',strtotime($productDate))){
 									$counter++;
 									$instal = false;
