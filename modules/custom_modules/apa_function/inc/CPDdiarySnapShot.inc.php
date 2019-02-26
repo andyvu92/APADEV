@@ -11,7 +11,7 @@ $results = aptify_get_GetAptifyData("33", $_SESSION["UserId"]);
 $CPDHousrs = $results["CurrentCPDHour"];
 ?>
 
-<h2>Your 2018 CPD snapshot</h2>
+<h2>Your 2019 CPD snapshot</h2>
 
 <div id="cpd" style="display:none"><?php echo $CPDHousrs; ?></div>
 <div class="col-xs-12 col-md-12 circle-container" id="goo-chart">
