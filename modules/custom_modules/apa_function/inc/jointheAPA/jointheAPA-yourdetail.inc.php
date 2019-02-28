@@ -2853,38 +2853,38 @@ if(isset($_POST['MT'])){
                     <div class="row" id="shippingAddress">
                         <div class="col-xs-12">
                             <label for="">Building name</label>
-                            <input type="text" class="form-control"  name="Billing-BuildingName">
+                            <input type="text" class="form-control"  name="Billing-BuildingName" autocomplete="Building-Name">
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <label for="">PO Box</label>
-                            <input type="text" class="form-control" name="Billing-Pobox" id="Billing-Pobox">
+                            <input type="text" class="form-control" name="Billing-Pobox" id="Billing-Pobox" autocomplete="Pobox">
                         </div>
 
                         <div class="col-xs-12 col-sm-6 col-md-9">
                            <label for="">Address Line 1<span class="tipstyle billing-pobox-stat"> *</span></label>
-                           <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1">
+                           <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" autocomplete="address-line1">
                         </div>
 
                         <div class="col-xs-12">
                            <label for="">Address Line 2</label>
-                           <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2">
+                           <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" autocomplete="address-line2">
                         </div>
 
                         <!--BREAK-->
 
                         <div class="col-xs-6 col-md-3">
                            <label for="">City or town<span class="tipstyle"> *</span></label>
-                           <input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb">
+                           <input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" autocomplete="address-level2">
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">Postcode<span class="tipstyle"> *</span></label>
-                           <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode">
+                           <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" autocomplete="postal-code">
                         </div>
                         <div class="col-xs-6 col-md-3">
                            <label for="">State</label>
                            <div class="chevron-select-box">
-                           <select class="form-control" name="Billing-State" id="State2">
+                           <select class="form-control" name="Billing-State" id="State2" autocomplete="address-level1">
                                 <option value="" selected='selected' disabled> State </option>
                                 <?php
     $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
@@ -2902,7 +2902,7 @@ if(isset($_POST['MT'])){
                         <div class="col-xs-6 col-md-3">
                            <label for="">Country<span class="tipstyle"> *</span></label>
                                <div class="chevron-select-box">
-                               <select class="form-control" id="Country2" name="Billing-Country">
+                               <select class="form-control" id="Country2" name="Billing-Country" autocomplete="country">
                             <?php
     //$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
     //$country     = json_decode($countrycode, true);
@@ -2959,7 +2959,7 @@ if(isset($_POST['MT'])){
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
                         <label for="">Member ID (Your email address)<span class="tipstyle"> *</span></label>
-                        <input type="email" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)">
+                        <input type="email" class="form-control" name="Memberid" id="Memberid" value="" onchange="checkEmailFunction(this.value)" autocomplete="email">
                     <div id="checkMessage" class="display-none">This email address matches one that’s already registered, please use a different one or <a class="info" data-target="#loginAT" data-toggle="modal" type="button">
 					
 		<i class="Log-in">&nbsp;</i>login 
@@ -2994,7 +2994,7 @@ if(isset($_POST['MT'])){
                     </div>
 					<div class="col-xs-12 col-md-6">
 						<label for="">Confirm your email address<span class="tipstyle"> *</span></label>
-						<input type="text" class="form-control" name="CMemberid" id="CMemberid" value="" onchange="confirmEmailFunction(this.value)" required>
+						<input type="text" class="form-control" name="CMemberid" id="CMemberid" value="" onchange="confirmEmailFunction(this.value)" required autocomplete="email">
 					<div id="confirmMessage"></div>
 					</div>
 					<script>
@@ -3019,13 +3019,13 @@ if(isset($_POST['MT'])){
 				<div class="row">
 					<div class="col-xs-6 col-md-6">
                         <label for="">Your password<span class="tipstyle"> *</span></label>
-                        <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="8 characters minimum" onkeyup="PasswordFunction(this.value)">
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" placeholder="8 characters minimum" onkeyup="PasswordFunction(this.value)" autocomplete="new-password">
 						<div id="PasswordMessage"></div>
 					</div>
 
                     <div class="col-xs-6 col-md-6">
                         <label for="">Confirm password<span class="tipstyle"> *</span></label>
-                        <input type="password" class="form-control" id="Password" name="Password" value="" placeholder="8 characters minimum" onkeyup="checkPasswordFunction(this.value)">
+                        <input type="password" class="form-control" id="Password" name="Password" value="" placeholder="8 characters minimum" onkeyup="checkPasswordFunction(this.value)" autocomplete="new-password">
 						<div id="checkPasswordMessage"></div>
 					</div>  
 				
