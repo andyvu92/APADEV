@@ -834,14 +834,14 @@ function findPageUrl($nid){
 }
 function checkSP($products){
 	foreach ($products as $key => $value) {
-		if($value=="10021"){ return true;}
-		
+		if($value=="10021"){ return true; }
+		else { return false; }
 	}
 }
 function checkITouch($products){
 	foreach ($products as $key => $value) {
 		if($value=="10015"){ return true;}
-		
+		else { return false; }
 	}
 }
 ?>
