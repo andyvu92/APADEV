@@ -573,8 +573,8 @@ $filterMemberProduct = array("10007","10008","10009","9997");
 		}
 		// save magazine products on APA side
         //check the Sports MG , Intouch MG
-        $sportTag = false;
-	    $inTouchTag = false;
+        //$sportTag = false;
+	    //$inTouchTag = false;
         $sportTag = checkSP($products);
         $inTouchTag = checkITouch($products);
 		/*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
