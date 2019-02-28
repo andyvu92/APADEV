@@ -364,6 +364,7 @@ jQuery(document).ready(function($) {
 	$('#PDPlaceOrder').click(function(){
 		if($('#checkTerm').val() == "1"){
 			if($('#accept1').val()!="1")  {$('#pd_terms_open').addClass("focuscss");alert("please fill out all required fields *");return false;}
+			if($('#accept2').length!=0) {if($('#accept2').val()!="1")  {$('#accept2label').addClass("focuscss");alert("please fill out all required fields *");return false;}}
 			if($('#accept3').val()!="1")  {$('#accept3label').addClass("focuscss");alert("please fill out all required fields *");return false;}
 		}
 	});

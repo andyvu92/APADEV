@@ -16,7 +16,9 @@ $price=0;
 $tag=0;
 $products = array();
 $localProducts = array();
-$pdtype= array("event", "course", "workshop");
+//$pdtype= array("event", "course", "workshop");
+//change the filter pd type
+$pdtype= "Courses and Workshops";
 $type = "PD";
 $couponCode ="";
 $userID = $_SESSION['UserId'];
@@ -274,7 +276,8 @@ if(isset($_SESSION["UserId"])){
 			$n=$n+1;
 			$i=$i+1;
 			//$price=$price+(int)str_replace('$', '', $productt['Pricelist'][0]['Price']);
-		if (in_array($productt['Typeofpd'],  $pdtype)){ $tag=1; }
+		//if (in_array($productt['Typeofpd'],  $pdtype)){ $tag=1; }
+		if ($productt['Typeofpd'] == $pdtype){ $tag=1; }
 		}
 	}
     if(sizeof($NGProductsArray)!=0){
