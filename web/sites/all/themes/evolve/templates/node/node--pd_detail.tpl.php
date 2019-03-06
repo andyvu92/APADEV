@@ -82,7 +82,8 @@
 
 ?>
 <?php 
-
+$tag=0;
+$pdtype= "Courses and Workshops";
 $userRetisterStatus = false;
 	if(isset($_SESSION["UserId"])&&($_SESSION["UserId"]!="0")){ $userId=$_SESSION["UserId"];
 	} else {$userId="0";}
@@ -211,6 +212,7 @@ $userRetisterStatus = false;
 	$pd_detail = aptify_get_GetAptifyData("29", $pdArr);
 
 	$pd_detail = $pd_detail['MeetingDetails'][0];
+	if ($pd_detail['Typeofpd'] == $pdtype){ $tag=1; }
 	$prices = $pd_detail['Pricelist'];
 	$pricelistGet = Array();
 	foreach($prices as $t) {
@@ -1064,12 +1066,13 @@ $userRetisterStatus = false;
 				  <input class="styled-checkbox" type="checkbox" name="Registrationboard" id="Registrationboard"  value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Registrationboard'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Registrationboard']=="1") echo 'checked="checked"';?>>
 				  <label for="Registrationboard">I am registered with my profession's registration board.<span class="tipstyle"> *</span></label>
 				   </div>
-
-				   <div class="col-xs-12">
-					<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Professionalinsurance'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Professionalinsurance']=="1") echo 'checked="checked"';?>>
-					<label for="Professional-insurance">I have current and adequate professional indemnity insurance.<span class="tipstyle"> *</span></label>
-				   </div>
-
+                   
+				   <?php if($tag==1): ?>							
+						<div class="col-xs-12">
+							<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Professionalinsurance'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Professionalinsurance']=="1") echo 'checked="checked"';?>>
+							<label for="Professional-insurance">I have current and adequate professional indemnity insurance.<span class="tipstyle"> *</span></label>
+						</div>
+					<?php endif; ?>
 				   <div class="col-xs-12">
 				  <input class="styled-checkbox" type="checkbox" name="Professionalbody" id="Professionalbody" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Professionalbody'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Professionalbody']=="1") echo 'checked="checked"';?>>
 				  <label for="Professionalbody">I am a member of my professional body.<span class="tipstyle"> *</span></label>
@@ -1629,12 +1632,15 @@ $userRetisterStatus = false;
 		<input type="hidden" name="Mailing-State" value="<?php echo $details['Mailing-state'];?>">
 		<input type="hidden" name="Mailing-country" value="<?php echo $details['Mailing-country'];?>">
 		<!---Hidden mailing address and shipping address End here-->
-		<div class="row">
-		   <div class="col-lg-12">
-				<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance1"  required>
-				<label for="Professional-insurance1">I have current and adequate professional indemnity insurance.</label>
-		   </div>
-		</div>
+		<input class="styled-checkbox" type="checkbox" name="invalidElement" id="invalidElement">
+		<?php if($tag==1): ?>
+			<div class="row">
+				<div class="col-lg-12">
+					<input class="styled-checkbox" type="checkbox" name="Professionalinsurance" id="Professional-insurance1"  required>
+					<label for="Professional-insurance1">I have current and adequate professional indemnity insurance.</label>
+				</div>
+			</div>
+		<?php endif; ?>
 		<div class="row">
 			<div class="col-xs-12">
 				<label>Your dietary requirements</label>
