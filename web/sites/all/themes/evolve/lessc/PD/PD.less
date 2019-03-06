@@ -2264,6 +2264,13 @@ input[name="Couponcode"]{
     #section-banner #block-block-123{
         background-position: 70% 70px!important;  
 
+        @media all and (max-width: 1375px) and (min-width: 1024px){
+            background-position: 70% 0 !important;
+            .img-parallax{
+                display: none;
+            }
+        }
+
         @media all and (max-width: @larger-tablet-width) {
             background-size: cover;
             background-attachment: scroll;
