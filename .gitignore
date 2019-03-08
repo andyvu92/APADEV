@@ -1,0 +1,9 @@
+# macos directory info files
+.DS_Store
+
+# Backup versions of files
+*.bak
+
+# Unclean patches
+*.orig
+*.rej
