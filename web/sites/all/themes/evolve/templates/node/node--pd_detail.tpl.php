@@ -1377,14 +1377,14 @@ $userRetisterStatus = false;
 							$( "#Memberid" ).focus();
 							$('#Memberid').css('border', '1px solid #ffa02e');
 							
-							$(".accent-btn").addClass("stop");
+							$("#create-webuser-form .accent-btn").addClass("stop");
 							return;
 						}
 						else{
 							$('#error-format').html("");
 							$( "#Memberid" ).blur();
 							$("#Memberid").css('border', '');
-							$(".accent-btn").removeClass("stop");
+							$("#create-webuser-form .accent-btn").removeClass("stop");
 						}
 						$.ajax({
 						url:"/apa/checkemail", 
@@ -1398,7 +1398,7 @@ $userRetisterStatus = false;
 							$( "#Memberid" ).focus();
 							$("#Memberid").css('border', '1px solid #ffa02e');
 							
-							$(".accent-btn").addClass("stop");
+							$("#create-webuser-form .accent-btn").addClass("stop");
 							
 						}
 						else{
@@ -1406,7 +1406,7 @@ $userRetisterStatus = false;
 							$( "#Memberid" ).blur();
 							$("#Memberid").css('border', '');
 							//$(".join-details-button2").removeClass("display-none");
-							$(".accent-btn").removeClass("stop");
+							$("#create-webuser-form .accent-btn").removeClass("stop");
 						}					
 						}
 						});
@@ -1429,14 +1429,14 @@ $userRetisterStatus = false;
 								$( "#CMemberid" ).focus();
 								$("#CMemberid").css('border', '1px solid #ffa02e');
 								$(".join-details-button2").addClass("display-none");
-								$(".accent-btn").addClass("stop");
+								$("#create-webuser-form .accent-btn").addClass("stop");
 							}
 							else{
 								$('#confirmMessage').html("");
 								$( "#CMemberid" ).blur();
 								$("#CMemberid").css('border', '');
 								$(".join-details-button2").removeClass("display-none");
-								$(".accent-btn").removeClass("stop");
+								$("#create-webuser-form .accent-btn").removeClass("stop");
 							}					
 						}
 					</script>
@@ -1461,18 +1461,18 @@ $userRetisterStatus = false;
 							$('#PasswordMessage').html("8 characters minimum");
 							$( "#newPassword" ).focus();
 							$("#newPassword").css("border", "1px solid #ffa02e");
-							$(".accent-btn").addClass("stop");
+							$("#create-webuser-form .accent-btn").addClass("stop");
 						}else if($( "#Password" ).val()!="" && $( "#Password" ).val().length <= 7){
 							$('#checkPasswordMessage').html("8 characters minimum");
 							$( "#Password" ).focus();
 							$("#Password").addClass('focuscss');
-							$(".accent-btn").addClass("stop");
+							$("#create-webuser-form .accent-btn").addClass("stop");
 						}
 						else{
 							$('#PasswordMessage').html("");
 							
 							$("#newPassword").css("border", "");
-							$(".accent-btn").removeClass("stop");
+							$("#create-webuser-form .accent-btn").removeClass("stop");
 						}					
 					}
 				   	function checkPasswordFunction(Password) {
@@ -1480,19 +1480,19 @@ $userRetisterStatus = false;
 							$('#checkPasswordMessage').html("Your passwords do not match");
 							$( "#Password" ).focus();
 							$("#Password").css("border", "1px solid #ffa02e");
-							$(".accent-btn").addClass("stop");
+							$("#create-webuser-form .accent-btn").addClass("stop");
 							
 						}else if($( "#Password" ).val().length <= 7){
 							$('#checkPasswordMessage').html("8 characters minimum");
 							$( "#Password" ).focus();
 							$("#Password").addClass('focuscss');
-							$(".accent-btn").addClass("stop");
+							$("#create-webuser-form .accent-btn").addClass("stop");
 						}
 						else{
 							$('#checkPasswordMessage').html("");
 							
 							$("#Password").css("border", "");
-							$(".accent-btn").removeClass("stop");
+							$("#create-webuser-form .accent-btn").removeClass("stop");
 						}					
 					}
 				</script>
