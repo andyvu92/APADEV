@@ -803,11 +803,9 @@ jQuery(document).ready(function() {
     $('.region-right-sidebar, .node .right-sidebar').each(function(){
       var window_width = $(window).width();
       var title = $('.underline-heading' ,this).first().text();
-      if (window_width >= 993){
-        return;
-      }
 
       if ( (window_width < 993) && !(window.location.href.indexOf("pd-product") > -1) ){
+        console.log('<993');
         if ( $(this).parent().find('.sidebar-toggle').length == 0 ) {
           $(this).wrap('<div class="sidebar-overlay"></div>');
           $(this).before('<span class="sidebar-toggle">' + title.toLowerCase() + '</span>');
@@ -846,10 +844,11 @@ jQuery(document).ready(function() {
           //Default is 75px
            threshold:150
         });
-      } else {
-        $('.sidebar-overlay > .sidebar-toggle').remove();
-        $('.sidebar-overlay > .region-right-sidebar, .sidebar-overlay > .right-sidebar').unwrap();
+      } else{
+        $(this).insertAfter($('body').find('.left-content'));
+        $('body').find('.sidebar-overlay').remove();
       }
+
       if ( (window_width < 570) && !(window.location.href.indexOf("pd-product") > -1) ) {
         // HIDE SIDEBAR ON SWIPE RIGHT
         $('.sidebar-overlay').swipe( {
