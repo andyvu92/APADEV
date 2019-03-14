@@ -692,7 +692,7 @@
               padding-left: 40px;
               text-align: left;
               &:before{
-                  margin-left: -40px;
+                  margin-left: -39px;
               }
             }
           
@@ -1875,9 +1875,6 @@ div[id^="myCart"] .modal-body a.addCartlink{
 .pdSearchButton{
     float:right;
 }
-#node-249 .region div {
-    padding: 0;
-}
 
 .detailContent div{
     border-bottom: 1px solid lightgray;
@@ -2060,6 +2057,26 @@ a#createAccount {
 #node-249 div#registerMember .modal-content{
     width:653px;
 }
+
+#node-249{
+    #registerMember{
+        [class^="down"]{
+            overflow: hidden;
+            .row{
+                margin-left: 0;
+                margin-right: 0;
+                [class^="col-"]{
+                    padding-left: 0;
+                    padding-right: 0;
+                }
+            }
+        }
+        .selectize-control.multi .selectize-input{
+            border: 1px solid #eceef0;
+        }
+    }
+}
+
 #node-255 .dashboard-button,#node-256 .dashboard-button {
     width: 165px;
     margin-bottom: 30px;
