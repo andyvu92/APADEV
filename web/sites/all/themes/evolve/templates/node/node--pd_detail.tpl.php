@@ -219,6 +219,11 @@ $userRetisterStatus = false;
 		$type = $t['MemberType'];
 		$pricelistGet[$type] = $t['Price'];
 	}
+	if($pd_detail['IsDistanceDiscountApplied']=="Yes") {
+        $type = "Distance Discount";
+        $pricelistGet[$type] = $pd_detail["DistanceDiscount"];
+    }
+
       /*Save data to local shopping cart database response here*/
     	 $saveShoppingCart = "0";
 	   if(isset($_GET['saveShoppingCart'])){ 
@@ -1729,14 +1734,14 @@ $userRetisterStatus = false;
 				<?php 
 				$priceList = array();
 				$cost = 0;
-                if($pd_detail['IsDistanceDiscountApplied']=="Yes"){$distanceprice="Distance Discount:";}  else{$distanceprice="";}
+                //if($pd_detail['IsDistanceDiscountApplied']=="Yes"){$distanceprice="Distance Discount:";}  else{$distanceprice="";}
 				if($prices!="NULL"&& isset($_SESSION["UserId"])){
 					if(in_array($pd_detail['Product Cost Without Coupon'],$pricelistGet)) {
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
 					}
 					else {
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-						echo $distanceprice."$".number_format($pd_detail['Product Cost Without Coupon'],2);
+						//echo $distanceprice."$".number_format($pd_detail['Product Cost Without Coupon'],2);
 					}
 				} else{
 					foreach($pricelistGet as $key=>$value){
