@@ -805,7 +805,6 @@ jQuery(document).ready(function() {
       var title = $('.underline-heading' ,this).first().text();
 
       if ( (window_width < 993) && !(window.location.href.indexOf("pd-product") > -1) ){
-        console.log('<993');
         if ( $(this).parent().find('.sidebar-toggle').length == 0 ) {
           $(this).wrap('<div class="sidebar-overlay"></div>');
           $(this).before('<span class="sidebar-toggle">' + title.toLowerCase() + '</span>');
