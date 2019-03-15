@@ -2077,7 +2077,7 @@ $userRetisterStatus = false;
 </div>
 	<div class="extra-info">
 		<span>By registering for this course, you agree to the <a href="/pd/terms-and-conditions">APA Events Terms and Conditions.</a></span>
-		<span>You could save on future events by joining an <a href="/membership/national-groups">APA National Group</a>. Pay $54 today and keep saving throughout the year.</span>
+		<span>You could save on future events by joining an <a href="/membership/national-groups">APA National Group</a>. Pay $56 today and keep saving throughout the year.</span>
 	</div>
 </div>
 
