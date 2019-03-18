@@ -68,7 +68,7 @@ if(isset($_POST['step3'])) {
 		 // record member log for successful process
 		 if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 		 $addMemberLog["orderID"] = "0";
-		 $addMemberLog["jsonMessage"] = json_encode($postReviewData);
+		 $addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($registerOuts);
 		 $addMemberLog["createDate"] = date('Y-m-d');
 		 $addMemberLog["type"] =  "Join";
 		 $addMemberLog["logError"] = 0;
