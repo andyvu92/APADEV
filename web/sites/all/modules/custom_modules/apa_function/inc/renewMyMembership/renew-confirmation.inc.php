@@ -189,7 +189,7 @@ $background = getBackgroundImage($userID);
 				    // record member log for successful process
 					if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 					$addMemberLog["orderID"] = $postReviewData['OrderID'];
-					$addMemberLog["jsonMessage"] = json_encode($postReviewData);
+					$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
 					$addMemberLog["createDate"] = date('Y-m-d');
 					$addMemberLog["type"] =  "Renew";
 					$addMemberLog["logError"] = 0;

@@ -50,7 +50,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 	// record member log for successful process
 	if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 	$addMemberLog["orderID"] = "0";
-	$addMemberLog["jsonMessage"] = $OrderSend;
+	$addMemberLog["jsonMessage"] = json_encode($OrderSend).json_encode($registerOuts);
 	$addMemberLog["createDate"] = date('Y-m-d');
 	$addMemberLog["type"] =  "PRF";
 	$addMemberLog["logError"] = 0;

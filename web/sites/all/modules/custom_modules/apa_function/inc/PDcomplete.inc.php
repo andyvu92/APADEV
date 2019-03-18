@@ -75,7 +75,7 @@ if(isset($_POST["POSTPRF"])) {
 		// record member log for successful process
 		if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 		$addMemberLog["orderID"] = "0";
-		$addMemberLog["jsonMessage"] = json_encode($OrderSend);
+		$addMemberLog["jsonMessage"] = json_encode($OrderSend).json_encode($registerOuts);
 		$addMemberLog["createDate"] = date('Y-m-d');
 		$addMemberLog["type"] =  "PD";
 		$addMemberLog["logError"] = 0;
