@@ -1814,6 +1814,15 @@ jQuery(document).ready(function() {
     }
   });
 
+  //REDIRECTION FOR UNSECURED URLs
+  $('a[redirect]').each(function(){
+    var target = $(this).attr('redirect');
+    $(this).click(function(e){
+      e.preventDefault();
+      window.open(target, '_blank');
+    });
+  });
+
 	//DETECT DEVICES AND ADD CLASS ACCORDINGLY-----------------------------------------------------
   //ipad
   if ( navigator.userAgent.match(/iPad/) ){
