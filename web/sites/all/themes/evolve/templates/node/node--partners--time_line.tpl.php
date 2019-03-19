@@ -81,9 +81,7 @@
 ?>
 <?php 
 	$only = ((array)$content['field_members_only']['#items'][0]['taxonomy_term'])["name"];	
-
 ?>
-
 
 <div id="myModal-node-<?php print $node->nid; ?>" class="PartnersDetail" style="display:none;">
 
@@ -156,7 +154,13 @@
 	</div>
 
 	<div class="modal-footer">
-		<a class="partner-logo" href="<?php echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_company_logo']);?></a>
+		<?php 
+		$urlLink = $node->field_web_address['und'][0]['value'];
+		if(substr($urlLink, 4, 1) == "s"): ?>
+			<a class="partner-logo" href="<?php echo $node->field_web_address['und'][0]['value']; ?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_company_logo']);?></a>
+		<?php else: ?>
+			<a class="partner-logo" redirect="<?php echo $node->field_web_address['und'][0]['value']; ?>" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php print render($content['field_company_logo']);?></a>
+		<?php endif; ?>
 		<!-- <a class="partner-address" href="<?php //echo $node->field_web_address['und'][0]['value']?>" target="_blank" onclick="ga('send','partners', 'Partners-Tracking', 'Click', 'partner',1.0);"><?php //print render($content['field_web_address']);?></a> -->
 	</div>
 			<?php endif;?>
