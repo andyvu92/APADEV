@@ -1849,7 +1849,98 @@ jQuery(document).ready(function() {
 	browser_details += "<p>Browser Language: " + navigator.language + "</p>";
 	browser_details += "<p>Browser Online: " + navigator.onLine + "</p>";
 	browser_details += "<p>Platform: " + navigator.platform + "</p>";
-	browser_details += "<p>User-agent header: " + navigator.userAgent + "</p>";
+  browser_details += "<p>User-agent header: " + navigator.userAgent + "</p>";
+  
+  // PAYMENT PROGRESS PIE CHART------------------------------------------------------------------
+  var payment_progress_chart = function(prop){
+     
+    var build_progress_chart = '<div class="progress-pie-chart" data-percent="0"><div class="ppc-progress"><div class="ppc-progress-fill">&nbsp;</div></div><div class="ppc-percents"><div class="pcc-percents-wrapper"><span>0%</span></div></div></div><input id="value" type="text" val="0" />';
+    // build progress chart
+    $('body').find('#progress_chart').html(build_progress_chart);
+
+    // calculate progress
+    var calculate_progress = function(percent){
+      var $ppc = $('.progress-pie-chart'),
+        deg = 360*percent/100;
+      if (percent > 50) {
+        $ppc.addClass('gt-50');
+      } else {
+        $ppc.removeClass('gt-50');
+      }
+      $('.ppc-progress-fill').css('transform','rotate('+ deg +'deg)');
+      $('.ppc-percents span').html(percent+'%');
+    }
+    calculate_progress(0);
+
+    // run progress with conditions
+    var progressCal = function(status){
+      if (status == 'active'){
+        var up = true;
+        var value = 0;
+        var increment = 1;
+        var ceiling = 100;
+        var timer;
+    
+        function PerformCalc() {
+          if (up == true && value <= ceiling) {
+            console.log('start');
+            value += increment;
+            // assign value and add trigger
+            $('#value').val(value).trigger('change');
+            // stop when percentage hit 100
+            if (value == ceiling) {
+              console.log('stop');
+              up = false;
+            }
+          } else {
+              return;
+          }
+          calculate_progress(value);
+        }
+        // progress speed
+        timer = setInterval(PerformCalc, 500);
+      }
+      
+      var state_completed = false;
+
+      $('#value').on('change', function(){
+        if (state_completed == false){
+          var progress = $(this).val();
+          if (progress < 30){
+            clearInterval(timer);
+            timer = setInterval(PerformCalc, 500);
+          } else if (30 < progress < 70){
+            clearInterval(timer);
+            timer = setInterval(PerformCalc, 1000);
+          } 
+          if ( progress > 70){
+            clearInterval(timer);
+            timer = setInterval(PerformCalc, 1500);
+          }
+        }
+      });
+
+      $(window).on('beforeunload', function(){
+        // complete the progress if page get redirected
+        state_completed = true;
+        clearInterval(timer);
+        timer = setInterval(PerformCalc, 10);
+      });
+    }
+    progressCal('active');  
+  }
+
+  $('#PDPlaceOrder button').on('click', function(e){
+    $('body').find('.overlay .loader').hide();
+    setTimeout(function(){
+      if( $('body').find('.overlay').is(':visible') ){
+        if( $('.overlay .loaders').find('#progress_chart').length == 0 ) {
+          $('body').find('.overlay .loader').after('<div id="progress_chart"></div>');
+          payment_progress_chart();
+        }
+      }
+    }, 300);
+  }); 
 });
 
 

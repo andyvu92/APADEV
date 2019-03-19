@@ -5279,3 +5279,75 @@ body{
         }
     }
 }
+
+
+/* PAYMENT PROGRESS PIE CHART */
+.circle(@size) {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    left: calc(~'50% - '@size/2);
+    top: calc(~'50% - '@size/2);
+    width: @size;
+    height: @size;
+}
+  
+#reset_data{
+    margin: 50px auto;
+    display: block;
+}
+
+@size: 200px;
+@progress_fill_color: @brighter-blue;
+@circle_fill_color: #E5E5E5;
+
+.progress-pie-chart {
+    width: @size;
+    height: @size;
+    border-radius: 50%;
+    background-color: @circle_fill_color;
+    position: relative;
+    &.gt-50 {
+        background-color: @progress_fill_color;
+    }
+    & + #value{
+        display: none;
+    }
+}
+.ppc-progress {
+    .circle(@size);
+    clip: rect(0, @size, @size, @size/2);
+    .ppc-progress-fill {
+        .circle(@size);
+        clip: rect(0, @size/2, @size, 0);
+        background: @progress_fill_color;
+        transform: rotate(0deg);
+    }
+    .gt-50 & {
+        clip: rect(0, @size/2, @size, 0);
+        .ppc-progress-fill {
+        clip: rect(0, @size, @size, @size/2);
+        background: @circle_fill_color;
+        }
+    }
+}
+.ppc-percents {
+    .circle(@size/1.15);
+    background: #fff;
+    text-align: center;
+    display: table;
+    span {
+        display: block;
+        font-size: 2.6em;
+        font-weight: bold;
+        color: @progress_fill_color;
+    }
+}
+.pcc-percents-wrapper {
+display: table-cell;
+vertical-align: middle;
+}
+
+.progress-pie-chart {
+margin: 50px auto 0;
+}
