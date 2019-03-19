@@ -13,3 +13,6 @@ log/
 tmp/
 web/sites/Log/
 web/tmp/
+
+# Untrack of local history files
+.history/
