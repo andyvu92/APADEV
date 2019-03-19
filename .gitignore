@@ -7,3 +7,9 @@
 # Unclean patches
 *.orig
 *.rej
+
+# Untrack of local tmp and log files
+log/
+tmp/
+web/sites/Log/
+web/tmp/
