@@ -1132,10 +1132,13 @@ jQuery(document).ready(function() {
       });
       
       //update step number and label on Prev/Next click
-      $(document).on('click', 'a[class^="join-details-button"], a[class^="your-details-prevbutton"]', function(){
+      $(document).on('click', 'a[class^="join-details-button"], a[class^="your-details-prevbutton"], #tabmenu .skip', function(){
         var currentStep = $('.numberized').find('.text-underline').text();
         var stepNumber = $('.numberized .text-underline').parent().find('.step-order').text();
         $('.number-menu-active .current-step .step-number').text(stepNumber);
+        if ( currentStep == 'Education4' ) {
+          currentStep = 'Education';
+        }
         $('.number-menu-active .current-step .step-label').text(currentStep);
       });
     });
@@ -1892,13 +1895,11 @@ jQuery(document).ready(function() {
     
         function PerformCalc() {
           if (up == true && value <= ceiling) {
-            console.log('start');
             value += increment;
             // assign value and add trigger
             $('#value').val(value).trigger('change');
             // stop when percentage hit 100
             if (value == ceiling) {
-              console.log('stop');
               up = false;
             }
           } else {
@@ -1949,7 +1950,19 @@ jQuery(document).ready(function() {
         }
       }
     }, 300);
-  }); 
+  });
+
+  $('#join-insurance-form .join-details-button7, #renew-insurance-form .join-details-button7').on('click', function(e){
+    $('body').find('.overlay .loader').hide();
+    setTimeout(function(){
+      if( $('body').find('.overlay').is(':visible') ){
+        if( $('.overlay .loaders').find('#progress_chart').length == 0 ) {
+          $('body').find('.overlay .loader').after('<div id="progress_chart"></div>');
+          payment_progress_chart();
+        }
+      }
+    }, 300);
+  });
 });
 
 
