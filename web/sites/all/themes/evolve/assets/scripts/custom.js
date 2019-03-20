@@ -1774,7 +1774,11 @@ if($('select[name="Mailing-Country"]').val()=="Australia"){
 	$(document).on('click', '.join-details-button4', function(){
 		$('.down4').show();
 		$('.down5').hide();
-		$('.overlay .edu-step-note').show();
+		if( $('body').find('form[action="jointheapa"]').length > 0 ) {
+			$('.overlay .edu-step-note').show();
+		} else {
+			$('.overlay .edu-step-note-generic').show();
+		}
 		$('.overlay').fadeIn();
 		$('.loaders').css('visibility','visible').hide().fadeIn();
 	});

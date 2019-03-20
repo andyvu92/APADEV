@@ -346,6 +346,7 @@ You have the right to access the personal information about yourself held by the
 		<span class="loader loader-quart">
 		</span>   
 		<span class="edu-step-note">This may take a moment while we create your account</span>
+		<span class="edu-step-note-generic">This may take a moment while we update your details</span>
 	</section>
 </div>
 <?php logRecorder(); ?>
