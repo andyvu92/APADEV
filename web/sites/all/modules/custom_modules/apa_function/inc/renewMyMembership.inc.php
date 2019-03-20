@@ -441,7 +441,7 @@ You have the right to access the personal information about yourself held by the
 	<section class="loaders">
 		<span class="loader loader-quart">
 		</span>  
-		<span class="edu-step-note"></span> 
+		<span class="edu-step-note">This may take a moment while we update your details</span>
 	</section>
 </div>
 
