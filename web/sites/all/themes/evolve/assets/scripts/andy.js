@@ -1963,6 +1963,52 @@ jQuery(document).ready(function() {
       }
     }, 300);
   });
+
+  // inmotion archives carousel
+  $('.archive').slick({
+    dots: true,
+    centerMode: true,
+    centerPadding: '0px',
+    slidesToShow: 9,
+    slidesToScroll: 1,
+    autoplay: true,
+    infinite: true,
+    swipeToSlide: true,
+    arrows: false,
+    responsive: [
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 5
+        }
+      },
+      {
+        breakpoint: 570,
+        settings: {
+          centerPadding: '40px',
+          slidesToShow: 3
+        }
+      }
+    ]
+  }).mousewheel(function(e) {
+      e.preventDefault();
+  
+      if (e.deltaY < 0) {
+        $(this).slick('slickNext');
+      }
+      else {
+        $(this).slick('slickPrev');
+      }
+  });
+  
+  $('.archive_year .item').on('click', function(e){
+    e.preventDefault();
+    var target = $(this).attr('href').replace('#', '');
+    $(this).siblings().removeClass('active');
+    $(this).addClass('active');
+    $('.archive_carousel_wrapper .archive').removeClass('active');
+    $('.'+target).addClass('active');
+  });
 });
 
 
