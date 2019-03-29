@@ -1734,14 +1734,14 @@ $userRetisterStatus = false;
 				<?php 
 				$priceList = array();
 				$cost = 0;
-                //if($pd_detail['IsDistanceDiscountApplied']=="Yes"){$distanceprice="Distance Discount:";}  else{$distanceprice="";}
+               
 				if($prices!="NULL"&& isset($_SESSION["UserId"])){
 					if(in_array($pd_detail['Product Cost Without Coupon'],$pricelistGet)) {
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
 					}
 					else {
 						comparePrice($pricelistGet, $pd_detail['Product Cost Without Coupon']);
-						//echo $distanceprice."$".number_format($pd_detail['Product Cost Without Coupon'],2);
+						
 					}
 				} else{
 					foreach($pricelistGet as $key=>$value){
