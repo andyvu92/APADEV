@@ -58,9 +58,23 @@ if(isset($_POST["POSTPRF"])) {
 	$OrderSend['InstallmentFrequency'] = "";
 	$OrderSend['CampaignCode'] = $_POST["CouponCode"];
 	$registerOuts = GetAptifyData("26", $OrderSend);
+	$recordOrder = array();
+	//new array to record specific fields
+	$recordOrder['userID'] = $OrderSend['userID'];
+	$recordOrder['PRFdonation'] = $OrderSend['PRFdonation'];
+	$recordOrder['Card_number'] = $OrderSend['Card_number'];
+	$recordOrder['productID'] = $OrderSend['productID'];
+	$recordOrder['PaymentTypeID'] = $OrderSend['PaymentTypeID'];
+	if($OrderSend['CCNumber'] !=""){  $recordOrder['CCNumber'] = substr($OrderSend['CCNumber'], -4); }
+	else{ $recordOrder['CCNumber'] = $OrderSend['CCNumber'];}
+	$recordOrder['InsuranceApplied'] = $OrderSend['InsuranceApplied'];
+	$recordOrder['Paymentoption'] = $OrderSend['Paymentoption'];
+	$recordOrder['InstallmentFor'] = $OrderSend['InstallmentFor'];
+	$recordOrder['InstallmentFrequency'] = $OrderSend['InstallmentFrequency'];
+	$recordOrder['CampaignCode'] = $OrderSend['CampaignCode'];
 	//delete session: really important!!!!!!!!
 	unset($_SESSION["tempcard"]);
-	if($registerOuts['Invoice_ID']!=="0") {
+	if(sizeof($registerOuts)!=0 && $registerOuts['Invoice_ID']!=="0") {
 		$invoice_ID = $registerOuts['Invoice_ID'];
 		
 		//put extra code when using API to get the status of order, if it is successful, will save terms and conditions on APA side
@@ -75,7 +89,7 @@ if(isset($_POST["POSTPRF"])) {
 		// record member log for successful process
 		if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 		$addMemberLog["orderID"] = "0";
-		$addMemberLog["jsonMessage"] = json_encode($OrderSend).json_encode($registerOuts);
+		$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
 		$addMemberLog["createDate"] = date('Y-m-d');
 		$addMemberLog["type"] =  "PD";
 		$addMemberLog["logError"] = 0;
@@ -182,7 +196,7 @@ if(isset($_POST["Invoice_ID"])) {
 }
 ?>
 <?php logRecorder();  ?>
-<?php if($registerOuts['Invoice_ID']!=="0"):?>
+<?php if(sizeof($registerOuts)!=0 && $registerOuts['Invoice_ID']!=="0"):?>
 
 <div class="flex-container" id="non-member">
 	<div class="flex-cell">
@@ -225,7 +239,7 @@ if(isset($_POST["Invoice_ID"])) {
 <!--this is handle record error log-->
 <?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 		$addMemberLog["orderID"] = "0";
-		$addMemberLog["jsonMessage"] = json_encode($OrderSend).json_encode($registerOuts);
+		$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
 		$addMemberLog["createDate"] = date('Y-m-d');
 		$addMemberLog["type"] =  "PD";
 		$addMemberLog["logError"] = 1;

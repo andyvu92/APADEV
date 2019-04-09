@@ -52,6 +52,15 @@ if(isset($_POST['step3'])) {
 	// Response -Renew a membership order successfully
 	//submit data to complete renew membership web service 2.2.27
 	$renewOuts=aptify_get_GetAptifyData("27", $postReviewData);
+	$recordOrder = array();
+	//new array to record specific fields
+	$recordOrder['userID'] = $postReviewData['userID'];
+	$recordOrder['Card_number'] = $postReviewData['Card_number'];
+	$recordOrder['productID'] = $postReviewData['productID'];
+	$recordOrder['PaymentTypeID'] = $postReviewData['PaymentTypeID'];
+	if($OrderSend['CCNumber'] !=""){  $postReviewData['CCNumber'] = substr($postReviewData['CCNumber'], -4); }
+	else{ $recordOrder['CCNumber'] = $postReviewData['CCNumber'];}
+	$recordOrder['InsuranceApplied'] = $postReviewData['InsuranceApplied'];
 	if($renewOuts['MResponse'] =="Order updated successfully") {
 	//refresh session data
 	$data = "UserID=".$_SESSION["UserId"];
@@ -189,7 +198,7 @@ $background = getBackgroundImage($userID);
 				    // record member log for successful process
 					if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 					$addMemberLog["orderID"] = $postReviewData['OrderID'];
-					$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
+					$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
 					$addMemberLog["createDate"] = date('Y-m-d');
 					$addMemberLog["type"] =  "Renew";
 					$addMemberLog["logError"] = 0;
@@ -229,7 +238,7 @@ $background = getBackgroundImage($userID);
 						<!--this is handle record error log-->
 						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 								$addMemberLog["orderID"] = $postReviewData['OrderID'];
-								$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
+								$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
 								$addMemberLog["createDate"] = date('Y-m-d');
 								$addMemberLog["type"] =  "Renew";
 								$addMemberLog["logError"] = 1;
@@ -247,7 +256,7 @@ $background = getBackgroundImage($userID);
 						<!--this is handle record error log-->
 						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 								$addMemberLog["orderID"] = $postReviewData['OrderID'];
-								$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
+								$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
 								$addMemberLog["createDate"] = date('Y-m-d');
 								$addMemberLog["type"] =  "Renew";
 								$addMemberLog["logError"] = 1;
@@ -265,7 +274,7 @@ $background = getBackgroundImage($userID);
 						<!--this is handle record error log-->
 						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 								$addMemberLog["orderID"] = $postReviewData['OrderID'];
-								$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
+								$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
 								$addMemberLog["createDate"] = date('Y-m-d');
 								$addMemberLog["type"] =  "Renew";
 								$addMemberLog["logError"] = 1;
@@ -283,7 +292,7 @@ $background = getBackgroundImage($userID);
 					<!--this is handle record error log-->
 					<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 							$addMemberLog["orderID"] = $postReviewData['OrderID'];
-							$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
+							$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
 							$addMemberLog["createDate"] = date('Y-m-d');
 							$addMemberLog["type"] =  "Renew";
 							$addMemberLog["logError"] = 1;
@@ -313,7 +322,7 @@ $background = getBackgroundImage($userID);
 					    <!--this is handle record error log-->
 						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 								$addMemberLog["orderID"] = $postReviewData['OrderID'];
-								$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
+								$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
 								$addMemberLog["createDate"] = date('Y-m-d');
 								$addMemberLog["type"] =  "Renew";
 								$addMemberLog["logError"] = 1;
@@ -340,7 +349,7 @@ $background = getBackgroundImage($userID);
 					    <!--this is handle record error log-->
 						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 								$addMemberLog["orderID"] = $postReviewData['OrderID'];
-								$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($renewOuts);
+								$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
 								$addMemberLog["createDate"] = date('Y-m-d');
 								$addMemberLog["type"] =  "Renew";
 								$addMemberLog["logError"] = 1;

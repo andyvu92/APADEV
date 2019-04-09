@@ -34,6 +34,20 @@ if(isset($_POST['step3'])) {
 	// userID&Paymentoption&PRFdonation&Rollover&Card_number&productID
 	// Response -Register a new order successfully
 	$registerOuts = aptify_get_GetAptifyData("26", $postReviewData);
+	$recordOrder = array();
+	//new array to record specific fields
+	$recordOrder['userID'] = $postReviewData['userID'];
+	$recordOrder['PRFdonation'] = $postReviewData['PRFdonation'];
+	$recordOrder['Card_number'] = $postReviewData['Card_number'];
+	$recordOrder['productID'] = $postReviewData['productID'];
+	$recordOrder['PaymentTypeID'] = $postReviewData['PaymentTypeID'];
+	if($OrderSend['CCNumber'] !=""){  $postReviewData['CCNumber'] = substr($postReviewData['CCNumber'], -4); }
+	else{ $recordOrder['CCNumber'] = $postReviewData['CCNumber'];}
+	$recordOrder['InsuranceApplied'] = $postReviewData['InsuranceApplied'];
+	$recordOrder['Paymentoption'] = $postReviewData['Paymentoption'];
+	$recordOrder['InstallmentFor'] = $postReviewData['InstallmentFor'];
+	$recordOrder['InstallmentFrequency'] = $postReviewData['InstallmentFrequency'];
+	$recordOrder['CampaignCode'] = $postReviewData['CampaignCode'];
     if($registerOuts['Invoice_ID']!=="0") {
 		//refresh session data
 		$data = "UserID=".$_SESSION["UserId"];
@@ -68,7 +82,7 @@ if(isset($_POST['step3'])) {
 		 // record member log for successful process
 		 if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 		 $addMemberLog["orderID"] = "0";
-		 $addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($registerOuts);
+		 $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
 		 $addMemberLog["createDate"] = date('Y-m-d');
 		 $addMemberLog["type"] =  "Join";
 		 $addMemberLog["logError"] = 0;
@@ -221,7 +235,7 @@ $background = getBackgroundImage($userID);
                     <!--this is handle record error log-->
 					<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 						$addMemberLog["orderID"] = "0";
-						$addMemberLog["jsonMessage"] = json_encode($postReviewData).json_encode($registerOuts);
+						$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
 						$addMemberLog["createDate"] = date('Y-m-d');
 						$addMemberLog["type"] =  "Join";
 						$addMemberLog["logError"] = 1;

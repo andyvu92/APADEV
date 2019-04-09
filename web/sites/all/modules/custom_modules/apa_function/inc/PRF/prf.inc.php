@@ -23,7 +23,20 @@ if(isset($_POST["POSTPRF"])) {
 	else {$OrderSend['PRFdonation']=$_POST["PRF"];}
 	$OrderSend['productID'] = array();
 	$registerOuts = aptify_get_GetAptifyData("26", $OrderSend);
-	
+	$recordOrder = array();
+	//new array to record specific fields
+	$recordOrder['userID'] = $OrderSend['userID'];
+	$recordOrder['PRFdonation'] = $OrderSend['PRFdonation'];
+	$recordOrder['Card_number'] = $OrderSend['Card_number'];
+	$recordOrder['productID'] = $OrderSend['productID'];
+	$recordOrder['PaymentTypeID'] = $OrderSend['PaymentTypeID'];
+	if($OrderSend['CCNumber'] !=""){  $recordOrder['CCNumber'] = substr($OrderSend['CCNumber'], -4); }
+	else{ $recordOrder['CCNumber'] = $OrderSend['CCNumber'];}
+	$recordOrder['InsuranceApplied'] = $OrderSend['InsuranceApplied'];
+	$recordOrder['Paymentoption'] = $OrderSend['Paymentoption'];
+	$recordOrder['InstallmentFor'] = $OrderSend['InstallmentFor'];
+	$recordOrder['InstallmentFrequency'] = $OrderSend['InstallmentFrequency'];
+	$recordOrder['CampaignCode'] = $OrderSend['CampaignCode'];
 	$invoice_ID = $registerOuts['Invoice_ID'];
 	//if(isset($_POST['addcardtag'])){
 		// 2.2.15 - Add payment method
@@ -50,7 +63,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 	// record member log for successful process
 	if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 	$addMemberLog["orderID"] = "0";
-	$addMemberLog["jsonMessage"] = json_encode($OrderSend).json_encode($registerOuts);
+	$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
 	$addMemberLog["createDate"] = date('Y-m-d');
 	$addMemberLog["type"] =  "PRF";
 	$addMemberLog["logError"] = 0;
@@ -249,7 +262,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 	<?php 
 		if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
 		$addMemberLog["orderID"] = "0";
-		$addMemberLog["jsonMessage"] = json_encode($OrderSend).json_encode($registerOuts);
+		$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
 		$addMemberLog["createDate"] = date('Y-m-d');
 		$addMemberLog["type"] =  "PRF";
 		$addMemberLog["logError"] = 1;
