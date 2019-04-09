@@ -39,7 +39,7 @@ function nationalIcons(){
 		// National Group ID, National Group title
 		//$sendData["RequestNG"] = "RequestNG";
 		$sendData["UserID"] = $_SESSION['UserId'];
-		$nationalGroups = GetAptifyData("20", $sendData);
+		$nationalGroups = aptify_get_GetAptifyData("20", $sendData);
 		
 		//$userIcons = array(0,1,2 ,3,3,5,6,7);
 		$NGs = $nationalGroups["results"];

@@ -57,7 +57,7 @@ if(isset($_POST["POSTPRF"])) {
 	$OrderSend['InstallmentFor'] = "Membership";
 	$OrderSend['InstallmentFrequency'] = "";
 	$OrderSend['CampaignCode'] = $_POST["CouponCode"];
-	$registerOuts = GetAptifyData("26", $OrderSend);
+	$registerOuts = aptify_get_GetAptifyData("26", $OrderSend);
 	$recordOrder = array();
 	//new array to record specific fields
 	$recordOrder['userID'] = $OrderSend['userID'];

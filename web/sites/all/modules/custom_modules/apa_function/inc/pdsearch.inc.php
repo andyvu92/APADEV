@@ -18,7 +18,7 @@ if(!function_exists('drupal_session_started'))
 	} else {
 		$sendData["UserID"] = "-1";
 	}
-	$details = GetAptifyData("19", $sendData);
+	$details = aptify_get_GetAptifyData("19", $sendData);
 	//print_r($details);
 ?>
 <form id="pd-search-form" action="pd-search?search-result" method="POST">
