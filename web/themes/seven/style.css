@@ -988,3 +988,8 @@ div.add-or-remove-shortcuts {
   -webkit-border-radius: 8px;
   border-radius: 8px;
 }
+/* admin setting - increase font & size of admin nav */
+#admin-menu .dropdown a, #admin-menu .dropdown li > span {
+	font-size: 13px;
+	padding: 8px 12px;
+}
