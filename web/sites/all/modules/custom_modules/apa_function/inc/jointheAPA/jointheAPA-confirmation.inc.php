@@ -41,13 +41,12 @@ if(isset($_POST['step3'])) {
 	$recordOrder['Card_number'] = $postReviewData['Card_number'];
 	$recordOrder['productID'] = $postReviewData['productID'];
 	$recordOrder['PaymentTypeID'] = $postReviewData['PaymentTypeID'];
-	if($OrderSend['CCNumber'] !=""){  $postReviewData['CCNumber'] = substr($postReviewData['CCNumber'], -4); }
+	if($postReviewData['CCNumber'] !=""){  $recordOrder['CCNumber'] = substr($postReviewData['CCNumber'], -4); }
 	else{ $recordOrder['CCNumber'] = $postReviewData['CCNumber'];}
 	$recordOrder['InsuranceApplied'] = $postReviewData['InsuranceApplied'];
 	$recordOrder['Paymentoption'] = $postReviewData['Paymentoption'];
 	$recordOrder['InstallmentFor'] = $postReviewData['InstallmentFor'];
 	$recordOrder['InstallmentFrequency'] = $postReviewData['InstallmentFrequency'];
-	$recordOrder['CampaignCode'] = $postReviewData['CampaignCode'];
     if($registerOuts['Invoice_ID']!=="0") {
 		//refresh session data
 		$data = "UserID=".$_SESSION["UserId"];

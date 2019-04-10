@@ -58,7 +58,7 @@ if(isset($_POST['step3'])) {
 	$recordOrder['Card_number'] = $postReviewData['Card_number'];
 	$recordOrder['productID'] = $postReviewData['productID'];
 	$recordOrder['PaymentTypeID'] = $postReviewData['PaymentTypeID'];
-	if($OrderSend['CCNumber'] !=""){  $postReviewData['CCNumber'] = substr($postReviewData['CCNumber'], -4); }
+	if($postReviewData['CCNumber'] !=""){  $recordOrder['CCNumber'] = substr($postReviewData['CCNumber'], -4); }
 	else{ $recordOrder['CCNumber'] = $postReviewData['CCNumber'];}
 	$recordOrder['InsuranceApplied'] = $postReviewData['InsuranceApplied'];
 	if($renewOuts['MResponse'] =="Order updated successfully") {
