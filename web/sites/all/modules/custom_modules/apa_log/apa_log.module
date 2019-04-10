@@ -24,8 +24,8 @@ function apa_log_menu() {
     'page arguments' => array('apa_log_admin_settings'),
     'access arguments' => array('access member_log settings'),
     //'access callback' => TRUE,
-    //'type' => MENU_LOCAL_ACTION | MENU_NORMAL_ITEM,
-    'type' =>MENU_CALLBACK,
+    'type' => MENU_LOCAL_ACTION | MENU_NORMAL_ITEM,
+    
   );
   return $items;
 }
