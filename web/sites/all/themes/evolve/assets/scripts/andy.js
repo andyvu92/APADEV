@@ -2009,6 +2009,81 @@ jQuery(document).ready(function() {
     $('.archive_carousel_wrapper .archive').removeClass('active');
     $('.'+target).addClass('active');
   });
+
+  $.fn.loadContent = function(url, targetContainer) {
+    var container = $(this);
+    $.get(url, function(result){
+      var obj = $(result).find('body');
+          var data = $(result).find(targetContainer).html();
+          $(container).html(data);
+    });
+  };
+
+  // AJAXIFY APP LOADING & FETCH DATA TO POPUP MODEL
+  $(document).on('click', '.initiate_data', function(e){
+    e.preventDefault();
+    var target = '/featured-app/' + $(this).attr('data-src');
+
+    if ( $(this).parent().is('.cta-primary') ){
+      var appTitle = $(this).parent().parent().find('.app_title').text();
+      var appCreator = $(this).parent().parent().find('.app_provider').text();
+      var ios = $(this).parent().parent().find('.download_urls .ios').attr('href');
+      var android = $(this).parent().parent().find('.download_urls .android').attr('href');
+    } else {
+      var appTitle = $(this).parent().find('.app_title').text();
+      var appCreator = $(this).parent().find('.app_provider').text();
+      var ios = $(this).parent().find('.download_urls .ios').attr('href');
+      var android = $(this).parent().find('.download_urls .android').attr('href');
+    }
+
+    // load logo
+    $('#app_view_popup .app_heading .app_logo').loadContent(target, '.field-name-field-logo .field-item.even .content');
+    // load title
+    $('#app_view_popup .app_heading .main_heading').text(appTitle);
+    // load creator
+    $('#app_view_popup .app_heading .app_creator').text(appCreator);
+    // load cost
+    $('#app_view_popup .app_heading .app_cost .cost').loadContent(target, '.field-name-field-cost .field-item.even');
+    // load description
+    $('#app_view_popup .app_content .app_description').loadContent(target, '.field-name-body .field-item.even');
+    // load contact
+    $('#app_view_popup .app_contact .content').loadContent(target, '.field-name-field-contact .field-item.even');
+    // load terms & conditions
+    $('#app_view_popup .app_content .app_terms_conditions .content').loadContent(target, '.field-name-field-terms-and-conditions .field-item.even');
+    // load app download
+    $('#app_view_popup .app_content .app_download .ios').attr('href', ios);
+    $('#app_view_popup .app_content .app_download .android').attr('href', android);
+    // load app screens
+    $('#app_view_popup .app_screen .screen_grid > div').html('');
+    $('#app_view_popup .app_screen .screen_grid .screen_1').loadContent(target, '.field-name-field-app-screen-1 .field-item.even .content');
+    $('#app_view_popup .app_screen .screen_grid .screen_2').loadContent(target, '.field-name-field-app-screen-2 .field-item.even .content');
+    $('#app_view_popup .app_screen .screen_grid .screen_3').loadContent(target, '.field-name-field-app-screen-3 .field-item.even .content');
+    $('#app_view_popup .app_screen .screen_grid .screen_4').loadContent(target, '.field-name-field-app-screen-4 .field-item.even .content');
+    $('#app_view_popup .app_screen .screen_grid .screen_5').loadContent(target, '.field-name-field-app-screen-5 .field-item.even .content');
+  
+    $('#app_featured, #app_grid').hide();
+
+    $('#app_view_popup').fadeIn(1000, function () {
+      setTimeout(function () {
+        $('#app_view_popup .loading_overlay').fadeOut();
+      }, 3000);
+    });
+
+    $('html, body').animate({
+      scrollTop: $('#featured_app_scroll_point').offset().top
+    }, 500);
+    
+  });
+
+  $('#app_view_popup .close-popup').on('click', function (e) {
+    var target = $(this).parent();
+    e.preventDefault();
+    $('#app_featured, #app_grid').show();
+    $(target).addClass('fadingOut').fadeOut(1000, function () {
+      $('#app_view_popup .loading_overlay').show();
+      $(target).removeClass('fadingOut');
+    });
+  });
 });
 
 

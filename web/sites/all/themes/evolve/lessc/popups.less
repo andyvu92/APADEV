@@ -1959,7 +1959,245 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
         top: calc(~'50vh - 255px') !important;
     }
 }
+
 /***endpoint time out pop up***********/
 #timeoutWindow {
     .small-popup;
+}
+
+/* APP VIEW POPUP */
+.page-node-779{
+    #section-main-content{
+        #block-system-main{
+            .content{
+                .field-item.even{
+                    position: relative;
+                }
+            }
+        }
+    }
+}
+
+#app_view_popup{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 70px;
+    background: #fff;
+    display: none;
+    .inner_wrapper{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    &.fadingOut{
+        position: absolute;
+        margin-top: 120px;
+    }
+    /* close popup */
+    .close-popup{
+        background-image: none;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        width: 25px;
+        height: 25px;
+        cursor: pointer;
+        &:before{
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 2px;
+            transform: rotate(45deg);
+            background: white;
+        }
+        &:after{
+            content: "";
+            position: absolute;
+            width: 15px;
+            height: 2px;
+            transform: rotate(-45deg);
+            background: white;
+        }
+    }
+
+    /* overlay loading */
+    .loading_overlay{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        .loaders{
+            visibility: visible;
+            .loader-quart:after{
+                border: 6px solid #009fda42;
+                border-top-color: #009fda;
+            }
+        }
+    }
+    /* app content */
+    .app_content{
+        padding: 52px 64px;
+        width: 50%;
+        border: 1px solid #DBDBDB;
+        border-right: 0;
+        .content_wrapper{
+            display: flex;
+            flex-direction: column;
+            max-width: 520px;
+        }
+        .app_heading{
+            .app_logo{
+                display: block;
+                max-width: max-content;
+                border-radius: 10px;
+                overflow: hidden;
+                box-shadow: 0 5px 14px rgba(40,48,79,0), 0 2px 4px rgba(40,48,79,.2), inset 0 -1px 4px rgba(23,78,138,.09);
+                img{
+                    max-width: 74px;
+                    height: auto;
+                }
+            }
+            .main_heading{
+                margin-top: 35px;
+                font-size: 1.8em;
+                margin-bottom: 0px;
+                font-weight: 700;
+            }
+            .app_creator{
+                font-size: 1.8em;
+                color: #009fda;
+            }
+            .app_cost{
+                font-size: 1.3em;
+                margin-top: 10px;
+                span{
+                    font-weight: 700;
+                    color: #009fda;
+                }
+                .cost{
+                    color: #32363D;
+                    font-weight: 300;
+                }
+            }
+        }
+        .app_description{
+            padding-top: 45px;
+            margin-top: 15px;
+            border-top: 1px solid rgba(0,0,0,0.12);
+            p{
+                font-size: 1.3em;
+                line-height: 1.3em;
+            }
+        }
+        .app_contact, .app_terms_conditions{
+            margin-top: 25px;
+            .sub_heading{
+                font-size: 1.3em;
+                padding-top: 0;
+                margin-top: 0px;
+            }
+            .content{
+                p{
+                    font-size: 1.3em;
+                    margin-bottom: 0;
+                }
+            }
+        }
+        .app_terms_conditions{
+            .content{
+                p{
+                    margin-bottom: 10px;
+                }
+            }
+        }
+
+        .app_download{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 30px;
+            .ios, .android{
+                width: calc(~'50% - 6px');
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                flex-wrap: nowrap;
+                padding: 7.5px 0px;
+                transition: all .3s linear;
+                box-shadow: 0 5px 14px rgba(40,48,79,0), 0 2px 4px rgba(40,48,79,0.2), inset 0 -1px 4px rgba(23,78,138,0.09);
+                .icon{
+                    display: flex;
+                    max-width: 32px;
+                    justify-content: center;
+                    align-items: center;
+                    svg{
+                        max-height: 32px;
+                    }
+                }
+                .button_txt{
+                    color: #fff;
+                    display: block;
+                    line-height: 1em;
+                    padding-left: 10px;
+                    span{
+                        display: block;
+                        font-size: 1.8em;
+                        line-height: 1em;
+                        font-weight: 500;
+                    }
+                }
+                &:hover{
+                    box-shadow: 0 5px 14px rgba(40,48,79,.2), 0 2px 4px rgba(40,48,79,.2), inset 0 -1px 4px rgba(23,78,138,.09);
+                }
+            }
+            .ios{
+                background: #009FDA;
+            }
+            .android{
+                background: #A2AD00;
+            }
+        }
+    }
+
+    /* app screens */
+    .app_screen{
+        width: 50%;
+        padding: 52px 64px;
+        background: #009FDA;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        .sub_heading{
+            color: #fff;
+            font-size: 1.3em;
+            font-weight: 500;
+            text-align: center;
+            padding-top: 0;
+            margin: 27px 0 64px;
+        }
+        .screen_grid{
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 380px;
+            div[class*="screen_"]{
+                margin-bottom: 37px;
+                max-width: 170px;
+                width: 50%;
+                position: relative;
+                img{
+                    width: 100%;
+                }
+            }
+        }
+    }
 }
