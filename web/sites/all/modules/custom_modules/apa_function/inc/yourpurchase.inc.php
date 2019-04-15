@@ -135,6 +135,7 @@ apa_function_dashboardLeftNavigation_form();
 							$counterTwo = 0;
 							if(!empty($products)) {
 								foreach($products as $product){
+									$productDate = $product['Orderdate'];//str_replace('/', '-', $product['Orderdate']);
 									$counter++;
 									$instal = false;
 									array_push($apis, $product["ID"]);
