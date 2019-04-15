@@ -9,5 +9,3 @@ tmp/
 web/sites/Log/*
 web/tmp/*
 
-# Ignore htaccess file
-.htaccess
