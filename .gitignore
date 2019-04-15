@@ -17,3 +17,5 @@ web/tmp/
 # Untrack of local history files
 .history/
 
+# Untrack of htaccess file
+.htaccess

@@ -9,3 +9,5 @@ tmp/
 web/sites/Log/*
 web/tmp/*
 
+# Untrack of htaccess file
+.htaccess
