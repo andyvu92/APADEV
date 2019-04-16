@@ -1162,6 +1162,33 @@ $('.tab span').on('click', function (e) {
 </div>
 <!--handle the session expired popup-->
 <script type="text/javascript">
+	 // automatically pop up session expire window 
+	 var popUPTag ='<?php if(isset($_SESSION['TokenId']))  {echo $_SESSION['TokenId']; } else{ echo "";}?>';
+	 var countSession = <?php if(isset($_SESSION['expireSessionTag'])) {echo $_SESSION['expireSessionTag'] - time();}?>;
+	 if(popUPTag!=""){
+		 	function countSessionDown(){
+				if(countSession > 0){
+					countSession--;
+					setTimeout("countSessionDown()", 1000);
+				}else{
+					// prevent element inspect
+				document.addEventListener('contextmenu', function(e) {
+					e.preventDefault();
+				});
+				// remove duplicate login form
+				$('#loginAT').remove();
+				// append overlay
+				if( $('body, html, .html').find('.overlay').length == 0 ){
+					$('body').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+				}
+				$('.overlay').fadeIn();
+				$("#sessionExpiredWindow").fadeIn();
+			
+				}
+
+			}
+			countSessionDown();
+		}
 $(document).ready(function(){
 	var logoutTag ='<?php if(isset($_SESSION['logoutSession']))  {echo $_SESSION['logoutSession']; } else{ echo "";}?>';
 	if(logoutTag == "1"){

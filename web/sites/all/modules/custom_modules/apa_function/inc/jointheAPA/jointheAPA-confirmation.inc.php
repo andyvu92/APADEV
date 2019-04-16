@@ -311,3 +311,23 @@ $(document).ready(function() {
 </script>
 */ ?>
 <?php logRecorder();  ?>
+<script>
+$(document).ready(function() {
+	window.history.pushState(null,"", "/jointheapa");        
+	window.onpopstate = function() {
+		window.history.pushState(null, "", "/jointheapa");
+	};
+	$(function () {  
+        $(document).keydown(function (e) {  
+            return (e.which || e.keyCode) != 116;  
+		}); 
+		$(document).keydown(function (e) {  
+            return (e.which || e.keyCode) != 78;  
+		}); 
+		$(document).keydown(function (e) {  
+            return (e.which || e.keyCode) != 82;  
+		}); 
+		  
+    });  
+ });
+</script>

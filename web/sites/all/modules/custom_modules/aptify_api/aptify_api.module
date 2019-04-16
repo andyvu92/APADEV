@@ -149,6 +149,18 @@ function aptify_test_calls_logged_in(){
     $return = aptify_get_member_details();
      drupal_json_output($return);
 }
+/**
+ * Function to check session expire.
+ */
+function check_session(){
+    $now = time();
+	if (isset($_SESSION['expireSessionTag']) && $now > $_SESSION['expireSessionTag']) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
 
 /**
  * This is the main method makes call to APTIFY api.
@@ -164,14 +176,22 @@ function aptify_test_calls_logged_in(){
  */
 function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
     $base_url = variable_get('aptify_api_base_url', APTIFY_API_BASE_URL_DEFAULT);
-
+    $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
     $ch = curl_init();
     $headers = array();
-
     if ($token) {
         $headers[]="AptifyAuthorization: Web ".$token;
+        //when call endpoint if session is not expired recount the expire session otherwise trigger session expired pop up window
+        if(check_session()){ 
+            $_SESSION['logoutSession'] = 1; 
+            header("Location:".$link."/"); 
+            return;
+        }
+        else {
+            $_SESSION['expireSessionTag'] = time() + (60 * 60); 
+            
+        }  
     }
-
     if($method == "Image" || $method == "Order" || $method == "JSON") {
         $headers[] = "Content-Type:application/json";
     } elseif($method == "Secure" || $method == "SecureNoToken") {
@@ -278,7 +298,6 @@ function _aptify_api_call($api_number, $path, $token, $data, $method = 'GET') {
     // Request authentication and HTTP response check.
     $response = new stdClass();
     $response->data = $result;
-
     // if debugging is on
     $data_sent = isset($request_data) ? $request_data : "No data was sent.";
     aptify_log_to_watchdog($api_number, $request_url, $data_sent, $response);

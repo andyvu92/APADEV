@@ -234,7 +234,14 @@ if(isset($_POST["Invoice_ID"])) {
 */ ?>
 
 <!--<a class="addCartlink" href="../your-purchases"><button class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Go to my dashboard</button></a>-->
-
+<script>
+$(document).ready(function() {
+	window.history.pushState(null,"", "/your-purchases");        
+	window.onpopstate = function() {
+		window.history.pushState(null, "", "/your-purchases");
+	};
+});
+</script>
 <?php else:?>
 <!--this is handle record error log-->
 <?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
@@ -260,6 +267,14 @@ if(isset($_POST["Invoice_ID"])) {
 ?>
 
 </div>
+<script>
+$(document).ready(function() {
+	window.history.pushState(null,"", "/pd/pd-shopping-cart");        
+	window.onpopstate = function() {
+		window.history.pushState(null, "", "/pd/pd-shopping-cart");
+	};
+});
+</script>
 <?php endif;?>
 
 <?php  /*
@@ -304,3 +319,19 @@ $(document).ready(function() {
 </script>
 */ ?>
 <?php logRecorder();  ?>	
+<script>
+$(document).ready(function() {
+	$(function () {  
+        $(document).keydown(function (e) {  
+            return (e.which || e.keyCode) != 116;  
+		}); 
+		$(document).keydown(function (e) {  
+            return (e.which || e.keyCode) != 78;  
+		}); 
+		$(document).keydown(function (e) {  
+            return (e.which || e.keyCode) != 82;  
+		}); 
+		  
+    });  
+ });
+</script>
