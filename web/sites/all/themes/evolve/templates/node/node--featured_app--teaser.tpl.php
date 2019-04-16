@@ -79,8 +79,8 @@
         }
       ?>
       <div class="download_urls">
-        <a class="ios" href="<?php print $ios ?>">Download on apple</a>
-        <a class="android" href="<?php print $android ?>">Download on android</a>
+        <a class="ios" target="_blank" href="<?php print $ios ?>">Download on apple</a>
+        <a class="android" target="_blank" href="<?php print $android ?>">Download on android</a>
       </div>
     </div>
   </div>

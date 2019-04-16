@@ -2012,10 +2012,12 @@ jQuery(document).ready(function() {
 
   $.fn.loadContent = function(url, targetContainer) {
     var container = $(this);
+    $(container).hide();
     $.get(url, function(result){
-      var obj = $(result).find('body');
-          var data = $(result).find(targetContainer).html();
-          $(container).html(data);
+      var data = $(result).find(targetContainer).html();
+      $(container).html(data);
+    }).done(function(){
+      $(container).fadeIn();
     });
   };
 
@@ -2066,7 +2068,7 @@ jQuery(document).ready(function() {
     $('#app_view_popup').fadeIn(1000, function () {
       setTimeout(function () {
         $('#app_view_popup .loading_overlay').fadeOut();
-      }, 3000);
+      }, 2000);
     });
 
     $('html, body').animate({
@@ -2079,7 +2081,7 @@ jQuery(document).ready(function() {
     var target = $(this).parent();
     e.preventDefault();
     $('#app_featured, #app_grid').show();
-    $(target).addClass('fadingOut').fadeOut(1000, function () {
+    $(target).addClass('fadingOut').fadeOut(500, function () {
       $('#app_view_popup .loading_overlay').show();
       $(target).removeClass('fadingOut');
     });

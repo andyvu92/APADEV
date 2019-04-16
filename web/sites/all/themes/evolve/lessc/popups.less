@@ -2194,10 +2194,20 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
                 max-width: 170px;
                 width: 50%;
                 position: relative;
+                top: 15px;
+                animation: moveTop .35s ease-in-out forwards;
                 img{
                     width: 100%;
                 }
             }
         }
+    }
+}
+@keyframes moveTop{
+    from {
+        top: 15px;
+    }
+    to {
+        top: 0px;
     }
 }

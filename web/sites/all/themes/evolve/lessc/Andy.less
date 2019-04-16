@@ -5787,19 +5787,20 @@ body .block #app_grid{
     /* featured app */
     &.view-display-id-block{
         padding-bottom: 75px;
-        margin: 0px 0 70px;
+        margin: 0px 17.5px 70px;
         border-bottom: 1px solid rgba(0,0,0,0.12);
         .view-content{
             display: flex;
             flex-wrap: wrap;
             .app_inner_wrapper{
                 display: flex;
+                justify-content: space-between;
                 flex-wrap: wrap;
 
                 /* app featured image */
                 .app_featured_img{
                     order: 2;
-                    width: 50%;
+                    width: calc(~'50% - 50px');
                     padding: 30px 17.5px 0;
                     position: relative;
                     .img_wrapper{
@@ -5820,7 +5821,6 @@ body .block #app_grid{
                 .app_content{
                     order: 1;
                     width: 50%;
-                    padding: 0px 17.5px;
                     .lead-heading{
                         font-size: 3.9em;
                         font-weight: 300;
