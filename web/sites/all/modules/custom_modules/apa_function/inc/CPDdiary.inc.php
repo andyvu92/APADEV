@@ -66,8 +66,8 @@ if(isset($_POST["NONAPA"])) {
 $DiaryAll = Array();
 
 function date_sort($a, $b) {
-	$BB = $b["Date"];//str_replace('/', '-', $b["Date"]);
-	$AA = $a["Date"];//str_replace('/', '-', $a["Date"]);
+	$BB = str_replace('/', '-', $b["Date"]);//$b["Date"];//
+	$AA = str_replace('/', '-', $a["Date"]);//$a["Date"];//s
 	$c = strtotime($BB) - strtotime($AA);
 	$c .= strcmp($b["Description"], $a["Description"]);
 	return $c;
@@ -94,8 +94,8 @@ function date_sort($a, $b) {
 		<?php
 			if(sizeof($APA) > 0) {
 				function date_sortA($a, $b) {
-					$BB = $b["Date"];//str_replace('/', '-', $b["Date"]);
-					$AA = $a["Date"];//str_replace('/', '-', $a["Date"]);
+					$BB = str_replace('/', '-', $b["Date"]);//$b["Date"];//
+					$AA = str_replace('/', '-', $a["Date"]);//$a["Date"];//
 					$c = strtotime($BB) - strtotime($AA);
 					$c .= strcmp($b["Title"], $a["Title"]);
 					return $c;
@@ -103,7 +103,7 @@ function date_sort($a, $b) {
 				usort($APA, "date_sortA");
 				foreach($APA as $rowData) {
 					echo "<div class='flex-cell flex-flow-row'>";
-					$dateCPD = $rowData["Date"];//str_replace('/', '-', $rowData["Date"]);
+					$dateCPD = str_replace('/', '-', $rowData["Date"]);//$rowData["Date"];//
 					$date = date("d/m/Y", strtotime($dateCPD));
 					echo "<div style='display: none;'>".$rowData["Id"]."</div><div class='flex-col-5'><span class='mobile-header'>Completed PD</span><b>".$rowData["Title"]."&nbsp;</b></div><div class='flex-col-1 date'><span class='mobile-header'>Date</span>".$date."</div><div class='flex-col-2 hours'><span class='mobile-header'>Hours</span>".$rowData["Hours"]."</div>";
 					echo "<div class='flex-col-3'><span class='mobile-header'>Provider</span>Australian Physiotherapy Association</div><div class='lineBreak'>&nbsp;</div>";
@@ -136,7 +136,7 @@ function date_sort($a, $b) {
 		usort($NAPA, "date_sort");
 		foreach($NAPA as $rowData) {
 			echo "<div class='flex-cell flex-flow-row'>";
-			$dateCPD = $rowData["Date"];//str_replace('/', '-', $rowData["Date"]);
+			$dateCPD = str_replace('/', '-', $rowData["Date"]);//$rowData["Date"];//
 			$date = date("d/m/Y", strtotime($dateCPD));
 			echo "<div style='display: none;'>".$rowData["NPDid"]."</div><div class='flex-col-4'><b><span class='mobile-header'>Description</span>".$rowData["Description"]."</b></div><div class='flex-col-1 date'><span class='mobile-header'>Date</span>".$date."</div><div class='flex-col-1 hours'><span class='mobile-header'>Hours</span>".$rowData["Time"]."</div><div class='flex-col-2'><span class='mobile-header'>Provider</span>".$rowData["Provider"]."</div><div class='flex-col-4 reflection'><span class='mobile-header'>Reflection</span>".$rowData["Reflection"]."</div>";
 			echo "<div class='lineBreak'>&nbsp;</div>";
@@ -167,7 +167,7 @@ function date_sort($a, $b) {
 		if(sizeof($DiaryAll) > 0) {
 			usort($DiaryAll, "date_sort");
 			foreach($DiaryAll as $rowData) {
-				$dateCPD = $rowData["Date"];//str_replace('/', '-', $rowData["Date"]);
+				$dateCPD = str_replace('/', '-', $rowData["Date"]);//$rowData["Date"];//
 				$date = date("d/m/Y", strtotime($dateCPD));
 				echo "<div class='flex-cell flex-flow-row'>";
 				echo "<div style='display: none;'>".$rowData["ID"]."</div><div class='flex-col-4'><b><span class='mobile-header'>Description</span>".$rowData["Description"]."</b></div><div class='flex-col-1 date'><span class='mobile-header'>Date</span>".$date."</div><div class='flex-col-1 hours'><span class='mobile-header'>Hours</span>".$rowData["Hours"]."</div><div class='flex-col-2'><span class='mobile-header'>Provider</span>".$rowData["Provider"]."</div><div class='flex-col-4 reflection'><span class='mobile-header'>Reflection</span>".$rowData["Reflection"]."</div>";
