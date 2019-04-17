@@ -5,6 +5,25 @@
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="/sites/all/themes/evolve/assets/scripts/typeahead.js-master/dist/typeahead.bundle.min.js" type="text/javascript"></script>
 
+	<!-- Structured Data Setting -->
+	<script type="application/ld+json">
+	{
+	"@context": "http://schema.org",
+	"@type": "Organization",
+	"name":"Australian Physiotherapy Association",
+	"url": "https://australian.physio/",
+	"logo": "https://australian.physio/sites/default/files/logo_apa_0.png",
+	"sameAs": [
+		"https://www.facebook.com/AustralianPhysiotherapyAssociation",
+		"https://twitter.com/apaphysio",
+		"https://www.linkedin.com/company/australian-physiotherapy-association",
+		"https://www.instagram.com/physioaustralia/",
+		"https://www.youtube.com/user/apatube1"
+	]
+	}
+	</script>
+	
+
 	<!-- TOUCH SWIPE -->
 	<script src="/sites/all/themes/evolve/assets/scripts/jquery.touchSwipe.min.js" type="text/javascript"></script>
 
