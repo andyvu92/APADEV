@@ -47,6 +47,11 @@ function log_submit($form, &$form_state) {
   }else{
     unset($_SESSION["GetAll"]);
   }
+  if( $form_state['values']['error'] == "ALL") {
+    $_SESSION["AllError"] = 1;
+  }else{
+    unset($_SESSION["AllError"]);
+  }
   $_SESSION["filterconditions"] = $filterConditions;
 }
 /*
@@ -65,6 +70,7 @@ function log_all($form, &$form_state) {
 function clear_all($form, &$form_state) {
   if(isset($_SESSION["filterconditions"])) {  unset($_SESSION["filterconditions"]); }
   if(isset($_SESSION["GetAll"] )) {  unset($_SESSION["GetAll"] ); }
+  if(isset($_SESSION["AllError"] )) {  unset($_SESSION["AllError"] ); }
  
 }
 /*
@@ -76,7 +82,8 @@ function add_Member_Log($addMemberLog) {
 	$jsonMessage = $addMemberLog["jsonMessage"];
 	$createDate = $addMemberLog["createDate"];
 	$type = $addMemberLog["type"];
-	$logError = $addMemberLog["logError"];
+  $logError = $addMemberLog["logError"];
+  $timeStamp = strtotime(date('Y-m-d H:i:s'));
   $memberLog	=  db_insert('member_log') 
     ->fields(array(
       'UserID' => $userID,
@@ -85,6 +92,7 @@ function add_Member_Log($addMemberLog) {
       'CreateDate' => $createDate,
       'Type' => $type,
       'LogError' => $logError,
+      'TimeStamp' => $timeStamp,
     ))
     ->execute();
  

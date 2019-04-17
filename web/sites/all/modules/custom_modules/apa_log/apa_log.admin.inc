@@ -38,6 +38,7 @@ function apa_log_admin_settings($form = array(), &$form_state= array()) {
     }
   }
    $defaultError = 1;
+   $tempErrorArray["ALL"] = "ALL";
   // generate form
   $form = array();
   $form['textfield_input'] = array(
@@ -99,29 +100,45 @@ function apa_log_admin_settings($form = array(), &$form_state= array()) {
    // filter automatically
   if(isset( $_SESSION['filterconditions']["type"] )) { $type =  $_SESSION['filterconditions']["type"] ;} else {  $type = $defaultType;}
   $variables = array();
-  $header = array('User ID', 'Order ID', 'Message', 'Date', 'Type', 'Error');
+  $header = array('User ID', 'Order ID', 'Message', 'DateTime', 'Type', 'Error','Date');
   $query = db_select('member_log','m');
-  $query ->fields('m', array('UserID','OrderID', 'JsonMessage', 'CreateDate', 'Type', 'LogError'));
+  $query ->fields('m', array('UserID','OrderID', 'JsonMessage', 'TimeStamp', 'Type', 'LogError','CreateDate'));
   // handle display all data
   if(isset($_SESSION['filterconditions']["email"])) {$query->condition('UserID', $_SESSION['filterconditions']["email"]); }
   if(!isset($_SESSION["GetAll"])) {$query->condition('Type', $type); }
-  if(isset($_SESSION['filterconditions']["beginDate"]) && isset($_SESSION['filterconditions']["endDate"])) {$query->condition('CreateDate', array($_SESSION['filterconditions']["beginDate"], $_SESSION['filterconditions']["endDate"]), 'BETWEEN'); }
-  if(isset($_SESSION['filterconditions']["error"])) {$query->condition('LogError', $_SESSION['filterconditions']["error"]); }
+  if(isset($_SESSION['filterconditions']["beginDate"]) && isset($_SESSION['filterconditions']["endDate"])) { 
+    $bTime = strtotime(date('Y-m-d H:i:s',strtotime($_SESSION['filterconditions']["beginDate"])));
+    $eTime = strtotime(date('Y-m-d H:i:s', strtotime("+1 day",strtotime($_SESSION['filterconditions']["endDate"]))));
+    $query->condition('TimeStamp', array($bTime, $eTime), 'BETWEEN'); }
+  if(!isset($_SESSION["AllError"])) {if(isset($_SESSION['filterconditions']["error"])) {$query->condition('LogError', $_SESSION['filterconditions']["error"]); }}
+  $query->orderBy('TimeStamp', 'DESC');
   $queryResult = $query->execute();
   $arrayReturn = array();
   while ($row = $queryResult->fetchAssoc()) {$arrayReturn[] = $row;  }  
     // handle pagenation
+    $arrayResult = array();
   if(sizeof($arrayReturn)!= 0){
+      foreach($arrayReturn as $singleArr){
+        $tempResult = array();
+        $tempResult['UserID'] = $singleArr['UserID'];
+        $tempResult['OrderID'] = $singleArr['OrderID'];
+        $tempResult['JsonMessage'] = $singleArr['JsonMessage'];
+        $tempResult['TimeStamp'] = date('Y-m-d H:i:s',$singleArr['TimeStamp']);
+        $tempResult['Type'] = $singleArr['Type'];
+        $tempResult['LogError'] = $singleArr['LogError'];
+        $tempResult['CreateDate'] = $singleArr['CreateDate'];
+        array_push($arrayResult, $tempResult);
+      }
       $per_page = 30;
-      $current_page = pager_default_initialize(count($arrayReturn), $per_page);
-      $chunks = array_chunk($arrayReturn, $per_page, TRUE);
+      $current_page = pager_default_initialize(count($arrayResult), $per_page);
+      $chunks = array_chunk($arrayResult, $per_page, TRUE);
       $form['table'] = array(
         '#theme' => 'table',
         '#header' => $header,
         '#rows' => $chunks[$current_page],
         '#empty' => t('Empty Rows')
         );	 
-      $form['pager'] = array('#markup' => theme('pager'), '#quantity' => count($arrayReturn));
+      $form['pager'] = array('#markup' => theme('pager'), '#quantity' => count($arrayResult));
   }
   else{
     $form['textfield_input_1'] = array(

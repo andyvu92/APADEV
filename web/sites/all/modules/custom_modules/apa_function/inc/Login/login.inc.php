@@ -941,7 +941,7 @@ if(isset($_SESSION['UserId'])) {
 	</div>
 </div>
 <div class="pull-right borderLeftForTop LogOutPadding">
-	<form method="POST" action="<?php echo $url; ?>" name="forlogout">
+	<form method="POST" action="/" name="forlogout">
 		<div><input id="logoutAcButton"type="hidden" name="logout" value="out" style="display: none;" /></div>
 		<div id="logoutButton" class="ButtonIconHolder withButtonIcon OutwithButtonIcon" title="Log out">
 			<input type="submit" value="Log out" />
