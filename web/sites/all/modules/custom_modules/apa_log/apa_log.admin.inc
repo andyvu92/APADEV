@@ -107,11 +107,12 @@ function apa_log_admin_settings($form = array(), &$form_state= array()) {
   if(isset($_SESSION['filterconditions']["email"])) {$query->condition('UserID', $_SESSION['filterconditions']["email"]); }
   if(!isset($_SESSION["GetAll"])) {$query->condition('Type', $type); }
   if(isset($_SESSION['filterconditions']["beginDate"]) && isset($_SESSION['filterconditions']["endDate"])) { 
-    $bTime = strtotime(date('Y-m-d H:i:s',strtotime($_SESSION['filterconditions']["beginDate"])));
-    $eTime = strtotime(date('Y-m-d H:i:s', strtotime("+1 day",strtotime($_SESSION['filterconditions']["endDate"]))));
-    $query->condition('TimeStamp', array($bTime, $eTime), 'BETWEEN'); }
+    //$bTime = strtotime(date('Y-m-d H:i:s',strtotime($_SESSION['filterconditions']["beginDate"])));
+    //$eTime = strtotime(date('Y-m-d H:i:s', strtotime("+1 day",strtotime($_SESSION['filterconditions']["endDate"]))));
+    //$query->condition('TimeStamp', array($bTime, $eTime), 'BETWEEN'); }
+    $query->condition('CreateDate', array($_SESSION['filterconditions']["beginDate"], $_SESSION['filterconditions']["endDate"]), 'BETWEEN'); }
   if(!isset($_SESSION["AllError"])) {if(isset($_SESSION['filterconditions']["error"])) {$query->condition('LogError', $_SESSION['filterconditions']["error"]); }}
-  $query->orderBy('TimeStamp', 'DESC');
+  $query->orderBy('CreateDate', 'DESC');
   $queryResult = $query->execute();
   $arrayReturn = array();
   while ($row = $queryResult->fetchAssoc()) {$arrayReturn[] = $row;  }  
