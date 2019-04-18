@@ -718,9 +718,8 @@ function getProductList($userID){
 	return $arrayReturn;
 } 
 function checkRenew($Paidthrough, $tag){
-	$currentDate = strtotime(date('m-d-Y'));
-	
-	if(date("m-d-Y",strtotime('-1 month')) <= date("m-d-Y",strtotime($Paidthrough)) && strtotime(date("m-d-Y",strtotime($Paidthrough))) <= strtotime(date("m-d-Y",strtotime('+2 month'))))  {
+	$currentDate = strtotime(date('d-m-Y'));
+	if(strtotime(date("d-m-Y",strtotime('-2 month'))) <= strtotime(date("d-m-Y",strtotime($Paidthrough))) && strtotime(date("d-m-Y",strtotime($Paidthrough))) <= strtotime(date("d-m-Y",strtotime('+1 month'))))  {
 		if($tag){
 			return true;
 		}
