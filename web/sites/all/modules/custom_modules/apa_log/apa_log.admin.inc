@@ -113,6 +113,7 @@ function apa_log_admin_settings($form = array(), &$form_state= array()) {
     $query->condition('CreateDate', array($_SESSION['filterconditions']["beginDate"], $_SESSION['filterconditions']["endDate"]), 'BETWEEN'); }
   if(!isset($_SESSION["AllError"])) {if(isset($_SESSION['filterconditions']["error"])) {$query->condition('LogError', $_SESSION['filterconditions']["error"]); }}
   $query->orderBy('CreateDate', 'DESC');
+  $query->orderBy('TimeStamp', 'DESC');
   $queryResult = $query->execute();
   $arrayReturn = array();
   while ($row = $queryResult->fetchAssoc()) {$arrayReturn[] = $row;  }  
