@@ -1991,10 +1991,19 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
+        @media @larger-tablet-width-down{
+            flex-direction: column;
+        }
     }
     &.fadingOut{
         position: absolute;
         margin-top: 120px;
+        @media @larger-tablet-width-down{
+            margin-top: 90px;
+        }
+        @media @larger-phone-width-down{
+            margin-top: 60px;
+        }
     }
     /* close popup */
     .close-popup{
@@ -2015,6 +2024,9 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
             height: 2px;
             transform: rotate(45deg);
             background: white;
+            @media @larger-tablet-width-down{
+                background: #009fda;
+            }
         }
         &:after{
             content: "";
@@ -2023,6 +2035,9 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
             height: 2px;
             transform: rotate(-45deg);
             background: white;
+            @media @larger-tablet-width-down{
+                background: #009fda;
+            }
         }
     }
 
@@ -2048,6 +2063,13 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
         width: 50%;
         border: 1px solid #DBDBDB;
         border-right: 0;
+        @media @larger-tablet-width-down{
+            width: 100%;
+            border-right: 1px solid #DBDBDB;
+        }
+        @media @larger-phone-width-down{
+            padding: 25px;
+        }
         .content_wrapper{
             display: flex;
             flex-direction: column;
@@ -2133,6 +2155,9 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
                 padding: 7.5px 0px;
                 transition: all .3s linear;
                 box-shadow: 0 5px 14px rgba(40,48,79,0), 0 2px 4px rgba(40,48,79,0.2), inset 0 -1px 4px rgba(23,78,138,0.09);
+                @media @larger-phone-width-down{
+                    font-size: 0.7em;
+                }
                 .icon{
                     display: flex;
                     max-width: 32px;
@@ -2175,6 +2200,12 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
         display: flex;
         flex-direction: column;
         align-items: center;
+        @media @larger-tablet-width-down{
+            width: 100%;
+        }
+        @media @larger-phone-width-down{
+            padding: 25px;
+        }
         .sub_heading{
             color: #fff;
             font-size: 1.3em;
@@ -2182,6 +2213,9 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
             text-align: center;
             padding-top: 0;
             margin: 27px 0 64px;
+            @media @larger-phone-width-down{
+                margin: 20px 0 35px;
+            }
         }
         .screen_grid{
             display: flex;
@@ -2196,6 +2230,10 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
                 position: relative;
                 top: 15px;
                 animation: moveTop .35s ease-in-out forwards;
+                @media @larger-phone-width-down{
+                    width: calc(~'50% - 10px');
+                    margin-bottom: 20px;
+                }
                 img{
                     width: 100%;
                 }

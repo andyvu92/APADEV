@@ -1,5 +1,6 @@
 <?php 
-  $isFeatured = ((array)$content['field_is_featured']['#items'][0]['taxonomy_term'])["name"]; 
+  $platform = render($content['field_supported_platforms']);
+  $isFeatured = ((array)$content['field_is_featured']['#items'][0]['taxonomy_term'])["name"];
   $ios = $content['field_apple_link']['#items']['0']['value'];
   $android = $content['field_android_link']['#items']['0']['value'];
 ?>
@@ -20,7 +21,7 @@
 ?>
 
 <div id="node-<?php print $node->nid; ?>" style="margin-bottom: 0" class="<?php print $classes; ?> clearfix"<?php print $attributes; ?>>
-  <div class="app_inner_wrapper"<?php print $content_attributes; ?>>
+  <div class="app_inner_wrapper">
     <div class="app_featured_img">
       <div class="img_wrapper" style="background-image: url(<?php echo $imgUrl; ?>);">
         <?php
@@ -31,6 +32,8 @@
           }
         ?>
       </div>
+      <!-- SUPPORTED PLATFORMS -->
+      <?php echo $platform; ?>
     </div>
     
     <div class="app_content">
@@ -45,7 +48,6 @@
             $typePos = strpos($test, 'typeof');
             $a = $typePos + 8;
             $b = $typePos + 26;
-            //echo "a: $a & b: $b <br />";
             $type = substr($test, $a, 10);
             if($type == "foaf:Image") {
               $num1 = strpos($test, "src");
@@ -68,7 +70,22 @@
       </div>
       
       <div class="app_description">
-        <?php print render($content['field_excerp']['#items']['0']['value']); ?>
+      <span></span>
+
+        <?php 
+          $body = $content['body']['#items']['0']['value'];
+          if ($isFeatured == 'yes'){
+            $maxPos = 450;
+          } else  {
+            $maxPos = 80;
+          }
+          if (strlen($body) > $maxPos)
+          {
+              $lastPos = $maxPos - strlen($body);
+              $body = substr($body, 0, strrpos($body, ' ', $lastPos)) . '...';
+          }
+          print $body; 
+        ?>
       </div>
       <?php 
         $striped_node_url = str_replace("/featured-app/","",$node_url);
