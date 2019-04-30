@@ -42,6 +42,11 @@
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.min.css">
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/css/selectize.bootstrap3.min.css">
 
+	<!-- DFLIP -->
+	<link href="/sites/all/themes/evolve/assets/scripts/dflip/css/dflip.css" rel="stylesheet" type="text/css">
+	<link href="/sites/all/themes/evolve/assets/scripts/dflip/css/themify-icons.css" rel="stylesheet" type="text/css">
+	<!-- END DFLIP -->
+
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-32728465-9"></script>
 	<script>
@@ -186,5 +191,8 @@
 		}); 
 		</script>
 		
+		<!-- DFLIP -->
+		<script src="/sites/all/themes/evolve/assets/scripts/dflip/js/dflip.min.js" type="text/javascript"></script>
+		<!-- END DFLIP -->
 	</body>
 </html>

@@ -1965,42 +1965,118 @@ jQuery(document).ready(function() {
   });
 
   // inmotion archives carousel
-  $('.archive').slick({
-    dots: true,
-    centerMode: true,
-    centerPadding: '0px',
-    slidesToShow: 9,
-    slidesToScroll: 1,
-    autoplay: true,
-    infinite: true,
-    swipeToSlide: true,
-    arrows: false,
-    responsive: [
-      {
-        breakpoint: 769,
-        settings: {
-          slidesToShow: 5
-        }
-      },
-      {
-        breakpoint: 570,
-        settings: {
-          centerPadding: '40px',
-          slidesToShow: 3
-        }
+  $('.archive_carousel_wrapper .archive').each(function(){
+    var archive_number = $(this).find('.item').length;
+    
+    if(archive_number > 9) {
+      $(this).slick({
+        dots: true,
+        centerMode: true,
+        centerPadding: '0px',
+        slidesToShow: 9,
+        slidesToScroll: 1,
+        autoplay: true,
+        infinite: true,
+        swipeToSlide: true,
+        arrows: false,
+        responsive: [
+          {
+            breakpoint: 769,
+            settings: {
+              slidesToShow: 5
+            }
+          },
+          {
+            breakpoint: 570,
+            settings: {
+              centerPadding: '40px',
+              slidesToShow: 3
+            }
+          }
+        ]
+      }).mousewheel(function(e) {
+          e.preventDefault();
+      
+          if (e.deltaY < 0) {
+            $(this).slick('slickNext');
+          }
+          else {
+            $(this).slick('slickPrev');
+          }
+      });
+    } else {
+      $(this).addClass('archive_grid');
+      if( $(this).find('.item').length > 5 ) {
+        console.log('> 5');
+        $(this).slick({
+          centerPadding: '0px',
+          slidesToShow: 9,
+          slidesToScroll: 1,
+          arrows: false,
+          responsive: [
+            {
+              breakpoint: 5000,
+              settings: {
+                unslick: true
+              }
+            },
+            {
+              breakpoint: 769,
+              settings: {
+                dots: true,
+                centerMode: true,
+                autoplay: true,
+                infinite: true,
+                swipeToSlide: true,
+                slidesToShow: 5
+              }
+            },
+            {
+              breakpoint: 570,
+              settings: {
+                dots: true,
+                centerMode: true,
+                autoplay: true,
+                infinite: true,
+                swipeToSlide: true,
+                centerPadding: '40px',
+                slidesToShow: 3
+              }
+            }
+          ]
+        });
+      } 
+      else if( $(this).find('.item').length == 4 || $(this).find('.item').length == 5 ) {
+        $(this).slick({
+          centerPadding: '0px',
+          slidesToShow: 9,
+          slidesToScroll: 1,
+          arrows: false,
+          responsive: [
+            {
+              breakpoint: 5000,
+              settings: {
+                unslick: true
+              }
+            },
+            {
+              breakpoint: 570,
+              settings: {
+                dots: true,
+                centerMode: true,
+                autoplay: true,
+                infinite: true,
+                swipeToSlide: true,
+                centerPadding: '40px',
+                slidesToShow: 3
+              }
+            }
+          ]
+        });
       }
-    ]
-  }).mousewheel(function(e) {
-      e.preventDefault();
-  
-      if (e.deltaY < 0) {
-        $(this).slick('slickNext');
-      }
-      else {
-        $(this).slick('slickPrev');
-      }
+    }
   });
-  
+
   $('.archive_year .item').on('click', function(e){
     e.preventDefault();
     var target = $(this).attr('href').replace('#', '');
