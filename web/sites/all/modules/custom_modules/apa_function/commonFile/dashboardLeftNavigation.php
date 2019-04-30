@@ -108,11 +108,21 @@ if(isset($_SESSION["UserId"])) {
 				</a>
 			</li>
 			<li class="dashboard-nav">
-				<?php  if($details['MemberTypeID']!="1"):?>
+				<?php 
+				//check the member is eligible for renew
+					$variableData['id'] = $_SESSION["UserId"];
+					$Quatation = aptify_get_GetAptifyData("45", $variableData);
+					if(sizeof($Quatation["results"])!=0){
+						$tag = true; 
+					}
+					else{ $tag = false;}	
+					
+				?>
+				<?php  if($details['MemberTypeID']!="1" && checkRenew($_SESSION['payThroughDate'], $tag)):?>
 				<a href="/renewmymembership">
 					<div class="dashboard-button-name"><span class="left-nav-icon renew-icon"></span>Renew</div>
 				</a>
-				<?php else:?>
+				<?php elseif($details['MemberTypeID']=="1"):?>
 				<a href="/membership-question">
 					<div class="dashboard-button-name"><span class="left-nav-icon renew-icon"></span>Join the APA</div>
 				</a>
