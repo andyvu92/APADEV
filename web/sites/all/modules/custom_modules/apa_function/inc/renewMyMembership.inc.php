@@ -515,13 +515,14 @@ You have the right to access the personal information about yourself held by the
 
 		<div class="grid-block apa-member-grid">
 			
-			<!--<div class="item">
+			<?php /*<div class="item">
 				<div class="item-body current-member">
 					<span class="item-title">2018 APA member</span>
 					<span class="item-description">If you were an APA member in 2018, please renew your membership for 2019 below.</span>
 					<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
 				</div>
-			</div>-->
+			</div>*/ ?>
+
 			
 			<div class="item">
 				<div class="item-body previous-member">
@@ -566,13 +567,13 @@ You have the right to access the personal information about yourself held by the
 
 		<div class="grid-block apa-member-grid">
 				
-			<!--<div class="item">
+			<?php /* <div class="item">
 				<div class="item-body current-member">
 					<span class="item-title">2018 APA member</span>
 					<span class="item-description">If you were an APA member in 2018, please renew your membership for 2019 below.</span>
 					<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#" id="renewItem">Renew</a>
 				</div>
-			</div>-->
+			</div> */ ?>
 			
 			<div class="item">
 				<div class="item-body previous-member">
