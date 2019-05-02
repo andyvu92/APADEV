@@ -2025,50 +2025,123 @@ jQuery(document).ready(function() {
   $(document).on('click', '.initiate_data', function(e){
     e.preventDefault();
     var target = '/featured-app/' + $(this).attr('data-src');
+    var checkPlatform;
 
     if ( $(this).parent().is('.cta-primary') ){
+      var current = $(this);
+
       var appTitle = $(this).parent().parent().find('.app_title').text();
       var appCreator = $(this).parent().parent().find('.app_provider').text();
       var ios = $(this).parent().parent().find('.download_urls .ios').attr('href');
       var android = $(this).parent().parent().find('.download_urls .android').attr('href');
+      var webApp = $(this).parent().parent().find('.download_urls .webApp').attr('href');
+      checkPlatform = function(){
+        if( $(current).parent().parent().find('.app_platforms .field-item:contains("Tablet")').length > 0 ) {
+          return 'true';
+        } else {
+          return 'false';
+        }
+      }
+      checkLogoSize = function(){
+        if( $(current).parent().parent().find('.app_heading').is('.logo_alt') ) {
+          return 'true';
+        } else {
+          return 'false';
+        }
+      }
+      var appImg = $(this).parent().parent().find('.app_images').html();
+      var appLogo = $(this).parent().parent().find('.app_logo').html();
+      var appCost = $(this).parent().parent().find('.hidden_content .app_cost').html();
+      var appDescription = $(this).parent().parent().find('.hidden_content .app_description').html();
+      var appContact = $(this).parent().parent().find('.hidden_content .app_contact').html();
+      var appTermsConditions = $(this).parent().parent().find('.hidden_content .app_terms_conditions').text();
     } else {
       var appTitle = $(this).parent().find('.app_title').text();
       var appCreator = $(this).parent().find('.app_provider').text();
       var ios = $(this).parent().find('.download_urls .ios').attr('href');
       var android = $(this).parent().find('.download_urls .android').attr('href');
+      var webApp = $(this).parent().find('.download_urls .webApp').attr('href');
+      checkPlatform = function(){
+        if( $(current).parent().find('.app_platforms .field-item:contains("Tablet")').length > 0 ) {
+          return 'true';
+        } else {
+          return 'false';
+        }
+      }
+      checkLogoSize = function(){
+        if( $(current).parent().find('.app_heading').is('.logo_alt') ) {
+          return 'true';
+        } else {
+          return 'false';
+        }
+      }
+      var appImg = $(this).parent().find('.app_images').html();
+      var appLogo = $(this).parent().find('.app_logo').html();
+      var appCost = $(this).parent().find('.hidden_content .app_cost').html();
+      var appDescription = $(this).parent().find('.hidden_content .app_description').html();
+      var appContact = $(this).parent().find('.hidden_content .app_contact').html();
+      var appTermsConditions = $(this).parent().find('.hidden_content .app_terms_conditions').text();
     }
 
     // load logo
-    $('#app_view_popup .app_heading .app_logo').loadContent(target, '.field-name-field-logo .field-item.even .content');
+    console.log(checkLogoSize());
+    if( checkLogoSize() == 'true' ) {
+      $('#app_view_popup .app_heading').addClass('logo_alt');
+    } else {
+      $('#app_view_popup .app_heading').removeClass('logo_alt');
+    }
+    $('#app_view_popup .app_heading .app_logo').html(appLogo);
     // load title
     $('#app_view_popup .app_heading .main_heading').text(appTitle);
     // load creator
     $('#app_view_popup .app_heading .app_creator').text(appCreator);
     // load cost
-    $('#app_view_popup .app_heading .app_cost .cost').loadContent(target, '.field-name-field-cost .field-item.even');
+    $('#app_view_popup .app_heading .app_cost .cost').html(appCost);
     // load description
-    $('#app_view_popup .app_content .app_description').loadContent(target, '.field-name-body .field-item.even');
+    $('#app_view_popup .app_content .app_description').html(appDescription);
     // load contact
-    $('#app_view_popup .app_contact .content').loadContent(target, '.field-name-field-contact .field-item.even');
+    $('#app_view_popup .app_contact .content').html(appContact);
     // load terms & conditions
-    $('#app_view_popup .app_content .app_terms_conditions .content').loadContent(target, '.field-name-field-terms-and-conditions .field-item.even');
+    $('#app_view_popup .app_content .app_terms_conditions .content').html('<p>'+ appTermsConditions + '</p>');
     // load app download
     $('#app_view_popup .app_content .app_download .ios').attr('href', ios);
     $('#app_view_popup .app_content .app_download .android').attr('href', android);
+    $('#app_view_popup .app_content .app_download .webApp').attr('href', webApp);
+
+    // determine app platforms
+    if( checkPlatform() === 'true' ) {
+      $('#app_view_popup .app_screen').addClass('non_mobile');
+      $('#app_view_popup .app_content .app_download .android').hide();
+      $('#app_view_popup .app_content .app_download .ios').hide();
+      $('#app_view_popup .app_content .app_download .web_app').show();
+    } else {
+      $('#app_view_popup .app_screen').removeClass('non_mobile');
+      $('#app_view_popup .app_content .app_download .android').show();
+      $('#app_view_popup .app_content .app_download .ios').show();
+      $('#app_view_popup .app_content .app_download .web_app').hide();
+    }
+
     // load app screens
     $('#app_view_popup .app_screen .screen_grid > div').html('');
-    $('#app_view_popup .app_screen .screen_grid .screen_1').loadContent(target, '.field-name-field-app-screen-1 .field-item.even .content');
-    $('#app_view_popup .app_screen .screen_grid .screen_2').loadContent(target, '.field-name-field-app-screen-2 .field-item.even .content');
-    $('#app_view_popup .app_screen .screen_grid .screen_3').loadContent(target, '.field-name-field-app-screen-3 .field-item.even .content');
-    $('#app_view_popup .app_screen .screen_grid .screen_4').loadContent(target, '.field-name-field-app-screen-4 .field-item.even .content');
-    $('#app_view_popup .app_screen .screen_grid .screen_5').loadContent(target, '.field-name-field-app-screen-5 .field-item.even .content');
-  
+
+    function loadAppImg(){
+      $('#app_view_popup .app_screen .screen_grid').html(appImg);
+    }
+
+    function setLightBox(){
+      var $gallery = $('#app_view_popup .app_screen .screen_grid img').simpleLightbox({sourceAttr: 'src'});
+    }
+
+    $.when( loadAppImg() ).done(function() {
+      setLightBox();
+    });
+
     $('#app_featured, #app_grid').hide();
 
     $('#app_view_popup').fadeIn(1000, function () {
       setTimeout(function () {
         $('#app_view_popup .loading_overlay').fadeOut();
-      }, 2000);
+      }, 500);
     });
 
     $('html, body').animate({
@@ -2077,6 +2150,7 @@ jQuery(document).ready(function() {
     
   });
 
+  // close app popup
   $('#app_view_popup .close-popup').on('click', function (e) {
     var target = $(this).parent();
     e.preventDefault();
@@ -2085,6 +2159,17 @@ jQuery(document).ready(function() {
       $('#app_view_popup .loading_overlay').show();
       $(target).removeClass('fadingOut');
     });
+  });
+
+  //test
+  $('.app_inner_wrapper .app_content .app_logo img').each(function(){
+    var img_width = $(this).width();
+    var img_height = $(this).height();
+    var current = $(this);
+    if( img_width != img_height ) {
+      $(current).parent().addClass('logo');
+      $(current).parent().parent().addClass('logo_alt');
+    }
   });
 });
 

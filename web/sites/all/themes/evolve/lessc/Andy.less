@@ -5770,6 +5770,9 @@ body .block #app_grid{
         font-size: 1.7em;
         padding: 0 15px;
         margin-bottom: 0;
+        @media @small-phone-width-down{
+            font-size: 1.5em;
+        }
     }
 }
 
@@ -5791,10 +5794,13 @@ body .block #app_grid{
 
 .view-id-featured_app_grid{
     /* featured app */
+    @media @tablet-width-down{
+        margin-bottom: 50px;
+    }
     &.view-display-id-block{
         padding-bottom: 75px;
         margin: 0px 17.5px 70px;
-        border-bottom: 1px solid rgba(0,0,0,0.12);
+        /*border-bottom: 1px solid rgba(0,0,0,0.12);*/
         @media @larger-phone-width-down{
             margin: 0px 10.5px 70px;
         }
@@ -5815,9 +5821,25 @@ body .block #app_grid{
                     @media @large-ipadpro-down{
                         width: 50%;
                     }
+                    @media @tablet-width-down{
+                        width: 100%;
+                        margin-top: 35px;
+                        min-height: unset;
+                        padding: 0;
+                        position: relative;
+                        .img_wrapper{
+                            min-height: unset;
+                            position: relative;
+                            img{
+                                position: relative;
+                                width: 100%;
+                                height: auto;
+                                min-height: unset;
+                            }
+                        }
+                    }
                     @media @larger-phone-width-down{
                         width: 100%;
-                        padding-bottom: 50.6%;
                         margin-top: 35px;
                     }
                     .img_wrapper{
@@ -5826,10 +5848,26 @@ body .block #app_grid{
                         left: 0;
                         width: 100%;
                         height: 100%;
-                        background-size: cover;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        overflow: hidden;
+                        @media @tablet-width-down{
+                            min-height: unset;
+                            position: relative;
+                        }
                         img{
                             max-height: 100%;
-                            visibility: hidden;
+                            position: absolute;
+                            height: 100%;
+                            max-width: unset;
+                            width: auto;
+                            @media @tablet-width-down{
+                                position: relative;
+                                width: 100%;
+                                height: auto;
+                                min-height: unset;
+                            }
                         }
                     }
                 }
@@ -5844,9 +5882,6 @@ body .block #app_grid{
                             display: flex;
                             flex-direction: row;
                             flex-wrap: wrap;
-                            .field-item{
-                                
-                            }
                         }
                     }
                 }
@@ -5857,6 +5892,9 @@ body .block #app_grid{
                     width: 50%;
                     @media @large-ipadpro-down{
                         padding-right: 35px;
+                    }
+                    @media @tablet-width-down{
+                        width: 100%;
                     }
                     @media @larger-phone-width-down{
                         width: 100%;
@@ -5869,21 +5907,73 @@ body .block #app_grid{
                             font-size: 3.2em;
                         }
                         @media @tablet-width-down{
-                            font-size: 2.2em;
+                            font-size: 3em;
+                        }
+                        @media @larger-phone-width-down{
+                            font-size: 2.5em;
+                        }
+                        @media @smaller-phone-width-down{
+                            font-size: 2em;
                         }
                     }
                     .app_heading{
                         display: flex;
                         justify-content: flex-start;
+                        @media @larger-phone-width-down{
+                            flex-direction: column;
+                        }
+                        &.logo_alt{
+                            margin: 20px 0 25px;
+                        }
                         .app_logo{
                             display: block;
                             max-width: max-content;
+                            max-height: max-content;
                             border-radius: 10px;
-                            overflow: hidden;
-                            box-shadow: 0 5px 14px rgba(40,48,79,0), 0 2px 4px rgba(40,48,79,.2), inset 0 -1px 4px rgba(23,78,138,.09);
+                            box-shadow: 0 5px 14px rgba(40,48,79,0), 
+                                        0 2px 4px rgba(40,48,79,.2), 
+                                        inset 0 -1px 4px rgba(23,78,138,.09);
                             img{
-                                max-width: 74px;
+                                max-width: 150px;
+                                max-height: 74px;
                                 height: auto;
+                                width: auto;
+                                @media @large-ipadpro-down{
+                                    max-width: 135px;
+                                }
+                                @media @tablet-width-down{
+                                    max-width: 150px;
+                                }
+                                @media @smaller-phone-width-down{
+                                    max-width: 135px;
+                                }
+                            }
+                            &.logo{
+                                border-radius: 0;
+                                box-shadow: unset;
+                                & + .app_title_provider{
+                                    margin-left: 20px;
+                                    border-left: 1px solid rgba(0,0,0,0.12);
+                                    position: relative;
+                                    @media @larger-phone-width-down{
+                                        padding: 0;
+                                        margin: 10px 0 0px;
+                                        border: 0;
+                                    }
+                                    &:after{
+                                        content: '';
+                                        position: absolute;
+                                        top: 0;
+                                        left: 0;
+                                        height: 100%;
+                                        width: 1px;
+                                        background: rgba(0,0,0,0.12);
+                                        filter: blur(10px);
+                                    }
+                                    .app_title{
+                                        display: none;
+                                    }
+                                }
                             }
                         }
                         .app_title_provider{
@@ -5891,7 +5981,12 @@ body .block #app_grid{
                             flex-direction: column;
                             justify-content: center;
                             font-size: 1.1em;
-                            padding-left: 25px;
+                            padding-left: 20px;
+                            @media @larger-phone-width-down{
+                                padding: 0;
+                                margin: 10px 0 0px;
+                                border: 0;
+                            }
                             .app_title{
                                 font-size: 1.3em;
                                 line-height: 1.3em;
@@ -5899,10 +5994,22 @@ body .block #app_grid{
                                 margin-top: 0;
                                 padding-top: 0;
                                 color: #333;
+                                @media @tablet-width-down{
+                                    font-size: 1.2em;
+                                }
                             }
                             .app_provider{
                                 font-size: 1.2em;
                                 color: #333;
+                                @media @large-ipadpro-down{
+                                    font-size: 1em;
+                                }
+                                @media @tablet-width-down{
+                                    font-size: 1.2em;
+                                }
+                                @media @smaller-phone-width-down{
+                                    font-size: 1.1em;
+                                }
                             }
                         }
                     }
@@ -5915,6 +6022,13 @@ body .block #app_grid{
                         display: -webkit-box;
                         -webkit-line-clamp: 6;
                         -webkit-box-orient: vertical;
+                        @media @tablet-width-down{
+                            font-size: 1.1em;
+                            margin-bottom: 25px;
+                        }
+                        @media @larger-phone-width-down{
+                            margin-bottom: 20px;
+                        }
                         p{
                             margin: 0;
                             padding: 0;
@@ -5923,7 +6037,8 @@ body .block #app_grid{
                     .cta-primary{
                         font-size: 1.2em;
                     }
-                    .download_urls{
+                    /* hide content for popups */
+                    .hidden_content{
                         display: none;
                     }
                 }
@@ -5939,6 +6054,9 @@ body .block #app_grid{
             .app{
                 width: 33.33%;
                 padding: 30px 17.5px 70px;
+                @media @tablet-width-down{
+                    padding: 30px 17.5px 50px;
+                }
                 @media @larger-phone-width-down{
                     width: 100%;
                     padding: 30px 10.5px;
@@ -5947,6 +6065,9 @@ body .block #app_grid{
                 /* app content */
                 .app_content{
                     .app_heading{
+                        &.logo_alt{
+
+                        }
                         .app_logo{
                             display: none;
                         }
@@ -5955,6 +6076,9 @@ body .block #app_grid{
                             line-height: 1.3em;
                             margin-bottom: 0;
                             padding-top: 20px;
+                            @media @tablet-width-down{
+                                font-size: 1.2em;
+                            }
                         }
                         .app_provider{
                             font-size: 1.2em;
@@ -5972,6 +6096,13 @@ body .block #app_grid{
                         display: -webkit-box;
                         -webkit-line-clamp: 2;
                         -webkit-box-orient: vertical;
+                        @media @tablet-width-down{
+                            font-size: 1.1em;
+                            margin-bottom: 25px;
+                        }
+                        @media @larger-phone-width-down{
+                            margin-bottom: 20px;
+                        }
                         p{
                             margin: 0;
                             padding: 0;
@@ -5983,11 +6114,15 @@ body .block #app_grid{
                         font-weight: 500;
                         text-decoration: underline;
                         transition: all .3s linear;
+                        @media @tablet-width-down{
+                            font-size: 1.1em;
+                        }
                         &:hover{
                             color: #009fda;
                         }
                     }
-                    .download_urls{
+                    /* hide content for popups */
+                    .hidden_content{
                         display: none;
                     }
                 }
@@ -5999,15 +6134,19 @@ body .block #app_grid{
 /* app grid banner */
 .page-node-779 #section-banner .block{
     @media @large-ipadpro-down{
-        background-position: 68% 30%!important;
+        background-position: 64% 30%!important;
     }
     @media @larger-phone-width-down{
         background-position: 75% 30%!important;
+        background-image: url(/sites/default/files/APP-MOBILE-F-2-min.jpg)!important;
     }
     .top-banner{
         padding: 120px 25%;
+        @media @large-ipadpro-down{
+            padding: 120px 15%;
+        }
         @media @tablet-width-down{
-            padding: 70px 15% 30px;
+            padding: 70px 10% 30px;
         }
         .page-main-header{
             padding: 0 10%;
@@ -6020,11 +6159,52 @@ body .block #app_grid{
         .flex-cell.note{
             text-align: center;
             color: #fff;
-            padding: 30px 12% 0;
+            padding: 20px 12% 0px;
             display: inline;
+            @media @tablet-width-down{
+                padding: 20px 12% 50px;
+            }
+            @media @larger-phone-width-down{
+                font-size: 0.9em;
+            }
+            @media @smaller-phone-width-down{
+                padding: 20px 2% 50px;
+            }
             span{
                 font-weight: 700;
             }
         }
+    }
+}
+
+/* lightbox background */
+body .sl-overlay{
+    opacity: 1;
+}
+
+body .sl-wrapper .sl-close{
+    background-image: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    font-size: 0!important;
+    &:before{
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 2px;
+        transform: rotate(45deg);
+        background: @grey;
+    }
+    &:after{
+        content: "";
+        position: absolute;
+        width: 15px;
+        height: 2px;
+        transform: rotate(-45deg);
+        background: @grey;
     }
 }

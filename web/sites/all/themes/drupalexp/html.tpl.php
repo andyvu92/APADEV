@@ -33,6 +33,10 @@
 	<!-- SLICK CAROUSEL -->
 	<script src="/sites/all/themes/evolve/assets/scripts/slick.min.js" type="text/javascript"></script>
 
+	<!-- SIMPLE LIGHTBOX -->
+	<script src="/sites/all/themes/evolve/assets/scripts/simplelightbox/simple-lightbox.js"></script>
+	<link rel="stylesheet" type="text/css" href="/sites/all/themes/evolve/assets/scripts/simplelightbox/simplelightbox.css">
+
 	<!-- SELECTIZE -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.6/js/standalone/selectize.js"></script>
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.1/css/selectize.min.css">

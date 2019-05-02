@@ -1991,7 +1991,7 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        @media @larger-tablet-width-down{
+        @media @large-ipadpro-down{
             flex-direction: column;
         }
     }
@@ -2024,8 +2024,8 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
             height: 2px;
             transform: rotate(45deg);
             background: white;
-            @media @larger-tablet-width-down{
-                background: #009fda;
+            @media @large-ipadpro-down{
+                background: lightgrey;
             }
         }
         &:after{
@@ -2035,15 +2035,15 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
             height: 2px;
             transform: rotate(-45deg);
             background: white;
-            @media @larger-tablet-width-down{
-                background: #009fda;
+            @media @large-ipadpro-down{
+                background: lightgrey;
             }
         }
     }
 
     /* overlay loading */
     .loading_overlay{
-        position: absolute;
+        position: fixed;
         top: 0;
         left: 0;
         width: 100%;
@@ -2063,19 +2063,33 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
         width: 50%;
         border: 1px solid #DBDBDB;
         border-right: 0;
-        @media @larger-tablet-width-down{
+        @media @large-ipadpro-down{
             width: 100%;
             border-right: 1px solid #DBDBDB;
+            padding: 52px 64px 75px;
         }
         @media @larger-phone-width-down{
-            padding: 25px;
+            padding: 25px 25px 40px;
         }
         .content_wrapper{
             display: flex;
             flex-direction: column;
             max-width: 520px;
+            @media @large-ipadpro-down{
+                width: 100%;
+                max-width: unset;
+            }
         }
         .app_heading{
+            &.logo_alt{
+                .app_logo{
+                    border-radius: 0;
+                    box-shadow: unset; 
+                    margin-bottom: 20px;
+                }
+                .main_heading{
+                    display: none;                }
+            }
             .app_logo{
                 display: block;
                 max-width: max-content;
@@ -2083,8 +2097,10 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
                 overflow: hidden;
                 box-shadow: 0 5px 14px rgba(40,48,79,0), 0 2px 4px rgba(40,48,79,.2), inset 0 -1px 4px rgba(23,78,138,.09);
                 img{
-                    max-width: 74px;
+                    max-width: 150px;
+                    max-height: 74px;
                     height: auto;
+                    width: auto;
                 }
             }
             .main_heading{
@@ -2096,10 +2112,16 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
             .app_creator{
                 font-size: 1.8em;
                 color: #009fda;
+                @media @larger-phone-width-down{
+                    font-size: 1.3em;
+                }
             }
             .app_cost{
                 font-size: 1.3em;
                 margin-top: 10px;
+                @media @larger-phone-width-down{
+                    font-size: 1.1em;
+                }
                 span{
                     font-weight: 700;
                     color: #009fda;
@@ -2114,22 +2136,40 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
             padding-top: 45px;
             margin-top: 15px;
             border-top: 1px solid rgba(0,0,0,0.12);
+            @media @larger-phone-width-down{
+                padding-top: 30px;
+            }
             p{
                 font-size: 1.3em;
                 line-height: 1.3em;
+                @media @larger-phone-width-down{
+                    font-size: 1.1em;
+                }
             }
         }
         .app_contact, .app_terms_conditions{
             margin-top: 25px;
+            @media @larger-phone-width-down{
+                margin-top: 20px;
+            }
             .sub_heading{
                 font-size: 1.3em;
                 padding-top: 0;
                 margin-top: 0px;
+                @media @larger-phone-width-down{
+                    font-size: 1.1em;
+                }
             }
             .content{
                 p{
                     font-size: 1.3em;
                     margin-bottom: 0;
+                    &:last-of-type{
+                        margin-bottom: 15px;
+                    }
+                    @media @larger-phone-width-down{
+                        font-size: 1.1em;
+                    }
                 }
             }
         }
@@ -2146,11 +2186,16 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
             flex-wrap: wrap;
             justify-content: space-between;
             margin-top: 30px;
-            .ios, .android{
+            @media @larger-phone-width-down{
+                margin-top: 20px;
+            }
+            .ios, .android, .webApp{
                 width: calc(~'50% - 6px');
                 display: flex;
                 flex-direction: row;
                 justify-content: center;
+                max-width: 254px;
+                min-width: 200px;
                 flex-wrap: nowrap;
                 padding: 7.5px 0px;
                 transition: all .3s linear;
@@ -2183,8 +2228,17 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
                     box-shadow: 0 5px 14px rgba(40,48,79,.2), 0 2px 4px rgba(40,48,79,.2), inset 0 -1px 4px rgba(23,78,138,.09);
                 }
             }
-            .ios{
+            .ios, .webApp{
                 background: #009FDA;
+            }
+            .webApp{
+                @media @large-ipadpro-down{
+                    background: #A2AD00;
+                }
+                @media @smaller-phone-width-down{
+                    max-width: unset;
+                    width: 100%;
+                }
             }
             .android{
                 background: #A2AD00;
@@ -2200,11 +2254,27 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
         display: flex;
         flex-direction: column;
         align-items: center;
-        @media @larger-tablet-width-down{
+        @media @large-ipadpro-down{
             width: 100%;
+            padding: 52px 64px 75px;
+            margin-bottom: 80px;
         }
         @media @larger-phone-width-down{
-            padding: 25px;
+            padding: 25px 25px 50px;
+        }
+        &.non_mobile{
+            .screen_grid{
+                max-width: unset;
+                img{
+                    margin-bottom: 30px;
+                    max-width: unset;
+                    width: calc(~'50% - 15px');
+                    @media @larger-phone-width-down{
+                        width: calc(~'50% - 8px');
+                        margin-bottom: 16px;
+                    }
+                }
+            }
         }
         .sub_heading{
             color: #fff;
@@ -2216,26 +2286,28 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
             @media @larger-phone-width-down{
                 margin: 20px 0 35px;
             }
+            @media @smaller-phone-width-down{
+                font-size: 1.1em;
+            }
         }
         .screen_grid{
             display: flex;
             flex-wrap: wrap;
             justify-content: space-between;
+            align-items: flex-start;
             width: 100%;
             max-width: 380px;
-            div[class*="screen_"]{
+            img{
                 margin-bottom: 37px;
                 max-width: 170px;
                 width: 50%;
                 position: relative;
                 top: 15px;
                 animation: moveTop .35s ease-in-out forwards;
+                cursor: pointer;
                 @media @larger-phone-width-down{
                     width: calc(~'50% - 10px');
                     margin-bottom: 20px;
-                }
-                img{
-                    width: 100%;
                 }
             }
         }
