@@ -5,24 +5,236 @@
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="/sites/all/themes/evolve/assets/scripts/typeahead.js-master/dist/typeahead.bundle.min.js" type="text/javascript"></script>
 
-	<!-- Structured Data Setting -->
+	<!-- Structured Data Setting Start -->
 	<script type="application/ld+json">
 	{
-	"@context": "http://schema.org",
-	"@type": "Organization",
-	"name":"Australian Physiotherapy Association",
-	"url": "https://australian.physio/",
-	"logo": "https://australian.physio/sites/default/files/logo_apa_0.png",
-	"sameAs": [
-		"https://www.facebook.com/AustralianPhysiotherapyAssociation",
-		"https://twitter.com/apaphysio",
-		"https://www.linkedin.com/company/australian-physiotherapy-association",
-		"https://www.instagram.com/physioaustralia/",
-		"https://www.youtube.com/user/apatube1"
-	]
+		"@context": "http://schema.org",
+		"@type": "Organization",
+		"name":"Australian Physiotherapy Association",
+		"url": "https://australian.physio/",
+		"logo": "https://australian.physio/sites/default/files/logo_apa_0.png",
+		"sameAs": [
+			"https://www.facebook.com/AustralianPhysiotherapyAssociation",
+			"https://twitter.com/apaphysio",
+			"https://www.linkedin.com/company/australian-physiotherapy-association",
+			"https://www.instagram.com/physioaustralia/",
+			"https://www.youtube.com/user/apatube1"
+		],
+		"contactPoint": [{
+			"@type": "ContactPoint",
+			"telephone": "+61-3-9092-0888",
+			"contactType": "National Office",
+			"areaServed": "AU"
+		},{
+			"@type": "ContactPoint",
+			"telephone": "1300-306-622",
+			"contactType": "National Office",
+			"areaServed": "AU",
+			"contactOption": "TollFree"
+		},{
+			"@type": "ContactPoint",
+			"telephone": "+61-3-9092-0834",
+			"contactType": "Advertising",
+			"areaServed": "AU"
+		},{
+			"@type": "ContactPoint",
+			"telephone": "+61-3-9092-0810",
+			"contactType": "Media",
+			"areaServed": "AU"
+		},{
+			"@type": "ContactPoint",
+			"telephone": "1300-306-622",
+			"contactType": "NSW/ACT Branch",
+			"areaServed": {
+				"@type": "Place",
+				"name": "NSW/ACT Branch",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Suite 204, 32 Delhi Road",
+					"addressLocality": "North Ryde",
+					"addressRegion": "NSW",
+					"postalCode": "2113"
+				}
+			},
+			"contactOption": "TollFree"
+		},{
+			"@type": "ContactPoint",
+			"telephone": "+61-2-8748-1555",
+			"contactType": "NSW/ACT Branch",
+			"areaServed": {
+				"@type": "Place",
+				"name": "NSW/ACT Branch",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Suite 204, 32 Delhi Road",
+					"addressLocality": "North Ryde",
+					"addressRegion": "NSW",
+					"postalCode": "2113"
+				}
+			}
+		},{
+			"@type": "ContactPoint",
+			"telephone": "1300-306-622",
+			"contactType": "QLD Branch",
+			"areaServed": {
+				"@type": "Place",
+				"name": "QLD Branch",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Freeway Office Park Building 6C 2728 Logan Road",
+					"addressLocality": "Eight Mile Plains",
+					"addressRegion": "QLD",
+					"postalCode": "4113"
+				}
+			},
+			"contactOption": "TollFree"
+		},{
+			"@type": "ContactPoint",
+			"telephone": "+61-7-3423-1553",
+			"contactType": "QLD Branch",
+			"areaServed": {
+				"@type": "Place",
+				"name": "QLD Branch",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Freeway Office Park Building 6C 2728 Logan Road",
+					"addressLocality": "Eight Mile Plains",
+					"addressRegion": "QLD",
+					"postalCode": "4113"
+				}
+			}
+		},{
+			"@type": "ContactPoint",
+			"telephone": "1300-306-622",
+			"contactType": "SA/NT Branch",
+			"areaServed": {
+				"@type": "Place",
+				"name": "SA/NT Branch",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "8/15 Fullarton Road",
+					"addressLocality": "Kent Town",
+					"addressRegion": "SA",
+					"postalCode": "5067"
+				}
+			},
+			"contactOption": "TollFree"
+		},{
+			"@type": "ContactPoint",
+			"telephone": "+61-8-8362-1355",
+			"contactType": "SA/NT Branch",
+			"areaServed": {
+				"@type": "Place",
+				"name": "SA/NT Branch",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "8/15 Fullarton Road",
+					"addressLocality": "Kent Town",
+					"addressRegion": "SA",
+					"postalCode": "5067"
+				}
+			}
+		},{
+			"@type": "ContactPoint",
+			"telephone": "1300-306-622",
+			"contactType": "VIC/TAS Branch",
+			"areaServed": {
+				"@type": "Place",
+				"name": "VIC/TAS Branch",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Level 1, 1175 Toorak Road",
+					"addressLocality": "Camberwell",
+					"addressRegion": "VIC",
+					"postalCode": "3124"
+				}
+			},
+			"contactOption": "TollFree"
+		},{
+			"@type": "ContactPoint",
+			"telephone": "+61-3-9092-0888",
+			"contactType": "VIC/TAS Branch",
+			"areaServed": {
+				"@type": "Place",
+				"name": "VIC/TAS Branch",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Level 1, 1175 Toorak Road",
+					"addressLocality": "Camberwell",
+					"addressRegion": "VIC",
+					"postalCode": "3124"
+				}
+			}
+		},{
+			"@type": "ContactPoint",
+			"telephone": "1300-306-622",
+			"contactType": "WA Branch",
+			"areaServed": {
+				"@type": "Place",
+				"name": "WA Branch",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Suite 1, 4 Sarich Way",
+					"addressLocality": "Bentley",
+					"addressRegion": "WA",
+					"postalCode": "6102"
+				}
+			},
+			"contactOption": "TollFree"
+		},{
+			"@type": "ContactPoint",
+			"telephone": "+61-8-9389-9211",
+			"contactType": "WA Branch",
+			"areaServed": {
+				"@type": "Place",
+				"name": "WA Branch",
+				"address": {
+					"@type": "PostalAddress",
+					"streetAddress": "Suite 1, 4 Sarich Way",
+					"addressLocality": "Bentley",
+					"addressRegion": "WA",
+					"postalCode": "6102"
+				}
+			}
+		}
+	}]
 	}
 	</script>
-	
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org/",
+		"@type": "Association",
+		"name": "Australian Physiotherapy Association",
+		"address": {
+			"@type": "PostalAddress",
+			"streetAddress": "Level 1, 1175 Toorak Road",
+			"addressLocality": "Camberwell",
+			"addressRegion": "VIC",
+			"postalCode": "3124",
+			"addressCountry": "AU"
+		},
+		"geo": {
+			"@type": "GeoCoordinates",
+			"latitude": -37.8482993,
+			"longitude": 145.0787798
+		},
+		"url": "https://australian.physio",
+		"telephone": "+61-3-9092-0888", 
+		"openingHoursSpecification": {
+			"@type": "OpeningHoursSpecification",
+			"dayOfWeek": [
+				"Monday",
+				"Tuesday",
+				"Wednesday",
+				"Thursday",
+				"Friday"
+			],
+			"opens": "09:00",
+			"closes": "17:00"
+		}
+	}
+	</script>
+	<!-- Structured Data Setting Ends -->
 
 	<!-- TOUCH SWIPE -->
 	<script src="/sites/all/themes/evolve/assets/scripts/jquery.touchSwipe.min.js" type="text/javascript"></script>
