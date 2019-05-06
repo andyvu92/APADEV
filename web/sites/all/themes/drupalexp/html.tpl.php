@@ -196,8 +196,7 @@
 					"postalCode": "6102"
 				}
 			}
-		}
-	}]
+		}]
 	}
 	</script>
 	<script type="application/ld+json">
