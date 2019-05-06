@@ -23,28 +23,28 @@
 		"contactPoint": [{
 			"@type": "ContactPoint",
 			"telephone": "+61-3-9092-0888",
-			"contactType": "National Office",
+			"contactType": "customer support",
 			"areaServed": "AU"
 		},{
 			"@type": "ContactPoint",
-			"telephone": "1300-306-622",
-			"contactType": "National Office",
+			"telephone": "+61-1300-306-622",
+			"contactType": "customer support",
 			"areaServed": "AU",
 			"contactOption": "TollFree"
 		},{
 			"@type": "ContactPoint",
 			"telephone": "+61-3-9092-0834",
-			"contactType": "Advertising",
+			"contactType": "customer support",
 			"areaServed": "AU"
 		},{
 			"@type": "ContactPoint",
 			"telephone": "+61-3-9092-0810",
-			"contactType": "Media",
+			"contactType": "customer support",
 			"areaServed": "AU"
 		},{
 			"@type": "ContactPoint",
-			"telephone": "1300-306-622",
-			"contactType": "NSW/ACT Branch",
+			"telephone": "+61-1300-306-622",
+			"contactType": "customer support",
 			"areaServed": {
 				"@type": "Place",
 				"name": "NSW/ACT Branch",
@@ -60,7 +60,7 @@
 		},{
 			"@type": "ContactPoint",
 			"telephone": "+61-2-8748-1555",
-			"contactType": "NSW/ACT Branch",
+			"contactType": "customer support",
 			"areaServed": {
 				"@type": "Place",
 				"name": "NSW/ACT Branch",
@@ -74,8 +74,8 @@
 			}
 		},{
 			"@type": "ContactPoint",
-			"telephone": "1300-306-622",
-			"contactType": "QLD Branch",
+			"telephone": "+61-1300-306-622",
+			"contactType": "customer support",
 			"areaServed": {
 				"@type": "Place",
 				"name": "QLD Branch",
@@ -91,7 +91,7 @@
 		},{
 			"@type": "ContactPoint",
 			"telephone": "+61-7-3423-1553",
-			"contactType": "QLD Branch",
+			"contactType": "customer support",
 			"areaServed": {
 				"@type": "Place",
 				"name": "QLD Branch",
@@ -105,8 +105,8 @@
 			}
 		},{
 			"@type": "ContactPoint",
-			"telephone": "1300-306-622",
-			"contactType": "SA/NT Branch",
+			"telephone": "+61-1300-306-622",
+			"contactType": "customer support",
 			"areaServed": {
 				"@type": "Place",
 				"name": "SA/NT Branch",
@@ -122,7 +122,7 @@
 		},{
 			"@type": "ContactPoint",
 			"telephone": "+61-8-8362-1355",
-			"contactType": "SA/NT Branch",
+			"contactType": "customer support",
 			"areaServed": {
 				"@type": "Place",
 				"name": "SA/NT Branch",
@@ -136,8 +136,8 @@
 			}
 		},{
 			"@type": "ContactPoint",
-			"telephone": "1300-306-622",
-			"contactType": "VIC/TAS Branch",
+			"telephone": "+61-1300-306-622",
+			"contactType": "customer support",
 			"areaServed": {
 				"@type": "Place",
 				"name": "VIC/TAS Branch",
@@ -153,7 +153,7 @@
 		},{
 			"@type": "ContactPoint",
 			"telephone": "+61-3-9092-0888",
-			"contactType": "VIC/TAS Branch",
+			"contactType": "customer support",
 			"areaServed": {
 				"@type": "Place",
 				"name": "VIC/TAS Branch",
@@ -167,8 +167,8 @@
 			}
 		},{
 			"@type": "ContactPoint",
-			"telephone": "1300-306-622",
-			"contactType": "WA Branch",
+			"telephone": "+61-1300-306-622",
+			"contactType": "customer support",
 			"areaServed": {
 				"@type": "Place",
 				"name": "WA Branch",
@@ -184,7 +184,7 @@
 		},{
 			"@type": "ContactPoint",
 			"telephone": "+61-8-9389-9211",
-			"contactType": "WA Branch",
+			"contactType": "customer support",
 			"areaServed": {
 				"@type": "Place",
 				"name": "WA Branch",
@@ -202,7 +202,7 @@
 	<script type="application/ld+json">
 	{
 		"@context": "https://schema.org/",
-		"@type": "Association",
+		"@type": "ProfessionalService",
 		"name": "Australian Physiotherapy Association",
 		"address": {
 			"@type": "PostalAddress",
