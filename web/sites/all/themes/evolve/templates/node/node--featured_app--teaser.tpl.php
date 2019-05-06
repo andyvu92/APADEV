@@ -153,17 +153,18 @@
       <?php 
         $striped_node_url = str_replace("/featured-app/","",$node_url);
         if ( $isFeatured == 'yes' ){
-          echo "<div class='cta-primary'><a class='initiate_data' data-src='".$striped_node_url."'><span>Read more</span></a></div>";
+          echo "<a class='initiate_data cta_light' data-src='".$striped_node_url."'>Read more</a>";
         } else {
           echo "<a data-src='".$striped_node_url."' class='app_readmore initiate_data'>Read more</a>";
         }
       ?>
+
       <!-- hidden content -->
       <div class="hidden_content">
         <div class="download_urls">
-          <a class="ios" target="_blank" href="<?php print $ios ?>">Download on apple</a>
-          <a class="android" target="_blank" href="<?php print $android ?>">Download on android</a>
-          <a class="webApp" target="_blank" href="<?php print $webApp ?>">Go to the Website</a>
+          <a class="ios" target="_blank" rel="nofollow" href="<?php print $ios ?>">Download on apple</a>
+          <a class="android" target="_blank" rel="nofollow" href="<?php print $android ?>">Download on android</a>
+          <a class="webApp" target="_blank" rel="nofollow" href="<?php print $webApp ?>">Go to the Website</a>
         </div> <!-- end download url -->
         <div class="app_platforms">
           <?php echo $platform ?>

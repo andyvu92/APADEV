@@ -2007,7 +2007,6 @@ jQuery(document).ready(function() {
     } else {
       $(this).addClass('archive_grid');
       if( $(this).find('.item').length > 5 ) {
-        console.log('> 5');
         $(this).slick({
           centerPadding: '0px',
           slidesToShow: 9,
@@ -2100,67 +2099,35 @@ jQuery(document).ready(function() {
   // AJAXIFY APP LOADING & FETCH DATA TO POPUP MODEL
   $(document).on('click', '.initiate_data', function(e){
     e.preventDefault();
-    var target = '/featured-app/' + $(this).attr('data-src');
-    var checkPlatform;
+    var current = $(this);
 
-    if ( $(this).parent().is('.cta-primary') ){
-      var current = $(this);
-
-      var appTitle = $(this).parent().parent().find('.app_title').text();
-      var appCreator = $(this).parent().parent().find('.app_provider').text();
-      var ios = $(this).parent().parent().find('.download_urls .ios').attr('href');
-      var android = $(this).parent().parent().find('.download_urls .android').attr('href');
-      var webApp = $(this).parent().parent().find('.download_urls .webApp').attr('href');
-      checkPlatform = function(){
-        if( $(current).parent().parent().find('.app_platforms .field-item:contains("Tablet")').length > 0 ) {
-          return 'true';
-        } else {
-          return 'false';
-        }
+    var appTitle = $(this).parent().find('.app_title').text();
+    var appCreator = $(this).parent().find('.app_provider').text();
+    var ios = $(this).parent().find('.download_urls .ios').attr('href');
+    var android = $(this).parent().find('.download_urls .android').attr('href');
+    var webApp = $(this).parent().find('.download_urls .webApp').attr('href');
+    var checkPlatform = function(){
+      if( $(current).parent().find('.app_platforms .field-item:contains("Tablet")').length > 0 ) {
+        return 'true';
+      } else {
+        return 'false';
       }
-      checkLogoSize = function(){
-        if( $(current).parent().parent().find('.app_heading').is('.logo_alt') ) {
-          return 'true';
-        } else {
-          return 'false';
-        }
-      }
-      var appImg = $(this).parent().parent().find('.app_images').html();
-      var appLogo = $(this).parent().parent().find('.app_logo').html();
-      var appCost = $(this).parent().parent().find('.hidden_content .app_cost').html();
-      var appDescription = $(this).parent().parent().find('.hidden_content .app_description').html();
-      var appContact = $(this).parent().parent().find('.hidden_content .app_contact').html();
-      var appTermsConditions = $(this).parent().parent().find('.hidden_content .app_terms_conditions').text();
-    } else {
-      var appTitle = $(this).parent().find('.app_title').text();
-      var appCreator = $(this).parent().find('.app_provider').text();
-      var ios = $(this).parent().find('.download_urls .ios').attr('href');
-      var android = $(this).parent().find('.download_urls .android').attr('href');
-      var webApp = $(this).parent().find('.download_urls .webApp').attr('href');
-      checkPlatform = function(){
-        if( $(current).parent().find('.app_platforms .field-item:contains("Tablet")').length > 0 ) {
-          return 'true';
-        } else {
-          return 'false';
-        }
-      }
-      checkLogoSize = function(){
-        if( $(current).parent().find('.app_heading').is('.logo_alt') ) {
-          return 'true';
-        } else {
-          return 'false';
-        }
-      }
-      var appImg = $(this).parent().find('.app_images').html();
-      var appLogo = $(this).parent().find('.app_logo').html();
-      var appCost = $(this).parent().find('.hidden_content .app_cost').html();
-      var appDescription = $(this).parent().find('.hidden_content .app_description').html();
-      var appContact = $(this).parent().find('.hidden_content .app_contact').html();
-      var appTermsConditions = $(this).parent().find('.hidden_content .app_terms_conditions').text();
     }
+    var checkLogoSize = function(){
+      if( $(current).parent().find('.app_heading').is('.logo_alt') ) {
+        return 'true';
+      } else {
+        return 'false';
+      }
+    }
+    var appImg = $(this).parent().find('.app_images').html();
+    var appLogo = $(this).parent().find('.app_logo').html();
+    var appCost = $(this).parent().find('.hidden_content .app_cost').html();
+    var appDescription = $(this).parent().find('.hidden_content .app_description').html();
+    var appContact = $(this).parent().find('.hidden_content .app_contact').html();
+    var appTermsConditions = $(this).parent().find('.hidden_content .app_terms_conditions').text();
 
     // load logo
-    console.log(checkLogoSize());
     if( checkLogoSize() == 'true' ) {
       $('#app_view_popup .app_heading').addClass('logo_alt');
     } else {
@@ -2189,12 +2156,12 @@ jQuery(document).ready(function() {
       $('#app_view_popup .app_screen').addClass('non_mobile');
       $('#app_view_popup .app_content .app_download .android').hide();
       $('#app_view_popup .app_content .app_download .ios').hide();
-      $('#app_view_popup .app_content .app_download .web_app').show();
+      $('#app_view_popup .app_content .app_download .webApp').show();
     } else {
       $('#app_view_popup .app_screen').removeClass('non_mobile');
       $('#app_view_popup .app_content .app_download .android').show();
       $('#app_view_popup .app_content .app_download .ios').show();
-      $('#app_view_popup .app_content .app_download .web_app').hide();
+      $('#app_view_popup .app_content .app_download .webApp').hide();
     }
 
     // load app screens
@@ -2205,7 +2172,11 @@ jQuery(document).ready(function() {
     }
 
     function setLightBox(){
-      var $gallery = $('#app_view_popup .app_screen .screen_grid img').simpleLightbox({sourceAttr: 'src'});
+      var chevron = '<svg xmlns="http://www.w3.org/2000/svg" width="39.688" height="68" viewBox="0 0 39.688 68"><g id="CHEVRON_FORWARD-G_108px" data-name="CHEVRON FORWARD-G 108px" transform="translate(-944.121 -188.467)"><g id="Group_455" data-name="Group 455" transform="translate(948.121 192.467)"><path id="Path_220" data-name="Path 220" d="M-5.372,0,24.656,30.045-5.372,60" transform="translate(5.372)" fill="none" stroke="#a6a8ab" stroke-linecap="round" stroke-width="8"/></g></g></svg>';
+      var $gallery = $('#app_view_popup .app_screen .screen_grid img')
+      .simpleLightbox({
+        sourceAttr: 'src',
+        navText: ['<span class="sl_arrow_left">'+ chevron +'</span>','<span class="sl_arrow_right">'+ chevron +'</span>']});
     }
 
     $.when( loadAppImg() ).done(function() {
@@ -2237,7 +2208,7 @@ jQuery(document).ready(function() {
     });
   });
 
-  //test
+  // style the featured app logo if it's not icon
   $('.app_inner_wrapper .app_content .app_logo img').each(function(){
     var img_width = $(this).width();
     var img_height = $(this).height();
@@ -2246,6 +2217,12 @@ jQuery(document).ready(function() {
       $(current).parent().addClass('logo');
       $(current).parent().parent().addClass('logo_alt');
     }
+  });
+
+  // apply styles for cta link
+  $('.cta_light').each(function () {  
+    var chevron = '<svg xmlns="http://www.w3.org/2000/svg" width="39.688" height="68" viewBox="0 0 39.688 68"><g id="CHEVRON_FORWARD-G_108px" data-name="CHEVRON FORWARD-G 108px" transform="translate(-944.121 -188.467)"><g id="Group_455" data-name="Group 455" transform="translate(948.121 192.467)"><path id="Path_220" data-name="Path 220" d="M-5.372,0,24.656,30.045-5.372,60" transform="translate(5.372)" fill="none" stroke="#a6a8ab" stroke-linecap="round" stroke-width="8"/></g></g></svg>';
+    $(this).append(chevron);
   });
 });
 

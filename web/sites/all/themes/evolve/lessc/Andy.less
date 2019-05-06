@@ -6201,10 +6201,11 @@ body .sl-wrapper .sl-close{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 25px;
-    height: 25px;
+    width: 25px!important;
+    height: 25px!important;
     cursor: pointer;
     font-size: 0!important;
+    padding: 0!important;
     &:before{
         content: "";
         position: absolute;
@@ -6212,6 +6213,8 @@ body .sl-wrapper .sl-close{
         height: 2px;
         transform: rotate(45deg);
         background: @grey;
+        top: calc(~'50% - 1px');
+        left: calc(~'50% - 7.5px');
     }
     &:after{
         content: "";
@@ -6220,5 +6223,74 @@ body .sl-wrapper .sl-close{
         height: 2px;
         transform: rotate(-45deg);
         background: @grey;
+        top: calc(~'50% - 1px');
+        left: calc(~'50% - 7.5px');
+    }
+}
+
+body .sl-wrapper .sl-counter{
+    font-size: 1em;
+}
+
+body{
+    .sl-wrapper .sl-navigation{
+        button.sl-prev, button.sl-next{
+            svg{
+                max-height: 20px;
+            }
+            &:hover{
+                opacity: 0.7;
+            }
+        }
+        button.sl-prev{
+            -moz-transform: scaleX(-1);
+            -o-transform: scaleX(-1);
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1);
+            filter: FlipH;
+            -ms-filter: "FlipH";
+        }
+    }
+}
+
+/* styles cta button */
+.cta_light{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 25px;
+    font-size: 1.2em;
+    font-weight: 500;
+    width: max-content;
+    position: relative;
+    &:after{
+        position: absolute;
+        content: '';
+        height: 2px;
+        width: 13px;
+        background: @bright-blue;
+        border-radius: 10px;
+        right: 0;
+        transform: translateX(-12px) translateY(-0.5px);
+        opacity: 0;
+        transition: all .3s ease-in-out;
+    }
+    &:hover{
+        &:after{
+            transform: translateX(-6px) translateY(-0.5px);
+            opacity: 1;
+        }
+        svg{
+            margin-left: 10px;
+        }
+    }
+    svg{
+        height: 15px;
+        width: 15px;
+        margin-left: 6px;
+        transition: all .3s ease-in-out;
+        path{
+            stroke: @bright-blue;
+        }
     }
 }
