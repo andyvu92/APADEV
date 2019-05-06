@@ -199,7 +199,7 @@
 		}
 	}]
 	}
-	</script>
+	</script>4
 	<script type="application/ld+json">
 	{
 		"@context": "https://schema.org/",
@@ -234,6 +234,22 @@
 		}
 	}
 	</script>
+	<?php 
+	$actual_link = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+	if($actual_link == "https://australian.physio" || $actual_link == "https://australian.physio/"): ?>
+	<script type="application/ld+json">
+	{
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"url": "https://australian.physio/",
+		"potentialAction": {
+			"@type": "SearchAction",
+			"target": "https://australian.physio/pd/pd-search?page=1&pagesize=5&Keyword={search_term_string}",
+			"query-input": "required name=search_term_string"
+		}
+	}
+	</script>
+	<?php endif; ?>
 	<!-- Structured Data Setting Ends -->
 
 	<!-- TOUCH SWIPE -->
