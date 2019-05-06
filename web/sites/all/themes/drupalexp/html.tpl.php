@@ -199,7 +199,7 @@
 		}
 	}]
 	}
-	</script>4
+	</script>
 	<script type="application/ld+json">
 	{
 		"@context": "https://schema.org/",
