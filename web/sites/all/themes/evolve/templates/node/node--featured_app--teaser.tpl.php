@@ -138,14 +138,14 @@
         <?php 
           $excerp = $content['field_excerp']['#items']['0']['value'];
           if ($isFeatured == 'yes'){
-            $maxPos = 500;
+            //$maxPos = 500;
           } else  {
-            $maxPos = 80;
+            //$maxPos = 80;
           }
-          if (strlen($excerp) > $maxPos)
+          //if (strlen($excerp) > $maxPos)
           {
-              $lastPos = $maxPos - strlen($excerp);
-              $excerp = substr($excerp, 0, strrpos($excerp, ' ', $lastPos)) . '...';
+              //$lastPos = $maxPos - strlen($excerp);
+              //$excerp = substr($excerp, 0, strrpos($excerp, ' ', $lastPos)) . '...';
           }
           print $excerp; 
         ?>
