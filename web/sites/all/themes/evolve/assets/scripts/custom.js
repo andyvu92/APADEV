@@ -1857,7 +1857,10 @@ $(document).on('click', '.pd-spcart-delete a', function(){
 	$('.overlay').fadeIn();
 	$('.loaders').css('visibility','visible').hide().fadeIn();
 });
-
+// PD skip go to cart pop up save product in shopping cart
+$(document).on('click', '#skipDietary ', function(){
+	$('#skipDietaryForm').submit();
+});
 //===============================================================================	
 	$('#logoutButton').click(function() {
 		document.getElementById("logoutAcButton").click();

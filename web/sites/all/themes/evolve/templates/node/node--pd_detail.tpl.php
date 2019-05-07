@@ -235,6 +235,11 @@ $userRetisterStatus = false;
 	if(isset($_GET['updateNonmember'])&&($_GET['updateNonmember']!=0)){ 
 		
 	}
+	//skip dietary pop up post data
+	if(isset($_POST['skipDietaryPOP'])){
+		//update PD shopping care 
+		PDShoppingCart($userID=$_SESSION['UserId'], $productID=$_POST['productID'], $meetingID=$_POST['meetingID'],$type=$_POST['type'],$Coupon=$_POST['Couponcode']);
+	}
 	// user update detail!
 	if(isset($_POST['updateDetail'])){
 		$postData = array();
@@ -414,7 +419,9 @@ $userRetisterStatus = false;
 			if(isset($_POST['Job']) && $_POST['Job']!="other" ){ $CreateNewUserPD["Job"] = $_POST["Job"];  } else { $CreateNewUserPD["Job"] = $_POST["jobother"];}
 			if(isset($_POST['Registrationboard'])){ $CreateNewUserPD["Registrationboard"] = $_POST["Registrationboard"];  } else { $CreateNewUserPD["Registrationboard"] = 0;  } 
 			if(isset($_POST['Professionalinsurance'])){ $CreateNewUserPD["Professionalinsurance"] = $_POST["Professionalinsurance"];  }else { $CreateNewUserPD["Professionalinsurance"] = 0;  } 
+			//this field is not used anymore, keep that for database store purpose
 			if(isset($_POST['Professionalbody'])){ $CreateNewUserPD["Professionalbody"] = $_POST["Professionalbody"];  }else { $CreateNewUserPD["Professionalbody"] = 0;  } 
+			//end
 			if(isset($_POST['HearaboutAPA'])){ $CreateNewUserPD["HearaboutAPA"] = $_POST["HearaboutAPA"];  } else { $CreateNewUserPD["HearaboutAPA"] = "";}
 			if(isset($_POST['Membership-product'])){ $CreateNewUserPD["Membership-product"] = $_POST["Membership-product"];  }else { $CreateNewUserPD["Membership-product"] = 0;  } 
 			if(isset($_POST['Pdemails-product'])){ $CreateNewUserPD["Pdemails-product"] = $_POST["Pdemails-product"];  }else { $CreateNewUserPD["Pdemails-product"] = 0;  } 
@@ -645,6 +652,7 @@ $userRetisterStatus = false;
         hide($content['links']);
         print render($content['body']);
         ?>
+		
 		<div id="processWindow">
 		   <h3>This item has been successfully added to your cart.</h3>
            <a target="_self" id="continue-shopping" class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
@@ -1078,12 +1086,13 @@ $userRetisterStatus = false;
 							<label for="Professional-insurance">I have current and adequate professional indemnity insurance.<span class="tipstyle"> *</span></label>
 						</div>
 					<?php endif; ?>
+					<?php /*
 				   <div class="col-xs-12">
 				  <input class="styled-checkbox" type="checkbox" name="Professionalbody" id="Professionalbody" value="<?php if(isset($_SESSION['SurveyData'])) echo $_SESSION['SurveyData']['Professionalbody'];?>" <?php if(isset($_SESSION['SurveyData']) && $_SESSION['SurveyData']['Professionalbody']=="1") echo 'checked="checked"';?>>
-				  <label for="Professionalbody">I am a member of my professional body.<span class="tipstyle"> *</span></label>
-				   </div>
+				  <label for="Professionalbody">I am a member of my professional body.</label>
+				   </div>*/?>
 				</div>
-
+                <?php if($tag==1): ?>
 				<div class="row" style="margin-top: 10px; margin-bottom: 10px">
 					<div class="col-xs-12">
 					<label>Your dietary requirements</label>
@@ -1104,7 +1113,7 @@ $userRetisterStatus = false;
 						</div>
 					</div>
 				</div>
-
+                <?php endif; ?>
 				<div class="row">
 				   <div class="col-lg-12">
 					   <label>How did you hear about APA PD?</label>
@@ -1590,7 +1599,15 @@ $userRetisterStatus = false;
 
 </div>
 <!--End Sign up Web User-->
+<!--Skip dietary requirement-->
+<form id="skipDietaryForm" action="pd-product?id=<?php echo $pd_detail['MeetingID'];?>" method="POST" >
+	<input type="hidden" name="skipDietaryPOP">
+	<input type="hidden" name="meetingID" value="<?php echo $pd_detail['MeetingID'];?>"> 
+	<input type="hidden" name="productID" value="<?php echo $pd_detail['ProductID'];?>"> 
+	<input type="hidden" name="type" value="PD">
+	<input type="hidden" name="Couponcode" value="<?php echo $Couponcode;?>"> 
 
+</form>
 <!--Member update detail-->
  <?php if(isset($details)): ?>
 <div id="registerPDUser">
@@ -1873,7 +1890,7 @@ $userRetisterStatus = false;
 							echo '<span class="add-to-cart disable '.$pd_detail['Typeofpd'].'">Registration closed</span>';
 						}
 					} elseif ($userTag =="0"){ // any logged in users
-						if(isset($pd_detail['Typeofpd']) && $pd_detail['Typeofpd'] == "Course") {
+						if($tag==1) {
 							if($_SESSION['MemberTypeID'] =='31' || $_SESSION['MemberTypeID'] =='32') {
 								echo '<span class="add-to-cart student-disable '.$pd_detail['Typeofpd'].'" data-target="#student-limitation">Not available to students</span>';
 								// student message
@@ -1881,7 +1898,8 @@ $userRetisterStatus = false;
 								echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
 							}
 						} else {
-							echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
+							//echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
+							echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="skipDietary"><span>Add to cart</span></a>';
 						}
 					} else { // Not-logged in
 						echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerNonMember" popup-target="registerMember-container"><span>Add to cart</span></a>';
