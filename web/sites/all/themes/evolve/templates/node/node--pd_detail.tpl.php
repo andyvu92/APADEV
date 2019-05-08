@@ -626,6 +626,16 @@ $userRetisterStatus = false;
 				 //echo "Open"; 
 			  
 			 //}
+
+			function replaceAll($stringInput) {
+				$Outputstring = $stringInput;
+				$Outputstring = preg_replace("#(<[a-z ]*)(style=('|\")(.*?)('|\"))([a-z ]*>)#", '', $Outputstring);
+				$Outputstring = preg_replace('#(</[a-z ]*>)#', '', $Outputstring);
+				$Outputstring = preg_replace('#(<[a-z ]*>)#', '', $Outputstring);
+				$Outputstring = str_replace(">","",$Outputstring);
+				$Outputstring = preg_replace("/style=\\'[^\\']*\\'/", '', $Outputstring);
+				return $Outputstring;
+			}
 		 
 		 ?></p></div>
 		 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6"><h3>When:</h3><p><?php //echo $bdata[1]."-".$edata[1]; ?></p><p><?php //echo $bdata[0]." - ".$edata[0] ; ?></p></div>
@@ -2096,6 +2106,66 @@ $userRetisterStatus = false;
 			</div>
 	</div>
 <?php endif; ?>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Event",
+  "name": "<?php echo $title; ?>",
+  "startDate": "<?php echo $pd_detail['Sdate']; ?>",
+  "endDate": "<?php echo $pd_detail['Edate']; ?>",
+  "location": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "<?php echo $pd_detail['AddressLine1']." ".$pd_detail['AddressLine2']; ?>",
+      "addressLocality": "<?php echo $pd_detail['City']; ?>",
+      "postalCode": "<?php echo $pd_detail['PostalCode']; ?>",
+      "addressRegion": "<?php echo $pd_detail['State']; ?>",
+      "addressCountry": "AU"
+    }
+  },
+  "offers": {
+	"@type": "Offer",
+	"url": "https://australian.physio/pd/pd-product?id=<?php echo $pdArr["PDIDs"]; ?>"
+	},
+  <?php 
+	if (!empty($pd_detail['Description'])){
+		$EventDescription = explode("<p",$pd_detail['Description']);
+		$firstLine =  replaceAll($EventDescription[1]);
+		$secondLine = replaceAll($EventDescription[2]);
+		echo '"description": "'.$firstLine." ".$secondLine.'"';
+	} else{
+		echo '"description": "No Description!"';
+	}
+	?>
+  <?php if(!empty($pd_detail['Presenter'])): ?>
+  ,
+  "performer": 
+	<?php 
+	$PresentSize = sizeof($pd_detail['Presenter']);
+	$PresentCounter = 0;
+	if($PresentSize > 1): ?>
+	[
+		<?php 
+		foreach($pd_detail['Presenter'] as $bios) {
+			$PresentCounter++;
+			echo '{"@type": "PerformingGroup",';
+			echo '"name": "'.$bios['SpeakerID_Name'].'"}';
+			if($PresentSize != $PresentCounter) {
+				echo ",";
+			}
+		} ?>
+	]
+	<?php else: ?>
+	{
+		"@type": "PerformingGroup",
+		"name": "<?php echo $bios['SpeakerID_Name']; ?>"  
+	}
+	<?php endif; ?>
+  <?php endif; ?>
+}
+</script>
 
 </div>
 	<div class="extra-info">
