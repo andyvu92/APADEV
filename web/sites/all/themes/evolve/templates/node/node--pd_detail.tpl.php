@@ -1908,7 +1908,7 @@ $userRetisterStatus = false;
 								echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
 							}
 						} 
-						if($pd_detail['Typeofpd'] =="Networking Event" || $pd_detail['Typeofpd'] =="Student Event"){ echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	}
+						elseif($pd_detail['Typeofpd'] =="Networking Event" || $pd_detail['Typeofpd'] =="Student Event"){ echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	}
 						else {
 							//echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
 							echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="skipDietary"><span>Add to cart</span></a>';
