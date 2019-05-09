@@ -26,6 +26,7 @@ if(isset($_SESSION["Log-in"])) {
 }
 $products = $product["Orders"];
 //rsort($products);
+$SetDate = strtotime("13-11-2018");
 ?>
 <div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
 <?php //include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
@@ -70,38 +71,40 @@ apa_function_dashboardLeftNavigation_form();
 							foreach($products as $product){
 								$now = date('d-m-Y');
 								$productDate = str_replace('/', '-', $product['Orderdate']);//$product['Orderdate'];//
-								if(strtotime($now)<strtotime('+1 years',strtotime($productDate))){
-									$counter++;
-									$instal = false;
-									echo "<div class='flex-cell flex-flow-row'>";
-									if($counterTwo == 0) {
-										$counterTwo++;
-										echo "<div class='flex-col-6'><a class='Tabs".$counter." active'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
-									} else {
-										echo "<div class='flex-col-6'><a class='Tabs".$counter."'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
-									}
-									//echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
-									echo "<div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div>";
-									$OrderDate = date('d-m-Y', strtotime($productDate));
-									echo "<div class='flex-col-3'>".$OrderDate."</div>";
-									/// original copy for order detail:
-									/// echo "</div><div class='TabContents".$counter."' style='display: none;'>";
-									/// Made this change to hide the details
-									echo "</div><div class='noTabContents".$counter."' style='display: none;'>";
-									foreach($product["OrderLines"] as $orderDetails) {
+								if($SetDate<=strtotime($productDate)){
+									if(strtotime($now)<strtotime('+1 years',strtotime($productDate))){
+										$counter++;
+										$instal = false;
 										echo "<div class='flex-cell flex-flow-row'>";
-										echo "<div class='flex-col-6'>".$orderDetails['ProductName']."</div>";
-										echo "<div class='flex-col-3'>$".number_format($orderDetails['ProductPrice'],2)."</div>";
-										echo "<div class='flex-col-3'></div></div>";
-										if($orderDetails['ProductName'] == "Administrative Fee") {$instal = true;}
+										if($counterTwo == 0) {
+											$counterTwo++;
+											echo "<div class='flex-col-6'><a class='Tabs".$counter." active'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
+										} else {
+											echo "<div class='flex-col-6'><a class='Tabs".$counter."'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
+										}
+										//echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
+										echo "<div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div>";
+										$OrderDate = date('d-m-Y', strtotime($productDate));
+										echo "<div class='flex-col-3'>".$OrderDate."</div>";
+										/// original copy for order detail:
+										/// echo "</div><div class='TabContents".$counter."' style='display: none;'>";
+										/// Made this change to hide the details
+										echo "</div><div class='noTabContents".$counter."' style='display: none;'>";
+										foreach($product["OrderLines"] as $orderDetails) {
+											echo "<div class='flex-cell flex-flow-row'>";
+											echo "<div class='flex-col-6'>".$orderDetails['ProductName']."</div>";
+											echo "<div class='flex-col-3'>$".number_format($orderDetails['ProductPrice'],2)."</div>";
+											echo "<div class='flex-col-3'></div></div>";
+											if($orderDetails['ProductName'] == "Administrative Fee") {$instal = true;}
+										}
+										if($instal) {
+											echo "<div class='flex-cell flex-flow-row'>";
+											echo "<div class='flex-col-6'><b>Left to pay</b></div>";
+											echo "<div class='flex-col-3'>$".number_format($product['Balance'],2)."</div>";
+											echo "<div class='flex-col-3'></div></div>";
+										}
+										echo "</div>";
 									}
-									if($instal) {
-										echo "<div class='flex-cell flex-flow-row'>";
-										echo "<div class='flex-col-6'><b>Left to pay</b></div>";
-										echo "<div class='flex-col-3'>$".number_format($product['Balance'],2)."</div>";
-										echo "<div class='flex-col-3'></div></div>";
-									}
-									echo "</div>";
 								}
 							}
 						}
@@ -138,37 +141,39 @@ apa_function_dashboardLeftNavigation_form();
 									$productDate = str_replace('/', '-', $product['Orderdate']);//$product['Orderdate'];//
 									$counter++;
 									$instal = false;
-									array_push($apis, $product["ID"]);
-									echo "<div class='flex-cell flex-flow-row'>";
-									if($counterTwo == 0) {
-										$counterTwo++;
-										echo "<div class='flex-col-6'><a class='Tabs".$counter." active'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
-									} else {
-										echo "<div class='flex-col-6'><a class='Tabs".$counter."'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
-									}
-									// echo "<div class='flex-col-6'><a class='Tabs".$counter."'>".$product['OrderLines'][0]['ProductName']."</a></div>";
-									//echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
-									echo "<div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div>";
-									$OrderDate = date('d-m-Y', strtotime($productDate));
-									echo "<div class='flex-col-3'>".$OrderDate."</div>";
-									/// original copy for order detail:
-									/// echo "</div><div class='TabContents".$counter."' style='display: none;'>";
-									/// Made this change to hide the details
-									echo "</div><div class='noTabContents".$counter."' style='display: none;'>";
-									foreach($product["OrderLines"] as $orderDetails) {
+									//array_push($apis, $product["ID"]);
+									if($SetDate<=strtotime($productDate)){
 										echo "<div class='flex-cell flex-flow-row'>";
-										echo "<div class='flex-col-6'>".$orderDetails['ProductName']."</div>";
-										echo "<div class='flex-col-3'>$".number_format($orderDetails['ProductPrice'],2)."</div>";
-										echo "<div class='flex-col-3'></div></div>";
-										if($orderDetails['ProductName'] == "Administrative Fee") {$instal = true;}
+										if($counterTwo == 0) {
+											$counterTwo++;
+											echo "<div class='flex-col-6'><a class='Tabs".$counter." active'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
+										} else {
+											echo "<div class='flex-col-6'><a class='Tabs".$counter."'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
+										}
+										// echo "<div class='flex-col-6'><a class='Tabs".$counter."'>".$product['OrderLines'][0]['ProductName']."</a></div>";
+										//echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
+										echo "<div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div>";
+										$OrderDate = date('d-m-Y', strtotime($productDate));
+										echo "<div class='flex-col-3'>".$OrderDate."</div>";
+										/// original copy for order detail:
+										/// echo "</div><div class='TabContents".$counter."' style='display: none;'>";
+										/// Made this change to hide the details
+										echo "</div><div class='noTabContents".$counter."' style='display: none;'>";
+										foreach($product["OrderLines"] as $orderDetails) {
+											echo "<div class='flex-cell flex-flow-row'>";
+											echo "<div class='flex-col-6'>".$orderDetails['ProductName']."</div>";
+											echo "<div class='flex-col-3'>$".number_format($orderDetails['ProductPrice'],2)."</div>";
+											echo "<div class='flex-col-3'></div></div>";
+											if($orderDetails['ProductName'] == "Administrative Fee") {$instal = true;}
+										}
+										if($instal) {
+											echo "<div class='flex-cell flex-flow-row'>";
+											echo "<div class='flex-col-6'><b>Left to pay</b></div>";
+											echo "<div class='flex-col-3'>$".$product['Balance']."</div>";
+											echo "<div class='flex-col-3'></div></div>";
+										}
+										echo "</div>";
 									}
-									if($instal) {
-										echo "<div class='flex-cell flex-flow-row'>";
-										echo "<div class='flex-col-6'><b>Left to pay</b></div>";
-										echo "<div class='flex-col-3'>$".$product['Balance']."</div>";
-										echo "<div class='flex-col-3'></div></div>";
-									}
-									echo "</div>";
 								}
 							}
 							//// 2.2.18 - GET payment history list
