@@ -184,8 +184,6 @@ apa_function_dashboardLeftNavigation_form();
 							//$invoiceAPI = aptify_get_GetAptifyData("18", $apis);
 							?>	
 				</div>
-
-
 				</div>
 				<?php 
 				/*
@@ -214,6 +212,7 @@ apa_function_dashboardLeftNavigation_form();
 				*/
 				?>
 			</div>
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" style="margin-top: 21px;">If you would like to view your transaction history prior to November 2018, please get in touch via <a href="mailto:info@australian.physio">email</a> or phone 1300 306 622.</div>
 		</div>
 	</div>
 	<?php logRecorder(); ?>
