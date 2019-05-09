@@ -278,6 +278,7 @@ if(isset($_SESSION["UserId"])){
 			//$price=$price+(int)str_replace('$', '', $productt['Pricelist'][0]['Price']);
 		//if (in_array($productt['Typeofpd'],  $pdtype)){ $tag=1; }
 		if ($productt['Typeofpd'] == $pdtype){ $tag=1; }
+		if ($productt['Typeofpd'] =="Networking Event" || $productt['Typeofpd'] =="Student Event") { $dietarT = 1;} else { $dietarT = 0;}
 		}
 	}
     if(sizeof($NGProductsArray)!=0){
@@ -349,7 +350,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			<label for="accept3" id="accept3label">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled. The APA recommends travelling participants purchase travel insurance to cover this<span class="tipstyle">*</span></label>
 		</div>
 	</div>
-	<?php if($tag==1): ?>
+	<?php if($tag==1 || $dietarT==1): ?>
 	<div class="flex-container flex-flow-column">
 		<div class="flex-cell">
 			<span class="small-lead-heading">Your dietary requirements</span>

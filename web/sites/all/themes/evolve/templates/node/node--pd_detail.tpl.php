@@ -1102,7 +1102,7 @@ $userRetisterStatus = false;
 				  <label for="Professionalbody">I am a member of my professional body.</label>
 				   </div>*/?>
 				</div>
-                <?php if($tag==1): ?>
+                <?php if($tag==1 || $pd_detail['Typeofpd'] =="Networking Event" || $pd_detail['Typeofpd'] =="Student Event"): ?>
 				<div class="row" style="margin-top: 10px; margin-bottom: 10px">
 					<div class="col-xs-12">
 					<label>Your dietary requirements</label>
@@ -1907,7 +1907,9 @@ $userRetisterStatus = false;
 							} else {
 								echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
 							}
-						} else {
+						} 
+						if($pd_detail['Typeofpd'] =="Networking Event" || $pd_detail['Typeofpd'] =="Student Event"){ echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	}
+						else {
 							//echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="registerPDUserButton"><span>Add to cart</span></a>';	
 							echo '<a class="add-to-cart '.$pd_detail['Typeofpd'].'" id="skipDietary"><span>Add to cart</span></a>';
 						}
@@ -2132,9 +2134,13 @@ $userRetisterStatus = false;
   <?php 
 	if (!empty($pd_detail['Description'])){
 		$EventDescription = explode("<p",$pd_detail['Description']);
-		$firstLine =  replaceAll($EventDescription[1]);
-		$secondLine = replaceAll($EventDescription[2]);
-		echo '"description": "'.$firstLine." ".$secondLine.'"';
+		if(sizeof($EventDescription)>1) {
+			$firstLine =  replaceAll($EventDescription[1]);
+			$secondLine = replaceAll($EventDescription[2]);
+			echo '"description": "'.$firstLine." ".$secondLine.'"';
+		} else {
+			echo '"description": "No Description!"';	
+		}
 	} else{
 		echo '"description": "No Description!"';
 	}
