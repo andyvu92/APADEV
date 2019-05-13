@@ -6294,3 +6294,189 @@ body{
         }
     }
 }
+
+/* -------------------------Online Community Page-------------------------- */
+/* Online Community Banner */
+.html #section-banner{
+    .block.online_community_banner{
+        position: relative;
+        @media @larger-phone-width-down{
+            background-image: url(/sites/default/files/SOCIAL%20MOBILE%20F-min.jpg)!important;
+            .img-parallax{
+                display: none;
+            }
+        }
+        .top-banner{
+            padding: 170px 25% 125px;
+            min-height: 400px;
+            justify-content: center;
+            @media @larger-phone-width-down{
+                padding: 170px 7% 125px;
+            }
+            .text-container{
+                text-align: center;
+                display: block;
+                max-width: 500px;
+            }
+        }
+        .image_credit{
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+            color: rgba(255,255,255,0.5);
+            font-size: 11px;
+            @media @tablet-width-down{
+                display: none;
+            }
+        }
+    }
+}
+
+/* Online Community Grid */
+.gridbox_logo_top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .items_wrapper{
+        margin: 8vh auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        max-width: 900px;
+        border: 1px solid rgba(0,0,0,0.12);
+        border-bottom: 0;
+        border-left: 0;
+        .item{
+            width: calc(~'100%/3');
+            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border: 1px solid rgba(0,0,0,0.12);
+            border-top: 0;
+            border-right: 0;
+            position: relative;
+            text-align: center;
+            @media @larger-phone-width-down{
+                padding: 20px;
+            }
+            a{
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 10;
+                &:hover{
+                    & + .facebook_icon svg path{ fill: #3b5998 }
+                    & + .twitter_icon svg path{ fill: #38A1F3 }
+                    & + .instagram_icon svg path{ fill: #3f6f94 }
+                    & + .linkedin_icon svg path{ fill: #0b7bb5 }
+                    & + .youtube_icon svg path{ fill: #c4302b }
+                }
+            }
+            .icon{
+                svg:not(.transform){
+                    width: 60px;
+                    height: 60px;
+                    @media @larger-phone-width-down{
+                        height: 40px;
+                    }
+                    path{
+                        fill: #a6a8ab;
+                        transition: all .3s linear;
+                    }
+                }
+                svg.transform{
+                    width: 130px;
+                    height: 70px;
+                    margin-top: -10px;
+                    @media @larger-phone-width-down{
+                        height: 60px;
+                        margin-top: 0px;
+                    }
+                    path{
+                        transition: all .3s linear;
+                    }
+                }
+                &.transform_icon{
+                    &.gray{
+                        path{
+                            fill: #a6a8ab;
+                        }
+                    }
+                }
+                &.facebook_icon, &.instagram_icon, &.linkedin_icon{
+                    svg{
+                        height: 50px;
+                        @media @larger-phone-width-down{
+                            height: 40px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.sub_text_center{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 8vh;
+    p{
+        font-size: 1.4em;
+        max-width: 500px;
+    }
+}
+
+/* social media contact block */
+body .social_media_contact{
+    padding: 8vh 0;
+    min-height: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    .content{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    h2.lead-heading{
+        font-weight: 300;
+        margin-bottom: 0;
+        max-width: 80%;
+        @media @larger-phone-width-down{
+            font-size: 2.9em;
+        }
+        @media @smaller-phone-width-down{
+            font-size: 2.5em;
+        }
+    }
+
+    .sub-heading{
+        font-size: 1.8em;
+        @media @tablet-width-down{
+            max-width: 80%;
+        }
+        @media @larger-phone-width-down{
+            font-size: 1.5em;
+        }
+        @media @smaller-phone-width-down{
+            font-size: 1.3em;
+        }
+        a{
+            color: #333;
+            font-weight: 500;
+            transition: all .3s linear;
+            &:hover{
+                color: @bright-blue;
+            }
+        }
+    }
+}
