@@ -575,13 +575,16 @@ jQuery(document).ready(function() {
     }
   });
 
-  // AUTO SORT APA MEMBER IN ALPHABETICAL ORDER---------------------------------------------------
-  $('#apateammember-block-2').each(function(){
-    var $divs = $(".node-apateam", this);
-    var alphabeticallyOrderedDivs = $divs.sort(function (a, b) {
-      return $(a).find("h5 a .field-item").text() > $(b).find("h5 a .field-item").text();
-    });
-    $(this).html(alphabeticallyOrderedDivs);
+  // AUTO SORT APA NAC MEMBER IN ALPHABETICAL ORDER---------------------------------------------------
+  $('#apateammember-block-1').each(function(){
+    var items = $(".node-apateam", this);
+    $(items).sort(function(a, b) {
+      if ($(a).find('.member-name .field-item').text() < $(b).find('.member-name .field-item').text()) {
+        return -1;
+      } else {
+        return 1;
+      }
+    }).appendTo(this);
   });
 
   // BACK TO TOP BUTTON----------------------------------------------------------------------------
