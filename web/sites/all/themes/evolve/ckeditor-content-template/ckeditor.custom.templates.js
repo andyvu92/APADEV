@@ -62,5 +62,13 @@ templates :
                 '</div>' + 
                 '<h6>Double_click_to_edit</h6>'
         },
+        {
+            title: 'Responsive Video Embedder',
+			image: 'template1.gif',
+			description: 'Embed responsive iframe.',
+			html: '<div class="video-embed inmotion_iframe">' +
+				'double_click_then_click_embed_iframe' +
+                '</div>'
+        }
     ]
 });
