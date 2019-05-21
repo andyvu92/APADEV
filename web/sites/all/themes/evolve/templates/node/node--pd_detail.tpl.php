@@ -2135,14 +2135,17 @@ $userRetisterStatus = false;
 	if (!empty($pd_detail['Description'])){
 		$EventDescription = explode("<p",$pd_detail['Description']);
 		if(sizeof($EventDescription)>1) {
-			$firstLine =  replaceAll($EventDescription[1]);
-			$secondLine = replaceAll($EventDescription[2]);
+			$firstLine =  replaceAll($EventDescription[0]);
+			$secondLine = replaceAll($EventDescription[1]);
 			echo '"description": "'.$firstLine." ".$secondLine.'"';
+		} elseif(sizeof($EventDescription) == 1) {
+			$firstLine =  replaceAll($EventDescription[0]);
+			echo '"description": "'.$firstLine.'"';
 		} else {
-			echo '"description": "No Description!"';	
+			echo '"description": "Please visit page for a description"';	
 		}
 	} else{
-		echo '"description": "No Description!"';
+		echo '"description": "Please visit page for a description"';
 	}
 	?>
   <?php if(!empty($pd_detail['Presenter'])): ?>

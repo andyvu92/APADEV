@@ -222,6 +222,7 @@ if(isset($_SESSION["UserId"])){
 	
 	<h1 class="SectionHeader">Summary of cart</h1>
 	<div class="brd-headling">&nbsp;</div>
+	<div style="padding-bottom: 15px;">Time left to purchase: <span id="timer" style="color: #00b8f1; font-weight: 700;">15</span></div>
 	
 	<div class="flex-container" id="pd-shopping-cart">
 	<div class="flex-cell flex-flow-row heading-row">
@@ -232,6 +233,49 @@ if(isset($_SESSION["UserId"])){
 		<!--<div class="flex-col-2 pd-spcart-wishlist"><span class="table-heading">Action</span></div>-->
 		<div class="flex-col-1 pd-spcart-delete"><span class="table-heading">Delete</span></div>
 	</div>
+
+	<script>
+		// todo: change this count to 300
+		var count = 300;
+		function countDown(){
+			var timer = document.getElementById("timer");
+			if(count > 0){
+				count--;
+				if(count > 120) {
+					var min = parseInt(count/60);
+					var sec = count%60;
+					if(sec > 1) {
+						timer.innerHTML = min + " mins " + sec + " seconds";
+					} else if(sec == 0) {
+						timer.innerHTML = min + " mins";
+					} else {
+						timer.innerHTML = min + " mins " + sec + " second";
+					}
+				}else if(count > 60) {
+					var min = parseInt(count/60);
+					var sec = count%60;
+					if(sec > 1) {
+						timer.innerHTML = min + " min " + sec + " seconds";
+					} else if(sec == 0) {
+						timer.innerHTML = min + " mins";
+					} else {
+						timer.innerHTML = min + " min " + sec + " second";
+					}
+				} else {
+					var sec = count%60;
+					if(sec > 1) {
+						timer.innerHTML = sec + " seconds";
+					} else {
+						timer.innerHTML = sec + " second";
+					}
+				}
+				setTimeout("countDown()", 1000);
+			}else{
+				window.location.href = "/pd/pd-shopping-cart";
+			}
+		}
+		countDown();
+	</script>
 	
 	<?php 
 	if(sizeof($products)!=0){
@@ -240,11 +284,63 @@ if(isset($_SESSION["UserId"])){
 		$discountPrice=0;
 		foreach($products as $productt){
 		$n = 0;
+
+
+		//// Testing start
+		$available = true;
+		$outPutResult = "";
+
+		$pdArr["PDIDs"] = $productt['MeetingID'];
+		if(isset($_SESSION["UserId"])) {
+			$pdArr["UserID"] = $_SESSION["UserId"];
+		}
+		// 2.2.29 - GET event detail
+		// Send - 
+		// PDID, UserID, Coupon
+		// Response -
+		// PriceTable(list), Max enrolment, Current enrolment, PD_id,
+		// Title, PD type, Presenter bio, Leaning outcomes, Prerequisites
+		// Presenters, Time, Start date, End date, Registration closing
+		// Where:{Address1, Address2, Address3(if exist), Address4(if exist), City,
+		//	state, Postcode}, CPD hours, Cost, Your registration stats
+		$pd_detail_indiv = aptify_get_GetAptifyData("29", $pdArr);
+		$pd_detail_indiv = $pd_detail_indiv['MeetingDetails'][0];
+
+		$closingDate = explode(" ",$pd_detail_indiv['Close_date']);
+		$cldate = str_replace('/', '-', $closingDate[0]);//$closingDate[0];//
+		$Cls = strtotime($cldate);
+		$Totalnumber = doubleval($pd_detail_indiv['Totalnumber']);
+		$Enrollednumber = doubleval($pd_detail_indiv['Enrollednumber']);
+		$Now = strtotime(date('m/d/Y'));
+		$Div = $Totalnumber - $Enrollednumber;
+		if($pd_detail_indiv['AttendeeStatus'] == "Registered") {
+			$outPutResult = "registered";
+			$available = false;
+		} else {
+			if($Now > $Cls){
+				$outPutResult = "closed";  
+				$available = false;
+			} elseif($Div == 0){
+				$outPutResult = "full"; 
+				$available = false;
+			}
+		}
+		if(substr($pd_detail_indiv['Title'], 0, 8) == "External") {
+			$outPutResult = "External";
+			$available = false;
+		}
+		if($available) {
+			$eventMessage = "Your event ".$pd_detail_indiv['Title']." is up.";
+		} else {
+			$eventMessage = "Your event &nbsp;<a href='http://localhost/pd/pd-product?saveShoppingCart&id=".$pdArr["PDIDs"]."' target='_blank'>".$pd_detail_indiv['Title']."</a>&nbsp;is ".$outPutResult.". Please removed it from your shopping cart.";
+		}
+		//// testing end
 		$pass=$localProducts[$n]['UID'];
 		//$arrPID["PID"] = $productt['MeetingID'];
 		$arrPID["PID"] = $productt['ProductID'];
 		array_push($ListProductID ,$arrPID);
 			echo "<div class='flex-cell flex-flow-row'>";
+			if(!$available) echo	"<div class='removedEvent'>".$eventMessage."</div>";
 			echo	"<div class='flex-col-3'><span class='mobile-visible'>Product name: </span>".$productt['Title']."</div>";
 			$bdate = explode(" ",$productt['Sdate']);
 			$edate = explode(" ",$productt['Edate']);
@@ -647,7 +743,11 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 				echo '<input type="hidden" name="totalMG" id="totalMG" value="'.$mgTotal.'">';
 			}
 			?>
-			<a href="javascript:document.getElementById('pd-shoppingcart-form').submit();" class="placeorder" value="Place your order" id="PDPlaceOrder"><span class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</span></a>
+			<?php if(!$available): ?>
+				<span>Please remove items that are not available to continue with your purchase</span>
+			<?php else: ?>
+				<a href="javascript:document.getElementById('PDShoppingcartForm').submit();" class="placeorder<?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" value="Place your order" id="PDPlaceOrder"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</button></a>
+			<?php endif; ?>
 		</form>
 	</div>
 

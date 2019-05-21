@@ -82,11 +82,13 @@ fieldset {
             flex-direction:column;
             .start-date:before{
               content: 'Start date: ';
-              color: @brighter-blue;
+              color: #333;
+              font-weight: 700;
             }
             .end-date:before{
               content: 'End date: ';
-              color: @brighter-blue;
+              color: #333;
+              font-weight: 700;
             }
           }
           .pd-spcart-location{
@@ -100,6 +102,7 @@ fieldset {
             display: flex;
             align-items: center;
             a{
+              z-index: 10;
               i{
                 color: #ffa02e;
               }
@@ -158,6 +161,19 @@ fieldset {
           &:hover{
             opacity: 0.8;
           }
+        }
+        .removedEvent {
+          position: absolute;
+          display: flex;
+          background-color: rgba(255,255,255,0.8);
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          align-items: center;
+          border-left: 3px solid #920075;
+          padding-left: 10px;
+          z-index: 9;
         }
       }
 
@@ -561,6 +577,7 @@ fieldset {
                   padding: 5px 10px;
                 }
                 i{
+                  z-index: 10;
                   display: none;
                 }
               }
