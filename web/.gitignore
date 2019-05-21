@@ -11,3 +11,6 @@ web/tmp/*
 
 # Untrack of htaccess file
 .htaccess
+
+# Untrack of Tracking file from Web Prophet
+sucuri-2a5edef6774431aa428b7438a7f77dd7.php
