@@ -533,6 +533,213 @@ $PRFPrice = 0;
 	</div>
 	</div>
 </form>
+<!--merge part start from here-->
+<!---done by jinghu--22/05/2019-->
+<form id="join-insurance-form" action="jointheapa" method="POST">
+	<input type="hidden" name="step2" value="2"/>
+	<div class="col-lg-8 col-md-8 col-xs-12">
+	<div class="row">
+<div class="col-xs-12">
+<label>Payment options:</label>
+</div>
+
+<div class="row">
+	<div class="col-xs-12">
+	<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-1" value="0" checked="checked"><label for="p1-1">Pay in full today</label>
+	</div>
+	<?php if($_SESSION["MembershipProductID"]!="9964" && $_SESSION["MembershipProductID"]!="9965" && $_SESSION["MembershipProductID"]!="9966" && $_SESSION["MembershipProductID"] !="9968" && $_SESSION["MembershipProductID"] !="10005" && $_SESSION["MembershipProductID"] !="9967"&& $_SESSION["MembershipProductID"] !="10006"): ?>
+	<div class="col-xs-12">
+	<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-2" value="1"><label for="p1-2">Pay by monthly instalments (This option incurs a $12.00 admin fee)</label>
+	</div>
+	<?php endif;?>
+</div>
+
+	<input type="hidden" id="Installpayment-frequency" name="Installpayment-frequency" value="">
+</div>
+<?php if(isset($_SESSION["postReviewData"])) { $PRFTemp = $_SESSION["postReviewData"]['PRFdonation'];}?>
+<div class="row">
+<div class="col-xs-12"><label>PRF donation</label></div>
+	<div class="col-xs-12 tooltip-container top">
+		<span class="tooltip-activate">What is this?</span>
+		<div class="tooltip-content">
+			The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot.
+		<br>
+			<a href="/reserach/purpose-prf">Tell me more</a>
+		</div>
+	</div>
+<div class="col-xs-12">A small proportion of all membership fees directly support physiotherapy research. We also appreciate member donations to further the important work of the Physiotherapy Research Foundation.</div>
+<div class="col-xs-12">
+	<input class="styled-checkbox" type="checkbox" id="prftag" name="prftag" <?php if(isset($_SESSION["postReviewData"])) {if(empty($PRFTemp)) {echo 'value="1" checked="checked"';}} ?>>
+	<label for="prftag" id="prftagAgree">No, I do not want to make a donation to the PRF</label>
+</div>
+<div class="col-xs-6 col-sm-6 col-md-3" id="prfselect">
+	<div class="chevron-select-box" style="margin-top: 10px;">
+	<select class="form-control" id="PRF" name="PRF">
+		<option value="5" <?php if(!isset($_SESSION["postReviewData"])) {echo "selected";} if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="5") {echo "selected";}}?>>$5.00</option>
+		<option value="10" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="10") {echo "selected";}}?>>$10.00</option>
+		<option value="20" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="20") {echo "selected";}}?>>$20.00</option>
+		<option value="50" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="50") {echo "selected";}}?>>$50.00</option>
+		<option value="100" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="100") {echo "selected";}}?>>$100.00</option>
+		<option value="Other" <?php if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo "selected";}}?>>Other</option>
+	</select>
+	</div>
+	<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="<?php if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo $PRFTemp;}}?>" oninput="this.value = Math.abs(this.value)" min="0">
+				
+</div>
+</div>
+<?php 
+// 2.2.12 - Get payment list
+// Send - 
+// UserID 
+// Response -payment card list
+$test['id'] = $_SESSION["UserId"];
+$cardsnum = aptify_get_GetAptifyData("12", $test);
+//print_r($cardsnum);?>
+<?php if (sizeof($cardsnum["results"])!=0): ?> 
+<div id="hiddenPayment">	
+<div class="row">
+<div class="col-xs-12 col-sm-6">	
+	<fieldset>
+		<div class="chevron-select-box">
+			<select class="form-control" id="Paymentcard" name="Paymentcard">
+				<?php
+				
+					foreach( $cardsnum["results"] as $cardnum) {
+						echo '<option value="'.$cardnum["Creditcards-ID"].'"';
+						if($cardnum["IsDefault"]=="1") {
+						echo "selected ";
+					}
+					echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
+					echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+					}
+				
+				?>
+			</select>
+		</div>
+	</fieldset>
+</div>
+</div>
+
+<div class="row">
+<div class="col-xs-12 col-sm-6">
+	<input class="styled-checkbox" type="checkbox" id="anothercard">
+	<label for="anothercard">Use another card</label>
+</div>
+</div> 
+
+<div id="anothercardBlock" style="margin: 0; padding:0" class="col-xs-12">
+<div class="row">
+<div class="col-xs-6 col-sm-6 col-md-3">
+	<label for="">Payment method:<span class="tipstyle"> *</span></label>
+	<div class="chevron-select-box">
+	<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
+	<?php 
+		$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+		$PaymentType=json_decode($PaymentTypecode, true);
+		foreach($PaymentType  as $pair => $value){
+			echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+			echo '> '.$PaymentType[$pair]['Name'].' </option>';
+			
+		}
+	?>	
+	</select>
+	</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-xs-12 col-sm-6">
+	<label for="">Name on card:<span class="tipstyle"> *</span></label>
+	<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
+</div>
+</div>
+
+<div class="row">
+<div class="col-xs-12 col-md-6">
+	<label for="">Card number:<span class="tipstyle"> *</span></label>
+	<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
+</div>
+
+<div class="col-xs-6 col-md-3">
+	<label for="">Expiry date:<span class="tipstyle"> *</span></label>
+	<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" maxlength="4">
+</div>
+
+<div class="col-xs-6 col-md-3">
+	<label for="">CVV:<span class="tipstyle"> *</span></label>
+	<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
+</div>
+</div>
+<div class="col-xs-12">
+<!--<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Save this card</label>-->
+</div>
+<input type="hidden" name="addCard" value="0">
+</div>
+<div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</div>
+</div>
+<?php endif; ?>  
+<?php if (sizeof($cardsnum["results"])==0): ?> 
+<div id="anothercardBlock" class="row show">				   
+<div class="row">
+<div class="col-xs-6 col-sm-6 col-md-3">
+	<label for="">Payment method:<span class="tipstyle"> *</span></label>
+	<div class="chevron-select-box">
+	<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
+	<?php 
+		$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
+		$PaymentType=json_decode($PaymentTypecode, true);
+		foreach($PaymentType  as $pair => $value){
+			echo '<option value="'.$PaymentType[$pair]['ID'].'"';
+			echo '> '.$PaymentType[$pair]['Name'].' </option>';
+			
+		}
+	?>
+	</select>
+	</div>
+</div>
+</div>
+
+<div class="row">
+<div class="col-xs-12 col-sm-6">
+	<label for="">Name on card:<span class="tipstyle"> *</span></label>
+	<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
+</div>
+</div>
+
+<div class="row">
+<div class="col-xs-12 col-md-6">
+	<label for="">Card number:<span class="tipstyle"> *</span></label>
+	<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
+</div>
+
+<div class="col-xs-6 col-md-3">
+	<label for="">Expiry date:<span class="tipstyle"> *</span></label>
+	<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" maxlength="4">
+</div>
+
+<div class="col-xs-6 col-md-3">
+	<label for="">CVV:<span class="tipstyle"> *</span></label>
+	<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
+</div>
+</div>
+<div class="col-xs-12">
+<!--<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Save this card</label>-->
+<input type="hidden" name="addCard" value="1">
+</div>
+<div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</div>
+</div>
+<?php endif; ?>  
+<div class="row">
+<div class="col-xs-12">
+	<input popup class="styled-checkbox" type="checkbox" id="jprivacy-policy">
+	<label for="jprivacy-policy" id="privacypolicyl" popup-target="privacypolicyWindow"><span class="tipstyle">*&nbsp;</span>I agree to the APA Terms and Conditions</label>
+</div>
+</div>   
+
+</div>			
+	</div>
+</form>
+<!--merge part end from here-->
 <form id="pform" action="" method="POST"><input type="hidden" name="goP"></form>
 <form id="deletePRFForm" action="" method="POST"><input type="hidden" name="step2-2"></form>
 <form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>
