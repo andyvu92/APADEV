@@ -1,7 +1,9 @@
 <?php
 if(isset($_POST['step3'])) {
 	//continue to get the review data
-	$postReviewData = $_SESSION['postReviewData'];
+	$postReviewData = array();
+	//$postReviewData = $_SESSION['postReviewData'];
+	$postReviewData['InstallmentFor'] = "Membership";
 	$postReviewData['productID'] = getProductList($_SESSION['UserId']);
 	if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
 	//if(isset($_POST['rollover'])){ $postReviewData['Rollover'] = $_POST['rollover']; }
@@ -28,11 +30,30 @@ if(isset($_POST['step3'])) {
 		$postReviewData['CCSecurityNumber'] = "";
 	}
 	$postReviewData['InsuranceApplied'] = 0;
-		
+	if(!isset($_POST['prftag'])){
+		if(isset($_POST['PRF'])&& $_POST['PRF']!="Other"){ 
+			$postReviewData['PRFdonation'] = $_POST['PRF']; 
+		}
+		elseif(isset($_POST['PRF'])&& $_POST['PRF']=="Other"){
+			$_POST['PRF'] = $_POST['PRFOther'];
+			$postReviewData['PRFdonation'] = $_POST['PRF'];		
+		}
+		//check is there PRF product existed for this user
+		//checkShoppingCart($userID=$_SESSION['UserId'], $type="", $prodcutID="PRF");
+		//save PRF product into APA database function
+		//createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $type="",$coupon=$_POST['PRF']); 
+	}
+	else{
+		$postReviewData['PRFdonation'] = "";
+		$_POST['PRF'] = "0";
+	}	
 	// 2.2.26 - Register a new order
 	// Send - 
 	// userID&Paymentoption&PRFdonation&Rollover&Card_number&productID
 	// Response -Register a new order successfully
+	if(isset($_SESSION['UserId'])){ $postReviewData['userID'] = $_SESSION['UserId'];  } 
+	if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption'] == '1' ? 1:0; }
+	if(isset($_POST['Installpayment-frequency'])){ $postReviewData['InstallmentFrequency'] = $_POST['Installpayment-frequency']; }
 	$registerOuts = aptify_get_GetAptifyData("26", $postReviewData);
 	$recordOrder = array();
 	//new array to record specific fields

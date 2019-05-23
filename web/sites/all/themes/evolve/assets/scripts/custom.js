@@ -374,23 +374,24 @@ jQuery(document).ready(function($) {
           $(this).val('0');
          }
     });
-	$('input[name="Paymentoption"]').change(function(){
-        if($("#p1-2").is(":checked")){
-			//$(this).attr('checked', true);
-			$(this).val('1');
-		
-		}
-        else{
-            //$(this).removeAttr('checked');
-            $(this).val('0');
+	$('input[name="Paymentoption"]').click(function(){
+			if($("#p1-2").is(":checked")){
+				$(this).val('1');
+				$('.schedule').css('display','inline-flex');
+				$('.full').css('display','none');
+			}
+      else{
+				$(this).val('0');
+				$('.full').css('display','inline-flex');
+				$('.schedule').css('display','none');
 		}
 		if($("#p1-2").is(":checked"))
 		{
 			$('#rolloverblock').removeClass("display-none");
 			$('#Installpayment-frequency').val("Monthly");
-			var tempTotal = Number($('#totalPayment').html().replace(',',''));
-			var Total = Number(tempTotal +12).toFixed(2);
-			$('#totalPayment').html(Total);
+			//var tempTotal = Number($('#totalPayment').html().replace(',',''));
+			//var Total = Number(tempTotal +12).toFixed(2);
+			//$('#totalPayment').html(Total);
 			$("#installmentafter").after('<div class="flex-cell flex-flow-row" id="installmentline"><div class="flex-col-7">Admin fee</div><div class="flex-col-5">$12.00</div></div>');
 		}
 		else{
