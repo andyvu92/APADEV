@@ -508,6 +508,11 @@ jQuery(document).ready(function($) {
 			$( "#confirmDelete" ).dialog();
 	});
 	var PRF = $("#PRF").val();
+	//this is merged steps start
+	$( "#PRFFinal").val(PRF);
+	$('#todayFullAmount').html(Number(Number($('#fullHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
+	$('#todayScheduleAmount').html(Number(Number($('#scheduleHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
+	//this is end merged steps
 	$( "#POSTPRF").val(PRF);
 	$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
 	$('#prf-donation').html(Number($( "#POSTPRF").val()) );
@@ -529,6 +534,13 @@ jQuery(document).ready(function($) {
 			$( "#PRFOther").addClass('display-none');
 			$( "#PRFOther").val('');
 			var PRF = $("#PRF").val();
+			//this is merged steps part
+			$('#PRFFinal').val('');
+			$("#PRFFinal").val(PRF);
+			$('#PRFshow').html(Number($("#PRFFinal").val()));
+			$('#todayFullAmount').html(Number(Number($('#fullHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
+			$('#todayScheduleAmount').html(Number(Number($('#scheduleHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
+			//this is end merge steps part
 			$( "#POSTPRF").val(PRF);
 			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
 			$('#prf-donation').html(Number($( "#POSTPRF").val()) );
@@ -551,11 +563,17 @@ jQuery(document).ready(function($) {
 	});
 	if(($('#PRF').val()=="Other")){
 			$( "#PRFOther").removeClass('display-none');
-			
 	}
 	$( "#PRFOther" ).blur(function() {
 		var PRF = $("#PRFOther").val();
 		$( "#POSTPRF").val(PRF);
+		//this is merged steps part
+		$('#PRFFinal').val('');
+		$("#PRFFinal").val(PRF);
+		$('#PRFshow').html(Number($("#PRFFinal").val()));
+		$('#todayFullAmount').html(Number(Number($('#fullHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
+		$('#todayScheduleAmount').html(Number(Number($('#scheduleHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
+		//this is end merge steps part
 		$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
 		$('#prf-donation').html(Number($( "#POSTPRF").val()) );
 		if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
@@ -584,8 +602,16 @@ jQuery(document).ready(function($) {
 				
 		}
 	});
-	    $('#prftag').click(function(){
+
+	$('#prftag').click(function(){
 		if($('#prftag').val()=="1"){
+			//this is merged steps
+			$('#PRFFinal').val('');
+			$('#PRFdetail').addClass('display-none');
+			$('#todayFullAmount').html(Number($('#fullHiddenAmount').val()));
+			$('#todayScheduleAmount').html(Number($('#scheduleHiddenAmount').val()));
+		  
+			//this is end merged steps
 			$('#prfselect').slideUp().css('overflow', 'hidden');
 			$( "#POSTPRF").val("");
 			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
@@ -621,6 +647,12 @@ jQuery(document).ready(function($) {
 			
 		}
 		else{
+			//this is merged steps
+			$('#PRFdetail').removeClass('display-none');
+			$('#todayFullAmount').html(Number(Number($('#fullHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
+			$('#todayScheduleAmount').html(Number(Number($('#scheduleHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
+			
+			//this is end merged steps
 			$('#prfselect').slideDown().css('overflow', 'unset');
 			$( "#POSTPRF").val(Number($("#PRF").val()));
 			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));

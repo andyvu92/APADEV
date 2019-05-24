@@ -517,7 +517,7 @@ $PRFPrice = 0;
                         <strong>PRF donation</strong>
                     </div>
                     <div class="flex-col-6">
-                        $<?php echo number_format(5,2);?>
+                        $<span id="PRFshow"><?php echo number_format(5,2);?></span>
                     </div>
                 </div>
                
@@ -526,7 +526,9 @@ $PRFPrice = 0;
                         <strong>Today's total (inc. GST)</strong>
                     </div>
                     <div class="flex-col-6">
-                        $<span class="full"><?php echo number_format($fullDetails['InitialPaymentAmount']+5,2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['InitialPaymentAmount']+5,2);?></span>
+                    <input type="hidden" id="fullHiddenAmount" value="<?php echo number_format($fullDetails['InitialPaymentAmount'],2);?>">
+                    <input type="hidden" id="scheduleHiddenAmount" value="<?php echo number_format($scheduleDetails['InitialPaymentAmount'],2);?>">
+                        $<span class="full" id="todayFullAmount"></span><span class="schedule" id="todayScheduleAmount"></span></div>
                     </div>
                 </div>
                
@@ -650,19 +652,19 @@ $PRFPrice = 0;
             <div class="col-xs-6 col-sm-6 col-md-3" id="prfselect">
                 <div class="chevron-select-box" style="margin-top: 10px;">
                     <select class="form-control" id="PRF" name="PRF">
-                        <option value="5"
+                        <option value="5.00"
                             <?php //if(!isset($_SESSION["postReviewData"])) {echo "selected";} if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="5") {echo "selected";}}?>>
                             $5.00</option>
-                        <option value="10"
+                        <option value="10.00"
                             <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="10") {echo "selected";}}?>>
                             $10.00</option>
-                        <option value="20"
+                        <option value="20.00"
                             <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="20") {echo "selected";}}?>>
                             $20.00</option>
-                        <option value="50"
+                        <option value="50.00"
                             <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="50") {echo "selected";}}?>>
                             $50.00</option>
-                        <option value="100"
+                        <option value="100.00"
                             <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="100") {echo "selected";}}?>>
                             $100.00</option>
                         <option value="Other"
@@ -670,6 +672,7 @@ $PRFPrice = 0;
                             Other</option>
                     </select>
                 </div>
+                <input type="hidden" id="PRFFinal" value=""/>
                 <input type="number" class="form-control display-none" id="PRFOther" name="PRFOther"
                     value="<?php //if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo $PRFTemp;}}?>"
                     oninput="this.value = Math.abs(this.value)" min="0">
