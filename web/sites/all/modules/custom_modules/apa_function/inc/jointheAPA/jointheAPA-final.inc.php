@@ -672,7 +672,7 @@ $PRFPrice = 0;
                             Other</option>
                     </select>
                 </div>
-                <input type="hidden" id="PRFFinal" value=""/>
+                <input type="hidden" id="PRFFinal" name="PRFFinal" value=""/>
                 <input type="number" class="form-control display-none" id="PRFOther" name="PRFOther"
                     value="<?php //if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo $PRFTemp;}}?>"
                     oninput="this.value = Math.abs(this.value)" min="0">
@@ -714,7 +714,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 
             <div class="row">
                 <div class="col-xs-12 col-sm-6">
-                    <input class="styled-checkbox" type="checkbox" id="anothercard">
+                    <input class="styled-checkbox" type="checkbox" id="anothercard" name="anothercard">
                     <label for="anothercard">Use another card</label>
                 </div>
             </div>
@@ -766,9 +766,10 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
                     </div>
                 </div>
                 <div class="col-xs-12">
-                    <!--<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Save this card</label>-->
+                    <input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
                 </div>
                 <input type="hidden" name="addCard" value="0">
+
             </div>
             <div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off
                 verification charge of $1 will be deducted from your account. This amount will be refunded immediately
@@ -822,7 +823,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
                 </div>
             </div>
             <div class="col-xs-12">
-                <!--<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Save this card</label>-->
+                <input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="0"><label for="addcardtag">Save this card</label>
                 <input type="hidden" name="addCard" value="1">
             </div>
             <div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off

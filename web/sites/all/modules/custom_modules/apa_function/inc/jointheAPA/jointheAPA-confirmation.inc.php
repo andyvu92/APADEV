@@ -5,48 +5,33 @@ if(isset($_POST['step3'])) {
 	//$postReviewData = $_SESSION['postReviewData'];
 	$postReviewData['InstallmentFor'] = "Membership";
 	$postReviewData['productID'] = getProductList($_SESSION['UserId']);
-	if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
-	//if(isset($_POST['rollover'])){ $postReviewData['Rollover'] = $_POST['rollover']; }
-	if(isset($_SESSION["tempcard"])){
-		$cardDetails = $_SESSION["tempcard"];
-		//$postReviewData['Payment-method'] = $cardDetails['Payment-method'];
-		//$postReviewData['Cardno'] = $cardDetails['Cardno'];
-		//$postReviewData['Expiry-date'] = $cardDetails['Expiry-date'];
-		//$postReviewData['CCV'] = $cardDetails['CCV'];
-		//test data
-		$postReviewData['PaymentTypeID'] = $cardDetails['Payment-method'];
-		$postReviewData['CCNumber'] = $cardDetails['Cardno'];
-		$postReviewData['CCExpireDate'] = $cardDetails['Expiry-date'];
-		
-		//test data
-		
-		$postReviewData['CCSecurityNumber'] = $cardDetails['CCV'];	
-		$postReviewData['Card_number'] = "";	
+	//this is merge start from here
+	//this is handle save payment card
+	if(isset($_POST['addcardtag']) && $_POST['addcardtag']=="1"){
+		if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
+		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
+		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
+		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
+		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
+		$out = aptify_get_GetAptifyData("15", $postPaymentData);
+
 	}
-	else{
+    if(isset($_POST['anothercard']) && $_POST['anothercard']=="1"){
+		$postReviewData['Card_number'] = "";	
+		$postReviewData['PaymentTypeID'] = $_POST['Cardtype'];
+		$postReviewData['CCNumber'] = $_POST['Cardnumber'];
+		$postReviewData['CCExpireDate'] = $_POST['Expirydate'];
+		$postReviewData['CCSecurityNumber'] = $_POST['CCV'];
+	}elseif(isset($_POST['anothercard']) && $_POST['anothercard']=="0"){
+		if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
 		$postReviewData['PaymentTypeID'] = "";
 		$postReviewData['CCNumber'] = "";
 		$postReviewData['CCExpireDate'] = "";
 		$postReviewData['CCSecurityNumber'] = "";
 	}
+	//this is end merge part
 	$postReviewData['InsuranceApplied'] = 0;
-	if(!isset($_POST['prftag'])){
-		if(isset($_POST['PRF'])&& $_POST['PRF']!="Other"){ 
-			$postReviewData['PRFdonation'] = $_POST['PRF']; 
-		}
-		elseif(isset($_POST['PRF'])&& $_POST['PRF']=="Other"){
-			$_POST['PRF'] = $_POST['PRFOther'];
-			$postReviewData['PRFdonation'] = $_POST['PRF'];		
-		}
-		//check is there PRF product existed for this user
-		//checkShoppingCart($userID=$_SESSION['UserId'], $type="", $prodcutID="PRF");
-		//save PRF product into APA database function
-		//createShoppingCart($userID=$_SESSION['UserId'], $productID="PRF", $type="",$coupon=$_POST['PRF']); 
-	}
-	else{
-		$postReviewData['PRFdonation'] = "";
-		$_POST['PRF'] = "0";
-	}	
+	if(isset($_POST['PRFFinal'])) {$postReviewData['PRFdonation'] = $_POST['PRFFinal'];}else{ $postReviewData['PRFdonation'] = "";}
 	// 2.2.26 - Register a new order
 	// Send - 
 	// userID&Paymentoption&PRFdonation&Rollover&Card_number&productID
