@@ -492,7 +492,7 @@ $PRFPrice = 0;
 					$InitialPaymentAmount = number_format($scheduleDetails['InitialPaymentAmount'],2);
 					$OccuringPayment = number_format($scheduleDetails['OccuringPayment'],2);
 					$LastPayment = number_format($scheduleDetails['LastPayment'],2);
-					$firstInstallment = $InitialPaymentAmount-$scheduleDetails['AdminFee']-$scheduleDetails['GST']-5;
+					$firstInstallment = $InitialPaymentAmount-$scheduleDetails['AdminFee']-$scheduleDetails['GST'];
 				?>
                 <div class="flex-cell flex-flow-row schedule" id="installDetail">
                     <div class="flex-col-6">
