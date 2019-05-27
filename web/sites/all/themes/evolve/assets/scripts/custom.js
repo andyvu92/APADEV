@@ -525,7 +525,7 @@ jQuery(document).ready(function($) {
 	}
 	else{
 		$('#hiddenPayment').removeClass('display-none');
-		$("#anothercardBlock").addClass('show');
+	
 	}
 	//this is end merged steps
 	$( "#POSTPRF").val(PRF);

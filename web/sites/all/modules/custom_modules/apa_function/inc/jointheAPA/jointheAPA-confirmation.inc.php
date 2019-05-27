@@ -14,7 +14,20 @@ if(isset($_POST['step3'])) {
 		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
 		$out = aptify_get_GetAptifyData("15", $postPaymentData);
+		$postReviewData['Card_number'] = "";	
+		$postReviewData['PaymentTypeID'] = $_POST['Cardtype'];
+		$postReviewData['CCNumber'] = $_POST['Cardnumber'];
+		$postReviewData['CCExpireDate'] = $_POST['Expirydate'];
+		$postReviewData['CCSecurityNumber'] = $_POST['CCV'];
 
+	}
+	elseif(isset($_POST['addCard'])){
+		$postReviewData['Card_number'] = "";	
+		$postReviewData['PaymentTypeID'] = $_POST['Cardtype'];
+		$postReviewData['CCNumber'] = $_POST['Cardnumber'];
+		$postReviewData['CCExpireDate'] = $_POST['Expirydate'];
+		$postReviewData['CCSecurityNumber'] = $_POST['CCV'];
+		
 	}
     if(isset($_POST['anothercard']) && $_POST['anothercard']=="1"){
 		$postReviewData['Card_number'] = "";	
@@ -22,8 +35,8 @@ if(isset($_POST['step3'])) {
 		$postReviewData['CCNumber'] = $_POST['Cardnumber'];
 		$postReviewData['CCExpireDate'] = $_POST['Expirydate'];
 		$postReviewData['CCSecurityNumber'] = $_POST['CCV'];
-	}elseif(isset($_POST['anothercard']) && $_POST['anothercard']=="0"){
-		if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
+	}elseif(isset($_POST['Paymentcard'])){
+	    $postReviewData['Card_number'] = $_POST['Paymentcard']; 
 		$postReviewData['PaymentTypeID'] = "";
 		$postReviewData['CCNumber'] = "";
 		$postReviewData['CCExpireDate'] = "";

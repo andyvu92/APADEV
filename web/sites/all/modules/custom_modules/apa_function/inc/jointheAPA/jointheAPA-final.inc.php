@@ -279,7 +279,7 @@ $PRFPrice = 0;
     <span style="color:red;">Unfortunately, we cannot let you proceed with this membership purchase. Please contact the
         APA member hub (include email link) or on 1 300 306 622 for more information.</span></div>
 <form id="join-review-form" action="joinconfirmation" method="POST">
-    
+
     <?php if (isset($_POST['addCard']) && $_POST['addCard'] == "1"): ?>
     <?php if($out["result"]=="Failed"):?>
     <?php if($out["Message"]=="Expiry date lenght should be 4."):?>
@@ -594,9 +594,9 @@ $PRFPrice = 0;
             </div>
 
             <div class="flex-col-12" style="text-align: center">
-                <a class="addCartlink" href="javascript:document.getElementById('join-insurance-form').submit();"><button style="margin-top: 30px;"
+                <a class="addCartlink" href="javascript:document.getElementById('join-insurance-form').submit();"><span style="margin-top: 30px;"
                         class="placeorder"
-                       >Place your order</button></a>
+                       >Place your order</span></a>
             </div>
         </div>
     </div>
