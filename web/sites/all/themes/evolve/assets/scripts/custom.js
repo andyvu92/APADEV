@@ -379,11 +379,20 @@ jQuery(document).ready(function($) {
 				$(this).val('1');
 				$('.schedule').css('display','inline-flex');
 				$('.full').css('display','none');
+				if($('#addcardtag').is(":visible")){
+					$('#addcardtag').attr('checked', true);
+					$('#addcardtag').attr('disabled', true);
+				}
+
 			}
       else{
 				$(this).val('0');
 				$('.full').css('display','inline-flex');
 				$('.schedule').css('display','none');
+				if($('#addcardtag').is(":visible")){
+					$('#addcardtag').attr('checked', false);
+					$('#addcardtag').attr('disabled', false);
+				}
 		}
 		if($("#p1-2").is(":checked"))
 		{
@@ -402,11 +411,7 @@ jQuery(document).ready(function($) {
 			$("#installmentline").remove();
 			$('#Installpayment-frequency').val("");
 		}
-		
-			
-		
-		
-				 
+	
     });
 	
 	$('input[type="checkbox"]').click(function(){
@@ -513,6 +518,15 @@ jQuery(document).ready(function($) {
 	$( "#PRFFinal").val(PRF);
 	$('#todayFullAmount').html(Number(Number($('#fullHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
 	$('#todayScheduleAmount').html(Number(Number($('#scheduleHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
+	if($('#todayFullAmount').html()=="0"){
+		$('#hiddenPayment').addClass('display-none');
+		$("#anothercardBlock").removeClass('show');
+		alert("ddddd");
+	}
+	else{
+		$('#hiddenPayment').removeClass('display-none');
+		$("#anothercardBlock").addClass('show');
+	}
 	//this is end merged steps
 	$( "#POSTPRF").val(PRF);
 	$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
@@ -541,6 +555,14 @@ jQuery(document).ready(function($) {
 			$('#PRFshow').html(Number($("#PRFFinal").val()));
 			$('#todayFullAmount').html(Number(Number($('#fullHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
 			$('#todayScheduleAmount').html(Number(Number($('#scheduleHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
+			if($('#todayFullAmount').html()=="0"){
+				$('#hiddenPayment').addClass('display-none');
+				$("#anothercardBlock").removeClass('show');
+			}
+			else{
+				$('#hiddenPayment').removeClass('display-none');
+				$("#anothercardBlock").addClass('show');
+			}
 			//this is end merge steps part
 			$( "#POSTPRF").val(PRF);
 			$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
@@ -574,6 +596,14 @@ jQuery(document).ready(function($) {
 		$('#PRFshow').html(Number($("#PRFFinal").val()));
 		$('#todayFullAmount').html(Number(Number($('#fullHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
 		$('#todayScheduleAmount').html(Number(Number($('#scheduleHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
+		if($('#todayFullAmount').html()=="0"){
+			$('#hiddenPayment').addClass('display-none');
+			$("#anothercardBlock").removeClass('show');
+		}
+		else{
+			$('#hiddenPayment').removeClass('display-none');
+			$("#anothercardBlock").addClass('show');
+		}
 		//this is end merge steps part
 		$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
 		$('#prf-donation').html(Number($( "#POSTPRF").val()) );
@@ -587,7 +617,7 @@ jQuery(document).ready(function($) {
 			$('#hiddenPayment').removeClass('display-none');
 			if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 		}
-		if($('.down6:visible').length !== 0){
+		/*if($('.down6:visible').length !== 0){
 				if($('#PRFOther').val()=="0" && $( "#totalPayment").html()=="0.00" || $( "#todayFullAmount").html()=="0.00"){
 					$("#anothercardBlock").removeClass('show');
 					$("input[name='addCard']").val('0');
@@ -601,7 +631,7 @@ jQuery(document).ready(function($) {
 				}
 				
 				
-		}
+		}*/
 	});
 
 	$('#prftag').click(function(){
@@ -611,7 +641,14 @@ jQuery(document).ready(function($) {
 			$('#PRFdetail').addClass('display-none');
 			$('#todayFullAmount').html(Number($('#fullHiddenAmount').val()));
 			$('#todayScheduleAmount').html(Number($('#scheduleHiddenAmount').val()));
-		  
+		  if($('#todayFullAmount').html()=="0"){
+				$('#hiddenPayment').addClass('display-none');
+				$("#anothercardBlock").removeClass('show');
+			}
+			else{
+				$('#hiddenPayment').removeClass('display-none');
+				$("#anothercardBlock").addClass('show');
+			}
 			//this is end merged steps
 			$('#prfselect').slideUp().css('overflow', 'hidden');
 			$( "#POSTPRF").val("");
@@ -630,7 +667,7 @@ jQuery(document).ready(function($) {
 				$('#hiddenPayment').removeClass('display-none');
 				
 			}
-			if($('.down6:visible').length !== 0){
+			/*if($('.down6:visible').length !== 0){
 				if($( "#totalPayment").html()=="0.00" || $( "#todayFullAmount").html()=="0.00"){
 					$("#anothercardBlock").removeClass('show');
 					$("input[name='addCard']").val('0');
@@ -644,7 +681,7 @@ jQuery(document).ready(function($) {
 				}
 				
 				
-			}
+			}*/
 			
 		}
 		else{
@@ -654,6 +691,14 @@ jQuery(document).ready(function($) {
 			$('#PRFshow').html(Number($("#PRFFinal").val()).toFixed(2));
 			$('#todayFullAmount').html(Number(Number($('#fullHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
 			$('#todayScheduleAmount').html(Number(Number($('#scheduleHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
+			if($('#todayFullAmount').html()=="0"){
+				$('#hiddenPayment').addClass('display-none');
+				$("#anothercardBlock").removeClass('show');
+			}
+			else{
+				$('#hiddenPayment').removeClass('display-none');
+				$("#anothercardBlock").addClass('show');
+			}
 			//this is end merged steps
 			$('#prfselect').slideDown().css('overflow', 'unset');
 			$( "#POSTPRF").val(Number($("#PRF").val()));
@@ -672,7 +717,7 @@ jQuery(document).ready(function($) {
 				$('.sidebardis').removeClass('display-none');
 				
 			}
-			if($('.down6:visible').length !== 0){
+			/*if($('.down6:visible').length !== 0){
 				if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0.00" || $( "#todayFullAmount").html()!="0.00"){
 					$('#hiddenPayment').removeClass('display-none');
 					if($('#Paymentcard:visible').length === 0)	{
@@ -680,7 +725,7 @@ jQuery(document).ready(function($) {
 					}
 				}
 				
-			}
+			}*/
 		}
 		
 	});
@@ -694,13 +739,13 @@ jQuery(document).ready(function($) {
 	}
 	else{
 		$('#prfselect').slideDown().css('overflow', 'unset').delay( 800 );
-		if($('.down6:visible').length !== 0){
+		/*if($('.down6:visible').length !== 0){
 			
 			if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0.00" || $( "#todayFullAmount").html()!="0.00"){
 				if($('#Paymentcard:visible').length === 0)	{
 					$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1');}
 			}
-		}
+		}*/
 	}
 	// HIDE / SHOW PAYMENT CARD FORM 
 	$('#anothercard').click(function(){

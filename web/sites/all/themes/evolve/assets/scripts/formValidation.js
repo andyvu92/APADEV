@@ -182,7 +182,6 @@ jQuery(document).ready(function($) {
 			}
 		}
 		if($('.down6:visible').length !== 0){
-			if($("#jprivacy-policy").val() !=='1'){$("label[for=jprivacy-policy]").addClass("focuscss");return false;}else{$("label[for=jprivacy-policy]").removeClass("focuscss");}
 			//if(!$("#rolloverblock").hasClass("display-none")){
 			//	if($("#instalmentpolicy").val() !=='1'){$("label[for=instalmentpolicy]").addClass("focuscss");return false;}else{$("label[for=instalmentpolicy]").removeClass("focuscss");}
 		   	//}
@@ -193,6 +192,7 @@ jQuery(document).ready(function($) {
 				if($("input[name=Expirydate]").val() =='') {$("input[name=Expirydate").addClass("focuscss");}else{$("input[name=Expirydate").removeClass("focuscss");}
 				if($("input[name=CCV]").val() =='') {$("input[name=CCV").addClass("focuscss");}else{$("input[name=CCV").removeClass("focuscss");}
 			}
+			if($("#jprivacy-policy").val() !=='1'){$("label[for=jprivacy-policy]").addClass("focuscss");}else{$("label[for=jprivacy-policy]").removeClass("focuscss");}
 			if($("#anothercardBlock").is(":visible")){
 				if($("select[name=Cardtype]").val() =='') { return false;}
 				if($("input[name=Cardname]").val() =='') { return false;}
@@ -200,6 +200,7 @@ jQuery(document).ready(function($) {
 				if($("input[name=Expirydate]").val() =='') { return false;}
 				if($("input[name=CCV]").val() =='') { return false;}
 			}
+			if($("#jprivacy-policy").val() !=='1'){return false;}
 		}
 		if($('.down13:visible').length !== 0){
 		   	if($("input[name=Shipping-PObox]").val() ==''){
@@ -372,7 +373,9 @@ jQuery(document).ready(function($) {
 		if(validateFun()==false){alert("please fill out all required fields *");return false;}
 		if ( $('.down22').find('.focuscss').length > 0 ){alert("please fill out all required fields *");return false;}
 	});
-	
+	$('#join-review-form .down6 .addCartlink .placeorder').click(function(){
+		if(validateFun()==false){alert("please fill out all required fields *");return false;}
+	});
 	$('[class^=your-details-prevbutton]').click(function(){
 		
         var i = Number($(this).attr("class").replace('your-details-prevbutton', ''));

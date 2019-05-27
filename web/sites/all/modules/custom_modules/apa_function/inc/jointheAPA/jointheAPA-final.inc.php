@@ -595,7 +595,7 @@ $PRFPrice = 0;
 
             <div class="flex-col-12" style="text-align: center">
                 <a class="addCartlink" href="javascript:document.getElementById('join-insurance-form').submit();"><button style="margin-top: 30px;"
-                        class="placeorder <?php if(sizeof($cardsnum["results"])==0 && $scheduleDetails['OrderTotal']!="0"){ echo " stop";} ?>"
+                        class="placeorder"
                        >Place your order</button></a>
             </div>
         </div>
@@ -603,7 +603,7 @@ $PRFPrice = 0;
 </form>
 <!--merge part start from here-->
 <!---done by jinghu--22/05/2019-->
-<form id="join-insurance-form" action="jointheapa" method="POST">
+<form id="join-insurance-form" action="joinconfirmation" method="POST">
    	<input type="hidden" name="step3" value="3">
     <div class="down6"
         <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
