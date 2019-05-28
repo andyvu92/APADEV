@@ -823,3 +823,46 @@ div#schedulePOPUp {
 }
 </style>
 <!--  this part will be merged with Andy's Dashboard less file-->	
+<script>
+        // todo: change this count to 300
+        var count = 300;
+        function countDown(){
+            var timer = document.getElementById("timer");
+            if(count > 0){
+                count--;
+                if(count > 120) {
+                    var min = parseInt(count/60);
+                    var sec = count%60;
+                    if(sec > 1) {
+                        timer.innerHTML = min + " mins " + sec + " seconds";
+                    } else if(sec == 0) {
+                        timer.innerHTML = min + " mins";
+                    } else {
+                        timer.innerHTML = min + " mins " + sec + " second";
+                    }
+                }else if(count > 60) {
+                    var min = parseInt(count/60);
+                    var sec = count%60;
+                    if(sec > 1) {
+                        timer.innerHTML = min + " min " + sec + " seconds";
+                    } else if(sec == 0) {
+                        timer.innerHTML = min + " mins";
+                    } else {
+                        timer.innerHTML = min + " min " + sec + " second";
+                    }
+                } else {
+                    var sec = count%60;
+                    if(sec > 1) {
+                        timer.innerHTML = sec + " seconds";
+                    } else {
+                        timer.innerHTML = sec + " second";
+                    }
+                }
+                setTimeout("countDown()", 1000);
+            }else{
+                window.location.href = "/renewmymembership";
+            }
+        }
+        countDown();
+</script>
+<div style="padding-bottom: 15px;">Time left to purchase: <span id="timer" style="color: #00b8f1; font-weight: 700;">15</span></div>
