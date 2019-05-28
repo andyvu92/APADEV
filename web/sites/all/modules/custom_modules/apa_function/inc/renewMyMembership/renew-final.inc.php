@@ -324,22 +324,22 @@ if(sizeof($fpProdcutArray)!=0){
 						}
 				}
 				//if((!isset($_POST['prftag'])) && isset($_POST['PRF'])&& $_POST['PRF']!=""){ 
-				if($reviewData['PRFdonation']!=""){ 
-                    echo '<div class="flex-cell flex-flow-row table-cell PRF">
-                    <div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Physiotherapy Research Foundation donation</div>
+				//if($reviewData['PRFdonation']!=""){ 
+                    //echo '<div class="flex-cell flex-flow-row table-cell PRF">
+                    /*<div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Physiotherapy Research Foundation donation</div>
                     <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.number_format($reviewData['PRFdonation'],2).'</div>
                     <div class="flex-col-2 action-col"><a class="deletePRFButton">delete</a></div>
-                    </div>'; 
-					$price +=$reviewData['PRFdonation']; 
-					}
-				if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"){ 
-					echo '<div class="flex-cell flex-flow-row table-cell">
-					<div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Admin fee</div>
+                    </div>'; */
+					//$price +=$reviewData['PRFdonation']; 
+					//}
+				//if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"){ 
+					//echo '<div class="flex-cell flex-flow-row table-cell">
+					/*<div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Admin fee</div>
 					<div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.number_format($scheduleDetails['AdminFee'],2).'</div>
 					<div class="flex-col-2 action-col"></div>
-					</div>'; 
+					</div>'; */
 							
-				}
+				//}
 				?>
             </div>
 			<div class="flex-container flex-table total-price">
@@ -349,7 +349,7 @@ if(sizeof($fpProdcutArray)!=0){
 					Subtotal (ex. GST)	
 					</div>
 					<div class="flex-col-4">
-			        $<?php echo number_format($scheduleDetails['SubTotal'],2);?>
+					$<span class="full"><?php echo number_format($fullDetails['SubTotal'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['SubTotal'],2);?></span>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
@@ -357,7 +357,7 @@ if(sizeof($fpProdcutArray)!=0){
 					GST	
 					</div>
 					<div class="flex-col-4">
-			        $<?php echo number_format($scheduleDetails['GST'],2);?>
+			        $<span class="full"><?php echo number_format($fullDetails['GST'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['GST'],2);?></span>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
@@ -365,7 +365,7 @@ if(sizeof($fpProdcutArray)!=0){
 					Total (inc. GST)	
 					</div>
 					<div class="flex-col-4">
-			        $<span id="totalPayment"><?php echo number_format($scheduleDetails['OrderTotal'],2);?></span>
+			        $<span id="fullPayment" class="full"><?php echo number_format($fullDetails['OrderTotal'],2);?></span><span id="schedulePayment" class="schedule"><?php echo number_format($scheduleDetails['OrderTotal'],2);?></span>
 					</div>
 				</div>
 			</div>
@@ -567,92 +567,10 @@ if(sizeof($fpProdcutArray)!=0){
 </form>
 <!--merged steps from here-->
 <!--done by jinghu --27-05-2019-->
-<form id="renew-insurance-form" action="renewmymembership" method="POST">
+<form id="renew-insurance-form" action="renewconfirmation" method="POST">
 	<input type="hidden" name="step3" value="3">
 	<div class="down6" <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")|| isset($_POST['QOrder']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
-			<div class="row">
-			<div class="flex-container flex-table">
-				<div class="flex-cell flex-flow-row table-header">
-					<div class="flex-col-7">
-						<span class="table-heading">Product name</span>
-					</div>
-					<div class="flex-col-5">
-						<span class="table-heading">Price</span>
-					</div>
-				</div>
-
-    			<?php 
-						$price = "";
-						if(sizeof($prodcutArray)!=0){
-							foreach( $memberProducts as $memberProduct){
-								echo "<div class='flex-cell flex-flow-row table-cell'>";
-								echo "<div class='flex-col-7 title-col'>".$memberProduct['Title']."</div>";
-								echo "<div class='flex-col-5 price-col'>$".number_format($memberProduct['Price'],2)."</div>";
-								$price += $memberProduct['Price'];
-								echo "</div>";  
-							}
-						}	
-						foreach( $NGListArray as $NGArray){
-						if(sizeof($NGProductsArray)!=0){
-						    foreach($NGProductsArray as $NGProduct){
-								if($NGProduct == $NGArray['ProductID']){
-									echo "<div class='flex-cell flex-flow-row table-cell'>";
-									echo "<div class='flex-col-7 title-col'>".$NGArray['ProductName']."</div>";
-									echo "<div class='flex-col-5 price-col'>$".number_format($NGArray['NGprice'],2)."</div>";
-									$price += $NGArray['NGprice'];
-									echo "</div>";
-								}	  
-							}
-						}
-						}
-						if(sizeof($FPListArray)!=0){
-							
-							foreach( $FPListArray as $FProduct){
-									echo "<div class='flex-cell flex-flow-row table-cell'>";
-									echo "<div class='flex-col-7 title-col'>".$FProduct['FPtitle']."</div>";
-									echo "<div class='flex-col-5 price-col'>$".number_format($FProduct['FPprice'],2)."</div>";
-									$price += $FProduct['FPprice'];
-									echo "</div>";  
-							}
-						}
-                        
-				?>
-			</div>
-
-			<div class="flex-container flex-table">
-				
-				<div class="flex-cell flex-flow-row">
-					<div class="flex-col-12">
-						<span class="table-heading">Membership payment total</span>	
-					</div>
-				</div>
-				<div class="flex-cell flex-flow-row">
-					<div class="flex-col-7">
-						Subtotal (exc. GST)	
-					</div>
-					<div class="flex-col-5">
-			        	$<?php echo number_format($scheduleDetails['SubTotal'],2);?>
-					</div>
-				</div>
-				<div class="flex-cell flex-flow-row" id="installmentafter">
-					<div class="flex-col-7">
-						GST	
-					</div>
-					<div class="flex-col-5">
-			        	$<?php echo number_format($scheduleDetails['GST'],2);?>
-					</div>
-				</div>
-				<div class="flex-cell flex-flow-row">
-					<div class="flex-col-7">
-						<strong>Total</strong> (inc. GST)	
-					</div>
-					<div class="flex-col-5">
-			        	$<span id="totalPayment"><?php echo number_format($scheduleDetails['OrderTotal'],2);?></span>
-					</div>
-				</div>
-			</div>
-		</div>	
-
+		<div class="row">	
 			<div class="col-xs-12">
 			<label>Payment options:</label>
 			</div>
@@ -668,7 +586,7 @@ if(sizeof($fpProdcutArray)!=0){
 			</div>
 			<?php endif;?>
 			<input type="hidden" id="Installpayment-frequency" name="Installpayment-frequency" value="">
-		<?php if(isset($_SESSION["postReviewData"])) { $PRFTemp = $_SESSION["postReviewData"]['PRFdonation'];}?>
+		<?php //if(isset($_SESSION["postReviewData"])) { $PRFTemp = $_SESSION["postReviewData"]['PRFdonation'];}?>
 		<div class="row">
 			<div class="col-xs-12"><label>PRF donation</label></div>
 				<div class="col-xs-12 tooltip-container top">
@@ -687,19 +605,21 @@ if(sizeof($fpProdcutArray)!=0){
 			<div class="col-xs-6 col-md-3" id="prfselect">
 				<div class="chevron-select-box">
 					<select class="form-control" id="PRF" name="PRF">
-						<option value="5" <?php if(!isset($_SESSION["postReviewData"])) {echo "selected";} if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="5") {echo "selected";}}?>>$5.00</option>
-						<option value="10" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="10") {echo "selected";}}?>>$10.00</option>
-						<option value="20" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="20") {echo "selected";}}?>>$20.00</option>
-						<option value="50" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="50") {echo "selected";}}?>>$50.00</option>
-						<option value="100" <?php if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="100") {echo "selected";}}?>>$100.00</option>
-						<option value="Other" <?php if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo "selected";}}?>>Other</option>
+						<option value="5.00" <?php //if(!isset($_SESSION["postReviewData"])) {echo "selected";} if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="5") {echo "selected";}}?>>$5.00</option>
+						<option value="10.00" <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="10") {echo "selected";}}?>>$10.00</option>
+						<option value="20.00" <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="20") {echo "selected";}}?>>$20.00</option>
+						<option value="50.00" <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="50") {echo "selected";}}?>>$50.00</option>
+						<option value="100.00" <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="100") {echo "selected";}}?>>$100.00</option>
+						<option value="Other" <?php //if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo "selected";}}?>>Other</option>
 					</select>
 				</div>
-				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="<?php if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo $PRFTemp;}}?>" oninput="this.value = Math.abs(this.value)" min="0">
+				<input type="hidden" id="PRFFinal" name="PRFFinal" value=""/>
+				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="<?php //if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo $PRFTemp;}}?>" oninput="this.value = Math.abs(this.value)" min="0">
 				
 				
 			</div>
-		</div>
+	</div>
+	
 	<?php 
 	// 2.2.12 - Get payment list
 	// Send - 
@@ -775,10 +695,10 @@ if(sizeof($fpProdcutArray)!=0){
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 		</div>
-		<!--<div class="col-xs-12">
-			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked>
+		<div class="col-xs-12">
+			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="0">
 			<label for="addcardtag">Save this card</label>
-		</div>-->
+		</div>
 		<input type="hidden" name="addCard" value="0">
 	</div>
 	<div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</div>
@@ -826,10 +746,10 @@ if(sizeof($fpProdcutArray)!=0){
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 		</div>
-		<!--<div class="col-xs-12">
-			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked>
+		<div class="col-xs-12">
+			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="0">
 			<label for="addcardtag">Save this card</label>
-		</div>-->
+		</div>
 		
 		<input type="hidden" name="addCard" value="1">
 		<div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</div>
@@ -840,13 +760,8 @@ if(sizeof($fpProdcutArray)!=0){
 				<input popup class="styled-checkbox" type="checkbox" id="jprivacy-policy">
 				<label for="jprivacy-policy" id="privacypolicyl" popup-target="privacypolicyWindow"><span class="tipstyle">*&nbsp;</span>I agree to the APA Terms and Conditions</label>
 			</div>
-			<!--<div class="col-xs-12 display-none" id="rolloverblock">
-				<input class="styled-checkbox" type="checkbox" id="instalmentpolicy">
-				<label for="instalmentpolicy" id="instalmentpolicyl"><span class="tipstyle">*&nbsp;</span>I agree to the APA Instalment Payment Policy</label>
-			</div>-->
-			<!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 display-none" id="rolloverblock"><label for="Rollover">Roll over</label><input type="checkbox" name="Rollover" id="Rollover"></div>-->
-		</div>   
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  <a href="javascript:document.getElementById('renew-insurance-form').submit();" class="join-details-button7 <?php if(isset($_POST["insuranceStatus"])&& $_POST["insuranceStatus"]=="1") { echo "stop"; }?>"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>
+	    </div>   
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding"><a class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>
 	</div>
 </form>
 <!--end merged steps-->
@@ -854,8 +769,8 @@ if(sizeof($fpProdcutArray)!=0){
 <form id="deletePRFForm" action="" method="POST"><input type="hidden" name="step2-2"></form>
 <form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>
 <form id="deleteNGForm" action="" method="POST"><input type="hidden" name="step2-4" value=""></form>		
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  <a class="your-details-prevbutton8"><span class="dashboard-button-name">Back</span></a></div>
-<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"): ?>
+<form id="tempform" action="" method="POST"><input type="hidden" name="goI"></form>	
+
 <div id="schedulePOPUp" class="modal fade" role="dialog">
 	<div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
 	<!-- Modal content-->
@@ -899,7 +814,7 @@ if(sizeof($fpProdcutArray)!=0){
 		</div>
 	</div>
 </div>
-<?php endif;?>
+
 <?php logRecorder();  ?>
 <!--  this part will be merged with Andy's Dashboard less file-->
 <style>

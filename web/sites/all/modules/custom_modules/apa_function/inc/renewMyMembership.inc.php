@@ -178,9 +178,9 @@ $background = getBackgroundImage($userID);
 				<li><a class="tabtitle3 inactiveLink" style="cursor: pointer;"><span class="eventtitle3" id="Workplace"><strong>Workplace</strong></span></a></li>
 				<li><a class="tabtitle4 inactiveLink" style="cursor: pointer;"><span class="eventtitle4" id="Education"><strong>Education</strong></span></a></li>
 				<li><a class="tabtitle5 inactiveLink" style="cursor: pointer;"><span class="eventtitle5 <?php if((isset($_POST['step1'])&& $_POST['insuranceTag']!="0") || isset($_POST['goI']))echo 'text-underline';?>" id="Insurance"><strong>Insurance</strong></span></a></li>
-				<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6 <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")||isset($_POST['QOrder']) || isset($_POST['goP']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>
+				<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6 <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")||isset($_POST['QOrder']) || isset($_POST['stepAdd']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>
 				<!--<li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7 <?php //if(isset($_POST['goP']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>-->
-				<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 <?php if(isset($_POST['step2']) || isset($_POST['step3']) || isset($_POST['stepAdd']) ||isset($_POST['step2-2']) ||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'text-underline';?>" id="Review"><strong>Review</strong></span></a></li>
+				<!--<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 <?php //if(isset($_POST['step2']) || isset($_POST['step3']) || isset($_POST['stepAdd']) ||isset($_POST['step2-2']) ||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'text-underline';?>" id="Review"><strong>Review</strong></span></a></li>-->
 				</ul>
 			<div id="insuranceBlockRN"></div>
 			<div class="col-xs-12 none-margin">
@@ -194,9 +194,10 @@ $background = getBackgroundImage($userID);
 			//include('sites/all/themes/evolve/inc/renewMyMembership/renew-insurance.inc.php'); 
 			apa_function_renew_the_apa_insurance_form();
 			}
-            elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder'])) {
+            elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder']) || (isset($_POST["stepAdd"]) && $_POST["stepAdd"] == "2") ||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['step2-4'])) {
 		    //include('sites/all/themes/evolve/inc/renewMyMembership/renew-surveypayment.inc.php');
-			apa_function_renew_the_apa_surveypayment_form();
+			//apa_function_renew_the_apa_surveypayment_form();
+			apa_function_renew_the_apa_final_form();
 		    } 			
 			elseif((isset($_POST["step2"]) && $_POST["step2"] == "2") || (isset($_POST["stepAdd"]) && $_POST["stepAdd"] == "2") ||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['step2-4'])) {
 			//include('sites/all/themes/evolve/inc/renewMyMembership/renew-final.inc.php');
@@ -521,7 +522,7 @@ You have the right to access the personal information about yourself held by the
 					<span class="item-description">If you were an APA member in 2018, please renew your membership for 2019 below.</span>
 					<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
 				</div>
-			</div>*/ ?>
+			</div>*/?>
 
 			
 			<div class="item">

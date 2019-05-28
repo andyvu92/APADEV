@@ -852,7 +852,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 <form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>
 <form id="deleteNGForm" action="" method="POST"><input type="hidden" name="step2-4" value=""></form>
 <form id="tempform" action="" method="POST"><input type="hidden" name="goI"></form>	
-<?php if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"): ?>
+
 <div id="schedulePOPUp" class="modal fade" role="dialog">
     <div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
         <!-- Modal content-->
@@ -893,7 +893,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
         </div>
     </div>
 </div>
-<?php endif;?>
+
 <!--  this part will be merged with Andy's Dashboard less file-->
 <style>
 div#schedulePOPUp {

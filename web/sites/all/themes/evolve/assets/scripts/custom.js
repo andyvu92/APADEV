@@ -521,11 +521,11 @@ jQuery(document).ready(function($) {
 	if($('#todayFullAmount').html()=="0"){
 		$('#hiddenPayment').addClass('display-none');
 		$("#anothercardBlock").removeClass('show');
-		alert("ddddd");
+	
 	}
 	else{
 		$('#hiddenPayment').removeClass('display-none');
-	
+	  if($('#Paymentcard:visible').length === 0){ $('#anothercardBlock').addClass('show');}
 	}
 	//this is end merged steps
 	$( "#POSTPRF").val(PRF);
@@ -561,7 +561,7 @@ jQuery(document).ready(function($) {
 			}
 			else{
 				$('#hiddenPayment').removeClass('display-none');
-				$("#anothercardBlock").addClass('show');
+				if($('#Paymentcard:visible').length === 0){ $('#anothercardBlock').addClass('show');}
 			}
 			//this is end merge steps part
 			$( "#POSTPRF").val(PRF);
@@ -602,7 +602,7 @@ jQuery(document).ready(function($) {
 		}
 		else{
 			$('#hiddenPayment').removeClass('display-none');
-			$("#anothercardBlock").addClass('show');
+			if($('#Paymentcard:visible').length === 0){ $('#anothercardBlock').addClass('show');}
 		}
 		//this is end merge steps part
 		$('#Amount').html(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val()));
@@ -647,7 +647,7 @@ jQuery(document).ready(function($) {
 			}
 			else{
 				$('#hiddenPayment').removeClass('display-none');
-				$("#anothercardBlock").addClass('show');
+				if($('#Paymentcard:visible').length === 0){ $('#anothercardBlock').addClass('show');}
 			}
 			//this is end merged steps
 			$('#prfselect').slideUp().css('overflow', 'hidden');
@@ -697,7 +697,7 @@ jQuery(document).ready(function($) {
 			}
 			else{
 				$('#hiddenPayment').removeClass('display-none');
-				$("#anothercardBlock").addClass('show');
+				if($('#Paymentcard:visible').length === 0){ $('#anothercardBlock').addClass('show');}
 			}
 			//this is end merged steps
 			$('#prfselect').slideDown().css('overflow', 'unset');

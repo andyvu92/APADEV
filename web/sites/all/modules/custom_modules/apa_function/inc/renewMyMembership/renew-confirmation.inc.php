@@ -1,39 +1,57 @@
 <?php
  $invoice_ID ="";
 if(isset($_POST['step3'])) {
+	$postReviewData = array();
+	$postReviewData['InstallmentFor'] = "Membership";
+	$postReviewData['productID'] = getProductList($_SESSION['UserId']);
+	$postReviewData['InsuranceApplied'] = 0;
+	if(isset($_POST['PRFFinal'])) {$postReviewData['PRFdonation'] = $_POST['PRFFinal'];}else{ $postReviewData['PRFdonation'] = "";}
 	//added by merged steps
 	if(isset($_SESSION['UserId'])){ $postReviewData['userID'] = $_SESSION['UserId']; } 
 	if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption'] == '1' ? 1:0; }
 	if(isset($_POST['Installpayment-frequency'])){ $postReviewData['InstallmentFrequency'] = $_POST['Installpayment-frequency']; }
-	//end merged steps
-	//continue to get the review data
-	$postReviewData = $_SESSION['postReviewData'];
-	$postReviewData['productID'] = getProductList($_SESSION['UserId']);
-	if(isset($_POST['Paymentcard'])){ $postReviewData['Card_number'] = $_POST['Paymentcard']; }
-	//if(isset($_POST['rollover'])){ $postReviewData['Rollover'] = $_POST['rollover']; }
-	//if(isset($_POST['Installpayment-frequency'])){ $postReviewData['Installpayment-frequency'] = $_POST['Installpayment-frequency']; }
-	
-	if(isset($_SESSION["tempcard"])){
-		$cardDetails = $_SESSION["tempcard"];
-		
-		//$postReviewData['Payment-method'] = $cardDetails['Payment-method'];
-		//$postReviewData['Cardno'] = $cardDetails['Cardno'];
-		//$postReviewData['Expiry-date'] = $cardDetails['Expiry-date'];
-		//$postReviewData['CCV'] = $cardDetails['CCV'];
-		$postReviewData['PaymentTypeID'] = $cardDetails['Payment-method'];
-		$postReviewData['CCNumber'] = $cardDetails['Cardno'];
-		$postReviewData['CCExpireDate'] = $cardDetails['Expiry-date'];
-		//test data
-		
-		$postReviewData['CCSecurityNumber'] = $cardDetails['CCV'];	
+	//this is handle save payment card
+	if(isset($_POST['addcardtag']) && $_POST['addcardtag']=="1"){
+		if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
+		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
+		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
+		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
+		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
+		$out = aptify_get_GetAptifyData("15", $postPaymentData);
 		$postReviewData['Card_number'] = "";	
+		$postReviewData['PaymentTypeID'] = $_POST['Cardtype'];
+		$postReviewData['CCNumber'] = $_POST['Cardnumber'];
+		$postReviewData['CCExpireDate'] = $_POST['Expirydate'];
+		$postReviewData['CCSecurityNumber'] = $_POST['CCV'];
+
 	}
-	else{
+	elseif(isset($_POST['addCard'])){
+		$postReviewData['Card_number'] = "";	
+		$postReviewData['PaymentTypeID'] = $_POST['Cardtype'];
+		$postReviewData['CCNumber'] = $_POST['Cardnumber'];
+		$postReviewData['CCExpireDate'] = $_POST['Expirydate'];
+		$postReviewData['CCSecurityNumber'] = $_POST['CCV'];
+		
+	}
+    if(isset($_POST['anothercard']) && $_POST['anothercard']=="1"){
+		$postReviewData['Card_number'] = "";	
+		$postReviewData['PaymentTypeID'] = $_POST['Cardtype'];
+		$postReviewData['CCNumber'] = $_POST['Cardnumber'];
+		$postReviewData['CCExpireDate'] = $_POST['Expirydate'];
+		$postReviewData['CCSecurityNumber'] = $_POST['CCV'];
+	}elseif(isset($_POST['Paymentcard'])){
+	    $postReviewData['Card_number'] = $_POST['Paymentcard']; 
 		$postReviewData['PaymentTypeID'] = "";
 		$postReviewData['CCNumber'] = "";
 		$postReviewData['CCExpireDate'] = "";
 		$postReviewData['CCSecurityNumber'] = "";
 	}
+	//end merged steps
+
+
+	
+
+	
 	
 	//This is to get the renewal quatation order details from Aptify!!!!!!!!
 	// 2.2.45 - Renewal Quatation OrderID
@@ -47,10 +65,7 @@ if(isset($_POST['step3'])) {
 	}
 	
 	$postReviewData['OrderID'] = $quatationOrderID;
-	
-	$postReviewData['InsuranceApplied'] = 0;
-	
-	
+		
 	// 2.2.27 - Renew a membership order
 	// Send - 
 	// userID&Paymentoption&PRFdonation&Rollover&Card_number&productID
@@ -61,11 +76,15 @@ if(isset($_POST['step3'])) {
 	//new array to record specific fields
 	$recordOrder['userID'] = $postReviewData['userID'];
 	$recordOrder['Card_number'] = $postReviewData['Card_number'];
+	$recordOrder['PRFdonation'] = $postReviewData['PRFdonation'];
 	$recordOrder['productID'] = $postReviewData['productID'];
 	$recordOrder['PaymentTypeID'] = $postReviewData['PaymentTypeID'];
 	if($postReviewData['CCNumber'] !=""){  $recordOrder['CCNumber'] = substr($postReviewData['CCNumber'], -4); }
 	else{ $recordOrder['CCNumber'] = $postReviewData['CCNumber'];}
 	$recordOrder['InsuranceApplied'] = $postReviewData['InsuranceApplied'];
+	$recordOrder['Paymentoption'] = $postReviewData['Paymentoption'];
+	$recordOrder['InstallmentFor'] = $postReviewData['InstallmentFor'];
+	$recordOrder['InstallmentFrequency'] = $postReviewData['InstallmentFrequency'];
 	if($renewOuts['MResponse'] =="Order updated successfully") {
 	//refresh session data
 	$data = "UserID=".$_SESSION["UserId"];
