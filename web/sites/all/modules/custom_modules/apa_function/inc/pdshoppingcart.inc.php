@@ -470,7 +470,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
 		</div>
 		</form>-->
-		<?php $the_form = drupal_get_form('apa_create_payment_card_form');
+		<?php $the_form = drupal_get_form('pd_shoppingcart_form');
              print drupal_render($the_form);	?>
 	</div>
 	
@@ -539,7 +539,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		</div>
 	</form>	-->
 	<div id="addPaymentCardForm">
-	<?php $the_form = drupal_get_form('apa_create_payment_card_form');
+	<?php $the_form = drupal_get_form('pd_shoppingcart_form');
              print drupal_render($the_form);?>
     </div>
 	<?php endif; ?>
@@ -609,10 +609,10 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			</div>
 		</div>
 		         
-		<form action="/pd/completed-purchase" method="POST" id="PDShoppingcartForm">
-			<input type="hidden" name="POSTPRF" id="POSTPRF" value="">
+		<form action="" method="POST" id="">
+			<!--<input type="hidden" name="POSTPRF" id="POSTPRF" value="">-->
 			<input type="hidden" name="TandC" id="TandC" value="0">
-			<input type="hidden" name="CardUsed" id="CardUsed" value="">
+			<!--<input type="hidden" name="CardUsed" id="CardUsed" value="">-->
 			<input type="hidden" name="CouponCode"  value="<?php echo $couponCode; ?>">
 			<?php
 			if(sizeof($products)!=0){	
@@ -647,7 +647,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 				echo '<input type="hidden" name="totalMG" id="totalMG" value="'.$mgTotal.'">';
 			}
 			?>
-			<a href="javascript:document.getElementById('PDShoppingcartForm').submit();" class="placeorder<?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" value="Place your order" id="PDPlaceOrder"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</button></a>
+			<a href="javascript:document.getElementById('pd-shoppingcart-form').submit();" class="placeorder" value="Place your order" id="PDPlaceOrder"><span class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</span></a>
 		</form>
 	</div>
 

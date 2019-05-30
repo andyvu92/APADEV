@@ -482,10 +482,14 @@ jQuery(document).ready(function($) {
 			
 	});
 	$("#CardUsed").val($("#Paymentcard").val());
-	$("input[value='PLACE YOUR ORDER']").click(function(){
+	$('body').on('change','#hiddenPayment #Paymentcard',function(){
 		var CardID = $("#Paymentcard").val();
 		$("#CardUsed").val(CardID);
-	});		
+	});
+	/*$("input[value='PLACE YOUR ORDER']").click(function(){
+		var CardID = $("#Paymentcard").val();
+		$("#CardUsed").val(CardID);
+	});	*/	
 	$('body').on('change', 'select', function() {
 		if($('.down4:visible').length !== 0){
 			var x = $(this).attr("id").replace('Udegree', '');
@@ -533,13 +537,13 @@ jQuery(document).ready(function($) {
 	$('#prf-donation').html(Number($( "#POSTPRF").val()) );
 	if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
 		$('#addPaymentCardForm').addClass('display-none');
-		$('#PDPlaceOrder').removeClass('stop');
+		//$('#PDPlaceOrder').removeClass('stop');
 		$('#hiddenPayment').addClass('display-none');
 	}
 	else{
 		$('#addPaymentCardForm').removeClass('display-none');
 		$('#hiddenPayment').removeClass('display-none');
-		if($('#Paymentcard:visible').length === 0){ $('#PDPlaceOrder').addClass('stop');}
+		//if($('#Paymentcard:visible').length === 0){ $('#PDPlaceOrder').addClass('stop');}
 	}
 	$( "#PRF" ).change(function() {
 		if(($('#PRF').val()=="Other")){
@@ -569,13 +573,13 @@ jQuery(document).ready(function($) {
 			$('#prf-donation').html(Number($( "#POSTPRF").val()) );
 			if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
 				$('#addPaymentCardForm').addClass('display-none');
-				$('#PDPlaceOrder').removeClass('stop');
+				$//('#PDPlaceOrder').removeClass('stop');
 				$('#hiddenPayment').addClass('display-none');
 			}
 			else{
 				$('#addPaymentCardForm').removeClass('display-none');
 				$('#hiddenPayment').removeClass('display-none');
-				if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
+				//if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 			}
 		}
 		//var tempTotal = Number($('#totalPayment').html());
@@ -609,13 +613,13 @@ jQuery(document).ready(function($) {
 		$('#prf-donation').html(Number($( "#POSTPRF").val()) );
 		if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
 			$('#addPaymentCardForm').addClass('display-none');
-			$('#PDPlaceOrder').removeClass('stop');
+			//$('#PDPlaceOrder').removeClass('stop');
 			$('#hiddenPayment').addClass('display-none');
 		}
 		else{
 			$('#addPaymentCardForm').removeClass('display-none');
 			$('#hiddenPayment').removeClass('display-none');
-			if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
+			//if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 		}
 		/*if($('.down6:visible').length !== 0){
 				if($('#PRFOther').val()=="0" && $( "#totalPayment").html()=="0.00" || $( "#todayFullAmount").html()=="0.00"){
@@ -656,13 +660,13 @@ jQuery(document).ready(function($) {
 			$('#prf-donation').html(Number($( "#POSTPRF").val()) );
 			if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
 				$('#addPaymentCardForm').addClass('display-none');
-				$('#PDPlaceOrder').removeClass('stop');
+				//$('#PDPlaceOrder').removeClass('stop');
 				$('.sidebardis').addClass('display-none');
 				$('#hiddenPayment').addClass('display-none');
 			}
 			else{
 				$('#addPaymentCardForm').removeClass('display-none');
-				if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
+				//if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 				$('.sidebardis').removeClass('display-none');
 				$('#hiddenPayment').removeClass('display-none');
 				
@@ -706,14 +710,14 @@ jQuery(document).ready(function($) {
 			$('#prf-donation').html(Number($( "#POSTPRF").val()) );
 			if(Number($( "#POSTPRF").val()) + Number($( "#totalhidden").val())=="0") {
 				$('#addPaymentCardForm').addClass('display-none');
-				$('#PDPlaceOrder').removeClass('stop');
+			//	$('#PDPlaceOrder').removeClass('stop');
 				$('.sidebardis').addClass('display-none');
 				$('#hiddenPayment').addClass('display-none');
 			}
 			else{
 				$('#addPaymentCardForm').removeClass('display-none');
 				$('#hiddenPayment').removeClass('display-none');
-				if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
+				//if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 				$('.sidebardis').removeClass('display-none');
 				
 			}
@@ -2016,4 +2020,9 @@ jQuery(document).ready(function(){
 jQuery(document).ready(function(){
 	$("#dashboard-right-content .styled-checkbox#15").parents('li').remove();
 
+});
+//remove credit card updates in PD shopping cart page
+jQuery(document).ready(function(){
+	$("#pd-shoppingcart-form #edit-submit").addClass('display-none');
+	$("#pd-shoppingcart-form #edit-addcardtag").val('0');
 });

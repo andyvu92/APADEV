@@ -364,9 +364,32 @@ jQuery(document).ready(function($) {
 	});
 	$('#PDPlaceOrder').click(function(){
 		if($('#checkTerm').val() == "1"){
-			if($('#accept1').val()!="1")  {$('#pd_terms_open').addClass("focuscss");alert("please fill out all required fields *");return false;}
-			if($('#accept2').length!=0) {if($('#accept2').val()!="1")  {$('#accept2label').addClass("focuscss");alert("please fill out all required fields *");return false;}}
-			if($('#accept3').val()!="1")  {$('#accept3label').addClass("focuscss");alert("please fill out all required fields *");return false;}
+			if($('#accept1').val()!="1")  {$('#pd_terms_open').addClass("focuscss");}else{$('#pd_terms_open').removeClass("focuscss");}
+			if($('#accept2').length!=0) {if($('#accept2').val()!="1")  {$('#accept2label').addClass("focuscss");} else{$('#accept2label').removeClass("focuscss");}}
+			if($('#accept3').val()!="1")  {$('#accept3label').addClass("focuscss");}else{$('#accept3label').removeClass("focuscss");}
+		}
+
+
+		if($('#addPaymentCardForm:visible').length !== 0 || $('#anothercardBlock:visible').length !== 0) {
+			if($("select[name=Cardtype]").val() =='') {$("select[name=Cardtype]").addClass("focuscss");}else{$("select[name=Cardtype]").removeClass("focuscss");}
+			if($("input[name=Cardname]").val() =='') {$("input[name=Cardname").addClass("focuscss");}else{$("input[name=Cardname").removeClass("focuscss");}
+			if($("input[name=Cardnumber]").val() =='') {$("input[name=Cardnumber").addClass("focuscss");}else{$("input[name=Cardnumber").removeClass("focuscss");}
+			if($("input[name=Expirydate]").val() =='') {$("input[name=Expirydate").addClass("focuscss");}else{$("input[name=Expirydate").removeClass("focuscss");}
+			if($("input[name=CCV]").val() =='') {$("input[name=CCV").addClass("focuscss");}else{$("input[name=CCV").removeClass("focuscss");}
+
+		}
+		if($('#checkTerm').val() == "1"){
+			if($('#accept1').val()!="1")  {alert("please fill out all required fields *");return false;}
+			if($('#accept2').length!=0) { if($('#accept2').val()!="1"){alert("please fill out all required fields *");return false;}}
+			if($('#accept3').val()!="1")  {alert("please fill out all required fields *");return false;}
+		}
+		if($('#addPaymentCardForm:visible').length !== 0 || $('#anothercardBlock:visible').length !== 0){
+		
+			if($("select[name=Cardtype]").val() =='') { alert("please fill out all required fields *");return false;}
+			if($("input[name=Cardname]").val() =='') { alert("please fill out all required fields *");return false;}
+			if($("input[name=Cardnumber]").val() =='') { alert("please fill out all required fields *");return false;}
+			if($("input[name=Expirydate]").val() =='') { alert("please fill out all required fields *");return false;}
+			if($("input[name=CCV]").val() =='') { alert("please fill out all required fields *");return false;}
 		}
 	});
 	$('.pd-register-submit').click(function(){
