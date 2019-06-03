@@ -745,7 +745,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			<?php if(!$available): ?>
 				<span>Please remove items that are not available to continue with your purchase</span>
 			<?php else: ?>
-				<a href="javascript:document.getElementById('PDShoppingcartForm').submit();" class="placeorder<?php if(sizeof($cardsnum["results"])==0){ echo " stop";} ?>" value="Place your order" id="PDPlaceOrder"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</button></a>
+				<a href="javascript:document.getElementById('pd-shoppingcart-form').submit();" class="placeorder" value="Place your order" id="PDPlaceOrder"><span class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</span></a>
 			<?php endif; ?>
 		</form>
 	</div>
