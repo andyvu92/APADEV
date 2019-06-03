@@ -281,6 +281,7 @@ if(isset($_SESSION["UserId"])){
 		////print_r($products);
 		$ListProductID = Array();
 		$discountPrice=0;
+		$Availability = true;
 		foreach($products as $productt){
 		$n = 0;
 
@@ -315,23 +316,27 @@ if(isset($_SESSION["UserId"])){
 		if($pd_detail_indiv['AttendeeStatus'] == "Registered") {
 			$outPutResult = "registered";
 			$available = false;
+			$Availability = false;
 		} else {
 			if($Now > $Cls){
 				$outPutResult = "closed";  
 				$available = false;
+				$Availability = false;
 			} elseif($Div == 0){
 				$outPutResult = "full"; 
 				$available = false;
+				$Availability = false;
 			}
 		}
 		if(substr($pd_detail_indiv['Title'], 0, 8) == "External") {
 			$outPutResult = "External";
 			$available = false;
+			$Availability = false;
 		}
 		if($available) {
 			$eventMessage = "Your event ".$pd_detail_indiv['Title']." is up.";
 		} else {
-			$eventMessage = "Your event &nbsp;<a href='http://localhost/pd/pd-product?saveShoppingCart&id=".$pdArr["PDIDs"]."' target='_blank'>".$pd_detail_indiv['Title']."</a>&nbsp;is <span class='eventStatus'>".$outPutResult."</span>. Please removed it from your shopping cart.";
+			$eventMessage = "Your event &nbsp;<a href='http://localhost/pd/pd-product?saveShoppingCart&id=".$pdArr["PDIDs"]."' target='_blank'>".$pd_detail_indiv['Title']."</a>&nbsp;is <span class='eventStatus'>&nbsp;".$outPutResult."</span>. Please removed it from your shopping cart.";
 		}
 		/* Event status checker end	 */
 		$pass=$localProducts[$n]['UID'];
@@ -742,7 +747,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 				echo '<input type="hidden" name="totalMG" id="totalMG" value="'.$mgTotal.'">';
 			}
 			?>
-			<?php if(!$available): ?>
+			<?php if(!$Availability): ?>
 				<span>Please remove items that are not available to continue with your purchase</span>
 			<?php else: ?>
 				<a href="javascript:document.getElementById('pd-shoppingcart-form').submit();" class="placeorder" value="Place your order" id="PDPlaceOrder"><span class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</span></a>
