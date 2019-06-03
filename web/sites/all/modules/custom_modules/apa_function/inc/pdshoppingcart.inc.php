@@ -235,7 +235,6 @@ if(isset($_SESSION["UserId"])){
 	</div>
 
 	<script>
-		// todo: change this count to 300
 		var count = 300;
 		function countDown(){
 			var timer = document.getElementById("timer");
@@ -286,7 +285,7 @@ if(isset($_SESSION["UserId"])){
 		$n = 0;
 
 
-		//// Testing start
+		/* Event status checker start */
 		$available = true;
 		$outPutResult = "";
 
@@ -332,9 +331,9 @@ if(isset($_SESSION["UserId"])){
 		if($available) {
 			$eventMessage = "Your event ".$pd_detail_indiv['Title']." is up.";
 		} else {
-			$eventMessage = "Your event &nbsp;<a href='http://localhost/pd/pd-product?saveShoppingCart&id=".$pdArr["PDIDs"]."' target='_blank'>".$pd_detail_indiv['Title']."</a>&nbsp;is ".$outPutResult.". Please removed it from your shopping cart.";
+			$eventMessage = "Your event &nbsp;<a href='http://localhost/pd/pd-product?saveShoppingCart&id=".$pdArr["PDIDs"]."' target='_blank'>".$pd_detail_indiv['Title']."</a>&nbsp;is <span class='eventStatus'>".$outPutResult."</span>. Please removed it from your shopping cart.";
 		}
-		//// testing end
+		/* Event status checker end	 */
 		$pass=$localProducts[$n]['UID'];
 		//$arrPID["PID"] = $productt['MeetingID'];
 		$arrPID["PID"] = $productt['ProductID'];
