@@ -2079,7 +2079,7 @@ jQuery(document).ready(function() {
     }
   });
 
-  $('.archive_year .item').on('click', function(e){
+  $('.archive_wrapper .archive_year .item').on('click', function(e){
     e.preventDefault();
     var target = $(this).attr('href').replace('#', '');
     $(this).siblings().removeClass('active');
