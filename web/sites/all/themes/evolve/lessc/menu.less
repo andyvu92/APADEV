@@ -107,11 +107,6 @@
         position: relative;
     }
     .dexp-dropdown{
-        display: none;
-        position: absolute;
-        background: #fff;
-        width: 100vw;
-        z-index: 999;
         &.open{
             display: block;
         }
@@ -232,9 +227,6 @@
 
 /* MOBILE MENU */
 .html{
-    #search-mobile{
-        display: none;
-    }
     @media @larger-tablet-width-down{
         a.site-logo{
             text-align: left;
@@ -243,110 +235,13 @@
         #nav-old-toggle{
             display: none;
         }
-        #search-mobile{
-            display: block;
-            position: fixed;
-            z-index: 99999;
-            width: 100vw;
-            left: 100vw;
-            top: 145px;
-            opacity: 0;
-            transition: all .3s linear;
-            #edit-search-block-form--2-mobile{
-                display: inline-block;
-                width: 100%;
-                background: #f0f0f0;
-                padding: 15px 30px;
-                &::placeholder {
-                    color: #333;
-                    opacity: 1; /* Firefox */
-                }
-                
-                &:-ms-input-placeholder { /* Internet Explorer 10-11 */
-                   color: #333;
-                }
-                
-                &::-ms-input-placeholder { /* Microsoft Edge */
-                   color: #333;
-                }
-            }
-            .form-item{
-                margin: 0;
-            }
-            #edit-submit-mobile{
-                position: absolute;
-                right: 30px;
-                top: 0;
-                border: 0;
-                background: none;
-                top: calc(~'50% - 20.5px');
-                filter: grayscale(100);
-                transform: rotate(90deg);
-                padding: 10px!important;
-            }
-        }
-        .search-toggle{
-            display: none;
-        }
-        #block-dexp-menu-dexp-menu-block-1{
-            z-index: 9999!important;
-            #dexp-dropdown{
-                left: 100vw;
-                position: fixed;
-                top: 145px;
-                height: calc(~'100vh - 145px');
-                display: block;
-                opacity: 0;
-                border-bottom: 10px solid @bright-blue;
-                background: #fff;
-                transition: all .3s linear;
-                overflow-y: auto;
-                ul.menu{
-                    padding: 0px 30px;
-                    li{
-                        border-bottom: 1px solid rgba(0,0,0,0.12);
-                        a{
-                            color: #333;
-                            font-size: 1.2em;
-                            text-transform: uppercase;
-                            padding: 2px 0;
-                            &.active{
-                                border-top: 0;
-                            }
-                        }
-                        &.first{
-                            display: none;
-                            + li{
-                                margin-top: 65px;
-                            }
-                        }
-                        &.last{
-                            border-bottom: 0;
-                        }
-                        &:hover{
-                            a{
-                                border-top: 0;
-                            }
-                        }
-                    }
-                }
-            }
-        }
+        
+
         &.menu-open{
             > .dexp-body-inner{
                 overflow: hidden!important;
                 position: relative;
                 height: 100vh!important;
-            }
-            #block-dexp-menu-dexp-menu-block-1{
-                #dexp-dropdown{
-                    left: 0;
-                    opacity: 1;
-                }
-            }
-            #search-mobile{
-                opacity: 1;
-                left: 0;
             }
         }
         &.admin-menu{
@@ -358,17 +253,6 @@
             }
             #search-mobile{
                 top: 152px;
-            }
-        }
-    }
-    @media @larger-phone-width-down{
-        #search-mobile{
-            top: 124px;
-        }
-        #block-dexp-menu-dexp-menu-block-1{
-            #dexp-dropdown{
-                top: 124px;
-                height: calc(~'100vh - 124px');
             }
         }
     }

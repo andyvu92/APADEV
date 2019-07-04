@@ -191,7 +191,7 @@
                 content: "";
                 position: absolute;
                 width: 15px;
-                height: 2px;
+                height: 1px;
                 transform: rotate(45deg);
                 background: @grey;
             }
@@ -199,7 +199,7 @@
                 content: "";
                 position: absolute;
                 width: 15px;
-                height: 2px;
+                height: 1px;
                 transform: rotate(-45deg);
                 background: @grey;
             }
@@ -1288,7 +1288,7 @@ div[aria-describedby="jobnoticement"].ui-dialog {
         height: 25px!important;
         width: 25px!important;
         padding: 0!important;
-        margin: 5px 10px;
+        margin: 10px;
         .ui-button-icon-primary{
             background-image: none;
             display: flex;
@@ -1299,7 +1299,7 @@ div[aria-describedby="jobnoticement"].ui-dialog {
                 content: "";
                 position: absolute;
                 width: 15px;
-                height: 2px;
+                height: 1px;
                 transform: rotate(45deg);
                 background: @grey;
             }
@@ -1307,7 +1307,7 @@ div[aria-describedby="jobnoticement"].ui-dialog {
                 content: "";
                 position: absolute;
                 width: 15px;
-                height: 2px;
+                height: 1px;
                 transform: rotate(-45deg);
                 background: @grey;
             }
@@ -1952,14 +1952,13 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
         }
     }
     @media all and (max-width: @larger-phone-width){
-        position: absolute!important;
+        position: fixed!important;
         .create-account{
             font-size: 1.1em;
         }
     }
     @media all and (max-width: @phone-width) {
         width: 300px !important;
-        top: 10vh!important;
         left: calc(~"50% - 150px")!important;
         .modal-body{
             #loginAT .modal-body;

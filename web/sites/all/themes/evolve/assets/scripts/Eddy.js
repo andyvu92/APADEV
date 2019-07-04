@@ -80,10 +80,6 @@ jQuery(document).ready(function($) {
 		
 	}
 	
-	$(".ShoppingCartBorder").click(function() {
-		window.location = "/pd/pd-shopping-cart";		
-	});
-	
 	/* Menu control */
 	if(window.location.pathname.indexOf("/home/homeMain") == 0 || window.location.pathname.indexOf("aboutus/partners") == 0 || window.location.pathname.indexOf("advocacy/submission") == 0) {
 		window.location.replace("/");

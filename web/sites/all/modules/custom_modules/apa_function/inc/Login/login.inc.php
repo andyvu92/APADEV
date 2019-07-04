@@ -916,88 +916,6 @@ if(isset($_SESSION['UserId'])) {
 </div>
 <?php unset($_SESSION["logoutmessage"]); ?>
 <?php endif;?>
-<?php if(isset($_SESSION["Log-in"])): ?>
-<div class="pull-right borderLeftForTop borderLeftForTopRight" title="Other websites">
-<div class="ButtonIconHolder OthersiteButton">
-<div class="OtherSites">APA sites</div>
-</div>
-</div>
-<?php if($counts == 0): ?>
-<div class="pull-right borderLeftForTop ShoppingCartBorder" title="Shopping cart">
-	<div class="ButtonIconHolder">
-		<div class="ShoppingCartEmpty">0</div>
-	</div>
-</div>
-<?php else: ?>
-<div class="pull-right borderLeftForTop ShoppingCartBorder" title="Shopping cart">
-	<div class="ButtonIconHolder">
-		<div class="ShoppingCart"><?php echo $counts; ?></div>
-	</div>
-</div>
-<?php endif; ?>
-<div class="pull-right borderLeftForTop DashboardPadding">
-	<div id="DashboardButton" class="ButtonIconHolder withButtonIcon DashboardwithButtonIcon" title="Dashboard">
-		<i class="Dashboard">&nbsp;</i>
-	</div>
-</div>
-<div class="pull-right borderLeftForTop LogOutPadding">
-	<form method="POST" action="/" name="forlogout">
-		<div><input id="logoutAcButton"type="hidden" name="logout" value="out" style="display: none;" /></div>
-		<div id="logoutButton" class="ButtonIconHolder withButtonIcon OutwithButtonIcon" title="Log out">
-			<input type="submit" value="Log out" />
-		</div>
-		<?php
-			$name = $_SESSION["FirstName"];
-			if(isset($_SESSION['Preferred-name']) && $_SESSION['Preferred-name'] != "") {
-				if(isset($_POST['Preferred-name']) && $_POST['Preferred-name'] != "") {
-					$name = $_POST['Preferred-name'];
-				} elseif(isset($_POST['Firstname']) && $_POST['Firstname'] != "") {
-					$name = $_POST['Firstname'];
-				} else {
-					$name = $_SESSION['Preferred-name'];
-				}
-			} elseif(isset($_POST['Preferred-name']) && $_POST['Preferred-name'] != "") {
-				$name = $_POST['Preferred-name'];
-			} elseif(isset($_POST['Firstname']) && $_POST['Firstname'] != "") {
-				$name = $_POST['Firstname'];
-			} 
-			
-		?>
-		<div class="nameHello">Hi <?php echo $name; ?></div>
-		<?php
-		/*
-		if(isset($_SESSION["tasjdfksdkfsd"])) {
-			echo "aaaaaaaaaaaaa";
-			var_dump($_SESSION["tasjdfksdkfsd"]);
-		} else {
-			echo "dddddddddddd";
-		}
-		*/
-		?>
-	</form>
-</div>
-
-<?php // bobber top showing name ?>
-
-<!--div style="float: right;">
-<form method="POST" action="<?php echo $url; ?>" name="getData">
-	<input type="hidden" name="Getdata" value="out" style="display: none;" />
-	<input type="submit" value="Get Data" />
-</form>
-</div-->
-<?php else: ?>
-<div class="pull-right borderLeftForTop borderLeftForTopRight" title="Other websites">
-<div class="ButtonIconHolder OthersiteButton OthersiteButtonNoLogIn">
-<div class="OtherSites">APA sites</div>
-</div>
-</div>
-<div class="pull-right borderLeftForTop LogInPadding">
-	<button class="info" data-target="#loginAT" data-toggle="modal" type="button">
-	<div class="ButtonIconHolder withButtonIcon InwithButtonIcon" title="Log in">
-		<i class="Log-in">&nbsp;</i>Log in
-	</div></button>
-</div>
-<?php endif; ?>
 
 <!-- other Sites -->
 <div class="OtherSitesList">
@@ -1249,3 +1167,98 @@ $(document).ready(function(){
 	});
 });		
 </script>
+
+<div class="top_nav_socials">
+	<ul>
+		<li>
+			<a class="facebook_icon" href="https://www.facebook.com/AustralianPhysiotherapyAssociation" target="_blank" rel="nofollow"></a>
+		</li>
+		<li>
+			<a class="twitter_icon" href="https://twitter.com/apaphysio" target="_blank" rel="nofollow"></a>
+		</li>
+		<li>
+			<a class="linkedin_icon" href="https://www.linkedin.com/company/747310" target="_blank" rel="nofollow">
+				<span class=""></a>
+			</a>
+		</li>
+		<li>
+			<a class="instagram_icon" href="https://instagram.com/physioaustralia" target="_blank" rel="nofollow"></a>
+		</li>
+		<li>
+			<a class="youtube_icon" href="https://www.youtube.com/user/apatube1" target="_blank" rel="nofollow"></a>
+		</li>
+	</ul>
+</div>
+
+<!-- LOGIN/LOGOUT -->
+<?php if(isset($_SESSION["Log-in"])): ?>
+	<!-- DISPLAY NAME -->
+	<div class="user_logged_in">
+		<div class="user_name LogOutPadding">
+			<?php
+				$name = $_SESSION["FirstName"];
+				if(isset($_SESSION['Preferred-name']) && $_SESSION['Preferred-name'] != "") {
+					if(isset($_POST['Preferred-name']) && $_POST['Preferred-name'] != "") {
+						$name = $_POST['Preferred-name'];
+					} elseif(isset($_POST['Firstname']) && $_POST['Firstname'] != "") {
+						$name = $_POST['Firstname'];
+					} else {
+						$name = $_SESSION['Preferred-name'];
+					}
+				} elseif(isset($_POST['Preferred-name']) && $_POST['Preferred-name'] != "") {
+					$name = $_POST['Preferred-name'];
+				} elseif(isset($_POST['Firstname']) && $_POST['Firstname'] != "") {
+					$name = $_POST['Firstname'];
+				} 
+			?>
+
+			<div class="nameHello"><span class="icon user_icon"></span>Hi <?php echo $name; ?></div>
+		</div>
+
+		<?php if($counts == 0): ?>
+			<div class="cart_wrapper" title="Shopping cart">
+				<div class="ButtonIconHolder">
+					<div class="ShoppingCartEmpty">0</div>
+				</div>
+			</div>
+
+		<?php else: ?>
+			<div class="cart_wrapper" title="Shopping cart">
+				<div class="ButtonIconHolder">
+					<div class="ShoppingCart"><?php echo $counts; ?></div>
+				</div>
+			</div>
+		<?php endif; ?>
+
+		<div class="user_menu">
+			<ul>
+				<li><a href="/dashboard">Dashboard</a></li>
+				<li><a href="/your-details">Account</a></li>
+				<li><a href="/your-purchases">Purchases</a></li>
+				<li><a href="/subscriptions">Subscriptions</a></li>
+				<li><a href="/renewmymembership">Join/Renew</a></li>
+			</ul>
+
+			<form method="POST" action="/" name="forlogout">
+				<input id="logoutAcButton"type="hidden" name="logout" value="out" style="display: none;" />
+				<div id="logoutButton" title="Log out">
+					<span class="icon logout_icon"></span><input type="submit" value="Log out" />
+				</div>
+			</form>
+
+		</div>
+	</div>
+
+<?php else: ?>
+	<div class="LogInPadding">
+		<button class="info" data-target="#loginAT" data-toggle="modal" type="button">
+			<span class="icon user_icon"></span>Login
+		</button>
+	</div>
+<?php endif; ?>
+<!-- END LOGIN/LOGOUT -->
+
+<div class="other_sites OthersiteButton" title="Other websites">
+	<span class="laptop_icon"></span>
+	APA websites
+</div>

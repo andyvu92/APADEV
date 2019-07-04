@@ -236,6 +236,7 @@
          <span class="brd-headling"></span>
          <div class="content">
             <ul class="inmotion_archive">
+                <li><a href="/inmotion/archive#2019">2019</a></li>
                 <li><a href="/inmotion/archive#2018">2018</a></li>
                 <li><a href="/inmotion/archive#2017">2017</a></li>
                 <li><a href="/inmotion/archive#2016">2016</a></li>  
