@@ -114,8 +114,6 @@
     }
     .agree-btn{
         padding: 8px 30px;
-        border: 1px solid #adadad;
-        border-radius: 5px;
         color: #fff;
         font-weight: 600;
         font-family: Cairo;
@@ -131,7 +129,6 @@
     .disagree-btn{
         padding: 8px 30px;
         border: 1px solid #adadad;
-        border-radius: 5px;
         color: #333;
         font-weight: 600;
         font-family: Cairo;
@@ -243,7 +240,7 @@
             content: "";
             position: absolute;
             width: 15px;
-            height: 2px;
+            height: 1px;
             transform: rotate(45deg);
             background: @grey;
         }
@@ -384,6 +381,16 @@ div[aria-describedby="myMap"] .ui-widget-header{
     .large-popup;
     .modal-dialog{
         margin-top: 0!important;
+    }
+    .modal-header{
+        background: #009fda;
+        color: #fff;
+        .modal-title{
+            color: #fff;
+        }
+    }
+    .modal-body{
+        padding-top: 25px;
     }
     .modal-content{
         .modal-body{
@@ -696,6 +703,20 @@ div[aria-describedby="QuatationPopUp"].ui-dialog{
     .large-popup;
     @media @larger-phone-width-down{
         top: 6vh!important;
+    }
+    
+    .modal-header{
+        background: @bright-blue;
+        color: #fff;
+        @media @tablet-width-down{
+            padding-right: 70px;
+        }
+        .modal-title{
+            color: #fff;
+        }
+    }
+    .modal-body{
+        padding-top: 25px;
     }
     .modal-footer {
         display: flex;
@@ -1740,6 +1761,11 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
     }
 }
 
+/* customise modal */
+body .modal-header{
+    display: flex;
+}
+
 /* NON-APA HOURS - CPD DIARY */
 #nonAPAhour.modal{
     .modal-dialog{
@@ -1806,12 +1832,13 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
         }
         .btn-wrapper{
             display: flex;
-            justify-content: space-evenly;
+            justify-content: center;
             margin: 40px 0 10px;
             .accent-btn{
-                margin: 0;
+                margin: 0 5px;
                 padding: 10px 20px;
                 font-weight: 500;
+                width: calc(~'50% - 20px');
                 &.session_logout{
                     background: @grey;
                 }
@@ -2030,7 +2057,7 @@ div[aria-describedby="deleteConfirmwindow"].ui-dialog {
             content: "";
             position: absolute;
             width: 15px;
-            height: 2px;
+            height: 1px;
             transform: rotate(45deg);
             background: white;
             @media @large-ipadpro-down{

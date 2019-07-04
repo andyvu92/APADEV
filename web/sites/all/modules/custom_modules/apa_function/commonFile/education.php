@@ -10,7 +10,7 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 	<div class="col-xs-12 space-line"><div class="col-xs-12 separater"></div></div>
 
 	<div class="row">
-		<div class="col-xs-12 col-sm-6"> <label for="degree'.$i.'">Degree level<span class="tipstyle">*</span></label>
+		<div class="col-xs-12 col-sm-12"> <label for="degree'.$i.'">Degree level<span class="tipstyle">*</span></label>
 		<div class="chevron-select-box">	
 		<select class="form-control" name="Udegree'.$i.'" id="Udegree'.$i.'">';
 				echo '<option value="" selected disabled>Please select</option>';
@@ -26,7 +26,7 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 	</div>
 
 	<div class="row">
-		<div class="col-xs-12 col-sm-6">
+		<div class="col-xs-12 col-sm-12">
 			<label for="Undergraduate-university-name'.$i.'">University name<span class="tipstyle">*</span></label>
 			<div class="chevron-select-box">
 			<select class="form-control" name="Undergraduate-university-name'.$i.'" id="Undergraduate-university-name'.$i.'">';
@@ -76,7 +76,11 @@ echo '<input type="hidden" name="ID'.$i.'" value="-1">
 		</div>
 	</div>
 </div>
-<a class="callDeleteEdu" id="deleteEducation'.$i.'"><span class="dashboard-button-name">Delete</span></a>
 
+<div class="col-xs-12">
+	<a class="callDeleteEdu" id="deleteEducation'.$i.'">
+		Delete
+	</a>
+</div>
 ';
 ?>

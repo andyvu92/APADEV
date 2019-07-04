@@ -1180,7 +1180,7 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
           cursor: pointer;
           line-height: 20px;
           display: inline-block;
-          color: #666;
+          color: #000000;
       }
       .styled-radio-select:checked + label:before,
       .styled-radio-select:not(:checked) + label:before {
@@ -1246,6 +1246,9 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
         background-repeat: no-repeat;
         background-position: center;
         transform: rotate(90deg);
+        @media @larger-phone-width-down{
+            width: 7px;
+        }
     }
     &.chevron-adjust{
         &::after{
@@ -1396,11 +1399,14 @@ input{
     background: none;
     flex-direction: column;
     display: flex;
-    .edu-step-note{
+    .edu-step-note, .edu-step-note-generic{
         color: #fff;
         font-size: 1.5em;
         margin-top: 15px;
         text-align: center;
+    }
+    .edu-step-note-generic{
+        display: none;
     }
     .loader {
         display: inline-block;
@@ -1480,10 +1486,13 @@ input{
 .selectize-control.multi{
     .selectize-input{
         background: none;
-        padding: 12px 12px;
+        padding: 5px 12px;
         min-height: 48px;
         transition: 0.1s linear;
+        border: 1px solid rgba(0,0,0,0.12);
         cursor: default;
+        display: flex;
+        flex-wrap: wrap;
         &:before{
             display: none;
         }
@@ -1508,15 +1517,15 @@ input{
         }
         .item{
             position: relative;
-            margin: 3px 5px 3px 0;
-            border: 1px solid #aaa;
+            margin: 0px 5px 0px 0;
+            border: none;
             border-radius: 3px;
-            background-color: #eeeeee;
-            background-image: linear-gradient(#f4f4f4 20%,#f0f0f0 50%,#e8e8e8 52%,#eee 100%);
+            background-color: unset;
+            background: none;
             background-size: 100% 19px;
             background-repeat: repeat-x;
             background-clip: padding-box;
-            box-shadow: 0 0 2px #fff inset, 0 1px 0 rgba(0,0,0,0.05);
+            box-shadow: none;
             color: #333;
             line-height: 13px;
             cursor: default;
@@ -5191,6 +5200,10 @@ body{
                 width: 100%;
             }
         }
+        /* table section */
+        &.table_section{
+            border-left: 2px solid #009fda;
+        }
         /* table header */
         &.table_header{
             background: #fafafa;
@@ -6064,9 +6077,6 @@ body .block #app_grid{
                 /* app content */
                 .app_content{
                     .app_heading{
-                        &.logo_alt{
-
-                        }
                         .app_logo{
                             display: none;
                         }
@@ -6476,4 +6486,16 @@ body .social_media_contact{
     ._df_book-cover{
         display: none!important;
     }
+}
+
+.mobile_visible{
+    display: none!important;
+    @media @phone-width-down{
+        display: inherit!important;
+    }
+}
+
+/* remove unuse fonts */
+body a b, body span b{
+    font-family: Roboto;
 }

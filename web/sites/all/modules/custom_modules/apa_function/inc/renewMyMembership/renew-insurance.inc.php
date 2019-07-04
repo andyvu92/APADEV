@@ -159,7 +159,15 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			</div>
 		</div>
 
-		<div class="col-xs-12" style="margin-top: 20px;"><a id="insuranceControl" class="accent-right-btn"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton5"><span class="dashboard-button-name">Back</span></a></div>
+		<div class="col-xs-12 btn_wrapper" style="margin-top: 20px;">
+			<a id="insuranceControl" class="accent-right-btn" variant="next">
+				<span class="dashboard-button-name">Next</span>
+			</a>
+			<a class="your-details-prevbutton5" variant="prev">
+				<span class="icon arrow_left"></span>
+				Back to previous
+			</a>
+		</div>
 	</div>
 </form>
 <div id="insurancePopUp" style="display:none;">
@@ -178,6 +186,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 
 			<div class="modal-body">
 				<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>
+				<br />
 				<strong>This guide includes important information about:</strong>
 				<ul>
 					<li>the financial services we offer</li>

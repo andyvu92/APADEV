@@ -12,12 +12,12 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
  {echo '   
 	<div class="col-xs-12 FapTagC">
 		<input class="styled-checkbox" type="checkbox" name="Findphysio'.$i.'" id="Findphysio'.$i.'" value="" >
-		<label class="light-font-weight" for="Findphysio'.$i.'"><span class="note-text">NOTE:&nbsp;</span><span>I want to be listed at this workplace within Find a Physio on the <b>consumer choose.physio site</b></span></label>
+		<label class="light-font-weight" for="Findphysio'.$i.'">I want to be listed at this workplace within Find a Physio on the consumer <span class="note-text">choose.physio</span> site</label>
 	</div>
 
 	<div class="col-xs-12 FapTagA">
 		<input class="styled-checkbox" type="checkbox" name="Findabuddy'.$i.'" id="Findabuddy'.$i.'" value="" >
-		<label class="light-font-weight" for="Findabuddy'.$i.'"><span class="note-text">NOTE:&nbsp;</span><span>I want to be listed at this workplace within Find a Physio on the <b>corporate australian.physio site</b></span></label>
+		<label class="light-font-weight" for="Findabuddy'.$i.'">I want to be listed at this workplace within Find a Physio on the corporate <span class="note-text">australian.physio</span> site</label>
  </div>';}
 	echo'
 <div class="row">
@@ -131,7 +131,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
         <input type="text" class="form-control" name="WPhoneAreaCode'.$i.'" maxlength="5" placeholder="Area code">
 </div>
 
-<div class="col-xs-6 col-md-3">
+<div class="col-xs-6 col-md-6">
         <label for="">Phone number<span class="tipstyle"> *</span></label>
         <input type="number" class="form-control" name="Wphone'.$i.'" placeholder="Phone number">
 </div>
@@ -165,7 +165,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 
 	<div class="col-xs-12 col-sm-6 col-md-6">
 		<input class="styled-checkbox" type="checkbox" name="Departmentva'.$i.'" id="Departmentva'.$i.'" value="False">
-		<label class="light-font-weight" for="Departmentva'.$i.'">Department of Vetarans Affairs</label>
+		<label class="light-font-weight" for="Departmentva'.$i.'">Department of Veterans&apos; Affairs</label>
 	</div>
 
 	<div class="col-xs-12 col-sm-6 col-md-6">

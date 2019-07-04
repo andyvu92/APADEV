@@ -432,7 +432,7 @@ if(isset($_POST['step2-1'])) {
 		</div>-->
 		
 		<input type="hidden" name="addCard" value="1">
-		<div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</div>
+		<div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off verification charge of your account. This amount will be refunded immediately upon payment confirmation.</div>
 	</div>				 
 	<?php endif; ?>  
 		<div class="row">
@@ -446,7 +446,15 @@ if(isset($_POST['step2-1'])) {
 			</div>-->
 			<!--<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 display-none" id="rolloverblock"><label for="Rollover">Roll over</label><input type="checkbox" name="Rollover" id="Rollover"></div>-->
 		</div>   
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  <a href="javascript:document.getElementById('renew-insurance-form').submit();" class="join-details-button7 <?php if(isset($_POST["insuranceStatus"])&& $_POST["insuranceStatus"]=="1") { echo "stop"; }?>"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn_wrapper">  
+			<a variant="next" href="javascript:document.getElementById('renew-insurance-form').submit();" class="join-details-button7 <?php if(isset($_POST["insuranceStatus"])&& $_POST["insuranceStatus"]=="1") { echo "stop"; }?>">
+				<span class="dashboard-button-name">Next</span>
+			</a>
+			<a variant="prev" class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>">
+				<span class="icon arrow_left"></span>
+				Back to previous
+			</a>
+		</div>
 	</div>
 </form>
 <form id="tempform" action="" method="POST"><input type="hidden" name="goI"></form>	

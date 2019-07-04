@@ -207,26 +207,23 @@ $price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
 	
 }	*/
 if(isset($_SESSION["UserId"])){
-    
 	$userid = $_SESSION["UserId"];
 	$test['id'] = $_SESSION["UserId"];
 	$cardsnum = aptify_get_GetAptifyData("12", $test);
-	
-	   
-	
 } 
 ?>
 <?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0) || (sizeof($FPListArray)!=0)):?>
 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 left-content">
 	<?php if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0) || (sizeof($FPListArray)!=0)):?>
 	
-	<h1 class="SectionHeader">Summary of cart</h1>
-	<div class="brd-headling">&nbsp;</div>
-	<div style="padding-bottom: 15px;">Time left to purchase: <span id="timer" style="color: #00b8f1; font-weight: 700;">15</span></div>
+	<div class="heading_wrapper">
+		<span class="dashboard-name cairo" style="color: #333">Summary of cart</span>
+		<div class="countdown_wrapper">Time left to purchase: <input type="text" value="05:00" id="timer" disabled></div>
+	</div>
 	
 	<div class="flex-container" id="pd-shopping-cart">
 	<div class="flex-cell flex-flow-row heading-row">
-		<div class="flex-col-3"><span class="table-heading">Product name</span></div>
+		<div class="flex-col-5 name_col"><span class="table-heading">Product name</span></div>
 		<div class="flex-col-3"><span class="table-heading">Date</span></div>
 		<div class="flex-col-2 pd-spcart-location"><span class="table-heading">Location</span></div>
 		<div class="flex-col-1 pd-spcart-price"><span class="table-heading">Price</span></div>
@@ -240,37 +237,32 @@ if(isset($_SESSION["UserId"])){
 			var timer = document.getElementById("timer");
 			if(count > 0){
 				count--;
-				if(count > 120) {
+				if(count > 60) {
 					var min = parseInt(count/60);
 					var sec = count%60;
-					if(sec > 1) {
-						timer.innerHTML = min + " mins " + sec + " seconds";
-					} else if(sec == 0) {
-						timer.innerHTML = min + " mins";
-					} else {
-						timer.innerHTML = min + " mins " + sec + " second";
+					if( sec < 10 ){
+						sec = "0" + sec;
 					}
-				}else if(count > 60) {
-					var min = parseInt(count/60);
+					//timer.innerHTML = "0" + min + ":" + sec;
+					timer.value = "0" + min + ":" + sec;
+				} else if (count === 60) {
 					var sec = count%60;
-					if(sec > 1) {
-						timer.innerHTML = min + " min " + sec + " seconds";
-					} else if(sec == 0) {
-						timer.innerHTML = min + " mins";
-					} else {
-						timer.innerHTML = min + " min " + sec + " second";
+					if( sec < 10 ){
+						sec = "0" + sec;
 					}
-				} else {
+					//timer.innerHTML = "0" + min + ":" + sec;
+					timer.value = "01:" + sec;
+				}else {
 					var sec = count%60;
-					if(sec > 1) {
-						timer.innerHTML = sec + " seconds";
-					} else {
-						timer.innerHTML = sec + " second";
+					if( sec < 10 ){
+						sec = "0" + sec;
 					}
+					//timer.innerHTML = "00:" + sec;
+					timer.value = "00:" + sec;
 				}
 				setTimeout("countDown()", 1000);
 			}else{
-				window.location.href = "/pd/pd-shopping-cart";
+				//location.reload(true);
 			}
 		}
 		countDown();
@@ -336,16 +328,19 @@ if(isset($_SESSION["UserId"])){
 		if($available) {
 			$eventMessage = "Your event ".$pd_detail_indiv['Title']." is up.";
 		} else {
-			$eventMessage = "Your event &nbsp;<a href='http://localhost/pd/pd-product?saveShoppingCart&id=".$pdArr["PDIDs"]."' target='_blank'>".$pd_detail_indiv['Title']."</a>&nbsp;is <span class='eventStatus'>&nbsp;".$outPutResult."</span>. Please removed it from your shopping cart.";
+			$eventMessage = "<a href='/pd/pd-product?saveShoppingCart&id=".$pdArr["PDIDs"]."' target='_blank'>This event</a> is now ".$outPutResult.". Please remove from your cart.";
 		}
 		/* Event status checker end	 */
 		$pass=$localProducts[$n]['UID'];
 		//$arrPID["PID"] = $productt['MeetingID'];
 		$arrPID["PID"] = $productt['ProductID'];
 		array_push($ListProductID ,$arrPID);
-			echo "<div class='flex-cell flex-flow-row'>";
-			if(!$available) echo	"<div class='removedEvent'>".$eventMessage."</div>";
-			echo	"<div class='flex-col-3'><span class='mobile-visible'>Product name: </span>".$productt['Title']."</div>";
+			if( $available ){
+				echo "<div class='flex-cell flex-flow-row event_available'>";
+			} else{
+				echo "<div class='flex-cell flex-flow-row event_unavailable'>";
+			}
+			echo	"<div class='flex-col-5 name_col'><span class='mobile-visible'>Product name: </span>".$productt['Title']."</div>";
 			$bdate = explode(" ",$productt['Sdate']);
 			$edate = explode(" ",$productt['Edate']);
 			$newt = str_replace('/', '-', $bdate[0]);//$bdate[0];//
@@ -372,6 +367,7 @@ if(isset($_SESSION["UserId"])){
 				//echo	"<td>NM price</td>";
 			//}
 			echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
+			if(!$available) echo	"<div class='removedEvent flex-col-12'>".$eventMessage."</div>";
 			echo "</div>";    
 			$n=$n+1;
 			$i=$i+1;
@@ -451,7 +447,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		</div>
 	</div>
 	<?php if($tag==1 || $dietarT==1): ?>
-	<div class="flex-container flex-flow-column">
+	<div class="flex-container flex-flow-column" id="diet_req">
 		<div class="flex-cell">
 			<span class="small-lead-heading">Your dietary requirements</span>
 		</div>
@@ -471,7 +467,13 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	</div>
 	<?php endif; ?>
 	<?php endif; ?>	
-		
+	
+	<?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0 && sizeof($FPListArray)==0) : ?>   <div  class="col-xs-12 no-item-title" style="text-align: center"><h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3></div>      <?php endif;?>
+	<div class="col-xs-12 bottom-buttons">
+		<a class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
+		<a class="addCartlink" href="../your-details?Goback=PD"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
+	</div>
+
 </div>
 
 
@@ -639,6 +641,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		</div>
 	</form>	-->
 	<div id="addPaymentCardForm">
+	<span class="sidebardis sidebar_heading">Payment information</span>
 	<?php $the_form = drupal_get_form('pd_shoppingcart_form');
              print drupal_render($the_form);?>
     </div>
@@ -657,7 +660,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 				</div>
 			<div class="col-xs-12">
 				<input class="styled-checkbox" type="checkbox" id="prftag" name="prftag">
-				<label for="prftag" id="prftagAgree">No, I do not want to make a donation to the PRF</label>
+				<label for="prftag" id="prftagAgree">No, I do not want to make a donation to the Physiotherapy Research Foundation</label>
 			</div>
 			<div class="col-xs-12 col-md-12" id="prfselect">
 				<div class="chevron-select-box">
@@ -678,10 +681,14 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		<form id="discount" action="pd-shopping-cart" method="POST">
 			<input type="text" name="Couponcode" placeholder="Enter discount code" value="">
 			<button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button>
-		</form></p><br>
+		</form></p>
 	<?php endif; ?>
      
-	<div class="row ordersummary"><div class="col-xs-12"><span class="blue-sidebardis">YOUR ORDER</span></div></div>
+	<div class="row ordersummary">
+		<div class="col-xs-12">
+			<span class="sidebardis sidebar_heading">Your order</span>
+		</div>
+	</div>
 		<div class="flex-container flex-flow-column pd-spcart-order">
 			<div class="flex-cell">
                 <div class="flex-col-6"><?php echo $i;?> items</div>
@@ -703,9 +710,9 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
             </div>
             
 			<div class="flex-cell">
-                <div class="flex-col-6">Total (Inc.GST)</div>
+                <div class="flex-col-6"><b>Total</b> (Inc.GST)</div>
 				<input type="hidden" id="totalhidden" value="<?php echo $scheduleDetails['OrderTotal'];?>"/>
-                <div class="flex-col-6">$<span id="Amount"></span></div>
+                <div class="flex-col-6"><b>$<span id="Amount"></span></b></div>
 			</div>
 		</div>
 		         
@@ -748,7 +755,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			}
 			?>
 			<?php if(!$Availability): ?>
-				<span>Please remove items that are not available to continue with your purchase</span>
+				<span class="expired_item_note">Please remove items that are not available to continue with your purchase</span>
 			<?php else: ?>
 				<a href="javascript:document.getElementById('pd-shoppingcart-form').submit();" class="placeorder" value="Place your order" id="PDPlaceOrder"><span class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</span></a>
 			<?php endif; ?>
@@ -756,12 +763,6 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	</div>
 
 <?php endif; ?>
-
-<?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0 && sizeof($FPListArray)==0) : ?>   <div  class="col-xs-12 no-item-title" style="text-align: center"><h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3></div>      <?php endif;?>
-<div class="col-xs-12 bottom-buttons">
- 	<a class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
- 	<a class="addCartlink" href="../your-details?Goback=PD"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
-</div>
 
 <?php 
 		$block = block_load('block', '309');

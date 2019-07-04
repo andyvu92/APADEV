@@ -271,7 +271,7 @@ if(sizeof($fpProdcutArray)!=0){
 		<?php endif;?>		
 <?php endif;?>
 <div class="down6" <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")|| isset($_POST['QOrder']) || isset($_POST['goP'])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
-
+asd
 	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 review-main-container">
 	<div class="flex-container join-apa-final flex-table">
 				<div class="flex-cell flex-flow-row table-header">
@@ -437,9 +437,13 @@ if(sizeof($fpProdcutArray)!=0){
 
 			<div class="flex-container flex-flow-column payment-details">
 
-				<div class="flex-cell ordersummary">
-					<span>YOUR ORDER</span>
-				</div>
+				<div class="flex-cell payment_heading">
+                    <h3>Payment information:</h3>
+                </div>
+
+                <div class="flex-cell payment_sub_heading">
+                    <span>YOUR ORDER</span>
+                </div>
 
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-12">
@@ -484,7 +488,7 @@ if(sizeof($fpProdcutArray)!=0){
 				</div>
 				<div class="flex-cell flex-flow-row" id="PRFdetail">
 						<div class="flex-col-6">
-						<strong>PRF donation</strong>
+							PRF donation
 						</div>
 						<div class="flex-col-6">
 						$<span id="PRFshow"><?php echo number_format(5,2);?></span>
@@ -493,12 +497,12 @@ if(sizeof($fpProdcutArray)!=0){
 			
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-6">
-					<strong>Today's total (inc. GST)</strong>
+						<strong>Today's total (inc. GST)</strong>
 					</div>
 					<div class="flex-col-6">
-					<input type="hidden" id="fullHiddenAmount" value="<?php echo number_format($fullDetails['InitialPaymentAmount'],2);?>">
-                    <input type="hidden" id="scheduleHiddenAmount" value="<?php echo number_format($scheduleDetails['InitialPaymentAmount'],2);?>">
-					$<span class="full" id="todayFullAmount"></span><span class="schedule" id="todayScheduleAmount"></span>
+						<input type="hidden" id="fullHiddenAmount" value="<?php echo number_format($fullDetails['InitialPaymentAmount'],2);?>">
+						<input type="hidden" id="scheduleHiddenAmount" value="<?php echo number_format($scheduleDetails['InitialPaymentAmount'],2);?>">
+						<strong>$<span class="full" id="todayFullAmount"></span><span class="schedule" id="todayScheduleAmount"></span></strong>
 					</div>
 				</div>
 			
@@ -559,8 +563,12 @@ if(sizeof($fpProdcutArray)!=0){
 			</div>
 			
 			<!--<input type="hidden" name="Paymentcard" id="Paymentcardvalue" value="">-->
-			<div class="flex-col-12" style="text-align: center">
-				<a class="addCartlink" href="javascript:document.getElementById('renew-insurance-form').submit();"><span style="margin-top: 30px;" class="placeorder">Place your order</span></a>
+			<div class="flex-col-12 btn_wrapper">
+				<a class="addCartlink" href="javascript:document.getElementById('renew-insurance-form').submit();">
+					<span class="placeorder">
+						Place your order
+					</span>
+				</a>
 			</div>
 	</div>
 </div>
@@ -761,7 +769,12 @@ if(sizeof($fpProdcutArray)!=0){
 				<label for="jprivacy-policy" id="privacypolicyl" popup-target="privacypolicyWindow"><span class="tipstyle">*&nbsp;</span>I agree to the APA Terms and Conditions</label>
 			</div>
 	    </div>   
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding"><a class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding btn_wrapper">
+			<a variant="prev" class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>">
+				<span class="icon arrow_left"></span>
+				Back to previous
+			</a>
+		</div>
 	</div>
 </form>
 <!--end merged steps-->
@@ -822,45 +835,33 @@ div#schedulePOPUp {
     color: black;
 }
 </style>
-<!--  this part will be merged with Andy's Dashboard less file-->	
-<div style="padding-bottom: 15px;">Time left to purchase: <span id="timer" style="color: #00b8f1; font-weight: 700;">15</span></div>
+<!--  this part will be merged with Andy's Dashboard less file-->
+
 <script>
 	var count = 300;
 	function countDown(){
 		var timer = document.getElementById("timer");
 		if(count > 0){
 			count--;
-			if(count > 120) {
+			if(count > 60) {
 				var min = parseInt(count/60);
 				var sec = count%60;
-				if(sec > 1) {
-					timer.innerHTML = min + " mins " + sec + " seconds";
-				} else if(sec == 0) {
-					timer.innerHTML = min + " mins";
-				} else {
-					timer.innerHTML = min + " mins " + sec + " second";
+				if( sec < 10 ){
+					sec = "0" + sec;
 				}
-			}else if(count > 60) {
-				var min = parseInt(count/60);
-				var sec = count%60;
-				if(sec > 1) {
-					timer.innerHTML = min + " min " + sec + " seconds";
-				} else if(sec == 0) {
-					timer.innerHTML = min + " mins";
-				} else {
-					timer.innerHTML = min + " min " + sec + " second";
-				}
+				//timer.innerHTML = "0" + min + ":" + sec;
+				timer.value = "0" + min + ":" + sec;
 			} else {
 				var sec = count%60;
-				if(sec > 1) {
-					timer.innerHTML = sec + " seconds";
-				} else {
-					timer.innerHTML = sec + " second";
+				if( sec < 10 ){
+					sec = "0" + sec;
 				}
+				//timer.innerHTML = "00:" + sec;
+				timer.value = "00:" + sec;
 			}
 			setTimeout("countDown()", 1000);
 		}else{
-			window.location.href = "/renewmymembership";
+			//location.reload(true);
 		}
 	}
 	countDown();

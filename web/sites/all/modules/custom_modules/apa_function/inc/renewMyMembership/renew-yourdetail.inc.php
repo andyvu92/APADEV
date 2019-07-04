@@ -634,7 +634,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<label for="">Area code</label>
 						<input type="text" class="form-control" name="Mobile-areacode" <?php /*if (empty($details['Mobile-area-code'])) {echo "placeholder='Mobile Area code'";}   else{ echo 'value="'.$details['Mobile-area-code'].'"'; }*/?>  maxlength="5">
 					</div>-->
-					<div class="col-xs-12 col-md-6">
+					<div class="col-xs-6 col-md-6">
 						<label for="">Mobile number<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>>
 					</div>
@@ -832,7 +832,11 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 			 </div>
 									   
 		  </div>-->
-		    <div class="col-xs-12">   <a class="join-details-button1"><span class="dashboard-button-name">Next</span></a></div>
+		    <div class="col-xs-12 btn_wrapper">   
+				<a class="join-details-button1" variant="next">
+					<span class="dashboard-button-name">Next</span>
+				</a>
+			</div>
 		</div>
 		<div class="down2" <?php if(isset($_POST["MType"]))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
 			<div class="row">
@@ -972,7 +976,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					if(!empty($details['PSpecialInterestAreaID'])) {$PSpecialInterestAreaID = explode(",",$details['PSpecialInterestAreaID']); } else {$PSpecialInterestAreaID =array();}
 				?>
 				<div class="col-xs-12">
-					<label>Choose as many interest areas as you like from the list below:</label>
+					<label>Choose one or more interest areas below:</label>
 					<div class="plus-select-box">
 					<select id="interest-area" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
 					  <?php 
@@ -1035,7 +1039,15 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				</div>
 			</div>-->
 
-			<div class="col-xs-12">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Back</span></a></div>
+			<div class="col-xs-12 btn_wrapper">   
+				<a class="join-details-button2" variant="next">
+					<span class="dashboard-button-name">Next</span>
+				</a>
+				<a class="your-details-prevbutton2" variant="prev">
+					<span class="icon arrow_left"></span>
+					Back to previous
+				</a>
+			</div>
 		</div>
        
         <input type="hidden" id="wpnumber" name="wpnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =0; echo $wpnumber;} ?>"/>
@@ -1062,12 +1074,12 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 				<div class="col-xs-12 FapTagC">
 					<input class="styled-checkbox" type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" <?php if($details['Workplaces'][$key]['Findphysio']=="True"){echo "checked";} ?>>
-					<label class="light-font-weight" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span><span>I want to be listed at this workplace within Find a Physio on the <b>consumer choose.physio site</b></span></label>
+					<label class="light-font-weight" for="Findphysio<?php echo $key;?>">I want to be listed at this workplace within Find a Physio on the consumer <span class="note-text">choose.physio</span> site</label>
 				</div>
 
 				<div class="col-xs-12 FapTagA"> 
 					<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
-					<label class="light-font-weight" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span><span>I want to be listed at this workplace within Find a Physio on the <b>corporate australian.physio site</b></span></label>	
+					<label class="light-font-weight" for="Findabuddy<?php echo $key;?>">I want to be listed at this workplace within Find a Physio on the corporate <span class="note-text">australian.physio</span> site</label>	
 				</div>
 
 					<div class="col-xs-12">
@@ -1349,8 +1361,14 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				<a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a>
 			</div>
 
-			<div class="col-xs-12">   
-				<a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Back</span></a>
+			<div class="col-xs-12 btn_wrapper">   
+				<a class="join-details-button3" variant="next">
+					<span class="dashboard-button-name">Next</span>
+				</a>
+				<a class="your-details-prevbutton3" variant="prev">
+					<span class="icon arrow_left"></span>
+					Back to previous
+				</a>
 			</div>
 		
 		</div>
@@ -1579,7 +1597,15 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 		<div class="col-xs-12">
 				<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>		
 		</div>
-		<div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Back</span></a></div>
+		<div class="col-xs-12 btn_wrapper">
+			<a href="javascript:document.getElementById('your-detail-form').submit();" variant="next" class="join-details-button4">
+				<span class="dashboard-button-name">Next</span>
+			</a>
+			<a class="your-details-prevbutton4" variant="prev">
+				<span class="icon arrow_left"></span>
+				Back to previous
+			</a>
+		</div>
 
 	</div>
 

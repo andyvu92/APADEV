@@ -186,6 +186,10 @@ if(isset($_POST['step2-1'])) {
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">  <a class="join-details-button6 <?php //if(isset($_POST['insuranceStatus'])&&$_POST['insuranceStatus']=="1") {echo "disabled";}  ?>"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton<?php //if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>-->
 	<!--</div>
 	<div class="down7" <?php //if(isset($_POST['goP']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>-->
+		<div class="countdown_wrapper">Time left to purchase: 
+			<input type="text" value="05:00" id="timer" disabled>
+		</div>
+
 		<div class="row">
 
 			<div class="flex-container flex-table">
@@ -474,7 +478,15 @@ if(isset($_POST['step2-1'])) {
 				<input class="styled-checkbox" type="checkbox" name="Rollover" id="Rollover"><label for="Rollover">Roll over</label>
 			</div>-->
 		</div>   
-		<div class="col-xs-12">  <a href="javascript:document.getElementById('join-insurance-form').submit();" class="join-details-button7 <?php if(isset($_POST['insuranceStatus'])&&$_POST['insuranceStatus']=="1") {echo "stop";}  ?>" ><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>"><span class="dashboard-button-name">Back</span></a></div>
+		<div class="col-xs-12 btn_wrapper">  
+			<a variant="next" href="javascript:document.getElementById('join-insurance-form').submit();" class="join-details-button7 <?php if(isset($_POST['insuranceStatus'])&&$_POST['insuranceStatus']=="1") {echo "stop";}  ?>" >
+				<span class="dashboard-button-name">Next</span>
+			</a>
+			<a variant="prev" class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>">
+				<span class="icon arrow_left"></span>
+				Back to previous
+			</a>
+		</div>
 	</div>
 </form>
 <form id="tempform" action="" method="POST"><input type="hidden" name="goI"></form>	

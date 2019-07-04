@@ -56,6 +56,10 @@ fieldset {
           div[class^="flex-col-"]{
             padding: 0px 5px;
             font-size: 1em;
+            @media @phone-width-down{
+              font-size: 0.9em;
+              padding: 0;
+            }
           }
           .heading-row{
             border-top: 1px solid #d3d4d5;
@@ -81,14 +85,23 @@ fieldset {
             display: flex;
             flex-direction:column;
             .start-date:before{
-              content: 'Start date: ';
+              content: 'Start: ';
               color: #333;
               font-weight: 700;
+              display: inline-block;
+              min-width: 55px;
             }
             .end-date:before{
-              content: 'End date: ';
+              content: 'End: ';
               color: #333;
               font-weight: 700;
+              display: inline-block;
+              min-width: 55px;
+            }
+            .start-date:before, .end-date:before{
+              @media @phone-width-down{
+                min-width: 120px!important;
+              }
             }
           }
           .pd-spcart-location{
@@ -103,6 +116,10 @@ fieldset {
             align-items: center;
             a{
               z-index: 10;
+              @media @phone-width-down{
+                bottom: 30px;
+                margin-top: 0;
+              }
               i{
                 color: #ffa02e;
               }
@@ -112,6 +129,42 @@ fieldset {
             a{
               color: @brighter-blue;
             }
+          }
+          .event_available{
+            .pd-spcart-delete{
+              @media @tablet-width-down{
+                align-items: flex-end;
+                flex-direction: column;
+              }
+              a{
+                @media @tablet-width-down{
+                  position: relative;
+                  transform: translatex(5px);
+                }
+                @media @phone-width-down{
+                  bottom: 10px;
+                  transform: translatex(0px);
+                }
+              }
+            }
+          }
+        }
+
+        #termc{
+          margin-top: 25px;
+          .small-lead-heading{
+            color: @bright-blue;
+            font-size: 1.5em;
+            font-weight: 500;
+          }
+        }
+        
+        #diet_req{
+          margin-top: 15px;
+          .small-lead-heading{
+            color: @bright-blue;
+            font-size: 1.5em;
+            font-weight: 500;
           }
         }
 
@@ -151,11 +204,16 @@ fieldset {
           @media all and (max-width: @tablet-width) {
             width: 100%;
           }
+
+          .name_col{
+            padding-right: 25px!important;
+            display: flex;
+          }
         }
         .right-sidebar{
           @media @larger-tablet-width-up{
             padding-left: 4%;
-          }   
+          }
         }
         .dashboard-button{
           &:hover{
@@ -163,23 +221,46 @@ fieldset {
           }
         }
         .removedEvent {
-          position: absolute;
-          display: flex;
-          background-color: rgba(255,255,255,0.8);
-          bottom: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          align-items: center;
-          border-left: 3px solid #920075;
-          padding-left: 10px;
-          z-index: 9;
+          padding-left: 5px;
+          color: @orange;
+          padding-top: 10px;
+          @media @phone-width-down{
+            max-width: 65%;
+            font-size: 0.9em;
+            padding-left: 0;
+          }
+          @media @smaller-phone-width-down{
+            max-width: 70%;
+          }
+          a{
+            color: @orange;
+            text-decoration: underline;
+          }
         }
       }
 
       .paymentsiderbar{
-        background-color: rgba(137,159,153,0.1);
-        border: 0;
+        border: 1px solid rgba(0,0,0,0.12);
+        border-radius: 12px;
+        padding: 20px 35px;
+        background: none;
+        @media @tablet-width-down{
+          margin-top: 25px;
+          margin-left: 30px;
+          margin-right: 30px;
+          width: calc(~'100% - 60px');
+        }
+        @media @phone-width-down{
+          margin-left: 10px;
+          margin-right: 10px;
+          width: calc(~'100% - 20px');
+        }
+        @media @smaller-phone-width-down{
+          margin-left: 0;
+          margin-right: 0;
+          width: 100%;
+          padding: 10px 25px;
+        }
         span.sidebardis{
           color: #000;
           font-weight: 400;
@@ -187,17 +268,76 @@ fieldset {
           display: block;
           font-size: 16px;
           &.sidebar_heading{
-            padding-top: 30px;
+            padding-top: 20px;
             padding-bottom: 0;
             font-size: 1.5em;
             font-weight: 500;
             color: #333;
+            @media @large-ipadpro-down{
+              font-size: 1.3em;
+            }
+            @media @tablet-width-down{
+              font-size: 1.6em;
+            }
+          }
+        }
+
+        .ordersummary{
+          span{
+            color: #333;
+            margin-bottom: 15px;
+            display: block;
           }
         }
 
         .tooltip-container{
           padding-bottom: 10px;
         }
+
+        label{
+          font-weight: 400;
+          display: block;
+        }
+
+        input{
+          color: black;
+          &::placeholder{
+            color: #848688!important;
+          }
+        }
+
+        select.form-control{
+          border: 1px solid #eceef0;
+        }
+
+        .form-type-checkbox{
+          margin: 1.5em 0;
+        }
+        
+        .form-type-select::after{
+          @media @large-ipadpro-down{
+            height: 12px;
+            top: calc(~'70% - 6px');
+          }
+        }
+
+        .chevron-select-box::after{
+          @media @large-ipadpro-down{
+            height: 12px!important;
+            top: calc(~'50% - 6px')!important;
+          }
+        }
+
+        #prftagAgree{
+          margin-bottom: 20px;
+        }
+
+        #addPaymentCardForm{
+          input[type="text"]{
+            background: #fff
+          }
+        }
+
         #anothercardBlock{
           .tooltip-container{
             padding: 0 15px;
@@ -205,6 +345,15 @@ fieldset {
               margin-right: 15px;
             }
           }
+        }
+
+        .payment_note{
+          font-size: 0.9em;
+          line-height: 1.3em;
+        }
+        
+        .expired_item_note{
+          color: @bright-blue;
         }
 
         span.blue-sidebardis{
@@ -290,6 +439,9 @@ fieldset {
             background-repeat: no-repeat;
             background-position: center;
             transform: rotate(90deg);
+            @media @larger-phone-width-down{
+              width: 7px;
+            }
           }
           &.chevron-adjust{
               &::after{
@@ -300,29 +452,28 @@ fieldset {
 
         #discount{
           display: flex;
-          flex-direction: row;
+          flex-direction: column;
           width: 100%;
-          flex-wrap: wrap;
+          input{
+            width: 100%;
+            background: #fff;
+            color: black;
+            &::placeholder{
+              color: #848688!important;
+            }
+          }
           .dashboard-button{
-            color: white;
-            margin: 0;
-            width: auto;
+            color: @bright-blue;
+            background: #fff;
+            border: 1px solid @bright-blue!important;
+            margin: 15px 0 0 0;
+            width: 100%;
             height: auto;
             padding: 9px 25px;
-            margin-left: 10px;
             display: block;
-            width: 60%;
-            @media all and (max-width: 1253px) {
-              margin-left: 0;
-            }
-            @media all and (max-width: @desktop-width) and (min-width: @larger-tablet-width + 1) {
-              margin-left: 0;
-            }
-            @media all and (max-width: @larger-tablet-width) {
-              margin-left: 10px;
-            }
             &:hover{
-              opacity: 0.8;
+              background: @bright-blue;
+              color: #fff;
             }
           }
         }
@@ -338,19 +489,28 @@ fieldset {
         }
 
         .placeorder{
-          width: 100%!important;
+          width: 100%;
+          margin-bottom: 20px;
+          display: flex;
           &:hover{
             opacity: 0.8;
+          }
+          span{
+            width: 100%;
+            margin: 0;
+            text-align: center;
+            padding: 11px 20px;
+            height: unset;
           }
         }
       }
       
 .paymentsiderbar{
   /* OTHER CARD FORM */
-#apa-create-payment-card-form{
-  input.form-submit{
-    background: @bright-blue;
-  }
+  #apa-create-payment-card-form{
+    input.form-submit{
+      background: @bright-blue;
+    }
 }
 
   .bottom-buttons{
@@ -379,8 +539,42 @@ fieldset {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
+    padding-left: 0;
+    margin-top: 50px;
+    @media @tablet-width-down{
+      margin: 40px 0;
+    }
+    @media @phone-width-down{
+      margin: 35px 0;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      padding: 0;
+      justify-content: space-between;
+      & > a{
+        width: calc(~'50% - 5px');
+        line-height: 1.2em;
+        button{
+          padding: 10px 14px!important;
+          width: 100%!important;
+          margin: 0;
+        }
+      }
+    }
+    @media @smaller-phone-width-down{
+      & > a{
+        width: calc(~'50% - 3px');
+        button{
+          padding: 13px 5px!important;
+        }
+      }
+    }
+    a{
+      button{
+        margin-left: 0;
+      }
+    }
   }
   h3.light-lead-heading{
     color: @blue;
@@ -536,6 +730,11 @@ fieldset {
               display: inline-block;
               font-weight: 400;
               padding-right: 5px;
+              min-width: 130px;
+              font-weight: 500;
+            }
+            @media @phone-width-down{
+              min-width: 120px;
             }
           }
           @media all and (max-width: @tablet-width) {
@@ -550,7 +749,9 @@ fieldset {
             .pd-spcart-date{
               .start-date:before, .end-date:before{
                 color: #000;
-                font-weight: 400;
+                font-weight: 500;
+                display: inline-block;
+                min-width: 130px;
               }
             }
             .pd-spcart-wishlist{
@@ -571,10 +772,14 @@ fieldset {
               a{
                 position: relative;
                 margin-top: 20px;
-                text-decoration: underline;
+                text-decoration: none;
+                position: absolute;
+                right: 0;
+                color: @orange;
                 &:after{
                   content: 'Delete';
                   padding: 5px 10px;
+                  border: 1px solid @orange;
                 }
                 i{
                   z-index: 10;
@@ -588,6 +793,84 @@ fieldset {
     }
   }
 }
+
+.heading_wrapper{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 15px 0 25px;
+  @media @tablet-width-down{
+    padding: 25px 0 0;
+  }
+  @media @phone-width-down{
+    padding: 30px 0 0;
+  }
+}
+
+body{
+  .countdown_wrapper{
+    text-align: right;
+    @media @phone-width-down{
+      line-height: 1.2em;
+      position: fixed;
+      bottom: 0;
+      background: #009fda;
+      color: #fff;
+      width: 100%;
+      left: 0;
+      z-index: 99;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0 30px;
+    }
+    #timer{
+      color: @bright-blue; 
+      font-weight: 700;
+      display: block;
+      font-size: 2.5em;
+      line-height: 1em;
+      background: none;
+      max-width: 132px;
+      border: 0;
+      margin: 0;
+      padding-left: 0;
+      padding-right: 0;
+      letter-spacing: 5px;
+      text-align: center;
+      @media @phone-width-down{
+        padding-top: 0;
+        padding-left: 0;
+        text-align: right;
+        max-width: 85px;
+        margin-left: auto;
+        font-size: 1.5em;
+        letter-spacing: 2px;
+        padding-bottom: 0;
+        color: #ffffff;
+      }
+    }
+    &.locked{
+      &:before{
+        display: none!important;
+      }
+    }
+  }
+}
+
+#node-250{
+  .content{
+    .left-content{
+      padding-right: 50px;
+      @media @larger-tablet-width-down{
+        padding-right: 15px;
+      }
+    }
+  }
+  
+}
+  
 
 /*--PD WISHLIST--*/
 

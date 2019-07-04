@@ -1123,6 +1123,9 @@ jQuery(document).ready(function() {
           $(this).addClass('numberized').hide();
           $(this).parent().addClass('number-menu-active');
   
+          // get total step number
+          var totalStep = $('li', this).length;
+
           //assign step number
           $('li', this).each(function(id){
             id++;
@@ -1134,7 +1137,7 @@ jQuery(document).ready(function() {
           var stepNumber = $('.text-underline', this).parent().find('.step-order').text();
   
           //append customised elemen to show step order
-          $(this).after('<span class="current-step">Step <span class="step-number">'+stepNumber+'</span> of 7: <span class="step-label">'+currentStep+'</span></span>');    
+          $(this).after('<span class="current-step">Step <span class="step-number">'+stepNumber+'</span> of '+totalStep+': <span class="step-label">'+currentStep+'</span></span>');    
         }
       });
       
@@ -2268,6 +2271,18 @@ jQuery(document).ready(function() {
     }).on('mouseleave', function () {  
       $(current).addClass('gray');
     });
+  });
+
+  // load svg for back to prev button
+  $('.arrow_left').each(function () {
+    var arrow_icon = '<svg enable-background="new 0 0 400.004 400.004" version="1.1" viewBox="0 0 400 400" xml:space="preserve" xmlns="http://www.w3.org/2000/svg"><path d="m382.69 182.69h-323.57l77.209-77.214c6.764-6.76 6.764-17.726 0-24.485-6.764-6.764-17.73-6.764-24.484 0l-106.77 106.77c-6.764 6.76-6.764 17.727 0 24.485l106.77 106.78c3.381 3.383 7.812 5.072 12.242 5.072s8.861-1.689 12.242-5.072c6.764-6.76 6.764-17.726 0-24.484l-77.209-77.218h323.57c9.562 0 17.316-7.753 17.316-17.315s-7.753-17.314-17.316-17.314z"/></svg>';
+    $(this).html(arrow_icon);
+  });
+
+  // load svg for back to prev button
+  $('.plus_circle').each(function () {
+    var plus_circle = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 612 612" xml:space="preserve"><g xmlns="http://www.w3.org/2000/svg"><path d="M306,0C136.992,0,0,136.992,0,306s136.992,306,306,306s306-137.012,306-306S475.008,0,306,0z M306,573.75C158.125,573.75,38.25,453.875,38.25,306C38.25,158.125,158.125,38.25,306,38.25c147.875,0,267.75,119.875,267.75,267.75C573.75,453.875,453.875,573.75,306,573.75zM420.75,286.875h-95.625V191.25c0-10.557-8.568-19.125-19.125-19.125c-10.557,0-19.125,8.568-19.125,19.125v95.625H191.25c-10.557,0-19.125,8.568-19.125,19.125c0,10.557,8.568,19.125,19.125,19.125h95.625v95.625c0,10.557,8.568,19.125,19.125,19.125c10.557,0,19.125-8.568,19.125-19.125v-95.625h95.625c10.557,0,19.125-8.568,19.125-19.125C439.875,295.443,431.307,286.875,420.75,286.875z"/></g></svg>';
+    $(this).html(plus_circle);
   });
 
   // auto fetch top nav icons

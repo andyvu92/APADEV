@@ -20,8 +20,8 @@ $background = getBackgroundImage($userID);
 /* get background image****/ 
  ?> 
 
-<div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 autoscroll background_<?php echo $background;?> " id="dashboard-right-content">
+<div id="pre_background" style="display:none">background_<?php //echo $background; ?></div>
+<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 autoscroll background_<?php //echo $background;?> " id="dashboard-right-content">
 	<?php if(isset($_SESSION['UserId']) && ($_SESSION['MemberTypeID'] !=="1")):?>
 		<!-- EXIST MEMBER -->
 		<?php header("Location: /dashboard");?>
@@ -95,9 +95,11 @@ $background = getBackgroundImage($userID);
 	<?php endif;?>
 </div>
 <div id="privacypolicyWindow" style="display:none;">
-	<span class="close-popup"></span>
+	<!-- <span class="close-popup"></span> -->
 	<div class="modal-header">
-		<h4 class="modal-title">Australian Physiotherapy Association Terms & Conditions</h4>
+		<div class="col-xs-12">
+			<h4 class="modal-title">Australian Physiotherapy Association Terms & Conditions</h4>
+		</div>
 	</div>
 	
 	<div class="modal-body">

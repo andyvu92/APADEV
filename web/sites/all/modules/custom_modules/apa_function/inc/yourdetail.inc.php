@@ -1000,7 +1000,7 @@ apa_function_dashboardLeftNavigation_form();
 						</div>
 
 						<div class="col-xs-12 col-md-6">
-							<label for=""><?php if(!empty($details['State'])) {echo "You are in the &nbsp;".$details['State']."&nbsp;Branch ,&nbsp;would you like to add an additional Branch?";} else { echo "Would you like to add an additional Branch?";}?></label>
+							<label for=""><?php if(!empty($details['State'])) {echo "You are in the &nbsp;".$details['State']."&nbsp;Branch. <br/>Would you like to add an additional Branch?";} else { echo "Would you like to add an additional Branch?";}?></label>
 							<div class="chevron-select-box">
 							<select class="form-control" name="Branch" id="Branch">
 							<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>What additional Branch would you like to join?</option>
@@ -1028,7 +1028,7 @@ apa_function_dashboardLeftNavigation_form();
 						
 						?>
 						<div class="col-xs-12">
-							<label>Choose as many interest areas as you like from the list below:</label>
+							<label>Choose one or more interest areas below:</label>
 							<div class="plus-select-box">
 							<select id="interest-area" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area..."data-placeholder="Choose interest area...">
 							<?php 
@@ -1379,12 +1379,12 @@ apa_function_dashboardLeftNavigation_form();
 					<div class="row FapTagC">
 						<div class="col-xs-12">
 							<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
-							<label  style="font-weight: 300" for="Findabuddy<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span><span>I want to be listed at this workplace within Find a Physio on the <b>corporate australian.physio site</b></span></label>
+							<label  style="font-weight: 300" for="Findabuddy<?php echo $key;?>">I want to be listed at this workplace within Find a Physio on the corporate <span class="note-text">australian.physio</span> site</label>
 						</div>
 
 						<div class="col-xs-12"> 
 							<input class="styled-checkbox" type="checkbox" name="Findphysio<?php echo $key;?>" id="Findphysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Findphysio'];?>" <?php if($details['Workplaces'][$key]['Findphysio']=="True"){echo "checked";} ?>>
-							<label  style="font-weight: 300" for="Findphysio<?php echo $key;?>"><span class="note-text">NOTE:&nbsp;</span><span>I want to be listed at this workplace within Find a Physio on the <b>consumer choose.physio site</b></span></label>
+							<label  style="font-weight: 300" for="Findphysio<?php echo $key;?>">I want to be listed at this workplace within Find a Physio on the consumer <span class="note-text">choose.physio</span> site</label>
 						</div>
 					</div>
 					<?php endif;?>

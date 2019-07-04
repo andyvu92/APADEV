@@ -577,7 +577,7 @@ function pd_shoppingcart_form($form, &$form_state){
 		'#title' => t('Do you want to save this card?'),
 	);
     $form['Message']['notice'] = array(
-        '#markup' => '<div class="form-item form-type-textfield"><span style="font-size: 1.1em;">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</span></div>',
+        '#markup' => '<div class="form-item form-type-textfield"><p class="payment_note">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</p></div>',
        
     );
     $form['submit'] = array('#type' => 'submit','#submit'=>['place_pd_shopping_cart']); 
@@ -883,7 +883,7 @@ function apa_create_payment_card_form($form, &$form_state){
 	);
     //$form['submit'] = array('#type' => 'submit', '#value' => t('Add')); 
     $form['Message']['notice'] = array(
-        '#markup' => '<div class="form-item form-type-textfield"><span style="font-size: 1.1em;">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</span></div>',
+        '#markup' => '<div class="form-item form-type-textfield"><p class="payment_note">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</p></div>',
     );
     $form['submit'] = array('#type' => 'submit', '#value' => t('Add'), '#submit'=>['add_payment_card']); 
 	return $form;

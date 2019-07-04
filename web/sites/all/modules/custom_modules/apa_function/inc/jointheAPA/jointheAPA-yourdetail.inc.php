@@ -897,7 +897,7 @@ if (isset($_SESSION['UserId'])):
                     <div class="row">
 
                             <div class="col-xs-12">
-								<span class="light-lead-heading cairo" style="font-weight: 200; margin-bottom: 18px;">Phone numbers:</span>
+								<span class="section_title">Phone numbers:</span>
 								<label for="">Please enter at least one phone number</label>
 								<span class="text-underline smaller-lead-heading" style="color: #000">Home</span>
                             </div>
@@ -940,7 +940,7 @@ if (isset($_SESSION['UserId'])):
 ?>  maxlength="5">
 						<div id="areaMessage"></div>
                         </div>
-                        <div class="col-xs-12 col-md-3">
+                        <div class="col-xs-12 col-md-6">
                             <label for="">Phone number<span class="tipstyle"> *</span></label>
                             <input type="text" class="form-control" name="phone-number" placeholder='Phone number'<?php
     if (empty($details['Home-phone-number'])) {
@@ -995,7 +995,7 @@ if (isset($_SESSION['UserId'])):
     }*/
 ?>  maxlength="5">
                         </div>-->
-                        <div class="col-xs-12 col-md-3">
+                        <div class="col-xs-6 col-md-3">
                             <label for="">Mobile number<span class="tipstyle"> *</span></label>
                             <input type="text" class="form-control" name="Mobile-number" placeholder='Mobile number'<?php
     if (empty($details['Mobile-number'])) {
@@ -1010,7 +1010,7 @@ if (isset($_SESSION['UserId'])):
                     <!--BREAK-->
 
                         <div class="col-xs-12">
-							<span class="light-lead-heading cairo" style="font-weight: 200">Residential address:</span>
+							<span class="section_title">Residential address:</span>
 						</div>
                     
                         <div class="col-xs-12">
@@ -1127,9 +1127,9 @@ if (isset($_SESSION['UserId'])):
                        </div>
                     </div>
 
-                    <div class="row payment-line flex-cell flex-flow-row">
+                    <div class="row payment-line flex-cell flex-flow-row form_one_column">
 							<div class="col-xs-12 col-sm-6">
-								<span class="light-lead-heading cairo" style="font-weight: 200">Billing address:</span>
+								<span class="section_title">Billing address:</span>
 							</div>
 
 							<div class="col-xs-12 col-sm-6 align-item-end">
@@ -1298,8 +1298,10 @@ if (isset($_SESSION['UserId'])):
     echo $details['Mailing-country'];
 ?>">
                     <!---Hidden mailing address and shipping address End here-->
-                <div class="col-xs-12">   
-                    <a class="join-details-button1"><span class="dashboard-button-name">Next</span></a>
+                <div class="col-xs-12 btn_wrapper">   
+                    <a class="join-details-button1" variant="next">
+                        <span class="dashboard-button-name">Next</span>
+                    </a>
                 </div>
 
                   <!--
@@ -1387,7 +1389,7 @@ array_multisort($Title, SORT_ASC, $MemberType);
                 </div>
             </div>
             <div class="row" id="ahpblock">
-                <div class="col-xs-6 col-md-3">
+                <div class="col-xs-12 col-md-6">
                     <label for="">AHPRA number</label>
                     <input type="text" class="form-control" name="Ahpranumber" placeholder='AHPRA number'<?php
     if (empty($details['Ahpranumber'])) {
@@ -1396,22 +1398,19 @@ array_multisort($Title, SORT_ASC, $MemberType);
         echo 'value="' . $details['Ahpranumber'] . '"';
     }
 ?>>
+
+                <!--<label for="">Specialty</label>-->
+                <input type="hidden" class="form-control" name="Specialty" placeholder='Specialty'<?php
+                    if (empty($details['Specialty'])) {
+                        echo "placeholder='Specialty'";
+                    } else {
+                        echo 'value="' . $details['Specialty'] . '"';
+                    }
+                ?>>
                 </div>
 
-                <div class="col-xs-6 col-md-3">
-                    <!--<label for="">Specialty</label>-->
-                    <input type="hidden" class="form-control" name="Specialty" placeholder='Specialty'<?php
-    if (empty($details['Specialty'])) {
-        echo "placeholder='Specialty'";
-    } else {
-        echo 'value="' . $details['Specialty'] . '"';
-    }
-?>>
-                </div>
-            </div>
-            <div class="row">
-            <div class="col-xs-12 col-md-6">
-                    <label for=""><?php if(!empty($details['State'])) {echo "You are in the &nbsp;".$details['State']."&nbsp;Branch ,&nbsp;would you like to add an additional Branch?";} else { echo "Would you like to add an additional Branch?";}?></label>
+                <div class="col-xs-12 col-md-6">
+                    <label for=""><?php if(!empty($details['State'])) {echo "You are in the ".$details['State']." Branch, would you like to add an additional branch?";} else { echo "Would you like to add an additional branch?";}?></label>
                     <div class="chevron-select-box">
                     <select class="form-control" id="Branch" name="Branch">
 					<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>What additional Branch would you like to join?</option>
@@ -1431,9 +1430,10 @@ array_multisort($Title, SORT_ASC, $MemberType);
                    </select>
                    </div>
                 </div>
-
+            </div>
+            <div class="row">
                 <div class="col-xs-12">
-                    <label for="">Choose which National Groups you would like to join:<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
+                    <label for="">Choose which National Groups you would like to join: <?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
                     
                     <div class="plus-select-box">
                     <select id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups" multiple>
@@ -1496,7 +1496,7 @@ array_multisort($Title, SORT_ASC, $MemberType);
 ?>
 
                <div class="col-xs-12">
-                    <label>Choose as many interest areas as you like from the list below:</label>
+                    <label>Choose one or more interest areas below:</label>
 
                     
                     <div class="plus-select-box">
@@ -1559,7 +1559,15 @@ array_multisort($Title, SORT_ASC, $MemberType);
                 
 
             </div>
-            <div class="col-xs-12">   <a class="your-details-prevbutton2"><span class="dashboard-button-name">Back</span></a><a class="join-details-button2"><span class="dashboard-button-name">Next</span></a></div>
+            <div class="col-xs-12 btn_wrapper">   
+                <a class="join-details-button2" variant="next">
+                    <span class="dashboard-button-name">Next</span>
+                </a>
+                <a class="your-details-prevbutton2" variant="prev">
+                    <span class="icon arrow_left"></span>
+                    Back to previous
+                </a>
+            </div>
         </div>
         <!--BREAK-->
 
@@ -1655,7 +1663,7 @@ array_multisort($Title, SORT_ASC, $MemberType);
                     ?>" <?php if($details['Workplaces'][$key]['Findphysio']=="True"){echo "checked";} ?>>
                                                 <label class="light-font-weight" for="Findphysio<?php
                             echo $key;
-                    ?>"><span class="note-text">NOTE:&nbsp;</span><span>I want to be listed at this workplace within Find a Physio on the <b>consumer choose.physio site</b></span></label>
+                    ?>">I want to be listed at this workplace within Find a Physio on the consumer <span class="note-text">choose.physio</span> site</label>
                         </div>
 
                         <div class="col-xs-12 FapTagA"> 
@@ -1672,7 +1680,7 @@ array_multisort($Title, SORT_ASC, $MemberType);
                         ?>>
                             <label class="light-font-weight" for="Findabuddy<?php
                                 echo $key;
-                        ?>"><span class="note-text">NOTE:&nbsp;</span><span>I want to be listed at this workplace within Find a Physio on the <b>corporate australian.physio site</b></span></label>
+                        ?>">I want to be listed at this workplace within Find a Physio on the corporate <span class="note-text">australian.physio</span> site</label>
                         </div>
 
                         <!--BREAK-->
@@ -1909,7 +1917,7 @@ array_multisort($Title, SORT_ASC, $MemberType);
         }
 ?>  maxlength="5">
                             </div>
-                            <div class="col-xs-6 col-md-3">
+                            <div class="col-xs-6 col-md-6">
                                 <label for="">Phone number<span class="tipstyle"> *</span></label>
                                 <input type="number" class="form-control" name="Wphone<?php
         echo $key;
@@ -2195,10 +2203,23 @@ array_multisort($Title, SORT_ASC, $MemberType);
  
             </div>
 
-            <div class="row"><div class="col-xs-9 col-sm-9 col-md-9 col-lg-9"><a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a></div></div>
+            <div class="row">
+                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                    <a class="add-workplace-join">
+                        <span class="icon plus_circle"></span>
+                        Add workplace
+                    </a>
+                </div>
+            </div>
             
-            <div class="col-xs-12">   
-                <a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Back</span></a>
+            <div class="col-xs-12 btn_wrapper">   
+                <a class="join-details-button3" variant="next">
+                    <span class="dashboard-button-name">Next</span>
+                </a>
+                <a class="your-details-prevbutton3" variant="prev">
+                    <span class="icon arrow_left"></span>
+                    Back to previous
+                </a>
             </div>
         </div>
         <div class="down4" style="display:none;" >
@@ -2220,7 +2241,7 @@ array_multisort($Title, SORT_ASC, $MemberType);
                         <div class="row">
                         
                         <div class="row">
-                            <div class="col-xs-12 col-sm-6">
+                            <div class="col-xs-12 col-sm-12">
                                 <label for="Udegree<?php
         echo $key;
 ?>">Degree level<span class="tipstyle"> *</span></label>
@@ -2277,7 +2298,7 @@ array_multisort($Title, SORT_ASC, $MemberType);
                         </div>
 
                         <div class="row">
-                            <div class="col-xs-12 col-sm-6">
+                            <div class="col-xs-12 col-sm-12">
                                 <label for="Undergraduateuniversity-name<?php
         echo $key;
 ?>">University name<span class="tipstyle"> *</span></label>
@@ -2396,8 +2417,13 @@ array_multisort($Title, SORT_ASC, $MemberType);
                             </div>
                             
                         </div>
-					<!--<?php //if($key!="0"):?>-->
-					<a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="dashboard-button-name">Delete</span></a>	
+                    <!--<?php //if($key!="0"):?>-->
+                    <div class="col-xs-12">
+                        <a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>">
+                            Delete
+                        </a>
+                    </div>
+						
                     <!--<?php //endif;?>-->
 					</div>
                 <?php
@@ -2499,10 +2525,21 @@ array_multisort($Title, SORT_ASC, $MemberType);
             </div>
             
             <div class="col-xs-12 col-md-6">
-                <a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>         
+                <a class="add-additional-qualification">
+                    <span class="icon plus_circle"></span>
+                    Add qualification
+                </a>         
             </div>
 
-            <div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Back</span></a></div>
+            <div class="col-xs-12 btn_wrapper">  
+                <a href="javascript:document.getElementById('your-detail-form').submit();" variant="next" class="join-details-button4">
+                    <span class="dashboard-button-name">Next</span>
+                </a>
+                <a class="your-details-prevbutton4" variant="prev">
+                    <span class="icon arrow_left"></span>
+                    Back to previous
+                </a>
+            </div>
         </div>
                
 </form>   
@@ -2689,7 +2726,7 @@ if(isset($_POST['MT'])){
 
                         <div class="row">
                             <div class="col-xs-12">
-								<span class="light-lead-heading cairo" style="font-weight: 200; margin-bottom: 18px;">Phone numbers:</span>
+								<span class="section_title">Phone numbers:</span>
 								<label for="">Please enter at least one phone number</label>
 								<span class="text-underline smaller-lead-heading" style="color: #000">Home</span>
                             </div>
@@ -2717,7 +2754,7 @@ if(isset($_POST['MT'])){
                                 <input type="text" maxlength="5" class="form-control" id="area-code" onchange="areaCodeFunction(this.value)" name="area-code" placeholder="Area code">
 							    <div id="areaMessage"></div>
                             </div>
-                            <div class="col-xs-12 col-md-3">
+                            <div class="col-xs-12 col-md-6">
                                 <label for="">Phone number<span class="tipstyle"> *</span></label>
                                 <input type="text" class="form-control" name="phone-number">
                             </div>
@@ -2755,7 +2792,7 @@ if(isset($_POST['MT'])){
                                 <label for="">Area code</label>
                                 <input type="text" class="form-control" name="Mobile-area-code"  maxlength="5">
                             </div>-->
-                            <div class="col-xs-12 col-md-3">
+                            <div class="col-xs-6 col-md-3">
                                 <label for="">Mobile number<span class="tipstyle"> *</span></label>
                                 <input type="text" class="form-control" name="Mobile-number">
                             </div>
@@ -2764,7 +2801,7 @@ if(isset($_POST['MT'])){
                     <!--BREAK-->
 
                         <div class="col-xs-12">
-							<span class="light-lead-heading cairo" style="font-weight: 200">Residential address:</span>
+							<span class="section_title">Residential address:</span>
                         </div>
                             
                         <div class="col-xs-12">
@@ -2839,9 +2876,9 @@ if(isset($_POST['MT'])){
 
                         <!--BREAK-->
 
-                        <div class="row payment-line flex-cell flex-flow-row">
+                        <div class="row payment-line flex-cell flex-flow-row form_one_column">
 							<div class="col-xs-12 col-sm-6">
-								<span class="light-lead-heading cairo" style="font-weight: 200">Billing address:</span>
+								<span class="section_title">Billing address:</span>
 							</div>
 
 							<div class="col-xs-12 col-sm-6 align-item-end">
@@ -2952,8 +2989,12 @@ if(isset($_POST['MT'])){
                         </div>
                      </div>
                                                
-                  </div>-->
-                  <div class="col-xs-12">   <a class="join-details-button1"><span class="dashboard-button-name">Next</span></a></div>
+                    </div>-->
+                    <div class="col-xs-12 btn_wrapper">   
+                        <a class="join-details-button1" variant="next">
+                            <span class="dashboard-button-name">Next</span>
+                        </a>
+                    </div>
             </div>
             <div class="down2" style="display:none;" >
                 <div class="row">
@@ -3133,7 +3174,7 @@ if(isset($_POST['MT'])){
                 <input type="hidden" class="form-control" name="Specialty">
                 <div class="row">
                     <div class="col-xs-12 col-md-6">
-                        <label for="">You are in the <span id="homebranch"></span>&nbsp;Branch, would you like to add an additional Branch?</label>
+                        <label for="">You are in the<span id="homebranch"></span> Branch, would you like to add an additional Branch?</label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="Branch" name="Branch">
                             <option value="" selected disabled>What branch would you like to join?</option>
@@ -3201,7 +3242,7 @@ if(isset($_POST['MT'])){
                 <div class="row"> 
 
                     <div class="col-xs-12">
-						<label>Choose as many interest areas as you like from the list below:</label>
+						<label>Choose one or more interest areas below:</label>
                         
                         <div class="plus-select-box">
                         <select id="SpecialInterest" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
@@ -3249,7 +3290,15 @@ if(isset($_POST['MT'])){
                 </div>
 
                 
-                <div class="col-xs-12">   <a class="join-details-button2"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Back</span></a></div>
+                <div class="col-xs-12 btn_wrapper">   
+                    <a class="join-details-button2" variant="next">
+                        <span class="dashboard-button-name">Next</span>
+                    </a>
+                    <a class="your-details-prevbutton2" variant="prev">
+                        <span class="icon arrow_left"></span>
+                        Back to previous
+                    </a>
+                </div>
             </div>
             <?php
     
@@ -3284,8 +3333,14 @@ if(isset($_POST['MT'])){
         
             </div>
                 <div class="row"><div class="col-xs-12"><a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a></div></div>
-                <div class="col-xs-12">   
-                <a class="join-details-button3"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton3"><span class="dashboard-button-name">Back</span></a>
+                <div class="col-xs-12 btn_wrapper">   
+                    <a class="join-details-button3" variant="next">
+                        <span class="dashboard-button-name">Next</span>
+                    </a>
+                    <a class="your-details-prevbutton3" variant="prev">
+                        <span class="icon arrow_left"></span>
+                        Back to previous
+                    </a>
                 </div>
             </div>
             <div class="down4" style="display:none;" >
@@ -3396,7 +3451,15 @@ if(isset($_POST['MT'])){
                         <span class="dashboard-button-name">Add qualification</span></a></label>
                 </div>
 
-                <div class="col-xs-12">  <a href="javascript:document.getElementById('your-detail-form').submit();" class="join-details-button4"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton4"><span class="dashboard-button-name">Back</span></a></div>
+                <div class="col-xs-12 btn_wrapper">  
+                    <a href="javascript:document.getElementById('your-detail-form').submit();" variant="next" class="join-details-button4">
+                        <span class="dashboard-button-name">Next</span>
+                    </a>
+                    <a class="your-details-prevbutton4" variant="prev">
+                        <span class="icon arrow_left"></span>
+                        Back to previous
+                    </a>
+                </div>
             </div>
     </form>
 <?php
