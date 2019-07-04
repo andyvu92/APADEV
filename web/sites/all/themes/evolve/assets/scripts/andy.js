@@ -5,7 +5,7 @@
 */
 function topFunction215() {
   jQuery(document).ready(function(){
-    $("html, body").animate({ scrollTop: "215" }, 600);
+    $("html, body").animate({ scrollTop: "215" }, 600) ;
   });
 }
 
