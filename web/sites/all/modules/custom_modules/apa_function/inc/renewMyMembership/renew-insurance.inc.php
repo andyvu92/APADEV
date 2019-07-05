@@ -14,7 +14,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 	<input type="hidden" name="step2-1" value="1"/>
 	<input type="hidden" name="insuranceStatus" id="insuranceStatus" value="0">
 	<div class="down5 <?php if((isset($_POST['step1'])&& $_POST['insuranceTag']!="0")||isset($_POST['goI']))echo 'display'; else { echo 'display-none';}?>">
-		<div class="row">
+		<div class="row question_row">
 			<div class="col-xs-12">
 			<label>Have you been the subject of a medical malpractice or liability claim in the last five years (whether insured or uninsured)?<span class="tipstyle">*</span></label>
 			</div>
@@ -29,7 +29,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row question_row">
 			<div class="col-xs-12">
 			<label>Are you aware of any circumstances that may give rise to a claim, including but not limited to predecessors in your workplace?<span class="tipstyle">*</span></label>
 			</div>
@@ -44,7 +44,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row question_row">
 			<div class="col-xs-12">
 			<label>Have there been any external disciplinary proceedings, or have you been subject to a complaint to a professional society or statutory registration board in the last five years?<span class="tipstyle">*</span></label>
 			</div>
@@ -59,7 +59,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row question_row">
 			<div class="col-xs-12">
 			<label>Has any insurer declined a proposal, imposed special terms, declined to renew or cancelled your insurance policy?<span class="tipstyle">*</span></label>
 			</div>
@@ -74,7 +74,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			</div>
 		</div>
 
-		<div class="row">
+		<div class="row question_row">
 			<div class="col-xs-12">
 			<label>Have you made more than one claim?<span class="tipstyle">*</span></label>
 			</div>
@@ -90,7 +90,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<label>Please note that adding an entity name to your Certificate of Currency will cover you for physiotherapy services only. If you have other services being performed at your clinic, including those performed by registered physios, you must contact BMS on 1800 931 068 to ensure you are adequately covered.</label>
+				<label><span class="note-text">Please note</span> that adding an entity name to your Certificate of Currency will cover you for physiotherapy services only. If you have other services being performed at your clinic, including those performed by registered physios, you must contact BMS on 1800 931 068 to ensure you are adequately covered.</label>
 			</div>
 			<div class="col-xs-12">
 				<label>Business name</label>
@@ -154,7 +154,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			<div class="col-xs-12">
 				<input popup class="styled-checkbox" type="checkbox" name="conditions" id="conditions" value="0">
 
-				<label for="conditions" popup-target="insuranceTermsandConditions"><span class="tipstyle">* </span>I have read and agree to the terms and conditions within the financial services guide</label>
+				<label for="conditions" popup-target="insuranceTermsandConditions"><span class="tipstyle">* </span>I have read and agree to the <span style="text-decoration: underline">terms and conditions</span> within the financial services guide</label>
 
 			</div>
 		</div>

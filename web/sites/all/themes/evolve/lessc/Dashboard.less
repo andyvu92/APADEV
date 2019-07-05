@@ -836,9 +836,16 @@ a.accent-btn, button.accent-btn{
 }
 
 /* DISABLE BACKGROUND */
-#section-content-top[class*="background_"]{
+body .dexp-body-inner #section-content-top[class*="background_"]{
     @media @tablet-width-up{
         border-top: 1px solid rgba(0,0,0,0.04);
+    }
+    @media @larger-phone-width-down{
+        padding: 0;
+        > .container{
+            padding: 25px 20px;
+            background: #fff;
+        }
     }
 }
 
@@ -870,7 +877,19 @@ body #section-content-top[class*="background_"]{
             }
         }
     }
-    
+
+    @media @phone-with-down{
+        #join-review-form{
+            .Membpaymentsiderbar{
+                margin-left: 0px;
+            }
+        }
+    }
+
+    #dashboard-right-content .styled-checkbox#conditions + label{
+        display: block;
+    }
+
     @media @larger-phone-width-down{
         padding: 25px 20px;
         .dashboard-name{
@@ -882,9 +901,6 @@ body #section-content-top[class*="background_"]{
                     padding-right: 0px;
                 }
             }
-        }
-        #dashboard-right-content .styled-checkbox + label{
-            display: block;
         }
 
         #join-review-form{
@@ -907,6 +923,9 @@ body #section-content-top[class*="background_"]{
         margin-top: 0!important;
         a[variant="next"]{
             margin-top: 4vh;
+            span{
+                padding: 0 39px;
+            }
         }
         a[variant="prev"]{
             margin-top: 4vh;
@@ -1106,6 +1125,7 @@ a#insuranceControl{
     @media all and (max-width:@larger-tablet-width) {
         position: fixed;
         bottom: 0;
+        left: 0;
         z-index: 999999;
         border-bottom: 10px solid #009fda;
         background: rgba(94,96,103,1);
@@ -1122,6 +1142,7 @@ a#insuranceControl{
         @media all and (max-width: @larger-phone-width){
             background: #5e6067;
             margin-left: 25px;
+            overflow: hidden;
             &::after{
                 content: '';
                 width: 35px;
@@ -1371,7 +1392,7 @@ a#insuranceControl{
     display: flex;
     float: right;
     color: black;
-    background: @light-transparent-background;
+    background: #fff;
     padding: 0;
     min-height: 476px;
     position: relative;
@@ -3064,10 +3085,44 @@ select.form-control{
     color:  rgb(176, 176, 175) !important;
     border: 1px solid rgba(0,0,0,0.12)!important;
 }
+
+#renew-insurance-form{
+    .down6{
+        @media @desktop-width-up{
+            padding-right: 50px;
+            max-width: 66.66666667%;
+        }
+    }
+}
+
 #join-review-form{
     .review-main-container{
+        @media @desktop-width-up{
+            padding-right: 50px;
+        }
+
         @media all and (max-width: @desktop-width){
             width: 100%;
+        }
+
+        
+    }
+    .review-main-container + .Membpaymentsiderbar{
+        @media @desktop-width-up{
+            padding: 25px 30px 8px;
+        }
+        @media @desktop-width-down{
+            margin: 30px 15px;
+            max-width: calc(~'100% - 30px');
+        }
+        @media @larger-phone-width-down{
+            margin: 30px 0;
+            max-width: 100%;
+        }
+        .btn_wrapper{
+            .addCartlink{
+                width: 100%;
+            }
         }
     }
     .Membpaymentsiderbar{
@@ -3892,5 +3947,48 @@ input[type="email"], .email-field{
                 }
             }
         }
+    }
+}
+
+/* DASHBOARD STYLES */
+#section-content-top{
+    border-top: 1px solid rgba(0,0,0,0.08)!important;
+    .region-content-top{
+        margin: 30px 0;   
+    }
+    .dashboard-left-nav{
+        .dashboard-nav{
+            a{
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                color: #fff!important;
+                @media @larger-tablet-width-down{
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                }
+                span{
+                    display: block;
+                    width: 20px;
+                    height: 20px;
+                    margin-right: 10px;
+                    @media @larger-tablet-width-down{
+                        margin-right: 0;
+                        margin-bottom: 10px;
+                    }
+                    svg{
+                        width: 20px;
+                        height: 20px;
+                        path{
+                            fill: #fff;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    #dashboard-right-content{
+
     }
 }

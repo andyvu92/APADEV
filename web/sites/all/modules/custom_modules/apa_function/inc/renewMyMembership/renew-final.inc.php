@@ -271,7 +271,6 @@ if(sizeof($fpProdcutArray)!=0){
 		<?php endif;?>		
 <?php endif;?>
 <div class="down6" <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")|| isset($_POST['QOrder']) || isset($_POST['goP'])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
-asd
 	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 review-main-container">
 	<div class="flex-container join-apa-final flex-table">
 				<div class="flex-cell flex-flow-row table-header">
@@ -346,10 +345,10 @@ asd
 				
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-8">
-					Subtotal (ex. GST)	
+						Subtotal (ex. GST)	
 					</div>
 					<div class="flex-col-4">
-					$<span class="full"><?php echo number_format($fullDetails['SubTotal'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['SubTotal'],2);?></span>
+						$<span class="full"><?php echo number_format($fullDetails['SubTotal'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['SubTotal'],2);?></span>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
@@ -362,10 +361,10 @@ asd
 				</div>
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-8">
-					Total (inc. GST)	
+					<b>Total (inc. GST)</b>
 					</div>
 					<div class="flex-col-4">
-			        $<span id="fullPayment" class="full"><?php echo number_format($fullDetails['OrderTotal'],2);?></span><span id="schedulePayment" class="schedule"><?php echo number_format($scheduleDetails['OrderTotal'],2);?></span>
+			        <b>$<span id="fullPayment" class="full"><?php echo number_format($fullDetails['OrderTotal'],2);?></span><span id="schedulePayment" class="schedule"><?php echo number_format($scheduleDetails['OrderTotal'],2);?></span></b>
 					</div>
 				</div>
 			</div>
@@ -480,22 +479,29 @@ asd
 				
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-6">
-					GST	
+						GST	
 					</div>
 					<div class="flex-col-6">
-			        $<span class="full"><?php echo number_format($fullDetails['GST'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['GST'],2);?></span>
+			        	$<span class="full"><?php echo number_format($fullDetails['GST'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['GST'],2);?></span>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row" id="PRFdetail">
-						<div class="flex-col-6">
-							PRF donation
-						</div>
-						<div class="flex-col-6">
+					<div class="flex-col-6">
+						PRF donation
+					</div>
+					<div class="flex-col-6">
 						$<span id="PRFshow"><?php echo number_format(5,2);?></span>
-						</div>
-					</div>		
-			
-				<div class="flex-cell flex-flow-row">
+					</div>
+				</div>		
+				<div class="flex-cell flex-flow-row" >
+					<div class="flex-col-6">
+						Subtotal (ex. GST)
+					</div>
+					<div class="flex-col-6">
+						$<span class="full"><?php echo number_format($fullDetails['SubTotal'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['SubTotal'],2);?></span>
+					</div>
+				</div>
+				<div class="flex-cell flex-flow-row last_row">
 					<div class="flex-col-6">
 						<strong>Today's total (inc. GST)</strong>
 					</div>
@@ -570,6 +576,11 @@ asd
 					</span>
 				</a>
 			</div>
+
+			<div class="countdown_wrapper">
+				Time left to purchase: 
+				<input type="text" value="05:00" id="timer" disabled>
+			</div>
 	</div>
 </div>
 </form>
@@ -580,7 +591,7 @@ asd
 	<div class="down6" <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")|| isset($_POST['QOrder']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
 		<div class="row">	
 			<div class="col-xs-12">
-			<label>Payment options:</label>
+				<span class="section_title">Payment options:</span>
 			</div>
 
 			<div class="col-xs-12">
@@ -596,7 +607,9 @@ asd
 			<input type="hidden" id="Installpayment-frequency" name="Installpayment-frequency" value="">
 		<?php //if(isset($_SESSION["postReviewData"])) { $PRFTemp = $_SESSION["postReviewData"]['PRFdonation'];}?>
 		<div class="row">
-			<div class="col-xs-12"><label>PRF donation</label></div>
+			<div class="col-xs-12">
+				<span class="section_title">PRF donation</span>
+			</div>
 				<div class="col-xs-12 tooltip-container top">
 					<span class="tooltip-activate">What is this?</span>
 					<div class="tooltip-content">
@@ -609,22 +622,6 @@ asd
 			<div class="col-xs-12">
 				<input class="styled-checkbox" type="checkbox" id="prftag" name="prftag" <?php if(isset($_SESSION["postReviewData"])) {if(empty($PRFTemp)) {echo 'value="1" checked="checked"';}} ?>>
 				<label for="prftag" id="prftagAgree">No, I do not want to make a donation to the PRF</label>
-			</div>
-			<div class="col-xs-6 col-md-3" id="prfselect">
-				<div class="chevron-select-box">
-					<select class="form-control" id="PRF" name="PRF">
-						<option value="5.00" <?php //if(!isset($_SESSION["postReviewData"])) {echo "selected";} if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="5") {echo "selected";}}?>>$5.00</option>
-						<option value="10.00" <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="10") {echo "selected";}}?>>$10.00</option>
-						<option value="20.00" <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="20") {echo "selected";}}?>>$20.00</option>
-						<option value="50.00" <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="50") {echo "selected";}}?>>$50.00</option>
-						<option value="100.00" <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="100") {echo "selected";}}?>>$100.00</option>
-						<option value="Other" <?php //if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo "selected";}}?>>Other</option>
-					</select>
-				</div>
-				<input type="hidden" id="PRFFinal" name="PRFFinal" value=""/>
-				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="<?php //if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo $PRFTemp;}}?>" oninput="this.value = Math.abs(this.value)" min="0">
-				
-				
 			</div>
 	</div>
 	
@@ -664,7 +661,7 @@ asd
 		</div>
 	<div id="anothercardBlock" class="row">
 		<div class="row">
-			<div class="col-xs-12 col-sm-6">
+			<div class="col-xs-12 col-sm-6 col-md-6">
 				<label for="">Payment method:<span class="tipstyle"> *</span></label>
 				<div class="chevron-select-box">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
@@ -682,23 +679,23 @@ asd
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-12 col-sm-6">
+			<div class="col-xs-12">
 				<label for="">Name on card:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-6 col-sm-6">
+			<div class="col-xs-12">
 				<label for="">Card number:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
 
-			<div class="col-xs-6 col-sm-3">
+			<div class="col-xs-6 col-md-6">
 				<label for="">Expiry date:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" maxlength="4">
 			</div>
 
-			<div class="col-xs-6 col-sm-3">
+			<div class="col-xs-6 col-md-6">
 				<label for="">CVV:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
@@ -715,7 +712,23 @@ asd
 	<?php if (sizeof($cardsnum["results"])==0): ?> 
 	<div id="anothercardBlock" class="row show">					   
 		<div class="row">
-			<div class="col-xs-6 col-sm-6">
+			<div class="col-xs-12 col-sm-6 col-md-6" id="prfselect">
+				<label for="">Your donation:</label>
+				<div class="chevron-select-box">
+					<select class="form-control" id="PRF" name="PRF">
+						<option value="5.00" <?php //if(!isset($_SESSION["postReviewData"])) {echo "selected";} if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="5") {echo "selected";}}?>>$5.00</option>
+						<option value="10.00" <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="10") {echo "selected";}}?>>$10.00</option>
+						<option value="20.00" <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="20") {echo "selected";}}?>>$20.00</option>
+						<option value="50.00" <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="50") {echo "selected";}}?>>$50.00</option>
+						<option value="100.00" <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="100") {echo "selected";}}?>>$100.00</option>
+						<option value="Other" <?php //if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo "selected";}}?>>Other</option>
+					</select>
+				</div>
+				<input type="hidden" id="PRFFinal" name="PRFFinal" value=""/>
+				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="<?php //if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo $PRFTemp;}}?>" oninput="this.value = Math.abs(this.value)" min="0">
+			</div>
+
+			<div class="col-xs-12 col-sm-6 col-md-6">
 				<label for="">Payment method:<span class="tipstyle"> *</span></label>
 				<div class="chevron-select-box">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
@@ -733,23 +746,23 @@ asd
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-12 col-sm-6">
+			<div class="col-xs-12">
 				<label for="">Name on card:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Cardname" name="Cardname" placeholder="Name on card">
 			</div>
 		</div>
 		<div class="row">
-			<div class="col-xs-12 col-sm-6">
+			<div class="col-xs-12">
 				<label for="">Card number:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Cardnumber" name="Cardnumber" placeholder="Card number" maxlength="16">
 			</div>
 
-			<div class="col-xs-6 col-sm-3">
+			<div class="col-xs-6 col-md-6">
 				<label for="">Expiry date:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="Expirydate" name="Expirydate" placeholder="mmyy (eg: 0225)" maxlength="4">
 			</div>
 
-			<div class="col-xs-6 col-sm-3">
+			<div class="col-xs-6 col-md-6">
 				<label for="">CVV:<span class="tipstyle"> *</span></label>
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>

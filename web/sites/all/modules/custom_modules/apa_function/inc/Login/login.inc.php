@@ -1215,20 +1215,10 @@ $(document).ready(function(){
 			<div class="nameHello"><span class="icon user_icon"></span>Hi <?php echo $name; ?></div>
 		</div>
 
-		<?php if($counts == 0): ?>
-			<div class="cart_wrapper" title="Shopping cart">
-				<div class="ButtonIconHolder">
-					<div class="ShoppingCartEmpty">0</div>
-				</div>
-			</div>
-
-		<?php else: ?>
-			<div class="cart_wrapper" title="Shopping cart">
-				<div class="ButtonIconHolder">
-					<div class="ShoppingCart"><?php echo $counts; ?></div>
-				</div>
-			</div>
-		<?php endif; ?>
+		<div class="cart_wrapper" title="Shopping cart">
+			<span class="cart_icon"></span>
+			<span class="cart_number"><?php echo $counts; ?></span>
+		</div>
 
 		<div class="user_menu">
 			<ul>

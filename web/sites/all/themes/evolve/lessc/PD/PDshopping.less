@@ -811,20 +811,6 @@ fieldset {
 body{
   .countdown_wrapper{
     text-align: right;
-    @media @phone-width-down{
-      line-height: 1.2em;
-      position: fixed;
-      bottom: 0;
-      background: #009fda;
-      color: #fff;
-      width: 100%;
-      left: 0;
-      z-index: 99;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      padding: 0 30px;
-    }
     #timer{
       color: @bright-blue; 
       font-weight: 700;
@@ -839,17 +825,6 @@ body{
       padding-right: 0;
       letter-spacing: 5px;
       text-align: center;
-      @media @phone-width-down{
-        padding-top: 0;
-        padding-left: 0;
-        text-align: right;
-        max-width: 85px;
-        margin-left: auto;
-        font-size: 1.5em;
-        letter-spacing: 2px;
-        padding-bottom: 0;
-        color: #ffffff;
-      }
     }
     &.locked{
       &:before{
@@ -868,7 +843,35 @@ body{
       }
     }
   }
-  
+  .countdown_wrapper{
+    @media @phone-width-down{
+      line-height: 1.2em;
+      position: fixed;
+      bottom: 0;
+      background: #009fda;
+      color: #fff;
+      width: 100%;
+      left: 0;
+      z-index: 99;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 0 30px;
+    }
+    #timer{
+      @media @phone-width-down{
+        padding-top: 0;
+        padding-left: 0;
+        text-align: right;
+        max-width: 85px;
+        margin-left: auto;
+        font-size: 1.5em;
+        letter-spacing: 2px;
+        padding-bottom: 0;
+        color: #ffffff;
+      }
+    }
+  }
 }
   
 

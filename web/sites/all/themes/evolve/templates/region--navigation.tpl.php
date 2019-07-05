@@ -76,9 +76,8 @@ if ($content):
         </div>
 
         <div class="cart_wrapper" title="Shopping cart">
-          <div class="ButtonIconHolder">
-            <div class="ShoppingCart"><?php echo $counts; ?></div>
-          </div>
+          <span class="cart_icon"></span>
+          <span class="cart_number"><?php echo $counts; ?></span>
         </div>
 
       <?php else: ?>

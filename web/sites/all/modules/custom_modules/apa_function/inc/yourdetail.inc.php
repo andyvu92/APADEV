@@ -395,7 +395,7 @@ if(isset($_Get["action"]) && $_Get["action"] = "rollover") {
 ?>
 
 
-<div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
+<div id="pre_background" style="display:none">background_<?php// echo $background; ?></div>
 <div class="extra_information">
 <?php
 // please use those data!!!!

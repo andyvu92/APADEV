@@ -192,8 +192,8 @@ if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID 
 $background = getBackgroundImage($userID);
 /* get background image****/      
 ?>
-<div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
-<div class="col-xs-12 background_<?php echo $background; ?>" id="dashboard-right-content">
+<div id="pre_background" style="display:none">background_<?php //echo $background; ?></div>
+<div class="col-xs-12 background_<?php //echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 	<?php
 	//include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');

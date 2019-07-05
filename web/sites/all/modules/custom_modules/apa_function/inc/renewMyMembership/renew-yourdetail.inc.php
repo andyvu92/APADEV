@@ -542,7 +542,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				
 				<div class="row">
 					<div class="col-xs-12">
-						<span class="light-lead-heading cairo" style="font-weight: 200; margin-bottom: 18px;">Phone numbers:</span>
+						<span class="section_title">Phone numbers:</span>
 						<label for="">Please enter at least one phone number</label>
 						<span class="text-underline smaller-lead-heading" style="color: #000">Home</span>
 					</div>
@@ -634,13 +634,13 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<label for="">Area code</label>
 						<input type="text" class="form-control" name="Mobile-areacode" <?php /*if (empty($details['Mobile-area-code'])) {echo "placeholder='Mobile Area code'";}   else{ echo 'value="'.$details['Mobile-area-code'].'"'; }*/?>  maxlength="5">
 					</div>-->
-					<div class="col-xs-6 col-md-6">
+					<div class="col-xs-6 col-md-3">
 						<label for="">Mobile number<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" name="Mobile-number" <?php if (empty($details['Mobile-number'])) {echo "placeholder='Mobile number'";}   else{ echo 'value="'.$details['Mobile-number'].'"'; }?>>
 					</div>
 				</div>
 
-					<div class="col-xs-12"><span class="light-lead-heading cairo">Residential address:</span></div>
+					<div class="col-xs-12"><span class="section_title">Residential address:</span></div>
 				<div class="row">
 					<div class="col-xs-12">
 					   <label for="">Building name</label>
@@ -719,9 +719,9 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 				</div>
 				
-				<div class="row payment-line flex-column">
+				<div class="row payment-line flex-column form_one_column">
 					<div class="col-xs-12 col-sm-6">
-						<span class="light-lead-heading cairo">Billing address:</span>
+						<span class="section_title">Billing address:</span>
 					</div>
 
 					<div class="col-xs-12 col-sm-6 align-item-end">
@@ -905,7 +905,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 			</div>
 
 			<div class="row" id="ahpblock">
-				<div class="col-xs-6 col-md-3">
+				<div class="col-xs-12 col-md-6">
 					<label for="">AHPRA number</label>
 					<input type="text" class="form-control" name="Ahpranumber"  <?php if (empty($details['Ahpranumber'])) {echo "placeholder='AHPRA number'";}   else{ echo 'value="'.$details['Ahpranumber'].'"'; }?>>
 				</div>
@@ -1131,17 +1131,17 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				</div>
 
 				<div class="row">
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-6 col-md-6">
 						<label for="Wcity">City/Town<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" name="Wcity<?php echo $key;?>" id="Wcity<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wcity'])) {echo "placeholder='City or town'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wcity'].'"'; }?>>
 					</div>
 
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-6 col-md-6">
 						<label for="Wpostcode">Postcode<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" name="Wpostcode<?php echo $key;?>" id="Wpostcode<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wpostcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wpostcode'].'"'; }?>>
 					</div>
 
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-6 col-md-6">
 						<label for="Wstate">State</label>
 						<div class="chevron-select-box">
 						<select class="form-control" id="Wstate<?php echo $key;?>" name="Wstate<?php echo $key;?>">
@@ -1160,7 +1160,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						</div>
 					</div>
 
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-6 col-md-6">
 						<label for="Wcountry<?php echo $key;?>">Country<span class="tipstyle"> *</span></label>
 						<div class="chevron-select-box">
 						<select class="form-control" id="Wcountry<?php echo $key;?>" name="Wcountry<?php echo $key;?>" required>
@@ -1183,13 +1183,13 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				</div>
 
 				<div class="row">
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-12 col-sm-6 col-md-6">
 						<label for="Wemail">Workplace email</label>
 						<input type="text" class="form-control" name="Wemail<?php echo $key;?>" id="Wemail<?php echo $key;?>"  <?php if (empty($details['Workplaces'][$key]['Wemail'])) {echo "placeholder='Workplace email'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wemail'].'"'; }?>>
 						<div id="EmailMessage<?php echo $key;?>"></div>
 					</div>
 
-					<div class="col-xs-6 col-md-3">
+					<div class="col-xs-12 col-sm-6 col-md-6">
 						<label for="Wwebaddress">Website</label>
 						<input type="text" class="form-control" name="Wwebaddress<?php echo $key;?>" id="Wwebaddress<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Wwebaddress'])) {echo "placeholder='Website'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Wwebaddress'].'"'; }?>>
 					</div>
@@ -1358,7 +1358,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 			</div>
 			
 			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-				<a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a>
+				<a class="add-workplace-join"><span class="icon plus_circle"></span>Add workplace</a>
 			</div>
 
 			<div class="col-xs-12 btn_wrapper">   
@@ -1595,7 +1595,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 		</div>
 		<div class="col-xs-12">
-				<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>		
+				<a class="add-additional-qualification"><span class="icon plus_circle"></span>Add qualification</a>		
 		</div>
 		<div class="col-xs-12 btn_wrapper">
 			<a href="javascript:document.getElementById('your-detail-form').submit();" variant="next" class="join-details-button4">

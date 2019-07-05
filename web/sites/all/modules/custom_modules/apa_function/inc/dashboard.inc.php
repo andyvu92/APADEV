@@ -30,7 +30,7 @@ $background = getBackgroundImage($userID);
 ?>
 <?php if(isset($_SESSION["UserId"])) : ?>
 <div id="cpd" style="display:none"><?php echo $cpd; ?></div>
-<div id="pre_background" style="display:none">background_<?php echo $background; ?></div>
+<div id="pre_background" style="display:none">background_<?php //echo $background; ?></div>
 <?php if($_SESSION['MemberTypeID']!="1"): ?>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -171,7 +171,7 @@ $background = getBackgroundImage($userID);
 <?php //include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 apa_function_dashboardLeftNavigation_form();
  ?> 
-<div class="col-xs-12 col-md-10 background_<?php echo $background; ?>" id="dashboard-right-content">
+<div class="col-xs-12 col-md-10 background_<?php //echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12"><span class="dashboard-name cairo" maxChar="30">Hello <?php 

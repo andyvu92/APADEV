@@ -89,22 +89,26 @@ if(isset($_SESSION["UserId"])) {
 		<ul class="nav navbar-nav navbar-left">
 			<li class="dashboard-nav">
 				<a href="dashboard">
-					<div class="dashboard-button-name"><span class="left-nav-icon dashboard-icon"></span>Dashboard</div>
+					<span class="doashboard_icon"></span>
+					Dashboard
 				</a>
-				</li>
+			</li>
 			<li class="dashboard-nav">
 				<a href="your-details">
-					<div class="dashboard-button-name"><span class="left-nav-icon account-icon"></span>Account</div>
+					<span class="account_icon"></span>
+					Account
 				</a>
 			</li>
 			<li class="dashboard-nav">
 				<a href="your-purchases">
-					<div class="dashboard-button-name"><span class="left-nav-icon purchases-icon"></span>Purchases</div>
+					<span class="purchase_icon"></span>
+					Purchases
 				</a>
 			</li>
 			<li class="dashboard-nav">
 				<a href="subscriptions">
-					<div class="dashboard-button-name"><span class="left-nav-icon subscription-icon"></span>Subscriptions</div>
+					<span class="subscription_icon"></span>
+					Subscriptions
 				</a>
 			</li>
 			<li class="dashboard-nav">
@@ -120,11 +124,13 @@ if(isset($_SESSION["UserId"])) {
 				?>
 				<?php  if($details['MemberTypeID']!="1" && checkRenew($_SESSION['payThroughDate'], $tag)):?>
 				<a href="/renewmymembership">
-					<div class="dashboard-button-name"><span class="left-nav-icon renew-icon"></span>Renew</div>
+					<span class="renew_icon"></span>
+					Renew
 				</a>
 				<?php elseif($details['MemberTypeID']=="1"):?>
 				<a href="/membership-question">
-					<div class="dashboard-button-name"><span class="left-nav-icon renew-icon"></span>Join the APA</div>
+					<span class="renew_icon"></span>
+					Join the APA
 				</a>
 				<?php endif;?>
 				

@@ -32,7 +32,7 @@ $SetDate = strtotime("13-11-2018");
 <?php //include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 apa_function_dashboardLeftNavigation_form();
  ?>
-<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?>" id="dashboard-right-content">
+<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php //echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12"><span class="dashboard-name cairo">Your purchases</span></div>
