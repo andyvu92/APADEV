@@ -259,7 +259,8 @@ if(isset($_SESSION["UserId"])){
 				}
 				setTimeout("countDown()", 1000);
 			}else{
-				location.reload(true);
+				//location.reload(true);
+				window.history.back();
 			}
 		}
 		countDown();
