@@ -2376,10 +2376,102 @@ jQuery(document).ready(function() {
   });
 
   /* FULL HEIGHT SIDEBAR FOR RENEW */
-  
   $('.dashboard-left-nav').each(function () {
     if( $('body').find('#your-detail-form') ) {
       $(this).parent().css('display', 'flex');
     }
+  });
+
+  // STICKY SIDEBAR FOR JOIN/RENEW
+  $('.Membpaymentsiderbar').each(function () {
+    var sidebar = $(this);
+    var startPoint = $(sidebar).offset().top - 18;
+    var formWrapper = $('#join-review-form');
+    var renewForm = false;
+    if( $('body').find('.renew_content').length > 0 ) {
+      var mainContent = $('body').find('.review-main-container');
+      var renewForm = true;
+    } else {
+      var mainContent = $('body').find('.main_content');
+      var renewForm = false;
+    }
+
+    $(window).on('scroll resize load', function () {
+      // calc window width to restrict sidebar sticky
+      var window_width = $(window).width();
+      var stickySidebarActive = true;
+      // JOIN FORM
+      if( window_width < 993 && !renewForm ) {
+        stickySidebarActive = false;
+      }
+      // RENEW FORM
+      if( window_width < 1201 && renewForm ) {
+        stickySidebarActive = false;
+      }
+
+      // form wrapper left position & width
+      var formWrapperLeft = $(formWrapper).offset().left;
+      var formWrapperWidth = $(formWrapper).width();
+      // main content width
+      var contentWidth = $(mainContent).outerWidth(true);
+      
+      // calc sidebar width by substracting main content width from container width
+      var sidebarWidth = formWrapperWidth - contentWidth;
+      // set min-height to keep container height when sidebar is taken
+      var sidebarheight = $(sidebar).outerHeight();
+      $(sidebar).parent().find('.main_content').css('min-height', sidebarheight);
+      // calc sidebar left position
+      var sidebarLeft = formWrapperLeft + contentWidth;
+      var headerHeight = $('#section-header').height();
+      // get endpoint where sidebar should stop
+      var endPoint = $('body').find('#anothercardBlock').offset().top;
+
+      // calc stop position in the bottom for sidebar
+      var floatBottomPosition = endPoint - startPoint;
+
+      // calc current window scroll point by adding heading height
+      var currentScrollPoint = $(this).scrollTop();
+      currentScrollPoint = currentScrollPoint + headerHeight;
+
+      // switch for sidebar to stay when reach bottom
+      var floatBottom = false;
+
+      // sidebar only active on window height > 992
+      if(stickySidebarActive) {
+        // start sticky
+        if( currentScrollPoint > startPoint && !floatBottom ) {
+          $(sidebar).addClass('sticky');
+          $(sidebar).css({
+            'left': sidebarLeft,
+            'top': headerHeight,
+            'width': sidebarWidth,
+            'max-width': sidebarWidth
+          });
+        } else {
+          $(sidebar).removeClass('sticky');
+          $(sidebar).css({
+            'left': '',
+            'top': '',
+            'width': '',
+            'max-width': ''
+          });
+        }
+
+        // stop sticky | start floating bottom
+        if( currentScrollPoint > endPoint ) {
+          $(sidebar).addClass('float_bottom');
+          floatBottom = true;
+          $(sidebar).css({
+            'left': '',
+            'top': floatBottomPosition,
+            'width': sidebarWidth,
+            'max-width': sidebarWidth
+          });
+        } else {
+          $(sidebar).removeClass('float_bottom');
+          floatBottom = false;
+        }
+      }
+    });
   });
 });

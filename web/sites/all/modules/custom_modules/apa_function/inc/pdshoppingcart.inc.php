@@ -243,26 +243,23 @@ if(isset($_SESSION["UserId"])){
 					if( sec < 10 ){
 						sec = "0" + sec;
 					}
-					//timer.innerHTML = "0" + min + ":" + sec;
 					timer.value = "0" + min + ":" + sec;
 				} else if (count === 60) {
 					var sec = count%60;
 					if( sec < 10 ){
 						sec = "0" + sec;
 					}
-					//timer.innerHTML = "0" + min + ":" + sec;
 					timer.value = "01:" + sec;
 				}else {
 					var sec = count%60;
 					if( sec < 10 ){
 						sec = "0" + sec;
 					}
-					//timer.innerHTML = "00:" + sec;
 					timer.value = "00:" + sec;
 				}
 				setTimeout("countDown()", 1000);
 			}else{
-				//location.reload(true);
+				location.reload(true);
 			}
 		}
 		countDown();

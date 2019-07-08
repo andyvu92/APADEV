@@ -842,10 +842,6 @@ body .dexp-body-inner #section-content-top[class*="background_"]{
     }
     @media @larger-phone-width-down{
         padding: 0;
-        > .container{
-            padding: 25px 20px;
-            background: #fff;
-        }
     }
 }
 
@@ -1052,7 +1048,6 @@ a#insuranceControl{
 }
 /*--DASHBOARD LEFT NAVIGATION--*/
 .dashboard-left-nav{
-    background: @dark-transparent-background;
     padding: @no-padding;
     height: auto;
     transform: translateY(0%);
@@ -1189,7 +1184,7 @@ a#insuranceControl{
                 }
             }
             .user-name{
-                color: #fff;
+                color: #32363D;
                 font-size: 16px;
                 font-weight: 600;
                 display: block;
@@ -1240,9 +1235,12 @@ a#insuranceControl{
         border-left: 5px solid rgba(0,184,241,0);
         transition: 0.1s linear;
         &.active{
-            border-left: 5px solid @brighter-blue;
-            background: @brighter-blue;
+            border-left: 5px solid @bright-blue;
+            background: @bright-blue;
             position: relative;
+            a{
+                color: #fff!important;
+            }
             @media @larger-tablet-width-down{
                 border-left: 0px;
             }
@@ -1253,10 +1251,8 @@ a#insuranceControl{
                 position: absolute;
                 top: 35%;
                 right: -7px;
-                background: rgb(237, 235, 232);
+                background: #F2F3F4;
                 transform: rotate(45deg);
-                background: linear-gradient(45deg, #edebe8 0%,#edebe8 50%,
-                                            rgb(237, 235, 232, 0) 51%,rgb(237, 235, 232, 0) 100%);
                 @media all and (max-width: @larger-tablet-width){
                     display: none;
                 }
@@ -1297,14 +1293,6 @@ a#insuranceControl{
                     color: @brighter-blue;
                     font-weight: 300;
                 }
-            }
-        }
-        &:hover{
-            border-left: 5px solid @brighter-blue;
-            background: rgba(87,87,94,0.5);
-            .dashboard-button-name{
-                color: @brighter-blue;
-                font-weight: 300;
             }
         }
         .dashboard-button-name{
@@ -3126,9 +3114,6 @@ select.form-control{
         }
     }
     .Membpaymentsiderbar{
-        @media all and (max-width: @desktop-width){
-            width: 100%;
-        }
         @media all and (max-width: @larger-phone-width){
             padding: 15px;
         }
@@ -3951,22 +3936,46 @@ input[type="email"], .email-field{
 }
 
 /* DASHBOARD STYLES */
-#section-content-top{
+#section-content-top[class*="background_"]{
     border-top: 1px solid rgba(0,0,0,0.08)!important;
     .region-content-top{
-        margin: 30px 0;   
+        @media @larger-desktop-width-up{
+            margin: 4vh 0; 
+        }
     }
     .dashboard-left-nav{
+        @media @larger-tablet-width-up{
+            background: #E7E8E9;
+        }
         .dashboard-nav{
+            border-top: 1px solid rgba(0,0,0,0.12);
+            &:last-child{
+                border-bottom: 1px solid rgba(0,0,0,0.12);
+            }
+            &:not(.active):hover{
+                border-left: 5px solid @brighter-blue;
+                a{
+                    color: @bright-blue!important;
+                    span{
+                        svg{
+                            path{
+                                fill: @bright-blue;
+                            }
+                        }
+                    }
+                }
+            }
             a{
                 display: flex;
                 justify-content: flex-start;
                 align-items: center;
-                color: #fff!important;
+                color: #32363D!important;
+                transition: all .2s linear;
                 @media @larger-tablet-width-down{
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
+                    color: #fff!important;
                 }
                 span{
                     display: block;
@@ -3981,6 +3990,20 @@ input[type="email"], .email-field{
                         width: 20px;
                         height: 20px;
                         path{
+                            transition: all .2s linear;
+                            fill: #32363D;
+                            @media @larger-tablet-width-down{
+                                fill: #fff;
+                            }
+                        }
+                    }
+                }
+            }
+            &.active{
+                a{
+                    color: #fff!important;
+                    svg{
+                        path{
                             fill: #fff;
                         }
                     }
@@ -3988,7 +4011,62 @@ input[type="email"], .email-field{
             }
         }
     }
-    #dashboard-right-content{
+    #dashboard-right-content.dashboard_content{
+        background: #F2F3F4;
+    }
+}
 
+/* STICKY SIDEBAR FOR JOIN/RENEW */
+#join-review-form{
+    position: relative;
+    .Membpaymentsiderbar{
+        &.sticky{
+            position: fixed;
+            &.float_bottom{
+                position: absolute;
+                right: 0;
+            }
+        }
+    }
+}
+
+/* JOIN FORM */
+#dashboard-right-content{
+    &.join_content{
+        #join-review-form{
+            .main_content{
+                @media @larger-tablet-width-down{
+                    padding-right: 0;
+                    padding-left: 0;
+                }
+                .Membpaymentsiderbar{
+                    @media all and (max-width: 1130px) and (min-width: 993px){
+                        padding: 25px 20px 8px;
+                        .payment_heading h3{
+                            line-height: 1.3em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    &.renew_content{
+        #join-review-form{
+            .review-main-container{
+                @media @desktop-width-down{
+                    width: 100%;
+                }
+            }
+            .Membpaymentsiderbar{
+                @media @desktop-width-down{
+                    width: calc(~'100% - 30px');
+                    margin-left: 15px!important;
+                }
+                @media @larger-phone-width-down{
+                    width: 100%;
+                    margin-left: 0!important;
+                }
+            }
+        }
     }
 }

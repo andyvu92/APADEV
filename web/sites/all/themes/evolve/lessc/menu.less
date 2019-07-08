@@ -227,6 +227,13 @@
 
 /* MOBILE MENU */
 .html{
+    &.menu-open{
+        @media @larger-tablet-with-down{
+            .dashboard-left-nav{
+                z-index: 9;
+            }
+        }
+    }
     @media @larger-tablet-width-down{
         a.site-logo{
             text-align: left;
@@ -242,6 +249,11 @@
                 overflow: hidden!important;
                 position: relative;
                 height: 100vh!important;
+            }
+            @media @larger-tablet-with-down{
+                .dashboard-left-nav{
+                    z-index: 9;
+                }
             }
         }
         &.admin-menu{

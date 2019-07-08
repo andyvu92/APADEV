@@ -158,7 +158,7 @@ $background = getBackgroundImage($userID);
 <!--End Pop up--->
 <!-- PAGE CONTENT BEGIN -->
 <div id="pre_background" style="display:none">background_<?php //echo $background; ?></div>
-	<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php //echo $background; ?> autoscroll" id="dashboard-right-content">
+	<div class="renew_content col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php //echo $background; ?> " id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div class="col-xs-12 page-title">

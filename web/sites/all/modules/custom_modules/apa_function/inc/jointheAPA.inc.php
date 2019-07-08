@@ -21,7 +21,7 @@ $background = getBackgroundImage($userID);
  ?> 
 
 <div id="pre_background" style="display:none">background_<?php //echo $background; ?></div>
-<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 autoscroll background_<?php //echo $background;?> " id="dashboard-right-content">
+<div class="join_content col-xs-12 col-sm-12 col-md-12 col-lg-12 background_<?php //echo $background;?> " id="dashboard-right-content">
 	<?php if(isset($_SESSION['UserId']) && ($_SESSION['MemberTypeID'] !=="1")):?>
 		<!-- EXIST MEMBER -->
 		<?php header("Location: /dashboard");?>
