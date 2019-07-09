@@ -466,7 +466,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	<?php endif; ?>
 	<?php endif; ?>	
 	
-	<?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0 && sizeof($FPListArray)==0) : ?>   <div  class="col-xs-12 no-item-title" style="text-align: center"><h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3></div>      <?php endif;?>
+	
 	<div class="col-xs-12 bottom-buttons">
 		<a class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
 		<a class="addCartlink" href="../your-details?Goback=PD"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
@@ -761,7 +761,12 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	</div>
 
 <?php endif; ?>
-
+<?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0 && sizeof($FPListArray)==0) : ?>   <div  class="col-xs-12 no-item-title" style="text-align: center"><h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3></div>     
+	<div class="col-xs-12  no-item-button">
+		<a class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
+		<a class="addCartlink" href="../your-details?Goback=PD"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
+	</div>
+<?php endif;?>
 <?php 
 		$block = block_load('block', '309');
 		$get = _block_get_renderable_array(_block_render_blocks(array($block)));

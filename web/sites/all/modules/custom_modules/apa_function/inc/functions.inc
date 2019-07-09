@@ -724,11 +724,11 @@ function checkRenew($Paidthrough, $tag){
 			return true;
 		}
 		else {
-			return true;
+			return false;
 		}
 	}
 	else{
-		return true;
+		return false;
 	}
 }
 // sort array by specific key
