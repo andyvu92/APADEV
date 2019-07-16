@@ -3015,18 +3015,29 @@ if(isset($_POST['MT'])){
                     success:function(response) {						
                     var result = response;
                     if(result=="T"){
-						
-                        $('#checkMessage').removeClass("display-none");
+						$('#checkMessage').removeClass("display-none");
 						$( "#Memberid" ).focus();
                         $("#Memberid").css("border", "1px solid red");
                         $(".join-details-button2").addClass("display-none");
                         
                     }
                     else{
-                        $('#checkMessage').html("");
+                        $('#checkMessage').addClass("display-none");
                         $( "#Memberid" ).blur();
                         $("#Memberid").css("border", "");
                         $(".join-details-button2").removeClass("display-none");
+                        if($('#CMemberid').val()!="" && $('#Memberid').val()!= $('#CMemberid').val()){
+                            $('#confirmMessage').html("These emails do not match");
+                            $( "#CMemberid" ).focus();
+                            $("#CMemberid").css("border", "1px solid red");
+                            $(".join-details-button2").addClass("display-none");
+                        }
+                        else{
+                            $('#confirmMessage').html("");
+                            $( "#CMemberid" ).blur();
+                            $("#CMemberid").css("border", "");
+                            $(".join-details-button2").removeClass("display-none");
+						}	
                     }                    
                     }
                     });
