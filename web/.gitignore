@@ -12,6 +12,9 @@ web/tmp/*
 # Untrack of htaccess file
 .htaccess
 
+# Untrack of json files
+web/sites/all/theme/evolve/json/*
+
 # Untrack local history
 .history
 
