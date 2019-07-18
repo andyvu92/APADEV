@@ -103,24 +103,37 @@
 			<div class="row">
 				<div class="region region-content col-xs-12 col-sm-12 col-md-9 col-lg-9 MainContent">
 					
-					<!--<h1 class="SectionHeader"><?php //print $node->title;?></h1>
-					<div class="brd-headling">&nbsp;</div>-->
-					
 				<?php
 					// We hide the comments and links now so that we can render them later.
 					hide($content['comments']);
 					hide($content['links']);
 					print render($content['body']);
+					$current_url = $_SERVER['REQUEST_URI'];
+					// if current page is choose physio campaign
+					$choose_physio_page = false;
+					if( strpos($current_url, 'choose-physio') == true ) {
+						$choose_physio_page = true;
+					}
+					// if current page is tradies national health month
+					$tradies_national_health_month_page = false;
+					if(strpos($current_url, 'tradies-national-health-month') == true){
+						$tradies_national_health_month_page = true;
+					}
 					?>
 				
 				</div>
+				
+				<!-- campaign_sidebar -->
 				<div class="region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3">
-					<?php 
+					<!-- for consumer -->
+					<?php
 						$block = block_load('block', '297');
 						$get = _block_get_renderable_array(_block_render_blocks(array($block)));
 						$output = drupal_render($get);        
 						print $output;
 					?>
+
+					<!-- for member -->
 					<?php 
 						$block = block_load('block', '298');
 						$get = _block_get_renderable_array(_block_render_blocks(array($block)));
@@ -132,70 +145,152 @@
 		</div>
 	</div>
 
-	<div class="container">
-	<?php 
-		$block = block_load('block', '302');
-		$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-		$output = drupal_render($get);        
-		print $output;
+	<!-- campaign_parralax_section -->
+	<?php
+		$parralax_section = true;
+		if( $choose_physio_page ){
+			$parralax_section_block = block_load('block', '302');
+		}
+		else if( $tradies_national_health_month_page ){
+			$parralax_section_block = block_load('block', '368');
+		} else {
+			$parralax_section = false;
+		}
+		// if parralax_section is true
+		if( $parralax_section ) {
+			$parralax_section_get = _block_get_renderable_array(_block_render_blocks(array($parralax_section_block)));
+			$parralax_section_output = drupal_render($parralax_section_get); 
+		}
 	?>
+	<?php if( $parralax_section ): ?>
+	<div class="container full_width_section">
+		<?php 
+				print $parralax_section_output; 
+		?>
 	</div>
-    <div id="section-content-bottom-second">
+	<?php endif; ?>
+
+	<!-- campaign_toolkit_section -->
+	<?php 
+		$toolkit_section = true;
+		if( $choose_physio_page ){
+			$toolkit_section_block = block_load('block', '303');
+		}
+		else if( $tradies_national_health_month_page ){
+			$toolkit_section_block = block_load('block', '369');
+		} else {
+			$toolkit_section = false;
+		}
+		// if toolkit_section is true
+		if( $toolkit_section ) {
+			$toolkit_section_get = _block_get_renderable_array(_block_render_blocks(array($toolkit_section_block)));
+			$toolkit_section_output = drupal_render($toolkit_section_get); 
+		}
+	?>
+	<?php if( $toolkit_section ): ?>
+	<div id="section-content-bottom-second">
 		<div class="container">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 ">
-			<?php 
-				$block = block_load('block', '303');
-				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-				$output = drupal_render($get);        
-				print $output;
-			?>
+			<div class="col-xs-12">
+				<?php 
+						print $toolkit_section_output; 
+				?>
 			</div>
 		</div>
 	</div>
-	<div id="section-content-bottom-third">
+	<?php endif; ?>
+
+	<!-- campaign_tabbed_section -->
+	<?php 
+		$tabbed_section = true;
+		if( $choose_physio_page ){
+			$tabbed_section_block = block_load('block', '304');
+		}
+		else if( $tradies_national_health_month_page ){
+			$tabbed_section_block = block_load('block', '370');
+		} else {
+			$tabbed_section = false;
+		}
+		// if tabbed_section is true
+		if( $tabbed_section ){
+			$tabbed_section_get = _block_get_renderable_array(_block_render_blocks(array($tabbed_section_block)));
+			$tabbed_section_output = drupal_render($tabbed_section_get);        
+		}
+	?>
+	
+	<?php if( $tabbed_section ): ?>
+	<div id="section-content-bottom-third" class="tabbed_section_container">
 		<div class="container">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<?php 
-				$block = block_load('block', '304');
-				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-				$output = drupal_render($get);        
-				print $output;
-			?>
+			<div class="col-xs-12">
+				<?php print $tabbed_section_output; ?>
 			</div>
 		</div>
 	</div>
+	<?php endif; ?>
+
+	<!-- caimpaign_find_a_physio_section -->
 	<div id="section-content-bottom-fourth">
 		<div class="container">
-			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<?php 
-				$block = block_load('block', '305');
-				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-				$output = drupal_render($get);        
-				print $output;
-			?>
-			<?php 
-			$block = block_load('block', '306');
+			<div class="col-xs-12">
+				<!-- caimpaign_find_a_physio_section -->
+				<?php 
+					$find_a_physio_section_block = block_load('block', '305');
+					$find_a_physio_section_get = _block_get_renderable_array(_block_render_blocks(array($find_a_physio_section_block)));
+					$find_a_physio_section_output = drupal_render($find_a_physio_section_get);        
+					print $find_a_physio_section_output;
+				?>
+
+				<div class="back-to-top">
+					<span>Back to top</span>
+				</div>
+
+				<!-- caimpaign_faq_section -->
+				<?php 
+					$faq_section = false;
+					if( $choose_physio_page ){
+						$faq_section_block = block_load('block', '306');
+					}
+					else if( $tradies_national_health_month_page ){
+						$faq_section = false;
+					} else {
+						$faq_section = false;
+					}
+					// if faq_section is true
+					if( $faq_section ) {
+						$faq_section_get = _block_get_renderable_array(_block_render_blocks(array($faq_section_block)));
+						$faq_section_output = drupal_render($faq_section_get);        
+					}
+					
+				?>
+				<?php if( $faq_section ): ?>
+					<?php 
+						print $faq_section_output; 
+					?>
+				<?php endif; ?>
+				
+				<p>By using the campaign as a conversation starter within your own workplace and community, its penetration and impact on consumers will be greatly enhanced and will help us achieve our objective of increased awareness of the profession, its strong relationship with GPs and increased demand for services.</p>
+
+				<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
+			</div>
+		</div>
+	</div>
+	
+	<?php else: $url = "{$_SERVER['REQUEST_URI']}";?>
+	<!-- NON-MEMBER SECTION -->
+	<div class="flex-container" id="non-member">
+		<!-- LOGIN PROM -->
+		<?php 
+			$block = block_load('block', '358');
 			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
 			$output = drupal_render($get);        
 			print $output;
-			?>
-			</div>
-		</div>
-	</div>
-    <?php else: $url =  "{$_SERVER['REQUEST_URI']}";?>
-	<div class="flex-container" id="non-member">
-		<?php 
-				$block = block_load('block', '358');
-				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-				$output = drupal_render($get);        
-				print $output;
 		?>
 
+		<!-- DIGITAL ADS -->
 		<?php 
-				$block = block_load('block', '309');
-				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-				$output = drupal_render($get);        
-				print $output;
+			$block = block_load('block', '309');
+			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+			$output = drupal_render($get);        
+			print $output;
 		?>
 
 	</div>

@@ -69,13 +69,13 @@ jQuery(document).ready(function() {
   list.find(".acordian-label").on("click", function(){
     if (jQuery(this).hasClass('active')) {
       $(this).removeClass('active');
-      $(this).next().slideToggle("fast", "swing").slideUp();
+      $(this).next().slideToggle(500);
     }
     else
     {
       $(".acordian-label").removeClass('active');
       $(this).addClass('active');
-      $(this).next().slideToggle("fast", "swing").siblings(".accordian-content").slideUp();
+      $(this).next().slideToggle(500).siblings(".accordian-content").slideUp(500);
     }
   });
 
@@ -2473,5 +2473,39 @@ jQuery(document).ready(function() {
         }
       }
     });
+  });
+
+  // CAMPAIGN SIDEBAR - SET LINK
+  $('.nav-block#member-block').each(function () {
+    var preUrl = window.location.href;
+    // member page
+    if( window.location.href.indexOf('about-campaign') > -1 ) {
+      $('a.dynamic_url').each(function () {
+        var currentUrl = $(this).attr('dynamic-url');
+        $(this).attr('href', '#'+currentUrl);
+      });
+    // non-member page
+    } else {
+      if(window.location.href.indexOf('campaign') > -1) {
+        $('a.dynamic_url').each(function () {
+          var currentUrl = $(this).attr('dynamic-url');
+          $(this).attr('href', preUrl+'/about-campaign/#'+currentUrl);
+        });
+      }
+    }
+
+    // remove faq link if no faq section is found
+    if( $('body').find('.campaign_qa_section').length > 0 ) {
+      return;
+    } else {
+      $(this).find('a[dynamic-url="faq"]').remove();
+    }
+  });
+
+  // REMOVE SECTION IF NO BLOCK IS FOUND
+  $('.block_condition_section').each(function(){
+    if( !$(this).find('.block').length ) {
+      $(this).remove();
+    }
   });
 });

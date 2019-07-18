@@ -27,6 +27,12 @@
     body, .html{
         .container{
             max-width: 1500px;
+            &.full_width_section{
+                width: 100%;
+                max-width: unset;
+                padding-left: 0;
+                padding-right: 0;
+            }
         }
     }
 /*--HOMEPAGE--*/
@@ -6498,4 +6504,146 @@ body .social_media_contact{
 /* remove unuse fonts */
 body a b, body span b{
     font-family: Roboto;
+}
+
+/* TRADIES BANNER */
+.html #section-banner .block{
+    #tradies-main-banner{
+        padding: 170px 25% 130px;
+        @media @large-ipadpro-down{
+            padding: 130px 15% 100px;
+        }
+        .text-container{
+            text-align: center;
+        }
+    }
+}
+
+/* TRADIES GRID */
+#tradies-grid{
+    margin: 12vh 0;
+    @media @large-ipadpro-down{
+        margin: 8vh 0;
+    }
+    @media @larger-phone-width-down{
+        margin: 12vh 0;
+    }
+    .grid_header{
+        margin-bottom: 6vh;
+        h2{
+            margin: 0;
+            color: #333;
+            font-size: 2.3em;
+            text-align: center;
+        }
+    }
+    .grid_wrapper{
+        display: flex;
+        justify-content: center;
+        @media @larger-phone-width-down{
+            flex-direction: column;
+        }
+        .tradies_item{
+            width: calc(~'33.33% - 15px');
+            display: flex;
+            flex-direction: column;
+            max-width: 420px;
+            margin: 0 15px;
+            @media @larger-phone-width-down{
+                flex-direction: column;
+                margin: 0;
+                width: 100%;
+                margin-bottom: 8vh;
+                &:last-of-type{
+                    margin-bottom: 0;
+                }
+            }
+            .item_featured_image{
+                padding-bottom: 54.5%;
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+            }
+            .item_details{
+                margin-top: 30px;
+                @media @larger-phone-width-down{
+                    margin-top: 15px;
+                }
+                .item_heading{
+                    font-size: 1.3em;
+                    padding: 0 0 20px;
+                    margin-bottom: 20px;
+                    border-bottom: 1px solid rgba(0,0,0,0.12);
+                }
+                .item_url{
+                    color: #333;
+                    font-size: 1.2em;
+                    font-weight: 700;
+                    text-decoration: underline;
+                    transition: all .2s ease;
+                    &:hover{
+                        color: @bright-blue;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* CAMPAIGN SUPPORTER GRID */
+.campaign_supporter_section{
+    .campaign_supporters{
+        border: 1px solid rgba(0,0,0,0.12);
+        border-width: 1px 0;
+        margin: 3vh 0 10vh;
+        padding: 10px 0 15px;
+        .supporter_heading{
+            h3{
+                font-size: 1.2em;
+                color: #333;
+                padding: 0;
+            }
+        }
+        .supporter_grid{
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            .supporter{
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                position: relative;
+                @media @large-ipadpro-down{
+                    width: 30%;
+                    margin-bottom: 15px;
+                }
+                @media @larger-phone-width-down{
+                    width: 40%;
+                }
+                .supporter_logo{
+                    padding-bottom: 50px;
+                    @media @large-ipadpro-down{
+                        padding-bottom: 35px;
+                    }
+                    @media @larger-phone-width-down{
+                        padding-bottom: 0;
+                    }
+                }
+                .supporter_url{
+                    position: absolute;
+                    bottom: 5px;
+                    color: #333;
+                    transition: all .2s ease;
+                    &:hover{
+                        text-decoration: underline;
+                        color: @bright-blue;
+                    }
+                    @media @larger-phone-width-down{
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
 }
