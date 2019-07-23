@@ -267,14 +267,13 @@ if(isset($_SESSION["UserId"])){
 	</script>
 	
 	<?php 
+	$Availability = true;
 	if(sizeof($products)!=0){
 		////print_r($products);
 		$ListProductID = Array();
 		$discountPrice=0;
-		$Availability = true;
 		foreach($products as $productt){
 		$n = 0;
-
 
 		/* Event status checker start */
 		$available = true;
