@@ -197,7 +197,7 @@ function date_sort($a, $b) {
 		</div>
 		<form name="formradio" action="cpd-diary" method="POST">
 		<div class="modal-body">
-			<p>Please note, saved entries cannot be edited. If you need to make any amendments, please contact <a href="mailto:info@australian.physio">info@australian.physio</a> </p>
+			<p>Please note, saved entries cannot be edited. If you need to make any amendments, please contact <a href="mailto:info@australian.physio">info@australian.physio</a>.</p>
 			<input type="hidden" name="nonAPA" value="1" placeholder="" id="hidden">
 			<div class="col-lg-12">
 			<label for="DescripotionNA">Description</label>

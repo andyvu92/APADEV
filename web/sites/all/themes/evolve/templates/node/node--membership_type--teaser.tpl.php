@@ -92,7 +92,6 @@ $rens = str_replace('</div>',"",$rens);
 	<div class="contents">
 		<div class="MTcontent">
 			<div class="MTcontentTitle">Category:</div>
-			<?php //print render($content['field_member_type_category']);?>
 			<?php 
 				print '<div style="text-transform: uppercase;">'.$rens.'</div>';
 			?>
@@ -100,62 +99,17 @@ $rens = str_replace('</div>',"",$rens);
 		<div class="MTcontent">
 			<div class="MTcontentTitle">Price:</div>
 			<?php
-			
 			$TypePrice = file_get_contents("sites/all/themes/evolve/json/TypePrice.json");
 			$TypePrice = json_decode($TypePrice, true);
 			foreach ($TypePrice as $key => $value) {
-				//echo $TypePrice[$key]["Code"]." vs ".strtoupper($rens)."<br>";
 				if($TypePrice[$key]["Code"] == strtoupper($rens)) {
-					//echo "ever?????????????????!!!!!!!!!!!!!!!!!!";
-					print '<div class="MTprice">$'.$TypePrice[$key]["Price"].'</div>';
+					print '<div class="MTprice">$'.$TypePrice[$key]["Price"].": Pro-rata price as of ".date("d/m/y")." valid until 31/12/19".'</div>';
+					print '<div class="MTprice">$'.$TypePrice[$key]["UnitPrice"].": Full price".'</div>';
 					print '<div class="MTid" style="display: none;">'.$TypePrice[$key]["ID"].'</div>';
 				}
 			}
 			?>
-
-			<?php
-				/*
-				// 2.2.31 Get Membership prodcut price
-				// Send - 
-				// userID & product list
-				// Response -Membership prodcut price
-				$prodcutArray = array();
-				$memberProductsArray['ProductID']=$prodcutArray;
-				$memberProdcutID = $memberProductsArray;
-				$MemberTypes = GetAptifyData("31", $memberProdcutID);
-				$MemberType = unique_multidim_array($MemberTypes,'ProductID'); 
-				//$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
-				//$MemberType     = json_decode($MemberTypecode, true);
-				foreach ($MemberType as $key => $value) {
-					$x = explode(" ", $MemberType[$key]['Title']);
-					$y = str_replace(":", "", $x[0]);
-					//$z = str_replace($x[0]." ", "", $MemberType[$key]['Title']);
-					$ID = $MemberType[$key]['ProductID'];
-					$code = $y;
-					//$Title = $z;
-					$Price = $MemberType[$key]['Price'];
-					if($code == strtoupper($rens)) {
-						//echo "ever?????????????????!!!!!!!!!!!!!!!!!!";
-						print '<div class="MTprice">$'.$Price.'</div>';
-						print '<div class="MTid" style="display: none;">'.$ID.'</div>';
-					}
-				}
-				*/
-			?>
-
-			<?php //print '$'.render($content['field_member_type_price']);?>
-			<?php 
-				/*
-				$rens = render($content['field_member_type_price']);
-				$rens = str_replace('<div class="field field-name-field-member-type-price field-type-text field-label-hidden">',"",$rens);
-				$rens = str_replace('<div class="field-items">',"",$rens);
-				$rens = str_replace('<div class="field-item even">',"",$rens);
-				$rens = str_replace('</div>',"",$rens);
-				print '<div class="MTprice">$'.$rens.'</div>';
-				*/
-			?>
 		</div>
-		<?php //print render($content['field_what_is_it']);?>
 		<?php 
 			$rens = render($content['field_what_is_it']);
 			$linksList = explode("\n", $rens);
@@ -197,7 +151,6 @@ $rens = str_replace('</div>',"",$rens);
 				print '</ul></div>';
 			}
 		?>
-		<?php // print render($content['field_eligibility']);?>
 		<?php 
 			$rens = render($content['field_eligibility']);
 			$linksList = explode("\n", $rens);
@@ -239,7 +192,6 @@ $rens = str_replace('</div>',"",$rens);
 				print '</ul></div>';
 			}
 		?>
-		<?php // print render($content['body']); ?>
 		<?php 
 			$rens = render($content['body']);
 			$rens = str_replace('<div class="field field-name-body field-type-text-with-summary field-label-hidden">',"",$rens);
