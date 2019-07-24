@@ -708,6 +708,35 @@
 			color: #fff;
 			background: @brighter-blue;
 		}
+		&.back_to_prev{
+			background: #fff;
+			color: @bright-blue;
+			border: 1px solid @bright-blue;
+			margin-top: 50px;
+			.link-block-icon{
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				svg{
+					height: 20px;
+					path, line{
+						stroke: @bright-blue;
+						transition: all .2s linear;
+					}
+				}
+			}
+			&:hover{
+				background: @bright-blue;
+				color: #fff;
+				.link-block-icon{
+					svg{
+						path, line{
+							stroke: #fff;
+						}
+					}
+				}
+			}
+		}
 		.link-block-title{
 			font-size: 1.3em;
 		}
@@ -739,6 +768,7 @@
 		display: block;
 		font-family: Roboto;
 	}
+	
 }
 
 .page-node-528, .page-node-547{
@@ -1053,6 +1083,7 @@
 		.brd-headling{
 			display: none;
 		}
+
 	}
 }
 
@@ -1365,10 +1396,73 @@
 		position: relative;
 		max-width: 700px;
 		margin: 0 auto;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
 		&.tradies_radio{
 			transform: translateY(-50px);
+			.radio, .radio-btn{
+				filter: blur(0);
+				opacity: 1;
+				transform: scale(1);
+				transition: all .5s ease;
+			}
+			&.radio_active{
+				.radio, .radio-btn{
+					filter: blur(5px);
+					opacity: 0;
+					transform: scale(0.9);
+				}
+			}
 			.radio-btn{
 				left: 43.2%;
+			}
+			.audio_player{
+				width: 100%;
+				@media @larger-phone-width-down{
+					width: calc(~'100% + 30px');
+					top: 0px;
+				}
+				.audio_playlist{
+					@media @larger-phone-width-down{
+						padding: 30px 25px 0;
+					}
+				}
+				.audio_item{
+					.audio_title, .audio_duration{
+						@media @larger-phone-width-down{
+							font-size: 1em;
+							padding: 0 10px;
+						}
+					}
+					.audio_duration{
+						@media @larger-phone-width-down{
+							padding: 0;
+						}
+					}
+				}
+				.control_panel{
+					@media @larger-phone-width-down{
+						padding: 15px;
+						margin: 20px 0 0;
+					}
+					.audio_info, .audio_play_time{
+						@media @larger-phone-width-down{
+							display: none;
+						}
+					}
+					.audio_actions{
+						.audio_play_icon, .audio_pause_icon{
+							svg{
+								@media @larger-phone-width-down{
+									width: 40px;
+									height: 40px;
+								}
+							}
+						}
+					}
+				}
 			}
 		}
 		br{

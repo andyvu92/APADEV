@@ -2279,7 +2279,13 @@ jQuery(document).ready(function() {
     $(this).html(arrow_icon);
   });
 
-  // load svg for back to prev button
+  // load svg for back to prev with circle button
+  $('.arrow_left_circle').each(function () {
+    var arrow_circle_icon = '<svg viewBox="0 0 26.198 26.199" xmlns="http://www.w3.org/2000/svg"><g transform="translate(-121.25 -49.254)" fill="none" stroke="#009fda"><path transform="translate(141.21 62.813) rotate(90)" d="m0 0v14.152l5.427-6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" data-name="Path 22"/><line transform="translate(133.06 57.386) rotate(90)" x1="5.427" y1="5.998" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" data-name="Line 11"/><path transform="translate(148.94 63.449)" d="M-2.2-1.1a12.4,12.4,0,0,1-12.4,12.4,12.4,12.4,0,0,1-12.4-12.4,12.4,12.4,0,0,1,12.4-12.4A12.4,12.4,0,0,1-2.2-1.1Z" stroke-width="1.4" data-name="Path 1393"/></g></svg>';
+    $(this).html(arrow_circle_icon);
+  });
+
+  // load svg for plus circle
   $('.plus_circle').each(function () {
     var plus_circle = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 612 612" xml:space="preserve"><g xmlns="http://www.w3.org/2000/svg"><path d="M306,0C136.992,0,0,136.992,0,306s136.992,306,306,306s306-137.012,306-306S475.008,0,306,0z M306,573.75C158.125,573.75,38.25,453.875,38.25,306C38.25,158.125,158.125,38.25,306,38.25c147.875,0,267.75,119.875,267.75,267.75C573.75,453.875,453.875,573.75,306,573.75zM420.75,286.875h-95.625V191.25c0-10.557-8.568-19.125-19.125-19.125c-10.557,0-19.125,8.568-19.125,19.125v95.625H191.25c-10.557,0-19.125,8.568-19.125,19.125c0,10.557,8.568,19.125,19.125,19.125h95.625v95.625c0,10.557,8.568,19.125,19.125,19.125c10.557,0,19.125-8.568,19.125-19.125v-95.625h95.625c10.557,0,19.125-8.568,19.125-19.125C439.875,295.443,431.307,286.875,420.75,286.875z"/></g></svg>';
     $(this).html(plus_circle);
@@ -2333,6 +2339,12 @@ jQuery(document).ready(function() {
 
   $('.renew_icon').each(function () {
     var icon = '<svg viewBox="0 0 14 16.027" xmlns="http://www.w3.org/2000/svg"><path transform="translate(-1)" d="M14,0H2A.946.946,0,0,0,1,1V16.027l3-2,2,2,2-2,2,2,2-2,3,2V1A.946.946,0,0,0,14,0ZM12,10.017H4v-2h8ZM12,6.01H4v-2h8Z" fill="#32363d"/></svg>';
+    $(this).html(icon);
+  });
+
+  // info icon
+  $('.info_icon').each(function () {
+    var icon = '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01c.564-1.789 1.632-3.932 1.821-4.474.273-.787-.211-1.136-1.74.209l-.34-.64c1.744-1.897 5.335-2.326 4.113.613-.763 1.835-1.309 3.074-1.621 4.03-.455 1.393.694.828 1.819-.211.153.25.203.331.356.619-2.498 2.378-5.271 2.588-4.408-.146zm4.742-8.169c-.532.453-1.32.443-1.761-.022-.441-.465-.367-1.208.164-1.661.532-.453 1.32-.442 1.761.022.439.466.367 1.209-.164 1.661z"/></svg>';
     $(this).html(icon);
   });
 
@@ -2484,6 +2496,12 @@ jQuery(document).ready(function() {
         var currentUrl = $(this).attr('dynamic-url');
         $(this).attr('href', '#'+currentUrl);
       });
+      // back to prev
+      $('a.back_to_prev').each(function(){
+        var strimUrl = 'http://' + window.location.hostname + window.location.pathname;
+        var prevUrl = strimUrl.replace('/about-campaign/', '');
+        $(this).attr('href', prevUrl);
+      });
     // non-member page
     } else {
       if(window.location.href.indexOf('campaign') > -1) {
@@ -2491,6 +2509,8 @@ jQuery(document).ready(function() {
           var currentUrl = $(this).attr('dynamic-url');
           $(this).attr('href', preUrl+'/about-campaign/#'+currentUrl);
         });
+        // back to prev
+        $('a.back_to_prev').remove();
       }
     }
 
@@ -2507,5 +2527,298 @@ jQuery(document).ready(function() {
     if( !$(this).find('.block').length ) {
       $(this).remove();
     }
+  });
+
+  /* AUDIO PLAYLIST */
+
+  // audio play button icon
+  $('.audio_play_icon').each(function () {  
+    var icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59.336 59.334"><g transform="translate(-63.414 -49.152)"><path d="M84.54,91.74l22.374-12.914L84.54,65.908Z" fill="#1a1818"/><path d="M93.082,108.487A29.667,29.667,0,1,1,122.75,78.82,29.7,29.7,0,0,1,93.082,108.487Zm0-56.548a26.88,26.88,0,1,0,26.88,26.881A26.911,26.911,0,0,0,93.082,51.939Z" fill="#1a1818"/></g></svg>';
+    $(this).append(icon);
+  });
+  // audio pause button icon
+  $('.audio_pause_icon').each(function () {  
+    var icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59.336 59.334"><g transform="translate(-120.514 -94.152)"><path d="M150.182,153.487A29.667,29.667,0,1,1,179.85,123.82,29.7,29.7,0,0,1,150.182,153.487Zm0-56.548a26.88,26.88,0,1,0,26.88,26.881A26.911,26.911,0,0,0,150.182,96.939Z" fill="#1a1818"/><rect width="6.73" height="25.695" transform="translate(141.722 111.044)" fill="#1a1818"/><rect width="6.73" height="25.695" transform="translate(152 111.044)" fill="#1a1818"/></g></svg>';
+    $(this).append(icon);
+  });
+  // audio next button icon
+  $('.audio_next_icon').each(function () {  
+    var icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.625 30.336"><g transform="translate(-487.301 -63.656)"><path d="M487.3,93.992l26.262-15.157L487.3,63.662Z" fill="#1a1818"/><rect width="4.375" height="30.26" transform="translate(513.551 63.657)" fill="#1a1818"/></g></svg>';
+    $(this).append(icon);
+  });
+  // audio prev button icon
+  $('.audio_prev_icon').each(function () {  
+    var icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.625 30.336"><g transform="translate(-384.918 -63.656)"><path d="M415.543,93.992,389.281,78.835l26.262-15.172Z" fill="#1a1818"/><rect width="4.375" height="30.26" transform="translate(384.918 63.657)" fill="#1a1818"/></g></svg>';
+    $(this).append(icon);
+  });
+  
+  // AUDIO PLAYLIST CONTROLER
+  $('.audio_player').each(function(){
+    var player = $(this);
+    var controlPanel = $('.control_panel', this);
+    var audio_items = $(this).find('.audio_item audio');
+    var currentAudio;
+    var currentAudioTitle;
+    var playingDuration;
+    var currentAudioTime;
+    var playing = false;
+
+    //play list
+    $(audio_items).on('canplay', function(){
+      var duration = Math.round(this.duration);
+      if( duration < 59 ) {
+        duration = '0:' + duration;
+      } else if( duration === 60 ) {
+        duration = '1:00';
+      } else {
+        var minutes = Math.floor(duration / 60);
+        var seconds = duration - minutes * 60;
+        duration = minutes + ":" + seconds;
+      }
+      $(this).parent().find('.audio_duration').text(duration);
+    });
+    // control panel
+    $('.control_panel').each(function () {
+      // get playing audio info
+      var getDefaultAudioInfo = function(callback){
+        
+        currentAudio = $(player).find('.audio_item.active audio');
+        
+        $(currentAudio).on('loadedmetadata', function(){
+          var duration = Math.round($(this).get(0).duration);
+          currentAudioTime = Math.round($(this).get(0).currentTime);
+          // get duration
+          if( duration < 10 ) {
+            duration = '0:0' + duration;
+          } else if( duration < 59 ) {
+            duration = '0:' + duration;
+          } else if( duration === 60 ) {
+            duration = '1:00';
+          } else {
+            var minutes = Math.floor(duration / 60);
+            var seconds = duration - minutes * 60;
+            duration = minutes + ":" + seconds;
+          }
+          // get current time
+          if( currentAudioTime < 10 ) {
+            currentAudioTime = '0:0' + currentAudioTime;
+          } else if( currentAudioTime < 59 ) {
+            currentAudioTime = '0:' + currentAudioTime;
+          } else if( currentAudioTime === 60 ) {
+            currentAudioTime = '1:00';
+          } else {
+            var minutes = Math.floor(currentAudioTime / 60);
+            var seconds = currentAudioTime - minutes * 60;
+            currentAudioTime = minutes + ":" + seconds;
+          }
+
+          playingDuration = duration;
+          currentAudioTitle = $(player).find('.audio_item.active .audio_title').text();
+          callback();
+        });
+      }
+      
+      // display current audio info
+      function fetchCurrentAudioInfo(){
+        // limit character to 30
+        var maxChar = 30;
+        var charCount = currentAudioTitle.trim().length;
+        
+        if ( charCount > maxChar ){
+          currentAudioTitle = currentAudioTitle.split('').slice(0,maxChar).join('');
+          currentAudioTitle = currentAudioTitle + '...';
+        }
+        $(controlPanel).find('.audio_play_time .audio_current_sec').text(currentAudioTime);
+        $(controlPanel).find('.audio_play_time .audio_duration').text(playingDuration);
+        $(controlPanel).find('.audio_info .playing_title').text(currentAudioTitle);
+      }
+
+      getDefaultAudioInfo(function(){
+        fetchCurrentAudioInfo();
+      });
+
+      // display current audio info
+      function updateCurrentAudioInfo(currentTitle, currentDuration){
+        // limit character to 30
+        var maxChar = 30;
+        var charCount = currentTitle.trim().length;
+        
+        if ( charCount > maxChar ){
+          currentTitle = currentTitle.split('').slice(0,maxChar).join('');
+          currentTitle = currentTitle + '...';
+        }
+
+        // diplay info
+        $(controlPanel).find('.audio_play_time .audio_duration').text(currentDuration);
+        $(controlPanel).find('.audio_info .playing_title').text(currentTitle);
+      }
+
+      // play & pause btns
+      $(controlPanel).find('.audio_status').each(function () {
+        var playBtn = $(this).find('.audio_play_icon');
+        var pauseBtn = $(this).find('.audio_pause_icon');
+        // pause
+        $(pauseBtn).on('click', function(){
+          $(currentAudio).get(0).pause();
+          $(this).parent().removeClass('play').addClass('pause');
+          playing = false;
+        });
+        // play
+        $(playBtn).on('click', function(){
+          $(currentAudio).get(0).play();
+          $(this).parent().removeClass('pause').addClass('play');
+          playing = true;
+        });
+      })
+
+      // next btn
+      $(controlPanel).find('.audio_next').each(function(){
+        $(this).on('click', function(){
+          if( $(currentAudio).parent().next().is('.audio_item') ) {
+            // pause and reset current audio
+            $(currentAudio).get(0).pause();
+            playing = false;
+            $(currentAudio).get(0).currentTime = 0;
+            // get next audio info
+            var nextAudio = $(currentAudio).parent().next().find('audio');
+            setTimeout(function(){
+              currentAudio = nextAudio;
+              var nextAudioTitle = nextAudio.parent().find('.audio_title').text();
+              var nextAudioDuration = nextAudio.parent().find('.audio_duration').text();
+              // switch current audio
+              currentAudio = nextAudio;
+              currentAudioTitle = nextAudioTitle;
+              playingDuration = nextAudioDuration;
+              $(nextAudio).parent().siblings().removeClass('active');
+              $(nextAudio).parent().addClass('active');
+              updateCurrentAudioInfo(nextAudioTitle, nextAudioDuration);
+              // play next audio
+              $(currentAudio).get(0).play();
+              playing = true;
+              $(controlPanel).find('.audio_status').removeClass('pause').addClass('play');
+            }, 10);
+          }
+        });
+      });
+
+      // prev btn
+      $(controlPanel).find('.audio_prev_icon').each(function(){
+        $(this).on('click', function(){
+          if( $(currentAudio).parent().prev().is('.audio_item') ) {
+            // pause and reset current audio
+            $(currentAudio).get(0).pause();
+            playing = false;
+            $(currentAudio).get(0).currentTime = 0;
+            // get next audio info
+            var nextAudio = $(currentAudio).parent().prev().find('audio');
+            setTimeout(function(){
+              currentAudio = nextAudio;
+              var nextAudioTitle = nextAudio.parent().find('.audio_title').text();
+              var nextAudioDuration = nextAudio.parent().find('.audio_duration').text();
+              // switch current audio
+              currentAudio = nextAudio;
+              currentAudioTitle = nextAudioTitle;
+              playingDuration = nextAudioDuration;
+              $(nextAudio).parent().siblings().removeClass('active');
+              $(nextAudio).parent().addClass('active');
+              updateCurrentAudioInfo(nextAudioTitle, nextAudioDuration);
+              // play next audio
+              $(currentAudio).get(0).play();
+              playing = true;
+              $(controlPanel).find('.audio_status').removeClass('pause').addClass('play');
+            }, 10);
+          }
+        });
+
+        // play on title click
+        $(player).find('.audio_item').each(function () {
+          $(this).on('click', function(){
+            var thisAudioItem = $(this);
+            $(this).siblings().removeClass('active');
+            $(this).addClass('active');
+            // pause and reset current audio
+            $(currentAudio).get(0).pause();
+            playing = false;
+            $(currentAudio).get(0).currentTime = 0;
+            setTimeout(function () {
+              // switch current audio
+              var nextAudio = $(thisAudioItem).find('audio');
+              currentAudio = nextAudio;
+              var nextAudioTitle = $(thisAudioItem).find('.audio_title').text();
+              var nextAudioDuration = $(thisAudioItem).find('.audio_duration').text();
+              updateCurrentAudioInfo(nextAudioTitle, nextAudioDuration);
+              // play next audio
+              $(currentAudio).get(0).play();
+              playing = true;
+              $(controlPanel).find('.audio_status').removeClass('pause').addClass('play');
+            }, 10);
+          });
+        });
+
+      });
+    });
+
+    /* ********************TRADIES RADIO PLAYLIST CALL/HIDE ON CLICK***************************** */
+    $('.tradies_radio').each(function(){
+      var audioPlayer = $(this).find('.audio_player');
+      var callBtn = $('.radio-btn', this);
+      var closeBtn = $('.close_player', this);
+
+      /* TRADIES RADIO PLAYLIST CALL ON CLICK */
+      $(callBtn).on('click', function(){
+        $(this).addClass('pause');
+        $(this).parent().addClass('radio_active');
+        if( $(audioPlayer).is('.active') ) {
+          $(audioPlayer).removeClass('active');
+        } else {
+          $(audioPlayer).addClass('active');
+          //play audio
+          $(currentAudio).get(0).currentTime = 0;
+          $(currentAudio).get(0).play();
+          $(audioPlayer).find('.control_panel .audio_actions .audio_status').removeClass('pause').addClass('play');
+          playing = true;
+        }
+      });
+
+      /* TRADIES RADIO PLAYLIST HIDE ON CLICK */
+      $(closeBtn).on('click', function(){
+        $(currentAudio).get(0).pause();
+        $(audioPlayer).removeClass('active');
+        $(callBtn).removeClass('pause');
+        $(callBtn).parent().removeClass('radio_active');
+      });
+    });
+    /* ******************** END TRADIES RADIO PLAYLIST CALL/HIDE ON CLICK***************************** */
+
+    var setCurrentSecond = function(){
+      $(audio_items).each(function(){
+        if( $(this).parent().is('.active') ) {
+          var thisAudioSecond = Math.round($(this).get(0).currentTime);
+          if( thisAudioSecond < 10 ) {
+            thisAudioSecond = '0:0' + thisAudioSecond;
+          } else if( thisAudioSecond < 59 ) {
+            thisAudioSecond = '0:' + thisAudioSecond;
+          } else if( thisAudioSecond === 60 ) {
+            thisAudioSecond = '1:00';
+          } else {
+            var minutes = Math.floor(thisAudioSecond / 60);
+            var seconds = thisAudioSecond - minutes * 60;
+            thisAudioSecond = minutes + ":" + seconds;
+          }
+          $(controlPanel).find('.audio_play_time .audio_current_sec').text(thisAudioSecond);
+        }
+      });
+    } 
+
+    setInterval(function(){
+      if( playing ) {
+        setCurrentSecond();
+      }
+    }, 1000);
+
+    $(audio_items).parent().on('click', function(){
+
+    });
+
   });
 });
