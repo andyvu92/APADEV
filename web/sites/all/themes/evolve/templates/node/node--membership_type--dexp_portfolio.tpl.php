@@ -104,12 +104,21 @@ $rens = str_replace('</div>',"",$rens);
 			$TypePrice = json_decode($TypePrice, true);
 			foreach ($TypePrice as $key => $value) {
 				if($TypePrice[$key]["Code"] == strtoupper($rens)) {
-					print '<div class="MTprice">$'.$TypePrice[$key]["Price"].": Pro-rata price as of ".date("d/m/y")." valid until 31/12/19".'</div>';
+					print '<div class="MTprice">$'.$TypePrice[$key]["Price"].": Pro-rata price as of ".date("d/m/y")." valid until 31/12/19".'<span class="info_icon" popup-target="PriceExplaination'.$node->nid.'"></span></div>';
 					print '<div class="MTprice">$'.$TypePrice[$key]["UnitPrice"].": Full price".'</div>';
 					print '<div class="MTid" style="display: none;">'.$TypePrice[$key]["ID"].'</div>';
 				}
 			}
 			?>
+		</div>
+		<div id="PriceExplaination<?php print $node->nid; ?>" style="display:none;">
+			<span class="close-popup"></span>
+			<div class="modal-header">
+				<h4 class="modal-title">About pro-rata price</h4>
+			</div>
+			<div class="modal-body">
+				<p>APA membership is valid from 1 January to 31 December. If you are joining the APA during the year, you are charged a reduced pro-rata price to cover your membership from the month you join until the end of the calendar year.</p>
+			</div>
 		</div>
 		<?php 
 			$rens = render($content['field_what_is_it']);
@@ -152,6 +161,7 @@ $rens = str_replace('</div>',"",$rens);
 				print '</ul></div>';
 			}
 		?>
+		</div>
 		<?php 
 			$rens = render($content['field_eligibility']);
 			$linksList = explode("\n", $rens);

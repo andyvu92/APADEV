@@ -491,10 +491,13 @@ table.MTtable td {
     text-align: left;
 }
 .node-membership-type .post-content .MTcontent .MTprice{
-	margin-left: 49px;
+	margin-left: 52px;
 	&:nth-child(1){
 		margin-left: 0;
 	}
+}
+.node-membership-type.node-teaser .post-content .MTcontent .MTprice{
+	margin-left: 60px;
 }
 .MainQuestionHolder div[id^="Sections"] .buttons {
 	margin: 20px auto 10px;
@@ -1357,6 +1360,25 @@ table.MTtable td {
 	}
 }
 
+.view-membership-type {
+	.node-membership-type.contextual-links-region {
+		.MTcontent {
+			li {
+				font-size: 0.9em;
+				color: #666666;
+			}
+		}
+	}
+	..node-membership-type.node-teaser {
+		.MTcontent {
+			li {
+				font-size: 0.8em;
+				color: #666666;
+			}
+		}
+	}
+}
+
 /* CATEGORIES & FEES DIM IMAGE BANNER */
 .page-node-109{
 	.region-banner{
@@ -1375,3 +1397,4 @@ table.MTtable td {
 		}
 	}
 }
+
