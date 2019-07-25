@@ -573,9 +573,13 @@ function pd_shoppingcart_form($form, &$form_state){
 		'#attributes' => array(
             ' class' => 'styled-checkbox',
          ),
-         '#default_value' => 0,			
+         '#default_value' => 0,	
+         '#suffix'=>'<span class="save_card_msg">Paying for your APA membership via instalments? Are you using a different/new card to make this purchase?
+Please note: if you opt to save this credit card, it will automatically become your default card for your instalment payments. If you wish to continue using your previous default card to make instalment payments, don’t save this card.</span>
+					',		
 		'#title' => t('Do you want to save this card?'),
 	);
+    
     $form['Message']['notice'] = array(
         '#markup' => '<div class="form-item form-type-textfield"><p class="payment_note">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</p></div>',
        

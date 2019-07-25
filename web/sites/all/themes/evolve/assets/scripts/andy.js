@@ -2815,10 +2815,33 @@ jQuery(document).ready(function() {
         setCurrentSecond();
       }
     }, 1000);
-
-    $(audio_items).parent().on('click', function(){
-
-    });
-
   });
+  // ********************* END AUDIO PLAYLIST
+
+  $('.form-item-addcardtag').each(function () {
+    var addCardInput = $(this).find('input');
+    var addCardMsg = $(this).parent().find('.save_card_msg');
+
+    $(addCardInput).on('change load', function(){
+      if( addCardInput.is(':checked') ) {
+        addCardMsg.slideDown();
+      } else {
+        addCardMsg.slideUp();
+      }
+    });
+  });
+
+  $('#addcardtag').each(function () {
+    var addCardInput = $(this);
+    var addCardMsg = $(this).parent().find('.save_card_msg');
+
+    $(addCardInput).on('change load', function(){
+      if( addCardInput.is(':checked') ) {
+        addCardMsg.slideDown();
+      } else {
+        addCardMsg.slideUp();
+      }
+    });
+  });
+
 });
