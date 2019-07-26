@@ -601,13 +601,13 @@ function place_pd_shopping_cart($form, &$form_state){
     }
     $ngProduct = getProduct($_SESSION['UserId'],"PDNG");
     if (sizeof($ngProduct) != 0) {
-		foreach($pdProduct as $singleNG){
+		foreach($ngProduct as $singleNG){
 			array_push($products, $singleNG);
 		}
     }
     $mgProduct = getProduct($_SESSION['UserId'],"PDMG");
     if (sizeof($mgProduct) != 0) {
-        foreach($pdProduct as $singleMG){
+        foreach($mgProduct as $singleMG){
 			array_push($products, $singleMG);
 		}
 	}
