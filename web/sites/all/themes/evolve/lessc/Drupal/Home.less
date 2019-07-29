@@ -1266,10 +1266,7 @@ div.SSOlogin {
 
 	/* NAME & CART */
 	.mobile_user_name{
-		display: flex;
-		flex-direction: row;
-		justify-content: space-between;
-		align-items: center;
+		display: block;
 		padding: 15px 30px;
 		.name_wrapper{
 			display: flex;
@@ -1371,6 +1368,11 @@ div.SSOlogin {
 				margin: 0;
 			}
 			input{
+				&[type="text"]{
+					-webkit-appearance: none;
+					-moz-appearance: none;
+					appearance: none;
+				}
 				display: inline-block;
 				width: 100%;
 				background: #f9f9f9;
@@ -1570,5 +1572,8 @@ div.SSOlogin {
 	}
 	.modal{
 		z-index: 99999;
+	}
+	.modal-backdrop{
+		z-index: 9999;
 	}
 }
