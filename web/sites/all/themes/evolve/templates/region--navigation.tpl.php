@@ -147,9 +147,11 @@ if ($content):
     </div>
 
     <!-- LOGOUT BUTTON -->
+    <?php if(isset($_SESSION["Log-in"])): ?>
     <div class="user_logout_mobile">
       <span class="icon logout_icon"></span>Logout
     </div>
+    <?php endif; ?>
   </div>
 
   <!-- MENU OVERLAY -->
