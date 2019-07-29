@@ -360,9 +360,15 @@ if(isset($results['MResponse'])) {
 		$Div = $Totalnumber - $Enrollednumber;
 		if($IsExternal) {
 			echo '<i class="fa fa-lg course-full" aria-hidden="true"></i><span>N/A</span>';
+		} elseif($result['AttendeeStatus'] == "Registered") {
+			echo '<i class="fa fa-lg registered" aria-hidden="true"></i><span>Registered</span>';
 		} else {
-			if($result['AttendeeStatus'] == "Registered") {
-				echo '<i class="fa fa-lg registered" aria-hidden="true"></i><span>Registered</span>';
+			$closingDate = explode(" ",$result['Close_date']);
+			$cldate = str_replace('/', '-', $closingDate[0]);//$closingDate[0];//
+			$Cls = strtotime($cldate);
+			$Now = strtotime(date('m/d/Y'));
+			if($Now > $Cls) {
+				echo '<i class="fa fa-lg course-full" aria-hidden="true"></i><span>Registration closed</span>';
 			} elseif($Div == 0){
 				echo  "<i class='fa fa-lg course-full' aria-hidden='true'></i><span>Course full</span>";
 			} elseif($Div <= 5){
