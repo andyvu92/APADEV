@@ -248,7 +248,7 @@
             content: "";
             position: absolute;
             width: 15px;
-            height: 2px;
+            height: 1px;
             transform: rotate(-45deg);
             background: @grey;
         }
@@ -420,7 +420,10 @@ div[aria-describedby="myMap"] .ui-widget-header{
     top: calc(~'50vh - 332px')!important;
     border-radius: 0;
     overflow: hidden;
-    overflow-y: hidden;
+    overflow-y: auto;
+    .save_card_msg{
+        display: block;
+    }
     @media @larger-phone-width-down{
         overflow-y: scroll; 
     }
