@@ -395,7 +395,7 @@ if(isset($_Get["action"]) && $_Get["action"] = "rollover") {
 ?>
 
 
-<div id="pre_background" style="display:none">background_<?php// echo $background; ?></div>
+<div id="pre_background" style="display:none">background_<?php //echo $background; ?></div>
 <div class="extra_information">
 <?php
 // please use those data!!!!
@@ -982,18 +982,19 @@ apa_function_dashboardLeftNavigation_form();
 							// 2.2.19 - get national group
 							// Send - 
 							// Response - national group
-							
 							$nationalGroupsCode= file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
 							$nationalGroups=json_decode($nationalGroupsCode, true);
 							?>
 							<?php 
+								$sendData["UserID"] = $_SESSION["UserId"];
+								$NGdetail = aptify_get_GetAptifyData("20", $sendData);
+								$NGresults = $NGdetail["results"];
 								foreach($nationalGroups as $key=>$value) {
 								   echo '<option value="'.$nationalGroups[$key]["ID"].'"';
-								   foreach($details['Nationalgp'] as $detailNG){
+								   foreach($NGresults as $detailNG){
 								   if (in_array( $nationalGroups[$key]["ID"],$detailNG)){ echo "selected='selected'"; } }
 								   echo '> '.$nationalGroups[$key]["Name"].' </option>';
 								}
-								
 							?>
 							</select>
 							</div>
