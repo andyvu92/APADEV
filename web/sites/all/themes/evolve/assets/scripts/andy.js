@@ -2844,4 +2844,8 @@ jQuery(document).ready(function() {
     });
   });
 
+  // SELECT ALL WHEN CLICK ON EMAIL IN LOGIN POPUP FOR THE FIRST TIME
+  $('#loginAT #edit-id').one('click', function(){
+    $(this).select();
+  });
 });

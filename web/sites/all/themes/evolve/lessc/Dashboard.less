@@ -2309,14 +2309,40 @@ iframe{
     }
     .nav-tabs>li>a{
         font-size: 1.25em;
-        color: #009fda;
+        color: @bright-blue;
         font-family: cairo;
+        span{
+            &:not(.text-underline)
+                strong{
+                    position: relative;
+                    &:after{
+                        content: '';
+                        position: absolute;
+                        left: 0;
+                        bottom: 3px;
+                        width: 0%;
+                        height: 2px;
+                        background: @bright-blue;
+                        transition: width .3s ease;
+                    }
+                }
+            &.text-underline{
+                strong{
+                    text-decoration: underline;
+                    &:after{
+                        display: none;
+                    }
+                }
+            }
+        }
         &:hover{
             border: 0;
-        }
-        span.text-underline{
-            strong{
-                text-decoration: underline;
+            span{
+                strong{
+                    &:after{
+                        width: 100%;
+                    }
+                }
             }
         }
     }
