@@ -206,10 +206,16 @@ apa_function_dashboardLeftNavigation_form();
 							<td><strong>Member type:</strong></td>
 							<td><?php echo $user['MemberType']; ?></td>
 						</tr>
+						<?php /**
+						 * Hide active status. We will use this again once Aptify works normally
+						 */
+						/*
 						<tr>
 							<td><strong>Status:</strong></td>
 							<td><?php echo $user['Status']; ?></td>
 						</tr>
+						*/
+						?>
 						<?php if(isset($user['Ahpranumber']) && $user['Ahpranumber'] != ""): ?>
 						<tr>
 							<td><strong>AHPRA NO:</strong></td>
