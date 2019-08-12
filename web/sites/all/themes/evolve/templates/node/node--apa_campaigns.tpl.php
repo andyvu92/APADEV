@@ -119,6 +119,11 @@
 					if(strpos($current_url, 'tradies-national-health-month') == true){
 						$tradies_national_health_month_page = true;
 					}
+					// if current page is tradies national health month
+					$world_physiotherapy_day_page = false;
+					if(strpos($current_url, 'world-physiotherapy-day') == true){
+						$world_physiotherapy_day_page = true;
+					}
 					?>
 				
 				</div>
@@ -153,6 +158,9 @@
 		}
 		else if( $tradies_national_health_month_page ){
 			$parralax_section_block = block_load('block', '368');
+		} 
+		else if( $world_physiotherapy_day_page ){
+			$parralax_section_block = block_load('block', '374');
 		} else {
 			$parralax_section = false;
 		}
@@ -178,6 +186,8 @@
 		}
 		else if( $tradies_national_health_month_page ){
 			$toolkit_section_block = block_load('block', '369');
+		}else if( $world_physiotherapy_day_page ){
+			$toolkit_section_block = block_load('block', '375');
 		} else {
 			$toolkit_section = false;
 		}
@@ -207,6 +217,8 @@
 		}
 		else if( $tradies_national_health_month_page ){
 			$tabbed_section_block = block_load('block', '370');
+		}else if( $world_physiotherapy_day_page ){
+			$tabbed_section_block = block_load('block', '376');
 		} else {
 			$tabbed_section = false;
 		}
@@ -268,7 +280,22 @@
 				<?php endif; ?>
 				
 				<p>By using the campaign as a conversation starter within your own workplace and community, its penetration and impact on consumers will be greatly enhanced and will help us achieve our objective of increased awareness of the profession, its strong relationship with GPs and increased demand for services.</p>
-
+				<?php 
+					
+					if( $world_physiotherapy_day_page ){
+						$how_to_get_block = block_load('block', '377');
+					}
+					if( $world_physiotherapy_day_page ) {
+						$how_to_get_invloved = _block_get_renderable_array(_block_render_blocks(array($how_to_get_block)));
+						$how_to_get_invloved_output = drupal_render($how_to_get_invloved);        
+					}
+					
+				?>
+				<?php if( $world_physiotherapy_day_page ): ?>
+				<?php 
+					print $how_to_get_invloved_output; 
+				?>
+				<?php endif;?>
 				<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
 			</div>
 		</div>
