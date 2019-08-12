@@ -26,16 +26,28 @@ jQuery(document).ready(function($) {
 	});
 	$('[class^=Tabs]').click(function(){
 		var x = $(this).attr("class").replace('Tabs', '');
+		if(x.includes("active")) {
+			var y = x.replace(" active", "");
+		} else {
+			var y = x;
+		}
 		if ( $(this).hasClass('active') ){
 			$(this).removeClass('active');
-			$('[class^=TabContents]').slideUp(400);
+			$('.member-purchases .price'+y).removeClass('remove');
+			$('[class^=TabContents]').slideUp(function () {
+				$(this).hide();
+			});
 		}
-		else{
+		else {
 			$(this).siblings().removeClass('active');
 			$('[class^=Tabs]').removeClass('active');
+			$('.member-purchases .price'+y).addClass('remove');
+			$('[class^=price]:not(.price'+y+')').removeClass('remove');
 			$(this).addClass('active');
-			$('[class^=TabContents]:not(.TabContents'+x+')').slideUp(400);
-			$('.TabContents' + x).slideToggle(450);
+			$('[class^=TabContents]:not(.TabContents'+y+')').slideUp(function () {
+				$(this).hide();
+			});
+			$('.TabContents' + y).slideToggle(450);
 			$('[class^=Tabs]:not(.Tabs'+x+') span').removeClass("text-underline");
 			var eventtitle = "eventtitle"+x;
 			$("span." + eventtitle).addClass("text-underline");

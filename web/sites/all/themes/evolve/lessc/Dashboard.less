@@ -2166,6 +2166,16 @@ iframe{
             border-bottom: 1px solid rgba(0,0,0,0.12);
             padding: 11px 0;
             font-size: 1.2em;
+            .priceHighlight, .active {
+                font-weight: 500;
+            }
+            .orderListItems {
+                padding-left: 8px;
+                padding-top: 2px;
+            }
+            .remove {
+                display: none !important;
+            }
             .flex-col-2{
                 justify-content: flex-end;
             }
@@ -2179,6 +2189,16 @@ iframe{
                 .flex-center{
                     text-align: center;
                 }
+            }
+        }
+        div[class^="TabContents"] {
+            .flex-cell {
+                border-bottom: 0;
+                padding: 4px 0;
+            }
+            .lastLineItem {
+                border-bottom: 1px solid rgba(0,0,0,0.12) !important;
+                padding: 4px 0;
             }
         }
         .border-btm{
@@ -4097,3 +4117,5 @@ input[type="email"], .email-field{
         }
     }
 }
+
+/* Your Purchase */

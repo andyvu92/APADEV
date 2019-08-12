@@ -70,38 +70,60 @@ apa_function_dashboardLeftNavigation_form();
 							$counterTwo = 0;
 							foreach($products as $product){
 								$now = date('d-m-Y');
-								$productDate = str_replace('/', '-', $product['Orderdate']);//$product['Orderdate'];//
+								$productDate = str_replace('/', '-', $product['Orderdate']);
 								if($SetDate<=strtotime($productDate)){
 									if(strtotime($now)<strtotime('+1 years',strtotime($productDate))){
 										$counter++;
 										$instal = false;
 										echo "<div class='flex-cell flex-flow-row'>";
-										if($counterTwo == 0) {
-											$counterTwo++;
-											echo "<div class='flex-col-6'><a class='Tabs".$counter." active'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
-										} else {
-											echo "<div class='flex-col-6'><a class='Tabs".$counter."'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
+										$status = "";
+										if($product['Orderstatus'] == "Cancelled") {
+											$status = " - cancelled";
 										}
+										echo "<div class='flex-col-6'><a class='Tabs".$counter."'>Order ID: ".$product['ID'].$status."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
 										//echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
-										echo "<div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div>";
+										echo "<div class='flex-col-3'><div class='price".$counter."'>$".number_format($product['Grandtotal'],2)."</div></div>";
 										$OrderDate = date('d-m-Y', strtotime($productDate));
 										echo "<div class='flex-col-3'>".$OrderDate."</div>";
-										/// original copy for order detail:
-										/// echo "</div><div class='TabContents".$counter."' style='display: none;'>";
-										/// Made this change to hide the details
-										echo "</div><div class='noTabContents".$counter."' style='display: none;'>";
+										echo "</div><div class='TabContents".$counter."' style='display: none;'>";
 										foreach($product["OrderLines"] as $orderDetails) {
 											echo "<div class='flex-cell flex-flow-row'>";
-											echo "<div class='flex-col-6'>".$orderDetails['ProductName']."</div>";
-											echo "<div class='flex-col-3'>$".number_format($orderDetails['ProductPrice'],2)."</div>";
+											echo "<div class='flex-col-6 orderListItems'>".$orderDetails['ProductName']."</div>";
+											if($orderDetails['ProductCategory'] == "Memberships") {
+												if($product["Grandtotal"] < $orderDetails['ProductPrice']) {
+													$priceStart = doubleval($product["Grandtotal"]);
+													foreach($product["OrderLines"] as $ForSubs) {
+														if($ForSubs['ProductCategory'] != "Memberships") {
+															$priceStart = $priceStart - doubleval($ForSubs['ProductPrice']);
+														}
+													}
+													echo "<div class='flex-col-3'>$".number_format($priceStart,2)." (pro-rata)</div>";
+												} else {
+													echo "<div class='flex-col-3'>$".number_format($orderDetails['ProductPrice'],2)."</div>";
+												}
+											} else {
+												echo "<div class='flex-col-3'>$".number_format($orderDetails['ProductPrice'],2)."</div>";
+											}
 											echo "<div class='flex-col-3'></div></div>";
 											if($orderDetails['ProductName'] == "Administrative Fee") {$instal = true;}
 										}
 										if($instal) {
-											echo "<div class='flex-cell flex-flow-row'>";
+											echo "<div class='flex-cell flex-flow-row lastLineItem'>";
 											echo "<div class='flex-col-6'><b>Left to pay</b></div>";
 											echo "<div class='flex-col-3'>$".number_format($product['Balance'],2)."</div>";
 											echo "<div class='flex-col-3'></div></div>";
+										} else {
+											echo "<div class='flex-cell flex-flow-row lastLineItem'></div>";
+										}
+										if($product["Balance"] != "0.0000") {
+											echo "<div class='flex-cell flex-flow-row lastLineItem'>";
+											echo "<div class='flex-col-6 orderListItems priceHighlight'>Total</div><div class='flex-col-3 priceHighlight'>$".number_format($product['Grandtotal'],2)."</div><div class='flex-col-3'></div>";
+											echo "<div class='flex-col-6 orderListItems'>Paid</div><div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div><div class='flex-col-3'></div></div>";
+											echo "<div class='flex-cell flex-flow-row'>";
+											echo "<div class='flex-col-6 orderListItems priceHighlight'>Balance (amount owing)</div><div class='flex-col-3 priceHighlight'>$".number_format($product['Balance'],2)."</div><div class='flex-col-3'></div></div>";
+										} else {
+											echo "<div class='flex-cell flex-flow-row lastLineItem'>";
+											echo "<div class='flex-col-6 orderListItems priceHighlight'>Total</div><div class='flex-col-3 priceHighlight'>$".number_format($product['Grandtotal'],2)."</div><div class='flex-col-3'></div></div>";
 										}
 										echo "</div>";
 									}
@@ -138,39 +160,60 @@ apa_function_dashboardLeftNavigation_form();
 							$counterTwo = 0;
 							if(!empty($products)) {
 								foreach($products as $product){
-									$productDate = str_replace('/', '-', $product['Orderdate']);//$product['Orderdate'];//
+									$productDate = str_replace('/', '-', $product['Orderdate']);
 									$counter++;
 									$instal = false;
 									//array_push($apis, $product["ID"]);
 									if($SetDate<=strtotime($productDate)){
 										echo "<div class='flex-cell flex-flow-row'>";
-										if($counterTwo == 0) {
-											$counterTwo++;
-											echo "<div class='flex-col-6'><a class='Tabs".$counter." active'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
-										} else {
-											echo "<div class='flex-col-6'><a class='Tabs".$counter."'>Order ID: ".$product['ID']."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
+										$status = "";
+										if($product['Orderstatus'] == "Cancelled") {
+											$status = " - cancelled";
 										}
-										// echo "<div class='flex-col-6'><a class='Tabs".$counter."'>".$product['OrderLines'][0]['ProductName']."</a></div>";
+										echo "<div class='flex-col-6'><a class='Tabs".$counter."'>Order ID: ".$product['ID'].$status."</a></div>";//$product['OrderLines'][0]['ProductName']."</a></div>";
 										//echo '<div class="flex-col-3 flex-center"><a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice'.$product['ID'].'"><span class="invoice-icon"></span><span class="invoice-text">Invoice</span></a></div>';
-										echo "<div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div>";
+										echo "<div class='flex-col-3'><div class='price".$counter."'>$".number_format($product['Grandtotal'],2)."</div></div>";
 										$OrderDate = date('d-m-Y', strtotime($productDate));
 										echo "<div class='flex-col-3'>".$OrderDate."</div>";
-										/// original copy for order detail:
-										/// echo "</div><div class='TabContents".$counter."' style='display: none;'>";
-										/// Made this change to hide the details
-										echo "</div><div class='noTabContents".$counter."' style='display: none;'>";
+										echo "</div><div class='TabContents".$counter."' style='display: none;'>";
 										foreach($product["OrderLines"] as $orderDetails) {
 											echo "<div class='flex-cell flex-flow-row'>";
-											echo "<div class='flex-col-6'>".$orderDetails['ProductName']."</div>";
-											echo "<div class='flex-col-3'>$".number_format($orderDetails['ProductPrice'],2)."</div>";
+											echo "<div class='flex-col-6 orderListItems'>".$orderDetails['ProductName']."</div>";
+											if($orderDetails['ProductCategory'] == "Memberships") {
+												if($product["Grandtotal"] < $orderDetails['ProductPrice']) {
+													$priceStart = doubleval($product["Grandtotal"]);
+													foreach($product["OrderLines"] as $ForSubs) {
+														if($ForSubs['ProductCategory'] != "Memberships") {
+															$priceStart = $priceStart - doubleval($ForSubs['ProductPrice']);
+														}
+													}
+													echo "<div class='flex-col-3'>$".number_format($priceStart,2)." (pro-rata)</div>";
+												} else {
+													echo "<div class='flex-col-3'>$".number_format($orderDetails['ProductPrice'],2)."</div>";
+												}
+											} else {
+												echo "<div class='flex-col-3'>$".number_format($orderDetails['ProductPrice'],2)."</div>";
+											}
 											echo "<div class='flex-col-3'></div></div>";
 											if($orderDetails['ProductName'] == "Administrative Fee") {$instal = true;}
 										}
 										if($instal) {
-											echo "<div class='flex-cell flex-flow-row'>";
+											echo "<div class='flex-cell flex-flow-row lastLineItem'>";
 											echo "<div class='flex-col-6'><b>Left to pay</b></div>";
-											echo "<div class='flex-col-3'>$".$product['Balance']."</div>";
+											echo "<div class='flex-col-3'>$".number_format($product['Balance'],2)."</div>";
 											echo "<div class='flex-col-3'></div></div>";
+										} else {
+											echo "<div class='flex-cell flex-flow-row lastLineItem'></div>";
+										}
+										if($product["Balance"] != "0.0000") {
+											echo "<div class='flex-cell flex-flow-row lastLineItem'>";
+											echo "<div class='flex-col-6 orderListItems priceHighlight'>Total</div><div class='flex-col-3 priceHighlight'>$".number_format($product['Grandtotal'],2)."</div><div class='flex-col-3'></div>";
+											echo "<div class='flex-col-6 orderListItems'>Paid</div><div class='flex-col-3'>$".number_format($product['Paymenttotal'],2)."</div><div class='flex-col-3'></div></div>";
+											echo "<div class='flex-cell flex-flow-row'>";
+											echo "<div class='flex-col-6 orderListItems priceHighlight'>Balance (amount owing)</div><div class='flex-col-3 priceHighlight'>$".number_format($product['Balance'],2)."</div><div class='flex-col-3'></div>";
+										} else {
+											echo "<div class='flex-cell flex-flow-row lastLineItem'>";
+											echo "<div class='flex-col-6 orderListItems priceHighlight'>Total</div><div class='flex-col-3 priceHighlight'>$".number_format($product['Grandtotal'],2)."</div><div class='flex-col-3'></div></div>";
 										}
 										echo "</div>";
 									}
