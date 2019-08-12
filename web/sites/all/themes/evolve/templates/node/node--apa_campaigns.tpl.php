@@ -173,7 +173,7 @@
 	<?php if( $parralax_section ): ?>
 	<div class="container full_width_section">
 		<?php 
-				print $parralax_section_output; 
+			print $parralax_section_output; 
 		?>
 	</div>
 	<?php endif; ?>
