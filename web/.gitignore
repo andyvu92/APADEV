@@ -13,7 +13,7 @@ web/tmp/*
 .htaccess
 
 # Untrack of json files
-web/sites/all/theme/evolve/json/*
+web/sites/all/themes/evolve/json/*
 
 # Untrack local history
 .history
