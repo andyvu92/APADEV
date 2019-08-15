@@ -11,8 +11,9 @@
 # Untrack of local tmp and log files
 log/
 tmp/
-web/sites/Log/
-web/tmp/
+web/sites/Log/*
+web/tmp/*
+
 
 # Untrack of local history files
 .history/

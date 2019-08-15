@@ -6,14 +6,14 @@ sites/*/files
 sites/*/private
 log/*
 tmp/
-web/sites/Log/*
-web/tmp/*
+sites/Log/*
+tmp/*
 
 # Untrack of htaccess file
 .htaccess
 
 # Untrack of json files
-web/sites/all/themes/evolve/json/*
+sites/all/themes/evolve/json/*
 
 # Untrack local history
 .history
