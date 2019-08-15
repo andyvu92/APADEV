@@ -931,7 +931,7 @@ if(isset($_SESSION['UserId'])) {
 
 	<div class="OtherListTop"><a class="shop" href="https://www.shop4physios.com.au/" target="_blank"><span class="uniq">shop</span>4physios</a></div>
 
-	<div class="OtherListTop"><a class="ifompt" href="https://physiotherapy.eventsair.com/QuickEventWebsitePortal/ifompt-2020/ifompt2020" target="_blank"><span class="uniq">IFOMPT2020</a></div>
+	<div class="OtherListTop"><a class="ifompt" href="https://ifomptconference.org/" target="_blank"><span class="uniq">IFOMPT2020</a></div>
 
 	<div class="OtherListTop"><a class="transform" href="https://transform.physio" target="_blank"><span class="uniq">TRANSFORM2019</a></div>
 </div>
