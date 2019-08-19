@@ -189,7 +189,8 @@ if(!function_exists('drupal_session_started'))
 	</div>
 	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 		<label>Start date</label>
-		<input type="date" name="BeginDate" placeholder="Begin date" required <?php if(isset($_POST["BeginDate"]) || isset($_GET["BeginDate"])) { if(isset($_POST["BeginDate"])) {echo "value='".$_POST["BeginDate"]."'";} else {echo "value='".str_replace("/","-",$_GET["BeginDate"])."'";} } else {echo "value='".date("Y-m-d")."'";} ?>>
+		<?php /*<input type="date" name="BeginDate" placeholder="Begin date" <?php if(isset($_POST["BeginDate"]) || isset($_GET["BeginDate"])) { if(isset($_POST["BeginDate"])) {echo "value='".$_POST["BeginDate"]."'";} else {echo "value='".str_replace("/","-",$_GET["BeginDate"])."'";} } else {echo "value='".date("Y-m-d")."'";} ?>> */ ?>
+		<input type="date" name="BeginDate" placeholder="Begin date" value="">
 	</div>
 	<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
 		<label>End date</label>
