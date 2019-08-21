@@ -1926,6 +1926,15 @@ if($('select[name="Mailing-Country"]').val()=="Australia"){
 		$('.loaders').css('visibility','visible').hide().fadeIn();
 	});
 
+  $(document).on('click', '#edit-submit--4', function(){
+		$('#addPaymentCardForm-container').fadeOut();
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+		$(document).keydown(function (e) {  
+			return (e.which || e.keyCode) != 116;  
+	  }); 
+	});
+
 	//---------------------------------------------------------------------------
 
 //------------- PD PAGES -----------------------
