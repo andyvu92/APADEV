@@ -1934,6 +1934,10 @@ if($('select[name="Mailing-Country"]').val()=="Australia"){
 			return (e.which || e.keyCode) != 116;  
 	  }); 
 	});
+	$(document).on('click', '#prf-donation-container .submit-donate', function(){
+		$('.overlay').fadeIn();
+		$('.loaders').css('visibility','visible').hide().fadeIn();
+	});
 
 	//---------------------------------------------------------------------------
 

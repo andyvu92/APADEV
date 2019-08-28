@@ -297,6 +297,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 	<button class="submit-donate" type="submit" value="Donate now" onclick="return checkCard();">Donate now</button>
 		
 </form>
+
 <script>
   function checkCard(){
 		if($("#anothercardBlock").is(":visible")){
@@ -635,3 +636,9 @@ $(document).ready(function() {
 
 	</div>
 <?php endif; ?>
+<div class="overlay">
+	<section class="loaders">
+		<span class="loader loader-quart">
+		</span>   
+	</section>
+</div>
