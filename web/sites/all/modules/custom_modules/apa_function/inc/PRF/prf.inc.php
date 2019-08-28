@@ -38,7 +38,7 @@ if(isset($_POST["POSTPRF"])) {
 	$recordOrder['InstallmentFrequency'] = $OrderSend['InstallmentFrequency'];
 	$recordOrder['CampaignCode'] = $OrderSend['CampaignCode'];
 	$invoice_ID = $registerOuts['Invoice_ID'];
-	//if(isset($_POST['addcardtag'])){
+	if(isset($_POST['addcardtag'])){
 		// 2.2.15 - Add payment method
 		// Send - 
 		// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
@@ -50,8 +50,34 @@ if(isset($_POST["POSTPRF"])) {
 		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
 		$out = aptify_get_GetAptifyData("15",$postPaymentData); 
+		if($out["result"]=="Failed"){ 
+			if($out["Message"]=="Expiry date lenght should be 4."){
+				drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
+			}
+			elseif($out["Message"]=="CCV accepts up to 4 digit."){
+				drupal_set_message('<div class="checkMessage">Please enter a valid CCV number.</div>',"error");
+			}
+			elseif((strpos($out["Message"], 'Month must be between one and twelve') !== false)){
+				drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
+			}
+			elseif($out["Message"]=="Please enter a valid End Date occurring after the Start Date."){
+				drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
+			}
+			elseif((strpos($out["Message"], 'credit card number') !== false)){
+				drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
+			}
+			elseif((strpos($out["Message"], 'Invalid CCV number') !== false)){
+				drupal_set_message('<div class="checkMessage">Please enter a valid CCV number.</div>',"error");
+			}
+			elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)){
+				drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
+			}
+			else{
+				drupal_set_message('<div class="checkMessage">There was an unexpected error with your payment details, please go back and check they are correct, or contact the APA.</div>',"error");
+			}
+		}
 	
-	//}
+	}
 	
 }
 $test['id'] = $_SESSION["UserId"];
@@ -179,7 +205,16 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 					</div>
 			</div>
 		</div>
-
+        <div class="flex-cell">
+			<div class="flex-col-12">
+				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
+				<span class="save_card_msg">Paying for your APA membership via instalments? Are you using a different/new card to make this purchase?
+	Please note: if you opt to save this credit card, it will automatically become your default card for your instalment payments. If you wish to continue using your previous default card to make instalment payments, don’t save this card.</span>
+	            <span class="save_card_msg"> To confirm that we can receive payments from your nominated credit card a one off
+                verification charge of $1 will be deducted from your account. This amount will be refunded immediately
+                upon payment confirmation.</span>	
+			</div>
+		</div>
 		<!--<div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label>
@@ -248,7 +283,16 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 				</div>
 			</div>
 		</div>
-
+        <div class="flex-cell">
+			<div class="flex-col-12">
+				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
+				<span class="save_card_msg">Paying for your APA membership via instalments? Are you using a different/new card to make this purchase?
+	Please note: if you opt to save this credit card, it will automatically become your default card for your instalment payments. If you wish to continue using your previous default card to make instalment payments, don’t save this card.</span>
+	            <span class="save_card_msg"> To confirm that we can receive payments from your nominated credit card a one off
+                verification charge of $1 will be deducted from your account. This amount will be refunded immediately
+                upon payment confirmation.</span>	
+			</div>
+		</div>
 		<!--<div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label>
@@ -294,7 +338,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 		</div>
 	</div>
 	
-	<button class="submit-donate" type="submit" value="Donate now" onclick="return checkCard();">Donate now</button>
+	<button class="submit-donate" type="submit" value="Donate now" onClick="return checkCard();">Donate now</button>
 		
 </form>
 
@@ -314,6 +358,8 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 				if($("input[name=Expirydate]").val() =='') { return false;}
 				if($("input[name=CCV]").val() =='') { return false;}
 			}
+			$('.overlay').fadeIn();
+		    $('.loaders').css('visibility','visible').hide().fadeIn();
 }
 </script>
 </div>
@@ -414,7 +460,16 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 					</div>
 			</div>
 		</div>
-
+        <div class="flex-cell">
+			<div class="flex-col-12">
+				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
+				<span class="save_card_msg">Paying for your APA membership via instalments? Are you using a different/new card to make this purchase?
+	Please note: if you opt to save this credit card, it will automatically become your default card for your instalment payments. If you wish to continue using your previous default card to make instalment payments, don’t save this card.</span>
+	            <span class="save_card_msg"> To confirm that we can receive payments from your nominated credit card a one off
+                verification charge of $1 will be deducted from your account. This amount will be refunded immediately
+                upon payment confirmation.</span>	
+			</div>
+		</div>
 		<!--<div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="1" checked><label for="addcardtag">Do you want to save this card</label>
@@ -481,6 +536,16 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 						<span class="tooltip-img"><img src="/sites/default/files/general-icon/cvn-image.png"></span>
 						<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
 					</div>
+			</div>
+		</div>
+		<div class="flex-cell">
+			<div class="flex-col-12">
+				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
+				<span class="save_card_msg">Paying for your APA membership via instalments? Are you using a different/new card to make this purchase?
+	Please note: if you opt to save this credit card, it will automatically become your default card for your instalment payments. If you wish to continue using your previous default card to make instalment payments, don’t save this card.</span>
+	            <span class="save_card_msg"> To confirm that we can receive payments from your nominated credit card a one off
+                verification charge of $1 will be deducted from your account. This amount will be refunded immediately
+                upon payment confirmation.</span>	
 			</div>
 		</div>
 
