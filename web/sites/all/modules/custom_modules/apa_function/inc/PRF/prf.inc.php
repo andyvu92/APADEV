@@ -598,6 +598,13 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 				if($("input[name=Expirydate]").val() =='') { return false;}
 				if($("input[name=CCV]").val() =='') { return false;}
 			}
+			$('body').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+			$('.overlay').fadeIn();
+			$('.loaders').css('visibility','visible').hide().fadeIn();
+			$(document).keydown(function (e) {  
+			return (e.which || e.keyCode) != 116;  
+	        }); 
+
 }
 </script>
 </div>
@@ -701,9 +708,3 @@ $(document).ready(function() {
 
 	</div>
 <?php endif; ?>
-<div class="overlay">
-	<section class="loaders">
-		<span class="loader loader-quart">
-		</span>   
-	</section>
-</div>
