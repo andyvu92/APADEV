@@ -646,7 +646,7 @@ if(sizeof($fpProdcutArray)!=0){
 								if($cardnum["IsDefault"]=="1") {
 								echo "selected ";
 							}
-							echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
+							echo 'data-class="'.$cardnum["Payment-Method"].'" class="'.'c'.str_replace("/","",$cardnum["Expiry-date"]).'">____ ____ ____ ';
 							echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
 							}
 					?>

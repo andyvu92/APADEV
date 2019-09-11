@@ -696,7 +696,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 									if($cardnum["IsDefault"]=="1") {
 									echo "selected ";
 								}
-								echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
+								echo 'data-class="'.$cardnum["Payment-Method"].'" class="'.'c'.str_replace("/","",$cardnum["Expiry-date"]).'">____ ____ ____ ';
 								echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
 								}
 							

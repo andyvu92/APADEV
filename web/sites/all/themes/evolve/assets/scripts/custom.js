@@ -2048,3 +2048,20 @@ jQuery(document).ready(function(){
 	$("#pd-shoppingcart-form #edit-submit").addClass('display-none');
 	$("#pd-shoppingcart-form #edit-addcardtag").val('0');
 });
+// check existing credit card
+$(document).on('blur', 'input[name=Cardnumber], input[name=Expirydate]', function(){
+	var cardvalue = $('input[name=Cardnumber]').val().substr($('input[name=Cardnumber]').val().length - 4);
+	var expirydate = $('input[name=Expirydate]').val();
+	if($('#Paymentcard').length!=0 && $('.c'+expirydate).length!=0){
+		if($('.c'+expirydate).html().includes(cardvalue)){
+			if($('.duplicatedMessage').length==0){$('input[name=Expirydate]').after('<div class="duplicatedMessage">A credit card with the same last 4 digits and expiry date is already stored in our system. Do you wish to proceed with adding this card?</div>');}
+		}
+		else{
+			$('.duplicatedMessage').remove();
+		}
+	}
+	else{
+		$('.duplicatedMessage').remove();
+	}
+
+});

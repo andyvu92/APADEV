@@ -490,7 +490,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 							if($cardnum["IsDefault"]=="1") {
 							echo "selected ";
 						}
-						echo 'data-class="'.$cardnum["Payment-Method"].'">Credit card ending with ';
+						echo 'data-class="'.$cardnum["Payment-Method"].'" class="'.'c'.str_replace("/","",$cardnum["Expiry-date"]).'">Credit card ending with ';
 						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
 						}
 					}
