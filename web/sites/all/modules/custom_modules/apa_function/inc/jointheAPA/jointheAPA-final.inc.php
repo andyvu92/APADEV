@@ -672,7 +672,35 @@ $PRFPrice = 0;
                     <?php //if(isset($_SESSION["postReviewData"])) {if(empty($PRFTemp)) {echo 'value="1" checked="checked"';}} ?>>
                 <label for="prftag" id="prftagAgree">No, I do not want to make a donation to the PRF</label>
             </div>
-            
+            <div class="col-xs-12 col-sm-6 col-md-6" id="prfselect">
+                    <label for="">Your donation:</label>
+                    <div class="chevron-select-box">
+                        <select class="form-control" id="PRF" name="PRF">
+                            <option value="5.00"
+                                <?php //if(!isset($_SESSION["postReviewData"])) {echo "selected";} if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="5") {echo "selected";}}?>>
+                                $5.00</option>
+                            <option value="10.00"
+                                <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="10") {echo "selected";}}?>>
+                                $10.00</option>
+                            <option value="20.00"
+                                <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="20") {echo "selected";}}?>>
+                                $20.00</option>
+                            <option value="50.00"
+                                <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="50") {echo "selected";}}?>>
+                                $50.00</option>
+                            <option value="100.00"
+                                <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="100") {echo "selected";}}?>>
+                                $100.00</option>
+                            <option value="Other"
+                                <?php //if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo "selected";}}?>>
+                                Other</option>
+                        </select>
+                    </div>
+                    <input type="hidden" id="PRFFinal" name="PRFFinal" value=""/>
+                    <input type="number" class="form-control display-none" id="PRFOther" name="PRFOther"
+                        value="<?php //if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo $PRFTemp;}}?>"
+                        oninput="this.value = Math.abs(this.value)" min="0">
+                </div>
         </div>
         <?php 
 // 2.2.12 - Get payment list
@@ -777,35 +805,7 @@ Please note: if you opt to save this credit card, it will automatically become y
         <?php if (sizeof($cardsnum["results"])==0): ?>
         <div id="anothercardBlock" class="row show">
             <div class="row">
-                <div class="col-xs-12 col-sm-6 col-md-6" id="prfselect">
-                    <label for="">Your donation:</label>
-                    <div class="chevron-select-box">
-                        <select class="form-control" id="PRF" name="PRF">
-                            <option value="5.00"
-                                <?php //if(!isset($_SESSION["postReviewData"])) {echo "selected";} if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="5") {echo "selected";}}?>>
-                                $5.00</option>
-                            <option value="10.00"
-                                <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="10") {echo "selected";}}?>>
-                                $10.00</option>
-                            <option value="20.00"
-                                <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="20") {echo "selected";}}?>>
-                                $20.00</option>
-                            <option value="50.00"
-                                <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="50") {echo "selected";}}?>>
-                                $50.00</option>
-                            <option value="100.00"
-                                <?php //if(isset($_SESSION["postReviewData"])) {if($PRFTemp =="100") {echo "selected";}}?>>
-                                $100.00</option>
-                            <option value="Other"
-                                <?php //if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo "selected";}}?>>
-                                Other</option>
-                        </select>
-                    </div>
-                    <input type="hidden" id="PRFFinal" name="PRFFinal" value=""/>
-                    <input type="number" class="form-control display-none" id="PRFOther" name="PRFOther"
-                        value="<?php //if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo $PRFTemp;}}?>"
-                        oninput="this.value = Math.abs(this.value)" min="0">
-                </div>
+                
 
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <label for="">Payment method:<span class="tipstyle"> *</span></label>
