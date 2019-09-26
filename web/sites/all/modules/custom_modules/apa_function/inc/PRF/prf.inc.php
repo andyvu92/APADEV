@@ -49,6 +49,7 @@ if(isset($_POST["POSTPRF"])) {
 		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
 		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
+		$postPaymentData['IsDefault'] = 0;
 		$out = aptify_get_GetAptifyData("15",$postPaymentData); 
 		if($out["result"]=="Failed"){ 
 			if($out["Message"]=="Expiry date lenght should be 4."){
@@ -208,8 +209,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
         <div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
-				<span class="save_card_msg">Paying for your APA membership via instalments? Are you using a different/new card to make this purchase?
-	Please note: if you opt to save this credit card, it will automatically become your default card for your instalment payments. If you wish to continue using your previous default card to make instalment payments, don’t save this card.</span>
+				
 	            <span class="save_card_msg"> To confirm that we can receive payments from your nominated credit card a one off
                 verification charge of $1 will be deducted from your account. This amount will be refunded immediately
                 upon payment confirmation.</span>	
@@ -286,8 +286,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
         <div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
-				<span class="save_card_msg">Paying for your APA membership via instalments? Are you using a different/new card to make this purchase?
-	Please note: if you opt to save this credit card, it will automatically become your default card for your instalment payments. If you wish to continue using your previous default card to make instalment payments, don’t save this card.</span>
+			
 	            <span class="save_card_msg"> To confirm that we can receive payments from your nominated credit card a one off
                 verification charge of $1 will be deducted from your account. This amount will be refunded immediately
                 upon payment confirmation.</span>	
@@ -463,8 +462,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
         <div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
-				<span class="save_card_msg">Paying for your APA membership via instalments? Are you using a different/new card to make this purchase?
-	Please note: if you opt to save this credit card, it will automatically become your default card for your instalment payments. If you wish to continue using your previous default card to make instalment payments, don’t save this card.</span>
+				
 	            <span class="save_card_msg"> To confirm that we can receive payments from your nominated credit card a one off
                 verification charge of $1 will be deducted from your account. This amount will be refunded immediately
                 upon payment confirmation.</span>	

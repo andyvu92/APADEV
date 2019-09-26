@@ -765,14 +765,18 @@ jQuery(document).ready(function($) {
 	}
 	// HIDE / SHOW PAYMENT CARD FORM 
 	$('#anothercard').click(function(){
-        if($(this).is(":checked")){
+    if($(this).is(":checked")){
 			$('#anothercardBlock').slideDown();
 			$('input[name=addCard]').val('1');
+      if($("#p1-2").lenght !==0 && $("#p1-2").is(":checked") && $('#addcardtag').is(":visible")){
+				$('#addcardtag').attr('checked', true);
+				$('#addcardtag').attr('disabled', true);
+			} 
 		}
-        else{
+    else{
 			$('#anothercardBlock').slideUp();
 			$('input[name=addCard]').val('0');
-        }
+		}
 	});
 
 	// HIDE / SHOW MAILING ADDRESS ON DASHBOARD > ACCOUNT

@@ -790,8 +790,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 
                 <div class="col-xs-12">
                     <input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
-                    <span class="save_card_msg">Paying for your APA membership via instalments? Are you using a different/new card to make this purchase?
-Please note: if you opt to save this credit card, it will automatically become your default card for your instalment payments. If you wish to continue using your previous default card to make instalment payments, don’t save this card.</span>
+                    
                 </div>
 
                 <input type="hidden" name="addCard" value="0">
@@ -854,8 +853,7 @@ Please note: if you opt to save this credit card, it will automatically become y
             <div class="col-xs-12">
                 <input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="0"><label for="addcardtag">Save this card</label>
                 <input type="hidden" name="addCard" value="1">
-                <span class="save_card_msg">Paying for your APA membership via instalments? Are you using a different/new card to make this purchase?
-Please note: if you opt to save this credit card, it will automatically become your default card for your instalment payments. If you wish to continue using your previous default card to make instalment payments, don’t save this card.</span>
+                
             </div>
 
             <div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off

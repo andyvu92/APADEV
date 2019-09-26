@@ -13,6 +13,7 @@ if(isset($_POST['step3'])) {
 		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
 		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
+		if($_POST['Paymentoption']=="1"){ $postPaymentData['IsDefault'] = 1; } else{ $postPaymentData['IsDefault'] = 0;}
 		$out = aptify_get_GetAptifyData("15", $postPaymentData);
 		$postReviewData['Card_number'] = "";	
 		$postReviewData['PaymentTypeID'] = $_POST['Cardtype'];
@@ -36,7 +37,21 @@ if(isset($_POST['step3'])) {
 		$postReviewData['CCExpireDate'] = $_POST['Expirydate'];
 		$postReviewData['CCSecurityNumber'] = $_POST['CCV'];
 	}elseif(isset($_POST['Paymentcard'])){
-	    $postReviewData['Card_number'] = $_POST['Paymentcard']; 
+		$postReviewData['Card_number'] = $_POST['Paymentcard']; 
+		if($_POST['Paymentoption']=="1"){ 
+			$updateCardSubmit["UserID"] = $_SESSION['UserId'];
+			$updateCardSubmit["SpmID"] = $_POST['Paymentcard'];
+			$updateCardSubmit["ExpireMonthYear"] = "";
+			$updateCardSubmit["CCSNumber"] = "";
+			$updateCardSubmit["IsDefault"] = "1";
+			$updateCardSubmit["IsActive"] = "";
+			// 2.2.13 - update payment method-3-set main card
+			// Send - 
+			// UserID, Creditcard-ID
+			// Response -
+			// N/A.
+			$updateCards = aptify_get_GetAptifyData("13", $updateCardSubmit);  
+		} 
 		$postReviewData['PaymentTypeID'] = "";
 		$postReviewData['CCNumber'] = "";
 		$postReviewData['CCExpireDate'] = "";

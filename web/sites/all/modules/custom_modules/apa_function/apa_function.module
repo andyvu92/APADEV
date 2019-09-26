@@ -574,9 +574,7 @@ function pd_shoppingcart_form($form, &$form_state){
             ' class' => 'styled-checkbox',
          ),
          '#default_value' => 0,	
-         '#suffix'=>'<span class="save_card_msg">Paying for your APA membership via instalments? Are you using a different/new card to make this purchase?
-Please note: if you opt to save this credit card, it will automatically become your default card for your instalment payments. If you wish to continue using your previous default card to make instalment payments, don’t save this card.</span>
-					',		
+         	
 		'#title' => t('Do you want to save this card?'),
 	);
 
@@ -651,6 +649,7 @@ function place_pd_shopping_cart($form, &$form_state){
         $postPaymentData['Cardno'] = $form["Cardnumber"]["#value"];
         $postPaymentData['Expiry-date'] = $form["Expirydate"]["#value"];
         $postPaymentData['CCV'] = $form["CCV"]["#value"];
+        $postPaymentData['IsDefault'] = 0;
         $out = aptify_get_GetAptifyData("15",$postPaymentData);
         if($out["result"]=="Failed"){ 
             if($out["Message"]=="Expiry date lenght should be 4."){
@@ -886,11 +885,7 @@ function apa_create_payment_card_form($form, &$form_state){
 		'#required' => TRUE,
 	);
 
-    $form['AddCardMessage']['notice'] = array(
-        '#markup' => '<span class="save_card_msg">Paying for your APA membership via instalments? Are you using a different/new card to make this purchase?
-Please note: if you opt to save this credit card, it will automatically become your default card for your instalment payments. If you wish to continue using your previous default card to make instalment payments, don’t save this card.</span>',
-       
-    );
+   
 
     $form['Message']['notice'] = array(
         '#markup' => '<div class="form-item form-type-textfield"><p class="payment_note">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</p></div>',
@@ -903,7 +898,8 @@ function add_payment_card($form, &$form_state){
 	$postPaymentData['Payment-method'] = $form["Cardtype"]["#value"];
 	$postPaymentData['Cardno'] = $form["Cardnumber"]["#value"];
 	$postPaymentData['Expiry-date'] = $form["Expirydate"]["#value"];
-	$postPaymentData['CCV'] = $form["CCV"]["#value"];
+    $postPaymentData['CCV'] = $form["CCV"]["#value"];
+    $postPaymentData['IsDefault'] = 0;
 	$out = aptify_get_GetAptifyData("15",$postPaymentData);
 	$_SESSION["paymentTabTag"]=1;
 	if($out["result"]=="Failed"){ 
