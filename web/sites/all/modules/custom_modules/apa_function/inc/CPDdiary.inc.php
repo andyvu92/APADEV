@@ -18,19 +18,19 @@ if(isset($_POST["nonAPA"])) {
 	$CPDsend = Array();
 	// Values need keys associated
 	$CPDsend["userID"] = $_SESSION["UserId"];
-	$CPDsend["Date"] = $_POST["Date"];
+	$dateConvt = date("d/m/Y", strtotime($_POST["Date"]));
+	$CPDsend["Date"] = $dateConvt;
 	$CPDsend["Description"] = $_POST["Description"];
 	$CPDsend["Time"] = $_POST["Time"];
 	$CPDsend["Provider"] = $_POST["Provider"];
 	$CPDsend["Reflection"] = $_POST["Reflection"];
 	// send and get response
 	$resultst = aptify_get_GetAptifyData("34", $CPDsend);
-	print_r($resultst);
 	if($resultst["Status"] == "Success") {
 		header("Location: /pd/cpd-diary");
 		exit;
 	} else {
-		echo "error!";
+		echo "error!: <br>".$resultst["StatusReason"];
 	}
 	// this should be executed before load the data.
 }
