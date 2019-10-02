@@ -868,7 +868,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
                         class="tipstyle">*&nbsp;</span>I agree to the APA Terms and Conditions</label>
             </div>
         </div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn_wrapper"> 
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn_wrapper" id="back_to_prev"> 
             <a variant="prev" class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>">
                 <span class="icon arrow_left"></span>
                 Back to previous

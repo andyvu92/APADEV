@@ -2413,7 +2413,7 @@ jQuery(document).ready(function() {
       var window_width = $(window).width();
       var stickySidebarActive = true;
       // JOIN FORM
-      if( window_width < 993 && !renewForm ) {
+      if( window_width < 1091 && !renewForm ) {
         stickySidebarActive = false;
       }
       // RENEW FORM
@@ -2436,21 +2436,24 @@ jQuery(document).ready(function() {
       var sidebarLeft = formWrapperLeft + contentWidth;
       var headerHeight = $('#section-header').height();
       // get endpoint where sidebar should stop
-      var endPoint = $('body').find('#anothercardBlock').offset().top;
+      //var endPoint = $('body').find('#anothercardBlock').offset().top;
+      var endPoint = $('body').find('#back_to_prev');
+      var endPointPos = $(endPoint).offset().top + $(endPoint).outerHeight();
 
       // calc stop position in the bottom for sidebar
       var floatBottomPosition = endPoint - startPoint;
 
       // calc current window scroll point by adding heading height
-      var currentScrollPoint = $(this).scrollTop();
+      var currentScrollPoint = $(window).scrollTop();
       currentScrollPoint = currentScrollPoint + headerHeight;
-
+      console.log(currentScrollPoint)
       // switch for sidebar to stay when reach bottom
       var floatBottom = false;
 
       // sidebar only active on window height > 992
       if(stickySidebarActive) {
         // start sticky
+        console.log('startPoint' + currentScrollPoint +' > '+startPoint)
         if( currentScrollPoint > startPoint && !floatBottom ) {
           $(sidebar).addClass('sticky');
           $(sidebar).css({
@@ -2470,12 +2473,19 @@ jQuery(document).ready(function() {
         }
 
         // stop sticky | start floating bottom
-        if( currentScrollPoint > endPoint ) {
+        var sidebarBot = currentScrollPoint + sidebarheight;
+        var stopBottom = endPointPos - sidebarheight - sidebarheight + 38;
+        // if( currentScrollPoint > endPoint ) {
+        if( sidebarBot > endPointPos ) {
+          console.log('stop');
+          console.log(endPoint);
+          console.log($(sidebar).outerHeight(true));
+          console.log(stopBottom);
           $(sidebar).addClass('float_bottom');
           floatBottom = true;
           $(sidebar).css({
             'left': '',
-            'top': floatBottomPosition,
+            'top': stopBottom,
             'width': sidebarWidth,
             'max-width': sidebarWidth
           });
@@ -2483,6 +2493,8 @@ jQuery(document).ready(function() {
           $(sidebar).removeClass('float_bottom');
           floatBottom = false;
         }
+      } else {
+        $(sidebar).removeClass('sticky');
       }
     });
   });
