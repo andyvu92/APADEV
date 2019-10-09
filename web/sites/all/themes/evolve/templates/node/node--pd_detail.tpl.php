@@ -219,9 +219,18 @@ $userRetisterStatus = false;
 		$type = $t['MemberType'];
 		$pricelistGet[$type] = $t['Price'];
 	}
+	/**
+	 * remove three lines below after 1st Jan 2020.
+	 * Remove the condition below for 01.01.2020 one.
+	 */
+	$StartDate = explode(" ",$pd_detail['Sdate']);
+	$SortStart = str_replace('/', '-', $StartDate[0]);
+	$ttt = strtotime($SortStart);
 	if($pd_detail['IsDistanceDiscountApplied']=="Yes") {
-        $type = "Distance Discount";
-        $pricelistGet[$type] = $pd_detail["DistanceDiscount"];
+		if($ttt <= strtotime("01.01.2020",date('d/m/Y'))) {
+			$type = "Distance Discount";
+        	$pricelistGet[$type] = $pd_detail["DistanceDiscount"];
+		}
     }
 
       /*Save data to local shopping cart database response here*/
