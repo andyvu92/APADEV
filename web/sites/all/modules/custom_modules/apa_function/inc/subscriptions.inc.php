@@ -202,51 +202,56 @@ apa_function_dashboardLeftNavigation_form();
 							$counter = 0;
 							foreach($SubListAll as $Subs) {
 								$counter++;
-								if($counter < 2) { 
-									// for normal subscriptions
-									// from 1st item
-									echo '
-										<li>
-											<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
-											'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
-											if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){ 
-												echo "checked='checked'";
+								if($Subs["SubscriptionID"] == "28" || $Subs["SubscriptionID"] == "30") {
+									// 28 for Insurance
+									// 30 for Titled???? (suddenly appeared)
+								} else {
+									if($counter < 2) {
+										// for normal subscriptions
+										// from 1st item
+										echo '
+											<li>
+												<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
+												'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
+												if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){ 
+													echo "checked='checked'";
+												}
+												echo '>
+												<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
+												.'</label>
+											</li>';
+									} elseif($counter < 4) {
+										// for extra magazine copy
+										foreach($MagSubs as $mags) {
+											$tt = strpos($Subs["Subscription"], $mags);
+											if($tt !== FALSE) {
+												echo '
+												<li>
+													<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
+													'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'" checked="checked" disabled />
+													<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
+													.'</label>
+												</li>';
 											}
-											echo '>
-											<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
-											.'</label>
-										</li>';
-								} elseif($counter < 4) {
-									// for extra magazine copy
-									foreach($MagSubs as $mags) {
-										$tt = strpos($Subs["Subscription"], $mags);
-										if($tt !== FALSE) {
+										}
+									} else {									
+										// for InMotion print copy
+										if($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") {
+											// No InMotion print copy for 
+											// student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
+										} else {
 											echo '
 											<li>
 												<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
-												'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'" checked="checked" disabled />
+												'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
+												if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){ 
+													echo "checked='checked'";
+												}
+												echo '>
 												<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
 												.'</label>
 											</li>';
 										}
-									}
-								} else {										
-									// for InMotion print copy
-									if($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") {
-										// No InMotion print copy for 
-										// student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
-									} else {
-										echo '
-										<li>
-											<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
-											'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
-											if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){ 
-												echo "checked='checked'";
-											}
-											echo '>
-											<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
-											.'</label>
-										</li>';
 									}
 								}
 							}
