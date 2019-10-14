@@ -425,7 +425,13 @@ jQuery(document).ready(function($) {
 		}
 	
     });
-	
+	if($("#p1-2").length!==0 && $("#p1-2").is(":checked")){
+		$('.schedule').css('display','inline-flex');
+		$('.full').css('display','none');
+	}
+	if($("#p1-2").length===0){
+		 $("#p1-1").attr('checked', true);
+	}
 	$('input[type="checkbox"]').click(function(){
         if($(this).is(":checked")){
         $(this).attr('checked', true);
