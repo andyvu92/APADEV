@@ -450,15 +450,7 @@ if(sizeof($fpProdcutArray)!=0){
 					</div>
 				</div>
 				
-					<div class="flex-cell flex-flow-row schedule">
-					<div class="flex-col-6 display-none">
-					Admin fee (ex. GST)
-					</div>
-					<div class="flex-col-6 display-none">
-					$<?php echo number_format($scheduleDetails['AdminFee'],2);?>
-					</div>
-				</div>
-			
+				
 			
 				<?php  
 					$InitialPaymentAmount = number_format($scheduleDetails['InitialPaymentAmount'],2);
@@ -594,16 +586,17 @@ if(sizeof($fpProdcutArray)!=0){
 				<span class="section_title">Payment options:</span>
 			</div>
 
-			<div class="col-xs-12">
-				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-1" value="0">
-				<label for="p1-1">Pay in full today</label>
-			</div>
+			
 			<?php if($_SESSION["MembershipProductID"]!="9964" && $_SESSION["MembershipProductID"]!="9965" && $_SESSION["MembershipProductID"]!="9966" && $_SESSION["MembershipProductID"] !="9968" ||$_SESSION["MembershipProductID"] !="10005"|| $_SESSION["MembershipProductID"] !="9967"|| $_SESSION["MembershipProductID"] !="10006"): ?>
 			<div class="col-xs-12">
 				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-2" value="1" checked="checked">
 				<label for="p1-2">Pay by monthly instalments</label>
 			</div>
 			<?php endif;?>
+			<div class="col-xs-12">
+				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-1" value="0">
+				<label for="p1-1">Pay in full today</label>
+			</div>
 			<input type="hidden" id="Installpayment-frequency" name="Installpayment-frequency" value="">
 		<?php //if(isset($_SESSION["postReviewData"])) { $PRFTemp = $_SESSION["postReviewData"]['PRFdonation'];}?>
 		<div class="row">
