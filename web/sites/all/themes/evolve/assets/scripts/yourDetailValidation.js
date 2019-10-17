@@ -147,6 +147,11 @@ jQuery(document).ready(function($) {
 						if($("input[name=Undergraduate-university-name-other"+t+"]").val() =='') { return false;}
 					}
 				}
+			} else {
+				// for students, education record is mandatory
+				if($('select[name=MemberType]').val()=="31" || $('select[name=MemberType]').val()=="32") {
+					return false;
+				}
 			}
 	
 	};
@@ -161,9 +166,17 @@ jQuery(document).ready(function($) {
 			$('html, body').animate({
 				scrollTop: $('#dashboard-right-content').offset().top
 			}, 600);
+		
+		var num = $("input[name=addtionalNumber]").val();
+		// for students, education record is mandatory
+		if($('select[name=MemberType]').val()=="31" || $('select[name=MemberType]').val()=="32") {
+			if(num==0){
+				$('.dashboard_detail .down4').addClass(".focuscss");
+				$('.dashboard_detail li#yourdetail5').addClass("warning");
+			}
+		}
 			
 		if ($('.dashboard_detail .down1').find(".focuscss").length > 0){ 
-		    
 			$('.dashboard_detail li#yourdetail1').addClass("warning");
 		}
 		if ($('.dashboard_detail .down2').find(".focuscss").length > 0){ 
@@ -176,7 +189,6 @@ jQuery(document).ready(function($) {
 			$('.dashboard_detail li#yourdetail4').addClass("warning");
 		}
 		if ($('.dashboard_detail .down4').find(".focuscss").length > 0){
-           
 			$('.dashboard_detail li#yourdetail5').addClass("warning");
 		}
 
