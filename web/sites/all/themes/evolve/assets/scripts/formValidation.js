@@ -159,7 +159,13 @@ jQuery(document).ready(function($) {
 						if($("input[name=Undergraduate-university-name-other"+t+"]").val() =='') { return false;}
 					}
 				}
+			} else {
+				// for students, education record is mandatory
+				if($('select[name=MemberType]').val()=="9964" || $('select[name=MemberType]').val()=="9965") {
+					return false;
+				}
 			}
+			
 		}
 		if($('.down5:visible').length !== 0){
 		   	if(!$("#insuranceMore").hasClass("display-none")){
@@ -323,7 +329,16 @@ jQuery(document).ready(function($) {
 		if(validateFun()==false){
 			$('.overlay').fadeOut();
 			$('#insurancePopUp').fadeOut();
-			alert("please fill out all required fields *");return false;} 
+			alert("please fill out all required fields *");
+			var num = $("input[name=addtionalNumber]").val();
+			// for students, education record is mandatory
+			if($('select[name=MemberType]').val()=="9964" || $('select[name=MemberType]').val()=="9965") {
+				if(num==0){
+					alert("Students must put education details.");
+				}
+			}
+			return false;
+		} 
         var i = Number($(this).attr("class").replace('join-details-button', ''));
 		var x = Number(i + 1);
 		
