@@ -2860,4 +2860,118 @@ jQuery(document).ready(function() {
   $('#loginAT #edit-id').one('click', function(){
     $(this).select();
   });
+
+  // dashboard account menu handler
+  $('.dashboard-left-nav').each(function () {
+    var leftNav = $(this);
+    var toggle = $(this).find('.account_menu');
+    var subMenu = $(this).find('.account_submenu');
+    var dashboard = $('body').find('#dashboard-right-content');
+
+    var allContainer = $('body').find('#dashboard-right-content .dashboard_detail form .account_container');
+
+    var accountDetailsContainer = $('body').find('#account-details');
+    var membershipContainer = $('body').find('#account-membership');
+    var paymentContainer = $('body').find('#account-payment');
+    var workplaceContainer = $('body').find('#account-workplace');
+    var educationContainer = $('body').find('#account-education');
+
+    var isAccount = false;
+
+    if( $(dashboard).is('.account_dashboard') ){
+      isAccount = true;
+      var hash = window.location.hash;
+      $(subMenu).addClass('active');
+      // if no hash
+      if (hash === '' || hash === undefined){
+        $('a[href="#profile"]', subMenu).addClass('active');
+        $(subMenu).parent().addClass('submenu1');
+      } 
+      // with defined hash
+      else {
+        $(allContainer).hide();
+        $('a[href="'+hash+'"]', subMenu).addClass('active');
+        if( hash === '#profile' ){
+          $(accountDetailsContainer).fadeIn();
+          $(subMenu).parent().addClass('submenu1');
+        } else if( hash === '#membership' ){
+          $(subMenu).parent().addClass('submenu2');
+          $(membershipContainer).fadeIn();
+        } else if( hash === '#payment' ){
+          $(subMenu).parent().addClass('submenu3');
+          $(paymentContainer).fadeIn();
+        } else if( hash === '#workplace' ){
+          $(subMenu).parent().addClass('submenu4');
+          $(workplaceContainer).fadeIn();
+        } else if( hash === '#education' ){
+          $(subMenu).parent().addClass('submenu5');
+          $(educationContainer).fadeIn();
+        }
+      }
+
+    } else {
+      isAccount = false;
+      $('a', subMenu).each(function(){
+        // add href to redirect to account page
+        var href = $(this).attr('href');
+        $(this).attr('href', 'your-details' + href);
+      })
+    }
+
+    var window_width = $(window).width();
+    if ( window_width > 992 ){
+      $(toggle).on('click', function(e){
+        e.preventDefault();
+        if( $(subMenu).is('.active') ){
+          $(subMenu).removeClass('active');
+          $(subMenu).parent().attr('class', 'dashboard-nav active');
+        } else {
+          $(subMenu).addClass('active');
+        }
+      });
+    } // end if
+
+    if( isAccount ){
+      $('a', subMenu).on('click', function (e) { 
+        e.preventDefault();
+  
+        var hash = $(this).attr('href');
+  
+        window.location.hash = hash;
+  
+        if( $(this).is('.active') ){
+          //$(this).removeClass('active');
+        } else {
+          $(this).parent().siblings().find('a').removeClass('active');
+          $(this).addClass('active');
+        }
+  
+        // hide all containers
+        $(allContainer).hide();
+  
+        if( hash === '#profile' ){
+          $(accountDetailsContainer).fadeIn();
+          $(subMenu).parent().attr('class', 'dashboard-nav active');
+          $(subMenu).parent().addClass('submenu1');
+        } else if( hash === '#membership' ){
+          $(membershipContainer).fadeIn();
+          $(subMenu).parent().attr('class', 'dashboard-nav active');
+          $(subMenu).parent().addClass('submenu2');
+        } else if( hash === '#payment' ){
+          $(paymentContainer).fadeIn();
+          $(subMenu).parent().attr('class', 'dashboard-nav active');
+          $(subMenu).parent().addClass('submenu3');
+        } else if( hash === '#workplace' ){
+          $(workplaceContainer).fadeIn();
+          $(subMenu).parent().attr('class', 'dashboard-nav active');
+          $(subMenu).parent().addClass('submenu4');
+        } else if( hash === '#education' ){
+          $(educationContainer).fadeIn();
+          $(subMenu).parent().attr('class', 'dashboard-nav active');
+          $(subMenu).parent().addClass('submenu5');
+        }
+      });
+    } // end if
+  });
+
 });

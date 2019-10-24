@@ -1615,10 +1615,27 @@ input, select, button{
 }
 
 /* MULTI SELECT CUSTOM STYLES */
+.selectize-control.multi .selectize-input.has-items.disabled{
+	padding: 13px 12px 8px;
+
+}
+
+.selectize-control.multi.plugin-remove_button{
+	.selectize-input.has-items.disabled{
+		.item{
+			padding-right: 5px!important;
+			.remove{
+				display: none;
+			}
+		}
+	}
+}
+
 .selectize-control.multi .selectize-input.disabled>div{
 	color: grey;
     background: #eeeeee;
-    border: 1px solid rgba(77,77,77, 0.7);
+	border: 1px solid rgba(77,77,77, 0.7);
+	margin: 0px 5px 5px 0;
 }
 
 /* DRUPAL FORM ELEMENTS */

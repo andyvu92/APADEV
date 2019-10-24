@@ -432,7 +432,7 @@ echo "MobilePhysio2: ".$details["Workplaces"][2]['MobilePhysio']."<br />";
 <?php //include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php'); 
 apa_function_dashboardLeftNavigation_form();
 ?>  
-<div class="col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php echo $background; ?> autoscroll" id="dashboard-right-content">
+<div class="account_dashboard dashboard_content col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php //echo $background; ?> autoscroll" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12"><span class="dashboard-name cairo" style="font-weight: 300;">Your account</span></div>
@@ -447,13 +447,49 @@ apa_function_dashboardLeftNavigation_form();
 	?>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div class="col-xs-12 none-padding" >
-				<div class="account-nav nav-chevron">
+				<div class="account-nav nav-chevron" style="display: none">
 					<ul class="nav nav-tabs">
-							<li id="yourdetail1"><a class="event1" style="cursor: pointer;"><span class="<?php if(!isset($_SESSION["paymentTabTag"]) && !isset($_POST["deleteID"]) && !isset($_POST["setCardID"]))echo 'text-underline';?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
-							<?php if($details['MemberTypeID']!="1"): ?><li id="yourdetail2"><a class="event2" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li><?php endif;?>
-							<li id="yourdetail3"><a class="event13" style="cursor: pointer;"><span class="eventtitle13 <?php if(isset($_SESSION["paymentTabTag"]) || isset($_POST["deleteID"]) || isset($_POST["setCardID"]))echo 'text-underline';?>" id="payment"><strong>Payment information</strong></span></a></li>
-							<?php if($details['MemberTypeID']!="31" && $details['MemberTypeID']!="32" && $details['MemberTypeID']!="1"): ?><li id="yourdetail4"><a class="event3" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li><?php endif; ?>
-							<?php if($details['MemberTypeID']!="1"): ?><li id="yourdetail5"><a class="event4" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li><?php endif;?>
+							<li id="yourdetail1">
+								<a class="event1" style="cursor: pointer;">
+									<span class="<?php if(!isset($_SESSION["paymentTabTag"]) && !isset($_POST["deleteID"]) && !isset($_POST["setCardID"]))echo 'text-underline';?> eventtitle1" id="yourdetails-tab">
+										<strong>Your details</strong>
+									</span>
+								</a>
+							</li>
+							<?php if($details['MemberTypeID']!="1"): ?>
+							<li id="yourdetail2">
+								<a class="event2" style="cursor: pointer;">
+									<span class="eventtitle2" id="membership">
+										<strong>Membership</strong>
+									</span>
+								</a>
+							</li>
+							<?php endif;?>
+							<li id="yourdetail3">
+								<a class="event13" style="cursor: pointer;">
+									<span class="eventtitle13 <?php if(isset($_SESSION["paymentTabTag"]) || isset($_POST["deleteID"]) || isset($_POST["setCardID"]))echo 'text-underline';?>" id="payment">
+										<strong>Payment information</strong>
+									</span>
+								</a>
+							</li>
+							<?php if($details['MemberTypeID']!="31" && $details['MemberTypeID']!="32" && $details['MemberTypeID']!="1"): ?>
+							<li id="yourdetail4">
+								<a class="event3" style="cursor: pointer;">
+									<span class="eventtitle3" id="workplace">
+										<strong>Workplace</strong>
+									</span>
+								</a>
+							</li>
+							<?php endif; ?>
+							<?php if($details['MemberTypeID']!="1"): ?>
+							<li id="yourdetail5">
+								<a class="event4" style="cursor: pointer;">
+									<span class="eventtitle4" id="education">
+										<strong>Education</strong>
+									</span>
+								</a>
+							</li>
+							<?php endif;?>
 					</ul>
 				</div>
 				<!--<?php //if(isset($_POST["addCard"])) :?>
@@ -478,8 +514,11 @@ apa_function_dashboardLeftNavigation_form();
 			<form action="<?php echo $url;?>" name="your-details" method="POST" novalidate>
 			    <input type="hidden" name="step1" value="1"/>
 				<input type="hidden" name="Specialty" value="<?php echo$details['Specialty'];?>">
-				<div class="down1" <?php if(isset($_SESSION["paymentTabTag"]) || isset($_POST["deleteID"]) || isset($_POST["setCardID"]))echo 'style="display:none;"';?>>
+				<div class="down1 account_container" id="account-details" <?php if(isset($_SESSION["paymentTabTag"]) || isset($_POST["deleteID"]) || isset($_POST["setCardID"]))echo 'style="display:none;"';?>>
 					<div class="col-xs-12 none-padding none-margin">
+						<div class="col-xs-12 none-margin">
+							<h3 class="tab_title">Your details</h3>
+						</div>
 						<div class="col-xs-12 none-margin">
 							<label class="note-text"><span class="tipstyle"> *</span>Required fields</label>
 						</div>
@@ -935,8 +974,11 @@ apa_function_dashboardLeftNavigation_form();
 
 					<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button1"><span class="dashboard-button-name">Next</span></a></div>-->
 				</div>
-				<div class="down2" style="display:none;" >
+				<div class="down2 account_container" id="account-membership" style="display:none;" >
 						<input type="hidden"  name="Status" value="<?php echo $details['Status'];?>">
+						<div class="col-xs-12 none-margin">
+							<h3 class="tab_title">Membership</h3>
+						</div>
 						<div class="col-xs-12 col-sm-6 col-md-6">
 							<label for="">Member ID (Your email address)<span class="tipstyle"> *</span></label>
 							<input type="text" class="form-control" name="Memberid"  <?php if (empty($details['Memberid'])) {echo "placeholder='Member ID(Your email address)'";}   else{ echo 'value="'.$details['Memberid'].'"'; }?> readonly>
@@ -1087,7 +1129,7 @@ apa_function_dashboardLeftNavigation_form();
 				</div>-->
 					<!--<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">   <a class="join-details-button12"><span class="dashboard-button-name">Next</span></a><a class="your-details-prevbutton2"><span class="dashboard-button-name">Last</span></a></div>-->
 				</div>
-				<div class="down13"  <?php if(!isset($_SESSION["paymentTabTag"]) && !isset($_POST["deleteID"]) && !isset($_POST["setCardID"])) {echo 'style="display:none;"';}?> >
+				<div class="down13 account_container" id="account-payment" <?php if(!isset($_SESSION["paymentTabTag"]) && !isset($_POST["deleteID"]) && !isset($_POST["setCardID"])) {echo 'style="display:none;"';}?> >
 				<?php
 				// 2.2.12 - GET payment listing
 				// Send - 
@@ -1103,6 +1145,10 @@ apa_function_dashboardLeftNavigation_form();
 				//$_SESSION["cardsnum"]= $cardsnum;
 				?>
 					<div class="row" >
+						<div class="col-xs-12 none-margin">
+							<h3 class="tab_title">Payment information</h3>
+						</div>
+
 						<div class="col-xs-12 none-margin">
 							<label class="black-underline-link" style="text-decoration: none;">Credit card</label>
 							<input type="hidden" id="defaultCard" value="">
@@ -1352,12 +1398,15 @@ apa_function_dashboardLeftNavigation_form();
 				<input id="wpnumber" type="hidden" name="wpnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =0; echo $wpnumber;} ?>"/>
 				<input id="maxumnumber" type="hidden" name="maxumnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =0; echo $wpnumber;} ?>">
 				
-				<div class="down3" style="display:none;">
+				<div class="down3 account_container" id="account-workplace" style="display:none;">
 						<!--<div class="col-xs-12"> 
 							<input class="styled-checkbox" type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="<?php  echo $details['Findpublicbuddy'];?>" <?php //if($details['Findpublicbuddy']=="True"){echo "checked";} ?>>
 							<label  style="font-weight: 300" for="Findpublicbuddy"><span class="note-text">NOTE: </span>Please list my details in the public (visbile to other health professionals)</label>	
 						</div>-->
-				
+					<div class="col-xs-12 none-margin">
+						<h3 class="tab_title">Workplace</h3>
+					</div>
+
 					<div class="col-xs-12">
 						<ul class="nav nav-tabs" id="tabmenu">
 						<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
@@ -1787,7 +1836,10 @@ apa_function_dashboardLeftNavigation_form();
 
 		</div>
 
-			<div class="down4" style="display:none;" >
+			<div class="down4 account_container" id="account-education" style="display:none;" >
+			<div class="col-xs-12 none-margin">
+				<h3 class="tab_title">Education</h3>
+			</div>
 			<div class="col-xs-12 col-sm-12 col-md-12"><p>Please note: all education undertaken with the APA or APC will already be recorded on your profile.</p></div>
 			<input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) { $addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =0;} echo  $addtionalNumber;  ?>"/>
 

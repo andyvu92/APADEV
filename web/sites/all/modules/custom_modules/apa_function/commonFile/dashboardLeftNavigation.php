@@ -94,10 +94,27 @@ if(isset($_SESSION["UserId"])) {
 				</a>
 			</li>
 			<li class="dashboard-nav">
-				<a href="your-details">
+				<a href="your-details" class="account_menu">
 					<span class="account_icon"></span>
 					Account
 				</a>
+				<ul class="account_submenu">
+					<li>
+						<a href="#profile"><span>Your details</span></a>
+					</li>
+					<li>
+						<a href="#membership"><span>Membership</span></a>
+					</li>
+					<li>
+						<a href="#payment"><span>Payment information</span></a>
+					</li>
+					<li>
+						<a href="#workplace"><span>Workplace</span></a>
+					</li>
+					<li>
+						<a href="#education"><span>Education</span></a>
+					</li>
+				</ul>
 			</li>
 			<li class="dashboard-nav">
 				<a href="your-purchases">
