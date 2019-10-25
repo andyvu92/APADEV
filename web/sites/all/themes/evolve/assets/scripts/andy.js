@@ -2927,6 +2927,18 @@ jQuery(document).ready(function() {
           $(subMenu).parent().attr('class', 'dashboard-nav active');
         } else {
           $(subMenu).addClass('active');
+          var hash = subMenu.find('a.active').attr('href');
+          if( hash === '#profile' ){
+            $(subMenu).parent().addClass('submenu1');
+          } else if( hash === '#membership' ){
+            $(subMenu).parent().addClass('submenu2');
+          } else if( hash === '#payment' ){
+            $(subMenu).parent().addClass('submenu3');
+          } else if( hash === '#workplace' ){
+            $(subMenu).parent().addClass('submenu4');
+          } else if( hash === '#education' ){
+            $(subMenu).parent().addClass('submenu5');
+          }
         }
       });
     } // end if
