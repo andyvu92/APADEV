@@ -1410,7 +1410,10 @@ apa_function_dashboardLeftNavigation_form();
 					<div class="col-xs-12">
 						<ul class="nav nav-tabs" id="tabmenu">
 						<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
-						<li <?php if($key=='Workplace0') echo 'class ="active prewp'.$key.'"';?> id="workplaceli<?php echo $key;?>"><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a><span class="calldeletewp<?php echo $key;?>"></span></li>
+							<li <?php if($key=='Workplace0') echo 'class ="active prewp'.$key.'"';?> id="workplaceli<?php echo $key;?>">
+								<a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a>
+								<span class="calldeletewp<?php echo $key;?>"></span>
+							</li>
 						<?php endforeach; ?> 
 						<?php //if(sizeof($details['Workplaces'])==0):?>
 					
@@ -2286,10 +2289,10 @@ apa_function_dashboardLeftNavigation_form();
 			var j = Number(number +1);
 			var i = Number(maxNumber +1);
 
-			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span></li>' );
+			$('.down3').find('#tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span></li>' );
 			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in"></div>');
 			
-			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
+			$('.down3').find('#tabmenu li:not(#workplaceli'+i+')').removeClass("active");
 			$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
 			$('input[name=wpnumber]').val(j);
 			$('input[name=maxumnumber]').val(i);
