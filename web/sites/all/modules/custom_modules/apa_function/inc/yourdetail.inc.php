@@ -447,7 +447,7 @@ apa_function_dashboardLeftNavigation_form();
 	?>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div class="col-xs-12 none-padding" >
-				<div class="account-nav nav-chevron" style="display: none">
+				<div class="account-nav nav-chevron">
 					<ul class="nav nav-tabs">
 							<li id="yourdetail1">
 								<a class="event1" style="cursor: pointer;">
