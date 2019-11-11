@@ -1851,6 +1851,12 @@ $userRetisterStatus = false;
 				?>
 			</span>
 
+			<?php
+			if($ttt >= strtotime("01.01.2020",date('d/m/Y'))) {
+				echo '<span class="small-heading">* Early bird prices close 4 weeks prior to the registration closing date</span><br>';
+			}
+			?>
+
 			<span>
 				<?php 
 				if(!$IsExternal) {
@@ -2010,6 +2016,12 @@ $userRetisterStatus = false;
 				 }
 				?>
 			</span>
+
+			<?php
+			if($ttt >= strtotime("01.01.2020",date('d/m/Y'))) {
+				echo '<span class="small-heading">* Early bird prices close 4 weeks prior to the registration closing date</span><br>';
+			}
+			?>
 
 			<span class="small-heading">Your registration status:</span>
 			<span>
