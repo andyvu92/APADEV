@@ -89,10 +89,10 @@ apa_function_dashboardLeftNavigation_form();
 /* get background image****/
 if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];
 $userTag = getInsuranceStatus($userID);
-if($userTag ==1){
+/*if($userTag ==1){
 	$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 	header("Location:".$link."/insuranceprocess");
-}
+}*/
    
 } else { $userID =0; }
 $background = getBackgroundImage($userID);
@@ -106,18 +106,19 @@ $background = getBackgroundImage($userID);
 	}
 </style>
 <!--Quotation order POP UP-->
+
 <div id="QuatationPopUp" style="display:none;" class="container">
 	<h3 style="color:black;">Renewing your APA membership is easy…</h3>
 	<p>If your membership category hasn’t changed, simply click continue to proceed with the following purchase:</p>
 	<p><?php if(sizeof($orderDetails)!=0): ?>
 	<?php 
+	$ngQuatation = array();
 	if(!isset($_SESSION['QuatationTag'])){
 		foreach($orderDetails['Order'] as $orders){
 		foreach($orders['OrderLines'] as $order){
 //  put the code here to save the quatation order products into the database firstly.
         
 		
-			
 			if($order['ProductCategory'] =="Memberships"){
 				//checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID=$order['ProductID']);
 				checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID="");
@@ -127,32 +128,44 @@ $background = getBackgroundImage($userID);
 				
 				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
 				createShoppingCart($userID, $productID =$order['ProductID'],$type="NG",$coupon="");
-			
+			    array_push($ngQuatation, $order['ProductID']);
 			}
 			if($order['ProductID'] =="9978"){
 				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
 				createShoppingCart($userID, $productID =$order['ProductID'],$type="MG1",$coupon="");
+				
 			}
 			if($order['ProductID'] =="9977"){
 				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
 				createShoppingCart($userID, $productID =$order['ProductID'],$type="MG2",$coupon="");
+				
 			}
 			if($order['ProductID'] =="9973"){
 				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
 				createShoppingCart($userID, $productID =$order['ProductID'],$type="FP",$coupon="");
+				$_SESSION['fpQuatation'] = $order['ProductID'];
+				
+			}
+			if($order['ProductID'] =="18247"){
+				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
+				createShoppingCart($userID, $productID =$order['ProductID'],$type="FP",$coupon="");
+				$_SESSION['fpQuatation'] = $order['ProductID'];
 			}
 			$_SESSION['QuatationTag'] = "1";
 		
 		echo $order['ProductName']; echo "</br>";} 
-	}}?><?php endif;?></p>
-	
-	<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
+	}
+		
+		$_SESSION['ngQuatation'] = $ngQuatation;
+	}?><?php endif;?></p>
+		
+	<!--<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>-->
 
 	<!--<p>If this isn’t quite right, and you’d like to change your member type, or add some National Groups to your membership, follow the link below:</p>-->
-	<a href="javascript:document.getElementById('renew-membertype-form2').submit();"  target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change member category or national group</span></a>
+	<!--<a href="javascript:document.getElementById('renew-membertype-form2').submit();"  target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change member category or national group</span></a>-->
 
 	<!--<p>If you’ve changed address recently or would like to update any of your personal details, follow this link:</p>-->
-	<a href="renewmymembership" target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change your details</span></a>
+	<a href="renewmymembership" target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
 
 </div>
 <!--End Pop up--->

@@ -1080,8 +1080,7 @@ jQuery(document).ready(function($) {
 	if(jQuery.inArray( "10021", $('select[id=Nationalgp]').val())!==-1)
 		{
 			$( "#ngsports" ).removeClass('display-none');
-			$( "#ngsportsbox" ).val('1');
-			$("#ngsportsbox").attr('checked', true);
+		
 		}
 		else{
 			$( "#ngsports" ).addClass('display-none');
@@ -1091,8 +1090,7 @@ jQuery(document).ready(function($) {
 		if(jQuery.inArray( "10015", $('select[id=Nationalgp]').val())!==-1)	
 		{
 			$( "#ngmusculo" ).removeClass('display-none');
-			$( "#ngmusculobox" ).val('1');
-			$("#ngmusculobox").attr('checked', true);
+	
 	    }
 		else{
 			$( "#ngmusculo" ).addClass('display-none');
@@ -1572,14 +1570,49 @@ jQuery(document).ready(function($) {
 		$('#deleteMGForm').submit();
 	});
 	/*delete NG Product from member shoppingcart  */
+	
 	$('[class^=deleteNGButton]').click(function(){
 		var productID = $(this).attr("class").replace('deleteNGButton', '');
 		$('input[name="step2-4"]').val(productID);
+		if($('body').find('.macp').length > 0 && $(this).parent('.ngtilted').length >0 && $('body').find('.ngtilted').length == 1) {
+			$('input[name="delMACP"]').val("1");
+			$('.overlay').remove();
+			$('#confirmDeleteMACP').fadeIn();	 
+		}
+		else{
+		
+      $('#deleteNGForm').submit();
+		}
+    
+		
 		//if(productID == "10021") { $('input[name="MG"]').val("9977");}
 		//if(productID == "10015") { $('input[name="MG"]').val("9978");}
+		
+	});
+
+  $('#deleteMACPButton').click(function(){
+		$('#confirmDeleteMACP').hide();
+		if ( $('body, .html, html').find('.overlay').length == 0 ){
+			$('body').append('<div class="overlay"><section class="loaders "><span class="loader loader-quart"></span></section></div>');
+			$('.loaders').css('visibility','visible').fadeIn();
+		}
+		$('.overlay').fadeIn();
 		$('#deleteNGForm').submit();
 	});
-	
+	$('.cancelDeleteMACPButton').click(function(){
+		$('#confirmDeleteMACP').hide();
+		if ( $('body, .html, html').find('.overlay').length == 0 ){
+			$('body').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+		
+		}
+		
+		
+	});
+	//change membertype
+	$('.changeMT').click(function(){
+		$('#renew-membertype-form2').submit();
+	});
+
 	if($('#insuranceTerms').val()=="0"){
 		$( "#disagreeDescription" ).removeClass('display-none');
 		$('a.join-details-button5').addClass('disabled');

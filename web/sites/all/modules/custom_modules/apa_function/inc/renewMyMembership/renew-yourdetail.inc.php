@@ -5,16 +5,29 @@ if(!function_exists('drupal_session_started'))
 }
 ?>
 <?php
-
-//Put filter condition to display member type
+  	//define Magazine and Fellowship tag
+	$IntouchTag = false;
+	$SportTag = false;
+	$FellowTag = false;
+	$fpProduct = "0";
+	if(sizeof(getProduct($_SESSION['UserId'],"MG1"))!=0) { $IntouchTag = true; }
+    if(sizeof(getProduct($_SESSION['UserId'],"MG2"))!=0) { $SportTag = true;}
+	if(sizeof(getProduct($_SESSION['UserId'],"FP"))!=0) { 
+		$FellowTag= true; 
+		$fpResults = getProduct($_SESSION['UserId'],"FP");
+		foreach ($fpResults as $fpResult) {
+			$fpProduct = $fpResult;
+		}
+	}
+	//Put filter condition to display member type
 $filterMemberProduct = array("10007","10008","10009","9997");
 // 2.2.21 - Get Fellowship product
 	// Send - 
 	// ProductID 
 	// Response - UserID & detail data
 	$tt["ProductID"] = "";
-    $fellowshipProducts = aptify_get_GetAptifyData("21", $tt);
-	//$fellow = array_shift($fellowshipProducts);
+	$fellowshipProducts = aptify_get_GetAptifyData("21", $tt);
+    //$fellow = array_shift($fellowshipProducts);
 	foreach ($fellowshipProducts as $fellowshipProduct){
 		if($fellowshipProduct['FPid'] !="0"){
 			$fellowshipProductID = $fellowshipProduct['ProductID'];
@@ -269,7 +282,7 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 	//save fellowship product on APA side
 	if(isset($_POST['fap']) && $_POST['fap'] =="1" ) { 
 		checkShoppingCart($userID, $type="FP",$productID="");
-		createShoppingCart($userID, $fellowshipProductID,$type="FP",$coupon="");
+		createShoppingCart($userID, $_SESSION['fpQuatation'],$type="FP",$coupon="");
 	}else{ checkShoppingCart($userID, $type="FP",$productID="");}
 	//save magazine products on APA side
 	 //check the Sports MG , Intouch MG
@@ -278,11 +291,11 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 	 $sportTag = checkSP($products);
 	 $inTouchTag = checkITouch($products);
 	 /*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
-	if(isset($_POST['ngmusculo']) && $_POST['ngmusculo'] =="1" && $inTouchTag){ 
+	if(isset($_POST['ngmusculo']) && $_POST['ngmusculo'] =="1"){ 
 		checkShoppingCart($userID, $type="MG1",$productID="");
 		createShoppingCart($userID, "9978",$type="MG1",$coupon=""); 
 	}
-	if(isset($_POST['ngsports']) && $_POST['ngsports'] =="1" && $sportTag) {
+	if(isset($_POST['ngsports']) && $_POST['ngsports'] =="1") {
 		checkShoppingCart($userID, $type="MG2",$productID="");
 		createShoppingCart($userID, "9977",$type="MG2",$coupon=""); 
 		
@@ -967,8 +980,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				</div>
 
 				</div>
-				<div class="col-xs-12 display-none" id="ngsports"><input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value="0"> <label class="light-font-weight" for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?($<?php echo $SportPrice;?>)</label></div>
-				<div class="col-xs-12 display-none" id="ngmusculo"><input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value="0"> <label class="light-font-weight" for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?($<?php echo $IntouchPrice;?>)</label></div>
+				<div class="col-xs-12 display-none" id="ngsports"><input class="styled-checkbox" type="checkbox" id="ngsportsbox" name="ngsports" value='<?php if($SportTag) {echo "1";} else { echo "0";}?>' <?php if($SportTag) { echo 'checked="checked"';}?>> <label class="light-font-weight" for="ngsportsbox">Would you like to subscribe to the APA SportsPhysio magazine?($<?php echo $SportPrice;?>)</label></div>
+				<div class="col-xs-12 display-none" id="ngmusculo"><input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value='<?php if($IntouchTag) {echo "1";} else { echo "0";}?>' <?php if($IntouchTag) { echo 'checked="checked"';}?>> <label class="light-font-weight" for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?($<?php echo $IntouchPrice;?>)</label></div>
 			</div>
 
 			<div class="row"> 
@@ -1001,14 +1014,27 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 					<input type="hidden" name="fapnum" value="<?php //echo sizeof($details['Specialty']);?>">
 					<?php if(sizeof($details['PersonSpecialisation'])!=0){
-						echo '<input class="styled-checkbox" type="checkbox" id="fap" name="fap">';
+						if($fpProduct != "18247"){
+						echo '<input class="styled-checkbox" type="checkbox" id="fap" name="fap"';
+						if($FellowTag) {echo 'checked="checked"  value="1">'; } else { echo '>';}
 						echo '<label class="light-font-weight" style="margin-top: 15px; font-weight: 700;" for="fap">I am part of the Australian College of Physiotherapists</label>';
 						echo '<p style="margin-bottom: 0"><span class="note-text">Please note:</span> Ticking this box adds an extra $220 to the price of your membership.
 	If you have passed Specialisation, Fellowship by Original Contribution or are
 	a Fellow of the Australian College of Physiotherapists, you must tick this box.</p>';
+}
 						
 						}
-					?>	
+					?>
+					<div id="addfap">
+					<?php 
+					    if(isset($_SESSION["fpQuatation"]) && $_SESSION["fpQuatation"]=="18247"){ echo '<input type="hidden" id="fpQuatation">';}
+						if($FellowTag && $fpProduct == "18247"){
+							echo '<div id="fpnew"><input class="styled-checkbox" type="checkbox" id="fap" name="fap" checked="checked" value="1">';
+							echo '<label class="light-font-weight" style="margin-top: 15px; font-weight: 700;" for="fap">I would like to be part of the Australian College of Physiotherapists</label>';
+							echo '<p style="margin-bottom: 0"><span class="note-text">Please note:</span> Ticking this box adds an extra $110 to the price of your membership. If you have passed your APA Titling pathway, you are eligible to purchase ACP membership and entitled to use the MACP title.</p></div>';
+						}
+					?>
+					</div>
 				</div>
 
 				
@@ -1691,5 +1717,60 @@ jQuery(document).ready(function() {
   $(".callDeleteEdu").on("click",function(){
     $('div[aria-describedby=confirmDelete]').fadeIn();
   });
+ 
+});
+</script>
+<script>
+ //handle MACP product related to the NG
+ 
+ var prevSetup = Selectize.prototype.setup;
+
+  Selectize.prototype.setup = function () {
+      prevSetup.call(this);
+  
+      // This property is set in native setup
+      // Unless the source code changes, it should
+      // work with any version
+      this.$control_input.prop('readonly', true);
+  };
+  
+ var $nationalSelectize = $('#Nationalgp').selectize({
+    plugins: ['remove_button'],
+  });
+  
+  var ngQuatation ='<?php if(isset($_SESSION['ngQuatation']))  echo json_encode($_SESSION['ngQuatation']);?>';
+   var macpTag = false;
+   $(document).on('change', $nationalSelectize, function(){
+		if($('select[id=Nationalgp]').val()!= null){
+		var ngArray = $('select[id=Nationalgp]').val().toString().split(",");
+		for(var i=0; i < ngArray.length; i++){
+			if(ngQuatation.includes(ngArray[i])){
+					macpTag = true;
+					break;
+			}
+			else{
+					macpTag = false;
+				}
+				
+			}
+			if(macpTag){
+				if($('#fpnew').length!=0 ) {$( "#fpnew" ).removeClass('display-none');}
+				if($('#fpQuatation').length!=0 && $('#fpnew').length==0){
+					$('#addfap').append('<div id="fpnew"><input class="styled-checkbox" type="checkbox" id="fap" checked="checked" name="fap" value="1"><label class="light-font-weight" style="margin-top: 15px; font-weight: 700;" for="fap">I would like to be part of the Australian College of Physiotherapists</label><p style="margin-bottom: 0"><span class="note-text">Please note:</span> Ticking this box adds an extra $110 to the price of your membership. If you have passed your APA Titling pathway, you are eligible to purchase ACP membership and entitled to use the MACP title.</p></div>');
+				}
+			}
+			else{
+				$( "#fpnew" ).addClass('display-none');
+				$( "#fpnew #fap" ).val('0');
+				$("#fpnew #fap").attr('checked', false);
+			}
+	}
+	else{
+		$( "#fpnew" ).addClass('display-none');
+		$( "#fpnew #fap" ).val('0');
+		$("#fpnew #fap").attr('checked', false);
+		
+	}
+	
 });
 </script>

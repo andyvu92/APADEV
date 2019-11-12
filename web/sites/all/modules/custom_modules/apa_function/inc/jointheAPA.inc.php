@@ -9,10 +9,10 @@ if(!function_exists('drupal_session_started'))
 if(isset($_SESSION['UserId'])) { 
 $userID = $_SESSION['UserId'];
 $userTag = getInsuranceStatus($userID);
-if($userTag ==1){
+/*if($userTag ==1){
 	$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 	header("Location:".$link."/insuranceprocess");
-}
+}*/
 
 } else { $userID =0; }
 

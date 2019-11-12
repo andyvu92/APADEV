@@ -69,7 +69,7 @@ if(isset($_POST['step2-1'])) {
 		$Type = "J";
 		createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type);
 		$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-		header("Location:".$link."/insuranceprocess");
+		//header("Location:".$link."/insuranceprocess");
 	}
 	
 	
@@ -275,9 +275,8 @@ if(isset($_POST['Paymentcard']) && $_POST['addCard'] == "0") {
 $PRFPrice = 0;
 ?>
 <div id="tipsBlock"
-    class="<?php if(isset($_POST['insuranceStatus'])&& $_POST['insuranceStatus']=="1" ) {echo "display";} else { echo "display-none";}?>">
-    <span style="color:red;">Unfortunately, we cannot let you proceed with this membership purchase. Please contact the
-        APA member hub (include email link) or on 1 300 306 622 for more information.</span></div>
+    class="<?php //if(isset($_POST['insuranceStatus'])&& $_POST['insuranceStatus']=="1" ) {echo "display";} else { echo "display-none";}?>">
+   </div>
 <form id="join-review-form" action="joinconfirmation" method="POST">
 
     <?php if (isset($_POST['addCard']) && $_POST['addCard'] == "1"): ?>
@@ -327,7 +326,7 @@ $PRFPrice = 0;
 								echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$memberProduct['Title']."</div>";
 								echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($memberProduct['Price'],2)."</div>";
 								$price += $memberProduct['Price'];
-								echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
+								echo "<div class='flex-col-2 action-col'><a class='changeMT' target='_self'>change</a></div>";
 								echo "</div>";  
 							}
 						}	
@@ -616,6 +615,7 @@ $PRFPrice = 0;
         </div>
     </div>
 </form>
+<form id="renew-membertype-form2" action="" method="POST"><input type="hidden" name="MType"></form>
 <!--merge part start from here-->
 <!---done by jinghu--22/05/2019-->
 <form id="join-insurance-form" class="col-xs-12" action="joinconfirmation" method="POST">

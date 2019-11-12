@@ -90,15 +90,9 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-				<label><span class="note-text">Please note</span> that adding an entity name to your Certificate of Currency will cover you for physiotherapy services only. If you have other services being performed at your clinic, including those performed by registered physios, you must contact BMS on 1800 931 068 to ensure you are adequately covered.</label>
-			</div>
-			<div class="col-xs-12">
-				<label>Business name</label>
-				<input type="text" class="form-control" name="Businiessname" id="Businiessname" placeholder="" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Businiessname']; }else{ echo '';}?>>
-			</div>
-			<div class="col-xs-12">
-				<strong><span class="note-text">Note: </span>Business name, practice name or trading name owned by you, do not name your employer’s business.</strong>
-			</div>
+			    <label>Please <a href="https://apa.bmsgroup.com/#/" target="_blank">click here</a> to proceed to BMS’s microsite to take up entity cover. There will be additional information collected by BMS to ensure you’re business is appropriately covered.</label>
+				<label><span class="note-text">Please note</span> it is your duty to disclose anything that you know, or could reasonably be expected to know, that may affect the decision to insure you and on what terms. If you answered ‘yes’ to any of the underwriting questions, BMS may reach out to you to find out further details.</label>
+			</div>		
 		</div>
 		<div class="display-none" id="insuranceMore">
 			<div class="col-xs-12">

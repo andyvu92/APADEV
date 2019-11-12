@@ -66,7 +66,7 @@ if(isset($_POST['step2-1'])) {
 		$Type = "R";
 		createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type);
 		$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-		header("Location:".$link."/insuranceprocess");
+		//header("Location:".$link."/insuranceprocess");
 	}
 }
 ?>
@@ -82,7 +82,7 @@ if(isset($_POST['step2-1'])) {
 //delete MG product
 if(isset($_POST['step2-3'])){
 	checkShoppingCart($userID=$_SESSION['UserId'], $type="" ,$prodcutID=$_POST['step2-3']);
-	if($_POST['step2-3']=="9973"){
+	if($_POST['step2-3']=="9973" || $_POST['step2-3']=="18247"){
 		unset($_SESSION["FPProductID"]);
 	}
 	
@@ -104,7 +104,11 @@ if(isset($_POST['step2-3'])){
 
 //delete NG product-------change delete NG product process at 31/07/2018
 if(isset($_POST['step2-4'])){
+	
 	checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID=$_POST['step2-4']);
+	if(isset($_POST['delMACP']) && $_POST['delMACP']=="1"){checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID="18247");
+		unset($_SESSION["FPProductID"]);
+	}
 	unset($_SESSION["NationalProductID"]);
 	$userNGProduct = getProduct($_SESSION['UserId'], "NG");
 	if (sizeof($userNGProduct) != 0) {
@@ -141,8 +145,13 @@ function deleteMGR($totalMGProduct, $NGProduct, $userID){
 	}
 	if($NGProduct == "10015") {
 		checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID="9978");
-		
+		//checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID="18247");
 	}
+	/* delete MACP product
+	if($NGProduct == "10015") {
+		checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID="18247");
+		
+	}*/
 
 }
 
@@ -223,13 +232,16 @@ if(isset($_SESSION["NationalProductID"])) {$NGProductsArray=$_SESSION["NationalP
 // Response -Fellowship product list
 $FPListArray = array();
 $fpProdcutArray = array();
+$macpTag = false;
 if(isset($_SESSION["FPProductID"])){
+	if($_SESSION["FPProductID"]=="18247"){ $macpTag = true;}
 	array_push($fpProdcutArray,$_SESSION["FPProductID"]);
 }
 if(isset($_SESSION["MGProductID"])){
 	foreach($_SESSION["MGProductID"] as $singleM){
 	    foreach($singleM as $key => $value){
 			array_push($fpProdcutArray,$value);
+			
 		}
 	}
 }
@@ -246,7 +258,7 @@ if(sizeof($fpProdcutArray)!=0){
 	//print_r($cardsnum);
 	$PRFPrice = 0;
 ?> 
-<div id="tipsBlock" class="<?php if(isset($_POST['insuranceStatus'])&& $_POST['insuranceStatus']=="1") {echo "display";} else { echo "display-none";}?>"><span style="color:red;">Unfortunately, we cannot let you proceed with this membership purchase. Please contact the APA member hub (include email link) or on 1 300 306 622 for more information.</span></div>
+<div id="tipsBlock" class="<?php //if(isset($_POST['insuranceStatus'])&& $_POST['insuranceStatus']=="1") {echo "display";} else { echo "display-none";}?>"></div>
 <form id ="join-review-form" action="renewconfirmation" method="POST">
 
 <?php if (isset($_POST['addCard']) && $_POST['addCard'] == "1"): ?>  
@@ -284,7 +296,7 @@ if(sizeof($fpProdcutArray)!=0){
 						<span class="table-heading">Delete</span>
 					</div>
 				</div>
-
+                
     			<?php 
 				$price = "";
 				if(sizeof($prodcutArray)!=0){
@@ -293,19 +305,24 @@ if(sizeof($fpProdcutArray)!=0){
 						echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$memberProduct['Title']."</div>";
 						echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($memberProduct['Price'],2)."</div>";
 						$price += $memberProduct['Price'];
-						echo '<div class="flex-col-2 action-col"><a href="renewmymembership" target="_self">delete</a></div>';
+						echo '<div class="flex-col-2 action-col">';
+								
+						echo '<a class="changeMT" target="_self">change</a></div>';
 						echo "</div>";  
 					}
 				}
+				
 				foreach( $NGListArray as $NGArray){
 					if(sizeof($NGProductsArray)!=0){
 						foreach($NGProductsArray as $NGProduct){
 							if($NGProduct == $NGArray['ProductID']){
 								echo "<div class='flex-cell flex-flow-row table-cell NG'>";
-								echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$NGArray['ProductName']."</div>";
+							    echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$NGArray['ProductName']."</div>";
 								echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($NGArray['NGprice'],2)."</div>";
 								$price += $NGArray['NGprice'];
-								echo '<div class="flex-col-2 action-col"><a class="deleteNGButton'.$NGArray['ProductID'].'">delete</a></div>';
+								echo '<div class="flex-col-2 action-col';
+								if(in_array($NGArray['ProductID'],$_SESSION['ngQuatation'])) { echo " ngtilted";} 
+								echo '"><a class="deleteNGButton'.$NGArray['ProductID'].'">delete</a></div>';
 								echo "</div>";
 							}	  
 						}
@@ -314,7 +331,8 @@ if(sizeof($fpProdcutArray)!=0){
 				if(sizeof($FPListArray)!=0){
 					foreach( $FPListArray as $FProduct){
 						    echo '<input type="hidden" name="MGProductID" value="'.$FProduct['ProductID'].'">';
-							echo "<div class='flex-cell flex-flow-row table-cell FP'>";
+							echo "<div class='flex-cell flex-flow-row table-cell FP";
+							if($FProduct['ProductID']=="18247") { echo " macp' >";} else { echo "'>"; }
 							echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$FProduct['FPtitle']."</div>";
 							echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($FProduct['FPprice'],2)."</div>";
 							$price += $FProduct['FPprice'];
@@ -790,7 +808,7 @@ if(sizeof($fpProdcutArray)!=0){
 <form id="pform" action="" method="POST"><input type="hidden" name="goP"></form>
 <form id="deletePRFForm" action="" method="POST"><input type="hidden" name="step2-2"></form>
 <form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>
-<form id="deleteNGForm" action="" method="POST"><input type="hidden" name="step2-4" value=""></form>		
+<form id="deleteNGForm" action="" method="POST"><input type="hidden" name="step2-4" value=""><input type="hidden" name="delMACP" value="0"></form>		
 <form id="tempform" action="" method="POST"><input type="hidden" name="goI"></form>	
 
 <div id="schedulePOPUp" class="modal fade" role="dialog">
@@ -836,7 +854,15 @@ if(sizeof($fpProdcutArray)!=0){
 		</div>
 	</div>
 </div>
-
+<div id="confirmDeleteMACP" style="display:none;">
+				<div class="flex-cell">
+					<h3 class="light-lead-heading cairo">Please note, by removing the National Group subscription from your shopping cart, you are no longer eligible to purchase the ACP membership and consequently not entitled to use the MACP title. Do you wish to proceed?</h3>
+				</div>
+				<div class="flex-cell buttons-container">
+					<a id="deleteMACPButton" class="" value="yes" target="_self">Yes</a>
+					<a class="cancelDeleteMACPButton" value="no" target="_self">No</a>
+				</div>
+</div>
 <?php logRecorder();  ?>
 <!--  this part will be merged with Andy's Dashboard less file-->
 <style>

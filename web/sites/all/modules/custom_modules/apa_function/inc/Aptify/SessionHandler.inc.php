@@ -71,6 +71,9 @@ function deleteSession() {
 	unset($_SESSION['logoutSession']);
 	unset($_SESSION['reloadTag']);
 	unset($_SESSION['orderDetailsTag']);
+	unset($_SESSION['fpQuatation']);
+	unset($_SESSION["ngQuatation"]);
+	
 	/*
 	unset($_SESSION['Logfgh']);
 	unset($_SESSION['Logfgh']);

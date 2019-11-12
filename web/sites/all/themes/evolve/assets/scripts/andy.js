@@ -346,7 +346,8 @@ jQuery(document).ready(function() {
       $( "#ngmusculo" ).addClass('display-none');
       $( "#ngmusculobox" ).val('0');
 			$("#ngmusculobox").attr('checked', false);
-		}
+    }
+    
   });
 
   // INMOTION BLOG: BRING PREV BUTTON ABOVE ADS------------------------------
