@@ -159,12 +159,6 @@ $background = getBackgroundImage($userID);
 		$_SESSION['ngQuatation'] = $ngQuatation;
 	}?><?php endif;?></p>
 		
-	<!--<a href="javascript:document.getElementById('renew-survey-form2').submit();" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>-->
-
-	<!--<p>If this isn’t quite right, and you’d like to change your member type, or add some National Groups to your membership, follow the link below:</p>-->
-	<!--<a href="javascript:document.getElementById('renew-membertype-form2').submit();"  target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Change member category or national group</span></a>-->
-
-	<!--<p>If you’ve changed address recently or would like to update any of your personal details, follow this link:</p>-->
 	<a href="renewmymembership" target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
 
 </div>
@@ -177,7 +171,7 @@ $background = getBackgroundImage($userID);
 		<div class="col-xs-12 page-title">
 			<span class="dashboard-name cairo">Renew my membership</span>
 		</div>
-		<!--<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background <?php if(!isset($_SESSION["userID"])) echo "display-none";?>">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>-->
+		
 		</div>
 	<?php
 		//include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
@@ -192,8 +186,7 @@ $background = getBackgroundImage($userID);
 				<li><a class="tabtitle4 inactiveLink" style="cursor: pointer;"><span class="eventtitle4" id="Education"><strong>Education</strong></span></a></li>
 				<li><a class="tabtitle5 inactiveLink" style="cursor: pointer;"><span class="eventtitle5 <?php if((isset($_POST['step1'])&& $_POST['insuranceTag']!="0") || isset($_POST['goI']))echo 'text-underline';?>" id="Insurance"><strong>Insurance</strong></span></a></li>
 				<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6 <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")||isset($_POST['QOrder']) || isset($_POST['stepAdd']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>
-				<!--<li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7 <?php //if(isset($_POST['goP']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>-->
-				<!--<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 <?php //if(isset($_POST['step2']) || isset($_POST['step3']) || isset($_POST['stepAdd']) ||isset($_POST['step2-2']) ||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'text-underline';?>" id="Review"><strong>Review</strong></span></a></li>-->
+				
 				</ul>
 			<div id="insuranceBlockRN"></div>
 			<div class="col-xs-12 none-margin">
