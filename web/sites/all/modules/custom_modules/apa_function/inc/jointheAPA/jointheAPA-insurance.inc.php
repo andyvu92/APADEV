@@ -53,7 +53,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 		</div>
 		<div class="row">
 			<div class="col-xs-12">
-			    <label>Please <a href="https://apa.bmsgroup.com/#/" target="_blank">click here</a> to proceed to BMS’s microsite to take up entity cover. There will be additional information collected by BMS to ensure you’re business is appropriately covered.</label>
+			    <label>If you require entity cover, you will be prompted once completing the online membership form to proceed to BMS’s microsite. This process will take between 5 – 10 minutes where additional data will be gathered to ensure your business is appropriately covered.</label>
 				<label><span class="note-text">Please note</span> it is your duty to disclose anything that you know, or could reasonably be expected to know, that may affect the decision to insure you and on what terms. If you answered ‘yes’ to any of the underwriting questions, BMS may reach out to you to find out further details.</label>
 			</div>
 			
