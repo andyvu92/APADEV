@@ -24,31 +24,22 @@ jQuery(document).ready(function($) {
 			if($("select[name=Aboriginal]").val() ==''){$("select[name=Aboriginal]").addClass("focuscss");}else{$("select[name=Aboriginal]").removeClass("focuscss");}
 			if($("input[name=Pobox]").val() ==''){
 				if($("input[name=Address_Line_1]").val() ==''){$("input[name=Address_Line_1]").addClass("focuscss");}else{$("input[name=Address_Line_1]").removeClass("focuscss");}
-				//if($("input[name=Address_Line_2]").val() ==''){$("input[name=Address_Line_2]").addClass("focuscss");}else{$("input[name=Address_Line_2]").removeClass("focuscss");}
 			}
 			if($("input[name=Suburb]").val() ==''){$("input[name=Suburb]").addClass("focuscss");}else{$("input[name=Suburb]").removeClass("focuscss");}
 			if($("input[name=Postcode]").val() ==''){$("input[name=Postcode]").addClass("focuscss");}else{$("input[name=Postcode]").removeClass("focuscss");}
-			//if($("select[name=State]").val() ==''){$("select[name=State]").addClass("focuscss");}else{$("select[name=State]").removeClass("focuscss");}
 			if($("input[name=Country]").val() ==''){$("input[name=Country]").addClass("focuscss");}else{$("input[name=Country]").removeClass("focuscss");}
-			if(!$("#Shipping-address-join").is(":checked")){
-				if($("input[name=Billing-Pobox]").val() ==''){
-						if($("input[name=Billing-Address_Line_1]").val() ==''){$("input[name=Billing-Address_Line_1]").addClass("focuscss");}else{$("input[name=Billing-Address_Line_1]").removeClass("focuscss");}
+			if(!$("#Mailing-address").is(":checked")){
+				if($("input[name=Mailing-PObox]").val() ==''){
+						if($("input[name=Mailing-Address_Line_1]").val() ==''){$("input[name=Mailing-Address_Line_1]").addClass("focuscss");}else{$("input[name=Mailing-Address_Line_1]").removeClass("focuscss");}
 				}
-				//if($("input[name=Billing-Address_Line_1]").val() ==''){$("input[name=Billing-Address_Line_1]").addClass("focuscss");}else{$("input[name=Billing-Address_Line_1]").removeClass("focuscss");}
-				//if($("input[name=Billing-Address_Line_2]").val() ==''){$("input[name=Billing-Address_Line_2]").addClass("focuscss");}else{$("input[name=Billing-Address_Line_2]").removeClass("focuscss");}
-				if($("input[name=Billing-Suburb]").val() ==''){$("input[name=Billing-Suburb]").addClass("focuscss");}else{$("input[name=Billing-Suburb]").removeClass("focuscss");}
-				if($("input[name=Billing-Postcode]").val() ==''){$("input[name=Billing-Postcode]").addClass("focuscss");}else{$("input[name=Billing-Postcode]").removeClass("focuscss");}
-				//if($("select[name=Billing-State]").val() ==''){$("select[name=Billing-State]").addClass("focuscss");}else{$("select[name=Billing-State]").removeClass("focuscss");}
-				if($("input[name=Billing-Country]").val() ==''){$("input[name=Billing-Country]").addClass("focuscss");}else{$("input[name=Billing-Country]").removeClass("focuscss");}
+				if($("input[name=Mailing-city-town]").val() ==''){$("input[name=Mailing-city-town]").addClass("focuscss");}else{$("input[name=Mailing-city-town]").removeClass("focuscss");}
+				if($("input[name=Mailing-postcode]").val() ==''){$("input[name=Mailing-postcode]").addClass("focuscss");}else{$("input[name=Mailing-postcode]").removeClass("focuscss");}
+				if($("input[name=Mailing-Country]").val() ==''){$("input[name=Mailing-Country]").addClass("focuscss");}else{$("input[name=Mailing-Country]").removeClass("focuscss");}
 			}
-			
-		
-			
-			//if($("select[name=Branch]").val() ===''){$("select[name=Branch]").addClass("focuscss");}else{$("select[name=Branch]").removeClass("focuscss");}
-		   
+				   
 			var i = $("input[name=wpnumber]").val();
 			var n = $("input[name=maxumnumber]").val();
-		if($('select[name=MemberType]').val()!=="9964" && $('select[name=MemberType]').val()!=="9965" && $('select[name=MemberType]').val()!=="10004"&& $('select[name=MemberType]').val()!=="9966"&& $('select[name=MemberType]').val()!=="9967"&& $('select[name=MemberType]').val()!=="9968"&& $('select[name=MemberType]').val()!=="9997"&& $('select[name=MemberType]').val()!=="9967"){
+		if($('select[name=MemberType]').val()!=="31" && $('select[name=MemberType]').val()!=="32" && $('select[name=MemberType]').val()!=="33"&& $('select[name=MemberType]').val()!=="35"&& $('select[name=MemberType]').val()!=="36"&& $('select[name=MemberType]').val()!=="21"&& $('select[name=MemberType]').val()!=="22"&& $('select[name=MemberType]').val()!=="36"){
 			if(i!=0){
 				for (x = 0; x<=n;x++){
 					if($("#workplace"+x).length !== 0){
@@ -105,18 +96,18 @@ jQuery(document).ready(function($) {
 			if($("input[name=Country]").val() ==''||$("input[name=Postcode]").val() ==''||$("input[name=Suburb]").val() ==''){
 				return false;
 			}
-			if(!$("#Shipping-address-join").is(":checked")){
-				if($("input[name=Billing-Pobox]").val() ==''){
-					if($("input[name=Billing-Address_Line_1]").val() ==''){
+			if(!$("#Mailing-address").is(":checked")){
+				if($("input[name=Mailing-PObox]").val() ==''){
+					if($("input[name=Mailing-Address_Line_1]").val() ==''){
 						return false;
 					}
 				}
 				
-				if($("input[name=Billing-Country").val() ==''||$("input[name=Billing-Postcode]").val() ==''||$("input[name=Billing-Suburb]").val() ==''){
+				if($("input[name=Mailing-Country").val() ==''||$("input[name=Mailing-postcode]").val() ==''||$("input[name=Mailing-city-town]").val() ==''){
 					return false;
 				}
 			}
-			if($('select[name=MemberType]').val()!=="9964" && $('select[name=MemberType]').val()!=="9965" && $('select[name=MemberType]').val()!=="10004"&& $('select[name=MemberType]').val()!=="9966"&& $('select[name=MemberType]').val()!=="9967"&& $('select[name=MemberType]').val()!=="9968"&& $('select[name=MemberType]').val()!=="9997"&& $('select[name=MemberType]').val()!=="9967"){
+			if($('select[name=MemberType]').val()!=="31" && $('select[name=MemberType]').val()!=="32" && $('select[name=MemberType]').val()!=="33"&& $('select[name=MemberType]').val()!=="35"&& $('select[name=MemberType]').val()!=="36"&& $('select[name=MemberType]').val()!=="21"&& $('select[name=MemberType]').val()!=="22"&& $('select[name=MemberType]').val()!=="36"){
 				if(i!=0){
 					for (x = 0; x<=n;x++){
 						if($("#workplace"+x).length !== 0){	

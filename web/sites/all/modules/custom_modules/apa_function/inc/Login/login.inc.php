@@ -110,23 +110,7 @@ if (isset($_POST['refreshTag'])) {
 			$postData['Address_Line_2'] = $_POST['Address_Line_2'];
 			
 		}
-		/*
-		if (isset($_POST['BuildingName'])) {
-			$postData['BuildingName'] = $_POST['BuildingName'];
-		}
-		
-		if (isset($_POST['Address_Line_1'])) {
-			$postData['Address_Line_1'] = $_POST['Address_Line_1'];
-		}
-		
-		if (isset($_POST['Pobox'])) {
-			$postData['Pobox'] = $_POST['Pobox'];
-		}
-		
-		if (isset($_POST['Address_Line_2'])) {
-			$postData['Address_Line_2'] = $_POST['Address_Line_2'];
-		}*/
-		
+	
 		if (isset($_POST['Suburb'])) {
 			$postData['Suburb'] = $_POST['Suburb'];
 		}
@@ -151,135 +135,43 @@ if (isset($_POST['refreshTag'])) {
 			$postData['Specialty'] = $_POST['Specialty'];
 		}
 		
-		// change from shipping address to billing address
-		
+		//update mailing address is mandatory on 16/10/2019
 		if (isset($_POST['Shipping-address-join']) && $_POST['Shipping-address-join'] == '1') {
-			if(isset($_POST['BuildingName'])) {$postData['Billing-BuildingName']  = $_POST['BuildingName']; }
-			if(isset($_POST['Address_Line_1'])) {$postData['BillingAddress_Line_1'] = $_POST['Address_Line_1'];} else{$postData['BillingAddress_Line_1'] = "";}
-			if(isset($_POST['Address_Line_2'])) {$postData['BillingAddress_Line_2'] = $_POST['Address_Line_2']; } else {$postData['BillingAddress_Line_2'] ="";}
-			$postData['Billing-Pobox']         = $_POST['Pobox'];
-			$postData['Billing-Suburb']        = $_POST['Suburb'];
-			$postData['Billing-Postcode']      = $_POST['Postcode'];
-			if(isset($_POST['State'])) {$postData['Billing-State']  = $_POST['State'];} else{$postData['Billing-State']  = "";}
-			$postData['Billing-Country']       = $_POST['Country'];
+			if(isset($_POST['BuildingName'])) {$postData['Mailing-BuildingName']  = $_POST['BuildingName']; } else{ $postData['Mailing-BuildingName'] = "";}
+			if(isset($_POST['Address_Line_1'])) {$postData['Mailing-Address_line_1'] = $_POST['Address_Line_1'];} else{$postData['Mailing-Address_line_1'] = "";}
+			if(isset($_POST['Address_Line_2'])) {$postData['Mailing-Address_line_2'] = $_POST['Address_Line_2']; } else {$postData['Mailing-Address_line_2'] ="";}
+			$postData['Mailing-PObox']         = $_POST['Pobox'];
+			$postData['Mailing-city-town']        = $_POST['Suburb'];
+			$postData['Mailing-postcode']      = $_POST['Postcode'];
+			if(isset($_POST['State'])) {$postData['Mailing-state']  = $_POST['State'];} else{$postData['Mailing-state']  = "";}
+			$postData['Mailing-country']       = $_POST['Country'];
 		} else {
-			if($_POST['Billing-Pobox']!="") {
-				//$postData['Billing-Pobox'] = $_POST['Billing-Pobox'];
-				$postData['Billing-BuildingName'] =$_POST['Billing-Pobox'];
-				$postData['BillingAddress_Line_1'] ="";
-				$postData['BillingAddress_Line_2'] ="";
-			}else {
-				$postData['Billing-BuildingName'] = $_POST['Billing-BuildingName']; 
-				$postData['BillingAddress_Line_1'] = $_POST['Billing-Address_Line_1'];
-				$postData['BillingAddress_Line_2'] = $_POST['Billing-Address_Line_2'];
-				//$postData['Billing-Pobox'] = "";
-			}
-			//$postData['Billing-BuildingName']  = $_POST['Billing-BuildingName'];
-			//$postData['BillingAddress_Line_1'] = $_POST['Billing-Address_Line_1'];
-			//$postData['BillingAddress_Line_2'] = $_POST['Billing-Address_Line_2'];
-			//$postData['Billing-Pobox']         = $_POST['Billing-Pobox'];
-			$postData['Billing-Suburb']        = $_POST['Billing-Suburb'];
-			$postData['Billing-Postcode']      = $_POST['Billing-Postcode'];
-			if(isset($_POST['Billing-State'])) {$postData['Billing-State'] = $_POST['Billing-State']; } else{$postData['Billing-State'] ="";}
-			$postData['Billing-Country']       = $_POST['Billing-Country'];
-		}
-		
-		// Add shipping address & mailing address post data
-		/***put the logic when post Shipping-PObox******/
-		/***Updated on 02082018**/
-		if($_POST['Shipping-PObox']!="") {
-				//$postData['Shipping-PObox'] = $_POST['Shipping-PObox'];
-				$postData['Shipping-BuildingName'] =$_POST['Shipping-PObox'];
-				$postData['Shipping-Address_line_1'] ="";
-				$postData['Shipping-Address_line_2'] ="";
-				
-		}else {
-			$postData['Shipping-BuildingName'] = $_POST['Shipping-BuildingName']; 
-			$postData['Shipping-Address_line_1'] = $_POST['Shipping-Address_Line_1'];
-			$postData['Shipping-Address_line_2'] = $_POST['Shipping-Address_Line_2'];
-			//$postData['Shipping-PObox'] = "";
-		}
-		/*
-		if (isset($_POST['Shipping-BuildingName'])) {
-			$postData['Shipping-BuildingName'] = $_POST['Shipping-BuildingName'];
-		}
-		
-		if (isset($_POST['Shipping-Address_Line_1'])) {
-			$postData['Shipping-Address_line_1'] = $_POST['Shipping-Address_Line_1'];
-		}
-		
-		if (isset($_POST['Shipping-Address_Line_2'])) {
-			$postData['Shipping-Address_line_2'] = $_POST['Shipping-Address_Line_2'];
-		}
-		
-		if (isset($_POST['Shipping-PObox'])) {
-			$postData['Shipping-PObox'] = $_POST['Shipping-PObox'];
-		}*/
-		
-		if (isset($_POST['Shipping-city-town'])) {
-			$postData['Shipping-city-town'] = $_POST['Shipping-city-town'];
-		}
-		
-		if (isset($_POST['Shipping-postcode'])) {
-			$postData['Shipping-postcode'] = $_POST['Shipping-postcode'];
-		}
-		
-		if (isset($_POST['Shipping-State'])) {
-			$postData['Shipping-state'] = $_POST['Shipping-State'];
-		}
-		
-		if (isset($_POST['Shipping-country'])) {
-			$postData['Shipping-country'] = $_POST['Shipping-country'];
-		}
-		/***put the logic when post Mailing-PObox******/
-		/***Updated on 02082018**/
-		if($_POST['Mailing-PObox']!="") {
-				//$postData['Mailing-PObox'] = $_POST['Mailing-PObox'];
+				if($_POST['Mailing-PObox']!="") {
 				$postData['Mailing-BuildingName'] =$_POST['Mailing-PObox'];
 				$postData['Mailing-Address_line_1'] ="";
 				$postData['Mailing-Address_line_2'] ="";
+			}else {
+				$postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName']; 
+				$postData['Mailing-Address_line_1'] = $_POST['Mailing-Address_Line_1'];
+				$postData['Mailing-Address_line_2'] = $_POST['Mailing-Address_Line_2'];
 				
-		}else {
-			$postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName']; 
-			$postData['Mailing-Address_line_1'] = $_POST['Mailing-Address_Line_1'];
-			$postData['Mailing-Address_line_2'] = $_POST['Mailing-Address_Line_2'];
-			//$postData['Mailing-PObox'] = "";
+			}
+			if (isset($_POST['Mailing-city-town'])) {
+					$postData['Mailing-city-town'] = $_POST['Mailing-city-town'];
+			}
+			
+			if (isset($_POST['Mailing-postcode'])) {
+					$postData['Mailing-postcode'] = $_POST['Mailing-postcode'];
+			}
+			
+			if (isset($_POST['Mailing-State'])) {
+					$postData['Mailing-state'] = $_POST['Mailing-State'];
+			}
+			
+			if (isset($_POST['Mailing-country'])) {
+					$postData['Mailing-country'] = $_POST['Mailing-country'];
+			}
 		}
-		/*
-		if (isset($_POST['Mailing-BuildingName'])) {
-			$postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName'];
-		}
-		
-		if (isset($_POST['Mailing-Address_Line_1'])) {
-			$postData['Mailing-Address_line_1'] = $_POST['Mailing-Address_Line_1'];
-		}
-		
-		if (isset($_POST['Mailing-Address_Line_2'])) {
-			$postData['Mailing-Address_line_2'] = $_POST['Mailing-Address_Line_2'];
-		}
-		
-		if (isset($_POST['Mailing-PObox'])) {
-			$postData['Mailing-PObox'] = $_POST['Mailing-PObox'];
-		}*/
-		
-		if (isset($_POST['Mailing-city-town'])) {
-			$postData['Mailing-city-town'] = $_POST['Mailing-city-town'];
-		}
-		
-		if (isset($_POST['Mailing-postcode'])) {
-			$postData['Mailing-postcode'] = $_POST['Mailing-postcode'];
-		}
-		
-		if (isset($_POST['Mailing-State'])) {
-			$postData['Mailing-state'] = $_POST['Mailing-State'];
-		}
-		
-		if (isset($_POST['Mailing-country'])) {
-			$postData['Mailing-country'] = $_POST['Mailing-country'];
-		}
-		
-		// ---
-		
 		if (isset($_POST['Memberid'])) {
 			$postData['Memberid'] = $_POST['Memberid'];
 		}

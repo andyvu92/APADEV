@@ -77,90 +77,53 @@ if(isset($_POST['step1'])) {
 		$postData['Address_Line_2'] = $_POST['Address_Line_2'];
 		
 	}
-	/*if(isset($_POST['BuildingName'])){ $postData['BuildingName'] = $_POST['BuildingName']; }
-	if(isset($_POST['Address_Line_1'])){ $postData['Address_Line_1'] = $_POST['Address_Line_1']; }
-	if(isset($_POST['Pobox'])){ $postData['Pobox'] = $_POST['Pobox']; }
-	if(isset($_POST['Address_Line_2'])){ $postData['Address_Line_2'] = $_POST['Address_Line_2']; }*/
 	if(isset($_POST['Suburb'])){ $postData['Suburb'] = $_POST['Suburb']; }
 	if(isset($_POST['Postcode'])){ $postData['Postcode'] = $_POST['Postcode']; }
 	if(isset($_POST['State'])){ $postData['State'] = $_POST['State']; }  else {$postData['State'] = "";}
 	if(isset($_POST['Country'])){ $postData['Country'] = $_POST['Country']; }
 	if(isset($_POST['Status'])){ $postData['Status'] = $_POST['Status']; }
 	if(isset($_POST['Specialty'])){ $postData['Specialty'] = $_POST['Specialty']; }
-
-	//change from shipping address to billing address
-	if(isset($_POST['Shipping-address-join']) && $_POST['Shipping-address-join']=='1'){ 
-	if(isset($_POST['BuildingName'])) {$postData['Billing-BuildingName']  = $_POST['BuildingName']; }
-	if(isset($_POST['Address_Line_1'])) {$postData['BillingAddress_Line_1'] = $_POST['Address_Line_1'];} else{$postData['BillingAddress_Line_1'] = "";}
-    if(isset($_POST['Address_Line_2'])) {$postData['BillingAddress_Line_2'] = $_POST['Address_Line_2']; } else {$postData['BillingAddress_Line_2'] ="";}
-	$postData['Billing-Pobox'] = $_POST['Pobox'];
-	$postData['Billing-Suburb'] = $_POST['Suburb'];
-	$postData['Billing-Postcode'] = $_POST['Postcode'];
-	if(isset($_POST['State'])) {$postData['Billing-State']  = $_POST['State'];} else{$postData['Billing-State']  = "";}
-	$postData['Billing-Country'] = $_POST['Country'];
-	}else{
-		if($_POST['Billing-Pobox']!="") {
-			//$postData['Billing-Pobox'] = $_POST['Billing-Pobox'];
-			$postData['Billing-BuildingName'] =$_POST['Billing-Pobox'];
-			$postData['BillingAddress_Line_1'] ="";
-			$postData['BillingAddress_Line_2'] ="";
-		}else {
-			$postData['Billing-BuildingName'] = $_POST['Billing-BuildingName']; 
-			$postData['BillingAddress_Line_1'] = $_POST['Billing-Address_Line_1'];
-			$postData['BillingAddress_Line_2'] = $_POST['Billing-Address_Line_2'];
-			//$postData['Billing-Pobox'] = "";
-		}
-	
-	$postData['Billing-Suburb'] = $_POST['Billing-Suburb'];
-	$postData['Billing-Postcode'] = $_POST['Billing-Postcode'];
-	if(isset($_POST['Billing-State'])) {$postData['Billing-State'] = $_POST['Billing-State']; } else{$postData['Billing-State'] ="";}
-	$postData['Billing-Country'] = $_POST['Billing-Country'];  
-	}
-	//Add shipping address & mailing address post data
-	/***put the logic when post Shipping-PObox******/
-	/***Updated on 02082018**/
-	if($_POST['Shipping-PObox']!="") {
-			//$postData['Shipping-PObox'] = $_POST['Shipping-PObox'];
-			$postData['Shipping-BuildingName'] =$_POST['Shipping-PObox'];
-			$postData['Shipping-Address_line_1'] ="";
-			$postData['Shipping-Address_line_2'] ="";
-			
-	}else {
-		$postData['Shipping-BuildingName'] = $_POST['Shipping-BuildingName']; 
-		$postData['Shipping-Address_line_1'] = $_POST['Shipping-Address_Line_1'];
-		$postData['Shipping-Address_line_2'] = $_POST['Shipping-Address_Line_2'];
-		//$postData['Shipping-PObox'] = "";
-	}
-	//if(isset($_POST['Shipping-BuildingName'])){ $postData['Shipping-BuildingName'] = $_POST['Shipping-BuildingName']; }
-	//if(isset($_POST['Shipping-Address_Line_1'])){ $postData['Shipping-Address_line_1'] = $_POST['Shipping-Address_Line_1']; }
-	//if(isset($_POST['Shipping-Address_Line_2'])){ $postData['Shipping-Address_line_2'] = $_POST['Shipping-Address_Line_2']; }
-	//if(isset($_POST['Shipping-PObox'])){ $postData['Shipping-PObox'] = $_POST['Shipping-PObox']; } 
-	if(isset($_POST['Shipping-city-town'])){ $postData['Shipping-city-town'] = $_POST['Shipping-city-town']; } 
-	if(isset($_POST['Shipping-postcode'])){ $postData['Shipping-postcode'] = $_POST['Shipping-postcode']; } 
-	if(isset($_POST['Shipping-State'])){ $postData['Shipping-state'] = $_POST['Shipping-State']; }
-	if(isset($_POST['Shipping-country'])){ $postData['Shipping-country'] = $_POST['Shipping-country']; }
-	/***put the logic when post Mailing-PObox******/
-	/***Updated on 02082018**/
-	if($_POST['Mailing-PObox']!="") {
-			//$postData['Mailing-PObox'] = $_POST['Mailing-PObox'];
+	//update mailing address is mandatory on 16/10/2019
+    
+    if (isset($_POST['Shipping-address-join']) && $_POST['Shipping-address-join'] == '1') {
+        if(isset($_POST['BuildingName'])) {$postData['Mailing-BuildingName']  = $_POST['BuildingName']; } else{ $postData['Mailing-BuildingName'] = "";}
+        if(isset($_POST['Address_Line_1'])) {$postData['Mailing-Address_line_1'] = $_POST['Address_Line_1'];} else{$postData['Mailing-Address_line_1'] = "";}
+        if(isset($_POST['Address_Line_2'])) {$postData['Mailing-Address_line_2'] = $_POST['Address_Line_2']; } else {$postData['Mailing-Address_line_2'] ="";}
+        $postData['Mailing-PObox']         = $_POST['Pobox'];
+        $postData['Mailing-city-town']        = $_POST['Suburb'];
+        $postData['Mailing-postcode']      = $_POST['Postcode'];
+        if(isset($_POST['State'])) {$postData['Mailing-state']  = $_POST['State'];} else{$postData['Mailing-state']  = "";}
+        $postData['Mailing-country']       = $_POST['Country'];
+    } else {
+        if($_POST['Mailing-PObox']!="") {
 			$postData['Mailing-BuildingName'] =$_POST['Mailing-PObox'];
 			$postData['Mailing-Address_line_1'] ="";
 			$postData['Mailing-Address_line_2'] ="";
+		}else {
+			$postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName']; 
+            $postData['Mailing-Address_line_1'] = $_POST['Mailing-Address_Line_1'];
+            $postData['Mailing-Address_line_2'] = $_POST['Mailing-Address_Line_2'];
 			
-	}else {
-		$postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName']; 
-		$postData['Mailing-Address_line_1'] = $_POST['Mailing-Address_Line_1'];
-		$postData['Mailing-Address_line_2'] = $_POST['Mailing-Address_Line_2'];
-		//$postData['Mailing-PObox'] = "";
-	}
-	//if(isset($_POST['Mailing-BuildingName'])){ $postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName']; } 
-	//if(isset($_POST['Mailing-Address_Line_1'])){ $postData['Mailing-Address_line_1'] = $_POST['Mailing-Address_Line_1']; } 
-	//if(isset($_POST['Mailing-Address_Line_2'])){ $postData['Mailing-Address_line_2'] = $_POST['Mailing-Address_Line_2']; } 
-	//if(isset($_POST['Mailing-PObox'])){ $postData['Mailing-PObox'] = $_POST['Mailing-PObox']; }
-	if(isset($_POST['Mailing-city-town'])){ $postData['Mailing-city-town'] = $_POST['Mailing-city-town']; } 
-	if(isset($_POST['Mailing-postcode'])){ $postData['Mailing-postcode'] = $_POST['Mailing-postcode']; }
-	if(isset($_POST['Mailing-State'])){ $postData['Mailing-state'] = $_POST['Mailing-State']; } 
-	if(isset($_POST['Mailing-country'])){ $postData['Mailing-country'] = $_POST['Mailing-country']; } 
+		}
+        if (isset($_POST['Mailing-city-town'])) {
+            $postData['Mailing-city-town'] = $_POST['Mailing-city-town'];
+        }
+        
+        if (isset($_POST['Mailing-postcode'])) {
+            $postData['Mailing-postcode'] = $_POST['Mailing-postcode'];
+        }
+        
+        if (isset($_POST['Mailing-State'])) {
+            $postData['Mailing-state'] = $_POST['Mailing-State'];
+        }
+        
+        if (isset($_POST['Mailing-country'])) {
+            $postData['Mailing-country'] = $_POST['Mailing-country'];
+        }
+    }  
+  
+	
+	
 	if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid']; }
 	//if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password']; }
 	if(isset($_POST['MemberType'])){ $postLocalData['MemberType'] = $_POST['MemberType']; }
@@ -734,7 +697,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				
 				<div class="row payment-line flex-column form_one_column">
 					<div class="col-xs-12 col-sm-6">
-						<span class="section_title">Billing address:</span>
+						<span class="section_title">Mailing address:</span>
 					</div>
 
 					<div class="col-xs-12 col-sm-6 align-item-end">
@@ -747,48 +710,48 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				<div class="row">
 					<div class="col-xs-12">
 					   <label for="">Building name</label>
-					   <input type="text" class="form-control"  name="Billing-BuildingName" <?php if (empty($details['Billing-Unit'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?> autocomplete="Building-Name">
+					   <input type="text" class="form-control"  name="Mailing-BuildingName" <?php if (empty($details['Mailing-unitno'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?> autocomplete="Building-Name">
 					</div>
 				
 					<div class="col-xs-12 col-sm-6 col-md-6">
 					   <label for="">PO Box</label>
-					   <input type="text" class="form-control" name="Billing-Pobox"  <?php if (!empty($details['Billing-Unit'])) {echo "placeholder='PO Box'";}   else{ echo 'value="'.$details['BuildingName1'].'"'; }?> autocomplete="Pobox">
+					   <input type="text" class="form-control" name="Mailing-PObox"  <?php if (!empty($details['Mailing-unitno'])) {echo "placeholder='PO Box'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?> autocomplete="Pobox">
 					</div>
 					
 					<div class="col-xs-12 col-sm-6 col-md-9">
 					   <label for="">Address line 1<span class="tipstyle billing-pobox-stat"> *</span></label>
-					   <input type="text" class="form-control"  name="Billing-Address_Line_1" id="Billing-Address_Line_1" <?php if (empty($details['Billing-Unit']) || $details['Billing-Unit']=="") {echo "placeholder='Billing address line 1'";}   else{ echo 'value="'.$details['Billing-Unit'].'"'; }?> autocomplete="address-line1">
+					   <input type="text" class="form-control"  name="Mailing-Address_Line_1" id="Mailing-Address_Line_1" <?php if (empty($details['Mailing-unitno']) || $details['Mailing-unitno']=="") {echo "placeholder='Mailing address line 1'";}   else{ echo 'value="'.$details['Mailing-unitno'].'"'; }?> autocomplete="address-line1">
 					</div>
 					
 					<div class="col-xs-12">
 					   <label for="">Address line 2</label>
-					   <input type="text" class="form-control" name="Billing-Address_Line_2" id="Billing-Address_Line_2" <?php if (empty($details['Billing-Street'])) {echo "placeholder='Billing address line 2'";}   else{ echo 'value="'.$details['Billing-Street'].'"'; }?> autocomplete="address-line2">
+					   <input type="text" class="form-control" name="Mailing-Address_Line_2" id="Mailing-Address_Line_2" <?php if (empty($details['Mailing-streetname'])) {echo "placeholder='Mailing address line 2'";}   else{ echo 'value="'.$details['Mailing-streetname'].'"'; }?> autocomplete="address-line2">
 					</div>
 				</div>
 				
 				<div class="row">
 					<div class="col-xs-6 col-md-3">
 					   <label for="">City or town<span class="tipstyle"> *</span></label>
-					   <input type="text" class="form-control" name="Billing-Suburb" id="Billing-Suburb" <?php if (empty($details['Billing-Suburb'])) {echo "placeholder='Billing City/Town'";}   else{ echo 'value="'.$details['Billing-Suburb'].'"'; }?> autocomplete="address-level2">
+					   <input type="text" class="form-control" name="Mailing-city-town" id="Mailing-city-town" <?php if (empty($details['Mailing-city-town'])) {echo "placeholder='Mailing City/Town'";}   else{ echo 'value="'.$details['Mailing-city-town'].'"'; }?> autocomplete="address-level2">
 					</div>
 					
 					<div class="col-xs-6 col-md-3">
 					   <label for="">Postcode<span class="tipstyle"> *</span></label>
-					   <input type="text" class="form-control" name="Billing-Postcode" id="Billing-Postcode" <?php if (empty($details['Billing-Postcode'])) {echo "placeholder='Billing Postcode'";}   else{ echo 'value="'.$details['Billing-Postcode'].'"'; }?> autocomplete="postal-code">
+					   <input type="text" class="form-control" name="Mailing-postcode" id="Mailing-postcode" <?php if (empty($details['Mailing-postcode'])) {echo "placeholder='Mailing Postcode'";}   else{ echo 'value="'.$details['Mailing-postcode'].'"'; }?> autocomplete="postal-code">
 					</div>
 					
 					<div class="col-xs-6 col-md-3">
 					   <label for="">State</label>
 					 <div class="chevron-select-box">  
-					   <select class="form-control" name="Billing-State" id="State2" autocomplete="address-level1">
-							<option value=""  <?php if (empty($details['Billing-State'])) echo "selected='selected'";?> disabled> State </option>
+					   <select class="form-control" name="Mailing-State" id="State2" autocomplete="address-level1">
+							<option value=""  <?php if (empty($details['Mailing-state'])) echo "selected='selected'";?> disabled> State </option>
 							<?php 
 								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 								$State=json_decode($statecode, true);
 								foreach($State  as $key => $value){
 								//echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
 								echo '<option value="'.$State[$key]['Abbreviation'].'"';
-								if ($details['Billing-State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+								if ($details['Mailing-state'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
 								echo '> '.$State[$key]['Abbreviation'].' </option>';
 							
 								}
@@ -800,15 +763,15 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<div class="col-xs-6 col-md-3">
 					   <label for="">Country<span class="tipstyle"> *</span></label>
 					 <div class="chevron-select-box">  
-					   <select class="form-control" id="Country2" name="Billing-Country" autocomplete="country">
+					   <select class="form-control" id="Country2" name="Mailing-Country" autocomplete="country">
 							<?php 
 							//$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							//$country=json_decode($countrycode, true);
 							foreach($country  as $key => $value){
 								
 								echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
-								if ($details['Billing-Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
-								elseif(empty($details['Billing-Country']) && $country[$key]['ID']=="14"){
+								if ($details['Mailing-country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+								elseif(empty($details['Mailing-country']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
 								}
 								echo '> '.$country[$key]['Country'].' </option>';
@@ -819,24 +782,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 				</div>
 			</div>
-			<!---Hidden mailing address and shipping address Start from here-->
-				<input type="hidden" name="Shipping-BuildingName" value="<?php if (!empty($details['Shipping-unitno'])) {echo $details['Shipping-BuildingName'];}?>">
-				<input type="hidden" name="Shipping-Address_Line_1" value="<?php echo $details['Shipping-unitno'];?>">
-				<input type="hidden" name="Shipping-Address_Line_2" value="<?php echo $details['Shipping-streetname'];?>">
-				<input type="hidden" name="Shipping-PObox" value="<?php if(empty($details['Shipping-unitno'])){echo $details['Shipping-BuildingName'];}?>">
-				<input type="hidden" name="Shipping-city-town" value="<?php echo $details['Shipping-city-town'];?>">
-				<input type="hidden" name="Shipping-postcode" value="<?php echo $details['Shipping-postcode'];?>">
-				<input type="hidden" name="Shipping-State" value="<?php echo $details['Shipping-state'];?>">
-				<input type="hidden" name="Shipping-country" value="<?php echo $details['Shipping-country'];?>">
-				<input type="hidden" name="Mailing-BuildingName" value="<?php if(!empty($details['Mailing-unitno'])) {echo $details['Mailing-BuildingName'];}?>">
-				<input type="hidden" name="Mailing-Address_Line_1" value="<?php echo $details['Mailing-unitno'];?>">
-				<input type="hidden" name="Mailing-Address_Line_2" value="<?php echo $details['Mailing-streetname'];?>">
-				<input type="hidden" name="Mailing-PObox" value="<?php if(empty($details['Mailing-unitno'])){echo $details['Mailing-BuildingName'];}?>">
-				<input type="hidden" name="Mailing-city-town" value="<?php echo $details['Mailing-city-town'];?>">
-				<input type="hidden" name="Mailing-postcode" value="<?php echo $details['Mailing-postcode'];?>">
-				<input type="hidden" name="Mailing-State" value="<?php echo $details['Mailing-state'];?>">
-				<input type="hidden" name="Mailing-country" value="<?php echo $details['Mailing-country'];?>">
-			<!---Hidden mailing address and shipping address End here-->
+			
 		  <!--<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-right">
 			 <div class="row form-image">
 				<div class="col-lg-12">

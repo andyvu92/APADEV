@@ -35,15 +35,13 @@ jQuery(document).ready(function($) {
 			if($("select[name=Country]").val()=="Australia"){if($("select[name=State]").val() ==''){$("select[name=State]").addClass("focuscss");}else{$("select[name=State]").removeClass("focuscss");}}
 			if($("input[name=Country]").val() ==''){$("input[name=Country]").addClass("focuscss");}else{$("input[name=Country]").removeClass("focuscss");}
 			if(!$("#Shipping-address-join").is(":checked")){
-				if($("input[name=Billing-Pobox]").val() ==''){
-						if($("input[name=Billing-Address_Line_1]").val() ==''){$("input[name=Billing-Address_Line_1]").addClass("focuscss");}else{$("input[name=Billing-Address_Line_1]").removeClass("focuscss");}
+				if($("input[name=Mailing-PObox]").val() ==''){
+						if($("input[name=Mailing-Address_Line_1]").val() ==''){$("input[name=Mailing-Address_Line_1]").addClass("focuscss");}else{$("input[name=Mailing-Address_Line_1]").removeClass("focuscss");}
 				}
-				//if($("input[name=Billing-Address_Line_1]").val() ==''){$("input[name=Billing-Address_Line_1]").addClass("focuscss");}else{$("input[name=Billing-Address_Line_1]").removeClass("focuscss");}
-				//if($("input[name=Billing-Address_Line_2]").val() ==''){$("input[name=Billing-Address_Line_2]").addClass("focuscss");}else{$("input[name=Billing-Address_Line_2]").removeClass("focuscss");}
-				if($("input[name=Billing-Suburb]").val() ==''){$("input[name=Billing-Suburb]").addClass("focuscss");}else{$("input[name=Billing-Suburb]").removeClass("focuscss");}
-				if($("input[name=Billing-Postcode]").val() ==''){$("input[name=Billing-Postcode]").addClass("focuscss");}else{$("input[name=Billing-Postcode]").removeClass("focuscss");}
-				//if($("select[name=Billing-State]").val() ==''){$("select[name=Billing-State]").addClass("focuscss");}else{$("select[name=Billing-State]").removeClass("focuscss");}
-				if($("input[name=Billing-Country]").val() ==''){$("input[name=Billing-Country]").addClass("focuscss");}else{$("input[name=Billing-Country]").removeClass("focuscss");}
+				if($("input[name=Mailing-city-town]").val() ==''){$("input[name=Mailing-city-town]").addClass("focuscss");}else{$("input[name=Mailing-city-town]").removeClass("focuscss");}
+				if($("input[name=Mailing-postcode]").val() ==''){$("input[name=Mailing-postcode]").addClass("focuscss");}else{$("input[name=Mailing-postcode]").removeClass("focuscss");}
+				if($("select[name=Mailing-Country]").val()=="Australia"){if($("select[name=Mailing-State]").val() ==''){$("select[name=Mailing-State]").addClass("focuscss");}else{$("select[name=Mailing-State]").removeClass("focuscss");}}
+				if($("select[name=Mailing-Country]").val() ==''){$("select[name=Mailing-Country]").addClass("focuscss");}else{$("select[name=Mailing-Country]").removeClass("focuscss");}
 			}
 			if($("input[name=Firstname]").val() ==''||$("input[name=Lastname]").val() ==''){
 				return false;
@@ -66,14 +64,19 @@ jQuery(document).ready(function($) {
 				return false;
 			}
 			if(!$("#Shipping-address-join").is(":checked")){
-				if($("input[name=Billing-Pobox]").val() ==''){
-					if($("input[name=Billing-Address_Line_1]").val() ==''){
+				if($("input[name=Mailing-PObox]").val() ==''){
+					if($("input[name=Mailing-Address_Line_1]").val() ==''){
 						return false;
 					}
 				}
 				
-				if($("input[name=Billing-Country").val() ==''||$("input[name=Billing-Postcode]").val() ==''||$("input[name=Billing-Suburb]").val() ==''){
+				if($("input[name=Mailing-Country").val() ==''||$("input[name=Mailing-postcode]").val() ==''||$("input[name=Mailing-city-town]").val() ==''){
 					return false;
+				}
+				if($("select[name=Mailing-Country]").val()=="Australia"){	
+					if($("select[name=Mailing-State]").val() ==''){
+						return false;
+					}
 				}
 			}
 		}
@@ -263,13 +266,13 @@ jQuery(document).ready(function($) {
 			if($(".down20 input[name=Postcode]").val() ==''){$(".down20 input[name=Postcode]").addClass("focuscss");}else{$(".down20 input[name=Postcode]").removeClass("focuscss");}
 			if($(".down20 input[name=Country]").val() ==''){$(".down20 input[name=Country]").addClass("focuscss");}else{$(".down20 input[name=Country]").removeClass("focuscss");}
 			if(!$("#Shipping-address-join").is(":checked")){
-				if($(".down20 input[name=Billing-Pobox]").val() ==''){
-						if($(".down20 input[name=Billing-Address_Line_1]").val() ==''){$(".down20 input[name=Billing-Address_Line_1]").addClass("focuscss");}else{$(".down20 input[name=Billing-Address_Line_1]").removeClass("focuscss");}
+				if($(".down20 input[name=Mailing-PObox]").val() ==''){
+						if($(".down20 input[name=Mailing-Address_Line_1]").val() ==''){$(".down20 input[name=Mailing-Address_Line_1]").addClass("focuscss");}else{$(".down20 input[name=Mailing-Address_Line_1]").removeClass("focuscss");}
 				}
-				if($(".down20 input[name=Billing-Suburb]").val() ==''){$(".down20 input[name=Billing-Suburb]").addClass("focuscss");}else{$(".down20 input[name=Billing-Suburb]").removeClass("focuscss");}
-				if($(".down20 input[name=Billing-Postcode]").val() ==''){$(".down20 input[name=Billing-Postcode]").addClass("focuscss");}else{$(".down20 input[name=Billing-Postcode]").removeClass("focuscss");}
-				if($(".down20 select[name=Billing-State]").val() ==''){$(".down20 select[name=Billing-State]").addClass("focuscss");}else{$(".down20 select[name=Billing-State]").removeClass("focuscss");}
-				if($(".down20 input[name=Billing-Country]").val() ==''){$(".down20 input[name=Billing-Country]").addClass("focuscss");}else{$(".down20 input[name=Billing-Country]").removeClass("focuscss");}
+				if($(".down20 input[name=Mailing-city-town]").val() ==''){$(".down20 input[name=Mailing-city-town]").addClass("focuscss");}else{$(".down20 input[name=Mailing-city-town]").removeClass("focuscss");}
+				if($(".down20 input[name=Mailing-postcode]").val() ==''){$(".down20 input[name=Mailing-postcode]").addClass("focuscss");}else{$(".down20 input[name=Mailing-postcode]").removeClass("focuscss");}
+				if($(".down20 select[name=Mailing-State]").val() ==''){$(".down20 select[name=Mailing-State]").addClass("focuscss");}else{$(".down20 select[name=Mailing-State]").removeClass("focuscss");}
+				if($(".down20 input[name=Mailing-country]").val() ==''){$(".down20 input[name=Mailing-country]").addClass("focuscss");}else{$(".down20 input[name=Mailing-country]").removeClass("focuscss");}
 			}
 			if($(".down20 input[name=Firstname]").val() ==''||$(".down20 input[name=Lastname]").val() ==''){
 				return false;
@@ -283,13 +286,13 @@ jQuery(document).ready(function($) {
 				return false;
 			}
 			if(!$(".down20 #Shipping-address-join").is(":checked")){
-				if($(".down20 input[name=Billing-Pobox]").val() ==''){
-					if($(".down20 input[name=Billing-Address_Line_1]").val() ==''){
+				if($(".down20 input[name=Mailing-PObox]").val() ==''){
+					if($(".down20 input[name=Mailing-Address_Line_1]").val() ==''){
 						return false;
 					}
 				}
 				
-				if($(".down20 input[name=Billing-Country").val() ==''||$(".down20 input[name=Billing-Postcode]").val() ==''||$(".down20 input[name=Billing-Suburb]").val() ==''){
+				if($(".down20 input[name=Mailing-country").val() ==''||$(".down20 input[name=Mailing-postcode]").val() ==''||$(".down20 input[name=Mailing-city-town]").val() ==''){
 					return false;
 				}
 			}
