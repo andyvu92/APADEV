@@ -109,55 +109,77 @@ $background = getBackgroundImage($userID);
 
 <div id="QuatationPopUp" style="display:none;" class="container">
 	<h3 style="color:black;">Renewing your APA membership is easy…</h3>
-	<p>If your membership category hasn’t changed, simply click continue to proceed with the following purchase:</p>
+	<p>Your membership category for 2020 is:</p>
 	<p><?php if(sizeof($orderDetails)!=0): ?>
 	<?php 
 	$ngQuatation = array();
+	$SubsCount = 0;
 	if(!isset($_SESSION['QuatationTag'])){
 		foreach($orderDetails['Order'] as $orders){
-		foreach($orders['OrderLines'] as $order){
-//  put the code here to save the quatation order products into the database firstly.
-        
-		
-			if($order['ProductCategory'] =="Memberships"){
-				//checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID=$order['ProductID']);
-				checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID="");
-				createShoppingCart($userID, $productID =$order['ProductID'],$type="membership",$coupon="");
+			foreach($orders['OrderLines'] as $order){
+				//  put the code here to save the quatation order products into the database firstly.
+			
+				if($order['ProductCategory'] =="Memberships"){
+					//checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID=$order['ProductID']);
+					checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID="");
+					createShoppingCart($userID, $productID =$order['ProductID'],$type="membership",$coupon="");
+					echo $order['ProductName']; echo "</br>";
+				}
+				if($order['ProductCategory'] !="Memberships"){
+					$SubsCount++;
+				}
 			}
-			if($order['ProductCategory'] =="Subscription"){
-				
-				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
-				createShoppingCart($userID, $productID =$order['ProductID'],$type="NG",$coupon="");
-			    array_push($ngQuatation, $order['ProductID']);
+		}
+	}?><?php endif;?></p>
+	<?php if(sizeof($orderDetails)!=0 && $SubsCount > 0): ?>
+	<?php 
+	echo "<p>Your subscription(s) for 2020:</p><p>";
+	$ngQuatation = array();
+	if(!isset($_SESSION['QuatationTag'])){
+		foreach($orderDetails['Order'] as $orders){
+			foreach($orders['OrderLines'] as $order){
+				//  put the code here to save the quatation order products into the database firstly.
+				if($order['ProductCategory'] !="Memberships"){
+					echo $order['ProductName']; echo "</br>";
+				}
+				if($order['ProductCategory'] =="Subscription"){
+					
+					checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
+					createShoppingCart($userID, $productID =$order['ProductID'],$type="NG",$coupon="");
+					array_push($ngQuatation, $order['ProductID']);
+				}
+				if($order['ProductID'] =="9978"){
+					checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
+					createShoppingCart($userID, $productID =$order['ProductID'],$type="MG1",$coupon="");
+					
+				}
+				if($order['ProductID'] =="9977"){
+					checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
+					createShoppingCart($userID, $productID =$order['ProductID'],$type="MG2",$coupon="");
+					
+				}
+				if($order['ProductID'] =="9973"){
+					checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
+					createShoppingCart($userID, $productID =$order['ProductID'],$type="FP",$coupon="");
+					$_SESSION['fpQuatation'] = $order['ProductID'];
+					
+				}
+				if($order['ProductID'] =="18247"){
+					checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
+					createShoppingCart($userID, $productID =$order['ProductID'],$type="FP",$coupon="");
+					$_SESSION['fpQuatation'] = $order['ProductID'];
+				}
+				$_SESSION['QuatationTag'] = "1";
 			}
-			if($order['ProductID'] =="9978"){
-				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
-				createShoppingCart($userID, $productID =$order['ProductID'],$type="MG1",$coupon="");
-				
-			}
-			if($order['ProductID'] =="9977"){
-				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
-				createShoppingCart($userID, $productID =$order['ProductID'],$type="MG2",$coupon="");
-				
-			}
-			if($order['ProductID'] =="9973"){
-				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
-				createShoppingCart($userID, $productID =$order['ProductID'],$type="FP",$coupon="");
-				$_SESSION['fpQuatation'] = $order['ProductID'];
-				
-			}
-			if($order['ProductID'] =="18247"){
-				checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
-				createShoppingCart($userID, $productID =$order['ProductID'],$type="FP",$coupon="");
-				$_SESSION['fpQuatation'] = $order['ProductID'];
-			}
-			$_SESSION['QuatationTag'] = "1";
-		
-		echo $order['ProductName']; echo "</br>";} 
-	}
+		}
 		
 		$_SESSION['ngQuatation'] = $ngQuatation;
-	}?><?php endif;?></p>
+	}
+	echo "</p>";
+	?><?php endif;?>
+	<p>
+	</br></br>
+	Click continue to confirm or alter your membership and complete your renewal process.</p>
 		
 	<a href="renewmymembership" target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
 
@@ -524,13 +546,13 @@ You have the right to access the personal information about yourself held by the
 
 		<div class="grid-block apa-member-grid">
 			
-			<?php /*<div class="item">
+			<div class="item">
 				<div class="item-body current-member">
-					<span class="item-title">2018 APA member</span>
-					<span class="item-description">If you were an APA member in 2018, please renew your membership for 2019 below.</span>
+					<span class="item-title">2019 APA member</span>
+					<span class="item-description">If you were an APA member in 2019, please renew your membership for 2020 below.</span>
 					<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
 				</div>
-			</div>*/?>
+			</div>
 
 			
 			<div class="item">

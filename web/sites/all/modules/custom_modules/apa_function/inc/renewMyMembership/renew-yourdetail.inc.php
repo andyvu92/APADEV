@@ -829,7 +829,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						$MemberType = array();
 						foreach($MemberTypes as $tempM){
 							$temp_array['ProductID'] = $tempM['ProductID'];
-							$temp_array['Title'] = substr($tempM['Title'], strpos($tempM['Title'],":")+1);
+							$temp_array['Title'] = $tempM['Title'];//substr($tempM['Title'], strpos($tempM['Title'],":")+1);
 							$temp_array['Price'] = $tempM['Price'];
 							$temp_array['UnitPrice'] = $tempM['UnitPrice'];
 							$temp_array['Quantity'] = $tempM['Quantity'];
@@ -874,7 +874,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				<input type="hidden"  name="Specialty"  <?php   echo 'value="'.$details['Specialty'].'"'; ?>>
 				<div class="row">
 				<div class="col-xs-12 col-md-6">
-					<label for=""><?php if(!empty($details['State'])) {echo "You are in the &nbsp;".$details['State']."&nbsp;Branch ,&nbsp;would you like to add an additional Branch?";} else { echo "Would you like to add an additional Branch?";}?></label>
+					<label for=""><?php if(!empty($details['State'])) {echo "You are in the&nbsp;".$details['State']."&nbsp;Branch ,&nbsp;would you like to add an additional Branch?";} else { echo "Would you like to add an additional Branch?";}?></label>
 					<div class="chevron-select-box">
 					<select class="form-control" id="Branch" name="Branch">
 					<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>What additional Branch would you like to join?</option>
