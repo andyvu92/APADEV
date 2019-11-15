@@ -114,6 +114,11 @@
 		</div>
 	<?php endif; ?>
 	<?php   //print render($content); ?>
+	<?php 
+		if( !empty(render($content['field_video_url'])) ){
+			echo '<span class="video_play_btn audio_play_icon"></span>';
+		}
+	?>
 </div> 
 </a>
 

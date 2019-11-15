@@ -37,6 +37,11 @@
             <div class="portfolio-image-zoom">
                 <a href="<?php print $first_image; ?>" rel="lightbox[<?php print $lightboxrel; ?>]"><span class="fa fa-search"></span></a>
             </div>
+			<?php
+				if( !empty(render($content['field_video_url'])) ){
+					echo '<span class="video_play_btn audio_play_icon"></span>';
+                }
+			?>
         </div>
         <div class="item-description">
 			<div class="movSection">

@@ -84,12 +84,16 @@
       <div class='mediaholder'>
         <?php print render($content['field_inmotion_image']);?>
       </div>
+      <?php
+				if( !empty(render($content['field_video_url'])) ){
+					echo '<span class="video_play_btn audio_play_icon"></span>';
+        }
+			?>
     </div>
-    <div class="">
-		<a href="<?php print $node_url; ?>"><?php print $title; ?></a><br>
+    <div>
+		  <a href="<?php print $node_url; ?>"><?php print $title; ?></a><br>
 	    <?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?>
-	</div>
-	
-  
+    </div>
+    <a class="link_cover" href="<?php print $node_url; ?>"></a>
 </div> 
 

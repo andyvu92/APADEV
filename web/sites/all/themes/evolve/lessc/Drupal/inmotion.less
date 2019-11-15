@@ -589,6 +589,7 @@
 
 				/* POST FEATURED IMAGE */
 				.post-img{
+					position: relative;
 					&.mobile{
 						display: none;
 						width: 100vw;
@@ -602,7 +603,15 @@
 					@media @larger-phone-width-down{
 						display: none;
 					}
+					&.active{
+						background: none!important;
+						.field-name-field-inmotion-image, .field-name-field-home-tile-image{
+							opacity: 0;
+						}
+					}
 					.field-name-field-inmotion-image, .field-name-field-home-tile-image{
+						opacity: 1;
+						transition: all 1s ease;
 						.file-image{
 							.content{
 								background-size: cover!important;
@@ -612,6 +621,63 @@
 									height: auto;
 									visibility: hidden;
 								}
+							}
+						}
+					}
+					.inmotion_video, .inmotion_video iframe{
+						display: block;
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+					}
+					.inmotion_video{
+						iframe{
+							visibility: hidden;
+							opacity: 0;
+							transition: all 1s ease-in;
+							z-index: 1;
+						}
+						.play_button{
+							display: block;
+							position: absolute;
+							width: 70px;
+							height: 70px;
+							top: calc(~'50% - 70px/2');
+							left: calc(~'50% - 70px/2');
+							background: rgba(0,0,0,0.6);
+							border-radius: 100%;
+							visibility: visible;
+							opacity: 1;
+							z-index: 2;
+							transition: all 1s ease-in;
+							cursor: pointer;
+							svg{
+								g > path{
+									&:first-child{
+										fill: #fff;
+										transition: all .3s ease;
+									}
+									&:last-child{
+										fill :transparent;
+									}
+								}
+							}
+							&:hover{
+								svg g path:first-child{
+									fill: @bright-blue;
+								}
+							}
+						}
+						&.active{
+							iframe{
+								visibility: visible;
+								opacity: 1;
+							}
+							.play_button{
+								visibility: hidden;
+								opacity: 0;
 							}
 						}
 					}
@@ -1351,6 +1417,97 @@
 			}
 			&:last-of-type{
 				padding-right: 0;
+			}
+		}
+	}
+}
+
+.view-inmotioncategory{
+	.node-inmotion{
+		.portfolio-image{
+			position: relative;
+			.video_play_btn{
+				display: block;
+				position: absolute;
+				width: 50px;
+				height: 50px;
+				top: calc(~'50% - 50px/2');
+				left: calc(~'50% - 50px/2');
+				background: rgba(0,0,0,0.6);
+				border-radius: 100%;
+				visibility: visible;
+				opacity: 1;
+				z-index: 2;
+				transition: all 1s ease-in;
+				cursor: pointer;
+				svg{
+					g > path{
+						&:first-child{
+							fill: #fff;
+							transition: all .3s ease;
+						}
+						&:last-child{
+							fill :transparent;
+						}
+					}
+				}
+				&:hover{
+					svg g path:first-child{
+						fill: @bright-blue;
+					}
+				}
+			}
+		}
+	}
+}
+
+.node-type-inmotion #block-system-main .node-inmotion{
+	.CampaignSidebar > .content{
+		.views-row{
+			.node-inmotion{
+				position: relative;
+				&:hover{
+					a{
+						color: @bright-blue!important;
+					}
+				}
+				.post-img{
+					position: relative;
+					.video_play_btn{
+						display: block;
+						position: absolute;
+						width: 30px;
+						height: 30px;
+						top: calc(~'50% - 30px/2');
+						left: calc(~'50% - 30px/2');
+						background: rgba(0,0,0,0.6);
+						border-radius: 100%;
+						visibility: visible;
+						opacity: 1;
+						z-index: 2;
+						transition: all 1s ease-in;
+						cursor: pointer;
+						svg{
+							g > path{
+								&:first-child{
+									fill: #fff;
+									transition: all .3s ease;
+								}
+								&:last-child{
+									fill :transparent;
+								}
+							}
+						}
+					}
+				}
+				.link_cover{
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					z-index: 10;
+				}
 			}
 		}
 	}

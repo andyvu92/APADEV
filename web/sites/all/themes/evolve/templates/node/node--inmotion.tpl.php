@@ -111,6 +111,26 @@
             <div class='mediaholder fullwidthimage'>
                 <?php print render($content['field_inmotion_image']);?>
             </div>
+            <div class="inmotion_video">
+                <?php
+                    if( !empty(render($content['field_video_url'])) ){
+                        function get_string_between($string, $start, $end){
+                            $string = ' ' . $string;
+                            $ini = strpos($string, $start);
+                            if ($ini == 0) return '';
+                            $ini += strlen($start);
+                            $len = strpos($string, $end, $ini) - $ini;
+                            return substr($string, $ini, $len);
+                        }
+                        
+                        $videoID = render($content['field_video_url']);
+                        $videoID = get_string_between(render($content['field_video_url']), 'watch?v=', '</div>');
+    
+                        echo '<iframe id="inmotion-video" src="//www.youtube.com/embed/'.render($videoID).'?rel=0" frameborder="0" allow="autoplay" allowfullscreen></iframe>';
+                        echo '<span class="play_button audio_play_icon"></span>';
+                    }
+                ?>
+            </div>
         </div>
 
          <h1 class="SectionHeader"><?php print $node->title;?></h1>
@@ -165,6 +185,14 @@
 			<div class='mediaholder fullwidthimage'>
 				<?php print render($content['field_inmotion_image']);?>
 			</div>
+            <div class="inmotion_video">
+                <?php
+                    if( !empty(render($content['field_video_url'])) ){
+                        echo '<iframe id="inmotion-video" src="//www.youtube.com/embed/'.render($videoID).'?rel=0" frameborder="0" allow="autoplay" allowfullscreen></iframe>';
+                        echo '<span class="play_button audio_play_icon"></span>';
+                    }
+                ?>
+            </div>
         </div>
         <div class="inmotion-content">
                 <div class="content-loading">
@@ -177,6 +205,7 @@
                 hide($content['comments']);
                 hide($content['links']);
                 //print render($content['body']);
+                
                 echo '<div class="inmotion-readmore-content">'. render($content['body']) .'</div>';
             ?>
         </div>

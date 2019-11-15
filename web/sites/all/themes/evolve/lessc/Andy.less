@@ -355,6 +355,7 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
             .home-main-grid{
                 .main-block{
                         .node{
+                            position: relative;
                             .HomeTitle{
                                 font-size: 2.5em!important;
                                 line-height: 1.1em;
@@ -363,6 +364,32 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
                                 @media all and (max-width: @phone-width) {
                                     font-size: 2em!important;
                                     padding: 30px 20px 20px 20px!important;
+                                }
+                            }
+                            .video_play_btn{
+                                display: block;
+                                position: absolute;
+                                width: 30px;
+                                height: 30px;
+                                top: calc(~'50% - 30px/2');
+                                left: calc(~'50% - 30px/2');
+                                background: rgba(0,0,0,0.6);
+                                border-radius: 100%;
+                                visibility: visible;
+                                opacity: 1;
+                                z-index: 2;
+                                transition: all 1s ease-in;
+                                cursor: pointer;
+                                svg{
+                                    g > path{
+                                        &:first-child{
+                                            fill: #fff;
+                                            transition: all .3s ease;
+                                        }
+                                        &:last-child{
+                                            fill :transparent;
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -405,6 +432,32 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
                         position: relative;
                         height: 100%;
                         overflow: hidden;
+                        .video_play_btn{
+                            display: block;
+                            position: absolute;
+                            width: 50px;
+                            height: 50px;
+                            top: calc(~'50% - 50px/2');
+                            left: calc(~'50% - 50px/2');
+                            background: rgba(0,0,0,0.6);
+                            border-radius: 100%;
+                            visibility: visible;
+                            opacity: 1;
+                            z-index: 2;
+                            transition: all 1s ease-in;
+                            cursor: pointer;
+                            svg{
+                                g > path{
+                                    &:first-child{
+                                        fill: #fff;
+                                        transition: all .3s ease;
+                                    }
+                                    &:last-child{
+                                        fill :transparent;
+                                    }
+                                }
+                            }
+                        }
                         img{
                             transform: scale(1);
                             transition: all .5s linear;

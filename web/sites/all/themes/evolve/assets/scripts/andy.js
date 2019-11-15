@@ -2987,4 +2987,19 @@ jQuery(document).ready(function() {
     } // end if
   });
 
+  // inMotion video play
+  $('.node-type-inmotion .post-img.media').each(function(){
+    var playBtn = $(this).find('.play_button');
+    var wrapper = $(this);
+
+    var video = $(this).find('iframe');
+    $(video)[0].src = $(video)[0].src.split('#')[0];
+    
+    $(playBtn).on('click', function () {
+      $(wrapper).addClass('active');
+      $(this).parent().addClass('active');
+      $(this).parent().find('iframe')[0].src += "&autoplay=1";
+    });
+
+  });
 });
