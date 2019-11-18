@@ -1112,7 +1112,7 @@ jQuery(document).ready(function() {
       } 
     });
   });
-
+  
   //ADD STEP PROGRESS FOR RENEW/JOIN-------------------------------------------------------------
   var autoNumberRenewMenu = function(){
     $('.renew-membership-nav, .join-membership-nav').each(function(){
@@ -1125,8 +1125,8 @@ jQuery(document).ready(function() {
           $(this).parent().addClass('number-menu-active');
   
           // get total step number
-          var totalStep = $('li', this).length;
-
+          //var totalStep = $('li', this).length;
+          var totalStep = $('#totalStepNumber').val();
           //assign step number
           $('li', this).each(function(id){
             id++;
@@ -1136,9 +1136,9 @@ jQuery(document).ready(function() {
           //get current step number and label
           var currentStep = $(this).find('.text-underline').text();
           var stepNumber = $('.text-underline', this).parent().find('.step-order').text();
-  
+          if($('#totalStepNumber').val()=="5" && stepNumber == "6"){ stepNumber = "5";}
           //append customised elemen to show step order
-          $(this).after('<span class="current-step">Step <span class="step-number">'+stepNumber+'</span> of '+totalStep+': <span class="step-label">'+currentStep+'</span></span>');    
+          $(this).after('<span class="current-step">Step <span class="step-number">'+stepNumber+'</span> of <span class="total-number">'+totalStep+'</span>: <span class="step-label">'+currentStep+'</span></span>');    
         }
       });
       
@@ -1146,16 +1146,21 @@ jQuery(document).ready(function() {
       $(document).on('click', 'a[class^="join-details-button"], a[class^="your-details-prevbutton"], #tabmenu .skip', function(){
         var currentStep = $('.numberized').find('.text-underline').text();
         var stepNumber = $('.numberized .text-underline').parent().find('.step-order').text();
-        $('.number-menu-active .current-step .step-number').text(stepNumber);
+        if($('#totalStepNumber').val()=="5" && stepNumber == "6"){$('.number-menu-active .current-step .step-number').text("5");}
+        else {$('.number-menu-active .current-step .step-number').text(stepNumber);}
         if ( currentStep == 'Education4' ) {
           currentStep = 'Education';
         }
         $('.number-menu-active .current-step .step-label').text(currentStep);
+        $('.total-number').html($('#totalStepNumber').val());
       });
     });
   }
   autoNumberRenewMenu();
-
+  //member change
+  $('#MemberType').change(function(){
+		$('.total-number').html($('#totalStepNumber').val());
+	});
   // DEFAULT MINIMIZE ACCORDION------------------------------------------------------------------
   $('.ckeditor-accordion-container').each(function(){
     if ( $('dt' ,this).is('.active') ){

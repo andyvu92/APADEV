@@ -317,14 +317,19 @@ jQuery(document).ready(function($) {
 	else{return true;}
 	};
 	if(checkInsurance($('#MemberType').val())==false){
-			$('#insuranceTag').val("0");	
-		}
-		else{ $('#insuranceTag').val("1");}
+		$('#insuranceTag').val("0");
+		$('#totalStepNumber').val("5");	
+	}
+	else{ 
+		$('#insuranceTag').val("1");
+		$('#totalStepNumber').val("6");	
+	}
 	$('#MemberType').change(function(){
 		if(checkInsurance($('#MemberType').val())==false){
-			$('#insuranceTag').val("0");	
+			$('#insuranceTag').val("0");
+			$('#totalStepNumber').val("5");		
 		}
-		else{ $('#insuranceTag').val("1");}
+		else{ $('#insuranceTag').val("1"); $('#totalStepNumber').val("6");}
 		
 	});
 	$('[class^=join-details-button]').click(function(){

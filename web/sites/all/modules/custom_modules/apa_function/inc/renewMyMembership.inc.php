@@ -656,7 +656,7 @@ You have the right to access the personal information about yourself held by the
 	</div>
 </div>
 <a popup-target="timeoutWindow" id="triggerTimeout" syle="display:none;"></a>
-
+<input type="hidden" id="totalStepNumber" value="6">
 <!---Handle the endpoint time out error end--->
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>

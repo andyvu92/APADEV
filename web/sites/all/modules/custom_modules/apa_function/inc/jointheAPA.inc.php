@@ -353,6 +353,7 @@ You have the right to access the personal information about yourself held by the
 	</section>
 </div>
 <?php logRecorder(); ?>
+<input type="hidden" id="totalStepNumber" value="6">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
