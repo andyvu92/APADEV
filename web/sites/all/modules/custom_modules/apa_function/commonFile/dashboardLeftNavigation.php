@@ -139,7 +139,7 @@ if(isset($_SESSION["UserId"])) {
 					else{ $tag = false;}	
 					
 				?>
-				<?php  if($details['MemberTypeID']!="1" && checkRenew($_SESSION['payThroughDate'], $tag)):?>
+				<?php  if($details['MemberTypeID']!="1" && checkRenew($_SESSION['payThroughDate'], $tag)): $_SESSION["renewTag"]=1;?>
 				<a href="/renewmymembership">
 					<span class="renew_icon"></span>
 					Renew
