@@ -283,7 +283,24 @@ if(isset($_POST['step2-1'])) {
 				</div>
 				<?php if($_SESSION["MembershipProductID"]!="9964" && $_SESSION["MembershipProductID"]!="9965" && $_SESSION["MembershipProductID"]!="9966" && $_SESSION["MembershipProductID"] !="9968" && $_SESSION["MembershipProductID"] !="10005" && $_SESSION["MembershipProductID"] !="9967"&& $_SESSION["MembershipProductID"] !="10006"): ?>
 				<div class="col-xs-12">
-				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-2" value="1"><label for="p1-2">Pay by monthly instalments (This option incurs a $12.00 admin fee)</label>
+					<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-2" value="1">
+					<label for="p1-2">Pay by monthly instalments</label><span for="instalment_payment_note" class="note_trigger info_icon"></span>
+					<div id="instalment_payment_note" class="full_width_note">
+                        <p>The most convenient way to pay for your membership is to spread the costs out across the year with monthly instalments. This option also eliminates the stress of renewing your membership every year. Before your membership rolls over each year, we will give you plenty of notice as well as the opportunity to make any changes to your package.</p>
+                        <p>You can also opt to pay your membership in full at the time of your renewal.</p>
+                        <p>If you wish to take up the instalment option please note the following conditions:</p>
+                        <ul>
+                            <li>by selecting this payment option, you authorise the Australian Physiotherapy Association to charge all scheduled instalment payments to the credit card provided</li>
+                            <li>the first monthly instalment will be deducted upon receipt of renewal and it will include the full amount of GST payable for the year</li>
+                            <li>there is no administration fee associated with monthly instalments</li>
+                            <li>subsequent instalments for the year will equal the remaining amount due divided by the respective number of months of the year remaining</li>
+                            <li>monthly instalments will be deducted from your nominated credit or debit card on the first working day of the month</li>
+                            <li>by electing to pay by instalments you are also opting to have your membership automatically rolled over into the forthcoming year authorising the APA to continue deducting membership fees until you notify the APA in writing to cease deductions or your membership is cancelled or withdrawn and outstanding fees are collected</li>
+                            <li>instalments can only be cancelled in December at the end of our membership year</li>
+                            <li>you will be notified in writing of any change to your deductions at least 30 days prior to that change</li>
+                            <li>if there are insufficient funds available to make the deduction or the payment is rejected for other reasons, the APA may pass associated bank fees on to you</li>
+                        </ul>
+                    </div>
 				</div>
 				<?php endif;?>
 			</div>

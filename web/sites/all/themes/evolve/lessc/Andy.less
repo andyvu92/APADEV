@@ -6934,3 +6934,34 @@ body a b, body span b{
         padding-top: 15px;
     }
 }
+
+/* DASHBOARD FULL WIDTH NOTE */
+.full_width_note{
+    font-size: 0.9em;
+    background: #f9f9f9;
+    padding: 25px;
+    margin: 10px 0;
+    border-radius: 15px;
+    display: block;
+    border: 1px solid rgba(0,0,0,0.1);
+    display: none;
+    ul:last-of-type{
+        margin-bottom: 0!important;
+    }
+}
+
+.note_trigger{
+    width: 15px;
+    display: inline-block;
+    margin-left: 5px;
+    position: relative;
+    vertical-align: middle;
+    cursor: pointer;
+    &:hover, &.active{
+        svg{
+            path{
+                fill: @bright-blue;
+            }
+        }
+    }
+}
