@@ -836,11 +836,26 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 							array_push($MemberType, $temp_array);
 						}
 						$Title = array();
-						foreach ($MemberType  as $ukey => $row)
-							{
-								$Title[$ukey] = $row['Title'];
-							}
+						foreach ($MemberType  as $ukey => $row) {
+							$Title[$ukey] = $row['Title'];
+						}
 						array_multisort($Title, SORT_ASC, $MemberType);
+						//// Manually sort top three (M10, M11, M12) to the end of the array ///
+						$sortCountNum = 0;
+						$tempArrt = Array();
+						foreach($MemberType as $replace) {
+							if($sortCountNum < 3) {
+								array_push($tempArrt, $replace);
+								unset($MemberType[$sortCountNum]);
+							} else {
+								break;
+							}
+							$sortCountNum++;
+						}
+						foreach($tempArrt as $placeLast) {
+							array_push($MemberType, $placeLast);
+						}
+						//// Manual sort done ///
 					    //$MemberTypecode  = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
 						//$MemberType=json_decode($MemberTypecode, true);
 						foreach($MemberType  as $key => $value){
