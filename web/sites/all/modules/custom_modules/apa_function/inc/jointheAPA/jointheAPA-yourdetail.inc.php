@@ -1310,35 +1310,32 @@ array_multisort($Title, SORT_ASC, $MemberType);
                     
                     <?php
     
-    // get national group from Aptify via webserice return Json data;
-    // 2.2.19 - get national group
-    // Send -
-    // Response - national group
-    
-    //$nationalGroupsCode = file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
-    //$nationalGroups     = json_decode($nationalGroupsCode, true);
-	// 2.2.19 - GET list National Group
-	// Send - 
-	// userID
-	// Response -National Group product
-	$sendData["UserID"] = $_SESSION['UserId'];
-	$nationalGroups = aptify_get_GetAptifyData("19", $sendData);
-	sort($nationalGroups);
-	//print_r($nationalGroups);
-?>
-                   <?php
-    foreach ($nationalGroups as $key => $value) {
-        echo '<option value="' . $nationalGroups[$key]["ProductID"] . '"';
-        if (isset($_SESSION["NationalProductID"])) {
-            if (in_array($nationalGroups[$key]["ProductID"], $_SESSION["NationalProductID"])) {
-                echo "selected='selected'";
-            }
-        }
-        
-        echo '> ' . $nationalGroups[$key]["NGtitle"] . ' ($'.number_format($nationalGroups[$key]['NGprice'],2).')  </option>';
-    }
-    
-?>
+                        // get national group from Aptify via webserice return Json data;
+                        // 2.2.19 - get national group
+                        // Send -
+                        // Response - national group
+                        
+                        //$nationalGroupsCode = file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
+                        //$nationalGroups     = json_decode($nationalGroupsCode, true);
+                        // 2.2.19 - GET list National Group
+                        // Send - 
+                        // userID
+                        // Response -National Group product
+                        $sendData["UserID"] = $_SESSION['UserId'];
+                        $nationalGroups = aptify_get_GetAptifyData("19", $sendData);
+                        $arrColumn = array_column($nationalGroups, 'NGtitle');
+                        array_multisort($arrColumn, SORT_ASC, $nationalGroups);						
+                    
+                        foreach ($nationalGroups as $key => $value) {
+                            echo '<option value="' . $nationalGroups[$key]["ProductID"] . '"';
+                            if (isset($_SESSION["NationalProductID"])) {
+                                if (in_array($nationalGroups[$key]["ProductID"], $_SESSION["NationalProductID"])) {
+                                    echo "selected='selected'";
+                                }
+                            }   
+                            echo '> ' . $nationalGroups[$key]["NGtitle"] . ' ($'.number_format($nationalGroups[$key]['NGprice'],2).')  </option>';
+                        }
+                    ?>
                      </select>
                     </div>
                 </div>

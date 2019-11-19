@@ -910,7 +910,6 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				<div class="col-xs-12">
 					<label for="">Choose which National Groups you would like to join:<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
 					<div class="plus-select-box">
-					<select id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
 					<?php 
 						// get national group from Aptify via webserice return Json data;
 						// 2.2.19 - get national group
@@ -924,9 +923,10 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						// Response -National Group product
 						$sendData["UserID"] = $_SESSION['UserId'];
 						$nationalGroups = aptify_get_GetAptifyData("19", $sendData);
-						sort($nationalGroups);
-						
+						$arrColumn = array_column($nationalGroups, 'NGtitle');
+						array_multisort($arrColumn, SORT_ASC, $nationalGroups);
 				    ?>
+					<select id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
 					<?php 
 						foreach($nationalGroups as $key=>$value) {
 						   echo '<option value="'.$nationalGroups[$key]["ProductID"].'"';
