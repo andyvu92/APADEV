@@ -676,7 +676,7 @@ jQuery(document).ready(function($) {
 			//this is merged steps
 			$('#PRFFinal').val('');
 			$('#PRFdetail').addClass('display-none');
-			$('#todayFullAmount').html(Number($('#fullHiddenAmount').val()));
+			$('#todayFullAmount').html($('#fullHiddenAmount').val());
 			$('#todayScheduleAmount').html(Number($('#scheduleHiddenAmount').val()));
 		  if($('#todayFullAmount').html()=="0"){
 				$('#hiddenPayment').addClass('display-none');
