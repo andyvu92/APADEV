@@ -12,12 +12,12 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
  {echo '   
 	<div class="col-xs-12 FapTagC">
 		<input class="styled-checkbox" type="checkbox" name="Findphysio'.$i.'" id="Findphysio'.$i.'" value="" >
-		<label class="light-font-weight" for="Findphysio'.$i.'">I want to be listed at this workplace within Find a Physio on the consumer <span class="note-text">choose.physio</span> site</label>
+		<label class="light-font-weight highlight_checkbox" for="Findphysio'.$i.'">I want to be listed at this workplace within Find a Physio on the consumer <span class="note-text">choose.physio</span> site</label>
 	</div>
 
 	<div class="col-xs-12 FapTagA">
 		<input class="styled-checkbox" type="checkbox" name="Findabuddy'.$i.'" id="Findabuddy'.$i.'" value="" >
-		<label class="light-font-weight" for="Findabuddy'.$i.'">I want to be listed at this workplace within Find a Physio on the corporate <span class="note-text">australian.physio</span> site</label>
+		<label class="light-font-weight highlight_checkbox" for="Findabuddy'.$i.'">I want to be listed at this workplace within Find a Physio on the corporate <span class="note-text">australian.physio</span> site</label>
  </div>';}
 	echo'
 <div class="row">

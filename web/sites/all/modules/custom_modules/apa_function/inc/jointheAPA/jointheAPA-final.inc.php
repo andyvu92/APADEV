@@ -493,46 +493,46 @@ $PRFPrice = 0;
 					$firstInstallment = $InitialPaymentAmount-$scheduleDetails['AdminFee']-$scheduleDetails['GST'];
 				?>
                 <div class="flex-cell flex-flow-row schedule" id="installDetail">
-                    <div class="flex-col-6">
+                    <div class="payment_label">
                         First installment (ex. GST)
                     </div>
-                    <div class="flex-col-6">
+                    <div class="payment_value">
                         $<?php //echo $scheduleDetails['InitialPaymentAmount']; 
 						echo number_format($firstInstallment,2);?>
                     </div>
                 </div>
              
                 <div class="flex-cell flex-flow-row">
-                    <div class="flex-col-6">
+                    <div class="payment_label">
                         GST
                     </div>
-                    <div class="flex-col-6">
+                    <div class="payment_value">
                         $<span class="full"><?php echo number_format($fullDetails['GST'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['GST'],2);?></span>
                     </div>
                 </div>
                 <div class="flex-cell flex-flow-row" id="PRFdetail">
-                    <div class="flex-col-6">
+                    <div class="payment_label">
                         PRF donation
                     </div>
-                    <div class="flex-col-6">
+                    <div class="payment_value">
                         $<span id="PRFshow"><?php echo number_format(5,2);?></span>
                     </div>
                 </div>
 
                 <div class="flex-cell flex-flow-row">
-                    <div class="flex-col-6">
+                    <div class="payment_label">
                         Subtotal (ex. GST)
                     </div>
-                    <div class="flex-col-6">
+                    <div class="payment_value">
                     $<span class="full"><?php echo number_format($fullDetails['SubTotal'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['SubTotal'],2);?></span>
                     </div>
                 </div>
 
                 <div class="flex-cell flex-flow-row last_row">
-                    <div class="flex-col-6">
+                    <div class="payment_label">
                         <strong>Today's total (inc. GST)</strong>
                     </div>
-                    <div class="flex-col-6">
+                    <div class="payment_value">
                         <input type="hidden" id="fullHiddenAmount" value="<?php echo number_format($fullDetails['InitialPaymentAmount'],2);?>">
                         <input type="hidden" id="scheduleHiddenAmount" value="<?php echo number_format($scheduleDetails['InitialPaymentAmount'],2);?>">
                         <strong>$<span class="full" id="todayFullAmount"></span><span class="schedule" id="todayScheduleAmount"></span></strong></div>
@@ -540,8 +540,8 @@ $PRFPrice = 0;
                 </div>
                
                 <div class="flex-col-12 schedule" style="text-align: center" id="installmentPop">
-                    <button style="margin: 30px 0 0 0;" type="button" class="accent-btn" data-target="#schedulePOPUp"
-                        data-toggle="modal">Full list of scheduled payments</button>
+                    <a style="margin: 30px 0 0 0;" class="simple-btn" data-target="#schedulePOPUp"
+                        data-toggle="modal">View the full list of scheduled payments</a>
                 </div>
                
                 <?php 
@@ -905,29 +905,25 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
                 <h4 class="modal-title">Your next scheduled payment details</h4>
             </div>
             <div class="modal-body">
-                <ul>
+                <div class="flex-container flex-table">
                     <?php 
                     $month = date("m");	
                    	if($month!="10") {$currentMonth = trim($month,"0"); }else{$currentMonth =$month;}
 					$currentYear = date("Y"); 
-					echo '<div class="flex-cell flex-flow-row">
-								<div class="flex-col-6">
-								Date	
-								</div>
-								<div class="flex-col-6">
-								Payment amount	
-								</div>
+					echo '<div class="flex-cell flex-flow-row table-header">
+								<div class="flex-col-6"><span class="table-heading">Date</span></div>
+								<div class="flex-col-6"><span class="table-heading">Payment amount</span></div>
 							</div>';
 					for($i=$currentMonth+1; $i<12; $i++){
-						echo '<div class="flex-cell flex-flow-row"><div class="flex-col-6">01/'.$i.'/'.$currentYear.'</div>
+						echo '<div class="flex-cell flex-flow-row table-cell"><div class="flex-col-6">01/'.$i.'/'.$currentYear.'</div>
 								<div class="flex-col-6">$'.number_format($OccuringPayment,2).'</div>
 							</div>';
 					}
-				echo '<div class="flex-cell flex-flow-row"><div class="flex-col-6">01/12/'.$currentYear.'</div>
-						<div class="flex-col-6">$'.number_format($LastPayment,2).'</div>
-					</div>';
-				?>
-                </ul>
+                    echo '<div class="flex-cell flex-flow-row table-cell"><div class="flex-col-6">01/12/'.$currentYear.'</div>
+                            <div class="flex-col-6">$'.number_format($LastPayment,2).'</div>
+                        </div>';
+                    ?>
+                </div>
 
             </div>
             <div class="modal-footer">

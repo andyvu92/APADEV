@@ -534,8 +534,8 @@ You have the right to access the personal information about yourself held by the
 	//when the renewTag session is not existed 	
 ?>
 	<div class="full-width banner-img">
-			<img src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_1500X500.png" alt="Every step a leader">
-			<img class="mobile" src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_376X366.png" alt="Every step a leader">
+			<img src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_1500X500_2020.jpg" alt="APA plus you, together we can">
+			<img class="mobile" src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_570X366_2020.jpg" alt="APA plus you, together we can">
 		</div>
 
 		<span class="space-50">&nbsp;</span>
@@ -586,8 +586,8 @@ You have the right to access the personal information about yourself held by the
 	?>
 		<!-- USER NOT LOGIN  -->
 		<div class="full-width banner-img">
-			<img src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_1500X500.png" alt="Every step a leader">
-			<img class="mobile" src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_376X366.png" alt="Every step a leader">
+			<img src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_1500X500_2020.jpg" alt="APA plus you, together we can">
+			<img class="mobile" src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_570X366_2020.jpg" alt="APA plus you, together we can">
 		</div>
 
 		<span class="space-50">&nbsp;</span>

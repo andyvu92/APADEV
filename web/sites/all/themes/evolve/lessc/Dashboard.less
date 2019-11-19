@@ -17,6 +17,7 @@
 @alt-grey: #a6a8ab;
 @grey: #b5b5b5;
 @orange: #ffa02e;
+@pink: #920075;
 
 /*--RESPONSIVE BREAKPOINTS--*/
 @phone-width: 480px;
@@ -81,7 +82,7 @@
 	}
 
 .focuscss{
-    border: 1px solid #ffa22b!important;
+    border: 1px solid @pink!important;
 }
 /* ********************************************************* */
 /* -----------------Dashboard page backgroud picture settings ---------- */
@@ -255,7 +256,7 @@ body.modal-open {
         }
         &.ng-22{
             i{
-                background-image: url(/sites/default/files/national-group-icons/Business-Practitioner-B.png);
+                background-image: url(/sites/default/files/national-group-icons/Business%20Practitioner%20Group.png);
             }
         }
     }
@@ -806,6 +807,21 @@ a.accent-btn, button.accent-btn{
     }
 }
 
+a.simple-btn, .simple-btn{
+    color: @bright-blue;
+    font-weight: 700!important;
+    text-decoration: underline;
+    font-family: 'Cairo'!important;
+    float: none;
+    background: none;
+    border: none;
+    text-align: left;
+    padding: 0!important;
+    &:focus{
+        outline: none;
+    }
+}
+
 #your-details-submit-button{
     display: inline-block;
     margin-bottom: 20px;
@@ -849,6 +865,13 @@ body #section-content-top[class*="background_"]{
         .FapTagC, .FapTagA{
             label{
                 display: block;
+            }
+        }
+        label.highlight_checkbox{
+            font-size: 1.2em;
+            &:after{
+                left: 6px;
+                top: 11px;
             }
         }
     }
@@ -2232,8 +2255,19 @@ iframe{
         color: #009fda;
         font-family: cairo;
         &.warning{
+            position: relative;
             a{
-                color: @orange;
+                color: @pink;
+            }
+            svg{
+                position: absolute;
+                top: 5px;
+                left: 5px;
+                width: 13px;
+                height: 13px;
+                path{
+                    fill: @pink;
+                }
             }
         }
     }
@@ -2701,16 +2735,21 @@ form{
         }
       
         /* Box. */
-        & + label:before {
-          content: '';
-          margin-right: 20px;
-          display: inline-block;
-          vertical-align: text-top;
-          width: 20px;
-          min-width: 20px;
-          height: 20px;
-          background: none;
-          box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+        & + label{
+            &:before {
+                content: '';
+                margin-right: 20px;
+                display: inline-block;
+                vertical-align: text-top;
+                width: 20px;
+                min-width: 20px;
+                height: 20px;
+                background: none;
+                box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+            }
+            &.highlight_checkbox:before{
+                box-shadow: 0 0 0 1px @bright-blue;
+            }
         }
       
         /* Box hover */
@@ -2743,22 +2782,34 @@ form{
         }
       
         /* Checkmark. Could be replaced with an image */
-        &:checked + label:after {
-          content: '';
-          position: absolute;
-          left: 5px;
-          top: 10px;
-          background: #000;
-          width: 2px;
-          height: 2px;
-          box-shadow: 
-            2px 0 0 #000,
-            4px 0 0 #000,
-            4px -2px 0 #000,
-            4px -4px 0 #000,
-            4px -6px 0 #000,
-            4px -8px 0 #000;
-          transform: rotate(45deg);
+        &:checked + label{
+            &:after {
+                content: '';
+                position: absolute;
+                left: 5px;
+                top: 10px;
+                background: #000;
+                width: 2px;
+                height: 2px;
+                box-shadow: 
+                  2px 0 0 #000,
+                  4px 0 0 #000,
+                  4px -2px 0 #000,
+                  4px -4px 0 #000,
+                  4px -6px 0 #000,
+                  4px -8px 0 #000;
+                transform: rotate(45deg);
+            }
+            &.highlight_checkbox:after{
+                background: @bright-blue;
+                box-shadow: 
+                  2px 0 0 @bright-blue,
+                  4px 0 0 @bright-blue,
+                  4px -2px 0 @bright-blue,
+                  4px -4px 0 @bright-blue,
+                  4px -6px 0 @bright-blue,
+                  4px -8px 0 @bright-blue;
+            }
         }
       }
       .styled-radio-select:checked,
@@ -2828,10 +2879,28 @@ form{
         }
     }
     a.callDeleteEdu{
-        color: @orange;
-        font-size: 1.3em;
+        color: #333;
+        font-size: 1.2em;
+        font-weight: 400;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        padding: 7px 0px;
+        opacity: 1;
+        align-items: center;
+        max-width: max-content;
+        text-decoration: underline;
+        transition: opacity .2s ease;
+        .icon{
+            position: relative;
+            width: 12px;
+            margin-right: 8px;
+            svg path{
+                fill: #333;
+            }
+        }
         &:hover{
-            text-decoration: underline;
+            opacity: 0.8;
         }
     }
 }
@@ -3115,7 +3184,12 @@ select.form-control{
         }
         .payment-details{
             .flex-cell{
-                .flex-col-6:nth-child(2){
+                justify-content: space-between;
+                .payment_label{
+                    max-width: 70%;
+                    text-align: left;
+                }
+                .payment_value{
                     text-align: right;
                 }
                 &.last_row{
@@ -3191,7 +3265,7 @@ select.form-control{
 
 /* elements */
 #confirmMessage, #checkPasswordMessage, #validateMessage, #PasswordMessage{
-    color: @orange;
+    color: @pink;
     font-family: Roboto;
     font-weight: 400;
 }
@@ -3577,19 +3651,6 @@ form{
             }
         }
     }
-    .warning{
-        position: relative;
-        &:before{
-            content: '';
-            position: absolute;
-            background-size: contain!important;
-            left: 5px;
-            top: 5px;
-            width: 15px;
-            height: 15px;
-            background: url(/sites/default/files/general-icon/orange-notify.png) center no-repeat;
-        }
-    }
 }
 
 form{
@@ -3667,7 +3728,7 @@ input[type="email"], .email-field{
 }
 
 .checkmessage{
-    color: @orange;
+    color: @pink;
 }
 
 /* JOIN THE APA - NEW MEMBER WELCOME */

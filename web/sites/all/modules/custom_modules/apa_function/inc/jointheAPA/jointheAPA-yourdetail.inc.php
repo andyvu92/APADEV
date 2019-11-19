@@ -1528,7 +1528,7 @@ array_multisort($Title, SORT_ASC, $MemberType);
                     ?>" value="<?php
                             echo $details['Workplaces'][$key]['Findphysio'];
                     ?>" <?php if($details['Workplaces'][$key]['Findphysio']=="True"){echo "checked";} ?>>
-                                                <label class="light-font-weight" for="Findphysio<?php
+                                                <label class="light-font-weight highlight_checkbox" for="Findphysio<?php
                             echo $key;
                     ?>">I want to be listed at this workplace within Find a Physio on the consumer <span class="note-text">choose.physio</span> site</label>
                         </div>
@@ -1545,7 +1545,7 @@ array_multisort($Title, SORT_ASC, $MemberType);
                                     echo "checked";
                                 }
                         ?>>
-                            <label class="light-font-weight" for="Findabuddy<?php
+                            <label class="light-font-weight highlight_checkbox" for="Findabuddy<?php
                                 echo $key;
                         ?>">I want to be listed at this workplace within Find a Physio on the corporate <span class="note-text">australian.physio</span> site</label>
                         </div>
@@ -2287,7 +2287,7 @@ array_multisort($Title, SORT_ASC, $MemberType);
                     <!--<?php //if($key!="0"):?>-->
                     <div class="col-xs-12">
                         <a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>">
-                            Delete
+                            <span class="icon delete_icon"></span> Delete
                         </a>
                     </div>
 						

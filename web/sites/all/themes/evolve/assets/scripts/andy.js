@@ -151,15 +151,6 @@ jQuery(document).ready(function() {
     $(this).removeClass("focuscss");
   });
 
-  // REMOVE WARNING CLASS ON CLICK-------------------------------------------
-  $(document).on("click","#tabmenu li", function(){
-    $(this).removeClass("warning");
-  });
-
-  $(document).on("click",".nav-tabs > li", function(){
-    $(this).removeClass("warning");
-  });
-
   //ADD LOCKER ICON ON DISABLED FORM FIELDS--------------------------------------------
   var target_for_locker_icon = [];
   target_for_locker_icon = [
@@ -178,10 +169,23 @@ jQuery(document).ready(function() {
   $(".join-details-button3").on("click", function() {
     $( "#workplaceblocks > div" ).each(function() {
       if ($(this).find(".focuscss").length > 0){ 
+        var icon = '<svg class="warning_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01c.564-1.789 1.632-3.932 1.821-4.474.273-.787-.211-1.136-1.74.209l-.34-.64c1.744-1.897 5.335-2.326 4.113.613-.763 1.835-1.309 3.074-1.621 4.03-.455 1.393.694.828 1.819-.211.153.25.203.331.356.619-2.498 2.378-5.271 2.588-4.408-.146zm4.742-8.169c-.532.453-1.32.443-1.761-.022-.441-.465-.367-1.208.164-1.661.532-.453 1.32-.442 1.761.022.439.466.367 1.209-.164 1.661z"/></svg>';
         x = $(this).attr('id').replace('workplace', '');
         $('#tabmenu li#workplaceli' + x).addClass("warning");
+        $('#tabmenu li#workplaceli' + x).prepend(icon);
       }
     });
+  });
+
+  // REMOVE WARNING CLASS ON CLICK-------------------------------------------
+  $(document).on("click","#tabmenu li", function(){
+    $(this).removeClass("warning");
+    $(this).find('.warning_icon').remove();
+  });
+
+  $(document).on("click",".nav-tabs > li", function(){
+    $(this).removeClass("warning");
+    $(this).find('.warning_icon').remove();
   });
 
   //TRIGGER DELETE WORKPLACE(S) POPUPS-------------------------------------------------------
@@ -2351,6 +2355,12 @@ jQuery(document).ready(function() {
   // info icon
   $('.info_icon').each(function () {
     var icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01c.564-1.789 1.632-3.932 1.821-4.474.273-.787-.211-1.136-1.74.209l-.34-.64c1.744-1.897 5.335-2.326 4.113.613-.763 1.835-1.309 3.074-1.621 4.03-.455 1.393.694.828 1.819-.211.153.25.203.331.356.619-2.498 2.378-5.271 2.588-4.408-.146zm4.742-8.169c-.532.453-1.32.443-1.761-.022-.441-.465-.367-1.208.164-1.661.532-.453 1.32-.442 1.761.022.439.466.367 1.209-.164 1.661z"/></svg>';
+    $(this).html(icon);
+  });
+
+  // delete icon
+  $('.delete_icon').each(function () {
+    var icon = '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 22.88 22.88" style="enable-background:new 0 0 22.88 22.88;" xml:space="preserve"><path style="fill:#1E201D;" d="M0.324,1.909c-0.429-0.429-0.429-1.143,0-1.587c0.444-0.429,1.143-0.429,1.587,0l9.523,9.539  l9.539-9.539c0.429-0.429,1.143-0.429,1.571,0c0.444,0.444,0.444,1.159,0,1.587l-9.523,9.524l9.523,9.539  c0.444,0.429,0.444,1.143,0,1.587c-0.429,0.429-1.143,0.429-1.571,0l-9.539-9.539l-9.523,9.539c-0.444,0.429-1.143,0.429-1.587,0  c-0.429-0.444-0.429-1.159,0-1.587l9.523-9.539L0.324,1.909z"/></svg>';
     $(this).html(icon);
   });
 

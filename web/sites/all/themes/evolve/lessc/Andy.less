@@ -1153,16 +1153,21 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
     }
   
     /* Box. */
-    & + label:before {
-      content: '';
-      margin-right: 20px;
-      display: inline-block;
-      vertical-align: text-top;
-      width: 20px;
-      min-width: 20px;
-      height: 20px;
-      background: none;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+    & + label{
+        &:before {
+            content: '';
+            margin-right: 20px;
+            display: inline-block;
+            vertical-align: text-top;
+            width: 20px;
+            min-width: 20px;
+            height: 20px;
+            background: none;
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
+        }
+        &.highlight_checkbox:before{
+            box-shadow: 0 0 0 1px @bright-blue;
+        }
     }
   
     /* Box hover */
@@ -1206,22 +1211,34 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
       }
   
     /* Checkmark. Could be replaced with an image */
-    &:checked + label:after {
-      content: '';
-      position: absolute;
-      left: 5px;
-      top: 10px;
-      background: #000;
-      width: 2px;
-      height: 2px;
-      box-shadow: 
-        2px 0 0 #000,
-        4px 0 0 #000,
-        4px -2px 0 #000,
-        4px -4px 0 #000,
-        4px -6px 0 #000,
-        4px -8px 0 #000;
-      transform: rotate(45deg);
+    &:checked + label{
+        &:after {
+            content: '';
+            position: absolute;
+            left: 5px;
+            top: 10px;
+            background: #000;
+            width: 2px;
+            height: 2px;
+            box-shadow: 
+              2px 0 0 #000,
+              4px 0 0 #000,
+              4px -2px 0 #000,
+              4px -4px 0 #000,
+              4px -6px 0 #000,
+              4px -8px 0 #000;
+            transform: rotate(45deg);
+        }
+        &.highlight_checkbox:after{
+            background: @brighter-blue;
+            box-shadow: 
+              2px 0 0 @brighter-blue,
+              4px 0 0 @brighter-blue,
+              4px -2px 0 @brighter-blue,
+              4px -4px 0 @brighter-blue,
+              4px -6px 0 @brighter-blue,
+              4px -8px 0 @brighter-blue;
+        }
     }
   }
 
@@ -4726,7 +4743,7 @@ body{
                         opacity: 0;
                     }
                     &.error{
-                        border: 1px solid @orange;
+                        border: 1px solid @pink;
                     }
                 }
             }
@@ -4774,7 +4791,7 @@ body{
             overflow: hidden;
             .alert-danger{
                 background-color: #fff;
-                border-color: @orange;
+                border-color: @pink;
             }
         }
         .user-info-from-cookie{
@@ -4814,7 +4831,7 @@ body{
                     z-index: 10;
                     padding-left: 40px;
                     &.error{
-                        border: 1px solid @orange;
+                        border: 1px solid @pink;
                     }
                 }
             }
@@ -6925,7 +6942,7 @@ body a b, body span b{
 
 /* save card message */
 .save_card_msg{
-    color: @orange;
+    color: @pink;
     display: none;
 }
 
