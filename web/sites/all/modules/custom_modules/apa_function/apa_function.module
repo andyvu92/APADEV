@@ -513,7 +513,7 @@ function pd_shoppingcart_form($form, &$form_state){
     
     $form['Cardtype'] = array(
 		'#type' => 'select',
-        '#title' => t('Payment method:'),
+        '#title' => t('Card type:'),
        	'#default_value' => '',
 		'#attributes' => array(' class' => 'form-control'),
 		'#options' => $paymentArray,
@@ -831,7 +831,7 @@ function apa_create_payment_card_form($form, &$form_state){
 	);
 	$form['Cardtype'] = array(
 		'#type' => 'select',
-		'#title' => t('Payment method:'),
+		'#title' => t('Card type:'),
 		'#default_value' => '',
 		'#attributes' => array(' class' => 'form-control'),
 		'#options' => $paymentArray,

@@ -666,7 +666,9 @@ if(sizeof($fpProdcutArray)!=0){
 				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="<?php //if(isset($_SESSION["postReviewData"])) {if(!empty($PRFTemp) && $PRFTemp !="5" && $PRFTemp !="10" && $PRFTemp !="20" && $PRFTemp !="50" && $PRFTemp !="100") {echo $PRFTemp;}}?>" oninput="this.value = Math.abs(this.value)" min="0">
 			</div>
 	</div>
-	
+	<div class="col-xs-12">
+		<span class="section_title">Payment method</span>
+	</div>
 	<?php 
 	// 2.2.12 - Get payment list
 	// Send - 
@@ -704,7 +706,7 @@ if(sizeof($fpProdcutArray)!=0){
 	<div id="anothercardBlock" class="row">
 		<div class="row">
 			<div class="col-xs-12 col-sm-6 col-md-6">
-				<label for="">Payment method:<span class="tipstyle"> *</span></label>
+				<label for="">Card type:<span class="tipstyle"> *</span></label>
 				<div class="chevron-select-box">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 					<?php 
@@ -758,7 +760,7 @@ if(sizeof($fpProdcutArray)!=0){
 			
 
 			<div class="col-xs-12 col-sm-6 col-md-6">
-				<label for="">Payment method:<span class="tipstyle"> *</span></label>
+				<label for="">Card Type:<span class="tipstyle"> *</span></label>
 				<div class="chevron-select-box">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
 						<?php 

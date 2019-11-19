@@ -710,6 +710,9 @@ $PRFPrice = 0;
                         oninput="this.value = Math.abs(this.value)" min="0">
                 </div>
         </div>
+        <div class="col-xs-12">
+		    <span class="section_title">Payment method</span>
+	    </div>
         <?php 
 // 2.2.12 - Get payment list
 // Send - 
@@ -753,7 +756,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
             <div id="anothercardBlock" style="margin: 0; padding:0" class="col-xs-12">
                 <div class="row">
                     <div class="col-xs-6 col-sm-6 col-md-6">
-                        <label for="">Payment method:<span class="tipstyle"> *</span></label>
+                        <label for="">Card type:<span class="tipstyle"> *</span></label>
                         <div class="chevron-select-box">
                             <select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
                                 <?php 
@@ -815,7 +818,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
                 
 
                 <div class="col-xs-12 col-sm-6 col-md-6">
-                    <label for="">Payment method:<span class="tipstyle"> *</span></label>
+                    <label for="">Card type:<span class="tipstyle"> *</span></label>
                     <div class="chevron-select-box">
                         <select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
                             <?php 
