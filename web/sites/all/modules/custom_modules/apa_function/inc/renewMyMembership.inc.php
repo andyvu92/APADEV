@@ -393,7 +393,7 @@ $background = getBackgroundImage($userID);
 
 <h4 class="doc-header">Credit Card Information</h4>
 
-<p>The APA does not permanently store credit card information anywhere on this site.&nbsp;&nbsp;</p>
+<p>The APA does not store credit card information unless you choose to pay your membership fees by instalment or you elect to save your card details for the convenience of future purchases.</p>
 
 
 <h4 class="doc-header">APA Members Privacy</h4>
