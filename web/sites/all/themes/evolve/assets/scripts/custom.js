@@ -428,6 +428,12 @@ jQuery(document).ready(function($) {
 	if($("#p1-2").length!==0 && $("#p1-2").is(":checked")){
 		$('.schedule').css('display','inline-flex');
 		$('.full').css('display','none');
+		if($('#addcardtag').is(":visible")){
+			$('#addcardtag').attr('checked', true);
+			$('#addcardtag').attr('disabled',true);
+		
+			
+		}
 	}
 	if($("#p1-2").length===0){
 		 $("#p1-1").attr('checked', true);

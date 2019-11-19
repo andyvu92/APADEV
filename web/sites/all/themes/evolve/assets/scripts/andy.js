@@ -173,7 +173,7 @@ jQuery(document).ready(function() {
 
   //remove locker
   $('[class^="down"]').removeClass('locked');
-
+  $('#addcardtag').parent().closest( "div" ).removeClass('locked');
   //ADD WARNING ICON FOR MISSING INFO ON WORKPLACE TABS------------------------------------------
   $(".join-details-button3").on("click", function() {
     $( "#workplaceblocks > div" ).each(function() {
