@@ -11,37 +11,27 @@ if(isset($_POST['step3'])) {
 	if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption'] == '1' ? 1:0; }
 	//if(isset($_POST['Installpayment-frequency'])){ $postReviewData['InstallmentFrequency'] = $_POST['Installpayment-frequency']; }
 	$postReviewData['InstallmentFrequency'] = $_POST['Paymentoption'] == '1' ? "Monthly":"";
-	//this is handle save payment card
-	if(isset($_POST['addcardtag']) && $_POST['addcardtag']=="1"){
-		if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
-		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
-		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
-		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
-		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
-		if($_POST['Paymentoption']=="1"){ $postPaymentData['IsDefault'] = 1; } else{ $postPaymentData['IsDefault'] = 0;}
-		$out = aptify_get_GetAptifyData("15", $postPaymentData);
+	//handle new card 
+	if(isset($_POST['addCard']) && $_POST['addCard']=="1"){
 		$postReviewData['Card_number'] = "";	
 		$postReviewData['PaymentTypeID'] = $_POST['Cardtype'];
 		$postReviewData['CCNumber'] = $_POST['Cardnumber'];
 		$postReviewData['CCExpireDate'] = $_POST['Expirydate'];
 		$postReviewData['CCSecurityNumber'] = $_POST['CCV'];
-
+		//handle full payment and install payment
+		if((isset($_POST['addcardtag']) && $_POST['addcardtag']=="1") || $_POST['Paymentoption']=="1" ){
+			if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
+			if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
+			if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
+			if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
+			if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
+			if($_POST['Paymentoption']=="1"){ $postPaymentData['IsDefault'] = 1; } else{ $postPaymentData['IsDefault'] = 0;}
+			$out = aptify_get_GetAptifyData("15", $postPaymentData);
+		}
 	}
-	elseif(isset($_POST['addCard'])){
-		$postReviewData['Card_number'] = "";	
-		$postReviewData['PaymentTypeID'] = $_POST['Cardtype'];
-		$postReviewData['CCNumber'] = $_POST['Cardnumber'];
-		$postReviewData['CCExpireDate'] = $_POST['Expirydate'];
-		$postReviewData['CCSecurityNumber'] = $_POST['CCV'];
-		
-	}
-    if(isset($_POST['anothercard']) && $_POST['anothercard']=="1"){
-		$postReviewData['Card_number'] = "";	
-		$postReviewData['PaymentTypeID'] = $_POST['Cardtype'];
-		$postReviewData['CCNumber'] = $_POST['Cardnumber'];
-		$postReviewData['CCExpireDate'] = $_POST['Expirydate'];
-		$postReviewData['CCSecurityNumber'] = $_POST['CCV'];
-	}elseif(isset($_POST['Paymentcard'])){
+	
+	//handle using existed card scenario
+	elseif(isset($_POST['Paymentcard']) && !isset($_POST['anothercard'])){
 		$postReviewData['Card_number'] = $_POST['Paymentcard']; 
 		if($_POST['Paymentoption']=="1"){ 
 			$updateCardSubmit["UserID"] = $_SESSION['UserId'];

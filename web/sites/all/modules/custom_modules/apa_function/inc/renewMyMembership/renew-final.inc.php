@@ -700,7 +700,7 @@ if(sizeof($fpProdcutArray)!=0){
 			</div>
 		</div> 
 		<div class="col-xs-12">
-			<input type="checkbox" class="styled-checkbox" id="anothercard">
+			<input type="checkbox" class="styled-checkbox" id="anothercard" name="anothercard">
 			<label for="anothercard">Use another card</label>
 		</div>
 	<div id="anothercardBlock" class="row">
