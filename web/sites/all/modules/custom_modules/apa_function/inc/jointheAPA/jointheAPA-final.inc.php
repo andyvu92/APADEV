@@ -799,9 +799,13 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
                     </div>
                 </div>
 
-                <div class="col-xs-12">
-                    <input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
-                    
+                <div class="row">
+                    <div class="col-xs-4 col-md-4">
+                        <input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
+                    </div>
+                    <div class="col-xs-8 col-md-8">
+                        <label for="">To facilitate automatic further instalments, your credit card will be stored securely.</label>
+                    </div>
                 </div>
 
                 <input type="hidden" name="addCard" value="0">
@@ -861,10 +865,14 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
                 </div>
             </div>
 
-            <div class="col-xs-12">
-                <input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="0"><label for="addcardtag">Save this card</label>
-                <input type="hidden" name="addCard" value="1">
-                
+            <div class="row">
+                <div class="col-xs-4 col-md-4">
+                    <input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="0"><label for="addcardtag">Save this card</label>
+                    <input type="hidden" name="addCard" value="1">
+                </div>
+                <div class="col-xs-8 col-md-8">
+                    <label for="">To facilitate automatic further instalments, your credit card will be stored securely.</label>
+                </div>
             </div>
 
             <div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off

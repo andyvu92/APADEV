@@ -745,11 +745,18 @@ if(sizeof($fpProdcutArray)!=0){
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 		</div>
-		<div class="col-xs-12">
-			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="0">
-			<label for="addcardtag">Save this card</label>
-			
+
+		<div class="row">
+			<div class="col-xs-4 col-md-4">
+				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="0"><label for="addcardtag">Save this card</label>
+				<input type="hidden" name="addCard" value="1">
+			</div>
+			<div class="col-xs-8 col-md-8">
+				<label for="">To facilitate automatic further instalments, your credit card will be stored securely.</label>
+			</div>
 		</div>
+
+
 		<input type="hidden" name="addCard" value="0">
 	</div>
 	<div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</div>
@@ -799,10 +806,14 @@ if(sizeof($fpProdcutArray)!=0){
 				<input type="text" class="form-control" id="CCV" name="CCV" placeholder="CVV" maxlength="4">
 			</div>
 		</div>
-		<div class="col-xs-12">
-			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="0">
-			<label for="addcardtag">Save this card</label>
-			
+		<div class="row">
+			<div class="col-xs-4 col-md-4">
+				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="0"><label for="addcardtag">Save this card</label>
+				<input type="hidden" name="addCard" value="1">
+			</div>
+			<div class="col-xs-8 col-md-8">
+				<label for="">To facilitate automatic further instalments, your credit card will be stored securely.</label>
+			</div>
 		</div>
 		
 		<input type="hidden" name="addCard" value="1">
