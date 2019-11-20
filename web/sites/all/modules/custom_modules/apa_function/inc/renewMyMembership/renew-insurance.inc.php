@@ -102,11 +102,11 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			
 			<div class="row">
 				<div class="col-xs-6 col-md-3">
-					<label>Year of claim of incident</label>
+					<label>Year of claim of incident&nbsp;<span class="tipstyle">*</span></label>
 					<input type="number" class="form-control" name="Yearclaim" id="Yearclaim" placeholder="Year of claim of incident" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Yearclaim']; }else{ echo 'placeholder="Year of claim"';}?>>
 				</div>
 				<div class="col-xs-6 col-md-3">
-					<label>Name of claimant</label>
+					<label>Name of claimant&nbsp;<span class="tipstyle">*</span></label>
 					<input type="text" class="form-control" name="Nameclaim" id="Nameclaim" placeholder="Name of claimant" <?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Nameclaim']; }else{ echo 'placeholder="Name of claimant"';}?>>
 				</div>
 			</div>
@@ -123,13 +123,13 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			
 			<div class="row">
 				<div class="col-xs-6 col-md-6">
-					<label>Amount paid</label>
+					<label>Amount paid&nbsp;<span class="tipstyle">*</span></label>
 					<input type="number" class="form-control" name="Amountpaid" id="Amountpaid" placeholder="Amount paid (if nil, please state '0')"<?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Amountpaid']; }else{ echo '';}?>>
 				</div>
 
 				<div class="col-xs-12">
 				
-				<label>Has the claim been finalised?</label>
+				<label>Has the claim been finalised?&nbsp;<span class="tipstyle">*</span></label>
 				</div>
 				<div class="col-xs-6 col-md-3 restricted-width">
 					<input class="styled-radio-select" type="radio" name="Finalisedclaim" id="Finalisedclaim1" value="true" <?php if($insuranceDataTag==1 && $insuarnceData['results'][0]['Finalisedclaim']=="1") echo 'checked="checked"';?>>
