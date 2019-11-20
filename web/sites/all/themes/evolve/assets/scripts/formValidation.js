@@ -179,6 +179,7 @@ jQuery(document).ready(function($) {
 				if($("input[name=Nameclaim]").val() =='') {$("input[name=Nameclaim]").addClass("focuscss");}else{$("input[name=Nameclaim]").removeClass("focuscss");}
 				if($("input[name=Fulldescription]").val() =='') {$("input[name=Fulldescription]").addClass("focuscss");}else{$("input[name=Fulldescription]").removeClass("focuscss");}
 				if($("input[name=Amountpaid]").val() =='') {$("input[name=Amountpaid]").addClass("focuscss");}else{$("input[name=Amountpaid]").removeClass("focuscss");}
+				if(!$.trim($("#Fulldescription").val())) {$("#Fulldescription").addClass("focuscss");}else{$("#Fulldescription").removeClass("focuscss");}
 				if($("input[name=Finalisedclaim]").val() =='') {$("input[name=Finalisedclaim]").addClass("focuscss");}else{$("input[name=Finalisedclaim]").removeClass("focuscss");}
 				//if($("input[name=Businiessname]").val() =='') {$("input[name=Businiessname]").addClass("focuscss");}else{$("input[name=Businiessname]").removeClass("focuscss");}
 			}
@@ -188,6 +189,7 @@ jQuery(document).ready(function($) {
 				if($("input[name=Nameclaim]").val() =='') { return false;}
 				if($("input[name=Fulldescription]").val() =='') { return false;}
 				if($("input[name=Amountpaid]").val() =='') { return false;}
+				if(!$.trim($("#Fulldescription").val())) { return false;}
 				if($("input[name=Finalisedclaim]").val() =='') { return false;}
 				//if($("input[name=Businiessname]").val() =='') { return false;}
 				

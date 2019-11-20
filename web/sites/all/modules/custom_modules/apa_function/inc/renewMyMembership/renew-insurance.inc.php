@@ -112,7 +112,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;} else {$insuranceD
 			</div>
 			
 			<div class="row"><div class="col-xs-12 col-md-6">
-				<label>Full description</label>
+				<label>Full description&nbsp;<span class="tipstyle">*</span></label>
 				<textarea rows="5" type="text" class="form-control" name="Fulldescription" id="Fulldescription" placeholder="Full description of insurance" <?php if($insuranceDataTag==1 && strlen($insuarnceData['results'][0]['Fulldescription']) > 1) {echo " value='".$insuarnceData['results'][0]['Fulldescription']."'"; } ?>>
 				</textarea>
 			</div></div>
