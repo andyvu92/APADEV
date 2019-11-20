@@ -246,7 +246,7 @@ $background = getBackgroundImage($userID);
 					</div>
 					<div class="flex-cell body-text">
 						<span>A copy of your purchase receipt and membership certification will be sent to your inbox.</span>
-						<span>Please <a href="https://apa.bmsgroup.com/#/" target="_blank">click here</a> to proceed to BMS’s microsite to take up entity cover. There will be additional information collected by BMS to ensure your business is appropriately covered.</span>
+						<span>Please <a href="https://apa.bmsgroup.com?utm_source=apa&utm_medium=website&utm_campaign=renewal" target="_blank">click here</a> to proceed to BMS’s microsite to take up entity cover. There will be additional information collected by BMS to ensure your business is appropriately covered.</span>
 						<span>In the meantime, you might like to:</span>
 					</div>
 					<div class="flex-cell cta">
