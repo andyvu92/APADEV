@@ -65,8 +65,9 @@ jQuery(document).ready(function($) {
 		
 		
 			var num = $("input[name=addtionalNumber]").val();
+			var eduMaxNum = $("input[name=educationMaxNumber]").val();
 			if(num!=0){
-				for (t = 0; t<num;t++){
+				for (t = 0; t<eduMaxNum;t++){
 					if($("select[name=Udegree"+t+"]").val() ==''){$("select[name=Udegree"+t+"]").addClass("focuscss");}else{$("select[name=Udegree]").removeClass("focuscss");}
 					if($("select[name=Undergraduate-university-name"+t+"]").val() ==''){$("select[name=Undergraduate-university-name"+t+"]").addClass("focuscss");}else{$("select[name=Undergraduate-university-name"+t+"]").removeClass("focuscss");}
 					if($("input[name=Undergraduate-university-name-other"+t+"]").length!== 0){
@@ -130,7 +131,7 @@ jQuery(document).ready(function($) {
 			}
 			
 			if(num!=0){
-				for (t = 0; t<num;t++){
+				for (t = 0; t<eduMaxNum;t++){
 					if($("select[name=Udegree"+t+"]").val() ==''||$("select[name=Undergraduate-university-name"+t+"]").val() ==''||$("select[name=Ugraduate-country"+t+"]").val() ==''||$("select[name=Ugraduate-year-attained"+t+"]").val() ==''){
 						return false;
 					}

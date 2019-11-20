@@ -2092,6 +2092,7 @@ array_multisort($Title, SORT_ASC, $MemberType);
         <div class="down4" style="display:none;" >
         <div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please note: all education undertaken with the APA or APC will already be recorded on your profile.</p></div>
         <input type="hidden" id="addtionalNumber" name="addtionalNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$addtionalNumber =  sizeof($details['PersonEducation']);} else{ $addtionalNumber =0;} echo  $addtionalNumber;  ?>"/>
+        <input type="hidden" id="educationMaxNumber" name="educationMaxNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$educationMaxNumber =  sizeof($details['PersonEducation']);} else{ $educationMaxNumber =0;} echo  $educationMaxNumber;  ?>"/>
             <div id="additional-qualifications-block">
                 <?php
     foreach ($details['PersonEducation'] as $key => $value):
@@ -3210,6 +3211,7 @@ if(isset($_POST['MT'])){
     $addtionalNumber = 0;
     echo $addtionalNumber;
 ?>"/>
+<input type="hidden" id="educationMaxNumber" name="educationMaxNumber" value="0"/>
 				<div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please add your qualifications or click next to continue</p></div>
                 <div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please note: all education undertaken with the APA or APC will already be recorded on your profile.</p></div>
                 <div id="additional-qualifications-block">
@@ -3418,7 +3420,8 @@ endif;
     });
     $('.add-additional-qualification').click(function(){
         $('#dashboard-right-content').addClass("autoscroll");
-        var number = Number($('#addtionalNumber').val());
+        var number = Number($('#educationMaxNumber').val());
+        var educationNumber = Number($('#addtionalNumber').val());
         var sessionCountry = <?php
 echo json_encode($_SESSION['country']);
 ?>;
@@ -3430,8 +3433,10 @@ echo json_encode($_SESSION['University']);
 ?>;
         $('div[id="additional-qualifications-block"]').append('<div id="additional'+ number +'"></div>');
         $("#additional"+ number ).load("load/education", {"count":number,"sessionCountry":sessionCountry,"sessionDegree":sessionDegree,"sessionUniversity":sessionUniversity});
-        var i = Number(number +1);
+        var i = Number(educationNumber +1);
+        var j = Number(number +1);
         $('input[name=addtionalNumber]').val(i);
+        $('input[name=educationMaxNumber]').val(j);
     });
 	$("#deleteQButton").on( "click", function(){
 		var x = $(this).attr("class").replace('deleteEducation', '');

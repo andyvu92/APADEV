@@ -146,8 +146,9 @@ jQuery(document).ready(function($) {
 		
 		if($('.down4:visible').length !== 0){
 			var num = $("input[name=addtionalNumber]").val();
+			var eduMaxNum = $("input[name=educationMaxNumber]").val();
 			if(num!=0){
-				for (t = 0; t<num;t++){
+				for (t = 0; t<eduMaxNum;t++){
 					if($("select[name=Udegree"+t+"]").val() ==''){$("select[name=Udegree"+t+"]").addClass("focuscss");}else{$("select[name=Udegree]").removeClass("focuscss");}
 					if($("select[name=Undergraduate-university-name"+t+"]").val() ==''){$("select[name=Undergraduate-university-name"+t+"]").addClass("focuscss");}else{$("select[name=Undergraduate-university-name"+t+"]").removeClass("focuscss");}
 					if($("input[name=Undergraduate-university-name-other"+t+"]").length!== 0){
@@ -155,6 +156,8 @@ jQuery(document).ready(function($) {
 					}
 					if($("input[name=Ugraduate-country"+t+"]").val() ==''){$("input[name=Ugraduate-country"+t+"").addClass("focuscss");}else{$("input[name=Ugraduate-country"+t+"").removeClass("focuscss");}
 					if($("select[name=Ugraduate-yearattained"+t+"]").val() ==''){$("select[name=Ugraduate-yearattained"+t+"]").addClass("focuscss");}else{$("select[name=Ugraduate-year-attained"+t+"]").removeClass("focuscss");}
+				}
+				for (t = 0; t<eduMaxNum;t++){
 					if($("select[name=Udegree"+t+"]").val() ==''||$("select[name=Undergraduate-university-name"+t+"]").val() ==''||$("input[name=Ugraduate-country"+t+"]").val() ==''||$("select[name=Ugraduate-yearattained"+t+"]").val() ==''){
 						return false;
 					}
