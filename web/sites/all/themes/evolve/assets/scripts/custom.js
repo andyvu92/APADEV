@@ -391,6 +391,7 @@ jQuery(document).ready(function($) {
 				$(this).val('1');
 				$('.schedule').css('display','inline-flex');
 				$('.full').css('display','none');
+				$('#installmentMessage').removeClass('display-none');
 				if($('#addcardtag').is(":visible")){
 					$('#addcardtag').attr('checked', true);
 					$('#addcardtag').attr('disabled', true);
@@ -400,6 +401,7 @@ jQuery(document).ready(function($) {
       else{
 				$(this).val('0');
 				$('.full').css('display','inline-flex');
+				$('#installmentMessage').addClass('display-none');
 				$('.schedule').css('display','none');
 				if($('#addcardtag').is(":visible")){
 					$('#addcardtag').attr('checked', false);

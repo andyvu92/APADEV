@@ -803,7 +803,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
                     <div class="col-xs-4 col-md-4">
                         <input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
                     </div>
-                    <div class="col-xs-8 col-md-8">
+                    <div class="col-xs-8 col-md-8" id="installmentMessage">
                         <label for="">To facilitate automatic further instalments, your credit card will be stored securely.</label>
                     </div>
                 </div>

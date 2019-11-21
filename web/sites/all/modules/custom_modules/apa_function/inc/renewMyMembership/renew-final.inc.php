@@ -811,7 +811,7 @@ if(sizeof($fpProdcutArray)!=0){
 				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" value="0"><label for="addcardtag">Save this card</label>
 				<input type="hidden" name="addCard" value="1">
 			</div>
-			<div class="col-xs-8 col-md-8">
+			<div class="col-xs-8 col-md-8" id="installmentMessage">
 				<label for="">To facilitate automatic further instalments, your credit card will be stored securely.</label>
 			</div>
 		</div>
