@@ -131,7 +131,7 @@ if(isset($_POST['step2-1'])) {
 <div id="tipsBlock" class="<?php if(isset($_POST['insuranceStatus'])&& $_POST['insuranceStatus']=="1") {echo "display";} else { echo "display-none";}?>"><span style="color:red;">Unfortunately, we cannot let you proceed with this membership purchase. Please contact the APA member hub (include email link) or on 1 300 306 622 for more information.</span></div>
 <form action="" method="POST">
 	<input type="hidden" name="step2" value="2"/>
-	<div class="down6" <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['goP']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
+	<div class="down6" <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder']) || isset($_POST['goP']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
 		<!--<div class="row">
 			<div class="col-xs-12">
 			<label>Do you currently or plan to provide services to professional sport people in the AFL, A League, ARU, NRL, Cricket Australia or Olympic Representatives?</label>

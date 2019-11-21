@@ -56,12 +56,12 @@ $background = getBackgroundImage($userID);
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 join-membership-nav">
 			<ul class="nav nav-tabs">
-			<li><a class="tabtitle1 inactiveLink" style="cursor: pointer;"><span class="<?php if(!isset($_POST['step1']) && !isset($_POST['step2']) && !isset($_POST['step2-1'])&& !isset($_POST['goI']) && !isset($_POST['goP']) && !isset($_POST['step2-2']) && !isset($_POST['step2-3'])&& !isset($_POST['step2-4']))echo "text-underline";?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
+			<li><a class="tabtitle1 inactiveLink" style="cursor: pointer;"><span class="<?php if(!isset($_POST['step1']) && !isset($_POST['step2']) && !isset($_POST['step2-1'])&& !isset($_POST['goI']) && !isset($_POST['goP']) && !isset($_POST['step2-2']) && !isset($_POST['step2-3']) && !isset($_POST['QOrder']) && !isset($_POST['step2-4']))echo "text-underline";?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
 			<li><a class="tabtitle2 inactiveLink" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li>
 			<li><a class="tabtitle3 inactiveLink" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li>
 			<li><a class="tabtitle4 inactiveLink" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
 			<li><a class="tabtitle5 inactiveLink" style="cursor: pointer;"><span class="eventtitle5 <?php if((isset($_POST['step1'])&& $_POST['insuranceTag']!="0") || isset($_POST['goI']))echo 'text-underline';?>" id="Insurance"><strong>Insurance</strong></span></a></li>
-			<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6 <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>
+			<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6 <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") ||isset($_POST['QOrder']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>
 			<!--<li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7 <?php //if(isset($_POST['goP']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>-->
 			<!--<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 <?php //if(isset($_POST['step2']) || isset($_POST['step3'])|| isset($_POST['step2-2'])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'text-underline';?>" id="Review"><strong>Review</strong></span></a></li>-->
 			</ul>
@@ -78,7 +78,7 @@ $background = getBackgroundImage($userID);
 		apa_function_join_the_apa_insurance_form();
 		
 		}
-		elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4'])) {
+		elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4'])) {
 		//include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-surveypayment.inc.php');
 		//apa_function_join_the_apa_surveypayment_form();
 		apa_function_join_the_apa_final_form();

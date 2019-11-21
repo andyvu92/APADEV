@@ -302,7 +302,7 @@ $PRFPrice = 0;
     <?php endif;?>
     <?php endif;?>
     <div class="down6"
-        <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
+        <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
         
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main_content">
             <div class="flex-container join-apa-final flex-table">
@@ -621,7 +621,7 @@ $PRFPrice = 0;
 <form id="join-insurance-form" class="col-xs-12" action="joinconfirmation" method="POST">
    	<input type="hidden" name="step3" value="3">
     <div class="down6"
-        <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
+        <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
         <div class="row">
             <div class="col-xs-12">
                 <span class="section_title">Payment options:</span>

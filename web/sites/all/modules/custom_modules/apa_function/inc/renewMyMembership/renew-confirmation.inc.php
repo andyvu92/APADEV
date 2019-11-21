@@ -334,7 +334,7 @@ $background = getBackgroundImage($userID);
 								<h3 class="light-lead-heading">There were unexpected issues processing<br> your payment request.</h3>
 							</div>
 							<div class="flex-cell">
-								<span class="sub-heading">Please <a href="/renewmymembership">try again</a> or <a href="/contact-us">contact us</a>.</span>
+								<span class="sub-heading">Please <a href="javascript:document.getElementById('renew-survey-form2').submit();">try again</a> or <a href="/contact-us">contact us</a>.</span>
 							</div>
 						</div>
 					<?php endif; ?>
@@ -391,7 +391,7 @@ $background = getBackgroundImage($userID);
 								<h3 class="light-lead-heading">There were unexpected issues processing<br> your payment request.</h3>
 							</div>
 							<div class="flex-cell">
-								<span class="sub-heading">Please <a href="/renewmymembership">try again</a> or <a href="/contact-us">contact us</a>.</span>
+								<span class="sub-heading">Please <a href="javascript:document.getElementById('renew-survey-form2').submit();">try again</a> or <a href="/contact-us">contact us</a>.</span>
 							</div>
 						</div>
 					<?php endif; ?>
@@ -401,6 +401,7 @@ $background = getBackgroundImage($userID);
 		</div>
 	</div>
 </div>
+<form id="renew-survey-form2" action="/renewmymembership" method="POST"><input type="hidden" name="QOrder"></form>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
