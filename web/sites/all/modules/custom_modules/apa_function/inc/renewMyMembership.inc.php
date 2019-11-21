@@ -217,7 +217,8 @@ $background = getBackgroundImage($userID);
 			<?php
 			
 			//include('sites/all/themes/evolve/inc/renewMyMembership/renew-yourdetail.inc.php');
-			apa_function_renew_your_detail_form();
+			if(!isset($_POST["step2-1"])){
+			apa_function_renew_your_detail_form();}
 			if((isset($_POST["step1"]) && $_POST["step1"] == "1"&& $_POST['insuranceTag']!="0") || isset($_POST['goI'])){
 			//include('sites/all/themes/evolve/inc/renewMyMembership/renew-insurance.inc.php'); 
 			apa_function_renew_the_apa_insurance_form();
