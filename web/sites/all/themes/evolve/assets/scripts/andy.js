@@ -82,9 +82,16 @@ jQuery(document).ready(function() {
   //auto scroll top on Next/Prev in Join/Renew----------------------------------------------------
   $("[class^='join-details-button'], [class^='your-details-prevbutton']").click(function() {
     if ( $('body').find('#dashboard-right-content').length > 0 ){
-      $('html, body').animate({
-        scrollTop: $('#dashboard-right-content').offset().top
-      }, 600);
+      if( $('body #dashboard-right-content').find('.focuscss').length > 0 ){
+        var firstInvalid = $('body').find('.focuscss').first();
+        $('html, body').animate({
+          scrollTop: $(firstInvalid).offset().top - 128
+        }, 600);
+      } else {
+        $('html, body').animate({
+          scrollTop: $('#dashboard-right-content').offset().top
+        }, 600);
+      }
     }
   }); 
 

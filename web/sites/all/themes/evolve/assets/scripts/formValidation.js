@@ -343,6 +343,7 @@ jQuery(document).ready(function($) {
 			$('.overlay').fadeOut();
 			$('#insurancePopUp').fadeOut();
 			alert("please fill out all required fields *");
+
 			var num = $("input[name=addtionalNumber]").val();
 			// for students, education record is mandatory
 			if($('select[name=MemberType]').val()=="9964" || $('select[name=MemberType]').val()=="9965") {
