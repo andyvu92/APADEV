@@ -76,7 +76,7 @@ if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDa
 
 				<div class="col-xs-12 col-md-6">
 					<label>Full description&nbsp;<span class="tipstyle">*</span></label>
-					<textarea type="text" rows="5" class="form-control" name="Fulldescription" id="Fulldescription" placeholder="Full description of insurance"<?php if($insuranceDataTag==1) {echo "value=".$insuarnceData['results'][0]['Fulldescription']; }else{ echo '';}?>></textarea>
+					<textarea type="text" rows="5" class="form-control" name="Fulldescription" id="Fulldescription"><?php if($insuranceDataTag==1) {echo $insuarnceData['results'][0]['Fulldescription'];}  ?></textarea>
 				</div>
 
 			<div class="col-xs-12 font-weight-500"><label class="note-text">Insufficient details in your response may result in additional details being requested</label></div>
