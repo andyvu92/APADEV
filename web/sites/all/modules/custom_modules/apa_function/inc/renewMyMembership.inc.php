@@ -114,7 +114,7 @@ $background = getBackgroundImage($userID);
 	<?php 
 	$ngQuatation = array();
 	$SubsCount = 0;
-	if(!isset($_SESSION['QuatationTag'])){
+	if(!isset($_SESSION['QuatationTag']) && !isset($_POST["step2-1"]) ){
 		foreach($orderDetails['Order'] as $orders){
 			foreach($orders['OrderLines'] as $order){
 				//  put the code here to save the quatation order products into the database firstly.
