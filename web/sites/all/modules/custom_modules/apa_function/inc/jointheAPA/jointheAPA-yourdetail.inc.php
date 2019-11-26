@@ -3073,7 +3073,8 @@ if(isset($_POST['MT'])){
 							// Response -National Group product
 							$sendData["UserID"] = "-1";
 							$nationalGroups = aptify_get_GetAptifyData("19", $sendData);
-							sort($nationalGroups);
+                            $arrColumn = array_column($nationalGroups, 'NGtitle');
+                            array_multisort($arrColumn, SORT_ASC, $nationalGroups);	
 						?>
                        <?php
 							foreach ($nationalGroups as $key => $value) {

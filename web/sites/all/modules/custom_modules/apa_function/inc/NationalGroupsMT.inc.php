@@ -26,11 +26,12 @@ foreach($nationalGroup as $Subs) {
 ?>
 <?php logRecorder(); ?>
 <div class="MTtable flex-container" id="mt-national-group">
-
 		<?php
 			$countSubs = count($nationalGroups);
 			$countSubType = $countSubs%2;
 			$counter = 0;
+			$arrColumn = array_column($SubListAll, 'Subscription');
+			array_multisort($arrColumn, SORT_ASC, $SubListAll);
 			foreach($SubListAll as $Subs) {
 				$tr = $counter % 2;
 				if($tr == 0) {
