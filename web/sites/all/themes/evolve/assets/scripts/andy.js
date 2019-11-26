@@ -3015,7 +3015,6 @@ jQuery(document).ready(function() {
     var wrapper = $(this);
 
     var video = $(this).find('iframe');
-    $(video)[0].src = $(video)[0].src.split('#')[0];
     
     $(playBtn).on('click', function () {
       $(wrapper).addClass('active');
