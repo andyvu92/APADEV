@@ -710,7 +710,7 @@ $PRFPrice = 0;
                         oninput="this.value = Math.abs(this.value)" min="0">
                 </div>
         </div>
-        <div class="col-xs-12">
+        <div class="col-xs-12" id="paymentTitle">
 		    <span class="section_title">Payment method</span>
 	    </div>
         <?php 

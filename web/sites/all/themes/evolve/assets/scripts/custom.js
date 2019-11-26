@@ -439,6 +439,7 @@ jQuery(document).ready(function($) {
 	}
 	if($("#p1-2").length===0){
 		 $("#p1-1").attr('checked', true);
+		 $('#installmentMessage').addClass("display-none");
 	}
 	$('input[type="checkbox"]').click(function(){
         if($(this).is(":checked")){
@@ -635,7 +636,7 @@ jQuery(document).ready(function($) {
 		$('#PRFshow').html(Number($("#PRFFinal").val()));
 		$('#todayFullAmount').html(Number(Number(theAcmount)+Number($('#PRFFinal').val())).toFixed(2));
 		$('#todayScheduleAmount').html(Number(Number($('#scheduleHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
-		if($('#todayFullAmount').html()=="0"){
+		if($('#todayFullAmount').html()=="0" || $('#todayFullAmount').html()=="0.00"){
 			$('#hiddenPayment').addClass('display-none');
 			$("#anothercardBlock").removeClass('show');
 		}
@@ -680,12 +681,15 @@ jQuery(document).ready(function($) {
 			$('#PRFdetail').addClass('display-none');
 			$('#todayFullAmount').html($('#fullHiddenAmount').val());
 			$('#todayScheduleAmount').html(Number($('#scheduleHiddenAmount').val()));
-		  if($('#todayFullAmount').html()=="0"){
+		  if($('#todayFullAmount').html()=="0" || $('#todayFullAmount').html()=="0.00"){
 				$('#hiddenPayment').addClass('display-none');
 				$("#anothercardBlock").removeClass('show');
+				$('#paymentTitle').addClass('display-none');
+				
 			}
 			else{
 				$('#hiddenPayment').removeClass('display-none');
+				$('#paymentTitle').removeClass('display-none');
 				if($('#Paymentcard:visible').length === 0){ $('#anothercardBlock').addClass('show');}
 			}
 			//this is end merged steps
@@ -704,7 +708,7 @@ jQuery(document).ready(function($) {
 				//if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 				$('.sidebardis').removeClass('display-none');
 				$('#hiddenPayment').removeClass('display-none');
-				
+					
 			}
 			/*if($('.down6:visible').length !== 0){
 				if($( "#totalPayment").html()=="0.00" || $( "#todayFullAmount").html()=="0.00"){
@@ -725,14 +729,16 @@ jQuery(document).ready(function($) {
 		}
 		else{
 			//this is merged steps
+			$('#paymentTitle').removeClass('display-none');
 			$('#PRFdetail').removeClass('display-none');
 			$("#PRFFinal").val( $("#PRF").val());
 			$('#PRFshow').html(Number($("#PRFFinal").val()).toFixed(2));
 			$('#todayFullAmount').html(Number(Number(theAcmount)+Number($('#PRFFinal').val())).toFixed(2));
 			$('#todayScheduleAmount').html(Number(Number($('#scheduleHiddenAmount').val())+Number($('#PRFFinal').val())).toFixed(2));
-			if($('#todayFullAmount').html()=="0"){
+			if($('#todayFullAmount').html()=="0" || $('#todayFullAmount').html()=="0.00"){
 				$('#hiddenPayment').addClass('display-none');
 				$("#anothercardBlock").removeClass('show');
+
 			}
 			else{
 				$('#hiddenPayment').removeClass('display-none');
