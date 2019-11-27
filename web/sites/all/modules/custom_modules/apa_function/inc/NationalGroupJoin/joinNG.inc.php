@@ -155,7 +155,7 @@ $nationalGroup = $nationalGroups;
 				if(isset($_SESSION['UserId']) && in_array($Subs["NGid"], $myNG)){
 					echo "checked disabled";
 				}
-				echo '>&nbsp;&nbsp;&nbsp;<label class="NGnameText'.$counter.'" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
+				echo '><label class="NGnameText'.$counter.'" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
 					.' <span class="not-avalable"> (You are already a member)</span></label></div>';
 				echo '<div class="flex-col-2"><div class="NGprice'.$counter.'">$'.$Subs["NGprice"].'</div></div></div>';
 				if($tr == 1) {
@@ -181,7 +181,7 @@ $nationalGroup = $nationalGroups;
 						echo " checked";
 					}
 				}
-				echo '>&nbsp;&nbsp;&nbsp;<label class="NGnameText'.$mgCounter.'" for="'.$MG["ProductID"].'">'.$MG["FPtitle"]
+				echo '><label class="NGnameText'.$mgCounter.'" for="'.$MG["ProductID"].'">'.$MG["FPtitle"]
 					.'</label></div>';	
 				echo '<div class="flex-col-2"><div class="NGprice'.$mgCounter.'">$'.$MG["FPprice"].'</div></div></div>';
 				$mgCounter++;
