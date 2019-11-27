@@ -884,6 +884,10 @@ function apa_create_payment_card_form($form, &$form_state){
 		'#maxlength' => 4,
 		'#required' => TRUE,
 	);
+    $form['setDefault'] = array(
+		'#type' => 'checkbox',
+		'#title' => t('Make this card your preferred and/or instalment payment method'),
+	);
 
    
 
@@ -899,7 +903,7 @@ function add_payment_card($form, &$form_state){
 	$postPaymentData['Cardno'] = $form["Cardnumber"]["#value"];
 	$postPaymentData['Expiry-date'] = $form["Expirydate"]["#value"];
     $postPaymentData['CCV'] = $form["CCV"]["#value"];
-    $postPaymentData['IsDefault'] = 0;
+    $postPaymentData['IsDefault'] = $form["setDefault"]["#value"];
 	$out = aptify_get_GetAptifyData("15",$postPaymentData);
 	$_SESSION["paymentTabTag"]=1;
 	if($out["result"]=="Failed"){ 
