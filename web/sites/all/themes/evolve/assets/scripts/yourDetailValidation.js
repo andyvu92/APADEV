@@ -27,14 +27,14 @@ jQuery(document).ready(function($) {
 			}
 			if($("input[name=Suburb]").val() ==''){$("input[name=Suburb]").addClass("focuscss");}else{$("input[name=Suburb]").removeClass("focuscss");}
 			if($("input[name=Postcode]").val() ==''){$("input[name=Postcode]").addClass("focuscss");}else{$("input[name=Postcode]").removeClass("focuscss");}
-			if($("input[name=Country]").val() ==''){$("input[name=Country]").addClass("focuscss");}else{$("input[name=Country]").removeClass("focuscss");}
+			if($("select[name=Country]").val() ==''){$("select[name=Country]").addClass("focuscss");}else{$("select[name=Country]").removeClass("focuscss");}
 			if(!$("#Mailing-address").is(":checked")){
 				if($("input[name=Mailing-PObox]").val() ==''){
 						if($("input[name=Mailing-Address_Line_1]").val() ==''){$("input[name=Mailing-Address_Line_1]").addClass("focuscss");}else{$("input[name=Mailing-Address_Line_1]").removeClass("focuscss");}
 				}
 				if($("input[name=Mailing-city-town]").val() ==''){$("input[name=Mailing-city-town]").addClass("focuscss");}else{$("input[name=Mailing-city-town]").removeClass("focuscss");}
 				if($("input[name=Mailing-postcode]").val() ==''){$("input[name=Mailing-postcode]").addClass("focuscss");}else{$("input[name=Mailing-postcode]").removeClass("focuscss");}
-				if($("input[name=Mailing-Country]").val() ==''){$("input[name=Mailing-Country]").addClass("focuscss");}else{$("input[name=Mailing-Country]").removeClass("focuscss");}
+				if($("select[name=Mailing-Country]").val() ==''){$("select[name=Mailing-Country]").addClass("focuscss");}else{$("select[name=Mailing-Country]").removeClass("focuscss");}
 			}
 				   
 			var i = $("input[name=wpnumber]").val();
@@ -49,7 +49,7 @@ jQuery(document).ready(function($) {
 						if($("input[name=Wcity"+x+"]").val() ==''){$("input[name=Wcity"+x+"]").addClass("focuscss");}else{$("input[name=Wcity"+x+"]").removeClass("focuscss");}
 						if($("input[name=Wpostcode"+x+"]").val() ==''){$("input[name=Wpostcode"+x+"]").addClass("focuscss");}else{$("input[name=Wpostcode"+x+"]").removeClass("focuscss");}
 						if($("input[name=Wphone"+x+"]").val() ==''){$("input[name=Wphone"+x+"]").addClass("focuscss");}else{$("input[name=Wphone"+x+"]").removeClass("focuscss");}
-						if($("input[name=Wcountry"+x+"]").val() ==''){$("input[name=Wcountry"+x+"]").addClass("focuscss");}else{$("input[name=Wcountry"+x+"]").removeClass("focuscss");}
+						if($("select[name=Wcountry"+x+"]").val() ==''){$("select[name=Wcountry"+x+"]").addClass("focuscss");}else{$("select[name=Wcountry"+x+"]").removeClass("focuscss");}
 						//if($("input[name=Wemail"+x+"]").val() ==''){$("input[name=Wemail"+x+"]").addClass("focuscss");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss");}
 						if($("input[name=Wemail"+x+"]").val()!="") {if (!isValidEmailAddress($("input[name=Wemail"+x+"]").val())) {$("input[name=Wemail"+x+"]").addClass("focuscss");$("#EmailMessage"+x).html("this email address is not valid");}else{$("input[name=Wemail"+x+"]").removeClass("focuscss"); $("#EmailMessage"+x).html("");}}
 						//if($("input[name=Wwebaddress"+x+"]").val() ==''){$("input[name=Wwebaddress"+x+"]").addClass("focuscss");}else{$("input[name=Wwebaddress"+x+"]").removeClass("focuscss");}
@@ -73,7 +73,7 @@ jQuery(document).ready(function($) {
 					if($("input[name=Undergraduate-university-name-other"+t+"]").length!== 0){
 						if($("input[name=Undergraduate-university-name-other"+t+"]").val() ==''){$("input[name=Undergraduate-university-name-other"+t+"]").addClass("focuscss");}else{$("input[name=Undergraduate-university-name-other"+t+"]").removeClass("focuscss");}
 					}
-					if($("input[name=Ugraduate-country"+t+"]").val() ==''){$("input[name=Ugraduate-country"+t+"").addClass("focuscss");}else{$("select[name=Ugraduate-country"+t+"").removeClass("focuscss");}
+					if($("select[name=Ugraduate-country"+t+"]").val() ==''){$("select[name=Ugraduate-country"+t+"").addClass("focuscss");}else{$("select[name=Ugraduate-country"+t+"").removeClass("focuscss");}
 					if($("select[name=Ugraduate-yearattained"+t+"]").val() ==''){$("select[name=Ugraduate-yearattained"+t+"]").addClass("focuscss");}else{$("select[name=Ugraduate-year-attained"+t+"]").removeClass("focuscss");}
 					
 				}
@@ -94,7 +94,7 @@ jQuery(document).ready(function($) {
 			//if($("select[name=State]").val() ==''){
 				//return false;
 			//}
-			if($("input[name=Country]").val() ==''||$("input[name=Postcode]").val() ==''||$("input[name=Suburb]").val() ==''){
+			if($("select[name=Country]").val() ==''||$("input[name=Postcode]").val() ==''||$("input[name=Suburb]").val() ==''){
 				return false;
 			}
 			if(!$("#Mailing-address").is(":checked")){
@@ -104,7 +104,7 @@ jQuery(document).ready(function($) {
 					}
 				}
 				
-				if($("input[name=Mailing-Country").val() ==''||$("input[name=Mailing-postcode]").val() ==''||$("input[name=Mailing-city-town]").val() ==''){
+				if($("select[name=Mailing-Country").val() ==''||$("input[name=Mailing-postcode]").val() ==''||$("input[name=Mailing-city-town]").val() ==''){
 					return false;
 				}
 			}
@@ -122,7 +122,7 @@ jQuery(document).ready(function($) {
 								return false;
 							}
 							
-							if($("input[name=Wcountry"+x+"]").val() ==''||$("select[name=Number-worked-hours"+x+"]").val() ==''){
+							if($("select[name=Wcountry"+x+"]").val() ==''||$("select[name=Number-worked-hours"+x+"]").val() ==''){
 								return false;
 							}
 						}
