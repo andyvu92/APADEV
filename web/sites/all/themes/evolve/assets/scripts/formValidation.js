@@ -297,7 +297,7 @@ jQuery(document).ready(function($) {
 					}
 				}
 				
-				if($(".down20 select[name=Mailing-country").val() ==''||$(".down20 input[name=Mailing-postcode]").val() ==''||$(".down20 input[name=Mailing-city-town]").val() ==''){
+				if($(".down20 select[name=Mailing-countr]").val() ==''||$(".down20 input[name=Mailing-postcode]").val() ==''||$(".down20 input[name=Mailing-city-town]").val() ==''){
 					return false;
 				}
 			}
