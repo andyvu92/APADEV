@@ -70,7 +70,7 @@ jQuery(document).ready(function($) {
 					}
 				}
 				
-				if($("select[name=Mailing-Country").val() ==''||$("input[name=Mailing-postcode]").val() ==''||$("input[name=Mailing-city-town]").val() ==''){
+				if($("select[name=Mailing-Country]").val() ==''||$("input[name=Mailing-postcode]").val() ==''||$("input[name=Mailing-city-town]").val() ==''){
 					return false;
 				}
 				if($("select[name=Mailing-Country]").val()=="Australia"){	
