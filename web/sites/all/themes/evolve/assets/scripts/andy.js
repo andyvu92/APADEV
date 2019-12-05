@@ -3040,4 +3040,17 @@ jQuery(document).ready(function() {
       );
     }
   });
+
+  // media nav
+	$('.auto_media_nav').each(function(){
+		var menuItem = $('.auto_media_nav .media_filter ul li');
+		var wrapper = $(this);
+		$(menuItem).on('click', function(){
+			$(this).addClass('active');
+			$(this).siblings().removeClass('active')
+			var targetDiv = $(this).attr('data-content');
+			$(wrapper).find('div.'+targetDiv).siblings().hide();
+			$(wrapper).find('div.'+targetDiv).fadeIn();
+		});
+	});
 });
