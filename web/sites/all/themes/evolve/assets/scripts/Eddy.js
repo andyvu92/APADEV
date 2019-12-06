@@ -124,4 +124,8 @@ jQuery(document).ready(function($) {
 	
 	/* Client link new page */
 	$("#clients-block div.bxslide a").attr("target", "_blank");
+
+	$('.limitworkplace .close-popup').click(function(){
+		$('.overlay').fadeOut();
+	}
 });

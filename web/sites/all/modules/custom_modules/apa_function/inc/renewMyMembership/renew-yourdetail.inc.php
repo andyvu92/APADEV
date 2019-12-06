@@ -1644,6 +1644,7 @@ jQuery(document).ready(function($) {
 		var i = Number(maxNumber +1);
 		if(i > 12) {
 			$('#limitworkplace').fadeIn();
+			$('.overlay').fadeIn();
 		} else {
 			$('.down3').find('#tabmenu').append('<li class="active" id="workplaceli' + i +
 				'"><a data-toggle="tab" href="#workplace' + i + '">Workplace ' + j +

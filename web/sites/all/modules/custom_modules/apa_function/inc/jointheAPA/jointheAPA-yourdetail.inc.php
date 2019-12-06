@@ -3146,7 +3146,8 @@ endif;
             var j = Number(number +1);
             var i = Number(maxNumber +1);
             if(i > 12) {
-			    $('#limitworkplace').fadeIn();
+                $('#limitworkplace').fadeIn();
+                $('.overlay').fadeIn();
             } else {
                 if(i>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
                 if(number ==0){$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span><a class="skip">Skip this step</a></li>' );}

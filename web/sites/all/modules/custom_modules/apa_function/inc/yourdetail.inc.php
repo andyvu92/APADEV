@@ -1704,9 +1704,8 @@ apa_function_dashboardLeftNavigation_form();
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$('#workplace').click(function(){
-		$('#dashboard-right-content').addClass("autoscroll");
+			$('#dashboard-right-content').addClass("autoscroll");
 		});
-		
 		$('.add-workplace-join').click(function(){
 			var number = Number($('#wpnumber').val());
 			var maxNumber = Number($('#maxumnumber').val());
@@ -1714,6 +1713,7 @@ apa_function_dashboardLeftNavigation_form();
 			var i = Number(maxNumber +1);
 			if(i > 12) {
 				$('#limitworkplace').fadeIn();
+				$('.overlay').fadeIn();
 			} else {
 				$('.down3').find('#tabmenu').append('<li class="active" id="workplaceli' + i +
 					'"><a data-toggle="tab" href="#workplace' + i + '">Workplace ' + j +
