@@ -1046,6 +1046,62 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<label class="light-font-weight" class="light-font-weight" for="Findpublicbuddy"><span class="note-text">NOTE: </span>Please list my details in the public (visbile to other health professionals)</label>
 				</div>
 			</div>-->
+			<?php
+				// variables
+				$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+				$country = json_decode($countrycode, true);
+				usort($country, "cmp");
+
+				$AusStringCountry = "";
+				foreach($country as $pair => $value){
+					$AusStringCountry .= '<option class="CountryOption0" value="'.$country[$pair]['Country'].'"';
+					if ($country[$pair]['Country'] == "Australia"){ $AusStringCountry .= "selected='selected'"; }
+					$AusStringCountry .= '> '.$country[$pair]['Country'].' </option>';
+				}
+				
+				$AusStringCountryCode = "";
+				$countser = 0;
+				foreach($country  as $wcpair => $value){
+					$AusStringCountryCode .= '<option value="'.$country[$wcpair]['TelephoneCode'].'"';
+					if ($country[$wcpair]['ID']=="14"){	$AusStringCountryCode .= "selected='selected'"; }
+					$AusStringCountryCode .= '> '.$country[$wcpair]['Country'].' </option>';
+				}
+
+				function countryLoop($countryInput, $keys, $AusString) {
+					$returnString = "";
+					if($countryInput == "Australia") {
+						$returnString = $AusString;
+					} else {
+						foreach($country  as $pair => $value){
+							$returnString .= '<option class="CountryOption'.$country[$keys]['ID'].'" value="'.$country[$pair]['Country'].'"';
+							if ($countryInput == $country[$pair]['Country']){ $returnString  .= "selected='selected'"; }
+							elseif(empty($countryInput) && $country[$pair]['ID']=="14"){
+								$returnString  .= "selected='selected'";
+							}
+							$returnString  .= '> '.$country[$pair]['Country'].' </option>';
+						}
+					}
+					return $returnString;
+				}
+				
+				function countryCodeLoop($countryInput, $keys, $AusString) {
+					$returnString = "";
+					if($countryInput == "Australia") {
+						$returnString = $AusString;
+					} else {
+						$countser = 0;
+						foreach($country  as $wcpair => $value){
+							echo '<option value="'.$country[$wcpair]['TelephoneCode'].'"';
+							if ($countryInput == preg_replace('/\s+/', '', $country[$wcpair]['TelephoneCode']) && $countser == 0) { echo "selected='selected'"; $countser++;} 
+							elseif(empty($countryInput) && $country[$wcpair]['ID']=="14"){
+								echo "selected='selected'";
+							}
+							echo '> '.$country[$wcpair]['Country'].' </option>';
+						}
+					}
+					return $returnString;
+				}
+			?>
 		<ul class="nav nav-tabs" id="tabmenu">
 		<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
 		<li <?php if($key=='Workplace0') echo 'class ="active" ';?> id="workplaceli<?php echo $key;?>"><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a><span class="calldeletewp<?php echo $key;?>"></span></li>
@@ -1055,7 +1111,12 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 		<?php //endif; ?>
 		</ul>
 		<div id="workplaceblocks">
-			<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
+			<?php // stopper
+				$temMax = 12; $workCounter = 1;
+				foreach( $details['Workplaces'] as $key => $value ):  
+					if($workCounter > $temMax) {break;}
+					$workCounter++;
+			?>
 				<div id="workplace<?php echo $key;?>" class='tab-pane fade <?php if($key=='Workplace0') echo "in active ";?>'> 
 				<input type="hidden" name="WorkplaceID<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['WorkplaceID'];?>">
 
@@ -1073,32 +1134,6 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<label for="Name-of-workplace">Practice name<span class="tipstyle"> *</span></label>
 						<input type="text" class="form-control" name="Name-of-workplace<?php echo $key;?>" id="Name-of-workplace<?php echo $key;?>" <?php if (empty($details['Workplaces'][$key]['Name-of-workplace'])) {echo "placeholder='Name of workplace'";}   else{ echo 'value="'.$details['Workplaces'][$key]['Name-of-workplace'].'"'; }?>>
 					</div>
-
-				<!--<div class="row"> 
-						<div class="col-xs-12 col-md-6">
-						<label>Workplace treatment area:</label>
-						<?php  
-					if(!empty($details['Workplaces'][$key]['SpecialInterestAreaID'])) {$SpecialInterestAreaID = explode(",",$details['Workplaces'][$key]['SpecialInterestAreaID']); } else {$SpecialInterestAreaID = array();}
-					?>
-						<div class="plus-select-box">
-						<select id="WTreatmentarea<?php //echo $key;?>" name="WTreatmentarea<?php //echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
-						<?php 
-							// get interest area from Aptify via webserice return Json data;
-							$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
-				            $interestAreas=json_decode($interestAreascode, true);	
-						?>
-						<?php 
-							//foreach($interestAreas  as $pair => $value){
-								//echo '<option value="'.$interestAreas[$pair]["ID"].'"';
-								//if (in_array( $interestAreas[$pair]["ID"],$SpecialInterestAreaID)){ echo "selected='selected'"; } 
-								//echo '> '.$interestAreas[$pair]["Name"].' </option>'; 
-							//}
-					    ?>
-						</select>
-						</div>
-					</div>
-					
-				</div>-->
 
 				<div class="row">
 					<div class="col-xs-12">
@@ -1152,17 +1187,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<div class="chevron-select-box">
 						<select class="form-control" id="Wcountry<?php echo $key;?>" name="Wcountry<?php echo $key;?>" required>
 							<?php 
-							//$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							//$country=json_decode($countrycode, true);
-							foreach($country  as $pair => $value){
-								echo '<option class="CountryOption'.$country[$pair]['ID'].'" value="'.$country[$pair]['Country'].'"';
-								if ($details['Workplaces'][$key]['Wcountry'] == $country[$pair]['Country']){ echo "selected='selected'"; } 
-								elseif(empty($details['Workplaces'][$key]['Wcountry']) && $country[$pair]['ID']=="14"){
-									echo "selected='selected'";
-								}
-								echo '> '.$country[$pair]['Country'].' </option>';
-								
-							}
+								$countryList = countryLoop($details['Workplaces'][$key]['Wcountry'], $key, $AusStringCountry);
+								echo $countryList;
 							?>
 						</select>
 						</div>
@@ -1186,22 +1212,12 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<div class="col-xs-6 col-md-3">
 						<label for="">Country code</label>
 						<div class="chevron-select-box">
-						<select class="form-control" id="WPhoneCountryCode<?php echo $key;?>" name="WPhoneCountryCode<?php echo $key;?>">
-						<?php
-						
-							//$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-							//$country = json_decode($countrycode, true);	
-							$countser = 0;								
-							foreach($country  as $pair => $value){
-								echo '<option value="'.$country[$pair]['TelephoneCode'].'"';
-								if ($details['Workplaces'][$key]['WPhoneCountryCode'] == preg_replace('/\s+/', '', $country[$pair]['TelephoneCode']) && $countser == 0) { echo "selected='selected'"; $countser++;} 
-								elseif(empty($details['Workplaces'][$key]['WPhoneCountryCode']) && $country[$pair]['ID']=="14"){
-									echo "selected='selected'";
-								}
-								echo '> '.$country[$pair]['Country'].' </option>';
-							}
-						?>
-						</select>
+							<select class="form-control" id="WPhoneCountryCode<?php echo $key;?>" name="WPhoneCountryCode<?php echo $key;?>">
+							<?php 
+								$countryList = countryCodeLoop($details['Workplaces'][$key]['Wcountry'], $key, $AusStringCountryCode);
+								echo $countryList;
+							?>
+							</select>
 						</div>
 					</div>
 
@@ -1606,6 +1622,15 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<a class="cancelDeleteButton" value="no" target="_self">No</a>
 				</div>
 		</div>
+		<!-- Workplace limit POPUP -->
+		<div id="limitworkplace">
+			<span class="close-popup"></span>
+			<div class="flex-cell">
+				<h3 class="light-lead-heading cairo">Limit reached</h3>
+				<span>Please note, the number of practices you can list is limited to 12.</span>
+			</div>								
+		</div>
+		<!-- END Workplace limit POPUP -->
 <script type="text/javascript">
 jQuery(document).ready(function($) {
 	$('#workplace').click(function(){
@@ -1617,21 +1642,34 @@ jQuery(document).ready(function($) {
 		var maxNumber = Number($('#maxumnumber').val());
 		var j = Number(number +1);
 		var i = Number(maxNumber +1);
-	
-		$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span></li>' );
-		$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in"></div>');
-		
-		$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
-		$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
-		$('input[name=wpnumber]').val(j);
-		$('input[name=maxumnumber]').val(i);
-		var memberType = $('select[name=MemberType]').val();
-		var sessionvariable = '<?php echo json_encode($_SESSION["workplaceSettings"]);?>';
-		var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
-		var sessionLanguage = '<?php echo json_encode($_SESSION["Language"]);?>';
-		var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
-		  $("#workplace"+ i ).load("load/workplace", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
+		if(i > 12) {
+			$('#limitworkplace').fadeIn();
+		} else {
+			$('.down3').find('#tabmenu').append('<li class="active" id="workplaceli' + i +
+				'"><a data-toggle="tab" href="#workplace' + i + '">Workplace ' + j +
+				'</a><span class="calldeletewp' + i + '"></span></li>');
+			$('div[id="workplaceblocks"]').append('<div id="workplace' + i +
+				'" class="tab-pane fade active in"></div>');
 
+			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
+			$('div[id^=workplace]:not(#workplace' + i + ')').removeClass("active in");
+			$('input[name=wpnumber]').val(j);
+			$('input[name=maxumnumber]').val(i);
+			var memberType = $('select[name=MemberType]').val();
+			var sessionvariable = '<?php echo json_encode($_SESSION["workplaceSettings"]);?>';
+			var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
+			var sessionLanguage = '<?php echo json_encode($_SESSION["Language"]);?>';
+			var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
+
+			$("#workplace" + i).load("load/workplace", {
+				"count": i,
+				"sessionWorkplaceSetting": sessionvariable,
+				"sessioninterestAreas": sessionInterest,
+				"sessionLanguage": sessionLanguage,
+				"sessionCountry": sessionCountry,
+				"memberType": memberType
+			});
+		}
 	});
 	$("[class^=deletewp]").live( "click", function(){
 		  var x = $(this).attr("class").replace('deletewp', '');
@@ -1709,25 +1747,24 @@ jQuery(document).ready(function() {
 		var ngArray = $('select[id=Nationalgp]').val().toString().split(",");
 		for(var i=0; i < ngArray.length; i++){
 			if(ngQuatation.includes(ngArray[i])){
-					macpTag = true;
-					break;
+				macpTag = true;
+				break;
 			}
 			else{
-					macpTag = false;
-				}
-				
+				macpTag = false;
 			}
-			if(macpTag){
-				if($('#fpnew').length!=0 ) {$( "#fpnew" ).removeClass('display-none');}
-				if($('#fpQuatation').length!=0 && $('#fpnew').length==0){
-					$('#addfap').append('<div id="fpnew"><input class="styled-checkbox" type="checkbox" id="fap" checked="checked" name="fap" value="1"><label class="light-font-weight" style="margin-top: 15px; font-weight: 700;" for="fap">I would like to be part of the Australian College of Physiotherapists</label><p style="margin-bottom: 0"><span class="note-text">Please note:</span> Ticking this box adds an extra $110 to the price of your membership. If you have passed your APA Titling pathway, you are eligible to purchase ACP membership and entitled to use the MACP title.</p></div>');
-				}
+		}
+		if(macpTag){
+			if($('#fpnew').length!=0 ) {$( "#fpnew" ).removeClass('display-none');}
+			if($('#fpQuatation').length!=0 && $('#fpnew').length==0){
+				$('#addfap').append('<div id="fpnew"><input class="styled-checkbox" type="checkbox" id="fap" checked="checked" name="fap" value="1"><label class="light-font-weight" style="margin-top: 15px; font-weight: 700;" for="fap">I would like to be part of the Australian College of Physiotherapists</label><p style="margin-bottom: 0"><span class="note-text">Please note:</span> Ticking this box adds an extra $110 to the price of your membership. If you have passed your APA Titling pathway, you are eligible to purchase ACP membership and entitled to use the MACP title.</p></div>');
 			}
-			else{
-				$( "#fpnew" ).addClass('display-none');
-				$( "#fpnew #fap" ).val('0');
-				$("#fpnew #fap").attr('checked', false);
-			}
+		}
+		else{
+			$( "#fpnew" ).addClass('display-none');
+			$( "#fpnew #fap" ).val('0');
+			$("#fpnew #fap").attr('checked', false);
+		}
 	}
 	else{
 		$( "#fpnew" ).addClass('display-none');

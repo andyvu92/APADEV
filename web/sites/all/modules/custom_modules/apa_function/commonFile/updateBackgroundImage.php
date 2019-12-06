@@ -25,8 +25,8 @@ if(isset($_POST["update"]) && isset($_POST["background"]) &&($_POST['background'
 			$backgroundGet = null;
 		}
 		$backgroundUpdate->bindValue(':userID', $userID);
-		$backgroundUpdate->bindValue(':imageID', $imageID);		  
-		$backgroundUpdate->execute();	
+		$backgroundUpdate->bindValue(':imageID', $imageID);
+		$backgroundUpdate->execute();
 		$backgroundUpdate = null;
 	}
 	catch (PDOException $e) {

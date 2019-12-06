@@ -1071,7 +1071,7 @@ jQuery(document).ready(function($) {
 
 	$('.cancelDeleteButton').click(function() {
         $('#deleteCardWindow').dialog('close');
-    });	
+	});	
 	$('#registerPDUserButton').click(function(){
 		$( "#registerPDUser" ).dialog();
     });

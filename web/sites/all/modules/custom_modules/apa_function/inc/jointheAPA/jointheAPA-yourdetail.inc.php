@@ -1393,38 +1393,6 @@ array_multisort($Title, SORT_ASC, $MemberType);
                    </select>
                    </div>
                 </div>
-           
-            <!--<div class="row"> 
-                <div class="col-lg-3">
-                Your treatment area:
-                </div>
-            </div>
-            <div class="row"> 
-                <div class="col-lg-6">
-                    
-                <div class="plus-select-box">    
-                <select id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
-                    <?php
-    
-    // $interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
-    // $interestAreas=json_decode($interestAreascode, true);
-    
-?>
-                   <?php
-    
-    // foreach($interestAreas  as $key => $value){
-    // echo '<option value="'.$interestAreas[$key]["ID"].'"';
-    // if (in_array( $interestAreas[$key]["ID"],$details['Treatmentarea'])){ echo "selected='selected'"; }
-    // echo '> '.$interestAreas[$key]["Name"].' </option>';
-    // }
-    
-?>
-                   </select>
-                   </div>
-                </div>
-            </div>-->
-                
-
             </div>
             <div class="col-xs-12 btn_wrapper">   
                 <a class="join-details-button2" variant="next">
@@ -1450,16 +1418,6 @@ array_multisort($Title, SORT_ASC, $MemberType);
 ?>"/>
     <input id="maxumnumber" type="hidden" name="maxumnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =0; echo $wpnumber;} ?>">
         <div class="down3" style="display:none;">
-            <!--<div class="col-xs-12"> 
-                <input style="min-height: 0" type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="<?php
-    //echo $details['Findpublicbuddy'];
-?>" <?php
-    //if ($details['Findpublicbuddy'] == "True") {
-        //echo "checked";
-    //}
-?>>
-                <label for="Findpublicbuddy" class="light-font-weight">NOTE: Please list my details in the public (visbile to other health professionals)</label>
-            </div>-->
 			
 			<div class="row">
             <ul class="nav nav-tabs" id="tabmenu">
@@ -1796,54 +1754,6 @@ array_multisort($Title, SORT_ASC, $MemberType);
         }
 ?>>
                             </div>
-                            <!--<div class="col-xs-6 col-md-3">
-                                <label for="">Extention Number</label>
-                                <input type="text" class="form-control" name="WPhoneExtentions<?php
-        //echo $key;
-?>" <?php
-        //if (empty($details['Workplaces'][$key]['WPhoneExtentions'])) {
-           // echo "placeholder='Extentions Number'";
-        //} else {
-           // echo 'value="' . $details['Workplaces'][$key]['WPhoneExtentions'] . '"';
-        //}
-?>  >
-                            </div>-->
-                            
-                        <!--BREAK-->
-                    
-                        <div class="row">
-                            <!--<div class="col-xs-12">
-                                <label>Choose the languages you speak in your practice?</label>
-                                <?php /*
-        if (!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {
-            $WAdditionalLanguage = explode(",", $details['Workplaces'][$key]['AdditionalLanguage']);
-        } else {
-            $WAdditionalLanguage = array();
-        }*/
-        
-?>
-                               
-                               <div class="plus-select-box">
-                               <select id="Additionallanguage<?php
-        //echo $key;
-?>" name="Additionallanguage<?php
-        //echo $key;
-?>[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
-                                    <?php
-       /*
-        foreach ($Language as $pair => $value) {
-            echo '<option value="' . $Language[$pair]['ID'] . '"';
-            if (in_array($Language[$pair]['ID'], $WAdditionalLanguage)) {
-                echo "selected='selected'";
-            }
-            
-            echo '> ' . $Language[$pair]['Name'] . ' </option>';
-        }*/
-        
-?>
-                               </select>
-                                </div>
-                            </div>-->
                             <div class="col-xs-12 col-md-6">
                                 <label>Quality In Practice number&nbsp;(QIP)</label>
                                 <input type="text" class="form-control" name="QIP<?php
@@ -1881,36 +1791,6 @@ array_multisort($Title, SORT_ASC, $MemberType);
                                         echo $key;
                                 ?>">Electronic claiming</label>
                             </div>
-                            <!--<div class="col-xs-6 col-md-3">
-                                <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Hicaps<?php
-                                   // echo $key;
-                            ?>" id="Hicaps<?php
-                                    //echo $key;
-                            ?>" value="<?php
-                                    //echo $details['Workplaces'][$key]['Hicaps'];
-                            ?>" <?php
-                                    //if ($details['Workplaces'][$key]['Hicaps'] == "True") {
-                                        //echo "checked";
-                                    //}
-                            ?>> <label for="Hicaps<?php
-                                    //echo $key;
-                            ?>">HICAPS</label>
-                            </div>
-                            <div class="col-xs-6 col-md-3">
-                                <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Healthpoint<?php
-                                //echo $key;
-                        ?>" id="Healthpoint<?php
-                                //echo $key;
-                        ?>" value="<?php
-                                //echo $details['Workplaces'][$key]['Healthpoint'];
-                        ?>" <?php
-                                //if ($details['Workplaces'][$key]['Healthpoint'] == "True") {
-                                   // echo "checked";
-                                //}
-                        ?>> <label for="Healthpoint<?php
-                                //echo $key;
-                        ?>">Healthpoint</label>
-                            </div>-->
                             <div class="col-xs-6 col-md-3">
                                 <input class="styled-checkbox" style="min-height: 0" type="checkbox" name="Departmentva<?php
                                     echo $key;
@@ -2285,110 +2165,18 @@ array_multisort($Title, SORT_ASC, $MemberType);
                             </div>
                             
                         </div>
-                    <!--<?php //if($key!="0"):?>-->
                     <div class="col-xs-12">
                         <a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>">
                             <span class="icon delete_icon"></span> Delete
                         </a>
                     </div>
-						
-                    <!--<?php //endif;?>-->
-					</div>
-                <?php
-    endforeach;
-?>
-	<?php if(sizeof($details['PersonEducation'])==0):?>
-	<div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please add your qualifications or click next to continue</p></div>
-					<!--<div id="additional0">
-					
-					   <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                                <label for="Udegree">Degree<span class="tipstyle"> *</span></label>
-                                <div class="chevron-select-box">
-                                <select class="form-control" name="Udegree0" id="Udegree0">
-								<option value="" selected disabled>Please select</option>
-                                    <?php
-                                        $degreecode         = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
-                                        $degree             = json_decode($degreecode, true);
-                                        $_SESSION["degree"] = $degree;
-                                        foreach ($degree as $pair => $value) {
-                                            echo '<option value="' . $degree[$pair]['ID'] . '"';
-                                            echo '> ' . $degree[$pair]['Name'] . ' </option>';
-                                        }
-                                    ?>
-                                <option value="0">Other</option>
-                                </select>
-                                </div>
-                                <input type="text" class="form-control display-none" name="University-degree0" id="University-degree0">
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-12 col-sm-6">
-                                <label for="Undergraduateuniversity-name0">University name<span class="tipstyle"> *</span></label>
-                                <?php
-                                    $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
-                                    $University             = json_decode($universityCode, true);
-									$name = array();
-										foreach ($University as $ukey => $row)
-										{
-											$name[$ukey] = $row['Name'];
-										}
-										array_multisort($name, SORT_ASC, $University);
-                                    $_SESSION["University"] = $University;
-                                ?>
-                            <div class="chevron-select-box">
-                            <select class="form-control" name="Undergraduate-university-name0" id="Undergraduate-university-name0">
-                                <option value="" selected disabled>Please select</option>
-								<?php
-                                    foreach ($University as $pair => $value) {
-                                        echo '<option value="' . $University[$pair]['ID'] . '"';
-                                        echo '> ' . $University[$pair]['Name'] . ' </option>';
-                                    }
-                                ?>    
-                                    <option value="0">Other</option>
-                                </select>
-                                </div>
-                                <input type="text" class="form-control display-none" name="Undergraduate-university-name-other0" id="Undergraduate-university-name-other0">
-                            </div>
-                        </div>
-
-						<div class="row">
-                            <div class="col-xs-6 col-sm-6">
-                                <label for="Ugraduate-yearattained0">Year attained or expected graduation date<span class="tipstyle"> *</span></label>
-                                <div class="chevron-select-box">
-                                <select class="form-control" name="Ugraduate-yearattained0" id="Ugraduate-yearattained0">
-								<option value="" selected disabled>Please select</option>                               
-							   <?php
-                                    /*$y = date("Y") + 10;
-                                    for ($i = 1940; $i <= $y; $i++) {
-                                        echo '<option value="' . $i . '">' . $i . '</option>';
-                                    }*/
-                                ?>
-                                </select>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-6 col-sm-6">
-                                <label for="Ugraduate-country0">Country<span class="tipstyle"> *</span></label>
-                                <div class="chevron-select-box">
-                                <select class="form-control" id="Ugraduate-country0" name="Ugraduate-country0">
-                                <?php
-                                    /*$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
-                                    $country     = json_decode($countrycode, true);
-                                    foreach ($country as $key => $value) {
-                                        echo '<option value="' . $country[$key]['ID'] . '"';
-                                        if($country[$key]['ID']=="14"){echo "selected='selected'";}
-                                        echo '> ' . $country[$key]['Country'] . ' </option>';
-                                    }*/
-                                ?>
-                                </select>
-                                </div>
-                            </div>
-                        </div>
-						<a class="callDeleteEdu" id="deleteEducation0"><span class="dashboard-button-name">Delete</span></a>
-					</div>-->
-				<?php endif; ?>
+                </div>
+            <?php
+                endforeach;
+            ?>
+            <?php if(sizeof($details['PersonEducation'])==0):?>
+                <div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please add your qualifications or click next to continue</p></div>
+            <?php endif; ?>
 
             </div>
             
@@ -2538,14 +2326,14 @@ if(isset($_POST['MT'])){
 						  
                             <option value="" selected disabled>Please select</option>
 							<?php
-    $Gendercode = file_get_contents("sites/all/themes/evolve/json/Gender.json");
-    $Gender     = json_decode($Gendercode, true);
-    foreach ($Gender as $key => $value) {
-        echo '<option value="' . $Gender[$key]['ID'] . '"';
-		echo '> ' . $Gender[$key]['Description'] . ' </option>';
-    }
-    
-?>
+                                $Gendercode = file_get_contents("sites/all/themes/evolve/json/Gender.json");
+                                $Gender     = json_decode($Gendercode, true);
+                                foreach ($Gender as $key => $value) {
+                                    echo '<option value="' . $Gender[$key]['ID'] . '"';
+                                    echo '> ' . $Gender[$key]['Description'] . ' </option>';
+                                }
+                                
+                            ?>
                           </select>
                           </div>
                         </div>
@@ -2604,16 +2392,15 @@ if(isset($_POST['MT'])){
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="country-code" name="country-code">
                                 <?php
-    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
-    $country     = json_decode($countrycode, true);
-	usort($country, "cmp");
-    foreach ($country as $key => $value) {
-        echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
-		if($country[$key]['ID']=="14"){echo "selected='selected'";}
-        echo '> ' . $country[$key]['Country'] . ' </option>';
-    }
-    
-?>
+                                    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+                                    $country     = json_decode($countrycode, true);
+                                    usort($country, "cmp");
+                                    foreach ($country as $key => $value) {
+                                        echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
+                                        if($country[$key]['ID']=="14"){echo "selected='selected'";}
+                                        echo '> ' . $country[$key]['Country'] . ' </option>';
+                                    }
+                                ?>
                                </select>
                                </div>
                             </div>
@@ -2640,26 +2427,22 @@ if(isset($_POST['MT'])){
                                 <div class="chevron-select-box">
                                 <select class="form-control" id="Mobile-country-code" name="Mobile-country-code">
                                 <?php
-    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
-    $country     = json_decode($countrycode, true);
-	usort($country, "cmp");
-    foreach ($country as $key => $value) {
-        echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
-		if($country[$key]['ID']=="14"){echo "selected='selected'";}
-        echo '> ' . $country[$key]['Country'] . ' </option>';
-    }
-    
-?>
+                                    $countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+                                    $country     = json_decode($countrycode, true);
+                                    usort($country, "cmp");
+                                    foreach ($country as $key => $value) {
+                                        echo '<option value="' . $country[$key]['TelephoneCode'] . '"';
+                                        if($country[$key]['ID']=="14"){echo "selected='selected'";}
+                                        echo '> ' . $country[$key]['Country'] . ' </option>';
+                                    }
+                                    
+                                ?>
                                </select>
                                </div>
                             </div>
                             <?php
-    $_SESSION['country'] = $country;
-?>
-                           <!--<div class="col-xs-6 col-md-3">
-                                <label for="">Area code</label>
-                                <input type="text" class="form-control" name="Mobile-area-code"  maxlength="5">
-                            </div>-->
+                                $_SESSION['country'] = $country;
+                            ?>
                             <div class="col-xs-6 col-md-3">
                                 <label for="">Mobile number<span class="tipstyle"> *</span></label>
                                 <input type="text" class="form-control" name="Mobile-number">
@@ -2710,15 +2493,15 @@ if(isset($_POST['MT'])){
                             <select class="form-control" id="State1" name="State" autocomplete="address-level1">
                                 <option value="" selected disabled> State </option>
                                 <?php
-    $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
-    $State     = json_decode($statecode, true);
-	foreach ($State as $key => $value) {
-        //echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="' . $State[$key]['Abbreviation'] . '"';
-        echo '<option value="' . $State[$key]['Abbreviation'] . '"';
-		echo '> ' . $State[$key]['Abbreviation'] . ' </option>';
-    }
-    
-?>
+                                    $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
+                                    $State     = json_decode($statecode, true);
+                                    foreach ($State as $key => $value) {
+                                        //echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="' . $State[$key]['Abbreviation'] . '"';
+                                        echo '<option value="' . $State[$key]['Abbreviation'] . '"';
+                                        echo '> ' . $State[$key]['Abbreviation'] . ' </option>';
+                                    }
+                                    
+                                ?>
                            </select>
                            </div>
 
@@ -2728,15 +2511,13 @@ if(isset($_POST['MT'])){
                             <div class="chevron-select-box">
                             <select class="form-control" id="Country1" name="Country" autocomplete="country">
                             <?php
-    //$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
-    //$country     = json_decode($countrycode, true);
-    foreach ($country as $key => $value) {
-        echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$key]['Country'] . '"';
-		if($country[$key]['ID']=="14"){echo "selected='selected'";}
-        echo '> ' . $country[$key]['Country'] . ' </option>';
-    }
-    
-?>
+                                foreach ($country as $key => $value) {
+                                    echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$key]['Country'] . '"';
+                                    if($country[$key]['ID']=="14"){echo "selected='selected'";}
+                                    echo '> ' . $country[$key]['Country'] . ' </option>';
+                                }
+                                
+                            ?>
                            </select>
                            </div>
                         </div>
@@ -2792,15 +2573,15 @@ if(isset($_POST['MT'])){
                            <select class="form-control" name="Mailing-State" id="State2" autocomplete="address-level1">
                                 <option value="" selected='selected' disabled> State </option>
                                 <?php
-    $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
-    $State     = json_decode($statecode, true);
-    foreach ($State as $key => $value) {
-        //echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="' . $State[$key]['Abbreviation'] . '"';
-        echo '<option value="' . $State[$key]['Abbreviation'] . '"';
-		echo '> ' . $State[$key]['Abbreviation'] . ' </option>';
-    }
-    
-?>
+                                    $statecode = file_get_contents("sites/all/themes/evolve/json/State.json");
+                                    $State     = json_decode($statecode, true);
+                                    foreach ($State as $key => $value) {
+                                        //echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="' . $State[$key]['Abbreviation'] . '"';
+                                        echo '<option value="' . $State[$key]['Abbreviation'] . '"';
+                                        echo '> ' . $State[$key]['Abbreviation'] . ' </option>';
+                                    }
+                                    
+                                ?>
                           </select>
                           </div>
                         </div>
@@ -2808,44 +2589,27 @@ if(isset($_POST['MT'])){
                            <label for="">Country<span class="tipstyle"> *</span></label>
                                <div class="chevron-select-box">
                                <select class="form-control" id="Country2" name="Mailing-Country" autocomplete="country">
-                            <?php
-    //$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
-    //$country     = json_decode($countrycode, true);
-    foreach ($country as $key => $value) {
-        echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$key]['Country'] . '"';
-		if($country[$key]['ID']=="14"){echo "selected='selected'";}
-        echo '> ' . $country[$key]['Country'] . ' </option>';
-    }
-    
-?>
+                              <?php
+                                    //$countrycode = file_get_contents("sites/all/themes/evolve/json/Country.json");
+                                    //$country     = json_decode($countrycode, true);
+                                    foreach ($country as $key => $value) {
+                                        echo '<option class="CountryOption'.$country[$key]['ID'].'" value="' . $country[$key]['Country'] . '"';
+                                        if($country[$key]['ID']=="14"){echo "selected='selected'";}
+                                        echo '> ' . $country[$key]['Country'] . ' </option>';
+                                    }
+                                    
+                                ?>
                            </select>
                            </div>
                         </div>
                     </div>
                     
                 </div>
-                 <!-- <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-right">
-                     <div class="row form-image">
-                        <div class="col-lg-12">
-                        Upload/change image
-                           <form id ="upload-Image-Form" action="jointheapa" method="post" enctype="multipart/form-data">
-                           Upload/change image
-                           <input type="file" name="fileToUpload" id="fileToUpload">
-                           <input type="hidden" name="uploadeIamge">
-                         
-                           <a href="javascript:document.getElementById('upload-Image-Form').submit();" class="uploadImageButton">Upload Image</a>
-                           </form>
-                           
-                           
-                        </div>
-                     </div>
-                                               
-                    </div>-->
-                    <div class="col-xs-12 btn_wrapper">   
-                        <a class="join-details-button1" variant="next">
-                            <span class="dashboard-button-name">Next</span>
-                        </a>
-                    </div>
+                <div class="col-xs-12 btn_wrapper">   
+                    <a class="join-details-button1" variant="next">
+                        <span class="dashboard-button-name">Next</span>
+                    </a>
+                </div>
             </div>
             <div class="down2" style="display:none;" >
                 <div class="row">
@@ -3165,36 +2929,31 @@ if(isset($_POST['MT'])){
             </div>
             <?php
     
-    // 2.2.36 - get workplace settings list
-    // Send -
-    // Response - get workplace settings from Aptify via webserice return Json data;
-    // stroe workplace settings into the session
-    
-    $workplaceSettingscode         = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
-    $workplaceSettings             = json_decode($workplaceSettingscode, true);
-    $_SESSION["workplaceSettings"] = $workplaceSettings;
-?>
+                // 2.2.36 - get workplace settings list
+                // Send -
+                // Response - get workplace settings from Aptify via webserice return Json data;
+                // stroe workplace settings into the session
+                
+                $workplaceSettingscode         = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
+                $workplaceSettings             = json_decode($workplaceSettingscode, true);
+                $_SESSION["workplaceSettings"] = $workplaceSettings;
+            ?>
           
             <input id="wpnumber" type="hidden"  name="wpnumber" value="<?php
-    $wpnumber = 0;
-    echo $wpnumber;
-?>"/>
-     <input id="maxumnumber" type="hidden" name="maxumnumber" value="0">
+                $wpnumber = 0;
+                echo $wpnumber;
+            ?>"/>
+            <input id="maxumnumber" type="hidden" name="maxumnumber" value="0">
             
             <div class="down3" style="display:none;">
-                    <!--<div class="col-xs-12"><input type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="0"> <label for="Findpublicbuddy"><strong>NOTE:</strong>Please list my details in the public (visbile to other health professionals)</label>
-                    </div>-->
-			<div class="col-xs-12">
-				<ul class="nav nav-tabs" id="tabmenu">
-				<!--<li class ="active"><a data-toggle="tab" href="#workplace0"><?php
-					//echo "Workplace 1";
-				?></a></li>-->
-				</ul>
-			</div>
+                <div class="col-xs-12">
+                    <ul class="nav nav-tabs" id="tabmenu">
+                    </ul>
+                </div>
 
-            <div id="workplaceblocks">
-        
-            </div>
+                <div id="workplaceblocks">
+            
+                </div>
                 <div class="row"><div class="col-xs-12"><a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a></div></div>
                 <div class="col-xs-12 btn_wrapper">   
                     <a class="join-details-button3" variant="next">
@@ -3337,7 +3096,16 @@ endif;
 					<a id="deleteQButton" class="" value="yes" target="_self">Yes</a>
 					<a class="cancelDeleteButton" value="no" target="_self">No</a>
 				</div>
-		</div>    
+        </div>
+        <!-- Workplace limit POPUP -->
+		<div id="limitworkplace">
+			<span class="close-popup"></span>
+			<div class="flex-cell">
+				<h3 class="light-lead-heading cairo">Limit reached</h3>
+				<span>Please note, the number of practices you can list is limited to 12.</span>
+			</div>								
+		</div>
+		<!-- END Workplace limit POPUP -->
 <script type="text/javascript">
     jQuery(document).ready(function($) {
         $('#workplace').click(function(){
@@ -3376,32 +3144,34 @@ endif;
             var number = Number($('#wpnumber').val());
 			var maxNumber = Number($('#maxumnumber').val());
             var j = Number(number +1);
-			var i = Number(maxNumber +1);
-			if(i>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
-            //var j = Number(number +2);
-			if(number ==0){$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span><a class="skip">Skip this step</a></li>' );}
-            else {$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span></li>' );}
-            $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
-            //$('#wpnumber').text(i);
-			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
-			$('div[id^=workplace]:not(#workplace'+i+')').removeClass("active in");
-            $('input[name=wpnumber]').val(j);
-			$('input[name=maxumnumber]').val(i);
-			var memberType = $('select[name=MemberType]').val();
-            var sessionvariable = '<?php
-            echo json_encode($_SESSION["workplaceSettings"]);
-            ?>';
-                        var sessionInterest = '<?php
-            echo json_encode($_SESSION["interestAreas"]);
-            ?>';
-                    var sessionLanguage = '<?php
-            echo json_encode($_SESSION["Language"]);
-            ?>';
-                    var sessionCountry = <?php
-            echo json_encode($_SESSION['country']);
-?>;
-          $("#workplace"+ i ).load("load/workplace", {"count":i,"sessionWorkplaceSetting":sessionvariable, "sessioninterestAreas":sessionInterest, "sessionLanguage":sessionLanguage, "sessionCountry":sessionCountry, "memberType":memberType});
-          
+            var i = Number(maxNumber +1);
+            if(i > 12) {
+			    $('#limitworkplace').fadeIn();
+            } else {
+                if(i>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
+                if(number ==0){$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span><a class="skip">Skip this step</a></li>' );}
+                else {$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span></li>' );}
+                $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
+
+                $('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
+                $('div[id^=workplace]:not(#workplace' + i + ')').removeClass("active in");
+                $('input[name=wpnumber]').val(j);
+                $('input[name=maxumnumber]').val(i);
+                var memberType = $('select[name=MemberType]').val();
+                var sessionvariable = '<?php echo json_encode($_SESSION["workplaceSettings"]);?>';
+                var sessionInterest = '<?php echo json_encode($_SESSION["interestAreas"]);?>';
+                var sessionLanguage = '<?php echo json_encode($_SESSION["Language"]);?>';
+                var sessionCountry = <?php echo json_encode($_SESSION['country']);?>;
+
+                $("#workplace" + i).load("load/workplace", {
+                    "count": i,
+                    "sessionWorkplaceSetting": sessionvariable,
+                    "sessioninterestAreas": sessionInterest,
+                    "sessionLanguage": sessionLanguage,
+                    "sessionCountry": sessionCountry,
+                    "memberType": memberType
+                });
+            }
         });
         $(document).on( "click", "a[href^=#workplace]", function(){ });
         $(document).on( "click", "[class^=deletewp]",function(){

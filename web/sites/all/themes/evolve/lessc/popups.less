@@ -1006,9 +1006,12 @@ div[aria-describedby="confirmDelete"].ui-dialog, #confirmDeleteMACP{
 }
 
 /*DELETE WORKPLACE*/
-#deleteWorkplaceWindow{
+#deleteWorkplaceWindow, #limitworkplace{
     .small-popup;
     padding: 40px 80px;
+    .close-popup{
+        .small-popup .close-popup;
+    }
     .light-lead-heading{
         color: #000;
         margin-top: 0;
@@ -1057,6 +1060,20 @@ div[aria-describedby="confirmDelete"].ui-dialog, #confirmDeleteMACP{
         .light-lead-heading{
             font-size: 2em;
         }
+    }
+}
+
+#limitworkplace{
+    display: none;
+    padding: 40px;
+    .light-lead-heading{
+        color: @bright-blue;
+    }
+    span:not(.close-popup){
+        display: block;
+        width: 100%;
+        text-align: center;
+        padding-bottom: 35px;
     }
 }
 
