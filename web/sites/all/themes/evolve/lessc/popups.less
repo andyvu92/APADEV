@@ -377,6 +377,12 @@ div[aria-describedby="myMap"] .ui-widget-header{
 /* JOIN/RENEW INSURANCE */
 #insuranceTermsandConditions{
     .large-popup;
+    .close-popup{
+        border-color: #ffffffb0;
+        &:before, &:after{
+            background: #ffffffb0;
+        }
+    }
     .modal-dialog{
         margin-top: 0!important;
     }
@@ -656,19 +662,22 @@ div[aria-describedby="QuatationPopUp"].ui-dialog{
         font-family: Roboto;
         text-align: center;
     }
-     @media all and (max-width: @larger-phone-width) {
-        max-height: 500px;
-        overflow-y: auto!important;
-        top: 15% !important;
-        width: 70%!important;
-        left: 15%!important;
-     }
-     @media all and (max-width: 340px) {
-        max-height: 400px;
-     }
-     @media all and (max-width: @desktop-width) {
+    .ui-dialog-titlebar-close{
+        .small-popup .ui-dialog-titlebar-close;
+    }
+    @media all and (max-width: @desktop-width) {
         top: 30%!important;
-     }
+    }
+    @media all and (max-width: @larger-phone-width) {
+        max-height: calc(~'90vh - 150px');
+        overflow-y: auto!important;
+        top: 10vh !important;
+        width: 80%!important;
+        left: 10%!important;
+    }
+    @media all and (max-width: 340px) {
+        max-height: 400px;
+    }
 }
 
 /* JOIN/RENEW FORMS - INSURANCE */
@@ -705,7 +714,12 @@ div[aria-describedby="QuatationPopUp"].ui-dialog{
     @media @larger-phone-width-down{
         top: 6vh!important;
     }
-    
+    .close-popup{
+        border-color: #ffffffb0;
+        &:before, &:after{
+            background: #ffffffb0;
+        }
+    }
     .modal-header{
         background: @bright-blue;
         color: #fff;

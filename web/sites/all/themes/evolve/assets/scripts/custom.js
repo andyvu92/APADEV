@@ -1714,10 +1714,15 @@ jQuery(document).ready(function($) {
 	});
 
 	//ADD WORKPLACE SCROLL TOP
-	$(document).on('click', '.add-workplace-join', function(){
-		$('html, body').animate({
-			scrollTop: $('#dashboard-right-content').offset().top
-		}, 600);
+	$(document).on('click', '.add-workplace-join', function(e){
+		e.preventDefault();
+		var totalWorkplaces = $(this).next('ul').find('li');
+		var currentWidth = 0;
+		$(totalWorkplaces).each(function(){
+			var width = $(this).width();
+			currentWidth += width;
+		});
+		$(this).next('ul').scrollLeft(currentWidth);
 	});
 	
 	$("input[type=number]").keydown(function (e) {

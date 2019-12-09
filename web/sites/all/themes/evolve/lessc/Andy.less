@@ -6994,3 +6994,38 @@ body a b, body span b{
     background: #f7f7f7;
     border-radius: 12px;
 }
+
+.workplace_nav{
+    display: flex;
+    flex-direction: row;
+    #tabmenu{
+        margin-bottom: 0;
+        > li{
+            > a{
+                
+            }
+        }
+    }
+    .add-workplace-join{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        border-bottom: 1px solid #ddd;
+        border-top: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        padding: 10px 0;
+        margin: 0!important;
+        .icon{
+            width: 20px;
+            height: 20px;
+            svg path{
+                fill: @bright-blue;
+            }
+        }
+        span:not(.icon){
+            font-size: 15px;
+            margin-right: 15px;
+        }
+    }
+}

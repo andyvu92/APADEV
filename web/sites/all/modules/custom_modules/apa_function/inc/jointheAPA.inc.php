@@ -98,7 +98,7 @@ $background = getBackgroundImage($userID);
 	<!-- <span class="close-popup"></span> -->
 	<div class="modal-header">
 		<div class="col-xs-12">
-			<h4 class="modal-title">Australian Physiotherapy Association Terms & Conditions</h4>
+			<h4 class="modal-title">APA Terms & Conditions</h4>
 		</div>
 	</div>
 	

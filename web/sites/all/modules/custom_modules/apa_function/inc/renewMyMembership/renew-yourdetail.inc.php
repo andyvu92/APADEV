@@ -1102,14 +1102,20 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					return $returnString;
 				}
 			?>
-		<ul class="nav nav-tabs" id="tabmenu">
-		<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
-		<li <?php if($key=='Workplace0') echo 'class ="active" ';?> id="workplaceli<?php echo $key;?>"><a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a><span class="calldeletewp<?php echo $key;?>"></span></li>
-		<?php endforeach ?> 
-		<?php //if(sizeof($details['Workplaces'])==0):?>
-		<!--<li class ="active"><a data-toggle="tab" href="#workplace0"><?php //echo "Workplace1";?></a></li>-->
-		<?php //endif; ?>
-		</ul>
+		<div class="col-xs-12 workplace_nav">
+			<a class="add-workplace-join" href="#"><span class="icon plus_circle"></span><span>Add</span></a>
+			<ul class="nav nav-tabs" id="tabmenu">
+			<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
+				<li <?php if($key=='Workplace0') echo 'class ="active" ';?> id="workplaceli<?php echo $key;?>">
+					<a data-toggle="tab" href="#workplace<?php echo $key;?>">
+						<?php $newkey =$key+1; echo "Workplace ".$newkey;?>
+						<span class="calldeletewp<?php echo $key;?>"></span>
+					</a>
+				</li>
+			<?php endforeach ?> 
+			</ul>
+		</div>
+		
 		<div id="workplaceblocks">
 			<?php // stopper
 				$temMax = 12; $workCounter = 1;
@@ -1358,10 +1364,6 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 			</div>
 			<?php endforeach; ?>
 			
-			</div>
-			
-			<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-				<a class="add-workplace-join"><span class="icon plus_circle"></span>Add workplace</a>
 			</div>
 
 			<div class="col-xs-12 btn_wrapper">   
@@ -1648,7 +1650,7 @@ jQuery(document).ready(function($) {
 		} else {
 			$('.down3').find('#tabmenu').append('<li class="active" id="workplaceli' + i +
 				'"><a data-toggle="tab" href="#workplace' + i + '">Workplace ' + j +
-				'</a><span class="calldeletewp' + i + '"></span></li>');
+				'<span class="calldeletewp' + i + '"></span></a></li>');
 			$('div[id="workplaceblocks"]').append('<div id="workplace' + i +
 				'" class="tab-pane fade active in"></div>');
 
@@ -1682,7 +1684,10 @@ jQuery(document).ready(function($) {
 		  
 		$('input[name=wpnumber]').val(t);
 		for (m = 1; m<=t;m++){
-				$('div[class="down3"] #tabmenu li:nth-child(' + m + ') a').html("Workplace "+m);
+			var deleteVal = $('div[class="down3"] #tabmenu li:nth-child('+m+')')
+				.attr('id').replace('workplaceli', '');
+			$('div[class="down3"] #tabmenu li:nth-child(' + m + ') a')
+				.html("Workplace "+m+'<span class="calldeletewp' + deleteVal + '"></span>');
 		}
 	});
 	

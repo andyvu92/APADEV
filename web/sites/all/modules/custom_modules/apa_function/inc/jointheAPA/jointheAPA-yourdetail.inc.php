@@ -1419,35 +1419,19 @@ array_multisort($Title, SORT_ASC, $MemberType);
     <input id="maxumnumber" type="hidden" name="maxumnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =0; echo $wpnumber;} ?>">
         <div class="down3" style="display:none;">
 			
-			<div class="row">
-            <ul class="nav nav-tabs" id="tabmenu">
-            <?php
-				foreach ($details['Workplaces'] as $key => $value):
-			?>
-						<li <?php
-					if ($key == '0')
-						echo 'class ="active" ';
-			?> id="workplaceli<?php echo $key;?>"><a data-toggle="tab" href="#workplace<?php
-					echo $key;
-			?>"><?php $newkey =$key+1;
-					echo "Workplace " . $newkey;
-			?></a><span class="calldeletewp<?php echo $key;?>"></span></li>
-						<?php
-				endforeach;
-			?> 
-						<?php
-				//if (sizeof($details['Workplaces']) == 0):
-			?>
-						
-						<!--<li class ="active"><a data-toggle="tab" href="#workplace0">--><?php
-					//echo "Workplace1";
-			?><!--</a></li>-->
-						
-						<?php
-				//endif;
-			?>
-            </ul>
-			</div>
+            <div class="col-xs-12 workplace_nav">
+                <a class="add-workplace-join" href="#"><span class="icon plus_circle"></span><span>Add</span></a>
+                <ul class="nav nav-tabs" id="tabmenu">
+                <?php foreach( $details['Workplaces'] as $key => $value ): ?>
+                    <li <?php if ($key == '0') echo 'class ="active" '; ?> id="workplaceli<?php echo $key;?>">
+                        <a data-toggle="tab" href="#workplace<?php echo $key; ?>"><?php $newkey =$key+1; echo "Workplace " . $newkey; ?>
+                            <span class="calldeletewp<?php echo $key;?>"></span>
+                        </a>
+                    </li>
+                <?php endforeach; ?>
+                </ul>
+            </div>
+
 			<?php   
 				$workplaceSettingscode         = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
 				$workplaceSettings             = json_decode($workplaceSettingscode, true);
@@ -1949,15 +1933,6 @@ array_multisort($Title, SORT_ASC, $MemberType);
     endforeach;
 ?>
  
-            </div>
-
-            <div class="row">
-                <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                    <a class="add-workplace-join">
-                        <span class="icon plus_circle"></span>
-                        Add workplace
-                    </a>
-                </div>
             </div>
             
             <div class="col-xs-12 btn_wrapper">   
@@ -2947,15 +2922,15 @@ if(isset($_POST['MT'])){
             <input id="maxumnumber" type="hidden" name="maxumnumber" value="0">
             
             <div class="down3" style="display:none;">
-                <div class="col-xs-12">
+                <div class="col-xs-12 workplace_nav">
+                    <a class="add-workplace-join" href="#"><span class="icon plus_circle"></span><span>Add</span></a>
                     <ul class="nav nav-tabs" id="tabmenu">
                     </ul>
                 </div>
 
                 <div id="workplaceblocks">
-            
                 </div>
-                <div class="row"><div class="col-xs-12"><a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a></div></div>
+
                 <div class="col-xs-12 btn_wrapper">   
                     <a class="join-details-button3" variant="next">
                         <span class="dashboard-button-name">Next</span>
@@ -3116,7 +3091,7 @@ endif;
 			var number = Number($('#wpnumber').val());
 			var i = Number(number +1);
 			
-			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'</a><span class="calldeletewp'+ i + '"></span><a class="skip">Skip this step</a></li>' );
+			$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ i+'<span class="calldeletewp'+ i + '"></span></a></li><li class="skip_toggle"><a class="skip">Skip this step</a></li>' );
 			$('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
 			
 			$('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
@@ -3150,9 +3125,15 @@ endif;
                 $('#limitworkplace').fadeIn();
                 $('.overlay').fadeIn();
             } else {
-                if(i>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
-                if(number ==0){$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span><a class="skip">Skip this step</a></li>' );}
-                else {$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'</a><span class="calldeletewp'+ i + '"></span></li>' );}
+                if(i>=2) { 
+                    //$('.skip').parent().addClass("display-none");
+                    $('#tabmenu').find('.skip_toggle').remove();
+                } else { 
+                    //$('.skip').parent().removeClass("display-none");
+                    $('#tabmenu').append('<li class="skip_toggle"><a class="skip">Skip this step</a></li>');
+                }
+                if(number ==0){$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'<span class="calldeletewp'+ i + '"></span></a></li><li><a class="skip">Skip this step</a></li>' );}
+                else {$('div[class="down3"] #tabmenu').append( '<li class="active" id="workplaceli'+ i + '"><a data-toggle="tab" href="#workplace'+ i + '">Workplace '+ j+'<span class="calldeletewp'+ i + '"></span></a></li>' );}
                 $('div[id="workplaceblocks"]').append('<div id="workplace'+ i +'" class="tab-pane fade active in">');
 
                 $('div[class="down3"] #tabmenu li:not(#workplaceli'+i+')').removeClass("active");
@@ -3176,19 +3157,29 @@ endif;
             }
         });
         $(document).on( "click", "a[href^=#workplace]", function(){ });
+
         $(document).on( "click", "[class^=deletewp]",function(){
              var x = $(this).attr("class").replace('deletewp', '');
             $("#workplaceli"+ x).remove();
             $("#workplace"+ x).remove();
             //$(".deletewp"+ x).remove();
 			var n = Number($('#wpnumber').val());
-		  var t = Number(n -1);
+		    var t = Number(n -1);
 		 
-		$('input[name=wpnumber]').val(t);
-		if($('input[name=wpnumber]').val()>=2){ $('.skip').addClass("display-none");} else{ $('.skip').removeClass("display-none");}
-        for (m = 1; m<=t;m++){
-			$('div[class="down3"] #tabmenu li:nth-child(' + m + ') a:not(.skip)').html("Workplace "+m);
-		}
+            $('input[name=wpnumber]').val(t);
+            if ($('input[name=wpnumber]').val()>=2) { 
+                //$('.skip').parent().addClass("display-none");
+                $('#tabmenu').find('.skip_toggle').remove();
+            } else { 
+                //$('.skip').parent().removeClass("display-none");
+                $('#tabmenu').append('<li class="skip_toggle"><a class="skip">Skip this step</a></li>');
+            }
+
+            for (m = 1; m<=t;m++){
+                var deleteVal = $('#tabmenu li:nth-child('+m+')').attr('id').replace('workplaceli', '');
+                $('#tabmenu li:nth-child(' + m + ') a:not(.skip)').html("Workplace "+m+'<span class="calldeletewp' + deleteVal + '"></span>');
+                // $('div[class="down3"] #tabmenu li:nth-child(' + m + ') a:not(.skip)').html("Workplace "+m);
+            }
 		});
     });
     $('.add-additional-qualification').click(function(){

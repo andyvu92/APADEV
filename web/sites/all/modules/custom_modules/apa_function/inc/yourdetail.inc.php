@@ -1171,12 +1171,15 @@ apa_function_dashboardLeftNavigation_form();
 						}
 					?>
 
-					<div class="col-xs-12">
+					<div class="col-xs-12 workplace_nav">
+						<a class="add-workplace-join" href="#"><span class="icon plus_circle"></span><span>Add</span></a>
 						<ul class="nav nav-tabs" id="tabmenu">
 						<?php foreach( $details['Workplaces'] as $key => $value ):  ?>
 							<li <?php if($key=='Workplace0') echo 'class ="active prewp'.$key.'"';?> id="workplaceli<?php echo $key;?>">
-								<a data-toggle="tab" href="#workplace<?php echo $key;?>"><?php $newkey =$key+1; echo "Workplace ".$newkey;?></a>
-								<span class="calldeletewp<?php echo $key;?>"></span>
+								<a data-toggle="tab" href="#workplace<?php echo $key;?>">
+									<?php $newkey =$key+1; echo "Workplace ".$newkey;?>
+									<span class="calldeletewp<?php echo $key;?>"></span>
+								</a>
 							</li>
 						<?php endforeach; ?> 
 						</ul>
@@ -1401,11 +1404,6 @@ apa_function_dashboardLeftNavigation_form();
 					</div>
 				<?php endforeach; ?>
 			</div>	
-
-			<div class="col-xs-12">
-				<a class="add-workplace-join"><span class="dashboard-button-name">Add workplace</span></a>
-			</div>	
-
 		</div>
 
 			<div class="down4 account_container" id="account-education" style="display:none;" >
@@ -1716,8 +1714,8 @@ apa_function_dashboardLeftNavigation_form();
 				$('.overlay').fadeIn();
 			} else {
 				$('.down3').find('#tabmenu').append('<li class="active" id="workplaceli' + i +
-					'"><a data-toggle="tab" href="#workplace' + i + '">Workplace ' + j +
-					'</a><span class="calldeletewp' + i + '"></span></li>');
+					'"><a data-toggle="tab" href="#workplace' + i + '"><span>Workplace ' + j +
+					'</span><span class="calldeletewp' + i + '"></span></a></li>');
 				$('div[id="workplaceblocks"]').append('<div id="workplace' + i +
 					'" class="tab-pane fade active in"></div>');
 
@@ -1751,7 +1749,8 @@ apa_function_dashboardLeftNavigation_form();
 			var t = Number(n -1);
 			$('input[name=wpnumber]').val(t);
 			for (m = 1; m<=t;m++){
-				$('div[class="down3"] #tabmenu li:nth-child(' + m + ') a').html("Workplace "+m);
+				var deleteVal = $('#tabmenu li:nth-child('+m+')').attr('id').replace('workplaceli', '');
+				$('#tabmenu li:nth-child(' + m + ') a').html("Workplace "+m+'<span class="calldeletewp' + deleteVal + '"></span>');
 			}
 		});
 	});
