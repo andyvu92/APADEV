@@ -127,5 +127,5 @@ jQuery(document).ready(function($) {
 
 	$('.limitworkplace .close-popup').click(function(){
 		$('.overlay').fadeOut();
-	}
+	});
 });

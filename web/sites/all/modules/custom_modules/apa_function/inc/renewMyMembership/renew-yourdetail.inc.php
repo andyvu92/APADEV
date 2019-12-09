@@ -1644,7 +1644,8 @@ jQuery(document).ready(function($) {
 		var maxNumber = Number($('#maxumnumber').val());
 		var j = Number(number +1);
 		var i = Number(maxNumber +1);
-		if(i > 12) {
+		var totalCurrentWorkplaces = $('#tabmenu').find('li').length;
+		if(totalCurrentWorkplaces > 11) {
 			$('#limitworkplace').fadeIn();
 			$('.overlay').fadeIn();
 		} else {

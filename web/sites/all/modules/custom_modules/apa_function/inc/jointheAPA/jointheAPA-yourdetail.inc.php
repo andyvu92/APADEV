@@ -3047,7 +3047,7 @@ if(isset($_POST['MT'])){
 
                 <div class="col-xs-12">
                         <label for="Additional-qualifications"><a class="add-additional-qualification">
-                        <span class="dashboard-button-name">Add qualification</span></a></label>
+                        <span class="icon plus_circle"></span>Add qualification</a></label>
                 </div>
 
                 <div class="col-xs-12 btn_wrapper">  
@@ -3121,7 +3121,8 @@ endif;
 			var maxNumber = Number($('#maxumnumber').val());
             var j = Number(number +1);
             var i = Number(maxNumber +1);
-            if(i > 12) {
+            var totalCurrentWorkplaces = $('#tabmenu').find('li').length;
+            if(totalCurrentWorkplaces > 11) {
                 $('#limitworkplace').fadeIn();
                 $('.overlay').fadeIn();
             } else {

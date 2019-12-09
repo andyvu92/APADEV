@@ -2899,11 +2899,17 @@ jQuery(document).ready(function() {
     var workplaceContainer = $('body').find('#account-workplace');
     var educationContainer = $('body').find('#account-education');
 
+    var profileForm = $('#profile-details-form');
+    var formActionUrl = $(profileForm).attr('action');
+
     var isAccount = false;
 
     if( $(dashboard).is('.account_dashboard') ){
       isAccount = true;
       var hash = window.location.hash;
+
+      $(profileForm).attr('action', formActionUrl+hash);
+
       $(subMenu).addClass('active');
       // if no hash
       if (hash === '' || hash === undefined){
@@ -2974,36 +2980,38 @@ jQuery(document).ready(function() {
   
         window.location.hash = hash;
   
+        $(profileForm).attr('action', formActionUrl+hash);
+
         if( $(this).is('.active') ){
           //$(this).removeClass('active');
         } else {
           $(this).parent().siblings().find('a').removeClass('active');
           $(this).addClass('active');
-        }
-  
-        // hide all containers
-        $(allContainer).hide();
-  
-        if( hash === '#profile' ){
-          $(accountDetailsContainer).fadeIn();
-          $(subMenu).parent().attr('class', 'dashboard-nav active');
-          $(subMenu).parent().addClass('submenu1');
-        } else if( hash === '#membership' ){
-          $(membershipContainer).fadeIn();
-          $(subMenu).parent().attr('class', 'dashboard-nav active');
-          $(subMenu).parent().addClass('submenu2');
-        } else if( hash === '#payment' ){
-          $(paymentContainer).fadeIn();
-          $(subMenu).parent().attr('class', 'dashboard-nav active');
-          $(subMenu).parent().addClass('submenu3');
-        } else if( hash === '#workplace' ){
-          $(workplaceContainer).fadeIn();
-          $(subMenu).parent().attr('class', 'dashboard-nav active');
-          $(subMenu).parent().addClass('submenu4');
-        } else if( hash === '#education' ){
-          $(educationContainer).fadeIn();
-          $(subMenu).parent().attr('class', 'dashboard-nav active');
-          $(subMenu).parent().addClass('submenu5');
+
+          // hide all containers
+          $(allContainer).hide();
+    
+          if( hash === '#profile' ){
+            $(accountDetailsContainer).fadeIn();
+            $(subMenu).parent().attr('class', 'dashboard-nav active');
+            $(subMenu).parent().addClass('submenu1');
+          } else if( hash === '#membership' ){
+            $(membershipContainer).fadeIn();
+            $(subMenu).parent().attr('class', 'dashboard-nav active');
+            $(subMenu).parent().addClass('submenu2');
+          } else if( hash === '#payment' ){
+            $(paymentContainer).fadeIn();
+            $(subMenu).parent().attr('class', 'dashboard-nav active');
+            $(subMenu).parent().addClass('submenu3');
+          } else if( hash === '#workplace' ){
+            $(workplaceContainer).fadeIn();
+            $(subMenu).parent().attr('class', 'dashboard-nav active');
+            $(subMenu).parent().addClass('submenu4');
+          } else if( hash === '#education' ){
+            $(educationContainer).fadeIn();
+            $(subMenu).parent().attr('class', 'dashboard-nav active');
+            $(subMenu).parent().addClass('submenu5');
+          }
         }
       });
     } // end if

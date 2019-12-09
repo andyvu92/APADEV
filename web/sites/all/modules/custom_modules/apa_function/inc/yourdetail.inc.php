@@ -423,7 +423,7 @@ apa_function_dashboardLeftNavigation_form();
 							<?php endif;?>
 					</ul>
 				</div>
-			<form action="<?php echo $url;?>" name="your-details" method="POST" novalidate>
+			<form id="profile-details-form" action="<?php echo $url;?>" name="your-details" method="POST" novalidate>
 			    <input type="hidden" name="step1" value="1"/>
 				<input type="hidden" name="Specialty" value="<?php echo$details['Specialty'];?>">
 				<div class="down1 account_container" id="account-details" <?php if(isset($_SESSION["paymentTabTag"]) || isset($_POST["deleteID"]) || isset($_POST["setCardID"]))echo 'style="display:none;"';?>>
@@ -1535,7 +1535,7 @@ apa_function_dashboardLeftNavigation_form();
 				</div>
 				
 				<div class="col-xs-12">
-						<a class="add-additional-qualification"><span class="dashboard-button-name">Add qualification</span></a>			
+						<a class="add-additional-qualification"><span class="icon plus_circle"></span>Add qualification</a>			
 				</div>
 			</div>
 		<div class="col-xs-12" id="your-details-button">   <button type="submit" id="your-details-submit-button" ><span class="dashboard-button-name">Submit</span></button></div>
@@ -1709,7 +1709,8 @@ apa_function_dashboardLeftNavigation_form();
 			var maxNumber = Number($('#maxumnumber').val());
 			var j = Number(number +1);
 			var i = Number(maxNumber +1);
-			if(i > 12) {
+			var totalCurrentWorkplaces = $('#tabmenu').find('li').length;
+			if(totalCurrentWorkplaces > 11) {
 				$('#limitworkplace').fadeIn();
 				$('.overlay').fadeIn();
 			} else {
