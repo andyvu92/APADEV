@@ -43,7 +43,7 @@ foreach($nationalGroup as $Subs) {
 				if($Subs['Subscribed']==1){ 
 					echo "checked";
 				}
-				echo '>&nbsp;&nbsp;&nbsp;<label class="NGnameText'.$counter.'" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
+				echo '><label class="NGnameText'.$counter.'" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
 					.'</label></div>';
 				echo '<div class="flex-col-2"><div class="NGprice'.$counter.'">$'.$Subs["NGprice"].'</div></div></div>';
 				if($tr == 1) {
