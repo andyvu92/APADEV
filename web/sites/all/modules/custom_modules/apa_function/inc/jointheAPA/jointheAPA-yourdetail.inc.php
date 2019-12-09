@@ -1754,6 +1754,7 @@ array_multisort($Title, SORT_ASC, $MemberType);
         }
 ?>>
                             </div>
+                            <div class="row">
                             <div class="col-xs-12 col-md-6">
                                 <label>Quality In Practice number&nbsp;(QIP)</label>
                                 <input type="text" class="form-control" name="QIP<?php
