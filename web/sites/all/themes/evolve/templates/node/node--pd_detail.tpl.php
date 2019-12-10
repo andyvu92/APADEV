@@ -1780,7 +1780,9 @@ $userRetisterStatus = false;
 
 			<?php
 			if($ttt >= strtotime("01.01.2020",date('d/m/Y'))) {
-				echo '<span class="small-heading">* Early bird prices close 4 weeks prior to the registration closing date</span><br>';
+				if($pd_detail['Typeofpd'] != "Lecture") {
+					echo '<span class="small-heading">* Early bird prices close 4 weeks prior to the registration closing date</span><br>';
+				}
 			}
 			?>
 
@@ -1946,7 +1948,9 @@ $userRetisterStatus = false;
 
 			<?php
 			if($ttt >= strtotime("01.01.2020",date('d/m/Y'))) {
-				echo '<span class="small-heading">* Early bird prices close 4 weeks prior to the registration closing date</span><br>';
+				if($pd_detail['Typeofpd'] != "Lecture") {
+					echo '<span class="small-heading">* Early bird prices close 4 weeks prior to the registration closing date</span><br>';
+				}
 			}
 			?>
 
