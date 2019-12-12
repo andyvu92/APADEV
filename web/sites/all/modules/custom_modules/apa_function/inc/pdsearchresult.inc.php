@@ -5,6 +5,18 @@ if(!function_exists('drupal_session_started'))
 }
 ?>
 <?php
+$hasMalicious = false;
+if($_GET) {
+	foreach($_GET as $list) {
+		$list = preg_replace('/\//', '', $list);
+		if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $list)) {
+			$hasMalicious = true;
+		}
+	}
+}
+if($hasMalicious) {
+	die("Unauthorized Access");
+}
 global $base_url;
 // 2.2.28 - GET event search result list
 // It has four different cases, but we are going to use

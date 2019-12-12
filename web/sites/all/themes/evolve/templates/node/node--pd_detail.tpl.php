@@ -82,6 +82,22 @@
 
 ?>
 <?php 
+$hasMalicious = false;
+if($_GET) {
+	if(!is_numeric($_GET["id"])) {
+		$hasMalicious = true;
+	}
+	foreach($_GET as $list) {
+		$list = preg_replace('/\//', '', $list);
+		if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $list)) {
+			$hasMalicious = true;
+		}
+	}
+}
+if($hasMalicious): 
+	die("Unauthorized Access");
+else:
+
 $tag=0;
 $pdtype= "Courses and Workshops";
 $userRetisterStatus = false;
@@ -2503,4 +2519,5 @@ Facsimile: (03) 9092 0899</p>
      });
    });
 </script>
-<?php logRecorder(); ?>
+<?php logRecorder(); 
+endif; ?>
