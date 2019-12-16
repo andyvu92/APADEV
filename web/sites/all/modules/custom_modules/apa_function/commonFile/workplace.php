@@ -10,15 +10,14 @@ $interestAreas= $sessioninterestAreas;
 echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
  if($memberType!="9966" && $memberType!="9993" && $memberType!="9994" && $memberType!="9968" && $memberType!="9997" && $memberType!="10004" && $memberType!="17" && $memberType!="18" && $memberType!="21" && $memberType!="22" && $memberType!="31" && $memberType!="32" && $memberType!="34"  && $memberType!="35" && $memberType!="36" && $memberType!="37")
  {echo '   
-	<div class="col-xs-12 FapTagC">
-		<input class="styled-checkbox" type="checkbox" name="Findphysio'.$i.'" id="Findphysio'.$i.'" value="" >
-		<label class="light-font-weight highlight_checkbox" for="Findphysio'.$i.'">I want to be listed at this workplace within Find a Physio on the consumer <span class="note-text">choose.physio</span> site</label>
-	</div>
-
 	<div class="col-xs-12 FapTagA">
 		<input class="styled-checkbox" type="checkbox" name="Findabuddy'.$i.'" id="Findabuddy'.$i.'" value="" >
 		<label class="light-font-weight highlight_checkbox" for="Findabuddy'.$i.'">I want to be listed at this workplace within Find a Physio on the corporate <span class="note-text">australian.physio</span> site</label>
- </div>';}
+ 	</div>
+ 	<div class="col-xs-12 FapTagC">
+		<input class="styled-checkbox" type="checkbox" name="Findphysio'.$i.'" id="Findphysio'.$i.'" value="" >
+		<label class="light-font-weight highlight_checkbox" for="Findphysio'.$i.'">I want to be listed at this workplace within Find a Physio on the consumer <span class="note-text">choose.physio</span> site</label>
+	</div>';}
 	echo'
 <div class="row">
 <div class="col-xs-12">
