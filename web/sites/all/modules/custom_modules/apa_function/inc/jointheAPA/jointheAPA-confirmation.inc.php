@@ -288,26 +288,6 @@ $background = getBackgroundImage($userID);
 						</div>
 					</div>
 				<?php endif; ?>
-				<?php /*
-				<div id="Iaksbnkvoice" class="modal fade big-screen" role="dialog">
-					<div class="modal-dialog">
-
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						</div>
-						<div class="modal-body">
-						<iframe name="stsIaksbnkvoice" src="http://www.physiotherapy.asn.au"></iframe>
-						</div>
-						<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						</div>
-					</div>
-
-					</div>
-				</div>
-				*/ ?>
 			</div>
 		</div>
 	</div>
@@ -316,27 +296,6 @@ $background = getBackgroundImage($userID);
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<?php /*
-<style type="text/css">
-	.big-screen {
-		width: 62%;
-		margin: auto;
-		min-width: 1190px;
-	}
-	.big-screen .modal-dialog, .big-screen .modal-dialog .modal-content, .big-screen .modal-dialog .modal-content .modal-body, .big-screen iframe {
-		width: 100%;
-		height: 100%;
-	}
-</style> 
-<script>
-$(document).ready(function() {
-	if (window.frames["Iaksbnkvoice"] && !window.userSet) {
-		window.userSet = true;
-		frames['stsIaksbnkvoice'].location.href="<?php echo $invoiceAPI[0]; ?>";
-	}
-});
-</script>
-*/ ?>
 <?php logRecorder();  ?>
 <script>
 $(document).ready(function() {

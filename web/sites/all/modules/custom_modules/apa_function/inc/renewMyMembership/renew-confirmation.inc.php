@@ -123,66 +123,6 @@ if(isset($_POST['step3'])) {
 		$productID = "PRF";
 		checkShoppingCart($userID, $type="", $productID);			
 	}
-	/*
-	if(isset($renewOuts['MResponse'])) {
-		if($renewOuts['MResponse'] =="Order updated successfully") {
-			//refresh session data
-			$data = "UserID=".$_SESSION["UserId"];
-			$details = aptify_get_GetAptifyData("4", $data,"");
-			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
-			//end refresh session data
-			  $invoice_ID = $renewOuts['Invoice_ID'];
-			//save the terms and conditons on APA side
-			$dataArray = array();
-			$dataArray['MemberID'] = $postReviewData['userID'];
-			$dataArray['CreateDate']= date('Y-m-d');
-			$dataArray['MembershipYear'] = date('Y',strtotime('+1 year'));
-			$dataArray['ProductList'] = implode(",",$postReviewData['productID']);
-			$dataArray['Type'] = "R";
-			forCreateRecordFunc($dataArray);
-			//delete session:
-			completeOrderDeleteSession();
-			// delete shopping cart data from APA database; put the response status validation here!!!!!!!
-			$userID = $_SESSION["UserId"];
-							
-			// use drupal db_select by jinghu 20/09/2018
-			$type = "membership";
-			checkShoppingCart($userID, $type, $productID="");
-			$type = "NG";
-			checkShoppingCart($userID, $type, $productID="");
-			$type = "MG1";
-			checkShoppingCart($userID, $type, $productID="");
-			$type = "MG2";
-			checkShoppingCart($userID, $type, $productID="");
-			$productID = "PRF";
-			checkShoppingCart($userID, $type="", $productID);			
-		} else {
-			// ???
-			$messageOut = "";
-			foreach($renewOuts as $turnText) {
-				// turn array into a String
-				$messageOut = $messageOut.$turnText."<br/><br/>";
-			}
-			watchdog("Aptify", $messageOut, $postReviewData, WATCHDOG_CRITICAL,"renew failed");
-		}
-	} elseif($renewOuts['ErrorInfo'])) {
-		// 
-		$messageOut = "";
-		foreach($renewOuts as $turnText) {
-			// turn array into a String
-			$messageOut = $messageOut.$turnText."<br/><br/>";
-		}
-		watchdog("Aptify", $messageOut, $postReviewData, WATCHDOG_CRITICAL,"renew failed");
-	} else {
-		// ???
-		$messageOut = "";
-		foreach($renewOuts as $turnText) {
-			// turn array into a String
-			$messageOut = $messageOut.$turnText."<br/><br/>";
-		}
-		watchdog("Aptify", $messageOut, $postReviewData, WATCHDOG_CRITICAL,"renew failed");
-	}
-	*/
 }
 else{
 	header("Location: /");
@@ -265,136 +205,27 @@ $background = getBackgroundImage($userID);
 					</div>
 				</div>
 				<?php elseif(strpos($renewOuts['MResponse'], 'Order failed') !== false): ?>
-					<?php if(strpos($renewOuts['MResponse'], '50') !== false): ?>
-						<!--this is handle record error log-->
-						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
-								$addMemberLog["orderID"] = $postReviewData['OrderID'];
-								$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
-								$addMemberLog["createDate"] = date('Y-m-d');
-								$addMemberLog["type"] =  "Renew";
-								$addMemberLog["logError"] = 1;
-								add_Member_Log($addMemberLog);
-						?>
-						<div class="flex-container" id="fail-purchase">
-							<div class="flex-cell">
-								<h3 class="light-lead-heading">There are insufficient funds in this account.</h3>
-							</div>
-							<div class="flex-cell">
-								<span class="sub-heading">Please use another card, or try again.</span>
-							</div>
-						</div>
-					<?php elseif(strpos($renewOuts['MResponse'], '12') !== false): ?>
-						<!--this is handle record error log-->
-						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
-								$addMemberLog["orderID"] = $postReviewData['OrderID'];
-								$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
-								$addMemberLog["createDate"] = date('Y-m-d');
-								$addMemberLog["type"] =  "Renew";
-								$addMemberLog["logError"] = 1;
-								add_Member_Log($addMemberLog);
-						?>
-						<div class="flex-container" id="fail-purchase">
-							<div class="flex-cell">
-								<h3 class="light-lead-heading">This card has been declined.</h3>
-							</div>
-							<div class="flex-cell">
-							<span class="sub-heading">Please contact your financial institution or try again.</span>
-							</div>
-						</div>
-					<?php elseif(strpos($renewOuts['MResponse'], '13') !== false): ?>
-						<!--this is handle record error log-->
-						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
-								$addMemberLog["orderID"] = $postReviewData['OrderID'];
-								$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
-								$addMemberLog["createDate"] = date('Y-m-d');
-								$addMemberLog["type"] =  "Renew";
-								$addMemberLog["logError"] = 1;
-								add_Member_Log($addMemberLog);
-						?>
-						<div class="flex-container" id="fail-purchase">
-							<div class="flex-cell">
-								<h3 class="light-lead-heading">Your financial institution requires verbal authoristion of this payment before it can be processed.</h3>
-							</div>
-							<div class="flex-cell">
-							<span class="sub-heading">Please contact your financial institution.</span>
-							</div>
-						</div>
-					<?php else: ?>
 					<!--this is handle record error log-->
-					<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
-							$addMemberLog["orderID"] = $postReviewData['OrderID'];
-							$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
-							$addMemberLog["createDate"] = date('Y-m-d');
-							$addMemberLog["type"] =  "Renew";
-							$addMemberLog["logError"] = 1;
-							add_Member_Log($addMemberLog);
+					<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']; }
+						$addMemberLog["orderID"] = $postReviewData['OrderID'];
+						$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
+						$addMemberLog["createDate"] = date('Y-m-d');
+						$addMemberLog["type"] =  "Renew";
+						$addMemberLog["logError"] = 1;
+						add_Member_Log($addMemberLog);
 					?>
-						<div class="flex-container" id="fail-purchase">
-							<div class="flex-cell">
-								<h3 class="light-lead-heading">There were unexpected issues processing<br> your payment request.</h3>
-							</div>
-							<div class="flex-cell">
-								<span class="sub-heading">Please <a href="javascript:document.getElementById('renew-survey-form2').submit();">try again</a> or <a href="/contact-us">contact us</a>.</span>
-							</div>
-						</div>
-					<?php endif; ?>
+					<?php echo ErrorMessage($renewOuts['MResponse']); ?>
 				<?php else: ?>
-					<?php /*if(strpos($renewOuts['MResponse'], '50') !== false): ?>
-						<div class="flex-container" id="fail-purchase">
-							<div class="flex-cell">
-								<h3 class="light-lead-heading">There are insufficient funds in this account.</h3>
-							</div>
-							<div class="flex-cell">
-								<span class="sub-heading">Please use another card, or try again.</span>
-							</div>
-						</div>
-						*/ ?>
-					<?php if(strpos($renewOuts['MResponse'], '12') !== false): ?>
-					    <!--this is handle record error log-->
-						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
-								$addMemberLog["orderID"] = $postReviewData['OrderID'];
-								$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
-								$addMemberLog["createDate"] = date('Y-m-d');
-								$addMemberLog["type"] =  "Renew";
-								$addMemberLog["logError"] = 1;
-								add_Member_Log($addMemberLog);
-						?>
-						<div class="flex-container" id="fail-purchase">
-							<div class="flex-cell">
-								<h3 class="light-lead-heading">This card has been declined.</h3>
-							</div>
-							<div class="flex-cell">
-							<span class="sub-heading">Please contact your financial institution or try again.</span>
-							</div>
-						</div>
-					<?php /*elseif(strpos($renewOuts['MResponse'], '13') !== false): ?>
-						<div class="flex-container" id="fail-purchase">
-							<div class="flex-cell">
-								<h3 class="light-lead-heading">Your financial institution requires verbal authoristion of this payment before it can be processed.</h3>
-							</div>
-							<div class="flex-cell">
-							<span class="sub-heading">Please contact your financial institution.</span>
-							</div>
-						</div> */ ?>
-					<?php else: ?>
-					    <!--this is handle record error log-->
-						<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
-								$addMemberLog["orderID"] = $postReviewData['OrderID'];
-								$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
-								$addMemberLog["createDate"] = date('Y-m-d');
-								$addMemberLog["type"] =  "Renew";
-								$addMemberLog["logError"] = 1;
-								add_Member_Log($addMemberLog);
-						?>
-						<div class="flex-container" id="fail-purchase">
-							<div class="flex-cell">
-								<h3 class="light-lead-heading">There were unexpected issues processing<br> your payment request.</h3>
-							</div>
-							<div class="flex-cell">
-								<span class="sub-heading">Please <a href="javascript:document.getElementById('renew-survey-form2').submit();">try again</a> or <a href="/contact-us">contact us</a>.</span>
-							</div>
-						</div>
-					<?php endif; ?>
+					<!--this is handle record error log-->
+					<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']; }
+						$addMemberLog["orderID"] = $postReviewData['OrderID'];
+						$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
+						$addMemberLog["createDate"] = date('Y-m-d');
+						$addMemberLog["type"] =  "Renew";
+						$addMemberLog["logError"] = 1;
+						add_Member_Log($addMemberLog);
+					?>
+					<?php echo ErrorMessage($renewOuts['MResponse']); ?>
 				<?php endif; ?>
 				<?php ?>
 			</div>

@@ -354,22 +354,6 @@ $PRFPrice = 0;
 									echo "</div>";  
 							}
 						}
-                        //if((!isset($_POST['prftag'])) && isset($_POST['PRF'])&& $_POST['PRF']!=""){ 
-					//if($reviewData['PRFdonation']!=""){ 
-                            //echo '<div class="flex-cell flex-flow-row table-cell">
-                            /*<div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Physiotherapy Research Foundation donation</div>
-                            <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.number_format($reviewData['PRFdonation'],2).'</div>
-                            <div class="flex-col-2 action-col"><a class="deletePRFButton">delete</a></div>
-                            </div>'; */
-                           // $price +=$reviewData['PRFdonation'];}
-						//if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"){ 
-							//echo '<div class="flex-cell flex-flow-row table-cell">
-                            /*<div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Admin fee</div>
-                            <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.number_format($scheduleDetails['AdminFee'],2).'</div>
-                            <div class="flex-col-2 action-col"></div>
-                            </div>';*/ 
-							
-						//} 
 				?>
             </div>
             <div class="flex-container flex-table total-price">
@@ -402,74 +386,6 @@ $PRFPrice = 0;
         </div>
         <!--<a class="your-details-prevbutton8"><span class="dashboard-button-name">Last</span></a>-->
         <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 Membpaymentsiderbar">
-            <?php /***** <p><span class="sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
-            <div class="paymentsidecredit <?php if($price==0) echo " display-none";?>">
-                <?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>
-                <fieldset>
-                    <div class="chevron-select-box">
-                        <select class="form-control" id="Paymentcard" name="Paymentcard" readonly>
-                            <?php
-						
-							foreach( $cardsnum["results"] as $cardnum) {
-								echo '<option value="'.$cardnum["Creditcards-ID"].'"';
-								if($cardnum["IsDefault"]=="1") {
-								echo "selected ";
-							}
-							echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
-							echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
-							}
-						
-					?>
-                        </select>
-                    </div>
-                </fieldset>
-                <?php endif; ?>
-                <?php if(isset($_SESSION['tempcard']) && !isset($_POST['addcardtag'])) : ?>
-                <?php $tempcards = $_SESSION['tempcard'];?>
-                <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type" disabled>
-                            <?php 
-						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
-						$PaymentType=json_decode($PaymentTypecode, true);
-						foreach($PaymentType  as $pair => $value){
-							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
-							if($tempcards['Payment-method'] == $PaymentType[$pair]['ID']){ echo "selected ";}
-							echo '> '.$PaymentType[$pair]['Name'].' </option>';
-							
-						}
-				    ?>
-                        </select>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <input type="text" class="form-control" id="Cardname" name="Cardname"
-                            value="<?php echo $tempcards['Name-on-card']; ?>" placeholder="Card Name" readonly>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <input type="text" class="form-control" id="Cardnumber" name="Cardnumber"
-                            value="<?php echo $tempcards['Cardno']; ?>" placeholder="Card number" readonly>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <input type="text" class="form-control" id="Expirydate" name="Expirydate"
-                            value="<?php echo $tempcards['Expiry-date']; ?>" placeholder="Expire date" readonly>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-12 col-md-12">
-                        <input type="text" class="form-control" id="CCV" name="CCV"
-                            value="<?php echo $tempcards['CCV']; ?>" placeholder="CCV" readonly>
-                    </div>
-                </div>
-
-                <?php endif; ?>
-            </div>****/?>
-
             <div class="flex-container flex-flow-column payment-details">
                 
                 <div class="flex-cell payment_heading">
@@ -543,57 +459,6 @@ $PRFPrice = 0;
                     <a style="margin: 30px 0 0 0;" class="simple-btn" data-target="#schedulePOPUp"
                         data-toggle="modal">View the full list of scheduled payments</a>
                 </div>
-               
-                <?php 
-					/*if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"){ 
-						$AdminFee =$scheduleDetails['AdminFee']; 
-						$InitialPaymentAmount = $scheduleDetails['InitialPaymentAmount'];
-						$OccuringPayment = $scheduleDetails['OccuringPayment'];
-						$firstInstallment = $InitialPaymentAmount-$AdminFee-$scheduleDetails['GST']-$_POST['PRF'];
-						$LastPayment = $scheduleDetails['LastPayment'];
-						echo '<div class="flex-cell flex-flow-row">
-								<div class="flex-col-12">
-								</div>
-							</div>';
-						echo '<div class="flex-cell flex-flow-row">
-								<div class="flex-col-12">Today’s payment includes:
-								</div>
-							</div>';
-						echo'<div class="flex-cell flex-flow-row">
-								<div class="flex-col-6">
-									Admin fee	
-								</div>
-								<div class="flex-col-6">$'.$AdminFee.'</div></div>';
-						echo'<div class="flex-cell flex-flow-row">
-								<div class="flex-col-6">
-									First instalment	
-								</div>
-								<div class="flex-col-6">$'.$firstInstallment.'</div></div>';	
-						if($reviewData['PRFdonation']!=""){
-							$PRFPrice =$reviewData['PRFdonation']; 
-							echo'<div class="flex-cell flex-flow-row">
-									<div class="flex-col-6">
-										PRF donation	
-									</div>
-									<div class="flex-col-6">$'.$PRFPrice.'</div></div>';		
-						}
-						echo'<div class="flex-cell flex-flow-row">
-								<div class="flex-col-6">
-									GST	
-								</div>
-								<div class="flex-col-6">$'.$scheduleDetails['GST'].'</div></div>';
-						echo'<div class="flex-cell flex-flow-row">
-								<div class="flex-col-6">
-									Today’s total	
-								</div>
-								<div class="flex-col-6">$'.$InitialPaymentAmount.'</div></div>';
-                        echo'<div class="flex-cell flex-flow-row">
-								<div class="flex-col-12" style="text-align: center">
-									<button style="margin-top: 30px;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payment</button>	
-								</div>
-							</div>'; 								
-					}*/
-				?>
                 <div class="flex-cell flex-flow-row btn_wrapper">
                     <div class="flex-col-12">
                         <a class="addCartlink" href="javascript:document.getElementById('join-insurance-form').submit();">
