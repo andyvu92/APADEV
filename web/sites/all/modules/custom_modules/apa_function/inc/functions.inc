@@ -862,15 +862,15 @@ function ErrorMessage($MResponse) {
 	} elseif(strpos($MResponse, '(23)') !== false) {
 		return MessageEdit("Credit card verification failed.", "Invalid account number. Please <a href=".'"javascript:document.getElementById('."'renew-survey-form2'".').submit();">try again</a> or <a href="/contact-us">contact us</a>.');
 	} elseif(strpos($MResponse, '(13)') !== false) {
-		return MessageEdit("Your financial institution requires verbal authoristion of this payment before it can be processed.", "Please contact your financial institution. <div class='flex-cell'><span class='sub-heading'><a href=".'"javascript:document.getElementById('."'renew-survey-form2'".').submit();">Try again</a></span></div>');
+		return MessageEdit("Your financial institution requires verbal authoristion of this payment before it can be processed.", "Please contact your financial institution. </span></div><div class='flex-cell'><span class='sub-heading'><a href=".'"javascript:document.getElementById('."'renew-survey-form2'".').submit();">Try again</a></span></div>');
 	} elseif(strpos($MResponse, '(24)') !== false) {
-		return MessageEdit("Credit card verification failed.", "Please check the expiration date. <div class='flex-cell'><span class='sub-heading'><a href=".'"javascript:document.getElementById('."'renew-survey-form2'".').submit();">Try again</a></span></div>');
+		return MessageEdit("Credit card verification failed.", "Please check the expiration date. </span></div><div class='flex-cell'><span class='sub-heading'><a href=".'"javascript:document.getElementById('."'renew-survey-form2'".').submit();">Try again</a></span></div>');
 	} elseif(strpos($MResponse, 'Saved Payment Methods End Date is Expired') !== false) {
 		return MessageEdit("This card is no longer valid.", "Saved payment methods end date is expired.<br />Please <a href=".'"javascript:document.getElementById('."'renew-survey-form2'".').submit();">try again</a> with different credit card.');
 	} elseif(strpos($MResponse, 'does not match the payment type you selected') !== false) {
-		return MessageEdit("Credit card verification failed.", "The credit card number you entered does not match the payment type you selected, Visa. Please select a different Payment Type. <div class='flex-cell'><span class='sub-heading'><a href=".'"javascript:document.getElementById('."'renew-survey-form2'".').submit();">Try again</a></span></div>');
+		return MessageEdit("Credit card verification failed.", "The credit card number you entered does not match the payment type you selected, Visa. Please select a different Payment Type. </span></div><div class='flex-cell'><span class='sub-heading'><a href=".'"javascript:document.getElementById('."'renew-survey-form2'".').submit();">Try again</a></span></div>');
 	} elseif(strpos($MResponse, 'Invalid Credit Card Number') !== false) {
-		return MessageEdit("Invalid Credit Card Number.", "Please check the number on the card. <div class='flex-cell'><span class='sub-heading'><a href=".'"javascript:document.getElementById('."'renew-survey-form2'".').submit();">Try again</a></span></div>');
+		return MessageEdit("Invalid Credit Card Number.", "Please check the number on the card. </span></div><div class='flex-cell'><span class='sub-heading'><a href=".'"javascript:document.getElementById('."'renew-survey-form2'".').submit();">Try again</a></span></div>');
 	} else {
 		return MessageEdit("There were unexpected issues processing<br> your payment request.", "Please <a href=".'"javascript:document.getElementById('."'renew-survey-form2'".').submit();">try again</a> or <a href="/contact-us">contact us</a>.');
 	}
