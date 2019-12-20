@@ -1056,105 +1056,112 @@ ul.socials li a {
 }
 
 
-.questions .questionPart {
-	padding: 11px;
-	margin-bottom: 10px;
-	.question p {
-		font-weight: bold;
-		margin-left: 7px;
-		font-size: 15px !important;
-	}
-	.answer {
-		cursor: pointer;
-		padding: 8px 20px 2px;
-		margin: 8px;
-		width: 49%;
-		background-color: rgba(137,159,153, 0.2);
-		font-size: 15px !important;
-		transition: 0.3s;
-		transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
-		-webkit-transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
-		&:hover {
-			background-color: rgba(137,159,153, 0.4);
-			padding: 7px 18px 1px;
-			width: 48.9%;
+.questions.section {
+	background-color: white;
+	.questionPart {
+		padding: 11px;
+		margin-bottom: 10px;
+		.questionLabel h2 {
+			font-size: 4em;
+			font-weight: 200;
+			font-family: Cairo;
+			margin: 0 auto;
+			max-width: 860px;
 		}
-	}
-	.right {
-		transition: 0.3s;
-		transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
-		-webkit-transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
-		background-color: rgba(162,173,0,1);
-		float: initial !important;
-		&:hover {
-			background-color: rgba(162,173,0,0.5);
-			padding: 7px 18px 1px;
-			width: 48.9%;
-		}
-	}
-	.noright {
-		transition: 0.3s;
-		transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
-		-webkit-transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
-		background-color: rgba(255,160,47,1);
-		&:hover {
-			background-color: rgba(255,160,47,0.5);
-			padding: 7px 18px 1px;
-			width: 48.9%;
-		}
-	}
-	.selected {
-		transition: 0.3s;
-		transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
-		-webkit-transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
-		font-weight: bold;
-		cursor: none;
-		padding: 8px 20px 3px;
-		width: 49%;
-		p {
-			color: white !important;
-		}
-	}
-	.wrong {
-		transition: 0.3s;
-		transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
-		-webkit-transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
-		background-color: rgba(146,0,117,1);
-		&:hover {
-			background-color: rgba(146,0,117,0.5);
-			padding: 7px 18px 1px;
-			width: 49.9%;
-		}
-	}
-	.explanation {
-		transition: 0.3s;
-		transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
-		-webkit-transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
-		display: none;
-	}
-	#done {
-		.explanation {
-			display: block;
-			padding: 10px 20px;
-			width: 49%;
-			margin: 7px;
-			color: white !important;
-			font-size: 15px !important;
-			p, li {
-				color: white !important;
-				font-size: 15px !important;
+		.buttons {
+			margin: 50px auto;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			width: 100%;
+			div:not(#done) {
+				transition: 0.3s;
+				transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
+				-webkit-transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
 			}
-		}
-		.explanation.wrong a {
-			font-size: 15px !important;
-		}
-		.explanation.right a {
-			font-size: 15px !important;
-			color: rgb(0,159,218) !important;
+			div {
+				clear: both;
+				min-width: 200px;
+				text-align: center;
+				font-family: Cairo;
+				font-weight: 400;
+			}
+			.answer, .wrong, .right, .noright {
+				margin: auto;
+				width: 70%;
+			}
+			.answer {
+				cursor: pointer;
+				padding: 15px 20px 5px;
+				font-size: 15px;
+				border: 0.5px solid rgba(0,0,0,0.1);
+				border-bottom: 0.5px solid rgba(0,159,218,0);
+				transition: 0.1s linear;
+				&:nth-child(3) {
+					border-bottom: 0.5px solid rgba(0,0,0,0.1);
+				}
+				&:not(#done):hover {
+					padding: 12px 18px 5px;
+					background-color: rgba(0,0,0,0.05);
+					p {
+						color: @blue;
+					}
+				}
+			}
+			.right {
+				background-color: rgba(162,173,0,1);
+				float: initial !important;
+			}
+			.noright {
+				background-color: rgba(255,160,47,1);
+			}
+			.selected {
+				font-weight: bold;				
+				p {
+					color: white;
+				}
+			}
+			.wrong {
+				background-color: rgba(146,0,117,1);
+			}
+			.explanation {
+				display: none;
+			}
+			#done {
+				margin-top: 1px;
+				.explanation {
+					display: block;
+					padding: 10px 20px;
+					color: white;
+					font-size: 15px;
+					p {
+						color: white;
+						font-size: 15px;
+					}
+					.font_style--after_p li {
+						list-style: none;
+						margin: -3px 0;
+						color: white;
+						font-size: 15px;
+					}
+				}
+			}
 		}
 	}
 }
 
+@media screen and (max-width: @desktop-width) {
+	.questions.section .questionPart {
+		.questionLabel h2 {
+			font-size: 3em;
+		}
+		.buttons {
+			.answer, .wrong, .right, .noright {
+				width: 100%;
+			}
+		}
+	}
+}
 /* @end */
 
 
