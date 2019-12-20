@@ -49,8 +49,8 @@
   $typeimg1 = substr($img1, $aimg1, 10);
   if($typeimg1 == "foaf:Image") {
     $num1img1 = strpos($img1, "src");
-    $num2img1 = strpos($img1, 'width') - 7;
-    $num3img1 = $num2 - $num1;
+    $num2img1 = strpos($img1, 'width');
+    $num3img1 = $num2img1 - $num1img1;
     $imgUrlimg1 = substr($img1, $num1img1 + 5, $num3img1);
   }
 ?>
@@ -65,7 +65,7 @@
   if($typeimg2 == "foaf:Image") {
     $num1img2 = strpos($img2, "src");
     $num2img2 = strpos($img2, 'width') - 7;
-    $num3img2 = $num2 - $num1;
+    $num3img2 = $num1img2 - $num2img2;
     $imgUrlimg2 = substr($img2, $num1img2 + 5, $num3img2);
   }
 ?>
@@ -80,7 +80,7 @@
   if($typeimg3 == "foaf:Image") {
     $num1img3 = strpos($img3, "src");
     $num2img3 = strpos($img3, 'width') - 7;
-    $num3img3 = $num2 - $num1;
+    $num3img3 = $num2img3 - $num1img3;
     $imgUrlimg3 = substr($img3, $num1img3 + 5, $num3img3);
   }
 ?>
@@ -95,7 +95,7 @@
   if($typeimg4 == "foaf:Image") {
     $num1img4 = strpos($img4, "src");
     $num2img4 = strpos($img4, 'width') - 7;
-    $num3img4 = $num2 - $num1;
+    $num3img4 = $num2img4 - $num1img4;
     $imgUrlimg4 = substr($img4, $num1img4 + 5, $num3img4);
   }
 ?>
