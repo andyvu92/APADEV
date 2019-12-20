@@ -102,11 +102,22 @@ $rens = str_replace('</div>',"",$rens);
 			/* To get a static price (non-member price)	*/
 			$TypePrice = file_get_contents("sites/all/themes/evolve/json/TypePrice.json");
 			$TypePrice = json_decode($TypePrice, true);
-			foreach ($TypePrice as $key => $value) {
-				if($TypePrice[$key]["Code"] == strtoupper($rens)) {
-					print '<div class="MTprice">$'.$TypePrice[$key]["Price"].": Pro-rata price as of ".date("d/m/y")." valid until 31/12/19".'<span class="info_icon" popup-target="PriceExplaination'.$node->nid.'"></span></div>';
-					print '<div class="MTprice">$'.$TypePrice[$key]["UnitPrice"].": Full price".'</div>';
-					print '<div class="MTid" style="display: none;">'.$TypePrice[$key]["ID"].'</div>';
+			$year = date('y');
+			if(date('M') == "Jan") {
+				foreach ($TypePrice as $key => $value) {
+					if($TypePrice[$key]["Code"] == strtoupper($rens)) {
+						//print '<div class="MTprice">$'.$TypePrice[$key]["Price"].": Pro-rata price as of ".date("d/m/y")." valid until 31/12/19".'<span class="info_icon" popup-target="ProrataExplaination"></span></div>';
+						print '<div class="MTprice">$'.$TypePrice[$key]["UnitPrice"].": Full price".'</div>';
+						print '<div class="MTid" style="display: none;">'.$TypePrice[$key]["ID"].'</div>';
+					}
+				}
+			} else {
+				foreach ($TypePrice as $key => $value) {
+					if($TypePrice[$key]["Code"] == strtoupper($rens)) {
+						print '<div class="MTprice">$'.$TypePrice[$key]["Price"].": Pro-rata price as of ".date("d/m/y")." valid until 31/12/".$year.'<span class="info_icon" popup-target="ProrataExplaination"></span></div>';
+						print '<div class="MTprice">$'.$TypePrice[$key]["UnitPrice"].": Full price".'</div>';
+						print '<div class="MTid" style="display: none;">'.$TypePrice[$key]["ID"].'</div>';
+					}
 				}
 			}
 			?>
