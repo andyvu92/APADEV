@@ -545,7 +545,7 @@ You have the right to access the personal information about yourself held by the
 			<h2 class="lead-heading">Choose your current membership status below:</h2>
 		</div>
 
-		<div class="item" style="text-align: center; font-weight: 700;"><span class="item-description" style="">Due to high traffic some members may receive an error while renewing – we are investigating the cause and apologise for any inconvenience.</span></div>
+		<!-- <div class="item" style="text-align: center; font-weight: 700;"><span class="item-description" style="">Due to high traffic some members may receive an error while renewing – we are investigating the cause and apologise for any inconvenience.</span></div> -->
 
 		<div class="grid-block apa-member-grid">
 			
@@ -599,7 +599,7 @@ You have the right to access the personal information about yourself held by the
 			<h2 class="lead-heading">Choose your current membership status below:</h2>
 		</div>
 
-		<div class="item" style="text-align: center; font-weight: 700;"><span class="item-description" style="">Due to high traffic some members may receive an error while renewing – we are investigating the cause and apologise for any inconvenience.</span></div>
+		<!-- <div class="item" style="text-align: center; font-weight: 700;"><span class="item-description" style="">Due to high traffic some members may receive an error while renewing – we are investigating the cause and apologise for any inconvenience.</span></div> -->
 
 		<div class="grid-block apa-member-grid">
 				
