@@ -1057,23 +1057,33 @@ ul.socials li a {
 
 
 .questions.section {
+	padding: 0;
 	background-color: white;
 	.questionPart {
-		padding: 11px;
 		margin-bottom: 10px;
 		.questionLabel h2 {
-			font-size: 4em;
+			line-height: 1.3em;
+			font-size: 3em;
 			font-weight: 200;
 			font-family: Cairo;
-			margin: 0 auto;
-			max-width: 860px;
+			.questionNums {
+				font-size: 0.5em;
+				font-weight: 600;
+			}
 		}
 		.buttons {
-			margin: 50px auto;
+			margin: 10px auto 0;
 			display: flex;
-			flex-direction: column;
-			justify-content: center;
+			flex-direction: row;
+			justify-content: left;
 			width: 100%;
+			&:nth-child(3) {
+				margin: 0 0 75px;
+				div.explanation {
+					border: 0.5px rgb(195,200,200) solid;
+					border-top: 0;
+				}
+			}
 			div:not(#done) {
 				transition: 0.3s;
 				transition-timing-function: cubic-bezier(0.14, 0.32, 0.58, 0.87);
@@ -1081,10 +1091,7 @@ ul.socials li a {
 			}
 			div {
 				clear: both;
-				min-width: 200px;
-				text-align: center;
-				font-family: Cairo;
-				font-weight: 400;
+				width: 100%;
 			}
 			.answer, .wrong, .right, .noright {
 				margin: auto;
@@ -1092,37 +1099,33 @@ ul.socials li a {
 			}
 			.answer {
 				cursor: pointer;
-				padding: 15px 20px 5px;
+				padding: 10px 20px;
 				font-size: 15px;
-				border: 0.5px solid rgba(0,0,0,0.1);
-				border-bottom: 0.5px solid rgba(0,159,218,0);
+				border: 0.5px rgb(195,200,200) solid;
+				border-right: 0;
 				transition: 0.1s linear;
+				background-color: rgba(195,200,200,0.05);
 				&:nth-child(3) {
-					border-bottom: 0.5px solid rgba(0,0,0,0.1);
+					border-right: 0.5px rgb(195,200,200) solid;
 				}
 				&:not(#done):hover {
-					padding: 12px 18px 5px;
-					background-color: rgba(0,0,0,0.05);
+					padding: 9px 18px;
+					background-color: rgba(195,200,200,0.2);
 					p {
 						color: @blue;
 					}
 				}
-			}
-			.right {
-				background-color: rgba(162,173,0,1);
-				float: initial !important;
-			}
-			.noright {
-				background-color: rgba(255,160,47,1);
-			}
-			.selected {
-				font-weight: bold;				
 				p {
-					color: white;
+					text-align: center;
+					margin: 5px auto;
 				}
 			}
-			.wrong {
-				background-color: rgba(146,0,117,1);
+			.selected {
+				font-weight: bold;
+				background-color: rgba(195,200,200,0.2);
+				p {
+					color:black;
+				}
 			}
 			.explanation {
 				display: none;
@@ -1131,18 +1134,11 @@ ul.socials li a {
 				margin-top: 1px;
 				.explanation {
 					display: block;
-					padding: 10px 20px;
-					color: white;
-					font-size: 15px;
-					p {
-						color: white;
-						font-size: 15px;
-					}
+					padding: 30px;
+					width: 100%;
+					margin: 0;
 					.font_style--after_p li {
-						list-style: none;
-						margin: -3px 0;
-						color: white;
-						font-size: 15px;
+						font-size: 1.1em;
 					}
 				}
 			}
