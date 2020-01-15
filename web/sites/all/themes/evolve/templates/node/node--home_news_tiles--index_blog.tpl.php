@@ -80,13 +80,20 @@
 */
 ?>
 <div id="node-<?php print $node->nid; ?>" style="margin-top:30px;" class="<?php print $classes; ?> post MediaListing" <?php print $attributes; ?>>
-    <div class="post-img media">
+      <div class="post-img media">
       <div class='mediaholder'>
         <?php print render($content['field_home_tile_image']);?>
       </div>
     </div>
     <div class="">
-		<a href="<?php print $node_url; ?>"><?php print $title; ?></a><br>
+    <?php if(is_null(render($content['field_url_for_page'])) && is_null(render($content['field_external_url_for_page']))): ?>
+      <a href="<?php print $node_url; ?>">
+    <?php elseif(!is_null(render($content['field_url_for_page']))): ?>
+      <a href="<?php echo $content['field_url_for_page']['#items'][0]['value']; ?>">
+    <?php elseif(!is_null(render($content['field_external_url_for_page']))): ?>
+      <a href="<?php echo $content['field_external_url_for_page']['#items'][0]['value']; ?>" target="_blank">
+    <?php endif; ?><?php print $title; ?></a>
+    <br>
 	    <?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?>
 	</div>
 	
