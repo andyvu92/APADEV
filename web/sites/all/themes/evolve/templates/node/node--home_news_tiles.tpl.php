@@ -81,7 +81,16 @@
    * @ingroup themeable
    */
   global $user;
-$userRole = $user->roles[3];
+$userRole = $user->roles[3]; // admin
+if(is_null($userRole)) {
+   $userRole = $user->roles[4]; // Media Editor
+   if(is_null($userRole)) {
+      $userRole = $user->roles[5]; // InMotion Editor
+      if(is_null($userRole)) {
+         $userRole = $user->roles[7]; // Content Editor
+      }
+   }
+}
    ?>
 <div style="height: 10px; width: 1px;">&nbsp;</div>
 <div class="Pagination"></div>
@@ -183,9 +192,8 @@ $userRole = $user->roles[3];
          </div>
       </div>
    </section>
-
    <?php elseif(!is_null(render($content['field_url_for_page'])) || !is_null(render($content['field_external_url_for_page']))): ?>
-      <?php if($userRole == "administrator"): ?>
+      <?php if(!is_null($userRole)): // has 'editing roll ?>
          <section class="post-content container" style="float:none; margin:auto;">
             <div class="region col-xs-12 col-sm-12 col-md-8 col-lg-8">
       
