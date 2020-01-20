@@ -128,4 +128,15 @@ jQuery(document).ready(function($) {
 	$('.limitworkplace .close-popup').click(function(){
 		$('.overlay').fadeOut();
 	});
+	
+	// media nav with hash
+	if(window.location.pathname.indexOf("/home") == 0 || window.location.pathname == "/") {
+		if(location.hash) {
+			var hash = location.hash;
+			$("body").on("scroll", clickTab(hash));
+		}
+		function clickTab(link) {
+			$(link).click();
+		}
+	}
 });
