@@ -19,6 +19,8 @@ if(!function_exists('drupal_session_started'))
 		$sendData["UserID"] = "-1";
 	}
 	$details = aptify_get_GetAptifyData("19", $sendData);
+	$arrColumn = array_column($details, 'NGtitle');
+	array_multisort($arrColumn, SORT_ASC, $details);	
 	//print_r($details);
 ?>
 <form id="pd-search-form" action="pd-search?search-result" method="POST">
