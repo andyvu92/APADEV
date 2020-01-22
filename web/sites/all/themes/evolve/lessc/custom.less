@@ -1068,11 +1068,11 @@ ul.socials li a {
 			font-family: Cairo;
 			.questionNums {
 				font-size: 0.5em;
-				font-weight: 600;
+				font-weight: 700;
 			}
 		}
 		.buttons {
-			margin: 10px auto 0;
+			margin: 28px auto 0;
 			display: flex;
 			flex-direction: row;
 			justify-content: left;
@@ -1126,25 +1126,68 @@ ul.socials li a {
 				border: 0.5px rgb(195,200,200) solid;
 				border-top: 0;
 				.font_style--after_p li {
-					font-size: 1.1em;
+					font-size: 1.3em;
 				}
 			}
 		}
 	}
 }
 
-@media screen and (max-width: @desktop-width) {
+@media screen and (max-width: @tablet-width) {
 	.questions.section .questionPart {
 		.questionLabel h2 {
-			font-size: 3em;
+			font-size: 2.6em;
 		}
 		.buttons {
-			.answer, .wrong, .right, .noright {
-				width: 100%;
+			margin: 32px auto 0;
+			.intro p {
+				font-size: 1.3em;
 			}
 		}
 	}
 }
+@media screen and (max-width: @larger-phone-width) {
+	.questions.section .questionPart {
+		.questionLabel h2 {
+			font-size: 2.3em;
+			.questionNums {
+				font-size: 0.6em;
+			}
+		}
+		.buttons {
+			.answer {
+				padding: 8px 12px;
+				font-size: 13px;
+			}
+			.intro p {
+				font-size: 1.2em;
+			}
+		}
+	}
+}
+@media screen and (max-width: @phone-width) {
+	.questions.section .questionPart {
+		.questionLabel h2 {
+			font-size: 2.5em;
+			.questionNums {
+				font-size: 0.57em;
+			}
+		}
+		.buttons {
+			&nth-child(3) {
+				margin: 0 0 40px;
+			}
+			.answer {
+				padding: 5px 10px;
+				font-size: 12px;
+			}
+			.intro p {
+				font-size: 1.1em;
+			}
+		}
+	}
+}
+
 /* @end */
 
 
