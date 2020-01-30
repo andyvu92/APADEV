@@ -1555,35 +1555,19 @@ jQuery(document).ready(function($) {
 	$("#10021").click(function(){
 		if($("#10021").val()=="1"){
 			$("#9977").removeAttr('disabled');
-		}
-		else{
+		} else{
 			$("#9977").attr('disabled', 'disabled');
 			$("#9977" ).prop('checked', false);
 		}
 	});
-	if($("#10021").val()=="1"){
-			$("#9977").removeAttr('disabled');
-		}
-		else{
-			$("#9977").attr('disabled', 'disabled');
-			$("#9977" ).prop('checked', false);
-		}
 	$("#10015").click(function(){
 		if($("#10015").val()=="1"){
 			$("#9978").removeAttr('disabled');
-		}
-		else{
+		} else{
 			$("#9978").attr('disabled', 'disabled');
 			$("#9978" ).prop('checked', false);
 		}
 	});
-	if($("#10015").val()=="1"){
-			$("#9978").removeAttr('disabled');
-		}
-		else{
-			$("#9978").attr('disabled', 'disabled');
-			$("#9978" ).prop('checked', false);
-	}
 	/*delete PRF from member shoppingcart  */
 	$(".deletePRFButton").click(function(){
 		$('#deletePRFForm').submit();

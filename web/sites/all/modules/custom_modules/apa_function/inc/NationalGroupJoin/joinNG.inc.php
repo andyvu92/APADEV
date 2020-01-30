@@ -134,6 +134,8 @@ $nationalGroup = $nationalGroups;
 			$countSubType = $countSubs%2;
 			$counter = 0;
 			$mgCounter = 0;
+			$sport = true;
+			$Musc = true;		
 			foreach($SubListAll as $Subs) {
 				$tr = $counter % 2;
 				if($tr == 0) {
@@ -154,6 +156,11 @@ $nationalGroup = $nationalGroups;
 				}
 				if(isset($_SESSION['UserId']) && in_array($Subs["NGid"], $myNG)){
 					echo "checked disabled";
+					if($Subs['SubscriptionID'] == '10021') {
+						$sport = false;
+					} if($Subs['SubscriptionID'] == '10015') {
+						$Musc = false;
+					}
 				}
 				echo '><label class="NGnameText'.$counter.'" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
 					.' <span class="not-avalable"> (You are already a member)</span></label></div>';
@@ -163,20 +170,37 @@ $nationalGroup = $nationalGroups;
 				}
 				$counter++;
 			}
+			/**
+			 * Todo:
+			 * If NG corelated to Mags is active, open.
+			 */
 			echo "<div class='flex-cell'>";
+			if(isset($_GET["ProductID"]) && in_array($MG['SubscriptionID'],$choseProduct)){ 
+				
+			}
 			foreach($FPListArray as $MG){
-								
 				echo '<div class="flex-col-6"><div class="flex-col-10"><input type="checkbox" name="'.$MG["ProductID"].
 					'" id="'.$MG["ProductID"].'" class="styled-checkbox MGname'.$mgCounter.'" ';
-				if($MG["ProductID"]=="9977"){
-		
-					echo "disabled";
-					if($SMag){
+				if($MG["ProductID"]=="9977") {
+					if($sport) {
+						echo " disabled";
+					} else {
+						if(isset($_GET["ProductID"]) && in_array($MG['ProductID'],$choseProduct)) {
+							echo " checked";
+						}
+					}
+					if($SMag) {
 						echo " checked";
 					}
 				}
-				if($MG["ProductID"]=="9978"){
-					echo "disabled";
+				if($MG["ProductID"]=="9978") {
+					if($Musc) {
+						echo " disabled";
+					} else {
+						if(isset($_GET["ProductID"]) && in_array($MG['ProductID'],$choseProduct)) {
+							echo " checked";
+						}
+					}
 					if($TMag){
 						echo " checked";
 					}
