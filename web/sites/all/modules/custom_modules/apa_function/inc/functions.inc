@@ -719,7 +719,7 @@ function getProductList($userID){
 } 
 function checkRenew($Paidthrough, $tag){
 	$currentDate = strtotime(date('d-m-Y'));
-	if(strtotime(date("d-m-Y",strtotime('-1 month'))) <= strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate']))) && strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate']))) <= strtotime(date("d-m-Y",strtotime('+2 month'))))  {
+	if(strtotime(date("d-m-Y",strtotime('-3 month'))) <= strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate']))) && strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate']))) <= strtotime(date("d-m-Y",strtotime('+2 month'))))  {
 		if($tag){
 			return true;
 		}
