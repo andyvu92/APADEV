@@ -478,6 +478,14 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	<?php if (sizeof($cardsnum["results"])!=0): ?>
 	<div id="hiddenPayment">
 	<p><span class="sidebardis">Payment Information:</span></p>
+
+	<?php if(sizeof($products)!=0):?>
+		<form id="discount" action="pd-shopping-cart" method="POST">
+			<input type="text" name="Couponcode" placeholder="Enter discount code" value="">
+			<button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button>
+		</form>
+		<span>&nbsp;</span>
+	<?php endif; ?>
 	
 	<div class="paymentsidecredit"> 
 		<fieldset>
@@ -673,12 +681,6 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 				<input type="number" class="form-control display-none" id="PRFOther" name="PRFOther" value="" oninput="this.value = Math.abs(this.value)" min="0">
 			</div>
 		</div>
-	<?php endif; ?>
-	<?php if(sizeof($products)!=0):?><p>
-		<form id="discount" action="pd-shopping-cart" method="POST">
-			<input type="text" name="Couponcode" placeholder="Enter discount code" value="">
-			<button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button>
-		</form></p>
 	<?php endif; ?>
      
 	<div class="row ordersummary">
