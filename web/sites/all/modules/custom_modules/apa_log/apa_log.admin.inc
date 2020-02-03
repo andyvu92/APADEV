@@ -96,6 +96,11 @@ function apa_log_admin_settings($form = array(), &$form_state= array()) {
     '#value' => t('Show All'),
     '#submit'=>array('log_all'),
   );
+  $form['textfield_input']['submit4'] = array(
+    '#type' => 'submit',
+    '#value' => t('Export'),
+    '#submit'=>array('export_all'),
+  );
   
    // filter automatically
   if(isset( $_SESSION['filterconditions']["type"] )) { $type =  $_SESSION['filterconditions']["type"] ;} else {  $type = $defaultType;}
