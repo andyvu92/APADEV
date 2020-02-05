@@ -101,7 +101,7 @@
 
 				<!-- LOGGED IN NOT A MEMBER -->
 			   <a popup-target="nationalGroupRestrictWindow"></a><?php print render($content['field_company_logo']); ?>
-			<?php elseif($_SESSION['MemberTypeID']!="1" && strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate'])))>= strtotime(date("d-m-Y",strtotime('-1 month')))):?>
+			<?php elseif(apa_member_check_status()):?>
 
 			<!-- LOGGED IN AS A MEMBER -->
 			<a popup-target="myModal-node-<?php print $node->nid; ?>"></a><?php print render($content['field_company_logo']); ?>
