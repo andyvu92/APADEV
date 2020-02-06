@@ -134,6 +134,33 @@ function nationalIcons(){
 			echo "</div>";
 		}
 }
+
+/**
+ * Return true if sport or Musc NG is there for this user.
+ */
+function magPossible() {
+	// 2.2.20 - GET list of subscribed National Group
+	// Send - 
+	// Request, User ID
+	// Response -
+	// National Group ID, National Group title
+	//$sendData["RequestNG"] = "RequestNG";
+	$sendData["UserID"] = $_SESSION['UserId'];
+	$nationalGroups = aptify_get_GetAptifyData("20", $sendData);	
+	$NGs = $nationalGroups["results"];
+	$output = ["result" => false, "NG" => null ];
+	$arr = "";
+	foreach($NGs as $NG) {
+		if($NG["NGid"] == "20" || $NG["NGid"] == "11") {
+			$output["result"] = true;
+			/// todo below line (157)
+			///////$arr = $arr.$NG["NGid"]);
+		}
+	}
+	$output["NG"] = $arr;
+	return $output;
+}
+
 /*PD detail page display product price fuction*/
 /*Parameters: $priceList, $cost*/
 /*PD detail page */

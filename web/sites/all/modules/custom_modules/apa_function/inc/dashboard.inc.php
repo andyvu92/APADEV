@@ -400,7 +400,7 @@ apa_function_dashboardLeftNavigation_form();
 			<?php endif;?>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 bottom-space bottom-section flex-column">
-		<?php if($_SESSION['MemberTypeID']!="1"): ?>
+			<?php if($_SESSION['MemberTypeID']!="1"): ?>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line" id="national-groups">
 				<span class="small-heading cairo">Your National Groups</span>
 				<div class="col-xs-12 dashboard-content-bottom ng-icons-group">
@@ -413,16 +413,28 @@ apa_function_dashboardLeftNavigation_form();
 				<a class="accent-button" href="/joinnationalgroup" id="ng-join-btn"><span>Join more</span></a>
 			</div>
 			<?php endif;?>
+			<?php 
+				$magPossible = magPossible();
+				var_dump($magPossible);
+			 if($magPossible["result"]): ?>
+			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line feedback">
+				<span class="small-heading cairo">Magazine subscriptions</span>
+				<span class="dashboard-content-bottom">Subscribe to your National Group's magazine and stay up-to-date with the latest developments in your area of physiotherapy.</span>
+				<a class="accent-button" href="/SubscribeMagazine?list=<?php echo $magPossible["NG"] ?>"><span>Subscribe</span></a>
+			</div>
+			<?php endif; ?>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line prf">
 					<span class="small-heading cairo">Donate to the PRF</span>
 					<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="">
 					<a class="accent-button" href="/PRFdonation"><span>Donate today</span></a>
 			</div>
+			<?php if(!$magPossible["result"]): ?>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line feedback">
 				<span class="small-heading cairo">Suggestions/ feedback</span>
 				<span class="dashboard-content-bottom">If you have a question or concern, please don’t hesitate to contact us. We’re always looking for ways to improve our member offering.</span>
 				<a class="accent-button" href="/contact-us"><span>Submit</span></a>
 			</div>
+			<?php endif; ?>
 		</div>
 	</div>
 </div>
