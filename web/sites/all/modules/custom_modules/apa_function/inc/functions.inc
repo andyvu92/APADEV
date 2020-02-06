@@ -139,6 +139,22 @@ function nationalIcons(){
  * Return true if sport or Musc NG is there for this user.
  */
 function magPossible() {
+	//Get user's subscribed magezine products
+	$sendData["UserID"] = $_SESSION['UserId'];
+	$Fellows = aptify_get_GetAptifyData("22", $sendData);
+	$MagSubs = Array();
+	$Fellow = $Fellows["results"];
+	$TMag = false;
+	$SMag = false;
+	foreach($Fellow as $Subs) {
+		if($Subs["ProductID"] == "9978") {
+			$TMag = true;
+		}
+		
+		if($Subs["ProductID"] == "9977") {
+			$SMag = true;
+		}
+	}
 	// 2.2.20 - GET list of subscribed National Group
 	// Send - 
 	// Request, User ID
@@ -151,10 +167,10 @@ function magPossible() {
 	$output = ["result" => false, "NG" => null ];
 	$arr = "";
 	foreach($NGs as $NG) {
-		if($NG["NGid"] == "20" || $NG["NGid"] == "11") {
+		if(($NG["NGid"] == "20" && !$SMag) || ($NG["NGid"] == "11" && !$TMag)) {
 			$output["result"] = true;
 			/// todo below line (157)
-			///////$arr = $arr.$NG["NGid"]);
+			$arr .= $NG["NGid"]." ";
 		}
 	}
 	$output["NG"] = $arr;

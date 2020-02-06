@@ -313,6 +313,16 @@ function apa_function_joinng_form() {
     /// block
     include __DIR__."/inc/NationalGroupJoin/joinNG.inc.php";
 }
+
+/**
+ * Page Dashboard Magizine Subscribe.
+ *
+ * @see apa_function_menu()
+ */
+function apa_function_dashboard_mg_sub_form() {
+    /// block
+    include __DIR__."/inc/NationalGroupJoin/dashboardMGSub.inc.php";
+}
 function apa_function_ngshoppingcart_form() {
     /// not in use
     include __DIR__."/inc/NationalGroupJoin/NGShoppingCart.inc.php";

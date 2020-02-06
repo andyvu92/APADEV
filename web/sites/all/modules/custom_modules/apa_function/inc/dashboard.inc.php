@@ -415,8 +415,7 @@ apa_function_dashboardLeftNavigation_form();
 			<?php endif;?>
 			<?php 
 				$magPossible = magPossible();
-				var_dump($magPossible);
-			 if($magPossible["result"]): ?>
+				if($magPossible["result"]): ?>
 			<div class="col-xs-12 col-sm-12 col-md-4 mobile_line feedback">
 				<span class="small-heading cairo">Magazine subscriptions</span>
 				<span class="dashboard-content-bottom">Subscribe to your National Group's magazine and stay up-to-date with the latest developments in your area of physiotherapy.</span>
