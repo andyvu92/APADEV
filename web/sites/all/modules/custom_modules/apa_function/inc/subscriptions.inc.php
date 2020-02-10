@@ -236,7 +236,7 @@ apa_function_dashboardLeftNavigation_form();
 										}
 									} else {									
 										// for InMotion print copy
-										if($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") {
+										if(($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") && $Subs["SubscriptionID"] == "18") {
 											// No InMotion print copy for 
 											// student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
 										} else {
