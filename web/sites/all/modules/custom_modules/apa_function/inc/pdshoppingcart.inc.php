@@ -646,7 +646,15 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		</div>
 	</form>	-->
 	<div id="addPaymentCardForm">
-	<span class="sidebardis sidebar_heading">Payment information</span>
+	<p><span class="sidebardis">Payment Information:</span></p>
+
+	<?php if(sizeof($products)!=0):?>
+		<form id="discount" action="pd-shopping-cart" method="POST">
+			<input type="text" name="Couponcode" placeholder="Enter discount code" value="">
+			<button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button>
+		</form>
+		<span>&nbsp;</span>
+	<?php endif; ?>
 	<?php $the_form = drupal_get_form('pd_shoppingcart_form');
              print drupal_render($the_form);?>
     </div>
