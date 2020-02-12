@@ -2886,7 +2886,6 @@ jQuery(document).ready(function() {
 
   // dashboard account menu handler
   $('.dashboard-left-nav').each(function () {
-    var leftNav = $(this);
     var toggle = $(this).find('.account_menu');
     var subMenu = $(this).find('.account_submenu');
     var dashboard = $('body').find('#dashboard-right-content');
@@ -3017,6 +3016,75 @@ jQuery(document).ready(function() {
     } // end if
   });
 
+  // handle fail submission for dashboard user profile
+  $('#profile-details-form').each(function(){
+    // define this form
+    var form = $(this);
+    // define form containers
+    var accountDetailsContainer = $(this).find('div#account-details');
+    var membershipContainer = $(this).find('div#account-membership');
+    var paymentContainer = $(this).find('div#account-payment');
+    var workplaceContainer = $(this).find('div#account-workplace');
+    var educationContainer = $(this).find('div#account-education');
+
+    // define form links
+    var accountDetailsLink = $('body .nav').find('a[href="#profile"]').parent();
+    var membershipLink = $('body .nav').find('a[href="#membership""]').parent();
+    var paymentLink = $('body .nav').find('a[href="#payment"]').parent();
+    var workplaceLink = $('body .nav').find('a[href="#workplace"]').parent();
+    var educationLink = $('body .nav').find('a[href="#education"]').parent();
+
+    // define submit button
+    var submitBtn = $(this).find('button#your-details-submit-button');
+
+    // when submit button is clicked
+    $(submitBtn).on('click', function(){
+      // wait for error classes to be assigned
+      setTimeout(() => {
+        if( accountDetailsContainer.find('.focuscss').length > 0 ){
+          $(accountDetailsLink).addClass('error');
+          var icon = '<svg class="warning_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01c.564-1.789 1.632-3.932 1.821-4.474.273-.787-.211-1.136-1.74.209l-.34-.64c1.744-1.897 5.335-2.326 4.113.613-.763 1.835-1.309 3.074-1.621 4.03-.455 1.393.694.828 1.819-.211.153.25.203.331.356.619-2.498 2.378-5.271 2.588-4.408-.146zm4.742-8.169c-.532.453-1.32.443-1.761-.022-.441-.465-.367-1.208.164-1.661.532-.453 1.32-.442 1.761.022.439.466.367 1.209-.164 1.661z"/></svg>';
+          if( accountDetailsLink.find('svg').length < 1 ){
+            $(accountDetailsLink).append(icon);
+          }
+        }
+        if( membershipContainer.find('.focuscss').length > 0 ){
+          membershipLink.addClass('error');
+          var icon = '<svg class="warning_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01c.564-1.789 1.632-3.932 1.821-4.474.273-.787-.211-1.136-1.74.209l-.34-.64c1.744-1.897 5.335-2.326 4.113.613-.763 1.835-1.309 3.074-1.621 4.03-.455 1.393.694.828 1.819-.211.153.25.203.331.356.619-2.498 2.378-5.271 2.588-4.408-.146zm4.742-8.169c-.532.453-1.32.443-1.761-.022-.441-.465-.367-1.208.164-1.661.532-.453 1.32-.442 1.761.022.439.466.367 1.209-.164 1.661z"/></svg>';
+          if( membershipLink.find('svg').length < 1 ){
+            $(membershipLink).append(icon);
+          }
+        }
+        if( paymentContainer.find('.focuscss').length > 0 ){
+          paymentLink.addClass('error');
+          var icon = '<svg class="warning_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01c.564-1.789 1.632-3.932 1.821-4.474.273-.787-.211-1.136-1.74.209l-.34-.64c1.744-1.897 5.335-2.326 4.113.613-.763 1.835-1.309 3.074-1.621 4.03-.455 1.393.694.828 1.819-.211.153.25.203.331.356.619-2.498 2.378-5.271 2.588-4.408-.146zm4.742-8.169c-.532.453-1.32.443-1.761-.022-.441-.465-.367-1.208.164-1.661.532-.453 1.32-.442 1.761.022.439.466.367 1.209-.164 1.661z"/></svg>';
+          if( paymentLink.find('svg').length < 1 ){
+            $(paymentLink).append(icon);
+          }
+        }
+        if( workplaceContainer.find('.focuscss').length > 0 ){
+          $(workplaceLink).addClass('error');
+          var icon = '<svg class="warning_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01c.564-1.789 1.632-3.932 1.821-4.474.273-.787-.211-1.136-1.74.209l-.34-.64c1.744-1.897 5.335-2.326 4.113.613-.763 1.835-1.309 3.074-1.621 4.03-.455 1.393.694.828 1.819-.211.153.25.203.331.356.619-2.498 2.378-5.271 2.588-4.408-.146zm4.742-8.169c-.532.453-1.32.443-1.761-.022-.441-.465-.367-1.208.164-1.661.532-.453 1.32-.442 1.761.022.439.466.367 1.209-.164 1.661z"/></svg>';
+          if( workplaceLink.find('svg').length < 1 ){
+            $(workplaceLink).append(icon);
+          }
+        }
+        if( educationContainer.find('.focuscss').length > 0 ){
+          educationLink.addClass('error');
+          var icon = '<svg class="warning_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01c.564-1.789 1.632-3.932 1.821-4.474.273-.787-.211-1.136-1.74.209l-.34-.64c1.744-1.897 5.335-2.326 4.113.613-.763 1.835-1.309 3.074-1.621 4.03-.455 1.393.694.828 1.819-.211.153.25.203.331.356.619-2.498 2.378-5.271 2.588-4.408-.146zm4.742-8.169c-.532.453-1.32.443-1.761-.022-.441-.465-.367-1.208.164-1.661.532-.453 1.32-.442 1.761.022.439.466.367 1.209-.164 1.661z"/></svg>';
+          if( educationLink.find('svg').length < 1 ){
+            $(educationLink).append(icon);
+          }
+        }
+      }, 50)
+    });
+
+    // remove warning icon on click
+    $(accountDetailsLink, membershipLink, paymentLink, workplaceLink, educationLink).find('a').on('click', function(){
+      $(this).parent().find('svg.warning_icon').remove();
+    });
+  });
+
   // inMotion video play
   $('.node-type-inmotion .post-img.media').each(function(){
     var playBtn = $(this).find('.play_button');
@@ -3057,7 +3125,7 @@ jQuery(document).ready(function() {
       $(this).addClass('active');
       $(this).siblings().removeClass('active');
       var targetDiv = $(this).attr('data-content');
-      console.log("here: "+targetDiv+" "+wrapper);
+      // console.log("here: "+targetDiv+" "+wrapper);
       $(wrapper).find('div.'+targetDiv).siblings().hide();
       $(wrapper).find('div.'+targetDiv).fadeIn();
 		});
