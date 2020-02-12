@@ -70,7 +70,7 @@ jQuery(document).ready(function($) {
 				for (t = 0; t<eduMaxNum;t++){
 					if($("select[name=Udegree"+t+"]").val() ==''){$("select[name=Udegree"+t+"]").addClass("focuscss");}else{$("select[name=Udegree]").removeClass("focuscss");}
 					if($("select[name=Undergraduate-university-name"+t+"]").val() ==''){$("select[name=Undergraduate-university-name"+t+"]").addClass("focuscss");}else{$("select[name=Undergraduate-university-name"+t+"]").removeClass("focuscss");}
-					if($("input[name=Undergraduate-university-name-other"+t+"]").length!== 0){
+					if($("input[name=Undergraduate-university-name-other"+t+"]").length!== 0 && !$("input[name=Undergraduate-university-name-other"+t+"]").hasClass("display-none")){
 						if($("input[name=Undergraduate-university-name-other"+t+"]").val() ==''){$("input[name=Undergraduate-university-name-other"+t+"]").addClass("focuscss");}else{$("input[name=Undergraduate-university-name-other"+t+"]").removeClass("focuscss");}
 					}
 					if($("select[name=Ugraduate-country"+t+"]").val() ==''){$("select[name=Ugraduate-country"+t+"").addClass("focuscss");}else{$("select[name=Ugraduate-country"+t+"").removeClass("focuscss");}
