@@ -118,12 +118,52 @@ if(isset($_GET["page"])) {
 	$request["PageNumber"] = "1";
 }
 $results = aptify_get_GetAptifyData("28", $request);
-/*
+//Keep track of the search criteria and save on APA end
+if($request["Keyword"]!="" || $request["Typeofpd"] !="" || $request["Nationalgp"]!="" || $request["State"]!="" || $request["Suburb"]!=""){
+	if(isset($_SESSION['UserId'])) {
+		$pdSearchCriteria["UserID"] = $request["UserID"];
+		$pdSearchCriteria["UserEmail"] = $_SESSION['Email'];
+		$pdSearchCriteria["UserState"] = $_SESSION['userState'];
+		$pdSearchCriteria["UserSuburb"] = $_SESSION['userSub'];
+		if(isset($_SESSION['nationGP']) && sizeof($_SESSION['nationGP'])!=0){
+			$userNGArray = array();
+			foreach($_SESSION['nationGP'] as $userNG){
+				array_push($userNGArray, $userNG["Name"]);
+			}
+			$pdSearchCriteria["UserNG"] = implode(",", $userNGArray);
+		}
+		else{
+			$pdSearchCriteria["UserNG"] = "";
+		}
+	}
+	else{
+		$pdSearchCriteria["UserID"] = "";
+		$pdSearchCriteria["UserEmail"] = "";
+		$pdSearchCriteria["UserState"] = "";
+		$pdSearchCriteria["UserSuburb"] = "";
+		$pdSearchCriteria["UserNG"] = "";
+	}
+	$pdSearchCriteria["keyWord"] = $request["Keyword"];
+	$pdSearchCriteria["Type"] = $request["Typeofpd"];
+	$pdSearchCriteria["NG"] = $request["Nationalgp"];
+	if($request["Nationalgp"] !="") {
+		$searchNGID = explode(",",$request["Nationalgp"]);
+		$ngArray = array();
+		foreach($searchNGID as $tempID){
+			array_push($ngArray, getNGName($tempID));
+         
+		}
+		$pdSearchCriteria["NG"] = implode(",", $ngArray);
+		
+	}
+	else{ $pdSearchCriteria["NG"] = "";}
+	$pdSearchCriteria["State"] = $request["State"];
+	$pdSearchCriteria["Suburb"] = $request["Suburb"];
+	savePDSearch($pdSearchCriteria);
+}
+
 ?>
-<p>test</p>
-<?php var_dump($results); ?>
 <?php
-*/
 $outputEmpty = false;
 if(isset($results['MResponse'])) {
 	//echo 'no record!!!';

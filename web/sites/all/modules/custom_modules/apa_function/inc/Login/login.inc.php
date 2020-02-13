@@ -698,6 +698,7 @@ if($resultdata['result']) {
 			$details = aptify_get_GetAptifyData("4", $data,"");
 			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
 			nameUpdate($details["Firstname"], $details["Preferred-name"]);
+			pdGetInfo($details["State"], $details["Suburb"]);
 			/*
 			$checkSSO = $_SESSION["UserId"];
 			$detailstt = GetAptifyData("0", $checkSSO);

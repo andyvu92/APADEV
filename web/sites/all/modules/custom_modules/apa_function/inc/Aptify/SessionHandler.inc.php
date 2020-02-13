@@ -31,6 +31,10 @@ function nameUpdate($FirstName, $PrefName) {
 	$_SESSION['FirstName'] = $FirstName;
 	$_SESSION['Preferred-name'] = $PrefName;
 }
+function pdGetInfo($userState, $userSub) {
+	$_SESSION['userState'] = $userState;
+	$_SESSION['userSub'] = $userSub;
+}
 function deleteSession() {
 	// login related data
 	unset($_SESSION['Log-in']);
@@ -51,6 +55,8 @@ function deleteSession() {
 	unset($_SESSION['Status']);
 	unset($_SESSION['Speciality']);
 	unset($_SESSION['payThroughDate']);
+	unset($_SESSION['userState']);
+	unset($_SESSION['userSub']);
 	// SSO data
 	unset($_SESSION["outputReturn"]);
 	unset($_SESSION["thirdParty"]);

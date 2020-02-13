@@ -648,6 +648,45 @@ function SavePDSurvey($CreateNewUserPD){
 				->execute();
 	
 }
+// save pd search criteria
+function savePDSearch($pdSearchCriteria){
+	$UserID = $pdSearchCriteria["UserID"];
+	$UserEmail = $pdSearchCriteria["UserEmail"];
+	$UserState = $pdSearchCriteria["UserState"];
+	$UserSuburb = $pdSearchCriteria["UserSuburb"];
+	$UserNG = $pdSearchCriteria["UserNG"];
+	$keyWord = $pdSearchCriteria["keyWord"];
+	$Type = $pdSearchCriteria["Type"];
+	$NG = $pdSearchCriteria["NG"];
+	$State = $pdSearchCriteria["State"];
+	$Suburb = $pdSearchCriteria["Suburb"];
+	$PDSearch	=  db_insert('pd_search') 
+				->fields(array(
+				  'UserID' => $UserID,
+				  'UserEmail' => $UserEmail,
+				  'UserState' => $UserState,
+				  'UserSuburb' => $UserSuburb,
+				  'UserNG' => $UserNG,
+				  'keyWord' => $keyWord,
+				  'Type' => $Type,
+				  'NG' => $NG,
+				  'State' => $State,
+				  'Suburb' => $Suburb,
+				))
+				->execute();
+
+}
+//find National group name from NGID
+function getNGName($ngID){
+	if(isset($_SESSION['UserID'])) {
+		$sendData["UserID"] = $_SESSION['UserId'];
+	} else {
+		$sendData["UserID"] = "-1";
+	}
+	$nationalGroups = aptify_get_GetAptifyData("19", $sendData);
+	$ngName = $nationalGroups[array_search($ngID,  array_column($nationalGroups, 'NGid'))]["NGtitle"];
+	return $ngName;
+}
 function createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type){
 	/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
 	$dbt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
