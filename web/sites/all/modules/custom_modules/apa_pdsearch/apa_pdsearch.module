@@ -1,0 +1,124 @@
+<?php
+require __DIR__ . '/apa_pdsearch.admin.inc';
+/**
+ * Implements hook_permission().
+ */
+function apa_pdsearch_permission()
+{
+  //setting module permissions
+  return [
+    'access apa_pdsearch settings' => [
+      'title' => t('access PD Search settings'),
+      'description' => t('Access PD Search Settings'),
+    ],
+  ];
+}
+/**
+ * Implements hook_menu().
+ */
+function apa_pdsearch_menu() {
+  // A path where all Global config lives.
+  $items['admin/config/system/pd'] = array(
+    'title' => 'APA PD',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apa_pdsearch_admin_settings'),
+    'access arguments' => array('access apa_pdsearch settings'),
+    'weight' => 0,
+    'type' => MENU_NORMAL_ITEM,
+        
+  );
+  $items['admin/config/system/pd/pdsearch'] = array(
+    'title' => 'APA PD Search criteria',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apa_pdsearch_admin_settings'),
+    'access arguments' => array('access apa_pdsearch settings'),
+    //'access callback' => TRUE,
+    'weight' => 1,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    
+  );
+  $items['admin/config/system/pd/test'] = array(
+    'title' => 'APA PD Search criteria',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apa_pd_admin_settings'),
+    'access arguments' => array('access apa_pdsearch settings'),
+    //'access callback' => TRUE,
+    'weight' => 1,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    
+  );
+  return $items;
+}
+/*
+* Create submit function to get the value
+*/
+function pdsearch_submit($form, &$form_state) {
+  //$form_state['storage']['type'] = $form_state['values']['type'];
+  $filterConditions =  array();
+  $filterConditions["beginDate"] = $form_state['values']['beginDate'];
+  $filterConditions["endDate"] = $form_state['values']['endDate'];
+  $form_state['rebuild'] = TRUE; 
+  drupal_session_start();
+  $_SESSION["filterconditions"] = $filterConditions;
+}
+/*
+* Show all data from member_log table
+*/
+function clear_allsearch($form, &$form_state) {
+   drupal_session_start();
+   if(isset($_SESSION["filterconditions"])) {  unset($_SESSION["filterconditions"]); }
+  
+}
+
+/*
+* Export the data
+*/
+function export_pd($form, &$form_state) {
+  $query = db_select('pd_search','m');
+  $query ->fields('m', array('UserID','UserEmail', 'UserState', 'UserSuburb', 'UserNG', 'keyWord','Type','NG','State','Suburb', 'CreateDate'));
+  if(isset($_SESSION['filterconditions']["beginDate"]) && isset($_SESSION['filterconditions']["endDate"])) { 
+  $query->condition('CreateDate', array($_SESSION['filterconditions']["beginDate"], $_SESSION['filterconditions']["endDate"]), 'BETWEEN'); }
+  $query->orderBy('CreateDate', 'DESC');
+  $queryResult = $query->execute();
+  $arrayReturn = array();
+  while ($row = $queryResult->fetchAssoc()) {$arrayReturn[] = $row;  }  
+    $arrayResult = array();
+  if(sizeof($arrayReturn)!= 0){
+      foreach($arrayReturn as $singleArr){
+        $tempResult = array();
+        $tempResult['UserID'] = $singleArr['UserID'];
+        $tempResult['UserEmail'] = $singleArr['UserEmail'];
+        $tempResult['UserState'] = $singleArr['UserState'];
+        $tempResult['UserSuburb'] = $singleArr['UserSuburb'];
+        $tempResult['UserNG'] = $singleArr['UserNG'];
+        $tempResult['keyWord'] = $singleArr['keyWord'];
+        $tempResult['Type'] = $singleArr['Type'];
+        $tempResult['NG'] = $singleArr['NG'];
+        $tempResult['State'] = $singleArr['State'];
+        $tempResult['Suburb'] = $singleArr['Suburb'];
+        $tempResult['CreateDate'] = $singleArr['CreateDate'];
+        array_push($arrayResult, $tempResult);
+      }
+  }
+  drupal_add_http_header('Content-Type', 'text/csv');
+  drupal_add_http_header('Content-Disposition', 'attachment; filename=pd_search.csv');
+  $csvdata = 'UserID,UserEmail,UserState,UserSuburb,UserNG,keyWord,Type,NG,State,Suburb,CreateDate' . PHP_EOL;
+  foreach ($arrayResult as $record) {
+    $row = array();
+    $row[] = $record['UserID']; 
+    $row[] = $record['UserEmail'];
+    $row[] = $record['UserState'];
+    $row[] = $record['UserSuburb'];
+    $row[] = str_replace(",", " ",$record['UserNG']); 
+    $row[] = $record['keyWord']; 
+    $row[] = $record['Type']; 
+    $row[] = str_replace(",", " ",$record['NG']); 
+    $row[] = $record['State'];
+    $row[] = $record['Suburb'];
+    $row[] = $record['CreateDate'];
+    $csvdata .= implode("," , $row). PHP_EOL;
+ }
+  print $csvdata;
+  drupal_exit();
+ 
+}

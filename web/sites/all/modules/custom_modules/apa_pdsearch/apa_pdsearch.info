@@ -1,0 +1,7 @@
+name = APA PD Search Module
+description = APA PD Search Functions.
+package = APA
+core = 7.x
+
+files[] = apa_pdsearch.admin.inc
+files[] = apa_pdsearch.module

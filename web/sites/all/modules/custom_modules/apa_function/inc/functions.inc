@@ -660,6 +660,7 @@ function savePDSearch($pdSearchCriteria){
 	$NG = $pdSearchCriteria["NG"];
 	$State = $pdSearchCriteria["State"];
 	$Suburb = $pdSearchCriteria["Suburb"];
+	$CreateDate = $pdSearchCriteria["CreateDate"];
 	$PDSearch	=  db_insert('pd_search') 
 				->fields(array(
 				  'UserID' => $UserID,
@@ -672,6 +673,7 @@ function savePDSearch($pdSearchCriteria){
 				  'NG' => $NG,
 				  'State' => $State,
 				  'Suburb' => $Suburb,
+				  'CreateDate' => $CreateDate,
 				))
 				->execute();
 

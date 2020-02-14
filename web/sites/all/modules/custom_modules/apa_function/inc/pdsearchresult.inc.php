@@ -159,6 +159,8 @@ if($request["Keyword"]!="" || $request["Typeofpd"] !="" || $request["Nationalgp"
 	else{ $pdSearchCriteria["NG"] = "";}
 	$pdSearchCriteria["State"] = $request["State"];
 	$pdSearchCriteria["Suburb"] = $request["Suburb"];
+	$CreateDate = date('Y-m-d');
+	$pdSearchCriteria["CreateDate"] = $CreateDate;
 	savePDSearch($pdSearchCriteria);
 }
 
