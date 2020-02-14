@@ -1,0 +1,88 @@
+<?php
+require __DIR__ . '/apa_pd.admin.inc';
+/**
+ * Implements hook_permission().
+ */
+function apa_pd_permission()
+{
+  //setting module permissions
+  return [
+    'PD settings' => [
+      'title' => t('pd settings'),
+      'description' => t('Search PD Settings'),
+    ],
+  ];
+}
+/**
+ * Implements hook_menu().
+ */
+function apa_pd_menu() {
+  // A path where all Global config lives.
+  $items['admin/config/system/apapd'] = array(
+    'title' => 'APA Non member register PD',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('apa_pd_admin_settings'),
+    'access arguments' => array('PD settings'),
+    //'access callback' => TRUE,
+    'type' => MENU_LOCAL_ACTION | MENU_NORMAL_ITEM,
+    
+  );
+  return $items;
+}
+/*
+* Create submit function to get the value
+*/
+function pd_submit($form, &$form_state) {
+  //$form_state['storage']['type'] = $form_state['values']['type'];
+  $filterConditions =  array();
+  $filterConditions["beginDate"] = $form_state['values']['beginDate'];
+  $filterConditions["endDate"] = $form_state['values']['endDate'];
+   $form_state['rebuild'] = TRUE; 
+   drupal_session_start();
+  $_SESSION["filterconditions"] = $filterConditions;
+}
+
+/*
+* Export the data
+*/
+function export_pd($form, &$form_state) {
+  $variables = array();
+  $header = array('User ID', 'Email Address', 'Job', 'Date');
+  $query = db_select('pdsurvey','pd');
+  $query ->fields('pd', array('UserID','EmailAddress', 'Job', 'CreateDate'));
+  // handle display all data
+  $query->condition('Job', "Physiotherapist");
+  if(isset($_SESSION['filterconditions']["beginDate"]) && isset($_SESSION['filterconditions']["endDate"])) { 
+  $query->condition('CreateDate', array($_SESSION['filterconditions']["beginDate"], $_SESSION['filterconditions']["endDate"]), 'BETWEEN'); }
+  $query->orderBy('CreateDate', 'DESC');
+  $query->distinct('UserID');
+  $queryResult = $query->execute();
+  $arrayReturn = array();
+  while ($row = $queryResult->fetchAssoc()) {$arrayReturn[] = $row;  }  
+    $arrayResult = array();
+  if(sizeof($arrayReturn)!= 0){
+      foreach($arrayReturn as $singleArr){
+        $tempResult = array();
+        $tempResult['UserID'] = $singleArr['UserID'];
+        $tempResult['EmailAddress'] = $singleArr['EmailAddress'];
+        $tempResult['Job'] = $singleArr['Job'];
+        $tempResult['CreateDate'] = $singleArr['CreateDate'];
+        array_push($arrayResult, $tempResult);
+      }
+  }
+  drupal_add_http_header('Content-Type', 'text/csv');
+  drupal_add_http_header('Content-Disposition', 'attachment; filename=no_member_PD.csv');
+  $csvdata = 'UserID,Email Address,Job,Date' . PHP_EOL;
+  foreach ($arrayResult as $record) {
+    $row = array();
+    $row[] = $record['UserID']; 
+    $row[] = $record['EmailAddress'];
+    //$row[] = str_replace("<br/><br/>", "    ",str_replace(",", " ",$record['JsonMessage'])); 
+    $row[] = $record['Job'];
+    $row[] = $record['CreateDate'];
+    $csvdata .= implode("," , $row). PHP_EOL;
+ }
+  print $csvdata;
+  drupal_exit();
+ 
+}

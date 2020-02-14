@@ -1,0 +1,7 @@
+name = APA PD Module
+description = APA PD Functions.
+package = APA
+core = 7.x
+
+files[] = apa_pd.admin.inc
+files[] = apa_pd.module
