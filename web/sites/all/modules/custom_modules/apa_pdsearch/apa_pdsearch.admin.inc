@@ -3,7 +3,7 @@
  * Create admin page to render drupal table view.
  * Display the log about member transaction
  */
-function apa_pd_admin_settings($form = array(), &$form_state= array()) {
+function apa_pdmain_admin_settings($form = array(), &$form_state= array()) {
   $form = array();
   $form['textfield_input'] = array(
     '#type' => 'fieldset',
@@ -55,7 +55,7 @@ function apa_pdsearch_admin_settings($form = array(), &$form_state= array()) {
   $form['textfield_input']['submit2'] = array(
     '#type' => 'submit',
     '#value' => t('Export'),
-    '#submit'=>array('export_pd'),
+    '#submit'=>array('export_pdsearch'),
   );
   
    // filter automatically
