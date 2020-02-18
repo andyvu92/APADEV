@@ -119,7 +119,7 @@ if(isset($_GET["page"])) {
 }
 $results = aptify_get_GetAptifyData("28", $request);
 //Keep track of the search criteria and save on APA end
-if($request["Keyword"]!="" || $request["Typeofpd"] !="" || $request["Nationalgp"]!="" || $request["State"]!="" || $request["Suburb"]!=""){
+if($request["Keyword"]!="" || $request["Typeofpd"] !="" || $request["Nationalgp"]!="" || $request["State"]!="" || $request["Suburb"]!="" || $request["EndDate"]!="" || $request["BeginDate"]!="" ){
 	if(isset($_SESSION['UserId'])) {
 		$pdSearchCriteria["UserID"] = $request["UserID"];
 		$pdSearchCriteria["UserEmail"] = $_SESSION['Email'];
@@ -159,6 +159,16 @@ if($request["Keyword"]!="" || $request["Typeofpd"] !="" || $request["Nationalgp"
 	else{ $pdSearchCriteria["NG"] = "";}
 	$pdSearchCriteria["State"] = $request["State"];
 	$pdSearchCriteria["Suburb"] = $request["Suburb"];
+	if($request["BeginDate"]!=""){ 
+		$pdSearchCriteria["searchBDate"] = date('Y-m-d', strtotime($request["BeginDate"]));//str_replace("/", "-", $request["BeginDate"]);
+	}else{
+		$pdSearchCriteria["searchBDate"] = NULL;
+	}
+	if($request["EndDate"]!=""){ 
+		$pdSearchCriteria["searchEDate"] = date('Y-m-d', strtotime($request["EndDate"]));//str_replace("/", "-", $request["EndDate"]);
+    }else{
+		$pdSearchCriteria["searchEDate"] = NULL;
+	}
 	$CreateDate = date('Y-m-d');
 	$pdSearchCriteria["CreateDate"] = $CreateDate;
 	savePDSearch($pdSearchCriteria);
