@@ -60,9 +60,9 @@ function apa_pdsearch_admin_settings($form = array(), &$form_state= array()) {
   
    // filter automatically
   $variables = array();
-  $header = array('UserID', 'UserEmail', 'UserState', 'UserSuburb', 'UserNG', 'keyWord', 'Type','NG','State','Suburb', 'CreateDate');
+  $header = array('UserID', 'UserEmail', 'UserState', 'UserSuburb', 'UserNG', 'keyWord', 'Type','NG','State','Suburb', 'BeginDate', 'EndDate', 'CreateDate');
   $query = db_select('pd_search','m');
-  $query ->fields('m', array('UserID','UserEmail', 'UserState', 'UserSuburb', 'UserNG', 'keyWord','Type','NG','State','Suburb', 'CreateDate'));
+  $query ->fields('m', array('UserID','UserEmail', 'UserState', 'UserSuburb', 'UserNG', 'keyWord','Type','NG','State','Suburb','searchBDate','searchEDate', 'CreateDate'));
   if(isset($_SESSION['filterconditions']["beginDate"]) && isset($_SESSION['filterconditions']["endDate"])) { 
     $query->condition('CreateDate', array($_SESSION['filterconditions']["beginDate"], $_SESSION['filterconditions']["endDate"]), 'BETWEEN'); }
   $query->orderBy('CreateDate', 'DESC');
@@ -84,6 +84,8 @@ function apa_pdsearch_admin_settings($form = array(), &$form_state= array()) {
         $tempResult['NG'] = $singleArr['NG'];
         $tempResult['State'] = $singleArr['State'];
         $tempResult['Suburb'] = $singleArr['Suburb'];
+        $tempResult['searchBDate'] = $singleArr['searchBDate'];
+        $tempResult['searchEDate'] = $singleArr['searchEDate'];
         $tempResult['CreateDate'] = $singleArr['CreateDate'];
         array_push($arrayResult, $tempResult);
       }
