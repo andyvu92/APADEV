@@ -186,7 +186,7 @@ $background = getBackgroundImage($userID);
 					</div>
 					<div class="flex-cell body-text">
 						<span>A copy of your purchase receipt and membership certification will be sent to your inbox.</span>
-						<span class="note_box">Your Business Entity is not covered by your APA Insurance Policy. Please <a href="https://apa.bmsgroup.com?utm_source=apa&utm_medium=website&utm_campaign=renewal" target="_blank">click here</a> to proceed to BMS’s microsite to take up Business Entity Insurance. BMS will gather additional information to provide you a quote.<br>
+						<span class="note_box">Your Business Entity is not covered by your APA Insurance Policy. Please <a href="https://apa.bmsgroup.com?utm_source=apa&utm_medium=website&utm_campaign=renewal" target="_blank">click here</a> to proceed to BMS’s microsite to take up Business Entity Insurance. BMS will gather additional information to provide you a quote.<br><br>
 							Business Entity Insurance provides cover for your Business Name, and is separate to your individual Professional Indemnity Insurance. For more information, <a href="https://australian.physio/apa-member-insurance-program">click here.</a></span>
 						<span>In the meantime, you might like to:</span>
 					</div>
