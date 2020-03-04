@@ -104,6 +104,7 @@ if(sizeof($productList)!=0){
 		$UserID = $productDetail['ID'];
 		$PDtotalArray["Coupon"] = $Lproduct['coupon'];
 		$couponCode = $Lproduct['coupon'];
+		$vars = $couponCode;
 		array_push($PDarray, $PDtotalArray);
 	}
 }
@@ -577,8 +578,8 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
 		</div>
 		</form>-->
-		<?php $the_form = drupal_get_form('pd_shoppingcart_form');
-             print drupal_render($the_form);	?>
+		<?php $the_form = drupal_get_form('pd_shoppingcart_form',$vars);
+			print drupal_render($the_form);	?>
 	</div>
 	
 	</div>
@@ -655,8 +656,8 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		</form>
 		<span>&nbsp;</span>
 	<?php endif; ?>
-	<?php $the_form = drupal_get_form('pd_shoppingcart_form');
-             print drupal_render($the_form);?>
+	<?php $the_form = drupal_get_form('pd_shoppingcart_form',$vars);
+	        print drupal_render($the_form);?>
     </div>
 	<?php endif; ?>
 	
