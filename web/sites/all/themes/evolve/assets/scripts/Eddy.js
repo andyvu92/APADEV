@@ -43,7 +43,7 @@ jQuery(document).ready(function($) {
 	
 	function removeSpan(string) {
 		var returnTxt = string;
-		if(returnTxt.includes("span")) {
+		if(returnTxt.includes("<span")) {
 			var n = returnTxt.indexOf("span");
 			var mx = returnTxt.length;
 			if(returnTxt.charAt(n - 1) == '/') {
