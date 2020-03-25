@@ -105,7 +105,7 @@
 			<div class="flex-cell">
 
 	<div class="flex-col-9 left-content">
-		<?php 
+		<?php
 			if ( !empty($content['field_contenttitle']) ) {
 				echo '<h2 class="lead-heading">'.render($content['field_contenttitle']).'</h2>';
 			}
@@ -123,10 +123,16 @@
 	<div class="flex-col-3 right-sidebar">
 		<span class="underline-heading">Our work</span>
 		<?php 
-			$block = block_load('block', '340');
-			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-			$output = drupal_render($get);        
-			print $output; 
+			if(!empty($content['field_member_content_type'])) {
+				echo '<div class="nav">';
+				echo views_embed_view('our_priorities', 'block_3');
+			 	echo '</div>';
+			} else {
+				$block = block_load('block', '340');
+				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+				$output = drupal_render($get);        
+				print $output; 
+			}
 		?>
 	</div>
 
@@ -135,6 +141,123 @@
 
 	
 	</section>
-	
+	<style type="text/css">
+	.simple_accordion{
+		margin-top: 45px;
+	}
+
+	.simple_accordion .accordion{
+		position: relative;
+		padding: 15px;
+	    border: 1px solid rgba(0,0,0,0.03);
+	    border-bottom-width: 0;
+	}
+
+	.simple_accordion .accordion:last-of-type{
+		border-bottom-width: 1px;
+	}
+
+	.simple_accordion .accordion .label{
+		color: #333;
+		font-weight: 500;
+		font-size: 1.2em;
+	    display: flex;
+	    flex-direction: row;
+	    align-items: center;
+	    padding: 0;
+	    cursor: pointer;
+	    transition: all .3s ease;
+	   text-align: left;
+	   white-space: pre-wrap;
+	   line-height: 1.3em;
+	}
+
+	.simple_accordion .accordion:hover .label{
+		color: #019fda;
+	}
+
+	.simple_accordion .accordion .label .icon{
+		margin-right: 10px;
+	}
+
+	.simple_accordion .accordion .label .icon svg{
+		transition: all .5s linear;
+		margin: 0;
+		transform: rotate(0deg);
+	}
+
+	.simple_accordion .accordion .content{
+		display: none;
+		padding-left: 25px;
+		padding-top: 20px;
+	}
+
+	.simple_accordion .accordion .content > *:last-child{
+		margin-bottom: 0;
+	}
+
+	.simple_accordion .accordion .content p, .simple_accordion .accordion .content ul, .simple_accordion .accordion .content ol{
+		margin-bottom: 10px;
+		opacity: 0;
+		transition: all 1s linear;
+	}
+
+	.simple_accordion .accordion{
+		transition: all .5s ease;
+	}
+
+	.simple_accordion .accordion.active{
+		padding-bottom: 30px;
+	}
+
+	.simple_accordion .accordion.active .content p, .simple_accordion .accordion.active .content ul, .simple_accordion .accordion.active .content ol{
+		opacity: 1;
+		transition: all .5s linear;
+	}
+
+	.simple_accordion .accordion.active .label{
+		color: #019fda;
+	}
+
+	.simple_accordion .accordion.active .label .icon svg{
+		transform: rotate(90deg);
+	}
+
+	.important{
+		position: relative;
+	    display: block;
+	    padding: 25px;
+	    border: 1px solid #f3f3f3;
+	    background: #fefefe;
+	    margin-top: 40px;
+	}
+
+	.important h4{
+		font-weight: 400;
+	    font-size: 1.5em;
+	    color: #009fda;
+	    margin-top: 0;
+	}
+
+	.important ul{
+		margin-bottom: 0!important;
+	    padding-left: 15px;
+	}
+</style>
+<script type="text/javascript">
+	jQuery(document).ready(function(){
+		$('.simple_accordion .label').on('click', function(){
+			if( $(this).parent().is('.active') ){
+				$(this).parent().removeClass('active');
+				$(this).parent().find('.content').slideUp();
+			} else {
+				$(this).parent().siblings().removeClass('active');
+				$(this).parent().siblings().find('.content').slideUp();
+				$(this).parent().addClass('active');
+				$(this).parent().find('.content').slideDown();
+			}
+		});
+	});
+</script>
 </div> 
 
