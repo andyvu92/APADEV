@@ -548,7 +548,7 @@ You have the right to access the personal information about yourself held by the
 		<!-- <div class="item" style="text-align: center; font-weight: 700;"><span class="item-description" style="">Due to high traffic some members may receive an error while renewing – we are investigating the cause and apologise for any inconvenience.</span></div> -->
 
 		<div class="grid-block apa-member-grid">
-			
+			<?php /*
 			<div class="item">
 				<div class="item-body current-member">
 					<span class="item-title">2019 APA member</span>
@@ -556,7 +556,7 @@ You have the right to access the personal information about yourself held by the
 					<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
 				</div>
 			</div>
-
+			*/ ?>
 			
 			<div class="item">
 				<div class="item-body previous-member">
@@ -602,7 +602,7 @@ You have the right to access the personal information about yourself held by the
 		<!-- <div class="item" style="text-align: center; font-weight: 700;"><span class="item-description" style="">Due to high traffic some members may receive an error while renewing – we are investigating the cause and apologise for any inconvenience.</span></div> -->
 
 		<div class="grid-block apa-member-grid">
-				
+			<?php /*
 			<div class="item">
 				<div class="item-body current-member">
 					<span class="item-title">2019 APA member</span>
@@ -610,7 +610,7 @@ You have the right to access the personal information about yourself held by the
 					<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#" id="renewItem">Renew</a>
 				</div>
 			</div> 
-			
+			*/ ?>
 			<div class="item">
 				<div class="item-body previous-member">
 					<span class="item-title">Existing account</span>
