@@ -1353,8 +1353,8 @@ apa_function_dashboardLeftNavigation_form();
 						    </div>
 
 							<div class="col-xs-12 col-sm-6 col-md-6">
-								<input class="styled-checkbox" type="checkbox" name="Mobilephysiotherapist<?php echo $key;?>" id="Mobilephysiotherapist<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['MobilePhysio'];?>" <?php if($details['Workplaces'][$key]['MobilePhysio']=="True"){echo "checked";} ?>>
-								<label class="light-font-weight" for="Mobilephysiotherapist<?php echo $key;?>">Mobile physiotherapist</label>
+								<input class="styled-checkbox" type="checkbox" name="MobilePhysio<?php echo $key;?>" id="MobilePhysio<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['MobilePhysio'];?>" <?php if($details['Workplaces'][$key]['MobilePhysio']=="True"){echo "checked";} ?>>
+								<label class="light-font-weight" for="MobilePhysio<?php echo $key;?>">Mobile physiotherapist</label>
 							</div>
 						</div>
 
