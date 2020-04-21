@@ -299,6 +299,19 @@
 
 	gtag('config', 'UA-32728465-9');
 	</script>
+	<?php if(strpos($actual_link, "/inmotion") !== false): ?>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-32728465-4"></script>
+	<script>
+	window.dataLayer = window.dataLayer || [];
+	function gtag()
+
+	{dataLayer.push(arguments);}
+	gtag('js', new Date());
+
+	gtag('config', 'UA-32728465-4');
+	</script>
+	<?php endif; ?>
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 
 	<!-- Google Tag Manager -->
