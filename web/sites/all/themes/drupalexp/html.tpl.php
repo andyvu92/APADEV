@@ -322,6 +322,25 @@
 	})(window,document,'script','dataLayer','GTM-WJFJNQX');</script>
 	<!-- End Google Tag Manager -->
 
+	<!-- Hotjar Tracking Code for www.australian.physio -->
+	<script>
+	(function(h,o,t,j,a,r){
+	h.hj=h.hj||function()
+
+	{(h.hj.q=h.hj.q||[]).push(arguments)}
+	;
+	h._hjSettings=
+
+	{hjid:1748132,hjsv:6}
+	;
+	a=o.getElementsByTagName('head')[0];
+	r=o.createElement('script');r.async=1;
+	r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+	a.appendChild(r);
+	})(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+	</script>
+	<!-- Hotjar tracking end -->
+
 	<script type="text/javascript" language="javascript">
 	$(document).ready(function(){
 		var jsonResult = new Bloodhound({
@@ -370,6 +389,7 @@
 				}
 			}
 		});
+	});
 	<?php
 		if(isset($_SESSION["UserId"])){ 
 			echo '$(document).ready(function(){
@@ -381,7 +401,6 @@
 			});';
 		}
 	?>
-	});
 	</script>
 	<link href="/sites/all/themes/evolve/assets/css/hamburgers-master/dist/hamburgers.css" rel="stylesheet">
 		<?php print $head; ?>
