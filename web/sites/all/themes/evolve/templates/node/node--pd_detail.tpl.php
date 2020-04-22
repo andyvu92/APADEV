@@ -82,21 +82,22 @@
 
 ?>
 <?php 
-$hasMalicious = false;
 if($_GET) {
 	if(!is_numeric($_GET["id"])) {
-		$hasMalicious = true;
+		die("Unauthorized Access");
+	}
+	foreach(array_keys($_GET) as $keyList) {
+		if($keyList == "fbclid") {
+			header("Location: /pd/pd-product?id=".$_GET["id"]);
+		}
 	}
 	foreach($_GET as $list) {
 		$list = preg_replace('/\//', '', $list);
 		if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $list)) {
-			$hasMalicious = true;
+			die("Unauthorized Access: ");
 		}
 	}
 }
-if($hasMalicious): 
-	die("Unauthorized Access");
-else:
 
 $tag=0;
 $pdtype= "Courses and Workshops";
@@ -2519,5 +2520,4 @@ Facsimile: (03) 9092 0899</p>
      });
    });
 </script>
-<?php logRecorder(); 
-endif; ?>
+<?php logRecorder(); ?>
