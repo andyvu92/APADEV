@@ -7,11 +7,11 @@
 		// put session expired message here.
 		$_SESSION['logoutSession'] = 1;
 		// todo
-		
+
 		//logoutManager();
-		
+
 	}
-	
+
 	 //elseif(isset($_SESSION['expireSessionTag'])) {
 		// if it is within session hour, renew session hour again.
 		//$_SESSION['expireSessionTag'] = time() + (60 * 59);
@@ -21,9 +21,9 @@
 //include('sites/all/themes/evolve/inc/Aptify/AptifyAPI.inc.php');
 	/*
 	 * Log-in and Log-out manager
-	 * Manage the entire log in and out here 
+	 * Manage the entire log in and out here
 	 **/
-	 
+
 	//$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 	//$redirectUrl = $link."/jointheapa";
 	//$currentUrl =  "{$_SERVER['REQUEST_URI']}";
@@ -33,67 +33,67 @@ if (isset($_POST['refreshTag'])) {
 		if (isset($_SESSION['UserId'])) {
 			$postData['userID'] = $_SESSION['UserId'];
 		}
-		
+
 		if (isset($_POST['Prefix'])) {
 			$postData['Prefix'] = $_POST['Prefix'];
 		}
-		
+
 		if (isset($_POST['Firstname'])) {
 			$postData['Firstname'] = $_POST['Firstname'];
 		}
-		
+
 		if (isset($_POST['Middle-name'])) {
 			$postData['Middle-name'] = $_POST['Middle-name'];
 		}
-		
+
 		if (isset($_POST['Preferred-name'])) {
 			$postData['Preferred-name'] = $_POST['Preferred-name'];
 		}
-		
+
 		if (isset($_POST['Maiden-name'])) {
 			$postData['Maiden-name'] = $_POST['Maiden-name'];
 		}
 		else{ $postData['Maiden-name'] ="";}
-		
+
 		if (isset($_POST['Lastname'])) {
 			$postData['Lastname'] = $_POST['Lastname'];
 		}
-		
+
 		//if (isset($_POST['Birth'])) {
 			//$postData['birth'] = str_replace("-", "/", $_POST['Birth']);
 		//}
 		if(isset($_POST['birthdate']) && isset($_POST['birthmonth']) && isset($_POST['birthyear'])) {
 			$postData['birth'] = $_POST['birthyear']."/".$_POST['birthmonth']."/".$_POST['birthdate'];
         }
-	
+
 		if (isset($_POST['Gender'])) {
 			$postData['Gender'] = $_POST['Gender'];
 		}
-		
+
 		if (isset($_POST['country-code'])) {
 			$postData['Home-country-code'] = $_POST['country-code'];
 		}
-		
+
 		if (isset($_POST['area-code'])) {
 			$postData['Home-area-code'] = $_POST['area-code'];
 		}
-		
+
 		if (isset($_POST['phone-number'])) {
 			$postData['Home-phone-number'] = $_POST['phone-number'];
 		}
-		
+
 		if (isset($_POST['Mobile-country-code'])) {
 			$postData['Mobile-country-code'] = $_POST['Mobile-country-code'];
 		}
-		
+
 		if (isset($_POST['Mobile-area-code'])) {
 			$postData['Mobile-area-code'] = $_POST['Mobile-area-code'];
 		}else {$postData['Mobile-area-code'] = "";}
-		
+
 		if (isset($_POST['Mobile-number'])) {
 			$postData['Mobile-number'] = $_POST['Mobile-number'];
 		}
-		
+
 		if (isset($_POST['Aboriginal'])) {
 			$postData['Aboriginal'] = $_POST['Aboriginal'];
 		}
@@ -103,22 +103,22 @@ if (isset($_POST['refreshTag'])) {
 				$postData['BuildingName'] =$_POST['Pobox'];
 				$postData['Address_Line_1'] ="";
 				$postData['Address_Line_2'] ="";
-				
+
 		}else {
-			$postData['BuildingName'] = $_POST['BuildingName']; 
+			$postData['BuildingName'] = $_POST['BuildingName'];
 			$postData['Address_Line_1'] = $_POST['Address_Line_1'];
 			$postData['Address_Line_2'] = $_POST['Address_Line_2'];
-			
+
 		}
-	
+
 		if (isset($_POST['Suburb'])) {
 			$postData['Suburb'] = $_POST['Suburb'];
 		}
-		
+
 		if (isset($_POST['Postcode'])) {
 			$postData['Postcode'] = $_POST['Postcode'];
 		}
-		
+
 		if (isset($_POST['State'])) {
 			$postData['State'] = $_POST['State'];
 		}
@@ -126,15 +126,15 @@ if (isset($_POST['refreshTag'])) {
 		if (isset($_POST['Country'])) {
 			$postData['Country'] = $_POST['Country'];
 		}
-		
+
 		if (isset($_POST['Status'])) {
 			$postData['Status'] = $_POST['Status'];
 		}
-		
+
 		if (isset($_POST['Specialty'])) {
 			$postData['Specialty'] = $_POST['Specialty'];
 		}
-		
+
 		//update mailing address is mandatory on 16/10/2019
 		if (isset($_POST['Shipping-address-join']) && $_POST['Shipping-address-join'] == '1') {
 			if(isset($_POST['BuildingName'])) {$postData['Mailing-BuildingName']  = $_POST['BuildingName']; } else{ $postData['Mailing-BuildingName'] = "";}
@@ -151,23 +151,23 @@ if (isset($_POST['refreshTag'])) {
 				$postData['Mailing-Address_line_1'] ="";
 				$postData['Mailing-Address_line_2'] ="";
 			}else {
-				$postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName']; 
+				$postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName'];
 				$postData['Mailing-Address_line_1'] = $_POST['Mailing-Address_Line_1'];
 				$postData['Mailing-Address_line_2'] = $_POST['Mailing-Address_Line_2'];
-				
+
 			}
 			if (isset($_POST['Mailing-city-town'])) {
 					$postData['Mailing-city-town'] = $_POST['Mailing-city-town'];
 			}
-			
+
 			if (isset($_POST['Mailing-postcode'])) {
 					$postData['Mailing-postcode'] = $_POST['Mailing-postcode'];
 			}
-			
+
 			if (isset($_POST['Mailing-State'])) {
 					$postData['Mailing-state'] = $_POST['Mailing-State'];
 			}
-			
+
 			if (isset($_POST['Mailing-country'])) {
 					$postData['Mailing-country'] = $_POST['Mailing-country'];
 			}
@@ -175,55 +175,55 @@ if (isset($_POST['refreshTag'])) {
 		if (isset($_POST['Memberid'])) {
 			$postData['Memberid'] = $_POST['Memberid'];
 		}
-		
+
 		if (isset($_POST['Password'])) {
 			$postData['Password'] = $_POST['Password'];
 		}
-		
+
 		if (isset($_POST['MemberType'])) {
 			$postLocalData['MemberType'] = $_POST['MemberType'];
 		}
-		
+
 		if (isset($_POST['Ahpranumber'])) {
 			$postData['Ahpranumber'] = $_POST['Ahpranumber'];
 		}
-		
+
 		if (isset($_POST['Branch'])) {
 			$postData['Branch'] = $_POST['Branch'];
 		}
-		
-		
+
+
 		if (isset($_SESSION['Regional-group'])) {
 			$postData['Regional-group'] = $_SESSION['Regional-group'];
 		} else {
 			$postData['Regional-group'] = "";
 		}
-		
+
 		if (isset($_POST['Nationalgp'])) {
 			$ngData['Nationalgp'] = $_POST['Nationalgp'];
 		}
 		else{$ngData = array();}
-		
+
 		if (isset($_POST['SpecialInterest'])) {
 			$postData['PSpecialInterestAreaID'] = implode(",", $_POST['SpecialInterest']);
 		}
-		
+
 		// if(isset($_POST['Treatmentarea'])){ $postData['Treatmentarea'] = $_POST['Treatmentarea']; }
-		
+
 		if (isset($_POST['MAdditionallanguage'])) {
 			$postData['PAdditionalLanguageID'] = implode(",", $_POST['MAdditionallanguage']);
 		}
-		
+
 		if (isset($_POST['Findpublicbuddy'])) {
 			$postData['Findpublicbuddy'] = $_POST['Findpublicbuddy'];
 		} else {
 			$postData['Findpublicbuddy'] = "False";
 		}
-	  if(isset($Dietary)) {$postData['Dietary'] = $Dietary;} 
+	  if(isset($Dietary)) {$postData['Dietary'] = $Dietary;}
 		// Process workplace data
-		
+
 		if (isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ) {
-			$num = $_POST['maxumnumber']; 
+			$num = $_POST['maxumnumber'];
 			$tempWork = array();
 			for ($i = 0; $i <=$num; $i++) {
 				$workplaceArray = array();
@@ -234,153 +234,154 @@ if (isset($_POST['refreshTag'])) {
 				} else {
 					$workplaceArray['Findabuddy'] = "False";
 				}
-				
+
 				if (isset($_POST['Findphysio' . $i])) {
 					$workplaceArray['Findphysio'] = $_POST['Findphysio' . $i];
 				} else {
 					$workplaceArray['Findphysio'] = "False";
 				}
-				
+
 				if (isset($_POST['Name-of-workplace' . $i])) {
 					$workplaceArray['Name-of-workplace'] = $_POST['Name-of-workplace' . $i];
 				}
-				
+
 				if (isset($_POST['Workplace-setting' . $i])) {
 					$workplaceArray['Workplace-settingID'] = $_POST['Workplace-setting' . $i];
 				}
-				
+
 				if (isset($_POST['WBuildingName' . $i])) {
 					$workplaceArray['WBuildingName'] = $_POST['WBuildingName' . $i];
 				}
-				
+
 				if (isset($_POST['WAddress_Line_1' . $i])) {
 					$workplaceArray['Address_Line_1'] = $_POST['WAddress_Line_1' . $i];
 				}
-				
+
 				if (isset($_POST['WAddress_Line_2' . $i])) {
 					$workplaceArray['Address_Line_2'] = $_POST['WAddress_Line_2' . $i];
 				}
-				
+
 				if (isset($_POST['Wcity' . $i])) {
 					$workplaceArray['Wcity'] = $_POST['Wcity' . $i];
 				}
-				
+
 				if (isset($_POST['Wpostcode' . $i])) {
 					$workplaceArray['Wpostcode'] = $_POST['Wpostcode' . $i];
 				}
-				
+
 				if (isset($_POST['Wstate' . $i])) {
 					$workplaceArray['Wstate'] = $_POST['Wstate' . $i];
 				}
-				
+
 				if (isset($_POST['Wcountry' . $i])) {
 					$workplaceArray['Wcountry'] = $_POST['Wcountry' . $i];
 				}
-				
+
 				if (isset($_POST['Wemail' . $i])) {
 					$workplaceArray['Wemail'] = $_POST['Wemail' . $i];
 				}
-				
+
 				if (isset($_POST['Wwebaddress' . $i])) {
 					$workplaceArray['Wwebaddress'] = $_POST['Wwebaddress' . $i];
 				}
-				
+
 				if (isset($_POST['WPhoneCountryCode' . $i])) {
 					$workplaceArray['WPhoneCountryCode'] = $_POST['WPhoneCountryCode'. $i];
 				}
-				
+
 				if (isset($_POST['WPhoneAreaCode' . $i])) {
 					$workplaceArray['WPhoneAreaCode'] = $_POST['WPhoneAreaCode' . $i];
 				}
-				
+
 				if (isset($_POST['Wphone' . $i])) {
 					$workplaceArray['WPhone'] = $_POST['Wphone' . $i];
 				}
-				
+
 				if (isset($_POST['WPhoneExtentions' . $i])) {
 					$workplaceArray['WPhoneExtentions'] = $_POST['WPhoneExtentions' . $i];
 				}
-				
+
 				if (isset($_POST['Electronic-claiming' . $i])) {
 					$workplaceArray['Electronic-claiming'] = $_POST['Electronic-claiming' . $i];
 				} else {
 					$workplaceArray['Electronic-claiming'] = "False";
 				}
-				
+
 				/*if (isset($_POST['Hicaps' . $i])) {
 					$workplaceArray['Hicaps'] = $_POST['Hicaps' . $i];
 				} else {
 					$workplaceArray['Hicaps'] = "False";
 				}*/
-				
+
 				/*if (isset($_POST['Healthpoint' . $i])) {
 					$workplaceArray['Healthpoint'] = $_POST['Healthpoint' . $i];
 				} else {
 					$workplaceArray['Healthpoint'] = "False";
 				}*/
-				
+
 				if (isset($_POST['Departmentva' . $i])) {
 					$workplaceArray['Departmentva'] = $_POST['Departmentva' . $i];
 				} else {
 					$workplaceArray['Departmentva'] = "False";
 				}
-				
+
 				if (isset($_POST['Workerscompensation' . $i])) {
 					$workplaceArray['Workerscompensation'] = $_POST['Workerscompensation' . $i];
 				} else {
 					$workplaceArray['Workerscompensation'] = "False";
 				}
-				
+
 				if (isset($_POST['Motora' . $i])) {
 					$workplaceArray['Motora'] = $_POST['Motora' . $i];
 				} else {
 					$workplaceArray['Motora'] = "False";
 				}
-				
+
 				if (isset($_POST['Medicare' . $i])) {
 					$workplaceArray['Medicare'] = $_POST['Medicare' . $i];
 				} else {
 					$workplaceArray['Medicare'] = "False";
 				}
-				
+
 				if (isset($_POST['Homehospital' . $i])) {
 					$workplaceArray['Homehospital'] = $_POST['Homehospital' . $i];
 				} else {
 					$workplaceArray['Homehospital'] = "False";
 				}
-				
+
 				if (isset($_POST['MobilePhysio' . $i])) {
 					$workplaceArray['MobilePhysio'] = $_POST['MobilePhysio' . $i];
 				} else {
 					$workplaceArray['MobilePhysio'] = "False";
-				}
-				
+        }
+        if(isset($_POST['NDIS'.$i])) { $workplaceArray['NDIS'] = $_POST['NDIS'.$i];}else {$workplaceArray['NDIS']="False";}
+
 				if (isset($_POST['Number-worked-hours' . $i])) {
 					$workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours' . $i];
 				}
-				
+
 				if (isset($_POST['WTreatmentarea' . $i])) {
 					$workplaceArray['SpecialInterestAreaID'] = implode(",", $_POST['WTreatmentarea' . $i]);
 				}else{
 					$workplaceArray['SpecialInterestAreaID'] = "";
 				}
-				
+
 				if (isset($_POST['Additionallanguage' . $i])) {
 					$workplaceArray['AdditionalLanguage'] = implode(",", $_POST['Additionallanguage' . $i]);
 				}
 				else{ $workplaceArray['AdditionalLanguage'] = ""; }
-				
+
 				array_push($tempWork, $workplaceArray);
 			}
 			}
-			
+
 			$postData['Workplaces'] = $tempWork;
 		}
-		
+
 		if (isset($_POST['wpnumber']) == "0") {
 			$postData['Workplaces'] = array();
 		}
-		
+
 		if (isset($_POST['addtionalNumber'])) {
 			$n    = $_POST['addtionalNumber'];
 			$temp = array();
@@ -389,7 +390,7 @@ if (isset($_POST['refreshTag'])) {
 				if (isset($_POST['ID' . $j])) {
 					$additionalQualifications['ID'] = $_POST['ID' . $j];
 				}
-				
+
 				if (isset($_POST['University-degree' . $j]) && $_POST['University-degree' . $j] != "") {
 					$additionalQualifications['Degree']   = $_POST['University-degree' . $j];
 					$additionalQualifications['DegreeID'] = "";
@@ -397,7 +398,7 @@ if (isset($_POST['refreshTag'])) {
 					$additionalQualifications['DegreeID'] = $_POST['Udegree' . $j];
 					$additionalQualifications['Degree']   = "";
 				}
-				
+
 				if (isset($_POST['Undergraduate-university-name-other' . $j]) && $_POST['Undergraduate-university-name-other' . $j] != "") {
 					$additionalQualifications['Institute']   = $_POST['Undergraduate-university-name-other' . $j];
 					$additionalQualifications['InstituteID'] = "";
@@ -405,57 +406,57 @@ if (isset($_POST['refreshTag'])) {
 					$additionalQualifications['InstituteID'] = $_POST['Undergraduate-university-name' . $j];
 					$additionalQualifications['Institute']   = "";
 				}
-				
+
 				if (isset($_POST['Ugraduate-country' . $j])) {
 					$additionalQualifications['Country'] = $_POST['Ugraduate-country' . $j];
 				}
-				
+
 				if (isset($_POST['Ugraduate-yearattained' . $j])) {
 					$additionalQualifications['Yearattained'] = $_POST['Ugraduate-yearattained' . $j];
 				}
-				
+
 				array_push($temp, $additionalQualifications);
 			}
-			
+
 			$postData['PersonEducation'] = $temp;
 		}
-		
+
 		// 2.2.5 - Member detail - Update
 		// Send -
 		// UserID & detail data
 		// Response -Update Success message & UserID & detail data
-		
+
 		if (isset($_SESSION['UserId'])) {
 			$testdata = aptify_get_GetAptifyData("5", $postData);
-		
+
 		} else {
-			
+
 			// for new user join a member call user registeration web service
-		   
+
 			$resultdata = aptify_get_GetAptifyData("25", $postData);
-			
+
 			// when create user successfully call login web service to login in APA website automatically.
 			// after login successfully get UserID as well to store on APA shopping cart database
-			
+
 			if ($resultdata['result'] == "Success") {
 				$_SESSION["LoginName"] = $postData['Memberid'];
 				$_SESSION["LoginPassword"] = $postData['Password'];
-				
+
 				// call webservice login. Eddy will provide login -process functionality---put code here
 				// login sucessful unset session
-				
+
 				loginManager($_SESSION["LoginName"], $_SESSION["LoginPassword"]);
 				//header("Refresh:0");
 				unset($_SESSION["LoginName"]);
 				unset($_SESSION["LoginPassword"]);
-				
+
 			}
 			else{
-				
+
 				header("Location: /failure");
 			}
 		}
-		
+
 		unset($_SESSION["Regional-group"]);
 		if (isset($_SESSION['UserId'])) {
 			$userID = $_SESSION['UserId'];
@@ -469,7 +470,7 @@ if (isset($_POST['refreshTag'])) {
 				foreach ($ngData['Nationalgp'] as $key => $value) {
 					array_push($products, $value);
 				}
-				
+
 				$type = "NG";
 				checkShoppingCart($userID, $type = "NG", $productID = "");
 				foreach ($products as $key => $value) {
@@ -478,23 +479,23 @@ if (isset($_POST['refreshTag'])) {
 				}
 			}
 			// save magazine products on APA side
-			
+
 			/*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
 			if (isset($_POST['ngmusculo']) && $_POST['ngmusculo'] == "1") {
 				checkShoppingCart($userID, $type = "MG1", $productID = "");
 				createShoppingCart($userID, "9978", $type = "MG1", $coupon = "");
 			}
-			
+
 			if (isset($_POST['ngsports']) && $_POST['ngsports'] == "1") {
 				checkShoppingCart($userID, $type = "MG2", $productID = "");
 				createShoppingCart($userID, "9977", $type = "MG2", $coupon = "");
 			}
 		}
-		//update subscription for the web user 
+		//update subscription for the web user
 		//added by jinghu 09/10/2018
 		if(isset($_SESSION['UserId'])) {
 			// 2.2.23 - GET list of subscription preferences
-			// Send - 
+			// Send -
 			// UserID
 			// Response -
 			// List of subscriptions and its T/F values.
@@ -523,16 +524,16 @@ if (isset($_POST['refreshTag'])) {
 			$ArrayReturn["Subscriptions"] = $subArray;
 			$ArrayReturn["Consents"] = $consArray;
 			// 2.2.24 - Update subscription preferences
-			// Send - 
+			// Send -
 			// UserID, List of subscriptions and its F/F values.
 			// Response -
 			// Response, List of subscriptions and it's T/F values.
 			$subscriptions = aptify_get_GetAptifyData("24", $ArrayReturn);
 		}
-		
-		
+
+
 	}
-} 
+}
 
 //1. for create web user
 
@@ -551,12 +552,12 @@ if(isset($_POST['CreateUser'])) {
 			$postData['BuildingName'] =$_POST['Pobox'];
 			$postData['Address_Line_1'] ="";
 			$postData['Address_Line_2'] ="";
-			
+
 	}else {
-		$postData['BuildingName'] = $_POST['BuildingName']; 
+		$postData['BuildingName'] = $_POST['BuildingName'];
 		$postData['Address_Line_1'] = $_POST['Address_Line_1'];
 		$postData['Address_Line_2'] = $_POST['Address_Line_2'];
-		
+
 	}
 	//if(isset($_POST['Address_Line_1'])){ $postData['Unit'] = $_POST['Address_Line_1']; }
 	//if(isset($_POST['Address_Line_2'])){ $postData['Street'] = $_POST['Address_Line_2']; }
@@ -566,13 +567,13 @@ if(isset($_POST['CreateUser'])) {
 	if(isset($_POST['Country'])){ $postData['Country'] = $_POST['Country']; }
 	if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid'];}
 	if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password'];}
-	
 
-// for new user join a member call user registeration web service	
+
+// for new user join a member call user registeration web service
 $resultdata = aptify_get_GetAptifyData("42", $postData);
 //when create user successfully call login web service to login in APA website automatically.
 //after login successfully get UserID as well to store on APA shopping cart database
-if($resultdata['result']) { 
+if($resultdata['result']) {
 	$_SESSION["LoginName"] = $postData['Memberid'];
 	$_SESSION["LoginPassword"] = $postData['Password'];
 	// call webservice login. Eddy will provide login -process functionality---put code here
@@ -581,11 +582,11 @@ if($resultdata['result']) {
 	unset($_SESSION["LoginName"]);
 	unset($_SESSION["LoginPassword"]);
 }
-		//update subscription for the web user 
+		//update subscription for the web user
 		//added by jinghu 09/10/2018
 		if(isset($_SESSION['UserId'])) {
 			// 2.2.23 - GET list of subscription preferences
-			// Send - 
+			// Send -
 			// UserID
 			// Response -
 			// List of subscriptions and its T/F values.
@@ -614,18 +615,18 @@ if($resultdata['result']) {
 			$ArrayReturn["Subscriptions"] = $subArray;
 			$ArrayReturn["Consents"] = $consArray;
 			// 2.2.24 - Update subscription preferences
-			// Send - 
+			// Send -
 			// UserID, List of subscriptions and its F/F values.
 			// Response -
 			// Response, List of subscriptions and it's T/F values.
 			$subscriptions = aptify_get_GetAptifyData("24", $ArrayReturn);
 		}
-		
-	
+
+
 }
 	// current page's url. log-in to the same page before log-in.
 	$url =  "{$_SERVER['REQUEST_URI']}";
-	
+
 	// log-in
 	/*if(isset($_POST["id"])) {
 		if(!empty($_POST["remember"])) {
@@ -643,27 +644,27 @@ if($resultdata['result']) {
 	} else {
 		// no id has been entered
 	}*/
-	
+
 	// log-out
 	if(isset($_POST["logout"])) {
 		// same with this commend.
 		// isset($_SESSION["Log-in"])
-		
+
 		// todo
 		// figure this out later
 		logoutManager();
 	}
-	
+
 	// test get data
 	if(isset($_POST["Getdata"])) {
 		$data = "UserID=".$_SESSION["UserId"];
 		$output = aptify_get_GetAptifyData("1", $data);
 		print_r($output);
 	}
-	
+
 	function loginManager($id, $pass) {
 		// 2.2.7 - log-in
-		// Send - 
+		// Send -
 		// UserID, User password
 		// Response -
 		// log-in
@@ -690,10 +691,10 @@ if($resultdata['result']) {
 			$Database= $result["Database"];
 			$AptifyUserID= $result["AptifyUserID"];
 			newSessionLogIn($id, $UserName, $Email, $FirstName, $LastName, $Title, $LinkId, $CompanyId, $TokenId, $Server, $Database, $AptifyUserID);
-			
+
 			$_SESSION["Log-in"] = "in";
 			//echo "<br>logged in!!";
-			
+
 			$data = "UserID=".$_SESSION["UserId"];
 			$details = aptify_get_GetAptifyData("4", $data,"");
 			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
@@ -707,21 +708,21 @@ if($resultdata['result']) {
 			logRecorder();
 		}
 	}
-	
+
 	function logoutManager() {
 		// 2.2.8 - log-out
-		// Send - 
-		// 
+		// Send -
+		//
 		// Response -
-		// 
+		//
 		$result = aptify_get_GetAptifyData("8", "logout");
 		if(isset($result["ErrorInfo"])) {
-			
+
 			echo $result["ErrorInfo"]["ErrorMessage"];
 			echo "<br>log-out fail";
 		} else {
 			$_SESSION['logoutmessage'] =1;
-			
+
 		}
 		//print_r($result);
 		logRecorder();
@@ -738,7 +739,7 @@ $type = "PD";
 $counts = 0;
 if(isset($_SESSION['UserId'])) {
 	$userID = $_SESSION['UserId'];
-	/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 	/********Get user shopping product form APA server******/
 	/*try {
 		$type="PD";
@@ -749,7 +750,7 @@ if(isset($_SESSION['UserId'])) {
 		foreach($shoppingcartGetPD as $ttt) {
 			$counts++;
 		}
-		$shoppingcartGetPD= null;               
+		$shoppingcartGetPD= null;
 		$type="PDNG";
 		$shoppingcartGetPDNG= $dbt->prepare('SELECT ID, productID, meetingID,coupon FROM shopping_cart WHERE userID= :userID AND type= :type');
 		$shoppingcartGetPDNG->bindValue(':userID', $userID);
@@ -758,7 +759,7 @@ if(isset($_SESSION['UserId'])) {
 		foreach($shoppingcartGetPDNG as $ttt) {
 			$counts++;
 		}
-		$shoppingcartGetPDNG= null;               
+		$shoppingcartGetPDNG= null;
 	} catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
@@ -770,7 +771,7 @@ if(isset($_SESSION['UserId'])) {
 			$counts++;
 	}
 	$type="PDNG";
-	$shoppingcartGetPDNG = getProduct($userID=$_SESSION['UserId'],$type="PDNG"); 
+	$shoppingcartGetPDNG = getProduct($userID=$_SESSION['UserId'],$type="PDNG");
 	foreach($shoppingcartGetPDNG as $ttt) {
 			$counts++;
 	}
@@ -786,10 +787,10 @@ if(isset($_SESSION['UserId'])) {
 }
 ?>
 <?php if(isset($_SESSION["loginFail"])): ?>
-	
+
 	<script>
 		jQuery(document).ready(function(){
-			
+
 			$('#main-signin-form .checkmessage').show();
 			$('.LogInPadding .info').click();
 		});
@@ -825,7 +826,7 @@ if(isset($_SESSION['UserId'])) {
 	<div class="OtherListTop"><a class="shop" href="https://www.shop4physios.com.au/" target="_blank"><span class="uniq">shop</span>4physios</a></div>
 
 	<div class="OtherListTop"><a class="ifompt" href="https://ifomptconference.org/" target="_blank"><span class="uniq">IFOMPT2020</a></div>
-	
+
 	<div class="OtherListTop"><a class="jobs" href="https://focus.physio" target="_blank"><span class="uniq">FOCUS2020</a></div>
 </div>
 
@@ -838,9 +839,9 @@ if(isset($_SESSION['UserId'])) {
 
 			<button class="close" data-dismiss="modal" type="button"><span class="ui-button-icon-primary ui-icon ui-icon-closethick"></span></button>
 
-		<div class="form-container">        
+		<div class="form-container">
       <div class="tab-content">
-        <div id="main-signin-form">             
+        <div id="main-signin-form">
           <!--<form name="signInForm" method="POST" action="<?php //echo $url;?>">-->
 				<div class="flex-container">
 					<div class="flex-cell">
@@ -879,7 +880,7 @@ if(isset($_SESSION['UserId'])) {
 				</div>
 			<!--</form>-->
         </div>
-        
+
       </div><!-- tab-content -->
       <script>
 $('[data-target="#loginAT"]').on('click', function (e) {
@@ -887,15 +888,15 @@ $('[data-target="#loginAT"]').on('click', function (e) {
 	$('#main-signin-form').show();
 });
 $('.tab span').on('click', function (e) {
-  
+
   e.preventDefault();
-  
+
   target = $(this).attr('data-form');
 
   $('.tab-content > div').not(target).hide();
-  
+
   $(target).fadeIn(600);
-  
+
 });
 </script>
 </div> <!-- /form -->
@@ -904,7 +905,7 @@ $('.tab span').on('click', function (e) {
 </div>
 </div>
 
-<!-- Modal forgot password 
+<!-- Modal forgot password
 <div class="modal fade" id="passwordReset" role="dialog">
 <div class="modal-dialog">
 	<div class="modal-content">
@@ -948,12 +949,12 @@ $('.tab span').on('click', function (e) {
 				<a class="accent-btn session_login">Login</a>
 				<a class="accent-btn session_logout">Logout</a>
 			</div>
-			
+
 		</div>
 		<div id="login_form">
-			<div class="form-container">        
+			<div class="form-container">
 				<div class="tab-content">
-					<div id="main-signin-form">             
+					<div id="main-signin-form">
 						<div class="flex-container">
 							<div class="flex-cell">
 								<span class="light-lead-heading cairo">Sign in to your account</span>
@@ -961,7 +962,7 @@ $('.tab span').on('click', function (e) {
 
 							<?php $the_form = drupal_get_form('apa_create_log_in_form');
 							print drupal_render($the_form);	?>
-							
+
 							<div class="flex-cell create-account">
 								<span>Not a member? <a href="/membership-question">Join today.</a></span>
 							</div>
@@ -974,7 +975,7 @@ $('.tab span').on('click', function (e) {
 </div>
 <!--handle the session expired popup-->
 <script type="text/javascript">
-	 // automatically pop up session expire window 
+	 // automatically pop up session expire window
 	 var popUPTag ='<?php if(isset($_SESSION['TokenId']))  {echo $_SESSION['TokenId']; } else{ echo "";}?>';
 	 var countSession = <?php if(isset($_SESSION['expireSessionTag'])) {echo $_SESSION['expireSessionTag'] - time();}?>;
 	 if(popUPTag!=""){
@@ -995,7 +996,7 @@ $('.tab span').on('click', function (e) {
 				}
 				$('.overlay').fadeIn();
 				$("#sessionExpiredWindow").fadeIn();
-			
+
 				}
 
 			}
@@ -1035,13 +1036,13 @@ $(document).ready(function(){
 		.animate({ "margin-top": "0px" }, 300 )
 		.animate({ "padding-left": "1px" }, 3000 )
 		.animate({ "margin-top": "-84px" }, 300 );
-	
+
 	$('.GetCentreLayoutHome .ASection .Mobile')
 		.animate({ "padding-left": "1px" }, 500 )
 		.animate({ "margin-top": "0px" }, 300 )
 		.animate({ "padding-left": "1px" }, 3000 )
 		.animate({ "margin-top": "-70px" }, 300 );
-		
+
 	$('.submit').click( function() {
 		var text = $("#bloodhound input[type=text].tt-input").val();
 		if(text != "" || text != " " || text != null) {
@@ -1059,7 +1060,7 @@ $(document).ready(function(){
 			$('.postcodeComp').val(rss[num-1]+"");
 		}
 	});
-});		
+});
 </script>
 
 <div class="top_nav_socials">
@@ -1103,7 +1104,7 @@ $(document).ready(function(){
 					$name = $_POST['Preferred-name'];
 				} elseif(isset($_POST['Firstname']) && $_POST['Firstname'] != "") {
 					$name = $_POST['Firstname'];
-				} 
+				}
 			?>
 
 			<div class="nameHello"><span class="icon user_icon"></span>Hi <?php echo $name; ?></div>

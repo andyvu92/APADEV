@@ -12,8 +12,8 @@ if(!function_exists('drupal_session_started'))
 	$fpProduct = "0";
 	if(sizeof(getProduct($_SESSION['UserId'],"MG1"))!=0) { $IntouchTag = true; }
     if(sizeof(getProduct($_SESSION['UserId'],"MG2"))!=0) { $SportTag = true;}
-	if(sizeof(getProduct($_SESSION['UserId'],"FP"))!=0) { 
-		$FellowTag= true; 
+	if(sizeof(getProduct($_SESSION['UserId'],"FP"))!=0) {
+		$FellowTag= true;
 		$fpResults = getProduct($_SESSION['UserId'],"FP");
 		foreach ($fpResults as $fpResult) {
 			$fpProduct = $fpResult;
@@ -22,8 +22,8 @@ if(!function_exists('drupal_session_started'))
 	//Put filter condition to display member type
 $filterMemberProduct = array("10007","10008","10009","9997");
 // 2.2.21 - Get Fellowship product
-	// Send - 
-	// ProductID 
+	// Send -
+	// ProductID
 	// Response - UserID & detail data
 	$tt["ProductID"] = "";
 	$fellowshipProducts = aptify_get_GetAptifyData("21", $tt);
@@ -36,13 +36,13 @@ $filterMemberProduct = array("10007","10008","10009","9997");
 		if($fellowshipProduct['ProductID']=="9978") { $IntouchPrice =$fellowshipProduct['FPprice']; }
 	}
 	// 2.2.36 - get workplace settings list
-	// Send - 
+	// Send -
 	// Response - get workplace settings from Aptify via webserice return Json data;
 	// stroe workplace settings into the session
 	$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
-	$workplaceSettings=json_decode($workplaceSettingscode, true);	
+	$workplaceSettings=json_decode($workplaceSettingscode, true);
 	$_SESSION["workplaceSettings"] = $workplaceSettings;
-    
+
 if(isset($_POST['step1'])) {
 	$postData = array();
 	if(isset($_SESSION['UserId'])) {$postData['userID'] = $_SESSION['UserId'];}
@@ -70,12 +70,12 @@ if(isset($_POST['step1'])) {
 			$postData['BuildingName'] =$_POST['Pobox'];
 			$postData['Address_Line_1'] ="";
 			$postData['Address_Line_2'] ="";
-			
+
 	}else {
-		$postData['BuildingName'] = $_POST['BuildingName']; 
+		$postData['BuildingName'] = $_POST['BuildingName'];
 		$postData['Address_Line_1'] = $_POST['Address_Line_1'];
 		$postData['Address_Line_2'] = $_POST['Address_Line_2'];
-		
+
 	}
 	if(isset($_POST['Suburb'])){ $postData['Suburb'] = $_POST['Suburb']; }
 	if(isset($_POST['Postcode'])){ $postData['Postcode'] = $_POST['Postcode']; }
@@ -84,7 +84,7 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Status'])){ $postData['Status'] = $_POST['Status']; }
 	if(isset($_POST['Specialty'])){ $postData['Specialty'] = $_POST['Specialty']; }
 	//update mailing address is mandatory on 16/10/2019
-    
+
     if (isset($_POST['Shipping-address-join']) && $_POST['Shipping-address-join'] == '1') {
         if(isset($_POST['BuildingName'])) {$postData['Mailing-BuildingName']  = $_POST['BuildingName']; } else{ $postData['Mailing-BuildingName'] = "";}
         if(isset($_POST['Address_Line_1'])) {$postData['Mailing-Address_line_1'] = $_POST['Address_Line_1'];} else{$postData['Mailing-Address_line_1'] = "";}
@@ -100,53 +100,53 @@ if(isset($_POST['step1'])) {
 			$postData['Mailing-Address_line_1'] ="";
 			$postData['Mailing-Address_line_2'] ="";
 		}else {
-			$postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName']; 
+			$postData['Mailing-BuildingName'] = $_POST['Mailing-BuildingName'];
             $postData['Mailing-Address_line_1'] = $_POST['Mailing-Address_Line_1'];
             $postData['Mailing-Address_line_2'] = $_POST['Mailing-Address_Line_2'];
-			
+
 		}
         if (isset($_POST['Mailing-city-town'])) {
             $postData['Mailing-city-town'] = $_POST['Mailing-city-town'];
         }
-        
+
         if (isset($_POST['Mailing-postcode'])) {
             $postData['Mailing-postcode'] = $_POST['Mailing-postcode'];
         }
-        
+
         if (isset($_POST['Mailing-State'])) {
             $postData['Mailing-state'] = $_POST['Mailing-State'];
         }
-        
+
         if (isset($_POST['Mailing-country'])) {
             $postData['Mailing-country'] = $_POST['Mailing-country'];
         }
-    }  
-  
-	
-	
+    }
+
+
+
 	if(isset($_POST['Memberid'])){ $postData['Memberid'] = $_POST['Memberid']; }
 	//if(isset($_POST['Password'])){ $postData['Password'] = $_POST['Password']; }
 	if(isset($_POST['MemberType'])){ $postLocalData['MemberType'] = $_POST['MemberType']; }
 	if(isset($_POST['Ahpranumber'])){ $postData['Ahpranumber'] = $_POST['Ahpranumber']; }
 	if(isset($_POST['Branch'])){ $postData['PreferBranch'] = $_POST['Branch']; }
-	
+
 	if(isset($_SESSION['Regional-group'])){ $postData['Regional-group'] = $_SESSION['Regional-group']; } else{ $postData['Regional-group'] ="";}
 	if(isset($_POST['Nationalgp'])){ $ngData['Nationalgp'] = $_POST['Nationalgp']; } else{$ngData = array();}
 	if(isset($_POST['SpecialInterest'])){ $postData['PSpecialInterestAreaID'] = implode(",",$_POST['SpecialInterest']); }
-	
+
 	//if(isset($_POST['Treatmentarea'])){ $postData['Treatmentarea'] = $_POST['Treatmentarea']; }
 	if(isset($_POST['MAdditionallanguage'])){ $postData['PAdditionalLanguageID'] = implode(",",$_POST['MAdditionallanguage']); }
-	
+
 	if(isset($_POST['Findpublicbuddy'])){ $postData['Findpublicbuddy'] = $_POST['Findpublicbuddy']; } else{ $postData['Findpublicbuddy'] = "False";}
-	/*if(isset($_POST['Dietary'])){ 
+	/*if(isset($_POST['Dietary'])){
 		$testD['ID']=$_POST['Dietary'];
 		$testDietaryArray = array();
 		array_push($testDietaryArray, $testD);
 		$postData['Dietary'] = $testDietaryArray;
 	}*/
-	if(isset($_SESSION['Dietary'])) {$postData['Dietary'] = $_SESSION['Dietary'];} 
-	if(isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ){ 
-	$num = $_POST['maxumnumber']; 
+	if(isset($_SESSION['Dietary'])) {$postData['Dietary'] = $_SESSION['Dietary'];}
+	if(isset($_POST['wpnumber']) && $_POST['wpnumber']!="0" ){
+	$num = $_POST['maxumnumber'];
 	$tempWork = array();
 	for($i=0; $i<=$num; $i++){
 		$workplaceArray = array();
@@ -178,7 +178,8 @@ if(isset($_POST['step1'])) {
 			if(isset($_POST['Medicare'.$i])) { $workplaceArray['Medicare'] = $_POST['Medicare'.$i];}else {$workplaceArray['Medicare']="False";}
 			if(isset($_POST['Homehospital'.$i])) { $workplaceArray['Homehospital'] = $_POST['Homehospital'.$i];} else {$workplaceArray['Homehospital']="False";}
 			if(isset($_POST['MobilePhysio'.$i])) { $workplaceArray['MobilePhysio'] = $_POST['MobilePhysio'.$i];}else {$workplaceArray['MobilePhysio']="False";}
-			if(isset($_POST['Number-worked-hours'.$i])) { $workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours'.$i];}
+      if(isset($_POST['NDIS'.$i])) { $workplaceArray['NDIS'] = $_POST['NDIS'.$i];}else {$workplaceArray['NDIS']="False";}
+      if(isset($_POST['Number-worked-hours'.$i])) { $workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours'.$i];}
 			if(isset($_POST['WTreatmentarea'.$i])){ $workplaceArray['SpecialInterestAreaID'] = implode(",",$_POST['WTreatmentarea'.$i]); } else { $workplaceArray['SpecialInterestAreaID'] = ""; }
 			if(isset($_POST['Additionallanguage'.$i])){ $workplaceArray['AdditionalLanguage'] = implode(",",$_POST['Additionallanguage'.$i]); } else{ $workplaceArray['AdditionalLanguage'] = "";}
 			array_push($tempWork, $workplaceArray);
@@ -194,7 +195,7 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 				$additionalQualifications = array();
 				if(isset($_POST['ID'.$j])) { $additionalQualifications['ID'] = $_POST['ID'.$j];}
 				if(isset($_POST['University-degree'.$j]) && $_POST['University-degree'.$j]!=""){
-					$additionalQualifications['Degree'] = $_POST['University-degree'.$j]; 
+					$additionalQualifications['Degree'] = $_POST['University-degree'.$j];
 					$additionalQualifications['DegreeID'] = "";
 				}
 				elseif(isset($_POST['Udegree'.$j])){
@@ -202,7 +203,7 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 					$additionalQualifications['Degree'] = "";
 				}
 				if(isset($_POST['Undergraduate-university-name-other'.$j]) && $_POST['Undergraduate-university-name-other'.$j]!=""){
-					$additionalQualifications['Institute'] = $_POST['Undergraduate-university-name-other'.$j]; 
+					$additionalQualifications['Institute'] = $_POST['Undergraduate-university-name-other'.$j];
 					$additionalQualifications['InstituteID'] = "";
 				}
 				elseif(isset($_POST['Undergraduate-university-name'.$j])){
@@ -216,12 +217,12 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 			$postData['PersonEducation'] =  $temp ;
 	}
     // 2.2.5 - Dashboard - update member detail
-	// Send - 
-	// UserID 
+	// Send -
+	// UserID
 	// Response - UserID & detail data
 	$postData['userID']=$_SESSION['UserId'];$testdata = aptify_get_GetAptifyData("5", $postData);
 	unset($_SESSION["Regional-group"]);
-	
+
 	 if(isset($_SESSION['UserId'])){$userID = $_SESSION['UserId']; }
 
 	$products = array();
@@ -236,14 +237,14 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 	}
 	$type = "NG";
 	checkShoppingCart($userID, $type="NG",$productID="");
-	
+
 	foreach($products as $key=>$value){
 		$productID = $value;
 		createShoppingCart($userID, $productID,$type,$coupon="");
 	}
 	}
 	//save fellowship product on APA side
-	if(isset($_POST['fap']) && $_POST['fap'] =="1" ) { 
+	if(isset($_POST['fap']) && $_POST['fap'] =="1" ) {
 		checkShoppingCart($userID, $type="FP",$productID="");
 		createShoppingCart($userID, $_SESSION['fpQuatation'],$type="FP",$coupon="");
 	}else{ checkShoppingCart($userID, $type="FP",$productID="");}
@@ -254,21 +255,21 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 	 $sportTag = checkSP($products);
 	 $inTouchTag = checkITouch($products);
 	 /*  there is a question for those two kinds of subscription product, need to know how Aptify organise combination products for "sports and mus"*/
-	if(isset($_POST['ngmusculo']) && $_POST['ngmusculo'] =="1"){ 
+	if(isset($_POST['ngmusculo']) && $_POST['ngmusculo'] =="1"){
 		checkShoppingCart($userID, $type="MG1",$productID="");
-		createShoppingCart($userID, "9978",$type="MG1",$coupon=""); 
+		createShoppingCart($userID, "9978",$type="MG1",$coupon="");
 	}
 	if(isset($_POST['ngsports']) && $_POST['ngsports'] =="1") {
 		checkShoppingCart($userID, $type="MG2",$productID="");
-		createShoppingCart($userID, "9977",$type="MG2",$coupon=""); 
-		
-	}
-	
-	nameUpdate($postData['Firstname'], $postData['Preferred-name']);
-}   
-?> 
+		createShoppingCart($userID, "9977",$type="MG2",$coupon="");
 
-<?php 
+	}
+
+	nameUpdate($postData['Firstname'], $postData['Preferred-name']);
+}
+?>
+
+<?php
 //get productID list from local database;
 /*	function getProduct($userID,$type){
 		$arrayReturn = array();
@@ -277,11 +278,11 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 		$shoppingcartGet->bindValue(':userID', $userID);
 		$shoppingcartGet->bindValue(':type', $type);
 		$shoppingcartGet->execute();
-		if($shoppingcartGet->rowCount()>0) { 
+		if($shoppingcartGet->rowCount()>0) {
 			foreach ($shoppingcartGet as $row) {
 				array_push($arrayReturn, $row['productID']);
 			}
-		}	
+		}
 		$shoppingcartGet = null;
 		return $arrayReturn;
 	}*/
@@ -295,22 +296,22 @@ unset($_SESSION["FPProductID"]);
 if(sizeof($userFPProduct)!=0){ foreach($userFPProduct as $singFP) { $_SESSION["FPProductID"] = $singFP;}}
 $userMGProduct = array();
 $userMG1Product = getProduct($_SESSION['UserId'],"MG1");
-if(sizeof($userMG1Product)!=0){ 
-    array_push($userMGProduct, $userMG1Product); 
-	
+if(sizeof($userMG1Product)!=0){
+    array_push($userMGProduct, $userMG1Product);
+
 }
 $userMG2Product = getProduct($_SESSION['UserId'],"MG2");
 
-if(sizeof($userMG2Product)!=0){ 
-    array_push($userMGProduct, $userMG2Product); 
+if(sizeof($userMG2Product)!=0){
+    array_push($userMGProduct, $userMG2Product);
 }
 if(sizeof($userMGProduct)==0) {unset($_SESSION["MGProductID"]);}
 if(sizeof($userMGProduct)!=0){  $_SESSION["MGProductID"] = $userMGProduct; }
 
 
 // 2.2.4 - Dashboard - Get member detail
-// Send - 
-// UserID 
+// Send -
+// UserID
 // Response - UserID & detail data
 
 $data = "UserID=".$_SESSION["UserId"];
@@ -341,10 +342,10 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 							<option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> disabled>Please select</option>
 						    <?php
 							$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
-							$Prefix=json_decode($Prefixcode, true);							
+							$Prefix=json_decode($Prefixcode, true);
 							foreach($Prefix  as $key => $value){
 								echo '<option value="'.$Prefix[$key]['ID'].'"';
-								if ($details['Prefix'] == $Prefix[$key]['ID']){ echo "selected='selected'"; } 
+								if ($details['Prefix'] == $Prefix[$key]['ID']){ echo "selected='selected'"; }
 								echo '> '.$Prefix[$key]['Prefix'].' </option>';
 							}
 							?>
@@ -364,7 +365,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					   <input type="text" class="form-control" name="Middle-name" <?php if (empty($details['Middle-name'])) {echo "placeholder='Middle name'";}   else{ echo 'value="'.$details['Middle-name'].'"'; }?>>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<!--<div class="col-xs-6 col-md-3">
 						<label for="">Maiden name</label>
@@ -385,7 +386,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 <div class="chevron-select-box date">
                                     <select class="form-control" id="birthdate" name="birthdate">
                                         <option value="" selected disabled>Date</option>
-                                        <?php 
+                                        <?php
                                             $start_date = 1;
                                             $end_date   = 31;
                                             for( $j=$start_date; $j<=$end_date; $j++ ) {
@@ -420,7 +421,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 <div class="chevron-select-box year">
                                     <select class="form-control" id="birthyear" name="birthyear">
                                         <option value="" selected disabled>Year</option>
-                                        <?php 
+                                        <?php
                                             $year = date('Y');
                                             $min = $year - 118;
                                             $max = $year;
@@ -445,7 +446,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						 <option value="" <?php if (empty($details['Gender'])) echo "selected='selected'";?> disabled>Please select</option>
 							<?php
 								$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
-								$Gender=json_decode($Gendercode, true);						
+								$Gender=json_decode($Gendercode, true);
 								foreach($Gender  as $key => $value){
 									echo '<option value="'.$Gender[$key]['ID'].'"';
 									if ($details['Gender'] == $Gender[$key]['ID']){ echo "selected='selected'"; }
@@ -456,20 +457,20 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					   </div>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-xs-6 col-md-6">
 					<label>Aboriginal and Torres Strait Islander origin<span class="tipstyle"> *</span></label>
-					<div class="chevron-select-box">   
+					<div class="chevron-select-box">
 					<select class="form-control" id="Aboriginal" name="Aboriginal">
 							<option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?> disabled>Please select</option>
 						 <?php
 									$Aboriginalcode  = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
 									$Aboriginal=json_decode($Aboriginalcode, true);
-									//sort($Aboriginal);									
+									//sort($Aboriginal);
 									foreach($Aboriginal  as $key => $value){
 										echo '<option value="'.$Aboriginal[$key]['ID'].'"';
-										if ($details['Aboriginal'] == $Aboriginal[$key]['ID']){ echo "selected='selected'"; } 
+										if ($details['Aboriginal'] == $Aboriginal[$key]['ID']){ echo "selected='selected'"; }
 										echo '> '.$Aboriginal[$key]['Name'].' </option>';
 									}
 								?>
@@ -477,21 +478,21 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					   </div>
 					</div>
 					<div class="col-xs-6">
-				<?php  
+				<?php
 					if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID =array();}
-						
+
 				?>
 					<label>Choose the languages you speak</label>
 					<div class="plus-select-box">
 					<select id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
-						<?php 
+						<?php
                         $Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
 						$Language=json_decode($Languagecode, true);
 						$_SESSION["Language"] = $Language;
 						foreach($Language  as $key => $value){
 						    echo '<option value="'.$Language[$key]['ID'].'"';
 							//if(sizeof($PAdditionalLanguageID)==0 && $Language[$key]["ID"]=="11"){ echo "selected='selected'"; }
-							if (in_array( $Language[$key]["ID"],$PAdditionalLanguageID)){ echo "selected='selected'"; } 
+							if (in_array( $Language[$key]["ID"],$PAdditionalLanguageID)){ echo "selected='selected'"; }
 							echo '> '.$Language[$key]['Name'].' </option>';
 						}
 						?>
@@ -499,23 +500,23 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 				</div>
 				</div>
-				
-				
+
+
 					<div class="col-xs-6 col-md-6 display-none">
 					<select id="Dietary"  name="Dietary[]" data-placeholder="Your dietary requirements..." multiple >
-					<?php 
+					<?php
 						$Dietarycode  = file_get_contents("sites/all/themes/evolve/json/Dietary.json");
 						$Dietary=json_decode($Dietarycode, true);
 						foreach($Dietary  as $key => $value){
 						echo '<option value="'.$Dietary[$key]['ID'].'"';
 						foreach($details['Dietary'] as $MemberDietary) {if ($MemberDietary['ID'] == $Dietary[$key]['ID']){ echo "selected='selected'"; } }
 						echo '> '.$Dietary[$key]['Name'].' </option>';
-					
+
 						}
 					?>
 					</select>
 					</div>
-				
+
 				<div class="row">
 					<div class="col-xs-12">
 						<span class="section_title">Phone numbers:</span>
@@ -531,11 +532,11 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
 							usort($country, "cmp");
-							$countser = 0;							
+							$countser = 0;
 							foreach($country  as $key => $value){
 								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
-								if ($details['Home-phone-countrycode'] == preg_replace('/\s+/', '', $country[$key]['TelephoneCode']) && $countser == 0){ 
-									echo "selected='selected'"; 
+								if ($details['Home-phone-countrycode'] == preg_replace('/\s+/', '', $country[$key]['TelephoneCode']) && $countser == 0){
+									echo "selected='selected'";
 									$countser++;
 								}
 								elseif(empty($details['Home-phone-countrycode']) && $country[$key]['ID']=="14"){
@@ -560,14 +561,14 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								$( "#area-code" ).focus();
 								$("#area-code").css("border", "1px solid red");
 								$(".join-details-button1").addClass("stop");
-								
+
 							}
 							else{
 								$('#areaMessage').html("");
 								$( "#area-code" ).blur();
 								$("#area-code").css("border", "");
 								$(".join-details-button1").removeClass("stop");
-							}					
+							}
 						}
 					</script>
 					<div class="col-xs-12 col-md-6">
@@ -575,7 +576,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<input type="text" class="form-control" name="phone-number" <?php if (empty($details['Home-phone-number'])) {echo "placeholder='Phone number'";}   else{ echo 'value="'.$details['Home-phone-number'].'"'; }?>>
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-xs-12">
 						<span class="text-underline smaller-lead-heading" style="color: #000">Mobile</span>
@@ -589,14 +590,14 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 							$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							$country=json_decode($countrycode, true);
 							usort($country, "cmp");
-							$countser = 0;							
+							$countser = 0;
 							foreach($country  as $key => $value){
 								echo '<option value="'.$country[$key]['TelephoneCode'].'"';
 								if ($details['Mobile-country-code'] ==  preg_replace('/\s+/', '', $country[$key]['TelephoneCode'])&& $countser == 0)
-									{ 
-										echo "selected='selected'"; 
+									{
+										echo "selected='selected'";
 										$countser++;
-									} 
+									}
 								elseif(empty($details['Mobile-country-code']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
 										}
@@ -623,14 +624,14 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					   <input type="text" class="form-control"  name="BuildingName" <?php if (empty($details['Unit'])) {echo "placeholder='Building name'";}   else{ echo 'value="'.$details['BuildingName'].'"'; }?> autocomplete="Building-Name">
 					</div>
 					</div>
-					
+
 					<div class="col-xs-12 col-sm-6 col-md-6">
 
 					   <label for="">PO Box</label>
 					   <input type="text" class="form-control" name="Pobox" <?php if (!empty($details['Unit'])) {echo "placeholder='PO box'";}   else{ echo 'value="'.$details['Pobox'].'"'; }?> autocomplete="Pobox">
 
 					</div>
-					
+
 					<div class="col-xs-12 col-sm-6 col-md-9">
 						<label for="">Address line 1<span class="tipstyle pobox-stat"> *</span></label>
 						<input type="text" class="form-control"  name="Address_Line_1" id="Address_Line_1" <?php if (empty($details['Unit'])) {echo "placeholder='Address line 1'";}   else{ echo 'value="'.$details['Unit'].'"'; }?> autocomplete="address-line1">
@@ -640,8 +641,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<label for="">Address line 2</label>
 						<input type="text" class="form-control" name="Address_Line_2" id="Address_Line_2" <?php if (empty($details['Street'])) {echo "placeholder='Address line 2'";}   else{ echo 'value="'.$details['Street'].'"'; }?> autocomplete="address-line2">
 					</div>
-				
-				
+
+
 				<div class="row">
 					<div class="col-xs-6 col-md-3">
 					   <label for="">City or town<span class="tipstyle"> *</span></label>
@@ -652,49 +653,49 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					   <label for="">Postcode<span class="tipstyle"> *</span></label>
 					   <input type="text" class="form-control" name="Postcode" id="Postcode" <?php if (empty($details['Postcode'])) {echo "placeholder='Postcode'";}   else{ echo 'value="'.$details['Postcode'].'"'; }?> autocomplete="postal-code">
 					</div>
-					
+
 					<div class="col-xs-6 col-md-3">
 					   <label for="">State</label>
-					 <div class="chevron-select-box">  
+					 <div class="chevron-select-box">
 					   <select class="form-control" id="State1" name="State" autocomplete="address-level1">
 					   <option value=""  <?php if (empty($details['State'])) echo "selected='selected'";?> disabled> State </option>
 							<?php
 							$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
-							$State=json_decode($statecode, true);						
+							$State=json_decode($statecode, true);
 							foreach($State  as $key => $value){
 								//echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
 								echo '<option value="'.$State[$key]['Abbreviation'].'"';
-								if ($details['State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+								if ($details['State'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; }
 								echo '> '.$State[$key]['Abbreviation'].' </option>';
 						    }
 						    ?>
 					   </select>
 					   </div>
 					</div>
-					
+
 					<div class="col-xs-6 col-md-3">
 					   <label for="">Country<span class="tipstyle"> *</span></label>
-					 <div class="chevron-select-box">  
+					 <div class="chevron-select-box">
 					   <select class="form-control" id="Country1" name="Country" autocomplete="country">
 						<?php
                         //$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
-						//$country=json_decode($countrycode, true);						
+						//$country=json_decode($countrycode, true);
 						foreach($country  as $key => $value){
-						    
+
 							echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
-							if ($details['Country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+							if ($details['Country'] == $country[$key]['Country']){ echo "selected='selected'"; }
 							elseif(empty($details['Country']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
 							}
 							echo '> '.$country[$key]['Country'].' </option>';
-							
+
 						}
 						?>
 						</select>
 						</div>
 					</div>
 				</div>
-				
+
 				<div class="row payment-line flex-column form_one_column">
 					<div class="col-xs-12 col-sm-6">
 						<span class="section_title">Mailing address:</span>
@@ -712,65 +713,65 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					   <label for="">Building name</label>
 					   <input type="text" class="form-control"  name="Mailing-BuildingName" <?php if (empty($details['Mailing-unitno'])) {echo "placeholder='Billing Building Name'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?> autocomplete="Building-Name">
 					</div>
-				
+
 					<div class="col-xs-12 col-sm-6 col-md-6">
 					   <label for="">PO Box</label>
 					   <input type="text" class="form-control" name="Mailing-PObox"  <?php if (!empty($details['Mailing-unitno'])) {echo "placeholder='PO Box'";}   else{ echo 'value="'.$details['Mailing-BuildingName'].'"'; }?> autocomplete="Pobox">
 					</div>
-					
+
 					<div class="col-xs-12 col-sm-6 col-md-9">
 					   <label for="">Address line 1<span class="tipstyle billing-pobox-stat"> *</span></label>
 					   <input type="text" class="form-control"  name="Mailing-Address_Line_1" id="Mailing-Address_Line_1" <?php if (empty($details['Mailing-unitno']) || $details['Mailing-unitno']=="") {echo "placeholder='Mailing address line 1'";}   else{ echo 'value="'.$details['Mailing-unitno'].'"'; }?> autocomplete="address-line1">
 					</div>
-					
+
 					<div class="col-xs-12">
 					   <label for="">Address line 2</label>
 					   <input type="text" class="form-control" name="Mailing-Address_Line_2" id="Mailing-Address_Line_2" <?php if (empty($details['Mailing-streetname'])) {echo "placeholder='Mailing address line 2'";}   else{ echo 'value="'.$details['Mailing-streetname'].'"'; }?> autocomplete="address-line2">
 					</div>
 				</div>
-				
+
 				<div class="row">
 					<div class="col-xs-6 col-md-3">
 					   <label for="">City or town<span class="tipstyle"> *</span></label>
 					   <input type="text" class="form-control" name="Mailing-city-town" id="Mailing-city-town" <?php if (empty($details['Mailing-city-town'])) {echo "placeholder='Mailing City/Town'";}   else{ echo 'value="'.$details['Mailing-city-town'].'"'; }?> autocomplete="address-level2">
 					</div>
-					
+
 					<div class="col-xs-6 col-md-3">
 					   <label for="">Postcode<span class="tipstyle"> *</span></label>
 					   <input type="text" class="form-control" name="Mailing-postcode" id="Mailing-postcode" <?php if (empty($details['Mailing-postcode'])) {echo "placeholder='Mailing Postcode'";}   else{ echo 'value="'.$details['Mailing-postcode'].'"'; }?> autocomplete="postal-code">
 					</div>
-					
+
 					<div class="col-xs-6 col-md-3">
 					   <label for="">State</label>
-					 <div class="chevron-select-box">  
+					 <div class="chevron-select-box">
 					   <select class="form-control" name="Mailing-State" id="State2" autocomplete="address-level1">
 							<option value=""  <?php if (empty($details['Mailing-state'])) echo "selected='selected'";?> disabled> State </option>
-							<?php 
+							<?php
 								$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 								$State=json_decode($statecode, true);
 								foreach($State  as $key => $value){
 								//echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
 								echo '<option value="'.$State[$key]['Abbreviation'].'"';
-								if ($details['Mailing-state'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+								if ($details['Mailing-state'] == $State[$key]['Abbreviation']){ echo "selected='selected'"; }
 								echo '> '.$State[$key]['Abbreviation'].' </option>';
-							
+
 								}
 							?>
 					   </select>
 					   </div>
 					</div>
-					
+
 					<div class="col-xs-6 col-md-3">
 					   <label for="">Country<span class="tipstyle"> *</span></label>
-					 <div class="chevron-select-box">  
+					 <div class="chevron-select-box">
 					   <select class="form-control" id="Country2" name="Mailing-Country" autocomplete="country">
-							<?php 
+							<?php
 							//$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 							//$country=json_decode($countrycode, true);
 							foreach($country  as $key => $value){
-								
+
 								echo '<option class="CountryOption'.$country[$key]['ID'].'" value="'.$country[$key]['Country'].'"';
-								if ($details['Mailing-country'] == $country[$key]['Country']){ echo "selected='selected'"; } 
+								if ($details['Mailing-country'] == $country[$key]['Country']){ echo "selected='selected'"; }
 								elseif(empty($details['Mailing-country']) && $country[$key]['ID']=="14"){
 											echo "selected='selected'";
 								}
@@ -782,16 +783,16 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 				</div>
 			</div>
-			
+
 		  <!--<div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 form-right">
 			 <div class="row form-image">
 				<div class="col-lg-12">
 				   Upload/change image
 				</div>
 			 </div>
-									   
+
 		  </div>-->
-		    <div class="col-xs-12 btn_wrapper">   
+		    <div class="col-xs-12 btn_wrapper">
 				<a class="join-details-button1" variant="next">
 					<span class="dashboard-button-name">Next</span>
 				</a>
@@ -804,7 +805,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<label for="">Member ID (Your email address)<span class="tipstyle"> *</span></label>
 					<input type="text" class="form-control" name="Memberid" readonly <?php if (empty($details['Memberid'])) {echo "placeholder='Member no.'";}   else{ echo 'value="'.$details['Memberid'].'"';}?> >
 				</div>
-				
+
 				<div class="mobile-note">
 					<div class="col-xs-12">
 						<span class="note-text">Note: </span>to update your email address, please contact the APA member hub via email at <a href="mailto:info@australian.physio" target="_self">info@australian.physio</a> or phone on <a href="tel:1300 306 622" target="_self">1300 306 622</a>.
@@ -815,10 +816,10 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<label for="">Member Category<span class="tipstyle"> *</span></label>
 					<div class="chevron-select-box">
 					<select class="form-control" id="MemberType" name="MemberType">
-						
+
 						<?php
 						// 2.2.31 Get Membership prodcut price
-						// Send - 
+						// Send -
 						// userID & product list
 						// Response -Membership prodcut price
 						$prodcutArray = array();
@@ -861,8 +862,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						foreach($MemberType  as $key => $value){
 							if(!in_array($MemberType[$key]['ProductID'],$filterMemberProduct)){
 								echo '<option value="'.$MemberType[$key]['ProductID'].'"';
-								if(isset($_SESSION["MembershipProductID"])){if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']){ echo "selected='selected'"; }} 
-								//elseif ($details['MemberTypeID'] == $MemberType[$key]['ID']){ echo "selected='selected'"; } 
+								if(isset($_SESSION["MembershipProductID"])){if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']){ echo "selected='selected'"; }}
+								//elseif ($details['MemberTypeID'] == $MemberType[$key]['ID']){ echo "selected='selected'"; }
 								echo '> ' .$MemberType[$key]['Title'] . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';
 							}
 						}
@@ -885,7 +886,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				</div>
 			</div>
 
-			<div class="row">	
+			<div class="row">
 				<input type="hidden"  name="Specialty"  <?php   echo 'value="'.$details['Specialty'].'"'; ?>>
 				<div class="row">
 				<div class="col-xs-12 col-md-6">
@@ -893,32 +894,32 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<div class="chevron-select-box">
 					<select class="form-control" id="Branch" name="Branch">
 					<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>What additional Branch would you like to join?</option>
-						<?php 
+						<?php
 							$Branchcode  = file_get_contents("sites/all/themes/evolve/json/Branch.json");
 							$Branch=json_decode($Branchcode, true);
 							foreach($Branch  as $key => $value){
 							echo '<option value="'.$Branch[$key]['Abbreviation'].'"';
-							if ($details['PreferBranch'] == $Branch[$key]['Abbreviation']){ echo "selected='selected'"; } 
+							if ($details['PreferBranch'] == $Branch[$key]['Abbreviation']){ echo "selected='selected'"; }
 							echo '> '.$Branch[$key]['FullName'].' </option>';
-						
+
 							}
 						?>
 					</select>
 					</div>
 				</div>
-			
+
 				<div class="col-xs-12">
 					<label for="">Choose which National Groups you would like to join:<?php if(isset($_SESSION["NationalProductID"])) { echo "(Add another National Group to your membership)";} ?></label>
 					<div class="plus-select-box">
-					<?php 
+					<?php
 						// get national group from Aptify via webserice return Json data;
 						// 2.2.19 - get national group
-						// Send - 
+						// Send -
 						// Response - national group
 						//$nationalGroupsCode= file_get_contents("sites/all/themes/evolve/json/NationalGroup__c.json");
 						//$nationalGroups=json_decode($nationalGroupsCode, true);
 						// 2.2.19 - GET list National Group
-						// Send - 
+						// Send -
 						// userID
 						// Response -National Group product
 						$sendData["UserID"] = $_SESSION['UserId'];
@@ -927,14 +928,14 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						array_multisort($arrColumn, SORT_ASC, $nationalGroups);
 				    ?>
 					<select id="Nationalgp" name="Nationalgp[]" multiple data-placeholder="Choose from our 21 National Groups">
-					<?php 
+					<?php
 						foreach($nationalGroups as $key=>$value) {
 						   echo '<option value="'.$nationalGroups[$key]["ProductID"].'"';
 						   if(isset($_SESSION["NationalProductID"])){ if (in_array( $nationalGroups[$key]["ProductID"],$_SESSION["NationalProductID"])){ echo "selected='selected'"; } }
-						   //elseif (in_array( $nationalGroups[$key]["ID"],$details['Nationalgp'])){ echo "selected='selected'"; } 
+						   //elseif (in_array( $nationalGroups[$key]["ID"],$details['Nationalgp'])){ echo "selected='selected'"; }
 						   echo '> '.$nationalGroups[$key]["NGtitle"]. ' ($'.number_format($nationalGroups[$key]['NGprice'],2).')  </option>';
 						}
-						
+
 					?>
 					</select>
 					</div>
@@ -945,31 +946,31 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				<div class="col-xs-12 display-none" id="ngmusculo"><input class="styled-checkbox" type="checkbox" id="ngmusculobox" name="ngmusculo" value='<?php if($IntouchTag) {echo "1";} else { echo "0";}?>' <?php if($IntouchTag) { echo 'checked="checked"';}?>> <label class="light-font-weight" for="ngmusculobox">Would you like to subscribe to the APA InTouch magazine?($<?php echo $IntouchPrice;?>)</label></div>
 			</div>
 
-			<div class="row"> 
-				<?php  
+			<div class="row">
+				<?php
 					if(!empty($details['PSpecialInterestAreaID'])) {$PSpecialInterestAreaID = explode(",",$details['PSpecialInterestAreaID']); } else {$PSpecialInterestAreaID =array();}
 				?>
 				<div class="col-xs-12">
 					<label>Choose one or more interest areas below:</label>
 					<div class="plus-select-box">
 					<select id="interest-area" name="SpecialInterest[]" multiple  tabindex="-1" data-placeholder="Choose interest area...">
-					  <?php 
+					  <?php
 						  // 2.2.37 - get interest area list
-                          // Send - 
+                          // Send -
                           // Response - interest area list
 						    $interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
-						    $interestAreas=json_decode($interestAreascode, true);	
+						    $interestAreas=json_decode($interestAreascode, true);
 							$_SESSION["interestAreas"] = $interestAreas;
 						  ?>
-						                    
-						   <?php 
+
+						   <?php
 						     foreach($interestAreas as $key => $value){
 								echo '<option value="'.$interestAreas[$key]["ID"].'"';
-								if (in_array( $interestAreas[$key]["ID"],$PSpecialInterestAreaID)){ echo "selected='selected'"; } 
-								echo '> '.$interestAreas[$key]["Name"].' </option>'; 
-								 
+								if (in_array( $interestAreas[$key]["ID"],$PSpecialInterestAreaID)){ echo "selected='selected'"; }
+								echo '> '.$interestAreas[$key]["Name"].' </option>';
+
 							 }
-												   
+
 						?>
 					</select>
 					</div>
@@ -983,11 +984,11 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 	If you have passed Specialisation, Fellowship by Original Contribution or are
 	a Fellow of the Australian College of Physiotherapists, you must tick this box.</p>';
 }
-						
+
 						}
 					?>
 					<div id="addfap">
-					<?php 
+					<?php
 					    if(isset($_SESSION["fpQuatation"]) && $_SESSION["fpQuatation"]=="18247"){ echo '<input type="hidden" id="fpQuatation">';}
 						if($FellowTag && $fpProduct == "18247"){
 							echo '<div id="fpnew"><input class="styled-checkbox" type="checkbox" id="fap" name="fap" checked="checked" value="1">';
@@ -998,27 +999,27 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 				</div>
 
-				
+
 			</div>
 			<!--
-			<div class="row"> 
+			<div class="row">
 				<div class="col-lg-3">
 				Your treatment area:
 				</div>
 			</div>
-			<div class="row"> 
+			<div class="row">
 				<div class="col-lg-6">
-				<div class="plus-select-box">	
+				<div class="plus-select-box">
 				<select id="treatment-area" name="Treatmentarea[]" multiple  tabindex="-1" data-placeholder="Choose treatment area...">
-					<?php 
+					<?php
 					//$interestAreascode  = file_get_contents("sites/all/themes/evolve/json/AreaOfInterest__c.json");
-				    //$interestAreas=json_decode($interestAreascode, true);	
+				    //$interestAreas=json_decode($interestAreascode, true);
 					?>
-					<?php 
+					<?php
 					//foreach($interestAreas  as $key => $value){
 						//echo '<option value="'.$interestAreas[$key]["ID"].'"';
-						//if (in_array( $interestAreas[$key]["ID"],$details['Treatmentarea'])){ echo "selected='selected'"; } 
-						//echo '> '.$interestAreas[$key]["Name"].' </option>'; 
+						//if (in_array( $interestAreas[$key]["ID"],$details['Treatmentarea'])){ echo "selected='selected'"; }
+						//echo '> '.$interestAreas[$key]["Name"].' </option>';
 					//}
 					?>
 					</select>
@@ -1026,7 +1027,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				</div>
 			</div>-->
 
-			<div class="col-xs-12 btn_wrapper">   
+			<div class="col-xs-12 btn_wrapper">
 				<a class="join-details-button2" variant="next">
 					<span class="dashboard-button-name">Next</span>
 				</a>
@@ -1036,12 +1037,12 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 				</a>
 			</div>
 		</div>
-       
+
         <input type="hidden" id="wpnumber" name="wpnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =0; echo $wpnumber;} ?>"/>
 		<input id="maxumnumber" type="hidden" name="maxumnumber" value="<?php  if(sizeof($details['Workplaces'])!=0) {$wpnumber =  sizeof($details['Workplaces']); echo  $wpnumber;} else {$wpnumber =0; echo $wpnumber;} ?>">
 		<div class="down3" style="display:none;">
 			<!--<div class="row">
-				<div class="col-lg-12"> 
+				<div class="col-lg-12">
 					<input class="styled-checkbox" type="checkbox" name="Findpublicbuddy" id="Findpublicbuddy" value="<?php  //echo $details['Findpublicbuddy'];?>" <?php //if($details['Findpublicbuddy']==1){echo "checked";} ?>>
 					<label class="light-font-weight" class="light-font-weight" for="Findpublicbuddy"><span class="note-text">NOTE: </span>Please list my details in the public (visbile to other health professionals)</label>
 				</div>
@@ -1058,7 +1059,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					if ($country[$pair]['Country'] == "Australia"){ $AusStringCountry .= "selected='selected'"; }
 					$AusStringCountry .= '> '.$country[$pair]['Country'].' </option>';
 				}
-				
+
 				$AusStringCountryCode = "";
 				$countser = 0;
 				foreach($country  as $wcpair => $value){
@@ -1083,7 +1084,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					}
 					return $returnString;
 				}
-				
+
 				function countryCodeLoop($countryInput, $keys, $AusString) {
 					$returnString = "";
 					if($countryInput == "Australia") {
@@ -1092,7 +1093,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						$countser = 0;
 						foreach($country  as $wcpair => $value){
 							echo '<option value="'.$country[$wcpair]['TelephoneCode'].'"';
-							if ($countryInput == preg_replace('/\s+/', '', $country[$wcpair]['TelephoneCode']) && $countser == 0) { echo "selected='selected'"; $countser++;} 
+							if ($countryInput == preg_replace('/\s+/', '', $country[$wcpair]['TelephoneCode']) && $countser == 0) { echo "selected='selected'"; $countser++;}
 							elseif(empty($countryInput) && $country[$wcpair]['ID']=="14"){
 								echo "selected='selected'";
 							}
@@ -1112,18 +1113,18 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<span class="calldeletewp<?php echo $key;?>"></span>
 					</a>
 				</li>
-			<?php endforeach ?> 
+			<?php endforeach ?>
 			</ul>
 		</div>
-		
+
 		<div id="workplaceblocks">
 			<?php // stopper
 				$temMax = 12; $workCounter = 1;
-				foreach( $details['Workplaces'] as $key => $value ):  
+				foreach( $details['Workplaces'] as $key => $value ):
 					if($workCounter > $temMax) {break;}
 					$workCounter++;
 			?>
-				<div id="workplace<?php echo $key;?>" class='tab-pane fade <?php if($key=='Workplace0') echo "in active ";?>'> 
+				<div id="workplace<?php echo $key;?>" class='tab-pane fade <?php if($key=='Workplace0') echo "in active ";?>'>
 				<input type="hidden" name="WorkplaceID<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['WorkplaceID'];?>">
 
 				<div class="col-xs-12 FapTagC">
@@ -1131,9 +1132,9 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<label class="light-font-weight highlight_checkbox" for="Findphysio<?php echo $key;?>">I want to be listed at this workplace within Find a Physio on the consumer <span class="note-text">choose.physio</span> site</label>
 				</div>
 
-				<div class="col-xs-12 FapTagA"> 
+				<div class="col-xs-12 FapTagA">
 					<input class="styled-checkbox" type="checkbox" name="Findabuddy<?php echo $key;?>" id="Findabuddy<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Find-a-buddy'];?>" <?php if($details['Workplaces'][$key]['Find-a-buddy']=="True"){echo "checked";} ?>>
-					<label class="light-font-weight highlight_checkbox" for="Findabuddy<?php echo $key;?>">I want to be listed at this workplace within Find a Physio on the corporate <span class="note-text">australian.physio</span> site</label>	
+					<label class="light-font-weight highlight_checkbox" for="Findabuddy<?php echo $key;?>">I want to be listed at this workplace within Find a Physio on the corporate <span class="note-text">australian.physio</span> site</label>
 				</div>
 
 					<div class="col-xs-12">
@@ -1176,11 +1177,11 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						   	<option value="" <?php if (empty($details['Workplaces'][$key]['Wstate'])) echo "selected='selected'";?> disabled>State</option>
 							<?php
 							//$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
-							//$State=json_decode($statecode, true);						
+							//$State=json_decode($statecode, true);
 							foreach($State  as $pair => $value){
 								//echo '<option class="StateOption'.$State[$pair]['CountryID'].'" value="'.$State[$pair]['Abbreviation'].'"';
 								echo '<option value="'.$State[$pair]['Abbreviation'].'"';
-								if ($details['Workplaces'][$key]['Wstate'] == $State[$pair]['Abbreviation']){ echo "selected='selected'"; } 
+								if ($details['Workplaces'][$key]['Wstate'] == $State[$pair]['Abbreviation']){ echo "selected='selected'"; }
 								echo '> '.$State[$pair]['Abbreviation'].' </option>';
 							}
 							?>
@@ -1192,7 +1193,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<label for="Wcountry<?php echo $key;?>">Country<span class="tipstyle"> *</span></label>
 						<div class="chevron-select-box">
 						<select class="form-control" id="Wcountry<?php echo $key;?>" name="Wcountry<?php echo $key;?>" required>
-							<?php 
+							<?php
 								$countryList = countryLoop($details['Workplaces'][$key]['Wcountry'], $key, $AusStringCountry);
 								echo $countryList;
 							?>
@@ -1219,7 +1220,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<label for="">Country code</label>
 						<div class="chevron-select-box">
 							<select class="form-control" id="WPhoneCountryCode<?php echo $key;?>" name="WPhoneCountryCode<?php echo $key;?>">
-							<?php 
+							<?php
 								$countryList = countryCodeLoop($details['Workplaces'][$key]['Wcountry'], $key, $AusStringCountryCode);
 								echo $countryList;
 							?>
@@ -1240,29 +1241,29 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					<!--<div class="col-xs-6 col-md-3">
 						<label for="">Extention Number</label>
 						<input type="text" class="form-control" name="WPhoneExtentions<?php //echo $key;?>" <?php //if (empty($details['Workplaces'][$key]['WPhoneExtentions'])) {echo "placeholder='Extentions Number'";}   else{ echo 'value="'.$details['Workplaces'][$key]['WPhoneExtentions'].'"'; }?>  >
-					</div>-->		
+					</div>-->
 				</div>
 
 				<div class="row">
 
-					 <?php  
+					 <?php
 						//if(!empty($details['Workplaces'][$key]['AdditionalLanguage'])) {$WAdditionalLanguage = explode(",",$details['Workplaces'][$key]['AdditionalLanguage']); } else {$WAdditionalLanguage = array();}
-						
+
 						?>
 					<!--<div class="col-xs-12">
 						<label>Choose the languages you speak in your practice?</label>
 						<div class="plus-select-box">
 						<select id="Additionallanguage<?php echo $key;?>" name="Additionallanguage<?php echo $key;?>[]" multiple  tabindex="-1" data-placeholder="Choose an additional language...">
-							<?php 
+							<?php
 							/*
 								$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
 								$Language=json_decode($Languagecode, true);
 								foreach($Language  as $pair => $value){
 									echo '<option value="'.$Language[$pair]['ID'].'"';
-									if (in_array($Language[$pair]['ID'],$WAdditionalLanguage)){ echo "selected='selected'"; } 
+									if (in_array($Language[$pair]['ID'],$WAdditionalLanguage)){ echo "selected='selected'"; }
 									echo '> '.$Language[$pair]['Name'].' </option>';
 								}*/
-						    ?>	
+						    ?>
 						</select>
 						</div>
 					</div>-->
@@ -1318,26 +1319,30 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<input class="styled-checkbox" type="checkbox" name="Mobilephysiotherapist<?php echo $key;?>" id="Mobilephysiotherapist<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['MobilePhysio'];?>" <?php if($details['Workplaces'][$key]['MobilePhysio']=="True"){echo "checked";} ?>>
 						<label class="light-font-weight" for="Mobilephysiotherapist<?php echo $key;?>">Mobile physiotherapist</label>
 					</div>
+          <div class="col-xs-6 col-md-4">
+            <input class="styled-checkbox" type="checkbox" name="NDIS<?php echo $key;?>" id="NDIS<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['NDIS'];?>" <?php if($details['Workplaces'][$key]['NDIS']=="True"){echo "checked";} ?>>
+            <label class="light-font-weight" for="NDIS<?php echo $key;?>">NDIS</label>
+          </div>
 				</div>
 
 				<div class="row">
 					<div class="col-xs-12 col-md-6">
 						<label>Workplace setting<span class="tipstyle"> *</span></label>
-						<div class="chevron-select-box">	
+						<div class="chevron-select-box">
 						<select class="form-control" id="Workplace-setting<?php echo $key;?>" name="Workplace-setting<?php echo $key;?>">
 						<?php
 							// 2.2.36 - get workplace settings list
-							// Send - 
+							// Send -
 							// Response - get workplace settings from Aptify via webserice return Json data;
 							// stroe workplace settings into the session
 							$workplaceSettingscode  = file_get_contents("sites/all/themes/evolve/json/WorkPlaceSettings.json");
-							$workplaceSettings=json_decode($workplaceSettingscode, true);	
+							$workplaceSettings=json_decode($workplaceSettingscode, true);
 							$_SESSION["workplaceSettings"] = $workplaceSettings;
 							foreach($workplaceSettings  as $pair => $value){
 							echo '<option value="'.$workplaceSettings[$pair]["ID"].'"';
-							if ($details['Workplaces'][$key]['Workplace-settingID'] == $workplaceSettings[$pair]["ID"]){ echo "selected='selected'"; } 
-							echo '> '.$workplaceSettings[$pair]["Name"].' </option>'; 
-							}							
+							if ($details['Workplaces'][$key]['Workplace-settingID'] == $workplaceSettings[$pair]["ID"]){ echo "selected='selected'"; }
+							echo '> '.$workplaceSettings[$pair]["Name"].' </option>';
+							}
 							?>
 						</select>
 						</div>
@@ -1347,12 +1352,12 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						<label>Numbers of hours worked<span class="tipstyle"> *</span></label>
 						<div class="chevron-select-box">
 						<select class="form-control" id="Number-worked-hours<?php echo $key;?>" name="Number-worked-hours<?php echo $key;?>">
-						<?php 
+						<?php
 							$NumberOfHourscode  = file_get_contents("sites/all/themes/evolve/json/NumberOfHours.json");
 							$NumberOfHours=json_decode($NumberOfHourscode, true);
 							foreach($NumberOfHours  as $pair => $value){
 								echo '<option value="'.$NumberOfHours[$pair]['ID'].'"';
-								if ($details['Workplaces'][$key]['Number-workedhours'] == $NumberOfHours[$pair]['ID']){ echo "selected='selected'"; } 
+								if ($details['Workplaces'][$key]['Number-workedhours'] == $NumberOfHours[$pair]['ID']){ echo "selected='selected'"; }
 								echo '> '.$NumberOfHours[$pair]['Name'].' </option>';
 							}
 						?>
@@ -1363,10 +1368,10 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 			</div>
 			<?php endforeach; ?>
-			
+
 			</div>
 
-			<div class="col-xs-12 btn_wrapper">   
+			<div class="col-xs-12 btn_wrapper">
 				<a class="join-details-button3" variant="next">
 					<span class="dashboard-button-name">Next</span>
 				</a>
@@ -1375,7 +1380,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					Back to previous
 				</a>
 			</div>
-		
+
 		</div>
 		<div class="down4" style="display:none;" >
 		<div class="col-xs-12 col-sm-12 col-md-12"><p>Please note: all education undertaken with the APA or APC will already be recorded on your profile.</p></div>
@@ -1383,7 +1388,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 		<input type="hidden" id="educationMaxNumber" name="educationMaxNumber" value="<?php  if(sizeof($details['PersonEducation'])!=0) {$educationMaxNumber =  sizeof($details['PersonEducation']);} else{ $educationMaxNumber =0;} echo  $educationMaxNumber;  ?>"/>
 			<div id="additional-qualifications-block">
 				<?php foreach($details['PersonEducation'] as $key => $value) :?>
-				
+
 					<div id="additional<?php echo $key;?>">
 					<input type="hidden" name="ID<?php echo $key;?>" value="<?php  echo $details['PersonEducation'][$key]['ID'];?>">
 					<div class="col-xs-12 space-line"><div class="col-xs-12 separater"></div></div>
@@ -1391,21 +1396,21 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 							<div class="row">
 								<div class="col-xs-12 col-sm-6">
 									<label for="Udegree<?php echo $key;?>">Degree level<span class="tipstyle"> *</span></label>
-									<?php 
+									<?php
 										$degreecode  = file_get_contents("sites/all/themes/evolve/json/Educationdegree.json");
 										$degree=json_decode($degreecode, true);
-										$_SESSION["degree"] = $degree;	
+										$_SESSION["degree"] = $degree;
 									?>
 									<?php if (!empty($details['PersonEducation'][$key]['DegreeID'])):?>
 									<div class="chevron-select-box">
 									<select class="form-control" name="Udegree<?php echo $key;?>" id="Udegree<?php echo $key;?>">
-										
-										<?php 
+
+										<?php
 											foreach($degree  as $pair => $value){
 												echo '<option value="'.$degree[$pair]['ID'].'"';
-												if ($details['PersonEducation'][$key]['DegreeID'] == $degree[$pair]['ID']){ echo "selected='selected'"; } 
+												if ($details['PersonEducation'][$key]['DegreeID'] == $degree[$pair]['ID']){ echo "selected='selected'"; }
 												echo '> '.$degree[$pair]['Name'].' </option>';
-												
+
 											}
 										?>
 										<option value="0" >Other</option>
@@ -1422,7 +1427,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 							<div class="row">
 								<div class="col-xs-12 col-sm-6">
 									<label for="Undergraduate-university-name<?php echo $key;?>">University name<span class="tipstyle"> *</span></label>
-									<?php 
+									<?php
 										$universityCode  = file_get_contents("sites/all/themes/evolve/json/University.json");
 										$University=json_decode($universityCode, true);
 										$name = array();
@@ -1431,18 +1436,18 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 											$name[$ukey] = $row['Name'];
 										}
 										array_multisort($name, SORT_ASC, $University);
-										
-										
-										$_SESSION["University"] = $University;	
+
+
+										$_SESSION["University"] = $University;
 									?>
 									<?php if (!empty($details['PersonEducation'][$key]['InstituteID'])):?>
 									<div class="chevron-select-box">
 									<select class="form-control" name="Undergraduate-university-name<?php echo $key;?>" id="Undergraduate-university-name<?php echo $key;?>">
-										
-										<?php 
+
+										<?php
 											foreach($University  as $pair => $value){
 												echo '<option value="'.$University[$pair]['ID'].'"';
-												if ($details['PersonEducation'][$key]['InstituteID'] == $University[$pair]['ID']){ echo "selected='selected'"; } 
+												if ($details['PersonEducation'][$key]['InstituteID'] == $University[$pair]['ID']){ echo "selected='selected'"; }
 												echo '> '.$University[$pair]['Name'].' </option>';
 											}
 										?>
@@ -1461,18 +1466,18 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								<label for="Ugraduate-country<?php echo $key;?>">Country<span class="tipstyle"> *</span></label>
 								<div class="chevron-select-box">
 								<select class="form-control" id="Ugraduate-country<?php echo $key;?>" name="Ugraduate-country<?php echo $key;?>">
-								<?php 
+								<?php
 								//$countrycode  = file_get_contents("sites/all/themes/evolve/json/Country.json");
 								//$country=json_decode($countrycode, true);
 								foreach($country  as $pair => $value){
 									echo '<option value="'.$country[$pair]['ID'].'"';
-									if ($details['PersonEducation'][$key]['Country'] == $country[$pair]['ID']){ echo "selected='selected'"; } 
+									if ($details['PersonEducation'][$key]['Country'] == $country[$pair]['ID']){ echo "selected='selected'"; }
 									elseif(empty($details['PersonEducation'][$key]['Country']) && $country[$pair]['ID']=="14"){
 											echo "selected='selected'";
 									}
 
 									echo '> '.$country[$pair]['Country'].' </option>';
-									
+
 								}
 								?>
 								</select>
@@ -1483,8 +1488,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								<label for="Ugraduate-yearattained<?php echo $key;?>">Year attained or expected graduation date<span class="tipstyle"> *</span></label>
 								<div class="chevron-select-box">
 								<select class="form-control" name="Ugraduate-yearattained<?php echo $key;?>" id="Ugraduate-yearattained<?php echo $key;?>">
-								
-								<?php 
+
+								<?php
 								$y = date("Y") + 10;
 								for ($i=$y; $i>= 1940; $i--){
 								echo '<option value="'.$i.'"';
@@ -1499,7 +1504,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 							</div>
 					</div>
 					<!--<?php //if($key!="0"):?>-->
-					<div class="col-xs-12"><a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="icon delete_icon"></span> Delete</a></div>	
+					<div class="col-xs-12"><a class="callDeleteEdu" id="deleteEducation<?php echo $key;?>"><span class="icon delete_icon"></span> Delete</a></div>
 					<?php //endif;?>
 					</div>
 				<?php endforeach;?>
@@ -1535,14 +1540,14 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                 <?php
                                     $universityCode         = file_get_contents("sites/all/themes/evolve/json/University.json");
                                     $University             = json_decode($universityCode, true);
-									
+
 									$name = array();
 										foreach ($University as $ukey => $row)
 										{
 											$name[$ukey] = $row['Name'];
 										}
 									array_multisort($name, SORT_ASC, $University);
-									
+
                                     $_SESSION["University"] = $University;
                                 ?>
                             <div class="chevron-select-box">
@@ -1553,7 +1558,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
                                         echo '<option value="' . $University[$pair]['ID'] . '"';
                                         echo '> ' . $University[$pair]['Name'] . ' </option>';
                                     }*/
-                                ?>    
+                                ?>
                                     <option value="0">Other</option>
                                 </select>
                                 </div>
@@ -1600,7 +1605,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 		</div>
 		<div class="col-xs-12">
-				<a class="add-additional-qualification"><span class="icon plus_circle"></span>Add qualification</a>		
+				<a class="add-additional-qualification"><span class="icon plus_circle"></span>Add qualification</a>
 		</div>
 		<div class="col-xs-12 btn_wrapper">
 			<a href="javascript:document.getElementById('your-detail-form').submit();" variant="next" class="join-details-button4">
@@ -1614,7 +1619,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 
 	</div>
 
-</form> 
+</form>
 		<div id="confirmDelete" style="display:none;">
 				<div class="flex-cell">
 					<h3 class="light-lead-heading cairo">Are you sure you want to delete this qualification record?</h3>
@@ -1630,7 +1635,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 			<div class="flex-cell">
 				<h3 class="light-lead-heading cairo">Limit reached</h3>
 				<span>Please note, the number of practices you can list is limited to 12.</span>
-			</div>								
+			</div>
 		</div>
 		<!-- END Workplace limit POPUP -->
 <script type="text/javascript">
@@ -1638,7 +1643,7 @@ jQuery(document).ready(function($) {
 	$('#workplace').click(function(){
 		$('#dashboard-right-content').addClass("autoscroll");
 	});
-	
+
 	$('.add-workplace-join').click(function(){
 		var number = Number($('#wpnumber').val());
 		var maxNumber = Number($('#maxumnumber').val());
@@ -1679,10 +1684,10 @@ jQuery(document).ready(function($) {
 		  var x = $(this).attr("class").replace('deletewp', '');
 		  $("#workplaceli"+ x).remove();
 		  $("#workplace"+ x).remove();
-		  
+
 		  var n = Number($('#wpnumber').val());
 		  var t = Number(n -1);
-		  
+
 		$('input[name=wpnumber]').val(t);
 		for (m = 1; m<=t;m++){
 			var deleteVal = $('div[class="down3"] #tabmenu li:nth-child('+m+')')
@@ -1691,7 +1696,7 @@ jQuery(document).ready(function($) {
 				.html("Workplace "+m+'<span class="calldeletewp' + deleteVal + '"></span>');
 		}
 	});
-	
+
 });
 $('.add-additional-qualification').click(function(){
 		$('#dashboard-right-content').addClass("autoscroll");
@@ -1712,7 +1717,7 @@ $('.add-additional-qualification').click(function(){
 		$("#additional"+ x).remove();
 		$("#deleteQButton").removeAttr('class');
 		var en = Number($('#addtionalNumber').val());
-		
+
 		var et = Number(en -1);
 		$('input[name=addtionalNumber]').val(et);
 		//$('#confirmDelete').dialog('close');
@@ -1726,27 +1731,27 @@ jQuery(document).ready(function() {
   $(".callDeleteEdu").on("click",function(){
     $('div[aria-describedby=confirmDelete]').fadeIn();
   });
- 
+
 });
 </script>
 <script>
  //handle MACP product related to the NG
- 
+
  var prevSetup = Selectize.prototype.setup;
 
   Selectize.prototype.setup = function () {
       prevSetup.call(this);
-  
+
       // This property is set in native setup
       // Unless the source code changes, it should
       // work with any version
       this.$control_input.prop('readonly', true);
   };
-  
+
  var $nationalSelectize = $('#Nationalgp').selectize({
     plugins: ['remove_button'],
   });
-  
+
   var ngQuatation ='<?php if(isset($_SESSION['ngQuatation']))  echo json_encode($_SESSION['ngQuatation']);?>';
    var macpTag = false;
    $(document).on('change', $nationalSelectize, function(){
@@ -1777,8 +1782,8 @@ jQuery(document).ready(function() {
 		$( "#fpnew" ).addClass('display-none');
 		$( "#fpnew #fap" ).val('0');
 		$("#fpnew #fap").attr('checked', false);
-		
+
 	}
-	
+
 });
 </script>

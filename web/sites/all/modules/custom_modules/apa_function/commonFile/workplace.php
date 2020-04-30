@@ -1,4 +1,4 @@
-<?php 
+<?php
 $i = $_POST['count'];
 $sessionWorkplaceSetting = json_decode($_POST['sessionWorkplaceSetting']);
 $sessioninterestAreas = json_decode($_POST['sessioninterestAreas']);
@@ -9,7 +9,7 @@ $interestAreas= $sessioninterestAreas;
 
 echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
  if($memberType!="9966" && $memberType!="9993" && $memberType!="9994" && $memberType!="9968" && $memberType!="9997" && $memberType!="10004" && $memberType!="17" && $memberType!="18" && $memberType!="21" && $memberType!="22" && $memberType!="31" && $memberType!="32" && $memberType!="34"  && $memberType!="35" && $memberType!="36" && $memberType!="37")
- {echo '   
+ {echo '
 	<div class="col-xs-12 FapTagA">
 		<input class="styled-checkbox" type="checkbox" name="Findabuddy'.$i.'" id="Findabuddy'.$i.'" value="" >
 		<label class="light-font-weight highlight_checkbox" for="Findabuddy'.$i.'">I want to be listed at this workplace within Find a Physio on the corporate <span class="note-text">australian.physio</span> site</label>
@@ -78,13 +78,13 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 		';
 			$country = $sessionCountry;
 			foreach($country  as $key => $object){
-				echo '<option value="'.$country[$key]['Country']; 
+				echo '<option value="'.$country[$key]['Country'];
 				echo '"';
 				if($country[$key]['ID']=="14"){
 					echo "selected='selected'";
 				}
 				echo '>'.$country[$key]['Country'].'</option>';
-				
+
 			}
 		echo '
 		</select>
@@ -107,7 +107,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 </div>
 
 <div class="row">
-                                                                                                                
+
 <div class="col-xs-6 col-md-3">
 		<label for="">Country code</label>
 		<div class="chevron-select-box">
@@ -119,7 +119,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 				}
                 echo '> '.$country[$pair]['Country'].' </option>';
                 }
-                
+
                 echo '
 		</select>
 		</div>
@@ -142,7 +142,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 
 <div class="row">
 
-	
+
 
 	<div class="col-xs-6 col-md-6">
 		<label>Quality In Practice number&nbsp;(QIP)</label>
@@ -150,7 +150,7 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 	</div>
 </div>
 
-<div class="row label-list"> 
+<div class="row label-list">
 	<div class="col-xs-12" style="margin-top: 18px">
 		<label>What services does this workplace provide?</label>
 	</div>
@@ -190,6 +190,10 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
 	<div class="col-xs-12 col-sm-6 col-md-6">
 		<input class="styled-checkbox" type="checkbox" name="MobilePhysio'.$i.'" id="MobilePhysio'.$i.'" value="False">
 		<label class="light-font-weight" for="MobilePhysio'.$i.'">Mobile physiotherapist</label>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-6">
+		<input class="styled-checkbox" type="checkbox" name="NDIS'.$i.'" id="NDIS'.$i.'" value="False">
+		<label class="light-font-weight" for="NDIS'.$i.'">NDIS</label>
 	</div>
 </div>
 
