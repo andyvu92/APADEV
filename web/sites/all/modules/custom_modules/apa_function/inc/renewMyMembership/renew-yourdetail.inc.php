@@ -179,6 +179,7 @@ if(isset($_POST['step1'])) {
 			if(isset($_POST['Homehospital'.$i])) { $workplaceArray['Homehospital'] = $_POST['Homehospital'.$i];} else {$workplaceArray['Homehospital']="False";}
 			if(isset($_POST['MobilePhysio'.$i])) { $workplaceArray['MobilePhysio'] = $_POST['MobilePhysio'.$i];}else {$workplaceArray['MobilePhysio']="False";}
       if(isset($_POST['NDIS'.$i])) { $workplaceArray['NDIS'] = $_POST['NDIS'.$i];}else {$workplaceArray['NDIS']="False";}
+      if(isset($_POST['Telehealth'.$i])) { $workplaceArray['Telehealth'] = $_POST['Telehealth'.$i];}else {$workplaceArray['Telehealth']="False";}
       if(isset($_POST['Number-worked-hours'.$i])) { $workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours'.$i];}
 			if(isset($_POST['WTreatmentarea'.$i])){ $workplaceArray['SpecialInterestAreaID'] = implode(",",$_POST['WTreatmentarea'.$i]); } else { $workplaceArray['SpecialInterestAreaID'] = ""; }
 			if(isset($_POST['Additionallanguage'.$i])){ $workplaceArray['AdditionalLanguage'] = implode(",",$_POST['Additionallanguage'.$i]); } else{ $workplaceArray['AdditionalLanguage'] = "";}
@@ -1322,6 +1323,10 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
           <div class="col-xs-6 col-md-4">
             <input class="styled-checkbox" type="checkbox" name="NDIS<?php echo $key;?>" id="NDIS<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['NDIS'];?>" <?php if($details['Workplaces'][$key]['NDIS']=="True"){echo "checked";} ?>>
             <label class="light-font-weight" for="NDIS<?php echo $key;?>">NDIS</label>
+          </div>
+          <div class="col-xs-6 col-md-4">
+                <input class="styled-checkbox" type="checkbox" name="Telehealth<?php echo $key;?>" id="Telehealth<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Telehealth'];?>" <?php if($details['Workplaces'][$key]['Telehealth']=="True"){echo "checked";} ?>>
+                <label class="light-font-weight" for="Telehealth<?php echo $key;?>">Telehealth</label>
           </div>
 				</div>
 

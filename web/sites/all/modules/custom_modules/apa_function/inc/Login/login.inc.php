@@ -355,7 +355,7 @@ if (isset($_POST['refreshTag'])) {
 					$workplaceArray['MobilePhysio'] = "False";
         }
         if(isset($_POST['NDIS'.$i])) { $workplaceArray['NDIS'] = $_POST['NDIS'.$i];}else {$workplaceArray['NDIS']="False";}
-
+        if(isset($_POST['Telehealth'.$i])) { $workplaceArray['Telehealth'] = $_POST['Telehealth'.$i];}else {$workplaceArray['Telehealth']="False";}
 				if (isset($_POST['Number-worked-hours' . $i])) {
 					$workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours' . $i];
 				}

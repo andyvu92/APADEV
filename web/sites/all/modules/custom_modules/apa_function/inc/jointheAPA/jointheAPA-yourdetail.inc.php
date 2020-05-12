@@ -365,7 +365,7 @@ $filterMemberProduct = array("10007","10008","10009","9997");
                 $workplaceArray['MobilePhysio'] = "False";
             }
             if(isset($_POST['NDIS'.$i])) { $workplaceArray['NDIS'] = $_POST['NDIS'.$i];}else {$workplaceArray['NDIS']="False";}
-
+            if(isset($_POST['Telehealth'.$i])) { $workplaceArray['Telehealth'] = $_POST['Telehealth'.$i];}else {$workplaceArray['Telehealth']="False";}
             if (isset($_POST['Number-worked-hours' . $i])) {
                 $workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours' . $i];
             }
@@ -1874,6 +1874,10 @@ array_multisort($Title, SORT_ASC, $MemberType);
                               <label for="NDIS<?php echo $key;?>">NDIS</label>
 
                             </div>
+                            <div class="col-xs-6 col-md-3">
+                <input class="styled-checkbox" type="checkbox" name="Telehealth<?php echo $key;?>" id="Telehealth<?php echo $key;?>" value="<?php  echo $details['Workplaces'][$key]['Telehealth'];?>" <?php if($details['Workplaces'][$key]['Telehealth']=="True"){echo "checked";} ?>>
+                <label for="Telehealth<?php echo $key;?>">Telehealth</label>
+              </div>
                         </div>
 
                         <!--BREAK-->

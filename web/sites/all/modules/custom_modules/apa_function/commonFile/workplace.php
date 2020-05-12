@@ -194,7 +194,11 @@ echo '<input type="hidden" name="WorkplaceID'.$i.'" value="-1">';
   <div class="col-xs-12 col-sm-6 col-md-6">
 		<input class="styled-checkbox" type="checkbox" name="NDIS'.$i.'" id="NDIS'.$i.'" value="False">
 		<label class="light-font-weight" for="NDIS'.$i.'">NDIS</label>
-	</div>
+  </div>
+  <div class="col-xs-12 col-sm-6 col-md-6">
+  <input class="styled-checkbox" type="checkbox" name="Telehealth'.$i.'" id="Telehealth'.$i.'" value="False">
+  <label class="light-font-weight" for="Telehealth'.$i.'">Telehealth</label>
+</div>
 </div>
 
 <div class="row">
