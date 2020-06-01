@@ -1786,7 +1786,7 @@ jQuery(document).ready(function() {
         return;
       } else {
         // append element
-        $(this).append('<div id="users_help_bar" class="minimized modal_disabled"><span class="close"></span><div class="modal_header"><span>Technical difficulties are currently preventing some website functions. We apologise for any inconvenience.</span></div><div class="modal_content"></div></div>');
+        $(this).append('<div id="users_help_bar" class="minimized modal_disabled"><span class="close"></span><div class="modal_header"><span>We are currently experiencing an issue that may prevent members from logging into the APA website and accessing member-only content, including PD. We are working to resolve this issue as soon as possible. Thank you for your patience.</span></div><div class="modal_content"></div></div>');
         // get content from a file
         /*
         $.ajax({
@@ -1815,7 +1815,7 @@ jQuery(document).ready(function() {
       });
     }) 
   }
-  //add_help_bar();
+  add_help_bar();
 
   // ADD HIDDEN HEADING FOR RESPONSIVE TABLE-------------------------------------------------------
   var responsive_heading_table = function(){
