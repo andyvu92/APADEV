@@ -1815,7 +1815,7 @@ jQuery(document).ready(function() {
       });
     }) 
   }
-  add_help_bar();
+  //add_help_bar();
 
   // ADD HIDDEN HEADING FOR RESPONSIVE TABLE-------------------------------------------------------
   var responsive_heading_table = function(){
