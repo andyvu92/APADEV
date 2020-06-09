@@ -1884,3 +1884,10 @@ background: url("/sites/default/files/logo_apa_0.png") 0 0 no-repeat;
 		?>
 	</div>
 <?php endif; ?>
+<?php 
+	// ads
+	$block = block_load('block', '389');
+	$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+	$output = drupal_render($get);        
+	print $output;
+?>
