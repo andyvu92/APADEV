@@ -46,3 +46,41 @@
 		}
 	}
 }
+
+.PopUpMiddleLayout {
+	width: 100%;
+	position: fixed;
+	display: inherit;
+	height: 90px;
+	z-index: 99999;
+	overflow: hidden;
+	top: 80%;
+	.ASection .Desktop {
+		max-width: 1450px;
+		z-index: 99999;
+		min-height: 37px;
+		margin: auto;
+		display: flex;
+		align-items: center;
+		margin-top: 0;
+		p{
+			margin: 0;
+			padding-left: 5px;
+		}
+	}
+	.ASection .Mobile {
+		display: none;
+		width: 234px;
+		z-index: 1000;
+		margin: auto;
+		margin-top: 0;
+	}
+}
+@media screen and (max-width: 600px) {
+	.PopUpMiddleLayout .ASection .Desktop {
+		display: none;
+	}
+	.PopUpMiddleLayout .ASection .Mobile {
+		display: block;
+	}
+}
