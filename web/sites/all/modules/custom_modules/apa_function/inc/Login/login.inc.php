@@ -825,9 +825,9 @@ if(isset($_SESSION['UserId'])) {
 
 	<div class="OtherListTop"><a class="shop" href="https://www.shop4physios.com.au/" target="_blank"><span class="uniq">shop</span>4physios</a></div>
 
-	<div class="OtherListTop"><a class="ifompt" href="https://ifomptconference.org/" target="_blank"><span class="uniq">IFOMPT2020</a></div>
+	<div class="OtherListTop"><a class="ifompt" href="https://ifomptconference.org/" target="_blank"><span class="uniq">IFOMPT2022</a></div>
 
-	<div class="OtherListTop"><a class="jobs" href="https://focus.physio" target="_blank"><span class="uniq">FOCUS2020</a></div>
+
 </div>
 
 <!-- Modal log-in -->
