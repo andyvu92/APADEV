@@ -221,7 +221,36 @@ if(isset($_POST['wpnumber']) == "0"){ $postData['Workplaces'] =array();}
 	// Send -
 	// UserID
 	// Response - UserID & detail data
-	$postData['userID']=$_SESSION['UserId'];$testdata = aptify_get_GetAptifyData("5", $postData);
+  $postData['userID']=$_SESSION['UserId'];$testdata = aptify_get_GetAptifyData("5", $postData);
+  //implement MBA member data update
+  if($testdata['Result']=="Success"){
+    $data = "UserID=".$_SESSION["UserId"];
+    $details = aptify_get_GetAptifyData("4", $data,"");
+    $updateAccountInfo['email'] = $details["Memberid"];
+    $updateAccountInfo['first_name'] = $details["Firstname"];
+    $updateAccountInfo['last_name'] = $details["Lastname"];
+    if(empty($details["Mobile-number"])){
+      $updateAccountInfo['phone'] = $details["Home-phone-number"];
+    }
+    else{
+      $updateAccountInfo['phone'] = $details["Mobile-number"];
+    }
+
+    $updateAccountInfo['membership_number'] =  $details["Memberno"];
+    $timeStr = strtotime(str_replace('/', '-', $details["PaythroughtDate"]));
+    $updateAccountInfo['membership_expiry'] = date("Y", $timeStr)."-".date("m", $timeStr)."-".date("d", $timeStr);
+    //check line1 characters
+    $addressSSOLine1 = $details["Unit"];
+    $str = strlen($addressSSOLine1);
+    if($str<8) { $addressSSOLine1 .="        "; }
+    if($str>40){ $addressSSOLine1 =  substr($addressSSOLine1,0, 39);}
+    $perAddArray = array();
+    $updateAccountInfo['address'] = array('line1'=>$addressSSOLine1, 'city'=>$details["Suburb"], 'post_code'=>$details["Postcode"], 'state'=>$details["State"], 'country'=>$details["Country"]);
+    $updateAccountInfo['extra_fields'] = array();
+    mba_sso_update_account($updateAccountInfo);
+
+  }
+  //end implement MBA member data update
 	unset($_SESSION["Regional-group"]);
 
 	 if(isset($_SESSION['UserId'])){$userID = $_SESSION['UserId']; }

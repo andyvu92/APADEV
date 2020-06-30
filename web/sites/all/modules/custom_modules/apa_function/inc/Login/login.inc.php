@@ -356,6 +356,7 @@ if (isset($_POST['refreshTag'])) {
         }
         if(isset($_POST['NDIS'.$i])) { $workplaceArray['NDIS'] = $_POST['NDIS'.$i];}else {$workplaceArray['NDIS']="False";}
         if(isset($_POST['Telehealth'.$i])) { $workplaceArray['Telehealth'] = $_POST['Telehealth'.$i];}else {$workplaceArray['Telehealth']="False";}
+
 				if (isset($_POST['Number-worked-hours' . $i])) {
 					$workplaceArray['Number-workedhours'] = $_POST['Number-worked-hours' . $i];
 				}
@@ -663,6 +664,7 @@ if($resultdata['result']) {
 	}
 
 	function loginManager($id, $pass) {
+
 		// 2.2.7 - log-in
 		// Send -
 		// UserID, User password
@@ -699,13 +701,77 @@ if($resultdata['result']) {
 			$details = aptify_get_GetAptifyData("4", $data,"");
 			newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
 			nameUpdate($details["Firstname"], $details["Preferred-name"]);
-			pdGetInfo($details["State"], $details["Suburb"]);
+      pdGetInfo($details["State"], $details["Suburb"]);
+      //implementation MBA SSO Start from here
+      /******Check the member is there or not
+       * one condition is member
+       * two condition is existed user in MBA
+      */
+      if(apa_member_check_status()){
+        $mba_login = mba_log_in($details["Memberid"]);
+        if(isset($mba_login['sc']['access_token']) && ($mba_login['sc']['access_token']!="")){
+          $_SESSION['MBASSO_Login_Path'] = $mba_login['sc']['path'];
+          $_SESSION['MBASSO_Login_Token'] = $mba_login['sc']['access_token'];
+          $redirectURL = mba_redirect($_SESSION['MBASSO_Login_Token'], $_SESSION['MBASSO_Login_Path']);
+        }else{
+
+          $personInfo['email'] = $details["Memberid"];
+          $personInfo['first_name'] = $details["Firstname"];
+          $personInfo['last_name'] = $details["Lastname"];
+          if(empty($details["Mobile-number"])){
+            $personInfo['phone'] = $details["Home-phone-number"];
+          }
+          else{
+            $personInfo['phone'] = $details["Mobile-number"];
+          }
+
+          $personInfo['membership_number'] =  $details["Memberno"];
+          $timeStr = strtotime(str_replace('/', '-', $details["PaythroughtDate"]));
+          $personInfo['membership_expiry'] = date("Y", $timeStr)."-".date("m", $timeStr)."-".date("d", $timeStr);
+          $personInfo['newsletter']=false;
+           //check line1 characters
+          $addressSSOLine1 = $details["Unit"];
+          $str = strlen($addressSSOLine1);
+          if($str<8) { $addressSSOLine1 .="        "; }
+          if($str>40){ $addressSSOLine1 =  substr($addressSSOLine1,0, 39);}
+          $perAddArray = array();
+          $personInfo['address'] = array('line1'=>$addressSSOLine1, 'city'=>$details["Suburb"], 'post_code'=>$details["Postcode"], 'state'=>$details["State"], 'country'=>$details["Country"]);
+          $personInfo['extra_fields'] = array();
+          $result = mba_sso_create($personInfo);
+          $mba_login = mba_log_in($details["Memberid"]);
+          if(isset($mba_login['sc']['access_token']) && ($mba_login['sc']['access_token']!="")){
+            $_SESSION['MBASSO_Login_Path'] = $mba_login['sc']['path'];
+            $_SESSION['MBASSO_Login_Token'] = $mba_login['sc']['access_token'];
+            $redirectURL = mba_redirect($_SESSION['MBASSO_Login_Token'], $_SESSION['MBASSO_Login_Path']);
+
+          }
+
+      }
+
+    }
+    //disable member status
+    /****
+     * condition: check member is there and then disable member status
+     */
+    if(!apa_member_check_status()){
+      $mba_login = mba_log_in($details["Memberid"]);
+      if(isset($mba_login['sc']['access_token']) && ($mba_login['sc']['access_token']!="")){
+        //handle disable status
+        $email = $details["Memberid"];
+        $member_status = "Disabled";
+        mba_sso_update_status($email, $member_status);
+      }
+    }
+    //implementation MBA SSO End here
 			/*
 			$checkSSO = $_SESSION["UserId"];
 			$detailstt = GetAptifyData("0", $checkSSO);
 			$_SESSION["tasjdfksdkfsd"] = $detailstt;
 			*/
-			logRecorder();
+      logRecorder();
+
+
+
 		}
 	}
 
@@ -826,6 +892,7 @@ if(isset($_SESSION['UserId'])) {
 	<div class="OtherListTop"><a class="shop" href="https://www.shop4physios.com.au/" target="_blank"><span class="uniq">shop</span>4physios</a></div>
 
 	<div class="OtherListTop"><a class="ifompt" href="https://ifomptconference.org/" target="_blank"><span class="uniq">IFOMPT2022</a></div>
+
 
 
 </div>

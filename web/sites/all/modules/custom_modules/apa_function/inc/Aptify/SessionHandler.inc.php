@@ -59,7 +59,10 @@ function deleteSession() {
 	unset($_SESSION['userSub']);
 	// SSO data
 	unset($_SESSION["outputReturn"]);
-	unset($_SESSION["thirdParty"]);
+  unset($_SESSION["thirdParty"]);
+   //MBA SSO
+  unset($_SESSION['MBASSO_Login_Path']);
+  unset($_SESSION['MBASSO_Login_Token']);
 	// user details' data
 	//Added by JingHu
 	unset($_SESSION["workplaceSettings"]);
@@ -79,7 +82,7 @@ function deleteSession() {
 	unset($_SESSION['orderDetailsTag']);
 	unset($_SESSION['fpQuatation']);
 	unset($_SESSION["ngQuatation"]);
-	
+
 	/*
 	unset($_SESSION['Logfgh']);
 	unset($_SESSION['Logfgh']);

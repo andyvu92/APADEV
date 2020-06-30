@@ -1,0 +1,7 @@
+name = MBA SSO Module
+description = MBA SSO Functions.
+package = APA
+core = 7.x
+
+files[] = mba_sso.admin.inc
+files[] = mba_sso.module

@@ -6,9 +6,9 @@ if(isset($_POST['step3'])) {
 	$postReviewData['InstallmentFor'] = "Membership";
 	$postReviewData['productID'] = getProductList($_SESSION['UserId']);
 	//this is merge start from here
-	//handle new card 
+	//handle new card
 	if(isset($_POST['addCard']) && $_POST['addCard']=="1"){
-		$postReviewData['Card_number'] = "";	
+		$postReviewData['Card_number'] = "";
 		$postReviewData['PaymentTypeID'] = $_POST['Cardtype'];
 		$postReviewData['CCNumber'] = $_POST['Cardnumber'];
 		$postReviewData['CCExpireDate'] = $_POST['Expirydate'];
@@ -24,11 +24,11 @@ if(isset($_POST['step3'])) {
 			$out = aptify_get_GetAptifyData("15", $postPaymentData);
 		}
 	}
-	
+
 	//handle using existed card scenario
 	elseif(isset($_POST['Paymentcard']) && !isset($_POST['anothercard'])){
-		$postReviewData['Card_number'] = $_POST['Paymentcard']; 
-		if($_POST['Paymentoption']=="1"){ 
+		$postReviewData['Card_number'] = $_POST['Paymentcard'];
+		if($_POST['Paymentoption']=="1"){
 			$updateCardSubmit["UserID"] = $_SESSION['UserId'];
 			$updateCardSubmit["SpmID"] = $_POST['Paymentcard'];
 			$updateCardSubmit["ExpireMonthYear"] = "";
@@ -36,12 +36,12 @@ if(isset($_POST['step3'])) {
 			$updateCardSubmit["IsDefault"] = "1";
 			$updateCardSubmit["IsActive"] = "";
 			// 2.2.13 - update payment method-3-set main card
-			// Send - 
+			// Send -
 			// UserID, Creditcard-ID
 			// Response -
 			// N/A.
-			$updateCards = aptify_get_GetAptifyData("13", $updateCardSubmit);  
-		} 
+			$updateCards = aptify_get_GetAptifyData("13", $updateCardSubmit);
+		}
 		$postReviewData['PaymentTypeID'] = "";
 		$postReviewData['CCNumber'] = "";
 		$postReviewData['CCExpireDate'] = "";
@@ -51,10 +51,10 @@ if(isset($_POST['step3'])) {
 	$postReviewData['InsuranceApplied'] = 0;
 	if(isset($_POST['PRFFinal'])) {$postReviewData['PRFdonation'] = $_POST['PRFFinal'];}else{ $postReviewData['PRFdonation'] = "";}
 	// 2.2.26 - Register a new order
-	// Send - 
+	// Send -
 	// userID&Paymentoption&PRFdonation&Rollover&Card_number&productID
 	// Response -Register a new order successfully
-	if(isset($_SESSION['UserId'])){ $postReviewData['userID'] = $_SESSION['UserId'];  } 
+	if(isset($_SESSION['UserId'])){ $postReviewData['userID'] = $_SESSION['UserId'];  }
 	if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption'] == '1' ? 1:0; }
 	//if(isset($_POST['Installpayment-frequency'])){ $postReviewData['InstallmentFrequency'] = $_POST['Installpayment-frequency']; }
 	$postReviewData['InstallmentFrequency'] = $_POST['Paymentoption'] == '1' ? "Monthly":"";
@@ -77,7 +77,41 @@ if(isset($_POST['step3'])) {
 		$data = "UserID=".$_SESSION["UserId"];
 		$details = aptify_get_GetAptifyData("4", $data,"");
 		newSessionStats($details["MemberTypeID"], $details["MemberType"], $details["Status"],$details["PersonSpecialisation"],$details["PaythroughtDate"],$details["Nationalgp"]);
-		//end refresh session data
+   //implementation MBA SSO Start from here
+   $personInfo['email'] = $details["Memberid"];
+   $personInfo['first_name'] = $details["Firstname"];
+   $personInfo['last_name'] = $details["Lastname"];
+   if(empty($details["Mobile-number"])){
+     $personInfo['phone'] = $details["Home-phone-number"];
+   }
+   else{
+     $personInfo['phone'] = $details["Mobile-number"];
+   }
+
+   $personInfo['membership_number'] =  $details["Memberno"];
+   $timeStr = strtotime(str_replace('/', '-', $details["PaythroughtDate"]));
+   $personInfo['membership_expiry'] = date("Y", $timeStr)."-".date("m", $timeStr)."-".date("d", $timeStr);
+   $personInfo['newsletter']=false;
+   //check line1 characters
+   $addressSSOLine1 = $details["Unit"];
+   $str = strlen($addressSSOLine1);
+   if($str<8) { $addressSSOLine1 .="        "; }
+   if($str>40){ $addressSSOLine1 =  substr($addressSSOLine1,0, 39);}
+   $perAddArray = array();
+   $personInfo['address'] = array('line1'=>$addressSSOLine1, 'city'=>$details["Suburb"], 'post_code'=>$details["Postcode"], 'state'=>$details["State"], 'country'=>$details["Country"]);
+   $personInfo['extra_fields'] = array();
+   $result = mba_sso_create($personInfo);
+   $mba_login = mba_log_in($details["Memberid"]);
+   if(isset($mba_login['sc']['access_token']) && ($mba_login['sc']['access_token']!="")){
+     $_SESSION['MBASSO_Login_Path'] = $mba_login['sc']['path'];
+     $_SESSION['MBASSO_Login_Token'] = $mba_login['sc']['access_token'];
+     $redirectURL = mba_redirect($_SESSION['MBASSO_Login_Token'], $_SESSION['MBASSO_Login_Path']);
+
+   }
+
+
+  //implementation MBA SSO End here
+    //end refresh session data
 		$invoice_ID = $registerOuts['Invoice_ID'];
 		//save the terms and conditons on APA side
 		$dataArray = array();
@@ -91,7 +125,7 @@ if(isset($_POST['step3'])) {
 		completeOrderDeleteSession();
 		// delete shopping cart data from APA database; put the response status validation here!!!!!!!
 		$userID = $_SESSION["UserId"];
-		
+
 		// use drupal db_select by jinghu 20/09/2018
 		$type = "membership";
 		checkShoppingCart($userID, $type, $productID="");
@@ -104,7 +138,7 @@ if(isset($_POST['step3'])) {
 		$productID = "PRF";
 		checkShoppingCart($userID, $type="", $productID);
 		 // record member log for successful process
-		 if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+		 if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
 		 $addMemberLog["orderID"] = "0";
 		 $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
 		 $addMemberLog["createDate"] = date('Y-m-d');
@@ -116,11 +150,11 @@ if(isset($_POST['step3'])) {
 	   //$paymentDataSchedules = GetAptifyData("46", $paymentData);
 	  //2.2.44 -get order detail test part
 	  // $orderData = $registerOuts['Invoice_ID'];
-	  // $orderDetails = GetAptifyData("44", $orderData);  
+	  // $orderDetails = GetAptifyData("44", $orderData);
 		//Put subscription logic here when the user become the member
 if(isset($_SESSION['UserId'])) {
     // 2.2.23 - GET list of subscription preferences
-    // Send - 
+    // Send -
     // UserID
     // Response -
     // List of subscriptions and its T/F values.
@@ -130,7 +164,7 @@ if(isset($_SESSION['UserId'])) {
     $ArrayReturn = Array();
     $ArrayReturn["UserID"] = $_SESSION['UserId'];
     // 2.2.22 - Get list of subscribed Fellowship Products
-    // Send - 
+    // Send -
     // UserID
     // Response -
     // List of Fellowship ID and its titles.
@@ -158,7 +192,7 @@ if(isset($_SESSION['UserId'])) {
         } elseif($Subs["ConsentID"] == '18') {
             // InMotion Copy
             if($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") {
-                // No InMotion print copy for 
+                // No InMotion print copy for
                 // student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
                 // and M11 Associated (Oversea)
                 $ArrayRe["Subscribed"] = '0';
@@ -188,7 +222,7 @@ if(isset($_SESSION['UserId'])) {
     $ArrayReturn["Subscriptions"] = $subArray;
     $ArrayReturn["Consents"] = $consArray;
     // 2.2.24 - Update subscription preferences
-    // Send - 
+    // Send -
     // UserID, List of subscriptions and its F/F values.
     // Response -
     // Response, List of subscriptions and it's T/F values.
@@ -196,8 +230,8 @@ if(isset($_SESSION['UserId'])) {
 }
 //end subscription
 }
-	
-   
+
+
 }
 else{
 	header("Location: /");
@@ -258,7 +292,7 @@ $background = getBackgroundImage($userID);
 
 				<?php else:?>
                     <!--this is handle record error log-->
-					<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+					<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
 						$addMemberLog["orderID"] = "0";
 						$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
 						$addMemberLog["createDate"] = date('Y-m-d');
@@ -293,27 +327,27 @@ $background = getBackgroundImage($userID);
 	</div>
 </div>
 <form id="renew-survey-form2" action="/jointheapa" method="POST"><input type="hidden" name="QOrder"></form>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <?php logRecorder();  ?>
 <script>
 $(document).ready(function() {
-	window.history.pushState(null,"", "/jointheapa");        
+	window.history.pushState(null,"", "/jointheapa");
 	window.onpopstate = function() {
 		window.history.pushState(null, "", "/jointheapa");
 	};
-	$(function () {  
-        $(document).keydown(function (e) {  
-            return (e.which || e.keyCode) != 116;  
-		}); 
-		$(document).keydown(function (e) {  
-            return (e.which || e.keyCode) != 78;  
-		}); 
-		$(document).keydown(function (e) {  
-            return (e.which || e.keyCode) != 82;  
-		}); 
-		  
-    });  
+	$(function () {
+        $(document).keydown(function (e) {
+            return (e.which || e.keyCode) != 116;
+		});
+		$(document).keydown(function (e) {
+            return (e.which || e.keyCode) != 78;
+		});
+		$(document).keydown(function (e) {
+            return (e.which || e.keyCode) != 82;
+		});
+
+    });
  });
 </script>

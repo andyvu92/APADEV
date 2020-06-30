@@ -1,0 +1,160 @@
+<?php
+require __DIR__ . '/mba_sso.admin.inc';
+/**
+ * Implements hook_menu().
+ */
+function mba_sso_menu() {
+    // A path where all Global config lives.
+    $items['admin/config/system/mbasso'] = array(
+      'title' => 'MBA SSO Configurations',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('mba_sso_admin_settings'),
+      'type' => MENU_LOCAL_ACTION | MENU_NORMAL_ITEM,
+      'access arguments' => array('administer site configuration'),
+      'file' => 'mba_sso.admin.inc',
+    );
+    return $items;
+  }
+/**
+ * Call API.
+ */
+function mba_calls($path, $data, $method){
+    $domain = variable_get('mba_sso_domain', SSO_DOMAIN);
+    $base_url = variable_get('mba_sso_url', SSO_URL);
+    $ch = curl_init();
+    $request_url = $domain.$base_url.$path;
+    if($method == "POST") {
+      curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+      curl_setopt($ch, CURLOPT_POST, 1);
+      curl_setopt($ch, CURLOPT_POSTFIELDS,json_encode($data));
+
+    }
+    if($method == "GET"){
+      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+      $request_url .= $data;
+
+    }
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    curl_setopt($ch, CURLOPT_URL, $request_url);
+    // todo! You must do this before go live!
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);
+    $JSONreturn = curl_exec($ch);
+    if(curl_error($ch))
+    {
+      echo 'error:' . curl_error($ch);
+      return curl_error($ch);
+    }
+    curl_close($ch);
+    $result = json_decode($JSONreturn, true);
+    return $result;
+
+}
+/**
+ * member log in MBA
+ */
+function mba_log_in($login){
+  $clientID = variable_get('client_id', CLIENT_ID);
+  $clientSecret = variable_get('client_secret', CLIENT_SECRET);
+  $path = "/SSO/APA/login";
+  $data = "?grant_type=client_credentials&client_id=".$clientID."&client_secret=".$clientSecret."&user_id=".$login."&scope=sc";
+  return mba_calls($path, $data, $method='GET');
+}
+/**
+ * member redirect MBA
+ */
+function mba_redirect($token, $loginPath){
+  $domain = variable_get('mba_sso_domain', SSO_DOMAIN);
+  $clientID = variable_get('client_id', CLIENT_ID);
+  $data = "?client_id=".$clientID."&token=".$token;
+  $redirectURL = $domain.$loginPath.$data;
+  return $redirectURL;
+}
+/**
+ * create member account.
+ */
+function mba_sso_create($personInfo) {
+    $path = "/Accounts/create";
+    $clientID = variable_get('client_id', CLIENT_ID);
+    $clientSecret = variable_get('client_secret', CLIENT_SECRET);
+    $data = array();
+    $data['client_id'] = $clientID;
+    $data['client_secret'] = $clientSecret;
+    $GUID = str_replace("}","",str_replace("{","",str_replace("-","",getGUID())));
+    $data['reference'] = $GUID;
+    $data['email'] = $personInfo['email'];
+    $data['last_name'] = $personInfo['last_name'];
+    $data['first_name'] = $personInfo['first_name'];
+    $data['group'] = variable_get('client_group', CLIENT_GROUP);
+    $data['phone'] =  $personInfo['phone'];
+    $data['status'] = "Enabled";
+    $data['membership_expiry'] = $personInfo['membership_expiry'];
+    $data['membership_number'] = $personInfo['membership_number'];
+    $data['newsletter'] = $personInfo['newsletter'];
+    $data['address'] = $personInfo['address'];
+    $data['extra_fields'] = array();
+    return mba_calls($path, $data, "POST");
+}
+function getGUID(){
+  if (function_exists('com_create_guid')){
+      return com_create_guid();
+  }else{
+      mt_srand((double)microtime()*10000);//optional for php 4.2.0 and up.
+      $charid = strtoupper(md5(uniqid(rand(), true)));
+        $hyphen = chr(45);// "-"
+        $uuid = chr(123)// "{"
+            .substr($charid, 0, 8).$hyphen
+            .substr($charid, 8, 4).$hyphen
+            .substr($charid,12, 4).$hyphen
+            .substr($charid,16, 4).$hyphen
+            .substr($charid,20,12)
+            .chr(125);// "}"
+
+      return $uuid;
+  }
+}
+/**
+ * update member status.
+ * member status Enabled/Disabled
+ */
+function mba_sso_update_status($email, $member_status) {
+  $path = "/Accounts/update-status";
+  $clientID = variable_get('client_id', CLIENT_ID);
+  $clientSecret = variable_get('client_secret', CLIENT_SECRET);
+  $data = array();
+  $data['client_id'] = $clientID;
+  $data['client_secret'] = $clientSecret;
+  $GUID = str_replace("}","",str_replace("{","",str_replace("-","",getGUID())));
+  $data['reference'] = $GUID;
+  $data['email'] = $email;
+  $data['group'] = variable_get('client_group', CLIENT_GROUP);
+  $data['status'] = $member_status;
+  mba_calls($path, $data, $method='POST');
+
+}
+
+/**
+ * update member status.
+ * member status Enabled/Disabled
+ */
+function mba_sso_update_account($updateAccountInfo) {
+  $path = "/Accounts/update";
+  $clientID = variable_get('client_id', CLIENT_ID);
+  $clientSecret = variable_get('client_secret', CLIENT_SECRET);
+  $data = array();
+  $data['client_id'] = $clientID;
+  $data['client_secret'] = $clientSecret;
+  $GUID = str_replace("}","",str_replace("{","",str_replace("-","",getGUID())));
+  $data['reference'] = $GUID;
+  $data['email'] = $updateAccountInfo['email'];
+  $data['last_name'] = $updateAccountInfo['last_name'];
+  $data['first_name'] = $updateAccountInfo['first_name'];
+  $data['group'] = variable_get('client_group', CLIENT_GROUP);
+  $data['phone'] =  $updateAccountInfo['phone'];
+  $data['status'] = "Enabled";
+  $data['membership_expiry'] = $updateAccountInfo['membership_expiry'];
+  $data['membership_number'] = $updateAccountInfo['membership_number'];
+  $data['address'] = $updateAccountInfo['address'];
+  $data['extra_fields'] = $updateAccountInfo['extra_fields'];
+  mba_calls($path, $data, $method='POST');
+
+}
