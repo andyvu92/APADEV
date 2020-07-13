@@ -32,7 +32,7 @@ jQuery(document).ready(function() {
   //ADD ACTIVE CLASS TO CURRENT URL--------------------------------
   // Get current path and find target link
   var path = window.location.pathname.split("/").pop();
-  
+
   // Account for home page with empty path
   if ( path == '' ) {
     path = 'index.php';
@@ -93,17 +93,17 @@ jQuery(document).ready(function() {
         }, 600);
       }
     }
-  }); 
+  });
 
   //CHANGE "JOIN BUTTON" FOR NATIONAL GROUP ON DASHBOARD---------------------------------------------
-  if ($("#national-groups").find(".ng-title").length == 0){ 
+  if ($("#national-groups").find(".ng-title").length == 0){
     $("#ng-join-btn").html('<span>Join now</span>');
   }
 
   //AUTO SCROLL ON SEARCH-----------------------------------------------------------------
   var is_mobile = true;
   if( $('#mobile-detector').is(':visible')) {
-    is_mobile = false;       
+    is_mobile = false;
   }
 	if(window.location.href.indexOf("?page") > -1||window.location.href.indexOf("?pagesize") > -1 || window.location.href.indexOf("?search-result") > -1){
     var window_width = $(window).width();
@@ -175,7 +175,7 @@ jQuery(document).ready(function() {
   //ADD WARNING ICON FOR MISSING INFO ON WORKPLACE TABS------------------------------------------
   $(".join-details-button3").on("click", function() {
     $( "#workplaceblocks > div" ).each(function() {
-      if ($(this).find(".focuscss").length > 0){ 
+      if ($(this).find(".focuscss").length > 0){
         var icon = '<svg class="warning_icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-2.033 16.01c.564-1.789 1.632-3.932 1.821-4.474.273-.787-.211-1.136-1.74.209l-.34-.64c1.744-1.897 5.335-2.326 4.113.613-.763 1.835-1.309 3.074-1.621 4.03-.455 1.393.694.828 1.819-.211.153.25.203.331.356.619-2.498 2.378-5.271 2.588-4.408-.146zm4.742-8.169c-.532.453-1.32.443-1.761-.022-.441-.465-.367-1.208.164-1.661.532-.453 1.32-.442 1.761.022.439.466.367 1.209-.164 1.661z"/></svg>';
         x = $(this).attr('id').replace('workplace', '');
         $('#tabmenu li#workplaceli' + x).addClass("warning");
@@ -247,7 +247,7 @@ jQuery(document).ready(function() {
 
   Selectize.prototype.setup = function () {
       prevSetup.call(this);
-  
+
       // This property is set in native setup
       // Unless the source code changes, it should
       // work with any version
@@ -276,47 +276,47 @@ jQuery(document).ready(function() {
   $('.modal-body').on('mouseleave', function(){
     $('body').removeClass('trapScroll-enabled');
   });
-  
+
   var trapScroll;
-  (function($){  
+  (function($){
     trapScroll = function(opt){
       var trapElement;
       var scrollableDist;
       var trapClassName = 'trapScroll-enabled';
       var trapSelector = '.modal-body, #signupWebUser';
-        
+
       var trapWheel = function(e){
-          
+
         if (!$('body').hasClass(trapClassName)) {
           return;
-        } else {  
+        } else {
           var curScrollPos = trapElement.scrollTop();
           var wheelEvent = e.originalEvent;
           var dY = wheelEvent.deltaY;
-    
+
           // only trap events once we've scrolled to the end
           // or beginning
           if ((dY>0 && curScrollPos >= scrollableDist) || (dY<0 && curScrollPos <= 0)) {
             opt.onScrollEnd();
             return false;
           }
-        } 
+        }
       }
-        
+
       $(document).on('wheel', trapWheel).on('mouseleave', trapSelector, function(){
         $('body').removeClass(trapClassName);
-      }).on('mouseenter', trapSelector, function(){   
+      }).on('mouseenter', trapSelector, function(){
         trapElement = $(this);
         var containerHeight = trapElement.outerHeight();
         var contentHeight = trapElement[0].scrollHeight; // height of scrollable content
         scrollableDist = contentHeight - containerHeight;
-            
+
         if (contentHeight>containerHeight)
-          $('body').addClass(trapClassName); 
-      });       
-    } 
+          $('body').addClass(trapClassName);
+      });
+    }
   })($);
-    
+
   var preventedCount = 0;
   var showEventPreventedMsg = function(){
     $('#mousewheel-prevented').stop().animate({opacity: 1}, 'fast');
@@ -329,37 +329,12 @@ jQuery(document).ready(function() {
   var addPreventedCount = function(){
     $('#prevented-count').html('prevented <small>x</small>' + preventedCount++);
   }
-    
+
   trapScroll({ onScrollEnd: addPreventedCount });
-  $('.trapScroll').on('mouseenter', showEventPreventedMsg).on('mouseleave', hideEventPreventedMsg);      
+  $('.trapScroll').on('mouseenter', showEventPreventedMsg).on('mouseleave', hideEventPreventedMsg);
   $('[id*="parent"]').scrollTop(100);
 
-  // NATIONAL GROUP MULTI-SELECT ON CHANGE--------------------------------------------------
-  var $nationalSelectize = $('#Nationalgp').selectize({
-    plugins: ['click2deselect'],
-  });
 
-  $(document).on('change', $nationalSelectize, function(){
-      if(jQuery.inArray( "10021", $('select[id=Nationalgp]').val())!==-1)
-		{
-			$( "#ngsports" ).removeClass('display-none');
-		}
-		else{
-      $( "#ngsports" ).addClass('display-none');
-      $( "#ngsportsbox" ).val('0');
-			$("#ngsportsbox").attr('checked', false);
-		}
-		if(jQuery.inArray( "10015", $('select[id=Nationalgp]').val())!==-1)	
-		{
-			$( "#ngmusculo" ).removeClass('display-none');
-	    }
-		else{
-      $( "#ngmusculo" ).addClass('display-none');
-      $( "#ngmusculobox" ).val('0');
-			$("#ngmusculobox").attr('checked', false);
-    }
-    
-  });
 
   // INMOTION BLOG: BRING PREV BUTTON ABOVE ADS------------------------------
   $('#prev-btn .prev').replaceWith( $('.go-back-button') );
@@ -440,13 +415,13 @@ jQuery(document).ready(function() {
 
   // ALERT WINDOWS FOR IE/EGDE------------------------------------------------------------------
   $( window ).load(function() {
-    if( /msie|trident|edge/g.test(navigator.userAgent.toLowerCase()) && !sessionStorage.getItem('firstVisit') ) { 
+    if( /msie|trident|edge/g.test(navigator.userAgent.toLowerCase()) && !sessionStorage.getItem('firstVisit') ) {
         //show the Popup
       $("body").css('overflow', 'hidden');
-      $(".html").append( "<div class='msie-alert'><div class='alert-container'><div class=''alert-header><h3 class='light-lead-heading cairo'>It looks like you may be using a web browser that we don’t support.</h3></div> <div class='alert-body'>We recommend using Google Chrome to get the best experience on the APA website. Click the image below to download Google Chrome.</span></div> <div class='alert-footer'><a href='https://www.google.com/chrome/' target='_blank'><span class='chrome-icon'></span></a></div><span class='close-ie-alert'>x</span></div> </div>" ); 
+      $(".html").append( "<div class='msie-alert'><div class='alert-container'><div class=''alert-header><h3 class='light-lead-heading cairo'>It looks like you may be using a web browser that we don’t support.</h3></div> <div class='alert-body'>We recommend using Google Chrome to get the best experience on the APA website. Click the image below to download Google Chrome.</span></div> <div class='alert-footer'><a href='https://www.google.com/chrome/' target='_blank'><span class='chrome-icon'></span></a></div><span class='close-ie-alert'>x</span></div> </div>" );
         //Set the key
       sessionStorage.setItem('firstVisit', '1');
-    } 
+    }
   });
 
   $(document).on('click', '.close-ie-alert', function(){
@@ -499,8 +474,8 @@ jQuery(document).ready(function() {
     $('body, .html').toggleClass('menu-open');
 
     if( $('body, .html').hasClass('menu-open') ){
-      $('body, .html').delay(300).queue(function (next) { 
-          $(this).css('overflow', 'hidden'); 
+      $('body, .html').delay(300).queue(function (next) {
+          $(this).css('overflow', 'hidden');
           next();
       });
     }
@@ -715,7 +690,7 @@ jQuery(document).ready(function() {
     });
 
     // NUMERIC ONLY WITHOUT DECIMAL FOR INPUT------------------------------------------------
-    $('.non_decimal_numeric').on('keypress keyup blur',function (event) {    
+    $('.non_decimal_numeric').on('keypress keyup blur',function (event) {
       $(this).val($(this).val().replace(/[^\d].+/, ''));
       if ((event.which < 48 || event.which > 57)) {
         event.preventDefault();
@@ -723,11 +698,11 @@ jQuery(document).ready(function() {
     });
 
     // TEXT ONLY WITHOUT NUMERIC & SYMBOLS FOR INPUT------------------------------------------------
-    $('.alphabet_only').on('keypress keyup blur',function (event) {    
+    $('.alphabet_only').on('keypress keyup blur',function (event) {
       if ( (event.which >= 48 && event.which <= 57) ) {
         event.preventDefault();
       }
-    });  
+    });
   }
   checkTextCondition();
 
@@ -793,7 +768,7 @@ jQuery(document).ready(function() {
     });
 
     // RETRIEVE SESSION & APPLY CONDITION
-    if( ($('body, .html').find('.nameHello').length > 0) && sessionStorage.getItem('userStatus') == 'current' ) { 
+    if( ($('body, .html').find('.nameHello').length > 0) && sessionStorage.getItem('userStatus') == 'current' ) {
       sessionStorage.setItem('userStatus', 'lodgedIn');
       $('#apa-renew-landingpage-form').submit();
     }
@@ -912,7 +887,7 @@ jQuery(document).ready(function() {
   $.lockBody = function() {
     if(window.pageYOffset) {
       scrollTop = window.pageYOffset;
-      
+
       //$wrap.css({
       //  top: - (scrollTop)
       //});
@@ -992,7 +967,7 @@ jQuery(document).ready(function() {
   $(document).scroll(function() {
     if ( (!($('#section-clients').isInViewport())) && (!($('#section-header').isInViewport())) ) {
       $('.sidebar-toggle').addClass('off-right');
-    } 
+    }
     else if ( ( (($('#section-clients').isInViewport())) || (($('#section-header').isInViewport())) ) && ( $('.sidebar-overlay').is('.active') ) ) {
       $('.sidebar-toggle').addClass('off-right');
     }
@@ -1107,7 +1082,7 @@ jQuery(document).ready(function() {
     $(this).parent().stop().slideUp(600).animate({opacity: 0}, { queue: false, duration: 600, complete: function(){
         $('li', this).show();
         $('.active', this).hide();
-      } 
+      }
     });
   });
   $(document).on('click', '.account-nav.chevron-active ul li', function(){
@@ -1120,21 +1095,21 @@ jQuery(document).ready(function() {
     $(this).parent().stop().slideUp(600).animate({opacity: 0}, { queue: false, duration: 600, complete: function(){
         $('li', this).show();
         $('.active', this).hide();
-      } 
+      }
     });
   });
-  
+
   //ADD STEP PROGRESS FOR RENEW/JOIN-------------------------------------------------------------
   var autoNumberRenewMenu = function(){
     $('.renew-membership-nav, .join-membership-nav').each(function(){
-      
+
       $('ul.nav', this).each(function(){
         if ( $(this).find('li[id^="workplaceli"]').length > 0 || $(this).find('.inactiveLink').length == 0 ) {
           $(this).show();
         } else{
           $(this).addClass('numberized').hide();
           $(this).parent().addClass('number-menu-active');
-  
+
           // get total step number
           //var totalStep = $('li', this).length;
           var totalStep = $('#totalStepNumber').val();
@@ -1143,16 +1118,16 @@ jQuery(document).ready(function() {
             id++;
             $('a span', this).after('<span class="step-order">'+id+'</span>');
           });
-  
+
           //get current step number and label
           var currentStep = $(this).find('.text-underline').text();
           var stepNumber = $('.text-underline', this).parent().find('.step-order').text();
           if($('#totalStepNumber').val()=="5" && stepNumber == "6"){ stepNumber = "5";}
           //append customised elemen to show step order
-          $(this).after('<span class="current-step">Step <span class="step-number">'+stepNumber+'</span> of <span class="total-number">'+totalStep+'</span>: <span class="step-label">'+currentStep+'</span></span>');    
+          $(this).after('<span class="current-step">Step <span class="step-number">'+stepNumber+'</span> of <span class="total-number">'+totalStep+'</span>: <span class="step-label">'+currentStep+'</span></span>');
         }
       });
-      
+
       //update step number and label on Prev/Next click
       $(document).on('click', 'a[class^="join-details-button"], a[class^="your-details-prevbutton"], #tabmenu .skip', function(){
         var currentStep = $('.numberized').find('.text-underline').text();
@@ -1207,7 +1182,7 @@ jQuery(document).ready(function() {
         return;
       } else{
         $('.form-actions input', this).attr('disabled', 'disabled').hide();
-        $('.form-actions', this).append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');  
+        $('.form-actions', this).append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');
       }
     });
   });
@@ -1217,7 +1192,7 @@ jQuery(document).ready(function() {
     if( $(this).parent().find('.blue-spinning-btn').length > 0 ){
     } else {
       $(this).hide();
-      $(this).parent().append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');  
+      $(this).parent().append('<div class="blue-spinning-btn"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></div>');
     }
   });
 
@@ -1622,7 +1597,7 @@ jQuery(document).ready(function() {
       var window_width = $(window).width();
 
       $('p > .archive_toggle' ,this).unwrap();
-      
+
       if ( window_width < 571 ){
         if ( !$('.inmotion-archive-grid', this).parent().is('.archive_minimize') ) {
           $('.inmotion-archive-grid', this).wrap('<div class="archive_minimize minimized"></div>');
@@ -1653,7 +1628,7 @@ jQuery(document).ready(function() {
       }
     }
   });
-  
+
   // REORDER APA ELT TEAM BY SPECIFIC ORDER-------------------------------------------------------
   $('.view-apateammember #apateammember-block-2 .node-apateam').each(function(){
     if ( $('.member-name .even', this).text() == 'Cris Massis' ) {
@@ -1687,7 +1662,7 @@ jQuery(document).ready(function() {
         $(this).prepend('<span class="nav_toggle blur"></span>');
         $(this).append('<div class="nav_notification"><span>Tap down arrow to hide</span></div>');
         $('.navbar-collapse', this).addClass('blur');
-      
+
         setTimeout( function(){
           $('.dashboard-left-nav').find('.nav_toggle, .navbar-collapse').removeClass('blur');
           $('.dashboard-left-nav').find('.nav_notification').fadeOut(500);
@@ -1813,7 +1788,7 @@ jQuery(document).ready(function() {
       $(document).on('click', '#users_help_bar .close', function(){
         $(this).parent().addClass('modal_disabled');
       });
-    }) 
+    })
   }
   //add_help_bar();
 
@@ -1831,7 +1806,7 @@ jQuery(document).ready(function() {
     }
   }
   responsive_heading_table();
-  
+
   //ADD SHOW PASSWORD TOGGLE---------------------------------------------------------------------
   $(document).on('click', '.show_password', function(){
     let target_input = $(this).parent().find('input');
@@ -1878,7 +1853,7 @@ jQuery(document).ready(function() {
 	if ( navigator.userAgent.toLowerCase().match(/macintosh/) ){
 		$('.html').addClass('safari_browser');
   }
-  
+
   // GET BROWSER DETAILS--------------------------------------------------------------------------
 	var browser_details = "";
 	browser_details += "<p>Browser CodeName: " + navigator.appCodeName + "</p>";
@@ -1889,10 +1864,10 @@ jQuery(document).ready(function() {
 	browser_details += "<p>Browser Online: " + navigator.onLine + "</p>";
 	browser_details += "<p>Platform: " + navigator.platform + "</p>";
   browser_details += "<p>User-agent header: " + navigator.userAgent + "</p>";
-  
+
   // PAYMENT PROGRESS PIE CHART------------------------------------------------------------------
   var payment_progress_chart = function(prop){
-     
+
     var build_progress_chart = '<div class="progress-pie-chart" data-percent="0"><div class="ppc-progress"><div class="ppc-progress-fill">&nbsp;</div></div><div class="ppc-percents"><div class="pcc-percents-wrapper"><span>0%</span></div></div></div><input id="value" type="text" val="0" />';
     // build progress chart
     $('body').find('#progress_chart').html(build_progress_chart);
@@ -1919,7 +1894,7 @@ jQuery(document).ready(function() {
         var increment = 1;
         var ceiling = 100;
         var timer;
-    
+
         function PerformCalc() {
           if (up == true && value <= ceiling) {
             value += increment;
@@ -1937,7 +1912,7 @@ jQuery(document).ready(function() {
         // progress speed
         timer = setInterval(PerformCalc, 500);
       }
-      
+
       var state_completed = false;
 
       $('#value').on('change', function(){
@@ -1949,7 +1924,7 @@ jQuery(document).ready(function() {
           } else if (30 < progress < 70){
             clearInterval(timer);
             timer = setInterval(PerformCalc, 1000);
-          } 
+          }
           if ( progress > 70){
             clearInterval(timer);
             timer = setInterval(PerformCalc, 1500);
@@ -1964,7 +1939,7 @@ jQuery(document).ready(function() {
         timer = setInterval(PerformCalc, 10);
       });
     }
-    progressCal('active');  
+    progressCal('active');
   }
 
   $('#PDPlaceOrder button').on('click', function(e){
@@ -1994,7 +1969,7 @@ jQuery(document).ready(function() {
   // inmotion archives carousel
   $('.archive_carousel_wrapper .archive').each(function(){
     var archive_number = $(this).find('.item').length;
-    
+
     if(archive_number > 9) {
       $(this).slick({
         dots: true,
@@ -2023,7 +1998,7 @@ jQuery(document).ready(function() {
         ]
       }).mousewheel(function(e) {
           e.preventDefault();
-      
+
           if (e.deltaY < 0) {
             $(this).slick('slickNext');
           }
@@ -2071,7 +2046,7 @@ jQuery(document).ready(function() {
             }
           ]
         });
-      } 
+      }
       else if( $(this).find('.item').length == 4 || $(this).find('.item').length == 5 ) {
         $(this).slick({
           centerPadding: '0px',
@@ -2221,7 +2196,7 @@ jQuery(document).ready(function() {
     $('html, body').animate({
       scrollTop: $('#featured_app_scroll_point').offset().top
     }, 500);
-    
+
   });
 
   // close app popup
@@ -2247,7 +2222,7 @@ jQuery(document).ready(function() {
   });
 
   // apply styles for cta link
-  $('.cta_light').each(function () {  
+  $('.cta_light').each(function () {
     var chevron = '<svg xmlns="http://www.w3.org/2000/svg" width="39.688" height="68" viewBox="0 0 39.688 68"><g id="CHEVRON_FORWARD-G_108px" data-name="CHEVRON FORWARD-G 108px" transform="translate(-944.121 -188.467)"><g id="Group_455" data-name="Group 455" transform="translate(948.121 192.467)"><path id="Path_220" data-name="Path 220" d="M-5.372,0,24.656,30.045-5.372,60" transform="translate(5.372)" fill="none" stroke="#a6a8ab" stroke-linecap="round" stroke-width="8"/></g></g></svg>';
     $(this).append(chevron);
   });
@@ -2283,9 +2258,9 @@ jQuery(document).ready(function() {
     $(this).html(icon);
     $(this).addClass('gray');
     var current = $(this);
-    $(this).parent().on('mouseover', function () {  
+    $(this).parent().on('mouseover', function () {
       $(current).removeClass('gray');
-    }).on('mouseleave', function () {  
+    }).on('mouseleave', function () {
       $(current).addClass('gray');
     });
   });
@@ -2375,7 +2350,7 @@ jQuery(document).ready(function() {
 	$('.cart_wrapper').click(function() {
     window.location.replace("/pd/pd-shopping-cart");
   });
-  
+
   // hanle user menu
   $('.user_logged_in .user_name').on('click', function () {
     var menuTarget = $(this).parent().find('.user_menu');
@@ -2449,7 +2424,7 @@ jQuery(document).ready(function() {
       var formWrapperWidth = $(formWrapper).width();
       // main content width
       var contentWidth = $(mainContent).outerWidth(true);
-      
+
       // calc sidebar width by substracting main content width from container width
       var sidebarWidth = formWrapperWidth - contentWidth;
       // set min-height to keep container height when sidebar is taken
@@ -2567,26 +2542,26 @@ jQuery(document).ready(function() {
   /* AUDIO PLAYLIST */
 
   // audio play button icon
-  $('.audio_play_icon').each(function () {  
+  $('.audio_play_icon').each(function () {
     var icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59.336 59.334"><g transform="translate(-63.414 -49.152)"><path d="M84.54,91.74l22.374-12.914L84.54,65.908Z" fill="#1a1818"/><path d="M93.082,108.487A29.667,29.667,0,1,1,122.75,78.82,29.7,29.7,0,0,1,93.082,108.487Zm0-56.548a26.88,26.88,0,1,0,26.88,26.881A26.911,26.911,0,0,0,93.082,51.939Z" fill="#1a1818"/></g></svg>';
     $(this).append(icon);
   });
   // audio pause button icon
-  $('.audio_pause_icon').each(function () {  
+  $('.audio_pause_icon').each(function () {
     var icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 59.336 59.334"><g transform="translate(-120.514 -94.152)"><path d="M150.182,153.487A29.667,29.667,0,1,1,179.85,123.82,29.7,29.7,0,0,1,150.182,153.487Zm0-56.548a26.88,26.88,0,1,0,26.88,26.881A26.911,26.911,0,0,0,150.182,96.939Z" fill="#1a1818"/><rect width="6.73" height="25.695" transform="translate(141.722 111.044)" fill="#1a1818"/><rect width="6.73" height="25.695" transform="translate(152 111.044)" fill="#1a1818"/></g></svg>';
     $(this).append(icon);
   });
   // audio next button icon
-  $('.audio_next_icon').each(function () {  
+  $('.audio_next_icon').each(function () {
     var icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.625 30.336"><g transform="translate(-487.301 -63.656)"><path d="M487.3,93.992l26.262-15.157L487.3,63.662Z" fill="#1a1818"/><rect width="4.375" height="30.26" transform="translate(513.551 63.657)" fill="#1a1818"/></g></svg>';
     $(this).append(icon);
   });
   // audio prev button icon
-  $('.audio_prev_icon').each(function () {  
+  $('.audio_prev_icon').each(function () {
     var icon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.625 30.336"><g transform="translate(-384.918 -63.656)"><path d="M415.543,93.992,389.281,78.835l26.262-15.172Z" fill="#1a1818"/><rect width="4.375" height="30.26" transform="translate(384.918 63.657)" fill="#1a1818"/></g></svg>';
     $(this).append(icon);
   });
-  
+
   // AUDIO PLAYLIST CONTROLER
   $('.audio_player').each(function(){
     var player = $(this);
@@ -2616,9 +2591,9 @@ jQuery(document).ready(function() {
     $('.control_panel').each(function () {
       // get playing audio info
       var getDefaultAudioInfo = function(callback){
-        
+
         currentAudio = $(player).find('.audio_item.active audio');
-        
+
         $(currentAudio).on('loadedmetadata', function(){
           var duration = Math.round($(this).get(0).duration);
           currentAudioTime = Math.round($(this).get(0).currentTime);
@@ -2652,13 +2627,13 @@ jQuery(document).ready(function() {
           callback();
         });
       }
-      
+
       // display current audio info
       function fetchCurrentAudioInfo(){
         // limit character to 30
         var maxChar = 30;
         var charCount = currentAudioTitle.trim().length;
-        
+
         if ( charCount > maxChar ){
           currentAudioTitle = currentAudioTitle.split('').slice(0,maxChar).join('');
           currentAudioTitle = currentAudioTitle + '...';
@@ -2677,7 +2652,7 @@ jQuery(document).ready(function() {
         // limit character to 30
         var maxChar = 30;
         var charCount = currentTitle.trim().length;
-        
+
         if ( charCount > maxChar ){
           currentTitle = currentTitle.split('').slice(0,maxChar).join('');
           currentTitle = currentTitle + '...';
@@ -2843,7 +2818,7 @@ jQuery(document).ready(function() {
           $(controlPanel).find('.audio_play_time .audio_current_sec').text(thisAudioSecond);
         }
       });
-    } 
+    }
 
     setInterval(function(){
       if( playing ) {
@@ -2914,7 +2889,7 @@ jQuery(document).ready(function() {
       if (hash === '' || hash === undefined){
         $('a[href="#profile"]', subMenu).addClass('active');
         $(subMenu).parent().addClass('submenu1');
-      } 
+      }
       // with defined hash
       else {
         $(allContainer).hide();
@@ -2972,13 +2947,13 @@ jQuery(document).ready(function() {
     } // end if
 
     if( isAccount ){
-      $('a', subMenu).on('click', function (e) { 
+      $('a', subMenu).on('click', function (e) {
         e.preventDefault();
-  
+
         var hash = $(this).attr('href');
-  
+
         window.location.hash = hash;
-  
+
         $(profileForm).attr('action', formActionUrl+hash);
 
         if( $(this).is('.active') ){
@@ -2989,7 +2964,7 @@ jQuery(document).ready(function() {
 
           // hide all containers
           $(allContainer).hide();
-    
+
           if( hash === '#profile' ){
             $(accountDetailsContainer).fadeIn();
             $(subMenu).parent().attr('class', 'dashboard-nav active');
@@ -3091,7 +3066,7 @@ jQuery(document).ready(function() {
     var wrapper = $(this);
 
     var video = $(this).find('iframe');
-    
+
     $(playBtn).on('click', function () {
       $(wrapper).addClass('active');
       $(this).parent().addClass('active');
@@ -3129,5 +3104,31 @@ jQuery(document).ready(function() {
       $(wrapper).find('div.'+targetDiv).siblings().hide();
       $(wrapper).find('div.'+targetDiv).fadeIn();
 		});
+  });
+  // NATIONAL GROUP MULTI-SELECT ON CHANGE--------------------------------------------------
+  var $nationalSelectize = $('#Nationalgp').selectize({
+    plugins: ['click2deselect'],
+  });
+
+  $(document).on('change', $nationalSelectize, function(){
+      if(jQuery.inArray( "10021", $('select[id=Nationalgp]').val())!==-1)
+		{
+			$( "#ngsports" ).removeClass('display-none');
+		}
+		else{
+      $( "#ngsports" ).addClass('display-none');
+      $( "#ngsportsbox" ).val('0');
+			$("#ngsportsbox").attr('checked', false);
+		}
+		if(jQuery.inArray( "10015", $('select[id=Nationalgp]').val())!==-1)
+		{
+			$( "#ngmusculo" ).removeClass('display-none');
+	    }
+		else{
+      $( "#ngmusculo" ).addClass('display-none');
+      $( "#ngmusculobox" ).val('0');
+			$("#ngmusculobox").attr('checked', false);
+    }
+
   });
 });

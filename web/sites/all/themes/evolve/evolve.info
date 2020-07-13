@@ -113,6 +113,7 @@ lessc[] = lessc/sso-login.less
 
 scripts[] = assets/scripts/evolve.js
 scripts[] = assets/scripts/formValidation.js
+scripts[] = assets/scripts/yourDetailValidation.js
 scripts[] = assets/scripts/custom.js
 scripts[] = assets/scripts/andy.js
 scripts[] = assets/scripts/readmore.min.js
@@ -122,7 +123,6 @@ scripts[] = assets/scripts/Distance.js
 scripts[] = assets/scripts/FindPhysio.js
 scripts[] = assets/scripts/Eddy.js
 scripts[] = assets/scripts/popups.js
-scripts[] = assets/scripts/yourDetailValidation.js
 scripts[] = assets/scripts/parallax.js
 
 
