@@ -32,10 +32,10 @@ if(isset($_POST['step1'])) {
 	if(isset($_POST['Gender'])){ $postData['Gender'] = $_POST['Gender']; }
 	if(isset($_POST['country-code'])){ $postData['Home-country-code'] = $_POST['country-code']; }
 	if(isset($_POST['area-code'])){ $postData['Home-area-code'] = $_POST['area-code']; }
-	if(isset($_POST['phone-number'])){ $postData['Home-phone-number'] = $_POST['phone-number']; }
+	if(isset($_POST['phone-number'])){ $postData['Home-phone-number'] = str_replace("-","",$_POST['phone-number']); }
 	if(isset($_POST['Mobile-country-code'])){ $postData['Mobile-country-code'] = $_POST['Mobile-country-code']; }
 	if(isset($_POST['Mobile-area-code'])){ $postData['Mobile-area-code'] = $_POST['Mobile-area-code']; }else {$postData['Mobile-area-code'] = "";}
-	if(isset($_POST['Mobile-number'])){ $postData['Mobile-number'] = $_POST['Mobile-number']; }
+	if(isset($_POST['Mobile-number'])){ $postData['Mobile-number'] = str_replace("-","",$_POST['Mobile-number']); }
     if(isset($_POST['Aboriginal'])){ $postData['Aboriginal'] = $_POST['Aboriginal']; }
 	/***put the logic when post Pobox******/
 	/***Updated on 02082018**/

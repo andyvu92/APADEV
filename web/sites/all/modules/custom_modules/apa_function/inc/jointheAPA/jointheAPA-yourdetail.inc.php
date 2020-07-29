@@ -70,7 +70,7 @@ $filterMemberProduct = array("10007","10008","10009","9997");
     }
 
     if (isset($_POST['phone-number'])) {
-        $postData['Home-phone-number'] = $_POST['phone-number'];
+        $postData['Home-phone-number'] = str_replace("-","",$_POST['phone-number']);
     }
 
     if (isset($_POST['Mobile-country-code'])) {
@@ -82,7 +82,7 @@ $filterMemberProduct = array("10007","10008","10009","9997");
     }else {$postData['Mobile-area-code'] = "";}
 
     if (isset($_POST['Mobile-number'])) {
-        $postData['Mobile-number'] = $_POST['Mobile-number'];
+        $postData['Mobile-number'] = str_replace("-","",$_POST['Mobile-number']);
     }
 
     if (isset($_POST['Aboriginal'])) {
