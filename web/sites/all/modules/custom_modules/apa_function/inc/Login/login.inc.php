@@ -719,10 +719,10 @@ if($resultdata['result']) {
           $personInfo['first_name'] = $details["Firstname"];
           $personInfo['last_name'] = $details["Lastname"];
           if(empty($details["Mobile-number"])){
-            $personInfo['phone'] = str_replace("-","",$details["Home-phone-number"]);
+            $personInfo['phone'] = str_replace(" ","",str_replace("-","",$details["Home-phone-number"]));
           }
           else{
-            $personInfo['phone'] = str_replace("-","",$details["Mobile-number"]);
+            $personInfo['phone'] = str_replace(" ","",str_replace("-","",$details["Mobile-number"]));
           }
 
           $personInfo['membership_number'] =  $details["Memberno"];
