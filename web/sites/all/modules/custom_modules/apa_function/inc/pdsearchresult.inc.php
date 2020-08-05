@@ -287,7 +287,7 @@ if(isset($results['MResponse'])) {
 			if($front == 0) {
 				echo '<div class="pager col-xs-12 col-sm-6 col-md-7"><a href="'.$base_url.'/pd/pd-search?page=1&pagesize='.$numItem.$passString.'"><div class="Pagebutton"><<</div></a>';
 			} else {
-				echo '<div class="pager"><a href="'.$base_url.'/pd/pd-search?page='.$front.'&pagesize='.$numItem.$passString.'"><div class="Pagebutton"><<</div></a>';
+				echo '<div class="pager col-xs-12 col-sm-6 col-md-7"><a href="'.$base_url.'/pd/pd-search?page='.$front.'&pagesize='.$numItem.$passString.'"><div class="Pagebutton"><<</div></a>';
 			}
 			if($current != 1) {
 				echo '<a href="'.$base_url.'/pd/pd-search?page='.($current - 1).'&pagesize='.$numItem.$passString.'"><div class="Pagebutton"><</div></a>';
