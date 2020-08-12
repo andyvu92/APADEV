@@ -55,7 +55,8 @@ if(isset($_POST['step3'])) {
 	// userID&Paymentoption&PRFdonation&Rollover&Card_number&productID
 	// Response -Register a new order successfully
 	if(isset($_SESSION['UserId'])){ $postReviewData['userID'] = $_SESSION['UserId'];  }
-	if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption'] == '1' ? 1:0; }
+  if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption'] == '1' ? 1:0; }
+  if(isset($_POST['appliedCoupon'])){$postReviewData['CampaignCode'] = $_POST['Paymentoption'] == '1' ? "":$_POST['appliedCoupon'];}
 	//if(isset($_POST['Installpayment-frequency'])){ $postReviewData['InstallmentFrequency'] = $_POST['Installpayment-frequency']; }
 	$postReviewData['InstallmentFrequency'] = $_POST['Paymentoption'] == '1' ? "Monthly":"";
 	$registerOuts = aptify_get_GetAptifyData("26", $postReviewData);

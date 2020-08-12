@@ -579,6 +579,9 @@ jQuery(document).ready(function($) {
 					$('#addcardtag').attr('checked', true);
 					$('#addcardtag').attr('disabled', true);
 				}
+        //add coupon control
+        $('.couponForm input[name="EnterCouponcode"]').prop('disabled', true);
+        $('.couponForm span.dashboard-button').addClass("isDisable");
 
 			}
       else{
@@ -589,7 +592,11 @@ jQuery(document).ready(function($) {
 				if($('#addcardtag').is(":visible")){
 					$('#addcardtag').attr('checked', false);
 					$('#addcardtag').attr('disabled', false);
-				}
+        }
+        //add coupon control
+        $('.couponForm input[name="EnterCouponcode"]').prop('disabled', false);
+        $('.couponForm span.dashboard-button').removeClass("isDisable");
+
 		}
 		if($("#p1-2").is(":checked"))
 		{
@@ -612,8 +619,11 @@ jQuery(document).ready(function($) {
     });
 	if($("#p1-2").length!==0 && $("#p1-2").is(":checked")){
 		$('.schedule').css('display','inline-flex');
-		$('.full').css('display','none');
-		if($('#addcardtag').is(":visible")){
+    $('.full').css('display','none');
+    //add coupon control
+    $('.couponForm input[name="EnterCouponcode"]').prop('disabled', true);
+    $('.couponForm span.dashboard-button').addClass("isDisable");
+   	if($('#addcardtag').is(":visible")){
 			$('#addcardtag').attr('checked', true);
 			$('#addcardtag').attr('disabled',true);
 
@@ -623,7 +633,20 @@ jQuery(document).ready(function($) {
 	if($("#p1-2").length===0){
 		 $("#p1-1").attr('checked', true);
 		 $('#installmentMessage').addClass("display-none");
-	}
+  }
+  //manage coupon code in hidden field
+  $('.couponForm input[name="EnterCouponcode"]').blur(function(){
+    $('#discount input[name="Couponcode"]').val($('.couponForm input[name="EnterCouponcode"]').val());
+  });
+  $('.couponForm span.dashboard-button').click(function(event){
+    if($("#p1-2").length!==0 && $("#p1-2").is(":checked")){
+      event.preventDefault();
+    }
+    else{
+      $('#discount').submit();
+    }
+
+  });
 	$('input[type="checkbox"]').click(function(){
         if($(this).is(":checked")){
         $(this).attr('checked', true);

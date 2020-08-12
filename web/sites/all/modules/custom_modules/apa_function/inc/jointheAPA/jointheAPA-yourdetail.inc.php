@@ -579,7 +579,7 @@ if (isset($_SESSION['UserId'])):
     <input type="hidden" name="step1" value="1"/>
     <input type="hidden" name="insuranceTag" id="insuranceTag"/>
             <div class="down1" <?php
-    if (isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['step2-1']) || isset($_POST['goI']) || isset($_POST['goP']) || isset($_POST['step2-2']) || isset($_POST['step2-3']) || isset($_POST['QOrder']) || isset($_POST['step2-4']))
+    if (isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['step2-1']) || isset($_POST['goI']) || isset($_POST['goP']) || isset($_POST['step2-2']) || isset($_POST['step2-3']) || isset($_POST['QOrder']) || isset($_POST['step2-4']) || isset($_POST['Couponcode']))
         echo 'style="display:none;"';
     else {
         echo 'style="display:block;"';

@@ -6,7 +6,7 @@ if(!function_exists('drupal_session_started'))
  //include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
  apa_function_updateBackgroundImage_form();
  /* get background image****/
-if(isset($_SESSION['UserId'])) { 
+if(isset($_SESSION['UserId'])) {
 $userID = $_SESSION['UserId'];
 $userTag = getInsuranceStatus($userID);
 /*if($userTag ==1){
@@ -17,8 +17,8 @@ $userTag = getInsuranceStatus($userID);
 } else { $userID =0; }
 
 $background = getBackgroundImage($userID);
-/* get background image****/ 
- ?> 
+/* get background image****/
+ ?>
 
 <div id="pre_background" style="display:none">background_<?php //echo $background; ?></div>
 <div class="join_content col-xs-12 col-sm-12 col-md-12 col-lg-12 background_<?php //echo $background;?> " id="dashboard-right-content">
@@ -52,16 +52,16 @@ $background = getBackgroundImage($userID);
 	//include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
 	apa_function_customizeBackgroundImage_form();
 	?>
-	
+
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 join-membership-nav">
 			<ul class="nav nav-tabs">
-			<li><a class="tabtitle1 inactiveLink" style="cursor: pointer;"><span class="<?php if(!isset($_POST['step1']) && !isset($_POST['step2']) && !isset($_POST['step2-1'])&& !isset($_POST['goI']) && !isset($_POST['goP']) && !isset($_POST['step2-2']) && !isset($_POST['step2-3']) && !isset($_POST['QOrder']) && !isset($_POST['step2-4']))echo "text-underline";?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
+			<li><a class="tabtitle1 inactiveLink" style="cursor: pointer;"><span class="<?php if(!isset($_POST['step1']) && !isset($_POST['step2']) && !isset($_POST['step2-1'])&& !isset($_POST['goI']) && !isset($_POST['goP']) && !isset($_POST['step2-2']) && !isset($_POST['step2-3']) && !isset($_POST['QOrder']) && !isset($_POST['step2-4']) && !isset($_POST['Couponcode']))echo "text-underline";?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
 			<li><a class="tabtitle2 inactiveLink" style="cursor: pointer;"><span class="eventtitle2" id="membership"><strong>Membership</strong></span></a></li>
 			<li><a class="tabtitle3 inactiveLink" style="cursor: pointer;"><span class="eventtitle3" id="workplace"><strong>Workplace</strong></span></a></li>
 			<li><a class="tabtitle4 inactiveLink" style="cursor: pointer;"><span class="eventtitle4" id="education"><strong>Education</strong></span></a></li>
 			<li><a class="tabtitle5 inactiveLink" style="cursor: pointer;"><span class="eventtitle5 <?php if((isset($_POST['step1'])&& $_POST['insuranceTag']!="0") || isset($_POST['goI']))echo 'text-underline';?>" id="Insurance"><strong>Insurance</strong></span></a></li>
-			<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6 <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") ||isset($_POST['QOrder']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>
+			<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6 <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") ||isset($_POST['QOrder']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']) || isset($_POST['Couponcode']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>
 			<!--<li><a class="tabtitle7 inactiveLink" style="cursor: pointer;"><span class="eventtitle7 <?php //if(isset($_POST['goP']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>-->
 			<!--<li><a class="tabtitle8 inactiveLink" style="cursor: pointer;"><span class="eventtitle8 <?php //if(isset($_POST['step2']) || isset($_POST['step3'])|| isset($_POST['step2-2'])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'text-underline';?>" id="Review"><strong>Review</strong></span></a></li>-->
 			</ul>
@@ -74,24 +74,24 @@ $background = getBackgroundImage($userID);
 		//include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-yourdetail.inc.php');
 		apa_function_join_your_detail_form();
 		if((isset($_POST["step1"]) && $_POST["step1"] == "1" && $_POST['insuranceTag']!="0") || isset($_POST['goI'])) {
-		//include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-insurance.inc.php'); 
+		//include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-insurance.inc.php');
 		apa_function_join_the_apa_insurance_form();
-		
+
 		}
-		elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4'])) {
+		elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']) || isset($_POST['Couponcode'])) {
 		//include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-surveypayment.inc.php');
 		//apa_function_join_the_apa_surveypayment_form();
 		apa_function_join_the_apa_final_form();
-		} 
+		}
 		//elseif((isset($_POST["step2"]) && $_POST["step2"] == "2")||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4'])) {
 		//include('sites/all/themes/evolve/inc/jointheAPA/jointheAPA-final.inc.php');
 		//apa_function_join_the_apa_final_form();
-		//} 
+		//}
 		?>
 		</div>
 	</div>
 	</div>
-	
+
 	<?php endif;?>
 </div>
 <div id="privacypolicyWindow" style="display:none;">
@@ -101,11 +101,11 @@ $background = getBackgroundImage($userID);
 			<h4 class="modal-title">APA Terms & Conditions</h4>
 		</div>
 	</div>
-	
+
 	<div class="modal-body">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	<span class="note-text" style="display: block">Please scroll down to accept the full APA terms and conditions</span>
-	
+
 	<h4>1. Eligibility for all members</h4>
 <p>In order to be eligible for APA membership, all members must:</p>
 <ul>
@@ -305,10 +305,10 @@ You have the right to access the personal information about yourself held by the
 	<div class="modal-header">
 		<h4 class="modal-title">APA installment policy</h4>
 	</div>
-	
+
 	<div class="modal-body">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-		<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
+		<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>
 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pretium
 		tellus non ex mattis feugiat a in est. Praesent est leo, viverra ac
 		hendrerit ac, facilisis at ante. Phasellus elementum hendrerit risus,
@@ -317,17 +317,17 @@ You have the right to access the personal information about yourself held by the
 		In viverra neque lacus, vel pulvinar nulla convallis id. Curabitur porttitor
 		eleifend quam in tincidunt.</p>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-			<input class="styled-checkbox" type="checkbox" id="installmentpolicyp" checked name="instalmentpolicy"> 
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<input class="styled-checkbox" type="checkbox" id="installmentpolicyp" checked name="instalmentpolicy">
 			<label class="apa_policy_button" for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label>
 		</div>
-		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none warning" id="disagreeInstallmentDescription"> 
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none warning" id="disagreeInstallmentDescription">
 			Please agree to the APA Installment Policy to continue with your membership
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button type="button" class="btn btn-default apa_policy_button" id="installment_policy_button">Submit</button>	
-	</div>	
+		<button type="button" class="btn btn-default apa_policy_button" id="installment_policy_button">Submit</button>
+	</div>
 </div>
 
 		<div id="deleteWorkplaceWindow" style="display:none;">
@@ -347,19 +347,19 @@ You have the right to access the personal information about yourself held by the
 <div class="overlay">
 	<section class="loaders">
 		<span class="loader loader-quart">
-		</span>   
+		</span>
 		<span class="edu-step-note">This may take a moment while we create your account</span>
 		<span class="edu-step-note-generic">This may take a moment while we update your details</span>
 	</section>
 </div>
 <?php logRecorder(); ?>
 <input type="hidden" id="totalStepNumber" value="6">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 $(document).ready(function() {
-        window.history.pushState(null, "", window.location.href);        
+        window.history.pushState(null, "", window.location.href);
         window.onpopstate = function() {
             window.history.pushState(null, "", window.location.href);
         };
