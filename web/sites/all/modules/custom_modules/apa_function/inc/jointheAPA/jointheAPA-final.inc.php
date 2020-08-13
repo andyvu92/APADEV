@@ -518,7 +518,7 @@ $PRFPrice = 0;
             <div class="row">
                 <?php if($_SESSION["MembershipProductID"]!="9964" && $_SESSION["MembershipProductID"]!="9965" && $_SESSION["MembershipProductID"]!="9966" && $_SESSION["MembershipProductID"] !="9968" && $_SESSION["MembershipProductID"] !="10005" && $_SESSION["MembershipProductID"] !="9967"&& $_SESSION["MembershipProductID"] !="10006"): ?>
                 <div class="col-xs-12">
-                    <input class="styled-radio-select" type="radio" name="Paymentoption" id="p1-2" value="1" checked="<?php if(!isset($_POST['Couponcode'])) {echo "checked";}?>">
+                    <input class="styled-radio-select" type="radio" name="Paymentoption" id="p1-2" value="1" <?php if(!isset($_POST['Couponcode'])) {echo 'checked="checked"';}?>>
                     <label for="p1-2">Pay by monthly instalments</label><span for="instalment_payment_note" class="note_trigger info_icon"></span>
                     <div id="instalment_payment_note" class="full_width_note">
                         <p>The most convenient way to pay for your membership is to spread the costs out across the year with monthly instalments. This option also eliminates the stress of renewing your membership every year. Before your membership rolls over each year, we will give you plenty of notice as well as the opportunity to make any changes to your package.</p>
@@ -539,7 +539,7 @@ $PRFPrice = 0;
                 </div>
                 <?php endif;?>
                 <div class="col-xs-12">
-                    <input class="styled-radio-select" type="radio" name="Paymentoption" id="p1-1" value="0" checked="<?php if(isset($_POST['Couponcode'])) {echo "checked";}?>"
+                    <input class="styled-radio-select" type="radio" name="Paymentoption" id="p1-1" value="0" <?php if(isset($_POST['Couponcode'])) {echo 'checked="checked"';}?>
                     ><label for="p1-1">Pay in full today</label>
                 </div>
             </div>
