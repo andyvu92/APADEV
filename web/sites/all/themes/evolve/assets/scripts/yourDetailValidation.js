@@ -12,22 +12,23 @@ jQuery(document).ready(function($) {
 			if($("input[name=Lastname]").val() ==''){$("input[name=Lastname]").addClass("focuscss");} else{$("input[name=Lastname]").removeClass("focuscss");}
 			if($("input[name=Birth]").val() ==''){$("input[name=Birth]").addClass("focuscss");}else{$("input[name=Birth]").removeClass("focuscss");}
 			//if($("select[name=Gender]").val() ==''){$("select[name=Gender]").addClass("focuscss");}else{$("select[name=Gender]").removeClass("focuscss");}
-			if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ 
+			if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){
 				$("input[name=phone-number]").addClass("focuscss");
 				$("input[name=Mobile-number]").addClass("focuscss");
-			} 
+			}
 			else{
 				$("input[name=phone-number]").removeClass("focuscss");
 				$("input[name=Mobile-number]").removeClass("focuscss");
-			}				
-			
+			}
+
 			if($("select[name=Aboriginal]").val() ==''){$("select[name=Aboriginal]").addClass("focuscss");}else{$("select[name=Aboriginal]").removeClass("focuscss");}
 			if($("input[name=Pobox]").val() ==''){
 				if($("input[name=Address_Line_1]").val() ==''){$("input[name=Address_Line_1]").addClass("focuscss");}else{$("input[name=Address_Line_1]").removeClass("focuscss");}
 			}
 			if($("input[name=Suburb]").val() ==''){$("input[name=Suburb]").addClass("focuscss");}else{$("input[name=Suburb]").removeClass("focuscss");}
 			if($("input[name=Postcode]").val() ==''){$("input[name=Postcode]").addClass("focuscss");}else{$("input[name=Postcode]").removeClass("focuscss");}
-			if($("select[name=Country]").val() ==''){$("select[name=Country]").addClass("focuscss");}else{$("select[name=Country]").removeClass("focuscss");}
+      if($("select[name=Country]").val()=="Australia"){if($("select[name=State]").val() ==''){$("select[name=State]").addClass("focuscss");}else{$("select[name=State]").removeClass("focuscss");}}
+      if($("select[name=Country]").val() ==''){$("select[name=Country]").addClass("focuscss");}else{$("select[name=Country]").removeClass("focuscss");}
 			if(!$("#Mailing-address").is(":checked")){
 				if($("input[name=Mailing-PObox]").val() ==''){
 						if($("input[name=Mailing-Address_Line_1]").val() ==''){$("input[name=Mailing-Address_Line_1]").addClass("focuscss");}else{$("input[name=Mailing-Address_Line_1]").removeClass("focuscss");}
@@ -36,7 +37,7 @@ jQuery(document).ready(function($) {
 				if($("input[name=Mailing-postcode]").val() ==''){$("input[name=Mailing-postcode]").addClass("focuscss");}else{$("input[name=Mailing-postcode]").removeClass("focuscss");}
 				if($("select[name=Mailing-Country]").val() ==''){$("select[name=Mailing-Country]").addClass("focuscss");}else{$("select[name=Mailing-Country]").removeClass("focuscss");}
 			}
-				   
+
 			var i = $("input[name=wpnumber]").val();
 			var n = $("input[name=maxumnumber]").val();
 		if($('select[name=MemberType]').val()!=="31" && $('select[name=MemberType]').val()!=="32" && $('select[name=MemberType]').val()!=="33"&& $('select[name=MemberType]').val()!=="35"&& $('select[name=MemberType]').val()!=="36"&& $('select[name=MemberType]').val()!=="21"&& $('select[name=MemberType]').val()!=="22"&& $('select[name=MemberType]').val()!=="36"){
@@ -56,14 +57,14 @@ jQuery(document).ready(function($) {
 						if($("select[name=Number-worked-hours"+x+"]").val() ==''){$("select[name=Number-worked-hours"+x+"]").addClass("focuscss");}else{$("select[name=Number-worked-hours"+x+"]").removeClass("focuscss");}
 					}
 				}
-							
-				
-			}	
-			
+
+
+			}
+
 		}
-		
-		
-		
+
+
+
 			var num = $("input[name=addtionalNumber]").val();
 			var eduMaxNum = $("input[name=educationMaxNumber]").val();
 			if(num!=0){
@@ -75,10 +76,10 @@ jQuery(document).ready(function($) {
 					}
 					if($("select[name=Ugraduate-country"+t+"]").val() ==''){$("select[name=Ugraduate-country"+t+"").addClass("focuscss");}else{$("select[name=Ugraduate-country"+t+"").removeClass("focuscss");}
 					if($("select[name=Ugraduate-yearattained"+t+"]").val() ==''){$("select[name=Ugraduate-yearattained"+t+"]").addClass("focuscss");}else{$("select[name=Ugraduate-year-attained"+t+"]").removeClass("focuscss");}
-					
+
 				}
 			}
-	
+
 			if($("input[name=Firstname]").val() ==''||$("input[name=Lastname]").val() ==''){
 				return false;
 			}
@@ -88,7 +89,7 @@ jQuery(document).ready(function($) {
 			if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){ return false; }
 			if($("input[name=Pobox]").val() ==''){
 				if($("input[name=Address_Line_1]").val() ==''){
-					return false;	
+					return false;
 				}
 			}
 			//if($("select[name=State]").val() ==''){
@@ -96,6 +97,11 @@ jQuery(document).ready(function($) {
 			//}
 			if($("select[name=Country]").val() ==''||$("input[name=Postcode]").val() ==''||$("input[name=Suburb]").val() ==''){
 				return false;
+      }
+      if($("select[name=Country]").val()=="Australia"){
+				if($("select[name=State]").val() ==''){
+					return false;
+				}
 			}
 			if(!$("#Mailing-address").is(":checked")){
 				if($("input[name=Mailing-PObox]").val() ==''){
@@ -103,7 +109,7 @@ jQuery(document).ready(function($) {
 						return false;
 					}
 				}
-				
+
 				if($("select[name=Mailing-Country").val() ==''||$("input[name=Mailing-postcode]").val() ==''||$("input[name=Mailing-city-town]").val() ==''){
 					return false;
 				}
@@ -111,17 +117,17 @@ jQuery(document).ready(function($) {
 			if($('select[name=MemberType]').val()!=="31" && $('select[name=MemberType]').val()!=="32" && $('select[name=MemberType]').val()!=="33"&& $('select[name=MemberType]').val()!=="35"&& $('select[name=MemberType]').val()!=="36"&& $('select[name=MemberType]').val()!=="21"&& $('select[name=MemberType]').val()!=="22"&& $('select[name=MemberType]').val()!=="36"){
 				if(i!=0){
 					for (x = 0; x<=n;x++){
-						if($("#workplace"+x).length !== 0){	
+						if($("#workplace"+x).length !== 0){
 							if($("input[name=Name-of-workplace"+x+"]").val() =='' || $("select[name=Workplace-setting"+x+"]").val() =='' ){
-								
+
 								return false;
 							}
 							if($("input[name=Wemail"+x+"]").val()!="") {if (!isValidEmailAddress($("input[name=Wemail"+x+"]").val())) { return false; }}
 							if($("input[name=Wcity"+x+"]").val() ==''||$("input[name=Wpostcode"+x+"]").val() =='' ||$("input[name=WAddress_Line_1"+x+"]").val() =='' ||$("input[name=Wphone"+x+"]").val() ==''){
-								
+
 								return false;
 							}
-							
+
 							if($("select[name=Wcountry"+x+"]").val() ==''||$("select[name=Number-worked-hours"+x+"]").val() ==''){
 								return false;
 							}
@@ -129,7 +135,7 @@ jQuery(document).ready(function($) {
 					}
 				}
 			}
-			
+
 			if(num!=0){
 				for (t = 0; t<eduMaxNum;t++){
 					if($("select[name=Udegree"+t+"]").val() ==''||$("select[name=Undergraduate-university-name"+t+"]").val() ==''||$("select[name=Ugraduate-country"+t+"]").val() ==''||$("select[name=Ugraduate-year-attained"+t+"]").val() ==''){
@@ -145,7 +151,7 @@ jQuery(document).ready(function($) {
 					return false;
 				}
 			}
-	
+
 	};
 
 	function isValidEmailAddress(emailAddress) {
@@ -158,7 +164,7 @@ jQuery(document).ready(function($) {
 			$('html, body').animate({
 				scrollTop: $('#dashboard-right-content').offset().top
 			}, 600);
-		
+
 		var num = $("input[name=addtionalNumber]").val();
 		// for students, education record is mandatory
 		if($('select[name=MemberType]').val()=="31" || $('select[name=MemberType]').val()=="32") {
@@ -167,17 +173,17 @@ jQuery(document).ready(function($) {
 				$('.dashboard_detail li#yourdetail5').addClass("warning");
 			}
 		}
-			
-		if ($('.dashboard_detail .down1').find(".focuscss").length > 0){ 
+
+		if ($('.dashboard_detail .down1').find(".focuscss").length > 0){
 			$('.dashboard_detail li#yourdetail1').addClass("warning");
 		}
-		if ($('.dashboard_detail .down2').find(".focuscss").length > 0){ 
+		if ($('.dashboard_detail .down2').find(".focuscss").length > 0){
 			$('.dashboard_detail li#yourdetail2').addClass("warning");
 		}
-		if ($('.dashboard_detail .down13').find(".focuscss").length > 0){ 
+		if ($('.dashboard_detail .down13').find(".focuscss").length > 0){
 			$('.dashboard_detail li#yourdetail3').addClass("warning");
 		}
-		if ($('.dashboard_detail .down3').find(".focuscss").length > 0){ 
+		if ($('.dashboard_detail .down3').find(".focuscss").length > 0){
 			$('.dashboard_detail li#yourdetail4').addClass("warning");
 		}
 		if ($('.dashboard_detail .down4').find(".focuscss").length > 0){
@@ -185,7 +191,7 @@ jQuery(document).ready(function($) {
 		}
 
 		$( "#workplaceblocks > div" ).each(function() {
-			if ($(this).find(".focuscss").length > 0){ 
+			if ($(this).find(".focuscss").length > 0){
 				x = $(this).attr('id').replace('workplace', '');
 				$('#tabmenu li#workplaceli' + x).addClass("warning");
 			}
@@ -193,5 +199,5 @@ jQuery(document).ready(function($) {
 		return false;
 		}
 	});
-	
+
 });
