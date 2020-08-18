@@ -3159,3 +3159,36 @@ jQuery(document).ready(function() {
 
   });
 });
+
+// LOAD SVG ICONS DYNAMICALLY
+const loadSVGIcons = () => {
+  const iconWrappers = document.querySelectorAll('.svg-icon');
+
+  iconWrappers.length && iconWrappers.forEach(item => {
+    let iconSrc = item.getAttribute('icon-src');
+
+    let baseUrl = window.location.origin;
+
+    if (iconSrc){
+      if ( !iconSrc.includes(baseUrl) ){
+        iconSrc = `${baseUrl}${iconSrc}`;
+      }
+  
+      // fetch svg src
+      fetch(iconSrc)
+        .then(response => response.text())
+        .then(text => {
+          // render icon svgs
+          item.innerHTML = text;
+        })
+        .catch((error) => {
+          console.log(error);
+          item.innerHTML = "Icon not loaded";
+        });
+    }
+  });
+}
+
+window.addEventListener('DOMContentLoaded', e => {
+  loadSVGIcons();
+});

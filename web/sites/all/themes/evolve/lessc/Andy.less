@@ -14,6 +14,7 @@
 @green: #A2AD00;
 @aqua-blue: #899f99;
 
+@color-primary: @blue;
 
 /*--RESPONSIVE BREAKPOINTS--*/
 @phone-width: 480px;
@@ -22,6 +23,9 @@
 @larger-tablet-width: 992px;
 @desktop-width: 1200px;
 @larger-desktop-width: 1500px;
+
+@font-family-primary: "Roboto";
+@font-family-secondary: "Cairo";
 
 /* SET SITE MAX WIDTH */
     body, .html{
@@ -7171,7 +7175,121 @@ body a b, body span b{
         }
     }
 }
-/* EXTEND PARALLAX BANNER WITH LARGER HEIGHT */
+
+/* ICON GRID */
+.icon-box-grid{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .box{
+        width: calc(~'33.3333% - 50px');
+        color: #000000;
+        text-decoration: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 88px;
+        @media @larger-phone-width-down{
+            margin-top: 50px;
+        }
+
+        &:hover{
+            .box-content{
+                h3{
+                    &:after{
+                        width: 100%;
+                    }
+                }
+            }
+        }
+
+        @media @tablet-width-up{
+            &:nth-child(-n + 3){
+                margin-top: 0;
+            }
+        }
+
+        @media @larger-phone-width-up{
+            &:nth-child(-n + 2){
+                margin-top: 0;
+            }
+        }
+
+        @media @larger-phone-width-down{
+            &:first-child{
+                margin-top: 0;
+            }
+        }
+
+        @media @tablet-width-down{
+            width: calc(~'50% - 35px');
+        }
+
+        @media @larger-phone-width-down{
+            width: 100%;
+        }
+
+        .box-icon{
+            width: 66px;
+            height: 66px;
+            display: flex;
+            position: relative;
+            align-items: center;
+            justify-content: center;
+
+            svg{
+                position: absolute;
+                height: 100%;
+                width: 100%;
+            }
+        }
+
+        .box-content{
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            h3{
+                font-family: @font-family-primary;
+                font-size: 23px;
+                line-height: 28px;
+                color: @color-primary;
+                margin-top: 16px;
+                margin-bottom: 0;
+                position: relative;
+                font-weight: 600;
+                padding-top: 0;
+                
+                @media @larger-phone-width-down{
+                    font-weight: 500;
+                }
+
+                &:after{
+                    content: '';
+                    position: absolute;
+                    left: 50%;
+                    bottom: -5px;
+                    transform: translateX(-50%);
+                    width: 0%;
+                    height: 2px;
+                    background-color: @color-primary;
+                    transition: width 0.3s ease-in;
+                }
+            }
+
+            p{
+                font-family: @font-family-primary;
+                margin-top: 16px;
+                font-size: 18px;
+                line-height: 22px;
+                margin-bottom: 0;
+                font-weight: 300;
+            }
+        }
+    }
+}/* EXTEND PARALLAX BANNER WITH LARGER HEIGHT */
 [class*="jarallax"]{
     &.large{
         min-height: 555px;
