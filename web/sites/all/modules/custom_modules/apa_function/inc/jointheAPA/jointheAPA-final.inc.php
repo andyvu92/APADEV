@@ -476,8 +476,10 @@ $PRFPrice = 0;
 
 
                 <div class="flex-container couponForm">
+                  <div><span class="tipstyle">* Please note: discount code only applies to the full payment</span></div>
                   <div><input type="text" name="EnterCouponcode" placeholder="Enter discount code"></div>
                   <span class="dashboard-button">Apply</span>
+
                 </div>
 
 
