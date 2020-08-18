@@ -3189,6 +3189,26 @@ const loadSVGIcons = () => {
   });
 }
 
+// hero banner with scroll to bottom button
+const heroBannerScrollNext = () => {
+  const herobanners = document.querySelectorAll('.hero-banner');
+
+  herobanners.length && herobanners.forEach(banner => {
+    const scrollNextBtn = banner.querySelector('#scroll-chevron a');
+
+    
+    scrollNextBtn && scrollNextBtn.addEventListener('click', e => {
+      let headerNavHeight = document.getElementById('section-header').clientHeight;
+      window.scrollTo({
+        top: banner.clientHeight + headerNavHeight,
+        behavior: 'smooth'
+      });
+    });
+  });
+}
+
+// trigger functions after DOM content loaded
 window.addEventListener('DOMContentLoaded', e => {
   loadSVGIcons();
+  heroBannerScrollNext();
 });
