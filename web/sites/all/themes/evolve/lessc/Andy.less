@@ -2994,12 +2994,20 @@ body, body .block{
 
 /* DEFAULT RIGHT SIDEBAR WITH DRUPAL BLOCKS */
 .region-right-sidebar, .right-sidebar{
-    h3.headline{
-        position: relative;
-        font-family: Cairo;
-        font-size: 1.4em;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
+    h3{
+        &.headline{
+            position: relative;
+            font-family: Cairo;
+            font-size: 1.4em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        &.sub-heading{
+            font-size: 24px!important;
+        }
+        &.text-center{
+            max-width: 255px;
+        }
     }
     .brd-headling{
         border-color: @bright-blue;
@@ -3119,26 +3127,58 @@ body, body .block{
 }
 
 /* STANDARD BUTTONS */
-body .block .secondary-button{
-    color: #fff;
-    border: 1px solid #fff;
-    font-family: Cairo;
-    font-weight: 300;
-    text-transform: uppercase;
-    padding: 15px 0px;
-    width: 80%;
-    text-align: center;
-    max-width: 294px;
-    letter-spacing: 1px;
-    transition: all .2s ease-in-out;
-    position: relative;
-    z-index: 10;
-    &:hover, &:focus{
-        color: #019fda;
-        background: rgba(255,255,255,1);
-        font-weight: 700;
-        &:before{
-            opacity: 1;
+body .block{
+    .secondary-button{
+        color: #fff;
+        border: 1px solid #fff;
+        font-family: Cairo;
+        font-weight: 300;
+        text-transform: uppercase;
+        padding: 15px 0px;
+        width: 80%;
+        text-align: center;
+        max-width: 294px;
+        letter-spacing: 1px;
+        transition: all .2s ease-in-out;
+        position: relative;
+        z-index: 10;
+        &:hover, &:focus{
+            color: #019fda;
+            background: rgba(255,255,255,1);
+            font-weight: 700;
+            &:before{
+                opacity: 1;
+            }
+        }
+    }
+
+    .primary-button{
+        font-size: 15px;
+        font-family: @font-family-secondary;
+        color: white;
+        background-color: @color-primary;
+        padding: 9px 15px;
+        font-weight: 400;
+        display: flex;
+        max-width: max-content;
+        text-transform: uppercase;
+        transition: all .3s ease;
+        &:hover{
+            opacity: 0.9;
+        }
+        &.large{
+            padding: 24px 54px;
+            font-size: 20px;
+        }
+    }
+
+    .simple-img-link{
+        display: flex;
+        box-shadow: 0px 3px 6px rgba(0,0,0,0.16);
+        max-width: max-content;
+        transition: all .3s ease;
+        &:hover{
+            transform: scale(1.03);
         }
     }
 }
@@ -7322,9 +7362,11 @@ body a b, body span b{
     }
 
     .box-body{
+        display: flex;
         margin-top: 35px;
         .box-grid{
             display: flex;
+            width: 100%;
             @media @tablet-width-down{
                 flex-direction: column;
             }
@@ -7400,6 +7442,101 @@ body a b, body span b{
                         @media all and (max-width: 1400px){
                             font-size: 18px;
                             line-height: 20px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    /* STYLE 2 */
+    &.style-2{
+        .box-heading{
+            h3{
+                font-size: 37px;
+                font-weight: 400;
+            }
+        }
+
+        .box-body{
+            .box-grid{
+                .box-item{
+                    padding: 0 50px;
+                    @media @desktop-width-down{
+                        padding: 0 30px;
+                    }
+                    @media @larger-tablet-width-down{
+                        padding: 50px 30px;
+                        &:first-child{
+                            padding-top: 0;
+                        }
+                        &:last-child{
+                            padding-bottom: 0;
+                        }
+                    }
+
+                    .box-label{
+                        font-size: 26px;
+                        line-height: 25px;
+                        color: @tuna;
+                        font-family: @font-family-secondary;
+                        font-weight: 400;
+                        text-align: center;
+                        margin: 0;
+                    }
+
+                    .featured-figure{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        width: 168px;
+                        height: 168px;
+                        border: 10px solid @color-primary;
+                        border-radius: 50%;
+                        margin-top: 28px;
+                        @media @desktop-width-down{
+                            width: 115px;
+                            height: 115px;
+                            border-width: 8px;
+                        }
+                        @media @larger-tablet-width-down{
+                            width: 168px;
+                            height: 168px;
+                            border-width: 10px;
+                        }
+                        p{
+                            margin: 0;
+                            padding: 0;
+                            font-size: 87px;
+                            font-family: @font-family-secondary;
+                            font-weight: 500;
+                            line-height: 87px;
+                            color: @color-primary;
+                            @media @desktop-width-down{
+                                font-size: 68px;
+                            }
+                            @media @larger-tablet-width-down{
+                                font-size: 87px;
+                            }
+                        }
+                    }
+
+                    .figured-content{
+                        flex-direction: column;
+                        align-items: center;
+                        margin-top: 25px;
+                        .label{
+                            font-size: 26px;
+                            font-weight: 500;
+                            margin-left: 0;
+                            width: 100%;
+                            text-align: center;
+                        }
+
+                        .figure{
+                            font-size: 35px;
+                            line-height: 50px;
+                            font-weight: 700;
                         }
                     }
                 }
