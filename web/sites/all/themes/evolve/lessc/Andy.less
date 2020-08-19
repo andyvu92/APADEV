@@ -3154,6 +3154,13 @@ body, .html{
             @media @larger-phone-width-down{
                 padding: 70px 10% 30px;
             }
+
+            &.extended-width{
+                padding: 170px 5% 70px;
+                max-width: calc(~'1045px + 5%');
+                margin: 0 auto;
+            }
+
             .page-main-header{
                 color: #fff;
                 font-family: Cairo;
@@ -3166,6 +3173,19 @@ body, .html{
                 }
                 @media @larger-phone-width-down{
                     font-size: 2.5em;
+                }
+
+                &.size-sm{
+                    font-size: 40px;
+                    line-height: 42px;
+                    letter-spacing: 0.5px;
+                    font-family: @font-family-primary;
+                    text-transform: inherit;
+                    font-weight: 400;
+                    @media @larger-phone-width-down{
+                        font-size: 30px;
+                        line-height: 32px;
+                    }
                 }
             }
             .separator{
@@ -7381,6 +7401,96 @@ body a b, body span b{
                             font-size: 18px;
                             line-height: 20px;
                         }
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* SUB TOPBANNER WITH CTA BANNER */
+.sub-top-banner{
+    .banner-cta{
+        margin: 0 auto;
+        padding: 0 15px;
+        max-width: 1300px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @media @larger-tablet-width-down{
+            flex-direction: column;
+        }
+
+        .media-container{
+            margin-right: 5%;
+            @media @larger-tablet-width-down{
+                margin: 0 0 24px;
+            }
+        }
+
+        .content-container{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex: auto;
+            @media @larger-tablet-width-down{
+                flex-direction: column;
+            }
+
+            .content-wrapper{
+                text-align: left;
+                @media @larger-tablet-width-down{
+                    text-align: center;
+                }
+                .heading{
+                    font-size: 28px;
+                    line-height: 30px;
+                    color: white;
+                    font-weight: 200;
+                    margin: 0;
+                    padding: 0;
+                    @media @desktop-width-down{
+                        font-size: 23px;
+                        line-height: 27px;
+                    }
+                    @media @larger-phone-width-down{
+                        font-size: 20px;
+                        line-height: 23px;
+                    }
+                }
+                .sub-heading{
+                    font-size: 20px;
+                    line-height: 30px;
+                    font-weight: 500;
+                    color: white;
+                    margin: 0;
+                    padding: 0;
+                    @media @desktop-width-down{
+                        font-size: 18px;
+                        line-height: 25px;
+                    }
+                    @media @larger-phone-width-down{
+                        font-size: 16px;
+                        line-height: 20px;
+                        margin-top: 4px;
+                    }
+                }
+            }
+
+            .actions-wrapper{
+                display: flex;
+                flex: auto;
+                margin-left: 5%;
+                @media @larger-tablet-width-down{
+                    margin: 24px 0 0px;
+                }
+                .secondary-button{
+                    padding: 15px;
+                    font-size: 16px;
+                    width: 100%;
+                    @media @larger-tablet-width-down{
+                        min-width: 190px;
                     }
                 }
             }
