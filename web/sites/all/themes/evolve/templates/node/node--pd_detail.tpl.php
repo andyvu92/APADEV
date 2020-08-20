@@ -529,14 +529,16 @@ $userRetisterStatus = false;
 				<div class="right-content presenters-bio">
 					<h2 class="blue-heading">Presenters</h2>
 						<?php
+            $numPresenter = 0;
 						foreach($pd_detail['Presenter'] as $bios) {
+              $numPresenter++;
 							echo '<h4>'.$bios['SpeakerID_Name'].'</h4><br>';
-							echo '<div class="content-loading">
-									<div class="line"></div>
+							echo '<div class="content-loading presents-content'.$numPresenter.'">';
+							echo '<div class="line"></div>
 									<div class="line"></div>
 									<div class="line"></div>
 								</div>'	;
-							echo '<div class="presenters-readmore-content">'.$bios['Comments'].'</div>';
+							echo '<div class="presenters-readmore-content extend-content'.$numPresenter.'">'.$bios['Comments'].'</div>';
 						}
 						?>
 

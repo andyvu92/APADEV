@@ -1452,37 +1452,64 @@ jQuery(document).ready(function() {
       presenters_show_content();
     }
 
-    // READMORE BUTTON FOR PD DESCRIPTION - toogle behaviour on click
-    $(document).on('click', '.left-side-content .presenters-bio .readmore-toggle', function(){
-      if ( $(this).text() == 'Read more' ) { // expanding
-        // get full height
-        fullHeight = $(this).parent().find('.presenters-readmore-content').css('height', 'auto').height();
-        // re-set min height
-        $(this).parent().find('.presenters-readmore-content').css('height', minHeight);
-
-        //set full height
-        $(this).parent().find('.presenters-readmore-content').animate({height: fullHeight}, 800);
-        $(this).parent().find('.presenters-readmore-content').removeClass('minimized');
-        $(this).text('Read less');
-      }
-      else{ //minimizing
-          // auto scroll back to top
-          var window_width = $(window).width();
-          if (window_width >= 993){
-            $('html, body').stop().animate({
-              scrollTop: $('#presenters-bio').offset().top - $('#section-header').height()
-            });
-          }
-          else{
-            $('html, body').stop().animate({ scrollTop: $('#presenters-bio').offset().top - 25 }, 1000);
-          }
-        // set min height
-        $(this).parent().find('.presenters-readmore-content').animate({height: minHeight}, 800);
-        $(this).parent().find('.presenters-readmore-content').addClass('minimized');
-        $(this).text('Read more');
-      }
-    });
   });
+  // READMORE BUTTON FOR PD DESCRIPTION - toogle behaviour on click
+ $(document).on('click', '.left-side-content .presenters-bio .readmore-toggle', function(){
+    // define min height
+    let minHeight = 190;
+    // get window width
+    var window_width = $(window).width() + 10;
+      // re-define min-height based on window width
+      if (window_width >= 1200){
+        minHeight = 190;
+      } else if ( window_width < 1200 && window_width >= 993 ){
+        minHeight = 260;
+      } else if ( window_width < 993 && window_width >= 769 ){
+        minHeight = 225;
+      } else if ( window_width < 769 && window_width >= 571 ){
+        minHeight = 230;
+      } else if ( window_width < 571 && window_width >= 481 ){
+        minHeight = 350;
+      } else {
+        minHeight = 410;
+      }
+
+    if ( $(this).text() == 'Read more' ) { // expanding
+    var x = $(this).parent().find('.presenters-readmore-content').attr("class").replace('extend-content', '').replace('presenters-readmore-content', '').replace('minimized', '');
+    var targetClass = "extend-content"+x;
+    targetClass = targetClass.replace(/\s/g, '');
+    // get full height
+    fullHeight = $(this).parent().find('.'+  targetClass).css('height', 'auto').height();
+    // re-set min height
+    $(this).parent().find('.'+ targetClass).css('height', minHeight);
+    //set full height
+    $(this).parent().find('.'+ targetClass).animate({height: fullHeight}, 800);
+    $(this).parent().find('.'+ targetClass).removeClass('minimized');
+    $(this).parent().find('.'+targetClass).next().text('Read less');
+    //$(this).text('Read less');
+
+  }
+  else{ //minimizing
+      // auto scroll back to top
+      var window_width = $(window).width();
+      if (window_width >= 993){
+        $('html, body').stop().animate({
+          scrollTop: $('#presenters-bio').offset().top - $('#section-header').height()
+        });
+      }
+      else{
+        $('html, body').stop().animate({ scrollTop: $('#presenters-bio').offset().top - 25 }, 1000);
+      }
+    // set min height
+    var x = $(this).parent().find('.presenters-readmore-content').attr("class").replace('extend-content', '').replace('presenters-readmore-content', '');
+    var targetClass = "extend-content"+x;
+    targetClass = targetClass.replace(/\s/g, '');
+    $(this).parent().find('.'+targetClass).animate({height: minHeight}, 800);
+    $(this).parent().find('.'+targetClass).addClass('minimized');
+    $(this).parent().find('.'+targetClass).next().text('Read more');
+    //$(this).text('Read more');
+  }
+});
 
   // GENERAL READMORE-------------------------------------------------------------------------------
   $('.a_readmore').each(function(){
