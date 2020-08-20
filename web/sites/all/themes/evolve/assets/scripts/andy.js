@@ -38,28 +38,28 @@ jQuery(document).ready(function() {
     path = 'index.php';
   }
 
-  // Add active class to target link
-  var target = $('.nav a[href="/'+path+'"]');
-  target.parent().addClass('active');
+  // // Add active class to target link
+  // var target = $('.nav a[href="/'+path+'"]');
+  // target.parent().addClass('active');
 
-  var target = $('.nav a[href="'+path+'"]');
-  target.parent().addClass('active');
+  // var target = $('.nav a[href="'+path+'"]');
+  // target.parent().addClass('active');
 
-  var target1 = $('.side-nav li a[href="/'+path+'"]');
-  target1.parent().addClass('active');
+  // var target1 = $('.side-nav li a[href="/'+path+'"]');
+  // target1.parent().addClass('active');
 
-  var target1 = $('.side-nav li a[href="'+path+'"]');
-  target1.parent().addClass('active');
+  // var target1 = $('.side-nav li a[href="'+path+'"]');
+  // target1.parent().addClass('active');
 
-  // Get current path and find target link
-  currentPath = window.location.pathname;
+  // // Get current path and find target link
+  // currentPath = window.location.pathname;
 
-  // Add active class to target link
-  var target = $('.side-nav li a[href="'+currentPath+'"]');
-  target.parent().addClass('active');
+  // // Add active class to target link
+  // var target = $('.side-nav li a[href="'+currentPath+'"]');
+  // target.parent().addClass('active');
 
-  var target = $('.nav li a[href="'+currentPath+'"]');
-  target.parent().addClass('active');
+  // var target = $('.nav li a[href="'+currentPath+'"]');
+  // target.parent().addClass('active');
 
   //ACORDION -----------------------------------------
   var list = $(".accordian-container");
@@ -3207,8 +3207,68 @@ const heroBannerScrollNext = () => {
   });
 }
 
+// add active class to link matching current path in nav
+const activeNavLinkHandler = () => {
+  let allNavLists = [];
+
+  const navLists = document.querySelectorAll('.nav');
+
+  const sideNavLists = document.querySelectorAll('.side-nav');
+
+  // get all nav lists
+  if (navLists.length){
+    allNavLists = [...allNavLists,...navLists];
+  }
+
+  // get all side nav list
+  if (sideNavLists.length){
+    allNavLists = [...allNavLists,...sideNavLists];
+  }
+
+  if (allNavLists.length){
+    // handle link matching location in each nav list
+    allNavLists.forEach(navList => {
+      // get current page location, transform to lower string and remove trailing slash
+      let currentLocation = window.location.href.toLowerCase().replace(/\/$/, "");
+
+      const allLinks = navList.querySelectorAll('a');
+
+      allLinks.length && allLinks.forEach(link => {
+        // get link href, transform to lower string and remove trailing slash
+        let href = link.href.toLowerCase().replace(/\/$/, "");
+
+        // if link href matching current location, add active class to link
+        if (href === currentLocation){
+          link.classList.add('active');
+
+          // if parent of link is a li tag, add active class to parent
+          if (link.parentNode.nodeName.toLowerCase() === 'li'){
+            link.parentNode.classList.add('active');
+          }
+        }
+      });
+    });
+  }
+}
+
+// handle back to top button
+const backToTopButtonHandler = () => {
+  const backToTopButtons = document.querySelectorAll('.back-to-top');
+
+  backToTopButtons.length && backToTopButtons.forEach(button => {
+    button.addEventListener('click', e => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+  });
+}
+
 // trigger functions after DOM content loaded
 window.addEventListener('DOMContentLoaded', e => {
   loadSVGIcons();
   heroBannerScrollNext();
+  activeNavLinkHandler();
+  backToTopButtonHandler();
 });
