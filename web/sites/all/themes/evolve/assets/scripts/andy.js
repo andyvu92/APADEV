@@ -3265,10 +3265,85 @@ const backToTopButtonHandler = () => {
   });
 }
 
+// tab banner script
+const tabBannerModuleScript = () => {
+  const tabBanners = document.querySelectorAll('.tab-banner');
+
+  tabBanners.length && tabBanners.forEach(banner => {
+    const toggles = banner.querySelectorAll('.banner-toggles button.toggle');
+    const tabs = banner.querySelectorAll('.banner-tab-container .tab');
+
+    const removeAllActive = () => {
+      [...toggles, ...tabs].forEach(item => {
+        item.classList.remove('active');
+      });
+    }
+
+    const activateSelected = (id) => {
+      const targetToggle = banner.querySelector(`.banner-toggles button.toggle[tab-target="${id}"]`);
+      const targetTab = banner.querySelector(`.banner-tab-container .tab[tab-id="${id}"]`);
+
+      targetToggle.classList.add('active');
+      targetTab.classList.add('active');
+    }
+
+    const activeToggle =  banner.querySelector('.banner-toggles button.toggle.active');
+
+    toggles.length && toggles.forEach(toggle => {
+      const isActive = toggle.classList.contains('active');
+
+      const targetTabId = toggle.getAttribute('tab-target');
+
+      const targetTab = banner.querySelector(`.banner-tab-container .tab[tab-id="${targetTabId}"]`);
+
+      // show tab when toggle is active
+      if (isActive){
+        targetTab.classList.add('active');
+      }
+
+      toggle.addEventListener('click', e => {
+        let isCurrentlyActive = e.target.classList.contains('active');
+
+        if (!isCurrentlyActive){
+          removeAllActive();
+          activateSelected(targetTabId);
+        }
+      });
+    });
+
+    // active the first tab - false back default when no tab is active
+    if (!activeToggle){
+      const firstToggle = banner.querySelector('.banner-toggles button.toggle');
+
+      const targetTabId = toggle.getAttribute('tab-target');
+
+      const targetTab = banner.querySelector(`.banner-tab-container .tab[tab-id="${targetTabId}"]`);
+
+      firstToggle.classList.add('active');
+      targetTab.classList.add('active');
+    }
+  });
+}
+
+// remove team email if empty
+const removeTeamEmailHandler = () => {
+  const teamEmailWrappers = document.querySelectorAll('.team .team-email');
+
+  teamEmailWrappers.length && teamEmailWrappers.forEach(email => {
+    const hasLink = email.querySelector('a');
+
+    if (!hasLink){
+      email.parentNode.removeChild(email);
+    }
+  });
+} 
+
 // trigger functions after DOM content loaded
 window.addEventListener('DOMContentLoaded', e => {
   loadSVGIcons();
   heroBannerScrollNext();
   activeNavLinkHandler();
   backToTopButtonHandler();
+  tabBannerModuleScript();
+  removeTeamEmailHandler();
 });
