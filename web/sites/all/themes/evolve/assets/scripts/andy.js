@@ -3169,7 +3169,6 @@ const heroBannerScrollNext = () => {
   herobanners.length && herobanners.forEach(banner => {
     const scrollNextBtn = banner.querySelector('#scroll-chevron a');
 
-    
     scrollNextBtn && scrollNextBtn.addEventListener('click', e => {
       let headerNavHeight = document.getElementById('section-header').clientHeight;
       window.scrollTo({
@@ -3243,6 +3242,10 @@ const tabBannerModuleScript = () => {
   const tabBanners = document.querySelectorAll('.tab-banner');
 
   tabBanners.length && tabBanners.forEach(banner => {
+    const mobileTogglesTriggerBtn = banner.querySelector('.toggles-trigger');
+    const mobileTogglesTriggerLabel = banner.querySelector('.toggles-trigger .toggle-label');
+
+    const togglesWrapper = banner.querySelector('.banner-toggles');
     const toggles = banner.querySelectorAll('.banner-toggles button.toggle');
     const tabs = banner.querySelectorAll('.banner-tab-container .tab');
 
@@ -3269,9 +3272,14 @@ const tabBannerModuleScript = () => {
 
       const targetTab = banner.querySelector(`.banner-tab-container .tab[tab-id="${targetTabId}"]`);
 
+      let label = toggle.textContent;
+
       // show tab when toggle is active
       if (isActive){
         targetTab.classList.add('active');
+
+        // set trigger label (mobile nav trigger)
+        mobileTogglesTriggerLabel.textContent = label;
       }
 
       toggle.addEventListener('click', e => {
@@ -3280,6 +3288,10 @@ const tabBannerModuleScript = () => {
         if (!isCurrentlyActive){
           removeAllActive();
           activateSelected(targetTabId);
+
+          // set trigger label (mobile nav trigger)
+          mobileTogglesTriggerLabel.textContent = label;
+          
         }
       });
     });
@@ -3292,9 +3304,70 @@ const tabBannerModuleScript = () => {
 
       const targetTab = banner.querySelector(`.banner-tab-container .tab[tab-id="${targetTabId}"]`);
 
+      // show the first tab as default fall back
       firstToggle.classList.add('active');
       targetTab.classList.add('active');
+
+      // set trigger label (mobile nav trigger)
+      let label = firstToggle.textContent;
+      mobileTogglesTriggerLabel.textContent = label;
     }
+
+    // mobile toggle nav handler
+    const toggleTriggerHandler = () => {
+      setTimeout(() => {
+        if (window.innerWidth < 571){
+  
+          let toggleWrapperHeight = togglesWrapper.clientHeight;
+  
+          setTimeout(() => {
+            togglesWrapper.classList.add('mobile-nav-initialised');
+            togglesWrapper.classList.add('collapsed');
+          }, 0);
+    
+          let isExpanded = mobileTogglesTriggerBtn.classList.contains('active');
+    
+          const expandHandler = () => {
+            mobileTogglesTriggerBtn.classList.add('active');
+            togglesWrapper.style.height = `${toggleWrapperHeight}px`;
+            togglesWrapper.classList.remove('collapsed');
+            togglesWrapper.classList.add('expanded');
+            isExpanded = true;
+          }
+  
+          const collapseHandler = () => {
+            mobileTogglesTriggerBtn.classList.remove('active');
+            togglesWrapper.style.height = `0px`;
+            togglesWrapper.classList.add('collapsed');
+            togglesWrapper.classList.remove('expanded');
+            isExpanded = false;
+          }
+  
+          mobileTogglesTriggerBtn.addEventListener('click', e => {
+            if (isExpanded){
+              collapseHandler();
+            }
+            else {
+              expandHandler()
+            }
+          });
+        } 
+        else {
+          togglesWrapper.classList.remove('mobile-nav-initialised');
+          togglesWrapper.classList.remove('collapsed');
+          togglesWrapper.classList.remove('expanded');
+          mobileTogglesTriggerBtn.classList.remove('active');
+          togglesWrapper.style.height = ``;
+        }
+      }, 10);
+      
+    }
+
+    toggleTriggerHandler();
+
+    window.addEventListener('resize', e => {
+      toggleTriggerHandler();
+    });
   });
 }
 
