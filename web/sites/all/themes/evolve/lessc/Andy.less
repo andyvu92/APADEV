@@ -8385,6 +8385,34 @@ body #section-main-content{
     }
 }
 
+/* RESEARCH STORY GRID */
+.article-grid{
+    .dexp-grid-items{
+        margin-left: -10px;
+        margin-right: -10px;
+
+        .node-research-article{
+            .team-extra{
+                display: flex!important;
+                justify-content: space-between;
+                align-items: center;
+                position: relative;
+                color: @color-primary!important;
+                &:before{
+                    content: "";
+                    position: absolute;
+                    .square(23px);
+                    right: 15px;
+                    background-position: 0 0;
+                    filter: grayscale(1);
+                    background-size: 46px 92px;
+                    background-image: url('/sites/default/files/CIRCLE POINTERS.png');
+                }
+            }
+        }
+    }
+}
+
 /* SPACING */
 .spacing{
     position: relative;
