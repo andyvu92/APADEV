@@ -3416,7 +3416,65 @@ const removeTeamEmailHandler = () => {
       email.parentNode.removeChild(email);
     }
   });
-} 
+}
+
+// brick nav handler
+
+const brickNavHandler = () => {
+  const brickNavLists = document.querySelectorAll('.brick-nav');
+
+  brickNavLists.length && brickNavLists.forEach(nav => {
+    const allLinks = nav.querySelectorAll('a');
+
+    if (allLinks.length){
+      const handleLinkArrangement = () => {
+        const linkWrapper = document.createElement('div');
+        linkWrapper.classList.add('link-wrapper');
+    
+        allLinks.forEach(link => {
+          linkWrapper.append(link);
+        });
+    
+        nav.firstElementChild.style.display = 'none';
+        nav.appendChild(linkWrapper);
+    
+        const rowArr = [];
+    
+        allLinks.forEach(link => {
+          let rowID = link.getBoundingClientRect().top;
+
+          link.setAttribute('row-id', rowID);
+    
+          if (!rowArr.includes(rowID)) rowArr.push(rowID);
+        });
+
+        rowArr.forEach(row => {
+          const rowNode = document.createElement('div');
+          rowNode.classList.add('link-row');
+
+          allLinks.forEach(link => {
+            let rowID = link.getAttribute('row-id');
+            
+            if (rowID == row){
+              rowNode.appendChild(link);
+            }
+          });
+
+          linkWrapper.appendChild(rowNode);
+        });
+      }
+
+      // wait for sidebar loaded fall back (mobile) 
+      if (window.innerWidth < 571){
+        setTimeout(() => {
+          handleLinkArrangement();
+        }, 2000);
+      } else {
+        handleLinkArrangement();
+      }
+    }
+  });
+}
 
 // trigger functions after DOM content loaded
 window.addEventListener('DOMContentLoaded', e => {
@@ -3426,4 +3484,5 @@ window.addEventListener('DOMContentLoaded', e => {
   backToTopButtonHandler();
   tabBannerModuleScript();
   removeTeamEmailHandler();
+  brickNavHandler();
 });
