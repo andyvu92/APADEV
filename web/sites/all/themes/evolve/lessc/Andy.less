@@ -2752,6 +2752,24 @@ body .block, body{
             height:15px;
         }
     }
+    .space-35{
+        height: 35px;
+        display: block;
+        width: 100%;
+
+        @media @larger-phone-width-down{
+            height:15px;
+        }
+    }
+    .space-40{
+        height: 40px;
+        display: block;
+        width: 100%;
+
+        @media @larger-phone-width-down{
+            height: 20px;
+        }
+    }
     .space-20{
         height: 30px;
         display: block;
@@ -8349,6 +8367,9 @@ body #section-main-content{
 
     .banner-body-wrapper{
         margin-top: 50px;
+        @media @larger-phone-width-down{
+            margin-top: 35px;
+        }
         .cta-wrapper{
             display: flex;
             flex-wrap: wrap;
@@ -8367,6 +8388,14 @@ body #section-main-content{
                 display: block;
                 text-align: center;
                 font-weight: 300;
+                @media @larger-tablet-width-down{
+                    font-size: 16px;
+                    line-height: 20px;
+                }
+                @media @larger-phone-width-down{
+                    max-width: 100%;
+                    padding: 15px;
+                }
                 u{
                     text-decoration: none;
                     position: relative;
@@ -8404,6 +8433,53 @@ body #section-main-content{
     }
 }
 
+/* BRICK NAV */
+.brick-nav{
+    display: flex;
+    width: 100%;
+    .view-content{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        .views-row{
+            align-self: flex-start;
+            transition: all .3s ease;
+            padding: 15px 20px;
+            border-bottom: 1px solid #E7E8E9;
+            position: relative;
+            &:after{
+                content: '';
+                position: absolute;
+                right: -1px;
+                top: 15%;
+                width: 1px;
+                height: 70%;
+                background: #E7E8E9;
+            }
+            
+            a{
+                font-family: @font-family-primary;
+                color: @tuna;
+                position: relative;
+                font-size: 18px;
+                line-height: 20px;
+                text-align: center;
+                font-weight: 400;
+                &:hover,
+                &.active{
+                    color: @color-primary;
+                    text-decoration: underline;
+                }
+            }
+
+            span{
+                display: flex;
+            }
+        }
+    }
+}
+
+/* SPACING */
 .spacing{
     position: relative;
     display: flex;

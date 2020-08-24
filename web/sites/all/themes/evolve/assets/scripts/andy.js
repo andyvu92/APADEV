@@ -3187,6 +3187,8 @@ const activeNavLinkHandler = () => {
 
   const sideNavLists = document.querySelectorAll('.side-nav');
 
+  const brickNavLists = document.querySelectorAll('.brick-nav');
+
   // get all nav lists
   if (navLists.length){
     allNavLists = [...allNavLists,...navLists];
@@ -3195,6 +3197,11 @@ const activeNavLinkHandler = () => {
   // get all side nav list
   if (sideNavLists.length){
     allNavLists = [...allNavLists,...sideNavLists];
+  }
+
+  // get all brick nav list
+  if (brickNavLists.length){
+    allNavLists = [...allNavLists,...brickNavLists];
   }
 
   if (allNavLists.length){
