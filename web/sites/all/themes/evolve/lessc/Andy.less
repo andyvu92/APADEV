@@ -8477,6 +8477,37 @@ body #section-main-content{
             }
         }
     }
+
+    .link-wrapper{
+        .link-row{
+            padding: 5px 0;
+            border-bottom: 1px solid #E7E8E9;
+            a{
+                &:first-child{
+                    padding-left: 0;
+                }
+                &:last-child{
+                    border-right-width: 0;
+                }
+            }
+        }
+        a {
+            padding: 15px;
+            position: relative;
+            font-family: @font-family-primary;
+            color: @tuna;
+            position: relative;
+            font-size: 18px;
+            line-height: 20px;
+            font-weight: 400;
+            display: inline-block;
+            border-right: 1px solid #E7E8E9;
+            transition: color .3s ease;
+            &:hover{
+                color: @color-primary;
+            }
+        }
+    }
 }
 
 /* SPACING */
