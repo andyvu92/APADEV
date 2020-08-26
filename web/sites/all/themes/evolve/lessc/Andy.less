@@ -363,7 +363,6 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
     }
 }
 
-
 #section-banner{
         .region{
             .home-main-grid{
@@ -8551,6 +8550,180 @@ body #section-main-content{
                     font-weight: 500;
                     text-decoration: underline;
                     margin-top: auto;
+                }
+            }
+        }
+    }
+}
+
+/* GENERAL ARTICLE GRID */
+.general-article-grid{
+    display: flex;
+    margin-left: -15px;
+    margin-right: -15px;
+    .view{
+        display: block;
+        width: 100%;
+    }
+    .dexp-grid-items{
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+
+        .node{
+            padding: 15px;
+            > .content{
+                display: flex;
+                flex-direction: column;
+                border: 0.5px solid #eceef0;
+                position: relative;
+                height: 100%;
+                .link-block{
+                    a{
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 10;
+                    }
+                }
+            }
+            .portfolio-image .field-type-image .field-item{
+                overflow: hidden;
+                align-items: center;
+                justify-content: center;
+                text-align: center;
+                display: flex;
+                min-height: 100px;
+                img{
+                    transform: scale3d(1,1,1);
+                    transition: all .5s ease-in-out;
+                }
+            }
+            &:hover{
+                .portfolio-image .field-type-image .field-item{
+                    img{
+                        transform: scale3d(1.1,1.1,1.1);
+                    }
+                }
+            }
+
+            .item-description{
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                padding: 10px 10px 15px 20px;
+                flex: auto;
+                .link-block{
+                    display: none!important;
+                }
+                h5{
+                    color: black;
+                    font-size: 1.65em;
+                    line-height: 1.1em;
+                    font-weight: 300;
+                }
+                .description{
+                    display: flex;
+                    vertical-align: bottom;
+                    align-items: center;
+                    justify-content: space-between;
+                    padding: 0!important;
+                    margin-top: 35px;
+                    .dateHome{
+                        float: left;
+                        font-size: 13px;
+                        font-weight: 700;
+                    }
+                    .NextIconHolder{
+                        float: right;
+                        width: 31px;
+                        height: 31px;
+                        overflow: hidden;
+                        .NextIcon{
+                            background-image: url('/sites/default/files/CIRCLE POINTERS.png');
+                            background-position: 0 62px;
+                            width: 31px;
+                            height: 31px;
+                        }
+                    }
+                }
+            }
+
+            .HomeType{
+                .field-item{
+                    padding: 0;
+                    z-index: 11;
+                    h2{
+                        margin: 0;
+                        line-height: 16px;
+                        font-size: 16px;
+                        font-family: @font-family-primary;
+                        a{
+                            z-index: 11;
+                            color: white;
+                            text-transform: uppercase;
+                            font-size: 11px;
+                            font-weight: 700;
+                            opacity: 1;
+                            transition: opacity 0.3s ease;
+                            &:hover{
+                                opacity: 0.7;
+                            }
+                        }
+                    }
+                }
+                .taxonomy-term{
+                    a{
+                        background: @color-primary;
+                        padding: 3px 5px;
+                    }
+                    &.Events, .BIP{
+                        a{
+                            background-color: #a2ad00;
+                        }
+                    }
+                    &.Publications, .Extra, .Digital, .Features{
+                        a{
+                            background-color: #009fda;
+                        }
+                    }
+                    &.In.Public{
+                        a{
+                            background-color: #0073B0;
+                        }
+                    }
+                    &.State{
+                        a{
+                            background-color: #004250;
+                        }
+                    }
+                    &.Reconciliation{
+                        a{
+                            background-color: #a25f3b;
+                        }
+                    }
+                    &.latest, .Research{
+                        a{
+                            background-color: #920075;
+                        }
+                    }
+                    &.Highlights{
+                        a{
+                            background-color: #ffa02f;
+                        }
+                    }
+                    &.Forum, .Case.Studies{
+                        a{
+                            background-color: @orange;
+                        }
+                    }
+                    &.Podcast{
+                        a{
+                            background-color: #920075;
+                        }
+                    }
                 }
             }
         }
