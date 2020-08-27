@@ -30,22 +30,22 @@ function nationalIcons(){
              array("MentalHealth","MEN"),
              array("Pain","PAN"),
              array("Orthopaedic","ORT"),
-         ); 
+         );
 		*/
 		// 2.2.20 - GET list of subscribed National Group
-		// Send - 
+		// Send -
 		// Request, User ID
 		// Response -
 		// National Group ID, National Group title
 		//$sendData["RequestNG"] = "RequestNG";
 		$sendData["UserID"] = $_SESSION['UserId'];
 		$nationalGroups = aptify_get_GetAptifyData("20", $sendData);
-		
+
 		//$userIcons = array(0,1,2 ,3,3,5,6,7);
 		$NGs = $nationalGroups["results"];
-	   
-		$length = sizeof($NGs);	
-	
+
+		$length = sizeof($NGs);
+
 		$k =0;
 		if($length == 0){
 			echo "<div class='flex-container flex-flow-row'>
@@ -70,11 +70,11 @@ function nationalIcons(){
 					else{
 						echo "<div class='item'>";
 						}
-					   
+
 				echo "<div class='flex-container flex-flow-row'>";
 				echo "<div class='flex-cell'>";
 					for($j=$k; $j<$k+3; $j++){
-						
+
 						if($j<$length){
 							$pageURL = findPageUrl($NGs[$j]["NGid"]);
 							echo "<div class='flex-col-4'>";
@@ -93,7 +93,7 @@ function nationalIcons(){
 						}
 					}
 				echo "</div>";
-				echo "</div>";	
+				echo "</div>";
 				echo "</div>";
 				$k=$k+3;
 			}
@@ -107,7 +107,7 @@ function nationalIcons(){
 				<span class="sr-only">Next</span>
 				</a>';
 				echo "</div>";
-				
+
 		}
 	    else{
 			echo "<div class='flex-container flex-flow-row'>";
@@ -150,19 +150,19 @@ function magPossible() {
 		if($Subs["ProductID"] == "9978") {
 			$TMag = true;
 		}
-		
+
 		if($Subs["ProductID"] == "9977") {
 			$SMag = true;
 		}
 	}
 	// 2.2.20 - GET list of subscribed National Group
-	// Send - 
+	// Send -
 	// Request, User ID
 	// Response -
 	// National Group ID, National Group title
 	//$sendData["RequestNG"] = "RequestNG";
 	$sendData["UserID"] = $_SESSION['UserId'];
-	$nationalGroups = aptify_get_GetAptifyData("20", $sendData);	
+	$nationalGroups = aptify_get_GetAptifyData("20", $sendData);
 	$NGs = $nationalGroups["results"];
 	$output = ["result" => false, "NG" => null ];
 	$arr = "";
@@ -181,7 +181,7 @@ function magPossible() {
 /*Parameters: $priceList, $cost*/
 /*PD detail page */
 function comparePrice($priceList, $cost){
-	foreach($priceList as $key=>$value) { 
+	foreach($priceList as $key=>$value) {
 		$cost = doubleval($cost);
 		$value = doubleval($value);
 		$valuet = number_format($value,2);
@@ -200,27 +200,27 @@ function comparePrice($priceList, $cost){
 //function checkPDUser($Job, $Professionalbody, $Professionalinsurance, $HearaboutAPA, $Registrationboard, $Dietary, $paymentCardList){
  //if(($Job!=NULL) && ($Professionalbody=="1") && ($Professionalinsurance=="1") && ($HearaboutAPA!=NULL) && ($Registrationboard=="1") && ($Registrationboard=="1") && (sizeof($Dietary)>0) && (sizeof($paymentCardList)>0))
  //{
-	//return "1"; 
+	//return "1";
  //}
 // else{
 	// return "0";
  //}
- 
+
 //}
 function checkPDUser($memberType){
 	if($memberType=="1"){
-		return "1"; 
+		return "1";
 	}
 	else{
-		return "0"; 
-	}	
-}			 
+		return "0";
+	}
+}
 /*General function: save data to APA shopping cart database;*/
 /*Parameters: $userID, $productID,$type;*/
 /*save product data including membership type product, national group product, fellowship & PRF product*/
 function createShoppingCart($userID, $productID,$type,$coupon){
 	/*try {
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 		$dbt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
@@ -231,14 +231,14 @@ function createShoppingCart($userID, $productID,$type,$coupon){
 		$shoppingcartUpdate->bindValue(':productID', $productID);
 		$shoppingcartUpdate->bindValue(':type', $type);
 		$shoppingcartUpdate->bindValue(':coupon', $coupon);
-		$shoppingcartUpdate->execute();	
+		$shoppingcartUpdate->execute();
 		$shoppingcartUpdate = null;
 	} catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
 	}*/
 	// use drupal db_insert by jinghu 20/09/2018
-	$shoppingcartUpdate	=  db_insert('shopping_cart') 
+	$shoppingcartUpdate	=  db_insert('shopping_cart')
 							->fields(array(
 							  'userID' => $userID,
 							  'productID' => $productID,
@@ -246,22 +246,22 @@ function createShoppingCart($userID, $productID,$type,$coupon){
 							  'coupon' => $coupon,
 							))
 							->execute();
-	
+
 }
 // check the user product in case of duplicated shopping cart data
 function checkShoppingCart($userID, $type, $productID){
-		/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+		/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 		try {
 			if($type!=""){
 				$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID and type=:type');
 				$shoppingcartGet->bindValue(':type', $type);}
 			if($productID!=""){
-				$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID and productID=:productID');	
-				$shoppingcartGet->bindValue(':productID', $productID);	
+				$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID and productID=:productID');
+				$shoppingcartGet->bindValue(':productID', $productID);
 			}
-			$shoppingcartGet->bindValue(':userID', $userID);	
+			$shoppingcartGet->bindValue(':userID', $userID);
 			$shoppingcartGet->execute();
-			if($shoppingcartGet->rowCount()>0) { 
+			if($shoppingcartGet->rowCount()>0) {
 				if($type!=""){
 					$shoppingcartDel = $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and type=:type');
 					$shoppingcartDel->bindValue(':type', $type);
@@ -270,18 +270,18 @@ function checkShoppingCart($userID, $type, $productID){
 					$shoppingcartDel = $dbt->prepare('DELETE FROM shopping_cart WHERE userID=:userID and productID=:productID');
 					$shoppingcartDel->bindValue(':productID', $productID);
 			   }
-			   
-			   $shoppingcartDel->bindValue(':userID', $userID);	   
-			   $shoppingcartDel->execute();	
+
+			   $shoppingcartDel->bindValue(':userID', $userID);
+			   $shoppingcartDel->execute();
 			   $shoppingcartDel = null;
 			}
-			$shoppingcartGet = null; 
+			$shoppingcartGet = null;
 	    }
 		catch (PDOException $e) {
 				print "Error!: " . $e->getMessage() . "<br/>";
 				die();
 	    }*/
-		
+
 		/*$shoppingcartGet = db_select('shopping_cart','s');
 		$shoppingcartGet ->fields('s');
 		$shoppingcartGet ->condition('userID', $userID, '=');
@@ -304,10 +304,10 @@ function checkShoppingCart($userID, $type, $productID){
 				$shoppingcartDel ->condition('productID', $productID, '=');
 			}
 			$shoppingcartDel ->execute();
-		//}			
-					
-					
-					
+		//}
+
+
+
 }
 //get productID list from local database;
 function getProduct($userID,$type){
@@ -317,11 +317,11 @@ function getProduct($userID,$type){
 		$shoppingcartGet->bindValue(':userID', $userID);
 		$shoppingcartGet->bindValue(':type', $type);
 		$shoppingcartGet->execute();
-		if($shoppingcartGet->rowCount()>0) { 
+		if($shoppingcartGet->rowCount()>0) {
 			foreach ($shoppingcartGet as $row) {
 				array_push($arrayReturn, $row['productID']);
 			}
-		}	
+		}
 		$shoppingcartGet = null;*/
 		// use drupal db_select by jinghu 20/09/2018
 		$shoppingcartGet = db_select('shopping_cart','s')
@@ -341,9 +341,9 @@ function getProduct($userID,$type){
 
 function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 	$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
-	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 	/*try {
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 		$dbt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	} catch (PDOException $e) {
 		echo 'Connection failed: ' . $e->getMessage();
@@ -364,16 +364,16 @@ function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 			$shoppingcartUpdate->bindValue(':meetingID', $meetingID);
 			$shoppingcartUpdate->bindValue(':type', $type);
 			$shoppingcartUpdate->bindValue(':Coupon', $Coupon);
-			$shoppingcartUpdate->execute();	
+			$shoppingcartUpdate->execute();
 			$shoppingcartUpdate = null;
 		}
-	
+
 		$wishlistDel= $dbt->prepare('DELETE FROM wishlist WHERE productID=:productID AND userID=:userID AND source=:source');
 		$wishlistDel->bindValue(':productID', $productID);
 		$wishlistDel->bindValue(':userID', $userID);
 		$wishlistDel->bindValue(':source', $type);
 		$wishlistDel->execute();
-		$wishlistDel = null;		
+		$wishlistDel = null;
 	}
 	catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
@@ -391,7 +391,7 @@ function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 		header("Location:".$link."/pd/pd-product?id=".$meetingID);
 	}
 	else{
-		$shoppingcartUpdate	=  db_insert('shopping_cart') 
+		$shoppingcartUpdate	=  db_insert('shopping_cart')
 							->fields(array(
 							  'userID' => $userID,
 							  'productID' => $productID,
@@ -402,7 +402,7 @@ function PDShoppingCart($userID, $productID, $meetingID,$type,$Coupon){
 							->execute();
 	}
 	header("Location:".$link."/pd/pd-product?saveShoppingCart&id=".$meetingID);
-	
+
 }
 //get productID list from local database;
 function getPDProduct($userID,$type){
@@ -424,11 +424,11 @@ function deletePDProduct($userID,$productID,$deltype){
 		$shoppingcartDel ->condition('userID', $userID, '=');
 		$shoppingcartDel ->condition('productID', $productID, '=');
 		$shoppingcartDel ->condition('type', $deltype, '=');
-		$shoppingcartDel ->execute();			
-		
+		$shoppingcartDel ->execute();
+
 }
 function PDSaveCoupon($userID, $type, $Coupon){
-	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 	// use drupal db_update by jinghu 18/09/2018
 	/*try {
 	$shoppingcartSave= $dbt->prepare('UPDATE shopping_cart SET Coupon = :Coupon WHERE userID= :userID AND type= :type');
@@ -436,12 +436,12 @@ function PDSaveCoupon($userID, $type, $Coupon){
 	$shoppingcartSave->bindValue(':type', $type);
 	$shoppingcartSave->bindValue(':Coupon', $Coupon);
 	$shoppingcartSave->execute();
-	$shoppingcartSave= null;               
+	$shoppingcartSave= null;
 	} catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
 	}*/
-	
+
 	$db_result = db_update('shopping_cart')
 				->fields(array('coupon' => $Coupon,))
 				->condition ('userID', $userID, '=')
@@ -449,13 +449,13 @@ function PDSaveCoupon($userID, $type, $Coupon){
 				->execute();
 }
 function getBackgroundImage($userID){
-	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 	$background=0;
 	/*try {
 		$backgroundInfo= $dbt->prepare('SELECT * FROM background_images WHERE userID= :userID');
 		$backgroundInfo->bindValue(':userID', $userID);
 		$backgroundInfo->execute();
-		if($backgroundInfo->rowCount()>0) { 
+		if($backgroundInfo->rowCount()>0) {
 			foreach ($backgroundInfo as $row) {
 				$background= $row['imageID'];
 				break;
@@ -463,7 +463,7 @@ function getBackgroundImage($userID){
 			return $background;
 		}
 		else{
-			$background=1; 
+			$background=1;
 			return $background;
 		}
 		$backgroundInfo = null;
@@ -478,12 +478,12 @@ function getBackgroundImage($userID){
 					->condition('userID', $userID, '=')
 					->execute()
 					->fetchAssoc();
-	if(!empty($backgroundInfo)) { 
+	if(!empty($backgroundInfo)) {
 	    $background= $backgroundInfo['imageID'];
 		return $background;
 	}
 	else{
-		$background=1; 
+		$background=1;
 		return $background;
 	}
 }
@@ -491,7 +491,7 @@ function getBackgroundImage($userID){
 
 /**
  *  Member only content display controller.
- *  
+ *
  *  $Only -> field_member_content_type
  *  $type -> field_member_type_list
  *
@@ -513,7 +513,7 @@ function MtypeContent($Only, $type) {
 		//echo "F";
 		return "0";
 	} elseif($MemberOnly == "Members only") {
-		/* 
+		/*
 		echo "M";
 		echo "<br>MemberTypeID->".$_SESSION['MemberTypeID'];
 		echo "<br>MemberType->".$_SESSION['MemberType'];
@@ -621,14 +621,14 @@ function SavePDSurvey($CreateNewUserPD){
 		$PDSurvey->bindValue(':Campaignsproduct', $Campaignsproduct);
 		$PDSurvey->bindValue(':Partnerproduct', $Partnerproduct);
 		$PDSurvey->bindValue(':CreateDate', $CreateDate);
-		$PDSurvey->execute();	
+		$PDSurvey->execute();
 		$PDSurvey = null;
 	}
 	catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
-	}*/	
-	$PDSurvey	=  db_insert('pdsurvey') 
+	}*/
+	$PDSurvey	=  db_insert('pdsurvey')
 				->fields(array(
 				  'UserID' => $UserID,
 				  'Job' => $Job,
@@ -646,7 +646,7 @@ function SavePDSurvey($CreateNewUserPD){
 				  'CreateDate' => $CreateDate,
 				))
 				->execute();
-	
+
 }
 // save pd search criteria
 function savePDSearch($pdSearchCriteria){
@@ -663,7 +663,7 @@ function savePDSearch($pdSearchCriteria){
 	$CreateDate = $pdSearchCriteria["CreateDate"];
 	$SearchBDate = $pdSearchCriteria["searchBDate"];
 	$SearchEDate = $pdSearchCriteria["searchEDate"];
-	$PDSearch	=  db_insert('pd_search') 
+	$PDSearch	=  db_insert('pd_search')
 				->fields(array(
 				  'UserID' => $UserID,
 				  'UserEmail' => $UserEmail,
@@ -678,7 +678,7 @@ function savePDSearch($pdSearchCriteria){
 					'CreateDate' => $CreateDate,
 					'searchBDate' => $SearchBDate,
 					'searchEDate' => $SearchEDate,
-					
+
 				))
 				->execute();
 
@@ -695,7 +695,7 @@ function getNGName($ngID){
 	return $ngName;
 }
 function createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type){
-	/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 	$dbt->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	try {
 		$insuranceUpdate= $dbt->prepare('INSERT INTO insurance (UserID, EmailAddress, CreateDate, Type) VALUES (:UserID, :EmailAddress, :CreateDate, :Type)');
@@ -703,14 +703,14 @@ function createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type){
 		$insuranceUpdate->bindValue(':EmailAddress', $EmailAddress);
 		$insuranceUpdate->bindValue(':CreateDate', $CreateDate);
 		$insuranceUpdate->bindValue(':Type', $Type);
-		$insuranceUpdate->execute();	
+		$insuranceUpdate->execute();
 		$insuranceUpdate = null;
 	}
 	catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
 	}*/
-	$insuranceUpdate	=  db_insert('insurance') 
+	$insuranceUpdate	=  db_insert('insurance')
 				->fields(array(
 				  'UserID' => $UserID,
 				  'EmailAddress' => $EmailAddress,
@@ -720,16 +720,16 @@ function createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type){
 				->execute();
 }
 function getInsuranceStatus($UserID){
-	/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+	/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 	try {
 		$insuranceGet= $dbt->prepare('SELECT * FROM insurance WHERE UserID= :UserID');
 		$insuranceGet->bindValue(':UserID', $UserID);
 		$insuranceGet->execute();
-		if($insuranceGet->rowCount()>0) { 
+		if($insuranceGet->rowCount()>0) {
 		    $userTag = 1;
 		}
 		else{
-			$userTag=0; 
+			$userTag=0;
 		}
 		return $userTag;
 	}
@@ -743,37 +743,37 @@ function getInsuranceStatus($UserID){
 					->condition('UserID', $UserID, '=')
 					->execute()
 					->fetchAssoc();
-					
-	if(!empty($insuranceGet)) { 
+
+	if(!empty($insuranceGet)) {
 		$userTag = 1;
 	}
 	else{
-		$userTag=0;  
+		$userTag=0;
 	}
-	return $userTag;	
-	
+	return $userTag;
+
 }
 
 
 /**
  *  Unique multip-dimensionarray function.
- *  
- * 
+ *
+ *
  */
-function unique_multidim_array($array, $key) { 
-    $temp_array = array(); 
-    $i = 0; 
-    $key_array = array(); 
-    
-    foreach($array as $val) { 
-        if (!in_array($val[$key], $key_array)) { 
-            $key_array[$i] = $val[$key]; 
-            $temp_array[$i] = $val; 
-        } 
-        $i++; 
-    } 
-    return $temp_array; 
-} 
+function unique_multidim_array($array, $key) {
+    $temp_array = array();
+    $i = 0;
+    $key_array = array();
+
+    foreach($array as $val) {
+        if (!in_array($val[$key], $key_array)) {
+            $key_array[$i] = $val[$key];
+            $temp_array[$i] = $val;
+        }
+        $i++;
+    }
+    return $temp_array;
+}
 
 //get productID list from local database;
 function getProductList($userID){
@@ -782,11 +782,11 @@ function getProductList($userID){
 	$shoppingcartGet = $dbt->prepare('SELECT * FROM shopping_cart WHERE userID=:userID AND productID != "PRF" AND type != "PD" AND type != "PDNG" AND type != "PDMG"');
 	$shoppingcartGet->bindValue(':userID', $userID);
 	$shoppingcartGet->execute();
-	if($shoppingcartGet->rowCount()>0) { 
+	if($shoppingcartGet->rowCount()>0) {
 		foreach ($shoppingcartGet as $row) {
 			array_push($arrayReturn, $row['productID']);
 		}
-	}	
+	}
 	$shoppingcartGet = null;*/
 	// use drupal db_update by jinghu 20/09/2018
 	$shoppingcartGet = db_select('shopping_cart','s')
@@ -803,9 +803,9 @@ function getProductList($userID){
 		foreach ($shoppingcartGet as $row) {
 			array_push($arrayReturn, $row['productID']);
 		}
-	}					
+	}
 	return $arrayReturn;
-} 
+}
 function checkRenew($Paidthrough, $tag){
 	$renewStatus = variable_get('renew_active_status', RENEW_ACTIVE_STATUS);
 	if($renewStatus) {
@@ -825,12 +825,35 @@ function checkRenew($Paidthrough, $tag){
 		return false;
 	}
 }
+// get different subscriptions descriptions
+function getDescription($str){
+  switch($str){
+    case "Employment opportunities":
+      return "Updates on physiotherapy positions available across Australian and internationally";
+    case "News and articles":
+      return "Keep up-to-date with the profession with the latest news and articles covering all areas of physiotherapy";
+    case "Research":
+      return "Physiotherapy research, research updates and research participation and opportunities";
+    case "National Group Communications":
+      return "Annual subscriptions to 20 special-interest National Groups can be purchased for a small fee and include professional development discounts, relevant updates and access to a community of like-minded peers.";
+    case "Professional Development":
+      return "World-leading professional development opportunities offered in a variaty of online and offline styles at a discounted rate to members. PD communications will be tialored to your location and interests";
+    case "Conferences and Events":
+      return "Updates on upcoming conferences and events";
+    case "Member updates":
+      return "Important updates on the physiotherapy profession, advocacy, the APA and more";
+    case "Essential Communications":
+      return "Essential communications will be delivered via the most relevant channel. These communications are mandatory and cannot be opted-out of.";
+    case "Third party communications":
+      return "Third party communications are delivered via the APA and APA channels. Your information will not be provided to any third parties";
+  }
+}
 // sort array by specific key
 function cmp($a, $b)
     {
         return strcmp($a['Country'], $b['Country']);
     }
-// find product ID in national group page	
+// find product ID in national group page
 function findPID($ngtag){
 	switch($ngtag){
 		case "201":
@@ -875,7 +898,7 @@ function findPID($ngtag){
 			return "10021";
 		case "223":
 			return "10015";
-		
+
 	}
 }
 //find the NG page url for NG type
@@ -921,8 +944,8 @@ function findPageUrl($nid){
 			return "gerontology";
 		case "21":
 			return "womens-mens-and-pelvic-health";
-		
-		
+
+
 	}
 }
 function checkSP($products){

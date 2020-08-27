@@ -4,7 +4,7 @@ if(!function_exists('drupal_session_started'))
   die("Unauthorized Access");
 }
 ?>
-<?php if(isset($_SESSION["UserId"])) : 
+<?php if(isset($_SESSION["UserId"])) :
 //include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 apa_function_updateBackgroundImage_form();
 /* get background image****/
@@ -13,7 +13,7 @@ $background = getBackgroundImage($userID);
 /* get background image****/
 /* We may use this as "Session" data and won't need to load. */
 // 2.2.20 - GET list of subscribed National Group
-// Send - 
+// Send -
 // User ID
 // Response -
 // National Group ID, National Group title
@@ -24,7 +24,7 @@ $sendData["UserID"] = $_SESSION['UserId'];
 
 /* We may use this as "Session" data and won't need to load. */
 // 2.2.22 - Get list of subscribed Fellowship Products
-// Send - 
+// Send -
 // UserID
 // Response -
 // List of Fellowship ID and its titles.
@@ -43,7 +43,7 @@ foreach($Fellow as $Subs) {
 //print_r($Fellows);
 /* We may use this as "Session" data and won't need to load. */
 // 2.2.23 - GET list of subscription preferences
-// Send - 
+// Send -
 // UserID
 // Response -
 // List of subscriptions and its T/F values.
@@ -167,12 +167,13 @@ if(count($PostArray) == 0) { // GET data
 	$ArrayReturn["Consents"] = $consArray;
 	echo "<br /><br />";
 	// 2.2.24 - Update subscription preferences
-	// Send - 
+	// Send -
 	// UserID, List of subscriptions and its F/F values.
 	// Response -
 	// Response, List of subscriptions and it's T/F values.
-	$subscriptions = aptify_get_GetAptifyData("24", $ArrayReturn);
-	
+  $subscriptions = aptify_get_GetAptifyData("24", $ArrayReturn);
+
+
 }
 
 ?>
@@ -195,68 +196,87 @@ apa_function_dashboardLeftNavigation_form();
 				<p><span style="color:#009fda; font-size: 1.2em;"><strong>What you're signed up for</strong></span></p>
 				<form action="/subscriptions" method="POST">
 					<input name="validator" tyle="hidden" value="0" style="display: none;" />
-					<ul>
-						<?php
-							$countSubs = count($Subscription);
-							$countSubType = $countSubs%2;
-							$counter = 0;
-							foreach($SubListAll as $Subs) {
-								$counter++;
-								if($Subs["SubscriptionID"] == "28" || $Subs["SubscriptionID"] == "30") {
+					<div>
+            <?php
+
+              $countSubs = count($Subscription);
+             	$countSubType = $countSubs%2;
+              $counter = 0;
+             	foreach($SubListAll as $Subs) {
+                $counter++;
+               	if($Subs["SubscriptionID"] == "28" || $Subs["SubscriptionID"] == "30") {
 									// 28 for Insurance
-									// 30 for Titled???? (suddenly appeared)
+                  // 30 for Titled???? (suddenly appeared)
+
 								} else {
 									if($counter < 2) {
 										// for normal subscriptions
 										// from 1st item
 										echo '
-											<li>
+											<div>
 												<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
 												'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
-												if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){ 
+												if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){
 													echo "checked='checked'";
 												}
 												echo '>
 												<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
 												.'</label>
-											</li>';
+                      </div>';
+
 									} elseif($counter < 4) {
 										// for extra magazine copy
 										foreach($MagSubs as $mags) {
 											$tt = strpos($Subs["Subscription"], $mags);
 											if($tt !== FALSE) {
 												echo '
-												<li>
+												<div>
 													<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
 													'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'" checked="checked" disabled />
 													<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
 													.'</label>
-												</li>';
+												</div>';
 											}
 										}
-									} else {									
-										// for InMotion print copy
+									} else {
+                    // for InMotion print copy
+
 										if(($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") && $Subs["SubscriptionID"] == "18") {
-											// No InMotion print copy for 
+											// No InMotion print copy for
 											// student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
 										} else {
-											echo '
-											<li>
+                      $description = getDescription($Subs["Subscription"]);
+                      $extraSub = $counter>8?"extra-subscriptions":"";
+                      $extraClass = $counter>8?"column":"";
+                      $parentBeginElement ="";
+                      $parentEndElement ="";
+                      $findMore = "";
+                      if($counter==9){$parentBeginElement = '<div class="subscriptions-dashboard flex-container">';}
+                      if($counter==$countSubs){$parentEndElement ="</div>";}
+                      if($Subs["Subscription"]=="National Group Communications"){$findMore = "<br>Find out more(https://australian.physio/membership/national-groups)";}
+                      echo $parentBeginElement.'
+											<div class="'.$extraClass.'">
 												<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
 												'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
-												if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){ 
+												if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){
 													echo "checked='checked'";
 												}
 												echo '>
-												<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'">'.$Subs["Subscription"]
-												.'</label>
-											</li>';
+												<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'"><span class="'.$extraSub.'">'.$Subs["Subscription"]
+                        .'</span></label><span class="extra-description">'.$description;
+                        if($Subs["Subscription"]=="National Group Communications") { echo "<br>";
+                        echo 'Find out more (<a href="https://australian.physio/membership/national-groups">https://australian.physio/membership/national-groups</a>)';
+
+                       }
+
+                        echo '</span>
+											</div>'.$parentEndElement;
 										}
 									}
 								}
 							}
 						?>
-					</ul>
+					</div>
 					<button id="your-details-submit-button" class="dashboard-button dashboard-bottom-button subscriptions-submit"><span class="dashboard-button-name">Submit</span></button>
 				</form>
 			</div>
@@ -264,7 +284,7 @@ apa_function_dashboardLeftNavigation_form();
 	</div>
 	<?php logRecorder(); ?>
 </div>
- <?php else : 
+ <?php else :
 	// when user is not logged in
 	?>
 	<!-- NON-LOGIN USERS -->
@@ -277,10 +297,10 @@ apa_function_dashboardLeftNavigation_form();
 				<a href="/membership-question" class="join">Join now</a>
 			</div>
 
-			<?php 
+			<?php
 					$block = block_load('block', '309');
 					$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-					$output = drupal_render($get);        
+					$output = drupal_render($get);
 					print $output;
 			?>
 

@@ -780,6 +780,27 @@ input[id^="Additional-qualifications"] {
     font-size: 1em;
     font-weight: 600;
 }
+/*----Subscriptions Dashboard ----*/
+.subscriptions-dashboard.flex-container{
+  display: flex;
+  flex-direction: column;
+  height:460px;
+  @media all and (max-width: @larger-desktop-width) {
+    height:539px;
+  }
+  width: 50%;
+}
+.extra-subscriptions{
+  font-weight: 600;
+}
+.extra-description{
+  margin-left: 40px;
+  font-weight: 400;
+  display: inline-block;
+}
+.subscriptions-dashboard .column{
+  margin-right: 10px;
+}
 /*--BUTTON STYLES--*/
 a.accent-btn, button.accent-btn{
     float: none;
