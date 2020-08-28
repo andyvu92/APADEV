@@ -781,26 +781,65 @@ input[id^="Additional-qualifications"] {
     font-weight: 600;
 }
 /*----Subscriptions Dashboard ----*/
-.subscriptions-dashboard.flex-container{
-  display: flex;
-  flex-direction: column;
-  height:460px;
-  @media all and (max-width: @larger-desktop-width) {
-    height:539px;
-  }
-  width: 50%;
+.dashboard_detail {
+    span.label-text {
+        font-weight: 600;
+    }
+    .subscriptions-dashboard.flex-container{
+        display: flex;
+        flex-direction: column;
+        height:460px;
+        width: 50%;
+        margin-bottom: 15px;
+        @media (min-width: @desktop-width) and (max-width: @larger-desktop-width) {
+            height:485px;
+        }
+        @media (min-width: @larger-tablet-width) and (max-width: @desktop-width) {
+            height:550px;
+        }
+        @media (min-width: @tablet-width) and (max-width: @larger-tablet-width) {
+            height:585px;
+        }
+        @media all and (max-width: @tablet-width) {
+            width: 100%;
+            height: auto;
+        }
+        .column{
+            margin-right: 10px;
+        }
+        .functional-title {
+            width: 100%;
+            min-height: 26px;
+            .subscription-title{
+                float: left;
+            }
+            [class^="description_info"]{
+                position: relative;
+                display: none;
+                width: 20px;
+                height: 20px;
+                margin-right: 7px;
+                float: right;
+                cursor: zoom-in;
+                background-image: url("/sites/default/files/dashboard-icon/plus-icon-G.png");
+                background-position: center center;
+                background-size: contain;
+                @media all and (max-width: @tablet-width) {
+                    display: flex;
+                }
+            }
+        }
+        [class^="extra-description"]{
+            margin-left: 40px;
+            font-weight: 400;
+            display: inline-block;
+            @media all and (max-width: @tablet-width) {
+                display: none;
+            }
+        }
+    }
 }
-.extra-subscriptions{
-  font-weight: 600;
-}
-.extra-description{
-  margin-left: 40px;
-  font-weight: 400;
-  display: inline-block;
-}
-.subscriptions-dashboard .column{
-  margin-right: 10px;
-}
+
 /*--BUTTON STYLES--*/
 a.accent-btn, button.accent-btn{
     float: none;

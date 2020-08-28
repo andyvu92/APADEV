@@ -1299,7 +1299,12 @@ jQuery(document).ready(function($) {
 		$( "#installmentpolicyWindow" ).dialog();
 	});
 
-
+	// Dashboard - subscription page - click to expand description for mobile
+	$('[class^=description_info]').click(function(){
+		var x = $(this).attr("class").replace('description_info', '');
+		console.log("click in with x:"+x);
+		$('.extra-description'+x).slideToggle(450).css('display', 'inline-block');
+	});
 
 	/*$('[id=Nationalgp]').change(function(){
 	    if(jQuery.inArray( "10021", $('select[id=Nationalgp]').val())!==-1)
@@ -2255,7 +2260,6 @@ $(document).on('click', '#skipDietary ', function(){
 	$(".OthersiteButtonClose").click( function() {
 		$(".OtherSitesList").removeClass('expand');
 	});
-
 });
 
 // PREFIX "PHY" FOR AHPRA NUMBER AND INPUT RULES
@@ -2338,5 +2342,4 @@ $(document).on('blur', 'input[name=Cardnumber], input[name=Expirydate]', functio
 	else{
 		$('.duplicatedMessage').remove();
 	}
-
 });
