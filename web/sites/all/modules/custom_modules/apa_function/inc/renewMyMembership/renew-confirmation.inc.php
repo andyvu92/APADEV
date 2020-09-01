@@ -7,13 +7,14 @@ if(isset($_POST['step3'])) {
 	$postReviewData['InsuranceApplied'] = 0;
 	if(isset($_POST['PRFFinal'])) {$postReviewData['PRFdonation'] = $_POST['PRFFinal'];}else{ $postReviewData['PRFdonation'] = "";}
 	//added by merged steps
-	if(isset($_SESSION['UserId'])){ $postReviewData['userID'] = $_SESSION['UserId']; } 
+	if(isset($_SESSION['UserId'])){ $postReviewData['userID'] = $_SESSION['UserId']; }
 	if(isset($_POST['Paymentoption'])){ $postReviewData['Paymentoption'] = $_POST['Paymentoption'] == '1' ? 1:0; }
-	//if(isset($_POST['Installpayment-frequency'])){ $postReviewData['InstallmentFrequency'] = $_POST['Installpayment-frequency']; }
+  if(isset($_POST['appliedCoupon'])){$postReviewData['CampaignCode'] = $_POST['Paymentoption'] == '1' ? "":$_POST['appliedCoupon'];}
+  //if(isset($_POST['Installpayment-frequency'])){ $postReviewData['InstallmentFrequency'] = $_POST['Installpayment-frequency']; }
 	$postReviewData['InstallmentFrequency'] = $_POST['Paymentoption'] == '1' ? "Monthly":"";
-	//handle new card 
+	//handle new card
 	if(isset($_POST['addCard']) && $_POST['addCard']=="1"){
-		$postReviewData['Card_number'] = "";	
+		$postReviewData['Card_number'] = "";
 		$postReviewData['PaymentTypeID'] = $_POST['Cardtype'];
 		$postReviewData['CCNumber'] = $_POST['Cardnumber'];
 		$postReviewData['CCExpireDate'] = $_POST['Expirydate'];
@@ -29,11 +30,11 @@ if(isset($_POST['step3'])) {
 			$out = aptify_get_GetAptifyData("15", $postPaymentData);
 		}
 	}
-	
+
 	//handle using existed card scenario
 	elseif(isset($_POST['Paymentcard']) && !isset($_POST['anothercard'])){
-		$postReviewData['Card_number'] = $_POST['Paymentcard']; 
-		if($_POST['Paymentoption']=="1"){ 
+		$postReviewData['Card_number'] = $_POST['Paymentcard'];
+		if($_POST['Paymentoption']=="1"){
 			$updateCardSubmit["UserID"] = $_SESSION['UserId'];
 			$updateCardSubmit["SpmID"] = $_POST['Paymentcard'];
 			$updateCardSubmit["ExpireMonthYear"] = "";
@@ -41,12 +42,12 @@ if(isset($_POST['step3'])) {
 			$updateCardSubmit["IsDefault"] = "1";
 			$updateCardSubmit["IsActive"] = "";
 			// 2.2.13 - update payment method-3-set main card
-			// Send - 
+			// Send -
 			// UserID, Creditcard-ID
 			// Response -
 			// N/A.
-			$updateCards = aptify_get_GetAptifyData("13", $updateCardSubmit);  
-		} 
+			$updateCards = aptify_get_GetAptifyData("13", $updateCardSubmit);
+		}
 		$postReviewData['PaymentTypeID'] = "";
 		$postReviewData['CCNumber'] = "";
 		$postReviewData['CCExpireDate'] = "";
@@ -55,13 +56,13 @@ if(isset($_POST['step3'])) {
 	//end merged steps
 
 
-	
 
-	
-	
+
+
+
 	//This is to get the renewal quatation order details from Aptify!!!!!!!!
 	// 2.2.45 - Renewal Quatation OrderID
-	// Send - 
+	// Send -
 	// userID
 	// Response -Renewal Quatation OrderID
 	$variableData['id'] = $_SESSION["UserId"];
@@ -69,11 +70,11 @@ if(isset($_POST['step3'])) {
 	foreach ($Quatation["results"] as $quatationOrderArray){
 		$quatationOrderID =  $quatationOrderArray["ID"];
 	}
-	
+
 	$postReviewData['OrderID'] = $quatationOrderID;
-		
+
 	// 2.2.27 - Renew a membership order
-	// Send - 
+	// Send -
 	// userID&Paymentoption&PRFdonation&Rollover&Card_number&productID
 	// Response -Renew a membership order successfully
 	//submit data to complete renew membership web service 2.2.27
@@ -110,7 +111,7 @@ if(isset($_POST['step3'])) {
 	completeOrderDeleteSession();
 	// delete shopping cart data from APA database; put the response status validation here!!!!!!!
 					$userID = $_SESSION["UserId"];
-					
+
 		// use drupal db_select by jinghu 20/09/2018
 		$type = "membership";
 		checkShoppingCart($userID, $type, $productID="");
@@ -121,7 +122,7 @@ if(isset($_POST['step3'])) {
 		$type = "MG2";
 		checkShoppingCart($userID, $type, $productID="");
 		$productID = "PRF";
-		checkShoppingCart($userID, $type="", $productID);			
+		checkShoppingCart($userID, $type="", $productID);
 	}
 }
 else{
@@ -131,12 +132,12 @@ else{
 <?php
 //include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
  apa_function_updateBackgroundImage_form();
-//include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php'); 
+//include('sites/all/themes/evolve/commonFile/dashboardLeftNavigation.php');
 apa_function_dashboardLeftNavigation_form();
 /* get background image****/
 if(isset($_SESSION['UserId'])) { $userID = $_SESSION['UserId'];} else { $userID =0; }
 $background = getBackgroundImage($userID);
-/* get background image****/      
+/* get background image****/
 ?>
 <div id="pre_background" style="display:none">background_<?php //echo $background; ?></div>
 <div class="col-xs-12 background_<?php //echo $background; ?>" id="dashboard-right-content">
@@ -148,25 +149,25 @@ $background = getBackgroundImage($userID);
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
 
 				<?php if($renewOuts['MResponse'] =="Order updated successfully"): ?>
-					<?php 
+					<?php
 					// after web service 2.2.26 Aptify response the invoice_id;
 					// 2.2.18 Get payment invoice PDF
-					// Send - 
+					// Send -
 					// UserID & Invoice_ID
 					// Response -Invoice PDF
 					$send["UserID"] = $_SESSION["UserId"];
-					$send["Invoice_ID"] = $invoice_ID;  
-					//$invoiceAPI = GetAptifyData("18", $send); 
+					$send["Invoice_ID"] = $invoice_ID;
+					//$invoiceAPI = GetAptifyData("18", $send);
 					//$apis[0] = $invoice_ID;
 					//$invoiceAPI = GetAptifyData("18", $apis);
-					?> 
+					?>
 					<?php /*
 					<a class="download-link" data-toggle="modal" data-target="#Iaksbnkvoice"><span class="invoice-icon"></span><span class="invoice-text">Download Invoice</span></a>
 					*/
 					?>
                     <?php
 				    // record member log for successful process
-					if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+					if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
 					$addMemberLog["orderID"] = $postReviewData['OrderID'];
 					$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($renewOuts);
 					$addMemberLog["createDate"] = date('Y-m-d');
@@ -237,7 +238,7 @@ $background = getBackgroundImage($userID);
 	</div>
 </div>
 <form id="renew-survey-form2" action="/renewmymembership" method="POST"><input type="hidden" name="QOrder"></form>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <?php /*
@@ -251,7 +252,7 @@ $background = getBackgroundImage($userID);
 		width: 100%;
 		height: 100%;
 	}
-</style> 
+</style>
 <script>
 $(document).ready(function() {
 	if (window.frames["Iaksbnkvoice"] && !window.userSet) {
@@ -261,24 +262,24 @@ $(document).ready(function() {
 });
 </script>
 */ ?>
-<?php logRecorder();  ?>	
+<?php logRecorder();  ?>
 <script>
 $(document).ready(function() {
-	window.history.pushState(null,"", "/renewmymembership");        
+	window.history.pushState(null,"", "/renewmymembership");
 	window.onpopstate = function() {
 		window.history.pushState(null, "", "/renewmymembership");
 	};
-	$(function () {  
-        $(document).keydown(function (e) {  
-            return (e.which || e.keyCode) != 116;  
-		}); 
-		$(document).keydown(function (e) {  
-            return (e.which || e.keyCode) != 78;  
-		}); 
-		$(document).keydown(function (e) {  
-            return (e.which || e.keyCode) != 82;  
-		}); 
-		  
-    });  
+	$(function () {
+        $(document).keydown(function (e) {
+            return (e.which || e.keyCode) != 116;
+		});
+		$(document).keydown(function (e) {
+            return (e.which || e.keyCode) != 78;
+		});
+		$(document).keydown(function (e) {
+            return (e.which || e.keyCode) != 82;
+		});
+
+    });
  });
 </script>

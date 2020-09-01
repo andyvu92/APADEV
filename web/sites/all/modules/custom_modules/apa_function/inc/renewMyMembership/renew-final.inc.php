@@ -1,22 +1,36 @@
-<?php  
+<?php
+//add coupon logic here
+$couponCode ="";
+/***************Save coupon code on APA side******************/
+if(isset($_POST['Couponcode'])) {
+	PDSaveCoupon($userID=$_SESSION['UserId'], $type="membership", $Coupon=$_POST['Couponcode']);
+}
+/***************End Save coupon code on APA side************/
+$productList = getPDProduct($userID,"membership");
+if(sizeof($productList)!=0){
+  foreach ($productList as $productDetail){
+    $couponCode =  $productDetail['coupon'];
+  }
+}
+//end here save coupon
 if(isset($_POST['step2-1'])) {
 	$postInsuranceData = array();
 	$postInsuranceData['ID'] = "-1";
 	$postInsuranceData['EntityName'] = "PersonInsuranceData__c";
-	if(isset($_SESSION['LinkId'])){ $postInsuranceData['PersonID'] = $_SESSION['LinkId']; } 
+	if(isset($_SESSION['LinkId'])){ $postInsuranceData['PersonID'] = $_SESSION['LinkId']; }
 	if(isset($_POST['Claim'])){ $postInsuranceData['MalpracticeClaim'] = $_POST['Claim']; }
 	if(isset($_POST['Facts'])){ $postInsuranceData['InsuredClaimRisk'] = $_POST['Facts']; }
 	if(isset($_POST['Disciplinary'])){ $postInsuranceData['ExternalDisciplinaryProceedings'] = $_POST['Disciplinary']; }
 	if(isset($_POST['Decline'])){ $postInsuranceData['InsurerDeclinedInsurance'] = $_POST['Decline']; }
 	if(isset($_POST['Oneclaim'])){ $postInsuranceData['MoreThanOneClaim'] = $_POST['Oneclaim']; }
-	if(isset($_POST['Businiessname'])){ $postInsuranceData['BusinessNameOwned'] = $_POST['Businiessname']; }	
+	if(isset($_POST['Businiessname'])){ $postInsuranceData['BusinessNameOwned'] = $_POST['Businiessname']; }
 	if($_POST['Addtionalquestion']=="1"){
 		if(isset($_POST['Yearclaim'])){ $postInsuranceData['Yearofclaim'] = $_POST['Yearclaim']; }
 		if(isset($_POST['Nameclaim'])){ $postInsuranceData['ClaimantName'] = $_POST['Nameclaim']; }
 		if(isset($_POST['Fulldescription'])){ $postInsuranceData['Description'] = $_POST['Fulldescription']; }
 		if(isset($_POST['Amountpaid'])){ $postInsuranceData['AmountPaid'] = $_POST['Amountpaid']; }
 		if(isset($_POST['Finalisedclaim'])){ $postInsuranceData['ClaimFinalised'] = $_POST['Finalisedclaim']; }
-		
+
 	}
 	else{
 		$postInsuranceData['Yearofclaim'] ="";
@@ -24,12 +38,12 @@ if(isset($_POST['step2-1'])) {
 		$postInsuranceData['Description']="";
 		$postInsuranceData['AmountPaid'] ="";
 		$postInsuranceData['ClaimFinalised'] ="";
-		
-	}		
-	
+
+	}
+
     // 2.2.40 - Get user insurance data
-	// Send - 
-	// UserID 
+	// Send -
+	// UserID
 	// Response -UserID & insurance data
 	$data = array();
 	$data['ID'] = $_SESSION["UserId"];
@@ -37,31 +51,31 @@ if(isset($_POST['step2-1'])) {
 	if(sizeof($insuarnceData['results'])!=0){
 		if($postInsuranceData['MalpracticeClaim']!=$insuarnceData['results'][0]['Claim'] || $postInsuranceData['InsuredClaimRisk']!=$insuarnceData['results'][0]['Facts'] || $postInsuranceData['ExternalDisciplinaryProceedings']!=$insuarnceData['results'][0]['Disciplinary'] || $postInsuranceData['InsurerDeclinedInsurance']!=$insuarnceData['results'][0]['Decline']|| $postInsuranceData['MoreThanOneClaim']!=$insuarnceData['results'][0]['Oneclaim']){
 		$submitTag=true;
-        		
+
 	}
 		else{$submitTag=false;}
 		if($postInsuranceData['Yearofclaim'] != $insuarnceData['results'][0]['Yearclaim'] || $postInsuranceData['ClaimantName'] != $insuarnceData['results'][0]['Nameclaim'] || $postInsuranceData['Description'] != $insuarnceData['results'][0]['Fulldescription']|| $postInsuranceData['AmountPaid'] != $insuarnceData['results'][0]['Amountpaid']|| $postInsuranceData['ClaimFinalised'] != $insuarnceData['results'][0]['Finalisedclaim']|| $postInsuranceData['BusinessNameOwned'] != $insuarnceData['results'][0]['Businiessname']){
 		$submitTag=true;
-       		
+
 	}
 	else{$submitTag=false;}
-		
+
     }
 	else{
 		$submitTag=true;
 	}
-	  
+
 	// 2.2.41 Send insurance data to Aptify webservice
-	// Send - 
+	// Send -
 	// userID & insurance data
 	// Response -??????????????????????set in the future
-   
+
 	if($submitTag){$testData = aptify_get_GetAptifyData("41", $postInsuranceData); }
 	//force the not eligible user
 	//added on 13/08/2018
 	if(isset($_POST['insuranceStatus'])&& $_POST['insuranceStatus']=="1") {
-		if(isset($_SESSION['UserId'])){ $UserID = $_SESSION['UserId'];  } 
-		if(isset($_SESSION['UserName'])){ $EmailAddress = $_SESSION['UserName'];  } 
+		if(isset($_SESSION['UserId'])){ $UserID = $_SESSION['UserId'];  }
+		if(isset($_SESSION['UserName'])){ $EmailAddress = $_SESSION['UserName'];  }
 		$CreateDate = date('Y-m-d');
 		$Type = "R";
 		createInsuranceStatus($UserID,$EmailAddress,$CreateDate,$Type);
@@ -85,26 +99,26 @@ if(isset($_POST['step2-3'])){
 	if($_POST['step2-3']=="9973" || $_POST['step2-3']=="18247"){
 		unset($_SESSION["FPProductID"]);
 	}
-	
+
 	else{
 		foreach($_SESSION["MGProductID"] as $deleteM){
 			if (($key = array_search($_POST['step2-3'], $deleteM)) !== false) {
 			unset($deleteM[$key]);
-			}    
+			}
 		}
 		//print_r($deleteM);
 		unset($_SESSION["MGProductID"]);
-		
+
 		$afterDelete = array();
 		array_push($afterDelete,$deleteM);
 		$_SESSION["MGProductID"] = $afterDelete;
 	}
-	
+
 }
 
 //delete NG product-------change delete NG product process at 31/07/2018
 if(isset($_POST['step2-4'])){
-	
+
 	checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID=$_POST['step2-4']);
 	if(isset($_POST['delMACP']) && $_POST['delMACP']=="1"){checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID="18247");
 		unset($_SESSION["FPProductID"]);
@@ -123,12 +137,12 @@ if(isset($_POST['step2-4'])){
 			if (sizeof($userMG1Product) != 0) {
 				array_push($userMGProduct, $userMG1Product);
 			}
-			
+
 			$userMG2Product = getProduct($_SESSION['UserId'], "MG2");
 			if (sizeof($userMG2Product) != 0) {
 				array_push($userMGProduct, $userMG2Product);
 			}
-			
+
 			if (sizeof($userMGProduct) != 0) {
 				$_SESSION["MGProductID"] = $userMGProduct;
 			}
@@ -150,7 +164,7 @@ function deleteMGR($totalMGProduct, $NGProduct, $userID){
 	/* delete MACP product
 	if($NGProduct == "10015") {
 		checkShoppingCart($userID=$_SESSION['UserId'],$type="",$prodcutID="18247");
-		
+
 	}*/
 
 }
@@ -159,7 +173,7 @@ function deleteMGR($totalMGProduct, $NGProduct, $userID){
 /***********End delete MG Product when required********/
 
 	// 2.2.15 Add payment method
-	// Send - 
+	// Send -
 	// UserID&Payment-method&Name-on-card&Cardno&Expiry-date&CCV
 	// Response - Add payment card successful
 
@@ -170,31 +184,31 @@ function deleteMGR($totalMGProduct, $NGProduct, $userID){
 		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate']; }
 		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV']; }
 		$out = aptify_get_GetAptifyData("15", $postPaymentData);
-		
+
 }*/
 /*elseif(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])){
 	$tempcard = array();
 	$tempcard['Payment-method'] = $_POST['Cardtype'];
 	$tempcard['Cardno'] = $_POST['Cardnumber'];
 	$tempcard['Name-on-card'] = $_POST['Cardname'];
-	$tempcard['Expiry-date'] = $_POST['Expirydate']; 
+	$tempcard['Expiry-date'] = $_POST['Expirydate'];
 	$tempcard['CCV'] = $_POST['CCV'];
 	if(isset($_SESSION['tempcard'])){ unset($_SESSION["tempcard"]);}
 	$_SESSION['tempcard'] = $tempcard;
-		
+
 }*/
 //For pay in full scenario
 $postFullData['userID'] = $_SESSION['UserId'];
 $postFullData['Paymentoption'] = 0;
 $postFullData['InstallmentFor'] = "Membership";
 $postFullData['InstallmentFrequency'] = "";
-$postFullData['PRFdonation'] = "0"; 
+$postFullData['PRFdonation'] = "0";
 $postFullData['productID'] = getProductList($_SESSION['UserId']);
-$postFullData['CampaignCode'] = "";
+$postFullData['CampaignCode'] = $couponCode;
 $fullDetails = aptify_get_GetAptifyData("47", $postFullData);
 //Get calculating the Order Total and Schedule Payments for instalments scenario
 // 2.2.47 Get calculating the Order Total and Schedule Payments
-// Send - 
+// Send -
 // userID & Paymentoption & InstallmentFor & InstallmentFrequency & PRFdonation & productID & CampaignCode
 // Response -AdminFee & SubTotal & GST & OrderTotal & InitialPaymentAmount & OccuringPayment & LastPayment
 //$reviewData = $_SESSION["postReviewData"] ;
@@ -202,13 +216,13 @@ $postScheduleData['userID'] = $_SESSION['UserId'];
 $postScheduleData['Paymentoption'] = 1;
 $postScheduleData['InstallmentFor'] = "Membership";
 $postScheduleData['InstallmentFrequency'] = "Monthly";
-$postScheduleData['PRFdonation'] = "0"; 
+$postScheduleData['PRFdonation'] = "0";
 $postScheduleData['productID'] = getProductList($_SESSION['UserId']);
 $postScheduleData['CampaignCode'] = "";
 $scheduleDetails = aptify_get_GetAptifyData("47", $postScheduleData);
 
 // 2.2.31 Get Membership prodcut price
-// Send - 
+// Send -
 // userID & product list
 // Response -Membership prodcut price
 $prodcutArray = array();
@@ -219,7 +233,7 @@ if(sizeof($prodcutArray)!=0){
 	$memberProducts = aptify_get_GetAptifyData("31", $memberProdcutID);
 }
 // 2.2.19 - GET list National Group
-// Send - 
+// Send -
 // userID
 // Response -National Group product
 $sendData["UserID"] = $_SESSION['UserId'];
@@ -227,7 +241,7 @@ $NGListArray = aptify_get_GetAptifyData("19", $sendData);
 //print_r($NGListArray);
 if(isset($_SESSION["NationalProductID"])) {$NGProductsArray=$_SESSION["NationalProductID"];} else{$NGProductsArray=array();}
 // 2.2.21 - GET Fellowship product price
-// Send - 
+// Send -
 // userID
 // Response -Fellowship product list
 $FPListArray = array();
@@ -241,7 +255,7 @@ if(isset($_SESSION["MGProductID"])){
 	foreach($_SESSION["MGProductID"] as $singleM){
 	    foreach($singleM as $key => $value){
 			array_push($fpProdcutArray,$value);
-			
+
 		}
 	}
 }
@@ -250,18 +264,18 @@ if(sizeof($fpProdcutArray)!=0){
 	$FPListArray = aptify_get_GetAptifyData("21", $fpData);
 }
 	// 2.2.12 - Get payment list
-	// Send - 
-	// UserID 
+	// Send -
+	// UserID
 	// Response -payment card list
 	$test['id'] = $_SESSION["UserId"];
 	$cardsnum = aptify_get_GetAptifyData("12", $test);
 	//print_r($cardsnum);
 	$PRFPrice = 0;
-?> 
+?>
 <div id="tipsBlock" class="<?php //if(isset($_POST['insuranceStatus'])&& $_POST['insuranceStatus']=="1") {echo "display";} else { echo "display-none";}?>"></div>
 <form id ="join-review-form" action="renewconfirmation" method="POST">
 
-<?php if (isset($_POST['addCard']) && $_POST['addCard'] == "1"): ?>  
+<?php if (isset($_POST['addCard']) && $_POST['addCard'] == "1"): ?>
 	   <?php if($out["result"]=="Failed"):?>
 			<?php if($out["Message"]=="Expiry date lenght should be 4."):?>
 			<div class="checkMessage">Please go back to enter a valid expiry date before proceeding with your order. </div>
@@ -279,10 +293,10 @@ if(sizeof($fpProdcutArray)!=0){
 			<div class="checkMessage">Please go back to enter a valid credit card number before proceeding with your order. </div>
 			<?php else:?>
 			<div class="checkMessage">There was an unexpected error with your payment details, please go back and check they are correct, or contact the APA.</div>
-			<?php endif;?>	
-		<?php endif;?>		
+			<?php endif;?>
+		<?php endif;?>
 <?php endif;?>
-<div class="down6" <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")|| isset($_POST['QOrder']) || isset($_POST['goP'])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
+<div class="down6" <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")|| isset($_POST['QOrder']) || isset($_POST['goP'])||isset($_POST['step2-3']) ||isset($_POST['step2-4']) ||isset($_POST['Couponcode']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?> >
 	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 review-main-container">
 	<div class="flex-container join-apa-final flex-table">
 				<div class="flex-cell flex-flow-row table-header">
@@ -296,8 +310,8 @@ if(sizeof($fpProdcutArray)!=0){
 						<span class="table-heading">Action</span>
 					</div>
 				</div>
-                
-    			<?php 
+
+    			<?php
 				$price = "";
 				if(sizeof($prodcutArray)!=0){
 					foreach( $memberProducts as $memberProduct){
@@ -306,12 +320,12 @@ if(sizeof($fpProdcutArray)!=0){
 						echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($memberProduct['Price'],2)."</div>";
 						$price += $memberProduct['Price'];
 						echo '<div class="flex-col-2 action-col">';
-								
+
 						echo '<a class="changeMT" target="_self">change</a></div>';
-						echo "</div>";  
+						echo "</div>";
 					}
 				}
-				
+
 				foreach( $NGListArray as $NGArray){
 					if(sizeof($NGProductsArray)!=0){
 						foreach($NGProductsArray as $NGProduct){
@@ -321,10 +335,10 @@ if(sizeof($fpProdcutArray)!=0){
 								echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($NGArray['NGprice'],2)."</div>";
 								$price += $NGArray['NGprice'];
 								echo '<div class="flex-col-2 action-col';
-								if(in_array($NGArray['ProductID'],$_SESSION['ngQuatation'])) { echo " ngtilted";} 
+								if(in_array($NGArray['ProductID'],$_SESSION['ngQuatation'])) { echo " ngtilted";}
 								echo '"><a class="deleteNGButton'.$NGArray['ProductID'].'">delete</a></div>';
 								echo "</div>";
-							}	  
+							}
 						}
 					}
 				}
@@ -337,33 +351,33 @@ if(sizeof($fpProdcutArray)!=0){
 							echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($FProduct['FPprice'],2)."</div>";
 							$price += $FProduct['FPprice'];
 							echo '<div class="flex-col-2 action-col">'; echo '<a class="deleteMGButton'.$FProduct['ProductID'].'">delete</a>'; echo '</div>';
-							echo "</div>";  
+							echo "</div>";
 						}
 				}
-				//if((!isset($_POST['prftag'])) && isset($_POST['PRF'])&& $_POST['PRF']!=""){ 
-				//if($reviewData['PRFdonation']!=""){ 
+				//if((!isset($_POST['prftag'])) && isset($_POST['PRF'])&& $_POST['PRF']!=""){
+				//if($reviewData['PRFdonation']!=""){
                     //echo '<div class="flex-cell flex-flow-row table-cell PRF">
                     /*<div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Physiotherapy Research Foundation donation</div>
                     <div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.number_format($reviewData['PRFdonation'],2).'</div>
                     <div class="flex-col-2 action-col"><a class="deletePRFButton">delete</a></div>
                     </div>'; */
-					//$price +=$reviewData['PRFdonation']; 
+					//$price +=$reviewData['PRFdonation'];
 					//}
-				//if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"){ 
+				//if(isset($reviewData['Paymentoption'])&& $reviewData['Paymentoption']=="1"){
 					//echo '<div class="flex-cell flex-flow-row table-cell">
 					/*<div class="flex-col-8 title-col"><span class="pd-header-mobile">Product name:</span>Admin fee</div>
 					<div class="flex-col-2 price-col"><span class="pd-header-mobile">Price:</span>A$'.number_format($scheduleDetails['AdminFee'],2).'</div>
 					<div class="flex-col-2 action-col"></div>
 					</div>'; */
-							
+
 				//}
 				?>
             </div>
 			<div class="flex-container flex-table total-price">
-				
+
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-8">
-						Subtotal (ex. GST)	
+						Subtotal (ex. GST)
 					</div>
 					<div class="flex-col-4">
 						$<span class="full"><?php echo number_format($fullDetails['SubTotal'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['SubTotal'],2);?></span>
@@ -371,7 +385,7 @@ if(sizeof($fpProdcutArray)!=0){
 				</div>
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-8">
-					GST	
+					GST
 					</div>
 					<div class="flex-col-4">
 			        $<span class="full"><?php echo number_format($fullDetails['GST'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['GST'],2);?></span>
@@ -389,13 +403,13 @@ if(sizeof($fpProdcutArray)!=0){
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 Membpaymentsiderbar">
 	<?php /*****<p><span class="smaller-lead-heading sidebardis<?php if($price==0) echo " display-none";?>">Payment Information:</span></p>
-				<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>"> 
-		<?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>   
+				<div class="paymentsidecredit <?php if($price==0) echo " display-none";?>">
+		<?php if ((sizeof($cardsnum["results"])!=0) && (!isset($_SESSION['tempcard']))): ?>
 			<fieldset>
 				<div class="chevron-select-box">
 					<select class="form-control" id="Paymentcard" name="Paymentcard" readonly>
 					<?php
-						
+
 							foreach( $cardsnum["results"] as $cardnum) {
 								echo '<option value="'.$cardnum["Creditcards-ID"].'"';
 								if($cardnum["IsDefault"]=="1") {
@@ -404,27 +418,27 @@ if(sizeof($fpProdcutArray)!=0){
 							echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
 							echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
 							}
-						
+
 					?>
 					</select>
 				</div>
 			</fieldset>
-		<?php endif; ?>  
+		<?php endif; ?>
 		<?php if(isset($_SESSION['tempcard'])) : ?>
 		<?php $tempcards = $_SESSION['tempcard'];?>
 		    <div class="row">
 				<div class="col-xs-12 col-md-12">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type" disabled>
-					<?php 
+					<?php
 						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 						$PaymentType=json_decode($PaymentTypecode, true);
 						foreach($PaymentType  as $pair => $value){
 							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 							if($tempcards['Payment-method'] == $PaymentType[$pair]['ID']){ echo "selected ";}
 							echo '> '.$PaymentType[$pair]['Name'].' </option>';
-							
+
 						}
-				    ?>	
+				    ?>
 					</select>
 				</div>
 			</div>
@@ -448,7 +462,7 @@ if(sizeof($fpProdcutArray)!=0){
 					<input type="text" class="form-control" id="CCV" name="CCV" value="<?php echo $tempcards['CCV']; ?>" placeholder="CCV" readonly>
 				</div>
 			</div>
-		
+
 		<?php endif; ?>
 		</div>****/?>
 
@@ -464,13 +478,13 @@ if(sizeof($fpProdcutArray)!=0){
 
 				<div class="flex-cell flex-flow-row">
 					<div class="flex-col-12">
-					Today's payment:	
+					Today's payment:
 					</div>
 				</div>
-				
-				
-			
-				<?php  
+
+
+
+				<?php
 					$InitialPaymentAmount = number_format($scheduleDetails['InitialPaymentAmount'],2);
 					$OccuringPayment = number_format($scheduleDetails['OccuringPayment'],2);
 					$LastPayment = number_format($scheduleDetails['LastPayment'],2);
@@ -487,10 +501,10 @@ if(sizeof($fpProdcutArray)!=0){
 					?>
 					</div>
 				</div>
-				
+
 				<div class="flex-cell flex-flow-row">
 					<div class="payment_label">
-						GST	
+						GST
 					</div>
 					<div class="payment_value">
 			        	$<span class="full"><?php echo number_format($fullDetails['GST'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['GST'],2);?></span>
@@ -503,7 +517,7 @@ if(sizeof($fpProdcutArray)!=0){
 					<div class="payment_value">
 						$<span id="PRFshow"><?php echo number_format(5,2);?></span>
 					</div>
-				</div>		
+				</div>
 				<div class="flex-cell flex-flow-row" >
 					<div class="payment_label">
 						Subtotal (ex. GST)
@@ -522,14 +536,19 @@ if(sizeof($fpProdcutArray)!=0){
 						<strong>$<span class="full" id="todayFullAmount"></span><span class="schedule" id="todayScheduleAmount"></span></strong>
 					</div>
 				</div>
-			
+
 					<div class="flex-col-12 schedule" style="text-align: center" id="installmentPop">
-						<a style="margin: 30px 0 0 0;" class="simple-btn" data-target="#schedulePOPUp" data-toggle="modal">View the full list of scheduled payments</a>	
+						<a style="margin: 30px 0 0 0;" class="simple-btn" data-target="#schedulePOPUp" data-toggle="modal">View the full list of scheduled payments</a>
 					</div>
-				
-				<?php 
-					/*if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"){ 
-						$AdminFee =$scheduleDetails['AdminFee']; 
+          <div class="flex-container couponForm">
+                  <div><span class="tipstyle">* Please note: discount code only applies to the full payment</span></div>
+                  <div><input type="text" name="EnterCouponcode" placeholder="Enter discount code"></div>
+                  <span class="dashboard-button">Apply</span>
+
+          </div>
+				<?php
+					/*if(isset($_POST['Paymentoption'])&& $_POST['Paymentoption']=="1"){
+						$AdminFee =$scheduleDetails['AdminFee'];
 						$InitialPaymentAmount = $scheduleDetails['InitialPaymentAmount'];
 						$OccuringPayment = $scheduleDetails['OccuringPayment'];
 						$firstInstallment = $InitialPaymentAmount-$AdminFee-$scheduleDetails['GST']-$_POST['PRF'];
@@ -544,41 +563,41 @@ if(sizeof($fpProdcutArray)!=0){
 							</div>';
 						echo'<div class="flex-cell flex-flow-row">
 								<div class="flex-col-6">
-									Admin fee	
+									Admin fee
 								</div>
 								<div class="flex-col-6">$'.$AdminFee.'</div></div>';
 						echo'<div class="flex-cell flex-flow-row">
 								<div class="flex-col-6">
-									First instalment	
+									First instalment
 								</div>
-								<div class="flex-col-6">$'.$firstInstallment.'</div></div>';	
+								<div class="flex-col-6">$'.$firstInstallment.'</div></div>';
 						if($reviewData['PRFdonation']!=""){
-							$PRFPrice =$reviewData['PRFdonation']; 
+							$PRFPrice =$reviewData['PRFdonation'];
 							echo'<div class="flex-cell flex-flow-row">
 									<div class="flex-col-6">
-										PRF donation	
+										PRF donation
 									</div>
-									<div class="flex-col-6">$'.$PRFPrice.'</div></div>';		
+									<div class="flex-col-6">$'.$PRFPrice.'</div></div>';
 						}
 						echo'<div class="flex-cell flex-flow-row">
 								<div class="flex-col-6">
-									GST	
+									GST
 								</div>
 								<div class="flex-col-6">$'.$scheduleDetails['GST'].'</div></div>';
 						echo'<div class="flex-cell flex-flow-row">
 								<div class="flex-col-6">
-									Today’s total	
+									Today’s total
 								</div>
 								<div class="flex-col-6">$'.$InitialPaymentAmount.'</div></div>';
                         echo'<div class="flex-cell flex-flow-row">
 								<div class="flex-col-12" style="text-align: center">
-									<button style="margin-top: 30px;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payment</button>	
+									<button style="margin-top: 30px;" type="button" class="placeorder" data-target="#schedulePOPUp" data-toggle="modal">Full list of scheduled payment</button>
 								</div>
-							</div>'; 								
+							</div>';
 					}*/
-				?>				
+				?>
 			</div>
-			
+
 			<!--<input type="hidden" name="Paymentcard" id="Paymentcardvalue" value="">-->
 			<div class="flex-col-12 btn_wrapper">
 				<a class="addCartlink" href="javascript:document.getElementById('renew-insurance-form').submit();">
@@ -589,7 +608,7 @@ if(sizeof($fpProdcutArray)!=0){
 			</div>
 
 			<div class="countdown_wrapper">
-				Time left to purchase: 
+				Time left to purchase:
 				<input type="text" value="05:00" id="timer" disabled>
 			</div>
 	</div>
@@ -599,16 +618,17 @@ if(sizeof($fpProdcutArray)!=0){
 <!--done by jinghu --27-05-2019-->
 <form id="renew-insurance-form" action="renewconfirmation" method="POST">
 	<input type="hidden" name="step3" value="3">
-	<div class="down6" <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")|| isset($_POST['QOrder']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
-		<div class="row">	
+  <input type="hidden" name="appliedCoupon" value="<?php echo $couponCode;?>">
+	<div class="down6" <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")|| isset($_POST['QOrder']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']) ||isset($_POST['Couponcode']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
+		<div class="row">
 			<div class="col-xs-12">
 				<span class="section_title">Payment options:</span>
 			</div>
 
-			
+
 			<?php if($_SESSION["MembershipProductID"]!="9964" && $_SESSION["MembershipProductID"]!="9965" && $_SESSION["MembershipProductID"]!="9966" && $_SESSION["MembershipProductID"] !="9968" && $_SESSION["MembershipProductID"] !="10005" && $_SESSION["MembershipProductID"] !="9967" && $_SESSION["MembershipProductID"] !="10006"): ?>
 			<div class="col-xs-12">
-				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-2" value="1" checked="checked">
+				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-2" value="1" <?php if(!isset($_POST['Couponcode'])) {echo 'checked="checked"';}?>>
 				<label for="p1-2">Pay by monthly instalments</label><span for="instalment_payment_note" class="note_trigger info_icon"></span>
 				<div id="instalment_payment_note" class="full_width_note">
 					<p>The most convenient way to pay for your membership is to spread the costs out across the year with monthly instalments. This option also eliminates the stress of renewing your membership every year. Before your membership rolls over each year, we will give you plenty of notice as well as the opportunity to make any changes to your package.</p>
@@ -629,7 +649,7 @@ if(sizeof($fpProdcutArray)!=0){
 			</div>
 			<?php endif;?>
 			<div class="col-xs-12">
-				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-1" value="0">
+				<input class="styled-radio-select" type="radio" name ="Paymentoption" id="p1-1" value="0" <?php if(isset($_POST['Couponcode'])) {echo 'checked="checked"';}?>>
 				<label for="p1-1">Pay in full today</label>
 			</div>
 			<input type="hidden" id="Installpayment-frequency" name="Installpayment-frequency" value="">
@@ -670,18 +690,18 @@ if(sizeof($fpProdcutArray)!=0){
 	<div class="col-xs-12" id="paymentTitle">
 		<span class="section_title">Payment method</span>
 	</div>
-	<?php 
+	<?php
 	// 2.2.12 - Get payment list
-	// Send - 
-	// UserID 
+	// Send -
+	// UserID
 	// Response -payment card list
 	$test['id'] = $_SESSION["UserId"];
 	$cardsnum = aptify_get_GetAptifyData("12", $test);
 	//print_r($cardsnum);?>
-	<?php if (sizeof($cardsnum["results"])!=0): ?>  
+	<?php if (sizeof($cardsnum["results"])!=0): ?>
 	<div id="hiddenPayment">
-		<div class="row">	
-		<div class="col-xs-12 col-sm-6">				
+		<div class="row">
+		<div class="col-xs-12 col-sm-6">
 			<fieldset>
 				<div class="chevron-select-box">
 					<select class="form-control" id="Paymentcard" name="Paymentcard">
@@ -699,7 +719,7 @@ if(sizeof($fpProdcutArray)!=0){
 				</div>
 			</fieldset>
 			</div>
-		</div> 
+		</div>
 		<div class="col-xs-12">
 			<input type="checkbox" class="styled-checkbox" id="anothercard" name="anothercard">
 			<label for="anothercard">Use another card</label>
@@ -710,13 +730,13 @@ if(sizeof($fpProdcutArray)!=0){
 				<label for="">Choose credit card type:<span class="tipstyle"> *</span></label>
 				<div class="chevron-select-box">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-					<?php 
+					<?php
 						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 						$PaymentType=json_decode($PaymentTypecode, true);
 						foreach($PaymentType  as $pair => $value){
 							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 							echo '> '.$PaymentType[$pair]['Name'].' </option>';
-							
+
 						}
 					?>
 					</select>
@@ -761,25 +781,25 @@ if(sizeof($fpProdcutArray)!=0){
 	</div>
 	<div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</div>
 	</div>
-	<?php endif; ?>  
-	<?php if (sizeof($cardsnum["results"])==0): ?> 
-	<div id="anothercardBlock" class="row show">					   
+	<?php endif; ?>
+	<?php if (sizeof($cardsnum["results"])==0): ?>
+	<div id="anothercardBlock" class="row show">
 		<div class="row">
-			
+
 
 			<div class="col-xs-12 col-sm-6 col-md-6">
 				<label for="">Choose credit card type:<span class="tipstyle"> *</span></label>
 				<div class="chevron-select-box">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-						<?php 
+						<?php
 						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 						$PaymentType=json_decode($PaymentTypecode, true);
 						foreach($PaymentType  as $pair => $value){
 							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 							echo '> '.$PaymentType[$pair]['Name'].' </option>';
-							
+
 						}
-					?>	
+					?>
 					</select>
 				</div>
 			</div>
@@ -815,17 +835,17 @@ if(sizeof($fpProdcutArray)!=0){
 				<label for="">To facilitate automatic further instalments, your credit card will be stored securely.</label>
 			</div>
 		</div>
-		
+
 		<input type="hidden" name="addCard" value="1">
 		<div class="col-xs-12">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</div>
-	</div>				 
-	<?php endif; ?>  
+	</div>
+	<?php endif; ?>
 		<div class="row">
 			<div class="col-xs-12">
 				<input popup class="styled-checkbox" type="checkbox" id="jprivacy-policy">
 				<label for="jprivacy-policy" id="privacypolicyl" popup-target="privacypolicyWindow"><span class="tipstyle">*&nbsp;</span>I agree to the APA Terms and Conditions</label>
 			</div>
-	    </div>   
+	    </div>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 none-padding btn_wrapper" id="back_to_prev">
 			<a variant="prev" class="your-details-prevbutton<?php if(isset($_POST['step1'])&& $_POST['insuranceTag']=="0"){echo "5";} else {echo "6";}?>">
 				<span class="icon arrow_left"></span>
@@ -838,21 +858,21 @@ if(sizeof($fpProdcutArray)!=0){
 <form id="pform" action="" method="POST"><input type="hidden" name="goP"></form>
 <form id="deletePRFForm" action="" method="POST"><input type="hidden" name="step2-2"></form>
 <form id="deleteMGForm" action="" method="POST"><input type="hidden" name="step2-3" value=""></form>
-<form id="deleteNGForm" action="" method="POST"><input type="hidden" name="step2-4" value=""><input type="hidden" name="delMACP" value="0"></form>		
-<form id="tempform" action="" method="POST"><input type="hidden" name="goI"></form>	
-
+<form id="deleteNGForm" action="" method="POST"><input type="hidden" name="step2-4" value=""><input type="hidden" name="delMACP" value="0"></form>
+<form id="tempform" action="" method="POST"><input type="hidden" name="goI"></form>
+<form id="discount" action="" method="POST"><input type="hidden" name="Couponcode" value=""></form>
 <div id="schedulePOPUp" class="modal fade" role="dialog">
 	<div class="modal-dialog" style="overflow-y: scroll; max-height:85%;  margin-top: 50px; margin-bottom:50px;">
 	<!-- Modal content-->
 		<div class="modal-content">
 			<div class="modal-header">
-				
+
 				<h4 class="modal-title">Your next scheduled payment details</h4>
 			</div>
 			<div class="modal-body">
-				<div class="flex-container flex-table"> 
-			    <?php 
-                    $month = date("m");		
+				<div class="flex-container flex-table">
+			    <?php
+                    $month = date("m");
 					//if($month!="10") {$currentMonth = trim($month,"0"); }else{$currentMonth =$month;}
 					if($month =="01"){$currentYear = date("Y");} else{$currentYear = date("Y")+1; }
 					echo '<div class="flex-cell flex-flow-row table-header">

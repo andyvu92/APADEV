@@ -10,19 +10,19 @@ unset($_SESSION['timeoutPopUp']);
 <?php if(isset($_SESSION["renewTag"])): ?>
 <?php
 	/*hanled renewTag session */
-	$now = time();  
+	$now = time();
 	if (isset($_SESSION['expireTag']) && $now > $_SESSION['expireTag']) {
 		unset($_SESSION['renewTag']);
 	}
 ?>
 <?php if(!empty($_SESSION['payThroughDate'])):?>
-<?php 
+<?php
 //This is to get the renewal quatation order details from Aptify!!!!!!!!
 // 2.2.45 - Renewal Quatation OrderID
-// Send - 
+// Send -
 // userID
 // Response -Renewal Quatation OrderID
-   
+
 	$variableData['id'] = $_SESSION["UserId"];
 	$Quatation = aptify_get_GetAptifyData("45", $variableData);
 	// Put the unexpected scenario here to avoid getting the empty data or sever response is empty.
@@ -33,17 +33,17 @@ unset($_SESSION['timeoutPopUp']);
 			unset($_SESSION['reloadTag']);
 			$_SESSION['timeoutPopUp'] = 1;
 			//header("Location:".$link."/");
-			
+
 		}
 		else{
 			header("Location:".$link."/renewmymembership");
 		}
-		
+
 	}
 	//End unexpected scenario
 
 	if(!empty($Quatation) && sizeof($Quatation["results"])!=0){
-		
+
 		foreach ($Quatation["results"] as $quatationOrderArray){
 			$quatationOrderID =  $quatationOrderArray["ID"];
 		}
@@ -51,10 +51,10 @@ unset($_SESSION['timeoutPopUp']);
 
 // after web service 2.2.45 Get renewal quatation orderID from Aptify;
 // 2.2.44 Get Order details this web service is to use renew membership to get the order detail for next year
-// Send - 
+// Send -
 // Invoice_ID
 // Response -Order details
-	$orderDetails = aptify_get_GetAptifyData("44", $quatationOrderID); 
+	$orderDetails = aptify_get_GetAptifyData("44", $quatationOrderID);
 		// Put the unexpected scenario here to avoid getting the empty data or sever response is empty.
 		if(empty($orderDetails)) {if(isset($_SESSION['orderDetailsTag'])) { $_SESSION['orderDetailsTag']++; } else{$_SESSION['orderDetailsTag']=1;}}
 			if(empty($orderDetails)){
@@ -62,22 +62,22 @@ unset($_SESSION['timeoutPopUp']);
 				unset($_SESSION['orderDetailsTag']);
 				$_SESSION['timeoutPopUp'] = 1;
 				//header("Location:".$link."/");
-				
+
 			}
 			else{
 				header("Location:".$link."/renewmymembership");
 			}
-			
+
 		}
 		//End unexpected scenario
-	    if(!empty($orderDetails)){ $tag = true; } else{ $tag = false;}	
+	    if(!empty($orderDetails)){ $tag = true; } else{ $tag = true;}
 	}
-	
-else{$orderDetails = array(); $tag = false; }
+
+else{$orderDetails = array(); $tag = true; }
     //$paythrough = date_create_from_format('m/d/Y', $_SESSION['payThroughDate']);
     //echo $_SESSION['payThroughDate'];
 	//echo $paythrough;
-   
+
 ?>
 
 <?php if(checkRenew($_SESSION['payThroughDate'], $tag)): ?>
@@ -93,11 +93,11 @@ $userTag = getInsuranceStatus($userID);
 	$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 	header("Location:".$link."/insuranceprocess");
 }*/
-   
+
 } else { $userID =0; }
 $background = getBackgroundImage($userID);
-/* get background image****/ 
- 
+/* get background image****/
+
 ?>
 <!-- PREVENT OVERLAY TO SHOW UP -->
 <style>
@@ -111,14 +111,14 @@ $background = getBackgroundImage($userID);
 	<h3 style="color:black;">Renewing your APA membership is easy…</h3>
 	<p>Your membership category for 2020 is:</p>
 	<p><?php if(sizeof($orderDetails)!=0): ?>
-	<?php 
+	<?php
 	$ngQuatation = array();
 	$SubsCount = 0;
 	if(!isset($_SESSION['QuatationTag']) && !isset($_POST["step2-1"]) ){
 		foreach($orderDetails['Order'] as $orders){
 			foreach($orders['OrderLines'] as $order){
 				//  put the code here to save the quatation order products into the database firstly.
-			
+
 				if($order['ProductCategory'] =="Memberships"){
 					//checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID=$order['ProductID']);
 					checkShoppingCart($userID=$_SESSION["UserId"], $type="membership", $productID="");
@@ -132,7 +132,7 @@ $background = getBackgroundImage($userID);
 		}
 	}?><?php endif;?></p>
 	<?php if(sizeof($orderDetails)!=0 && $SubsCount > 0): ?>
-	<?php 
+	<?php
 	echo "<p>Your subscription(s) for 2020:</p><p>";
 	$ngQuatation = array();
 	if(!isset($_SESSION['QuatationTag'])){
@@ -143,7 +143,7 @@ $background = getBackgroundImage($userID);
 					echo $order['ProductName']; echo "</br>";
 				}
 				if($order['ProductCategory'] =="Subscription"){
-					
+
 					checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
 					createShoppingCart($userID, $productID =$order['ProductID'],$type="NG",$coupon="");
 					array_push($ngQuatation, $order['ProductID']);
@@ -151,18 +151,18 @@ $background = getBackgroundImage($userID);
 				if($order['ProductID'] =="9978"){
 					checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
 					createShoppingCart($userID, $productID =$order['ProductID'],$type="MG1",$coupon="");
-					
+
 				}
 				if($order['ProductID'] =="9977"){
 					checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
 					createShoppingCart($userID, $productID =$order['ProductID'],$type="MG2",$coupon="");
-					
+
 				}
 				if($order['ProductID'] =="9973"){
 					checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
 					createShoppingCart($userID, $productID =$order['ProductID'],$type="FP",$coupon="");
 					$_SESSION['fpQuatation'] = $order['ProductID'];
-					
+
 				}
 				if($order['ProductID'] =="18247"){
 					checkShoppingCart($userID=$_SESSION["UserId"], $type="", $productID=$order['ProductID']);
@@ -172,7 +172,7 @@ $background = getBackgroundImage($userID);
 				$_SESSION['QuatationTag'] = "1";
 			}
 		}
-		
+
 		$_SESSION['ngQuatation'] = $ngQuatation;
 	}
 	echo "</p>";
@@ -180,7 +180,7 @@ $background = getBackgroundImage($userID);
 	<p>
 	</br></br>
 	Click continue to confirm or alter your membership and complete your renewal process.</p>
-		
+
 	<a href="renewmymembership" target="_self" class="accent-btn cancelInsuranceButton"><span class="dashboard-button-name">Continue</span></a>
 
 </div>
@@ -193,7 +193,7 @@ $background = getBackgroundImage($userID);
 		<div class="col-xs-12 page-title">
 			<span class="dashboard-name cairo">Renew my membership</span>
 		</div>
-		
+
 		</div>
 	<?php
 		//include('sites/all/themes/evolve/commonFile/customizeBackgroundImage.php');
@@ -202,32 +202,32 @@ $background = getBackgroundImage($userID);
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 renew-membership-nav">
 				<ul class="nav nav-tabs">
-				<li><a class="tabtitle1 inactiveLink" style="cursor: pointer;"><span class="<?php if(!isset($_POST['step1']) && !isset($_POST['step2']) && !isset($_POST['stepAdd']) && !isset($_POST['step2-1']) && !isset($_POST['goI']) && !isset($_POST['goP'])&& !isset($_POST['step2-2'])&&!isset($_POST['step2-3'])&& !isset($_POST['QOrder']) && !isset($_POST["MType"]) && !isset($_POST['step2-4']))echo "text-underline";?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
+				<li><a class="tabtitle1 inactiveLink" style="cursor: pointer;"><span class="<?php if(!isset($_POST['step1']) && !isset($_POST['step2']) && !isset($_POST['stepAdd']) && !isset($_POST['step2-1']) && !isset($_POST['goI']) && !isset($_POST['goP'])&& !isset($_POST['step2-2'])&&!isset($_POST['step2-3'])&& !isset($_POST['QOrder']) && !isset($_POST["MType"]) && !isset($_POST['step2-4']) && !isset($_POST['Couponcode']))echo "text-underline";?> eventtitle1" id="yourdetails-tab"><strong>Your details</strong></span> </a></li>
 				<li><a class="tabtitle2 inactiveLink" style="cursor: pointer;"><span class="eventtitle2 <?php if(isset($_POST['MType']))echo 'text-underline';?>" id="Membership"><strong>Membership</strong></span></a></li>
 				<li><a class="tabtitle3 inactiveLink" style="cursor: pointer;"><span class="eventtitle3" id="Workplace"><strong>Workplace</strong></span></a></li>
 				<li><a class="tabtitle4 inactiveLink" style="cursor: pointer;"><span class="eventtitle4" id="Education"><strong>Education</strong></span></a></li>
 				<li><a class="tabtitle5 inactiveLink" style="cursor: pointer;"><span class="eventtitle5 <?php if((isset($_POST['step1'])&& $_POST['insuranceTag']!="0") || isset($_POST['goI']))echo 'text-underline';?>" id="Insurance"><strong>Insurance</strong></span></a></li>
-				<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6 <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")||isset($_POST['QOrder']) || isset($_POST['stepAdd']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>
-				
+				<li><a class="tabtitle6 inactiveLink" style="cursor: pointer;"><span class="eventtitle6 <?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")||isset($_POST['QOrder']) || isset($_POST['stepAdd']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']) || isset($_POST['Couponcode']))echo 'text-underline';?>" id="Payment"><strong>Payment</strong></span></a></li>
+
 				</ul>
 			<div id="insuranceBlockRN"></div>
 			<div class="col-xs-12 none-margin">
 				<label class="note-text"><span class="tipstyle">*</span>Required fields</label>
 			</div>
 			<?php
-			
+
 			//include('sites/all/themes/evolve/inc/renewMyMembership/renew-yourdetail.inc.php');
 			if(!isset($_POST["step2-1"])){
 			apa_function_renew_your_detail_form();}
 			if((isset($_POST["step1"]) && $_POST["step1"] == "1"&& $_POST['insuranceTag']!="0") || isset($_POST['goI'])){
-			//include('sites/all/themes/evolve/inc/renewMyMembership/renew-insurance.inc.php'); 
+			//include('sites/all/themes/evolve/inc/renewMyMembership/renew-insurance.inc.php');
 			apa_function_renew_the_apa_insurance_form();
 			}
-            elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder']) || (isset($_POST["stepAdd"]) && $_POST["stepAdd"] == "2") ||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['step2-4'])) {
+            elseif(isset($_POST["step2-1"]) && $_POST["step2-1"] == "1" || isset($_POST['goP'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder']) || (isset($_POST["stepAdd"]) && $_POST["stepAdd"] == "2") ||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['step2-4']) || isset($_POST['Couponcode'])) {
 		    //include('sites/all/themes/evolve/inc/renewMyMembership/renew-surveypayment.inc.php');
 			//apa_function_renew_the_apa_surveypayment_form();
 			apa_function_renew_the_apa_final_form();
-		    } 			
+		    }
 			elseif((isset($_POST["step2"]) && $_POST["step2"] == "2") || (isset($_POST["stepAdd"]) && $_POST["stepAdd"] == "2") ||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['step2-4'])) {
 			//include('sites/all/themes/evolve/inc/renewMyMembership/renew-final.inc.php');
 			apa_function_renew_the_apa_final_form();
@@ -248,9 +248,9 @@ $background = getBackgroundImage($userID);
 	</div>
 
 <div class="modal-body">
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 	<span class="note-text" style="display: block">Please scroll down to accept the full APA terms and conditions</span>
-	
+
 	<h4>1. Eligibility for all members</h4>
 <p>In order to be eligible for APA membership, all members must:</p>
 <ul>
@@ -448,8 +448,8 @@ You have the right to access the personal information about yourself held by the
 </div>
 <div id="installmentpolicyWindow" style="display:none;">
 	<h3>APA installment policy</h3>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
-	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>	
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<span class="note-text" style="display: block">Please scroll down to accept the full terms and conditions of this guide</span>
 	Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam pretium
 	tellus non ex mattis feugiat a in est. Praesent est leo, viverra ac
 	hendrerit ac, facilisis at ante. Phasellus elementum hendrerit risus,
@@ -458,11 +458,11 @@ You have the right to access the personal information about yourself held by the
 	In viverra neque lacus, vel pulvinar nulla convallis id. Curabitur porttitor
 	eleifend quam in tincidunt.
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">  
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<input class="styled-checkbox" type="checkbox" id="installmentpolicyp" checked name="instalmentpolicy">
 		<label for="installmentpolicyp">Yes. I’ve read and understand the APA installment policy</label>
 	</div>
-	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none warning" id="disagreeInstallmentDescription"> 
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 display-none warning" id="disagreeInstallmentDescription">
          Please agree to the APA Installment Policy to continue with your membership
 	</div>
 	<button type="button" class="btn btn-default" id="installment_policy_button">Submit</button>
@@ -472,7 +472,7 @@ You have the right to access the personal information about yourself held by the
 <div class="overlay">
 	<section class="loaders">
 		<span class="loader loader-quart">
-		</span>  
+		</span>
 		<span class="edu-step-note">This may take a moment while we update your details</span>
 	</section>
 </div>
@@ -490,7 +490,7 @@ You have the right to access the personal information about yourself held by the
 				</div>
 			</form>
 		</div>
-		
+
 <form id="renew-survey-form2" action="" method="POST"><input type="hidden" name="QOrder"></form>
 <form id="renew-membertype-form2" action="" method="POST"><input type="hidden" name="MType"></form>
 <?php else:?>
@@ -503,10 +503,10 @@ You have the right to access the personal information about yourself held by the
 			<a href="/dashboard" class="join">Go to dashboard</a>
 		</div>
 
-		<?php 
+		<?php
 				$block = block_load('block', '309');
 				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-				$output = drupal_render($get);        
+				$output = drupal_render($get);
 				print $output;
 		?>
 
@@ -522,17 +522,17 @@ You have the right to access the personal information about yourself held by the
 			<a href="/membership-question" class="join">Join now</a>
 		</div>
 
-		<?php 
+		<?php
 				$block = block_load('block', '309');
 				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-				$output = drupal_render($get);        
+				$output = drupal_render($get);
 				print $output;
 		?>
 
 	</div>
 <?php endif;?>
 <?php else:
-	//when the renewTag session is not existed 	
+	//when the renewTag session is not existed
 ?>
 	<div class="full-width banner-img">
 			<img src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_1500X500_2020.jpg" alt="APA plus you, together we can">
@@ -548,7 +548,7 @@ You have the right to access the personal information about yourself held by the
 		<!-- <div class="item" style="text-align: center; font-weight: 700;"><span class="item-description" style="">Due to high traffic some members may receive an error while renewing – we are investigating the cause and apologise for any inconvenience.</span></div> -->
 
 		<div class="grid-block apa-member-grid">
-			<?php /*
+     <?php /*
 			<div class="item">
 				<div class="item-body current-member">
 					<span class="item-title">2019 APA member</span>
@@ -556,8 +556,7 @@ You have the right to access the personal information about yourself held by the
 					<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
 				</div>
 			</div>
-			*/ ?>
-			
+    */?>
 			<div class="item">
 				<div class="item-body previous-member">
 					<span class="item-title">Existing account</span>
@@ -582,9 +581,9 @@ You have the right to access the personal information about yourself held by the
 		</div>
 
 		<span class="space-100">&nbsp;</span>
-		
+
 <?php endif;?>
-<?php else: 
+<?php else:
 	// when user is not logged in
 	?>
 		<!-- USER NOT LOGIN  -->
@@ -609,7 +608,7 @@ You have the right to access the personal information about yourself held by the
 					<span class="item-description">If you were an APA member in 2019, please renew your membership for 2020 below.</span>
 					<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#" id="renewItem">Renew</a>
 				</div>
-			</div> 
+			</div>
 			*/ ?>
 			<div class="item">
 				<div class="item-body previous-member">
@@ -647,23 +646,23 @@ You have the right to access the personal information about yourself held by the
 
 <!--Added renew landing page hidden form to check the login user eligible for renew process-->
 <div class="display-none">
-<?php 
+<?php
 	$the_form = drupal_get_form('apa_renew_landingpage_form');
-	print drupal_render($the_form);			 
+	print drupal_render($the_form);
 ?>
 </div>
 <!---Handle the endpoint time out error start--->
 <div id="timeoutWindow" style="display:none;">
 	<div class="flex-cell">
 		<div id="time_msg">
-			<span class="light-lead-heading cairo">There was an unexpected server error. <br>Please contact the APA Member Hub on 1300 306 622 or try again later.</span>		
+			<span class="light-lead-heading cairo">There was an unexpected server error. <br>Please contact the APA Member Hub on 1300 306 622 or try again later.</span>
 		</div>
 	</div>
 </div>
 <a popup-target="timeoutWindow" id="triggerTimeout" syle="display:none;"></a>
 <input type="hidden" id="totalStepNumber" value="6">
 <!---Handle the endpoint time out error end--->
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">		
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.9/jquery.validate.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
@@ -672,31 +671,31 @@ jQuery(document).ready(function($) {
 	var user ='<?php if(isset($_SESSION['UserId']) && isset($_SESSION['renewTag']))  {echo $_SESSION['UserId']; } else{ echo "";}?>';
 	if(isshow == null && user != ""){
        sessionStorage.setItem('isshow', 1);
-	   
+
        $("#QuatationPopUp").dialog();
-       
+
     }
 	$('input[value="Log out"]').click(function(){
 	   sessionStorage.removeItem("isshow");
-	   
+
 	});
-	
+
 });
 </script>
 <script>
 $(document).ready(function() {
-        window.history.pushState(null, "", window.location.href);        
+        window.history.pushState(null, "", window.location.href);
         window.onpopstate = function() {
             window.history.pushState(null, "", window.location.href);
 		};
-	// handle the endpoint time out 
+	// handle the endpoint time out
 	var timeoutTag ='<?php if(isset($_SESSION['timeoutPopUp']))  {echo $_SESSION['timeoutPopUp']; } else{ echo "";}?>';
 	if(timeoutTag == "1"){
 		// prevent element inspect
 		document.addEventListener('contextmenu', function(e) {
 			e.preventDefault();
 		});
-	   
+
 		// append overlay
 		if( $('body, html, .html').find('.overlay').length == 0 ){
 			$('body').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');

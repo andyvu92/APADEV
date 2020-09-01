@@ -363,7 +363,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 <form id="your-detail-form" action="renewmymembership" method="POST">
 	<input type="hidden" name="step1" value="1"/>
 	<input type="hidden" name="insuranceTag" id="insuranceTag"/>
-		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_POST['goI'])|| isset($_POST['goP'])||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['QOrder']) || isset($_POST["MType"]) || isset($_POST['step2-4']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
+		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_POST['goI'])|| isset($_POST['goP'])||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['QOrder']) || isset($_POST["MType"]) || isset($_POST['step2-4']) || isset($_POST['Couponcode']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
 				<div class="row">
 					<div class="col-xs-6 col-md-3">
 						<label for="prefix">Prefix</label>
