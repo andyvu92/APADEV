@@ -18,7 +18,7 @@ if(is_null($userRole)) {
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
 <?php if(is_null(render($content['field_podcast_url']))): ?>
    <section class="post-content container" style="float:none; margin:auto;">
-      <div class="region col-xs-12 col-sm-12 col-md-8 col-lg-8">
+      <div class="region col-xs-12 col-sm-12 col-md-9 col-lg-9">
 
         <!-- MOBILE POST FEATURED IMG -->
         <div class="post-img media mobile">
@@ -100,7 +100,7 @@ if(is_null($userRole)) {
             <a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a>
         </div>
       </div>
-      <div class="block CampaignSidebar contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-4 col-lg-4" style="margin:0 0 50px">
+      <div class="block CampaignSidebar contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
          <h3 class="headline">Physiotherapy research</h3>
          <span class="brd-headling"></span>
          <div class="content">
@@ -110,6 +110,9 @@ if(is_null($userRole)) {
             $get = _block_get_renderable_array(_block_render_blocks(array($block)));
             $output = drupal_render($get);
             print $output;
+
+            echo views_embed_view('research_translation', 'block_4');
+
          ?>
          </div>
       </div>
@@ -117,7 +120,7 @@ if(is_null($userRole)) {
    <?php else: ?>
       <?php if(!is_null($userRole)): // has 'editing roll ?>
          <section class="post-content container" style="float:none; margin:auto;">
-            <div class="region col-xs-12 col-sm-12 col-md-8 col-lg-8">
+            <div class="region col-xs-12 col-sm-12 col-md-9 col-lg-9">
 
             <!-- MOBILE POST FEATURED IMG -->
             <div class="post-img media mobile">
@@ -199,7 +202,7 @@ if(is_null($userRole)) {
                   <a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a>
             </div>
             </div>
-            <div class="block CampaignSidebar contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-4 col-lg-4" style="margin:0 0 50px">
+            <div class="block CampaignSidebar contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
                <h3 class="headline">Physiotherapy research</h3>
                <span class="brd-headling"></span>
                <div class="content">
