@@ -3280,8 +3280,10 @@ const tabBannerModuleScript = () => {
     const mobileTogglesTriggerLabel = banner.querySelector('.toggles-trigger .toggle-label');
 
     const togglesWrapper = banner.querySelector('.banner-toggles');
-    const toggles = banner.querySelectorAll('.banner-toggles button.toggle');
-    const tabs = banner.querySelectorAll('.banner-tab-container .tab');
+    const tabsWrapper = banner.querySelector('.banner-tab-container');
+
+    const toggles = togglesWrapper.querySelectorAll('button.toggle');
+    const tabs = [...tabsWrapper.children];
 
     const removeAllActive = () => {
       [...toggles, ...tabs].forEach(item => {
@@ -3289,22 +3291,33 @@ const tabBannerModuleScript = () => {
       });
     }
 
+    const getTargetTab = (id) => {
+      let resolvedTab = null;
+      tabs.forEach(tab => {
+        if (tab.getAttribute('tab-id') == id){
+          resolvedTab = tab;
+        }
+      });
+
+      return resolvedTab;
+    }
+
     const activateSelected = (id) => {
-      const targetToggle = banner.querySelector(`.banner-toggles button.toggle[tab-target="${id}"]`);
-      const targetTab = banner.querySelector(`.banner-tab-container .tab[tab-id="${id}"]`);
+      const targetToggle = togglesWrapper.querySelector(`button.toggle[tab-target="${id}"]`);
+      const targetTab = getTargetTab(id);
 
       targetToggle.classList.add('active');
       targetTab.classList.add('active');
     }
 
-    const activeToggle =  banner.querySelector('.banner-toggles button.toggle.active');
+    const activeToggle =  togglesWrapper.querySelector('button.toggle.active');
 
     toggles.length && toggles.forEach(toggle => {
       const isActive = toggle.classList.contains('active');
 
       const targetTabId = toggle.getAttribute('tab-target');
 
-      const targetTab = banner.querySelector(`.banner-tab-container .tab[tab-id="${targetTabId}"]`);
+      const targetTab = getTargetTab(targetTabId);
 
       let label = toggle.textContent;
 
@@ -3332,11 +3345,11 @@ const tabBannerModuleScript = () => {
 
     // active the first tab - false back default when no tab is active
     if (!activeToggle){
-      const firstToggle = banner.querySelector('.banner-toggles button.toggle');
+      const firstToggle = togglesWrapper.querySelector('button.toggle');
 
       const targetTabId = toggle.getAttribute('tab-target');
 
-      const targetTab = banner.querySelector(`.banner-tab-container .tab[tab-id="${targetTabId}"]`);
+      const targetTab = getTargetTab(targetTabId);
 
       // show the first tab as default fall back
       firstToggle.classList.add('active');
@@ -3397,11 +3410,16 @@ const tabBannerModuleScript = () => {
       
     }
 
-    toggleTriggerHandler();
+    // only trigger dropdown function if this is not a horizon style
+    const isToggleHorizon = banner.classList.contains('toggle-sm-horizon');
 
-    window.addEventListener('resize', e => {
+    if (!isToggleHorizon){
       toggleTriggerHandler();
-    });
+  
+      window.addEventListener('resize', e => {
+        toggleTriggerHandler();
+      });
+    }
   });
 }
 
