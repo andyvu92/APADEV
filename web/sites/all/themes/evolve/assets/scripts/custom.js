@@ -202,6 +202,179 @@ jQuery(document).ready(function($) {
 		$('.media_contents_filtered #' + getid + '-content').fadeIn();
 	});
 
+	// ANIMATED SECTION ON CAMPAIGN/Thank you
+	// tab banner script
+	const tabBannerAltModuleScript = () => {
+		const tabBanners = document.querySelectorAll('.tab-banner-alt');
+	
+		tabBanners.length && tabBanners.forEach(banner => {
+		const mobileTogglesTriggerBtn = banner.querySelector('.toggles-trigger');
+		const mobileTogglesTriggerLabel = banner.querySelector('.toggles-trigger .toggle-label');
+	
+		const togglesWrapper = banner.querySelector('.banner-toggles');
+		const tabsWrapper = banner.querySelector('.banner-tab-container');
+	
+		const toggles = togglesWrapper.querySelectorAll('button.toggle');
+		const tabs = [...tabsWrapper.children];
+	
+		const removeAllActive = () => {
+			[...toggles, ...tabs].forEach(item => {
+			item.classList.remove('active');
+			});
+		}
+	
+		const getTargetTab = (id) => {
+			let resolvedTab = null;
+			tabs.forEach(tab => {
+			if (tab.getAttribute('tab-id') == id){
+				resolvedTab = tab;
+			}
+			});
+	
+			return resolvedTab;
+		}
+	
+		const activateSelected = (id) => {
+			const targetToggle = togglesWrapper.querySelector(`button.toggle[tab-target="${id}"]`);
+			const targetTab = getTargetTab(id);
+	
+			targetToggle.classList.add('active');
+			targetTab.classList.add('active');
+		}
+	
+		const activeToggle =  togglesWrapper.querySelector('button.toggle.active');
+	
+		toggles.length && toggles.forEach(toggle => {
+			const isActive = toggle.classList.contains('active');
+	
+			const targetTabId = toggle.getAttribute('tab-target');
+	
+			const targetTab = getTargetTab(targetTabId);
+	
+			let label = toggle.textContent;
+	
+			// show tab when toggle is active
+			if (isActive){
+			targetTab.classList.add('active');
+	
+			// set trigger label (mobile nav trigger)
+			mobileTogglesTriggerLabel.textContent = label;
+			}
+	
+			toggle.addEventListener('click', e => {
+			let isCurrentlyActive = e.target.classList.contains('active');
+	
+			if (!isCurrentlyActive){
+				removeAllActive();
+				activateSelected(targetTabId);
+	
+				// set trigger label (mobile nav trigger)
+				mobileTogglesTriggerLabel.textContent = label;
+				
+			}
+			});
+		});
+	
+		// active the first tab - false back default when no tab is active
+		if (!activeToggle){
+			const firstToggle = togglesWrapper.querySelector('button.toggle');
+	
+			const targetTabId = toggle.getAttribute('tab-target');
+	
+			const targetTab = getTargetTab(targetTabId);
+	
+			// show the first tab as default fall back
+			firstToggle.classList.add('active');
+			targetTab.classList.add('active');
+	
+			// set trigger label (mobile nav trigger)
+			let label = firstToggle.textContent;
+			mobileTogglesTriggerLabel.textContent = label;
+		}
+	
+		// mobile toggle nav handler
+		const toggleTriggerHandler = () => {
+			setTimeout(() => {
+			if (window.innerWidth < 571){
+		
+				let toggleWrapperHeight = togglesWrapper.clientHeight;
+		
+				setTimeout(() => {
+				togglesWrapper.classList.add('mobile-nav-initialised');
+				togglesWrapper.classList.add('collapsed');
+				}, 0);
+		
+				let isExpanded = mobileTogglesTriggerBtn.classList.contains('active');
+		
+				const expandHandler = () => {
+				mobileTogglesTriggerBtn.classList.add('active');
+				togglesWrapper.style.height = `${toggleWrapperHeight}px`;
+				togglesWrapper.classList.remove('collapsed');
+				togglesWrapper.classList.add('expanded');
+				isExpanded = true;
+				}
+		
+				const collapseHandler = () => {
+				mobileTogglesTriggerBtn.classList.remove('active');
+				togglesWrapper.style.height = `0px`;
+				togglesWrapper.classList.add('collapsed');
+				togglesWrapper.classList.remove('expanded');
+				isExpanded = false;
+				}
+		
+				mobileTogglesTriggerBtn.addEventListener('click', e => {
+				if (isExpanded){
+					collapseHandler();
+				}
+				else {
+					expandHandler()
+				}
+				});
+			} 
+			else {
+				togglesWrapper.classList.remove('mobile-nav-initialised');
+				togglesWrapper.classList.remove('collapsed');
+				togglesWrapper.classList.remove('expanded');
+				mobileTogglesTriggerBtn.classList.remove('active');
+				togglesWrapper.style.height = ``;
+			}
+			}, 10);
+			
+		}
+	
+		// only trigger dropdown function if this is not a horizon style
+		const isToggleHorizon = banner.classList.contains('toggle-sm-horizon');
+	
+		if (!isToggleHorizon){
+			toggleTriggerHandler();
+		
+			window.addEventListener('resize', e => {
+			toggleTriggerHandler();
+			});
+		}
+		});
+	}
+	
+	// handle back to top button
+	const backToTopButtonAltHandler = () => {
+		const backToTopButtons = document.querySelectorAll('.back-to-top-alt');
+		
+		backToTopButtons.length && backToTopButtons.forEach(button => {
+			button.addEventListener('click', e => {
+			window.scrollTo({
+				top: 0,
+				behavior: 'smooth'
+			});
+			});
+		});
+	}
+	
+	// trigger functions after DOM content loaded
+	window.addEventListener('DOMContentLoaded', e => {
+		backToTopButtonAltHandler();
+		tabBannerAltModuleScript();
+	});
+
 	$("#homeShowAll").click(function() {
 		$('#downHomeT1').show(500);
 		$('#downHomeT2').hide(500);
