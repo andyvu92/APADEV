@@ -3198,11 +3198,12 @@ body .block{
         max-width: max-content;
         text-transform: uppercase;
         transition: all .3s ease;
+        text-align: center;
         &:hover{
             opacity: 0.9;
         }
         &.large{
-            padding: 24px 54px;
+            padding: 24px 15px;
             font-size: 20px;
         }
     }
@@ -8518,6 +8519,23 @@ body #section-main-content{
     background-color: @porcelain;
     padding: 70px 30px;
 
+    &.slim{
+        padding: 50px 30px;
+        .banner-body-wrapper{
+            margin-top: 32px;
+            .cta-wrapper{
+                > a{
+                    padding: 18px 15px;
+                    font-size: 18px;
+                    line-height: 22px;
+                }
+            }
+        }
+        .banner-footer-wrapper{
+            margin-top: 16px;
+        }
+    }
+
     .banner-header-wrapper{
         .heading{
             color: @tuna;
@@ -8525,6 +8543,10 @@ body #section-main-content{
             line-height: 38px;
             font-weight: 300;
             text-align: center;
+            @media @larger-phone-width-down{
+                font-size: 32px;
+                line-height: 36px;
+            }
         }
 
         h2,
@@ -8790,11 +8812,24 @@ body #section-main-content{
                     }
                 }
                 .actions-wrapper{
-                    display: block;
+                    display: flex;
+                    align-items: flex-end;
+                    justify-content: space-between;
                     margin: 20px 0;
+                    @media @larger-phone-width-down{
+                        flex-direction: column;
+                        align-items: flex-start;
+                        justify-content: flex-start;
+                        border-top: 1px solid rgba(0,0,0,0.12);
+                        border-bottom: 1px solid rgba(0,0,0,0.12);
+                        padding: 10px 0 15px;
+                    }
                     .author{
                         padding-left: 16px;
                         position: relative;
+                        @media @larger-phone-width-down{
+                            padding-left: 0;
+                        }
                         &:before{
                             content: '';
                             position: absolute;
@@ -8802,6 +8837,9 @@ body #section-main-content{
                             top: 5px;
                             height: calc(~'100% - 10px');
                             border-left: 1px solid @tuna;
+                            @media @larger-phone-width-down{
+                                display: none;
+                            }
                         }
                         p{
                             color: @tuna;
@@ -8809,6 +8847,53 @@ body #section-main-content{
                         }
                         time{
                             display: block;
+                        }
+                    }
+
+                    .share{
+                        display: flex;
+                        justify-content: flex-end;
+                        align-items: center;
+                        @media @larger-phone-width-down{
+                            margin-top: 12px;
+                        }
+                        .social-share{
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            border: 0;
+                            padding: 2px 4px!important;
+                            margin-right: 12px;
+                            border-radius: 3px!important;
+                            color: white;
+                            &:hover{
+                                opacity: 0.8;
+                            }
+                            &:focus{
+                                outline: none;
+                            }
+                            &:last-child{
+                                margin-right: 0;
+                            }
+                            .fa{
+                                margin-right: 6px;
+                            }
+                            .label{
+                                font-family: @font-family-primary;
+                                font-size: 11px;
+                                font-weight: 400;
+                                color: white;
+                                padding: 0;
+                            }
+                            &.linkedin{
+                                background: #0073b1;
+                            }
+                            &.twitter{
+                                background: #1DA1F2;
+                            }
+                            &.facebook{
+                                background: #3b5998;
+                            }
                         }
                     }
                 }
@@ -9193,6 +9278,25 @@ body #section-main-content{
                         padding-left: 0;
                     }
                 }
+            }
+        }
+    }
+}
+
+/* hide donate btn on PRF get involved page */
+.hidden-donate-btn{
+    .primary-button.donate{
+        display: none;
+    }
+}
+
+/* element styling for block */
+.block{
+    .content{
+        > p,
+        > ul{
+            &:last-child{
+                margin-bottom: 0;
             }
         }
     }

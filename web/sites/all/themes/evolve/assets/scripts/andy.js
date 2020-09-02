@@ -3410,7 +3410,6 @@ const removeTeamEmailHandler = () => {
 }
 
 // brick nav handler
-
 const brickNavHandler = () => {
   const brickNavLists = document.querySelectorAll('.brick-nav');
 
@@ -3467,6 +3466,81 @@ const brickNavHandler = () => {
   });
 }
 
+// article verticle list script
+const articleVerticleListHandler = () => {
+  const articleVerticleLists = document.querySelectorAll('.article-verticle-list');
+
+  articleVerticleLists.length && articleVerticleLists.forEach(list => {
+    const articles = list.querySelectorAll('.single-article');
+
+    articles.length && articles.forEach(article => {
+      // default variables
+      const shareWrapper = article.querySelector('.actions-wrapper .share');
+      const articleButton = article.querySelector('.article-info .simple-link');
+  
+      // handle social share links
+      const isSocialShareRequired = list.classList.contains('auto-share-embed');
+  
+      if (isSocialShareRequired && shareWrapper && articleButton){
+        let articleUrl = articleButton.href;
+        
+        // create linkedin
+        const linkedInShare = document.createElement('button');
+        linkedInShare.classList.add('social-share');
+        linkedInShare.classList.add('linkedin');
+        linkedInShare.innerHTML = `
+          <i class="fa fa-linkedin-square"></i>
+          <span class="label">Share</span>
+        `;
+
+        // handle share event
+        linkedInShare.addEventListener('click', e => {
+          e.preventDefault();
+          let shareUrl = `https://www.linkedin.com/shareArticle?mini=true&url=${articleUrl}`
+          window.open(shareUrl, "_blank");
+        });
+
+        // create twitter
+        const twitterShare = document.createElement('button');
+        twitterShare.classList.add('social-share');
+        twitterShare.classList.add('twitter');
+        twitterShare.innerHTML = `
+          <i class="fa fa-twitter-square"></i>
+          <span class="label">Tweet</span>
+        `;
+
+        // handle share event
+        twitterShare.addEventListener('click', e => {
+          e.preventDefault();
+          let shareUrl = `https://twitter.com/intent/tweet?url=${articleUrl}`
+          window.open(shareUrl, "_blank");
+        });
+
+        // create facebook
+        const facebookShare = document.createElement('button');
+        facebookShare.classList.add('social-share');
+        facebookShare.classList.add('facebook');
+        facebookShare.innerHTML = `
+          <i class="fa fa-facebook-square"></i>
+          <span class="label">Share</span>
+        `;
+
+        // handle share event
+        facebookShare.addEventListener('click', e => {
+          e.preventDefault();
+          let shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`
+          window.open(shareUrl, "_blank");
+        });
+
+        shareWrapper.appendChild(linkedInShare);
+        shareWrapper.appendChild(twitterShare);
+        shareWrapper.appendChild(facebookShare);
+      }
+    });
+
+  });
+}
+
 // trigger functions after DOM content loaded
 window.addEventListener('DOMContentLoaded', e => {
   loadSVGIcons();
@@ -3476,4 +3550,5 @@ window.addEventListener('DOMContentLoaded', e => {
   tabBannerModuleScript();
   removeTeamEmailHandler();
   brickNavHandler();
+  articleVerticleListHandler();
 });

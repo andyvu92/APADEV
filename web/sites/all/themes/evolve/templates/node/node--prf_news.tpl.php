@@ -162,7 +162,8 @@
 					$output = drupal_render($get);
 					print $output;
 
-					echo views_embed_view('media', 'block_19');
+					// most popular
+					// echo views_embed_view('media', 'block_19');
 
 				?>
 			</div>
