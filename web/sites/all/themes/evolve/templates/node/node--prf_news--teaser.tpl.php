@@ -93,7 +93,7 @@
 			</div>
 
 			<div class="share">
-				<!-- REUSE THE CURRENT SOCIAL SHARE FROM INMOTION -->
+				
 			</div>
 		</div>
 

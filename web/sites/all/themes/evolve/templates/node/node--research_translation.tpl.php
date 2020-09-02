@@ -108,7 +108,8 @@ if(is_null($userRole)) {
             $output = drupal_render($get);
             print $output;
 
-            echo views_embed_view('research_translation', 'block_4');
+            // most popular
+            // echo views_embed_view('research_translation', 'block_4');
 
          ?>
          </div>
