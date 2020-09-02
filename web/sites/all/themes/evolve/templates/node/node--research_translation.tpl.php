@@ -1,4 +1,3 @@
-<div class="border-10 full-width"></div>
 
 <?php
   global $user;
@@ -13,11 +12,10 @@ if(is_null($userRole)) {
    }
 }
    ?>
-<div style="height: 10px; width: 1px;">&nbsp;</div>
 <div class="Pagination"></div>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
 <?php if(is_null(render($content['field_podcast_url']))): ?>
-   <section class="post-content container" style="float:none; margin:auto;">
+   <section class="post-content" style="float:none; margin:auto;">
       <div class="region col-xs-12 col-sm-12 col-md-9 col-lg-9">
 
         <!-- MOBILE POST FEATURED IMG -->
@@ -28,7 +26,6 @@ if(is_null($userRole)) {
         </div>
 
          <h1 class="SectionHeader"><?php print $node->title;?></h1>
-         <div class="brd-headling">&nbsp;</div>
 			
          <header class="meta">
             <div class="flex-container post-meta">
@@ -44,7 +41,7 @@ if(is_null($userRole)) {
                            ?>
                            <?php if(!is_null(render($content['field_members_only']))): ?> 
                            <?php endif */ ?>
-                        <div class="meta-author-date">
+                        <div class="meta-type-date">
                            <!-- <span class="meta-author">By <b><?php //print render($content['field_inmotion_author']); ?></b></span> -->
                            <span class="meta-date"><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></span>
                         </div>

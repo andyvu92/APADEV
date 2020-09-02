@@ -9091,11 +9091,109 @@ body #section-main-content{
     }
 }
 
-.node-type-research-translation{
+.node-type-research-translation,
+.node-type-prf-news{
+    #section-main-content{
+        border-top: 10px solid #e7e8ea;
+    }
     .CampaignSidebar{
         .headline,
         .brd-headling{
             display: block!important;
+        }
+    }
+    .post-content{
+        @media @larger-phone-width-down{
+            padding-top: 0!important;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        > .region{
+            @media @larger-phone-width-down{
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+        .post-img{
+            margin-bottom: 30px;
+            img{
+                width: 100%;
+                height: auto;
+            }
+            .field-name-field-folder {
+                display: none;
+            }
+
+            &.mobile{
+                display: none;
+                @media @larger-phone-width-down{
+                    display: block;
+                    margin-left: -15px;
+                    margin-right: -15px;
+                    width: 100vw;
+                }
+            }
+            &:not(.mobile){
+                display: block;
+                @media @larger-phone-width-down{
+                    display: none;
+                }
+            }
+        }
+
+        h1.SectionHeader{
+            font-weight: 400;
+            font-size: 4em;
+            line-height: 1.1em;
+            font-family: @font-family-secondary;
+            margin-bottom: 50px;
+            color: @blue;
+            & + .brd-headling{
+                display: none;
+            }
+            @media @larger-phone-width-down{
+                font-weight: 700;
+                font-size: 2.5em;
+                margin-bottom: 25px;
+            }
+        }
+
+        .post-meta{
+            margin-bottom: 20px;
+            @media @larger-phone-width-down{
+                margin-bottom: 30px;
+                > .flex-cell{
+                    flex-direction: column;
+                    border-top: 1px solid rgba(0,0,0,0.12);
+                    border-bottom: 1px solid rgba(0,0,0,0.12);
+                    padding: 10px 0 15px;
+                }
+            }
+            .meta-type-date{
+                font-size: 1.2em;
+            }
+    
+            .meta-info{
+                @media @larger-phone-width-down{
+                    width: 100%;
+                }
+            }
+            .meta-share-url{
+                @media @larger-phone-width-down{
+                    width: 100%;
+                }
+                #fb-root{
+                    display: none;
+                }
+                .socialMediaIcon{
+                    margin: 0!important;
+                    @media @larger-phone-width-down{
+                        margin: 15px 0px 0px !important;
+                        float: left !important;
+                        padding-left: 0;
+                    }
+                }
+            }
         }
     }
 }
