@@ -55,7 +55,7 @@ function getMemberTypePrice(){
     // Send - 
     // userID & product list
 	// Response -Membership prodcut price
-	$API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/-1";
+	$API = "https://aptifywebtest.australian.physio/AptifyServicesAPI/services/MembershipProducts/-1";
 	$tt = curlRequesttttt($API, "JSON");
 	//echo $tt;
 	$MemberType = json_clean_decode($tt, true);
@@ -80,7 +80,7 @@ function getMemberTypePrice(){
 }
 
 function getDropdown(){
-	$API = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOptionValues';
+	$API = 'https://aptifywebtest.australian.physio/AptifyServicesAPI/services/GetOptionValues';
 	$resultt = curlRequesttttt($API, "Get");
 	$result = json_clean_decode($resultt, true);
 
@@ -281,13 +281,17 @@ function getDropdown(){
 		}
     }
 	$response= $arrayPDTypes;
+	$fp = fopen(__DIR__ . '/../json/PDTypes.json', 'w');
+    $test = fwrite($fp, json_encode($response));
+	fclose($fp);
 	foreach($result['CurrentEmploymentSectors']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
 		$EmploymentSectors[] = array('ID'=>$ID, 'Name'=>$Name);
     }
 	$response= $EmploymentSectors;
-	$fp = fopen(__DIR__ . '/../json/PDTypes.json', 'w');
+	var_dump($response);
+	$fp = fopen(__DIR__ . '/../json/CurrentEmployment.json', 'w');
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);
 }
