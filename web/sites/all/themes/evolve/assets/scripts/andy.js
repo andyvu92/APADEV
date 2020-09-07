@@ -3338,7 +3338,9 @@ const tabBannerModuleScript = () => {
       setTimeout(() => {
         if (window.innerWidth < 571){
   
+          togglesWrapper.style.height = `auto`;
           let toggleWrapperHeight = togglesWrapper.clientHeight;
+          togglesWrapper.style.height = ``;
   
           setTimeout(() => {
             togglesWrapper.classList.add('mobile-nav-initialised');
