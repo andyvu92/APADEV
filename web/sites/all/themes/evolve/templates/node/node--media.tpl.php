@@ -111,12 +111,8 @@
                         <li>
                             <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;
                         </li>
-                        <li>
-                            <div class="g-plus" data-action="share" data-annotation="none">&nbsp;</div>
-                        </li>
 					</ul>
 					<div id="fb-root">&nbsp;</div>
-					<script src="https://apis.google.com/js/platform.js" async defer></script>
 					<script>(function(d, s, id) {
 					var js, fjs = d.getElementsByTagName(s)[0];
 					if (d.getElementById(id)) return;

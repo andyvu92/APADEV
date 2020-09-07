@@ -170,9 +170,6 @@
                             <li>
                                 <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;
                             </li>
-                            <li>
-                                <div class="g-plus" data-action="share" data-annotation="none">&nbsp;</div>
-                            </li>
                         </ul>
                     </div>
                 </div>
@@ -195,11 +192,11 @@
             </div>
         </div>
         <div class="inmotion-content">
-                <div class="content-loading">
-                    <div class="line"></div>
-                    <div class="line"></div>
-                    <div class="line"></div>
-                </div>
+            <div class="content-loading">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
             <?php
                 // We hide the comments and links now so that we can render them later.
                 hide($content['comments']);
@@ -209,9 +206,6 @@
                 echo '<div class="inmotion-readmore-content">'. render($content['body']) .'</div>';
             ?>
         </div>
-        
-         <script src="https://apis.google.com/js/platform.js" async defer></script>
-         
          <div id="fb-root">&nbsp;</div>
          <script>(function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
@@ -222,14 +216,11 @@
             }(document, 'script', 'facebook-jssdk'));
          </script><script type="text/javascript">
             jQuery(document).ready(function($) {
-				
-            var x = $(location).attr('href');
-            jQuery(document).ready(function($) {
-            	$('.fb-share-button').html("<a class='fb-xfbml-parse-ignore' target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=" +  x  +  "&amp;src=sdkpreparse'></a>")
-            });
-            
+                var x = $(location).attr('href');
+                jQuery(document).ready(function($) {
+                    $('.fb-share-button').html("<a class='fb-xfbml-parse-ignore' target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=" +  x  +  "&amp;src=sdkpreparse'></a>")
+                });
             })
-              
          </script>
 		<?php 
 			$block = block_load('block', '288');

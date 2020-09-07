@@ -5,8 +5,7 @@ if(!function_exists('drupal_session_started'))
 }
 ?>
 <?php
-
-if (isset($_SESSION['UserId'])):
+	if (isset($_SESSION['UserId'])):
 ?>
 <?php
 $creditcard='';
@@ -49,8 +48,6 @@ if(isset($_POST["PostNG"])) {
 	}
 /***************End Save National Group in PD shopping cart***********/
 }
-
-
 
 // 2.2.19 - GET list National Group
 // Send -
@@ -204,8 +201,6 @@ $price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
 	$tempcard['Expiry-date'] = $_POST['Expirydate'];
 	$tempcard['CCV'] = $_POST['CCV'];
 	$_SESSION['tempcard'] = $tempcard;
-
-
 }	*/
 if(isset($_SESSION["UserId"])){
 	$userid = $_SESSION["UserId"];
@@ -267,7 +262,7 @@ if(isset($_SESSION["UserId"])){
 		countDown();
 	</script>
 
-	<?php
+	<?php 
 	$Availability = true;
 	if(sizeof($products)!=0){
 		////print_r($products);
@@ -393,27 +388,19 @@ if(isset($_SESSION["UserId"])){
 					}
 				}
 			}
-
 		}
 	}
 	if(sizeof($FPListArray)!=0){
 		foreach( $FPListArray as $MGArray){
-
-
-
-						echo "<div class='flex-cell flex-flow-row table-cell'>";
-
-						echo "<div class='flex-col-5 title-col'>".$MGArray['FPtitle']."</div>";
-						echo	"<div class='flex-col-3 pd-spcart-date'>N/A</div>";
-						echo	"<div class='flex-col-2 pd-spcart-location'><span class='mobile-visible'>Location: </span>N/A</div>";
-						echo "<div class='flex-col-1 pd-spcart-price'>A$".$MGArray['FPprice']."</div>";
-						//$price += $NGArray['NGprice'];
-						//echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
-						echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PDMG&productid='.$MGArray['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
-						echo "</div>";
-
-
-
+			echo "<div class='flex-cell flex-flow-row table-cell'>";
+			echo "<div class='flex-col-3 title-col'>".$MGArray['FPtitle']."</div>";
+			echo	"<div class='flex-col-3 pd-spcart-date'>N/A</div>";
+			echo	"<div class='flex-col-2 pd-spcart-location'><span class='mobile-visible'>Location: </span>N/A</div>";
+			echo "<div class='flex-col-1 pd-spcart-price'>A$".$MGArray['FPprice']."</div>";
+			//$price += $NGArray['NGprice'];
+			//echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
+			echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PDMG&productid='.$MGArray['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
+			echo "</div>";
 		}
 	}
 $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
@@ -441,7 +428,15 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		<?php endif; ?>
 		<div class="flex-cell">
 			<input class="styled-checkbox" type="checkbox" id="accept3">
-			<label for="accept3" id="accept3label">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled. The APA recommends travelling participants purchase travel insurance to cover this<span class="tipstyle">*</span></label>
+			<label for="accept3" id="accept3label">I accept that the APA will not reimburse costs associated with travel and/or accommodation if the event is cancelled.</label>
+        </div>
+        <div class="flex-cell">
+            <input class="styled-checkbox" type="checkbox" id="accept4">
+            <label for="accept4" id="accept4label">I understand that it is my responsibility to (where applicable) recognise and complete, in full, any noted pre-requisites/pre-learning requirements of a course/workshop before I attend the face-to-face component of it. </label>
+        </div>
+        <div class="flex-cell">
+            <input class="styled-checkbox" type="checkbox" id="accept5">
+            <label for="accept5" id="accept5label">I understand that failure to do so may result in my inability to attend/participate in the face-to-face component of the course, and I will be ineligible for a full refund.</label>
 		</div>
 	</div>
 	<?php if($tag==1 || $dietarT==1): ?>

@@ -281,6 +281,12 @@ function getDropdown(){
 		}
     }
 	$response= $arrayPDTypes;
+	foreach($result['CurrentEmploymentSectors']  as $lines){
+		$ID = $lines['ID'];
+		$Name = $lines['Name'];
+		$EmploymentSectors[] = array('ID'=>$ID, 'Name'=>$Name);
+    }
+	$response= $EmploymentSectors;
 	$fp = fopen(__DIR__ . '/../json/PDTypes.json', 'w');
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);

@@ -53,24 +53,19 @@ if(is_null($userRole)) {
                         <span class="meta-date"><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></span>
                      </div>
                   </div>
-
-                  <div class="flex-col-6 meta-share-url">
-                     <ul class="socialMediaIcon" style="float:right;margin-top:-3%;">
-                     <li>
-                        <div class="fb-share-button" data-layout="button_count" data-mobile-iframe="true" data-size="small">&nbsp;</div>
-                     </li>
-                     <li>
-                        <a class="twitter-share-button" data-show-count="false" href="https://twitter.com/share">Tweet</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8">&nbsp;</script>
-                     </li>
-                     <li>
-                        <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;
-                     </li>
-                     <li>
-                        <!-- Place this tag where you want the share button to render. -->
-                        <div class="g-plus" data-action="share" data-annotation="none">&nbsp;</div>
-                     </li>
-                     </ul>
-                  </div>
+                     <div class="flex-col-6 meta-share-url">
+                        <ul class="socialMediaIcon" style="float:right;margin-top:-3%;">
+                           <li>
+                              <div class="fb-share-button" data-layout="button_count" data-mobile-iframe="true" data-size="small">&nbsp;</div>
+                           </li>
+                           <li>
+                              <a class="twitter-share-button" data-show-count="false" href="https://twitter.com/share">Tweet</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8">&nbsp;</script>
+                           </li>
+                           <li>
+                              <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;
+                           </li>
+                        </ul>
+                     </div>
                </div>
 
             </div>
@@ -87,8 +82,6 @@ if(is_null($userRole)) {
             hide($content['links']);
             print render($content['body']);
          ?>
-         <script src="https://apis.google.com/js/platform.js" async defer></script>
-         
          <div id="fb-root">&nbsp;</div>
          <script>(function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
