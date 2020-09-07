@@ -3378,9 +3378,11 @@ const tabBannerModuleScript = () => {
     
           const expandHandler = () => {
             mobileTogglesTriggerBtn.classList.add('active');
-            togglesWrapper.style.height = `${toggleWrapperHeight}px`;
             togglesWrapper.classList.remove('collapsed');
             togglesWrapper.classList.add('expanded');
+            setTimeout(() => {
+              togglesWrapper.style.height = `${toggleWrapperHeight}px`;
+            }, 10);
             isExpanded = true;
           }
   
@@ -3680,9 +3682,11 @@ const tabBannerAltModuleScript = () => {
     
           const expandHandler = () => {
             mobileTogglesTriggerBtn.classList.add('active');
-            togglesWrapper.style.height = `${toggleWrapperHeight}px`;
             togglesWrapper.classList.remove('collapsed');
             togglesWrapper.classList.add('expanded');
+            setTimeout(() => {
+              togglesWrapper.style.height = `${toggleWrapperHeight}px`;
+            }, 10);
             isExpanded = true;
           }
   
@@ -3744,5 +3748,5 @@ const backToTopButtonAltHandler = () => {
 // trigger functions after DOM content loaded
 window.addEventListener('DOMContentLoaded', e => {
     backToTopButtonAltHandler();
-    tabBannerAltModuleScript();
+    //tabBannerAltModuleScript();
 });
