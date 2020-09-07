@@ -9143,10 +9143,136 @@ body #section-main-content{
             }
         }
     }
-}/* EXTEND PARALLAX BANNER WITH LARGER HEIGHT */
+}
+
+.right-sidebar{
+    .block{
+        .primary-button{
+            &.large{
+                padding: 24px 34px;
+                font-size: 20px;
+                width: 100%;
+                max-width: 100%;
+                align-items: center;
+                justify-content: center;
+            }
+        }
+    }
+}
+
+.node-type-research-translation,
+.node-type-prf-news{
+    #section-main-content{
+        border-top: 10px solid #e7e8ea;
+    }
+    .CampaignSidebar{
+        .headline,
+        .brd-headling{
+            display: block!important;
+        }
+    }
+    .post-content{
+        @media @larger-phone-width-down{
+            padding-top: 0!important;
+            padding-left: 0;
+            padding-right: 0;
+        }
+        > .region{
+            @media @larger-phone-width-down{
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+        .post-img{
+            margin-bottom: 30px;
+            img{
+                width: 100%;
+                height: auto;
+            }
+            .field-name-field-folder {
+                display: none;
+            }
+
+            &.mobile{
+                display: none;
+                @media @larger-phone-width-down{
+                    display: block;
+                    margin-left: -15px;
+                    margin-right: -15px;
+                    width: 100vw;
+                }
+            }
+            &:not(.mobile){
+                display: block;
+                @media @larger-phone-width-down{
+                    display: none;
+                }
+            }
+        }
+
+        h1.SectionHeader{
+            font-weight: 400;
+            font-size: 4em;
+            line-height: 1.1em;
+            font-family: @font-family-secondary;
+            margin-bottom: 50px;
+            color: @blue;
+            & + .brd-headling{
+                display: none;
+            }
+            @media @larger-phone-width-down{
+                font-weight: 700;
+                font-size: 2.5em;
+                margin-bottom: 25px;
+            }
+        }
+
+        .post-meta{
+            margin-bottom: 20px;
+            @media @larger-phone-width-down{
+                margin-bottom: 30px;
+                > .flex-cell{
+                    flex-direction: column;
+                    border-top: 1px solid rgba(0,0,0,0.12);
+                    border-bottom: 1px solid rgba(0,0,0,0.12);
+                    padding: 10px 0 15px;
+                }
+            }
+            .meta-type-date{
+                font-size: 1.2em;
+            }
+    
+            .meta-info{
+                @media @larger-phone-width-down{
+                    width: 100%;
+                }
+            }
+            .meta-share-url{
+                @media @larger-phone-width-down{
+                    width: 100%;
+                }
+                #fb-root{
+                    display: none;
+                }
+                .socialMediaIcon{
+                    margin: 0!important;
+                    @media @larger-phone-width-down{
+                        margin: 15px 0px 0px !important;
+                        float: left !important;
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* EXTEND PARALLAX BANNER WITH LARGER HEIGHT */
 [class*="jarallax"]{
     &.large{
-        min-height: 555px;
+        @media @larger-tablet-width-up{
+            min-height: 555px;
+        }
     }
 }
 
@@ -9156,7 +9282,7 @@ h1.heading{
     font-size: 63px;
     font-weight: 600;
     line-height: 66px;
-    color: @blue;
+    color: #009FDA;
     @media @larger-tablet-width-down{
         font-size: 55px;
         line-height: 58px;
@@ -9175,18 +9301,18 @@ h1.heading{
 
 .intro-20{
     > p{
-        font-size: 20px!important;
+        font-size: 20px;
         @media @larger-phone-width-down{
-            font-size: 18px!important;
+            font-size: 18px;
         }
     }
 }
 
 .intro-24{
     > p{
-        font-size: 24px!important;
+        font-size: 24px;
         @media @larger-phone-width-down{
-            font-size: 20px!important;
+            font-size: 20px;
         }
     }
 }
@@ -9217,7 +9343,7 @@ h1.heading{
         background: none;
         &:hover,
         &:focus{
-            color: @blue;
+            color: @color-primary;
             outline: none;
         }
         &:before{
@@ -9267,7 +9393,6 @@ h1.heading{
         }
     }
 }
-
 /* hide donate btn on PRF get involved page */
 .hidden-donate-btn{
     .primary-button.donate{
@@ -9293,7 +9418,8 @@ h1.heading{
     #section-features{
         margin: 0;
     }
-}/* SPACING */
+}
+/* SPACING */
 .spacing{
     position: relative;
     display: flex;
@@ -9368,20 +9494,30 @@ h1.heading{
                 @media @larger-phone-width-down{
                     padding: 0px 15px !important;
                     font-size: 16px!important;
+                    &:after{
+                        width: calc(~'100% - 30px');
+                        position: absolute!important;
+                    }
                 }
                 &:hover{
                     color: @blue;
                     background: none;
                     border: 0 solid white!important;
                 }
+                &:after{
+                    content: '';
+                    position: absolute!important;
+                    visibility: hidden;
+                }
                 &.active{
                     border: 0 solid white!important;
                     background: none;
                     color: @blue;
                     position: relative;
+                    visibility: visible;
                     &:after{
                         content: '';
-                        position: absolute;
+                        position: absolute!important;
                         bottom: 4px;
                         width: calc(~'100% - 40px');
                         border-top: 1px solid @blue;
@@ -9458,7 +9594,6 @@ h1.heading{
             
             .toggle{
                 min-width: max-content;
-                width: auto!important;
                 &:first-child{
                     padding-left: 25px!important;
                     &.active{
@@ -9509,13 +9644,9 @@ h1.heading{
         border: 0;
         margin-top: 35px;
         background: none;
-        &:first-child{
-            margin-top: 0;
-        }
         &:focus{
             outline: none;
         }
-
         &.active{
             .toggle-icon{
                 background: rgba(0,0,0,0);
@@ -9642,9 +9773,9 @@ h1.heading{
             &:hover,
             &:focus,
             &.active{
-                background-color: @blue;
+                background-color: @color-primary;
                 color: white;
-                border: 1px solid @blue;
+                border: 1px solid @color-primary;
                 outline: none;
                 & + .toggle{
                     border-left: 1px solid rgba(255,255,255,0);
@@ -9658,7 +9789,6 @@ h1.heading{
             }
         }
     }
-
     .banner-tab-container{
         padding-top: 35px;
         &.large-margin{
@@ -9678,128 +9808,6 @@ h1.heading{
                 opacity: 1;
                 height: auto;
                 overflow: visible;
-            }
-        }
-    }
-}
-
-.right-sidebar{
-    .block{
-        .primary-button{
-            &.large{
-                padding: 24px 34px;
-                font-size: 20px;
-                width: 100%;
-                max-width: 100%;
-                align-items: center;
-                justify-content: center;
-            }
-        }
-    }
-}
-
-.node-type-research-translation,
-.node-type-prf-news{
-    #section-main-content{
-        border-top: 10px solid #e7e8ea;
-    }
-    .CampaignSidebar{
-        .headline,
-        .brd-headling{
-            display: block!important;
-        }
-    }
-    .post-content{
-        @media @larger-phone-width-down{
-            padding-top: 0!important;
-            padding-left: 0;
-            padding-right: 0;
-        }
-        > .region{
-            @media @larger-phone-width-down{
-                padding-left: 0;
-                padding-right: 0;
-            }
-        }
-        .post-img{
-            margin-bottom: 30px;
-            img{
-                width: 100%;
-                height: auto;
-            }
-            .field-name-field-folder {
-                display: none;
-            }
-
-            &.mobile{
-                display: none;
-                @media @larger-phone-width-down{
-                    display: block;
-                    margin-left: -15px;
-                    margin-right: -15px;
-                    width: 100vw;
-                }
-            }
-            &:not(.mobile){
-                display: block;
-                @media @larger-phone-width-down{
-                    display: none;
-                }
-            }
-        }
-
-        h1.SectionHeader{
-            font-weight: 400;
-            font-size: 4em;
-            line-height: 1.1em;
-            font-family: @font-family-secondary;
-            margin-bottom: 50px;
-            color: @blue;
-            & + .brd-headling{
-                display: none;
-            }
-            @media @larger-phone-width-down{
-                font-weight: 700;
-                font-size: 2.5em;
-                margin-bottom: 25px;
-            }
-        }
-
-        .post-meta{
-            margin-bottom: 20px;
-            @media @larger-phone-width-down{
-                margin-bottom: 30px;
-                > .flex-cell{
-                    flex-direction: column;
-                    border-top: 1px solid rgba(0,0,0,0.12);
-                    border-bottom: 1px solid rgba(0,0,0,0.12);
-                    padding: 10px 0 15px;
-                }
-            }
-            .meta-type-date{
-                font-size: 1.2em;
-            }
-    
-            .meta-info{
-                @media @larger-phone-width-down{
-                    width: 100%;
-                }
-            }
-            .meta-share-url{
-                @media @larger-phone-width-down{
-                    width: 100%;
-                }
-                #fb-root{
-                    display: none;
-                }
-                .socialMediaIcon{
-                    margin: 0!important;
-                    @media @larger-phone-width-down{
-                        margin: 15px 0px 0px !important;
-                        float: left !important;
-                        padding-left: 0;
-                    }
-                }
             }
         }
     }
