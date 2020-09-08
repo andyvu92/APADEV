@@ -223,6 +223,8 @@ $filterMemberProduct = array("10007","10008","10009","9997");
     if (isset($_POST['MAdditionallanguage'])) {
         $postData['PAdditionalLanguageID'] = implode(",", $_POST['MAdditionallanguage']);
     }
+    if(isset($_POST['CurrentEmploymentSector'])){ $postData['CurrentEmploymentSector'] = $_POST['CurrentEmploymentSector']; }
+    
 
     if (isset($_POST['Findpublicbuddy'])) {
         $postData['Findpublicbuddy'] = $_POST['Findpublicbuddy'];
@@ -444,6 +446,9 @@ $filterMemberProduct = array("10007","10008","10009","9997");
         // for new user join a member call user registeration web service
 
         $resultdata = aptify_get_GetAptifyData("25", $postData);
+        var_dump($_POST);
+        var_dump($postData);
+
 
         // when create user successfully call login web service to login in APA website automatically.
         // after login successfully get UserID as well to store on APA shopping cart database
@@ -578,7 +583,7 @@ if (isset($_SESSION['UserId'])):
 <form id="your-detail-form" action="jointheapa" method="POST" autocomplete="off">
     <input type="hidden" name="step1" value="1"/>
     <input type="hidden" name="insuranceTag" id="insuranceTag"/>
-            <div class="down1" <?php
+    <div class="down1" <?php
     if (isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['step2-1']) || isset($_POST['goI']) || isset($_POST['goP']) || isset($_POST['step2-2']) || isset($_POST['step2-3']) || isset($_POST['QOrder']) || isset($_POST['step2-4']) || isset($_POST['Couponcode']))
         echo 'style="display:none;"';
     else {
@@ -586,57 +591,56 @@ if (isset($_SESSION['UserId'])):
     }
 ?>>
 
-                            <div class="row">
-                                <div class="col-xs-6 col-md-3">
-                                        <label for="prefix">Prefix</label>
-                                        <div class="chevron-select-box">
-                                        <select class="form-control" id="Prefix" name="Prefix">
-										<option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> disabled>Please select</option>
-                                        <?php
-    $Prefixcode = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
-    $Prefix     = json_decode($Prefixcode, true);
-    foreach ($Prefix as $key => $value) {
-        echo '<option value="' . $Prefix[$key]['ID'] . '"';
-        if ($details['Prefix'] == $Prefix[$key]['ID']) {
-            echo "selected='selected'";
-        }
-
-        echo '> ' . $Prefix[$key]['Prefix'] . ' </option>';
-    }
-?>
-                           </select>
-                           </div>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <label for="">Given name<span class="tipstyle"> *</span></label>
-                        <input type="text" class="form-control"  name="Firstname" placeholder="Given name"<?php
-    if (empty($details['Firstname'])) {
-        echo "";
-    } else {
-        echo 'value="' . $details['Firstname'] . '"';
-    }
-?>>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <label for="">Preferred name</label>
-                        <input type="text" class="form-control"  name="Preferred-name" placeholder="Preferred name"<?php
-    if (empty($details['Preferred-name'])) {
-        echo "";
-    } else {
-        echo 'value="' . $details['Preferred-name'] . '"';
-    }
-?>>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-                        <label for="">Middle name</label>
-                        <input type="text" class="form-control" name="Middle-name" placeholder="Middle name"<?php
-    if (empty($details['Middle-name'])) {
-        echo "";
-    } else {
-        echo 'value="' . $details['Middle-name'] . '"';
-    }
-?>>
-                    </div>
+    <div class="row">
+        <div class="col-xs-6 col-md-3">
+            <label for="prefix">Prefix<span class="tipstyle"> *</span></label>
+            <div class="chevron-select-box">
+            <select class="form-control" id="Prefix" name="Prefix" required>
+                <option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> disabled>Please select</option>
+                <?php
+                    $Prefixcode = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
+                    $Prefix     = json_decode($Prefixcode, true);
+                    foreach ($Prefix as $key => $value) {
+                        echo '<option value="' . $Prefix[$key]['ID'] . '"';
+                        if ($details['Prefix'] == $Prefix[$key]['ID']) {
+                            echo "selected='selected'";
+                        }
+                        echo '> ' . $Prefix[$key]['Prefix'] . ' </option>';
+                    }
+                ?>
+            </select>
+            </div>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <label for="">Given name<span class="tipstyle"> *</span></label>
+            <input type="text" class="form-control"  name="Firstname" placeholder="Given name"<?php
+                if (empty($details['Firstname'])) {
+                    echo "";
+                } else {
+                    echo 'value="' . $details['Firstname'] . '"';
+                }
+            ?>>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <label for="">Preferred name</label>
+            <input type="text" class="form-control"  name="Preferred-name" placeholder="Preferred name"<?php
+                if (empty($details['Preferred-name'])) {
+                    echo "";
+                } else {
+                    echo 'value="' . $details['Preferred-name'] . '"';
+                }
+            ?>>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <label for="">Middle name</label>
+            <input type="text" class="form-control" name="Middle-name" placeholder="Middle name"<?php
+                if (empty($details['Middle-name'])) {
+                    echo "";
+                } else {
+                    echo 'value="' . $details['Middle-name'] . '"';
+                }
+            ?>>
+        </div>
 
                     <!--BREAK-->
 
@@ -650,160 +654,157 @@ if (isset($_SESSION['UserId'])):
     }*/
 ?>>
                     </div>-->
-                    <div class="col-xs-6 col-md-3">
-                       <label for="">Family name<span class="tipstyle"> *</span></label>
-                       <input type="text" class="form-control" name="Lastname" placeholder='Family name'<?php
+        <div class="col-xs-6 col-md-3">
+            <label for="">Family name<span class="tipstyle"> *</span></label>
+            <input type="text" class="form-control" name="Lastname" placeholder='Family name'<?php
     if (empty($details['Lastname'])) {
         echo "";
     } else {
         echo 'value="' . $details['Lastname'] . '"';
     }
 ?>>
-                    </div>
-                    <div class="col-xs-6 col-md-3">
-
-
-<?php $birthdata = explode("/",$details['birth']);?>
-                       <label for="">Date of birth<span class="tipstyle"> *</span></label>
-					       <div class="dateselect">
-
-                                <div class="chevron-select-box date">
-                                    <select class="form-control" id="birthdate" name="birthdate">
-                                        <option value="" selected disabled>Date</option>
-                                        <?php
-                                            $start_date = 1;
-                                            $end_date   = 31;
-                                            for( $j=$start_date; $j<=$end_date; $j++ ) {
-
-                                                echo '<option value='.$j;
-											    if($j ==$birthdata[2]) {echo " selected='selected'";}
-												echo '>'.$j.'</option>';
-
-                                            }
-                                        ?>
-                                    </select>
-                                </div>
-                                <div class="chevron-select-box month">
-                                    <select class="form-control" id="birthmonth" name="birthmonth">
-                                        <option value="" selected disabled>Month</option>
-
-                                        <option value="01" <?php  if($birthdata[1] == "01") {echo "selected='selected'";}?>>Jan</option>
-                                        <option value="02" <?php  if($birthdata[1] == "02") {echo "selected='selected'";}?>>Feb</option>
-                                        <option value="03" <?php  if($birthdata[1] == "03") {echo "selected='selected'";}?>>Mar</option>
-                                        <option value="04" <?php  if($birthdata[1] == "04") {echo "selected='selected'";}?>>Apr</option>
-                                        <option value="05" <?php  if($birthdata[1] == "05") {echo "selected='selected'";}?>>May</option>
-                                        <option value="06" <?php  if($birthdata[1] == "06") {echo "selected='selected'";}?>>Jun</option>
-                                        <option value="07" <?php  if($birthdata[1] == "07") {echo "selected='selected'";}?>>Jul</option>
-                                        <option value="08" <?php  if($birthdata[1] == "08") {echo "selected='selected'";}?>>Aug</option>
-                                        <option value="09" <?php  if($birthdata[1] == "09") {echo "selected='selected'";}?>>Sep</option>
-                                        <option value="10" <?php  if($birthdata[1] == "10") {echo "selected='selected'";}?>>Oct</option>
-                                        <option value="11" <?php  if($birthdata[1] == "11") {echo "selected='selected'";}?>>Nov</option>
-                                        <option value="12" <?php  if($birthdata[1] == "12") {echo "selected='selected'";}?>>Dec</option>
-
-                                    </select>
-                                </div>
-                                <div class="chevron-select-box year">
-                                    <select class="form-control" id="birthyear" name="birthyear">
-                                        <option value="" selected disabled>Year</option>
-                                        <?php
-                                            $year = date('Y');
-                                            $min = $year - 118;
-                                            $max = $year;
-                                            for( $i=$max; $i>=$min; $i-- ) {
-
-                                                echo '<option value='.$i;
-												 if($i == $birthdata[0]) {echo " selected='selected'";}
-												echo '>'.$i.'</option>';
-
-                                            }
-                                        ?>
-                                    </select>
-                                </div>
-                            </div>
-
-                   </div>
-
-                    <div class="col-xs-6 col-md-3">
-
-                       <label for="">Gender</label>
-                       <div class="chevron-select-box">
-                       <select class="form-control" id="Gender" name="Gender">
-					   <option value="" <?php if (empty($details['Gender'])) echo "selected='selected'";?> disabled>Please select</option>
+        </div>
+        <div class="col-xs-6 col-md-3">
+            <?php $birthdata = explode("/",$details['birth']);?>
+        <label for="">Date of birth<span class="tipstyle"> *</span></label>
+            <div class="dateselect">
+                <div class="chevron-select-box date">
+                    <select class="form-control" id="birthdate" name="birthdate">
+                        <option value="" selected disabled>Date</option>
                         <?php
-    $Gendercode = file_get_contents("sites/all/themes/evolve/json/Gender.json");
-    $Gender     = json_decode($Gendercode, true);
-    foreach ($Gender as $key => $value) {
-        echo '<option value="' . $Gender[$key]['ID'] . '"';
-        if ($details['Gender'] == $Gender[$key]['ID']) {
-            echo "selected='selected'";
-        }
-        echo '> ' . $Gender[$key]['Description'] . ' </option>';
-    }
+                            $start_date = 1;
+                            $end_date   = 31;
+                            for( $j=$start_date; $j<=$end_date; $j++ ) {
 
-?>
-                       </select>
-                       </div>
-                    </div>
+                                echo '<option value='.$j;
+                                if($j ==$birthdata[2]) {echo " selected='selected'";}
+                                echo '>'.$j.'</option>';
 
-                        <div class="row">
-                            <div class="col-xs-6">
-                                <label for="">Aboriginal and Torres Strait Islander origin<span class="tipstyle"> *</span></label>
-
-
-
-                                <div class="chevron-select-box">
-                                    <select class="form-control" id="Aboriginal" name="Aboriginal">
-                                    <option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?> disabled>Please select</option>
-                                    <?php
-                                        $Aboriginalcode = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
-                                        $Aboriginal     = json_decode($Aboriginalcode, true);
-										//sort($Aboriginal);
-                                        foreach ($Aboriginal as $key => $value) {
-                                            echo '<option value="' . $Aboriginal[$key]['ID'] . '"';
-                                            if ($details['Aboriginal'] == $Aboriginal[$key]['ID']) {
-                                                echo "selected='selected'";
-                                            }
-
-                                            echo '> ' . $Aboriginal[$key]['Name'] . ' </option>';
-                                        }
-
-                                    ?>
-                                    </select>
-                                </div>
-                            </div>
-												                <?php
-    if (!empty($details['PAdditionalLanguageID'])) {
-        $PAdditionalLanguageID = explode(",", $details['PAdditionalLanguageID']);
-    } else {
-        $PAdditionalLanguageID = array();
-    }
-
-?>
-               <div class="col-xs-6">
-                    <label>Choose the languages you speak</label>
-
-                    <div class="plus-select-box">
-                    <select id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
-
-                       <?php
-    $Languagecode         = file_get_contents("sites/all/themes/evolve/json/Language.json");
-    $Language             = json_decode($Languagecode, true);
-    $_SESSION["Language"] = $Language;
-    foreach ($Language as $key => $value) {
-        echo '<option value="' . $Language[$key]['ID'] . '"';
-		//if(sizeof($PAdditionalLanguageID)==0 && $Language[$key]["ID"]=="11"){ echo "selected='selected'"; }
-        if (in_array($Language[$key]["ID"], $PAdditionalLanguageID)) {
-            echo "selected='selected'";
-        }
-
-        echo '> ' . $Language[$key]['Name'] . ' </option>';
-    }
-
-?>
-                   </select>
-                   </div>
+                            }
+                        ?>
+                    </select>
                 </div>
-                        </div>
+                <div class="chevron-select-box month">
+                    <select class="form-control" id="birthmonth" name="birthmonth">
+                        <option value="" selected disabled>Month</option>
+                        <option value="01" <?php  if($birthdata[1] == "01") {echo "selected='selected'";}?>>Jan</option>
+                        <option value="02" <?php  if($birthdata[1] == "02") {echo "selected='selected'";}?>>Feb</option>
+                        <option value="03" <?php  if($birthdata[1] == "03") {echo "selected='selected'";}?>>Mar</option>
+                        <option value="04" <?php  if($birthdata[1] == "04") {echo "selected='selected'";}?>>Apr</option>
+                        <option value="05" <?php  if($birthdata[1] == "05") {echo "selected='selected'";}?>>May</option>
+                        <option value="06" <?php  if($birthdata[1] == "06") {echo "selected='selected'";}?>>Jun</option>
+                        <option value="07" <?php  if($birthdata[1] == "07") {echo "selected='selected'";}?>>Jul</option>
+                        <option value="08" <?php  if($birthdata[1] == "08") {echo "selected='selected'";}?>>Aug</option>
+                        <option value="09" <?php  if($birthdata[1] == "09") {echo "selected='selected'";}?>>Sep</option>
+                        <option value="10" <?php  if($birthdata[1] == "10") {echo "selected='selected'";}?>>Oct</option>
+                        <option value="11" <?php  if($birthdata[1] == "11") {echo "selected='selected'";}?>>Nov</option>
+                        <option value="12" <?php  if($birthdata[1] == "12") {echo "selected='selected'";}?>>Dec</option>
+                    </select>
+                </div>
+                <div class="chevron-select-box year">
+                    <select class="form-control" id="birthyear" name="birthyear">
+                        <option value="" selected disabled>Year</option>
+                        <?php
+                            $year = date('Y');
+                            $min = $year - 118;
+                            $max = $year;
+                            for( $i=$max; $i>=$min; $i-- ) {
+
+                                echo '<option value='.$i;
+                                    if($i == $birthdata[0]) {echo " selected='selected'";}
+                                echo '>'.$i.'</option>';
+
+                            }
+                        ?>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 col-md-3">
+            <label for="">Gender<span class="tipstyle"> *</span></label>
+            <div class="chevron-select-box">
+            <select class="form-control" id="Gender" name="Gender" required>
+                <option value="" <?php if (empty($details['Gender'])) echo "selected='selected'";?> disabled>Please select</option>
+                <?php
+                    $Gendercode = file_get_contents("sites/all/themes/evolve/json/Gender.json");
+                    $Gender     = json_decode($Gendercode, true);
+                    foreach ($Gender as $key => $value) {
+                        echo '<option value="' . $Gender[$key]['ID'] . '"';
+                        if ($details['Gender'] == $Gender[$key]['ID']) {
+                            echo "selected='selected'";
+                        }
+                        echo '> ' . $Gender[$key]['Description'] . ' </option>';
+                    }
+                ?>
+            </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <label for="">Aboriginal and Torres Strait Islander origin<span class="tipstyle"> *</span></label>
+                <div class="chevron-select-box">
+                    <select class="form-control" id="Aboriginal" name="Aboriginal">
+                    <option value="" <?php if (empty($details['Aboriginal'])) echo "selected='selected'";?> disabled>Please select</option>
+                    <?php
+                        $Aboriginalcode = file_get_contents("sites/all/themes/evolve/json/Aboriginal.json");
+                        $Aboriginal     = json_decode($Aboriginalcode, true);
+                        foreach ($Aboriginal as $key => $value) {
+                            echo '<option value="' . $Aboriginal[$key]['ID'] . '"';
+                            if ($details['Aboriginal'] == $Aboriginal[$key]['ID']) {
+                                echo "selected='selected'";
+                            }
+                            echo '> ' . $Aboriginal[$key]['Name'] . ' </option>';
+                        }
+                    ?>
+                    </select>
+                </div>
+            </div>
+            <?php
+                if (!empty($details['PAdditionalLanguageID'])) {
+                    $PAdditionalLanguageID = explode(",", $details['PAdditionalLanguageID']);
+                } else {
+                    $PAdditionalLanguageID = array();
+                }
+            ?>
+            <div class="col-xs-6">
+                <label>Choose the languages you speak</label>
+
+                <div class="plus-select-box">
+                    <select id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
+                    <?php
+                        $Languagecode         = file_get_contents("sites/all/themes/evolve/json/Language.json");
+                        $Language             = json_decode($Languagecode, true);
+                        $_SESSION["Language"] = $Language;
+                        foreach ($Language as $key => $value) {
+                            echo '<option value="' . $Language[$key]['ID'] . '"';
+                            if (in_array($Language[$key]["ID"], $PAdditionalLanguageID)) {
+                                echo "selected='selected'";
+                            }
+                            echo '> ' . $Language[$key]['Name'] . ' </option>';
+                        }
+                    ?>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xs-12">
+                <label>Choose the sector that best describes your current primary employer<span class="tipstyle"> *</span></label>
+                <div class="chevron-select-box">									
+                    <select class="form-control" id="CurrentEmploymentSector" name="CurrentEmploymentSector" required>
+                        <option value="" <?php if (empty($details['CurrentEmploymentSector'])) echo "selected='selected'";?> disabled>Please select</option>
+                        <?php
+                            $PrimaryEmployers  = file_get_contents("sites/all/themes/evolve/json/CurrentEmployment.json");
+                            $PrimaryEmployer=json_decode($PrimaryEmployers, true);
+                            foreach($PrimaryEmployer  as $key => $value){
+                                echo '<option value="'.$PrimaryEmployer[$key]['ID'].'"';
+                                if ($details['CurrentEmploymentSector'] == $PrimaryEmployer[$key]['ID']){ echo "selected='selected'"; }
+                                echo '> '.$PrimaryEmployer[$key]['Name'].' </option>';
+                            }
+                        ?>
+                    </select>
+                </div>
+            </div>
+        </div>
 
                     <!--BREAK-->
                     <div class="row">
@@ -1286,18 +1287,16 @@ array_multisort($Title, SORT_ASC, $MemberType);
                     <select class="form-control" id="Branch" name="Branch">
 					<option value="" <?php if(empty($details['PreferBranch'])){ echo "selected";}?> disabled>What additional Branch would you like to join?</option>
                     <?php
-    $Branchcode = file_get_contents("sites/all/themes/evolve/json/Branch.json");
-    $Branch     = json_decode($Branchcode, true);
-    foreach ($Branch as $key => $value) {
-        echo '<option value="' . $Branch[$key]['Abbreviation'] . '"';
-        if ($details['PreferBranch'] == $Branch[$key]['Abbreviation']) {
-            echo "selected='selected'";
-        }
-
-        echo '> ' . $Branch[$key]['FullName'] . ' </option>';
-    }
-
-?>
+                        $Branchcode = file_get_contents("sites/all/themes/evolve/json/Branch.json");
+                        $Branch     = json_decode($Branchcode, true);
+                        foreach ($Branch as $key => $value) {
+                            echo '<option value="' . $Branch[$key]['Abbreviation'] . '"';
+                            if ($details['PreferBranch'] == $Branch[$key]['Abbreviation']) {
+                                echo "selected='selected'";
+                            }
+                            echo '> ' . $Branch[$key]['FullName'] . ' </option>';
+                        }
+                    ?>
                    </select>
                    </div>
                 </div>
@@ -2215,21 +2214,21 @@ if(isset($_POST['MT'])){
 
                     <div class="row">
                         <div class="col-xs-6 col-md-3">
-                            <label for="prefix">Prefix</label>
+                            <label for="prefix">Prefix<span class="tipstyle"> *</span></label>
                             <?php
-    $Prefixcode = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
-    $Prefix     = json_decode($Prefixcode, true);
-?>
+                                $Prefixcode = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
+                                $Prefix     = json_decode($Prefixcode, true);
+                            ?>
                            <div class="chevron-select-box">
-                           <select class="form-control" id="Prefix" name="Prefix">
-						   <option value="" selected disabled>Please select</option>
-                            <?php
-    foreach ($Prefix as $key => $value) {
-        echo '<option value="' . $Prefix[$key]['ID'] . '"';
-        echo '> ' . $Prefix[$key]['Prefix'] . ' </option>';
-    }
+                           <select class="form-control" id="Prefix" name="Prefix" required>
+                            <option value="" selected disabled>Please select</option>
+                                <?php
+                                    foreach ($Prefix as $key => $value) {
+                                        echo '<option value="' . $Prefix[$key]['ID'] . '"';
+                                        echo '> ' . $Prefix[$key]['Prefix'] . ' </option>';
+                                    }
 
-?>
+                                ?>
                            </select>
                            </div>
                         </div>
@@ -2306,9 +2305,9 @@ if(isset($_POST['MT'])){
                             </div>
                         </div>
                         <div class="col-xs-6 col-md-3">
-                           <label for="">Gender</label>
+                           <label for="">Gender<span class="tipstyle"> *</span></label>
                            <div class="chevron-select-box">
-                           <select class="form-control" id="Gender" name="Gender">
+                           <select class="form-control" id="Gender" name="Gender" required>
 
                             <option value="" selected disabled>Please select</option>
 							<?php
@@ -2344,24 +2343,37 @@ if(isset($_POST['MT'])){
                                </div>
                             </div>
 							<div class="col-xs-12">
-						<label>Choose the languages you speak</label>
-
-                        <div class="plus-select-box">
-                        <select id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
-
-						<?php
-								$Languagecode         = file_get_contents("sites/all/themes/evolve/json/Language.json");
-								$Language             = json_decode($Languagecode, true);
-								$_SESSION["Language"] = $Language;
-								foreach ($Language as $key => $value) {
-									echo '<option value="' . $Language[$key]['ID'] . '"';
-									if($Language[$key]["ID"]=="11"){ echo "selected='selected'"; }
-									echo '> ' . $Language[$key]['Name'] . ' </option>';
-								}
-							?>
-                    </select>
-                    </div>
-					</div>
+                                <label>Choose the languages you speak</label>
+                                <div class="plus-select-box">
+                                    <select id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
+                                        <?php
+                                                $Languagecode         = file_get_contents("sites/all/themes/evolve/json/Language.json");
+                                                $Language             = json_decode($Languagecode, true);
+                                                $_SESSION["Language"] = $Language;
+                                                foreach ($Language as $key => $value) {
+                                                    echo '<option value="' . $Language[$key]['ID'] . '"';
+                                                    if($Language[$key]["ID"]=="11"){ echo "selected='selected'"; }
+                                                    echo '> ' . $Language[$key]['Name'] . ' </option>';
+                                                }
+                                            ?>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-xs-12">
+                                <label>Choose the sector that best describes your current primary employer<span class="tipstyle"> *</span></label>
+                                <div class="chevron-select-box">									
+                                    <select class="form-control" id="CurrentEmploymentSector" name="CurrentEmploymentSector" required>
+                                        <option value="" selected='selected' disabled>Please select</option>
+                                        <?php
+                                            $PrimaryEmployers  = file_get_contents("sites/all/themes/evolve/json/CurrentEmployment.json");
+                                            $PrimaryEmployer=json_decode($PrimaryEmployers, true);
+                                            foreach($PrimaryEmployer  as $key => $value){
+                                                echo '<option value="'.$PrimaryEmployer[$key]['ID'].'"> '.$PrimaryEmployer[$key]['Name'].' </option>';
+                                            }
+                                        ?>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
 
                             <!--BREAK-->

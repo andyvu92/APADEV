@@ -7,11 +7,12 @@
 })(this.jQuery);
 jQuery(document).ready(function($) {
 	var validateYourDetailFun = function(){
-			//if($("select[name=Prefix]").val() =='' ){$("select[name=Prefix]").addClass("focuscss");} else{$("select[name=Prefix]").removeClass("focuscss");}
+			if($("select[name=Prefix]").val() =='' ){$("select[name=Prefix]").addClass("focuscss");} else{$("select[name=Prefix]").removeClass("focuscss");}
 			if($("input[name=Firstname]").val() ==''){$("input[name=Firstname]").addClass("focuscss");} else{$("input[name=Firstname]").removeClass("focuscss");}
 			if($("input[name=Lastname]").val() ==''){$("input[name=Lastname]").addClass("focuscss");} else{$("input[name=Lastname]").removeClass("focuscss");}
 			if($("input[name=Birth]").val() ==''){$("input[name=Birth]").addClass("focuscss");}else{$("input[name=Birth]").removeClass("focuscss");}
-			//if($("select[name=Gender]").val() ==''){$("select[name=Gender]").addClass("focuscss");}else{$("select[name=Gender]").removeClass("focuscss");}
+			if($("select[name=Gender]").val() ==''){$("select[name=Gender]").addClass("focuscss");}else{$("select[name=Gender]").removeClass("focuscss");}
+			if($("select[name=CurrentEmploymentSector]").val() ==''){$("select[name=CurrentEmploymentSector]").addClass("focuscss");}else{$("select[name=CurrentEmploymentSector]").removeClass("focuscss");}
 			if($("input[name=phone-number]").val() =='' && $("input[name=Mobile-number]").val() ==''){
 				$("input[name=phone-number]").addClass("focuscss");
 				$("input[name=Mobile-number]").addClass("focuscss");

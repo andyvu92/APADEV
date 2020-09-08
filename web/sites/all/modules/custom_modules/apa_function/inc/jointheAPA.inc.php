@@ -13,7 +13,6 @@ $userTag = getInsuranceStatus($userID);
 	$link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 	header("Location:".$link."/insuranceprocess");
 }*/
-
 } else { $userID =0; }
 
 $background = getBackgroundImage($userID);
@@ -34,12 +33,12 @@ $background = getBackgroundImage($userID);
 			 * May need to update this again for 2019 or
 			 * Fixed the join issue with Aptify later
 			 */
-			if(date("Y") == date("2018")) {
+			if(date("Y") == date("2020")) {
 				echo '<div class="messages">
 					<div class="alert alert-danger alert-dismissable">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-							<span>APA memberships are based on a calendar year. If you are a current APA member, you can renew your membership for 2019 <a href="/renew">here</a>.</span><br />
-							<span>If you are a new or lapsed member, the fees currently displayed are pro-rata and valid to 31 December 2018. If you wish to purchase 2019 membership, please call us on 1300 306 622 or email <a href="mailto:info@australian.physio">info@australian.physio</a>.</span><br />
+							<span>APA memberships are based on a calendar year. If you are a current APA member, you can renew your membership for 2021 <a href="/renew">here</a>.</span><br />
+							<span>If you are a new or lapsed member, the fees currently displayed are pro-rata and valid to 31 December 2020. If you wish to purchase 2021 membership, please call us on 1300 306 622 or email <a href="mailto:info@australian.physio">info@australian.physio</a>.</span><br />
 						</div>
 				</div>';
 			}

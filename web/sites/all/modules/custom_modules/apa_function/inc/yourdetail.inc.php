@@ -103,6 +103,7 @@ if(isset($_POST['step1'])) {
 
 	//if(isset($_POST['Treatmentarea'])){ $postData['Treatmentarea'] = $_POST['Treatmentarea']; }
 	if(isset($_POST['MAdditionallanguage'])){ $postData['PAdditionalLanguageID'] = implode(",",$_POST['MAdditionallanguage']); }
+	if(isset($_POST['CurrentEmploymentSector'])){ $postData['CurrentEmploymentSector'] = $_POST['CurrentEmploymentSector']; }
 
 	if(isset($_POST['Findpublicbuddy'])){ $postData['Findpublicbuddy'] = $_POST['Findpublicbuddy']; } else{ $postData['Findpublicbuddy'] = "False";}
 	if(isset($_POST['Dietary'])){
@@ -467,9 +468,9 @@ apa_function_dashboardLeftNavigation_form();
 						</div>
 
 							<div class="col-xs-6 col-md-2">
-								<label for="prefix">Prefix</label>
+								<label for="prefix">Prefix<span class="tipstyle"> *</span></label>
 								<div class="chevron-select-box">
-								<select class="form-control" id="Prefix" name="Prefix">
+								<select class="form-control" id="Prefix" name="Prefix" required>
 									<option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> disabled>Please select</option>
 								<?php
 									$Prefixcode  = file_get_contents("sites/all/themes/evolve/json/Prefix.json");
@@ -561,9 +562,9 @@ apa_function_dashboardLeftNavigation_form();
                         </div>
 
 							<div class="col-xs-6 col-sm-6 col-md-3">
-								<label for="">Gender</label>
+								<label for="">Gender<span class="tipstyle"> *</span></label>
 								<div class="chevron-select-box">
-								<select class="form-control" id="Gender" name="Gender">
+								<select class="form-control" id="Gender" name="Gender" required>
 								 <option value="" <?php if (empty($details['Gender'])) echo "selected='selected'";?> disabled>Please select</option>
 								<?php
 									$Gendercode  = file_get_contents("sites/all/themes/evolve/json/Gender.json");
@@ -618,29 +619,44 @@ apa_function_dashboardLeftNavigation_form();
 								</div>
 							</div>
 							 <?php
-						if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID =array();}
-
-						?>
-						<div class="col-xs-12">
-							<label>Choose the languages you speak</label>
-							<div class="plus-select-box">
-							<select id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
-								<?php
-									$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
-									$Language=json_decode($Languagecode, true);
-									$_SESSION["Language"] = $Language;
-									foreach($Language  as $key => $value){
-										echo '<option value="'.$Language[$key]['ID'].'"';
-										//if(sizeof($PAdditionalLanguageID)==0 && $Language[$key]["ID"]=="11"){ echo "selected='selected'"; }
-										if (in_array( $Language[$key]["ID"],$PAdditionalLanguageID)){ echo "selected='selected'"; }
-										echo '> '.$Language[$key]['Name'].' </option>';
-									}
-								?>
-							</select>
+								if(!empty($details['PAdditionalLanguageID'])) {$PAdditionalLanguageID = explode(",",$details['PAdditionalLanguageID']); } else {$PAdditionalLanguageID =array();}
+							?>
+							<div class="col-xs-12">
+								<label>Choose the languages you speak</label>
+								<div class="plus-select-box">
+								<select id="MAdditionallanguage" name="MAdditionallanguage[]" multiple  tabindex="-1" data-placeholder="Choose the languages you speak">
+									<?php
+										$Languagecode  = file_get_contents("sites/all/themes/evolve/json/Language.json");
+										$Language=json_decode($Languagecode, true);
+										$_SESSION["Language"] = $Language;
+										foreach($Language  as $key => $value){
+											echo '<option value="'.$Language[$key]['ID'].'"';
+											//if(sizeof($PAdditionalLanguageID)==0 && $Language[$key]["ID"]=="11"){ echo "selected='selected'"; }
+											if (in_array( $Language[$key]["ID"],$PAdditionalLanguageID)){ echo "selected='selected'"; }
+											echo '> '.$Language[$key]['Name'].' </option>';
+										}
+									?>
+								</select>
+								</div>
+							</div>
+							<div class="col-xs-12">
+								<label>Choose the sector that best describes your current primary employer<span class="tipstyle"> *</span></label>
+								<div class="chevron-select-box">									
+									<select class="form-control" id="CurrentEmploymentSector" name="CurrentEmploymentSector" required>
+										<option value="" <?php if (empty($details['CurrentEmploymentSector'])) echo "selected='selected'";?> disabled>Please select</option>
+										<?php
+											$PrimaryEmployers  = file_get_contents("sites/all/themes/evolve/json/CurrentEmployment.json");
+											$PrimaryEmployer=json_decode($PrimaryEmployers, true);
+											foreach($PrimaryEmployer  as $key => $value){
+												echo '<option value="'.$PrimaryEmployer[$key]['ID'].'"';
+												if ($details['CurrentEmploymentSector'] == $PrimaryEmployer[$key]['ID']){ echo "selected='selected'"; }
+												echo '> '.$PrimaryEmployer[$key]['Name'].' </option>';
+											}
+										?>
+									</select>
+								</div>
 							</div>
 						</div>
-						</div>
-
 						<div class="row">
 							<div class="col-xs-12">
 								<span class="light-lead-heading cairo" style="font-weight: 200; margin-bottom: 18px;">Phone numbers:</span>

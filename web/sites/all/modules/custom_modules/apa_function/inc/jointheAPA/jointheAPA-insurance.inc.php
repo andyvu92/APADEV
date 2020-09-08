@@ -7,8 +7,6 @@ $data = array();
 $data['ID'] = $_SESSION["UserId"];
 $insuarnceData = aptify_get_GetAptifyData("40", $data,""); // #_SESSION["UserID"];
 if(sizeof($insuarnceData['results'])!=0){$insuranceDataTag=1;}else {$insuranceDataTag=0;}// this is important key, to check the user is whether the first time to submit insuranceData;
-
-
 ?>
 <form id="join-insurance-form2" action="jointheapa" method="POST">
     <input type="hidden" name="step2-1" value="1"/>
