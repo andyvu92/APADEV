@@ -3569,6 +3569,23 @@ const articleVerticleListHandler = () => {
   });
 }
 
+// back to prev btn handler
+const backToPrevBtnhandler = () => {
+  const backToPrevBtns = document.querySelectorAll('.dynamic-back-to-prev-btn');
+
+  backToPrevBtns.length && backToPrevBtns.forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.preventDefault();
+
+      if (document.referrer !== ''){
+        window.location.href = document.referrer;
+      } else {
+        window.location.href = btn.href;
+      }
+    });
+  });
+}
+
 // trigger functions after DOM content loaded
 window.addEventListener('DOMContentLoaded', e => {
   loadSVGIcons();
@@ -3579,6 +3596,7 @@ window.addEventListener('DOMContentLoaded', e => {
   removeTeamEmailHandler();
   brickNavHandler();
   articleVerticleListHandler();
+  backToPrevBtnhandler();
 });
 
 // tab banner script

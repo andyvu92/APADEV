@@ -94,7 +94,7 @@ if(is_null($userRole)) {
             })  
          </script>
         <div id="prev-btn">
-            <a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a>
+            <a class="go-back-button button dynamic-back-to-prev-btn" href="/research/prf/translation">Back to previous</a>
         </div>
       </div>
       <div class="block CampaignSidebar contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
@@ -196,7 +196,7 @@ if(is_null($userRole)) {
                   })  
                </script>
             <div id="prev-btn">
-                  <a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a>
+                  <a class="go-back-button button dynamic-back-to-prev-btn" href="/research/prf/translation">Back to previous</a>
             </div>
             </div>
             <div class="block CampaignSidebar contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">

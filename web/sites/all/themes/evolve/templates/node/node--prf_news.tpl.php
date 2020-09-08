@@ -67,7 +67,7 @@
 
 			<div class="space-20">&nbsp;</div>
 
-			<div id="prev-btn"><a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a></div>
+			<div id="prev-btn"><a class="go-back-button button dynamic-back-to-prev-btn" href="/research/prf/news">Back to previous</a></div>
 		</div>
 		<div class="block CampaignSidebar contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-3 col-lg-3" style="margin:0 0 50px">
 			<h3 class="headline">Physiotherapy research</h3>
