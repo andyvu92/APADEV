@@ -861,7 +861,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						foreach($MemberTypes as $tempM){
 							$temp_array['ProductID'] = $tempM['ProductID'];
 							$temp_array['Title'] = $tempM['Title'];//substr($tempM['Title'], strpos($tempM['Title'],":")+1);
-							$temp_array['Price'] = $tempM['Price']['ProductCostWithoutCoupon'];
+							$temp_array['Price'] = $tempM['Price']["ProductCostWithoutCoupon"];
 							$temp_array['UnitPrice'] = $tempM['UnitPrice'];
 							$temp_array['Quantity'] = $tempM['Quantity'];
 							array_push($MemberType, $temp_array);

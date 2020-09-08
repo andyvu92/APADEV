@@ -339,15 +339,14 @@ $PRFPrice = 0;
 							foreach( $memberProducts as $memberProduct){
 								echo "<div class='flex-cell flex-flow-row table-cell'>";
 								echo "<div class='flex-col-7 title-col'><span class='pd-header-mobile'>Product name:</span>".$memberProduct['Title']."</div>";
-                if($_POST['Couponcode']){
-                  echo "<div class='flex-col-3 price-col'><span class='pd-header-mobile'>Price:</span>A$<span id='originalPrice' class='original-price'>".number_format($memberProduct['Price']['ProductCostWithoutCoupon'],2)."</span><span id='coupon_price'>".number_format($memberProduct['Price']['ProductCostWithCoupon'],2)."</span></div>";
-                  $price += $memberProduct['Price']['ProductCostWithCoupon'];
-                }
-                else{
-                  echo "<div class='flex-col-3 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($memberProduct['Price']['ProductCostWithoutCoupon'],2)."</div>";
-                  $price += $memberProduct['Price']['ProductCostWithoutCoupon'];
-                }
-
+                                if($_POST['Couponcode']){
+                                echo "<div class='flex-col-3 price-col'><span class='pd-header-mobile'>Price:</span>A$<span id='originalPrice' class='original-price'>".number_format($memberProduct['Price']['ProductCostWithoutCoupon'],2)."</span><span id='coupon_price'>".number_format($memberProduct['Price']['ProductCostWithCoupon'],2)."</span></div>";
+                                $price += $memberProduct['Price']['ProductCostWithCoupon'];
+                                }
+                                else{
+                                echo "<div class='flex-col-3 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($memberProduct['Price']['ProductCostWithoutCoupon'],2)."</div>";
+                                $price += $memberProduct['Price']['ProductCostWithoutCoupon'];
+                                }
 								echo "<div class='flex-col-2 action-col'><a class='changeMT' target='_self'>change</a></div>";
 								echo "</div>";
 							}

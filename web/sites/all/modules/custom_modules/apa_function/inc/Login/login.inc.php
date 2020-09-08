@@ -225,6 +225,7 @@ if (isset($_POST['refreshTag'])) {
 		if (isset($_POST['MAdditionallanguage'])) {
 			$postData['PAdditionalLanguageID'] = implode(",", $_POST['MAdditionallanguage']);
 		}
+		if(isset($_POST['CurrentEmploymentSector'])){ $postData['CurrentEmploymentSector'] = $_POST['CurrentEmploymentSector']; }
 
 		if (isset($_POST['Findpublicbuddy'])) {
 			$postData['Findpublicbuddy'] = $_POST['Findpublicbuddy'];

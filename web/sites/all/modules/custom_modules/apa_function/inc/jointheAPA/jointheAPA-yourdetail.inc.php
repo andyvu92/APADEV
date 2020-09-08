@@ -8,7 +8,6 @@
 		if($MagazineProduct['ProductID']=="9977") { $SportPrice =$MagazineProduct['FPprice']; }
 		if($MagazineProduct['ProductID']=="9978") { $IntouchPrice =$MagazineProduct['FPprice']; }
 	}
-
 ?>
 <?php
 
@@ -439,16 +438,12 @@ $filterMemberProduct = array("10007","10008","10009","9997");
     // Response -Update Success message & UserID & detail data
 
     if (isset($_SESSION['UserId'])) {
-
-		$testdata = aptify_get_GetAptifyData("5", $postData);
+        $testdata = aptify_get_GetAptifyData("5", $postData);
 	} else {
 
         // for new user join a member call user registeration web service
 
         $resultdata = aptify_get_GetAptifyData("25", $postData);
-        var_dump($_POST);
-        var_dump($postData);
-
 
         // when create user successfully call login web service to login in APA website automatically.
         // after login successfully get UserID as well to store on APA shopping cart database
@@ -456,7 +451,6 @@ $filterMemberProduct = array("10007","10008","10009","9997");
         if ($resultdata['result'] == "Success") {
             $_SESSION["LoginName"] = $postData['Memberid'];
             $_SESSION["LoginPassword"] = $postData['Password'];
-
             // call webservice login. Eddy will provide login -process functionality---put code here
             // login sucessful unset session
 
@@ -502,10 +496,7 @@ $filterMemberProduct = array("10007","10008","10009","9997");
 			checkShoppingCart($userID, $type = "MG2", $productID = "");
 			createShoppingCart($userID, "9977", $type = "MG2", $coupon = "");
 		}
-
     }
-
-
 }
 
 ?>
@@ -1212,50 +1203,46 @@ if (isset($_SESSION['UserId'])):
                     <label for="">Member Category<span class="tipstyle"> *</span></label>
                     <div class="chevron-select-box">
                     <select class="form-control" id="MemberType" name="MemberType">
-                        <option value="" <?php
-    if (!isset($_SESSION["MembershipProductID"]))
-        echo "selected='selected'";
-?> disabled>Member Category</option>
-                    <?php
-// 2.2.31 Get Membership prodcut price
-// Send -
-// userID & product list
-// Response -Membership prodcut price
-$prodcutArray = array();
-$memberProductsArray['ProductID']=$prodcutArray;
-$memberProdcutID = $memberProductsArray;
-$MemberTypes = aptify_get_GetAptifyData("31", $memberProdcutID);
-$temp_array = array();
-$MemberType = array();
-foreach($MemberTypes as $tempM){
-    $temp_array['ProductID'] = $tempM['ProductID'];
-    $temp_array['Title'] = substr($tempM['Title'], strpos($tempM['Title'],":")+1);
-    $temp_array['Price'] = $tempM['Price']['ProductCostWithoutCoupon'];
-    $temp_array['UnitPrice'] = $tempM['UnitPrice'];
-    $temp_array['Quantity'] = $tempM['Quantity'];
-    array_push($MemberType, $temp_array);
-}
-$Title = array();
-foreach ($MemberType  as $ukey => $row)
-    {
-        $Title[$ukey] = $row['Title'];
-    }
-array_multisort($Title, SORT_ASC, $MemberType);
-    //$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
-    //$MemberType     = json_decode($MemberTypecode, true);
-    foreach ($MemberType as $key => $value) {
-		if(!in_array($MemberType[$key]['ProductID'],$filterMemberProduct)){
-			echo '<option value="' . $MemberType[$key]['ProductID'] . '"';
-			if (isset($_SESSION["MembershipProductID"])) {
-				if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']) {
-					echo "selected='selected'";
-				}
-			}
-			echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';
-		}
-    }
-
-?>
+                        <option value="" <?php if (!isset($_SESSION["MembershipProductID"])) echo "selected='selected'"; ?> disabled>Member Category</option>
+                        <?php
+                            // 2.2.31 Get Membership prodcut price
+                            // Send -
+                            // userID & product list
+                            // Response -Membership prodcut price
+                            $prodcutArray = array();
+                            $memberProductsArray['ProductID']=$prodcutArray;
+                            $memberProdcutID = $memberProductsArray;
+                            $MemberTypes = aptify_get_GetAptifyData("31", $memberProdcutID);
+                            $temp_array = array();
+                            $MemberType = array();
+                            foreach($MemberTypes as $tempM){
+                                $temp_array['ProductID'] = $tempM['ProductID'];
+                                $temp_array['Title'] = substr($tempM['Title'], strpos($tempM['Title'],":")+1);
+                                $temp_array['Price'] = $tempM['Price']["ProductCostWithoutCoupon"];
+                                $temp_array['UnitPrice'] = $tempM['UnitPrice'];
+                                $temp_array['Quantity'] = $tempM['Quantity'];
+                                array_push($MemberType, $temp_array);
+                            }
+                            $Title = array();
+                            foreach ($MemberType  as $ukey => $row)
+                            {
+                                $Title[$ukey] = $row['Title'];
+                            }
+                            array_multisort($Title, SORT_ASC, $MemberType);
+                            //$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
+                            //$MemberType     = json_decode($MemberTypecode, true);
+                            foreach ($MemberType as $key => $value) {
+                                if(!in_array($MemberType[$key]['ProductID'],$filterMemberProduct)){
+                                    echo '<option value="' . $MemberType[$key]['ProductID'] . '"';
+                                    if (isset($_SESSION["MembershipProductID"])) {
+                                        if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']) {
+                                            echo "selected='selected'";
+                                        }
+                                    }
+                                    echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';
+                                }
+                            }
+                        ?>
                    </select>
                    </div>
                 </div>
@@ -2361,12 +2348,12 @@ if(isset($_POST['MT'])){
                             </div>
                             <div class="col-xs-12">
                                 <label>Choose the sector that best describes your current primary employer<span class="tipstyle"> *</span></label>
-                                <div class="chevron-select-box">									
+                                <div class="chevron-select-box">
                                     <select class="form-control" id="CurrentEmploymentSector" name="CurrentEmploymentSector" required>
-                                        <option value="" selected='selected' disabled>Please select</option>
+                                        <option value="" selected disabled>Please select</option>
                                         <?php
                                             $PrimaryEmployers  = file_get_contents("sites/all/themes/evolve/json/CurrentEmployment.json");
-                                            $PrimaryEmployer=json_decode($PrimaryEmployers, true);
+                                            $PrimaryEmployer = json_decode($PrimaryEmployers, true);
                                             foreach($PrimaryEmployer  as $key => $value){
                                                 echo '<option value="'.$PrimaryEmployer[$key]['ID'].'"> '.$PrimaryEmployer[$key]['Name'].' </option>';
                                             }
@@ -2753,14 +2740,14 @@ if(isset($_POST['MT'])){
 								// Response -Membership prodcut price
 								$prodcutArray = array();
 								$memberProductsArray['ProductID']=$prodcutArray;
-								$memberProdcutID = $memberProductsArray;
-								$MemberTypes = aptify_get_GetAptifyData("31", $memberProdcutID);
+                                $memberProdcutID = $memberProductsArray;
+                                $MemberTypes = aptify_get_GetAptifyData("31", $memberProdcutID);
 								$temp_array = array();
                                 $MemberType = array();
                                 foreach($MemberTypes as $tempM){
                                     $temp_array['ProductID'] = $tempM['ProductID'];
                                     $temp_array['Title'] = substr($tempM['Title'], strpos($tempM['Title'],":")+1);
-                                    $temp_array['Price'] = $tempM['Price']['ProductCostWithoutCoupon'];
+                                    $temp_array['Price'] = $tempM['Price']["ProductCostWithoutCoupon"];
                                     $temp_array['UnitPrice'] = $tempM['UnitPrice'];
                                     $temp_array['Quantity'] = $tempM['Quantity'];
                                     array_push($MemberType, $temp_array);
