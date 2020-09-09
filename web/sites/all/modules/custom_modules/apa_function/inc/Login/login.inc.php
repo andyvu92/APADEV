@@ -1043,8 +1043,8 @@ $('.tab span').on('click', function (e) {
 <!--handle the session expired popup-->
 <script type="text/javascript">
 	 // automatically pop up session expire window
-	 var popUPTag ='<?php if(isset($_SESSION['TokenId']))  {echo $_SESSION['TokenId']; } else{ echo "";}?>';
-	 var countSession = <?php if(isset($_SESSION['expireSessionTag'])) {echo $_SESSION['expireSessionTag'] - time();} else{ echo "";} ?>;
+	 var popUPTag ='<?php if(isset($_SESSION['TokenId']))  {echo $_SESSION['TokenId']; } else{ echo "''";}?>';
+	 var countSession = <?php if(isset($_SESSION['expireSessionTag'])) {echo $_SESSION['expireSessionTag'] - time();} else{ echo "''";} ?>;
 	 if(popUPTag!=""){
 		 	function countSessionDown(){
 				if(countSession > 0){
