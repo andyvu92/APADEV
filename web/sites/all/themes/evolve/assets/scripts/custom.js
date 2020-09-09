@@ -70,7 +70,7 @@ jQuery(document).ready(function($) {
 		else{
 			$('select[id="State'+x+'"]').removeAttr('disabled');
 		}
-		
+
 		//$('select[id="State'+x+'"] option:not(.StateOption'+y+'), select[id="State'+x+'"] li:not(.StateOption'+y+')').addClass("display-none");
 		//$('select[id="State'+x+'"] option.StateOption'+y+', select[id="State'+x+'"] li:not(.StateOption'+y+')').removeClass("display-none");
 		//$('select[id="State'+x+'"] option.StateOption'+y+', select[id="State'+x+'"] li:not(.StateOption'+y+')').addClass("display");
@@ -96,7 +96,7 @@ jQuery(document).ready(function($) {
 	//$('select[id^=Wstate] option.StateOption14').addClass("display");
 	//$('select[id^=Wstate] option:not(.StateOption14)').addClass("display-none");
 	//$('select[id^=Wstate] option:not(.StateOption14)').removeClass("display");
-	
+
 	$('[class=cardevent]').click(function(){
 	    $('.carddown').slideToggle(450);
 	});
@@ -172,14 +172,14 @@ jQuery(document).ready(function($) {
 		if(x != "undefined") {functionCall(x);}
 	});
 	// advocacy section done
-	
+
 	$("[id^=event]").click(function(){
         var x = $(this).attr("id").replace('event', '');
         var y = $("#event"+x).html().replace('+','~');
         if($('#event'+x).attr("class") == 'open') {$('#event'+x).attr("class",'close');} else {$('#event'+x).attr("class",'open');}
 		$("#down" + x).slideToggle(500);
 	});
-	
+
 	$("#block-block-271 .media_filter ul li").click(function(){
 		$('li').siblings().removeClass('active');
 		$(this).addClass('active');
@@ -206,23 +206,23 @@ jQuery(document).ready(function($) {
 	// tab banner script
 	const tabBannerAltModuleScript = () => {
 		const tabBanners = document.querySelectorAll('.tab-banner-alt');
-	
+
 		tabBanners.length && tabBanners.forEach(banner => {
 		const mobileTogglesTriggerBtn = banner.querySelector('.toggles-trigger');
 		const mobileTogglesTriggerLabel = banner.querySelector('.toggles-trigger .toggle-label');
-	
+
 		const togglesWrapper = banner.querySelector('.banner-toggles');
 		const tabsWrapper = banner.querySelector('.banner-tab-container');
-	
+
 		const toggles = togglesWrapper.querySelectorAll('button.toggle');
 		const tabs = [...tabsWrapper.children];
-	
+
 		const removeAllActive = () => {
 			[...toggles, ...tabs].forEach(item => {
 			item.classList.remove('active');
 			});
 		}
-	
+
 		const getTargetTab = (id) => {
 			let resolvedTab = null;
 			tabs.forEach(tab => {
@@ -230,82 +230,82 @@ jQuery(document).ready(function($) {
 				resolvedTab = tab;
 			}
 			});
-	
+
 			return resolvedTab;
 		}
-	
+
 		const activateSelected = (id) => {
 			const targetToggle = togglesWrapper.querySelector(`button.toggle[tab-target="${id}"]`);
 			const targetTab = getTargetTab(id);
-	
+
 			targetToggle.classList.add('active');
 			targetTab.classList.add('active');
 		}
-	
+
 		const activeToggle =  togglesWrapper.querySelector('button.toggle.active');
-	
+
 		toggles.length && toggles.forEach(toggle => {
 			const isActive = toggle.classList.contains('active');
-	
+
 			const targetTabId = toggle.getAttribute('tab-target');
-	
+
 			const targetTab = getTargetTab(targetTabId);
-	
+
 			let label = toggle.textContent;
-	
+
 			// show tab when toggle is active
 			if (isActive){
 			targetTab.classList.add('active');
-	
+
 			// set trigger label (mobile nav trigger)
 			mobileTogglesTriggerLabel.textContent = label;
 			}
-	
+
 			toggle.addEventListener('click', e => {
 			let isCurrentlyActive = e.target.classList.contains('active');
-	
+
 			if (!isCurrentlyActive){
 				removeAllActive();
 				activateSelected(targetTabId);
-	
+
 				// set trigger label (mobile nav trigger)
 				mobileTogglesTriggerLabel.textContent = label;
-				
+
 			}
 			});
 		});
-	
+
 		// active the first tab - false back default when no tab is active
 		if (!activeToggle){
 			const firstToggle = togglesWrapper.querySelector('button.toggle');
-	
+
 			const targetTabId = toggle.getAttribute('tab-target');
-	
+
 			const targetTab = getTargetTab(targetTabId);
-	
+
 			// show the first tab as default fall back
 			firstToggle.classList.add('active');
 			targetTab.classList.add('active');
-	
+
 			// set trigger label (mobile nav trigger)
 			let label = firstToggle.textContent;
 			mobileTogglesTriggerLabel.textContent = label;
 		}
-	
+
 		// mobile toggle nav handler
 		const toggleTriggerHandler = () => {
 			setTimeout(() => {
 			if (window.innerWidth < 571){
-		
+
 				let toggleWrapperHeight = togglesWrapper.clientHeight;
-		
+
 				setTimeout(() => {
 				togglesWrapper.classList.add('mobile-nav-initialised');
 				togglesWrapper.classList.add('collapsed');
 				}, 0);
-		
+
 				let isExpanded = mobileTogglesTriggerBtn.classList.contains('active');
-		
+
 				const expandHandler = () => {
 				mobileTogglesTriggerBtn.classList.add('active');
 				togglesWrapper.style.height = `${toggleWrapperHeight}px`;
@@ -313,7 +313,7 @@ jQuery(document).ready(function($) {
 				togglesWrapper.classList.add('expanded');
 				isExpanded = true;
 				}
-		
+
 				const collapseHandler = () => {
 				mobileTogglesTriggerBtn.classList.remove('active');
 				togglesWrapper.style.height = `0px`;
@@ -321,7 +321,7 @@ jQuery(document).ready(function($) {
 				togglesWrapper.classList.remove('expanded');
 				isExpanded = false;
 				}
-		
+
 				mobileTogglesTriggerBtn.addEventListener('click', e => {
 				if (isExpanded){
 					collapseHandler();
@@ -330,7 +330,7 @@ jQuery(document).ready(function($) {
 					expandHandler()
 				}
 				});
-			} 
+			}
 			else {
 				togglesWrapper.classList.remove('mobile-nav-initialised');
 				togglesWrapper.classList.remove('collapsed');
@@ -339,26 +339,26 @@ jQuery(document).ready(function($) {
 				togglesWrapper.style.height = ``;
 			}
 			}, 10);
-			
+
 		}
-	
+
 		// only trigger dropdown function if this is not a horizon style
 		const isToggleHorizon = banner.classList.contains('toggle-sm-horizon');
-	
+
 		if (!isToggleHorizon){
 			toggleTriggerHandler();
-		
+
 			window.addEventListener('resize', e => {
 			toggleTriggerHandler();
 			});
 		}
 		});
 	}
-	
+
 	// handle back to top button
 	const backToTopButtonAltHandler = () => {
 		const backToTopButtons = document.querySelectorAll('.back-to-top-alt');
-		
+
 		backToTopButtons.length && backToTopButtons.forEach(button => {
 			button.addEventListener('click', e => {
 			window.scrollTo({
@@ -368,7 +368,7 @@ jQuery(document).ready(function($) {
 			});
 		});
 	}
-	
+
 	// trigger functions after DOM content loaded
 	window.addEventListener('DOMContentLoaded', e => {
 		backToTopButtonAltHandler();
@@ -380,13 +380,13 @@ jQuery(document).ready(function($) {
 		$('#downHomeT2').hide(500);
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
-		$('#downHomeT5').hide(500);	
-		$('#downHomeT6').hide(500);	
+		$('#downHomeT5').hide(500);
+		$('#downHomeT6').hide(500);
 		$('#downHomeT7').hide(500);
-		$('#downHomeT8').hide(500);	
-		$('#downHomeT9').hide(500);	
+		$('#downHomeT8').hide(500);
+		$('#downHomeT9').hide(500);
 		$('#downHomeT10').hide(500);
-		$('#downHomeT11').hide(500);	
+		$('#downHomeT11').hide(500);
 
 	});
 
@@ -396,12 +396,12 @@ jQuery(document).ready(function($) {
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
-		$('#downHomeT6').hide(500);	
+		$('#downHomeT6').hide(500);
 		$('#downHomeT7').hide(500);
-		$('#downHomeT8').hide(500);	
-		$('#downHomeT9').hide(500);	
+		$('#downHomeT8').hide(500);
+		$('#downHomeT9').hide(500);
 		$('#downHomeT10').hide(500);
-		$('#downHomeT11').hide(500);	
+		$('#downHomeT11').hide(500);
 	});
 
 	$("#homePublication").click(function() {
@@ -410,12 +410,12 @@ jQuery(document).ready(function($) {
 		$('#downHomeT3').show(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
-		$('#downHomeT6').hide(500);	
+		$('#downHomeT6').hide(500);
 		$('#downHomeT7').hide(500);
-		$('#downHomeT8').hide(500);	
-		$('#downHomeT9').hide(500);	
+		$('#downHomeT8').hide(500);
+		$('#downHomeT9').hide(500);
 		$('#downHomeT10').hide(500);
-		$('#downHomeT11').hide(500);	
+		$('#downHomeT11').hide(500);
 	});
 
 	$("#homeStateNews").click(function() {
@@ -424,9 +424,9 @@ jQuery(document).ready(function($) {
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').show(500);
 		$('#downHomeT5').hide(500);
-		$('#downHomeT6').hide(500);	
+		$('#downHomeT6').hide(500);
 		$('#downHomeT10').hide(500);
-		$('#downHomeT11').hide(500);	
+		$('#downHomeT11').hide(500);
 	});
 
 	$("#homeTheLatest").click(function() {
@@ -435,12 +435,12 @@ jQuery(document).ready(function($) {
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').show(500);
-		$('#downHomeT6').hide(500);	
+		$('#downHomeT6').hide(500);
 		$('#downHomeT7').hide(500);
-		$('#downHomeT8').hide(500);	
+		$('#downHomeT8').hide(500);
 		$('#downHomeT9').hide(500);
 		$('#downHomeT10').hide(500);
-		$('#downHomeT11').hide(500);		
+		$('#downHomeT11').hide(500);
 	});
 
 	$("#homeHighlights").click(function() {
@@ -449,12 +449,12 @@ jQuery(document).ready(function($) {
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
-		$('#downHomeT6').show(500);	
+		$('#downHomeT6').show(500);
 		$('#downHomeT7').hide(500);
-		$('#downHomeT8').hide(500);	
-		$('#downHomeT9').hide(500);	
+		$('#downHomeT8').hide(500);
+		$('#downHomeT9').hide(500);
 		$('#downHomeT10').hide(500);
-		$('#downHomeT11').hide(500);	
+		$('#downHomeT11').hide(500);
 	});
 	$("#homeBIP").click(function() {
 		$('#downHomeT1').hide(500);
@@ -462,12 +462,12 @@ jQuery(document).ready(function($) {
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
-		$('#downHomeT6').hide(500);	
+		$('#downHomeT6').hide(500);
 		$('#downHomeT7').show(500);
-		$('#downHomeT8').hide(500);	
-		$('#downHomeT9').hide(500);	
+		$('#downHomeT8').hide(500);
+		$('#downHomeT9').hide(500);
 		$('#downHomeT10').hide(500);
-		$('#downHomeT11').hide(500);	
+		$('#downHomeT11').hide(500);
 	});
 	$("#homeIn").click(function() {
 		$('#downHomeT1').hide(500);
@@ -475,12 +475,12 @@ jQuery(document).ready(function($) {
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
-		$('#downHomeT6').hide(500);	
+		$('#downHomeT6').hide(500);
 		$('#downHomeT7').hide(500);
-		$('#downHomeT8').show(500);	
-		$('#downHomeT9').hide(500);	
+		$('#downHomeT8').show(500);
+		$('#downHomeT9').hide(500);
 		$('#downHomeT10').hide(500);
-		$('#downHomeT11').hide(500);	
+		$('#downHomeT11').hide(500);
 	});
 	$("#homeS").click(function() {
 		$('#downHomeT1').hide(500);
@@ -488,12 +488,12 @@ jQuery(document).ready(function($) {
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
-		$('#downHomeT6').hide(500);	
+		$('#downHomeT6').hide(500);
 		$('#downHomeT7').hide(500);
-		$('#downHomeT8').hide(500);	
-		$('#downHomeT9').show(500);	
+		$('#downHomeT8').hide(500);
+		$('#downHomeT9').show(500);
 		$('#downHomeT10').hide(500);
-		$('#downHomeT11').hide(500);	
+		$('#downHomeT11').hide(500);
 	});
 	$("#homeF").click(function() {
 		$('#downHomeT1').hide(500);
@@ -501,12 +501,12 @@ jQuery(document).ready(function($) {
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
-		$('#downHomeT6').hide(500);	
+		$('#downHomeT6').hide(500);
 		$('#downHomeT7').hide(500);
-		$('#downHomeT8').hide(500);	
+		$('#downHomeT8').hide(500);
 		$('#downHomeT9').hide(500);
 		$('#downHomeT10').show(500);
-		$('#downHomeT11').hide(500);			
+		$('#downHomeT11').hide(500);
 	});
 	$("#homeC").click(function() {
 		$('#downHomeT1').hide(500);
@@ -514,12 +514,12 @@ jQuery(document).ready(function($) {
 		$('#downHomeT3').hide(500);
 		$('#downHomeT4').hide(500);
 		$('#downHomeT5').hide(500);
-		$('#downHomeT6').hide(500);	
+		$('#downHomeT6').hide(500);
 		$('#downHomeT7').hide(500);
-		$('#downHomeT8').hide(500);	
-		$('#downHomeT9').hide(500);	
+		$('#downHomeT8').hide(500);
+		$('#downHomeT9').hide(500);
 		$('#downHomeT10').hide(500);
-		$('#downHomeT11').show(500);	
+		$('#downHomeT11').show(500);
 
 	});
 
@@ -547,14 +547,24 @@ jQuery(document).ready(function($) {
 		$('#downT2').hide(500);
 		$('#downT3').show(500);
 	});
+  //save partner services icon status---------------------------------------------------------------------
+  $(document).on('click', '#partners-info .media_filter li', function(){
+    currentStatus = $(this).attr('id');
+    sessionStorage.setItem('currentStatus', currentStatus);
+  });
 
+  if( window.location.href.indexOf("aboutus/partner-services?page") > -1 ){
+    currentStatus = sessionStorage.getItem('currentStatus');
+    $('#partners-info .media_filter li#' + currentStatus).click();
+    window.scrollTo(0, 2000);
+  }
     $('#block-block-216 input[type="checkbox"]').click(function(){
          if($(this).is(":checked")){
             $(this).attr('checked', true);
            $(this).val('1');
          }
          else{
-          
+
           $(this).removeAttr('checked');
           $(this).val('0');
          }
@@ -598,7 +608,7 @@ jQuery(document).ready(function($) {
 			$("#installmentline").remove();
 			$('#Installpayment-frequency').val("");
 		}
-	
+
     });
 	if($("#p1-2").length!==0 && $("#p1-2").is(":checked")){
 		$('.schedule').css('display','inline-flex');
@@ -606,8 +616,8 @@ jQuery(document).ready(function($) {
 		if($('#addcardtag').is(":visible")){
 			$('#addcardtag').attr('checked', true);
 			$('#addcardtag').attr('disabled',true);
-		
-			
+
+
 		}
 	}
 	if($("#p1-2").length===0){
@@ -618,20 +628,20 @@ jQuery(document).ready(function($) {
         if($(this).is(":checked")){
         $(this).attr('checked', true);
            $(this).val('1');
-		
+
 		  }
          else{
-         
+
           $(this).removeAttr('checked');
           $(this).val('0');
-		  
+
          }
-		
+
     });
 	$('#State1').change(function(){
 		var state = $('#State1').val();
 		$('#homebranch').html(state);
-		
+
 	});
 	/*$('body').on('change', '[type="checkbox"]', function() {
 		$('#workplaceblocks input[type="checkbox"]').click(function(){
@@ -639,47 +649,47 @@ jQuery(document).ready(function($) {
 			if($(this).is(":checked")){
 			$(this).attr('checked', true);
 			   $(this).val('True');
-			
+
 			  }
 			 else{
-			 
+
 			  $(this).removeAttr('checked');
 			  $(this).val('False');
-			  
+
 			 }
-			
+
 		});
-		
+
 	});*/
 	$('body').on('click', '#workplaceblocks input[type="checkbox"]', function() {
-		
+
 		if($(this).is(":checked")){
 			$(this).attr('checked', true);
 			   $(this).val('True');
-			
+
 			  }
 			 else{
-			 
+
 			  $(this).removeAttr('checked');
 			  $(this).val('False');
-			  
+
 			 }
-			
+
 	});
 	$('#workplaceblocks input[type="checkbox"]').click(function(){
-		
+
 			if($(this).is(":checked")){
 			$(this).attr('checked', true);
 			   $(this).val('True');
-			
+
 			  }
 			 else{
-			 
+
 			  $(this).removeAttr('checked');
 			  $(this).val('False');
-			  
+
 			 }
-			
+
 	});
 	$("#CardUsed").val($("#Paymentcard").val());
 	$('body').on('change','#hiddenPayment #Paymentcard',function(){
@@ -689,17 +699,17 @@ jQuery(document).ready(function($) {
 	/*$("input[value='PLACE YOUR ORDER']").click(function(){
 		var CardID = $("#Paymentcard").val();
 		$("#CardUsed").val(CardID);
-	});	*/	
+	});	*/
 	$('body').on('change', 'select', function() {
 		if($('.down4:visible').length !== 0){
 			var x = $(this).attr("id").replace('Udegree', '');
 			if(($('#Udegree'+ x).val()=="0")){
-				
+
 				$( "#University-degree"+ x ).removeClass('display-none');
 			}
 			else{
 				$( "#University-degree" + x).addClass('display-none');
-				
+
 			}
 			var y = $(this).attr("id").replace('Undergraduate-university-name', '');
 			if(($('#Undergraduate-university-name'+ y).val()=="0")){
@@ -709,8 +719,8 @@ jQuery(document).ready(function($) {
 				$( "#Undergraduate-university-name-other" + y).addClass('display-none');
 			}
 		}
-		
-		
+
+
 	});
 	$(document).on("click", "[id^=deleteEducation]", function(){
 			var x = $(this).attr("id");
@@ -734,7 +744,7 @@ jQuery(document).ready(function($) {
 	if($('#todayFullAmount').html()=="0"){
 		$('#hiddenPayment').addClass('display-none');
 		$("#anothercardBlock").removeClass('show');
-	
+
 	}
 	else{
 		$('#hiddenPayment').removeClass('display-none');
@@ -795,7 +805,7 @@ jQuery(document).ready(function($) {
 		//var prf = Number($('#PRF').val());
 		//var Total = Number(tempTotal + prf);
 		//$('#totalPayment').html(Total);
-		
+
 	});
 	if(($('#PRF').val()=="Other")){
 			$( "#PRFOther").removeClass('display-none');
@@ -836,17 +846,17 @@ jQuery(document).ready(function($) {
 					$("input[name='addCard']").val('0');
 					$('#hiddenPayment').addClass('display-none');
 				}
-				else{ 
+				else{
 				   	$('#hiddenPayment').removeClass('display-none');
 					if($('#Paymentcard:visible').length === 0)	{
-						$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1'); 
+						$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1');
 					}
 				}
-				
-				
+
+
 		}*/
 	});
-   
+
 	$('#prftag').click(function(){
 		if($('#prftag').val()=="1"){
 			//this is merged steps
@@ -858,7 +868,7 @@ jQuery(document).ready(function($) {
 				$('#hiddenPayment').addClass('display-none');
 				$("#anothercardBlock").removeClass('show');
 				$('#paymentTitle').addClass('display-none');
-				
+
 			}
 			else{
 				$('#hiddenPayment').removeClass('display-none');
@@ -881,7 +891,7 @@ jQuery(document).ready(function($) {
 				//if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 				$('.sidebardis').removeClass('display-none');
 				$('#hiddenPayment').removeClass('display-none');
-					
+
 			}
 			/*if($('.down6:visible').length !== 0){
 				if($( "#totalPayment").html()=="0.00" || $( "#todayFullAmount").html()=="0.00"){
@@ -889,16 +899,16 @@ jQuery(document).ready(function($) {
 					$("input[name='addCard']").val('0');
 					$('#hiddenPayment').addClass('display-none');
 				}
-				else{ 
+				else{
 					$('#hiddenPayment').removeClass('display-none');
 					if($('#Paymentcard:visible').length === 0)	{
-						$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1'); 
+						$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1');
 					}
 				}
-				
-				
+
+
 			}*/
-			
+
 		}
 		else{
 			//this is merged steps
@@ -933,7 +943,7 @@ jQuery(document).ready(function($) {
 				$('#hiddenPayment').removeClass('display-none');
 				//if($('#Paymentcard:visible').length === 0){$('#PDPlaceOrder').addClass('stop');}
 				$('.sidebardis').removeClass('display-none');
-				
+
 			}
 			/*if($('.down6:visible').length !== 0){
 				if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0.00" || $( "#todayFullAmount").html()!="0.00"){
@@ -942,23 +952,23 @@ jQuery(document).ready(function($) {
 						$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1');
 					}
 				}
-				
+
 			}*/
 		}
-		
+
 	});
 	if($('#prftag').val()=="1"){
 		$('#prfselect').slideUp().css('overflow', 'hidden');
 		if($('.down6:visible').length !== 0){
 			if($( "#totalPayment").html()=="0.00" || $( "#todayFullAmount").html()=="0.00"){$("#anothercardBlock").removeClass('show');$("input[name='addCard']").val('0');$('#hiddenPayment').addClass('display-none');}
 			else{ if($('#Paymentcard:visible').length === 0)	{$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1'); }}
-				
+
 		}
 	}
 	else{
 		$('#prfselect').slideDown().css('overflow', 'unset').delay( 800 );
 		/*if($('.down6:visible').length !== 0){
-			
+
 			if($('#PRFOther').val()!="0" || $( "#totalPayment").html()!="0.00" || $( "#todayFullAmount").html()!="0.00"){
 				if($('#Paymentcard:visible').length === 0)	{
 					$("#anothercardBlock").addClass('show');$("input[name='addCard']").val('1');}
@@ -966,8 +976,8 @@ jQuery(document).ready(function($) {
 		}*/
 	}
 
-	
-  // HIDE / SHOW PAYMENT CARD FORM 
+
+  // HIDE / SHOW PAYMENT CARD FORM
 	$('#anothercard').click(function(){
     if($(this).is(":checked")){
 			$('#anothercardBlock').slideDown();
@@ -975,7 +985,7 @@ jQuery(document).ready(function($) {
       if($("#p1-2").lenght !==0 && $("#p1-2").is(":checked") && $('#addcardtag').is(":visible")){
 				$('#addcardtag').attr('checked', true);
 				$('#addcardtag').attr('disabled', true);
-			} 
+			}
 		}
     else{
 			$('#anothercardBlock').slideUp();
@@ -1022,26 +1032,26 @@ jQuery(document).ready(function($) {
 	else if($('#Claim2').is(":checked") && $('#Facts2').is(":checked") && $('#Disciplinary2').is(":checked") && $('#Decline2').is(":checked") && $('#Oneclaim2').is(":checked")){
 		$('#insuranceMore').addClass("display-none");
 		$('#Addtionalquestion').val("0");
-			
+
 	}
 	if($('#Addtionalquestion').val()=="1"){$('#insuranceMore').removeClass("display-none");} else{$('#insuranceMore').addClass("display-none");
-		
+
 	}
 	  $('#recent-purchases').click(function(){
 		$('#all-purchases').removeClass("text-underline");
 		$('#recent-purchases').addClass("text-underline");
-		  
+
 	});
       $('#all-purchases').click(function(){
 		$('#recent-purchases').removeClass("text-underline");
 		$('#all-purchases').addClass("text-underline");
 	});
 	  $('#change-password').click(function(){
-		
+
 		$('#your-details-button').addClass("display-none");
 	});
 	  $('#yourdetails-tab, #membership, #payment, #workplace, #education').click(function(){
-		  
+
 		$('#your-details-button').removeClass("display-none");
 	});
 	  $('#Creditcard').click(function(){
@@ -1050,7 +1060,7 @@ jQuery(document).ready(function($) {
         $('#Cardno').removeClass('display-none');
         $('#Card-details').removeClass('display-none');
         $('#Card-account').addClass('display-none');
-   
+
     });
     $('#Debitcard').click(function(){
        $('#card_type_display').removeClass('display-none');
@@ -1058,57 +1068,57 @@ jQuery(document).ready(function($) {
 	   $('#Cardno').removeClass('display-none');
 	   $('#Card-account').removeClass('display-none');
 	   $('#Card-details').addClass('display-none');
-    }); 
+    });
 	$('#Paypal').click(function(){
      $('#card_type_display').addClass('display-none');
      $('#Name-on-card').addClass('display-none');
      $('#Cardno').addClass('display-none');
      $('#Card-account').addClass('display-none');
      $('#Card-details').addClass('display-none');
-    });  
+    });
     $('#Shipping-address').click(function(){
         if($(this).is(":checked")){
             $(this).attr('checked', true);
             $('#Shipping-unitno').val($('#Billing-unitno').val());
          $('#Shipping-streetname').val($('#Billing-streetname').val());
          $('#Shipping-city-town').val($('#Billing-city-town').val());
-     
+
          $('#Shipping-postcode').val($('#Billing-streetname').val());
          $('#Shipping-state').val($('#Billing-state').val());
          $('#Shipping-country').val($('#Billing-country').val());
 
          }
          else{
-          
+
           $(this).removeAttr('checked');
            $('#Shipping-unitno').val('');
          $('#Shipping-streetname').val('');
          $('#Shipping-city-town').val('');
-     
+
          $('#Shipping-postcode').val('');
          $('#Shipping-state').val('');
          $('#Shipping-country').val('');
-         
+
          }
-    }); 
+    });
 	$('#Shipping-address-join').click(function(){
            if($(this).is(":checked")){
-			$('#shippingAddress').addClass('shipping').slideUp();  
+			$('#shippingAddress').addClass('shipping').slideUp();
             $(this).attr('checked', true);
 			$('#Billing-BuildingName').val($('input[name="BuildingName"]').val());
             $('#Billing-Address_Line_1').val($('input[name="Address_Line_1"]').val());
             $('#Billing-Address_Line_2').val($('input[name="Address_Line_2"]').val());
 			$('#Billing-PObox').val($('input[name="Pobox"]').val());
             $('#Billing-Suburb').val($('input[name="Suburb"]').val());
-            
+
             $('#Billing-Postcode').val($('input[name="Postcode"]').val());
             $('#Billing-State').val($('select[name="State"]').val());
             $('#Billing-Country').val($('select[name="Country"]').val());
-            
-			
+
+
          }
          else{
-          
+
           $(this).removeAttr('checked');
 		  $(this).val('0');
 		  $('#shippingAddress').removeClass('shipping').slideDown();
@@ -1118,18 +1128,18 @@ jQuery(document).ready(function($) {
           $('#Billing-Address_Line_2').val('');
 		  $('#Billing-PObox').val('');
          $('#Billing-Suburb').val('');
-     
+
          $('#Billing-Postcode').val('');
          $('#Billing-State').val('');
          $('#Billing-Country').val('');
-         
+
          }
-    }); 
+    });
 	$('#Shipping-address-dup').click(function(){
-		  
+
            if($(this).is(":checked")){
 			$(this).attr('checked', true);
-			$('#shippingaddressblock').slideUp();  
+			$('#shippingaddressblock').slideUp();
 			$('#Shipping-BuildingName').val($('input[name="BuildingName"]').val());
             $('#Shipping-Address_Line_1').val($('input[name="Address_Line_1"]').val());
             $('#Shipping-Address_Line_2').val($('input[name="Address_Line_2"]').val());
@@ -1140,7 +1150,7 @@ jQuery(document).ready(function($) {
             $('#Shipping-country').val($('select[name="Country"]').val());
         }
 		else{
-			$('#shippingaddressblock').slideDown();  
+			$('#shippingaddressblock').slideDown();
 			$('#Shipping-BuildingName').val('');
             $('#Shipping-Address_Line_1').val('');
             $('#Shipping-Address_Line_2').val('');
@@ -1148,10 +1158,10 @@ jQuery(document).ready(function($) {
             $('#Shipping-city-town').val('');
             $('#Shipping-postcode').val('');
             $('#Shipping-state').val('');
-            $('#Shipping-country').val(''); 	
+            $('#Shipping-country').val('');
 		}
-        
-    }); 
+
+    });
 	$('#Mailing-address').click(function(){
 		if($(this).is(":checked")){
 			$(this).attr('checked', true);
@@ -1171,10 +1181,10 @@ jQuery(document).ready(function($) {
             $('#Mailing-city-town').val('');
             $('#Mailing-postcode').val('');
             $('#Mailing-state').val('');
-            $('#Mailing-country').val(''); 	
+            $('#Mailing-country').val('');
 		}
-     
-    }); 
+
+    });
 	$('[id^=Job]').change(function(){
 	    if(($('select[name=Job]').val()!="Physiotherapist")){
 			$( "#jobnoticement" ).dialog();
@@ -1186,7 +1196,7 @@ jQuery(document).ready(function($) {
 			$( "#jobother" ).addClass('display-none');
 		}
 	});
-	
+
 	$('#uploadImageButton').click(function(){
 		if ( $('.html').find('.overlay').length == 0 ){
             $('.html').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
@@ -1204,11 +1214,11 @@ jQuery(document).ready(function($) {
 		$('.overlay').fadeIn();
 		$( "#addPaymentCardForm-container").fadeIn();
 	});
-	 
+
 	$('[aria-describedby="addPaymentCardForm"] .ui-dialog-titlebar-close').click(function(){
 		$( '[aria-describedby="addPaymentCardForm"]' ).show().fadeOut();
 	});
-	
+
 	$('#setCardButton').click(function(){
 		$( ".overlay" ).fadeIn()
 		$( "#setCardWindow" ).fadeIn();
@@ -1227,8 +1237,8 @@ jQuery(document).ready(function($) {
     });
     $('#updatecard').click(function(){
 		$( "#updateCardForm" ).dialog();
-	});	
-	
+	});
+
 	$(document).on('click', '.deletecardbutton', function(){
 		$( ".overlay" ).fadeIn()
 		$( "#deleteCardWindow" ).fadeIn();
@@ -1244,7 +1254,7 @@ jQuery(document).ready(function($) {
 
 	$('.cancelDeleteButton').click(function() {
         $('#deleteCardWindow').dialog('close');
-	});	
+	});
 	$('#registerPDUserButton').click(function(){
 		$( "#registerPDUser" ).dialog();
     });
@@ -1257,7 +1267,7 @@ jQuery(document).ready(function($) {
 		$( "#installmentpolicyWindow" ).dialog();
 	});
 
-	
+
 
 	/*$('[id=Nationalgp]').change(function(){
 	    if(jQuery.inArray( "10021", $('select[id=Nationalgp]').val())!==-1)
@@ -1267,7 +1277,7 @@ jQuery(document).ready(function($) {
 		else{
 			$( "#ngsports" ).addClass('display-none');
 		}
-		if(jQuery.inArray( "10015", $('select[id=Nationalgp]').val())!==-1)	
+		if(jQuery.inArray( "10015", $('select[id=Nationalgp]').val())!==-1)
 		{
 			$( "#ngmusculo" ).removeClass('display-none');
 	    }
@@ -1278,27 +1288,27 @@ jQuery(document).ready(function($) {
 	if(jQuery.inArray( "10021", $('select[id=Nationalgp]').val())!==-1)
 		{
 			$( "#ngsports" ).removeClass('display-none');
-		
+
 		}
 		else{
 			$( "#ngsports" ).addClass('display-none');
 			$( "#ngsportsbox" ).val('0');
 			$("#ngsportsbox").attr('checked', false);
 		}
-		if(jQuery.inArray( "10015", $('select[id=Nationalgp]').val())!==-1)	
+		if(jQuery.inArray( "10015", $('select[id=Nationalgp]').val())!==-1)
 		{
 			$( "#ngmusculo" ).removeClass('display-none');
-	
+
 	    }
 		else{
 			$( "#ngmusculo" ).addClass('display-none');
 			$( "#ngmusculobox" ).val('0');
 			$("#ngmusculobox").attr('checked', false);
-		}	
-	
+		}
+
 	//  add additional education
 	//$( "#datepicker" ).datepicker({dateFormat: 'yy'});
-	
+
     $("input[name=Pobox]").on("change paste keyup", function() {
 		if($(this).val()!==""){
 			$("input[name=Address_Line_1]").prop('disabled', true);
@@ -1320,8 +1330,8 @@ jQuery(document).ready(function($) {
 			$("input[name=Address_Line_2]").parent().removeClass('locked');
 			$("input[name=BuildingName]").parent().removeClass('locked');
 			$('.pobox-stat').show();
-		}		
-    });	
+		}
+    });
 	if($("input[name=Pobox]").val()!=""){
 		$("input[name=Address_Line_1]").prop('disabled', true);
 		$("input[name=Address_Line_2]").prop('disabled', true);
@@ -1385,7 +1395,7 @@ jQuery(document).ready(function($) {
 			$("input[name=Shipping-Address_Line_2]").parent().removeClass('locked');
 			$("input[name=Shipping-BuildingName]").parent().removeClass('locked');
 			$('.shippng-pobox-stat').show();
-		}		
+		}
     });
 	if($("input[name=Shipping-PObox]").val()!=""){
 		$("input[name=Shipping-Address_Line_1]").prop('disabled', true);
@@ -1396,7 +1406,7 @@ jQuery(document).ready(function($) {
 		$("input[name=Shipping-Address_Line_1]").prop('disabled', false);
 		$("input[name=Shipping-Address_Line_2]").prop('disabled', false);
 		$("input[name=Shipping-BuildingName]").prop('disabled', false);
-	}	
+	}
 	$("input[name=Mailing-PObox]").on("change paste keyup", function() {
 		if($(this).val()!==""){
 			$("input[name=Mailing-Address_Line_1]").prop('disabled', true);
@@ -1408,7 +1418,7 @@ jQuery(document).ready(function($) {
 			$("input[name=Mailing-Address_Line_1]").parent().addClass('locked');
 			$("input[name=Mailing-Address_Line_2]").parent().addClass('locked');
 			$("input[name=Mailing-BuildingName]").parent().addClass('locked');
-			
+
 		}
         else{
 			$("input[name=Mailing-Address_Line_1]").prop('disabled', false);
@@ -1417,8 +1427,8 @@ jQuery(document).ready(function($) {
 			$("input[name=Mailing-Address_Line_1]").parent().removeClass('locked');
 			$("input[name=Mailing-Address_Line_2]").parent().removeClass('locked');
 			$("input[name=Mailing-BuildingName]").parent().removeClass('locked');
-		}		
-    });	
+		}
+    });
 	if($("input[name=Mailing-PObox]").val()!=""){
 		$("input[name=Mailing-Address_Line_1]").prop('disabled', true);
 		$("input[name=Mailing-Address_Line_2]").prop('disabled', true);
@@ -1433,39 +1443,39 @@ jQuery(document).ready(function($) {
 	    if($('select[name=MemberType]').val()=="10005" || $('select[name=MemberType]').val()=="9966" || $('select[name=MemberType]').val()=="9967"|| $('select[name=MemberType]').val()=="10006"|| $('select[name=MemberType]').val()=="9965"|| $('select[name=MemberType]').val()=="9964"){
 			$( "#ahpblock" ).addClass('display-none');
 			$( "input[name=Ahpranumber]" ).val('');
-			
+
 		}
 		else{
 			$( "#ahpblock" ).removeClass('display-none');
 		}
-		
+
 	});
-	
+
 	$('body').on('change', 'select', function() {
-		
+
 			if($('select[name=MemberType]').val()=="9966" || $('select[name=MemberType]').val()=="9993" || $('select[name=MemberType]').val()=="9994" || $('select[name=MemberType]').val()=="9968"|| $('select[name=MemberType]').val()=="9997"|| $('select[name=MemberType]').val()=="10004" || $('select[name=MemberType]').val()=="10005"){
 				$( ".FapTagC" ).addClass('display-none');
 				$( ".FapTagA" ).addClass('display-none');
-					
+
 			}
 			else{
 				$( ".FapTagC" ).removeClass('display-none');
 				$( ".FapTagA" ).removeClass('display-none');
 			}
-		
-		
+
+
 	});
 	if($('select[name=MemberType]').val()=="9966" || $('select[name=MemberType]').val()=="9993" || $('select[name=MemberType]').val()=="9994" || $('select[name=MemberType]').val()=="9968"|| $('select[name=MemberType]').val()=="9997" || $('select[name=MemberType]').val()=="10004" || $('select[name=MemberType]').val()=="10005"){
 			$( ".FapTagC" ).addClass('display-none');
 			$( ".FapTagA" ).addClass('display-none');
-				
+
 		}
 	else{
 		$( ".FapTagC" ).removeClass('display-none');
 		$( ".FapTagA" ).removeClass('display-none');
 	}
 
-	/*   Membership Types questions start  */	
+	/*   Membership Types questions start  */
 	$(".next").click(function() {
 		var x = $(".MainQuestionHolder .activated").attr('id').replace('Sections','');
 		var type = $("#chosenType").text();
@@ -1484,7 +1494,7 @@ jQuery(document).ready(function($) {
 		   $('.MainQuestionHolder [id^=Sections]:not(.MainQuestionHolder #Sections'+x+')').hide(400);
 		  ProgressMove(x);
 		}
-		
+
 		if(x == 5) { // if it is the last section
 			convertAndCalculate(type);
 			$('.TidPAss').val($("#chosenTid").text());
@@ -1497,12 +1507,12 @@ jQuery(document).ready(function($) {
 		if(x == 3) {
 			$("."+type).show();
 		}
-		
+
 		$('html, body').animate({
 			scrollTop: $('#section-main-content').offset().top
 		}, 500, 'linear');
 	});
-	
+
   $(".prev").click(function() {
     var x = $(".MainQuestionHolder .activated").attr('id').replace('Sections','');
     if(x != '1') {
@@ -1575,7 +1585,7 @@ jQuery(document).ready(function($) {
 	  // get original ids
 	  console.log("ins: "+ins+" / NGpriceT: "+NGpriceT+" / NGprice: "+NGPrice+" / totalNG: "+totalNG+" / totalPrice: "+totalPrice+" / Sum: "+Sum);
 	  var original = $("#chosenNGid").text();
-      
+
       $(".NGpriceT").text(Sum);
       var index = NGtotalText.indexOf(NGtext);
       var subs = index + NGtext.length + 5;
@@ -1585,7 +1595,7 @@ jQuery(document).ready(function($) {
 	  var output = original.indexOf(id);
       var subsID = output + id.length + 1;
 	  var firstStringID = original.substring(0, output);
-      
+
       if(index == (NGtotalText.length - NGtext.length)) {
 		var firstString = NGtotalText.substring(0, index - 5);
 		// its same. If first string's location is at the end
@@ -1597,7 +1607,7 @@ jQuery(document).ready(function($) {
 	  $("#chosenNGid").text(firstStringID + finalStringID);
     }
   });
-  
+
   $('.restart').click(function() {
     $('#Section1').click();
   });
@@ -1648,7 +1658,7 @@ jQuery(document).ready(function($) {
 		$("#chosenNG").text(NGprice);
 		$("#totalCost").text('$'+Sum);
 	}
-	 
+
 	$(document).on('click', '[id^=labelmQ]', function() {
 		var i = $(this).attr("id").replace('labelmQ', '');
 		if(i!=="0"){
@@ -1656,7 +1666,7 @@ jQuery(document).ready(function($) {
 			$('[id^=question]:not(.function)').addClass("function");
 			$('#question'+ i).fadeIn();
 			$('#question'+ i).removeClass("function");
-		} else if(i === "0") { 
+		} else if(i === "0") {
 			n = $(this).attr("class").replace('optionLabel', '');
 			var anstr = "Answer" + n;
 			var choseType = $("#"+anstr).val();
@@ -1696,7 +1706,7 @@ jQuery(document).ready(function($) {
 				$('#question65').fadeIn();
 				$('#question65').removeClass("function");
 			}
-		} 
+		}
 	});
 	 var widthCalVideo169 = $(".video169").width();
 	$(".video169").attr('style','height: '+((parseInt(widthCalVideo169) * 9)/16)+"px; width: 100%;");
@@ -1705,25 +1715,25 @@ jQuery(document).ready(function($) {
 	/*insurance page for join a new member */
 	$('#join-insurance-form2 input, #renew-insurance-form2 input').click(function() {
        if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked"))
-	   { 
-			
-            $( "#insuranceStatus" ).val('1');			
+	   {
+
+            $( "#insuranceStatus" ).val('1');
        }
 	   else if($('#Claim2').is(":checked") && $('#Facts2').is(":checked") && $('#Disciplinary2').is(":checked") && $('#Decline2').is(":checked") && $('#Oneclaim2').is(":checked")){
-			
-           
-            $( "#insuranceStatus" ).val('0');				
+
+
+            $( "#insuranceStatus" ).val('0');
 		}
     });
 	if($('#Claim1').is(":checked") || $('#Facts1').is(":checked") || $('#Disciplinary1').is(":checked") || $('#Decline1').is(":checked") || $('#Oneclaim1').is(":checked"))
-   { 
-		
-		$( "#insuranceStatus" ).val('1');			
+   {
+
+		$( "#insuranceStatus" ).val('1');
    }
    else if($('#Claim2').is(":checked") && $('#Facts2').is(":checked") && $('#Disciplinary2').is(":checked") && $('#Decline2').is(":checked") && $('#Oneclaim2').is(":checked")){
-		
-	   
-		$( "#insuranceStatus" ).val('0');				
+
+
+		$( "#insuranceStatus" ).val('0');
 	}
 	$("#10021").click(function(){
 		if($("#10021").val()=="1"){
@@ -1752,24 +1762,24 @@ jQuery(document).ready(function($) {
 		$('#deleteMGForm').submit();
 	});
 	/*delete NG Product from member shoppingcart  */
-	
+
 	$('[class^=deleteNGButton]').click(function(){
 		var productID = $(this).attr("class").replace('deleteNGButton', '');
 		$('input[name="step2-4"]').val(productID);
 		if($('body').find('.macp').length > 0 && $(this).parent('.ngtilted').length >0 && $('body').find('.ngtilted').length == 1) {
 			$('input[name="delMACP"]').val("1");
 			$('.overlay').remove();
-			$('#confirmDeleteMACP').fadeIn();	 
+			$('#confirmDeleteMACP').fadeIn();
 		}
 		else{
-		
+
       $('#deleteNGForm').submit();
 		}
-    
-		
+
+
 		//if(productID == "10021") { $('input[name="MG"]').val("9977");}
 		//if(productID == "10015") { $('input[name="MG"]').val("9978");}
-		
+
 	});
 	$('.skipRew').click(function(){
 		window.location.href="http://renewmymembership";
@@ -1788,10 +1798,10 @@ jQuery(document).ready(function($) {
 		$('#confirmDeleteMACP').hide();
 		if ( $('body, .html, html').find('.overlay').length == 0 ){
 			$('body').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
-		
+
 		}
-		
-		
+
+
 	});
 	//change membertype
 	$('.changeMT').click(function(){
@@ -1807,9 +1817,9 @@ jQuery(document).ready(function($) {
 		$( "#disagreeDescription" ).addClass('display-none');
 		$('a.join-details-button5').removeClass('disabled');
 		//$("#conditions" ).attr('checked', true);
-		
+
 	}
-    
+
 	//INSURANCE CHECKBOX IN POPUP
 	$('#insuranceTerms, #insurance_terms_button').click(function() {
 		$("#conditions" ).prop('checked', true);
@@ -1881,12 +1891,12 @@ jQuery(document).ready(function($) {
 		});
 		$(this).next('ul').scrollLeft(currentWidth);
 	});
-	
+
 	$("input[type=number]").keydown(function (e) {
       // Allow: backspace, delete, tab, escape, enter and .
       if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
            // Allow: Ctrl+A, Command+A
-          (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+          (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
            // Allow: home, end, left, right, down, up
           (e.keyCode >= 35 && e.keyCode <= 40)) {
                // let it happen, don't do anything
@@ -1901,7 +1911,7 @@ jQuery(document).ready(function($) {
       // Allow: backspace, delete, tab, escape, enter and .
       if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
            // Allow: Ctrl+A, Command+A
-          (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+          (e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
            // Allow: home, end, left, right, down, up
           (e.keyCode >= 35 && e.keyCode <= 40)) {
                // let it happen, don't do anything
@@ -1916,7 +1926,7 @@ jQuery(document).ready(function($) {
 	// Allow: backspace, delete, tab, escape, enter and .
 	if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 		 // Allow: Ctrl+A, Command+A
-		(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+		(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
 		 // Allow: home, end, left, right, down, up
 		(e.keyCode >= 35 && e.keyCode <= 40)) {
 			 // let it happen, don't do anything
@@ -1939,7 +1949,7 @@ $(document).on('change', 'select[name="Country"]', function(){
 			// Allow: backspace, delete, tab, escape, enter and .
 			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 				 // Allow: Ctrl+A, Command+A
-				(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+				(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
 				 // Allow: home, end, left, right, down, up
 				(e.keyCode >= 35 && e.keyCode <= 40)) {
 					 // let it happen, don't do anything
@@ -1949,12 +1959,12 @@ $(document).on('change', 'select[name="Country"]', function(){
 			if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
 				e.preventDefault();
 			}
-		});   
+		});
 	}
 	else {
 		$("input[name='Postcode']").val("");
 		$("input[name='Postcode']").unbind("keydown");
-		
+
 	}
 });
 if($('select[name="Country"]').val()=="Australia"){
@@ -1962,7 +1972,7 @@ if($('select[name="Country"]').val()=="Australia"){
 		// Allow: backspace, delete, tab, escape, enter and .
 		if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 			 // Allow: Ctrl+A, Command+A
-			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
 			 // Allow: home, end, left, right, down, up
 			(e.keyCode >= 35 && e.keyCode <= 40)) {
 				 // let it happen, don't do anything
@@ -1972,7 +1982,7 @@ if($('select[name="Country"]').val()=="Australia"){
 		if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
 			e.preventDefault();
 		}
-	});   
+	});
 }
 $(document).on('change', 'select[name="Billing-Country"]', function(){
 	if($('select[name="Billing-Country"]').val()=="Australia"){
@@ -1980,7 +1990,7 @@ $(document).on('change', 'select[name="Billing-Country"]', function(){
 			// Allow: backspace, delete, tab, escape, enter and .
 			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 				 // Allow: Ctrl+A, Command+A
-				(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+				(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
 				 // Allow: home, end, left, right, down, up
 				(e.keyCode >= 35 && e.keyCode <= 40)) {
 					 // let it happen, don't do anything
@@ -1990,12 +2000,12 @@ $(document).on('change', 'select[name="Billing-Country"]', function(){
 			if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
 				e.preventDefault();
 			}
-		});   
+		});
 	}
 	else {
 		$("input[name='Billing-Postcode']").val("");
 		$("input[name='Billing-Postcode']").unbind("keydown");
-		
+
 	}
 });
 if($('select[name="Billing-Country"]').val()=="Australia"){
@@ -2003,7 +2013,7 @@ if($('select[name="Billing-Country"]').val()=="Australia"){
 		// Allow: backspace, delete, tab, escape, enter and .
 		if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 			 // Allow: Ctrl+A, Command+A
-			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
 			 // Allow: home, end, left, right, down, up
 			(e.keyCode >= 35 && e.keyCode <= 40)) {
 				 // let it happen, don't do anything
@@ -2013,7 +2023,7 @@ if($('select[name="Billing-Country"]').val()=="Australia"){
 		if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
 			e.preventDefault();
 		}
-	});   
+	});
 }
 $(document).on('change', 'select[name="Shipping-Country"]', function(){
 	if($('select[name="Shipping-Country"]').val()=="Australia"){
@@ -2021,7 +2031,7 @@ $(document).on('change', 'select[name="Shipping-Country"]', function(){
 			// Allow: backspace, delete, tab, escape, enter and .
 			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 				 // Allow: Ctrl+A, Command+A
-				(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+				(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
 				 // Allow: home, end, left, right, down, up
 				(e.keyCode >= 35 && e.keyCode <= 40)) {
 					 // let it happen, don't do anything
@@ -2031,12 +2041,12 @@ $(document).on('change', 'select[name="Shipping-Country"]', function(){
 			if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
 				e.preventDefault();
 			}
-		});   
+		});
 	}
 	else {
 		$("input[name='Shipping-postcode']").val("");
 		$("input[name='Shipping-postcode']").unbind("keydown");
-		
+
 	}
 });
 if($('select[name="Shipping-Country"]').val()=="Australia"){
@@ -2044,7 +2054,7 @@ if($('select[name="Shipping-Country"]').val()=="Australia"){
 		// Allow: backspace, delete, tab, escape, enter and .
 		if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 			 // Allow: Ctrl+A, Command+A
-			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
 			 // Allow: home, end, left, right, down, up
 			(e.keyCode >= 35 && e.keyCode <= 40)) {
 				 // let it happen, don't do anything
@@ -2054,7 +2064,7 @@ if($('select[name="Shipping-Country"]').val()=="Australia"){
 		if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
 			e.preventDefault();
 		}
-	});   
+	});
 }
 $(document).on('change', 'select[name="Mailing-Country"]', function(){
 	if($('select[name="Mailing-Country"]').val()=="Australia"){
@@ -2062,7 +2072,7 @@ $(document).on('change', 'select[name="Mailing-Country"]', function(){
 			// Allow: backspace, delete, tab, escape, enter and .
 			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 				 // Allow: Ctrl+A, Command+A
-				(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+				(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
 				 // Allow: home, end, left, right, down, up
 				(e.keyCode >= 35 && e.keyCode <= 40)) {
 					 // let it happen, don't do anything
@@ -2072,12 +2082,12 @@ $(document).on('change', 'select[name="Mailing-Country"]', function(){
 			if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
 				e.preventDefault();
 			}
-		});   
+		});
 	}
 	else {
 		$("input[name='Mailing-postcode']").val("");
 		$("input[name='Mailing-postcode']").unbind("keydown");
-		
+
 	}
 });
 if($('select[name="Mailing-Country"]').val()=="Australia"){
@@ -2085,7 +2095,7 @@ if($('select[name="Mailing-Country"]').val()=="Australia"){
 		// Allow: backspace, delete, tab, escape, enter and .
 		if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 			 // Allow: Ctrl+A, Command+A
-			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
 			 // Allow: home, end, left, right, down, up
 			(e.keyCode >= 35 && e.keyCode <= 40)) {
 				 // let it happen, don't do anything
@@ -2095,10 +2105,10 @@ if($('select[name="Mailing-Country"]').val()=="Australia"){
 		if ((e.shiftKey || (e.keyCode < 48 || e.keyCode > 57)) && (e.keyCode < 96 || e.keyCode > 105)) {
 			e.preventDefault();
 		}
-	});   
+	});
 }
 //======================== LOADING SCREEN BUTTONS =================================
-	
+
 //------------- JOIN THE APA / RENEW MEMBERSHIP-----------------------
 	$(document).on('click', '.join-details-button4', function(){
 		$('.down4').show();
@@ -2163,11 +2173,11 @@ if($('select[name="Mailing-Country"]').val()=="Australia"){
 		$('#addPaymentCardForm-container').fadeOut();
 		$('.overlay').fadeIn();
 		$('.loaders').css('visibility','visible').hide().fadeIn();
-		$(document).keydown(function (e) {  
-			return (e.which || e.keyCode) != 116;  
-	  }); 
+		$(document).keydown(function (e) {
+			return (e.which || e.keyCode) != 116;
+	  });
 	});
-	
+
 
 	//---------------------------------------------------------------------------
 
@@ -2200,7 +2210,7 @@ $(document).on('click', '.pd-spcart-delete a', function(){
 $(document).on('click', '#skipDietary ', function(){
 	$('#skipDietaryForm').submit();
 });
-//===============================================================================	
+//===============================================================================
 	$('#logoutButton').click(function() {
 		document.getElementById("logoutAcButton").click();
 	});
@@ -2213,7 +2223,7 @@ $(document).on('click', '#skipDietary ', function(){
 	$(".OthersiteButtonClose").click( function() {
 		$(".OtherSitesList").removeClass('expand');
 	});
-	
+
 });
 
 // PREFIX "PHY" FOR AHPRA NUMBER AND INPUT RULES
@@ -2222,7 +2232,7 @@ jQuery(document).ready(function(){
 			// Allow: backspace, delete, tab, escape, enter and .
 			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 			// Allow: Ctrl+A, Command+A
-			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
 			// Allow: home, end, left, right, down, up
 			(e.keyCode >= 35 && e.keyCode <= 40)) {
 				// let it happen, don't do anything
@@ -2237,7 +2247,7 @@ jQuery(document).ready(function(){
 	var max_chars = 13;
 
 	$('#ahpblock input').keydown( function(e){
-		if ($(this).val().length >= max_chars) { 
+		if ($(this).val().length >= max_chars) {
 			$(this).val($(this).val().substr(0, max_chars));
 		}
 	});
@@ -2245,11 +2255,11 @@ jQuery(document).ready(function(){
 	// PHONE NUMBER MAX 13
 	var max_phone_chars = 12;
     $(document).on('keydown', 'input[name="phone-number"], input[name="Mobile-number"]', function(e){
-		if ($(this).val().length >= max_phone_chars) { 
+		if ($(this).val().length >= max_phone_chars) {
 			$(this).val($(this).val().substr(0, max_phone_chars));
 		}
 	});
-	
+
 });
 
 // NO NUMBER IN FORMS FIELS TOWN/CITY
@@ -2259,7 +2269,7 @@ jQuery(document).ready(function(){
 			// Allow: backspace, delete, tab, escape, enter and .
 			if ($.inArray(e.keyCode, [46, 8, 9, 27, 13, 110]) !== -1 ||
 			// Allow: Ctrl+A, Command+A
-			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) || 
+			(e.keyCode === 65 && (e.ctrlKey === true || e.metaKey === true)) ||
 			// Allow: home, end, left, right, down, up
 			(e.keyCode >= 35 && e.keyCode <= 40)) {
 				// let it happen, don't do anything

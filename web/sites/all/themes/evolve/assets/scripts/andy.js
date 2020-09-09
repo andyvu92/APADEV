@@ -107,7 +107,13 @@ jQuery(document).ready(function() {
   }
 	if(window.location.href.indexOf("?page") > -1||window.location.href.indexOf("?pagesize") > -1 || window.location.href.indexOf("?search-result") > -1){
     var window_width = $(window).width();
-    var target = $('#section-content-top');
+    if(window.location.href.indexOf("aboutus/partner-services?page") > -1)
+    {
+      var target = $('#partners-info');
+    }
+    else{
+      var target = $('#section-content-top');
+    }
 
     if (window_width >= 993) {
       $('html, body').stop().animate({
@@ -3173,7 +3179,7 @@ const loadSVGIcons = () => {
       if ( !iconSrc.includes(baseUrl) ){
         iconSrc = `${baseUrl}${iconSrc}`;
       }
-  
+
       // fetch svg src
       fetch(iconSrc)
         .then(response => response.text())
@@ -3338,7 +3344,7 @@ const tabBannerModuleScript = () => {
 
           // set trigger label (mobile nav trigger)
           mobileTogglesTriggerLabel.textContent = label;
-          
+
         }
       });
     });
@@ -3364,18 +3370,18 @@ const tabBannerModuleScript = () => {
     const toggleTriggerHandler = () => {
       setTimeout(() => {
         if (window.innerWidth < 571){
-  
+
           togglesWrapper.style.height = "auto";
           let toggleWrapperHeight = togglesWrapper.clientHeight;
           togglesWrapper.style.height = "";
-  
+
           setTimeout(() => {
             togglesWrapper.classList.add('mobile-nav-initialised');
             togglesWrapper.classList.add('collapsed');
           }, 0);
-    
+
           let isExpanded = mobileTogglesTriggerBtn.classList.contains('active');
-    
+
           const expandHandler = () => {
             mobileTogglesTriggerBtn.classList.add('active');
             togglesWrapper.classList.remove('collapsed');
@@ -3385,7 +3391,7 @@ const tabBannerModuleScript = () => {
             }, 10);
             isExpanded = true;
           }
-  
+
           const collapseHandler = () => {
             mobileTogglesTriggerBtn.classList.remove('active');
             togglesWrapper.style.height = '0px';
@@ -3393,7 +3399,7 @@ const tabBannerModuleScript = () => {
             togglesWrapper.classList.remove('expanded');
             isExpanded = false;
           }
-  
+
           mobileTogglesTriggerBtn.addEventListener('click', e => {
             if (isExpanded){
               collapseHandler();
@@ -3402,7 +3408,7 @@ const tabBannerModuleScript = () => {
               expandHandler()
             }
           });
-        } 
+        }
         else {
           togglesWrapper.classList.remove('mobile-nav-initialised');
           togglesWrapper.classList.remove('collapsed');
@@ -3411,7 +3417,7 @@ const tabBannerModuleScript = () => {
           togglesWrapper.style.height = '';
         }
       }, 10);
-      
+
     }
 
     // only trigger dropdown function if this is not a horizon style
@@ -3419,7 +3425,7 @@ const tabBannerModuleScript = () => {
 
     if (!isToggleHorizon){
       toggleTriggerHandler();
-  
+
       window.addEventListener('resize', e => {
         toggleTriggerHandler();
       });
@@ -3451,21 +3457,21 @@ const brickNavHandler = () => {
       const handleLinkArrangement = () => {
         const linkWrapper = document.createElement('div');
         linkWrapper.classList.add('link-wrapper');
-    
+
         allLinks.forEach(link => {
           linkWrapper.append(link);
         });
-    
+
         nav.firstElementChild.style.display = 'none';
         nav.appendChild(linkWrapper);
-    
+
         const rowArr = [];
-    
+
         allLinks.forEach(link => {
           let rowID = link.getBoundingClientRect().top;
 
           link.setAttribute('row-id', rowID);
-    
+
           if (!rowArr.includes(rowID)) rowArr.push(rowID);
         });
 
@@ -3475,7 +3481,7 @@ const brickNavHandler = () => {
 
           allLinks.forEach(link => {
             let rowID = link.getAttribute('row-id');
-            
+
             if (rowID == row){
               rowNode.appendChild(link);
             }
@@ -3485,7 +3491,7 @@ const brickNavHandler = () => {
         });
       }
 
-      // wait for sidebar loaded fall back (mobile) 
+      // wait for sidebar loaded fall back (mobile)
       if (window.innerWidth < 571){
         setTimeout(() => {
           handleLinkArrangement();
@@ -3508,13 +3514,13 @@ const articleVerticleListHandler = () => {
       // default variables
       const shareWrapper = article.querySelector('.actions-wrapper .share');
       const articleButton = article.querySelector('.article-info .simple-link');
-  
+
       // handle social share links
       const isSocialShareRequired = list.classList.contains('auto-share-embed');
-  
+
       if (isSocialShareRequired && shareWrapper && articleButton){
         let articleUrl = articleButton.href;
-        
+
         // create linkedin
         const linkedInShare = document.createElement('button');
         linkedInShare.classList.add('social-share');
@@ -3642,7 +3648,7 @@ const tabBannerAltModuleScript = () => {
 
           // set trigger label (mobile nav trigger)
           mobileTogglesTriggerLabel.textContent = label;
-          
+
         }
       });
     });
@@ -3668,18 +3674,18 @@ const tabBannerAltModuleScript = () => {
     const toggleTriggerHandler = () => {
       setTimeout(() => {
         if (window.innerWidth < 571){
-  
+
           togglesWrapper.style.height = "auto";
           let toggleWrapperHeight = togglesWrapper.clientHeight;
           togglesWrapper.style.height = "";
-  
+
           setTimeout(() => {
             togglesWrapper.classList.add('mobile-nav-initialised');
             togglesWrapper.classList.add('collapsed');
           }, 0);
-    
+
           let isExpanded = mobileTogglesTriggerBtn.classList.contains('active');
-    
+
           const expandHandler = () => {
             mobileTogglesTriggerBtn.classList.add('active');
             togglesWrapper.classList.remove('collapsed');
@@ -3689,7 +3695,7 @@ const tabBannerAltModuleScript = () => {
             }, 10);
             isExpanded = true;
           }
-  
+
           const collapseHandler = () => {
             mobileTogglesTriggerBtn.classList.remove('active');
             togglesWrapper.style.height = '0px';
@@ -3697,7 +3703,7 @@ const tabBannerAltModuleScript = () => {
             togglesWrapper.classList.remove('expanded');
             isExpanded = false;
           }
-  
+
           mobileTogglesTriggerBtn.addEventListener('click', e => {
             if (isExpanded){
               collapseHandler();
@@ -3706,7 +3712,7 @@ const tabBannerAltModuleScript = () => {
               expandHandler()
             }
           });
-        } 
+        }
         else {
           togglesWrapper.classList.remove('mobile-nav-initialised');
           togglesWrapper.classList.remove('collapsed');
@@ -3715,7 +3721,7 @@ const tabBannerAltModuleScript = () => {
           togglesWrapper.style.height = '';
         }
       }, 10);
-      
+
     }
 
     // only trigger dropdown function if this is not a horizon style
@@ -3723,7 +3729,7 @@ const tabBannerAltModuleScript = () => {
 
     if (!isToggleHorizon){
       toggleTriggerHandler();
-  
+
       window.addEventListener('resize', e => {
         toggleTriggerHandler();
       });
@@ -3734,7 +3740,7 @@ const tabBannerAltModuleScript = () => {
 // handle back to top button
 const backToTopButtonAltHandler = () => {
     const backToTopButtons = document.querySelectorAll('.back-to-top-alt');
-  
+
     backToTopButtons.length && backToTopButtons.forEach(button => {
       button.addEventListener('click', e => {
         window.scrollTo({
