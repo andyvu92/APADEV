@@ -3042,6 +3042,8 @@ body, body .block{
         }
         &.text-center{
             max-width: 255px;
+            margin-left: auto;
+            margin-right: auto;
         }
     }
     .brd-headling{
@@ -7344,7 +7346,25 @@ body a b, body span b{
     .banner-inner-wrapper{
         width: 100%;
         max-width: 915px;
+    }
 
+    &.default-width{
+        .banner-inner-wrapper{
+            max-width: 100%;
+        }
+    }
+
+    &.gutter{
+        &-medium{
+            padding: 100px 0;
+            @media @tablet-width-down{
+                padding: 55px 0;
+            }
+        
+            @media @larger-phone-width-down{
+                padding: 50px 0;
+            }
+        }
     }
 
     .banner-heading{
@@ -9024,6 +9044,9 @@ body #section-main-content{
         &:first-of-type{
             margin-top: 0;
         }
+        & + h3{
+            padding-top: 0;
+        }
     }
 }/* ICON GRID */
 .icon-box-grid{
@@ -9299,20 +9322,24 @@ h1.heading{
     }
 }
 
-.intro-20{
-    > p{
-        font-size: 20px;
-        @media @larger-phone-width-down{
-            font-size: 18px;
+body{
+    .dexp-body-inner{
+        .intro-20{
+            > p{
+                font-size: 20px;
+                @media @larger-phone-width-down{
+                    font-size: 18px;
+                }
+            }
         }
-    }
-}
-
-.intro-24{
-    > p{
-        font-size: 24px;
-        @media @larger-phone-width-down{
-            font-size: 20px;
+        
+        .intro-24{
+            > p{
+                font-size: 24px;
+                @media @larger-phone-width-down{
+                    font-size: 20px;
+                }
+            }
         }
     }
 }
