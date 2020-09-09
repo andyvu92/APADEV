@@ -846,6 +846,8 @@ function getDescription($str){
       return "Essential communications will be delivered via the most relevant channel. These communications are mandatory and cannot be opted-out of.";
     case "Third party communications":
       return "Third party communications are delivered via the APA and APA channels. Your information will not be provided to any third parties";
+    case "SMS Opt Out":
+      return "SMS communications are used sparingly and at no cost to members.";
   }
 }
 // sort array by specific key

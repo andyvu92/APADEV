@@ -182,21 +182,42 @@ if(count($PostArray) == 0) { // GET data
 <div class="dashboard_content col-xs-12 col-sm-12 col-md-10 col-lg-10 background_<?php //echo $background; ?>" id="dashboard-right-content">
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 dashboard_detail">
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-			<div class="col-xs-12"><span class="dashboard-name cairo">Your subscriptions</span></div>
+			<div class="col-xs-12"><span class="dashboard-name cairo">Communications</span></div>
 			<div class="col-xs-12 col-sm-6" style="display: none"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
 		<?php apa_function_customizeBackgroundImage_form(); ?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
-				<p><span style="color:#009fda; font-size: 1.2em;"><strong>What you're signed up for</strong></span></p>
+				<p><span>Choose below which APA communications you would like to be excluded from. Simply tick the
+communications you do <strong>not</strong> want to receive.
+</span><br><span>Note: Essential APA Communications are mandatory and cannot be opted out of. These will be delivered
+by the most relevant channel.</span></p>
 				<form action="/subscriptions" method="POST">
 					<input name="validator" tyle="hidden" value="0" style="display: none;" />
 					<div>
             <?php
 				$countSubs = count($Subscription);
 				$countSubType = $countSubs%2;
-				$counter = 0;
-             	foreach($SubListAll as $Subs) {
+        $counter = 0;
+
+        //rearrange SubListAll Array
+        $arrangArray = Array();
+        foreach ($SubListAll as $temArray){
+          $arrayNew["SubscriptionID"] =  $temArray["SubscriptionID"];
+          $arrayNew["Subscription"] =  $temArray["Subscription"];
+          $arrayNew["Subscribed"] = $temArray["Subscribed"];
+          if($arrayNew["Subscription"]!="SMS Opt Out" ){
+            array_push($arrangArray, $arrayNew);
+          }
+          else{
+            $arraySMS["SubscriptionID"] =  $arrayNew["SubscriptionID"];
+            $arraySMS["Subscription"] =  $arrayNew["Subscription"];
+            $arraySMS["Subscribed"] = $arrayNew["Subscribed"];
+          }
+        }
+        array_push($arrangArray, $arraySMS);
+
+             	foreach($arrangArray as $Subs) {
 					$counter++;
 					if($Subs["SubscriptionID"] == "28" || $Subs["SubscriptionID"] == "30") {
 						// 28 for Insurance
@@ -211,7 +232,8 @@ if(count($PostArray) == 0) { // GET data
 								echo "checked='checked'";
 							}
 							echo '><label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'"><span class="label-text">'.$Subs["Subscription"].'</span></label></div>';
-						} elseif($counter < 4) {
+
+            } elseif($counter < 4) {
 							// for extra magazine copy
 							foreach($MagSubs as $mags) {
 								$tt = strpos($Subs["Subscription"], $mags);
@@ -224,17 +246,18 @@ if(count($PostArray) == 0) { // GET data
 										.'</span></label>
 									</div>';
 								}
-							}
+              }
+
 						} else {
                   			// for InMotion print copy
 							if(($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") && $Subs["SubscriptionID"] == "18") {
 								// No InMotion print copy for
 								// student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
 							} else {
-								$description = getDescription($Subs["Subscription"]);
-								$NoSub = $counter>8?True:False;
 
-								if($counter==9){echo '<div class="subscriptions-dashboard flex-container">';}
+								$description = getDescription($Subs["Subscription"]);
+								$NoSub = $counter>7?True:False;
+               	if($counter==8){echo '<div class="subscriptions-dashboard flex-container">';}
 								echo $parentBeginElement.'<div class="column"><div class="functional-title"><div class="subscription-title">
 								<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
 								'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';

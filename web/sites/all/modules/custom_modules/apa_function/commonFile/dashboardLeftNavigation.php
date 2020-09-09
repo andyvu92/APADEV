@@ -1,9 +1,9 @@
-<?php 
+<?php
 $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 $url= $link.$_SERVER['REQUEST_URI']; 
 $renewStatus = variable_get('renew_active_status', RENEW_ACTIVE_STATUS);
 // 2.2.11 - UPDATE Picture
-// Send - 
+// Send -
 // UserID, Image
 // Response -
 // N/A.
@@ -48,7 +48,7 @@ if ($uploadOk == 0) {
     //echo "Sorry, your file was not uploaded.";
 // if everything is ok, try to upload file
 } else {
-	
+
     if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
         //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
     } else {
@@ -59,9 +59,9 @@ $imageBlob = base64_encode(file_get_contents("sites/all/themes/evolve/uploads/".
 $postImageData['ID'] = $_SESSION['LinkId'];
 $postImageData['EntityName'] = "Persons";
 $postImageData['Photo'] = $imageBlob;
-$outImage = aptify_get_GetAptifyData("11",$postImageData); 
+$outImage = aptify_get_GetAptifyData("11",$postImageData);
 unlink("sites/all/themes/evolve/uploads/".$name);
-    
+
 }
 if(isset($_SESSION["UserId"])) {
 	$data = "UserID=".$_SESSION["UserId"];
@@ -72,18 +72,18 @@ if(isset($_SESSION["UserId"])) {
 
 	<div class="navbar-collapse">
 		<div class="user-avatar">
-			<?php 
+			<?php
 				/* todo
 				Taken out for a security issue
-				
+
 				$AptifyAuthI = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/Authentication/Login/DomainWithContainer?UserName=Jing.Hu@aptifyAPAAUS.local&Password=APA%pw!58';
 				$AuthTokenI = curlRequest($AptifyAuthI, "Get", "");
 				$AuthTokenI = json_decode($AuthTokenI, true);
 				$AuthTokenI = $AuthTokenI["TokenId"];
 			?>
-			<a  style="cursor: pointer; color:white;" id="uploadImageButton"><div class="ava-circle" style='background: url(https://aptifyweb.australian.physio/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo?NoImageObject=CRM.NoPhotoAvailable&amp;ds=636682564840400000<?php echo "&AptifyAuthorization=DomainWithContainer%20".$AuthTokenI; ?>) no-repeat center center'></div></a> 
+			<a  style="cursor: pointer; color:white;" id="uploadImageButton"><div class="ava-circle" style='background: url(https://aptifyweb.australian.physio/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo?NoImageObject=CRM.NoPhotoAvailable&amp;ds=636682564840400000<?php echo "&AptifyAuthorization=DomainWithContainer%20".$AuthTokenI; ?>) no-repeat center center'></div></a>
 			*/ ?>
-			<a  style="cursor: pointer; color:white;" id="uploadImageButton"><div class="ava-circle" style='background: url(https://aptifyweb.australian.physio/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo?NoImageObject=CRM.NoPhotoAvailable&amp;<?php echo "AptifyAuthorization=Web%20".$_SESSION['TokenId']; ?>) no-repeat center center'></div></a> 
+			<a  style="cursor: pointer; color:white;" id="uploadImageButton"><div class="ava-circle" style='background: url(https://aptifyweb.australian.physio/AptifyServicesAPI/services/ImageField/Persons/<?php echo $_SESSION['LinkId'];?>/Photo?NoImageObject=CRM.NoPhotoAvailable&amp;<?php echo "AptifyAuthorization=Web%20".$_SESSION['TokenId']; ?>) no-repeat center center'></div></a>
 			<!--a><div class="ava-circle" style='background: url(https://australian.physio/sites/default/files/Photo.png) no-repeat center center'></div></a-->
 			<span class="user-name cairo"><?php echo $details['Firstname'].' '.$details['Lastname'];?></span>
 		</div>
@@ -126,19 +126,19 @@ if(isset($_SESSION["UserId"])) {
 			<li class="dashboard-nav">
 				<a href="subscriptions">
 					<span class="subscription_icon"></span>
-					Subscriptions
+					Communications
 				</a>
 			</li>
 			<li class="dashboard-nav">
-				<?php 
+				<?php
 				//check the member is eligible for renew
 					$variableData['id'] = $_SESSION["UserId"];
 					$Quatation = aptify_get_GetAptifyData("45", $variableData);
 					if(sizeof($Quatation["results"])!=0){
-						$tag = true; 
+						$tag = true;
 					}
-					else{ $tag = false;}	
-					
+					else{ $tag = false;}
+
 				?>
 				<?php  if($details['MemberTypeID']!="1" && checkRenew($_SESSION['payThroughDate'], $tag)): $_SESSION["renewTag"]=1;?>
 				<?php if($renewStatus): ?>
@@ -153,7 +153,7 @@ if(isset($_SESSION["UserId"])) {
 					Join the APA
 				</a>
 				<?php endif;?>
-				
+
 			</li>
 		</ul>
 	</div>

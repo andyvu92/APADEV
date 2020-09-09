@@ -1211,7 +1211,7 @@ $(document).ready(function(){
 				<li><a href="/dashboard">Dashboard</a></li>
 				<li><a href="/your-details">Account</a></li>
 				<li><a href="/your-purchases">Purchases</a></li>
-				<li><a href="/subscriptions">Subscriptions</a></li>
+				<li><a href="/subscriptions">Communications</a></li>
 				<li><a href="/renewmymembership">Join/Renew</a></li>
 			</ul>
 
