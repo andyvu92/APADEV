@@ -3182,14 +3182,16 @@ const loadSVGIcons = () => {
 
       // fetch svg src
       fetch(iconSrc)
-        .then(response => response.text())
-        .then(text => {
+        .then(function(response) {
+          let responseStatus = response.ok;
           // render icon svgs
-          item.innerHTML = text;
-        })
-        .catch((error) => {
-          console.log(error);
-          item.innerHTML = "Icon not loaded";
+          if(responseStatus) {
+            response.text().then(function(text) {
+              item.innerHTML = text;
+            });
+          }else {
+            item.innerHTML = "Icon not loaded";
+          }
         });
     }
   });

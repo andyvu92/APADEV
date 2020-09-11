@@ -7,7 +7,9 @@
 
 		<div class="actions-wrapper">
 			<div class="author">
-				<p>By <b><?php print render($content['field_prf_news_author']);?></b></p>
+				<?php if(!empty($content['field_prf_news_author'])): ?>
+					<p>By <b><?php print render($content['field_prf_news_author']);?></b></p>
+				<?php endif; ?>
 				<time datetime="<?php print date('M',$created); print " "; print date('Y',$created); ?>"><?php print date('M',$created); print " "; print date('Y',$created); ?></time>
 			</div>
 
