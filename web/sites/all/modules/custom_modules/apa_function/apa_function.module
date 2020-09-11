@@ -125,29 +125,29 @@ function apa_function_updateBackgroundImage_form() {
 	/// in 'jointheAPA.inc.php', 'renewMyMembership.inc.php'
 	/// 'yourdetail.inc.php', 'dashboard.inc.php'
     include __DIR__.'/commonFile/updateBackgroundImage.php';
-   
+
 }
 function apa_function_customizeBackgroundImage_form() {
    /// in 'jointheAPA.inc.php', 'renewMyMembership.inc.php'
    /// 'yourdetail.inc.php', 'dashboard.inc.php'
     include __DIR__.'/commonFile/customizeBackgroundImage.php';
-   
+
 }
 function apa_function_dashboardLeftNavigation_form() {
 	/// in 'renewMyMembership.inc.php', 'yourdetail.inc.php'
 	/// 'dashboard.inc.php'
     include __DIR__.'/commonFile/dashboardLeftNavigation.php';
-   
+
 }
 function apa_function_loadworkplace_form() {
 	/// in this file
     include __DIR__.'/commonFile/workplace.php';
-   
+
 }
 function apa_function_loadeducation_form() {
 	/// in this file
     include __DIR__.'/commonFile/education.php';
-   
+
 }
 function apa_function_updateshoppingcart_form() {
 	/// merged in function.inc
@@ -172,6 +172,10 @@ function apa_function_login_form() {
 function apa_function_forgot_password_form() {
     /// block
     include __DIR__."/inc/Login/forget-password.inc.php";
+}
+function apa_function_maintenance_mode_form() {
+  /// block
+  include __DIR__."/inc/maintenance-mode.inc.php";
 }
 function apa_function_return_udsers_form() {
     /// page
@@ -255,7 +259,7 @@ function apa_function_renew_the_apa_confirmation_form() {
  * @see apa_function_menu()
  */
 function apa_function_sign_up_form() {
-    
+
     include __DIR__."/inc/Signup/signUp.inc.php";
 }
 /**
@@ -346,15 +350,15 @@ function apa_function_purchasePRF_form() {
  * @see apa_function_menu()
  */
 function apa_function_surveyquestions_form() {
-    /// block   
+    /// block
     include __DIR__."/Survey/SurveyQuestions.inc.php";
 }
 function apa_function_surveyedit_form() {
-    
+
     include __DIR__."/Survey/SurveyEdit.inc.php";
 }
 function apa_function_surveylist_form() {
- 
+
     include __DIR__."/Survey/SurveyList.inc.php";
 }
 function apa_function_surveyquestionslist_form() {
@@ -424,7 +428,7 @@ function apa_create_log_in_form($form, &$form_state){
 		'#prefix'=>'<div class="flex-cell email-field">',
 		'#suffix'=>'</div>',
 		'#attributes' => array(
-			
+
 			' class' => 'form-control',
 			' placeholder' => 'Email address',
 		),
@@ -448,11 +452,11 @@ function apa_create_log_in_form($form, &$form_state){
 	$form['submit'] = array(
 		'#type' => 'submit',
 		'#prefix'=>'<div class="flex-cell login-btn">',
-		'#suffix'=>'</div>',		
+		'#suffix'=>'</div>',
 		'#value' => t('Login'),
 		'#submit'=>['log_in'],
-		
-	); 
+
+	);
 	$form['remember'] = array(
 		'#type' => 'checkbox',
 		'#prefix'=>'<div class="flex-cell"><div class="flex-col-5 remember-opt">',
@@ -462,13 +466,13 @@ function apa_create_log_in_form($form, &$form_state){
 					</div></div>',
 		'#default_value' => isset($_COOKIE["member_login"])?1:0,
 		'#attributes' => array(
-			
+
 			' class' => 'styled-checkbox',
-			
-		),						
+
+		),
 		'#title' => t('Remember me'),
-		
-	); 
+
+	);
 	return $form;
 }
 //create log in function
@@ -493,7 +497,7 @@ function pd_shoppingcart_form($form, &$form_state, $vars){
         $userid = $_SESSION["UserId"];
         $test['id'] = $_SESSION["UserId"];
         $cardsnum = aptify_get_GetAptifyData("12", $test);
-       
+
     }
 	$form['POSTPRF'] = array(
         '#type' => 'hidden',
@@ -507,7 +511,7 @@ function pd_shoppingcart_form($form, &$form_state, $vars){
         $form['CardUsed'] = array(
             '#type' => 'hidden',
             '#attributes' => array(' id' => 'CardUsed'),
-    
+
         );
     }
     $form['addCard'] = array(
@@ -521,7 +525,7 @@ function pd_shoppingcart_form($form, &$form_state, $vars){
 		$key = $PaymentType[$pair]['ID'];
 		$paymentArray[$key] = $PaymentType[$pair]['Name'];
     }
-    
+
     $form['Cardtype'] = array(
 		'#type' => 'select',
         '#title' => t('Choose credit card type:'),
@@ -530,12 +534,12 @@ function pd_shoppingcart_form($form, &$form_state, $vars){
 		'#options' => $paymentArray,
 		//'#required' => TRUE,
 	);
-	
+
 	$form['Cardname'] = array(
 		'#type' => 'textfield',
 		'#title' => t('Name on card:<span class="tipstyle">*</span>'),
 		'#attributes' => array(
-			
+
 			' class' => 'form-control',
 			' placeholder' => 'Name on card',
 		),
@@ -545,7 +549,7 @@ function pd_shoppingcart_form($form, &$form_state, $vars){
 	$form['Cardnumber'] = array(
 		'#type' => 'textfield',
 		'#attributes' => array(
-			//' type' => 'number', 
+			//' type' => 'number',
 			' class' => 'form-control',
 			' placeholder' => 'Card number',
 		),
@@ -557,7 +561,7 @@ function pd_shoppingcart_form($form, &$form_state, $vars){
 	$form['Expirydate'] = array(
 		'#type' => 'textfield',
 		'#attributes' => array(
-			//' type' => 'number', 
+			//' type' => 'number',
 			' class' => 'form-control',
 			' placeholder' => 'mmyy (eg: 0225)',
 		),
@@ -569,11 +573,11 @@ function pd_shoppingcart_form($form, &$form_state, $vars){
 	$form['CCV'] = array(
 		'#type' => 'textfield',
 		'#attributes' => array(
-			//' type' => 'number', 
+			//' type' => 'number',
 			' class' => 'form-control',
 			' placeholder' => 'CVV',
         ),
-       
+
 		'#title' => t('CVV:<span class="tipstyle">*</span>'),
 		'#default_value' => '',
 		'#maxlength' => 4,
@@ -584,16 +588,16 @@ function pd_shoppingcart_form($form, &$form_state, $vars){
 		'#attributes' => array(
             ' class' => 'styled-checkbox',
          ),
-         '#default_value' => 0,	
-         	
+         '#default_value' => 0,
+
 		'#title' => t('Do you want to save this card?'),
 	);
 
     $form['Message']['notice'] = array(
         '#markup' => '<div class="form-item form-type-textfield"><p class="payment_note">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</p></div>',
-       
+
     );
-    $form['submit'] = array('#type' => 'submit','#submit'=>['place_pd_shopping_cart']); 
+    $form['submit'] = array('#type' => 'submit','#submit'=>['place_pd_shopping_cart']);
 	return $form;
 }
 
@@ -621,9 +625,9 @@ function place_pd_shopping_cart($form, &$form_state){
 		}
 	}
     $OrderSend["productID"] = $products;
-    if(isset($form["CardUsed"]["#value"])) { 
+    if(isset($form["CardUsed"]["#value"])) {
        if($form["addCard"]["#value"]=="0"){
-        
+
         $OrderSend["Card_number"] = $form["CardUsed"]["#value"];
         $OrderSend['PaymentTypeID'] = "";
         $OrderSend['CCNumber'] = "";
@@ -631,7 +635,7 @@ function place_pd_shopping_cart($form, &$form_state){
         $OrderSend['CCSecurityNumber'] = "";
        }
        else{
-    
+
         $OrderSend["Card_number"] = "";
         $OrderSend['PaymentTypeID'] = $form["Cardtype"]["#value"];
         $OrderSend['CCNumber'] = $form["Cardnumber"]["#value"];
@@ -654,7 +658,7 @@ function place_pd_shopping_cart($form, &$form_state){
     $registerOuts = aptify_get_GetAptifyData("26", $OrderSend);
     //call add payment card endpoint if neccessary
     if(isset($form["addcardtag"]["#value"]) && $form["addcardtag"]["#value"]=="1"){
-       
+
         $postPaymentData['userID'] = $_SESSION['UserId'];
         $postPaymentData['Payment-method'] = $form["Cardtype"]["#value"];
         $postPaymentData['Cardno'] = $form["Cardnumber"]["#value"];
@@ -662,7 +666,7 @@ function place_pd_shopping_cart($form, &$form_state){
         $postPaymentData['CCV'] = $form["CCV"]["#value"];
         $postPaymentData['IsDefault'] = 0;
         $out = aptify_get_GetAptifyData("15",$postPaymentData);
-        if($out["result"]=="Failed"){ 
+        if($out["result"]=="Failed"){
             if($out["Message"]=="Expiry date lenght should be 4."){
                 drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
             }
@@ -705,7 +709,7 @@ function place_pd_shopping_cart($form, &$form_state){
     $recordOrder['CampaignCode'] = $OrderSend['CampaignCode'];
     if(sizeof($registerOuts)!=0 && $registerOuts['Invoice_ID']!=="0") {
             $invoice_ID = $registerOuts['Invoice_ID'];
-       
+
             //put extra code when using API to get the status of order, if it is successful, will save terms and conditions on APA side
             //save the terms and conditons on APA side
             $dataArray = array();
@@ -716,7 +720,7 @@ function place_pd_shopping_cart($form, &$form_state){
             $dataArray['Type'] = "P";
             forCreateRecordFunc($dataArray);
             // record member log for successful process
-            if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+            if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
             $addMemberLog["orderID"] = "0";
             $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
             $addMemberLog["createDate"] = date('Y-m-d');
@@ -731,10 +735,10 @@ function place_pd_shopping_cart($form, &$form_state){
             checkShoppingCart($userID, $type, $productID="");
             $type = "PDMG";
             checkShoppingCart($userID, $type, $productID="");
-            //add subscription 
+            //add subscription
             if(isset($_SESSION['UserId'])) {
             // 2.2.23 - GET list of subscription preferences
-            // Send - 
+            // Send -
             // UserID
             // Response -
             // List of subscriptions and its T/F values.
@@ -744,7 +748,7 @@ function place_pd_shopping_cart($form, &$form_state){
             $ArrayReturn = Array();
             $ArrayReturn["UserID"] = $_SESSION['UserId'];
             // 2.2.22 - Get list of subscribed Fellowship Products
-            // Send - 
+            // Send -
             // UserID
             // Response -
             // List of Fellowship ID and its titles.
@@ -772,7 +776,7 @@ function place_pd_shopping_cart($form, &$form_state){
                 } elseif($Subs["ConsentID"] == '18') {
                     // InMotion Copy
                     if($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") {
-                        // No InMotion print copy for 
+                        // No InMotion print copy for
                         // student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
                         // and M11 Associated (Oversea)
                         $ArrayRe["Subscribed"] = '0';
@@ -802,18 +806,18 @@ function place_pd_shopping_cart($form, &$form_state){
             $ArrayReturn["Subscriptions"] = $subArray;
             $ArrayReturn["Consents"] = $consArray;
             // 2.2.24 - Update subscription preferences
-            // Send - 
+            // Send -
             // UserID, List of subscriptions and its F/F values.
             // Response -
             // Response, List of subscriptions and it's T/F values.
             $subscriptions = aptify_get_GetAptifyData("24", $ArrayReturn);
             drupal_goto('/pd/completed-purchase',array('query' => array('status' => '1')));
-            
+
         }
     else{
         //this is handle record error log
-      
-        if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+
+        if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
         $addMemberLog["orderID"] = "0";
         $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
         $addMemberLog["createDate"] = date('Y-m-d');
@@ -821,11 +825,11 @@ function place_pd_shopping_cart($form, &$form_state){
         $addMemberLog["logError"] = 1;
         add_Member_Log($addMemberLog);
         drupal_goto('/pd/completed-purchase',array('query' => array('status' => '0')));
-       
+
     }
-    logRecorder(); 
+    logRecorder();
     //add drupal form redirct function
-    }	
+    }
 }
 //create add payment card form
 function apa_create_payment_card_form($form, &$form_state){
@@ -852,7 +856,7 @@ function apa_create_payment_card_form($form, &$form_state){
 		'#type' => 'textfield',
 		'#title' => t('Name on card:'),
 		'#attributes' => array(
-			
+
 			' class' => 'form-control',
 			' placeholder' => 'Name on card',
 		),
@@ -862,7 +866,7 @@ function apa_create_payment_card_form($form, &$form_state){
 	$form['Cardnumber'] = array(
 		'#type' => 'textfield',
 		'#attributes' => array(
-			//' type' => 'number', 
+			//' type' => 'number',
 			' class' => 'form-control',
 			' placeholder' => 'Card number',
 		),
@@ -874,7 +878,7 @@ function apa_create_payment_card_form($form, &$form_state){
 	$form['Expirydate'] = array(
 		'#type' => 'textfield',
 		'#attributes' => array(
-			//' type' => 'number', 
+			//' type' => 'number',
 			' class' => 'form-control',
 			' placeholder' => 'mmyy (eg: 0225)',
 		),
@@ -886,7 +890,7 @@ function apa_create_payment_card_form($form, &$form_state){
 	$form['CCV'] = array(
 		'#type' => 'textfield',
 		'#attributes' => array(
-			//' type' => 'number', 
+			//' type' => 'number',
 			' class' => 'form-control',
 			' placeholder' => 'CVV',
 		),
@@ -900,12 +904,12 @@ function apa_create_payment_card_form($form, &$form_state){
 		'#title' => t('Make this card your preferred and/or instalment payment method'),
 	);
 
-   
+
 
     $form['Message']['notice'] = array(
         '#markup' => '<div class="form-item form-type-textfield"><p class="payment_note">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</p></div>',
     );
-    $form['submit'] = array('#type' => 'submit', '#value' => t('Add'), '#submit'=>['add_payment_card']); 
+    $form['submit'] = array('#type' => 'submit', '#value' => t('Add'), '#submit'=>['add_payment_card']);
 	return $form;
 }
 function add_payment_card($form, &$form_state){
@@ -917,7 +921,7 @@ function add_payment_card($form, &$form_state){
     $postPaymentData['IsDefault'] = $form["setDefault"]["#value"];
 	$out = aptify_get_GetAptifyData("15",$postPaymentData);
 	$_SESSION["paymentTabTag"]=1;
-	if($out["result"]=="Failed"){ 
+	if($out["result"]=="Failed"){
 		if($out["Message"]=="Expiry date lenght should be 4."){
 			drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
 		}
@@ -948,14 +952,14 @@ function add_payment_card($form, &$form_state){
 create renew landing page hidden form
 */
 function apa_renew_landingpage_form($form, &$form_state){
-    $form['submit'] = array('#type' => 'submit','#value' => t('submit'), '#submit'=>['renew_landingpage_login']); 
+    $form['submit'] = array('#type' => 'submit','#value' => t('submit'), '#submit'=>['renew_landingpage_login']);
     return $form;
 }
 /*
-create session for the renew logic 
+create session for the renew logic
 */
 function renew_landingpage_login($form, &$form_state){
-  
+
     $_SESSION["renewTag"]=1;
     // keep this session for half hour
   	$_SESSION['expireTag'] = time() + (30 * 60);

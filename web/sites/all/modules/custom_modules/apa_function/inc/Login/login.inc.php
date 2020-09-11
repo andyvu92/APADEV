@@ -1,4 +1,14 @@
 <?php
+/******Handle Aptify Server Maintenance Mode */
+$aptify_maintenance = variable_get('aptify_server_maintenance', APTIFY_SERVER_MAINTENANCE);
+$check_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+if($aptify_maintenance){
+  if(strpos($check_link,"jointheapa") || strpos($check_link,"renew") || strpos($check_link,"renewmymembership") || strpos($check_link,"membership-question")){
+    header("Location: /maintenance-mode", true, 301);
+  }
+}
+
+/************End here */
 	/*hanled session */
 	$now = time();
 	$_SESSION['logoutSession'] = 0;
