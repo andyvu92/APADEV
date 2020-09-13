@@ -1815,7 +1815,11 @@ jQuery(document).ready(function() {
       });
     })
   }
-  //add_help_bar();
+
+  if($('body').find('#maintenance-mode-block').length != 0 ){
+    add_help_bar();
+  }
+
 
   // ADD HIDDEN HEADING FOR RESPONSIVE TABLE-------------------------------------------------------
   var responsive_heading_table = function(){

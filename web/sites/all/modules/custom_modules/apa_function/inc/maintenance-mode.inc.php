@@ -1,5 +1,5 @@
 <div id="forgot-pw-form">
-	<div class="flex-container">
+	<div class="flex-container maintenance-mode">
 		<div class="flex-cell user-info">
 			<h3 class="light-lead-heading cairo">Oops!</h3>
 			<span class="sub-heading">We are currently experiencing an issue that may prevent members from logging into the APA website and accessing member-only content, including PD. We are working to resolve this issue as soon as possible. Thank you for your patience.</span>
