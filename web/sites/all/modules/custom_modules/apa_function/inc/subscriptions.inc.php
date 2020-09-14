@@ -51,7 +51,6 @@ $subscriptions = aptify_get_GetAptifyData("23", $sendData);
 //echo "Subs:<br>";
 //print_r($subscriptions);
 $Subscription = $subscriptions["results"];
-
 // use one of above to get "current" data
 // and combine with existing data ("$Subsctiption")
 // Then send it to Aptify.
@@ -199,7 +198,6 @@ by the most relevant channel.</span></p>
 				$countSubs = count($Subscription);
 				$countSubType = $countSubs%2;
         $counter = 0;
-
         //rearrange SubListAll Array
         $arrangArray = Array();
         foreach ($SubListAll as $temArray){
@@ -216,14 +214,13 @@ by the most relevant channel.</span></p>
           }
         }
         array_push($arrangArray, $arraySMS);
-
-             	foreach($arrangArray as $Subs) {
+          foreach($arrangArray as $Subs) {
 					$counter++;
 					if($Subs["SubscriptionID"] == "28" || $Subs["SubscriptionID"] == "30") {
 						// 28 for Insurance
 						// 30 for Titled???? (suddenly appeared)
 					} else {
-						if($counter < 2) {
+						if($counter < 0) {
 							// for normal subscriptions
 							// from 1st item
 							echo '<div class="column"><input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
@@ -233,7 +230,7 @@ by the most relevant channel.</span></p>
 							}
 							echo '><label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'"><span class="label-text">'.$Subs["Subscription"].'</span></label></div>';
 
-            } elseif($counter < 4) {
+            } elseif($counter < 0) {
 							// for extra magazine copy
 							foreach($MagSubs as $mags) {
 								$tt = strpos($Subs["Subscription"], $mags);
@@ -256,8 +253,8 @@ by the most relevant channel.</span></p>
 							} else {
 
 								$description = getDescription($Subs["Subscription"]);
-								$NoSub = $counter>7?True:False;
-               	if($counter==8){echo '<div class="subscriptions-dashboard flex-container">';}
+								$NoSub = $counter>1?True:False;
+               	if($counter==2){echo '<div class="subscriptions-dashboard flex-container">';}
 								echo $parentBeginElement.'<div class="column"><div class="functional-title"><div class="subscription-title">
 								<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
 								'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
