@@ -855,13 +855,13 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 						$prodcutArray = array();
 						$memberProductsArray['ProductID']=$prodcutArray;
 						$memberProdcutID = $memberProductsArray;
-						$MemberTypes = aptify_get_GetAptifyData("31", $memberProdcutID);
-						$temp_array = array();
+            $MemberTypes = aptify_get_GetAptifyData("31", $memberProdcutID);
+   					$temp_array = array();
 						$MemberType = array();
 						foreach($MemberTypes as $tempM){
 							$temp_array['ProductID'] = $tempM['ProductID'];
 							$temp_array['Title'] = $tempM['Title'];//substr($tempM['Title'], strpos($tempM['Title'],":")+1);
-							$temp_array['Price'] = $tempM['Price'];
+							$temp_array['Price'] = $tempM['Price']['ProductCostWithoutCoupon'];
 							$temp_array['UnitPrice'] = $tempM['UnitPrice'];
 							$temp_array['Quantity'] = $tempM['Quantity'];
 							array_push($MemberType, $temp_array);

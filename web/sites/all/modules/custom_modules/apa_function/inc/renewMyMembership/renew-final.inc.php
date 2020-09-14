@@ -228,7 +228,8 @@ $scheduleDetails = aptify_get_GetAptifyData("47", $postScheduleData);
 $prodcutArray = array();
 if(isset($_SESSION["MembershipProductID"])) { array_push($prodcutArray,$_SESSION["MembershipProductID"]);}
 if(sizeof($prodcutArray)!=0){
-	$memberProductsArray['ProductID']=$prodcutArray;
+  $memberProductsArray['ProductID']=$prodcutArray;
+  $memberProductsArray['CampaignCode']=$couponCode;
 	$memberProdcutID = $memberProductsArray;
 	$memberProducts = aptify_get_GetAptifyData("31", $memberProdcutID);
 }
@@ -317,8 +318,15 @@ if(sizeof($fpProdcutArray)!=0){
 					foreach( $memberProducts as $memberProduct){
 						echo "<div class='flex-cell flex-flow-row table-cell memberproduct'>";
 						echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$memberProduct['Title']."</div>";
-						echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($memberProduct['Price'],2)."</div>";
-						$price += $memberProduct['Price'];
+            if($_POST['Couponcode']){
+              echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$<span class='original-price'>".number_format($memberProduct['Price']['ProductCostWithoutCoupon'],2)."</span>".number_format($memberProduct['Price']['ProductCostWithCoupon'],2)."</div>";
+              $price += $memberProduct['Price']['ProductCostWithCoupon'];
+            }
+            else{
+              echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($memberProduct['Price']['ProductCostWithoutCoupon'],2)."</div>";
+              $price += $memberProduct['Price']['ProductCostWithoutCoupon'];
+            }
+
 						echo '<div class="flex-col-2 action-col">';
 
 						echo '<a class="changeMT" target="_self">change</a></div>';
@@ -904,6 +912,7 @@ if(sizeof($fpProdcutArray)!=0){
 					<a id="deleteMACPButton" class="" value="yes" target="_self">Yes</a>
 					<a class="cancelDeleteMACPButton" value="no" target="_self">No</a>
 				</div>
+</div>
 </div>
 <?php logRecorder();  ?>
 <!--  this part will be merged with Andy's Dashboard less file-->
