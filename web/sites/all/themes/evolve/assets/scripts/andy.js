@@ -1328,20 +1328,12 @@ jQuery(document).ready(function() {
   // PD DESCRIPTION READMORE-------------------------------------------------------------------------
   $('.pd-readmore-content').each(function(){
     // define min height
-    let minHeight = 190;
+    let minHeight = 240;
     // get window width
     let window_width = $(window).width() + 10;
 
     // re-define min-height based on window width
-    if (window_width >= 1200){
-      minHeight = 190;
-    } else if (window_width < 1200 && window_width >= 993){
-      minHeight = 260;
-    } else if (window_width < 993 && window_width >= 769){
-      minHeight = 225;
-    } else if (window_width < 769 && window_width >= 571){
-      minHeight = 230;
-    } else if (window_width < 571 && window_width >= 481){
+    if(window_width >= 481) {
       minHeight = 350;
     } else {
       minHeight = 410;
