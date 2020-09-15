@@ -301,10 +301,10 @@ if(sizeof($fpProdcutArray)!=0){
 	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 review-main-container">
 	<div class="flex-container join-apa-final flex-table">
 				<div class="flex-cell flex-flow-row table-header">
-					<div class="flex-col-8">
+					<div class="flex-col-7">
 						<span class="table-heading">Product name</span>
 					</div>
-					<div class="flex-col-2">
+					<div class="flex-col-3">
 						<span class="table-heading">Price</span>
 					</div>
 					<div class="flex-col-2">
@@ -317,13 +317,13 @@ if(sizeof($fpProdcutArray)!=0){
 				if(sizeof($prodcutArray)!=0){
 					foreach( $memberProducts as $memberProduct){
 						echo "<div class='flex-cell flex-flow-row table-cell memberproduct'>";
-						echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$memberProduct['Title']."</div>";
+						echo "<div class='flex-col-7 title-col'><span class='pd-header-mobile'>Product name:</span>".$memberProduct['Title']."</div>";
             if($_POST['Couponcode']){
-              echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$<span class='original-price'>".number_format($memberProduct['Price']['ProductCostWithoutCoupon'],2)."</span>".number_format($memberProduct['Price']['ProductCostWithCoupon'],2)."</div>";
+              echo "<div class='flex-col-3 price-col'><span class='pd-header-mobile'>Price:</span>A$<span id='originalPrice' class='original-price'>".number_format($memberProduct['Price']['ProductCostWithoutCoupon'],2)."</span><span id='coupon_price'>".number_format($memberProduct['Price']['ProductCostWithCoupon'],2)."</span></div>";
               $price += $memberProduct['Price']['ProductCostWithCoupon'];
             }
             else{
-              echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($memberProduct['Price']['ProductCostWithoutCoupon'],2)."</div>";
+              echo "<div class='flex-col-3 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($memberProduct['Price']['ProductCostWithoutCoupon'],2)."</div>";
               $price += $memberProduct['Price']['ProductCostWithoutCoupon'];
             }
 
@@ -339,8 +339,8 @@ if(sizeof($fpProdcutArray)!=0){
 						foreach($NGProductsArray as $NGProduct){
 							if($NGProduct == $NGArray['ProductID']){
 								echo "<div class='flex-cell flex-flow-row table-cell NG'>";
-							    echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$NGArray['ProductName']."</div>";
-								echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($NGArray['NGprice'],2)."</div>";
+							    echo "<div class='flex-col-7 title-col'><span class='pd-header-mobile'>Product name:</span>".$NGArray['ProductName']."</div>";
+								echo "<div class='flex-col-3 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($NGArray['NGprice'],2)."</div>";
 								$price += $NGArray['NGprice'];
 								echo '<div class="flex-col-2 action-col';
 								if(in_array($NGArray['ProductID'],$_SESSION['ngQuatation'])) { echo " ngtilted";}
@@ -355,8 +355,8 @@ if(sizeof($fpProdcutArray)!=0){
 						    echo '<input type="hidden" name="MGProductID" value="'.$FProduct['ProductID'].'">';
 							echo "<div class='flex-cell flex-flow-row table-cell FP";
 							if($FProduct['ProductID']=="18247") { echo " macp' >";} else { echo "'>"; }
-							echo "<div class='flex-col-8 title-col'><span class='pd-header-mobile'>Product name:</span>".$FProduct['FPtitle']."</div>";
-							echo "<div class='flex-col-2 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($FProduct['FPprice'],2)."</div>";
+							echo "<div class='flex-col-7 title-col'><span class='pd-header-mobile'>Product name:</span>".$FProduct['FPtitle']."</div>";
+							echo "<div class='flex-col-3 price-col'><span class='pd-header-mobile'>Price:</span>A$".number_format($FProduct['FPprice'],2)."</div>";
 							$price += $FProduct['FPprice'];
 							echo '<div class="flex-col-2 action-col">'; echo '<a class="deleteMGButton'.$FProduct['ProductID'].'">delete</a>'; echo '</div>';
 							echo "</div>";
@@ -384,26 +384,26 @@ if(sizeof($fpProdcutArray)!=0){
 			<div class="flex-container flex-table total-price">
 
 				<div class="flex-cell flex-flow-row">
-					<div class="flex-col-8">
+					<div class="flex-col-7">
 						Subtotal (ex. GST)
 					</div>
-					<div class="flex-col-4">
+					<div class="flex-col-5">
 						$<span class="full"><?php echo number_format($fullDetails['SubTotal'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['SubTotal'],2);?></span>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
-					<div class="flex-col-8">
+					<div class="flex-col-7">
 					GST
 					</div>
-					<div class="flex-col-4">
+					<div class="flex-col-5">
 			        $<span class="full"><?php echo number_format($fullDetails['GST'],2);?></span><span class="schedule"><?php echo number_format($scheduleDetails['GST'],2);?></span>
 					</div>
 				</div>
 				<div class="flex-cell flex-flow-row">
-					<div class="flex-col-8">
+					<div class="flex-col-7">
 					<b>Total (inc. GST)</b>
 					</div>
-					<div class="flex-col-4">
+					<div class="flex-col-5">
 			        <b>$<span id="fullPayment" class="full"><?php echo number_format($fullDetails['OrderTotal'],2);?></span><span id="schedulePayment" class="schedule"><?php echo number_format($scheduleDetails['OrderTotal'],2);?></span></b>
 					</div>
 				</div>

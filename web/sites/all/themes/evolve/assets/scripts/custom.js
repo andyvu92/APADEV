@@ -582,6 +582,10 @@ jQuery(document).ready(function($) {
         //add coupon control
         $('.couponForm input[name="EnterCouponcode"]').prop('disabled', true);
         $('.couponForm span.dashboard-button').addClass("isDisable");
+        if($('#originalPrice').length!=0) {
+          $('#coupon_price').addClass('display-none');
+          $('#originalPrice').removeClass('original-price');
+        }
 
 			}
       else{
@@ -596,6 +600,11 @@ jQuery(document).ready(function($) {
         //add coupon control
         $('.couponForm input[name="EnterCouponcode"]').prop('disabled', false);
         $('.couponForm span.dashboard-button').removeClass("isDisable");
+        if($('#originalPrice').length!=0) {
+          $('#coupon_price').removeClass('display-none');
+          $('#originalPrice').addClass('original-price');
+
+        }
 
 		}
 		if($("#p1-2").is(":checked"))
