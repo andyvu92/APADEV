@@ -1,85 +1,5 @@
 <div class="border-10 full-width"></div>
-
 <?php
-   /**
-   * @file
-   * Default theme implementation to display a node.
-   *
-   * Available variables:
-   * - $title: the (sanitized) title of the node.
-   * - $content: An array of node items. Use render($content) to print them all,
-   * or print a subset such as render($content['field_example']). Use
-   * hide($content['field_example']) to temporarily suppress the printing of a
-   * given element.
-   * - $user_picture: The node author's picture from user-picture.tpl.php.
-   * - $date: Formatted creation date. Preprocess functions can reformat it by
-   * calling format_date() with the desired parameters on the $created variable.
-   * - $name: Themed username of node author output from theme_username().
-   * - $node_url: Direct URL of the current node.
-   * - $display_submitted: Whether submission information should be displayed.
-   * - $submitted: Submission information created from $name and $date during
-   * template_preprocess_node().
-   * - $classes: String of classes that can be used to style contextually through
-   * CSS. It can be manipulated through the variable $classes_array from
-   * preprocess functions. The default values can be one or more of the
-   * following:  
-   * - node: The current template type; for example, "theming hook".
-   * - node-[type]: The current node type. For example, if the node is a
-   * "Blog entry" it would result in "node-blog". Note that the machine
-   * name will often be in a short form of the human readable label.
-   * - node-teaser: Nodes in teaser form.
-   * - node-preview: Nodes in preview mode.
-   * The following are controlled through the node publishing options.
-   * - node-promoted: Nodes promoted to the front page.
-   * - node-sticky: Nodes ordered above other non-sticky nodes in teaser
-   * listings.
-   * - node-unpublished: Unpublished nodes visible only to administrators.
-   * - $title_prefix (array): An array containing additional output populated by
-   * modules, intended to be displayed in front of the main title tag that
-   * appears in the template.
-   * - $title_suffix (array): An array containing additional output populated by
-   * modules, intended to be displayed after the main title tag that appears in
-   * the template.
-   *
-   * Other variables:
-   * - $node: Full node object. Contains data that may not be safe.
-   * - $type: Node type; for example, story, page, blog, etc.
-   * - $comment_count: Number of comments attached to the node.
-   * - $uid: User ID of the node author.
-   * - $created: Time the node was published formatted in Unix timestamp.
-   * - $classes_array: Array of html class attribute values. It is flattened
-   * into a string within the variable $classes.
-   * - $zebra: Outputs either "even" or "odd". Useful for zebra striping in
-   * teaser listings.
-   * - $id: Position of the node. Increments each time it's output.
-   *
-   * Node status variables:
-   * - $view_mode: View mode; for example, "full", "teaser".
-   * - $teaser: Flag for the teaser state (shortcut for $view_mode == 'teaser').
-   * - $page: Flag for the full page state.
-   * - $promote: Flag for front page promotion state.
-   * - $sticky: Flags for sticky post setting.
-   * - $status: Flag for published status.
-   * - $comment: State of comment settings for the node.
-   * - $readmore: Flags true if the teaser content of the node cannot hold the
-   * main body content.
-   * - $is_front: Flags true when presented in the front page.
-   * - $logged_in: Flags true when the current user is a logged-in member.
-   * - $is_admin: Flags true when the current user is an administrator.
-   *
-   * Field variables: for each field instance attached to the node a corresponding
-   * variable is defined; for example, $node->body becomes $body. When needing to
-   * access a field's raw values, developers/themers are strongly encouraged to
-   * use these variables. Otherwise they will have to explicitly specify the
-   * desired field language; for example, $node->body['en'], thus overriding any
-   * language negotiation rule that was previously applied.
-   *
-   * @see template_preprocess()
-   * @see template_preprocess_node()
-   * @see template_process()
-   *
-   * @ingroup themeable
-   */
   global $user;
 $userRole = $user->roles[3]; // admin
 if(is_null($userRole)) {
@@ -91,60 +11,66 @@ if(is_null($userRole)) {
       }
    }
 }
-   ?>
+if(is_null($userRole)) {
+   if(!is_null(render($content['field_url_for_page']))) {
+      $outLink = $content['field_url_for_page']['#items'][0]['value'];
+   } elseif(!is_null(render($content['field_external_url_for_page']))) {
+      $outLink = $content['field_external_url_for_page']['#items'][0]['value'];
+   }
+   if(!is_null($outLink)) {
+      header("Location: ".$outLink);
+      exit;
+   }
+}
+?>
 <div style="height: 10px; width: 1px;">&nbsp;</div>
 <div class="Pagination"></div>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
-<?php if(is_null(render($content['field_url_for_page'])) && is_null(render($content['field_external_url_for_page']))): ?>
    <section class="post-content container" style="float:none; margin:auto;">
       <div class="region col-xs-12 col-sm-12 col-md-8 col-lg-8">
-
-        <!-- MOBILE POST FEATURED IMG -->
-        <div class="post-img media mobile">
-            <div class='mediaholder fullwidthimage'>
-                <?php print render($content['field_home_tile_image']);?>
-            </div>
-        </div>
+         <!-- MOBILE POST FEATURED IMG -->
+         <div class="post-img media mobile">
+               <div class='mediaholder fullwidthimage'>
+                  <?php print render($content['field_home_tile_image']);?>
+               </div>
+         </div>
 
          <h1 class="SectionHeader"><?php print $node->title;?></h1>
          <div class="brd-headling">&nbsp;</div>
 			
          <header class="meta">
             <div class="flex-container post-meta">
-
                <div class="flex-cell">
-                     <div class="flex-col-6 meta-info">
-                                 <?php 
-                              $only = ((array)$content['field_members_only']['#items'][0]['taxonomy_term'])["name"];
-                              if($only == "Yes") {
-                                 echo "<li><strong><div class='MonlyIconHolder'><div class='MonlyIcon'></div></div></strong></li>";
-                              } 
-                           ?>
-                           <?php if(!is_null(render($content['field_members_only']))): ?> 
-                           <?php endif?>
-                        <div class="meta-author-date">
-                           <!-- <span class="meta-author">By <b><?php //print render($content['field_inmotion_author']); ?></b></span> -->
-                           <span class="meta-date"><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></span>
-                        </div>
+                  <div class="flex-col-6 meta-info">
+                     <?php 
+                        $only = ((array)$content['field_members_only']['#items'][0]['taxonomy_term'])["name"];
+                        if($only == "Yes") {
+                           echo "<li><strong><div class='MonlyIconHolder'><div class='MonlyIcon'></div></div></strong></li>";
+                        } 
+                     ?>
+                     <div class="meta-author-date">
+                        <!-- <span class="meta-author">By <b><?php //print render($content['field_inmotion_author']); ?></b></span> -->
+                        <span class="meta-date"><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></span>
                      </div>
+                  </div>
 
-                     <div class="flex-col-6 meta-share-url">
-                        <ul class="socialMediaIcon" style="float:right;margin-top:-3%;">
-                        <li>
-                           <div class="fb-share-button" data-layout="button_count" data-mobile-iframe="true" data-size="small">&nbsp;</div>
-                        </li>
-                        <li>
-                           <a class="twitter-share-button" data-show-count="false" href="https://twitter.com/share">Tweet</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8">&nbsp;</script>
-                        </li>
-                        <li>
-                           <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;
-                        </li>
-                        <li>
-                           <!-- Place this tag where you want the share button to render. -->
-                           <div class="g-plus" data-action="share" data-annotation="none">&nbsp;</div>
-                        </li>
-                        </ul>
-                     </div>
+                  <div class="flex-col-6 meta-share-url">
+                     <ul class="socialMediaIcon" style="float:right;margin-top:-3%;">
+                     <li>
+                        <div class="fb-share-button" data-layout="button_count" data-mobile-iframe="true" data-size="small">&nbsp;</div>
+                     </li>
+                     <li>
+                        <a class="twitter-share-button" data-show-count="false" href="https://twitter.com/share">Tweet</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8">&nbsp;</script>
+                     </li>
+                     <li>
+                        <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;
+                     </li>
+                     <li>
+                        <!-- Place this tag where you want the share button to render. -->
+                        <div class="g-plus" data-action="share" data-annotation="none">&nbsp;</div>
+                     </li>
+                     </ul>
+                  </div>
                </div>
 
             </div>
@@ -160,8 +86,7 @@ if(is_null($userRole)) {
             hide($content['comments']);
             hide($content['links']);
             print render($content['body']);
-            ?>
-			
+         ?>
          <script src="https://apis.google.com/js/platform.js" async defer></script>
          
          <div id="fb-root">&nbsp;</div>
@@ -192,116 +117,4 @@ if(is_null($userRole)) {
          </div>
       </div>
    </section>
-   <?php elseif(!is_null(render($content['field_url_for_page'])) || !is_null(render($content['field_external_url_for_page']))): ?>
-      <?php if(!is_null($userRole)): // has 'editing roll ?>
-         <section class="post-content container" style="float:none; margin:auto;">
-            <div class="region col-xs-12 col-sm-12 col-md-8 col-lg-8">
-      
-            <!-- MOBILE POST FEATURED IMG -->
-            <div class="post-img media mobile">
-                  <div class='mediaholder fullwidthimage'>
-                     <?php print render($content['field_home_tile_image']);?>
-                  </div>
-            </div>
-      
-               <h1 class="SectionHeader"><?php print $node->title;?></h1>
-               <div class="brd-headling">&nbsp;</div>
-               
-               <header class="meta">
-                  <div class="flex-container post-meta">
-      
-                     <div class="flex-cell">
-                           <div class="flex-col-6 meta-info">
-                                       <?php 
-                                    $only = ((array)$content['field_members_only']['#items'][0]['taxonomy_term'])["name"];
-                                    if($only == "Yes") {
-                                       echo "<li><strong><div class='MonlyIconHolder'><div class='MonlyIcon'></div></div></strong></li>";
-                                    } 
-                                 ?>
-                                 <?php if(!is_null(render($content['field_members_only']))): ?> 
-                                 <?php endif?>
-                              <div class="meta-author-date">
-                                 <!-- <span class="meta-author">By <b><?php //print render($content['field_inmotion_author']); ?></b></span> -->
-                                 <span class="meta-date"><?php print date('M',$created); print " "; print date('d',$created).' '.date('Y',$created); ?></span>
-                              </div>
-                           </div>
-      
-                           <div class="flex-col-6 meta-share-url">
-                              <ul class="socialMediaIcon" style="float:right;margin-top:-3%;">
-                              <li>
-                                 <div class="fb-share-button" data-layout="button_count" data-mobile-iframe="true" data-size="small">&nbsp;</div>
-                              </li>
-                              <li>
-                                 <a class="twitter-share-button" data-show-count="false" href="https://twitter.com/share">Tweet</a> <script async src="//platform.twitter.com/widgets.js" charset="utf-8">&nbsp;</script>
-                              </li>
-                              <li>
-                                 <script src="//platform.linkedin.com/in.js" type="text/javascript"> lang: en_US</script><script type="IN/Share" data-counter="right"></script>&nbsp;
-                              </li>
-                              <li>
-                                 <!-- Place this tag where you want the share button to render. -->
-                                 <div class="g-plus" data-action="share" data-annotation="none">&nbsp;</div>
-                              </li>
-                              </ul>
-                           </div>
-                     </div>
-      
-                  </div>
-               </header>
-               <!-- DESKTOP POST FEATURED IMG -->
-               <div class="post-img media">
-                  <div class='mediaholder fullwidthimage'>
-                     <?php print render($content['field_home_tile_image']);?>
-                  </div>
-               </div>
-               <?php
-                  // We hide the comments and links now so that we can render them later.
-                  hide($content['comments']);
-                  hide($content['links']);
-                  print render($content['body']);
-                  ?>
-               
-               <script src="https://apis.google.com/js/platform.js" async defer></script>
-               
-               <div id="fb-root">&nbsp;</div>
-               <script>(function(d, s, id) {
-                  var js, fjs = d.getElementsByTagName(s)[0];
-                  if (d.getElementById(id)) return;
-                  js = d.createElement(s); js.id = id;
-                  js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.9";
-                  fjs.parentNode.insertBefore(js, fjs);
-                  }(document, 'script', 'facebook-jssdk'));
-               </script><script type="text/javascript">
-                  jQuery(document).ready(function($) {
-                     var x = $(location).attr('href');
-                     jQuery(document).ready(function($) {
-                        $('.fb-share-button').html("<a class='fb-xfbml-parse-ignore' target='_blank' href='https://www.facebook.com/sharer/sharer.php?u=" +  x  +  "&amp;src=sdkpreparse'></a>")
-                     });
-                  })  
-               </script>
-            <div id="prev-btn">
-                  <a class="go-back-button button" href="javascript:history.go(-1)">Back to previous</a>
-            </div>
-            </div>
-            <div class="block CampaignSidebar contextual-links-region region-right-sidebar col-xs-12 col-sm-12 col-md-4 col-lg-4" style="margin:0 0 50px">
-               <h3 class="headline">Most Popular</h3>
-               <span class="brd-headling"></span>
-               <div class="content">
-                  <?php echo views_embed_view('home_tile_view', 'block_6');?>
-               </div>
-            </div>
-         </section>
-      <?php else: ?>
-      <?php
-         // We hide the comments and links now so that we can render them later.
-         //redirect:
-         $outLink = "";
-         if(!is_null(render($content['field_url_for_page']))) {
-            $outLink = $content['field_url_for_page']['#items'][0]['value'];
-         } elseif(!is_null(render($content['field_external_url_for_page']))) {
-            $outLink = $content['field_external_url_for_page']['#items'][0]['value'];
-         }
-         header("Location: ".$outLink);
-         exit;
-      endif; ?>
-   <?php endif; ?>
 </div>

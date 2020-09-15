@@ -1,3 +1,23 @@
+<?php
+global $user;
+$userRole = $user->roles[3]; // admin
+if(is_null($userRole)) {
+   $userRole = $user->roles[4]; // Media Editor
+   if(is_null($userRole)) {
+      $userRole = $user->roles[9]; // InMotion Editor
+      if(is_null($userRole)) {
+         $userRole = $user->roles[7]; // Content Editor
+      }
+   }
+}
+if(is_null($userRole)) {
+	if(!is_null($content['field_url_article_link'])) {
+		// if user has no edit access and has url article link
+		header("Location: /".$content['field_url_article_link']['#items'][0]['value']);
+		exit;
+	}
+}
+?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>	
 	<section class="post-content">
 		<div class="region col-xs-12 col-sm-12 col-md-9 col-lg-9">
