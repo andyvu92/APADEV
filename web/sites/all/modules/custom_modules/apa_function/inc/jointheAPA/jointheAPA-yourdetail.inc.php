@@ -1229,7 +1229,7 @@ $MemberType = array();
 foreach($MemberTypes as $tempM){
     $temp_array['ProductID'] = $tempM['ProductID'];
     $temp_array['Title'] = substr($tempM['Title'], strpos($tempM['Title'],":")+1);
-    $temp_array['Price'] = $tempM['Price'];
+    $temp_array['Price'] = $tempM['Price']['ProductCostWithoutCoupon'];
     $temp_array['UnitPrice'] = $tempM['UnitPrice'];
     $temp_array['Quantity'] = $tempM['Quantity'];
     array_push($MemberType, $temp_array);
@@ -2748,7 +2748,7 @@ if(isset($_POST['MT'])){
                                 foreach($MemberTypes as $tempM){
                                     $temp_array['ProductID'] = $tempM['ProductID'];
                                     $temp_array['Title'] = substr($tempM['Title'], strpos($tempM['Title'],":")+1);
-                                    $temp_array['Price'] = $tempM['Price'];
+                                    $temp_array['Price'] = $tempM['Price']['ProductCostWithoutCoupon'];
                                     $temp_array['UnitPrice'] = $tempM['UnitPrice'];
                                     $temp_array['Quantity'] = $tempM['Quantity'];
                                     array_push($MemberType, $temp_array);

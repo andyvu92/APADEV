@@ -1972,6 +1972,13 @@ jQuery(document).ready(function() {
     progressCal('active');
   }
 
+  $('.couponForm .dashboard-button').on('click', function(e){
+    if($("#p1-1").is(":checked")){
+      $('.overlay').fadeIn();
+      $('.loaders').css('visibility','visible').hide().fadeIn();
+    }
+
+  });
   $('#PDPlaceOrder button').on('click', function(e){
     $('body').find('.overlay .loader').hide();
     setTimeout(function(){
