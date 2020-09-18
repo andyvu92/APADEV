@@ -921,9 +921,17 @@ if(isset($_SESSION['UserId'])) {
       <div class="tab-content">
         <div id="main-signin-form">
           <!--<form name="signInForm" method="POST" action="<?php //echo $url;?>">-->
+
 				<div class="flex-container">
+          <?php if($aptify_maintenance): ?>
+            <div class="flex-cell" style="margin-bottom:35px;">
+              <span class="light-lead-heading cairo">Oops!</span>
+              <p style="margin-bottom: 0"><span class="strong-subhead">We are currently experiencing an issue that may prevent members from logging into the APA website and accessing member-only content, including PD. We are working to resolve this issue as soon as possible. Thank you for your patience.</a></span></p>
+            </div>
+
+          <?php else: ?>
 					<div class="flex-cell">
-						<span class="light-lead-heading cairo">Sign in to your account</span>
+            <span class="light-lead-heading cairo">Sign in to your account</span>
 						<p style="margin-bottom: 0"><span class="strong-subhead">Are you an existing member logging in for the first time?</a></span></p>
 						<p style="margin-top: 0"><span class="strong-subhead"><a id="return-users" href="/return-user-welcome">Click here</a> and we'll help you get started.</span></p>
 					</div>
@@ -954,8 +962,10 @@ if(isset($_SESSION['UserId'])) {
 
 					<div class="flex-cell create-account">
 						<span>Not a member? <a href="/membership-question">Join today.</a></span>
-					</div>
-				</div>
+          </div>
+          <?php endif;?>
+        </div>
+
 			<!--</form>-->
         </div>
 
@@ -979,7 +989,8 @@ $('.tab span').on('click', function (e) {
 </script>
 </div> <!-- /form -->
 	</div>
-	</div>
+  </div>
+
 </div>
 </div>
 
