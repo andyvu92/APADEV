@@ -927,7 +927,7 @@ if(isset($_SESSION['UserId'])) {
           <?php if($aptify_maintenance): ?>
             <div class="flex-cell" style="margin-bottom:35px;">
               <span class="light-lead-heading cairo">Oops!</span>
-              <p style="margin-bottom: 0"><span class="strong-subhead">We are currently experiencing an issue that may prevent members from logging into the APA website and accessing member-only content, including PD. We are working to resolve this issue as soon as possible. Thank you for your patience.</a></span></p>
+              <p style="margin-bottom: 0"><span class="strong-subhead"><?php echo $aptify_server_maitenance_oops;?></a></span></p>
             </div>
 
           <?php else: ?>
