@@ -1,9 +1,10 @@
 <?php
 /******Handle Aptify Server Maintenance Mode */
 $aptify_maintenance = variable_get('aptify_server_maintenance', APTIFY_SERVER_MAINTENANCE);
+$aptify_server_maitenance_oops = variable_get('aptify_server_maitenance_oops', APTIFY_SERVER_MAINTENANCE_OOPS);
 $check_link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 if($aptify_maintenance){
-  echo '<div id="maintenance-mode-block"></div>';
+  echo '<div id="maintenance-mode-block" style="display:none;">'.$aptify_server_maitenance_oops.'</div>';
   if(strpos($check_link,"jointheapa") || strpos($check_link,"renew") || strpos($check_link,"renewmymembership") || strpos($check_link,"membership-question")|| strpos($check_link,"dashboard")|| strpos($check_link,"your-details")|| strpos($check_link,"your-purchases")|| strpos($check_link,"subscriptions") || strpos($check_link,"pd/pd-product") || strpos($check_link,"pd/pd-shopping-cart")){
     header("Location: /maintenance-mode", true, 301);
   }

@@ -1773,6 +1773,7 @@ jQuery(document).ready(function() {
   }
 
   // ADD SITE NOTIFICATIONS--------------------------------------------------------------------
+  var oops_text = $('#maintenance-mode-block').html();
   var add_help_bar = function(){
     var path = window.location.pathname.split("/").pop();
     $('.dexp-body-inner').each(function(){
@@ -1786,7 +1787,7 @@ jQuery(document).ready(function() {
         return;
       } else {
         // append element
-        $(this).append('<div id="users_help_bar" class="minimized modal_disabled"><span class="close"></span><div class="modal_header"><span>We are currently experiencing an issue that may prevent members from logging into the APA website and accessing member-only content, including PD. We are working to resolve this issue as soon as possible. Thank you for your patience.</span></div><div class="modal_content"></div></div>');
+        $(this).append('<div id="users_help_bar" class="minimized modal_disabled"><span class="close"></span><div class="modal_header"><span>'+oops_text+'</span></div><div class="modal_content"></div></div>');
         // get content from a file
         /*
         $.ajax({

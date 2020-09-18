@@ -9,6 +9,7 @@ define('APTIFY_API_BASE_URL_DEFAULT', 'https://aptifyweb.australian.physio/Aptif
 define('APTIFY_API_OOPS_DEFAULT', 'Communication error, Please contact site administrator');
 define('APTIFY_API_INVALID_TOKEN_DEFAULT', 'Invalid Token Please contact administrator.');
 define('APTIFY_SERVER_MAINTENANCE',0);
+define('APTIFY_SERVER_MAINTENANCE_OOPS','We are currently experiencing an issue that may prevent members from logging into the APA website and accessing member-only content, including PD. We are working to resolve this issue as soon as possible. Thank you for your patience.');
 /**
  * Admin settings form.
  */
@@ -47,6 +48,11 @@ function aptify_api_admin_settings() {
     '#type' => 'checkbox',
     '#title' => t('Aptify Server Maintenance'),
     '#default_value' => variable_get('aptify_server_maintenance', APTIFY_SERVER_MAINTENANCE),
+  );
+  $form['aptify_api']['aptify_server_maitenance_oops'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Pop up message for Aptify server maintenance mode'),
+    '#default_value' => variable_get('aptify_server_maitenance_oops', APTIFY_SERVER_MAINTENANCE_OOPS),
   );
   return system_settings_form($form);
 }
