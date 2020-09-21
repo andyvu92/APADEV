@@ -894,7 +894,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 								echo '<option value="'.$MemberType[$key]['ProductID'].'"';
 								if(isset($_SESSION["MembershipProductID"])){if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']){ echo "selected='selected'"; }}
 								//elseif ($details['MemberTypeID'] == $MemberType[$key]['ID']){ echo "selected='selected'"; }
-								echo '> ' .$MemberType[$key]['Title'] . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';
+								echo '> ' .$MemberType[$key]['Title'] . ' ($'.number_format($MemberType[$key]['UnitPrice'],2).') </option>';
 							}
 						}
 					    ?>
