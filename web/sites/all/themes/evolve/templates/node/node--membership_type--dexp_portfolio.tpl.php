@@ -114,7 +114,7 @@ $rens = str_replace('</div>',"",$rens);
 			} else {
 				foreach ($TypePrice as $key => $value) {
 					if($TypePrice[$key]["Code"] == strtoupper($rens)) {
-						print '<div class="MTprice">$'.$TypePrice[$key]["Price"].": Pro-rata price as of ".date("d/m/y")." valid until 31/12/".$year.'<span class="info_icon" popup-target="ProrataExplaination"></span></div>';
+						print '<div class="MTprice">$'.$TypePrice[$key]["Price"]["ProductCostWithoutCoupon"].": Pro-rata price as of ".date("d/m/y")." valid until 31/12/".$year.'<span class="info_icon" popup-target="ProrataExplaination"></span></div>';
 						print '<div class="MTprice">$'.$TypePrice[$key]["UnitPrice"].": Full price".'</div>';
 						print '<div class="MTid" style="display: none;">'.$TypePrice[$key]["ID"].'</div>';
 					}
