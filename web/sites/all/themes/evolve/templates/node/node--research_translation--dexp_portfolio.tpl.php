@@ -25,7 +25,7 @@
         	<span class="link-block"><?php if(is_null(render($content['field_podcast_url']))): ?>
                 <a href="<?php print $node_url; ?>">
             <?php else: ?>
-                <a href="<?php echo $content['field_podcast_url']['#items'][0]['value']; ?>" target="_blank">
+                <a href="<?php echo $content['field_podcast_url']['#items'][0]['value']; ?>">
             <?php endif; ?></a></span>
             
         <div class="portfolio-image">
