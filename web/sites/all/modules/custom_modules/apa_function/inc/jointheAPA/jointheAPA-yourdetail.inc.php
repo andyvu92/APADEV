@@ -1198,7 +1198,6 @@ if (isset($_SESSION['UserId'])):
     }
 ?> readonly>
                 </div>
-
                 <div class="col-xs-12 col-md-6">
                     <label for="">Member Category<span class="tipstyle"> *</span></label>
                     <div class="chevron-select-box">
