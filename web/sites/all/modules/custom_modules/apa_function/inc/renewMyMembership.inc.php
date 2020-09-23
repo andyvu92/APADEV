@@ -108,7 +108,7 @@ $background = getBackgroundImage($userID);
 
 <div id="QuatationPopUp" style="display:none;" class="container">
 	<h3 style="color:black;">Renewing your APA membership is easy…</h3>
-	<p>Your membership category for 2020 is:</p>
+	<p>Your membership category for 2021 is:</p>
 	<p><?php if(sizeof($orderDetails)!=0): ?>
 	<?php
 	$ngQuatation = array();
