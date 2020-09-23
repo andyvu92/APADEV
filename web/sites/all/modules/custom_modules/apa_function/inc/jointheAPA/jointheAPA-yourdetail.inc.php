@@ -1216,7 +1216,7 @@ if (isset($_SESSION['UserId'])):
                             $MemberType = array();
                             foreach($MemberTypes as $tempM){
                                 $temp_array['ProductID'] = $tempM['ProductID'];
-                                $temp_array['Title'] = substr($tempM['Title'], strpos($tempM['Title'],":")+1);
+                                $temp_array['Title'] = $tempM['Title'];//substr($tempM['Title'], strpos($tempM['Title'],":")+1);
                                 $temp_array['Price'] = $tempM['Price']["ProductCostWithoutCoupon"];
                                 $temp_array['UnitPrice'] = $tempM['UnitPrice'];
                                 $temp_array['Quantity'] = $tempM['Quantity'];
@@ -2745,18 +2745,32 @@ if(isset($_POST['MT'])){
                                 $MemberType = array();
                                 foreach($MemberTypes as $tempM){
                                     $temp_array['ProductID'] = $tempM['ProductID'];
-                                    $temp_array['Title'] = substr($tempM['Title'], strpos($tempM['Title'],":")+1);
+                                    $temp_array['Title'] = $tempM['Title'];//substr($tempM['Title'], strpos($tempM['Title'],":")+1);
                                     $temp_array['Price'] = $tempM['Price']["ProductCostWithoutCoupon"];
                                     $temp_array['UnitPrice'] = $tempM['UnitPrice'];
                                     $temp_array['Quantity'] = $tempM['Quantity'];
                                     array_push($MemberType, $temp_array);
                                 }
                                 $Title = array();
-                                foreach ($MemberType  as $ukey => $row)
-                                    {
-                                        $Title[$ukey] = $row['Title'];
-                                    }
+                                foreach ($MemberType  as $ukey => $row) {
+                                    $Title[$ukey] = $row['Title'];
+                                }
                                 array_multisort($Title, SORT_ASC, $MemberType);
+                                //// Manually sort top three (M10, M11, M12) to the end of the array ///
+                                $sortCountNum = 0;
+                                $tempArrt = Array();
+                                foreach($MemberType as $replace) {
+                                    if($sortCountNum < 3) {
+                                        array_push($tempArrt, $replace);
+                                        unset($MemberType[$sortCountNum]);
+                                    } else {
+                                        break;
+                                    }
+                                    $sortCountNum++;
+                                }
+                                foreach($tempArrt as $placeLast) {
+                                    array_push($MemberType, $placeLast);
+                                }
 								//$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
 								//$MemberType     = json_decode($MemberTypecode, true);
 								foreach ($MemberType as $key => $value) {
@@ -2767,7 +2781,7 @@ if(isset($_POST['MT'])){
 												echo "selected='selected'";
 											}
 										}
-										echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';
+										echo '> ' .$MemberType[$key]['Title'] . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';//echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';
 									}
 								}
 
