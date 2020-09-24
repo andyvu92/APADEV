@@ -131,8 +131,8 @@ $background = getBackgroundImage($userID);
 		}
 	}?><?php endif;?></p>
 	<?php if(sizeof($orderDetails)!=0 && $SubsCount > 0): ?>
-	<?php
-	echo "<p>Your subscription(s) for 2020:</p><p>";
+	<?php 
+	echo "<p>Your subscription(s) for 2021:</p><p>";
 	$ngQuatation = array();
 	if(!isset($_SESSION['QuatationTag'])){
 		foreach($orderDetails['Order'] as $orders){
