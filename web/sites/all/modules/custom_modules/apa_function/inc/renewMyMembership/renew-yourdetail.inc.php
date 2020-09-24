@@ -136,7 +136,8 @@ if(isset($_POST['step1'])) {
 
 	//if(isset($_POST['Treatmentarea'])){ $postData['Treatmentarea'] = $_POST['Treatmentarea']; }
 	if(isset($_POST['MAdditionallanguage'])){ $postData['PAdditionalLanguageID'] = implode(",",$_POST['MAdditionallanguage']); }
-
+	if(isset($_POST['CurrentEmploymentSector'])){ $postData['CurrentEmploymentSector'] = $_POST['CurrentEmploymentSector']; }
+	
 	if(isset($_POST['Findpublicbuddy'])){ $postData['Findpublicbuddy'] = $_POST['Findpublicbuddy']; } else{ $postData['Findpublicbuddy'] = "False";}
 	/*if(isset($_POST['Dietary'])){
 		$testD['ID']=$_POST['Dietary'];
