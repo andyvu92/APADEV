@@ -21,6 +21,7 @@ if(!function_exists('drupal_session_started'))
 	}
 	//Put filter condition to display member type
 $filterMemberProduct = array("10007","10008","10009","9997");
+$filterMemberProductsRenew = array("9965","9962","9963","9998","10000","10001","10002");
 // 2.2.21 - Get Fellowship product
 	// Send -
 	// ProductID
@@ -907,7 +908,8 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					    //$MemberTypecode  = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
 						//$MemberType=json_decode($MemberTypecode, true);
 						foreach($MemberType  as $key => $value){
-							if(!in_array($MemberType[$key]['ProductID'],$filterMemberProduct)){
+							$FilterTypes = (!in_array($MemberType[$key]['ProductID'],$filterMemberProductsRenew)) ? true : false;
+							if(!in_array($MemberType[$key]['ProductID'],$filterMemberProduct) && $FilterTypes){
 								echo '<option value="'.$MemberType[$key]['ProductID'].'"';
 								if(isset($_SESSION["MembershipProductID"])){if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']){ echo "selected='selected'"; }}
 								//elseif ($details['MemberTypeID'] == $MemberType[$key]['ID']){ echo "selected='selected'"; }

@@ -13,6 +13,9 @@
 
 //Put filter condition to display member type
 $filterMemberProduct = array("10007","10008","10009","9997");
+
+$filterMemberProductsJoin = array("18730","18731","18732","18733","9960","9961");
+$filterMemberProductsJoinAfterJan = array("18730","18731","18732","18733");
 // Put two scenarios here;
 // 1. for new user who join a member
 // 2. web user who join a member use $_SESSION]['userID'] to get user info
@@ -2728,7 +2731,7 @@ if(isset($_POST['MT'])){
 
                 <div class="row">
                     <div class="col-xs-6 col-md-6">
-                        <label for="">Member Category<span class="tipstyle"> *</span></label>
+                        <label for="">Member Category1<span class="tipstyle"> *</span></label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="MemberType" name="MemberType">
 							<option value="" <?php if (!isset($_SESSION["MembershipProductID"])) echo "selected='selected'";?> disabled>Member Category</option>
@@ -2774,7 +2777,13 @@ if(isset($_POST['MT'])){
 								//$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
 								//$MemberType     = json_decode($MemberTypecode, true);
 								foreach ($MemberType as $key => $value) {
-									if(!in_array($MemberType[$key]['ProductID'],$filterMemberProduct)){
+                                    $FilterTypes = false;
+                                    if(date("Y") == "2020") { // before 2021
+                                        if(!in_array($MemberType[$key]['ProductID'],$filterMemberProductsJoin)) {$FilterTypes = true;}
+                                    } else { // after 2021
+                                        if(!in_array($MemberType[$key]['ProductID'],$filterMemberProductsJoinAfterJan)) {$FilterTypes = true;}
+                                    }
+									if(!in_array($MemberType[$key]['ProductID'],$filterMemberProduct) && $FilterTypes){
 										echo '<option value="' . $MemberType[$key]['ProductID'] . '"';
 										if (isset($_SESSION["MembershipProductID"])) {
 											if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']) {
