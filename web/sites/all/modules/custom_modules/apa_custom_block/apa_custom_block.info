@@ -1,0 +1,5 @@
+name = APA Custom PHP Block
+description = APA Custom Blocks with php code.
+package = APA
+core = 7.x
+files[] = apa_custom_block.module

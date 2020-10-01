@@ -196,11 +196,14 @@ function apa_function_change_existing_password_form() {
  */
 function apa_function_join_the_APA_form() {
     /// block
-    include __DIR__."/inc/jointheAPA.inc.php";
+    //include __DIR__."/inc/jointheAPA.inc.php";
+    if(isset($_POST['goI']))  { $_POST['goI'] =  $_POST['goI'] ;}
+    return render_php(__DIR__."/inc/jointheAPA.inc.php");
 }
 function apa_function_join_your_detail_form() {
 	/// in 'jointheAPA.inc.php'
     include __DIR__."/inc/jointheAPA/jointheAPA-yourdetail.inc.php";
+
 }
 function apa_function_join_the_apa_insurance_form() {
     /// in 'jointheAPA.inc.php'
@@ -216,7 +219,8 @@ function apa_function_join_the_apa_final_form() {
 }
 function apa_function_join_the_apa_confirmation_form() {
     /// block
-    include __DIR__."/inc/jointheAPA/jointheAPA-confirmation.inc.php";
+    //include __DIR__."/inc/jointheAPA/jointheAPA-confirmation.inc.php";
+    return render_php(__DIR__."/inc/jointheAPA/jointheAPA-confirmation.inc.php");
 }
 function apa_function_checkemail_form() {
     /// in this file
@@ -230,7 +234,8 @@ function apa_function_checkemail_form() {
  */
 function apa_function_renew_the_APA_form() {
     /// block
-    include __DIR__."/inc/renewMyMembership.inc.php";
+    //include __DIR__."/inc/renewMyMembership.inc.php";
+    return render_php(__DIR__."/inc/renewMyMembership.inc.php");
 }
 function apa_function_renew_your_detail_form() {
     /// in 'renewMyMembership.inc.php'
@@ -250,7 +255,9 @@ function apa_function_renew_the_apa_final_form() {
 }
 function apa_function_renew_the_apa_confirmation_form() {
     /// block
-    include __DIR__."/inc/renewMyMembership/renew-confirmation.inc.php";
+    //include __DIR__."/inc/renewMyMembership/renew-confirmation.inc.php";
+    return render_php(__DIR__."/inc/renewMyMembership/renew-confirmation.inc.php");
+
 }
 
 /**
@@ -269,19 +276,24 @@ function apa_function_sign_up_form() {
  */
 function apa_function_your_detail_form() {
     /// block
-    include __DIR__."/inc/yourdetail.inc.php";
+    //include __DIR__."/inc/yourdetail.inc.php";
+    return render_php(__DIR__."/inc/yourdetail.inc.php");
+
 }
 function apa_function_your_dashboard_form() {
     /// block
-    include __DIR__."/inc/dashboard.inc.php";
+    //include __DIR__."/inc/dashboard.inc.php";
+    return render_php(__DIR__."/inc/dashboard.inc.php");
 }
 function apa_function_your_purchase_form() {
     /// block
-    include __DIR__."/inc/yourpurchase.inc.php";
+    //include __DIR__."/inc/yourpurchase.inc.php";
+    return render_php(__DIR__."/inc/yourpurchase.inc.php");
 }
 function apa_function_your_subscription_form() {
 	/// block
-    include __DIR__."/inc/subscriptions.inc.php";
+    //include __DIR__."/inc/subscriptions.inc.php";
+    return render_php(__DIR__."/inc/subscriptions.inc.php");
 }
 /**
  * Page PD Page.
@@ -290,11 +302,13 @@ function apa_function_your_subscription_form() {
  */
 function apa_function_pdsearch_form() {
     /// block
-    include __DIR__."/inc/pdsearch.inc.php";
+    //include __DIR__."/inc/pdsearch.inc.php";
+    return render_php(__DIR__."/inc/pdsearch.inc.php");
 }
 function apa_function_pdsearchresult_form() {
     /// block
-    include __DIR__."/inc/pdsearchresult.inc.php";
+    //include __DIR__."/inc/pdsearchresult.inc.php";
+    return render_php(__DIR__."/inc/pdsearchresult.inc.php");
 }
 function apa_function_pdshoppingcart_form() {
     /// page
@@ -307,6 +321,13 @@ function apa_function_pdcomplete_form() {
 function apa_function_pdwishlist_form() {
     /// page
     include __DIR__."/inc/pdwishlist.inc.php";
+}
+function render_php($path){
+  ob_start();
+  include($path);
+  $var = ob_get_contents();
+  ob_end_clean();
+  return $var;
 }
 /**
  * Page Join the national group Page.

@@ -3,7 +3,9 @@ if(!function_exists('drupal_session_started'))
 {
   die("Unauthorized Access");
 }
+$aptify_maintenance = variable_get('aptify_server_maintenance', APTIFY_SERVER_MAINTENANCE);
 ?>
+<?php if(!$aptify_maintenance): ?>
 <?php
 $hasMalicious = false;
 if($_GET) {
@@ -20,12 +22,12 @@ if($hasMalicious) {
 global $base_url;
 // 2.2.28 - GET event search result list
 // It has four different cases, but we are going to use
-// only one scenario 
+// only one scenario
 // 1. Nothing is given (default)
 // 2. State only
 // 3. Lat, Lng only
 // 4. All of information is given
-// Send - 
+// Send -
 // Latitude, Longitude, userID, Radius, Keywords, Type of PD
 // National Group, Regional Group, State, Suburb, Begin date
 // End date, Page size, Page number
@@ -42,11 +44,11 @@ if(isset($_SESSION['UserID'])) { $sendData["UserID"] = $_SESSION['UserId'];
 } else { $sendData["UserID"] = "-1"; }
 if(isset($_POST["Radius"])) { $request["Radius"] = $_POST["Radius"];
 } else { $request["Radius"] = ""; }
-if(isset($_POST["Keyword"]) || isset($_GET["Keyword"])) {	
+if(isset($_POST["Keyword"]) || isset($_GET["Keyword"])) {
 	if(isset($_POST["Keyword"])) {$request["Keyword"] = $_POST["Keyword"];}
 	else {$request["Keyword"] = $_GET["Keyword"];}
 } else { $request["Keyword"] = ""; }
-if(isset($_POST["Typeofpd"]) || isset($_GET["Typeofpd"])) {	
+if(isset($_POST["Typeofpd"]) || isset($_GET["Typeofpd"])) {
 	$returnTypePD = "";
 	/* for single pd types */
 	if(isset($_POST["Typeofpd"])) {
@@ -71,7 +73,7 @@ if(isset($_POST["Typeofpd"]) || isset($_GET["Typeofpd"])) {
 	*/
 	$request["Typeofpd"] = $returnTypePD;
 } else { $request["Typeofpd"] = ""; }
-if(isset($_POST["Nationalgp"]) || isset($_GET["Nationalgp"])) {	
+if(isset($_POST["Nationalgp"]) || isset($_GET["Nationalgp"])) {
 	$returnNGs = "";
 	if(isset($_POST["Nationalgp"])) {
 		foreach($_POST["Nationalgp"] as $types) {
@@ -91,19 +93,19 @@ if(isset($_POST["Nationalgp"]) || isset($_GET["Nationalgp"])) {
 } else { $request["Nationalgp"] = ""; }
 if(isset($_POST["Regionalgp"])) {	$request["Regionalgp"] = $_POST["Regionalgp"];
 } else { $request["Regionalgp"] = ""; }
-if(isset($_POST["State"]) || isset($_GET["State"])) {	
+if(isset($_POST["State"]) || isset($_GET["State"])) {
 	if(isset($_POST["State"])) {$request["State"] = $_POST["State"]; }
 	else {$request["State"] = $_GET["State"];}
 } else { $request["State"] = ""; }
-if(isset($_POST["Suburb"]) || isset($_GET["Suburb"])) {	
+if(isset($_POST["Suburb"]) || isset($_GET["Suburb"])) {
 	if(isset($_POST["Suburb"])) {$request["Suburb"] = $_POST["Suburb"];}
 	else {$request["Suburb"] = $_GET["Suburb"];}
 } else { $request["Suburb"] = ""; }
-if(isset($_POST["BeginDate"]) || isset($_GET["BeginDate"])) {	
+if(isset($_POST["BeginDate"]) || isset($_GET["BeginDate"])) {
 	if(isset($_POST["BeginDate"])) {$request["BeginDate"] = str_replace("-","/",$_POST["BeginDate"]);}
 	else {$request["BeginDate"] = str_replace("-","/",$_GET["BeginDate"]);}
 } else { $request["BeginDate"] = ""; }
-if(isset($_POST["EndDate"]) || isset($_GET["EndDate"])) {	
+if(isset($_POST["EndDate"]) || isset($_GET["EndDate"])) {
 	if(isset($_POST["EndDate"])) {$request["EndDate"] = str_replace("-","/",$_POST["EndDate"]);}
 	else {$request["EndDate"] = str_replace("-","/",$_GET["EndDate"]);}
 } else { $request["EndDate"] = ""; }
@@ -151,20 +153,20 @@ if($request["Keyword"]!="" || $request["Typeofpd"] !="" || $request["Nationalgp"
 		$ngArray = array();
 		foreach($searchNGID as $tempID){
 			array_push($ngArray, getNGName($tempID));
-         
+
 		}
 		$pdSearchCriteria["NG"] = implode(",", $ngArray);
-		
+
 	}
 	else{ $pdSearchCriteria["NG"] = "";}
 	$pdSearchCriteria["State"] = $request["State"];
 	$pdSearchCriteria["Suburb"] = $request["Suburb"];
-	if($request["BeginDate"]!=""){ 
+	if($request["BeginDate"]!=""){
 		$pdSearchCriteria["searchBDate"] = date('Y-m-d', strtotime($request["BeginDate"]));//str_replace("/", "-", $request["BeginDate"]);
 	}else{
 		$pdSearchCriteria["searchBDate"] = NULL;
 	}
-	if($request["EndDate"]!=""){ 
+	if($request["EndDate"]!=""){
 		$pdSearchCriteria["searchEDate"] = date('Y-m-d', strtotime($request["EndDate"]));//str_replace("/", "-", $request["EndDate"]);
     }else{
 		$pdSearchCriteria["searchEDate"] = NULL;
@@ -221,10 +223,10 @@ if(isset($results['MResponse'])) {
 		<a class="accent-btn" href="#block-block-240"><i class="fa fa-search"></i> Search again</a>
 	</div>
 
-	<?php 
+	<?php
 			$block = block_load('block', '309');
 			$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-			$output = drupal_render($get);        
+			$output = drupal_render($get);
 			print $output;
 	?>
 
@@ -236,8 +238,8 @@ if(isset($results['MResponse'])) {
 	usort($results, function($a, $b) {
 		return $b['Begindate'] - $a['Begindate'];
 	});
-	******/ 
-	
+	******/
+
 	$_SESSION["`searchResult`"] = $results;
 	$passString = "";
 	foreach($request as $key => $value) {
@@ -257,7 +259,7 @@ if(isset($results['MResponse'])) {
 						if($key != "UserID") {
 							$passString = $passString.$key."=".$value."&";
 						}
-					}			
+					}
 				}
 			}
 		}
@@ -270,7 +272,7 @@ if(isset($results['MResponse'])) {
 	//echo "test3: ".$passString."<br >";
 	//echo "test4: ".strlen($passString)."<br >";
 	/******** search result pagination *****/
-	
+
 	if(isset($_GET["page"])) {
 		$current = $_GET["page"];
 	} else {
@@ -319,15 +321,15 @@ if(isset($results['MResponse'])) {
 		}
 		echo "<br><br>";
 	}
-	
+
 	/********end search result pagination*******/
 
  ?>
  <div class="col-xs-12 col-sm-6 col-md-5 none-padding align-right page-size-setting">
 	<div class="pageSetting"><p>Showing</p><select id="pagesize" name="pagesize" onchange="pagesize(this)"><option value="1" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==5)){ echo "selected";  } ?>> 5 </option><option value="2" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==10)){ echo "selected";  }  ?>> 10 </option><option value="3" <?php  if(isset($_GET["pagesize"])&&($_GET["pagesize"]==20)){ echo "selected";  }  ?>> 20 </option></select><p> events</p></div>
 	<div class="pageItem"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php echo $pageNfront; ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php echo $pageNrear; ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
-</div>		
-<?php              /**************************************pagination settings***************************/        ?>  
+</div>
+<?php              /**************************************pagination settings***************************/        ?>
 <div class="col-xs-12" style="padding:0;">
 <div id="mobile-detector"></div>
 <div class="flex-container" id="pd-search-results">
@@ -362,7 +364,7 @@ if(isset($results['MResponse'])) {
 	<?php
 	//var_dump($results);
 	foreach($results as $result){
- 
+
 		$title = "";
 		$IsExternal = false;
 		if(substr($result['Title'], 0, 8) == "External") {
@@ -417,7 +419,7 @@ if(isset($results['MResponse'])) {
 		} else {
 			echo	"<div class='flex-col-1'><span class='pd-header-mobile'>End date: </span>N/A</div>";
 		}
-		
+
 		echo	"<div class='flex-col-1 pd-status'>";
 		$Totalnumber = doubleval($result['Totalnumber']);
 		$Enrollednumber = doubleval($result['Enrollednumber']);
@@ -445,7 +447,7 @@ if(isset($results['MResponse'])) {
 		echo "</div>";
 
 	}
-	?>	
+	?>
 </div>
 
 <?php  /*******************************right item******************/?>
@@ -455,10 +457,10 @@ if(isset($results['MResponse'])) {
 	<div class="pageItem"><p><span class="pageItemDes">Item </span><span class="pageItemDes"><?php echo $pageNfront; ?></span><span class="pageItemDes">to</span><span class="pageItemDes"><?php echo $pageNrear; ?></span><span class="pageItemDes">of</span><span class="pageItemDes"><?php echo $totalNum;?></span></p></div>
 </div>
 
-<?php 
+<?php
 	$block = block_load('block', '310');
 	$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-	$output = drupal_render($get);        
+	$output = drupal_render($get);
 	print $output;
 ?>
 
@@ -476,7 +478,7 @@ if(isset($results['MResponse'])) {
 
 		//urls += "?" + paramPass;
 	  	// urls = "/pd/pd-search?";
-	 
+
 		if(value== 1) {
 						window.location.href= urls + "?pagesize=5"+"<?php echo $passString; ?>";
 		} else if(value== 2) {
@@ -485,8 +487,15 @@ if(isset($results['MResponse'])) {
 		else{
 			window.location.href= urls + "?pagesize=20"+"<?php echo $passString; ?>";
 		}
-                
+
 	}
 </script>
 <?php endif; ?>
 <?php logRecorder(); ?>
+<?php else: ?>
+<?php
+  $block = block_load('block', '424');
+	$get = _block_get_renderable_array(_block_render_blocks(array($block)));
+	$output = drupal_render($get);
+  print $output;?>
+<?php endif;?>

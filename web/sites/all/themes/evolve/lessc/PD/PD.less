@@ -39,55 +39,55 @@
                 background: url(/sites/default/files/PROFESSIONALDEVELOPMENT/pd-featured-images/lecture-image.png) no-repeat center center;
                     .pd-type{
                         background: #ffa02f;
-                    }  
+                    }
                &.Lecture{
                 border-bottom: 5px solid #ffa02f;
                 background: url(/sites/default/files/PROFESSIONALDEVELOPMENT/pd-featured-images/lecture-image.png) no-repeat center center;
                     .pd-type{
                         background: #ffa02f;
-                    }   
+                    }
                 }
                &.Branch{
                 border-bottom: 5px solid #00424f;
                 background: url(/sites/default/files/PROFESSIONALDEVELOPMENT/pd-featured-images/branch-image.png) no-repeat center center;
                     .pd-type{
                         background: #00424f;
-                    } 
+                    }
                 }
                &.College{
                 border-bottom: 5px solid #0772b0;
                 background: url(/sites/default/files/PROFESSIONALDEVELOPMENT/pd-featured-images/college-image.png) no-repeat center center;
                     .pd-type{
                         background: #0772b0;
-                    } 
+                    }
                 }
                &.Course{
                 border-bottom: 5px solid #5e6067;
                 background: url(/sites/default/files/PROFESSIONALDEVELOPMENT/pd-featured-images/course-mage.png) no-repeat center center;
                     .pd-type{
                         background: #5e6067;
-                    }    
+                    }
                 }
                &.Masterclass{
                 border-bottom: 5px solid #910674;
                 background: url(/sites/default/files/PROFESSIONALDEVELOPMENT/pd-featured-images/masterclass-image.png) no-repeat center center;
                     .pd-type{
                         background: #910674;
-                    }    
+                    }
                 }
                &.Symposium{
                 border-bottom: 5px solid #23c1fc;
                 background: url(/sites/default/files/PROFESSIONALDEVELOPMENT/pd-featured-images/symposium-image.png) no-repeat center center;
                     .pd-type{
                         background: #23c1fc;
-                    }    
+                    }
                 }
                &.Virtual{
                 border-bottom: 5px solid #a2ad00;
                 background: url(/sites/default/files/PROFESSIONALDEVELOPMENT/pd-featured-images/virtual-image.png) no-repeat center center;
                     .pd-type{
                         background: #a2ad00;
-                    }    
+                    }
                 }
            }
            .session-cta{
@@ -112,7 +112,7 @@
                    }
                    &.Virtual{
                     background: #a2ad00;
-                   } 
+                   }
                }
            }
         }
@@ -228,9 +228,9 @@
                 background-size: cover;
                 background-position: 40%;
                 @media all and (max-width: @larger-tablet-width){
-                    background-position: 70%; 
+                    background-position: 70%;
                 }
-            } 
+            }
         }
     }
 }
@@ -332,11 +332,11 @@
             color: rgba(255,255,255,0.8);
             opacity: 1; /* Firefox */
         }
-        
+
         &:-ms-input-placeholder { /* Internet Explorer 10-11 */
            color: @grey;
         }
-        
+
         &::-ms-input-placeholder { /* Microsoft Edge */
            color: @grey;
         }
@@ -344,8 +344,8 @@
     select:focus{
         color: #333;
     }
-    input[type="date"]::-webkit-inner-spin-button { 
-        display: none; 
+    input[type="date"]::-webkit-inner-spin-button {
+        display: none;
     }
     input[type="date"]::-webkit-calendar-picker-indicator{
         background: none;
@@ -539,7 +539,7 @@
                     background: rgba(58, 60, 60,0.8);
                     background-color: rgba(0,0,0,0);
                     margin: 8px;
-                    
+
                     &:active {
                         outline: none;
                         border: none;
@@ -686,7 +686,7 @@
         .styled-checkbox {
             position: absolute; // take it out of document flow
             opacity: 0; // hide it
-          
+
             & + label {
               position: relative;
               cursor: pointer;
@@ -696,7 +696,7 @@
                   margin-left: -39px;
               }
             }
-          
+
             // Box.
             & + label:before {
               content: '';
@@ -709,12 +709,12 @@
               background: none;
               box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
             }
-          
+
             // Box hover
             &:hover + label:before {
               background: none;
             }
-          
+
             // Box checked
             &:checked + label:before {
               background: none;
@@ -733,19 +733,19 @@
                 min-height: 22px;
                 cursor: pointer;
             }
-            
+
             // Disabled state label.
             &:disabled + label {
               color: #b8b8b8;
               cursor: auto;
             }
-          
+
             // Disabled box.
             &:disabled + label:before {
               box-shadow: none;
               background: #fff;
             }
-          
+
             // Checkmark. Could be replaced with an image
             &:checked + label:after {
               content: '';
@@ -755,7 +755,7 @@
               background: #000;
               width: 2px;
               height: 2px;
-              box-shadow: 
+              box-shadow:
                 2px 0 0 #000,
                 4px 0 0 #000,
                 4px -2px 0 #000,
@@ -772,8 +772,8 @@ body.page-node{
     #section-content-top{
         .container{
             .row{
-                #block-block-241{
-                    
+                .pdcustom-result-block{
+
                     @media all and (max-width: @larger-desktop-width){
                         padding: 0 50px;
                     }
@@ -815,7 +815,7 @@ body.page-node{
                                 .pd-status{
                                     position: absolute;
                                     bottom: 5%;
-                                    right: 5%; 
+                                    right: 5%;
                                     width: 10%;
                                     font-size: 1em;
                                     text-align: center;
@@ -876,7 +876,7 @@ body.page-node{
                             }
                         }
                     }
-                   
+
                 }
             }
         }
@@ -899,7 +899,7 @@ body.page-node{
 #section-content-top .container{
     width: 100%;
     max-width: 1500px;
-    .row #block-block-241{
+    .row .pdcustom-result-block{
         .content{
             display: block;
             width: 100%;
@@ -1066,7 +1066,7 @@ body.page-node{
                     background-size: contain;
                     background-position: center center;
                     background-repeat: no-repeat;
-                    
+
                 }
                 i.registered{
                     background-image: url(/sites/default/files/PROFESSIONALDEVELOPMENT/pd-status-icons/registered-DG.png);
@@ -1322,41 +1322,41 @@ body.page-node{
                     font-size: 1.2em;
                     color: #fff;
                     .add-to-cart{
-                        background: #ffa02f; 
+                        background: #ffa02f;
                     }
                     &.Lecture{
                         .add-to-cart{
-                            background: #ffa02f; 
+                            background: #ffa02f;
                         }
                     }
                     &.Branch{
                         .add-to-cart{
-                            background: #00424f;             
+                            background: #00424f;
                         }
                     }
                     &.College{
                         .add-to-cart{
-                            background: #0772b0;    
+                            background: #0772b0;
                         }
                     }
                     &.Course{
                         .add-to-cart{
-                            background: #5e6067;                     
+                            background: #5e6067;
                         }
                     }
                     &.Masterclass{
                         .add-to-cart{
-                            background: #910674;               
+                            background: #910674;
                         }
                     }
                     &.Symposium{
                         .add-to-cart{
-                            background: #23c1fc;              
+                            background: #23c1fc;
                         }
                     }
                     &.Virtual{
                         .add-to-cart{
-                            background: #a2ad00;             
+                            background: #a2ad00;
                         }
                     }
                     .add-to-wishlist{
@@ -1395,7 +1395,7 @@ body.page-node{
                             opacity: 0.8;
                         }
                             &.Lecture{
-                                background: #ffa02f; 
+                                background: #ffa02f;
                             }
                             &.Branch{
                                 background: #00424f;
@@ -1404,13 +1404,13 @@ body.page-node{
                                 background: #0772b0;
                             }
                             &.Course{
-                                background: #5e6067;  
+                                background: #5e6067;
                             }
                             &.Masterclass{
-                                background: #910674; 
+                                background: #910674;
                             }
                             &.Symposium{
-                                background: #23c1fc; 
+                                background: #23c1fc;
                             }
                             &.Virtual{
                                 background: #a2ad00;
@@ -1577,7 +1577,7 @@ body.page-node{
                           font-size: 1.4em;
                           font-weight: 900;
                           &.active{
-                            background: #e7e8e9; 
+                            background: #e7e8e9;
                           }
                           &:after {
                             content: "\f054";
@@ -1620,7 +1620,7 @@ body.page-node{
                           }
                       }
                       .pd-description-nonmobile{
-                          display: block;    
+                          display: block;
                           font-size: 1.2em;
                           .short-text, .full-text{
                               font-size: 1em;
@@ -1773,7 +1773,7 @@ body.page-node{
     }
 }
 
-#block-block-241 table th{
+.pdcustom-result-block table th{
     background-color: #5E6167;
 	color: white;
     border: 1px solid #ccc!important;
@@ -1784,10 +1784,10 @@ body.page-node{
     border: 1px solid #ccc!important;
     font-weight: normal!important;
 }
-#block-block-241 table tr:nth-child(even){
+.pdcustom-result-block table tr:nth-child(even){
     background-color:rgba(195,200,200,0.5);
 }
-#block-block-241 td, #block-block-241 th{
+.pdcustom-result-block td, .pdcustom-result-block th{
     padding: 10px!important;
     border-right: 1px solid white;
 }
@@ -1859,10 +1859,10 @@ div[id^="myCart"] .modal-body{
 }
 div[id^="myCart"] .modal-body h3{
     padding-left:27px;
-	
+
 }
 div[id^="myCart"] .modal-body a.addCartlink{
-    margin-left: 42px; 
+    margin-left: 42px;
 }
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
     color:    white;
@@ -1870,7 +1870,7 @@ div[id^="myCart"] .modal-body a.addCartlink{
 
 .searchds a {
     color: white;
-   
+
     text-decoration: underline;
 }
 .pdSearchButton{
@@ -1897,7 +1897,7 @@ div[id^="myCart"] .modal-body a.addCartlink{
 }
 #tabpd{
     border-bottom:none!important;
-	
+
 }
 #tabpd li a {
     color: #004250;
@@ -1920,7 +1920,7 @@ div[id^="myCart"] .modal-body a.addCartlink{
 	margin-bottom: 10px;
 }
 
-div#block-block-241 a:not(.btn) i {
+div.pdcustom-result-block a:not(.btn) i {
     color: #5E6167;
 }
 .addCartButton{
@@ -1928,7 +1928,7 @@ div#block-block-241 a:not(.btn) i {
 	color: white;
 }
 .detailContent a.addCartlink {
-   
+
     color: white!important;
 }
 #node-249 .modal.fade.in {
@@ -1938,7 +1938,7 @@ div#block-block-241 a:not(.btn) i {
     width: 122%;
     height: 100%;
     overflow-y: hidden!important;
- 
+
 }
 #node-249 .modal-content{
     border:none!important;
@@ -1995,7 +1995,7 @@ input[value="Sign in"], input[value="Submit"], input[value="Next"]{
     padding: 5px;
     background-color: #009fda;
     text-align: center;
-    color: white; 
+    color: white;
 	border:none;
 }
 #login a.signIn:hover, #node-254 a.signIn:hover{
@@ -2152,28 +2152,28 @@ input[name="otherjob"]{
     display:none;
 }
 
-#block-block-241 .pageItem .pageItemDes{
+.pdcustom-result-block .pageItem .pageItemDes{
     padding:0 1px;
 }
-#block-block-241 .pageSettingBottom p {
+.pdcustom-result-block .pageSettingBottom p {
     margin-left: 72%;
     margin-top: 3%;
     color: #004250 !important;
 }
-#block-block-241 .pageSettingBottom select#pagesizebottom {
+.pdcustom-result-block .pageSettingBottom select#pagesizebottom {
     margin-left: 80%!important;
 	margin-top: -42px;
 }
-#block-block-241 .pageItemBottom {
+.pdcustom-result-block .pageItemBottom {
     width: 50%;
     margin-left: 85%;
     margin-top: -29px;
     margin-bottom: 8px;
 }
-#block-block-241 .pageItemBottom p {
+.pdcustom-result-block .pageItemBottom p {
     color: #004250 !important;
 }
-#block-block-241 .pageItemBottom span.pageItemDes {
+.pdcustom-result-block .pageItemBottom span.pageItemDes {
     padding: 0 1px;
 }
 form#registerMemberForm .error, form#updatePaymentForm .error{
@@ -2189,7 +2189,7 @@ form{
 
 input[name="Couponcode"]::-webkit-input-placeholder {
   color: black!important;
-  
+
 }
 input[name="Couponcode"]{
   border: 1px solid #eceef0;
@@ -2242,14 +2242,14 @@ input[name="Couponcode"]{
             -o-background-size: cover!important;
             background-size: cover!important;
             .top-banner{
-                background-image: linear-gradient(to top,#000000 0%,#000000 40%,#000000 52%,rgba(255,255,255,0) 85%); 
-                height: auto;            
+                background-image: linear-gradient(to top,#000000 0%,#000000 40%,#000000 52%,rgba(255,255,255,0) 85%);
+                height: auto;
             }
         }
-    }  
+    }
 
     #section-banner #block-block-123{
-        background-position: 70% 70px!important;  
+        background-position: 70% 70px!important;
 
         @media all and (max-width: 1375px) and (min-width: 1024px){
             background-position: 70% 0 !important;
@@ -2465,7 +2465,7 @@ input[name="Couponcode"]{
                         border: 0px solid #009fda!important;
                     }
                 }
-            }  
+            }
         }
         @media all and (max-width: @tablet-width + 1px) {
             .dexp-shortcodes-box{
@@ -2475,7 +2475,7 @@ input[name="Couponcode"]{
         @media all and (max-width: @larger-phone-width) {
             .dexp-shortcodes-box{
                 padding: 15px 20px 15px;
-                border-bottom: 1px solid #e7e8e9; 
+                border-bottom: 1px solid #e7e8e9;
                 margin: 0 10px;
             }
         }
@@ -2996,4 +2996,3 @@ input[name="Couponcode"]{
         }
     }
 }
-    

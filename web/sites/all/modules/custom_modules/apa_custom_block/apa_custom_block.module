@@ -1,0 +1,128 @@
+<?php
+/**
+ * Implements hook_block_info().
+ */
+function apa_custom_block_block_info() {
+  $blocks['dashboard_block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - dashboard block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['yourdetail-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - your detail block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['yourcommunications-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - communications block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['yourpurchases-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - your purchases block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['joinAPA-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - Join APA block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['joinAPAConfirmation-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - Join APA Comfirmation block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['renewMembership-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - Renew membership block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['renewConfirmation-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - Renew membership confirmation block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['pdsearch-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - PD search block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['pdresult-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - PD search result block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  return $blocks;
+}
+/**
+ * Implements hook_block_view().
+ *
+ * Prepares the contents of the block.
+ */
+function apa_custom_block_block_view($delta = '') {
+  switch ($delta) {
+    case 'dashboard_block':
+        if (user_access('access content')) {
+        $block['content'] = render(apa_function_your_dashboard_form());
+
+      }
+    return $block;
+    case 'yourdetail-block':
+        if (user_access('access content')) {
+        $block['content'] = render(apa_function_your_detail_form());
+      }
+    return $block;
+    case 'yourpurchases-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_your_purchase_form());
+    }
+    return $block;
+    case 'yourcommunications-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_your_subscription_form());
+    }
+    return $block;
+    case 'joinAPA-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_join_the_APA_form());
+    }
+    return $block;
+    case 'joinAPAConfirmation-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_join_the_apa_confirmation_form());
+    }
+    return $block;
+    case 'renewMembership-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_renew_the_APA_form());
+    }
+    return $block;
+    case 'renewConfirmation-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_renew_the_apa_confirmation_form());
+    }
+    return $block;
+    case 'pdsearch-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_pdsearch_form());
+    }
+    return $block;
+    case 'pdresult-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_pdsearchresult_form());
+    }
+    return $block;
+
+  }
+}
