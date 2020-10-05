@@ -27,7 +27,7 @@ jQuery(document).ready(function() {
   $('#section-content-top').removeClass('autoscroll');
 
   //PAGER TO BOTTOM ON PD PAGE------------------------------------
-  $("#section-content-top .container .row #block-block-241 .content .pager").clone().appendTo("#section-content-top .container .row #block-block-241 .content .pager-bottom");
+  $("#section-content-top .container .row .pdcustom-result-block .content .pager").clone().appendTo("#section-content-top .container .row .pdcustom-result-block .content .pager-bottom");
 
   //ADD ACTIVE CLASS TO CURRENT URL--------------------------------
   // Get current path and find target link
@@ -550,10 +550,10 @@ jQuery(document).ready(function() {
   });
 
   // ADD LOADING SCREEN FOR CPD DIARY----------------------------------------------------------
-  $('#block-block-291').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
+  $('.cpd-diary-snapshot').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
 
   $(window).load(function(){
-    $('#block-block-291 .overlay, #block-block-240 .overlay').fadeOut();
+    $('.cpd-diary-snapshot .overlay, #block-block-240 .overlay').fadeOut();
     $('.CPD_snapshot').fadeIn().addClass('visible');
   });
 

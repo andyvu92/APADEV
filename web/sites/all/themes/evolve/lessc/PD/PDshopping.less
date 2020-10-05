@@ -158,7 +158,7 @@ fieldset {
             font-weight: 500;
           }
         }
-        
+
         #diet_req{
           margin-top: 15px;
           .small-lead-heading{
@@ -313,7 +313,7 @@ fieldset {
         .form-type-checkbox{
           margin: 1.5em 0;
         }
-        
+
         .form-type-select::after{
           @media @large-ipadpro-down{
             height: 12px;
@@ -351,7 +351,7 @@ fieldset {
           font-size: 0.9em;
           line-height: 1.3em;
         }
-        
+
         .expired_item_note{
           color: @bright-blue;
         }
@@ -410,7 +410,7 @@ fieldset {
             }
           }
         }
-        
+
         .chevron-select-box{
           position: relative;
           select{
@@ -504,7 +504,7 @@ fieldset {
           }
         }
       }
-      
+
 .paymentsiderbar{
   /* OTHER CARD FORM */
   #apa-create-payment-card-form{
@@ -534,7 +534,7 @@ fieldset {
 }
 
 /*------------- NO ITEMS IN CART -----------------*/
-#node-250{
+#node-250, .pdcustom-shoppingcart-block{
   .no-item-button{
     display: flex;
     flex-wrap: wrap;
@@ -636,7 +636,7 @@ fieldset {
       .styled-checkbox {
         position: absolute; // take it out of document flow
         opacity: 0; // hide it
-      
+
         & + label {
           position: relative;
           cursor: pointer;
@@ -646,7 +646,7 @@ fieldset {
               margin-left: -39px;
             }
         }
-      
+
         // Box.
         & + label:before {
           content: '';
@@ -659,29 +659,29 @@ fieldset {
           background: none;
           box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.12);
         }
-      
+
         // Box hover
         &:hover + label:before {
           background: none;
         }
-      
+
         // Box checked
         &:checked + label:before {
           background: none;
         }
-        
+
         // Disabled state label.
         &:disabled + label {
           color: #b8b8b8;
           cursor: auto;
         }
-      
+
         // Disabled box.
         &:disabled + label:before {
           box-shadow: none;
           background: #fff;
         }
-      
+
         // Checkmark. Could be replaced with an image
         &:checked + label:after {
           content: '';
@@ -691,7 +691,7 @@ fieldset {
           background: #000;
           width: 2px;
           height: 2px;
-          box-shadow: 
+          box-shadow:
             2px 0 0 #000,
             4px 0 0 #000,
             4px -2px 0 #000,
@@ -812,7 +812,7 @@ body{
   .countdown_wrapper{
     text-align: right;
     #timer{
-      color: @bright-blue; 
+      color: @bright-blue;
       font-weight: 700;
       display: block;
       font-size: 2.5em;
@@ -873,7 +873,7 @@ body{
     }
   }
 }
-  
+
 
 /*--PD WISHLIST--*/
 

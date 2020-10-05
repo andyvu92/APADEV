@@ -63,6 +63,96 @@ function apa_custom_block_block_info() {
     // Default setting.
     'cache' => DRUPAL_CACHE_PER_ROLE,
   );
+  $blocks['changepassword-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - Change password block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['pdshoppingcart-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - PD shopping cart block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['pdcomplete-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - PD Complete block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['joinng-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - Join national group block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['dashboardmg-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - Dashboard magzine block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['login-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - Login block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['forgetpassword-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - forget password block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['maintainencemode-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - Maintenance mode block'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['return-udsers-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - return password for old users'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['member-questions-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - member questions'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['memberquestions-bottom-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - member questions bottom'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['hometiles-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - home tiles'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['homenews-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - home news'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['cpd-diary-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - CPD Diary'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
+  $blocks['cpd-diary-snapshot-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - CPD Diary Snapshot'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
   return $blocks;
 }
 /**
@@ -123,6 +213,80 @@ function apa_custom_block_block_view($delta = '') {
       $block['content'] = render(apa_function_pdsearchresult_form());
     }
     return $block;
-
+    case 'changepassword-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_change_existing_password_form());
+    }
+    return $block;
+    case 'pdshoppingcart-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_pdshoppingcart_form());
+    }
+    return $block;
+    case 'pdcomplete-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_pdcomplete_form());
+    }
+    return $block;
+    case 'joinng-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_joinng_form());
+    }
+    return $block;
+    case 'dashboardmg-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_dashboard_mg_sub_form());
+    }
+    return $block;
+    case 'login-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_login_form());
+    }
+    return $block;
+    case 'forgetpassword-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_forgot_password_form());
+    }
+    return $block;
+    case 'maintainencemode-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_maintenance_mode_form());
+    }
+    return $block;
+    case 'return-udsers-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_return_udsers_form());
+    }
+    return $block;
+    case 'member-questions-block':
+      if (user_access('access content')) {
+      $block['content'] = render( apa_function_memberquestions_form());
+    }
+    return $block;
+    case 'memberquestions-bottom-block':
+      if (user_access('access content')) {
+      $block['content'] = render( apa_function_memberquestions_bottom_form());
+    }
+    return $block;
+    case 'hometiles-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_hometiles_form());
+    }
+    return $block;
+    case 'homenews-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_homenews_form());
+    }
+    return $block;
+    case 'cpd-diary-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_CPD_diary_form());
+    }
+    return $block;
+    case 'cpd-diary-snapshot-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_CPD_diary_snapshot_form());
+    }
+    return $block;
   }
 }

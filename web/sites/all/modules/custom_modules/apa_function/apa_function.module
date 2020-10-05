@@ -167,19 +167,26 @@ function apa_function_changeState_form() {
 }
 function apa_function_login_form() {
     /// block
-    include __DIR__."/inc/Login/login.inc.php";
+    //include __DIR__."/inc/Login/login.inc.php";
+    return render_php(__DIR__."/inc/Login/login.inc.php");
+
+
 }
 function apa_function_forgot_password_form() {
     /// block
-    include __DIR__."/inc/Login/forget-password.inc.php";
+    //include __DIR__."/inc/Login/forget-password.inc.php";
+    return render_php(__DIR__."/inc/Login/forget-password.inc.php");
 }
 function apa_function_maintenance_mode_form() {
   /// block
-  include __DIR__."/inc/maintenance-mode.inc.php";
+  //include __DIR__."/inc/maintenance-mode.inc.php";
+  return render_php(__DIR__."/inc/maintenance-mode.inc.php");
 }
 function apa_function_return_udsers_form() {
     /// page
-    include __DIR__."/inc/Login/return-users-password.inc.php";
+    //include __DIR__."/inc/Login/return-users-password.inc.php";
+    return render_php(__DIR__."/inc/Login/return-users-password.inc.php");
+
 }
 function apa_function_reset_password_from_email_form() {
     /// page
@@ -187,7 +194,9 @@ function apa_function_reset_password_from_email_form() {
 }
 function apa_function_change_existing_password_form() {
     /// block
-    include __DIR__."/inc/changepassword.inc.php";
+    //include __DIR__."/inc/changepassword.inc.php";
+    return render_php(__DIR__."/inc/changepassword.inc.php");
+
 }
 /**
  * Page Join Page.
@@ -312,11 +321,13 @@ function apa_function_pdsearchresult_form() {
 }
 function apa_function_pdshoppingcart_form() {
     /// page
-    include __DIR__."/inc/pdshoppingcart.inc.php";
+    //include __DIR__."/inc/pdshoppingcart.inc.php";
+    return render_php(__DIR__."/inc/pdshoppingcart.inc.php");
 }
 function apa_function_pdcomplete_form() {
     /// page
-    include __DIR__."/inc/PDcomplete.inc.php";
+    //include __DIR__."/inc/PDcomplete.inc.php";
+    return render_php(__DIR__."/inc/PDcomplete.inc.php");
 }
 function apa_function_pdwishlist_form() {
     /// page
@@ -336,7 +347,8 @@ function render_php($path){
  */
 function apa_function_joinng_form() {
     /// block
-    include __DIR__."/inc/NationalGroupJoin/joinNG.inc.php";
+    //include __DIR__."/inc/NationalGroupJoin/joinNG.inc.php";
+    return render_php(__DIR__."/inc/NationalGroupJoin/joinNG.inc.php");
 }
 
 /**
@@ -346,7 +358,8 @@ function apa_function_joinng_form() {
  */
 function apa_function_dashboard_mg_sub_form() {
     /// block
-    include __DIR__."/inc/NationalGroupJoin/dashboardMGSub.inc.php";
+    //include __DIR__."/inc/NationalGroupJoin/dashboardMGSub.inc.php";
+    return render_php(__DIR__."/inc/NationalGroupJoin/dashboardMGSub.inc.php");
 }
 function apa_function_ngshoppingcart_form() {
     /// not in use
@@ -402,11 +415,34 @@ function apa_function_NationalGroupsMT_form() {
  */
 function apa_function_CPD_diary_snapshot_form() {
     /// block
-    include __DIR__."/inc/CPDdiarySnapShot.inc.php";
+    //include __DIR__."/inc/CPDdiarySnapShot.inc.php";
+    return render_php(__DIR__."/inc/CPDdiarySnapShot.inc.php");
 }
 function apa_function_CPD_diary_form() {
     /// block
-    include __DIR__."/inc/CPDdiary.inc.php";
+    //include __DIR__."/inc/CPDdiary.inc.php";
+    return render_php(__DIR__."/inc/CPDdiary.inc.php");
+}
+/**
+ * Custom block for PHP code
+ */
+function apa_function_memberquestions_form(){
+  //block
+  //include __DIR__."/inc/customBlockInc/memberquestions.inc.php";
+  return render_php(__DIR__."/inc/customBlockInc/memberquestions.inc.php");
+}
+function apa_function_memberquestions_bottom_form(){
+  //block
+  //include __DIR__."/inc/customBlockInc/memberquestions.inc.php";
+  return render_php(__DIR__."/inc/customBlockInc/memberquestionsbottom.inc.php");
+}
+function apa_function_hometiles_form(){
+  //block
+  return render_php(__DIR__."/inc/customBlockInc/hometiles.inc.php");
+}
+function apa_function_homenews_form(){
+  //block
+  return render_php(__DIR__."/inc/customBlockInc/homenews.inc.php");
 }
 /**
  * Find a physios

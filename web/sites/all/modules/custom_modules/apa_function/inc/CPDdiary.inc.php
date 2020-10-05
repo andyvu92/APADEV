@@ -1,7 +1,8 @@
+<div class="space-50"></div>
 <?php if(isset($_SESSION['UserId'])):?>
 <?php  if($_SESSION['MemberTypeID']!="1"): ?>
 
-<?php 
+<?php
 //include('sites/all/themes/evolve/commonFile/updateBackgroundImage.php');
 
 /* get background image****/
@@ -11,7 +12,7 @@ $background = getBackgroundImage($userID);
 
 if(isset($_POST["nonAPA"])) {
 	// 2.2.34 - INSERT CPD diary
-	// Send - 
+	// Send -
 	// UserID, Description, Date, Time, Provider, Reflection
 	// Response -
 	// response
@@ -36,7 +37,7 @@ if(isset($_POST["nonAPA"])) {
 }
 
 // 2.2.33 - GET CPD diary
-// Send - 
+// Send -
 // UserID
 // Response -
 // PD_id, NPD_id, CPD hours, PD title, PD date, CPD points
@@ -56,7 +57,7 @@ foreach($results["APA"] as $t) {
 }
 if(isset($_POST["NONAPA"])) {
 	// 2.2.38 - GET NON-APA CPD point's PDF
-	// Send - 
+	// Send -
 	// UserID
 	// Response -
 	// PDF file of NON-CPD hours
@@ -119,7 +120,7 @@ function date_sort($a, $b) {
 			} else {
 				echo "<div style='display: none;'>&nbsp;</div><div>No PD information found.</div><div>&nbsp;</div><div>0</div>";
 			}
-		?> 
+		?>
 		</div>
 	</div>
 </div>
@@ -152,7 +153,7 @@ function date_sort($a, $b) {
 	}else {
 		echo "<div style='display: none;'>&nbsp;</div><div>&nbsp;</div><div>No PD information was found.</div><div>0</div><div>&nbsp;</div><div>&nbsp;</div>";
 	}
-    ?> 
+    ?>
   </div>
 </div>
 <button class="Non-APA-hour accent-btn" data-toggle="modal" data-target="#nonAPAhour"><span>Add non-APA hours</span></button><br />
@@ -177,7 +178,7 @@ function date_sort($a, $b) {
 		}else {
 			echo "<div style='display: none;'>&nbsp;</div><div>&nbsp;</div><div>No PD information was found.</div><div>0</div><div>&nbsp;</div><div>&nbsp;</div>";
 		}
-		?> 
+		?>
 	</div>
 	</div>
 </div>
@@ -237,10 +238,10 @@ function date_sort($a, $b) {
 			<a href="/membership-question" class="join">Join now</a>
 		</div>
 
-		<?php 
+		<?php
 				$block = block_load('block', '309');
 				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-				$output = drupal_render($get);        
+				$output = drupal_render($get);
 				print $output;
 		?>
 
@@ -256,11 +257,11 @@ function date_sort($a, $b) {
 				<a data-target="#loginAT" data-toggle="modal" href="#" class="login">Login</a>
 				<a href="/membership-question" class="join">Join now</a>
 			</div>
-			
-			<?php 
+
+			<?php
 				$block = block_load('block', '309');
 				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-				$output = drupal_render($get);        
+				$output = drupal_render($get);
 				print $output;
 			?>
 
@@ -269,7 +270,7 @@ function date_sort($a, $b) {
 
 <?php
 // 2.2.2 - GET Membership certification PDF
-// Send - 
+// Send -
 // UserID
 // Response -
 // Membership certificate PDF
@@ -281,7 +282,7 @@ function date_sort($a, $b) {
 //echo "<iframe src='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&amp;ViewEntityName=Persons&amp;ReportId=151&amp;EntityRecordID=55280'width='900' height='900'></iframe>";
 //echo "<a href='https://apaaptifywebuat.aptify.com/AptifyServicesAPI/forms/CrystalReportView.aspx?ViewMode=entityRecord&ViewEntityName=Persons&ReportId=151&EntityRecordID=".$_SESSION['LinkId']."'>ttttt</a>";
 ?>
-<?php 
+<?php
 /*
 <input type="submit" class="Non-APA-hour" name="NONAPA" id="NONAPA" value="Download NON-APA PDF">
 <button type="button" class="btn btn-info btn-lg Non-APA-hour" data-toggle="modal" data-target="#NonCPDPDF"><span style="text-decoration: underline; color:white;">Download NON-APA PDF</span></button>
@@ -341,7 +342,7 @@ print_r($NAPA);
 		document.getElementById("CPD-diary-main").classList.remove(pre_bg);
 		var cur_bg = 'background_' +background_number;
 		document.getElementById("CPD-diary-main").classList.add(cur_bg);
-		document.getElementById('pre_background').innerHTML = 'background_' + background_number; 
+		document.getElementById('pre_background').innerHTML = 'background_' + background_number;
 }
 </script>
 
@@ -362,8 +363,8 @@ print_r($NAPA);
 		</div>
 		<div class="modal-body">
 			<form name="formradio" action="cpd-diary" method="POST">
-			<input type="hidden" name="userID" value="<?php echo $userID; ?>"> 
-			<input type="hidden" name="update">  
+			<input type="hidden" name="userID" value="<?php echo $userID; ?>">
+			<input type="hidden" name="update">
 			<label> <input type="radio" name="background" value="1" id="background1"><img src="/sites/default/files/PARALLAX_TRADIES.jpg"></label>
 			<label> <input type="radio" name="background" value="2"  id="background2"><img src="/sites/default/files/ABOUT-US/ABOUTUS1170X600.jpg"></label>
 			<label> <input type="radio" name="background" value="3"  id="background3"><img src="/sites/default/files/NG_1200X600_RURAL.png"></label>

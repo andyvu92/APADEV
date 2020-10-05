@@ -180,7 +180,7 @@ jQuery(document).ready(function($) {
 		$("#down" + x).slideToggle(500);
 	});
 
-	$("#block-block-271 .media_filter ul li").click(function(){
+	$(".home-news-custom-block .media_filter ul li").click(function(){
 		$('li').siblings().removeClass('active');
 		$(this).addClass('active');
 	});

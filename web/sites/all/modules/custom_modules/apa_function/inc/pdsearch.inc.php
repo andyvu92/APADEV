@@ -7,9 +7,9 @@ if(!function_exists('drupal_session_started'))
 <span class="col-xs-12 col-sm-10 col-md-8 col-lg-5" id="pdSearch">
 <?php
 	// 2.2.19 - GET list of National Group
-	// For this page, we are going to get NG list only. 
+	// For this page, we are going to get NG list only.
 	// Not sending NGID here.
-	// Send - 
+	// Send -
 	// Request, NGID(optional)
 	// Response -
 	// National Group ID, National Group title and National Group Price
@@ -20,7 +20,7 @@ if(!function_exists('drupal_session_started'))
 	}
 	$details = aptify_get_GetAptifyData("19", $sendData);
 	$arrColumn = array_column($details, 'NGtitle');
-	array_multisort($arrColumn, SORT_ASC, $details);	
+	array_multisort($arrColumn, SORT_ASC, $details);
 	//print_r($details);
 ?>
 <form id="pd-search-form" action="pd-search?search-result" method="POST">
@@ -40,7 +40,7 @@ if(!function_exists('drupal_session_started'))
 		<div class="chevron-select-box">
 		<select  name="Typeofpd" id="Typeofpd" data-placeholder="Type of PD">
 			<option class="type" selected>Any type</option>
-			<?php 
+			<?php
 				$PDtypecode = file_get_contents("sites/all/themes/evolve/json/PDTypes.json");
 				$PDType = json_decode($PDtypecode, true);
 				foreach($PDType  as $key => $value){
@@ -123,7 +123,7 @@ if(!function_exists('drupal_session_started'))
 			<option value="WA-MW" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="WA-MW") { echo "selected";} ?>> WA - MID WEST </option>
 			<option value="WA-PI" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="WA-PI") { echo "selected";} ?>> WA - PILBARRA/KIMBERLEY </option>
 			<option value="WA-SW" <?php if(isset($_POST["Regionalgp"]) && $_POST["Regionalgp"]=="WA-SW") { echo "selected";} ?>> WA - SOUTH WEST   </option>
-																																																
+
 		</select>
 	</div-->
 	<div class="col-xs-12 hide">
@@ -167,16 +167,16 @@ if(!function_exists('drupal_session_started'))
 			<div class="chevron-select-box">
 				<select name="State" id="State" data-placeholder="State">
 					<option class="StateOption" selected disabled></option>
-					<?php 
+					<?php
 					$statecode  = file_get_contents("sites/all/themes/evolve/json/State.json");
 					$State=json_decode($statecode, true);
 					$t = 0;
 					foreach($State  as $key => $value){
 						echo '<option class="StateOption'.$State[$key]['CountryID'].'" value="'.$State[$key]['Abbreviation'].'"';
 						if (isset($_POST["State"])) {
-							if($_POST["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+							if($_POST["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; }
 						} elseif(isset($_GET["State"])) {
-							if($_GET["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; } 
+							if($_GET["State"]==$State[$key]['Abbreviation']){ echo "selected='selected'"; }
 						}
 						echo '> '.$State[$key]['Abbreviation'].' </option>';
 					}
@@ -207,7 +207,7 @@ if(!function_exists('drupal_session_started'))
 			<span class="small-text"><a href="/pd/terms-and-conditions">Terms and conditions</a></span>
 			<span id="reset-search">Reset search filters</span>
 			<!--<span class="small-text"><a href="/sites/default/files/PROFESSIONAL DEVELOPMENT/LD039_Event_registration_form_fillable.pdf" target="_blank">Event registration form</a></span>-->
-		
+
 		</div>
 		<div class="col-xs-12 col-sm-6 col-md-7 searchds align-right">
 			<button class="accent-btn your-details-submit pdSearchButton" type="submit"><i class="fa fa-search"></i> Search now</button>
@@ -218,21 +218,21 @@ if(!function_exists('drupal_session_started'))
 <?php logRecorder(); ?>
  <script type="text/javascript">
 	  jQuery(document).ready(function($) {
-	  if(!(window.location.href.indexOf("?search-result") > -1)) 
-	{  
-		$("#block-block-241").addClass("display-none");
+	  if(!(window.location.href.indexOf("?search-result") > -1))
+	{
+		$(".pdcustom-result-block").addClass("display-none");
 		$("#section-parallax-first").addClass("display-none");
 		}
 		   $(".pdSearchButton").click(function(){
-	   
+
 			if(!(window.location.href.indexOf("?search-result") > -1)){
 			window.location.hash = '?search-result';
 			}
 	   });
-  
+
 	if(window.location.href.indexOf("?page") > -1||window.location.href.indexOf("?pagesize") > -1 || window.location.href.indexOf("?search-result") > -1){
-		$("#block-block-241").removeClass("display-none");
-		$("#block-block-241").addClass("display");
+		$(".pdcustom-result-block").removeClass("display-none");
+		$(".pdcustom-result-block").addClass("display");
 		$("#section-parallax-first").removeClass("display-none");
 		$("#section-parallax-first").addClass("display");
 		//$('html, body').animate({ scrollTop: $('#section-content-top').offset().top  - $('#section-header').height() }, 1000);
@@ -240,7 +240,7 @@ if(!function_exists('drupal_session_started'))
 });
 
    	jQuery(document).ready(function($) {
-		
+
 	});
 
 </script>
