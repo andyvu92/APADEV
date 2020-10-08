@@ -153,6 +153,12 @@ function apa_custom_block_block_info() {
     // Default setting.
     'cache' => DRUPAL_CACHE_PER_ROLE,
   );
+  $blocks['media-block'] = array(
+    // The name that will appear in the block list.
+    'info' => t('apa-custom-blocks - Media'),
+    // Default setting.
+    'cache' => DRUPAL_CACHE_PER_ROLE,
+  );
   return $blocks;
 }
 /**
@@ -286,6 +292,11 @@ function apa_custom_block_block_view($delta = '') {
     case 'cpd-diary-snapshot-block':
       if (user_access('access content')) {
       $block['content'] = render(apa_function_CPD_diary_snapshot_form());
+    }
+    return $block;
+    case 'media-block':
+      if (user_access('access content')) {
+      $block['content'] = render(apa_function_media_form());
     }
     return $block;
   }

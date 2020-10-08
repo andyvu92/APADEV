@@ -444,6 +444,10 @@ function apa_function_homenews_form(){
   //block
   return render_php(__DIR__."/inc/customBlockInc/homenews.inc.php");
 }
+function apa_function_media_form(){
+  //block
+  return render_php(__DIR__."/inc/customBlockInc/media.inc.php");
+}
 /**
  * Find a physios
  *
