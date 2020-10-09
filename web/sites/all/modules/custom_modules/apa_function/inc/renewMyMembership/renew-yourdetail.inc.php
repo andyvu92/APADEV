@@ -367,7 +367,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 		<div class="down1" <?php if(isset($_POST['step1']) || isset($_POST['step2']) || isset($_POST['stepAdd']) || isset($_POST['step2-1'])|| isset($_POST['goI'])|| isset($_POST['goP'])||isset($_POST['step2-2'])||isset($_POST['step2-3'])||isset($_POST['QOrder']) || isset($_POST["MType"]) || isset($_POST['step2-4']) || isset($_POST['Couponcode']))echo 'style="display:none;"'; else { echo 'style="display:block;"';}?>>
 				<div class="row">
 					<div class="col-xs-6 col-md-3">
-						<label for="prefix">Prefix</label>
+						<label for="prefix">Prefix<span class="tipstyle"> *</span></label>
 						<div class="chevron-select-box">
 						<select class="form-control" id="Prefix" name="Prefix">
 							<option value="" <?php if (empty($details['Prefix'])) echo "selected='selected'";?> disabled>Please select</option>
@@ -702,7 +702,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 
 					<div class="col-xs-6 col-md-3">
-					   <label for="">State</label>
+					   <label for="">State<span class="tipstyle"> *</span></label>
 					 <div class="chevron-select-box">
 					   <select class="form-control" id="State1" name="State" autocomplete="address-level1">
 					   <option value=""  <?php if (empty($details['State'])) echo "selected='selected'";?> disabled> State </option>
