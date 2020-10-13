@@ -43,7 +43,7 @@ if(isset($_POST["PostNG"])) {
 				checkShoppingCart($userID=$_SESSION['UserId'], $type="PDNG", $productID=$NG,$coupon = "");
 				createShoppingCart($userID, $productID=$NG, $type = "PDNG", $coupon = "");
 			}
-			
+
 			//PDShoppingCart($userID=$_SESSION['UserId'], $productID=$NG, $meetingID="",$type="PDNG",$Coupon="");
 		}
 	}
@@ -53,14 +53,14 @@ if(isset($_POST["PostNG"])) {
 
 
 // 2.2.19 - GET list National Group
-// Send - 
+// Send -
 // userID
 // Response -National Group product
 $sendData["UserID"] = $_SESSION['UserId'];
 $NGListArray = aptify_get_GetAptifyData("19", $sendData);
 /***************get userinfo from Aptify******************/
 if(isset($_SESSION['Dietary'])) {
-	$Dietary = $_SESSION['Dietary'];	
+	$Dietary = $_SESSION['Dietary'];
 }
 else {$Dietary = array();}
 
@@ -95,9 +95,9 @@ if(sizeof($productList)!=0){
 		$UID = $productDetail['ID'];
 		$Lproduct = array('UID'=>$UID,'ProductID' =>$productID,'MeetingID' =>$meetingID, 'coupon' =>$coupon);
 		array_push($localProducts, $Lproduct);
-			
+
 		// Eddy's code next 3
-		
+
 		$PDtotalArray["PDid"] = $Lproduct['MeetingID'];
 		$SingleProduct = $Lproduct['ProductID'];
 		array_push($PDProductarray, $SingleProduct);
@@ -112,8 +112,8 @@ if(sizeof($productList)!=0){
  *  Get National Group products for PD shopping cart
  *  added by jing hu
  */
-$NGProductsArray = array(); 
-$NGProductsArray = getProduct($userID=$_SESSION['UserId'],$type="PDNG"); 
+$NGProductsArray = array();
+$NGProductsArray = getProduct($userID=$_SESSION['UserId'],$type="PDNG");
 
 if(sizeof($NGProductsArray)!=0) {
 	foreach($NGProductsArray as $singleNG){
@@ -126,7 +126,7 @@ if(sizeof($NGProductsArray)!=0) {
  */
 $MGProductsArray = array();
 
-$MGProductsArray = getProduct($userID=$_SESSION['UserId'],$type="PDMG"); 
+$MGProductsArray = getProduct($userID=$_SESSION['UserId'],$type="PDMG");
 if(sizeof($MGProductsArray)!=0) {
 	foreach($MGProductsArray as $singleMG){
 		array_push($PDProductarray, $singleMG);
@@ -140,7 +140,7 @@ if(sizeof($MGProductsArray)!=0){
 
 //$RequestCart = array('Id' => $PIDArray, "userID" => $UserID, "Coupon" => $CouponArray);
 // 2.2.30 - GET event detail list
-// Send - 
+// Send -
 // ProductIDs, UserID, Coupons
 // Response -
 // Max Number of enrolment, Current people enrolled, PD ID,
@@ -159,7 +159,7 @@ if(sizeof($PDarray)!=0){
 
 //Get calculating the Order Total and Schedule Payments
 // 2.2.47 Get calculating the Order Total and Schedule Payments
-// Send - 
+// Send -
 // userID & Paymentoption & InstallmentFor & InstallmentFrequency & PRFdonation & productID & CampaignCode
 // Response -AdminFee & SubTotal & GST & OrderTotal & InitialPaymentAmount & OccuringPayment & LastPayment
 $postScheduleData['userID'] = $_SESSION["UserId"];
@@ -175,7 +175,7 @@ $price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
 /********End get Order Total and Schedule Payments  from Aptify******/
 /*if(isset($_POST['addCard'])){
 	// 2.2.15 - Add payment method
-	// Send - 
+	// Send -
 	// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
 	// Response -
 	// N/A.
@@ -184,8 +184,8 @@ $price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
 	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
 	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
 	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
-	$out = aptify_get_GetAptifyData("15",$postPaymentData); 
-	
+	$out = aptify_get_GetAptifyData("15",$postPaymentData);
+
 	if($out["result"]=="Failed"){
 	    if($out["Message"]=="Expiry date lenght should be 4."){ echo '<div class="checkMessage">Please enter a valid expiry date before proceeding with your order.</div>';}
 		elseif($out["Message"]=="CCV accepts up to 4 digit."){ echo '<div class="checkMessage">Please enter a valid CVV number before proceeding with your order.</div>';}
@@ -201,27 +201,27 @@ $price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
 	$tempcard['Payment-method'] = $_POST['Cardtype'];
 	$tempcard['Cardno'] = $_POST['Cardnumber'];
 	$tempcard['CardName'] = $_POST['Cardname'];
-	$tempcard['Expiry-date'] = $_POST['Expirydate']; 
+	$tempcard['Expiry-date'] = $_POST['Expirydate'];
 	$tempcard['CCV'] = $_POST['CCV'];
 	$_SESSION['tempcard'] = $tempcard;
 
-	
+
 }	*/
 if(isset($_SESSION["UserId"])){
 	$userid = $_SESSION["UserId"];
 	$test['id'] = $_SESSION["UserId"];
 	$cardsnum = aptify_get_GetAptifyData("12", $test);
-} 
+}
 ?>
 <?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0) || (sizeof($FPListArray)!=0)):?>
 <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9 left-content">
 	<?php if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0) || (sizeof($FPListArray)!=0)):?>
-	
+
 	<div class="heading_wrapper">
 		<span class="dashboard-name cairo" style="color: #333">Summary of cart</span>
 		<div class="countdown_wrapper">Time left to purchase: <input type="text" value="05:00" id="timer" disabled></div>
 	</div>
-	
+
 	<div class="flex-container" id="pd-shopping-cart">
 	<div class="flex-cell flex-flow-row heading-row">
 		<div class="flex-col-5 name_col"><span class="table-heading">Product name</span></div>
@@ -266,8 +266,8 @@ if(isset($_SESSION["UserId"])){
 		}
 		countDown();
 	</script>
-	
-	<?php 
+
+	<?php
 	$Availability = true;
 	if(sizeof($products)!=0){
 		////print_r($products);
@@ -285,7 +285,7 @@ if(isset($_SESSION["UserId"])){
 			$pdArr["UserID"] = $_SESSION["UserId"];
 		}
 		// 2.2.29 - GET event detail
-		// Send - 
+		// Send -
 		// PDID, UserID, Coupon
 		// Response -
 		// PriceTable(list), Max enrolment, Current enrolment, PD_id,
@@ -309,11 +309,11 @@ if(isset($_SESSION["UserId"])){
 			$Availability = false;
 		} else {
 			if($Now > $Cls){
-				$outPutResult = "closed";  
+				$outPutResult = "closed";
 				$available = false;
 				$Availability = false;
 			} elseif($Div == 0){
-				$outPutResult = "full"; 
+				$outPutResult = "full";
 				$available = false;
 				$Availability = false;
 			}
@@ -345,7 +345,7 @@ if(isset($_SESSION["UserId"])){
 			$newj = str_replace('/', '-', $edate[0]);//$edate[0];//
 			$t = strtotime($newt);
 			$j = strtotime($newj);
-		
+
 			echo	"<div class='flex-col-3 pd-spcart-date'><span class='start-date'>".date("d M Y",$t)."</span><span class='end-date'>".date("d M Y",$j)."</span></div>";
 			echo	"<div class='flex-col-2 pd-spcart-location'><span class='mobile-visible'>Location: </span>".$productt['City'].", ".$productt['State']."</div>";
 			// add by jinghu
@@ -366,7 +366,7 @@ if(isset($_SESSION["UserId"])){
 			//}
 			echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
 			if(!$available) echo	"<div class='removedEvent flex-col-12'>".$eventMessage."</div>";
-			echo "</div>";    
+			echo "</div>";
 			$n=$n+1;
 			$i=$i+1;
 			//$price=$price+(int)str_replace('$', '', $productt['Pricelist'][0]['Price']);
@@ -381,8 +381,8 @@ if(isset($_SESSION["UserId"])){
 				foreach($NGProductsArray as $NGProduct){
 					if($NGProduct == $NGArray['ProductID']){
 						echo "<div class='flex-cell flex-flow-row table-cell'>";
-						
-						echo "<div class='flex-col-3 title-col'>".$NGArray['ProductName']."</div>";
+
+						echo "<div class='flex-col-5 title-col'>".$NGArray['ProductName']."</div>";
 						echo	"<div class='flex-col-3 pd-spcart-date'>N/A</div>";
 						echo	"<div class='flex-col-2 pd-spcart-location'><span class='mobile-visible'>Location: </span>N/A</div>";
 						echo "<div class='flex-col-1 pd-spcart-price'>A$".$NGArray['NGprice']."</div>";
@@ -390,20 +390,20 @@ if(isset($_SESSION["UserId"])){
 						//echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
 						echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PDNG&productid='.$NGArray['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
 						echo "</div>";
-					}	  
+					}
 				}
 			}
-			
+
 		}
-	}	
+	}
 	if(sizeof($FPListArray)!=0){
 		foreach( $FPListArray as $MGArray){
-			
-				
-					
+
+
+
 						echo "<div class='flex-cell flex-flow-row table-cell'>";
-						
-						echo "<div class='flex-col-3 title-col'>".$MGArray['FPtitle']."</div>";
+
+						echo "<div class='flex-col-5 title-col'>".$MGArray['FPtitle']."</div>";
 						echo	"<div class='flex-col-3 pd-spcart-date'>N/A</div>";
 						echo	"<div class='flex-col-2 pd-spcart-location'><span class='mobile-visible'>Location: </span>N/A</div>";
 						echo "<div class='flex-col-1 pd-spcart-price'>A$".$MGArray['FPprice']."</div>";
@@ -411,9 +411,9 @@ if(isset($_SESSION["UserId"])){
 						//echo "<div class='flex-col-2 action-col'><a href='jointheapa' target='_self'>delete</a></div>";
 						echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PDMG&productid='.$MGArray['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
 						echo "</div>";
-						  
-				
-			
+
+
+
 		}
 	}
 $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
@@ -423,7 +423,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	<?php   if(sizeof($products)!=0):?>
     <div class="flex-container flex-flow-column" id="termc">
 	<input type="hidden" id="checkTerm" value="1">
-		<div class="flex-cell">	
+		<div class="flex-cell">
 			<span class="small-lead-heading">Terms & conditions</span>
 		</div>
 
@@ -455,18 +455,18 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		<div class="flex-cell flex-flow-column">
 			<?php if(sizeof($Dietary)>0) {
 				foreach($Dietary as $item) {
-					echo '<span class="diet-name">'.$item['Name'].'</span>';} }  
-				else { 
+					echo '<span class="diet-name">'.$item['Name'].'</span>';} }
+				else {
 					echo "<span style='text-transform: uppercase; color: grey; font-size: 1.1em; font-weight: 500;'>None</span>";}
 			?>
 		</div>
-		
+
 		<span class="">Please note that not all APA PD events include catering.</span>
 	</div>
 	<?php endif; ?>
-	<?php endif; ?>	
-	
-	
+	<?php endif; ?>
+
+
 	<div class="col-xs-12 bottom-buttons">
 		<a class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
 		<a class="addCartlink" href="../your-details?Goback=PD"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
@@ -487,8 +487,8 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		</form>
 		<span>&nbsp;</span>
 	<?php endif; ?>
-	
-	<div class="paymentsidecredit"> 
+
+	<div class="paymentsidecredit">
 		<fieldset>
 			<div class="chevron-select-box">
 				<select  id="Paymentcard" name="Paymentcard" >
@@ -511,7 +511,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 
 
 	<div class="paymentsideuse">
-	
+
 	<div class="col-xs-12 none-padding" style="margin: 5px 0;">
 		<input class="styled-checkbox" type="checkbox" id="anothercard">
 		<label for="anothercard"><a class="event10" style="cursor: pointer;">Use another card</a></label>
@@ -524,14 +524,14 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			<div class="col-lg-12">
 				<div class="chevron-select-box">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-					<?php 
+					<?php
 						/*$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 						$PaymentType=json_decode($PaymentTypecode, true);
 						foreach($PaymentType  as $pair => $value){
 							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 							if(isset($_SESSION["tempcard"]) && $_SESSION["tempcard"]['Payment-method'] ==$PaymentType[$pair]['ID']) {echo "selected ";}
 							echo '> '.$PaymentType[$pair]['Name'].' </option>';
-							
+
 						}*/
 					?>
 					</select>
@@ -568,7 +568,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 						<span class="tooltip-img"><img src="/sites/default/files/general-icon/cvn-image.png"></span>
 						<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
 					</div>
-				</div>	
+				</div>
 		</div>
 		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
 			<input class="styled-checkbox" type="hidden" id="addcardtag" name="addcardtag" <?php //if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>>
@@ -581,7 +581,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		<?php $the_form = drupal_get_form('pd_shoppingcart_form',$vars);
 			print drupal_render($the_form);	?>
 	</div>
-	
+
 	</div>
 	</div>
 	<?php endif; ?>
@@ -592,14 +592,14 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			<div class="col-lg-12">
 				<div class="chevron-select-box">
 					<select class="form-control"  name="Cardtype" placeholder="Card type">
-					<?php 
+					<?php
 						/*$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 						$PaymentType=json_decode($PaymentTypecode, true);
 						foreach($PaymentType  as $pair => $value){
 							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 							if(isset($_SESSION["tempcard"]) && $_SESSION["tempcard"]['Payment-method'] ==$PaymentType[$pair]['ID']) {echo "selected ";}
 							echo '> '.$PaymentType[$pair]['Name'].' </option>';
-							
+
 						}*/
 					?>
 					</select>
@@ -660,7 +660,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	        print drupal_render($the_form);?>
     </div>
 	<?php endif; ?>
-	
+
 	<?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0) || (sizeof($FPListArray)!=0)):?>
 		<div class="row">
 			<div class="col-xs-12"><span class="sidebardis sidebar_heading">PRF donation</span></div>
@@ -691,7 +691,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			</div>
 		</div>
 	<?php endif; ?>
-     
+
 	<div class="row ordersummary">
 		<div class="col-xs-12">
 			<span class="sidebardis sidebar_heading">Your order</span>
@@ -716,21 +716,21 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			    <div class="flex-col-6">PRF</div>
 				<div class="flex-col-6">$<span id="prf-donation">0</span></div>
             </div>
-            
+
 			<div class="flex-cell">
                 <div class="flex-col-6"><b>Total</b> (Inc.GST)</div>
 				<input type="hidden" id="totalhidden" value="<?php echo $scheduleDetails['OrderTotal'];?>"/>
                 <div class="flex-col-6"><b>$<span id="Amount"></span></b></div>
 			</div>
 		</div>
-		         
+
 		<form action="" method="POST" id="">
 			<!--<input type="hidden" name="POSTPRF" id="POSTPRF" value="">-->
 			<input type="hidden" name="TandC" id="TandC" value="0">
 			<!--<input type="hidden" name="CardUsed" id="CardUsed" value="">-->
 			<input type="hidden" name="CouponCode"  value="<?php echo $couponCode; ?>">
 			<?php
-			if(sizeof($products)!=0){	
+			if(sizeof($products)!=0){
 				$counterTotal = count($ListProductID);
 				$counters = 0;
 				foreach($ListProductID as $PIDs) {
@@ -771,16 +771,16 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	</div>
 
 <?php endif; ?>
-<?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0 && sizeof($FPListArray)==0) : ?>   <div  class="col-xs-12 no-item-title" style="text-align: center"><h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3></div>     
+<?php if(sizeof($products)==0 && sizeof($NGProductsArray)==0 && sizeof($FPListArray)==0) : ?>   <div  class="col-xs-12 no-item-title" style="text-align: center"><h3 class="light-lead-heading align-center">There are currently no items in your cart.</h3></div>
 	<div class="col-xs-12  no-item-button">
 		<a class="addCartlink" href="pd-search"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Continue shopping</button></a>
 		<a class="addCartlink" href="../your-details?Goback=PD"><button class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Update your details</button></a>
 	</div>
 <?php endif;?>
-<?php 
+<?php
 		$block = block_load('block', '309');
 		$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-		$output = drupal_render($get);        
+		$output = drupal_render($get);
 		print $output;
 ?>
 
@@ -794,7 +794,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	</div>
 
 	<div class="modal-body">
-	<span class="note-text" style="display: block">Please scroll down to accept the full APA terms and conditions</span>	
+	<span class="note-text" style="display: block">Please scroll down to accept the full APA terms and conditions</span>
 	<h4>Registration:</h4>
 <p>Online registration is the simplest way to secure a place at an APA course or event.  If unable to register online for any reason, a <a href="/sites/default/files/PROFESSIONAL DEVELOPMENT/LD039_Event_registration_form_fillable.pdf">manual registration form</a> may be completed and returned to the APA Branch office in the state that the event is being held (<a href="/contact-us">see state office details</a>).</p>
 <br />
@@ -875,7 +875,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 <div class="overlay">
 	<section class="loaders">
 		<span class="loader loader-quart">
-		</span>   
+		</span>
 	</section>
 </div>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -890,17 +890,17 @@ jQuery(document).ready(function(){
     //  _renderItem: function( ul, item ) {
     //    var li = $( "<li>" ),
     //      wrapper = $( "<div>", { text: item.label } );
- 
+
     //    if ( item.disabled ) {
     //      li.addClass( "ui-state-disabled" );
     //    }
- 
+
     //    $( "<span>", {
     //      style: item.element.attr( "data-style" ),
     //      "class": "ui-icon " + item.element.attr( "data-class" )
     //    })
     //      .appendTo( wrapper );
- 
+
      //   return li.append( wrapper ).appendTo( ul );
     //  }
     //});
@@ -912,7 +912,7 @@ jQuery(document).ready(function(){
 } );
 });
 </script>
- <?php else : 
+ <?php else :
 	// when user is not logged in
 	?>
 		<div class="flex-container" id="non-member">
@@ -924,12 +924,12 @@ jQuery(document).ready(function(){
 				<a href="/membership-question" class="join">Join now</a>
 			</div>
 
-			<?php 
+			<?php
 					$block = block_load('block', '309');
 					$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-					$output = drupal_render($get);        
+					$output = drupal_render($get);
 					print $output;
 			?>
 
 		</div>
-<?php endif; ?> 
+<?php endif; ?>
