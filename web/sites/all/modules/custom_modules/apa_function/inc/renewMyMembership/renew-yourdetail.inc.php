@@ -1562,7 +1562,7 @@ if (!empty($details['Regionalgp'])) { $_SESSION['Regional-group'] = $details['Re
 					</div>
 				<?php endforeach;?>
 				<?php if(sizeof($details['PersonEducation'])==0):?>
-				<div class="col-xs-12 col-sm-12 col-md-12 note"><p>Please add your qualification(s) or click Next to continue</p></div>
+				<div class="col-xs-12 col-sm-12 col-md-12 note"><p>Please add your physiotherapy qualification(s) or click next to continue</p></div>
 					<!--<div id="additional0">
 						<input type="hidden" name="ID0" value="-1">
 					   <div class="row">

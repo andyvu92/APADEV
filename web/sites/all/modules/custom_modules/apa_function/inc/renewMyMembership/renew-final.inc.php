@@ -669,8 +669,10 @@ if(sizeof($fpProdcutArray)!=0){
 				<div class="col-xs-12 tooltip-container top">
 					<span class="tooltip-activate">What is this?</span>
 					<div class="tooltip-content">
-						The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting, encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims to boost the careers of new researchers through seeding grants, support research in key areas through tagged grants and encourage academic excellence through university prizes. Give a little, get a lot.
-					<br>
+						<a href="/research/PRF/translation">The Physiotherapy Research Foundation (PRF) supports you through the provision of research translation material</a> and undertaking strategy led research projects that aim to strengthen advocacy efforts by delivering data-driven insights for the effectiveness of physiotherapy treatments.  Please help us continue these plus other important activities.
+						<br>	
+						Donations of $2 or more are tax deductible.
+						<br>
 						<a href="/reserach/purpose-prf">Tell me more</a>
 					</div>
 				</div>

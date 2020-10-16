@@ -318,7 +318,6 @@ $PRFPrice = 0;
     <?php endif;?>
     <div class="down6"
         <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']) ||isset($_POST['Couponcode']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
-
         <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 main_content">
             <div class="flex-container join-apa-final flex-table">
                 <div class="flex-cell flex-flow-row table-header">
@@ -559,13 +558,11 @@ $PRFPrice = 0;
             <div class="col-xs-12"><span class="section_title">PRF donation:</div>
             <div class="col-xs-12 tooltip-container top">
                 <span class="tooltip-activate">What is this?</span>
-                <div class="tooltip-content">
-                    The Physiotherapy Research Foundation (PRF) supports the physiotherapy profession by promoting,
-                    encouraging and supporting research that advances physiotherapy knowledge and practice. The PRF aims
-                    to boost the careers of new researchers through seeding grants, support research in key areas
-                    through tagged grants and encourage academic excellence through university prizes. Give a little,
-                    get a lot.
-                    <br>
+                    <div class="tooltip-content">
+                        <a href="/research/PRF/translation">The Physiotherapy Research Foundation (PRF) supports you through the provision of research translation material</a> and undertaking strategy led research projects that aim to strengthen advocacy efforts by delivering data-driven insights for the effectiveness of physiotherapy treatments.  Please help us continue these plus other important activities.
+						<br>	
+						Donations of $2 or more are tax deductible.
+						<br>
                     <a href="/reserach/purpose-prf">Tell me more</a>
                 </div>
             </div>

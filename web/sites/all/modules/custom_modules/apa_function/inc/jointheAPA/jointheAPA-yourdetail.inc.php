@@ -2149,7 +2149,7 @@ if (isset($_SESSION['UserId'])):
                 endforeach;
             ?>
             <?php if(sizeof($details['PersonEducation'])==0):?>
-                <div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please add your qualifications or click next to continue</p></div>
+                <div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please add your physiotherapy qualification or click next to continue</p></div>
             <?php endif; ?>
 
             </div>
@@ -2979,7 +2979,7 @@ if(isset($_POST['MT'])){
     echo $addtionalNumber;
 ?>"/>
 <input type="hidden" id="educationMaxNumber" name="educationMaxNumber" value="0"/>
-				<div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please add your qualifications or click next to continue</p></div>
+				<div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please add your physiotherapy qualification or click next to continue</p></div>
                 <div class="col-xs-12 col-sm-12 col-md-12 instruction"><p>Please note: all education undertaken with the APA or APC will already be recorded on your profile.</p></div>
                 <div id="additional-qualifications-block">
 					<!--<div id="additional0">

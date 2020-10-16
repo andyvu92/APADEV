@@ -280,7 +280,7 @@ $background = getBackgroundImage($userID);
 							<span class="icon dashboard-icon"></span>
 							<span class="description">Go to your dashboard to review your membership information</span>
 						</a>
-						<a href="/membership/memberbenefits" class="cta-item">
+						<a href="/membership/member-benefits" class="cta-item">
 							<span class="icon benefit-icon"></span>
 							<span class="description">Take advantage of the great range of APA member benefits</span>
 						</a>

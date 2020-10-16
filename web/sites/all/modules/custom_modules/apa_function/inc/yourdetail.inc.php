@@ -1585,7 +1585,7 @@ apa_function_dashboardLeftNavigation_form();
 
 				<?php endforeach;?>
 				<?php if(sizeof($details['PersonEducation'])==0):?>
-					<div class="col-xs-12 col-sm-12 col-md-12" id="educationNotice"><p>Please add your qualifications or click submit to continue</p></div>
+					<div class="col-xs-12 col-sm-12 col-md-12" id="educationNotice"><p>Please add your physiotherapy qualification or click next to continue</p></div>
 				<?php endif; ?>
 				</div>
 
