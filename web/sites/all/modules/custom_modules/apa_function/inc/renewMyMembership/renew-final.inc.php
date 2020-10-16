@@ -549,7 +549,7 @@ if(sizeof($fpProdcutArray)!=0){
 						<a style="margin: 30px 0 0 0;" class="simple-btn" data-target="#schedulePOPUp" data-toggle="modal">View the full list of scheduled payments</a>
 					</div>
           <div class="flex-container couponForm">
-                  <div><span class="tipstyle">* Please note: discount code only applies to the full payment</span></div>
+                  <div><span class="tipstyle">Discount codes can only be entered when the ‘pay in full’ payment option is selected and are not valid when paying by monthly instalments.</span></div>
                   <div><input type="text" name="EnterCouponcode" placeholder="Enter discount code"></div>
                   <span class="dashboard-button">Apply</span>
 
