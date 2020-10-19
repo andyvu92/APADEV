@@ -187,10 +187,9 @@ if(count($PostArray) == 0) { // GET data
 		<?php apa_function_customizeBackgroundImage_form(); ?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
-				<p><span>Choose below which APA communications you would like to be excluded from. Simply tick the
-communications you do <strong>not</strong> want to receive.
-</span><br><span>Note: Essential APA Communications are mandatory and cannot be opted out of. These will be delivered
-by the most relevant channel.</span></p>
+				<p><span>Choose below which APA communications you would like to be <strong>excluded</strong> from. Simply tick the
+communications you <strong>do not</strong> want to receive.
+</span><br><span>Note: Some communications we send are considered critically important and therefore mandatory; these cannot be opted out of.</span></p>
 				<form action="/subscriptions" method="POST">
 					<input name="validator" tyle="hidden" value="0" style="display: none;" />
 					<div>
@@ -267,7 +266,7 @@ by the most relevant channel.</span></p>
 								if($NoSub) {
 									echo '<span class="extra-description'.$counter.'">'.$description;
 									if($Subs["Subscription"]=="National Group Communications") { echo "<br>";
-										echo 'Find out more (<a href="https://australian.physio/membership/national-groups">https://australian.physio/membership/national-groups</a>)';
+										echo 'For more information please visit the <a href="https://australian.physio">APA website.</a>';
 									}
 									echo '</span>';
 								}

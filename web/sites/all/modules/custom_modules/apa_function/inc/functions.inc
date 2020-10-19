@@ -829,25 +829,27 @@ function checkRenew($Paidthrough, $tag){
 function getDescription($str){
   switch($str){
     case "Employment opportunities":
-      return "Updates on physiotherapy positions available across Australian and internationally";
-    case "News and articles":
-      return "Keep up-to-date with the profession with the latest news and articles covering all areas of physiotherapy";
+      return "Updates on physiotherapy positions available across Australia and internationally";
+    case "News and publications":
+      return "Keep up-to-date with the latest professional news covering all areas of physiotherapy.";
     case "Research":
       return "Physiotherapy research, research updates and research participation and opportunities";
     case "National Group Communications":
       return "Annual subscriptions to 20 special-interest National Groups can be purchased for a small fee and include professional development discounts, relevant updates and access to a community of like-minded peers.";
     case "Professional Development":
-      return "World-leading professional development opportunities offered in a variaty of online and offline styles at a discounted rate to members. PD communications will be tialored to your location and interests";
+      return "World-class professional development courses and events across a range of in-person and online platforms PD communications will be tailored to your location and interests.";
     case "Conferences and Events":
       return "Updates on upcoming conferences and events";
-    case "Member updates":
-      return "Important updates on the physiotherapy profession, advocacy, the APA and more";
+    case "Important Member Information":
+      return "Information of professional or organisational significance that you should know about.";
     case "Essential Communications":
       return "Essential communications will be delivered via the most relevant channel. These communications are mandatory and cannot be opted-out of.";
     case "Third party communications":
       return "Third party communications are delivered via the APA and APA channels. Your information will not be provided to any third parties";
     case "SMS Opt Out":
-      return "SMS communications are used sparingly and at no cost to members.";
+      return "SMS communications are used for critical membership information only.";
+    case "Member Surveys Opt Out":
+      return "Member Surveys are an important tool to determine the needs of members and the needs of the profession. These surveys may be conducted by external parties at the direction of the APA.";
   }
 }
 // sort array by specific key
