@@ -33,7 +33,8 @@ $background = getBackgroundImage($userID);
 			 * May need to update this again for 2019 or
 			 * Fixed the join issue with Aptify later
 			 */
-			if(date("Y") == date("2020")) {
+			/*
+			if(date("Y") == date("2021")) {
 				echo '<div class="messages">
 					<div class="alert alert-danger alert-dismissable">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
@@ -41,7 +42,7 @@ $background = getBackgroundImage($userID);
 							<span>If you are a new or lapsed member, the fees currently displayed are pro-rata and valid to 31 December 2020. If you wish to purchase 2021 membership, please call us on 1300 306 622 or email <a href="mailto:info@australian.physio">info@australian.physio</a>.</span><br />
 						</div>
 				</div>';
-			}
+			}*/
 		?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<div class="col-xs-12"><span class="dashboard-name cairo">Become a member</span></div>
