@@ -290,7 +290,6 @@ function getDropdown(){
 		$EmploymentSectors[] = array('ID'=>$ID, 'Name'=>$Name);
     }
 	$response= $EmploymentSectors;
-	var_dump($response);
 	$fp = fopen(__DIR__ . '/../json/CurrentEmployment.json', 'w');
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);

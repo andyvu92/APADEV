@@ -47,14 +47,12 @@ unset($_SESSION['timeoutPopUp']);
 		foreach ($Quatation["results"] as $quatationOrderArray){
 			$quatationOrderID =  $quatationOrderArray["ID"];
 		}
-
-
-// after web service 2.2.45 Get renewal quatation orderID from Aptify;
-// 2.2.44 Get Order details this web service is to use renew membership to get the order detail for next year
-// Send -
-// Invoice_ID
-// Response -Order details
-	$orderDetails = aptify_get_GetAptifyData("44", $quatationOrderID);
+		// after web service 2.2.45 Get renewal quatation orderID from Aptify;
+		// 2.2.44 Get Order details this web service is to use renew membership to get the order detail for next year
+		// Send - 
+		// Invoice_ID
+		// Response -Order details
+		$orderDetails = aptify_get_GetAptifyData("44", $quatationOrderID); 
 		// Put the unexpected scenario here to avoid getting the empty data or sever response is empty.
 		if(empty($orderDetails)) {if(isset($_SESSION['orderDetailsTag'])) { $_SESSION['orderDetailsTag']++; } else{$_SESSION['orderDetailsTag']=1;}}
 			if(empty($orderDetails)){
@@ -72,8 +70,7 @@ unset($_SESSION['timeoutPopUp']);
 		//End unexpected scenario
 	    if(!empty($orderDetails)){ $tag = true; } else{ $tag = true;}
 	}
-
-else{$orderDetails = array(); $tag = true; }
+	else{$orderDetails = array(); $tag = false; }
     //$paythrough = date_create_from_format('m/d/Y', $_SESSION['payThroughDate']);
     //echo $_SESSION['payThroughDate'];
 	//echo $paythrough;
