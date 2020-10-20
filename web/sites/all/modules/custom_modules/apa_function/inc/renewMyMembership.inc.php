@@ -68,7 +68,7 @@ unset($_SESSION['timeoutPopUp']);
 
 		}
 		//End unexpected scenario
-	    if(!empty($orderDetails)){ $tag = true; } else{ $tag = true;}
+	    if(!empty($orderDetails)){ $tag = true; } else{ $tag = false;}
 	}
 	else{$orderDetails = array(); $tag = false; }
     //$paythrough = date_create_from_format('m/d/Y', $_SESSION['payThroughDate']);

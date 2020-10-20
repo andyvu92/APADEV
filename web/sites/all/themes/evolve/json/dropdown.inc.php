@@ -55,7 +55,7 @@ function getMemberTypePrice(){
     // Send - 
     // userID & product list
 	// Response -Membership prodcut price
-	$API = "https://aptifywebtest.australian.physio/AptifyServicesAPI/services/MembershipProducts/-1";
+	$API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/-1";
 	$tt = curlRequesttttt($API, "JSON");
 	//echo $tt;
 	$MemberType = json_clean_decode($tt, true);
@@ -80,7 +80,7 @@ function getMemberTypePrice(){
 }
 
 function getDropdown(){
-	$API = 'https://aptifywebtest.australian.physio/AptifyServicesAPI/services/GetOptionValues';
+	$API = 'https://aptifyweb.australian.physio/AptifyServicesAPI/services/GetOptionValues';
 	$resultt = curlRequesttttt($API, "Get");
 	$result = json_clean_decode($resultt, true);
 
