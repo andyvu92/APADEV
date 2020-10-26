@@ -184,6 +184,8 @@ if(count($PostArray) == 0) { // GET data
 			<div class="col-xs-12"><span class="dashboard-name cairo">Communications</span></div>
 			<div class="col-xs-12 col-sm-6" style="display: none"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
+		<p>We have currently undergone maintenance mode for updated communication setting. Thank you for your patience.</p>
+		<?php /*
 		<?php apa_function_customizeBackgroundImage_form(); ?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
@@ -282,6 +284,7 @@ communications you <strong>do not</strong> want to receive.
 			</form>
 		</div>
 	</div>
+	*/ ?>
 </div>
 <?php logRecorder(); ?>
 </div>
