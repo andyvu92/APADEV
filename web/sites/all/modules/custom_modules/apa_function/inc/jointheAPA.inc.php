@@ -67,6 +67,11 @@ $background = getBackgroundImage($userID);
 			</ul>
 
 		<div id="insuranceBlock"></div>
+		<?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4'])): ?>
+		<div class="col-xs-12 none-margin">
+			<p>Please apply any discount codes prior to entering or changing your payment information.</p>
+		</div>
+		<?php endif; ?>
 		<div class="col-xs-12 none-margin">
 			<label class="note-text"><span class="tipstyle">*</span>Required fields</label>
 		</div>
