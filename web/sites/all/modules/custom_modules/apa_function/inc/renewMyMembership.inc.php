@@ -3,6 +3,8 @@ if(!function_exists('drupal_session_started'))
 {
   die("Unauthorized Access");
 }
+$renewStatus = variable_get('renew_active_status', RENEW_ACTIVE_STATUS);
+$renewYear = variable_get('renew_year', RENEW_YEAR);
 unset($_SESSION['timeoutPopUp']);
 ?>
 <?php if(isset($_SESSION["UserId"])): ?>
@@ -545,15 +547,17 @@ You have the right to access the personal information about yourself held by the
 		<!-- <div class="item" style="text-align: center; font-weight: 700;"><span class="item-description" style="">Due to high traffic some members may receive an error while renewing – we are investigating the cause and apologise for any inconvenience.</span></div> -->
 
 		<div class="grid-block apa-member-grid">
-     <?php /*
+		<?php if($renewStatus): 
+				$toYear = intval($renewYear);
+			?>
 			<div class="item">
 				<div class="item-body current-member">
-					<span class="item-title">2019 APA member</span>
-					<span class="item-description">If you were an APA member in 2019, please renew your membership for 2020 below.</span>
+					<span class="item-title"><?php echo $toYear-1; ?> APA member</span>
+					<span class="item-description">If you were an APA member in <?php echo $toYear-1; ?>, please renew your membership for <?php echo $toYear; ?> below.</span>
 					<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
 				</div>
 			</div>
-    */?>
+		<?php endif; ?>
 			<div class="item">
 				<div class="item-body previous-member">
 					<span class="item-title">Existing account</span>
@@ -598,15 +602,17 @@ You have the right to access the personal information about yourself held by the
 		<!-- <div class="item" style="text-align: center; font-weight: 700;"><span class="item-description" style="">Due to high traffic some members may receive an error while renewing – we are investigating the cause and apologise for any inconvenience.</span></div> -->
 
 		<div class="grid-block apa-member-grid">
-			<?php /*
-			<div class="item">
-				<div class="item-body current-member">
-					<span class="item-title">2019 APA member</span>
-					<span class="item-description">If you were an APA member in 2019, please renew your membership for 2020 below.</span>
-					<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#" id="renewItem">Renew</a>
+			<?php if($renewStatus): 
+				$toYear = intval($renewYear);
+				?>
+				<div class="item">
+					<div class="item-body current-member">
+						<span class="item-title"><?php echo $toYear-1; ?> APA member</span>
+						<span class="item-description">If you were an APA member in <?php echo $toYear-1; ?>, please renew your membership for <?php echo $toYear; ?> below.</span>
+						<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
+					</div>
 				</div>
-			</div>
-			*/ ?>
+			<?php endif; ?>
 			<div class="item">
 				<div class="item-body previous-member">
 					<span class="item-title">Existing account</span>

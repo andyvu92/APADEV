@@ -1,6 +1,7 @@
 <?php 
 $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
 $url= $link.$_SERVER['REQUEST_URI']; 
+$renewStatus = variable_get('renew_active_status', RENEW_ACTIVE_STATUS);
 // 2.2.11 - UPDATE Picture
 // Send - 
 // UserID, Image
@@ -140,10 +141,12 @@ if(isset($_SESSION["UserId"])) {
 					
 				?>
 				<?php  if($details['MemberTypeID']!="1" && checkRenew($_SESSION['payThroughDate'], $tag)): $_SESSION["renewTag"]=1;?>
+				<?php if($renewStatus): ?>
 				<a href="/renewmymembership">
 					<span class="renew_icon"></span>
 					Renew
 				</a>
+				<?php endif;?>
 				<?php elseif($details['MemberTypeID']=="1"):?>
 				<a href="/membership-question">
 					<span class="renew_icon"></span>

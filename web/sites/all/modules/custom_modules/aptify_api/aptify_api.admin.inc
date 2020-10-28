@@ -9,6 +9,8 @@ define('APTIFY_API_BASE_URL_DEFAULT', 'https://aptifyweb.australian.physio/Aptif
 define('APTIFY_API_OOPS_DEFAULT', 'Communication error, Please contact site administrator');
 define('APTIFY_API_INVALID_TOKEN_DEFAULT', 'Invalid Token Please contact administrator.');
 define('APTIFY_SERVER_MAINTENANCE',0);
+define('RENEW_ACTIVE_STATUS',0);
+define('RENEW_YEAR',2021);
 define('APTIFY_SERVER_MAINTENANCE_OOPS','We are currently experiencing an issue that may prevent members from logging into the APA website and accessing member-only content, including PD. We are working to resolve this issue as soon as possible. Thank you for your patience.');
 /**
  * Admin settings form.
@@ -43,6 +45,16 @@ function aptify_api_admin_settings() {
     '#type' => 'checkbox',
     '#title' => t('Debug mode'),
     '#default_value' => variable_get('aptify_api_debug', 0),
+  );
+  $form['aptify_api']['renew_active_status'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Renew active status'),
+    '#default_value' => variable_get('renew_active_status', RENEW_ACTIVE_STATUS),
+  );
+  $form['aptify_api']['renew_year'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Renew year (renew to)'),
+    '#default_value' => variable_get('renew_year', RENEW_YEAR),
   );
   $form['aptify_api']['aptify_server_maintenance'] = array(
     '#type' => 'checkbox',
