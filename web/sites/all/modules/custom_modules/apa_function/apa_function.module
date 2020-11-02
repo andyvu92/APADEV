@@ -875,22 +875,24 @@ function place_pd_shopping_cart($form, &$form_state){
             drupal_goto('/pd/completed-purchase',array('query' => array('status' => '1')));
 
         }
-    else{
-        //this is handle record error log
 
-        if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
-        $addMemberLog["orderID"] = "0";
-        $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
-        $addMemberLog["createDate"] = date('Y-m-d');
-        $addMemberLog["type"] =  "PD";
-        $addMemberLog["logError"] = 1;
-        add_Member_Log($addMemberLog);
-        drupal_goto('/pd/completed-purchase',array('query' => array('status' => '0')));
 
-    }
-    logRecorder();
     //add drupal form redirct function
-    }
+  }
+  else{
+    //this is handle record error log
+
+    if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
+    $addMemberLog["orderID"] = "0";
+    $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
+    $addMemberLog["createDate"] = date('Y-m-d');
+    $addMemberLog["type"] =  "PD";
+    $addMemberLog["logError"] = 1;
+    add_Member_Log($addMemberLog);
+    drupal_goto('/pd/completed-purchase',array('query' => array('status' => '0')));
+
+}
+  logRecorder();
 }
 //create add payment card form
 function apa_create_payment_card_form($form, &$form_state){
