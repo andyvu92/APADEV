@@ -807,16 +807,21 @@ function getProductList($userID){
 	return $arrayReturn;
 } 
 function checkRenew($Paidthrough, $tag){
-	$currentDate = strtotime(date('d-m-Y'));
-	if(strtotime(date("d-m-Y",strtotime('-3 month'))) <= strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate']))) && strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate']))) <= strtotime(date("d-m-Y",strtotime('+2 month'))))  {
-		if($tag){
-			return true;
+	$renewStatus = variable_get('renew_active_status', RENEW_ACTIVE_STATUS);
+	if($renewStatus) {
+		$currentDate = strtotime(date('d-m-Y'));
+		if(strtotime(date("d-m-Y",strtotime('-3 month'))) <= strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate']))) && strtotime(date("d-m-Y",strtotime($_SESSION['payThroughDate']))) <= strtotime(date("d-m-Y",strtotime('+2 month'))))  {
+			if($tag){
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
-		else {
+		else{
 			return false;
 		}
-	}
-	else{
+	} else {
 		return false;
 	}
 }
