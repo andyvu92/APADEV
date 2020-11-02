@@ -2731,7 +2731,7 @@ if(isset($_POST['MT'])){
 
                 <div class="row">
                     <div class="col-xs-6 col-md-6">
-                        <label for="">Member Category1<span class="tipstyle"> *</span></label>
+                        <label for="">Member Category<span class="tipstyle"> *</span></label>
                         <div class="chevron-select-box">
                         <select class="form-control" id="MemberType" name="MemberType">
 							<option value="" <?php if (!isset($_SESSION["MembershipProductID"])) echo "selected='selected'";?> disabled>Member Category</option>
