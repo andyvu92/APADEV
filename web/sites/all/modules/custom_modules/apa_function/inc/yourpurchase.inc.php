@@ -98,7 +98,7 @@ apa_function_dashboardLeftNavigation_form();
 															$priceStart = $priceStart - doubleval($ForSubs['ProductPrice']);
 														}
 													}
-													echo "<div class='flex-col-3'>$".number_format($priceStart,2)." (pro-rata)</div>";
+													echo "<div class='flex-col-3'>$".number_format($priceStart,2)."</div>";
 												} else {
 													echo "<div class='flex-col-3'>$".number_format($orderDetails['ProductPrice'],2)."</div>";
 												}
@@ -188,7 +188,7 @@ apa_function_dashboardLeftNavigation_form();
 															$priceStart = $priceStart - doubleval($ForSubs['ProductPrice']);
 														}
 													}
-													echo "<div class='flex-col-3'>$".number_format($priceStart,2)." (pro-rata)</div>";
+													echo "<div class='flex-col-3'>$".number_format($priceStart,2)."</div>";
 												} else {
 													echo "<div class='flex-col-3'>$".number_format($orderDetails['ProductPrice'],2)."</div>";
 												}
