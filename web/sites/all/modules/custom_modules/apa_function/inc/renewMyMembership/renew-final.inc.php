@@ -673,7 +673,7 @@ if(sizeof($fpProdcutArray)!=0){
 						<br>	
 						Donations of $2 or more are tax deductible.
 						<br>
-						<a href="/reserach/purpose-prf">Tell me more</a>
+						<a href="/research/purpose-prf">Tell me more</a>
 					</div>
 				</div>
 			<div class="col-xs-12">A small proportion of all membership fees directly support physiotherapy research. We also appreciate member donations to further the important work of the Physiotherapy Research Foundation.</div>
