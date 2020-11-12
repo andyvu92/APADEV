@@ -186,8 +186,8 @@ $background = getBackgroundImage($userID);
 						<h3 class="lead-heading">We're glad to welcome you back.</h3>
 					</div>
 					<div class="flex-cell body-text">
-						<span>A copy of your purchase receipt and membership certification will be sent to your inbox.</span>
-						<span class="note_box">Your Business Entity is not covered by your APA Insurance Policy. Please <a href="https://apa.bmsgroup.com?utm_source=apa&utm_medium=website&utm_campaign=renewal" target="_blank">click here</a> to proceed to BMS’s microsite to take up Business Entity Insurance. BMS will gather additional information to provide you a quote.<br><br>
+						<span>A copy of your purchase receipt, membership certificate and evidence of insurance  (if applicable) will be sent to your inbox in the next 24 hours.</span>
+						<span class="note_box">Please note: Business Entity Insurance is not covered by the APA’s Insurance Policy. If you have purchased an APA membership category with insurance, this will meet AHPRA’s registration standards for individual professional indemnity insurance, in addition to providing you with some excellent extras. If you need Business Entity cover please <a href="https://apa.bmsgroup.com/?utm_source=apa&utm_medium=website&utm_campaign=renewal" target="_blank">proceed to BMS’s microsite</a> to take up Business Entity Insurance. BMS will gather additional information to provide you a quote. If you are a physiotherapy only practice with five or fewer physiotherapists employed there is no additional premium payable under the policy you hold through your membership however, you still need to apply for cover to obtain a certificate with your business name insured.<br><br>
 							Business Entity Insurance provides cover for your Business Name, and is separate to your individual Professional Indemnity Insurance. For more information, <a href="https://australian.physio/apa-member-insurance-program">click here.</a></span>
 						<span>In the meantime, you might like to:</span>
 					</div>
