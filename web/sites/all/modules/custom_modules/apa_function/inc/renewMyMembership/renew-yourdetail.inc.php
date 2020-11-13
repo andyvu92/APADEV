@@ -21,7 +21,7 @@ if(!function_exists('drupal_session_started'))
 	}
 	//Put filter condition to display member type
 $filterMemberProduct = array("10007","10008","10009","9997");
-$filterMemberProductsRenew = array("9965","9962","9963","9998","10000","10001","10002");
+$filterMemberProductsRenew = array("9962","9963","9999","9998","10000","10001","10002","10003");
 // 2.2.21 - Get Fellowship product
 	// Send -
 	// ProductID
