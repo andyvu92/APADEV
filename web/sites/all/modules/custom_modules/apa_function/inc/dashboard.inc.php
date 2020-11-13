@@ -293,6 +293,7 @@ apa_function_dashboardLeftNavigation_form();
 				</table>
 				
 				<div class="col-xs-12 none-padding" style="font-size: 1.2em"><a href="/changepassword"><strong style="text-decoration: underline;">Change your password</strong></a></div>
+				<div class="col-xs-12 none-padding" style="font-size: 1.2em;margin-top: 13px;"><a href="/with-you-all-the-way"><strong style="text-decoration: underline; color: #920075;">2021 membership - important information</strong></a></div>
 				<!--div class="col-xs-12 none-padding">
 					<a href class="black-underline-link" data-toggle="modal" data-target="#YInkFroamame">
 						<span>Membership certificate</span></a>
