@@ -538,8 +538,8 @@ You have the right to access the personal information about yourself held by the
 	//when the renewTag session is not existed
 ?>
 	<div class="full-width banner-img">
-			<img src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_1500X500_2020.jpg" alt="APA plus you, together we can">
-			<img class="mobile" src="/sites/default/files/DASHBOARD/renew-membership/MEMBERSHIP_570X366_2020.jpg" alt="APA plus you, together we can">
+			<img src="/sites/default/files/CAMPAIGNS/APA_MEMB_RENEW_1500x500-min.jpg" alt="APA plus you, with you all the way">
+			<img class="mobile" src="/sites/default/files/CAMPAIGNS/APA_MEMB_RENEW_1500x500-min.jpg" alt="APA plus you, with you all the way">
 		</div>
 
 		<span class="space-50">&nbsp;</span>
