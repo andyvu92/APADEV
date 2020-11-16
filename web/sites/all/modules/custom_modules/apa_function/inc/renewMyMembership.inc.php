@@ -215,7 +215,7 @@ $background = getBackgroundImage($userID);
 			</div>
 			<?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")||isset($_POST['QOrder']) || isset($_POST['stepAdd']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4'])): ?>
 			<div class="col-xs-12 none-margin">
-				<p>Please apply any discount codes prior to entering or changing your payment information.</p>
+				<p><span style="color: #920075;"><strong>Please apply any discount code before entering or changing your credit card details</strong></span></p>
 			</div>
 			<?php endif; ?>
 			<?php
@@ -558,7 +558,11 @@ You have the right to access the personal information about yourself held by the
 				<div class="item-body current-member">
 					<span class="item-title"><?php echo $toYear-1; ?> APA member</span>
 					<span class="item-description">If you were an APA member in <?php echo $toYear-1; ?>, please renew your membership for <?php echo $toYear; ?> below.</span>
-					<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
+					<?php if(isset($_SESSION["UserId"])): ?>
+						<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
+					<?php else: ?>
+						<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#">Login</a>
+					<?php endif; ?>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -613,7 +617,11 @@ You have the right to access the personal information about yourself held by the
 					<div class="item-body current-member">
 						<span class="item-title"><?php echo $toYear-1; ?> APA member</span>
 						<span class="item-description">If you were an APA member in <?php echo $toYear-1; ?>, please renew your membership for <?php echo $toYear; ?> below.</span>
-						<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
+						<?php if(isset($_SESSION["UserId"])): ?>
+							<a href="javascript:document.getElementById('apa-renew-landingpage-form').submit();" class="item-action">Renew</a>
+						<?php else: ?>
+							<a data-target="#loginAT" data-toggle="modal" class="item-action" href="#">Login</a>
+						<?php endif; ?>
 					</div>
 				</div>
 			<?php endif; ?>
