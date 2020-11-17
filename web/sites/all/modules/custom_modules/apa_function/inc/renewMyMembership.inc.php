@@ -113,7 +113,7 @@ $background = getBackgroundImage($userID);
 	<?php
 	$ngQuatation = array();
 	$SubsCount = 0;
-	if(!isset($_SESSION['QuatationTag']) && !isset($_POST["step2-1"]) ){
+	if(!isset($_SESSION['QuatationTag']) && !isset($_POST["step2-1"]) && !isset($_POST['Couponcode'])){
 		foreach($orderDetails['Order'] as $orders){
 			foreach($orders['OrderLines'] as $order){
 				//  put the code here to save the quatation order products into the database firstly.
@@ -220,7 +220,7 @@ $background = getBackgroundImage($userID);
 			<?php endif; ?>
 			<?php
 			//include('sites/all/themes/evolve/inc/renewMyMembership/renew-yourdetail.inc.php');
-			if(!isset($_POST["step2-1"])){
+			if(!isset($_POST["step2-1"]) && !isset($_POST['Couponcode'])){
 			apa_function_renew_your_detail_form();}
 			if((isset($_POST["step1"]) && $_POST["step1"] == "1"&& $_POST['insuranceTag']!="0") || isset($_POST['goI'])){
 			//include('sites/all/themes/evolve/inc/renewMyMembership/renew-insurance.inc.php');
