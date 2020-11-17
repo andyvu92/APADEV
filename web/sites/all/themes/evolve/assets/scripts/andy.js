@@ -3647,7 +3647,7 @@ const backToPrevBtnhandler = () => {
   });
 }
 
-const countDown = () => {
+const countDownRenew = () => {
     const coundDownContainers = document.querySelectorAll('.countdown-container');
 
     coundDownContainers.length && coundDownContainers.forEach(container => {
@@ -3811,7 +3811,7 @@ window.addEventListener('DOMContentLoaded', e => {
   brickNavHandler();
   articleVerticleListHandler();
   backToPrevBtnhandler();
-  countDown();
+  countDownRenew();
   setBaseCSSVars();
   initLoadVideoToggle();
 });
