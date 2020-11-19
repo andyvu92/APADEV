@@ -19,8 +19,6 @@ $background = getBackgroundImage($userID);
 // National Group ID, National Group title
 $sendData["UserID"] = $_SESSION['UserId'];
 //$nationalGroups = aptify_get_GetAptifyData("20", $sendData);
-//echo "national Groups:<br>";
-//print_r($nationalGroups);
 
 /* We may use this as "Session" data and won't need to load. */
 // 2.2.22 - Get list of subscribed Fellowship Products
@@ -39,8 +37,6 @@ foreach($Fellow as $Subs) {
 		}
 	}
 }
-//echo "Fellow ships:<br>";
-//print_r($Fellows);
 /* We may use this as "Session" data and won't need to load. */
 // 2.2.23 - GET list of subscription preferences
 // Send -
@@ -48,15 +44,11 @@ foreach($Fellow as $Subs) {
 // Response -
 // List of subscriptions and its T/F values.
 $subscriptions = aptify_get_GetAptifyData("23", $sendData);
-//echo "Subs:<br>";
-//print_r($subscriptions);
 $Subscription = $subscriptions["results"];
 // use one of above to get "current" data
 // and combine with existing data ("$Subsctiption")
 // Then send it to Aptify.
 // May go through Session
-//print_r($Subscription);
-//echo "<br /><br />";
 $PostArray = Array();
 foreach ($_POST as $key => $value) {
 	//echo "Field ".htmlspecialchars($key)." is ".htmlspecialchars($value)."<br>";
@@ -184,8 +176,6 @@ if(count($PostArray) == 0) { // GET data
 			<div class="col-xs-12"><span class="dashboard-name cairo">Communications</span></div>
 			<div class="col-xs-12 col-sm-6" style="display: none"><button class="dashboard-backgroud" data-target="#myModal" data-toggle="modal"><span class="customise_background">Customise your background</span><span class="customise_icon">[icon class="fa fa-cogs fa-x"][/icon]</span></button></div>
 		</div>
-		<p>We are currently upgrading our communications preferences page. Please check back shortly to update your communication preferences.</p>
-		<?php /*
 		<?php apa_function_customizeBackgroundImage_form(); ?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
@@ -284,7 +274,6 @@ communications you <strong>do not</strong> want to receive.
 			</form>
 		</div>
 	</div>
-	*/ ?>
 </div>
 <?php logRecorder(); ?>
 </div>
