@@ -237,10 +237,11 @@ communications you <strong>do not</strong> want to receive.
               }
 
 						} else {
-							  // Hide InMotion print copy, InTouch, SportsPhysio & 
-							if(($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") && $Subs["SubscriptionID"] == "18" || $Subs["SubscriptionID"] == "17" || $Subs["SubscriptionID"] == "16") {
+							if(($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") && $Subs["SubscriptionID"] == "18") {
 								// No InMotion print copy for
 								// student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
+							} elseif($Subs["SubscriptionID"] == "17" || $Subs["SubscriptionID"] == "16" || $Subs["SubscriptionID"] == "18") {
+								// Hide InMotion print copy, InTouch, SportsPhysio
 							} else {
 
 								$description = getDescription($Subs["Subscription"]);
