@@ -184,7 +184,7 @@ communications you <strong>do not</strong> want to receive.
 </span><br><span>Note: Some communications we send are considered critically important and therefore mandatory; these cannot be opted out of.</span></p>
 				<form action="/subscriptions" method="POST">
 					<input name="validator" tyle="hidden" value="0" style="display: none;" />
-					<div class="subscriptions-dashboard flex-container">
+					<div>
             <?php
 				$countSubs = count($Subscription);
 				$countSubType = $countSubs%2;
