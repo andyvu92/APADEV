@@ -184,7 +184,7 @@ communications you <strong>do not</strong> want to receive.
 </span><br><span>Note: Some communications we send are considered critically important and therefore mandatory; these cannot be opted out of.</span></p>
 				<form action="/subscriptions" method="POST">
 					<input name="validator" tyle="hidden" value="0" style="display: none;" />
-					<div>
+					<div class="subscriptions-dashboard flex-container">
             <?php
 				$countSubs = count($Subscription);
 				$countSubType = $countSubs%2;
@@ -237,8 +237,8 @@ communications you <strong>do not</strong> want to receive.
               }
 
 						} else {
-                  			// for InMotion print copy
-							if(($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") && $Subs["SubscriptionID"] == "18") {
+							  // Hide InMotion print copy, InTouch, SportsPhysio & 
+							if(($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") && $Subs["SubscriptionID"] == "18" || $Subs["SubscriptionID"] == "17" || $Subs["SubscriptionID"] == "16") {
 								// No InMotion print copy for
 								// student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
 							} else {
