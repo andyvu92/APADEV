@@ -237,6 +237,7 @@ communications you <strong>do not</strong> want to receive.
               }
 
 						} else {
+							if($counter==2){echo '<div class="subscriptions-dashboard flex-container">';}
 							if(($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") && $Subs["SubscriptionID"] == "18") {
 								// No InMotion print copy for
 								// student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
@@ -246,7 +247,6 @@ communications you <strong>do not</strong> want to receive.
 
 								$description = getDescription($Subs["Subscription"]);
 								$NoSub = $counter>1?True:False;
-               	if($counter==2){echo '<div class="subscriptions-dashboard flex-container">';}
 								echo $parentBeginElement.'<div class="column"><div class="functional-title"><div class="subscription-title">
 								<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
 								'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
