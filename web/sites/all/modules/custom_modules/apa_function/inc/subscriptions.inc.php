@@ -179,97 +179,99 @@ if(count($PostArray) == 0) { // GET data
 		<?php apa_function_customizeBackgroundImage_form(); ?>
 		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" >
-				<p><span>Choose below which APA communications you would like to be <strong>excluded</strong> from. Simply tick the
-communications you <strong>do not</strong> want to receive.
-</span><br><span>Note: Some communications we send are considered critically important and therefore mandatory; these cannot be opted out of.</span></p>
+				<p>
+					<span>Choose below which APA communications you would like to be <strong>excluded</strong> from. Simply tick the communications you <strong>do not</strong> want to receive.</span><br>
+					<span>Note: Some communications we send are considered critically important and therefore mandatory; these cannot be opted out of.</span>
+				</p>
 				<form action="/subscriptions" method="POST">
 					<input name="validator" tyle="hidden" value="0" style="display: none;" />
 					<div>
-            <?php
-				$countSubs = count($Subscription);
-				$countSubType = $countSubs%2;
-        $counter = 0;
-        //rearrange SubListAll Array
-        $arrangArray = Array();
-        foreach ($SubListAll as $temArray){
-          $arrayNew["SubscriptionID"] =  $temArray["SubscriptionID"];
-          $arrayNew["Subscription"] =  $temArray["Subscription"];
-          $arrayNew["Subscribed"] = $temArray["Subscribed"];
-          if($arrayNew["Subscription"]!="SMS Opt Out" ){
-            array_push($arrangArray, $arrayNew);
-          }
-          else{
-            $arraySMS["SubscriptionID"] =  $arrayNew["SubscriptionID"];
-            $arraySMS["Subscription"] =  $arrayNew["Subscription"];
-            $arraySMS["Subscribed"] = $arrayNew["Subscribed"];
-          }
-        }
-        array_push($arrangArray, $arraySMS);
-          foreach($arrangArray as $Subs) {
-					$counter++;
-					if($Subs["SubscriptionID"] == "28" || $Subs["SubscriptionID"] == "30") {
-						// 28 for Insurance
-						// 30 for Titled???? (suddenly appeared)
-					} else {
-						if($counter < 0) {
-							// for normal subscriptions
-							// from 1st item
-							echo '<div class="column"><input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
-								'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
-							if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){
-								echo "checked='checked'";
-							}
-							echo '><label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'"><span class="label-text">'.$Subs["Subscription"].'</span></label></div>';
-
-            } elseif($counter < 0) {
-							// for extra magazine copy
-							foreach($MagSubs as $mags) {
-								$tt = strpos($Subs["Subscription"], $mags);
-								if($tt !== FALSE) {
-									echo '
-									<div class="column">
-										<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
-										'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'" checked="checked" disabled />
-										<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'"><span class="label-text">'.$Subs["Subscription"]
-										.'</span></label>
-									</div>';
-								}
-              }
-
+						<div class="subscriptions-dashboard flex-container">
+           				<?php
+					$countSubs = count($Subscription);
+					$countSubType = $countSubs%2;
+					$counter = 0;
+					//rearrange SubListAll Array
+					$arrangArray = Array();
+					foreach ($SubListAll as $temArray){
+						$arrayNew["SubscriptionID"] =  $temArray["SubscriptionID"];
+						$arrayNew["Subscription"] =  $temArray["Subscription"];
+						$arrayNew["Subscribed"] = $temArray["Subscribed"];
+						if($arrayNew["Subscription"]!="SMS Opt Out" ){
+							array_push($arrangArray, $arrayNew);
+						}
+						else{
+							$arraySMS["SubscriptionID"] =  $arrayNew["SubscriptionID"];
+							$arraySMS["Subscription"] =  $arrayNew["Subscription"];
+							$arraySMS["Subscribed"] = $arrayNew["Subscribed"];
+						}
+					}
+					array_push($arrangArray, $arraySMS);
+					foreach($arrangArray as $Subs) {
+						var_dump($Subs);
+						echo "<br>";
+					}
+					foreach($arrangArray as $Subs) {
+						$counter++;
+						if($Subs["SubscriptionID"] == "28" || $Subs["SubscriptionID"] == "30") {
+							// 28 for Insurance
+							// 30 for Titled???? (suddenly appeared)
 						} else {
-							if($counter==2){echo '<div class="subscriptions-dashboard flex-container">';}
-							if(($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") && $Subs["SubscriptionID"] == "18") {
-								// No InMotion print copy for
-								// student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
-							} elseif($Subs["SubscriptionID"] == "17" || $Subs["SubscriptionID"] == "16" || $Subs["SubscriptionID"] == "18") {
-								// Hide InMotion print copy, InTouch, SportsPhysio
-							} else {
-
-								$description = getDescription($Subs["Subscription"]);
-								$NoSub = $counter>1?True:False;
-								echo $parentBeginElement.'<div class="column"><div class="functional-title"><div class="subscription-title">
-								<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
-								'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
+							if($counter < 0) {
+								// for normal subscriptions
+								// from 1st item
+								echo '<div class="column"><input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
+									'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
 								if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){
 									echo "checked='checked'";
 								}
-								echo '>
-								<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'"><span class="label-text">'.$Subs["Subscription"]
-								.'</span></div><div class="description_info'.$counter.'"></div></label></div>';
-								if($NoSub) {
-									echo '<span class="extra-description'.$counter.'">'.$description;
-									if($Subs["Subscription"]=="National Group Communications") { echo "<br>";
-										echo 'For more information please visit the <a href="https://australian.physio">APA website.</a>';
+								echo '><label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'"><span class="label-text">'.$Subs["Subscription"].'</span></label></div>';
+							} elseif($counter < 0) {
+								// for extra magazine copy
+								foreach($MagSubs as $mags) {
+									$tt = strpos($Subs["Subscription"], $mags);
+									if($tt !== FALSE) {
+										echo '
+										<div class="column">
+											<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
+											'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'" checked="checked" disabled />
+											<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'"><span class="label-text">'.$Subs["Subscription"]
+											.'</span></label>
+										</div>';
 									}
-									echo '</span>';
 								}
-								echo '</div>';
-								if($counter==$countSubs){echo "</div>";}
+							} else {
+								if(($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") && $Subs["SubscriptionID"] == "18") {
+									// No InMotion print copy for
+									// student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
+								} elseif($Subs["SubscriptionID"] == "17" || $Subs["SubscriptionID"] == "16" || $Subs["SubscriptionID"] == "18") {
+									// Hide InMotion print copy, InTouch, SportsPhysio
+								} else {
+									$description = getDescription($Subs["Subscription"]);
+									$NoSub = $counter>1?True:False;
+									echo $parentBeginElement.'<div class="column"><div class="functional-title"><div class="subscription-title">
+									<input class="styled-checkbox" type="checkbox" name="'.$Subs["SubscriptionID"].
+									'" id="'.$Subs["SubscriptionID"].'" value="'.$Subs["Subscribed"].'"';
+									if($Subs['Subscribed']==1 || $Subs['Subscribed']=='1' || $Subs['Subscribed']=='True'){
+										echo "checked='checked'";
+									}
+									echo '>
+									<label  class="light-font-weight" for="'.$Subs["SubscriptionID"].'"><span class="label-text">'.$Subs["Subscription"]
+									.'</span></div><div class="description_info'.$counter.'"></div></label></div>';
+									if($NoSub) {
+										echo '<span class="extra-description'.$counter.'">'.$description;
+										if($Subs["Subscription"]=="National Group Communications") { echo "<br>";
+											echo 'For more information please visit the <a href="https://australian.physio">APA website.</a>';
+										}
+										echo '</span>';
+									}
+									echo '</div>';
+									if($counter==$countSubs){echo "</div>";}
+								}
 							}
 						}
 					}
-				}
-				?>
+					?>
 				</div>
 				<button id="your-details-submit-button" class="dashboard-button dashboard-bottom-button subscriptions-submit"><span class="dashboard-button-name">Submit</span></button>
 			</form>
