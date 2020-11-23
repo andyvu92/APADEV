@@ -9,6 +9,7 @@ define('APTIFY_API_BASE_URL_DEFAULT', 'https://aptifyweb.australian.physio/Aptif
 define('APTIFY_API_OOPS_DEFAULT', 'Communication error, Please contact site administrator');
 define('APTIFY_API_INVALID_TOKEN_DEFAULT', 'Invalid Token Please contact administrator.');
 define('APTIFY_SERVER_MAINTENANCE',0);
+define('GLOBAL_MESSAGE_CONTROL',0);
 define('RENEW_ACTIVE_STATUS',0);
 define('RENEW_YEAR',2021);
 define('APTIFY_SERVER_MAINTENANCE_OOPS','We are currently experiencing an issue that may prevent members from logging into the APA website and accessing member-only content, including PD. We are working to resolve this issue as soon as possible. Thank you for your patience.');
@@ -63,8 +64,13 @@ function aptify_api_admin_settings() {
   );
   $form['aptify_api']['aptify_server_maitenance_oops'] = array(
     '#type' => 'textarea',
-    '#title' => t('Pop up message for Aptify server maintenance mode'),
+    '#title' => t('Pop up message for Aptify server maintenance mode/ working mode'),
     '#default_value' => variable_get('aptify_server_maitenance_oops', APTIFY_SERVER_MAINTENANCE_OOPS),
+  );
+  $form['aptify_api']['messagebox_control'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Global pop up message on/off'),
+    '#default_value' => variable_get('messagebox_control', GLOBAL_MESSAGE_CONTROL),
   );
   return system_settings_form($form);
 }
