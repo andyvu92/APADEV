@@ -54,11 +54,6 @@ foreach ($_POST as $key => $value) {
 	//echo "Field ".htmlspecialchars($key)." is ".htmlspecialchars($value)."<br>";
 	$PostArray[htmlspecialchars($key)] = htmlspecialchars($value);
 }
-/*
-echo "@@@@";
-var_dump($PostArray);
-echo "@@@@";
-*/
 if(count($PostArray) == 0) { // GET data
 	$SubListAll = Array();
 	foreach($Subscription as $Subs) {
@@ -207,10 +202,6 @@ if(count($PostArray) == 0) { // GET data
 						}
 					}
 					array_push($arrangArray, $arraySMS);
-					foreach($arrangArray as $Subs) {
-						var_dump($Subs);
-						echo "<br>";
-					}
 					foreach($arrangArray as $Subs) {
 						$counter++;
 						if($Subs["SubscriptionID"] == "28" || $Subs["SubscriptionID"] == "30") {
