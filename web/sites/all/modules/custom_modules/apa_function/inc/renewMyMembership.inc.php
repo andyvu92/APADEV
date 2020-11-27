@@ -218,7 +218,7 @@ $background = getBackgroundImage($userID);
 				<p><span style="color: #920075;"><strong>Please apply any discount code before entering or changing your credit card details</strong></span><br />
 				<?php 
 				$CurrentYear = date("d-m-Y",strtotime("now"));
-				if($CurrentYear <= date("29-11-2020") ) {
+				if($CurrentYear <= date("30-11-2020") ) {
 					echo '<span style="color: #920075;"><strong>Use code WITHYOU2021 to get 15% off your membership fees</strong></span>';
 				}
 				?>
