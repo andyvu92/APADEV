@@ -216,7 +216,13 @@ $background = getBackgroundImage($userID);
 			<?php if(isset($_POST['step2-1'])|| (isset($_POST['step1'])&& $_POST['insuranceTag']=="0")||isset($_POST['QOrder']) || isset($_POST['stepAdd']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4'])): ?>
 			<div class="col-xs-12 none-margin">
 				<p><span style="color: #920075;"><strong>Please apply any discount code before entering or changing your credit card details</strong></span><br />
-				<span style="color: #920075;"><strong>Use code WITHYOU2021 to get 15% off your membership fees</strong></span></p>
+				<?php 
+				$CurrentYear = date("d-m-Y",strtotime("now"));
+				if($CurrentYear <= date("29-11-2020") ) {
+					echo '<span style="color: #920075;"><strong>Use code WITHYOU2021 to get 15% off your membership fees</strong></span>';
+				}
+				?>
+				</p>
 			</div>
 			<?php endif; ?>
 			<?php
