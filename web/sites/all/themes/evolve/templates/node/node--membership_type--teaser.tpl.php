@@ -20,7 +20,7 @@
 * - $classes: String of classes that can be used to style contextually through
 * CSS. It can be manipulated through the variable $classes_array from
 * preprocess functions. The default values can be one or more of the
-* following:  
+* following:
 * - node: The current template type; for example, "theming hook".
 * - node-[type]: The current node type. For example, if the node is a
 * "Blog entry" it would result in "node-blog". Note that the machine
@@ -74,25 +74,27 @@
 *
 * @see template_preprocess()
 * @see template_preprocess_node()
-* @see template_process() 
+* @see template_process()
 *
 * @ingroup themeable
 */
 ?>
-<?php 
+<?php
 $rens = render($content['field_member_type_category']);
 $rens = str_replace('<div class="field field-name-field-member-type-category field-type-text field-label-hidden">',"",$rens);
 $rens = str_replace('<div class="field-items">',"",$rens);
 $rens = str_replace('<div class="field-item even">',"",$rens);
 $rens = str_replace('</div>',"",$rens);
+
 ?>
 <div id="node-<?php print $node->nid; ?>" style="display: none; margin-top:30px;" class="<?php print $classes; echo ' '.$rens; ?> clearfix large" <?php print $attributes; ?>>
-	<section class="post-content">
+	<?php if($rens!="ContactAPA"): ?>
+  <section class="post-content">
 	<h2 class="MTtitle"><?php print $title; ?></h2>
 	<div class="contents">
 		<div class="MTcontent">
 			<div class="MTcontentTitle">Category:</div>
-			<?php 
+			<?php
 				print '<div style="text-transform: uppercase;">'.$rens.'</div>';
 			?>
 		</div>
@@ -121,7 +123,7 @@ $rens = str_replace('</div>',"",$rens);
 			}
 			?>
 		</div>
-		<?php 
+		<?php
 			$rens = render($content['field_what_is_it']);
 			$linksList = explode("\n", $rens);
 			$count = 0;
@@ -130,7 +132,7 @@ $rens = str_replace('</div>',"",$rens);
 				echo '<div class="MTcontent">
 				<div class="MTcontentTitle">What is it?</div><br />';
 				print '<ul>';
-				foreach($linksList as $ren) {					
+				foreach($linksList as $ren) {
 					$count++;
 					if($count == $total) {
 						// get rid of </div>;
@@ -149,7 +151,7 @@ $rens = str_replace('</div>',"",$rens);
 				echo '<div class="MTcontent">
 				<div class="MTcontentTitle">What is it?</div><br />';
 				print '<ul>';
-				foreach($linksList as $ren) {					
+				foreach($linksList as $ren) {
 					// get rid of &nbsp;
 					$string = htmlentities($ren, null, 'utf-8');
 					$checks = str_replace("&nbsp;", " ", $string);
@@ -162,7 +164,7 @@ $rens = str_replace('</div>',"",$rens);
 				print '</ul></div>';
 			}
 		?>
-		<?php 
+		<?php
 			$rens = render($content['field_eligibility']);
 			$linksList = explode("\n", $rens);
 			$count = 0;
@@ -171,7 +173,7 @@ $rens = str_replace('</div>',"",$rens);
 				echo '<div class="MTcontent">
 					<div class="MTcontentTitle">You are eligible if you:</div><br />';
 				print '<ul>';
-				foreach($linksList as $ren) {					
+				foreach($linksList as $ren) {
 					$count++;
 					if($count == $total) {
 						// get rid of </div>;
@@ -190,7 +192,7 @@ $rens = str_replace('</div>',"",$rens);
 				echo '<div class="MTcontent">
 				<div class="MTcontentTitle">You are eligible if you:</div><br />';
 				print '<ul>';
-				foreach($linksList as $ren) {					
+				foreach($linksList as $ren) {
 					// get rid of &nbsp;
 					$string = htmlentities($ren, null, 'utf-8');
 					$checks = str_replace("&nbsp;", " ", $string);
@@ -203,7 +205,7 @@ $rens = str_replace('</div>',"",$rens);
 				print '</ul></div>';
 			}
 		?>
-		<?php 
+		<?php
 			$rens = render($content['body']);
 			$rens = str_replace('<div class="field field-name-body field-type-text-with-summary field-label-hidden">',"",$rens);
 			$rens = str_replace('<div class="field-items">',"",$rens);
@@ -221,7 +223,7 @@ $rens = str_replace('</div>',"",$rens);
 				echo '<div class="MTcontent">
 					<div class="MTcontentTitle">You are not eligible if you:</div><br />';
 				print '<ul>';
-				foreach($linksList as $ren) {					
+				foreach($linksList as $ren) {
 					$count++;
 					if($count == $total) break;
 					print '<li>';
@@ -233,7 +235,7 @@ $rens = str_replace('</div>',"",$rens);
 				echo '<div class="MTcontent">
 					<div class="MTcontentTitle">You are not eligible if you:</div><br />';
 				print '<ul>';
-				foreach($linksList as $ren) {					
+				foreach($linksList as $ren) {
 					print '<li>';
 					print $ren;
 					print '</li>';
@@ -250,6 +252,11 @@ $rens = str_replace('</div>',"",$rens);
         //print render($content);
         ?>
 	</section>
-  
-</div> 
+    <?php else:?>
+    <section>
+    <div class="contents"><h2 class="MTtitle"><?php echo render($content['field_what_is_it']);?></h2></div>
+    </section>
+    <?php endif;?>
+
+</div>
 
