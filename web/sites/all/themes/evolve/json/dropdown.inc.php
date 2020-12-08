@@ -1,12 +1,12 @@
 <?php
 
 function curlRequesttttt($API, $type) {
-	// create curl resource 
-	$ch = curl_init(); 
+	// create curl resource
+	$ch = curl_init();
 
-	// set url 
+	// set url
 	if($type == "Get") {
-		curl_setopt($ch, CURLOPT_URL, $API); 
+		curl_setopt($ch, CURLOPT_URL, $API);
 		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
 	} else {
 		//echo "else!";
@@ -14,14 +14,14 @@ function curlRequesttttt($API, $type) {
 		$memberProductsArray['ProductID']=$prodcutArray;
 		$memberProdcutID = $memberProductsArray;
 		$memberProdcutID = json_encode($memberProdcutID, true);
-		curl_setopt($ch, CURLOPT_URL, $API); 
+		curl_setopt($ch, CURLOPT_URL, $API);
 		curl_setopt($ch, CURLOPT_POST, 1);
 		curl_setopt($ch, CURLOPT_POSTFIELDS,$memberProdcutID);
 		curl_setopt($ch, CURLOPT_HTTPHEADER, array(
 			"Content-Type:application/json"
 		));
 	}
-	//return the transfer as a string 
+	//return the transfer as a string
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	curl_setopt($ch, CURLOPT_BINARYTRANSFER,1);
 	curl_setopt($ch, CURLOPT_ENCODING, "");
@@ -29,14 +29,14 @@ function curlRequesttttt($API, $type) {
 	curl_setopt($ch, CURLOPT_TIMEOUT, 300000);
 	curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
 	curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-	
+
 	$JSONreturn = curl_exec($ch);
 	if(curl_error($ch))
 	{
 		//echo 'error:' . curl_error($ch);
 		return curl_error($ch);
 	}
-	// close curl resource to free up system resources 
+	// close curl resource to free up system resources
 	curl_close($ch);
 	return $JSONreturn;
 }
@@ -52,7 +52,7 @@ function json_clean_decode($json, $assoc = false, $depth = 512, $options = 0) {
 
 function getMemberTypePrice(){
 	// 2.2.31 Get Membership prodcut price
-    // Send - 
+    // Send -
     // userID & product list
 	// Response -Membership prodcut price
 	$API = "https://aptifyweb.australian.physio/AptifyServicesAPI/services/MembershipProducts/-1";
@@ -89,7 +89,7 @@ function getDropdown(){
 		$ID = $lines['ID'];
 		$Country = $lines['Country'];
 		$TelephoneCode = $lines['TelephoneCode'];
-		$arrayCountry[] = array('ID'=>$ID, 'Country'=>$Country, 'TelephoneCode'=>$TelephoneCode);	
+		$arrayCountry[] = array('ID'=>$ID, 'Country'=>$Country, 'TelephoneCode'=>$TelephoneCode);
     }
 	$response= $arrayCountry;
 	$fp = fopen(__DIR__ . '/../json/Country.json', 'w');
@@ -102,7 +102,7 @@ function getDropdown(){
 			$Abbreviation = $lines['Abbreviation'];
 			$FullName = $lines['FullName'];
 			$CountryID = $lines['CountryID'];
-			$arrayState[] = array('ID'=>$ID, 'Abbreviation'=>$Abbreviation, 'FullName'=>$FullName,'CountryID'=>$CountryID);	
+			$arrayState[] = array('ID'=>$ID, 'Abbreviation'=>$Abbreviation, 'FullName'=>$FullName,'CountryID'=>$CountryID);
 		}
 	}
 	$response= $arrayState;
@@ -114,7 +114,7 @@ function getDropdown(){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
 		$ProductID = $lines['ProductID'];
-		$arrayMemberType[] = array('ID'=>$ID, 'Name'=>$Name, 'ProductID'=>$ProductID);	
+		$arrayMemberType[] = array('ID'=>$ID, 'Name'=>$Name, 'ProductID'=>$ProductID);
     }
 	$response= $arrayMemberType;
 	$fp = fopen(__DIR__ . '/../json/MemberType.json', 'w');
@@ -124,7 +124,7 @@ function getDropdown(){
 	foreach($result['MemberStatusType']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
-		$arrayMemberStatusType[] = array('ID'=>$ID, 'Name'=>$Name);	
+		$arrayMemberStatusType[] = array('ID'=>$ID, 'Name'=>$Name);
     }
 	$response= $arrayMemberStatusType;
 	$fp = fopen(__DIR__ . '/../json/MemberStatusType.json', 'w');
@@ -134,33 +134,31 @@ function getDropdown(){
 	foreach($result['Prefix']  as $lines){
 		$ID = $lines['ID'];
 		$Prefix = $lines['Prefix'];
-		$arrayPrefix[] = array('ID'=>$ID, 'Prefix'=>$Prefix);	
+		$arrayPrefix[] = array('ID'=>$ID, 'Prefix'=>$Prefix);
     }
 	$response= $arrayPrefix;
 	$fp = fopen(__DIR__ . '/../json/Prefix.json', 'w');
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);
 	// write NationalGroup__c json file
-	/*
 	foreach($result['NationalGroup__c']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
 		$IsActive = $lines['IsActive'];
 		$ProductID = $lines['ProductID'];
-		$arrayNationalGroup__c[] = array('ID'=>$ID, 'Name'=>$Name, 'IsActive'=>$IsActive, 'ProductID'=>$ProductID);	
+		$arrayNationalGroup__c[] = array('ID'=>$ID, 'Name'=>$Name, 'IsActive'=>$IsActive, 'ProductID'=>$ProductID);
     }
 	$response= $arrayNationalGroup__c;
 	$fp = fopen(__DIR__ . '/../json/NationalGroup__c.json', 'w');
     $test = fwrite($fp, json_encode($response));
 	fclose($fp);
-	*/
 	// write AreaOfInterest__c json file
 	foreach($result['AreaOfInterest__c']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
 		$IsActive = $lines['IsActive'];
 		$Code = $lines['Code'];
-		$arrayAreaOfInterest__c[] = array('ID'=>$ID, 'Name'=>$Name, 'IsActive'=>$IsActive,'Code'=>$Code);	
+		$arrayAreaOfInterest__c[] = array('ID'=>$ID, 'Name'=>$Name, 'IsActive'=>$IsActive,'Code'=>$Code);
     }
 	$response= $arrayAreaOfInterest__c;
 	$fp = fopen(__DIR__ . '/../json/AreaOfInterest__c.json', 'w');
@@ -171,7 +169,7 @@ function getDropdown(){
 		if($lines['ID'] != "9"){
 			$ID = $lines['ID'];
 			$Name = $lines['Name'];
-			$arrayPaymentType[] = array('ID'=>$ID, 'Name'=>$Name);	
+			$arrayPaymentType[] = array('ID'=>$ID, 'Name'=>$Name);
 		}
     }
 	$response= $arrayPaymentType;
@@ -182,7 +180,7 @@ function getDropdown(){
 	foreach($result['Language']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
-		$arrayLanguage[] = array('ID'=>$ID, 'Name'=>$Name);	
+		$arrayLanguage[] = array('ID'=>$ID, 'Name'=>$Name);
     }
 	$response= $arrayLanguage;
 	$fp = fopen(__DIR__ . '/../json/Language.json', 'w');
@@ -192,7 +190,7 @@ function getDropdown(){
 	foreach($result['NumberOfHours']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
-		$arrayNumberOfHours[] = array('ID'=>$ID, 'Name'=>$Name);	
+		$arrayNumberOfHours[] = array('ID'=>$ID, 'Name'=>$Name);
     }
 	$response= $arrayNumberOfHours;
 	$fp = fopen(__DIR__ . '/../json/NumberOfHours.json', 'w');
@@ -204,7 +202,7 @@ function getDropdown(){
 		$Name = $lines['Name'];
 		$IsActive = $lines['IsActive'];
 		$IsPublic = $lines['IsPublic'];
-		$arrayWorkPlaceSettings[] = array('ID'=>$ID, 'Name'=>$Name, 'IsActive'=>$IsActive, 'IsPublic'=>$IsPublic);	
+		$arrayWorkPlaceSettings[] = array('ID'=>$ID, 'Name'=>$Name, 'IsActive'=>$IsActive, 'IsPublic'=>$IsPublic);
     }
 	$response= $arrayWorkPlaceSettings;
 	$fp = fopen(__DIR__ . '/../json/WorkPlaceSettings.json', 'w');
@@ -214,7 +212,7 @@ function getDropdown(){
 	foreach($result['Educationdegree']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
-		$arrayEducationdegree[] = array('ID'=>$ID, 'Name'=>$Name);	
+		$arrayEducationdegree[] = array('ID'=>$ID, 'Name'=>$Name);
     }
 	$response= $arrayEducationdegree;
 	$fp = fopen(__DIR__ . '/../json/Educationdegree.json', 'w');
@@ -224,7 +222,7 @@ function getDropdown(){
 	foreach($result['Aboriginal']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
-		$arrayAboriginal[] = array('ID'=>$ID, 'Name'=>$Name);	
+		$arrayAboriginal[] = array('ID'=>$ID, 'Name'=>$Name);
     }
 	$response= $arrayAboriginal;
 	$fp = fopen(__DIR__ . '/../json/Aboriginal.json', 'w');
@@ -234,7 +232,7 @@ function getDropdown(){
 	foreach($result['Dietary']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
-		$arrayDietary[] = array('ID'=>$ID, 'Name'=>$Name);	
+		$arrayDietary[] = array('ID'=>$ID, 'Name'=>$Name);
     }
 	$response= $arrayDietary;
 	$fp = fopen(__DIR__ . '/../json/Dietary.json', 'w');
@@ -244,7 +242,7 @@ function getDropdown(){
 	foreach($result['Gender']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Description'];
-		$arrayGender[] = array('ID'=>$ID, 'Description'=>$Name);	
+		$arrayGender[] = array('ID'=>$ID, 'Description'=>$Name);
     }
 	$response= $arrayGender;
 	$fp = fopen(__DIR__ . '/../json/Gender.json', 'w');
@@ -255,7 +253,7 @@ function getDropdown(){
 		$ID = $lines['ID'];
 		$Abbreviation = $lines['Abbreviation'];
 		$FullName = $lines['FullName'];
-		$arrayBranch[] = array('ID'=>$ID, 'Abbreviation'=>$Abbreviation, 'FullName'=>$FullName);	
+		$arrayBranch[] = array('ID'=>$ID, 'Abbreviation'=>$Abbreviation, 'FullName'=>$FullName);
     }
 	$response= $arrayBranch;
 	$fp = fopen(__DIR__ . '/../json/Branch.json', 'w');
@@ -265,7 +263,7 @@ function getDropdown(){
 	foreach($result['University']  as $lines){
 		$ID = $lines['ID'];
 		$Name = $lines['Name'];
-		$arrayUniversity[] = array('ID'=>$ID, 'Name'=>$Name);	
+		$arrayUniversity[] = array('ID'=>$ID, 'Name'=>$Name);
     }
 	$response= $arrayUniversity;
 	$fp = fopen(__DIR__ . '/../json/University.json', 'w');
@@ -277,7 +275,7 @@ function getDropdown(){
 		if(in_array($lines['Column1'], $selections)) {
 			$ID = $lines['ID'];
 			$Name = $lines['Column1'];
-			$arrayPDTypes[] = array('ID'=>$ID, 'Name'=>$Name);	
+			$arrayPDTypes[] = array('ID'=>$ID, 'Name'=>$Name);
 		}
     }
 	$response= $arrayPDTypes;
