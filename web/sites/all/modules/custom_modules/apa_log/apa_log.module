@@ -33,6 +33,7 @@ function apa_log_menu() {
 * Create submit function to get the value
 */
 function log_submit($form, &$form_state) {
+  ini_set('memory_limit', '512M');
   //$form_state['storage']['type'] = $form_state['values']['type'];
   $filterConditions =  array();
   $filterConditions["beginDate"] = $form_state['values']['beginDate'];
@@ -101,6 +102,7 @@ function add_Member_Log($addMemberLog) {
 * Export the data
 */
 function export_all($form, &$form_state) {
+  ini_set('memory_limit', '512M');
   $query = db_select('member_log','m');
   $query ->fields('m', array('UserID','OrderID', 'JsonMessage', 'TimeStamp', 'Type', 'LogError','CreateDate'));
   $defaultType = "ALL";

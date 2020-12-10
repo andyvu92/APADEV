@@ -4,6 +4,7 @@
  * Display the log about member transaction
  */
 function apa_log_admin_settings($form = array(), &$form_state= array()) {
+  ini_set('memory_limit', '512M');
   //init form data
   // get the type drop down list
   $typelist = db_select('member_log','m')
