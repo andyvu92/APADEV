@@ -4,6 +4,7 @@
  * Display the non member register the PD course 
  */
 function apa_pd_admin_settings($form = array(), &$form_state= array()) {
+  ini_set('memory_limit', '512M');
   // generate form
   $form = array();
   $form['textfield_input'] = array(

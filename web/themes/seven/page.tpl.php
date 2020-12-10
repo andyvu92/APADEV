@@ -1,6 +1,5 @@
 
   <div id="branding" class="clearfix">
-    <?php ini_set("memory_limit","512M"); ?>
     <?php print $breadcrumb; ?>
     <?php print render($title_prefix); ?>
     <?php if ($title): ?>

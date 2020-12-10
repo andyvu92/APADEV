@@ -46,6 +46,7 @@ function pd_submit($form, &$form_state) {
 * Export the data
 */
 function export_pd($form, &$form_state) {
+  ini_set('memory_limit', '512M');
   $variables = array();
   $header = array('User ID', 'Email Address', 'Job', 'Date');
   $query = db_select('pdsurvey','pd');
