@@ -1,13 +1,27 @@
 <?php
 /* Survey Database */
-
+/************ */
+function checkMembershipYear(){
+   $currentYear = date("Y");
+   if($currentYear =="2021"){
+     return true;
+   }
+   else{
+     return false;
+   }
+}
+/*********** */
 /* ------------------ forGetGroupList() start -------- */
 function forGetGroupList() {
 	$arrayReturn = array();
 	try {
 		//$db = new PDO('mysql:host=10.1.1.35;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-		$db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-		
+    if(checkMembershipYear()){
+      $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    }
+    else{
+      $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    }
 		$Mcheck = $db->prepare('SELECT * FROM groups');
 		if(!$Mcheck->execute()) {
 			echo "<br />RunFail- Mcheck<br>";
@@ -30,7 +44,7 @@ function forGetGroupList() {
 		// close connection
 		$Mcheck->closeCursor();
 		$Mcheck = null;
-		
+
 		/////////// end of the code
 		$db = null;
 	} catch (PDOException $e) {
@@ -46,7 +60,12 @@ function forUpdateGroupList($action){
 /* Survey Group Edit/Create */
 	try {
 		//$dbt = new PDO('mysql:host=localhost;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+    if(checkMembershipYear()){
+      $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    }
+    else{
+      $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    }
 		$GDescription = '';
 		$GStartDate = '';
 		$GEndDate = '';
@@ -57,17 +76,17 @@ function forUpdateGroupList($action){
 	   if(isset($_POST['GID'])){ $GID = $_POST['GID']; }
 	   if(isset($_POST['groupDescription'])){ $GDescription = $_POST['groupDescription']; }
 	   if(isset($_POST['groupStartDate'])){ $GStartDate = $_POST['groupStartDate']; }
-       if(isset($_POST['groupEndDate'])){ $GEndDate = $_POST['groupEndDate']; }    
-	   if(isset($_POST['userNumber'])){ $GUserNum = $_POST['userNumber']; } 
+       if(isset($_POST['groupEndDate'])){ $GEndDate = $_POST['groupEndDate']; }
+	   if(isset($_POST['userNumber'])){ $GUserNum = $_POST['userNumber']; }
 	   if(isset($_POST['userType'])){ $GUserType = $_POST['userType']; }
-       if(isset($_POST['publishStatus'])){ $GStatus = $_POST['publishStatus']; } 	   
-         if($action == "create"){ 
+       if(isset($_POST['publishStatus'])){ $GStatus = $_POST['publishStatus']; }
+         if($action == "create"){
 		  $connUpdate= $dbt->prepare('INSERT INTO groups (GroupTitle, GroupDescription, GroupStartDate, GroupEndDate, GroupNumUserLimit, GroupUserTypeLimit, IsPublished) VALUES (:GTitle, :GDescription, :GStartDate, :GEndDate, :userNumber, :userType, :publishStatus)');
 		 }
           if($action == "edit")	{
-			  $connUpdate= $dbt->prepare('UPDATE groups SET GroupTitle = :GTitle, GroupDescription = :GDescription, GroupStartDate = :GStartDate, GroupEndDate = :GEndDate, GroupNumUserLimit = :userNumber, GroupUserTypeLimit = :userType, IsPublished = :publishStatus WHERE GroupID= :GID');  
+			  $connUpdate= $dbt->prepare('UPDATE groups SET GroupTitle = :GTitle, GroupDescription = :GDescription, GroupStartDate = :GStartDate, GroupEndDate = :GEndDate, GroupNumUserLimit = :userNumber, GroupUserTypeLimit = :userType, IsPublished = :publishStatus WHERE GroupID= :GID');
 		      $connUpdate->bindValue(':GID', $GID);
-		  }	
+		  }
 		  $connUpdate->bindValue(':GTitle', $GTitle);
           $connUpdate->bindValue(':GDescription', $GDescription);
 		  $connUpdate->bindValue(':GStartDate', $GStartDate);
@@ -76,16 +95,16 @@ function forUpdateGroupList($action){
 		  $connUpdate->bindValue(':userType', $GUserType);
 		  $connUpdate->bindValue(':publishStatus', $GStatus);
 		  $connUpdate->execute();
- 
+
           $connUpdate= null;
        echo "save sccussfully!";
-  
+
      }
       catch (PDOException $e) {
 				print "Error!: " . $e->getMessage() . "<br/>";
 				die();
 	  }
-   
+
 }
 /* ------------------ forUpdateGroupList($action) end -------- */
 
@@ -93,11 +112,16 @@ function forUpdateGroupList($action){
 function forSingleGroup($GID){
 	$arrayReturn = array();
 	//$dbt = new PDO('mysql:host=localhost;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-	$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+  if(checkMembershipYear()){
+    $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+  }
+  else{
+    $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+  }
 	$connSelect = $dbt->prepare('SELECT * FROM groups WHERE GroupID= :GID');
 	$connSelect->bindValue(':GID', $GID);
 	$connSelect->execute();
-	if($connSelect->rowCount()>0) { 
+	if($connSelect->rowCount()>0) {
       foreach ($connSelect as $row) {
 		    $arrayRaw = array();
 			array_push($arrayRaw, $row['ParentID']);
@@ -108,14 +132,14 @@ function forSingleGroup($GID){
 			array_push($arrayRaw, $row['GroupNumUserLimit']);
 			array_push($arrayRaw, $row['GroupUserTypeLimit']);
 			array_push($arrayRaw, $row['IsPublished']);
-			
+
 			array_push($arrayReturn, $arrayRaw);
-		
+
 	          }
-	}	
+	}
 	    $connSelect = null;
         return $arrayReturn;
-	
+
 }
 /* ------------------ forSingleGroup($GID)end -------- */
 
@@ -124,8 +148,13 @@ function forGetOptionList() {
 	$arrayReturn = array();
 	try {
 		//$db = new PDO('mysql:host=10.1.1.35;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-		$db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-		
+		if(checkMembershipYear()){
+      $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    }
+    else{
+      $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    }
+
 		$Mcheck = $db->prepare('SELECT * FROM options');
 		if(!$Mcheck->execute()) {
 			echo "<br />RunFail- Mcheck<br>";
@@ -143,7 +172,7 @@ function forGetOptionList() {
 		// close connection
 		$Mcheck->closeCursor();
 		$Mcheck = null;
-		
+
 		/////////// end of the code
 		$db = null;
 	} catch (PDOException $e) {
@@ -158,8 +187,13 @@ function forGetOptionList() {
 function forDeleteGroup($GID) {
 	try {
 		//$db = new PDO('mysql:host=10.1.1.35;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-		$db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-		
+    if(checkMembershipYear()){
+      $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    }
+    else{
+      $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    }
+
 		$Delete = $db->prepare('Delete FROM groups WHERE GroupID = :gid');
 		$Delete->bindValue(':gid', $GID);
 		if(!$Delete->execute()) {
@@ -167,11 +201,11 @@ function forDeleteGroup($GID) {
 			print_r($Delete->errorInfo());
 		}
 		echo "delete successful!";
-		
+
 		// close connection
 		$Delete->closeCursor();
 		$Delete = null;
-		
+
 		/////////// end of the code
 		$db = null;
 	} catch (PDOException $e) {
@@ -186,7 +220,12 @@ function forUpdateQustion($action){
 /* Survey Group Edit/Create */
 	try {
 		//$dbt = new PDO('mysql:host=localhost;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+    if(checkMembershipYear()){
+      $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    }
+    else{
+      $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    }
 		$QDescription = '';
 		$QType = '';
 		$QMandatory = '';
@@ -195,11 +234,11 @@ function forUpdateQustion($action){
 	   if(isset($_POST['QID'])){ $QID = $_POST['QID']; }
 	   if(isset($_POST['qDescription'])){ $QDescription = $_POST['qDescription']; }
 	   if(isset($_POST['qType'])){ $QType = $_POST['qType']; }
-       if(isset($_POST['qMandatory'])){ $QMandatory = $_POST['qMandatory']; } 
-	   if(isset($_POST['optionID'])){ $QOption = $_POST['optionID']; } 
+       if(isset($_POST['qMandatory'])){ $QMandatory = $_POST['qMandatory']; }
+	   if(isset($_POST['optionID'])){ $QOption = $_POST['optionID']; }
 	   if(isset($_POST['GID'])){ $GID = $_POST['GID']; }
 	   if($action == "create"){
-          if(isset($_POST['oValue'])){ $OValue = $_POST['oValue']; } 
+          if(isset($_POST['oValue'])){ $OValue = $_POST['oValue']; }
 		  $optionUpdate= $dbt->prepare('INSERT INTO options (Value) VALUES (:OValue)');
 		  $optionUpdate->bindValue(':OValue', $OValue);
 		  $optionUpdate->execute();
@@ -211,14 +250,14 @@ function forUpdateQustion($action){
           $parentUpdate->bindValue(':QDescription', $QDescription);
 		  $parentUpdate->bindValue(':GID', $GID);
 		  $parentUpdate->execute();
-          $parentUpdate= null;		  
-		 }			  
-		  
-		  
+          $parentUpdate= null;
+		 }
+
+
           if($action == "edit")	{
-			  $connUpdate= $dbt->prepare('UPDATE questions SET QuestionTitle = :QTitle, QuestionDescription = :QDescription, QuestionType = :QType, IsMandatory = :QMandatory WHERE QuestionID= :QID');  
+			  $connUpdate= $dbt->prepare('UPDATE questions SET QuestionTitle = :QTitle, QuestionDescription = :QDescription, QuestionType = :QType, IsMandatory = :QMandatory WHERE QuestionID= :QID');
 		      $connUpdate->bindValue(':QID', $QID);
-		  }	
+		  }
 		  $connUpdate->bindValue(':QTitle', $QTitle);
           $connUpdate->bindValue(':QDescription', $QDescription);
 		  $connUpdate->bindValue(':QOption', $QOption);
@@ -227,13 +266,13 @@ function forUpdateQustion($action){
 		  $connUpdate->execute();
           $connUpdate= null;
        echo "save sccussfully!";
-  
+
      }
       catch (PDOException $e) {
 				print "Error!: " . $e->getMessage() . "<br/>";
 				die();
 	  }
-   
+
 }
 /* ------------------ forUpdateQustion($action) end -------- */
 
@@ -247,7 +286,12 @@ function forUpdateQustions($action){
 	$GIDSave = $action[0];
 	try {
 		//$dbt = new PDO('mysql:host=localhost;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-		$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
+		if(checkMembershipYear()){
+      $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    }
+    else{
+      $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    }
 		/* First run - Enter questions */
 		//Things to consider
 		$count = 0;
@@ -394,7 +438,7 @@ function forUpdateQustions($action){
 		echo "Second run Done!";
 		$Tcount++;
 		/* Third run - Enter option ID to questions */
-		$questionUpdate= $dbt->prepare('UPDATE questions SET OptionID = :OID WHERE QuestionID= :QID');  
+		$questionUpdate= $dbt->prepare('UPDATE questions SET OptionID = :OID WHERE QuestionID= :QID');
 		$counter = 0;
 		foreach($QuestionList as $question) {
 			$questionUpdate->bindValue(':OID', $OptionIDs[$counter]);
@@ -443,18 +487,18 @@ function forUpdateQustions($action){
 				}
 				$parentList .= $id.",";
 				$Qcount++;
-			} 
+			}
 			$count++;
 		}
 		$parentList = substr($parentList, 0, -1);
 		// when there are sub questions
 		// code
-		
+
 		echo "Forth run Done!<br />parentList : ".$parentList;
-		
+
 		$Tcount++;
 		/* Fifth run - Add ParentIDs in Group */
-		$GroupUpdate= $dbt->prepare('UPDATE groups SET ParentID= :PID WHERE GroupID = :GID');  
+		$GroupUpdate= $dbt->prepare('UPDATE groups SET ParentID= :PID WHERE GroupID = :GID');
 		$counter = 0;
 		foreach($QuestionList as $question) {
 			$GroupUpdate->bindValue(':GID', $GIDSave);
@@ -466,16 +510,16 @@ function forUpdateQustions($action){
 		}
 		echo "Fifth run Done!";
 		$Tcount++;
-		
+
 		if($Tcount == 5) {
 			echo "save sccussfully!";
 		}
-  
+
     } catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
 	}
-	
+
 }
 /* ------------------ forUpdateQustions($action) end -------- */
 
@@ -484,22 +528,27 @@ function forListQuestions($GID){
 	// this variable will be used to search parent list from Group table.
 	$parentListArray = Array();
 	$questionCollection = Array();
-	
+
 	//$db = new PDO('mysql:host=10.1.1.35;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-	$db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+  if(checkMembershipYear()){
+    $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+  }
+  else{
+    $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+  }
 	try {
 	$connSelect = $db->prepare('SELECT * FROM groups WHERE GroupID= :GID');
 	$connSelect->bindValue(':GID', $GID);
 	$connSelect->execute();
-	if($connSelect->rowCount()>0) { 
+	if($connSelect->rowCount()>0) {
         foreach ($connSelect as $row) {
 			$parentStr = $row['ParentID'];
 			//print_r($parentStr);
 			//echo "----Parent List ID---<br>";
-			break;			
+			break;
 	    }
 	}
-    //Get ParentList from Group	
+    //Get ParentList from Group
 	$parentListArray = explode(",",$parentStr);
 	if($parentListArray[0] == "") return null;
     $questioL = array();
@@ -517,18 +566,18 @@ function forListQuestions($GID){
 				  //break;
 			   }
 		    }
-            //get question list for one loop 
-		
-			$questionListArray = explode(",",$questionStr); 
+            //get question list for one loop
+
+			$questionListArray = explode(",",$questionStr);
 			$questioL = array_merge($questioL, $questionListArray);
 	      	//if($i==0){$questioL = $questionListArray;}
 			//else{array_merge($questioL, $questionListArray);}
 		    //print_r($questioL);
 			//echo "-------<br>";
-		
-			
-		}	
-		//get questions from questions table 
+
+
+		}
+		//get questions from questions table
 		for ($i=0; $i<sizeof($questioL); $i++){
 			$qSelect = $db->prepare('SELECT * FROM questions WHERE QuestionID= :QID');
 			$qSelect->bindValue(':QID', $questioL[$i]);
@@ -563,7 +612,7 @@ function forListQuestions($GID){
 							}
 						}
 					}
-					// array_push($optionCollection, $optionItem);	
+					// array_push($optionCollection, $optionItem);
 					array_push($arrayQuestion, $rowQuestion['QuestionID']);
 					array_push($arrayQuestion, $rowQuestion['QuestionTitle']);
 					array_push($arrayQuestion, $rowQuestion['QuestionDescription']);
@@ -574,17 +623,17 @@ function forListQuestions($GID){
 					array_push($questionCollection, $arrayQuestion);
 				}
 			}
-		}			
-		
+		}
+
 	// Return the array colletion for all the questions against with option
 	return $questionCollection;
-	
-  
+
+
     } catch (PDOException $e) {
 		print "Error!: " . $e->getMessage() . "<br/>";
 		die();
 	}
-   
+
 }
 /* ------------------ forListQustions($GID) end -------- */
 ?>
