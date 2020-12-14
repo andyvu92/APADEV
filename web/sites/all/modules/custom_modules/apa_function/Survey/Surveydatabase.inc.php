@@ -2,8 +2,11 @@
 /* Survey Database */
 /************ */
 function checkMembershipYear(){
-   $currentYear = date("Y");
-   if($currentYear =="2021"){
+   //$currentYear = date("Y");
+   //if($currentYear !="2020"){
+    $currentYear = date("d-m-Y");
+    $comYear = "14-12-2020";
+    if($currentYear>$comYear){
      return true;
    }
    else{
