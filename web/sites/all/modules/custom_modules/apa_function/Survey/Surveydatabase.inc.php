@@ -5,7 +5,7 @@ function checkMembershipYear(){
    //$currentYear = date("Y");
    //if($currentYear !="2020"){
     $currentYear = date("d-m-Y");
-    $comYear = "14-12-2020";
+    $comYear = "21-12-2020";
     if($currentYear>$comYear){
      return true;
    }
@@ -20,7 +20,7 @@ function forGetGroupList() {
 	try {
 		//$db = new PDO('mysql:host=10.1.1.35;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
     if(checkMembershipYear()){
-      $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+      $db = new PDO('mysql:host=localhost;dbname=apa_new_db', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
     }
     else{
       $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
@@ -64,7 +64,7 @@ function forUpdateGroupList($action){
 	try {
 		//$dbt = new PDO('mysql:host=localhost;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
     if(checkMembershipYear()){
-      $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+      $db = new PDO('mysql:host=localhost;dbname=apa_new_db', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
     }
     else{
       $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
@@ -116,7 +116,7 @@ function forSingleGroup($GID){
 	$arrayReturn = array();
 	//$dbt = new PDO('mysql:host=localhost;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
   if(checkMembershipYear()){
-    $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    $db = new PDO('mysql:host=localhost;dbname=apa_new_db', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
   }
   else{
     $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
@@ -152,7 +152,7 @@ function forGetOptionList() {
 	try {
 		//$db = new PDO('mysql:host=10.1.1.35;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 		if(checkMembershipYear()){
-      $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+      $db = new PDO('mysql:host=localhost;dbname=apa_new_db', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
     }
     else{
       $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
@@ -191,7 +191,7 @@ function forDeleteGroup($GID) {
 	try {
 		//$db = new PDO('mysql:host=10.1.1.35;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
     if(checkMembershipYear()){
-      $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+      $db = new PDO('mysql:host=localhost;dbname=apa_new_db', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
     }
     else{
       $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
@@ -224,7 +224,7 @@ function forUpdateQustion($action){
 	try {
 		//$dbt = new PDO('mysql:host=localhost;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
     if(checkMembershipYear()){
-      $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+      $db = new PDO('mysql:host=localhost;dbname=apa_new_db', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
     }
     else{
       $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
@@ -290,7 +290,7 @@ function forUpdateQustions($action){
 	try {
 		//$dbt = new PDO('mysql:host=localhost;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
 		if(checkMembershipYear()){
-      $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+      $db = new PDO('mysql:host=localhost;dbname=apa_new_db', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
     }
     else{
       $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
@@ -534,7 +534,7 @@ function forListQuestions($GID){
 
 	//$db = new PDO('mysql:host=10.1.1.35;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
   if(checkMembershipYear()){
-    $db = new PDO('mysql:host=localhost;dbname=membership_questionnaire', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
+    $db = new PDO('mysql:host=localhost;dbname=apa_new_db', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
   }
   else{
     $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
