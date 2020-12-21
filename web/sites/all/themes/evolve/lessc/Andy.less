@@ -172,12 +172,12 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
                         background-color: #a2ad00;
                     }
                 }
-                .Publications, .Extra, .Digital, .Features{
+                .Publications, .Extra, .Digital, .Features, .Innovation{
                     .field-item{
                         background-color: #009fda;
                     }
                 }
-                .In.Public{
+                .In.Public, .People{
                     .field-item{
                         background-color: #0073B0;
                     }
@@ -187,7 +187,7 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
                         background-color: #004250;
                     }
                 }
-                .Reconciliation{
+                .Reconciliation, .Profession{
                     .field-item{
                         background-color: #a25f3b;
                     }
@@ -202,7 +202,7 @@ div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
                         background-color: #ffa02f;
                     }
                 }
-                .Forum, .Case.Studies{
+                .Forum, .Case.studies, .Voices.of.APA{
                     .field-item{
                         background-color: @orange;
                     }
@@ -1463,6 +1463,18 @@ input{
             color: #000;
         }
     }
+}
+
+// InMotion update - seperate landing page
+#block-system-main .content {
+    .flex-container .node.node-inmotion {
+        .item-description {
+            height:208px;
+        }
+        .description {
+            padding-bottom: initial;
+        }
+    } 
 }
 
 /* POPUP OVERLAY */
