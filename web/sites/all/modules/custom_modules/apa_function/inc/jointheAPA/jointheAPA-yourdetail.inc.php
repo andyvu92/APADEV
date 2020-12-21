@@ -2775,10 +2775,22 @@ if(isset($_POST['MT'])){
                                     array_push($MemberType, $placeLast);
                                 }
 								//$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
-								//$MemberType     = json_decode($MemberTypecode, true);
+                                //$MemberType     = json_decode($MemberTypecode, true);
+                                function checkMembershipYear(){
+                                    //$currentYear = date("Y");
+                                    //if($currentYear !="2020"){
+                                     $currentYear = date("d-m-Y");
+                                     $comYear = "21-12-2020";
+                                     if($currentYear>$comYear){
+                                      return true;
+                                    }
+                                    else{
+                                      return false;
+                                    }
+                                 }
 								foreach ($MemberType as $key => $value) {
                                     $FilterTypes = false;
-                                    if(date("Y") == "2020") { // before 2021
+                                    if(checkMembershipYear()) { //date("Y") == "2020") { // before 2021
                                         if(!in_array($MemberType[$key]['ProductID'],$filterMemberProductsJoin)) {$FilterTypes = true;}
                                     } else { // after 2021
                                         if(!in_array($MemberType[$key]['ProductID'],$filterMemberProductsJoinAfterJan)) {$FilterTypes = true;}
@@ -2792,8 +2804,7 @@ if(isset($_POST['MT'])){
 										}
 										echo '> ' .$MemberType[$key]['Title'] . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';//echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';
 									}
-								}
-
+                                }
 							?>
                        </select>
                        </div>
