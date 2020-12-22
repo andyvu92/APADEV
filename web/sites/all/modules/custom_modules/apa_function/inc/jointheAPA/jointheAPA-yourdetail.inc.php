@@ -15,7 +15,7 @@
 $filterMemberProduct = array("10007","10008","10009","9997");
 
 $filterMemberProductsJoin = array("18768","18769","18770","18771","9960","9961");
-$filterMemberProductsJoinAfterJan = array("18768","18769","18770","18771");
+$filterMemberProductsJoinAfterJan = array("9962","9963","9998","9999","10000","10001","10002","10003");
 // Put two scenarios here;
 // 1. for new user who join a member
 // 2. web user who join a member use $_SESSION]['userID'] to get user info
@@ -2776,7 +2776,8 @@ if(isset($_POST['MT'])){
                                 }
 								//$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
                                 //$MemberType     = json_decode($MemberTypecode, true);
-                                function checkMembershipYear(){
+                                
+                                function checkMembershipYearJoin(){
                                     //$currentYear = date("Y");
                                     //if($currentYear !="2020"){
                                      $currentYear = date("d-m-Y");
@@ -2788,9 +2789,9 @@ if(isset($_POST['MT'])){
                                       return false;
                                     }
                                  }
-								foreach ($MemberType as $key => $value) {
+								foreach ($MemberType as $key => $value) {+
                                     $FilterTypes = false;
-                                    if(checkMembershipYear()) { //date("Y") == "2020") { // before 2021
+                                    if(!checkMembershipYearJoin()) { //date("Y") == "2020") { // before 2021
                                         if(!in_array($MemberType[$key]['ProductID'],$filterMemberProductsJoin)) {$FilterTypes = true;}
                                     } else { // after 2021
                                         if(!in_array($MemberType[$key]['ProductID'],$filterMemberProductsJoinAfterJan)) {$FilterTypes = true;}
