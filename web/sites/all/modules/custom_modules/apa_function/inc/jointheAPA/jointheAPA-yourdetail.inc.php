@@ -2778,11 +2778,8 @@ if(isset($_POST['MT'])){
                                 //$MemberType     = json_decode($MemberTypecode, true);
                                 
                                 function checkMembershipYearJoin(){
-                                    //$currentYear = date("Y");
-                                    //if($currentYear !="2020"){
-                                     $currentYear = date("d-m-Y");
-                                     $comYear = "23-12-2020";
-                                     if($currentYear>$comYear){
+                                    $currentYear = date("Y");
+                                    if($currentYear != "2020"){
                                       return true;
                                     }
                                     else{

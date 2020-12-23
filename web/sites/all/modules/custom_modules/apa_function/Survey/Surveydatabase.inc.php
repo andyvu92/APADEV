@@ -2,11 +2,8 @@
 /* Survey Database */
 /************ */
 function checkMembershipYear(){
-   //$currentYear = date("Y");
-   //if($currentYear !="2020"){
-    $currentYear = date("d-m-Y");
-    $comYear = "23-12-2020";
-    if($currentYear>$comYear){
+   $currentYear = date("Y");
+   if($currentYear !="2020"){
      return true;
    }
    else{
@@ -21,8 +18,7 @@ function forGetGroupList() {
 		//$db = new PDO('mysql:host=10.1.1.35;dbname=apa_survey', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
     if(checkMembershipYear()){
       $db = new PDO('mysql:host=localhost;dbname=apa_new_db', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-    }
-    else{
+    } else {
       $db = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
     }
 		$Mcheck = $db->prepare('SELECT * FROM groups');
