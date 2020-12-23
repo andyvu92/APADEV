@@ -2781,7 +2781,7 @@ if(isset($_POST['MT'])){
                                     //$currentYear = date("Y");
                                     //if($currentYear !="2020"){
                                      $currentYear = date("d-m-Y");
-                                     $comYear = "21-12-2020";
+                                     $comYear = "23-12-2020";
                                      if($currentYear>$comYear){
                                       return true;
                                     }
