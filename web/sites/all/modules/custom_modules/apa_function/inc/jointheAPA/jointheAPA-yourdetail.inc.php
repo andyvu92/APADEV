@@ -1233,15 +1233,47 @@ if (isset($_SESSION['UserId'])):
                             array_multisort($Title, SORT_ASC, $MemberType);
                             //$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
                             //$MemberType     = json_decode($MemberTypecode, true);
+                            $sortCountNum = 0;
+                            $tempArrt = Array();
+                            foreach($MemberType as $replace) {
+                                if($sortCountNum < 3) {
+                                    array_push($tempArrt, $replace);
+                                    unset($MemberType[$sortCountNum]);
+                                } else {
+                                    break;
+                                }
+                                $sortCountNum++;
+                            }
+                            foreach($tempArrt as $placeLast) {
+                                array_push($MemberType, $placeLast);
+                            }
+                            //$MemberTypecode = file_get_contents("sites/all/themes/evolve/json/MemberType.json");
+                            //$MemberType     = json_decode($MemberTypecode, true);
+
+                            function checkMembershipYearJoin(){
+                                $currentYear = date("Y");
+                                if($currentYear != "2020"){
+                                    return true;
+                                }
+                                else{
+                                    return false;
+                                }
+                                }
                             foreach ($MemberType as $key => $value) {
-                                if(!in_array($MemberType[$key]['ProductID'],$filterMemberProduct)){
+                                $FilterTypes = false;
+                                if(!checkMembershipYearJoin()) { //date("Y") == "2020") { // before 2021
+                                    if(!in_array($MemberType[$key]['ProductID'],$filterMemberProductsJoin)) {$FilterTypes = true;}
+                                } else { // after 2021
+                                    if(!in_array($MemberType[$key]['ProductID'],$filterMemberProductsJoinAfterJan)) {$FilterTypes = true;}
+                                }
+                                if(!in_array($MemberType[$key]['ProductID'],$filterMemberProduct) && $FilterTypes){
                                     echo '<option value="' . $MemberType[$key]['ProductID'] . '"';
                                     if (isset($_SESSION["MembershipProductID"])) {
                                         if ($_SESSION["MembershipProductID"] == $MemberType[$key]['ProductID']) {
                                             echo "selected='selected'";
                                         }
                                     }
-                                    echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';
+                                    echo '> ' .$MemberType[$key]['Title'] . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';//echo '> ' .substr($MemberType[$key]['Title'], strpos($MemberType[$key]['Title'],":")+1) . ' ($'.number_format($MemberType[$key]['Price'],2).') </option>';
                                 }
                             }
                         ?>
@@ -2786,7 +2818,7 @@ if(isset($_POST['MT'])){
                                       return false;
                                     }
                                  }
-								foreach ($MemberType as $key => $value) {+
+								foreach ($MemberType as $key => $value) {
                                     $FilterTypes = false;
                                     if(!checkMembershipYearJoin()) { //date("Y") == "2020") { // before 2021
                                         if(!in_array($MemberType[$key]['ProductID'],$filterMemberProductsJoin)) {$FilterTypes = true;}
