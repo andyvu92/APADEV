@@ -1,29 +1,30 @@
 <?php if(isset($_SESSION['UserId'])):?>
 <?php  if($_SESSION['MemberTypeID']!="1"): ?>
-<?php 
+<?php
 // 2.2.33 - GET CPD diary
-// Send - 
+// Send -
 // UserID
 // Response -
 // PD_id, NPD_id, CPD hours, PD title, PD date, CPD points
 // Description, Date, Time, Provider, Reflection
 $results = aptify_get_GetAptifyData("33", $_SESSION["UserId"]);
 $CPDHousrs = $results["CurrentCPDHour"];
+$currentYear = date("Y");
 ?>
 
-<h2>Your 2020 CPD snapshot</h2>
+<h2>Your <?php echo $currentYear;?> CPD snapshot</h2>
 
 <div id="cpd" style="display:none"><?php echo $CPDHousrs; ?></div>
 <div class="col-xs-12 col-md-12 circle-container" id="goo-chart">
 	<div id="donutchart"></div>
-	<span class="number"><?php  
+	<span class="number"><?php
 	if (!empty($CPDHousrs)){
 		echo $CPDHousrs;
 	}
 	else{
 		echo '0';
 	}
-	
+
 	?></span>
 	<span class="text">CPD hours<br>Completed</span>
 </div>
