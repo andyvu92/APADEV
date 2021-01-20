@@ -725,6 +725,12 @@ if($resultdata['result']) {
       */
       if(apa_member_check_status()){
         $mba_login = mba_log_in($details["Memberid"]);
+        //added logic enable member if member disable in MBA
+        if(isset($mba_login['error_description']) && ($mba_login['error_description']=="Request error: User is disabled")){
+          $email = $details["Memberid"];
+          $member_status = "Enabled";
+          mba_sso_update_status($email, $member_status);
+        }
         if(isset($mba_login['sc']['access_token']) && ($mba_login['sc']['access_token']!="")){
           $_SESSION['MBASSO_Login_Path'] = $mba_login['sc']['path'];
           $_SESSION['MBASSO_Login_Token'] = $mba_login['sc']['access_token'];
