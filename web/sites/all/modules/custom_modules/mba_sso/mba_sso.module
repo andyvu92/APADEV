@@ -13,8 +13,29 @@ function mba_sso_menu() {
       'access arguments' => array('administer site configuration'),
       'file' => 'mba_sso.admin.inc',
     );
+    $items['apasso/logon'] = [
+      'title' => "APA SSO Login",
+      'page callback' => 'mab_sso_logon',
+      'page arguments' => ['6'],
+      'access callback' => true,
+      'type' => MENU_CALLBACK,
+  ];
     return $items;
   }
+/****Get token and logon */
+function mab_sso_logon(){
+  $data = "UserID=".$_SESSION["UserId"];
+	$details = aptify_get_GetAptifyData("4", $data,"");
+  $mba_login = mba_log_in($details["Memberid"]);
+  if(isset($mba_login['sc']['access_token']) && ($mba_login['sc']['access_token']!="")){
+    $MBA_login_path = $mba_login['sc']['path'];
+    $MBA_login_token = $mba_login['sc']['access_token'];
+    $redirectURL = mba_redirect($MBA_login_token, $MBA_login_path);
+    header("Location: $redirectURL");
+  }
+
+
+}
 /**
  * Call API.
  */
