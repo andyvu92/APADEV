@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
+	<meta name="referrer" content="origin">
 	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 	<script src="/sites/all/themes/evolve/assets/scripts/typeahead.js-master/dist/typeahead.bundle.min.js" type="text/javascript"></script>
 
