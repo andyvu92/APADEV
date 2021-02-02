@@ -42,7 +42,6 @@ if(isset($_POST["PostNG"])) {
 				checkShoppingCart($userID=$_SESSION['UserId'], $type="PDNG", $productID=$NG,$coupon = "");
 				createShoppingCart($userID, $productID=$NG, $type = "PDNG", $coupon = "");
 			}
-
 			//PDShoppingCart($userID=$_SESSION['UserId'], $productID=$NG, $meetingID="",$type="PDNG",$Coupon="");
 		}
 	}
@@ -71,7 +70,7 @@ if(isset($_POST['Couponcode'])) {
 /*********Delete shopping product from APAserver******/
 if(isset($_GET["action"])&&$_GET["action"]=="del"){
 	$productID = $_GET['productid'];
-	$deltype =  $_GET['type'];
+	$deltype = $_GET['type'];
 	deletePDProduct($userID,$productID,$deltype);
 }
 
@@ -168,40 +167,7 @@ $postScheduleData['productID'] = $PDProductarray;
 $postScheduleData['CampaignCode'] = $couponCode;
 $scheduleDetails = aptify_get_GetAptifyData("47", $postScheduleData);
 $price =$scheduleDetails['OrderTotal']-$scheduleDetails['GST'];
-//print_r($scheduleDetails);
 /********End get Order Total and Schedule Payments  from Aptify******/
-/*if(isset($_POST['addCard'])){
-	// 2.2.15 - Add payment method
-	// Send -
-	// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
-	// Response -
-	// N/A.
-	if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
-	if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
-	if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
-	if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
-	if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
-	$out = aptify_get_GetAptifyData("15",$postPaymentData);
-
-	if($out["result"]=="Failed"){
-	    if($out["Message"]=="Expiry date lenght should be 4."){ echo '<div class="checkMessage">Please enter a valid expiry date before proceeding with your order.</div>';}
-		elseif($out["Message"]=="CCV accepts up to 4 digit."){ echo '<div class="checkMessage">Please enter a valid CVV number before proceeding with your order.</div>';}
-		elseif($out["Message"]=="Error in Create Person Saved Payment Method:Month must be between one and twelve. Parameter name: month"){ echo '<div class="checkMessage">Please enter a valid expiry date before proceeding with your order.</div>';}
-		elseif($out["Message"]=="Please enter a valid End Date occurring after the Start Date."){ echo '<div class="checkMessage">Please enter a valid expiry date before proceeding with your order.</div>';}
-		elseif((strpos($out["Message"], 'credit card number') !== false)){ echo '<div class="checkMessage">Please enter a valid credit card number before proceeding with your order.</div>';}
-	    elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)){ echo '<div class="checkMessage">Please enter a valid credit card number before proceeding with your order.</div>';}
-	    else{ echo '<div class="checkMessage">there was an unexpected error with your payment details, Please go back and check they are correct, or contact the APA.</div> ';}
-	}
-} */
-/*if(isset($_POST['addCard']) && $_POST['addCard'] == "1" && !isset($_POST['addcardtag'])) {
-	$tempcard = array();
-	$tempcard['Payment-method'] = $_POST['Cardtype'];
-	$tempcard['Cardno'] = $_POST['Cardnumber'];
-	$tempcard['CardName'] = $_POST['Cardname'];
-	$tempcard['Expiry-date'] = $_POST['Expirydate'];
-	$tempcard['CCV'] = $_POST['CCV'];
-	$_SESSION['tempcard'] = $tempcard;
-}	*/
 if(isset($_SESSION["UserId"])){
 	$userid = $_SESSION["UserId"];
 	$test['id'] = $_SESSION["UserId"];
@@ -352,20 +318,11 @@ if(isset($_SESSION["UserId"])){
 			}
 			$discountPrice += $productt['Product Cost Without Coupon']-$productt['Product Cost With Coupon'];
 			// end add by jinghu
-			//if($_SESSION['MemberTypeID'] == "1" || $_SESSION['MemberTypeID'] == 1) {
-				//echo	"<td>".$productt['Pricelist'][1]['Price']."</td>";
-				//echo	"<td>M price</td>";
-			//} else {
-				//echo	"<td>".$productt['Pricelist'][0]['Price']."</td>";
-				//echo	"<td>NM price</td>";
-			//}
 			echo        '<div class="flex-col-1 pd-spcart-delete"><a target="_self" href="pd-shopping-cart?action=del&type=PD&productid='.$productt['ProductID'].'"><i class="fa fa-times-circle" aria-hidden="true"></i></a></div>';
 			if(!$available) echo	"<div class='removedEvent flex-col-12'>".$eventMessage."</div>";
 			echo "</div>";
 			$n=$n+1;
 			$i=$i+1;
-			//$price=$price+(int)str_replace('$', '', $productt['Pricelist'][0]['Price']);
-		//if (in_array($productt['Typeofpd'],  $pdtype)){ $tag=1; }
 		if ($productt['Typeofpd'] == $pdtype){ $tag=1; }
 		if ($productt['Typeofpd'] =="Networking Event" || $productt['Typeofpd'] =="Student Event") { $dietarT = 1;} else { $dietarT = 0;}
 		}
@@ -513,66 +470,6 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	</div>
 
 	<div id="anothercardBlock" class="col-xs-12 none-padding down10 extra-card" style="display:none;"<?php //if(isset($_SESSION["tempcard"])){ echo 'style="display:block;"';} else { echo 'style="display:none;"';}?>>
-		<!--<form action="/pd/pd-shopping-cart" method="POST" class="">
-		<input type="hidden" name="addCard" value="1"/>
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="chevron-select-box">
-					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-					<?php
-						/*$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
-						$PaymentType=json_decode($PaymentTypecode, true);
-						foreach($PaymentType  as $pair => $value){
-							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
-							if(isset($_SESSION["tempcard"]) && $_SESSION["tempcard"]['Payment-method'] ==$PaymentType[$pair]['ID']) {echo "selected ";}
-							echo '> '.$PaymentType[$pair]['Name'].' </option>';
-
-						}*/
-					?>
-					</select>
-				</div>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<label for="">Name on card:<span class="tipstyle"> *</span></label>
-			<input type="text" class="form-control"  name="Cardname" placeholder="Name on card" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CardName'].''; ?>>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<label for="">Card number:<span class="tipstyle"> *</span></label>
-			<input type="number" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-			<input type="number" class="form-control"  name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-				<label for="">CVV:<span class="tipstyle"> *</span></label>
-				<input type="number" class="form-control"  name="CCV" placeholder="CVV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
-			</div>
-				<div class="col-xs-12 tooltip-container top" style="margin-top: 10px;">
-					<span class="tooltip-activate">What is CVV?</span>
-					<div class="tooltip-content">
-						<h4>What is a Card Verification Number?</h4>
-						<span class="tooltip-img"><img src="/sites/default/files/general-icon/cvn-image.png"></span>
-						<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
-					</div>
-				</div>
-		</div>
-		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
-			<input class="styled-checkbox" type="hidden" id="addcardtag" name="addcardtag" <?php //if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>>
-			<label for="addcardtag">Do you want to save this card?</label>
-		</div>-->
-		<!--<div class="col-xs-12 none-padding">
-			<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
-		</div>
-		</form>-->
 		<?php $the_form = drupal_get_form('pd_shoppingcart_form',$vars);
 			print drupal_render($the_form);	?>
 	</div>
@@ -581,79 +478,19 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 	</div>
 	<?php endif; ?>
     <?php if (sizeof($cardsnum["results"])==0): ?>
-	<!--<form action="/pd/pd-shopping-cart" method="POST" id="addPaymentCardForm">
-	    <input type="hidden" name="addCard" value="1">
-		<div class="row">
-			<div class="col-lg-12">
-				<div class="chevron-select-box">
-					<select class="form-control"  name="Cardtype" placeholder="Card type">
-					<?php
-						/*$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
-						$PaymentType=json_decode($PaymentTypecode, true);
-						foreach($PaymentType  as $pair => $value){
-							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
-							if(isset($_SESSION["tempcard"]) && $_SESSION["tempcard"]['Payment-method'] ==$PaymentType[$pair]['ID']) {echo "selected ";}
-							echo '> '.$PaymentType[$pair]['Name'].' </option>';
+		<div id="addPaymentCardForm">
+		<p><span class="sidebardis">Payment Information:</span></p>
 
-						}*/
-					?>
-					</select>
-				</div>
-			</div>
+		<?php if(sizeof($products)!=0):?>
+			<form id="discount" action="pd-shopping-cart" method="POST">
+				<input type="text" name="Couponcode" placeholder="Enter discount code" value="">
+				<button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button>
+			</form>
+			<span>&nbsp;</span>
+		<?php endif; ?>
+		<?php $the_form = drupal_get_form('pd_shoppingcart_form',$vars);
+				print drupal_render($the_form);?>
 		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<label for="">Name on card:<span class="tipstyle"> *</span></label>
-			<input type="text" class="form-control"  name="Cardname" placeholder="Name on card" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CardName'].''; ?>>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<label for="">Card number:<span class="tipstyle"> *</span></label>
-			<input type="number" class="form-control"  name="Cardnumber" placeholder="Card number" required maxlength="16" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Cardno'].''; ?>>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-			<label for="">Expiry date:<span class="tipstyle"> *</span></label>
-			<input type="number" class="form-control"  name="Expirydate" placeholder="mmyy (eg: 0225)" required maxlength="4" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['Expiry-date'].''; ?>>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-lg-12">
-				<label for="">CVV:<span class="tipstyle"> *</span></label>
-				<input type="number" class="form-control"  name="CCV" placeholder="CVV" <?php //if(isset($_SESSION["tempcard"])) echo 'value='.$_SESSION["tempcard"]['CCV'].''; ?>>
-			</div>
-			<div class="col-xs-12 tooltip-container top" style="margin-top: 10px;">
-				<span class="tooltip-activate">What is this?</span>
-				<div class="tooltip-content">
-					<h4>What is a Card Verification Number?</h4>
-					<span class="tooltip-img"><img src="sites/default/files/general-icon/cvn-image.png"></span>
-					<span>For Visa and Mastercard enter the last three digits on the signature strip. For American Express, enter the four digits in small print on the front of the card.</span>
-				</div>
-			</div>
-		</div>
-		<!--<div class="col-xs-12 none-padding" style="padding-left: 1px; margin: 5px 0;">
-			<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag" <?php //if(!isset($_SESSION["tempcard"])) {echo 'value="1" checked';} else {echo 'value="0"';} ?>>
-			<label for="addcardtag">Do you want to save this card?</label>
-		</div>-->
-		<!--<div class="col-xs-12 none-padding">
-			<a class="addCartlink"><button type="submit" class="dashboard-button dashboard-bottom-button your-details-submit addCartButton">Add</button></a>
-		</div>
-	</form>	-->
-	<div id="addPaymentCardForm">
-	<p><span class="sidebardis">Payment Information:</span></p>
-
-	<?php if(sizeof($products)!=0):?>
-		<form id="discount" action="pd-shopping-cart" method="POST">
-			<input type="text" name="Couponcode" placeholder="Enter discount code" value="">
-			<button type="Submit" class="dashboard-button dashboard-bottom-button your-details-submit applyCouponButton">Apply</button>
-		</form>
-		<span>&nbsp;</span>
-	<?php endif; ?>
-	<?php $the_form = drupal_get_form('pd_shoppingcart_form',$vars);
-	        print drupal_render($the_form);?>
-    </div>
 	<?php endif; ?>
 
 	<?php  if((sizeof($products)!=0) || (sizeof($NGProductsArray)!=0) || (sizeof($FPListArray)!=0)):?>
@@ -877,36 +714,6 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
   <link rel="stylesheet" href="/resources/demos/style.css">
  <!--<script src="https://code.jquery.com/jquery-1.12.4.js"></script>-->
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-
-jQuery(document).ready(function(){
-	$( function() {
-  //$.widget( "custom.iconselectmenu", $.ui.selectmenu, {
-    //  _renderItem: function( ul, item ) {
-    //    var li = $( "<li>" ),
-    //      wrapper = $( "<div>", { text: item.label } );
-
-    //    if ( item.disabled ) {
-    //      li.addClass( "ui-state-disabled" );
-    //    }
-
-    //    $( "<span>", {
-    //      style: item.element.attr( "data-style" ),
-    //      "class": "ui-icon " + item.element.attr( "data-class" )
-    //    })
-    //      .appendTo( wrapper );
-
-     //   return li.append( wrapper ).appendTo( ul );
-    //  }
-    //});
-    //$( "#Paymentcard" )
-    //  .iconselectmenu()
-    //  .iconselectmenu( "menuWidget" )
-    //    .addClass( "ui-menu-icons customicons" );
-
-} );
-});
-</script>
  <?php else :
 	// when user is not logged in
 	?>

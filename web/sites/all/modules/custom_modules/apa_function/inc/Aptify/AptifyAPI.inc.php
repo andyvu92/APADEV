@@ -538,18 +538,14 @@ function curlRequest($API, $type, $variables) {
 }
 
 function logTransaction($APINum, $Sent, $Got) {
-	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
-	//$profile = $dbt->prepare('INSERT INTO logprofile (userID, text) VALUES (:userID, :text)');	
-	$profile	=  db_insert('logprofile'); 
+	$profile = db_insert('logprofile'); 
 				
 	$txt = "UserID: ";
 	if(isset($_SESSION["UserId"])) {
 		$txt .= $_SESSION["UserId"]."\n";
-		//$profile->bindValue(':userID', $_SESSION["UserId"]);
 		$userlogID =$_SESSION["UserId"];
 		
 	} else {
-		//$profile->bindValue(':userID', 'noValue');
 		$userlogID ="noValue";
 		$txt .= "noValue\n";
 	}
@@ -560,31 +556,21 @@ function logTransaction($APINum, $Sent, $Got) {
 	$txt .= "Data Received: \n";
 	$txt .= $Got."\n";
 	$txt .= "---End of Log (".date("Y-m-d h-i-s").")---\n\n\n\n\n";
-	
-	//$profile->bindValue(':text', $txt);		  
 	$profile->fields(array(
 				  'userID' => $userlogID,
 				  'text' => $txt,
 	));
 	// log file output.
-	$profile->execute();	
-	//$profile->closeCursor();
-	//$profile = null;
-	//$dbt = null;
+	$profile->execute();
 }
 
 /** Log record start / end
   * Records log when sent TRUE.
   * When start - Use
-  *
-  *
-  *
   */
 function logRecorder() {
 	/* load log file and prepare for new data */
 	$sizeByte = intval(filesize("sites/Log/APA_Aptify_Communication.log"));
-	//$size = FileSizeConvert($sizeByte);
-	////echo "size: ".$size." // ".filesize("sites/Log/APA_Aptify_Communication.log")."<br />";
 	if($sizeByte > 1000000) {
 		fileloop();
 	}
@@ -592,22 +578,12 @@ function logRecorder() {
 	if(file_exists("sites/Log/APA_Aptify_Communication.log")){ // Check If File Already Exists
 		$myfilet = fopen("sites/Log/APA_Aptify_Communication.log", "r");
 		$fileContinue = fread($myfilet,filesize("sites/Log/APA_Aptify_Communication.log"));
-		////echo "Yo: ".$fileContinue."!<br />";
 		fclose($myfilet);
 	}
 	/* load logged records to a single text */
-	//$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g'); 
-	//$profileFinal= $dbt->prepare('SELECT * FROM logprofile WHERE userID= :userID');	
 	if(isset($_SESSION["UserId"])) {
-		//$profileFinal->bindValue(':userID', $_SESSION["UserId"]);
 	    $userlog = $_SESSION["UserId"];
-		//$Mdelete = $dbt->prepare('DELETE FROM logprofile WHERE userID = '.$_SESSION["UserId"].'');
-		//$Mdelete ->condition('userID', $_SESSION["UserId"], '=');
 	} else {
-		//$profileFinal->bindValue(':userID', 'noValue');
-		//$profileFinal->condition('userID', 'noValue', '=');
-		//$Mdelete = $dbt->prepare('DELETE FROM logprofile WHERE userID = "noValue"');
-		//$Mdelete ->condition('userID', 'noValue', '='); 
 		$userlog = "noValue";
 	}
 	$profileFinal=db_select('logprofile','logfile')
@@ -631,14 +607,7 @@ function logRecorder() {
 	fclose($myfile);
 	$Mdelete = db_delete('logprofile');
 	$Mdelete ->condition('userID', $userlog, '=');
-	$Mdelete->execute();
-	/* close connection */
-	//$Mdelete->closeCursor();
-	//$Mdelete = null;
-	//$profileFinal->closeCursor();
-	//$profileFinal = null;
-	//$dbt = null;
-	
+	$Mdelete->execute();	
 }
 
 // push file names' number increased by 1.

@@ -827,32 +827,6 @@ $type = "PD";
 $counts = 0;
 if(isset($_SESSION['UserId'])) {
 	$userID = $_SESSION['UserId'];
-	/*$dbt = new PDO('mysql:host=localhost;dbname=apa_extrainformation', 'c0DefaultMain', 'Rkd#!8cd,&ag6e95g9&5192(gb[5g');
-	/********Get user shopping product form APA server******/
-	/*try {
-		$type="PD";
-		$shoppingcartGetPD= $dbt->prepare('SELECT ID, productID, meetingID,coupon FROM shopping_cart WHERE userID= :userID AND type= :type');
-		$shoppingcartGetPD->bindValue(':userID', $userID);
-		$shoppingcartGetPD->bindValue(':type', $type);
-		$shoppingcartGetPD->execute();
-		foreach($shoppingcartGetPD as $ttt) {
-			$counts++;
-		}
-		$shoppingcartGetPD= null;
-		$type="PDNG";
-		$shoppingcartGetPDNG= $dbt->prepare('SELECT ID, productID, meetingID,coupon FROM shopping_cart WHERE userID= :userID AND type= :type');
-		$shoppingcartGetPDNG->bindValue(':userID', $userID);
-		$shoppingcartGetPDNG->bindValue(':type', $type);
-		$shoppingcartGetPDNG->execute();
-		foreach($shoppingcartGetPDNG as $ttt) {
-			$counts++;
-		}
-		$shoppingcartGetPDNG= null;
-	} catch (PDOException $e) {
-		print "Error!: " . $e->getMessage() . "<br/>";
-		die();
-	}
-	$dbt = null;*/
 	$type="PD";
 	$shoppingcartGetPD = getPDProduct($userID,$type);
 	foreach($shoppingcartGetPD as $ttt) {
