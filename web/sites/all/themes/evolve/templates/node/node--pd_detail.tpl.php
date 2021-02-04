@@ -1690,6 +1690,8 @@ $userRetisterStatus = false;
 						$timeZone = "ACST";
 					} elseif($pd_detail['State'] == "WA") {
 						$timeZone = "AWST";
+					} elseif($pd_detail['State'] == "QLD") {
+						$timeZone = "AEST";
 					} ?>
 					<?php echo $timeOutput." ".$timeZone;//$edate[1]."-".$edate[1]; ?>
 				</span>
