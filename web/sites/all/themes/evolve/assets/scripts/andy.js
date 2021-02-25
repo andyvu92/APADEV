@@ -2291,7 +2291,7 @@ jQuery(document).ready(function() {
   });
 
   $('.check_square').each(function () {
-    var icon = '<svg xmlns="http://www.w3.org/2000/svg" width="33.107" height="30.976" viewBox="0 0 33.107 30.976"><g transform="translate(0 1.976)"><g fill="none" stroke="#bb3c9e" stroke-width="3"><rect width="29" height="29" rx="6" stroke="none"/><rect x="1.5" y="1.5" width="26" height="26" rx="4.5" fill="none"/></g><path d="M-23827.367,4128.662l5.986,7.187,15.357-18.432" transform="translate(23836.314 -4116.575)" fill="none" stroke="#bb3c9e" stroke-linecap="round" stroke-width="4"/></g></svg>';
+    var icon = '<svg xmlns="http://www.w3.org/2000/svg" width="33.107" height="30.976" viewBox="0 0 33.107 30.976"><g transform="translate(0 1.976)"><g fill="none" stroke="#ffa02e" stroke-width="3"><rect width="29" height="29" rx="6" stroke="none"/><rect x="1.5" y="1.5" width="26" height="26" rx="4.5" fill="none"/></g><path d="M-23827.367,4128.662l5.986,7.187,15.357-18.432" transform="translate(23836.314 -4116.575)" fill="none" stroke="#ffa02e" stroke-linecap="round" stroke-width="4"/></g></svg>';
     $(this).html(icon);
   });
 
@@ -3660,25 +3660,25 @@ const countDownRenew = () => {
                 minute = second * 60,
                 hour = minute * 60,
                 day = hour * 24;
-        
+
             let endDate = setDate,
                 countDown = new Date(endDate).getTime(),
-        
-            x = setInterval(() => {    
+
+            x = setInterval(() => {
                 let now = new Date().getTime(),
                     distance = countDown - now;
-                
+
                 container.querySelector(".days").innerText = distance > 0 ? Math.floor(distance / (day)) : '0',
                 container.querySelector(".hours").innerText = distance > 0 ? Math.floor((distance % (day)) / (hour)) : '0',
                 container.querySelector(".minutes").innerText = distance > 0 ? Math.floor((distance % (hour)) / (minute)) : '0',
                 container.querySelector(".seconds").innerText = distance > 0 ? Math.floor((distance % (minute)) / second) : '0';
-        
+
                 //do something later when date is reached
                 if (distance < 0) {
                     let headline = container.querySelector(".headline"),
                         countdown = container.querySelector(".countdown"),
                         message = container.querySelector(".message");
-            
+
                     if (message) {
                         headline.innerText = "It's my birthday!";
                         countdown.style.display = "none";
@@ -3722,7 +3722,7 @@ const initLoadVideoToggle = () => {
       const iframe = document.createElement('iframe');
       iframe.src = src;
       iframe.setAttribute('allowfullscreen', 'allowfullscreen');
-      
+
       // create iframe overlay
       const iframeOverlay = document.createElement('div');
       iframeOverlay.classList.add('iframe-overlay');
@@ -3742,7 +3742,7 @@ const initLoadVideoToggle = () => {
       // create video player popup
       const videoPlayerPopup = document.createElement('div');
       videoPlayerPopup.id = 'video-player-overlay';
-      
+
       // append components to display
       document.body.style.overflow = "hidden";
       document.body.style.paddingRight = "var(--sbw)";
