@@ -2291,7 +2291,12 @@ jQuery(document).ready(function() {
   });
 
   $('.check_square').each(function () {
-    var icon = '<svg xmlns="http://www.w3.org/2000/svg" width="33.107" height="30.976" viewBox="0 0 33.107 30.976"><g transform="translate(0 1.976)"><g fill="none" stroke="#ffa02e" stroke-width="3"><rect width="29" height="29" rx="6" stroke="none"/><rect x="1.5" y="1.5" width="26" height="26" rx="4.5" fill="none"/></g><path d="M-23827.367,4128.662l5.986,7.187,15.357-18.432" transform="translate(23836.314 -4116.575)" fill="none" stroke="#ffa02e" stroke-linecap="round" stroke-width="4"/></g></svg>';
+    var icon = '<svg xmlns="http://www.w3.org/2000/svg" width="33.107" height="30.976" viewBox="0 0 33.107 30.976"><g transform="translate(0 1.976)"><g fill="none" stroke="#bb3c9e" stroke-width="3"><rect width="29" height="29" rx="6" stroke="none"/><rect x="1.5" y="1.5" width="26" height="26" rx="4.5" fill="none"/></g><path d="M-23827.367,4128.662l5.986,7.187,15.357-18.432" transform="translate(23836.314 -4116.575)" fill="none" stroke="#ffa02e" stroke-linecap="round" stroke-width="4"/></g></svg>';
+    $(this).html(icon);
+  });
+
+  $('.check_square_orange').each(function () {
+    var icon = '<svg xmlns="http://www.w3.org/2000/svg" width="33.107" height="30.976" viewBox="0 0 33.107 30.976"><g transform="translate(0 1.976)"><g fill="none" stroke="#bb3c9e" stroke-width="3"><rect width="29" height="29" rx="6" stroke="none"/><rect x="1.5" y="1.5" width="26" height="26" rx="4.5" fill="none"/></g><path d="M-23827.367,4128.662l5.986,7.187,15.357-18.432" transform="translate(23836.314 -4116.575)" fill="none" stroke="#ffa02e" stroke-linecap="round" stroke-width="4"/></g></svg>';
     $(this).html(icon);
   });
 
