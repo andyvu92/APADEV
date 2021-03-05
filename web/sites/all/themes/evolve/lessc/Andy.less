@@ -2428,6 +2428,9 @@ input{
 }
 
 &.border-pink {
+    border-color: @pink
+}
+&.border-orange {
     border-color: @orange;
 }
 
@@ -2934,6 +2937,23 @@ body, body .block{
     position: relative;
 
     &.theme-pink {
+        .underline-heading {
+            &:after {
+                background: @pink;
+            }
+        }
+
+        .nav {
+            li {
+                > a {
+                    &:hover {
+                        color: @pink;
+                    }
+                }
+            }
+        }
+    }
+    &.theme-orange {
         .underline-heading {
             &:after {
                 background: @orange;
@@ -9289,6 +9309,13 @@ body #section-main-content{
             }
         }
     }
+    &.theme-orange {
+        .underline-heading {
+            &:after {
+                background-color: @orange;
+            }
+        }
+    }
 }
 
 .node-type-research-translation,
@@ -9998,6 +10025,50 @@ body {
                 h4,
                 h5,
                 h6 {
+                    color: @pink;
+                }
+
+                a {
+                    color: @pink;
+                }
+            }
+
+            .secondary-button {
+                color: white;
+
+                &:hover {
+                    color: @pink;
+                }
+            }
+        }
+    }
+    .block {
+        &.theme-orange,
+        .theme-orange {
+            color: @dark-border;
+
+            ul,
+            p {
+                color: @dark-border;
+            }
+
+            &,
+            .block,
+            &.left-content, .left-content,
+            &.right-sidebar, .right-sidebar {
+                color: @dark-border;
+
+                ul,
+                p {
+                    color: @dark-border;
+                }
+
+                h1,
+                h2,
+                h3,
+                h4,
+                h5,
+                h6 {
                     color: @orange;
                 }
 
@@ -10017,6 +10088,9 @@ body {
     }
 
     .color-pink {
+        color: @pink!important;
+    }
+    .color-orange {
         color: @orange!important;
     }
 
