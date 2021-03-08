@@ -192,7 +192,7 @@ if(count($PostArray) == 0) { // GET data
 						$arrayNew["SubscriptionID"] =  $temArray["SubscriptionID"];
 						$arrayNew["Subscription"] =  $temArray["Subscription"];
 						$arrayNew["Subscribed"] = $temArray["Subscribed"];
-						if($arrayNew["Subscription"]!="SMS Opt Out" ){
+						if($arrayNew["Subscription"]!="SMS" ){
 							array_push($arrangArray, $arrayNew);
 						}
 						else{

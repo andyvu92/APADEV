@@ -389,7 +389,7 @@ function SavePDSurvey($CreateNewUserPD){
 	$Campaignsproduct = $CreateNewUserPD["Campaigns-product"];
 	$Partnerproduct = $CreateNewUserPD["Partner-product"];
 	$CreateDate = $CreateNewUserPD["CreateDate"];
-	
+
 	$PDSurvey	=  db_insert('pdsurvey')
 				->fields(array(
 				  'UserID' => $UserID,
@@ -566,9 +566,9 @@ function getDescription($str){
       return "Essential communications will be delivered via the most relevant channel. These communications are mandatory and cannot be opted-out of.";
     case "Third party communications":
       return "Third party communications are delivered via the APA and APA channels. Your information will not be provided to any third parties";
-    case "SMS Opt Out":
+    case "SMS":
       return "SMS communications are used for critical membership information only.";
-    case "Member Surveys Opt Out":
+    case "Member Surveys":
       return "Member Surveys are an important tool to determine the needs of members and the needs of the profession. These surveys may be conducted by external parties at the direction of the APA.";
   }
 }
