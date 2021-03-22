@@ -580,7 +580,7 @@ You have the right to access the personal information about yourself held by the
 		<span class="space-50">&nbsp;</span>
 
 		<div class="bottom-info">
-			<span>If you have any questions with regard to APA membership, please contact our Member Service Centre at <a href="mailto:info@australian.physio">info@australian.physio</a> or call <a href="tel:1300 306 622">1300&nbsp;306&nbsp;622</a></span>
+			<span>If you have any questions with regard to APA membership, please contact our Member Support Team at <a href="mailto:info@australian.physio">info@australian.physio</a> or call <a href="tel:1300 306 622">1300&nbsp;306&nbsp;622</a></span>
 		</div>
 
 		<span class="space-100">&nbsp;</span>
@@ -639,7 +639,7 @@ You have the right to access the personal information about yourself held by the
 		<span class="space-50">&nbsp;</span>
 
 		<div class="bottom-info">
-			<span>If you have any questions with regard to APA membership, please contact our Member Service Centre at <a href="mailto:info@australian.physio">info@australian.physio</a> or call <a href="tel:1300 306 622">1300&nbsp;306&nbsp;622</a></span>
+			<span>If you have any questions with regard to APA membership, please contact our Member Support Team at <a href="mailto:info@australian.physio">info@australian.physio</a> or call <a href="tel:1300 306 622">1300&nbsp;306&nbsp;622</a></span>
 		</div>
 
 		<span class="space-100">&nbsp;</span>
