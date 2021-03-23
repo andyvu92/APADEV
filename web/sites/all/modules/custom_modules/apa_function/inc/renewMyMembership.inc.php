@@ -93,6 +93,7 @@ $userTag = getInsuranceStatus($userID);
 	header("Location:".$link."/insuranceprocess");
 }*/
 
+
 } else { $userID =0; }
 $background = getBackgroundImage($userID);
 /* get background image****/
@@ -494,10 +495,10 @@ You have the right to access the personal information about yourself held by the
 	<!-- A MEMBER DOESN'T HAVE A RENEW QUATATION -->
 	<div class="flex-container" id="non-member">
 		<div class="flex-cell">
-			<h3 class="light-lead-heading">Looks like you’ve already renewed your APA membership. <br>If you’re looking to update your membership details, <br>go to your dashboard.</h3>
+			<h3 class="light-lead-heading">It looks like your APA membership has expired. <br>Purchase your APA membership to access your member benefits.</h3>
 		</div>
 		<div class="flex-cell cta">
-			<a href="/dashboard" class="join">Go to dashboard</a>
+			<a href="/membership-question" class="join">Join now</a>
 		</div>
 
 		<?php
@@ -509,6 +510,7 @@ You have the right to access the personal information about yourself held by the
 
 	</div>
 <?php endif; ?>
+
 <?php  else: ?>
 	<!-- USER LOGGED IN BUT NOT A MEMBER  -->
 	<div class="flex-container" id="non-member">
@@ -580,7 +582,7 @@ You have the right to access the personal information about yourself held by the
 		<span class="space-50">&nbsp;</span>
 
 		<div class="bottom-info">
-			<span>If you have any questions with regard to APA membership, please contact our Member Support Team at <a href="mailto:info@australian.physio">info@australian.physio</a> or call <a href="tel:1300 306 622">1300&nbsp;306&nbsp;622</a></span>
+			<span>If you have any questions, please contact our Member Support team at <a href="mailto:info@australian.physio">info@australian.physio</a> or call <a href="tel:1300 306 622">1300&nbsp;306&nbsp;622</a></span>
 		</div>
 
 		<span class="space-100">&nbsp;</span>
@@ -639,7 +641,7 @@ You have the right to access the personal information about yourself held by the
 		<span class="space-50">&nbsp;</span>
 
 		<div class="bottom-info">
-			<span>If you have any questions with regard to APA membership, please contact our Member Support Team at <a href="mailto:info@australian.physio">info@australian.physio</a> or call <a href="tel:1300 306 622">1300&nbsp;306&nbsp;622</a></span>
+			<span>If you have any questions, please contact our Member Support team at <a href="mailto:info@australian.physio">info@australian.physio</a> or call <a href="tel:1300 306 622">1300&nbsp;306&nbsp;622</a></span>
 		</div>
 
 		<span class="space-100">&nbsp;</span>
