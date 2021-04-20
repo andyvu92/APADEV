@@ -1684,8 +1684,10 @@ $userRetisterStatus = false;
 				</div>
 				<span class="session-time">
 					<?php
-					// $timeZone = "AEST";
 					$timeZone = "AEDST";
+					if(variable_get('daylightsaving_control', 0) == 0) {
+						$timeZone = "AEST";
+					}
 					if($pd_detail['State'] == "NT" || $pd_detail['State'] == "SA") {
 						$timeZone = "ACST";
 					} elseif($pd_detail['State'] == "WA") {

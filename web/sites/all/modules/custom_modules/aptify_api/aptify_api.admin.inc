@@ -13,6 +13,7 @@ define('GLOBAL_MESSAGE_CONTROL',0);
 define('RENEW_ACTIVE_STATUS',0);
 define('RENEW_YEAR',2021);
 define('APTIFY_SERVER_MAINTENANCE_OOPS','We are currently experiencing an issue that may prevent members from logging into the APA website and accessing member-only content, including PD. We are working to resolve this issue as soon as possible. Thank you for your patience.');
+define('DAYLIGHT_SAVINGS',0);
 /**
  * Admin settings form.
  */
@@ -71,6 +72,11 @@ function aptify_api_admin_settings() {
     '#type' => 'checkbox',
     '#title' => t('Global pop up message on/off'),
     '#default_value' => variable_get('messagebox_control', GLOBAL_MESSAGE_CONTROL),
+  );
+  $form['aptify_api']['daylightsaving_control'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Daylight savings on/off for PD events'),
+    '#default_value' => variable_get('daylightsaving_control', DAYLIGHT_SAVINGS),
   );
   return system_settings_form($form);
 }
