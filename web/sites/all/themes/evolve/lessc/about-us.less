@@ -645,26 +645,6 @@
 /* APA PARTNERS */
 .page-node-241{
     .page-node-141;
-    #block-system-main{
-        #node-241{
-            padding-top: 50px;
-            h2.lead-heading{
-                margin-top: 0;
-            }
-        }
-        .sub-heading {
-            color: #009fda;
-            font-size: 1.8em;
-            font-family: Roboto;
-            font-weight: 700;
-        }
-        a.dark-text{
-            color: #000;
-            &:hover{
-                color: @bright-blue;
-            }
-        }
-    }
 
     /* PARTNER LOGOS */
     #partners-info{
@@ -833,8 +813,16 @@
 .page-node-2116{
     .contact-details{
         margin-bottom: 70px;
-        .contact-block:first-of-type{
-            margin: 25px 0 35px;
+        .contact-block {
+            a.dark-text{
+                color: #000;
+                &:hover{
+                    color: @bright-blue;
+                }
+            }
+            &:first-of-type{
+                margin: 25px 0 35px;
+            }
         }
         p{
             margin-bottom: 20px !important;
