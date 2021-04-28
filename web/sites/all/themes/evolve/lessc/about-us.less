@@ -665,48 +665,6 @@
             }
         }
     }
-    /* BANNER */
-    #section-banner{
-        #block-block-246{
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            .header-banner h1 {
-                font-family: Roboto;
-                font-weight: 400;
-                text-transform: uppercase;
-                color: #fff;
-                font-size: 5em;
-                line-height: 1em;
-                @media @larger-phone-width-down {
-                    font-size: 2.5em;
-                }
-            }
-            @media @tablet-width-down{
-                .header-banner h1{
-                    font-size: 4em;
-                }
-            }
-            @media @larger-phone-width-down{
-                .header-banner h1{
-                    font-size: 3em;
-                }
-            }
-            @media @phone-width-down{
-                .header-banner h1{
-                    font-size: 2.5em;
-                }
-            }
-            .img-parallax{
-                @media @desktop-width-down{
-                    margin-top: 50px;
-                }
-                @media @larger-phone-width-down {
-                    margin-top: 0px;
-                }
-            }
-        }
-    }
 
     /* PARTNER LOGOS */
     #partners-info{
@@ -828,8 +786,51 @@
     }
 }
 
+/* BANNER */
+#section-banner{
+    #block-block-246, #block-block-459{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .header-banner h1 {
+            font-family: Roboto;
+            font-weight: 400;
+            text-transform: uppercase;
+            color: #fff;
+            font-size: 5em;
+            line-height: 1em;
+            @media @larger-phone-width-down {
+                font-size: 2.5em;
+            }
+        }
+        @media @tablet-width-down{
+            .header-banner h1{
+                font-size: 4em;
+            }
+        }
+        @media @larger-phone-width-down{
+            .header-banner h1{
+                font-size: 3em;
+            }
+        }
+        @media @phone-width-down{
+            .header-banner h1{
+                font-size: 2.5em;
+            }
+        }
+        .img-parallax{
+            @media @desktop-width-down{
+                margin-top: 50px;
+            }
+            @media @larger-phone-width-down {
+                margin-top: 0px;
+            }
+        }
+    }
+}
+
 /* BOTTOM CONTACT DETAILS */
-.page-node-241{
+.page-node-2116{
     .contact-details{
         margin-bottom: 70px;
         .contact-block:first-of-type{
