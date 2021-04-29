@@ -1,3 +1,4 @@
+<?php $shows = ($content["field_tile_type"]['#items'][0]["taxonomy_term"]->name == "Podcast Shows")? true : false; ?>
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix homeBottom"<?php print $attributes; ?>>
     <?php print render($title_prefix); ?>
     <?php print render($title_suffix); ?>
@@ -31,7 +32,12 @@
                 <?php endif; ?></a></span>
             
         <div class="portfolio-image">
-			<div class="HomeType"><?php print render($content['field_tile_type']); ?></div>
+			<div class="HomeType"><?php 
+                if($shows) {
+                    echo '<div class="field field-name-field-tile-type field-type-taxonomy-term-reference field-label-hidden Podcast"><div class="field-items"><div class="field-item even">Podcasts</div></div></div>';
+                } else {
+                    print render($content['field_tile_type']);
+                } ?></div>
             <?php print render($content['field_home_tile_image']); ?>
             <div class="mediaholder"></div>
             <div class="portfolio-image-zoom">
@@ -45,7 +51,12 @@
         </div>
         <div class="item-description">
 			<div class="movSection">
-				<div class="HomeType"><?php print render($content['field_tile_type']); ?></div>
+				<div class="HomeType"><?php 
+                if($shows) {
+                    echo '<div class="field field-name-field-tile-type field-type-taxonomy-term-reference field-label-hidden Podcast"><div class="field-items"><div class="field-item even">Podcasts</div></div></div>';
+                } else {
+                    print render($content['field_tile_type']);
+                } ?></div>
 				<?php 
 					$only = ((array)$content['field_members_only']['#items'][0]['taxonomy_term'])["name"];
 					if($only == "Yes") {
@@ -68,7 +79,11 @@
 			</a></h5>
 			<div class="description">
 				<div class="dateHome">
-					<?php print date('d',$created); print " "; print date('M',$created).', '.date('Y',$created); ?>
+					<?php if($shows) {
+                        echo "Listen now";
+                    } else {
+                        print date('d',$created); print " "; print date('M',$created).', '.date('Y',$created);
+                    } ?>
 				</div>
 				<div class='NextIconHolder'><div class='NextIcon'></div></div>
 				<?php 
