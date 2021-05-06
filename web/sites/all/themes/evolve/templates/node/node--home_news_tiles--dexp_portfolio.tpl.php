@@ -38,6 +38,11 @@
                 } else {
                     print render($content['field_tile_type']);
                 } ?></div>
+            <?php if($shows): ?>
+            <div class="newTag">
+                <div class="icon svg-icon podcastNews" icon-src="/sites/default/files/NEW!_223X197.svg"></div>
+            </div>
+            <?php endif; ?>
             <?php print render($content['field_home_tile_image']); ?>
             <div class="mediaholder"></div>
             <div class="portfolio-image-zoom">
@@ -78,9 +83,10 @@
 			<?php print $title; ?>
 			</a></h5>
 			<div class="description">
+                <?php if($shows) {echo '<div class="icon svg-icon headPhone" icon-src="/sites/default/files/HEADPHONES_84X84.svg"></div>';} ?>
 				<div class="dateHome">
 					<?php if($shows) {
-                        echo "Listen now";
+                        echo " Listen now";
                     } else {
                         print date('d',$created); print " "; print date('M',$created).', '.date('Y',$created);
                     } ?>

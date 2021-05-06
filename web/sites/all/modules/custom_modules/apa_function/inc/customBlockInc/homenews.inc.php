@@ -9,7 +9,7 @@
 </ul><p class="font_style--after_ul"></p></nav></div>
 
 <div class="media_contents_filtered">
-<div class="downHomeT1"><?php echo views_embed_view('home_tile_view', 'block');?></div>
+<div class="downHomeT1" style="display: none;"><?php echo views_embed_view('home_tile_view', 'block');?></div>
 
 <div class="downHomeT2" style="display: none;"><?php echo views_embed_view('home_tile_view', 'block_1');?></div>
 
@@ -18,6 +18,6 @@
 <div class="downHomeT4" style="display: none;"><?php echo views_embed_view('home_tile_view', 'block_3');?></div>
 
 <div class="downHomeT5" style="display: none;"><?php echo views_embed_view('home_tile_view', 'block_5');?></div>
-<div class="downHomeT6" style="display: none;"><?php echo views_embed_view('home_tile_view', 'block_7');?></div>
+<div class="downHomeT6"><?php echo views_embed_view('home_tile_view', 'block_7');?></div>
 </div>
 </div>
