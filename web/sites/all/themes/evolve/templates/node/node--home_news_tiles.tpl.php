@@ -27,7 +27,7 @@ if(is_null($userRole)) {
 ?>
 <div style="height: 10px; width: 1px;">&nbsp;</div>
 <div class="Pagination"></div>
-<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large" <?php print $attributes; ?>>
+<div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large home-news-indiv" <?php print $attributes; ?>>
    <section class="post-content container" style="float:none; margin:auto;">
       <div class="region col-xs-12 col-sm-12 col-md-8 col-lg-8">
          <!-- MOBILE POST FEATURED IMG -->
