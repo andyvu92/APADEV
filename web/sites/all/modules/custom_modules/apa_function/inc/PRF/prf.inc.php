@@ -136,7 +136,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 									echo "selected ";
 								}
 								echo 'data-class="'.$cardnum["Payment-Method"].'" class="'.'c'.str_replace("/","",$cardnum["Expiry-date"]).'">____ ____ ____ ';
-								echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+								echo $cardnum["Digitsnumber-Cardtype-Default"].' - '.$cardnum["Expiry-date"].'</option>';
 								}
 							
 							?>
@@ -389,7 +389,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 									echo "selected ";
 								}
 								echo 'data-class="'.$cardnum["Payment-Method"].'" class="'.'c'.str_replace("/","",$cardnum["Expiry-date"]).'">____ ____ ____ ';
-								echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+								echo $cardnum["Digitsnumber-Cardtype-Default"].' - '.$cardnum["Expiry-date"].'</option>';
 								}
 							
 							?>

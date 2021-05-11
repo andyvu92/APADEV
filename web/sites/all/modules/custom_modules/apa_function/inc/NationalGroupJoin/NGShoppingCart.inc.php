@@ -88,7 +88,7 @@ $scheduleDetails = aptify_get_GetAptifyData("47", $postScheduleData);
 							echo "selected ";
 						}
 						echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
-						echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+						echo $cardnum["Digitsnumber-Cardtype-Default"].' - '.$cardnum["Expiry-date"].'</option>';
 						}
 					
 				?>

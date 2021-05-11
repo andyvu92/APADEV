@@ -338,7 +338,7 @@ if(isset($_POST['step2-1'])) {
 								echo "selected ";
 							}
 							echo 'data-class="'.$cardnum["Payment-Method"].'">____ ____ ____ ';
-							echo $cardnum["Digitsnumber-Cardtype-Default"].'</option>';
+							echo $cardnum["Digitsnumber-Cardtype-Default"].' - '.$cardnum["Expiry-date"].'</option>';
 							}
 					?>
 					</select>
