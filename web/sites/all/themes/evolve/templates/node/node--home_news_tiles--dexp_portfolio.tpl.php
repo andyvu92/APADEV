@@ -40,7 +40,7 @@
                 } ?></div>
             <?php if($shows): ?>
             <div class="newTag">
-                <div class="icon svg-icon podcastNews" icon-src="/sites/default/files/NEW!_223X197_2.svg"></div>
+                <div class="icon podcastNews"><img src="/sites/default/files/NEW_tag.png" /></div>
             </div>
             <?php endif; ?>
             <?php print render($content['field_home_tile_image']); ?>

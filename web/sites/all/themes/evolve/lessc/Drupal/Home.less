@@ -83,23 +83,29 @@
 .description {
 	display: block;
 }
-.homeBottom .portfolio-image .newTag .svg-icon.podcastNews {
-	position: absolute;z-index: 1;top: 9px;right: 16px;height: 115px;width: 115px;
+.homeBottom .portfolio-image .newTag .podcastNews {
+	position: absolute;z-index: 1;right: 15px; margin-left: 7px;
+	img {
+		width: 117px !important; height: 102px !important; visibility: visible !important;
+	}
 	@media screen and (max-width: 1025px) {
-		top: 1px;right: 8px;
+		right: 7px;
 	}
 	@media screen and (max-width: 767px) {
-		top: 9px; left: calc(~'40% - 114px');
+		left: calc(~'40% - 121px');
 	}
 	@media screen and (max-width: 570px) {
-		width:88px;height:88px;top:11px;left: calc(~'38% - 86px');
+		left: calc(~'40% - 130px');
 	}
 	@media screen and (max-width: 480px) {
-		left: calc(~'40% - 87px');
+		left: calc(~'40% - 122px');
+	}
+	@media screen and (max-width: 335px) {
+		right: 6px; left: unset;
 	}
 }
-.home-news-indiv .svg-icon svg {
-	height: unset;
+.home-news-indiv .show-header {
+	padding-bottom: 22px;
 }
 .homeBottom .item-description .description .svg-icon.headPhone {
 	height: 19px;width: 19px;margin-right: 6px;
