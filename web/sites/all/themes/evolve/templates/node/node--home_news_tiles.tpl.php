@@ -111,10 +111,10 @@ if(is_null($userRole)) {
          <span class="brd-headling"></span>
          <div class="content">
             <ul class="nav views-row">
-               <li><a href="/home/podcast-shows/conference-conversations">conference conversations</a></li>
+               <li><a href="/home/podcast-shows/conference-conversations">Conference Conversations</a></li>
                <li><a href="/home/podcast-shows/researchers-record">Researchers on the Record</a></li>
                <li><a href="/home/podcast-shows/deadly-physios">The Deadly Physios</a></li>
-               <li><a href="/home/podcast-shows/physios-mic">Physio s on the Mic</a></li>
+               <li><a href="/home/podcast-shows/physios-mic">Physios on the Mic</a></li>
             </ul>
          </div>
          <?php endif; ?>
