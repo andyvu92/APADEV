@@ -118,11 +118,13 @@ if(is_null($userRole)) {
             </ul>
          </div>
          <?php endif; ?>
+         <?php if(!$shows): ?>
          <h3 class="headline">Most Popular</h3>
          <span class="brd-headling"></span>
          <div class="content">
             <?php echo views_embed_view('home_tile_view', 'block_6');?>
          </div>
+         <?php endif; ?>
       </div>
    </section>
    <?php $img = "/sites/default/files".substr($content['field_home_tile_image']['#items'][0]["file"]->uri, 8); ?>
