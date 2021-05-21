@@ -26,7 +26,11 @@
         	<span class="link-block"><?php if(is_null(render($content['field_url_for_page'])) && is_null(render($content['field_external_url_for_page']))): ?>
                 <a href="<?php print $node_url; ?>">
                 <?php elseif(!is_null(render($content['field_url_for_page']))): ?>
+                    <?php if($content['field_url_for_page']['#items'][0]['value'] == "soon" && $shows): ?>
+                <a>
+                <?php else: ?>
                 <a href="<?php echo $content['field_url_for_page']['#items'][0]['value']; ?>">
+                <?php endif; ?>
                 <?php elseif(!is_null(render($content['field_external_url_for_page']))): ?>
                 <a href="<?php echo $content['field_external_url_for_page']['#items'][0]['value']; ?>" target="_blank">
                 <?php endif; ?></a></span>
@@ -75,12 +79,20 @@
 			<h5>
 			<?php if(is_null(render($content['field_url_for_page'])) && is_null(render($content['field_external_url_for_page']))): ?>
             <a href="<?php print $node_url; ?>">
-			<?php elseif(!is_null(render($content['field_url_for_page']))): ?>
-			<a href="<?php echo $content['field_url_for_page']['#items'][0]['value']; ?>">
+			<?php elseif(!is_null(render($content['field_url_for_page']))): 
+                if($content['field_url_for_page']['#items'][0]['value'] == "soon" && $shows): ?>
+                <a>
+                <?php else: ?>
+                <a href="<?php echo $content['field_url_for_page']['#items'][0]['value']; ?>">
+                <?php endif; ?>
             <?php elseif(!is_null(render($content['field_external_url_for_page']))): ?>
             <a href="<?php echo $content['field_external_url_for_page']['#items'][0]['value']; ?>" target="_blank">
-			<?php endif; ?>
-			<?php print $title; ?>
+			<?php endif; 
+            if($content['field_url_for_page']['#items'][0]['value'] == "soon" && $shows) {
+                print $title." (<b>coming soon</b>)";
+            } else {
+                print $title;
+            } ?>
 			</a></h5>
 			<div class="description">
                 <?php if($shows) {echo '<div class="icon svg-icon headPhone" icon-src="/sites/default/files/HEADPHONES_84X84.svg"></div>';} ?>
