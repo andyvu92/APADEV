@@ -74,6 +74,9 @@
   </div>
 </div>
 <div class="space-50"></div>
+<?php $rens = render($content['field_slider_show']);
+    if (sizeof($rens) != "0"):
+?>
 <div class="block block-block bg-bluewood full-width-alt">
   <div class="content">
     <div class="container theme-<?php echo $content['field_color_theme']['#items'][0]['value'];?> text-center">
@@ -146,13 +149,15 @@
     </div>
   </div>
 </div>
-
+<?php endif;?>
 <?php
   $link = (isset($_SERVER['HTTPS']) ? "https" : "http") . "://$_SERVER[HTTP_HOST]";
   $base_path = base_path();
   $imageUrl = $link.$base_path."sites/default/files/".str_replace("public://","",$node->field_promotion_image['und'][0]['uri']);
 ?>
+<?php if (!empty($node->field_promotion_image['und'][0]['uri'])):?>
 <div class="block block-block full-width-alt simple-image-banner" style="background-image: url(<?php echo $imageUrl;?>);background-position:center center;background-size:cover"></div>
+<?php endif; ?>
 <div class="space-50"></div>
 <div class="flex-container">
   <div class="flex-cell">
