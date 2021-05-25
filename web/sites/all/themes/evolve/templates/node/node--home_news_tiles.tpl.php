@@ -1,4 +1,4 @@
-<?php $shows = ($content["field_tile_type"]['#items'][0]["taxonomy_term"]->name == "Podcast Shows")? true : false; 
+<?php $shows = ($content["field_tile_type"]['#items'][0]["taxonomy_term"]->name == "Podcast Shows")? true : false;
 if(!$shows): ?>
 <div class="border-10 full-width"></div>
 <?php endif;
@@ -13,16 +13,18 @@ if(is_null($userRole)) {
       }
    }
 }
-if(is_null($userRole)) {
-   if(!is_null(render($content['field_url_for_page']))) {
-      $outLink = $content['field_url_for_page']['#items'][0]['value'];
-   } elseif(!is_null(render($content['field_external_url_for_page']))) {
-      $outLink = $content['field_external_url_for_page']['#items'][0]['value'];
-   }
-   if(!is_null($outLink)) {
-      header("Location: ".$outLink);
-      exit;
-   }
+if(!$shows) {
+  if(is_null($userRole)) {
+    if(!is_null(render($content['field_url_for_page']))) {
+       $outLink = $content['field_url_for_page']['#items'][0]['value'];
+    } elseif(!is_null(render($content['field_external_url_for_page']))) {
+       $outLink = $content['field_external_url_for_page']['#items'][0]['value'];
+    }
+    if(!is_null($outLink)) {
+       header("Location: ".$outLink);
+       exit;
+    }
+ }
 }
 ?>
 <div style="height: 10px; width: 1px;">&nbsp;</div>
@@ -30,25 +32,25 @@ if(is_null($userRole)) {
 <div id="node-<?php print $node->nid; ?>" class="<?php print $classes; ?> clearfix post large home-news-indiv" <?php print $attributes; ?>>
    <section class="post-content container" style="float:none; margin:auto;">
       <div class="region col-xs-12 col-sm-12 col-md-8 col-lg-8">
-         <!-- MOBILE POST FEATURED IMG -->
-         <div class="post-img media mobile">
+          <?php if(!$shows): ?>
+          <!-- MOBILE POST FEATURED IMG -->
+          <div class="post-img media mobile">
                <div class='mediaholder fullwidthimage'>
                   <?php print render($content['field_home_tile_image']);?>
                </div>
          </div>
-         <?php if(!$shows): ?>
          <h1 class="SectionHeader"><?php print $node->title;?></h1>
          <div class="brd-headling">&nbsp;</div>
-			
+
          <header class="meta">
             <div class="flex-container post-meta">
                <div class="flex-cell">
                   <div class="flex-col-6 meta-info">
-                     <?php 
+                     <?php
                         $only = ((array)$content['field_members_only']['#items'][0]['taxonomy_term'])["name"];
                         if($only == "Yes") {
                            echo "<li><strong><div class='MonlyIconHolder'><div class='MonlyIcon'></div></div></strong></li>";
-                        } 
+                        }
                      ?>
                      <div class="meta-author-date">
                         <!-- <span class="meta-author">By <b><?php //print render($content['field_inmotion_author']); ?></b></span> -->
