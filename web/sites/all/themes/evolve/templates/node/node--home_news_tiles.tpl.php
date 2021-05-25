@@ -130,8 +130,7 @@ if(is_null($userRole)) {
    <?php $img = "/sites/default/files".substr($content['field_home_tile_image']['#items'][0]["file"]->uri, 8); ?>
    <script type="text/javascript">
       jQuery(document).ready(function($) {
-         // 460 for live
-         $('#block-block-451').each(function(){
+         $('#block-block-460').each(function(){
             $(this).css('background-image', "<?php echo $img; ?>");
             img = '<?php echo $img; ?>';
             $(this).append("<img data-speed='1' class='img-parallax' src=' " + img + "'>");
