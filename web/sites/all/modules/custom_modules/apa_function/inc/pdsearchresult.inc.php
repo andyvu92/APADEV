@@ -11,7 +11,7 @@ $hasMalicious = false;
 if($_GET) {
 	foreach($_GET as $list) {
 		$list = preg_replace('/\//', '', $list);
-		if(preg_match('/[\^£$%&*()}{@#~?><>,|=_+¬-]/', $list)) {
+		if(preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $list)) {
 			$hasMalicious = true;
 		}
 	}

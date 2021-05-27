@@ -1976,8 +1976,22 @@ jQuery(document).ready(function($) {
 });
 $("form:not(#pd-search-form) input[type='text']").keydown(function (e) {
 	// Ensure text field not allow the double quote
-  if (e.keyCode == 222) {
+  	if (e.keyCode == 222) {
 		e.preventDefault();
+	}
+});
+var countKEY_PD = 0;
+$("#pd-search-form input[type='text']").keydown(function (e) {
+	var keywords = $(this).val();
+	if (e.keyCode == 222) {
+		if(countKEY_PD >= 1) {
+			if(keywords.search("'") == -1) {
+				countKEY_PD = 0;
+			}
+			e.preventDefault();
+		} else {
+			countKEY_PD++;
+		}
 	}
 });
 $(document).on('change', 'select[name="Country"]', function(){
