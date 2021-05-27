@@ -21,7 +21,8 @@ if(!function_exists('drupal_session_started'))
 	$details = aptify_get_GetAptifyData("19", $sendData);
 	$arrColumn = array_column($details, 'NGtitle');
 	array_multisort($arrColumn, SORT_ASC, $details);
-	//print_r($details);
+  //print_r($details);
+
 ?>
 <form id="pd-search-form" action="pd-search?search-result" method="POST">
 	<div id="mobile-banner" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
@@ -33,7 +34,7 @@ if(!function_exists('drupal_session_started'))
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Keyword</label>
-		<input type="text" name="Keyword" placeholder="Keyword" <?php if(isset($_POST["Keyword"]) || isset($_GET["Keyword"])) { if(isset($_POST["Keyword"])) {echo "value='".$_POST["Keyword"]."'";} else {echo "value='".$_GET["Keyword"]."'";} } ?>>
+		<input type="text" name="Keyword" placeholder="Keyword" value= "<?php if(isset($_POST["Keyword"])) {echo $_POST["Keyword"];} if(isset($_GET["Keyword"])) {echo $_GET["Keyword"];}?>">
 	</div>
 	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
 		<label>Type of PD</label>

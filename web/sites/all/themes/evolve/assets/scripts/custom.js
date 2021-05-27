@@ -1974,9 +1974,9 @@ jQuery(document).ready(function($) {
 		e.preventDefault();
 	}
 });
-$("input[type='text']").keydown(function (e) {
+$("form:not(#pd-search-form) input[type='text']").keydown(function (e) {
 	// Ensure text field not allow the double quote
-	if (e.keyCode == 222) {
+  if (e.keyCode == 222) {
 		e.preventDefault();
 	}
 });
