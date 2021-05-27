@@ -17,7 +17,7 @@
 
 <div class="downHomeT4" style="display: none;"><?php echo views_embed_view('home_tile_view', 'block_3');?></div>
 
-<div class="downHomeT5"><?php echo views_embed_view('home_tile_view', 'block_5');?></div>
+<div class="downHomeT5" style="display: none;"><?php echo views_embed_view('home_tile_view', 'block_5');?></div>
 <div class="downHomeT6" style="display: none;"><?php echo views_embed_view('home_tile_view', 'block_7');?></div>
 </div>
 </div>
