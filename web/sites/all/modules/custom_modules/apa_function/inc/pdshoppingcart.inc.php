@@ -556,7 +556,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			</div>
 		</div>
 
-		<form action="" method="POST" id="">
+		<form action="" method="POST" id="pd_confirm_form">
 			<!--<input type="hidden" name="POSTPRF" id="POSTPRF" value="">-->
 			<input type="hidden" name="TandC" id="TandC" value="0">
 			<!--<input type="hidden" name="CardUsed" id="CardUsed" value="">-->
@@ -597,7 +597,7 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 			<?php if(!$Availability): ?>
 				<span class="expired_item_note">Please remove items that are not available to continue with your purchase</span>
 			<?php else: ?>
-				<a href="javascript:document.getElementById('pd-shoppingcart-form').submit();" class="placeorder" value="Place your order" id="PDPlaceOrder"><span class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</span></a>
+				<a href="" class="placeorder" value="Place your order" id="PDPlaceOrder"><span class="dashboard-button dashboard-bottom-button your-details-submit shopCartButton">Place your order</span></a>
 			<?php endif; ?>
 		</form>
 	</div>
@@ -759,12 +759,15 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
     grecaptcha.ready(function() {
     // do request for recaptcha token
     // response is promise with passed token
-        grecaptcha.execute('6Ledch8bAAAAAKr2bHQAz7eu6LwNdfB1ddwyrHRx', {action:'submit'})
-			.then(function(token) {
-            // add token value to form
-            document.getElementById('recaptcha_response').value = token;
-			console.log("token: "+token);
-        });
+		document.getElementById('PDPlaceOrder').addEventListener("click", function(event) {
+			//event.preventDefault();
+			grecaptcha.execute('6Ledch8bAAAAAKr2bHQAz7eu6LwNdfB1ddwyrHRx', {action:'submit'}).then(function(token) {
+				// add token value to form
+				document.getElementById('recaptcha_response').value = token;
+				console.log("token: "+token);
+				document.getElementById('pd-shoppingcart-form').submit();
+			});        
+		}, false);
     });
 </script>
 <?php /*

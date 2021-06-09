@@ -659,10 +659,6 @@ function pd_shoppingcart_form($form, &$form_state, $vars){
             ' id' => 'recaptcha_response',
          ),
 	);
-    $form['action'] = array(
-		'#type' => 'hidden',
-        '#default_value' => "validate_captcha",
-	);
 
     $form['Message']['notice'] = array(
         '#markup' => '<div class="form-item form-type-textfield"><p class="payment_note">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</p></div>',
@@ -684,7 +680,7 @@ function place_pd_shopping_cart($form, &$form_state){
     
     if (!$captcha) {
         //Do something with error
-        drupal_set_message('<div class="checkMessage">Don\' use a bot! - 1 / '.$asdfjaskdjf.'</div>',"error");
+        drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 1</div>',"error");
         $isHuman = false;
     } else {
         // $secret   = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'; // test
@@ -697,7 +693,7 @@ function place_pd_shopping_cart($form, &$form_state){
 
         if ($responses->success === false) {
             //Do something with error
-            drupal_set_message('<div class="checkMessage">Don\' use a bot! - 2</div>',"error");
+            drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 2</div>',"error");
             $isHuman = false;
         }
     }
@@ -706,7 +702,7 @@ function place_pd_shopping_cart($form, &$form_state){
     //... Add code to filter access using $response . score
     if ($responses->success==true && $responses->score <= 0.5) {
         //Do something to denied access
-        drupal_set_message('<div class="checkMessage">Don\' use a bot! - 3</div>',"error");
+        drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 3</div>',"error");
         $isHuman = false;
     }
 
