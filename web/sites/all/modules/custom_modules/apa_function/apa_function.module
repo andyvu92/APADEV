@@ -653,6 +653,16 @@ function pd_shoppingcart_form($form, &$form_state, $vars){
 
 		'#title' => t('Do you want to save this card?'),
 	);
+    $form['recaptcha_response'] = array(
+		'#type' => 'hidden',
+		'#attributes' => array(
+            ' id' => 'recaptcha_response',
+         ),
+	);
+    $form['action'] = array(
+		'#type' => 'hidden',
+        '#default_value' => "validate_captcha",
+	);
 
     $form['Message']['notice'] = array(
         '#markup' => '<div class="form-item form-type-textfield"><p class="payment_note">To confirm that we can receive payments from your nominated credit card a one off verification charge of $1 will be deducted from your account. This amount will be refunded immediately upon payment confirmation.</p></div>',
@@ -663,112 +673,151 @@ function pd_shoppingcart_form($form, &$form_state, $vars){
 }
 
 function place_pd_shopping_cart($form, &$form_state){
-    $OrderSend['userID'] = $_SESSION['UserId'];
-    $OrderSend["PRFdonation"] = $form["POSTPRF"]["#value"];
-    //get product ID
-    $products = array();
-	$pdProduct = getProduct($_SESSION['UserId'],"PD");
-	if (sizeof($pdProduct) != 0) {
-		foreach($pdProduct as $single){
-			array_push($products, $single);
-		}
+    $isHuman = true;
+    
+    $formToken = $form["recaptcha_response"]["#value"];
+    if (isset($formToken)) {
+        $captcha = $formToken;
+    } else {
+        $captcha = false;
     }
-    $ngProduct = getProduct($_SESSION['UserId'],"PDNG");
-    if (sizeof($ngProduct) != 0) {
-		foreach($ngProduct as $singleNG){
-			array_push($products, $singleNG);
-		}
-    }
-    $mgProduct = getProduct($_SESSION['UserId'],"PDMG");
-    if (sizeof($mgProduct) != 0) {
-        foreach($mgProduct as $singleMG){
-			array_push($products, $singleMG);
-		}
-	}
-    $OrderSend["productID"] = $products;
-    if(isset($form["CardUsed"]["#value"])) {
-       if($form["addCard"]["#value"]=="0"){
+    
+    if (!$captcha) {
+        //Do something with error
+        drupal_set_message('<div class="checkMessage">Don\' use a bot! - 1 / '.$asdfjaskdjf.'</div>',"error");
+        $isHuman = false;
+    } else {
+        // $secret   = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'; // test
+        $secret   = '6Ledch8bAAAAALVESG6t9S0wZmWmOwvJyiaF8s8a'; // live
+        $response = file_get_contents(
+            "https://www.google.com/recaptcha/api/siteverify?secret=" . $secret . "&response=" . $captcha . "&remoteip=" . $_SERVER['REMOTE_ADDR']
+        );
+        // use json_decode to extract json response
+        $responses = json_decode($response);
 
-        $OrderSend["Card_number"] = $form["CardUsed"]["#value"];
-        $OrderSend['PaymentTypeID'] = "";
-        $OrderSend['CCNumber'] = "";
-        $OrderSend['CCExpireDate'] = "";
-        $OrderSend['CCSecurityNumber'] = "";
-       }
-       else{
-
-        $OrderSend["Card_number"] = "";
-        $OrderSend['PaymentTypeID'] = $form["Cardtype"]["#value"];
-        $OrderSend['CCNumber'] = $form["Cardnumber"]["#value"];
-        $OrderSend['CCExpireDate'] = $form["Expirydate"]["#value"];
-        $OrderSend['CCSecurityNumber'] = $form["CCV"]["#value"];
-       }
-    }
-    else{
-        $OrderSend["Card_number"] = "";
-        $OrderSend['PaymentTypeID'] = $form["Cardtype"]["#value"];
-        $OrderSend['CCNumber'] = $form["Cardnumber"]["#value"];
-        $OrderSend['CCExpireDate'] = $form["Expirydate"]["#value"];
-        $OrderSend['CCSecurityNumber'] = $form["CCV"]["#value"];
-    }
-    $OrderSend['InsuranceApplied'] = 0;
-	$OrderSend['Paymentoption'] = 0;
-	$OrderSend['InstallmentFor'] = "Membership";
-	$OrderSend['InstallmentFrequency'] = "";
-    $OrderSend['CampaignCode'] = $form["CouponCode"]["#value"];
-    $registerOuts = aptify_get_GetAptifyData("26", $OrderSend);
-    //call add payment card endpoint if neccessary
-    if(isset($form["addcardtag"]["#value"]) && $form["addcardtag"]["#value"]=="1"){
-
-        $postPaymentData['userID'] = $_SESSION['UserId'];
-        $postPaymentData['Payment-method'] = $form["Cardtype"]["#value"];
-        $postPaymentData['Cardno'] = $form["Cardnumber"]["#value"];
-        $postPaymentData['Expiry-date'] = $form["Expirydate"]["#value"];
-        $postPaymentData['CCV'] = $form["CCV"]["#value"];
-        $postPaymentData['IsDefault'] = 0;
-        $out = aptify_get_GetAptifyData("15",$postPaymentData);
-        if($out["result"]=="Failed"){
-            if($out["Message"]=="Expiry date lenght should be 4."){
-                drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
-            }
-            elseif($out["Message"]=="CCV accepts up to 4 digit."){
-                drupal_set_message('<div class="checkMessage">Please enter a valid CCV number.</div>',"error");
-            }
-            elseif((strpos($out["Message"], 'Month must be between one and twelve') !== false)){
-                drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
-            }
-            elseif($out["Message"]=="Please enter a valid End Date occurring after the Start Date."){
-                drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
-            }
-            elseif((strpos($out["Message"], 'credit card number') !== false)){
-                drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
-            }
-            elseif((strpos($out["Message"], 'Invalid CCV number') !== false)){
-                drupal_set_message('<div class="checkMessage">Please enter a valid CCV number.</div>',"error");
-            }
-            elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)){
-                drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
-            }
-            else{
-                drupal_set_message('<div class="checkMessage">There was an unexpected error with your payment details, please go back and check they are correct, or contact the APA.</div>',"error");
-            }
+        if ($responses->success === false) {
+            //Do something with error
+            drupal_set_message('<div class="checkMessage">Don\' use a bot! - 2</div>',"error");
+            $isHuman = false;
         }
     }
-    //$recordOrder = array();
-	//new array to record specific fields
-	$recordOrder['userID'] = $OrderSend['userID'];
-	$recordOrder['PRFdonation'] = $OrderSend['PRFdonation'];
-	$recordOrder['Card_number'] = $OrderSend['Card_number'];
-	$recordOrder['productID'] = $OrderSend['productID'];
-	$recordOrder['PaymentTypeID'] = $OrderSend['PaymentTypeID'];
-	if($OrderSend['CCNumber'] !=""){  $recordOrder['CCNumber'] = substr($OrderSend['CCNumber'], -4); }
-	else{ $recordOrder['CCNumber'] = $OrderSend['CCNumber'];}
-	$recordOrder['InsuranceApplied'] = $OrderSend['InsuranceApplied'];
-	$recordOrder['Paymentoption'] = $OrderSend['Paymentoption'];
-	$recordOrder['InstallmentFor'] = $OrderSend['InstallmentFor'];
-	$recordOrder['InstallmentFrequency'] = $OrderSend['InstallmentFrequency'];
-    $recordOrder['CampaignCode'] = $OrderSend['CampaignCode'];
-    if(sizeof($registerOuts)!=0 && $registerOuts['Invoice_ID']!=="0") {
+    
+    //... The Captcha is valid you can continue with the rest of your code
+    //... Add code to filter access using $response . score
+    if ($responses->success==true && $responses->score <= 0.5) {
+        //Do something to denied access
+        drupal_set_message('<div class="checkMessage">Don\' use a bot! - 3</div>',"error");
+        $isHuman = false;
+    }
+
+    // if the reqeust is human
+    if($isHuman) {
+        $OrderSend['userID'] = $_SESSION['UserId'];
+        $OrderSend["PRFdonation"] = $form["POSTPRF"]["#value"];
+        //get product ID
+        $products = array();
+        $pdProduct = getProduct($_SESSION['UserId'],"PD");
+        if (sizeof($pdProduct) != 0) {
+            foreach($pdProduct as $single){
+                array_push($products, $single);
+            }
+        }
+        $ngProduct = getProduct($_SESSION['UserId'],"PDNG");
+        if (sizeof($ngProduct) != 0) {
+            foreach($ngProduct as $singleNG){
+                array_push($products, $singleNG);
+            }
+        }
+        $mgProduct = getProduct($_SESSION['UserId'],"PDMG");
+        if (sizeof($mgProduct) != 0) {
+            foreach($mgProduct as $singleMG){
+                array_push($products, $singleMG);
+            }
+        }
+        $OrderSend["productID"] = $products;
+        if(isset($form["CardUsed"]["#value"])) {
+        if($form["addCard"]["#value"]=="0"){
+
+            $OrderSend["Card_number"] = $form["CardUsed"]["#value"];
+            $OrderSend['PaymentTypeID'] = "";
+            $OrderSend['CCNumber'] = "";
+            $OrderSend['CCExpireDate'] = "";
+            $OrderSend['CCSecurityNumber'] = "";
+        }
+        else{
+
+            $OrderSend["Card_number"] = "";
+            $OrderSend['PaymentTypeID'] = $form["Cardtype"]["#value"];
+            $OrderSend['CCNumber'] = $form["Cardnumber"]["#value"];
+            $OrderSend['CCExpireDate'] = $form["Expirydate"]["#value"];
+            $OrderSend['CCSecurityNumber'] = $form["CCV"]["#value"];
+        }
+        }
+        else{
+            $OrderSend["Card_number"] = "";
+            $OrderSend['PaymentTypeID'] = $form["Cardtype"]["#value"];
+            $OrderSend['CCNumber'] = $form["Cardnumber"]["#value"];
+            $OrderSend['CCExpireDate'] = $form["Expirydate"]["#value"];
+            $OrderSend['CCSecurityNumber'] = $form["CCV"]["#value"];
+        }
+        $OrderSend['InsuranceApplied'] = 0;
+        $OrderSend['Paymentoption'] = 0;
+        $OrderSend['InstallmentFor'] = "Membership";
+        $OrderSend['InstallmentFrequency'] = "";
+        $OrderSend['CampaignCode'] = $form["CouponCode"]["#value"];
+        $registerOuts = aptify_get_GetAptifyData("26", $OrderSend);
+        //call add payment card endpoint if neccessary
+        if(isset($form["addcardtag"]["#value"]) && $form["addcardtag"]["#value"]=="1"){
+
+            $postPaymentData['userID'] = $_SESSION['UserId'];
+            $postPaymentData['Payment-method'] = $form["Cardtype"]["#value"];
+            $postPaymentData['Cardno'] = $form["Cardnumber"]["#value"];
+            $postPaymentData['Expiry-date'] = $form["Expirydate"]["#value"];
+            $postPaymentData['CCV'] = $form["CCV"]["#value"];
+            $postPaymentData['IsDefault'] = 0;
+            $out = aptify_get_GetAptifyData("15",$postPaymentData);
+            if($out["result"]=="Failed"){
+                if($out["Message"]=="Expiry date lenght should be 4."){
+                    drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
+                }
+                elseif($out["Message"]=="CCV accepts up to 4 digit."){
+                    drupal_set_message('<div class="checkMessage">Please enter a valid CCV number.</div>',"error");
+                }
+                elseif((strpos($out["Message"], 'Month must be between one and twelve') !== false)){
+                    drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
+                }
+                elseif($out["Message"]=="Please enter a valid End Date occurring after the Start Date."){
+                    drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
+                }
+                elseif((strpos($out["Message"], 'credit card number') !== false)){
+                    drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
+                }
+                elseif((strpos($out["Message"], 'Invalid CCV number') !== false)){
+                    drupal_set_message('<div class="checkMessage">Please enter a valid CCV number.</div>',"error");
+                }
+                elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)){
+                    drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
+                }
+                else{
+                    drupal_set_message('<div class="checkMessage">There was an unexpected error with your payment details, please go back and check they are correct, or contact the APA.</div>',"error");
+                }
+            }
+        }
+        //$recordOrder = array();
+        //new array to record specific fields
+        $recordOrder['userID'] = $OrderSend['userID'];
+        $recordOrder['PRFdonation'] = $OrderSend['PRFdonation'];
+        $recordOrder['Card_number'] = $OrderSend['Card_number'];
+        $recordOrder['productID'] = $OrderSend['productID'];
+        $recordOrder['PaymentTypeID'] = $OrderSend['PaymentTypeID'];
+        if($OrderSend['CCNumber'] !=""){  $recordOrder['CCNumber'] = substr($OrderSend['CCNumber'], -4); }
+        else{ $recordOrder['CCNumber'] = $OrderSend['CCNumber'];}
+        $recordOrder['InsuranceApplied'] = $OrderSend['InsuranceApplied'];
+        $recordOrder['Paymentoption'] = $OrderSend['Paymentoption'];
+        $recordOrder['InstallmentFor'] = $OrderSend['InstallmentFor'];
+        $recordOrder['InstallmentFrequency'] = $OrderSend['InstallmentFrequency'];
+        $recordOrder['CampaignCode'] = $OrderSend['CampaignCode'];
+        if(sizeof($registerOuts)!=0 && $registerOuts['Invoice_ID']!=="0") {
             $invoice_ID = $registerOuts['Invoice_ID'];
 
             //put extra code when using API to get the status of order, if it is successful, will save terms and conditions on APA side
@@ -783,7 +832,7 @@ function place_pd_shopping_cart($form, &$form_state){
             // record member log for successful process
             if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
             $addMemberLog["orderID"] = "0";
-            $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
+            $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/>".$response."<br/>".json_encode($registerOuts);
             $addMemberLog["createDate"] = date('Y-m-d');
             $addMemberLog["type"] =  "PD";
             $addMemberLog["logError"] = 0;
@@ -798,101 +847,98 @@ function place_pd_shopping_cart($form, &$form_state){
             checkShoppingCart($userID, $type, $productID="");
             //add subscription
             if(isset($_SESSION['UserId'])) {
-            // 2.2.23 - GET list of subscription preferences
-            // Send -
-            // UserID
-            // Response -
-            // List of subscriptions and its T/F values.
-            $sendData["UserID"] = $_SESSION['UserId'];
-            $subscriptions = aptify_get_GetAptifyData("23", $sendData);
-            $Subscription = $subscriptions["results"];
-            $ArrayReturn = Array();
-            $ArrayReturn["UserID"] = $_SESSION['UserId'];
-            // 2.2.22 - Get list of subscribed Fellowship Products
-            // Send -
-            // UserID
-            // Response -
-            // List of Fellowship ID and its titles.
-            $Fellows = aptify_get_GetAptifyData("22", $sendData);
-            $MagSubs = Array();
-            $Fellow = $Fellows["results"];
-            foreach($Fellow as $Subs) {
-                if(strpos($Subs["FPtitle"], "Magazine") !== false) {
-                    $divs = explode(" ", $Subs["FPtitle"]);
-                    if($divs[0] == "InTouch" || $divs[0] == "Sports") {
-                        array_push($MagSubs, $divs[0]);
-                    }
-                }
-            }
-            $SubListAll = Array();
-            $subArray = Array();
-            $consArray = Array();
-            foreach($Subscription as $Subs) {
-                $ArrayRe["SubscriptionID"] = $Subs["ConsentID"];
-                $arrayUpdate["ConsentID"] = $Subs["ConsentID"];
-                if($Subs["ConsentID"] == '15') {
-                    // APA email
-                    $ArrayRe["Subscribed"] = $Subs["Subscribed"];
-                    $arrayUpdate["Subscribed"] = $Subs["Subscribed"];
-                } elseif($Subs["ConsentID"] == '18') {
-                    // InMotion Copy
-                    if($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") {
-                        // No InMotion print copy for
-                        // student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
-                        // and M11 Associated (Oversea)
-                        $ArrayRe["Subscribed"] = '0';
-                        $arrayUpdate["Subscribed"] = '0';
-                    } else {
-                        $ArrayRe["Subscribed"] = $Subs["Subscribed"];
-                        $arrayUpdate["Subscribed"] = $Subs["Subscribed"];
-                    }
-                } else {
-                    // InTouch and Sports
-                    $ArrayRe["Subscribed"] = $Subs["Subscribed"];
-                    $arrayUpdate["Subscribed"] = $Subs["Subscribed"];
-                    if($Subs["ConsentID"] == '16' || $Subs["ConsentID"] == '17') {
-                        foreach($MagSubs as $mags) {
-                            $tts = strpos($Subs["Consent"], $mags);
-                            if($tts !== FALSE) {
-                                $ArrayRe["Subscribed"] = '1';//$Subs["Subscribed"];
-                                $arrayUpdate["Subscribed"] = '1';//$Subs["Subscribed"];
-                            }
+                // 2.2.23 - GET list of subscription preferences
+                // Send -
+                // UserID
+                // Response -
+                // List of subscriptions and its T/F values.
+                $sendData["UserID"] = $_SESSION['UserId'];
+                $subscriptions = aptify_get_GetAptifyData("23", $sendData);
+                $Subscription = $subscriptions["results"];
+                $ArrayReturn = Array();
+                $ArrayReturn["UserID"] = $_SESSION['UserId'];
+                // 2.2.22 - Get list of subscribed Fellowship Products
+                // Send -
+                // UserID
+                // Response -
+                // List of Fellowship ID and its titles.
+                $Fellows = aptify_get_GetAptifyData("22", $sendData);
+                $MagSubs = Array();
+                $Fellow = $Fellows["results"];
+                foreach($Fellow as $Subs) {
+                    if(strpos($Subs["FPtitle"], "Magazine") !== false) {
+                        $divs = explode(" ", $Subs["FPtitle"]);
+                        if($divs[0] == "InTouch" || $divs[0] == "Sports") {
+                            array_push($MagSubs, $divs[0]);
                         }
                     }
                 }
-                array_push($consArray, $arrayUpdate);
-                $ArrayRe["Subscription"] = $Subs["Consent"];
-                array_push($SubListAll, $ArrayRe);
+                $SubListAll = Array();
+                $subArray = Array();
+                $consArray = Array();
+                foreach($Subscription as $Subs) {
+                    $ArrayRe["SubscriptionID"] = $Subs["ConsentID"];
+                    $arrayUpdate["ConsentID"] = $Subs["ConsentID"];
+                    if($Subs["ConsentID"] == '15') {
+                        // APA email
+                        $ArrayRe["Subscribed"] = $Subs["Subscribed"];
+                        $arrayUpdate["Subscribed"] = $Subs["Subscribed"];
+                    } elseif($Subs["ConsentID"] == '18') {
+                        // InMotion Copy
+                        if($_SESSION['MemberTypeID'] == "31" || $_SESSION['MemberTypeID'] == "32" || $_SESSION['MemberTypeID'] == "34" || $_SESSION['MemberTypeID'] == "35" || $_SESSION['MemberTypeID'] == "36") {
+                            // No InMotion print copy for
+                            // student (M7, M7a), Physiotherapy assistant (M9) and Associated (M10)
+                            // and M11 Associated (Oversea)
+                            $ArrayRe["Subscribed"] = '0';
+                            $arrayUpdate["Subscribed"] = '0';
+                        } else {
+                            $ArrayRe["Subscribed"] = $Subs["Subscribed"];
+                            $arrayUpdate["Subscribed"] = $Subs["Subscribed"];
+                        }
+                    } else {
+                        // InTouch and Sports
+                        $ArrayRe["Subscribed"] = $Subs["Subscribed"];
+                        $arrayUpdate["Subscribed"] = $Subs["Subscribed"];
+                        if($Subs["ConsentID"] == '16' || $Subs["ConsentID"] == '17') {
+                            foreach($MagSubs as $mags) {
+                                $tts = strpos($Subs["Consent"], $mags);
+                                if($tts !== FALSE) {
+                                    $ArrayRe["Subscribed"] = '1';//$Subs["Subscribed"];
+                                    $arrayUpdate["Subscribed"] = '1';//$Subs["Subscribed"];
+                                }
+                            }
+                        }
+                    }
+                    array_push($consArray, $arrayUpdate);
+                    $ArrayRe["Subscription"] = $Subs["Consent"];
+                    array_push($SubListAll, $ArrayRe);
+                }
+                $ArrayReturn["Subscriptions"] = $subArray;
+                $ArrayReturn["Consents"] = $consArray;
+                // 2.2.24 - Update subscription preferences
+                // Send -
+                // UserID, List of subscriptions and its F/F values.
+                // Response -
+                // Response, List of subscriptions and it's T/F values.
+                $subscriptions = aptify_get_GetAptifyData("24", $ArrayReturn);
+                drupal_goto('/pd/completed-purchase',array('query' => array('status' => '1')));
+
             }
-            $ArrayReturn["Subscriptions"] = $subArray;
-            $ArrayReturn["Consents"] = $consArray;
-            // 2.2.24 - Update subscription preferences
-            // Send -
-            // UserID, List of subscriptions and its F/F values.
-            // Response -
-            // Response, List of subscriptions and it's T/F values.
-            $subscriptions = aptify_get_GetAptifyData("24", $ArrayReturn);
-            drupal_goto('/pd/completed-purchase',array('query' => array('status' => '1')));
+        //add drupal form redirct function
+        } else{
+            //this is handle record error log
 
+            if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
+            $addMemberLog["orderID"] = "0";
+            $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/>".$response."<br/>".json_encode($registerOuts);
+            $addMemberLog["createDate"] = date('Y-m-d');
+            $addMemberLog["type"] =  "PD";
+            $addMemberLog["logError"] = 1;
+            add_Member_Log($addMemberLog);
+            drupal_goto('/pd/completed-purchase',array('query' => array('status' => '0')));
         }
-
-
-    //add drupal form redirct function
-  }
-  else{
-    //this is handle record error log
-
-    if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
-    $addMemberLog["orderID"] = "0";
-    $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
-    $addMemberLog["createDate"] = date('Y-m-d');
-    $addMemberLog["type"] =  "PD";
-    $addMemberLog["logError"] = 1;
-    add_Member_Log($addMemberLog);
-    drupal_goto('/pd/completed-purchase',array('query' => array('status' => '0')));
-
-}
-  logRecorder();
+        logRecorder();
+    }
 }
 //create add payment card form
 function apa_create_payment_card_form($form, &$form_state){
