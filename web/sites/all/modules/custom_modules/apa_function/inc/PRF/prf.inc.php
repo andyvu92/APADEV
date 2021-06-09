@@ -1,6 +1,4 @@
 <?php if(isset($_SESSION["UserId"])) : ?>
-
-
 <?php
 if(isset($_POST["POSTPRF"])) {
 	$isHuman = true;

@@ -491,7 +491,7 @@ $PRFPrice = 0;
 
                 <div class="flex-cell flex-flow-row btn_wrapper">
                     <div class="flex-col-12">
-                        <a class="addCartlink" href="javascript:document.getElementById('join-insurance-form').submit();">
+                        <a id="join_APA_Submit" class="addCartlink" href="/">
                             <span class="placeorder">
                                 Place your order
                             </span>
@@ -515,6 +515,7 @@ $PRFPrice = 0;
 <!---done by jinghu--22/05/2019-->
 <form id="join-insurance-form" class="col-xs-12" action="joinconfirmation" method="POST">
      <input type="hidden" name="step3" value="3">
+     <input type="hidden" name="recaptcha_response" id="recaptcha_response">
      <input type="hidden" name="appliedCoupon" value="<?php echo $couponCode;?>">
         <div class="down6"
         <?php if(isset($_POST['step2-1']) || (isset($_POST['step1'])&& $_POST['insuranceTag']=="0") || isset($_POST['QOrder']) || isset($_POST['goP']) ||isset($_POST["step2-2"])||isset($_POST['step2-3']) ||isset($_POST['step2-4']) ||isset($_POST['Couponcode']))echo 'style="display:block;"'; else { echo 'style="display:none;"';}?>>
@@ -879,4 +880,20 @@ div#schedulePOPUp {
         }
     }
     countDown();
+</script>
+<script src="https://www.google.com/recaptcha/api.js?render=6Ledch8bAAAAAKr2bHQAz7eu6LwNdfB1ddwyrHRx"></script>
+<script>
+    grecaptcha.ready(function() {
+    // do request for recaptcha token
+    // response is promise with passed token
+        document.getElementById('join_APA_Submit').addEventListener("click", function(event) {
+			//event.preventDefault();
+			grecaptcha.execute('6Ledch8bAAAAAKr2bHQAz7eu6LwNdfB1ddwyrHRx', {action:'submit_Join'}).then(function(token) {
+				// add token value to form
+				document.getElementById('recaptcha_response').value = token;
+				console.log("token: "+token);
+				document.getElementById('join-insurance-form').submit();
+			});        
+		}, false);
+    });
 </script>
