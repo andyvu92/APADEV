@@ -770,19 +770,3 @@ $i = $i+sizeof($FPListArray)+sizeof($NGProductsArray);
 		}, false);
     });
 </script>
-<?php /*
-test key for local testing
-<script src="https://www.google.com/recaptcha/api.js?render=6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI"></script>
-<script>
-    grecaptcha.ready(function() {
-    // do request for recaptcha token
-    // response is promise with passed token
-        grecaptcha.execute('6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI', {action:'submit'})
-			.then(function(token) {
-            // add token value to form
-            document.getElementById('recaptcha_response').value = token;
-			console.log("token: "+token);
-        });
-    });
-</script>
-*/ ?>

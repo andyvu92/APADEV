@@ -680,6 +680,14 @@ function place_pd_shopping_cart($form, &$form_state){
     
     if (!$captcha) {
         //Do something with error
+        if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']."<br/>".$_SERVER['REMOTE_ADDR'];  }
+        $addMemberLog["orderID"] = "0";
+        $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/>Google reCAPTCHA Token not generated<br/>".json_encode($registerOuts);
+        $addMemberLog["createDate"] = date('Y-m-d');
+        $addMemberLog["type"] =  "PD";
+        $addMemberLog["logError"] = 1;
+        add_Member_Log($addMemberLog);
+
         drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 1</div>',"error");
         $isHuman = false;
     } else {
@@ -693,6 +701,14 @@ function place_pd_shopping_cart($form, &$form_state){
 
         if ($responses->success === false) {
             //Do something with error
+            if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']."<br/>".$_SERVER['REMOTE_ADDR'];  }
+            $addMemberLog["orderID"] = "0";
+            $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/>Google reCAPTCHA failed - ".$response."<br/>".json_encode($registerOuts);
+            $addMemberLog["createDate"] = date('Y-m-d');
+            $addMemberLog["type"] =  "PD";
+            $addMemberLog["logError"] = 1;
+            add_Member_Log($addMemberLog);
+
             drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 2</div>',"error");
             $isHuman = false;
         }
@@ -702,6 +718,14 @@ function place_pd_shopping_cart($form, &$form_state){
     //... Add code to filter access using $response . score
     if ($responses->success==true && $responses->score <= 0.5) {
         //Do something to denied access
+        if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']."<br/>".$_SERVER['REMOTE_ADDR'];  }
+        $addMemberLog["orderID"] = "0";
+        $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/>Google reCAPTCHA denied - ".$response."<br/>".json_encode($registerOuts);
+        $addMemberLog["createDate"] = date('Y-m-d');
+        $addMemberLog["type"] =  "PD";
+        $addMemberLog["logError"] = 1;
+        add_Member_Log($addMemberLog);
+
         drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 3</div>',"error");
         $isHuman = false;
     }
@@ -826,7 +850,7 @@ function place_pd_shopping_cart($form, &$form_state){
             $dataArray['Type'] = "P";
             forCreateRecordFunc($dataArray);
             // record member log for successful process
-            if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
+            if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']."<br/>".$_SERVER['REMOTE_ADDR'];  }
             $addMemberLog["orderID"] = "0";
             $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/>".$response."<br/>".json_encode($registerOuts);
             $addMemberLog["createDate"] = date('Y-m-d');
@@ -924,7 +948,7 @@ function place_pd_shopping_cart($form, &$form_state){
         } else{
             //this is handle record error log
 
-            if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
+            if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']."<br/>".$_SERVER['REMOTE_ADDR'];  }
             $addMemberLog["orderID"] = "0";
             $addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/>".$response."<br/>".json_encode($registerOuts);
             $addMemberLog["createDate"] = date('Y-m-d');

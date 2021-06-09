@@ -3,83 +3,120 @@
 
 <?php
 if(isset($_POST["POSTPRF"])) {
-	$OrderSend['userID'] = $_SESSION["UserId"];
-	$OrderSend['InsuranceApplied'] = 0;
-	$OrderSend['Paymentoption'] = 0;
-	$OrderSend['InstallmentFor'] = "Membership";
-	$OrderSend['InstallmentFrequency'] = "";
-	$OrderSend['CampaignCode'] = "";
-	if(isset($_POST['anothercard'])){
-		$OrderSend['PaymentTypeID'] = $_POST['Cardtype'];
-		$OrderSend['CCNumber'] = $_POST['Cardnumber'];
-		$OrderSend['CCExpireDate'] = $_POST['Expirydate'];
-		$OrderSend['CCSecurityNumber'] = $_POST['CCV'];
-		$OrderSend['Card_number'] = "";	
-	}
-	else{
-		$OrderSend["Card_number"] = $_POST["Paymentcard"];
-	}
-	if($_POST["PRF"]=="Other") {$OrderSend['PRFdonation'] = $_POST["PRFOther"];} 
-	else {$OrderSend['PRFdonation']=$_POST["PRF"];}
-	$OrderSend['productID'] = array();
-	$registerOuts = aptify_get_GetAptifyData("26", $OrderSend);
-	$recordOrder = array();
-	//new array to record specific fields
-	$recordOrder['userID'] = $OrderSend['userID'];
-	$recordOrder['PRFdonation'] = $OrderSend['PRFdonation'];
-	$recordOrder['Card_number'] = $OrderSend['Card_number'];
-	$recordOrder['productID'] = $OrderSend['productID'];
-	$recordOrder['PaymentTypeID'] = $OrderSend['PaymentTypeID'];
-	if($OrderSend['CCNumber'] !=""){  $recordOrder['CCNumber'] = substr($OrderSend['CCNumber'], -4); }
-	else{ $recordOrder['CCNumber'] = $OrderSend['CCNumber'];}
-	$recordOrder['InsuranceApplied'] = $OrderSend['InsuranceApplied'];
-	$recordOrder['Paymentoption'] = $OrderSend['Paymentoption'];
-	$recordOrder['InstallmentFor'] = $OrderSend['InstallmentFor'];
-	$recordOrder['InstallmentFrequency'] = $OrderSend['InstallmentFrequency'];
-	$recordOrder['CampaignCode'] = $OrderSend['CampaignCode'];
-	$invoice_ID = $registerOuts['Invoice_ID'];
-	if(isset($_POST['addcardtag'])){
-		// 2.2.15 - Add payment method
-		// Send - 
-		// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
-		// Response -
-		// N/A.
-		if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
-		if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
-		if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
-		if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
-		if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
-		$postPaymentData['IsDefault'] = 0;
-		$out = aptify_get_GetAptifyData("15",$postPaymentData); 
-		if($out["result"]=="Failed"){ 
-			if($out["Message"]=="Expiry date lenght should be 4."){
-				drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
-			}
-			elseif($out["Message"]=="CCV accepts up to 4 digit."){
-				drupal_set_message('<div class="checkMessage">Please enter a valid CCV number.</div>',"error");
-			}
-			elseif((strpos($out["Message"], 'Month must be between one and twelve') !== false)){
-				drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
-			}
-			elseif($out["Message"]=="Please enter a valid End Date occurring after the Start Date."){
-				drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
-			}
-			elseif((strpos($out["Message"], 'credit card number') !== false)){
-				drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
-			}
-			elseif((strpos($out["Message"], 'Invalid CCV number') !== false)){
-				drupal_set_message('<div class="checkMessage">Please enter a valid CCV number.</div>',"error");
-			}
-			elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)){
-				drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
-			}
-			else{
-				drupal_set_message('<div class="checkMessage">There was an unexpected error with your payment details, please go back and check they are correct, or contact the APA.</div>',"error");
-			}
+	$isHuman = true;
+    
+	if (isset($_POST['recaptcha_response'])) {
+        $captcha = $_POST['recaptcha_response'];
+    } else {
+        $captcha = false;
+    }
+    
+    if (!$captcha) {
+        //Do something with error
+        drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 1</div>',"error");
+        $isHuman = false;
+    } else {
+        // $secret   = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'; // test
+        $secret   = '6Ledch8bAAAAALVESG6t9S0wZmWmOwvJyiaF8s8a'; // live
+        $response = file_get_contents(
+            "https://www.google.com/recaptcha/api/siteverify?secret=" . $secret . "&response=" . $captcha . "&remoteip=" . $_SERVER['REMOTE_ADDR']
+        );
+        // use json_decode to extract json response
+        $responses = json_decode($response);
+
+        if ($responses->success === false) {
+            //Do something with error
+            drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 2</div>',"error");
+            $isHuman = false;
+        }
+    }
+    
+    //... The Captcha is valid you can continue with the rest of your code
+    //... Add code to filter access using $response . score
+    if ($responses->success==true && $responses->score <= 0.5) {
+        //Do something to denied access
+        drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 3</div>',"error");
+        $isHuman = false;
+    }
+
+    // if the reqeust is human
+    if($isHuman) {
+		$OrderSend['userID'] = $_SESSION["UserId"];
+		$OrderSend['InsuranceApplied'] = 0;
+		$OrderSend['Paymentoption'] = 0;
+		$OrderSend['InstallmentFor'] = "Membership";
+		$OrderSend['InstallmentFrequency'] = "";
+		$OrderSend['CampaignCode'] = "";
+		if(isset($_POST['anothercard'])){
+			$OrderSend['PaymentTypeID'] = $_POST['Cardtype'];
+			$OrderSend['CCNumber'] = $_POST['Cardnumber'];
+			$OrderSend['CCExpireDate'] = $_POST['Expirydate'];
+			$OrderSend['CCSecurityNumber'] = $_POST['CCV'];
+			$OrderSend['Card_number'] = "";	
+		} else{
+			$OrderSend["Card_number"] = $_POST["Paymentcard"];
 		}
-	
+		if($_POST["PRF"]=="Other") {$OrderSend['PRFdonation'] = $_POST["PRFOther"];} 
+		else {$OrderSend['PRFdonation']=$_POST["PRF"];}
+		$OrderSend['productID'] = array();
+		$registerOuts = aptify_get_GetAptifyData("26", $OrderSend);
+		$recordOrder = array();
+		//new array to record specific fields
+		$recordOrder['userID'] = $OrderSend['userID'];
+		$recordOrder['PRFdonation'] = $OrderSend['PRFdonation'];
+		$recordOrder['Card_number'] = $OrderSend['Card_number'];
+		$recordOrder['productID'] = $OrderSend['productID'];
+		$recordOrder['PaymentTypeID'] = $OrderSend['PaymentTypeID'];
+		if($OrderSend['CCNumber'] !=""){  $recordOrder['CCNumber'] = substr($OrderSend['CCNumber'], -4); }
+		else{ $recordOrder['CCNumber'] = $OrderSend['CCNumber'];}
+		$recordOrder['InsuranceApplied'] = $OrderSend['InsuranceApplied'];
+		$recordOrder['Paymentoption'] = $OrderSend['Paymentoption'];
+		$recordOrder['InstallmentFor'] = $OrderSend['InstallmentFor'];
+		$recordOrder['InstallmentFrequency'] = $OrderSend['InstallmentFrequency'];
+		$recordOrder['CampaignCode'] = $OrderSend['CampaignCode'];
+		$invoice_ID = $registerOuts['Invoice_ID'];
+		if(isset($_POST['addcardtag'])){
+			// 2.2.15 - Add payment method
+			// Send - 
+			// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
+			// Response -
+			// N/A.
+			if(isset($_SESSION['UserId'])){ $postPaymentData['userID'] = $_SESSION['UserId']; }
+			if(isset($_POST['Cardtype'])){ $postPaymentData['Payment-method'] = $_POST['Cardtype']; }
+			if(isset($_POST['Cardnumber'])){ $postPaymentData['Cardno'] = $_POST['Cardnumber']; }
+			if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
+			if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
+			$postPaymentData['IsDefault'] = 0;
+			$out = aptify_get_GetAptifyData("15",$postPaymentData); 
+			if($out["result"]=="Failed"){ 
+				if($out["Message"]=="Expiry date lenght should be 4."){
+					drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
+				}
+				elseif($out["Message"]=="CCV accepts up to 4 digit."){
+					drupal_set_message('<div class="checkMessage">Please enter a valid CCV number.</div>',"error");
+				}
+				elseif((strpos($out["Message"], 'Month must be between one and twelve') !== false)){
+					drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
+				}
+				elseif($out["Message"]=="Please enter a valid End Date occurring after the Start Date."){
+					drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
+				}
+				elseif((strpos($out["Message"], 'credit card number') !== false)){
+					drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
+				}
+				elseif((strpos($out["Message"], 'Invalid CCV number') !== false)){
+					drupal_set_message('<div class="checkMessage">Please enter a valid CCV number.</div>',"error");
+				}
+				elseif($out["result"]=="Failed" && (strpos($out["Message"], 'Invalid Credit Card Number') !== false)){
+					drupal_set_message('<div class="checkMessage">Please enter a valid credit card number.</div>',"error");
+				}
+				else{
+					drupal_set_message('<div class="checkMessage">There was an unexpected error with your payment details, please go back and check they are correct, or contact the APA.</div>',"error");
+				}
+			}
+		
+		}
 	}
-	
 }
 $test['id'] = $_SESSION["UserId"];
 $cardsnum = aptify_get_GetAptifyData("12", $test);
@@ -88,9 +125,9 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 <?php if(isset($registerOuts['Invoice_ID']) && $registerOuts['Invoice_ID']!=="0"): ?>
 <?php
 	// record member log for successful process
-	if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+	if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']."<br/>".$_SERVER['REMOTE_ADDR'];  }
 	$addMemberLog["orderID"] = "0";
-	$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
+	$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/>".$response."<br/>".json_encode($registerOuts);
 	$addMemberLog["createDate"] = date('Y-m-d');
 	$addMemberLog["type"] =  "PRF";
 	$addMemberLog["logError"] = 0;
@@ -117,8 +154,9 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 		<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="Physiotherapy Research Foundation">
 		<h2 class="lead-heading cairo">Donate to the PRF.</h2>
 	</div>
-<form action="" method="POST" style="width:100%;">
+<form action="" method="POST" style="width:100%;" id="PRF_form_control">
 	<input type="hidden" name="POSTPRF" id="POSTPRF">
+	<input type="hidden" name="recaptcha_response" id="recaptcha_response">
 
 		<?php if (sizeof($cardsnum["results"])!=0): ?>  
 	<div class="flex-container">
@@ -303,9 +341,9 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 	<?php endif; ?>
 	<!--this is handle record error log-->
 	<?php 
-		if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  } 
+		if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']."<br/>".$_SERVER['REMOTE_ADDR'];  }
 		$addMemberLog["orderID"] = "0";
-		$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/><br/>".json_encode($registerOuts);
+		$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/>".$response."<br/>".json_encode($registerOuts);
 		$addMemberLog["createDate"] = date('Y-m-d');
 		$addMemberLog["type"] =  "PRF";
 		$addMemberLog["logError"] = 1;
@@ -370,8 +408,9 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 		<img style="display: block" src="/sites/default/files/PRF_155x56.png" alt="Physiotherapy Research Foundation">
 		<h2 class="lead-heading cairo">Donate to the PRF.</h2>
 	</div>
-<form action="" method="POST" style="width:100%;">
+<form action="" method="POST" style="width:100%;" id="PRF_form_control">
 	<input type="hidden" name="POSTPRF" id="POSTPRF">
+	<input type="hidden" name="recaptcha_response" id="recaptcha_response">
 
 		<?php if (sizeof($cardsnum["results"])!=0): ?>  
 	<div class="flex-container">
@@ -706,3 +745,19 @@ $(document).ready(function() {
 
 	</div>
 <?php endif; ?>
+<script src="https://www.google.com/recaptcha/api.js?render=6Ledch8bAAAAAKr2bHQAz7eu6LwNdfB1ddwyrHRx"></script>
+<script>
+    grecaptcha.ready(function() {
+    // do request for recaptcha token
+    // response is promise with passed token
+		document.getElementById('PRF_form_control').addEventListener("submit", function(event) {
+			event.preventDefault();
+			grecaptcha.execute('6Ledch8bAAAAAKr2bHQAz7eu6LwNdfB1ddwyrHRx', {action:'submit'}).then(function(token) {
+				// add token value to form
+				document.getElementById('recaptcha_response').value = token;
+				console.log("token: "+token);
+				document.getElementById('PRF_form_control').submit();
+			});        
+		}, false);
+    });
+</script>
