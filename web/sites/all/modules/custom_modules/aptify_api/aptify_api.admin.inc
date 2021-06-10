@@ -14,6 +14,7 @@ define('RENEW_ACTIVE_STATUS',0);
 define('RENEW_YEAR',2021);
 define('APTIFY_SERVER_MAINTENANCE_OOPS','We are currently experiencing an issue that may prevent members from logging into the APA website and accessing member-only content, including PD. We are working to resolve this issue as soon as possible. Thank you for your patience.');
 define('DAYLIGHT_SAVINGS',0);
+define('GOOGLE_RECAPTCHA','0');
 /**
  * Admin settings form.
  */
@@ -77,6 +78,11 @@ function aptify_api_admin_settings() {
     '#type' => 'checkbox',
     '#title' => t('Daylight savings on/off for PD events'),
     '#default_value' => variable_get('daylightsaving_control', DAYLIGHT_SAVINGS),
+  );
+  $form['aptify_api']['Google_reCAPTCHA'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Google reCAPTCHA score setting'),
+    '#default_value' => variable_get('Google_reCAPTCHA', GOOGLE_RECAPTCHA),
   );
   return system_settings_form($form);
 }

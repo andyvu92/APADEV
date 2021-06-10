@@ -688,7 +688,7 @@ function place_pd_shopping_cart($form, &$form_state){
         $addMemberLog["logError"] = 1;
         add_Member_Log($addMemberLog);
 
-        drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 1</div>',"error");
+        drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try submit your order again. If you continue to receive this message please contact the member services team on 1300 306 622 for assistance.</div>',"error");
         $isHuman = false;
     } else {
         // $secret   = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'; // test
@@ -709,14 +709,15 @@ function place_pd_shopping_cart($form, &$form_state){
             $addMemberLog["logError"] = 1;
             add_Member_Log($addMemberLog);
 
-            drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 2</div>',"error");
+            drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try submit your order again. If you continue to receive this message please contact the member services team on 1300 306 622 for assistance.</div>',"error");
             $isHuman = false;
         }
     }
     
     //... The Captcha is valid you can continue with the rest of your code
     //... Add code to filter access using $response . score
-    if ($responses->success==true && $responses->score <= 0.5) {
+    $reCAPTCHAscore = floatval(variable_get('Google_reCAPTCHA', GOOGLE_RECAPTCHA));
+    if ($responses->success==true && $responses->score <= $reCAPTCHAscore) {
         //Do something to denied access
         if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']."<br/>".$_SERVER['REMOTE_ADDR'];  }
         $addMemberLog["orderID"] = "0";
@@ -726,7 +727,7 @@ function place_pd_shopping_cart($form, &$form_state){
         $addMemberLog["logError"] = 1;
         add_Member_Log($addMemberLog);
 
-        drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 3</div>',"error");
+        drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try submit your order again. If you continue to receive this message please contact the member services team on 1300 306 622 for assistance.</div>',"error");
         $isHuman = false;
     }
 

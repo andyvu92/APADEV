@@ -10,7 +10,7 @@ if(isset($_POST['step3'])) {
     
     if (!$captcha) {
         //Do something with error
-        drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 1</div>',"error");
+        drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try submit your order again. If you continue to receive this message please contact the member services team on 1300 306 622 for assistance.</div>',"error");
         $isHuman = false;
     } else {
         // $secret   = '6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe'; // test
@@ -23,16 +23,17 @@ if(isset($_POST['step3'])) {
 
         if ($responses->success === false) {
             //Do something with error
-            drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 2</div>',"error");
+            drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try submit your order again. If you continue to receive this message please contact the member services team on 1300 306 622 for assistance.</div>',"error");
             $isHuman = false;
         }
     }
     
     //... The Captcha is valid you can continue with the rest of your code
     //... Add code to filter access using $response . score
-    if ($responses->success==true && $responses->score <= 0.5) {
+    $reCAPTCHAscore = floatval(variable_get('Google_reCAPTCHA', GOOGLE_RECAPTCHA));
+    if ($responses->success==true && $responses->score <= $reCAPTCHAscore) {
         //Do something to denied access
-        drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try click pay now again. If you continue to receive this error message please contact the member services team on 1300 XXX - 3</div>',"error");
+        drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try submit your order again. If you continue to receive this message please contact the member services team on 1300 306 622 for assistance.</div>',"error");
         $isHuman = false;
     }
 
