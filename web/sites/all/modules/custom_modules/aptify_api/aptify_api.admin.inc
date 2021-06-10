@@ -80,7 +80,7 @@ function aptify_api_admin_settings() {
     '#default_value' => variable_get('daylightsaving_control', DAYLIGHT_SAVINGS),
   );
   $form['aptify_api']['Google_reCAPTCHA'] = array(
-    '#type' => 'textarea',
+    '#type' => 'textfield',
     '#title' => t('Google reCAPTCHA score setting'),
     '#default_value' => variable_get('Google_reCAPTCHA', GOOGLE_RECAPTCHA),
   );
