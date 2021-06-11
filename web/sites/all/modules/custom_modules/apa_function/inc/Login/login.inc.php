@@ -887,6 +887,8 @@ if(isset($_SESSION['UserId'])) {
 
 	<div class="OtherListTop"><a class="shop" href="https://www.shop4physios.com.au/" target="_blank"><span class="uniq">shop</span>4physios</a></div>
 
+	<div class="OtherListTop"><a class="ifompt" href="https://thrive.physio/" target="_blank"><span class="uniq">THRIVE2021</a></div>
+
 	<div class="OtherListTop"><a class="ifompt" href="https://ifomptconference.org/" target="_blank"><span class="uniq">IFOMPT2022</a></div>
 
 
