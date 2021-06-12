@@ -889,7 +889,7 @@ if(isset($_SESSION['UserId'])) {
 
 	<div class="OtherListTop"><a class="ifompt" href="https://thrive.physio/" target="_blank"><span class="uniq">THRIVE2021</a></div>
 
-	<div class="OtherListTop"><a class="ifompt" href="https://ifomptconference.org/" target="_blank"><span class="uniq">IFOMPT2022</a></div>
+	<div class="OtherListTop"><a class="jobs" href="https://focus.physio/" target="_blank"><span class="uniq">FOCUS2022</a></div>
 
 
 
