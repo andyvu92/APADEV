@@ -106,9 +106,9 @@ function apa_log_admin_settings($form = array(), &$form_state= array()) {
    // filter automatically
   if(isset( $_SESSION['filterconditions']["type"] )) { $type =  $_SESSION['filterconditions']["type"] ;} else {  $type = $defaultType;}
   $variables = array();
-  $header = array('User ID', 'Order ID', 'Message', 'DateTime', 'Type', 'Error','Date');
+  $header = array('User ID','IPAddress', 'Order ID', 'Score', 'Message', 'DateTime', 'Type', 'Error','Date');
   $query = db_select('member_log','m');
-  $query ->fields('m', array('UserID','OrderID', 'JsonMessage', 'TimeStamp', 'Type', 'LogError','CreateDate'));
+  $query ->fields('m', array('UserID','IPAddress','OrderID', 'Score','JsonMessage','TimeStamp', 'Type', 'LogError','CreateDate'));
   // handle display all data
   if(isset($_SESSION['filterconditions']["email"])) {$query->condition('UserID', $_SESSION['filterconditions']["email"]); }
   if(!isset($_SESSION["GetAll"])) {$query->condition('Type', $type); }
@@ -132,7 +132,9 @@ function apa_log_admin_settings($form = array(), &$form_state= array()) {
       foreach($arrayReturn as $singleArr){
         $tempResult = array();
         $tempResult['UserID'] = $singleArr['UserID'];
+        $tempResult['IPAddress'] = $singleArr['IPAddress'];
         $tempResult['OrderID'] = $singleArr['OrderID'];
+        $tempResult['Score'] = $singleArr['Score'];
         $tempResult['JsonMessage'] = $singleArr['JsonMessage'];
         $tempResult['TimeStamp'] = date('Y-m-d H:i:s',$singleArr['TimeStamp']);
         $tempResult['Type'] = $singleArr['Type'];

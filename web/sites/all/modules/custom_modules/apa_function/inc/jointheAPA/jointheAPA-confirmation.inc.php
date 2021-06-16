@@ -1,13 +1,13 @@
 <?php
 if(isset($_POST['step3'])) {
 	$isHuman = true;
-    
+
 	if (isset($_POST['recaptcha_response'])) {
         $captcha = $_POST['recaptcha_response'];
     } else {
         $captcha = false;
     }
-    
+
     if (!$captcha) {
         //Do something with error
         drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try submit your order again. If you continue to receive this message please contact the member services team on 1300 306 622 for assistance.</div>',"error");
@@ -27,7 +27,7 @@ if(isset($_POST['step3'])) {
             $isHuman = false;
         }
     }
-    
+
     //... The Captcha is valid you can continue with the rest of your code
     //... Add code to filter access using $response . score
     $reCAPTCHAscore = floatval(variable_get('Google_reCAPTCHA', GOOGLE_RECAPTCHA));
@@ -173,8 +173,10 @@ if(isset($_POST['step3'])) {
 			$productID = "PRF";
 			checkShoppingCart($userID, $type="", $productID);
 			// record member log for successful process
-			if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']."<br/>".$_SERVER['REMOTE_ADDR'];  }
-			$addMemberLog["orderID"] = "0";
+			if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
+      $addMemberLog["orderID"] = "0";
+      $addMemberLog["IPAddress"] = $_SERVER['REMOTE_ADDR'];
+      $addMemberLog["Score"] = $responses->score;
 			$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/>".$response."<br/>".json_encode($registerOuts);
 			$addMemberLog["createDate"] = date('Y-m-d');
 			$addMemberLog["type"] =  "Join";
@@ -325,8 +327,11 @@ $background = getBackgroundImage($userID);
 
 				<?php else:?>
                     <!--this is handle record error log-->
-					<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']."<br/>".$_SERVER['REMOTE_ADDR'];  }
-						$addMemberLog["orderID"] = "0";
+					<?php if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
+
+            $addMemberLog["orderID"] = "0";
+            $addMemberLog["IPAddress"] = $_SERVER['REMOTE_ADDR'];
+            $addMemberLog["Score"] = $responses->score;
 						$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/>".$response."<br/>".json_encode($registerOuts);
 						$addMemberLog["createDate"] = date('Y-m-d');
 						$addMemberLog["type"] =  "Join";

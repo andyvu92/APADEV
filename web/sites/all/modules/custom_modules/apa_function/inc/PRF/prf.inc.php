@@ -2,13 +2,13 @@
 <?php
 if(isset($_POST["POSTPRF"])) {
 	$isHuman = true;
-    
+
 	if (isset($_POST['recaptcha_response'])) {
         $captcha = $_POST['recaptcha_response'];
     } else {
         $captcha = false;
     }
-    
+
     if (!$captcha) {
         //Do something with error
         drupal_set_message('<div class="checkMessage">Our systems have detected a possible issue. Please try submit your order again. If you continue to receive this message please contact the member services team on 1300 306 622 for assistance.</div>',"error");
@@ -28,7 +28,7 @@ if(isset($_POST["POSTPRF"])) {
             $isHuman = false;
         }
     }
-    
+
     //... The Captcha is valid you can continue with the rest of your code
     //... Add code to filter access using $response . score
     $reCAPTCHAscore = floatval(variable_get('Google_reCAPTCHA', GOOGLE_RECAPTCHA));
@@ -51,11 +51,11 @@ if(isset($_POST["POSTPRF"])) {
 			$OrderSend['CCNumber'] = $_POST['Cardnumber'];
 			$OrderSend['CCExpireDate'] = $_POST['Expirydate'];
 			$OrderSend['CCSecurityNumber'] = $_POST['CCV'];
-			$OrderSend['Card_number'] = "";	
+			$OrderSend['Card_number'] = "";
 		} else{
 			$OrderSend["Card_number"] = $_POST["Paymentcard"];
 		}
-		if($_POST["PRF"]=="Other") {$OrderSend['PRFdonation'] = $_POST["PRFOther"];} 
+		if($_POST["PRF"]=="Other") {$OrderSend['PRFdonation'] = $_POST["PRFOther"];}
 		else {$OrderSend['PRFdonation']=$_POST["PRF"];}
 		$OrderSend['productID'] = array();
 		$registerOuts = aptify_get_GetAptifyData("26", $OrderSend);
@@ -76,7 +76,7 @@ if(isset($_POST["POSTPRF"])) {
 		$invoice_ID = $registerOuts['Invoice_ID'];
 		if(isset($_POST['addcardtag'])){
 			// 2.2.15 - Add payment method
-			// Send - 
+			// Send -
 			// UserID, Cardtype,Cardname,Cardnumber,Expirydate,CCV
 			// Response -
 			// N/A.
@@ -86,8 +86,8 @@ if(isset($_POST["POSTPRF"])) {
 			if(isset($_POST['Expirydate'])){ $postPaymentData['Expiry-date'] = $_POST['Expirydate'];}
 			if(isset($_POST['CCV'])){ $postPaymentData['CCV'] = $_POST['CCV'];}
 			$postPaymentData['IsDefault'] = 0;
-			$out = aptify_get_GetAptifyData("15",$postPaymentData); 
-			if($out["result"]=="Failed"){ 
+			$out = aptify_get_GetAptifyData("15",$postPaymentData);
+			if($out["result"]=="Failed"){
 				if($out["Message"]=="Expiry date lenght should be 4."){
 					drupal_set_message('<div class="checkMessage">Please enter a valid expiry date.</div>',"error");
 				}
@@ -113,19 +113,21 @@ if(isset($_POST["POSTPRF"])) {
 					drupal_set_message('<div class="checkMessage">There was an unexpected error with your payment details, please go back and check they are correct, or contact the APA.</div>',"error");
 				}
 			}
-		
+
 		}
 	}
 }
 $test['id'] = $_SESSION["UserId"];
 $cardsnum = aptify_get_GetAptifyData("12", $test);
-  	
+
 ?>
 <?php if(isset($registerOuts['Invoice_ID']) && $registerOuts['Invoice_ID']!=="0"): ?>
 <?php
 	// record member log for successful process
-	if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']."<br/>".$_SERVER['REMOTE_ADDR'];  }
-	$addMemberLog["orderID"] = "0";
+	if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
+  $addMemberLog["orderID"] = "0";
+  $addMemberLog["IPAddress"] = $_SERVER['REMOTE_ADDR'];
+  $addMemberLog["Score"] = $responses->score;
 	$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/>".$response."<br/>".json_encode($registerOuts);
 	$addMemberLog["createDate"] = date('Y-m-d');
 	$addMemberLog["type"] =  "PRF";
@@ -157,16 +159,16 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 	<input type="hidden" name="POSTPRF" id="POSTPRF">
 	<input type="hidden" name="recaptcha_response" id="recaptcha_response">
 
-		<?php if (sizeof($cardsnum["results"])!=0): ?>  
+		<?php if (sizeof($cardsnum["results"])!=0): ?>
 	<div class="flex-container">
 		<div class="flex-cell">
-			<div class="flex-col-12">					
+			<div class="flex-col-12">
 				<fieldset>
 					<label for="">Payment method:<span class="tipstyle"> *</span></label>
 					<div class="chevron-select-box">
 						<select id="Paymentcard" name="Paymentcard">
 							<?php
-							
+
 								foreach( $cardsnum["results"] as $cardnum) {
 									echo '<option value="'.$cardnum["Creditcards-ID"].'"';
 									if($cardnum["IsDefault"]=="1") {
@@ -175,7 +177,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 								echo 'data-class="'.$cardnum["Payment-Method"].'" class="'.'c'.str_replace("/","",$cardnum["Expiry-date"]).'">____ ____ ____ ';
 								echo $cardnum["Digitsnumber-Cardtype-Default"].' - '.$cardnum["Expiry-date"].'</option>';
 								}
-							
+
 							?>
 						</select>
 					</div>
@@ -188,7 +190,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 				<input class="styled-checkbox" type="checkbox" id="anothercard" name="anothercard">
 				<label for="anothercard">Use another card</label>
 			</div>
-		</div> 
+		</div>
 	</div>
 
 	<div class="flex-container" id="anothercardBlock" style="margin: 0; padding:0" class="display-none col-xs-12">
@@ -196,15 +198,15 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 			<div class="flex-col-12">
 				<div class="chevron-select-box">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-				<?php 
+				<?php
 					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 					$PaymentType=json_decode($PaymentTypecode, true);
 					foreach($PaymentType  as $pair => $value){
 						echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 						echo '> '.$PaymentType[$pair]['Name'].' </option>';
-						
+
 					}
-				?>	
+				?>
 				</select>
 				</div>
 			</div>
@@ -246,10 +248,10 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
         <div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
-				
+
 	            <span class="save_card_msg"> To confirm that we can receive payments from your nominated credit card a one off
                 verification charge of $1 will be deducted from your account. This amount will be refunded immediately
-                upon payment confirmation.</span>	
+                upon payment confirmation.</span>
 			</div>
 		</div>
 		<!--<div class="flex-cell">
@@ -259,27 +261,27 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 				<input type="hidden" name="addCard" value="0">
 		</div>-->
 	</div>
-	<?php endif; ?>  
-	<?php if (sizeof($cardsnum["results"])==0): ?> 
-	<div class="flex-container show" id="anothercardBlock">	
+	<?php endif; ?>
+	<?php if (sizeof($cardsnum["results"])==0): ?>
+	<div class="flex-container show" id="anothercardBlock">
 		<div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" name="anothercard">
-				
+
 			</div>
-		</div> 
+		</div>
 		<div class="flex-cell">
 			<div class="flex-col-12">
 				<label for="">Payment method:<span class="tipstyle"> *</span></label>
 				<div class="chevron-select-box">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-					<?php 
+					<?php
 						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 						$PaymentType=json_decode($PaymentTypecode, true);
 						foreach($PaymentType  as $pair => $value){
 							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 							echo '> '.$PaymentType[$pair]['Name'].' </option>';
-							
+
 						}
 					?>
 					</select>
@@ -323,10 +325,10 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
         <div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
-			
+
 	            <span class="save_card_msg"> To confirm that we can receive payments from your nominated credit card a one off
                 verification charge of $1 will be deducted from your account. This amount will be refunded immediately
-                upon payment confirmation.</span>	
+                upon payment confirmation.</span>
 			</div>
 		</div>
 		<!--<div class="flex-cell">
@@ -339,9 +341,11 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 	</div>
 	<?php endif; ?>
 	<!--this is handle record error log-->
-	<?php 
-		if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']."<br/>".$_SERVER['REMOTE_ADDR'];  }
-		$addMemberLog["orderID"] = "0";
+	<?php
+		if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
+    $addMemberLog["orderID"] = "0";
+    $addMemberLog["IPAddress"] = $_SERVER['REMOTE_ADDR'];
+    $addMemberLog["Score"] = $responses->score;
 		$addMemberLog["jsonMessage"] = json_encode($recordOrder)."<br/>".$response."<br/>".json_encode($registerOuts);
 		$addMemberLog["createDate"] = date('Y-m-d');
 		$addMemberLog["type"] =  "PRF";
@@ -352,7 +356,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 		<div class="flex-cell">
 			<span class="fail-payment-message">Payment has failed. Please check your card details and try again or <a href="/contact-us">contact us</a>.</span>
 		</div>
-	</div>  
+	</div>
 	<div class="flex-container">
 		<div class="flex-cell">
 			<div class="flex-col-12">
@@ -373,9 +377,9 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 			</div>
 		</div>
 	</div>
-	
+
 	<button class="submit-donate" type="submit" value="Donate now" onClick="return checkCard();">Donate now</button>
-		
+
 </form>
 
 <script>
@@ -411,16 +415,16 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 	<input type="hidden" name="POSTPRF" id="POSTPRF">
 	<input type="hidden" name="recaptcha_response" id="recaptcha_response">
 
-		<?php if (sizeof($cardsnum["results"])!=0): ?>  
+		<?php if (sizeof($cardsnum["results"])!=0): ?>
 	<div class="flex-container">
 		<div class="flex-cell">
-			<div class="flex-col-12">					
+			<div class="flex-col-12">
 				<fieldset>
 					<label for="">Payment method:<span class="tipstyle"> *</span></label>
 					<div class="chevron-select-box">
 						<select id="Paymentcard" name="Paymentcard">
 							<?php
-							
+
 								foreach( $cardsnum["results"] as $cardnum) {
 									echo '<option value="'.$cardnum["Creditcards-ID"].'"';
 									if($cardnum["IsDefault"]=="1") {
@@ -429,7 +433,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 								echo 'data-class="'.$cardnum["Payment-Method"].'" class="'.'c'.str_replace("/","",$cardnum["Expiry-date"]).'">____ ____ ____ ';
 								echo $cardnum["Digitsnumber-Cardtype-Default"].' - '.$cardnum["Expiry-date"].'</option>';
 								}
-							
+
 							?>
 						</select>
 					</div>
@@ -442,7 +446,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 				<input class="styled-checkbox" type="checkbox" id="anothercard" name="anothercard">
 				<label for="anothercard">Use another card</label>
 			</div>
-		</div> 
+		</div>
 	</div>
 
 	<div class="flex-container" id="anothercardBlock" style="margin: 0; padding:0" class="display-none col-xs-12">
@@ -450,15 +454,15 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 			<div class="flex-col-12">
 				<div class="chevron-select-box">
 				<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-				<?php 
+				<?php
 					$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 					$PaymentType=json_decode($PaymentTypecode, true);
 					foreach($PaymentType  as $pair => $value){
 						echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 						echo '> '.$PaymentType[$pair]['Name'].' </option>';
-						
+
 					}
-				?>	
+				?>
 				</select>
 				</div>
 			</div>
@@ -500,10 +504,10 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
         <div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" id="addcardtag" name="addcardtag"><label for="addcardtag">Save this card</label>
-				
+
 	            <span class="save_card_msg"> To confirm that we can receive payments from your nominated credit card a one off
                 verification charge of $1 will be deducted from your account. This amount will be refunded immediately
-                upon payment confirmation.</span>	
+                upon payment confirmation.</span>
 			</div>
 		</div>
 		<!--<div class="flex-cell">
@@ -513,27 +517,27 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 				<input type="hidden" name="addCard" value="0">
 		</div>-->
 	</div>
-	<?php endif; ?>  
-	<?php if (sizeof($cardsnum["results"])==0): ?> 
-	<div class="flex-container show" id="anothercardBlock">	
+	<?php endif; ?>
+	<?php if (sizeof($cardsnum["results"])==0): ?>
+	<div class="flex-container show" id="anothercardBlock">
 		<div class="flex-cell">
 			<div class="flex-col-12">
 				<input class="styled-checkbox" type="checkbox" name="anothercard">
-				
+
 			</div>
-		</div> 
+		</div>
 		<div class="flex-cell">
 			<div class="flex-col-12">
 				<label for="">Payment method:<span class="tipstyle"> *</span></label>
 				<div class="chevron-select-box">
 					<select class="form-control" id="Cardtype" name="Cardtype" placeholder="Card type">
-					<?php 
+					<?php
 						$PaymentTypecode  = file_get_contents("sites/all/themes/evolve/json/PaymentType.json");
 						$PaymentType=json_decode($PaymentTypecode, true);
 						foreach($PaymentType  as $pair => $value){
 							echo '<option value="'.$PaymentType[$pair]['ID'].'"';
 							echo '> '.$PaymentType[$pair]['Name'].' </option>';
-							
+
 						}
 					?>
 					</select>
@@ -581,7 +585,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 	Please note: if you opt to save this credit card, it will automatically become your default card for your instalment payments. If you wish to continue using your previous default card to make instalment payments, don’t save this card.</span>
 	            <span class="save_card_msg"> To confirm that we can receive payments from your nominated credit card a one off
                 verification charge of $1 will be deducted from your account. This amount will be refunded immediately
-                upon payment confirmation.</span>	
+                upon payment confirmation.</span>
 			</div>
 		</div>
 
@@ -593,7 +597,7 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 		</div>-->
 
 	</div>
-	<?php endif; ?>  
+	<?php endif; ?>
 	<div class="flex-container">
 		<div class="flex-cell">
 			<div class="flex-col-12">
@@ -614,9 +618,9 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 			</div>
 		</div>
 	</div>
-	
+
 	<button class="submit-donate" type="submit" value="Donate now" onclick="return checkCard();">Donate now</button>
-		
+
 </form>
 <script>
   function checkCard(){
@@ -637,9 +641,9 @@ $cardsnum = aptify_get_GetAptifyData("12", $test);
 			$('body').append('<div class="overlay"><section class="loaders"><span class="loader loader-quart"></span></section></div>');
 			$('.overlay').fadeIn();
 			$('.loaders').css('visibility','visible').hide().fadeIn();
-			$(document).keydown(function (e) {  
-			return (e.which || e.keyCode) != 116;  
-	        }); 
+			$(document).keydown(function (e) {
+			return (e.which || e.keyCode) != 116;
+	        });
 
 }
 </script>
@@ -660,26 +664,26 @@ $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
       _renderItem: function( ul, item ) {
         var li = $( "<li>" ),
           wrapper = $( "<div>", { text: item.label } );
- 
+
         if ( item.disabled ) {
           li.addClass( "ui-state-disabled" );
         }
- 
+
         $( "<span>", {
           style: item.element.attr( "data-style" ),
           "class": "ui-icon " + item.element.attr( "data-class" )
         })
           .appendTo( wrapper );
- 
+
         return li.append( wrapper ).appendTo( ul );
       }
     });
-   
+
     $( "#Paymentcard" )
       .iconselectmenu()
       .iconselectmenu( "menuWidget" )
         .addClass( "ui-menu-icons customicons" );
-	
+
 } );
 
 </script>
@@ -713,7 +717,7 @@ $.widget( "custom.iconselectmenu", $.ui.selectmenu, {
 		width: 100%;
 		height: 100%;
 	}
-</style> 
+</style>
 <script>
 $(document).ready(function() {
 	if (window.frames["Iaksbnkvoice"] && !window.userSet) {
@@ -722,7 +726,7 @@ $(document).ready(function() {
 	}
 });
 </script>
- <?php else : 
+ <?php else :
 	// when user is not logged in
 	?>
 	<!-- USER NOT LOGIN BUT NOT A MEMBER  -->
@@ -735,10 +739,10 @@ $(document).ready(function() {
 			<a href="/membership-question" class="join">Join now</a>
 		</div>
 
-		<?php 
+		<?php
 				$block = block_load('block', '309');
 				$get = _block_get_renderable_array(_block_render_blocks(array($block)));
-				$output = drupal_render($get);        
+				$output = drupal_render($get);
 				print $output;
 		?>
 
@@ -756,7 +760,7 @@ $(document).ready(function() {
 				document.getElementById('recaptcha_response').value = token;
 				console.log("token: "+token);
 				document.getElementById('PRF_form_control').submit();
-			});        
+			});
 		}, false);
     });
 </script>

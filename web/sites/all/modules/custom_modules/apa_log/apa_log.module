@@ -79,7 +79,9 @@ function clear_all($form, &$form_state) {
 */
 function add_Member_Log($addMemberLog) {
   $userID = $addMemberLog["userID"];
-	$orderID = $addMemberLog["orderID"];
+  if(isset($addMemberLog["IPAddress"])) { $IPAddress = $addMemberLog["IPAddress"];}else{$IPAddress ="";}
+  $orderID = $addMemberLog["orderID"];
+  if(isset($addMemberLog["Score"])){ $score = $addMemberLog["Score"]; }else{ $score = "";}
 	$jsonMessage = $addMemberLog["jsonMessage"];
 	$createDate = $addMemberLog["createDate"];
 	$type = $addMemberLog["type"];
@@ -88,7 +90,9 @@ function add_Member_Log($addMemberLog) {
   $memberLog	=  db_insert('member_log')
     ->fields(array(
       'UserID' => $userID,
+      'IPAddress' => $IPAddress,
       'OrderID' => $orderID,
+      'Score' => $score,
       'JsonMessage' => $jsonMessage,
       'CreateDate' => $createDate,
       'Type' => $type,
@@ -104,7 +108,7 @@ function add_Member_Log($addMemberLog) {
 function export_all($form, &$form_state) {
   ini_set('memory_limit', '512M');
   $query = db_select('member_log','m');
-  $query ->fields('m', array('UserID','OrderID', 'JsonMessage', 'TimeStamp', 'Type', 'LogError','CreateDate'));
+  $query ->fields('m', array('UserID','IPAddress','OrderID','Score', 'JsonMessage', 'TimeStamp', 'Type', 'LogError','CreateDate'));
   $defaultType = "ALL";
   if(isset( $_SESSION['filterconditions']["type"] )) { $type =  $_SESSION['filterconditions']["type"] ;} else {  $type = $defaultType;}
   // handle display all data
@@ -123,7 +127,9 @@ function export_all($form, &$form_state) {
       foreach($arrayReturn as $singleArr){
         $tempResult = array();
         $tempResult['UserID'] = $singleArr['UserID'];
+        $tempResult['IPAddress'] = $singleArr['IPAddress'];
         $tempResult['OrderID'] = $singleArr['OrderID'];
+        $tempResult['Score'] = $singleArr['Score'];
         $tempResult['JsonMessage'] = $singleArr['JsonMessage'];
         $tempResult['TimeStamp'] = date('Y-m-d H:i:s',$singleArr['TimeStamp']);
         $tempResult['Type'] = $singleArr['Type'];
@@ -134,12 +140,14 @@ function export_all($form, &$form_state) {
   }
   drupal_add_http_header('Content-Type', 'text/csv');
   drupal_add_http_header('Content-Disposition', 'attachment; filename=member_transaction.csv');
-  $csvdata = 'UserID,OrderID,Message,DateTime,Type,Error,Date' . PHP_EOL;
+  $csvdata = 'UserID,IPAddress,OrderID,Score,Message,DateTime,Type,Error,Date' . PHP_EOL;
   foreach ($arrayResult as $record) {
     $row = array();
     $row[] = $record['UserID'];
+    $row[] = $record['IPAddress'];
     $row[] = $record['OrderID'];
-    $row[] = str_replace("<br/><br/>", "    ",str_replace(",", " ",$record['JsonMessage']));
+    $row[] = $record['Score'];
+    $row[] = str_replace("\n","",str_replace("<br/><br/>", "    ",str_replace(",", " ",$record['JsonMessage'])));
     $row[] = $record['TimeStamp'];
     $row[] = $record['Type'];
     $row[] = $record['LogError'];
