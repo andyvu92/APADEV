@@ -856,7 +856,7 @@ function place_pd_shopping_cart($form, &$form_state){
             $dataArray['Type'] = "P";
             forCreateRecordFunc($dataArray);
             // record member log for successful process
-            if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName']."<br/>".$_SERVER['REMOTE_ADDR'];  }
+            if(isset($_SESSION['UserName'])){ $addMemberLog["userID"] = $_SESSION['UserName'];  }
             $addMemberLog["orderID"] = "0";
             $addMemberLog["IPAddress"] = $_SERVER['REMOTE_ADDR'];
             $addMemberLog["Score"] = $responses->score;
