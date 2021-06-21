@@ -83,7 +83,8 @@ body, .html{
 }
 
  /* BLOG TYPE LAYOUT */
-div[id^="home-tile-view-block"], div[id^="inmotioncategory-block"]{
+div[id^="home-tile-view-block"], 
+div[id^="inmotioncategory-block"]{
     display: flex;
     flex-wrap: wrap;
     &.dexp-grid-items{
@@ -8998,6 +8999,10 @@ body #section-main-content{
                     font-size: 1.65em;
                     line-height: 1.1em;
                     font-weight: 300;
+                    > a {
+                        color: currentColor !important;
+                        text-decoration: inherit !important;
+                    }
                 }
                 .description{
                     display: flex;
