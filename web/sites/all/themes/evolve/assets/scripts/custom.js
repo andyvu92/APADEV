@@ -193,12 +193,22 @@ jQuery(document).ready(function($) {
 	$('.media_filter ul li').click(function(){
 		$(this).siblings().removeClass('active');
 		$(this).addClass('active');
+  });
+  $('.sub_media_filter ul li').click(function(){
+		$(this).siblings().removeClass('active');
+		$(this).addClass('active');
 	});
 
 	// ANIMATED SECTION ON CAMPAIGN/ABOUT-CAMPAIGN
 	$('.media_filter ul li[id^="section"]').click(function(){
-		getid = $(this).attr('id');
-		$('.media_contents_filtered [id^="section"]').hide();
+		const getid = $(this).attr('id');
+		$('.media_contents_filtered').children().hide();
+		$('.media_contents_filtered #' + getid + '-content').fadeIn();
+  	});
+	  
+  	$('.sub_media_filter ul li[id^="section"]').click(function(){
+		const getid = $(this).attr('id');
+		$('.media_contents_filtered').children().hide();
 		$('.media_contents_filtered #' + getid + '-content').fadeIn();
 	});
 

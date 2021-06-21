@@ -20,6 +20,7 @@
 @brightPink: #BB3C9E;
 @green: #A2AD00;
 @aqua-blue: #899f99;
+@charcoal: #333333;
 
 @color-primary: @blue;
 
@@ -10682,4 +10683,49 @@ button.video-toggle {
     width: 100px;
     height: 100px;
     margin-top: -20px;
+}
+
+// style nav link media filter
+.media_filter{
+    &.link-nav{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-weight: 400;
+        margin-bottom: 70px;
+        font-size: 16px;
+        .filter-label {
+            padding-right: 20px;
+            font-weight: inherit;
+        }
+        > ul {
+            margin: 0;
+            max-width: max-content;
+            > li {
+                background: none;
+                color: @charcoal;
+                padding: 0 20px 0;
+                border: 0;
+                min-width: unset!important;
+                &:hover {
+                    background: none;
+                    color: @orange;
+                }
+                &.active {
+                    border-bottom: 3px solid @orange;
+                    color: @orange;
+                }
+                &:last-of-type {
+                    border-right: 0;
+                }
+                &:hover > a,
+                &.active > a,
+                > a {
+                    color: currentColor;
+                    font-weight: inherit;
+                    font-size: inherit;
+                }
+            }
+        }
+    }
 }
